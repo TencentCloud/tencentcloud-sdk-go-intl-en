@@ -262,43 +262,55 @@ type CloneDBInstanceRequestParams struct {
 	// ID of the original instance to be cloned.
 	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
 
-	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	// Purchasable code, which can be obtained from the `SpecCode` field in the return value of the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
 	SpecCode *string `json:"SpecCode,omitnil" name:"SpecCode"`
 
 	// Instance storage capacity in GB.
 	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
 
-	// Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	// Validity period in months. Valid values:
+	// <li>Monthly subscription: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// <li>Pay-as-you-go: `1`.
 	Period *int64 `json:"Period,omitnil" name:"Period"`
 
-	// Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+	// Auto-renewal flag. Valid values:
+	// <li>`0`: Manual renewal.
+	// <li>`1`: Automatic renewal.
+	// Default value: `0`.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 
-	// VPC ID.
+	// VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
 	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
-	// ID of a subnet in the VPC specified by `VpcId`.
+	// VPC subnet ID in the format of `subnet-xxxxxxxx`, which can be obtained in the console or from the `unSubnetId` field in the return value of the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API.
 	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
-	// Name of the purchased instance.
+	// Name of the newly purchased instance, which can contain up to 60 letters, digits, or symbols (-_). If this parameter is not specified, "Unnamed" will be displayed by default.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+	// Instance billing mode. Valid values:
+	// <li>`PREPAID`: Monthly subscription.
+	// <li>`POSTPAID_BY_HOUR`: Pay-as-you-go.
+	// Default value: `PREPAID`.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil" name:"InstanceChargeType"`
 
-	// Security group ID.
+	// Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 
 	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
-	// The information of tags to be bound with the purchased instance. This parameter is left empty by default.
+	// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
 	TagList []*Tag `json:"TagList,omitnil" name:"TagList"`
 
-	// This parameter is required if you purchase a multi-AZ deployed instance.
+	// Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
+	// The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
 	DBNodeSet []*DBNode `json:"DBNodeSet,omitnil" name:"DBNodeSet"`
 
-	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	// Whether to use vouchers automatically. Valid values:
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Voucher ID list.
@@ -312,6 +324,13 @@ type CloneDBInstanceRequestParams struct {
 
 	// Restoration point in time.
 	RecoveryTargetTime *string `json:"RecoveryTargetTime,omitnil" name:"RecoveryTargetTime"`
+
+	// Primary-standby sync mode. Valid values:  
+	// <li>`Semi-sync`
+	// <li>`Async`
+	// Default value for the primary instance: `Semi-sync`.
+	// Default value for the standby instance: `Async`.
+	SyncMode *string `json:"SyncMode,omitnil" name:"SyncMode"`
 }
 
 type CloneDBInstanceRequest struct {
@@ -320,43 +339,55 @@ type CloneDBInstanceRequest struct {
 	// ID of the original instance to be cloned.
 	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
 
-	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	// Purchasable code, which can be obtained from the `SpecCode` field in the return value of the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
 	SpecCode *string `json:"SpecCode,omitnil" name:"SpecCode"`
 
 	// Instance storage capacity in GB.
 	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
 
-	// Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	// Validity period in months. Valid values:
+	// <li>Monthly subscription: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// <li>Pay-as-you-go: `1`.
 	Period *int64 `json:"Period,omitnil" name:"Period"`
 
-	// Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+	// Auto-renewal flag. Valid values:
+	// <li>`0`: Manual renewal.
+	// <li>`1`: Automatic renewal.
+	// Default value: `0`.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 
-	// VPC ID.
+	// VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
 	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
-	// ID of a subnet in the VPC specified by `VpcId`.
+	// VPC subnet ID in the format of `subnet-xxxxxxxx`, which can be obtained in the console or from the `unSubnetId` field in the return value of the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API.
 	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
-	// Name of the purchased instance.
+	// Name of the newly purchased instance, which can contain up to 60 letters, digits, or symbols (-_). If this parameter is not specified, "Unnamed" will be displayed by default.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+	// Instance billing mode. Valid values:
+	// <li>`PREPAID`: Monthly subscription.
+	// <li>`POSTPAID_BY_HOUR`: Pay-as-you-go.
+	// Default value: `PREPAID`.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil" name:"InstanceChargeType"`
 
-	// Security group ID.
+	// Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 
 	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
-	// The information of tags to be bound with the purchased instance. This parameter is left empty by default.
+	// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
 	TagList []*Tag `json:"TagList,omitnil" name:"TagList"`
 
-	// This parameter is required if you purchase a multi-AZ deployed instance.
+	// Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
+	// The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
 	DBNodeSet []*DBNode `json:"DBNodeSet,omitnil" name:"DBNodeSet"`
 
-	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	// Whether to use vouchers automatically. Valid values:
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Voucher ID list.
@@ -370,6 +401,13 @@ type CloneDBInstanceRequest struct {
 
 	// Restoration point in time.
 	RecoveryTargetTime *string `json:"RecoveryTargetTime,omitnil" name:"RecoveryTargetTime"`
+
+	// Primary-standby sync mode. Valid values:  
+	// <li>`Semi-sync`
+	// <li>`Async`
+	// Default value for the primary instance: `Semi-sync`.
+	// Default value for the standby instance: `Async`.
+	SyncMode *string `json:"SyncMode,omitnil" name:"SyncMode"`
 }
 
 func (r *CloneDBInstanceRequest) ToJsonString() string {
@@ -402,6 +440,7 @@ func (r *CloneDBInstanceRequest) FromJsonString(s string) error {
 	delete(f, "ActivityId")
 	delete(f, "BackupSetId")
 	delete(f, "RecoveryTargetTime")
+	delete(f, "SyncMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloneDBInstanceRequest has unknown keys!", "")
 	}
@@ -712,7 +751,7 @@ func (r *CreateDBInstanceNetworkAccessResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDBInstancesRequestParams struct {
-	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeClasses` API.
 	SpecCode *string `json:"SpecCode,omitnil" name:"SpecCode"`
 
 	// Instance capacity size in GB.
@@ -776,7 +815,7 @@ type CreateDBInstancesRequestParams struct {
 type CreateDBInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeClasses` API.
 	SpecCode *string `json:"SpecCode,omitnil" name:"SpecCode"`
 
 	// Instance capacity size in GB.
@@ -908,207 +947,293 @@ func (r *CreateDBInstancesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateInstancesRequestParams struct {
-	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	// Primary AZ of the instance in the format of `ap-guangzhou-3`. To support multiple AZs, add information of the primary and standby AZs in the `DBNodeSet.N` field.
+	// The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
+
+	// Purchasable code, which can be obtained from the `SpecCode` field in the return value of the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
 	SpecCode *string `json:"SpecCode,omitnil" name:"SpecCode"`
 
 	// Instance storage capacity in GB
 	Storage *uint64 `json:"Storage,omitnil" name:"Storage"`
 
-	// The number of instances purchased at a time. Value range: 1-10.
+	// The number of instances to be purchased at a time. Value range: 1-10. To purchase more than 10 instances each time, you can make multiple calls.
 	InstanceCount *uint64 `json:"InstanceCount,omitnil" name:"InstanceCount"`
 
-	// Valid period in months of purchased instances. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	// Validity period in months.
+	// <li>Monthly subscription: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// <li>Pay-as-you-go: `1`.
 	Period *uint64 `json:"Period,omitnil" name:"Period"`
 
-	// Availability zone ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
-
-	// Instance character set. Valid values: `UTF8`, `LATIN1`.
+	// Instance character set. Valid values: 
+	// <li> `UTF8`
+	// <li> `LATIN1`
 	Charset *string `json:"Charset,omitnil" name:"Charset"`
 
-	// Instance root account name
+	// Username of the instance root account, which has the following rules:
+	// <li>It must contain 1–16 letters , digits, or underscores
+	// <li>It can't be `postgres`.
+	// <li>It can't start with a digit or `pg_`.
+	// <li>All rules are case-insensitive.
 	AdminName *string `json:"AdminName,omitnil" name:"AdminName"`
 
-	// Instance root account password
+	// Password of the instance root account, which must contain 8-32 characters (above 12 characters preferably). It cannot begin with "/",
+	// and must contain the following 4 types of characters.
+	// <li>Lowercase letters: [a–z]
+	// <li>Uppercase letters: [A–Z]
+	// <li>Digits: 0-9
+	// <li>Symbols: ()`~!@#$%^&*-+=_|{}[]:;'<>,.?/
 	AdminPassword *string `json:"AdminPassword,omitnil" name:"AdminPassword"`
 
-	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	// The major PostgreSQL version number, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API. Valid values: `10`, `11`, `12`, `13`, `14`, `15`.
+	// When only this parameter is specified, an instance running the latest kernel version of the latest minor version will be created based on this major version.
+	// You must pass in at least one of the following parameters: `DBMajorVersion`, `DBVersion`, DBKernelVersion`. If you don't need a minor version, just pass in `DBMajorVersion`.
+	DBMajorVersion *string `json:"DBMajorVersion,omitnil" name:"DBMajorVersion"`
 
-	// PostgreSQL version. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created. You must pass in at least one of the following parameters: DBVersion, DBMajorVersion, DBKernelVersion.
+	// Number of the major PostgreSQL community version and minor version, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+	// If it is specified, an instance running the latest kernel version will be created based on the community minor version.
+	// You must pass in at least one of the following parameters: `DBMajorVersion`, `DBVersion`, DBKernelVersion`.
 	DBVersion *string `json:"DBVersion,omitnil" name:"DBVersion"`
 
-	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+	// PostgreSQL kernel version number, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+	// PostgreSQL kernel version number. If it is specified, an instance running the specified kernel version will be created. Passing in this parameter in other scenarios is not supported.This parameter is only used to specify a kernel version, which serves no other purposes.
+	DBKernelVersion *string `json:"DBKernelVersion,omitnil" name:"DBKernelVersion"`
+
+	// Instance billing mode. Valid values:
+	// <li>`PREPAID`: Monthly subscription
+	// <li>`POSTPAID_BY_HOUR`: Pay-as-you-go
+	// Default value: `PREPAID`.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil" name:"InstanceChargeType"`
 
-	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	// VPC ID in the format of `vpc-xxxxxxx`. To obtain valid VPC IDs, you can log in to the console or call [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) and look for the `unVpcId` fields in the response.
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+
+	// VPC subnet ID in the format of `subnet-xxxxxxxx`, u200cwhich can be obtained in the console or from the `unSubnetId` field in the return value of the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API.
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+
+	// Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
+	// The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
+	DBNodeSet []*DBNode `json:"DBNodeSet,omitnil" name:"DBNodeSet"`
+
+	// Auto-renewal flag. Valid values:
+	// <li>`0`: Manual renewal.
+	// <li> `1`: Automatic renewal.
+	// Default value: `0`.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
+
+	// Whether to use vouchers automatically. Valid values:
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
 	AutoVoucher *uint64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Voucher ID list. Currently, you can specify only one voucher.
 	VoucherIds []*string `json:"VoucherIds,omitnil" name:"VoucherIds"`
 
-	// VPC ID
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
-
-	// ID of a subnet in the VPC specified by `VpcId`
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
-
-	// Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
-	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// Campaign ID
 	ActivityId *int64 `json:"ActivityId,omitnil" name:"ActivityId"`
 
-	// Instance name
+	// Instance name, which can contain up to 60 letters, digits, hyphens, and symbols (_-). If this parameter is not specified, "Unnamed" will be displayed by default.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no). Default value: `0`
-	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitnil" name:"NeedSupportIpv6"`
-
-	// The information of tags to be associated with instances. This parameter is left empty by default.
+	// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
 	TagList []*Tag `json:"TagList,omitnil" name:"TagList"`
 
-	// Security group IDs
+	// Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 
-	// PostgreSQL major version. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created. You must pass in at least one of the following parameters: DBMajorVersion, DBVersion, DBKernelVersion.
-	DBMajorVersion *string `json:"DBMajorVersion,omitnil" name:"DBMajorVersion"`
-
-	// PostgreSQL kernel version. If it is specified, an instance running the latest kernel of PostgreSQL `DBKernelVersion` will be created. You must pass in one of the following parameters: DBKernelVersion, DBVersion, DBMajorVersion.
-	DBKernelVersion *string `json:"DBKernelVersion,omitnil" name:"DBKernelVersion"`
-
-	// Instance node information, which is required if you purchase a multi-AZ deployed instance.
-	DBNodeSet []*DBNode `json:"DBNodeSet,omitnil" name:"DBNodeSet"`
-
-	// Whether to support transparent data encryption. Valid values: 1 (yes), 0 (no). Default value: 0.
+	// Whether to support TDE. Valid values:
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
+	// For more information, see [TDE]u200d(https://www.tencentcloud.com/document/product/409/47765).
 	NeedSupportTDE *uint64 `json:"NeedSupportTDE,omitnil" name:"NeedSupportTDE"`
 
 	// KeyId of custom key, which is required if you select custom key encryption. It is also the unique CMK identifier.
+	// For more information on creating `KeyId`, see [Enabling TDE](https://www.tencentcloud.com/document/product/409/47762).
 	KMSKeyId *string `json:"KMSKeyId,omitnil" name:"KMSKeyId"`
 
-	// The region where the KMS service is enabled. When `KMSRegion` is left empty, the KMS of the current region will be enabled by default. If the current region is not supported, you need to select another region supported by KMS.
+	// The region where the KMS service is enabled. When `KMSRegion` is left empty, the current region will be selected by default.  If the current region does not support KMS, you must select another region that does.
+	// For more information on `KMSRegion`, see [Enabling TDE](https://intl.cloud.tencent.com/document/product/409/71749?from_cn_redirect=1).
 	KMSRegion *string `json:"KMSRegion,omitnil" name:"KMSRegion"`
 
-	// Database engine. Valid values:
-	// 1. `postgresql` (TencentDB for PostgreSQL)
-	// 2. `mssql_compatible`（MSSQL compatible-TencentDB for PostgreSQL)
-	// Default value: `postgresql`
+	// Database engines. Valid values:
+	// <li>`postgresql`: TencentDB for PostgreSQL
+	// <li>`mssql_compatible`: MSSQL compatible-TencentDB for PostgreSQL
+	// Default value: `postgresql`.
 	DBEngine *string `json:"DBEngine,omitnil" name:"DBEngine"`
 
 	// Configuration information of database engine in the following format:
 	// {"$key1":"$value1", "$key2":"$value2"}
-	// 
 	// Valid values:
-	// 1. mssql_compatible engine：
-	// `migrationMode`: Database mode. Valid values: `single-db` (single-database mode), `multi-db` (multi-database mode). Default value: `single-db`.
-	// `defaultLocale`: Default locale, which can’t be modified after the initialization. Default value: `en_US`. Valid values:
+	// mssql_compatible engine:
+	// <li>`migrationMode`: Database mode. Valid values: `single-db` (single-database mode), `multi-db` (multi-database mode). Default value: `single-db`.
+	// <li>`defaultLocale`: Default locale, which can’t be modified after the initialization. Default value: `en_US`. Valid values:
 	// "af_ZA", "sq_AL", "ar_DZ", "ar_BH", "ar_EG", "ar_IQ", "ar_JO", "ar_KW", "ar_LB", "ar_LY", "ar_MA", "ar_OM", "ar_QA", "ar_SA", "ar_SY", "ar_TN", "ar_AE", "ar_YE", "hy_AM", "az_Cyrl_AZ", "az_Latn_AZ", "eu_ES", "be_BY", "bg_BG", "ca_ES", "zh_HK", "zh_MO", "zh_CN", "zh_SG", "zh_TW", "hr_HR", "cs_CZ", "da_DK", "nl_BE", "nl_NL", "en_AU", "en_BZ", "en_CA", "en_IE", "en_JM", "en_NZ", "en_PH", "en_ZA", "en_TT", "en_GB", "en_US", "en_ZW", "et_EE", "fo_FO", "fa_IR", "fi_FI", "fr_BE", "fr_CA", "fr_FR", "fr_LU", "fr_MC", "fr_CH", "mk_MK", "ka_GE", "de_AT", "de_DE", "de_LI", "de_LU", "de_CH", "el_GR", "gu_IN", "he_IL", "hi_IN", "hu_HU", "is_IS", "id_ID", "it_IT", "it_CH", "ja_JP", "kn_IN", "kok_IN", "ko_KR", "ky_KG", "lv_LV", "lt_LT", "ms_BN", "ms_MY", "mr_IN", "mn_MN", "nb_NO", "nn_NO", "pl_PL", "pt_BR", "pt_PT", "pa_IN", "ro_RO", "ru_RU", "sa_IN", "sr_Cyrl_RS", "sr_Latn_RS", "sk_SK", "sl_SI", "es_AR", "es_BO", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_SV", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PY","es_PE", "es_PR", "es_ES", "es_TRADITIONAL", "es_UY", "es_VE", "sw_KE", "sv_FI", "sv_SE", "tt_RU", "te_IN", "th_TH", "tr_TR", "uk_UA", "ur_IN", "ur_PK", "uz_Cyrl_UZ", "uz_Latn_UZ", "vi_VN".
-	// `serverCollationName`: Name of collation rule, which can’t be modified after the initialization. Default value: `sql_latin1_general_cp1_ci_as`. Valid values:
-	// "bbf_unicode_general_ci_as", "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as".
+	// <li>`serverCollationName`: Default collation name, which can’t be modified after the initialization. Default value: "bbf_unicode_general_ci_as". Valid values: "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as"。
 	DBEngineConfig *string `json:"DBEngineConfig,omitnil" name:"DBEngineConfig"`
+
+	// Primary-standby sync mode. Valid values:  
+	// <li>`Semi-sync`
+	// <li>`Async`
+	// Default value for the primary instance: `Semi-sync`.
+	// Default value for the standby instance: `Async`.
+	SyncMode *string `json:"SyncMode,omitnil" name:"SyncMode"`
+
+	// Whether IPv6 is supported.
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
+	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitnil" name:"NeedSupportIpv6"`
 }
 
 type CreateInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	// Primary AZ of the instance in the format of `ap-guangzhou-3`. To support multiple AZs, add information of the primary and standby AZs in the `DBNodeSet.N` field.
+	// The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
+
+	// Purchasable code, which can be obtained from the `SpecCode` field in the return value of the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
 	SpecCode *string `json:"SpecCode,omitnil" name:"SpecCode"`
 
 	// Instance storage capacity in GB
 	Storage *uint64 `json:"Storage,omitnil" name:"Storage"`
 
-	// The number of instances purchased at a time. Value range: 1-10.
+	// The number of instances to be purchased at a time. Value range: 1-10. To purchase more than 10 instances each time, you can make multiple calls.
 	InstanceCount *uint64 `json:"InstanceCount,omitnil" name:"InstanceCount"`
 
-	// Valid period in months of purchased instances. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	// Validity period in months.
+	// <li>Monthly subscription: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// <li>Pay-as-you-go: `1`.
 	Period *uint64 `json:"Period,omitnil" name:"Period"`
 
-	// Availability zone ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
-
-	// Instance character set. Valid values: `UTF8`, `LATIN1`.
+	// Instance character set. Valid values: 
+	// <li> `UTF8`
+	// <li> `LATIN1`
 	Charset *string `json:"Charset,omitnil" name:"Charset"`
 
-	// Instance root account name
+	// Username of the instance root account, which has the following rules:
+	// <li>It must contain 1–16 letters , digits, or underscores
+	// <li>It can't be `postgres`.
+	// <li>It can't start with a digit or `pg_`.
+	// <li>All rules are case-insensitive.
 	AdminName *string `json:"AdminName,omitnil" name:"AdminName"`
 
-	// Instance root account password
+	// Password of the instance root account, which must contain 8-32 characters (above 12 characters preferably). It cannot begin with "/",
+	// and must contain the following 4 types of characters.
+	// <li>Lowercase letters: [a–z]
+	// <li>Uppercase letters: [A–Z]
+	// <li>Digits: 0-9
+	// <li>Symbols: ()`~!@#$%^&*-+=_|{}[]:;'<>,.?/
 	AdminPassword *string `json:"AdminPassword,omitnil" name:"AdminPassword"`
 
-	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	// The major PostgreSQL version number, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API. Valid values: `10`, `11`, `12`, `13`, `14`, `15`.
+	// When only this parameter is specified, an instance running the latest kernel version of the latest minor version will be created based on this major version.
+	// You must pass in at least one of the following parameters: `DBMajorVersion`, `DBVersion`, DBKernelVersion`. If you don't need a minor version, just pass in `DBMajorVersion`.
+	DBMajorVersion *string `json:"DBMajorVersion,omitnil" name:"DBMajorVersion"`
 
-	// PostgreSQL version. If it is specified, an instance running the latest kernel of PostgreSQL `DBVersion` will be created. You must pass in at least one of the following parameters: DBVersion, DBMajorVersion, DBKernelVersion.
+	// Number of the major PostgreSQL community version and minor version, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+	// If it is specified, an instance running the latest kernel version will be created based on the community minor version.
+	// You must pass in at least one of the following parameters: `DBMajorVersion`, `DBVersion`, DBKernelVersion`.
 	DBVersion *string `json:"DBVersion,omitnil" name:"DBVersion"`
 
-	// Instance billing mode. Valid values: `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go).
+	// PostgreSQL kernel version number, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+	// PostgreSQL kernel version number. If it is specified, an instance running the specified kernel version will be created. Passing in this parameter in other scenarios is not supported.This parameter is only used to specify a kernel version, which serves no other purposes.
+	DBKernelVersion *string `json:"DBKernelVersion,omitnil" name:"DBKernelVersion"`
+
+	// Instance billing mode. Valid values:
+	// <li>`PREPAID`: Monthly subscription
+	// <li>`POSTPAID_BY_HOUR`: Pay-as-you-go
+	// Default value: `PREPAID`.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil" name:"InstanceChargeType"`
 
-	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	// VPC ID in the format of `vpc-xxxxxxx`. To obtain valid VPC IDs, you can log in to the console or call [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) and look for the `unVpcId` fields in the response.
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+
+	// VPC subnet ID in the format of `subnet-xxxxxxxx`, u200cwhich can be obtained in the console or from the `unSubnetId` field in the return value of the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API.
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+
+	// Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
+	// The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
+	DBNodeSet []*DBNode `json:"DBNodeSet,omitnil" name:"DBNodeSet"`
+
+	// Auto-renewal flag. Valid values:
+	// <li>`0`: Manual renewal.
+	// <li> `1`: Automatic renewal.
+	// Default value: `0`.
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
+
+	// Whether to use vouchers automatically. Valid values:
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
 	AutoVoucher *uint64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Voucher ID list. Currently, you can specify only one voucher.
 	VoucherIds []*string `json:"VoucherIds,omitnil" name:"VoucherIds"`
 
-	// VPC ID
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
-
-	// ID of a subnet in the VPC specified by `VpcId`
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
-
-	// Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
-	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// Campaign ID
 	ActivityId *int64 `json:"ActivityId,omitnil" name:"ActivityId"`
 
-	// Instance name
+	// Instance name, which can contain up to 60 letters, digits, hyphens, and symbols (_-). If this parameter is not specified, "Unnamed" will be displayed by default.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no). Default value: `0`
-	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitnil" name:"NeedSupportIpv6"`
-
-	// The information of tags to be associated with instances. This parameter is left empty by default.
+	// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
 	TagList []*Tag `json:"TagList,omitnil" name:"TagList"`
 
-	// Security group IDs
+	// Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 
-	// PostgreSQL major version. Valid values: `10`, `11`, `12`, `13`. If it is specified, an instance running the latest kernel of PostgreSQL `DBMajorVersion` will be created. You must pass in at least one of the following parameters: DBMajorVersion, DBVersion, DBKernelVersion.
-	DBMajorVersion *string `json:"DBMajorVersion,omitnil" name:"DBMajorVersion"`
-
-	// PostgreSQL kernel version. If it is specified, an instance running the latest kernel of PostgreSQL `DBKernelVersion` will be created. You must pass in one of the following parameters: DBKernelVersion, DBVersion, DBMajorVersion.
-	DBKernelVersion *string `json:"DBKernelVersion,omitnil" name:"DBKernelVersion"`
-
-	// Instance node information, which is required if you purchase a multi-AZ deployed instance.
-	DBNodeSet []*DBNode `json:"DBNodeSet,omitnil" name:"DBNodeSet"`
-
-	// Whether to support transparent data encryption. Valid values: 1 (yes), 0 (no). Default value: 0.
+	// Whether to support TDE. Valid values:
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
+	// For more information, see [TDE]u200d(https://www.tencentcloud.com/document/product/409/47765).
 	NeedSupportTDE *uint64 `json:"NeedSupportTDE,omitnil" name:"NeedSupportTDE"`
 
 	// KeyId of custom key, which is required if you select custom key encryption. It is also the unique CMK identifier.
+	// For more information on creating `KeyId`, see [Enabling TDE](https://www.tencentcloud.com/document/product/409/47762).
 	KMSKeyId *string `json:"KMSKeyId,omitnil" name:"KMSKeyId"`
 
-	// The region where the KMS service is enabled. When `KMSRegion` is left empty, the KMS of the current region will be enabled by default. If the current region is not supported, you need to select another region supported by KMS.
+	// The region where the KMS service is enabled. When `KMSRegion` is left empty, the current region will be selected by default.  If the current region does not support KMS, you must select another region that does.
+	// For more information on `KMSRegion`, see [Enabling TDE](https://intl.cloud.tencent.com/document/product/409/71749?from_cn_redirect=1).
 	KMSRegion *string `json:"KMSRegion,omitnil" name:"KMSRegion"`
 
-	// Database engine. Valid values:
-	// 1. `postgresql` (TencentDB for PostgreSQL)
-	// 2. `mssql_compatible`（MSSQL compatible-TencentDB for PostgreSQL)
-	// Default value: `postgresql`
+	// Database engines. Valid values:
+	// <li>`postgresql`: TencentDB for PostgreSQL
+	// <li>`mssql_compatible`: MSSQL compatible-TencentDB for PostgreSQL
+	// Default value: `postgresql`.
 	DBEngine *string `json:"DBEngine,omitnil" name:"DBEngine"`
 
 	// Configuration information of database engine in the following format:
 	// {"$key1":"$value1", "$key2":"$value2"}
-	// 
 	// Valid values:
-	// 1. mssql_compatible engine：
-	// `migrationMode`: Database mode. Valid values: `single-db` (single-database mode), `multi-db` (multi-database mode). Default value: `single-db`.
-	// `defaultLocale`: Default locale, which can’t be modified after the initialization. Default value: `en_US`. Valid values:
+	// mssql_compatible engine:
+	// <li>`migrationMode`: Database mode. Valid values: `single-db` (single-database mode), `multi-db` (multi-database mode). Default value: `single-db`.
+	// <li>`defaultLocale`: Default locale, which can’t be modified after the initialization. Default value: `en_US`. Valid values:
 	// "af_ZA", "sq_AL", "ar_DZ", "ar_BH", "ar_EG", "ar_IQ", "ar_JO", "ar_KW", "ar_LB", "ar_LY", "ar_MA", "ar_OM", "ar_QA", "ar_SA", "ar_SY", "ar_TN", "ar_AE", "ar_YE", "hy_AM", "az_Cyrl_AZ", "az_Latn_AZ", "eu_ES", "be_BY", "bg_BG", "ca_ES", "zh_HK", "zh_MO", "zh_CN", "zh_SG", "zh_TW", "hr_HR", "cs_CZ", "da_DK", "nl_BE", "nl_NL", "en_AU", "en_BZ", "en_CA", "en_IE", "en_JM", "en_NZ", "en_PH", "en_ZA", "en_TT", "en_GB", "en_US", "en_ZW", "et_EE", "fo_FO", "fa_IR", "fi_FI", "fr_BE", "fr_CA", "fr_FR", "fr_LU", "fr_MC", "fr_CH", "mk_MK", "ka_GE", "de_AT", "de_DE", "de_LI", "de_LU", "de_CH", "el_GR", "gu_IN", "he_IL", "hi_IN", "hu_HU", "is_IS", "id_ID", "it_IT", "it_CH", "ja_JP", "kn_IN", "kok_IN", "ko_KR", "ky_KG", "lv_LV", "lt_LT", "ms_BN", "ms_MY", "mr_IN", "mn_MN", "nb_NO", "nn_NO", "pl_PL", "pt_BR", "pt_PT", "pa_IN", "ro_RO", "ru_RU", "sa_IN", "sr_Cyrl_RS", "sr_Latn_RS", "sk_SK", "sl_SI", "es_AR", "es_BO", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_SV", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PY","es_PE", "es_PR", "es_ES", "es_TRADITIONAL", "es_UY", "es_VE", "sw_KE", "sv_FI", "sv_SE", "tt_RU", "te_IN", "th_TH", "tr_TR", "uk_UA", "ur_IN", "ur_PK", "uz_Cyrl_UZ", "uz_Latn_UZ", "vi_VN".
-	// `serverCollationName`: Name of collation rule, which can’t be modified after the initialization. Default value: `sql_latin1_general_cp1_ci_as`. Valid values:
-	// "bbf_unicode_general_ci_as", "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as".
+	// <li>`serverCollationName`: Default collation name, which can’t be modified after the initialization. Default value: "bbf_unicode_general_ci_as". Valid values: "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as"。
 	DBEngineConfig *string `json:"DBEngineConfig,omitnil" name:"DBEngineConfig"`
+
+	// Primary-standby sync mode. Valid values:  
+	// <li>`Semi-sync`
+	// <li>`Async`
+	// Default value for the primary instance: `Semi-sync`.
+	// Default value for the standby instance: `Async`.
+	SyncMode *string `json:"SyncMode,omitnil" name:"SyncMode"`
+
+	// Whether IPv6 is supported.
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
+	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitnil" name:"NeedSupportIpv6"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -1123,35 +1248,36 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "Zone")
 	delete(f, "SpecCode")
 	delete(f, "Storage")
 	delete(f, "InstanceCount")
 	delete(f, "Period")
-	delete(f, "Zone")
 	delete(f, "Charset")
 	delete(f, "AdminName")
 	delete(f, "AdminPassword")
-	delete(f, "ProjectId")
+	delete(f, "DBMajorVersion")
 	delete(f, "DBVersion")
+	delete(f, "DBKernelVersion")
 	delete(f, "InstanceChargeType")
-	delete(f, "AutoVoucher")
-	delete(f, "VoucherIds")
 	delete(f, "VpcId")
 	delete(f, "SubnetId")
+	delete(f, "DBNodeSet")
 	delete(f, "AutoRenewFlag")
+	delete(f, "AutoVoucher")
+	delete(f, "VoucherIds")
+	delete(f, "ProjectId")
 	delete(f, "ActivityId")
 	delete(f, "Name")
-	delete(f, "NeedSupportIpv6")
 	delete(f, "TagList")
 	delete(f, "SecurityGroupIds")
-	delete(f, "DBMajorVersion")
-	delete(f, "DBKernelVersion")
-	delete(f, "DBNodeSet")
 	delete(f, "NeedSupportTDE")
 	delete(f, "KMSKeyId")
 	delete(f, "KMSRegion")
 	delete(f, "DBEngine")
 	delete(f, "DBEngineConfig")
+	delete(f, "SyncMode")
+	delete(f, "NeedSupportIpv6")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancesRequest has unknown keys!", "")
 	}
@@ -1269,129 +1395,159 @@ func (r *CreateParameterTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateReadOnlyDBInstanceRequestParams struct {
-	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	// Primary AZ of an instance, such as "ap-guangzhou-3".
+	// The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
+
+	// ID of the primary instance to which the read-only instance belongs
+	MasterDBInstanceId *string `json:"MasterDBInstanceId,omitnil" name:"MasterDBInstanceId"`
+
+	// Purchasable code, which can be obtained from the `SpecCode` field in the return value of the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
 	SpecCode *string `json:"SpecCode,omitnil" name:"SpecCode"`
 
 	// Instance storage capacity in GB
 	Storage *uint64 `json:"Storage,omitnil" name:"Storage"`
 
-	// Number of instances purchased at a time. Value range: 1–100.
+	// The number of instances to be purchased at a time. Value range: 1-10. To purchase more than 10 instances each time, you can make multiple calls.
 	InstanceCount *uint64 `json:"InstanceCount,omitnil" name:"InstanceCount"`
 
-	// Valid period in months of purchased instances. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	// Validity period in months, valid values:
+	// <li>Monthly subscription: `1`, `2`, `3`, 4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// <li>Pay-as-you-go: `1`.
 	Period *uint64 `json:"Period,omitnil" name:"Period"`
 
-	// ID of the primary instance to which the read-only replica belongs
-	MasterDBInstanceId *string `json:"MasterDBInstanceId,omitnil" name:"MasterDBInstanceId"`
+	// VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
-	// Availability zone ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	// VPC subnet ID in the format of `subnet-xxxxxxxx` which can be obtained in the console or from the `unSubnetId` field in the return value of the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API.
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
-	// Project ID
-	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
-
-	// (Disused) You don’t need to specify a version, as the kernel version is as the same as that of the instance.
-	DBVersion *string `json:"DBVersion,omitnil" name:"DBVersion"`
-
-	// Instance billing mode. Valid value: `POSTPAID_BY_HOUR` (pay-as-you-go). If the source instance is pay-as-you-go, so is the read-only instance.
+	// Instance billing mode. Valid values: 
+	// <li>`PREPAID`: Monthly subscription
+	// <li>`POSTPAID_BY_HOUR`: Pay-as-you-go
+	// Default value: `PREPAID`. If the primary instance is pay-as-you-go, so is the read-only instance.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil" name:"InstanceChargeType"`
 
-	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	// Whether to use vouchers automatically. Valid values:
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
 	AutoVoucher *uint64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Voucher ID list. Currently, you can specify only one voucher.
 	VoucherIds []*string `json:"VoucherIds,omitnil" name:"VoucherIds"`
 
-	// Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+	// Auto-renewal flag. Valid values:
+	// <li>`0`: Manual renewal.
+	// <li>`1`: Automatic renewal.
+	// Default value: `0`.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 
-	// VPC ID
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
-
-	// VPC subnet ID
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// Special offer ID
 	ActivityId *int64 `json:"ActivityId,omitnil" name:"ActivityId"`
 
-	// Instance name (which will be supported in the future)
-	Name *string `json:"Name,omitnil" name:"Name"`
-
-	// Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no).
-	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitnil" name:"NeedSupportIpv6"`
-
 	// RO group ID
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitnil" name:"ReadOnlyGroupId"`
 
-	// The information of tags to be bound with the purchased instance, which is left empty by default (type: tag array).
+	// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
 	TagList *Tag `json:"TagList,omitnil" name:"TagList"`
 
-	// Security group ID
+	// Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+
+	// Whether IPv6 is supported.
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
+	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitnil" name:"NeedSupportIpv6"`
+
+	// Instance name (which will be supported in the future)
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// (Disused) You don’t need to specify a version, as the kernel version is as the same as that of the instance.
+	DBVersion *string `json:"DBVersion,omitnil" name:"DBVersion"`
 }
 
 type CreateReadOnlyDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// Purchasable specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	// Primary AZ of an instance, such as "ap-guangzhou-3".
+	// The information of AZ can be obtained from the `Zone` field in the return value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
+
+	// ID of the primary instance to which the read-only instance belongs
+	MasterDBInstanceId *string `json:"MasterDBInstanceId,omitnil" name:"MasterDBInstanceId"`
+
+	// Purchasable code, which can be obtained from the `SpecCode` field in the return value of the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
 	SpecCode *string `json:"SpecCode,omitnil" name:"SpecCode"`
 
 	// Instance storage capacity in GB
 	Storage *uint64 `json:"Storage,omitnil" name:"Storage"`
 
-	// Number of instances purchased at a time. Value range: 1–100.
+	// The number of instances to be purchased at a time. Value range: 1-10. To purchase more than 10 instances each time, you can make multiple calls.
 	InstanceCount *uint64 `json:"InstanceCount,omitnil" name:"InstanceCount"`
 
-	// Valid period in months of purchased instances. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	// Validity period in months, valid values:
+	// <li>Monthly subscription: `1`, `2`, `3`, 4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// <li>Pay-as-you-go: `1`.
 	Period *uint64 `json:"Period,omitnil" name:"Period"`
 
-	// ID of the primary instance to which the read-only replica belongs
-	MasterDBInstanceId *string `json:"MasterDBInstanceId,omitnil" name:"MasterDBInstanceId"`
+	// VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
+	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
-	// Availability zone ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	// VPC subnet ID in the format of `subnet-xxxxxxxx` which can be obtained in the console or from the `unSubnetId` field in the return value of the [DescribeSubnets](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API.
+	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
-	// Project ID
-	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
-
-	// (Disused) You don’t need to specify a version, as the kernel version is as the same as that of the instance.
-	DBVersion *string `json:"DBVersion,omitnil" name:"DBVersion"`
-
-	// Instance billing mode. Valid value: `POSTPAID_BY_HOUR` (pay-as-you-go). If the source instance is pay-as-you-go, so is the read-only instance.
+	// Instance billing mode. Valid values: 
+	// <li>`PREPAID`: Monthly subscription
+	// <li>`POSTPAID_BY_HOUR`: Pay-as-you-go
+	// Default value: `PREPAID`. If the primary instance is pay-as-you-go, so is the read-only instance.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil" name:"InstanceChargeType"`
 
-	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	// Whether to use vouchers automatically. Valid values:
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
 	AutoVoucher *uint64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Voucher ID list. Currently, you can specify only one voucher.
 	VoucherIds []*string `json:"VoucherIds,omitnil" name:"VoucherIds"`
 
-	// Renewal flag. Valid values: `0` (manual renewal), `1` (auto-renewal). Default value: `0`.
+	// Auto-renewal flag. Valid values:
+	// <li>`0`: Manual renewal.
+	// <li>`1`: Automatic renewal.
+	// Default value: `0`.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 
-	// VPC ID
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
-
-	// VPC subnet ID
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
 	// Special offer ID
 	ActivityId *int64 `json:"ActivityId,omitnil" name:"ActivityId"`
 
-	// Instance name (which will be supported in the future)
-	Name *string `json:"Name,omitnil" name:"Name"`
-
-	// Whether to support IPv6 address access. Valid values: `1` (yes), `0` (no).
-	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitnil" name:"NeedSupportIpv6"`
-
 	// RO group ID
 	ReadOnlyGroupId *string `json:"ReadOnlyGroupId,omitnil" name:"ReadOnlyGroupId"`
 
-	// The information of tags to be bound with the purchased instance, which is left empty by default (type: tag array).
+	// The information of tags to be bound with the instance, which is left empty by default. This parameter can be obtained from the `Tags` field in the return value of the [DescribeTags](https://intl.cloud.tencent.com/document/api/651/35316?from_cn_redirect=1) API.
 	TagList *Tag `json:"TagList,omitnil" name:"TagList"`
 
-	// Security group ID
+	// Security group of the instance, which can be obtained from the `sgld` field in the return value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API. If this parameter is not specified, the default security group will be bound.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+
+	// Whether IPv6 is supported.
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
+	NeedSupportIpv6 *uint64 `json:"NeedSupportIpv6,omitnil" name:"NeedSupportIpv6"`
+
+	// Instance name (which will be supported in the future)
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// (Disused) You don’t need to specify a version, as the kernel version is as the same as that of the instance.
+	DBVersion *string `json:"DBVersion,omitnil" name:"DBVersion"`
 }
 
 func (r *CreateReadOnlyDBInstanceRequest) ToJsonString() string {
@@ -1406,26 +1562,26 @@ func (r *CreateReadOnlyDBInstanceRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "Zone")
+	delete(f, "MasterDBInstanceId")
 	delete(f, "SpecCode")
 	delete(f, "Storage")
 	delete(f, "InstanceCount")
 	delete(f, "Period")
-	delete(f, "MasterDBInstanceId")
-	delete(f, "Zone")
-	delete(f, "ProjectId")
-	delete(f, "DBVersion")
+	delete(f, "VpcId")
+	delete(f, "SubnetId")
 	delete(f, "InstanceChargeType")
 	delete(f, "AutoVoucher")
 	delete(f, "VoucherIds")
 	delete(f, "AutoRenewFlag")
-	delete(f, "VpcId")
-	delete(f, "SubnetId")
+	delete(f, "ProjectId")
 	delete(f, "ActivityId")
-	delete(f, "Name")
-	delete(f, "NeedSupportIpv6")
 	delete(f, "ReadOnlyGroupId")
 	delete(f, "TagList")
 	delete(f, "SecurityGroupIds")
+	delete(f, "NeedSupportIpv6")
+	delete(f, "Name")
+	delete(f, "DBVersion")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateReadOnlyDBInstanceRequest has unknown keys!", "")
 	}
@@ -1826,19 +1982,16 @@ type DBBackup struct {
 }
 
 type DBInstance struct {
-	// Instance region such as ap-guangzhou, which corresponds to the `Region` field of `RegionSet`
+	// Instance region such as ap-guangzhou, which corresponds to the`Region` field in `RegionSet`.
 	Region *string `json:"Region,omitnil" name:"Region"`
 
-	// Instance AZ such as ap-guangzhou-3, which corresponds to the `Zone` field of `ZoneSet`
+	// Instance AZ such as ap-guangzhou-3, which corresponds to the `Zone` field of `ZoneSet`.
 	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
-	// Project ID
-	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
-
-	// VPC ID
+	// VPC ID in the format of `vpc-xxxxxxx`, which can be obtained in the console or from the `unVpcId` field in the return value of the [DescribeVpcEx](https://intl.cloud.tencent.com/document/api/215/1372?from_cn_redirect=1) API.
 	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
 
-	// SubnetId
+	// VPC subnet ID in the format of `subnet-xxxxxxxx`, which can be obtained in the console or from the `unSubnetId` field in the return value of the [DescribeSubnets ](https://intl.cloud.tencent.com/document/api/215/15784?from_cn_redirect=1) API.
 	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
 
 	// Instance ID
@@ -1847,7 +2000,7 @@ type DBInstance struct {
 	// Instance name
 	DBInstanceName *string `json:"DBInstanceName,omitnil" name:"DBInstanceName"`
 
-	// Instance status.  Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolating`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`, `network changing`, `upgrading` (upgrading kernel version).
+	// Instance status. Valid values: `applying`, `init` (to be initialized), `initing` (initializing), `running`, `limited run`, `isolating`, `isolated`, `recycling`, `recycled`, `job running`, `offline`, `migrating`, `expanding`, `waitSwitch` (waiting for switch), `switching`, `readonly`, `restarting`, `network changing`, `upgrading` (upgrading kernel version), `audit-switching` (changing audit status), `primary-switching` (primary-standby switching).
 	DBInstanceStatus *string `json:"DBInstanceStatus,omitnil" name:"DBInstanceStatus"`
 
 	// Assigned instance memory size in GB
@@ -1862,22 +2015,36 @@ type DBInstance struct {
 	// Purchasable specification ID
 	DBInstanceClass *string `json:"DBInstanceClass,omitnil" name:"DBInstanceClass"`
 
-	// Instance type. 1: primary (master instance), 2: readonly (read-only instance), 3: guard (disaster recovery instance), 4: temp (temp instance)
+	// The major PostgreSQL version number, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API. Valid values: `10`, `11`, `12`, `13`, `14`, `15`.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	DBMajorVersion *string `json:"DBMajorVersion,omitnil" name:"DBMajorVersion"`
+
+	// Number of the major PostgreSQL community version and minor version, such as 12.4, which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+	DBVersion *string `json:"DBVersion,omitnil" name:"DBVersion"`
+
+	// PostgreSQL kernel version number (like v12.7_r1.8), which can be queried by the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	DBKernelVersion *string `json:"DBKernelVersion,omitnil" name:"DBKernelVersion"`
+
+	// Instance type. Valid values:
+	// <li>`primary`: Primary instance
+	// <li>`readonly`: Read-only instance
+	// <li>`guard`: Disaster recovery instance
+	// <li>`temp`: Temp instance
 	DBInstanceType *string `json:"DBInstanceType,omitnil" name:"DBInstanceType"`
 
-	// Instance edition. Currently, only `standard` edition (dual-server high-availability one-master-one-slave edition) is supported
+	// Instance version. Valid value: `standard` (dual-server high-availability; one-primary-one-standby).
 	DBInstanceVersion *string `json:"DBInstanceVersion,omitnil" name:"DBInstanceVersion"`
 
-	// Instance database character set
+	// Instance character set. Valid values:
+	// <li>`UTF8`
+	// <li>`LATIN1`
 	DBCharset *string `json:"DBCharset,omitnil" name:"DBCharset"`
-
-	// PostgreSQL version number
-	DBVersion *string `json:"DBVersion,omitnil" name:"DBVersion"`
 
 	// Instance creation time
 	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
-	// Instance last modified time
+	// Last updated time of the instance attribute
 	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
 	// Instance expiration time
@@ -1886,10 +2053,15 @@ type DBInstance struct {
 	// Instance isolation time
 	IsolatedTime *string `json:"IsolatedTime,omitnil" name:"IsolatedTime"`
 
-	// Billing mode. postpaid: pay-as-you-go
+	// Billing mode. Valid values:
+	// <li>`PREPAID`: Monthly subscription
+	// <li>`postpaid`: Pay-as-you-go
 	PayType *string `json:"PayType,omitnil" name:"PayType"`
 
-	// Whether to renew automatically. 1: yes, 0: no
+	// Whether auto-renewal is enabled. Valid values:
+	// <li>`0`: Manual renewal.
+	// <li>`1`: Automatic renewal.
+	// Default value: `0`.
 	AutoRenew *uint64 `json:"AutoRenew,omitnil" name:"AutoRenew"`
 
 	// Instance network connection information
@@ -1904,55 +2076,68 @@ type DBInstance struct {
 	// Instance `Uid`
 	Uid *uint64 `json:"Uid,omitnil" name:"Uid"`
 
-	// Whether the instance supports IPv6 address access. Valid values: 1 (yes), 0 (no)
-	SupportIpv6 *uint64 `json:"SupportIpv6,omitnil" name:"SupportIpv6"`
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
 
-	// The information of tags associated with instances.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The information of tags associated with instances
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	TagList []*Tag `json:"TagList,omitnil" name:"TagList"`
 
-	// Primary instance information, which is returned only when the instance is read-only
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Primary instance information, which is returned only when the instance is read-only.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	MasterDBInstanceId *string `json:"MasterDBInstanceId,omitnil" name:"MasterDBInstanceId"`
 
 	// Number of read-only instances
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	ReadOnlyInstanceNum *int64 `json:"ReadOnlyInstanceNum,omitnil" name:"ReadOnlyInstanceNum"`
 
-	// The status of a instance in a read-only group
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// The status of a read-only instance in a read-only group
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	StatusInReadonlyGroup *string `json:"StatusInReadonlyGroup,omitnil" name:"StatusInReadonlyGroup"`
 
-	// Elimination time
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Offline time
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	OfflineTime *string `json:"OfflineTime,omitnil" name:"OfflineTime"`
 
-	// Database kernel version
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	DBKernelVersion *string `json:"DBKernelVersion,omitnil" name:"DBKernelVersion"`
+	// Instance node information
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	DBNodeSet []*DBNode `json:"DBNodeSet,omitnil" name:"DBNodeSet"`
+
+	// Whether the instance supports TDE. Valid values: 
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
+	// For more information, see [TDE](https://intl.cloud.tencent.com/document/product/409/71748?from_cn_redirect=1).
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	IsSupportTDE *int64 `json:"IsSupportTDE,omitnil" name:"IsSupportTDE"`
+
+	// Database engines. Valid values:
+	// <li>`postgresql`: TencentDB for PostgreSQL
+	// <li>`mssql_compatible`: MSSQL compatible-TencentDB for PostgreSQL
+	// Default value: `postgresql`.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	DBEngine *string `json:"DBEngine,omitnil" name:"DBEngine"`
+
+	// Configuration information of database engine in the following format:
+	// {"$key1":"$value1", "$key2":"$value2"}
+	// Valid values:
+	// mssql_compatible engine:
+	// <li>`migrationMode`: Database mode. Valid values: `single-db` (single-database mode), `multi-db` (multi-database mode). Default value: `single-db`.
+	// <li>`defaultLocale`: Default locale, which can’t be modified after the initialization. Default value: `en_US`. Valid values:
+	// "af_ZA", "sq_AL", "ar_DZ", "ar_BH", "ar_EG", "ar_IQ", "ar_JO", "ar_KW", "ar_LB", "ar_LY", "ar_MA", "ar_OM", "ar_QA", "ar_SA", "ar_SY", "ar_TN", "ar_AE", "ar_YE", "hy_AM", "az_Cyrl_AZ", "az_Latn_AZ", "eu_ES", "be_BY", "bg_BG", "ca_ES", "zh_HK", "zh_MO", "zh_CN", "zh_SG", "zh_TW", "hr_HR", "cs_CZ", "da_DK", "nl_BE", "nl_NL", "en_AU", "en_BZ", "en_CA", "en_IE", "en_JM", "en_NZ", "en_PH", "en_ZA", "en_TT", "en_GB", "en_US", "en_ZW", "et_EE", "fo_FO", "fa_IR", "fi_FI", "fr_BE", "fr_CA", "fr_FR", "fr_LU", "fr_MC", "fr_CH", "mk_MK", "ka_GE", "de_AT", "de_DE", "de_LI", "de_LU", "de_CH", "el_GR", "gu_IN", "he_IL", "hi_IN", "hu_HU", "is_IS", "id_ID", "it_IT", "it_CH", "ja_JP", "kn_IN", "kok_IN", "ko_KR", "ky_KG", "lv_LV", "lt_LT", "ms_BN", "ms_MY", "mr_IN", "mn_MN", "nb_NO", "nn_NO", "pl_PL", "pt_BR", "pt_PT", "pa_IN", "ro_RO", "ru_RU", "sa_IN", "sr_Cyrl_RS", "sr_Latn_RS", "sk_SK", "sl_SI", "es_AR", "es_BO", "es_CL", "es_CO", "es_CR", "es_DO", "es_EC", "es_SV", "es_GT", "es_HN", "es_MX", "es_NI", "es_PA", "es_PY","es_PE", "es_PR", "es_ES", "es_TRADITIONAL", "es_UY", "es_VE", "sw_KE", "sv_FI", "sv_SE", "tt_RU", "te_IN", "th_TH", "tr_TR", "uk_UA", "ur_IN", "ur_PK", "uz_Cyrl_UZ", "uz_Latn_UZ", "vi_VN".
+	// <li>`serverCollationName`: Default collation name, which can’t be modified after the initialization. Default value: "sql_latin1_general_cp1_ci_as". Valid values: "bbf_unicode_cp1_ci_as", "bbf_unicode_CP1250_ci_as", "bbf_unicode_CP1251_ci_as", "bbf_unicode_cp1253_ci_as", "bbf_unicode_cp1254_ci_as", "bbf_unicode_cp1255_ci_as", "bbf_unicode_cp1256_ci_as", "bbf_unicode_cp1257_ci_as", "bbf_unicode_cp1258_ci_as", "bbf_unicode_cp874_ci_as", "sql_latin1_general_cp1250_ci_as", "sql_latin1_general_cp1251_ci_as", "sql_latin1_general_cp1_ci_as", "sql_latin1_general_cp1253_ci_as", "sql_latin1_general_cp1254_ci_as", "sql_latin1_general_cp1255_ci_as","sql_latin1_general_cp1256_ci_as", "sql_latin1_general_cp1257_ci_as", "sql_latin1_general_cp1258_ci_as", "chinese_prc_ci_as", "cyrillic_general_ci_as", "finnish_swedish_ci_as", "french_ci_as", "japanese_ci_as", "korean_wansung_ci_as", "latin1_general_ci_as", "modern_spanish_ci_as", "polish_ci_as", "thai_ci_as", "traditional_spanish_ci_as", "turkish_ci_as", "ukrainian_ci_as", "vietnamese_ci_as".
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	DBEngineConfig *string `json:"DBEngineConfig,omitnil" name:"DBEngineConfig"`
 
 	// Network access list of the instance (this field has been deprecated)
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	NetworkAccessList []*NetworkAccess `json:"NetworkAccessList,omitnil" name:"NetworkAccessList"`
 
-	// PostgreSQL major version number
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	DBMajorVersion *string `json:"DBMajorVersion,omitnil" name:"DBMajorVersion"`
-
-	// Instance node information
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	DBNodeSet []*DBNode `json:"DBNodeSet,omitnil" name:"DBNodeSet"`
-
-	// Whether the instance supports TDE data encryption. Valid values: 0 (no), 1 (yes)
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	IsSupportTDE *int64 `json:"IsSupportTDE,omitnil" name:"IsSupportTDE"`
-
-
-	DBEngine *string `json:"DBEngine,omitnil" name:"DBEngine"`
-
-	// Configuration information of database engine
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	DBEngineConfig *string `json:"DBEngineConfig,omitnil" name:"DBEngineConfig"`
+	// Whether the instance supports IPv6. Valid values:
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
+	SupportIpv6 *uint64 `json:"SupportIpv6,omitnil" name:"SupportIpv6"`
 }
 
 type DBInstanceNetInfo struct {
@@ -3327,50 +3512,50 @@ func (r *DescribeDBBackupsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBErrlogsRequestParams struct {
-	// Instance ID in the format of postgres-5bq3wfjd
+	// Instance ID	
 	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
 
-	// Query start time in the format of 2018-01-01 00:00:00, which cannot be more than 7 days ago
+	// u200cu200cu200cQuery start time in the format of 2018-01-01 00:00:00. The log is retained for seven days by default, so the start time must fall within the retention period.	
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
-	// Query end time in the format of 2018-01-01 00:00:00
+	// u200cu200cu200cu200cQuery end time in the format of 2018-01-01 00:00:00	
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Database name
 	DatabaseName *string `json:"DatabaseName,omitnil" name:"DatabaseName"`
 
-	// Search keyword
+	// Keywords used for search
 	SearchKeys []*string `json:"SearchKeys,omitnil" name:"SearchKeys"`
 
-	// Number of entries returned per page. Value range: 1-100
+	// Number of results returned per page. Value range: 1-100. Default value: `50`.	
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Page number for data return in paged query. Pagination starts from 0
+	// Data offset, which starts from 0. Default value: `0`.	
 	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 }
 
 type DescribeDBErrlogsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance ID in the format of postgres-5bq3wfjd
+	// Instance ID	
 	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
 
-	// Query start time in the format of 2018-01-01 00:00:00, which cannot be more than 7 days ago
+	// u200cu200cu200cQuery start time in the format of 2018-01-01 00:00:00. The log is retained for seven days by default, so the start time must fall within the retention period.	
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
-	// Query end time in the format of 2018-01-01 00:00:00
+	// u200cu200cu200cu200cQuery end time in the format of 2018-01-01 00:00:00	
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Database name
 	DatabaseName *string `json:"DatabaseName,omitnil" name:"DatabaseName"`
 
-	// Search keyword
+	// Keywords used for search
 	SearchKeys []*string `json:"SearchKeys,omitnil" name:"SearchKeys"`
 
-	// Number of entries returned per page. Value range: 1-100
+	// Number of results returned per page. Value range: 1-100. Default value: `50`.	
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Page number for data return in paged query. Pagination starts from 0
+	// Data offset, which starts from 0. Default value: `0`.	
 	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 }
 
@@ -3401,10 +3586,10 @@ func (r *DescribeDBErrlogsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDBErrlogsResponseParams struct {
-	// Number of date entries returned for this call
+	// Number of logs returned in a single query. Maximum value: `10000`.
 	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
-	// Error log list
+	// Detailed sets of error logs
 	Details []*ErrLogDetail `json:"Details,omitnil" name:"Details"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3481,6 +3666,89 @@ func (r *DescribeDBInstanceAttributeResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDBInstanceAttributeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstanceHAConfigRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
+}
+
+type DescribeDBInstanceHAConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
+}
+
+func (r *DescribeDBInstanceHAConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceHAConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstanceHAConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstanceHAConfigResponseParams struct {
+	// Primary-standby sync mode. Valid values:
+	// <li>`Semi-sync`
+	// <li>`Async`
+	SyncMode *string `json:"SyncMode,omitnil" name:"SyncMode"`
+
+	// Maximum data lag for high-availability standby server. The standby node can be promoted to the primary node when its data lag and the delay time are both less than the value of `MaxStandbyLatency` and `MaxStandbyLag` respectively.
+	// <li>Unit: byte
+	// <li>Value range: 1073741824-322122547200
+	MaxStandbyLatency *uint64 `json:"MaxStandbyLatency,omitnil" name:"MaxStandbyLatency"`
+
+	// The maximum delay for high-availability standby server The standby node can be promoted to the primary node when its data lag and the delay time are both less than or equals to the value of `MaxStandbyLatency` and `MaxStandbyLag` respectively.
+	// <li>Unit: s
+	// <li>Value range: 5-10
+	MaxStandbyLag *uint64 `json:"MaxStandbyLag,omitnil" name:"MaxStandbyLag"`
+
+	// Maximum data sync lag for u200du200dstandby server. If data lag of the standby node and the delay time are both less than or equals to the values of `MaxSyncStandbyLatency` and `MaxSyncStandbyLag` respectively, the standby server adopts semi-sync replication; if not, it adopts async replication.
+	// This value is only valid for the instance with `SyncMode` set to `Semi-sync`.
+	// This field returns null for async instance
+	// and semi-sync (non-downgradable to async) instance.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	MaxSyncStandbyLatency *uint64 `json:"MaxSyncStandbyLatency,omitnil" name:"MaxSyncStandbyLatency"`
+
+	// Maximum sync delay time for u200dstandby server. If the delay time for u200dstandby server and the data lag are both less than or equals to the values of `MaxSyncStandbyLag` and `MaxSyncStandbyLatency` respectively, the standby server adopts sync replication mode; if not, it adopts async replication.
+	// This value is only valid for the instance with `SyncMode` set to `Semi-sync`.
+	// This field will not return for async instance
+	// and semi-sync (non-downgradable to async) instance.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	MaxSyncStandbyLag *uint64 `json:"MaxSyncStandbyLag,omitnil" name:"MaxSyncStandbyLag"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeDBInstanceHAConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBInstanceHAConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBInstanceHAConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceHAConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5194,13 +5462,18 @@ type Detail struct {
 
 // Predefined struct for user
 type DisIsolateDBInstancesRequestParams struct {
-	// List of resource IDs. Note that currently you cannot remove multiple instances from isolation at the same time. Only one instance ID can be passed in here.
+	// Instance ID list. Currently, you can't remove multiple instances from isolation in batches. Only one instance ID can be passed in here.
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitnil" name:"DBInstanceIdSet"`
 
-	// The valid period (in months) of the monthly-subscribed instance when removing it from isolation
+	// Validity period in months
+	// <li>Monthly subscription: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// <li>Pay-as-you-go: `1`.
 	Period *int64 `json:"Period,omitnil" name:"Period"`
 
-	// Whether to use vouchers. Valid values: `true` (yes), `false` (no). Default value: `false`.
+	// Whether to use vouchers. Valid values:
+	// <li>`true`: Yes.
+	// u200c<li>`false`: No.
+	// Default value: `false`.
 	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Voucher ID list
@@ -5210,13 +5483,18 @@ type DisIsolateDBInstancesRequestParams struct {
 type DisIsolateDBInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of resource IDs. Note that currently you cannot remove multiple instances from isolation at the same time. Only one instance ID can be passed in here.
+	// Instance ID list. Currently, you can't remove multiple instances from isolation in batches. Only one instance ID can be passed in here.
 	DBInstanceIdSet []*string `json:"DBInstanceIdSet,omitnil" name:"DBInstanceIdSet"`
 
-	// The valid period (in months) of the monthly-subscribed instance when removing it from isolation
+	// Validity period in months
+	// <li>Monthly subscription: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// <li>Pay-as-you-go: `1`.
 	Period *int64 `json:"Period,omitnil" name:"Period"`
 
-	// Whether to use vouchers. Valid values: `true` (yes), `false` (no). Default value: `false`.
+	// Whether to use vouchers. Valid values:
+	// <li>`true`: Yes.
+	// u200c<li>`false`: No.
+	// Default value: `false`.
 	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Voucher ID list
@@ -5454,7 +5732,7 @@ type InquiryPriceCreateDBInstancesRequestParams struct {
 	// AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
 	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
-	// Specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	// Specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeClasses` API.
 	SpecCode *string `json:"SpecCode,omitnil" name:"SpecCode"`
 
 	// Storage capacity size in GB.
@@ -5487,7 +5765,7 @@ type InquiryPriceCreateDBInstancesRequest struct {
 	// AZ ID, which can be obtained through the `Zone` field in the returned value of the `DescribeZones` API.
 	Zone *string `json:"Zone,omitnil" name:"Zone"`
 
-	// Specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeProductConfig` API.
+	// Specification ID, which can be obtained through the `SpecCode` field in the returned value of the `DescribeClasses` API.
 	SpecCode *string `json:"SpecCode,omitnil" name:"SpecCode"`
 
 	// Storage capacity size in GB.
@@ -5972,7 +6250,7 @@ type ModifyBackupPlanRequestParams struct {
 	// The latest time to start a backup
 	MaxBackupStartTime *string `json:"MaxBackupStartTime,omitnil" name:"MaxBackupStartTime"`
 
-	// Backup retention period in days. Value range: 3-7
+	// Backup retention period in days. Value range: 7-1830
 	BaseBackupRetentionPeriod *uint64 `json:"BaseBackupRetentionPeriod,omitnil" name:"BaseBackupRetentionPeriod"`
 
 	// Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
@@ -5991,7 +6269,7 @@ type ModifyBackupPlanRequest struct {
 	// The latest time to start a backup
 	MaxBackupStartTime *string `json:"MaxBackupStartTime,omitnil" name:"MaxBackupStartTime"`
 
-	// Backup retention period in days. Value range: 3-7
+	// Backup retention period in days. Value range: 7-1830
 	BaseBackupRetentionPeriod *uint64 `json:"BaseBackupRetentionPeriod,omitnil" name:"BaseBackupRetentionPeriod"`
 
 	// Backup cycle, which means on which days each week the instance will be backed up. The parameter value should be the lowercase names of the days of the week.
@@ -6116,16 +6394,27 @@ type ModifyDBInstanceChargeTypeRequestParams struct {
 	// Instance ID in the format of `postgres-6fego161`
 	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
 
-	// Instance billing mode.  Valid values:  `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go). Default value:  `PREPAID`.
+	// Instance billing mode. Valid values:
+	// <li>`PREPAID`: Monthly subscription.
+	// <li>`POSTPAID_BY_HOUR`: Pay-as-you-go.
+	// Default value: `PREPAID`.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil" name:"InstanceChargeType"`
 
-	// Validity period  in months. Valid values:  Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	// Validity period in months
+	// <li>Monthly subscription: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// <li>Pay-as-you-go: `1`.
 	Period *int64 `json:"Period,omitnil" name:"Period"`
 
-	// Renewal flag. Valid values；  Valid values: `0` (manual renewal), `1` (auto-renewal).
+	// Auto-renewal flag. Valid values:
+	// <li>`0`: Manual renewal.
+	// <li>`1`: Automatic renewal.
+	// Default value: `0`.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 
-	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	// Whether to use vouchers automatically. Valid values:
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 }
 
@@ -6135,16 +6424,27 @@ type ModifyDBInstanceChargeTypeRequest struct {
 	// Instance ID in the format of `postgres-6fego161`
 	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
 
-	// Instance billing mode.  Valid values:  `PREPAID` (monthly subscription), `POSTPAID_BY_HOUR` (pay-as-you-go). Default value:  `PREPAID`.
+	// Instance billing mode. Valid values:
+	// <li>`PREPAID`: Monthly subscription.
+	// <li>`POSTPAID_BY_HOUR`: Pay-as-you-go.
+	// Default value: `PREPAID`.
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil" name:"InstanceChargeType"`
 
-	// Validity period  in months. Valid values:  Valid period in months of the purchased instance. Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`. This parameter is set to `1` when the pay-as-you-go billing mode is used.
+	// Validity period in months
+	// <li>Monthly subscription: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`.
+	// <li>Pay-as-you-go: `1`.
 	Period *int64 `json:"Period,omitnil" name:"Period"`
 
-	// Renewal flag. Valid values；  Valid values: `0` (manual renewal), `1` (auto-renewal).
+	// Auto-renewal flag. Valid values:
+	// <li>`0`: Manual renewal.
+	// <li>`1`: Automatic renewal.
+	// Default value: `0`.
 	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
 
-	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	// Whether to use vouchers automatically. Valid values:
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 }
 
@@ -6201,10 +6501,15 @@ type ModifyDBInstanceDeploymentRequestParams struct {
 	// Instance ID.
 	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
 
-	// Instance node information.
+	// Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
+	// The information of AZ can be obtained from the `Zone` field in the returned value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
 	DBNodeSet []*DBNode `json:"DBNodeSet,omitnil" name:"DBNodeSet"`
 
-	// Switch time. Valid values: `0` (switch now), `1` (switch at a specified time), `2` (switch during maintenance time). Default value: `0`.
+	// Switch time for the specified instance after configuration modification.
+	// <li>`0`: Switch now. 
+	// <li>`1`: Switch at the specified time.
+	// <li>`2`: Switch in the maintenance time.
+	// Default value: `0`. 
 	SwitchTag *int64 `json:"SwitchTag,omitnil" name:"SwitchTag"`
 
 	// Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
@@ -6220,10 +6525,15 @@ type ModifyDBInstanceDeploymentRequest struct {
 	// Instance ID.
 	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
 
-	// Instance node information.
+	// Deployment information of the instance node, which will display the information of each AZ when the instance node is deployed across multiple AZs.
+	// The information of AZ can be obtained from the `Zone` field in the returned value of the [DescribeZones](https://intl.cloud.tencent.com/document/api/409/16769?from_cn_redirect=1) API.
 	DBNodeSet []*DBNode `json:"DBNodeSet,omitnil" name:"DBNodeSet"`
 
-	// Switch time. Valid values: `0` (switch now), `1` (switch at a specified time), `2` (switch during maintenance time). Default value: `0`.
+	// Switch time for the specified instance after configuration modification.
+	// <li>`0`: Switch now. 
+	// <li>`1`: Switch at the specified time.
+	// <li>`2`: Switch in the maintenance time.
+	// Default value: `0`. 
 	SwitchTag *int64 `json:"SwitchTag,omitnil" name:"SwitchTag"`
 
 	// Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
@@ -6279,11 +6589,124 @@ func (r *ModifyDBInstanceDeploymentResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyDBInstanceHAConfigRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
+
+	// Primary-standby sync mode. Valid values:
+	// <li>`Semi-sync`
+	// <li>`Async`
+	SyncMode *string `json:"SyncMode,omitnil" name:"SyncMode"`
+
+	// u200cMaximum data lag for high-availability standby server. The standby node can be promoted to the primary node when its data lag and the delay time are both less than the value of `MaxStandbyLatency` and `MaxStandbyLag` respectively.
+	// <li>Unit: byte
+	// <li>Value range: 1073741824-322122547200
+	MaxStandbyLatency *uint64 `json:"MaxStandbyLatency,omitnil" name:"MaxStandbyLatency"`
+
+	// The maximum delay for high-availability standby server The standby node can be promoted to the primary node when its data lag and the delay time are both less or equals to the value of `MaxStandbyLatency` and `MaxStandbyLag` respectively.
+	// <li>Unit: s
+	// <li>Value range: 5-10
+	MaxStandbyLag *uint64 `json:"MaxStandbyLag,omitnil" name:"MaxStandbyLag"`
+
+	// Maximum data sync lag for u200dstandby server. If data lag of the standby node and the delay ime are both less than or equals to the values of `MaxSyncStandbyLatency` and `MaxSyncStandbyLag`, the standby server adopts semi-sync replication; if not, it adopts async replication.
+	// This value is only valid for the instance with `SyncMode` set to `Semi-sync`.
+	// When the semi-sync replication mode of the instance is not allowed to downgrade to async replication, `MaxSyncStandbyLatency` and `MaxSyncStandbyLag` are not required.
+	// When the semi-sync instance is allowed to downgrade to async replication, `MaxSyncStandbyLatency` is required and `MaxSyncStandbyLag` must be left empty for PostgreSQL 9; `MaxSyncStandbyLatency` and MaxSyncStandbyLag` are required for PostgreSQL 10 and later.
+	MaxSyncStandbyLatency *uint64 `json:"MaxSyncStandbyLatency,omitnil" name:"MaxSyncStandbyLatency"`
+
+	// Maximum delay for u200dsync u200dstandby server. If the delay time for u200dstandby server and the data lag are both less than or equals to the value of `MaxSyncStandbyLag` and `MaxSyncStandbyLatency` respectively, the standby server adopts sync replication mode; if not, it adopts async replication.
+	// This value is only valid for the instance with `SyncMode` set to `Semi-sync`.
+	// When the semi-sync replication mode of the instance is not allowed to downgrade to async replication, `MaxSyncStandbyLatency` and `MaxSyncStandbyLag` are not required.
+	// When the semi-sync instance is allowed to downgrade to async replication, `MaxSyncStandbyLatency` is required and `MaxSyncStandbyLag` must be left empty for PostgreSQL 9; `MaxSyncStandbyLatency` and MaxSyncStandbyLag` are required for PostgreSQL 10 and later.
+	MaxSyncStandbyLag *uint64 `json:"MaxSyncStandbyLag,omitnil" name:"MaxSyncStandbyLag"`
+}
+
+type ModifyDBInstanceHAConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
+
+	// Primary-standby sync mode. Valid values:
+	// <li>`Semi-sync`
+	// <li>`Async`
+	SyncMode *string `json:"SyncMode,omitnil" name:"SyncMode"`
+
+	// u200cMaximum data lag for high-availability standby server. The standby node can be promoted to the primary node when its data lag and the delay time are both less than the value of `MaxStandbyLatency` and `MaxStandbyLag` respectively.
+	// <li>Unit: byte
+	// <li>Value range: 1073741824-322122547200
+	MaxStandbyLatency *uint64 `json:"MaxStandbyLatency,omitnil" name:"MaxStandbyLatency"`
+
+	// The maximum delay for high-availability standby server The standby node can be promoted to the primary node when its data lag and the delay time are both less or equals to the value of `MaxStandbyLatency` and `MaxStandbyLag` respectively.
+	// <li>Unit: s
+	// <li>Value range: 5-10
+	MaxStandbyLag *uint64 `json:"MaxStandbyLag,omitnil" name:"MaxStandbyLag"`
+
+	// Maximum data sync lag for u200dstandby server. If data lag of the standby node and the delay ime are both less than or equals to the values of `MaxSyncStandbyLatency` and `MaxSyncStandbyLag`, the standby server adopts semi-sync replication; if not, it adopts async replication.
+	// This value is only valid for the instance with `SyncMode` set to `Semi-sync`.
+	// When the semi-sync replication mode of the instance is not allowed to downgrade to async replication, `MaxSyncStandbyLatency` and `MaxSyncStandbyLag` are not required.
+	// When the semi-sync instance is allowed to downgrade to async replication, `MaxSyncStandbyLatency` is required and `MaxSyncStandbyLag` must be left empty for PostgreSQL 9; `MaxSyncStandbyLatency` and MaxSyncStandbyLag` are required for PostgreSQL 10 and later.
+	MaxSyncStandbyLatency *uint64 `json:"MaxSyncStandbyLatency,omitnil" name:"MaxSyncStandbyLatency"`
+
+	// Maximum delay for u200dsync u200dstandby server. If the delay time for u200dstandby server and the data lag are both less than or equals to the value of `MaxSyncStandbyLag` and `MaxSyncStandbyLatency` respectively, the standby server adopts sync replication mode; if not, it adopts async replication.
+	// This value is only valid for the instance with `SyncMode` set to `Semi-sync`.
+	// When the semi-sync replication mode of the instance is not allowed to downgrade to async replication, `MaxSyncStandbyLatency` and `MaxSyncStandbyLag` are not required.
+	// When the semi-sync instance is allowed to downgrade to async replication, `MaxSyncStandbyLatency` is required and `MaxSyncStandbyLag` must be left empty for PostgreSQL 9; `MaxSyncStandbyLatency` and MaxSyncStandbyLag` are required for PostgreSQL 10 and later.
+	MaxSyncStandbyLag *uint64 `json:"MaxSyncStandbyLag,omitnil" name:"MaxSyncStandbyLag"`
+}
+
+func (r *ModifyDBInstanceHAConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceHAConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "SyncMode")
+	delete(f, "MaxStandbyLatency")
+	delete(f, "MaxStandbyLag")
+	delete(f, "MaxSyncStandbyLatency")
+	delete(f, "MaxSyncStandbyLag")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceHAConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBInstanceHAConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ModifyDBInstanceHAConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDBInstanceHAConfigResponseParams `json:"Response"`
+}
+
+func (r *ModifyDBInstanceHAConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceHAConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyDBInstanceNameRequestParams struct {
 	// Database instance ID in the format of postgres-6fego161
 	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
 
-	// New name of database instance
+	// Instance name, which can contain up to 60 letters, digits, hyphens, and symbols (_-). If this parameter is not specified, "Unnamed" will be displayed by default.
 	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 }
 
@@ -6293,7 +6716,7 @@ type ModifyDBInstanceNameRequest struct {
 	// Database instance ID in the format of postgres-6fego161
 	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
 
-	// New name of database instance
+	// Instance name, which can contain up to 60 letters, digits, hyphens, and symbols (_-). If this parameter is not specified, "Unnamed" will be displayed by default.
 	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 }
 
@@ -6473,7 +6896,8 @@ func (r *ModifyDBInstanceReadOnlyGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDBInstanceSecurityGroupsRequestParams struct {
-	// The list of security groups to be associated with the instance or RO groups
+	// The list of security groups to be associated with the instance or RO groups.
+	// Information of security groups can be obtained from the `sgld` field in the returned value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API.
 	SecurityGroupIdSet []*string `json:"SecurityGroupIdSet,omitnil" name:"SecurityGroupIdSet"`
 
 	// Instance ID. Either this parameter or `ReadOnlyGroupId` must be passed in. If both parameters are passed in, `ReadOnlyGroupId` will be ignored.
@@ -6486,7 +6910,8 @@ type ModifyDBInstanceSecurityGroupsRequestParams struct {
 type ModifyDBInstanceSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// The list of security groups to be associated with the instance or RO groups
+	// The list of security groups to be associated with the instance or RO groups.
+	// Information of security groups can be obtained from the `sgld` field in the returned value of the [DescribeSecurityGroups](https://intl.cloud.tencent.com/document/api/215/15808?from_cn_redirect=1) API.
 	SecurityGroupIdSet []*string `json:"SecurityGroupIdSet,omitnil" name:"SecurityGroupIdSet"`
 
 	// Instance ID. Either this parameter or `ReadOnlyGroupId` must be passed in. If both parameters are passed in, `ReadOnlyGroupId` will be ignored.
@@ -6550,7 +6975,10 @@ type ModifyDBInstanceSpecRequestParams struct {
 	// Instance disk size in GiB after modification.
 	Storage *uint64 `json:"Storage,omitnil" name:"Storage"`
 
-	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	// Whether to use vouchers automatically. Valid values:
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
 	AutoVoucher *uint64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Voucher ID list. Currently, you can specify only one voucher.
@@ -6559,7 +6987,11 @@ type ModifyDBInstanceSpecRequestParams struct {
 	// Campaign ID.
 	ActivityId *uint64 `json:"ActivityId,omitnil" name:"ActivityId"`
 
-	// Switch time after instance configurations are modified. Valid values: `0` (switch now), `1` (switch at a specified time), `2` (switch during maintenance time). Default value: `0`.
+	// Switch time for the specified instance after configuration modification.
+	// <li>`0`: Switch now. 
+	// <li>`1`: Switch at the specified time.
+	// <li>`2`: Switch in the maintenance time.
+	// Default value: `0`. 
 	SwitchTag *uint64 `json:"SwitchTag,omitnil" name:"SwitchTag"`
 
 	// Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
@@ -6581,7 +7013,10 @@ type ModifyDBInstanceSpecRequest struct {
 	// Instance disk size in GiB after modification.
 	Storage *uint64 `json:"Storage,omitnil" name:"Storage"`
 
-	// Whether to automatically use vouchers. Valid values: `1` (yes), `0` (no). Default value: `0`.
+	// Whether to use vouchers automatically. Valid values:
+	// <li>`0`: No.
+	// <li>`1`: Yes.
+	// Default value: `0`.
 	AutoVoucher *uint64 `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
 
 	// Voucher ID list. Currently, you can specify only one voucher.
@@ -6590,7 +7025,11 @@ type ModifyDBInstanceSpecRequest struct {
 	// Campaign ID.
 	ActivityId *uint64 `json:"ActivityId,omitnil" name:"ActivityId"`
 
-	// Switch time after instance configurations are modified. Valid values: `0` (switch now), `1` (switch at a specified time), `2` (switch during maintenance time). Default value: `0`.
+	// Switch time for the specified instance after configuration modification.
+	// <li>`0`: Switch now. 
+	// <li>`1`: Switch at the specified time.
+	// <li>`2`: Switch in the maintenance time.
+	// Default value: `0`. 
 	SwitchTag *uint64 `json:"SwitchTag,omitnil" name:"SwitchTag"`
 
 	// Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is 0 or 2, this parameter becomes invalid.
@@ -8063,6 +8502,98 @@ type SpecItemInfo struct {
 	IsSupportTDE *int64 `json:"IsSupportTDE,omitnil" name:"IsSupportTDE"`
 }
 
+// Predefined struct for user
+type SwitchDBInstancePrimaryRequestParams struct {
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
+
+	// Whether to perform forced switch. As long as the standby node can be accessed, the switch will be performed regardless of the primary-standby sync delay. You can switch immediately only when `SwitchTag` is `0.
+	// <li>Default: `false`.
+	Force *bool `json:"Force,omitnil" name:"Force"`
+
+	// Switch time for the specified instance after configuration modification.
+	// <li>`0`: Switch now. 
+	// <li>`1`: Switch at the specified time.
+	// <li>`2`: Switch in the maintenance time.
+	// <li>Default value: `0`. 
+	SwitchTag *uint64 `json:"SwitchTag,omitnil" name:"SwitchTag"`
+
+	// The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00". This parameter is invalid when `SwitchTag` is `0` or `2`.
+	SwitchStartTime *string `json:"SwitchStartTime,omitnil" name:"SwitchStartTime"`
+
+	// The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00". This parameter is invalid when `SwitchTag` is `0` or `2`. The difference between `SwitchStartTime` and `SwitchEndTime` cannot be less than 30 minutes.
+	SwitchEndTime *string `json:"SwitchEndTime,omitnil" name:"SwitchEndTime"`
+}
+
+type SwitchDBInstancePrimaryRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
+
+	// Whether to perform forced switch. As long as the standby node can be accessed, the switch will be performed regardless of the primary-standby sync delay. You can switch immediately only when `SwitchTag` is `0.
+	// <li>Default: `false`.
+	Force *bool `json:"Force,omitnil" name:"Force"`
+
+	// Switch time for the specified instance after configuration modification.
+	// <li>`0`: Switch now. 
+	// <li>`1`: Switch at the specified time.
+	// <li>`2`: Switch in the maintenance time.
+	// <li>Default value: `0`. 
+	SwitchTag *uint64 `json:"SwitchTag,omitnil" name:"SwitchTag"`
+
+	// The earliest time to start a switch in the format of "HH:MM:SS", such as "01:00:00". This parameter is invalid when `SwitchTag` is `0` or `2`.
+	SwitchStartTime *string `json:"SwitchStartTime,omitnil" name:"SwitchStartTime"`
+
+	// The latest time to start a switch in the format of "HH:MM:SS", such as "01:30:00". This parameter is invalid when `SwitchTag` is `0` or `2`. The difference between `SwitchStartTime` and `SwitchEndTime` cannot be less than 30 minutes.
+	SwitchEndTime *string `json:"SwitchEndTime,omitnil" name:"SwitchEndTime"`
+}
+
+func (r *SwitchDBInstancePrimaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SwitchDBInstancePrimaryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DBInstanceId")
+	delete(f, "Force")
+	delete(f, "SwitchTag")
+	delete(f, "SwitchStartTime")
+	delete(f, "SwitchEndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SwitchDBInstancePrimaryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SwitchDBInstancePrimaryResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type SwitchDBInstancePrimaryResponse struct {
+	*tchttp.BaseResponse
+	Response *SwitchDBInstancePrimaryResponseParams `json:"Response"`
+}
+
+func (r *SwitchDBInstancePrimaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SwitchDBInstancePrimaryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Tag struct {
 	// Tag key
 	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
@@ -8076,13 +8607,14 @@ type UpgradeDBInstanceKernelVersionRequestParams struct {
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
 
-	// Target kernel version, which can be obtained in the `AvailableUpgradeTarget` field returned by the `DescribeDBVersions` API.
+	// Target kernel version, which can be obtained in the `AvailableUpgradeTarget` field in the returned value of the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
 	TargetDBKernelVersion *string `json:"TargetDBKernelVersion,omitnil" name:"TargetDBKernelVersion"`
 
-	// Switch time after the kernel version upgrade. Valid values:
-	// `0` (default value): Switch now.
-	// `1`: Switch at the specified time.
-	// `2`: Switch in the maintenance time.
+	// Switch time after the kernel version upgrade for the specified instance. Valid values:
+	// <li>`0`: Switch now.
+	// <li>`1`: Switch at the specified time.
+	// <li>`2`: Switch in the maintenance time.
+	// Default value: `0`. 
 	SwitchTag *uint64 `json:"SwitchTag,omitnil" name:"SwitchTag"`
 
 	// Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is `0` or `2`, this parameter is invalid.
@@ -8091,9 +8623,10 @@ type UpgradeDBInstanceKernelVersionRequestParams struct {
 	// Switch end time in the format of `HH:MM:SS`, such as 01:30:00. When `SwitchTag` is `0` or `2`, this parameter is invalid. The difference between `SwitchStartTime` and `SwitchEndTime` cannot be less than 30 minutes.
 	SwitchEndTime *string `json:"SwitchEndTime,omitnil" name:"SwitchEndTime"`
 
-	// Whether to perform a precheck on the current operation of upgrading the instance kernel version. Valid values:
-	// `true`: Performs a precheck without upgrading the kernel version. Check items include request parameters, kernel version compatibility, and instance parameters.
-	// `false` (default value): Sends a normal request and upgrades the kernel version directly after the check is passed.
+	// Whether to perform a pre-check on the current operation of upgrading the instance kernel version. Valid values:
+	// u200c<li>u200c`true`: Performs a pre-check without upgrading the kernel version. Check items include request parameters, kernel version compatibility, and instance parameters.
+	// u200cu200c<li>`false`: Sends a normal request and upgrades the kernel version directly after the check is passed.
+	// Default value: `false`.
 	DryRun *bool `json:"DryRun,omitnil" name:"DryRun"`
 }
 
@@ -8103,13 +8636,14 @@ type UpgradeDBInstanceKernelVersionRequest struct {
 	// Instance ID
 	DBInstanceId *string `json:"DBInstanceId,omitnil" name:"DBInstanceId"`
 
-	// Target kernel version, which can be obtained in the `AvailableUpgradeTarget` field returned by the `DescribeDBVersions` API.
+	// Target kernel version, which can be obtained in the `AvailableUpgradeTarget` field in the returned value of the [DescribeDBVersions](https://intl.cloud.tencent.com/document/api/409/89018?from_cn_redirect=1) API.
 	TargetDBKernelVersion *string `json:"TargetDBKernelVersion,omitnil" name:"TargetDBKernelVersion"`
 
-	// Switch time after the kernel version upgrade. Valid values:
-	// `0` (default value): Switch now.
-	// `1`: Switch at the specified time.
-	// `2`: Switch in the maintenance time.
+	// Switch time after the kernel version upgrade for the specified instance. Valid values:
+	// <li>`0`: Switch now.
+	// <li>`1`: Switch at the specified time.
+	// <li>`2`: Switch in the maintenance time.
+	// Default value: `0`. 
 	SwitchTag *uint64 `json:"SwitchTag,omitnil" name:"SwitchTag"`
 
 	// Switch start time in the format of `HH:MM:SS`, such as 01:00:00. When `SwitchTag` is `0` or `2`, this parameter is invalid.
@@ -8118,9 +8652,10 @@ type UpgradeDBInstanceKernelVersionRequest struct {
 	// Switch end time in the format of `HH:MM:SS`, such as 01:30:00. When `SwitchTag` is `0` or `2`, this parameter is invalid. The difference between `SwitchStartTime` and `SwitchEndTime` cannot be less than 30 minutes.
 	SwitchEndTime *string `json:"SwitchEndTime,omitnil" name:"SwitchEndTime"`
 
-	// Whether to perform a precheck on the current operation of upgrading the instance kernel version. Valid values:
-	// `true`: Performs a precheck without upgrading the kernel version. Check items include request parameters, kernel version compatibility, and instance parameters.
-	// `false` (default value): Sends a normal request and upgrades the kernel version directly after the check is passed.
+	// Whether to perform a pre-check on the current operation of upgrading the instance kernel version. Valid values:
+	// u200c<li>u200c`true`: Performs a pre-check without upgrading the kernel version. Check items include request parameters, kernel version compatibility, and instance parameters.
+	// u200cu200c<li>`false`: Sends a normal request and upgrades the kernel version directly after the check is passed.
+	// Default value: `false`.
 	DryRun *bool `json:"DryRun,omitnil" name:"DryRun"`
 }
 

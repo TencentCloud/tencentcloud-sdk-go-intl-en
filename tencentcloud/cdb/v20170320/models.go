@@ -2581,7 +2581,7 @@ type CreateDBInstanceRequestParams struct {
 	// MySQL version. Valid values: `5.5`, `5.6`, `5.7`, and `8.0`. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported instance versions.
 	EngineVersion *string `json:"EngineVersion,omitnil" name:"EngineVersion"`
 
-	// The root account password. It can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing a replica instance and is invalid for read-only or disaster recovery instances.
+	// The root account password, which can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and symbols `_+-&=!@#$%^*()`. This parameter applies to source instances but not to read-only or disaster recovery instances.
 	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// Data replication mode. Valid values: `0` (async replication), `1` (semi-sync replication), `2` (strong sync replication). Default value: `0`.
@@ -2629,7 +2629,7 @@ type CreateDBInstanceRequestParams struct {
 	// Parameter template ID
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil" name:"ParamTemplateId"`
 
-	// Array of alarm policy IDs, which is `OriginId` obtained through the `DescribeAlarmPolicy` API.
+	// Array of alarm policy IDs, which can be obtained through the `OriginId` field in the return value of the `DescribeAlarmPolicy` API of TCOP.
 	AlarmPolicyList []*int64 `json:"AlarmPolicyList,omitnil" name:"AlarmPolicyList"`
 
 	// The number of nodes of the instance. To purchase a read-only instance or a basic instance, set this parameter to `1` or leave it empty. To purchase a three-node instance, set this parameter to `3` or specify the `BackupZone` parameter. If the instance to be purchased is a source instance and both `BackupZone` and this parameter are left empty, the value `2` will be used, which indicates the source instance will have two nodes.
@@ -2699,7 +2699,7 @@ type CreateDBInstanceRequest struct {
 	// MySQL version. Valid values: `5.5`, `5.6`, `5.7`, and `8.0`. You can use the [DescribeDBZoneConfig](https://intl.cloud.tencent.com/document/api/236/17229?from_cn_redirect=1) API to query the supported instance versions.
 	EngineVersion *string `json:"EngineVersion,omitnil" name:"EngineVersion"`
 
-	// The root account password. It can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and symbols (_+-&=!@#$%^*()). This parameter can be specified when purchasing a replica instance and is invalid for read-only or disaster recovery instances.
+	// The root account password, which can contain 8-64 characters and must contain at least two of the following types of characters: letters, digits, and symbols `_+-&=!@#$%^*()`. This parameter applies to source instances but not to read-only or disaster recovery instances.
 	Password *string `json:"Password,omitnil" name:"Password"`
 
 	// Data replication mode. Valid values: `0` (async replication), `1` (semi-sync replication), `2` (strong sync replication). Default value: `0`.
@@ -2747,7 +2747,7 @@ type CreateDBInstanceRequest struct {
 	// Parameter template ID
 	ParamTemplateId *int64 `json:"ParamTemplateId,omitnil" name:"ParamTemplateId"`
 
-	// Array of alarm policy IDs, which is `OriginId` obtained through the `DescribeAlarmPolicy` API.
+	// Array of alarm policy IDs, which can be obtained through the `OriginId` field in the return value of the `DescribeAlarmPolicy` API of TCOP.
 	AlarmPolicyList []*int64 `json:"AlarmPolicyList,omitnil" name:"AlarmPolicyList"`
 
 	// The number of nodes of the instance. To purchase a read-only instance or a basic instance, set this parameter to `1` or leave it empty. To purchase a three-node instance, set this parameter to `3` or specify the `BackupZone` parameter. If the instance to be purchased is a source instance and both `BackupZone` and this parameter are left empty, the value `2` will be used, which indicates the source instance will have two nodes.
@@ -3639,7 +3639,7 @@ type DescribeAuditLogsRequestParams struct {
 	// `execTime`: Execution time.
 	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
-	// Filter, which can be used to filter logs.
+	// Filter. Multiple values are in `AND` relationship.
 	LogFilter []*InstanceAuditLogFilters `json:"LogFilter,omitnil" name:"LogFilter"`
 }
 
@@ -3670,7 +3670,7 @@ type DescribeAuditLogsRequest struct {
 	// `execTime`: Execution time.
 	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
 
-	// Filter, which can be used to filter logs.
+	// Filter. Multiple values are in `AND` relationship.
 	LogFilter []*InstanceAuditLogFilters `json:"LogFilter,omitnil" name:"LogFilter"`
 }
 
@@ -4812,6 +4812,72 @@ func (r *DescribeCloneListResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCloneListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCpuExpandStrategyRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+type DescribeCpuExpandStrategyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+func (r *DescribeCpuExpandStrategyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCpuExpandStrategyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCpuExpandStrategyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCpuExpandStrategyResponseParams struct {
+	// Policy type. Valid values: `auto`, `manual`.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// Manually expanded CPU, which is valid when `Type` is `manual`.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	ExpandCpu *string `json:"ExpandCpu,omitnil" name:"ExpandCpu"`
+
+	// Automatic expansion policy, which is valid when `Type` is `auto`.
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	AutoStrategy *string `json:"AutoStrategy,omitnil" name:"AutoStrategy"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeCpuExpandStrategyResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCpuExpandStrategyResponseParams `json:"Response"`
+}
+
+func (r *DescribeCpuExpandStrategyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCpuExpandStrategyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8279,19 +8345,22 @@ func (r *InitDBInstancesResponse) FromJsonString(s string) error {
 }
 
 type InstanceAuditLogFilters struct {
-	// Filter condition, which is not supported for `SQL`. The search conditions are supported as follows:
+	// Filter condition. The search conditions are supported as follows:
 	// 
-	// `Equal to`, `Not equal to`, `Include`, and `Exclude` can be used to search for 
-	// `host` (Client IP),
-	// `user` (Username),
-	// and `DBName` (Database name).
+	// Include/Exclude, and Include/Exclude (segment dimension) can be used to search for:
+	// `sql` - SQL details.
 	// 
-	// `Equal to` and `Not equal to` can be used to search for 
-	// `sqlType`- SQL u200dtype,
+	// `Equal to`, `Not equal to`, `Include`, and `Exclude` can be used to search for:
+	// `host` - Client IP,
+	// `user` - Username,
+	// `DBName` - Database name.
+	// 
+	// `Equal to` and `Not equal to` can be used to search for:
+	// `sqlType` - SQL u200dtype,
 	// `errCode` - Error code,
-	// `threadId`- Thread ID.
+	// `threadId` - Thread ID.
 	// 
-	// Range search is supported for the fields, such as 
+	// Range search is supported for:
 	// `execTime`- Execution time (μs),
 	// `lockWaitTime`u200d - Lock wait time (μs),
 	// `ioWaitTime` - IO wait time (μs),
@@ -8302,15 +8371,17 @@ type InstanceAuditLogFilters struct {
 	// `sentRows` - Number of returned rows.
 	Type *string `json:"Type,omitnil" name:"Type"`
 
-	// Filter, including:
+	// Filter. Valid values:
+	// `WINC` - Include (segment dimension)
+	// `WEXC` - Exclude (segment dimension)
 	// `INC` - Include,
-	// `EXC` -Exclude,
+	// `EXC` - Exclude,
 	// `EQS` - Equal to,
 	// `NEQ` - Not equal to.
 	// u200d`RA` - Range
 	Compare *string `json:"Compare,omitnil" name:"Compare"`
 
-	// The filter value
+	// The filter value. In a reverse query, multiple values are in an "AND" relationship; while in a forward query, multiple values are in an "OR" relationship.
 	Value []*string `json:"Value,omitnil" name:"Value"`
 }
 
@@ -11912,6 +11983,60 @@ func (r *StartBatchRollbackResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type StartCpuExpandRequestParams struct {
+
+}
+
+type StartCpuExpandRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *StartCpuExpandRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartCpuExpandRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartCpuExpandRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartCpuExpandResponseParams struct {
+	// Async task ID, which can be passed in by calling the u200c`DescribeAsyncRequest` API for task progress query.
+	AsyncRequestId *string `json:"AsyncRequestId,omitnil" name:"AsyncRequestId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type StartCpuExpandResponse struct {
+	*tchttp.BaseResponse
+	Response *StartCpuExpandResponseParams `json:"Response"`
+}
+
+func (r *StartCpuExpandResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartCpuExpandResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type StartReplicationRequestParams struct {
 	// Read-Only instance ID.
 	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
@@ -11966,6 +12091,63 @@ func (r *StartReplicationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *StartReplicationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopCpuExpandRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+type StopCpuExpandRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+func (r *StopCpuExpandRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopCpuExpandRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopCpuExpandRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopCpuExpandResponseParams struct {
+	// Async task ID, which can be passed in by calling the u200c`DescribeAsyncRequest` API for task progress query.
+	AsyncRequestId *string `json:"AsyncRequestId,omitnil" name:"AsyncRequestId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type StopCpuExpandResponse struct {
+	*tchttp.BaseResponse
+	Response *StopCpuExpandResponseParams `json:"Response"`
+}
+
+func (r *StopCpuExpandResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopCpuExpandResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

@@ -246,7 +246,7 @@ func NewCloseDBExtranetAccessResponse() (response *CloseDBExtranetAccessResponse
 }
 
 // CloseDBExtranetAccess
-// This API is used to disable the public network link to an instance.
+// This API is used to disable the public network address of an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -273,7 +273,7 @@ func (c *Client) CloseDBExtranetAccess(request *CloseDBExtranetAccessRequest) (r
 }
 
 // CloseDBExtranetAccess
-// This API is used to disable the public network link to an instance.
+// This API is used to disable the public network address of an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -330,7 +330,7 @@ func NewCloseServerlessDBExtranetAccessResponse() (response *CloseServerlessDBEx
 }
 
 // CloseServerlessDBExtranetAccess
-// This API is used to disable public network access for a PostgreSQL for Serverless instance.
+// This API is used to disable the public network address of a PostgreSQL for Serverless instance.
 //
 // error code that may be returned:
 //  ACCOUNTNOTEXIST = "AccountNotExist"
@@ -376,7 +376,7 @@ func (c *Client) CloseServerlessDBExtranetAccess(request *CloseServerlessDBExtra
 }
 
 // CloseServerlessDBExtranetAccess
-// This API is used to disable public network access for a PostgreSQL for Serverless instance.
+// This API is used to disable the public network address of a PostgreSQL for Serverless instance.
 //
 // error code that may be returned:
 //  ACCOUNTNOTEXIST = "AccountNotExist"
@@ -510,7 +510,7 @@ func NewCreateDBInstanceNetworkAccessResponse() (response *CreateDBInstanceNetwo
 }
 
 // CreateDBInstanceNetworkAccess
-// This API is used to add a network for an instance.
+// This API is used to create a network for an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -540,7 +540,7 @@ func (c *Client) CreateDBInstanceNetworkAccess(request *CreateDBInstanceNetworkA
 }
 
 // CreateDBInstanceNetworkAccess
-// This API is used to add a network for an instance.
+// This API is used to create a network for an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -600,7 +600,7 @@ func NewCreateDBInstancesResponse() (response *CreateDBInstancesResponse) {
 }
 
 // CreateDBInstances
-// This API is used to create (but not initialize) one or more TencentDB for PostgreSQL instances.
+// This API is used to create (but not initialize) one or more TencentDB for PostgreSQL instances. This API is disused and replaced by the [CreateInstances](https://intl.cloud.tencent.com/document/api/409/56107?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -679,7 +679,7 @@ func (c *Client) CreateDBInstances(request *CreateDBInstancesRequest) (response 
 }
 
 // CreateDBInstances
-// This API is used to create (but not initialize) one or more TencentDB for PostgreSQL instances.
+// This API is used to create (but not initialize) one or more TencentDB for PostgreSQL instances. This API is disused and replaced by the [CreateInstances](https://intl.cloud.tencent.com/document/api/409/56107?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -790,6 +790,10 @@ func NewCreateInstancesResponse() (response *CreateInstancesResponse) {
 // CreateInstances
 // This API is used to create and initialize one or more TencentDB for PostgreSQL instances.
 //
+// <li>After an instance is created successfully, it will start up automatically and enter the "Running" status.
+//
+// <li>If you create a monthly subscribed instance, you will be billed for the instance before the creation; if you create a pay-as-you-go instance billed on an hourly basis, the amount equivalent to the hourly rate will be frozen before the creation. Make sure your account balance is sufficient before calling this API.
+//
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_ALLOCATEQUOTASERROR = "FailedOperation.AllocateQuotasError"
@@ -872,6 +876,10 @@ func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *Cre
 
 // CreateInstances
 // This API is used to create and initialize one or more TencentDB for PostgreSQL instances.
+//
+// <li>After an instance is created successfully, it will start up automatically and enter the "Running" status.
+//
+// <li>If you create a monthly subscribed instance, you will be billed for the instance before the creation; if you create a pay-as-you-go instance billed on an hourly basis, the amount equivalent to the hourly rate will be frozen before the creation. Make sure your account balance is sufficient before calling this API.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -1336,7 +1344,7 @@ func NewCreateReadOnlyGroupNetworkAccessResponse() (response *CreateReadOnlyGrou
 }
 
 // CreateReadOnlyGroupNetworkAccess
-// This API is used to add a network for an RO group.
+// This API is used to create a network for an RO group.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1361,7 +1369,7 @@ func (c *Client) CreateReadOnlyGroupNetworkAccess(request *CreateReadOnlyGroupNe
 }
 
 // CreateReadOnlyGroupNetworkAccess
-// This API is used to add a network for an RO group.
+// This API is used to create a network for an RO group.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1544,6 +1552,7 @@ func NewDeleteBaseBackupResponse() (response *DeleteBaseBackupResponse) {
 //  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) DeleteBaseBackup(request *DeleteBaseBackupRequest) (response *DeleteBaseBackupResponse, err error) {
     return c.DeleteBaseBackupWithContext(context.Background(), request)
@@ -1556,6 +1565,7 @@ func (c *Client) DeleteBaseBackup(request *DeleteBaseBackupRequest) (response *D
 //  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) DeleteBaseBackupWithContext(ctx context.Context, request *DeleteBaseBackupRequest) (response *DeleteBaseBackupResponse, err error) {
     if request == nil {
@@ -2020,7 +2030,7 @@ func NewDescribeAccountsResponse() (response *DescribeAccountsResponse) {
 }
 
 // DescribeAccounts
-// This API is used to get the instance user list.
+// This API is used to query the list of the database accounts for an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -2041,7 +2051,7 @@ func (c *Client) DescribeAccounts(request *DescribeAccountsRequest) (response *D
 }
 
 // DescribeAccounts
-// This API is used to get the instance user list.
+// This API is used to query the list of the database accounts for an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -2204,7 +2214,7 @@ func NewDescribeBackupDownloadURLResponse() (response *DescribeBackupDownloadURL
 }
 
 // DescribeBackupDownloadURL
-// This API is used to get the download URL of a backup.
+// u200cThis API is used to query the download address of a specified backup set, including full backup sets and incremental log backup sets.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -2212,6 +2222,7 @@ func NewDescribeBackupDownloadURLResponse() (response *DescribeBackupDownloadURL
 //  INTERNALERROR_INSTANCEDATAERROR = "InternalError.InstanceDataError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) DescribeBackupDownloadURL(request *DescribeBackupDownloadURLRequest) (response *DescribeBackupDownloadURLResponse, err error) {
@@ -2219,7 +2230,7 @@ func (c *Client) DescribeBackupDownloadURL(request *DescribeBackupDownloadURLReq
 }
 
 // DescribeBackupDownloadURL
-// This API is used to get the download URL of a backup.
+// u200cThis API is used to query the download address of a specified backup set, including full backup sets and incremental log backup sets.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -2227,6 +2238,7 @@ func (c *Client) DescribeBackupDownloadURL(request *DescribeBackupDownloadURLReq
 //  INTERNALERROR_INSTANCEDATAERROR = "InternalError.InstanceDataError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) DescribeBackupDownloadURLWithContext(ctx context.Context, request *DescribeBackupDownloadURLRequest) (response *DescribeBackupDownloadURLResponse, err error) {
@@ -2387,6 +2399,7 @@ func NewDescribeBackupSummariesResponse() (response *DescribeBackupSummariesResp
 // This API is used to query the backup statistics of an instance. It will return the number and size (bytes) of backups of the instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -2400,6 +2413,7 @@ func (c *Client) DescribeBackupSummaries(request *DescribeBackupSummariesRequest
 // This API is used to query the backup statistics of an instance. It will return the number and size (bytes) of backups of the instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -2618,7 +2632,7 @@ func NewDescribeDBBackupsResponse() (response *DescribeDBBackupsResponse) {
 }
 
 // DescribeDBBackups
-// This API is used to query the instance backup list.
+// This API is used to query the backup list of an instance. This API is disused and replaced by the [DescribeBaseBackups](https://intl.cloud.tencent.com/document/api/409/89022?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -2647,7 +2661,7 @@ func (c *Client) DescribeDBBackups(request *DescribeDBBackupsRequest) (response 
 }
 
 // DescribeDBBackups
-// This API is used to query the instance backup list.
+// This API is used to query the backup list of an instance. This API is disused and replaced by the [DescribeBaseBackups](https://intl.cloud.tencent.com/document/api/409/89022?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -2706,7 +2720,7 @@ func NewDescribeDBErrlogsResponse() (response *DescribeDBErrlogsResponse) {
 }
 
 // DescribeDBErrlogs
-// This API is used to get error logs.
+// This API is used to query an error log.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -2732,7 +2746,7 @@ func (c *Client) DescribeDBErrlogs(request *DescribeDBErrlogsRequest) (response 
 }
 
 // DescribeDBErrlogs
-// This API is used to get error logs.
+// This API is used to query an error log.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -2802,6 +2816,7 @@ func NewDescribeDBInstanceAttributeResponse() (response *DescribeDBInstanceAttri
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_TRANSACTIOBEGINERROR = "InternalError.TransactioBeginError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
@@ -2830,6 +2845,7 @@ func (c *Client) DescribeDBInstanceAttribute(request *DescribeDBInstanceAttribut
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INTERNALERROR_TRANSACTIOBEGINERROR = "InternalError.TransactioBeginError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_ILLEGALREGION = "InvalidParameterValue.IllegalRegion"
@@ -2855,6 +2871,76 @@ func (c *Client) DescribeDBInstanceAttributeWithContext(ctx context.Context, req
     return
 }
 
+func NewDescribeDBInstanceHAConfigRequest() (request *DescribeDBInstanceHAConfigRequest) {
+    request = &DescribeDBInstanceHAConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "DescribeDBInstanceHAConfig")
+    
+    
+    return
+}
+
+func NewDescribeDBInstanceHAConfigResponse() (response *DescribeDBInstanceHAConfigResponse) {
+    response = &DescribeDBInstanceHAConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// DescribeDBInstanceHAConfig
+// This API is used to query the HA configuration of an instance, u200cwhich includes:
+//
+// <li>Allow a standby node to promote to a primary node.
+//
+// <li>Allow a semi-sync instance to adopt sync or async replication.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeDBInstanceHAConfig(request *DescribeDBInstanceHAConfigRequest) (response *DescribeDBInstanceHAConfigResponse, err error) {
+    return c.DescribeDBInstanceHAConfigWithContext(context.Background(), request)
+}
+
+// DescribeDBInstanceHAConfig
+// This API is used to query the HA configuration of an instance, u200cwhich includes:
+//
+// <li>Allow a standby node to promote to a primary node.
+//
+// <li>Allow a semi-sync instance to adopt sync or async replication.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) DescribeDBInstanceHAConfigWithContext(ctx context.Context, request *DescribeDBInstanceHAConfigRequest) (response *DescribeDBInstanceHAConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceHAConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBInstanceHAConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBInstanceHAConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBInstanceParametersRequest() (request *DescribeDBInstanceParametersRequest) {
     request = &DescribeDBInstanceParametersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2874,7 +2960,7 @@ func NewDescribeDBInstanceParametersResponse() (response *DescribeDBInstancePara
 }
 
 // DescribeDBInstanceParameters
-// This API is used to get the list of modifiable parameters of an instance.
+// This API is used to query the parameters of an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
@@ -2891,7 +2977,7 @@ func (c *Client) DescribeDBInstanceParameters(request *DescribeDBInstanceParamet
 }
 
 // DescribeDBInstanceParameters
-// This API is used to get the list of modifiable parameters of an instance.
+// This API is used to query the parameters of an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
@@ -2938,7 +3024,7 @@ func NewDescribeDBInstanceSecurityGroupsResponse() (response *DescribeDBInstance
 }
 
 // DescribeDBInstanceSecurityGroups
-// This API is used to query the security group information of an instance.
+// This API is used to query the security group of an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -2954,7 +3040,7 @@ func (c *Client) DescribeDBInstanceSecurityGroups(request *DescribeDBInstanceSec
 }
 
 // DescribeDBInstanceSecurityGroups
-// This API is used to query the security group information of an instance.
+// This API is used to query the security group of an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -3100,7 +3186,7 @@ func NewDescribeDBSlowlogsResponse() (response *DescribeDBSlowlogsResponse) {
 }
 
 // DescribeDBSlowlogs
-// This API was used to get slow query logs. Since it was deprecated on September 1, 2021, it has no longer returned data. Please use the [DescribeSlowQueryList](https://intl.cloud.tencent.com/document/product/409/60540?from_cn_redirect=1) API instead to get slow query logs.
+// This API is used to get a slow query log. Since it was deprecated on September 1, 2021, it has no longer returned data. You need to use the [DescribeSlowQueryList](https://intl.cloud.tencent.com/document/product/409/60540?from_cn_redirect=1) API instead to get slow query logs.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -3124,7 +3210,7 @@ func (c *Client) DescribeDBSlowlogs(request *DescribeDBSlowlogsRequest) (respons
 }
 
 // DescribeDBSlowlogs
-// This API was used to get slow query logs. Since it was deprecated on September 1, 2021, it has no longer returned data. Please use the [DescribeSlowQueryList](https://intl.cloud.tencent.com/document/product/409/60540?from_cn_redirect=1) API instead to get slow query logs.
+// This API is used to get a slow query log. Since it was deprecated on September 1, 2021, it has no longer returned data. You need to use the [DescribeSlowQueryList](https://intl.cloud.tencent.com/document/product/409/60540?from_cn_redirect=1) API instead to get slow query logs.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -3183,6 +3269,7 @@ func NewDescribeDBVersionsResponse() (response *DescribeDBVersionsResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 func (c *Client) DescribeDBVersions(request *DescribeDBVersionsRequest) (response *DescribeDBVersionsResponse, err error) {
@@ -3195,6 +3282,7 @@ func (c *Client) DescribeDBVersions(request *DescribeDBVersionsRequest) (respons
 // error code that may be returned:
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 func (c *Client) DescribeDBVersionsWithContext(ctx context.Context, request *DescribeDBVersionsRequest) (response *DescribeDBVersionsResponse, err error) {
@@ -3232,7 +3320,7 @@ func NewDescribeDBXlogsResponse() (response *DescribeDBXlogsResponse) {
 }
 
 // DescribeDBXlogs
-// This API is used to get the instance Xlog list.
+// This API is used to get the instance Xlog list. This API is disused and replaced by the [DescribeBaseBackups](https://intl.cloud.tencent.com/document/api/409/89022?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -3261,7 +3349,7 @@ func (c *Client) DescribeDBXlogs(request *DescribeDBXlogsRequest) (response *Des
 }
 
 // DescribeDBXlogs
-// This API is used to get the instance Xlog list.
+// This API is used to get the instance Xlog list. This API is disused and replaced by the [DescribeBaseBackups](https://intl.cloud.tencent.com/document/api/409/89022?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -3320,7 +3408,7 @@ func NewDescribeDatabasesResponse() (response *DescribeDatabasesResponse) {
 }
 
 // DescribeDatabases
-// This API is used to pull the list of databases.
+// This API is used to query the database list of an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -3350,7 +3438,7 @@ func (c *Client) DescribeDatabases(request *DescribeDatabasesRequest) (response 
 }
 
 // DescribeDatabases
-// This API is used to pull the list of databases.
+// This API is used to query the database list of an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -3464,7 +3552,7 @@ func NewDescribeEncryptionKeysResponse() (response *DescribeEncryptionKeysRespon
 }
 
 // DescribeEncryptionKeys
-// This API is used to get instance key list.
+// This API is used to query the instance key list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -3476,7 +3564,7 @@ func (c *Client) DescribeEncryptionKeys(request *DescribeEncryptionKeysRequest) 
 }
 
 // DescribeEncryptionKeys
-// This API is used to get instance key list.
+// This API is used to query the instance key list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -3572,7 +3660,7 @@ func NewDescribeOrdersResponse() (response *DescribeOrdersResponse) {
 }
 
 // DescribeOrders
-// This API is used to get order information.
+// This API is used to query the order information.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -3594,7 +3682,7 @@ func (c *Client) DescribeOrders(request *DescribeOrdersRequest) (response *Descr
 }
 
 // DescribeOrders
-// This API is used to get order information.
+// This API is used to query the order information.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -3746,7 +3834,7 @@ func NewDescribeParamsEventResponse() (response *DescribeParamsEventResponse) {
 }
 
 // DescribeParamsEvent
-// This API is used to get the details of parameter modification events.
+// This API is used to query the parameter modification event.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
@@ -3762,7 +3850,7 @@ func (c *Client) DescribeParamsEvent(request *DescribeParamsEventRequest) (respo
 }
 
 // DescribeParamsEvent
-// This API is used to get the details of parameter modification events.
+// This API is used to query the parameter modification event.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
@@ -3808,18 +3896,20 @@ func NewDescribeProductConfigResponse() (response *DescribeProductConfigResponse
 }
 
 // DescribeProductConfig
-// This API is used to query the purchasable specification configuration.
+// This API is used to query the purchasable specification configuration. u200cThis API is disused and replaced by the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_WHITELISTCONNECTERROR = "FailedOperation.WhitelistConnectError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  INVALIDPARAMETERVALUE_BADSPEC = "InvalidParameterValue.BadSpec"
 //  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -3831,18 +3921,20 @@ func (c *Client) DescribeProductConfig(request *DescribeProductConfigRequest) (r
 }
 
 // DescribeProductConfig
-// This API is used to query the purchasable specification configuration.
+// This API is used to query the purchasable specification configuration. u200cThis API is disused and replaced by the [DescribeClasses](https://intl.cloud.tencent.com/document/api/409/89019?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_WHITELISTCONNECTERROR = "FailedOperation.WhitelistConnectError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
 //  INVALIDPARAMETERVALUE_BADSPEC = "InvalidParameterValue.BadSpec"
 //  INVALIDPARAMETERVALUE_ILLEGALZONE = "InvalidParameterValue.IllegalZone"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
@@ -3884,7 +3976,7 @@ func NewDescribeReadOnlyGroupsResponse() (response *DescribeReadOnlyGroupsRespon
 }
 
 // DescribeReadOnlyGroups
-// This API is used to query RO group information by specifying the primary instance IDs.
+// This API is used to query the list of RO groups.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
@@ -3907,7 +3999,7 @@ func (c *Client) DescribeReadOnlyGroups(request *DescribeReadOnlyGroupsRequest) 
 }
 
 // DescribeReadOnlyGroups
-// This API is used to query RO group information by specifying the primary instance IDs.
+// This API is used to query the list of RO groups.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
@@ -3966,6 +4058,7 @@ func NewDescribeRegionsResponse() (response *DescribeRegionsResponse) {
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  FAILEDOPERATION_WHITELISTCONNECTERROR = "FailedOperation.WhitelistConnectError"
 //  INTERNALERROR = "InternalError"
@@ -3991,6 +4084,7 @@ func (c *Client) DescribeRegions(request *DescribeRegionsRequest) (response *Des
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
 //  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  FAILEDOPERATION_WHITELISTCONNECTERROR = "FailedOperation.WhitelistConnectError"
 //  INTERNALERROR = "InternalError"
@@ -4203,12 +4297,14 @@ func NewDescribeSlowQueryListResponse() (response *DescribeSlowQueryListResponse
 // This API is used to get the slow queries during the specified period of time.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) DescribeSlowQueryList(request *DescribeSlowQueryListRequest) (response *DescribeSlowQueryListResponse, err error) {
     return c.DescribeSlowQueryListWithContext(context.Background(), request)
@@ -4218,12 +4314,14 @@ func (c *Client) DescribeSlowQueryList(request *DescribeSlowQueryListRequest) (r
 // This API is used to get the slow queries during the specified period of time.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CAMSIGANDAUTHERROR = "FailedOperation.CamSigAndAuthError"
 //  FAILEDOPERATION_DATABASEAFFECTEDERROR = "FailedOperation.DatabaseAffectedError"
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
 //  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  INVALIDPARAMETERVALUE_PARAMETERVALUEEXCEEDERROR = "InvalidParameterValue.ParameterValueExceedError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
 //  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) DescribeSlowQueryListWithContext(ctx context.Context, request *DescribeSlowQueryListRequest) (response *DescribeSlowQueryListResponse, err error) {
     if request == nil {
@@ -4340,7 +4438,7 @@ func NewDestroyDBInstanceResponse() (response *DestroyDBInstanceResponse) {
 }
 
 // DestroyDBInstance
-// This API is used to terminate an isolated instance by specifying the `DBInstanceId` parameter. The data of an terminated instance will be deleted and cannot be recovered.
+// This API is used to terminate an isolated instance by specifying the `DBInstanceId` parameter. The data of a terminated instance will be deleted and cannot be recovered. Be cautious with this API calling. Only the instance in isolation can be terminated.
 //
 // error code that may be returned:
 //  ACCOUNTNOTEXIST = "AccountNotExist"
@@ -4382,7 +4480,7 @@ func (c *Client) DestroyDBInstance(request *DestroyDBInstanceRequest) (response 
 }
 
 // DestroyDBInstance
-// This API is used to terminate an isolated instance by specifying the `DBInstanceId` parameter. The data of an terminated instance will be deleted and cannot be recovered.
+// This API is used to terminate an isolated instance by specifying the `DBInstanceId` parameter. The data of a terminated instance will be deleted and cannot be recovered. Be cautious with this API calling. Only the instance in isolation can be terminated.
 //
 // error code that may be returned:
 //  ACCOUNTNOTEXIST = "AccountNotExist"
@@ -4568,7 +4666,7 @@ func NewInitDBInstancesResponse() (response *InitDBInstancesResponse) {
 }
 
 // InitDBInstances
-// This API is used to initialize a TencentDB for PostgreSQL instance.
+// This API is used to initialize a TencentDB for PostgreSQL instance. This API is disused and replaced by the [CreateInstances](https://intl.cloud.tencent.com/document/api/409/56107?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -4603,7 +4701,7 @@ func (c *Client) InitDBInstances(request *InitDBInstancesRequest) (response *Ini
 }
 
 // InitDBInstances
-// This API is used to initialize a TencentDB for PostgreSQL instance.
+// This API is used to initialize a TencentDB for PostgreSQL instance. This API is disused and replaced by the [CreateInstances](https://intl.cloud.tencent.com/document/api/409/56107?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -4668,7 +4766,7 @@ func NewInquiryPriceCreateDBInstancesResponse() (response *InquiryPriceCreateDBI
 }
 
 // InquiryPriceCreateDBInstances
-// This API is used to query the purchase price of one or multiple instances.
+// This API is used to query the purchase price of an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -4699,7 +4797,7 @@ func (c *Client) InquiryPriceCreateDBInstances(request *InquiryPriceCreateDBInst
 }
 
 // InquiryPriceCreateDBInstances
-// This API is used to query the purchase price of one or multiple instances.
+// This API is used to query the purchase price of an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -4944,7 +5042,7 @@ func NewIsolateDBInstancesResponse() (response *IsolateDBInstancesResponse) {
 }
 
 // IsolateDBInstances
-// This API is used to isolate one or more instances.
+// This API is used to isolate an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4988,7 +5086,7 @@ func (c *Client) IsolateDBInstances(request *IsolateDBInstancesRequest) (respons
 }
 
 // IsolateDBInstances
-// This API is used to isolate one or more instances.
+// This API is used to isolate an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -5258,7 +5356,7 @@ func NewModifyBaseBackupExpireTimeResponse() (response *ModifyBaseBackupExpireTi
 }
 
 // ModifyBaseBackupExpireTime
-// This API is used to modify the expiration time of the specified full backup of an instance.
+// This API is used to modify the specified expiration time of a full backup for an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -5269,7 +5367,7 @@ func (c *Client) ModifyBaseBackupExpireTime(request *ModifyBaseBackupExpireTimeR
 }
 
 // ModifyBaseBackupExpireTime
-// This API is used to modify the expiration time of the specified full backup of an instance.
+// This API is used to modify the specified expiration time of a full backup for an instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -5417,6 +5515,78 @@ func (c *Client) ModifyDBInstanceDeploymentWithContext(ctx context.Context, requ
     return
 }
 
+func NewModifyDBInstanceHAConfigRequest() (request *ModifyDBInstanceHAConfigRequest) {
+    request = &ModifyDBInstanceHAConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "ModifyDBInstanceHAConfig")
+    
+    
+    return
+}
+
+func NewModifyDBInstanceHAConfigResponse() (response *ModifyDBInstanceHAConfigResponse) {
+    response = &ModifyDBInstanceHAConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// ModifyDBInstanceHAConfig
+// This API is used to modify the HA configuration of an instance. u200cwhich includes:
+//
+// <li>Allow the standby node to promote to the primary node.
+//
+// <li>Allow a semi-sync instance to adopt sync or async replication.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETER_PARAMETERSNOTSET = "InvalidParameter.ParametersNotSet"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMETEROUTOFRANGE = "InvalidParameterValue.ParameterOutOfRange"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyDBInstanceHAConfig(request *ModifyDBInstanceHAConfigRequest) (response *ModifyDBInstanceHAConfigResponse, err error) {
+    return c.ModifyDBInstanceHAConfigWithContext(context.Background(), request)
+}
+
+// ModifyDBInstanceHAConfig
+// This API is used to modify the HA configuration of an instance. u200cwhich includes:
+//
+// <li>Allow the standby node to promote to the primary node.
+//
+// <li>Allow a semi-sync instance to adopt sync or async replication.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETER_PARAMETERSNOTSET = "InvalidParameter.ParametersNotSet"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  INVALIDPARAMETERVALUE_PARAMETEROUTOFRANGE = "InvalidParameterValue.ParameterOutOfRange"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) ModifyDBInstanceHAConfigWithContext(ctx context.Context, request *ModifyDBInstanceHAConfigRequest) (response *ModifyDBInstanceHAConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyDBInstanceHAConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDBInstanceHAConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDBInstanceHAConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDBInstanceNameRequest() (request *ModifyDBInstanceNameRequest) {
     request = &ModifyDBInstanceNameRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5518,7 +5688,7 @@ func NewModifyDBInstanceParametersResponse() (response *ModifyDBInstanceParamete
 }
 
 // ModifyDBInstanceParameters
-// This API is used to modify parameters in batches.
+// This API is used to modify instance parameters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
@@ -5535,7 +5705,7 @@ func (c *Client) ModifyDBInstanceParameters(request *ModifyDBInstanceParametersR
 }
 
 // ModifyDBInstanceParameters
-// This API is used to modify parameters in batches.
+// This API is used to modify instance parameters.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMAUTHFAILED = "FailedOperation.CamAuthFailed"
@@ -5730,7 +5900,7 @@ func NewModifyDBInstanceSpecResponse() (response *ModifyDBInstanceSpecResponse) 
 }
 
 // ModifyDBInstanceSpec
-// This API is used to modify instance specifications including memory and disk size.
+// This API is used to modify instance specifications, including memory and disk size.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5754,7 +5924,7 @@ func (c *Client) ModifyDBInstanceSpec(request *ModifyDBInstanceSpecRequest) (res
 }
 
 // ModifyDBInstanceSpec
-// This API is used to modify instance specifications including memory and disk size.
+// This API is used to modify instance specifications, including memory and disk size.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5808,7 +5978,7 @@ func NewModifyDBInstancesProjectResponse() (response *ModifyDBInstancesProjectRe
 }
 
 // ModifyDBInstancesProject
-// This API is used to transfer an instance to another project.
+// This API is used to modify the project of an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -5833,7 +6003,7 @@ func (c *Client) ModifyDBInstancesProject(request *ModifyDBInstancesProjectReque
 }
 
 // ModifyDBInstancesProject
-// This API is used to transfer an instance to another project.
+// This API is used to modify the project of an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -5888,7 +6058,7 @@ func NewModifyParameterTemplateResponse() (response *ModifyParameterTemplateResp
 }
 
 // ModifyParameterTemplate
-// This API is used to modify the parameter template name and description, and add or delete parameter template parameters.
+// This API is used to modify the configurations, such as parameter template name and description. It can also be used to manage the parameter list in the parameter template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -5899,7 +6069,7 @@ func (c *Client) ModifyParameterTemplate(request *ModifyParameterTemplateRequest
 }
 
 // ModifyParameterTemplate
-// This API is used to modify the parameter template name and description, and add or delete parameter template parameters.
+// This API is used to modify the configurations, such as parameter template name and description. It can also be used to manage the parameter list in the parameter template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
@@ -6104,7 +6274,7 @@ func NewOpenDBExtranetAccessResponse() (response *OpenDBExtranetAccessResponse) 
 }
 
 // OpenDBExtranetAccess
-// This API is used to enable public network access.
+// This API is used to enable the public network access of an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -6131,7 +6301,7 @@ func (c *Client) OpenDBExtranetAccess(request *OpenDBExtranetAccessRequest) (res
 }
 
 // OpenDBExtranetAccess
-// This API is used to enable public network access.
+// This API is used to enable the public network access of an instance.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -6188,7 +6358,7 @@ func NewOpenServerlessDBExtranetAccessResponse() (response *OpenServerlessDBExtr
 }
 
 // OpenServerlessDBExtranetAccess
-// This API is used to enable public network access for a PostgreSQL for Serverless instance.
+// This API is used to enable the public network address of a PostgreSQL for Serverless instance.
 //
 // error code that may be returned:
 //  ACCOUNTNOTEXIST = "AccountNotExist"
@@ -6233,7 +6403,7 @@ func (c *Client) OpenServerlessDBExtranetAccess(request *OpenServerlessDBExtrane
 }
 
 // OpenServerlessDBExtranetAccess
-// This API is used to enable public network access for a PostgreSQL for Serverless instance.
+// This API is used to enable the public network address of a PostgreSQL for Serverless instance.
 //
 // error code that may be returned:
 //  ACCOUNTNOTEXIST = "AccountNotExist"
@@ -6813,6 +6983,84 @@ func (c *Client) SetAutoRenewFlagWithContext(ctx context.Context, request *SetAu
     return
 }
 
+func NewSwitchDBInstancePrimaryRequest() (request *SwitchDBInstancePrimaryRequest) {
+    request = &SwitchDBInstancePrimaryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("postgres", APIVersion, "SwitchDBInstancePrimary")
+    
+    
+    return
+}
+
+func NewSwitchDBInstancePrimaryResponse() (response *SwitchDBInstancePrimaryResponse) {
+    response = &SwitchDBInstancePrimaryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    }
+    return
+}
+
+// SwitchDBInstancePrimary
+// This API is used to enable the primary-standby switch of an instance.
+//
+// <li>By initiating a switch, you can verify whether the primary-standby switch is performed correctly.
+//
+// <li>By using forced switch, you can forcibly initiate the primary-standby switch when the delay of replica node failed to meet the switch requirement.
+//
+// <li>This operation can only be performed for the primary instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_NOAVAILABLESTANDBY = "FailedOperation.NoAvailableStandby"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  OPERATIONDENIED_INSTANCETYPEDENIED = "OperationDenied.InstanceTypeDenied"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) SwitchDBInstancePrimary(request *SwitchDBInstancePrimaryRequest) (response *SwitchDBInstancePrimaryResponse, err error) {
+    return c.SwitchDBInstancePrimaryWithContext(context.Background(), request)
+}
+
+// SwitchDBInstancePrimary
+// This API is used to enable the primary-standby switch of an instance.
+//
+// <li>By initiating a switch, you can verify whether the primary-standby switch is performed correctly.
+//
+// <li>By using forced switch, you can forcibly initiate the primary-standby switch when the delay of replica node failed to meet the switch requirement.
+//
+// <li>This operation can only be performed for the primary instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_FLOWCREATEERROR = "FailedOperation.FlowCreateError"
+//  FAILEDOPERATION_NOAVAILABLESTANDBY = "FailedOperation.NoAvailableStandby"
+//  INVALIDPARAMETER_PARAMETERCHECKERROR = "InvalidParameter.ParameterCheckError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
+//  OPERATIONDENIED_INSTANCESTATUSLIMITERROR = "OperationDenied.InstanceStatusLimitError"
+//  OPERATIONDENIED_INSTANCETYPEDENIED = "OperationDenied.InstanceTypeDenied"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
+func (c *Client) SwitchDBInstancePrimaryWithContext(ctx context.Context, request *SwitchDBInstancePrimaryRequest) (response *SwitchDBInstancePrimaryResponse, err error) {
+    if request == nil {
+        request = NewSwitchDBInstancePrimaryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SwitchDBInstancePrimary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSwitchDBInstancePrimaryResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpgradeDBInstanceRequest() (request *UpgradeDBInstanceRequest) {
     request = &UpgradeDBInstanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6832,7 +7080,7 @@ func NewUpgradeDBInstanceResponse() (response *UpgradeDBInstanceResponse) {
 }
 
 // UpgradeDBInstance
-// This API is used to upgrade instance configurations.
+// This API is used to upgrade instance configurations. u200cThis API is disused and replaced by the [ModifyDBInstanceSpec](https://intl.cloud.tencent.com/document/api/409/63689?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -6868,7 +7116,7 @@ func (c *Client) UpgradeDBInstance(request *UpgradeDBInstanceRequest) (response 
 }
 
 // UpgradeDBInstance
-// This API is used to upgrade instance configurations.
+// This API is used to upgrade instance configurations. u200cThis API is disused and replaced by the [ModifyDBInstanceSpec](https://intl.cloud.tencent.com/document/api/409/63689?from_cn_redirect=1) API.
 //
 // error code that may be returned:
 //  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
@@ -6946,6 +7194,7 @@ func NewUpgradeDBInstanceKernelVersionResponse() (response *UpgradeDBInstanceKer
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) UpgradeDBInstanceKernelVersion(request *UpgradeDBInstanceKernelVersionRequest) (response *UpgradeDBInstanceKernelVersionResponse, err error) {
     return c.UpgradeDBInstanceKernelVersionWithContext(context.Background(), request)
 }
@@ -6963,6 +7212,7 @@ func (c *Client) UpgradeDBInstanceKernelVersion(request *UpgradeDBInstanceKernel
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_CAMDENIEDERROR = "OperationDenied.CamDeniedError"
 //  OPERATIONDENIED_INSTANCESTATUSLIMITOPERROR = "OperationDenied.InstanceStatusLimitOpError"
+//  RESOURCENOTFOUND_INSTANCENOTFOUNDERROR = "ResourceNotFound.InstanceNotFoundError"
 func (c *Client) UpgradeDBInstanceKernelVersionWithContext(ctx context.Context, request *UpgradeDBInstanceKernelVersionRequest) (response *UpgradeDBInstanceKernelVersionResponse, err error) {
     if request == nil {
         request = NewUpgradeDBInstanceKernelVersionRequest()

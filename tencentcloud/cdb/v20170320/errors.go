@@ -74,8 +74,14 @@ const (
 	// Query failed.
 	FAILEDOPERATION_INSTANCEQUERYERROR = "FailedOperation.InstanceQueryError"
 
+	// 
+	FAILEDOPERATION_INSTANCETASKCONFLICTERROR = "FailedOperation.InstanceTaskConflictError"
+
 	// Failed to deserialize JSON.
 	FAILEDOPERATION_JSONUNMARSHALERROR = "FailedOperation.JsonUnmarshalError"
+
+	// No policy modification detected
+	FAILEDOPERATION_NOTCHANGESTRATEGY = "FailedOperation.NotChangeStrategy"
 
 	// It is not a read-only instance with delayed replication enabled.
 	FAILEDOPERATION_NOTDELAYRO = "FailedOperation.NotDelayRo"
@@ -95,11 +101,17 @@ const (
 	// Log query failed.
 	FAILEDOPERATION_QUERYLOGERROR = "FailedOperation.QueryLogError"
 
+	// Cross-region deserialization failed for the high-availability service.
+	FAILEDOPERATION_REMOTECALLUNMARSHALERROR = "FailedOperation.RemoteCallUnmarshalError"
+
 	// The proxy is being created or already exists. You cannot create it again.
 	FAILEDOPERATION_REPEATCREATEPROXYERROR = "FailedOperation.RepeatCreateProxyError"
 
 	// Exception with the backend request for the service. Please contact customer service.
 	FAILEDOPERATION_RESPONSEVALUEERROR = "FailedOperation.ResponseValueError"
+
+	// 
+	FAILEDOPERATION_RESULTSETOVERLIMIT = "FailedOperation.ResultSetOverLimit"
 
 	// Failed to initiate the operation. Please try again later. If the operation remains unsuccessful, please contact customer service.
 	FAILEDOPERATION_STARTFLOWERROR = "FailedOperation.StartFlowError"
@@ -118,6 +130,9 @@ const (
 
 	// The IP has been occupied.
 	FAILEDOPERATION_VPCIPINUSEERROR = "FailedOperation.VpcIpInUseError"
+
+	// 
+	FAILEDOPERATION_VPCIPINVALIDERROR = "FailedOperation.VpcIpInvalidError"
 
 	// The IP doesn’t exist in the subnet.
 	FAILEDOPERATION_VPCIPNOTINSUBNETERROR = "FailedOperation.VpcIpNotInSubnetError"
@@ -184,6 +199,9 @@ const (
 
 	// Exceptional HTTP request
 	INTERNALERROR_HTTPERROR = "InternalError.HttpError"
+
+	// 
+	INTERNALERROR_HTTPREQUESTERROR = "InternalError.HttpRequestError"
 
 	// Import failed
 	INTERNALERROR_IMPORTERROR = "InternalError.ImportError"
@@ -514,6 +532,9 @@ const (
 
 	// Unsupported operation.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"
+
+	// The current operation is not supported for instances with no resource usage limit.
+	UNSUPPORTEDOPERATION_NOTSUPPORTNORMALINSTANCE = "UnsupportedOperation.NotSupportNormalInstance"
 
 	// Unsupported permission.
 	UNSUPPORTEDOPERATION_PRIVILEGESUNSUPPORTEDERROR = "UnsupportedOperation.PrivilegesUnsupportedError"
