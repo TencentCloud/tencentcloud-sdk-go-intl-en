@@ -59,8 +59,9 @@ func NewBindNewLVBDomainWithChannelRequest() (request *BindNewLVBDomainWithChann
 func NewBindNewLVBDomainWithChannelResponse() (response *BindNewLVBDomainWithChannelResponse) {
     response = &BindNewLVBDomainWithChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BindNewLVBDomainWithChannel
@@ -109,8 +110,9 @@ func NewCreateStreamPackageChannelRequest() (request *CreateStreamPackageChannel
 func NewCreateStreamPackageChannelResponse() (response *CreateStreamPackageChannelResponse) {
     response = &CreateStreamPackageChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateStreamPackageChannel
@@ -165,8 +167,9 @@ func NewCreateStreamPackageChannelEndpointRequest() (request *CreateStreamPackag
 func NewCreateStreamPackageChannelEndpointResponse() (response *CreateStreamPackageChannelEndpointResponse) {
     response = &CreateStreamPackageChannelEndpointResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateStreamPackageChannelEndpoint
@@ -223,8 +226,9 @@ func NewDeleteStreamPackageChannelEndpointsRequest() (request *DeleteStreamPacka
 func NewDeleteStreamPackageChannelEndpointsResponse() (response *DeleteStreamPackageChannelEndpointsResponse) {
     response = &DeleteStreamPackageChannelEndpointsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteStreamPackageChannelEndpoints
@@ -277,8 +281,9 @@ func NewDeleteStreamPackageChannelsRequest() (request *DeleteStreamPackageChanne
 func NewDeleteStreamPackageChannelsResponse() (response *DeleteStreamPackageChannelsResponse) {
     response = &DeleteStreamPackageChannelsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteStreamPackageChannels
@@ -331,8 +336,9 @@ func NewDescribeStreamPackageChannelRequest() (request *DescribeStreamPackageCha
 func NewDescribeStreamPackageChannelResponse() (response *DescribeStreamPackageChannelResponse) {
     response = &DescribeStreamPackageChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamPackageChannel
@@ -383,8 +389,9 @@ func NewDescribeStreamPackageChannelsRequest() (request *DescribeStreamPackageCh
 func NewDescribeStreamPackageChannelsResponse() (response *DescribeStreamPackageChannelsResponse) {
     response = &DescribeStreamPackageChannelsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamPackageChannels
@@ -441,8 +448,9 @@ func NewModifyStreamPackageChannelRequest() (request *ModifyStreamPackageChannel
 func NewModifyStreamPackageChannelResponse() (response *ModifyStreamPackageChannelResponse) {
     response = &ModifyStreamPackageChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyStreamPackageChannel
@@ -497,8 +505,9 @@ func NewModifyStreamPackageChannelEndpointRequest() (request *ModifyStreamPackag
 func NewModifyStreamPackageChannelEndpointResponse() (response *ModifyStreamPackageChannelEndpointResponse) {
     response = &ModifyStreamPackageChannelEndpointResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyStreamPackageChannelEndpoint
@@ -555,8 +564,9 @@ func NewModifyStreamPackageChannelInputAuthInfoRequest() (request *ModifyStreamP
 func NewModifyStreamPackageChannelInputAuthInfoResponse() (response *ModifyStreamPackageChannelInputAuthInfoResponse) {
     response = &ModifyStreamPackageChannelInputAuthInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyStreamPackageChannelInputAuthInfo
@@ -609,8 +619,9 @@ func NewUnbindCdnDomainWithChannelRequest() (request *UnbindCdnDomainWithChannel
 func NewUnbindCdnDomainWithChannelResponse() (response *UnbindCdnDomainWithChannelResponse) {
     response = &UnbindCdnDomainWithChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UnbindCdnDomainWithChannel

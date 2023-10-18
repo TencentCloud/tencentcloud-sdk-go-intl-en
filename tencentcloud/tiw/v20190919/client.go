@@ -59,8 +59,9 @@ func NewApplyTiwTrialRequest() (request *ApplyTiwTrialRequest) {
 func NewApplyTiwTrialResponse() (response *ApplyTiwTrialResponse) {
     response = &ApplyTiwTrialResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ApplyTiwTrial
@@ -113,8 +114,9 @@ func NewCreateApplicationRequest() (request *CreateApplicationRequest) {
 func NewCreateApplicationResponse() (response *CreateApplicationResponse) {
     response = &CreateApplicationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateApplication
@@ -173,8 +175,9 @@ func NewCreateOfflineRecordRequest() (request *CreateOfflineRecordRequest) {
 func NewCreateOfflineRecordResponse() (response *CreateOfflineRecordResponse) {
     response = &CreateOfflineRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateOfflineRecord
@@ -237,8 +240,9 @@ func NewCreateSnapshotTaskRequest() (request *CreateSnapshotTaskRequest) {
 func NewCreateSnapshotTaskResponse() (response *CreateSnapshotTaskResponse) {
     response = &CreateSnapshotTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSnapshotTask
@@ -299,8 +303,9 @@ func NewCreateTranscodeRequest() (request *CreateTranscodeRequest) {
 func NewCreateTranscodeResponse() (response *CreateTranscodeResponse) {
     response = &CreateTranscodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTranscode
@@ -365,8 +370,9 @@ func NewCreateVideoGenerationTaskRequest() (request *CreateVideoGenerationTaskRe
 func NewCreateVideoGenerationTaskResponse() (response *CreateVideoGenerationTaskResponse) {
     response = &CreateVideoGenerationTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateVideoGenerationTask
@@ -431,8 +437,9 @@ func NewDescribeAPIServiceRequest() (request *DescribeAPIServiceRequest) {
 func NewDescribeAPIServiceResponse() (response *DescribeAPIServiceResponse) {
     response = &DescribeAPIServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAPIService
@@ -491,8 +498,9 @@ func NewDescribeApplicationInfosRequest() (request *DescribeApplicationInfosRequ
 func NewDescribeApplicationInfosResponse() (response *DescribeApplicationInfosResponse) {
     response = &DescribeApplicationInfosResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApplicationInfos
@@ -545,8 +553,9 @@ func NewDescribeApplicationUsageRequest() (request *DescribeApplicationUsageRequ
 func NewDescribeApplicationUsageResponse() (response *DescribeApplicationUsageResponse) {
     response = &DescribeApplicationUsageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApplicationUsage
@@ -601,8 +610,9 @@ func NewDescribeBoardSDKLogRequest() (request *DescribeBoardSDKLogRequest) {
 func NewDescribeBoardSDKLogResponse() (response *DescribeBoardSDKLogResponse) {
     response = &DescribeBoardSDKLogResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBoardSDKLog
@@ -655,8 +665,9 @@ func NewDescribeIMApplicationsRequest() (request *DescribeIMApplicationsRequest)
 func NewDescribeIMApplicationsResponse() (response *DescribeIMApplicationsResponse) {
     response = &DescribeIMApplicationsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIMApplications
@@ -707,8 +718,9 @@ func NewDescribeOfflineRecordRequest() (request *DescribeOfflineRecordRequest) {
 func NewDescribeOfflineRecordResponse() (response *DescribeOfflineRecordResponse) {
     response = &DescribeOfflineRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOfflineRecord
@@ -769,8 +781,9 @@ func NewDescribeOfflineRecordCallbackRequest() (request *DescribeOfflineRecordCa
 func NewDescribeOfflineRecordCallbackResponse() (response *DescribeOfflineRecordCallbackResponse) {
     response = &DescribeOfflineRecordCallbackResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOfflineRecordCallback
@@ -825,8 +838,9 @@ func NewDescribeOnlineRecordRequest() (request *DescribeOnlineRecordRequest) {
 func NewDescribeOnlineRecordResponse() (response *DescribeOnlineRecordResponse) {
     response = &DescribeOnlineRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOnlineRecord
@@ -885,8 +899,9 @@ func NewDescribeOnlineRecordCallbackRequest() (request *DescribeOnlineRecordCall
 func NewDescribeOnlineRecordCallbackResponse() (response *DescribeOnlineRecordCallbackResponse) {
     response = &DescribeOnlineRecordCallbackResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOnlineRecordCallback
@@ -943,8 +958,9 @@ func NewDescribePostpaidUsageRequest() (request *DescribePostpaidUsageRequest) {
 func NewDescribePostpaidUsageResponse() (response *DescribePostpaidUsageResponse) {
     response = &DescribePostpaidUsageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePostpaidUsage
@@ -997,8 +1013,9 @@ func NewDescribeQualityMetricsRequest() (request *DescribeQualityMetricsRequest)
 func NewDescribeQualityMetricsResponse() (response *DescribeQualityMetricsResponse) {
     response = &DescribeQualityMetricsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeQualityMetrics
@@ -1053,8 +1070,9 @@ func NewDescribeRecordSearchRequest() (request *DescribeRecordSearchRequest) {
 func NewDescribeRecordSearchResponse() (response *DescribeRecordSearchResponse) {
     response = &DescribeRecordSearchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRecordSearch
@@ -1113,8 +1131,9 @@ func NewDescribeRoomListRequest() (request *DescribeRoomListRequest) {
 func NewDescribeRoomListResponse() (response *DescribeRoomListResponse) {
     response = &DescribeRoomListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRoomList
@@ -1167,8 +1186,9 @@ func NewDescribeSnapshotTaskRequest() (request *DescribeSnapshotTaskRequest) {
 func NewDescribeSnapshotTaskResponse() (response *DescribeSnapshotTaskResponse) {
     response = &DescribeSnapshotTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSnapshotTask
@@ -1235,8 +1255,9 @@ func NewDescribeTIWDailyUsageRequest() (request *DescribeTIWDailyUsageRequest) {
 func NewDescribeTIWDailyUsageResponse() (response *DescribeTIWDailyUsageResponse) {
     response = &DescribeTIWDailyUsageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTIWDailyUsage
@@ -1305,8 +1326,9 @@ func NewDescribeTIWRoomDailyUsageRequest() (request *DescribeTIWRoomDailyUsageRe
 func NewDescribeTIWRoomDailyUsageResponse() (response *DescribeTIWRoomDailyUsageResponse) {
     response = &DescribeTIWRoomDailyUsageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTIWRoomDailyUsage
@@ -1375,8 +1397,9 @@ func NewDescribeTranscodeRequest() (request *DescribeTranscodeRequest) {
 func NewDescribeTranscodeResponse() (response *DescribeTranscodeResponse) {
     response = &DescribeTranscodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTranscode
@@ -1453,8 +1476,9 @@ func NewDescribeTranscodeCallbackRequest() (request *DescribeTranscodeCallbackRe
 func NewDescribeTranscodeCallbackResponse() (response *DescribeTranscodeCallbackResponse) {
     response = &DescribeTranscodeCallbackResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTranscodeCallback
@@ -1511,8 +1535,9 @@ func NewDescribeTranscodeSearchRequest() (request *DescribeTranscodeSearchReques
 func NewDescribeTranscodeSearchResponse() (response *DescribeTranscodeSearchResponse) {
     response = &DescribeTranscodeSearchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTranscodeSearch
@@ -1573,8 +1598,9 @@ func NewDescribeUsageSummaryRequest() (request *DescribeUsageSummaryRequest) {
 func NewDescribeUsageSummaryResponse() (response *DescribeUsageSummaryResponse) {
     response = &DescribeUsageSummaryResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUsageSummary
@@ -1629,8 +1655,9 @@ func NewDescribeUserListRequest() (request *DescribeUserListRequest) {
 func NewDescribeUserListResponse() (response *DescribeUserListResponse) {
     response = &DescribeUserListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUserList
@@ -1683,8 +1710,9 @@ func NewDescribeUserResourcesRequest() (request *DescribeUserResourcesRequest) {
 func NewDescribeUserResourcesResponse() (response *DescribeUserResourcesResponse) {
     response = &DescribeUserResourcesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUserResources
@@ -1735,8 +1763,9 @@ func NewDescribeUserStatusRequest() (request *DescribeUserStatusRequest) {
 func NewDescribeUserStatusResponse() (response *DescribeUserStatusResponse) {
     response = &DescribeUserStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUserStatus
@@ -1789,8 +1818,9 @@ func NewDescribeVideoGenerationTaskRequest() (request *DescribeVideoGenerationTa
 func NewDescribeVideoGenerationTaskResponse() (response *DescribeVideoGenerationTaskResponse) {
     response = &DescribeVideoGenerationTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeVideoGenerationTask
@@ -1849,8 +1879,9 @@ func NewDescribeVideoGenerationTaskCallbackRequest() (request *DescribeVideoGene
 func NewDescribeVideoGenerationTaskCallbackResponse() (response *DescribeVideoGenerationTaskCallbackResponse) {
     response = &DescribeVideoGenerationTaskCallbackResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeVideoGenerationTaskCallback
@@ -1907,8 +1938,9 @@ func NewDescribeWhiteboardApplicationConfigRequest() (request *DescribeWhiteboar
 func NewDescribeWhiteboardApplicationConfigResponse() (response *DescribeWhiteboardApplicationConfigResponse) {
     response = &DescribeWhiteboardApplicationConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeWhiteboardApplicationConfig
@@ -1971,8 +2003,9 @@ func NewDescribeWhiteboardBucketConfigRequest() (request *DescribeWhiteboardBuck
 func NewDescribeWhiteboardBucketConfigResponse() (response *DescribeWhiteboardBucketConfigResponse) {
     response = &DescribeWhiteboardBucketConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeWhiteboardBucketConfig
@@ -2033,8 +2066,9 @@ func NewDescribeWhiteboardPushRequest() (request *DescribeWhiteboardPushRequest)
 func NewDescribeWhiteboardPushResponse() (response *DescribeWhiteboardPushResponse) {
     response = &DescribeWhiteboardPushResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeWhiteboardPush
@@ -2093,8 +2127,9 @@ func NewDescribeWhiteboardPushCallbackRequest() (request *DescribeWhiteboardPush
 func NewDescribeWhiteboardPushCallbackResponse() (response *DescribeWhiteboardPushCallbackResponse) {
     response = &DescribeWhiteboardPushCallbackResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeWhiteboardPushCallback
@@ -2151,8 +2186,9 @@ func NewDescribeWhiteboardPushSearchRequest() (request *DescribeWhiteboardPushSe
 func NewDescribeWhiteboardPushSearchResponse() (response *DescribeWhiteboardPushSearchResponse) {
     response = &DescribeWhiteboardPushSearchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeWhiteboardPushSearch
@@ -2213,8 +2249,9 @@ func NewModifyApplicationRequest() (request *ModifyApplicationRequest) {
 func NewModifyApplicationResponse() (response *ModifyApplicationResponse) {
     response = &ModifyApplicationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyApplication
@@ -2267,8 +2304,9 @@ func NewModifyAutoRenewFlagRequest() (request *ModifyAutoRenewFlagRequest) {
 func NewModifyAutoRenewFlagResponse() (response *ModifyAutoRenewFlagResponse) {
     response = &ModifyAutoRenewFlagResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyAutoRenewFlag
@@ -2319,8 +2357,9 @@ func NewModifyWhiteboardApplicationConfigRequest() (request *ModifyWhiteboardApp
 func NewModifyWhiteboardApplicationConfigResponse() (response *ModifyWhiteboardApplicationConfigResponse) {
     response = &ModifyWhiteboardApplicationConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyWhiteboardApplicationConfig
@@ -2393,8 +2432,9 @@ func NewModifyWhiteboardBucketConfigRequest() (request *ModifyWhiteboardBucketCo
 func NewModifyWhiteboardBucketConfigResponse() (response *ModifyWhiteboardBucketConfigResponse) {
     response = &ModifyWhiteboardBucketConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyWhiteboardBucketConfig
@@ -2461,8 +2501,9 @@ func NewPauseOnlineRecordRequest() (request *PauseOnlineRecordRequest) {
 func NewPauseOnlineRecordResponse() (response *PauseOnlineRecordResponse) {
     response = &PauseOnlineRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // PauseOnlineRecord
@@ -2523,8 +2564,9 @@ func NewResumeOnlineRecordRequest() (request *ResumeOnlineRecordRequest) {
 func NewResumeOnlineRecordResponse() (response *ResumeOnlineRecordResponse) {
     response = &ResumeOnlineRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResumeOnlineRecord
@@ -2585,8 +2627,9 @@ func NewSetOfflineRecordCallbackRequest() (request *SetOfflineRecordCallbackRequ
 func NewSetOfflineRecordCallbackResponse() (response *SetOfflineRecordCallbackResponse) {
     response = &SetOfflineRecordCallbackResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetOfflineRecordCallback
@@ -2643,8 +2686,9 @@ func NewSetOnlineRecordCallbackRequest() (request *SetOnlineRecordCallbackReques
 func NewSetOnlineRecordCallbackResponse() (response *SetOnlineRecordCallbackResponse) {
     response = &SetOnlineRecordCallbackResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetOnlineRecordCallback
@@ -2701,8 +2745,9 @@ func NewSetOnlineRecordCallbackKeyRequest() (request *SetOnlineRecordCallbackKey
 func NewSetOnlineRecordCallbackKeyResponse() (response *SetOnlineRecordCallbackKeyResponse) {
     response = &SetOnlineRecordCallbackKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetOnlineRecordCallbackKey
@@ -2759,8 +2804,9 @@ func NewSetTranscodeCallbackRequest() (request *SetTranscodeCallbackRequest) {
 func NewSetTranscodeCallbackResponse() (response *SetTranscodeCallbackResponse) {
     response = &SetTranscodeCallbackResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetTranscodeCallback
@@ -2817,8 +2863,9 @@ func NewSetTranscodeCallbackKeyRequest() (request *SetTranscodeCallbackKeyReques
 func NewSetTranscodeCallbackKeyResponse() (response *SetTranscodeCallbackKeyResponse) {
     response = &SetTranscodeCallbackKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetTranscodeCallbackKey
@@ -2875,8 +2922,9 @@ func NewSetVideoGenerationTaskCallbackRequest() (request *SetVideoGenerationTask
 func NewSetVideoGenerationTaskCallbackResponse() (response *SetVideoGenerationTaskCallbackResponse) {
     response = &SetVideoGenerationTaskCallbackResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetVideoGenerationTaskCallback
@@ -2933,8 +2981,9 @@ func NewSetVideoGenerationTaskCallbackKeyRequest() (request *SetVideoGenerationT
 func NewSetVideoGenerationTaskCallbackKeyResponse() (response *SetVideoGenerationTaskCallbackKeyResponse) {
     response = &SetVideoGenerationTaskCallbackKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetVideoGenerationTaskCallbackKey
@@ -2991,8 +3040,9 @@ func NewSetWhiteboardPushCallbackRequest() (request *SetWhiteboardPushCallbackRe
 func NewSetWhiteboardPushCallbackResponse() (response *SetWhiteboardPushCallbackResponse) {
     response = &SetWhiteboardPushCallbackResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetWhiteboardPushCallback
@@ -3049,8 +3099,9 @@ func NewSetWhiteboardPushCallbackKeyRequest() (request *SetWhiteboardPushCallbac
 func NewSetWhiteboardPushCallbackKeyResponse() (response *SetWhiteboardPushCallbackKeyResponse) {
     response = &SetWhiteboardPushCallbackKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetWhiteboardPushCallbackKey
@@ -3107,8 +3158,9 @@ func NewStartOnlineRecordRequest() (request *StartOnlineRecordRequest) {
 func NewStartOnlineRecordResponse() (response *StartOnlineRecordResponse) {
     response = &StartOnlineRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartOnlineRecord
@@ -3173,8 +3225,9 @@ func NewStartWhiteboardPushRequest() (request *StartWhiteboardPushRequest) {
 func NewStartWhiteboardPushResponse() (response *StartWhiteboardPushResponse) {
     response = &StartWhiteboardPushResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartWhiteboardPush
@@ -3239,8 +3292,9 @@ func NewStopOnlineRecordRequest() (request *StopOnlineRecordRequest) {
 func NewStopOnlineRecordResponse() (response *StopOnlineRecordResponse) {
     response = &StopOnlineRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopOnlineRecord
@@ -3299,8 +3353,9 @@ func NewStopWhiteboardPushRequest() (request *StopWhiteboardPushRequest) {
 func NewStopWhiteboardPushResponse() (response *StopWhiteboardPushResponse) {
     response = &StopWhiteboardPushResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopWhiteboardPush

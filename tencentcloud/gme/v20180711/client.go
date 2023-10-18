@@ -59,8 +59,9 @@ func NewCreateAppRequest() (request *CreateAppRequest) {
 func NewCreateAppResponse() (response *CreateAppResponse) {
     response = &CreateAppResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateApp
@@ -127,8 +128,9 @@ func NewDeleteRoomMemberRequest() (request *DeleteRoomMemberRequest) {
 func NewDeleteRoomMemberResponse() (response *DeleteRoomMemberResponse) {
     response = &DeleteRoomMemberResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRoomMember
@@ -183,8 +185,9 @@ func NewDescribeAppStatisticsRequest() (request *DescribeAppStatisticsRequest) {
 func NewDescribeAppStatisticsResponse() (response *DescribeAppStatisticsResponse) {
     response = &DescribeAppStatisticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAppStatistics
@@ -251,8 +254,9 @@ func NewDescribeApplicationDataRequest() (request *DescribeApplicationDataReques
 func NewDescribeApplicationDataResponse() (response *DescribeApplicationDataResponse) {
     response = &DescribeApplicationDataResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApplicationData
@@ -307,8 +311,9 @@ func NewDescribeRecordInfoRequest() (request *DescribeRecordInfoRequest) {
 func NewDescribeRecordInfoResponse() (response *DescribeRecordInfoResponse) {
     response = &DescribeRecordInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRecordInfo
@@ -369,8 +374,9 @@ func NewDescribeTaskInfoRequest() (request *DescribeTaskInfoRequest) {
 func NewDescribeTaskInfoResponse() (response *DescribeTaskInfoResponse) {
     response = &DescribeTaskInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTaskInfo
@@ -433,8 +439,9 @@ func NewModifyAppStatusRequest() (request *ModifyAppStatusRequest) {
 func NewModifyAppStatusResponse() (response *ModifyAppStatusResponse) {
     response = &ModifyAppStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyAppStatus
@@ -499,8 +506,9 @@ func NewModifyRecordInfoRequest() (request *ModifyRecordInfoRequest) {
 func NewModifyRecordInfoResponse() (response *ModifyRecordInfoResponse) {
     response = &ModifyRecordInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRecordInfo
@@ -569,8 +577,9 @@ func NewStartRecordRequest() (request *StartRecordRequest) {
 func NewStartRecordResponse() (response *StartRecordResponse) {
     response = &StartRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartRecord
@@ -643,8 +652,9 @@ func NewStopRecordRequest() (request *StopRecordRequest) {
 func NewStopRecordResponse() (response *StopRecordResponse) {
     response = &StopRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopRecord

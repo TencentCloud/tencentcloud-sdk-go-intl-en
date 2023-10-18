@@ -59,8 +59,9 @@ func NewCreateStreamLinkFlowRequest() (request *CreateStreamLinkFlowRequest) {
 func NewCreateStreamLinkFlowResponse() (response *CreateStreamLinkFlowResponse) {
     response = &CreateStreamLinkFlowResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateStreamLinkFlow
@@ -117,8 +118,9 @@ func NewCreateStreamLinkOutputInfoRequest() (request *CreateStreamLinkOutputInfo
 func NewCreateStreamLinkOutputInfoResponse() (response *CreateStreamLinkOutputInfoResponse) {
     response = &CreateStreamLinkOutputInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateStreamLinkOutputInfo
@@ -177,8 +179,9 @@ func NewDeleteStreamLinkFlowRequest() (request *DeleteStreamLinkFlowRequest) {
 func NewDeleteStreamLinkFlowResponse() (response *DeleteStreamLinkFlowResponse) {
     response = &DeleteStreamLinkFlowResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteStreamLinkFlow
@@ -227,8 +230,9 @@ func NewDeleteStreamLinkOutputRequest() (request *DeleteStreamLinkOutputRequest)
 func NewDeleteStreamLinkOutputResponse() (response *DeleteStreamLinkOutputResponse) {
     response = &DeleteStreamLinkOutputResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteStreamLinkOutput
@@ -281,8 +285,9 @@ func NewDescribeStreamLinkFlowRequest() (request *DescribeStreamLinkFlowRequest)
 func NewDescribeStreamLinkFlowResponse() (response *DescribeStreamLinkFlowResponse) {
     response = &DescribeStreamLinkFlowResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLinkFlow
@@ -331,8 +336,9 @@ func NewDescribeStreamLinkFlowLogsRequest() (request *DescribeStreamLinkFlowLogs
 func NewDescribeStreamLinkFlowLogsResponse() (response *DescribeStreamLinkFlowLogsResponse) {
     response = &DescribeStreamLinkFlowLogsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLinkFlowLogs
@@ -397,8 +403,9 @@ func NewDescribeStreamLinkFlowMediaStatisticsRequest() (request *DescribeStreamL
 func NewDescribeStreamLinkFlowMediaStatisticsResponse() (response *DescribeStreamLinkFlowMediaStatisticsResponse) {
     response = &DescribeStreamLinkFlowMediaStatisticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLinkFlowMediaStatistics
@@ -461,8 +468,9 @@ func NewDescribeStreamLinkFlowRealtimeStatusRequest() (request *DescribeStreamLi
 func NewDescribeStreamLinkFlowRealtimeStatusResponse() (response *DescribeStreamLinkFlowRealtimeStatusResponse) {
     response = &DescribeStreamLinkFlowRealtimeStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLinkFlowRealtimeStatus
@@ -513,8 +521,9 @@ func NewDescribeStreamLinkFlowSRTStatisticsRequest() (request *DescribeStreamLin
 func NewDescribeStreamLinkFlowSRTStatisticsResponse() (response *DescribeStreamLinkFlowSRTStatisticsResponse) {
     response = &DescribeStreamLinkFlowSRTStatisticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLinkFlowSRTStatistics
@@ -577,8 +586,9 @@ func NewDescribeStreamLinkFlowStatisticsRequest() (request *DescribeStreamLinkFl
 func NewDescribeStreamLinkFlowStatisticsResponse() (response *DescribeStreamLinkFlowStatisticsResponse) {
     response = &DescribeStreamLinkFlowStatisticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLinkFlowStatistics
@@ -641,8 +651,9 @@ func NewDescribeStreamLinkFlowsRequest() (request *DescribeStreamLinkFlowsReques
 func NewDescribeStreamLinkFlowsResponse() (response *DescribeStreamLinkFlowsResponse) {
     response = &DescribeStreamLinkFlowsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLinkFlows
@@ -695,8 +706,9 @@ func NewDescribeStreamLinkRegionsRequest() (request *DescribeStreamLinkRegionsRe
 func NewDescribeStreamLinkRegionsResponse() (response *DescribeStreamLinkRegionsResponse) {
     response = &DescribeStreamLinkRegionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLinkRegions
@@ -743,8 +755,9 @@ func NewModifyStreamLinkFlowRequest() (request *ModifyStreamLinkFlowRequest) {
 func NewModifyStreamLinkFlowResponse() (response *ModifyStreamLinkFlowResponse) {
     response = &ModifyStreamLinkFlowResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyStreamLinkFlow
@@ -797,8 +810,9 @@ func NewModifyStreamLinkInputRequest() (request *ModifyStreamLinkInputRequest) {
 func NewModifyStreamLinkInputResponse() (response *ModifyStreamLinkInputResponse) {
     response = &ModifyStreamLinkInputResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyStreamLinkInput
@@ -853,8 +867,9 @@ func NewModifyStreamLinkOutputInfoRequest() (request *ModifyStreamLinkOutputInfo
 func NewModifyStreamLinkOutputInfoResponse() (response *ModifyStreamLinkOutputInfoResponse) {
     response = &ModifyStreamLinkOutputInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyStreamLinkOutputInfo
@@ -911,8 +926,9 @@ func NewStartStreamLinkFlowRequest() (request *StartStreamLinkFlowRequest) {
 func NewStartStreamLinkFlowResponse() (response *StartStreamLinkFlowResponse) {
     response = &StartStreamLinkFlowResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartStreamLinkFlow
@@ -965,8 +981,9 @@ func NewStopStreamLinkFlowRequest() (request *StopStreamLinkFlowRequest) {
 func NewStopStreamLinkFlowResponse() (response *StopStreamLinkFlowResponse) {
     response = &StopStreamLinkFlowResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopStreamLinkFlow

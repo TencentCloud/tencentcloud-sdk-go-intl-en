@@ -59,8 +59,9 @@ func NewAcceptOrganizationInvitationRequest() (request *AcceptOrganizationInvita
 func NewAcceptOrganizationInvitationResponse() (response *AcceptOrganizationInvitationResponse) {
     response = &AcceptOrganizationInvitationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AcceptOrganizationInvitation
@@ -109,8 +110,9 @@ func NewAddOrganizationNodeRequest() (request *AddOrganizationNodeRequest) {
 func NewAddOrganizationNodeResponse() (response *AddOrganizationNodeResponse) {
     response = &AddOrganizationNodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AddOrganizationNode
@@ -165,8 +167,9 @@ func NewCancelOrganizationInvitationRequest() (request *CancelOrganizationInvita
 func NewCancelOrganizationInvitationResponse() (response *CancelOrganizationInvitationResponse) {
     response = &CancelOrganizationInvitationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CancelOrganizationInvitation
@@ -213,8 +216,9 @@ func NewCreateOrganizationRequest() (request *CreateOrganizationRequest) {
 func NewCreateOrganizationResponse() (response *CreateOrganizationResponse) {
     response = &CreateOrganizationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateOrganization
@@ -263,8 +267,9 @@ func NewDeleteOrganizationRequest() (request *DeleteOrganizationRequest) {
 func NewDeleteOrganizationResponse() (response *DeleteOrganizationResponse) {
     response = &DeleteOrganizationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteOrganization
@@ -313,8 +318,9 @@ func NewDeleteOrganizationMemberFromNodeRequest() (request *DeleteOrganizationMe
 func NewDeleteOrganizationMemberFromNodeResponse() (response *DeleteOrganizationMemberFromNodeResponse) {
     response = &DeleteOrganizationMemberFromNodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteOrganizationMemberFromNode
@@ -365,8 +371,9 @@ func NewDeleteOrganizationMembersRequest() (request *DeleteOrganizationMembersRe
 func NewDeleteOrganizationMembersResponse() (response *DeleteOrganizationMembersResponse) {
     response = &DeleteOrganizationMembersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteOrganizationMembers
@@ -413,8 +420,9 @@ func NewDeleteOrganizationNodesRequest() (request *DeleteOrganizationNodesReques
 func NewDeleteOrganizationNodesResponse() (response *DeleteOrganizationNodesResponse) {
     response = &DeleteOrganizationNodesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteOrganizationNodes
@@ -463,8 +471,9 @@ func NewDenyOrganizationInvitationRequest() (request *DenyOrganizationInvitation
 func NewDenyOrganizationInvitationResponse() (response *DenyOrganizationInvitationResponse) {
     response = &DenyOrganizationInvitationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DenyOrganizationInvitation
@@ -511,8 +520,9 @@ func NewGetOrganizationRequest() (request *GetOrganizationRequest) {
 func NewGetOrganizationResponse() (response *GetOrganizationResponse) {
     response = &GetOrganizationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetOrganization
@@ -561,8 +571,9 @@ func NewGetOrganizationMemberRequest() (request *GetOrganizationMemberRequest) {
 func NewGetOrganizationMemberResponse() (response *GetOrganizationMemberResponse) {
     response = &GetOrganizationMemberResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetOrganizationMember
@@ -611,8 +622,9 @@ func NewListOrganizationInvitationsRequest() (request *ListOrganizationInvitatio
 func NewListOrganizationInvitationsResponse() (response *ListOrganizationInvitationsResponse) {
     response = &ListOrganizationInvitationsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ListOrganizationInvitations
@@ -659,8 +671,9 @@ func NewListOrganizationMembersRequest() (request *ListOrganizationMembersReques
 func NewListOrganizationMembersResponse() (response *ListOrganizationMembersResponse) {
     response = &ListOrganizationMembersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ListOrganizationMembers
@@ -707,8 +720,9 @@ func NewListOrganizationNodeMembersRequest() (request *ListOrganizationNodeMembe
 func NewListOrganizationNodeMembersResponse() (response *ListOrganizationNodeMembersResponse) {
     response = &ListOrganizationNodeMembersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ListOrganizationNodeMembers
@@ -757,8 +771,9 @@ func NewListOrganizationNodesRequest() (request *ListOrganizationNodesRequest) {
 func NewListOrganizationNodesResponse() (response *ListOrganizationNodesResponse) {
     response = &ListOrganizationNodesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ListOrganizationNodes
@@ -805,8 +820,9 @@ func NewMoveOrganizationMembersToNodeRequest() (request *MoveOrganizationMembers
 func NewMoveOrganizationMembersToNodeResponse() (response *MoveOrganizationMembersToNodeResponse) {
     response = &MoveOrganizationMembersToNodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // MoveOrganizationMembersToNode
@@ -857,8 +873,9 @@ func NewQuitOrganizationRequest() (request *QuitOrganizationRequest) {
 func NewQuitOrganizationResponse() (response *QuitOrganizationResponse) {
     response = &QuitOrganizationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // QuitOrganization
@@ -907,8 +924,9 @@ func NewSendOrganizationInvitationRequest() (request *SendOrganizationInvitation
 func NewSendOrganizationInvitationResponse() (response *SendOrganizationInvitationResponse) {
     response = &SendOrganizationInvitationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SendOrganizationInvitation
@@ -967,8 +985,9 @@ func NewUpdateOrganizationMemberRequest() (request *UpdateOrganizationMemberRequ
 func NewUpdateOrganizationMemberResponse() (response *UpdateOrganizationMemberResponse) {
     response = &UpdateOrganizationMemberResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateOrganizationMember
@@ -1019,8 +1038,9 @@ func NewUpdateOrganizationNodeRequest() (request *UpdateOrganizationNodeRequest)
 func NewUpdateOrganizationNodeResponse() (response *UpdateOrganizationNodeResponse) {
     response = &UpdateOrganizationNodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateOrganizationNode

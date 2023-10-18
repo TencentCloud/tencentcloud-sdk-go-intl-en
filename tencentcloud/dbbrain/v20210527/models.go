@@ -91,6 +91,144 @@ func (r *AddUserContactResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AuditInstance struct {
+	// Audit status. Valid values: `ON` (Enabled), `OFF` (Not enabled).
+	AuditStatus *string `json:"AuditStatus,omitnil" name:"AuditStatus"`
+
+	// Audit log size. This parameter is only used for the free trial edition of Database Audit.
+	BillingAmount *int64 `json:"BillingAmount,omitnil" name:"BillingAmount"`
+
+	// Billing confirmation status. Valid values: `0` (Unconfirmed), `1` (Confirmed).
+	BillingConfirmed *int64 `json:"BillingConfirmed,omitnil" name:"BillingConfirmed"`
+
+	// Infrequent access storage period
+	ColdLogExpireDay *int64 `json:"ColdLogExpireDay,omitnil" name:"ColdLogExpireDay"`
+
+	// Storage size of infrequently accessed logs in MB
+	ColdLogSize *int64 `json:"ColdLogSize,omitnil" name:"ColdLogSize"`
+
+	// Storage period of frequently accessed logs in days
+	HotLogExpireDay *int64 `json:"HotLogExpireDay,omitnil" name:"HotLogExpireDay"`
+
+	// Storage size of frequently accessed logs in MB
+	HotLogSize *int64 `json:"HotLogSize,omitnil" name:"HotLogSize"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Log retention period in days, which is the sum of the frequent and infrequent access storage periods.
+	LogExpireDay *int64 `json:"LogExpireDay,omitnil" name:"LogExpireDay"`
+
+	// Instance creation time
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+
+	// Instance details
+	InstanceInfo *AuditInstanceInfo `json:"InstanceInfo,omitnil" name:"InstanceInfo"`
+}
+
+type AuditInstanceFilter struct {
+	// Filter name
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// Filter value
+	Values []*string `json:"Values,omitnil" name:"Values"`
+}
+
+type AuditInstanceInfo struct {
+	// appId
+	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
+
+	// Audit status. Valid values: `0` (Not enabled), `1` (Enabled).
+	AuditStatus *int64 `json:"AuditStatus,omitnil" name:"AuditStatus"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Instance name
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+
+	// The region where the instance resides
+	Region *string `json:"Region,omitnil" name:"Region"`
+
+	// Resource tags
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	ResourceTags []*string `json:"ResourceTags,omitnil" name:"ResourceTags"`
+}
+
+// Predefined struct for user
+type CloseAuditServiceRequestParams struct {
+	// Service type. Valid values: `dcdb` (TDSQL for MySQL), `mariadb` (TencentDB for MariaDB).
+	Product *string `json:"Product,omitnil" name:"Product"`
+
+	// Use the value of `u200cProduct` for this parameter, such as `dcdb` and `mariadb`.
+	NodeRequestType *string `json:"NodeRequestType,omitnil" name:"NodeRequestType"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+type CloseAuditServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Service type. Valid values: `dcdb` (TDSQL for MySQL), `mariadb` (TencentDB for MariaDB).
+	Product *string `json:"Product,omitnil" name:"Product"`
+
+	// Use the value of `u200cProduct` for this parameter, such as `dcdb` and `mariadb`.
+	NodeRequestType *string `json:"NodeRequestType,omitnil" name:"NodeRequestType"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+func (r *CloseAuditServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseAuditServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Product")
+	delete(f, "NodeRequestType")
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CloseAuditServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CloseAuditServiceResponseParams struct {
+	// If `0` is returned, audit is successfully disabled; otherwise, an exception will be returned, indicating that audit has failed to be disabled.
+	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type CloseAuditServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *CloseAuditServiceResponseParams `json:"Response"`
+}
+
+func (r *CloseAuditServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CloseAuditServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ContactItem struct {
 	// Recipient ID.
 	Id *int64 `json:"Id,omitnil" name:"Id"`
@@ -543,6 +681,86 @@ func (r *CreateProxySessionKillTaskResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateRedisBigKeyAnalysisTaskRequestParams struct {
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Service type. Valid value: `redis` (TencentDB for Redis).
+	Product *string `json:"Product,omitnil" name:"Product"`
+
+	// The list of the serial numbers of shard nodes. When the list is empty, all shard nodes will be selected.
+	ShardIds []*int64 `json:"ShardIds,omitnil" name:"ShardIds"`
+
+	// The list of separators of top key prefixes.
+	// Currently, the following separators are supported: ",", ";", ":", "_", "-", "+", "@", "=", "|", "#", ".". When the list is empty, all separators will be selected by default.
+	KeyDelimiterList []*string `json:"KeyDelimiterList,omitnil" name:"KeyDelimiterList"`
+}
+
+type CreateRedisBigKeyAnalysisTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Service type. Valid value: `redis` (TencentDB for Redis).
+	Product *string `json:"Product,omitnil" name:"Product"`
+
+	// The list of the serial numbers of shard nodes. When the list is empty, all shard nodes will be selected.
+	ShardIds []*int64 `json:"ShardIds,omitnil" name:"ShardIds"`
+
+	// The list of separators of top key prefixes.
+	// Currently, the following separators are supported: ",", ";", ":", "_", "-", "+", "@", "=", "|", "#", ".". When the list is empty, all separators will be selected by default.
+	KeyDelimiterList []*string `json:"KeyDelimiterList,omitnil" name:"KeyDelimiterList"`
+}
+
+func (r *CreateRedisBigKeyAnalysisTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRedisBigKeyAnalysisTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Product")
+	delete(f, "ShardIds")
+	delete(f, "KeyDelimiterList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRedisBigKeyAnalysisTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateRedisBigKeyAnalysisTaskResponseParams struct {
+	// Async task ID
+	AsyncRequestId *int64 `json:"AsyncRequestId,omitnil" name:"AsyncRequestId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type CreateRedisBigKeyAnalysisTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateRedisBigKeyAnalysisTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateRedisBigKeyAnalysisTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateRedisBigKeyAnalysisTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateSchedulerMailProfileRequestParams struct {
 	// Value range: 1-7, representing Monday to Sunday respectively.
 	WeekConfiguration []*int64 `json:"WeekConfiguration,omitnil" name:"WeekConfiguration"`
@@ -981,6 +1199,102 @@ func (r *DescribeAllUserGroupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAllUserGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditInstanceListRequestParams struct {
+	// Service type. Valid values: `dcdb` (TDSQL for MySQL), `mariadb` (TencentDB for MariaDB).
+	Product *string `json:"Product,omitnil" name:"Product"`
+
+	// Use the value of `u200cProduct` for this parameter, such as `dcdb` and `mariadb`.
+	NodeRequestType *string `json:"NodeRequestType,omitnil" name:"NodeRequestType"`
+
+	// Audit status. Valid values: `0` (Not enabled), `1` (Enabled). Default value: `0`.
+	AuditSwitch *int64 `json:"AuditSwitch,omitnil" name:"AuditSwitch"`
+
+	// The offset. Default value: `0`.
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+
+	// The number of queried items. Default value: `20`. Max value: `100`.
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Filters for querying instances
+	Filters []*AuditInstanceFilter `json:"Filters,omitnil" name:"Filters"`
+}
+
+type DescribeAuditInstanceListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Service type. Valid values: `dcdb` (TDSQL for MySQL), `mariadb` (TencentDB for MariaDB).
+	Product *string `json:"Product,omitnil" name:"Product"`
+
+	// Use the value of `u200cProduct` for this parameter, such as `dcdb` and `mariadb`.
+	NodeRequestType *string `json:"NodeRequestType,omitnil" name:"NodeRequestType"`
+
+	// Audit status. Valid values: `0` (Not enabled), `1` (Enabled). Default value: `0`.
+	AuditSwitch *int64 `json:"AuditSwitch,omitnil" name:"AuditSwitch"`
+
+	// The offset. Default value: `0`.
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+
+	// The number of queried items. Default value: `20`. Max value: `100`.
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Filters for querying instances
+	Filters []*AuditInstanceFilter `json:"Filters,omitnil" name:"Filters"`
+}
+
+func (r *DescribeAuditInstanceListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditInstanceListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Product")
+	delete(f, "NodeRequestType")
+	delete(f, "AuditSwitch")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAuditInstanceListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAuditInstanceListResponseParams struct {
+	// The number of eligible instances.
+	// Note: u200dThis field may return `null`, indicating that no valid values can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// Instance details
+	Items []*AuditInstance `json:"Items,omitnil" name:"Items"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeAuditInstanceListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAuditInstanceListResponseParams `json:"Response"`
+}
+
+func (r *DescribeAuditInstanceListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAuditInstanceListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2475,7 +2789,7 @@ type DescribeSlowLogUserHostStatsRequestParams struct {
 	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
 	Product *string `json:"Product,omitnil" name:"Product"`
 
-	// MD5 value of SOL template
+	// MD5 value of the SQL template
 	Md5 *string `json:"Md5,omitnil" name:"Md5"`
 }
 
@@ -2494,7 +2808,7 @@ type DescribeSlowLogUserHostStatsRequest struct {
 	// Service type. Valid values: mysql (TencentDB for MySQL), cynosdb (TDSQL-C for MySQL). Default value: mysql.
 	Product *string `json:"Product,omitnil" name:"Product"`
 
-	// MD5 value of SOL template
+	// MD5 value of the SQL template
 	Md5 *string `json:"Md5,omitnil" name:"Md5"`
 }
 
@@ -3524,6 +3838,91 @@ type MailConfiguration struct {
 }
 
 // Predefined struct for user
+type ModifyAuditServiceRequestParams struct {
+	// Service type. Valid values: `dcdb` (TDSQL for MySQL), `mariadb` (TencentDB for MariaDB).
+	Product *string `json:"Product,omitnil" name:"Product"`
+
+	// Use the value of `u200cProduct` for this parameter, such as `dcdb` and `mariadb`.
+	NodeRequestType *string `json:"NodeRequestType,omitnil" name:"NodeRequestType"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Total log retention period in days. Valid values: `7`, `30`, `90`, `180`, `365`, `1095`, `1825`.
+	LogExpireDay *int64 `json:"LogExpireDay,omitnil" name:"LogExpireDay"`
+
+	// Storage period of frequently accessed logs in days. Valid values: `7`, `30`, `90`, `180`, `365`, `1095`, `1825`.
+	HotLogExpireDay *int64 `json:"HotLogExpireDay,omitnil" name:"HotLogExpireDay"`
+}
+
+type ModifyAuditServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Service type. Valid values: `dcdb` (TDSQL for MySQL), `mariadb` (TencentDB for MariaDB).
+	Product *string `json:"Product,omitnil" name:"Product"`
+
+	// Use the value of `u200cProduct` for this parameter, such as `dcdb` and `mariadb`.
+	NodeRequestType *string `json:"NodeRequestType,omitnil" name:"NodeRequestType"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Total log retention period in days. Valid values: `7`, `30`, `90`, `180`, `365`, `1095`, `1825`.
+	LogExpireDay *int64 `json:"LogExpireDay,omitnil" name:"LogExpireDay"`
+
+	// Storage period of frequently accessed logs in days. Valid values: `7`, `30`, `90`, `180`, `365`, `1095`, `1825`.
+	HotLogExpireDay *int64 `json:"HotLogExpireDay,omitnil" name:"HotLogExpireDay"`
+}
+
+func (r *ModifyAuditServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAuditServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Product")
+	delete(f, "NodeRequestType")
+	delete(f, "InstanceId")
+	delete(f, "LogExpireDay")
+	delete(f, "HotLogExpireDay")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAuditServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAuditServiceResponseParams struct {
+	// Audit configuration modification result. If `0` is returned, the modification is successful; otherwise, an exception will be returned, indicating that the modification failed.
+	Success *int64 `json:"Success,omitnil" name:"Success"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ModifyAuditServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAuditServiceResponseParams `json:"Response"`
+}
+
+func (r *ModifyAuditServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAuditServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyDiagDBInstanceConfRequestParams struct {
 	// Instance configuration, including inspection and overview switch.
 	InstanceConfs *InstanceConfs `json:"InstanceConfs,omitnil" name:"InstanceConfs"`
@@ -3662,6 +4061,91 @@ type MySqlProcess struct {
 
 	// Thread operation statement.
 	Info *string `json:"Info,omitnil" name:"Info"`
+}
+
+// Predefined struct for user
+type OpenAuditServiceRequestParams struct {
+	// Service type. Valid values: `dcdb` (TDSQL for MySQL), `mariadb` (TencentDB for MariaDB).
+	Product *string `json:"Product,omitnil" name:"Product"`
+
+	// Use the value of `u200cProduct` for this parameter, such as `dcdb` and `mariadb`.
+	NodeRequestType *string `json:"NodeRequestType,omitnil" name:"NodeRequestType"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Total log retention period in days. Valid values: `7`, `30`, `90`, `180`, `365`, `1095`, `1825`.
+	LogExpireDay *int64 `json:"LogExpireDay,omitnil" name:"LogExpireDay"`
+
+	// Storage period of frequently accessed logs in days. Valid values: `7`, `30`, `90`, `180`, `365`, `1095`, `1825`.
+	HotLogExpireDay *int64 `json:"HotLogExpireDay,omitnil" name:"HotLogExpireDay"`
+}
+
+type OpenAuditServiceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Service type. Valid values: `dcdb` (TDSQL for MySQL), `mariadb` (TencentDB for MariaDB).
+	Product *string `json:"Product,omitnil" name:"Product"`
+
+	// Use the value of `u200cProduct` for this parameter, such as `dcdb` and `mariadb`.
+	NodeRequestType *string `json:"NodeRequestType,omitnil" name:"NodeRequestType"`
+
+	// Instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Total log retention period in days. Valid values: `7`, `30`, `90`, `180`, `365`, `1095`, `1825`.
+	LogExpireDay *int64 `json:"LogExpireDay,omitnil" name:"LogExpireDay"`
+
+	// Storage period of frequently accessed logs in days. Valid values: `7`, `30`, `90`, `180`, `365`, `1095`, `1825`.
+	HotLogExpireDay *int64 `json:"HotLogExpireDay,omitnil" name:"HotLogExpireDay"`
+}
+
+func (r *OpenAuditServiceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenAuditServiceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Product")
+	delete(f, "NodeRequestType")
+	delete(f, "InstanceId")
+	delete(f, "LogExpireDay")
+	delete(f, "HotLogExpireDay")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenAuditServiceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type OpenAuditServiceResponseParams struct {
+	// Audit is successfully enabled only when the value of this parameter is `0`.
+	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type OpenAuditServiceResponse struct {
+	*tchttp.BaseResponse
+	Response *OpenAuditServiceResponseParams `json:"Response"`
+}
+
+func (r *OpenAuditServiceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *OpenAuditServiceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type ProcessStatistic struct {

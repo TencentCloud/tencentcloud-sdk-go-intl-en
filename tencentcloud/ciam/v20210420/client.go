@@ -59,8 +59,9 @@ func NewListUserGroupsRequest() (request *ListUserGroupsRequest) {
 func NewListUserGroupsResponse() (response *ListUserGroupsResponse) {
     response = &ListUserGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ListUserGroups

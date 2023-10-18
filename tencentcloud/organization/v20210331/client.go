@@ -59,8 +59,9 @@ func NewAddOrganizationNodeRequest() (request *AddOrganizationNodeRequest) {
 func NewAddOrganizationNodeResponse() (response *AddOrganizationNodeResponse) {
     response = &AddOrganizationNodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AddOrganizationNode
@@ -119,8 +120,9 @@ func NewBindOrganizationMemberAuthAccountRequest() (request *BindOrganizationMem
 func NewBindOrganizationMemberAuthAccountResponse() (response *BindOrganizationMemberAuthAccountResponse) {
     response = &BindOrganizationMemberAuthAccountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BindOrganizationMemberAuthAccount
@@ -183,8 +185,9 @@ func NewCancelOrganizationMemberAuthAccountRequest() (request *CancelOrganizatio
 func NewCancelOrganizationMemberAuthAccountResponse() (response *CancelOrganizationMemberAuthAccountResponse) {
     response = &CancelOrganizationMemberAuthAccountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CancelOrganizationMemberAuthAccount
@@ -243,8 +246,9 @@ func NewCreateOrganizationMemberRequest() (request *CreateOrganizationMemberRequ
 func NewCreateOrganizationMemberResponse() (response *CreateOrganizationMemberResponse) {
     response = &CreateOrganizationMemberResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateOrganizationMember
@@ -361,8 +365,9 @@ func NewCreateOrganizationMemberPolicyRequest() (request *CreateOrganizationMemb
 func NewCreateOrganizationMemberPolicyResponse() (response *CreateOrganizationMemberPolicyResponse) {
     response = &CreateOrganizationMemberPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateOrganizationMemberPolicy
@@ -423,8 +428,9 @@ func NewDeleteOrganizationMembersRequest() (request *DeleteOrganizationMembersRe
 func NewDeleteOrganizationMembersResponse() (response *DeleteOrganizationMembersResponse) {
     response = &DeleteOrganizationMembersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteOrganizationMembers
@@ -499,8 +505,9 @@ func NewDeleteOrganizationNodesRequest() (request *DeleteOrganizationNodesReques
 func NewDeleteOrganizationNodesResponse() (response *DeleteOrganizationNodesResponse) {
     response = &DeleteOrganizationNodesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteOrganizationNodes
@@ -559,8 +566,9 @@ func NewDescribeOrganizationRequest() (request *DescribeOrganizationRequest) {
 func NewDescribeOrganizationResponse() (response *DescribeOrganizationResponse) {
     response = &DescribeOrganizationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOrganization
@@ -613,8 +621,9 @@ func NewDescribeOrganizationMemberAuthAccountsRequest() (request *DescribeOrgani
 func NewDescribeOrganizationMemberAuthAccountsResponse() (response *DescribeOrganizationMemberAuthAccountsResponse) {
     response = &DescribeOrganizationMemberAuthAccountsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOrganizationMemberAuthAccounts
@@ -665,8 +674,9 @@ func NewDescribeOrganizationMemberAuthIdentitiesRequest() (request *DescribeOrga
 func NewDescribeOrganizationMemberAuthIdentitiesResponse() (response *DescribeOrganizationMemberAuthIdentitiesResponse) {
     response = &DescribeOrganizationMemberAuthIdentitiesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOrganizationMemberAuthIdentities
@@ -717,8 +727,9 @@ func NewDescribeOrganizationMemberPoliciesRequest() (request *DescribeOrganizati
 func NewDescribeOrganizationMemberPoliciesResponse() (response *DescribeOrganizationMemberPoliciesResponse) {
     response = &DescribeOrganizationMemberPoliciesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOrganizationMemberPolicies
@@ -771,8 +782,9 @@ func NewDescribeOrganizationMembersRequest() (request *DescribeOrganizationMembe
 func NewDescribeOrganizationMembersResponse() (response *DescribeOrganizationMembersResponse) {
     response = &DescribeOrganizationMembersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOrganizationMembers
@@ -827,8 +839,9 @@ func NewDescribeOrganizationNodesRequest() (request *DescribeOrganizationNodesRe
 func NewDescribeOrganizationNodesResponse() (response *DescribeOrganizationNodesResponse) {
     response = &DescribeOrganizationNodesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOrganizationNodes
@@ -879,8 +892,9 @@ func NewListOrganizationIdentityRequest() (request *ListOrganizationIdentityRequ
 func NewListOrganizationIdentityResponse() (response *ListOrganizationIdentityResponse) {
     response = &ListOrganizationIdentityResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ListOrganizationIdentity
@@ -931,8 +945,9 @@ func NewMoveOrganizationNodeMembersRequest() (request *MoveOrganizationNodeMembe
 func NewMoveOrganizationNodeMembersResponse() (response *MoveOrganizationNodeMembersResponse) {
     response = &MoveOrganizationNodeMembersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // MoveOrganizationNodeMembers
@@ -989,8 +1004,9 @@ func NewUpdateOrganizationNodeRequest() (request *UpdateOrganizationNodeRequest)
 func NewUpdateOrganizationNodeResponse() (response *UpdateOrganizationNodeResponse) {
     response = &UpdateOrganizationNodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateOrganizationNode

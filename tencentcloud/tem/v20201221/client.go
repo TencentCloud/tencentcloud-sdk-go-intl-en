@@ -59,8 +59,9 @@ func NewCreateCosTokenV2Request() (request *CreateCosTokenV2Request) {
 func NewCreateCosTokenV2Response() (response *CreateCosTokenV2Response) {
     response = &CreateCosTokenV2Response{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCosTokenV2
@@ -101,8 +102,9 @@ func NewCreateNamespaceRequest() (request *CreateNamespaceRequest) {
 func NewCreateNamespaceResponse() (response *CreateNamespaceResponse) {
     response = &CreateNamespaceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateNamespace
@@ -143,8 +145,9 @@ func NewCreateResourceRequest() (request *CreateResourceRequest) {
 func NewCreateResourceResponse() (response *CreateResourceResponse) {
     response = &CreateResourceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateResource
@@ -185,8 +188,9 @@ func NewCreateServiceV2Request() (request *CreateServiceV2Request) {
 func NewCreateServiceV2Response() (response *CreateServiceV2Response) {
     response = &CreateServiceV2Response{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateServiceV2
@@ -233,8 +237,9 @@ func NewDeleteIngressRequest() (request *DeleteIngressRequest) {
 func NewDeleteIngressResponse() (response *DeleteIngressResponse) {
     response = &DeleteIngressResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteIngress
@@ -281,8 +286,9 @@ func NewDeployServiceV2Request() (request *DeployServiceV2Request) {
 func NewDeployServiceV2Response() (response *DeployServiceV2Response) {
     response = &DeployServiceV2Response{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeployServiceV2
@@ -329,8 +335,9 @@ func NewDescribeIngressRequest() (request *DescribeIngressRequest) {
 func NewDescribeIngressResponse() (response *DescribeIngressResponse) {
     response = &DescribeIngressResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIngress
@@ -377,8 +384,9 @@ func NewDescribeIngressesRequest() (request *DescribeIngressesRequest) {
 func NewDescribeIngressesResponse() (response *DescribeIngressesResponse) {
     response = &DescribeIngressesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIngresses
@@ -425,8 +433,9 @@ func NewDescribeNamespacesRequest() (request *DescribeNamespacesRequest) {
 func NewDescribeNamespacesResponse() (response *DescribeNamespacesResponse) {
     response = &DescribeNamespacesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeNamespaces
@@ -473,8 +482,9 @@ func NewDescribeRelatedIngressesRequest() (request *DescribeRelatedIngressesRequ
 func NewDescribeRelatedIngressesResponse() (response *DescribeRelatedIngressesResponse) {
     response = &DescribeRelatedIngressesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRelatedIngresses
@@ -521,8 +531,9 @@ func NewDescribeServiceRunPodListV2Request() (request *DescribeServiceRunPodList
 func NewDescribeServiceRunPodListV2Response() (response *DescribeServiceRunPodListV2Response) {
     response = &DescribeServiceRunPodListV2Response{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeServiceRunPodListV2
@@ -569,8 +580,9 @@ func NewGenerateDownloadUrlRequest() (request *GenerateDownloadUrlRequest) {
 func NewGenerateDownloadUrlResponse() (response *GenerateDownloadUrlResponse) {
     response = &GenerateDownloadUrlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GenerateDownloadUrl
@@ -617,8 +629,9 @@ func NewModifyIngressRequest() (request *ModifyIngressRequest) {
 func NewModifyIngressResponse() (response *ModifyIngressResponse) {
     response = &ModifyIngressResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyIngress
@@ -665,8 +678,9 @@ func NewModifyNamespaceRequest() (request *ModifyNamespaceRequest) {
 func NewModifyNamespaceResponse() (response *ModifyNamespaceResponse) {
     response = &ModifyNamespaceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyNamespace
@@ -713,8 +727,9 @@ func NewModifyServiceInfoRequest() (request *ModifyServiceInfoRequest) {
 func NewModifyServiceInfoResponse() (response *ModifyServiceInfoResponse) {
     response = &ModifyServiceInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyServiceInfo
@@ -761,8 +776,9 @@ func NewRestartServiceRunPodRequest() (request *RestartServiceRunPodRequest) {
 func NewRestartServiceRunPodResponse() (response *RestartServiceRunPodResponse) {
     response = &RestartServiceRunPodResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RestartServiceRunPod

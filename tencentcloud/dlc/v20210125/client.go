@@ -59,8 +59,9 @@ func NewCancelSparkSessionBatchSQLRequest() (request *CancelSparkSessionBatchSQL
 func NewCancelSparkSessionBatchSQLResponse() (response *CancelSparkSessionBatchSQLResponse) {
     response = &CancelSparkSessionBatchSQLResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CancelSparkSessionBatchSQL
@@ -115,8 +116,9 @@ func NewCancelTaskRequest() (request *CancelTaskRequest) {
 func NewCancelTaskResponse() (response *CancelTaskResponse) {
     response = &CancelTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CancelTask
@@ -173,8 +175,9 @@ func NewCreateDataEngineRequest() (request *CreateDataEngineRequest) {
 func NewCreateDataEngineResponse() (response *CreateDataEngineResponse) {
     response = &CreateDataEngineResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDataEngine
@@ -301,8 +304,9 @@ func NewCreateInternalTableRequest() (request *CreateInternalTableRequest) {
 func NewCreateInternalTableResponse() (response *CreateInternalTableResponse) {
     response = &CreateInternalTableResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateInternalTable
@@ -359,8 +363,9 @@ func NewCreateResultDownloadRequest() (request *CreateResultDownloadRequest) {
 func NewCreateResultDownloadResponse() (response *CreateResultDownloadResponse) {
     response = &CreateResultDownloadResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateResultDownload
@@ -409,8 +414,9 @@ func NewCreateSparkAppRequest() (request *CreateSparkAppRequest) {
 func NewCreateSparkAppResponse() (response *CreateSparkAppResponse) {
     response = &CreateSparkAppResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSparkApp
@@ -459,8 +465,9 @@ func NewCreateSparkAppTaskRequest() (request *CreateSparkAppTaskRequest) {
 func NewCreateSparkAppTaskResponse() (response *CreateSparkAppTaskResponse) {
     response = &CreateSparkAppTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSparkAppTask
@@ -515,8 +522,9 @@ func NewCreateSparkSessionBatchSQLRequest() (request *CreateSparkSessionBatchSQL
 func NewCreateSparkSessionBatchSQLResponse() (response *CreateSparkSessionBatchSQLResponse) {
     response = &CreateSparkSessionBatchSQLResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSparkSessionBatchSQL
@@ -577,8 +585,9 @@ func NewCreateTaskRequest() (request *CreateTaskRequest) {
 func NewCreateTaskResponse() (response *CreateTaskResponse) {
     response = &CreateTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTask
@@ -645,8 +654,9 @@ func NewCreateTasksRequest() (request *CreateTasksRequest) {
 func NewCreateTasksResponse() (response *CreateTasksResponse) {
     response = &CreateTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTasks
@@ -717,8 +727,9 @@ func NewDeleteSparkAppRequest() (request *DeleteSparkAppRequest) {
 func NewDeleteSparkAppResponse() (response *DeleteSparkAppResponse) {
     response = &DeleteSparkAppResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSparkApp
@@ -789,8 +800,9 @@ func NewDescribeEngineUsageInfoRequest() (request *DescribeEngineUsageInfoReques
 func NewDescribeEngineUsageInfoResponse() (response *DescribeEngineUsageInfoResponse) {
     response = &DescribeEngineUsageInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeEngineUsageInfo
@@ -841,8 +853,9 @@ func NewDescribeForbiddenTableProRequest() (request *DescribeForbiddenTableProRe
 func NewDescribeForbiddenTableProResponse() (response *DescribeForbiddenTableProResponse) {
     response = &DescribeForbiddenTableProResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeForbiddenTablePro
@@ -897,8 +910,9 @@ func NewDescribeLakeFsDirSummaryRequest() (request *DescribeLakeFsDirSummaryRequ
 func NewDescribeLakeFsDirSummaryResponse() (response *DescribeLakeFsDirSummaryResponse) {
     response = &DescribeLakeFsDirSummaryResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeLakeFsDirSummary
@@ -959,8 +973,9 @@ func NewDescribeLakeFsInfoRequest() (request *DescribeLakeFsInfoRequest) {
 func NewDescribeLakeFsInfoResponse() (response *DescribeLakeFsInfoResponse) {
     response = &DescribeLakeFsInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeLakeFsInfo
@@ -1023,8 +1038,9 @@ func NewDescribeResultDownloadRequest() (request *DescribeResultDownloadRequest)
 func NewDescribeResultDownloadResponse() (response *DescribeResultDownloadResponse) {
     response = &DescribeResultDownloadResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeResultDownload
@@ -1071,8 +1087,9 @@ func NewDescribeSparkAppJobRequest() (request *DescribeSparkAppJobRequest) {
 func NewDescribeSparkAppJobResponse() (response *DescribeSparkAppJobResponse) {
     response = &DescribeSparkAppJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSparkAppJob
@@ -1123,8 +1140,9 @@ func NewDescribeSparkAppJobsRequest() (request *DescribeSparkAppJobsRequest) {
 func NewDescribeSparkAppJobsResponse() (response *DescribeSparkAppJobsResponse) {
     response = &DescribeSparkAppJobsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSparkAppJobs
@@ -1179,8 +1197,9 @@ func NewDescribeSparkAppTasksRequest() (request *DescribeSparkAppTasksRequest) {
 func NewDescribeSparkAppTasksResponse() (response *DescribeSparkAppTasksResponse) {
     response = &DescribeSparkAppTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSparkAppTasks
@@ -1227,8 +1246,9 @@ func NewDescribeSparkSessionBatchSqlLogRequest() (request *DescribeSparkSessionB
 func NewDescribeSparkSessionBatchSqlLogResponse() (response *DescribeSparkSessionBatchSqlLogResponse) {
     response = &DescribeSparkSessionBatchSqlLogResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSparkSessionBatchSqlLog
@@ -1283,8 +1303,9 @@ func NewDescribeTaskResultRequest() (request *DescribeTaskResultRequest) {
 func NewDescribeTaskResultResponse() (response *DescribeTaskResultResponse) {
     response = &DescribeTaskResultResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTaskResult
@@ -1341,8 +1362,9 @@ func NewDescribeTasksRequest() (request *DescribeTasksRequest) {
 func NewDescribeTasksResponse() (response *DescribeTasksResponse) {
     response = &DescribeTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTasks
@@ -1395,8 +1417,9 @@ func NewDescribeUserRolesRequest() (request *DescribeUserRolesRequest) {
 func NewDescribeUserRolesResponse() (response *DescribeUserRolesResponse) {
     response = &DescribeUserRolesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUserRoles
@@ -1443,8 +1466,9 @@ func NewGenerateCreateMangedTableSqlRequest() (request *GenerateCreateMangedTabl
 func NewGenerateCreateMangedTableSqlResponse() (response *GenerateCreateMangedTableSqlResponse) {
     response = &GenerateCreateMangedTableSqlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GenerateCreateMangedTableSql
@@ -1501,8 +1525,9 @@ func NewModifyGovernEventRuleRequest() (request *ModifyGovernEventRuleRequest) {
 func NewModifyGovernEventRuleResponse() (response *ModifyGovernEventRuleResponse) {
     response = &ModifyGovernEventRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyGovernEventRule
@@ -1567,8 +1592,9 @@ func NewModifySparkAppRequest() (request *ModifySparkAppRequest) {
 func NewModifySparkAppResponse() (response *ModifySparkAppResponse) {
     response = &ModifySparkAppResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySparkApp
@@ -1617,8 +1643,9 @@ func NewModifySparkAppBatchRequest() (request *ModifySparkAppBatchRequest) {
 func NewModifySparkAppBatchResponse() (response *ModifySparkAppBatchResponse) {
     response = &ModifySparkAppBatchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySparkAppBatch
@@ -1673,8 +1700,9 @@ func NewSuspendResumeDataEngineRequest() (request *SuspendResumeDataEngineReques
 func NewSuspendResumeDataEngineResponse() (response *SuspendResumeDataEngineResponse) {
     response = &SuspendResumeDataEngineResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SuspendResumeDataEngine
@@ -1727,8 +1755,9 @@ func NewSwitchDataEngineRequest() (request *SwitchDataEngineRequest) {
 func NewSwitchDataEngineResponse() (response *SwitchDataEngineResponse) {
     response = &SwitchDataEngineResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SwitchDataEngine
@@ -1781,8 +1810,9 @@ func NewUpdateRowFilterRequest() (request *UpdateRowFilterRequest) {
 func NewUpdateRowFilterResponse() (response *UpdateRowFilterResponse) {
     response = &UpdateRowFilterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateRowFilter

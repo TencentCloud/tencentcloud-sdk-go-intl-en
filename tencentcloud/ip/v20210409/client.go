@@ -59,8 +59,9 @@ func NewAllocateCustomerCreditRequest() (request *AllocateCustomerCreditRequest)
 func NewAllocateCustomerCreditResponse() (response *AllocateCustomerCreditResponse) {
     response = &AllocateCustomerCreditResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AllocateCustomerCredit
@@ -123,8 +124,9 @@ func NewCreateAccountRequest() (request *CreateAccountRequest) {
 func NewCreateAccountResponse() (response *CreateAccountResponse) {
     response = &CreateAccountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateAccount
@@ -225,8 +227,9 @@ func NewGetCountryCodesRequest() (request *GetCountryCodesRequest) {
 func NewGetCountryCodesResponse() (response *GetCountryCodesResponse) {
     response = &GetCountryCodesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetCountryCodes
@@ -273,8 +276,9 @@ func NewQueryCreditAllocationHistoryRequest() (request *QueryCreditAllocationHis
 func NewQueryCreditAllocationHistoryResponse() (response *QueryCreditAllocationHistoryResponse) {
     response = &QueryCreditAllocationHistoryResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // QueryCreditAllocationHistory
@@ -321,8 +325,9 @@ func NewQueryCustomersCreditRequest() (request *QueryCustomersCreditRequest) {
 func NewQueryCustomersCreditResponse() (response *QueryCustomersCreditResponse) {
     response = &QueryCustomersCreditResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // QueryCustomersCredit
@@ -369,8 +374,9 @@ func NewQueryPartnerCreditRequest() (request *QueryPartnerCreditRequest) {
 func NewQueryPartnerCreditResponse() (response *QueryPartnerCreditResponse) {
     response = &QueryPartnerCreditResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // QueryPartnerCredit

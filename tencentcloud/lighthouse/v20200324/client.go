@@ -59,8 +59,9 @@ func NewApplyInstanceSnapshotRequest() (request *ApplyInstanceSnapshotRequest) {
 func NewApplyInstanceSnapshotResponse() (response *ApplyInstanceSnapshotResponse) {
     response = &ApplyInstanceSnapshotResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ApplyInstanceSnapshot
@@ -157,8 +158,9 @@ func NewAssociateInstancesKeyPairsRequest() (request *AssociateInstancesKeyPairs
 func NewAssociateInstancesKeyPairsResponse() (response *AssociateInstancesKeyPairsResponse) {
     response = &AssociateInstancesKeyPairsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AssociateInstancesKeyPairs
@@ -271,8 +273,9 @@ func NewAttachCcnRequest() (request *AttachCcnRequest) {
 func NewAttachCcnResponse() (response *AttachCcnResponse) {
     response = &AttachCcnResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AttachCcn
@@ -331,8 +334,9 @@ func NewAttachDisksRequest() (request *AttachDisksRequest) {
 func NewAttachDisksResponse() (response *AttachDisksResponse) {
     response = &AttachDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AttachDisks
@@ -413,8 +417,9 @@ func NewCreateBlueprintRequest() (request *CreateBlueprintRequest) {
 func NewCreateBlueprintResponse() (response *CreateBlueprintResponse) {
     response = &CreateBlueprintResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateBlueprint
@@ -481,8 +486,9 @@ func NewCreateFirewallRulesRequest() (request *CreateFirewallRulesRequest) {
 func NewCreateFirewallRulesResponse() (response *CreateFirewallRulesResponse) {
     response = &CreateFirewallRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateFirewallRules
@@ -599,8 +605,9 @@ func NewCreateInstanceSnapshotRequest() (request *CreateInstanceSnapshotRequest)
 func NewCreateInstanceSnapshotResponse() (response *CreateInstanceSnapshotResponse) {
     response = &CreateInstanceSnapshotResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateInstanceSnapshot
@@ -677,8 +684,9 @@ func NewCreateInstancesRequest() (request *CreateInstancesRequest) {
 func NewCreateInstancesResponse() (response *CreateInstancesResponse) {
     response = &CreateInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateInstances
@@ -783,8 +791,9 @@ func NewCreateKeyPairRequest() (request *CreateKeyPairRequest) {
 func NewCreateKeyPairResponse() (response *CreateKeyPairResponse) {
     response = &CreateKeyPairResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateKeyPair
@@ -843,8 +852,9 @@ func NewDeleteBlueprintsRequest() (request *DeleteBlueprintsRequest) {
 func NewDeleteBlueprintsResponse() (response *DeleteBlueprintsResponse) {
     response = &DeleteBlueprintsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteBlueprints
@@ -919,8 +929,9 @@ func NewDeleteFirewallRulesRequest() (request *DeleteFirewallRulesRequest) {
 func NewDeleteFirewallRulesResponse() (response *DeleteFirewallRulesResponse) {
     response = &DeleteFirewallRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteFirewallRules
@@ -1027,8 +1038,9 @@ func NewDeleteKeyPairsRequest() (request *DeleteKeyPairsRequest) {
 func NewDeleteKeyPairsResponse() (response *DeleteKeyPairsResponse) {
     response = &DeleteKeyPairsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteKeyPairs
@@ -1087,8 +1099,9 @@ func NewDeleteSnapshotsRequest() (request *DeleteSnapshotsRequest) {
 func NewDeleteSnapshotsResponse() (response *DeleteSnapshotsResponse) {
     response = &DeleteSnapshotsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSnapshots
@@ -1159,8 +1172,9 @@ func NewDescribeAllScenesRequest() (request *DescribeAllScenesRequest) {
 func NewDescribeAllScenesResponse() (response *DescribeAllScenesResponse) {
     response = &DescribeAllScenesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAllScenes
@@ -1207,8 +1221,9 @@ func NewDescribeBlueprintInstancesRequest() (request *DescribeBlueprintInstances
 func NewDescribeBlueprintInstancesResponse() (response *DescribeBlueprintInstancesResponse) {
     response = &DescribeBlueprintInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBlueprintInstances
@@ -1273,8 +1288,9 @@ func NewDescribeBlueprintsRequest() (request *DescribeBlueprintsRequest) {
 func NewDescribeBlueprintsResponse() (response *DescribeBlueprintsResponse) {
     response = &DescribeBlueprintsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBlueprints
@@ -1363,8 +1379,9 @@ func NewDescribeBundleDiscountRequest() (request *DescribeBundleDiscountRequest)
 func NewDescribeBundleDiscountResponse() (response *DescribeBundleDiscountResponse) {
     response = &DescribeBundleDiscountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBundleDiscount
@@ -1425,8 +1442,9 @@ func NewDescribeBundlesRequest() (request *DescribeBundlesRequest) {
 func NewDescribeBundlesResponse() (response *DescribeBundlesResponse) {
     response = &DescribeBundlesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBundles
@@ -1517,8 +1535,9 @@ func NewDescribeCcnAttachedInstancesRequest() (request *DescribeCcnAttachedInsta
 func NewDescribeCcnAttachedInstancesResponse() (response *DescribeCcnAttachedInstancesResponse) {
     response = &DescribeCcnAttachedInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCcnAttachedInstances
@@ -1577,8 +1596,9 @@ func NewDescribeDiskConfigsRequest() (request *DescribeDiskConfigsRequest) {
 func NewDescribeDiskConfigsResponse() (response *DescribeDiskConfigsResponse) {
     response = &DescribeDiskConfigsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDiskConfigs
@@ -1633,8 +1653,9 @@ func NewDescribeDiskDiscountRequest() (request *DescribeDiskDiscountRequest) {
 func NewDescribeDiskDiscountResponse() (response *DescribeDiskDiscountResponse) {
     response = &DescribeDiskDiscountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDiskDiscount
@@ -1693,8 +1714,9 @@ func NewDescribeDisksRequest() (request *DescribeDisksRequest) {
 func NewDescribeDisksResponse() (response *DescribeDisksResponse) {
     response = &DescribeDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDisks
@@ -1783,8 +1805,9 @@ func NewDescribeDisksDeniedActionsRequest() (request *DescribeDisksDeniedActions
 func NewDescribeDisksDeniedActionsResponse() (response *DescribeDisksDeniedActionsResponse) {
     response = &DescribeDisksDeniedActionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDisksDeniedActions
@@ -1841,8 +1864,9 @@ func NewDescribeDisksReturnableRequest() (request *DescribeDisksReturnableReques
 func NewDescribeDisksReturnableResponse() (response *DescribeDisksReturnableResponse) {
     response = &DescribeDisksReturnableResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDisksReturnable
@@ -1895,8 +1919,9 @@ func NewDescribeFirewallRulesRequest() (request *DescribeFirewallRulesRequest) {
 func NewDescribeFirewallRulesResponse() (response *DescribeFirewallRulesResponse) {
     response = &DescribeFirewallRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeFirewallRules
@@ -1955,8 +1980,9 @@ func NewDescribeFirewallRulesTemplateRequest() (request *DescribeFirewallRulesTe
 func NewDescribeFirewallRulesTemplateResponse() (response *DescribeFirewallRulesTemplateResponse) {
     response = &DescribeFirewallRulesTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeFirewallRulesTemplate
@@ -2003,8 +2029,9 @@ func NewDescribeGeneralResourceQuotasRequest() (request *DescribeGeneralResource
 func NewDescribeGeneralResourceQuotasResponse() (response *DescribeGeneralResourceQuotasResponse) {
     response = &DescribeGeneralResourceQuotasResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeGeneralResourceQuotas
@@ -2055,8 +2082,9 @@ func NewDescribeInstanceLoginKeyPairAttributeRequest() (request *DescribeInstanc
 func NewDescribeInstanceLoginKeyPairAttributeResponse() (response *DescribeInstanceLoginKeyPairAttributeResponse) {
     response = &DescribeInstanceLoginKeyPairAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceLoginKeyPairAttribute
@@ -2105,8 +2133,9 @@ func NewDescribeInstanceVncUrlRequest() (request *DescribeInstanceVncUrlRequest)
 func NewDescribeInstanceVncUrlResponse() (response *DescribeInstanceVncUrlResponse) {
     response = &DescribeInstanceVncUrlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceVncUrl
@@ -2221,8 +2250,9 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
 func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
     response = &DescribeInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstances
@@ -2331,8 +2361,9 @@ func NewDescribeInstancesDeniedActionsRequest() (request *DescribeInstancesDenie
 func NewDescribeInstancesDeniedActionsResponse() (response *DescribeInstancesDeniedActionsResponse) {
     response = &DescribeInstancesDeniedActionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstancesDeniedActions
@@ -2397,8 +2428,9 @@ func NewDescribeInstancesDiskNumRequest() (request *DescribeInstancesDiskNumRequ
 func NewDescribeInstancesDiskNumResponse() (response *DescribeInstancesDiskNumResponse) {
     response = &DescribeInstancesDiskNumResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstancesDiskNum
@@ -2453,8 +2485,9 @@ func NewDescribeInstancesReturnableRequest() (request *DescribeInstancesReturnab
 func NewDescribeInstancesReturnableResponse() (response *DescribeInstancesReturnableResponse) {
     response = &DescribeInstancesReturnableResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstancesReturnable
@@ -2523,8 +2556,9 @@ func NewDescribeInstancesTrafficPackagesRequest() (request *DescribeInstancesTra
 func NewDescribeInstancesTrafficPackagesResponse() (response *DescribeInstancesTrafficPackagesResponse) {
     response = &DescribeInstancesTrafficPackagesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstancesTrafficPackages
@@ -2587,8 +2621,9 @@ func NewDescribeKeyPairsRequest() (request *DescribeKeyPairsRequest) {
 func NewDescribeKeyPairsResponse() (response *DescribeKeyPairsResponse) {
     response = &DescribeKeyPairsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeKeyPairs
@@ -2651,8 +2686,9 @@ func NewDescribeModifyInstanceBundlesRequest() (request *DescribeModifyInstanceB
 func NewDescribeModifyInstanceBundlesResponse() (response *DescribeModifyInstanceBundlesResponse) {
     response = &DescribeModifyInstanceBundlesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeModifyInstanceBundles
@@ -2753,8 +2789,9 @@ func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
 func NewDescribeRegionsResponse() (response *DescribeRegionsResponse) {
     response = &DescribeRegionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRegions
@@ -2801,8 +2838,9 @@ func NewDescribeResetInstanceBlueprintsRequest() (request *DescribeResetInstance
 func NewDescribeResetInstanceBlueprintsResponse() (response *DescribeResetInstanceBlueprintsResponse) {
     response = &DescribeResetInstanceBlueprintsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeResetInstanceBlueprints
@@ -2885,8 +2923,9 @@ func NewDescribeScenesRequest() (request *DescribeScenesRequest) {
 func NewDescribeScenesResponse() (response *DescribeScenesResponse) {
     response = &DescribeScenesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeScenes
@@ -2945,8 +2984,9 @@ func NewDescribeSnapshotsRequest() (request *DescribeSnapshotsRequest) {
 func NewDescribeSnapshotsResponse() (response *DescribeSnapshotsResponse) {
     response = &DescribeSnapshotsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSnapshots
@@ -3025,8 +3065,9 @@ func NewDescribeSnapshotsDeniedActionsRequest() (request *DescribeSnapshotsDenie
 func NewDescribeSnapshotsDeniedActionsResponse() (response *DescribeSnapshotsDeniedActionsResponse) {
     response = &DescribeSnapshotsDeniedActionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSnapshotsDeniedActions
@@ -3083,8 +3124,9 @@ func NewDescribeZonesRequest() (request *DescribeZonesRequest) {
 func NewDescribeZonesResponse() (response *DescribeZonesResponse) {
     response = &DescribeZonesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeZones
@@ -3137,8 +3179,9 @@ func NewDetachCcnRequest() (request *DetachCcnRequest) {
 func NewDetachCcnResponse() (response *DetachCcnResponse) {
     response = &DetachCcnResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DetachCcn
@@ -3193,8 +3236,9 @@ func NewDetachDisksRequest() (request *DetachDisksRequest) {
 func NewDetachDisksResponse() (response *DetachDisksResponse) {
     response = &DetachDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DetachDisks
@@ -3257,8 +3301,9 @@ func NewDisassociateInstancesKeyPairsRequest() (request *DisassociateInstancesKe
 func NewDisassociateInstancesKeyPairsResponse() (response *DisassociateInstancesKeyPairsResponse) {
     response = &DisassociateInstancesKeyPairsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DisassociateInstancesKeyPairs
@@ -3359,8 +3404,9 @@ func NewImportKeyPairRequest() (request *ImportKeyPairRequest) {
 func NewImportKeyPairResponse() (response *ImportKeyPairResponse) {
     response = &ImportKeyPairResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ImportKeyPair
@@ -3425,8 +3471,9 @@ func NewInquirePriceCreateBlueprintRequest() (request *InquirePriceCreateBluepri
 func NewInquirePriceCreateBlueprintResponse() (response *InquirePriceCreateBlueprintResponse) {
     response = &InquirePriceCreateBlueprintResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquirePriceCreateBlueprint
@@ -3483,8 +3530,9 @@ func NewInquirePriceCreateDisksRequest() (request *InquirePriceCreateDisksReques
 func NewInquirePriceCreateDisksResponse() (response *InquirePriceCreateDisksResponse) {
     response = &InquirePriceCreateDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquirePriceCreateDisks
@@ -3541,8 +3589,9 @@ func NewInquirePriceCreateInstancesRequest() (request *InquirePriceCreateInstanc
 func NewInquirePriceCreateInstancesResponse() (response *InquirePriceCreateInstancesResponse) {
     response = &InquirePriceCreateInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquirePriceCreateInstances
@@ -3611,8 +3660,9 @@ func NewInquirePriceRenewDisksRequest() (request *InquirePriceRenewDisksRequest)
 func NewInquirePriceRenewDisksResponse() (response *InquirePriceRenewDisksResponse) {
     response = &InquirePriceRenewDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquirePriceRenewDisks
@@ -3671,8 +3721,9 @@ func NewInquirePriceRenewInstancesRequest() (request *InquirePriceRenewInstances
 func NewInquirePriceRenewInstancesResponse() (response *InquirePriceRenewInstancesResponse) {
     response = &InquirePriceRenewInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquirePriceRenewInstances
@@ -3737,8 +3788,9 @@ func NewIsolateInstancesRequest() (request *IsolateInstancesRequest) {
 func NewIsolateInstancesResponse() (response *IsolateInstancesResponse) {
     response = &IsolateInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // IsolateInstances
@@ -3829,8 +3881,9 @@ func NewModifyBlueprintAttributeRequest() (request *ModifyBlueprintAttributeRequ
 func NewModifyBlueprintAttributeResponse() (response *ModifyBlueprintAttributeResponse) {
     response = &ModifyBlueprintAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyBlueprintAttribute
@@ -3897,8 +3950,9 @@ func NewModifyDisksAttributeRequest() (request *ModifyDisksAttributeRequest) {
 func NewModifyDisksAttributeResponse() (response *ModifyDisksAttributeResponse) {
     response = &ModifyDisksAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDisksAttribute
@@ -3959,8 +4013,9 @@ func NewModifyDisksRenewFlagRequest() (request *ModifyDisksRenewFlagRequest) {
 func NewModifyDisksRenewFlagResponse() (response *ModifyDisksRenewFlagResponse) {
     response = &ModifyDisksRenewFlagResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDisksRenewFlag
@@ -4019,8 +4074,9 @@ func NewModifyFirewallRuleDescriptionRequest() (request *ModifyFirewallRuleDescr
 func NewModifyFirewallRuleDescriptionResponse() (response *ModifyFirewallRuleDescriptionResponse) {
     response = &ModifyFirewallRuleDescriptionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyFirewallRuleDescription
@@ -4117,8 +4173,9 @@ func NewModifyFirewallRulesRequest() (request *ModifyFirewallRulesRequest) {
 func NewModifyFirewallRulesResponse() (response *ModifyFirewallRulesResponse) {
     response = &ModifyFirewallRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyFirewallRules
@@ -4233,8 +4290,9 @@ func NewModifyInstancesAttributeRequest() (request *ModifyInstancesAttributeRequ
 func NewModifyInstancesAttributeResponse() (response *ModifyInstancesAttributeResponse) {
     response = &ModifyInstancesAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyInstancesAttribute
@@ -4325,8 +4383,9 @@ func NewModifyInstancesBundleRequest() (request *ModifyInstancesBundleRequest) {
 func NewModifyInstancesBundleResponse() (response *ModifyInstancesBundleResponse) {
     response = &ModifyInstancesBundleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyInstancesBundle
@@ -4413,8 +4472,9 @@ func NewModifyInstancesLoginKeyPairAttributeRequest() (request *ModifyInstancesL
 func NewModifyInstancesLoginKeyPairAttributeResponse() (response *ModifyInstancesLoginKeyPairAttributeResponse) {
     response = &ModifyInstancesLoginKeyPairAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyInstancesLoginKeyPairAttribute
@@ -4483,8 +4543,9 @@ func NewModifyInstancesRenewFlagRequest() (request *ModifyInstancesRenewFlagRequ
 func NewModifyInstancesRenewFlagResponse() (response *ModifyInstancesRenewFlagResponse) {
     response = &ModifyInstancesRenewFlagResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyInstancesRenewFlag
@@ -4563,8 +4624,9 @@ func NewModifySnapshotAttributeRequest() (request *ModifySnapshotAttributeReques
 func NewModifySnapshotAttributeResponse() (response *ModifySnapshotAttributeResponse) {
     response = &ModifySnapshotAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySnapshotAttribute
@@ -4619,8 +4681,9 @@ func NewRebootInstancesRequest() (request *RebootInstancesRequest) {
 func NewRebootInstancesResponse() (response *RebootInstancesResponse) {
     response = &RebootInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RebootInstances
@@ -4715,8 +4778,9 @@ func NewResetAttachCcnRequest() (request *ResetAttachCcnRequest) {
 func NewResetAttachCcnResponse() (response *ResetAttachCcnResponse) {
     response = &ResetAttachCcnResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetAttachCcn
@@ -4775,8 +4839,9 @@ func NewResetInstanceRequest() (request *ResetInstanceRequest) {
 func NewResetInstanceResponse() (response *ResetInstanceResponse) {
     response = &ResetInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetInstance
@@ -4889,8 +4954,9 @@ func NewResetInstancesPasswordRequest() (request *ResetInstancesPasswordRequest)
 func NewResetInstancesPasswordResponse() (response *ResetInstancesPasswordResponse) {
     response = &ResetInstancesPasswordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetInstancesPassword
@@ -4993,8 +5059,9 @@ func NewStartInstancesRequest() (request *StartInstancesRequest) {
 func NewStartInstancesResponse() (response *StartInstancesResponse) {
     response = &StartInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartInstances
@@ -5087,8 +5154,9 @@ func NewStopInstancesRequest() (request *StopInstancesRequest) {
 func NewStopInstancesResponse() (response *StopInstancesResponse) {
     response = &StopInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopInstances
@@ -5177,8 +5245,9 @@ func NewTerminateDisksRequest() (request *TerminateDisksRequest) {
 func NewTerminateDisksResponse() (response *TerminateDisksResponse) {
     response = &TerminateDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TerminateDisks
@@ -5237,8 +5306,9 @@ func NewTerminateInstancesRequest() (request *TerminateInstancesRequest) {
 func NewTerminateInstancesResponse() (response *TerminateInstancesResponse) {
     response = &TerminateInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TerminateInstances

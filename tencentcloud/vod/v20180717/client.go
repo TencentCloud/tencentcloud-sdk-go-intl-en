@@ -59,8 +59,9 @@ func NewApplyUploadRequest() (request *ApplyUploadRequest) {
 func NewApplyUploadResponse() (response *ApplyUploadResponse) {
     response = &ApplyUploadResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ApplyUpload
@@ -125,8 +126,9 @@ func NewAttachMediaSubtitlesRequest() (request *AttachMediaSubtitlesRequest) {
 func NewAttachMediaSubtitlesResponse() (response *AttachMediaSubtitlesResponse) {
     response = &AttachMediaSubtitlesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AttachMediaSubtitles
@@ -181,8 +183,9 @@ func NewCloneCDNDomainRequest() (request *CloneCDNDomainRequest) {
 func NewCloneCDNDomainResponse() (response *CloneCDNDomainResponse) {
     response = &CloneCDNDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CloneCDNDomain
@@ -237,8 +240,9 @@ func NewCommitUploadRequest() (request *CommitUploadRequest) {
 func NewCommitUploadResponse() (response *CommitUploadResponse) {
     response = &CommitUploadResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CommitUpload
@@ -293,8 +297,9 @@ func NewComposeMediaRequest() (request *ComposeMediaRequest) {
 func NewComposeMediaResponse() (response *ComposeMediaResponse) {
     response = &ComposeMediaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ComposeMedia
@@ -405,8 +410,9 @@ func NewConfirmEventsRequest() (request *ConfirmEventsRequest) {
 func NewConfirmEventsResponse() (response *ConfirmEventsResponse) {
     response = &ConfirmEventsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ConfirmEvents
@@ -469,8 +475,9 @@ func NewCreateAIAnalysisTemplateRequest() (request *CreateAIAnalysisTemplateRequ
 func NewCreateAIAnalysisTemplateResponse() (response *CreateAIAnalysisTemplateResponse) {
     response = &CreateAIAnalysisTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateAIAnalysisTemplate
@@ -539,8 +546,9 @@ func NewCreateAIRecognitionTemplateRequest() (request *CreateAIRecognitionTempla
 func NewCreateAIRecognitionTemplateResponse() (response *CreateAIRecognitionTemplateResponse) {
     response = &CreateAIRecognitionTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateAIRecognitionTemplate
@@ -617,8 +625,9 @@ func NewCreateAdaptiveDynamicStreamingTemplateRequest() (request *CreateAdaptive
 func NewCreateAdaptiveDynamicStreamingTemplateResponse() (response *CreateAdaptiveDynamicStreamingTemplateResponse) {
     response = &CreateAdaptiveDynamicStreamingTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateAdaptiveDynamicStreamingTemplate
@@ -703,8 +712,9 @@ func NewCreateAnimatedGraphicsTemplateRequest() (request *CreateAnimatedGraphics
 func NewCreateAnimatedGraphicsTemplateResponse() (response *CreateAnimatedGraphicsTemplateResponse) {
     response = &CreateAnimatedGraphicsTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateAnimatedGraphicsTemplate
@@ -775,8 +785,9 @@ func NewCreateCDNDomainRequest() (request *CreateCDNDomainRequest) {
 func NewCreateCDNDomainResponse() (response *CreateCDNDomainResponse) {
     response = &CreateCDNDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCDNDomain
@@ -833,8 +844,9 @@ func NewCreateClassRequest() (request *CreateClassRequest) {
 func NewCreateClassResponse() (response *CreateClassResponse) {
     response = &CreateClassResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateClass
@@ -911,8 +923,9 @@ func NewCreateContentReviewTemplateRequest() (request *CreateContentReviewTempla
 func NewCreateContentReviewTemplateResponse() (response *CreateContentReviewTemplateResponse) {
     response = &CreateContentReviewTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateContentReviewTemplate
@@ -989,8 +1002,9 @@ func NewCreateImageProcessingTemplateRequest() (request *CreateImageProcessingTe
 func NewCreateImageProcessingTemplateResponse() (response *CreateImageProcessingTemplateResponse) {
     response = &CreateImageProcessingTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateImageProcessingTemplate
@@ -1057,8 +1071,9 @@ func NewCreateImageSpriteTemplateRequest() (request *CreateImageSpriteTemplateRe
 func NewCreateImageSpriteTemplateResponse() (response *CreateImageSpriteTemplateResponse) {
     response = &CreateImageSpriteTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateImageSpriteTemplate
@@ -1129,8 +1144,9 @@ func NewCreatePersonSampleRequest() (request *CreatePersonSampleRequest) {
 func NewCreatePersonSampleResponse() (response *CreatePersonSampleResponse) {
     response = &CreatePersonSampleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreatePersonSample
@@ -1185,8 +1201,9 @@ func NewCreateProcedureTemplateRequest() (request *CreateProcedureTemplateReques
 func NewCreateProcedureTemplateResponse() (response *CreateProcedureTemplateResponse) {
     response = &CreateProcedureTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateProcedureTemplate
@@ -1247,8 +1264,9 @@ func NewCreateRebuildMediaTemplateRequest() (request *CreateRebuildMediaTemplate
 func NewCreateRebuildMediaTemplateResponse() (response *CreateRebuildMediaTemplateResponse) {
     response = &CreateRebuildMediaTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRebuildMediaTemplate
@@ -1297,8 +1315,9 @@ func NewCreateReviewTemplateRequest() (request *CreateReviewTemplateRequest) {
 func NewCreateReviewTemplateResponse() (response *CreateReviewTemplateResponse) {
     response = &CreateReviewTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateReviewTemplate
@@ -1369,8 +1388,9 @@ func NewCreateRoundPlayRequest() (request *CreateRoundPlayRequest) {
 func NewCreateRoundPlayResponse() (response *CreateRoundPlayResponse) {
     response = &CreateRoundPlayResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRoundPlay
@@ -1427,8 +1447,9 @@ func NewCreateSampleSnapshotTemplateRequest() (request *CreateSampleSnapshotTemp
 func NewCreateSampleSnapshotTemplateResponse() (response *CreateSampleSnapshotTemplateResponse) {
     response = &CreateSampleSnapshotTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSampleSnapshotTemplate
@@ -1497,8 +1518,9 @@ func NewCreateSnapshotByTimeOffsetTemplateRequest() (request *CreateSnapshotByTi
 func NewCreateSnapshotByTimeOffsetTemplateResponse() (response *CreateSnapshotByTimeOffsetTemplateResponse) {
     response = &CreateSnapshotByTimeOffsetTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSnapshotByTimeOffsetTemplate
@@ -1565,8 +1587,9 @@ func NewCreateStorageRegionRequest() (request *CreateStorageRegionRequest) {
 func NewCreateStorageRegionResponse() (response *CreateStorageRegionResponse) {
     response = &CreateStorageRegionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateStorageRegion
@@ -1635,8 +1658,9 @@ func NewCreateSubAppIdRequest() (request *CreateSubAppIdRequest) {
 func NewCreateSubAppIdResponse() (response *CreateSubAppIdResponse) {
     response = &CreateSubAppIdResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSubAppId
@@ -1693,8 +1717,9 @@ func NewCreateSuperPlayerConfigRequest() (request *CreateSuperPlayerConfigReques
 func NewCreateSuperPlayerConfigResponse() (response *CreateSuperPlayerConfigResponse) {
     response = &CreateSuperPlayerConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSuperPlayerConfig
@@ -1755,8 +1780,9 @@ func NewCreateTranscodeTemplateRequest() (request *CreateTranscodeTemplateReques
 func NewCreateTranscodeTemplateResponse() (response *CreateTranscodeTemplateResponse) {
     response = &CreateTranscodeTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTranscodeTemplate
@@ -1859,8 +1885,9 @@ func NewCreateVodDomainRequest() (request *CreateVodDomainRequest) {
 func NewCreateVodDomainResponse() (response *CreateVodDomainResponse) {
     response = &CreateVodDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateVodDomain
@@ -1921,8 +1948,9 @@ func NewCreateWatermarkTemplateRequest() (request *CreateWatermarkTemplateReques
 func NewCreateWatermarkTemplateResponse() (response *CreateWatermarkTemplateResponse) {
     response = &CreateWatermarkTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateWatermarkTemplate
@@ -2013,8 +2041,9 @@ func NewCreateWordSamplesRequest() (request *CreateWordSamplesRequest) {
 func NewCreateWordSamplesResponse() (response *CreateWordSamplesResponse) {
     response = &CreateWordSamplesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateWordSamples
@@ -2065,8 +2094,9 @@ func NewDeleteAIAnalysisTemplateRequest() (request *DeleteAIAnalysisTemplateRequ
 func NewDeleteAIAnalysisTemplateResponse() (response *DeleteAIAnalysisTemplateResponse) {
     response = &DeleteAIAnalysisTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteAIAnalysisTemplate
@@ -2131,8 +2161,9 @@ func NewDeleteAIRecognitionTemplateRequest() (request *DeleteAIRecognitionTempla
 func NewDeleteAIRecognitionTemplateResponse() (response *DeleteAIRecognitionTemplateResponse) {
     response = &DeleteAIRecognitionTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteAIRecognitionTemplate
@@ -2189,8 +2220,9 @@ func NewDeleteAdaptiveDynamicStreamingTemplateRequest() (request *DeleteAdaptive
 func NewDeleteAdaptiveDynamicStreamingTemplateResponse() (response *DeleteAdaptiveDynamicStreamingTemplateResponse) {
     response = &DeleteAdaptiveDynamicStreamingTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteAdaptiveDynamicStreamingTemplate
@@ -2243,8 +2275,9 @@ func NewDeleteAnimatedGraphicsTemplateRequest() (request *DeleteAnimatedGraphics
 func NewDeleteAnimatedGraphicsTemplateResponse() (response *DeleteAnimatedGraphicsTemplateResponse) {
     response = &DeleteAnimatedGraphicsTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteAnimatedGraphicsTemplate
@@ -2297,8 +2330,9 @@ func NewDeleteCDNDomainRequest() (request *DeleteCDNDomainRequest) {
 func NewDeleteCDNDomainResponse() (response *DeleteCDNDomainResponse) {
     response = &DeleteCDNDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCDNDomain
@@ -2349,8 +2383,9 @@ func NewDeleteClassRequest() (request *DeleteClassRequest) {
 func NewDeleteClassResponse() (response *DeleteClassResponse) {
     response = &DeleteClassResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteClass
@@ -2409,8 +2444,9 @@ func NewDeleteContentReviewTemplateRequest() (request *DeleteContentReviewTempla
 func NewDeleteContentReviewTemplateResponse() (response *DeleteContentReviewTemplateResponse) {
     response = &DeleteContentReviewTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteContentReviewTemplate
@@ -2471,8 +2507,9 @@ func NewDeleteImageProcessingTemplateRequest() (request *DeleteImageProcessingTe
 func NewDeleteImageProcessingTemplateResponse() (response *DeleteImageProcessingTemplateResponse) {
     response = &DeleteImageProcessingTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteImageProcessingTemplate
@@ -2531,8 +2568,9 @@ func NewDeleteImageSpriteTemplateRequest() (request *DeleteImageSpriteTemplateRe
 func NewDeleteImageSpriteTemplateResponse() (response *DeleteImageSpriteTemplateResponse) {
     response = &DeleteImageSpriteTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteImageSpriteTemplate
@@ -2585,8 +2623,9 @@ func NewDeleteMediaRequest() (request *DeleteMediaRequest) {
 func NewDeleteMediaResponse() (response *DeleteMediaResponse) {
     response = &DeleteMediaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteMedia
@@ -2649,8 +2688,9 @@ func NewDeletePersonSampleRequest() (request *DeletePersonSampleRequest) {
 func NewDeletePersonSampleResponse() (response *DeletePersonSampleResponse) {
     response = &DeletePersonSampleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeletePersonSample
@@ -2701,8 +2741,9 @@ func NewDeleteProcedureTemplateRequest() (request *DeleteProcedureTemplateReques
 func NewDeleteProcedureTemplateResponse() (response *DeleteProcedureTemplateResponse) {
     response = &DeleteProcedureTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteProcedureTemplate
@@ -2759,8 +2800,9 @@ func NewDeleteRebuildMediaTemplateRequest() (request *DeleteRebuildMediaTemplate
 func NewDeleteRebuildMediaTemplateResponse() (response *DeleteRebuildMediaTemplateResponse) {
     response = &DeleteRebuildMediaTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRebuildMediaTemplate
@@ -2817,8 +2859,9 @@ func NewDeleteReviewTemplateRequest() (request *DeleteReviewTemplateRequest) {
 func NewDeleteReviewTemplateResponse() (response *DeleteReviewTemplateResponse) {
     response = &DeleteReviewTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteReviewTemplate
@@ -2877,8 +2920,9 @@ func NewDeleteRoundPlayRequest() (request *DeleteRoundPlayRequest) {
 func NewDeleteRoundPlayResponse() (response *DeleteRoundPlayResponse) {
     response = &DeleteRoundPlayResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRoundPlay
@@ -2931,8 +2975,9 @@ func NewDeleteSampleSnapshotTemplateRequest() (request *DeleteSampleSnapshotTemp
 func NewDeleteSampleSnapshotTemplateResponse() (response *DeleteSampleSnapshotTemplateResponse) {
     response = &DeleteSampleSnapshotTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSampleSnapshotTemplate
@@ -2985,8 +3030,9 @@ func NewDeleteSnapshotByTimeOffsetTemplateRequest() (request *DeleteSnapshotByTi
 func NewDeleteSnapshotByTimeOffsetTemplateResponse() (response *DeleteSnapshotByTimeOffsetTemplateResponse) {
     response = &DeleteSnapshotByTimeOffsetTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSnapshotByTimeOffsetTemplate
@@ -3039,8 +3085,9 @@ func NewDeleteSuperPlayerConfigRequest() (request *DeleteSuperPlayerConfigReques
 func NewDeleteSuperPlayerConfigResponse() (response *DeleteSuperPlayerConfigResponse) {
     response = &DeleteSuperPlayerConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSuperPlayerConfig
@@ -3103,8 +3150,9 @@ func NewDeleteTranscodeTemplateRequest() (request *DeleteTranscodeTemplateReques
 func NewDeleteTranscodeTemplateResponse() (response *DeleteTranscodeTemplateResponse) {
     response = &DeleteTranscodeTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteTranscodeTemplate
@@ -3159,8 +3207,9 @@ func NewDeleteVodDomainRequest() (request *DeleteVodDomainRequest) {
 func NewDeleteVodDomainResponse() (response *DeleteVodDomainResponse) {
     response = &DeleteVodDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteVodDomain
@@ -3215,8 +3264,9 @@ func NewDeleteWatermarkTemplateRequest() (request *DeleteWatermarkTemplateReques
 func NewDeleteWatermarkTemplateResponse() (response *DeleteWatermarkTemplateResponse) {
     response = &DeleteWatermarkTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteWatermarkTemplate
@@ -3273,8 +3323,9 @@ func NewDeleteWordSamplesRequest() (request *DeleteWordSamplesRequest) {
 func NewDeleteWordSamplesResponse() (response *DeleteWordSamplesResponse) {
     response = &DeleteWordSamplesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteWordSamples
@@ -3325,8 +3376,9 @@ func NewDescribeAIAnalysisTemplatesRequest() (request *DescribeAIAnalysisTemplat
 func NewDescribeAIAnalysisTemplatesResponse() (response *DescribeAIAnalysisTemplatesResponse) {
     response = &DescribeAIAnalysisTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAIAnalysisTemplates
@@ -3385,8 +3437,9 @@ func NewDescribeAIRecognitionTemplatesRequest() (request *DescribeAIRecognitionT
 func NewDescribeAIRecognitionTemplatesResponse() (response *DescribeAIRecognitionTemplatesResponse) {
     response = &DescribeAIRecognitionTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAIRecognitionTemplates
@@ -3447,8 +3500,9 @@ func NewDescribeAdaptiveDynamicStreamingTemplatesRequest() (request *DescribeAda
 func NewDescribeAdaptiveDynamicStreamingTemplatesResponse() (response *DescribeAdaptiveDynamicStreamingTemplatesResponse) {
     response = &DescribeAdaptiveDynamicStreamingTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAdaptiveDynamicStreamingTemplates
@@ -3507,8 +3561,9 @@ func NewDescribeAllClassRequest() (request *DescribeAllClassRequest) {
 func NewDescribeAllClassResponse() (response *DescribeAllClassResponse) {
     response = &DescribeAllClassResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAllClass
@@ -3561,8 +3616,9 @@ func NewDescribeAnimatedGraphicsTemplatesRequest() (request *DescribeAnimatedGra
 func NewDescribeAnimatedGraphicsTemplatesResponse() (response *DescribeAnimatedGraphicsTemplatesResponse) {
     response = &DescribeAnimatedGraphicsTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAnimatedGraphicsTemplates
@@ -3621,8 +3677,9 @@ func NewDescribeCDNDomainsRequest() (request *DescribeCDNDomainsRequest) {
 func NewDescribeCDNDomainsResponse() (response *DescribeCDNDomainsResponse) {
     response = &DescribeCDNDomainsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCDNDomains
@@ -3675,8 +3732,9 @@ func NewDescribeCDNStatDetailsRequest() (request *DescribeCDNStatDetailsRequest)
 func NewDescribeCDNStatDetailsResponse() (response *DescribeCDNStatDetailsResponse) {
     response = &DescribeCDNStatDetailsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCDNStatDetails
@@ -3757,8 +3815,9 @@ func NewDescribeCDNUsageDataRequest() (request *DescribeCDNUsageDataRequest) {
 func NewDescribeCDNUsageDataResponse() (response *DescribeCDNUsageDataResponse) {
     response = &DescribeCDNUsageDataResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCDNUsageData
@@ -3843,8 +3902,9 @@ func NewDescribeCdnLogsRequest() (request *DescribeCdnLogsRequest) {
 func NewDescribeCdnLogsResponse() (response *DescribeCdnLogsResponse) {
     response = &DescribeCdnLogsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCdnLogs
@@ -3915,8 +3975,9 @@ func NewDescribeClientUploadAccelerationUsageDataRequest() (request *DescribeCli
 func NewDescribeClientUploadAccelerationUsageDataResponse() (response *DescribeClientUploadAccelerationUsageDataResponse) {
     response = &DescribeClientUploadAccelerationUsageDataResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClientUploadAccelerationUsageData
@@ -3981,8 +4042,9 @@ func NewDescribeContentReviewTemplatesRequest() (request *DescribeContentReviewT
 func NewDescribeContentReviewTemplatesResponse() (response *DescribeContentReviewTemplatesResponse) {
     response = &DescribeContentReviewTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeContentReviewTemplates
@@ -4047,8 +4109,9 @@ func NewDescribeDailyPlayStatFileListRequest() (request *DescribeDailyPlayStatFi
 func NewDescribeDailyPlayStatFileListResponse() (response *DescribeDailyPlayStatFileListResponse) {
     response = &DescribeDailyPlayStatFileListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDailyPlayStatFileList
@@ -4129,8 +4192,9 @@ func NewDescribeDrmKeyProviderInfoRequest() (request *DescribeDrmKeyProviderInfo
 func NewDescribeDrmKeyProviderInfoResponse() (response *DescribeDrmKeyProviderInfoResponse) {
     response = &DescribeDrmKeyProviderInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDrmKeyProviderInfo
@@ -4183,8 +4247,9 @@ func NewDescribeFileAttributesRequest() (request *DescribeFileAttributesRequest)
 func NewDescribeFileAttributesResponse() (response *DescribeFileAttributesResponse) {
     response = &DescribeFileAttributesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeFileAttributes
@@ -4263,8 +4328,9 @@ func NewDescribeImageProcessingTemplatesRequest() (request *DescribeImageProcess
 func NewDescribeImageProcessingTemplatesResponse() (response *DescribeImageProcessingTemplatesResponse) {
     response = &DescribeImageProcessingTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImageProcessingTemplates
@@ -4325,8 +4391,9 @@ func NewDescribeImageReviewUsageDataRequest() (request *DescribeImageReviewUsage
 func NewDescribeImageReviewUsageDataResponse() (response *DescribeImageReviewUsageDataResponse) {
     response = &DescribeImageReviewUsageDataResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImageReviewUsageData
@@ -4391,8 +4458,9 @@ func NewDescribeImageSpriteTemplatesRequest() (request *DescribeImageSpriteTempl
 func NewDescribeImageSpriteTemplatesResponse() (response *DescribeImageSpriteTemplatesResponse) {
     response = &DescribeImageSpriteTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImageSpriteTemplates
@@ -4451,8 +4519,9 @@ func NewDescribeLicenseUsageDataRequest() (request *DescribeLicenseUsageDataRequ
 func NewDescribeLicenseUsageDataResponse() (response *DescribeLicenseUsageDataResponse) {
     response = &DescribeLicenseUsageDataResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeLicenseUsageData
@@ -4517,8 +4586,9 @@ func NewDescribeMediaInfosRequest() (request *DescribeMediaInfosRequest) {
 func NewDescribeMediaInfosResponse() (response *DescribeMediaInfosResponse) {
     response = &DescribeMediaInfosResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeMediaInfos
@@ -4623,8 +4693,9 @@ func NewDescribeMediaPlayStatDetailsRequest() (request *DescribeMediaPlayStatDet
 func NewDescribeMediaPlayStatDetailsResponse() (response *DescribeMediaPlayStatDetailsResponse) {
     response = &DescribeMediaPlayStatDetailsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeMediaPlayStatDetails
@@ -4693,8 +4764,9 @@ func NewDescribeMediaProcessUsageDataRequest() (request *DescribeMediaProcessUsa
 func NewDescribeMediaProcessUsageDataResponse() (response *DescribeMediaProcessUsageDataResponse) {
     response = &DescribeMediaProcessUsageDataResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeMediaProcessUsageData
@@ -4755,8 +4827,9 @@ func NewDescribePersonSamplesRequest() (request *DescribePersonSamplesRequest) {
 func NewDescribePersonSamplesResponse() (response *DescribePersonSamplesResponse) {
     response = &DescribePersonSamplesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePersonSamples
@@ -4807,8 +4880,9 @@ func NewDescribeProcedureTemplatesRequest() (request *DescribeProcedureTemplates
 func NewDescribeProcedureTemplatesResponse() (response *DescribeProcedureTemplatesResponse) {
     response = &DescribeProcedureTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeProcedureTemplates
@@ -4867,8 +4941,9 @@ func NewDescribeRebuildMediaTemplatesRequest() (request *DescribeRebuildMediaTem
 func NewDescribeRebuildMediaTemplatesResponse() (response *DescribeRebuildMediaTemplatesResponse) {
     response = &DescribeRebuildMediaTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRebuildMediaTemplates
@@ -4927,8 +5002,9 @@ func NewDescribeReviewDetailsRequest() (request *DescribeReviewDetailsRequest) {
 func NewDescribeReviewDetailsResponse() (response *DescribeReviewDetailsResponse) {
     response = &DescribeReviewDetailsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeReviewDetails
@@ -5007,8 +5083,9 @@ func NewDescribeReviewTemplatesRequest() (request *DescribeReviewTemplatesReques
 func NewDescribeReviewTemplatesResponse() (response *DescribeReviewTemplatesResponse) {
     response = &DescribeReviewTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeReviewTemplates
@@ -5059,8 +5136,9 @@ func NewDescribeRoundPlaysRequest() (request *DescribeRoundPlaysRequest) {
 func NewDescribeRoundPlaysResponse() (response *DescribeRoundPlaysResponse) {
     response = &DescribeRoundPlaysResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRoundPlays
@@ -5113,8 +5191,9 @@ func NewDescribeSampleSnapshotTemplatesRequest() (request *DescribeSampleSnapsho
 func NewDescribeSampleSnapshotTemplatesResponse() (response *DescribeSampleSnapshotTemplatesResponse) {
     response = &DescribeSampleSnapshotTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSampleSnapshotTemplates
@@ -5173,8 +5252,9 @@ func NewDescribeSnapshotByTimeOffsetTemplatesRequest() (request *DescribeSnapsho
 func NewDescribeSnapshotByTimeOffsetTemplatesResponse() (response *DescribeSnapshotByTimeOffsetTemplatesResponse) {
     response = &DescribeSnapshotByTimeOffsetTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSnapshotByTimeOffsetTemplates
@@ -5233,8 +5313,9 @@ func NewDescribeStorageDataRequest() (request *DescribeStorageDataRequest) {
 func NewDescribeStorageDataResponse() (response *DescribeStorageDataResponse) {
     response = &DescribeStorageDataResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStorageData
@@ -5289,8 +5370,9 @@ func NewDescribeStorageDetailsRequest() (request *DescribeStorageDetailsRequest)
 func NewDescribeStorageDetailsResponse() (response *DescribeStorageDetailsResponse) {
     response = &DescribeStorageDetailsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStorageDetails
@@ -5369,8 +5451,9 @@ func NewDescribeStorageRegionsRequest() (request *DescribeStorageRegionsRequest)
 func NewDescribeStorageRegionsResponse() (response *DescribeStorageRegionsResponse) {
     response = &DescribeStorageRegionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStorageRegions
@@ -5433,8 +5516,9 @@ func NewDescribeSubAppIdsRequest() (request *DescribeSubAppIdsRequest) {
 func NewDescribeSubAppIdsResponse() (response *DescribeSubAppIdsResponse) {
     response = &DescribeSubAppIdsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSubAppIds
@@ -5489,8 +5573,9 @@ func NewDescribeSuperPlayerConfigsRequest() (request *DescribeSuperPlayerConfigs
 func NewDescribeSuperPlayerConfigsResponse() (response *DescribeSuperPlayerConfigsResponse) {
     response = &DescribeSuperPlayerConfigsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSuperPlayerConfigs
@@ -5549,8 +5634,9 @@ func NewDescribeTaskDetailRequest() (request *DescribeTaskDetailRequest) {
 func NewDescribeTaskDetailResponse() (response *DescribeTaskDetailResponse) {
     response = &DescribeTaskDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTaskDetail
@@ -5611,8 +5697,9 @@ func NewDescribeTasksRequest() (request *DescribeTasksRequest) {
 func NewDescribeTasksResponse() (response *DescribeTasksResponse) {
     response = &DescribeTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTasks
@@ -5677,8 +5764,9 @@ func NewDescribeTranscodeTemplatesRequest() (request *DescribeTranscodeTemplates
 func NewDescribeTranscodeTemplatesResponse() (response *DescribeTranscodeTemplatesResponse) {
     response = &DescribeTranscodeTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTranscodeTemplates
@@ -5743,8 +5831,9 @@ func NewDescribeVodDomainsRequest() (request *DescribeVodDomainsRequest) {
 func NewDescribeVodDomainsResponse() (response *DescribeVodDomainsResponse) {
     response = &DescribeVodDomainsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeVodDomains
@@ -5803,8 +5892,9 @@ func NewDescribeWatermarkTemplatesRequest() (request *DescribeWatermarkTemplates
 func NewDescribeWatermarkTemplatesResponse() (response *DescribeWatermarkTemplatesResponse) {
     response = &DescribeWatermarkTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeWatermarkTemplates
@@ -5865,8 +5955,9 @@ func NewDescribeWordSamplesRequest() (request *DescribeWordSamplesRequest) {
 func NewDescribeWordSamplesResponse() (response *DescribeWordSamplesResponse) {
     response = &DescribeWordSamplesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeWordSamples
@@ -5917,8 +6008,9 @@ func NewEditMediaRequest() (request *EditMediaRequest) {
 func NewEditMediaResponse() (response *EditMediaResponse) {
     response = &EditMediaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // EditMedia
@@ -6021,8 +6113,9 @@ func NewExecuteFunctionRequest() (request *ExecuteFunctionRequest) {
 func NewExecuteFunctionResponse() (response *ExecuteFunctionResponse) {
     response = &ExecuteFunctionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ExecuteFunction
@@ -6081,8 +6174,9 @@ func NewExtractTraceWatermarkRequest() (request *ExtractTraceWatermarkRequest) {
 func NewExtractTraceWatermarkResponse() (response *ExtractTraceWatermarkResponse) {
     response = &ExtractTraceWatermarkResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ExtractTraceWatermark
@@ -6141,8 +6235,9 @@ func NewForbidMediaDistributionRequest() (request *ForbidMediaDistributionReques
 func NewForbidMediaDistributionResponse() (response *ForbidMediaDistributionResponse) {
     response = &ForbidMediaDistributionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ForbidMediaDistribution
@@ -6207,8 +6302,9 @@ func NewLiveRealTimeClipRequest() (request *LiveRealTimeClipRequest) {
 func NewLiveRealTimeClipResponse() (response *LiveRealTimeClipResponse) {
     response = &LiveRealTimeClipResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // LiveRealTimeClip
@@ -6365,8 +6461,9 @@ func NewManageTaskRequest() (request *ManageTaskRequest) {
 func NewManageTaskResponse() (response *ManageTaskResponse) {
     response = &ManageTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ManageTask
@@ -6425,8 +6522,9 @@ func NewModifyAIAnalysisTemplateRequest() (request *ModifyAIAnalysisTemplateRequ
 func NewModifyAIAnalysisTemplateResponse() (response *ModifyAIAnalysisTemplateResponse) {
     response = &ModifyAIAnalysisTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyAIAnalysisTemplate
@@ -6503,8 +6601,9 @@ func NewModifyAIRecognitionTemplateRequest() (request *ModifyAIRecognitionTempla
 func NewModifyAIRecognitionTemplateResponse() (response *ModifyAIRecognitionTemplateResponse) {
     response = &ModifyAIRecognitionTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyAIRecognitionTemplate
@@ -6581,8 +6680,9 @@ func NewModifyAdaptiveDynamicStreamingTemplateRequest() (request *ModifyAdaptive
 func NewModifyAdaptiveDynamicStreamingTemplateResponse() (response *ModifyAdaptiveDynamicStreamingTemplateResponse) {
     response = &ModifyAdaptiveDynamicStreamingTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyAdaptiveDynamicStreamingTemplate
@@ -6667,8 +6767,9 @@ func NewModifyAnimatedGraphicsTemplateRequest() (request *ModifyAnimatedGraphics
 func NewModifyAnimatedGraphicsTemplateResponse() (response *ModifyAnimatedGraphicsTemplateResponse) {
     response = &ModifyAnimatedGraphicsTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyAnimatedGraphicsTemplate
@@ -6737,8 +6838,9 @@ func NewModifyCDNDomainConfigRequest() (request *ModifyCDNDomainConfigRequest) {
 func NewModifyCDNDomainConfigResponse() (response *ModifyCDNDomainConfigResponse) {
     response = &ModifyCDNDomainConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCDNDomainConfig
@@ -6791,8 +6893,9 @@ func NewModifyClassRequest() (request *ModifyClassRequest) {
 func NewModifyClassResponse() (response *ModifyClassResponse) {
     response = &ModifyClassResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyClass
@@ -6853,8 +6956,9 @@ func NewModifyContentReviewTemplateRequest() (request *ModifyContentReviewTempla
 func NewModifyContentReviewTemplateResponse() (response *ModifyContentReviewTemplateResponse) {
     response = &ModifyContentReviewTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyContentReviewTemplate
@@ -6931,8 +7035,9 @@ func NewModifyDefaultStorageRegionRequest() (request *ModifyDefaultStorageRegion
 func NewModifyDefaultStorageRegionResponse() (response *ModifyDefaultStorageRegionResponse) {
     response = &ModifyDefaultStorageRegionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDefaultStorageRegion
@@ -6991,8 +7096,9 @@ func NewModifyImageSpriteTemplateRequest() (request *ModifyImageSpriteTemplateRe
 func NewModifyImageSpriteTemplateResponse() (response *ModifyImageSpriteTemplateResponse) {
     response = &ModifyImageSpriteTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyImageSpriteTemplate
@@ -7059,8 +7165,9 @@ func NewModifyMediaInfoRequest() (request *ModifyMediaInfoRequest) {
 func NewModifyMediaInfoResponse() (response *ModifyMediaInfoResponse) {
     response = &ModifyMediaInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyMediaInfo
@@ -7143,8 +7250,9 @@ func NewModifyMediaStorageClassRequest() (request *ModifyMediaStorageClassReques
 func NewModifyMediaStorageClassResponse() (response *ModifyMediaStorageClassResponse) {
     response = &ModifyMediaStorageClassResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyMediaStorageClass
@@ -7271,8 +7379,9 @@ func NewModifyPersonSampleRequest() (request *ModifyPersonSampleRequest) {
 func NewModifyPersonSampleResponse() (response *ModifyPersonSampleResponse) {
     response = &ModifyPersonSampleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyPersonSample
@@ -7331,8 +7440,9 @@ func NewModifyRebuildMediaTemplateRequest() (request *ModifyRebuildMediaTemplate
 func NewModifyRebuildMediaTemplateResponse() (response *ModifyRebuildMediaTemplateResponse) {
     response = &ModifyRebuildMediaTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRebuildMediaTemplate
@@ -7391,8 +7501,9 @@ func NewModifyReviewTemplateRequest() (request *ModifyReviewTemplateRequest) {
 func NewModifyReviewTemplateResponse() (response *ModifyReviewTemplateResponse) {
     response = &ModifyReviewTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyReviewTemplate
@@ -7457,8 +7568,9 @@ func NewModifyRoundPlayRequest() (request *ModifyRoundPlayRequest) {
 func NewModifyRoundPlayResponse() (response *ModifyRoundPlayResponse) {
     response = &ModifyRoundPlayResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRoundPlay
@@ -7515,8 +7627,9 @@ func NewModifySampleSnapshotTemplateRequest() (request *ModifySampleSnapshotTemp
 func NewModifySampleSnapshotTemplateResponse() (response *ModifySampleSnapshotTemplateResponse) {
     response = &ModifySampleSnapshotTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySampleSnapshotTemplate
@@ -7581,8 +7694,9 @@ func NewModifySnapshotByTimeOffsetTemplateRequest() (request *ModifySnapshotByTi
 func NewModifySnapshotByTimeOffsetTemplateResponse() (response *ModifySnapshotByTimeOffsetTemplateResponse) {
     response = &ModifySnapshotByTimeOffsetTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySnapshotByTimeOffsetTemplate
@@ -7645,8 +7759,9 @@ func NewModifySubAppIdInfoRequest() (request *ModifySubAppIdInfoRequest) {
 func NewModifySubAppIdInfoResponse() (response *ModifySubAppIdInfoResponse) {
     response = &ModifySubAppIdInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySubAppIdInfo
@@ -7703,8 +7818,9 @@ func NewModifySubAppIdStatusRequest() (request *ModifySubAppIdStatusRequest) {
 func NewModifySubAppIdStatusResponse() (response *ModifySubAppIdStatusResponse) {
     response = &ModifySubAppIdStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySubAppIdStatus
@@ -7759,8 +7875,9 @@ func NewModifySuperPlayerConfigRequest() (request *ModifySuperPlayerConfigReques
 func NewModifySuperPlayerConfigResponse() (response *ModifySuperPlayerConfigResponse) {
     response = &ModifySuperPlayerConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySuperPlayerConfig
@@ -7819,8 +7936,9 @@ func NewModifyTranscodeTemplateRequest() (request *ModifyTranscodeTemplateReques
 func NewModifyTranscodeTemplateResponse() (response *ModifyTranscodeTemplateResponse) {
     response = &ModifyTranscodeTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyTranscodeTemplate
@@ -7915,8 +8033,9 @@ func NewModifyVodDomainAccelerateConfigRequest() (request *ModifyVodDomainAccele
 func NewModifyVodDomainAccelerateConfigResponse() (response *ModifyVodDomainAccelerateConfigResponse) {
     response = &ModifyVodDomainAccelerateConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyVodDomainAccelerateConfig
@@ -7971,8 +8090,9 @@ func NewModifyVodDomainConfigRequest() (request *ModifyVodDomainConfigRequest) {
 func NewModifyVodDomainConfigResponse() (response *ModifyVodDomainConfigResponse) {
     response = &ModifyVodDomainConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyVodDomainConfig
@@ -8027,8 +8147,9 @@ func NewModifyWatermarkTemplateRequest() (request *ModifyWatermarkTemplateReques
 func NewModifyWatermarkTemplateResponse() (response *ModifyWatermarkTemplateResponse) {
     response = &ModifyWatermarkTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyWatermarkTemplate
@@ -8111,8 +8232,9 @@ func NewModifyWordSampleRequest() (request *ModifyWordSampleRequest) {
 func NewModifyWordSampleResponse() (response *ModifyWordSampleResponse) {
     response = &ModifyWordSampleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyWordSample
@@ -8165,8 +8287,9 @@ func NewParseStreamingManifestRequest() (request *ParseStreamingManifestRequest)
 func NewParseStreamingManifestResponse() (response *ParseStreamingManifestResponse) {
     response = &ParseStreamingManifestResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ParseStreamingManifest
@@ -8221,8 +8344,9 @@ func NewProcessMediaByProcedureRequest() (request *ProcessMediaByProcedureReques
 func NewProcessMediaByProcedureResponse() (response *ProcessMediaByProcedureResponse) {
     response = &ProcessMediaByProcedureResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ProcessMediaByProcedure
@@ -8313,8 +8437,9 @@ func NewProcessMediaByUrlRequest() (request *ProcessMediaByUrlRequest) {
 func NewProcessMediaByUrlResponse() (response *ProcessMediaByUrlResponse) {
     response = &ProcessMediaByUrlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ProcessMediaByUrl
@@ -8387,8 +8512,9 @@ func NewPullEventsRequest() (request *PullEventsRequest) {
 func NewPullEventsResponse() (response *PullEventsResponse) {
     response = &PullEventsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // PullEvents
@@ -8465,8 +8591,9 @@ func NewPullUploadRequest() (request *PullUploadRequest) {
 func NewPullUploadResponse() (response *PullUploadResponse) {
     response = &PullUploadResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // PullUpload
@@ -8547,8 +8674,9 @@ func NewPushUrlCacheRequest() (request *PushUrlCacheRequest) {
 func NewPushUrlCacheResponse() (response *PushUrlCacheResponse) {
     response = &PushUrlCacheResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // PushUrlCache
@@ -8613,8 +8741,9 @@ func NewRebuildMediaRequest() (request *RebuildMediaRequest) {
 func NewRebuildMediaResponse() (response *RebuildMediaResponse) {
     response = &RebuildMediaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RebuildMedia
@@ -8663,8 +8792,9 @@ func NewRebuildMediaByTemplateRequest() (request *RebuildMediaByTemplateRequest)
 func NewRebuildMediaByTemplateResponse() (response *RebuildMediaByTemplateResponse) {
     response = &RebuildMediaByTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RebuildMediaByTemplate
@@ -8713,8 +8843,9 @@ func NewRefreshUrlCacheRequest() (request *RefreshUrlCacheRequest) {
 func NewRefreshUrlCacheResponse() (response *RefreshUrlCacheResponse) {
     response = &RefreshUrlCacheResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RefreshUrlCache
@@ -8781,8 +8912,9 @@ func NewRemoveWatermarkRequest() (request *RemoveWatermarkRequest) {
 func NewRemoveWatermarkResponse() (response *RemoveWatermarkResponse) {
     response = &RemoveWatermarkResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RemoveWatermark
@@ -8851,8 +8983,9 @@ func NewResetProcedureTemplateRequest() (request *ResetProcedureTemplateRequest)
 func NewResetProcedureTemplateResponse() (response *ResetProcedureTemplateResponse) {
     response = &ResetProcedureTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetProcedureTemplate
@@ -8911,8 +9044,9 @@ func NewRestoreMediaRequest() (request *RestoreMediaRequest) {
 func NewRestoreMediaResponse() (response *RestoreMediaResponse) {
     response = &RestoreMediaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RestoreMedia
@@ -8989,8 +9123,9 @@ func NewReviewAudioVideoRequest() (request *ReviewAudioVideoRequest) {
 func NewReviewAudioVideoResponse() (response *ReviewAudioVideoResponse) {
     response = &ReviewAudioVideoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ReviewAudioVideo
@@ -9061,8 +9196,9 @@ func NewReviewImageRequest() (request *ReviewImageRequest) {
 func NewReviewImageResponse() (response *ReviewImageResponse) {
     response = &ReviewImageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ReviewImage
@@ -9123,8 +9259,9 @@ func NewSearchMediaRequest() (request *SearchMediaRequest) {
 func NewSearchMediaResponse() (response *SearchMediaResponse) {
     response = &SearchMediaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SearchMedia
@@ -9361,8 +9498,9 @@ func NewSetDrmKeyProviderInfoRequest() (request *SetDrmKeyProviderInfoRequest) {
 func NewSetDrmKeyProviderInfoResponse() (response *SetDrmKeyProviderInfoResponse) {
     response = &SetDrmKeyProviderInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetDrmKeyProviderInfo
@@ -9417,8 +9555,9 @@ func NewSimpleHlsClipRequest() (request *SimpleHlsClipRequest) {
 func NewSimpleHlsClipResponse() (response *SimpleHlsClipResponse) {
     response = &SimpleHlsClipResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SimpleHlsClip
@@ -9571,8 +9710,9 @@ func NewStartCDNDomainRequest() (request *StartCDNDomainRequest) {
 func NewStartCDNDomainResponse() (response *StartCDNDomainResponse) {
     response = &StartCDNDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartCDNDomain

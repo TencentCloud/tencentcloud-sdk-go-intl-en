@@ -59,8 +59,9 @@ func NewTextToVoiceRequest() (request *TextToVoiceRequest) {
 func NewTextToVoiceResponse() (response *TextToVoiceResponse) {
     response = &TextToVoiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TextToVoice

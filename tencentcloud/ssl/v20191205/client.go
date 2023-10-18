@@ -59,8 +59,9 @@ func NewApplyCertificateRequest() (request *ApplyCertificateRequest) {
 func NewApplyCertificateResponse() (response *ApplyCertificateResponse) {
     response = &ApplyCertificateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ApplyCertificate
@@ -151,8 +152,9 @@ func NewBatchDeleteCSRRequest() (request *BatchDeleteCSRRequest) {
 func NewBatchDeleteCSRResponse() (response *BatchDeleteCSRResponse) {
     response = &BatchDeleteCSRResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BatchDeleteCSR
@@ -207,8 +209,9 @@ func NewCancelAuditCertificateRequest() (request *CancelAuditCertificateRequest)
 func NewCancelAuditCertificateResponse() (response *CancelAuditCertificateResponse) {
     response = &CancelAuditCertificateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CancelAuditCertificate
@@ -255,8 +258,9 @@ func NewCancelCertificateOrderRequest() (request *CancelCertificateOrderRequest)
 func NewCancelCertificateOrderResponse() (response *CancelCertificateOrderResponse) {
     response = &CancelCertificateOrderResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CancelCertificateOrder
@@ -317,8 +321,9 @@ func NewCommitCertificateInformationRequest() (request *CommitCertificateInforma
 func NewCommitCertificateInformationResponse() (response *CommitCertificateInformationResponse) {
     response = &CommitCertificateInformationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CommitCertificateInformation
@@ -383,8 +388,9 @@ func NewCreateCSRRequest() (request *CreateCSRRequest) {
 func NewCreateCSRResponse() (response *CreateCSRResponse) {
     response = &CreateCSRResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCSR
@@ -437,8 +443,9 @@ func NewCreateCertificateRequest() (request *CreateCertificateRequest) {
 func NewCreateCertificateResponse() (response *CreateCertificateResponse) {
     response = &CreateCertificateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCertificate
@@ -499,8 +506,9 @@ func NewCreateCertificateBindResourceSyncTaskRequest() (request *CreateCertifica
 func NewCreateCertificateBindResourceSyncTaskResponse() (response *CreateCertificateBindResourceSyncTaskResponse) {
     response = &CreateCertificateBindResourceSyncTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCertificateBindResourceSyncTask
@@ -549,8 +557,9 @@ func NewDeleteCertificateRequest() (request *DeleteCertificateRequest) {
 func NewDeleteCertificateResponse() (response *DeleteCertificateResponse) {
     response = &DeleteCertificateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCertificate
@@ -635,8 +644,9 @@ func NewDescribeCSRRequest() (request *DescribeCSRRequest) {
 func NewDescribeCSRResponse() (response *DescribeCSRResponse) {
     response = &DescribeCSRResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCSR
@@ -687,8 +697,9 @@ func NewDescribeCSRSetRequest() (request *DescribeCSRSetRequest) {
 func NewDescribeCSRSetResponse() (response *DescribeCSRSetResponse) {
     response = &DescribeCSRSetResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCSRSet
@@ -739,8 +750,9 @@ func NewDescribeCertificateRequest() (request *DescribeCertificateRequest) {
 func NewDescribeCertificateResponse() (response *DescribeCertificateResponse) {
     response = &DescribeCertificateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCertificate
@@ -823,8 +835,9 @@ func NewDescribeCertificateBindResourceTaskDetailRequest() (request *DescribeCer
 func NewDescribeCertificateBindResourceTaskDetailResponse() (response *DescribeCertificateBindResourceTaskDetailResponse) {
     response = &DescribeCertificateBindResourceTaskDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCertificateBindResourceTaskDetail
@@ -873,8 +886,9 @@ func NewDescribeCertificateBindResourceTaskResultRequest() (request *DescribeCer
 func NewDescribeCertificateBindResourceTaskResultResponse() (response *DescribeCertificateBindResourceTaskResultResponse) {
     response = &DescribeCertificateBindResourceTaskResultResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCertificateBindResourceTaskResult
@@ -921,8 +935,9 @@ func NewDescribeCertificateDetailRequest() (request *DescribeCertificateDetailRe
 func NewDescribeCertificateDetailResponse() (response *DescribeCertificateDetailResponse) {
     response = &DescribeCertificateDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCertificateDetail
@@ -985,8 +1000,9 @@ func NewDescribeCertificateOperateLogsRequest() (request *DescribeCertificateOpe
 func NewDescribeCertificateOperateLogsResponse() (response *DescribeCertificateOperateLogsResponse) {
     response = &DescribeCertificateOperateLogsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCertificateOperateLogs
@@ -1041,8 +1057,9 @@ func NewDescribeCertificatesRequest() (request *DescribeCertificatesRequest) {
 func NewDescribeCertificatesResponse() (response *DescribeCertificatesResponse) {
     response = &DescribeCertificatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCertificates
@@ -1129,8 +1146,9 @@ func NewDescribeHostTeoInstanceListRequest() (request *DescribeHostTeoInstanceLi
 func NewDescribeHostTeoInstanceListResponse() (response *DescribeHostTeoInstanceListResponse) {
     response = &DescribeHostTeoInstanceListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeHostTeoInstanceList
@@ -1197,8 +1215,9 @@ func NewDownloadCertificateRequest() (request *DownloadCertificateRequest) {
 func NewDownloadCertificateResponse() (response *DownloadCertificateResponse) {
     response = &DownloadCertificateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DownloadCertificate
@@ -1277,8 +1296,9 @@ func NewModifyCSRRequest() (request *ModifyCSRRequest) {
 func NewModifyCSRResponse() (response *ModifyCSRResponse) {
     response = &ModifyCSRResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCSR
@@ -1331,8 +1351,9 @@ func NewModifyCertificateAliasRequest() (request *ModifyCertificateAliasRequest)
 func NewModifyCertificateAliasResponse() (response *ModifyCertificateAliasResponse) {
     response = &ModifyCertificateAliasResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCertificateAlias
@@ -1391,8 +1412,9 @@ func NewModifyCertificateProjectRequest() (request *ModifyCertificateProjectRequ
 func NewModifyCertificateProjectResponse() (response *ModifyCertificateProjectResponse) {
     response = &ModifyCertificateProjectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCertificateProject
@@ -1449,8 +1471,9 @@ func NewModifyCertificateResubmitRequest() (request *ModifyCertificateResubmitRe
 func NewModifyCertificateResubmitResponse() (response *ModifyCertificateResubmitResponse) {
     response = &ModifyCertificateResubmitResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCertificateResubmit
@@ -1507,8 +1530,9 @@ func NewReplaceCertificateRequest() (request *ReplaceCertificateRequest) {
 func NewReplaceCertificateResponse() (response *ReplaceCertificateResponse) {
     response = &ReplaceCertificateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ReplaceCertificate
@@ -1589,8 +1613,9 @@ func NewSubmitCertificateInformationRequest() (request *SubmitCertificateInforma
 func NewSubmitCertificateInformationResponse() (response *SubmitCertificateInformationResponse) {
     response = &SubmitCertificateInformationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SubmitCertificateInformation
@@ -1651,8 +1676,9 @@ func NewUploadCertificateRequest() (request *UploadCertificateRequest) {
 func NewUploadCertificateResponse() (response *UploadCertificateResponse) {
     response = &UploadCertificateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UploadCertificate
@@ -1745,8 +1771,9 @@ func NewUploadConfirmLetterRequest() (request *UploadConfirmLetterRequest) {
 func NewUploadConfirmLetterResponse() (response *UploadConfirmLetterResponse) {
     response = &UploadConfirmLetterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UploadConfirmLetter

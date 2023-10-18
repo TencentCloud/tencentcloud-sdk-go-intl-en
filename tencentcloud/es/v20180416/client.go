@@ -59,8 +59,9 @@ func NewCreateIndexRequest() (request *CreateIndexRequest) {
 func NewCreateIndexResponse() (response *CreateIndexResponse) {
     response = &CreateIndexResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateIndex
@@ -133,8 +134,9 @@ func NewCreateInstanceRequest() (request *CreateInstanceRequest) {
 func NewCreateInstanceResponse() (response *CreateInstanceResponse) {
     response = &CreateInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateInstance
@@ -203,8 +205,9 @@ func NewDeleteIndexRequest() (request *DeleteIndexRequest) {
 func NewDeleteIndexResponse() (response *DeleteIndexResponse) {
     response = &DeleteIndexResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteIndex
@@ -277,8 +280,9 @@ func NewDeleteInstanceRequest() (request *DeleteInstanceRequest) {
 func NewDeleteInstanceResponse() (response *DeleteInstanceResponse) {
     response = &DeleteInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteInstance
@@ -331,8 +335,9 @@ func NewDescribeIndexListRequest() (request *DescribeIndexListRequest) {
 func NewDescribeIndexListResponse() (response *DescribeIndexListResponse) {
     response = &DescribeIndexListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIndexList
@@ -405,8 +410,9 @@ func NewDescribeIndexMetaRequest() (request *DescribeIndexMetaRequest) {
 func NewDescribeIndexMetaResponse() (response *DescribeIndexMetaResponse) {
     response = &DescribeIndexMetaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIndexMeta
@@ -479,8 +485,9 @@ func NewDescribeInstanceLogsRequest() (request *DescribeInstanceLogsRequest) {
 func NewDescribeInstanceLogsResponse() (response *DescribeInstanceLogsResponse) {
     response = &DescribeInstanceLogsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceLogs
@@ -529,8 +536,9 @@ func NewDescribeInstanceOperationsRequest() (request *DescribeInstanceOperations
 func NewDescribeInstanceOperationsResponse() (response *DescribeInstanceOperationsResponse) {
     response = &DescribeInstanceOperationsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceOperations
@@ -581,8 +589,9 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
 func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
     response = &DescribeInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstances
@@ -635,8 +644,9 @@ func NewDescribeViewsRequest() (request *DescribeViewsRequest) {
 func NewDescribeViewsResponse() (response *DescribeViewsResponse) {
     response = &DescribeViewsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeViews
@@ -687,8 +697,9 @@ func NewGetRequestTargetNodeTypesRequest() (request *GetRequestTargetNodeTypesRe
 func NewGetRequestTargetNodeTypesResponse() (response *GetRequestTargetNodeTypesResponse) {
     response = &GetRequestTargetNodeTypesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetRequestTargetNodeTypes
@@ -739,8 +750,9 @@ func NewRestartInstanceRequest() (request *RestartInstanceRequest) {
 func NewRestartInstanceResponse() (response *RestartInstanceResponse) {
     response = &RestartInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RestartInstance
@@ -793,8 +805,9 @@ func NewRestartKibanaRequest() (request *RestartKibanaRequest) {
 func NewRestartKibanaResponse() (response *RestartKibanaResponse) {
     response = &RestartKibanaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RestartKibana
@@ -845,8 +858,9 @@ func NewRestartNodesRequest() (request *RestartNodesRequest) {
 func NewRestartNodesResponse() (response *RestartNodesResponse) {
     response = &RestartNodesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RestartNodes
@@ -901,8 +915,9 @@ func NewUpdateDictionariesRequest() (request *UpdateDictionariesRequest) {
 func NewUpdateDictionariesResponse() (response *UpdateDictionariesResponse) {
     response = &UpdateDictionariesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateDictionaries
@@ -961,8 +976,9 @@ func NewUpdateIndexRequest() (request *UpdateIndexRequest) {
 func NewUpdateIndexResponse() (response *UpdateIndexResponse) {
     response = &UpdateIndexResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateIndex
@@ -1035,8 +1051,9 @@ func NewUpdateInstanceRequest() (request *UpdateInstanceRequest) {
 func NewUpdateInstanceResponse() (response *UpdateInstanceResponse) {
     response = &UpdateInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateInstance
@@ -1139,8 +1156,9 @@ func NewUpdatePluginsRequest() (request *UpdatePluginsRequest) {
 func NewUpdatePluginsResponse() (response *UpdatePluginsResponse) {
     response = &UpdatePluginsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdatePlugins
@@ -1205,8 +1223,9 @@ func NewUpdateRequestTargetNodeTypesRequest() (request *UpdateRequestTargetNodeT
 func NewUpdateRequestTargetNodeTypesResponse() (response *UpdateRequestTargetNodeTypesResponse) {
     response = &UpdateRequestTargetNodeTypesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateRequestTargetNodeTypes
@@ -1263,8 +1282,9 @@ func NewUpgradeInstanceRequest() (request *UpgradeInstanceRequest) {
 func NewUpgradeInstanceResponse() (response *UpgradeInstanceResponse) {
     response = &UpgradeInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpgradeInstance
@@ -1329,8 +1349,9 @@ func NewUpgradeLicenseRequest() (request *UpgradeLicenseRequest) {
 func NewUpgradeLicenseResponse() (response *UpgradeLicenseResponse) {
     response = &UpgradeLicenseResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpgradeLicense

@@ -59,8 +59,9 @@ func NewCreateBasicDDoSAlarmThresholdRequest() (request *CreateBasicDDoSAlarmThr
 func NewCreateBasicDDoSAlarmThresholdResponse() (response *CreateBasicDDoSAlarmThresholdResponse) {
     response = &CreateBasicDDoSAlarmThresholdResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateBasicDDoSAlarmThreshold
@@ -101,8 +102,9 @@ func NewCreateBoundIPRequest() (request *CreateBoundIPRequest) {
 func NewCreateBoundIPResponse() (response *CreateBoundIPResponse) {
     response = &CreateBoundIPResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateBoundIP
@@ -153,8 +155,9 @@ func NewCreateCCFrequencyRulesRequest() (request *CreateCCFrequencyRulesRequest)
 func NewCreateCCFrequencyRulesResponse() (response *CreateCCFrequencyRulesResponse) {
     response = &CreateCCFrequencyRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCCFrequencyRules
@@ -205,8 +208,9 @@ func NewCreateCCSelfDefinePolicyRequest() (request *CreateCCSelfDefinePolicyRequ
 func NewCreateCCSelfDefinePolicyResponse() (response *CreateCCSelfDefinePolicyResponse) {
     response = &CreateCCSelfDefinePolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCCSelfDefinePolicy
@@ -269,8 +273,9 @@ func NewCreateDDoSPolicyRequest() (request *CreateDDoSPolicyRequest) {
 func NewCreateDDoSPolicyResponse() (response *CreateDDoSPolicyResponse) {
     response = &CreateDDoSPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDDoSPolicy
@@ -333,8 +338,9 @@ func NewCreateDDoSPolicyCaseRequest() (request *CreateDDoSPolicyCaseRequest) {
 func NewCreateDDoSPolicyCaseResponse() (response *CreateDDoSPolicyCaseResponse) {
     response = &CreateDDoSPolicyCaseResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDDoSPolicyCase
@@ -397,8 +403,9 @@ func NewCreateInstanceNameRequest() (request *CreateInstanceNameRequest) {
 func NewCreateInstanceNameResponse() (response *CreateInstanceNameResponse) {
     response = &CreateInstanceNameResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateInstanceName
@@ -461,8 +468,9 @@ func NewCreateL4HealthConfigRequest() (request *CreateL4HealthConfigRequest) {
 func NewCreateL4HealthConfigResponse() (response *CreateL4HealthConfigResponse) {
     response = &CreateL4HealthConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateL4HealthConfig
@@ -525,8 +533,9 @@ func NewCreateL4RulesRequest() (request *CreateL4RulesRequest) {
 func NewCreateL4RulesResponse() (response *CreateL4RulesResponse) {
     response = &CreateL4RulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateL4Rules
@@ -589,8 +598,9 @@ func NewCreateL7CCRuleRequest() (request *CreateL7CCRuleRequest) {
 func NewCreateL7CCRuleResponse() (response *CreateL7CCRuleResponse) {
     response = &CreateL7CCRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateL7CCRule
@@ -653,8 +663,9 @@ func NewCreateL7HealthConfigRequest() (request *CreateL7HealthConfigRequest) {
 func NewCreateL7HealthConfigResponse() (response *CreateL7HealthConfigResponse) {
     response = &CreateL7HealthConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateL7HealthConfig
@@ -717,8 +728,9 @@ func NewCreateL7RuleCertRequest() (request *CreateL7RuleCertRequest) {
 func NewCreateL7RuleCertResponse() (response *CreateL7RuleCertResponse) {
     response = &CreateL7RuleCertResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateL7RuleCert
@@ -765,8 +777,9 @@ func NewCreateL7RulesRequest() (request *CreateL7RulesRequest) {
 func NewCreateL7RulesResponse() (response *CreateL7RulesResponse) {
     response = &CreateL7RulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateL7Rules
@@ -813,8 +826,9 @@ func NewCreateL7RulesUploadRequest() (request *CreateL7RulesUploadRequest) {
 func NewCreateL7RulesUploadResponse() (response *CreateL7RulesUploadResponse) {
     response = &CreateL7RulesUploadResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateL7RulesUpload
@@ -879,8 +893,9 @@ func NewCreateNetReturnRequest() (request *CreateNetReturnRequest) {
 func NewCreateNetReturnResponse() (response *CreateNetReturnResponse) {
     response = &CreateNetReturnResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateNetReturn
@@ -945,8 +960,9 @@ func NewCreateNewL7RulesUploadRequest() (request *CreateNewL7RulesUploadRequest)
 func NewCreateNewL7RulesUploadResponse() (response *CreateNewL7RulesUploadResponse) {
     response = &CreateNewL7RulesUploadResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateNewL7RulesUpload
@@ -993,8 +1009,9 @@ func NewCreateUnblockIpRequest() (request *CreateUnblockIpRequest) {
 func NewCreateUnblockIpResponse() (response *CreateUnblockIpResponse) {
     response = &CreateUnblockIpResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateUnblockIp
@@ -1041,8 +1058,9 @@ func NewDeleteCCFrequencyRulesRequest() (request *DeleteCCFrequencyRulesRequest)
 func NewDeleteCCFrequencyRulesResponse() (response *DeleteCCFrequencyRulesResponse) {
     response = &DeleteCCFrequencyRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCCFrequencyRules
@@ -1089,8 +1107,9 @@ func NewDeleteCCSelfDefinePolicyRequest() (request *DeleteCCSelfDefinePolicyRequ
 func NewDeleteCCSelfDefinePolicyResponse() (response *DeleteCCSelfDefinePolicyResponse) {
     response = &DeleteCCSelfDefinePolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCCSelfDefinePolicy
@@ -1153,8 +1172,9 @@ func NewDeleteDDoSPolicyRequest() (request *DeleteDDoSPolicyRequest) {
 func NewDeleteDDoSPolicyResponse() (response *DeleteDDoSPolicyResponse) {
     response = &DeleteDDoSPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteDDoSPolicy
@@ -1201,8 +1221,9 @@ func NewDeleteDDoSPolicyCaseRequest() (request *DeleteDDoSPolicyCaseRequest) {
 func NewDeleteDDoSPolicyCaseResponse() (response *DeleteDDoSPolicyCaseResponse) {
     response = &DeleteDDoSPolicyCaseResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteDDoSPolicyCase
@@ -1249,8 +1270,9 @@ func NewDeleteL4RulesRequest() (request *DeleteL4RulesRequest) {
 func NewDeleteL4RulesResponse() (response *DeleteL4RulesResponse) {
     response = &DeleteL4RulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteL4Rules
@@ -1297,8 +1319,9 @@ func NewDeleteL7RulesRequest() (request *DeleteL7RulesRequest) {
 func NewDeleteL7RulesResponse() (response *DeleteL7RulesResponse) {
     response = &DeleteL7RulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteL7Rules
@@ -1345,8 +1368,9 @@ func NewDescribeActionLogRequest() (request *DescribeActionLogRequest) {
 func NewDescribeActionLogResponse() (response *DescribeActionLogResponse) {
     response = &DescribeActionLogResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeActionLog
@@ -1393,8 +1417,9 @@ func NewDescribeBGPIPL7RuleMaxCntRequest() (request *DescribeBGPIPL7RuleMaxCntRe
 func NewDescribeBGPIPL7RuleMaxCntResponse() (response *DescribeBGPIPL7RuleMaxCntResponse) {
     response = &DescribeBGPIPL7RuleMaxCntResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBGPIPL7RuleMaxCnt
@@ -1441,8 +1466,9 @@ func NewDescribeBaradDataRequest() (request *DescribeBaradDataRequest) {
 func NewDescribeBaradDataResponse() (response *DescribeBaradDataResponse) {
     response = &DescribeBaradDataResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBaradData
@@ -1489,8 +1515,9 @@ func NewDescribeBasicCCThresholdRequest() (request *DescribeBasicCCThresholdRequ
 func NewDescribeBasicCCThresholdResponse() (response *DescribeBasicCCThresholdResponse) {
     response = &DescribeBasicCCThresholdResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBasicCCThreshold
@@ -1555,8 +1582,9 @@ func NewDescribeBasicDeviceThresholdRequest() (request *DescribeBasicDeviceThres
 func NewDescribeBasicDeviceThresholdResponse() (response *DescribeBasicDeviceThresholdResponse) {
     response = &DescribeBasicDeviceThresholdResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBasicDeviceThreshold
@@ -1621,8 +1649,9 @@ func NewDescribeBizHttpStatusRequest() (request *DescribeBizHttpStatusRequest) {
 func NewDescribeBizHttpStatusResponse() (response *DescribeBizHttpStatusResponse) {
     response = &DescribeBizHttpStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBizHttpStatus
@@ -1687,8 +1716,9 @@ func NewDescribeCCAlarmThresholdRequest() (request *DescribeCCAlarmThresholdRequ
 func NewDescribeCCAlarmThresholdResponse() (response *DescribeCCAlarmThresholdResponse) {
     response = &DescribeCCAlarmThresholdResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCCAlarmThreshold
@@ -1753,8 +1783,9 @@ func NewDescribeCCEvListRequest() (request *DescribeCCEvListRequest) {
 func NewDescribeCCEvListResponse() (response *DescribeCCEvListResponse) {
     response = &DescribeCCEvListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCCEvList
@@ -1819,8 +1850,9 @@ func NewDescribeCCFrequencyRulesRequest() (request *DescribeCCFrequencyRulesRequ
 func NewDescribeCCFrequencyRulesResponse() (response *DescribeCCFrequencyRulesResponse) {
     response = &DescribeCCFrequencyRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCCFrequencyRules
@@ -1885,8 +1917,9 @@ func NewDescribeCCIpAllowDenyRequest() (request *DescribeCCIpAllowDenyRequest) {
 func NewDescribeCCIpAllowDenyResponse() (response *DescribeCCIpAllowDenyResponse) {
     response = &DescribeCCIpAllowDenyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCCIpAllowDeny
@@ -1951,8 +1984,9 @@ func NewDescribeCCSelfDefinePolicyRequest() (request *DescribeCCSelfDefinePolicy
 func NewDescribeCCSelfDefinePolicyResponse() (response *DescribeCCSelfDefinePolicyResponse) {
     response = &DescribeCCSelfDefinePolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCCSelfDefinePolicy
@@ -2015,8 +2049,9 @@ func NewDescribeCCTrendRequest() (request *DescribeCCTrendRequest) {
 func NewDescribeCCTrendResponse() (response *DescribeCCTrendResponse) {
     response = &DescribeCCTrendResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCCTrend
@@ -2079,8 +2114,9 @@ func NewDescribeCCUrlAllowRequest() (request *DescribeCCUrlAllowRequest) {
 func NewDescribeCCUrlAllowResponse() (response *DescribeCCUrlAllowResponse) {
     response = &DescribeCCUrlAllowResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCCUrlAllow
@@ -2143,8 +2179,9 @@ func NewDescribeDDoSAlarmThresholdRequest() (request *DescribeDDoSAlarmThreshold
 func NewDescribeDDoSAlarmThresholdResponse() (response *DescribeDDoSAlarmThresholdResponse) {
     response = &DescribeDDoSAlarmThresholdResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSAlarmThreshold
@@ -2207,8 +2244,9 @@ func NewDescribeDDoSAttackIPRegionMapRequest() (request *DescribeDDoSAttackIPReg
 func NewDescribeDDoSAttackIPRegionMapResponse() (response *DescribeDDoSAttackIPRegionMapResponse) {
     response = &DescribeDDoSAttackIPRegionMapResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSAttackIPRegionMap
@@ -2267,8 +2305,9 @@ func NewDescribeDDoSAttackSourceRequest() (request *DescribeDDoSAttackSourceRequ
 func NewDescribeDDoSAttackSourceResponse() (response *DescribeDDoSAttackSourceResponse) {
     response = &DescribeDDoSAttackSourceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSAttackSource
@@ -2333,8 +2372,9 @@ func NewDescribeDDoSCountRequest() (request *DescribeDDoSCountRequest) {
 func NewDescribeDDoSCountResponse() (response *DescribeDDoSCountResponse) {
     response = &DescribeDDoSCountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSCount
@@ -2399,8 +2439,9 @@ func NewDescribeDDoSDefendStatusRequest() (request *DescribeDDoSDefendStatusRequ
 func NewDescribeDDoSDefendStatusResponse() (response *DescribeDDoSDefendStatusResponse) {
     response = &DescribeDDoSDefendStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSDefendStatus
@@ -2465,8 +2506,9 @@ func NewDescribeDDoSEvInfoRequest() (request *DescribeDDoSEvInfoRequest) {
 func NewDescribeDDoSEvInfoResponse() (response *DescribeDDoSEvInfoResponse) {
     response = &DescribeDDoSEvInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSEvInfo
@@ -2531,8 +2573,9 @@ func NewDescribeDDoSEvListRequest() (request *DescribeDDoSEvListRequest) {
 func NewDescribeDDoSEvListResponse() (response *DescribeDDoSEvListResponse) {
     response = &DescribeDDoSEvListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSEvList
@@ -2597,8 +2640,9 @@ func NewDescribeDDoSIpLogRequest() (request *DescribeDDoSIpLogRequest) {
 func NewDescribeDDoSIpLogResponse() (response *DescribeDDoSIpLogResponse) {
     response = &DescribeDDoSIpLogResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSIpLog
@@ -2663,8 +2707,9 @@ func NewDescribeDDoSNetCountRequest() (request *DescribeDDoSNetCountRequest) {
 func NewDescribeDDoSNetCountResponse() (response *DescribeDDoSNetCountResponse) {
     response = &DescribeDDoSNetCountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSNetCount
@@ -2729,8 +2774,9 @@ func NewDescribeDDoSNetEvInfoRequest() (request *DescribeDDoSNetEvInfoRequest) {
 func NewDescribeDDoSNetEvInfoResponse() (response *DescribeDDoSNetEvInfoResponse) {
     response = &DescribeDDoSNetEvInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSNetEvInfo
@@ -2795,8 +2841,9 @@ func NewDescribeDDoSNetEvListRequest() (request *DescribeDDoSNetEvListRequest) {
 func NewDescribeDDoSNetEvListResponse() (response *DescribeDDoSNetEvListResponse) {
     response = &DescribeDDoSNetEvListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSNetEvList
@@ -2861,8 +2908,9 @@ func NewDescribeDDoSNetIpLogRequest() (request *DescribeDDoSNetIpLogRequest) {
 func NewDescribeDDoSNetIpLogResponse() (response *DescribeDDoSNetIpLogResponse) {
     response = &DescribeDDoSNetIpLogResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSNetIpLog
@@ -2927,8 +2975,9 @@ func NewDescribeDDoSNetTrendRequest() (request *DescribeDDoSNetTrendRequest) {
 func NewDescribeDDoSNetTrendResponse() (response *DescribeDDoSNetTrendResponse) {
     response = &DescribeDDoSNetTrendResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSNetTrend
@@ -2993,8 +3042,9 @@ func NewDescribeDDoSPolicyRequest() (request *DescribeDDoSPolicyRequest) {
 func NewDescribeDDoSPolicyResponse() (response *DescribeDDoSPolicyResponse) {
     response = &DescribeDDoSPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSPolicy
@@ -3059,8 +3109,9 @@ func NewDescribeDDoSTrendRequest() (request *DescribeDDoSTrendRequest) {
 func NewDescribeDDoSTrendResponse() (response *DescribeDDoSTrendResponse) {
     response = &DescribeDDoSTrendResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSTrend
@@ -3125,8 +3176,9 @@ func NewDescribeDDoSUsedStatisRequest() (request *DescribeDDoSUsedStatisRequest)
 func NewDescribeDDoSUsedStatisResponse() (response *DescribeDDoSUsedStatisResponse) {
     response = &DescribeDDoSUsedStatisResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSUsedStatis
@@ -3191,8 +3243,9 @@ func NewDescribeIPProductInfoRequest() (request *DescribeIPProductInfoRequest) {
 func NewDescribeIPProductInfoResponse() (response *DescribeIPProductInfoResponse) {
     response = &DescribeIPProductInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIPProductInfo
@@ -3257,8 +3310,9 @@ func NewDescribeInsurePacksRequest() (request *DescribeInsurePacksRequest) {
 func NewDescribeInsurePacksResponse() (response *DescribeInsurePacksResponse) {
     response = &DescribeInsurePacksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInsurePacks
@@ -3323,8 +3377,9 @@ func NewDescribeIpBlockListRequest() (request *DescribeIpBlockListRequest) {
 func NewDescribeIpBlockListResponse() (response *DescribeIpBlockListResponse) {
     response = &DescribeIpBlockListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIpBlockList
@@ -3389,8 +3444,9 @@ func NewDescribeIpUnBlockListRequest() (request *DescribeIpUnBlockListRequest) {
 func NewDescribeIpUnBlockListResponse() (response *DescribeIpUnBlockListResponse) {
     response = &DescribeIpUnBlockListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIpUnBlockList
@@ -3455,8 +3511,9 @@ func NewDescribeL4HealthConfigRequest() (request *DescribeL4HealthConfigRequest)
 func NewDescribeL4HealthConfigResponse() (response *DescribeL4HealthConfigResponse) {
     response = &DescribeL4HealthConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeL4HealthConfig
@@ -3521,8 +3578,9 @@ func NewDescribeL4RulesErrHealthRequest() (request *DescribeL4RulesErrHealthRequ
 func NewDescribeL4RulesErrHealthResponse() (response *DescribeL4RulesErrHealthResponse) {
     response = &DescribeL4RulesErrHealthResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeL4RulesErrHealth
@@ -3587,8 +3645,9 @@ func NewDescribeL7HealthConfigRequest() (request *DescribeL7HealthConfigRequest)
 func NewDescribeL7HealthConfigResponse() (response *DescribeL7HealthConfigResponse) {
     response = &DescribeL7HealthConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeL7HealthConfig
@@ -3653,8 +3712,9 @@ func NewDescribePackIndexRequest() (request *DescribePackIndexRequest) {
 func NewDescribePackIndexResponse() (response *DescribePackIndexResponse) {
     response = &DescribePackIndexResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePackIndex
@@ -3719,8 +3779,9 @@ func NewDescribePcapRequest() (request *DescribePcapRequest) {
 func NewDescribePcapResponse() (response *DescribePcapResponse) {
     response = &DescribePcapResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePcap
@@ -3785,8 +3846,9 @@ func NewDescribePolicyCaseRequest() (request *DescribePolicyCaseRequest) {
 func NewDescribePolicyCaseResponse() (response *DescribePolicyCaseResponse) {
     response = &DescribePolicyCaseResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePolicyCase
@@ -3851,8 +3913,9 @@ func NewDescribeResIpListRequest() (request *DescribeResIpListRequest) {
 func NewDescribeResIpListResponse() (response *DescribeResIpListResponse) {
     response = &DescribeResIpListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeResIpList
@@ -3917,8 +3980,9 @@ func NewDescribeResourceListRequest() (request *DescribeResourceListRequest) {
 func NewDescribeResourceListResponse() (response *DescribeResourceListResponse) {
     response = &DescribeResourceListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeResourceList
@@ -3983,8 +4047,9 @@ func NewDescribeRuleSetsRequest() (request *DescribeRuleSetsRequest) {
 func NewDescribeRuleSetsResponse() (response *DescribeRuleSetsResponse) {
     response = &DescribeRuleSetsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRuleSets
@@ -4049,8 +4114,9 @@ func NewDescribeSchedulingDomainListRequest() (request *DescribeSchedulingDomain
 func NewDescribeSchedulingDomainListResponse() (response *DescribeSchedulingDomainListResponse) {
     response = &DescribeSchedulingDomainListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSchedulingDomainList
@@ -4115,8 +4181,9 @@ func NewDescribeSecIndexRequest() (request *DescribeSecIndexRequest) {
 func NewDescribeSecIndexResponse() (response *DescribeSecIndexResponse) {
     response = &DescribeSecIndexResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSecIndex
@@ -4181,8 +4248,9 @@ func NewDescribeSourceIpSegmentRequest() (request *DescribeSourceIpSegmentReques
 func NewDescribeSourceIpSegmentResponse() (response *DescribeSourceIpSegmentResponse) {
     response = &DescribeSourceIpSegmentResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSourceIpSegment
@@ -4247,8 +4315,9 @@ func NewDescribeTransmitStatisRequest() (request *DescribeTransmitStatisRequest)
 func NewDescribeTransmitStatisResponse() (response *DescribeTransmitStatisResponse) {
     response = &DescribeTransmitStatisResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTransmitStatis
@@ -4295,8 +4364,9 @@ func NewDescribeUnBlockStatisRequest() (request *DescribeUnBlockStatisRequest) {
 func NewDescribeUnBlockStatisResponse() (response *DescribeUnBlockStatisResponse) {
     response = &DescribeUnBlockStatisResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUnBlockStatis
@@ -4343,8 +4413,9 @@ func NewDescribleL4RulesRequest() (request *DescribleL4RulesRequest) {
 func NewDescribleL4RulesResponse() (response *DescribleL4RulesResponse) {
     response = &DescribleL4RulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribleL4Rules
@@ -4391,8 +4462,9 @@ func NewDescribleL7RulesRequest() (request *DescribleL7RulesRequest) {
 func NewDescribleL7RulesResponse() (response *DescribleL7RulesResponse) {
     response = &DescribleL7RulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribleL7Rules
@@ -4439,8 +4511,9 @@ func NewDescribleRegionCountRequest() (request *DescribleRegionCountRequest) {
 func NewDescribleRegionCountResponse() (response *DescribleRegionCountResponse) {
     response = &DescribleRegionCountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribleRegionCount
@@ -4487,8 +4560,9 @@ func NewModifyCCAlarmThresholdRequest() (request *ModifyCCAlarmThresholdRequest)
 func NewModifyCCAlarmThresholdResponse() (response *ModifyCCAlarmThresholdResponse) {
     response = &ModifyCCAlarmThresholdResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCCAlarmThreshold
@@ -4535,8 +4609,9 @@ func NewModifyCCFrequencyRulesRequest() (request *ModifyCCFrequencyRulesRequest)
 func NewModifyCCFrequencyRulesResponse() (response *ModifyCCFrequencyRulesResponse) {
     response = &ModifyCCFrequencyRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCCFrequencyRules
@@ -4583,8 +4658,9 @@ func NewModifyCCFrequencyRulesStatusRequest() (request *ModifyCCFrequencyRulesSt
 func NewModifyCCFrequencyRulesStatusResponse() (response *ModifyCCFrequencyRulesStatusResponse) {
     response = &ModifyCCFrequencyRulesStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCCFrequencyRulesStatus
@@ -4631,8 +4707,9 @@ func NewModifyCCHostProtectionRequest() (request *ModifyCCHostProtectionRequest)
 func NewModifyCCHostProtectionResponse() (response *ModifyCCHostProtectionResponse) {
     response = &ModifyCCHostProtectionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCCHostProtection
@@ -4679,8 +4756,9 @@ func NewModifyCCIpAllowDenyRequest() (request *ModifyCCIpAllowDenyRequest) {
 func NewModifyCCIpAllowDenyResponse() (response *ModifyCCIpAllowDenyResponse) {
     response = &ModifyCCIpAllowDenyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCCIpAllowDeny
@@ -4727,8 +4805,9 @@ func NewModifyCCLevelRequest() (request *ModifyCCLevelRequest) {
 func NewModifyCCLevelResponse() (response *ModifyCCLevelResponse) {
     response = &ModifyCCLevelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCCLevel
@@ -4775,8 +4854,9 @@ func NewModifyCCPolicySwitchRequest() (request *ModifyCCPolicySwitchRequest) {
 func NewModifyCCPolicySwitchResponse() (response *ModifyCCPolicySwitchResponse) {
     response = &ModifyCCPolicySwitchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCCPolicySwitch
@@ -4839,8 +4919,9 @@ func NewModifyCCSelfDefinePolicyRequest() (request *ModifyCCSelfDefinePolicyRequ
 func NewModifyCCSelfDefinePolicyResponse() (response *ModifyCCSelfDefinePolicyResponse) {
     response = &ModifyCCSelfDefinePolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCCSelfDefinePolicy
@@ -4903,8 +4984,9 @@ func NewModifyCCThresholdRequest() (request *ModifyCCThresholdRequest) {
 func NewModifyCCThresholdResponse() (response *ModifyCCThresholdResponse) {
     response = &ModifyCCThresholdResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCCThreshold
@@ -4951,8 +5033,9 @@ func NewModifyCCUrlAllowRequest() (request *ModifyCCUrlAllowRequest) {
 func NewModifyCCUrlAllowResponse() (response *ModifyCCUrlAllowResponse) {
     response = &ModifyCCUrlAllowResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCCUrlAllow
@@ -4999,8 +5082,9 @@ func NewModifyDDoSAIStatusRequest() (request *ModifyDDoSAIStatusRequest) {
 func NewModifyDDoSAIStatusResponse() (response *ModifyDDoSAIStatusResponse) {
     response = &ModifyDDoSAIStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDDoSAIStatus
@@ -5047,8 +5131,9 @@ func NewModifyDDoSAlarmThresholdRequest() (request *ModifyDDoSAlarmThresholdRequ
 func NewModifyDDoSAlarmThresholdResponse() (response *ModifyDDoSAlarmThresholdResponse) {
     response = &ModifyDDoSAlarmThresholdResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDDoSAlarmThreshold
@@ -5095,8 +5180,9 @@ func NewModifyDDoSDefendStatusRequest() (request *ModifyDDoSDefendStatusRequest)
 func NewModifyDDoSDefendStatusResponse() (response *ModifyDDoSDefendStatusResponse) {
     response = &ModifyDDoSDefendStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDDoSDefendStatus
@@ -5143,8 +5229,9 @@ func NewModifyDDoSLevelRequest() (request *ModifyDDoSLevelRequest) {
 func NewModifyDDoSLevelResponse() (response *ModifyDDoSLevelResponse) {
     response = &ModifyDDoSLevelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDDoSLevel
@@ -5191,8 +5278,9 @@ func NewModifyDDoSPolicyRequest() (request *ModifyDDoSPolicyRequest) {
 func NewModifyDDoSPolicyResponse() (response *ModifyDDoSPolicyResponse) {
     response = &ModifyDDoSPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDDoSPolicy
@@ -5239,8 +5327,9 @@ func NewModifyDDoSPolicyCaseRequest() (request *ModifyDDoSPolicyCaseRequest) {
 func NewModifyDDoSPolicyCaseResponse() (response *ModifyDDoSPolicyCaseResponse) {
     response = &ModifyDDoSPolicyCaseResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDDoSPolicyCase
@@ -5287,8 +5376,9 @@ func NewModifyDDoSPolicyNameRequest() (request *ModifyDDoSPolicyNameRequest) {
 func NewModifyDDoSPolicyNameResponse() (response *ModifyDDoSPolicyNameResponse) {
     response = &ModifyDDoSPolicyNameResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDDoSPolicyName
@@ -5335,8 +5425,9 @@ func NewModifyDDoSSwitchRequest() (request *ModifyDDoSSwitchRequest) {
 func NewModifyDDoSSwitchResponse() (response *ModifyDDoSSwitchResponse) {
     response = &ModifyDDoSSwitchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDDoSSwitch
@@ -5383,8 +5474,9 @@ func NewModifyDDoSThresholdRequest() (request *ModifyDDoSThresholdRequest) {
 func NewModifyDDoSThresholdResponse() (response *ModifyDDoSThresholdResponse) {
     response = &ModifyDDoSThresholdResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDDoSThreshold
@@ -5431,8 +5523,9 @@ func NewModifyDDoSWaterKeyRequest() (request *ModifyDDoSWaterKeyRequest) {
 func NewModifyDDoSWaterKeyResponse() (response *ModifyDDoSWaterKeyResponse) {
     response = &ModifyDDoSWaterKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDDoSWaterKey
@@ -5479,8 +5572,9 @@ func NewModifyElasticLimitRequest() (request *ModifyElasticLimitRequest) {
 func NewModifyElasticLimitResponse() (response *ModifyElasticLimitResponse) {
     response = &ModifyElasticLimitResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyElasticLimit
@@ -5527,8 +5621,9 @@ func NewModifyL4HealthRequest() (request *ModifyL4HealthRequest) {
 func NewModifyL4HealthResponse() (response *ModifyL4HealthResponse) {
     response = &ModifyL4HealthResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyL4Health
@@ -5575,8 +5670,9 @@ func NewModifyL4KeepTimeRequest() (request *ModifyL4KeepTimeRequest) {
 func NewModifyL4KeepTimeResponse() (response *ModifyL4KeepTimeResponse) {
     response = &ModifyL4KeepTimeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyL4KeepTime
@@ -5623,8 +5719,9 @@ func NewModifyL4RulesRequest() (request *ModifyL4RulesRequest) {
 func NewModifyL4RulesResponse() (response *ModifyL4RulesResponse) {
     response = &ModifyL4RulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyL4Rules
@@ -5671,8 +5768,9 @@ func NewModifyL7RulesRequest() (request *ModifyL7RulesRequest) {
 func NewModifyL7RulesResponse() (response *ModifyL7RulesResponse) {
     response = &ModifyL7RulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyL7Rules
@@ -5721,8 +5819,9 @@ func NewModifyNetReturnSwitchRequest() (request *ModifyNetReturnSwitchRequest) {
 func NewModifyNetReturnSwitchResponse() (response *ModifyNetReturnSwitchResponse) {
     response = &ModifyNetReturnSwitchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyNetReturnSwitch
@@ -5771,8 +5870,9 @@ func NewModifyNewDomainRulesRequest() (request *ModifyNewDomainRulesRequest) {
 func NewModifyNewDomainRulesResponse() (response *ModifyNewDomainRulesResponse) {
     response = &ModifyNewDomainRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyNewDomainRules
@@ -5819,8 +5919,9 @@ func NewModifyNewL4RuleRequest() (request *ModifyNewL4RuleRequest) {
 func NewModifyNewL4RuleResponse() (response *ModifyNewL4RuleResponse) {
     response = &ModifyNewL4RuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyNewL4Rule
@@ -5867,8 +5968,9 @@ func NewModifyResBindDDoSPolicyRequest() (request *ModifyResBindDDoSPolicyReques
 func NewModifyResBindDDoSPolicyResponse() (response *ModifyResBindDDoSPolicyResponse) {
     response = &ModifyResBindDDoSPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyResBindDDoSPolicy
@@ -5915,8 +6017,9 @@ func NewModifyResourceRenewFlagRequest() (request *ModifyResourceRenewFlagReques
 func NewModifyResourceRenewFlagResponse() (response *ModifyResourceRenewFlagResponse) {
     response = &ModifyResourceRenewFlagResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyResourceRenewFlag

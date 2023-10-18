@@ -59,8 +59,9 @@ func NewCreateLogExportRequest() (request *CreateLogExportRequest) {
 func NewCreateLogExportResponse() (response *CreateLogExportResponse) {
     response = &CreateLogExportResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateLogExport
@@ -125,8 +126,9 @@ func NewCreateOfflineLogConfigRequest() (request *CreateOfflineLogConfigRequest)
 func NewCreateOfflineLogConfigResponse() (response *CreateOfflineLogConfigResponse) {
     response = &CreateOfflineLogConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateOfflineLogConfig
@@ -175,8 +177,9 @@ func NewCreateProjectRequest() (request *CreateProjectRequest) {
 func NewCreateProjectResponse() (response *CreateProjectResponse) {
     response = &CreateProjectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateProject
@@ -239,8 +242,9 @@ func NewCreateReleaseFileRequest() (request *CreateReleaseFileRequest) {
 func NewCreateReleaseFileResponse() (response *CreateReleaseFileResponse) {
     response = &CreateReleaseFileResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateReleaseFile
@@ -327,8 +331,9 @@ func NewCreateStarProjectRequest() (request *CreateStarProjectRequest) {
 func NewCreateStarProjectResponse() (response *CreateStarProjectResponse) {
     response = &CreateStarProjectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateStarProject
@@ -413,8 +418,9 @@ func NewCreateTawInstanceRequest() (request *CreateTawInstanceRequest) {
 func NewCreateTawInstanceResponse() (response *CreateTawInstanceResponse) {
     response = &CreateTawInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTawInstance
@@ -477,8 +483,9 @@ func NewCreateWhitelistRequest() (request *CreateWhitelistRequest) {
 func NewCreateWhitelistResponse() (response *CreateWhitelistResponse) {
     response = &CreateWhitelistResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateWhitelist
@@ -563,8 +570,9 @@ func NewDeleteInstanceRequest() (request *DeleteInstanceRequest) {
 func NewDeleteInstanceResponse() (response *DeleteInstanceResponse) {
     response = &DeleteInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteInstance
@@ -635,8 +643,9 @@ func NewDeleteLogExportRequest() (request *DeleteLogExportRequest) {
 func NewDeleteLogExportResponse() (response *DeleteLogExportResponse) {
     response = &DeleteLogExportResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteLogExport
@@ -701,8 +710,9 @@ func NewDeleteOfflineLogConfigRequest() (request *DeleteOfflineLogConfigRequest)
 func NewDeleteOfflineLogConfigResponse() (response *DeleteOfflineLogConfigResponse) {
     response = &DeleteOfflineLogConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteOfflineLogConfig
@@ -789,8 +799,9 @@ func NewDeleteOfflineLogRecordRequest() (request *DeleteOfflineLogRecordRequest)
 func NewDeleteOfflineLogRecordResponse() (response *DeleteOfflineLogRecordResponse) {
     response = &DeleteOfflineLogRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteOfflineLogRecord
@@ -837,8 +848,9 @@ func NewDeleteProjectRequest() (request *DeleteProjectRequest) {
 func NewDeleteProjectResponse() (response *DeleteProjectResponse) {
     response = &DeleteProjectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteProject
@@ -887,8 +899,9 @@ func NewDeleteReleaseFileRequest() (request *DeleteReleaseFileRequest) {
 func NewDeleteReleaseFileResponse() (response *DeleteReleaseFileResponse) {
     response = &DeleteReleaseFileResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteReleaseFile
@@ -975,8 +988,9 @@ func NewDeleteStarProjectRequest() (request *DeleteStarProjectRequest) {
 func NewDeleteStarProjectResponse() (response *DeleteStarProjectResponse) {
     response = &DeleteStarProjectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteStarProject
@@ -1061,8 +1075,9 @@ func NewDeleteWhitelistRequest() (request *DeleteWhitelistRequest) {
 func NewDeleteWhitelistResponse() (response *DeleteWhitelistResponse) {
     response = &DeleteWhitelistResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteWhitelist
@@ -1147,8 +1162,9 @@ func NewDescribeDataRequest() (request *DescribeDataRequest) {
 func NewDescribeDataResponse() (response *DescribeDataResponse) {
     response = &DescribeDataResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeData
@@ -1237,8 +1253,9 @@ func NewDescribeDataCustomUrlRequest() (request *DescribeDataCustomUrlRequest) {
 func NewDescribeDataCustomUrlResponse() (response *DescribeDataCustomUrlResponse) {
     response = &DescribeDataCustomUrlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataCustomUrl
@@ -1327,8 +1344,9 @@ func NewDescribeDataEventUrlRequest() (request *DescribeDataEventUrlRequest) {
 func NewDescribeDataEventUrlResponse() (response *DescribeDataEventUrlResponse) {
     response = &DescribeDataEventUrlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataEventUrl
@@ -1417,8 +1435,9 @@ func NewDescribeDataFetchProjectRequest() (request *DescribeDataFetchProjectRequ
 func NewDescribeDataFetchProjectResponse() (response *DescribeDataFetchProjectResponse) {
     response = &DescribeDataFetchProjectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataFetchProject
@@ -1507,8 +1526,9 @@ func NewDescribeDataFetchUrlRequest() (request *DescribeDataFetchUrlRequest) {
 func NewDescribeDataFetchUrlResponse() (response *DescribeDataFetchUrlResponse) {
     response = &DescribeDataFetchUrlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataFetchUrl
@@ -1597,8 +1617,9 @@ func NewDescribeDataFetchUrlInfoRequest() (request *DescribeDataFetchUrlInfoRequ
 func NewDescribeDataFetchUrlInfoResponse() (response *DescribeDataFetchUrlInfoResponse) {
     response = &DescribeDataFetchUrlInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataFetchUrlInfo
@@ -1687,8 +1708,9 @@ func NewDescribeDataLogUrlInfoRequest() (request *DescribeDataLogUrlInfoRequest)
 func NewDescribeDataLogUrlInfoResponse() (response *DescribeDataLogUrlInfoResponse) {
     response = &DescribeDataLogUrlInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataLogUrlInfo
@@ -1777,8 +1799,9 @@ func NewDescribeDataLogUrlStatisticsRequest() (request *DescribeDataLogUrlStatis
 func NewDescribeDataLogUrlStatisticsResponse() (response *DescribeDataLogUrlStatisticsResponse) {
     response = &DescribeDataLogUrlStatisticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataLogUrlStatistics
@@ -1865,8 +1888,9 @@ func NewDescribeDataPerformancePageRequest() (request *DescribeDataPerformancePa
 func NewDescribeDataPerformancePageResponse() (response *DescribeDataPerformancePageResponse) {
     response = &DescribeDataPerformancePageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataPerformancePage
@@ -1955,8 +1979,9 @@ func NewDescribeDataPerformanceProjectRequest() (request *DescribeDataPerformanc
 func NewDescribeDataPerformanceProjectResponse() (response *DescribeDataPerformanceProjectResponse) {
     response = &DescribeDataPerformanceProjectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataPerformanceProject
@@ -2043,8 +2068,9 @@ func NewDescribeDataPvUrlInfoRequest() (request *DescribeDataPvUrlInfoRequest) {
 func NewDescribeDataPvUrlInfoResponse() (response *DescribeDataPvUrlInfoResponse) {
     response = &DescribeDataPvUrlInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataPvUrlInfo
@@ -2133,8 +2159,9 @@ func NewDescribeDataPvUrlStatisticsRequest() (request *DescribeDataPvUrlStatisti
 func NewDescribeDataPvUrlStatisticsResponse() (response *DescribeDataPvUrlStatisticsResponse) {
     response = &DescribeDataPvUrlStatisticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataPvUrlStatistics
@@ -2223,8 +2250,9 @@ func NewDescribeDataReportCountRequest() (request *DescribeDataReportCountReques
 func NewDescribeDataReportCountResponse() (response *DescribeDataReportCountResponse) {
     response = &DescribeDataReportCountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataReportCount
@@ -2313,8 +2341,9 @@ func NewDescribeDataSetUrlStatisticsRequest() (request *DescribeDataSetUrlStatis
 func NewDescribeDataSetUrlStatisticsResponse() (response *DescribeDataSetUrlStatisticsResponse) {
     response = &DescribeDataSetUrlStatisticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataSetUrlStatistics
@@ -2403,8 +2432,9 @@ func NewDescribeDataStaticProjectRequest() (request *DescribeDataStaticProjectRe
 func NewDescribeDataStaticProjectResponse() (response *DescribeDataStaticProjectResponse) {
     response = &DescribeDataStaticProjectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataStaticProject
@@ -2493,8 +2523,9 @@ func NewDescribeDataStaticResourceRequest() (request *DescribeDataStaticResource
 func NewDescribeDataStaticResourceResponse() (response *DescribeDataStaticResourceResponse) {
     response = &DescribeDataStaticResourceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataStaticResource
@@ -2583,8 +2614,9 @@ func NewDescribeDataStaticUrlRequest() (request *DescribeDataStaticUrlRequest) {
 func NewDescribeDataStaticUrlResponse() (response *DescribeDataStaticUrlResponse) {
     response = &DescribeDataStaticUrlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataStaticUrl
@@ -2673,8 +2705,9 @@ func NewDescribeDataWebVitalsPageRequest() (request *DescribeDataWebVitalsPageRe
 func NewDescribeDataWebVitalsPageResponse() (response *DescribeDataWebVitalsPageResponse) {
     response = &DescribeDataWebVitalsPageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDataWebVitalsPage
@@ -2767,8 +2800,9 @@ func NewDescribeErrorRequest() (request *DescribeErrorRequest) {
 func NewDescribeErrorResponse() (response *DescribeErrorResponse) {
     response = &DescribeErrorResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeError
@@ -2853,8 +2887,9 @@ func NewDescribeLogExportsRequest() (request *DescribeLogExportsRequest) {
 func NewDescribeLogExportsResponse() (response *DescribeLogExportsResponse) {
     response = &DescribeLogExportsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeLogExports
@@ -2919,8 +2954,9 @@ func NewDescribeLogListRequest() (request *DescribeLogListRequest) {
 func NewDescribeLogListResponse() (response *DescribeLogListResponse) {
     response = &DescribeLogListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeLogList
@@ -3005,8 +3041,9 @@ func NewDescribeOfflineLogConfigsRequest() (request *DescribeOfflineLogConfigsRe
 func NewDescribeOfflineLogConfigsResponse() (response *DescribeOfflineLogConfigsResponse) {
     response = &DescribeOfflineLogConfigsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOfflineLogConfigs
@@ -3053,8 +3090,9 @@ func NewDescribeOfflineLogRecordsRequest() (request *DescribeOfflineLogRecordsRe
 func NewDescribeOfflineLogRecordsResponse() (response *DescribeOfflineLogRecordsResponse) {
     response = &DescribeOfflineLogRecordsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOfflineLogRecords
@@ -3101,8 +3139,9 @@ func NewDescribeOfflineLogsRequest() (request *DescribeOfflineLogsRequest) {
 func NewDescribeOfflineLogsResponse() (response *DescribeOfflineLogsResponse) {
     response = &DescribeOfflineLogsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOfflineLogs
@@ -3149,8 +3188,9 @@ func NewDescribeProjectLimitsRequest() (request *DescribeProjectLimitsRequest) {
 func NewDescribeProjectLimitsResponse() (response *DescribeProjectLimitsResponse) {
     response = &DescribeProjectLimitsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeProjectLimits
@@ -3239,8 +3279,9 @@ func NewDescribeProjectsRequest() (request *DescribeProjectsRequest) {
 func NewDescribeProjectsResponse() (response *DescribeProjectsResponse) {
     response = &DescribeProjectsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeProjects
@@ -3305,8 +3346,9 @@ func NewDescribePvListRequest() (request *DescribePvListRequest) {
 func NewDescribePvListResponse() (response *DescribePvListResponse) {
     response = &DescribePvListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePvList
@@ -3391,8 +3433,9 @@ func NewDescribeReleaseFileSignRequest() (request *DescribeReleaseFileSignReques
 func NewDescribeReleaseFileSignResponse() (response *DescribeReleaseFileSignResponse) {
     response = &DescribeReleaseFileSignResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeReleaseFileSign
@@ -3479,8 +3522,9 @@ func NewDescribeReleaseFilesRequest() (request *DescribeReleaseFilesRequest) {
 func NewDescribeReleaseFilesResponse() (response *DescribeReleaseFilesResponse) {
     response = &DescribeReleaseFilesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeReleaseFiles
@@ -3567,8 +3611,9 @@ func NewDescribeRumGroupLogRequest() (request *DescribeRumGroupLogRequest) {
 func NewDescribeRumGroupLogResponse() (response *DescribeRumGroupLogResponse) {
     response = &DescribeRumGroupLogResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRumGroupLog
@@ -3653,8 +3698,9 @@ func NewDescribeRumLogExportRequest() (request *DescribeRumLogExportRequest) {
 func NewDescribeRumLogExportResponse() (response *DescribeRumLogExportResponse) {
     response = &DescribeRumLogExportResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRumLogExport
@@ -3739,8 +3785,9 @@ func NewDescribeRumLogExportsRequest() (request *DescribeRumLogExportsRequest) {
 func NewDescribeRumLogExportsResponse() (response *DescribeRumLogExportsResponse) {
     response = &DescribeRumLogExportsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRumLogExports
@@ -3825,8 +3872,9 @@ func NewDescribeRumLogListRequest() (request *DescribeRumLogListRequest) {
 func NewDescribeRumLogListResponse() (response *DescribeRumLogListResponse) {
     response = &DescribeRumLogListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRumLogList
@@ -3911,8 +3959,9 @@ func NewDescribeRumStatsLogListRequest() (request *DescribeRumStatsLogListReques
 func NewDescribeRumStatsLogListResponse() (response *DescribeRumStatsLogListResponse) {
     response = &DescribeRumStatsLogListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRumStatsLogList
@@ -3997,8 +4046,9 @@ func NewDescribeScoresRequest() (request *DescribeScoresRequest) {
 func NewDescribeScoresResponse() (response *DescribeScoresResponse) {
     response = &DescribeScoresResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeScores
@@ -4083,8 +4133,9 @@ func NewDescribeTawAreasRequest() (request *DescribeTawAreasRequest) {
 func NewDescribeTawAreasResponse() (response *DescribeTawAreasResponse) {
     response = &DescribeTawAreasResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTawAreas
@@ -4137,8 +4188,9 @@ func NewDescribeUvListRequest() (request *DescribeUvListRequest) {
 func NewDescribeUvListResponse() (response *DescribeUvListResponse) {
     response = &DescribeUvListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUvList
@@ -4223,8 +4275,9 @@ func NewDescribeWhitelistsRequest() (request *DescribeWhitelistsRequest) {
 func NewDescribeWhitelistsResponse() (response *DescribeWhitelistsResponse) {
     response = &DescribeWhitelistsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeWhitelists
@@ -4307,8 +4360,9 @@ func NewModifyInstanceRequest() (request *ModifyInstanceRequest) {
 func NewModifyInstanceResponse() (response *ModifyInstanceResponse) {
     response = &ModifyInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyInstance
@@ -4377,8 +4431,9 @@ func NewModifyProjectRequest() (request *ModifyProjectRequest) {
 func NewModifyProjectResponse() (response *ModifyProjectResponse) {
     response = &ModifyProjectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyProject
@@ -4427,8 +4482,9 @@ func NewModifyProjectLimitRequest() (request *ModifyProjectLimitRequest) {
 func NewModifyProjectLimitResponse() (response *ModifyProjectLimitResponse) {
     response = &ModifyProjectLimitResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyProjectLimit
@@ -4517,8 +4573,9 @@ func NewResumeInstanceRequest() (request *ResumeInstanceRequest) {
 func NewResumeInstanceResponse() (response *ResumeInstanceResponse) {
     response = &ResumeInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResumeInstance
@@ -4589,8 +4646,9 @@ func NewResumeProjectRequest() (request *ResumeProjectRequest) {
 func NewResumeProjectResponse() (response *ResumeProjectResponse) {
     response = &ResumeProjectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResumeProject
@@ -4661,8 +4719,9 @@ func NewStopInstanceRequest() (request *StopInstanceRequest) {
 func NewStopInstanceResponse() (response *StopInstanceResponse) {
     response = &StopInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopInstance
@@ -4735,8 +4794,9 @@ func NewStopProjectRequest() (request *StopProjectRequest) {
 func NewStopProjectResponse() (response *StopProjectResponse) {
     response = &StopProjectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopProject

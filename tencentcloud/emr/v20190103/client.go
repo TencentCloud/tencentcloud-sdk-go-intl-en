@@ -59,8 +59,9 @@ func NewAddUsersForUserManagerRequest() (request *AddUsersForUserManagerRequest)
 func NewAddUsersForUserManagerResponse() (response *AddUsersForUserManagerResponse) {
     response = &AddUsersForUserManagerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AddUsersForUserManager
@@ -119,8 +120,9 @@ func NewCreateClusterRequest() (request *CreateClusterRequest) {
 func NewCreateClusterResponse() (response *CreateClusterResponse) {
     response = &CreateClusterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCluster
@@ -203,8 +205,9 @@ func NewCreateInstanceRequest() (request *CreateInstanceRequest) {
 func NewCreateInstanceResponse() (response *CreateInstanceResponse) {
     response = &CreateInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateInstance
@@ -399,8 +402,9 @@ func NewDescribeClusterNodesRequest() (request *DescribeClusterNodesRequest) {
 func NewDescribeClusterNodesResponse() (response *DescribeClusterNodesResponse) {
     response = &DescribeClusterNodesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterNodes
@@ -501,8 +505,9 @@ func NewDescribeEmrApplicationStaticsRequest() (request *DescribeEmrApplicationS
 func NewDescribeEmrApplicationStaticsResponse() (response *DescribeEmrApplicationStaticsResponse) {
     response = &DescribeEmrApplicationStaticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeEmrApplicationStatics
@@ -553,8 +558,9 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
 func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
     response = &DescribeInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstances
@@ -659,8 +665,9 @@ func NewDescribeInstancesListRequest() (request *DescribeInstancesListRequest) {
 func NewDescribeInstancesListResponse() (response *DescribeInstancesListResponse) {
     response = &DescribeInstancesListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstancesList
@@ -757,8 +764,9 @@ func NewDescribeResourceScheduleRequest() (request *DescribeResourceScheduleRequ
 func NewDescribeResourceScheduleResponse() (response *DescribeResourceScheduleResponse) {
     response = &DescribeResourceScheduleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeResourceSchedule
@@ -815,8 +823,9 @@ func NewDescribeUsersForUserManagerRequest() (request *DescribeUsersForUserManag
 func NewDescribeUsersForUserManagerResponse() (response *DescribeUsersForUserManagerResponse) {
     response = &DescribeUsersForUserManagerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUsersForUserManager
@@ -871,8 +880,9 @@ func NewInquiryPriceCreateInstanceRequest() (request *InquiryPriceCreateInstance
 func NewInquiryPriceCreateInstanceResponse() (response *InquiryPriceCreateInstanceResponse) {
     response = &InquiryPriceCreateInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquiryPriceCreateInstance
@@ -1003,8 +1013,9 @@ func NewInquiryPriceRenewInstanceRequest() (request *InquiryPriceRenewInstanceRe
 func NewInquiryPriceRenewInstanceResponse() (response *InquiryPriceRenewInstanceResponse) {
     response = &InquiryPriceRenewInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquiryPriceRenewInstance
@@ -1107,8 +1118,9 @@ func NewInquiryPriceScaleOutInstanceRequest() (request *InquiryPriceScaleOutInst
 func NewInquiryPriceScaleOutInstanceResponse() (response *InquiryPriceScaleOutInstanceResponse) {
     response = &InquiryPriceScaleOutInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquiryPriceScaleOutInstance
@@ -1217,8 +1229,9 @@ func NewInquiryPriceUpdateInstanceRequest() (request *InquiryPriceUpdateInstance
 func NewInquiryPriceUpdateInstanceResponse() (response *InquiryPriceUpdateInstanceResponse) {
     response = &InquiryPriceUpdateInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquiryPriceUpdateInstance
@@ -1319,8 +1332,9 @@ func NewModifyResourceScheduleConfigRequest() (request *ModifyResourceScheduleCo
 func NewModifyResourceScheduleConfigResponse() (response *ModifyResourceScheduleConfigResponse) {
     response = &ModifyResourceScheduleConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyResourceScheduleConfig
@@ -1377,8 +1391,9 @@ func NewModifyResourceSchedulerRequest() (request *ModifyResourceSchedulerReques
 func NewModifyResourceSchedulerResponse() (response *ModifyResourceSchedulerResponse) {
     response = &ModifyResourceSchedulerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyResourceScheduler
@@ -1431,8 +1446,9 @@ func NewScaleOutClusterRequest() (request *ScaleOutClusterRequest) {
 func NewScaleOutClusterResponse() (response *ScaleOutClusterResponse) {
     response = &ScaleOutClusterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ScaleOutCluster
@@ -1481,8 +1497,9 @@ func NewScaleOutInstanceRequest() (request *ScaleOutInstanceRequest) {
 func NewScaleOutInstanceResponse() (response *ScaleOutInstanceResponse) {
     response = &ScaleOutInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ScaleOutInstance
@@ -1643,8 +1660,9 @@ func NewStartStopServiceOrMonitorRequest() (request *StartStopServiceOrMonitorRe
 func NewStartStopServiceOrMonitorResponse() (response *StartStopServiceOrMonitorResponse) {
     response = &StartStopServiceOrMonitorResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartStopServiceOrMonitor
@@ -1707,8 +1725,9 @@ func NewTerminateClusterNodesRequest() (request *TerminateClusterNodesRequest) {
 func NewTerminateClusterNodesResponse() (response *TerminateClusterNodesResponse) {
     response = &TerminateClusterNodesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TerminateClusterNodes
@@ -1763,8 +1782,9 @@ func NewTerminateInstanceRequest() (request *TerminateInstanceRequest) {
 func NewTerminateInstanceResponse() (response *TerminateInstanceResponse) {
     response = &TerminateInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TerminateInstance
@@ -1837,8 +1857,9 @@ func NewTerminateTasksRequest() (request *TerminateTasksRequest) {
 func NewTerminateTasksResponse() (response *TerminateTasksResponse) {
     response = &TerminateTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TerminateTasks

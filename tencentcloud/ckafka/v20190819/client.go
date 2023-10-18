@@ -59,8 +59,9 @@ func NewBatchCreateAclRequest() (request *BatchCreateAclRequest) {
 func NewBatchCreateAclResponse() (response *BatchCreateAclResponse) {
     response = &BatchCreateAclResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BatchCreateAcl
@@ -111,8 +112,9 @@ func NewBatchModifyGroupOffsetsRequest() (request *BatchModifyGroupOffsetsReques
 func NewBatchModifyGroupOffsetsResponse() (response *BatchModifyGroupOffsetsResponse) {
     response = &BatchModifyGroupOffsetsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BatchModifyGroupOffsets
@@ -169,8 +171,9 @@ func NewBatchModifyTopicAttributesRequest() (request *BatchModifyTopicAttributes
 func NewBatchModifyTopicAttributesResponse() (response *BatchModifyTopicAttributesResponse) {
     response = &BatchModifyTopicAttributesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BatchModifyTopicAttributes
@@ -231,8 +234,9 @@ func NewCreateAclRequest() (request *CreateAclRequest) {
 func NewCreateAclResponse() (response *CreateAclResponse) {
     response = &CreateAclResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateAcl
@@ -305,8 +309,9 @@ func NewCreateAclRuleRequest() (request *CreateAclRuleRequest) {
 func NewCreateAclRuleResponse() (response *CreateAclRuleResponse) {
     response = &CreateAclRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateAclRule
@@ -381,8 +386,9 @@ func NewCreateConsumerRequest() (request *CreateConsumerRequest) {
 func NewCreateConsumerResponse() (response *CreateConsumerResponse) {
     response = &CreateConsumerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateConsumer
@@ -441,8 +447,9 @@ func NewCreateDatahubTopicRequest() (request *CreateDatahubTopicRequest) {
 func NewCreateDatahubTopicResponse() (response *CreateDatahubTopicResponse) {
     response = &CreateDatahubTopicResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDatahubTopic
@@ -519,8 +526,9 @@ func NewCreateInstancePostRequest() (request *CreateInstancePostRequest) {
 func NewCreateInstancePostResponse() (response *CreateInstancePostResponse) {
     response = &CreateInstancePostResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateInstancePost
@@ -595,8 +603,9 @@ func NewCreatePartitionRequest() (request *CreatePartitionRequest) {
 func NewCreatePartitionResponse() (response *CreatePartitionResponse) {
     response = &CreatePartitionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreatePartition
@@ -671,8 +680,9 @@ func NewCreatePostPaidInstanceRequest() (request *CreatePostPaidInstanceRequest)
 func NewCreatePostPaidInstanceResponse() (response *CreatePostPaidInstanceResponse) {
     response = &CreatePostPaidInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreatePostPaidInstance
@@ -747,8 +757,9 @@ func NewCreateTopicRequest() (request *CreateTopicRequest) {
 func NewCreateTopicResponse() (response *CreateTopicResponse) {
     response = &CreateTopicResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTopic
@@ -825,8 +836,9 @@ func NewCreateTopicIpWhiteListRequest() (request *CreateTopicIpWhiteListRequest)
 func NewCreateTopicIpWhiteListResponse() (response *CreateTopicIpWhiteListResponse) {
     response = &CreateTopicIpWhiteListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTopicIpWhiteList
@@ -899,8 +911,9 @@ func NewCreateUserRequest() (request *CreateUserRequest) {
 func NewCreateUserResponse() (response *CreateUserResponse) {
     response = &CreateUserResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateUser
@@ -973,8 +986,9 @@ func NewDeleteAclRequest() (request *DeleteAclRequest) {
 func NewDeleteAclResponse() (response *DeleteAclResponse) {
     response = &DeleteAclResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteAcl
@@ -1047,8 +1061,9 @@ func NewDeleteInstancePreRequest() (request *DeleteInstancePreRequest) {
 func NewDeleteInstancePreResponse() (response *DeleteInstancePreResponse) {
     response = &DeleteInstancePreResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteInstancePre
@@ -1097,8 +1112,9 @@ func NewDeleteRouteRequest() (request *DeleteRouteRequest) {
 func NewDeleteRouteResponse() (response *DeleteRouteResponse) {
     response = &DeleteRouteResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRoute
@@ -1175,8 +1191,9 @@ func NewDeleteRouteTriggerTimeRequest() (request *DeleteRouteTriggerTimeRequest)
 func NewDeleteRouteTriggerTimeResponse() (response *DeleteRouteTriggerTimeResponse) {
     response = &DeleteRouteTriggerTimeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRouteTriggerTime
@@ -1231,8 +1248,9 @@ func NewDeleteTopicRequest() (request *DeleteTopicRequest) {
 func NewDeleteTopicResponse() (response *DeleteTopicResponse) {
     response = &DeleteTopicResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteTopic
@@ -1309,8 +1327,9 @@ func NewDeleteTopicIpWhiteListRequest() (request *DeleteTopicIpWhiteListRequest)
 func NewDeleteTopicIpWhiteListResponse() (response *DeleteTopicIpWhiteListResponse) {
     response = &DeleteTopicIpWhiteListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteTopicIpWhiteList
@@ -1383,8 +1402,9 @@ func NewDeleteUserRequest() (request *DeleteUserRequest) {
 func NewDeleteUserResponse() (response *DeleteUserResponse) {
     response = &DeleteUserResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteUser
@@ -1457,8 +1477,9 @@ func NewDescribeACLRequest() (request *DescribeACLRequest) {
 func NewDescribeACLResponse() (response *DescribeACLResponse) {
     response = &DescribeACLResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeACL
@@ -1531,8 +1552,9 @@ func NewDescribeAclRuleRequest() (request *DescribeAclRuleRequest) {
 func NewDescribeAclRuleResponse() (response *DescribeAclRuleResponse) {
     response = &DescribeAclRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAclRule
@@ -1605,8 +1627,9 @@ func NewDescribeAppInfoRequest() (request *DescribeAppInfoRequest) {
 func NewDescribeAppInfoResponse() (response *DescribeAppInfoResponse) {
     response = &DescribeAppInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAppInfo
@@ -1677,8 +1700,9 @@ func NewDescribeCkafkaZoneRequest() (request *DescribeCkafkaZoneRequest) {
 func NewDescribeCkafkaZoneResponse() (response *DescribeCkafkaZoneResponse) {
     response = &DescribeCkafkaZoneResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCkafkaZone
@@ -1753,8 +1777,9 @@ func NewDescribeConsumerGroupRequest() (request *DescribeConsumerGroupRequest) {
 func NewDescribeConsumerGroupResponse() (response *DescribeConsumerGroupResponse) {
     response = &DescribeConsumerGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeConsumerGroup
@@ -1827,8 +1852,9 @@ func NewDescribeDatahubTopicRequest() (request *DescribeDatahubTopicRequest) {
 func NewDescribeDatahubTopicResponse() (response *DescribeDatahubTopicResponse) {
     response = &DescribeDatahubTopicResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDatahubTopic
@@ -1903,8 +1929,9 @@ func NewDescribeDatahubTopicsRequest() (request *DescribeDatahubTopicsRequest) {
 func NewDescribeDatahubTopicsResponse() (response *DescribeDatahubTopicsResponse) {
     response = &DescribeDatahubTopicsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDatahubTopics
@@ -1979,8 +2006,9 @@ func NewDescribeGroupRequest() (request *DescribeGroupRequest) {
 func NewDescribeGroupResponse() (response *DescribeGroupResponse) {
     response = &DescribeGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeGroup
@@ -2053,8 +2081,9 @@ func NewDescribeGroupInfoRequest() (request *DescribeGroupInfoRequest) {
 func NewDescribeGroupInfoResponse() (response *DescribeGroupInfoResponse) {
     response = &DescribeGroupInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeGroupInfo
@@ -2127,8 +2156,9 @@ func NewDescribeGroupOffsetsRequest() (request *DescribeGroupOffsetsRequest) {
 func NewDescribeGroupOffsetsResponse() (response *DescribeGroupOffsetsResponse) {
     response = &DescribeGroupOffsetsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeGroupOffsets
@@ -2201,8 +2231,9 @@ func NewDescribeInstanceAttributesRequest() (request *DescribeInstanceAttributes
 func NewDescribeInstanceAttributesResponse() (response *DescribeInstanceAttributesResponse) {
     response = &DescribeInstanceAttributesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceAttributes
@@ -2277,8 +2308,9 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
 func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
     response = &DescribeInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstances
@@ -2345,8 +2377,9 @@ func NewDescribeInstancesDetailRequest() (request *DescribeInstancesDetailReques
 func NewDescribeInstancesDetailResponse() (response *DescribeInstancesDetailResponse) {
     response = &DescribeInstancesDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstancesDetail
@@ -2421,8 +2454,9 @@ func NewDescribeRegionRequest() (request *DescribeRegionRequest) {
 func NewDescribeRegionResponse() (response *DescribeRegionResponse) {
     response = &DescribeRegionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRegion
@@ -2495,8 +2529,9 @@ func NewDescribeRouteRequest() (request *DescribeRouteRequest) {
 func NewDescribeRouteResponse() (response *DescribeRouteResponse) {
     response = &DescribeRouteResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRoute
@@ -2571,8 +2606,9 @@ func NewDescribeTaskStatusRequest() (request *DescribeTaskStatusRequest) {
 func NewDescribeTaskStatusResponse() (response *DescribeTaskStatusResponse) {
     response = &DescribeTaskStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTaskStatus
@@ -2645,8 +2681,9 @@ func NewDescribeTopicRequest() (request *DescribeTopicRequest) {
 func NewDescribeTopicResponse() (response *DescribeTopicResponse) {
     response = &DescribeTopicResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTopic
@@ -2725,8 +2762,9 @@ func NewDescribeTopicAttributesRequest() (request *DescribeTopicAttributesReques
 func NewDescribeTopicAttributesResponse() (response *DescribeTopicAttributesResponse) {
     response = &DescribeTopicAttributesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTopicAttributes
@@ -2801,8 +2839,9 @@ func NewDescribeTopicDetailRequest() (request *DescribeTopicDetailRequest) {
 func NewDescribeTopicDetailResponse() (response *DescribeTopicDetailResponse) {
     response = &DescribeTopicDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTopicDetail
@@ -2869,8 +2908,9 @@ func NewDescribeTopicProduceConnectionRequest() (request *DescribeTopicProduceCo
 func NewDescribeTopicProduceConnectionResponse() (response *DescribeTopicProduceConnectionResponse) {
     response = &DescribeTopicProduceConnectionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTopicProduceConnection
@@ -2927,8 +2967,9 @@ func NewDescribeTopicSubscribeGroupRequest() (request *DescribeTopicSubscribeGro
 func NewDescribeTopicSubscribeGroupResponse() (response *DescribeTopicSubscribeGroupResponse) {
     response = &DescribeTopicSubscribeGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTopicSubscribeGroup
@@ -3011,8 +3052,9 @@ func NewDescribeTopicSyncReplicaRequest() (request *DescribeTopicSyncReplicaRequ
 func NewDescribeTopicSyncReplicaResponse() (response *DescribeTopicSyncReplicaResponse) {
     response = &DescribeTopicSyncReplicaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTopicSyncReplica
@@ -3069,8 +3111,9 @@ func NewDescribeUserRequest() (request *DescribeUserRequest) {
 func NewDescribeUserResponse() (response *DescribeUserResponse) {
     response = &DescribeUserResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUser
@@ -3143,8 +3186,9 @@ func NewFetchMessageByOffsetRequest() (request *FetchMessageByOffsetRequest) {
 func NewFetchMessageByOffsetResponse() (response *FetchMessageByOffsetResponse) {
     response = &FetchMessageByOffsetResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // FetchMessageByOffset
@@ -3191,8 +3235,9 @@ func NewFetchMessageListByOffsetRequest() (request *FetchMessageListByOffsetRequ
 func NewFetchMessageListByOffsetResponse() (response *FetchMessageListByOffsetResponse) {
     response = &FetchMessageListByOffsetResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // FetchMessageListByOffset
@@ -3241,8 +3286,9 @@ func NewInquireCkafkaPriceRequest() (request *InquireCkafkaPriceRequest) {
 func NewInquireCkafkaPriceResponse() (response *InquireCkafkaPriceResponse) {
     response = &InquireCkafkaPriceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquireCkafkaPrice
@@ -3299,8 +3345,9 @@ func NewModifyAclRuleRequest() (request *ModifyAclRuleRequest) {
 func NewModifyAclRuleResponse() (response *ModifyAclRuleResponse) {
     response = &ModifyAclRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyAclRule
@@ -3355,8 +3402,9 @@ func NewModifyDatahubTopicRequest() (request *ModifyDatahubTopicRequest) {
 func NewModifyDatahubTopicResponse() (response *ModifyDatahubTopicResponse) {
     response = &ModifyDatahubTopicResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDatahubTopic
@@ -3429,8 +3477,9 @@ func NewModifyGroupOffsetsRequest() (request *ModifyGroupOffsetsRequest) {
 func NewModifyGroupOffsetsResponse() (response *ModifyGroupOffsetsResponse) {
     response = &ModifyGroupOffsetsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyGroupOffsets
@@ -3503,8 +3552,9 @@ func NewModifyInstanceAttributesRequest() (request *ModifyInstanceAttributesRequ
 func NewModifyInstanceAttributesResponse() (response *ModifyInstanceAttributesResponse) {
     response = &ModifyInstanceAttributesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyInstanceAttributes
@@ -3579,8 +3629,9 @@ func NewModifyInstancePreRequest() (request *ModifyInstancePreRequest) {
 func NewModifyInstancePreResponse() (response *ModifyInstancePreResponse) {
     response = &ModifyInstancePreResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyInstancePre
@@ -3651,8 +3702,9 @@ func NewModifyPasswordRequest() (request *ModifyPasswordRequest) {
 func NewModifyPasswordResponse() (response *ModifyPasswordResponse) {
     response = &ModifyPasswordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyPassword
@@ -3725,8 +3777,9 @@ func NewModifyTopicAttributesRequest() (request *ModifyTopicAttributesRequest) {
 func NewModifyTopicAttributesResponse() (response *ModifyTopicAttributesResponse) {
     response = &ModifyTopicAttributesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyTopicAttributes
@@ -3799,8 +3852,9 @@ func NewSendMessageRequest() (request *SendMessageRequest) {
 func NewSendMessageResponse() (response *SendMessageResponse) {
     response = &SendMessageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SendMessage

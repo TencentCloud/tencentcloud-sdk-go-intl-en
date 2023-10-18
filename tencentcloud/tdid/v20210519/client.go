@@ -59,8 +59,9 @@ func NewAddLabelRequest() (request *AddLabelRequest) {
 func NewAddLabelResponse() (response *AddLabelResponse) {
     response = &AddLabelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AddLabel
@@ -133,8 +134,9 @@ func NewCancelAuthorityIssuerRequest() (request *CancelAuthorityIssuerRequest) {
 func NewCancelAuthorityIssuerResponse() (response *CancelAuthorityIssuerResponse) {
     response = &CancelAuthorityIssuerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CancelAuthorityIssuer
@@ -205,8 +207,9 @@ func NewCheckChainRequest() (request *CheckChainRequest) {
 func NewCheckChainResponse() (response *CheckChainResponse) {
     response = &CheckChainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CheckChain
@@ -277,8 +280,9 @@ func NewCheckDidDeployRequest() (request *CheckDidDeployRequest) {
 func NewCheckDidDeployResponse() (response *CheckDidDeployResponse) {
     response = &CheckDidDeployResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CheckDidDeploy
@@ -349,8 +353,9 @@ func NewCreateCredentialRequest() (request *CreateCredentialRequest) {
 func NewCreateCredentialResponse() (response *CreateCredentialResponse) {
     response = &CreateCredentialResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCredential
@@ -409,8 +414,9 @@ func NewCreateDidServiceRequest() (request *CreateDidServiceRequest) {
 func NewCreateDidServiceResponse() (response *CreateDidServiceResponse) {
     response = &CreateDidServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDidService
@@ -481,8 +487,9 @@ func NewCreateLabelRequest() (request *CreateLabelRequest) {
 func NewCreateLabelResponse() (response *CreateLabelResponse) {
     response = &CreateLabelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateLabel
@@ -553,8 +560,9 @@ func NewCreateSelectiveCredentialRequest() (request *CreateSelectiveCredentialRe
 func NewCreateSelectiveCredentialResponse() (response *CreateSelectiveCredentialResponse) {
     response = &CreateSelectiveCredentialResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSelectiveCredential
@@ -625,8 +633,9 @@ func NewCreateTDidRequest() (request *CreateTDidRequest) {
 func NewCreateTDidResponse() (response *CreateTDidResponse) {
     response = &CreateTDidResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTDid
@@ -693,8 +702,9 @@ func NewCreateTDidByPrivateKeyRequest() (request *CreateTDidByPrivateKeyRequest)
 func NewCreateTDidByPrivateKeyResponse() (response *CreateTDidByPrivateKeyResponse) {
     response = &CreateTDidByPrivateKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTDidByPrivateKey
@@ -765,8 +775,9 @@ func NewCreateTDidByPublicKeyRequest() (request *CreateTDidByPublicKeyRequest) {
 func NewCreateTDidByPublicKeyResponse() (response *CreateTDidByPublicKeyResponse) {
     response = &CreateTDidByPublicKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTDidByPublicKey
@@ -837,8 +848,9 @@ func NewDeployByNameRequest() (request *DeployByNameRequest) {
 func NewDeployByNameResponse() (response *DeployByNameResponse) {
     response = &DeployByNameResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeployByName
@@ -909,8 +921,9 @@ func NewDownCptRequest() (request *DownCptRequest) {
 func NewDownCptResponse() (response *DownCptResponse) {
     response = &DownCptResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DownCpt
@@ -981,8 +994,9 @@ func NewEnableHashRequest() (request *EnableHashRequest) {
 func NewEnableHashResponse() (response *EnableHashResponse) {
     response = &EnableHashResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // EnableHash
@@ -1053,8 +1067,9 @@ func NewGetAgencyTDidRequest() (request *GetAgencyTDidRequest) {
 func NewGetAgencyTDidResponse() (response *GetAgencyTDidResponse) {
     response = &GetAgencyTDidResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetAgencyTDid
@@ -1133,8 +1148,9 @@ func NewGetAuthoritiesListRequest() (request *GetAuthoritiesListRequest) {
 func NewGetAuthoritiesListResponse() (response *GetAuthoritiesListResponse) {
     response = &GetAuthoritiesListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetAuthoritiesList
@@ -1205,8 +1221,9 @@ func NewGetAuthorityIssuerRequest() (request *GetAuthorityIssuerRequest) {
 func NewGetAuthorityIssuerResponse() (response *GetAuthorityIssuerResponse) {
     response = &GetAuthorityIssuerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetAuthorityIssuer
@@ -1277,8 +1294,9 @@ func NewGetConsortiumClusterListRequest() (request *GetConsortiumClusterListRequ
 func NewGetConsortiumClusterListResponse() (response *GetConsortiumClusterListResponse) {
     response = &GetConsortiumClusterListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetConsortiumClusterList
@@ -1349,8 +1367,9 @@ func NewGetConsortiumListRequest() (request *GetConsortiumListRequest) {
 func NewGetConsortiumListResponse() (response *GetConsortiumListResponse) {
     response = &GetConsortiumListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetConsortiumList
@@ -1421,8 +1440,9 @@ func NewGetCptInfoRequest() (request *GetCptInfoRequest) {
 func NewGetCptInfoResponse() (response *GetCptInfoResponse) {
     response = &GetCptInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetCptInfo
@@ -1493,8 +1513,9 @@ func NewGetCptListRequest() (request *GetCptListRequest) {
 func NewGetCptListResponse() (response *GetCptListResponse) {
     response = &GetCptListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetCptList
@@ -1565,8 +1586,9 @@ func NewGetCredentialCptRankRequest() (request *GetCredentialCptRankRequest) {
 func NewGetCredentialCptRankResponse() (response *GetCredentialCptRankResponse) {
     response = &GetCredentialCptRankResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetCredentialCptRank
@@ -1637,8 +1659,9 @@ func NewGetCredentialIssueRankRequest() (request *GetCredentialIssueRankRequest)
 func NewGetCredentialIssueRankResponse() (response *GetCredentialIssueRankResponse) {
     response = &GetCredentialIssueRankResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetCredentialIssueRank
@@ -1709,8 +1732,9 @@ func NewGetCredentialIssueTrendRequest() (request *GetCredentialIssueTrendReques
 func NewGetCredentialIssueTrendResponse() (response *GetCredentialIssueTrendResponse) {
     response = &GetCredentialIssueTrendResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetCredentialIssueTrend
@@ -1781,8 +1805,9 @@ func NewGetCredentialStatusRequest() (request *GetCredentialStatusRequest) {
 func NewGetCredentialStatusResponse() (response *GetCredentialStatusResponse) {
     response = &GetCredentialStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetCredentialStatus
@@ -1853,8 +1878,9 @@ func NewGetDataPanelRequest() (request *GetDataPanelRequest) {
 func NewGetDataPanelResponse() (response *GetDataPanelResponse) {
     response = &GetDataPanelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetDataPanel
@@ -1925,8 +1951,9 @@ func NewGetDeployInfoRequest() (request *GetDeployInfoRequest) {
 func NewGetDeployInfoResponse() (response *GetDeployInfoResponse) {
     response = &GetDeployInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetDeployInfo
@@ -1997,8 +2024,9 @@ func NewGetDeployListRequest() (request *GetDeployListRequest) {
 func NewGetDeployListResponse() (response *GetDeployListResponse) {
     response = &GetDeployListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetDeployList
@@ -2069,8 +2097,9 @@ func NewGetDidClusterDetailRequest() (request *GetDidClusterDetailRequest) {
 func NewGetDidClusterDetailResponse() (response *GetDidClusterDetailResponse) {
     response = &GetDidClusterDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetDidClusterDetail
@@ -2141,8 +2170,9 @@ func NewGetDidClusterListRequest() (request *GetDidClusterListRequest) {
 func NewGetDidClusterListResponse() (response *GetDidClusterListResponse) {
     response = &GetDidClusterListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetDidClusterList
@@ -2213,8 +2243,9 @@ func NewGetDidDetailRequest() (request *GetDidDetailRequest) {
 func NewGetDidDetailResponse() (response *GetDidDetailResponse) {
     response = &GetDidDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetDidDetail
@@ -2285,8 +2316,9 @@ func NewGetDidDocumentRequest() (request *GetDidDocumentRequest) {
 func NewGetDidDocumentResponse() (response *GetDidDocumentResponse) {
     response = &GetDidDocumentResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetDidDocument
@@ -2357,8 +2389,9 @@ func NewGetDidListRequest() (request *GetDidListRequest) {
 func NewGetDidListResponse() (response *GetDidListResponse) {
     response = &GetDidListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetDidList
@@ -2429,8 +2462,9 @@ func NewGetDidRegisterTrendRequest() (request *GetDidRegisterTrendRequest) {
 func NewGetDidRegisterTrendResponse() (response *GetDidRegisterTrendResponse) {
     response = &GetDidRegisterTrendResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetDidRegisterTrend
@@ -2501,8 +2535,9 @@ func NewGetDidServiceDetailRequest() (request *GetDidServiceDetailRequest) {
 func NewGetDidServiceDetailResponse() (response *GetDidServiceDetailResponse) {
     response = &GetDidServiceDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetDidServiceDetail
@@ -2573,8 +2608,9 @@ func NewGetDidServiceListRequest() (request *GetDidServiceListRequest) {
 func NewGetDidServiceListResponse() (response *GetDidServiceListResponse) {
     response = &GetDidServiceListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetDidServiceList
@@ -2645,8 +2681,9 @@ func NewGetGroupListRequest() (request *GetGroupListRequest) {
 func NewGetGroupListResponse() (response *GetGroupListResponse) {
     response = &GetGroupListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetGroupList
@@ -2717,8 +2754,9 @@ func NewGetLabelListRequest() (request *GetLabelListRequest) {
 func NewGetLabelListResponse() (response *GetLabelListResponse) {
     response = &GetLabelListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetLabelList
@@ -2773,8 +2811,9 @@ func NewGetPolicyListRequest() (request *GetPolicyListRequest) {
 func NewGetPolicyListResponse() (response *GetPolicyListResponse) {
     response = &GetPolicyListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetPolicyList
@@ -2845,8 +2884,9 @@ func NewGetPublicKeyRequest() (request *GetPublicKeyRequest) {
 func NewGetPublicKeyResponse() (response *GetPublicKeyResponse) {
     response = &GetPublicKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetPublicKey
@@ -2917,8 +2957,9 @@ func NewQueryPolicyRequest() (request *QueryPolicyRequest) {
 func NewQueryPolicyResponse() (response *QueryPolicyResponse) {
     response = &QueryPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // QueryPolicy
@@ -2989,8 +3030,9 @@ func NewRecognizeAuthorityIssuerRequest() (request *RecognizeAuthorityIssuerRequ
 func NewRecognizeAuthorityIssuerResponse() (response *RecognizeAuthorityIssuerResponse) {
     response = &RecognizeAuthorityIssuerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RecognizeAuthorityIssuer
@@ -3061,8 +3103,9 @@ func NewRegisterClaimPolicyRequest() (request *RegisterClaimPolicyRequest) {
 func NewRegisterClaimPolicyResponse() (response *RegisterClaimPolicyResponse) {
     response = &RegisterClaimPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RegisterClaimPolicy
@@ -3133,8 +3176,9 @@ func NewRegisterCptRequest() (request *RegisterCptRequest) {
 func NewRegisterCptResponse() (response *RegisterCptResponse) {
     response = &RegisterCptResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RegisterCpt
@@ -3205,8 +3249,9 @@ func NewRegisterIssuerRequest() (request *RegisterIssuerRequest) {
 func NewRegisterIssuerResponse() (response *RegisterIssuerResponse) {
     response = &RegisterIssuerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RegisterIssuer
@@ -3277,8 +3322,9 @@ func NewRemoveHashRequest() (request *RemoveHashRequest) {
 func NewRemoveHashResponse() (response *RemoveHashResponse) {
     response = &RemoveHashResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RemoveHash
@@ -3349,8 +3395,9 @@ func NewSetCredentialStatusRequest() (request *SetCredentialStatusRequest) {
 func NewSetCredentialStatusResponse() (response *SetCredentialStatusResponse) {
     response = &SetCredentialStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetCredentialStatus
@@ -3421,8 +3468,9 @@ func NewVerifyCredentialRequest() (request *VerifyCredentialRequest) {
 func NewVerifyCredentialResponse() (response *VerifyCredentialResponse) {
     response = &VerifyCredentialResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // VerifyCredential

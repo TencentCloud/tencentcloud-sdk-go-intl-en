@@ -59,8 +59,9 @@ func NewCreateStreamLiveChannelRequest() (request *CreateStreamLiveChannelReques
 func NewCreateStreamLiveChannelResponse() (response *CreateStreamLiveChannelResponse) {
     response = &CreateStreamLiveChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateStreamLiveChannel
@@ -131,8 +132,9 @@ func NewCreateStreamLiveInputRequest() (request *CreateStreamLiveInputRequest) {
 func NewCreateStreamLiveInputResponse() (response *CreateStreamLiveInputResponse) {
     response = &CreateStreamLiveInputResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateStreamLiveInput
@@ -193,8 +195,9 @@ func NewCreateStreamLiveInputSecurityGroupRequest() (request *CreateStreamLiveIn
 func NewCreateStreamLiveInputSecurityGroupResponse() (response *CreateStreamLiveInputSecurityGroupResponse) {
     response = &CreateStreamLiveInputSecurityGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateStreamLiveInputSecurityGroup
@@ -249,8 +252,9 @@ func NewCreateStreamLivePlanRequest() (request *CreateStreamLivePlanRequest) {
 func NewCreateStreamLivePlanResponse() (response *CreateStreamLivePlanResponse) {
     response = &CreateStreamLivePlanResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateStreamLivePlan
@@ -301,8 +305,9 @@ func NewCreateStreamLiveWatermarkRequest() (request *CreateStreamLiveWatermarkRe
 func NewCreateStreamLiveWatermarkResponse() (response *CreateStreamLiveWatermarkResponse) {
     response = &CreateStreamLiveWatermarkResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateStreamLiveWatermark
@@ -359,8 +364,9 @@ func NewDeleteStreamLiveChannelRequest() (request *DeleteStreamLiveChannelReques
 func NewDeleteStreamLiveChannelResponse() (response *DeleteStreamLiveChannelResponse) {
     response = &DeleteStreamLiveChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteStreamLiveChannel
@@ -417,8 +423,9 @@ func NewDeleteStreamLiveInputRequest() (request *DeleteStreamLiveInputRequest) {
 func NewDeleteStreamLiveInputResponse() (response *DeleteStreamLiveInputResponse) {
     response = &DeleteStreamLiveInputResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteStreamLiveInput
@@ -473,8 +480,9 @@ func NewDeleteStreamLiveInputSecurityGroupRequest() (request *DeleteStreamLiveIn
 func NewDeleteStreamLiveInputSecurityGroupResponse() (response *DeleteStreamLiveInputSecurityGroupResponse) {
     response = &DeleteStreamLiveInputSecurityGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteStreamLiveInputSecurityGroup
@@ -529,8 +537,9 @@ func NewDeleteStreamLivePlanRequest() (request *DeleteStreamLivePlanRequest) {
 func NewDeleteStreamLivePlanResponse() (response *DeleteStreamLivePlanResponse) {
     response = &DeleteStreamLivePlanResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteStreamLivePlan
@@ -581,8 +590,9 @@ func NewDeleteStreamLiveWatermarkRequest() (request *DeleteStreamLiveWatermarkRe
 func NewDeleteStreamLiveWatermarkResponse() (response *DeleteStreamLiveWatermarkResponse) {
     response = &DeleteStreamLiveWatermarkResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteStreamLiveWatermark
@@ -635,8 +645,9 @@ func NewDescribeStreamLiveChannelRequest() (request *DescribeStreamLiveChannelRe
 func NewDescribeStreamLiveChannelResponse() (response *DescribeStreamLiveChannelResponse) {
     response = &DescribeStreamLiveChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveChannel
@@ -685,8 +696,9 @@ func NewDescribeStreamLiveChannelAlertsRequest() (request *DescribeStreamLiveCha
 func NewDescribeStreamLiveChannelAlertsResponse() (response *DescribeStreamLiveChannelAlertsResponse) {
     response = &DescribeStreamLiveChannelAlertsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveChannelAlerts
@@ -735,8 +747,9 @@ func NewDescribeStreamLiveChannelInputStatisticsRequest() (request *DescribeStre
 func NewDescribeStreamLiveChannelInputStatisticsResponse() (response *DescribeStreamLiveChannelInputStatisticsResponse) {
     response = &DescribeStreamLiveChannelInputStatisticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveChannelInputStatistics
@@ -789,8 +802,9 @@ func NewDescribeStreamLiveChannelLogsRequest() (request *DescribeStreamLiveChann
 func NewDescribeStreamLiveChannelLogsResponse() (response *DescribeStreamLiveChannelLogsResponse) {
     response = &DescribeStreamLiveChannelLogsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveChannelLogs
@@ -843,8 +857,9 @@ func NewDescribeStreamLiveChannelOutputStatisticsRequest() (request *DescribeStr
 func NewDescribeStreamLiveChannelOutputStatisticsResponse() (response *DescribeStreamLiveChannelOutputStatisticsResponse) {
     response = &DescribeStreamLiveChannelOutputStatisticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveChannelOutputStatistics
@@ -899,8 +914,9 @@ func NewDescribeStreamLiveChannelsRequest() (request *DescribeStreamLiveChannels
 func NewDescribeStreamLiveChannelsResponse() (response *DescribeStreamLiveChannelsResponse) {
     response = &DescribeStreamLiveChannelsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveChannels
@@ -947,8 +963,9 @@ func NewDescribeStreamLiveInputRequest() (request *DescribeStreamLiveInputReques
 func NewDescribeStreamLiveInputResponse() (response *DescribeStreamLiveInputResponse) {
     response = &DescribeStreamLiveInputResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveInput
@@ -1001,8 +1018,9 @@ func NewDescribeStreamLiveInputSecurityGroupRequest() (request *DescribeStreamLi
 func NewDescribeStreamLiveInputSecurityGroupResponse() (response *DescribeStreamLiveInputSecurityGroupResponse) {
     response = &DescribeStreamLiveInputSecurityGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveInputSecurityGroup
@@ -1055,8 +1073,9 @@ func NewDescribeStreamLiveInputSecurityGroupsRequest() (request *DescribeStreamL
 func NewDescribeStreamLiveInputSecurityGroupsResponse() (response *DescribeStreamLiveInputSecurityGroupsResponse) {
     response = &DescribeStreamLiveInputSecurityGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveInputSecurityGroups
@@ -1103,8 +1122,9 @@ func NewDescribeStreamLiveInputsRequest() (request *DescribeStreamLiveInputsRequ
 func NewDescribeStreamLiveInputsResponse() (response *DescribeStreamLiveInputsResponse) {
     response = &DescribeStreamLiveInputsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveInputs
@@ -1151,8 +1171,9 @@ func NewDescribeStreamLivePlansRequest() (request *DescribeStreamLivePlansReques
 func NewDescribeStreamLivePlansResponse() (response *DescribeStreamLivePlansResponse) {
     response = &DescribeStreamLivePlansResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLivePlans
@@ -1201,8 +1222,9 @@ func NewDescribeStreamLiveRegionsRequest() (request *DescribeStreamLiveRegionsRe
 func NewDescribeStreamLiveRegionsResponse() (response *DescribeStreamLiveRegionsResponse) {
     response = &DescribeStreamLiveRegionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveRegions
@@ -1249,8 +1271,9 @@ func NewDescribeStreamLiveTranscodeDetailRequest() (request *DescribeStreamLiveT
 func NewDescribeStreamLiveTranscodeDetailResponse() (response *DescribeStreamLiveTranscodeDetailResponse) {
     response = &DescribeStreamLiveTranscodeDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveTranscodeDetail
@@ -1307,8 +1330,9 @@ func NewDescribeStreamLiveWatermarkRequest() (request *DescribeStreamLiveWaterma
 func NewDescribeStreamLiveWatermarkResponse() (response *DescribeStreamLiveWatermarkResponse) {
     response = &DescribeStreamLiveWatermarkResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveWatermark
@@ -1359,8 +1383,9 @@ func NewDescribeStreamLiveWatermarksRequest() (request *DescribeStreamLiveWaterm
 func NewDescribeStreamLiveWatermarksResponse() (response *DescribeStreamLiveWatermarksResponse) {
     response = &DescribeStreamLiveWatermarksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeStreamLiveWatermarks
@@ -1411,8 +1436,9 @@ func NewModifyStreamLiveChannelRequest() (request *ModifyStreamLiveChannelReques
 func NewModifyStreamLiveChannelResponse() (response *ModifyStreamLiveChannelResponse) {
     response = &ModifyStreamLiveChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyStreamLiveChannel
@@ -1479,8 +1505,9 @@ func NewModifyStreamLiveInputRequest() (request *ModifyStreamLiveInputRequest) {
 func NewModifyStreamLiveInputResponse() (response *ModifyStreamLiveInputResponse) {
     response = &ModifyStreamLiveInputResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyStreamLiveInput
@@ -1541,8 +1568,9 @@ func NewModifyStreamLiveInputSecurityGroupRequest() (request *ModifyStreamLiveIn
 func NewModifyStreamLiveInputSecurityGroupResponse() (response *ModifyStreamLiveInputSecurityGroupResponse) {
     response = &ModifyStreamLiveInputSecurityGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyStreamLiveInputSecurityGroup
@@ -1599,8 +1627,9 @@ func NewModifyStreamLiveWatermarkRequest() (request *ModifyStreamLiveWatermarkRe
 func NewModifyStreamLiveWatermarkResponse() (response *ModifyStreamLiveWatermarkResponse) {
     response = &ModifyStreamLiveWatermarkResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyStreamLiveWatermark
@@ -1657,8 +1686,9 @@ func NewQueryInputStreamStateRequest() (request *QueryInputStreamStateRequest) {
 func NewQueryInputStreamStateResponse() (response *QueryInputStreamStateResponse) {
     response = &QueryInputStreamStateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // QueryInputStreamState
@@ -1711,8 +1741,9 @@ func NewStartStreamLiveChannelRequest() (request *StartStreamLiveChannelRequest)
 func NewStartStreamLiveChannelResponse() (response *StartStreamLiveChannelResponse) {
     response = &StartStreamLiveChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartStreamLiveChannel
@@ -1767,8 +1798,9 @@ func NewStopStreamLiveChannelRequest() (request *StopStreamLiveChannelRequest) {
 func NewStopStreamLiveChannelResponse() (response *StopStreamLiveChannelResponse) {
     response = &StopStreamLiveChannelResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopStreamLiveChannel

@@ -59,8 +59,9 @@ func NewDescribeAccountBalanceRequest() (request *DescribeAccountBalanceRequest)
 func NewDescribeAccountBalanceResponse() (response *DescribeAccountBalanceResponse) {
     response = &DescribeAccountBalanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAccountBalance
@@ -117,8 +118,9 @@ func NewDescribeBillDetailRequest() (request *DescribeBillDetailRequest) {
 func NewDescribeBillDetailResponse() (response *DescribeBillDetailResponse) {
     response = &DescribeBillDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBillDetail
@@ -181,8 +183,9 @@ func NewDescribeBillResourceSummaryRequest() (request *DescribeBillResourceSumma
 func NewDescribeBillResourceSummaryResponse() (response *DescribeBillResourceSummaryResponse) {
     response = &DescribeBillResourceSummaryResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBillResourceSummary
@@ -233,8 +236,9 @@ func NewDescribeBillSummaryRequest() (request *DescribeBillSummaryRequest) {
 func NewDescribeBillSummaryResponse() (response *DescribeBillSummaryResponse) {
     response = &DescribeBillSummaryResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBillSummary
@@ -289,8 +293,9 @@ func NewDescribeBillSummaryByPayModeRequest() (request *DescribeBillSummaryByPay
 func NewDescribeBillSummaryByPayModeResponse() (response *DescribeBillSummaryByPayModeResponse) {
     response = &DescribeBillSummaryByPayModeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBillSummaryByPayMode
@@ -345,8 +350,9 @@ func NewDescribeBillSummaryByProductRequest() (request *DescribeBillSummaryByPro
 func NewDescribeBillSummaryByProductResponse() (response *DescribeBillSummaryByProductResponse) {
     response = &DescribeBillSummaryByProductResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBillSummaryByProduct
@@ -403,8 +409,9 @@ func NewDescribeBillSummaryByProjectRequest() (request *DescribeBillSummaryByPro
 func NewDescribeBillSummaryByProjectResponse() (response *DescribeBillSummaryByProjectResponse) {
     response = &DescribeBillSummaryByProjectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBillSummaryByProject
@@ -459,8 +466,9 @@ func NewDescribeBillSummaryByRegionRequest() (request *DescribeBillSummaryByRegi
 func NewDescribeBillSummaryByRegionResponse() (response *DescribeBillSummaryByRegionResponse) {
     response = &DescribeBillSummaryByRegionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBillSummaryByRegion
@@ -515,8 +523,9 @@ func NewDescribeBillSummaryByTagRequest() (request *DescribeBillSummaryByTagRequ
 func NewDescribeBillSummaryByTagResponse() (response *DescribeBillSummaryByTagResponse) {
     response = &DescribeBillSummaryByTagResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBillSummaryByTag
@@ -571,8 +580,9 @@ func NewDescribeDosageCosDetailByDateRequest() (request *DescribeDosageCosDetail
 func NewDescribeDosageCosDetailByDateResponse() (response *DescribeDosageCosDetailByDateResponse) {
     response = &DescribeDosageCosDetailByDateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDosageCosDetailByDate
@@ -619,8 +629,9 @@ func NewDescribeVoucherInfoRequest() (request *DescribeVoucherInfoRequest) {
 func NewDescribeVoucherInfoResponse() (response *DescribeVoucherInfoResponse) {
     response = &DescribeVoucherInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeVoucherInfo
@@ -675,8 +686,9 @@ func NewDescribeVoucherUsageDetailsRequest() (request *DescribeVoucherUsageDetai
 func NewDescribeVoucherUsageDetailsResponse() (response *DescribeVoucherUsageDetailsResponse) {
     response = &DescribeVoucherUsageDetailsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeVoucherUsageDetails

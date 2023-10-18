@@ -59,8 +59,9 @@ func NewApplyDiskBackupRequest() (request *ApplyDiskBackupRequest) {
 func NewApplyDiskBackupResponse() (response *ApplyDiskBackupResponse) {
     response = &ApplyDiskBackupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ApplyDiskBackup
@@ -141,8 +142,9 @@ func NewApplySnapshotRequest() (request *ApplySnapshotRequest) {
 func NewApplySnapshotResponse() (response *ApplySnapshotResponse) {
     response = &ApplySnapshotResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ApplySnapshot
@@ -241,8 +243,9 @@ func NewAttachDisksRequest() (request *AttachDisksRequest) {
 func NewAttachDisksResponse() (response *AttachDisksResponse) {
     response = &AttachDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AttachDisks
@@ -339,8 +342,9 @@ func NewBindAutoSnapshotPolicyRequest() (request *BindAutoSnapshotPolicyRequest)
 func NewBindAutoSnapshotPolicyResponse() (response *BindAutoSnapshotPolicyResponse) {
     response = &BindAutoSnapshotPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BindAutoSnapshotPolicy
@@ -417,8 +421,9 @@ func NewCopySnapshotCrossRegionsRequest() (request *CopySnapshotCrossRegionsRequ
 func NewCopySnapshotCrossRegionsResponse() (response *CopySnapshotCrossRegionsResponse) {
     response = &CopySnapshotCrossRegionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CopySnapshotCrossRegions
@@ -493,8 +498,9 @@ func NewCreateAutoSnapshotPolicyRequest() (request *CreateAutoSnapshotPolicyRequ
 func NewCreateAutoSnapshotPolicyResponse() (response *CreateAutoSnapshotPolicyResponse) {
     response = &CreateAutoSnapshotPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateAutoSnapshotPolicy
@@ -561,8 +567,9 @@ func NewCreateDiskBackupRequest() (request *CreateDiskBackupRequest) {
 func NewCreateDiskBackupResponse() (response *CreateDiskBackupResponse) {
     response = &CreateDiskBackupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDiskBackup
@@ -623,8 +630,9 @@ func NewCreateDisksRequest() (request *CreateDisksRequest) {
 func NewCreateDisksResponse() (response *CreateDisksResponse) {
     response = &CreateDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDisks
@@ -711,8 +719,9 @@ func NewCreateSnapshotRequest() (request *CreateSnapshotRequest) {
 func NewCreateSnapshotResponse() (response *CreateSnapshotResponse) {
     response = &CreateSnapshotResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSnapshot
@@ -819,8 +828,9 @@ func NewDeleteAutoSnapshotPoliciesRequest() (request *DeleteAutoSnapshotPolicies
 func NewDeleteAutoSnapshotPoliciesResponse() (response *DeleteAutoSnapshotPoliciesResponse) {
     response = &DeleteAutoSnapshotPoliciesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteAutoSnapshotPolicies
@@ -885,8 +895,9 @@ func NewDeleteDiskBackupsRequest() (request *DeleteDiskBackupsRequest) {
 func NewDeleteDiskBackupsResponse() (response *DeleteDiskBackupsResponse) {
     response = &DeleteDiskBackupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteDiskBackups
@@ -937,8 +948,9 @@ func NewDeleteSnapshotsRequest() (request *DeleteSnapshotsRequest) {
 func NewDeleteSnapshotsResponse() (response *DeleteSnapshotsResponse) {
     response = &DeleteSnapshotsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSnapshots
@@ -1015,8 +1027,9 @@ func NewDescribeAutoSnapshotPoliciesRequest() (request *DescribeAutoSnapshotPoli
 func NewDescribeAutoSnapshotPoliciesResponse() (response *DescribeAutoSnapshotPoliciesResponse) {
     response = &DescribeAutoSnapshotPoliciesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAutoSnapshotPolicies
@@ -1081,8 +1094,9 @@ func NewDescribeDiskAssociatedAutoSnapshotPolicyRequest() (request *DescribeDisk
 func NewDescribeDiskAssociatedAutoSnapshotPolicyResponse() (response *DescribeDiskAssociatedAutoSnapshotPolicyResponse) {
     response = &DescribeDiskAssociatedAutoSnapshotPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDiskAssociatedAutoSnapshotPolicy
@@ -1133,8 +1147,9 @@ func NewDescribeDiskBackupsRequest() (request *DescribeDiskBackupsRequest) {
 func NewDescribeDiskBackupsResponse() (response *DescribeDiskBackupsResponse) {
     response = &DescribeDiskBackupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDiskBackups
@@ -1195,8 +1210,9 @@ func NewDescribeDiskConfigQuotaRequest() (request *DescribeDiskConfigQuotaReques
 func NewDescribeDiskConfigQuotaResponse() (response *DescribeDiskConfigQuotaResponse) {
     response = &DescribeDiskConfigQuotaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDiskConfigQuota
@@ -1247,8 +1263,9 @@ func NewDescribeDiskOperationLogsRequest() (request *DescribeDiskOperationLogsRe
 func NewDescribeDiskOperationLogsResponse() (response *DescribeDiskOperationLogsResponse) {
     response = &DescribeDiskOperationLogsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDiskOperationLogs
@@ -1321,8 +1338,9 @@ func NewDescribeDisksRequest() (request *DescribeDisksRequest) {
 func NewDescribeDisksResponse() (response *DescribeDisksResponse) {
     response = &DescribeDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDisks
@@ -1387,8 +1405,9 @@ func NewDescribeInstancesDiskNumRequest() (request *DescribeInstancesDiskNumRequ
 func NewDescribeInstancesDiskNumResponse() (response *DescribeInstancesDiskNumResponse) {
     response = &DescribeInstancesDiskNumResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstancesDiskNum
@@ -1449,8 +1468,9 @@ func NewDescribeSnapshotOperationLogsRequest() (request *DescribeSnapshotOperati
 func NewDescribeSnapshotOperationLogsResponse() (response *DescribeSnapshotOperationLogsResponse) {
     response = &DescribeSnapshotOperationLogsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSnapshotOperationLogs
@@ -1523,8 +1543,9 @@ func NewDescribeSnapshotSharePermissionRequest() (request *DescribeSnapshotShare
 func NewDescribeSnapshotSharePermissionResponse() (response *DescribeSnapshotSharePermissionResponse) {
     response = &DescribeSnapshotSharePermissionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSnapshotSharePermission
@@ -1575,8 +1596,9 @@ func NewDescribeSnapshotsRequest() (request *DescribeSnapshotsRequest) {
 func NewDescribeSnapshotsResponse() (response *DescribeSnapshotsResponse) {
     response = &DescribeSnapshotsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSnapshots
@@ -1641,8 +1663,9 @@ func NewDetachDisksRequest() (request *DetachDisksRequest) {
 func NewDetachDisksResponse() (response *DetachDisksResponse) {
     response = &DetachDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DetachDisks
@@ -1739,8 +1762,9 @@ func NewGetSnapOverviewRequest() (request *GetSnapOverviewRequest) {
 func NewGetSnapOverviewResponse() (response *GetSnapOverviewResponse) {
     response = &GetSnapOverviewResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetSnapOverview
@@ -1789,8 +1813,9 @@ func NewInitializeDisksRequest() (request *InitializeDisksRequest) {
 func NewInitializeDisksResponse() (response *InitializeDisksResponse) {
     response = &InitializeDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InitializeDisks
@@ -1855,8 +1880,9 @@ func NewInquirePriceModifyDiskBackupQuotaRequest() (request *InquirePriceModifyD
 func NewInquirePriceModifyDiskBackupQuotaResponse() (response *InquirePriceModifyDiskBackupQuotaResponse) {
     response = &InquirePriceModifyDiskBackupQuotaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquirePriceModifyDiskBackupQuota
@@ -1909,8 +1935,9 @@ func NewInquirePriceModifyDiskExtraPerformanceRequest() (request *InquirePriceMo
 func NewInquirePriceModifyDiskExtraPerformanceResponse() (response *InquirePriceModifyDiskExtraPerformanceResponse) {
     response = &InquirePriceModifyDiskExtraPerformanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquirePriceModifyDiskExtraPerformance
@@ -1965,8 +1992,9 @@ func NewInquiryPriceCreateDisksRequest() (request *InquiryPriceCreateDisksReques
 func NewInquiryPriceCreateDisksResponse() (response *InquiryPriceCreateDisksResponse) {
     response = &InquiryPriceCreateDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquiryPriceCreateDisks
@@ -2023,8 +2051,9 @@ func NewInquiryPriceResizeDiskRequest() (request *InquiryPriceResizeDiskRequest)
 func NewInquiryPriceResizeDiskResponse() (response *InquiryPriceResizeDiskResponse) {
     response = &InquiryPriceResizeDiskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquiryPriceResizeDisk
@@ -2081,8 +2110,9 @@ func NewModifyAutoSnapshotPolicyAttributeRequest() (request *ModifyAutoSnapshotP
 func NewModifyAutoSnapshotPolicyAttributeResponse() (response *ModifyAutoSnapshotPolicyAttributeResponse) {
     response = &ModifyAutoSnapshotPolicyAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyAutoSnapshotPolicyAttribute
@@ -2149,8 +2179,9 @@ func NewModifyDiskAttributesRequest() (request *ModifyDiskAttributesRequest) {
 func NewModifyDiskAttributesResponse() (response *ModifyDiskAttributesResponse) {
     response = &ModifyDiskAttributesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDiskAttributes
@@ -2229,8 +2260,9 @@ func NewModifyDiskBackupQuotaRequest() (request *ModifyDiskBackupQuotaRequest) {
 func NewModifyDiskBackupQuotaResponse() (response *ModifyDiskBackupQuotaResponse) {
     response = &ModifyDiskBackupQuotaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDiskBackupQuota
@@ -2287,8 +2319,9 @@ func NewModifyDiskExtraPerformanceRequest() (request *ModifyDiskExtraPerformance
 func NewModifyDiskExtraPerformanceResponse() (response *ModifyDiskExtraPerformanceResponse) {
     response = &ModifyDiskExtraPerformanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDiskExtraPerformance
@@ -2357,8 +2390,9 @@ func NewModifySnapshotAttributeRequest() (request *ModifySnapshotAttributeReques
 func NewModifySnapshotAttributeResponse() (response *ModifySnapshotAttributeResponse) {
     response = &ModifySnapshotAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySnapshotAttribute
@@ -2427,8 +2461,9 @@ func NewModifySnapshotsSharePermissionRequest() (request *ModifySnapshotsSharePe
 func NewModifySnapshotsSharePermissionResponse() (response *ModifySnapshotsSharePermissionResponse) {
     response = &ModifySnapshotsSharePermissionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySnapshotsSharePermission
@@ -2507,8 +2542,9 @@ func NewResizeDiskRequest() (request *ResizeDiskRequest) {
 func NewResizeDiskResponse() (response *ResizeDiskResponse) {
     response = &ResizeDiskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResizeDisk
@@ -2593,8 +2629,9 @@ func NewTerminateDisksRequest() (request *TerminateDisksRequest) {
 func NewTerminateDisksResponse() (response *TerminateDisksResponse) {
     response = &TerminateDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TerminateDisks
@@ -2681,8 +2718,9 @@ func NewUnbindAutoSnapshotPolicyRequest() (request *UnbindAutoSnapshotPolicyRequ
 func NewUnbindAutoSnapshotPolicyResponse() (response *UnbindAutoSnapshotPolicyResponse) {
     response = &UnbindAutoSnapshotPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UnbindAutoSnapshotPolicy

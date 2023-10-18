@@ -59,8 +59,9 @@ func NewAttachPluginRequest() (request *AttachPluginRequest) {
 func NewAttachPluginResponse() (response *AttachPluginResponse) {
     response = &AttachPluginResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AttachPlugin
@@ -139,8 +140,9 @@ func NewBindApiAppRequest() (request *BindApiAppRequest) {
 func NewBindApiAppResponse() (response *BindApiAppResponse) {
     response = &BindApiAppResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BindApiApp
@@ -209,8 +211,9 @@ func NewBindEnvironmentRequest() (request *BindEnvironmentRequest) {
 func NewBindEnvironmentResponse() (response *BindEnvironmentResponse) {
     response = &BindEnvironmentResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BindEnvironment
@@ -283,8 +286,9 @@ func NewBindIPStrategyRequest() (request *BindIPStrategyRequest) {
 func NewBindIPStrategyResponse() (response *BindIPStrategyResponse) {
     response = &BindIPStrategyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BindIPStrategy
@@ -343,8 +347,9 @@ func NewBindSecretIdsRequest() (request *BindSecretIdsRequest) {
 func NewBindSecretIdsResponse() (response *BindSecretIdsResponse) {
     response = &BindSecretIdsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BindSecretIds
@@ -411,8 +416,9 @@ func NewBindSubDomainRequest() (request *BindSubDomainRequest) {
 func NewBindSubDomainResponse() (response *BindSubDomainResponse) {
     response = &BindSubDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BindSubDomain
@@ -529,8 +535,9 @@ func NewBuildAPIDocRequest() (request *BuildAPIDocRequest) {
 func NewBuildAPIDocResponse() (response *BuildAPIDocResponse) {
     response = &BuildAPIDocResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BuildAPIDoc
@@ -589,8 +596,9 @@ func NewCreateAPIDocRequest() (request *CreateAPIDocRequest) {
 func NewCreateAPIDocResponse() (response *CreateAPIDocResponse) {
     response = &CreateAPIDocResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateAPIDoc
@@ -683,8 +691,9 @@ func NewCreateApiRequest() (request *CreateApiRequest) {
 func NewCreateApiResponse() (response *CreateApiResponse) {
     response = &CreateApiResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateApi
@@ -831,8 +840,9 @@ func NewCreateApiAppRequest() (request *CreateApiAppRequest) {
 func NewCreateApiAppResponse() (response *CreateApiAppResponse) {
     response = &CreateApiAppResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateApiApp
@@ -893,8 +903,9 @@ func NewCreateApiKeyRequest() (request *CreateApiKeyRequest) {
 func NewCreateApiKeyResponse() (response *CreateApiKeyResponse) {
     response = &CreateApiKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateApiKey
@@ -953,8 +964,9 @@ func NewCreateIPStrategyRequest() (request *CreateIPStrategyRequest) {
 func NewCreateIPStrategyResponse() (response *CreateIPStrategyResponse) {
     response = &CreateIPStrategyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateIPStrategy
@@ -1009,8 +1021,9 @@ func NewCreatePluginRequest() (request *CreatePluginRequest) {
 func NewCreatePluginResponse() (response *CreatePluginResponse) {
     response = &CreatePluginResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreatePlugin
@@ -1115,8 +1128,9 @@ func NewCreateServiceRequest() (request *CreateServiceRequest) {
 func NewCreateServiceResponse() (response *CreateServiceResponse) {
     response = &CreateServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateService
@@ -1221,8 +1235,9 @@ func NewCreateUpstreamRequest() (request *CreateUpstreamRequest) {
 func NewCreateUpstreamResponse() (response *CreateUpstreamResponse) {
     response = &CreateUpstreamResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateUpstream
@@ -1307,8 +1322,9 @@ func NewCreateUsagePlanRequest() (request *CreateUsagePlanRequest) {
 func NewCreateUsagePlanResponse() (response *CreateUsagePlanResponse) {
     response = &CreateUsagePlanResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateUsagePlan
@@ -1367,8 +1383,9 @@ func NewDeleteAPIDocRequest() (request *DeleteAPIDocRequest) {
 func NewDeleteAPIDocResponse() (response *DeleteAPIDocResponse) {
     response = &DeleteAPIDocResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteAPIDoc
@@ -1449,8 +1466,9 @@ func NewDeleteApiRequest() (request *DeleteApiRequest) {
 func NewDeleteApiResponse() (response *DeleteApiResponse) {
     response = &DeleteApiResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteApi
@@ -1545,8 +1563,9 @@ func NewDeleteApiAppRequest() (request *DeleteApiAppRequest) {
 func NewDeleteApiAppResponse() (response *DeleteApiAppResponse) {
     response = &DeleteApiAppResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteApiApp
@@ -1615,8 +1634,9 @@ func NewDeleteApiKeyRequest() (request *DeleteApiKeyRequest) {
 func NewDeleteApiKeyResponse() (response *DeleteApiKeyResponse) {
     response = &DeleteApiKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteApiKey
@@ -1669,8 +1689,9 @@ func NewDeleteIPStrategyRequest() (request *DeleteIPStrategyRequest) {
 func NewDeleteIPStrategyResponse() (response *DeleteIPStrategyResponse) {
     response = &DeleteIPStrategyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteIPStrategy
@@ -1717,8 +1738,9 @@ func NewDeletePluginRequest() (request *DeletePluginRequest) {
 func NewDeletePluginResponse() (response *DeletePluginResponse) {
     response = &DeletePluginResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeletePlugin
@@ -1775,8 +1797,9 @@ func NewDeleteServiceRequest() (request *DeleteServiceRequest) {
 func NewDeleteServiceResponse() (response *DeleteServiceResponse) {
     response = &DeleteServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteService
@@ -1847,8 +1870,9 @@ func NewDeleteServiceSubDomainMappingRequest() (request *DeleteServiceSubDomainM
 func NewDeleteServiceSubDomainMappingResponse() (response *DeleteServiceSubDomainMappingResponse) {
     response = &DeleteServiceSubDomainMappingResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteServiceSubDomainMapping
@@ -1907,8 +1931,9 @@ func NewDeleteUpstreamRequest() (request *DeleteUpstreamRequest) {
 func NewDeleteUpstreamResponse() (response *DeleteUpstreamResponse) {
     response = &DeleteUpstreamResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteUpstream
@@ -1975,8 +2000,9 @@ func NewDeleteUsagePlanRequest() (request *DeleteUsagePlanRequest) {
 func NewDeleteUsagePlanResponse() (response *DeleteUsagePlanResponse) {
     response = &DeleteUsagePlanResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteUsagePlan
@@ -2027,8 +2053,9 @@ func NewDemoteServiceUsagePlanRequest() (request *DemoteServiceUsagePlanRequest)
 func NewDemoteServiceUsagePlanResponse() (response *DemoteServiceUsagePlanResponse) {
     response = &DemoteServiceUsagePlanResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DemoteServiceUsagePlan
@@ -2087,8 +2114,9 @@ func NewDescribeAPIDocDetailRequest() (request *DescribeAPIDocDetailRequest) {
 func NewDescribeAPIDocDetailResponse() (response *DescribeAPIDocDetailResponse) {
     response = &DescribeAPIDocDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAPIDocDetail
@@ -2141,8 +2169,9 @@ func NewDescribeAPIDocsRequest() (request *DescribeAPIDocsRequest) {
 func NewDescribeAPIDocsResponse() (response *DescribeAPIDocsResponse) {
     response = &DescribeAPIDocsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAPIDocs
@@ -2211,8 +2240,9 @@ func NewDescribeAllPluginApisRequest() (request *DescribeAllPluginApisRequest) {
 func NewDescribeAllPluginApisResponse() (response *DescribeAllPluginApisResponse) {
     response = &DescribeAllPluginApisResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAllPluginApis
@@ -2265,8 +2295,9 @@ func NewDescribeApiRequest() (request *DescribeApiRequest) {
 func NewDescribeApiResponse() (response *DescribeApiResponse) {
     response = &DescribeApiResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApi
@@ -2333,8 +2364,9 @@ func NewDescribeApiAppRequest() (request *DescribeApiAppRequest) {
 func NewDescribeApiAppResponse() (response *DescribeApiAppResponse) {
     response = &DescribeApiAppResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApiApp
@@ -2385,8 +2417,9 @@ func NewDescribeApiAppBindApisStatusRequest() (request *DescribeApiAppBindApisSt
 func NewDescribeApiAppBindApisStatusResponse() (response *DescribeApiAppBindApisStatusResponse) {
     response = &DescribeApiAppBindApisStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApiAppBindApisStatus
@@ -2439,8 +2472,9 @@ func NewDescribeApiAppsStatusRequest() (request *DescribeApiAppsStatusRequest) {
 func NewDescribeApiAppsStatusResponse() (response *DescribeApiAppsStatusResponse) {
     response = &DescribeApiAppsStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApiAppsStatus
@@ -2495,8 +2529,9 @@ func NewDescribeApiBindApiAppsStatusRequest() (request *DescribeApiBindApiAppsSt
 func NewDescribeApiBindApiAppsStatusResponse() (response *DescribeApiBindApiAppsStatusResponse) {
     response = &DescribeApiBindApiAppsStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApiBindApiAppsStatus
@@ -2545,8 +2580,9 @@ func NewDescribeApiEnvironmentStrategyRequest() (request *DescribeApiEnvironment
 func NewDescribeApiEnvironmentStrategyResponse() (response *DescribeApiEnvironmentStrategyResponse) {
     response = &DescribeApiEnvironmentStrategyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApiEnvironmentStrategy
@@ -2599,8 +2635,9 @@ func NewDescribeApiForApiAppRequest() (request *DescribeApiForApiAppRequest) {
 func NewDescribeApiForApiAppResponse() (response *DescribeApiForApiAppResponse) {
     response = &DescribeApiForApiAppResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApiForApiApp
@@ -2661,8 +2698,9 @@ func NewDescribeApiKeyRequest() (request *DescribeApiKeyRequest) {
 func NewDescribeApiKeyResponse() (response *DescribeApiKeyResponse) {
     response = &DescribeApiKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApiKey
@@ -2713,8 +2751,9 @@ func NewDescribeApiKeysStatusRequest() (request *DescribeApiKeysStatusRequest) {
 func NewDescribeApiKeysStatusResponse() (response *DescribeApiKeysStatusResponse) {
     response = &DescribeApiKeysStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApiKeysStatus
@@ -2771,8 +2810,9 @@ func NewDescribeApiUsagePlanRequest() (request *DescribeApiUsagePlanRequest) {
 func NewDescribeApiUsagePlanResponse() (response *DescribeApiUsagePlanResponse) {
     response = &DescribeApiUsagePlanResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApiUsagePlan
@@ -2827,8 +2867,9 @@ func NewDescribeApisStatusRequest() (request *DescribeApisStatusRequest) {
 func NewDescribeApisStatusResponse() (response *DescribeApisStatusResponse) {
     response = &DescribeApisStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeApisStatus
@@ -2885,8 +2926,9 @@ func NewDescribeIPStrategyRequest() (request *DescribeIPStrategyRequest) {
 func NewDescribeIPStrategyResponse() (response *DescribeIPStrategyResponse) {
     response = &DescribeIPStrategyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIPStrategy
@@ -2939,8 +2981,9 @@ func NewDescribeIPStrategyApisStatusRequest() (request *DescribeIPStrategyApisSt
 func NewDescribeIPStrategyApisStatusResponse() (response *DescribeIPStrategyApisStatusResponse) {
     response = &DescribeIPStrategyApisStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIPStrategyApisStatus
@@ -2989,8 +3032,9 @@ func NewDescribeIPStrategysStatusRequest() (request *DescribeIPStrategysStatusRe
 func NewDescribeIPStrategysStatusResponse() (response *DescribeIPStrategysStatusResponse) {
     response = &DescribeIPStrategysStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIPStrategysStatus
@@ -3041,8 +3085,9 @@ func NewDescribeLogSearchRequest() (request *DescribeLogSearchRequest) {
 func NewDescribeLogSearchResponse() (response *DescribeLogSearchResponse) {
     response = &DescribeLogSearchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeLogSearch
@@ -3093,8 +3138,9 @@ func NewDescribePluginRequest() (request *DescribePluginRequest) {
 func NewDescribePluginResponse() (response *DescribePluginResponse) {
     response = &DescribePluginResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePlugin
@@ -3147,8 +3193,9 @@ func NewDescribePluginApisRequest() (request *DescribePluginApisRequest) {
 func NewDescribePluginApisResponse() (response *DescribePluginApisResponse) {
     response = &DescribePluginApisResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePluginApis
@@ -3203,8 +3250,9 @@ func NewDescribePluginsByApiRequest() (request *DescribePluginsByApiRequest) {
 func NewDescribePluginsByApiResponse() (response *DescribePluginsByApiResponse) {
     response = &DescribePluginsByApiResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePluginsByApi
@@ -3259,8 +3307,9 @@ func NewDescribeServiceRequest() (request *DescribeServiceRequest) {
 func NewDescribeServiceResponse() (response *DescribeServiceResponse) {
     response = &DescribeServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeService
@@ -3331,8 +3380,9 @@ func NewDescribeServiceEnvironmentListRequest() (request *DescribeServiceEnviron
 func NewDescribeServiceEnvironmentListResponse() (response *DescribeServiceEnvironmentListResponse) {
     response = &DescribeServiceEnvironmentListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeServiceEnvironmentList
@@ -3381,8 +3431,9 @@ func NewDescribeServiceEnvironmentReleaseHistoryRequest() (request *DescribeServ
 func NewDescribeServiceEnvironmentReleaseHistoryResponse() (response *DescribeServiceEnvironmentReleaseHistoryResponse) {
     response = &DescribeServiceEnvironmentReleaseHistoryResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeServiceEnvironmentReleaseHistory
@@ -3435,8 +3486,9 @@ func NewDescribeServiceEnvironmentStrategyRequest() (request *DescribeServiceEnv
 func NewDescribeServiceEnvironmentStrategyResponse() (response *DescribeServiceEnvironmentStrategyResponse) {
     response = &DescribeServiceEnvironmentStrategyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeServiceEnvironmentStrategy
@@ -3485,8 +3537,9 @@ func NewDescribeServiceForApiAppRequest() (request *DescribeServiceForApiAppRequ
 func NewDescribeServiceForApiAppResponse() (response *DescribeServiceForApiAppResponse) {
     response = &DescribeServiceForApiAppResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeServiceForApiApp
@@ -3535,8 +3588,9 @@ func NewDescribeServiceReleaseVersionRequest() (request *DescribeServiceReleaseV
 func NewDescribeServiceReleaseVersionResponse() (response *DescribeServiceReleaseVersionResponse) {
     response = &DescribeServiceReleaseVersionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeServiceReleaseVersion
@@ -3589,8 +3643,9 @@ func NewDescribeServiceSubDomainMappingsRequest() (request *DescribeServiceSubDo
 func NewDescribeServiceSubDomainMappingsResponse() (response *DescribeServiceSubDomainMappingsResponse) {
     response = &DescribeServiceSubDomainMappingsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeServiceSubDomainMappings
@@ -3645,8 +3700,9 @@ func NewDescribeServiceSubDomainsRequest() (request *DescribeServiceSubDomainsRe
 func NewDescribeServiceSubDomainsResponse() (response *DescribeServiceSubDomainsResponse) {
     response = &DescribeServiceSubDomainsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeServiceSubDomains
@@ -3705,8 +3761,9 @@ func NewDescribeServiceUsagePlanRequest() (request *DescribeServiceUsagePlanRequ
 func NewDescribeServiceUsagePlanResponse() (response *DescribeServiceUsagePlanResponse) {
     response = &DescribeServiceUsagePlanResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeServiceUsagePlan
@@ -3761,8 +3818,9 @@ func NewDescribeServicesStatusRequest() (request *DescribeServicesStatusRequest)
 func NewDescribeServicesStatusResponse() (response *DescribeServicesStatusResponse) {
     response = &DescribeServicesStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeServicesStatus
@@ -3851,8 +3909,9 @@ func NewDescribeUpstreamBindApisRequest() (request *DescribeUpstreamBindApisRequ
 func NewDescribeUpstreamBindApisResponse() (response *DescribeUpstreamBindApisResponse) {
     response = &DescribeUpstreamBindApisResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUpstreamBindApis
@@ -3917,8 +3976,9 @@ func NewDescribeUpstreamsRequest() (request *DescribeUpstreamsRequest) {
 func NewDescribeUpstreamsResponse() (response *DescribeUpstreamsResponse) {
     response = &DescribeUpstreamsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUpstreams
@@ -3987,8 +4047,9 @@ func NewDescribeUsagePlanRequest() (request *DescribeUsagePlanRequest) {
 func NewDescribeUsagePlanResponse() (response *DescribeUsagePlanResponse) {
     response = &DescribeUsagePlanResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUsagePlan
@@ -4037,8 +4098,9 @@ func NewDescribeUsagePlanEnvironmentsRequest() (request *DescribeUsagePlanEnviro
 func NewDescribeUsagePlanEnvironmentsResponse() (response *DescribeUsagePlanEnvironmentsResponse) {
     response = &DescribeUsagePlanEnvironmentsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUsagePlanEnvironments
@@ -4091,8 +4153,9 @@ func NewDescribeUsagePlanSecretIdsRequest() (request *DescribeUsagePlanSecretIds
 func NewDescribeUsagePlanSecretIdsResponse() (response *DescribeUsagePlanSecretIdsResponse) {
     response = &DescribeUsagePlanSecretIdsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUsagePlanSecretIds
@@ -4145,8 +4208,9 @@ func NewDescribeUsagePlansStatusRequest() (request *DescribeUsagePlansStatusRequ
 func NewDescribeUsagePlansStatusResponse() (response *DescribeUsagePlansStatusResponse) {
     response = &DescribeUsagePlansStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUsagePlansStatus
@@ -4195,8 +4259,9 @@ func NewDetachPluginRequest() (request *DetachPluginRequest) {
 func NewDetachPluginResponse() (response *DetachPluginResponse) {
     response = &DetachPluginResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DetachPlugin
@@ -4261,8 +4326,9 @@ func NewDisableApiKeyRequest() (request *DisableApiKeyRequest) {
 func NewDisableApiKeyResponse() (response *DisableApiKeyResponse) {
     response = &DisableApiKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DisableApiKey
@@ -4315,8 +4381,9 @@ func NewEnableApiKeyRequest() (request *EnableApiKeyRequest) {
 func NewEnableApiKeyResponse() (response *EnableApiKeyResponse) {
     response = &EnableApiKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // EnableApiKey
@@ -4367,8 +4434,9 @@ func NewImportOpenApiRequest() (request *ImportOpenApiRequest) {
 func NewImportOpenApiResponse() (response *ImportOpenApiResponse) {
     response = &ImportOpenApiResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ImportOpenApi
@@ -4441,8 +4509,9 @@ func NewModifyAPIDocRequest() (request *ModifyAPIDocRequest) {
 func NewModifyAPIDocResponse() (response *ModifyAPIDocResponse) {
     response = &ModifyAPIDocResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyAPIDoc
@@ -4501,8 +4570,9 @@ func NewModifyApiRequest() (request *ModifyApiRequest) {
 func NewModifyApiResponse() (response *ModifyApiResponse) {
     response = &ModifyApiResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyApi
@@ -4649,8 +4719,9 @@ func NewModifyApiAppRequest() (request *ModifyApiAppRequest) {
 func NewModifyApiAppResponse() (response *ModifyApiAppResponse) {
     response = &ModifyApiAppResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyApiApp
@@ -4721,8 +4792,9 @@ func NewModifyApiEnvironmentStrategyRequest() (request *ModifyApiEnvironmentStra
 func NewModifyApiEnvironmentStrategyResponse() (response *ModifyApiEnvironmentStrategyResponse) {
     response = &ModifyApiEnvironmentStrategyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyApiEnvironmentStrategy
@@ -4777,8 +4849,9 @@ func NewModifyApiIncrementRequest() (request *ModifyApiIncrementRequest) {
 func NewModifyApiIncrementResponse() (response *ModifyApiIncrementResponse) {
     response = &ModifyApiIncrementResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyApiIncrement
@@ -4833,8 +4906,9 @@ func NewModifyIPStrategyRequest() (request *ModifyIPStrategyRequest) {
 func NewModifyIPStrategyResponse() (response *ModifyIPStrategyResponse) {
     response = &ModifyIPStrategyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyIPStrategy
@@ -4883,8 +4957,9 @@ func NewModifyPluginRequest() (request *ModifyPluginRequest) {
 func NewModifyPluginResponse() (response *ModifyPluginResponse) {
     response = &ModifyPluginResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyPlugin
@@ -4991,8 +5066,9 @@ func NewModifyServiceRequest() (request *ModifyServiceRequest) {
 func NewModifyServiceResponse() (response *ModifyServiceResponse) {
     response = &ModifyServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyService
@@ -5055,8 +5131,9 @@ func NewModifyServiceEnvironmentStrategyRequest() (request *ModifyServiceEnviron
 func NewModifyServiceEnvironmentStrategyResponse() (response *ModifyServiceEnvironmentStrategyResponse) {
     response = &ModifyServiceEnvironmentStrategyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyServiceEnvironmentStrategy
@@ -5109,8 +5186,9 @@ func NewModifySubDomainRequest() (request *ModifySubDomainRequest) {
 func NewModifySubDomainResponse() (response *ModifySubDomainResponse) {
     response = &ModifySubDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySubDomain
@@ -5183,8 +5261,9 @@ func NewModifyUpstreamRequest() (request *ModifyUpstreamRequest) {
 func NewModifyUpstreamResponse() (response *ModifyUpstreamResponse) {
     response = &ModifyUpstreamResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyUpstream
@@ -5261,8 +5340,9 @@ func NewModifyUsagePlanRequest() (request *ModifyUsagePlanRequest) {
 func NewModifyUsagePlanResponse() (response *ModifyUsagePlanResponse) {
     response = &ModifyUsagePlanResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyUsagePlan
@@ -5313,8 +5393,9 @@ func NewReleaseServiceRequest() (request *ReleaseServiceRequest) {
 func NewReleaseServiceResponse() (response *ReleaseServiceResponse) {
     response = &ReleaseServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ReleaseService
@@ -5383,8 +5464,9 @@ func NewResetAPIDocPasswordRequest() (request *ResetAPIDocPasswordRequest) {
 func NewResetAPIDocPasswordResponse() (response *ResetAPIDocPasswordResponse) {
     response = &ResetAPIDocPasswordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetAPIDocPassword
@@ -5435,8 +5517,9 @@ func NewUnBindEnvironmentRequest() (request *UnBindEnvironmentRequest) {
 func NewUnBindEnvironmentResponse() (response *UnBindEnvironmentResponse) {
     response = &UnBindEnvironmentResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UnBindEnvironment
@@ -5497,8 +5580,9 @@ func NewUnBindIPStrategyRequest() (request *UnBindIPStrategyRequest) {
 func NewUnBindIPStrategyResponse() (response *UnBindIPStrategyResponse) {
     response = &UnBindIPStrategyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UnBindIPStrategy
@@ -5545,8 +5629,9 @@ func NewUnBindSecretIdsRequest() (request *UnBindSecretIdsRequest) {
 func NewUnBindSecretIdsResponse() (response *UnBindSecretIdsResponse) {
     response = &UnBindSecretIdsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UnBindSecretIds
@@ -5597,8 +5682,9 @@ func NewUnBindSubDomainRequest() (request *UnBindSubDomainRequest) {
 func NewUnBindSubDomainResponse() (response *UnBindSubDomainResponse) {
     response = &UnBindSubDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UnBindSubDomain
@@ -5667,8 +5753,9 @@ func NewUnReleaseServiceRequest() (request *UnReleaseServiceRequest) {
 func NewUnReleaseServiceResponse() (response *UnReleaseServiceResponse) {
     response = &UnReleaseServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UnReleaseService
@@ -5737,8 +5824,9 @@ func NewUnbindApiAppRequest() (request *UnbindApiAppRequest) {
 func NewUnbindApiAppResponse() (response *UnbindApiAppResponse) {
     response = &UnbindApiAppResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UnbindApiApp
@@ -5803,8 +5891,9 @@ func NewUpdateApiAppKeyRequest() (request *UpdateApiAppKeyRequest) {
 func NewUpdateApiAppKeyResponse() (response *UpdateApiAppKeyResponse) {
     response = &UpdateApiAppKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateApiAppKey
@@ -5875,8 +5964,9 @@ func NewUpdateApiKeyRequest() (request *UpdateApiKeyRequest) {
 func NewUpdateApiKeyResponse() (response *UpdateApiKeyResponse) {
     response = &UpdateApiKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateApiKey
@@ -5929,8 +6019,9 @@ func NewUpdateServiceRequest() (request *UpdateServiceRequest) {
 func NewUpdateServiceResponse() (response *UpdateServiceResponse) {
     response = &UpdateServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateService

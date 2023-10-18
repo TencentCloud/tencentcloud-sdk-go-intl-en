@@ -59,8 +59,9 @@ func NewCompleteMigrateJobRequest() (request *CompleteMigrateJobRequest) {
 func NewCompleteMigrateJobResponse() (response *CompleteMigrateJobResponse) {
     response = &CompleteMigrateJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CompleteMigrateJob
@@ -173,8 +174,9 @@ func NewConfigureSyncJobRequest() (request *ConfigureSyncJobRequest) {
 func NewConfigureSyncJobResponse() (response *ConfigureSyncJobResponse) {
     response = &ConfigureSyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ConfigureSyncJob
@@ -227,8 +229,9 @@ func NewContinueMigrateJobRequest() (request *ContinueMigrateJobRequest) {
 func NewContinueMigrateJobResponse() (response *ContinueMigrateJobResponse) {
     response = &ContinueMigrateJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ContinueMigrateJob
@@ -283,8 +286,9 @@ func NewContinueSyncJobRequest() (request *ContinueSyncJobRequest) {
 func NewContinueSyncJobResponse() (response *ContinueSyncJobResponse) {
     response = &ContinueSyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ContinueSyncJob
@@ -345,8 +349,9 @@ func NewCreateCheckSyncJobRequest() (request *CreateCheckSyncJobRequest) {
 func NewCreateCheckSyncJobResponse() (response *CreateCheckSyncJobResponse) {
     response = &CreateCheckSyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCheckSyncJob
@@ -354,6 +359,7 @@ func NewCreateCheckSyncJobResponse() (response *CreateCheckSyncJobResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_INTRANETUSERNOTTAGGEDERROR = "UnsupportedOperation.IntraNetUserNotTaggedError"
 //  UNSUPPORTEDOPERATION_INTRANETUSERNOTTAGGEDFORSYNCJOBERROR = "UnsupportedOperation.IntraNetUserNotTaggedForSyncJobError"
@@ -367,6 +373,7 @@ func (c *Client) CreateCheckSyncJob(request *CreateCheckSyncJobRequest) (respons
 //
 // error code that may be returned:
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_INTRANETUSERNOTTAGGEDERROR = "UnsupportedOperation.IntraNetUserNotTaggedError"
 //  UNSUPPORTEDOPERATION_INTRANETUSERNOTTAGGEDFORSYNCJOBERROR = "UnsupportedOperation.IntraNetUserNotTaggedForSyncJobError"
@@ -401,8 +408,9 @@ func NewCreateCompareTaskRequest() (request *CreateCompareTaskRequest) {
 func NewCreateCompareTaskResponse() (response *CreateCompareTaskResponse) {
     response = &CreateCompareTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCompareTask
@@ -485,8 +493,9 @@ func NewCreateMigrateCheckJobRequest() (request *CreateMigrateCheckJobRequest) {
 func NewCreateMigrateCheckJobResponse() (response *CreateMigrateCheckJobResponse) {
     response = &CreateMigrateCheckJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateMigrateCheckJob
@@ -611,8 +620,9 @@ func NewCreateMigrationServiceRequest() (request *CreateMigrationServiceRequest)
 func NewCreateMigrationServiceResponse() (response *CreateMigrationServiceResponse) {
     response = &CreateMigrationServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateMigrationService
@@ -697,8 +707,9 @@ func NewCreateModifyCheckSyncJobRequest() (request *CreateModifyCheckSyncJobRequ
 func NewCreateModifyCheckSyncJobResponse() (response *CreateModifyCheckSyncJobResponse) {
     response = &CreateModifyCheckSyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateModifyCheckSyncJob
@@ -783,8 +794,9 @@ func NewCreateSyncJobRequest() (request *CreateSyncJobRequest) {
 func NewCreateSyncJobResponse() (response *CreateSyncJobResponse) {
     response = &CreateSyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSyncJob
@@ -853,8 +865,9 @@ func NewDeleteCompareTaskRequest() (request *DeleteCompareTaskRequest) {
 func NewDeleteCompareTaskResponse() (response *DeleteCompareTaskResponse) {
     response = &DeleteCompareTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCompareTask
@@ -937,8 +950,9 @@ func NewDescribeCheckSyncJobResultRequest() (request *DescribeCheckSyncJobResult
 func NewDescribeCheckSyncJobResultResponse() (response *DescribeCheckSyncJobResultResponse) {
     response = &DescribeCheckSyncJobResultResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCheckSyncJobResult
@@ -989,8 +1003,9 @@ func NewDescribeCompareReportRequest() (request *DescribeCompareReportRequest) {
 func NewDescribeCompareReportResponse() (response *DescribeCompareReportResponse) {
     response = &DescribeCompareReportResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCompareReport
@@ -1071,8 +1086,9 @@ func NewDescribeCompareTasksRequest() (request *DescribeCompareTasksRequest) {
 func NewDescribeCompareTasksResponse() (response *DescribeCompareTasksResponse) {
     response = &DescribeCompareTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCompareTasks
@@ -1155,8 +1171,9 @@ func NewDescribeMigrateDBInstancesRequest() (request *DescribeMigrateDBInstances
 func NewDescribeMigrateDBInstancesResponse() (response *DescribeMigrateDBInstancesResponse) {
     response = &DescribeMigrateDBInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeMigrateDBInstances
@@ -1261,8 +1278,9 @@ func NewDescribeMigrationCheckJobRequest() (request *DescribeMigrationCheckJobRe
 func NewDescribeMigrationCheckJobResponse() (response *DescribeMigrationCheckJobResponse) {
     response = &DescribeMigrationCheckJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeMigrationCheckJob
@@ -1351,8 +1369,9 @@ func NewDescribeMigrationDetailRequest() (request *DescribeMigrationDetailReques
 func NewDescribeMigrationDetailResponse() (response *DescribeMigrationDetailResponse) {
     response = &DescribeMigrationDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeMigrationDetail
@@ -1435,8 +1454,9 @@ func NewDescribeMigrationJobsRequest() (request *DescribeMigrationJobsRequest) {
 func NewDescribeMigrationJobsResponse() (response *DescribeMigrationJobsResponse) {
     response = &DescribeMigrationJobsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeMigrationJobs
@@ -1519,8 +1539,9 @@ func NewDescribeModifyCheckSyncJobResultRequest() (request *DescribeModifyCheckS
 func NewDescribeModifyCheckSyncJobResultResponse() (response *DescribeModifyCheckSyncJobResultResponse) {
     response = &DescribeModifyCheckSyncJobResultResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeModifyCheckSyncJobResult
@@ -1567,8 +1588,9 @@ func NewDescribeSyncJobsRequest() (request *DescribeSyncJobsRequest) {
 func NewDescribeSyncJobsResponse() (response *DescribeSyncJobsResponse) {
     response = &DescribeSyncJobsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSyncJobs
@@ -1629,8 +1651,9 @@ func NewDestroyMigrateJobRequest() (request *DestroyMigrateJobRequest) {
 func NewDestroyMigrateJobResponse() (response *DestroyMigrateJobResponse) {
     response = &DestroyMigrateJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DestroyMigrateJob
@@ -1711,8 +1734,9 @@ func NewDestroySyncJobRequest() (request *DestroySyncJobRequest) {
 func NewDestroySyncJobResponse() (response *DestroySyncJobResponse) {
     response = &DestroySyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DestroySyncJob
@@ -1761,8 +1785,9 @@ func NewIsolateMigrateJobRequest() (request *IsolateMigrateJobRequest) {
 func NewIsolateMigrateJobResponse() (response *IsolateMigrateJobResponse) {
     response = &IsolateMigrateJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // IsolateMigrateJob
@@ -1845,8 +1870,9 @@ func NewIsolateSyncJobRequest() (request *IsolateSyncJobRequest) {
 func NewIsolateSyncJobResponse() (response *IsolateSyncJobResponse) {
     response = &IsolateSyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // IsolateSyncJob
@@ -1899,8 +1925,9 @@ func NewModifyCompareTaskRequest() (request *ModifyCompareTaskRequest) {
 func NewModifyCompareTaskResponse() (response *ModifyCompareTaskResponse) {
     response = &ModifyCompareTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCompareTask
@@ -1983,8 +2010,9 @@ func NewModifyCompareTaskNameRequest() (request *ModifyCompareTaskNameRequest) {
 func NewModifyCompareTaskNameResponse() (response *ModifyCompareTaskNameResponse) {
     response = &ModifyCompareTaskNameResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCompareTaskName
@@ -2065,8 +2093,9 @@ func NewModifyMigrateJobSpecRequest() (request *ModifyMigrateJobSpecRequest) {
 func NewModifyMigrateJobSpecResponse() (response *ModifyMigrateJobSpecResponse) {
     response = &ModifyMigrateJobSpecResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyMigrateJobSpec
@@ -2145,8 +2174,9 @@ func NewModifyMigrateNameRequest() (request *ModifyMigrateNameRequest) {
 func NewModifyMigrateNameResponse() (response *ModifyMigrateNameResponse) {
     response = &ModifyMigrateNameResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyMigrateName
@@ -2229,8 +2259,9 @@ func NewModifyMigrationJobRequest() (request *ModifyMigrationJobRequest) {
 func NewModifyMigrationJobResponse() (response *ModifyMigrationJobResponse) {
     response = &ModifyMigrationJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyMigrationJob
@@ -2323,8 +2354,9 @@ func NewModifySyncJobConfigRequest() (request *ModifySyncJobConfigRequest) {
 func NewModifySyncJobConfigResponse() (response *ModifySyncJobConfigResponse) {
     response = &ModifySyncJobConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySyncJobConfig
@@ -2373,8 +2405,9 @@ func NewPauseMigrateJobRequest() (request *PauseMigrateJobRequest) {
 func NewPauseMigrateJobResponse() (response *PauseMigrateJobResponse) {
     response = &PauseMigrateJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // PauseMigrateJob
@@ -2429,8 +2462,9 @@ func NewPauseSyncJobRequest() (request *PauseSyncJobRequest) {
 func NewPauseSyncJobResponse() (response *PauseSyncJobResponse) {
     response = &PauseSyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // PauseSyncJob
@@ -2491,14 +2525,16 @@ func NewRecoverMigrateJobRequest() (request *RecoverMigrateJobRequest) {
 func NewRecoverMigrateJobResponse() (response *RecoverMigrateJobResponse) {
     response = &RecoverMigrateJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RecoverMigrateJob
 // This API is used to recover a data migration task in **Isolated** status. After calling this API, you can call the `DescribeMigrationJobs` API to query the latest task status.
 //
 // error code that may be returned:
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
 func (c *Client) RecoverMigrateJob(request *RecoverMigrateJobRequest) (response *RecoverMigrateJobResponse, err error) {
     return c.RecoverMigrateJobWithContext(context.Background(), request)
@@ -2508,6 +2544,7 @@ func (c *Client) RecoverMigrateJob(request *RecoverMigrateJobRequest) (response 
 // This API is used to recover a data migration task in **Isolated** status. After calling this API, you can call the `DescribeMigrationJobs` API to query the latest task status.
 //
 // error code that may be returned:
+//  INTERNALERROR_INTERNALHTTPSERVERERROR = "InternalError.InternalHttpServerError"
 //  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
 func (c *Client) RecoverMigrateJobWithContext(ctx context.Context, request *RecoverMigrateJobRequest) (response *RecoverMigrateJobResponse, err error) {
     if request == nil {
@@ -2539,8 +2576,9 @@ func NewRecoverSyncJobRequest() (request *RecoverSyncJobRequest) {
 func NewRecoverSyncJobResponse() (response *RecoverSyncJobResponse) {
     response = &RecoverSyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RecoverSyncJob
@@ -2623,14 +2661,16 @@ func NewResizeSyncJobRequest() (request *ResizeSyncJobRequest) {
 func NewResizeSyncJobResponse() (response *ResizeSyncJobResponse) {
     response = &ResizeSyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResizeSyncJob
 // This API is used to adjust the specification of a pay-as-you-go sync task. After this API is called, the backend needs to take about 3-5 minutes to implement the adjustment. You can call the `DescribeSyncJobs` API to query the latest task status.
 //
 // error code that may be returned:
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
 //  INTERNALERROR_INTERNALTRADEERROR = "InternalError.InternalTradeError"
 //  INTERNALERROR_NOTENOUGHMONEYERROR = "InternalError.NotEnoughMoneyError"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
@@ -2642,6 +2682,7 @@ func (c *Client) ResizeSyncJob(request *ResizeSyncJobRequest) (response *ResizeS
 // This API is used to adjust the specification of a pay-as-you-go sync task. After this API is called, the backend needs to take about 3-5 minutes to implement the adjustment. You can call the `DescribeSyncJobs` API to query the latest task status.
 //
 // error code that may be returned:
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
 //  INTERNALERROR_INTERNALTRADEERROR = "InternalError.InternalTradeError"
 //  INTERNALERROR_NOTENOUGHMONEYERROR = "InternalError.NotEnoughMoneyError"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
@@ -2675,8 +2716,9 @@ func NewResumeMigrateJobRequest() (request *ResumeMigrateJobRequest) {
 func NewResumeMigrateJobResponse() (response *ResumeMigrateJobResponse) {
     response = &ResumeMigrateJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResumeMigrateJob
@@ -2767,8 +2809,9 @@ func NewResumeSyncJobRequest() (request *ResumeSyncJobRequest) {
 func NewResumeSyncJobResponse() (response *ResumeSyncJobResponse) {
     response = &ResumeSyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResumeSyncJob
@@ -2815,8 +2858,9 @@ func NewSkipCheckItemRequest() (request *SkipCheckItemRequest) {
 func NewSkipCheckItemResponse() (response *SkipCheckItemResponse) {
     response = &SkipCheckItemResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SkipCheckItem
@@ -2867,8 +2911,9 @@ func NewSkipSyncCheckItemRequest() (request *SkipSyncCheckItemRequest) {
 func NewSkipSyncCheckItemResponse() (response *SkipSyncCheckItemResponse) {
     response = &SkipSyncCheckItemResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SkipSyncCheckItem
@@ -2882,6 +2927,7 @@ func NewSkipSyncCheckItemResponse() (response *SkipSyncCheckItemResponse) {
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -2900,6 +2946,7 @@ func (c *Client) SkipSyncCheckItem(request *SkipSyncCheckItemRequest) (response 
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
@@ -2933,8 +2980,9 @@ func NewStartCompareRequest() (request *StartCompareRequest) {
 func NewStartCompareResponse() (response *StartCompareResponse) {
     response = &StartCompareResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartCompare
@@ -3015,8 +3063,9 @@ func NewStartMigrateJobRequest() (request *StartMigrateJobRequest) {
 func NewStartMigrateJobResponse() (response *StartMigrateJobResponse) {
     response = &StartMigrateJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartMigrateJob
@@ -3127,8 +3176,9 @@ func NewStartModifySyncJobRequest() (request *StartModifySyncJobRequest) {
 func NewStartModifySyncJobResponse() (response *StartModifySyncJobResponse) {
     response = &StartModifySyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartModifySyncJob
@@ -3177,8 +3227,9 @@ func NewStartSyncJobRequest() (request *StartSyncJobRequest) {
 func NewStartSyncJobResponse() (response *StartSyncJobResponse) {
     response = &StartSyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartSyncJob
@@ -3188,6 +3239,7 @@ func NewStartSyncJobResponse() (response *StartSyncJobResponse) {
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  OPERATIONDENIED_BIZOPERATIONDENIEDERROR = "OperationDenied.BizOperationDeniedError"
 //  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
 func (c *Client) StartSyncJob(request *StartSyncJobRequest) (response *StartSyncJobResponse, err error) {
     return c.StartSyncJobWithContext(context.Background(), request)
 }
@@ -3199,6 +3251,7 @@ func (c *Client) StartSyncJob(request *StartSyncJobRequest) (response *StartSync
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  OPERATIONDENIED_BIZOPERATIONDENIEDERROR = "OperationDenied.BizOperationDeniedError"
 //  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
 func (c *Client) StartSyncJobWithContext(ctx context.Context, request *StartSyncJobRequest) (response *StartSyncJobResponse, err error) {
     if request == nil {
         request = NewStartSyncJobRequest()
@@ -3229,8 +3282,9 @@ func NewStopCompareRequest() (request *StopCompareRequest) {
 func NewStopCompareResponse() (response *StopCompareResponse) {
     response = &StopCompareResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopCompare
@@ -3311,8 +3365,9 @@ func NewStopMigrateJobRequest() (request *StopMigrateJobRequest) {
 func NewStopMigrateJobResponse() (response *StopMigrateJobResponse) {
     response = &StopMigrateJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopMigrateJob
@@ -3415,8 +3470,9 @@ func NewStopSyncJobRequest() (request *StopSyncJobRequest) {
 func NewStopSyncJobResponse() (response *StopSyncJobResponse) {
     response = &StopSyncJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopSyncJob

@@ -59,8 +59,9 @@ func NewAssociateDDoSEipAddressRequest() (request *AssociateDDoSEipAddressReques
 func NewAssociateDDoSEipAddressResponse() (response *AssociateDDoSEipAddressResponse) {
     response = &AssociateDDoSEipAddressResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AssociateDDoSEipAddress
@@ -141,8 +142,9 @@ func NewAssociateDDoSEipLoadBalancerRequest() (request *AssociateDDoSEipLoadBala
 func NewAssociateDDoSEipLoadBalancerResponse() (response *AssociateDDoSEipLoadBalancerResponse) {
     response = &AssociateDDoSEipLoadBalancerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AssociateDDoSEipLoadBalancer
@@ -223,8 +225,9 @@ func NewCreateBlackWhiteIpListRequest() (request *CreateBlackWhiteIpListRequest)
 func NewCreateBlackWhiteIpListResponse() (response *CreateBlackWhiteIpListResponse) {
     response = &CreateBlackWhiteIpListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateBlackWhiteIpList
@@ -275,8 +278,9 @@ func NewCreateBoundIPRequest() (request *CreateBoundIPRequest) {
 func NewCreateBoundIPResponse() (response *CreateBoundIPResponse) {
     response = &CreateBoundIPResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateBoundIP
@@ -327,8 +331,9 @@ func NewCreateCCPrecisionPolicyRequest() (request *CreateCCPrecisionPolicyReques
 func NewCreateCCPrecisionPolicyResponse() (response *CreateCCPrecisionPolicyResponse) {
     response = &CreateCCPrecisionPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCCPrecisionPolicy
@@ -407,8 +412,9 @@ func NewCreateCCReqLimitPolicyRequest() (request *CreateCCReqLimitPolicyRequest)
 func NewCreateCCReqLimitPolicyResponse() (response *CreateCCReqLimitPolicyResponse) {
     response = &CreateCCReqLimitPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCCReqLimitPolicy
@@ -487,8 +493,9 @@ func NewCreateCcBlackWhiteIpListRequest() (request *CreateCcBlackWhiteIpListRequ
 func NewCreateCcBlackWhiteIpListResponse() (response *CreateCcBlackWhiteIpListResponse) {
     response = &CreateCcBlackWhiteIpListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCcBlackWhiteIpList
@@ -539,8 +546,9 @@ func NewCreateCcGeoIPBlockConfigRequest() (request *CreateCcGeoIPBlockConfigRequ
 func NewCreateCcGeoIPBlockConfigResponse() (response *CreateCcGeoIPBlockConfigResponse) {
     response = &CreateCcGeoIPBlockConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCcGeoIPBlockConfig
@@ -589,8 +597,9 @@ func NewCreateDDoSAIRequest() (request *CreateDDoSAIRequest) {
 func NewCreateDDoSAIResponse() (response *CreateDDoSAIResponse) {
     response = &CreateDDoSAIResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDDoSAI
@@ -639,8 +648,9 @@ func NewCreateDDoSGeoIPBlockConfigRequest() (request *CreateDDoSGeoIPBlockConfig
 func NewCreateDDoSGeoIPBlockConfigResponse() (response *CreateDDoSGeoIPBlockConfigResponse) {
     response = &CreateDDoSGeoIPBlockConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDDoSGeoIPBlockConfig
@@ -691,8 +701,9 @@ func NewCreateDDoSSpeedLimitConfigRequest() (request *CreateDDoSSpeedLimitConfig
 func NewCreateDDoSSpeedLimitConfigResponse() (response *CreateDDoSSpeedLimitConfigResponse) {
     response = &CreateDDoSSpeedLimitConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDDoSSpeedLimitConfig
@@ -743,8 +754,9 @@ func NewCreateDefaultAlarmThresholdRequest() (request *CreateDefaultAlarmThresho
 func NewCreateDefaultAlarmThresholdResponse() (response *CreateDefaultAlarmThresholdResponse) {
     response = &CreateDefaultAlarmThresholdResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDefaultAlarmThreshold
@@ -791,8 +803,9 @@ func NewCreateIPAlarmThresholdConfigRequest() (request *CreateIPAlarmThresholdCo
 func NewCreateIPAlarmThresholdConfigResponse() (response *CreateIPAlarmThresholdConfigResponse) {
     response = &CreateIPAlarmThresholdConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateIPAlarmThresholdConfig
@@ -839,8 +852,9 @@ func NewCreateL7RuleCertsRequest() (request *CreateL7RuleCertsRequest) {
 func NewCreateL7RuleCertsResponse() (response *CreateL7RuleCertsResponse) {
     response = &CreateL7RuleCertsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateL7RuleCerts
@@ -899,8 +913,9 @@ func NewCreateNewL7RulesRequest() (request *CreateNewL7RulesRequest) {
 func NewCreateNewL7RulesResponse() (response *CreateNewL7RulesResponse) {
     response = &CreateNewL7RulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateNewL7Rules
@@ -949,8 +964,9 @@ func NewCreatePacketFilterConfigRequest() (request *CreatePacketFilterConfigRequ
 func NewCreatePacketFilterConfigResponse() (response *CreatePacketFilterConfigResponse) {
     response = &CreatePacketFilterConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreatePacketFilterConfig
@@ -1003,8 +1019,9 @@ func NewCreateProtocolBlockConfigRequest() (request *CreateProtocolBlockConfigRe
 func NewCreateProtocolBlockConfigResponse() (response *CreateProtocolBlockConfigResponse) {
     response = &CreateProtocolBlockConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateProtocolBlockConfig
@@ -1055,8 +1072,9 @@ func NewCreateSchedulingDomainRequest() (request *CreateSchedulingDomainRequest)
 func NewCreateSchedulingDomainResponse() (response *CreateSchedulingDomainResponse) {
     response = &CreateSchedulingDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSchedulingDomain
@@ -1121,8 +1139,9 @@ func NewCreateWaterPrintConfigRequest() (request *CreateWaterPrintConfigRequest)
 func NewCreateWaterPrintConfigResponse() (response *CreateWaterPrintConfigResponse) {
     response = &CreateWaterPrintConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateWaterPrintConfig
@@ -1175,8 +1194,9 @@ func NewCreateWaterPrintKeyRequest() (request *CreateWaterPrintKeyRequest) {
 func NewCreateWaterPrintKeyResponse() (response *CreateWaterPrintKeyResponse) {
     response = &CreateWaterPrintKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateWaterPrintKey
@@ -1229,8 +1249,9 @@ func NewDeleteCCLevelPolicyRequest() (request *DeleteCCLevelPolicyRequest) {
 func NewDeleteCCLevelPolicyResponse() (response *DeleteCCLevelPolicyResponse) {
     response = &DeleteCCLevelPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCCLevelPolicy
@@ -1309,8 +1330,9 @@ func NewDeleteCCPrecisionPolicyRequest() (request *DeleteCCPrecisionPolicyReques
 func NewDeleteCCPrecisionPolicyResponse() (response *DeleteCCPrecisionPolicyResponse) {
     response = &DeleteCCPrecisionPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCCPrecisionPolicy
@@ -1389,8 +1411,9 @@ func NewDeleteCCThresholdPolicyRequest() (request *DeleteCCThresholdPolicyReques
 func NewDeleteCCThresholdPolicyResponse() (response *DeleteCCThresholdPolicyResponse) {
     response = &DeleteCCThresholdPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCCThresholdPolicy
@@ -1469,8 +1492,9 @@ func NewDeleteCcBlackWhiteIpListRequest() (request *DeleteCcBlackWhiteIpListRequ
 func NewDeleteCcBlackWhiteIpListResponse() (response *DeleteCcBlackWhiteIpListResponse) {
     response = &DeleteCcBlackWhiteIpListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCcBlackWhiteIpList
@@ -1523,8 +1547,9 @@ func NewDeleteCcGeoIPBlockConfigRequest() (request *DeleteCcGeoIPBlockConfigRequ
 func NewDeleteCcGeoIPBlockConfigResponse() (response *DeleteCcGeoIPBlockConfigResponse) {
     response = &DeleteCcGeoIPBlockConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCcGeoIPBlockConfig
@@ -1575,8 +1600,9 @@ func NewDeleteDDoSGeoIPBlockConfigRequest() (request *DeleteDDoSGeoIPBlockConfig
 func NewDeleteDDoSGeoIPBlockConfigResponse() (response *DeleteDDoSGeoIPBlockConfigResponse) {
     response = &DeleteDDoSGeoIPBlockConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteDDoSGeoIPBlockConfig
@@ -1623,8 +1649,9 @@ func NewDeleteDDoSSpeedLimitConfigRequest() (request *DeleteDDoSSpeedLimitConfig
 func NewDeleteDDoSSpeedLimitConfigResponse() (response *DeleteDDoSSpeedLimitConfigResponse) {
     response = &DeleteDDoSSpeedLimitConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteDDoSSpeedLimitConfig
@@ -1671,8 +1698,9 @@ func NewDeletePacketFilterConfigRequest() (request *DeletePacketFilterConfigRequ
 func NewDeletePacketFilterConfigResponse() (response *DeletePacketFilterConfigResponse) {
     response = &DeletePacketFilterConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeletePacketFilterConfig
@@ -1721,8 +1749,9 @@ func NewDeleteWaterPrintConfigRequest() (request *DeleteWaterPrintConfigRequest)
 func NewDeleteWaterPrintConfigResponse() (response *DeleteWaterPrintConfigResponse) {
     response = &DeleteWaterPrintConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteWaterPrintConfig
@@ -1771,8 +1800,9 @@ func NewDeleteWaterPrintKeyRequest() (request *DeleteWaterPrintKeyRequest) {
 func NewDeleteWaterPrintKeyResponse() (response *DeleteWaterPrintKeyResponse) {
     response = &DeleteWaterPrintKeyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteWaterPrintKey
@@ -1823,8 +1853,9 @@ func NewDescribeBasicDeviceStatusRequest() (request *DescribeBasicDeviceStatusRe
 func NewDescribeBasicDeviceStatusResponse() (response *DescribeBasicDeviceStatusResponse) {
     response = &DescribeBasicDeviceStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBasicDeviceStatus
@@ -1875,8 +1906,9 @@ func NewDescribeBgpBizTrendRequest() (request *DescribeBgpBizTrendRequest) {
 func NewDescribeBgpBizTrendResponse() (response *DescribeBgpBizTrendResponse) {
     response = &DescribeBgpBizTrendResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBgpBizTrend
@@ -1927,8 +1959,9 @@ func NewDescribeBizHttpStatusRequest() (request *DescribeBizHttpStatusRequest) {
 func NewDescribeBizHttpStatusResponse() (response *DescribeBizHttpStatusResponse) {
     response = &DescribeBizHttpStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBizHttpStatus
@@ -1993,8 +2026,9 @@ func NewDescribeBizTrendRequest() (request *DescribeBizTrendRequest) {
 func NewDescribeBizTrendResponse() (response *DescribeBizTrendResponse) {
     response = &DescribeBizTrendResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBizTrend
@@ -2059,8 +2093,9 @@ func NewDescribeBlackWhiteIpListRequest() (request *DescribeBlackWhiteIpListRequ
 func NewDescribeBlackWhiteIpListResponse() (response *DescribeBlackWhiteIpListResponse) {
     response = &DescribeBlackWhiteIpListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBlackWhiteIpList
@@ -2139,8 +2174,9 @@ func NewDescribeCCLevelListRequest() (request *DescribeCCLevelListRequest) {
 func NewDescribeCCLevelListResponse() (response *DescribeCCLevelListResponse) {
     response = &DescribeCCLevelListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCCLevelList
@@ -2219,8 +2255,9 @@ func NewDescribeCCLevelPolicyRequest() (request *DescribeCCLevelPolicyRequest) {
 func NewDescribeCCLevelPolicyResponse() (response *DescribeCCLevelPolicyResponse) {
     response = &DescribeCCLevelPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCCLevelPolicy
@@ -2299,8 +2336,9 @@ func NewDescribeCCPrecisionPlyListRequest() (request *DescribeCCPrecisionPlyList
 func NewDescribeCCPrecisionPlyListResponse() (response *DescribeCCPrecisionPlyListResponse) {
     response = &DescribeCCPrecisionPlyListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCCPrecisionPlyList
@@ -2379,8 +2417,9 @@ func NewDescribeCCThresholdListRequest() (request *DescribeCCThresholdListReques
 func NewDescribeCCThresholdListResponse() (response *DescribeCCThresholdListResponse) {
     response = &DescribeCCThresholdListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCCThresholdList
@@ -2459,8 +2498,9 @@ func NewDescribeCCTrendRequest() (request *DescribeCCTrendRequest) {
 func NewDescribeCCTrendResponse() (response *DescribeCCTrendResponse) {
     response = &DescribeCCTrendResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCCTrend
@@ -2539,8 +2579,9 @@ func NewDescribeCcBlackWhiteIpListRequest() (request *DescribeCcBlackWhiteIpList
 func NewDescribeCcBlackWhiteIpListResponse() (response *DescribeCcBlackWhiteIpListResponse) {
     response = &DescribeCcBlackWhiteIpListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCcBlackWhiteIpList
@@ -2591,8 +2632,9 @@ func NewDescribeCcGeoIPBlockConfigListRequest() (request *DescribeCcGeoIPBlockCo
 func NewDescribeCcGeoIPBlockConfigListResponse() (response *DescribeCcGeoIPBlockConfigListResponse) {
     response = &DescribeCcGeoIPBlockConfigListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCcGeoIPBlockConfigList
@@ -2643,8 +2685,9 @@ func NewDescribeDDoSTrendRequest() (request *DescribeDDoSTrendRequest) {
 func NewDescribeDDoSTrendResponse() (response *DescribeDDoSTrendResponse) {
     response = &DescribeDDoSTrendResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDDoSTrend
@@ -2695,8 +2738,9 @@ func NewDescribeDefaultAlarmThresholdRequest() (request *DescribeDefaultAlarmThr
 func NewDescribeDefaultAlarmThresholdResponse() (response *DescribeDefaultAlarmThresholdResponse) {
     response = &DescribeDefaultAlarmThresholdResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDefaultAlarmThreshold
@@ -2747,8 +2791,9 @@ func NewDescribeL7RulesBySSLCertIdRequest() (request *DescribeL7RulesBySSLCertId
 func NewDescribeL7RulesBySSLCertIdResponse() (response *DescribeL7RulesBySSLCertIdResponse) {
     response = &DescribeL7RulesBySSLCertIdResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeL7RulesBySSLCertId
@@ -2809,8 +2854,9 @@ func NewDescribeListBGPIPInstancesRequest() (request *DescribeListBGPIPInstances
 func NewDescribeListBGPIPInstancesResponse() (response *DescribeListBGPIPInstancesResponse) {
     response = &DescribeListBGPIPInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListBGPIPInstances
@@ -2857,8 +2903,9 @@ func NewDescribeListBGPInstancesRequest() (request *DescribeListBGPInstancesRequ
 func NewDescribeListBGPInstancesResponse() (response *DescribeListBGPInstancesResponse) {
     response = &DescribeListBGPInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListBGPInstances
@@ -2905,8 +2952,9 @@ func NewDescribeListBlackWhiteIpListRequest() (request *DescribeListBlackWhiteIp
 func NewDescribeListBlackWhiteIpListResponse() (response *DescribeListBlackWhiteIpListResponse) {
     response = &DescribeListBlackWhiteIpListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListBlackWhiteIpList
@@ -2953,8 +3001,9 @@ func NewDescribeListDDoSAIRequest() (request *DescribeListDDoSAIRequest) {
 func NewDescribeListDDoSAIResponse() (response *DescribeListDDoSAIResponse) {
     response = &DescribeListDDoSAIResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListDDoSAI
@@ -3001,8 +3050,9 @@ func NewDescribeListDDoSGeoIPBlockConfigRequest() (request *DescribeListDDoSGeoI
 func NewDescribeListDDoSGeoIPBlockConfigResponse() (response *DescribeListDDoSGeoIPBlockConfigResponse) {
     response = &DescribeListDDoSGeoIPBlockConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListDDoSGeoIPBlockConfig
@@ -3049,8 +3099,9 @@ func NewDescribeListDDoSSpeedLimitConfigRequest() (request *DescribeListDDoSSpee
 func NewDescribeListDDoSSpeedLimitConfigResponse() (response *DescribeListDDoSSpeedLimitConfigResponse) {
     response = &DescribeListDDoSSpeedLimitConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListDDoSSpeedLimitConfig
@@ -3097,8 +3148,9 @@ func NewDescribeListIPAlarmConfigRequest() (request *DescribeListIPAlarmConfigRe
 func NewDescribeListIPAlarmConfigResponse() (response *DescribeListIPAlarmConfigResponse) {
     response = &DescribeListIPAlarmConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListIPAlarmConfig
@@ -3145,8 +3197,9 @@ func NewDescribeListListenerRequest() (request *DescribeListListenerRequest) {
 func NewDescribeListListenerResponse() (response *DescribeListListenerResponse) {
     response = &DescribeListListenerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListListener
@@ -3193,8 +3246,9 @@ func NewDescribeListPacketFilterConfigRequest() (request *DescribeListPacketFilt
 func NewDescribeListPacketFilterConfigResponse() (response *DescribeListPacketFilterConfigResponse) {
     response = &DescribeListPacketFilterConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListPacketFilterConfig
@@ -3241,8 +3295,9 @@ func NewDescribeListProtectThresholdConfigRequest() (request *DescribeListProtec
 func NewDescribeListProtectThresholdConfigResponse() (response *DescribeListProtectThresholdConfigResponse) {
     response = &DescribeListProtectThresholdConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListProtectThresholdConfig
@@ -3289,8 +3344,9 @@ func NewDescribeListProtocolBlockConfigRequest() (request *DescribeListProtocolB
 func NewDescribeListProtocolBlockConfigResponse() (response *DescribeListProtocolBlockConfigResponse) {
     response = &DescribeListProtocolBlockConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListProtocolBlockConfig
@@ -3337,8 +3393,9 @@ func NewDescribeListSchedulingDomainRequest() (request *DescribeListSchedulingDo
 func NewDescribeListSchedulingDomainResponse() (response *DescribeListSchedulingDomainResponse) {
     response = &DescribeListSchedulingDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListSchedulingDomain
@@ -3385,8 +3442,9 @@ func NewDescribeListWaterPrintConfigRequest() (request *DescribeListWaterPrintCo
 func NewDescribeListWaterPrintConfigResponse() (response *DescribeListWaterPrintConfigResponse) {
     response = &DescribeListWaterPrintConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListWaterPrintConfig
@@ -3433,8 +3491,9 @@ func NewDescribeNewL7RulesRequest() (request *DescribeNewL7RulesRequest) {
 func NewDescribeNewL7RulesResponse() (response *DescribeNewL7RulesResponse) {
     response = &DescribeNewL7RulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeNewL7Rules
@@ -3481,8 +3540,9 @@ func NewDescribeNewL7RulesErrHealthRequest() (request *DescribeNewL7RulesErrHeal
 func NewDescribeNewL7RulesErrHealthResponse() (response *DescribeNewL7RulesErrHealthResponse) {
     response = &DescribeNewL7RulesErrHealthResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeNewL7RulesErrHealth
@@ -3529,8 +3589,9 @@ func NewDescribeOverviewDDoSEventListRequest() (request *DescribeOverviewDDoSEve
 func NewDescribeOverviewDDoSEventListResponse() (response *DescribeOverviewDDoSEventListResponse) {
     response = &DescribeOverviewDDoSEventListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeOverviewDDoSEventList
@@ -3611,8 +3672,9 @@ func NewDescribePendingRiskInfoRequest() (request *DescribePendingRiskInfoReques
 func NewDescribePendingRiskInfoResponse() (response *DescribePendingRiskInfoResponse) {
     response = &DescribePendingRiskInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePendingRiskInfo
@@ -3693,8 +3755,9 @@ func NewDisassociateDDoSEipAddressRequest() (request *DisassociateDDoSEipAddress
 func NewDisassociateDDoSEipAddressResponse() (response *DisassociateDDoSEipAddressResponse) {
     response = &DisassociateDDoSEipAddressResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DisassociateDDoSEipAddress
@@ -3775,8 +3838,9 @@ func NewModifyCCPrecisionPolicyRequest() (request *ModifyCCPrecisionPolicyReques
 func NewModifyCCPrecisionPolicyResponse() (response *ModifyCCPrecisionPolicyResponse) {
     response = &ModifyCCPrecisionPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCCPrecisionPolicy
@@ -3855,8 +3919,9 @@ func NewModifyCcBlackWhiteIpListRequest() (request *ModifyCcBlackWhiteIpListRequ
 func NewModifyCcBlackWhiteIpListResponse() (response *ModifyCcBlackWhiteIpListResponse) {
     response = &ModifyCcBlackWhiteIpListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCcBlackWhiteIpList
@@ -3907,8 +3972,9 @@ func NewModifyDDoSGeoIPBlockConfigRequest() (request *ModifyDDoSGeoIPBlockConfig
 func NewModifyDDoSGeoIPBlockConfigResponse() (response *ModifyDDoSGeoIPBlockConfigResponse) {
     response = &ModifyDDoSGeoIPBlockConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDDoSGeoIPBlockConfig
@@ -3955,8 +4021,9 @@ func NewModifyDDoSSpeedLimitConfigRequest() (request *ModifyDDoSSpeedLimitConfig
 func NewModifyDDoSSpeedLimitConfigResponse() (response *ModifyDDoSSpeedLimitConfigResponse) {
     response = &ModifyDDoSSpeedLimitConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDDoSSpeedLimitConfig
@@ -4003,8 +4070,9 @@ func NewModifyDomainUsrNameRequest() (request *ModifyDomainUsrNameRequest) {
 func NewModifyDomainUsrNameResponse() (response *ModifyDomainUsrNameResponse) {
     response = &ModifyDomainUsrNameResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDomainUsrName
@@ -4051,8 +4119,9 @@ func NewModifyNewDomainRulesRequest() (request *ModifyNewDomainRulesRequest) {
 func NewModifyNewDomainRulesResponse() (response *ModifyNewDomainRulesResponse) {
     response = &ModifyNewDomainRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyNewDomainRules
@@ -4101,8 +4170,9 @@ func NewModifyPacketFilterConfigRequest() (request *ModifyPacketFilterConfigRequ
 func NewModifyPacketFilterConfigResponse() (response *ModifyPacketFilterConfigResponse) {
     response = &ModifyPacketFilterConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyPacketFilterConfig
@@ -4151,8 +4221,9 @@ func NewSwitchWaterPrintConfigRequest() (request *SwitchWaterPrintConfigRequest)
 func NewSwitchWaterPrintConfigResponse() (response *SwitchWaterPrintConfigResponse) {
     response = &SwitchWaterPrintConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SwitchWaterPrintConfig

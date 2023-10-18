@@ -59,8 +59,9 @@ func NewTextTranslateRequest() (request *TextTranslateRequest) {
 func NewTextTranslateResponse() (response *TextTranslateResponse) {
     response = &TextTranslateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TextTranslate

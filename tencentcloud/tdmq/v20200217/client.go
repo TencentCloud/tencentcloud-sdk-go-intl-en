@@ -59,8 +59,9 @@ func NewAcknowledgeMessageRequest() (request *AcknowledgeMessageRequest) {
 func NewAcknowledgeMessageResponse() (response *AcknowledgeMessageResponse) {
     response = &AcknowledgeMessageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AcknowledgeMessage
@@ -125,8 +126,9 @@ func NewClearCmqQueueRequest() (request *ClearCmqQueueRequest) {
 func NewClearCmqQueueResponse() (response *ClearCmqQueueResponse) {
     response = &ClearCmqQueueResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ClearCmqQueue
@@ -177,8 +179,9 @@ func NewClearCmqSubscriptionFilterTagsRequest() (request *ClearCmqSubscriptionFi
 func NewClearCmqSubscriptionFilterTagsResponse() (response *ClearCmqSubscriptionFilterTagsResponse) {
     response = &ClearCmqSubscriptionFilterTagsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ClearCmqSubscriptionFilterTags
@@ -225,8 +228,9 @@ func NewCreateClusterRequest() (request *CreateClusterRequest) {
 func NewCreateClusterResponse() (response *CreateClusterResponse) {
     response = &CreateClusterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCluster
@@ -291,8 +295,9 @@ func NewCreateCmqQueueRequest() (request *CreateCmqQueueRequest) {
 func NewCreateCmqQueueResponse() (response *CreateCmqQueueResponse) {
     response = &CreateCmqQueueResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCmqQueue
@@ -363,8 +368,9 @@ func NewCreateCmqSubscribeRequest() (request *CreateCmqSubscribeRequest) {
 func NewCreateCmqSubscribeResponse() (response *CreateCmqSubscribeResponse) {
     response = &CreateCmqSubscribeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCmqSubscribe
@@ -423,8 +429,9 @@ func NewCreateCmqTopicRequest() (request *CreateCmqTopicRequest) {
 func NewCreateCmqTopicResponse() (response *CreateCmqTopicResponse) {
     response = &CreateCmqTopicResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCmqTopic
@@ -495,8 +502,9 @@ func NewCreateEnvironmentRequest() (request *CreateEnvironmentRequest) {
 func NewCreateEnvironmentResponse() (response *CreateEnvironmentResponse) {
     response = &CreateEnvironmentResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateEnvironment
@@ -573,8 +581,9 @@ func NewCreateEnvironmentRoleRequest() (request *CreateEnvironmentRoleRequest) {
 func NewCreateEnvironmentRoleResponse() (response *CreateEnvironmentRoleResponse) {
     response = &CreateEnvironmentRoleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateEnvironmentRole
@@ -641,8 +650,9 @@ func NewCreateRabbitMQUserRequest() (request *CreateRabbitMQUserRequest) {
 func NewCreateRabbitMQUserResponse() (response *CreateRabbitMQUserResponse) {
     response = &CreateRabbitMQUserResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRabbitMQUser
@@ -693,8 +703,9 @@ func NewCreateRabbitMQVipInstanceRequest() (request *CreateRabbitMQVipInstanceRe
 func NewCreateRabbitMQVipInstanceResponse() (response *CreateRabbitMQVipInstanceResponse) {
     response = &CreateRabbitMQVipInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRabbitMQVipInstance
@@ -745,8 +756,9 @@ func NewCreateRabbitMQVirtualHostRequest() (request *CreateRabbitMQVirtualHostRe
 func NewCreateRabbitMQVirtualHostResponse() (response *CreateRabbitMQVirtualHostResponse) {
     response = &CreateRabbitMQVirtualHostResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRabbitMQVirtualHost
@@ -797,8 +809,9 @@ func NewCreateRocketMQClusterRequest() (request *CreateRocketMQClusterRequest) {
 func NewCreateRocketMQClusterResponse() (response *CreateRocketMQClusterResponse) {
     response = &CreateRocketMQClusterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRocketMQCluster
@@ -867,8 +880,9 @@ func NewCreateRocketMQGroupRequest() (request *CreateRocketMQGroupRequest) {
 func NewCreateRocketMQGroupResponse() (response *CreateRocketMQGroupResponse) {
     response = &CreateRocketMQGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRocketMQGroup
@@ -927,8 +941,9 @@ func NewCreateRocketMQNamespaceRequest() (request *CreateRocketMQNamespaceReques
 func NewCreateRocketMQNamespaceResponse() (response *CreateRocketMQNamespaceResponse) {
     response = &CreateRocketMQNamespaceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRocketMQNamespace
@@ -995,8 +1010,9 @@ func NewCreateRocketMQTopicRequest() (request *CreateRocketMQTopicRequest) {
 func NewCreateRocketMQTopicResponse() (response *CreateRocketMQTopicResponse) {
     response = &CreateRocketMQTopicResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRocketMQTopic
@@ -1065,8 +1081,9 @@ func NewCreateRoleRequest() (request *CreateRoleRequest) {
 func NewCreateRoleResponse() (response *CreateRoleResponse) {
     response = &CreateRoleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRole
@@ -1135,8 +1152,9 @@ func NewCreateSubscriptionRequest() (request *CreateSubscriptionRequest) {
 func NewCreateSubscriptionResponse() (response *CreateSubscriptionResponse) {
     response = &CreateSubscriptionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSubscription
@@ -1209,8 +1227,9 @@ func NewCreateTopicRequest() (request *CreateTopicRequest) {
 func NewCreateTopicResponse() (response *CreateTopicResponse) {
     response = &CreateTopicResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTopic
@@ -1283,8 +1302,9 @@ func NewDeleteClusterRequest() (request *DeleteClusterRequest) {
 func NewDeleteClusterResponse() (response *DeleteClusterResponse) {
     response = &DeleteClusterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCluster
@@ -1343,8 +1363,9 @@ func NewDeleteCmqQueueRequest() (request *DeleteCmqQueueRequest) {
 func NewDeleteCmqQueueResponse() (response *DeleteCmqQueueResponse) {
     response = &DeleteCmqQueueResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCmqQueue
@@ -1399,8 +1420,9 @@ func NewDeleteCmqSubscribeRequest() (request *DeleteCmqSubscribeRequest) {
 func NewDeleteCmqSubscribeResponse() (response *DeleteCmqSubscribeResponse) {
     response = &DeleteCmqSubscribeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCmqSubscribe
@@ -1457,8 +1479,9 @@ func NewDeleteCmqTopicRequest() (request *DeleteCmqTopicRequest) {
 func NewDeleteCmqTopicResponse() (response *DeleteCmqTopicResponse) {
     response = &DeleteCmqTopicResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCmqTopic
@@ -1511,8 +1534,9 @@ func NewDeleteEnvironmentRolesRequest() (request *DeleteEnvironmentRolesRequest)
 func NewDeleteEnvironmentRolesResponse() (response *DeleteEnvironmentRolesResponse) {
     response = &DeleteEnvironmentRolesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteEnvironmentRoles
@@ -1571,8 +1595,9 @@ func NewDeleteEnvironmentsRequest() (request *DeleteEnvironmentsRequest) {
 func NewDeleteEnvironmentsResponse() (response *DeleteEnvironmentsResponse) {
     response = &DeleteEnvironmentsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteEnvironments
@@ -1641,8 +1666,9 @@ func NewDeleteRabbitMQUserRequest() (request *DeleteRabbitMQUserRequest) {
 func NewDeleteRabbitMQUserResponse() (response *DeleteRabbitMQUserResponse) {
     response = &DeleteRabbitMQUserResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRabbitMQUser
@@ -1693,8 +1719,9 @@ func NewDeleteRabbitMQVipInstanceRequest() (request *DeleteRabbitMQVipInstanceRe
 func NewDeleteRabbitMQVipInstanceResponse() (response *DeleteRabbitMQVipInstanceResponse) {
     response = &DeleteRabbitMQVipInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRabbitMQVipInstance
@@ -1745,8 +1772,9 @@ func NewDeleteRabbitMQVirtualHostRequest() (request *DeleteRabbitMQVirtualHostRe
 func NewDeleteRabbitMQVirtualHostResponse() (response *DeleteRabbitMQVirtualHostResponse) {
     response = &DeleteRabbitMQVirtualHostResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRabbitMQVirtualHost
@@ -1797,8 +1825,9 @@ func NewDeleteRocketMQClusterRequest() (request *DeleteRocketMQClusterRequest) {
 func NewDeleteRocketMQClusterResponse() (response *DeleteRocketMQClusterResponse) {
     response = &DeleteRocketMQClusterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRocketMQCluster
@@ -1855,8 +1884,9 @@ func NewDeleteRocketMQGroupRequest() (request *DeleteRocketMQGroupRequest) {
 func NewDeleteRocketMQGroupResponse() (response *DeleteRocketMQGroupResponse) {
     response = &DeleteRocketMQGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRocketMQGroup
@@ -1913,8 +1943,9 @@ func NewDeleteRocketMQNamespaceRequest() (request *DeleteRocketMQNamespaceReques
 func NewDeleteRocketMQNamespaceResponse() (response *DeleteRocketMQNamespaceResponse) {
     response = &DeleteRocketMQNamespaceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRocketMQNamespace
@@ -1969,8 +2000,9 @@ func NewDeleteRocketMQTopicRequest() (request *DeleteRocketMQTopicRequest) {
 func NewDeleteRocketMQTopicResponse() (response *DeleteRocketMQTopicResponse) {
     response = &DeleteRocketMQTopicResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRocketMQTopic
@@ -2025,8 +2057,9 @@ func NewDeleteRolesRequest() (request *DeleteRolesRequest) {
 func NewDeleteRolesResponse() (response *DeleteRolesResponse) {
     response = &DeleteRolesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRoles
@@ -2087,8 +2120,9 @@ func NewDeleteSubscriptionsRequest() (request *DeleteSubscriptionsRequest) {
 func NewDeleteSubscriptionsResponse() (response *DeleteSubscriptionsResponse) {
     response = &DeleteSubscriptionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSubscriptions
@@ -2159,8 +2193,9 @@ func NewDeleteTopicsRequest() (request *DeleteTopicsRequest) {
 func NewDeleteTopicsResponse() (response *DeleteTopicsResponse) {
     response = &DeleteTopicsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteTopics
@@ -2225,8 +2260,9 @@ func NewDescribeBindClustersRequest() (request *DescribeBindClustersRequest) {
 func NewDescribeBindClustersResponse() (response *DescribeBindClustersResponse) {
     response = &DescribeBindClustersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBindClusters
@@ -2285,8 +2321,9 @@ func NewDescribeBindVpcsRequest() (request *DescribeBindVpcsRequest) {
 func NewDescribeBindVpcsResponse() (response *DescribeBindVpcsResponse) {
     response = &DescribeBindVpcsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBindVpcs
@@ -2345,8 +2382,9 @@ func NewDescribeClusterDetailRequest() (request *DescribeClusterDetailRequest) {
 func NewDescribeClusterDetailResponse() (response *DescribeClusterDetailResponse) {
     response = &DescribeClusterDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterDetail
@@ -2393,8 +2431,9 @@ func NewDescribeClustersRequest() (request *DescribeClustersRequest) {
 func NewDescribeClustersResponse() (response *DescribeClustersResponse) {
     response = &DescribeClustersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusters
@@ -2441,8 +2480,9 @@ func NewDescribeCmqDeadLetterSourceQueuesRequest() (request *DescribeCmqDeadLett
 func NewDescribeCmqDeadLetterSourceQueuesResponse() (response *DescribeCmqDeadLetterSourceQueuesResponse) {
     response = &DescribeCmqDeadLetterSourceQueuesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCmqDeadLetterSourceQueues
@@ -2489,8 +2529,9 @@ func NewDescribeCmqQueueDetailRequest() (request *DescribeCmqQueueDetailRequest)
 func NewDescribeCmqQueueDetailResponse() (response *DescribeCmqQueueDetailResponse) {
     response = &DescribeCmqQueueDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCmqQueueDetail
@@ -2539,8 +2580,9 @@ func NewDescribeCmqQueuesRequest() (request *DescribeCmqQueuesRequest) {
 func NewDescribeCmqQueuesResponse() (response *DescribeCmqQueuesResponse) {
     response = &DescribeCmqQueuesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCmqQueues
@@ -2589,8 +2631,9 @@ func NewDescribeCmqSubscriptionDetailRequest() (request *DescribeCmqSubscription
 func NewDescribeCmqSubscriptionDetailResponse() (response *DescribeCmqSubscriptionDetailResponse) {
     response = &DescribeCmqSubscriptionDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCmqSubscriptionDetail
@@ -2639,8 +2682,9 @@ func NewDescribeCmqTopicDetailRequest() (request *DescribeCmqTopicDetailRequest)
 func NewDescribeCmqTopicDetailResponse() (response *DescribeCmqTopicDetailResponse) {
     response = &DescribeCmqTopicDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCmqTopicDetail
@@ -2695,8 +2739,9 @@ func NewDescribeCmqTopicsRequest() (request *DescribeCmqTopicsRequest) {
 func NewDescribeCmqTopicsResponse() (response *DescribeCmqTopicsResponse) {
     response = &DescribeCmqTopicsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCmqTopics
@@ -2745,8 +2790,9 @@ func NewDescribeEnvironmentAttributesRequest() (request *DescribeEnvironmentAttr
 func NewDescribeEnvironmentAttributesResponse() (response *DescribeEnvironmentAttributesResponse) {
     response = &DescribeEnvironmentAttributesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeEnvironmentAttributes
@@ -2809,8 +2855,9 @@ func NewDescribeEnvironmentRolesRequest() (request *DescribeEnvironmentRolesRequ
 func NewDescribeEnvironmentRolesResponse() (response *DescribeEnvironmentRolesResponse) {
     response = &DescribeEnvironmentRolesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeEnvironmentRoles
@@ -2869,8 +2916,9 @@ func NewDescribeEnvironmentsRequest() (request *DescribeEnvironmentsRequest) {
 func NewDescribeEnvironmentsResponse() (response *DescribeEnvironmentsResponse) {
     response = &DescribeEnvironmentsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeEnvironments
@@ -2925,8 +2973,9 @@ func NewDescribePublisherSummaryRequest() (request *DescribePublisherSummaryRequ
 func NewDescribePublisherSummaryResponse() (response *DescribePublisherSummaryResponse) {
     response = &DescribePublisherSummaryResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePublisherSummary
@@ -2973,8 +3022,9 @@ func NewDescribePublishersRequest() (request *DescribePublishersRequest) {
 func NewDescribePublishersResponse() (response *DescribePublishersResponse) {
     response = &DescribePublishersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePublishers
@@ -3021,8 +3071,9 @@ func NewDescribePulsarProInstanceDetailRequest() (request *DescribePulsarProInst
 func NewDescribePulsarProInstanceDetailResponse() (response *DescribePulsarProInstanceDetailResponse) {
     response = &DescribePulsarProInstanceDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePulsarProInstanceDetail
@@ -3077,8 +3128,9 @@ func NewDescribePulsarProInstancesRequest() (request *DescribePulsarProInstances
 func NewDescribePulsarProInstancesResponse() (response *DescribePulsarProInstancesResponse) {
     response = &DescribePulsarProInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePulsarProInstances
@@ -3133,8 +3185,9 @@ func NewDescribeRabbitMQNodeListRequest() (request *DescribeRabbitMQNodeListRequ
 func NewDescribeRabbitMQNodeListResponse() (response *DescribeRabbitMQNodeListResponse) {
     response = &DescribeRabbitMQNodeListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRabbitMQNodeList
@@ -3183,8 +3236,9 @@ func NewDescribeRabbitMQUserRequest() (request *DescribeRabbitMQUserRequest) {
 func NewDescribeRabbitMQUserResponse() (response *DescribeRabbitMQUserResponse) {
     response = &DescribeRabbitMQUserResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRabbitMQUser
@@ -3237,8 +3291,9 @@ func NewDescribeRabbitMQVipInstancesRequest() (request *DescribeRabbitMQVipInsta
 func NewDescribeRabbitMQVipInstancesResponse() (response *DescribeRabbitMQVipInstancesResponse) {
     response = &DescribeRabbitMQVipInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRabbitMQVipInstances
@@ -3291,8 +3346,9 @@ func NewDescribeRabbitMQVirtualHostRequest() (request *DescribeRabbitMQVirtualHo
 func NewDescribeRabbitMQVirtualHostResponse() (response *DescribeRabbitMQVirtualHostResponse) {
     response = &DescribeRabbitMQVirtualHostResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRabbitMQVirtualHost
@@ -3345,8 +3401,9 @@ func NewDescribeRabbitMQVirtualHostListRequest() (request *DescribeRabbitMQVirtu
 func NewDescribeRabbitMQVirtualHostListResponse() (response *DescribeRabbitMQVirtualHostListResponse) {
     response = &DescribeRabbitMQVirtualHostListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRabbitMQVirtualHostList
@@ -3393,8 +3450,9 @@ func NewDescribeRocketMQClusterRequest() (request *DescribeRocketMQClusterReques
 func NewDescribeRocketMQClusterResponse() (response *DescribeRocketMQClusterResponse) {
     response = &DescribeRocketMQClusterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRocketMQCluster
@@ -3449,8 +3507,9 @@ func NewDescribeRocketMQClustersRequest() (request *DescribeRocketMQClustersRequ
 func NewDescribeRocketMQClustersResponse() (response *DescribeRocketMQClustersResponse) {
     response = &DescribeRocketMQClustersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRocketMQClusters
@@ -3503,8 +3562,9 @@ func NewDescribeRocketMQGroupsRequest() (request *DescribeRocketMQGroupsRequest)
 func NewDescribeRocketMQGroupsResponse() (response *DescribeRocketMQGroupsResponse) {
     response = &DescribeRocketMQGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRocketMQGroups
@@ -3563,8 +3623,9 @@ func NewDescribeRocketMQMsgRequest() (request *DescribeRocketMQMsgRequest) {
 func NewDescribeRocketMQMsgResponse() (response *DescribeRocketMQMsgResponse) {
     response = &DescribeRocketMQMsgResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRocketMQMsg
@@ -3613,8 +3674,9 @@ func NewDescribeRocketMQNamespacesRequest() (request *DescribeRocketMQNamespaces
 func NewDescribeRocketMQNamespacesResponse() (response *DescribeRocketMQNamespacesResponse) {
     response = &DescribeRocketMQNamespacesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRocketMQNamespaces
@@ -3673,8 +3735,9 @@ func NewDescribeRocketMQTopicsRequest() (request *DescribeRocketMQTopicsRequest)
 func NewDescribeRocketMQTopicsResponse() (response *DescribeRocketMQTopicsResponse) {
     response = &DescribeRocketMQTopicsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRocketMQTopics
@@ -3735,8 +3798,9 @@ func NewDescribeRocketMQVipInstanceDetailRequest() (request *DescribeRocketMQVip
 func NewDescribeRocketMQVipInstanceDetailResponse() (response *DescribeRocketMQVipInstanceDetailResponse) {
     response = &DescribeRocketMQVipInstanceDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRocketMQVipInstanceDetail
@@ -3795,8 +3859,9 @@ func NewDescribeRocketMQVipInstancesRequest() (request *DescribeRocketMQVipInsta
 func NewDescribeRocketMQVipInstancesResponse() (response *DescribeRocketMQVipInstancesResponse) {
     response = &DescribeRocketMQVipInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRocketMQVipInstances
@@ -3855,8 +3920,9 @@ func NewDescribeRolesRequest() (request *DescribeRolesRequest) {
 func NewDescribeRolesResponse() (response *DescribeRolesResponse) {
     response = &DescribeRolesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRoles
@@ -3913,8 +3979,9 @@ func NewDescribeSubscriptionsRequest() (request *DescribeSubscriptionsRequest) {
 func NewDescribeSubscriptionsResponse() (response *DescribeSubscriptionsResponse) {
     response = &DescribeSubscriptionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSubscriptions
@@ -3979,8 +4046,9 @@ func NewDescribeTopicsRequest() (request *DescribeTopicsRequest) {
 func NewDescribeTopicsResponse() (response *DescribeTopicsResponse) {
     response = &DescribeTopicsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTopics
@@ -4041,8 +4109,9 @@ func NewModifyClusterRequest() (request *ModifyClusterRequest) {
 func NewModifyClusterResponse() (response *ModifyClusterResponse) {
     response = &ModifyClusterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCluster
@@ -4095,8 +4164,9 @@ func NewModifyCmqQueueAttributeRequest() (request *ModifyCmqQueueAttributeReques
 func NewModifyCmqQueueAttributeResponse() (response *ModifyCmqQueueAttributeResponse) {
     response = &ModifyCmqQueueAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCmqQueueAttribute
@@ -4155,8 +4225,9 @@ func NewModifyCmqSubscriptionAttributeRequest() (request *ModifyCmqSubscriptionA
 func NewModifyCmqSubscriptionAttributeResponse() (response *ModifyCmqSubscriptionAttributeResponse) {
     response = &ModifyCmqSubscriptionAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCmqSubscriptionAttribute
@@ -4203,8 +4274,9 @@ func NewModifyCmqTopicAttributeRequest() (request *ModifyCmqTopicAttributeReques
 func NewModifyCmqTopicAttributeResponse() (response *ModifyCmqTopicAttributeResponse) {
     response = &ModifyCmqTopicAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCmqTopicAttribute
@@ -4253,8 +4325,9 @@ func NewModifyEnvironmentAttributesRequest() (request *ModifyEnvironmentAttribut
 func NewModifyEnvironmentAttributesResponse() (response *ModifyEnvironmentAttributesResponse) {
     response = &ModifyEnvironmentAttributesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyEnvironmentAttributes
@@ -4331,8 +4404,9 @@ func NewModifyEnvironmentRoleRequest() (request *ModifyEnvironmentRoleRequest) {
 func NewModifyEnvironmentRoleResponse() (response *ModifyEnvironmentRoleResponse) {
     response = &ModifyEnvironmentRoleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyEnvironmentRole
@@ -4393,8 +4467,9 @@ func NewModifyRabbitMQUserRequest() (request *ModifyRabbitMQUserRequest) {
 func NewModifyRabbitMQUserResponse() (response *ModifyRabbitMQUserResponse) {
     response = &ModifyRabbitMQUserResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRabbitMQUser
@@ -4445,8 +4520,9 @@ func NewModifyRabbitMQVirtualHostRequest() (request *ModifyRabbitMQVirtualHostRe
 func NewModifyRabbitMQVirtualHostResponse() (response *ModifyRabbitMQVirtualHostResponse) {
     response = &ModifyRabbitMQVirtualHostResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRabbitMQVirtualHost
@@ -4497,8 +4573,9 @@ func NewModifyRocketMQClusterRequest() (request *ModifyRocketMQClusterRequest) {
 func NewModifyRocketMQClusterResponse() (response *ModifyRocketMQClusterResponse) {
     response = &ModifyRocketMQClusterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRocketMQCluster
@@ -4561,8 +4638,9 @@ func NewModifyRocketMQGroupRequest() (request *ModifyRocketMQGroupRequest) {
 func NewModifyRocketMQGroupResponse() (response *ModifyRocketMQGroupResponse) {
     response = &ModifyRocketMQGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRocketMQGroup
@@ -4617,8 +4695,9 @@ func NewModifyRocketMQInstanceSpecRequest() (request *ModifyRocketMQInstanceSpec
 func NewModifyRocketMQInstanceSpecResponse() (response *ModifyRocketMQInstanceSpecResponse) {
     response = &ModifyRocketMQInstanceSpecResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRocketMQInstanceSpec
@@ -4673,8 +4752,9 @@ func NewModifyRocketMQNamespaceRequest() (request *ModifyRocketMQNamespaceReques
 func NewModifyRocketMQNamespaceResponse() (response *ModifyRocketMQNamespaceResponse) {
     response = &ModifyRocketMQNamespaceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRocketMQNamespace
@@ -4739,8 +4819,9 @@ func NewModifyRocketMQTopicRequest() (request *ModifyRocketMQTopicRequest) {
 func NewModifyRocketMQTopicResponse() (response *ModifyRocketMQTopicResponse) {
     response = &ModifyRocketMQTopicResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRocketMQTopic
@@ -4797,8 +4878,9 @@ func NewModifyRoleRequest() (request *ModifyRoleRequest) {
 func NewModifyRoleResponse() (response *ModifyRoleResponse) {
     response = &ModifyRoleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRole
@@ -4859,8 +4941,9 @@ func NewModifyTopicRequest() (request *ModifyTopicRequest) {
 func NewModifyTopicResponse() (response *ModifyTopicResponse) {
     response = &ModifyTopicResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyTopic
@@ -4923,8 +5006,9 @@ func NewPublishCmqMsgRequest() (request *PublishCmqMsgRequest) {
 func NewPublishCmqMsgResponse() (response *PublishCmqMsgResponse) {
     response = &PublishCmqMsgResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // PublishCmqMsg
@@ -4973,8 +5057,9 @@ func NewReceiveMessageRequest() (request *ReceiveMessageRequest) {
 func NewReceiveMessageResponse() (response *ReceiveMessageResponse) {
     response = &ReceiveMessageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ReceiveMessage
@@ -5117,8 +5202,9 @@ func NewResetMsgSubOffsetByTimestampRequest() (request *ResetMsgSubOffsetByTimes
 func NewResetMsgSubOffsetByTimestampResponse() (response *ResetMsgSubOffsetByTimestampResponse) {
     response = &ResetMsgSubOffsetByTimestampResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetMsgSubOffsetByTimestamp
@@ -5185,8 +5271,9 @@ func NewResetRocketMQConsumerOffSetRequest() (request *ResetRocketMQConsumerOffS
 func NewResetRocketMQConsumerOffSetResponse() (response *ResetRocketMQConsumerOffSetResponse) {
     response = &ResetRocketMQConsumerOffSetResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetRocketMQConsumerOffSet
@@ -5241,8 +5328,9 @@ func NewRewindCmqQueueRequest() (request *RewindCmqQueueRequest) {
 func NewRewindCmqQueueResponse() (response *RewindCmqQueueResponse) {
     response = &RewindCmqQueueResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RewindCmqQueue
@@ -5291,8 +5379,9 @@ func NewSendBatchMessagesRequest() (request *SendBatchMessagesRequest) {
 func NewSendBatchMessagesResponse() (response *SendBatchMessagesResponse) {
     response = &SendBatchMessagesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SendBatchMessages
@@ -5367,8 +5456,9 @@ func NewSendCmqMsgRequest() (request *SendCmqMsgRequest) {
 func NewSendCmqMsgResponse() (response *SendCmqMsgResponse) {
     response = &SendCmqMsgResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SendCmqMsg
@@ -5417,8 +5507,9 @@ func NewSendMessagesRequest() (request *SendMessagesRequest) {
 func NewSendMessagesResponse() (response *SendMessagesResponse) {
     response = &SendMessagesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SendMessages
@@ -5489,8 +5580,9 @@ func NewSendMsgRequest() (request *SendMsgRequest) {
 func NewSendMsgResponse() (response *SendMsgResponse) {
     response = &SendMsgResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SendMsg
@@ -5555,8 +5647,9 @@ func NewSendRocketMQMessageRequest() (request *SendRocketMQMessageRequest) {
 func NewSendRocketMQMessageResponse() (response *SendRocketMQMessageResponse) {
     response = &SendRocketMQMessageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SendRocketMQMessage
@@ -5607,8 +5700,9 @@ func NewUnbindCmqDeadLetterRequest() (request *UnbindCmqDeadLetterRequest) {
 func NewUnbindCmqDeadLetterResponse() (response *UnbindCmqDeadLetterResponse) {
     response = &UnbindCmqDeadLetterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UnbindCmqDeadLetter

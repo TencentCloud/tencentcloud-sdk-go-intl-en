@@ -59,8 +59,9 @@ func NewAllocateHostsRequest() (request *AllocateHostsRequest) {
 func NewAllocateHostsResponse() (response *AllocateHostsResponse) {
     response = &AllocateHostsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AllocateHosts
@@ -125,8 +126,9 @@ func NewAssociateInstancesKeyPairsRequest() (request *AssociateInstancesKeyPairs
 func NewAssociateInstancesKeyPairsResponse() (response *AssociateInstancesKeyPairsResponse) {
     response = &AssociateInstancesKeyPairsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AssociateInstancesKeyPairs
@@ -249,8 +251,9 @@ func NewAssociateSecurityGroupsRequest() (request *AssociateSecurityGroupsReques
 func NewAssociateSecurityGroupsResponse() (response *AssociateSecurityGroupsResponse) {
     response = &AssociateSecurityGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AssociateSecurityGroups
@@ -325,8 +328,9 @@ func NewConfigureChcAssistVpcRequest() (request *ConfigureChcAssistVpcRequest) {
 func NewConfigureChcAssistVpcResponse() (response *ConfigureChcAssistVpcResponse) {
     response = &ConfigureChcAssistVpcResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ConfigureChcAssistVpc
@@ -399,8 +403,9 @@ func NewConfigureChcDeployVpcRequest() (request *ConfigureChcDeployVpcRequest) {
 func NewConfigureChcDeployVpcResponse() (response *ConfigureChcDeployVpcResponse) {
     response = &ConfigureChcDeployVpcResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ConfigureChcDeployVpc
@@ -465,8 +470,9 @@ func NewCreateDisasterRecoverGroupRequest() (request *CreateDisasterRecoverGroup
 func NewCreateDisasterRecoverGroupResponse() (response *CreateDisasterRecoverGroupResponse) {
     response = &CreateDisasterRecoverGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDisasterRecoverGroup
@@ -517,8 +523,9 @@ func NewCreateImageRequest() (request *CreateImageRequest) {
 func NewCreateImageResponse() (response *CreateImageResponse) {
     response = &CreateImageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateImage
@@ -653,8 +660,9 @@ func NewCreateKeyPairRequest() (request *CreateKeyPairRequest) {
 func NewCreateKeyPairResponse() (response *CreateKeyPairResponse) {
     response = &CreateKeyPairResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateKeyPair
@@ -739,8 +747,9 @@ func NewCreateLaunchTemplateVersionRequest() (request *CreateLaunchTemplateVersi
 func NewCreateLaunchTemplateVersionResponse() (response *CreateLaunchTemplateVersionResponse) {
     response = &CreateLaunchTemplateVersionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateLaunchTemplateVersion
@@ -931,8 +940,9 @@ func NewDeleteDisasterRecoverGroupsRequest() (request *DeleteDisasterRecoverGrou
 func NewDeleteDisasterRecoverGroupsResponse() (response *DeleteDisasterRecoverGroupsResponse) {
     response = &DeleteDisasterRecoverGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteDisasterRecoverGroups
@@ -987,8 +997,9 @@ func NewDeleteImagesRequest() (request *DeleteImagesRequest) {
 func NewDeleteImagesResponse() (response *DeleteImagesResponse) {
     response = &DeleteImagesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteImages
@@ -1063,8 +1074,9 @@ func NewDeleteKeyPairsRequest() (request *DeleteKeyPairsRequest) {
 func NewDeleteKeyPairsResponse() (response *DeleteKeyPairsResponse) {
     response = &DeleteKeyPairsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteKeyPairs
@@ -1137,8 +1149,9 @@ func NewDeleteLaunchTemplateRequest() (request *DeleteLaunchTemplateRequest) {
 func NewDeleteLaunchTemplateResponse() (response *DeleteLaunchTemplateResponse) {
     response = &DeleteLaunchTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteLaunchTemplate
@@ -1197,8 +1210,9 @@ func NewDeleteLaunchTemplateVersionsRequest() (request *DeleteLaunchTemplateVers
 func NewDeleteLaunchTemplateVersionsResponse() (response *DeleteLaunchTemplateVersionsResponse) {
     response = &DeleteLaunchTemplateVersionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteLaunchTemplateVersions
@@ -1263,8 +1277,9 @@ func NewDescribeChcDeniedActionsRequest() (request *DescribeChcDeniedActionsRequ
 func NewDescribeChcDeniedActionsResponse() (response *DescribeChcDeniedActionsResponse) {
     response = &DescribeChcDeniedActionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeChcDeniedActions
@@ -1315,8 +1330,9 @@ func NewDescribeChcHostsRequest() (request *DescribeChcHostsRequest) {
 func NewDescribeChcHostsResponse() (response *DescribeChcHostsResponse) {
     response = &DescribeChcHostsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeChcHosts
@@ -1399,8 +1415,9 @@ func NewDescribeDisasterRecoverGroupQuotaRequest() (request *DescribeDisasterRec
 func NewDescribeDisasterRecoverGroupQuotaResponse() (response *DescribeDisasterRecoverGroupQuotaResponse) {
     response = &DescribeDisasterRecoverGroupQuotaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDisasterRecoverGroupQuota
@@ -1471,8 +1488,9 @@ func NewDescribeDisasterRecoverGroupsRequest() (request *DescribeDisasterRecover
 func NewDescribeDisasterRecoverGroupsResponse() (response *DescribeDisasterRecoverGroupsResponse) {
     response = &DescribeDisasterRecoverGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDisasterRecoverGroups
@@ -1521,8 +1539,9 @@ func NewDescribeHostsRequest() (request *DescribeHostsRequest) {
 func NewDescribeHostsResponse() (response *DescribeHostsResponse) {
     response = &DescribeHostsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeHosts
@@ -1581,8 +1600,9 @@ func NewDescribeImageQuotaRequest() (request *DescribeImageQuotaRequest) {
 func NewDescribeImageQuotaResponse() (response *DescribeImageQuotaResponse) {
     response = &DescribeImageQuotaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImageQuota
@@ -1641,8 +1661,9 @@ func NewDescribeImageSharePermissionRequest() (request *DescribeImageSharePermis
 func NewDescribeImageSharePermissionResponse() (response *DescribeImageSharePermissionResponse) {
     response = &DescribeImageSharePermissionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImageSharePermission
@@ -1699,8 +1720,9 @@ func NewDescribeImagesRequest() (request *DescribeImagesRequest) {
 func NewDescribeImagesResponse() (response *DescribeImagesResponse) {
     response = &DescribeImagesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImages
@@ -1789,8 +1811,9 @@ func NewDescribeImportImageOsRequest() (request *DescribeImportImageOsRequest) {
 func NewDescribeImportImageOsResponse() (response *DescribeImportImageOsResponse) {
     response = &DescribeImportImageOsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImportImageOs
@@ -1867,8 +1890,9 @@ func NewDescribeInstanceFamilyConfigsRequest() (request *DescribeInstanceFamilyC
 func NewDescribeInstanceFamilyConfigsResponse() (response *DescribeInstanceFamilyConfigsResponse) {
     response = &DescribeInstanceFamilyConfigsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceFamilyConfigs
@@ -1919,8 +1943,9 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
 func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
     response = &DescribeInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstances
@@ -2033,8 +2058,9 @@ func NewDescribeInstancesOperationLimitRequest() (request *DescribeInstancesOper
 func NewDescribeInstancesOperationLimitResponse() (response *DescribeInstancesOperationLimitResponse) {
     response = &DescribeInstancesOperationLimitResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstancesOperationLimit
@@ -2095,8 +2121,9 @@ func NewDescribeInstancesStatusRequest() (request *DescribeInstancesStatusReques
 func NewDescribeInstancesStatusResponse() (response *DescribeInstancesStatusResponse) {
     response = &DescribeInstancesStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstancesStatus
@@ -2167,8 +2194,9 @@ func NewDescribeInternetChargeTypeConfigsRequest() (request *DescribeInternetCha
 func NewDescribeInternetChargeTypeConfigsResponse() (response *DescribeInternetChargeTypeConfigsResponse) {
     response = &DescribeInternetChargeTypeConfigsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInternetChargeTypeConfigs
@@ -2227,8 +2255,9 @@ func NewDescribeKeyPairsRequest() (request *DescribeKeyPairsRequest) {
 func NewDescribeKeyPairsResponse() (response *DescribeKeyPairsResponse) {
     response = &DescribeKeyPairsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeKeyPairs
@@ -2305,8 +2334,9 @@ func NewDescribeLaunchTemplateVersionsRequest() (request *DescribeLaunchTemplate
 func NewDescribeLaunchTemplateVersionsResponse() (response *DescribeLaunchTemplateVersionsResponse) {
     response = &DescribeLaunchTemplateVersionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeLaunchTemplateVersions
@@ -2387,8 +2417,9 @@ func NewDescribeLaunchTemplatesRequest() (request *DescribeLaunchTemplatesReques
 func NewDescribeLaunchTemplatesResponse() (response *DescribeLaunchTemplatesResponse) {
     response = &DescribeLaunchTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeLaunchTemplates
@@ -2455,8 +2486,9 @@ func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
 func NewDescribeRegionsResponse() (response *DescribeRegionsResponse) {
     response = &DescribeRegionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRegions
@@ -2503,8 +2535,9 @@ func NewDescribeReservedInstancesConfigInfosRequest() (request *DescribeReserved
 func NewDescribeReservedInstancesConfigInfosResponse() (response *DescribeReservedInstancesConfigInfosResponse) {
     response = &DescribeReservedInstancesConfigInfosResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeReservedInstancesConfigInfos
@@ -2557,8 +2590,9 @@ func NewDescribeReservedInstancesOfferingsRequest() (request *DescribeReservedIn
 func NewDescribeReservedInstancesOfferingsResponse() (response *DescribeReservedInstancesOfferingsResponse) {
     response = &DescribeReservedInstancesOfferingsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeReservedInstancesOfferings
@@ -2621,8 +2655,9 @@ func NewDescribeZoneInstanceConfigInfosRequest() (request *DescribeZoneInstanceC
 func NewDescribeZoneInstanceConfigInfosResponse() (response *DescribeZoneInstanceConfigInfosResponse) {
     response = &DescribeZoneInstanceConfigInfosResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeZoneInstanceConfigInfos
@@ -2693,8 +2728,9 @@ func NewDescribeZonesRequest() (request *DescribeZonesRequest) {
 func NewDescribeZonesResponse() (response *DescribeZonesResponse) {
     response = &DescribeZonesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeZones
@@ -2743,8 +2779,9 @@ func NewDisassociateInstancesKeyPairsRequest() (request *DisassociateInstancesKe
 func NewDisassociateInstancesKeyPairsResponse() (response *DisassociateInstancesKeyPairsResponse) {
     response = &DisassociateInstancesKeyPairsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DisassociateInstancesKeyPairs
@@ -2857,8 +2894,9 @@ func NewDisassociateSecurityGroupsRequest() (request *DisassociateSecurityGroups
 func NewDisassociateSecurityGroupsResponse() (response *DisassociateSecurityGroupsResponse) {
     response = &DisassociateSecurityGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DisassociateSecurityGroups
@@ -2925,8 +2963,9 @@ func NewExportImagesRequest() (request *ExportImagesRequest) {
 func NewExportImagesResponse() (response *ExportImagesResponse) {
     response = &ExportImagesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ExportImages
@@ -3011,8 +3050,9 @@ func NewImportImageRequest() (request *ImportImageRequest) {
 func NewImportImageResponse() (response *ImportImageResponse) {
     response = &ImportImageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ImportImage
@@ -3081,8 +3121,9 @@ func NewImportKeyPairRequest() (request *ImportKeyPairRequest) {
 func NewImportKeyPairResponse() (response *ImportKeyPairResponse) {
     response = &ImportKeyPairResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ImportKeyPair
@@ -3167,8 +3208,9 @@ func NewInquirePricePurchaseReservedInstancesOfferingRequest() (request *Inquire
 func NewInquirePricePurchaseReservedInstancesOfferingResponse() (response *InquirePricePurchaseReservedInstancesOfferingResponse) {
     response = &InquirePricePurchaseReservedInstancesOfferingResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquirePricePurchaseReservedInstancesOffering
@@ -3219,8 +3261,9 @@ func NewInquiryPriceResetInstanceRequest() (request *InquiryPriceResetInstanceRe
 func NewInquiryPriceResetInstanceResponse() (response *InquiryPriceResetInstanceResponse) {
     response = &InquiryPriceResetInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquiryPriceResetInstance
@@ -3321,8 +3364,9 @@ func NewInquiryPriceResetInstancesInternetMaxBandwidthRequest() (request *Inquir
 func NewInquiryPriceResetInstancesInternetMaxBandwidthResponse() (response *InquiryPriceResetInstancesInternetMaxBandwidthResponse) {
     response = &InquiryPriceResetInstancesInternetMaxBandwidthResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquiryPriceResetInstancesInternetMaxBandwidth
@@ -3417,8 +3461,9 @@ func NewInquiryPriceResetInstancesTypeRequest() (request *InquiryPriceResetInsta
 func NewInquiryPriceResetInstancesTypeResponse() (response *InquiryPriceResetInstancesTypeResponse) {
     response = &InquiryPriceResetInstancesTypeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquiryPriceResetInstancesType
@@ -3549,8 +3594,9 @@ func NewInquiryPriceResizeInstanceDisksRequest() (request *InquiryPriceResizeIns
 func NewInquiryPriceResizeInstanceDisksResponse() (response *InquiryPriceResizeInstanceDisksResponse) {
     response = &InquiryPriceResizeInstanceDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquiryPriceResizeInstanceDisks
@@ -3637,8 +3683,9 @@ func NewInquiryPriceRunInstancesRequest() (request *InquiryPriceRunInstancesRequ
 func NewInquiryPriceRunInstancesResponse() (response *InquiryPriceRunInstancesResponse) {
     response = &InquiryPriceRunInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InquiryPriceRunInstances
@@ -3817,8 +3864,9 @@ func NewModifyChcAttributeRequest() (request *ModifyChcAttributeRequest) {
 func NewModifyChcAttributeResponse() (response *ModifyChcAttributeResponse) {
     response = &ModifyChcAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyChcAttribute
@@ -3881,8 +3929,9 @@ func NewModifyDisasterRecoverGroupAttributeRequest() (request *ModifyDisasterRec
 func NewModifyDisasterRecoverGroupAttributeResponse() (response *ModifyDisasterRecoverGroupAttributeResponse) {
     response = &ModifyDisasterRecoverGroupAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDisasterRecoverGroupAttribute
@@ -3933,8 +3982,9 @@ func NewModifyHostsAttributeRequest() (request *ModifyHostsAttributeRequest) {
 func NewModifyHostsAttributeResponse() (response *ModifyHostsAttributeResponse) {
     response = &ModifyHostsAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyHostsAttribute
@@ -3987,8 +4037,9 @@ func NewModifyImageAttributeRequest() (request *ModifyImageAttributeRequest) {
 func NewModifyImageAttributeResponse() (response *ModifyImageAttributeResponse) {
     response = &ModifyImageAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyImageAttribute
@@ -4055,8 +4106,9 @@ func NewModifyImageSharePermissionRequest() (request *ModifyImageSharePermission
 func NewModifyImageSharePermissionResponse() (response *ModifyImageSharePermissionResponse) {
     response = &ModifyImageSharePermissionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyImageSharePermission
@@ -4155,8 +4207,9 @@ func NewModifyInstancesAttributeRequest() (request *ModifyInstancesAttributeRequ
 func NewModifyInstancesAttributeResponse() (response *ModifyInstancesAttributeResponse) {
     response = &ModifyInstancesAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyInstancesAttribute
@@ -4303,8 +4356,9 @@ func NewModifyInstancesProjectRequest() (request *ModifyInstancesProjectRequest)
 func NewModifyInstancesProjectResponse() (response *ModifyInstancesProjectResponse) {
     response = &ModifyInstancesProjectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyInstancesProject
@@ -4393,8 +4447,9 @@ func NewModifyInstancesVpcAttributeRequest() (request *ModifyInstancesVpcAttribu
 func NewModifyInstancesVpcAttributeResponse() (response *ModifyInstancesVpcAttributeResponse) {
     response = &ModifyInstancesVpcAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyInstancesVpcAttribute
@@ -4527,8 +4582,9 @@ func NewModifyKeyPairAttributeRequest() (request *ModifyKeyPairAttributeRequest)
 func NewModifyKeyPairAttributeResponse() (response *ModifyKeyPairAttributeResponse) {
     response = &ModifyKeyPairAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyKeyPairAttribute
@@ -4603,8 +4659,9 @@ func NewModifyLaunchTemplateDefaultVersionRequest() (request *ModifyLaunchTempla
 func NewModifyLaunchTemplateDefaultVersionResponse() (response *ModifyLaunchTemplateDefaultVersionResponse) {
     response = &ModifyLaunchTemplateDefaultVersionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyLaunchTemplateDefaultVersion
@@ -4669,8 +4726,9 @@ func NewPurchaseReservedInstancesOfferingRequest() (request *PurchaseReservedIns
 func NewPurchaseReservedInstancesOfferingResponse() (response *PurchaseReservedInstancesOfferingResponse) {
     response = &PurchaseReservedInstancesOfferingResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // PurchaseReservedInstancesOffering
@@ -4731,8 +4789,9 @@ func NewRebootInstancesRequest() (request *RebootInstancesRequest) {
 func NewRebootInstancesResponse() (response *RebootInstancesResponse) {
     response = &RebootInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RebootInstances
@@ -4855,8 +4914,9 @@ func NewRemoveChcAssistVpcRequest() (request *RemoveChcAssistVpcRequest) {
 func NewRemoveChcAssistVpcResponse() (response *RemoveChcAssistVpcResponse) {
     response = &RemoveChcAssistVpcResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RemoveChcAssistVpc
@@ -4907,8 +4967,9 @@ func NewRemoveChcDeployVpcRequest() (request *RemoveChcDeployVpcRequest) {
 func NewRemoveChcDeployVpcResponse() (response *RemoveChcDeployVpcResponse) {
     response = &RemoveChcDeployVpcResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RemoveChcDeployVpc
@@ -4963,8 +5024,9 @@ func NewResetInstanceRequest() (request *ResetInstanceRequest) {
 func NewResetInstanceResponse() (response *ResetInstanceResponse) {
     response = &ResetInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetInstance
@@ -5157,8 +5219,9 @@ func NewResetInstancesInternetMaxBandwidthRequest() (request *ResetInstancesInte
 func NewResetInstancesInternetMaxBandwidthResponse() (response *ResetInstancesInternetMaxBandwidthResponse) {
     response = &ResetInstancesInternetMaxBandwidthResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetInstancesInternetMaxBandwidth
@@ -5279,8 +5342,9 @@ func NewResetInstancesPasswordRequest() (request *ResetInstancesPasswordRequest)
 func NewResetInstancesPasswordResponse() (response *ResetInstancesPasswordResponse) {
     response = &ResetInstancesPasswordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetInstancesPassword
@@ -5403,8 +5467,9 @@ func NewResetInstancesTypeRequest() (request *ResetInstancesTypeRequest) {
 func NewResetInstancesTypeResponse() (response *ResetInstancesTypeResponse) {
     response = &ResetInstancesTypeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetInstancesType
@@ -5583,8 +5648,9 @@ func NewResizeInstanceDisksRequest() (request *ResizeInstanceDisksRequest) {
 func NewResizeInstanceDisksResponse() (response *ResizeInstanceDisksResponse) {
     response = &ResizeInstanceDisksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResizeInstanceDisks
@@ -5703,8 +5769,9 @@ func NewRunInstancesRequest() (request *RunInstancesRequest) {
 func NewRunInstancesResponse() (response *RunInstancesResponse) {
     response = &RunInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RunInstances
@@ -6015,8 +6082,9 @@ func NewStartInstancesRequest() (request *StartInstancesRequest) {
 func NewStartInstancesResponse() (response *StartInstancesResponse) {
     response = &StartInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartInstances
@@ -6129,8 +6197,9 @@ func NewStopInstancesRequest() (request *StopInstancesRequest) {
 func NewStopInstancesResponse() (response *StopInstancesResponse) {
     response = &StopInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopInstances
@@ -6259,8 +6328,9 @@ func NewSyncImagesRequest() (request *SyncImagesRequest) {
 func NewSyncImagesResponse() (response *SyncImagesResponse) {
     response = &SyncImagesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SyncImages
@@ -6353,8 +6423,9 @@ func NewTerminateInstancesRequest() (request *TerminateInstancesRequest) {
 func NewTerminateInstancesResponse() (response *TerminateInstancesResponse) {
     response = &TerminateInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TerminateInstances

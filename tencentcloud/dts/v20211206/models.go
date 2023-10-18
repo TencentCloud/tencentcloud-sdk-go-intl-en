@@ -375,7 +375,7 @@ type ConfigureSyncJobRequestParams struct {
 	// Enumerated values: `single` (for single-node target database), `cluster` (for multi-node target database).
 	DstNodeType *string `json:"DstNodeType,omitnil" name:"DstNodeType"`
 
-	// Sync task options
+	// Sync task options. The `RateLimitOption` option cannot take effect currently. To modify the speed limit settings, use the `ModifySyncRateLimit` API.
 	Options *Options `json:"Options,omitnil" name:"Options"`
 
 	// Automatic retry time, which can be set to 5-720 minutes. 0 indicates that retry is disabled.
@@ -427,7 +427,7 @@ type ConfigureSyncJobRequest struct {
 	// Enumerated values: `single` (for single-node target database), `cluster` (for multi-node target database).
 	DstNodeType *string `json:"DstNodeType,omitnil" name:"DstNodeType"`
 
-	// Sync task options
+	// Sync task options. The `RateLimitOption` option cannot take effect currently. To modify the speed limit settings, use the `ModifySyncRateLimit` API.
 	Options *Options `json:"Options,omitnil" name:"Options"`
 
 	// Automatic retry time, which can be set to 5-720 minutes. 0 indicates that retry is disabled.
@@ -2057,6 +2057,13 @@ type DescribeMigrationDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErrorInfo []*ErrorInfoItem `json:"ErrorInfo,omitnil" name:"ErrorInfo"`
 
+	// Whether the task can be reentered in the full export stage. Valid values: `yes`, `no`. `yes`: The current task can be reentered. `no`: The current task is in the full export stage which cannot be reentered. If the value of this parameter is `no`, the checkpoint restart is not supported when the task is restarted in the export stage.
+	DumperResumeCtrl *string `json:"DumperResumeCtrl,omitnil" name:"DumperResumeCtrl"`
+
+	// Task throttling information
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	RateLimitOption *RateLimitOption `json:"RateLimitOption,omitnil" name:"RateLimitOption"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
@@ -2757,6 +2764,23 @@ type Endpoint struct {
 	// Network environment of the database. This parameter is required when `AccessType` is `ccn`. Valid values: `UserIDC` (user IDC), `TencentVPC` (Tencent Cloud VPC).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DatabaseNetEnv *string `json:"DatabaseNetEnv,omitnil" name:"DatabaseNetEnv"`
+
+	// The root account of CCN in the scenario where the database is connected to CCN under another Tencent Cloud account
+	// Note: u200dThis field may return `null`, indicating that no valid values can be obtained.
+	CcnOwnerUin *string `json:"CcnOwnerUin,omitnil" name:"CcnOwnerUin"`
+}
+
+type ErrInfo struct {
+	// Cause of the error
+	Reason *string `json:"Reason,omitnil" name:"Reason"`
+
+	// Error message
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitnil" name:"Message"`
+
+	// Solution
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	Solution *string `json:"Solution,omitnil" name:"Solution"`
 }
 
 type ErrorInfoItem struct {
@@ -2956,6 +2980,10 @@ type JobItem struct {
 	// Information of automatic retry time
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitnil" name:"AutoRetryTimeRangeMinutes"`
+
+	// Whether the task can be reentered in the full export stage. Valid values: `yes`, `no`. `yes`: The current task can be reentered. `no`: The current task is in the full export stage which cannot be reentered. If the value of this parameter is `no`, the checkpoint restart is not supported when the task is restarted in the export stage.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	DumperResumeCtrl *string `json:"DumperResumeCtrl,omitnil" name:"DumperResumeCtrl"`
 }
 
 type KafkaOption struct {
@@ -3060,8 +3088,8 @@ type MigrateOption struct {
 	IsDstReadOnly *bool `json:"IsDstReadOnly,omitnil" name:"IsDstReadOnly"`
 
 	// Additional information. You can set additional parameters for certain database types. For Redis, you can define the following parameters: 
-	// ["ClientOutputBufferHardLimit":512, 	Hard limit of the replica buffer zone capacity in MB	"ClientOutputBufferSoftLimit":512, 	Soft limit of the replica buffer zone capacity in MB	"ClientOutputBufferPersistTime":60, Soft limit duration of the replica buffer zone in seconds	"ReplBacklogSize":512, 	Limit of the circular buffer zone capacity in MB	"ReplTimeout":120, 		Replication timeout period in seconds]
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// ["DstWriteMode": `normal`. 	Target database write mode. Valid values: `clearData` (Clear the target instance data), overwrite` (Execute the task in overwriting mode), `normal` (Follow the normal steps) 	"IsDstReadOnly": `true`. 	Whether to set the target database to read-only for a migration task. Valid values: `true` (Yes), `false` (No) 	"ClientOutputBufferHardLimit": 512. 	Hard limit of the replica buffer zone capacity in MB. 	"ClientOutputBufferSoftLimit": 512. 	Soft limit of the replica buffer zone capacity in MB. 	"ClientOutputBufferPersistTime": 60. Soft limit duration of the replica buffer zone in seconds. 	"ReplBacklogSize": 512, 	Limit of the circular buffer zone capacity in MB. 	"ReplTimeout":120，		Replication timeout period in seconds]
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitnil" name:"ExtraAttr"`
 }
 
@@ -3352,7 +3380,7 @@ type ModifyMigrationJobRequestParams struct {
 	// Running mode. Valid values: `immediate`, `timed`.
 	RunMode *string `json:"RunMode,omitnil" name:"RunMode"`
 
-	// Migration task configuration options, which describe how the task performs migration.
+	// Migration task configuration options, which describe how the task performs migration. The `RateLimitOption` option cannot be configured. To modify the speed limit settings of the task, use the `ModifyMigrateRateLimit` API after the task starts running.
 	MigrateOption *MigrateOption `json:"MigrateOption,omitnil" name:"MigrateOption"`
 
 	// Source instance information
@@ -3383,7 +3411,7 @@ type ModifyMigrationJobRequest struct {
 	// Running mode. Valid values: `immediate`, `timed`.
 	RunMode *string `json:"RunMode,omitnil" name:"RunMode"`
 
-	// Migration task configuration options, which describe how the task performs migration.
+	// Migration task configuration options, which describe how the task performs migration. The `RateLimitOption` option cannot be configured. To modify the speed limit settings of the task, use the `ModifyMigrateRateLimit` API after the task starts running.
 	MigrateOption *MigrateOption `json:"MigrateOption,omitnil" name:"MigrateOption"`
 
 	// Source instance information
@@ -3576,6 +3604,14 @@ type Options struct {
 	// Kafka sync options
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	KafkaOption *KafkaOption `json:"KafkaOption,omitnil" name:"KafkaOption"`
+
+	// Task speed limit information. This parameter can only be used as an output parameter.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	RateLimitOption *RateLimitOption `json:"RateLimitOption,omitnil" name:"RateLimitOption"`
+
+	// Settings of the automatic retry time range
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitnil" name:"AutoRetryTimeRangeMinutes"`
 }
 
 // Predefined struct for user
@@ -3724,6 +3760,52 @@ type ProcessStepTip struct {
 	// Help document
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HelpDoc *string `json:"HelpDoc,omitnil" name:"HelpDoc"`
+}
+
+type RateLimitOption struct {
+	// The number of full export threads that have taken effect.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	CurrentDumpThread *int64 `json:"CurrentDumpThread,omitnil" name:"CurrentDumpThread"`
+
+	// The default number of full export threads.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	DefaultDumpThread *int64 `json:"DefaultDumpThread,omitnil" name:"DefaultDumpThread"`
+
+	// The full export RPS that has taken effect.	
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	CurrentDumpRps *int64 `json:"CurrentDumpRps,omitnil" name:"CurrentDumpRps"`
+
+	// The default full export RPS.	
+	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	DefaultDumpRps *int64 `json:"DefaultDumpRps,omitnil" name:"DefaultDumpRps"`
+
+	// The number of full import threads that have taken effect.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	CurrentLoadThread *int64 `json:"CurrentLoadThread,omitnil" name:"CurrentLoadThread"`
+
+	// The default number of full import threads.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	DefaultLoadThread *int64 `json:"DefaultLoadThread,omitnil" name:"DefaultLoadThread"`
+
+	// The full import RPS that has taken effect.	
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	CurrentLoadRps *int64 `json:"CurrentLoadRps,omitnil" name:"CurrentLoadRps"`
+
+	// The default full import RPS.	
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	DefaultLoadRps *int64 `json:"DefaultLoadRps,omitnil" name:"DefaultLoadRps"`
+
+	// The number of incremental import threads that have taken effect.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	CurrentSinkerThread *int64 `json:"CurrentSinkerThread,omitnil" name:"CurrentSinkerThread"`
+
+	// The default number of incremental import threads.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	DefaultSinkerThread *int64 `json:"DefaultSinkerThread,omitnil" name:"DefaultSinkerThread"`
+
+	// Whether the speed limit has been set. Valid values: `no` (No), `yes` (Yes).
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	HasUserSetRateLimit *string `json:"HasUserSetRateLimit,omitnil" name:"HasUserSetRateLimit"`
 }
 
 // Predefined struct for user
@@ -4693,8 +4775,8 @@ type SyncDetailInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
 
-	// Progress of the current step
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Progress of the current step. Value range: 0-100. The value of `-1` indicates that you can't check the progress of the current step.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
 	CurrentStepProgress *int64 `json:"CurrentStepProgress,omitnil" name:"CurrentStepProgress"`
 
 	// Data volume difference between the sync source and target
@@ -4716,6 +4798,10 @@ type SyncDetailInfo struct {
 	// Cause of the failure of initiating data consistency check
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CauseOfCompareDisable *string `json:"CauseOfCompareDisable,omitnil" name:"CauseOfCompareDisable"`
+
+	// Task error and the corresponding solution
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	ErrInfo *ErrInfo `json:"ErrInfo,omitnil" name:"ErrInfo"`
 }
 
 type SyncJobInfo struct {
@@ -4779,6 +4865,14 @@ type SyncJobInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SrcInfo *Endpoint `json:"SrcInfo,omitnil" name:"SrcInfo"`
 
+	// Valid values: `cluster`, `single`. `single`: For single-node source databases; `cluster`: For multi-node source databases.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	SrcNodeType *string `json:"SrcNodeType,omitnil" name:"SrcNodeType"`
+
+	// Source database information. This parameter is used for multi-node databases.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	SrcInfos *SyncDBEndpointInfos `json:"SrcInfos,omitnil" name:"SrcInfos"`
+
 	// Target database region, such as `ap-guangzhou`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DstRegion *string `json:"DstRegion,omitnil" name:"DstRegion"`
@@ -4794,6 +4888,14 @@ type SyncJobInfo struct {
 	// Target database information. This parameter is used by single-node databases.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DstInfo *Endpoint `json:"DstInfo,omitnil" name:"DstInfo"`
+
+	// Valid values: `cluster`, `single`. `single`: For single-node target databases; `cluster`: For multi-node target databases.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	DstNodeType *string `json:"DstNodeType,omitnil" name:"DstNodeType"`
+
+	// Target database information. This parameter is used for multi-node databases.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	DstInfos *SyncDBEndpointInfos `json:"DstInfos,omitnil" name:"DstInfos"`
 
 	// Creation time in the format of `yyyy-mm-dd hh:mm:ss`
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -4838,6 +4940,10 @@ type SyncJobInfo struct {
 	// Settings of automatic retry time
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AutoRetryTimeRangeMinutes *int64 `json:"AutoRetryTimeRangeMinutes,omitnil" name:"AutoRetryTimeRangeMinutes"`
+
+	// Whether the task can be reentered in the full export stage. Valid values: `yes`, `no`. `yes`: The current task can be reentered. `no`: The current task is in the full export stage which cannot be reentered. If the value of this parameter is `no`, the checkpoint restart is not supported when the task is restarted in the export stage.
+	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
+	DumperResumeCtrl *string `json:"DumperResumeCtrl,omitnil" name:"DumperResumeCtrl"`
 }
 
 type Table struct {

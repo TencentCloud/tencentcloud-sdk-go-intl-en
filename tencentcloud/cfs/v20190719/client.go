@@ -59,8 +59,9 @@ func NewBindAutoSnapshotPolicyRequest() (request *BindAutoSnapshotPolicyRequest)
 func NewBindAutoSnapshotPolicyResponse() (response *BindAutoSnapshotPolicyResponse) {
     response = &BindAutoSnapshotPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BindAutoSnapshotPolicy
@@ -125,8 +126,9 @@ func NewCreateAutoSnapshotPolicyRequest() (request *CreateAutoSnapshotPolicyRequ
 func NewCreateAutoSnapshotPolicyResponse() (response *CreateAutoSnapshotPolicyResponse) {
     response = &CreateAutoSnapshotPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateAutoSnapshotPolicy
@@ -219,8 +221,9 @@ func NewCreateCfsFileSystemRequest() (request *CreateCfsFileSystemRequest) {
 func NewCreateCfsFileSystemResponse() (response *CreateCfsFileSystemResponse) {
     response = &CreateCfsFileSystemResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCfsFileSystem
@@ -379,8 +382,9 @@ func NewCreateCfsPGroupRequest() (request *CreateCfsPGroupRequest) {
 func NewCreateCfsPGroupResponse() (response *CreateCfsPGroupResponse) {
     response = &CreateCfsPGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCfsPGroup
@@ -443,8 +447,9 @@ func NewCreateCfsRuleRequest() (request *CreateCfsRuleRequest) {
 func NewCreateCfsRuleResponse() (response *CreateCfsRuleResponse) {
     response = &CreateCfsRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCfsRule
@@ -523,8 +528,9 @@ func NewCreateCfsSnapshotRequest() (request *CreateCfsSnapshotRequest) {
 func NewCreateCfsSnapshotResponse() (response *CreateCfsSnapshotResponse) {
     response = &CreateCfsSnapshotResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCfsSnapshot
@@ -615,8 +621,9 @@ func NewCreateMigrationTaskRequest() (request *CreateMigrationTaskRequest) {
 func NewCreateMigrationTaskResponse() (response *CreateMigrationTaskResponse) {
     response = &CreateMigrationTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateMigrationTask
@@ -667,8 +674,9 @@ func NewDeleteAutoSnapshotPolicyRequest() (request *DeleteAutoSnapshotPolicyRequ
 func NewDeleteAutoSnapshotPolicyResponse() (response *DeleteAutoSnapshotPolicyResponse) {
     response = &DeleteAutoSnapshotPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteAutoSnapshotPolicy
@@ -731,8 +739,9 @@ func NewDeleteCfsFileSystemRequest() (request *DeleteCfsFileSystemRequest) {
 func NewDeleteCfsFileSystemResponse() (response *DeleteCfsFileSystemResponse) {
     response = &DeleteCfsFileSystemResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCfsFileSystem
@@ -803,8 +812,9 @@ func NewDeleteCfsPGroupRequest() (request *DeleteCfsPGroupRequest) {
 func NewDeleteCfsPGroupResponse() (response *DeleteCfsPGroupResponse) {
     response = &DeleteCfsPGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCfsPGroup
@@ -869,8 +879,9 @@ func NewDeleteCfsRuleRequest() (request *DeleteCfsRuleRequest) {
 func NewDeleteCfsRuleResponse() (response *DeleteCfsRuleResponse) {
     response = &DeleteCfsRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCfsRule
@@ -949,8 +960,9 @@ func NewDeleteCfsSnapshotRequest() (request *DeleteCfsSnapshotRequest) {
 func NewDeleteCfsSnapshotResponse() (response *DeleteCfsSnapshotResponse) {
     response = &DeleteCfsSnapshotResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCfsSnapshot
@@ -1013,8 +1025,9 @@ func NewDeleteMigrationTaskRequest() (request *DeleteMigrationTaskRequest) {
 func NewDeleteMigrationTaskResponse() (response *DeleteMigrationTaskResponse) {
     response = &DeleteMigrationTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteMigrationTask
@@ -1079,8 +1092,9 @@ func NewDeleteMountTargetRequest() (request *DeleteMountTargetRequest) {
 func NewDeleteMountTargetResponse() (response *DeleteMountTargetResponse) {
     response = &DeleteMountTargetResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteMountTarget
@@ -1147,8 +1161,9 @@ func NewDescribeAutoSnapshotPoliciesRequest() (request *DescribeAutoSnapshotPoli
 func NewDescribeAutoSnapshotPoliciesResponse() (response *DescribeAutoSnapshotPoliciesResponse) {
     response = &DescribeAutoSnapshotPoliciesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAutoSnapshotPolicies
@@ -1209,8 +1224,9 @@ func NewDescribeAvailableZoneInfoRequest() (request *DescribeAvailableZoneInfoRe
 func NewDescribeAvailableZoneInfoResponse() (response *DescribeAvailableZoneInfoResponse) {
     response = &DescribeAvailableZoneInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAvailableZoneInfo
@@ -1267,8 +1283,9 @@ func NewDescribeBucketListRequest() (request *DescribeBucketListRequest) {
 func NewDescribeBucketListResponse() (response *DescribeBucketListResponse) {
     response = &DescribeBucketListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBucketList
@@ -1329,8 +1346,9 @@ func NewDescribeCfsFileSystemClientsRequest() (request *DescribeCfsFileSystemCli
 func NewDescribeCfsFileSystemClientsResponse() (response *DescribeCfsFileSystemClientsResponse) {
     response = &DescribeCfsFileSystemClientsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCfsFileSystemClients
@@ -1391,8 +1409,9 @@ func NewDescribeCfsFileSystemsRequest() (request *DescribeCfsFileSystemsRequest)
 func NewDescribeCfsFileSystemsResponse() (response *DescribeCfsFileSystemsResponse) {
     response = &DescribeCfsFileSystemsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCfsFileSystems
@@ -1463,8 +1482,9 @@ func NewDescribeCfsPGroupsRequest() (request *DescribeCfsPGroupsRequest) {
 func NewDescribeCfsPGroupsResponse() (response *DescribeCfsPGroupsResponse) {
     response = &DescribeCfsPGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCfsPGroups
@@ -1515,8 +1535,9 @@ func NewDescribeCfsRulesRequest() (request *DescribeCfsRulesRequest) {
 func NewDescribeCfsRulesResponse() (response *DescribeCfsRulesResponse) {
     response = &DescribeCfsRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCfsRules
@@ -1571,8 +1592,9 @@ func NewDescribeCfsServiceStatusRequest() (request *DescribeCfsServiceStatusRequ
 func NewDescribeCfsServiceStatusResponse() (response *DescribeCfsServiceStatusResponse) {
     response = &DescribeCfsServiceStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCfsServiceStatus
@@ -1627,8 +1649,9 @@ func NewDescribeCfsSnapshotOverviewRequest() (request *DescribeCfsSnapshotOvervi
 func NewDescribeCfsSnapshotOverviewResponse() (response *DescribeCfsSnapshotOverviewResponse) {
     response = &DescribeCfsSnapshotOverviewResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCfsSnapshotOverview
@@ -1681,8 +1704,9 @@ func NewDescribeCfsSnapshotsRequest() (request *DescribeCfsSnapshotsRequest) {
 func NewDescribeCfsSnapshotsResponse() (response *DescribeCfsSnapshotsResponse) {
     response = &DescribeCfsSnapshotsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCfsSnapshots
@@ -1741,8 +1765,9 @@ func NewDescribeMigrationTasksRequest() (request *DescribeMigrationTasksRequest)
 func NewDescribeMigrationTasksResponse() (response *DescribeMigrationTasksResponse) {
     response = &DescribeMigrationTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeMigrationTasks
@@ -1805,8 +1830,9 @@ func NewDescribeMountTargetsRequest() (request *DescribeMountTargetsRequest) {
 func NewDescribeMountTargetsResponse() (response *DescribeMountTargetsResponse) {
     response = &DescribeMountTargetsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeMountTargets
@@ -1871,8 +1897,9 @@ func NewDescribeSnapshotOperationLogsRequest() (request *DescribeSnapshotOperati
 func NewDescribeSnapshotOperationLogsResponse() (response *DescribeSnapshotOperationLogsResponse) {
     response = &DescribeSnapshotOperationLogsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSnapshotOperationLogs
@@ -1933,8 +1960,9 @@ func NewModifyFileSystemAutoScaleUpRuleRequest() (request *ModifyFileSystemAutoS
 func NewModifyFileSystemAutoScaleUpRuleResponse() (response *ModifyFileSystemAutoScaleUpRuleResponse) {
     response = &ModifyFileSystemAutoScaleUpRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyFileSystemAutoScaleUpRule
@@ -1989,8 +2017,9 @@ func NewScaleUpFileSystemRequest() (request *ScaleUpFileSystemRequest) {
 func NewScaleUpFileSystemResponse() (response *ScaleUpFileSystemResponse) {
     response = &ScaleUpFileSystemResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ScaleUpFileSystem
@@ -2061,8 +2090,9 @@ func NewSignUpCfsServiceRequest() (request *SignUpCfsServiceRequest) {
 func NewSignUpCfsServiceResponse() (response *SignUpCfsServiceResponse) {
     response = &SignUpCfsServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SignUpCfsService
@@ -2117,8 +2147,9 @@ func NewStopMigrationTaskRequest() (request *StopMigrationTaskRequest) {
 func NewStopMigrationTaskResponse() (response *StopMigrationTaskResponse) {
     response = &StopMigrationTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopMigrationTask
@@ -2177,8 +2208,9 @@ func NewUnbindAutoSnapshotPolicyRequest() (request *UnbindAutoSnapshotPolicyRequ
 func NewUnbindAutoSnapshotPolicyResponse() (response *UnbindAutoSnapshotPolicyResponse) {
     response = &UnbindAutoSnapshotPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UnbindAutoSnapshotPolicy
@@ -2243,8 +2275,9 @@ func NewUpdateAutoSnapshotPolicyRequest() (request *UpdateAutoSnapshotPolicyRequ
 func NewUpdateAutoSnapshotPolicyResponse() (response *UpdateAutoSnapshotPolicyResponse) {
     response = &UpdateAutoSnapshotPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateAutoSnapshotPolicy
@@ -2321,8 +2354,9 @@ func NewUpdateCfsFileSystemNameRequest() (request *UpdateCfsFileSystemNameReques
 func NewUpdateCfsFileSystemNameResponse() (response *UpdateCfsFileSystemNameResponse) {
     response = &UpdateCfsFileSystemNameResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateCfsFileSystemName
@@ -2393,8 +2427,9 @@ func NewUpdateCfsFileSystemPGroupRequest() (request *UpdateCfsFileSystemPGroupRe
 func NewUpdateCfsFileSystemPGroupResponse() (response *UpdateCfsFileSystemPGroupResponse) {
     response = &UpdateCfsFileSystemPGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateCfsFileSystemPGroup
@@ -2473,8 +2508,9 @@ func NewUpdateCfsFileSystemSizeLimitRequest() (request *UpdateCfsFileSystemSizeL
 func NewUpdateCfsFileSystemSizeLimitResponse() (response *UpdateCfsFileSystemSizeLimitResponse) {
     response = &UpdateCfsFileSystemSizeLimitResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateCfsFileSystemSizeLimit
@@ -2545,8 +2581,9 @@ func NewUpdateCfsPGroupRequest() (request *UpdateCfsPGroupRequest) {
 func NewUpdateCfsPGroupResponse() (response *UpdateCfsPGroupResponse) {
     response = &UpdateCfsPGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateCfsPGroup
@@ -2619,8 +2656,9 @@ func NewUpdateCfsRuleRequest() (request *UpdateCfsRuleRequest) {
 func NewUpdateCfsRuleResponse() (response *UpdateCfsRuleResponse) {
     response = &UpdateCfsRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateCfsRule
@@ -2701,8 +2739,9 @@ func NewUpdateCfsSnapshotAttributeRequest() (request *UpdateCfsSnapshotAttribute
 func NewUpdateCfsSnapshotAttributeResponse() (response *UpdateCfsSnapshotAttributeResponse) {
     response = &UpdateCfsSnapshotAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateCfsSnapshotAttribute

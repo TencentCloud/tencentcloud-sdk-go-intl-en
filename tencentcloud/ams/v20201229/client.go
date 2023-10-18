@@ -59,8 +59,9 @@ func NewCancelTaskRequest() (request *CancelTaskRequest) {
 func NewCancelTaskResponse() (response *CancelTaskResponse) {
     response = &CancelTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CancelTask
@@ -137,8 +138,9 @@ func NewCreateAudioModerationTaskRequest() (request *CreateAudioModerationTaskRe
 func NewCreateAudioModerationTaskResponse() (response *CreateAudioModerationTaskResponse) {
     response = &CreateAudioModerationTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateAudioModerationTask
@@ -315,8 +317,9 @@ func NewDescribeTaskDetailRequest() (request *DescribeTaskDetailRequest) {
 func NewDescribeTaskDetailResponse() (response *DescribeTaskDetailResponse) {
     response = &DescribeTaskDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTaskDetail
@@ -395,8 +398,9 @@ func NewDescribeTasksRequest() (request *DescribeTasksRequest) {
 func NewDescribeTasksResponse() (response *DescribeTasksResponse) {
     response = &DescribeTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTasks

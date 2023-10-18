@@ -59,8 +59,9 @@ func NewAllocateAddressesRequest() (request *AllocateAddressesRequest) {
 func NewAllocateAddressesResponse() (response *AllocateAddressesResponse) {
     response = &AllocateAddressesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AllocateAddresses
@@ -155,8 +156,9 @@ func NewAssignIpv6AddressesRequest() (request *AssignIpv6AddressesRequest) {
 func NewAssignIpv6AddressesResponse() (response *AssignIpv6AddressesResponse) {
     response = &AssignIpv6AddressesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AssignIpv6Addresses
@@ -233,8 +235,9 @@ func NewAssignPrivateIpAddressesRequest() (request *AssignPrivateIpAddressesRequ
 func NewAssignPrivateIpAddressesResponse() (response *AssignPrivateIpAddressesResponse) {
     response = &AssignPrivateIpAddressesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AssignPrivateIpAddresses
@@ -305,8 +308,9 @@ func NewAssociateAddressRequest() (request *AssociateAddressRequest) {
 func NewAssociateAddressResponse() (response *AssociateAddressResponse) {
     response = &AssociateAddressResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AssociateAddress
@@ -419,8 +423,9 @@ func NewAssociateSecurityGroupsRequest() (request *AssociateSecurityGroupsReques
 func NewAssociateSecurityGroupsResponse() (response *AssociateSecurityGroupsResponse) {
     response = &AssociateSecurityGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AssociateSecurityGroups
@@ -481,8 +486,9 @@ func NewAttachNetworkInterfaceRequest() (request *AttachNetworkInterfaceRequest)
 func NewAttachNetworkInterfaceResponse() (response *AttachNetworkInterfaceResponse) {
     response = &AttachNetworkInterfaceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AttachNetworkInterface
@@ -567,8 +573,9 @@ func NewBatchDeregisterTargetsRequest() (request *BatchDeregisterTargetsRequest)
 func NewBatchDeregisterTargetsResponse() (response *BatchDeregisterTargetsResponse) {
     response = &BatchDeregisterTargetsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BatchDeregisterTargets
@@ -641,8 +648,9 @@ func NewBatchModifyTargetWeightRequest() (request *BatchModifyTargetWeightReques
 func NewBatchModifyTargetWeightResponse() (response *BatchModifyTargetWeightResponse) {
     response = &BatchModifyTargetWeightResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BatchModifyTargetWeight
@@ -701,8 +709,9 @@ func NewBatchRegisterTargetsRequest() (request *BatchRegisterTargetsRequest) {
 func NewBatchRegisterTargetsResponse() (response *BatchRegisterTargetsResponse) {
     response = &BatchRegisterTargetsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BatchRegisterTargets
@@ -773,8 +782,9 @@ func NewCreateHaVipRequest() (request *CreateHaVipRequest) {
 func NewCreateHaVipResponse() (response *CreateHaVipResponse) {
     response = &CreateHaVipResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateHaVip
@@ -839,8 +849,9 @@ func NewCreateImageRequest() (request *CreateImageRequest) {
 func NewCreateImageResponse() (response *CreateImageResponse) {
     response = &CreateImageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateImage
@@ -913,8 +924,9 @@ func NewCreateKeyPairRequest() (request *CreateKeyPairRequest) {
 func NewCreateKeyPairResponse() (response *CreateKeyPairResponse) {
     response = &CreateKeyPairResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateKeyPair
@@ -967,8 +979,9 @@ func NewCreateListenerRequest() (request *CreateListenerRequest) {
 func NewCreateListenerResponse() (response *CreateListenerResponse) {
     response = &CreateListenerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateListener
@@ -1029,8 +1042,9 @@ func NewCreateLoadBalancerRequest() (request *CreateLoadBalancerRequest) {
 func NewCreateLoadBalancerResponse() (response *CreateLoadBalancerResponse) {
     response = &CreateLoadBalancerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateLoadBalancer
@@ -1119,8 +1133,9 @@ func NewCreateModuleRequest() (request *CreateModuleRequest) {
 func NewCreateModuleResponse() (response *CreateModuleResponse) {
     response = &CreateModuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateModule
@@ -1209,8 +1224,9 @@ func NewCreateNetworkInterfaceRequest() (request *CreateNetworkInterfaceRequest)
 func NewCreateNetworkInterfaceResponse() (response *CreateNetworkInterfaceResponse) {
     response = &CreateNetworkInterfaceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateNetworkInterface
@@ -1287,8 +1303,9 @@ func NewCreateRouteTableRequest() (request *CreateRouteTableRequest) {
 func NewCreateRouteTableResponse() (response *CreateRouteTableResponse) {
     response = &CreateRouteTableResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRouteTable
@@ -1355,8 +1372,9 @@ func NewCreateRoutesRequest() (request *CreateRoutesRequest) {
 func NewCreateRoutesResponse() (response *CreateRoutesResponse) {
     response = &CreateRoutesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRoutes
@@ -1429,8 +1447,9 @@ func NewCreateSecurityGroupRequest() (request *CreateSecurityGroupRequest) {
 func NewCreateSecurityGroupResponse() (response *CreateSecurityGroupResponse) {
     response = &CreateSecurityGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSecurityGroup
@@ -1491,8 +1510,9 @@ func NewCreateSecurityGroupPoliciesRequest() (request *CreateSecurityGroupPolici
 func NewCreateSecurityGroupPoliciesResponse() (response *CreateSecurityGroupPoliciesResponse) {
     response = &CreateSecurityGroupPoliciesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSecurityGroupPolicies
@@ -1617,8 +1637,9 @@ func NewCreateSubnetRequest() (request *CreateSubnetRequest) {
 func NewCreateSubnetResponse() (response *CreateSubnetResponse) {
     response = &CreateSubnetResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSubnet
@@ -1689,8 +1710,9 @@ func NewCreateVpcRequest() (request *CreateVpcRequest) {
 func NewCreateVpcResponse() (response *CreateVpcResponse) {
     response = &CreateVpcResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateVpc
@@ -1755,8 +1777,9 @@ func NewDeleteHaVipRequest() (request *DeleteHaVipRequest) {
 func NewDeleteHaVipResponse() (response *DeleteHaVipResponse) {
     response = &DeleteHaVipResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteHaVip
@@ -1815,8 +1838,9 @@ func NewDeleteImageRequest() (request *DeleteImageRequest) {
 func NewDeleteImageResponse() (response *DeleteImageResponse) {
     response = &DeleteImageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteImage
@@ -1875,8 +1899,9 @@ func NewDeleteListenerRequest() (request *DeleteListenerRequest) {
 func NewDeleteListenerResponse() (response *DeleteListenerResponse) {
     response = &DeleteListenerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteListener
@@ -1935,8 +1960,9 @@ func NewDeleteLoadBalancerRequest() (request *DeleteLoadBalancerRequest) {
 func NewDeleteLoadBalancerResponse() (response *DeleteLoadBalancerResponse) {
     response = &DeleteLoadBalancerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteLoadBalancer
@@ -2007,8 +2033,9 @@ func NewDeleteLoadBalancerListenersRequest() (request *DeleteLoadBalancerListene
 func NewDeleteLoadBalancerListenersResponse() (response *DeleteLoadBalancerListenersResponse) {
     response = &DeleteLoadBalancerListenersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteLoadBalancerListeners
@@ -2063,8 +2090,9 @@ func NewDeleteModuleRequest() (request *DeleteModuleRequest) {
 func NewDeleteModuleResponse() (response *DeleteModuleResponse) {
     response = &DeleteModuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteModule
@@ -2123,8 +2151,9 @@ func NewDeleteNetworkInterfaceRequest() (request *DeleteNetworkInterfaceRequest)
 func NewDeleteNetworkInterfaceResponse() (response *DeleteNetworkInterfaceResponse) {
     response = &DeleteNetworkInterfaceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteNetworkInterface
@@ -2191,8 +2220,9 @@ func NewDeleteRouteTableRequest() (request *DeleteRouteTableRequest) {
 func NewDeleteRouteTableResponse() (response *DeleteRouteTableResponse) {
     response = &DeleteRouteTableResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRouteTable
@@ -2249,8 +2279,9 @@ func NewDeleteRoutesRequest() (request *DeleteRoutesRequest) {
 func NewDeleteRoutesResponse() (response *DeleteRoutesResponse) {
     response = &DeleteRoutesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRoutes
@@ -2301,8 +2332,9 @@ func NewDeleteSecurityGroupRequest() (request *DeleteSecurityGroupRequest) {
 func NewDeleteSecurityGroupResponse() (response *DeleteSecurityGroupResponse) {
     response = &DeleteSecurityGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSecurityGroup
@@ -2367,8 +2399,9 @@ func NewDeleteSecurityGroupPoliciesRequest() (request *DeleteSecurityGroupPolici
 func NewDeleteSecurityGroupPoliciesResponse() (response *DeleteSecurityGroupPoliciesResponse) {
     response = &DeleteSecurityGroupPoliciesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSecurityGroupPolicies
@@ -2425,8 +2458,9 @@ func NewDeleteSnapshotsRequest() (request *DeleteSnapshotsRequest) {
 func NewDeleteSnapshotsResponse() (response *DeleteSnapshotsResponse) {
     response = &DeleteSnapshotsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSnapshots
@@ -2499,8 +2533,9 @@ func NewDeleteSubnetRequest() (request *DeleteSubnetRequest) {
 func NewDeleteSubnetResponse() (response *DeleteSubnetResponse) {
     response = &DeleteSubnetResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSubnet
@@ -2567,8 +2602,9 @@ func NewDeleteVpcRequest() (request *DeleteVpcRequest) {
 func NewDeleteVpcResponse() (response *DeleteVpcResponse) {
     response = &DeleteVpcResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteVpc
@@ -2629,8 +2665,9 @@ func NewDescribeAddressQuotaRequest() (request *DescribeAddressQuotaRequest) {
 func NewDescribeAddressQuotaResponse() (response *DescribeAddressQuotaResponse) {
     response = &DescribeAddressQuotaResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAddressQuota
@@ -2687,8 +2724,9 @@ func NewDescribeAddressesRequest() (request *DescribeAddressesRequest) {
 func NewDescribeAddressesResponse() (response *DescribeAddressesResponse) {
     response = &DescribeAddressesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAddresses
@@ -2751,8 +2789,9 @@ func NewDescribeBaseOverviewRequest() (request *DescribeBaseOverviewRequest) {
 func NewDescribeBaseOverviewResponse() (response *DescribeBaseOverviewResponse) {
     response = &DescribeBaseOverviewResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBaseOverview
@@ -2805,8 +2844,9 @@ func NewDescribeConfigRequest() (request *DescribeConfigRequest) {
 func NewDescribeConfigResponse() (response *DescribeConfigResponse) {
     response = &DescribeConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeConfig
@@ -2861,8 +2901,9 @@ func NewDescribeCustomImageTaskRequest() (request *DescribeCustomImageTaskReques
 func NewDescribeCustomImageTaskResponse() (response *DescribeCustomImageTaskResponse) {
     response = &DescribeCustomImageTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCustomImageTask
@@ -2917,8 +2958,9 @@ func NewDescribeDefaultSubnetRequest() (request *DescribeDefaultSubnetRequest) {
 func NewDescribeDefaultSubnetResponse() (response *DescribeDefaultSubnetResponse) {
     response = &DescribeDefaultSubnetResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDefaultSubnet
@@ -2973,8 +3015,9 @@ func NewDescribeHaVipsRequest() (request *DescribeHaVipsRequest) {
 func NewDescribeHaVipsResponse() (response *DescribeHaVipsResponse) {
     response = &DescribeHaVipsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeHaVips
@@ -3035,8 +3078,9 @@ func NewDescribeImageRequest() (request *DescribeImageRequest) {
 func NewDescribeImageResponse() (response *DescribeImageResponse) {
     response = &DescribeImageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImage
@@ -3099,8 +3143,9 @@ func NewDescribeImportImageOsRequest() (request *DescribeImportImageOsRequest) {
 func NewDescribeImportImageOsResponse() (response *DescribeImportImageOsResponse) {
     response = &DescribeImportImageOsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImportImageOs
@@ -3147,8 +3192,9 @@ func NewDescribeInstanceTypeConfigRequest() (request *DescribeInstanceTypeConfig
 func NewDescribeInstanceTypeConfigResponse() (response *DescribeInstanceTypeConfigResponse) {
     response = &DescribeInstanceTypeConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceTypeConfig
@@ -3201,8 +3247,9 @@ func NewDescribeInstanceVncUrlRequest() (request *DescribeInstanceVncUrlRequest)
 func NewDescribeInstanceVncUrlResponse() (response *DescribeInstanceVncUrlResponse) {
     response = &DescribeInstanceVncUrlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceVncUrl
@@ -3261,8 +3308,9 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
 func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
     response = &DescribeInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstances
@@ -3327,8 +3375,9 @@ func NewDescribeInstancesDeniedActionsRequest() (request *DescribeInstancesDenie
 func NewDescribeInstancesDeniedActionsResponse() (response *DescribeInstancesDeniedActionsResponse) {
     response = &DescribeInstancesDeniedActionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstancesDeniedActions
@@ -3383,8 +3432,9 @@ func NewDescribeListenersRequest() (request *DescribeListenersRequest) {
 func NewDescribeListenersResponse() (response *DescribeListenersResponse) {
     response = &DescribeListenersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeListeners
@@ -3443,8 +3493,9 @@ func NewDescribeLoadBalanceTaskStatusRequest() (request *DescribeLoadBalanceTask
 func NewDescribeLoadBalanceTaskStatusResponse() (response *DescribeLoadBalanceTaskStatusResponse) {
     response = &DescribeLoadBalanceTaskStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeLoadBalanceTaskStatus
@@ -3497,8 +3548,9 @@ func NewDescribeLoadBalancersRequest() (request *DescribeLoadBalancersRequest) {
 func NewDescribeLoadBalancersResponse() (response *DescribeLoadBalancersResponse) {
     response = &DescribeLoadBalancersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeLoadBalancers
@@ -3563,8 +3615,9 @@ func NewDescribeModuleRequest() (request *DescribeModuleRequest) {
 func NewDescribeModuleResponse() (response *DescribeModuleResponse) {
     response = &DescribeModuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeModule
@@ -3625,8 +3678,9 @@ func NewDescribeModuleDetailRequest() (request *DescribeModuleDetailRequest) {
 func NewDescribeModuleDetailResponse() (response *DescribeModuleDetailResponse) {
     response = &DescribeModuleDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeModuleDetail
@@ -3683,8 +3737,9 @@ func NewDescribeMonthPeakNetworkRequest() (request *DescribeMonthPeakNetworkRequ
 func NewDescribeMonthPeakNetworkResponse() (response *DescribeMonthPeakNetworkResponse) {
     response = &DescribeMonthPeakNetworkResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeMonthPeakNetwork
@@ -3749,8 +3804,9 @@ func NewDescribeNetworkInterfacesRequest() (request *DescribeNetworkInterfacesRe
 func NewDescribeNetworkInterfacesResponse() (response *DescribeNetworkInterfacesResponse) {
     response = &DescribeNetworkInterfacesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeNetworkInterfaces
@@ -3819,8 +3875,9 @@ func NewDescribeNodeRequest() (request *DescribeNodeRequest) {
 func NewDescribeNodeResponse() (response *DescribeNodeResponse) {
     response = &DescribeNodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeNode
@@ -3873,8 +3930,9 @@ func NewDescribePackingQuotaGroupRequest() (request *DescribePackingQuotaGroupRe
 func NewDescribePackingQuotaGroupResponse() (response *DescribePackingQuotaGroupResponse) {
     response = &DescribePackingQuotaGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePackingQuotaGroup
@@ -3939,8 +3997,9 @@ func NewDescribePeakBaseOverviewRequest() (request *DescribePeakBaseOverviewRequ
 func NewDescribePeakBaseOverviewResponse() (response *DescribePeakBaseOverviewResponse) {
     response = &DescribePeakBaseOverviewResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePeakBaseOverview
@@ -3995,8 +4054,9 @@ func NewDescribePeakNetworkOverviewRequest() (request *DescribePeakNetworkOvervi
 func NewDescribePeakNetworkOverviewResponse() (response *DescribePeakNetworkOverviewResponse) {
     response = &DescribePeakNetworkOverviewResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePeakNetworkOverview
@@ -4053,8 +4113,9 @@ func NewDescribePriceRunInstanceRequest() (request *DescribePriceRunInstanceRequ
 func NewDescribePriceRunInstanceResponse() (response *DescribePriceRunInstanceResponse) {
     response = &DescribePriceRunInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePriceRunInstance
@@ -4115,8 +4176,9 @@ func NewDescribeRouteConflictsRequest() (request *DescribeRouteConflictsRequest)
 func NewDescribeRouteConflictsResponse() (response *DescribeRouteConflictsResponse) {
     response = &DescribeRouteConflictsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRouteConflicts
@@ -4171,8 +4233,9 @@ func NewDescribeRouteTablesRequest() (request *DescribeRouteTablesRequest) {
 func NewDescribeRouteTablesResponse() (response *DescribeRouteTablesResponse) {
     response = &DescribeRouteTablesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRouteTables
@@ -4237,8 +4300,9 @@ func NewDescribeSecurityGroupAssociationStatisticsRequest() (request *DescribeSe
 func NewDescribeSecurityGroupAssociationStatisticsResponse() (response *DescribeSecurityGroupAssociationStatisticsResponse) {
     response = &DescribeSecurityGroupAssociationStatisticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSecurityGroupAssociationStatistics
@@ -4295,8 +4359,9 @@ func NewDescribeSecurityGroupLimitsRequest() (request *DescribeSecurityGroupLimi
 func NewDescribeSecurityGroupLimitsResponse() (response *DescribeSecurityGroupLimitsResponse) {
     response = &DescribeSecurityGroupLimitsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSecurityGroupLimits
@@ -4349,8 +4414,9 @@ func NewDescribeSecurityGroupPoliciesRequest() (request *DescribeSecurityGroupPo
 func NewDescribeSecurityGroupPoliciesResponse() (response *DescribeSecurityGroupPoliciesResponse) {
     response = &DescribeSecurityGroupPoliciesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSecurityGroupPolicies
@@ -4407,8 +4473,9 @@ func NewDescribeSecurityGroupsRequest() (request *DescribeSecurityGroupsRequest)
 func NewDescribeSecurityGroupsResponse() (response *DescribeSecurityGroupsResponse) {
     response = &DescribeSecurityGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSecurityGroups
@@ -4469,8 +4536,9 @@ func NewDescribeSnapshotsRequest() (request *DescribeSnapshotsRequest) {
 func NewDescribeSnapshotsResponse() (response *DescribeSnapshotsResponse) {
     response = &DescribeSnapshotsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSnapshots
@@ -4535,8 +4603,9 @@ func NewDescribeSubnetsRequest() (request *DescribeSubnetsRequest) {
 func NewDescribeSubnetsResponse() (response *DescribeSubnetsResponse) {
     response = &DescribeSubnetsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSubnets
@@ -4605,8 +4674,9 @@ func NewDescribeTargetHealthRequest() (request *DescribeTargetHealthRequest) {
 func NewDescribeTargetHealthResponse() (response *DescribeTargetHealthResponse) {
     response = &DescribeTargetHealthResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTargetHealth
@@ -4667,8 +4737,9 @@ func NewDescribeTargetsRequest() (request *DescribeTargetsRequest) {
 func NewDescribeTargetsResponse() (response *DescribeTargetsResponse) {
     response = &DescribeTargetsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTargets
@@ -4725,8 +4796,9 @@ func NewDescribeTaskResultRequest() (request *DescribeTaskResultRequest) {
 func NewDescribeTaskResultResponse() (response *DescribeTaskResultResponse) {
     response = &DescribeTaskResultResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTaskResult
@@ -4787,8 +4859,9 @@ func NewDescribeTaskStatusRequest() (request *DescribeTaskStatusRequest) {
 func NewDescribeTaskStatusResponse() (response *DescribeTaskStatusResponse) {
     response = &DescribeTaskStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTaskStatus
@@ -4839,8 +4912,9 @@ func NewDescribeVpcsRequest() (request *DescribeVpcsRequest) {
 func NewDescribeVpcsResponse() (response *DescribeVpcsResponse) {
     response = &DescribeVpcsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeVpcs
@@ -4907,8 +4981,9 @@ func NewDetachNetworkInterfaceRequest() (request *DetachNetworkInterfaceRequest)
 func NewDetachNetworkInterfaceResponse() (response *DetachNetworkInterfaceResponse) {
     response = &DetachNetworkInterfaceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DetachNetworkInterface
@@ -4973,8 +5048,9 @@ func NewDisableRoutesRequest() (request *DisableRoutesRequest) {
 func NewDisableRoutesResponse() (response *DisableRoutesResponse) {
     response = &DisableRoutesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DisableRoutes
@@ -5035,8 +5111,9 @@ func NewDisassociateAddressRequest() (request *DisassociateAddressRequest) {
 func NewDisassociateAddressResponse() (response *DisassociateAddressResponse) {
     response = &DisassociateAddressResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DisassociateAddress
@@ -5123,8 +5200,9 @@ func NewDisassociateInstancesKeyPairsRequest() (request *DisassociateInstancesKe
 func NewDisassociateInstancesKeyPairsResponse() (response *DisassociateInstancesKeyPairsResponse) {
     response = &DisassociateInstancesKeyPairsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DisassociateInstancesKeyPairs
@@ -5179,8 +5257,9 @@ func NewDisassociateSecurityGroupsRequest() (request *DisassociateSecurityGroups
 func NewDisassociateSecurityGroupsResponse() (response *DisassociateSecurityGroupsResponse) {
     response = &DisassociateSecurityGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DisassociateSecurityGroups
@@ -5233,8 +5312,9 @@ func NewEnableRoutesRequest() (request *EnableRoutesRequest) {
 func NewEnableRoutesResponse() (response *EnableRoutesResponse) {
     response = &EnableRoutesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // EnableRoutes
@@ -5307,8 +5387,9 @@ func NewImportImageRequest() (request *ImportImageRequest) {
 func NewImportImageResponse() (response *ImportImageResponse) {
     response = &ImportImageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ImportImage
@@ -5373,8 +5454,9 @@ func NewMigrateNetworkInterfaceRequest() (request *MigrateNetworkInterfaceReques
 func NewMigrateNetworkInterfaceResponse() (response *MigrateNetworkInterfaceResponse) {
     response = &MigrateNetworkInterfaceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // MigrateNetworkInterface
@@ -5435,8 +5517,9 @@ func NewMigratePrivateIpAddressRequest() (request *MigratePrivateIpAddressReques
 func NewMigratePrivateIpAddressResponse() (response *MigratePrivateIpAddressResponse) {
     response = &MigratePrivateIpAddressResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // MigratePrivateIpAddress
@@ -5505,8 +5588,9 @@ func NewModifyAddressAttributeRequest() (request *ModifyAddressAttributeRequest)
 func NewModifyAddressAttributeResponse() (response *ModifyAddressAttributeResponse) {
     response = &ModifyAddressAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyAddressAttribute
@@ -5577,8 +5661,9 @@ func NewModifyAddressesBandwidthRequest() (request *ModifyAddressesBandwidthRequ
 func NewModifyAddressesBandwidthResponse() (response *ModifyAddressesBandwidthResponse) {
     response = &ModifyAddressesBandwidthResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyAddressesBandwidth
@@ -5645,8 +5730,9 @@ func NewModifyDefaultSubnetRequest() (request *ModifyDefaultSubnetRequest) {
 func NewModifyDefaultSubnetResponse() (response *ModifyDefaultSubnetResponse) {
     response = &ModifyDefaultSubnetResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDefaultSubnet
@@ -5703,8 +5789,9 @@ func NewModifyHaVipAttributeRequest() (request *ModifyHaVipAttributeRequest) {
 func NewModifyHaVipAttributeResponse() (response *ModifyHaVipAttributeResponse) {
     response = &ModifyHaVipAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyHaVipAttribute
@@ -5759,8 +5846,9 @@ func NewModifyImageAttributeRequest() (request *ModifyImageAttributeRequest) {
 func NewModifyImageAttributeResponse() (response *ModifyImageAttributeResponse) {
     response = &ModifyImageAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyImageAttribute
@@ -5821,8 +5909,9 @@ func NewModifyInstancesAttributeRequest() (request *ModifyInstancesAttributeRequ
 func NewModifyInstancesAttributeResponse() (response *ModifyInstancesAttributeResponse) {
     response = &ModifyInstancesAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyInstancesAttribute
@@ -5885,8 +5974,9 @@ func NewModifyIpv6AddressesAttributeRequest() (request *ModifyIpv6AddressesAttri
 func NewModifyIpv6AddressesAttributeResponse() (response *ModifyIpv6AddressesAttributeResponse) {
     response = &ModifyIpv6AddressesAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyIpv6AddressesAttribute
@@ -5945,8 +6035,9 @@ func NewModifyListenerRequest() (request *ModifyListenerRequest) {
 func NewModifyListenerResponse() (response *ModifyListenerResponse) {
     response = &ModifyListenerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyListener
@@ -6005,8 +6096,9 @@ func NewModifyLoadBalancerAttributesRequest() (request *ModifyLoadBalancerAttrib
 func NewModifyLoadBalancerAttributesResponse() (response *ModifyLoadBalancerAttributesResponse) {
     response = &ModifyLoadBalancerAttributesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyLoadBalancerAttributes
@@ -6071,8 +6163,9 @@ func NewModifyModuleConfigRequest() (request *ModifyModuleConfigRequest) {
 func NewModifyModuleConfigResponse() (response *ModifyModuleConfigResponse) {
     response = &ModifyModuleConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyModuleConfig
@@ -6141,8 +6234,9 @@ func NewModifyModuleDisableWanIpRequest() (request *ModifyModuleDisableWanIpRequ
 func NewModifyModuleDisableWanIpResponse() (response *ModifyModuleDisableWanIpResponse) {
     response = &ModifyModuleDisableWanIpResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyModuleDisableWanIp
@@ -6195,8 +6289,9 @@ func NewModifyModuleImageRequest() (request *ModifyModuleImageRequest) {
 func NewModifyModuleImageResponse() (response *ModifyModuleImageResponse) {
     response = &ModifyModuleImageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyModuleImage
@@ -6259,8 +6354,9 @@ func NewModifyModuleIpDirectRequest() (request *ModifyModuleIpDirectRequest) {
 func NewModifyModuleIpDirectResponse() (response *ModifyModuleIpDirectResponse) {
     response = &ModifyModuleIpDirectResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyModuleIpDirect
@@ -6315,8 +6411,9 @@ func NewModifyModuleNameRequest() (request *ModifyModuleNameRequest) {
 func NewModifyModuleNameResponse() (response *ModifyModuleNameResponse) {
     response = &ModifyModuleNameResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyModuleName
@@ -6373,8 +6470,9 @@ func NewModifyModuleNetworkRequest() (request *ModifyModuleNetworkRequest) {
 func NewModifyModuleNetworkResponse() (response *ModifyModuleNetworkResponse) {
     response = &ModifyModuleNetworkResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyModuleNetwork
@@ -6439,8 +6537,9 @@ func NewModifyModuleSecurityGroupsRequest() (request *ModifyModuleSecurityGroups
 func NewModifyModuleSecurityGroupsResponse() (response *ModifyModuleSecurityGroupsResponse) {
     response = &ModifyModuleSecurityGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyModuleSecurityGroups
@@ -6501,8 +6600,9 @@ func NewModifyPrivateIpAddressesAttributeRequest() (request *ModifyPrivateIpAddr
 func NewModifyPrivateIpAddressesAttributeResponse() (response *ModifyPrivateIpAddressesAttributeResponse) {
     response = &ModifyPrivateIpAddressesAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyPrivateIpAddressesAttribute
@@ -6557,8 +6657,9 @@ func NewModifyRouteTableAttributeRequest() (request *ModifyRouteTableAttributeRe
 func NewModifyRouteTableAttributeResponse() (response *ModifyRouteTableAttributeResponse) {
     response = &ModifyRouteTableAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRouteTableAttribute
@@ -6611,8 +6712,9 @@ func NewModifySecurityGroupAttributeRequest() (request *ModifySecurityGroupAttri
 func NewModifySecurityGroupAttributeResponse() (response *ModifySecurityGroupAttributeResponse) {
     response = &ModifySecurityGroupAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySecurityGroupAttribute
@@ -6671,8 +6773,9 @@ func NewModifySecurityGroupPoliciesRequest() (request *ModifySecurityGroupPolici
 func NewModifySecurityGroupPoliciesResponse() (response *ModifySecurityGroupPoliciesResponse) {
     response = &ModifySecurityGroupPoliciesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySecurityGroupPolicies
@@ -6729,8 +6832,9 @@ func NewModifySubnetAttributeRequest() (request *ModifySubnetAttributeRequest) {
 func NewModifySubnetAttributeResponse() (response *ModifySubnetAttributeResponse) {
     response = &ModifySubnetAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySubnetAttribute
@@ -6797,8 +6901,9 @@ func NewModifyTargetPortRequest() (request *ModifyTargetPortRequest) {
 func NewModifyTargetPortResponse() (response *ModifyTargetPortResponse) {
     response = &ModifyTargetPortResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyTargetPort
@@ -6855,8 +6960,9 @@ func NewModifyTargetWeightRequest() (request *ModifyTargetWeightRequest) {
 func NewModifyTargetWeightResponse() (response *ModifyTargetWeightResponse) {
     response = &ModifyTargetWeightResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyTargetWeight
@@ -6917,8 +7023,9 @@ func NewModifyVpcAttributeRequest() (request *ModifyVpcAttributeRequest) {
 func NewModifyVpcAttributeResponse() (response *ModifyVpcAttributeResponse) {
     response = &ModifyVpcAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyVpcAttribute
@@ -6981,8 +7088,9 @@ func NewRebootInstancesRequest() (request *RebootInstancesRequest) {
 func NewRebootInstancesResponse() (response *RebootInstancesResponse) {
     response = &RebootInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RebootInstances
@@ -7049,8 +7157,9 @@ func NewReleaseAddressesRequest() (request *ReleaseAddressesRequest) {
 func NewReleaseAddressesResponse() (response *ReleaseAddressesResponse) {
     response = &ReleaseAddressesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ReleaseAddresses
@@ -7125,8 +7234,9 @@ func NewReleaseIpv6AddressesRequest() (request *ReleaseIpv6AddressesRequest) {
 func NewReleaseIpv6AddressesResponse() (response *ReleaseIpv6AddressesResponse) {
     response = &ReleaseIpv6AddressesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ReleaseIpv6Addresses
@@ -7185,8 +7295,9 @@ func NewRemovePrivateIpAddressesRequest() (request *RemovePrivateIpAddressesRequ
 func NewRemovePrivateIpAddressesResponse() (response *RemovePrivateIpAddressesResponse) {
     response = &RemovePrivateIpAddressesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RemovePrivateIpAddresses
@@ -7255,8 +7366,9 @@ func NewReplaceRouteTableAssociationRequest() (request *ReplaceRouteTableAssocia
 func NewReplaceRouteTableAssociationResponse() (response *ReplaceRouteTableAssociationResponse) {
     response = &ReplaceRouteTableAssociationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ReplaceRouteTableAssociation
@@ -7317,8 +7429,9 @@ func NewReplaceRoutesRequest() (request *ReplaceRoutesRequest) {
 func NewReplaceRoutesResponse() (response *ReplaceRoutesResponse) {
     response = &ReplaceRoutesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ReplaceRoutes
@@ -7385,8 +7498,9 @@ func NewReplaceSecurityGroupPolicyRequest() (request *ReplaceSecurityGroupPolicy
 func NewReplaceSecurityGroupPolicyResponse() (response *ReplaceSecurityGroupPolicyResponse) {
     response = &ReplaceSecurityGroupPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ReplaceSecurityGroupPolicy
@@ -7443,8 +7557,9 @@ func NewResetInstancesRequest() (request *ResetInstancesRequest) {
 func NewResetInstancesResponse() (response *ResetInstancesResponse) {
     response = &ResetInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetInstances
@@ -7513,8 +7628,9 @@ func NewResetInstancesMaxBandwidthRequest() (request *ResetInstancesMaxBandwidth
 func NewResetInstancesMaxBandwidthResponse() (response *ResetInstancesMaxBandwidthResponse) {
     response = &ResetInstancesMaxBandwidthResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetInstancesMaxBandwidth
@@ -7579,8 +7695,9 @@ func NewResetInstancesPasswordRequest() (request *ResetInstancesPasswordRequest)
 func NewResetInstancesPasswordResponse() (response *ResetInstancesPasswordResponse) {
     response = &ResetInstancesPasswordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetInstancesPassword
@@ -7645,8 +7762,9 @@ func NewResetRoutesRequest() (request *ResetRoutesRequest) {
 func NewResetRoutesResponse() (response *ResetRoutesResponse) {
     response = &ResetRoutesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ResetRoutes
@@ -7705,8 +7823,9 @@ func NewRunInstancesRequest() (request *RunInstancesRequest) {
 func NewRunInstancesResponse() (response *RunInstancesResponse) {
     response = &RunInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RunInstances
@@ -7871,8 +7990,9 @@ func NewSetLoadBalancerSecurityGroupsRequest() (request *SetLoadBalancerSecurity
 func NewSetLoadBalancerSecurityGroupsResponse() (response *SetLoadBalancerSecurityGroupsResponse) {
     response = &SetLoadBalancerSecurityGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetLoadBalancerSecurityGroups
@@ -7939,8 +8059,9 @@ func NewSetSecurityGroupForLoadbalancersRequest() (request *SetSecurityGroupForL
 func NewSetSecurityGroupForLoadbalancersResponse() (response *SetSecurityGroupForLoadbalancersResponse) {
     response = &SetSecurityGroupForLoadbalancersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetSecurityGroupForLoadbalancers
@@ -8009,8 +8130,9 @@ func NewStartInstancesRequest() (request *StartInstancesRequest) {
 func NewStartInstancesResponse() (response *StartInstancesResponse) {
     response = &StartInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartInstances
@@ -8073,8 +8195,9 @@ func NewStopInstancesRequest() (request *StopInstancesRequest) {
 func NewStopInstancesResponse() (response *StopInstancesResponse) {
     response = &StopInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopInstances
@@ -8145,8 +8268,9 @@ func NewTerminateInstancesRequest() (request *TerminateInstancesRequest) {
 func NewTerminateInstancesResponse() (response *TerminateInstancesResponse) {
     response = &TerminateInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TerminateInstances

@@ -59,8 +59,9 @@ func NewCheckInstanceRequest() (request *CheckInstanceRequest) {
 func NewCheckInstanceResponse() (response *CheckInstanceResponse) {
     response = &CheckInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CheckInstance
@@ -135,8 +136,9 @@ func NewCheckInstanceNameRequest() (request *CheckInstanceNameRequest) {
 func NewCheckInstanceNameResponse() (response *CheckInstanceNameResponse) {
     response = &CheckInstanceNameResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CheckInstanceName
@@ -211,8 +213,9 @@ func NewCreateCustomAccountRequest() (request *CreateCustomAccountRequest) {
 func NewCreateCustomAccountResponse() (response *CreateCustomAccountResponse) {
     response = &CreateCustomAccountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCustomAccount
@@ -271,8 +274,9 @@ func NewCreateImageAccelerationServiceRequest() (request *CreateImageAcceleratio
 func NewCreateImageAccelerationServiceResponse() (response *CreateImageAccelerationServiceResponse) {
     response = &CreateImageAccelerationServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateImageAccelerationService
@@ -333,8 +337,9 @@ func NewCreateImmutableTagRulesRequest() (request *CreateImmutableTagRulesReques
 func NewCreateImmutableTagRulesResponse() (response *CreateImmutableTagRulesResponse) {
     response = &CreateImmutableTagRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateImmutableTagRules
@@ -395,8 +400,9 @@ func NewCreateInstanceRequest() (request *CreateInstanceRequest) {
 func NewCreateInstanceResponse() (response *CreateInstanceResponse) {
     response = &CreateInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateInstance
@@ -487,8 +493,9 @@ func NewCreateInstanceCustomizedDomainRequest() (request *CreateInstanceCustomiz
 func NewCreateInstanceCustomizedDomainResponse() (response *CreateInstanceCustomizedDomainResponse) {
     response = &CreateInstanceCustomizedDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateInstanceCustomizedDomain
@@ -561,8 +568,9 @@ func NewCreateInstanceTokenRequest() (request *CreateInstanceTokenRequest) {
 func NewCreateInstanceTokenResponse() (response *CreateInstanceTokenResponse) {
     response = &CreateInstanceTokenResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateInstanceToken
@@ -623,8 +631,9 @@ func NewCreateMultipleSecurityPolicyRequest() (request *CreateMultipleSecurityPo
 func NewCreateMultipleSecurityPolicyResponse() (response *CreateMultipleSecurityPolicyResponse) {
     response = &CreateMultipleSecurityPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateMultipleSecurityPolicy
@@ -693,8 +702,9 @@ func NewCreateNamespaceRequest() (request *CreateNamespaceRequest) {
 func NewCreateNamespaceResponse() (response *CreateNamespaceResponse) {
     response = &CreateNamespaceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateNamespace
@@ -775,8 +785,9 @@ func NewCreateReplicationInstanceRequest() (request *CreateReplicationInstanceRe
 func NewCreateReplicationInstanceResponse() (response *CreateReplicationInstanceResponse) {
     response = &CreateReplicationInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateReplicationInstance
@@ -851,8 +862,9 @@ func NewCreateRepositoryRequest() (request *CreateRepositoryRequest) {
 func NewCreateRepositoryResponse() (response *CreateRepositoryResponse) {
     response = &CreateRepositoryResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRepository
@@ -919,8 +931,9 @@ func NewCreateSecurityPolicyRequest() (request *CreateSecurityPolicyRequest) {
 func NewCreateSecurityPolicyResponse() (response *CreateSecurityPolicyResponse) {
     response = &CreateSecurityPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSecurityPolicy
@@ -981,8 +994,9 @@ func NewCreateServiceAccountRequest() (request *CreateServiceAccountRequest) {
 func NewCreateServiceAccountResponse() (response *CreateServiceAccountResponse) {
     response = &CreateServiceAccountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateServiceAccount
@@ -1041,8 +1055,9 @@ func NewCreateSignatureRequest() (request *CreateSignatureRequest) {
 func NewCreateSignatureResponse() (response *CreateSignatureResponse) {
     response = &CreateSignatureResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSignature
@@ -1111,8 +1126,9 @@ func NewCreateSignaturePolicyRequest() (request *CreateSignaturePolicyRequest) {
 func NewCreateSignaturePolicyResponse() (response *CreateSignaturePolicyResponse) {
     response = &CreateSignaturePolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSignaturePolicy
@@ -1163,8 +1179,9 @@ func NewCreateTagRetentionExecutionRequest() (request *CreateTagRetentionExecuti
 func NewCreateTagRetentionExecutionResponse() (response *CreateTagRetentionExecutionResponse) {
     response = &CreateTagRetentionExecutionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTagRetentionExecution
@@ -1233,8 +1250,9 @@ func NewCreateTagRetentionRuleRequest() (request *CreateTagRetentionRuleRequest)
 func NewCreateTagRetentionRuleResponse() (response *CreateTagRetentionRuleResponse) {
     response = &CreateTagRetentionRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTagRetentionRule
@@ -1307,8 +1325,9 @@ func NewCreateWebhookTriggerRequest() (request *CreateWebhookTriggerRequest) {
 func NewCreateWebhookTriggerResponse() (response *CreateWebhookTriggerResponse) {
     response = &CreateWebhookTriggerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateWebhookTrigger
@@ -1367,8 +1386,9 @@ func NewDeleteCustomAccountRequest() (request *DeleteCustomAccountRequest) {
 func NewDeleteCustomAccountResponse() (response *DeleteCustomAccountResponse) {
     response = &DeleteCustomAccountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCustomAccount
@@ -1423,8 +1443,9 @@ func NewDeleteImageRequest() (request *DeleteImageRequest) {
 func NewDeleteImageResponse() (response *DeleteImageResponse) {
     response = &DeleteImageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteImage
@@ -1491,8 +1512,9 @@ func NewDeleteImageAccelerateServiceRequest() (request *DeleteImageAccelerateSer
 func NewDeleteImageAccelerateServiceResponse() (response *DeleteImageAccelerateServiceResponse) {
     response = &DeleteImageAccelerateServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteImageAccelerateService
@@ -1551,8 +1573,9 @@ func NewDeleteImmutableTagRulesRequest() (request *DeleteImmutableTagRulesReques
 func NewDeleteImmutableTagRulesResponse() (response *DeleteImmutableTagRulesResponse) {
     response = &DeleteImmutableTagRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteImmutableTagRules
@@ -1609,8 +1632,9 @@ func NewDeleteInstanceRequest() (request *DeleteInstanceRequest) {
 func NewDeleteInstanceResponse() (response *DeleteInstanceResponse) {
     response = &DeleteInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteInstance
@@ -1675,8 +1699,9 @@ func NewDeleteInstanceCustomizedDomainRequest() (request *DeleteInstanceCustomiz
 func NewDeleteInstanceCustomizedDomainResponse() (response *DeleteInstanceCustomizedDomainResponse) {
     response = &DeleteInstanceCustomizedDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteInstanceCustomizedDomain
@@ -1749,8 +1774,9 @@ func NewDeleteInstanceTokenRequest() (request *DeleteInstanceTokenRequest) {
 func NewDeleteInstanceTokenResponse() (response *DeleteInstanceTokenResponse) {
     response = &DeleteInstanceTokenResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteInstanceToken
@@ -1809,8 +1835,9 @@ func NewDeleteMultipleSecurityPolicyRequest() (request *DeleteMultipleSecurityPo
 func NewDeleteMultipleSecurityPolicyResponse() (response *DeleteMultipleSecurityPolicyResponse) {
     response = &DeleteMultipleSecurityPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteMultipleSecurityPolicy
@@ -1869,8 +1896,9 @@ func NewDeleteNamespaceRequest() (request *DeleteNamespaceRequest) {
 func NewDeleteNamespaceResponse() (response *DeleteNamespaceResponse) {
     response = &DeleteNamespaceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteNamespace
@@ -1951,8 +1979,9 @@ func NewDeleteReplicationInstanceRequest() (request *DeleteReplicationInstanceRe
 func NewDeleteReplicationInstanceResponse() (response *DeleteReplicationInstanceResponse) {
     response = &DeleteReplicationInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteReplicationInstance
@@ -2015,8 +2044,9 @@ func NewDeleteRepositoryRequest() (request *DeleteRepositoryRequest) {
 func NewDeleteRepositoryResponse() (response *DeleteRepositoryResponse) {
     response = &DeleteRepositoryResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRepository
@@ -2083,8 +2113,9 @@ func NewDeleteRepositoryTagsRequest() (request *DeleteRepositoryTagsRequest) {
 func NewDeleteRepositoryTagsResponse() (response *DeleteRepositoryTagsResponse) {
     response = &DeleteRepositoryTagsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRepositoryTags
@@ -2151,8 +2182,9 @@ func NewDeleteSecurityPolicyRequest() (request *DeleteSecurityPolicyRequest) {
 func NewDeleteSecurityPolicyResponse() (response *DeleteSecurityPolicyResponse) {
     response = &DeleteSecurityPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSecurityPolicy
@@ -2221,8 +2253,9 @@ func NewDeleteServiceAccountRequest() (request *DeleteServiceAccountRequest) {
 func NewDeleteServiceAccountResponse() (response *DeleteServiceAccountResponse) {
     response = &DeleteServiceAccountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteServiceAccount
@@ -2277,8 +2310,9 @@ func NewDeleteSignaturePolicyRequest() (request *DeleteSignaturePolicyRequest) {
 func NewDeleteSignaturePolicyResponse() (response *DeleteSignaturePolicyResponse) {
     response = &DeleteSignaturePolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSignaturePolicy
@@ -2355,8 +2389,9 @@ func NewDeleteTagRetentionRuleRequest() (request *DeleteTagRetentionRuleRequest)
 func NewDeleteTagRetentionRuleResponse() (response *DeleteTagRetentionRuleResponse) {
     response = &DeleteTagRetentionRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteTagRetentionRule
@@ -2427,8 +2462,9 @@ func NewDeleteWebhookTriggerRequest() (request *DeleteWebhookTriggerRequest) {
 func NewDeleteWebhookTriggerResponse() (response *DeleteWebhookTriggerResponse) {
     response = &DeleteWebhookTriggerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteWebhookTrigger
@@ -2489,8 +2525,9 @@ func NewDescribeChartDownloadInfoRequest() (request *DescribeChartDownloadInfoRe
 func NewDescribeChartDownloadInfoResponse() (response *DescribeChartDownloadInfoResponse) {
     response = &DescribeChartDownloadInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeChartDownloadInfo
@@ -2543,8 +2580,9 @@ func NewDescribeCustomAccountsRequest() (request *DescribeCustomAccountsRequest)
 func NewDescribeCustomAccountsResponse() (response *DescribeCustomAccountsResponse) {
     response = &DescribeCustomAccountsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCustomAccounts
@@ -2601,8 +2639,9 @@ func NewDescribeExternalEndpointStatusRequest() (request *DescribeExternalEndpoi
 func NewDescribeExternalEndpointStatusResponse() (response *DescribeExternalEndpointStatusResponse) {
     response = &DescribeExternalEndpointStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeExternalEndpointStatus
@@ -2671,8 +2710,9 @@ func NewDescribeGCJobsRequest() (request *DescribeGCJobsRequest) {
 func NewDescribeGCJobsResponse() (response *DescribeGCJobsResponse) {
     response = &DescribeGCJobsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeGCJobs
@@ -2733,8 +2773,9 @@ func NewDescribeImageAccelerateServiceRequest() (request *DescribeImageAccelerat
 func NewDescribeImageAccelerateServiceResponse() (response *DescribeImageAccelerateServiceResponse) {
     response = &DescribeImageAccelerateServiceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImageAccelerateService
@@ -2793,8 +2834,9 @@ func NewDescribeImageManifestsRequest() (request *DescribeImageManifestsRequest)
 func NewDescribeImageManifestsResponse() (response *DescribeImageManifestsResponse) {
     response = &DescribeImageManifestsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImageManifests
@@ -2865,8 +2907,9 @@ func NewDescribeImagesRequest() (request *DescribeImagesRequest) {
 func NewDescribeImagesResponse() (response *DescribeImagesResponse) {
     response = &DescribeImagesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImages
@@ -2937,8 +2980,9 @@ func NewDescribeImmutableTagRulesRequest() (request *DescribeImmutableTagRulesRe
 func NewDescribeImmutableTagRulesResponse() (response *DescribeImmutableTagRulesResponse) {
     response = &DescribeImmutableTagRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImmutableTagRules
@@ -3001,8 +3045,9 @@ func NewDescribeInstanceAllNamespacesRequest() (request *DescribeInstanceAllName
 func NewDescribeInstanceAllNamespacesResponse() (response *DescribeInstanceAllNamespacesResponse) {
     response = &DescribeInstanceAllNamespacesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceAllNamespaces
@@ -3077,8 +3122,9 @@ func NewDescribeInstanceCustomizedDomainRequest() (request *DescribeInstanceCust
 func NewDescribeInstanceCustomizedDomainResponse() (response *DescribeInstanceCustomizedDomainResponse) {
     response = &DescribeInstanceCustomizedDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceCustomizedDomain
@@ -3147,8 +3193,9 @@ func NewDescribeInstanceStatusRequest() (request *DescribeInstanceStatusRequest)
 func NewDescribeInstanceStatusResponse() (response *DescribeInstanceStatusResponse) {
     response = &DescribeInstanceStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceStatus
@@ -3207,8 +3254,9 @@ func NewDescribeInstanceTokenRequest() (request *DescribeInstanceTokenRequest) {
 func NewDescribeInstanceTokenResponse() (response *DescribeInstanceTokenResponse) {
     response = &DescribeInstanceTokenResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceToken
@@ -3265,8 +3313,9 @@ func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
 func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
     response = &DescribeInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstances
@@ -3331,8 +3380,9 @@ func NewDescribeInternalEndpointsRequest() (request *DescribeInternalEndpointsRe
 func NewDescribeInternalEndpointsResponse() (response *DescribeInternalEndpointsResponse) {
     response = &DescribeInternalEndpointsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInternalEndpoints
@@ -3391,8 +3441,9 @@ func NewDescribeNamespacesRequest() (request *DescribeNamespacesRequest) {
 func NewDescribeNamespacesResponse() (response *DescribeNamespacesResponse) {
     response = &DescribeNamespacesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeNamespaces
@@ -3477,8 +3528,9 @@ func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
 func NewDescribeRegionsResponse() (response *DescribeRegionsResponse) {
     response = &DescribeRegionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRegions
@@ -3533,8 +3585,9 @@ func NewDescribeReplicationInstanceCreateTasksRequest() (request *DescribeReplic
 func NewDescribeReplicationInstanceCreateTasksResponse() (response *DescribeReplicationInstanceCreateTasksResponse) {
     response = &DescribeReplicationInstanceCreateTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeReplicationInstanceCreateTasks
@@ -3593,8 +3646,9 @@ func NewDescribeReplicationInstanceSyncStatusRequest() (request *DescribeReplica
 func NewDescribeReplicationInstanceSyncStatusResponse() (response *DescribeReplicationInstanceSyncStatusResponse) {
     response = &DescribeReplicationInstanceSyncStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeReplicationInstanceSyncStatus
@@ -3653,8 +3707,9 @@ func NewDescribeReplicationInstancesRequest() (request *DescribeReplicationInsta
 func NewDescribeReplicationInstancesResponse() (response *DescribeReplicationInstancesResponse) {
     response = &DescribeReplicationInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeReplicationInstances
@@ -3717,8 +3772,9 @@ func NewDescribeRepositoriesRequest() (request *DescribeRepositoriesRequest) {
 func NewDescribeRepositoriesResponse() (response *DescribeRepositoriesResponse) {
     response = &DescribeRepositoriesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRepositories
@@ -3793,8 +3849,9 @@ func NewDescribeSecurityPoliciesRequest() (request *DescribeSecurityPoliciesRequ
 func NewDescribeSecurityPoliciesResponse() (response *DescribeSecurityPoliciesResponse) {
     response = &DescribeSecurityPoliciesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSecurityPolicies
@@ -3865,8 +3922,9 @@ func NewDescribeServiceAccountsRequest() (request *DescribeServiceAccountsReques
 func NewDescribeServiceAccountsResponse() (response *DescribeServiceAccountsResponse) {
     response = &DescribeServiceAccountsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeServiceAccounts
@@ -3923,8 +3981,9 @@ func NewDescribeTagRetentionExecutionRequest() (request *DescribeTagRetentionExe
 func NewDescribeTagRetentionExecutionResponse() (response *DescribeTagRetentionExecutionResponse) {
     response = &DescribeTagRetentionExecutionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTagRetentionExecution
@@ -3995,8 +4054,9 @@ func NewDescribeTagRetentionExecutionTaskRequest() (request *DescribeTagRetentio
 func NewDescribeTagRetentionExecutionTaskResponse() (response *DescribeTagRetentionExecutionTaskResponse) {
     response = &DescribeTagRetentionExecutionTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTagRetentionExecutionTask
@@ -4065,8 +4125,9 @@ func NewDescribeTagRetentionRulesRequest() (request *DescribeTagRetentionRulesRe
 func NewDescribeTagRetentionRulesResponse() (response *DescribeTagRetentionRulesResponse) {
     response = &DescribeTagRetentionRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTagRetentionRules
@@ -4141,8 +4202,9 @@ func NewDescribeWebhookTriggerRequest() (request *DescribeWebhookTriggerRequest)
 func NewDescribeWebhookTriggerResponse() (response *DescribeWebhookTriggerResponse) {
     response = &DescribeWebhookTriggerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeWebhookTrigger
@@ -4203,8 +4265,9 @@ func NewDescribeWebhookTriggerLogRequest() (request *DescribeWebhookTriggerLogRe
 func NewDescribeWebhookTriggerLogResponse() (response *DescribeWebhookTriggerLogResponse) {
     response = &DescribeWebhookTriggerLogResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeWebhookTriggerLog
@@ -4263,8 +4326,9 @@ func NewDownloadHelmChartRequest() (request *DownloadHelmChartRequest) {
 func NewDownloadHelmChartResponse() (response *DownloadHelmChartResponse) {
     response = &DownloadHelmChartResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DownloadHelmChart
@@ -4317,8 +4381,9 @@ func NewManageExternalEndpointRequest() (request *ManageExternalEndpointRequest)
 func NewManageExternalEndpointResponse() (response *ManageExternalEndpointResponse) {
     response = &ManageExternalEndpointResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ManageExternalEndpoint
@@ -4377,8 +4442,9 @@ func NewManageInternalEndpointRequest() (request *ManageInternalEndpointRequest)
 func NewManageInternalEndpointResponse() (response *ManageInternalEndpointResponse) {
     response = &ManageInternalEndpointResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ManageInternalEndpoint
@@ -4449,8 +4515,9 @@ func NewManageReplicationRequest() (request *ManageReplicationRequest) {
 func NewManageReplicationResponse() (response *ManageReplicationResponse) {
     response = &ManageReplicationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ManageReplication
@@ -4523,8 +4590,9 @@ func NewModifyCustomAccountRequest() (request *ModifyCustomAccountRequest) {
 func NewModifyCustomAccountResponse() (response *ModifyCustomAccountResponse) {
     response = &ModifyCustomAccountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyCustomAccount
@@ -4579,8 +4647,9 @@ func NewModifyImmutableTagRulesRequest() (request *ModifyImmutableTagRulesReques
 func NewModifyImmutableTagRulesResponse() (response *ModifyImmutableTagRulesResponse) {
     response = &ModifyImmutableTagRulesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyImmutableTagRules
@@ -4637,8 +4706,9 @@ func NewModifyInstanceRequest() (request *ModifyInstanceRequest) {
 func NewModifyInstanceResponse() (response *ModifyInstanceResponse) {
     response = &ModifyInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyInstance
@@ -4703,8 +4773,9 @@ func NewModifyInstanceTokenRequest() (request *ModifyInstanceTokenRequest) {
 func NewModifyInstanceTokenResponse() (response *ModifyInstanceTokenResponse) {
     response = &ModifyInstanceTokenResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyInstanceToken
@@ -4763,8 +4834,9 @@ func NewModifyNamespaceRequest() (request *ModifyNamespaceRequest) {
 func NewModifyNamespaceResponse() (response *ModifyNamespaceResponse) {
     response = &ModifyNamespaceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyNamespace
@@ -4833,8 +4905,9 @@ func NewModifyRepositoryRequest() (request *ModifyRepositoryRequest) {
 func NewModifyRepositoryResponse() (response *ModifyRepositoryResponse) {
     response = &ModifyRepositoryResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRepository
@@ -4899,8 +4972,9 @@ func NewModifySecurityPolicyRequest() (request *ModifySecurityPolicyRequest) {
 func NewModifySecurityPolicyResponse() (response *ModifySecurityPolicyResponse) {
     response = &ModifySecurityPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifySecurityPolicy
@@ -4959,8 +5033,9 @@ func NewModifyServiceAccountRequest() (request *ModifyServiceAccountRequest) {
 func NewModifyServiceAccountResponse() (response *ModifyServiceAccountResponse) {
     response = &ModifyServiceAccountResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyServiceAccount
@@ -5015,8 +5090,9 @@ func NewModifyTagRetentionRuleRequest() (request *ModifyTagRetentionRuleRequest)
 func NewModifyTagRetentionRuleResponse() (response *ModifyTagRetentionRuleResponse) {
     response = &ModifyTagRetentionRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyTagRetentionRule
@@ -5087,8 +5163,9 @@ func NewModifyWebhookTriggerRequest() (request *ModifyWebhookTriggerRequest) {
 func NewModifyWebhookTriggerResponse() (response *ModifyWebhookTriggerResponse) {
     response = &ModifyWebhookTriggerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyWebhookTrigger
@@ -5147,8 +5224,9 @@ func NewRenewInstanceRequest() (request *RenewInstanceRequest) {
 func NewRenewInstanceResponse() (response *RenewInstanceResponse) {
     response = &RenewInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RenewInstance

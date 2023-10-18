@@ -59,8 +59,9 @@ func NewDescribeCaptchaResultRequest() (request *DescribeCaptchaResultRequest) {
 func NewDescribeCaptchaResultResponse() (response *DescribeCaptchaResultResponse) {
     response = &DescribeCaptchaResultResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCaptchaResult

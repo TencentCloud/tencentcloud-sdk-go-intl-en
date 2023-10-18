@@ -59,8 +59,9 @@ func NewSendEmailRequest() (request *SendEmailRequest) {
 func NewSendEmailResponse() (response *SendEmailResponse) {
     response = &SendEmailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SendEmail
@@ -137,8 +138,9 @@ func NewSendTemplatedEmailRequest() (request *SendTemplatedEmailRequest) {
 func NewSendTemplatedEmailResponse() (response *SendTemplatedEmailResponse) {
     response = &SendTemplatedEmailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SendTemplatedEmail

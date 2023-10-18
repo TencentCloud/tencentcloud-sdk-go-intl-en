@@ -59,8 +59,9 @@ func NewAcquireClusterAdminRoleRequest() (request *AcquireClusterAdminRoleReques
 func NewAcquireClusterAdminRoleResponse() (response *AcquireClusterAdminRoleResponse) {
     response = &AcquireClusterAdminRoleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AcquireClusterAdminRole
@@ -139,8 +140,9 @@ func NewAddExistedInstancesRequest() (request *AddExistedInstancesRequest) {
 func NewAddExistedInstancesResponse() (response *AddExistedInstancesResponse) {
     response = &AddExistedInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AddExistedInstances
@@ -225,8 +227,9 @@ func NewAddNodeToNodePoolRequest() (request *AddNodeToNodePoolRequest) {
 func NewAddNodeToNodePoolResponse() (response *AddNodeToNodePoolResponse) {
     response = &AddNodeToNodePoolResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AddNodeToNodePool
@@ -277,8 +280,9 @@ func NewAddVpcCniSubnetsRequest() (request *AddVpcCniSubnetsRequest) {
 func NewAddVpcCniSubnetsResponse() (response *AddVpcCniSubnetsResponse) {
     response = &AddVpcCniSubnetsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AddVpcCniSubnets
@@ -345,8 +349,9 @@ func NewCheckEdgeClusterCIDRRequest() (request *CheckEdgeClusterCIDRRequest) {
 func NewCheckEdgeClusterCIDRResponse() (response *CheckEdgeClusterCIDRResponse) {
     response = &CheckEdgeClusterCIDRResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CheckEdgeClusterCIDR
@@ -441,8 +446,9 @@ func NewCheckInstancesUpgradeAbleRequest() (request *CheckInstancesUpgradeAbleRe
 func NewCheckInstancesUpgradeAbleResponse() (response *CheckInstancesUpgradeAbleResponse) {
     response = &CheckInstancesUpgradeAbleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CheckInstancesUpgradeAble
@@ -513,8 +519,9 @@ func NewCreateBackupStorageLocationRequest() (request *CreateBackupStorageLocati
 func NewCreateBackupStorageLocationResponse() (response *CreateBackupStorageLocationResponse) {
     response = &CreateBackupStorageLocationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateBackupStorageLocation
@@ -569,8 +576,9 @@ func NewCreateClusterRequest() (request *CreateClusterRequest) {
 func NewCreateClusterResponse() (response *CreateClusterResponse) {
     response = &CreateClusterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateCluster
@@ -743,8 +751,9 @@ func NewCreateClusterEndpointRequest() (request *CreateClusterEndpointRequest) {
 func NewCreateClusterEndpointResponse() (response *CreateClusterEndpointResponse) {
     response = &CreateClusterEndpointResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateClusterEndpoint
@@ -831,8 +840,9 @@ func NewCreateClusterEndpointVipRequest() (request *CreateClusterEndpointVipRequ
 func NewCreateClusterEndpointVipResponse() (response *CreateClusterEndpointVipResponse) {
     response = &CreateClusterEndpointVipResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateClusterEndpointVip
@@ -915,8 +925,9 @@ func NewCreateClusterInstancesRequest() (request *CreateClusterInstancesRequest)
 func NewCreateClusterInstancesResponse() (response *CreateClusterInstancesResponse) {
     response = &CreateClusterInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateClusterInstances
@@ -1041,8 +1052,9 @@ func NewCreateClusterNodePoolRequest() (request *CreateClusterNodePoolRequest) {
 func NewCreateClusterNodePoolResponse() (response *CreateClusterNodePoolResponse) {
     response = &CreateClusterNodePoolResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateClusterNodePool
@@ -1115,8 +1127,9 @@ func NewCreateClusterRouteTableRequest() (request *CreateClusterRouteTableReques
 func NewCreateClusterRouteTableResponse() (response *CreateClusterRouteTableResponse) {
     response = &CreateClusterRouteTableResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateClusterRouteTable
@@ -1193,8 +1206,9 @@ func NewCreateClusterVirtualNodeRequest() (request *CreateClusterVirtualNodeRequ
 func NewCreateClusterVirtualNodeResponse() (response *CreateClusterVirtualNodeResponse) {
     response = &CreateClusterVirtualNodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateClusterVirtualNode
@@ -1253,8 +1267,9 @@ func NewCreateClusterVirtualNodePoolRequest() (request *CreateClusterVirtualNode
 func NewCreateClusterVirtualNodePoolResponse() (response *CreateClusterVirtualNodePoolResponse) {
     response = &CreateClusterVirtualNodePoolResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateClusterVirtualNodePool
@@ -1317,8 +1332,9 @@ func NewCreateECMInstancesRequest() (request *CreateECMInstancesRequest) {
 func NewCreateECMInstancesResponse() (response *CreateECMInstancesResponse) {
     response = &CreateECMInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateECMInstances
@@ -1387,8 +1403,9 @@ func NewCreateEdgeCVMInstancesRequest() (request *CreateEdgeCVMInstancesRequest)
 func NewCreateEdgeCVMInstancesResponse() (response *CreateEdgeCVMInstancesResponse) {
     response = &CreateEdgeCVMInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateEdgeCVMInstances
@@ -1457,8 +1474,9 @@ func NewCreateEdgeLogConfigRequest() (request *CreateEdgeLogConfigRequest) {
 func NewCreateEdgeLogConfigResponse() (response *CreateEdgeLogConfigResponse) {
     response = &CreateEdgeLogConfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateEdgeLogConfig
@@ -1507,8 +1525,9 @@ func NewCreatePrometheusAlertRuleRequest() (request *CreatePrometheusAlertRuleRe
 func NewCreatePrometheusAlertRuleResponse() (response *CreatePrometheusAlertRuleResponse) {
     response = &CreatePrometheusAlertRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreatePrometheusAlertRule
@@ -1565,8 +1584,9 @@ func NewCreateTKEEdgeClusterRequest() (request *CreateTKEEdgeClusterRequest) {
 func NewCreateTKEEdgeClusterResponse() (response *CreateTKEEdgeClusterResponse) {
     response = &CreateTKEEdgeClusterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTKEEdgeCluster
@@ -1633,8 +1653,9 @@ func NewDeleteAddonRequest() (request *DeleteAddonRequest) {
 func NewDeleteAddonResponse() (response *DeleteAddonResponse) {
     response = &DeleteAddonResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteAddon
@@ -1701,8 +1722,9 @@ func NewDeleteBackupStorageLocationRequest() (request *DeleteBackupStorageLocati
 func NewDeleteBackupStorageLocationResponse() (response *DeleteBackupStorageLocationResponse) {
     response = &DeleteBackupStorageLocationResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteBackupStorageLocation
@@ -1755,8 +1777,9 @@ func NewDeleteClusterRequest() (request *DeleteClusterRequest) {
 func NewDeleteClusterResponse() (response *DeleteClusterResponse) {
     response = &DeleteClusterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteCluster
@@ -1843,8 +1866,9 @@ func NewDeleteClusterAsGroupsRequest() (request *DeleteClusterAsGroupsRequest) {
 func NewDeleteClusterAsGroupsResponse() (response *DeleteClusterAsGroupsResponse) {
     response = &DeleteClusterAsGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteClusterAsGroups
@@ -1929,8 +1953,9 @@ func NewDeleteClusterEndpointRequest() (request *DeleteClusterEndpointRequest) {
 func NewDeleteClusterEndpointResponse() (response *DeleteClusterEndpointResponse) {
     response = &DeleteClusterEndpointResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteClusterEndpoint
@@ -2019,8 +2044,9 @@ func NewDeleteClusterEndpointVipRequest() (request *DeleteClusterEndpointVipRequ
 func NewDeleteClusterEndpointVipResponse() (response *DeleteClusterEndpointVipResponse) {
     response = &DeleteClusterEndpointVipResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteClusterEndpointVip
@@ -2103,8 +2129,9 @@ func NewDeleteClusterInstancesRequest() (request *DeleteClusterInstancesRequest)
 func NewDeleteClusterInstancesResponse() (response *DeleteClusterInstancesResponse) {
     response = &DeleteClusterInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteClusterInstances
@@ -2181,8 +2208,9 @@ func NewDeleteClusterNodePoolRequest() (request *DeleteClusterNodePoolRequest) {
 func NewDeleteClusterNodePoolResponse() (response *DeleteClusterNodePoolResponse) {
     response = &DeleteClusterNodePoolResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteClusterNodePool
@@ -2239,8 +2267,9 @@ func NewDeleteClusterRouteRequest() (request *DeleteClusterRouteRequest) {
 func NewDeleteClusterRouteResponse() (response *DeleteClusterRouteResponse) {
     response = &DeleteClusterRouteResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteClusterRoute
@@ -2301,8 +2330,9 @@ func NewDeleteClusterRouteTableRequest() (request *DeleteClusterRouteTableReques
 func NewDeleteClusterRouteTableResponse() (response *DeleteClusterRouteTableResponse) {
     response = &DeleteClusterRouteTableResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteClusterRouteTable
@@ -2359,8 +2389,9 @@ func NewDeleteClusterVirtualNodeRequest() (request *DeleteClusterVirtualNodeRequ
 func NewDeleteClusterVirtualNodeResponse() (response *DeleteClusterVirtualNodeResponse) {
     response = &DeleteClusterVirtualNodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteClusterVirtualNode
@@ -2413,8 +2444,9 @@ func NewDeleteClusterVirtualNodePoolRequest() (request *DeleteClusterVirtualNode
 func NewDeleteClusterVirtualNodePoolResponse() (response *DeleteClusterVirtualNodePoolResponse) {
     response = &DeleteClusterVirtualNodePoolResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteClusterVirtualNodePool
@@ -2469,8 +2501,9 @@ func NewDeleteECMInstancesRequest() (request *DeleteECMInstancesRequest) {
 func NewDeleteECMInstancesResponse() (response *DeleteECMInstancesResponse) {
     response = &DeleteECMInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteECMInstances
@@ -2539,8 +2572,9 @@ func NewDeleteEdgeCVMInstancesRequest() (request *DeleteEdgeCVMInstancesRequest)
 func NewDeleteEdgeCVMInstancesResponse() (response *DeleteEdgeCVMInstancesResponse) {
     response = &DeleteEdgeCVMInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteEdgeCVMInstances
@@ -2609,8 +2643,9 @@ func NewDeleteEdgeClusterInstancesRequest() (request *DeleteEdgeClusterInstances
 func NewDeleteEdgeClusterInstancesResponse() (response *DeleteEdgeClusterInstancesResponse) {
     response = &DeleteEdgeClusterInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteEdgeClusterInstances
@@ -2679,8 +2714,9 @@ func NewDeletePrometheusAlertRuleRequest() (request *DeletePrometheusAlertRuleRe
 func NewDeletePrometheusAlertRuleResponse() (response *DeletePrometheusAlertRuleResponse) {
     response = &DeletePrometheusAlertRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeletePrometheusAlertRule
@@ -2735,8 +2771,9 @@ func NewDeleteTKEEdgeClusterRequest() (request *DeleteTKEEdgeClusterRequest) {
 func NewDeleteTKEEdgeClusterResponse() (response *DeleteTKEEdgeClusterResponse) {
     response = &DeleteTKEEdgeClusterResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteTKEEdgeCluster
@@ -2803,8 +2840,9 @@ func NewDescribeAddonRequest() (request *DescribeAddonRequest) {
 func NewDescribeAddonResponse() (response *DescribeAddonResponse) {
     response = &DescribeAddonResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAddon
@@ -2871,8 +2909,9 @@ func NewDescribeAddonValuesRequest() (request *DescribeAddonValuesRequest) {
 func NewDescribeAddonValuesResponse() (response *DescribeAddonValuesResponse) {
     response = &DescribeAddonValuesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAddonValues
@@ -2919,8 +2958,9 @@ func NewDescribeAvailableClusterVersionRequest() (request *DescribeAvailableClus
 func NewDescribeAvailableClusterVersionResponse() (response *DescribeAvailableClusterVersionResponse) {
     response = &DescribeAvailableClusterVersionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAvailableClusterVersion
@@ -2981,8 +3021,9 @@ func NewDescribeAvailableTKEEdgeVersionRequest() (request *DescribeAvailableTKEE
 func NewDescribeAvailableTKEEdgeVersionResponse() (response *DescribeAvailableTKEEdgeVersionResponse) {
     response = &DescribeAvailableTKEEdgeVersionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAvailableTKEEdgeVersion
@@ -3047,8 +3088,9 @@ func NewDescribeBackupStorageLocationsRequest() (request *DescribeBackupStorageL
 func NewDescribeBackupStorageLocationsResponse() (response *DescribeBackupStorageLocationsResponse) {
     response = &DescribeBackupStorageLocationsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeBackupStorageLocations
@@ -3101,8 +3143,9 @@ func NewDescribeClusterAsGroupOptionRequest() (request *DescribeClusterAsGroupOp
 func NewDescribeClusterAsGroupOptionResponse() (response *DescribeClusterAsGroupOptionResponse) {
     response = &DescribeClusterAsGroupOptionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterAsGroupOption
@@ -3175,8 +3218,9 @@ func NewDescribeClusterAsGroupsRequest() (request *DescribeClusterAsGroupsReques
 func NewDescribeClusterAsGroupsResponse() (response *DescribeClusterAsGroupsResponse) {
     response = &DescribeClusterAsGroupsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterAsGroups
@@ -3253,8 +3297,9 @@ func NewDescribeClusterAuthenticationOptionsRequest() (request *DescribeClusterA
 func NewDescribeClusterAuthenticationOptionsResponse() (response *DescribeClusterAuthenticationOptionsResponse) {
     response = &DescribeClusterAuthenticationOptionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterAuthenticationOptions
@@ -3309,8 +3354,9 @@ func NewDescribeClusterCommonNamesRequest() (request *DescribeClusterCommonNames
 func NewDescribeClusterCommonNamesResponse() (response *DescribeClusterCommonNamesResponse) {
     response = &DescribeClusterCommonNamesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterCommonNames
@@ -3375,8 +3421,9 @@ func NewDescribeClusterEndpointStatusRequest() (request *DescribeClusterEndpoint
 func NewDescribeClusterEndpointStatusResponse() (response *DescribeClusterEndpointStatusResponse) {
     response = &DescribeClusterEndpointStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterEndpointStatus
@@ -3469,8 +3516,9 @@ func NewDescribeClusterEndpointVipStatusRequest() (request *DescribeClusterEndpo
 func NewDescribeClusterEndpointVipStatusResponse() (response *DescribeClusterEndpointVipStatusResponse) {
     response = &DescribeClusterEndpointVipStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterEndpointVipStatus
@@ -3559,8 +3607,9 @@ func NewDescribeClusterEndpointsRequest() (request *DescribeClusterEndpointsRequ
 func NewDescribeClusterEndpointsResponse() (response *DescribeClusterEndpointsResponse) {
     response = &DescribeClusterEndpointsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterEndpoints
@@ -3631,8 +3680,9 @@ func NewDescribeClusterInstancesRequest() (request *DescribeClusterInstancesRequ
 func NewDescribeClusterInstancesResponse() (response *DescribeClusterInstancesResponse) {
     response = &DescribeClusterInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterInstances
@@ -3703,8 +3753,9 @@ func NewDescribeClusterKubeconfigRequest() (request *DescribeClusterKubeconfigRe
 func NewDescribeClusterKubeconfigResponse() (response *DescribeClusterKubeconfigResponse) {
     response = &DescribeClusterKubeconfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterKubeconfig
@@ -3793,8 +3844,9 @@ func NewDescribeClusterLevelAttributeRequest() (request *DescribeClusterLevelAtt
 func NewDescribeClusterLevelAttributeResponse() (response *DescribeClusterLevelAttributeResponse) {
     response = &DescribeClusterLevelAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterLevelAttribute
@@ -3847,8 +3899,9 @@ func NewDescribeClusterLevelChangeRecordsRequest() (request *DescribeClusterLeve
 func NewDescribeClusterLevelChangeRecordsResponse() (response *DescribeClusterLevelChangeRecordsResponse) {
     response = &DescribeClusterLevelChangeRecordsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterLevelChangeRecords
@@ -3901,8 +3954,9 @@ func NewDescribeClusterNodePoolDetailRequest() (request *DescribeClusterNodePool
 func NewDescribeClusterNodePoolDetailResponse() (response *DescribeClusterNodePoolDetailResponse) {
     response = &DescribeClusterNodePoolDetailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterNodePoolDetail
@@ -3957,8 +4011,9 @@ func NewDescribeClusterNodePoolsRequest() (request *DescribeClusterNodePoolsRequ
 func NewDescribeClusterNodePoolsResponse() (response *DescribeClusterNodePoolsResponse) {
     response = &DescribeClusterNodePoolsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterNodePools
@@ -4013,8 +4068,9 @@ func NewDescribeClusterRouteTablesRequest() (request *DescribeClusterRouteTables
 func NewDescribeClusterRouteTablesResponse() (response *DescribeClusterRouteTablesResponse) {
     response = &DescribeClusterRouteTablesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterRouteTables
@@ -4061,8 +4117,9 @@ func NewDescribeClusterRoutesRequest() (request *DescribeClusterRoutesRequest) {
 func NewDescribeClusterRoutesResponse() (response *DescribeClusterRoutesResponse) {
     response = &DescribeClusterRoutesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterRoutes
@@ -4115,8 +4172,9 @@ func NewDescribeClusterSecurityRequest() (request *DescribeClusterSecurityReques
 func NewDescribeClusterSecurityResponse() (response *DescribeClusterSecurityResponse) {
     response = &DescribeClusterSecurityResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterSecurity
@@ -4225,8 +4283,9 @@ func NewDescribeClusterStatusRequest() (request *DescribeClusterStatusRequest) {
 func NewDescribeClusterStatusResponse() (response *DescribeClusterStatusResponse) {
     response = &DescribeClusterStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterStatus
@@ -4305,8 +4364,9 @@ func NewDescribeClusterVirtualNodeRequest() (request *DescribeClusterVirtualNode
 func NewDescribeClusterVirtualNodeResponse() (response *DescribeClusterVirtualNodeResponse) {
     response = &DescribeClusterVirtualNodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterVirtualNode
@@ -4363,8 +4423,9 @@ func NewDescribeClusterVirtualNodePoolsRequest() (request *DescribeClusterVirtua
 func NewDescribeClusterVirtualNodePoolsResponse() (response *DescribeClusterVirtualNodePoolsResponse) {
     response = &DescribeClusterVirtualNodePoolsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusterVirtualNodePools
@@ -4419,8 +4480,9 @@ func NewDescribeClustersRequest() (request *DescribeClustersRequest) {
 func NewDescribeClustersResponse() (response *DescribeClustersResponse) {
     response = &DescribeClustersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeClusters
@@ -4497,8 +4559,9 @@ func NewDescribeECMInstancesRequest() (request *DescribeECMInstancesRequest) {
 func NewDescribeECMInstancesResponse() (response *DescribeECMInstancesResponse) {
     response = &DescribeECMInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeECMInstances
@@ -4567,8 +4630,9 @@ func NewDescribeEdgeAvailableExtraArgsRequest() (request *DescribeEdgeAvailableE
 func NewDescribeEdgeAvailableExtraArgsResponse() (response *DescribeEdgeAvailableExtraArgsResponse) {
     response = &DescribeEdgeAvailableExtraArgsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeEdgeAvailableExtraArgs
@@ -4617,8 +4681,9 @@ func NewDescribeEdgeCVMInstancesRequest() (request *DescribeEdgeCVMInstancesRequ
 func NewDescribeEdgeCVMInstancesResponse() (response *DescribeEdgeCVMInstancesResponse) {
     response = &DescribeEdgeCVMInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeEdgeCVMInstances
@@ -4687,8 +4752,9 @@ func NewDescribeEdgeClusterExtraArgsRequest() (request *DescribeEdgeClusterExtra
 func NewDescribeEdgeClusterExtraArgsResponse() (response *DescribeEdgeClusterExtraArgsResponse) {
     response = &DescribeEdgeClusterExtraArgsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeEdgeClusterExtraArgs
@@ -4747,8 +4813,9 @@ func NewDescribeEdgeClusterInstancesRequest() (request *DescribeEdgeClusterInsta
 func NewDescribeEdgeClusterInstancesResponse() (response *DescribeEdgeClusterInstancesResponse) {
     response = &DescribeEdgeClusterInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeEdgeClusterInstances
@@ -4817,8 +4884,9 @@ func NewDescribeEdgeClusterUpgradeInfoRequest() (request *DescribeEdgeClusterUpg
 func NewDescribeEdgeClusterUpgradeInfoResponse() (response *DescribeEdgeClusterUpgradeInfoResponse) {
     response = &DescribeEdgeClusterUpgradeInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeEdgeClusterUpgradeInfo
@@ -4869,8 +4937,9 @@ func NewDescribeEdgeLogSwitchesRequest() (request *DescribeEdgeLogSwitchesReques
 func NewDescribeEdgeLogSwitchesResponse() (response *DescribeEdgeLogSwitchesResponse) {
     response = &DescribeEdgeLogSwitchesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeEdgeLogSwitches
@@ -4929,8 +4998,9 @@ func NewDescribeEnableVpcCniProgressRequest() (request *DescribeEnableVpcCniProg
 func NewDescribeEnableVpcCniProgressResponse() (response *DescribeEnableVpcCniProgressResponse) {
     response = &DescribeEnableVpcCniProgressResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeEnableVpcCniProgress
@@ -4981,8 +5051,9 @@ func NewDescribeEncryptionStatusRequest() (request *DescribeEncryptionStatusRequ
 func NewDescribeEncryptionStatusResponse() (response *DescribeEncryptionStatusResponse) {
     response = &DescribeEncryptionStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeEncryptionStatus
@@ -5033,8 +5104,9 @@ func NewDescribeExistedInstancesRequest() (request *DescribeExistedInstancesRequ
 func NewDescribeExistedInstancesResponse() (response *DescribeExistedInstancesResponse) {
     response = &DescribeExistedInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeExistedInstances
@@ -5149,8 +5221,9 @@ func NewDescribeImagesRequest() (request *DescribeImagesRequest) {
 func NewDescribeImagesResponse() (response *DescribeImagesResponse) {
     response = &DescribeImagesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeImages
@@ -5233,8 +5306,9 @@ func NewDescribePrometheusInstanceRequest() (request *DescribePrometheusInstance
 func NewDescribePrometheusInstanceResponse() (response *DescribePrometheusInstanceResponse) {
     response = &DescribePrometheusInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePrometheusInstance
@@ -5303,8 +5377,9 @@ func NewDescribeRegionsRequest() (request *DescribeRegionsRequest) {
 func NewDescribeRegionsResponse() (response *DescribeRegionsResponse) {
     response = &DescribeRegionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRegions
@@ -5385,8 +5460,9 @@ func NewDescribeResourceUsageRequest() (request *DescribeResourceUsageRequest) {
 func NewDescribeResourceUsageResponse() (response *DescribeResourceUsageResponse) {
     response = &DescribeResourceUsageResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeResourceUsage
@@ -5445,8 +5521,9 @@ func NewDescribeRouteTableConflictsRequest() (request *DescribeRouteTableConflic
 func NewDescribeRouteTableConflictsResponse() (response *DescribeRouteTableConflictsResponse) {
     response = &DescribeRouteTableConflictsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRouteTableConflicts
@@ -5509,8 +5586,9 @@ func NewDescribeTKEEdgeClusterCredentialRequest() (request *DescribeTKEEdgeClust
 func NewDescribeTKEEdgeClusterCredentialResponse() (response *DescribeTKEEdgeClusterCredentialResponse) {
     response = &DescribeTKEEdgeClusterCredentialResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTKEEdgeClusterCredential
@@ -5577,8 +5655,9 @@ func NewDescribeTKEEdgeClusterStatusRequest() (request *DescribeTKEEdgeClusterSt
 func NewDescribeTKEEdgeClusterStatusResponse() (response *DescribeTKEEdgeClusterStatusResponse) {
     response = &DescribeTKEEdgeClusterStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTKEEdgeClusterStatus
@@ -5645,8 +5724,9 @@ func NewDescribeTKEEdgeClustersRequest() (request *DescribeTKEEdgeClustersReques
 func NewDescribeTKEEdgeClustersResponse() (response *DescribeTKEEdgeClustersResponse) {
     response = &DescribeTKEEdgeClustersResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTKEEdgeClusters
@@ -5715,8 +5795,9 @@ func NewDescribeTKEEdgeExternalKubeconfigRequest() (request *DescribeTKEEdgeExte
 func NewDescribeTKEEdgeExternalKubeconfigResponse() (response *DescribeTKEEdgeExternalKubeconfigResponse) {
     response = &DescribeTKEEdgeExternalKubeconfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTKEEdgeExternalKubeconfig
@@ -5783,8 +5864,9 @@ func NewDescribeTKEEdgeScriptRequest() (request *DescribeTKEEdgeScriptRequest) {
 func NewDescribeTKEEdgeScriptResponse() (response *DescribeTKEEdgeScriptResponse) {
     response = &DescribeTKEEdgeScriptResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTKEEdgeScript
@@ -5851,8 +5933,9 @@ func NewDescribeVersionsRequest() (request *DescribeVersionsRequest) {
 func NewDescribeVersionsResponse() (response *DescribeVersionsResponse) {
     response = &DescribeVersionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeVersions
@@ -5937,8 +6020,9 @@ func NewDescribeVpcCniPodLimitsRequest() (request *DescribeVpcCniPodLimitsReques
 func NewDescribeVpcCniPodLimitsResponse() (response *DescribeVpcCniPodLimitsResponse) {
     response = &DescribeVpcCniPodLimitsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeVpcCniPodLimits
@@ -6009,8 +6093,9 @@ func NewDisableClusterDeletionProtectionRequest() (request *DisableClusterDeleti
 func NewDisableClusterDeletionProtectionResponse() (response *DisableClusterDeletionProtectionResponse) {
     response = &DisableClusterDeletionProtectionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DisableClusterDeletionProtection
@@ -6061,8 +6146,9 @@ func NewDisableEncryptionProtectionRequest() (request *DisableEncryptionProtecti
 func NewDisableEncryptionProtectionResponse() (response *DisableEncryptionProtectionResponse) {
     response = &DisableEncryptionProtectionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DisableEncryptionProtection
@@ -6113,8 +6199,9 @@ func NewDrainClusterVirtualNodeRequest() (request *DrainClusterVirtualNodeReques
 func NewDrainClusterVirtualNodeResponse() (response *DrainClusterVirtualNodeResponse) {
     response = &DrainClusterVirtualNodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DrainClusterVirtualNode
@@ -6165,8 +6252,9 @@ func NewEnableClusterDeletionProtectionRequest() (request *EnableClusterDeletion
 func NewEnableClusterDeletionProtectionResponse() (response *EnableClusterDeletionProtectionResponse) {
     response = &EnableClusterDeletionProtectionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // EnableClusterDeletionProtection
@@ -6217,8 +6305,9 @@ func NewEnableEncryptionProtectionRequest() (request *EnableEncryptionProtection
 func NewEnableEncryptionProtectionResponse() (response *EnableEncryptionProtectionResponse) {
     response = &EnableEncryptionProtectionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // EnableEncryptionProtection
@@ -6271,8 +6360,9 @@ func NewEnableVpcCniNetworkTypeRequest() (request *EnableVpcCniNetworkTypeReques
 func NewEnableVpcCniNetworkTypeResponse() (response *EnableVpcCniNetworkTypeResponse) {
     response = &EnableVpcCniNetworkTypeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // EnableVpcCniNetworkType
@@ -6327,8 +6417,9 @@ func NewForwardTKEEdgeApplicationRequestV3Request() (request *ForwardTKEEdgeAppl
 func NewForwardTKEEdgeApplicationRequestV3Response() (response *ForwardTKEEdgeApplicationRequestV3Response) {
     response = &ForwardTKEEdgeApplicationRequestV3Response{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ForwardTKEEdgeApplicationRequestV3
@@ -6399,8 +6490,9 @@ func NewGetClusterLevelPriceRequest() (request *GetClusterLevelPriceRequest) {
 func NewGetClusterLevelPriceResponse() (response *GetClusterLevelPriceResponse) {
     response = &GetClusterLevelPriceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetClusterLevelPrice
@@ -6449,8 +6541,9 @@ func NewGetUpgradeInstanceProgressRequest() (request *GetUpgradeInstanceProgress
 func NewGetUpgradeInstanceProgressResponse() (response *GetUpgradeInstanceProgressResponse) {
     response = &GetUpgradeInstanceProgressResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetUpgradeInstanceProgress
@@ -6501,8 +6594,9 @@ func NewInstallAddonRequest() (request *InstallAddonRequest) {
 func NewInstallAddonResponse() (response *InstallAddonResponse) {
     response = &InstallAddonResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InstallAddon
@@ -6553,8 +6647,9 @@ func NewInstallEdgeLogAgentRequest() (request *InstallEdgeLogAgentRequest) {
 func NewInstallEdgeLogAgentResponse() (response *InstallEdgeLogAgentResponse) {
     response = &InstallEdgeLogAgentResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // InstallEdgeLogAgent
@@ -6607,8 +6702,9 @@ func NewModifyClusterAsGroupAttributeRequest() (request *ModifyClusterAsGroupAtt
 func NewModifyClusterAsGroupAttributeResponse() (response *ModifyClusterAsGroupAttributeResponse) {
     response = &ModifyClusterAsGroupAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyClusterAsGroupAttribute
@@ -6699,8 +6795,9 @@ func NewModifyClusterAsGroupOptionAttributeRequest() (request *ModifyClusterAsGr
 func NewModifyClusterAsGroupOptionAttributeResponse() (response *ModifyClusterAsGroupOptionAttributeResponse) {
     response = &ModifyClusterAsGroupOptionAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyClusterAsGroupOptionAttribute
@@ -6783,8 +6880,9 @@ func NewModifyClusterAttributeRequest() (request *ModifyClusterAttributeRequest)
 func NewModifyClusterAttributeResponse() (response *ModifyClusterAttributeResponse) {
     response = &ModifyClusterAttributeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyClusterAttribute
@@ -6865,8 +6963,9 @@ func NewModifyClusterAuthenticationOptionsRequest() (request *ModifyClusterAuthe
 func NewModifyClusterAuthenticationOptionsResponse() (response *ModifyClusterAuthenticationOptionsResponse) {
     response = &ModifyClusterAuthenticationOptionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyClusterAuthenticationOptions
@@ -6923,8 +7022,9 @@ func NewModifyClusterEndpointSPRequest() (request *ModifyClusterEndpointSPReques
 func NewModifyClusterEndpointSPResponse() (response *ModifyClusterEndpointSPResponse) {
     response = &ModifyClusterEndpointSPResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyClusterEndpointSP
@@ -7013,8 +7113,9 @@ func NewModifyClusterNodePoolRequest() (request *ModifyClusterNodePoolRequest) {
 func NewModifyClusterNodePoolResponse() (response *ModifyClusterNodePoolResponse) {
     response = &ModifyClusterNodePoolResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyClusterNodePool
@@ -7077,8 +7178,9 @@ func NewModifyClusterVirtualNodePoolRequest() (request *ModifyClusterVirtualNode
 func NewModifyClusterVirtualNodePoolResponse() (response *ModifyClusterVirtualNodePoolResponse) {
     response = &ModifyClusterVirtualNodePoolResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyClusterVirtualNodePool
@@ -7133,8 +7235,9 @@ func NewModifyNodePoolInstanceTypesRequest() (request *ModifyNodePoolInstanceTyp
 func NewModifyNodePoolInstanceTypesResponse() (response *ModifyNodePoolInstanceTypesResponse) {
     response = &ModifyNodePoolInstanceTypesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyNodePoolInstanceTypes
@@ -7203,8 +7306,9 @@ func NewModifyPrometheusAlertRuleRequest() (request *ModifyPrometheusAlertRuleRe
 func NewModifyPrometheusAlertRuleResponse() (response *ModifyPrometheusAlertRuleResponse) {
     response = &ModifyPrometheusAlertRuleResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyPrometheusAlertRule
@@ -7265,8 +7369,9 @@ func NewRemoveNodeFromNodePoolRequest() (request *RemoveNodeFromNodePoolRequest)
 func NewRemoveNodeFromNodePoolResponse() (response *RemoveNodeFromNodePoolResponse) {
     response = &RemoveNodeFromNodePoolResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RemoveNodeFromNodePool
@@ -7319,8 +7424,9 @@ func NewSetNodePoolNodeProtectionRequest() (request *SetNodePoolNodeProtectionRe
 func NewSetNodePoolNodeProtectionResponse() (response *SetNodePoolNodeProtectionResponse) {
     response = &SetNodePoolNodeProtectionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetNodePoolNodeProtection
@@ -7385,8 +7491,9 @@ func NewUninstallEdgeLogAgentRequest() (request *UninstallEdgeLogAgentRequest) {
 func NewUninstallEdgeLogAgentResponse() (response *UninstallEdgeLogAgentResponse) {
     response = &UninstallEdgeLogAgentResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UninstallEdgeLogAgent
@@ -7437,8 +7544,9 @@ func NewUpdateAddonRequest() (request *UpdateAddonRequest) {
 func NewUpdateAddonResponse() (response *UpdateAddonResponse) {
     response = &UpdateAddonResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateAddon
@@ -7489,8 +7597,9 @@ func NewUpdateClusterKubeconfigRequest() (request *UpdateClusterKubeconfigReques
 func NewUpdateClusterKubeconfigResponse() (response *UpdateClusterKubeconfigResponse) {
     response = &UpdateClusterKubeconfigResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateClusterKubeconfig
@@ -7547,8 +7656,9 @@ func NewUpdateClusterVersionRequest() (request *UpdateClusterVersionRequest) {
 func NewUpdateClusterVersionResponse() (response *UpdateClusterVersionResponse) {
     response = &UpdateClusterVersionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateClusterVersion
@@ -7613,8 +7723,9 @@ func NewUpdateEdgeClusterVersionRequest() (request *UpdateEdgeClusterVersionRequ
 func NewUpdateEdgeClusterVersionResponse() (response *UpdateEdgeClusterVersionResponse) {
     response = &UpdateEdgeClusterVersionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateEdgeClusterVersion
@@ -7679,8 +7790,9 @@ func NewUpgradeClusterInstancesRequest() (request *UpgradeClusterInstancesReques
 func NewUpgradeClusterInstancesResponse() (response *UpgradeClusterInstancesResponse) {
     response = &UpgradeClusterInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpgradeClusterInstances

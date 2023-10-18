@@ -59,8 +59,9 @@ func NewBatchModifyIntlDomainDNSRequest() (request *BatchModifyIntlDomainDNSRequ
 func NewBatchModifyIntlDomainDNSResponse() (response *BatchModifyIntlDomainDNSResponse) {
     response = &BatchModifyIntlDomainDNSResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BatchModifyIntlDomainDNS
@@ -149,8 +150,9 @@ func NewBatchModifyIntlDomainInfoRequest() (request *BatchModifyIntlDomainInfoRe
 func NewBatchModifyIntlDomainInfoResponse() (response *BatchModifyIntlDomainInfoResponse) {
     response = &BatchModifyIntlDomainInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // BatchModifyIntlDomainInfo
@@ -231,8 +233,9 @@ func NewCheckIntlDomainNewRequest() (request *CheckIntlDomainNewRequest) {
 func NewCheckIntlDomainNewResponse() (response *CheckIntlDomainNewResponse) {
     response = &CheckIntlDomainNewResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CheckIntlDomainNew
@@ -305,8 +308,9 @@ func NewCreateIntlDomainBatchRequest() (request *CreateIntlDomainBatchRequest) {
 func NewCreateIntlDomainBatchResponse() (response *CreateIntlDomainBatchResponse) {
     response = &CreateIntlDomainBatchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateIntlDomainBatch
@@ -393,8 +397,9 @@ func NewCreateIntlPhoneEmailRequest() (request *CreateIntlPhoneEmailRequest) {
 func NewCreateIntlPhoneEmailResponse() (response *CreateIntlPhoneEmailResponse) {
     response = &CreateIntlPhoneEmailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateIntlPhoneEmail
@@ -461,8 +466,9 @@ func NewCreateIntlTemplateRequest() (request *CreateIntlTemplateRequest) {
 func NewCreateIntlTemplateResponse() (response *CreateIntlTemplateResponse) {
     response = &CreateIntlTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateIntlTemplate
@@ -575,8 +581,9 @@ func NewDeleteIntlPhoneEmailRequest() (request *DeleteIntlPhoneEmailRequest) {
 func NewDeleteIntlPhoneEmailResponse() (response *DeleteIntlPhoneEmailResponse) {
     response = &DeleteIntlPhoneEmailResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteIntlPhoneEmail
@@ -637,8 +644,9 @@ func NewDeleteIntlTemplateRequest() (request *DeleteIntlTemplateRequest) {
 func NewDeleteIntlTemplateResponse() (response *DeleteIntlTemplateResponse) {
     response = &DeleteIntlTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteIntlTemplate
@@ -697,8 +705,9 @@ func NewDescribeIntlBatchDetailStatusRequest() (request *DescribeIntlBatchDetail
 func NewDescribeIntlBatchDetailStatusResponse() (response *DescribeIntlBatchDetailStatusResponse) {
     response = &DescribeIntlBatchDetailStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIntlBatchDetailStatus
@@ -759,8 +768,9 @@ func NewDescribeIntlBatchOperationLogsRequest() (request *DescribeIntlBatchOpera
 func NewDescribeIntlBatchOperationLogsResponse() (response *DescribeIntlBatchOperationLogsResponse) {
     response = &DescribeIntlBatchOperationLogsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIntlBatchOperationLogs
@@ -823,8 +833,9 @@ func NewDescribeIntlDomainRequest() (request *DescribeIntlDomainRequest) {
 func NewDescribeIntlDomainResponse() (response *DescribeIntlDomainResponse) {
     response = &DescribeIntlDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIntlDomain
@@ -881,8 +892,9 @@ func NewDescribeIntlDomainBatchDetailsRequest() (request *DescribeIntlDomainBatc
 func NewDescribeIntlDomainBatchDetailsResponse() (response *DescribeIntlDomainBatchDetailsResponse) {
     response = &DescribeIntlDomainBatchDetailsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIntlDomainBatchDetails
@@ -935,8 +947,9 @@ func NewDescribeIntlDomainListRequest() (request *DescribeIntlDomainListRequest)
 func NewDescribeIntlDomainListResponse() (response *DescribeIntlDomainListResponse) {
     response = &DescribeIntlDomainListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIntlDomainList
@@ -993,8 +1006,9 @@ func NewDescribeIntlDomainPriceNewListRequest() (request *DescribeIntlDomainPric
 func NewDescribeIntlDomainPriceNewListResponse() (response *DescribeIntlDomainPriceNewListResponse) {
     response = &DescribeIntlDomainPriceNewListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIntlDomainPriceNewList
@@ -1059,8 +1073,9 @@ func NewDescribeIntlPhoneEmailListRequest() (request *DescribeIntlPhoneEmailList
 func NewDescribeIntlPhoneEmailListResponse() (response *DescribeIntlPhoneEmailListResponse) {
     response = &DescribeIntlPhoneEmailListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIntlPhoneEmailList
@@ -1121,8 +1136,9 @@ func NewDescribeIntlTemplateRequest() (request *DescribeIntlTemplateRequest) {
 func NewDescribeIntlTemplateResponse() (response *DescribeIntlTemplateResponse) {
     response = &DescribeIntlTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIntlTemplate
@@ -1179,8 +1195,9 @@ func NewDescribeIntlTemplateListRequest() (request *DescribeIntlTemplateListRequ
 func NewDescribeIntlTemplateListResponse() (response *DescribeIntlTemplateListResponse) {
     response = &DescribeIntlTemplateListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeIntlTemplateList
@@ -1231,8 +1248,9 @@ func NewModifyOwnerIntlBatchRequest() (request *ModifyOwnerIntlBatchRequest) {
 func NewModifyOwnerIntlBatchResponse() (response *ModifyOwnerIntlBatchResponse) {
     response = &ModifyOwnerIntlBatchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyOwnerIntlBatch
@@ -1299,8 +1317,9 @@ func NewRenewIntlDomainBatchRequest() (request *RenewIntlDomainBatchRequest) {
 func NewRenewIntlDomainBatchResponse() (response *RenewIntlDomainBatchResponse) {
     response = &RenewIntlDomainBatchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RenewIntlDomainBatch
@@ -1369,8 +1388,9 @@ func NewSendIntlPhoneEmailCodeRequest() (request *SendIntlPhoneEmailCodeRequest)
 func NewSendIntlPhoneEmailCodeResponse() (response *SendIntlPhoneEmailCodeResponse) {
     response = &SendIntlPhoneEmailCodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SendIntlPhoneEmailCode
@@ -1431,8 +1451,9 @@ func NewSetIntlDomainAutoRenewRequest() (request *SetIntlDomainAutoRenewRequest)
 func NewSetIntlDomainAutoRenewResponse() (response *SetIntlDomainAutoRenewResponse) {
     response = &SetIntlDomainAutoRenewResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetIntlDomainAutoRenew
@@ -1491,8 +1512,9 @@ func NewTransferInIntlDomainBatchRequest() (request *TransferInIntlDomainBatchRe
 func NewTransferInIntlDomainBatchResponse() (response *TransferInIntlDomainBatchResponse) {
     response = &TransferInIntlDomainBatchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TransferInIntlDomainBatch
@@ -1561,8 +1583,9 @@ func NewTransferProhibitionIntlBatchRequest() (request *TransferProhibitionIntlB
 func NewTransferProhibitionIntlBatchResponse() (response *TransferProhibitionIntlBatchResponse) {
     response = &TransferProhibitionIntlBatchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TransferProhibitionIntlBatch
@@ -1623,8 +1646,9 @@ func NewUpdateProhibitionIntlBatchRequest() (request *UpdateProhibitionIntlBatch
 func NewUpdateProhibitionIntlBatchResponse() (response *UpdateProhibitionIntlBatchResponse) {
     response = &UpdateProhibitionIntlBatchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateProhibitionIntlBatch

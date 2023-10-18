@@ -59,8 +59,9 @@ func NewApplyLivenessTokenRequest() (request *ApplyLivenessTokenRequest) {
 func NewApplyLivenessTokenResponse() (response *ApplyLivenessTokenResponse) {
     response = &ApplyLivenessTokenResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ApplyLivenessToken
@@ -113,8 +114,9 @@ func NewApplySdkVerificationTokenRequest() (request *ApplySdkVerificationTokenRe
 func NewApplySdkVerificationTokenResponse() (response *ApplySdkVerificationTokenResponse) {
     response = &ApplySdkVerificationTokenResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ApplySdkVerificationToken
@@ -167,8 +169,9 @@ func NewApplyWebVerificationBizTokenIntlRequest() (request *ApplyWebVerification
 func NewApplyWebVerificationBizTokenIntlResponse() (response *ApplyWebVerificationBizTokenIntlResponse) {
     response = &ApplyWebVerificationBizTokenIntlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ApplyWebVerificationBizTokenIntl
@@ -227,8 +230,9 @@ func NewApplyWebVerificationTokenRequest() (request *ApplyWebVerificationTokenRe
 func NewApplyWebVerificationTokenResponse() (response *ApplyWebVerificationTokenResponse) {
     response = &ApplyWebVerificationTokenResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ApplyWebVerificationToken
@@ -287,8 +291,9 @@ func NewCreateUploadUrlRequest() (request *CreateUploadUrlRequest) {
 func NewCreateUploadUrlResponse() (response *CreateUploadUrlResponse) {
     response = &CreateUploadUrlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateUploadUrl
@@ -343,8 +348,9 @@ func NewDetectReflectLivenessAndCompareRequest() (request *DetectReflectLiveness
 func NewDetectReflectLivenessAndCompareResponse() (response *DetectReflectLivenessAndCompareResponse) {
     response = &DetectReflectLivenessAndCompareResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DetectReflectLivenessAndCompare
@@ -443,8 +449,9 @@ func NewGenerateReflectSequenceRequest() (request *GenerateReflectSequenceReques
 func NewGenerateReflectSequenceResponse() (response *GenerateReflectSequenceResponse) {
     response = &GenerateReflectSequenceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GenerateReflectSequence
@@ -497,8 +504,9 @@ func NewGetFaceIdResultIntlRequest() (request *GetFaceIdResultIntlRequest) {
 func NewGetFaceIdResultIntlResponse() (response *GetFaceIdResultIntlResponse) {
     response = &GetFaceIdResultIntlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetFaceIdResultIntl
@@ -553,8 +561,9 @@ func NewGetFaceIdTokenIntlRequest() (request *GetFaceIdTokenIntlRequest) {
 func NewGetFaceIdTokenIntlResponse() (response *GetFaceIdTokenIntlResponse) {
     response = &GetFaceIdTokenIntlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetFaceIdTokenIntl
@@ -605,8 +614,9 @@ func NewGetLivenessResultRequest() (request *GetLivenessResultRequest) {
 func NewGetLivenessResultResponse() (response *GetLivenessResultResponse) {
     response = &GetLivenessResultResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetLivenessResult
@@ -661,8 +671,9 @@ func NewGetSdkVerificationResultRequest() (request *GetSdkVerificationResultRequ
 func NewGetSdkVerificationResultResponse() (response *GetSdkVerificationResultResponse) {
     response = &GetSdkVerificationResultResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetSdkVerificationResult
@@ -717,8 +728,9 @@ func NewGetWebVerificationResultRequest() (request *GetWebVerificationResultRequ
 func NewGetWebVerificationResultResponse() (response *GetWebVerificationResultResponse) {
     response = &GetWebVerificationResultResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetWebVerificationResult
@@ -773,8 +785,9 @@ func NewGetWebVerificationResultIntlRequest() (request *GetWebVerificationResult
 func NewGetWebVerificationResultIntlResponse() (response *GetWebVerificationResultIntlResponse) {
     response = &GetWebVerificationResultIntlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetWebVerificationResultIntl
@@ -831,8 +844,9 @@ func NewLivenessCompareRequest() (request *LivenessCompareRequest) {
 func NewLivenessCompareResponse() (response *LivenessCompareResponse) {
     response = &LivenessCompareResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // LivenessCompare
@@ -987,8 +1001,9 @@ func NewVideoLivenessCompareRequest() (request *VideoLivenessCompareRequest) {
 func NewVideoLivenessCompareResponse() (response *VideoLivenessCompareResponse) {
     response = &VideoLivenessCompareResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // VideoLivenessCompare

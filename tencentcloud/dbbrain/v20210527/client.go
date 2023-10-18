@@ -59,8 +59,9 @@ func NewAddUserContactRequest() (request *AddUserContactRequest) {
 func NewAddUserContactResponse() (response *AddUserContactResponse) {
     response = &AddUserContactResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AddUserContact
@@ -119,6 +120,77 @@ func (c *Client) AddUserContactWithContext(ctx context.Context, request *AddUser
     return
 }
 
+func NewCloseAuditServiceRequest() (request *CloseAuditServiceRequest) {
+    request = &CloseAuditServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dbbrain", APIVersion, "CloseAuditService")
+    
+    
+    return
+}
+
+func NewCloseAuditServiceResponse() (response *CloseAuditServiceResponse) {
+    response = &CloseAuditServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CloseAuditService
+// This API is used to disable database audit as needed.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CloseAuditService(request *CloseAuditServiceRequest) (response *CloseAuditServiceResponse, err error) {
+    return c.CloseAuditServiceWithContext(context.Background(), request)
+}
+
+// CloseAuditService
+// This API is used to disable database audit as needed.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) CloseAuditServiceWithContext(ctx context.Context, request *CloseAuditServiceRequest) (response *CloseAuditServiceResponse, err error) {
+    if request == nil {
+        request = NewCloseAuditServiceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CloseAuditService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCloseAuditServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateDBDiagReportTaskRequest() (request *CreateDBDiagReportTaskRequest) {
     request = &CreateDBDiagReportTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -133,8 +205,9 @@ func NewCreateDBDiagReportTaskRequest() (request *CreateDBDiagReportTaskRequest)
 func NewCreateDBDiagReportTaskResponse() (response *CreateDBDiagReportTaskResponse) {
     response = &CreateDBDiagReportTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDBDiagReportTask
@@ -205,8 +278,9 @@ func NewCreateDBDiagReportUrlRequest() (request *CreateDBDiagReportUrlRequest) {
 func NewCreateDBDiagReportUrlResponse() (response *CreateDBDiagReportUrlResponse) {
     response = &CreateDBDiagReportUrlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDBDiagReportUrl
@@ -277,8 +351,9 @@ func NewCreateKillTaskRequest() (request *CreateKillTaskRequest) {
 func NewCreateKillTaskResponse() (response *CreateKillTaskResponse) {
     response = &CreateKillTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateKillTask
@@ -347,8 +422,9 @@ func NewCreateMailProfileRequest() (request *CreateMailProfileRequest) {
 func NewCreateMailProfileResponse() (response *CreateMailProfileResponse) {
     response = &CreateMailProfileResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateMailProfile
@@ -419,8 +495,9 @@ func NewCreateProxySessionKillTaskRequest() (request *CreateProxySessionKillTask
 func NewCreateProxySessionKillTaskResponse() (response *CreateProxySessionKillTaskResponse) {
     response = &CreateProxySessionKillTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateProxySessionKillTask
@@ -455,6 +532,67 @@ func (c *Client) CreateProxySessionKillTaskWithContext(ctx context.Context, requ
     return
 }
 
+func NewCreateRedisBigKeyAnalysisTaskRequest() (request *CreateRedisBigKeyAnalysisTaskRequest) {
+    request = &CreateRedisBigKeyAnalysisTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dbbrain", APIVersion, "CreateRedisBigKeyAnalysisTask")
+    
+    
+    return
+}
+
+func NewCreateRedisBigKeyAnalysisTaskResponse() (response *CreateRedisBigKeyAnalysisTaskResponse) {
+    response = &CreateRedisBigKeyAnalysisTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateRedisBigKeyAnalysisTask
+// This API is used to create an ad hoc big key analysis task for Redis instances. By default, there can only be up to five running ad hoc analysis tasks.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateRedisBigKeyAnalysisTask(request *CreateRedisBigKeyAnalysisTaskRequest) (response *CreateRedisBigKeyAnalysisTaskResponse, err error) {
+    return c.CreateRedisBigKeyAnalysisTaskWithContext(context.Background(), request)
+}
+
+// CreateRedisBigKeyAnalysisTask
+// This API is used to create an ad hoc big key analysis task for Redis instances. By default, there can only be up to five running ad hoc analysis tasks.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateRedisBigKeyAnalysisTaskWithContext(ctx context.Context, request *CreateRedisBigKeyAnalysisTaskRequest) (response *CreateRedisBigKeyAnalysisTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateRedisBigKeyAnalysisTaskRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRedisBigKeyAnalysisTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRedisBigKeyAnalysisTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateSchedulerMailProfileRequest() (request *CreateSchedulerMailProfileRequest) {
     request = &CreateSchedulerMailProfileRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -469,8 +607,9 @@ func NewCreateSchedulerMailProfileRequest() (request *CreateSchedulerMailProfile
 func NewCreateSchedulerMailProfileResponse() (response *CreateSchedulerMailProfileResponse) {
     response = &CreateSchedulerMailProfileResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSchedulerMailProfile
@@ -543,8 +682,9 @@ func NewCreateSecurityAuditLogExportTaskRequest() (request *CreateSecurityAuditL
 func NewCreateSecurityAuditLogExportTaskResponse() (response *CreateSecurityAuditLogExportTaskResponse) {
     response = &CreateSecurityAuditLogExportTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateSecurityAuditLogExportTask
@@ -615,8 +755,9 @@ func NewDeleteDBDiagReportTasksRequest() (request *DeleteDBDiagReportTasksReques
 func NewDeleteDBDiagReportTasksResponse() (response *DeleteDBDiagReportTasksResponse) {
     response = &DeleteDBDiagReportTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteDBDiagReportTasks
@@ -689,8 +830,9 @@ func NewDeleteSecurityAuditLogExportTasksRequest() (request *DeleteSecurityAudit
 func NewDeleteSecurityAuditLogExportTasksResponse() (response *DeleteSecurityAuditLogExportTasksResponse) {
     response = &DeleteSecurityAuditLogExportTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteSecurityAuditLogExportTasks
@@ -761,8 +903,9 @@ func NewDescribeAllUserContactRequest() (request *DescribeAllUserContactRequest)
 func NewDescribeAllUserContactResponse() (response *DescribeAllUserContactResponse) {
     response = &DescribeAllUserContactResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAllUserContact
@@ -833,8 +976,9 @@ func NewDescribeAllUserGroupRequest() (request *DescribeAllUserGroupRequest) {
 func NewDescribeAllUserGroupResponse() (response *DescribeAllUserGroupResponse) {
     response = &DescribeAllUserGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAllUserGroup
@@ -891,6 +1035,79 @@ func (c *Client) DescribeAllUserGroupWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeAuditInstanceListRequest() (request *DescribeAuditInstanceListRequest) {
+    request = &DescribeAuditInstanceListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dbbrain", APIVersion, "DescribeAuditInstanceList")
+    
+    
+    return
+}
+
+func NewDescribeAuditInstanceListResponse() (response *DescribeAuditInstanceListResponse) {
+    response = &DescribeAuditInstanceListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAuditInstanceList
+// This API is used to query the instance list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAuditInstanceList(request *DescribeAuditInstanceListRequest) (response *DescribeAuditInstanceListResponse, err error) {
+    return c.DescribeAuditInstanceListWithContext(context.Background(), request)
+}
+
+// DescribeAuditInstanceList
+// This API is used to query the instance list.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAuditInstanceListWithContext(ctx context.Context, request *DescribeAuditInstanceListRequest) (response *DescribeAuditInstanceListResponse, err error) {
+    if request == nil {
+        request = NewDescribeAuditInstanceListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAuditInstanceList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAuditInstanceListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDBDiagEventRequest() (request *DescribeDBDiagEventRequest) {
     request = &DescribeDBDiagEventRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -905,8 +1122,9 @@ func NewDescribeDBDiagEventRequest() (request *DescribeDBDiagEventRequest) {
 func NewDescribeDBDiagEventResponse() (response *DescribeDBDiagEventResponse) {
     response = &DescribeDBDiagEventResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDBDiagEvent
@@ -977,8 +1195,9 @@ func NewDescribeDBDiagEventsRequest() (request *DescribeDBDiagEventsRequest) {
 func NewDescribeDBDiagEventsResponse() (response *DescribeDBDiagEventsResponse) {
     response = &DescribeDBDiagEventsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDBDiagEvents
@@ -1049,8 +1268,9 @@ func NewDescribeDBDiagHistoryRequest() (request *DescribeDBDiagHistoryRequest) {
 func NewDescribeDBDiagHistoryResponse() (response *DescribeDBDiagHistoryResponse) {
     response = &DescribeDBDiagHistoryResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDBDiagHistory
@@ -1121,8 +1341,9 @@ func NewDescribeDBDiagReportTasksRequest() (request *DescribeDBDiagReportTasksRe
 func NewDescribeDBDiagReportTasksResponse() (response *DescribeDBDiagReportTasksResponse) {
     response = &DescribeDBDiagReportTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDBDiagReportTasks
@@ -1193,8 +1414,9 @@ func NewDescribeDBSpaceStatusRequest() (request *DescribeDBSpaceStatusRequest) {
 func NewDescribeDBSpaceStatusResponse() (response *DescribeDBSpaceStatusResponse) {
     response = &DescribeDBSpaceStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDBSpaceStatus
@@ -1265,8 +1487,9 @@ func NewDescribeDiagDBInstancesRequest() (request *DescribeDiagDBInstancesReques
 func NewDescribeDiagDBInstancesResponse() (response *DescribeDiagDBInstancesResponse) {
     response = &DescribeDiagDBInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDiagDBInstances
@@ -1339,8 +1562,9 @@ func NewDescribeHealthScoreRequest() (request *DescribeHealthScoreRequest) {
 func NewDescribeHealthScoreResponse() (response *DescribeHealthScoreResponse) {
     response = &DescribeHealthScoreResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeHealthScore
@@ -1413,8 +1637,9 @@ func NewDescribeMailProfileRequest() (request *DescribeMailProfileRequest) {
 func NewDescribeMailProfileResponse() (response *DescribeMailProfileResponse) {
     response = &DescribeMailProfileResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeMailProfile
@@ -1485,8 +1710,9 @@ func NewDescribeMySqlProcessListRequest() (request *DescribeMySqlProcessListRequ
 func NewDescribeMySqlProcessListResponse() (response *DescribeMySqlProcessListResponse) {
     response = &DescribeMySqlProcessListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeMySqlProcessList
@@ -1557,8 +1783,9 @@ func NewDescribeProxyProcessStatisticsRequest() (request *DescribeProxyProcessSt
 func NewDescribeProxyProcessStatisticsResponse() (response *DescribeProxyProcessStatisticsResponse) {
     response = &DescribeProxyProcessStatisticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeProxyProcessStatistics
@@ -1631,8 +1858,9 @@ func NewDescribeProxySessionKillTasksRequest() (request *DescribeProxySessionKil
 func NewDescribeProxySessionKillTasksResponse() (response *DescribeProxySessionKillTasksResponse) {
     response = &DescribeProxySessionKillTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeProxySessionKillTasks
@@ -1715,8 +1943,9 @@ func NewDescribeRedisTopKeyPrefixListRequest() (request *DescribeRedisTopKeyPref
 func NewDescribeRedisTopKeyPrefixListResponse() (response *DescribeRedisTopKeyPrefixListResponse) {
     response = &DescribeRedisTopKeyPrefixListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRedisTopKeyPrefixList
@@ -1787,8 +2016,9 @@ func NewDescribeSecurityAuditLogDownloadUrlsRequest() (request *DescribeSecurity
 func NewDescribeSecurityAuditLogDownloadUrlsResponse() (response *DescribeSecurityAuditLogDownloadUrlsResponse) {
     response = &DescribeSecurityAuditLogDownloadUrlsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSecurityAuditLogDownloadUrls
@@ -1859,8 +2089,9 @@ func NewDescribeSecurityAuditLogExportTasksRequest() (request *DescribeSecurityA
 func NewDescribeSecurityAuditLogExportTasksResponse() (response *DescribeSecurityAuditLogExportTasksResponse) {
     response = &DescribeSecurityAuditLogExportTasksResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSecurityAuditLogExportTasks
@@ -1931,8 +2162,9 @@ func NewDescribeSlowLogTimeSeriesStatsRequest() (request *DescribeSlowLogTimeSer
 func NewDescribeSlowLogTimeSeriesStatsResponse() (response *DescribeSlowLogTimeSeriesStatsResponse) {
     response = &DescribeSlowLogTimeSeriesStatsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSlowLogTimeSeriesStats
@@ -1941,6 +2173,7 @@ func NewDescribeSlowLogTimeSeriesStatsResponse() (response *DescribeSlowLogTimeS
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SEGMENTLOADING = "FailedOperation.SegmentLoading"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1962,6 +2195,7 @@ func (c *Client) DescribeSlowLogTimeSeriesStats(request *DescribeSlowLogTimeSeri
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SEGMENTLOADING = "FailedOperation.SegmentLoading"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2003,8 +2237,9 @@ func NewDescribeSlowLogTopSqlsRequest() (request *DescribeSlowLogTopSqlsRequest)
 func NewDescribeSlowLogTopSqlsResponse() (response *DescribeSlowLogTopSqlsResponse) {
     response = &DescribeSlowLogTopSqlsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSlowLogTopSqls
@@ -2013,6 +2248,7 @@ func NewDescribeSlowLogTopSqlsResponse() (response *DescribeSlowLogTopSqlsRespon
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SEGMENTLOADING = "FailedOperation.SegmentLoading"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2034,6 +2270,7 @@ func (c *Client) DescribeSlowLogTopSqls(request *DescribeSlowLogTopSqlsRequest) 
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SEGMENTLOADING = "FailedOperation.SegmentLoading"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2075,8 +2312,9 @@ func NewDescribeSlowLogUserHostStatsRequest() (request *DescribeSlowLogUserHostS
 func NewDescribeSlowLogUserHostStatsResponse() (response *DescribeSlowLogUserHostStatsResponse) {
     response = &DescribeSlowLogUserHostStatsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSlowLogUserHostStats
@@ -2147,8 +2385,9 @@ func NewDescribeSlowLogsRequest() (request *DescribeSlowLogsRequest) {
 func NewDescribeSlowLogsResponse() (response *DescribeSlowLogsResponse) {
     response = &DescribeSlowLogsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSlowLogs
@@ -2219,8 +2458,9 @@ func NewDescribeTopSpaceSchemaTimeSeriesRequest() (request *DescribeTopSpaceSche
 func NewDescribeTopSpaceSchemaTimeSeriesResponse() (response *DescribeTopSpaceSchemaTimeSeriesResponse) {
     response = &DescribeTopSpaceSchemaTimeSeriesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTopSpaceSchemaTimeSeries
@@ -2291,8 +2531,9 @@ func NewDescribeTopSpaceSchemasRequest() (request *DescribeTopSpaceSchemasReques
 func NewDescribeTopSpaceSchemasResponse() (response *DescribeTopSpaceSchemasResponse) {
     response = &DescribeTopSpaceSchemasResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTopSpaceSchemas
@@ -2363,8 +2604,9 @@ func NewDescribeTopSpaceTableTimeSeriesRequest() (request *DescribeTopSpaceTable
 func NewDescribeTopSpaceTableTimeSeriesResponse() (response *DescribeTopSpaceTableTimeSeriesResponse) {
     response = &DescribeTopSpaceTableTimeSeriesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTopSpaceTableTimeSeries
@@ -2435,8 +2677,9 @@ func NewDescribeTopSpaceTablesRequest() (request *DescribeTopSpaceTablesRequest)
 func NewDescribeTopSpaceTablesResponse() (response *DescribeTopSpaceTablesResponse) {
     response = &DescribeTopSpaceTablesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTopSpaceTables
@@ -2507,8 +2750,9 @@ func NewDescribeUserSqlAdviceRequest() (request *DescribeUserSqlAdviceRequest) {
 func NewDescribeUserSqlAdviceResponse() (response *DescribeUserSqlAdviceResponse) {
     response = &DescribeUserSqlAdviceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeUserSqlAdvice
@@ -2579,8 +2823,9 @@ func NewKillMySqlThreadsRequest() (request *KillMySqlThreadsRequest) {
 func NewKillMySqlThreadsResponse() (response *KillMySqlThreadsResponse) {
     response = &KillMySqlThreadsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // KillMySqlThreads
@@ -2639,6 +2884,77 @@ func (c *Client) KillMySqlThreadsWithContext(ctx context.Context, request *KillM
     return
 }
 
+func NewModifyAuditServiceRequest() (request *ModifyAuditServiceRequest) {
+    request = &ModifyAuditServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dbbrain", APIVersion, "ModifyAuditService")
+    
+    
+    return
+}
+
+func NewModifyAuditServiceResponse() (response *ModifyAuditServiceResponse) {
+    response = &ModifyAuditServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyAuditService
+// u200cThis API is used to modify audit configurations such as the frequent access storage period.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyAuditService(request *ModifyAuditServiceRequest) (response *ModifyAuditServiceResponse, err error) {
+    return c.ModifyAuditServiceWithContext(context.Background(), request)
+}
+
+// ModifyAuditService
+// u200cThis API is used to modify audit configurations such as the frequent access storage period.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) ModifyAuditServiceWithContext(ctx context.Context, request *ModifyAuditServiceRequest) (response *ModifyAuditServiceResponse, err error) {
+    if request == nil {
+        request = NewModifyAuditServiceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAuditService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyAuditServiceResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDiagDBInstanceConfRequest() (request *ModifyDiagDBInstanceConfRequest) {
     request = &ModifyDiagDBInstanceConfRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2653,8 +2969,9 @@ func NewModifyDiagDBInstanceConfRequest() (request *ModifyDiagDBInstanceConfRequ
 func NewModifyDiagDBInstanceConfResponse() (response *ModifyDiagDBInstanceConfResponse) {
     response = &ModifyDiagDBInstanceConfResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDiagDBInstanceConf
@@ -2707,6 +3024,79 @@ func (c *Client) ModifyDiagDBInstanceConfWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewModifyDiagDBInstanceConfResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewOpenAuditServiceRequest() (request *OpenAuditServiceRequest) {
+    request = &OpenAuditServiceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dbbrain", APIVersion, "OpenAuditService")
+    
+    
+    return
+}
+
+func NewOpenAuditServiceResponse() (response *OpenAuditServiceResponse) {
+    response = &OpenAuditServiceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// OpenAuditService
+// This API is used to enable database audit.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) OpenAuditService(request *OpenAuditServiceRequest) (response *OpenAuditServiceResponse, err error) {
+    return c.OpenAuditServiceWithContext(context.Background(), request)
+}
+
+// OpenAuditService
+// This API is used to enable database audit.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) OpenAuditServiceWithContext(ctx context.Context, request *OpenAuditServiceRequest) (response *OpenAuditServiceResponse, err error) {
+    if request == nil {
+        request = NewOpenAuditServiceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenAuditService require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOpenAuditServiceResponse()
     err = c.Send(request, response)
     return
 }

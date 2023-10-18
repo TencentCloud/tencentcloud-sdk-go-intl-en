@@ -59,8 +59,9 @@ func NewCreateDomainRequest() (request *CreateDomainRequest) {
 func NewCreateDomainResponse() (response *CreateDomainResponse) {
     response = &CreateDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDomain
@@ -131,8 +132,9 @@ func NewCreateDomainAliasRequest() (request *CreateDomainAliasRequest) {
 func NewCreateDomainAliasResponse() (response *CreateDomainAliasResponse) {
     response = &CreateDomainAliasResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDomainAlias
@@ -219,8 +221,9 @@ func NewCreateDomainBatchRequest() (request *CreateDomainBatchRequest) {
 func NewCreateDomainBatchResponse() (response *CreateDomainBatchResponse) {
     response = &CreateDomainBatchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDomainBatch
@@ -301,8 +304,9 @@ func NewCreateDomainGroupRequest() (request *CreateDomainGroupRequest) {
 func NewCreateDomainGroupResponse() (response *CreateDomainGroupResponse) {
     response = &CreateDomainGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateDomainGroup
@@ -367,8 +371,9 @@ func NewCreateRecordRequest() (request *CreateRecordRequest) {
 func NewCreateRecordResponse() (response *CreateRecordResponse) {
     response = &CreateRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRecord
@@ -515,8 +520,9 @@ func NewCreateRecordBatchRequest() (request *CreateRecordBatchRequest) {
 func NewCreateRecordBatchResponse() (response *CreateRecordBatchResponse) {
     response = &CreateRecordBatchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRecordBatch
@@ -597,8 +603,9 @@ func NewCreateRecordGroupRequest() (request *CreateRecordGroupRequest) {
 func NewCreateRecordGroupResponse() (response *CreateRecordGroupResponse) {
     response = &CreateRecordGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateRecordGroup
@@ -657,8 +664,9 @@ func NewDeleteDomainRequest() (request *DeleteDomainRequest) {
 func NewDeleteDomainResponse() (response *DeleteDomainResponse) {
     response = &DeleteDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteDomain
@@ -727,8 +735,9 @@ func NewDeleteDomainAliasRequest() (request *DeleteDomainAliasRequest) {
 func NewDeleteDomainAliasResponse() (response *DeleteDomainAliasResponse) {
     response = &DeleteDomainAliasResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteDomainAlias
@@ -807,8 +816,9 @@ func NewDeleteDomainBatchRequest() (request *DeleteDomainBatchRequest) {
 func NewDeleteDomainBatchResponse() (response *DeleteDomainBatchResponse) {
     response = &DeleteDomainBatchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteDomainBatch
@@ -871,8 +881,9 @@ func NewDeleteRecordRequest() (request *DeleteRecordRequest) {
 func NewDeleteRecordResponse() (response *DeleteRecordResponse) {
     response = &DeleteRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRecord
@@ -969,8 +980,9 @@ func NewDeleteRecordGroupRequest() (request *DeleteRecordGroupRequest) {
 func NewDeleteRecordGroupResponse() (response *DeleteRecordGroupResponse) {
     response = &DeleteRecordGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteRecordGroup
@@ -1029,8 +1041,9 @@ func NewDeleteShareDomainRequest() (request *DeleteShareDomainRequest) {
 func NewDeleteShareDomainResponse() (response *DeleteShareDomainResponse) {
     response = &DeleteShareDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteShareDomain
@@ -1095,8 +1108,9 @@ func NewDescribeDomainRequest() (request *DescribeDomainRequest) {
 func NewDescribeDomainResponse() (response *DescribeDomainResponse) {
     response = &DescribeDomainResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDomain
@@ -1157,8 +1171,9 @@ func NewDescribeDomainAliasListRequest() (request *DescribeDomainAliasListReques
 func NewDescribeDomainAliasListResponse() (response *DescribeDomainAliasListResponse) {
     response = &DescribeDomainAliasListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDomainAliasList
@@ -1231,8 +1246,9 @@ func NewDescribeDomainGroupListRequest() (request *DescribeDomainGroupListReques
 func NewDescribeDomainGroupListResponse() (response *DescribeDomainGroupListResponse) {
     response = &DescribeDomainGroupListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDomainGroupList
@@ -1291,8 +1307,9 @@ func NewDescribeDomainListRequest() (request *DescribeDomainListRequest) {
 func NewDescribeDomainListResponse() (response *DescribeDomainListResponse) {
     response = &DescribeDomainListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDomainList
@@ -1367,8 +1384,9 @@ func NewDescribeDomainLogListRequest() (request *DescribeDomainLogListRequest) {
 func NewDescribeDomainLogListResponse() (response *DescribeDomainLogListResponse) {
     response = &DescribeDomainLogListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDomainLogList
@@ -1427,8 +1445,9 @@ func NewDescribeDomainPurviewRequest() (request *DescribeDomainPurviewRequest) {
 func NewDescribeDomainPurviewResponse() (response *DescribeDomainPurviewResponse) {
     response = &DescribeDomainPurviewResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDomainPurview
@@ -1513,8 +1532,9 @@ func NewDescribeDomainShareInfoRequest() (request *DescribeDomainShareInfoReques
 func NewDescribeDomainShareInfoResponse() (response *DescribeDomainShareInfoResponse) {
     response = &DescribeDomainShareInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeDomainShareInfo
@@ -1571,8 +1591,9 @@ func NewDescribeRecordRequest() (request *DescribeRecordRequest) {
 func NewDescribeRecordResponse() (response *DescribeRecordResponse) {
     response = &DescribeRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRecord
@@ -1663,8 +1684,9 @@ func NewDescribeRecordGroupListRequest() (request *DescribeRecordGroupListReques
 func NewDescribeRecordGroupListResponse() (response *DescribeRecordGroupListResponse) {
     response = &DescribeRecordGroupListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRecordGroupList
@@ -1723,8 +1745,9 @@ func NewDescribeRecordLineListRequest() (request *DescribeRecordLineListRequest)
 func NewDescribeRecordLineListResponse() (response *DescribeRecordLineListResponse) {
     response = &DescribeRecordLineListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRecordLineList
@@ -1811,8 +1834,9 @@ func NewDescribeRecordListRequest() (request *DescribeRecordListRequest) {
 func NewDescribeRecordListResponse() (response *DescribeRecordListResponse) {
     response = &DescribeRecordListResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRecordList
@@ -1901,8 +1925,9 @@ func NewDescribeRecordTypeRequest() (request *DescribeRecordTypeRequest) {
 func NewDescribeRecordTypeResponse() (response *DescribeRecordTypeResponse) {
     response = &DescribeRecordTypeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeRecordType
@@ -1985,8 +2010,9 @@ func NewDescribeSubdomainAnalyticsRequest() (request *DescribeSubdomainAnalytics
 func NewDescribeSubdomainAnalyticsResponse() (response *DescribeSubdomainAnalyticsResponse) {
     response = &DescribeSubdomainAnalyticsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeSubdomainAnalytics
@@ -2049,8 +2075,9 @@ func NewModifyDomainLockRequest() (request *ModifyDomainLockRequest) {
 func NewModifyDomainLockResponse() (response *ModifyDomainLockResponse) {
     response = &ModifyDomainLockResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDomainLock
@@ -2143,8 +2170,9 @@ func NewModifyDomainOwnerRequest() (request *ModifyDomainOwnerRequest) {
 func NewModifyDomainOwnerResponse() (response *ModifyDomainOwnerResponse) {
     response = &ModifyDomainOwnerResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDomainOwner
@@ -2225,8 +2253,9 @@ func NewModifyDomainRemarkRequest() (request *ModifyDomainRemarkRequest) {
 func NewModifyDomainRemarkResponse() (response *ModifyDomainRemarkResponse) {
     response = &ModifyDomainRemarkResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDomainRemark
@@ -2317,8 +2346,9 @@ func NewModifyDomainStatusRequest() (request *ModifyDomainStatusRequest) {
 func NewModifyDomainStatusResponse() (response *ModifyDomainStatusResponse) {
     response = &ModifyDomainStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDomainStatus
@@ -2383,8 +2413,9 @@ func NewModifyDomainUnlockRequest() (request *ModifyDomainUnlockRequest) {
 func NewModifyDomainUnlockResponse() (response *ModifyDomainUnlockResponse) {
     response = &ModifyDomainUnlockResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyDomainUnlock
@@ -2477,8 +2508,9 @@ func NewModifyRecordRequest() (request *ModifyRecordRequest) {
 func NewModifyRecordResponse() (response *ModifyRecordResponse) {
     response = &ModifyRecordResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRecord
@@ -2627,8 +2659,9 @@ func NewModifyRecordBatchRequest() (request *ModifyRecordBatchRequest) {
 func NewModifyRecordBatchResponse() (response *ModifyRecordBatchResponse) {
     response = &ModifyRecordBatchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRecordBatch
@@ -2723,8 +2756,9 @@ func NewModifyRecordGroupRequest() (request *ModifyRecordGroupRequest) {
 func NewModifyRecordGroupResponse() (response *ModifyRecordGroupResponse) {
     response = &ModifyRecordGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRecordGroup
@@ -2783,8 +2817,9 @@ func NewModifyRecordRemarkRequest() (request *ModifyRecordRemarkRequest) {
 func NewModifyRecordRemarkResponse() (response *ModifyRecordRemarkResponse) {
     response = &ModifyRecordRemarkResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRecordRemark
@@ -2881,8 +2916,9 @@ func NewModifyRecordStatusRequest() (request *ModifyRecordStatusRequest) {
 func NewModifyRecordStatusResponse() (response *ModifyRecordStatusResponse) {
     response = &ModifyRecordStatusResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRecordStatus
@@ -3015,8 +3051,9 @@ func NewModifyRecordToGroupRequest() (request *ModifyRecordToGroupRequest) {
 func NewModifyRecordToGroupResponse() (response *ModifyRecordToGroupResponse) {
     response = &ModifyRecordToGroupResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyRecordToGroup

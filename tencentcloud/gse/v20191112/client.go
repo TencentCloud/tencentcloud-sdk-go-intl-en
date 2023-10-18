@@ -59,8 +59,9 @@ func NewCopyFleetRequest() (request *CopyFleetRequest) {
 func NewCopyFleetResponse() (response *CopyFleetResponse) {
     response = &CopyFleetResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CopyFleet
@@ -141,8 +142,9 @@ func NewCreateGameServerSessionRequest() (request *CreateGameServerSessionReques
 func NewCreateGameServerSessionResponse() (response *CreateGameServerSessionResponse) {
     response = &CreateGameServerSessionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateGameServerSession
@@ -207,8 +209,9 @@ func NewDeleteTimerScalingPolicyRequest() (request *DeleteTimerScalingPolicyRequ
 func NewDeleteTimerScalingPolicyResponse() (response *DeleteTimerScalingPolicyResponse) {
     response = &DeleteTimerScalingPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteTimerScalingPolicy
@@ -267,8 +270,9 @@ func NewDescribeGameServerSessionDetailsRequest() (request *DescribeGameServerSe
 func NewDescribeGameServerSessionDetailsResponse() (response *DescribeGameServerSessionDetailsResponse) {
     response = &DescribeGameServerSessionDetailsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeGameServerSessionDetails
@@ -329,8 +333,9 @@ func NewDescribeGameServerSessionPlacementRequest() (request *DescribeGameServer
 func NewDescribeGameServerSessionPlacementResponse() (response *DescribeGameServerSessionPlacementResponse) {
     response = &DescribeGameServerSessionPlacementResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeGameServerSessionPlacement
@@ -385,8 +390,9 @@ func NewDescribeGameServerSessionsRequest() (request *DescribeGameServerSessions
 func NewDescribeGameServerSessionsResponse() (response *DescribeGameServerSessionsResponse) {
     response = &DescribeGameServerSessionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeGameServerSessions
@@ -447,8 +453,9 @@ func NewDescribeInstanceTypesRequest() (request *DescribeInstanceTypesRequest) {
 func NewDescribeInstanceTypesResponse() (response *DescribeInstanceTypesResponse) {
     response = &DescribeInstanceTypesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceTypes
@@ -503,8 +510,9 @@ func NewDescribePlayerSessionsRequest() (request *DescribePlayerSessionsRequest)
 func NewDescribePlayerSessionsResponse() (response *DescribePlayerSessionsResponse) {
     response = &DescribePlayerSessionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribePlayerSessions
@@ -563,8 +571,9 @@ func NewDescribeTimerScalingPoliciesRequest() (request *DescribeTimerScalingPoli
 func NewDescribeTimerScalingPoliciesResponse() (response *DescribeTimerScalingPoliciesResponse) {
     response = &DescribeTimerScalingPoliciesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTimerScalingPolicies
@@ -623,8 +632,9 @@ func NewEndGameServerSessionAndProcessRequest() (request *EndGameServerSessionAn
 func NewEndGameServerSessionAndProcessResponse() (response *EndGameServerSessionAndProcessResponse) {
     response = &EndGameServerSessionAndProcessResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // EndGameServerSessionAndProcess
@@ -677,8 +687,9 @@ func NewGetGameServerSessionLogUrlRequest() (request *GetGameServerSessionLogUrl
 func NewGetGameServerSessionLogUrlResponse() (response *GetGameServerSessionLogUrlResponse) {
     response = &GetGameServerSessionLogUrlResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetGameServerSessionLogUrl
@@ -737,8 +748,9 @@ func NewGetInstanceAccessRequest() (request *GetInstanceAccessRequest) {
 func NewGetInstanceAccessResponse() (response *GetInstanceAccessResponse) {
     response = &GetInstanceAccessResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // GetInstanceAccess
@@ -809,8 +821,9 @@ func NewJoinGameServerSessionRequest() (request *JoinGameServerSessionRequest) {
 func NewJoinGameServerSessionResponse() (response *JoinGameServerSessionResponse) {
     response = &JoinGameServerSessionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // JoinGameServerSession
@@ -875,8 +888,9 @@ func NewJoinGameServerSessionBatchRequest() (request *JoinGameServerSessionBatch
 func NewJoinGameServerSessionBatchResponse() (response *JoinGameServerSessionBatchResponse) {
     response = &JoinGameServerSessionBatchResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // JoinGameServerSessionBatch
@@ -939,8 +953,9 @@ func NewPutTimerScalingPolicyRequest() (request *PutTimerScalingPolicyRequest) {
 func NewPutTimerScalingPolicyResponse() (response *PutTimerScalingPolicyResponse) {
     response = &PutTimerScalingPolicyResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // PutTimerScalingPolicy
@@ -1009,8 +1024,9 @@ func NewSearchGameServerSessionsRequest() (request *SearchGameServerSessionsRequ
 func NewSearchGameServerSessionsResponse() (response *SearchGameServerSessionsResponse) {
     response = &SearchGameServerSessionsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SearchGameServerSessions
@@ -1069,8 +1085,9 @@ func NewSetServerReservedRequest() (request *SetServerReservedRequest) {
 func NewSetServerReservedResponse() (response *SetServerReservedResponse) {
     response = &SetServerReservedResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // SetServerReserved
@@ -1139,8 +1156,9 @@ func NewStartGameServerSessionPlacementRequest() (request *StartGameServerSessio
 func NewStartGameServerSessionPlacementResponse() (response *StartGameServerSessionPlacementResponse) {
     response = &StartGameServerSessionPlacementResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StartGameServerSessionPlacement
@@ -1199,8 +1217,9 @@ func NewStopGameServerSessionPlacementRequest() (request *StopGameServerSessionP
 func NewStopGameServerSessionPlacementResponse() (response *StopGameServerSessionPlacementResponse) {
     response = &StopGameServerSessionPlacementResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // StopGameServerSessionPlacement
@@ -1253,8 +1272,9 @@ func NewUpdateBucketAccelerateOptRequest() (request *UpdateBucketAccelerateOptRe
 func NewUpdateBucketAccelerateOptResponse() (response *UpdateBucketAccelerateOptResponse) {
     response = &UpdateBucketAccelerateOptResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateBucketAccelerateOpt
@@ -1311,8 +1331,9 @@ func NewUpdateBucketCORSOptRequest() (request *UpdateBucketCORSOptRequest) {
 func NewUpdateBucketCORSOptResponse() (response *UpdateBucketCORSOptResponse) {
     response = &UpdateBucketCORSOptResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateBucketCORSOpt
@@ -1371,8 +1392,9 @@ func NewUpdateGameServerSessionRequest() (request *UpdateGameServerSessionReques
 func NewUpdateGameServerSessionResponse() (response *UpdateGameServerSessionResponse) {
     response = &UpdateGameServerSessionResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // UpdateGameServerSession

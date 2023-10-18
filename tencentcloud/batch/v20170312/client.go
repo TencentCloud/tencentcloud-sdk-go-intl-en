@@ -59,8 +59,9 @@ func NewAttachInstancesRequest() (request *AttachInstancesRequest) {
 func NewAttachInstancesResponse() (response *AttachInstancesResponse) {
     response = &AttachInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // AttachInstances
@@ -143,8 +144,9 @@ func NewCreateComputeEnvRequest() (request *CreateComputeEnvRequest) {
 func NewCreateComputeEnvResponse() (response *CreateComputeEnvResponse) {
     response = &CreateComputeEnvResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateComputeEnv
@@ -237,8 +239,9 @@ func NewCreateTaskTemplateRequest() (request *CreateTaskTemplateRequest) {
 func NewCreateTaskTemplateResponse() (response *CreateTaskTemplateResponse) {
     response = &CreateTaskTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // CreateTaskTemplate
@@ -323,8 +326,9 @@ func NewDeleteComputeEnvRequest() (request *DeleteComputeEnvRequest) {
 func NewDeleteComputeEnvResponse() (response *DeleteComputeEnvResponse) {
     response = &DeleteComputeEnvResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteComputeEnv
@@ -385,8 +389,9 @@ func NewDeleteJobRequest() (request *DeleteJobRequest) {
 func NewDeleteJobResponse() (response *DeleteJobResponse) {
     response = &DeleteJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteJob
@@ -449,8 +454,9 @@ func NewDeleteTaskTemplatesRequest() (request *DeleteTaskTemplatesRequest) {
 func NewDeleteTaskTemplatesResponse() (response *DeleteTaskTemplatesResponse) {
     response = &DeleteTaskTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DeleteTaskTemplates
@@ -501,8 +507,9 @@ func NewDescribeAvailableCvmInstanceTypesRequest() (request *DescribeAvailableCv
 func NewDescribeAvailableCvmInstanceTypesResponse() (response *DescribeAvailableCvmInstanceTypesResponse) {
     response = &DescribeAvailableCvmInstanceTypesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeAvailableCvmInstanceTypes
@@ -563,8 +570,9 @@ func NewDescribeComputeEnvRequest() (request *DescribeComputeEnvRequest) {
 func NewDescribeComputeEnvResponse() (response *DescribeComputeEnvResponse) {
     response = &DescribeComputeEnvResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeComputeEnv
@@ -615,8 +623,9 @@ func NewDescribeComputeEnvActivitiesRequest() (request *DescribeComputeEnvActivi
 func NewDescribeComputeEnvActivitiesResponse() (response *DescribeComputeEnvActivitiesResponse) {
     response = &DescribeComputeEnvActivitiesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeComputeEnvActivities
@@ -671,8 +680,9 @@ func NewDescribeComputeEnvCreateInfoRequest() (request *DescribeComputeEnvCreate
 func NewDescribeComputeEnvCreateInfoResponse() (response *DescribeComputeEnvCreateInfoResponse) {
     response = &DescribeComputeEnvCreateInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeComputeEnvCreateInfo
@@ -721,8 +731,9 @@ func NewDescribeComputeEnvCreateInfosRequest() (request *DescribeComputeEnvCreat
 func NewDescribeComputeEnvCreateInfosResponse() (response *DescribeComputeEnvCreateInfosResponse) {
     response = &DescribeComputeEnvCreateInfosResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeComputeEnvCreateInfos
@@ -777,8 +788,9 @@ func NewDescribeComputeEnvsRequest() (request *DescribeComputeEnvsRequest) {
 func NewDescribeComputeEnvsResponse() (response *DescribeComputeEnvsResponse) {
     response = &DescribeComputeEnvsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeComputeEnvs
@@ -841,8 +853,9 @@ func NewDescribeCvmZoneInstanceConfigInfosRequest() (request *DescribeCvmZoneIns
 func NewDescribeCvmZoneInstanceConfigInfosResponse() (response *DescribeCvmZoneInstanceConfigInfosResponse) {
     response = &DescribeCvmZoneInstanceConfigInfosResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeCvmZoneInstanceConfigInfos
@@ -905,8 +918,9 @@ func NewDescribeInstanceCategoriesRequest() (request *DescribeInstanceCategories
 func NewDescribeInstanceCategoriesResponse() (response *DescribeInstanceCategoriesResponse) {
     response = &DescribeInstanceCategoriesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeInstanceCategories
@@ -955,8 +969,9 @@ func NewDescribeJobRequest() (request *DescribeJobRequest) {
 func NewDescribeJobResponse() (response *DescribeJobResponse) {
     response = &DescribeJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeJob
@@ -1007,8 +1022,9 @@ func NewDescribeJobSubmitInfoRequest() (request *DescribeJobSubmitInfoRequest) {
 func NewDescribeJobSubmitInfoResponse() (response *DescribeJobSubmitInfoResponse) {
     response = &DescribeJobSubmitInfoResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeJobSubmitInfo
@@ -1059,8 +1075,9 @@ func NewDescribeJobsRequest() (request *DescribeJobsRequest) {
 func NewDescribeJobsResponse() (response *DescribeJobsResponse) {
     response = &DescribeJobsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeJobs
@@ -1123,8 +1140,9 @@ func NewDescribeTaskRequest() (request *DescribeTaskRequest) {
 func NewDescribeTaskResponse() (response *DescribeTaskResponse) {
     response = &DescribeTaskResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTask
@@ -1175,8 +1193,9 @@ func NewDescribeTaskLogsRequest() (request *DescribeTaskLogsRequest) {
 func NewDescribeTaskLogsResponse() (response *DescribeTaskLogsResponse) {
     response = &DescribeTaskLogsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTaskLogs
@@ -1241,8 +1260,9 @@ func NewDescribeTaskTemplatesRequest() (request *DescribeTaskTemplatesRequest) {
 func NewDescribeTaskTemplatesResponse() (response *DescribeTaskTemplatesResponse) {
     response = &DescribeTaskTemplatesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DescribeTaskTemplates
@@ -1297,8 +1317,9 @@ func NewDetachInstancesRequest() (request *DetachInstancesRequest) {
 func NewDetachInstancesResponse() (response *DetachInstancesResponse) {
     response = &DetachInstancesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // DetachInstances
@@ -1357,8 +1378,9 @@ func NewModifyComputeEnvRequest() (request *ModifyComputeEnvRequest) {
 func NewModifyComputeEnvResponse() (response *ModifyComputeEnvResponse) {
     response = &ModifyComputeEnvResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyComputeEnv
@@ -1435,8 +1457,9 @@ func NewModifyTaskTemplateRequest() (request *ModifyTaskTemplateRequest) {
 func NewModifyTaskTemplateResponse() (response *ModifyTaskTemplateResponse) {
     response = &ModifyTaskTemplateResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // ModifyTaskTemplate
@@ -1519,8 +1542,9 @@ func NewRetryJobsRequest() (request *RetryJobsRequest) {
 func NewRetryJobsResponse() (response *RetryJobsResponse) {
     response = &RetryJobsResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // RetryJobs
@@ -1577,8 +1601,9 @@ func NewTerminateComputeNodeRequest() (request *TerminateComputeNodeRequest) {
 func NewTerminateComputeNodeResponse() (response *TerminateComputeNodeResponse) {
     response = &TerminateComputeNodeResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TerminateComputeNode
@@ -1645,8 +1670,9 @@ func NewTerminateComputeNodesRequest() (request *TerminateComputeNodesRequest) {
 func NewTerminateComputeNodesResponse() (response *TerminateComputeNodesResponse) {
     response = &TerminateComputeNodesResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TerminateComputeNodes
@@ -1707,8 +1733,9 @@ func NewTerminateJobRequest() (request *TerminateJobRequest) {
 func NewTerminateJobResponse() (response *TerminateJobResponse) {
     response = &TerminateJobResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TerminateJob
@@ -1773,8 +1800,9 @@ func NewTerminateTaskInstanceRequest() (request *TerminateTaskInstanceRequest) {
 func NewTerminateTaskInstanceResponse() (response *TerminateTaskInstanceResponse) {
     response = &TerminateTaskInstanceResponse{
         BaseResponse: &tchttp.BaseResponse{},
-    }
+    } 
     return
+
 }
 
 // TerminateTaskInstance
