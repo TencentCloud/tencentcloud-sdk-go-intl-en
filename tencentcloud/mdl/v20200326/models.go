@@ -2092,6 +2092,9 @@ type EventSettingsReq struct {
 
 	// The duration of the segment in 90kHz ticks.It used to  give the splicer an indication of when the break will be over and when the network In Point will occur. If not specifyed,the splice_insert will continue when enter a return_to_network to end the splice_insert at the appropriate time.
 	SpliceDuration *uint64 `json:"SpliceDuration,omitnil" name:"SpliceDuration"`
+
+	// Meta information plan configuration.
+	TimedMetadataSetting *TimedMetadataInfo `json:"TimedMetadataSetting,omitnil" name:"TimedMetadataSetting"`
 }
 
 type EventSettingsResp struct {
@@ -2118,6 +2121,9 @@ type EventSettingsResp struct {
 
 	// The duration of the segment in 90kHz ticks.It used to  give the splicer an indication of when the break will be over and when the network In Point will occur. If not specifyed,the splice_insert will continue when enter a return_to_network to end the splice_insert at the appropriate time.
 	SpliceDuration *string `json:"SpliceDuration,omitnil" name:"SpliceDuration"`
+
+	// Meta information plan configuration.
+	TimedMetadataSetting *TimedMetadataInfo `json:"TimedMetadataSetting,omitnil" name:"TimedMetadataSetting"`
 }
 
 type FailOverSettings struct {
@@ -2661,6 +2667,9 @@ type OutputInfo struct {
 	// Audio/Video transcoding template name. If `HlsRemuxSettings.Scheme` is `MERGE`, there is 1 audio/video transcoding template. Otherwise, this parameter is empty.
 	// Note: this field may return `null`, indicating that no valid value was found.
 	AVTemplateNames []*string `json:"AVTemplateNames,omitnil" name:"AVTemplateNames"`
+
+	// Meta information controls configuration.
+	TimedMetadataSettings *TimedMetadataSettingInfo `json:"TimedMetadataSettings,omitnil" name:"TimedMetadataSettings"`
 }
 
 type OutputsStatistics struct {
@@ -3196,6 +3205,16 @@ type TimeShiftSettingsInfo struct {
 	// Allowable time-shift period (s). Value range: [600, 1209600]. Default value: 300
 	// Note: This field may return `null`, indicating that no valid value was found.
 	StartoverWindow *int64 `json:"StartoverWindow,omitnil" name:"StartoverWindow"`
+}
+
+type TimedMetadataInfo struct {
+	// Base64-encoded id3 metadata information, with a maximum limit of 1024 characters.
+	ID3 *string `json:"ID3,omitnil" name:"ID3"`
+}
+
+type TimedMetadataSettingInfo struct {
+	// Whether to transparently transmit ID3 information, optional values: 0:NO_PASSTHROUGH, 1:PASSTHROUGH, default 0.
+	Behavior *uint64 `json:"Behavior,omitnil" name:"Behavior"`
 }
 
 type TimedRecordSettings struct {
