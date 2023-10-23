@@ -19,7 +19,6 @@ func NewProviderChain(providers []Provider) Provider {
 //  1. Environment variable
 //  2. Profile
 //  3. CvmRole
-//
 // If you want to customize the search order, please use the function NewProviderChain
 func DefaultProviderChain() Provider {
 	return NewProviderChain([]Provider{DefaultEnvProvider(), DefaultProfileProvider(), DefaultCvmRoleProvider()})
