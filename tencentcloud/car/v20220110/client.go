@@ -299,6 +299,65 @@ func (c *Client) StartPublishStreamWithContext(ctx context.Context, request *Sta
     return
 }
 
+func NewStartPublishStreamWithURLRequest() (request *StartPublishStreamWithURLRequest) {
+    request = &StartPublishStreamWithURLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "StartPublishStreamWithURL")
+    
+    
+    return
+}
+
+func NewStartPublishStreamWithURLResponse() (response *StartPublishStreamWithURLResponse) {
+    response = &StartPublishStreamWithURLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StartPublishStreamWithURL
+// This API is used to start stream push to the specified URL. It is billed separately. For billing details, see the [Push to third-party address](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6) section.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
+func (c *Client) StartPublishStreamWithURL(request *StartPublishStreamWithURLRequest) (response *StartPublishStreamWithURLResponse, err error) {
+    return c.StartPublishStreamWithURLWithContext(context.Background(), request)
+}
+
+// StartPublishStreamWithURL
+// This API is used to start stream push to the specified URL. It is billed separately. For billing details, see the [Push to third-party address](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6) section.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
+func (c *Client) StartPublishStreamWithURLWithContext(ctx context.Context, request *StartPublishStreamWithURLRequest) (response *StartPublishStreamWithURLResponse, err error) {
+    if request == nil {
+        request = NewStartPublishStreamWithURLRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartPublishStreamWithURL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartPublishStreamWithURLResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStopPublishStreamRequest() (request *StopPublishStreamRequest) {
     request = &StopPublishStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},

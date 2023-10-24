@@ -339,6 +339,67 @@ func (r *StartPublishStreamResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type StartPublishStreamWithURLRequestParams struct {
+	// Unique user ID, which is customized by you and is not understood by CAR.
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
+
+	// Push address. Only RTMP is supported for push currently.
+	PublishStreamURL *string `json:"PublishStreamURL,omitnil" name:"PublishStreamURL"`
+}
+
+type StartPublishStreamWithURLRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique user ID, which is customized by you and is not understood by CAR.
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
+
+	// Push address. Only RTMP is supported for push currently.
+	PublishStreamURL *string `json:"PublishStreamURL,omitnil" name:"PublishStreamURL"`
+}
+
+func (r *StartPublishStreamWithURLRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartPublishStreamWithURLRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "UserId")
+	delete(f, "PublishStreamURL")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartPublishStreamWithURLRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartPublishStreamWithURLResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type StartPublishStreamWithURLResponse struct {
+	*tchttp.BaseResponse
+	Response *StartPublishStreamWithURLResponseParams `json:"Response"`
+}
+
+func (r *StartPublishStreamWithURLResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartPublishStreamWithURLResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type StopPublishStreamRequestParams struct {
 	// Unique user ID, which is customized by you and is not understood by CAR. It can also be randomly generated using the timestamp and should be kept unchanged during user reconnection.
 	UserId *string `json:"UserId,omitnil" name:"UserId"`
