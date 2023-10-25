@@ -2643,7 +2643,7 @@ type CloneCDNDomainRequestParams struct {
 	// The cloned domain.
 	ReferenceDomain *string `json:"ReferenceDomain,omitnil" name:"ReferenceDomain"`
 
-	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	// VOD[Subapplication](https://www.tencentcloud.com/document/product/266/33987) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -2656,7 +2656,7 @@ type CloneCDNDomainRequest struct {
 	// The cloned domain.
 	ReferenceDomain *string `json:"ReferenceDomain,omitnil" name:"ReferenceDomain"`
 
-	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	// VOD[Subapplication](https://www.tencentcloud.com/document/product/266/33987) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -3776,7 +3776,7 @@ type CreateCDNDomainRequestParams struct {
 	// Domain configuration.
 	Config *CDNDomainConfig `json:"Config,omitnil" name:"Config"`
 
-	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	// VOD[Subapplication](https://www.tencentcloud.com/zh/document/product/266/33987) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -3789,7 +3789,7 @@ type CreateCDNDomainRequest struct {
 	// Domain configuration.
 	Config *CDNDomainConfig `json:"Config,omitnil" name:"Config"`
 
-	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	// VOD[Subapplication](https://www.tencentcloud.com/zh/document/product/266/33987) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -17664,6 +17664,135 @@ func (r *ProcessMediaByUrlResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ProcessMediaRequestParams struct {
+	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
+	FileId *string `json:"FileId,omitnil" name:"FileId"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// Parameter of video processing task.
+	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitnil" name:"MediaProcessTask"`
+
+	// The information of the audio/video moderation task\*.
+	// This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
+	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitnil" name:"AiContentReviewTask"`
+
+	// Video content analysis task parameter.
+	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil" name:"AiAnalysisTask"`
+
+	// Type parameter of video content recognition task.
+	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil" name:"AiRecognitionTask"`
+
+	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitnil" name:"TasksPriority"`
+
+	// Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
+	TasksNotifyMode *string `json:"TasksNotifyMode,omitnil" name:"TasksNotifyMode"`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
+
+	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
+
+	// Reserved field for special purposes.
+	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
+}
+
+type ProcessMediaRequest struct {
+	*tchttp.BaseRequest
+	
+	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
+	FileId *string `json:"FileId,omitnil" name:"FileId"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// Parameter of video processing task.
+	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitnil" name:"MediaProcessTask"`
+
+	// The information of the audio/video moderation task\*.
+	// This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
+	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitnil" name:"AiContentReviewTask"`
+
+	// Video content analysis task parameter.
+	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil" name:"AiAnalysisTask"`
+
+	// Type parameter of video content recognition task.
+	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil" name:"AiRecognitionTask"`
+
+	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitnil" name:"TasksPriority"`
+
+	// Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
+	TasksNotifyMode *string `json:"TasksNotifyMode,omitnil" name:"TasksNotifyMode"`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
+
+	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
+
+	// Reserved field for special purposes.
+	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
+}
+
+func (r *ProcessMediaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ProcessMediaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileId")
+	delete(f, "SubAppId")
+	delete(f, "MediaProcessTask")
+	delete(f, "AiContentReviewTask")
+	delete(f, "AiAnalysisTask")
+	delete(f, "AiRecognitionTask")
+	delete(f, "TasksPriority")
+	delete(f, "TasksNotifyMode")
+	delete(f, "SessionContext")
+	delete(f, "SessionId")
+	delete(f, "ExtInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ProcessMediaResponseParams struct {
+	// Task ID
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ProcessMediaResponse struct {
+	*tchttp.BaseResponse
+	Response *ProcessMediaResponseParams `json:"Response"`
+}
+
+func (r *ProcessMediaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ProcessMediaResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ProhibitedAsrReviewTemplateInfo struct {
 	// Switch of prohibited information detection in speech task. Valid values:
 	// <li>ON: enables prohibited information detection in speech task;</li>
@@ -21225,13 +21354,13 @@ type TempCertificate struct {
 }
 
 type TerrorismConfigureInfo struct {
-	// Parameters for recognition of terrorism content in images
-	// Note: This field may return `null`, indicating that no valid value can be found.
-	ImgReviewInfo *TerrorismImgReviewTemplateInfo `json:"ImgReviewInfo,omitnil" name:"ImgReviewInfo"`
-
 	// Parameters for OCR-based recognition of terrorism content
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	OcrReviewInfo *TerrorismOcrReviewTemplateInfo `json:"OcrReviewInfo,omitnil" name:"OcrReviewInfo"`
+
+	// Parameters for recognition of terrorism content in images
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	ImgReviewInfo *TerrorismImgReviewTemplateInfo `json:"ImgReviewInfo,omitnil" name:"ImgReviewInfo"`
 }
 
 type TerrorismConfigureInfoForUpdate struct {

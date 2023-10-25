@@ -698,7 +698,7 @@ type CloneLoadBalancerRequestParams struct {
 	// CLB network billing mode. This parameter is applicable only to public network CLB instances.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil" name:"InternetAccessible"`
 
-	// It's only applicable to public network CLB instances. u200dValues: `CMCC` (China Mobile), `CTCC`·(China Telecom) and `CUCC` (China Unicom). If it is not specified, BGP line is used by default. To query ISPs available in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). If this parameter is specified, the network billing mode must be `BANDWIDTH_PACKAGE`.
+	// ISP of VIP. Values: `CMCC` (China Mobile), `CUCC` (China Unicom) and `CTCC` (China Telecom). You need to activate static single-line IPs. This feature is in beta and is only available in Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu and Chongqing regions. To try it out, please contact your sales rep. If it's specified, the network billing mode must be `BANDWIDTH_PACKAGE`. If it's not specified, BGP is used by default. To query ISPs supported in a region, please use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). 
 	VipIsp *string `json:"VipIsp,omitnil" name:"VipIsp"`
 
 	// Applies for CLB instances for a specified VIP
@@ -762,7 +762,7 @@ type CloneLoadBalancerRequest struct {
 	// CLB network billing mode. This parameter is applicable only to public network CLB instances.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil" name:"InternetAccessible"`
 
-	// It's only applicable to public network CLB instances. u200dValues: `CMCC` (China Mobile), `CTCC`·(China Telecom) and `CUCC` (China Unicom). If it is not specified, BGP line is used by default. To query ISPs available in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). If this parameter is specified, the network billing mode must be `BANDWIDTH_PACKAGE`.
+	// ISP of VIP. Values: `CMCC` (China Mobile), `CUCC` (China Unicom) and `CTCC` (China Telecom). You need to activate static single-line IPs. This feature is in beta and is only available in Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu and Chongqing regions. To try it out, please contact your sales rep. If it's specified, the network billing mode must be `BANDWIDTH_PACKAGE`. If it's not specified, BGP is used by default. To query ISPs supported in a region, please use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). 
 	VipIsp *string `json:"VipIsp,omitnil" name:"VipIsp"`
 
 	// Applies for CLB instances for a specified VIP
@@ -1169,8 +1169,8 @@ type CreateLoadBalancerRequestParams struct {
 	// Number of CLBs to be created. Default value: 1.
 	Number *uint64 `json:"Number,omitnil" name:"Number"`
 
-	// Sets the primary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB.
-	// Note: By default, the traffic goes to the primary AZ. The secondary AZs only carry traffic when the primary AZ is unavailable. The optimal secondary AZ is chosen automatically. You can query the primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
+	// ID of the primary AZ for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`. It's only available to public CLB instances. 
+	// Note: The traffic only goes to the primary AZ in normal cases. The secondary AZ is used only when the primary AZ is unavailable. To query the list of primary AZs in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
 	MasterZoneId *string `json:"MasterZoneId,omitnil" name:"MasterZoneId"`
 
 	// Specifies an AZ ID for creating a CLB instance, such as `ap-guangzhou-1`, which is applicable only to public network CLB instances.
@@ -1179,7 +1179,7 @@ type CreateLoadBalancerRequestParams struct {
 	// It only works on LCU-supported instances on private networks and all instances on public networks.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil" name:"InternetAccessible"`
 
-	// It's only applicable to public network CLB instances. u200dValues: `CMCC` (China Mobile), `CTCC`·(China Telecom) and `CUCC` (China Unicom). If it is not specified, BGP line is used by default. To query ISPs available in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). If this parameter is specified, the network billing mode must be `BANDWIDTH_PACKAGE`.
+	// ISP of VIP. Values: `CMCC` (China Mobile), `CUCC` (China Unicom) and `CTCC` (China Telecom). You need to activate static single-line IPs. This feature is in beta and is only available in Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu and Chongqing regions. To try it out, please contact your sales rep. If it's specified, the network billing mode must be `BANDWIDTH_PACKAGE`. If it's not specified, BGP is used by default. To query ISPs supported in a region, please use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). 
 	VipIsp *string `json:"VipIsp,omitnil" name:"VipIsp"`
 
 	// Tags the CLB instance when purchasing it. Up to 20 tag key value pairs are supported.
@@ -1195,9 +1195,8 @@ type CreateLoadBalancerRequestParams struct {
 	// Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
 	ExclusiveCluster *ExclusiveCluster `json:"ExclusiveCluster,omitnil" name:"ExclusiveCluster"`
 
-	// Creates an LCU-supported instance.
-	// <ul><li>To create an LCU-supported instance, this parameter must be set to `SLA`, which indicates the Super Large 1 specification. 
-	// <ul><li>If you have activated Super Large LCU-supported instances, `SLA` indicates the Super Large 4 specification. Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category). </li></ul></li><li>It’s not required for a shared CLB instance. </li></ul>
+	// Specification of LCU-supported instance.
+	// <ul><li>This parameter is required to create LCU-supported instances. Values: <ul><li>`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4.</li><li>`clb.c2.medium`: Standard</li><li>`clb.c3.small`: Advanced 1</li><li>`clb.c3.medium`: Advanced 1</li><li>`clb.c4.small`: Super Large 1</li><li>`clb.c4.medium`: Super Large 2</li><li>`clb.c4.large`: Super Large 3</li><li>`clb.c4.xlarge`: Super Large 4</li> For Super Large 2 and above models, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).</ul></li><li> This parameter is not required for creating shared instances.</li></ul>For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
 	SlaType *string `json:"SlaType,omitnil" name:"SlaType"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
@@ -1224,6 +1223,9 @@ type CreateLoadBalancerRequestParams struct {
 
 	// Upgrades to domain name-based CLB
 	DynamicVip *bool `json:"DynamicVip,omitnil" name:"DynamicVip"`
+
+	// Network egress point
+	Egress *string `json:"Egress,omitnil" name:"Egress"`
 }
 
 type CreateLoadBalancerRequest struct {
@@ -1255,8 +1257,8 @@ type CreateLoadBalancerRequest struct {
 	// Number of CLBs to be created. Default value: 1.
 	Number *uint64 `json:"Number,omitnil" name:"Number"`
 
-	// Sets the primary AZ ID for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`, which is applicable only to public network CLB.
-	// Note: By default, the traffic goes to the primary AZ. The secondary AZs only carry traffic when the primary AZ is unavailable. The optimal secondary AZ is chosen automatically. You can query the primary and secondary AZ of a region by calling [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
+	// ID of the primary AZ for cross-AZ disaster recovery, such as `100001` or `ap-guangzhou-1`. It's only available to public CLB instances. 
+	// Note: The traffic only goes to the primary AZ in normal cases. The secondary AZ is used only when the primary AZ is unavailable. To query the list of primary AZs in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1).
 	MasterZoneId *string `json:"MasterZoneId,omitnil" name:"MasterZoneId"`
 
 	// Specifies an AZ ID for creating a CLB instance, such as `ap-guangzhou-1`, which is applicable only to public network CLB instances.
@@ -1265,7 +1267,7 @@ type CreateLoadBalancerRequest struct {
 	// It only works on LCU-supported instances on private networks and all instances on public networks.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil" name:"InternetAccessible"`
 
-	// It's only applicable to public network CLB instances. u200dValues: `CMCC` (China Mobile), `CTCC`·(China Telecom) and `CUCC` (China Unicom). If it is not specified, BGP line is used by default. To query ISPs available in a region, use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). If this parameter is specified, the network billing mode must be `BANDWIDTH_PACKAGE`.
+	// ISP of VIP. Values: `CMCC` (China Mobile), `CUCC` (China Unicom) and `CTCC` (China Telecom). You need to activate static single-line IPs. This feature is in beta and is only available in Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu and Chongqing regions. To try it out, please contact your sales rep. If it's specified, the network billing mode must be `BANDWIDTH_PACKAGE`. If it's not specified, BGP is used by default. To query ISPs supported in a region, please use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). 
 	VipIsp *string `json:"VipIsp,omitnil" name:"VipIsp"`
 
 	// Tags the CLB instance when purchasing it. Up to 20 tag key value pairs are supported.
@@ -1281,9 +1283,8 @@ type CreateLoadBalancerRequest struct {
 	// Information about the dedicated CLB instance. You must specify this parameter when you create a dedicated CLB instance in a private network.
 	ExclusiveCluster *ExclusiveCluster `json:"ExclusiveCluster,omitnil" name:"ExclusiveCluster"`
 
-	// Creates an LCU-supported instance.
-	// <ul><li>To create an LCU-supported instance, this parameter must be set to `SLA`, which indicates the Super Large 1 specification. 
-	// <ul><li>If you have activated Super Large LCU-supported instances, `SLA` indicates the Super Large 4 specification. Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category). </li></ul></li><li>It’s not required for a shared CLB instance. </li></ul>
+	// Specification of LCU-supported instance.
+	// <ul><li>This parameter is required to create LCU-supported instances. Values: <ul><li>`SLA`: Super Large 4. When you have activated Super Large models, `SLA` refers to Super Large 4.</li><li>`clb.c2.medium`: Standard</li><li>`clb.c3.small`: Advanced 1</li><li>`clb.c3.medium`: Advanced 1</li><li>`clb.c4.small`: Super Large 1</li><li>`clb.c4.medium`: Super Large 2</li><li>`clb.c4.large`: Super Large 3</li><li>`clb.c4.xlarge`: Super Large 4</li> For Super Large 2 and above models, please [submit a ticket](https://console.cloud.tencent.com/workorder/category).</ul></li><li> This parameter is not required for creating shared instances.</li></ul>For more details, see [Instance Specifications](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1).
 	SlaType *string `json:"SlaType,omitnil" name:"SlaType"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idempotency of the request cannot be guaranteed.
@@ -1310,6 +1311,9 @@ type CreateLoadBalancerRequest struct {
 
 	// Upgrades to domain name-based CLB
 	DynamicVip *bool `json:"DynamicVip,omitnil" name:"DynamicVip"`
+
+	// Network egress point
+	Egress *string `json:"Egress,omitnil" name:"Egress"`
 }
 
 func (r *CreateLoadBalancerRequest) ToJsonString() string {
@@ -1349,6 +1353,7 @@ func (r *CreateLoadBalancerRequest) FromJsonString(s string) error {
 	delete(f, "EipAddressId")
 	delete(f, "LoadBalancerPassToTarget")
 	delete(f, "DynamicVip")
+	delete(f, "Egress")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLoadBalancerRequest has unknown keys!", "")
 	}
@@ -4683,8 +4688,8 @@ type HealthCheck struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HttpCheckPath *string `json:"HttpCheckPath,omitnil" name:"HttpCheckPath"`
 
-	// Health check domain name. It is only applicable to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners. For HTTP health checks of TCP listeners, this parameter is required.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Health check domain name. It’s applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners. It’s required for HTTP health check of TCP listeners.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	HttpCheckDomain *string `json:"HttpCheckDomain,omitnil" name:"HttpCheckDomain"`
 
 	// Health check method (applicable only to HTTP/HTTPS forwarding rules and HTTP health checks of TCP listeners). Value range: HEAD, GET. Default value: HEAD.
@@ -4752,6 +4757,304 @@ type IdleLoadBalancer struct {
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 }
 
+// Predefined struct for user
+type InquiryPriceCreateLoadBalancerRequestParams struct {
+	// Network type of the CLB to query. `OPEN`: Public network; `INTERNAL`: Private network is intranet type
+	LoadBalancerType *string `json:"LoadBalancerType,omitnil" name:"LoadBalancerType"`
+
+	// The billing mode to query. `POSTPAID`:Pay as you go
+	LoadBalancerChargeType *string `json:"LoadBalancerChargeType,omitnil" name:"LoadBalancerChargeType"`
+
+	// Reserved field
+	LoadBalancerChargePrepaid *LBChargePrepaid `json:"LoadBalancerChargePrepaid,omitnil" name:"LoadBalancerChargePrepaid"`
+
+	// The network billing mode to query 
+	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil" name:"InternetAccessible"`
+
+	// Number of CLB instances to query. Default value: 1.
+	GoodsNum *uint64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
+
+	// Availability zone in the format of "ap-guangzhou-1"
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// To query the price of monthly subscribed LCU-supported instances, specify the instance specification in this parameter, such as `clb.c3.small`. For PAYG instances, use `SLA`.
+	SlaType *string `json:"SlaType,omitnil" name:"SlaType"`
+
+	// IP version. Valid values: `IPV4` (default), `IPV6` (IPV6 NAT64 version) or `IPv6FullChain` (IPv6 version). 
+	AddressIPVersion *string `json:"AddressIPVersion,omitnil" name:"AddressIPVersion"`
+
+	// ISP of VIP. Values: `CMCC` (China Mobile), `CUCC` (China Unicom) and `CTCC` (China Telecom). You need to activate static single-line IPs. This feature is in beta and is only available in Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu and Chongqing regions. To try it out, please contact your sales rep. If it's specified, the network billing mode must be `BANDWIDTH_PACKAGE`. If it's not specified, BGP is used by default. To query ISPs supported in a region, please use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). 
+	VipIsp *string `json:"VipIsp,omitnil" name:"VipIsp"`
+}
+
+type InquiryPriceCreateLoadBalancerRequest struct {
+	*tchttp.BaseRequest
+	
+	// Network type of the CLB to query. `OPEN`: Public network; `INTERNAL`: Private network is intranet type
+	LoadBalancerType *string `json:"LoadBalancerType,omitnil" name:"LoadBalancerType"`
+
+	// The billing mode to query. `POSTPAID`:Pay as you go
+	LoadBalancerChargeType *string `json:"LoadBalancerChargeType,omitnil" name:"LoadBalancerChargeType"`
+
+	// Reserved field
+	LoadBalancerChargePrepaid *LBChargePrepaid `json:"LoadBalancerChargePrepaid,omitnil" name:"LoadBalancerChargePrepaid"`
+
+	// The network billing mode to query 
+	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil" name:"InternetAccessible"`
+
+	// Number of CLB instances to query. Default value: 1.
+	GoodsNum *uint64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
+
+	// Availability zone in the format of "ap-guangzhou-1"
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// To query the price of monthly subscribed LCU-supported instances, specify the instance specification in this parameter, such as `clb.c3.small`. For PAYG instances, use `SLA`.
+	SlaType *string `json:"SlaType,omitnil" name:"SlaType"`
+
+	// IP version. Valid values: `IPV4` (default), `IPV6` (IPV6 NAT64 version) or `IPv6FullChain` (IPv6 version). 
+	AddressIPVersion *string `json:"AddressIPVersion,omitnil" name:"AddressIPVersion"`
+
+	// ISP of VIP. Values: `CMCC` (China Mobile), `CUCC` (China Unicom) and `CTCC` (China Telecom). You need to activate static single-line IPs. This feature is in beta and is only available in Guangzhou, Shanghai, Nanjing, Jinan, Hangzhou, Fuzhou, Beijing, Shijiazhuang, Wuhan, Changsha, Chengdu and Chongqing regions. To try it out, please contact your sales rep. If it's specified, the network billing mode must be `BANDWIDTH_PACKAGE`. If it's not specified, BGP is used by default. To query ISPs supported in a region, please use [DescribeResources](https://intl.cloud.tencent.com/document/api/214/70213?from_cn_redirect=1). 
+	VipIsp *string `json:"VipIsp,omitnil" name:"VipIsp"`
+}
+
+func (r *InquiryPriceCreateLoadBalancerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceCreateLoadBalancerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LoadBalancerType")
+	delete(f, "LoadBalancerChargeType")
+	delete(f, "LoadBalancerChargePrepaid")
+	delete(f, "InternetAccessible")
+	delete(f, "GoodsNum")
+	delete(f, "ZoneId")
+	delete(f, "SlaType")
+	delete(f, "AddressIPVersion")
+	delete(f, "VipIsp")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceCreateLoadBalancerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceCreateLoadBalancerResponseParams struct {
+	// Price of the instance with the specified configurations.
+	Price *Price `json:"Price,omitnil" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type InquiryPriceCreateLoadBalancerResponse struct {
+	*tchttp.BaseResponse
+	Response *InquiryPriceCreateLoadBalancerResponseParams `json:"Response"`
+}
+
+func (r *InquiryPriceCreateLoadBalancerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceCreateLoadBalancerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceModifyLoadBalancerRequestParams struct {
+	// CLB instance ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitnil" name:"LoadBalancerId"`
+
+	// New bandwidth bandwidth specification
+	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil" name:"InternetAccessible"`
+}
+
+type InquiryPriceModifyLoadBalancerRequest struct {
+	*tchttp.BaseRequest
+	
+	// CLB instance ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitnil" name:"LoadBalancerId"`
+
+	// New bandwidth bandwidth specification
+	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil" name:"InternetAccessible"`
+}
+
+func (r *InquiryPriceModifyLoadBalancerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceModifyLoadBalancerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LoadBalancerId")
+	delete(f, "InternetAccessible")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceModifyLoadBalancerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceModifyLoadBalancerResponseParams struct {
+	// Pricing information
+	Price *Price `json:"Price,omitnil" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type InquiryPriceModifyLoadBalancerResponse struct {
+	*tchttp.BaseResponse
+	Response *InquiryPriceModifyLoadBalancerResponseParams `json:"Response"`
+}
+
+func (r *InquiryPriceModifyLoadBalancerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceModifyLoadBalancerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceRefundLoadBalancerRequestParams struct {
+	// CLB instance ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitnil" name:"LoadBalancerId"`
+}
+
+type InquiryPriceRefundLoadBalancerRequest struct {
+	*tchttp.BaseRequest
+	
+	// CLB instance ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitnil" name:"LoadBalancerId"`
+}
+
+func (r *InquiryPriceRefundLoadBalancerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceRefundLoadBalancerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LoadBalancerId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceRefundLoadBalancerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceRefundLoadBalancerResponseParams struct {
+	// Price of the instance with the specified configurations.
+	Price *Price `json:"Price,omitnil" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type InquiryPriceRefundLoadBalancerResponse struct {
+	*tchttp.BaseResponse
+	Response *InquiryPriceRefundLoadBalancerResponseParams `json:"Response"`
+}
+
+func (r *InquiryPriceRefundLoadBalancerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceRefundLoadBalancerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceRenewLoadBalancerRequestParams struct {
+	// CLB instance ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitnil" name:"LoadBalancerId"`
+
+	// Renewal period
+	LoadBalancerChargePrepaid *LBChargePrepaid `json:"LoadBalancerChargePrepaid,omitnil" name:"LoadBalancerChargePrepaid"`
+}
+
+type InquiryPriceRenewLoadBalancerRequest struct {
+	*tchttp.BaseRequest
+	
+	// CLB instance ID
+	LoadBalancerId *string `json:"LoadBalancerId,omitnil" name:"LoadBalancerId"`
+
+	// Renewal period
+	LoadBalancerChargePrepaid *LBChargePrepaid `json:"LoadBalancerChargePrepaid,omitnil" name:"LoadBalancerChargePrepaid"`
+}
+
+func (r *InquiryPriceRenewLoadBalancerRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceRenewLoadBalancerRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LoadBalancerId")
+	delete(f, "LoadBalancerChargePrepaid")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceRenewLoadBalancerRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceRenewLoadBalancerResponseParams struct {
+	// Price to renew
+	Price *Price `json:"Price,omitnil" name:"Price"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type InquiryPriceRenewLoadBalancerResponse struct {
+	*tchttp.BaseResponse
+	Response *InquiryPriceRenewLoadBalancerResponseParams `json:"Response"`
+}
+
+func (r *InquiryPriceRenewLoadBalancerResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceRenewLoadBalancerResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type InternetAccessible struct {
 	// TRAFFIC_POSTPAID_BY_HOUR: hourly pay-as-you-go by traffic; BANDWIDTH_POSTPAID_BY_HOUR: hourly pay-as-you-go by bandwidth;
 	// BANDWIDTH_PACKAGE: billed by bandwidth package (currently, this method is supported only if the ISP is specified)
@@ -4768,6 +5071,34 @@ type InternetAccessible struct {
 	// Bandwidth package type, such as SINGLEISP
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	BandwidthpkgSubType *string `json:"BandwidthpkgSubType,omitnil" name:"BandwidthpkgSubType"`
+}
+
+type ItemPrice struct {
+	// PAYG unit price, in USD.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	UnitPrice *float64 `json:"UnitPrice,omitnil" name:"UnitPrice"`
+
+	// Subsequent billing unit. Value Range: 
+	// `HOUR`: Calculate the cost by hour. It's available when "InternetChargeType=POSTPAID_BY_HOUR".
+	// `GB`: Calculate the cost by traffic in GB. It's available when "InternetChargeType=TRAFFIC_POSTPAID_BY_HOUR".
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	ChargeUnit *string `json:"ChargeUnit,omitnil" name:"ChargeUnit"`
+
+	// Reserved field
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	OriginalPrice *float64 `json:"OriginalPrice,omitnil" name:"OriginalPrice"`
+
+	// Reserved field
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	DiscountPrice *float64 `json:"DiscountPrice,omitnil" name:"DiscountPrice"`
+
+	// Discount unit price of a pay-as-you-go instance, in USD.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	UnitPriceDiscount *float64 `json:"UnitPriceDiscount,omitnil" name:"UnitPriceDiscount"`
+
+	// Discount. For example, 20.0 indicates 80% off.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Discount *float64 `json:"Discount,omitnil" name:"Discount"`
 }
 
 type LBChargePrepaid struct {
@@ -4847,8 +5178,8 @@ type Listener struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SessionExpireTime *int64 `json:"SessionExpireTime,omitnil" name:"SessionExpireTime"`
 
-	// Whether to enable the SNI feature (this parameter is only meaningful for HTTPS listeners)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to enable SNI. `1`: Enable; `0`: Do not enable. This parameter is only meaningful for HTTPS listeners.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	SniSwitch *int64 `json:"SniSwitch,omitnil" name:"SniSwitch"`
 
 	// All forwarding rules under a listener (this parameter is meaningful only for HTTP/HTTPS listeners)
@@ -5189,6 +5520,10 @@ type LoadBalancer struct {
 	// Domain name of the CLB instance.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LoadBalancerDomain *string `json:"LoadBalancerDomain,omitnil" name:"LoadBalancerDomain"`
+
+	// Network egress
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Egress *string `json:"Egress,omitnil" name:"Egress"`
 }
 
 type LoadBalancerDetail struct {
@@ -5336,13 +5671,17 @@ type LoadBalancerDetail struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Zones []*string `json:"Zones,omitnil" name:"Zones"`
 
-	// Whether SNI is enabled. This parameter is only meaningful for HTTPS listeners.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Whether to enable SNI. `1`: Enable; `0`: Do not enable. This parameter is only meaningful for HTTPS listeners.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	SniSwitch *int64 `json:"SniSwitch,omitnil" name:"SniSwitch"`
 
 	// Domain name of the CLB instance.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LoadBalancerDomain *string `json:"LoadBalancerDomain,omitnil" name:"LoadBalancerDomain"`
+
+	// Network egress
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Egress *string `json:"Egress,omitnil" name:"Egress"`
 }
 
 type LoadBalancerHealth struct {
@@ -6230,6 +6569,67 @@ func (r *ModifyLoadBalancerSlaResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyLoadBalancersProjectRequestParams struct {
+	// IDs of CLB instances ID(s).
+	LoadBalancerIds []*string `json:"LoadBalancerIds,omitnil" name:"LoadBalancerIds"`
+
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
+}
+
+type ModifyLoadBalancersProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// IDs of CLB instances ID(s).
+	LoadBalancerIds []*string `json:"LoadBalancerIds,omitnil" name:"LoadBalancerIds"`
+
+	// Project ID
+	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
+}
+
+func (r *ModifyLoadBalancersProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLoadBalancersProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LoadBalancerIds")
+	delete(f, "ProjectId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLoadBalancersProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyLoadBalancersProjectResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ModifyLoadBalancersProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyLoadBalancersProjectResponseParams `json:"Response"`
+}
+
+func (r *ModifyLoadBalancersProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyLoadBalancersProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyRuleRequestParams struct {
 	// CLB instance ID
 	LoadBalancerId *string `json:"LoadBalancerId,omitnil" name:"LoadBalancerId"`
@@ -6738,6 +7138,20 @@ type MultiCertInfo struct {
 	CertList []*CertInfo `json:"CertList,omitnil" name:"CertList"`
 }
 
+type Price struct {
+	// Instance price.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	InstancePrice *ItemPrice `json:"InstancePrice,omitnil" name:"InstancePrice"`
+
+	// Network price.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	BandwidthPrice *ItemPrice `json:"BandwidthPrice,omitnil" name:"BandwidthPrice"`
+
+	// LCU price.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	LcuPrice *ItemPrice `json:"LcuPrice,omitnil" name:"LcuPrice"`
+}
+
 type Quota struct {
 	// Quota name. Valid values:
 	// <li> `TOTAL_OPEN_CLB_QUOTA`: Quota of public network CLB instances in the current region</li>
@@ -7146,7 +7560,7 @@ type RewriteLocationMap struct {
 	// Source forwarding rule ID
 	SourceLocationId *string `json:"SourceLocationId,omitnil" name:"SourceLocationId"`
 
-	// Forwarding rule ID of a redirect target
+	// ID of the forwarding rule of the destination
 	TargetLocationId *string `json:"TargetLocationId,omitnil" name:"TargetLocationId"`
 
 	// Redirection status code. Valid values: 301, 302, and 307.
@@ -7693,8 +8107,15 @@ type SlaUpdateParam struct {
 	// ID of the CLB instance
 	LoadBalancerId *string `json:"LoadBalancerId,omitnil" name:"LoadBalancerId"`
 
-	// u200dTo upgrade the instance to an LCU-support instance, set it to `SLA`. `SLA` indicates Super Large 1. 
-	// If you have activated Super Large LCU-supported instances, `SLA` indicates the Super Large 4 specification. Super u200dLarge LCU-supported specification is in beta now. u200cu200dTo join the beta, [submit a ticket](https://console.cloud.tencent.com/workorder/category).
+	// LCU-supported instance specification. Value:
+	// <li>`SLA`: If you have activated Super Large LCU-supported instances, `SLA` indicates Super Large 4.</li>
+	// <li>`clb.c2.medium`: Standard</li>
+	// <li>`clb.c3.small`: Advanced 1</li>
+	// <li>`clb.c3.medium`: Advanced 2</li>
+	// <li>`clb.c4.small`: Super Large 1</li>
+	// <li>`clb.c4.medium`: Super Large 2</li>
+	// <li>`clb.c4.large`: Super Large 3</li>
+	// <li>`clb.c4.xlarge`: Super Large 4</li> For Super Large 2 and above specifications, please [submit a ticket](https://console.cloud.tencent.com/workorder/category). For more specifications, see [Specifications Comparison](https://intl.cloud.tencent.com/document/product/214/84689?from_cn_redirect=1)
 	SlaType *string `json:"SlaType,omitnil" name:"SlaType"`
 }
 
@@ -7934,4 +8355,8 @@ type ZoneResource struct {
 
 	// Whether the AZ is an edge zone. Values: `true`, `false`.
 	EdgeZone *bool `json:"EdgeZone,omitnil" name:"EdgeZone"`
+
+	// Network egress
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Egress *string `json:"Egress,omitnil" name:"Egress"`
 }

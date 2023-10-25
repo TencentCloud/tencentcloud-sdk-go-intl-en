@@ -4836,6 +4836,7 @@ func NewDescribePersonSamplesResponse() (response *DescribePersonSamplesResponse
 // This API is used to query the information of samples and supports paginated queries by sample ID, name, and tag.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -4847,6 +4848,7 @@ func (c *Client) DescribePersonSamples(request *DescribePersonSamplesRequest) (r
 // This API is used to query the information of samples and supports paginated queries by sample ID, name, and tag.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
@@ -8326,6 +8328,85 @@ func (c *Client) ParseStreamingManifestWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewParseStreamingManifestResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewProcessMediaRequest() (request *ProcessMediaRequest) {
+    request = &ProcessMediaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ProcessMedia")
+    
+    
+    return
+}
+
+func NewProcessMediaResponse() (response *ProcessMediaResponse) {
+    response = &ProcessMediaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ProcessMedia
+// 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_NONEEDTOREDUCEMEDIABITRATE = "FailedOperation.NoNeedToReduceMediaBitrate"
+//  FAILEDOPERATION_TASKDUPLICATE = "FailedOperation.TaskDuplicate"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AIANALYSISTASKDEFINITION = "InvalidParameterValue.AiAnalysisTaskDefinition"
+//  INVALIDPARAMETERVALUE_AICONTENTREVIEWTASKDEFINITION = "InvalidParameterValue.AiContentReviewTaskDefinition"
+//  INVALIDPARAMETERVALUE_AIRECOGNITIONTASKDEFINITION = "InvalidParameterValue.AiRecognitionTaskDefinition"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMediaResponse, err error) {
+    return c.ProcessMediaWithContext(context.Background(), request)
+}
+
+// ProcessMedia
+// 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_NONEEDTOREDUCEMEDIABITRATE = "FailedOperation.NoNeedToReduceMediaBitrate"
+//  FAILEDOPERATION_TASKDUPLICATE = "FailedOperation.TaskDuplicate"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AIANALYSISTASKDEFINITION = "InvalidParameterValue.AiAnalysisTaskDefinition"
+//  INVALIDPARAMETERVALUE_AICONTENTREVIEWTASKDEFINITION = "InvalidParameterValue.AiContentReviewTaskDefinition"
+//  INVALIDPARAMETERVALUE_AIRECOGNITIONTASKDEFINITION = "InvalidParameterValue.AiRecognitionTaskDefinition"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ProcessMediaWithContext(ctx context.Context, request *ProcessMediaRequest) (response *ProcessMediaResponse, err error) {
+    if request == nil {
+        request = NewProcessMediaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ProcessMedia require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewProcessMediaResponse()
     err = c.Send(request, response)
     return
 }

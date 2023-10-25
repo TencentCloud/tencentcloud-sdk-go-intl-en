@@ -3025,6 +3025,7 @@ func NewDescribeQuotaResponse() (response *DescribeQuotaResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeQuota(request *DescribeQuotaRequest) (response *DescribeQuotaResponse, err error) {
     return c.DescribeQuotaWithContext(context.Background(), request)
@@ -3035,6 +3036,7 @@ func (c *Client) DescribeQuota(request *DescribeQuotaRequest) (response *Describ
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeQuotaWithContext(ctx context.Context, request *DescribeQuotaRequest) (response *DescribeQuotaResponse, err error) {
     if request == nil {
@@ -3599,6 +3601,234 @@ func (c *Client) DisassociateTargetGroupsWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDisassociateTargetGroupsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquiryPriceCreateLoadBalancerRequest() (request *InquiryPriceCreateLoadBalancerRequest) {
+    request = &InquiryPriceCreateLoadBalancerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "InquiryPriceCreateLoadBalancer")
+    
+    
+    return
+}
+
+func NewInquiryPriceCreateLoadBalancerResponse() (response *InquiryPriceCreateLoadBalancerResponse) {
+    response = &InquiryPriceCreateLoadBalancerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InquiryPriceCreateLoadBalancer
+// This API is used to query the price of creating a CLB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) InquiryPriceCreateLoadBalancer(request *InquiryPriceCreateLoadBalancerRequest) (response *InquiryPriceCreateLoadBalancerResponse, err error) {
+    return c.InquiryPriceCreateLoadBalancerWithContext(context.Background(), request)
+}
+
+// InquiryPriceCreateLoadBalancer
+// This API is used to query the price of creating a CLB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) InquiryPriceCreateLoadBalancerWithContext(ctx context.Context, request *InquiryPriceCreateLoadBalancerRequest) (response *InquiryPriceCreateLoadBalancerResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceCreateLoadBalancerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquiryPriceCreateLoadBalancer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInquiryPriceCreateLoadBalancerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquiryPriceModifyLoadBalancerRequest() (request *InquiryPriceModifyLoadBalancerRequest) {
+    request = &InquiryPriceModifyLoadBalancerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "InquiryPriceModifyLoadBalancer")
+    
+    
+    return
+}
+
+func NewInquiryPriceModifyLoadBalancerResponse() (response *InquiryPriceModifyLoadBalancerResponse) {
+    response = &InquiryPriceModifyLoadBalancerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InquiryPriceModifyLoadBalancer
+// This API is used to query the price of adjusting the specification of a CLB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) InquiryPriceModifyLoadBalancer(request *InquiryPriceModifyLoadBalancerRequest) (response *InquiryPriceModifyLoadBalancerResponse, err error) {
+    return c.InquiryPriceModifyLoadBalancerWithContext(context.Background(), request)
+}
+
+// InquiryPriceModifyLoadBalancer
+// This API is used to query the price of adjusting the specification of a CLB instance.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) InquiryPriceModifyLoadBalancerWithContext(ctx context.Context, request *InquiryPriceModifyLoadBalancerRequest) (response *InquiryPriceModifyLoadBalancerResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceModifyLoadBalancerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquiryPriceModifyLoadBalancer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInquiryPriceModifyLoadBalancerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquiryPriceRefundLoadBalancerRequest() (request *InquiryPriceRefundLoadBalancerRequest) {
+    request = &InquiryPriceRefundLoadBalancerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "InquiryPriceRefundLoadBalancer")
+    
+    
+    return
+}
+
+func NewInquiryPriceRefundLoadBalancerResponse() (response *InquiryPriceRefundLoadBalancerResponse) {
+    response = &InquiryPriceRefundLoadBalancerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InquiryPriceRefundLoadBalancer
+// This API is used to query the refund amount of returning a CLB instance. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+func (c *Client) InquiryPriceRefundLoadBalancer(request *InquiryPriceRefundLoadBalancerRequest) (response *InquiryPriceRefundLoadBalancerResponse, err error) {
+    return c.InquiryPriceRefundLoadBalancerWithContext(context.Background(), request)
+}
+
+// InquiryPriceRefundLoadBalancer
+// This API is used to query the refund amount of returning a CLB instance. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+func (c *Client) InquiryPriceRefundLoadBalancerWithContext(ctx context.Context, request *InquiryPriceRefundLoadBalancerRequest) (response *InquiryPriceRefundLoadBalancerResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceRefundLoadBalancerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquiryPriceRefundLoadBalancer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInquiryPriceRefundLoadBalancerResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquiryPriceRenewLoadBalancerRequest() (request *InquiryPriceRenewLoadBalancerRequest) {
+    request = &InquiryPriceRenewLoadBalancerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "InquiryPriceRenewLoadBalancer")
+    
+    
+    return
+}
+
+func NewInquiryPriceRenewLoadBalancerResponse() (response *InquiryPriceRenewLoadBalancerResponse) {
+    response = &InquiryPriceRenewLoadBalancerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InquiryPriceRenewLoadBalancer
+// This API is used to query the price of renewing a CLB instance. It's only available to prepaid CLB instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) InquiryPriceRenewLoadBalancer(request *InquiryPriceRenewLoadBalancerRequest) (response *InquiryPriceRenewLoadBalancerResponse, err error) {
+    return c.InquiryPriceRenewLoadBalancerWithContext(context.Background(), request)
+}
+
+// InquiryPriceRenewLoadBalancer
+// This API is used to query the price of renewing a CLB instance. It's only available to prepaid CLB instances.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) InquiryPriceRenewLoadBalancerWithContext(ctx context.Context, request *InquiryPriceRenewLoadBalancerRequest) (response *InquiryPriceRenewLoadBalancerResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceRenewLoadBalancerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquiryPriceRenewLoadBalancer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInquiryPriceRenewLoadBalancerResponse()
     err = c.Send(request, response)
     return
 }
@@ -4232,6 +4462,69 @@ func (c *Client) ModifyLoadBalancerSlaWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewModifyLoadBalancerSlaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyLoadBalancersProjectRequest() (request *ModifyLoadBalancersProjectRequest) {
+    request = &ModifyLoadBalancersProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("clb", APIVersion, "ModifyLoadBalancersProject")
+    
+    
+    return
+}
+
+func NewModifyLoadBalancersProjectResponse() (response *ModifyLoadBalancersProjectResponse) {
+    response = &ModifyLoadBalancersProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyLoadBalancersProject
+// This API is used to modify the projects of CLB instances. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyLoadBalancersProject(request *ModifyLoadBalancersProjectRequest) (response *ModifyLoadBalancersProjectResponse, err error) {
+    return c.ModifyLoadBalancersProjectWithContext(context.Background(), request)
+}
+
+// ModifyLoadBalancersProject
+// This API is used to modify the projects of CLB instances. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETER_LBIDNOTFOUND = "InvalidParameter.LBIdNotFound"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LENGTH = "InvalidParameterValue.Length"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyLoadBalancersProjectWithContext(ctx context.Context, request *ModifyLoadBalancersProjectRequest) (response *ModifyLoadBalancersProjectResponse, err error) {
+    if request == nil {
+        request = NewModifyLoadBalancersProjectRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyLoadBalancersProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyLoadBalancersProjectResponse()
     err = c.Send(request, response)
     return
 }
