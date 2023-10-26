@@ -45,6 +45,112 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewCreateAllocationTagRequest() (request *CreateAllocationTagRequest) {
+    request = &CreateAllocationTagRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "CreateAllocationTag")
+    
+    
+    return
+}
+
+func NewCreateAllocationTagResponse() (response *CreateAllocationTagResponse) {
+    response = &CreateAllocationTagResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAllocationTag
+// This API is used to batch set cost allocation tags.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateAllocationTag(request *CreateAllocationTagRequest) (response *CreateAllocationTagResponse, err error) {
+    return c.CreateAllocationTagWithContext(context.Background(), request)
+}
+
+// CreateAllocationTag
+// This API is used to batch set cost allocation tags.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateAllocationTagWithContext(ctx context.Context, request *CreateAllocationTagRequest) (response *CreateAllocationTagResponse, err error) {
+    if request == nil {
+        request = NewCreateAllocationTagRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAllocationTag require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAllocationTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteAllocationTagRequest() (request *DeleteAllocationTagRequest) {
+    request = &DeleteAllocationTagRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DeleteAllocationTag")
+    
+    
+    return
+}
+
+func NewDeleteAllocationTagResponse() (response *DeleteAllocationTagResponse) {
+    response = &DeleteAllocationTagResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteAllocationTag
+// u200cThis API is used to batch cancel cost allocation tags.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteAllocationTag(request *DeleteAllocationTagRequest) (response *DeleteAllocationTagResponse, err error) {
+    return c.DeleteAllocationTagWithContext(context.Background(), request)
+}
+
+// DeleteAllocationTag
+// u200cThis API is used to batch cancel cost allocation tags.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DeleteAllocationTagWithContext(ctx context.Context, request *DeleteAllocationTagRequest) (response *DeleteAllocationTagResponse, err error) {
+    if request == nil {
+        request = NewDeleteAllocationTagRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAllocationTag require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAllocationTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAccountBalanceRequest() (request *DescribeAccountBalanceRequest) {
     request = &DescribeAccountBalanceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -124,9 +230,13 @@ func NewDescribeBillDetailResponse() (response *DescribeBillDetailResponse) {
 }
 
 // DescribeBillDetail
-// This API is used to get bill details. 
+// u200cThis API is used to get bill details.
 //
-// Notes: 1. The API request may fail due to network instability or other network exceptions. In this case, we recommend you manually retry the request when the API request fails. 2. If the volume of your bill data is high (for example, if over 200 thousand bill entries are generated for a month), querying bill data via APIs may be slow. We recommend you enable bill storage so that you can obtain bill files from COS buckets for analysis. For details, see [Saving Bills to COS](https://intl.cloud.tencent.com/document/product/555/61275?from_cn_redirect=1).
+// Note:
+//
+// 1. The API request may fail due to network instability or other exceptions. In this case, we recommend you manually retry the request when the API request fails.
+//
+// 2.If the volume of your bill data is high (for example, if over 200 thousand bill entries are generated for a month), bill data query via APIs may be slow. We recommend you enable bill storage so that you can obtain bill files from COS buckets for analysis. For details, see [Saving Bills to COS](https://intl.cloud.tencent.com/document/product/555/61275?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_QUERYCOUNTFAILED = "FailedOperation.QueryCountFailed"
@@ -141,9 +251,13 @@ func (c *Client) DescribeBillDetail(request *DescribeBillDetailRequest) (respons
 }
 
 // DescribeBillDetail
-// This API is used to get bill details. 
+// u200cThis API is used to get bill details.
 //
-// Notes: 1. The API request may fail due to network instability or other network exceptions. In this case, we recommend you manually retry the request when the API request fails. 2. If the volume of your bill data is high (for example, if over 200 thousand bill entries are generated for a month), querying bill data via APIs may be slow. We recommend you enable bill storage so that you can obtain bill files from COS buckets for analysis. For details, see [Saving Bills to COS](https://intl.cloud.tencent.com/document/product/555/61275?from_cn_redirect=1).
+// Note:
+//
+// 1. The API request may fail due to network instability or other exceptions. In this case, we recommend you manually retry the request when the API request fails.
+//
+// 2.If the volume of your bill data is high (for example, if over 200 thousand bill entries are generated for a month), bill data query via APIs may be slow. We recommend you enable bill storage so that you can obtain bill files from COS buckets for analysis. For details, see [Saving Bills to COS](https://intl.cloud.tencent.com/document/product/555/61275?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_QUERYCOUNTFAILED = "FailedOperation.QueryCountFailed"
@@ -169,6 +283,124 @@ func (c *Client) DescribeBillDetailWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeBillDetailForOrganizationRequest() (request *DescribeBillDetailForOrganizationRequest) {
+    request = &DescribeBillDetailForOrganizationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeBillDetailForOrganization")
+    
+    
+    return
+}
+
+func NewDescribeBillDetailForOrganizationResponse() (response *DescribeBillDetailForOrganizationResponse) {
+    response = &DescribeBillDetailForOrganizationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBillDetailForOrganization
+// This API is used to get pay-on-behalf bills of the admin account (bill details).
+//
+// Note: The API request may fail due to network instability or other exceptions. In this case, we recommend you manually retry the request when the API request fails.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYCOUNTFAILED = "FailedOperation.QueryCountFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeBillDetailForOrganization(request *DescribeBillDetailForOrganizationRequest) (response *DescribeBillDetailForOrganizationResponse, err error) {
+    return c.DescribeBillDetailForOrganizationWithContext(context.Background(), request)
+}
+
+// DescribeBillDetailForOrganization
+// This API is used to get pay-on-behalf bills of the admin account (bill details).
+//
+// Note: The API request may fail due to network instability or other exceptions. In this case, we recommend you manually retry the request when the API request fails.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYCOUNTFAILED = "FailedOperation.QueryCountFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeBillDetailForOrganizationWithContext(ctx context.Context, request *DescribeBillDetailForOrganizationRequest) (response *DescribeBillDetailForOrganizationResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillDetailForOrganizationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillDetailForOrganization require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillDetailForOrganizationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBillDownloadUrlRequest() (request *DescribeBillDownloadUrlRequest) {
+    request = &DescribeBillDownloadUrlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeBillDownloadUrl")
+    
+    
+    return
+}
+
+func NewDescribeBillDownloadUrlResponse() (response *DescribeBillDownloadUrlResponse) {
+    response = &DescribeBillDownloadUrlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBillDownloadUrl
+// This API is used to get bill download URLs for L0, L1, L2, and L3 bills and bill packs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBillDownloadUrl(request *DescribeBillDownloadUrlRequest) (response *DescribeBillDownloadUrlResponse, err error) {
+    return c.DescribeBillDownloadUrlWithContext(context.Background(), request)
+}
+
+// DescribeBillDownloadUrl
+// This API is used to get bill download URLs for L0, L1, L2, and L3 bills and bill packs.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBillDownloadUrlWithContext(ctx context.Context, request *DescribeBillDownloadUrlRequest) (response *DescribeBillDownloadUrlResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillDownloadUrlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillDownloadUrl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillDownloadUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBillResourceSummaryRequest() (request *DescribeBillResourceSummaryRequest) {
     request = &DescribeBillResourceSummaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -189,7 +421,7 @@ func NewDescribeBillResourceSummaryResponse() (response *DescribeBillResourceSum
 }
 
 // DescribeBillResourceSummary
-// This API is used to query bill resources summary.
+// This API is used to get the bill summarized by instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SUMMARYDATANOTREADY = "FailedOperation.SummaryDataNotReady"
@@ -200,7 +432,7 @@ func (c *Client) DescribeBillResourceSummary(request *DescribeBillResourceSummar
 }
 
 // DescribeBillResourceSummary
-// This API is used to query bill resources summary.
+// This API is used to get the bill summarized by instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SUMMARYDATANOTREADY = "FailedOperation.SummaryDataNotReady"
@@ -218,6 +450,59 @@ func (c *Client) DescribeBillResourceSummaryWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDescribeBillResourceSummaryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBillResourceSummaryForOrganizationRequest() (request *DescribeBillResourceSummaryForOrganizationRequest) {
+    request = &DescribeBillResourceSummaryForOrganizationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeBillResourceSummaryForOrganization")
+    
+    
+    return
+}
+
+func NewDescribeBillResourceSummaryForOrganizationResponse() (response *DescribeBillResourceSummaryForOrganizationResponse) {
+    response = &DescribeBillResourceSummaryForOrganizationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBillResourceSummaryForOrganization
+// This API is used to get pay-on-behalf bills of the admin account (bills by instance).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SUMMARYDATANOTREADY = "FailedOperation.SummaryDataNotReady"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+func (c *Client) DescribeBillResourceSummaryForOrganization(request *DescribeBillResourceSummaryForOrganizationRequest) (response *DescribeBillResourceSummaryForOrganizationResponse, err error) {
+    return c.DescribeBillResourceSummaryForOrganizationWithContext(context.Background(), request)
+}
+
+// DescribeBillResourceSummaryForOrganization
+// This API is used to get pay-on-behalf bills of the admin account (bills by instance).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SUMMARYDATANOTREADY = "FailedOperation.SummaryDataNotReady"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+func (c *Client) DescribeBillResourceSummaryForOrganizationWithContext(ctx context.Context, request *DescribeBillResourceSummaryForOrganizationRequest) (response *DescribeBillResourceSummaryForOrganizationResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillResourceSummaryForOrganizationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillResourceSummaryForOrganization require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillResourceSummaryForOrganizationResponse()
     err = c.Send(request, response)
     return
 }
@@ -535,6 +820,7 @@ func NewDescribeBillSummaryByTagResponse() (response *DescribeBillSummaryByTagRe
 //  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByTag(request *DescribeBillSummaryByTagRequest) (response *DescribeBillSummaryByTagResponse, err error) {
@@ -548,6 +834,7 @@ func (c *Client) DescribeBillSummaryByTag(request *DescribeBillSummaryByTagReque
 //  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeBillSummaryByTagWithContext(ctx context.Context, request *DescribeBillSummaryByTagRequest) (response *DescribeBillSummaryByTagResponse, err error) {
@@ -562,6 +849,63 @@ func (c *Client) DescribeBillSummaryByTagWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeBillSummaryByTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBillSummaryForOrganizationRequest() (request *DescribeBillSummaryForOrganizationRequest) {
+    request = &DescribeBillSummaryForOrganizationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeBillSummaryForOrganization")
+    
+    
+    return
+}
+
+func NewDescribeBillSummaryForOrganizationResponse() (response *DescribeBillSummaryForOrganizationResponse) {
+    response = &DescribeBillSummaryForOrganizationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBillSummaryForOrganization
+// This API is used to get bills summarized by product, project, region, billing mode, and tag by passing in parameters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeBillSummaryForOrganization(request *DescribeBillSummaryForOrganizationRequest) (response *DescribeBillSummaryForOrganizationResponse, err error) {
+    return c.DescribeBillSummaryForOrganizationWithContext(context.Background(), request)
+}
+
+// DescribeBillSummaryForOrganization
+// This API is used to get bills summarized by product, project, region, billing mode, and tag by passing in parameters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeBillSummaryForOrganizationWithContext(ctx context.Context, request *DescribeBillSummaryForOrganizationRequest) (response *DescribeBillSummaryForOrganizationResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillSummaryForOrganizationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillSummaryForOrganization require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillSummaryForOrganizationResponse()
     err = c.Send(request, response)
     return
 }
@@ -611,6 +955,61 @@ func (c *Client) DescribeDosageCosDetailByDateWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeDosageCosDetailByDateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTagListRequest() (request *DescribeTagListRequest) {
+    request = &DescribeTagListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeTagList")
+    
+    
+    return
+}
+
+func NewDescribeTagListResponse() (response *DescribeTagListResponse) {
+    response = &DescribeTagListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTagList
+// This API is used to get cost allocation tags.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeTagList(request *DescribeTagListRequest) (response *DescribeTagListResponse, err error) {
+    return c.DescribeTagListWithContext(context.Background(), request)
+}
+
+// DescribeTagList
+// This API is used to get cost allocation tags.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeTagListWithContext(ctx context.Context, request *DescribeTagListRequest) (response *DescribeTagListResponse, err error) {
+    if request == nil {
+        request = NewDescribeTagListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTagList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTagListResponse()
     err = c.Send(request, response)
     return
 }

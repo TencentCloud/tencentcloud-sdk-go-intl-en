@@ -236,11 +236,12 @@ type ApplyWebVerificationBizTokenIntlRequestParams struct {
 	// The Base64-encoded string (max 8 MB in size) of the photo to be compared.
 	CompareImageBase64 *string `json:"CompareImageBase64,omitnil" name:"CompareImageBase64"`
 
-	// The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. Example: `https://www.tencentcloud.com/products/faceid`.
-	// After the verification process is completed, the `BizToken` of this process will be spliced to the callback URL in the format of `https://www.tencentcloud.com/products/faceid?token={BizToken}` before redirect.
+	// The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. 
+	// Example: https://www.tencentcloud.com/products/faceid.
+	// After the verification process is completed, the BizToken of this process will be spliced to the callback URL in the format of https://www.tencentcloud.com/products/faceid?token={BizToken} before redirect.
 	RedirectURL *string `json:"RedirectURL,omitnil" name:"RedirectURL"`
 
-	// The passthrough parameter of the business, max 1,000 characters, which will be returned in `GetWebVerificationResultIntl`.
+	// The passthrough parameter of the business, max 1,000 characters, which will be returned in GetWebVerificationResultIntl.
 	Extra *string `json:"Extra,omitnil" name:"Extra"`
 
 	// The parameter control the page configuration.
@@ -253,11 +254,12 @@ type ApplyWebVerificationBizTokenIntlRequest struct {
 	// The Base64-encoded string (max 8 MB in size) of the photo to be compared.
 	CompareImageBase64 *string `json:"CompareImageBase64,omitnil" name:"CompareImageBase64"`
 
-	// The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. Example: `https://www.tencentcloud.com/products/faceid`.
-	// After the verification process is completed, the `BizToken` of this process will be spliced to the callback URL in the format of `https://www.tencentcloud.com/products/faceid?token={BizToken}` before redirect.
+	// The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. 
+	// Example: https://www.tencentcloud.com/products/faceid.
+	// After the verification process is completed, the BizToken of this process will be spliced to the callback URL in the format of https://www.tencentcloud.com/products/faceid?token={BizToken} before redirect.
 	RedirectURL *string `json:"RedirectURL,omitnil" name:"RedirectURL"`
 
-	// The passthrough parameter of the business, max 1,000 characters, which will be returned in `GetWebVerificationResultIntl`.
+	// The passthrough parameter of the business, max 1,000 characters, which will be returned in GetWebVerificationResultIntl.
 	Extra *string `json:"Extra,omitnil" name:"Extra"`
 
 	// The parameter control the page configuration.
@@ -288,12 +290,12 @@ func (r *ApplyWebVerificationBizTokenIntlRequest) FromJsonString(s string) error
 
 // Predefined struct for user
 type ApplyWebVerificationBizTokenIntlResponseParams struct {
-	// The URL of this verification process, which will be returned to the frontend of the browser for starting the process.
+	// The token identifying this web-based verification process, valid for 7,200s after issuance. It is required for getting the result after the verification process is completed.
 	//
 	// Deprecated: VerificationUrl is deprecated.
 	VerificationUrl *string `json:"VerificationUrl,omitnil" name:"VerificationUrl"`
 
-	// The token identifying this web-based verification process, valid for 7,200s after issuance. It is required for getting the result after the verification process is completed.
+	// The token for the web-based verification, which is generated using the ApplyWebVerificationBizTokenIntl API.
 	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
 
 	// The verification URL to be opened with a browser to start the verification process.
@@ -510,6 +512,135 @@ type CardVerifyResult struct {
 
 	// The request ID of a single process.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+// Predefined struct for user
+type CompareFaceLivenessRequestParams struct {
+	// Base64 value of photos used for face comparison. 
+	// The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
+	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
+	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
+	ImageBase64 *string `json:"ImageBase64,omitnil" name:"ImageBase64"`
+
+	// Base64 value of photos used for face comparison. 
+	// The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
+	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
+	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
+	VideoBase64 *string `json:"VideoBase64,omitnil" name:"VideoBase64"`
+
+	// The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
+	// `LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
+	// Example value: "SILENT"
+	LivenessType *string `json:"LivenessType,omitnil" name:"LivenessType"`
+
+	// When the “LivenessType” parameter is “ACTION”, it must be specified.
+	// It is used to control the action sequence. Action types: 
+	// 1 (open mouth)
+	// 2 (blink)
+	// 3 (nod)
+	// 4 (shake head). 
+	// Select one or two from the four actions.
+	// Example of passing single action parameter: "1".
+	// Example of passing multiple action parameters: "4,2".
+	// When the “LivenessType” parameter value is “SILENT”, it shall be unspecified.
+	// Example value: ""
+	ValidateData *string `json:"ValidateData,omitnil" name:"ValidateData"`
+}
+
+type CompareFaceLivenessRequest struct {
+	*tchttp.BaseRequest
+	
+	// Base64 value of photos used for face comparison. 
+	// The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
+	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
+	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
+	ImageBase64 *string `json:"ImageBase64,omitnil" name:"ImageBase64"`
+
+	// Base64 value of photos used for face comparison. 
+	// The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
+	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
+	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
+	VideoBase64 *string `json:"VideoBase64,omitnil" name:"VideoBase64"`
+
+	// The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
+	// `LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
+	// Example value: "SILENT"
+	LivenessType *string `json:"LivenessType,omitnil" name:"LivenessType"`
+
+	// When the “LivenessType” parameter is “ACTION”, it must be specified.
+	// It is used to control the action sequence. Action types: 
+	// 1 (open mouth)
+	// 2 (blink)
+	// 3 (nod)
+	// 4 (shake head). 
+	// Select one or two from the four actions.
+	// Example of passing single action parameter: "1".
+	// Example of passing multiple action parameters: "4,2".
+	// When the “LivenessType” parameter value is “SILENT”, it shall be unspecified.
+	// Example value: ""
+	ValidateData *string `json:"ValidateData,omitnil" name:"ValidateData"`
+}
+
+func (r *CompareFaceLivenessRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CompareFaceLivenessRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "VideoBase64")
+	delete(f, "LivenessType")
+	delete(f, "ValidateData")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CompareFaceLivenessRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CompareFaceLivenessResponseParams struct {
+	// Service error code. When the return value is "Success", it indicates that the liveness detection and face comparison succeeded. It is determined that they are the same person. When the return value is "FailedOperation.CompareLowSimilarity", it indicates that the liveness detection succeeded, and the face comparison similarity is lower than 70 points. It is determined that they are not the same person. For other error cases, please refer to Liveness Face Comparison (Pure API) Error Code (https://www.tencentcloud.com/document/product/1061/55390). 
+	// Example Value: "Success".
+	Result *string `json:"Result,omitnil" name:"Result"`
+
+	// Description of business results. 
+	// Example value: "Success"
+	Description *string `json:"Description,omitnil" name:"Description"`
+
+	// This value is valid when the “Result” parameter is "Success" or "FailedOperation.CompareLowSimilarity." 
+	// This value indicates the similarity of face comparison. Value range: [0.00, 100.00]. The false pass rate for threshold 70 is 1 in 1,000, and the false pass rate for threshold 80 is 1 in 1,000. 
+	// Example value: 80.00
+	Sim *float64 `json:"Sim,omitnil" name:"Sim"`
+
+	// The optimal screenshot of the video after verification is the value encoded by BASE64, jpg format. 
+	// Note: This field may return “null”, indicating that no valid value can be obtained. 
+	// Example values: "/9j/4AAQSk... (total length:142036)s97n//2Q=="
+	BestFrameBase64 *string `json:"BestFrameBase64,omitnil" name:"BestFrameBase64"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type CompareFaceLivenessResponse struct {
+	*tchttp.BaseResponse
+	Response *CompareFaceLivenessResponseParams `json:"Response"`
+}
+
+func (r *CompareFaceLivenessResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CompareFaceLivenessResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type CompareResult struct {
@@ -1607,6 +1738,6 @@ func (r *VideoLivenessCompareResponse) FromJsonString(s string) error {
 }
 
 type WebVerificationConfigIntl struct {
-	// Whether to automatically redirect to `RedirectUrl` after successful verification. Default value: `false`.
+	// Whether to automatically redirect to RedirectUrl after successful verification. Default value: false.
 	AutoSkip *bool `json:"AutoSkip,omitnil" name:"AutoSkip"`
 }

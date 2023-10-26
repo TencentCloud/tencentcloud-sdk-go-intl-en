@@ -277,6 +277,67 @@ func (c *Client) ApplyWebVerificationTokenWithContext(ctx context.Context, reque
     return
 }
 
+func NewCompareFaceLivenessRequest() (request *CompareFaceLivenessRequest) {
+    request = &CompareFaceLivenessRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "CompareFaceLiveness")
+    
+    
+    return
+}
+
+func NewCompareFaceLivenessResponse() (response *CompareFaceLivenessResponse) {
+    response = &CompareFaceLivenessResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CompareFaceLiveness
+// This interface supports judgment of real person and photo comparison to verify the user's identity online. By passing the video and photo into the interface, it will first judge whether the person in the video is real. If yes, it judges whether the person in the video is the same one as the uploaded photo and returns authentication result.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ACTIVATING = "UnauthorizedOperation.Activating"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) CompareFaceLiveness(request *CompareFaceLivenessRequest) (response *CompareFaceLivenessResponse, err error) {
+    return c.CompareFaceLivenessWithContext(context.Background(), request)
+}
+
+// CompareFaceLiveness
+// This interface supports judgment of real person and photo comparison to verify the user's identity online. By passing the video and photo into the interface, it will first judge whether the person in the video is real. If yes, it judges whether the person in the video is the same one as the uploaded photo and returns authentication result.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ACTIVATING = "UnauthorizedOperation.Activating"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_NONAUTHORIZE = "UnauthorizedOperation.NonAuthorize"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) CompareFaceLivenessWithContext(ctx context.Context, request *CompareFaceLivenessRequest) (response *CompareFaceLivenessResponse, err error) {
+    if request == nil {
+        request = NewCompareFaceLivenessRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CompareFaceLiveness require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCompareFaceLivenessResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateUploadUrlRequest() (request *CreateUploadUrlRequest) {
     request = &CreateUploadUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
