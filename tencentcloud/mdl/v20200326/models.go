@@ -230,6 +230,9 @@ type CreateStreamLiveChannelRequestParams struct {
 
 	// Complement the last video frame settings.
 	InputLossBehavior *InputLossBehaviorInfo `json:"InputLossBehavior,omitnil" name:"InputLossBehavior"`
+
+	// Pipeline configuration.
+	PipelineInputSettings *PipelineInputSettingsInfo `json:"PipelineInputSettings,omitnil" name:"PipelineInputSettings"`
 }
 
 type CreateStreamLiveChannelRequest struct {
@@ -261,6 +264,9 @@ type CreateStreamLiveChannelRequest struct {
 
 	// Complement the last video frame settings.
 	InputLossBehavior *InputLossBehaviorInfo `json:"InputLossBehavior,omitnil" name:"InputLossBehavior"`
+
+	// Pipeline configuration.
+	PipelineInputSettings *PipelineInputSettingsInfo `json:"PipelineInputSettings,omitnil" name:"PipelineInputSettings"`
 }
 
 func (r *CreateStreamLiveChannelRequest) ToJsonString() string {
@@ -284,6 +290,7 @@ func (r *CreateStreamLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "PlanSettings")
 	delete(f, "EventNotifySettings")
 	delete(f, "InputLossBehavior")
+	delete(f, "PipelineInputSettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamLiveChannelRequest has unknown keys!", "")
 	}
@@ -2048,8 +2055,7 @@ type DrmSettingsInfo struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	SDMCSettings *SDMCSettingsInfo `json:"SDMCSettings,omitnil" name:"SDMCSettings"`
 
-	// The DRM type. Valid values: `FAIRPLAY`, `WIDEVINE`, `AES128`. For HLS, this can be `FAIRPLAY` or `AES128`. For DASH, this can only be `WIDEVINE`.
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// The DRM type. Valid values: `FAIRPLAY`, `WIDEVINE`, `AES128`, `PLAYREADY`. For HLS, this can be `FAIRPLAY` or `AES128` or `PLAYREADY`. For DASH, valid values: `WIDEVINE` or `PLAYREADY`. 
 	DrmType *string `json:"DrmType,omitnil" name:"DrmType"`
 }
 
@@ -2161,14 +2167,20 @@ type HlsRemuxSettingsInfo struct {
 	// The HLS package type when the H.265 codec is used. Valid values: `hvc1`, `hev1` (default).
 	H265PackageType *string `json:"H265PackageType,omitnil" name:"H265PackageType"`
 
-
+	// Whether to enable low latency 0:CLOSE, 1:OPEN, default value: 0.
 	LowLatency *uint64 `json:"LowLatency,omitnil" name:"LowLatency"`
 
-
+	// Low latency slice size, unit ms. Value range: integer [200-HlsRemuxSettings.SegmentDuration] Default value: 500ms.
 	PartialSegmentDuration *uint64 `json:"PartialSegmentDuration,omitnil" name:"PartialSegmentDuration"`
 
-
+	// Low latency slice playback position, unit ms. Value range: integer [3*HlsRemuxSettings.PartiSegmentDuration - 3*HlsRemuxSettings.SegmentDuration], Default value: 3*HlsRemuxSettings.PartiSegmentDuration.
 	PartialSegmentPlaySite *uint64 `json:"PartialSegmentPlaySite,omitnil" name:"PartialSegmentPlaySite"`
+
+	// Hls main m3u8 file sorting rules by bitrate, optional values: 1: video bitrate ascending order; 2: video bitrate descending order. Default value: 1.
+	StreamOrder *uint64 `json:"StreamOrder,omitnil" name:"StreamOrder"`
+
+	// Whether the Hls main m3u8 file contains resolution information, optional values: 1: INCLUDE includes video resolution; 2: EXCLUDE does not include video resolution. Default value: 1.
+	VideoResolution *uint64 `json:"VideoResolution,omitnil" name:"VideoResolution"`
 }
 
 type InputInfo struct {
@@ -2338,6 +2350,9 @@ type ModifyStreamLiveChannelRequestParams struct {
 
 	// Complement the last video frame settings.
 	InputLossBehavior *InputLossBehaviorInfo `json:"InputLossBehavior,omitnil" name:"InputLossBehavior"`
+
+	// Pipeline configuration.
+	PipelineInputSettings *PipelineInputSettingsInfo `json:"PipelineInputSettings,omitnil" name:"PipelineInputSettings"`
 }
 
 type ModifyStreamLiveChannelRequest struct {
@@ -2372,6 +2387,9 @@ type ModifyStreamLiveChannelRequest struct {
 
 	// Complement the last video frame settings.
 	InputLossBehavior *InputLossBehaviorInfo `json:"InputLossBehavior,omitnil" name:"InputLossBehavior"`
+
+	// Pipeline configuration.
+	PipelineInputSettings *PipelineInputSettingsInfo `json:"PipelineInputSettings,omitnil" name:"PipelineInputSettings"`
 }
 
 func (r *ModifyStreamLiveChannelRequest) ToJsonString() string {
@@ -2396,6 +2414,7 @@ func (r *ModifyStreamLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "PlanSettings")
 	delete(f, "EventNotifySettings")
 	delete(f, "InputLossBehavior")
+	delete(f, "PipelineInputSettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamLiveChannelRequest has unknown keys!", "")
 	}
@@ -2678,6 +2697,11 @@ type OutputsStatistics struct {
 
 	// Output information of pipeline 1.
 	Pipeline1 []*PipelineOutputStatistics `json:"Pipeline1,omitnil" name:"Pipeline1"`
+}
+
+type PipelineInputSettingsInfo struct {
+	// Pipeline failover configuration, the valid value is: 1.PIPELINE_FAILOVER (channels are mutually failover); 2.PIPELINE_FILLING (channels fill in themselves). Default value: PIPELINE_FILLING. The specific content is specified by FaultBehavior.
+	FaultBehavior *string `json:"FaultBehavior,omitnil" name:"FaultBehavior"`
 }
 
 type PipelineInputStatistics struct {
@@ -3113,6 +3137,9 @@ type StreamLiveChannelInfo struct {
 
 	// Supplement the last video frame configuration settings.
 	InputLossBehavior *InputLossBehaviorInfo `json:"InputLossBehavior,omitnil" name:"InputLossBehavior"`
+
+	// Pipeline configuration.
+	PipelineInputSettings *PipelineInputSettingsInfo `json:"PipelineInputSettings,omitnil" name:"PipelineInputSettings"`
 }
 
 type StreamLiveOutputGroupsInfo struct {
@@ -3202,8 +3229,7 @@ type TimeShiftSettingsInfo struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	PlayDomain *string `json:"PlayDomain,omitnil" name:"PlayDomain"`
 
-	// Allowable time-shift period (s). Value range: [600, 1209600]. Default value: 300
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Allowable time-shift period (s). Value range: [300, 2592000]. Default value: 300Note: This field may return `null`, indicating that no valid value was found.
 	StartoverWindow *int64 `json:"StartoverWindow,omitnil" name:"StartoverWindow"`
 }
 
