@@ -2101,6 +2101,18 @@ type DescribeTranscodeResponseParams struct {
 	// Note: This parameter may return null, indicating that no valid values can be obtained.
 	Ext *string `json:"Ext,omitnil" name:"Ext"`
 
+	// Document transcoding task creation time, unit: seconds.
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	CreateTime *uint64 `json:"CreateTime,omitnil" name:"CreateTime"`
+
+	// Document transcoding task assignment time, unit: seconds.
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	AssignTime *uint64 `json:"AssignTime,omitnil" name:"AssignTime"`
+
+	// Document transcoding task finished time, unit: seconds.
+	// Note: This parameter may return null, indicating that no valid values can be obtained.
+	FinishedTime *uint64 `json:"FinishedTime,omitnil" name:"FinishedTime"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }

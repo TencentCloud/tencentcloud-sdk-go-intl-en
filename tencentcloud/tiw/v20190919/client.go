@@ -181,6 +181,10 @@ func NewCreateOfflineRecordResponse() (response *CreateOfflineRecordResponse) {
 }
 
 // CreateOfflineRecord
+// 课后录制服务已下线
+//
+// 
+//
 // This API is used to create an offline recording task.
 //
 // error code that may be returned:
@@ -198,6 +202,10 @@ func (c *Client) CreateOfflineRecord(request *CreateOfflineRecordRequest) (respo
 }
 
 // CreateOfflineRecord
+// 课后录制服务已下线
+//
+// 
+//
 // This API is used to create an offline recording task.
 //
 // error code that may be returned:
@@ -724,6 +732,10 @@ func NewDescribeOfflineRecordResponse() (response *DescribeOfflineRecordResponse
 }
 
 // DescribeOfflineRecord
+// 课后录制服务已下线
+//
+// 
+//
 // This API is used to query the information about an offline recording task, including the recording progress and recording result.
 //
 // error code that may be returned:
@@ -740,6 +752,10 @@ func (c *Client) DescribeOfflineRecord(request *DescribeOfflineRecordRequest) (r
 }
 
 // DescribeOfflineRecord
+// 课后录制服务已下线
+//
+// 
+//
 // This API is used to query the information about an offline recording task, including the recording progress and recording result.
 //
 // error code that may be returned:
@@ -787,6 +803,10 @@ func NewDescribeOfflineRecordCallbackResponse() (response *DescribeOfflineRecord
 }
 
 // DescribeOfflineRecordCallback
+// 课后录制服务已下线
+//
+// 
+//
 // This API is used to query the offline recording callback URL.
 //
 // error code that may be returned:
@@ -800,6 +820,10 @@ func (c *Client) DescribeOfflineRecordCallback(request *DescribeOfflineRecordCal
 }
 
 // DescribeOfflineRecordCallback
+// 课后录制服务已下线
+//
+// 
+//
 // This API is used to query the offline recording callback URL.
 //
 // error code that may be returned:
@@ -2633,6 +2657,10 @@ func NewSetOfflineRecordCallbackResponse() (response *SetOfflineRecordCallbackRe
 }
 
 // SetOfflineRecordCallback
+// 课后录制服务已下线
+//
+// 
+//
 // This API is used to set the offline recording callback URL.
 //
 // error code that may be returned:
@@ -2647,6 +2675,10 @@ func (c *Client) SetOfflineRecordCallback(request *SetOfflineRecordCallbackReque
 }
 
 // SetOfflineRecordCallback
+// 课后录制服务已下线
+//
+// 
+//
 // This API is used to set the offline recording callback URL.
 //
 // error code that may be returned:

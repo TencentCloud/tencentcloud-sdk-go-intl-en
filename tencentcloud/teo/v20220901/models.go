@@ -982,6 +982,9 @@ func (r *CreateAccelerationDomainRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAccelerationDomainResponseParams struct {
+
+	OwnershipVerification *OwnershipVerification `json:"OwnershipVerification,omitnil" name:"OwnershipVerification"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
@@ -1685,7 +1688,7 @@ type CreatePurgeTaskRequestParams struct {
 	// <li>`purge_cache_tag`: Purge by the cache-tag </li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1).
 	Type *string `json:"Type,omitnil" name:"Type"`
 
-	// Configures how resources under the directory are purged when `Type = purge_prefix`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated. </li>Default value: `invalidate`.
+	// Configures how cache are purged. It works when `Type` is `purge_prefix`, `purge_host` or `purge_all`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated.</li>Note that when Type` is `purge_prefix`, it defaults to `invalidate`.
 	Method *string `json:"Method,omitnil" name:"Method"`
 
 	// List of cached resources to purge. The format for input depends on the type of cache purging. See examples below for details. <li>By default, non-ASCII characters u200dare escaped based on RFC3986.</li><li>The maximum number of tasks per purging request is determined by the EdgeOne plan. See [Billing Overview (New)](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1). </li>
@@ -1712,7 +1715,7 @@ type CreatePurgeTaskRequest struct {
 	// <li>`purge_cache_tag`: Purge by the cache-tag </li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1).
 	Type *string `json:"Type,omitnil" name:"Type"`
 
-	// Configures how resources under the directory are purged when `Type = purge_prefix`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated. </li>Default value: `invalidate`.
+	// Configures how cache are purged. It works when `Type` is `purge_prefix`, `purge_host` or `purge_all`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated.</li>Note that when Type` is `purge_prefix`, it defaults to `invalidate`.
 	Method *string `json:"Method,omitnil" name:"Method"`
 
 	// List of cached resources to purge. The format for input depends on the type of cache purging. See examples below for details. <li>By default, non-ASCII characters u200dare escaped based on RFC3986.</li><li>The maximum number of tasks per purging request is determined by the EdgeOne plan. See [Billing Overview (New)](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1). </li>
@@ -1925,6 +1928,81 @@ func (r *CreateSecurityIPGroupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateSecurityIPGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSharedCNAMERequestParams struct {
+	// ID of the site to which the shared CNAME belongs.	
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// Prefix of the shared CNAME. Format: "test-api","test-api.com". Up 50 characters allowed.
+	// The full format of the shared CNAME is: <custom prefix> + <12-bit random string in ZoneId> + "share.eo.dns[0-5].com". For example, if the prefix is "example.com", the created shared CNAME is "example.com.sai2ig51kaa5.share.eo.dnse2.com"
+	// Example: example.com
+	SharedCNAMEPrefix *string `json:"SharedCNAMEPrefix,omitnil" name:"SharedCNAMEPrefix"`
+
+	// Description. It supports 1-50 characters.
+	Description *string `json:"Description,omitnil" name:"Description"`
+}
+
+type CreateSharedCNAMERequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the site to which the shared CNAME belongs.	
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// Prefix of the shared CNAME. Format: "test-api","test-api.com". Up 50 characters allowed.
+	// The full format of the shared CNAME is: <custom prefix> + <12-bit random string in ZoneId> + "share.eo.dns[0-5].com". For example, if the prefix is "example.com", the created shared CNAME is "example.com.sai2ig51kaa5.share.eo.dnse2.com"
+	// Example: example.com
+	SharedCNAMEPrefix *string `json:"SharedCNAMEPrefix,omitnil" name:"SharedCNAMEPrefix"`
+
+	// Description. It supports 1-50 characters.
+	Description *string `json:"Description,omitnil" name:"Description"`
+}
+
+func (r *CreateSharedCNAMERequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSharedCNAMERequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "SharedCNAMEPrefix")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSharedCNAMERequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSharedCNAMEResponseParams struct {
+	// Shared CNAME. Format: <Custom Prefix> + <12-bit random string in ZoneId> + "share.eo.dnse[0-5].com"
+	SharedCNAME *string `json:"SharedCNAME,omitnil" name:"SharedCNAME"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type CreateSharedCNAMEResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSharedCNAMEResponseParams `json:"Response"`
+}
+
+func (r *CreateSharedCNAMEResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSharedCNAMEResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5376,6 +5454,17 @@ type DiffIPWhitelist struct {
 	NoChangeIPWhitelist *IPWhitelist `json:"NoChangeIPWhitelist,omitnil" name:"NoChangeIPWhitelist"`
 }
 
+type DnsVerification struct {
+
+	Subdomain *string `json:"Subdomain,omitnil" name:"Subdomain"`
+
+
+	RecordType *string `json:"RecordType,omitnil" name:"RecordType"`
+
+
+	RecordValue *string `json:"RecordValue,omitnil" name:"RecordValue"`
+}
+
 // Predefined struct for user
 type DownloadL4LogsRequestParams struct {
 	// The start time.
@@ -5390,7 +5479,7 @@ type DownloadL4LogsRequestParams struct {
 	// List of L4 proxy instance IDs.
 	ProxyIds []*string `json:"ProxyIds,omitnil" name:"ProxyIds"`
 
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
+	// Limit on paginated queries. Default value: 20. Maximum value: 300.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The page offset. Default value: 0.
@@ -5412,7 +5501,7 @@ type DownloadL4LogsRequest struct {
 	// List of L4 proxy instance IDs.
 	ProxyIds []*string `json:"ProxyIds,omitnil" name:"ProxyIds"`
 
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
+	// Limit on paginated queries. Default value: 20. Maximum value: 300.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The page offset. Default value: 0.
@@ -5485,7 +5574,7 @@ type DownloadL7LogsRequestParams struct {
 	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
 	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
+	// Limit on paginated queries. Default value: 20. Maximum value: 300.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The page offset. Default value: 0.
@@ -5507,7 +5596,7 @@ type DownloadL7LogsRequest struct {
 	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
 	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
-	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
+	// Limit on paginated queries. Default value: 20. Maximum value: 300.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
 	// The page offset. Default value: 0.
@@ -5719,6 +5808,14 @@ type FileAscriptionInfo struct {
 
 	// Content of the verification file.
 	IdentifyContent *string `json:"IdentifyContent,omitnil" name:"IdentifyContent"`
+}
+
+type FileVerification struct {
+
+	Path *string `json:"Path,omitnil" name:"Path"`
+
+
+	Content *string `json:"Content,omitnil" name:"Content"`
 }
 
 type Filter struct {
@@ -7707,6 +7804,11 @@ type NormalAction struct {
 	Parameters []*RuleNormalActionParams `json:"Parameters,omitnil" name:"Parameters"`
 }
 
+type NsVerification struct {
+
+	NameServers []*string `json:"NameServers,omitnil" name:"NameServers"`
+}
+
 type OfflineCache struct {
 	// Whether offline cache is enabled. Valid values:
 	// <li>`on`: Enable</li>
@@ -7807,21 +7909,22 @@ type OriginGroup struct {
 type OriginInfo struct {
 	// The origin type. Values:
 	// <li>`IP_DOMAIN`: IPv4/IPv6 address or domain name</li>
-	// <li>`COS`: COS bucket address </li>
-	// <li>`ORIGIN_GROUP`: Origin group </li>
-	// <li>`AWS_S3`: AWS S3 bucket address </li>
-	// <li>`SPACE`: EdgeOne Shield Space </li>
+	// <li>`COS`: COS bucket address</li>
+	// <li>`ORIGIN_GROUP`: Origin group</li>
+	// <li>`AWS_S3`: AWS S3 bucket address</li>
+	// <li>`LB`: Tencent Cloud CLB instance</li>
+	// <li>`SPACE`: EdgeOne Shield Space</li>
 	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
 
 	// The origin address. Enter the origin group ID if `OriginType=ORIGIN_GROUP`.
 	Origin *string `json:"Origin,omitnil" name:"Origin"`
 
-	// ID of the secondary origin group (valid when `OriginType=ORIGIN_GROUP`). If it’s not specified, it indicates that secondary origins are not used.
+	// ID of the backup origin group (valid when `OriginType=ORIGIN_GROUP`). If it’s not specified, it indicates not to use backup origins.
 	BackupOrigin *string `json:"BackupOrigin,omitnil" name:"BackupOrigin"`
 
-	// Whether to authenticate access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values: 
-	// <li>`on`: Enable private authentication.</li>
-	// <li>`off`: Disable private authentication.</li>If this field is not specified, the default value `off` is used.
+	// Whether to allow access to the private object storage origin (valid when `OriginType=COS/AWS_S3`). Values:
+	// u200c<li>`on`: Enable private authentication.</li>
+	// <li>`off`: (Default) Disable private authentication.</li>
 	PrivateAccess *string `json:"PrivateAccess,omitnil" name:"PrivateAccess"`
 
 	// The private authentication parameters. This field is valid when `PrivateAccess=on`.
@@ -7902,6 +8005,17 @@ type OriginRecord struct {
 
 	// The authentication parameter, which is used when `Private=true`.
 	PrivateParameters []*PrivateParameter `json:"PrivateParameters,omitnil" name:"PrivateParameters"`
+}
+
+type OwnershipVerification struct {
+
+	DnsVerification *DnsVerification `json:"DnsVerification,omitnil" name:"DnsVerification"`
+
+
+	FileVerification *FileVerification `json:"FileVerification,omitnil" name:"FileVerification"`
+
+
+	NsVerification *NsVerification `json:"NsVerification,omitnil" name:"NsVerification"`
 }
 
 type PartialModule struct {
@@ -8568,10 +8682,10 @@ type ServerCertInfo struct {
 	Alias *string `json:"Alias,omitnil" name:"Alias"`
 
 	// Type of the certificate. Values:
-	// <li>`default`: Default certificate</lil>
-	// <li>`upload`: Specified certificate</li>
-	// <li>`managed`: Tencent Cloud-managed certificate</li>
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// u200c<li>`default`: Default certificate</li>
+	// u200c<li>`upload`: Custom certificate</li>
+	// u200c<li>`managed`: Tencent Cloud-managed certificate</li>
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// Time when the certificate expires.

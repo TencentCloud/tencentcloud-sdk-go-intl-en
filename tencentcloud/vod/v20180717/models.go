@@ -144,13 +144,14 @@ type AdaptiveDynamicStreamingInfoItem struct {
 	// <li><font color=red>Note</font>: For adaptive bitrate streaming files generated before 2022-01-10T16:00:00Z, the value of this parameter is `0`.</li>
 	Size *int64 `json:"Size,omitnil" name:"Size"`
 
-	// The watermark type. Valid values:
-	// <li>Trace: Digital watermark</li>
-	// <li>None: Regular watermark</li>
+
 	DigitalWatermarkType *string `json:"DigitalWatermarkType,omitnil" name:"DigitalWatermarkType"`
 
 	// The information of the streams.
 	SubStreamSet []*MediaSubStreamInfoItem `json:"SubStreamSet,omitnil" name:"SubStreamSet"`
+
+
+	CopyRightWatermarkText *string `json:"CopyRightWatermarkText,omitnil" name:"CopyRightWatermarkText"`
 }
 
 type AdaptiveDynamicStreamingTaskInput struct {
@@ -163,6 +164,9 @@ type AdaptiveDynamicStreamingTaskInput struct {
 
 	// Digital watermark.
 	TraceWatermark *TraceWatermarkInput `json:"TraceWatermark,omitnil" name:"TraceWatermark"`
+
+
+	CopyRightWatermark *CopyRightWatermarkInput `json:"CopyRightWatermark,omitnil" name:"CopyRightWatermark"`
 
 	// List of subtitle IDs (maximum: 16)
 	SubtitleSet []*string `json:"SubtitleSet,omitnil" name:"SubtitleSet"`
@@ -314,6 +318,12 @@ type AiAnalysisTaskClassificationResult struct {
 
 	// The progress of an intelligent categorization task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type AiAnalysisTaskCoverInput struct {
@@ -355,6 +365,12 @@ type AiAnalysisTaskCoverResult struct {
 
 	// The progress of an intelligent thumbnail generation task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type AiAnalysisTaskFrameTagInput struct {
@@ -396,6 +412,12 @@ type AiAnalysisTaskFrameTagResult struct {
 
 	// The progress of an intelligent labeling by frame task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type AiAnalysisTaskHighlightInput struct {
@@ -437,6 +459,12 @@ type AiAnalysisTaskHighlightResult struct {
 
 	// The progress of an intelligent highlight generation task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type AiAnalysisTaskInput struct {
@@ -483,6 +511,12 @@ type AiAnalysisTaskTagResult struct {
 
 	// The progress of an intelligent labeling task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type AiContentReviewResult struct {
@@ -616,6 +650,15 @@ type AiRecognitionTaskAsrFullTextResult struct {
 	// Output information of full speech recognition task.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Output *AiRecognitionTaskAsrFullTextResultOutput `json:"Output,omitnil" name:"Output"`
+
+
+	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type AiRecognitionTaskAsrFullTextResultInput struct {
@@ -687,6 +730,12 @@ type AiRecognitionTaskAsrWordsResult struct {
 
 	// The progress of a speech keyword recognition task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type AiRecognitionTaskAsrWordsResultInput struct {
@@ -747,6 +796,12 @@ type AiRecognitionTaskFaceResult struct {
 
 	// The progress of a face recognition task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type AiRecognitionTaskFaceResultInput struct {
@@ -818,6 +873,12 @@ type AiRecognitionTaskHeadTailResult struct {
 
 	// The progress of an opening/closing segment recognition task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type AiRecognitionTaskHeadTailResultInput struct {
@@ -866,6 +927,12 @@ type AiRecognitionTaskObjectResult struct {
 
 	// The progress of an object recognition task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type AiRecognitionTaskObjectResultInput struct {
@@ -878,7 +945,12 @@ type AiRecognitionTaskObjectResultItem struct {
 	Name *string `json:"Name,omitnil" name:"Name"`
 
 	// List of segments that contain an object.
+	//
+	// Deprecated: SegmentSet is deprecated.
 	SegmentSet []*AiRecognitionTaskObjectSeqmentItem `json:"SegmentSet,omitnil" name:"SegmentSet"`
+
+
+	RecognitionSegmentSet []*AiRecognitionTaskObjectSegmentItem `json:"RecognitionSegmentSet,omitnil" name:"RecognitionSegmentSet"`
 }
 
 type AiRecognitionTaskObjectResultOutput struct {
@@ -891,6 +963,20 @@ type AiRecognitionTaskObjectResultOutput struct {
 
 	// Expiration time of the URL to the object recognition result set, in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732)
 	ResultSetFileUrlExpireTime *string `json:"ResultSetFileUrlExpireTime,omitnil" name:"ResultSetFileUrlExpireTime"`
+}
+
+type AiRecognitionTaskObjectSegmentItem struct {
+
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil" name:"StartTimeOffset"`
+
+
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil" name:"EndTimeOffset"`
+
+
+	Confidence *float64 `json:"Confidence,omitnil" name:"Confidence"`
+
+
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil" name:"AreaCoordSet"`
 }
 
 type AiRecognitionTaskObjectSeqmentItem struct {
@@ -929,6 +1015,12 @@ type AiRecognitionTaskOcrFullTextResult struct {
 
 	// The progress of a full text recognition task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type AiRecognitionTaskOcrFullTextResultInput struct {
@@ -992,6 +1084,12 @@ type AiRecognitionTaskOcrWordsResult struct {
 
 	// The progress of a text keyword recognition task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type AiRecognitionTaskOcrWordsResultInput struct {
@@ -1056,6 +1154,12 @@ type AiRecognitionTaskSegmentResult struct {
 
 	// The progress of a video splitting task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type AiRecognitionTaskSegmentResultInput struct {
@@ -1364,6 +1468,9 @@ type AiReviewTaskPoliticalOcrResult struct {
 	// Output for OCR-based recognition of politically sensitive content
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	Output *AiReviewPoliticalOcrTaskOutput `json:"Output,omitnil" name:"Output"`
+
+
+	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
 }
 
 type AiReviewTaskPoliticalResult struct {
@@ -1644,10 +1751,7 @@ type AiSampleFaceOperation struct {
 	// Face ID set, which is required if `Type` is `delete`.
 	FaceIds []*string `json:"FaceIds,omitnil" name:"FaceIds"`
 
-	// String set generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) the face image.
-	// <li>This field is required if `Type` is `add` or `reset`;</li>
-	// <li>Array length limit: 5 images.</li>
-	// Note: the image must be a relatively clear full-face photo of a figure in at least 200 * 200 px.
+
 	FaceContents []*string `json:"FaceContents,omitnil" name:"FaceContents"`
 }
 
@@ -2249,7 +2353,7 @@ type AudioVolumeParam struct {
 }
 
 type Authentication struct {
-	// Hotlink protection configuration switch: <li>on:Enable;</li> <li>off:Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Timestamp hotlink protection mode A configuration
@@ -2266,90 +2370,90 @@ type Authentication struct {
 }
 
 type AuthenticationTypeA struct {
-	// The key for signature calculation 6-32 characters. Only digits and letters are allowed.
+
 	SecretKey *string `json:"SecretKey,omitnil" name:"SecretKey"`
 
-	// Signature parameter name Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+
 	SignParam *string `json:"SignParam,omitnil" name:"SignParam"`
 
-	// Signature expiration time;Unit: second. The maximum value is 630720000.
+
 	ExpireTime *uint64 `json:"ExpireTime,omitnil" name:"ExpireTime"`
 
-	// File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
+
 	FileExtensions []*string `json:"FileExtensions,omitnil" name:"FileExtensions"`
 
-	// whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
+
 	FilterType *string `json:"FilterType,omitnil" name:"FilterType"`
 
-	// Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
+
 	BackupSecretKey *string `json:"BackupSecretKey,omitnil" name:"BackupSecretKey"`
 }
 
 type AuthenticationTypeB struct {
-	// The key for signature calculation 6-32 characters. Only digits and letters are allowed.
+
 	SecretKey *string `json:"SecretKey,omitnil" name:"SecretKey"`
 
-	// Signature parameter name Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+
 	ExpireTime *uint64 `json:"ExpireTime,omitnil" name:"ExpireTime"`
 
-	// File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
+
 	FileExtensions []*string `json:"FileExtensions,omitnil" name:"FileExtensions"`
 
-	// whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
+
 	FilterType *string `json:"FilterType,omitnil" name:"FilterType"`
 
-	// Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
+
 	BackupSecretKey *string `json:"BackupSecretKey,omitnil" name:"BackupSecretKey"`
 }
 
 type AuthenticationTypeC struct {
-	// The key for signature calculation 6-32 characters. Only digits and letters are allowed.
+
 	SecretKey *string `json:"SecretKey,omitnil" name:"SecretKey"`
 
-	// Signature expiration time;Unit: second. The maximum value is 630720000.
+
 	ExpireTime *uint64 `json:"ExpireTime,omitnil" name:"ExpireTime"`
 
-	// File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
+
 	FileExtensions []*string `json:"FileExtensions,omitnil" name:"FileExtensions"`
 
-	// whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
+
 	FilterType *string `json:"FilterType,omitnil" name:"FilterType"`
 
-	// Timestamp settings:<li>dec: Decimal</li> <li>hex: Hexadecimal</li>
+
 	TimeFormat *string `json:"TimeFormat,omitnil" name:"TimeFormat"`
 
-	// Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
+
 	BackupSecretKey *string `json:"BackupSecretKey,omitnil" name:"BackupSecretKey"`
 }
 
 type AuthenticationTypeD struct {
-	// The key for signature calculation 6-32 characters. Only digits and letters are allowed.
+
 	SecretKey *string `json:"SecretKey,omitnil" name:"SecretKey"`
 
-	// Signature expiration time;Unit: second. The maximum value is 630720000.
+
 	ExpireTime *uint64 `json:"ExpireTime,omitnil" name:"ExpireTime"`
 
-	// File extension list settings determining if authentication should be performed;If it contains an asterisk (*), this indicates all files.
+
 	FileExtensions []*string `json:"FileExtensions,omitnil" name:"FileExtensions"`
 
-	// whitelist: All file types apart from the FileExtensions list are authenticated;blacklist: Only the file types in the FileExtensions list are authenticated.
+
 	FilterType *string `json:"FilterType,omitnil" name:"FilterType"`
 
-	// Signature parameter name Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+
 	SignParam *string `json:"SignParam,omitnil" name:"SignParam"`
 
-	// Timestamp parameter name;Only upper and lower-case letters, digits, and underscores (_) are allowed. It cannot start with a digit. Length limit: 1-100 characters.
+
 	TimeParam *string `json:"TimeParam,omitnil" name:"TimeParam"`
 
-	// Timestamp settings: <li>dec: Decimal</li> <li>hex: Hexadecimal</li>
+
 	TimeFormat *string `json:"TimeFormat,omitnil" name:"TimeFormat"`
 
-	// Backup key, which is used to calculate a signature. 6-32 characters. Only digits and letters are allowed.
+
 	BackupSecretKey *string `json:"BackupSecretKey,omitnil" name:"BackupSecretKey"`
 }
 
 type AwsPrivateAccess struct {
-	//  Aws S3 back-to-origin authentication configuration switch, the values are: <li>on:Enable;</li> <li>off: Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Access ID.
@@ -2366,7 +2470,7 @@ type AwsPrivateAccess struct {
 }
 
 type CDNCertInfo struct {
-	// Server certificate ID, which is auto-generated when the certificate is being managed by the SSL Certificate Service
+
 	CertId *string `json:"CertId,omitnil" name:"CertId"`
 
 	// Server certificate information.
@@ -2375,12 +2479,12 @@ type CDNCertInfo struct {
 	// Server key information.
 	PrivateKey *string `json:"PrivateKey,omitnil" name:"PrivateKey"`
 
-	// Time when the certificate expires;Can be left blank when used as an input parameter.
+
 	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
 }
 
 type CDNDomainConfig struct {
-	// Acceleration region:<li>mainland:Acceleration inside the Chinese mainland;</li> <li>overseas: Acceleration outside the Chinese mainland;</li> <li>Acceleration over the globe.</li>
+
 	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Origin Server Configuration
@@ -2439,7 +2543,7 @@ type CDNDomainConfig struct {
 }
 
 type CDNDomainConfigForUpdate struct {
-	// Acceleration region:<li>mainland:Acceleration inside the Chinese mainland;</li> <li>overseas: Acceleration outside the Chinese mainland;</li> <li>Acceleration over the globe.</li>
+
 	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Origin Server Configuration.
@@ -2498,46 +2602,46 @@ type CDNDomainConfigForUpdate struct {
 }
 
 type CDNDomainInfo struct {
-	// Domain.
+
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// Deployment status.
+
 	DeployStatus *string `json:"DeployStatus,omitnil" name:"DeployStatus"`
 
-	// CNAME record.
+
 	Cname *string `json:"Cname,omitnil" name:"Cname"`
 
-	// Creation time.
+
 	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
-	// CDN domain configuration information.
+
 	Config *CDNDomainConfig `json:"Config,omitnil" name:"Config"`
 }
 
 type Cache struct {
-	// Advanced path cache configuration.
+
 	RuleCache []*RuleCache `json:"RuleCache,omitnil" name:"RuleCache"`
 }
 
 type CacheConfigCache struct {
-	// Cache configuration switch: <li>on:enable；</li> <li>off: disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Cache expiration time settings<li>Unit: second. The maximum value is 365 days.</li>
 	CacheTime *uint64 `json:"CacheTime,omitnil" name:"CacheTime"`
 
-	// Advanced cache expiration configuration. If this is enabled, the max-age value returned by the origin server will be compared with the cache expiration time set in CacheRules, and the smallest value will be cached on the node: <li>on: Enable;</li> <li>off: Disable.</li>
+
 	CompareMaxAge *string `json:"CompareMaxAge,omitnil" name:"CompareMaxAge"`
 
-	// Force cache: <li>on: Enable;</li> <li>off: Disable.</li>
+
 	IgnoreCacheControl *string `json:"IgnoreCacheControl,omitnil" name:"IgnoreCacheControl"`
 
-	// Whether to ignore the header and body on cache nodes if the origin server returns the header Set-Cookie. <li>on: Ignore; do not cache the header and body.</li> <li>off: Do not ignore; follow the custom cache rules of cache nodes.</li>
+
 	IgnoreSetCookie *string `json:"IgnoreSetCookie,omitnil" name:"IgnoreSetCookie"`
 }
 
 type CacheConfigFollowOrigin struct {
-	// Follow origin server switch configuration: <li>on: Enable.</li> <li>off: Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Heuristic cache configuration
@@ -2545,10 +2649,10 @@ type CacheConfigFollowOrigin struct {
 }
 
 type CacheConfigNoCache struct {
-	// No-cache configuration switch: <li>on: Enable;</li> <li>off: Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
-	// Always forwards to the origin server for verification:<li>on: Enable;</li> <li>off: Disable.</li>
+
 	Revalidate *string `json:"Revalidate,omitnil" name:"Revalidate"`
 }
 
@@ -2559,12 +2663,10 @@ type Canvas struct {
 	// Default value: Black.
 	Color *string `json:"Color,omitnil" name:"Color"`
 
-	// Canvas width, which is the width of the output video. Value range: 0-4096 px.
-	// Default value: 0, which means that the value is the same as the video width of the first video segment in the first video track.
+
 	Width *int64 `json:"Width,omitnil" name:"Width"`
 
-	// Canvas height, which is the height (or long side) of the output video. Value range: 0-4096 px.
-	// Default value: 0, which means that the value is the same as the video height of the first video segment in the first video track.
+
 	Height *int64 `json:"Height,omitnil" name:"Height"`
 }
 
@@ -2643,7 +2745,7 @@ type CloneCDNDomainRequestParams struct {
 	// The cloned domain.
 	ReferenceDomain *string `json:"ReferenceDomain,omitnil" name:"ReferenceDomain"`
 
-	// VOD[Subapplication](https://www.tencentcloud.com/document/product/266/33987) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -2656,7 +2758,6 @@ type CloneCDNDomainRequest struct {
 	// The cloned domain.
 	ReferenceDomain *string `json:"ReferenceDomain,omitnil" name:"ReferenceDomain"`
 
-	// VOD[Subapplication](https://www.tencentcloud.com/document/product/266/33987) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -3193,6 +3294,11 @@ type ContentReviewTemplateItem struct {
 	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 }
 
+type CopyRightWatermarkInput struct {
+
+	Text *string `json:"Text,omitnil" name:"Text"`
+}
+
 type CoverBySnapshotTaskInput struct {
 	// Time point screencapturing template ID.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
@@ -3488,11 +3594,7 @@ type CreateAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// Template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// The DRM type. Valid values:
-	// <li>SimpleAES</li>
-	// <li>Widevine</li>
-	// <li>FairPlay</li>
-	// If this parameter is an empty string, it indicates that the video is not protected by DRM.
+
 	DrmType *string `json:"DrmType,omitnil" name:"DrmType"`
 
 	// The provider of the DRM key. Valid values:
@@ -3541,11 +3643,6 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 	// Template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// The DRM type. Valid values:
-	// <li>SimpleAES</li>
-	// <li>Widevine</li>
-	// <li>FairPlay</li>
-	// If this parameter is an empty string, it indicates that the video is not protected by DRM.
 	DrmType *string `json:"DrmType,omitnil" name:"DrmType"`
 
 	// The provider of the DRM key. Valid values:
@@ -3770,26 +3867,23 @@ func (r *CreateAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type CreateCDNDomainRequestParams struct {
-	// Domain.
+
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// Domain configuration.
+
 	Config *CDNDomainConfig `json:"Config,omitnil" name:"Config"`
 
-	// VOD[Subapplication](https://www.tencentcloud.com/zh/document/product/266/33987) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
 type CreateCDNDomainRequest struct {
 	*tchttp.BaseRequest
 	
-	// Domain.
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// Domain configuration.
 	Config *CDNDomainConfig `json:"Config,omitnil" name:"Config"`
 
-	// VOD[Subapplication](https://www.tencentcloud.com/zh/document/product/266/33987) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -4162,10 +4256,10 @@ type CreateImageSpriteTemplateRequestParams struct {
 	// <li>If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.</li>
 	SampleInterval *uint64 `json:"SampleInterval,omitnil" name:"SampleInterval"`
 
-	// Subimage row count of an image sprite.
+
 	RowCount *uint64 `json:"RowCount,omitnil" name:"RowCount"`
 
-	// Subimage column count of an image sprite.
+
 	ColumnCount *uint64 `json:"ColumnCount,omitnil" name:"ColumnCount"`
 
 	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
@@ -4183,20 +4277,10 @@ type CreateImageSpriteTemplateRequestParams struct {
 	// Default value: black.
 	FillType *string `json:"FillType,omitnil" name:"FillType"`
 
-	// Maximum value of the width (or long side) of a subimage in an image sprite in px. Value range: 0 and [128, 4,096].
-	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-	// <li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-	// <li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-	// Default value: 0.
+
 	Width *uint64 `json:"Width,omitnil" name:"Width"`
 
-	// Maximum value of the height (or short side) of a subimage in an image sprite in px. Value range: 0 and [128, 4,096].
-	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-	// <li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-	// <li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-	// Default value: 0.
+
 	Height *uint64 `json:"Height,omitnil" name:"Height"`
 
 	// Resolution adaption. Valid values:
@@ -4226,10 +4310,8 @@ type CreateImageSpriteTemplateRequest struct {
 	// <li>If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.</li>
 	SampleInterval *uint64 `json:"SampleInterval,omitnil" name:"SampleInterval"`
 
-	// Subimage row count of an image sprite.
 	RowCount *uint64 `json:"RowCount,omitnil" name:"RowCount"`
 
-	// Subimage column count of an image sprite.
 	ColumnCount *uint64 `json:"ColumnCount,omitnil" name:"ColumnCount"`
 
 	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
@@ -4247,20 +4329,8 @@ type CreateImageSpriteTemplateRequest struct {
 	// Default value: black.
 	FillType *string `json:"FillType,omitnil" name:"FillType"`
 
-	// Maximum value of the width (or long side) of a subimage in an image sprite in px. Value range: 0 and [128, 4,096].
-	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-	// <li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-	// <li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-	// Default value: 0.
 	Width *uint64 `json:"Width,omitnil" name:"Width"`
 
-	// Maximum value of the height (or short side) of a subimage in an image sprite in px. Value range: 0 and [128, 4,096].
-	// <li>If both `Width` and `Height` are 0, the resolution will be the same as that of the source video;</li>
-	// <li>If `Width` is 0, but `Height` is not 0, `Width` will be proportionally scaled;</li>
-	// <li>If `Width` is not 0, but `Height` is 0, `Height` will be proportionally scaled;</li>
-	// <li>If both `Width` and `Height` are not 0, the custom resolution will be used.</li>
-	// Default value: 0.
 	Height *uint64 `json:"Height,omitnil" name:"Height"`
 
 	// Resolution adaption. Valid values:
@@ -4768,6 +4838,9 @@ type CreateRoundPlayRequestParams struct {
 
 	// The playlist description (not longer than 256 characters).
 	Desc *string `json:"Desc,omitnil" name:"Desc"`
+
+
+	PlayBackMode *string `json:"PlayBackMode,omitnil" name:"PlayBackMode"`
 }
 
 type CreateRoundPlayRequest struct {
@@ -4788,6 +4861,8 @@ type CreateRoundPlayRequest struct {
 
 	// The playlist description (not longer than 256 characters).
 	Desc *string `json:"Desc,omitnil" name:"Desc"`
+
+	PlayBackMode *string `json:"PlayBackMode,omitnil" name:"PlayBackMode"`
 }
 
 func (r *CreateRoundPlayRequest) ToJsonString() string {
@@ -4807,6 +4882,7 @@ func (r *CreateRoundPlayRequest) FromJsonString(s string) error {
 	delete(f, "SubAppId")
 	delete(f, "Name")
 	delete(f, "Desc")
+	delete(f, "PlayBackMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRoundPlayRequest has unknown keys!", "")
 	}
@@ -5312,14 +5388,7 @@ type CreateSuperPlayerConfigRequestParams struct {
 	// ID of the image sprite generating template that allows output.
 	ImageSpriteDefinition *uint64 `json:"ImageSpriteDefinition,omitnil" name:"ImageSpriteDefinition"`
 
-	// Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used:
-	// <li>MinEdgeLength: 240, Name: LD;</li>
-	// <li>MinEdgeLength: 480, Name: SD;</li>
-	// <li>MinEdgeLength: 720, Name: HD;</li>
-	// <li>MinEdgeLength: 1080, Name: FHD;</li>
-	// <li>MinEdgeLength: 1440, Name: 2K;</li>
-	// <li>MinEdgeLength: 2160, Name: 4K;</li>
-	// <li>MinEdgeLength: 4320, Name: 8K.</li>
+
 	ResolutionNames []*ResolutionNameInfo `json:"ResolutionNames,omitnil" name:"ResolutionNames"`
 
 	// Domain name used for playback. If it is left empty or set to `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
@@ -5375,14 +5444,6 @@ type CreateSuperPlayerConfigRequest struct {
 	// ID of the image sprite generating template that allows output.
 	ImageSpriteDefinition *uint64 `json:"ImageSpriteDefinition,omitnil" name:"ImageSpriteDefinition"`
 
-	// Display name of player for substreams with different resolutions. If this parameter is left empty or an empty array, the default configuration will be used:
-	// <li>MinEdgeLength: 240, Name: LD;</li>
-	// <li>MinEdgeLength: 480, Name: SD;</li>
-	// <li>MinEdgeLength: 720, Name: HD;</li>
-	// <li>MinEdgeLength: 1080, Name: FHD;</li>
-	// <li>MinEdgeLength: 1440, Name: 2K;</li>
-	// <li>MinEdgeLength: 2160, Name: 4K;</li>
-	// <li>MinEdgeLength: 4320, Name: 8K.</li>
 	ResolutionNames []*ResolutionNameInfo `json:"ResolutionNames,omitnil" name:"ResolutionNames"`
 
 	// Domain name used for playback. If it is left empty or set to `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
@@ -5592,15 +5653,15 @@ type CreateVodDomainRequestParams struct {
 	// Domain name to add to VOD. Note: a wildcard domain name is not supported.
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
-	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
-
 	// Region to enable acceleration. Valid values:
 	// <li>`Chinese Mainland`</li>
 	// <li>`Outside Chinese Mainland`</li>
 	// <li>`Global`</li>
 	// If `AccelerateArea` is not specified, VOD will enable acceleration in or outside Chinese mainland based on the regional information a user has configured with Tencent Cloud.
 	AccelerateArea *string `json:"AccelerateArea,omitnil" name:"AccelerateArea"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
 type CreateVodDomainRequest struct {
@@ -5609,15 +5670,15 @@ type CreateVodDomainRequest struct {
 	// Domain name to add to VOD. Note: a wildcard domain name is not supported.
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
-	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
-
 	// Region to enable acceleration. Valid values:
 	// <li>`Chinese Mainland`</li>
 	// <li>`Outside Chinese Mainland`</li>
 	// <li>`Global`</li>
 	// If `AccelerateArea` is not specified, VOD will enable acceleration in or outside Chinese mainland based on the regional information a user has configured with Tencent Cloud.
 	AccelerateArea *string `json:"AccelerateArea,omitnil" name:"AccelerateArea"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
 func (r *CreateVodDomainRequest) ToJsonString() string {
@@ -5633,8 +5694,8 @@ func (r *CreateVodDomainRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Domain")
-	delete(f, "SubAppId")
 	delete(f, "AccelerateArea")
+	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVodDomainRequest has unknown keys!", "")
 	}
@@ -6144,20 +6205,18 @@ func (r *DeleteAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DeleteCDNDomainRequestParams struct {
-	// Domain.
+
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
 type DeleteCDNDomainRequest struct {
 	*tchttp.BaseRequest
 	
-	// Domain.
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7659,7 +7718,7 @@ type DescribeCDNDomainsRequestParams struct {
 	// The maximum number of returned results for pagination fetching. Default value: 20.
 	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
-	// The starting offset for page fetching. Default value: 0.
+
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
@@ -7675,7 +7734,6 @@ type DescribeCDNDomainsRequest struct {
 	// The maximum number of returned results for pagination fetching. Default value: 20.
 	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
-	// The starting offset for page fetching. Default value: 0.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
@@ -7706,10 +7764,10 @@ func (r *DescribeCDNDomainsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCDNDomainsResponseParams struct {
-	// List of domain information.
+
 	DomainSet []*CDNDomainInfo `json:"DomainSet,omitnil" name:"DomainSet"`
 
-	// The total number of CDN domain under the current application.
+
 	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -7734,10 +7792,7 @@ func (r *DescribeCDNDomainsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCDNStatDetailsRequestParams struct {
-	// Metrics to query. Valid values:
-	// <li>`Traffic`: traffic in bytes</li>
-	// <li>`Bandwidth`: bandwidth in bps</li>
-	// <li>`Requests`: the number of requests</li>
+
 	Metric *string `json:"Metric,omitnil" name:"Metric"`
 
 	// Start time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
@@ -7823,10 +7878,6 @@ type DescribeCDNStatDetailsRequestParams struct {
 type DescribeCDNStatDetailsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Metrics to query. Valid values:
-	// <li>`Traffic`: traffic in bytes</li>
-	// <li>`Bandwidth`: bandwidth in bps</li>
-	// <li>`Requests`: the number of requests</li>
 	Metric *string `json:"Metric,omitnil" name:"Metric"`
 
 	// Start time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
@@ -8599,6 +8650,9 @@ type DescribeFileAttributesTask struct {
 type DescribeFileAttributesTaskOutput struct {
 	// The MD5 hash of the file.
 	Md5 *string `json:"Md5,omitnil" name:"Md5"`
+
+
+	Sha1 *string `json:"Sha1,omitnil" name:"Sha1"`
 }
 
 // Predefined struct for user
@@ -10049,21 +10103,7 @@ type DescribeStorageDetailsRequestParams struct {
 	// The value is set according to query period length by default. 5-minute granularity is set for periods no longer than 1 day, and 1-day granularity is set for periods longer than 1 day.
 	Interval *string `json:"Interval,omitnil" name:"Interval"`
 
-	// Storage class to query. Valid values:
-	// <li>`TotalStorage`: total storage usage in classes of STANDARD, STANDARD_IA, ARCHIVE, and DEEP ARCHIVE, excluding the storage usage for data deleted in advance.</li>
-	// <li>`StandardStorage`: STANDARD</li>
-	// <li>`InfrequentStorage`: STANDARD_IA</li>
-	// <li>`ArchiveStorage`: ARCHIVE</li>
-	// <li>`DeepArchiveStorage`: DEEP ARCHIVE</li>
-	// <li>`DeletedInfrequentStorage`: STANDARD_IA data deleted in advance</li>
-	// <li>`DeletedArchiveStorage`: ARCHIVE data deleted in advance</li>
-	// <li>`DeletedDeepArchiveStorage`: DEEP ARCHIVE data deleted in advance</li>
-	// <li>`ArchiveStandardRetrieval`: ARCHIVE data retrieved using standard retrievals</li>
-	// <li>`ArchiveExpeditedRetrieval`: ARCHIVE data retrieved using expedited retrievals</li>
-	// <li>`ArchiveBulkRetrieval`: ARCHIVE data retrieved using bulk retrievals</li>
-	// <li>`DeepArchiveStandardRetrieval`: DEEP ARCHIVE data retrieved using standard retrievals</li>
-	// <li>`DeepArchiveBulkRetrieval`: DEEP ARCHIVE data retrieved using bulk retrievals</li>
-	// Default value: `TotalStorage`
+
 	StorageType *string `json:"StorageType,omitnil" name:"StorageType"`
 
 	// Storage region to query. Valid values:
@@ -10092,21 +10132,6 @@ type DescribeStorageDetailsRequest struct {
 	// The value is set according to query period length by default. 5-minute granularity is set for periods no longer than 1 day, and 1-day granularity is set for periods longer than 1 day.
 	Interval *string `json:"Interval,omitnil" name:"Interval"`
 
-	// Storage class to query. Valid values:
-	// <li>`TotalStorage`: total storage usage in classes of STANDARD, STANDARD_IA, ARCHIVE, and DEEP ARCHIVE, excluding the storage usage for data deleted in advance.</li>
-	// <li>`StandardStorage`: STANDARD</li>
-	// <li>`InfrequentStorage`: STANDARD_IA</li>
-	// <li>`ArchiveStorage`: ARCHIVE</li>
-	// <li>`DeepArchiveStorage`: DEEP ARCHIVE</li>
-	// <li>`DeletedInfrequentStorage`: STANDARD_IA data deleted in advance</li>
-	// <li>`DeletedArchiveStorage`: ARCHIVE data deleted in advance</li>
-	// <li>`DeletedDeepArchiveStorage`: DEEP ARCHIVE data deleted in advance</li>
-	// <li>`ArchiveStandardRetrieval`: ARCHIVE data retrieved using standard retrievals</li>
-	// <li>`ArchiveExpeditedRetrieval`: ARCHIVE data retrieved using expedited retrievals</li>
-	// <li>`ArchiveBulkRetrieval`: ARCHIVE data retrieved using bulk retrievals</li>
-	// <li>`DeepArchiveStandardRetrieval`: DEEP ARCHIVE data retrieved using standard retrievals</li>
-	// <li>`DeepArchiveBulkRetrieval`: DEEP ARCHIVE data retrieved using bulk retrievals</li>
-	// Default value: `TotalStorage`
 	StorageType *string `json:"StorageType,omitnil" name:"StorageType"`
 
 	// Storage region to query. Valid values:
@@ -10467,77 +10492,65 @@ type DescribeTaskDetailResponseParams struct {
 	// End time of task execution in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 
-	// Video processing task information. This field has a value only when `TaskType` is `Procedure`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	ProcedureTask *ProcedureTask `json:"ProcedureTask,omitnil" name:"ProcedureTask"`
 
-	// Video editing task information. This field has a value only when `TaskType` is `EditMedia`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	EditMediaTask *EditMediaTask `json:"EditMediaTask,omitnil" name:"EditMediaTask"`
 
-	// Release on WeChat task information. This field has a value only when `TaskType` is `WechatPublish`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	WechatPublishTask *WechatPublishTask `json:"WechatPublishTask,omitnil" name:"WechatPublishTask"`
 
-	// Media file composing task information. This field has a value only when `TaskType` is `ComposeMedia`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	ComposeMediaTask *ComposeMediaTask `json:"ComposeMediaTask,omitnil" name:"ComposeMediaTask"`
 
-	// Video splitting task information. This field has a value only when `TaskType` is `EditMedia`.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+
 	SplitMediaTask *SplitMediaTask `json:"SplitMediaTask,omitnil" name:"SplitMediaTask"`
 
-	// Release on WeChat Mini Program task information. This field has a value only when `TaskType` is `WechatMiniProgramPublish`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	WechatMiniProgramPublishTask *WechatMiniProgramPublishTask `json:"WechatMiniProgramPublishTask,omitnil" name:"WechatMiniProgramPublishTask"`
 
-	// Media file pulling for upload task information. This field has a value only when `TaskType` is `PullUpload`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	PullUploadTask *PullUploadTask `json:"PullUploadTask,omitnil" name:"PullUploadTask"`
 
-	// Video transcoding task information. This field has a value only when `TaskType` is `Transcode`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	TranscodeTask *TranscodeTask2017 `json:"TranscodeTask,omitnil" name:"TranscodeTask"`
 
-	// Video splicing task information. This field has a value only when `TaskType` is `Concat`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	ConcatTask *ConcatTask2017 `json:"ConcatTask,omitnil" name:"ConcatTask"`
 
-	// Video clipping task information. This field has a value only when `TaskType` is `Clip`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	ClipTask *ClipTask2017 `json:"ClipTask,omitnil" name:"ClipTask"`
 
-	// Image sprite creating task information. This field has a value only when `TaskType` is `ImageSprite`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	CreateImageSpriteTask *CreateImageSpriteTask2017 `json:"CreateImageSpriteTask,omitnil" name:"CreateImageSpriteTask"`
 
-	// Time point screencapturing task information. This field has a value only when `TaskType` is `SnapshotByTimeOffset`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	SnapshotByTimeOffsetTask *SnapshotByTimeOffsetTask2017 `json:"SnapshotByTimeOffsetTask,omitnil" name:"SnapshotByTimeOffsetTask"`
 
-	// The information of a watermark removal task. This parameter is valid only if `TaskType` is `RemoveWatermark`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+
 	RemoveWatermarkTask *RemoveWatermarkTask `json:"RemoveWatermarkTask,omitnil" name:"RemoveWatermarkTask"`
 
-	// The information of an audio/video remastering task. This parameter is valid only if `TaskType` is `RebuildMedia`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+
 	RebuildMediaTask *RebuildMediaTask `json:"RebuildMediaTask,omitnil" name:"RebuildMediaTask"`
 
-	// The information of a digital watermark extraction task. This parameter is valid only if `TaskType` is `ExtractTraceWatermark`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+
 	ExtractTraceWatermarkTask *ExtractTraceWatermarkTask `json:"ExtractTraceWatermarkTask,omitnil" name:"ExtractTraceWatermarkTask"`
 
-	// The information of a moderation task. This parameter is valid only if `TaskType` is `ReviewAudioVideo`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+
+	ExtractCopyRightWatermarkTask *ExtractCopyRightWatermarkTask `json:"ExtractCopyRightWatermarkTask,omitnil" name:"ExtractCopyRightWatermarkTask"`
+
+
 	ReviewAudioVideoTask *ReviewAudioVideoTask `json:"ReviewAudioVideoTask,omitnil" name:"ReviewAudioVideoTask"`
 
-	// This parameter is invalid now.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+
 	ReduceMediaBitrateTask *ReduceMediaBitrateTask `json:"ReduceMediaBitrateTask,omitnil" name:"ReduceMediaBitrateTask"`
 
-	// The information of a task to get file attributes. This parameter is valid only if `TaskType` is `DescribeFileAttributes`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+
 	DescribeFileAttributesTask *DescribeFileAttributesTask `json:"DescribeFileAttributesTask,omitnil" name:"DescribeFileAttributesTask"`
+
+
+	QualityInspectTask *QualityInspectTask `json:"QualityInspectTask,omitnil" name:"QualityInspectTask"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
@@ -11164,159 +11177,11 @@ type EditMediaFileInfo struct {
 	// Video ID.
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// Start time offset of video clipping in seconds.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil" name:"StartTimeOffset"`
 
-	// End time offset of video clipping in seconds.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil" name:"EndTimeOffset"`
-}
-
-type EditMediaOutputConfig struct {
-	// Output filename of up to 64 characters, which is generated by the system by default.
-	MediaName *string `json:"MediaName,omitnil" name:"MediaName"`
-
-	// Output file format. Valid values: mp4, hls. Default value: mp4.
-	Type *string `json:"Type,omitnil" name:"Type"`
-
-	// Category ID, which is used to categorize the media for management. A category can be created and its ID can be obtained by using the [category creating](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API.
-	// <li>Default value: 0, which means "Other".</li>
-	ClassId *int64 `json:"ClassId,omitnil" name:"ClassId"`
-
-	// Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
-	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
-}
-
-// Predefined struct for user
-type EditMediaRequestParams struct {
-	// Input video type. Valid values: File, Stream.
-	InputType *string `json:"InputType,omitnil" name:"InputType"`
-
-	// Information of input video file, which is required if `InputType` is `File`.
-	FileInfos []*EditMediaFileInfo `json:"FileInfos,omitnil" name:"FileInfos"`
-
-	// Input stream information, which is required if `InputType` is `Stream`.
-	StreamInfos []*EditMediaStreamInfo `json:"StreamInfos,omitnil" name:"StreamInfos"`
-
-	// Editing template ID. Valid values: 10, 20. If this parameter is left empty, template 10 will be used.
-	// <li>10: the input with the highest resolution will be used as the benchmark;</li>
-	// <li>20: the input with the highest bitrate will be used as the benchmark;</li>
-	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
-
-	// [Task flow template](https://intl.cloud.tencent.com/document/product/266/11700?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name, which should be entered if you want to perform a task flow on the generated new video.
-	ProcedureName *string `json:"ProcedureName,omitnil" name:"ProcedureName"`
-
-	// Configuration of file generated after editing.
-	OutputConfig *EditMediaOutputConfig `json:"OutputConfig,omitnil" name:"OutputConfig"`
-
-	// Identifies the source context which is used to pass through the user request information. The `EditMediaComplete` callback and task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
-
-	// Task priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
-	TasksPriority *int64 `json:"TasksPriority,omitnil" name:"TasksPriority"`
-
-	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
-	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
-
-	// Reserved field for special purposes.
-	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
-}
-
-type EditMediaRequest struct {
-	*tchttp.BaseRequest
-	
-	// Input video type. Valid values: File, Stream.
-	InputType *string `json:"InputType,omitnil" name:"InputType"`
-
-	// Information of input video file, which is required if `InputType` is `File`.
-	FileInfos []*EditMediaFileInfo `json:"FileInfos,omitnil" name:"FileInfos"`
-
-	// Input stream information, which is required if `InputType` is `Stream`.
-	StreamInfos []*EditMediaStreamInfo `json:"StreamInfos,omitnil" name:"StreamInfos"`
-
-	// Editing template ID. Valid values: 10, 20. If this parameter is left empty, template 10 will be used.
-	// <li>10: the input with the highest resolution will be used as the benchmark;</li>
-	// <li>20: the input with the highest bitrate will be used as the benchmark;</li>
-	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
-
-	// [Task flow template](https://intl.cloud.tencent.com/document/product/266/11700?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name, which should be entered if you want to perform a task flow on the generated new video.
-	ProcedureName *string `json:"ProcedureName,omitnil" name:"ProcedureName"`
-
-	// Configuration of file generated after editing.
-	OutputConfig *EditMediaOutputConfig `json:"OutputConfig,omitnil" name:"OutputConfig"`
-
-	// Identifies the source context which is used to pass through the user request information. The `EditMediaComplete` callback and task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
-
-	// Task priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
-	TasksPriority *int64 `json:"TasksPriority,omitnil" name:"TasksPriority"`
-
-	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
-	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
-
-	// Reserved field for special purposes.
-	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
-
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
-}
-
-func (r *EditMediaRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *EditMediaRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "InputType")
-	delete(f, "FileInfos")
-	delete(f, "StreamInfos")
-	delete(f, "Definition")
-	delete(f, "ProcedureName")
-	delete(f, "OutputConfig")
-	delete(f, "SessionContext")
-	delete(f, "TasksPriority")
-	delete(f, "SessionId")
-	delete(f, "ExtInfo")
-	delete(f, "SubAppId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EditMediaRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type EditMediaResponseParams struct {
-	// Video editing task ID, which can be used to query the status of editing task (with task type being `EditMedia`).
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
-}
-
-type EditMediaResponse struct {
-	*tchttp.BaseResponse
-	Response *EditMediaResponseParams `json:"Response"`
-}
-
-func (r *EditMediaResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *EditMediaResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
 }
 
 type EditMediaStreamInfo struct {
@@ -11457,60 +11322,47 @@ type EventContent struct {
 	// <li>`CreateSnapshotByTimeOffsetComplete`: Finished time point screencapturing.</li>
 	EventType *string `json:"EventType,omitnil" name:"EventType"`
 
-	// Video upload completion event, which is valid if the event type is `NewFileUpload`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	FileUploadEvent *FileUploadTask `json:"FileUploadEvent,omitnil" name:"FileUploadEvent"`
 
-	// Task flow status change event, which is valid if the event type is `ProcedureStateChanged`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	ProcedureStateChangeEvent *ProcedureTask `json:"ProcedureStateChangeEvent,omitnil" name:"ProcedureStateChangeEvent"`
 
-	// File deletion event, which is valid if the event type is `FileDeleted`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	FileDeleteEvent *FileDeleteTask `json:"FileDeleteEvent,omitnil" name:"FileDeleteEvent"`
 
-	// Video pull for upload completion event, which is valid if the event type is `PullComplete`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	PullCompleteEvent *PullUploadTask `json:"PullCompleteEvent,omitnil" name:"PullCompleteEvent"`
 
-	// Video editing completion event, which is valid if the event type is `EditMediaComplete`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	EditMediaCompleteEvent *EditMediaTask `json:"EditMediaCompleteEvent,omitnil" name:"EditMediaCompleteEvent"`
 
 	// The notification for completing video splitting, which is valid if the event type is `SplitMediaComplete`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SplitMediaCompleteEvent *SplitMediaTask `json:"SplitMediaCompleteEvent,omitnil" name:"SplitMediaCompleteEvent"`
 
-	// Media file composing task completion event, which is valid when the event type is `ComposeMediaComplete`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	ComposeMediaCompleteEvent *ComposeMediaTask `json:"ComposeMediaCompleteEvent,omitnil" name:"ComposeMediaCompleteEvent"`
 
-	// Video clipping completion event, which is valid if the event type is `ClipComplete`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	ClipCompleteEvent *ClipTask2017 `json:"ClipCompleteEvent,omitnil" name:"ClipCompleteEvent"`
 
-	// Video transcoding completion event, which is valid if the event type is `TranscodeComplete`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	TranscodeCompleteEvent *TranscodeTask2017 `json:"TranscodeCompleteEvent,omitnil" name:"TranscodeCompleteEvent"`
 
-	// Image sprite generating completion event, which is valid if the event type is `CreateImageSpriteComplete`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	CreateImageSpriteCompleteEvent *CreateImageSpriteTask2017 `json:"CreateImageSpriteCompleteEvent,omitnil" name:"CreateImageSpriteCompleteEvent"`
 
-	// Video splicing completion event, which is valid if the event type is `ConcatComplete`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	ConcatCompleteEvent *ConcatTask2017 `json:"ConcatCompleteEvent,omitnil" name:"ConcatCompleteEvent"`
 
-	// Time point screencapturing completion event, which is valid when the event type is `CreateSnapshotByTimeOffsetComplete`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	SnapshotByTimeOffsetCompleteEvent *SnapshotByTimeOffsetTask2017 `json:"SnapshotByTimeOffsetCompleteEvent,omitnil" name:"SnapshotByTimeOffsetCompleteEvent"`
 
-	// Release on WeChat completion event, which is valid if the event type is `WechatPublishComplete`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	WechatPublishCompleteEvent *WechatPublishTask `json:"WechatPublishCompleteEvent,omitnil" name:"WechatPublishCompleteEvent"`
 
-	// Release on WeChat Mini Program task completion event, which is valid if the event type is `WechatMiniProgramPublishComplete`.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	WechatMiniProgramPublishCompleteEvent *WechatMiniProgramPublishTask `json:"WechatMiniProgramPublishCompleteEvent,omitnil" name:"WechatMiniProgramPublishCompleteEvent"`
 
 	// The notification for completing watermark removal. This parameter is valid only if the event type is `RemoveWatermark`.
@@ -11529,17 +11381,20 @@ type EventContent struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExtractTraceWatermarkCompleteEvent *ExtractTraceWatermarkTask `json:"ExtractTraceWatermarkCompleteEvent,omitnil" name:"ExtractTraceWatermarkCompleteEvent"`
 
-	// The callback for the completion of the moderation task. This parameter is valid only if `EventType` is `ReviewAudioVideoComplete`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+
+	ExtractCopyRightWatermarkCompleteEvent *ExtractCopyRightWatermarkTask `json:"ExtractCopyRightWatermarkCompleteEvent,omitnil" name:"ExtractCopyRightWatermarkCompleteEvent"`
+
+
 	ReviewAudioVideoCompleteEvent *ReviewAudioVideoTask `json:"ReviewAudioVideoCompleteEvent,omitnil" name:"ReviewAudioVideoCompleteEvent"`
 
-	// This parameter is invalid now.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+
 	ReduceMediaBitrateCompleteEvent *ReduceMediaBitrateTask `json:"ReduceMediaBitrateCompleteEvent,omitnil" name:"ReduceMediaBitrateCompleteEvent"`
 
-	// The event of finishing getting file attributes. This parameter is valid only if `EventType` is `DescribeFileAttributesComplete`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+
 	DescribeFileAttributesCompleteEvent *DescribeFileAttributesTask `json:"DescribeFileAttributesCompleteEvent,omitnil" name:"DescribeFileAttributesCompleteEvent"`
+
+
+	QualityInspectCompleteEvent *QualityInspectTask `json:"QualityInspectCompleteEvent,omitnil" name:"QualityInspectCompleteEvent"`
 }
 
 // Predefined struct for user
@@ -11633,6 +11488,45 @@ func (r *ExecuteFunctionResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ExecuteFunctionResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ExtractCopyRightWatermarkTask struct {
+
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+
+	ErrCode *int64 `json:"ErrCode,omitnil" name:"ErrCode"`
+
+
+	Message *string `json:"Message,omitnil" name:"Message"`
+
+
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil" name:"ErrCodeExt"`
+
+
+	Input *ExtractCopyRightWatermarkTaskInput `json:"Input,omitnil" name:"Input"`
+
+
+	Output *ExtractCopyRightWatermarkTaskOutput `json:"Output,omitnil" name:"Output"`
+
+
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
+
+
+	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
+}
+
+type ExtractCopyRightWatermarkTaskInput struct {
+
+	Url *string `json:"Url,omitnil" name:"Url"`
+}
+
+type ExtractCopyRightWatermarkTaskOutput struct {
+
+	Text *string `json:"Text,omitnil" name:"Text"`
 }
 
 // Predefined struct for user
@@ -11773,6 +11667,9 @@ type ExtractTraceWatermarkTask struct {
 type ExtractTraceWatermarkTaskInput struct {
 	// The URL of the media on which digital watermark extraction is to be performed.
 	Url *string `json:"Url,omitnil" name:"Url"`
+
+
+	FileId *string `json:"FileId,omitnil" name:"FileId"`
 }
 
 type ExtractTraceWatermarkTaskOutput struct {
@@ -11897,7 +11794,7 @@ type FileUploadTask struct {
 }
 
 type FollowRedirect struct {
-	// Access forced redirect configuration switch <li>on：Enable;</li> <li>off：Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
@@ -11973,10 +11870,10 @@ func (r *ForbidMediaDistributionResponse) FromJsonString(s string) error {
 }
 
 type ForceRedirect struct {
-	// Access forced redirect configuration switch:<li>on:Enable;</li> <li>off:Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
-	// Access forced redirect types: <li>http:forced HTTP redirect</li> <li>https: forced HTTPS redirect</li>
+
 	RedirectType *string `json:"RedirectType,omitnil" name:"RedirectType"`
 
 	// Status code returned for forced redirect Supports 301, 302.
@@ -12050,7 +11947,7 @@ type HeuristicCache struct {
 }
 
 type HeuristicCacheConfig struct {
-	// Heuristic cache configuration switch:<li>on:Enable.</li> <li>off: Disable.</li>
+
 	HeuristicCacheTimeSwitch *string `json:"HeuristicCacheTimeSwitch,omitnil" name:"HeuristicCacheTimeSwitch"`
 
 	// Unit: seconds.
@@ -12083,27 +11980,27 @@ type HighlightsConfigureInfoForUpdate struct {
 }
 
 type HttpHeaderPathRule struct {
-	// HTTP header setting methods: <li>set: sets a value for an existing header parameter, a new header parameter, or multiple header parameters. Multiple header parameters will be merged into one.</li> <li>del: deletes a header parameter.</li> <li>add: adds a header parameter. By default, you can repeat the same action to add the same header parameter, which may affect browser response. Please consider the set operation first.</li>
+
 	HeaderMode *string `json:"HeaderMode,omitnil" name:"HeaderMode"`
 
 	// HTTP header name. Up to 100 characters can be set.
 	HeaderName *string `json:"HeaderName,omitnil" name:"HeaderName"`
 
-	// HTTP header value. Up to 1000 characters can be set.<li>Not required when Mode is del.</li> <li>Required when Mode is add/set.</li>
+
 	HeaderValue *string `json:"HeaderValue,omitnil" name:"HeaderValue"`
 
-	// Rule types:<li>all: Apply to all files.</li> <li>file: Apply to files with the specified suffixes.</li> <li>directory: Apply to specified paths.</li> <li>path: Apply to specified absolute paths.</li>
+
 	RuleType *string `json:"RuleType,omitnil" name:"RuleType"`
 
-	// Content for each RuleType:<li>For all, enter a wildcard *.</li> <li>For file, enter a suffix, e.g., jpg or txt.</li> <li>For directory, enter a path, e.g., /xxx/test/.</li> <li>For path, enter an absolute path, e.g., /xxx/test.html.</li>
+
 	RulePaths []*string `json:"RulePaths,omitnil" name:"RulePaths"`
 }
 
 type Https struct {
-	// HTTPS configuration switch: <li>on:Enable;</li> <li>off:Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
-	// Whether to enable HTTP2: <li>on:Enable;</li> <li>off:Disable.</li>
+
 	Http2 *string `json:"Http2,omitnil" name:"Http2"`
 
 	// Server certificate configuration information
@@ -12111,7 +12008,7 @@ type Https struct {
 }
 
 type HwPrivateAccess struct {
-	// Huawei Cloud OBS origin authentication configuration switch, the values are: <li>on:Enable;</li> <li>off: Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Access ID
@@ -12153,9 +12050,7 @@ type ImageCenterCut struct {
 }
 
 type ImageOperation struct {
-	// The image processing type. Valid values:
-	// <li>`Scale`: Scaling</li>
-	// <li>`CenterCut`: Cropping</li>
+
 	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// The scaling details. This parameter is valid only if `Type` is `Scale`.
@@ -12328,6 +12223,9 @@ type ImageWatermarkInput struct {
 	// <li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
 	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitnil" name:"RepeatType"`
+
+
+	Transparency *int64 `json:"Transparency,omitnil" name:"Transparency"`
 }
 
 type ImageWatermarkInputForUpdate struct {
@@ -12349,6 +12247,9 @@ type ImageWatermarkInputForUpdate struct {
 	// <li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
 	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitnil" name:"RepeatType"`
+
+
+	Transparency *int64 `json:"Transparency,omitnil" name:"Transparency"`
 }
 
 type ImageWatermarkTemplate struct {
@@ -12371,16 +12272,19 @@ type ImageWatermarkTemplate struct {
 	// <li>repeat_last_frame: stays on the last frame after watermark playback ends.</li>
 	// <li>repeat (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitnil" name:"RepeatType"`
+
+
+	Transparency *int64 `json:"Transparency,omitnil" name:"Transparency"`
 }
 
 type IpFilter struct {
-	// IP blocklist/allowlist configuration switch :<li>on：Enable;</li> <li>off：Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
-	// IP blocklist/allowlist type <li>whitelist: IP allowlist;</li> <li>blacklist:IP blocklist.</li>
+
 	FilterType *string `json:"FilterType,omitnil" name:"FilterType"`
 
-	// IP blocklist/allowlist Supports IPs in X.X.X.X format, or IP ranges in /8, /16, /24 format. Up to 50 whitelists or blacklists can be entered
+
 	Filters []*string `json:"Filters,omitnil" name:"Filters"`
 
 	// IP blocklist/allowlist path-based configuration. This feature is only available to selected beta customers.
@@ -12388,21 +12292,21 @@ type IpFilter struct {
 }
 
 type IpFilterPathRule struct {
-	// IP blocklist/allowlist type: <li>whitelist: allowlist IPs;</li> <li>blacklist: blocklist IPs.</li>
+
 	FilterType *string `json:"FilterType,omitnil" name:"FilterType"`
 
-	// IP blocklist/allowlist list Supports IPs in X.X.X.X format, or /8, /16, /24 format IP ranges. Up to 50 allowlists or blocklists can be entered.
+
 	Filters []*string `json:"Filters,omitnil" name:"Filters"`
 
-	// Rule types: <li>all: Effective for all files;</li> <li>file: Effective for specified file suffixes;</li> <li>directory: Effective for specified paths;</li> <li>path: Effective for specified absolute paths.</li>
+
 	RuleType *string `json:"RuleType,omitnil" name:"RuleType"`
 
-	// Content for each RuleType: <li>For all, enter an asterisk (*).</li> <li>For file, enter the suffix, such as jpg, txt.</li> <li>For directory, enter the path, such as /xxx/test/.</li> <li>For path, enter the corresponding absolute path, such as /xxx/test.html.</li>
+
 	RulePaths []*string `json:"RulePaths,omitnil" name:"RulePaths"`
 }
 
 type Ipv6Access struct {
-	// Enable the ipv6 access configuration switch for the domain name, the values are:<li>on:Enable;</li> <li>off: Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
@@ -12566,8 +12470,7 @@ type LiveRealTimeClipResponseParams struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	VodTaskId *string `json:"VodTaskId,omitnil" name:"VodTaskId"`
 
-	// Metadata of clipped video.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	MetaData *MediaMetaData `json:"MetaData,omitnil" name:"MetaData"`
 
 	// Cliped media segment info.
@@ -12602,6 +12505,17 @@ type LiveRealTimeClipStreamInfo struct {
 	// The transcoding template ID.
 	// <b>This is required if `Type` is `Transcoding`.</b>
 	TemplateId *uint64 `json:"TemplateId,omitnil" name:"TemplateId"`
+}
+
+type LiveRecordInfo struct {
+	// Live streaming recording ID
+	StreamId *string `json:"StreamId,omitnil" name:"StreamId"`
+
+	// Recording start time, using [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	RecordStartTime *string `json:"RecordStartTime,omitnil" name:"RecordStartTime"`
+
+	// Recording end time, using [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	RecordEndTime *string `json:"RecordEndTime,omitnil" name:"RecordEndTime"`
 }
 
 type LowLightEnhanceInfo struct {
@@ -12687,18 +12601,18 @@ func (r *ManageTaskResponse) FromJsonString(s string) error {
 }
 
 type MaxAge struct {
-	// MaxAge rule.
+	// MaxAge rule
 	MaxAgeRules []*MaxAgeRule `json:"MaxAgeRules,omitnil" name:"MaxAgeRules"`
 }
 
 type MaxAgeRule struct {
-	// Rule types: <li>all: effective for all files.</li> <li>file: effective for specified file suffixes.</li> <li>directory: effective for specified paths.</li> <li>path: effective for specified absolute paths.</li>
+
 	MaxAgeType *string `json:"MaxAgeType,omitnil" name:"MaxAgeType"`
 
-	// Content for each MaxAgeType: <li>For all, enter a wildcard *.</li> <li>For file, enter the suffix, e.g., jpg or txt.</li> <li>For directory, enter the path, e.g., /xxx/test/.</li> <li>For path, enter the absolute path, e.g., /xxx/test.html.</li> <b>Note: the all rule cannot be deleted, and it follows the origin site by default, which can be modified.</b>
+
 	MaxAgeContents []*string `json:"MaxAgeContents,omitnil" name:"MaxAgeContents"`
 
-	// Note: The value 0 means not to cache. <b>Note: The value 0 means not to cache.</b>
+
 	MaxAgeTime *uint64 `json:"MaxAgeTime,omitnil" name:"MaxAgeTime"`
 
 	// Whether to follow the origin server. Valid values: on and off. If it's on, MaxAgeTime is ignored.
@@ -13335,6 +13249,12 @@ type MediaProcessTaskAdaptiveDynamicStreamingResult struct {
 
 	// Output of adaptive bitrate streaming task.
 	Output *AdaptiveDynamicStreamingInfoItem `json:"Output,omitnil" name:"Output"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type MediaProcessTaskAnimatedGraphicResult struct {
@@ -13360,6 +13280,12 @@ type MediaProcessTaskAnimatedGraphicResult struct {
 
 	// The progress of an animated image generation task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type MediaProcessTaskCoverBySnapshotResult struct {
@@ -13384,6 +13310,12 @@ type MediaProcessTaskCoverBySnapshotResult struct {
 
 	// The progress of a video screenshot (thumbnail) task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type MediaProcessTaskImageSpriteResult struct {
@@ -13409,6 +13341,12 @@ type MediaProcessTaskImageSpriteResult struct {
 
 	// The progress of an image sprite generation task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type MediaProcessTaskInput struct {
@@ -13504,6 +13442,12 @@ type MediaProcessTaskSampleSnapshotResult struct {
 
 	// The progress of a sampled screenshot task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type MediaProcessTaskSnapshotByTimeOffsetResult struct {
@@ -13529,6 +13473,12 @@ type MediaProcessTaskSnapshotByTimeOffsetResult struct {
 
 	// The progress of a time point screenshot task. Value range: 0-100.
 	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil" name:"FinishTime"`
 }
 
 type MediaProcessTaskTranscodeResult struct {
@@ -13625,21 +13575,21 @@ type MediaSnapshotByTimePicInfoItem struct {
 }
 
 type MediaSourceData struct {
-	// Source of a media file:
-	// <li>`Record`: recording, such as live or time-shift recording</li>
-	// <li>`Upload`: upload, such as pull for upload, upload from server, and UGC upload from client</li>
-	// <li>`VideoProcessing`: video processing, such as video splicing and video clipping</li>
-	// <li>`WebPageRecord`: panoramic recording </li>
-	// <li>`Unknown`: unknown source</li>
+	// Media files source category: <li>Record: From recording. Such as live streaming recording, live time shift recording, etc.</li> <li>Upload: From upload. Such as pull upload, upload from server, client UGC upload, etc.</li> <li>VideoProcessing: From video processing. Such as video splicing, video editing, etc.</li> <li>TrtcRecord: From TRTC accompanying recording.</li> <li>WebPageRecord: From panoramic recording.</li> <li>Unknown: Unknown source.</li>
 	SourceType *string `json:"SourceType,omitnil" name:"SourceType"`
 
-	// Field passed through when a file is created.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// User-transparent transmission field when creating a file.
 	SourceContext *string `json:"SourceContext,omitnil" name:"SourceContext"`
+
+	// Live streaming recording information, valid when the file source is Record.
+	LiveRecordInfo *LiveRecordInfo `json:"LiveRecordInfo,omitnil" name:"LiveRecordInfo"`
 
 	// The TRTC recording information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TrtcRecordInfo *TrtcRecordInfo `json:"TrtcRecordInfo,omitnil" name:"TrtcRecordInfo"`
+
+	// Panoramic recording information, valid when the file source is WebPageRecord.
+	WebPageRecordInfo *WebPageRecordInfo `json:"WebPageRecordInfo,omitnil" name:"WebPageRecordInfo"`
 }
 
 type MediaSubStreamInfoItem struct {
@@ -13764,8 +13714,7 @@ type MediaTranscodeItem struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Url *string `json:"Url,omitnil" name:"Url"`
 
-	// Transcoding specification ID. For more information, please see [Transcoding Parameter Template](https://intl.cloud.tencent.com/document/product/266/33478?from_cn_redirect=1#.E8.BD.AC.E7.A0.81.E6.A8.A1.E6.9D.BF).
-	// Note: this field may return null, indicating that no valid values can be obtained.
+
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
 	// Sum of the average bitrate of a video stream and that of an audio stream in bps.
@@ -13808,6 +13757,9 @@ type MediaTranscodeItem struct {
 	// <li>Trace: Digital watermark</li>
 	// <li>None: Regular watermark</li>
 	DigitalWatermarkType *string `json:"DigitalWatermarkType,omitnil" name:"DigitalWatermarkType"`
+
+
+	CopyRightWatermarkText *string `json:"CopyRightWatermarkText,omitnil" name:"CopyRightWatermarkText"`
 }
 
 type MediaTransitionItem struct {
@@ -13816,7 +13768,12 @@ type MediaTransitionItem struct {
 
 	// List of transition operations. Up to one video image or audio transition operation is supported.
 	// Note: this field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: Transitions is deprecated.
 	Transitions []*TransitionOpertion `json:"Transitions,omitnil" name:"Transitions"`
+
+
+	MediaTransitions []*TransitionOperation `json:"MediaTransitions,omitnil" name:"MediaTransitions"`
 }
 
 type MediaVideoStreamItem struct {
@@ -14369,26 +14326,23 @@ func (r *ModifyAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type ModifyCDNDomainConfigRequestParams struct {
-	// Domain.
+
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// Domain configuration.
+
 	Config *CDNDomainConfigForUpdate `json:"Config,omitnil" name:"Config"`
 
-	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
 type ModifyCDNDomainConfigRequest struct {
 	*tchttp.BaseRequest
 	
-	// Domain.
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// Domain configuration.
 	Config *CDNDomainConfigForUpdate `json:"Config,omitnil" name:"Config"`
 
-	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -15034,7 +14988,7 @@ func (r *ModifyMediaInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyMediaStorageClassRequestParams struct {
-	// The unique IDs of media files
+
 	FileIds []*string `json:"FileIds,omitnil" name:"FileIds"`
 
 	// The target storage class. Valid values:
@@ -15061,7 +15015,6 @@ type ModifyMediaStorageClassRequestParams struct {
 type ModifyMediaStorageClassRequest struct {
 	*tchttp.BaseRequest
 	
-	// The unique IDs of media files
 	FileIds []*string `json:"FileIds,omitnil" name:"FileIds"`
 
 	// The target storage class. Valid values:
@@ -15252,10 +15205,10 @@ type ModifyRebuildMediaTemplateRequestParams struct {
 	// The template description.
 	Comment *string `json:"Comment,omitnil" name:"Comment"`
 
-	// The video remaster parameters.
+
 	RebuildVideoInfo *RebuildVideoInfo `json:"RebuildVideoInfo,omitnil" name:"RebuildVideoInfo"`
 
-	// The audio remaster parameters.
+
 	RebuildAudioInfo *RebuildAudioInfo `json:"RebuildAudioInfo,omitnil" name:"RebuildAudioInfo"`
 
 	// The output video parameters.
@@ -15293,10 +15246,8 @@ type ModifyRebuildMediaTemplateRequest struct {
 	// The template description.
 	Comment *string `json:"Comment,omitnil" name:"Comment"`
 
-	// The video remaster parameters.
 	RebuildVideoInfo *RebuildVideoInfo `json:"RebuildVideoInfo,omitnil" name:"RebuildVideoInfo"`
 
-	// The audio remaster parameters.
 	RebuildAudioInfo *RebuildAudioInfo `json:"RebuildAudioInfo,omitnil" name:"RebuildAudioInfo"`
 
 	// The output video parameters.
@@ -15468,6 +15419,12 @@ type ModifyRoundPlayRequestParams struct {
 
 	// The playlist description (not longer than 256 characters).
 	Desc *string `json:"Desc,omitnil" name:"Desc"`
+
+
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+
+	PlayBackMode *string `json:"PlayBackMode,omitnil" name:"PlayBackMode"`
 }
 
 type ModifyRoundPlayRequest struct {
@@ -15491,6 +15448,10 @@ type ModifyRoundPlayRequest struct {
 
 	// The playlist description (not longer than 256 characters).
 	Desc *string `json:"Desc,omitnil" name:"Desc"`
+
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	PlayBackMode *string `json:"PlayBackMode,omitnil" name:"PlayBackMode"`
 }
 
 func (r *ModifyRoundPlayRequest) ToJsonString() string {
@@ -15511,6 +15472,8 @@ func (r *ModifyRoundPlayRequest) FromJsonString(s string) error {
 	delete(f, "RoundPlaylist")
 	delete(f, "Name")
 	delete(f, "Desc")
+	delete(f, "Status")
+	delete(f, "PlayBackMode")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRoundPlayRequest has unknown keys!", "")
 	}
@@ -16021,7 +15984,7 @@ type ModifySuperPlayerConfigRequestParams struct {
 	// ID of the image sprite generating template that allows output.
 	ImageSpriteDefinition *uint64 `json:"ImageSpriteDefinition,omitnil" name:"ImageSpriteDefinition"`
 
-	// Display name of player for substreams with different resolutions.
+
 	ResolutionNames []*ResolutionNameInfo `json:"ResolutionNames,omitnil" name:"ResolutionNames"`
 
 	// Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
@@ -16069,7 +16032,6 @@ type ModifySuperPlayerConfigRequest struct {
 	// ID of the image sprite generating template that allows output.
 	ImageSpriteDefinition *uint64 `json:"ImageSpriteDefinition,omitnil" name:"ImageSpriteDefinition"`
 
-	// Display name of player for substreams with different resolutions.
 	ResolutionNames []*ResolutionNameInfo `json:"ResolutionNames,omitnil" name:"ResolutionNames"`
 
 	// Domain name used for playback. If its value is `Default`, the domain name configured in [Default Distribution Configuration](https://intl.cloud.tencent.com/document/product/266/33373?from_cn_redirect=1) will be used.
@@ -16775,33 +16737,33 @@ type OcrWordsConfigureInfoForUpdate struct {
 }
 
 type Origin struct {
-	// Primary origin server list When modifying the origin server, you need to enter the corresponding OriginType. Note: This field may return null, indicating that no valid value was found.
+
 	Origins []*string `json:"Origins,omitnil" name:"Origins"`
 
-	// Primary origin server type The following types are supported for input parameters: <li> domain:domain；</li> <li>ip：IP address；</li> <li>third_party：third-party object storage origin.</li>
+
 	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
 
-	// Host header used when accessing the primary origin server. If it is left empty, the acceleration domain name will be used by default.When the origin server type is object storage, the ServerName field is required.
+
 	ServerName *string `json:"ServerName,omitnil" name:"ServerName"`
 
-	// Origin-pull protocol configuration http: forced HTTP origin-pull follow: protocol follow origin-pull https: forced HTTPS origin-pull. This only supports origin server port 443 for origin-pull. Note: This field may return null, indicating that no valid value can be obtained.
+
 	OriginPullProtocol *string `json:"OriginPullProtocol,omitnil" name:"OriginPullProtocol"`
 
-	// Backup origin server list When modifying the backup origin server, you need to enter the corresponding BackupOriginType. Note: This field may return null, indicating that no valid value can be obtained.
+
 	BackupOrigins []*string `json:"BackupOrigins,omitnil" name:"BackupOrigins"`
 
-	//  Backup origin server type, which supports the following types: <li>domain：Domain；</li> <li>ip：IP address；</li> <li>third_party：third-party object storage origin.</li>
+
 	BackupOriginType *string `json:"BackupOriginType,omitnil" name:"BackupOriginType"`
 
 	// Host header used when accessing the backup origin server. If it is left empty, the ServerName of primary origin server will be used by default. Note: This field may return null, indicating that no valid value can be obtained.
 	BackupServerName *string `json:"BackupServerName,omitnil" name:"BackupServerName"`
 
-	// The object storage returns to the source vendor. It is required when the source site type is a third-party storage source site (third_party). The optional values include the following:<li>aws_s3：AWS S3;</li> <li>ali_oss：Alibaba Cloud OSS;</li> <li>hw_obs：Huawei OBS;</li> <li>others：Object storage from other vendors only supports object storage compatible with the AWS signature algorithm, such as Tencent Cloud COS.</li>
+
 	OriginCompany *string `json:"OriginCompany,omitnil" name:"OriginCompany"`
 }
 
 type OssPrivateAccess struct {
-	// Alibaba Cloud OSS back-to-origin authentication configuration switch, the values are:<li>on:Enable;</li> <li>off: Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Access ID.
@@ -16818,7 +16780,7 @@ type OssPrivateAccess struct {
 }
 
 type OthersPrivateAccess struct {
-	// Other vendor object storage back-to-source authentication configuration switches, the values are:<li>on:Enable;</li> <li>off: Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Access ID.
@@ -17455,7 +17417,7 @@ type ProcessMediaByProcedureRequestParams struct {
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
 
-	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
+
 	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
 
 	// Reserved field for special purposes.
@@ -17483,7 +17445,6 @@ type ProcessMediaByProcedureRequest struct {
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
 
-	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
 
 	// Reserved field for special purposes.
@@ -17661,135 +17622,6 @@ func (r *ProcessMediaByUrlResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ProcessMediaByUrlResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ProcessMediaRequestParams struct {
-	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
-	FileId *string `json:"FileId,omitnil" name:"FileId"`
-
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
-	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
-
-	// Parameter of video processing task.
-	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitnil" name:"MediaProcessTask"`
-
-	// The information of the audio/video moderation task\*.
-	// This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
-	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitnil" name:"AiContentReviewTask"`
-
-	// Video content analysis task parameter.
-	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil" name:"AiAnalysisTask"`
-
-	// Type parameter of video content recognition task.
-	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil" name:"AiRecognitionTask"`
-
-	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
-	TasksPriority *int64 `json:"TasksPriority,omitnil" name:"TasksPriority"`
-
-	// Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
-	TasksNotifyMode *string `json:"TasksNotifyMode,omitnil" name:"TasksNotifyMode"`
-
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
-
-	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
-	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
-
-	// Reserved field for special purposes.
-	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
-}
-
-type ProcessMediaRequest struct {
-	*tchttp.BaseRequest
-	
-	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
-	FileId *string `json:"FileId,omitnil" name:"FileId"`
-
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
-	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
-
-	// Parameter of video processing task.
-	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitnil" name:"MediaProcessTask"`
-
-	// The information of the audio/video moderation task\*.
-	// This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
-	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitnil" name:"AiContentReviewTask"`
-
-	// Video content analysis task parameter.
-	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil" name:"AiAnalysisTask"`
-
-	// Type parameter of video content recognition task.
-	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil" name:"AiRecognitionTask"`
-
-	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
-	TasksPriority *int64 `json:"TasksPriority,omitnil" name:"TasksPriority"`
-
-	// Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
-	TasksNotifyMode *string `json:"TasksNotifyMode,omitnil" name:"TasksNotifyMode"`
-
-	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
-	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
-
-	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
-	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
-
-	// Reserved field for special purposes.
-	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
-}
-
-func (r *ProcessMediaRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ProcessMediaRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "FileId")
-	delete(f, "SubAppId")
-	delete(f, "MediaProcessTask")
-	delete(f, "AiContentReviewTask")
-	delete(f, "AiAnalysisTask")
-	delete(f, "AiRecognitionTask")
-	delete(f, "TasksPriority")
-	delete(f, "TasksNotifyMode")
-	delete(f, "SessionContext")
-	delete(f, "SessionId")
-	delete(f, "ExtInfo")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ProcessMediaResponseParams struct {
-	// Task ID
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
-}
-
-type ProcessMediaResponse struct {
-	*tchttp.BaseResponse
-	Response *ProcessMediaResponseParams `json:"Response"`
-}
-
-func (r *ProcessMediaResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ProcessMediaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -18185,8 +18017,87 @@ func (r *PushUrlCacheResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type QualityInspectItem struct {
+	// Abnormal segment start offset time, unit: seconds.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil" name:"StartTimeOffset"`
+
+	// Abnormal segment termination's offset time, unit: seconds.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil" name:"EndTimeOffset"`
+
+	// Detect abnormality in the area coordinates. The array contains 4 elements [x1, y1, x2, y2], which indicate the horizontal and vertical coordinates of the upper left and lower right points of the area in sequence. <font color=red>Pay attention to:</font> The value of this field is valid only when Type is one of the following: <li>BlackWhiteEdge: black and white edge;</li> <li>Mosaic: mosaic;</li> <li>QRCode: QR code;</li> <li>AppletCode: Mini Program code;</li> <li>BarCode: bar code.</li>
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil" name:"AreaCoordSet"`
+
+	// Confidence threshold, range: [0, 100]. <font color=red>Pay attention to:</font> This field is valid only when Type has one of the following values: <li>Mosaic: Mosaic;</li> <li>QRCode: QR code;</li> <li>AppletCode: Mini Program code;</li> <li>BarCode: Bar code.</li>
+	Confidence *uint64 `json:"Confidence,omitnil" name:"Confidence"`
+}
+
+type QualityInspectResultItem struct {
+	// Abnormal type, range: <li>Jitter: Jitter;</li> <li>Blur: Blur;</li> <li>LowLighting: Low lighting;</li> <li>HighLighting: Overexposure;</li> <li>CrashScreen: Crash screen;</li> <li>BlackWhiteEdge: Black and white edges;</li> <li>SolidColorScreen: Solid color screen;</li> <li>Noise: Noise;</li> <li>Mosaic: Mosaic;</li> <li>QRCode: QR code;</li> <li>AppletCode: Applet code;</li> <li>BarCode: Bar code;</li> <li>LowVoice: Low voice;</li> <li>HighVoice: High voice;</li> <li>NoVoice: mutes;</li> <li>LowEvaluation: No reference scoring below the threshold.</li>
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// Abnormal segment List. <font color=red>Pay attention to:</font> This list will only show the first 100 elements at most. If you wish to get the complete result, please get it from the file corresponding to SegmentSetFileUrl.
+	SegmentSet []*QualityInspectItem `json:"SegmentSet,omitnil" name:"SegmentSet"`
+
+	// Abnormal segment List file URL. The file content is JSON, and the data structure is consistent with the SegmentSet Field. (The file will not be permanently stored, and will be deleted after reaching the SegmentSetFileUrlExpireTime Time point).
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitnil" name:"SegmentSetFileUrl"`
+
+	// Abnormal segment List file URL expiration time, using [ISO date supported](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitnil" name:"SegmentSetFileUrlExpireTime"`
+}
+
+type QualityInspectTask struct {
+	// Media quality inspection task ID.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// Task status, value: <li>PROCESSING: processing;</li> <li>FINISH: Completed.</li>
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// Error code, an empty string indicates success, other values indicate failure. Please refer to the [Video Processing Error Code](https://intl.cloud.tencent.com/document/product/266/50368?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81) list for values.
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil" name:"ErrCodeExt"`
+
+	// Error information.
+	Message *string `json:"Message,omitnil" name:"Message"`
+
+	// Media quality inpection input metadata of audio and video.
+	MetaData *MediaMetaData `json:"MetaData,omitnil" name:"MetaData"`
+
+	// Media quality inspection task input.
+	Input *QualityInspectTaskInput `json:"Input,omitnil" name:"Input"`
+
+	// Media quality inspection task generates.
+	Output *QualityInspectTaskOutput `json:"Output,omitnil" name:"Output"`
+
+	// Used for deduplication, if there has been a request with the same recognition code within seven days, this request will return an error. Maximum length of 50 characters, without or with an empty string indicates no deduplication.
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
+
+	// Source context, used for transparent transmission of user request information. Upon completion of media quality inpection, the callback will return the value of this field, with a maximum length of 1000 characters.
+	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
+}
+
+type QualityInspectTaskInput struct {
+	// Media file ID.
+	FileId *string `json:"FileId,omitnil" name:"FileId"`
+
+	// Media quality inspect template ID.
+	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
+}
+
+type QualityInspectTaskOutput struct {
+	// Whether the media files have no audio track, range: <li>0: No, that is, there is an audio track;</li> <li>1: Yes, that is, there is no audio track.</li>
+	NoAudio *int64 `json:"NoAudio,omitnil" name:"NoAudio"`
+
+	// Whether the media files have no video track, range: <li>0: No, that is, there is a video track;</li> <li>1: Yes, that is, there is no video track.</li>
+	NoVideo *int64 `json:"NoVideo,omitnil" name:"NoVideo"`
+
+	// Quality score, value range: [0, 100].
+	QualityEvaluationScore *uint64 `json:"QualityEvaluationScore,omitnil" name:"QualityEvaluationScore"`
+
+	// Abnormal items list detected of media quality inspection task
+	QualityInspectResultSet []*QualityInspectResultItem `json:"QualityInspectResultSet,omitnil" name:"QualityInspectResultSet"`
+}
+
 type Quic struct {
-	// Quic function configuration switch, the values are: <li>on:Enable;</li> <li>off: Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
@@ -18213,7 +18124,7 @@ type RebuildMediaByTemplateRequestParams struct {
 	// The end offset (seconds). If you do not specify this, the segment will end at the end of the video.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil" name:"EndTimeOffset"`
 
-	// The parameters for the output file of remastering.
+
 	OutputConfig *RebuildMediaOutputConfig `json:"OutputConfig,omitnil" name:"OutputConfig"`
 
 	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
@@ -18247,7 +18158,6 @@ type RebuildMediaByTemplateRequest struct {
 	// The end offset (seconds). If you do not specify this, the segment will end at the end of the video.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil" name:"EndTimeOffset"`
 
-	// The parameters for the output file of remastering.
 	OutputConfig *RebuildMediaOutputConfig `json:"OutputConfig,omitnil" name:"OutputConfig"`
 
 	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
@@ -18971,7 +18881,7 @@ type ReduceMediaBitrateTranscodeResult struct {
 }
 
 type Referer struct {
-	// Referer blacklist/whitelist configuration switch:<li>on:Enable;</li> <li>off:Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Referer blacklist/whitelist configuration rule
@@ -19001,19 +18911,19 @@ type RefererAuthPolicy struct {
 }
 
 type RefererRule struct {
-	// Rule types: <li>all: Apply to all files.</li> <li>file: Apply to files with the specified suffixes.</li> <li>directory: Apply to specified paths.</li> <li>path: Apply to specified absolute paths.</li>
+
 	RuleType *string `json:"RuleType,omitnil" name:"RuleType"`
 
-	// Content for each RuleType:<li>For all, enter a wildcard *.</li> <li>For file, enter a suffix, e.g., jpg or txt.</li> <li>For directory, enter a path, e.g., /xxx/test/.</li> <li>For path, enter an absolute path, e.g., /xxx/test.html.</li>
+
 	RulePaths []*string `json:"RulePaths,omitnil" name:"RulePaths"`
 
-	// Referer configuration types:<li>whitelist：Allowlist;</li> <li>blacklist:Blocklist.</li>
+
 	RefererType *string `json:"RefererType,omitnil" name:"RefererType"`
 
 	// Referer content list
 	Referers []*string `json:"Referers,omitnil" name:"Referers"`
 
-	// Whether to allow empty referer：true: Allow empty referer when RefererType = whitelist; false: Reject empty refer when RefererType = blacklist.
+
 	AllowEmpty *bool `json:"AllowEmpty,omitnil" name:"AllowEmpty"`
 }
 
@@ -19243,7 +19153,7 @@ type RepairInfo struct {
 }
 
 type RequestHeader struct {
-	// Custom request header configuration switch: <li>on：Enable;</li> <li>off：Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Custom request header configuration rules
@@ -19372,7 +19282,7 @@ type ResourceTag struct {
 }
 
 type ResponseHeader struct {
-	// Custom response header switch: <li>on：Enable;</li> <li>off：Disable.</li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Custom response header rules
@@ -19384,6 +19294,9 @@ type RestoreMediaRequestParams struct {
 	// The IDs of media files.
 	FileIds []*string `json:"FileIds,omitnil" name:"FileIds"`
 
+	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
 	// The number of days during which the restored files will remain available.
 	RestoreDay *uint64 `json:"RestoreDay,omitnil" name:"RestoreDay"`
 
@@ -19395,9 +19308,6 @@ type RestoreMediaRequestParams struct {
 	// <li>Standard: The files are made available in 24 hours.</li>
 	// <li>Bulk: The files are made available in 48 hours.</li>
 	RestoreTier *string `json:"RestoreTier,omitnil" name:"RestoreTier"`
-
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
 type RestoreMediaRequest struct {
@@ -19406,6 +19316,9 @@ type RestoreMediaRequest struct {
 	// The IDs of media files.
 	FileIds []*string `json:"FileIds,omitnil" name:"FileIds"`
 
+	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
 	// The number of days during which the restored files will remain available.
 	RestoreDay *uint64 `json:"RestoreDay,omitnil" name:"RestoreDay"`
 
@@ -19417,9 +19330,6 @@ type RestoreMediaRequest struct {
 	// <li>Standard: The files are made available in 24 hours.</li>
 	// <li>Bulk: The files are made available in 48 hours.</li>
 	RestoreTier *string `json:"RestoreTier,omitnil" name:"RestoreTier"`
-
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
 func (r *RestoreMediaRequest) ToJsonString() string {
@@ -19435,9 +19345,9 @@ func (r *RestoreMediaRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "FileIds")
+	delete(f, "SubAppId")
 	delete(f, "RestoreDay")
 	delete(f, "RestoreTier")
-	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RestoreMediaRequest has unknown keys!", "")
 	}
@@ -19943,6 +19853,15 @@ type RoundPlayInfo struct {
 
 	// The playlist description (not longer than 256 characters).
 	Desc *string `json:"Desc,omitnil" name:"Desc"`
+
+
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+
+	PlayBackMode *string `json:"PlayBackMode,omitnil" name:"PlayBackMode"`
+
+
+	Url *string `json:"Url,omitnil" name:"Url"`
 }
 
 type RoundPlayListItemInfo struct {
@@ -19960,10 +19879,10 @@ type RoundPlayListItemInfo struct {
 }
 
 type RuleCache struct {
-	// Rule types:<li>all: effective for all files.</li> <li>file: effective for specified file suffixes.</li> <li>directory: effective for specified paths.</li> <li>path: effective for specified absolute paths.</li>
+
 	RuleType *string `json:"RuleType,omitnil" name:"RuleType"`
 
-	// Content for each CacheType: <li>For all, enter a wildcard *.</li> <li>For file, enter the suffix, e.g., jpg or txt.</li> <li>For directory, enter the path, e.g., /xxx/test/.</li> <li>For path, enter the absolute path, e.g., /xxx/test.html.</li>
+
 	RulePaths []*string `json:"RulePaths,omitnil" name:"RulePaths"`
 
 	// Cache configuration
@@ -19971,13 +19890,13 @@ type RuleCache struct {
 }
 
 type RuleCacheConfig struct {
-	// Cache configuration
+
 	Cache *CacheConfigCache `json:"Cache,omitnil" name:"Cache"`
 
-	// No cache configuration
+
 	NoCache *CacheConfigNoCache `json:"NoCache,omitnil" name:"NoCache"`
 
-	// Follows the origin server configuration
+
 	FollowOrigin *CacheConfigFollowOrigin `json:"FollowOrigin,omitnil" name:"FollowOrigin"`
 }
 
@@ -20137,32 +20056,6 @@ type SearchMediaRequestParams struct {
 	// <li>The files whose expiration time points are on the start or end time of the specified range will also be returned.</li>
 	ExpireTime *TimeRange `json:"ExpireTime,omitnil" name:"ExpireTime"`
 
-	// Sorting order.
-	// <li>Valid value of `Sort.Field`: CreateTime.</li>
-	// <li>If `Text`, `Names`, or `Descriptions` is not empty, the `Sort.Field` field will not take effect, and the search results will be sorted by match rate.</li>
-	Sort *SortBy `json:"Sort,omitnil" name:"Sort"`
-
-	// <div id="p_offset">Start offset of a paged return. Default value: 0. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
-	// <li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
-
-	// <div id="p_limit">Number of entries returned by a paged query. Default value: 10. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
-	// <li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
-
-	// Specifies information entry that needs to be returned for all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
-	// <li>basicInfo (basic video information).</li>
-	// <li>metaData (video metadata).</li>
-	// <li>transcodeInfo (result information of video transcoding).</li>
-	// <li>animatedGraphicsInfo (result information of animated image generating task).</li>
-	// <li>imageSpriteInfo (image sprite information).</li>
-	// <li>snapshotByTimeOffsetInfo (point-in-time screenshot information).</li>
-	// <li>sampleSnapshotInfo (sampled screenshot information).</li>
-	// <li>keyFrameDescInfo (timestamp information).</li>
-	// <li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
-	// <li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
-	Filters []*string `json:"Filters,omitnil" name:"Filters"`
-
 	// Regions where media files are stored, such as `ap-chongqing`. For more regions, see [Storage Regions](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
 	// <li>Length limit for a single region: 20 characters</li>
 	// <li>Array length limit: 20</li>
@@ -20200,6 +20093,32 @@ type SearchMediaRequestParams struct {
 	// <li>Element length limit: 64 characters.</li>
 	// <li>Array length limit: 10.</li>
 	TrtcRoomIds []*string `json:"TrtcRoomIds,omitnil" name:"TrtcRoomIds"`
+
+	// Specifies information entry that needs to be returned for all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
+	// <li>basicInfo (basic video information).</li>
+	// <li>metaData (video metadata).</li>
+	// <li>transcodeInfo (result information of video transcoding).</li>
+	// <li>animatedGraphicsInfo (result information of animated image generating task).</li>
+	// <li>imageSpriteInfo (image sprite information).</li>
+	// <li>snapshotByTimeOffsetInfo (point-in-time screenshot information).</li>
+	// <li>sampleSnapshotInfo (sampled screenshot information).</li>
+	// <li>keyFrameDescInfo (timestamp information).</li>
+	// <li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
+	// <li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
+	Filters []*string `json:"Filters,omitnil" name:"Filters"`
+
+	// Sorting order.
+	// <li>Valid value of `Sort.Field`: CreateTime.</li>
+	// <li>If `Text`, `Names`, or `Descriptions` is not empty, the `Sort.Field` field will not take effect, and the search results will be sorted by match rate.</li>
+	Sort *SortBy `json:"Sort,omitnil" name:"Sort"`
+
+	// <div id="p_offset">Start offset of a paged return. Default value: 0. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
+	// <li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+
+	// <div id="p_limit">Number of entries returned by a paged query. Default value: 10. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
+	// <li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
 	// Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
@@ -20291,32 +20210,6 @@ type SearchMediaRequest struct {
 	// <li>The files whose expiration time points are on the start or end time of the specified range will also be returned.</li>
 	ExpireTime *TimeRange `json:"ExpireTime,omitnil" name:"ExpireTime"`
 
-	// Sorting order.
-	// <li>Valid value of `Sort.Field`: CreateTime.</li>
-	// <li>If `Text`, `Names`, or `Descriptions` is not empty, the `Sort.Field` field will not take effect, and the search results will be sorted by match rate.</li>
-	Sort *SortBy `json:"Sort,omitnil" name:"Sort"`
-
-	// <div id="p_offset">Start offset of a paged return. Default value: 0. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
-	// <li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
-
-	// <div id="p_limit">Number of entries returned by a paged query. Default value: 10. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
-	// <li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
-
-	// Specifies information entry that needs to be returned for all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
-	// <li>basicInfo (basic video information).</li>
-	// <li>metaData (video metadata).</li>
-	// <li>transcodeInfo (result information of video transcoding).</li>
-	// <li>animatedGraphicsInfo (result information of animated image generating task).</li>
-	// <li>imageSpriteInfo (image sprite information).</li>
-	// <li>snapshotByTimeOffsetInfo (point-in-time screenshot information).</li>
-	// <li>sampleSnapshotInfo (sampled screenshot information).</li>
-	// <li>keyFrameDescInfo (timestamp information).</li>
-	// <li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
-	// <li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
-	Filters []*string `json:"Filters,omitnil" name:"Filters"`
-
 	// Regions where media files are stored, such as `ap-chongqing`. For more regions, see [Storage Regions](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E5.B7.B2.E6.94.AF.E6.8C.81.E5.9C.B0.E5.9F.9F.E5.88.97.E8.A1.A8).
 	// <li>Length limit for a single region: 20 characters</li>
 	// <li>Array length limit: 20</li>
@@ -20354,6 +20247,32 @@ type SearchMediaRequest struct {
 	// <li>Element length limit: 64 characters.</li>
 	// <li>Array length limit: 10.</li>
 	TrtcRoomIds []*string `json:"TrtcRoomIds,omitnil" name:"TrtcRoomIds"`
+
+	// Specifies information entry that needs to be returned for all media files. Multiple entries can be specified simultaneously. N starts from 0. If this field is left empty, all information entries will be returned by default. Valid values:
+	// <li>basicInfo (basic video information).</li>
+	// <li>metaData (video metadata).</li>
+	// <li>transcodeInfo (result information of video transcoding).</li>
+	// <li>animatedGraphicsInfo (result information of animated image generating task).</li>
+	// <li>imageSpriteInfo (image sprite information).</li>
+	// <li>snapshotByTimeOffsetInfo (point-in-time screenshot information).</li>
+	// <li>sampleSnapshotInfo (sampled screenshot information).</li>
+	// <li>keyFrameDescInfo (timestamp information).</li>
+	// <li>adaptiveDynamicStreamingInfo (information of adaptive bitrate streaming).</li>
+	// <li>miniProgramReviewInfo (WeChat Mini Program audit information).</li>
+	Filters []*string `json:"Filters,omitnil" name:"Filters"`
+
+	// Sorting order.
+	// <li>Valid value of `Sort.Field`: CreateTime.</li>
+	// <li>If `Text`, `Names`, or `Descriptions` is not empty, the `Sort.Field` field will not take effect, and the search results will be sorted by match rate.</li>
+	Sort *SortBy `json:"Sort,omitnil" name:"Sort"`
+
+	// <div id="p_offset">Start offset of a paged return. Default value: 0. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
+	// <li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+
+	// <div id="p_limit">Number of entries returned by a paged query. Default value: 10. Entries from No. "Offset" to No. "Offset + Limit - 1" will be returned.
+	// <li>Value range: "Offset + Limit" cannot be more than 5,000. (For more information, please see <a href="#maxResultsDesc">Limit on the Number of Results Returned by API</a>)</li></div>
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// (This is not recommended. `Names`, `NamePrefixes`, or `Descriptions` should be used instead)
 	// Search text, which fuzzily matches the media file name or description. The more matching items and the higher the match rate, the higher-ranked the result. It can contain up to 64 characters.
@@ -20412,10 +20331,6 @@ func (r *SearchMediaRequest) FromJsonString(s string) error {
 	delete(f, "StreamIds")
 	delete(f, "CreateTime")
 	delete(f, "ExpireTime")
-	delete(f, "Sort")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	delete(f, "Filters")
 	delete(f, "StorageRegions")
 	delete(f, "StorageClasses")
 	delete(f, "MediaTypes")
@@ -20423,6 +20338,10 @@ func (r *SearchMediaRequest) FromJsonString(s string) error {
 	delete(f, "ReviewResults")
 	delete(f, "TrtcSdkAppIds")
 	delete(f, "TrtcRoomIds")
+	delete(f, "Filters")
+	delete(f, "Sort")
+	delete(f, "Offset")
+	delete(f, "Limit")
 	delete(f, "Text")
 	delete(f, "SourceType")
 	delete(f, "StreamId")
@@ -20892,7 +20811,7 @@ type StartCDNDomainRequestParams struct {
 	// Domain.
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// Domain operation, value: <li>start: enable;</li> <li>stop: disable. </li>
+
 	Operation *string `json:"Operation,omitnil" name:"Operation"`
 
 	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
@@ -20905,7 +20824,6 @@ type StartCDNDomainRequest struct {
 	// Domain.
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// Domain operation, value: <li>start: enable;</li> <li>stop: disable. </li>
 	Operation *string `json:"Operation,omitnil" name:"Operation"`
 
 	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
@@ -21354,13 +21272,13 @@ type TempCertificate struct {
 }
 
 type TerrorismConfigureInfo struct {
-	// Parameters for OCR-based recognition of terrorism content
-	// Note: This field may return `null`, indicating that no valid value can be found.
-	OcrReviewInfo *TerrorismOcrReviewTemplateInfo `json:"OcrReviewInfo,omitnil" name:"OcrReviewInfo"`
-
 	// Parameters for recognition of terrorism content in images
 	// Note: This field may return `null`, indicating that no valid value can be found.
 	ImgReviewInfo *TerrorismImgReviewTemplateInfo `json:"ImgReviewInfo,omitnil" name:"ImgReviewInfo"`
+
+	// Parameters for OCR-based recognition of terrorism content
+	// Note: This field may return `null`, indicating that no valid value can be found.
+	OcrReviewInfo *TerrorismOcrReviewTemplateInfo `json:"OcrReviewInfo,omitnil" name:"OcrReviewInfo"`
 }
 
 type TerrorismConfigureInfoForUpdate struct {
@@ -21588,23 +21506,26 @@ type TranscodeTaskInput struct {
 	// Digital watermark.
 	TraceWatermark *TraceWatermarkInput `json:"TraceWatermark,omitnil" name:"TraceWatermark"`
 
-	// List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
-	HeadTailSet []*HeadTailTaskInput `json:"HeadTailSet,omitnil" name:"HeadTailSet"`
+
+	CopyRightWatermark *CopyRightWatermarkInput `json:"CopyRightWatermark,omitnil" name:"CopyRightWatermark"`
 
 	// List of blurs. Up to 10 ones can be supported.
 	MosaicSet []*MosaicInput `json:"MosaicSet,omitnil" name:"MosaicSet"`
 
-	// End time offset of a transcoded video, in seconds.
-	// <li>If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.</li>
-	// <li>If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.</li>
-	// <li>If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.</li>
-	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil" name:"EndTimeOffset"`
+	// List of video opening/closing credits configuration template IDs. You can enter up to 10 IDs.
+	HeadTailSet []*HeadTailTaskInput `json:"HeadTailSet,omitnil" name:"HeadTailSet"`
 
 	// Start time offset of a transcoded video, in seconds.
 	// <li>If this parameter is left empty or set to 0, the transcoded video will start at the same time as the original video.</li>
 	// <li>If this parameter is set to a positive number (n for example), the transcoded video will start at the nth second of the original video.</li>
 	// <li>If this parameter is set to a negative number (-n for example), the transcoded video will start at the nth second before the end of the original video.</li>
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil" name:"StartTimeOffset"`
+
+	// End time offset of a transcoded video, in seconds.
+	// <li>If this parameter is left empty or set to 0, the transcoded video will end at the same time as the original video.</li>
+	// <li>If this parameter is set to a positive number (n for example), the transcoded video will end at the nth second of the original video.</li>
+	// <li>If this parameter is set to a negative number (-n for example), the transcoded video will end at the nth second before the end of the original video.</li>
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil" name:"EndTimeOffset"`
 }
 
 type TranscodeTemplate struct {
@@ -21662,6 +21583,11 @@ type TranscodeTemplate struct {
 
 	// The segment type. This parameter is valid only if `Container` is `hls`
 	SegmentType *string `json:"SegmentType,omitnil" name:"SegmentType"`
+}
+
+type TransitionOperation struct {
+
+	Type *string `json:"Type,omitnil" name:"Type"`
 }
 
 type TransitionOpertion struct {
@@ -21741,7 +21667,7 @@ type UrlSignatureAuthPolicy struct {
 }
 
 type UserAgentFilter struct {
-	// UserAgent blacklist and whitelist configuration switches, the values are: <li>on:Enable; </li> <li>off: Disable. </li>
+
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// UA blacklist/whitelist effect rule list
@@ -21749,16 +21675,16 @@ type UserAgentFilter struct {
 }
 
 type UserAgentFilterRule struct {
-	// UserAgent blacklist/whitelist type: <li>whitelist:whitelist;</li> <li>blacklist:blacklist.</li>
+
 	FilterType *string `json:"FilterType,omitnil" name:"FilterType"`
 
 	// UserAgent list.
 	UserAgents []*string `json:"UserAgents,omitnil" name:"UserAgents"`
 
-	// Rule type: <li>all: All files take effect;</li> <li>file: The specified file suffix takes effect;</li> <li>directory: The specified path takes effect;</li> <li>path: The specified absolute path takes effect.</li>
+
 	RuleType *string `json:"RuleType,omitnil" name:"RuleType"`
 
-	// Matching content under the corresponding type of RuleType:<li>For `all`, enter an asterisk (*).</li> <li>For `file`, enter the suffix, such as jpg, txt.</li> <li>For `directory`, enter the path, such as /xxx/test/.</li> <li>For `path`, enter the corresponding absolute path, such as /xxx/test.html.</li>
+
 	RulePaths []*string `json:"RulePaths,omitnil" name:"RulePaths"`
 }
 
@@ -22199,6 +22125,14 @@ type WatermarkTemplate struct {
 	// <li>bottomLeft: the origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text;</li>
 	// <li>bottomRight: the origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.</li>
 	CoordinateOrigin *string `json:"CoordinateOrigin,omitnil" name:"CoordinateOrigin"`
+}
+
+type WebPageRecordInfo struct {
+	// Panoramic recording Url.
+	RecordUrl *string `json:"RecordUrl,omitnil" name:"RecordUrl"`
+
+	// Panoramic recording task ID.
+	RecordTaskId *string `json:"RecordTaskId,omitnil" name:"RecordTaskId"`
 }
 
 type WechatMiniProgramPublishTask struct {
