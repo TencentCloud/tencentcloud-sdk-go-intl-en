@@ -35,21 +35,11 @@ type AccelerateType struct {
 }
 
 type AccelerationDomain struct {
-	// Details of the origin.
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	OriginDetail *OriginDetail `json:"OriginDetail,omitnil" name:"OriginDetail"`
-
-	// Creation time of the accelerated domain name.
-	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
+	// ID of the site.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
 	// Accelerated domain name
 	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
-
-	// Modification time of the accelerated domain name.
-	ModifiedOn *string `json:"ModifiedOn,omitnil" name:"ModifiedOn"`
-
-	// ID of the site.
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
 	// Status of the accelerated domain name. Values:
 	// <li>`online`: Activated</li>
@@ -59,12 +49,51 @@ type AccelerationDomain struct {
 	// <li>`init`: Pending activation</li>
 	DomainStatus *string `json:"DomainStatus,omitnil" name:"DomainStatus"`
 
+	// Details of the origin.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginDetail *OriginDetail `json:"OriginDetail,omitnil" name:"OriginDetail"`
+
+
+	OriginProtocol *string `json:"OriginProtocol,omitnil" name:"OriginProtocol"`
+
+
+	HttpOriginPort *uint64 `json:"HttpOriginPort,omitnil" name:"HttpOriginPort"`
+
+
+	HttpsOriginPort *uint64 `json:"HttpsOriginPort,omitnil" name:"HttpsOriginPort"`
+
+
+	IPv6Status *string `json:"IPv6Status,omitnil" name:"IPv6Status"`
+
 	// The CNAME address.
 	Cname *string `json:"Cname,omitnil" name:"Cname"`
 
 	// Ownership verification status. Values: <li>`pending`: Pending verification</li> <li>`finished`: Verified</li>	
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IdentificationStatus *string `json:"IdentificationStatus,omitnil" name:"IdentificationStatus"`
+
+	// Creation time of the accelerated domain name.
+	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
+
+	// Modification time of the accelerated domain name.
+	ModifiedOn *string `json:"ModifiedOn,omitnil" name:"ModifiedOn"`
+
+	// Information required to verify the ownership of a domain name.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	OwnershipVerification *OwnershipVerification `json:"OwnershipVerification,omitnil" name:"OwnershipVerification"`
+
+	// Domain name certificate information
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Certificate *AccelerationDomainCertificate `json:"Certificate,omitnil" name:"Certificate"`
+}
+
+type AccelerationDomainCertificate struct {
+	// Certificate configuration mode. Values: <li>`disable`: Do not configure the certificate;</li><li>`eofreecert`: Use a free certificate provided by EdgeOne; </li><li>`sslcert`: Configure an SSL certificate.</li>
+	Mode *string `json:"Mode,omitnil" name:"Mode"`
+
+	// List of certificates
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	List []*CertificateInfo `json:"List,omitnil" name:"List"`
 }
 
 type AclCondition struct {
@@ -811,6 +840,37 @@ type CachePrefresh struct {
 	Percent *int64 `json:"Percent,omitnil" name:"Percent"`
 }
 
+type CertificateInfo struct {
+	// ID of the server certificate.
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
+
+	// Alias of the certificate.
+	Alias *string `json:"Alias,omitnil" name:"Alias"`
+
+	// Type of the certificate. Values:
+	// <li>`default`: Default certificate</li>
+	// <li>`upload`: Specified certificate</li>
+	// <li>`managed`: Tencent Cloud-managed certificate</li>
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// The certificate expiration time.
+	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+
+	// Time when the certificate is deployed.
+	DeployTime *string `json:"DeployTime,omitnil" name:"DeployTime"`
+
+	// Signature algorithm.
+	SignAlgo *string `json:"SignAlgo,omitnil" name:"SignAlgo"`
+
+	// Status of the certificate. Values:
+	// u200c<li>`deployed`: The deployment has completed</li>
+	// u200c<li>`processing`: Deployment in progress</li>
+	// u200c<li>`applying`: Application in progress</li>
+	// u200c<li>`failed`: Application rejected</li>
+	// <li>`issued`: Binding failed.</li>
+	Status *string `json:"Status,omitnil" name:"Status"`
+}
+
 // Predefined struct for user
 type CheckCnameStatusRequestParams struct {
 	// Site ID.
@@ -936,27 +996,47 @@ type Compression struct {
 
 // Predefined struct for user
 type CreateAccelerationDomainRequestParams struct {
-	// ID of the site related with the accelerated domain name.
+	// ID of the site related with the acceleration domain name.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
-	// Accelerated domain name
+	// Acceleration domain name
 	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
 
 	// Details of the origin.
 	OriginInfo *OriginInfo `json:"OriginInfo,omitnil" name:"OriginInfo"`
+
+
+	OriginProtocol *string `json:"OriginProtocol,omitnil" name:"OriginProtocol"`
+
+
+	HttpOriginPort *uint64 `json:"HttpOriginPort,omitnil" name:"HttpOriginPort"`
+
+
+	HttpsOriginPort *uint64 `json:"HttpsOriginPort,omitnil" name:"HttpsOriginPort"`
+
+
+	IPv6Status *string `json:"IPv6Status,omitnil" name:"IPv6Status"`
 }
 
 type CreateAccelerationDomainRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the site related with the accelerated domain name.
+	// ID of the site related with the acceleration domain name.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
-	// Accelerated domain name
+	// Acceleration domain name
 	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
 
 	// Details of the origin.
 	OriginInfo *OriginInfo `json:"OriginInfo,omitnil" name:"OriginInfo"`
+
+	OriginProtocol *string `json:"OriginProtocol,omitnil" name:"OriginProtocol"`
+
+	HttpOriginPort *uint64 `json:"HttpOriginPort,omitnil" name:"HttpOriginPort"`
+
+	HttpsOriginPort *uint64 `json:"HttpsOriginPort,omitnil" name:"HttpsOriginPort"`
+
+	IPv6Status *string `json:"IPv6Status,omitnil" name:"IPv6Status"`
 }
 
 func (r *CreateAccelerationDomainRequest) ToJsonString() string {
@@ -974,6 +1054,10 @@ func (r *CreateAccelerationDomainRequest) FromJsonString(s string) error {
 	delete(f, "ZoneId")
 	delete(f, "DomainName")
 	delete(f, "OriginInfo")
+	delete(f, "OriginProtocol")
+	delete(f, "HttpOriginPort")
+	delete(f, "HttpsOriginPort")
+	delete(f, "IPv6Status")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAccelerationDomainRequest has unknown keys!", "")
 	}
@@ -982,7 +1066,8 @@ func (r *CreateAccelerationDomainRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAccelerationDomainResponseParams struct {
-
+	// Use the information returned by this parameter to verify the ownership of a domain name. For details, see [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1).
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	OwnershipVerification *OwnershipVerification `json:"OwnershipVerification,omitnil" name:"OwnershipVerification"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2008,46 +2093,68 @@ func (r *CreateSharedCNAMEResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateZoneRequestParams struct {
-	// The site name.
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
-
-	// The access mode. Values:
-	// <li> `full`: Access through a name server.</li>
-	// <li> `partial`: Access through a CNAME. Before using this access mode, first verify your site with the site verification API (IdentifyZone).<li>`noDomainAccess`: Access without using a domain name. If this value is passed, only the Tags field needs to be set. </li>
-	// If not specified, this field uses the default value `full`.
+	// Site access types. Options include:
+	// <li>`partial`: (Default) Access through a CNAME record</li>
+	// <li>`full`: Access through a name server</li>
+	// <li>`noDomainAccess`: Access without using a domain name</li>
 	Type *string `json:"Type,omitnil" name:"Type"`
 
-	// Whether to skip scanning the existing DNS records of the site. Default value: false.
-	JumpStart *bool `json:"JumpStart,omitnil" name:"JumpStart"`
+	// Site name. For sites connected via CNAME/NS, pass in the secondary domain name (example.com). Leave it blank if the site is connected without a domain name. 
+	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
 
-	// The resource tag.
+	// The acceleration area of the L7 domain name when `Type` is `partial` or `full`. When Type is `noDomainAccess`, please leave it blank.
+	// <li>`global`: Global AZs</li>
+	// <li>`mainland`: AZs in the Chinese mainland</li>
+	// <li>`overseas`: (Default) AZs outside the Chinese mainland </li>
+	Area *string `json:"Area,omitnil" name:"Area"`
+
+	// ID of the plan to which you want to bind the site. If you don't have an EdgeOne plan, purchase one in the EdgeOne console.
+	PlanId *string `json:"PlanId,omitnil" name:"PlanId"`
+
+	// The site alias. It allows up to 20 characters, including [0-9], [a-z], [A-Z] and [-_]. For details, see [Glossary](https://intl.cloud.tencent.com/document/product/1552/70202?from_cn_redirect=1). If you don't want to use it, just leave it blank.
+	AliasZoneName *string `json:"AliasZoneName,omitnil" name:"AliasZoneName"`
+
+	// Tags of the site. To create tags, go to the [Tag Console](https://console.cloud.tencent.com/tag/taglist).
 	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
 
 	// Whether to allow duplicate sites. Values:
 	// <li>`true`: Duplicate sites are allowed.</li>
 	// <li>`false`: Duplicate sites are not allowed.</li>If it is left empty, the default value `false` is used.
+	//
+	// Deprecated: AllowDuplicates is deprecated.
 	AllowDuplicates *bool `json:"AllowDuplicates,omitnil" name:"AllowDuplicates"`
 
-	// The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
-	AliasZoneName *string `json:"AliasZoneName,omitnil" name:"AliasZoneName"`
+	// Whether to skip scanning the existing DNS records of the site. Default value: false.
+	//
+	// Deprecated: JumpStart is deprecated.
+	JumpStart *bool `json:"JumpStart,omitnil" name:"JumpStart"`
 }
 
 type CreateZoneRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site name.
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
-
-	// The access mode. Values:
-	// <li> `full`: Access through a name server.</li>
-	// <li> `partial`: Access through a CNAME. Before using this access mode, first verify your site with the site verification API (IdentifyZone).<li>`noDomainAccess`: Access without using a domain name. If this value is passed, only the Tags field needs to be set. </li>
-	// If not specified, this field uses the default value `full`.
+	// Site access types. Options include:
+	// <li>`partial`: (Default) Access through a CNAME record</li>
+	// <li>`full`: Access through a name server</li>
+	// <li>`noDomainAccess`: Access without using a domain name</li>
 	Type *string `json:"Type,omitnil" name:"Type"`
 
-	// Whether to skip scanning the existing DNS records of the site. Default value: false.
-	JumpStart *bool `json:"JumpStart,omitnil" name:"JumpStart"`
+	// Site name. For sites connected via CNAME/NS, pass in the secondary domain name (example.com). Leave it blank if the site is connected without a domain name. 
+	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
 
-	// The resource tag.
+	// The acceleration area of the L7 domain name when `Type` is `partial` or `full`. When Type is `noDomainAccess`, please leave it blank.
+	// <li>`global`: Global AZs</li>
+	// <li>`mainland`: AZs in the Chinese mainland</li>
+	// <li>`overseas`: (Default) AZs outside the Chinese mainland </li>
+	Area *string `json:"Area,omitnil" name:"Area"`
+
+	// ID of the plan to which you want to bind the site. If you don't have an EdgeOne plan, purchase one in the EdgeOne console.
+	PlanId *string `json:"PlanId,omitnil" name:"PlanId"`
+
+	// The site alias. It allows up to 20 characters, including [0-9], [a-z], [A-Z] and [-_]. For details, see [Glossary](https://intl.cloud.tencent.com/document/product/1552/70202?from_cn_redirect=1). If you don't want to use it, just leave it blank.
+	AliasZoneName *string `json:"AliasZoneName,omitnil" name:"AliasZoneName"`
+
+	// Tags of the site. To create tags, go to the [Tag Console](https://console.cloud.tencent.com/tag/taglist).
 	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
 
 	// Whether to allow duplicate sites. Values:
@@ -2055,8 +2162,8 @@ type CreateZoneRequest struct {
 	// <li>`false`: Duplicate sites are not allowed.</li>If it is left empty, the default value `false` is used.
 	AllowDuplicates *bool `json:"AllowDuplicates,omitnil" name:"AllowDuplicates"`
 
-	// The site alias. It can be up to 20 characters consisting of digits, letters, hyphens (-) and underscores (_).
-	AliasZoneName *string `json:"AliasZoneName,omitnil" name:"AliasZoneName"`
+	// Whether to skip scanning the existing DNS records of the site. Default value: false.
+	JumpStart *bool `json:"JumpStart,omitnil" name:"JumpStart"`
 }
 
 func (r *CreateZoneRequest) ToJsonString() string {
@@ -2071,12 +2178,14 @@ func (r *CreateZoneRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	delete(f, "ZoneName")
 	delete(f, "Type")
-	delete(f, "JumpStart")
+	delete(f, "ZoneName")
+	delete(f, "Area")
+	delete(f, "PlanId")
+	delete(f, "AliasZoneName")
 	delete(f, "Tags")
 	delete(f, "AllowDuplicates")
-	delete(f, "AliasZoneName")
+	delete(f, "JumpStart")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateZoneRequest has unknown keys!", "")
 	}
@@ -2085,8 +2194,18 @@ func (r *CreateZoneRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateZoneResponseParams struct {
-	// The site ID.
+	// Site ID.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// Site ownership verification information. After the site is created, you need to complete the ownership verification before the site can serve normally.
+	// 
+	// If `Type=partial`, add TXT records to your DNS provider or add files to the root DNS server, and then call [VerifyOwnership]() to complete verification. For more information, see [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1).
+	// 
+	// If `Type = full`, switch the DNS server as instructed by [Modifying DNS Server](https://intl.cloud.tencent.com/document/product/1552/90452?from_cn_redirect=1). Then call [VerifyOwnership]() to check the result.
+	// 
+	// If `Type = noDomainAccess`, leave it blank. No action is required.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	OwnershipVerification *OwnershipVerification `json:"OwnershipVerification,omitnil" name:"OwnershipVerification"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
@@ -2716,77 +2835,75 @@ func (r *DeleteZoneResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAccelerationDomainsRequestParams struct {
-	// ID of the site related with the accelerated domain name.
+	// ID of the site related with the acceleration domain name.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
-	// Filters. Each filter can have up to 20 entries. See below for details: 
-	// <li>`domain-name`:<br>   <strong>Accelerated domain name</strong><br>   Type: String<br>Required: No 
-	// <li>`origin-type`:<br>   <strong>Type of the origin</strong><br>   Type: String<br>   Required: No 
-	// <li>`origin`:<br>   <strong>Primary origin</strong><br>   Type: String<br>   Required: No 
-	// <li>`backup-origin`:<br>   <strong>Secondary origin</strong><br>   Type: String<br>   Required: No 
-	// <li>`domain-cname`:<br>   <strong>Accelerated CNAME</strong><br>   Type: String<br>   Required: No 
-	// <li>`share-cname`:<br>   <strong> Shared CNAME</strong><br>   Type: String<br>   Required: No
+	// Offset for paginated queries. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Limit on paginated queries. Default value: 20. Maximum value: 200.
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Filter conditions. Up to 20 values for each filter. If it is not passed in, all domain names related with the specific zone-id are returned. 
+	// <li>`domain-name`: Acceleration domain name</li>
+	// <li>`origin-type`: Type of the origin</li>
+	// <li>`origin`: Primary origin address</li>
+	// <li>`backup-origin`: Secondary origin address</li>
+	// <li>`domain-cname`: CNAME</li>
+	// <li>`share-cname`: Shared CNAME</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
 
-	// The sorting order. Values:
+	// Sort the returned results according to this field. Values include:
+	// <li>`created_on`: Creation time of the acceleration domain name</li>
+	// <li>`domain-name`: (Default) Acceleration domain name.</li> 
+	Order *string `json:"Order,omitnil" name:"Order"`
+
+	// Sort direction. If the field value is number, sort by the numeric value. If the field value is text, sort by the ascill code. Values include:
 	// <li>`asc`: Ascending order.</li>
-	// <li>`desc`: Descending order.</li>Default value: `asc`.
+	// <li>`desc`: Descending order.</li> Default value: `asc`.
 	Direction *string `json:"Direction,omitnil" name:"Direction"`
 
 	// The match mode. Values:
 	// <li>`all`: Return all matches.</li>
 	// <li>`any`: Return any match.</li>Default value: `all`.
 	Match *string `json:"Match,omitnil" name:"Match"`
-
-	// Limit on paginated queries. Default value: 20. Maximum value: 200.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
-
-	// Offset for paginated queries. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
-
-	// The sorting criteria. Values:
-	// <li>`created_on`: Creation time of the accelerated domain name.</li>
-	// <li>`domain-name`: Acceleration domain name.</li>
-	// </li>Default value: `domain-name`.
-	Order *string `json:"Order,omitnil" name:"Order"`
 }
 
 type DescribeAccelerationDomainsRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the site related with the accelerated domain name.
+	// ID of the site related with the acceleration domain name.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
-	// Filters. Each filter can have up to 20 entries. See below for details: 
-	// <li>`domain-name`:<br>   <strong>Accelerated domain name</strong><br>   Type: String<br>Required: No 
-	// <li>`origin-type`:<br>   <strong>Type of the origin</strong><br>   Type: String<br>   Required: No 
-	// <li>`origin`:<br>   <strong>Primary origin</strong><br>   Type: String<br>   Required: No 
-	// <li>`backup-origin`:<br>   <strong>Secondary origin</strong><br>   Type: String<br>   Required: No 
-	// <li>`domain-cname`:<br>   <strong>Accelerated CNAME</strong><br>   Type: String<br>   Required: No 
-	// <li>`share-cname`:<br>   <strong> Shared CNAME</strong><br>   Type: String<br>   Required: No
+	// Offset for paginated queries. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Limit on paginated queries. Default value: 20. Maximum value: 200.
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Filter conditions. Up to 20 values for each filter. If it is not passed in, all domain names related with the specific zone-id are returned. 
+	// <li>`domain-name`: Acceleration domain name</li>
+	// <li>`origin-type`: Type of the origin</li>
+	// <li>`origin`: Primary origin address</li>
+	// <li>`backup-origin`: Secondary origin address</li>
+	// <li>`domain-cname`: CNAME</li>
+	// <li>`share-cname`: Shared CNAME</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
 
-	// The sorting order. Values:
+	// Sort the returned results according to this field. Values include:
+	// <li>`created_on`: Creation time of the acceleration domain name</li>
+	// <li>`domain-name`: (Default) Acceleration domain name.</li> 
+	Order *string `json:"Order,omitnil" name:"Order"`
+
+	// Sort direction. If the field value is number, sort by the numeric value. If the field value is text, sort by the ascill code. Values include:
 	// <li>`asc`: Ascending order.</li>
-	// <li>`desc`: Descending order.</li>Default value: `asc`.
+	// <li>`desc`: Descending order.</li> Default value: `asc`.
 	Direction *string `json:"Direction,omitnil" name:"Direction"`
 
 	// The match mode. Values:
 	// <li>`all`: Return all matches.</li>
 	// <li>`any`: Return any match.</li>Default value: `all`.
 	Match *string `json:"Match,omitnil" name:"Match"`
-
-	// Limit on paginated queries. Default value: 20. Maximum value: 200.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
-
-	// Offset for paginated queries. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
-
-	// The sorting criteria. Values:
-	// <li>`created_on`: Creation time of the accelerated domain name.</li>
-	// <li>`domain-name`: Acceleration domain name.</li>
-	// </li>Default value: `domain-name`.
-	Order *string `json:"Order,omitnil" name:"Order"`
 }
 
 func (r *DescribeAccelerationDomainsRequest) ToJsonString() string {
@@ -2802,12 +2919,12 @@ func (r *DescribeAccelerationDomainsRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ZoneId")
+	delete(f, "Offset")
+	delete(f, "Limit")
 	delete(f, "Filters")
+	delete(f, "Order")
 	delete(f, "Direction")
 	delete(f, "Match")
-	delete(f, "Limit")
-	delete(f, "Offset")
-	delete(f, "Order")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAccelerationDomainsRequest has unknown keys!", "")
 	}
@@ -2816,10 +2933,10 @@ func (r *DescribeAccelerationDomainsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAccelerationDomainsResponseParams struct {
-	// Total number of matched accelerated domain names.
+	// Total of matched alias domain names.
 	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
-	// List of accelerated domain names.
+	// Information of all matched acceleration domain names
 	AccelerationDomains []*AccelerationDomain `json:"AccelerationDomains,omitnil" name:"AccelerationDomains"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -5249,25 +5366,25 @@ type DescribeZonesRequestParams struct {
 	// The page offset. Default value: 0
 	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
-	// The paginated query limit. Default value: 20. Maximum value: 1000.
+	// Limit on paginated queries. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-name`:<br>   Filter by <strong>site name</strong><br>   Type: String<br>   Required: No</li><li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx<br>   Type: String<br>   Required: No</li><li>`status`:<br>   Filter by <strong>site status</strong><br>   Type: String<br>   Required: No</li><li>`tag-key`:<br>   Filter by <strong>tag key</strong><br>   Type: String<br>   Required: No</li><li>`tag-value`:<br>   Filter by <strong>tag value</strong><br>   Type: String<br>   Required: No</li>Only `zone-name` supports fuzzy query.
+	// Filter conditions. Up to 20 values for each filter. If this parameter is not filled in, the information of all sites under the current account is returned. Detailed filtering conditions are as follows:
+	// <li>`zone-name`: Site name </li><li>`zone-id`: Site ID, such as zone-2noz78a8ev6k</li><li>`status`: Site status </li><li>`tag-key`: Tag key </li><li>`tag-value`: Tag value </li>Only `zone-name` supports fuzzy query.
 	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
 
-	// The sorting field. Values:
-	// <li>`type`: Access mode</li>
+	// Sort the returned results according to this field. Values include:
+	// <li>`type`: Connection mode</li>
 	// <li>`area`: Acceleration region</li>
-	// <li>`create-time`: Creation date</li>
+	// <li>`create-time`: Creation time</li>
 	// <li>`zone-name`: Site name</li>
-	// <li>`use-time`: Last used date</li>
-	// <li>`active-status`: Activation status</li>If it is left empty, the default value `create-time` is used.
+	// <li>`use-time`: Last used time</li>
+	// <li>`active-status` Effective status</li> Default value: `create-time`
 	Order *string `json:"Order,omitnil" name:"Order"`
 
-	// The sorting direction. Values:
-	// <li>`asc`: From smallest to largest</li>
-	// <li>`desc`: From largest to smallest</li>If it is left empty, the default value `desc` is used.
+	// Sort direction. If the field value is a number, sort by the numeric value. If the field value is text, sort by the ascill code. Values include:
+	// <li>`asc`: From the smallest to largest</li>
+	// <li>`desc`: From the largest to smallest.</li>Default value: `desc`
 	Direction *string `json:"Direction,omitnil" name:"Direction"`
 }
 
@@ -5277,25 +5394,25 @@ type DescribeZonesRequest struct {
 	// The page offset. Default value: 0
 	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
 
-	// The paginated query limit. Default value: 20. Maximum value: 1000.
+	// Limit on paginated queries. Default value: 20. Maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-name`:<br>   Filter by <strong>site name</strong><br>   Type: String<br>   Required: No</li><li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx<br>   Type: String<br>   Required: No</li><li>`status`:<br>   Filter by <strong>site status</strong><br>   Type: String<br>   Required: No</li><li>`tag-key`:<br>   Filter by <strong>tag key</strong><br>   Type: String<br>   Required: No</li><li>`tag-value`:<br>   Filter by <strong>tag value</strong><br>   Type: String<br>   Required: No</li>Only `zone-name` supports fuzzy query.
+	// Filter conditions. Up to 20 values for each filter. If this parameter is not filled in, the information of all sites under the current account is returned. Detailed filtering conditions are as follows:
+	// <li>`zone-name`: Site name </li><li>`zone-id`: Site ID, such as zone-2noz78a8ev6k</li><li>`status`: Site status </li><li>`tag-key`: Tag key </li><li>`tag-value`: Tag value </li>Only `zone-name` supports fuzzy query.
 	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
 
-	// The sorting field. Values:
-	// <li>`type`: Access mode</li>
+	// Sort the returned results according to this field. Values include:
+	// <li>`type`: Connection mode</li>
 	// <li>`area`: Acceleration region</li>
-	// <li>`create-time`: Creation date</li>
+	// <li>`create-time`: Creation time</li>
 	// <li>`zone-name`: Site name</li>
-	// <li>`use-time`: Last used date</li>
-	// <li>`active-status`: Activation status</li>If it is left empty, the default value `create-time` is used.
+	// <li>`use-time`: Last used time</li>
+	// <li>`active-status` Effective status</li> Default value: `create-time`
 	Order *string `json:"Order,omitnil" name:"Order"`
 
-	// The sorting direction. Values:
-	// <li>`asc`: From smallest to largest</li>
-	// <li>`desc`: From largest to smallest</li>If it is left empty, the default value `desc` is used.
+	// Sort direction. If the field value is a number, sort by the numeric value. If the field value is text, sort by the ascill code. Values include:
+	// <li>`asc`: From the smallest to largest</li>
+	// <li>`desc`: From the largest to smallest.</li>Default value: `desc`
 	Direction *string `json:"Direction,omitnil" name:"Direction"`
 }
 
@@ -5327,7 +5444,7 @@ type DescribeZonesResponseParams struct {
 	// Number of eligible sites.
 	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
-	// Details of sites
+	// Details of sites.
 	Zones []*Zone `json:"Zones,omitnil" name:"Zones"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -5455,13 +5572,13 @@ type DiffIPWhitelist struct {
 }
 
 type DnsVerification struct {
-
+	// The host record.
 	Subdomain *string `json:"Subdomain,omitnil" name:"Subdomain"`
 
-
+	// The record type.
 	RecordType *string `json:"RecordType,omitnil" name:"RecordType"`
 
-
+	// The record value.
 	RecordValue *string `json:"RecordValue,omitnil" name:"RecordValue"`
 }
 
@@ -5811,10 +5928,10 @@ type FileAscriptionInfo struct {
 }
 
 type FileVerification struct {
-
+	// EdgeOne obtains the file verification information in the format of "Scheme + Host + URL Path", (e.g. https://www.example.com/.well-known/teo-verification/z12h416twn.txt). This field is the URL path section of the URL you need to create.
 	Path *string `json:"Path,omitnil" name:"Path"`
 
-
+	// Content of the verification file. The contents of this field need to be filled into the text file returned by `Path`.
 	Content *string `json:"Content,omitnil" name:"Content"`
 }
 
@@ -6964,15 +7081,24 @@ type ModifyHostsCertificateRequestParams struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
-	// List of domain names that the certificate will be attached to.
+	// Domain names that you need to modify the certificate configuration
 	Hosts []*string `json:"Hosts,omitnil" name:"Hosts"`
 
-	// Certificate information. Note that only `CertId` is required. If it is not specified, the default certificate will be used.
+	// Certificate configuration mode. Values:
+	// <li>`disable`: (Default) Do not configure the certificate</li>
+	// <li>`eofreecert`: Use a free certificate provided by EdgeOne</li>
+	// <li>`sslcert`: Configure an SSL certificate.</li>
+	Mode *string `json:"Mode,omitnil" name:"Mode"`
+
+	// ID of the SSL certificate. It takes effect when `mode=sslcert`. To check the certificate ID, go to the [SSL Certificate](https://console.cloud.tencent.com/certoview) console.
 	ServerCertInfo []*ServerCertInfo `json:"ServerCertInfo,omitnil" name:"ServerCertInfo"`
 
 	// Whether the certificate is managed by EdgeOne. Values:
-	// <li>`apply`: Managed by EdgeOne.</li>
-	// <li>`none`: Not managed by EdgeOne.</li>If not specified, this field uses the default value `none`.
+	// <li>`none`: Not managed by EdgeOne</li>
+	// <li>`apply`: Managed by EdgeOne</li>
+	// Default value: `none`.
+	//
+	// Deprecated: ApplyType is deprecated.
 	ApplyType *string `json:"ApplyType,omitnil" name:"ApplyType"`
 }
 
@@ -6982,15 +7108,22 @@ type ModifyHostsCertificateRequest struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
-	// List of domain names that the certificate will be attached to.
+	// Domain names that you need to modify the certificate configuration
 	Hosts []*string `json:"Hosts,omitnil" name:"Hosts"`
 
-	// Certificate information. Note that only `CertId` is required. If it is not specified, the default certificate will be used.
+	// Certificate configuration mode. Values:
+	// <li>`disable`: (Default) Do not configure the certificate</li>
+	// <li>`eofreecert`: Use a free certificate provided by EdgeOne</li>
+	// <li>`sslcert`: Configure an SSL certificate.</li>
+	Mode *string `json:"Mode,omitnil" name:"Mode"`
+
+	// ID of the SSL certificate. It takes effect when `mode=sslcert`. To check the certificate ID, go to the [SSL Certificate](https://console.cloud.tencent.com/certoview) console.
 	ServerCertInfo []*ServerCertInfo `json:"ServerCertInfo,omitnil" name:"ServerCertInfo"`
 
 	// Whether the certificate is managed by EdgeOne. Values:
-	// <li>`apply`: Managed by EdgeOne.</li>
-	// <li>`none`: Not managed by EdgeOne.</li>If not specified, this field uses the default value `none`.
+	// <li>`none`: Not managed by EdgeOne</li>
+	// <li>`apply`: Managed by EdgeOne</li>
+	// Default value: `none`.
 	ApplyType *string `json:"ApplyType,omitnil" name:"ApplyType"`
 }
 
@@ -7008,6 +7141,7 @@ func (r *ModifyHostsCertificateRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ZoneId")
 	delete(f, "Hosts")
+	delete(f, "Mode")
 	delete(f, "ServerCertInfo")
 	delete(f, "ApplyType")
 	if len(f) > 0 {
@@ -7805,7 +7939,7 @@ type NormalAction struct {
 }
 
 type NsVerification struct {
-
+	// The DNS server address assigned to the user when connecting a site to EO via NS. You need to switch the NameServer of the domain name to this address.
 	NameServers []*string `json:"NameServers,omitnil" name:"NameServers"`
 }
 
@@ -7913,7 +8047,7 @@ type OriginInfo struct {
 	// <li>`ORIGIN_GROUP`: Origin group</li>
 	// <li>`AWS_S3`: AWS S3 bucket address</li>
 	// <li>`LB`: Tencent Cloud CLB instance</li>
-	// <li>`SPACE`: EdgeOne Shield Space</li>
+	// <li>`SPACE`: EdgeOne Shield Space</li>  
 	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
 
 	// The origin address. Enter the origin group ID if `OriginType=ORIGIN_GROUP`.
@@ -8008,13 +8142,18 @@ type OriginRecord struct {
 }
 
 type OwnershipVerification struct {
-
+	// u200cInformation required for authentication using DNS resolution. It's applicable to sites connected via CNAME. See [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5).
+	//  
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	DnsVerification *DnsVerification `json:"DnsVerification,omitnil" name:"DnsVerification"`
 
-
+	// u200cInformation required for verifying via a file. It's applicable to sites connected via CNAMEs. See [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5).
+	//  
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	FileVerification *FileVerification `json:"FileVerification,omitnil" name:"FileVerification"`
 
-
+	// u200cInformation required for switching DNS servers. It's applicable to sites connected via NSs. For details, see [Modifying DNS Server](https://intl.cloud.tencent.com/document/product/1552/90452?from_cn_redirect=1).
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	NsVerification *NsVerification `json:"NsVerification,omitnil" name:"NsVerification"`
 }
 
@@ -8430,14 +8569,7 @@ type RuleCondition struct {
 	// <li>`notexist`: Does not exist</li>
 	Operator *string `json:"Operator,omitnil" name:"Operator"`
 
-	// The match type. Values:
-	// <li>`filename`: File name</li>
-	// <li>`extension`: File extension</li>
-	// <li>`host`: Host</li>
-	// <li>`full_url`: Full URL, which indicates the complete URL path under the current site and must contain the HTTP protocol, host, and path.</li>
-	// <li>`url`: Partial URL under the current site</li><li>`client_country`: Country/Region of the client</li>
-	// <li>`query_string`: Query string in the request URL</li>
-	// <li>`request_header`: HTTP request header</li>
+	// Match fields. Values: <li>`filename`: File name;</li><li>`extension`: File suffix;</li><li>`host`: HOST;</li><li>`full_url`: The complete URL path under the current site, including the HTTP protocol, Host and path;</li><li>`url`: The URL path request under the current site;</li><li>`client_country`: Client country;</li><li>`query_string`: The query string of the URL requested under the current site;</li><li>`request_header`: HTTP request header. </li>
 	Target *string `json:"Target,omitnil" name:"Target"`
 
 	// The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
@@ -8462,6 +8594,8 @@ type RuleCondition struct {
 
 	// Whether the parameter name is case insensitive. Default value: `false`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: IgnoreNameCase is deprecated.
 	IgnoreNameCase *bool `json:"IgnoreNameCase,omitnil" name:"IgnoreNameCase"`
 }
 
@@ -8982,6 +9116,68 @@ type VanityNameServersIps struct {
 	IPv4 *string `json:"IPv4,omitnil" name:"IPv4"`
 }
 
+// Predefined struct for user
+type VerifyOwnershipRequestParams struct {
+	// Site or acceleration domain name
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+}
+
+type VerifyOwnershipRequest struct {
+	*tchttp.BaseRequest
+	
+	// Site or acceleration domain name
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+}
+
+func (r *VerifyOwnershipRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *VerifyOwnershipRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "VerifyOwnershipRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type VerifyOwnershipResponseParams struct {
+	// Result of ownership verification
+	// <li>`success`: Verification passed</li>
+	// <li>`fail`: Verification failed</li>
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// When the ownership verification result is `fail`, this field returns the reason of failure.
+	Result *string `json:"Result,omitnil" name:"Result"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type VerifyOwnershipResponse struct {
+	*tchttp.BaseResponse
+	Response *VerifyOwnershipResponseParams `json:"Response"`
+}
+
+func (r *VerifyOwnershipResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *VerifyOwnershipResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Waf struct {
 	// Whether to enable WAF. Values:
 	// <li>`on`: Enable</li>
@@ -9042,7 +9238,7 @@ type WebSocket struct {
 }
 
 type Zone struct {
-	// The site ID.
+	// Site ID.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
 	// The site name.
@@ -9055,16 +9251,18 @@ type Zone struct {
 	NameServers []*string `json:"NameServers,omitnil" name:"NameServers"`
 
 	// The site status. Values:
-	// <li>`active`: The name server is switched.</li>
-	// <li>`pending`: The name server is not switched.</li>
-	// <li>`moved`: The name server is moved.</li>
-	// <li>`deactivated`: The site is blocked.</li>
+	// u200c<li>`active`: The name server is switched to EdgeOne.</li>
+	// u200c<li>`pending`: The name server is not switched.</li>
+	// u200c<li>`moved`: The name server is changed to other service providers.</li>
+	// u200c<li>`deactivated`: The site is blocked.</li>
+	// <li>`initializing`: The site is not bound with any plan. </li>
 	Status *string `json:"Status,omitnil" name:"Status"`
 
-	// Access mode of the site. Values:
-	// <li> `full`: Access through a name server.</li>
-	// <li> `partial`: Access through a CNAME record.</li>
-	// <li> `noDomainAccess`: Access without using a domain name </li>
+	// Connection mode of the site. Values:
+	// <li>`full`: Connect via the name server.</li>
+	// <li>`partial`: Connect via the CNAME record.</li>
+	// <li>`noDomainAccess`: Connect without using a domain name
+	//  
 	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// Whether the site is disabled.
@@ -9121,8 +9319,12 @@ type Zone struct {
 	// <li>`1`: Fake site.</li>
 	IsFake *int64 `json:"IsFake,omitnil" name:"IsFake"`
 
-	// Lock status. Valid values: <li>`enable`: Normal. Modifying is allowed;</li><li>`disable`: Locked. Modifying is not allowed.</li>
+	// Lock status. Values: <li>`enable`: Normal. Modification is allowed.</li><li>`disable`: Locked. Modification is not allowed.</li><li>`plan_migrate`: Adjusting the plan. Modification is not allowed.</li> 
 	LockStatus *string `json:"LockStatus,omitnil" name:"LockStatus"`
+
+	// Ownership verification information
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	OwnershipVerification *OwnershipVerification `json:"OwnershipVerification,omitnil" name:"OwnershipVerification"`
 }
 
 type ZoneSetting struct {

@@ -23,7 +23,7 @@ const (
 	// Operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
-	// 
+	// Failed to publish: The certificate has expired. 
 	FAILEDOPERATION_CERTIFICATEHASEXPIRED = "FailedOperation.CertificateHasExpired"
 
 	// The certificate does not exist.
@@ -83,7 +83,7 @@ const (
 	// Cu200dhinese SM certificates are not supported for alias domain names.
 	INVALIDPARAMETER_ALIASDOMAINNOTSUPPORTSMCERT = "InvalidParameter.AliasDomainNotSupportSMCert"
 
-	// 
+	// Invalid query string.
 	INVALIDPARAMETER_CACHEKEYQUERYSTRINGREQUIRESFULLURLCACHEOFF = "InvalidParameter.CacheKeyQueryStringRequiresFullUrlCacheOff"
 
 	// The query string has too many values.
@@ -146,10 +146,10 @@ const (
 	// Invalid action type.
 	INVALIDPARAMETER_ERRINVALIDACTIONTYPE = "InvalidParameter.ErrInvalidActionType"
 
-	// 
+	// Invalid conditions.
 	INVALIDPARAMETER_ERRINVALIDCONDITION = "InvalidParameter.ErrInvalidCondition"
 
-	// 
+	// You can only configure one host matching type when modifying the origin.
 	INVALIDPARAMETER_ERRINVALIDCONDITIONHOSTTOOMANYWHENMODIFYORIGINACTIONCONFIGURED = "InvalidParameter.ErrInvalidConditionHostTooManyWhenModifyOriginActionConfigured"
 
 	// Invalid condition: The letter case is ignored.
@@ -278,7 +278,7 @@ const (
 	// Invalid custom error page.
 	INVALIDPARAMETER_INVALIDERRORPAGEREDIRECTURL = "InvalidParameter.InvalidErrorPageRedirectUrl"
 
-	// 
+	// Invalid forced HTTPS direction settings
 	INVALIDPARAMETER_INVALIDFORCEREDIRECTTYPE = "InvalidParameter.InvalidForceRedirectType"
 
 	// Invalid parameter "https".
@@ -452,7 +452,7 @@ const (
 	// Internal error.
 	INVALIDPARAMETER_TASKSYSTEMERROR = "InvalidParameter.TaskSystemError"
 
-	// 
+	// Too many filter values.
 	INVALIDPARAMETER_TOOMANYFILTERVALUES = "InvalidParameter.TooManyFilterValues"
 
 	// Invalid file upload link.
@@ -464,7 +464,7 @@ const (
 	// The site is being upgraded. Changing is not supported. Please try again later.
 	INVALIDPARAMETER_ZONEISGRAYPUBLISHING = "InvalidParameter.ZoneIsGrayPublishing"
 
-	// 
+	// To switch a site from connecting without a domain name to connecting via the CNAME, the site name is required.
 	INVALIDPARAMETER_ZONENAMEISREQUIRED = "InvalidParameter.ZoneNameIsRequired"
 
 	// The site does not exist.
@@ -536,7 +536,7 @@ const (
 	// Reached the API rate limit.
 	LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 
-	// 
+	// Reached the upper limit of sites of the plan
 	LIMITEXCEEDED_ZONEBINDPLAN = "LimitExceeded.ZoneBindPlan"
 
 	// Operation denied.
@@ -602,16 +602,16 @@ const (
 	// Domain traffic scheduling is not supported in NS access mode.
 	OPERATIONDENIED_NSNOTALLOWTRAFFICSTRATEGY = "OperationDenied.NSNotAllowTrafficStrategy"
 
-	// 
+	// You can only switch a site connected without a domain name to connecting via the CNAME
 	OPERATIONDENIED_NODOMAINACCESSZONEONLYALLOWMODIFIEDTOCNAME = "OperationDenied.NoDomainAccessZoneOnlyAllowModifiedToCNAME"
 
-	// 
+	// You can only switch a site connected without a domain name to connecting via the CNAME. Other operations are not allowed.
 	OPERATIONDENIED_NODOMAINACCESSZONEONLYSUPPORTMODIFYTYPE = "OperationDenied.NoDomainAccessZoneOnlySupportModifyType"
 
 	// 
 	OPERATIONDENIED_ORIGINGROUPACCELERATIONDOMAINUSED = "OperationDenied.OriginGroupAccelerationDomainUsed"
 
-	// 
+	// The specified plan does not support changing the service area of the site.
 	OPERATIONDENIED_PLANNOTSUPPORTMODIFYZONEAREA = "OperationDenied.PlanNotSupportModifyZoneArea"
 
 	// 
