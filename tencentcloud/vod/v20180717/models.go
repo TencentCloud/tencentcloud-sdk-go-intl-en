@@ -11184,6 +11184,144 @@ type EditMediaFileInfo struct {
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil" name:"EndTimeOffset"`
 }
 
+type EditMediaOutputConfig struct {
+
+	MediaName *string `json:"MediaName,omitnil" name:"MediaName"`
+
+
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+
+	ClassId *int64 `json:"ClassId,omitnil" name:"ClassId"`
+
+
+	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+
+
+	VideoStream *EditMediaVideoStream `json:"VideoStream,omitnil" name:"VideoStream"`
+
+
+	TEHDConfig *EditMediaTEHDConfig `json:"TEHDConfig,omitnil" name:"TEHDConfig"`
+}
+
+// Predefined struct for user
+type EditMediaRequestParams struct {
+
+	InputType *string `json:"InputType,omitnil" name:"InputType"`
+
+
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+
+	FileInfos []*EditMediaFileInfo `json:"FileInfos,omitnil" name:"FileInfos"`
+
+
+	StreamInfos []*EditMediaStreamInfo `json:"StreamInfos,omitnil" name:"StreamInfos"`
+
+
+	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
+
+
+	ProcedureName *string `json:"ProcedureName,omitnil" name:"ProcedureName"`
+
+
+	OutputConfig *EditMediaOutputConfig `json:"OutputConfig,omitnil" name:"OutputConfig"`
+
+
+	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
+
+
+	TasksPriority *int64 `json:"TasksPriority,omitnil" name:"TasksPriority"`
+
+	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
+
+	// Reserved field for special purposes.
+	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
+}
+
+type EditMediaRequest struct {
+	*tchttp.BaseRequest
+	
+	InputType *string `json:"InputType,omitnil" name:"InputType"`
+
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	FileInfos []*EditMediaFileInfo `json:"FileInfos,omitnil" name:"FileInfos"`
+
+	StreamInfos []*EditMediaStreamInfo `json:"StreamInfos,omitnil" name:"StreamInfos"`
+
+	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
+
+	ProcedureName *string `json:"ProcedureName,omitnil" name:"ProcedureName"`
+
+	OutputConfig *EditMediaOutputConfig `json:"OutputConfig,omitnil" name:"OutputConfig"`
+
+	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
+
+	TasksPriority *int64 `json:"TasksPriority,omitnil" name:"TasksPriority"`
+
+	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
+
+	// Reserved field for special purposes.
+	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
+}
+
+func (r *EditMediaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EditMediaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InputType")
+	delete(f, "SubAppId")
+	delete(f, "FileInfos")
+	delete(f, "StreamInfos")
+	delete(f, "Definition")
+	delete(f, "ProcedureName")
+	delete(f, "OutputConfig")
+	delete(f, "SessionContext")
+	delete(f, "TasksPriority")
+	delete(f, "SessionId")
+	delete(f, "ExtInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EditMediaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EditMediaResponseParams struct {
+
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type EditMediaResponse struct {
+	*tchttp.BaseResponse
+	Response *EditMediaResponseParams `json:"Response"`
+}
+
+func (r *EditMediaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EditMediaResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type EditMediaStreamInfo struct {
 	// ID of recorded stream
 	StreamId *string `json:"StreamId,omitnil" name:"StreamId"`
@@ -11195,6 +11333,11 @@ type EditMediaStreamInfo struct {
 	// End time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+}
+
+type EditMediaTEHDConfig struct {
+
+	Type *string `json:"Type,omitnil" name:"Type"`
 }
 
 type EditMediaTask struct {
@@ -11288,6 +11431,20 @@ type EditMediaTaskOutput struct {
 	// Expiration time of output media file in ISO 8601 format, after which the file will be deleted. Files will never expire by default. For more information, please see [Notes on ISO Date Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+}
+
+type EditMediaVideoStream struct {
+
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitnil" name:"ResolutionAdaptive"`
+
+
+	Width *uint64 `json:"Width,omitnil" name:"Width"`
+
+
+	Height *uint64 `json:"Height,omitnil" name:"Height"`
+
+
+	Fps *int64 `json:"Fps,omitnil" name:"Fps"`
 }
 
 type EmptyTrackItem struct {
@@ -17622,6 +17779,135 @@ func (r *ProcessMediaByUrlResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ProcessMediaByUrlResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ProcessMediaRequestParams struct {
+	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
+	FileId *string `json:"FileId,omitnil" name:"FileId"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// Parameter of video processing task.
+	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitnil" name:"MediaProcessTask"`
+
+	// The information of the audio/video moderation task\*.
+	// This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
+	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitnil" name:"AiContentReviewTask"`
+
+	// Video content analysis task parameter.
+	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil" name:"AiAnalysisTask"`
+
+	// Type parameter of video content recognition task.
+	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil" name:"AiRecognitionTask"`
+
+	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitnil" name:"TasksPriority"`
+
+	// Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
+	TasksNotifyMode *string `json:"TasksNotifyMode,omitnil" name:"TasksNotifyMode"`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
+
+	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
+
+	// Reserved field for special purposes.
+	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
+}
+
+type ProcessMediaRequest struct {
+	*tchttp.BaseRequest
+	
+	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
+	FileId *string `json:"FileId,omitnil" name:"FileId"`
+
+	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// Parameter of video processing task.
+	MediaProcessTask *MediaProcessTaskInput `json:"MediaProcessTask,omitnil" name:"MediaProcessTask"`
+
+	// The information of the audio/video moderation task\*.
+	// This parameter is <font color=red>\*no longer recommended</font>. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
+	AiContentReviewTask *AiContentReviewTaskInput `json:"AiContentReviewTask,omitnil" name:"AiContentReviewTask"`
+
+	// Video content analysis task parameter.
+	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil" name:"AiAnalysisTask"`
+
+	// Type parameter of video content recognition task.
+	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil" name:"AiRecognitionTask"`
+
+	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
+	TasksPriority *int64 `json:"TasksPriority,omitnil" name:"TasksPriority"`
+
+	// Notification mode for task flow status change. Valid values: Finish, Change, None. If this parameter is left empty, `Finish` will be used.
+	TasksNotifyMode *string `json:"TasksNotifyMode,omitnil" name:"TasksNotifyMode"`
+
+	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
+
+	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
+
+	// Reserved field for special purposes.
+	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
+}
+
+func (r *ProcessMediaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ProcessMediaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileId")
+	delete(f, "SubAppId")
+	delete(f, "MediaProcessTask")
+	delete(f, "AiContentReviewTask")
+	delete(f, "AiAnalysisTask")
+	delete(f, "AiRecognitionTask")
+	delete(f, "TasksPriority")
+	delete(f, "TasksNotifyMode")
+	delete(f, "SessionContext")
+	delete(f, "SessionId")
+	delete(f, "ExtInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ProcessMediaResponseParams struct {
+	// Task ID
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ProcessMediaResponse struct {
+	*tchttp.BaseResponse
+	Response *ProcessMediaResponseParams `json:"Response"`
+}
+
+func (r *ProcessMediaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ProcessMediaResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

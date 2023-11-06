@@ -5996,6 +5996,71 @@ func (c *Client) DescribeWordSamplesWithContext(ctx context.Context, request *De
     return
 }
 
+func NewEditMediaRequest() (request *EditMediaRequest) {
+    request = &EditMediaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "EditMedia")
+    
+    
+    return
+}
+
+func NewEditMediaResponse() (response *EditMediaResponse) {
+    response = &EditMediaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EditMedia
+// 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) EditMedia(request *EditMediaRequest) (response *EditMediaResponse, err error) {
+    return c.EditMediaWithContext(context.Background(), request)
+}
+
+// EditMedia
+// 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) EditMediaWithContext(ctx context.Context, request *EditMediaRequest) (response *EditMediaResponse, err error) {
+    if request == nil {
+        request = NewEditMediaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EditMedia require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEditMediaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewExecuteFunctionRequest() (request *ExecuteFunctionRequest) {
     request = &ExecuteFunctionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8131,6 +8196,133 @@ func (c *Client) ParseStreamingManifestWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewParseStreamingManifestResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewProcessMediaRequest() (request *ProcessMediaRequest) {
+    request = &ProcessMediaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ProcessMedia")
+    
+    
+    return
+}
+
+func NewProcessMediaResponse() (response *ProcessMediaResponse) {
+    response = &ProcessMediaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ProcessMedia
+// This API is used to initiate a media processing task on a VOD file. The task may include:
+//
+// 1. Video transcoding (with watermark)
+//
+// 2. Animated image generating
+//
+// 3. Time point screenshot
+//
+// 4. Sampled screenshot
+//
+// 5. Image sprite generating
+//
+// 6. Taking a screenshot to use as the thumbnail
+//
+// 7. Adaptive bitrate streaming and encryption
+//
+// 8. Moderation (pornographic, terrorist, and politically sensitive content). We <font color=red>do not recommend</font> using this API to initiate a moderation task. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
+//
+// 9. Content analysis for labeling, categorization, thumbnail generation, or labeling by frame.
+//
+// 10. Recognition of opening and closing segments, faces, full text, text keywords, full speech, speech keywords, and objects
+//
+// 
+//
+// If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_NONEEDTOREDUCEMEDIABITRATE = "FailedOperation.NoNeedToReduceMediaBitrate"
+//  FAILEDOPERATION_TASKDUPLICATE = "FailedOperation.TaskDuplicate"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AIANALYSISTASKDEFINITION = "InvalidParameterValue.AiAnalysisTaskDefinition"
+//  INVALIDPARAMETERVALUE_AICONTENTREVIEWTASKDEFINITION = "InvalidParameterValue.AiContentReviewTaskDefinition"
+//  INVALIDPARAMETERVALUE_AIRECOGNITIONTASKDEFINITION = "InvalidParameterValue.AiRecognitionTaskDefinition"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMediaResponse, err error) {
+    return c.ProcessMediaWithContext(context.Background(), request)
+}
+
+// ProcessMedia
+// This API is used to initiate a media processing task on a VOD file. The task may include:
+//
+// 1. Video transcoding (with watermark)
+//
+// 2. Animated image generating
+//
+// 3. Time point screenshot
+//
+// 4. Sampled screenshot
+//
+// 5. Image sprite generating
+//
+// 6. Taking a screenshot to use as the thumbnail
+//
+// 7. Adaptive bitrate streaming and encryption
+//
+// 8. Moderation (pornographic, terrorist, and politically sensitive content). We <font color=red>do not recommend</font> using this API to initiate a moderation task. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
+//
+// 9. Content analysis for labeling, categorization, thumbnail generation, or labeling by frame.
+//
+// 10. Recognition of opening and closing segments, faces, full text, text keywords, full speech, speech keywords, and objects
+//
+// 
+//
+// If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  FAILEDOPERATION_NONEEDTOREDUCEMEDIABITRATE = "FailedOperation.NoNeedToReduceMediaBitrate"
+//  FAILEDOPERATION_TASKDUPLICATE = "FailedOperation.TaskDuplicate"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AIANALYSISTASKDEFINITION = "InvalidParameterValue.AiAnalysisTaskDefinition"
+//  INVALIDPARAMETERVALUE_AICONTENTREVIEWTASKDEFINITION = "InvalidParameterValue.AiContentReviewTaskDefinition"
+//  INVALIDPARAMETERVALUE_AIRECOGNITIONTASKDEFINITION = "InvalidParameterValue.AiRecognitionTaskDefinition"
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ProcessMediaWithContext(ctx context.Context, request *ProcessMediaRequest) (response *ProcessMediaResponse, err error) {
+    if request == nil {
+        request = NewProcessMediaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ProcessMedia require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewProcessMediaResponse()
     err = c.Send(request, response)
     return
 }
