@@ -77,6 +77,9 @@ const (
 	// Parameter error.
 	INVALIDPARAMETER = "InvalidParameter"
 
+	// The regex is not in the standard RE2 format.
+	INVALIDPARAMETER_ACCESSREDIRECTREGEXERROR = "InvalidParameter.AccessRedirectRegexError"
+
 	// Too many attempts. Please try again later.
 	INVALIDPARAMETER_ACTIONINPROGRESS = "InvalidParameter.ActionInProgress"
 
@@ -121,6 +124,9 @@ const (
 
 	// Invalid operation.
 	INVALIDPARAMETER_ERRINVALIDACTION = "InvalidParameter.ErrInvalidAction"
+
+	// Invalid operation: Duplicate operation configuration.
+	INVALIDPARAMETER_ERRINVALIDACTIONDUPLICATEACTION = "InvalidParameter.ErrInvalidActionDuplicateAction"
 
 	// Invalid operation: Invalid parameter.
 	INVALIDPARAMETER_ERRINVALIDACTIONPARAM = "InvalidParameter.ErrInvalidActionParam"
@@ -224,6 +230,9 @@ const (
 	// Invalid third-party object storage.
 	INVALIDPARAMETER_INVALIDAWSPRIVATEACCESS = "InvalidParameter.InvalidAwsPrivateAccess"
 
+	// Invalid region. Please fill in a correct region of the third-party object storage service.
+	INVALIDPARAMETER_INVALIDAWSREGION = "InvalidParameter.InvalidAwsRegion"
+
 	// 
 	INVALIDPARAMETER_INVALIDAWSSECRETKEY = "InvalidParameter.InvalidAwsSecretKey"
 
@@ -265,6 +274,9 @@ const (
 
 	// Invalid origin for region-specific origin-pull.
 	INVALIDPARAMETER_INVALIDCLIENTIPORIGIN = "InvalidParameter.InvalidClientIpOrigin"
+
+	// Invalid origin-pull configuration. When `OriginType` is `COS` or `AWS_S3`, the origin address must be an object storage domain name.
+	INVALIDPARAMETER_INVALIDCOSDOMAIN = "InvalidParameter.InvalidCosDomain"
 
 	// Invalid smart acceleration.
 	INVALIDPARAMETER_INVALIDDYNAMICROUTINE = "InvalidParameter.InvalidDynamicRoutine"
@@ -431,6 +443,9 @@ const (
 	// 
 	INVALIDPARAMETER_RULEORIGINPORTINTEGER = "InvalidParameter.RuleOriginPortInteger"
 
+	// Invalid origin in the rule.
+	INVALIDPARAMETER_RULEORIGINVALUEERROR = "InvalidParameter.RuleOriginValueError"
+
 	// 
 	INVALIDPARAMETER_RULEPORTDUPLICATING = "InvalidParameter.RulePortDuplicating"
 
@@ -536,6 +551,9 @@ const (
 	// Reached the API rate limit.
 	LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 
+	// Limit exceeded
+	LIMITEXCEEDED_SECURITY = "LimitExceeded.Security"
+
 	// Reached the upper limit of sites of the plan
 	LIMITEXCEEDED_ZONEBINDPLAN = "LimitExceeded.ZoneBindPlan"
 
@@ -629,6 +647,9 @@ const (
 	// The domain name is bound with a shared CNAME and cannot be changed to "IPv6 access". Please unbind the domain name from the shared CNAME first.
 	OPERATIONDENIED_SHAREDCNAMEUNSUPPORTEDIPV6 = "OperationDenied.SharedCNAMEUnsupportedIPv6"
 
+	// There is a test version in use. Please release the test version to the live environment, or roll back the test version and try again.
+	OPERATIONDENIED_VERSIONCONTROLISGRAYING = "OperationDenied.VersionControlIsGraying"
+
 	// The shared CNAME has been bound to another site. Please unbind first.
 	OPERATIONDENIED_ZONEISBINDINGSHAREDCNAME = "OperationDenied.ZoneIsBindingSharedCNAME"
 
@@ -682,6 +703,9 @@ const (
 
 	// Resources occupied by this account and others via CNAME.
 	RESOURCEINUSE_SELFANDOTHERSCNAME = "ResourceInUse.SelfAndOthersCname"
+
+	// Unable to delete the shared CNAME: It is bound to an acceleration domain name. Please remove the binding first.
+	RESOURCEINUSE_SHAREDCNAME = "ResourceInUse.SharedCNAME"
 
 	// The alias domain name is already added.
 	RESOURCEINUSE_ZONE = "ResourceInUse.Zone"

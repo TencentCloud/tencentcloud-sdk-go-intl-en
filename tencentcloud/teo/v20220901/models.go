@@ -555,6 +555,86 @@ type AscriptionInfo struct {
 	RecordValue *string `json:"RecordValue,omitnil" name:"RecordValue"`
 }
 
+type BindSharedCNAMEMap struct {
+	// The shared CNAME to be bound with or unbound from.
+	SharedCNAME *string `json:"SharedCNAME,omitnil" name:"SharedCNAME"`
+
+	// Acceleration domains (up to 20).
+	DomainNames []*string `json:"DomainNames,omitnil" name:"DomainNames"`
+}
+
+// Predefined struct for user
+type BindSharedCNAMERequestParams struct {
+	// ID of the site related with the acceleration domain name.	
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// Action type. Values:
+	// <li>`bind`: To bind</li>
+	// <li>`unbind`: To unbind</li>
+	BindType *string `json:"BindType,omitnil" name:"BindType"`
+
+	// Bindings between domain names and a shared CNAME
+	BindSharedCNAMEMaps []*BindSharedCNAMEMap `json:"BindSharedCNAMEMaps,omitnil" name:"BindSharedCNAMEMaps"`
+}
+
+type BindSharedCNAMERequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the site related with the acceleration domain name.	
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// Action type. Values:
+	// <li>`bind`: To bind</li>
+	// <li>`unbind`: To unbind</li>
+	BindType *string `json:"BindType,omitnil" name:"BindType"`
+
+	// Bindings between domain names and a shared CNAME
+	BindSharedCNAMEMaps []*BindSharedCNAMEMap `json:"BindSharedCNAMEMaps,omitnil" name:"BindSharedCNAMEMaps"`
+}
+
+func (r *BindSharedCNAMERequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindSharedCNAMERequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "BindType")
+	delete(f, "BindSharedCNAMEMaps")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BindSharedCNAMERequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type BindSharedCNAMEResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type BindSharedCNAMEResponse struct {
+	*tchttp.BaseResponse
+	Response *BindSharedCNAMEResponseParams `json:"Response"`
+}
+
+func (r *BindSharedCNAMEResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindSharedCNAMEResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type BindZoneToPlanRequestParams struct {
 	// ID of the site to be bound.
@@ -2021,9 +2101,11 @@ type CreateSharedCNAMERequestParams struct {
 	// ID of the site to which the shared CNAME belongs.	
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
-	// Prefix of the shared CNAME. Format: "test-api","test-api.com". Up 50 characters allowed.
-	// The full format of the shared CNAME is: <custom prefix> + <12-bit random string in ZoneId> + "share.eo.dns[0-5].com". For example, if the prefix is "example.com", the created shared CNAME is "example.com.sai2ig51kaa5.share.eo.dnse2.com"
-	// Example: example.com
+	// Prefix of the shared CNAME (up to 50 characters). Format: "test-api", "test-api.com". 
+	// 
+	// The complete format of a shared CNAME: <Custom Prefix> + <12-bit random string in ZoneId> + "share.dnse[0-5].com"
+	// 
+	// For example, if the prefix is `example.com`, the generated shared CNAME is `example.com.sai2ig51kaa5.share.dnse2.com`.
 	SharedCNAMEPrefix *string `json:"SharedCNAMEPrefix,omitnil" name:"SharedCNAMEPrefix"`
 
 	// Description. It supports 1-50 characters.
@@ -2036,9 +2118,11 @@ type CreateSharedCNAMERequest struct {
 	// ID of the site to which the shared CNAME belongs.	
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
-	// Prefix of the shared CNAME. Format: "test-api","test-api.com". Up 50 characters allowed.
-	// The full format of the shared CNAME is: <custom prefix> + <12-bit random string in ZoneId> + "share.eo.dns[0-5].com". For example, if the prefix is "example.com", the created shared CNAME is "example.com.sai2ig51kaa5.share.eo.dnse2.com"
-	// Example: example.com
+	// Prefix of the shared CNAME (up to 50 characters). Format: "test-api", "test-api.com". 
+	// 
+	// The complete format of a shared CNAME: <Custom Prefix> + <12-bit random string in ZoneId> + "share.dnse[0-5].com"
+	// 
+	// For example, if the prefix is `example.com`, the generated shared CNAME is `example.com.sai2ig51kaa5.share.dnse2.com`.
 	SharedCNAMEPrefix *string `json:"SharedCNAMEPrefix,omitnil" name:"SharedCNAMEPrefix"`
 
 	// Description. It supports 1-50 characters.
@@ -2068,7 +2152,7 @@ func (r *CreateSharedCNAMERequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSharedCNAMEResponseParams struct {
-	// Shared CNAME. Format: <Custom Prefix> + <12-bit random string in ZoneId> + "share.eo.dnse[0-5].com"
+	// Shared CNAME. Format: <Custom prefix> + <12-bit random string in ZoneId> + "share.dnse[0-5].com"
 	SharedCNAME *string `json:"SharedCNAME,omitnil" name:"SharedCNAME"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -2776,6 +2860,67 @@ func (r *DeleteSecurityIPGroupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteSecurityIPGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSharedCNAMERequestParams struct {
+	// ID of the site to which the shared CNAME belongs.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// The shared CNAME to be deleted
+	SharedCNAME *string `json:"SharedCNAME,omitnil" name:"SharedCNAME"`
+}
+
+type DeleteSharedCNAMERequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the site to which the shared CNAME belongs.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// The shared CNAME to be deleted
+	SharedCNAME *string `json:"SharedCNAME,omitnil" name:"SharedCNAME"`
+}
+
+func (r *DeleteSharedCNAMERequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSharedCNAMERequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "SharedCNAME")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSharedCNAMERequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSharedCNAMEResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DeleteSharedCNAMEResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSharedCNAMEResponseParams `json:"Response"`
+}
+
+func (r *DeleteSharedCNAMEResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSharedCNAMEResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -8005,39 +8150,41 @@ type OriginDetail struct {
 }
 
 type OriginGroup struct {
-	// The site ID.
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
-	// The site name.
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
 
-	// The ID of the origin group.
-	OriginGroupId *string `json:"OriginGroupId,omitnil" name:"OriginGroupId"`
 
-	// The origin type. Values:
-	// <li>`self`: Customer origin</li>
-	// <li>`third_party`: Third-party origin</li>
-	// <li>`cos`: Tencent Cloud COS origin</li>
-	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
+	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// The name of the origin group.
-	OriginGroupName *string `json:"OriginGroupName,omitnil" name:"OriginGroupName"`
 
-	// The origin configuration type when `OriginType=self`. Values:
-	// <li>`area`: Configure by region.</li>
-	// <li>`weight`: Configure by weight.</li>
-	// <li>`proto`: Configure by HTTP protocol.</li>When `OriginType=third_party/cos`, leave this field empty.
-	ConfigurationType *string `json:"ConfigurationType,omitnil" name:"ConfigurationType"`
+	Type *string `json:"Type,omitnil" name:"Type"`
 
-	// The origin record information.
-	OriginRecords []*OriginRecord `json:"OriginRecords,omitnil" name:"OriginRecords"`
+
+	Records []*OriginRecord `json:"Records,omitnil" name:"Records"`
+
+
+	References []*OriginGroupReference `json:"References,omitnil" name:"References"`
+
+
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// The update time of the origin group.
 	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
-	// The origin domain when `OriginType=self`.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Origin-pull host header
+	// Note: This field may return·null, indicating that no valid values can be obtained.
 	HostHeader *string `json:"HostHeader,omitnil" name:"HostHeader"`
+}
+
+type OriginGroupReference struct {
+
+	InstanceType *string `json:"InstanceType,omitnil" name:"InstanceType"`
+
+
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
 }
 
 type OriginInfo struct {
@@ -8931,7 +9078,7 @@ type StandardDebug struct {
 	// <li>`off`: Disable </li>
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
-	// The client IP to allow. It can be an IPv4/IPv6 address or a CIDR block. If not specified, it means to allow any client IP
+	// Allowed client source. It supports IPv4/IPv6 addresses and CIDR blocks.
 	AllowClientIPList []*string `json:"AllowClientIPList,omitnil" name:"AllowClientIPList"`
 
 	// The time when the standard debugging setting expires. If it is exceeded, this feature u200dbecomes invalid.
@@ -9261,8 +9408,7 @@ type Zone struct {
 	// Connection mode of the site. Values:
 	// <li>`full`: Connect via the name server.</li>
 	// <li>`partial`: Connect via the CNAME record.</li>
-	// <li>`noDomainAccess`: Connect without using a domain name
-	//  
+	// <li>`noDomainAccess`: Connect without using a domain name</li>
 	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// Whether the site is disabled.
