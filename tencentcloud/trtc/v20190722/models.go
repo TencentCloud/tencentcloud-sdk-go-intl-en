@@ -2006,7 +2006,7 @@ type RecordParams struct {
 	// The allowlist/blocklist for stream subscription.
 	SubscribeStreamUserIds *SubscribeStreamUserIds `json:"SubscribeStreamUserIds,omitnil" name:"SubscribeStreamUserIds"`
 
-	// The output format. `0` (default): HLS; `1`: HLS + MP4; `2`: HLS + AAC. This parameter is invalid if you save recording files to VOD. To specify the format of files saved to VOD, use `MediaType` of `TencentVod`.
+	// The output format. `0` (default): HLS; `1`: HLS + MP4; `2`: HLS + AAC;  `3` : MP4,  `4` : AAC. This parameter is invalid if you save recording files to VOD. To specify the format of files saved to VOD, use `MediaType` of `TencentVod`.
 	OutputFormat *uint64 `json:"OutputFormat,omitnil" name:"OutputFormat"`
 
 	// Whether to merge the audio and video of a user in the single-stream recording mode. 0 (default): Do not mix the audio and video; 1: Mix the audio and video into one TS file. You don’t need to specify this parameter for mixed-stream recording, which merges audios and videos by default.
@@ -2603,7 +2603,7 @@ type TencentVod struct {
 	// The upload context, which is passed through after upload is completed.
 	SourceContext *string `json:"SourceContext,omitnil" name:"SourceContext"`
 
-	// The format of recording files uploaded to VOD. `0` (default): MP4; `1`: HLS; `2`: AAC (valid only if `StreamType` is `1`).
+	// The format of recording files uploaded to VOD. `0` (default): MP4; `1`: HLS; `2`: AAC (valid only if `StreamType` is `1`); `3`: HLS+MP4; `4`: HLS+AAC.
 	MediaType *uint64 `json:"MediaType,omitnil" name:"MediaType"`
 
 	// The custom prefix of recording files. This parameter is valid only if recording files are uploaded to VOD. It can contain letters, numbers, underscores, and hyphens and cannot exceed 64 bytes. This prefix and the automatically generated filename are connected with `__UserId_u_`.
