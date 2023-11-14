@@ -2363,10 +2363,10 @@ func (r *DescribeDosageCosDetailByDateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTagListRequestParams struct {
-	// Pagination offset. If `Offset` is `0`, it indicates the first page. When `Limit` is `100`, if `Offset` is `100`, it indicates the second page; if `Offset` is `200`, it indicates the third page, and so on.
+	// The number of entries returned at a time. The maximum value is `1000`.
 	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
-	// The number of entries returned at a time. The maximum value is `1000`.
+	// Pagination offset. If `Offset` is `0`, it indicates the first page. When `Limit` is `100`, if `Offset` is `100`, it indicates the second page; if `Offset` is `200`, it indicates the third page, and so on.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Cost allocation tag key, used for fuzzy search.
@@ -2382,10 +2382,10 @@ type DescribeTagListRequestParams struct {
 type DescribeTagListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Pagination offset. If `Offset` is `0`, it indicates the first page. When `Limit` is `100`, if `Offset` is `100`, it indicates the second page; if `Offset` is `200`, it indicates the third page, and so on.
+	// The number of entries returned at a time. The maximum value is `1000`.
 	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
-	// The number of entries returned at a time. The maximum value is `1000`.
+	// Pagination offset. If `Offset` is `0`, it indicates the first page. When `Limit` is `100`, if `Offset` is `100`, it indicates the second page; if `Offset` is `200`, it indicates the third page, and so on.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
 	// Cost allocation tag key, used for fuzzy search.
