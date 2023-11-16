@@ -182,6 +182,7 @@ func NewCreateStreamPackageChannelEndpointResponse() (response *CreateStreamPack
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
 func (c *Client) CreateStreamPackageChannelEndpoint(request *CreateStreamPackageChannelEndpointRequest) (response *CreateStreamPackageChannelEndpointResponse, err error) {
     return c.CreateStreamPackageChannelEndpointWithContext(context.Background(), request)
 }
@@ -196,6 +197,7 @@ func (c *Client) CreateStreamPackageChannelEndpoint(request *CreateStreamPackage
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
 func (c *Client) CreateStreamPackageChannelEndpointWithContext(ctx context.Context, request *CreateStreamPackageChannelEndpointRequest) (response *CreateStreamPackageChannelEndpointResponse, err error) {
     if request == nil {
         request = NewCreateStreamPackageChannelEndpointRequest()
@@ -519,6 +521,7 @@ func NewModifyStreamPackageChannelEndpointResponse() (response *ModifyStreamPack
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
 //  INVALIDPARAMETER_URL = "InvalidParameter.Url"
 func (c *Client) ModifyStreamPackageChannelEndpoint(request *ModifyStreamPackageChannelEndpointRequest) (response *ModifyStreamPackageChannelEndpointResponse, err error) {
     return c.ModifyStreamPackageChannelEndpointWithContext(context.Background(), request)
@@ -533,6 +536,7 @@ func (c *Client) ModifyStreamPackageChannelEndpoint(request *ModifyStreamPackage
 //  INVALIDPARAMETER_ID = "InvalidParameter.Id"
 //  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
 //  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
 //  INVALIDPARAMETER_URL = "InvalidParameter.Url"
 func (c *Client) ModifyStreamPackageChannelEndpointWithContext(ctx context.Context, request *ModifyStreamPackageChannelEndpointRequest) (response *ModifyStreamPackageChannelEndpointResponse, err error) {
     if request == nil {

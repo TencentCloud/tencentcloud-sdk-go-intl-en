@@ -41,6 +41,31 @@ type CreateInput struct {
 
 	// Input failover. Valid values: `OPEN`, `CLOSE` (default)
 	FailOver *string `json:"FailOver,omitnil" name:"FailOver"`
+
+
+	RTMPPullSettings *CreateInputRTMPPullSettings `json:"RTMPPullSettings,omitnil" name:"RTMPPullSettings"`
+
+
+	RTSPPullSettings *CreateInputRTSPPullSettings `json:"RTSPPullSettings,omitnil" name:"RTSPPullSettings"`
+
+
+	HLSPullSettings *CreateInputHLSPullSettings `json:"HLSPullSettings,omitnil" name:"HLSPullSettings"`
+
+
+	ResilientStream *ResilientStreamConf `json:"ResilientStream,omitnil" name:"ResilientStream"`
+
+	// The bound security group IDs.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+}
+
+type CreateInputHLSPullSettings struct {
+
+	SourceAddresses []*HLSPullSourceAddress `json:"SourceAddresses,omitnil" name:"SourceAddresses"`
+}
+
+type CreateInputRTMPPullSettings struct {
+
+	SourceAddresses []*RTMPPullSourceAddress `json:"SourceAddresses,omitnil" name:"SourceAddresses"`
 }
 
 type CreateInputRTPSettings struct {
@@ -49,6 +74,11 @@ type CreateInputRTPSettings struct {
 
 	// Idle timeout period in ms. Default value: 5000. Value range: [1000, 10000].
 	IdleTimeout *int64 `json:"IdleTimeout,omitnil" name:"IdleTimeout"`
+}
+
+type CreateInputRTSPPullSettings struct {
+
+	SourceAddresses []*RTSPPullSourceAddress `json:"SourceAddresses,omitnil" name:"SourceAddresses"`
 }
 
 type CreateInputSRTSettings struct {
@@ -105,6 +135,12 @@ type CreateOutputInfo struct {
 	// The IP allowlist. The address must be in CIDR format, such as `0.0.0.0/0`.
 	// This parameter is valid if `Protocol` is set to `RTMP_PULL`. If it is left empty, there is no restriction on clients’ IP addresses.
 	AllowIpList []*string `json:"AllowIpList,omitnil" name:"AllowIpList"`
+
+
+	MaxConcurrent *uint64 `json:"MaxConcurrent,omitnil" name:"MaxConcurrent"`
+
+	// The bound security group IDs.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 }
 
 type CreateOutputInfoRTPSettings struct {
@@ -450,6 +486,11 @@ type DescribeFlow struct {
 	OutputGroup []*DescribeOutput `json:"OutputGroup,omitnil" name:"OutputGroup"`
 }
 
+type DescribeHLSPullSourceAddress struct {
+
+	Url *string `json:"Url,omitnil" name:"Url"`
+}
+
 type DescribeInput struct {
 	// Input ID.
 	InputId *string `json:"InputId,omitnil" name:"InputId"`
@@ -487,6 +528,31 @@ type DescribeInput struct {
 	// Input failover
 	// Note: this field may return `null`, indicating that no valid value was found.
 	FailOver *string `json:"FailOver,omitnil" name:"FailOver"`
+
+
+	RTMPPullSettings *DescribeInputRTMPPullSettings `json:"RTMPPullSettings,omitnil" name:"RTMPPullSettings"`
+
+
+	RTSPPullSettings *DescribeInputRTSPPullSettings `json:"RTSPPullSettings,omitnil" name:"RTSPPullSettings"`
+
+
+	HLSPullSettings *DescribeInputHLSPullSettings `json:"HLSPullSettings,omitnil" name:"HLSPullSettings"`
+
+
+	ResilientStream *ResilientStreamConf `json:"ResilientStream,omitnil" name:"ResilientStream"`
+
+	// The bound security group ID.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+}
+
+type DescribeInputHLSPullSettings struct {
+
+	SourceAddresses []*DescribeHLSPullSourceAddress `json:"SourceAddresses,omitnil" name:"SourceAddresses"`
+}
+
+type DescribeInputRTMPPullSettings struct {
+
+	SourceAddresses []*DescribeRTMPPullSourceAddress `json:"SourceAddresses,omitnil" name:"SourceAddresses"`
 }
 
 type DescribeInputRTMPSettings struct {
@@ -505,6 +571,11 @@ type DescribeInputRTPSettings struct {
 
 	// Idle timeout period.
 	IdleTimeout *int64 `json:"IdleTimeout,omitnil" name:"IdleTimeout"`
+}
+
+type DescribeInputRTSPPullSettings struct {
+
+	SourceAddresses []*DescribeRTSPPullSourceAddress `json:"SourceAddresses,omitnil" name:"SourceAddresses"`
 }
 
 type DescribeInputSRTSettings struct {
@@ -582,6 +653,28 @@ type DescribeOutput struct {
 	// This parameter is valid if `Protocol` is set to `RTMP_PULL`. If this parameter is left empty, there is no restriction on clients’ IP addresses.
 	// Note: This field may return `null`, indicating that no valid value was found.
 	AllowIpList []*string `json:"AllowIpList,omitnil" name:"AllowIpList"`
+
+
+	RTSPPullSettings *DescribeOutputRTSPPullSettings `json:"RTSPPullSettings,omitnil" name:"RTSPPullSettings"`
+
+
+	HLSPullSettings *DescribeOutputHLSPullSettings `json:"HLSPullSettings,omitnil" name:"HLSPullSettings"`
+
+
+	MaxConcurrent *uint64 `json:"MaxConcurrent,omitnil" name:"MaxConcurrent"`
+
+	// The bound security group IDs.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+}
+
+type DescribeOutputHLSPullServerUrl struct {
+
+	Url *string `json:"Url,omitnil" name:"Url"`
+}
+
+type DescribeOutputHLSPullSettings struct {
+
+	ServerUrls []*DescribeOutputHLSPullServerUrl `json:"ServerUrls,omitnil" name:"ServerUrls"`
 }
 
 type DescribeOutputRTMPPullServerUrl struct {
@@ -626,6 +719,16 @@ type DescribeOutputRTPSettings struct {
 	IdleTimeout *int64 `json:"IdleTimeout,omitnil" name:"IdleTimeout"`
 }
 
+type DescribeOutputRTSPPullServerUrl struct {
+
+	Url *string `json:"Url,omitnil" name:"Url"`
+}
+
+type DescribeOutputRTSPPullSettings struct {
+
+	ServerUrls []*DescribeOutputRTSPPullServerUrl `json:"ServerUrls,omitnil" name:"ServerUrls"`
+}
+
 type DescribeOutputSRTSettings struct {
 	// A list of the destination addresses for relay. This parameter is valid if `Mode` is `CALLER`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
@@ -666,6 +769,19 @@ type DescribeOutputSRTSettings struct {
 	// The server’s listen address, which is valid if `Mode` is `LISTENER`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	SourceAddresses []*OutputSRTSourceAddressResp `json:"SourceAddresses,omitnil" name:"SourceAddresses"`
+}
+
+type DescribeRTMPPullSourceAddress struct {
+
+	TcUrl *string `json:"TcUrl,omitnil" name:"TcUrl"`
+
+
+	StreamKey *string `json:"StreamKey,omitnil" name:"StreamKey"`
+}
+
+type DescribeRTSPPullSourceAddress struct {
+
+	Url *string `json:"Url,omitnil" name:"Url"`
 }
 
 // Predefined struct for user
@@ -1604,6 +1720,11 @@ type FlowVideo struct {
 	Pid *int64 `json:"Pid,omitnil" name:"Pid"`
 }
 
+type HLSPullSourceAddress struct {
+
+	Url *string `json:"Url,omitnil" name:"Url"`
+}
+
 type InputAddress struct {
 	// Input address IP.
 	Ip *string `json:"Ip,omitnil" name:"Ip"`
@@ -1639,6 +1760,21 @@ type ModifyInput struct {
 
 	// Whether to enable input failover. Valid values: OPEN, CLOSE.
 	FailOver *string `json:"FailOver,omitnil" name:"FailOver"`
+
+
+	RTMPPullSettings *CreateInputRTMPPullSettings `json:"RTMPPullSettings,omitnil" name:"RTMPPullSettings"`
+
+
+	RTSPPullSettings *CreateInputRTSPPullSettings `json:"RTSPPullSettings,omitnil" name:"RTSPPullSettings"`
+
+
+	HLSPullSettings *CreateInputHLSPullSettings `json:"HLSPullSettings,omitnil" name:"HLSPullSettings"`
+
+
+	ResilientStream *ResilientStreamConf `json:"ResilientStream,omitnil" name:"ResilientStream"`
+
+	// The bound security group IDs. 
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 }
 
 type ModifyOutputInfo struct {
@@ -1666,6 +1802,12 @@ type ModifyOutputInfo struct {
 	// The IP allowlist. The address must be in CIDR format, such as `0.0.0.0/0`.
 	// This parameter is valid if `Protocol` is set to `RTMP_PULL`. If it is left empty, there is no restriction on clients’ IP addresses.
 	AllowIpList []*string `json:"AllowIpList,omitnil" name:"AllowIpList"`
+
+
+	MaxConcurrent *uint64 `json:"MaxConcurrent,omitnil" name:"MaxConcurrent"`
+
+	// The bound security group IDs.
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
 }
 
 // Predefined struct for user
@@ -1878,6 +2020,14 @@ type RTMPAddressDestination struct {
 	StreamKey *string `json:"StreamKey,omitnil" name:"StreamKey"`
 }
 
+type RTMPPullSourceAddress struct {
+
+	TcUrl *string `json:"TcUrl,omitnil" name:"TcUrl"`
+
+
+	StreamKey *string `json:"StreamKey,omitnil" name:"StreamKey"`
+}
+
 type RTPAddressDestination struct {
 	// Push destination address IP.
 	Ip *string `json:"Ip,omitnil" name:"Ip"`
@@ -1886,9 +2036,22 @@ type RTPAddressDestination struct {
 	Port *int64 `json:"Port,omitnil" name:"Port"`
 }
 
+type RTSPPullSourceAddress struct {
+
+	Url *string `json:"Url,omitnil" name:"Url"`
+}
+
 type RegionInfo struct {
 	// Region name
 	Name *string `json:"Name,omitnil" name:"Name"`
+}
+
+type ResilientStreamConf struct {
+
+	Enable *bool `json:"Enable,omitnil" name:"Enable"`
+
+
+	BufferTime *uint64 `json:"BufferTime,omitnil" name:"BufferTime"`
 }
 
 type SRTAddressDestination struct {

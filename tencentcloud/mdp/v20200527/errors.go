@@ -62,6 +62,9 @@ const (
 	// Invalid protocol.
 	INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
 
+	// 
+	INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
+
 	// Invalid `Url`.
 	INVALIDPARAMETER_URL = "InvalidParameter.Url"
 )
