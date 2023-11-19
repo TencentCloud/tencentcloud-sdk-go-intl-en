@@ -45,6 +45,63 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewBindSecurityTemplateToEntityRequest() (request *BindSecurityTemplateToEntityRequest) {
+    request = &BindSecurityTemplateToEntityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "BindSecurityTemplateToEntity")
+    
+    
+    return
+}
+
+func NewBindSecurityTemplateToEntityResponse() (response *BindSecurityTemplateToEntityResponse) {
+    response = &BindSecurityTemplateToEntityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// BindSecurityTemplateToEntity
+// This API is used to bind/unbind a domain name to/from a specific policy template. 
+//
+// error code that may be returned:
+//  INTERNALERROR_CONFIGLOCKED = "InternalError.ConfigLocked"
+//  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) BindSecurityTemplateToEntity(request *BindSecurityTemplateToEntityRequest) (response *BindSecurityTemplateToEntityResponse, err error) {
+    return c.BindSecurityTemplateToEntityWithContext(context.Background(), request)
+}
+
+// BindSecurityTemplateToEntity
+// This API is used to bind/unbind a domain name to/from a specific policy template. 
+//
+// error code that may be returned:
+//  INTERNALERROR_CONFIGLOCKED = "InternalError.ConfigLocked"
+//  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
+//  OPERATIONDENIED = "OperationDenied"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) BindSecurityTemplateToEntityWithContext(ctx context.Context, request *BindSecurityTemplateToEntityRequest) (response *BindSecurityTemplateToEntityResponse, err error) {
+    if request == nil {
+        request = NewBindSecurityTemplateToEntityRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BindSecurityTemplateToEntity require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBindSecurityTemplateToEntityResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBindSharedCNAMERequest() (request *BindSharedCNAMERequest) {
     request = &BindSharedCNAMERequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -255,6 +312,7 @@ func NewCreateAccelerationDomainResponse() (response *CreateAccelerationDomainRe
 //  INVALIDPARAMETER_INVALIDPRIVATEACCESSSWITCH = "InvalidParameter.InvalidPrivateAccessSwitch"
 //  INVALIDPARAMETER_INVALIDQUICBILLING = "InvalidParameter.InvalidQuicBilling"
 //  INVALIDPARAMETER_INVALIDSERVERNAME = "InvalidParameter.InvalidServerName"
+//  INVALIDPARAMETER_INVALIDSTANDARDDEBUGCLIENTIP = "InvalidParameter.InvalidStandardDebugClientIp"
 //  INVALIDPARAMETER_INVALIDWEBSOCKETTIMEOUT = "InvalidParameter.InvalidWebSocketTimeout"
 //  INVALIDPARAMETER_POSTMAXSIZELIMITEXCEEDED = "InvalidParameter.PostMaxSizeLimitExceeded"
 //  INVALIDPARAMETER_SPACENOTBINDORIGIN = "InvalidParameter.SpaceNotBindOrigin"
@@ -312,6 +370,7 @@ func (c *Client) CreateAccelerationDomain(request *CreateAccelerationDomainReque
 //  INVALIDPARAMETER_INVALIDPRIVATEACCESSSWITCH = "InvalidParameter.InvalidPrivateAccessSwitch"
 //  INVALIDPARAMETER_INVALIDQUICBILLING = "InvalidParameter.InvalidQuicBilling"
 //  INVALIDPARAMETER_INVALIDSERVERNAME = "InvalidParameter.InvalidServerName"
+//  INVALIDPARAMETER_INVALIDSTANDARDDEBUGCLIENTIP = "InvalidParameter.InvalidStandardDebugClientIp"
 //  INVALIDPARAMETER_INVALIDWEBSOCKETTIMEOUT = "InvalidParameter.InvalidWebSocketTimeout"
 //  INVALIDPARAMETER_POSTMAXSIZELIMITEXCEEDED = "InvalidParameter.PostMaxSizeLimitExceeded"
 //  INVALIDPARAMETER_SPACENOTBINDORIGIN = "InvalidParameter.SpaceNotBindOrigin"
@@ -548,10 +607,13 @@ func NewCreateApplicationProxyRuleResponse() (response *CreateApplicationProxyRu
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_INVALIDORIGINIP = "InvalidParameter.InvalidOriginIp"
 //  INVALIDPARAMETER_PARAMETERERROR = "InvalidParameter.ParameterError"
+//  INVALIDPARAMETER_RULEORIGINFORMATERROR = "InvalidParameter.RuleOriginFormatError"
 //  INVALIDPARAMETER_RULEORIGINMULTIDOMAIN = "InvalidParameter.RuleOriginMultiDomain"
 //  INVALIDPARAMETER_RULEORIGINPORTINTEGER = "InvalidParameter.RuleOriginPortInteger"
 //  INVALIDPARAMETER_RULEORIGINVALUEERROR = "InvalidParameter.RuleOriginValueError"
 //  INVALIDPARAMETER_RULEPORTDUPLICATING = "InvalidParameter.RulePortDuplicating"
+//  INVALIDPARAMETER_RULEPORTGROUP = "InvalidParameter.RulePortGroup"
+//  INVALIDPARAMETER_RULEPORTINTEGER = "InvalidParameter.RulePortInteger"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
@@ -567,10 +629,13 @@ func (c *Client) CreateApplicationProxyRule(request *CreateApplicationProxyRuleR
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_INVALIDORIGINIP = "InvalidParameter.InvalidOriginIp"
 //  INVALIDPARAMETER_PARAMETERERROR = "InvalidParameter.ParameterError"
+//  INVALIDPARAMETER_RULEORIGINFORMATERROR = "InvalidParameter.RuleOriginFormatError"
 //  INVALIDPARAMETER_RULEORIGINMULTIDOMAIN = "InvalidParameter.RuleOriginMultiDomain"
 //  INVALIDPARAMETER_RULEORIGINPORTINTEGER = "InvalidParameter.RuleOriginPortInteger"
 //  INVALIDPARAMETER_RULEORIGINVALUEERROR = "InvalidParameter.RuleOriginValueError"
 //  INVALIDPARAMETER_RULEPORTDUPLICATING = "InvalidParameter.RulePortDuplicating"
+//  INVALIDPARAMETER_RULEPORTGROUP = "InvalidParameter.RulePortGroup"
+//  INVALIDPARAMETER_RULEPORTINTEGER = "InvalidParameter.RulePortInteger"
 //  OPERATIONDENIED = "OperationDenied"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
@@ -610,7 +675,7 @@ func NewCreateOriginGroupResponse() (response *CreateOriginGroupResponse) {
 }
 
 // CreateOriginGroup
-// This API is used to create an origin group.
+// This API is used to create an origin group for easy management. The created origin server group can be used for **adding acceleration domain names** and **layer-4 proxy configuration**.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -630,7 +695,7 @@ func (c *Client) CreateOriginGroup(request *CreateOriginGroupRequest) (response 
 }
 
 // CreateOriginGroup
-// This API is used to create an origin group.
+// This API is used to create an origin group for easy management. The created origin server group can be used for **adding acceleration domain names** and **layer-4 proxy configuration**.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -755,6 +820,7 @@ func NewCreatePrefetchTaskResponse() (response *CreatePrefetchTaskResponse) {
 //  LIMITEXCEEDED_BATCHQUOTA = "LimitExceeded.BatchQuota"
 //  LIMITEXCEEDED_DAILYQUOTA = "LimitExceeded.DailyQuota"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 //  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
 func (c *Client) CreatePrefetchTask(request *CreatePrefetchTaskRequest) (response *CreatePrefetchTaskResponse, err error) {
     return c.CreatePrefetchTaskWithContext(context.Background(), request)
@@ -776,6 +842,7 @@ func (c *Client) CreatePrefetchTask(request *CreatePrefetchTaskRequest) (respons
 //  LIMITEXCEEDED_BATCHQUOTA = "LimitExceeded.BatchQuota"
 //  LIMITEXCEEDED_DAILYQUOTA = "LimitExceeded.DailyQuota"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 //  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
 func (c *Client) CreatePrefetchTaskWithContext(ctx context.Context, request *CreatePrefetchTaskRequest) (response *CreatePrefetchTaskResponse, err error) {
     if request == nil {
@@ -833,6 +900,7 @@ func NewCreatePurgeTaskResponse() (response *CreatePurgeTaskResponse) {
 //  LIMITEXCEEDED_DAILYQUOTA = "LimitExceeded.DailyQuota"
 //  LIMITEXCEEDED_PACKNOTALLOW = "LimitExceeded.PackNotAllow"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 //  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
 func (c *Client) CreatePurgeTask(request *CreatePurgeTaskRequest) (response *CreatePurgeTaskResponse, err error) {
     return c.CreatePurgeTaskWithContext(context.Background(), request)
@@ -859,6 +927,7 @@ func (c *Client) CreatePurgeTask(request *CreatePurgeTaskRequest) (response *Cre
 //  LIMITEXCEEDED_DAILYQUOTA = "LimitExceeded.DailyQuota"
 //  LIMITEXCEEDED_PACKNOTALLOW = "LimitExceeded.PackNotAllow"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 //  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
 func (c *Client) CreatePurgeTaskWithContext(ctx context.Context, request *CreatePurgeTaskRequest) (response *CreatePurgeTaskResponse, err error) {
     if request == nil {
@@ -927,8 +996,10 @@ func NewCreateRuleResponse() (response *CreateRuleResponse) {
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOMANYVALUES = "InvalidParameter.ErrInvalidConditionValueTooManyValues"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOMANYWILDCARD = "InvalidParameter.ErrInvalidConditionValueTooManyWildcard"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEZEROLENGTH = "InvalidParameter.ErrInvalidConditionValueZeroLength"
+//  INVALIDPARAMETER_ERRNILCONDITION = "InvalidParameter.ErrNilCondition"
 //  INVALIDPARAMETER_HOSTNOTFOUND = "InvalidParameter.HostNotFound"
 //  INVALIDPARAMETER_INVALIDAUTHENTICATION = "InvalidParameter.InvalidAuthentication"
+//  INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPEEXPIRETIME = "InvalidParameter.InvalidAuthenticationTypeExpireTime"
 //  INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPESIGNPARAM = "InvalidParameter.InvalidAuthenticationTypeSignParam"
 //  INVALIDPARAMETER_INVALIDBACKUPSERVERNAME = "InvalidParameter.InvalidBackupServerName"
 //  INVALIDPARAMETER_INVALIDCACHECONFIGCACHE = "InvalidParameter.InvalidCacheConfigCache"
@@ -1010,8 +1081,10 @@ func (c *Client) CreateRule(request *CreateRuleRequest) (response *CreateRuleRes
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOMANYVALUES = "InvalidParameter.ErrInvalidConditionValueTooManyValues"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUETOOMANYWILDCARD = "InvalidParameter.ErrInvalidConditionValueTooManyWildcard"
 //  INVALIDPARAMETER_ERRINVALIDCONDITIONVALUEZEROLENGTH = "InvalidParameter.ErrInvalidConditionValueZeroLength"
+//  INVALIDPARAMETER_ERRNILCONDITION = "InvalidParameter.ErrNilCondition"
 //  INVALIDPARAMETER_HOSTNOTFOUND = "InvalidParameter.HostNotFound"
 //  INVALIDPARAMETER_INVALIDAUTHENTICATION = "InvalidParameter.InvalidAuthentication"
+//  INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPEEXPIRETIME = "InvalidParameter.InvalidAuthenticationTypeExpireTime"
 //  INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPESIGNPARAM = "InvalidParameter.InvalidAuthenticationTypeSignParam"
 //  INVALIDPARAMETER_INVALIDBACKUPSERVERNAME = "InvalidParameter.InvalidBackupServerName"
 //  INVALIDPARAMETER_INVALIDCACHECONFIGCACHE = "InvalidParameter.InvalidCacheConfigCache"
@@ -1540,7 +1613,7 @@ func NewDeleteOriginGroupResponse() (response *DeleteOriginGroupResponse) {
 }
 
 // DeleteOriginGroup
-// This API is used to delete an origin group.
+// This API is used to delete an origin group. Note that an origin group can not be deleted if it is referenced by services (e.g. L4 Proxy, domain name service, load balancing, rule engines). 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1553,7 +1626,7 @@ func (c *Client) DeleteOriginGroup(request *DeleteOriginGroupRequest) (response 
 }
 
 // DeleteOriginGroup
-// This API is used to delete an origin group.
+// This API is used to delete an origin group. Note that an origin group can not be deleted if it is referenced by services (e.g. L4 Proxy, domain name service, load balancing, rule engines). 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1847,6 +1920,7 @@ func NewDescribeAccelerationDomainsResponse() (response *DescribeAccelerationDom
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_DOMAINONTRAFFICSCHEDULING = "InvalidParameter.DomainOnTrafficScheduling"
 //  INVALIDPARAMETER_TOOMANYFILTERVALUES = "InvalidParameter.TooManyFilterValues"
 //  OPERATIONDENIED = "OperationDenied"
@@ -1863,6 +1937,7 @@ func (c *Client) DescribeAccelerationDomains(request *DescribeAccelerationDomain
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  INVALIDPARAMETER_DOMAINONTRAFFICSCHEDULING = "InvalidParameter.DomainOnTrafficScheduling"
 //  INVALIDPARAMETER_TOOMANYFILTERVALUES = "InvalidParameter.TooManyFilterValues"
 //  OPERATIONDENIED = "OperationDenied"
@@ -2849,6 +2924,61 @@ func (c *Client) DescribeRulesSettingWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeSecurityTemplateBindingsRequest() (request *DescribeSecurityTemplateBindingsRequest) {
+    request = &DescribeSecurityTemplateBindingsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeSecurityTemplateBindings")
+    
+    
+    return
+}
+
+func NewDescribeSecurityTemplateBindingsResponse() (response *DescribeSecurityTemplateBindingsResponse) {
+    response = &DescribeSecurityTemplateBindingsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSecurityTemplateBindings
+// This API is used to query bindings of a policy template.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeSecurityTemplateBindings(request *DescribeSecurityTemplateBindingsRequest) (response *DescribeSecurityTemplateBindingsResponse, err error) {
+    return c.DescribeSecurityTemplateBindingsWithContext(context.Background(), request)
+}
+
+// DescribeSecurityTemplateBindings
+// This API is used to query bindings of a policy template.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeSecurityTemplateBindingsWithContext(ctx context.Context, request *DescribeSecurityTemplateBindingsRequest) (response *DescribeSecurityTemplateBindingsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSecurityTemplateBindingsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSecurityTemplateBindings require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSecurityTemplateBindingsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTimingL4DataRequest() (request *DescribeTimingL4DataRequest) {
     request = &DescribeTimingL4DataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3123,6 +3253,7 @@ func NewDescribeTopL7CacheDataResponse() (response *DescribeTopL7CacheDataRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeTopL7CacheData(request *DescribeTopL7CacheDataRequest) (response *DescribeTopL7CacheDataResponse, err error) {
@@ -3134,6 +3265,7 @@ func (c *Client) DescribeTopL7CacheData(request *DescribeTopL7CacheDataRequest) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) DescribeTopL7CacheDataWithContext(ctx context.Context, request *DescribeTopL7CacheDataRequest) (response *DescribeTopL7CacheDataResponse, err error) {
@@ -3461,6 +3593,7 @@ func NewModifyAccelerationDomainResponse() (response *ModifyAccelerationDomainRe
 //  INVALIDPARAMETER_INVALIDORIGIN = "InvalidParameter.InvalidOrigin"
 //  INVALIDPARAMETER_INVALIDORIGINIP = "InvalidParameter.InvalidOriginIp"
 //  INVALIDPARAMETER_INVALIDRANGEORIGINPULL = "InvalidParameter.InvalidRangeOriginPull"
+//  INVALIDPARAMETER_INVALIDSTANDARDDEBUGCLIENTIP = "InvalidParameter.InvalidStandardDebugClientIp"
 //  INVALIDPARAMETER_INVALIDWEBSOCKETTIMEOUT = "InvalidParameter.InvalidWebSocketTimeout"
 //  INVALIDPARAMETER_ORIGINISINNERIP = "InvalidParameter.OriginIsInnerIp"
 //  INVALIDPARAMETER_SPACENOTBINDORIGIN = "InvalidParameter.SpaceNotBindOrigin"
@@ -3495,6 +3628,7 @@ func (c *Client) ModifyAccelerationDomain(request *ModifyAccelerationDomainReque
 //  INVALIDPARAMETER_INVALIDORIGIN = "InvalidParameter.InvalidOrigin"
 //  INVALIDPARAMETER_INVALIDORIGINIP = "InvalidParameter.InvalidOriginIp"
 //  INVALIDPARAMETER_INVALIDRANGEORIGINPULL = "InvalidParameter.InvalidRangeOriginPull"
+//  INVALIDPARAMETER_INVALIDSTANDARDDEBUGCLIENTIP = "InvalidParameter.InvalidStandardDebugClientIp"
 //  INVALIDPARAMETER_INVALIDWEBSOCKETTIMEOUT = "InvalidParameter.InvalidWebSocketTimeout"
 //  INVALIDPARAMETER_ORIGINISINNERIP = "InvalidParameter.OriginIsInnerIp"
 //  INVALIDPARAMETER_SPACENOTBINDORIGIN = "InvalidParameter.SpaceNotBindOrigin"
@@ -4074,7 +4208,7 @@ func NewModifyOriginGroupResponse() (response *ModifyOriginGroupResponse) {
 }
 
 // ModifyOriginGroup
-// This API is used to modify an origin group.
+// This API is used to modify the configuration of an origin group. The original configuration will be overwritten. 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4093,7 +4227,7 @@ func (c *Client) ModifyOriginGroup(request *ModifyOriginGroupRequest) (response 
 }
 
 // ModifyOriginGroup
-// This API is used to modify an origin group.
+// This API is used to modify the configuration of an origin group. The original configuration will be overwritten. 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

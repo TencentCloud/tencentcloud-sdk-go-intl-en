@@ -189,7 +189,7 @@ func NewCloneCDNDomainResponse() (response *CloneCDNDomainResponse) {
 }
 
 // CloneCDNDomain
-// CloneCDNDomain.
+// Clone CDN Domain.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -202,7 +202,7 @@ func (c *Client) CloneCDNDomain(request *CloneCDNDomainRequest) (response *Clone
 }
 
 // CloneCDNDomain
-// CloneCDNDomain.
+// Clone CDN Domain.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -791,7 +791,7 @@ func NewCreateCDNDomainResponse() (response *CreateCDNDomainResponse) {
 }
 
 // CreateCDNDomain
-// This interface is used to add domain names to VOD, and a user can add at most 20 domains. 1. After the domain name is successfully added, VOD will deploy the domain name. It takes about 2 minutes for the domain name to change from the deployed state to the online state.
+// This API is used for adding domain names to VOD. A user can add up to 20 domain names. 1. After the domain name is added successfully, VOD will carry out the deployment of the domain name. It takes approximately 2 minutes for the domain name to change from the deployment status to the online status.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -805,7 +805,7 @@ func (c *Client) CreateCDNDomain(request *CreateCDNDomainRequest) (response *Cre
 }
 
 // CreateCDNDomain
-// This interface is used to add domain names to VOD, and a user can add at most 20 domains. 1. After the domain name is successfully added, VOD will deploy the domain name. It takes about 2 minutes for the domain name to change from the deployed state to the online state.
+// This API is used for adding domain names to VOD. A user can add up to 20 domain names. 1. After the domain name is added successfully, VOD will carry out the deployment of the domain name. It takes approximately 2 minutes for the domain name to change from the deployment status to the online status.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -984,6 +984,183 @@ func (c *Client) CreateContentReviewTemplateWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewCreateContentReviewTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDomainVerifyRecordRequest() (request *CreateDomainVerifyRecordRequest) {
+    request = &CreateDomainVerifyRecordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateDomainVerifyRecord")
+    
+    
+    return
+}
+
+func NewCreateDomainVerifyRecordResponse() (response *CreateDomainVerifyRecordResponse) {
+    response = &CreateDomainVerifyRecordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDomainVerifyRecord
+// This API is used for generating a subdomain resolution, prompting the customer to add it to the domain name resolution, used for wildcard domain and domain name retrieval verification of ownership.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateDomainVerifyRecord(request *CreateDomainVerifyRecordRequest) (response *CreateDomainVerifyRecordResponse, err error) {
+    return c.CreateDomainVerifyRecordWithContext(context.Background(), request)
+}
+
+// CreateDomainVerifyRecord
+// This API is used for generating a subdomain resolution, prompting the customer to add it to the domain name resolution, used for wildcard domain and domain name retrieval verification of ownership.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateDomainVerifyRecordWithContext(ctx context.Context, request *CreateDomainVerifyRecordRequest) (response *CreateDomainVerifyRecordResponse, err error) {
+    if request == nil {
+        request = NewCreateDomainVerifyRecordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDomainVerifyRecord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDomainVerifyRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateEnhanceMediaTemplateRequest() (request *CreateEnhanceMediaTemplateRequest) {
+    request = &CreateEnhanceMediaTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateEnhanceMediaTemplate")
+    
+    
+    return
+}
+
+func NewCreateEnhanceMediaTemplateResponse() (response *CreateEnhanceMediaTemplateResponse) {
+    response = &CreateEnhanceMediaTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateEnhanceMediaTemplate
+// Create enhance media template.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateEnhanceMediaTemplate(request *CreateEnhanceMediaTemplateRequest) (response *CreateEnhanceMediaTemplateResponse, err error) {
+    return c.CreateEnhanceMediaTemplateWithContext(context.Background(), request)
+}
+
+// CreateEnhanceMediaTemplate
+// Create enhance media template.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) CreateEnhanceMediaTemplateWithContext(ctx context.Context, request *CreateEnhanceMediaTemplateRequest) (response *CreateEnhanceMediaTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateEnhanceMediaTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateEnhanceMediaTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateEnhanceMediaTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateHeadTailTemplateRequest() (request *CreateHeadTailTemplateRequest) {
+    request = &CreateHeadTailTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateHeadTailTemplate")
+    
+    
+    return
+}
+
+func NewCreateHeadTailTemplateResponse() (response *CreateHeadTailTemplateResponse) {
+    response = &CreateHeadTailTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateHeadTailTemplate
+// Create HeadTail Template.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateHeadTailTemplate(request *CreateHeadTailTemplateRequest) (response *CreateHeadTailTemplateResponse, err error) {
+    return c.CreateHeadTailTemplateWithContext(context.Background(), request)
+}
+
+// CreateHeadTailTemplate
+// Create HeadTail Template.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GENDEFINITION = "InternalError.GenDefinition"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateHeadTailTemplateWithContext(ctx context.Context, request *CreateHeadTailTemplateRequest) (response *CreateHeadTailTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateHeadTailTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateHeadTailTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateHeadTailTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -1250,6 +1427,61 @@ func (c *Client) CreateProcedureTemplateWithContext(ctx context.Context, request
     return
 }
 
+func NewCreateQualityInspectTemplateRequest() (request *CreateQualityInspectTemplateRequest) {
+    request = &CreateQualityInspectTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateQualityInspectTemplate")
+    
+    
+    return
+}
+
+func NewCreateQualityInspectTemplateResponse() (response *CreateQualityInspectTemplateResponse) {
+    response = &CreateQualityInspectTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateQualityInspectTemplate
+// Creates media quality inspection template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateQualityInspectTemplate(request *CreateQualityInspectTemplateRequest) (response *CreateQualityInspectTemplateResponse, err error) {
+    return c.CreateQualityInspectTemplateWithContext(context.Background(), request)
+}
+
+// CreateQualityInspectTemplate
+// Creates media quality inspection template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateQualityInspectTemplateWithContext(ctx context.Context, request *CreateQualityInspectTemplateRequest) (response *CreateQualityInspectTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateQualityInspectTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateQualityInspectTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateQualityInspectTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateRebuildMediaTemplateRequest() (request *CreateRebuildMediaTemplateRequest) {
     request = &CreateRebuildMediaTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1270,7 +1502,7 @@ func NewCreateRebuildMediaTemplateResponse() (response *CreateRebuildMediaTempla
 }
 
 // CreateRebuildMediaTemplate
-// This API is used to create a remaster template.
+// Create rebuild media template.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -1280,7 +1512,7 @@ func (c *Client) CreateRebuildMediaTemplate(request *CreateRebuildMediaTemplateR
 }
 
 // CreateRebuildMediaTemplate
-// This API is used to create a remaster template.
+// Create rebuild media template.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -2336,7 +2568,7 @@ func NewDeleteCDNDomainResponse() (response *DeleteCDNDomainResponse) {
 }
 
 // DeleteCDNDomain
-// DeleteCDNDomain.
+// Delete CDN Domain
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2347,7 +2579,7 @@ func (c *Client) DeleteCDNDomain(request *DeleteCDNDomainRequest) (response *Del
 }
 
 // DeleteCDNDomain
-// DeleteCDNDomain.
+// Delete CDN Domain
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2489,6 +2721,128 @@ func (c *Client) DeleteContentReviewTemplateWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDeleteContentReviewTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteEnhanceMediaTemplateRequest() (request *DeleteEnhanceMediaTemplateRequest) {
+    request = &DeleteEnhanceMediaTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteEnhanceMediaTemplate")
+    
+    
+    return
+}
+
+func NewDeleteEnhanceMediaTemplateResponse() (response *DeleteEnhanceMediaTemplateResponse) {
+    response = &DeleteEnhanceMediaTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteEnhanceMediaTemplate
+// Delete Enhance Media template
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteEnhanceMediaTemplate(request *DeleteEnhanceMediaTemplateRequest) (response *DeleteEnhanceMediaTemplateResponse, err error) {
+    return c.DeleteEnhanceMediaTemplateWithContext(context.Background(), request)
+}
+
+// DeleteEnhanceMediaTemplate
+// Delete Enhance Media template
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_DELETEDEFAULTTEMPLATE = "InvalidParameterValue.DeleteDefaultTemplate"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteEnhanceMediaTemplateWithContext(ctx context.Context, request *DeleteEnhanceMediaTemplateRequest) (response *DeleteEnhanceMediaTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteEnhanceMediaTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteEnhanceMediaTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteEnhanceMediaTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteHeadTailTemplateRequest() (request *DeleteHeadTailTemplateRequest) {
+    request = &DeleteHeadTailTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteHeadTailTemplate")
+    
+    
+    return
+}
+
+func NewDeleteHeadTailTemplateResponse() (response *DeleteHeadTailTemplateResponse) {
+    response = &DeleteHeadTailTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteHeadTailTemplate
+// Delete HeadTail Template
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteHeadTailTemplate(request *DeleteHeadTailTemplateRequest) (response *DeleteHeadTailTemplateResponse, err error) {
+    return c.DeleteHeadTailTemplateWithContext(context.Background(), request)
+}
+
+// DeleteHeadTailTemplate
+// Delete HeadTail Template
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DeleteHeadTailTemplateWithContext(ctx context.Context, request *DeleteHeadTailTemplateRequest) (response *DeleteHeadTailTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteHeadTailTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteHeadTailTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteHeadTailTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -2747,7 +3101,7 @@ func NewDeleteProcedureTemplateResponse() (response *DeleteProcedureTemplateResp
 }
 
 // DeleteProcedureTemplate
-// 
+// Delete user-created task flow templates.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2761,7 +3115,7 @@ func (c *Client) DeleteProcedureTemplate(request *DeleteProcedureTemplateRequest
 }
 
 // DeleteProcedureTemplate
-// 
+// Delete user-created task flow templates.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2786,6 +3140,57 @@ func (c *Client) DeleteProcedureTemplateWithContext(ctx context.Context, request
     return
 }
 
+func NewDeleteQualityInspectTemplateRequest() (request *DeleteQualityInspectTemplateRequest) {
+    request = &DeleteQualityInspectTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DeleteQualityInspectTemplate")
+    
+    
+    return
+}
+
+func NewDeleteQualityInspectTemplateResponse() (response *DeleteQualityInspectTemplateResponse) {
+    response = &DeleteQualityInspectTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteQualityInspectTemplate
+// Deletes media quality inspection template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteQualityInspectTemplate(request *DeleteQualityInspectTemplateRequest) (response *DeleteQualityInspectTemplateResponse, err error) {
+    return c.DeleteQualityInspectTemplateWithContext(context.Background(), request)
+}
+
+// DeleteQualityInspectTemplate
+// Deletes media quality inspection template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteQualityInspectTemplateWithContext(ctx context.Context, request *DeleteQualityInspectTemplateRequest) (response *DeleteQualityInspectTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteQualityInspectTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteQualityInspectTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteQualityInspectTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteRebuildMediaTemplateRequest() (request *DeleteRebuildMediaTemplateRequest) {
     request = &DeleteRebuildMediaTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2806,29 +3211,21 @@ func NewDeleteRebuildMediaTemplateResponse() (response *DeleteRebuildMediaTempla
 }
 
 // DeleteRebuildMediaTemplate
-// This API is used to delete a remaster template.
+// Delete rebuild media template.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 func (c *Client) DeleteRebuildMediaTemplate(request *DeleteRebuildMediaTemplateRequest) (response *DeleteRebuildMediaTemplateResponse, err error) {
     return c.DeleteRebuildMediaTemplateWithContext(context.Background(), request)
 }
 
 // DeleteRebuildMediaTemplate
-// This API is used to delete a remaster template.
+// Delete rebuild media template.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 func (c *Client) DeleteRebuildMediaTemplateWithContext(ctx context.Context, request *DeleteRebuildMediaTemplateRequest) (response *DeleteRebuildMediaTemplateResponse, err error) {
     if request == nil {
         request = NewDeleteRebuildMediaTemplateRequest()
@@ -3683,7 +4080,7 @@ func NewDescribeCDNDomainsResponse() (response *DescribeCDNDomainsResponse) {
 }
 
 // DescribeCDNDomains
-// DescribeCDNDomains.
+// Describe CDN Domains
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3695,7 +4092,7 @@ func (c *Client) DescribeCDNDomains(request *DescribeCDNDomainsRequest) (respons
 }
 
 // DescribeCDNDomains
-// DescribeCDNDomains.
+// Describe CDN Domains
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3981,13 +4378,13 @@ func NewDescribeClientUploadAccelerationUsageDataResponse() (response *DescribeC
 }
 
 // DescribeClientUploadAccelerationUsageData
-// This API is used to query the usage of the client upload acceleration service in a specific time period.
+// This interface returns client upload acceleration statistics within the query time range. 
 //
-//    1. You can query the usage of client upload acceleration in the last 365 days.
+//  1. You can query the client upload acceleration statistics in the last 365 days. 
 //
-//    2. The maximum time period allowed for query is 90 days.
+//  2. The query time span does not exceed 90 days. 
 //
-//    3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+//  3. If the query time span exceeds 1 day, data with day granularity will be returned. Otherwise, data with 5-minute granularity will be returned.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3999,13 +4396,13 @@ func (c *Client) DescribeClientUploadAccelerationUsageData(request *DescribeClie
 }
 
 // DescribeClientUploadAccelerationUsageData
-// This API is used to query the usage of the client upload acceleration service in a specific time period.
+// This interface returns client upload acceleration statistics within the query time range. 
 //
-//    1. You can query the usage of client upload acceleration in the last 365 days.
+//  1. You can query the client upload acceleration statistics in the last 365 days. 
 //
-//    2. The maximum time period allowed for query is 90 days.
+//  2. The query time span does not exceed 90 days. 
 //
-//    3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+//  3. If the query time span exceeds 1 day, data with day granularity will be returned. Otherwise, data with 5-minute granularity will be returned.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4233,6 +4630,55 @@ func (c *Client) DescribeDrmKeyProviderInfoWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeEnhanceMediaTemplatesRequest() (request *DescribeEnhanceMediaTemplatesRequest) {
+    request = &DescribeEnhanceMediaTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeEnhanceMediaTemplates")
+    
+    
+    return
+}
+
+func NewDescribeEnhanceMediaTemplatesResponse() (response *DescribeEnhanceMediaTemplatesResponse) {
+    response = &DescribeEnhanceMediaTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeEnhanceMediaTemplates
+// Describe Enhance Media Templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeEnhanceMediaTemplates(request *DescribeEnhanceMediaTemplatesRequest) (response *DescribeEnhanceMediaTemplatesResponse, err error) {
+    return c.DescribeEnhanceMediaTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeEnhanceMediaTemplates
+// Describe Enhance Media Templates.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeEnhanceMediaTemplatesWithContext(ctx context.Context, request *DescribeEnhanceMediaTemplatesRequest) (response *DescribeEnhanceMediaTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeEnhanceMediaTemplatesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeEnhanceMediaTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeEnhanceMediaTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeFileAttributesRequest() (request *DescribeFileAttributesRequest) {
     request = &DescribeFileAttributesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4310,6 +4756,67 @@ func (c *Client) DescribeFileAttributesWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeFileAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeHeadTailTemplatesRequest() (request *DescribeHeadTailTemplatesRequest) {
+    request = &DescribeHeadTailTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeHeadTailTemplates")
+    
+    
+    return
+}
+
+func NewDescribeHeadTailTemplatesResponse() (response *DescribeHeadTailTemplatesResponse) {
+    response = &DescribeHeadTailTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeHeadTailTemplates
+// Describe HeadTail Templates.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeHeadTailTemplates(request *DescribeHeadTailTemplatesRequest) (response *DescribeHeadTailTemplatesResponse, err error) {
+    return c.DescribeHeadTailTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeHeadTailTemplates
+// Describe HeadTail Templates.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeHeadTailTemplatesWithContext(ctx context.Context, request *DescribeHeadTailTemplatesRequest) (response *DescribeHeadTailTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeHeadTailTemplatesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeHeadTailTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeHeadTailTemplatesResponse()
     err = c.Send(request, response)
     return
 }
@@ -4397,13 +4904,13 @@ func NewDescribeImageReviewUsageDataResponse() (response *DescribeImageReviewUsa
 }
 
 // DescribeImageReviewUsageData
-// This API is used to query your daily usage of the image recognition feature in a specified time period.
+// This interface returns the image review usage information used every day within the query time range.
 //
-//    1. You can query statistics from the last 365 days.
+//    1. You can query the image review statistics for the last 365 days.
 //
-//    2. The maximum query period is 90 days.
+//    2. The query time span does not exceed 90 days.
 //
-//    3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+//    3. If the query time span exceeds 1 day, data with a granularity of days will be returned. Otherwise, data with a granularity of 5 minutes will be returned.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4415,13 +4922,13 @@ func (c *Client) DescribeImageReviewUsageData(request *DescribeImageReviewUsageD
 }
 
 // DescribeImageReviewUsageData
-// This API is used to query your daily usage of the image recognition feature in a specified time period.
+// This interface returns the image review usage information used every day within the query time range.
 //
-//    1. You can query statistics from the last 365 days.
+//    1. You can query the image review statistics for the last 365 days.
 //
-//    2. The maximum query period is 90 days.
+//    2. The query time span does not exceed 90 days.
 //
-//    3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+//    3. If the query time span exceeds 1 day, data with a granularity of days will be returned. Otherwise, data with a granularity of 5 minutes will be returned.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4525,13 +5032,13 @@ func NewDescribeLicenseUsageDataResponse() (response *DescribeLicenseUsageDataRe
 }
 
 // DescribeLicenseUsageData
-// This API is used to query daily playback license requests in a specified time period.
+// This interface returns information about the number of license requests per day within the query time range.
 //
-//    1. You can query statistics from the last 365 days.
+//    1. You can query the license request statistics in the last 365 days.
 //
-//    2. The maximum query period is 90 days.
+//    2. The query time span does not exceed 90 days.
 //
-//    3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+//    3. If the query time span exceeds 1 day, data with a granularity of days will be returned. Otherwise, data with a granularity of 5 minutes will be returned.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4543,13 +5050,13 @@ func (c *Client) DescribeLicenseUsageData(request *DescribeLicenseUsageDataReque
 }
 
 // DescribeLicenseUsageData
-// This API is used to query daily playback license requests in a specified time period.
+// This interface returns information about the number of license requests per day within the query time range.
 //
-//    1. You can query statistics from the last 365 days.
+//    1. You can query the license request statistics in the last 365 days.
 //
-//    2. The maximum query period is 90 days.
+//    2. The query time span does not exceed 90 days.
 //
-//    3. If the period specified is longer than one day, the statistics returned will be on a daily basis; otherwise, they will be on a 5-minute basis.
+//    3. If the query time span exceeds 1 day, data with a granularity of days will be returned. Otherwise, data with a granularity of 5 minutes will be returned.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4929,6 +5436,59 @@ func (c *Client) DescribeProcedureTemplatesWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeQualityInspectTemplatesRequest() (request *DescribeQualityInspectTemplatesRequest) {
+    request = &DescribeQualityInspectTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeQualityInspectTemplates")
+    
+    
+    return
+}
+
+func NewDescribeQualityInspectTemplatesResponse() (response *DescribeQualityInspectTemplatesResponse) {
+    response = &DescribeQualityInspectTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeQualityInspectTemplates
+// Get media quality inspection Template List.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeQualityInspectTemplates(request *DescribeQualityInspectTemplatesRequest) (response *DescribeQualityInspectTemplatesResponse, err error) {
+    return c.DescribeQualityInspectTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeQualityInspectTemplates
+// Get media quality inspection Template List.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeQualityInspectTemplatesWithContext(ctx context.Context, request *DescribeQualityInspectTemplatesRequest) (response *DescribeQualityInspectTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeQualityInspectTemplatesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeQualityInspectTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeQualityInspectTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRebuildMediaTemplatesRequest() (request *DescribeRebuildMediaTemplatesRequest) {
     request = &DescribeRebuildMediaTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4949,31 +5509,23 @@ func NewDescribeRebuildMediaTemplatesResponse() (response *DescribeRebuildMediaT
 }
 
 // DescribeRebuildMediaTemplates
-// This API is used to query remaster templates.
+// Describe Rebuild Media Templates
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
-//  INVALIDPARAMETERVALUE_NAMES = "InvalidParameterValue.Names"
-//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeRebuildMediaTemplates(request *DescribeRebuildMediaTemplatesRequest) (response *DescribeRebuildMediaTemplatesResponse, err error) {
     return c.DescribeRebuildMediaTemplatesWithContext(context.Background(), request)
 }
 
 // DescribeRebuildMediaTemplates
-// This API is used to query remaster templates.
+// Describe Rebuild Media Templates
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
-//  INVALIDPARAMETERVALUE_NAMES = "InvalidParameterValue.Names"
-//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeRebuildMediaTemplatesWithContext(ctx context.Context, request *DescribeRebuildMediaTemplatesRequest) (response *DescribeRebuildMediaTemplatesResponse, err error) {
     if request == nil {
         request = NewDescribeRebuildMediaTemplatesRequest()
@@ -6016,7 +6568,35 @@ func NewEditMediaResponse() (response *EditMediaResponse) {
 }
 
 // EditMedia
+// Edit the video (cut, splice, etc.) to generate a new video. The editing functions include:
+//
 // 
+//
+// 1. Edit a file in the VOD video to generate a new video;
+//
+// 2. Splice multiple files to generate a new video;
+//
+// 3. Edit multiple files and then splice them to generate a new video;
+//
+// 4. Directly generate a new video for a stream;
+//
+// 5. Edit a stream to generate a new video. Video;
+//
+// 6. Splice multiple streams to generate a new video;
+//
+// 7. Clip and then splice multiple streams to generate a new video. 
+//
+// 
+//
+// For the generated new video, you can also specify whether the generated video needs to execute the task flow. 
+//
+// 
+//
+// >When editing or splicing live streams, please make sure to do so after the stream is over. Otherwise the resulting video may be incomplete. 
+//
+// 
+//
+// If event notification is used, the type of event notification is [Video editing completed](https://intl.cloud.tencent.com/document/product/266/33794?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6033,7 +6613,35 @@ func (c *Client) EditMedia(request *EditMediaRequest) (response *EditMediaRespon
 }
 
 // EditMedia
+// Edit the video (cut, splice, etc.) to generate a new video. The editing functions include:
+//
 // 
+//
+// 1. Edit a file in the VOD video to generate a new video;
+//
+// 2. Splice multiple files to generate a new video;
+//
+// 3. Edit multiple files and then splice them to generate a new video;
+//
+// 4. Directly generate a new video for a stream;
+//
+// 5. Edit a stream to generate a new video. Video;
+//
+// 6. Splice multiple streams to generate a new video;
+//
+// 7. Clip and then splice multiple streams to generate a new video. 
+//
+// 
+//
+// For the generated new video, you can also specify whether the generated video needs to execute the task flow. 
+//
+// 
+//
+// >When editing or splicing live streams, please make sure to do so after the stream is over. Otherwise the resulting video may be incomplete. 
+//
+// 
+//
+// If event notification is used, the type of event notification is [Video editing completed](https://intl.cloud.tencent.com/document/product/266/33794?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6057,6 +6665,71 @@ func (c *Client) EditMediaWithContext(ctx context.Context, request *EditMediaReq
     request.SetContext(ctx)
     
     response = NewEditMediaResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewEnhanceMediaByTemplateRequest() (request *EnhanceMediaByTemplateRequest) {
+    request = &EnhanceMediaByTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "EnhanceMediaByTemplate")
+    
+    
+    return
+}
+
+func NewEnhanceMediaByTemplateResponse() (response *EnhanceMediaByTemplateResponse) {
+    response = &EnhanceMediaByTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EnhanceMediaByTemplate
+// Enhance Media By Template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) EnhanceMediaByTemplate(request *EnhanceMediaByTemplateRequest) (response *EnhanceMediaByTemplateResponse, err error) {
+    return c.EnhanceMediaByTemplateWithContext(context.Background(), request)
+}
+
+// EnhanceMediaByTemplate
+// Enhance Media By Template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) EnhanceMediaByTemplateWithContext(ctx context.Context, request *EnhanceMediaByTemplateRequest) (response *EnhanceMediaByTemplateResponse, err error) {
+    if request == nil {
+        request = NewEnhanceMediaByTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnhanceMediaByTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEnhanceMediaByTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -6118,6 +6791,67 @@ func (c *Client) ExecuteFunctionWithContext(ctx context.Context, request *Execut
     request.SetContext(ctx)
     
     response = NewExecuteFunctionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewExtractCopyRightWatermarkRequest() (request *ExtractCopyRightWatermarkRequest) {
+    request = &ExtractCopyRightWatermarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ExtractCopyRightWatermark")
+    
+    
+    return
+}
+
+func NewExtractCopyRightWatermarkResponse() (response *ExtractCopyRightWatermarkResponse) {
+    response = &ExtractCopyRightWatermarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExtractCopyRightWatermark
+// Extract CopyRight Watermark.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_FUNCTIONARG = "InvalidParameterValue.FunctionArg"
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ExtractCopyRightWatermark(request *ExtractCopyRightWatermarkRequest) (response *ExtractCopyRightWatermarkResponse, err error) {
+    return c.ExtractCopyRightWatermarkWithContext(context.Background(), request)
+}
+
+// ExtractCopyRightWatermark
+// Extract CopyRight Watermark.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_FUNCTIONARG = "InvalidParameterValue.FunctionArg"
+//  INVALIDPARAMETERVALUE_FUNCTIONNAME = "InvalidParameterValue.FunctionName"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ExtractCopyRightWatermarkWithContext(ctx context.Context, request *ExtractCopyRightWatermarkRequest) (response *ExtractCopyRightWatermarkResponse, err error) {
+    if request == nil {
+        request = NewExtractCopyRightWatermarkRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExtractCopyRightWatermark require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExtractCopyRightWatermarkResponse()
     err = c.Send(request, response)
     return
 }
@@ -6250,6 +6984,67 @@ func (c *Client) ForbidMediaDistributionWithContext(ctx context.Context, request
     return
 }
 
+func NewInspectMediaQualityRequest() (request *InspectMediaQualityRequest) {
+    request = &InspectMediaQualityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "InspectMediaQuality")
+    
+    
+    return
+}
+
+func NewInspectMediaQualityResponse() (response *InspectMediaQualityResponse) {
+    response = &InspectMediaQualityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InspectMediaQuality
+// Initiate media quality inspection task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) InspectMediaQuality(request *InspectMediaQualityRequest) (response *InspectMediaQualityResponse, err error) {
+    return c.InspectMediaQualityWithContext(context.Background(), request)
+}
+
+// InspectMediaQuality
+// Initiate media quality inspection task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) InspectMediaQualityWithContext(ctx context.Context, request *InspectMediaQualityRequest) (response *InspectMediaQualityResponse, err error) {
+    if request == nil {
+        request = NewInspectMediaQualityRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InspectMediaQuality require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInspectMediaQualityResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewLiveRealTimeClipRequest() (request *LiveRealTimeClipRequest) {
     request = &LiveRealTimeClipRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6270,7 +7065,53 @@ func NewLiveRealTimeClipResponse() (response *LiveRealTimeClipResponse) {
 }
 
 // LiveRealTimeClip
+// Live broadcast real-time editing means that during the live broadcast process (that is, before the live broadcast has ended), customers can select a section of past live broadcast content to generate a new video (HLS format) in real time. Developers can share it immediately, or permanently Save it.
+//
 // 
+//
+// Tencent Cloud VOD supports two real-time editing modes:
+//
+// - Editing and solidification: Save the edited video as an independent video with an independent FileId; suitable for scenes where the highlight clips are saved for a long time;
+//
+// - Editing is not solidified: the edited video is attached to the live broadcast recording file and does not have an independent FileId; it is suitable for scenarios where highlight clips are **temporarily shared**.
+//
+// 
+//
+// Notice:
+//
+// - The prerequisite for using the live broadcast real-time editing function is that the target live stream has the [Time Shift Replay](https://intl.cloud.tencent.com/document/product/267/32742?from_cn_redirect=1) function enabled.
+//
+// - Live broadcast real-time editing is based on the m3u8 file generated by live broadcast recording, so its minimum editing accuracy is one ts slice, and it is impossible to achieve second-level or more precise editing accuracy.
+//
+// - Since the stream may be interrupted during the live broadcast, the actual video duration generated by editing may be inconsistent with expectations. For example, the time interval for editing a live stream is from 2018-09-20T10:30:00Z to 2018-09-20T10:40:00Z. If the stream is interrupted during this time interval, the duration of the returned media asset file will be Less than 10 minutes, in which case it can be sensed via the output parameter <a href="#p_segmentset">SegmentSet</a>.
+//
+// 
+//
+// ### Clip solidification
+//
+// Clip solidification means saving the clipped video into an independent video (with an independent FileId). Its life cycle is not affected by the original live broadcast recording video (even if the original recording video is deleted, the editing results will not be affected in any way); it can also be subjected to secondary processing such as transcoding.
+//
+// 
+//
+// For example: for a complete football match, the original video recorded live may be as long as 2 hours. To save costs, the customer can store this video for 2 months, but for the "highlight moment" video that is edited in real time during the live broadcast However, you can specify a longer storage period, and at the same time, you can separately transcode the "highlight moments" video and other on-demand operations. At this time, you can choose the solution of real-time editing and solidification of the live broadcast.
+//
+// 
+//
+// The advantage of editing and curing is that its life cycle is independent of the original recorded video, and can be managed independently and stored for a long time.
+//
+// 
+//
+// ### Clips are not solidified
+//
+// The editing is not solidified, which means that the result of editing (m3u8 file) and the live recording video share the same ts fragment. The newly generated video is not an independent and complete video (no independent FileId, only playback URL), and its validity period is the same as the live broadcast. The validity period of the complete recorded video is the same. Once the video recorded during the live broadcast is deleted, the clip will also become unplayable.
+//
+// 
+//
+// The clip is not solidified. Because the clip result is not an independent video, it will not be included in on-demand media asset video management (for example, the total number of videos in the console will not count this clip), and this clip cannot be transcoded separately. Video processing operations.
+//
+// 
+//
+// The advantage of not solidifying editing is that its editing operation is very "lightweight" and does not generate additional storage overhead. However, its disadvantage is that the life cycle is the same as the original recorded video, and further video processing such as transcoding cannot be performed.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6288,7 +7129,53 @@ func (c *Client) LiveRealTimeClip(request *LiveRealTimeClipRequest) (response *L
 }
 
 // LiveRealTimeClip
+// Live broadcast real-time editing means that during the live broadcast process (that is, before the live broadcast has ended), customers can select a section of past live broadcast content to generate a new video (HLS format) in real time. Developers can share it immediately, or permanently Save it.
+//
 // 
+//
+// Tencent Cloud VOD supports two real-time editing modes:
+//
+// - Editing and solidification: Save the edited video as an independent video with an independent FileId; suitable for scenes where the highlight clips are saved for a long time;
+//
+// - Editing is not solidified: the edited video is attached to the live broadcast recording file and does not have an independent FileId; it is suitable for scenarios where highlight clips are **temporarily shared**.
+//
+// 
+//
+// Notice:
+//
+// - The prerequisite for using the live broadcast real-time editing function is that the target live stream has the [Time Shift Replay](https://intl.cloud.tencent.com/document/product/267/32742?from_cn_redirect=1) function enabled.
+//
+// - Live broadcast real-time editing is based on the m3u8 file generated by live broadcast recording, so its minimum editing accuracy is one ts slice, and it is impossible to achieve second-level or more precise editing accuracy.
+//
+// - Since the stream may be interrupted during the live broadcast, the actual video duration generated by editing may be inconsistent with expectations. For example, the time interval for editing a live stream is from 2018-09-20T10:30:00Z to 2018-09-20T10:40:00Z. If the stream is interrupted during this time interval, the duration of the returned media asset file will be Less than 10 minutes, in which case it can be sensed via the output parameter <a href="#p_segmentset">SegmentSet</a>.
+//
+// 
+//
+// ### Clip solidification
+//
+// Clip solidification means saving the clipped video into an independent video (with an independent FileId). Its life cycle is not affected by the original live broadcast recording video (even if the original recording video is deleted, the editing results will not be affected in any way); it can also be subjected to secondary processing such as transcoding.
+//
+// 
+//
+// For example: for a complete football match, the original video recorded live may be as long as 2 hours. To save costs, the customer can store this video for 2 months, but for the "highlight moment" video that is edited in real time during the live broadcast However, you can specify a longer storage period, and at the same time, you can separately transcode the "highlight moments" video and other on-demand operations. At this time, you can choose the solution of real-time editing and solidification of the live broadcast.
+//
+// 
+//
+// The advantage of editing and curing is that its life cycle is independent of the original recorded video, and can be managed independently and stored for a long time.
+//
+// 
+//
+// ### Clips are not solidified
+//
+// The editing is not solidified, which means that the result of editing (m3u8 file) and the live recording video share the same ts fragment. The newly generated video is not an independent and complete video (no independent FileId, only playback URL), and its validity period is the same as the live broadcast. The validity period of the complete recorded video is the same. Once the video recorded during the live broadcast is deleted, the clip will also become unplayable.
+//
+// 
+//
+// The clip is not solidified. Because the clip result is not an independent video, it will not be included in on-demand media asset video management (for example, the total number of videos in the console will not count this clip), and this clip cannot be transcoded separately. Video processing operations.
+//
+// 
+//
+// The advantage of not solidifying editing is that its editing operation is very "lightweight" and does not generate additional storage overhead. However, its disadvantage is that the life cycle is the same as the original recorded video, and further video processing such as transcoding cannot be performed.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6714,7 +7601,7 @@ func NewModifyCDNDomainConfigResponse() (response *ModifyCDNDomainConfigResponse
 }
 
 // ModifyCDNDomainConfig
-// ModifyCDNDomainConfig.
+// Modify CDN Domain Config.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6726,7 +7613,7 @@ func (c *Client) ModifyCDNDomainConfig(request *ModifyCDNDomainConfigRequest) (r
 }
 
 // ModifyCDNDomainConfig
-// ModifyCDNDomainConfig.
+// Modify CDN Domain Config.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6948,6 +7835,209 @@ func (c *Client) ModifyDefaultStorageRegionWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewModifyDefaultStorageRegionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyEnhanceMediaTemplateRequest() (request *ModifyEnhanceMediaTemplateRequest) {
+    request = &ModifyEnhanceMediaTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyEnhanceMediaTemplate")
+    
+    
+    return
+}
+
+func NewModifyEnhanceMediaTemplateResponse() (response *ModifyEnhanceMediaTemplateResponse) {
+    response = &ModifyEnhanceMediaTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyEnhanceMediaTemplate
+// Modify enhance media template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_STORAGEREGION = "InvalidParameterValue.StorageRegion"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyEnhanceMediaTemplate(request *ModifyEnhanceMediaTemplateRequest) (response *ModifyEnhanceMediaTemplateResponse, err error) {
+    return c.ModifyEnhanceMediaTemplateWithContext(context.Background(), request)
+}
+
+// ModifyEnhanceMediaTemplate
+// Modify enhance media template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_STORAGEREGION = "InvalidParameterValue.StorageRegion"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyEnhanceMediaTemplateWithContext(ctx context.Context, request *ModifyEnhanceMediaTemplateRequest) (response *ModifyEnhanceMediaTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyEnhanceMediaTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyEnhanceMediaTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyEnhanceMediaTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyEventConfigRequest() (request *ModifyEventConfigRequest) {
+    request = &ModifyEventConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyEventConfig")
+    
+    
+    return
+}
+
+func NewModifyEventConfigResponse() (response *ModifyEventConfigResponse) {
+    response = &ModifyEventConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyEventConfig
+// Tencent Cloud VOD provides customers with media upload, media management, media processing and other services. During or at the end of the execution of these services, Tencent Cloud On-Demand also provides various corresponding event notifications to facilitate developers to perceive the service processing status and Do the next business operation. 
+//
+// 
+//
+// Developers can achieve this by calling this interface:
+//
+// - Set the type of callback notification received. Currently, there is [HTTP callback notification](https://www.tencentcloud.com/document/product/266/33948) and [reliable notification based on message queue](https://www.tencentcloud.com/document/product/266/33948) two types. 
+//
+// - For [HTTP callback notification](https://www.tencentcloud.com/document/product/266/33948), you can set the address of the 3.0 format callback. For the description of 3.0 format callback, see [Historical Format Callback](https://intl.cloud.tencent.com/document/product/266/33796?from_cn_redirect=1). 
+//
+// - Select settings to receive or ignore notification events for specific event services.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyEventConfig(request *ModifyEventConfigRequest) (response *ModifyEventConfigResponse, err error) {
+    return c.ModifyEventConfigWithContext(context.Background(), request)
+}
+
+// ModifyEventConfig
+// Tencent Cloud VOD provides customers with media upload, media management, media processing and other services. During or at the end of the execution of these services, Tencent Cloud On-Demand also provides various corresponding event notifications to facilitate developers to perceive the service processing status and Do the next business operation. 
+//
+// 
+//
+// Developers can achieve this by calling this interface:
+//
+// - Set the type of callback notification received. Currently, there is [HTTP callback notification](https://www.tencentcloud.com/document/product/266/33948) and [reliable notification based on message queue](https://www.tencentcloud.com/document/product/266/33948) two types. 
+//
+// - For [HTTP callback notification](https://www.tencentcloud.com/document/product/266/33948), you can set the address of the 3.0 format callback. For the description of 3.0 format callback, see [Historical Format Callback](https://intl.cloud.tencent.com/document/product/266/33796?from_cn_redirect=1). 
+//
+// - Select settings to receive or ignore notification events for specific event services.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyEventConfigWithContext(ctx context.Context, request *ModifyEventConfigRequest) (response *ModifyEventConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyEventConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyEventConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyEventConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyHeadTailTemplateRequest() (request *ModifyHeadTailTemplateRequest) {
+    request = &ModifyHeadTailTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyHeadTailTemplate")
+    
+    
+    return
+}
+
+func NewModifyHeadTailTemplateResponse() (response *ModifyHeadTailTemplateResponse) {
+    response = &ModifyHeadTailTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyHeadTailTemplate
+// Modify HeadTail Template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_STORAGEREGIONS = "InvalidParameterValue.StorageRegions"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyHeadTailTemplate(request *ModifyHeadTailTemplateRequest) (response *ModifyHeadTailTemplateResponse, err error) {
+    return c.ModifyHeadTailTemplateWithContext(context.Background(), request)
+}
+
+// ModifyHeadTailTemplate
+// Modify HeadTail Template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_STORAGEREGIONS = "InvalidParameterValue.StorageRegions"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) ModifyHeadTailTemplateWithContext(ctx context.Context, request *ModifyHeadTailTemplateRequest) (response *ModifyHeadTailTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyHeadTailTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyHeadTailTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyHeadTailTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -7296,6 +8386,59 @@ func (c *Client) ModifyPersonSampleWithContext(ctx context.Context, request *Mod
     return
 }
 
+func NewModifyQualityInspectTemplateRequest() (request *ModifyQualityInspectTemplateRequest) {
+    request = &ModifyQualityInspectTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "ModifyQualityInspectTemplate")
+    
+    
+    return
+}
+
+func NewModifyQualityInspectTemplateResponse() (response *ModifyQualityInspectTemplateResponse) {
+    response = &ModifyQualityInspectTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyQualityInspectTemplate
+// Modifies media quality inspection template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyQualityInspectTemplate(request *ModifyQualityInspectTemplateRequest) (response *ModifyQualityInspectTemplateResponse, err error) {
+    return c.ModifyQualityInspectTemplateWithContext(context.Background(), request)
+}
+
+// ModifyQualityInspectTemplate
+// Modifies media quality inspection template.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyQualityInspectTemplateWithContext(ctx context.Context, request *ModifyQualityInspectTemplateRequest) (response *ModifyQualityInspectTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyQualityInspectTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyQualityInspectTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyQualityInspectTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyRebuildMediaTemplateRequest() (request *ModifyRebuildMediaTemplateRequest) {
     request = &ModifyRebuildMediaTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7316,31 +8459,23 @@ func NewModifyRebuildMediaTemplateResponse() (response *ModifyRebuildMediaTempla
 }
 
 // ModifyRebuildMediaTemplate
-// This API is used to modify a remaster template.
+// Modify Rebuild Media Template.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_FACEDUPLICATE = "InvalidParameterValue.FaceDuplicate"
-//  INVALIDPARAMETERVALUE_PICFORMATERROR = "InvalidParameterValue.PicFormatError"
-//  RESOURCENOTFOUND_PERSON = "ResourceNotFound.Person"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 func (c *Client) ModifyRebuildMediaTemplate(request *ModifyRebuildMediaTemplateRequest) (response *ModifyRebuildMediaTemplateResponse, err error) {
     return c.ModifyRebuildMediaTemplateWithContext(context.Background(), request)
 }
 
 // ModifyRebuildMediaTemplate
-// This API is used to modify a remaster template.
+// Modify Rebuild Media Template.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_FACEDUPLICATE = "InvalidParameterValue.FaceDuplicate"
-//  INVALIDPARAMETERVALUE_PICFORMATERROR = "InvalidParameterValue.PicFormatError"
-//  RESOURCENOTFOUND_PERSON = "ResourceNotFound.Person"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 func (c *Client) ModifyRebuildMediaTemplateWithContext(ctx context.Context, request *ModifyRebuildMediaTemplateRequest) (response *ModifyRebuildMediaTemplateResponse, err error) {
     if request == nil {
         request = NewModifyRebuildMediaTemplateRequest()
@@ -8220,31 +9355,31 @@ func NewProcessMediaResponse() (response *ProcessMediaResponse) {
 }
 
 // ProcessMedia
-// This API is used to initiate a media processing task on a VOD file. The task may include:
+// Initiate processing tasks for media file in VOD, including: 
 //
-// 1. Video transcoding (with watermark)
+// 1. Video transcoding (with Watermark); 
 //
-// 2. Animated image generating
+// 2. Video to animated image; 
 //
-// 3. Time point screenshot
+// 3. Screencapturing the video at specified Time point;
 //
-// 4. Sampled screenshot
+// 4. Sampled screenshot of the video;
 //
-// 5. Image sprite generating
+// 5. Generated Image sprite template from the video;
 //
-// 6. Taking a screenshot to use as the thumbnail
+// 6. Generated a cover image from the video;
 //
-// 7. Adaptive bitrate streaming and encryption
+// 7. Adaptive Bitrate Streaming for the video (with encryption); 
 //
-// 8. Moderation (pornographic, terrorist, and politically sensitive content). We <font color=red>do not recommend</font> using this API to initiate a moderation task. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
+// 8. Content Moderation (offensive Information, unsafe Information, inappropriate Information), it is <font color=red>not recommended</font> to use this API, recommend using [Video moderation(ReviewAudioVideo)](https://www.tencentcloud.com/document/api/266/50634) or [Image moderation(ReviewImage)](https://www.tencentcloud.com/document/api/266/47138);
 //
-// 9. Content analysis for labeling, categorization, thumbnail generation, or labeling by frame.
+// 9. Content analysis (tag, category, cover, frame-by-frame tag);
 //
-// 10. Recognition of opening and closing segments, faces, full text, text keywords, full speech, speech keywords, and objects
+// 10. Content recognition (video intro and outro, face, Text, keyword, voice, Key object).
 //
 // 
 //
-// If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
+// If using event notification, the event notification type is [task flow status change](https://www.tencentcloud.com/document/product/266/33953).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8268,31 +9403,31 @@ func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMe
 }
 
 // ProcessMedia
-// This API is used to initiate a media processing task on a VOD file. The task may include:
+// Initiate processing tasks for media file in VOD, including: 
 //
-// 1. Video transcoding (with watermark)
+// 1. Video transcoding (with Watermark); 
 //
-// 2. Animated image generating
+// 2. Video to animated image; 
 //
-// 3. Time point screenshot
+// 3. Screencapturing the video at specified Time point;
 //
-// 4. Sampled screenshot
+// 4. Sampled screenshot of the video;
 //
-// 5. Image sprite generating
+// 5. Generated Image sprite template from the video;
 //
-// 6. Taking a screenshot to use as the thumbnail
+// 6. Generated a cover image from the video;
 //
-// 7. Adaptive bitrate streaming and encryption
+// 7. Adaptive Bitrate Streaming for the video (with encryption); 
 //
-// 8. Moderation (pornographic, terrorist, and politically sensitive content). We <font color=red>do not recommend</font> using this API to initiate a moderation task. Please use [ReviewAudioVideo](https://intl.cloud.tencent.com/document/api/266/80283?from_cn_redirect=1) or [ReviewImage](https://intl.cloud.tencent.com/document/api/266/73217?from_cn_redirect=1) instead.
+// 8. Content Moderation (offensive Information, unsafe Information, inappropriate Information), it is <font color=red>not recommended</font> to use this API, recommend using [Video moderation(ReviewAudioVideo)](https://www.tencentcloud.com/document/api/266/50634) or [Image moderation(ReviewImage)](https://www.tencentcloud.com/document/api/266/47138);
 //
-// 9. Content analysis for labeling, categorization, thumbnail generation, or labeling by frame.
+// 9. Content analysis (tag, category, cover, frame-by-frame tag);
 //
-// 10. Recognition of opening and closing segments, faces, full text, text keywords, full speech, speech keywords, and objects
+// 10. Content recognition (video intro and outro, face, Text, keyword, voice, Key object).
 //
 // 
 //
-// If event notifications are used, the event type is [ProcedureStateChanged](https://intl.cloud.tencent.com/document/product/266/9636?from_cn_redirect=1).
+// If using event notification, the event notification type is [task flow status change](https://www.tencentcloud.com/document/product/266/33953).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8744,7 +9879,7 @@ func NewRebuildMediaResponse() (response *RebuildMediaResponse) {
 }
 
 // RebuildMedia
-// This API is used to remaster audio/video.
+// Initiate rebuild media
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8754,7 +9889,7 @@ func (c *Client) RebuildMedia(request *RebuildMediaRequest) (response *RebuildMe
 }
 
 // RebuildMedia
-// This API is used to remaster audio/video.
+// Initiate rebuild media
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8795,7 +9930,7 @@ func NewRebuildMediaByTemplateResponse() (response *RebuildMediaByTemplateRespon
 }
 
 // RebuildMediaByTemplate
-// This API is used to start a remaster task using a template.
+// Rebuild media by template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8805,7 +9940,7 @@ func (c *Client) RebuildMediaByTemplate(request *RebuildMediaByTemplateRequest) 
 }
 
 // RebuildMediaByTemplate
-// This API is used to start a remaster task using a template.
+// Rebuild media by template.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -9262,79 +10397,87 @@ func NewSearchMediaResponse() (response *SearchMediaResponse) {
 }
 
 // SearchMedia
-// This API is used to search for media files by specific criteria. You can sort the results and specify the information to return.
+// Search for media information, supporting multiple condition filtering, as well as sorting and filtering of returned results. This includes:
 //
-// - Specify a list of file IDs (`FileIds`). Any file that matches one of the IDs will be returned.
+// - Specify a collection of file IDs (FileIds) to return media with any ID in the collection.
 //
-// - Specify one or multiple keywords for `Names` or `Descriptions` for fuzzy search by filename or description.
+// - Fuzzy search based on multiple media file names (Names) or description information (Descriptions).
 //
-// - Specify multiple filename prefixes (`NamePrefixes`).
+// - Search based on multiple file name prefixes (NamePrefixes).
 //
-// - Specify a list of categories (`ClassIds`). Any file that matches one of the categories will be returned. For example, assume that there are categories `Movies`, `TV Series`, and `Variety Shows`, and `Movies` has subcategories including `History`, `Action`, and `Romance`. If `ClassIds` is set to `Movies` and `TV Series`, all media files in `Movies` (including its subcategories) and `TV Series` will be returned. If `ClassIds` is set to `History` and `Action`, only the files in those two subcategories will be returned.
+// - Specify a collection of categories (ClassIds, see input parameters) to return media that meets any category in the collection. For example, media categories include movies, TV shows, variety shows, etc., and there are subcategories such as historical films, action films, and romance films under the movie category. If ClassIds specifies movies and TV shows, all subcategories under movies and TV shows will be returned; if ClassIds specifies historical films and action films, only media under these two subcategories will be returned.
 //
-// - Specify a list of labels (`Tags`). Any file that matches one or more of the labels will be returned. For example, assume that there are labels `ACG`, `Drama`, and `YTPMV`. If `Tags` is set to `ACG` and `YTPMV`, any media file with either label will be returned.
+// - Specify a collection of tags (Tags, see input parameters) to return media that meets any tag in the collection. For example, media tags include ACG, palace fighting, and ghost animal. If Tags specifies ACG and ghost animal, media that meets any of these two tags will be retrieved.
 //
-// - Specify the types (`Categories`) of media files. Any file that matches one of the types will be returned. There are three file types: `Video`, `Audio`, and `Image`. If `Categories` is set to `Video` and `Audio`, all audio and video files will be returned.
+// - Specify a collection of file types (Categories, see input parameters) to return media that meets any type in the collection. For example, file types include Video (video), Audio (audio), and Image (image). If Categories specifies Video and Audio, media that meets these types will be retrieved.
 //
-// - Specify the source types (`SourceTypes`). Any file that matches one of the source types specified will be returned. For example, if you set `SourceTypes` to `Record` (live recording) and `Upload` (upload), all recording files and uploaded files will be returned.
+// - Specify a collection of sources (SourceTypes, see input parameters) to return media that meets any source in the collection. For example, media sources include Record (live recording) and Upload (upload). If SourceTypes specifies Record and Upload, media that meets these sources will be retrieved.
 //
-// - Specify the file formats (`MediaTypes`), such as MP4, AVI, and MP3. All files in the specified formats will be returned. For example, if you set `MediaTypes` to MP4 and MP3, all files in these two formats will be returned.
+// - Specify a collection of file container formats (MediaTypes, see input parameters) to return media that meets any container format in the collection. For example, container formats include MP4, AVI, MP3, etc. If MediaTypes specifies MP4 and MP3, media that meets these container formats will be retrieved.
 //
-// - Specify the file statuses (`Status`). Files in the specified statuses will be returned. Valid values: `Normal`, `SystemForbidden` (blocked by VOD), `Forbidden` (blocked by you). If you set `Status` to `Normal` and `Forbidden`, files in either status will be returned.
+// - Specify a collection of file statuses (Status, see input parameters) to return media that meets any status in the collection. For example, file statuses include Normal (normal), SystemForbidden (platform ban), and Forbidden (active ban). If Status specifies Normal and Forbidden, media that meets these statuses will be retrieved.
 //
-// - Specify the types of moderation results (`ReviewResults`). Files that have the specified types of moderation results will be returned. Valid values include `pass`, `block`, and more. If you set `ReviewResults` to `pass` and `block`, files whose moderation result is "pass" or "block" will be returned.
+// - Specify a collection of file moderation results (ReviewResults, see input parameters) to return media that meets any status in the collection. For example, file moderation results include pass (passed) and block (not compliant). If ReviewResults specifies pass and block, media that meets these moderation results will be retrieved.
 //
-// - Specify the stream IDs (`StreamIds`) of live recording files.
+// - Filter live recorded media by specifying a collection of live streaming codes (StreamIds, see input parameters).
 //
-// - Specify a time range for search by file creation time.
+// - Filter media by specifying the creation time range of the media.
 //
-// - Specify the TRTC application IDs.
+// - Filter media by specifying a collection of TRTC application IDs.
 //
-// - Specify the TRTC room IDs.
-//
-// - Specify one keyword for `Text` for fuzzy search by filename or description. (This is not recommended. Please use `Names`, `NamePrefixes` or `Descriptions` instead.)
-//
-// - Specify one source (`SourceType`). (This is not recommended. Please use `SourceTypes` instead.)
-//
-// - Specify one stream ID (`StreamId`). (This is not recommended. Please use `StreamIds` instead.)
-//
-// - Specify the start (`StartTime`) of the time range to search by creation time. (This is not recommended. Please use `CreateTime` instead.)
-//
-// - Specify the end (`EndTime`) of the time range to search by creation time. (This is not recommended. Please use `CreateTime` instead.)
-//
-// - You can search by any combination of the parameters above. For example, you can search for media files with the label "Drama" or "Suspense" in the category of "Movies" and "TV Series" created between 12:00:00, December 1, 2018 and 12:00:00, December 8, 2018. Note that for parameters whose data type is array, the search logic between their elements is "OR". The search logic between parameters is "AND".
+// - Filter media by specifying a collection of TRTC room IDs.
 //
 // 
 //
-// - You can sort the results by creation time and return them in multiple pages by specifying `Offset` and `Limit`.
-//
-// - You can use `Filters` to specify the types of file information to return (all types are returned by default). Valid values:
-//
-//     1. `basicInfo`: The file name, category, playback URL, thumbnail, etc.
-//
-//     2. `metaData`: The file size, duration, video stream information, audio stream information, etc.
-//
-//     3. `transcodeInfo`: The URLs, video stream parameters, and audio stream parameters of transcoding outputs.
-//
-//     4. `animatedGraphicsInfo`: The information of the animated images (such as GIF images) generated.
-//
-//     5. `sampleSnapshotInfo`: The information of the sampled screenshots generated.
-//
-//     6. `imageSpriteInfo`: The information of the image sprites generated.
-//
-//     7. `snapshotByTimeOffsetInfo`: The information of the time point screenshots generated.
-//
-//     8. `keyFrameDescInfo`: The video timestamp information.
-//
-//     9. `adaptiveDynamicStreamingInfo`: The specification, encryption type, format, etc.
+// - The above parameters can be combined in any way to search. For example, filter media created between 12:00:00 on December 1, 2018, and 12:00:00 on December 8, 2018, categorized as movies or TV shows, and tagged with palace fighting and suspense. Note that the search logic for elements of any parameter that supports array input is 'or'. The logical relationship between all parameters is 'and'
 //
 // 
 //
-// <div id="maxResultsDesc">Limits for returned records:</div>
+// - Allow to control the type of media information returned through Filters (default to return all information). Optional inputs include:
 //
-// - The <b><a href="#p_offset">Offset</a> and <a href="#p_limit">Limit</a> parameters determine the number of records per page. If neither parameter is passed, this API will return up to 10 records.</b>
+//     1. Basic information (basicInfo): including media name, category, playback URL, cover image, etc.
 //
-// - <b>Up to 5,000 records can be returned. If a request returns too many records, we recommend you use more specific search criteria to narrow down the results.</b>
+//     2. Metadata (metaData): including size, duration, video stream information, audio stream information, etc.
+//
+//     3. Transcoding result information (transcodeInfo): including the media addresses, video stream parameters, audio stream parameters, etc., generated by transcoding the media into various specifications.
+//
+//     4.  Animated image result information (animatedGraphicsInfo): information on the animated image (such as gif) generated after converting the video.
+//
+//     Sampled screenshot information (sampleSnapshotInfo): screenshot information after sampling the video.
+//
+//     6. Image sprite information (imageSpriteInfo): image sprite information after generating the sprite from the video.
+//
+//     7. Specified time point screenshot information (snapshotByTimeOffsetInfo): screenshot information after capturing the video at specified time points.
+//
+//     8. Video timestamp info (keyFrameDescInfo): timestamp information set for the video.
+//
+//     9. Adaptive Bitrate Streaming information (adaptiveDynamicStreamingInfo): including specifications, encryption types, muxing formats, and other relevant information.
+//
+// 
+//
+// - Allow sorting the results by creation time and returning them in pages. Pagination is controlled by Offset and Limit (see input parameters).
+//
+// 
+//
+// <div id="maxResultsDesc">API result count limitation:</div>
+//
+// - <b><a href="#p_offset">Offset</a> and <a href="#p_limit">Limit</a> both affect the number of results returned in a single page query. Please pay special attention: when both of these values are missing, this API will return a maximum of 10 query results.</b>
+//
+// - <b>Supports up to 5,000 search results, and queries beyond this limit are not supported. If the search result volume is too large, it is recommended to use more refined filtering conditions to reduce search results.</b>
+//
+// 
+//
+// <br>Not recommended for conditional filtering:
+//
+// - (Not recommended: use Names, NamePrefixes, or Descriptions instead) Fuzzy search for media file names or description information with a single text (Text).
+//
+// - (Not recommended: use SourceTypes instead) Search for media files with a single source (SourceType).
+//
+// - (Not recommended: use StreamIds instead) Search for media files with a single live streaming code (StreamId).
+//
+// - (Not recommended: use CreateTime instead) Search for media files with a single start creation time (StartTime).
+//
+// - (Not recommended: use CreateTime instead) Search for media files with a single end creation time (EndTime).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -9366,79 +10509,87 @@ func (c *Client) SearchMedia(request *SearchMediaRequest) (response *SearchMedia
 }
 
 // SearchMedia
-// This API is used to search for media files by specific criteria. You can sort the results and specify the information to return.
+// Search for media information, supporting multiple condition filtering, as well as sorting and filtering of returned results. This includes:
 //
-// - Specify a list of file IDs (`FileIds`). Any file that matches one of the IDs will be returned.
+// - Specify a collection of file IDs (FileIds) to return media with any ID in the collection.
 //
-// - Specify one or multiple keywords for `Names` or `Descriptions` for fuzzy search by filename or description.
+// - Fuzzy search based on multiple media file names (Names) or description information (Descriptions).
 //
-// - Specify multiple filename prefixes (`NamePrefixes`).
+// - Search based on multiple file name prefixes (NamePrefixes).
 //
-// - Specify a list of categories (`ClassIds`). Any file that matches one of the categories will be returned. For example, assume that there are categories `Movies`, `TV Series`, and `Variety Shows`, and `Movies` has subcategories including `History`, `Action`, and `Romance`. If `ClassIds` is set to `Movies` and `TV Series`, all media files in `Movies` (including its subcategories) and `TV Series` will be returned. If `ClassIds` is set to `History` and `Action`, only the files in those two subcategories will be returned.
+// - Specify a collection of categories (ClassIds, see input parameters) to return media that meets any category in the collection. For example, media categories include movies, TV shows, variety shows, etc., and there are subcategories such as historical films, action films, and romance films under the movie category. If ClassIds specifies movies and TV shows, all subcategories under movies and TV shows will be returned; if ClassIds specifies historical films and action films, only media under these two subcategories will be returned.
 //
-// - Specify a list of labels (`Tags`). Any file that matches one or more of the labels will be returned. For example, assume that there are labels `ACG`, `Drama`, and `YTPMV`. If `Tags` is set to `ACG` and `YTPMV`, any media file with either label will be returned.
+// - Specify a collection of tags (Tags, see input parameters) to return media that meets any tag in the collection. For example, media tags include ACG, palace fighting, and ghost animal. If Tags specifies ACG and ghost animal, media that meets any of these two tags will be retrieved.
 //
-// - Specify the types (`Categories`) of media files. Any file that matches one of the types will be returned. There are three file types: `Video`, `Audio`, and `Image`. If `Categories` is set to `Video` and `Audio`, all audio and video files will be returned.
+// - Specify a collection of file types (Categories, see input parameters) to return media that meets any type in the collection. For example, file types include Video (video), Audio (audio), and Image (image). If Categories specifies Video and Audio, media that meets these types will be retrieved.
 //
-// - Specify the source types (`SourceTypes`). Any file that matches one of the source types specified will be returned. For example, if you set `SourceTypes` to `Record` (live recording) and `Upload` (upload), all recording files and uploaded files will be returned.
+// - Specify a collection of sources (SourceTypes, see input parameters) to return media that meets any source in the collection. For example, media sources include Record (live recording) and Upload (upload). If SourceTypes specifies Record and Upload, media that meets these sources will be retrieved.
 //
-// - Specify the file formats (`MediaTypes`), such as MP4, AVI, and MP3. All files in the specified formats will be returned. For example, if you set `MediaTypes` to MP4 and MP3, all files in these two formats will be returned.
+// - Specify a collection of file container formats (MediaTypes, see input parameters) to return media that meets any container format in the collection. For example, container formats include MP4, AVI, MP3, etc. If MediaTypes specifies MP4 and MP3, media that meets these container formats will be retrieved.
 //
-// - Specify the file statuses (`Status`). Files in the specified statuses will be returned. Valid values: `Normal`, `SystemForbidden` (blocked by VOD), `Forbidden` (blocked by you). If you set `Status` to `Normal` and `Forbidden`, files in either status will be returned.
+// - Specify a collection of file statuses (Status, see input parameters) to return media that meets any status in the collection. For example, file statuses include Normal (normal), SystemForbidden (platform ban), and Forbidden (active ban). If Status specifies Normal and Forbidden, media that meets these statuses will be retrieved.
 //
-// - Specify the types of moderation results (`ReviewResults`). Files that have the specified types of moderation results will be returned. Valid values include `pass`, `block`, and more. If you set `ReviewResults` to `pass` and `block`, files whose moderation result is "pass" or "block" will be returned.
+// - Specify a collection of file moderation results (ReviewResults, see input parameters) to return media that meets any status in the collection. For example, file moderation results include pass (passed) and block (not compliant). If ReviewResults specifies pass and block, media that meets these moderation results will be retrieved.
 //
-// - Specify the stream IDs (`StreamIds`) of live recording files.
+// - Filter live recorded media by specifying a collection of live streaming codes (StreamIds, see input parameters).
 //
-// - Specify a time range for search by file creation time.
+// - Filter media by specifying the creation time range of the media.
 //
-// - Specify the TRTC application IDs.
+// - Filter media by specifying a collection of TRTC application IDs.
 //
-// - Specify the TRTC room IDs.
-//
-// - Specify one keyword for `Text` for fuzzy search by filename or description. (This is not recommended. Please use `Names`, `NamePrefixes` or `Descriptions` instead.)
-//
-// - Specify one source (`SourceType`). (This is not recommended. Please use `SourceTypes` instead.)
-//
-// - Specify one stream ID (`StreamId`). (This is not recommended. Please use `StreamIds` instead.)
-//
-// - Specify the start (`StartTime`) of the time range to search by creation time. (This is not recommended. Please use `CreateTime` instead.)
-//
-// - Specify the end (`EndTime`) of the time range to search by creation time. (This is not recommended. Please use `CreateTime` instead.)
-//
-// - You can search by any combination of the parameters above. For example, you can search for media files with the label "Drama" or "Suspense" in the category of "Movies" and "TV Series" created between 12:00:00, December 1, 2018 and 12:00:00, December 8, 2018. Note that for parameters whose data type is array, the search logic between their elements is "OR". The search logic between parameters is "AND".
+// - Filter media by specifying a collection of TRTC room IDs.
 //
 // 
 //
-// - You can sort the results by creation time and return them in multiple pages by specifying `Offset` and `Limit`.
-//
-// - You can use `Filters` to specify the types of file information to return (all types are returned by default). Valid values:
-//
-//     1. `basicInfo`: The file name, category, playback URL, thumbnail, etc.
-//
-//     2. `metaData`: The file size, duration, video stream information, audio stream information, etc.
-//
-//     3. `transcodeInfo`: The URLs, video stream parameters, and audio stream parameters of transcoding outputs.
-//
-//     4. `animatedGraphicsInfo`: The information of the animated images (such as GIF images) generated.
-//
-//     5. `sampleSnapshotInfo`: The information of the sampled screenshots generated.
-//
-//     6. `imageSpriteInfo`: The information of the image sprites generated.
-//
-//     7. `snapshotByTimeOffsetInfo`: The information of the time point screenshots generated.
-//
-//     8. `keyFrameDescInfo`: The video timestamp information.
-//
-//     9. `adaptiveDynamicStreamingInfo`: The specification, encryption type, format, etc.
+// - The above parameters can be combined in any way to search. For example, filter media created between 12:00:00 on December 1, 2018, and 12:00:00 on December 8, 2018, categorized as movies or TV shows, and tagged with palace fighting and suspense. Note that the search logic for elements of any parameter that supports array input is 'or'. The logical relationship between all parameters is 'and'
 //
 // 
 //
-// <div id="maxResultsDesc">Limits for returned records:</div>
+// - Allow to control the type of media information returned through Filters (default to return all information). Optional inputs include:
 //
-// - The <b><a href="#p_offset">Offset</a> and <a href="#p_limit">Limit</a> parameters determine the number of records per page. If neither parameter is passed, this API will return up to 10 records.</b>
+//     1. Basic information (basicInfo): including media name, category, playback URL, cover image, etc.
 //
-// - <b>Up to 5,000 records can be returned. If a request returns too many records, we recommend you use more specific search criteria to narrow down the results.</b>
+//     2. Metadata (metaData): including size, duration, video stream information, audio stream information, etc.
+//
+//     3. Transcoding result information (transcodeInfo): including the media addresses, video stream parameters, audio stream parameters, etc., generated by transcoding the media into various specifications.
+//
+//     4.  Animated image result information (animatedGraphicsInfo): information on the animated image (such as gif) generated after converting the video.
+//
+//     Sampled screenshot information (sampleSnapshotInfo): screenshot information after sampling the video.
+//
+//     6. Image sprite information (imageSpriteInfo): image sprite information after generating the sprite from the video.
+//
+//     7. Specified time point screenshot information (snapshotByTimeOffsetInfo): screenshot information after capturing the video at specified time points.
+//
+//     8. Video timestamp info (keyFrameDescInfo): timestamp information set for the video.
+//
+//     9. Adaptive Bitrate Streaming information (adaptiveDynamicStreamingInfo): including specifications, encryption types, muxing formats, and other relevant information.
+//
+// 
+//
+// - Allow sorting the results by creation time and returning them in pages. Pagination is controlled by Offset and Limit (see input parameters).
+//
+// 
+//
+// <div id="maxResultsDesc">API result count limitation:</div>
+//
+// - <b><a href="#p_offset">Offset</a> and <a href="#p_limit">Limit</a> both affect the number of results returned in a single page query. Please pay special attention: when both of these values are missing, this API will return a maximum of 10 query results.</b>
+//
+// - <b>Supports up to 5,000 search results, and queries beyond this limit are not supported. If the search result volume is too large, it is recommended to use more refined filtering conditions to reduce search results.</b>
+//
+// 
+//
+// <br>Not recommended for conditional filtering:
+//
+// - (Not recommended: use Names, NamePrefixes, or Descriptions instead) Fuzzy search for media file names or description information with a single text (Text).
+//
+// - (Not recommended: use SourceTypes instead) Search for media files with a single source (SourceType).
+//
+// - (Not recommended: use StreamIds instead) Search for media files with a single live streaming code (StreamId).
+//
+// - (Not recommended: use CreateTime instead) Search for media files with a single start creation time (StartTime).
+//
+// - (Not recommended: use CreateTime instead) Search for media files with a single end creation time (EndTime).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -9693,6 +10844,71 @@ func (c *Client) SimpleHlsClipWithContext(ctx context.Context, request *SimpleHl
     return
 }
 
+func NewSplitMediaRequest() (request *SplitMediaRequest) {
+    request = &SplitMediaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "SplitMedia")
+    
+    
+    return
+}
+
+func NewSplitMediaResponse() (response *SplitMediaResponse) {
+    response = &SplitMediaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SplitMedia
+// Split the video into strips to generate multiple new videos.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) SplitMedia(request *SplitMediaRequest) (response *SplitMediaResponse, err error) {
+    return c.SplitMediaWithContext(context.Background(), request)
+}
+
+// SplitMedia
+// Split the video into strips to generate multiple new videos.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) SplitMediaWithContext(ctx context.Context, request *SplitMediaRequest) (response *SplitMediaResponse, err error) {
+    if request == nil {
+        request = NewSplitMediaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SplitMedia require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSplitMediaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStartCDNDomainRequest() (request *StartCDNDomainRequest) {
     request = &StartCDNDomainRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -9713,7 +10929,7 @@ func NewStartCDNDomainResponse() (response *StartCDNDomainResponse) {
 }
 
 // StartCDNDomain
-// This interface is used to enable/disable CDN accelerated domain names.
+// This API is used for enabling/disabling the CDN acceleration domain.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -9723,7 +10939,7 @@ func (c *Client) StartCDNDomain(request *StartCDNDomainRequest) (response *Start
 }
 
 // StartCDNDomain
-// This interface is used to enable/disable CDN accelerated domain names.
+// This API is used for enabling/disabling the CDN acceleration domain.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -9740,6 +10956,61 @@ func (c *Client) StartCDNDomainWithContext(ctx context.Context, request *StartCD
     request.SetContext(ctx)
     
     response = NewStartCDNDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewVerifyDomainRecordRequest() (request *VerifyDomainRecordRequest) {
+    request = &VerifyDomainRecordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "VerifyDomainRecord")
+    
+    
+    return
+}
+
+func NewVerifyDomainRecordResponse() (response *VerifyDomainRecordResponse) {
+    response = &VerifyDomainRecordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// VerifyDomainRecord
+// This API is used to verify the domain name resolution value.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) VerifyDomainRecord(request *VerifyDomainRecordRequest) (response *VerifyDomainRecordResponse, err error) {
+    return c.VerifyDomainRecordWithContext(context.Background(), request)
+}
+
+// VerifyDomainRecord
+// This API is used to verify the domain name resolution value.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) VerifyDomainRecordWithContext(ctx context.Context, request *VerifyDomainRecordRequest) (response *VerifyDomainRecordResponse, err error) {
+    if request == nil {
+        request = NewVerifyDomainRecordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("VerifyDomainRecord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewVerifyDomainRecordResponse()
     err = c.Send(request, response)
     return
 }

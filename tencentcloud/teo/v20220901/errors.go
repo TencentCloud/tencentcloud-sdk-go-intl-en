@@ -197,10 +197,13 @@ const (
 	// ELSE is not supported for origin server modification.
 	INVALIDPARAMETER_ERRINVALIDELSEWHENMODIFYORIGINACTIONCONFIGURED = "InvalidParameter.ErrInvalidElseWhenModifyOriginActionConfigured"
 
+	// 
+	INVALIDPARAMETER_ERRNILCONDITION = "InvalidParameter.ErrNilCondition"
+
 	// To enable gRPC support, HTTP/2 support must be enabled as well.
 	INVALIDPARAMETER_GRPCREQUIREHTTP2 = "InvalidParameter.GrpcRequireHttp2"
 
-	// 
+	// Host header error
 	INVALIDPARAMETER_HOSTHEADERINVALID = "InvalidParameter.HostHeaderInvalid"
 
 	// The domain name does not exist.
@@ -214,6 +217,9 @@ const (
 
 	// Invalid token authentication.
 	INVALIDPARAMETER_INVALIDAUTHENTICATION = "InvalidParameter.InvalidAuthentication"
+
+	// 
+	INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPEEXPIRETIME = "InvalidParameter.InvalidAuthenticationTypeExpireTime"
 
 	// Invalid key for token authentication.
 	INVALIDPARAMETER_INVALIDAUTHENTICATIONTYPESECRETKEY = "InvalidParameter.InvalidAuthenticationTypeSecretKey"
@@ -233,7 +239,7 @@ const (
 	// Invalid region. Please fill in a correct region of the third-party object storage service.
 	INVALIDPARAMETER_INVALIDAWSREGION = "InvalidParameter.InvalidAwsRegion"
 
-	// 
+	// Invalid third-party object storage.
 	INVALIDPARAMETER_INVALIDAWSSECRETKEY = "InvalidParameter.InvalidAwsSecretKey"
 
 	// Invalid secondary origin domain.
@@ -332,7 +338,7 @@ const (
 	// AccessKeyId and SecretAccessKey u200dare required to access the third-party object storage.
 	INVALIDPARAMETER_INVALIDPRIVATEACCESSPARAMS = "InvalidParameter.InvalidPrivateAccessParams"
 
-	// 
+	// The value of `PrivateAccess` should be `on` or `off`.
 	INVALIDPARAMETER_INVALIDPRIVATEACCESSSWITCH = "InvalidParameter.InvalidPrivateAccessSwitch"
 
 	// The plan does not support QUIC.
@@ -416,13 +422,13 @@ const (
 	// The origin address cannot be a private IP address.
 	INVALIDPARAMETER_ORIGINISINNERIP = "InvalidParameter.OriginIsInnerIp"
 
-	// 
+	// The origin group name already exists.
 	INVALIDPARAMETER_ORIGINNAMEEXISTS = "InvalidParameter.OriginNameExists"
 
 	// The origin group ID is required.
 	INVALIDPARAMETER_ORIGINORIGINGROUPIDISREQUIRED = "InvalidParameter.OriginOriginGroupIdIsRequired"
 
-	// 
+	// Incorrect origin server format. 
 	INVALIDPARAMETER_ORIGINRECORDFORMATERROR = "InvalidParameter.OriginRecordFormatError"
 
 	// Parameter error: Invalid “End time”. The interval between the start and end time cannot exceed 7 days.
@@ -434,20 +440,29 @@ const (
 	// Maximum upload size exceeded.
 	INVALIDPARAMETER_POSTMAXSIZELIMITEXCEEDED = "InvalidParameter.PostMaxSizeLimitExceeded"
 
-	// 
+	// The instance name already exists.
 	INVALIDPARAMETER_PROXYNAMEDUPLICATING = "InvalidParameter.ProxyNameDuplicating"
 
 	// 
+	INVALIDPARAMETER_RULEORIGINFORMATERROR = "InvalidParameter.RuleOriginFormatError"
+
+	// The origin of the rule does not support multiple domain names.
 	INVALIDPARAMETER_RULEORIGINMULTIDOMAIN = "InvalidParameter.RuleOriginMultiDomain"
 
-	// 
+	// The origin port of the rule must be an integer.
 	INVALIDPARAMETER_RULEORIGINPORTINTEGER = "InvalidParameter.RuleOriginPortInteger"
 
 	// Invalid origin in the rule.
 	INVALIDPARAMETER_RULEORIGINVALUEERROR = "InvalidParameter.RuleOriginValueError"
 
-	// 
+	// The rule port already exists.
 	INVALIDPARAMETER_RULEPORTDUPLICATING = "InvalidParameter.RulePortDuplicating"
+
+	// 
+	INVALIDPARAMETER_RULEPORTGROUP = "InvalidParameter.RulePortGroup"
+
+	// 
+	INVALIDPARAMETER_RULEPORTINTEGER = "InvalidParameter.RulePortInteger"
 
 	// Invalid parameter.
 	INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
@@ -503,7 +518,7 @@ const (
 	// The specified domain name does not match the site. 
 	INVALIDPARAMETERVALUE_DOMAINNOTMATCHZONE = "InvalidParameterValue.DomainNotMatchZone"
 
-	// 
+	// Invalid alias domain suffix. This domain is for internal usage and cannot be used as the alias domain.
 	INVALIDPARAMETERVALUE_INVALIDALIASNAMESUFFIX = "InvalidParameterValue.InvalidAliasNameSuffix"
 
 	// Incorrect DNS record.
@@ -566,7 +581,7 @@ const (
 	// Cross-MLC-border acceleration and IPv6 cannot be configured at the same time.
 	OPERATIONDENIED_ACCELERATEMAINLANDIPV6CONFLICT = "OperationDenied.AccelerateMainlandIpv6Conflict"
 
-	// 
+	// An L7 DNS service referencing the origin group is being deployed. Please edit later.
 	OPERATIONDENIED_ACCELERATIONDOMAINSTATUSNOTINONLINE = "OperationDenied.AccelerationDomainStatusNotInOnline"
 
 	// The configuration is locked. Please unlock and try again.
@@ -611,7 +626,7 @@ const (
 	// The EdgeOne service cannot be disabled for the site: An accelerated domain name is being deployed.
 	OPERATIONDENIED_L7HOSTINPROCESSSTATUS = "OperationDenied.L7HostInProcessStatus"
 
-	// 
+	// The site status does not support operations on load balancers.
 	OPERATIONDENIED_LOADBALANCINGZONEISNOTACTIVE = "OperationDenied.LoadBalancingZoneIsNotActive"
 
 	// Unable to switch to NS for multiple sites using CNAME.
@@ -626,13 +641,13 @@ const (
 	// You can only switch a site connected without a domain name to connecting via the CNAME. Other operations are not allowed.
 	OPERATIONDENIED_NODOMAINACCESSZONEONLYSUPPORTMODIFYTYPE = "OperationDenied.NoDomainAccessZoneOnlySupportModifyType"
 
-	// 
+	// Failed to delete: The acceleration domain name is in use. 
 	OPERATIONDENIED_ORIGINGROUPACCELERATIONDOMAINUSED = "OperationDenied.OriginGroupAccelerationDomainUsed"
 
 	// The specified plan does not support changing the service area of the site.
 	OPERATIONDENIED_PLANNOTSUPPORTMODIFYZONEAREA = "OperationDenied.PlanNotSupportModifyZoneArea"
 
-	// 
+	// This site is using Anycast IP scheduling mode and does not support Cross-MLC-border acceleration. 
 	OPERATIONDENIED_PLATTYPEIPACCELERATEMAINLANDNOTSUPPORT = "OperationDenied.PlatTypeIPAccelerateMainlandNotSupport"
 
 	// The DNS record cannot be added.
@@ -653,7 +668,7 @@ const (
 	// The shared CNAME has been bound to another site. Please unbind first.
 	OPERATIONDENIED_ZONEISBINDINGSHAREDCNAME = "OperationDenied.ZoneIsBindingSharedCNAME"
 
-	// 
+	// Error found in the associated custom error page. Please unbind it first.
 	OPERATIONDENIED_ZONEISREFERENCECUSTOMERRORPAGE = "OperationDenied.ZoneIsReferenceCustomErrorPage"
 
 	// The resource is occupied.

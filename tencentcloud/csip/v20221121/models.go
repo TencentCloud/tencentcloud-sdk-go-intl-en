@@ -617,7 +617,7 @@ type AssetViewWeakPassRisk struct {
 }
 
 type BugInfoDetail struct {
-	// Type of the query action. `1`: Query emergency vulnerabilities; `2`: Query all vulnerabilities; `3`: Query a specific vulnerability. When `Id=3`, `CVEId` is required. 
+	// Vulnerability ID
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Id *uint64 `json:"Id,omitnil" name:"Id"`
 
@@ -677,19 +677,19 @@ type BugInfoDetail struct {
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	ProSupport *uint64 `json:"ProSupport,omitnil" name:"ProSupport"`
 
-	// Published or not, `0`: Not published; `1`: Published.
+	// Specify whether the vulnerability is published as an emergency vulnerability. `1`: Published as an emergency vulnerability; `0`: Not an emergency vulnerability.
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	IsPublish *uint64 `json:"IsPublish,omitnil" name:"IsPublish"`
 
-	// Release time
+	// Disclosure time of the vulnerability. 
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	ReleaseTime *string `json:"ReleaseTime,omitnil" name:"ReleaseTime"`
 
-	// Creation time
+	// The time when the vulnerability is added to the vulnerability database.
 	// Note: u200dThis field may return `null`, indicating that no valid values can be obtained.
 	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 
-	// Update time
+	// The last update time of the vulnerability in the database
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
 
@@ -826,15 +826,15 @@ type CVMAssetVO struct {
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	PortCount *uint64 `json:"PortCount,omitnil" name:"PortCount"`
 
-	// Network attacks
+	// Number of network attacks
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Attack *uint64 `json:"Attack,omitnil" name:"Attack"`
 
-	// Network access
+	// Number of network access requests
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Access *uint64 `json:"Access,omitnil" name:"Access"`
 
-	// Network interception
+	// Number of blocked attacks
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Intercept *uint64 `json:"Intercept,omitnil" name:"Intercept"`
 
@@ -1883,7 +1883,7 @@ type DescribeDomainAssetsResponseParams struct {
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Data []*DomainAssetVO `json:"Data,omitnil" name:"Data"`
 
-	// List of protection status
+	// List of WAF protection status
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	DefenseStatusList []*FilterDataObject `json:"DefenseStatusList,omitnil" name:"DefenseStatusList"`
 
@@ -2033,7 +2033,7 @@ type DescribePublicIpAssetsResponseParams struct {
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	AssetLocationList []*FilterDataObject `json:"AssetLocationList,omitnil" name:"AssetLocationList"`
 
-	// List of IPs
+	// List of IP types
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	IpTypeList []*FilterDataObject `json:"IpTypeList,omitnil" name:"IpTypeList"`
 
@@ -2120,7 +2120,7 @@ type DescribeRiskCenterAssetViewCFGRiskListResponseParams struct {
 	// List of configuration risks
 	Data []*AssetViewCFGRisk `json:"Data,omitnil" name:"Data"`
 
-	// List of status
+	// List of risk handling status
 	StatusLists []*FilterDataObject `json:"StatusLists,omitnil" name:"StatusLists"`
 
 	// List of risk levels
@@ -2205,7 +2205,7 @@ type DescribeRiskCenterAssetViewPortRiskListResponseParams struct {
 	// List of configuration risks
 	Data []*AssetViewPortRisk `json:"Data,omitnil" name:"Data"`
 
-	// List of status
+	// List of risk handling status
 	StatusLists []*FilterDataObject `json:"StatusLists,omitnil" name:"StatusLists"`
 
 	// List of risk levels
@@ -2287,7 +2287,7 @@ type DescribeRiskCenterAssetViewVULRiskListResponseParams struct {
 	// List of vulnerabilities
 	Data []*AssetViewVULRisk `json:"Data,omitnil" name:"Data"`
 
-	// List of status
+	// List of risk handling status
 	StatusLists []*FilterDataObject `json:"StatusLists,omitnil" name:"StatusLists"`
 
 	// List of risk levels
@@ -2369,7 +2369,7 @@ type DescribeRiskCenterAssetViewWeakPasswordRiskListResponseParams struct {
 	// List of risks
 	Data []*AssetViewWeakPassRisk `json:"Data,omitnil" name:"Data"`
 
-	// List of status
+	// List of risk handling status
 	StatusLists []*FilterDataObject `json:"StatusLists,omitnil" name:"StatusLists"`
 
 	// List of risk levels
@@ -2673,7 +2673,7 @@ type DescribeRiskCenterWebsiteRiskListResponseParams struct {
 	// List of content risks
 	Data []*WebsiteRisk `json:"Data,omitnil" name:"Data"`
 
-	// List of status
+	// List of risk handling status
 	StatusLists []*FilterDataObject `json:"StatusLists,omitnil" name:"StatusLists"`
 
 	// List of risk levels
@@ -3333,7 +3333,7 @@ type DomainAssetVO struct {
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Access *uint64 `json:"Access,omitnil" name:"Access"`
 
-	// Network interception
+	// Number of blocked attacks
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Intercept *uint64 `json:"Intercept,omitnil" name:"Intercept"`
 
@@ -3433,7 +3433,7 @@ type DomainAssetVO struct {
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	VerifyStatus *int64 `json:"VerifyStatus,omitnil" name:"VerifyStatus"`
 
-	// Bot access data
+	// u200cNumber of bot attacks
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	BotAccessCount *int64 `json:"BotAccessCount,omitnil" name:"BotAccessCount"`
 }
@@ -3529,15 +3529,15 @@ type IpAssetListVO struct {
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	IsCloud *uint64 `json:"IsCloud,omitnil" name:"IsCloud"`
 
-	// Network attacks
+	// Number of network attacks
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Attack *uint64 `json:"Attack,omitnil" name:"Attack"`
 
-	// Network access
+	// Number of network access requests
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Access *uint64 `json:"Access,omitnil" name:"Access"`
 
-	// Network Interception
+	// Number of blocked attacks
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Intercept *uint64 `json:"Intercept,omitnil" name:"Intercept"`
 
@@ -4238,7 +4238,7 @@ type TaskAssetObject struct {
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Region *string `json:"Region,omitnil" name:"Region"`
 
-	// Unique ID of Multi-cloud asset
+	// The ID specific for an asset synched from another cloud platform
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Arn *string `json:"Arn,omitnil" name:"Arn"`
 }
