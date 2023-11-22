@@ -214,6 +214,65 @@ func (c *Client) CreateStreamPackageChannelEndpointWithContext(ctx context.Conte
     return
 }
 
+func NewCreateStreamPackageHarvestJobRequest() (request *CreateStreamPackageHarvestJobRequest) {
+    request = &CreateStreamPackageHarvestJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "CreateStreamPackageHarvestJob")
+    
+    
+    return
+}
+
+func NewCreateStreamPackageHarvestJobResponse() (response *CreateStreamPackageHarvestJobResponse) {
+    response = &CreateStreamPackageHarvestJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateStreamPackageHarvestJob
+// Create HarvestJob.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) CreateStreamPackageHarvestJob(request *CreateStreamPackageHarvestJobRequest) (response *CreateStreamPackageHarvestJobResponse, err error) {
+    return c.CreateStreamPackageHarvestJobWithContext(context.Background(), request)
+}
+
+// CreateStreamPackageHarvestJob
+// Create HarvestJob.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_OUTPUTGROUPS = "InvalidParameter.OutputGroups"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) CreateStreamPackageHarvestJobWithContext(ctx context.Context, request *CreateStreamPackageHarvestJobRequest) (response *CreateStreamPackageHarvestJobResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamPackageHarvestJobRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamPackageHarvestJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateStreamPackageHarvestJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteStreamPackageChannelEndpointsRequest() (request *DeleteStreamPackageChannelEndpointsRequest) {
     request = &DeleteStreamPackageChannelEndpointsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -320,6 +379,120 @@ func (c *Client) DeleteStreamPackageChannelsWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDeleteStreamPackageChannelsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteStreamPackageHarvestJobRequest() (request *DeleteStreamPackageHarvestJobRequest) {
+    request = &DeleteStreamPackageHarvestJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageHarvestJob")
+    
+    
+    return
+}
+
+func NewDeleteStreamPackageHarvestJobResponse() (response *DeleteStreamPackageHarvestJobResponse) {
+    response = &DeleteStreamPackageHarvestJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteStreamPackageHarvestJob
+// Delete HarvestJob.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) DeleteStreamPackageHarvestJob(request *DeleteStreamPackageHarvestJobRequest) (response *DeleteStreamPackageHarvestJobResponse, err error) {
+    return c.DeleteStreamPackageHarvestJobWithContext(context.Background(), request)
+}
+
+// DeleteStreamPackageHarvestJob
+// Delete HarvestJob.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) DeleteStreamPackageHarvestJobWithContext(ctx context.Context, request *DeleteStreamPackageHarvestJobRequest) (response *DeleteStreamPackageHarvestJobResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamPackageHarvestJobRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamPackageHarvestJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamPackageHarvestJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteStreamPackageHarvestJobsRequest() (request *DeleteStreamPackageHarvestJobsRequest) {
+    request = &DeleteStreamPackageHarvestJobsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageHarvestJobs")
+    
+    
+    return
+}
+
+func NewDeleteStreamPackageHarvestJobsResponse() (response *DeleteStreamPackageHarvestJobsResponse) {
+    response = &DeleteStreamPackageHarvestJobsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteStreamPackageHarvestJobs
+// Deleting HarvestJobs in Batch.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) DeleteStreamPackageHarvestJobs(request *DeleteStreamPackageHarvestJobsRequest) (response *DeleteStreamPackageHarvestJobsResponse, err error) {
+    return c.DeleteStreamPackageHarvestJobsWithContext(context.Background(), request)
+}
+
+// DeleteStreamPackageHarvestJobs
+// Deleting HarvestJobs in Batch.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) DeleteStreamPackageHarvestJobsWithContext(ctx context.Context, request *DeleteStreamPackageHarvestJobsRequest) (response *DeleteStreamPackageHarvestJobsResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamPackageHarvestJobsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamPackageHarvestJobs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamPackageHarvestJobsResponse()
     err = c.Send(request, response)
     return
 }
@@ -432,6 +605,120 @@ func (c *Client) DescribeStreamPackageChannelsWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeStreamPackageChannelsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageHarvestJobRequest() (request *DescribeStreamPackageHarvestJobRequest) {
+    request = &DescribeStreamPackageHarvestJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageHarvestJob")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageHarvestJobResponse() (response *DescribeStreamPackageHarvestJobResponse) {
+    response = &DescribeStreamPackageHarvestJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageHarvestJob
+// Query HarvestJob.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) DescribeStreamPackageHarvestJob(request *DescribeStreamPackageHarvestJobRequest) (response *DescribeStreamPackageHarvestJobResponse, err error) {
+    return c.DescribeStreamPackageHarvestJobWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageHarvestJob
+// Query HarvestJob.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) DescribeStreamPackageHarvestJobWithContext(ctx context.Context, request *DescribeStreamPackageHarvestJobRequest) (response *DescribeStreamPackageHarvestJobResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageHarvestJobRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageHarvestJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageHarvestJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageHarvestJobsRequest() (request *DescribeStreamPackageHarvestJobsRequest) {
+    request = &DescribeStreamPackageHarvestJobsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageHarvestJobs")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageHarvestJobsResponse() (response *DescribeStreamPackageHarvestJobsResponse) {
+    response = &DescribeStreamPackageHarvestJobsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageHarvestJobs
+// Batch query HarvestJob.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) DescribeStreamPackageHarvestJobs(request *DescribeStreamPackageHarvestJobsRequest) (response *DescribeStreamPackageHarvestJobsResponse, err error) {
+    return c.DescribeStreamPackageHarvestJobsWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageHarvestJobs
+// Batch query HarvestJob.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) DescribeStreamPackageHarvestJobsWithContext(ctx context.Context, request *DescribeStreamPackageHarvestJobsRequest) (response *DescribeStreamPackageHarvestJobsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageHarvestJobsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageHarvestJobs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageHarvestJobsResponse()
     err = c.Send(request, response)
     return
 }

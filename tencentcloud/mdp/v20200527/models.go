@@ -262,6 +262,124 @@ func (r *CreateStreamPackageChannelResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateStreamPackageHarvestJobRequestParams struct {
+	// Task ID, a globally unique identifier, ID can contain up to 128 characters. Supported characters are numbers, letters, underscores (_), and dashes (-).
+	ID *string `json:"ID,omitnil" name:"ID"`
+
+	// The associated channel name.
+	ChannelName *string `json:"ChannelName,omitnil" name:"ChannelName"`
+
+	// The associated endpoint name, StreamPackage only supports harvesting content from HLS and DASH endpoints that have startover turned on.
+	EndpointName *string `json:"EndpointName,omitnil" name:"EndpointName"`
+
+	// Time format, supports the following types: 
+	// 1. Epoch seconds 
+	// 2. ISO-8601.
+	TimeFormat *string `json:"TimeFormat,omitnil" name:"TimeFormat"`
+
+	// Task start time supports two formats for TimeFormat input: 
+	// 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 
+	// 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+
+	// Task end time supports two formats for TimeFormat input: 
+	// 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 
+	// 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+
+	// The COS bucket address where the recording file is stored in COS, format: https://{Bucket_name}-{AppId}.cos.{Region}.myqcloud.com/.
+	Destination *string `json:"Destination,omitnil" name:"Destination"`
+
+	// The path in the cos bucket and identifier for the parent manifest for the live-to-VOD asset, fotmat: {path 1}/xxx/{path n}/{name}.m3u8.
+	Manifest *string `json:"Manifest,omitnil" name:"Manifest"`
+}
+
+type CreateStreamPackageHarvestJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task ID, a globally unique identifier, ID can contain up to 128 characters. Supported characters are numbers, letters, underscores (_), and dashes (-).
+	ID *string `json:"ID,omitnil" name:"ID"`
+
+	// The associated channel name.
+	ChannelName *string `json:"ChannelName,omitnil" name:"ChannelName"`
+
+	// The associated endpoint name, StreamPackage only supports harvesting content from HLS and DASH endpoints that have startover turned on.
+	EndpointName *string `json:"EndpointName,omitnil" name:"EndpointName"`
+
+	// Time format, supports the following types: 
+	// 1. Epoch seconds 
+	// 2. ISO-8601.
+	TimeFormat *string `json:"TimeFormat,omitnil" name:"TimeFormat"`
+
+	// Task start time supports two formats for TimeFormat input: 
+	// 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 
+	// 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+
+	// Task end time supports two formats for TimeFormat input: 
+	// 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 
+	// 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+
+	// The COS bucket address where the recording file is stored in COS, format: https://{Bucket_name}-{AppId}.cos.{Region}.myqcloud.com/.
+	Destination *string `json:"Destination,omitnil" name:"Destination"`
+
+	// The path in the cos bucket and identifier for the parent manifest for the live-to-VOD asset, fotmat: {path 1}/xxx/{path n}/{name}.m3u8.
+	Manifest *string `json:"Manifest,omitnil" name:"Manifest"`
+}
+
+func (r *CreateStreamPackageHarvestJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamPackageHarvestJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ID")
+	delete(f, "ChannelName")
+	delete(f, "EndpointName")
+	delete(f, "TimeFormat")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Destination")
+	delete(f, "Manifest")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamPackageHarvestJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateStreamPackageHarvestJobResponseParams struct {
+	// HarvestJob information.
+	Info *HarvestJobResp `json:"Info,omitnil" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type CreateStreamPackageHarvestJobResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateStreamPackageHarvestJobResponseParams `json:"Response"`
+}
+
+func (r *CreateStreamPackageHarvestJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamPackageHarvestJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteStreamPackageChannelEndpointsRequestParams struct {
 	// Channel ID
 	Id *string `json:"Id,omitnil" name:"Id"`
@@ -379,6 +497,114 @@ func (r *DeleteStreamPackageChannelsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteStreamPackageChannelsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageHarvestJobRequestParams struct {
+	// Task ID, a globally unique identifier.
+	ID *string `json:"ID,omitnil" name:"ID"`
+}
+
+type DeleteStreamPackageHarvestJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task ID, a globally unique identifier.
+	ID *string `json:"ID,omitnil" name:"ID"`
+}
+
+func (r *DeleteStreamPackageHarvestJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageHarvestJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamPackageHarvestJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageHarvestJobResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DeleteStreamPackageHarvestJobResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteStreamPackageHarvestJobResponseParams `json:"Response"`
+}
+
+func (r *DeleteStreamPackageHarvestJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageHarvestJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageHarvestJobsRequestParams struct {
+	// Task IDs, id is a globally unique identifier.
+	IDs []*string `json:"IDs,omitnil" name:"IDs"`
+}
+
+type DeleteStreamPackageHarvestJobsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task IDs, id is a globally unique identifier.
+	IDs []*string `json:"IDs,omitnil" name:"IDs"`
+}
+
+func (r *DeleteStreamPackageHarvestJobsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageHarvestJobsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IDs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamPackageHarvestJobsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageHarvestJobsResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DeleteStreamPackageHarvestJobsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteStreamPackageHarvestJobsResponseParams `json:"Response"`
+}
+
+func (r *DeleteStreamPackageHarvestJobsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageHarvestJobsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -516,6 +742,143 @@ func (r *DescribeStreamPackageChannelsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamPackageHarvestJobRequestParams struct {
+	// Task ID, a globally unique identifier.
+	ID *string `json:"ID,omitnil" name:"ID"`
+}
+
+type DescribeStreamPackageHarvestJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Task ID, a globally unique identifier.
+	ID *string `json:"ID,omitnil" name:"ID"`
+}
+
+func (r *DescribeStreamPackageHarvestJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageHarvestJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageHarvestJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageHarvestJobResponseParams struct {
+	// HarvestJob information.
+	Info *HarvestJobResp `json:"Info,omitnil" name:"Info"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeStreamPackageHarvestJobResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageHarvestJobResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageHarvestJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageHarvestJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageHarvestJobsRequestParams struct {
+	// The bound channel name. If not passed, all channels will be queried by default.
+	ChannelName *string `json:"ChannelName,omitnil" name:"ChannelName"`
+
+	// Page number.
+	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+
+	// PageSize.
+	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+}
+
+type DescribeStreamPackageHarvestJobsRequest struct {
+	*tchttp.BaseRequest
+	
+	// The bound channel name. If not passed, all channels will be queried by default.
+	ChannelName *string `json:"ChannelName,omitnil" name:"ChannelName"`
+
+	// Page number.
+	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+
+	// PageSize.
+	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+}
+
+func (r *DescribeStreamPackageHarvestJobsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageHarvestJobsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChannelName")
+	delete(f, "PageNum")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageHarvestJobsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageHarvestJobsResponseParams struct {
+	// HarvestJob information list.
+	Infos []*HarvestJobResp `json:"Infos,omitnil" name:"Infos"`
+
+	// Page number.
+	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+
+	// PageSize
+	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+
+	// TotalNum
+	TotalNum *uint64 `json:"TotalNum,omitnil" name:"TotalNum"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeStreamPackageHarvestJobsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageHarvestJobsResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageHarvestJobsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageHarvestJobsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type EndpointAuthInfo struct {
 	// The security group allowlist in CIDR format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -539,6 +902,47 @@ type EndpointInfo struct {
 
 	// Endpoint authentication information.
 	AuthInfo *EndpointAuthInfo `json:"AuthInfo,omitnil" name:"AuthInfo"`
+}
+
+type HarvestJobResp struct {
+	// Job ID, a globally unique identifier.
+	ID *string `json:"ID,omitnil" name:"ID"`
+
+	// The associated channel name.
+	ChannelName *string `json:"ChannelName,omitnil" name:"ChannelName"`
+
+	// The associated endpoint name.
+	EndpointName *string `json:"EndpointName,omitnil" name:"EndpointName"`
+
+	// Time format, supports the following types: 1. Epoch seconds 2. ISO-8601
+	TimeFormat *string `json:"TimeFormat,omitnil" name:"TimeFormat"`
+
+	// Job start time.
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+
+	// Job end time.
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+
+	// The path where the recording file is stored in COS.
+	Destination *string `json:"Destination,omitnil" name:"Destination"`
+
+	// The file name of the recording file stored in COS.
+	Manifest *string `json:"Manifest,omitnil" name:"Manifest"`
+
+	// The task status is divided into running: Running, execution completed: Completed, and execution failure: Failed.
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// Job error message.
+	ErrMessage *string `json:"ErrMessage,omitnil" name:"ErrMessage"`
+
+	// Job creation time, timestamp in seconds.
+	CreateTime *uint64 `json:"CreateTime,omitnil" name:"CreateTime"`
+
+	// The associated ChannelID.
+	ChannelId *string `json:"ChannelId,omitnil" name:"ChannelId"`
+
+	// The region corresponding to the harvest job.
+	Region *string `json:"Region,omitnil" name:"Region"`
 }
 
 type InputAuthInfo struct {
