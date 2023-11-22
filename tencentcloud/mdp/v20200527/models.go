@@ -263,68 +263,56 @@ func (r *CreateStreamPackageChannelResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateStreamPackageHarvestJobRequestParams struct {
-	// Task ID, a globally unique identifier, ID can contain up to 128 characters. Supported characters are numbers, letters, underscores (_), and dashes (-).
+	// HarvestJob ID, a globally unique identifier.
 	ID *string `json:"ID,omitnil" name:"ID"`
 
 	// The associated channel name.
 	ChannelName *string `json:"ChannelName,omitnil" name:"ChannelName"`
 
-	// The associated endpoint name, StreamPackage only supports harvesting content from HLS and DASH endpoints that have startover turned on.
+	// The associated endpoint name.
 	EndpointName *string `json:"EndpointName,omitnil" name:"EndpointName"`
 
-	// Time format, supports the following types: 
-	// 1. Epoch seconds 
-	// 2. ISO-8601.
+	// Time format, supports the following types: 1. Epoch seconds 2. ISO-8601
 	TimeFormat *string `json:"TimeFormat,omitnil" name:"TimeFormat"`
 
-	// Task start time supports two formats for TimeFormat input: 
-	// 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 
-	// 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
+	// Task start time supports two formats for TimeFormat input: 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
-	// Task end time supports two formats for TimeFormat input: 
-	// 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 
-	// 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
+	// Task end time supports two formats for TimeFormat input: 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// The COS bucket address where the recording file is stored in COS, format: https://{Bucket_name}-{AppId}.cos.{Region}.myqcloud.com/.
+	// The path where the recording file is stored in Cos.
 	Destination *string `json:"Destination,omitnil" name:"Destination"`
 
-	// The path in the cos bucket and identifier for the parent manifest for the live-to-VOD asset, fotmat: {path 1}/xxx/{path n}/{name}.m3u8.
+	// The file name of the recording file stored in Cos.
 	Manifest *string `json:"Manifest,omitnil" name:"Manifest"`
 }
 
 type CreateStreamPackageHarvestJobRequest struct {
 	*tchttp.BaseRequest
 	
-	// Task ID, a globally unique identifier, ID can contain up to 128 characters. Supported characters are numbers, letters, underscores (_), and dashes (-).
+	// HarvestJob ID, a globally unique identifier.
 	ID *string `json:"ID,omitnil" name:"ID"`
 
 	// The associated channel name.
 	ChannelName *string `json:"ChannelName,omitnil" name:"ChannelName"`
 
-	// The associated endpoint name, StreamPackage only supports harvesting content from HLS and DASH endpoints that have startover turned on.
+	// The associated endpoint name.
 	EndpointName *string `json:"EndpointName,omitnil" name:"EndpointName"`
 
-	// Time format, supports the following types: 
-	// 1. Epoch seconds 
-	// 2. ISO-8601.
+	// Time format, supports the following types: 1. Epoch seconds 2. ISO-8601
 	TimeFormat *string `json:"TimeFormat,omitnil" name:"TimeFormat"`
 
-	// Task start time supports two formats for TimeFormat input: 
-	// 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 
-	// 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
+	// Task start time supports two formats for TimeFormat input: 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
-	// Task end time supports two formats for TimeFormat input: 
-	// 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 
-	// 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
+	// Task end time supports two formats for TimeFormat input: 1. Epoch seconds: The input box is a numeric input box, and only positive integers can be entered. 2. ISO-8601: The supported format is ISO time, for example: 2023-08-01T10:00:00+08:00.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// The COS bucket address where the recording file is stored in COS, format: https://{Bucket_name}-{AppId}.cos.{Region}.myqcloud.com/.
+	// The path where the recording file is stored in Cos.
 	Destination *string `json:"Destination,omitnil" name:"Destination"`
 
-	// The path in the cos bucket and identifier for the parent manifest for the live-to-VOD asset, fotmat: {path 1}/xxx/{path n}/{name}.m3u8.
+	// The file name of the recording file stored in Cos.
 	Manifest *string `json:"Manifest,omitnil" name:"Manifest"`
 }
 
@@ -502,14 +490,14 @@ func (r *DeleteStreamPackageChannelsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteStreamPackageHarvestJobRequestParams struct {
-	// Task ID, a globally unique identifier.
+	// HarvestJob ID, a globally unique identifier.
 	ID *string `json:"ID,omitnil" name:"ID"`
 }
 
 type DeleteStreamPackageHarvestJobRequest struct {
 	*tchttp.BaseRequest
 	
-	// Task ID, a globally unique identifier.
+	// HarvestJob ID, a globally unique identifier.
 	ID *string `json:"ID,omitnil" name:"ID"`
 }
 
@@ -556,14 +544,14 @@ func (r *DeleteStreamPackageHarvestJobResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteStreamPackageHarvestJobsRequestParams struct {
-	// Task IDs, id is a globally unique identifier.
+	// HarvestJob IDs, id is a globally unique identifier.
 	IDs []*string `json:"IDs,omitnil" name:"IDs"`
 }
 
 type DeleteStreamPackageHarvestJobsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Task IDs, id is a globally unique identifier.
+	// HarvestJob IDs, id is a globally unique identifier.
 	IDs []*string `json:"IDs,omitnil" name:"IDs"`
 }
 
@@ -744,14 +732,14 @@ func (r *DescribeStreamPackageChannelsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeStreamPackageHarvestJobRequestParams struct {
-	// Task ID, a globally unique identifier.
+	// HarvestJob ID, a globally unique identifier.
 	ID *string `json:"ID,omitnil" name:"ID"`
 }
 
 type DescribeStreamPackageHarvestJobRequest struct {
 	*tchttp.BaseRequest
 	
-	// Task ID, a globally unique identifier.
+	// HarvestJob ID, a globally unique identifier.
 	ID *string `json:"ID,omitnil" name:"ID"`
 }
 
@@ -905,7 +893,7 @@ type EndpointInfo struct {
 }
 
 type HarvestJobResp struct {
-	// Job ID, a globally unique identifier.
+	// HarvestJob ID, a globally unique identifier.
 	ID *string `json:"ID,omitnil" name:"ID"`
 
 	// The associated channel name.
@@ -917,10 +905,10 @@ type HarvestJobResp struct {
 	// Time format, supports the following types: 1. Epoch seconds 2. ISO-8601
 	TimeFormat *string `json:"TimeFormat,omitnil" name:"TimeFormat"`
 
-	// Job start time.
+	// HarvestJob start time.
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
-	// Job end time.
+	// HarvestJob end time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// The path where the recording file is stored in COS.
@@ -932,10 +920,10 @@ type HarvestJobResp struct {
 	// The task status is divided into running: Running, execution completed: Completed, and execution failure: Failed.
 	Status *string `json:"Status,omitnil" name:"Status"`
 
-	// Job error message.
+	// HarvestJob error message.
 	ErrMessage *string `json:"ErrMessage,omitnil" name:"ErrMessage"`
 
-	// Job creation time, timestamp in seconds.
+	// HarvestJob creation time, timestamp in seconds.
 	CreateTime *uint64 `json:"CreateTime,omitnil" name:"CreateTime"`
 
 	// The associated ChannelID.
