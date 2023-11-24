@@ -2215,11 +2215,11 @@ type CreateSharedCNAMERequestParams struct {
 	// ID of the site to which the shared CNAME belongs.	
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
-	// Prefix of the shared CNAME (up to 50 characters). Format: "test-api", "test-api.com". 
+	// Shared CNAME prefix. Enter a valid domain name prefix, such as "test-api" and "test-api.com". A maximum of 50 characters are allowed. 
 	// 
-	// The complete format of a shared CNAME: <Custom Prefix> + <12-bit random string in ZoneId> + "share.dnse[0-5].com"
+	// Complete format of the shared CNAME: '<Custom prefix>+<A 12-character random string in ZoneId>+share.dnse[0-5].com'. 
 	// 
-	// For example, if the prefix is `example.com`, the generated shared CNAME is `example.com.sai2ig51kaa5.share.dnse2.com`.
+	// For example, if the prefix is example.com, EdgeOne will create the shared CNAME: example.com.sai2ig51kaa5.share.dnse2.com.
 	SharedCNAMEPrefix *string `json:"SharedCNAMEPrefix,omitnil" name:"SharedCNAMEPrefix"`
 
 	// Description. It supports 1-50 characters.
@@ -2232,11 +2232,11 @@ type CreateSharedCNAMERequest struct {
 	// ID of the site to which the shared CNAME belongs.	
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
-	// Prefix of the shared CNAME (up to 50 characters). Format: "test-api", "test-api.com". 
+	// Shared CNAME prefix. Enter a valid domain name prefix, such as "test-api" and "test-api.com". A maximum of 50 characters are allowed. 
 	// 
-	// The complete format of a shared CNAME: <Custom Prefix> + <12-bit random string in ZoneId> + "share.dnse[0-5].com"
+	// Complete format of the shared CNAME: '<Custom prefix>+<A 12-character random string in ZoneId>+share.dnse[0-5].com'. 
 	// 
-	// For example, if the prefix is `example.com`, the generated shared CNAME is `example.com.sai2ig51kaa5.share.dnse2.com`.
+	// For example, if the prefix is example.com, EdgeOne will create the shared CNAME: example.com.sai2ig51kaa5.share.dnse2.com.
 	SharedCNAMEPrefix *string `json:"SharedCNAMEPrefix,omitnil" name:"SharedCNAMEPrefix"`
 
 	// Description. It supports 1-50 characters.
@@ -2266,7 +2266,7 @@ func (r *CreateSharedCNAMERequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSharedCNAMEResponseParams struct {
-	// Shared CNAME. Format: <Custom prefix> + <12-bit random string in ZoneId> + "share.dnse[0-5].com"
+	// Shared CNAME. Format: '<Custom prefix>+<A 12-character random string in ZoneId>+share.dnse[0-5].com'.
 	SharedCNAME *string `json:"SharedCNAME,omitnil" name:"SharedCNAME"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4327,11 +4327,10 @@ type DescribeOverviewL7DataRequestParams struct {
 	// <li>`l7Flow_bandwidth`: Upstream and downstream bandwidth used for client access</li>
 	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
 
-	// List of sites
-	// Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
+	// Queried domain name set. This parameter has been discarded.
 	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The protocol type. Values:
@@ -4348,10 +4347,11 @@ type DescribeOverviewL7DataRequestParams struct {
 	// <li>`day`: One day</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
 	Interval *string `json:"Interval,omitnil" name:"Interval"`
 
-	// Filters
-	// <li>`socket`:<br>u2003u2003 Filter by the specified <strong>HTTP protocol type</strong><br>u2003u2003 Values:<br>u2003u2003 `HTTP`: HTTP protocol;<br>u2003u2003 `HTTPS`: HTTPS protocol;<br>u2003u2003 `QUIC`: QUIC protocol.</li>
-	// <li>`tagKey`:<br>u2003u2003 Filter by the specified <strong>tag key</strong></li>
-	// <li>`tagValue`<br>u2003u2003 Filter by the specified <strong>tag value</strong></li>
+	// Filtering condition. The detailed filtering condition key values are as follows: 
+	// <li>socket<br>    Filter based on [<strong>HTTP protocol type</strong>]. <br>    Corresponding value options: <br>    HTTP: HTTP protocol；<br>    HTTPS: HTTPS protocol;<br>    QUIC: QUIC protocol. </li>
+	// <li>domains<br>    Filter based on [<strong>domain name</strong>]. </li>
+	// <li>tagKey<br>    Filter based on [<strong>Tag Key</strong>]. </li>
+	// <li>tagValue<br>    Filter based on [<strong>Tag Value</strong>]. </li>
 	Filters []*QueryCondition `json:"Filters,omitnil" name:"Filters"`
 
 	// Geolocation scope. Values:
@@ -4381,11 +4381,10 @@ type DescribeOverviewL7DataRequest struct {
 	// <li>`l7Flow_bandwidth`: Upstream and downstream bandwidth used for client access</li>
 	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
 
-	// List of sites
-	// Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
-	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
+	// Queried domain name set. This parameter has been discarded.
 	Domains []*string `json:"Domains,omitnil" name:"Domains"`
 
 	// The protocol type. Values:
@@ -4402,10 +4401,11 @@ type DescribeOverviewL7DataRequest struct {
 	// <li>`day`: One day</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
 	Interval *string `json:"Interval,omitnil" name:"Interval"`
 
-	// Filters
-	// <li>`socket`:<br>u2003u2003 Filter by the specified <strong>HTTP protocol type</strong><br>u2003u2003 Values:<br>u2003u2003 `HTTP`: HTTP protocol;<br>u2003u2003 `HTTPS`: HTTPS protocol;<br>u2003u2003 `QUIC`: QUIC protocol.</li>
-	// <li>`tagKey`:<br>u2003u2003 Filter by the specified <strong>tag key</strong></li>
-	// <li>`tagValue`<br>u2003u2003 Filter by the specified <strong>tag value</strong></li>
+	// Filtering condition. The detailed filtering condition key values are as follows: 
+	// <li>socket<br>    Filter based on [<strong>HTTP protocol type</strong>]. <br>    Corresponding value options: <br>    HTTP: HTTP protocol；<br>    HTTPS: HTTPS protocol;<br>    QUIC: QUIC protocol. </li>
+	// <li>domains<br>    Filter based on [<strong>domain name</strong>]. </li>
+	// <li>tagKey<br>    Filter based on [<strong>Tag Key</strong>]. </li>
+	// <li>tagValue<br>    Filter based on [<strong>Tag Value</strong>]. </li>
 	Filters []*QueryCondition `json:"Filters,omitnil" name:"Filters"`
 
 	// Geolocation scope. Values:
@@ -4473,6 +4473,10 @@ func (r *DescribeOverviewL7DataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePrefetchTasksRequestParams struct {
+	// ZoneId. 
+	// The parameter is required.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
 	// Start time of the query.
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
@@ -4485,14 +4489,17 @@ type DescribePrefetchTasksRequestParams struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.</li>
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>    Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>target<br>    Filter based on [<strong>target resource information</strong>]. target format: http://www.qq.com/1.txt. Multiple values are not supported. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>domains<br>    Filter based on [<strong>domain name</strong>]. domains format: www.qq.com. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>statuses<br>    Filter based on [<strong>task status</strong>]. <br>    Required: No<br>    Fuzz query: Not supported. <br>    Options:<br>    processing: Processing<br>    success: Success<br>    failed: Failure<br>    timeout: Timeout</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
 type DescribePrefetchTasksRequest struct {
 	*tchttp.BaseRequest
 	
+	// ZoneId. 
+	// The parameter is required.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
 	// Start time of the query.
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
@@ -4505,8 +4512,7 @@ type DescribePrefetchTasksRequest struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.</li>
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>    Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>target<br>    Filter based on [<strong>target resource information</strong>]. target format: http://www.qq.com/1.txt. Multiple values are not supported. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>domains<br>    Filter based on [<strong>domain name</strong>]. domains format: www.qq.com. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>statuses<br>    Filter based on [<strong>task status</strong>]. <br>    Required: No<br>    Fuzz query: Not supported. <br>    Options:<br>    processing: Processing<br>    success: Success<br>    failed: Failure<br>    timeout: Timeout</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
@@ -4522,6 +4528,7 @@ func (r *DescribePrefetchTasksRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "ZoneId")
 	delete(f, "StartTime")
 	delete(f, "EndTime")
 	delete(f, "Offset")
@@ -4563,7 +4570,8 @@ func (r *DescribePrefetchTasksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePurgeTasksRequestParams struct {
-	// Disused. Use "zone-id" in "Filters" instead.
+	// ZoneId. 
+	// The parameter is required.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
 	// Start time of the query.
@@ -4578,14 +4586,15 @@ type DescribePurgeTasksRequestParams struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries. <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt and tag1<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.<li>`type`:<br>   Filter by <strong>purging mode</strong> (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `purge_url`: Purge by URL.<br>   `purge_prefix`: Purge by prefix.<br>   `purge_all`: Purge all caches.<br>   `purge_host`: Purge by hostname.<br>   `purge_cache_tag`: Purge by cache tag.</li>
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>    Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.</li><li>target<br>    Filter based on: [strong>target resource information</strong>. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported.<br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.</li><li>domains<br>    Filter based on [<strong>domain name</strong>]. domains format: www.qq.com<br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported. </li><li>statuses<br>    Filter based on <strong>task status</strong>.<br>    Required: No<br>    Fuzz query: Not supported. <br>    Options:<br>    processing: Processing<br>    success: Success<br>    failed: Failure<br>    timeout: Timeout</li><li>type<br>    Filter based on [<strong>cleared cache type</strong>]. Multiple values are not supported. <br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.<br>    Options:<br>    purge_url: URL<br>    purge_prefix: Prefix<br>    purge_all: All cache content<br>    purge_host: Hostname<br>    purge_cache_tag: CacheTag</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
 type DescribePurgeTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// Disused. Use "zone-id" in "Filters" instead.
+	// ZoneId. 
+	// The parameter is required.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
 
 	// Start time of the query.
@@ -4600,7 +4609,7 @@ type DescribePurgeTasksRequest struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries. <li>`zone-id`:<br>   Filter by <strong>site ID</strong>, such as zone-xxx (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`job-id`:<br>   Filter by <strong>task ID</strong>, such as 1379afjk91u32h (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`target`:<br>   Filter by <strong>target resource</strong>, such as http://www.qq.com/1.txt and tag1<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`domains`:<br>   Filter by <strong>domain name</strong>, such as www.qq.com<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported</li><li>`statuses`:<br>   Filter by <strong>task status</strong><br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `processing`: The task is in progress.<br>   `success`: The task succeeded.<br>   `failed`: The task failed.<br>   `timeout`: The task timed out.<li>`type`:<br>   Filter by <strong>purging mode</strong> (up to one entry)<br>   Type: String<br>   Required: No<br>   Fuzzy query: Not supported<br>   Values:<br>   `purge_url`: Purge by URL.<br>   `purge_prefix`: Purge by prefix.<br>   `purge_all`: Purge all caches.<br>   `purge_host`: Purge by hostname.<br>   `purge_cache_tag`: Purge by cache tag.</li>
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>    Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.</li><li>target<br>    Filter based on: [strong>target resource information</strong>. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported.<br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.</li><li>domains<br>    Filter based on [<strong>domain name</strong>]. domains format: www.qq.com<br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported. </li><li>statuses<br>    Filter based on <strong>task status</strong>.<br>    Required: No<br>    Fuzz query: Not supported. <br>    Options:<br>    processing: Processing<br>    success: Success<br>    failed: Failure<br>    timeout: Timeout</li><li>type<br>    Filter based on [<strong>cleared cache type</strong>]. Multiple values are not supported. <br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.<br>    Options:<br>    purge_url: URL<br>    purge_prefix: Prefix<br>    purge_all: All cache content<br>    purge_host: Hostname<br>    purge_cache_tag: CacheTag</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
@@ -4857,17 +4866,14 @@ type DescribeTimingL4DataRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// Metric to query. Values:
-	// <li>`l4Flow_connections`: Access connections;</li>
-	// <li>`l4Flow_flux`: Access traffic;</li>
-	// <li>`l4Flow_inFlux`: Inbound traffic;</li>
-	// <li>`l4Flow_outFlux`: Outbound traffic;</li>
-	// <li>`l4Flow_outPkt`: Outbound packets.</li>
+	// Query indicator. Values: 
+	// <li>l4Flow_connections: Number of access connections;</li>
+	// <li>l4Flow_flux: Total access traffic;</li>
+	// <li>l4Flow_inFlux: Ingress access traffic;</li>
+	// <li>l4Flow_outFlux: Egress access traffic. </li>
 	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
 
-	// List of sites
-	// If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
-	// Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. 
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// List of L4 proxy IDs. All L4 proxies will be selected if this field is not specified.
@@ -4901,17 +4907,14 @@ type DescribeTimingL4DataRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// Metric to query. Values:
-	// <li>`l4Flow_connections`: Access connections;</li>
-	// <li>`l4Flow_flux`: Access traffic;</li>
-	// <li>`l4Flow_inFlux`: Inbound traffic;</li>
-	// <li>`l4Flow_outFlux`: Outbound traffic;</li>
-	// <li>`l4Flow_outPkt`: Outbound packets.</li>
+	// Query indicator. Values: 
+	// <li>l4Flow_connections: Number of access connections;</li>
+	// <li>l4Flow_flux: Total access traffic;</li>
+	// <li>l4Flow_inFlux: Ingress access traffic;</li>
+	// <li>l4Flow_outFlux: Egress access traffic. </li>
 	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
 
-	// List of sites
-	// If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
-	// Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. 
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// List of L4 proxy IDs. All L4 proxies will be selected if this field is not specified.
@@ -4999,18 +5002,17 @@ type DescribeTimingL7AnalysisDataRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// The metric to query. Values:
-	// <li>`l7Flow_outFlux`: Traffic used for EdgeOne responses</li>
-	// <li>`l7Flow_inFlux`: Traffic used for EdgeOne requests</li>
-	// <li>`l7Flow_outBandwidth`: Bandwidth used for EdgeOne responses</li>
-	// <li>`l7Flow_inBandwidth`: Bandwidth used for EdgeOne requests</li>
-	// <li>`l7Flow_request`: Access requests</li>
-	// <li>`l7Flow_flux`: Upstream and downstream traffic used for client access</li>
-	// <li>`l7Flow_bandwidth`: Upstream and downstream bandwidth used for client access</li>
+	// Indicator list. Values: 
+	// <li>l7Flow_outFlux: Edgeone response traffic;</li>
+	// <li>l7Flow_inFlux: Edgeone request traffic;</li>
+	// <li>l7Flow_outBandwidth: Edgeone response bandwidth;</li>
+	// <li>l7Flow_inBandwidth: Edgeone request bandwidth;</li>
+	// <li>l7Flow_request: Number of access requests;</li>
+	// <li>l7Flow_flux: Uplink + downlink traffic of access requests;< li>
+	// <li>l7Flow_bandwidth: Uplink + downlink bandwidth of access requests. </li>
 	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
 
-	// List of sites
-	// Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// The query granularity. Values:
@@ -5056,18 +5058,17 @@ type DescribeTimingL7AnalysisDataRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// The metric to query. Values:
-	// <li>`l7Flow_outFlux`: Traffic used for EdgeOne responses</li>
-	// <li>`l7Flow_inFlux`: Traffic used for EdgeOne requests</li>
-	// <li>`l7Flow_outBandwidth`: Bandwidth used for EdgeOne responses</li>
-	// <li>`l7Flow_inBandwidth`: Bandwidth used for EdgeOne requests</li>
-	// <li>`l7Flow_request`: Access requests</li>
-	// <li>`l7Flow_flux`: Upstream and downstream traffic used for client access</li>
-	// <li>`l7Flow_bandwidth`: Upstream and downstream bandwidth used for client access</li>
+	// Indicator list. Values: 
+	// <li>l7Flow_outFlux: Edgeone response traffic;</li>
+	// <li>l7Flow_inFlux: Edgeone request traffic;</li>
+	// <li>l7Flow_outBandwidth: Edgeone response bandwidth;</li>
+	// <li>l7Flow_inBandwidth: Edgeone request bandwidth;</li>
+	// <li>l7Flow_request: Number of access requests;</li>
+	// <li>l7Flow_flux: Uplink + downlink traffic of access requests;< li>
+	// <li>l7Flow_bandwidth: Uplink + downlink bandwidth of access requests. </li>
 	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
 
-	// List of sites
-	// Enter the IDs of sites to query. The maximum query period is determined by the <a href="https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1#edgeone-.E5.A5.97.E9.A4.90">max data query period</a> of the bound plan. If it’s not specified, all sites are selected by default, and the query period must be within the last 30 days. 
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// The query granularity. Values:
@@ -5172,7 +5173,7 @@ type DescribeTimingL7CacheDataRequestParams struct {
 	// <li>`l7Cache_outBandwidth`: Response bandwidth.</li>
 	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
 
-	// List of sites to be queried. All sites will be selected if this field is not specified.
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// Filter conditions. See below for details: 
@@ -5214,7 +5215,7 @@ type DescribeTimingL7CacheDataRequest struct {
 	// <li>`l7Cache_outBandwidth`: Response bandwidth.</li>
 	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
 
-	// List of sites to be queried. All sites will be selected if this field is not specified.
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// Filter conditions. See below for details: 
@@ -5326,7 +5327,7 @@ type DescribeTopL7AnalysisDataRequestParams struct {
 	// <li>`l7Flow_request_us_os`: Query requests by OS.</li>
 	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
 
-	// (Required) List of sites. No query results are returned if this field is not specified.
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// Queries the top n rows of data. Maximum value: 1000. Top 10 rows of data will be queried if this field is not specified.
@@ -5398,7 +5399,7 @@ type DescribeTopL7AnalysisDataRequest struct {
 	// <li>`l7Flow_request_us_os`: Query requests by OS.</li>
 	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
 
-	// (Required) List of sites. No query results are returned if this field is not specified.
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// Queries the top n rows of data. Maximum value: 1000. Top 10 rows of data will be queried if this field is not specified.
@@ -5508,7 +5509,7 @@ type DescribeTopL7CacheDataRequestParams struct {
 	// <li>`l7Cache_outFlux_statusCode`: Status code.</li>
 	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
 
-	// Specifies sites by ID. All sites will be selected if this field is not specified.
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// Top rows of data to query. Maximum value: 1000. Top 10 rows of data are queried if this field is not specified.
@@ -5554,7 +5555,7 @@ type DescribeTopL7CacheDataRequest struct {
 	// <li>`l7Cache_outFlux_statusCode`: Status code.</li>
 	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
 
-	// Specifies sites by ID. All sites will be selected if this field is not specified.
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// Top rows of data to query. Maximum value: 1000. Top 10 rows of data are queried if this field is not specified.
@@ -5926,7 +5927,7 @@ type DownloadL4LogsRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// List of sites. This parameter is required. A `null` will be returned if it is left empty.
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// List of L4 proxy instance IDs.
@@ -5948,7 +5949,7 @@ type DownloadL4LogsRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// List of sites. This parameter is required. A `null` will be returned if it is left empty.
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// List of L4 proxy instance IDs.
@@ -6021,7 +6022,7 @@ type DownloadL7LogsRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// List of sites. This parameter is required. A `null` will be returned if it is left empty.
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
@@ -6043,7 +6044,7 @@ type DownloadL7LogsRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// List of sites. This parameter is required. A `null` will be returned if it is left empty.
+	// ZoneId set. This parameter is required.
 	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
 
 	// List of subdomain names to be queried. All subdomain names will be selected if this field is not specified.
@@ -9321,7 +9322,7 @@ type StandardDebug struct {
 	// <li>`off`: Disable </li>
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
-	// Allowed client source. It supports IPv4/IPv6 addresses and CIDR blocks.
+	// Allowed client source. IPv4 and IPv6 addresses and network segments are supported. 0.0.0.0/0 indicates that all IPv4 clients can be debugged, and ::/0 indicates that all IPv6 clients can be debugged.
 	AllowClientIPList []*string `json:"AllowClientIPList,omitnil" name:"AllowClientIPList"`
 
 	// The time when the standard debugging setting expires. If it is exceeded, this feature u200dbecomes invalid.
