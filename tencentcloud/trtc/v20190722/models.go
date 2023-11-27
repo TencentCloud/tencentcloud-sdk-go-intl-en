@@ -71,6 +71,17 @@ type AudioEncode struct {
 	Codec *uint64 `json:"Codec,omitnil" name:"Codec"`
 }
 
+type AudioEncodeParams struct {
+	// Audio Sample rate, Value range [48000, 44100], unit is Hz.
+	SampleRate *uint64 `json:"SampleRate,omitnil" name:"SampleRate"`
+
+	// Audio Channel number, Value range [1,2], 1 means Audio is Mono-channel, 2 means Audio is Dual-channel.
+	Channel *uint64 `json:"Channel,omitnil" name:"Channel"`
+
+	// Audio Bitrate, Value range [8,500], unit is kbps.
+	BitRate *uint64 `json:"BitRate,omitnil" name:"BitRate"`
+}
+
 type AudioParams struct {
 	// The audio sample rate.
 	// 1: 48000 Hz (default)
@@ -948,6 +959,70 @@ func (r *DescribeScaleInfoResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeScaleInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamIngestRequestParams struct {
+	// The SDKAppId of TRTC should be the same as the SDKAppId corresponding to the task room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// The unique Id of the task, will return after successfully starting the task.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+}
+
+type DescribeStreamIngestRequest struct {
+	*tchttp.BaseRequest
+	
+	// The SDKAppId of TRTC should be the same as the SDKAppId corresponding to the task room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// The unique Id of the task, will return after successfully starting the task.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+}
+
+func (r *DescribeStreamIngestRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamIngestRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamIngestRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamIngestResponseParams struct {
+	// Task status information. InProgress: Indicates that the current task is in progress. NotExist: Indicates that the current task does not exist. Example value: InProgress
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeStreamIngestResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamIngestResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamIngestResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamIngestResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2476,6 +2551,121 @@ func (r *StartPublishCdnStreamResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type StartStreamIngestRequestParams struct {
+	// TRTC's [SdkAppId](https://intl.cloud.tencent.com/document/product/647/46351?from_cn_redirect=1#sdkappid), the same as the SdkAppId corresponding to the Record room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// TRTC's [RoomId](https://intl.cloud.tencent.com/document/product/647/46351?from_cn_redirect=1#roomid), the RoomId corresponding to the Record TRTC room.
+	RoomId *string `json:"RoomId,omitnil" name:"RoomId"`
+
+	// Type of TRTC RoomId. 【*Note】Must be the same as the RoomId type corresponding to the Record room: 0: String type RoomId 1: 32-bit Integer type RoomId (default)
+	RoomIdType *uint64 `json:"RoomIdType,omitnil" name:"RoomIdType"`
+
+	// UserId of the Pull stream Relay Robot, used to enter the room and initiate the Pull stream Relay Task.
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
+
+	// UserSig corresponding to the Pull stream Relay Robot UserId, i.e., UserId and UserSig are equivalent to the Robot's Login password for entering the room. For the specific Calculation method, please refer to the TRTC [UserSig](https://intl.cloud.tencent.com/document/product/647/45910?from_cn_redirect=1#UserSig) Scheme.
+	UserSig *string `json:"UserSig,omitnil" name:"UserSig"`
+
+	// 	
+	// Source URL. Example value: https://a.b/test.mp4
+	SourceUrl []*string `json:"SourceUrl,omitnil" name:"SourceUrl"`
+
+	// TRTC room permission Encryption ticket, only needed when advanced permission control is enabled in the Console. After enabling advanced permission control in the TRTC Console, TRTC's backend service system will verify a so-called [PrivateMapKey] 'Permission ticket', which contains an encrypted RoomId and an encrypted 'Permission bit list'. Since PrivateMapKey contains RoomId, providing only UserSig without PrivateMapKey does not allow entry into the specified room.
+	PrivateMapKey *string `json:"PrivateMapKey,omitnil" name:"PrivateMapKey"`
+
+	// Video Codec Parameters. Optional, if not filled, Keep original stream Parameters.
+	VideoEncodeParams *VideoEncodeParams `json:"VideoEncodeParams,omitnil" name:"VideoEncodeParams"`
+
+	// Audio Codec Parameters. Optional, if not filled, Keep original stream Parameters.
+	AudioEncodeParams *AudioEncodeParams `json:"AudioEncodeParams,omitnil" name:"AudioEncodeParams"`
+}
+
+type StartStreamIngestRequest struct {
+	*tchttp.BaseRequest
+	
+	// TRTC's [SdkAppId](https://intl.cloud.tencent.com/document/product/647/46351?from_cn_redirect=1#sdkappid), the same as the SdkAppId corresponding to the Record room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// TRTC's [RoomId](https://intl.cloud.tencent.com/document/product/647/46351?from_cn_redirect=1#roomid), the RoomId corresponding to the Record TRTC room.
+	RoomId *string `json:"RoomId,omitnil" name:"RoomId"`
+
+	// Type of TRTC RoomId. 【*Note】Must be the same as the RoomId type corresponding to the Record room: 0: String type RoomId 1: 32-bit Integer type RoomId (default)
+	RoomIdType *uint64 `json:"RoomIdType,omitnil" name:"RoomIdType"`
+
+	// UserId of the Pull stream Relay Robot, used to enter the room and initiate the Pull stream Relay Task.
+	UserId *string `json:"UserId,omitnil" name:"UserId"`
+
+	// UserSig corresponding to the Pull stream Relay Robot UserId, i.e., UserId and UserSig are equivalent to the Robot's Login password for entering the room. For the specific Calculation method, please refer to the TRTC [UserSig](https://intl.cloud.tencent.com/document/product/647/45910?from_cn_redirect=1#UserSig) Scheme.
+	UserSig *string `json:"UserSig,omitnil" name:"UserSig"`
+
+	// 	
+	// Source URL. Example value: https://a.b/test.mp4
+	SourceUrl []*string `json:"SourceUrl,omitnil" name:"SourceUrl"`
+
+	// TRTC room permission Encryption ticket, only needed when advanced permission control is enabled in the Console. After enabling advanced permission control in the TRTC Console, TRTC's backend service system will verify a so-called [PrivateMapKey] 'Permission ticket', which contains an encrypted RoomId and an encrypted 'Permission bit list'. Since PrivateMapKey contains RoomId, providing only UserSig without PrivateMapKey does not allow entry into the specified room.
+	PrivateMapKey *string `json:"PrivateMapKey,omitnil" name:"PrivateMapKey"`
+
+	// Video Codec Parameters. Optional, if not filled, Keep original stream Parameters.
+	VideoEncodeParams *VideoEncodeParams `json:"VideoEncodeParams,omitnil" name:"VideoEncodeParams"`
+
+	// Audio Codec Parameters. Optional, if not filled, Keep original stream Parameters.
+	AudioEncodeParams *AudioEncodeParams `json:"AudioEncodeParams,omitnil" name:"AudioEncodeParams"`
+}
+
+func (r *StartStreamIngestRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartStreamIngestRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "RoomId")
+	delete(f, "RoomIdType")
+	delete(f, "UserId")
+	delete(f, "UserSig")
+	delete(f, "SourceUrl")
+	delete(f, "PrivateMapKey")
+	delete(f, "VideoEncodeParams")
+	delete(f, "AudioEncodeParams")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartStreamIngestRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartStreamIngestResponseParams struct {
+	// The Task ID of the Pull stream Relay. The Task ID is a unique identifier for a Pull stream Relay lifecycle process, and it loses its meaning when the task ends. The Task ID needs to be saved by the business as a parameter for the next operation on this task.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type StartStreamIngestResponse struct {
+	*tchttp.BaseResponse
+	Response *StartStreamIngestResponseParams `json:"Response"`
+}
+
+func (r *StartStreamIngestResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartStreamIngestResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type StopPublishCdnStreamRequestParams struct {
 	// The [SDKAppID](https://intl.cloud.tencent.com/document/product/647/37714) of the TRTC room whose streams are relayed.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
@@ -2536,6 +2726,67 @@ func (r *StopPublishCdnStreamResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *StopPublishCdnStreamResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopStreamIngestRequestParams struct {
+	// The SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the task's room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// The unique Task ID, which will be returned after the task is successfully started.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+}
+
+type StopStreamIngestRequest struct {
+	*tchttp.BaseRequest
+	
+	// The SDKAppId of TRTC, which is the same as the SDKAppId corresponding to the task's room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// The unique Task ID, which will be returned after the task is successfully started.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+}
+
+func (r *StopStreamIngestRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopStreamIngestRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopStreamIngestRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopStreamIngestResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type StopStreamIngestResponse struct {
+	*tchttp.BaseResponse
+	Response *StopStreamIngestResponseParams `json:"Response"`
+}
+
+func (r *StopStreamIngestResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopStreamIngestResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2794,6 +3045,23 @@ type VideoEncode struct {
 	BitRate *uint64 `json:"BitRate,omitnil" name:"BitRate"`
 
 	// The GOP (seconds) of the output stream. This parameter is required if audio and video are relayed. Value range: [1, 5].
+	Gop *uint64 `json:"Gop,omitnil" name:"Gop"`
+}
+
+type VideoEncodeParams struct {
+	// Width. Value range [0,1920], unit is pixel value.
+	Width *uint64 `json:"Width,omitnil" name:"Width"`
+
+	// Height. Value range [0,1080], unit is pixel value.
+	Height *uint64 `json:"Height,omitnil" name:"Height"`
+
+	// Frame Rate. Value range [1,60], indicating that the frame rate can be selected from 1 to 60fps.
+	Fps *uint64 `json:"Fps,omitnil" name:"Fps"`
+
+	// Bitrate. Value range [1,10000], unit is kbps.
+	BitRate *uint64 `json:"BitRate,omitnil" name:"BitRate"`
+
+	// Gop. Value range [1,2], unit is second.
 	Gop *uint64 `json:"Gop,omitnil" name:"Gop"`
 }
 

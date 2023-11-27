@@ -840,6 +840,63 @@ func (c *Client) DescribeScaleInfoWithContext(ctx context.Context, request *Desc
     return
 }
 
+func NewDescribeStreamIngestRequest() (request *DescribeStreamIngestRequest) {
+    request = &DescribeStreamIngestRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeStreamIngest")
+    
+    
+    return
+}
+
+func NewDescribeStreamIngestResponse() (response *DescribeStreamIngestResponse) {
+    response = &DescribeStreamIngestResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamIngest
+// You can query the status of the Relay task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYTASKINFOFAILED = "FailedOperation.QueryTaskInfoFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+func (c *Client) DescribeStreamIngest(request *DescribeStreamIngestRequest) (response *DescribeStreamIngestResponse, err error) {
+    return c.DescribeStreamIngestWithContext(context.Background(), request)
+}
+
+// DescribeStreamIngest
+// You can query the status of the Relay task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYTASKINFOFAILED = "FailedOperation.QueryTaskInfoFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+func (c *Client) DescribeStreamIngestWithContext(ctx context.Context, request *DescribeStreamIngestRequest) (response *DescribeStreamIngestResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamIngestRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamIngest require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamIngestResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTrtcRoomUsageRequest() (request *DescribeTrtcRoomUsageRequest) {
     request = &DescribeTrtcRoomUsageRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2059,6 +2116,79 @@ func (c *Client) StartPublishCdnStreamWithContext(ctx context.Context, request *
     return
 }
 
+func NewStartStreamIngestRequest() (request *StartStreamIngestRequest) {
+    request = &StartStreamIngestRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "StartStreamIngest")
+    
+    
+    return
+}
+
+func NewStartStreamIngestResponse() (response *StartStreamIngestResponse) {
+    response = &StartStreamIngestResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StartStreamIngest
+// Push an online media stream to the TRTC room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
+//  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
+//  INTERNALERROR_HTTPPARSEFAILED = "InternalError.HttpParseFailed"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STRROOMID = "InvalidParameter.StrRoomId"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  RESOURCEINSUFFICIENT_REQUESTREJECTION = "ResourceInsufficient.RequestRejection"
+func (c *Client) StartStreamIngest(request *StartStreamIngestRequest) (response *StartStreamIngestResponse, err error) {
+    return c.StartStreamIngestWithContext(context.Background(), request)
+}
+
+// StartStreamIngest
+// Push an online media stream to the TRTC room.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
+//  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
+//  INTERNALERROR_HTTPPARSEFAILED = "InternalError.HttpParseFailed"
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_STRROOMID = "InvalidParameter.StrRoomId"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+//  RESOURCEINSUFFICIENT_REQUESTREJECTION = "ResourceInsufficient.RequestRejection"
+func (c *Client) StartStreamIngestWithContext(ctx context.Context, request *StartStreamIngestRequest) (response *StartStreamIngestResponse, err error) {
+    if request == nil {
+        request = NewStartStreamIngestRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartStreamIngest require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartStreamIngestResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStopPublishCdnStreamRequest() (request *StopPublishCdnStreamRequest) {
     request = &StopPublishCdnStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2120,6 +2250,61 @@ func (c *Client) StopPublishCdnStreamWithContext(ctx context.Context, request *S
     request.SetContext(ctx)
     
     response = NewStopPublishCdnStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopStreamIngestRequest() (request *StopStreamIngestRequest) {
+    request = &StopStreamIngestRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "StopStreamIngest")
+    
+    
+    return
+}
+
+func NewStopStreamIngestResponse() (response *StopStreamIngestResponse) {
+    response = &StopStreamIngestResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StopStreamIngest
+// Stop a Pull stream Relay task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKFINISHED = "FailedOperation.TaskFinished"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) StopStreamIngest(request *StopStreamIngestRequest) (response *StopStreamIngestResponse, err error) {
+    return c.StopStreamIngestWithContext(context.Background(), request)
+}
+
+// StopStreamIngest
+// Stop a Pull stream Relay task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKFINISHED = "FailedOperation.TaskFinished"
+//  INVALIDPARAMETER_BODYPARAMSERROR = "InvalidParameter.BodyParamsError"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) StopStreamIngestWithContext(ctx context.Context, request *StopStreamIngestRequest) (response *StopStreamIngestResponse, err error) {
+    if request == nil {
+        request = NewStopStreamIngestRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopStreamIngest require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStopStreamIngestResponse()
     err = c.Send(request, response)
     return
 }
