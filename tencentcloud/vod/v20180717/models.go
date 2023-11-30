@@ -4804,6 +4804,88 @@ func (r *CreateImageSpriteTemplateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateJustInTimeTranscodeTemplateRequestParams struct {
+	// Template name, the length is limited to 64 characters.
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// Video parameter configuration.
+	VideoConfigure *VideoConfigureInfo `json:"VideoConfigure,omitnil" name:"VideoConfigure"`
+
+	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// Watermark parameter configuration.
+	WatermarkConfigure *WatermarkConfigureInfo `json:"WatermarkConfigure,omitnil" name:"WatermarkConfigure"`
+
+	// Template description, the length is limited to 256 characters.
+	Comment *string `json:"Comment,omitnil" name:"Comment"`
+}
+
+type CreateJustInTimeTranscodeTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Template name, the length is limited to 64 characters.
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// Video parameter configuration.
+	VideoConfigure *VideoConfigureInfo `json:"VideoConfigure,omitnil" name:"VideoConfigure"`
+
+	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// Watermark parameter configuration.
+	WatermarkConfigure *WatermarkConfigureInfo `json:"WatermarkConfigure,omitnil" name:"WatermarkConfigure"`
+
+	// Template description, the length is limited to 256 characters.
+	Comment *string `json:"Comment,omitnil" name:"Comment"`
+}
+
+func (r *CreateJustInTimeTranscodeTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateJustInTimeTranscodeTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "VideoConfigure")
+	delete(f, "SubAppId")
+	delete(f, "WatermarkConfigure")
+	delete(f, "Comment")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateJustInTimeTranscodeTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateJustInTimeTranscodeTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type CreateJustInTimeTranscodeTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateJustInTimeTranscodeTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateJustInTimeTranscodeTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateJustInTimeTranscodeTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreatePersonSampleRequestParams struct {
 	// Name of a sample. Length limit: 20 characters.
 	Name *string `json:"Name,omitnil" name:"Name"`
@@ -7209,6 +7291,67 @@ func (r *DeleteImageSpriteTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteImageSpriteTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteJustInTimeTranscodeTemplateRequestParams struct {
+	// Template name.
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
+}
+
+type DeleteJustInTimeTranscodeTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Template name.
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
+}
+
+func (r *DeleteJustInTimeTranscodeTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteJustInTimeTranscodeTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "SubAppId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteJustInTimeTranscodeTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteJustInTimeTranscodeTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DeleteJustInTimeTranscodeTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteJustInTimeTranscodeTemplateResponseParams `json:"Response"`
+}
+
+func (r *DeleteJustInTimeTranscodeTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteJustInTimeTranscodeTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9863,6 +10006,98 @@ func (r *DescribeImageSpriteTemplatesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeJustInTimeTranscodeTemplatesRequestParams struct {
+	// Template name filter condition, array length limit: 100.
+	Names []*string `json:"Names,omitnil" name:"Names"`
+
+	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// Template type filter conditions, optional values:
+	// <li>Preset: system preset task flow template;</li>
+	// <li>Custom: user-defined task flow template. </li>
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// Paging offset, default value: 0.
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Returns the number of records, default value: 10, maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+}
+
+type DescribeJustInTimeTranscodeTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Template name filter condition, array length limit: 100.
+	Names []*string `json:"Names,omitnil" name:"Names"`
+
+	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// Template type filter conditions, optional values:
+	// <li>Preset: system preset task flow template;</li>
+	// <li>Custom: user-defined task flow template. </li>
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// Paging offset, default value: 0.
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Returns the number of records, default value: 10, maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+}
+
+func (r *DescribeJustInTimeTranscodeTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeJustInTimeTranscodeTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Names")
+	delete(f, "SubAppId")
+	delete(f, "Type")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeJustInTimeTranscodeTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeJustInTimeTranscodeTemplatesResponseParams struct {
+	// The total number of records matching the filter criteria.
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// Template details list.
+	JustInTimeTranscodeTemplateSet []*JustInTimeTranscodeTemplate `json:"JustInTimeTranscodeTemplateSet,omitnil" name:"JustInTimeTranscodeTemplateSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeJustInTimeTranscodeTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeJustInTimeTranscodeTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeJustInTimeTranscodeTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeJustInTimeTranscodeTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeLicenseUsageDataRequestParams struct {
 	// The start date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format).
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
@@ -11655,6 +11890,10 @@ type DescribeTaskDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	QualityInspectTask *QualityInspectTask `json:"QualityInspectTask,omitnil" name:"QualityInspectTask"`
 
+	// Media Quality Enhance task information. This field has a value only when TaskType is QualityEnhance.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	QualityEnhanceTask *QualityEnhanceTask `json:"QualityEnhanceTask,omitnil" name:"QualityEnhanceTask"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
@@ -12233,6 +12472,9 @@ type DomainHTTPSConfig struct {
 	// Time when the certificate expires
 	// <li>The time is in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732).</li>
 	CertExpireTime *string `json:"CertExpireTime,omitnil" name:"CertExpireTime"`
+
+	// Certificate ID in Tencent Cloud SSL product.
+	CloudCertId *string `json:"CloudCertId,omitnil" name:"CloudCertId"`
 }
 
 type DomainQUICConfig struct {
@@ -12551,6 +12793,17 @@ type EditMediaTaskOutput struct {
 }
 
 type EditMediaVideoStream struct {
+	// The encoding format of the video stream, optional values:
+	// <li>libx264: H.264 encoding;</li>
+	// <li>libx265: H.265 encoding;</li>
+	// <li>av1: AOMedia Video 1 encoding;</li>
+	// <li>H.266: H.266 encoding. </li>
+	Codec *string `json:"Codec,omitnil" name:"Codec"`
+
+	// The bit rate of the video stream, value range: 0 and [128, 35000], unit: kbps. 
+	// When the value is 0 or left blank, it means automatically selecting the best video bit rate.
+	Bitrate *uint64 `json:"Bitrate,omitnil" name:"Bitrate"`
+
 	// Resolution adaptive, optional values:
 	// <li>open: open, at this time, Width represents the long side of the video, and Height represents the short side of the video;</li>
 	// <li>close: closed, at this time , Width represents the width of the video, and Height represents the height of the video. </li>
@@ -13996,6 +14249,25 @@ type JitterConfigureInfoForUpdate struct {
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
+type JustInTimeTranscodeTemplate struct {
+	// Template type.
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// Template name.
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// Template description.
+	Comment *string `json:"Comment,omitnil" name:"Comment"`
+
+	// Video parameter configuration.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	VideoConfigure *VideoConfigureInfo `json:"VideoConfigure,omitnil" name:"VideoConfigure"`
+
+	// Watermark parameter configuration. 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	WatermarkConfigure *WatermarkConfigureData `json:"WatermarkConfigure,omitnil" name:"WatermarkConfigure"`
+}
+
 type LicenseUsageDataItem struct {
 	// The start time (in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format)) of the data returned. For example, if the granularity is a day, `2018-12-01T00:00:00+08:00` indicates that the data is for the whole day of December 1, 2018.
 	Time *string `json:"Time,omitnil" name:"Time"`
@@ -14503,9 +14775,7 @@ type MediaBasicInfo struct {
 	// <li>Image: image file</li>
 	Category *string `json:"Category,omitnil" name:"Category"`
 
-	// The file status. Valid values: `Normal`, `Forbidden`.
-	// 
-	// *Note: This field is not supported yet.	
+	// File status: Normal: normal, Forbidden: banned.
 	Status *string `json:"Status,omitnil" name:"Status"`
 
 	// Storage class of a media file:
@@ -16836,6 +17106,88 @@ func (r *ModifyImageSpriteTemplateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyJustInTimeTranscodeTemplateRequestParams struct {
+	// Template name.
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// Video parameter configuration.
+	VideoConfigure *VideoConfigureInfoForUpdate `json:"VideoConfigure,omitnil" name:"VideoConfigure"`
+
+	// Watermark parameter configuration.
+	WatermarkConfigure *WatermarkConfigureInfoForUpdate `json:"WatermarkConfigure,omitnil" name:"WatermarkConfigure"`
+
+	// Template description, the length is limited to 256 characters.
+	Comment *string `json:"Comment,omitnil" name:"Comment"`
+}
+
+type ModifyJustInTimeTranscodeTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Template name.
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// Video parameter configuration.
+	VideoConfigure *VideoConfigureInfoForUpdate `json:"VideoConfigure,omitnil" name:"VideoConfigure"`
+
+	// Watermark parameter configuration.
+	WatermarkConfigure *WatermarkConfigureInfoForUpdate `json:"WatermarkConfigure,omitnil" name:"WatermarkConfigure"`
+
+	// Template description, the length is limited to 256 characters.
+	Comment *string `json:"Comment,omitnil" name:"Comment"`
+}
+
+func (r *ModifyJustInTimeTranscodeTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyJustInTimeTranscodeTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "SubAppId")
+	delete(f, "VideoConfigure")
+	delete(f, "WatermarkConfigure")
+	delete(f, "Comment")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyJustInTimeTranscodeTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyJustInTimeTranscodeTemplateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ModifyJustInTimeTranscodeTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyJustInTimeTranscodeTemplateResponseParams `json:"Response"`
+}
+
+func (r *ModifyJustInTimeTranscodeTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyJustInTimeTranscodeTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyMediaInfoRequestParams struct {
 	// Unique media file ID.
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
@@ -19029,6 +19381,10 @@ type OutputAudioStream struct {
 	// <li>2: dual</li>
 	// Default value: 2.
 	AudioChannel *int64 `json:"AudioChannel,omitnil" name:"AudioChannel"`
+
+	// The bit rate of the audio stream, value range: 0 and [26, 256], unit: kbps. 
+	// When the value is 0, the audio bitrate will be automatically set.
+	Bitrate *int64 `json:"Bitrate,omitnil" name:"Bitrate"`
 }
 
 type OutputVideoStream struct {
@@ -20372,6 +20728,78 @@ type QRCodeConfigureInfoForUpdate struct {
 	// <li>ON: enabled;</li>
 	// <li>OFF: disabled.</li>
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
+}
+
+type QualityEnhanceTask struct {
+	// Task Id.
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// Task flow status, values:
+	// <li>PROCESSING: Processing;</li>
+	// <li>FINISH: Completed. </li>
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// Error code, 0 means success, other values u200bu200bmean failure:
+	// <li>40000: The input parameters are illegal, please check the input parameters;</li>
+	// <li>60000: Source file error (such as video data damage), Please confirm whether the source file is normal;</li>
+	// <li>70000: Internal service error, it is recommended to try again. </li>
+	ErrCode *int64 `json:"ErrCode,omitnil" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil" name:"Message"`
+
+	// Error code. An empty string indicates success. Other values u200bu200bindicate failure. For values, please refer to [Video Processing Error Code](https://www.tencentcloud.com/document/product/266/39145) list.
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil" name:"ErrCodeExt"`
+
+	// Media quality enhance task progress, value range [0-100].
+	Progress *int64 `json:"Progress,omitnil" name:"Progress"`
+
+	// Input for media quality enhance task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Input *QualityEnhanceTaskInput `json:"Input,omitnil" name:"Input"`
+
+	// Output of the media quality enhance task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Output *QualityEnhanceTaskOutput `json:"Output,omitnil" name:"Output"`
+
+	// Media quality enhance outputs meta-information of the video.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	MetaData *MediaMetaData `json:"MetaData,omitnil" name:"MetaData"`
+
+	// Identification code used for deduplication. If there is a request for the same identification code within seven days, this request will return an error. The maximum length is 50 characters, without or with an empty string to indicate no deduplication.
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
+
+	// Source context, used to transparently transmit user request information. The task flow status change callback will return the value of this field, which can be up to 1000 characters.
+	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
+}
+
+type QualityEnhanceTaskInput struct {
+	// Media file ID.
+	FileId *string `json:"FileId,omitnil" name:"FileId"`
+
+	// Media quality enhance template ID.
+	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
+}
+
+type QualityEnhanceTaskOutput struct {
+	// File types such as mp4, flv, etc.
+	FileType *string `json:"FileType,omitnil" name:"FileType"`
+
+	// Media file playback address.
+	FileUrl *string `json:"FileUrl,omitnil" name:"FileUrl"`
+
+	// Media file ID.
+	FileId *string `json:"FileId,omitnil" name:"FileId"`
+
+	// Output file name, up to 64 characters. By default, the generated file name is specified by the system.
+	MediaName *string `json:"MediaName,omitnil" name:"MediaName"`
+
+	// Classification ID is used to classify media. You can create a classification through the [Create Classification](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) interface to obtain the classification ID. 
+	// <li>Default value: 0, indicating other categories. </li>
+	ClassId *int64 `json:"ClassId,omitnil" name:"ClassId"`
+
+	// The expiration time of the output file. The file will be deleted after this time. The default is permanent and not expired. The format is expressed in accordance with the ISO 8601 standard. For details, see [ISO Date Format Description](https://www.tencentcloud.com/document/product/266/11732#iso-date-format).
+	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
 }
 
 type QualityEvaluationConfigureInfo struct {
@@ -22899,6 +23327,57 @@ func (r *SetDrmKeyProviderInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SetVodDomainCertificateRequestParams struct {
+
+}
+
+type SetVodDomainCertificateRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *SetVodDomainCertificateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetVodDomainCertificateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetVodDomainCertificateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SetVodDomainCertificateResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type SetVodDomainCertificateResponse struct {
+	*tchttp.BaseResponse
+	Response *SetVodDomainCertificateResponseParams `json:"Response"`
+}
+
+func (r *SetVodDomainCertificateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SetVodDomainCertificateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type SharpEnhanceInfo struct {
 	// Whether to enable detail enhancement. Valid values:
 	// <li>`ON`</li>
@@ -23638,12 +24117,13 @@ type SvgWatermarkInputForUpdate struct {
 	// Default value: 0 px.
 	Height *string `json:"Height,omitnil" name:"Height"`
 
-	// Watermark cycle configuration, which is used to configure watermarks so that they will be displayed and hidden periodically.
-	// Primary use case: watermarks can be added at various positions in a video, which are displayed and hidden periodically to prevent them from being covered.
-	// For example, watermarks A, B, C, and D are set in the top-left corner, top-right corner, bottom-right corner, and bottom-left corner of a video, respectively. After the first video frame, { A will be displayed for 5s -> B for 5s -> C for 5s -> D for 5s } -> A for 5s -> B for 5s -> ... Only one watermark will be visible at any time.
-	// Within the braces ({}) is a major cycle composed of four watermarks, namely, A, B, C, and D, which lasts for 20 seconds in a cycle.
-	// Watermarks A, B, C, and D are displayed periodically for 5 seconds and hidden for 15 seconds each in a fixed order.
-	// This configuration item is used to describe the cycle configuration of a single watermark.
+	// Watermark period configuration is used to configure the watermark to be displayed and hidden periodically. 
+	// The main usage scenario is: in order to prevent video from being blocked, watermarks are set in multiple places on the video. These watermarks are periodically displayed and hidden in a fixed order. 
+	// For example, set four watermarks A, B, C, and D to be located in the upper left corner, upper right corner, lower right corner, and lower left corner of the video respectively. When the video starts, { A displays for 5 seconds -> B displays for 5 seconds -> C Display for 5 seconds -> D Display for 5 seconds} -> A Display for 5 seconds -> B Display for 5 seconds -> ..., only one watermark is displayed at any time. 
+	// The curly brackets {} represent a large cycle consisting of 4 watermarks A, B, C, and D. It can be seen that each large cycle lasts 20 seconds. 
+	// It can be seen that A, B, C, and D are periodically displayed for 5 seconds and hidden for 15 seconds, and the four have a fixed display order. 
+	// This configuration item is used to describe the periodic configuration of a single watermark.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	CycleConfig *WatermarkCycleConfigForUpdate `json:"CycleConfig,omitnil" name:"CycleConfig"`
 }
 
@@ -24490,6 +24970,68 @@ func (r *VerifyDomainRecordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type VideoConfigureInfo struct {
+	// The maximum value of the video stream width (or long side), value range: 0 and [128, 1920], unit: px. 
+	// <li>When Width and Height are both 0, the resolution is from the same source;</li>
+	// <li>When Width is 0 and Height is non-0, Width is scaled proportionally;</li>
+	// < li>When Width is non-0 and Height is 0, the Height is scaled proportionally; </li>
+	// <li>When both Width and Height are non-0, the resolution is specified by the user. </li>
+	// 
+	// Default value: 0.
+	Width *int64 `json:"Width,omitnil" name:"Width"`
+
+	// The maximum value of the video stream height (or short side), value range: 0 and [128, 1920], unit: px. 
+	// <li>When Width and Height are both 0, the resolution is from the same source;</li>
+	// <li>When Width is 0 and Height is non-0, Width is scaled proportionally;</li>
+	// < li>When Width is non-0 and Height is 0, the Height is scaled proportionally; </li>
+	// <li>When both Width and Height are non-0, the resolution is specified by the user. </li>
+	// 
+	// Default value: 0.
+	Height *int64 `json:"Height,omitnil" name:"Height"`
+
+	// Resolution adaptive, optional values:
+	// <li>open: open, at this time, Width represents the long side of the video, and Height represents the short side of the video;</li>
+	// <li>close: closed, at this time , Width represents the width of the video, and Height represents the height of the video. </li>
+	// 
+	// Default value: open.
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitnil" name:"ResolutionAdaptive"`
+
+	// The bit rate of the video stream, value range: 0 and [128, 10000], unit: kbps. 
+	// When the value is 0, it means that the video bitrate remains the same as the original video.
+	Bitrate *int64 `json:"Bitrate,omitnil" name:"Bitrate"`
+}
+
+type VideoConfigureInfoForUpdate struct {
+	// The maximum value of the video stream width (or long side), value range: 0 and [128, 1920], unit: px. 
+	// <li>When Width and Height are both 0, the resolution is from the same source;</li>
+	// <li>When Width is 0 and Height is non-0, Width is scaled proportionally;</li>
+	// < li>When Width is non-0 and Height is 0, the Height is scaled proportionally; </li>
+	// <li>When both Width and Height are non-0, the resolution is specified by the user. </li>
+	// 
+	// Default value: 0.
+	Width *int64 `json:"Width,omitnil" name:"Width"`
+
+	// The maximum value of the video stream height (or short side), value range: 0 and [128, 1920], unit: px. 
+	// <li>When Width and Height are both 0, the resolution is from the same source;</li>
+	// <li>When Width is 0 and Height is non-0, Width is scaled proportionally;</li>
+	// < li>When Width is non-0 and Height is 0, the Height is scaled proportionally; </li>
+	// <li>When both Width and Height are non-0, the resolution is specified by the user. </li>
+	// 
+	// Default value: 0.
+	Height *int64 `json:"Height,omitnil" name:"Height"`
+
+	// Resolution adaptive, optional values:
+	// <li>open: open, at this time, Width represents the long side of the video, and Height represents the short side of the video;</li>
+	// <li>close: closed, at this time , Width represents the width of the video, and Height represents the height of the video. </li>
+	// 
+	// Default value: open.
+	ResolutionAdaptive *string `json:"ResolutionAdaptive,omitnil" name:"ResolutionAdaptive"`
+
+	// The bit rate of the video stream, value range: 0 and [128, 10000], unit: kbps. 
+	// When the value is 0, it means that the video bitrate remains the same as the original video.
+	Bitrate *int64 `json:"Bitrate,omitnil" name:"Bitrate"`
+}
+
 type VideoDenoiseInfo struct {
 	// Whether to enable image noise removal. Valid values:
 	// <li>`ON`</li>
@@ -24725,6 +25267,78 @@ type VoiceConfigureInfoForUpdate struct {
 	// <li>ON: on; </li>
 	// <li>OFF: off. </li>
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
+}
+
+type WatermarkConfigureData struct {
+	// Whether to enable watermark. Possible values:
+	// <li>ON: means enabling watermark;</li>
+	// <li>OFF: means turning off watermark. </li>
+	Switch *string `json:"Switch,omitnil" name:"Switch"`
+
+	// Watermark URL.
+	Url *string `json:"Url,omitnil" name:"Url"`
+
+	// The width of the watermark. 
+	// <li>The string ends with %, indicating that the watermark Width is a percentage of the video width, such as 10% indicating that the Width is 10% of the video width;</li>
+	Width *string `json:"Width,omitnil" name:"Width"`
+
+	// The height of the watermark. 
+	// <li>The string ends with %, indicating that the watermark Height is a percentage of the video height, for example, 10% means that the Height is 10% of the video height;</li>
+	Height *string `json:"Height,omitnil" name:"Height"`
+
+	// The horizontal position of the watermark origin from the video image coordinate origin. The string ends with %, indicating that the watermark XPos specifies a percentage of the video width, such as 10% indicating that XPos is 10% of the video width.
+	XPos *string `json:"XPos,omitnil" name:"XPos"`
+
+	// The vertical position of the watermark origin from the video image coordinate origin. When the string ends with %, it means that the watermark YPos specifies a percentage of the video height. For example, 10% means that YPos is 10% of the video height.
+	YPos *string `json:"YPos,omitnil" name:"YPos"`
+}
+
+type WatermarkConfigureInfo struct {
+	// Whether to enable watermark. Possible values:
+	// <li>ON: means enabling watermark;</li>
+	// <li>OFF: means turning off watermark. </li>
+	Switch *string `json:"Switch,omitnil" name:"Switch"`
+
+	// Watermark image Base64 encoded string. Supports jpeg, png image formats.
+	ImageContent *string `json:"ImageContent,omitnil" name:"ImageContent"`
+
+	// The width of the watermark. 
+	// <li>The string ends with %, indicating that the watermark Width is a percentage of the video width, such as 10% indicating that the Width is 10% of the video width;</li>
+	Width *string `json:"Width,omitnil" name:"Width"`
+
+	// The height of the watermark. 
+	// <li>The string ends with %, indicating that the watermark Height is a percentage of the video height, for example, 10% means that the Height is 10% of the video height;</li>
+	Height *string `json:"Height,omitnil" name:"Height"`
+
+	// The horizontal position of the watermark origin from the video image coordinate origin. The string ends with %, indicating that the watermark XPos specifies a percentage of the video width, such as 10% indicating that the XPos is 10% of the video width.
+	XPos *string `json:"XPos,omitnil" name:"XPos"`
+
+	// The vertical position of the watermark origin from the video image coordinate origin. When the string ends with %, it means that the watermark YPos specifies a percentage of the video height. For example, 10% means that YPos is 10% of the video height.
+	YPos *string `json:"YPos,omitnil" name:"YPos"`
+}
+
+type WatermarkConfigureInfoForUpdate struct {
+	// Whether to enable watermark. Possible values:
+	// <li>ON: means enabling watermark;</li>
+	// <li>OFF: means turning off watermark. </li>
+	Switch *string `json:"Switch,omitnil" name:"Switch"`
+
+	// Watermark image Base64 encoded string. Supports jpeg, png image formats.
+	ImageContent *string `json:"ImageContent,omitnil" name:"ImageContent"`
+
+	// The width of the watermark. 
+	// <li>The string ends with %, indicating that the watermark Width is a percentage of the video width, such as 10% indicating that the Width is 10% of the video width;</li>
+	Width *string `json:"Width,omitnil" name:"Width"`
+
+	// The height of the watermark. 
+	// <li>The string ends with %, indicating that the watermark Height is a percentage of the video height, for example, 10% means that the Height is 10% of the video height;</li>
+	Height *string `json:"Height,omitnil" name:"Height"`
+
+	// The horizontal position of the watermark origin from the video image coordinate origin. The string ends with %, indicating that the watermark XPos specifies a percentage of the video width, such as 10% indicating that XPos is 10% of the video width.
+	XPos *string `json:"XPos,omitnil" name:"XPos"`
+
+	// The vertical position of the watermark origin from the video image coordinate origin. When the string ends with %, it means that the watermark YPos specifies a percentage of the video height. For example, 10% means that YPos is 10% of the video height.
+	YPos *string `json:"YPos,omitnil" name:"YPos"`
 }
 
 type WatermarkCycleConfigForUpdate struct {
