@@ -236,6 +236,10 @@ type BillDetailData struct {
 	// Total cost = discounted total - voucher deduction
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TotalCost *string `json:"TotalCost,omitnil" name:"TotalCost"`
+
+	// ID
+	// Note: The return value may be null, indicating that no valid data can be obtained.
+	Id *string `json:"Id,omitnil" name:"Id"`
 }
 
 type BusinessSummaryOverviewItem struct {
@@ -506,6 +510,10 @@ type CustomerBillDetailData struct {
 	// Total cost = discounted total - voucher deduction
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TotalCost *string `json:"TotalCost,omitnil" name:"TotalCost"`
+
+	// ID
+	// Note: The return value may be null, indicating that no valid data can be obtained.
+	Id *string `json:"Id,omitnil" name:"Id"`
 }
 
 // Predefined struct for user
@@ -513,7 +521,7 @@ type DescribeBillDetailRequestParams struct {
 	// The queried month in u200dthe format of “YYYY-MM”, such as 2023-01.
 	Month *string `json:"Month,omitnil" name:"Month"`
 
-	// A pagination parameter that specifies the number of entries per page
+	// Page parameter: Indicates the number of entries per page. The maximum value is 200.
 	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
 	// A pagination parameter that specifies the current page number
@@ -532,7 +540,7 @@ type DescribeBillDetailRequest struct {
 	// The queried month in u200dthe format of “YYYY-MM”, such as 2023-01.
 	Month *string `json:"Month,omitnil" name:"Month"`
 
-	// A pagination parameter that specifies the number of entries per page
+	// Page parameter: Indicates the number of entries per page. The maximum value is 200.
 	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
 	// A pagination parameter that specifies the current page number
@@ -801,7 +809,7 @@ type DescribeCustomerBillDetailRequestParams struct {
 	// The queried month in “YYYY-MM” format, such as 2023-01.
 	Month *string `json:"Month,omitnil" name:"Month"`
 
-	// A pagination parameter that specifies the number of entries per page
+	// Page parameter: Indicates the number of entries per page. The maximum value is 200.
 	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
 	// A pagination parameter that specifies the current page number
@@ -856,7 +864,7 @@ type DescribeCustomerBillDetailRequest struct {
 	// The queried month in “YYYY-MM” format, such as 2023-01.
 	Month *string `json:"Month,omitnil" name:"Month"`
 
-	// A pagination parameter that specifies the number of entries per page
+	// Page parameter: Indicates the number of entries per page. The maximum value is 200.
 	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
 	// A pagination parameter that specifies the current page number
@@ -1120,10 +1128,20 @@ type DescribeCustomerInfoData struct {
 	// Binding time Note: This field may return null, indicating that no valid values can be obtained.
 	BindTime *string `json:"BindTime,omitnil" name:"BindTime"`
 
-	// Account status Valid values: `0` (Not frozen),  `1` (Frozen).  Note: This field may return null, indicating that no valid values can be obtained.
+	// Account status
+	// 0: Normal
+	// 1: Forcibly mandatory (this function is not supported yet)
+	// 2. Mandatory arrears
+	// Note: The return value may be null, indicating that no valid data can be obtained.
 	AccountStatus *string `json:"AccountStatus,omitnil" name:"AccountStatus"`
 
-	// Identity verification status Note: This field may return null, indicating that no valid values can be obtained.
+	// Identity verification status
+	// -1: Files not uploaded
+	// 0: Not submitted for review
+	// 1: Under review
+	// 2: Review error
+	// 3: Approved
+	// Note: The return value may be null, indicating that no valid data can be obtained.
 	AuthStatus *string `json:"AuthStatus,omitnil" name:"AuthStatus"`
 }
 
@@ -1405,6 +1423,10 @@ type QueryCreditAllocationHistoryData struct {
 
 	// The allocated total credit
 	AllocatedCredit *float64 `json:"AllocatedCredit,omitnil" name:"AllocatedCredit"`
+
+	// Available credits after allocation
+	// Note: The return value may be null, indicating that no valid data can be obtained.
+	ClientCreditAfter *float64 `json:"ClientCreditAfter,omitnil" name:"ClientCreditAfter"`
 }
 
 // Predefined struct for user
@@ -1825,6 +1847,12 @@ type QueryPartnerCreditResponseParams struct {
 
 	// Remaining credit
 	RemainingCredit *float64 `json:"RemainingCredit,omitnil" name:"RemainingCredit"`
+
+	// Allocated quota for the client
+	CustomerTotalCredit *float64 `json:"CustomerTotalCredit,omitnil" name:"CustomerTotalCredit"`
+
+	// Remaining quota for the client
+	CustomerRemainingCredit *float64 `json:"CustomerRemainingCredit,omitnil" name:"CustomerRemainingCredit"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`

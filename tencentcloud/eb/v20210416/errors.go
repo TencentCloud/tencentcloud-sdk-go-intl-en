@@ -83,6 +83,9 @@ const (
 	// Service error. Please try again. If the problem persists, please submit a ticket.
 	INTERNALERROR_SYSTEM = "InternalError.System"
 
+	// 
+	INTERNALERROR_UNKNOWNINTERNALERROR = "InternalError.UnknownInternalError"
+
 	// Parameter error.
 	INVALIDPARAMETER = "InvalidParameter"
 
@@ -94,6 +97,9 @@ const (
 
 	// The `AMPParams` value does not conform to the specification. Please fix it and try again.
 	INVALIDPARAMETERVALUE_AMPPARAMS = "InvalidParameterValue.AMPParams"
+
+	// The `Action` value is invalid.
+	INVALIDPARAMETERVALUE_ACTION = "InvalidParameterValue.Action"
 
 	// The `BatchEventCount` value does not conform to the specification. Please fix it and try again.
 	INVALIDPARAMETERVALUE_BATCHEVENTCOUNT = "InvalidParameterValue.BatchEventCount"

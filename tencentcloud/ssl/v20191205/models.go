@@ -76,7 +76,7 @@ type ApplyCertificateRequestParams struct {
 	// Encryption algorithm. RSA and ECC are supported.
 	CsrEncryptAlgo *string `json:"CsrEncryptAlgo,omitnil" name:"CsrEncryptAlgo"`
 
-	// Key pair parameter. RSA supports only the 2048-bit key and ECC supports only prime256v1.
+	// Key pair parameters. RSA supports only 2048. ECC supports only prime256v1. When the encryption algorithm is set to ECC, this parameter is mandatory.
 	CsrKeyParameter *string `json:"CsrKeyParameter,omitnil" name:"CsrKeyParameter"`
 
 	// CSR encryption password
@@ -122,7 +122,7 @@ type ApplyCertificateRequest struct {
 	// Encryption algorithm. RSA and ECC are supported.
 	CsrEncryptAlgo *string `json:"CsrEncryptAlgo,omitnil" name:"CsrEncryptAlgo"`
 
-	// Key pair parameter. RSA supports only the 2048-bit key and ECC supports only prime256v1.
+	// Key pair parameters. RSA supports only 2048. ECC supports only prime256v1. When the encryption algorithm is set to ECC, this parameter is mandatory.
 	CsrKeyParameter *string `json:"CsrKeyParameter,omitnil" name:"CsrKeyParameter"`
 
 	// CSR encryption password
@@ -515,6 +515,10 @@ type CertificateExtra struct {
 	// Whether the certificate is a Chinese SM certificate.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SMCert *int64 `json:"SMCert,omitnil" name:"SMCert"`
+
+	// Company type
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CompanyType *int64 `json:"CompanyType,omitnil" name:"CompanyType"`
 }
 
 type Certificates struct {
@@ -620,8 +624,8 @@ type Certificates struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	IsVulnerability *bool `json:"IsVulnerability,omitnil" name:"IsVulnerability"`
 
-	// Whether the certificate can be reissued
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Whether it can be renewed 
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	RenewAble *bool `json:"RenewAble,omitnil" name:"RenewAble"`
 
 	// Project information
@@ -683,6 +687,50 @@ type Certificates struct {
 	// The hosted new certificate ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HostingRenewCertId *string `json:"HostingRenewCertId,omitnil" name:"HostingRenewCertId"`
+
+	// Existing renewed certificate ID
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	HasRenewOrder *string `json:"HasRenewOrder,omitnil" name:"HasRenewOrder"`
+
+	// Whether the original certificate is deleted when a certificate is reissued.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ReplaceOriCertIsDelete *bool `json:"ReplaceOriCertIsDelete,omitnil" name:"ReplaceOriCertIsDelete"`
+
+	// Whether the certificate is expiring soon. A certificate is considered to be expiring soon when there are 30 days or less left.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	IsExpiring *bool `json:"IsExpiring,omitnil" name:"IsExpiring"`
+
+	// Validation expiration time for the addition of the DV certificate
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	DVAuthDeadline *string `json:"DVAuthDeadline,omitnil" name:"DVAuthDeadline"`
+
+	// Domain name validation pass time
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ValidationPassedTime *string `json:"ValidationPassedTime,omitnil" name:"ValidationPassedTime"`
+
+	// Multiple domain names with which the certificate is associated
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CertSANs []*string `json:"CertSANs,omitnil" name:"CertSANs"`
+
+	// Domain name validation rejection information
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AwaitingValidationMsg *string `json:"AwaitingValidationMsg,omitnil" name:"AwaitingValidationMsg"`
+
+	// Whether downloading is allowed
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AllowDownload *bool `json:"AllowDownload,omitnil" name:"AllowDownload"`
+
+
+	IsDNSPODResolve *bool `json:"IsDNSPODResolve,omitnil" name:"IsDNSPODResolve"`
+
+
+	IsPackage *bool `json:"IsPackage,omitnil" name:"IsPackage"`
+
+
+	KeyPasswordCustomFlag *bool `json:"KeyPasswordCustomFlag,omitnil" name:"KeyPasswordCustomFlag"`
+
+
+	SupportDownloadType *SupportDownloadType `json:"SupportDownloadType,omitnil" name:"SupportDownloadType"`
 }
 
 type ClbInstanceDetail struct {
@@ -1473,6 +1521,10 @@ type DescribeCertificateBindResourceTaskDetailResponseParams struct {
 
 	// The cache time of the current result.
 	CacheTime *string `json:"CacheTime,omitnil" name:"CacheTime"`
+
+	// Associated TSE resource details
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TSE []*TSEInstanceList `json:"TSE,omitnil" name:"TSE"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
@@ -2316,6 +2368,177 @@ func (r *DescribeHostTeoInstanceListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeHostUpdateRecordDetailRequestParams struct {
+	// One-click update record ID
+	DeployRecordId *string `json:"DeployRecordId,omitnil" name:"DeployRecordId"`
+
+	// Number per page, 10 by default.
+	Limit *string `json:"Limit,omitnil" name:"Limit"`
+
+	// Paging offset, starting from 0
+	Offset *string `json:"Offset,omitnil" name:"Offset"`
+}
+
+type DescribeHostUpdateRecordDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// One-click update record ID
+	DeployRecordId *string `json:"DeployRecordId,omitnil" name:"DeployRecordId"`
+
+	// Number per page, 10 by default.
+	Limit *string `json:"Limit,omitnil" name:"Limit"`
+
+	// Paging offset, starting from 0
+	Offset *string `json:"Offset,omitnil" name:"Offset"`
+}
+
+func (r *DescribeHostUpdateRecordDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostUpdateRecordDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DeployRecordId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeHostUpdateRecordDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHostUpdateRecordDetailResponseParams struct {
+	// Total count
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// Certificate deployment record list
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	RecordDetailList []*UpdateRecordDetails `json:"RecordDetailList,omitnil" name:"RecordDetailList"`
+
+	// Total successful deployments
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SuccessTotalCount *int64 `json:"SuccessTotalCount,omitnil" name:"SuccessTotalCount"`
+
+	// Total failed deployments
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	FailedTotalCount *int64 `json:"FailedTotalCount,omitnil" name:"FailedTotalCount"`
+
+	// Total running deployments
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	RunningTotalCount *int64 `json:"RunningTotalCount,omitnil" name:"RunningTotalCount"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeHostUpdateRecordDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeHostUpdateRecordDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeHostUpdateRecordDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostUpdateRecordDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHostUpdateRecordRequestParams struct {
+	// Paging offset, starting from 0
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Number per page, 10 by default.
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+
+	// New certificate ID
+	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+
+	// Old certificate ID
+	OldCertificateId *string `json:"OldCertificateId,omitnil" name:"OldCertificateId"`
+}
+
+type DescribeHostUpdateRecordRequest struct {
+	*tchttp.BaseRequest
+	
+	// Paging offset, starting from 0
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Number per page, 10 by default.
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+
+	// New certificate ID
+	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+
+	// Old certificate ID
+	OldCertificateId *string `json:"OldCertificateId,omitnil" name:"OldCertificateId"`
+}
+
+func (r *DescribeHostUpdateRecordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostUpdateRecordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "CertificateId")
+	delete(f, "OldCertificateId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeHostUpdateRecordRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHostUpdateRecordResponseParams struct {
+	// Total count
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// Certificate deployment record list
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	DeployRecordList []*UpdateRecordInfo `json:"DeployRecordList,omitnil" name:"DeployRecordList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeHostUpdateRecordResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeHostUpdateRecordResponseParams `json:"Response"`
+}
+
+func (r *DescribeHostUpdateRecordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostUpdateRecordResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DownloadCertificateRequestParams struct {
 	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
@@ -2445,6 +2668,28 @@ type Filter struct {
 
 	// u200cThe value of the filter parameter.
 	FilterValue *string `json:"FilterValue,omitnil" name:"FilterValue"`
+}
+
+type GatewayCertificate struct {
+	// Gateway certificate ID
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Id *string `json:"Id,omitnil" name:"Id"`
+
+	// Gateway certificate information
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// Bound domain name
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BindDomains []*string `json:"BindDomains,omitnil" name:"BindDomains"`
+
+	// Certificate source
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CertSource *string `json:"CertSource,omitnil" name:"CertSource"`
+
+	// SSL certificate ID that is currently bound
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
 }
 
 type LiveInstanceDetail struct {
@@ -2957,6 +3202,14 @@ func (r *ReplaceCertificateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ResourceTypeRegions struct {
+	// Cloud resource type
+	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+
+	// Region list
+	Regions []*string `json:"Regions,omitnil" name:"Regions"`
+}
+
 type RootCertificates struct {
 	// Chinese SM signature certificate
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -3305,6 +3558,29 @@ type SubmittedData struct {
 	VerifyType *string `json:"VerifyType,omitnil" name:"VerifyType"`
 }
 
+type SupportDownloadType struct {
+
+	NGINX *bool `json:"NGINX,omitnil" name:"NGINX"`
+
+
+	APACHE *bool `json:"APACHE,omitnil" name:"APACHE"`
+
+
+	TOMCAT *bool `json:"TOMCAT,omitnil" name:"TOMCAT"`
+
+
+	IIS *bool `json:"IIS,omitnil" name:"IIS"`
+
+
+	JKS *bool `json:"JKS,omitnil" name:"JKS"`
+
+
+	OTHER *bool `json:"OTHER,omitnil" name:"OTHER"`
+
+
+	ROOT *bool `json:"ROOT,omitnil" name:"ROOT"`
+}
+
 type SyncTaskBindResourceResult struct {
 	// The task ID.
 	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
@@ -3432,6 +3708,32 @@ type TCBInstanceList struct {
 	Environments []*TCBEnvironments `json:"Environments,omitnil" name:"Environments"`
 }
 
+type TSEInstanceDetail struct {
+	// Gateway ID
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	GatewayId *string `json:"GatewayId,omitnil" name:"GatewayId"`
+
+	// Gateway name
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	GatewayName *string `json:"GatewayName,omitnil" name:"GatewayName"`
+
+	// Gateway certificate list
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CertificateList []*GatewayCertificate `json:"CertificateList,omitnil" name:"CertificateList"`
+}
+
+type TSEInstanceList struct {
+	// TSE instance details
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	InstanceList []*TSEInstanceDetail `json:"InstanceList,omitnil" name:"InstanceList"`
+
+	// Total TSE instances in this region	
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// Region	
+	Region *string `json:"Region,omitnil" name:"Region"`
+}
+
 type Tags struct {
 	// Tag key
 	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
@@ -3525,6 +3827,413 @@ type TkeSecretDetail struct {
 	// The list of domains that do not match the new certificate.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	NoMatchDomains []*string `json:"NoMatchDomains,omitnil" name:"NoMatchDomains"`
+}
+
+// Predefined struct for user
+type UpdateCertificateInstanceRequestParams struct {
+	// One-click update old certificate ID
+	OldCertificateId *string `json:"OldCertificateId,omitnil" name:"OldCertificateId"`
+
+	// Type of the resource that needs to be deployed. The following parameter values are optional: clb, cdn, waf, live, ddos, teo, apigateway, vod, tke, and tcb.
+	ResourceTypes []*string `json:"ResourceTypes,omitnil" name:"ResourceTypes"`
+
+	// One-click update new certificate ID
+	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+
+	// List of regions that need to be deployed (deprecated)
+	//
+	// Deprecated: Regions is deprecated.
+	Regions []*string `json:"Regions,omitnil" name:"Regions"`
+
+	// List of regions for which cloud resources need to be deployed
+	ResourceTypesRegions []*ResourceTypeRegions `json:"ResourceTypesRegions,omitnil" name:"ResourceTypesRegions"`
+
+	// Public key of the certificate. If the public key of the certificate is uploaded, CertificateId does not need to be uploaded.
+	CertificatePublicKey *string `json:"CertificatePublicKey,omitnil" name:"CertificatePublicKey"`
+
+	// Private key of the certificate. If the public key of the certificate is uploaded, the private key of the certificate is required.
+	CertificatePrivateKey *string `json:"CertificatePrivateKey,omitnil" name:"CertificatePrivateKey"`
+
+	// Whether an expiration reminder is ignored for the old certificate. 0: The notification is not ignored. 1: The notification is ignored.
+	ExpiringNotificationSwitch *uint64 `json:"ExpiringNotificationSwitch,omitnil" name:"ExpiringNotificationSwitch"`
+
+	// Whether repeated uploading of the same certificate is allowed. If the public key of the certificate is uploaded, this parameter can be configured.
+	Repeatable *bool `json:"Repeatable,omitnil" name:"Repeatable"`
+
+	// Whether downloading is allowed. If the public key of the certificate is uploaded, this parameter can be configured.
+	AllowDownload *bool `json:"AllowDownload,omitnil" name:"AllowDownload"`
+
+	// Tag list. If the public key of the certificate is uploaded, this parameter can be configured.
+	Tags []*Tags `json:"Tags,omitnil" name:"Tags"`
+
+	// Project ID. If the public key of the certificate is uploaded, this parameter can be configured.
+	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
+}
+
+type UpdateCertificateInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// One-click update old certificate ID
+	OldCertificateId *string `json:"OldCertificateId,omitnil" name:"OldCertificateId"`
+
+	// Type of the resource that needs to be deployed. The following parameter values are optional: clb, cdn, waf, live, ddos, teo, apigateway, vod, tke, and tcb.
+	ResourceTypes []*string `json:"ResourceTypes,omitnil" name:"ResourceTypes"`
+
+	// One-click update new certificate ID
+	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+
+	// List of regions that need to be deployed (deprecated)
+	Regions []*string `json:"Regions,omitnil" name:"Regions"`
+
+	// List of regions for which cloud resources need to be deployed
+	ResourceTypesRegions []*ResourceTypeRegions `json:"ResourceTypesRegions,omitnil" name:"ResourceTypesRegions"`
+
+	// Public key of the certificate. If the public key of the certificate is uploaded, CertificateId does not need to be uploaded.
+	CertificatePublicKey *string `json:"CertificatePublicKey,omitnil" name:"CertificatePublicKey"`
+
+	// Private key of the certificate. If the public key of the certificate is uploaded, the private key of the certificate is required.
+	CertificatePrivateKey *string `json:"CertificatePrivateKey,omitnil" name:"CertificatePrivateKey"`
+
+	// Whether an expiration reminder is ignored for the old certificate. 0: The notification is not ignored. 1: The notification is ignored.
+	ExpiringNotificationSwitch *uint64 `json:"ExpiringNotificationSwitch,omitnil" name:"ExpiringNotificationSwitch"`
+
+	// Whether repeated uploading of the same certificate is allowed. If the public key of the certificate is uploaded, this parameter can be configured.
+	Repeatable *bool `json:"Repeatable,omitnil" name:"Repeatable"`
+
+	// Whether downloading is allowed. If the public key of the certificate is uploaded, this parameter can be configured.
+	AllowDownload *bool `json:"AllowDownload,omitnil" name:"AllowDownload"`
+
+	// Tag list. If the public key of the certificate is uploaded, this parameter can be configured.
+	Tags []*Tags `json:"Tags,omitnil" name:"Tags"`
+
+	// Project ID. If the public key of the certificate is uploaded, this parameter can be configured.
+	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
+}
+
+func (r *UpdateCertificateInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCertificateInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "OldCertificateId")
+	delete(f, "ResourceTypes")
+	delete(f, "CertificateId")
+	delete(f, "Regions")
+	delete(f, "ResourceTypesRegions")
+	delete(f, "CertificatePublicKey")
+	delete(f, "CertificatePrivateKey")
+	delete(f, "ExpiringNotificationSwitch")
+	delete(f, "Repeatable")
+	delete(f, "AllowDownload")
+	delete(f, "Tags")
+	delete(f, "ProjectId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateCertificateInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateCertificateInstanceResponseParams struct {
+	// Cloud resource deployment task ID
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	DeployRecordId *uint64 `json:"DeployRecordId,omitnil" name:"DeployRecordId"`
+
+	// Deployment status. 1 indicates that the deployment succeeded, and 0 indicates that the deployment failed.
+	DeployStatus *int64 `json:"DeployStatus,omitnil" name:"DeployStatus"`
+
+
+	UpdateSyncProgress []*UpdateSyncProgress `json:"UpdateSyncProgress,omitnil" name:"UpdateSyncProgress"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type UpdateCertificateInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateCertificateInstanceResponseParams `json:"Response"`
+}
+
+func (r *UpdateCertificateInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCertificateInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateCertificateRecordRetryRequestParams struct {
+	// To-be-redeployed record ID
+	DeployRecordId *int64 `json:"DeployRecordId,omitnil" name:"DeployRecordId"`
+
+	// To-be-redeployed record detail ID
+	DeployRecordDetailId *int64 `json:"DeployRecordDetailId,omitnil" name:"DeployRecordDetailId"`
+}
+
+type UpdateCertificateRecordRetryRequest struct {
+	*tchttp.BaseRequest
+	
+	// To-be-redeployed record ID
+	DeployRecordId *int64 `json:"DeployRecordId,omitnil" name:"DeployRecordId"`
+
+	// To-be-redeployed record detail ID
+	DeployRecordDetailId *int64 `json:"DeployRecordDetailId,omitnil" name:"DeployRecordDetailId"`
+}
+
+func (r *UpdateCertificateRecordRetryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCertificateRecordRetryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DeployRecordId")
+	delete(f, "DeployRecordDetailId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateCertificateRecordRetryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateCertificateRecordRetryResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type UpdateCertificateRecordRetryResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateCertificateRecordRetryResponseParams `json:"Response"`
+}
+
+func (r *UpdateCertificateRecordRetryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCertificateRecordRetryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateCertificateRecordRollbackRequestParams struct {
+	// To-be-redeployed record ID
+	DeployRecordId *int64 `json:"DeployRecordId,omitnil" name:"DeployRecordId"`
+}
+
+type UpdateCertificateRecordRollbackRequest struct {
+	*tchttp.BaseRequest
+	
+	// To-be-redeployed record ID
+	DeployRecordId *int64 `json:"DeployRecordId,omitnil" name:"DeployRecordId"`
+}
+
+func (r *UpdateCertificateRecordRollbackRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCertificateRecordRollbackRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DeployRecordId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateCertificateRecordRollbackRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateCertificateRecordRollbackResponseParams struct {
+	// Rollback deployment record ID
+	DeployRecordId *int64 `json:"DeployRecordId,omitnil" name:"DeployRecordId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type UpdateCertificateRecordRollbackResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateCertificateRecordRollbackResponseParams `json:"Response"`
+}
+
+func (r *UpdateCertificateRecordRollbackResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCertificateRecordRollbackResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpdateRecordDetail struct {
+	// Detail record ID
+	Id *uint64 `json:"Id,omitnil" name:"Id"`
+
+	// New certificate ID
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
+
+	// Old certificate ID
+	OldCertId *string `json:"OldCertId,omitnil" name:"OldCertId"`
+
+	// Deployment domain name list
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+
+	// Deployment resource type
+	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+
+	// Deployment region
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Region *string `json:"Region,omitnil" name:"Region"`
+
+	// Deployment status
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
+
+	// Deployment error message
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ErrorMsg *string `json:"ErrorMsg,omitnil" name:"ErrorMsg"`
+
+	// Deployment time
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+
+	// Last update time
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+
+	// Deployment instance ID
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Deployment instance name
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+
+	// Deployment listener ID (only for CLB)
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ListenerId *string `json:"ListenerId,omitnil" name:"ListenerId"`
+
+	// Deployment listener name (only for CLB)
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ListenerName *string `json:"ListenerName,omitnil" name:"ListenerName"`
+
+	// Protocol
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+
+	// Whether SNI is enabled (only for CLB)
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SniSwitch *uint64 `json:"SniSwitch,omitnil" name:"SniSwitch"`
+
+	// Bucket name (only for COS)
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Bucket *string `json:"Bucket,omitnil" name:"Bucket"`
+
+	// Port
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Port *int64 `json:"Port,omitnil" name:"Port"`
+
+	// Namespace (only for TKE)
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+
+	// Secret name (only for TKE)
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
+
+	// Environment ID
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	EnvId *string `json:"EnvId,omitnil" name:"EnvId"`
+
+	// TCB deployment type
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TCBType *string `json:"TCBType,omitnil" name:"TCBType"`
+}
+
+type UpdateRecordDetails struct {
+	// Deployment resource type
+	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+
+	// Deployment resource detail list
+	List []*UpdateRecordDetail `json:"List,omitnil" name:"List"`
+
+	// Total deployment resource count
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+}
+
+type UpdateRecordInfo struct {
+	// Record ID
+	Id *uint64 `json:"Id,omitnil" name:"Id"`
+
+	// New certificate ID
+	CertId *string `json:"CertId,omitnil" name:"CertId"`
+
+	// Old certificate ID
+	OldCertId *string `json:"OldCertId,omitnil" name:"OldCertId"`
+
+	// Deployment resource type list
+	ResourceTypes []*string `json:"ResourceTypes,omitnil" name:"ResourceTypes"`
+
+	// Deployment region list
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Regions []*string `json:"Regions,omitnil" name:"Regions"`
+
+	// Deployment status
+	Status *uint64 `json:"Status,omitnil" name:"Status"`
+
+	// Deployment time
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+
+	// Last update time
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+}
+
+type UpdateSyncProgress struct {
+
+	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+
+
+	UpdateSyncProgressRegions []*UpdateSyncProgressRegion `json:"UpdateSyncProgressRegions,omitnil" name:"UpdateSyncProgressRegions"`
+
+
+	Status *int64 `json:"Status,omitnil" name:"Status"`
+}
+
+type UpdateSyncProgressRegion struct {
+
+	Region *string `json:"Region,omitnil" name:"Region"`
+
+
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+
+	OffsetCount *int64 `json:"OffsetCount,omitnil" name:"OffsetCount"`
+
+
+	Status *int64 `json:"Status,omitnil" name:"Status"`
 }
 
 // Predefined struct for user

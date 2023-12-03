@@ -955,6 +955,106 @@ func (r *DeleteTransformationResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeLogTagValueRequestParams struct {
+	// The query start time.
+	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+
+	// The query end time.
+	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitnil" name:"EventBusId"`
+
+	// Aggregation field
+	GroupField *string `json:"GroupField,omitnil" name:"GroupField"`
+
+	// Number of pages.
+	Page *int64 `json:"Page,omitnil" name:"Page"`
+
+	// Logs returned per page
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Filter conditions
+	Filter []*LogFilter `json:"Filter,omitnil" name:"Filter"`
+}
+
+type DescribeLogTagValueRequest struct {
+	*tchttp.BaseRequest
+	
+	// The query start time.
+	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+
+	// The query end time.
+	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitnil" name:"EventBusId"`
+
+	// Aggregation field
+	GroupField *string `json:"GroupField,omitnil" name:"GroupField"`
+
+	// Number of pages.
+	Page *int64 `json:"Page,omitnil" name:"Page"`
+
+	// Logs returned per page
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Filter conditions
+	Filter []*LogFilter `json:"Filter,omitnil" name:"Filter"`
+}
+
+func (r *DescribeLogTagValueRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLogTagValueRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "EventBusId")
+	delete(f, "GroupField")
+	delete(f, "Page")
+	delete(f, "Limit")
+	delete(f, "Filter")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeLogTagValueRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeLogTagValueResponseParams struct {
+	// Query searching metric value. 
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Results []*string `json:"Results,omitnil" name:"Results"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeLogTagValueResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeLogTagValueResponseParams `json:"Response"`
+}
+
+func (r *DescribeLogTagValueResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeLogTagValueResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type ESTargetParams struct {
 	// Network connection type
 	NetMode *string `json:"NetMode,omitnil" name:"NetMode"`
@@ -1647,6 +1747,34 @@ func (r *ListTargetsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type LogFilter struct {
+	// Field name
+	Key *string `json:"Key,omitnil" name:"Key"`
+
+	// Operator. Values: `eq` (Equal to), `neq` (Not equal to), `like`, `not like`, `lt` (Smaller than), `lte` (Smaller than and equal to), `gt` (Greater than), `gte` (Greater than and equal to), `range` (Within the range) and `norange` (Not in the range).
+	Operator *string `json:"Operator,omitnil" name:"Operator"`
+
+	// Filter value. Two values should be entered for range operation, separated by a comma (,).
+	Value *string `json:"Value,omitnil" name:"Value"`
+
+	// The logical relationship between conditions. Values: `AND` and `OR`.
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// LogFilters array
+	Filters []*LogFilters `json:"Filters,omitnil" name:"Filters"`
+}
+
+type LogFilters struct {
+	// Field name
+	Key *string `json:"Key,omitnil" name:"Key"`
+
+	// Operator. Values: `eq` (Equal to), `neq` (Not equal to), `like`, `not like`, `lt` (Smaller than), `lte` (Smaller than and equal to), `gt` (Greater than), `gte` (Greater than and equal to), `range` (Within the range) and `norange` (Not in the range).
+	Operator *string `json:"Operator,omitnil" name:"Operator"`
+
+	// Filter value. Two values should be entered for range operation, separated by a comma (,)
+	Value *string `json:"Value,omitnil" name:"Value"`
+}
+
 type OutputStructParam struct {
 	// Key in the corresponding JSON output
 	Key *string `json:"Key,omitnil" name:"Key"`
@@ -1709,6 +1837,159 @@ type SCFParams struct {
 
 	// Enables batch delivery
 	EnableBatchDelivery *bool `json:"EnableBatchDelivery,omitnil" name:"EnableBatchDelivery"`
+}
+
+// Predefined struct for user
+type SearchLogRequestParams struct {
+	// Query start time (UNIX in ms)
+	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+
+	// Query end time (UNIX in ms)
+	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitnil" name:"EventBusId"`
+
+	// Page number
+	Page *int64 `json:"Page,omitnil" name:"Page"`
+
+	// Logs returned per page
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Filter conditions
+	Filter []*LogFilter `json:"Filter,omitnil" name:"Filter"`
+
+	// Sorting array
+	OrderFields []*string `json:"OrderFields,omitnil" name:"OrderFields"`
+
+	// Sorting order. Values: `asc` (earliest first); `desc` (latest first)
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+}
+
+type SearchLogRequest struct {
+	*tchttp.BaseRequest
+	
+	// Query start time (UNIX in ms)
+	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+
+	// Query end time (UNIX in ms)
+	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+
+	// Event bus ID
+	EventBusId *string `json:"EventBusId,omitnil" name:"EventBusId"`
+
+	// Page number
+	Page *int64 `json:"Page,omitnil" name:"Page"`
+
+	// Logs returned per page
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Filter conditions
+	Filter []*LogFilter `json:"Filter,omitnil" name:"Filter"`
+
+	// Sorting array
+	OrderFields []*string `json:"OrderFields,omitnil" name:"OrderFields"`
+
+	// Sorting order. Values: `asc` (earliest first); `desc` (latest first)
+	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+}
+
+func (r *SearchLogRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SearchLogRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "EventBusId")
+	delete(f, "Page")
+	delete(f, "Limit")
+	delete(f, "Filter")
+	delete(f, "OrderFields")
+	delete(f, "OrderBy")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchLogRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SearchLogResponseParams struct {
+	// Total number of logs
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Total *int64 `json:"Total,omitnil" name:"Total"`
+
+	// Number of entries per page.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Page number
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Page *int64 `json:"Page,omitnil" name:"Page"`
+
+	// Log searching results
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Results []*SearchLogResult `json:"Results,omitnil" name:"Results"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type SearchLogResponse struct {
+	*tchttp.BaseResponse
+	Response *SearchLogResponseParams `json:"Response"`
+}
+
+func (r *SearchLogResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SearchLogResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type SearchLogResult struct {
+	// Log reported time
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Timestamp *string `json:"Timestamp,omitnil" name:"Timestamp"`
+
+	// Log details
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitnil" name:"Message"`
+
+	// Event source
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Source *string `json:"Source,omitnil" name:"Source"`
+
+	// The event type.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// Event matching rule
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	RuleIds *string `json:"RuleIds,omitnil" name:"RuleIds"`
+
+	// The instance ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Subject *string `json:"Subject,omitnil" name:"Subject"`
+
+	// The region.
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Region *string `json:"Region,omitnil" name:"Region"`
+
+	// Event status
+	// Note: This field may return·null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitnil" name:"Status"`
 }
 
 type Target struct {

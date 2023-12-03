@@ -77,6 +77,8 @@ func NewAllocateCustomerCreditResponse() (response *AllocateCustomerCreditRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE_CREDITAMOUNTOUTOFRANGE = "InvalidParameterValue.CreditAmountOutOfRange"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) AllocateCustomerCredit(request *AllocateCustomerCreditRequest) (response *AllocateCustomerCreditResponse, err error) {
     return c.AllocateCustomerCreditWithContext(context.Background(), request)
 }
@@ -94,6 +96,8 @@ func (c *Client) AllocateCustomerCredit(request *AllocateCustomerCreditRequest) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE_CREDITAMOUNTOUTOFRANGE = "InvalidParameterValue.CreditAmountOutOfRange"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) AllocateCustomerCreditWithContext(ctx context.Context, request *AllocateCustomerCreditRequest) (response *AllocateCustomerCreditResponse, err error) {
     if request == nil {
         request = NewAllocateCustomerCreditRequest()
@@ -291,6 +295,7 @@ func NewDescribeBillSummaryByPayModeResponse() (response *DescribeBillSummaryByP
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) DescribeBillSummaryByPayMode(request *DescribeBillSummaryByPayModeRequest) (response *DescribeBillSummaryByPayModeResponse, err error) {
     return c.DescribeBillSummaryByPayModeWithContext(context.Background(), request)
 }
@@ -301,6 +306,7 @@ func (c *Client) DescribeBillSummaryByPayMode(request *DescribeBillSummaryByPayM
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) DescribeBillSummaryByPayModeWithContext(ctx context.Context, request *DescribeBillSummaryByPayModeRequest) (response *DescribeBillSummaryByPayModeResponse, err error) {
     if request == nil {
         request = NewDescribeBillSummaryByPayModeRequest()
@@ -342,6 +348,7 @@ func NewDescribeBillSummaryByProductResponse() (response *DescribeBillSummaryByP
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) DescribeBillSummaryByProduct(request *DescribeBillSummaryByProductRequest) (response *DescribeBillSummaryByProductResponse, err error) {
     return c.DescribeBillSummaryByProductWithContext(context.Background(), request)
 }
@@ -352,6 +359,7 @@ func (c *Client) DescribeBillSummaryByProduct(request *DescribeBillSummaryByProd
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) DescribeBillSummaryByProductWithContext(ctx context.Context, request *DescribeBillSummaryByProductRequest) (response *DescribeBillSummaryByProductResponse, err error) {
     if request == nil {
         request = NewDescribeBillSummaryByProductRequest()
@@ -393,6 +401,7 @@ func NewDescribeBillSummaryByRegionResponse() (response *DescribeBillSummaryByRe
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) DescribeBillSummaryByRegion(request *DescribeBillSummaryByRegionRequest) (response *DescribeBillSummaryByRegionResponse, err error) {
     return c.DescribeBillSummaryByRegionWithContext(context.Background(), request)
 }
@@ -403,6 +412,7 @@ func (c *Client) DescribeBillSummaryByRegion(request *DescribeBillSummaryByRegio
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) DescribeBillSummaryByRegionWithContext(ctx context.Context, request *DescribeBillSummaryByRegionRequest) (response *DescribeBillSummaryByRegionResponse, err error) {
     if request == nil {
         request = NewDescribeBillSummaryByRegionRequest()
@@ -819,6 +829,7 @@ func NewQueryCreditByUinListResponse() (response *QueryCreditByUinListResponse) 
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  OPERATIONDENIED = "OperationDenied"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION_NOTCUSTOMERUIN = "UnauthorizedOperation.NotCustomerUin"
 func (c *Client) QueryCreditByUinList(request *QueryCreditByUinListRequest) (response *QueryCreditByUinListResponse, err error) {
     return c.QueryCreditByUinListWithContext(context.Background(), request)
 }
@@ -831,6 +842,7 @@ func (c *Client) QueryCreditByUinList(request *QueryCreditByUinListRequest) (res
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  OPERATIONDENIED = "OperationDenied"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION_NOTCUSTOMERUIN = "UnauthorizedOperation.NotCustomerUin"
 func (c *Client) QueryCreditByUinListWithContext(ctx context.Context, request *QueryCreditByUinListRequest) (response *QueryCreditByUinListResponse, err error) {
     if request == nil {
         request = NewQueryCreditByUinListRequest()
@@ -920,6 +932,8 @@ func NewQueryCustomersCreditResponse() (response *QueryCustomersCreditResponse) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryCustomersCredit(request *QueryCustomersCreditRequest) (response *QueryCustomersCreditResponse, err error) {
     return c.QueryCustomersCreditWithContext(context.Background(), request)
 }
@@ -929,6 +943,8 @@ func (c *Client) QueryCustomersCredit(request *QueryCustomersCreditRequest) (res
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryCustomersCreditWithContext(ctx context.Context, request *QueryCustomersCreditRequest) (response *QueryCustomersCreditResponse, err error) {
     if request == nil {
         request = NewQueryCustomersCreditRequest()
@@ -972,6 +988,7 @@ func NewQueryDirectCustomersCreditResponse() (response *QueryDirectCustomersCred
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  OPERATIONDENIED = "OperationDenied"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryDirectCustomersCredit(request *QueryDirectCustomersCreditRequest) (response *QueryDirectCustomersCreditResponse, err error) {
     return c.QueryDirectCustomersCreditWithContext(context.Background(), request)
 }
@@ -984,6 +1001,7 @@ func (c *Client) QueryDirectCustomersCredit(request *QueryDirectCustomersCreditR
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  OPERATIONDENIED = "OperationDenied"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryDirectCustomersCreditWithContext(ctx context.Context, request *QueryDirectCustomersCreditRequest) (response *QueryDirectCustomersCreditResponse, err error) {
     if request == nil {
         request = NewQueryDirectCustomersCreditRequest()
@@ -1024,6 +1042,8 @@ func NewQueryPartnerCreditResponse() (response *QueryPartnerCreditResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryPartnerCredit(request *QueryPartnerCreditRequest) (response *QueryPartnerCreditResponse, err error) {
     return c.QueryPartnerCreditWithContext(context.Background(), request)
 }
@@ -1033,6 +1053,8 @@ func (c *Client) QueryPartnerCredit(request *QueryPartnerCreditRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryPartnerCreditWithContext(ctx context.Context, request *QueryPartnerCreditRequest) (response *QueryPartnerCreditResponse, err error) {
     if request == nil {
         request = NewQueryPartnerCreditRequest()
@@ -1073,6 +1095,8 @@ func NewQueryVoucherAmountByUinResponse() (response *QueryVoucherAmountByUinResp
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherAmountByUin(request *QueryVoucherAmountByUinRequest) (response *QueryVoucherAmountByUinResponse, err error) {
     return c.QueryVoucherAmountByUinWithContext(context.Background(), request)
 }
@@ -1082,6 +1106,8 @@ func (c *Client) QueryVoucherAmountByUin(request *QueryVoucherAmountByUinRequest
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherAmountByUinWithContext(ctx context.Context, request *QueryVoucherAmountByUinRequest) (response *QueryVoucherAmountByUinResponse, err error) {
     if request == nil {
         request = NewQueryVoucherAmountByUinRequest()
@@ -1122,6 +1148,8 @@ func NewQueryVoucherListByUinResponse() (response *QueryVoucherListByUinResponse
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherListByUin(request *QueryVoucherListByUinRequest) (response *QueryVoucherListByUinResponse, err error) {
     return c.QueryVoucherListByUinWithContext(context.Background(), request)
 }
@@ -1131,6 +1159,8 @@ func (c *Client) QueryVoucherListByUin(request *QueryVoucherListByUinRequest) (r
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherListByUinWithContext(ctx context.Context, request *QueryVoucherListByUinRequest) (response *QueryVoucherListByUinResponse, err error) {
     if request == nil {
         request = NewQueryVoucherListByUinRequest()
@@ -1171,6 +1201,8 @@ func NewQueryVoucherPoolResponse() (response *QueryVoucherPoolResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherPool(request *QueryVoucherPoolRequest) (response *QueryVoucherPoolResponse, err error) {
     return c.QueryVoucherPoolWithContext(context.Background(), request)
 }
@@ -1180,6 +1212,8 @@ func (c *Client) QueryVoucherPool(request *QueryVoucherPoolRequest) (response *Q
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherPoolWithContext(ctx context.Context, request *QueryVoucherPoolRequest) (response *QueryVoucherPoolResponse, err error) {
     if request == nil {
         request = NewQueryVoucherPoolRequest()

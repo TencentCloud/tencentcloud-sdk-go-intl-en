@@ -21,7 +21,9 @@ import (
 )
 
 type AccessControl struct {
-	// Whether to enable request header and request URL access control. Valid values: on, off
+	// Whether to enable access control based on the request header and request URL. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Request header and request URL access rule
@@ -542,7 +544,10 @@ type AdvanceHttps struct {
 }
 
 type AdvancedAuthentication struct {
-	// Hotlink protection configuration switch (which can be on or off). If it is enabled, only one mode can and must be configured, while other modes are null.
+	// Whether to enable hot linking protection. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Only one advanced configuration can be enabled. Set the rests to `null`.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Timestamp hotlink protection advanced configuration mode A
@@ -725,8 +730,10 @@ type AdvancedCCRules struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	FrequencyLimit *uint64 `json:"FrequencyLimit,omitnil" name:"FrequencyLimit"`
 
-	// Whether to enable IP penalty. Valid values: `on` and `off`.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Whether to enable IP blocking. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	PunishmentSwitch *string `json:"PunishmentSwitch,omitnil" name:"PunishmentSwitch"`
 
 	// IP penalty duration
@@ -745,8 +752,10 @@ type AdvancedCCRules struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	Configure []*ScdnSevenLayerRules `json:"Configure,omitnil" name:"Configure"`
 
-	// Whether to enable the rule. Values: `on` (enable), `off` (disable).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to enable custom CC rules. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
@@ -818,7 +827,7 @@ type AdvancedScdnAclRule struct {
 	// `null`: Empty or does not exist
 	LogicOperator *string `json:"LogicOperator,omitnil" name:"LogicOperator"`
 
-	// Match value
+	// Matched value.
 	// When `MatchKey` is `protocol`,
 	// Values: `HTTP` and `HTTPS`.
 	// 
@@ -881,11 +890,10 @@ type AdvancedScdnAclRule struct {
 	// `AI`: Anguilla
 	// `VA`: Vatican
 	// `SK`: Slovakia
-	// `RU`: Russia
 	// `GB`: United Kingdom
 	// `CZ`: Czech Republic
 	// `UA`: Ukraine
-	// `TR`: Turkey
+	// `TR`: Türkiye
 	// `SI`: Slovenia
 	// `SE`: Sweden
 	// `RS`: Republic of Serbia
@@ -1022,7 +1030,7 @@ type AdvancedScdnAclRule struct {
 	// `AO`: Angola
 	// 
 	// When MatchKey is `ipArea`, valid values include:
-	// `OTHER`: other areas
+	// `OTHER`: Other areas
 	// `AS`: Asia
 	// `EU`: Europe
 	// `AN`: Antarctica
@@ -1043,11 +1051,18 @@ type AdvancedScdnAclRule struct {
 }
 
 type Authentication struct {
-	// Hotlink protection configuration switch
+	// Whether to enable hot linking protection. Values:
 	// `on`: Enable
 	// `off`: Disable
-	// When this is enabled, one mode needs to be configured. Other modes need to be set to null.
+	// Only one advanced configuration can be enabled. Set the rests to `null`.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
+
+	// Authentication algorithm. Values:
+	// `md5`: Calculate the hash using MD5.
+	// `sha256`: Calculate the hash using SHA-256.
+	// Default value: `md5`.
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	AuthAlgorithm *string `json:"AuthAlgorithm,omitnil" name:"AuthAlgorithm"`
 
 	// Timestamp hotlink protection mode A configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
@@ -1186,13 +1201,17 @@ type AuthenticationTypeD struct {
 }
 
 type AvifAdapter struct {
-	// Switch. Valid values: `on`, `off`.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Whether to enable `AvifAdapter` for image optimization. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
 type AwsPrivateAccess struct {
-	// Switch, which can be set to on or off.
+	// Whether to enable origin-pull authentication for S3 buckets.
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Access ID.
@@ -1213,7 +1232,7 @@ type AwsPrivateAccess struct {
 }
 
 type BandwidthAlert struct {
-	// Specifies whether to enable the bandwidth cap
+	// Whether to enable usage limit. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -1231,10 +1250,10 @@ type BandwidthAlert struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	LastTriggerTime *string `json:"LastTriggerTime,omitnil" name:"LastTriggerTime"`
 
-	// Indicates whether to trigger alerts when the upper limit is reached
+	// Whether to enable alerts for usage limit. Values:
 	// `on`: Enable
 	// `off`: Disable
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	AlertSwitch *string `json:"AlertSwitch,omitnil" name:"AlertSwitch"`
 
 	// Triggers alarms when the ratio of bandwidth or traffic usage to the usage upper limit reaches the specified value
@@ -1257,7 +1276,9 @@ type BandwidthAlert struct {
 }
 
 type BotCookie struct {
-	// Valid values: `on` and `off`.
+	// Whether to enable bot cookie policies. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Rule type, which can only be `all` currently.
@@ -1279,7 +1300,9 @@ type BotCookie struct {
 }
 
 type BotJavaScript struct {
-	// Valid values: `on` and `off`.
+	// Whether to enable bot JS policies. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Rule type, which can only be `file` currently.
@@ -1385,19 +1408,22 @@ type Cache struct {
 }
 
 type CacheConfig struct {
+	// Whether to enable heuristic cache validity. Values:
 	// `on`: Enable
 	// `off`: Disable
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	HeuristicCacheTimeSwitch *string `json:"HeuristicCacheTimeSwitch,omitnil" name:"HeuristicCacheTimeSwitch"`
 
 	// Unit: Second
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	HeuristicCacheTime *int64 `json:"HeuristicCacheTime,omitnil" name:"HeuristicCacheTime"`
 }
 
 type CacheConfigCache struct {
-	// Cache configuration switch
-	// on: enable
-	// off: disable
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to enable path cache. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Cache expiration time settings
@@ -1428,7 +1454,7 @@ type CacheConfigCache struct {
 }
 
 type CacheConfigFollowOrigin struct {
-	// Follow origin server switch configuration
+	// Whether to follow the origin configuration for path cache. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -1439,10 +1465,10 @@ type CacheConfigFollowOrigin struct {
 }
 
 type CacheConfigNoCache struct {
-	// No-cache configuration switch
+	// Whether to enable no-caching at the path. Values:
 	// `on`: Enable
 	// `off`: Disable
-	// Note: this field may return null, indicating that no valid value is obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Always forwards to the origin server for verification
@@ -1499,8 +1525,10 @@ type CacheOptResult struct {
 }
 
 type CacheTagKey struct {
-	// Whether to use `CacheTag` as part of `CacheKey`
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to include `CacheTag` as part of `CacheKey`. Values:
+	// `on`: Yes
+	// `off`: No
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Value of custom `CacheTag`
@@ -1646,7 +1674,7 @@ type Compatibility struct {
 }
 
 type Compression struct {
-	// Smart compression configuration switch
+	// Whether to enable smart compression. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -1702,8 +1730,10 @@ type CompressionRule struct {
 }
 
 type CookieKey struct {
-	// Whether to use `Cookie` as part of `CacheKey`. Valid values: on, off
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to include Cookie as part of CacheKey. Values:
+	// `on`: Yes
+	// `off`: No
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Used cookies (separated by ';')
@@ -3305,27 +3335,41 @@ func (r *DescribeOriginDataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePayTypeRequestParams struct {
-	// Specifies a service region.
-	// `mainland`: queries billing methods within Mainland China;
-	// `overseas`: queries billing methods outside Mainland China.
-	// Default value: `mainland`.
+	// Specifies the service area.
+	// `mainland`: Queries billing methods available in the Chinese mainland.
+	// `overseas`: Queries billing methods available in the regions outside the Chinese mainland.
+	// `Global`: Queries billing methods available across the globe.
+	// If it is not specified, it defaults to `mainland`.
 	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Specifies the product to query, either `cdn` (default) or `ecdn`.
 	Product *string `json:"Product,omitnil" name:"Product"`
+
+	// Specifies resources.
+	// `flux`: Traffic package
+	// `https`: HTTPS requests
+	// It defaults to `flux` if not specified. 
+	Type *string `json:"Type,omitnil" name:"Type"`
 }
 
 type DescribePayTypeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Specifies a service region.
-	// `mainland`: queries billing methods within Mainland China;
-	// `overseas`: queries billing methods outside Mainland China.
-	// Default value: `mainland`.
+	// Specifies the service area.
+	// `mainland`: Queries billing methods available in the Chinese mainland.
+	// `overseas`: Queries billing methods available in the regions outside the Chinese mainland.
+	// `Global`: Queries billing methods available across the globe.
+	// If it is not specified, it defaults to `mainland`.
 	Area *string `json:"Area,omitnil" name:"Area"`
 
 	// Specifies the product to query, either `cdn` (default) or `ecdn`.
 	Product *string `json:"Product,omitnil" name:"Product"`
+
+	// Specifies resources.
+	// `flux`: Traffic package
+	// `https`: HTTPS requests
+	// It defaults to `flux` if not specified. 
+	Type *string `json:"Type,omitnil" name:"Type"`
 }
 
 func (r *DescribePayTypeRequest) ToJsonString() string {
@@ -3342,6 +3386,7 @@ func (r *DescribePayTypeRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Area")
 	delete(f, "Product")
+	delete(f, "Type")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribePayTypeRequest has unknown keys!", "")
 	}
@@ -3350,39 +3395,40 @@ func (r *DescribePayTypeRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePayTypeResponseParams struct {
-	// Billing modes:
+	// Billing type
 	// `flux`: Bill by traffic
 	// `bandwidth`: Bill by bandwidth
 	// `request`: Bill by the number of requests
-	// `flux_sep`: Disused field
-	// `bandwidth_sep`: Disused field
-	// When you change a daily billing mode to another, and there is network usage on the day of change, this field shows the new billing mode, which takes effect from the next day. If there is no network usage on the day of change, this field shows the new billing mode directly.
+	// `flux_sep`: Bill by dynamic and static traffic separately 
+	// `bandwidth_sep`: Bill by dynamic and static bandwidth separately
+	// If you incur any usage when switching the billing mode, the new mode will take effect the next day. If no usage is incurred, the new mode takes effect immediately.
 	PayType *string `json:"PayType,omitnil" name:"PayType"`
 
-	// Billing cycle:
+	// Billing cycle
 	// `day`: Daily
-	// `month`: Monthly 
-	// `hour`: Hourly 
+	// `month`: Monthly
+	// `hour`: Hourly
 	BillingCycle *string `json:"BillingCycle,omitnil" name:"BillingCycle"`
 
-	// `monthMax`: Billed by the monthly average of daily peak traffic (monthly settlement)
-	// `day95`: Billed by the daily 95th percentile bandwidth (monthly settlement)
-	// `month95`: Billed by the monthly 95th percentile bandwidth (monthly settlement)
-	// `sum`: Billed by the total traffic/total requests (daily or monthly settlement)
-	// `max`: Billed by the peak bandwidth (daily settlement)
+	// Statistic data
+	// `monthMax`: Billed monthly based on the monthly average daily peak traffic
+	// `day95`: Billed monthly based on the daily 95th percentile bandwidth
+	// `month95`: Billed monthly based on the monthly 95th percentile bandwidth
+	// `sum`: Billed daily/monthly based on the total traffic or requests
+	// `max`: Billed daily based on the peak bandwidth
 	StatType *string `json:"StatType,omitnil" name:"StatType"`
 
-	// Billing method for regions outside the Chinese mainland:
+	// Regionl billing
 	// `all`: Unified billing for all regions
 	// `multiple`: Region-specific billing
 	RegionType *string `json:"RegionType,omitnil" name:"RegionType"`
 
-	// The current billing mode in effect:
-	// `flux`: Billed by traffic
-	// `bandwidth`: Billed by bandwidth
-	// `request`: Billed by the number of requests
-	// `flux_sep`: Disused field
-	// `bandwidth_sep`: Disused field
+	// Current billing mode
+	// `flux`: Bill by traffic
+	// `bandwidth`: Bill by bandwidth
+	// `request`: Bill by the number of requests
+	// `flux_sep`: Bill by dynamic and static traffic separately 
+	// `bandwidth_sep`: Bill by dynamic and static bandwidth separately
 	CurrentPayType *string `json:"CurrentPayType,omitnil" name:"CurrentPayType"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -3673,7 +3719,7 @@ type DescribePushTasksRequestParams struct {
 	// Limit on paginated queries. Default value: 20
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Specifies a region for your query:
+	// Specifies a region to query the prefetch records
 	// `mainland`: Chinese mainland
 	// `overseas`: Outside the Chinese mainland
 	// `global`: Globe
@@ -3709,7 +3755,7 @@ type DescribePushTasksRequest struct {
 	// Limit on paginated queries. Default value: 20
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Specifies a region for your query:
+	// Specifies a region to query the prefetch records
 	// `mainland`: Chinese mainland
 	// `overseas`: Outside the Chinese mainland
 	// `global`: Globe
@@ -4403,17 +4449,17 @@ type DomainAreaConfig struct {
 }
 
 type DomainFilter struct {
-	// Filters by the field name, which includes:
+	// Filter filter. Values:
 	// - `origin`: Primary origin server.
 	// - `domain`: Domain name.
 	// - `resourceId`: Domain name ID.
-	// - `status`: Domain name status. Valid values: `online`, `offline`, and `processing`.
-	// - `serviceType`: Service type. Valid values: `web`, `download`, `media`, `hybrid` and `dynamic`.
+	// - `status`: Domain name status. Values: `online`, `offline`, and `processing`.
+	// - `serviceType`: Service type. Values: `web`, `download`, `media`, `hybrid` and `dynamic`.
 	// - `projectId`: Project ID.
-	// - `domainType`: Primary origin server type. Valid values: `cname` (customer origin), `COS` (COS origin), and `third_party` (third-party object storage origin).
-	// - `fullUrlCache`: Whether to enable full-path cache, which can be `on` or `off`.
-	// - `https`: Whether to configure HTTPS, which can be `on`, `off` or `processing`.
-	// - `originPullProtocol`: Origin-pull protocol type, which can be `http`, `follow`, or `https`.
+	// - `domainType`: Primary origin type. Values: `cname` (customer origin), `COS` (COS origin), `third_party` (third-party object storage origin), and `igtm` (IGTM origin).
+	// - `fullUrlCache`: Whether to enable path cache. Values: `on`, `off`.
+	// - `https`: Whether to configure HTTPS. Values: `on`, `off` and `processing`.
+	// - `originPullProtocol`: Origin-pull protocol type. Value: `http`, `follow`, and `https`.
 	// - `tagKey`: Tag key.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
@@ -4442,10 +4488,14 @@ type DomainLog struct {
 
 	// Log package filename
 	LogName *string `json:"LogName,omitnil" name:"LogName"`
+
+	// File size, in bytes.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	FileSize *int64 `json:"FileSize,omitnil" name:"FileSize"`
 }
 
 type DownstreamCapping struct {
-	// Downstream speed configuration switch
+	// Whether to enable downstream speed limit. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -4593,10 +4643,10 @@ func (r *EnableClsLogTopicResponse) FromJsonString(s string) error {
 }
 
 type ErrorPage struct {
-	// Status code redirect configuration switch
+	// Whether to enable status code-based redirection. Values:
 	// `on`: Enable
 	// `off`: Disable
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Status code redirect rules configuration
@@ -4629,7 +4679,7 @@ type ExtraLogset struct {
 }
 
 type FollowRedirect struct {
-	// Origin-pull follow-redirect switch
+	// Whether to enable origin-pull to follow the origin configuration. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -4640,10 +4690,10 @@ type FollowRedirect struct {
 }
 
 type ForceRedirect struct {
-	// Access forced redirect configuration switch
+	// Whether to enable forced HTTPS redirects. Values:
 	// `on`: Enable
 	// `off`: Disable
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Access forced redirect types
@@ -4771,8 +4821,10 @@ func (r *GetDisableRecordsResponse) FromJsonString(s string) error {
 }
 
 type GuetzliAdapter struct {
-	// Switch. Valid values: on, off
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to enable AvifAdapter for image optimization. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
@@ -4785,8 +4837,10 @@ type HTTPHeader struct {
 }
 
 type HeaderKey struct {
-	// Whether to use it as part of `CacheKey`
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to enable Cachekey control. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Array of headers that make up the `CacheKey` (separated by ';')
@@ -4795,16 +4849,21 @@ type HeaderKey struct {
 }
 
 type HeuristicCache struct {
+	// Whether to enable heuristic caching. Values:
 	// `on`: Enable
 	// `off`: Disable
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Heuristic cache validity configuration
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	CacheConfig *CacheConfig `json:"CacheConfig,omitnil" name:"CacheConfig"`
 }
 
 type Hsts struct {
-	// Whether to enable. Valid values: on, off.
+	// Whether to enable HSTS. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// `MaxAge` value.
@@ -4863,10 +4922,10 @@ type HttpHeaderRule struct {
 }
 
 type Https struct {
-	// HTTPS configuration switch
+	// Whether to enable HTTPS. Values:
 	// `on`: Enable
 	// `off`: Disable
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Whether to enable HTTP2
@@ -4922,12 +4981,16 @@ type Https struct {
 }
 
 type HttpsBilling struct {
-	// HTTPS (enabled by default), which will incur charges.
+	// Whether to enable HTTPS. Values:
+	// `on`: When it's enabled, HTTPS requests are allowed and incur charges. If not specified, his field uses the default value `on`.
+	// `off`: When it's disabled, HTTPS requests are blocked.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
 type HwPrivateAccess struct {
-	// Whether to enable access authentication. Valid values: `on`, `off`.
+	//  Whether to enable origin-pull authentication for Huawei Cloud OBS origin. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Access ID
@@ -4962,7 +5025,7 @@ type ImageOptimization struct {
 }
 
 type IpFilter struct {
-	// IP blocklist/allowlist configuration switch
+	// Whether to enable IP blocklist/allowlist. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -5019,7 +5082,7 @@ type IpFilterPathRule struct {
 }
 
 type IpFreqLimit struct {
-	// IP access limit configuration switch
+	// Whether to enable IP rate limit. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -5050,14 +5113,18 @@ type IpStatus struct {
 }
 
 type Ipv6 struct {
-	// Whether to enable the IPv6 feature for a domain name. Values include `on` or `off`.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to enable an IPv6 address for the origin server. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
 type Ipv6Access struct {
-	// Whether to enable the IPv6 feature for a domain name. Values include `on` or `off`.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to enable IPv6 access. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
@@ -5255,15 +5322,13 @@ func (r *ListClsTopicDomainsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListTopDataRequestParams struct {
 	// Query start time in the format of `yyyy-MM-dd HH:mm:ss`
-	// Only supports data query at daily granularity. The date in the input parameter is used as the start date.
-	// If the specified start date is greater than 00:00:00, it will be rounded down to 00:00:00 on the date. For example, if `StartTime` is 2018-09-04 10:40:00, it will be rounded down to 2018-09-04 00:00:00.
-	// Only data from the last 90 days will be queried.
+	// Only data queries at the granularity of minutes are supported. The start time is truncated to minutes. For example, if the value of `StartTime` is 2018-09-04 10:40:23, the start time of the data returned is 2018-09-04 10:40:00.
+	// Only data for the last 90 days can be queried.
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Query end time in the format of `yyyy-MM-dd HH:mm:ss`
-	// Only supports data query at daily granularity. The date in the input parameter is used as the end date.
-	// If the specified end date is smaller than 23:59:59, it will be rounded up to 23:59:59 on the date. For example, if `EndTime` is 2018-09-05 22:40:00, it will be rounded up to 2018-09-05 23:59:59.
-	// `EndTime` must be later than or equal to `StartTime`
+	// Only data queries at the granularity of days are supported. Take the day in the input parameter as the end date, and the data generated on or before 23:59:59 on the end date is returned. For example, if the value of `EndTime` is 2018-09-05 22:40:00, the end time of the data returned is 2018-09-05 23:59:59.
+	// `EndTime` must be later than or equal to `StartTime`.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Objects to be sorted. Valid values:
@@ -5326,15 +5391,13 @@ type ListTopDataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Query start time in the format of `yyyy-MM-dd HH:mm:ss`
-	// Only supports data query at daily granularity. The date in the input parameter is used as the start date.
-	// If the specified start date is greater than 00:00:00, it will be rounded down to 00:00:00 on the date. For example, if `StartTime` is 2018-09-04 10:40:00, it will be rounded down to 2018-09-04 00:00:00.
-	// Only data from the last 90 days will be queried.
+	// Only data queries at the granularity of minutes are supported. The start time is truncated to minutes. For example, if the value of `StartTime` is 2018-09-04 10:40:23, the start time of the data returned is 2018-09-04 10:40:00.
+	// Only data for the last 90 days can be queried.
 	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
 
 	// Query end time in the format of `yyyy-MM-dd HH:mm:ss`
-	// Only supports data query at daily granularity. The date in the input parameter is used as the end date.
-	// If the specified end date is smaller than 23:59:59, it will be rounded up to 23:59:59 on the date. For example, if `EndTime` is 2018-09-05 22:40:00, it will be rounded up to 2018-09-05 23:59:59.
-	// `EndTime` must be later than or equal to `StartTime`
+	// Only data queries at the granularity of days are supported. Take the day in the input parameter as the end date, and the data generated on or before 23:59:59 on the end date is returned. For example, if the value of `EndTime` is 2018-09-05 22:40:00, the end time of the data returned is 2018-09-05 23:59:59.
+	// `EndTime` must be later than or equal to `StartTime`.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
 	// Objects to be sorted. Valid values:
@@ -5681,10 +5744,10 @@ type MapInfo struct {
 }
 
 type MaxAge struct {
-	// Browser cache configuration switch
+	// Whether to enable browser caching. Values:
 	// `on`: Enable
 	// `off`: Disable
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// MaxAge rule
@@ -5732,47 +5795,121 @@ type MaxAgeRule struct {
 	FollowOrigin *string `json:"FollowOrigin,omitnil" name:"FollowOrigin"`
 }
 
+// Predefined struct for user
+type ModifyDomainConfigRequestParams struct {
+	// The domain name.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// Name of the configuration parameter.
+	Route *string `json:"Route,omitnil" name:"Route"`
+
+	// Value of the configuration parameter. This field is serialized to a JSON string {key:value}, where **key** is fixed to `update`.
+	Value *string `json:"Value,omitnil" name:"Value"`
+}
+
+type ModifyDomainConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// The domain name.
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// Name of the configuration parameter.
+	Route *string `json:"Route,omitnil" name:"Route"`
+
+	// Value of the configuration parameter. This field is serialized to a JSON string {key:value}, where **key** is fixed to `update`.
+	Value *string `json:"Value,omitnil" name:"Value"`
+}
+
+func (r *ModifyDomainConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDomainConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "Route")
+	delete(f, "Value")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDomainConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDomainConfigResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ModifyDomainConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDomainConfigResponseParams `json:"Response"`
+}
+
+func (r *ModifyDomainConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDomainConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type OfflineCache struct {
-	// Whether to enable offline cache. Valid values: `on` and `off`.
+	// Whether to enable offline caching. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
 type Origin struct {
-	// Primary origin server list
-	// When modifying the origin server, you need to enter the corresponding OriginType.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// List of primary origin servers
+	// <font color=red>When modifying the origins, you need to specify `OriginType`.</font>
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Origins []*string `json:"Origins,omitnil" name:"Origins"`
 
 	// Primary origin server type
-	// The following types are supported for input parameters:
-	// `domain`: domain name
+	// <font color=red>This field is used together with `Origins`.</font>
+	// Input:
+	// `domain`: Domain name
 	// `domainv6`: IPv6 domain name
-	// cos: COS origin
+	// `cos`: COS bucket address
+	// `third_party`: Third-party object storage origin
+	// `igtm`: IGTM origin
 	// `ip`: IP address
-	// ipv6: origin server list is a single IPv6 address
-	// `ip_ipv6`: multiple IPv4 addresses and one IPv6 address
+	// `ipv6`: One IPv6 address
+	// `ip_ipv6`: Multiple IPv4 addresses and one IPv6 address
 	// `ip_domain`: IP addresses and domain names (only available to beta users)
 	// `ip_domainv6`: Multiple IPv4 addresses and one IPv6 domain name
-	// `ipv6_domain`: multiple IPv6 addresses and one domain name
+	// `ipv6_domain`: Multiple IPv6 addresses and one domain name
 	// `ipv6_domainv6`: Multiple IPv6 addresses and one IPv6 domain name
 	// `domain_domainv6`: Multiple IPv4 domain names and one IPv6 domain name
-	// `ip_ipv6_domain`: multiple IPv4 and IPv6 addresses and one domain name
+	// `ip_ipv6_domain`: Multiple IPv4 and IPv6 addresses and one domain name
 	// `ip_ipv6_domainv6`: Multiple IPv4 and IPv6 addresses and one IPv6 domain name
 	// `ip_domain_domainv6`: Multiple IPv4 addresses and IPv4 domain names and one IPv6 domain name
 	// `ipv6_domain_domainv6`: Multiple IPv4 domain names and IPv6 addresses and one IPv6 domain name
 	// `ip_ipv6_domain_domainv6`: Multiple IPv4 and IPv6 addresses and IPv4 domain names and one IPv6 domain name
-	// The following types of output parameters are added:
-	// image: Cloud Infinite origin
-	// ftp: legacy FTP origin, which is no longer maintained.
-	// When modifying `Origins`, you need to enter the corresponding OriginType.
-	// The IPv6 feature is not generally available yet. Please send in a whitelist application to use this feature.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Output:
+	// `image`: Cloud Infinite origin
+	// `ftp`: FTP origin (disused)
+	// When modifying `Origins`, you need to specify `OriginType`.
+	// The IPv6 feature is now only available to beta users. Submit a ticket if you need it.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
 
-	// It is required when a COS origin or third-party origin is used for acceleration.
-	// Host header used when accessing the primary origin server. If it is left empty, the acceleration domain name will be used by default.
-	// If a wildcard domain name is accessed, then the sub-domain name during the access will be used by default.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Origin-pull host header.
+	// <font color=red>This field is required when `OriginType=cos/third-party`.</font>
+	// If not specified, this field defaults to the acceleration domain name.
+	// For a wildcard domain name, the sub-domain name during the access is used by default.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ServerName *string `json:"ServerName,omitnil" name:"ServerName"`
 
 	// When OriginType is COS, you can specify if access to private buckets is allowed.
@@ -5787,21 +5924,22 @@ type Origin struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	OriginPullProtocol *string `json:"OriginPullProtocol,omitnil" name:"OriginPullProtocol"`
 
-	// Backup origin server list
-	// When modifying the backup origin server, you need to enter the corresponding BackupOriginType.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// List of secondary origin servers
+	// <font color=red>This field is used together with `BackupOriginType`.</font>
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	BackupOrigins []*string `json:"BackupOrigins,omitnil" name:"BackupOrigins"`
 
-	// Backup origin server type, which supports the following types:
+	// Secondary origin type
+	// <font color=red>This field is used together with `BackupOrigins`.</font>
+	// Values:
 	// `domain`: Domain name
 	// `ip`: IP address
-	// When modifying BackupOrigins, you need to enter the corresponding BackupOriginType.
-	// The following backup origin servers are only available to beta users. Submit an application if you want to become a beta user.
+	// The following secondary origin types are only available to beta users. Submit a ticket to use it.
 	// `ipv6_domain`: Multiple IPv6 addresses and one domain name
 	// `ip_ipv6`: Multiple IPv4 addresses and one IPv6 address
 	// `ipv6_domain`: Multiple IPv6 addresses and one domain name
 	// `ip_ipv6_domain`: Multiple IPv4 and IPv6 addresses and one domain name
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	BackupOriginType *string `json:"BackupOriginType,omitnil" name:"BackupOriginType"`
 
 	// Host header used when accessing the backup origin server. If it is left empty, the `ServerName` of primary origin server will be used by default.
@@ -5820,18 +5958,32 @@ type Origin struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	PathBasedOrigin []*PathBasedOriginRule `json:"PathBasedOrigin,omitnil" name:"PathBasedOrigin"`
 
+	// HTTPS origin-pull SNI
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	Sni *OriginSni `json:"Sni,omitnil" name:"Sni"`
+
 	// HTTPS advanced origin-pull configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	AdvanceHttps *AdvanceHttps `json:"AdvanceHttps,omitnil" name:"AdvanceHttps"`
 
-	// Object storage vendor
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Third-party object storage service vendor
+	// <font color=red>This field is required when `OriginType=third-party`.</font>
+	// Values:
+	// `aws_s3`: AWS S3
+	// `ali_oss`: Alibaba Cloud OSS
+	// `hw_obs`: Huawei Cloud OBS
+	// `Qiniu_kodo`: Qiniu Kodo
+	// `Others`: Other object storage service vendors. Only AWS signature-compatible object storage services are supported, such as Tencent Cloud COS for Finance Zone.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	OriginCompany *string `json:"OriginCompany,omitnil" name:"OriginCompany"`
 }
 
 type OriginAuthentication struct {
-	// Authentication switch, which can be on or off.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Whether to enable advanced origin-pull authentication. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Authentication type configuration A
@@ -5846,7 +5998,9 @@ type OriginAuthenticationTypeA struct {
 }
 
 type OriginCombine struct {
-	// Whether to enable the merging pull requests feature. Valid values: `on` and `off`.
+	// Whether to enable origin-pull merge. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
@@ -5856,7 +6010,7 @@ type OriginIp struct {
 }
 
 type OriginPullOptimization struct {
-	// Cross-border origin-pull optimization configuration switch
+	// Whether to enable cross-MLC-border origin-pull optimization. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -5878,8 +6032,21 @@ type OriginPullTimeout struct {
 	ReceiveTimeout *uint64 `json:"ReceiveTimeout,omitnil" name:"ReceiveTimeout"`
 }
 
+type OriginSni struct {
+	// Whether to enable HTTPS origin-pull SNI. Values:
+	// `on`: Enable
+	// `off`: Disable
+	Switch *string `json:"Switch,omitnil" name:"Switch"`
+
+	// Origin-pull domain name.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	ServerName *string `json:"ServerName,omitnil" name:"ServerName"`
+}
+
 type OssPrivateAccess struct {
-	// Whether to enable access authentication. Valid values: `on`, `off`.
+	// Whether to enable OSS origin-pull authentication. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Access ID.
@@ -5900,7 +6067,9 @@ type OssPrivateAccess struct {
 }
 
 type OthersPrivateAccess struct {
-	// Whether to enable access authentication. Valid values: `on`, `off`.
+	// Whether to enable origin-pull authentication for other object storage origins. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Access ID.
@@ -6095,9 +6264,9 @@ type PathRule struct {
 }
 
 type PostSize struct {
-	// Limit the size of POST requests. The default value is 32 MB.
-	// off: Disable
-	// on: Enable
+	// Maximum size of the file uploaded for streaming via a POST request. Values:
+	// `on`: Enable. When enabled, it is set to 32 MB by default.
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Maximum size. Value range: 1 MB to 200 MB.
@@ -6462,7 +6631,9 @@ func (r *PushUrlsCacheResponse) FromJsonString(s string) error {
 }
 
 type QnPrivateAccess struct {
-	// Switch. Valid values: `on`, `off`.
+	// Whether to enable origin-pull authentication for QiNiu Cloud Kodo. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Access ID
@@ -6474,16 +6645,22 @@ type QnPrivateAccess struct {
 }
 
 type QueryStringKey struct {
-	// Whether to use `QueryString` as part of `CacheKey`. Valid values: on, off
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to include `QueryString` as part of `CacheKey`. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Whether to sort again
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Reorder *string `json:"Reorder,omitnil" name:"Reorder"`
 
-	// Includes/excludes query parameters. Valid values: `includeAll`, `excludeAll`, `includeCustom`, `excludeCustom`
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether to include URL parameters. Values:
+	// `includeAll`: Include all parameters.
+	// `excludeAll`: Exclude all parameters.
+	// `includeCustom`: Include custom parameters.
+	// `excludeCustom`: Exclude custom parameters.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Action *string `json:"Action,omitnil" name:"Action"`
 
 	// Array of included/excluded query strings (separated by ';')
@@ -6492,7 +6669,9 @@ type QueryStringKey struct {
 }
 
 type Quic struct {
-	// Whether to enable QUIC
+	// Whether to enable QUIC. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
@@ -6511,7 +6690,7 @@ type Quota struct {
 }
 
 type RangeOriginPull struct {
-	// Range GETs configuration switch
+	// Whether to enable Range GETs. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -6522,7 +6701,9 @@ type RangeOriginPull struct {
 }
 
 type RangeOriginPullRule struct {
-	// Specifies whether Range GETs is enabled
+	// Whether to enable Range GETs. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Rule types:
@@ -6541,7 +6722,9 @@ type RangeOriginPullRule struct {
 }
 
 type RedirectConfig struct {
-	// Configuration switch
+	// Whether to enable the custom origin-pull request to follow the host when a 302 code is returned. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// The custom host header that is sent when the primary origin server follows 302 redirects
@@ -6552,7 +6735,7 @@ type RedirectConfig struct {
 }
 
 type Referer struct {
-	// Referer blacklist/whitelist configuration switch
+	// Whether to enable referer blocklist/allowlist. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -6600,10 +6783,10 @@ type RegionMapRelation struct {
 }
 
 type RemoteAuthentication struct {
-	// Remote authentication switch
-	// `on`: enable
-	// `off`: disable
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Whether to enable remote authentication. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Remote authentication rule configuration
@@ -6675,7 +6858,7 @@ type ReportData struct {
 }
 
 type RequestHeader struct {
-	// Custom request header configuration switch
+	// Whether to enable custom request headers. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -6722,7 +6905,7 @@ type ResourceOriginData struct {
 }
 
 type ResponseHeader struct {
-	// Custom response header switch
+	// Whether to enable custom response headers. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -6733,15 +6916,18 @@ type ResponseHeader struct {
 }
 
 type ResponseHeaderCache struct {
-	// Origin server header cache switch
+	// Whether to enable response header caching. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
 type Revalidate struct {
-	// Whether to always forward to the origin server for verification. Valid values: on, off
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to enable origin-pull authentication. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Forwards to the origin server for verification only for specific request path
@@ -6788,7 +6974,7 @@ type RuleCacheConfig struct {
 }
 
 type RuleEngine struct {
-	// Specifies whether to enable rule engine
+	// Whether to enable rule engine. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -6799,8 +6985,11 @@ type RuleEngine struct {
 }
 
 type RuleQueryString struct {
-	// Whether to use `QueryString` as part of `CacheKey`. Valid values: on, off
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to include query string parameters. Values:
+	// `on`: Include `QueryString` as part of `CacheKey`.
+	// `off`: Do not include `QueryString` as part of `CacheKey`.
+	// 
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// `includeCustom` will retain partial query strings
@@ -6813,7 +7002,9 @@ type RuleQueryString struct {
 }
 
 type ScdnAclConfig struct {
-	// Whether to enable. Valid values: `on` and `off`.
+	// Whether to enable SCDN access. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// This field is disused. Please use `AdvancedScriptData` instead.
@@ -6859,7 +7050,9 @@ type ScdnAclRule struct {
 }
 
 type ScdnBotConfig struct {
-	// Valid values: `on` and `off`.
+	// Whether to enable SCDN bot configuration. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Bot cookie policy
@@ -6894,8 +7087,10 @@ type ScdnCCRules struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	FrequencyLimit *uint64 `json:"FrequencyLimit,omitnil" name:"FrequencyLimit"`
 
-	// Whether to block or redirect requests from suspicious IPs. Valid values: `on` and `off`.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Whether to enable IP blocking. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	PunishmentSwitch *string `json:"PunishmentSwitch,omitnil" name:"PunishmentSwitch"`
 
 	// Suspicious IP restriction duration
@@ -6912,7 +7107,9 @@ type ScdnCCRules struct {
 }
 
 type ScdnConfig struct {
-	// Valid values: `on` and `off`.
+	// Whether to enable SCDN CC configuration. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Custom CC attack defense rule
@@ -6929,7 +7126,9 @@ type ScdnConfig struct {
 }
 
 type ScdnDdosConfig struct {
-	// Whether to enable DDoS defense. Valid values: `on` and `off`.
+	// Whether to enable SCDN DDoS configuration. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
@@ -6982,7 +7181,9 @@ type ScdnSevenLayerRules struct {
 }
 
 type ScdnWafConfig struct {
-	// Whether to enable WAF. Valid values: `on` and `off`.
+	// Whether to enable SCDN WAF configuration. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// WAF protection mode. Valid values: `intercept` and `observe`. Default value: `intercept`.
@@ -6993,8 +7194,10 @@ type ScdnWafConfig struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	ErrorPage *ScdnErrorPage `json:"ErrorPage,omitnil" name:"ErrorPage"`
 
-	// Whether to enable Web shell blocking. Valid values: `on` and `off`. Default value: `off`.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Whether to enable webshell blocking. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	WebShellSwitch *string `json:"WebShellSwitch,omitnil" name:"WebShellSwitch"`
 
 	// Attack blocking rules
@@ -7005,8 +7208,10 @@ type ScdnWafConfig struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	Level *int64 `json:"Level,omitnil" name:"Level"`
 
-	// WAF sub-rule switch
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to enable WAF sub-rules. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	SubRuleSwitch []*WafSubRuleStatus `json:"SubRuleSwitch,omitnil" name:"SubRuleSwitch"`
 }
 
@@ -7019,8 +7224,10 @@ type ScdnWafRule struct {
 }
 
 type SchemeKey struct {
-	// Whether to use the scheme as part of the cache key. Valid values: on, off
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to enable scheme as part of the cache key. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
@@ -7138,15 +7345,17 @@ func (r *SearchClsLogResponse) FromJsonString(s string) error {
 }
 
 type SecurityConfig struct {
-	// on|off
+	// Whether to enable SCDN. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
 type Seo struct {
-	// SEO configuration switch
+	// Whether to enable SEO. Values:
 	// `on`: Enable
 	// `off`: Disable
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
@@ -7190,9 +7399,9 @@ type ServerCert struct {
 }
 
 type ShareCname struct {
-	// Specifies whether to enable Shared CNAME. If it is set to `off`, the default CNAME is used. If it is set to `on`, a shared CNAME is used.
-	// 
-	// * ShareCname is only available to beta users. To use this feature, please submit a ticket for application.
+	// Whether to enable Shared CNAME. Values:
+	// `on`: Enable. When enabled, it uses a shared CNAME.
+	// `off`: Disable. When disabled, it uses a default CNAME.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Shared CNAME to be configured
@@ -7359,8 +7568,10 @@ type StatisticItem struct {
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	AlertPercentage *uint64 `json:"AlertPercentage,omitnil" name:"AlertPercentage"`
 
-	// Whether to enable the alarm threshold trigger. Values: `on`, `off`.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to enable alerts for cumulative usage limit. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	AlertSwitch *string `json:"AlertSwitch,omitnil" name:"AlertSwitch"`
 
 	// Metric type. `flux`: Traffic; `bandwidth`: Bandwidth.
@@ -7370,16 +7581,18 @@ type StatisticItem struct {
 
 	Cycle *uint64 `json:"Cycle,omitnil" name:"Cycle"`
 
-	// Whether to enable usage limit configuration. Values: `on`, `off`.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to enable cumulative usage limit. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
 type StatusCodeCache struct {
-	// Status code cache expiration configuration switch
+	// Whether to enable status code caching. Values:
 	// `on`: Enable
 	// `off`: Disable
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Status code cache expiration rules details
@@ -7526,8 +7739,10 @@ type TopicInfo struct {
 }
 
 type TpgAdapter struct {
-	// Switch. Valid values: `on`, `off`
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to enable TpgAdapter for image optimization. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }
 
@@ -7566,7 +7781,7 @@ type UpdateDomainConfigRequestParams struct {
 	// Error code redirect configuration (This feature is in beta and not generally available yet.)
 	ErrorPage *ErrorPage `json:"ErrorPage,omitnil" name:"ErrorPage"`
 
-	// Request header configuration
+	// Origin-pull request header configuration.
 	RequestHeader *RequestHeader `json:"RequestHeader,omitnil" name:"RequestHeader"`
 
 	// Response header configuration
@@ -7725,7 +7940,7 @@ type UpdateDomainConfigRequest struct {
 	// Error code redirect configuration (This feature is in beta and not generally available yet.)
 	ErrorPage *ErrorPage `json:"ErrorPage,omitnil" name:"ErrorPage"`
 
-	// Request header configuration
+	// Origin-pull request header configuration.
 	RequestHeader *RequestHeader `json:"RequestHeader,omitnil" name:"RequestHeader"`
 
 	// Response header configuration
@@ -8109,7 +8324,7 @@ type UrlRecord struct {
 }
 
 type UrlRedirect struct {
-	// Whether to enable URL rewriting
+	// Whether to enable URL rewriting. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -8139,8 +8354,10 @@ type UrlRedirectRule struct {
 }
 
 type UserAgentFilter struct {
-	// Switch. Valid values: on, off
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to enable User-Agent blocklist/allowlist. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// UA blacklist/whitelist effect rule list
@@ -8171,7 +8388,7 @@ type UserAgentFilterRule struct {
 }
 
 type VideoSeek struct {
-	// Video dragging switch
+	// Whether to enable video dragging. Values:
 	// `on`: Enable
 	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
@@ -8187,11 +8404,11 @@ type ViolationUrl struct {
 	// Snapshot path. This is used to display a snapshot of the content in violation on the console.
 	DownloadUrl *string `json:"DownloadUrl,omitnil" name:"DownloadUrl"`
 
-	// Current status of the resources in violation
+	// Current status of non-compliant resource
 	// `forbid`: Blocked
 	// `release`: Unblocked
 	// `delay`: Processing delayed
-	// `reject`: Appeal dismissed. The status is still blocked.
+	// `reject`: Appeal dismissed. It is still in `forbid` status.
 	// `complain`: Appeal in process
 	UrlStatus *string `json:"UrlStatus,omitnil" name:"UrlStatus"`
 
@@ -8203,7 +8420,9 @@ type ViolationUrl struct {
 }
 
 type WafSubRuleStatus struct {
-	// Sub-rule status. Valid values: `on` and `off`.
+	// Whether to enable WAF sub-rules. Values:
+	// `on`: Enable
+	// `off`: Disable
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// List of rule IDs
@@ -8211,9 +8430,9 @@ type WafSubRuleStatus struct {
 }
 
 type WebSocket struct {
-	// Whether to enable custom WebSocket timeout setting. When it’s `off`: WebSocket connection is supported, and the default timeout period is 15 seconds. To change the timeout period, please set it to `on`.
-	// 
-	// * WebSocket is an ECDN feature. You can enable it in the ECDN domain name configuration.
+	// Whether to enable WebSocket connection timeout. Values:
+	// `on`: When it's enabled, the connection timeout can be configured.
+	// `off`: When it's disabled, the connection timeout is set to 15 seconds by default.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
 	// Sets timeout period in seconds. Maximum value: 300
@@ -8222,7 +8441,9 @@ type WebSocket struct {
 }
 
 type WebpAdapter struct {
-	// Switch. Valid values: on, off
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether to enable WebpAdapter for image optimization. Values:
+	// `on`: Enable
+	// `off`: Disable
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 }

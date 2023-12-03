@@ -545,7 +545,7 @@ type ApplicationProxyRule struct {
 	OriginPort *string `json:"OriginPort,omitnil" name:"OriginPort"`
 
 	// Rule tag.
-	// Note: u200dThis field may returnu200d·`nullu200d`, indicating that no valid values can be obtained.
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	RuleTag *string `json:"RuleTag,omitnil" name:"RuleTag"`
 }
 
@@ -980,7 +980,7 @@ type Cache struct {
 	// Whether to enable force cache. Values:
 	// <li>`on`: Enable</li>
 	// <li>`off`: Disable </li>
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	//
 	// Deprecated: IgnoreCacheControl is deprecated.
 	IgnoreCacheControl *string `json:"IgnoreCacheControl,omitnil" name:"IgnoreCacheControl"`
@@ -1152,13 +1152,13 @@ type CnameStatus struct {
 	RecordName *string `json:"RecordName,omitnil" name:"RecordName"`
 
 	// The CNAME address.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Cname *string `json:"Cname,omitnil" name:"Cname"`
 
 	// The CNAME status. Values:
 	// <li>`active`: Activated</li>
 	// <li>`moved`: Not activated </li>
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Status *string `json:"Status,omitnil" name:"Status"`
 }
 
@@ -1181,6 +1181,34 @@ type Compression struct {
 	// <li>`gzip`: Gzip algorithm</li>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Algorithms []*string `json:"Algorithms,omitnil" name:"Algorithms"`
+}
+
+type ConfigGroupVersionInfo struct {
+	// Version ID.
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
+
+	// Version No.
+	VersionNumber *string `json:"VersionNumber,omitnil" name:"VersionNumber"`
+
+	// Configuraration group ID.
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+
+	// Configuration group type. Valid values: 
+	// <li>l7_acceleration: L7 acceleration configuration group. </li>
+	// <li>edge_functions: Edge function configuration group. </li>
+	GroupType *string `json:"GroupType,omitnil" name:"GroupType"`
+
+	// Version description.
+	Description *string `json:"Description,omitnil" name:"Description"`
+
+	// Version status. Valid values: 
+	// <li>creating: Being created.</li>
+	// <li>inactive: Not effective.</li>
+	// <li>active: Effective. </li>
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
 }
 
 // Predefined struct for user
@@ -1689,6 +1717,84 @@ func (r *CreateApplicationProxyRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateConfigGroupVersionRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// GroupId of the version to be created.
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+
+	// Configuration content to be imported. It is required to be in JSON format and encoded in UTF-8. Please refer to the example below for the configuration file content.
+	Content *string `json:"Content,omitnil" name:"Content"`
+
+	// Version description. The maximum length allowed is 50 characters. This field can be used to provide details about the application scenarios of this version.
+	Description *string `json:"Description,omitnil" name:"Description"`
+}
+
+type CreateConfigGroupVersionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// GroupId of the version to be created.
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+
+	// Configuration content to be imported. It is required to be in JSON format and encoded in UTF-8. Please refer to the example below for the configuration file content.
+	Content *string `json:"Content,omitnil" name:"Content"`
+
+	// Version description. The maximum length allowed is 50 characters. This field can be used to provide details about the application scenarios of this version.
+	Description *string `json:"Description,omitnil" name:"Description"`
+}
+
+func (r *CreateConfigGroupVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConfigGroupVersionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "GroupId")
+	delete(f, "Content")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateConfigGroupVersionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateConfigGroupVersionResponseParams struct {
+	// Version ID.
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type CreateConfigGroupVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateConfigGroupVersionResponseParams `json:"Response"`
+}
+
+func (r *CreateConfigGroupVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConfigGroupVersionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateOriginGroupRequestParams struct {
 	// Site ID
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
@@ -1967,10 +2073,10 @@ type CreatePurgeTaskRequestParams struct {
 	// <li>`purge_cache_tag`: Purge by the cache-tag </li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1).
 	Type *string `json:"Type,omitnil" name:"Type"`
 
-	// Configures how cache are purged. It works when `Type` is `purge_prefix`, `purge_host` or `purge_all`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated.</li>Note that when Type` is `purge_prefix`, it defaults to `invalidate`.
+	// Configures how resources under the directory are purged when `Type = purge_prefix`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated. </li>Default value: `invalidate`.
 	Method *string `json:"Method,omitnil" name:"Method"`
 
-	// List of cached resources to purge. The format for input depends on the type of cache purging. See examples below for details. <li>By default, non-ASCII characters u200dare escaped based on RFC3986.</li><li>The maximum number of tasks per purging request is determined by the EdgeOne plan. See [Billing Overview (New)](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1). </li>
+	// List of cached resources to purge. The format for input depends on the type of cache purging. See examples below for details. <li>By default, non-ASCII characters are escaped based on RFC3986.</li><li>The maximum number of tasks per purging request is determined by the EdgeOne plan. See [Billing Overview (New)](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1). </li>
 	Targets []*string `json:"Targets,omitnil" name:"Targets"`
 
 	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
@@ -1994,10 +2100,10 @@ type CreatePurgeTaskRequest struct {
 	// <li>`purge_cache_tag`: Purge by the cache-tag </li>For more details, see [Cache Purge](https://intl.cloud.tencent.com/document/product/1552/70759?from_cn_redirect=1).
 	Type *string `json:"Type,omitnil" name:"Type"`
 
-	// Configures how cache are purged. It works when `Type` is `purge_prefix`, `purge_host` or `purge_all`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated.</li>Note that when Type` is `purge_prefix`, it defaults to `invalidate`.
+	// Configures how resources under the directory are purged when `Type = purge_prefix`. Values: <li>`invalidate`: Only resources updated under the directory are purged.</li><li>`delete`: All resources under the directory are purged regardless of whether they are updated. </li>Default value: `invalidate`.
 	Method *string `json:"Method,omitnil" name:"Method"`
 
-	// List of cached resources to purge. The format for input depends on the type of cache purging. See examples below for details. <li>By default, non-ASCII characters u200dare escaped based on RFC3986.</li><li>The maximum number of tasks per purging request is determined by the EdgeOne plan. See [Billing Overview (New)](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1). </li>
+	// List of cached resources to purge. The format for input depends on the type of cache purging. See examples below for details. <li>By default, non-ASCII characters are escaped based on RFC3986.</li><li>The maximum number of tasks per purging request is determined by the EdgeOne plan. See [Billing Overview (New)](https://intl.cloud.tencent.com/document/product/1552/77380?from_cn_redirect=1). </li>
 	Targets []*string `json:"Targets,omitnil" name:"Targets"`
 
 	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
@@ -3093,6 +3199,108 @@ func (r *DeleteZoneResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeployConfigGroupVersionRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// Environment ID. Please specify the environment ID to which the version should be released.
+	EnvId *string `json:"EnvId,omitnil" name:"EnvId"`
+
+	// Version information required for release. Multiple versions of different configuration groups can be modified simultaneously, while each group allows modifying only one version at a time.
+	ConfigGroupVersionInfos []*ConfigGroupVersionInfo `json:"ConfigGroupVersionInfos,omitnil" name:"ConfigGroupVersionInfos"`
+
+	// Change description. It is used to describe the content and reasons for this change. A maximum of 100 characters are supported.
+	Description *string `json:"Description,omitnil" name:"Description"`
+}
+
+type DeployConfigGroupVersionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// Environment ID. Please specify the environment ID to which the version should be released.
+	EnvId *string `json:"EnvId,omitnil" name:"EnvId"`
+
+	// Version information required for release. Multiple versions of different configuration groups can be modified simultaneously, while each group allows modifying only one version at a time.
+	ConfigGroupVersionInfos []*ConfigGroupVersionInfo `json:"ConfigGroupVersionInfos,omitnil" name:"ConfigGroupVersionInfos"`
+
+	// Change description. It is used to describe the content and reasons for this change. A maximum of 100 characters are supported.
+	Description *string `json:"Description,omitnil" name:"Description"`
+}
+
+func (r *DeployConfigGroupVersionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeployConfigGroupVersionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "EnvId")
+	delete(f, "ConfigGroupVersionInfos")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeployConfigGroupVersionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeployConfigGroupVersionResponseParams struct {
+	// Release record ID.
+	RecordId *string `json:"RecordId,omitnil" name:"RecordId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DeployConfigGroupVersionResponse struct {
+	*tchttp.BaseResponse
+	Response *DeployConfigGroupVersionResponseParams `json:"Response"`
+}
+
+func (r *DeployConfigGroupVersionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeployConfigGroupVersionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type DeployRecord struct {
+	// Details about the released version.
+	ConfigGroupVersionInfos []*ConfigGroupVersionInfo `json:"ConfigGroupVersionInfos,omitnil" name:"ConfigGroupVersionInfos"`
+
+	// Release time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+	DeployTime *string `json:"DeployTime,omitnil" name:"DeployTime"`
+
+	// Release status. Valid values: 
+	// <li>deploying: Being released.</li>
+	// <li>failure: Release failed.</li>
+	// <li>success: Released successfully. </li>
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// Release result information.
+	Message *string `json:"Message,omitnil" name:"Message"`
+
+	// Release record ID. 
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	RecordId *string `json:"RecordId,omitnil" name:"RecordId"`
+
+	// Change description.
+	Description *string `json:"Description,omitnil" name:"Description"`
+}
+
+// Predefined struct for user
 type DescribeAccelerationDomainsRequestParams struct {
 	// ID of the site related with the acceleration domain name.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
@@ -3309,7 +3517,7 @@ type DescribeApplicationProxiesRequestParams struct {
 	// The paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filters. Each filter can have up to 20 entries. Details: <li>proxy-id<br>   Filter by the <strong>Proxy ID</strong>u200d, such as: `proxy-ev2sawbwfd`. <br>   Type: String<br>   Required: No</li><li>zone-id<br>   Filter by the <strong>Site ID</strong>, such as `zone-vawer2vadg`. <br>   Type: String<br>   Required: No</li><li>rule-tag<br>   Filter by the <strong>Rule tag</strong>, such as `rule-service-1`. <br>   Type: String<br>   Required: No</li>
+	// Filters. Each filter can have up to 20 entries. Details: <li>proxy-id<br>   Filter by the <strong>Proxy ID</strong>, such as: `proxy-ev2sawbwfd`. <br>   Type: String<br>   Required: No</li><li>zone-id<br>   Filter by the <strong>Site ID</strong>, such as `zone-vawer2vadg`. <br>   Type: String<br>   Required: No</li><li>rule-tag<br>   Filter by the <strong>Rule tag</strong>, such as `rule-service-1`. <br>   Type: String<br>   Required: No</li>
 	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 }
 
@@ -3322,7 +3530,7 @@ type DescribeApplicationProxiesRequest struct {
 	// The paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filters. Each filter can have up to 20 entries. Details: <li>proxy-id<br>   Filter by the <strong>Proxy ID</strong>u200d, such as: `proxy-ev2sawbwfd`. <br>   Type: String<br>   Required: No</li><li>zone-id<br>   Filter by the <strong>Site ID</strong>, such as `zone-vawer2vadg`. <br>   Type: String<br>   Required: No</li><li>rule-tag<br>   Filter by the <strong>Rule tag</strong>, such as `rule-service-1`. <br>   Type: String<br>   Required: No</li>
+	// Filters. Each filter can have up to 20 entries. Details: <li>proxy-id<br>   Filter by the <strong>Proxy ID</strong>, such as: `proxy-ev2sawbwfd`. <br>   Type: String<br>   Required: No</li><li>zone-id<br>   Filter by the <strong>Site ID</strong>, such as `zone-vawer2vadg`. <br>   Type: String<br>   Required: No</li><li>rule-tag<br>   Filter by the <strong>Rule tag</strong>, such as `rule-service-1`. <br>   Type: String<br>   Required: No</li>
 	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 }
 
@@ -3427,6 +3635,163 @@ func (r *DescribeAvailablePlansResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAvailablePlansResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConfigGroupVersionDetailRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// Version ID.
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
+}
+
+type DescribeConfigGroupVersionDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// Version ID.
+	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
+}
+
+func (r *DescribeConfigGroupVersionDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConfigGroupVersionDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "VersionId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConfigGroupVersionDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConfigGroupVersionDetailResponseParams struct {
+	// Version information.
+	ConfigGroupVersionInfo *ConfigGroupVersionInfo `json:"ConfigGroupVersionInfo,omitnil" name:"ConfigGroupVersionInfo"`
+
+	// Version file content. It is returned in JSON format.
+	Content *string `json:"Content,omitnil" name:"Content"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeConfigGroupVersionDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConfigGroupVersionDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeConfigGroupVersionDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConfigGroupVersionDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConfigGroupVersionsRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// Configuraration group ID.
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+
+	// Filtering condition. The maximum value of Filters.Values is 20. If this parameter is not specified, all version information for the selected configuration group is returned. Detailed filtering conditions: 
+	// <li>version-id: Filter by version ID.</li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
+
+	// Paging query offset. The default value is 0.
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Limited entries in paging queries. The default value is 20 and the maximum value is 100. 
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+}
+
+type DescribeConfigGroupVersionsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// Configuraration group ID.
+	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+
+	// Filtering condition. The maximum value of Filters.Values is 20. If this parameter is not specified, all version information for the selected configuration group is returned. Detailed filtering conditions: 
+	// <li>version-id: Filter by version ID.</li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
+
+	// Paging query offset. The default value is 0.
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Limited entries in paging queries. The default value is 20 and the maximum value is 100. 
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+}
+
+func (r *DescribeConfigGroupVersionsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConfigGroupVersionsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "GroupId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConfigGroupVersionsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConfigGroupVersionsResponseParams struct {
+	// Total versions.
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// Version information list.
+	ConfigGroupVersionInfos []*ConfigGroupVersionInfo `json:"ConfigGroupVersionInfos,omitnil" name:"ConfigGroupVersionInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeConfigGroupVersionsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConfigGroupVersionsResponseParams `json:"Response"`
+}
+
+func (r *DescribeConfigGroupVersionsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConfigGroupVersionsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3984,6 +4349,142 @@ func (r *DescribeDefaultCertificatesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDeployHistoryRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// Environment ID.
+	EnvId *string `json:"EnvId,omitnil" name:"EnvId"`
+
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: 
+	// <li>record-id: Filter by release record ID. </li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
+}
+
+type DescribeDeployHistoryRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+
+	// Environment ID.
+	EnvId *string `json:"EnvId,omitnil" name:"EnvId"`
+
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: 
+	// <li>record-id: Filter by release record ID. </li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
+}
+
+func (r *DescribeDeployHistoryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDeployHistoryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "EnvId")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDeployHistoryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDeployHistoryResponseParams struct {
+	// Total release records.
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// Release record details.
+	Records []*DeployRecord `json:"Records,omitnil" name:"Records"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeDeployHistoryResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDeployHistoryResponseParams `json:"Response"`
+}
+
+func (r *DescribeDeployHistoryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDeployHistoryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEnvironmentsRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+}
+
+type DescribeEnvironmentsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+}
+
+func (r *DescribeEnvironmentsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEnvironmentsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeEnvironmentsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeEnvironmentsResponseParams struct {
+	// Total environments.
+	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// Environment list.
+	EnvInfos []*EnvInfo `json:"EnvInfos,omitnil" name:"EnvInfos"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeEnvironmentsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeEnvironmentsResponseParams `json:"Response"`
+}
+
+func (r *DescribeEnvironmentsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeEnvironmentsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeHostsSettingRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
@@ -4348,10 +4849,10 @@ type DescribeOverviewL7DataRequestParams struct {
 	Interval *string `json:"Interval,omitnil" name:"Interval"`
 
 	// Filtering condition. The detailed filtering condition key values are as follows: 
-	// <li>socket<br>    Filter based on [<strong>HTTP protocol type</strong>]. <br>    Corresponding value options: <br>    HTTP: HTTP protocol；<br>    HTTPS: HTTPS protocol;<br>    QUIC: QUIC protocol. </li>
-	// <li>domains<br>    Filter based on [<strong>domain name</strong>]. </li>
-	// <li>tagKey<br>    Filter based on [<strong>Tag Key</strong>]. </li>
-	// <li>tagValue<br>    Filter based on [<strong>Tag Value</strong>]. </li>
+	// <li>socket<br>u2003u2003 Filter based on [<strong>HTTP protocol type</strong>]. <br>u2003u2003 Corresponding value options: <br>u2003u2003 HTTP: HTTP protocol；<br>u2003u2003 HTTPS: HTTPS protocol;<br>u2003u2003 QUIC: QUIC protocol. </li>
+	// <li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. </li>
+	// <li>tagKey<br>u2003u2003 Filter based on [<strong>Tag Key</strong>]. </li>
+	// <li>tagValue<br>u2003u2003 Filter based on [<strong>Tag Value</strong>]. </li>
 	Filters []*QueryCondition `json:"Filters,omitnil" name:"Filters"`
 
 	// Geolocation scope. Values:
@@ -4402,10 +4903,10 @@ type DescribeOverviewL7DataRequest struct {
 	Interval *string `json:"Interval,omitnil" name:"Interval"`
 
 	// Filtering condition. The detailed filtering condition key values are as follows: 
-	// <li>socket<br>    Filter based on [<strong>HTTP protocol type</strong>]. <br>    Corresponding value options: <br>    HTTP: HTTP protocol；<br>    HTTPS: HTTPS protocol;<br>    QUIC: QUIC protocol. </li>
-	// <li>domains<br>    Filter based on [<strong>domain name</strong>]. </li>
-	// <li>tagKey<br>    Filter based on [<strong>Tag Key</strong>]. </li>
-	// <li>tagValue<br>    Filter based on [<strong>Tag Value</strong>]. </li>
+	// <li>socket<br>u2003u2003 Filter based on [<strong>HTTP protocol type</strong>]. <br>u2003u2003 Corresponding value options: <br>u2003u2003 HTTP: HTTP protocol；<br>u2003u2003 HTTPS: HTTPS protocol;<br>u2003u2003 QUIC: QUIC protocol. </li>
+	// <li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. </li>
+	// <li>tagKey<br>u2003u2003 Filter based on [<strong>Tag Key</strong>]. </li>
+	// <li>tagValue<br>u2003u2003 Filter based on [<strong>Tag Value</strong>]. </li>
 	Filters []*QueryCondition `json:"Filters,omitnil" name:"Filters"`
 
 	// Geolocation scope. Values:
@@ -4489,7 +4990,7 @@ type DescribePrefetchTasksRequestParams struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>    Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>target<br>    Filter based on [<strong>target resource information</strong>]. target format: http://www.qq.com/1.txt. Multiple values are not supported. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>domains<br>    Filter based on [<strong>domain name</strong>]. domains format: www.qq.com. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>statuses<br>    Filter based on [<strong>task status</strong>]. <br>    Required: No<br>    Fuzz query: Not supported. <br>    Options:<br>    processing: Processing<br>    success: Success<br>    failed: Failure<br>    timeout: Timeout</li>
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>u2003u2003 Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>target<br>u2003u2003 Filter based on [<strong>target resource information</strong>]. target format: http://www.qq.com/1.txt. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. domains format: www.qq.com. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>statuses<br>u2003u2003 Filter based on [<strong>task status</strong>]. <br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. <br>u2003u2003 Options:<br>u2003u2003 processing: Processing<br>u2003u2003 success: Success<br>u2003u2003 failed: Failure<br>u2003u2003 timeout: Timeout</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
@@ -4512,7 +5013,7 @@ type DescribePrefetchTasksRequest struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>    Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>target<br>    Filter based on [<strong>target resource information</strong>]. target format: http://www.qq.com/1.txt. Multiple values are not supported. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>domains<br>    Filter based on [<strong>domain name</strong>]. domains format: www.qq.com. <br>    Type: String<br>    Required: No. <br>    Fuzz query: Not supported. </li><li>statuses<br>    Filter based on [<strong>task status</strong>]. <br>    Required: No<br>    Fuzz query: Not supported. <br>    Options:<br>    processing: Processing<br>    success: Success<br>    failed: Failure<br>    timeout: Timeout</li>
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>u2003u2003 Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>target<br>u2003u2003 Filter based on [<strong>target resource information</strong>]. target format: http://www.qq.com/1.txt. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. domains format: www.qq.com. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>statuses<br>u2003u2003 Filter based on [<strong>task status</strong>]. <br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. <br>u2003u2003 Options:<br>u2003u2003 processing: Processing<br>u2003u2003 success: Success<br>u2003u2003 failed: Failure<br>u2003u2003 timeout: Timeout</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
@@ -4586,7 +5087,7 @@ type DescribePurgeTasksRequestParams struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>    Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.</li><li>target<br>    Filter based on: [strong>target resource information</strong>. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported.<br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.</li><li>domains<br>    Filter based on [<strong>domain name</strong>]. domains format: www.qq.com<br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported. </li><li>statuses<br>    Filter based on <strong>task status</strong>.<br>    Required: No<br>    Fuzz query: Not supported. <br>    Options:<br>    processing: Processing<br>    success: Success<br>    failed: Failure<br>    timeout: Timeout</li><li>type<br>    Filter based on [<strong>cleared cache type</strong>]. Multiple values are not supported. <br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.<br>    Options:<br>    purge_url: URL<br>    purge_prefix: Prefix<br>    purge_all: All cache content<br>    purge_host: Hostname<br>    purge_cache_tag: CacheTag</li>
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>u2003u2003 Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.</li><li>target<br>u2003u2003 Filter based on: [strong>target resource information</strong>. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported.<br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.</li><li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. domains format: www.qq.com<br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. </li><li>statuses<br>u2003u2003 Filter based on <strong>task status</strong>.<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. <br>u2003u2003 Options:<br>u2003u2003 processing: Processing<br>u2003u2003 success: Success<br>u2003u2003 failed: Failure<br>u2003u2003 timeout: Timeout</li><li>type<br>u2003u2003 Filter based on [<strong>cleared cache type</strong>]. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.<br>u2003u2003 Options:<br>u2003u2003 purge_url: URL<br>u2003u2003 purge_prefix: Prefix<br>u2003u2003 purge_all: All cache content<br>u2003u2003 purge_host: Hostname<br>u2003u2003 purge_cache_tag: CacheTag</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
@@ -4609,7 +5110,7 @@ type DescribePurgeTasksRequest struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>    Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.</li><li>target<br>    Filter based on: [strong>target resource information</strong>. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported.<br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.</li><li>domains<br>    Filter based on [<strong>domain name</strong>]. domains format: www.qq.com<br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported. </li><li>statuses<br>    Filter based on <strong>task status</strong>.<br>    Required: No<br>    Fuzz query: Not supported. <br>    Options:<br>    processing: Processing<br>    success: Success<br>    failed: Failure<br>    timeout: Timeout</li><li>type<br>    Filter based on [<strong>cleared cache type</strong>]. Multiple values are not supported. <br>    Type: String<br>    Required: No<br>    Fuzz query: Not supported.<br>    Options:<br>    purge_url: URL<br>    purge_prefix: Prefix<br>    purge_all: All cache content<br>    purge_host: Hostname<br>    purge_cache_tag: CacheTag</li>
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>u2003u2003 Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.</li><li>target<br>u2003u2003 Filter based on: [strong>target resource information</strong>. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported.<br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.</li><li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. domains format: www.qq.com<br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. </li><li>statuses<br>u2003u2003 Filter based on <strong>task status</strong>.<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. <br>u2003u2003 Options:<br>u2003u2003 processing: Processing<br>u2003u2003 success: Success<br>u2003u2003 failed: Failure<br>u2003u2003 timeout: Timeout</li><li>type<br>u2003u2003 Filter based on [<strong>cleared cache type</strong>]. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.<br>u2003u2003 Options:<br>u2003u2003 purge_url: URL<br>u2003u2003 purge_prefix: Prefix<br>u2003u2003 purge_all: All cache content<br>u2003u2003 purge_host: Hostname<br>u2003u2003 purge_cache_tag: CacheTag</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil" name:"Filters"`
 }
 
@@ -6155,6 +6656,37 @@ type EntityStatus struct {
 	Message *string `json:"Message,omitnil" name:"Message"`
 }
 
+type EnvInfo struct {
+	// Environment ID.
+	EnvId *string `json:"EnvId,omitnil" name:"EnvId"`
+
+	// Environment type. Valid values: 
+	// <li>production: Production environment.</li><li> staging: Test environment. </li>
+	EnvType *string `json:"EnvType,omitnil" name:"EnvType"`
+
+	// Environment status. Valid values: 
+	// <li>creating: Being created.</li>
+	// <li>running: The environment is stable, with version changes allowed.</li>
+	// <li>version_deploying: The version is currently being deployed, with no more changes allowed. </li>
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// Effective scope of the configuration in the current environment. Valid values: 
+	// <li>ALL: It takes effect on the entire network when EnvType is set to production.</li>
+	// <li>It returns the IP address of the test node for host binding during testing when EnvType is set to staging. </li>
+	Scope []*string `json:"Scope,omitnil" name:"Scope"`
+
+	// For the effective versions of each configuration group in the current environment, there are two possible scenarios based on the value of Status: 
+	// <li>When Status is set to version_deploying, the returned value of this field represents the previously effective version. In other words, during the deployment of the new version, the effective version is the one that was in effect before any changes were made.</li>
+	// <li>When Status is set to running, the value returned by this field is the currently effective version. </li>
+	CurrentConfigGroupVersionInfos []*ConfigGroupVersionInfo `json:"CurrentConfigGroupVersionInfos,omitnil" name:"CurrentConfigGroupVersionInfos"`
+
+	// Creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+
+	// Update time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
+	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+}
+
 type ExceptConfig struct {
 	// Whether to enable configuration. Values:
 	// <li>`on`: Enable</li>
@@ -7065,9 +7597,8 @@ type ModifyApplicationProxyRequestParams struct {
 	// The original configuration will apply if this field is not specified.
 	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil" name:"SessionPersistTime"`
 
-	// The proxy type. Values:
-	// <li>`hostname`: The proxy is created by subdomain name.</li>
-	// <li>`instance`: The proxy is created by instance.</li>If not specified, this field uses the default value `instance`.
+	// L4 proxy mode. Valid values: 
+	// <li>instance: Instance mode. </li>If it is not specified, instance is used by default.
 	ProxyType *string `json:"ProxyType,omitnil" name:"ProxyType"`
 
 	// IPv6 access configuration. The original configuration will apply if it is not specified.
@@ -7094,9 +7625,8 @@ type ModifyApplicationProxyRequest struct {
 	// The original configuration will apply if this field is not specified.
 	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil" name:"SessionPersistTime"`
 
-	// The proxy type. Values:
-	// <li>`hostname`: The proxy is created by subdomain name.</li>
-	// <li>`instance`: The proxy is created by instance.</li>If not specified, this field uses the default value `instance`.
+	// L4 proxy mode. Valid values: 
+	// <li>instance: Instance mode. </li>If it is not specified, instance is used by default.
 	ProxyType *string `json:"ProxyType,omitnil" name:"ProxyType"`
 
 	// IPv6 access configuration. The original configuration will apply if it is not specified.
@@ -7912,7 +8442,7 @@ type ModifyZoneRequestParams struct {
 
 	// Access mode of the site. Values:
 	// <li> `full`: Access through a name server.</li>
-	// <li> `partial`: Access through a CNAME u200drecord. A site using domainless access can only switch to CNAME access. </li>The original configuration applies if this field is not specified.
+	// <li> `partial`: Access through a CNAME record. A site using domainless access can only switch to CNAME access. </li>The original configuration applies if this field is not specified.
 	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// The custom name servers. The original configuration applies if this field is not specified. It is not allowed to pass this field when a site is connected without using a domain name.
@@ -7939,7 +8469,7 @@ type ModifyZoneRequest struct {
 
 	// Access mode of the site. Values:
 	// <li> `full`: Access through a name server.</li>
-	// <li> `partial`: Access through a CNAME u200drecord. A site using domainless access can only switch to CNAME access. </li>The original configuration applies if this field is not specified.
+	// <li> `partial`: Access through a CNAME record. A site using domainless access can only switch to CNAME access. </li>The original configuration applies if this field is not specified.
 	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// The custom name servers. The original configuration applies if this field is not specified. It is not allowed to pass this field when a site is connected without using a domain name.
@@ -8866,11 +9396,11 @@ type Resource struct {
 	// <li>`plan`: Plan resources</li>
 	// <li>`pay-as-you-go`: Pay-as-you-go resources </li>
 	// <li>`value-added`: Value-added resources </li>
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Group *string `json:"Group,omitnil" name:"Group"`
 
 	// The sites that are associated with the current resources.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ZoneNumber *int64 `json:"ZoneNumber,omitnil" name:"ZoneNumber"`
 }
 
@@ -9322,10 +9852,10 @@ type StandardDebug struct {
 	// <li>`off`: Disable </li>
 	Switch *string `json:"Switch,omitnil" name:"Switch"`
 
-	// Allowed client source. IPv4 and IPv6 addresses and network segments are supported. 0.0.0.0/0 indicates that all IPv4 clients can be debugged, and ::/0 indicates that all IPv6 clients can be debugged.
+	// The client IP to allow. It can be an IPv4/IPv6 address or a CIDR block. If not specified, it means to allow any client IP
 	AllowClientIPList []*string `json:"AllowClientIPList,omitnil" name:"AllowClientIPList"`
 
-	// The time when the standard debugging setting expires. If it is exceeded, this feature u200dbecomes invalid.
+	// The time when the standard debugging setting expires. If it is exceeded, this feature becomes invalid.
 	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
 }
 
@@ -9358,16 +9888,16 @@ type Sv struct {
 	// <li>`custom-rule`: Quota for custom rules</li>
 	// <li>`rate-limiting-rule`: Quota for rate limiting rules</li>
 	// <li>`l4-proxy-instance`: Quota for L4 proxy instances </li>
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Pack *string `json:"Pack,omitnil" name:"Pack"`
 
 	// ID of the L4 proxy instance.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
 	// The protection specification.
 	// Values: <li> `cm_30G`: 30 Gbps base protection bandwidth in **Chinese mainland** service area</li><li> `cm_60G`: 60 Gbps base protection bandwidth in **Chinese mainland** service area</li><li> `cm_100G`: 100 Gbps base protection bandwidth in **Chinese mainland** service area</li><li> `anycast_300G`: 300 Gbps Anycast-based protection in **Global (MLC)** service area</li><li> `anycast_unlimited`: Unlimited Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> `cm_30G_anycast_300G`: 30 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> `cm_30G_anycast_unlimited`: 30 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> cm_60G_anycast_300G`: 60 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> cm_60G_anycast_unlimited`: 60 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> `cm_100G_anycast_300G`: 100 Gbps base protection bandwidth in **Chinese mainland** service area and 300 Gbps Anycast-based protection bandwidth in **Global (MLC)** service area</li><li> cm_100G_anycast_unlimited`: 100 Gbps base protection bandwidth in **Chinese mainland** service area and unlimited Anycast-based protection bandwidth in **Global (MLC)** service area </li>
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProtectionSpecs *string `json:"ProtectionSpecs,omitnil" name:"ProtectionSpecs"`
 }
 
@@ -9817,6 +10347,6 @@ type ZoneSetting struct {
 	AccelerateMainland *AccelerateMainland `json:"AccelerateMainland,omitnil" name:"AccelerateMainland"`
 
 	// Standard debugging configuration.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	StandardDebug *StandardDebug `json:"StandardDebug,omitnil" name:"StandardDebug"`
 }

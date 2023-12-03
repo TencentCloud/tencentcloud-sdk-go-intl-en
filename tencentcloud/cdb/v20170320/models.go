@@ -612,28 +612,32 @@ type AuditLog struct {
 	ThreadId *int64 `json:"ThreadId,omitnil" name:"ThreadId"`
 
 	// Number of scanned rows
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CheckRows *int64 `json:"CheckRows,omitnil" name:"CheckRows"`
 
-	// CPU u200dexecution time (μs)
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// CPU execution time (μs)
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CpuTime *float64 `json:"CpuTime,omitnil" name:"CpuTime"`
 
 	// IO wait time (μs)
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IoWaitTime *uint64 `json:"IoWaitTime,omitnil" name:"IoWaitTime"`
 
 	// Lock wait time (μs)
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LockWaitTime *uint64 `json:"LockWaitTime,omitnil" name:"LockWaitTime"`
 
 	// Start time, which forms a time accurate to nanoseconds with·`timestamp`.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	NsTime *uint64 `json:"NsTime,omitnil" name:"NsTime"`
 
-	// Transaction u200dduration (μs)
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Transaction duration (μs)
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TrxLivingTime *uint64 `json:"TrxLivingTime,omitnil" name:"TrxLivingTime"`
+
+	// Basic information on the rule template hit by the log.
+	// Note: The return value may be null, indicating that no valid data can be obtained.
+	TemplateInfo []*LogRuleTemplateInfo `json:"TemplateInfo,omitnil" name:"TemplateInfo"`
 }
 
 type AuditLogAggregationResult struct {
@@ -773,6 +777,20 @@ type AuditRuleFilters struct {
 	// Audit rule 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
 	RuleFilters []*RuleFilters `json:"RuleFilters,omitnil" name:"RuleFilters"`
+}
+
+type AutoStrategy struct {
+	// CPU utilization threshold (percent value). Valid values: 70, 80, and 90. Automatic scale-out will be triggered when CPU utilization reaches the set threshold.
+	ExpandThreshold *int64 `json:"ExpandThreshold,omitnil" name:"ExpandThreshold"`
+
+	// Interval, in seconds. Valid values: 1, 3, 5, 10, 15, and 30. The system backend determines whether automatic scale-out is required at the set interval.
+	ExpandPeriod *int64 `json:"ExpandPeriod,omitnil" name:"ExpandPeriod"`
+
+	// CPU utilization threshold (percent value). Valid values: 10, 20, and 30. Automatic scale-in will be triggered when CPU utilization reaches the set threshold.
+	ShrinkThreshold *int64 `json:"ShrinkThreshold,omitnil" name:"ShrinkThreshold"`
+
+	// Interval, in seconds. Valid values: 5, 10, 15, and 30. The system backend determines whether automatic scale-in is required at the set interval.
+	ShrinkPeriod *int64 `json:"ShrinkPeriod,omitnil" name:"ShrinkPeriod"`
 }
 
 type BackupConfig struct {
@@ -3706,7 +3724,7 @@ type DescribeAuditLogsResponseParams struct {
 	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
 
 	// Audit log details
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Items []*AuditLog `json:"Items,omitnil" name:"Items"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4850,15 +4868,15 @@ func (r *DescribeCpuExpandStrategyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCpuExpandStrategyResponseParams struct {
 	// Policy type. Valid values: `auto`, `manual`.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil" name:"Type"`
 
 	// Manually expanded CPU, which is valid when `Type` is `manual`.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExpandCpu *string `json:"ExpandCpu,omitnil" name:"ExpandCpu"`
 
 	// Automatic expansion policy, which is valid when `Type` is `auto`.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AutoStrategy *string `json:"AutoStrategy,omitnil" name:"AutoStrategy"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -5310,6 +5328,68 @@ func (r *DescribeDBInstanceInfoResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDBInstanceInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstanceLogToCLSRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+type DescribeDBInstanceLogToCLSRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+func (r *DescribeDBInstanceLogToCLSRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceLogToCLSRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDBInstanceLogToCLSRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDBInstanceLogToCLSResponseParams struct {
+	// Configurations of sending error logs to CLS.
+	// Note: The return value may be null, indicating that no valid data can be obtained.
+	ErrorLog *LogToCLSConfig `json:"ErrorLog,omitnil" name:"ErrorLog"`
+
+	// Configurations of sending slow logs to CLS.
+	// Note: The return value may be null, indicating that no valid data can be obtained.
+	SlowLog *LogToCLSConfig `json:"SlowLog,omitnil" name:"SlowLog"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeDBInstanceLogToCLSResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDBInstanceLogToCLSResponseParams `json:"Response"`
+}
+
+func (r *DescribeDBInstanceLogToCLSResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDBInstanceLogToCLSResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7150,7 +7230,7 @@ type DescribeRollbackRangeTimeRequestParams struct {
 	// Instance ID list. An instance ID is in the format of cdb-c1nl9rpv, which is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 
-	// Whether the clone instance and the source instance are in one AZ. Valid values: `true` (yes), `false` (no).
+	// Whether the clone instance and the source instance are in the same AZ. Valid values: `true` (yes), `false` (no).
 	IsRemoteZone *string `json:"IsRemoteZone,omitnil" name:"IsRemoteZone"`
 
 	// The region of the clone instance, such as `ap-guangzhou`.
@@ -7163,7 +7243,7 @@ type DescribeRollbackRangeTimeRequest struct {
 	// Instance ID list. An instance ID is in the format of cdb-c1nl9rpv, which is the same as the instance ID displayed on the TencentDB Console page.
 	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
 
-	// Whether the clone instance and the source instance are in one AZ. Valid values: `true` (yes), `false` (no).
+	// Whether the clone instance and the source instance are in the same AZ. Valid values: `true` (yes), `false` (no).
 	IsRemoteZone *string `json:"IsRemoteZone,omitnil" name:"IsRemoteZone"`
 
 	// The region of the clone instance, such as `ap-guangzhou`.
@@ -8356,13 +8436,13 @@ type InstanceAuditLogFilters struct {
 	// `DBName` - Database name.
 	// 
 	// `Equal to` and `Not equal to` can be used to search for:
-	// `sqlType` - SQL u200dtype,
+	// `sqlType` - SQL type,
 	// `errCode` - Error code,
 	// `threadId` - Thread ID.
 	// 
 	// Range search is supported for:
 	// `execTime`- Execution time (μs),
-	// `lockWaitTime`u200d - Lock wait time (μs),
+	// `lockWaitTime` - Lock wait time (μs),
 	// `ioWaitTime` - IO wait time (μs),
 	// `trxLivingTime` - Transaction duration (μs),
 	// `cpuTime` - CPU time (μs),
@@ -8378,7 +8458,7 @@ type InstanceAuditLogFilters struct {
 	// `EXC` - Exclude,
 	// `EQS` - Equal to,
 	// `NEQ` - Not equal to.
-	// u200d`RA` - Range
+	// `RA` - Range
 	Compare *string `json:"Compare,omitnil" name:"Compare"`
 
 	// The filter value. In a reverse query, multiple values are in an "AND" relationship; while in a forward query, multiple values are in an "OR" relationship.
@@ -8630,6 +8710,38 @@ type LocalBinlogConfigDefault struct {
 
 	// Space utilization of local binlog. Value range: [30,50].
 	MaxUsage *int64 `json:"MaxUsage,omitnil" name:"MaxUsage"`
+}
+
+type LogRuleTemplateInfo struct {
+	// Template ID. 
+	// Note: The return value may be null, indicating that no valid data can be obtained.
+	RuleTemplateId *string `json:"RuleTemplateId,omitnil" name:"RuleTemplateId"`
+
+	// Template name.
+	// Note: The return value may be null, indicating that no valid data can be obtained.
+	RuleTemplateName *string `json:"RuleTemplateName,omitnil" name:"RuleTemplateName"`
+
+	// Alarm level. Valid values: 1: Low risk; 2: Medium risk; 3: High risk. 
+	// Note: The return value may be null, indicating that no valid data can be obtained.
+	AlarmLevel *string `json:"AlarmLevel,omitnil" name:"AlarmLevel"`
+
+	// Template change status. Valid values: 0: Unchanged; 1: Changed; 2: Deleted.
+	// Note: The return value may be null, indicating that no valid data can be obtained.
+	RuleTemplateStatus *int64 `json:"RuleTemplateStatus,omitnil" name:"RuleTemplateStatus"`
+}
+
+type LogToCLSConfig struct {
+	// Enabling status of the feature.
+	// Note: The return value may be null, indicating that no valid data can be obtained.
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// CLS log set ID.
+	// Note: The return value may be null, indicating that no valid data can be obtained.
+	LogSetId *string `json:"LogSetId,omitnil" name:"LogSetId"`
+
+	// Log topic ID.
+	// Note: The return value may be null, indicating that no valid data can be obtained.
+	LogTopicId *string `json:"LogTopicId,omitnil" name:"LogTopicId"`
 }
 
 type MasterInfo struct {
@@ -9628,6 +9740,116 @@ func (r *ModifyCdbProxyParamResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyCdbProxyParamResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBInstanceLogToCLSRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Log type. Valid values: error and slowLog.
+	LogType *string `json:"LogType,omitnil" name:"LogType"`
+
+	// Enabling status. Valid values: ON and OFF.
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// Indicates whether a log set needs to be created.
+	CreateLogset *bool `json:"CreateLogset,omitnil" name:"CreateLogset"`
+
+	// Log set name if the log set is to be created or ID of the selected existing log set.
+	Logset *string `json:"Logset,omitnil" name:"Logset"`
+
+	// Indicates whether a log topic needs to be created.
+	CreateLogTopic *bool `json:"CreateLogTopic,omitnil" name:"CreateLogTopic"`
+
+	// Log topic name if the topic is to be created or ID of the selected existing topic.
+	LogTopic *string `json:"LogTopic,omitnil" name:"LogTopic"`
+
+	// Log topic validity period, which is 30 days by default if not specified.
+	Period *int64 `json:"Period,omitnil" name:"Period"`
+
+	// Indicates whether to create an index when creating the log topic.
+	CreateIndex *bool `json:"CreateIndex,omitnil" name:"CreateIndex"`
+}
+
+type ModifyDBInstanceLogToCLSRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Log type. Valid values: error and slowLog.
+	LogType *string `json:"LogType,omitnil" name:"LogType"`
+
+	// Enabling status. Valid values: ON and OFF.
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// Indicates whether a log set needs to be created.
+	CreateLogset *bool `json:"CreateLogset,omitnil" name:"CreateLogset"`
+
+	// Log set name if the log set is to be created or ID of the selected existing log set.
+	Logset *string `json:"Logset,omitnil" name:"Logset"`
+
+	// Indicates whether a log topic needs to be created.
+	CreateLogTopic *bool `json:"CreateLogTopic,omitnil" name:"CreateLogTopic"`
+
+	// Log topic name if the topic is to be created or ID of the selected existing topic.
+	LogTopic *string `json:"LogTopic,omitnil" name:"LogTopic"`
+
+	// Log topic validity period, which is 30 days by default if not specified.
+	Period *int64 `json:"Period,omitnil" name:"Period"`
+
+	// Indicates whether to create an index when creating the log topic.
+	CreateIndex *bool `json:"CreateIndex,omitnil" name:"CreateIndex"`
+}
+
+func (r *ModifyDBInstanceLogToCLSRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceLogToCLSRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "LogType")
+	delete(f, "Status")
+	delete(f, "CreateLogset")
+	delete(f, "Logset")
+	delete(f, "CreateLogTopic")
+	delete(f, "LogTopic")
+	delete(f, "Period")
+	delete(f, "CreateIndex")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDBInstanceLogToCLSRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDBInstanceLogToCLSResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ModifyDBInstanceLogToCLSResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDBInstanceLogToCLSResponseParams `json:"Response"`
+}
+
+func (r *ModifyDBInstanceLogToCLSResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDBInstanceLogToCLSResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -10660,8 +10882,11 @@ type OpenAuditServiceRequestParams struct {
 	// Audit rule If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
 	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitnil" name:"AuditRuleFilters"`
 
-	// Rule template ID If both this parameter and `AuditRuleFilters` are left empty, full audit will be applied.
+	// Rule template ID. If both this parameter and AuditRuleFilters are not specified, all SQL statements will be recorded.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil" name:"RuleTemplateIds"`
+
+	// Audit type. Valid values: true: Record all; false: Record by rules (default value).
+	AuditAll *bool `json:"AuditAll,omitnil" name:"AuditAll"`
 }
 
 type OpenAuditServiceRequest struct {
@@ -10679,8 +10904,11 @@ type OpenAuditServiceRequest struct {
 	// Audit rule If both this parameter and `RuleTemplateIds` are left empty, full audit will be applied.
 	AuditRuleFilters []*AuditRuleFilters `json:"AuditRuleFilters,omitnil" name:"AuditRuleFilters"`
 
-	// Rule template ID If both this parameter and `AuditRuleFilters` are left empty, full audit will be applied.
+	// Rule template ID. If both this parameter and AuditRuleFilters are not specified, all SQL statements will be recorded.
 	RuleTemplateIds []*string `json:"RuleTemplateIds,omitnil" name:"RuleTemplateIds"`
+
+	// Audit type. Valid values: true: Record all; false: Record by rules (default value).
+	AuditAll *bool `json:"AuditAll,omitnil" name:"AuditAll"`
 }
 
 func (r *OpenAuditServiceRequest) ToJsonString() string {
@@ -10700,6 +10928,7 @@ func (r *OpenAuditServiceRequest) FromJsonString(s string) error {
 	delete(f, "HighLogExpireDay")
 	delete(f, "AuditRuleFilters")
 	delete(f, "RuleTemplateIds")
+	delete(f, "AuditAll")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "OpenAuditServiceRequest has unknown keys!", "")
 	}
@@ -10955,10 +11184,15 @@ type ParamRecord struct {
 	NewValue *string `json:"NewValue,omitnil" name:"NewValue"`
 
 	// Whether the parameter is modified successfully
+	//
+	// Deprecated: IsSucess is deprecated.
 	IsSucess *bool `json:"IsSucess,omitnil" name:"IsSucess"`
 
 	// Modification time
 	ModifyTime *string `json:"ModifyTime,omitnil" name:"ModifyTime"`
+
+	// Indicates whether the parameter is modified successfully.
+	IsSuccess *bool `json:"IsSuccess,omitnil" name:"IsSuccess"`
 }
 
 type ParamTemplateInfo struct {
@@ -11984,12 +12218,35 @@ func (r *StartBatchRollbackResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartCpuExpandRequestParams struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
+	// Scale-out mode. Valid values: auto and
+	// manual.
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// Number of CPU cores to increase during manual scale-out. This parameter is required when Type is set to manual.
+	ExpandCpu *int64 `json:"ExpandCpu,omitnil" name:"ExpandCpu"`
+
+	// Automatic scale-out policy. This parameter is required when Type is set to auto.
+	AutoStrategy *AutoStrategy `json:"AutoStrategy,omitnil" name:"AutoStrategy"`
 }
 
 type StartCpuExpandRequest struct {
 	*tchttp.BaseRequest
 	
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Scale-out mode. Valid values: auto and
+	// manual.
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// Number of CPU cores to increase during manual scale-out. This parameter is required when Type is set to manual.
+	ExpandCpu *int64 `json:"ExpandCpu,omitnil" name:"ExpandCpu"`
+
+	// Automatic scale-out policy. This parameter is required when Type is set to auto.
+	AutoStrategy *AutoStrategy `json:"AutoStrategy,omitnil" name:"AutoStrategy"`
 }
 
 func (r *StartCpuExpandRequest) ToJsonString() string {
@@ -12004,7 +12261,10 @@ func (r *StartCpuExpandRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "InstanceId")
+	delete(f, "Type")
+	delete(f, "ExpandCpu")
+	delete(f, "AutoStrategy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartCpuExpandRequest has unknown keys!", "")
 	}
@@ -12013,7 +12273,7 @@ func (r *StartCpuExpandRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartCpuExpandResponseParams struct {
-	// Async task ID, which can be passed in by calling the u200c`DescribeAsyncRequest` API for task progress query.
+	// Async task ID, which can be passed in by calling the `DescribeAsyncRequest` API for task progress query.
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil" name:"AsyncRequestId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -12128,7 +12388,7 @@ func (r *StopCpuExpandRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StopCpuExpandResponseParams struct {
-	// Async task ID, which can be passed in by calling the u200c`DescribeAsyncRequest` API for task progress query.
+	// Async task ID, which can be passed in by calling the `DescribeAsyncRequest` API for task progress query.
 	AsyncRequestId *string `json:"AsyncRequestId,omitnil" name:"AsyncRequestId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.

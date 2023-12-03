@@ -56,7 +56,7 @@ const (
 	// InvalidParameter.MailFormatIncorrect
 	INVALIDPARAMETER_MAILFORMATINCORRECT = "InvalidParameter.MailFormatIncorrect"
 
-	// 
+	// Incorrect page parameter value.
 	INVALIDPARAMETER_PAGE = "InvalidParameter.Page"
 
 	// InvalidParameter.PasswordContentIncorrect
@@ -79,6 +79,9 @@ const (
 
 	// InvalidParameterValue.CountryCodeEmpty
 	INVALIDPARAMETERVALUE_COUNTRYCODEEMPTY = "InvalidParameterValue.CountryCodeEmpty"
+
+	// The credit quota has exceeded the limit with the newly allocated quota.
+	INVALIDPARAMETERVALUE_CREDITAMOUNTOUTOFRANGE = "InvalidParameterValue.CreditAmountOutOfRange"
 
 	// Incorrect month value
 	INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
