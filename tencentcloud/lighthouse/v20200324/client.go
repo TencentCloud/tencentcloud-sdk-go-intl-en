@@ -426,7 +426,9 @@ func NewCreateBlueprintResponse() (response *CreateBlueprintResponse) {
 // This API is used to create an image.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CREATEBLUEPRINTFAILED = "FailedOperation.CreateBlueprintFailed"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
 //  FAILEDOPERATION_UNABLETOCREATEBLUEPRINT = "FailedOperation.UnableToCreateBlueprint"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
@@ -445,7 +447,9 @@ func (c *Client) CreateBlueprint(request *CreateBlueprintRequest) (response *Cre
 // This API is used to create an image.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CREATEBLUEPRINTFAILED = "FailedOperation.CreateBlueprintFailed"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
 //  FAILEDOPERATION_UNABLETOCREATEBLUEPRINT = "FailedOperation.UnableToCreateBlueprint"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
@@ -468,6 +472,81 @@ func (c *Client) CreateBlueprintWithContext(ctx context.Context, request *Create
     request.SetContext(ctx)
     
     response = NewCreateBlueprintResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDisksRequest() (request *CreateDisksRequest) {
+    request = &CreateDisksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lighthouse", APIVersion, "CreateDisks")
+    
+    
+    return
+}
+
+func NewCreateDisksResponse() (response *CreateDisksResponse) {
+    response = &CreateDisksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDisks
+// This API is used to create one or more cloud disks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CREATEDISKSFAILED = "FailedOperation.CreateDisksFailed"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  INVALIDPARAMETERVALUE_DISKINSTANCEZONENOTMATCH = "InvalidParameterValue.DiskInstanceZoneNotMatch"
+//  INVALIDPARAMETERVALUE_INVALIDDISKTYPE = "InvalidParameterValue.InvalidDiskType"
+//  INVALIDPARAMETERVALUE_INVALIDZONE = "InvalidParameterValue.InvalidZone"
+//  INVALIDPARAMETERVALUE_PLATFORMTYPENOTSUPPORTFILESYSTEM = "InvalidParameterValue.PlatformTypeNotSupportFileSystem"
+//  INVALIDPARAMETERVALUE_PLATFORMTYPENOTSUPPORTMOUNTPOINT = "InvalidParameterValue.PlatformTypeNotSupportMountPoint"
+//  LIMITEXCEEDED_ATTACHDATADISKQUOTALIMITEXCEEDED = "LimitExceeded.AttachDataDiskQuotaLimitExceeded"
+//  LIMITEXCEEDED_DISKQUOTALIMITEXCEEDED = "LimitExceeded.DiskQuotaLimitExceeded"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_TATAGENTNOTONLINE = "UnsupportedOperation.TatAgentNotOnline"
+func (c *Client) CreateDisks(request *CreateDisksRequest) (response *CreateDisksResponse, err error) {
+    return c.CreateDisksWithContext(context.Background(), request)
+}
+
+// CreateDisks
+// This API is used to create one or more cloud disks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CREATEDISKSFAILED = "FailedOperation.CreateDisksFailed"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  INVALIDPARAMETERVALUE_DISKINSTANCEZONENOTMATCH = "InvalidParameterValue.DiskInstanceZoneNotMatch"
+//  INVALIDPARAMETERVALUE_INVALIDDISKTYPE = "InvalidParameterValue.InvalidDiskType"
+//  INVALIDPARAMETERVALUE_INVALIDZONE = "InvalidParameterValue.InvalidZone"
+//  INVALIDPARAMETERVALUE_PLATFORMTYPENOTSUPPORTFILESYSTEM = "InvalidParameterValue.PlatformTypeNotSupportFileSystem"
+//  INVALIDPARAMETERVALUE_PLATFORMTYPENOTSUPPORTMOUNTPOINT = "InvalidParameterValue.PlatformTypeNotSupportMountPoint"
+//  LIMITEXCEEDED_ATTACHDATADISKQUOTALIMITEXCEEDED = "LimitExceeded.AttachDataDiskQuotaLimitExceeded"
+//  LIMITEXCEEDED_DISKQUOTALIMITEXCEEDED = "LimitExceeded.DiskQuotaLimitExceeded"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_TATAGENTNOTONLINE = "UnsupportedOperation.TatAgentNotOnline"
+func (c *Client) CreateDisksWithContext(ctx context.Context, request *CreateDisksRequest) (response *CreateDisksResponse, err error) {
+    if request == nil {
+        request = NewCreateDisksRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDisks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDisksResponse()
     err = c.Send(request, response)
     return
 }
@@ -696,6 +775,7 @@ func NewCreateInstancesResponse() (response *CreateInstancesResponse) {
 //  AUTHFAILURE_INVALIDREGION = "AuthFailure.InvalidRegion"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CREATEINSTANCESFAILED = "FailedOperation.CreateInstancesFailed"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
 //  FAILEDOPERATION_UNABLETOCREATEINSTANCES = "FailedOperation.UnableToCreateInstances"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_INVALIDACTIONNOTFOUND = "InternalError.InvalidActionNotFound"
@@ -705,6 +785,7 @@ func NewCreateInstancesResponse() (response *CreateInstancesResponse) {
 //  INVALIDPARAMETERVALUE_BLUEPRINTID = "InvalidParameterValue.BlueprintId"
 //  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
 //  INVALIDPARAMETERVALUE_BUNDLEANDBLUEPRINTNOTMATCH = "InvalidParameterValue.BundleAndBlueprintNotMatch"
+//  INVALIDPARAMETERVALUE_BUNDLENOTSUPPORTBLUEPRINTPLATFORM = "InvalidParameterValue.BundleNotSupportBlueprintPlatform"
 //  INVALIDPARAMETERVALUE_CLIENTTOKENTOOLONG = "InvalidParameterValue.ClientTokenTooLong"
 //  INVALIDPARAMETERVALUE_INSTANCENAMETOOLONG = "InvalidParameterValue.InstanceNameTooLong"
 //  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTID = "InvalidParameterValue.InvalidBlueprintId"
@@ -718,7 +799,9 @@ func NewCreateInstancesResponse() (response *CreateInstancesResponse) {
 //  LIMITEXCEEDED_INSTANCEQUOTALIMITEXCEEDED = "LimitExceeded.InstanceQuotaLimitExceeded"
 //  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
 //  RESOURCENOTFOUND_BLUEPRINTNOTFOUND = "ResourceNotFound.BlueprintNotFound"
+//  RESOURCENOTFOUND_FIREWALLTEMPLATENOTFOUND = "ResourceNotFound.FirewallTemplateNotFound"
 //  RESOURCEUNAVAILABLE_BUNDLEUNAVAILABLE = "ResourceUnavailable.BundleUnavailable"
+//  RESOURCESSOLDOUT_BUNDLESOLDOUT = "ResourcesSoldOut.BundleSoldOut"
 //  RESOURCESSOLDOUT_PURCHASESOURCEHASNOBUNDLECONFIGS = "ResourcesSoldOut.PurchaseSourceHasNoBundleConfigs"
 //  RESOURCESSOLDOUT_ZONESHASNOBUNDLECONFIGS = "ResourcesSoldOut.ZonesHasNoBundleConfigs"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
@@ -734,6 +817,7 @@ func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *Cre
 //  AUTHFAILURE_INVALIDREGION = "AuthFailure.InvalidRegion"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CREATEINSTANCESFAILED = "FailedOperation.CreateInstancesFailed"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
 //  FAILEDOPERATION_UNABLETOCREATEINSTANCES = "FailedOperation.UnableToCreateInstances"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_INVALIDACTIONNOTFOUND = "InternalError.InvalidActionNotFound"
@@ -743,6 +827,7 @@ func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *Cre
 //  INVALIDPARAMETERVALUE_BLUEPRINTID = "InvalidParameterValue.BlueprintId"
 //  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
 //  INVALIDPARAMETERVALUE_BUNDLEANDBLUEPRINTNOTMATCH = "InvalidParameterValue.BundleAndBlueprintNotMatch"
+//  INVALIDPARAMETERVALUE_BUNDLENOTSUPPORTBLUEPRINTPLATFORM = "InvalidParameterValue.BundleNotSupportBlueprintPlatform"
 //  INVALIDPARAMETERVALUE_CLIENTTOKENTOOLONG = "InvalidParameterValue.ClientTokenTooLong"
 //  INVALIDPARAMETERVALUE_INSTANCENAMETOOLONG = "InvalidParameterValue.InstanceNameTooLong"
 //  INVALIDPARAMETERVALUE_INVALIDBLUEPRINTID = "InvalidParameterValue.InvalidBlueprintId"
@@ -756,7 +841,9 @@ func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *Cre
 //  LIMITEXCEEDED_INSTANCEQUOTALIMITEXCEEDED = "LimitExceeded.InstanceQuotaLimitExceeded"
 //  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
 //  RESOURCENOTFOUND_BLUEPRINTNOTFOUND = "ResourceNotFound.BlueprintNotFound"
+//  RESOURCENOTFOUND_FIREWALLTEMPLATENOTFOUND = "ResourceNotFound.FirewallTemplateNotFound"
 //  RESOURCEUNAVAILABLE_BUNDLEUNAVAILABLE = "ResourceUnavailable.BundleUnavailable"
+//  RESOURCESSOLDOUT_BUNDLESOLDOUT = "ResourcesSoldOut.BundleSoldOut"
 //  RESOURCESSOLDOUT_PURCHASESOURCEHASNOBUNDLECONFIGS = "ResourcesSoldOut.PurchaseSourceHasNoBundleConfigs"
 //  RESOURCESSOLDOUT_ZONESHASNOBUNDLECONFIGS = "ResourcesSoldOut.ZonesHasNoBundleConfigs"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
@@ -1181,6 +1268,7 @@ func NewDescribeAllScenesResponse() (response *DescribeAllScenesResponse) {
 // This API is used to query the list of scenes in all regions.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 func (c *Client) DescribeAllScenes(request *DescribeAllScenesRequest) (response *DescribeAllScenesResponse, err error) {
     return c.DescribeAllScenesWithContext(context.Background(), request)
@@ -1190,6 +1278,7 @@ func (c *Client) DescribeAllScenes(request *DescribeAllScenesRequest) (response 
 // This API is used to query the list of scenes in all regions.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 func (c *Client) DescribeAllScenesWithContext(ctx context.Context, request *DescribeAllScenesRequest) (response *DescribeAllScenesResponse, err error) {
     if request == nil {
@@ -1319,6 +1408,7 @@ func NewDescribeBlueprintsResponse() (response *DescribeBlueprintsResponse) {
 //  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
 //  RESOURCENOTFOUND_SCENEIDNOTFOUND = "ResourceNotFound.SceneIdNotFound"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_TOKENINVALID = "UnauthorizedOperation.TokenInvalid"
 func (c *Client) DescribeBlueprints(request *DescribeBlueprintsRequest) (response *DescribeBlueprintsResponse, err error) {
     return c.DescribeBlueprintsWithContext(context.Background(), request)
 }
@@ -1349,6 +1439,7 @@ func (c *Client) DescribeBlueprints(request *DescribeBlueprintsRequest) (respons
 //  RESOURCENOTFOUND_ROLENOTFOUND = "ResourceNotFound.RoleNotFound"
 //  RESOURCENOTFOUND_SCENEIDNOTFOUND = "ResourceNotFound.SceneIdNotFound"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_TOKENINVALID = "UnauthorizedOperation.TokenInvalid"
 func (c *Client) DescribeBlueprintsWithContext(ctx context.Context, request *DescribeBlueprintsRequest) (response *DescribeBlueprintsResponse, err error) {
     if request == nil {
         request = NewDescribeBlueprintsRequest()
@@ -1389,6 +1480,7 @@ func NewDescribeBundleDiscountResponse() (response *DescribeBundleDiscountRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEBUNDLEDISCOUNTFAILED = "FailedOperation.DescribeBundleDiscountFailed"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
@@ -1405,6 +1497,7 @@ func (c *Client) DescribeBundleDiscount(request *DescribeBundleDiscountRequest) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEBUNDLEDISCOUNTFAILED = "FailedOperation.DescribeBundleDiscountFailed"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
@@ -1452,6 +1545,7 @@ func NewDescribeBundlesResponse() (response *DescribeBundlesResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEBUNDLESFAILED = "FailedOperation.DescribeBundlesFailed"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
@@ -1483,6 +1577,7 @@ func (c *Client) DescribeBundles(request *DescribeBundlesRequest) (response *Des
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEBUNDLESFAILED = "FailedOperation.DescribeBundlesFailed"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_INVALIDCOMMANDNOTFOUND = "InternalError.InvalidCommandNotFound"
@@ -1544,6 +1639,7 @@ func NewDescribeCcnAttachedInstancesResponse() (response *DescribeCcnAttachedIns
 // This API is used to query the information of instances associated with CCN.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
@@ -1559,6 +1655,7 @@ func (c *Client) DescribeCcnAttachedInstances(request *DescribeCcnAttachedInstan
 // This API is used to query the information of instances associated with CCN.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
@@ -1605,6 +1702,7 @@ func NewDescribeDiskConfigsResponse() (response *DescribeDiskConfigsResponse) {
 // This API is used to query the cloud disk configuration.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
 //  INVALIDPARAMETERVALUE_INVALIDZONE = "InvalidParameterValue.InvalidZone"
@@ -1618,6 +1716,7 @@ func (c *Client) DescribeDiskConfigs(request *DescribeDiskConfigsRequest) (respo
 // This API is used to query the cloud disk configuration.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
 //  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
 //  INVALIDPARAMETERVALUE_INVALIDZONE = "InvalidParameterValue.InvalidZone"
@@ -1935,6 +2034,7 @@ func NewDescribeFirewallRulesResponse() (response *DescribeFirewallRulesResponse
 //  RESOURCENOTFOUND_FIREWALLNOTFOUND = "ResourceNotFound.FirewallNotFound"
 //  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_TOKENINVALID = "UnauthorizedOperation.TokenInvalid"
 func (c *Client) DescribeFirewallRules(request *DescribeFirewallRulesRequest) (response *DescribeFirewallRulesResponse, err error) {
     return c.DescribeFirewallRulesWithContext(context.Background(), request)
 }
@@ -1950,6 +2050,7 @@ func (c *Client) DescribeFirewallRules(request *DescribeFirewallRulesRequest) (r
 //  RESOURCENOTFOUND_FIREWALLNOTFOUND = "ResourceNotFound.FirewallNotFound"
 //  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_TOKENINVALID = "UnauthorizedOperation.TokenInvalid"
 func (c *Client) DescribeFirewallRulesWithContext(ctx context.Context, request *DescribeFirewallRulesRequest) (response *DescribeFirewallRulesResponse, err error) {
     if request == nil {
         request = NewDescribeFirewallRulesRequest()
@@ -1989,6 +2090,7 @@ func NewDescribeFirewallRulesTemplateResponse() (response *DescribeFirewallRules
 // This API is used to query a firewall rule template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 func (c *Client) DescribeFirewallRulesTemplate(request *DescribeFirewallRulesTemplateRequest) (response *DescribeFirewallRulesTemplateResponse, err error) {
     return c.DescribeFirewallRulesTemplateWithContext(context.Background(), request)
@@ -1998,6 +2100,7 @@ func (c *Client) DescribeFirewallRulesTemplate(request *DescribeFirewallRulesTem
 // This API is used to query a firewall rule template.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 func (c *Client) DescribeFirewallRulesTemplateWithContext(ctx context.Context, request *DescribeFirewallRulesTemplateRequest) (response *DescribeFirewallRulesTemplateResponse, err error) {
     if request == nil {
@@ -2093,6 +2196,7 @@ func NewDescribeInstanceLoginKeyPairAttributeResponse() (response *DescribeInsta
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  UNSUPPORTEDOPERATION_OPERATIONOFFLINE = "UnsupportedOperation.OperationOffline"
 func (c *Client) DescribeInstanceLoginKeyPairAttribute(request *DescribeInstanceLoginKeyPairAttributeRequest) (response *DescribeInstanceLoginKeyPairAttributeResponse, err error) {
     return c.DescribeInstanceLoginKeyPairAttributeWithContext(context.Background(), request)
 }
@@ -2103,6 +2207,7 @@ func (c *Client) DescribeInstanceLoginKeyPairAttribute(request *DescribeInstance
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  UNSUPPORTEDOPERATION_OPERATIONOFFLINE = "UnsupportedOperation.OperationOffline"
 func (c *Client) DescribeInstanceLoginKeyPairAttributeWithContext(ctx context.Context, request *DescribeInstanceLoginKeyPairAttributeRequest) (response *DescribeInstanceLoginKeyPairAttributeResponse, err error) {
     if request == nil {
         request = NewDescribeInstanceLoginKeyPairAttributeRequest()
@@ -2166,6 +2271,7 @@ func NewDescribeInstanceVncUrlResponse() (response *DescribeInstanceVncUrlRespon
 // ```
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
@@ -2209,6 +2315,7 @@ func (c *Client) DescribeInstanceVncUrl(request *DescribeInstanceVncUrlRequest) 
 // ```
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
@@ -2291,6 +2398,7 @@ func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
 //  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
 //  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_TOKENINVALID = "UnauthorizedOperation.TokenInvalid"
 func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response *DescribeInstancesResponse, err error) {
     return c.DescribeInstancesWithContext(context.Background(), request)
 }
@@ -2331,6 +2439,7 @@ func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response 
 //  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
 //  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_TOKENINVALID = "UnauthorizedOperation.TokenInvalid"
 func (c *Client) DescribeInstancesWithContext(ctx context.Context, request *DescribeInstancesRequest) (response *DescribeInstancesResponse, err error) {
     if request == nil {
         request = NewDescribeInstancesRequest()
@@ -2695,6 +2804,8 @@ func NewDescribeModifyInstanceBundlesResponse() (response *DescribeModifyInstanc
 // This API is used to query the list of package options of an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_DESCRIBEINSTANCESMODIFICATIONERROR = "FailedOperation.DescribeInstancesModificationError"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
@@ -2731,6 +2842,8 @@ func (c *Client) DescribeModifyInstanceBundles(request *DescribeModifyInstanceBu
 // This API is used to query the list of package options of an instance.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_DESCRIBEINSTANCESMODIFICATIONERROR = "FailedOperation.DescribeInstancesModificationError"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
@@ -3074,6 +3187,7 @@ func NewDescribeSnapshotsDeniedActionsResponse() (response *DescribeSnapshotsDen
 // This API is used to query the list of operation limits of one or more snapshots.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
@@ -3088,6 +3202,7 @@ func (c *Client) DescribeSnapshotsDeniedActions(request *DescribeSnapshotsDenied
 // This API is used to query the list of operation limits of one or more snapshots.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
@@ -3185,7 +3300,7 @@ func NewDetachCcnResponse() (response *DetachCcnResponse) {
 }
 
 // DetachCcn
-// This API is used to unassociate a CCN instance.
+// This API is used to disassociate with a CCN instance.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -3198,7 +3313,7 @@ func (c *Client) DetachCcn(request *DetachCcnRequest) (response *DetachCcnRespon
 }
 
 // DetachCcn
-// This API is used to unassociate a CCN instance.
+// This API is used to disassociate with a CCN instance.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -3480,6 +3595,7 @@ func NewInquirePriceCreateBlueprintResponse() (response *InquirePriceCreateBluep
 // This API is used to query the price of a created image.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR = "InternalError"
@@ -3494,6 +3610,7 @@ func (c *Client) InquirePriceCreateBlueprint(request *InquirePriceCreateBlueprin
 // This API is used to query the price of a created image.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR = "InternalError"
@@ -3539,6 +3656,7 @@ func NewInquirePriceCreateDisksResponse() (response *InquirePriceCreateDisksResp
 // This API is used to query the price of purchasing cloud disks.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
@@ -3553,6 +3671,7 @@ func (c *Client) InquirePriceCreateDisks(request *InquirePriceCreateDisksRequest
 // This API is used to query the price of purchasing cloud disks.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  FAILEDOPERATION_TRADEGETPRICEFAILED = "FailedOperation.TradeGetPriceFailed"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
@@ -3774,6 +3893,91 @@ func (c *Client) InquirePriceRenewInstancesWithContext(ctx context.Context, requ
     return
 }
 
+func NewIsolateDisksRequest() (request *IsolateDisksRequest) {
+    request = &IsolateDisksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lighthouse", APIVersion, "IsolateDisks")
+    
+    
+    return
+}
+
+func NewIsolateDisksResponse() (response *IsolateDisksResponse) {
+    response = &IsolateDisksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// IsolateDisks
+// This API is used to return one or more Lighthouse cloud disks.
+//
+// 
+//
+// You can only perform this operation on `UNATTACHED` disks.
+//
+// After the successful call of the API, the cloud disk goes to the SHUTDOWN state.
+//
+// Up to 20 instances are supported at one time. 
+//
+// This API is async. After the request is sent, a `RequestId` is returned. At this time, the operation is not completed yet. To check the result, you need to call  [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1). If the latest operation status (LatestOperationState) of the disk is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DESCRIBERESOURCESRETURNABLEERROR = "FailedOperation.DescribeResourcesReturnableError"
+//  FAILEDOPERATION_ISOLATERESOURCESFAILED = "FailedOperation.IsolateResourcesFailed"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  LIMITEXCEEDED_ISOLATERESOURCESLIMITEXCEEDED = "LimitExceeded.IsolateResourcesLimitExceeded"
+//  OPERATIONDENIED_DISKCREATING = "OperationDenied.DiskCreating"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_INVALIDDISKSTATE = "UnsupportedOperation.InvalidDiskState"
+//  UNSUPPORTEDOPERATION_RESOURCENOTRETURNABLE = "UnsupportedOperation.ResourceNotReturnable"
+func (c *Client) IsolateDisks(request *IsolateDisksRequest) (response *IsolateDisksResponse, err error) {
+    return c.IsolateDisksWithContext(context.Background(), request)
+}
+
+// IsolateDisks
+// This API is used to return one or more Lighthouse cloud disks.
+//
+// 
+//
+// You can only perform this operation on `UNATTACHED` disks.
+//
+// After the successful call of the API, the cloud disk goes to the SHUTDOWN state.
+//
+// Up to 20 instances are supported at one time. 
+//
+// This API is async. After the request is sent, a `RequestId` is returned. At this time, the operation is not completed yet. To check the result, you need to call  [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1). If the latest operation status (LatestOperationState) of the disk is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DESCRIBERESOURCESRETURNABLEERROR = "FailedOperation.DescribeResourcesReturnableError"
+//  FAILEDOPERATION_ISOLATERESOURCESFAILED = "FailedOperation.IsolateResourcesFailed"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  LIMITEXCEEDED_ISOLATERESOURCESLIMITEXCEEDED = "LimitExceeded.IsolateResourcesLimitExceeded"
+//  OPERATIONDENIED_DISKCREATING = "OperationDenied.DiskCreating"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_INVALIDDISKSTATE = "UnsupportedOperation.InvalidDiskState"
+//  UNSUPPORTEDOPERATION_RESOURCENOTRETURNABLE = "UnsupportedOperation.ResourceNotReturnable"
+func (c *Client) IsolateDisksWithContext(ctx context.Context, request *IsolateDisksRequest) (response *IsolateDisksResponse, err error) {
+    if request == nil {
+        request = NewIsolateDisksRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("IsolateDisks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewIsolateDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewIsolateInstancesRequest() (request *IsolateInstancesRequest) {
     request = &IsolateInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3806,6 +4010,7 @@ func NewIsolateInstancesResponse() (response *IsolateInstancesResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBERESOURCESRETURNABLEERROR = "FailedOperation.DescribeResourcesReturnableError"
 //  FAILEDOPERATION_ISOLATERESOURCESFAILED = "FailedOperation.IsolateResourcesFailed"
 //  INTERNALERROR_DESCRIBERESOURCESRETURNABLEERROR = "InternalError.DescribeResourcesReturnableError"
@@ -3837,6 +4042,7 @@ func (c *Client) IsolateInstances(request *IsolateInstancesRequest) (response *I
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBERESOURCESRETURNABLEERROR = "FailedOperation.DescribeResourcesReturnableError"
 //  FAILEDOPERATION_ISOLATERESOURCESFAILED = "FailedOperation.IsolateResourcesFailed"
 //  INTERNALERROR_DESCRIBERESOURCESRETURNABLEERROR = "InternalError.DescribeResourcesReturnableError"
@@ -3959,6 +4165,7 @@ func NewModifyDisksAttributeResponse() (response *ModifyDisksAttributeResponse) 
 // This API is used to modify cloud disk attributes.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_MODIFYRESOURCESATTRIBUTEFAILED = "FailedOperation.ModifyResourcesAttributeFailed"
 //  INTERNALERROR_TRADECALLBILLINGGATEWAYFAILED = "InternalError.TradeCallBillingGatewayFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
@@ -3975,6 +4182,7 @@ func (c *Client) ModifyDisksAttribute(request *ModifyDisksAttributeRequest) (res
 // This API is used to modify cloud disk attributes.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_MODIFYRESOURCESATTRIBUTEFAILED = "FailedOperation.ModifyResourcesAttributeFailed"
 //  INTERNALERROR_TRADECALLBILLINGGATEWAYFAILED = "InternalError.TradeCallBillingGatewayFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
@@ -4204,6 +4412,7 @@ func NewModifyFirewallRulesResponse() (response *ModifyFirewallRulesResponse) {
 // * The length of the `FirewallRuleDescription` field cannot exceed 64 characters.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_FIREWALLRULESOPERATIONFAILED = "FailedOperation.FirewallRulesOperationFailed"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
@@ -4247,6 +4456,7 @@ func (c *Client) ModifyFirewallRules(request *ModifyFirewallRulesRequest) (respo
 // * The length of the `FirewallRuleDescription` field cannot exceed 64 characters.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_FIREWALLRULESOPERATIONFAILED = "FailedOperation.FirewallRulesOperationFailed"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
 //  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
@@ -4401,8 +4611,10 @@ func NewModifyInstancesBundleResponse() (response *ModifyInstancesBundleResponse
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
 //  FAILEDOPERATION_MODIFYINSTANCESBUNDLEFAILED = "FailedOperation.ModifyInstancesBundleFailed"
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_BUNDLEIDNOTFOUND = "InvalidParameter.BundleIdNotFound"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -4430,8 +4642,10 @@ func (c *Client) ModifyInstancesBundle(request *ModifyInstancesBundleRequest) (r
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
 //  FAILEDOPERATION_MODIFYINSTANCESBUNDLEFAILED = "FailedOperation.ModifyInstancesBundleFailed"
 //  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_BUNDLEIDNOTFOUND = "InvalidParameter.BundleIdNotFound"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
@@ -4493,6 +4707,7 @@ func NewModifyInstancesLoginKeyPairAttributeResponse() (response *ModifyInstance
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 //  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
 //  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_OPERATIONOFFLINE = "UnsupportedOperation.OperationOffline"
 func (c *Client) ModifyInstancesLoginKeyPairAttribute(request *ModifyInstancesLoginKeyPairAttributeRequest) (response *ModifyInstancesLoginKeyPairAttributeResponse, err error) {
     return c.ModifyInstancesLoginKeyPairAttributeWithContext(context.Background(), request)
 }
@@ -4513,6 +4728,7 @@ func (c *Client) ModifyInstancesLoginKeyPairAttribute(request *ModifyInstancesLo
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 //  UNSUPPORTEDOPERATION_INVALIDINSTANCESTATE = "UnsupportedOperation.InvalidInstanceState"
 //  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_OPERATIONOFFLINE = "UnsupportedOperation.OperationOffline"
 func (c *Client) ModifyInstancesLoginKeyPairAttributeWithContext(ctx context.Context, request *ModifyInstancesLoginKeyPairAttributeRequest) (response *ModifyInstancesLoginKeyPairAttributeResponse, err error) {
     if request == nil {
         request = NewModifyInstancesLoginKeyPairAttributeRequest()
@@ -4558,7 +4774,9 @@ func NewModifyInstancesRenewFlagResponse() (response *ModifyInstancesRenewFlagRe
 // * Batch operations are supported. Up to 100 instances per request is allowed.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  FAILEDOPERATION_TRADECALLBILLINGGATEWAYFAILED = "FailedOperation.TradeCallBillingGatewayFailed"
 //  INTERNALERROR_TRADECALLBILLINGGATEWAYFAILED = "InternalError.TradeCallBillingGatewayFailed"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
@@ -4583,7 +4801,9 @@ func (c *Client) ModifyInstancesRenewFlag(request *ModifyInstancesRenewFlagReque
 // * Batch operations are supported. Up to 100 instances per request is allowed.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_REQUESTERROR = "FailedOperation.RequestError"
+//  FAILEDOPERATION_TRADECALLBILLINGGATEWAYFAILED = "FailedOperation.TradeCallBillingGatewayFailed"
 //  INTERNALERROR_TRADECALLBILLINGGATEWAYFAILED = "InternalError.TradeCallBillingGatewayFailed"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
@@ -4700,6 +4920,7 @@ func NewRebootInstancesResponse() (response *RebootInstancesResponse) {
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
@@ -4733,6 +4954,7 @@ func (c *Client) RebootInstances(request *RebootInstancesRequest) (response *Reb
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
@@ -4760,6 +4982,190 @@ func (c *Client) RebootInstancesWithContext(ctx context.Context, request *Reboot
     request.SetContext(ctx)
     
     response = NewRebootInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRenewDisksRequest() (request *RenewDisksRequest) {
+    request = &RenewDisksRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lighthouse", APIVersion, "RenewDisks")
+    
+    
+    return
+}
+
+func NewRenewDisksResponse() (response *RenewDisksResponse) {
+    response = &RenewDisksResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RenewDisks
+// This API is used to renew one or more Lighthouse cloud disks.
+//
+// 
+//
+// This operation can only be performed on data disks with the status of `ATTACHED`, `UNATTACHED` or `SHUTDOWN`.
+//
+// Up to 50 cloud disks are supported at one time.
+//
+// This API is async. After the request is sent, a `RequestId` is returned. At this time, the operation is not completed yet. To check the result, you need to call  [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1). If the latest operation status (LatestOperationState) of the disk is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_RENEWRESOURCESFAILED = "FailedOperation.RenewResourcesFailed"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INVALIDCURINSTANCEDEADLINE = "InvalidParameterValue.InvalidCurInstanceDeadline"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  MISSINGPARAMETER_MISSINGPARAMETERPERIODCURINSTANCEDEADLINE = "MissingParameter.MissingParameterPeriodCurInstanceDeadline"
+//  OPERATIONDENIED_DISKCREATING = "OperationDenied.DiskCreating"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_INVALIDDISKSTATE = "UnsupportedOperation.InvalidDiskState"
+func (c *Client) RenewDisks(request *RenewDisksRequest) (response *RenewDisksResponse, err error) {
+    return c.RenewDisksWithContext(context.Background(), request)
+}
+
+// RenewDisks
+// This API is used to renew one or more Lighthouse cloud disks.
+//
+// 
+//
+// This operation can only be performed on data disks with the status of `ATTACHED`, `UNATTACHED` or `SHUTDOWN`.
+//
+// Up to 50 cloud disks are supported at one time.
+//
+// This API is async. After the request is sent, a `RequestId` is returned. At this time, the operation is not completed yet. To check the result, you need to call  [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1). If the latest operation status (LatestOperationState) of the disk is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_RENEWRESOURCESFAILED = "FailedOperation.RenewResourcesFailed"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INVALIDCURINSTANCEDEADLINE = "InvalidParameterValue.InvalidCurInstanceDeadline"
+//  INVALIDPARAMETERVALUE_INVALIDDISKIDMALFORMED = "InvalidParameterValue.InvalidDiskIdMalformed"
+//  MISSINGPARAMETER_MISSINGPARAMETERPERIODCURINSTANCEDEADLINE = "MissingParameter.MissingParameterPeriodCurInstanceDeadline"
+//  OPERATIONDENIED_DISKCREATING = "OperationDenied.DiskCreating"
+//  RESOURCENOTFOUND_DISKIDNOTFOUND = "ResourceNotFound.DiskIdNotFound"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_INVALIDDISKSTATE = "UnsupportedOperation.InvalidDiskState"
+func (c *Client) RenewDisksWithContext(ctx context.Context, request *RenewDisksRequest) (response *RenewDisksResponse, err error) {
+    if request == nil {
+        request = NewRenewDisksRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenewDisks require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenewDisksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRenewInstancesRequest() (request *RenewInstancesRequest) {
+    request = &RenewInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lighthouse", APIVersion, "RenewInstances")
+    
+    
+    return
+}
+
+func NewRenewInstancesResponse() (response *RenewInstancesResponse) {
+    response = &RenewInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RenewInstances
+// This API is used to renew one or more Lighthouse instances.
+//
+// * You can only perform this operation on instances whose status is `RUNNING`, `STOPPED` and `SHUTDOWN`.
+//
+// * Batch operations are supported. Up to 100 instances are supported in each request.
+//
+// * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_RENEWRESOURCESFAILED = "FailedOperation.RenewResourcesFailed"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDNAMENOTSTR = "InvalidParameter.InvalidFilterInvalidNameNotStr"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDVALUESNOTLIST = "InvalidParameter.InvalidFilterInvalidValuesNotList"
+//  INVALIDPARAMETER_INVALIDFILTERNOTDICT = "InvalidParameter.InvalidFilterNotDict"
+//  INVALIDPARAMETER_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameter.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  OPERATIONDENIED_DISKOPERATIONINPROGRESS = "OperationDenied.DiskOperationInProgress"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_INVALIDDISKSTATE = "UnsupportedOperation.InvalidDiskState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) RenewInstances(request *RenewInstancesRequest) (response *RenewInstancesResponse, err error) {
+    return c.RenewInstancesWithContext(context.Background(), request)
+}
+
+// RenewInstances
+// This API is used to renew one or more Lighthouse instances.
+//
+// * You can only perform this operation on instances whose status is `RUNNING`, `STOPPED` and `SHUTDOWN`.
+//
+// * Batch operations are supported. Up to 100 instances are supported in each request.
+//
+// * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
+//  FAILEDOPERATION_RENEWRESOURCESFAILED = "FailedOperation.RenewResourcesFailed"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDKEY = "InvalidParameter.InvalidFilterInvalidKey"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDNAMENOTSTR = "InvalidParameter.InvalidFilterInvalidNameNotStr"
+//  INVALIDPARAMETER_INVALIDFILTERINVALIDVALUESNOTLIST = "InvalidParameter.InvalidFilterInvalidValuesNotList"
+//  INVALIDPARAMETER_INVALIDFILTERNOTDICT = "InvalidParameter.InvalidFilterNotDict"
+//  INVALIDPARAMETER_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameter.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  OPERATIONDENIED_DISKOPERATIONINPROGRESS = "OperationDenied.DiskOperationInProgress"
+//  OPERATIONDENIED_INSTANCECREATING = "OperationDenied.InstanceCreating"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNSUPPORTEDOPERATION_DISKLATESTOPERATIONUNFINISHED = "UnsupportedOperation.DiskLatestOperationUnfinished"
+//  UNSUPPORTEDOPERATION_INVALIDDISKSTATE = "UnsupportedOperation.InvalidDiskState"
+//  UNSUPPORTEDOPERATION_LATESTOPERATIONUNFINISHED = "UnsupportedOperation.LatestOperationUnfinished"
+func (c *Client) RenewInstancesWithContext(ctx context.Context, request *RenewInstancesRequest) (response *RenewInstancesResponse, err error) {
+    if request == nil {
+        request = NewRenewInstancesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenewInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenewInstancesResponse()
     err = c.Send(request, response)
     return
 }
@@ -4858,6 +5264,7 @@ func NewResetInstanceResponse() (response *ResetInstanceResponse) {
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
@@ -4867,6 +5274,8 @@ func NewResetInstanceResponse() (response *ResetInstanceResponse) {
 //  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERCOMBINATION = "InvalidParameterValue.InvalidParameterCombination"
+//  INVALIDPARAMETERVALUE_INVALIDPASSWORD = "InvalidParameterValue.InvalidPassword"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_NOTALLOWTOCHANGEPLATFORMTYPE = "InvalidParameterValue.NotAllowToChangePlatformType"
 //  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
@@ -4876,6 +5285,7 @@ func NewResetInstanceResponse() (response *ResetInstanceResponse) {
 //  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
 //  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCENOTFOUND_KEYPAIRNOTFOUND = "ResourceNotFound.KeyPairNotFound"
 //  RESOURCEUNAVAILABLE_BLUEPRINTUNAVAILABLE = "ResourceUnavailable.BlueprintUnavailable"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
@@ -4900,6 +5310,7 @@ func (c *Client) ResetInstance(request *ResetInstanceRequest) (response *ResetIn
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
@@ -4909,6 +5320,8 @@ func (c *Client) ResetInstance(request *ResetInstanceRequest) (response *ResetIn
 //  INVALIDPARAMETERVALUE_BLUEPRINTIDMALFORMED = "InvalidParameterValue.BlueprintIdMalformed"
 //  INVALIDPARAMETERVALUE_DUPLICATED = "InvalidParameterValue.Duplicated"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERCOMBINATION = "InvalidParameterValue.InvalidParameterCombination"
+//  INVALIDPARAMETERVALUE_INVALIDPASSWORD = "InvalidParameterValue.InvalidPassword"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_NOTALLOWTOCHANGEPLATFORMTYPE = "InvalidParameterValue.NotAllowToChangePlatformType"
 //  INVALIDPARAMETERVALUE_OUTOFRANGE = "InvalidParameterValue.OutOfRange"
@@ -4918,6 +5331,7 @@ func (c *Client) ResetInstance(request *ResetInstanceRequest) (response *ResetIn
 //  RESOURCENOTFOUND_BLUEPRINTIDNOTFOUND = "ResourceNotFound.BlueprintIdNotFound"
 //  RESOURCENOTFOUND_INSTANCEIDNOTFOUND = "ResourceNotFound.InstanceIdNotFound"
 //  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  RESOURCENOTFOUND_KEYPAIRNOTFOUND = "ResourceNotFound.KeyPairNotFound"
 //  RESOURCEUNAVAILABLE_BLUEPRINTUNAVAILABLE = "ResourceUnavailable.BlueprintUnavailable"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
@@ -4973,6 +5387,7 @@ func NewResetInstancesPasswordResponse() (response *ResetInstancesPasswordRespon
 // Note: Just like powering off a physical PC, a forced shutdown may cause data loss or the corruption of file system.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
@@ -5010,6 +5425,7 @@ func (c *Client) ResetInstancesPassword(request *ResetInstancesPasswordRequest) 
 // Note: Just like powering off a physical PC, a forced shutdown may cause data loss or the corruption of file system.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
@@ -5171,6 +5587,7 @@ func NewStopInstancesResponse() (response *StopInstancesResponse) {
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"
@@ -5201,6 +5618,7 @@ func (c *Client) StopInstances(request *StopInstancesRequest) (response *StopIns
 // * This API is async. After the request is sent successfully, a `RequestId` will be returned. At this time, the operation is not completed immediately. The result of the instance operation can be queried by calling the `DescribeInstances` API. If the latest operation status (LatestOperationState) of the instance is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_DESCRIBEINSTANCESTATUS = "FailedOperation.DescribeInstanceStatus"
 //  FAILEDOPERATION_INSTANCEOPERATIONFAILED = "FailedOperation.InstanceOperationFailed"
 //  INTERNALERROR_DESCRIBEINSTANCESTATUS = "InternalError.DescribeInstanceStatus"

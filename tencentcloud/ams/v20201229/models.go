@@ -46,7 +46,7 @@ type AudioResult struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Url *string `json:"Url,omitnil" name:"Url"`
 
-	// This field is used to return the length of an audio file in seconds.
+	// This field is used to return the length of an audio file in milliseconds.
 	Duration *string `json:"Duration,omitnil" name:"Duration"`
 
 	// This field is used to return additional information, and the returned information varies by customer or `Biztype`.
@@ -79,11 +79,11 @@ type AudioResultDetailLanguageResult struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Score *int64 `json:"Score,omitnil" name:"Score"`
 
-	// This parameter is used to return the start time of the segment of an audio file under the corresponding language tag in milliseconds.
+	// This parameter is used to return the start time of the segment of an audio file under the corresponding language tag in seconds. 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	StartTime *float64 `json:"StartTime,omitnil" name:"StartTime"`
 
-	// This parameter is used to return the end time of the segment of an audio file under the corresponding language tag in milliseconds.
+	// This parameter is used to return the end time of the segment of an audio file under the corresponding language tag in seconds. 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	EndTime *float64 `json:"EndTime,omitnil" name:"EndTime"`
 
@@ -100,10 +100,10 @@ type AudioResultDetailMoanResult struct {
 	// This field is used to return the confidence of moan detection. Value range: 0 (**the lowest confidence**)–100 (**the highest confidence**), where a higher value indicates that the audio is more likely to fall into the category of moan.
 	Score *int64 `json:"Score,omitnil" name:"Score"`
 
-	// This field is used to return the start time of the segment of an audio file under the corresponding moan tag in milliseconds.
+	// This field is used to return the start time of the segment of an audio file under the corresponding moan tag in seconds.
 	StartTime *float64 `json:"StartTime,omitnil" name:"StartTime"`
 
-	// This field is used to return the end time of the segment of an audio file under the corresponding moan tag in milliseconds.
+	// This field is used to return the end time of the segment of an audio file under the corresponding moan tag in seconds.
 	EndTime *float64 `json:"EndTime,omitnil" name:"EndTime"`
 
 	// *This field is in beta test. Stay tuned*
@@ -162,13 +162,16 @@ type AudioSegments struct {
 }
 
 type BucketInfo struct {
-	// This field indicates a bucket name in Tencent Cloud COS. For more information on buckets, see [Basic Concepts](https://intl.cloud.tencent.com/document/product/436/44352?from_cn_redirect=1).
+	// This field indicates a bucket name in Tencent Cloud COS. For more information on buckets, see Basic Concepts (https://intl.cloud.tencent.com/document/product/436/44352?from_cn_redirect=1). 
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Bucket *string `json:"Bucket,omitnil" name:"Bucket"`
 
-	// This field indicates a region where a Tencent Cloud managed data center is deployed. COS data is stored in buckets in these regions.
+	// This field indicates a region where a Tencent Cloud COS managed data center is deployed. COS data is stored in buckets in these regions. 
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Region *string `json:"Region,omitnil" name:"Region"`
 
-	// This field indicates an object key in Tencent Cloud COS. An object is stored in a bucket as a basic storage unit. You can manage objects through the Tencent Cloud console, API, or SDK. For more information on objects, see [Object Overview](https://intl.cloud.tencent.com/document/product/436/13324?from_cn_redirect=1).
+	// This field indicates an object key in Tencent Cloud COS. Object z is stored in a bucket as a basic storage unit. You can manage objects through the Tencent Cloud console, API, or SDK. For more information on objects, see Object Overview (https://intl.cloud.tencent.com/document/product/436/13324?from_cn_redirect=1). 
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Object *string `json:"Object,omitnil" name:"Object"`
 }
 
@@ -355,69 +358,68 @@ func (r *DescribeTaskDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTaskDetailResponseParams struct {
-	// This field is used to return the task ID (in the `Results` parameter) after an audio moderation task is created. It is used to identify the moderation task for which to query the details.
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
 
-	// This field is used to return the data ID parameter passed in within the `Tasks` parameter when the audio moderation API is called for easier data identification and management.
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	DataId *string `json:"DataId,omitnil" name:"DataId"`
 
-	// This field is used to return the `BizType` parameter passed in when the audio moderation API is called for easier data identification and management.
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	BizType *string `json:"BizType,omitnil" name:"BizType"`
 
-	// This field is used to return the task name in the `TaskInput` parameter passed in when the audio moderation API is called for easier task identification and management.
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// This field is used to return the task status of the queried content.
-	// <br>Valid values: **FINISH** (task completed), **PENDING** (task pending), **RUNNING** (task in progress), **ERROR** (task error), **CANCELLED** (task canceled).
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Status *string `json:"Status,omitnil" name:"Status"`
 
-	// This field is used to return the audio moderation type passed in when the audio moderation API is called. Valid values: **AUDIO** (audio on demand), **LIVE_AUDIO** (audio live streaming). Default value: AUDIO.
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil" name:"Type"`
 
-	// This field is used to return the operation suggestion for the maliciousness tag. When you get the determination result, the returned value indicates the operation suggested by the system. We recommend you handle different types of violations and suggestions according to your business needs. <br>Returned values: **Block**, **Review**, **Pass**.
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Suggestion *string `json:"Suggestion,omitnil" name:"Suggestion"`
 
-	// Label of the malicious content detected. <br>Values: **Porn**: pornographic; **Abuse**: abusive; **Ad**: advertising; **Custom**: custom type of non-compliant content and other offensive, unsafe, or inappropriate types of content.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// 
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Labels []*TaskLabel `json:"Labels,omitnil" name:"Labels"`
 
-	// This field is used to return the media content information of the moderation service, mainly including the input file type and access URL.
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	InputInfo *InputInfo `json:"InputInfo,omitnil" name:"InputInfo"`
 
-	// This field is used to return the recognized text content of an audio file. **Up to the first 1,000 characters** can be recognized.
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AudioText *string `json:"AudioText,omitnil" name:"AudioText"`
 
-	// This field is used to return the moderation result of an audio segment, mainly including the start time and audio moderation result.<br>For the specific output content, see the detailed description of the `AudioSegments` and `AudioResult` data structures.
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AudioSegments []*AudioSegments `json:"AudioSegments,omitnil" name:"AudioSegments"`
 
-	// If the task status is `Error`, this field will return the error type; otherwise, null will be returned by default.
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ErrorType *string `json:"ErrorType,omitnil" name:"ErrorType"`
 
-	// If the task status is `Error`, this field will return the error message; otherwise, null will be returned by default.
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	ErrorDescription *string `json:"ErrorDescription,omitnil" name:"ErrorDescription"`
 
-	// This field is used to return the creation time of the queried task in ISO 8601 format.
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	CreatedAt *string `json:"CreatedAt,omitnil" name:"CreatedAt"`
 
-	// This field is used to return the last update time of the queried task in ISO 8601 format.
+	// 
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	UpdatedAt *string `json:"UpdatedAt,omitnil" name:"UpdatedAt"`
 
-	// If the recognition result is normal, this parameter is returned with the value `Normal`. If malicious content is recognized, the tag with the highest priority in the result of `Labels` is returned.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// 
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	Label *string `json:"Label,omitnil" name:"Label"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -552,7 +554,7 @@ type MediaInfo struct {
 	// This field is used to return the codec of the media file passed in, such as WAV, MP3, AAC, FLAC, AMR, 3GP, M4A, WMA, OGG, and APE.
 	Codecs *string `json:"Codecs,omitnil" name:"Codecs"`
 
-	// This field is used to return the segment length of the input streaming media file in seconds. It is **15 seconds by default** and is customizable.
+	// This field is used to return the segment length of the input streaming media file in milliseconds.** It is 15 seconds** by default and is customizable.
 	Duration *int64 `json:"Duration,omitnil" name:"Duration"`
 
 	// *This field is in beta test. Stay tuned*

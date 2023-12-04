@@ -185,6 +185,39 @@ type AbnormalProcessEventInfo struct {
 	// `RESTARTING`: Restarting.
 	// `REMOVING`: Removing.
 	ContainerStatus *string `json:"ContainerStatus,omitnil" name:"ContainerStatus"`
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitnil" name:"ClusterID"`
+
+	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// Pod name
+	PodName *string `json:"PodName,omitnil" name:"PodName"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Cluster ID
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
+
+	// Node public IP
+	PublicIP *string `json:"PublicIP,omitnil" name:"PublicIP"`
+
+	// Node name
+	NodeName *string `json:"NodeName,omitnil" name:"NodeName"`
+
+	// Node ID
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// uuid
+	HostID *string `json:"HostID,omitnil" name:"HostID"`
+
+	// Private IP of the node
+	HostIP *string `json:"HostIP,omitnil" name:"HostIP"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 }
 
 type AbnormalProcessEventTendencyInfo struct {
@@ -419,6 +452,39 @@ type AccessControlEventInfo struct {
 	// `RESTARTING`: Restarting.
 	// `REMOVING`: Removing.
 	ContainerStatus *string `json:"ContainerStatus,omitnil" name:"ContainerStatus"`
+
+	// Node name: For super nodes, the node_id is displayed.
+	NodeName *string `json:"NodeName,omitnil" name:"NodeName"`
+
+	// Pod name
+	PodName *string `json:"PodName,omitnil" name:"PodName"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitnil" name:"ClusterID"`
+
+	// Node unique ID. It's used for super nodes.
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
+
+	// Node public IP
+	PublicIP *string `json:"PublicIP,omitnil" name:"PublicIP"`
+
+	// Node ID
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// uuid
+	HostID *string `json:"HostID,omitnil" name:"HostID"`
+
+	// Private IP of the node
+	HostIP *string `json:"HostIP,omitnil" name:"HostIP"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 }
 
 type AccessControlRuleInfo struct {
@@ -1740,6 +1806,9 @@ type AffectedNodeItem struct {
 
 	// Verification information of the check result
 	VerifyInfo *string `json:"VerifyInfo,omitnil" name:"VerifyInfo"`
+
+	// Node name
+	NodeName *string `json:"NodeName,omitnil" name:"NodeName"`
 }
 
 type AffectedWorkloadItem struct {
@@ -1781,7 +1850,17 @@ type AssetClusterListItem struct {
 	// Cluster type:
 	// `CT_TKE`: TKE cluster
 	// `CT_USER_CREATE`: External cluster
+	// `CT_TKE_SERVERLESS`: TKE Serverless cluster
 	ClusterType *string `json:"ClusterType,omitnil" name:"ClusterType"`
+
+	// Cluster version
+	ClusterVersion *string `json:"ClusterVersion,omitnil" name:"ClusterVersion"`
+
+	// MEM usage
+	MemLimit *int64 `json:"MemLimit,omitnil" name:"MemLimit"`
+
+	// cpu
+	CpuLimit *int64 `json:"CpuLimit,omitnil" name:"CpuLimit"`
 }
 
 type AssetFilters struct {
@@ -2178,6 +2257,14 @@ type ClusterCreateComponentItem struct {
 
 	// Cluster region
 	ClusterRegion *string `json:"ClusterRegion,omitnil" name:"ClusterRegion"`
+}
+
+type ClusterCustomParameters struct {
+	// Parameter name
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// Parameter value
+	Values []*string `json:"Values,omitnil" name:"Values"`
 }
 
 type ClusterInfoItem struct {
@@ -2810,11 +2897,29 @@ type ComponentInfo struct {
 type ComponentsInfo struct {
 	// Component name
 	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: Component is deprecated.
 	Component *string `json:"Component,omitnil" name:"Component"`
 
 	// Component version information
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Version *string `json:"Version,omitnil" name:"Version"`
+
+	// Fixed version
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	FixedVersion *string `json:"FixedVersion,omitnil" name:"FixedVersion"`
+
+	// Path
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	Path *string `json:"Path,omitnil" name:"Path"`
+
+	// Type
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// Add-on name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil" name:"Name"`
 }
 
 // Predefined struct for user
@@ -2952,6 +3057,36 @@ type ContainerInfo struct {
 	// Isolation time
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsolateTime *string `json:"IsolateTime,omitnil" name:"IsolateTime"`
+
+	// Super node ID
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Pod name
+	PodName *string `json:"PodName,omitnil" name:"PodName"`
+
+	// Node type. Valid values: `NORMAL` (general node), `SUPER` (super node)
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// UID of the super node
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
+
+	// Number of CPU cores used by the pod
+	PodCpu *int64 `json:"PodCpu,omitnil" name:"PodCpu"`
+
+	// Memory specification of the Pod
+	PodMem *int64 `json:"PodMem,omitnil" name:"PodMem"`
+
+
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
+
+
+	ClusterID *string `json:"ClusterID,omitnil" name:"ClusterID"`
+
+
+	PodUid *string `json:"PodUid,omitnil" name:"PodUid"`
 }
 
 type ContainerMount struct {
@@ -3225,6 +3360,9 @@ func (r *CreateAssetImageRegistryScanTaskOneKeyRequest) FromJsonString(s string)
 
 // Predefined struct for user
 type CreateAssetImageRegistryScanTaskOneKeyResponseParams struct {
+
+	TaskID *uint64 `json:"TaskID,omitnil" name:"TaskID"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
@@ -3321,6 +3459,9 @@ func (r *CreateAssetImageRegistryScanTaskRequest) FromJsonString(s string) error
 
 // Predefined struct for user
 type CreateAssetImageRegistryScanTaskResponseParams struct {
+
+	TaskID *uint64 `json:"TaskID,omitnil" name:"TaskID"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
@@ -5263,11 +5404,18 @@ func (r *CreateProcessEventsExportJobResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateRefreshTaskRequestParams struct {
 
+	ClusterIDs []*string `json:"ClusterIDs,omitnil" name:"ClusterIDs"`
+
+
+	IsSyncListOnly *bool `json:"IsSyncListOnly,omitnil" name:"IsSyncListOnly"`
 }
 
 type CreateRefreshTaskRequest struct {
 	*tchttp.BaseRequest
 	
+	ClusterIDs []*string `json:"ClusterIDs,omitnil" name:"ClusterIDs"`
+
+	IsSyncListOnly *bool `json:"IsSyncListOnly,omitnil" name:"IsSyncListOnly"`
 }
 
 func (r *CreateRefreshTaskRequest) ToJsonString() string {
@@ -5282,7 +5430,8 @@ func (r *CreateRefreshTaskRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "ClusterIDs")
+	delete(f, "IsSyncListOnly")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRefreshTaskRequest has unknown keys!", "")
 	}
@@ -8802,6 +8951,9 @@ type DescribeAgentDaemonSetCmdRequestParams struct {
 
 	// Command validity, which is required for non-Tencent Cloud instances.
 	ExpireDate *string `json:"ExpireDate,omitnil" name:"ExpireDate"`
+
+	// Custom parameters of the cluster
+	ClusterCustomParameters []*ClusterCustomParameters `json:"ClusterCustomParameters,omitnil" name:"ClusterCustomParameters"`
 }
 
 type DescribeAgentDaemonSetCmdRequest struct {
@@ -8821,6 +8973,9 @@ type DescribeAgentDaemonSetCmdRequest struct {
 
 	// Command validity, which is required for non-Tencent Cloud instances.
 	ExpireDate *string `json:"ExpireDate,omitnil" name:"ExpireDate"`
+
+	// Custom parameters of the cluster
+	ClusterCustomParameters []*ClusterCustomParameters `json:"ClusterCustomParameters,omitnil" name:"ClusterCustomParameters"`
 }
 
 func (r *DescribeAgentDaemonSetCmdRequest) ToJsonString() string {
@@ -8840,6 +8995,7 @@ func (r *DescribeAgentDaemonSetCmdRequest) FromJsonString(s string) error {
 	delete(f, "RegionCode")
 	delete(f, "VpcId")
 	delete(f, "ExpireDate")
+	delete(f, "ClusterCustomParameters")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAgentDaemonSetCmdRequest has unknown keys!", "")
 	}
@@ -9349,6 +9505,45 @@ type DescribeAssetContainerDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsolateTime *string `json:"IsolateTime,omitnil" name:"IsolateTime"`
 
+	// Node ID
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// Node name
+	NodeName *string `json:"NodeName,omitnil" name:"NodeName"`
+
+	// Node subnet ID
+	NodeSubNetID *string `json:"NodeSubNetID,omitnil" name:"NodeSubNetID"`
+
+	// Node subnet name
+	NodeSubNetName *string `json:"NodeSubNetName,omitnil" name:"NodeSubNetName"`
+
+	// Subnet IP range
+	NodeSubNetCIDR *string `json:"NodeSubNetCIDR,omitnil" name:"NodeSubNetCIDR"`
+
+	// Pod name
+	PodName *string `json:"PodName,omitnil" name:"PodName"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Pod status
+	PodStatus *string `json:"PodStatus,omitnil" name:"PodStatus"`
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitnil" name:"ClusterID"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
+
+	// Node type. Values: `NORMAL` (default), `SUPER`
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// UID of the super node
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
+
+	// Public IP
+	PublicIP *string `json:"PublicIP,omitnil" name:"PublicIP"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
@@ -9377,14 +9572,19 @@ type DescribeAssetContainerListRequestParams struct {
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// Filter
-	// <li>ContainerName - String - Required: No - Container name</li>
-	// <li>Status - String - Required: No - Container status. Valid values: `0` (created); `1` (running); `2` (paused); `3` (restarting); `4` (removing); `5` (exited); `6` (dead).</li>
-	// <li>Runas - String - Required: No - Operator</li>
-	// <li>ImageName- String - Required: No - Image name</li>
-	// <li>HostIP- string - Required: No - Server IP</li>
-	// <li>OrderBy - String - Required: No - Sorting field, which supports dynamic sorting by `cpu_usage` or `mem_usage` such as ["cpu_usage","+"]. '+' indicates ascending, and '-' indicates descending.</li>
-	// <li>NetStatus - String - Required: No - Container network status. Valid values: `normal`, `isolated`, `isolating`, `isolate_failed`, `restoring`, `restore_failed`.</li>
+	// Filter condition
+	// <li>`ContainerName`: String - Required: No - Container name</li>
+	// <li>`Status` - String - Required: No - Container status. Values: `0` (created); `1` (running); `2` (paused); `3` (restarting); `4` (removing); `5` (exited); `6` (dead).</li>
+	// <li>`Runas`: String - Required: No - Operator</li>
+	// <li>`ImageName`: String - Required: No - Image name</li>
+	// <li>`HostIP`: String - Required: No - Server IP</li>
+	// <li>`OrderBy` - String - Required: No - Sorting field, which supports dynamic sorting by `cpu_usage` or `mem_usage` such as ["cpu_usage","+"]. '+' indicates ascending, and '-' indicates descending.</li>
+	// <li>`NetStatus`: String - Required: No - Container network status. Values: `normal`, `isolated`, `isolating`, `isolate_failed`, `restoring`, `restore_failed`.</li>
+	// <li>`PodID`: String - Required: No- Pod ID </li>
+	// <li>`NodeUniqueID`: String - Required: No - Super Node</li>
+	// <li>`PodUid`: String - Required: No - Pod</li>
+	// <li>`PodIP`: String - Required: No - Pod IP</li>
+	// <li>`NodeType`: String - Required: No - Values: `NORMAL` (general nodes), `SUPER` (super nodes)</li>
 	Filters []*AssetFilters `json:"Filters,omitnil" name:"Filters"`
 
 	// Sorting field
@@ -9403,14 +9603,19 @@ type DescribeAssetContainerListRequest struct {
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// Filter
-	// <li>ContainerName - String - Required: No - Container name</li>
-	// <li>Status - String - Required: No - Container status. Valid values: `0` (created); `1` (running); `2` (paused); `3` (restarting); `4` (removing); `5` (exited); `6` (dead).</li>
-	// <li>Runas - String - Required: No - Operator</li>
-	// <li>ImageName- String - Required: No - Image name</li>
-	// <li>HostIP- string - Required: No - Server IP</li>
-	// <li>OrderBy - String - Required: No - Sorting field, which supports dynamic sorting by `cpu_usage` or `mem_usage` such as ["cpu_usage","+"]. '+' indicates ascending, and '-' indicates descending.</li>
-	// <li>NetStatus - String - Required: No - Container network status. Valid values: `normal`, `isolated`, `isolating`, `isolate_failed`, `restoring`, `restore_failed`.</li>
+	// Filter condition
+	// <li>`ContainerName`: String - Required: No - Container name</li>
+	// <li>`Status` - String - Required: No - Container status. Values: `0` (created); `1` (running); `2` (paused); `3` (restarting); `4` (removing); `5` (exited); `6` (dead).</li>
+	// <li>`Runas`: String - Required: No - Operator</li>
+	// <li>`ImageName`: String - Required: No - Image name</li>
+	// <li>`HostIP`: String - Required: No - Server IP</li>
+	// <li>`OrderBy` - String - Required: No - Sorting field, which supports dynamic sorting by `cpu_usage` or `mem_usage` such as ["cpu_usage","+"]. '+' indicates ascending, and '-' indicates descending.</li>
+	// <li>`NetStatus`: String - Required: No - Container network status. Values: `normal`, `isolated`, `isolating`, `isolate_failed`, `restoring`, `restore_failed`.</li>
+	// <li>`PodID`: String - Required: No- Pod ID </li>
+	// <li>`NodeUniqueID`: String - Required: No - Super Node</li>
+	// <li>`PodUid`: String - Required: No - Pod</li>
+	// <li>`PodIP`: String - Required: No - Pod IP</li>
+	// <li>`NodeType`: String - Required: No - Values: `NORMAL` (general nodes), `SUPER` (super nodes)</li>
 	Filters []*AssetFilters `json:"Filters,omitnil" name:"Filters"`
 
 	// Sorting field
@@ -11183,11 +11388,13 @@ func (r *DescribeAssetImageRegistryScanStatusOneKeyResponse) FromJsonString(s st
 // Predefined struct for user
 type DescribeAssetImageRegistrySummaryRequestParams struct {
 
+	Filters []*AssetFilters `json:"Filters,omitnil" name:"Filters"`
 }
 
 type DescribeAssetImageRegistrySummaryRequest struct {
 	*tchttp.BaseRequest
 	
+	Filters []*AssetFilters `json:"Filters,omitnil" name:"Filters"`
 }
 
 func (r *DescribeAssetImageRegistrySummaryRequest) ToJsonString() string {
@@ -11202,7 +11409,7 @@ func (r *DescribeAssetImageRegistrySummaryRequest) FromJsonString(s string) erro
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "Filters")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAssetImageRegistrySummaryRequest has unknown keys!", "")
 	}
@@ -12721,6 +12928,24 @@ type DescribeAssetSummaryResponseParams struct {
 	// Number of servers not installed with the agent
 	HostUnInstallCnt *uint64 `json:"HostUnInstallCnt,omitnil" name:"HostUnInstallCnt"`
 
+	// Number of super nodes
+	SuperNodeCnt *uint64 `json:"SuperNodeCnt,omitnil" name:"SuperNodeCnt"`
+
+	// Number of running super nodes
+	SuperNodeRunningCnt *uint64 `json:"SuperNodeRunningCnt,omitnil" name:"SuperNodeRunningCnt"`
+
+
+	TodayNewImageCnt *uint64 `json:"TodayNewImageCnt,omitnil" name:"TodayNewImageCnt"`
+
+
+	TodayUnsafeImageCnt *uint64 `json:"TodayUnsafeImageCnt,omitnil" name:"TodayUnsafeImageCnt"`
+
+
+	RecommendedFixImageCnt *uint64 `json:"RecommendedFixImageCnt,omitnil" name:"RecommendedFixImageCnt"`
+
+
+	ScannedImageCnt *uint64 `json:"ScannedImageCnt,omitnil" name:"ScannedImageCnt"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
@@ -13235,6 +13460,18 @@ type DescribeClusterSummaryResponseParams struct {
 
 	// Number of clusters not imported
 	NotImportedClusterCount *uint64 `json:"NotImportedClusterCount,omitnil" name:"NotImportedClusterCount"`
+
+	// Number of EKS clusters
+	ServerlessClusterCount *uint64 `json:"ServerlessClusterCount,omitnil" name:"ServerlessClusterCount"`
+
+
+	TkeClusterCount *uint64 `json:"TkeClusterCount,omitnil" name:"TkeClusterCount"`
+
+
+	UserCreateTencentClusterCount *uint64 `json:"UserCreateTencentClusterCount,omitnil" name:"UserCreateTencentClusterCount"`
+
+
+	UserCreateHybridClusterCount *uint64 `json:"UserCreateHybridClusterCount,omitnil" name:"UserCreateHybridClusterCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
@@ -14145,6 +14382,9 @@ type DescribeContainerAssetSummaryResponseParams struct {
 
 	// Number of servers not installed with the agent
 	HostUnInstallCnt *uint64 `json:"HostUnInstallCnt,omitnil" name:"HostUnInstallCnt"`
+
+	// Number of super nodes
+	HostSuperNodeCnt *uint64 `json:"HostSuperNodeCnt,omitnil" name:"HostSuperNodeCnt"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
@@ -15824,6 +16064,8 @@ type DescribeImageRegistryTimingScanTaskResponseParams struct {
 	ScanType []*string `json:"ScanType,omitnil" name:"ScanType"`
 
 	// Scan of all images
+	//
+	// Deprecated: All is deprecated.
 	All *bool `json:"All,omitnil" name:"All"`
 
 	// Scan of specified images
@@ -15833,6 +16075,25 @@ type DescribeImageRegistryTimingScanTaskResponseParams struct {
 	// ID of the specified image
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Id []*uint64 `json:"Id,omitnil" name:"Id"`
+
+	// Whether to scan the latest image tag
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	Latest *bool `json:"Latest,omitnil" name:"Latest"`
+
+
+	ScanEndTime *string `json:"ScanEndTime,omitnil" name:"ScanEndTime"`
+
+
+	RegistryType []*string `json:"RegistryType,omitnil" name:"RegistryType"`
+
+
+	ContainerRunning *bool `json:"ContainerRunning,omitnil" name:"ContainerRunning"`
+
+
+	ScanScope *uint64 `json:"ScanScope,omitnil" name:"ScanScope"`
+
+
+	Namespace []*string `json:"Namespace,omitnil" name:"Namespace"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
@@ -18237,7 +18498,8 @@ type DescribeReverseShellEventsRequestParams struct {
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
+	// Filter parameters
+	// `InnerNetAlarmShow` - int - Required: Values: `1` (show private network alert); `0` (do not show)
 	Filters []*RunTimeFilters `json:"Filters,omitnil" name:"Filters"`
 
 	// Valid values: `asc`, `desc`.
@@ -18256,7 +18518,8 @@ type DescribeReverseShellEventsRequest struct {
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// Filter parameter. "Filters":[{"Name":"Status","Values":["2"]}]
+	// Filter parameters
+	// `InnerNetAlarmShow` - int - Required: Values: `1` (show private network alert); `0` (do not show)
 	Filters []*RunTimeFilters `json:"Filters,omitnil" name:"Filters"`
 
 	// Valid values: `asc`, `desc`.
@@ -21096,10 +21359,6 @@ type DescribeVirusDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SourceType *int64 `json:"SourceType,omitnil" name:"SourceType"`
 
-	// Cluster name
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	PodName *string `json:"PodName,omitnil" name:"PodName"`
-
 	// Tag
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tags []*string `json:"Tags,omitnil" name:"Tags"`
@@ -21127,6 +21386,10 @@ type DescribeVirusDetailResponseParams struct {
 	// Event type
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EventType *string `json:"EventType,omitnil" name:"EventType"`
+
+	// Cluster name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PodName *string `json:"PodName,omitnil" name:"PodName"`
 
 	// `DEAL_NONE`: Pending.
 	// `DEAL_IGNORE`: Ignored.
@@ -21222,6 +21485,42 @@ type DescribeVirusDetailResponseParams struct {
 	// File modified time
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FileModifyTime *string `json:"FileModifyTime,omitnil" name:"FileModifyTime"`
+
+	// Node subnet ID
+	NodeSubNetID *string `json:"NodeSubNetID,omitnil" name:"NodeSubNetID"`
+
+	// Node subnet name
+	NodeSubNetName *string `json:"NodeSubNetName,omitnil" name:"NodeSubNetName"`
+
+	// Subnet IP range
+	NodeSubNetCIDR *string `json:"NodeSubNetCIDR,omitnil" name:"NodeSubNetCIDR"`
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitnil" name:"ClusterID"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Pod status
+	PodStatus *string `json:"PodStatus,omitnil" name:"PodStatus"`
+
+	// UID of the node
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
+
+	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// Node ID
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
+
+
+	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+
+
+	WorkloadType *string `json:"WorkloadType,omitnil" name:"WorkloadType"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
@@ -22378,9 +22677,13 @@ func (r *DescribeVulDefenceEventTendencyResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type DescribeVulDefenceHostRequestParams struct {
-	// Filter
-	// <li>Status- String - Required: No - Plugin status. Valid values: `SUCCESS` (normal); `FAIL` (abnormal); `NO_DEFENCE` (not defended).</li>
-	// <li>KeyWords- string - Required: No - Server name/IP</li>
+	// Filter condition
+	// <li>`Status`: String - Required: No - Plugin status. Values: `SUCCESS` (normal); `FAIL` (abnormal); `NO_DEFENCE` (not defended).</li>
+	// <li>`HostName`: String - Required: No - Server/Super node name</li>
+	// <li>`HostIP`: String - Required: No - Server IP </li>
+	// <li>`NodeType`: String  - Required: No - Node type</li>
+	// <li>`HostName` - String - Required: No - Super node name </li>
+	// <li>`NodeSubNetCIDR`: String - Required: No - Super node CIDR block</li>
 	Filters []*RunTimeFilters `json:"Filters,omitnil" name:"Filters"`
 
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
@@ -22399,9 +22702,13 @@ type DescribeVulDefenceHostRequestParams struct {
 type DescribeVulDefenceHostRequest struct {
 	*tchttp.BaseRequest
 	
-	// Filter
-	// <li>Status- String - Required: No - Plugin status. Valid values: `SUCCESS` (normal); `FAIL` (abnormal); `NO_DEFENCE` (not defended).</li>
-	// <li>KeyWords- string - Required: No - Server name/IP</li>
+	// Filter condition
+	// <li>`Status`: String - Required: No - Plugin status. Values: `SUCCESS` (normal); `FAIL` (abnormal); `NO_DEFENCE` (not defended).</li>
+	// <li>`HostName`: String - Required: No - Server/Super node name</li>
+	// <li>`HostIP`: String - Required: No - Server IP </li>
+	// <li>`NodeType`: String  - Required: No - Node type</li>
+	// <li>`HostName` - String - Required: No - Super node name </li>
+	// <li>`NodeSubNetCIDR`: String - Required: No - Super node CIDR block</li>
 	Filters []*RunTimeFilters `json:"Filters,omitnil" name:"Filters"`
 
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
@@ -22470,7 +22777,7 @@ func (r *DescribeVulDefenceHostResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeVulDefencePluginRequestParams struct {
-	// Server host ID, i.e., QUuid
+	// Host ID or unique super node ID
 	HostID *string `json:"HostID,omitnil" name:"HostID"`
 
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
@@ -22479,15 +22786,17 @@ type DescribeVulDefencePluginRequestParams struct {
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// Filter
-	// <li>Status- String - Required: No - Plugin status. Valid values: `INJECTING` (injecting); `SUCCESS` (injected successfully); `FAIL` (injection failed); `TIMEOUT` (plugin timed out); `QUIT` (plugin exited).</li>
+	// Filter condition
+	// <li>
+	// Status- String - Required: No - Plugin status. Valid values: `INJECTING` (injecting); `SUCCESS` (injected successfully); `FAIL` (injection failed); `TIMEOUT` (plugin timed out); `QUIT` (plugin exited).
+	// </li>
 	Filters []*RunTimeFilters `json:"Filters,omitnil" name:"Filters"`
 }
 
 type DescribeVulDefencePluginRequest struct {
 	*tchttp.BaseRequest
 	
-	// Server host ID, i.e., QUuid
+	// Host ID or unique super node ID
 	HostID *string `json:"HostID,omitnil" name:"HostID"`
 
 	// Number of results to be returned. Default value: `10`. Maximum value: `100`.
@@ -22496,8 +22805,10 @@ type DescribeVulDefencePluginRequest struct {
 	// Offset. Default value: `0`.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// Filter
-	// <li>Status- String - Required: No - Plugin status. Valid values: `INJECTING` (injecting); `SUCCESS` (injected successfully); `FAIL` (injection failed); `TIMEOUT` (plugin timed out); `QUIT` (plugin exited).</li>
+	// Filter condition
+	// <li>
+	// Status- String - Required: No - Plugin status. Valid values: `INJECTING` (injecting); `SUCCESS` (injected successfully); `FAIL` (injection failed); `TIMEOUT` (plugin timed out); `QUIT` (plugin exited).
+	// </li>
 	Filters []*RunTimeFilters `json:"Filters,omitnil" name:"Filters"`
 }
 
@@ -22605,6 +22916,21 @@ type DescribeVulDefenceSettingResponseParams struct {
 	// Number of vulnerabilities that can be prevented
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SupportDefenseVulCount *int64 `json:"SupportDefenseVulCount,omitnil" name:"SupportDefenseVulCount"`
+
+	// Number of normal nodes
+	HostNodeCount *int64 `json:"HostNodeCount,omitnil" name:"HostNodeCount"`
+
+	// Super node scope
+	SuperScope *int64 `json:"SuperScope,omitnil" name:"SuperScope"`
+
+	// Number of super nodes
+	SuperNodeCount *int64 `json:"SuperNodeCount,omitnil" name:"SuperNodeCount"`
+
+	// List of super node IDs
+	SuperNodeIds []*string `json:"SuperNodeIds,omitnil" name:"SuperNodeIds"`
+
+	// Total number of super nodes with TCSS activated
+	NodeTotalCount *int64 `json:"NodeTotalCount,omitnil" name:"NodeTotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
@@ -23178,6 +23504,116 @@ func (r *DescribeVulLevelSummaryResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeVulLevelSummaryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVulRegistryImageListRequestParams struct {
+	// Vulnerability ID
+	PocID *string `json:"PocID,omitnil" name:"PocID"`
+
+	// The number of results returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+
+
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Filter condition
+	// `OnlyAffectedNewestImage`: (bool) Whether the latest image is affected.
+	// `ImageDigest`: Image digest. Fuzzy query is supported.
+	// `ImageId`: Image ID.
+	// `Namespace`: Namespace. Fuzzy query is supported.
+	// `ImageTag`: Image tag. Fuzzy query is supported.
+	// `InstanceName`: Instance name. Fuzzy query is supported.
+	// `ImageName`: Image name. Fuzzy query is supported.
+	// `ImageRepoAddress`: Image address. Fuzzy query is supported.
+	Filters []*AssetFilters `json:"Filters,omitnil" name:"Filters"`
+
+	// Sorting order
+	Order *string `json:"Order,omitnil" name:"Order"`
+
+	// Sorting field
+	By *string `json:"By,omitnil" name:"By"`
+}
+
+type DescribeVulRegistryImageListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Vulnerability ID
+	PocID *string `json:"PocID,omitnil" name:"PocID"`
+
+	// The number of results returned. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Filter condition
+	// `OnlyAffectedNewestImage`: (bool) Whether the latest image is affected.
+	// `ImageDigest`: Image digest. Fuzzy query is supported.
+	// `ImageId`: Image ID.
+	// `Namespace`: Namespace. Fuzzy query is supported.
+	// `ImageTag`: Image tag. Fuzzy query is supported.
+	// `InstanceName`: Instance name. Fuzzy query is supported.
+	// `ImageName`: Image name. Fuzzy query is supported.
+	// `ImageRepoAddress`: Image address. Fuzzy query is supported.
+	Filters []*AssetFilters `json:"Filters,omitnil" name:"Filters"`
+
+	// Sorting order
+	Order *string `json:"Order,omitnil" name:"Order"`
+
+	// Sorting field
+	By *string `json:"By,omitnil" name:"By"`
+}
+
+func (r *DescribeVulRegistryImageListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVulRegistryImageListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PocID")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Filters")
+	delete(f, "Order")
+	delete(f, "By")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVulRegistryImageListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeVulRegistryImageListResponseParams struct {
+	// Total number of images
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+
+	List []*VulAffectedRegistryImageInfo `json:"List,omitnil" name:"List"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeVulRegistryImageListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeVulRegistryImageListResponseParams `json:"Response"`
+}
+
+func (r *DescribeVulRegistryImageListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeVulRegistryImageListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -23910,13 +24346,14 @@ type EscapeEventDescription struct {
 }
 
 type EscapeEventInfo struct {
-	// Event type
-	//    `ESCAPE_HOST_ACESS_FILE`: Host file access escape.
-	//    `ESCAPE_MOUNT_NAMESPACE`: Mount namespace escape.
-	//    `ESCAPE_PRIVILEDGE`: Program privilege escalation escape.
-	//    `ESCAPE_PRIVILEDGE_CONTAINER_START`: Privileged container startup escape.
-	//    `ESCAPE_MOUNT_SENSITIVE_PTAH`: Sensitive path mount.
-	//    `ESCAPE_SYSCALL`: Syscall escape.
+	// Event type.
+	//    `ESCAPE_CGROUPS`: Cgroup escape.
+	//    `ESCAPE_TAMPER_SENSITIVE_FILE`: File tamper escape.
+	//    `ESCAPE_DOCKER_API`: Docker API access escape.
+	//    `ESCAPE_VUL_OCCURRED`: Vulnerability exploit.
+	//    `MOUNT_SENSITIVE_PTAH`: Sensitive path mount.
+	//    `PRIVILEGE_CONTAINER_START`: Privileged container.
+	//    `PRIVILEGE`: Program privilege escalation escape.
 	EventType *string `json:"EventType,omitnil" name:"EventType"`
 
 	// Container name
@@ -24009,6 +24446,30 @@ type EscapeEventInfo struct {
 	// `RESTARTING`: Restarting.
 	// `REMOVING`: Removing.
 	ContainerStatus *string `json:"ContainerStatus,omitnil" name:"ContainerStatus"`
+
+	// ID of the cluster where the node resides
+	ClusterID *string `json:"ClusterID,omitnil" name:"ClusterID"`
+
+	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Unique node ID
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
+
+	// Node public IP
+	PublicIP *string `json:"PublicIP,omitnil" name:"PublicIP"`
+
+	// Node ID
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// Private IP of the node
+	HostIP *string `json:"HostIP,omitnil" name:"HostIP"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 }
 
 type EscapeEventTendencyInfo struct {
@@ -24305,6 +24766,15 @@ type HostInfo struct {
 	// Tags
 	// Note: This field may return `null`, indicating that no valid value was found.
 	Tags []*TagInfo `json:"Tags,omitnil" name:"Tags"`
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitnil" name:"ClusterID"`
+
+
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
+
+
+	ClusterAccessedStatus *string `json:"ClusterAccessedStatus,omitnil" name:"ClusterAccessedStatus"`
 }
 
 type ImageAutoAuthorizedTask struct {
@@ -26909,6 +27379,11 @@ type ModifySecLogJoinObjectsRequestParams struct {
 
 	// List of QUuids of servers to be unbound
 	UnBindList []*string `json:"UnBindList,omitnil" name:"UnBindList"`
+
+	// Node type.
+	// `NORMAL`: General node (default)
+	// `SUPER`: Super node
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
 }
 
 type ModifySecLogJoinObjectsRequest struct {
@@ -26925,6 +27400,11 @@ type ModifySecLogJoinObjectsRequest struct {
 
 	// List of QUuids of servers to be unbound
 	UnBindList []*string `json:"UnBindList,omitnil" name:"UnBindList"`
+
+	// Node type.
+	// `NORMAL`: General node (default)
+	// `SUPER`: Super node
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
 }
 
 func (r *ModifySecLogJoinObjectsRequest) ToJsonString() string {
@@ -26942,6 +27422,7 @@ func (r *ModifySecLogJoinObjectsRequest) FromJsonString(s string) error {
 	delete(f, "LogType")
 	delete(f, "BindList")
 	delete(f, "UnBindList")
+	delete(f, "NodeType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySecLogJoinObjectsRequest has unknown keys!", "")
 	}
@@ -27656,11 +28137,17 @@ type ModifyVulDefenceSettingRequestParams struct {
 	// Whether it is enabled. Valid values: `0` (disabled); `1` (enabled).
 	IsEnabled *int64 `json:"IsEnabled,omitnil" name:"IsEnabled"`
 
-	// Scope of servers for which to enable exploit prevention. Valid values: `0` (specified servers); `1` (all servers). This parameter is required when `IsEnabled` is `1`.
+	// Servers to enable exploit prevention. Values: `0` (custom); `1` (all).
 	Scope *int64 `json:"Scope,omitnil" name:"Scope"`
 
-	// Specified servers for which to enable exploit prevention. This parameter is required when `Scope` is `0`.
+	// Specified servers with exploit prevention enabled
 	HostIDs []*string `json:"HostIDs,omitnil" name:"HostIDs"`
+
+	// Super nodes to enable exploit prevention. Values: `0` (custom); `1` (all).
+	SuperScope *int64 `json:"SuperScope,omitnil" name:"SuperScope"`
+
+	// List of super node IDs
+	NodeIds []*string `json:"NodeIds,omitnil" name:"NodeIds"`
 }
 
 type ModifyVulDefenceSettingRequest struct {
@@ -27669,11 +28156,17 @@ type ModifyVulDefenceSettingRequest struct {
 	// Whether it is enabled. Valid values: `0` (disabled); `1` (enabled).
 	IsEnabled *int64 `json:"IsEnabled,omitnil" name:"IsEnabled"`
 
-	// Scope of servers for which to enable exploit prevention. Valid values: `0` (specified servers); `1` (all servers). This parameter is required when `IsEnabled` is `1`.
+	// Servers to enable exploit prevention. Values: `0` (custom); `1` (all).
 	Scope *int64 `json:"Scope,omitnil" name:"Scope"`
 
-	// Specified servers for which to enable exploit prevention. This parameter is required when `Scope` is `0`.
+	// Specified servers with exploit prevention enabled
 	HostIDs []*string `json:"HostIDs,omitnil" name:"HostIDs"`
+
+	// Super nodes to enable exploit prevention. Values: `0` (custom); `1` (all).
+	SuperScope *int64 `json:"SuperScope,omitnil" name:"SuperScope"`
+
+	// List of super node IDs
+	NodeIds []*string `json:"NodeIds,omitnil" name:"NodeIds"`
 }
 
 func (r *ModifyVulDefenceSettingRequest) ToJsonString() string {
@@ -27691,6 +28184,8 @@ func (r *ModifyVulDefenceSettingRequest) FromJsonString(s string) error {
 	delete(f, "IsEnabled")
 	delete(f, "Scope")
 	delete(f, "HostIDs")
+	delete(f, "SuperScope")
+	delete(f, "NodeIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyVulDefenceSettingRequest has unknown keys!", "")
 	}
@@ -27747,6 +28242,10 @@ type NetworkAuditRecord struct {
 
 	// Operator UIN
 	Uin *string `json:"Uin,omitnil" name:"Uin"`
+
+	// The policy ID.
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	PolicyId *uint64 `json:"PolicyId,omitnil" name:"PolicyId"`
 }
 
 type NetworkClusterInfoItem struct {
@@ -27786,6 +28285,10 @@ type NetworkClusterInfoItem struct {
 	// Error message of the cluster network plugin
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	NetworkPolicyPluginError *string `json:"NetworkPolicyPluginError,omitnil" name:"NetworkPolicyPluginError"`
+
+	// Cluster network plugin
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	ClusterNetworkSettings *string `json:"ClusterNetworkSettings,omitnil" name:"ClusterNetworkSettings"`
 }
 
 type NetworkClusterNamespaceLabelInfo struct {
@@ -28039,6 +28542,21 @@ type PortInfo struct {
 
 	// Public IP
 	PublicIp *string `json:"PublicIp,omitnil" name:"PublicIp"`
+
+	// Node ID
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Pod name
+	PodName *string `json:"PodName,omitnil" name:"PodName"`
+
+	// Node type.
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// UID of the super node
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
 }
 
 type ProcessBaseInfo struct {
@@ -28144,6 +28662,21 @@ type ProcessInfo struct {
 
 	// Public IP
 	PublicIp *string `json:"PublicIp,omitnil" name:"PublicIp"`
+
+	// Node ID
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Pod name
+	PodName *string `json:"PodName,omitnil" name:"PodName"`
+
+	// Node type.
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// UID of the super node
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
 }
 
 type ProjectInfo struct {
@@ -28618,6 +29151,33 @@ type RiskSyscallEventInfo struct {
 	// `RESTARTING`: Restarting.
 	// `REMOVING`: Removing.
 	ContainerStatus *string `json:"ContainerStatus,omitnil" name:"ContainerStatus"`
+
+	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitnil" name:"ClusterID"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Unique node ID
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
+
+	// Node public IP
+	PublicIP *string `json:"PublicIP,omitnil" name:"PublicIP"`
+
+	// Node ID
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// uuid
+	HostID *string `json:"HostID,omitnil" name:"HostID"`
+
+	// Private IP of the node
+	HostIP *string `json:"HostIP,omitnil" name:"HostIP"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 }
 
 type RiskSyscallWhiteListBaseInfo struct {
@@ -28706,9 +29266,6 @@ type RunTimeEventBaseInfo struct {
 	// Node name
 	NodeName *string `json:"NodeName,omitnil" name:"NodeName"`
 
-	// Pod name
-	PodName *string `json:"PodName,omitnil" name:"PodName"`
-
 	// Status. `EVENT_UNDEAL`: Pending.
 	//     `EVENT_DEALED`: Processed.
 	//     `EVENT_INGNORE`: Ignored.
@@ -28772,6 +29329,48 @@ type RunTimeEventBaseInfo struct {
 	// Container isolation operation source
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ContainerIsolateOperationSrc *string `json:"ContainerIsolateOperationSrc,omitnil" name:"ContainerIsolateOperationSrc"`
+
+	// Node ID
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// Node type. Valid values: `NORMAL` (general node), `SUPER` (super node)
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// Node subnet ID
+	NodeSubNetID *string `json:"NodeSubNetID,omitnil" name:"NodeSubNetID"`
+
+	// Node subnet name
+	NodeSubNetName *string `json:"NodeSubNetName,omitnil" name:"NodeSubNetName"`
+
+	// Subnet IP range
+	NodeSubNetCIDR *string `json:"NodeSubNetCIDR,omitnil" name:"NodeSubNetCIDR"`
+
+	// Pod name
+	PodName *string `json:"PodName,omitnil" name:"PodName"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Pod status
+	PodStatus *string `json:"PodStatus,omitnil" name:"PodStatus"`
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitnil" name:"ClusterID"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
+
+	// Unique node ID
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
+
+	// uuid
+	HostID *string `json:"HostID,omitnil" name:"HostID"`
+
+
+	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+
+
+	WorkloadType *string `json:"WorkloadType,omitnil" name:"WorkloadType"`
 }
 
 type RunTimeFilters struct {
@@ -29141,8 +29740,11 @@ type SecLogDeliveryKafkaSettingInfo struct {
 }
 
 type SecLogJoinInfo struct {
-	// Number of accessed servers
+	// Number of connected general nodes
 	Count *uint64 `json:"Count,omitnil" name:"Count"`
+
+	// Number of connected super nodes
+	SuperNodeCount *uint64 `json:"SuperNodeCount,omitnil" name:"SuperNodeCount"`
 
 	// Whether it is accessed. Valid values: `true` (accessed); `false` (not accessed).
 	IsJoined *bool `json:"IsJoined,omitnil" name:"IsJoined"`
@@ -29271,6 +29873,21 @@ type ServiceInfo struct {
 
 	// Public IP
 	PublicIp *string `json:"PublicIp,omitnil" name:"PublicIp"`
+
+	// Node ID
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Pod name
+	PodName *string `json:"PodName,omitnil" name:"PodName"`
+
+	// Node type.
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// UID of the super node
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
 }
 
 // Predefined struct for user
@@ -29575,11 +30192,18 @@ func (r *SwitchImageAutoAuthorizedRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type SyncAssetImageRegistryAssetRequestParams struct {
 
+	All *bool `json:"All,omitnil" name:"All"`
+
+
+	RegistryIds []*uint64 `json:"RegistryIds,omitnil" name:"RegistryIds"`
 }
 
 type SyncAssetImageRegistryAssetRequest struct {
 	*tchttp.BaseRequest
 	
+	All *bool `json:"All,omitnil" name:"All"`
+
+	RegistryIds []*uint64 `json:"RegistryIds,omitnil" name:"RegistryIds"`
 }
 
 func (r *SyncAssetImageRegistryAssetRequest) ToJsonString() string {
@@ -29594,7 +30218,8 @@ func (r *SyncAssetImageRegistryAssetRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "All")
+	delete(f, "RegistryIds")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SyncAssetImageRegistryAssetRequest has unknown keys!", "")
 	}
@@ -30000,10 +30625,30 @@ type UpdateImageRegistryTimingScanTaskRequestParams struct {
 	Images []*ImageInfo `json:"Images,omitnil" name:"Images"`
 
 	// Whether to scan all
+	//
+	// Deprecated: All is deprecated.
 	All *bool `json:"All,omitnil" name:"All"`
 
 	// ID of the image to be scanned
 	Id []*uint64 `json:"Id,omitnil" name:"Id"`
+
+	// Whether to scan for the latest version
+	Latest *bool `json:"Latest,omitnil" name:"Latest"`
+
+
+	ContainerRunning *bool `json:"ContainerRunning,omitnil" name:"ContainerRunning"`
+
+
+	ScanEndTime *string `json:"ScanEndTime,omitnil" name:"ScanEndTime"`
+
+
+	ScanScope *uint64 `json:"ScanScope,omitnil" name:"ScanScope"`
+
+
+	RegistryType []*string `json:"RegistryType,omitnil" name:"RegistryType"`
+
+
+	Namespace []*string `json:"Namespace,omitnil" name:"Namespace"`
 }
 
 type UpdateImageRegistryTimingScanTaskRequest struct {
@@ -30029,6 +30674,19 @@ type UpdateImageRegistryTimingScanTaskRequest struct {
 
 	// ID of the image to be scanned
 	Id []*uint64 `json:"Id,omitnil" name:"Id"`
+
+	// Whether to scan for the latest version
+	Latest *bool `json:"Latest,omitnil" name:"Latest"`
+
+	ContainerRunning *bool `json:"ContainerRunning,omitnil" name:"ContainerRunning"`
+
+	ScanEndTime *string `json:"ScanEndTime,omitnil" name:"ScanEndTime"`
+
+	ScanScope *uint64 `json:"ScanScope,omitnil" name:"ScanScope"`
+
+	RegistryType []*string `json:"RegistryType,omitnil" name:"RegistryType"`
+
+	Namespace []*string `json:"Namespace,omitnil" name:"Namespace"`
 }
 
 func (r *UpdateImageRegistryTimingScanTaskRequest) ToJsonString() string {
@@ -30050,6 +30708,12 @@ func (r *UpdateImageRegistryTimingScanTaskRequest) FromJsonString(s string) erro
 	delete(f, "Images")
 	delete(f, "All")
 	delete(f, "Id")
+	delete(f, "Latest")
+	delete(f, "ContainerRunning")
+	delete(f, "ScanEndTime")
+	delete(f, "ScanScope")
+	delete(f, "RegistryType")
+	delete(f, "Namespace")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateImageRegistryTimingScanTaskRequest has unknown keys!", "")
 	}
@@ -30416,6 +31080,39 @@ type VirusInfo struct {
 	// `5`: Threat intelligence.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CheckPlatform []*string `json:"CheckPlatform,omitnil" name:"CheckPlatform"`
+
+	// Node ID.
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// Node name
+	NodeName *string `json:"NodeName,omitnil" name:"NodeName"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Pod (instance) name
+	PodName *string `json:"PodName,omitnil" name:"PodName"`
+
+	// ID of the cluster where the node resides
+	ClusterID *string `json:"ClusterID,omitnil" name:"ClusterID"`
+
+	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// Public IP of the node
+	PublicIP *string `json:"PublicIP,omitnil" name:"PublicIP"`
+
+	// Node private IP
+	InnerIP *string `json:"InnerIP,omitnil" name:"InnerIP"`
+
+	// UID of the node
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
+
+	// ID for u200dthe general node
+	HostID *string `json:"HostID,omitnil" name:"HostID"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 }
 
 type VirusTaskInfo struct {
@@ -30431,10 +31128,10 @@ type VirusTaskInfo struct {
 	// Image ID
 	ImageId *string `json:"ImageId,omitnil" name:"ImageId"`
 
-	// Server name
+	// Node name
 	HostName *string `json:"HostName,omitnil" name:"HostName"`
 
-	// Server IP
+	// Private IP of the node
 	HostIp *string `json:"HostIp,omitnil" name:"HostIp"`
 
 	// Scanning status:
@@ -30474,6 +31171,15 @@ type VirusTaskInfo struct {
 	// `UNAUTH`: The image is not assigned with a license.
 	// `SEND_CANCEL_SUCCESSED`: Task submitted.
 	ErrorMsg *string `json:"ErrorMsg,omitnil" name:"ErrorMsg"`
+
+	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// Public IP of the node
+	PublicIP *string `json:"PublicIP,omitnil" name:"PublicIP"`
+
+	// Node ID
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
 }
 
 type VirusTendencyInfo struct {
@@ -30531,6 +31237,24 @@ type VulAffectedContainerInfo struct {
 
 	// Public IP
 	PublicIP *string `json:"PublicIP,omitnil" name:"PublicIP"`
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitnil" name:"ClusterID"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
+
+	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// UID of a super node
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
+
+	// ID of a super node
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// Super node name
+	NodeName *string `json:"NodeName,omitnil" name:"NodeName"`
 }
 
 type VulAffectedImageComponentInfo struct {
@@ -30566,6 +31290,32 @@ type VulAffectedImageInfo struct {
 
 	// List of components
 	ComponentList []*VulAffectedImageComponentInfo `json:"ComponentList,omitnil" name:"ComponentList"`
+}
+
+type VulAffectedRegistryImageInfo struct {
+	// Image ID
+	ImageID *string `json:"ImageID,omitnil" name:"ImageID"`
+
+	// Image name
+	ImageName *string `json:"ImageName,omitnil" name:"ImageName"`
+
+	// Image tag
+	ImageTag *string `json:"ImageTag,omitnil" name:"ImageTag"`
+
+	// Image namespace
+	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+
+	// Image address
+	ImageRepoAddress *string `json:"ImageRepoAddress,omitnil" name:"ImageRepoAddress"`
+
+	// List of components
+	ComponentList []*VulAffectedImageComponentInfo `json:"ComponentList,omitnil" name:"ComponentList"`
+
+	// Whether it is the latest image tag
+	IsLatestImage *bool `json:"IsLatestImage,omitnil" name:"IsLatestImage"`
+
+	// Internal image asset ID
+	ImageAssetId *int64 `json:"ImageAssetId,omitnil" name:"ImageAssetId"`
 }
 
 type VulDefenceEvent struct {
@@ -30651,17 +31401,35 @@ type VulDefenceEvent struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ContainerIsolateOperationSrc *string `json:"ContainerIsolateOperationSrc,omitnil" name:"ContainerIsolateOperationSrc"`
 
-	// Server QUuid
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Node QUuid/Super node ID
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	QUUID *string `json:"QUUID,omitnil" name:"QUUID"`
 
 	// Server private IP
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HostIP *string `json:"HostIP,omitnil" name:"HostIP"`
 
-	// Server name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// General node/Super node name
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	HostName *string `json:"HostName,omitnil" name:"HostName"`
+
+	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// Public IP
+	PublicIP *string `json:"PublicIP,omitnil" name:"PublicIP"`
+
+	// UID of a super node
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
+
+	// ID of a super node
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitnil" name:"ClusterID"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
 }
 
 type VulDefenceEventDetail struct {
@@ -30707,7 +31475,7 @@ type VulDefenceEventDetail struct {
 	// Event ID
 	EventID *int64 `json:"EventID,omitnil" name:"EventID"`
 
-	// Server name
+	// General node/Super node name
 	HostName *string `json:"HostName,omitnil" name:"HostName"`
 
 	// Server private IP
@@ -30756,8 +31524,8 @@ type VulDefenceEventDetail struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ServerArg *string `json:"ServerArg,omitnil" name:"ServerArg"`
 
-	// Server QUuid
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Node QUuid/Super node ID
+	// Note: This field may return·`null`, indicating that no valid values can be obtained.
 	QUUID *string `json:"QUUID,omitnil" name:"QUUID"`
 
 	// Isolation status
@@ -30803,6 +31571,39 @@ type VulDefenceEventDetail struct {
 	// RASP details
 	// Note: This field may return `null`, indicating that no valid value was found.
 	RaspDetail []*RaspInfo `json:"RaspDetail,omitnil" name:"RaspDetail"`
+
+	// Super node subnet name
+	NodeSubNetName *string `json:"NodeSubNetName,omitnil" name:"NodeSubNetName"`
+
+	// Super node subnet IP range
+	NodeSubNetCIDR *string `json:"NodeSubNetCIDR,omitnil" name:"NodeSubNetCIDR"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// ID of a super node
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// UID of a super node
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
+
+	// Super node subnet ID
+	NodeSubNetID *string `json:"NodeSubNetID,omitnil" name:"NodeSubNetID"`
+
+	// Cluster ID
+	ClusterID *string `json:"ClusterID,omitnil" name:"ClusterID"`
+
+	// Cluster name
+	ClusterName *string `json:"ClusterName,omitnil" name:"ClusterName"`
+
+
+	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+
+
+	WorkloadType *string `json:"WorkloadType,omitnil" name:"WorkloadType"`
 }
 
 type VulDefenceEventTendency struct {
@@ -30814,13 +31615,13 @@ type VulDefenceEventTendency struct {
 }
 
 type VulDefenceHost struct {
-	// Server name
+	// General node/Super node name
 	HostName *string `json:"HostName,omitnil" name:"HostName"`
 
 	// Server IP, which is the private IP
 	HostIP *string `json:"HostIP,omitnil" name:"HostIP"`
 
-	// Server QUuid
+	// Node QUuid/Super node ID
 	HostID *string `json:"HostID,omitnil" name:"HostID"`
 
 	// Plugin status. Valid values: `SUCCESS` (normal); `FAIL` (abnormal); `NO_DEFENDED` (not defended).
@@ -30834,6 +31635,30 @@ type VulDefenceHost struct {
 
 	// Update time
 	ModifyTime *string `json:"ModifyTime,omitnil" name:"ModifyTime"`
+
+	// Node type. Values: `NORMAL` (general node), `SUPER` (super node).
+	NodeType *string `json:"NodeType,omitnil" name:"NodeType"`
+
+	// Super node subnet name
+	NodeSubNetName *string `json:"NodeSubNetName,omitnil" name:"NodeSubNetName"`
+
+	// Super node subnet IP range
+	NodeSubNetCIDR *string `json:"NodeSubNetCIDR,omitnil" name:"NodeSubNetCIDR"`
+
+	// Super node subnet ID
+	NodeSubNetID *string `json:"NodeSubNetID,omitnil" name:"NodeSubNetID"`
+
+	// UID of a super node
+	NodeUniqueID *string `json:"NodeUniqueID,omitnil" name:"NodeUniqueID"`
+
+	// ID of a super node
+	NodeID *string `json:"NodeID,omitnil" name:"NodeID"`
+
+	// Pod IP
+	PodIP *string `json:"PodIP,omitnil" name:"PodIP"`
+
+	// Pod name
+	PodName *string `json:"PodName,omitnil" name:"PodName"`
 }
 
 type VulDefencePlugin struct {

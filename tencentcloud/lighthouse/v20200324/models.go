@@ -215,7 +215,11 @@ type AttachDisksRequestParams struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
-	// Whether Auto-Renewal is enabled 
+	// Specify whether to renew an instance automatically when it expires. Values: 
+	// 
+	// `NOTIFY_AND_AUTO_RENEW`: Trigger expiration notification and renew automatically; `NOTIFY_AND_MANUAL_RENEW`: Trigger expiration notification but do not renew; `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Do not trigger the notification and do not renew.
+	// 
+	// Default: `NOTIFY_AND_MANUAL_RENEW`. If `NOTIFY_AND_AUTO_RENEW` is specified, the instance is automatically renewed on a monthly basis when the account balance is sufficient.
 	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
 }
 
@@ -228,7 +232,11 @@ type AttachDisksRequest struct {
 	// Instance ID.
 	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
 
-	// Whether Auto-Renewal is enabled 
+	// Specify whether to renew an instance automatically when it expires. Values: 
+	// 
+	// `NOTIFY_AND_AUTO_RENEW`: Trigger expiration notification and renew automatically; `NOTIFY_AND_MANUAL_RENEW`: Trigger expiration notification but do not renew; `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Do not trigger the notification and do not renew.
+	// 
+	// Default: `NOTIFY_AND_MANUAL_RENEW`. If `NOTIFY_AND_AUTO_RENEW` is specified, the instance is automatically renewed on a monthly basis when the account balance is sufficient.
 	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
 }
 
@@ -273,6 +281,17 @@ func (r *AttachDisksResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *AttachDisksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type AutoMountConfiguration struct {
+	// ID of the instance to be mounted to. The instance must be **Running**.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// The mount point within the instance. Only Linux instances are supported. If it's not specified, the default mount point is "/data/disk".
+	MountPoint *string `json:"MountPoint,omitnil" name:"MountPoint"`
+
+	// The file system type. Values: `ext4` (default) and `xfs`. Only Linux instances are supported. 
+	FileSystemType *string `json:"FileSystemType,omitnil" name:"FileSystemType"`
 }
 
 type Blueprint struct {
@@ -376,14 +395,14 @@ type Bundle struct {
 	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
 
 	// System disk type.
-	// Valid values: 
-	// <li> LOCAL_BASIC: local disk</li><li> LOCAL_SSD: local SSD disk</li><li> CLOUD_BASIC: HDD cloud disk</li><li> CLOUD_SSD: SSD cloud disk</li><li> CLOUD_PREMIUM: Premium Cloud Storage</li>
+	// Values: 
+	// <li>`CLOUD_SSD`: SSD cloud disks</li><li>`CLOUD_PREMIUM`: Premium cloud disks</li>
 	SystemDiskType *string `json:"SystemDiskType,omitnil" name:"SystemDiskType"`
 
-	// System disk size.
+	// System disk size in GB.
 	SystemDiskSize *int64 `json:"SystemDiskSize,omitnil" name:"SystemDiskSize"`
 
-	// Monthly network traffic in Gb.
+	// Monthly network traffic in GB.
 	MonthlyTraffic *int64 `json:"MonthlyTraffic,omitnil" name:"MonthlyTraffic"`
 
 	// Whether Linux/Unix is supported.
@@ -552,6 +571,121 @@ func (r *CreateBlueprintResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateBlueprintResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDisksRequestParams struct {
+	// Availability zone. You can call [DescribeZones](https://intl.cloud.tencent.com/document/product/1207/57513?from_cn_redirect=1) and get the information in the `Zone` parameter re 
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
+
+	// Cloud disk size in GB.
+	DiskSize *int64 `json:"DiskSize,omitnil" name:"DiskSize"`
+
+	// Cloud disk media type. Valid values: "CLOUD_PREMIUM" (premium cloud disk), "CLOUD_SSD" (SSD cloud disk).
+	DiskType *string `json:"DiskType,omitnil" name:"DiskType"`
+
+	// Parameters of monthly subscribed cloud disks
+	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil" name:"DiskChargePrepaid"`
+
+	// Image name, which can contain up to 60 characters.
+	DiskName *string `json:"DiskName,omitnil" name:"DiskName"`
+
+	// Number of cloud disks. Range: [1, 30]. Default value: 1.
+	DiskCount *int64 `json:"DiskCount,omitnil" name:"DiskCount"`
+
+	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil" name:"DiskBackupQuota"`
+
+	// Whether to use the vouchers automatically. It defaults to No.
+	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+
+	// Automatically mount and initialize the data disk.
+	AutoMountConfiguration *AutoMountConfiguration `json:"AutoMountConfiguration,omitnil" name:"AutoMountConfiguration"`
+}
+
+type CreateDisksRequest struct {
+	*tchttp.BaseRequest
+	
+	// Availability zone. You can call [DescribeZones](https://intl.cloud.tencent.com/document/product/1207/57513?from_cn_redirect=1) and get the information in the `Zone` parameter re 
+	Zone *string `json:"Zone,omitnil" name:"Zone"`
+
+	// Cloud disk size in GB.
+	DiskSize *int64 `json:"DiskSize,omitnil" name:"DiskSize"`
+
+	// Cloud disk media type. Valid values: "CLOUD_PREMIUM" (premium cloud disk), "CLOUD_SSD" (SSD cloud disk).
+	DiskType *string `json:"DiskType,omitnil" name:"DiskType"`
+
+	// Parameters of monthly subscribed cloud disks
+	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil" name:"DiskChargePrepaid"`
+
+	// Image name, which can contain up to 60 characters.
+	DiskName *string `json:"DiskName,omitnil" name:"DiskName"`
+
+	// Number of cloud disks. Range: [1, 30]. Default value: 1.
+	DiskCount *int64 `json:"DiskCount,omitnil" name:"DiskCount"`
+
+	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil" name:"DiskBackupQuota"`
+
+	// Whether to use the vouchers automatically. It defaults to No.
+	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+
+	// Automatically mount and initialize the data disk.
+	AutoMountConfiguration *AutoMountConfiguration `json:"AutoMountConfiguration,omitnil" name:"AutoMountConfiguration"`
+}
+
+func (r *CreateDisksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDisksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Zone")
+	delete(f, "DiskSize")
+	delete(f, "DiskType")
+	delete(f, "DiskChargePrepaid")
+	delete(f, "DiskName")
+	delete(f, "DiskCount")
+	delete(f, "DiskBackupQuota")
+	delete(f, "AutoVoucher")
+	delete(f, "AutoMountConfiguration")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDisksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDisksResponseParams struct {
+	// List of IDs created by using this API. The returning of IDs does not mean that the instances are created successfully.
+	// 
+	// You can call `DescribeDisks` API, and find the disk ID in the `DiskSet` returned to check its status. If the status changes from `PENDING` to `UNATTACHED` or `ATTACHED`, the instance is created successfully.
+	DiskIdSet []*string `json:"DiskIdSet,omitnil" name:"DiskIdSet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type CreateDisksResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDisksResponseParams `json:"Response"`
+}
+
+func (r *CreateDisksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDisksResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1473,23 +1607,23 @@ type DescribeBundlesRequestParams struct {
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filter list
+	// Filter list.
 	// <li>bundle-id</li>Filter by the **bundle ID**.
 	// Type: String
 	// Required: No
-	// <li>support-platform-type</li>Filter by the **OS type**.
-	// Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
+	// <li>`support-platform-type`<li>Filter by the **system type**.
+	// Values: `LINUX_UNIX` (Linux/Unix), `WINDOWS` (Windows).
 	// Type: String
 	// Required: No
 	// <li>bundle-type</li>Filter by the **bundle type**.
-	// Valid values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle)
+	// Values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle), `STARTER_BUNDLE` (Beginner bundle); `CAREFREE_BUNDLE` (Carefree bundle);
 	// Type: String
 	// Required: No
 	// <li>bundle-state</li>Filter by the **bundle status**.
-	// Valid values: `ONLINE`, `OFFLINE`
+	// Values: `ONLINE`, `OFFLINE`
 	// Type: String
 	// Required: No
-	// Each request can contain up to 10 `Filters`, and up to 5 `Filter.Values` for each filter. You cannot specify both `BundleIds` and `Filters` at the same time.
+	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot specify both `BundleIds` and `Filters` at the same time.
 	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 
 	// AZ list, which contains all AZs by default.
@@ -1508,23 +1642,23 @@ type DescribeBundlesRequest struct {
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
 	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
 
-	// Filter list
+	// Filter list.
 	// <li>bundle-id</li>Filter by the **bundle ID**.
 	// Type: String
 	// Required: No
-	// <li>support-platform-type</li>Filter by the **OS type**.
-	// Valid values: `LINUX_UNIX` (Linux or Unix), `WINDOWS` (Windows)
+	// <li>`support-platform-type`<li>Filter by the **system type**.
+	// Values: `LINUX_UNIX` (Linux/Unix), `WINDOWS` (Windows).
 	// Type: String
 	// Required: No
 	// <li>bundle-type</li>Filter by the **bundle type**.
-	// Valid values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle)
+	// Values: `GENERAL_BUNDLE` (General bundle), `STORAGE_BUNDLE` (Storage bundle), `ENTERPRISE_BUNDLE` (Enterprise bundle), `EXCLUSIVE_BUNDLE` (Dedicated bundle), `BEFAST_BUNDLE` (BeFast bundle), `STARTER_BUNDLE` (Beginner bundle); `CAREFREE_BUNDLE` (Carefree bundle);
 	// Type: String
 	// Required: No
 	// <li>bundle-state</li>Filter by the **bundle status**.
-	// Valid values: `ONLINE`, `OFFLINE`
+	// Values: `ONLINE`, `OFFLINE`
 	// Type: String
 	// Required: No
-	// Each request can contain up to 10 `Filters`, and up to 5 `Filter.Values` for each filter. You cannot specify both `BundleIds` and `Filters` at the same time.
+	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot specify both `BundleIds` and `Filters` at the same time.
 	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
 
 	// AZ list, which contains all AZs by default.
@@ -3770,7 +3904,13 @@ type DiskChargePrepaid struct {
 	// Purchase duration.
 	Period *int64 `json:"Period,omitnil" name:"Period"`
 
-	// Whether Auto-Renewal is enabled 
+	// Auto-Renewal flag. Valid values:
+	// 
+	// `NOTIFY_AND_AUTO_RENEW`: Trigger expiration notification and renew automatically
+	// `NOTIFY_AND_MANUAL_RENEW`: Trigger expiration notification but do not renew
+	// `u200cDISABLE_NOTIFY_AND_AUTO_RENEW`: Neither trigger expiration notification nor renew
+	// 
+	// Default: `NOTIFY_AND_MANUAL_RENEW`. If `NOTIFY_AND_AUTO_RENEW` is specified, the instance is automatically renewed on a monthly basis when the account balance is sufficient.
 	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
 
 	// Purchase duration unit. Default value: "m" (month)
@@ -4559,6 +4699,60 @@ type InternetAccessible struct {
 }
 
 // Predefined struct for user
+type IsolateDisksRequestParams struct {
+	// IDs of cloud disks. The value can be obtained from the `InstanceId` parameter returned by the [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1) API. Up to 20 disks can be processed at a time.
+	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+}
+
+type IsolateDisksRequest struct {
+	*tchttp.BaseRequest
+	
+	// IDs of cloud disks. The value can be obtained from the `InstanceId` parameter returned by the [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1) API. Up to 20 disks can be processed at a time.
+	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+}
+
+func (r *IsolateDisksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateDisksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsolateDisksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateDisksResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type IsolateDisksResponse struct {
+	*tchttp.BaseResponse
+	Response *IsolateDisksResponseParams `json:"Response"`
+}
+
+func (r *IsolateDisksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateDisksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type IsolateInstancesRequestParams struct {
 	// IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 20 instances can be specified at the same time.
 	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
@@ -4653,13 +4847,16 @@ type LoginConfiguration struct {
 	// <li>`No`: Custom. `Password` must be specified. </li>
 	AutoGeneratePassword *string `json:"AutoGeneratePassword,omitnil" name:"AutoGeneratePassword"`
 
-	// Instace login password.
-	// For Windows instances, the password must contain 12 to 30 characters of the following types. It cannot start with “/” and cannot include the username.
-	// <li>[a-z]</li>
-	// <li>[A-Z]</li>
-	// <li>[0-9]</li>
-	// <li>[()`~!@#$%^&*-+=_|{}[]:;' <>,.?/]</li>
+	// Instance login password. 
+	// For Windows instances, the password must contain 12 to 30 characters of the following types. It cannot start with “/” and cannot include the username. 
+	// <li>Lowercase letters: [a–z]</li>
+	// <li>Uppercase letters: [A–Z]</li>
+	// <li>Digits: 0-9</li>
+	// <li>Symbols: ()`~!@#$%^&*-+=_|{}[]:;'<>,.?/</li>
 	Password *string `json:"Password,omitnil" name:"Password"`
+
+
+	KeyIds []*string `json:"KeyIds,omitnil" name:"KeyIds"`
 }
 
 type LoginSettings struct {
@@ -5423,17 +5620,176 @@ type RegionInfo struct {
 }
 
 type RenewDiskChargePrepaid struct {
-	// Purchase duration.
+	// Renewal period
 	Period *int64 `json:"Period,omitnil" name:"Period"`
 
-	// Whether Auto-Renewal is enabled 
+	// Whether to renew the disk automatically. Values:
+	// 
+	// `NOTIFY_AND_AUTO_RENEW`: Trigger expiration notification and renew automatically; `NOTIFY_AND_MANUAL_RENEW`: Trigger expiration notification but do not renew; `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Do not trigger the notification and do not renew.
+	// 
+	// Default: `NOTIFY_AND_MANUAL_RENEW`. If `NOTIFY_AND_AUTO_RENEW` is specified, the instance is automatically renewed on a monthly basis when the account balance is sufficient.
 	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
 
-	// Duration unit. Default value: "m" (month).
+	// Unit of the period. Values: `m` (month).
 	TimeUnit *string `json:"TimeUnit,omitnil" name:"TimeUnit"`
 
-	// Expiration time of the current instance.
+	// Expiration time of the current instance, such as "2018-01-01 00:00:00". Specify this parameter to align the expiration time of the instance and attached cloud disks. `CurInstanceDeadline` and `Period` cannot be both specified.
 	CurInstanceDeadline *string `json:"CurInstanceDeadline,omitnil" name:"CurInstanceDeadline"`
+}
+
+// Predefined struct for user
+type RenewDisksRequestParams struct {
+	// IDs of cloud disks. The value can be obtained from the `DiskId` parameter returned by the [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1) API. Up to 50 disks can be requested at a time.
+	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+
+	// Parameter settings for renewing the monthly subscribed cloud disk.
+	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil" name:"RenewDiskChargePrepaid"`
+
+	// Whether to use the vouchers automatically. It defaults to No.
+	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+}
+
+type RenewDisksRequest struct {
+	*tchttp.BaseRequest
+	
+	// IDs of cloud disks. The value can be obtained from the `DiskId` parameter returned by the [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1) API. Up to 50 disks can be requested at a time.
+	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+
+	// Parameter settings for renewing the monthly subscribed cloud disk.
+	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil" name:"RenewDiskChargePrepaid"`
+
+	// Whether to use the vouchers automatically. It defaults to No.
+	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+}
+
+func (r *RenewDisksRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RenewDisksRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DiskIds")
+	delete(f, "RenewDiskChargePrepaid")
+	delete(f, "AutoVoucher")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RenewDisksRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RenewDisksResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type RenewDisksResponse struct {
+	*tchttp.BaseResponse
+	Response *RenewDisksResponseParams `json:"Response"`
+}
+
+func (r *RenewDisksResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RenewDisksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RenewInstancesRequestParams struct {
+	// IDs of one or more instances to be operated. The value can be obtained from the `InstanceId` parameter returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API. Up to 100 instances can be requested at a time.
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+
+	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil" name:"InstanceChargePrepaid"`
+
+	// Whether to renew elastic data disks. Values: 
+	// `TRUE`: Renew the elastic data disks attached to the instance as well when the related instance is renewed.
+	// `FALSE`: Do not renew the elastic data disks attached to the instance as well when the related instance is renewed.
+	// Default: `TRUE`
+	RenewDataDisk *bool `json:"RenewDataDisk,omitnil" name:"RenewDataDisk"`
+
+	// Whether to automatically use vouchers. Values:
+	// `TRUE`: Use vouchers for payment automatically.
+	// `FALSE`: Do not use vouchers for payment automatically.
+	// Default: `FALSE`.
+	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+}
+
+type RenewInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// IDs of one or more instances to be operated. The value can be obtained from the `InstanceId` parameter returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API. Up to 100 instances can be requested at a time.
+	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+
+	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil" name:"InstanceChargePrepaid"`
+
+	// Whether to renew elastic data disks. Values: 
+	// `TRUE`: Renew the elastic data disks attached to the instance as well when the related instance is renewed.
+	// `FALSE`: Do not renew the elastic data disks attached to the instance as well when the related instance is renewed.
+	// Default: `TRUE`
+	RenewDataDisk *bool `json:"RenewDataDisk,omitnil" name:"RenewDataDisk"`
+
+	// Whether to automatically use vouchers. Values:
+	// `TRUE`: Use vouchers for payment automatically.
+	// `FALSE`: Do not use vouchers for payment automatically.
+	// Default: `FALSE`.
+	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+}
+
+func (r *RenewInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RenewInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	delete(f, "InstanceChargePrepaid")
+	delete(f, "RenewDataDisk")
+	delete(f, "AutoVoucher")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RenewInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RenewInstancesResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type RenewInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *RenewInstancesResponseParams `json:"Response"`
+}
+
+func (r *RenewInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RenewInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

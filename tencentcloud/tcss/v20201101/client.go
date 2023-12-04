@@ -1411,6 +1411,7 @@ func NewCreateAssetImageRegistryScanTaskResponse() (response *CreateAssetImageRe
 // This API is used to create an image scan task for an image repository.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateAssetImageRegistryScanTask(request *CreateAssetImageRegistryScanTaskRequest) (response *CreateAssetImageRegistryScanTaskResponse, err error) {
@@ -1421,6 +1422,7 @@ func (c *Client) CreateAssetImageRegistryScanTask(request *CreateAssetImageRegis
 // This API is used to create an image scan task for an image repository.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateAssetImageRegistryScanTaskWithContext(ctx context.Context, request *CreateAssetImageRegistryScanTaskRequest) (response *CreateAssetImageRegistryScanTaskResponse, err error) {
@@ -1462,6 +1464,7 @@ func NewCreateAssetImageRegistryScanTaskOneKeyResponse() (response *CreateAssetI
 // This API is used to create a quick image scan task for an image repository.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateAssetImageRegistryScanTaskOneKey(request *CreateAssetImageRegistryScanTaskOneKeyRequest) (response *CreateAssetImageRegistryScanTaskOneKeyResponse, err error) {
@@ -1472,6 +1475,7 @@ func (c *Client) CreateAssetImageRegistryScanTaskOneKey(request *CreateAssetImag
 // This API is used to create a quick image scan task for an image repository.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) CreateAssetImageRegistryScanTaskOneKeyWithContext(ctx context.Context, request *CreateAssetImageRegistryScanTaskOneKeyRequest) (response *CreateAssetImageRegistryScanTaskOneKeyResponse, err error) {
@@ -10592,6 +10596,7 @@ func NewDescribeK8sApiAbnormalEventInfoResponse() (response *DescribeK8sApiAbnor
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeK8sApiAbnormalEventInfo(request *DescribeK8sApiAbnormalEventInfoRequest) (response *DescribeK8sApiAbnormalEventInfoResponse, err error) {
     return c.DescribeK8sApiAbnormalEventInfoWithContext(context.Background(), request)
 }
@@ -10602,6 +10607,7 @@ func (c *Client) DescribeK8sApiAbnormalEventInfo(request *DescribeK8sApiAbnormal
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DescribeK8sApiAbnormalEventInfoWithContext(ctx context.Context, request *DescribeK8sApiAbnormalEventInfoRequest) (response *DescribeK8sApiAbnormalEventInfoResponse, err error) {
     if request == nil {
         request = NewDescribeK8sApiAbnormalEventInfoRequest()
@@ -15682,6 +15688,69 @@ func (c *Client) DescribeVulLevelSummaryWithContext(ctx context.Context, request
     return
 }
 
+func NewDescribeVulRegistryImageListRequest() (request *DescribeVulRegistryImageListRequest) {
+    request = &DescribeVulRegistryImageListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcss", APIVersion, "DescribeVulRegistryImageList")
+    
+    
+    return
+}
+
+func NewDescribeVulRegistryImageListResponse() (response *DescribeVulRegistryImageListResponse) {
+    response = &DescribeVulRegistryImageListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeVulRegistryImageList
+// This API is used to query the list of repository images affected by vulnerabilities.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeVulRegistryImageList(request *DescribeVulRegistryImageListRequest) (response *DescribeVulRegistryImageListResponse, err error) {
+    return c.DescribeVulRegistryImageListWithContext(context.Background(), request)
+}
+
+// DescribeVulRegistryImageList
+// This API is used to query the list of repository images affected by vulnerabilities.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
+//  INVALIDPARAMETER_PARSINGERROR = "InvalidParameter.ParsingError"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeVulRegistryImageListWithContext(ctx context.Context, request *DescribeVulRegistryImageListRequest) (response *DescribeVulRegistryImageListResponse, err error) {
+    if request == nil {
+        request = NewDescribeVulRegistryImageListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVulRegistryImageList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeVulRegistryImageListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeVulScanAuthorizedImageSummaryRequest() (request *DescribeVulScanAuthorizedImageSummaryRequest) {
     request = &DescribeVulScanAuthorizedImageSummaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -16669,6 +16738,7 @@ func NewModifyAssetImageRegistryScanStopOneKeyResponse() (response *ModifyAssetI
 // This API is used to stop a quick image scan task for an image repository.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyAssetImageRegistryScanStopOneKey(request *ModifyAssetImageRegistryScanStopOneKeyRequest) (response *ModifyAssetImageRegistryScanStopOneKeyResponse, err error) {
@@ -16679,6 +16749,7 @@ func (c *Client) ModifyAssetImageRegistryScanStopOneKey(request *ModifyAssetImag
 // This API is used to stop a quick image scan task for an image repository.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyAssetImageRegistryScanStopOneKeyWithContext(ctx context.Context, request *ModifyAssetImageRegistryScanStopOneKeyRequest) (response *ModifyAssetImageRegistryScanStopOneKeyResponse, err error) {
@@ -16902,6 +16973,7 @@ func NewModifyEscapeEventStatusResponse() (response *ModifyEscapeEventStatusResp
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyEscapeEventStatus(request *ModifyEscapeEventStatusRequest) (response *ModifyEscapeEventStatusResponse, err error) {
     return c.ModifyEscapeEventStatusWithContext(context.Background(), request)
 }
@@ -16913,6 +16985,7 @@ func (c *Client) ModifyEscapeEventStatus(request *ModifyEscapeEventStatusRequest
 //  AUTHFAILURE = "AuthFailure"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyEscapeEventStatusWithContext(ctx context.Context, request *ModifyEscapeEventStatusRequest) (response *ModifyEscapeEventStatusResponse, err error) {
     if request == nil {
         request = NewModifyEscapeEventStatusRequest()
@@ -18782,12 +18855,7 @@ func NewStopVulScanTaskResponse() (response *StopVulScanTaskResponse) {
 // This API is used to stop a vulnerability scan task.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) StopVulScanTask(request *StopVulScanTaskRequest) (response *StopVulScanTaskResponse, err error) {
     return c.StopVulScanTaskWithContext(context.Background(), request)
 }
@@ -18796,12 +18864,7 @@ func (c *Client) StopVulScanTask(request *StopVulScanTaskRequest) (response *Sto
 // This API is used to stop a vulnerability scan task.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  INVALIDPARAMETER_MISSINGPARAMETER = "InvalidParameter.MissingParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) StopVulScanTaskWithContext(ctx context.Context, request *StopVulScanTaskRequest) (response *StopVulScanTaskResponse, err error) {
     if request == nil {
         request = NewStopVulScanTaskRequest()

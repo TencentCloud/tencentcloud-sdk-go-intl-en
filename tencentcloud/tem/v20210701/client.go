@@ -150,6 +150,7 @@ func NewCreateApplicationAutoscalerResponse() (response *CreateApplicationAutosc
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INVALIDPARAMETERVALUE_ATLEASTONESCALERRULESHOULDBEAPPLIED = "InvalidParameterValue.AtLeastOneScalerRuleShouldBeApplied"
 //  INVALIDPARAMETERVALUE_AUTOSCALERLARGERTHANONE = "InvalidParameterValue.AutoScalerLargerThanOne"
+//  INVALIDPARAMETERVALUE_AUTOSCALERNAMEINVALID = "InvalidParameterValue.AutoScalerNameInvalid"
 //  INVALIDPARAMETERVALUE_CRONHPAREPLICASINVALID = "InvalidParameterValue.CronHpaReplicasInvalid"
 //  INVALIDPARAMETERVALUE_HPAMETRICSINVALID = "InvalidParameterValue.HpaMetricsInvalid"
 //  INVALIDPARAMETERVALUE_HPATHRESHOLDINVALID = "InvalidParameterValue.HpaThresholdInvalid"
@@ -173,6 +174,7 @@ func (c *Client) CreateApplicationAutoscaler(request *CreateApplicationAutoscale
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INVALIDPARAMETERVALUE_ATLEASTONESCALERRULESHOULDBEAPPLIED = "InvalidParameterValue.AtLeastOneScalerRuleShouldBeApplied"
 //  INVALIDPARAMETERVALUE_AUTOSCALERLARGERTHANONE = "InvalidParameterValue.AutoScalerLargerThanOne"
+//  INVALIDPARAMETERVALUE_AUTOSCALERNAMEINVALID = "InvalidParameterValue.AutoScalerNameInvalid"
 //  INVALIDPARAMETERVALUE_CRONHPAREPLICASINVALID = "InvalidParameterValue.CronHpaReplicasInvalid"
 //  INVALIDPARAMETERVALUE_HPAMETRICSINVALID = "InvalidParameterValue.HpaMetricsInvalid"
 //  INVALIDPARAMETERVALUE_HPATHRESHOLDINVALID = "InvalidParameterValue.HpaThresholdInvalid"
@@ -225,6 +227,7 @@ func NewCreateApplicationServiceResponse() (response *CreateApplicationServiceRe
 //
 // error code that may be returned:
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INTERNALERROR_DESCRIBESERVICELISTERROR = "InternalError.DescribeServiceListError"
 //  INVALIDPARAMETER_APPLICATIONACCESSSERVICEREACHMAXIMUM = "InvalidParameter.ApplicationAccessServiceReachMaximum"
 //  INVALIDPARAMETER_LBSERVICECANNOTSUPPORTTCPUDPSAMETIME = "InvalidParameter.LBServiceCannotSupportTcpUdpSameTime"
 //  INVALIDPARAMETER_MUSTPROVIDEPORTMAPPINGRULES = "InvalidParameter.MustProvidePortMappingRules"
@@ -254,6 +257,7 @@ func (c *Client) CreateApplicationService(request *CreateApplicationServiceReque
 //
 // error code that may be returned:
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
+//  INTERNALERROR_DESCRIBESERVICELISTERROR = "InternalError.DescribeServiceListError"
 //  INVALIDPARAMETER_APPLICATIONACCESSSERVICEREACHMAXIMUM = "InvalidParameter.ApplicationAccessServiceReachMaximum"
 //  INVALIDPARAMETER_LBSERVICECANNOTSUPPORTTCPUDPSAMETIME = "InvalidParameter.LBServiceCannotSupportTcpUdpSameTime"
 //  INVALIDPARAMETER_MUSTPROVIDEPORTMAPPINGRULES = "InvalidParameter.MustProvidePortMappingRules"
@@ -432,6 +436,7 @@ func NewCreateEnvironmentResponse() (response *CreateEnvironmentResponse) {
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INVALIDPARAMETER_UNAUTHORIZEDORMISSINGROLE = "InvalidParameter.UnauthorizedOrMissingRole"
 //  INVALIDPARAMETER_VPCOVERQUOTA = "InvalidParameter.VpcOverQuota"
+//  INVALIDPARAMETERVALUE_CREATENAMESPACEUNSUPPORTREGIONERROR = "InvalidParameterValue.CreateNamespaceUnsupportRegionError"
 //  INVALIDPARAMETERVALUE_DAILYCREATENAMESPACEREACHMAXIMUM = "InvalidParameterValue.DailyCreateNamespaceReachMaximum"
 //  INVALIDPARAMETERVALUE_NAMESPACEDUPLICATEERROR = "InvalidParameterValue.NamespaceDuplicateError"
 //  INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
@@ -451,6 +456,7 @@ func (c *Client) CreateEnvironment(request *CreateEnvironmentRequest) (response 
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INVALIDPARAMETER_UNAUTHORIZEDORMISSINGROLE = "InvalidParameter.UnauthorizedOrMissingRole"
 //  INVALIDPARAMETER_VPCOVERQUOTA = "InvalidParameter.VpcOverQuota"
+//  INVALIDPARAMETERVALUE_CREATENAMESPACEUNSUPPORTREGIONERROR = "InvalidParameterValue.CreateNamespaceUnsupportRegionError"
 //  INVALIDPARAMETERVALUE_DAILYCREATENAMESPACEREACHMAXIMUM = "InvalidParameterValue.DailyCreateNamespaceReachMaximum"
 //  INVALIDPARAMETERVALUE_NAMESPACEDUPLICATEERROR = "InvalidParameterValue.NamespaceDuplicateError"
 //  INVALIDPARAMETERVALUE_NAMESPACEREACHMAXIMUM = "InvalidParameterValue.NamespaceReachMaximum"
@@ -924,6 +930,7 @@ func NewDeployApplicationResponse() (response *DeployApplicationResponse) {
 //  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_OSNOTSUPPORT = "InvalidParameterValue.OsNotSupport"
 //  INVALIDPARAMETERVALUE_POSTSTARTNOTVALID = "InvalidParameterValue.PostStartNotValid"
+//  INVALIDPARAMETERVALUE_PRESTOPNOTVALID = "InvalidParameterValue.PreStopNotValid"
 //  INVALIDPARAMETERVALUE_REGISTRYNOTBIND = "InvalidParameterValue.RegistryNotBind"
 //  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
 //  INVALIDPARAMETERVALUE_SERVICENOTBELONGTOAPPID = "InvalidParameterValue.ServiceNotBelongToAppid"
@@ -938,6 +945,7 @@ func NewDeployApplicationResponse() (response *DeployApplicationResponse) {
 //  MISSINGPARAMETER_IMGREPONULL = "MissingParameter.ImgRepoNull"
 //  MISSINGPARAMETER_LOGSETORTOPICNULL = "MissingParameter.LogsetOrTopicNull"
 //  MISSINGPARAMETER_PKGNAMENULL = "MissingParameter.PkgNameNull"
+//  MISSINGPARAMETER_REPOSERVERNULL = "MissingParameter.RepoServerNull"
 //  MISSINGPARAMETER_SERVICEIDNULL = "MissingParameter.ServiceIdNull"
 //  MISSINGPARAMETER_SVCREPONOTREADY = "MissingParameter.SvcRepoNotReady"
 //  MISSINGPARAMETER_VPCSERVICESUBNETNULL = "MissingParameter.VpcServiceSubnetNull"
@@ -978,6 +986,7 @@ func (c *Client) DeployApplication(request *DeployApplicationRequest) (response 
 //  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_OSNOTSUPPORT = "InvalidParameterValue.OsNotSupport"
 //  INVALIDPARAMETERVALUE_POSTSTARTNOTVALID = "InvalidParameterValue.PostStartNotValid"
+//  INVALIDPARAMETERVALUE_PRESTOPNOTVALID = "InvalidParameterValue.PreStopNotValid"
 //  INVALIDPARAMETERVALUE_REGISTRYNOTBIND = "InvalidParameterValue.RegistryNotBind"
 //  INVALIDPARAMETERVALUE_SERVICENAMEDUPLICATEERROR = "InvalidParameterValue.ServiceNameDuplicateError"
 //  INVALIDPARAMETERVALUE_SERVICENOTBELONGTOAPPID = "InvalidParameterValue.ServiceNotBelongToAppid"
@@ -992,6 +1001,7 @@ func (c *Client) DeployApplication(request *DeployApplicationRequest) (response 
 //  MISSINGPARAMETER_IMGREPONULL = "MissingParameter.ImgRepoNull"
 //  MISSINGPARAMETER_LOGSETORTOPICNULL = "MissingParameter.LogsetOrTopicNull"
 //  MISSINGPARAMETER_PKGNAMENULL = "MissingParameter.PkgNameNull"
+//  MISSINGPARAMETER_REPOSERVERNULL = "MissingParameter.RepoServerNull"
 //  MISSINGPARAMETER_SERVICEIDNULL = "MissingParameter.ServiceIdNull"
 //  MISSINGPARAMETER_SVCREPONOTREADY = "MissingParameter.SvcRepoNotReady"
 //  MISSINGPARAMETER_VPCSERVICESUBNETNULL = "MissingParameter.VpcServiceSubnetNull"
@@ -1041,8 +1051,10 @@ func NewDescribeApplicationAutoscalerListResponse() (response *DescribeApplicati
 // This API is used to query the scaling rules of an application.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
@@ -1054,8 +1066,10 @@ func (c *Client) DescribeApplicationAutoscalerList(request *DescribeApplicationA
 // This API is used to query the scaling rules of an application.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
@@ -1183,6 +1197,7 @@ func NewDescribeApplicationPodsResponse() (response *DescribeApplicationPodsResp
 //  FAILEDOPERATION_DESCRIBERUNPODLISTERROR = "FailedOperation.DescribeRunPodListError"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DESCRIBERUNPODLISTERROR = "InternalError.DescribeRunPodListError"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
@@ -1201,6 +1216,7 @@ func (c *Client) DescribeApplicationPods(request *DescribeApplicationPodsRequest
 //  FAILEDOPERATION_DESCRIBERUNPODLISTERROR = "FailedOperation.DescribeRunPodListError"
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_DESCRIBERUNPODLISTERROR = "InternalError.DescribeRunPodListError"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 //  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
@@ -1364,6 +1380,7 @@ func NewDescribeApplicationsStatusResponse() (response *DescribeApplicationsStat
 // error code that may be returned:
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
+//  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
@@ -1378,6 +1395,7 @@ func (c *Client) DescribeApplicationsStatus(request *DescribeApplicationsStatusR
 // error code that may be returned:
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
+//  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 //  RESOURCENOTFOUND_MICROSERVICEOFFLINE = "ResourceNotFound.MicroserviceOffline"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
@@ -1709,6 +1727,7 @@ func NewDescribeIngressResponse() (response *DescribeIngressResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR_DESCRIBEINGRESSERROR = "InternalError.DescribeIngressError"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
@@ -1721,6 +1740,7 @@ func (c *Client) DescribeIngress(request *DescribeIngressRequest) (response *Des
 //
 // error code that may be returned:
 //  INTERNALERROR_DESCRIBEINGRESSERROR = "InternalError.DescribeIngressError"
+//  INVALIDPARAMETERVALUE_NAMESPACENOTBELONGTOAPPID = "InvalidParameterValue.NamespaceNotBelongToAppid"
 //  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  RESOURCENOTFOUND_VERSIONNAMESPACENOTFOUND = "ResourceNotFound.VersionNamespaceNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
@@ -2744,6 +2764,7 @@ func NewRestartApplicationResponse() (response *RestartApplicationResponse) {
 // error code that may be returned:
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
+//  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 //  OPERATIONDENIED_RESOURCEISOLATED = "OperationDenied.ResourceIsolated"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
@@ -2759,6 +2780,7 @@ func (c *Client) RestartApplication(request *RestartApplicationRequest) (respons
 // error code that may be returned:
 //  INTERNALERROR_DEFAULTINTERNALERROR = "InternalError.DefaultInternalError"
 //  INTERNALERROR_RESTARTAPPLICATIONERROR = "InternalError.RestartApplicationError"
+//  INVALIDPARAMETERVALUE_TEMIDINVALID = "InvalidParameterValue.TemIdInvalid"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 //  OPERATIONDENIED_RESOURCEISOLATED = "OperationDenied.ResourceIsolated"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
@@ -2870,6 +2892,7 @@ func NewRollingUpdateApplicationByVersionResponse() (response *RollingUpdateAppl
 //  INVALIDPARAMETERVALUE_VERSIONLENGTHLIMIT = "InvalidParameterValue.VersionLengthLimit"
 //  INVALIDPARAMETERVALUE_VERSIONLOWERCASE = "InvalidParameterValue.VersionLowerCase"
 //  MISSINGPARAMETER_DEPLOYMODENULL = "MissingParameter.DeployModeNull"
+//  MISSINGPARAMETER_DEPLOYVERSIONNULL = "MissingParameter.DeployVersionNull"
 //  MISSINGPARAMETER_LOGSETORTOPICNULL = "MissingParameter.LogsetOrTopicNull"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 //  MISSINGPARAMETER_SVCREPONOTREADY = "MissingParameter.SvcRepoNotReady"
@@ -2903,6 +2926,7 @@ func (c *Client) RollingUpdateApplicationByVersion(request *RollingUpdateApplica
 //  INVALIDPARAMETERVALUE_VERSIONLENGTHLIMIT = "InvalidParameterValue.VersionLengthLimit"
 //  INVALIDPARAMETERVALUE_VERSIONLOWERCASE = "InvalidParameterValue.VersionLowerCase"
 //  MISSINGPARAMETER_DEPLOYMODENULL = "MissingParameter.DeployModeNull"
+//  MISSINGPARAMETER_DEPLOYVERSIONNULL = "MissingParameter.DeployVersionNull"
 //  MISSINGPARAMETER_LOGSETORTOPICNULL = "MissingParameter.LogsetOrTopicNull"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
 //  MISSINGPARAMETER_SVCREPONOTREADY = "MissingParameter.SvcRepoNotReady"
@@ -2953,6 +2977,7 @@ func NewStopApplicationResponse() (response *StopApplicationResponse) {
 // error code that may be returned:
 //  INTERNALERROR_STOPAPPLICATIONERROR = "InternalError.StopApplicationError"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) StopApplication(request *StopApplicationRequest) (response *StopApplicationResponse, err error) {
@@ -2965,6 +2990,7 @@ func (c *Client) StopApplication(request *StopApplicationRequest) (response *Sto
 // error code that may be returned:
 //  INTERNALERROR_STOPAPPLICATIONERROR = "InternalError.StopApplicationError"
 //  MISSINGPARAMETER_NAMESPACEIDNULL = "MissingParameter.NamespaceIdNull"
+//  RESOURCENOTFOUND_SERVICENOTFOUND = "ResourceNotFound.ServiceNotFound"
 //  RESOURCENOTFOUND_SERVICERUNNINGVERSIONNOTFOUND = "ResourceNotFound.ServiceRunningVersionNotFound"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATION = "UnauthorizedOperation.UnauthorizedOperation"
 func (c *Client) StopApplicationWithContext(ctx context.Context, request *StopApplicationRequest) (response *StopApplicationResponse, err error) {

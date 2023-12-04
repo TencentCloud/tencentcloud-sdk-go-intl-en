@@ -4759,6 +4759,9 @@ type RollingUpdateApplicationByVersionRequestParams struct {
 
 	// Minimum number of available instances during the deployment
 	MinAvailable *int64 `json:"MinAvailable,omitnil" name:"MinAvailable"`
+
+	// Whether to enable force release
+	Force *bool `json:"Force,omitnil" name:"Force"`
 }
 
 type RollingUpdateApplicationByVersionRequest struct {
@@ -4793,6 +4796,9 @@ type RollingUpdateApplicationByVersionRequest struct {
 
 	// Minimum number of available instances during the deployment
 	MinAvailable *int64 `json:"MinAvailable,omitnil" name:"MinAvailable"`
+
+	// Whether to enable force release
+	Force *bool `json:"Force,omitnil" name:"Force"`
 }
 
 func (r *RollingUpdateApplicationByVersionRequest) ToJsonString() string {
@@ -4817,6 +4823,7 @@ func (r *RollingUpdateApplicationByVersionRequest) FromJsonString(s string) erro
 	delete(f, "BatchInterval")
 	delete(f, "BetaBatchNum")
 	delete(f, "MinAvailable")
+	delete(f, "Force")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RollingUpdateApplicationByVersionRequest has unknown keys!", "")
 	}
