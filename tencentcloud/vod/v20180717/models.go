@@ -8631,7 +8631,7 @@ type DescribeCDNDomainsRequestParams struct {
 	// The starting offset of paged pull. Default value: 0.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	// VOD [Subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?from_cn_redirect=1) ID. If you want to access resources in the Subapplication, enter the Subapplication ID in this field; otherwise, you do not need to fill in this field.
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -8647,7 +8647,7 @@ type DescribeCDNDomainsRequest struct {
 	// The starting offset of paged pull. Default value: 0.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	// VOD [Subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?from_cn_redirect=1) ID. If you want to access resources in the Subapplication, enter the Subapplication ID in this field; otherwise, you do not need to fill in this field.
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -11790,9 +11790,9 @@ type DescribeTaskDetailResponseParams struct {
 	// <li>`FastClipMedia`: Quick clipping</li>
 	// <li>`RemoveWatermarkTask`: Watermark removal</li>
 	// <li>`DescribeFileAttributesTask`: Getting file attributes</li>
-	// <li>`RebuildMedia`; Remastering audio/video</li>
 	// <li> `ReviewAudioVideo`: Moderation</li>
 	// <li>`ExtractTraceWatermark`: Digital watermark extraction</li>
+	// <li>`QualityEnhance：Enhance audio/video</li>
 	TaskType *string `json:"TaskType,omitnil" name:"TaskType"`
 
 	// Task status. Valid values:
@@ -12955,6 +12955,117 @@ func (r *EnhanceMediaByTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type EnhanceMediaQualityOutputConfig struct {
+	// Output file name, up to 64 characters. The system will specify the file name by default
+	MediaName *string `json:"MediaName,omitnil" name:"MediaName"`
+
+	// Category ID, used for media classification management, can be obtained by [creating a category](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) interface, create a category, get the category ID.
+	// <li>Default value: 0, which means other categories.</li>
+	ClassId *int64 `json:"ClassId,omitnil" name:"ClassId"`
+
+	// The expiration time of the output file, the file will be deleted after this time, the default is never to expire, the format is in accordance with the ISO 8601 standard, see [ISO date format description](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I)。
+	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+}
+
+// Predefined struct for user
+type EnhanceMediaQualityRequestParams struct {
+	// Media file ID, that is, the globally unique identifier of the file on VOD, which is assigned by the VOD backend after successful upload. This field can be obtained from [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media).
+	FileId *string `json:"FileId,omitnil" name:"FileId"`
+
+	// Remaster template ID, please contact Tencent Cloud for details
+	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
+
+	// <b>VOD [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you want to access resources in the Subapplication, enter the Subapplication ID in this field; otherwise, you do not need to fill in this field.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// Configuration of media files after Remaster
+	OutputConfig *EnhanceMediaQualityOutputConfig `json:"OutputConfig,omitnil" name:"OutputConfig"`
+
+	// The identification code used for deduplication. If there has been a request with the same identification code within three days, this request will return an error. Up to 50 characters, without or with an empty string means no deduplication
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
+
+	// Source context, used to pass through user request information, Remaster completion callback will return this field value, up to 1000 characters
+	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
+
+	// The priority of the task, the higher the value, the higher the priority, the range is -10 to 10, not filled in means 0
+	TasksPriority *int64 `json:"TasksPriority,omitnil" name:"TasksPriority"`
+}
+
+type EnhanceMediaQualityRequest struct {
+	*tchttp.BaseRequest
+	
+	// Media file ID, that is, the globally unique identifier of the file on VOD, which is assigned by the VOD backend after successful upload. This field can be obtained from [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [vod console](https://console.cloud.tencent.com/vod/media).
+	FileId *string `json:"FileId,omitnil" name:"FileId"`
+
+	// Remaster template ID, please contact Tencent Cloud for details
+	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
+
+	// <b>VOD [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you want to access resources in the Subapplication, enter the Subapplication ID in this field; otherwise, you do not need to fill in this field.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// Configuration of media files after Remaster
+	OutputConfig *EnhanceMediaQualityOutputConfig `json:"OutputConfig,omitnil" name:"OutputConfig"`
+
+	// The identification code used for deduplication. If there has been a request with the same identification code within three days, this request will return an error. Up to 50 characters, without or with an empty string means no deduplication
+	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
+
+	// Source context, used to pass through user request information, Remaster completion callback will return this field value, up to 1000 characters
+	SessionContext *string `json:"SessionContext,omitnil" name:"SessionContext"`
+
+	// The priority of the task, the higher the value, the higher the priority, the range is -10 to 10, not filled in means 0
+	TasksPriority *int64 `json:"TasksPriority,omitnil" name:"TasksPriority"`
+}
+
+func (r *EnhanceMediaQualityRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnhanceMediaQualityRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FileId")
+	delete(f, "Definition")
+	delete(f, "SubAppId")
+	delete(f, "OutputConfig")
+	delete(f, "SessionId")
+	delete(f, "SessionContext")
+	delete(f, "TasksPriority")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "EnhanceMediaQualityRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type EnhanceMediaQualityResponseParams struct {
+	// Remaster task ID
+	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type EnhanceMediaQualityResponse struct {
+	*tchttp.BaseResponse
+	Response *EnhanceMediaQualityResponseParams `json:"Response"`
+}
+
+func (r *EnhanceMediaQualityResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *EnhanceMediaQualityResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type EventContent struct {
 	// Event handler. The caller must call `ConfirmEvents` to confirm that the message has been received, and the confirmation is valid for 30 seconds. After the confirmation expires, the event can be obtained again.
 	EventHandle *string `json:"EventHandle,omitnil" name:"EventHandle"`
@@ -13073,6 +13184,10 @@ type EventContent struct {
 	// 
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	QualityInspectCompleteEvent *QualityInspectTask `json:"QualityInspectCompleteEvent,omitnil" name:"QualityInspectCompleteEvent"`
+
+	// Remaster completion event, valid when the event type is QualityEnhanceComplete.
+	// Pay attention to: this field may return null, indicating that no valid value can be obtained
+	QualityEnhanceCompleteEvent *QualityEnhanceTask `json:"QualityEnhanceCompleteEvent,omitnil" name:"QualityEnhanceCompleteEvent"`
 }
 
 // Predefined struct for user
@@ -23329,12 +23444,37 @@ func (r *SetDrmKeyProviderInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SetVodDomainCertificateRequestParams struct {
+	// Domain name
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
+	// The operation type of this API call, optional value:
+	// <li>Set: Set the certificate required for the domain name HTTPS;</li>
+	// <li>Clear: Clear the domain name HTTPS configuration, after clearing, the domain name cannot support </li>
+	Operation *string `json:"Operation,omitnil" name:"Operation"`
+
+	// <b>VOD [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you want to access resources in the Subapplication, enter the Subapplication ID in this field; otherwise, you do not need to fill in this field.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// [Tencent Cloud SSL](https://intl.cloud.tencent.com/document/product/400/7572?from_cn_redirect=1) uploaded certificate ID. No need to fill in this field when clearing domain HTTPS configuration
+	CertID *string `json:"CertID,omitnil" name:"CertID"`
 }
 
 type SetVodDomainCertificateRequest struct {
 	*tchttp.BaseRequest
 	
+	// Domain name
+	Domain *string `json:"Domain,omitnil" name:"Domain"`
+
+	// The operation type of this API call, optional value:
+	// <li>Set: Set the certificate required for the domain name HTTPS;</li>
+	// <li>Clear: Clear the domain name HTTPS configuration, after clearing, the domain name cannot support </li>
+	Operation *string `json:"Operation,omitnil" name:"Operation"`
+
+	// <b>VOD [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you want to access resources in the Subapplication, enter the Subapplication ID in this field; otherwise, you do not need to fill in this field.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
+
+	// [Tencent Cloud SSL](https://intl.cloud.tencent.com/document/product/400/7572?from_cn_redirect=1) uploaded certificate ID. No need to fill in this field when clearing domain HTTPS configuration
+	CertID *string `json:"CertID,omitnil" name:"CertID"`
 }
 
 func (r *SetVodDomainCertificateRequest) ToJsonString() string {
@@ -23349,7 +23489,10 @@ func (r *SetVodDomainCertificateRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "Domain")
+	delete(f, "Operation")
+	delete(f, "SubAppId")
+	delete(f, "CertID")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetVodDomainCertificateRequest has unknown keys!", "")
 	}
