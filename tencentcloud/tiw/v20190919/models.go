@@ -205,90 +205,6 @@ func (r *CreateApplicationResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type CreateOfflineRecordRequestParams struct {
-	// SdkAppId of the whiteboard application.
-	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
-
-	// Room ID corresponding to the recording task.
-	RoomId *int64 `json:"RoomId,omitnil" name:"RoomId"`
-
-	// Group ID corresponding to the recording task.
-	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
-
-	// Stream mixing parameters.
-	// The Custom parameter is not supported for offline recording tasks.
-	MixStream *MixStream `json:"MixStream,omitnil" name:"MixStream"`
-
-	// Whiteboard parameters.
-	Whiteboard *Whiteboard `json:"Whiteboard,omitnil" name:"Whiteboard"`
-}
-
-type CreateOfflineRecordRequest struct {
-	*tchttp.BaseRequest
-	
-	// SdkAppId of the whiteboard application.
-	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
-
-	// Room ID corresponding to the recording task.
-	RoomId *int64 `json:"RoomId,omitnil" name:"RoomId"`
-
-	// Group ID corresponding to the recording task.
-	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
-
-	// Stream mixing parameters.
-	// The Custom parameter is not supported for offline recording tasks.
-	MixStream *MixStream `json:"MixStream,omitnil" name:"MixStream"`
-
-	// Whiteboard parameters.
-	Whiteboard *Whiteboard `json:"Whiteboard,omitnil" name:"Whiteboard"`
-}
-
-func (r *CreateOfflineRecordRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateOfflineRecordRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "SdkAppId")
-	delete(f, "RoomId")
-	delete(f, "GroupId")
-	delete(f, "MixStream")
-	delete(f, "Whiteboard")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateOfflineRecordRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateOfflineRecordResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
-}
-
-type CreateOfflineRecordResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateOfflineRecordResponseParams `json:"Response"`
-}
-
-func (r *CreateOfflineRecordResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateOfflineRecordResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type CreateSnapshotTaskRequestParams struct {
 	// Whiteboard parameters.
 	Whiteboard *SnapshotWhiteboard `json:"Whiteboard,omitnil" name:"Whiteboard"`
@@ -1077,121 +993,6 @@ func (r *DescribeIMApplicationsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeIMApplicationsResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeOfflineRecordCallbackRequestParams struct {
-	// SdkAppId of the whiteboard application.
-	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
-}
-
-type DescribeOfflineRecordCallbackRequest struct {
-	*tchttp.BaseRequest
-	
-	// SdkAppId of the whiteboard application.
-	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
-}
-
-func (r *DescribeOfflineRecordCallbackRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeOfflineRecordCallbackRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "SdkAppId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOfflineRecordCallbackRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeOfflineRecordCallbackResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
-}
-
-type DescribeOfflineRecordCallbackResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeOfflineRecordCallbackResponseParams `json:"Response"`
-}
-
-func (r *DescribeOfflineRecordCallbackResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeOfflineRecordCallbackResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeOfflineRecordRequestParams struct {
-	// SdkAppId of the whiteboard application.
-	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
-
-	// ID of the offline recording task.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
-}
-
-type DescribeOfflineRecordRequest struct {
-	*tchttp.BaseRequest
-	
-	// SdkAppId of the whiteboard application.
-	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
-
-	// ID of the offline recording task.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
-}
-
-func (r *DescribeOfflineRecordRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeOfflineRecordRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "SdkAppId")
-	delete(f, "TaskId")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOfflineRecordRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeOfflineRecordResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
-}
-
-type DescribeOfflineRecordResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeOfflineRecordResponseParams `json:"Response"`
-}
-
-func (r *DescribeOfflineRecordResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeOfflineRecordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3587,72 +3388,11 @@ type RoomUsageDataItem struct {
 }
 
 // Predefined struct for user
-type SetOfflineRecordCallbackRequestParams struct {
-	// SdkAppId of the whiteboard application.
-	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
-
-	// Callback URL of the offline recording task result. If it is specified as null, the set callback URL is deleted. The callback URL only supports the HTTP or HTTPS protocol, and therefore the callback URL must start with `http://` or `https://`.
-	Callback *string `json:"Callback,omitnil" name:"Callback"`
-}
-
-type SetOfflineRecordCallbackRequest struct {
-	*tchttp.BaseRequest
-	
-	// SdkAppId of the whiteboard application.
-	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
-
-	// Callback URL of the offline recording task result. If it is specified as null, the set callback URL is deleted. The callback URL only supports the HTTP or HTTPS protocol, and therefore the callback URL must start with `http://` or `https://`.
-	Callback *string `json:"Callback,omitnil" name:"Callback"`
-}
-
-func (r *SetOfflineRecordCallbackRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *SetOfflineRecordCallbackRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "SdkAppId")
-	delete(f, "Callback")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SetOfflineRecordCallbackRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type SetOfflineRecordCallbackResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
-}
-
-type SetOfflineRecordCallbackResponse struct {
-	*tchttp.BaseResponse
-	Response *SetOfflineRecordCallbackResponseParams `json:"Response"`
-}
-
-func (r *SetOfflineRecordCallbackResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *SetOfflineRecordCallbackResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type SetOnlineRecordCallbackKeyRequestParams struct {
 	// SdkAppId of the application
 	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
-	// Authentication key for the real-time recording callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information, please [see here](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+	// Authentication key for the real-time recording callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
 	CallbackKey *string `json:"CallbackKey,omitnil" name:"CallbackKey"`
 }
 
@@ -3662,7 +3402,7 @@ type SetOnlineRecordCallbackKeyRequest struct {
 	// SdkAppId of the application
 	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
-	// Authentication key for the real-time recording callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information, please [see here](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+	// Authentication key for the real-time recording callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
 	CallbackKey *string `json:"CallbackKey,omitnil" name:"CallbackKey"`
 }
 
@@ -3713,7 +3453,7 @@ type SetOnlineRecordCallbackRequestParams struct {
 	// SdkAppId of the customer
 	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
-	// Callback address of the real-time recording task result. If an empty string is passed in, the existing callback address will be deleted. The callback address only supports the HTTP or HTTPS protocol, so the callback address must start with `http://` or `https://`. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40258?from_cn_redirect=1).
+	// Callback address of the real-time recording task result. If an empty string is passed in, the existing callback address will be deleted. The callback address only supports the HTTP or HTTPS protocol, so the callback address must start with `http://` or `https://`. For the callback format, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
 	Callback *string `json:"Callback,omitnil" name:"Callback"`
 }
 
@@ -3723,7 +3463,7 @@ type SetOnlineRecordCallbackRequest struct {
 	// SdkAppId of the customer
 	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
-	// Callback address of the real-time recording task result. If an empty string is passed in, the existing callback address will be deleted. The callback address only supports the HTTP or HTTPS protocol, so the callback address must start with `http://` or `https://`. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40258?from_cn_redirect=1).
+	// Callback address of the real-time recording task result. If an empty string is passed in, the existing callback address will be deleted. The callback address only supports the HTTP or HTTPS protocol, so the callback address must start with `http://` or `https://`. For the callback format, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
 	Callback *string `json:"Callback,omitnil" name:"Callback"`
 }
 
@@ -3774,7 +3514,7 @@ type SetTranscodeCallbackKeyRequestParams struct {
 	// SdkAppId of the application
 	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
-	// Authentication key for the document transcoding callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information about callback authentication, please [see here](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+	// Authentication key for the document transcoding callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information about callback authentication, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
 	CallbackKey *string `json:"CallbackKey,omitnil" name:"CallbackKey"`
 }
 
@@ -3784,7 +3524,7 @@ type SetTranscodeCallbackKeyRequest struct {
 	// SdkAppId of the application
 	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
-	// Authentication key for the document transcoding callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information about callback authentication, please [see here](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+	// Authentication key for the document transcoding callback. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key will be deleted. For more information about callback authentication, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
 	CallbackKey *string `json:"CallbackKey,omitnil" name:"CallbackKey"`
 }
 
@@ -3836,7 +3576,7 @@ type SetTranscodeCallbackRequestParams struct {
 	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// Callback address for the document transcoding progress. If an empty string is passed in, the existing callback address will be deleted. The callback address only supports the HTTP or HTTPS protocol, so the callback address must start with `http://` or `https://`.
-	// For more information about the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40260?from_cn_redirect=1).
+	// For more information about the callback format, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
 	Callback *string `json:"Callback,omitnil" name:"Callback"`
 }
 
@@ -3847,7 +3587,7 @@ type SetTranscodeCallbackRequest struct {
 	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
 	// Callback address for the document transcoding progress. If an empty string is passed in, the existing callback address will be deleted. The callback address only supports the HTTP or HTTPS protocol, so the callback address must start with `http://` or `https://`.
-	// For more information about the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40260?from_cn_redirect=1).
+	// For more information about the callback format, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
 	Callback *string `json:"Callback,omitnil" name:"Callback"`
 }
 
@@ -4020,7 +3760,7 @@ type SetWhiteboardPushCallbackKeyRequestParams struct {
 	// SdkAppId of the whiteboard application.
 	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
-	// Callback authentication key for whiteboard push. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key is deleted. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+	// Callback authentication key for whiteboard push. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key is deleted. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
 	CallbackKey *string `json:"CallbackKey,omitnil" name:"CallbackKey"`
 }
 
@@ -4030,7 +3770,7 @@ type SetWhiteboardPushCallbackKeyRequest struct {
 	// SdkAppId of the whiteboard application.
 	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
-	// Callback authentication key for whiteboard push. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key is deleted. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+	// Callback authentication key for whiteboard push. It is a string that can have up to 64 characters. If an empty string is passed in, the existing callback authentication key is deleted. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
 	CallbackKey *string `json:"CallbackKey,omitnil" name:"CallbackKey"`
 }
 
@@ -4081,7 +3821,7 @@ type SetWhiteboardPushCallbackRequestParams struct {
 	// SdkAppId of the whiteboard application.
 	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
-	// Callback URL of the whiteboard push task result. If an empty string is passed in, the existing callback URL is deleted. The callback URL only supports the HTTP or HTTPS protocol, and therefore the callback URL must start with `http://` or `https://`. For the callback format, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+	// Callback URL of the whiteboard push task result. If an empty string is passed in, the existing callback URL is deleted. The callback URL only supports the HTTP or HTTPS protocol, and therefore the callback URL must start with `http://` or `https://`. For the callback format, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
 	Callback *string `json:"Callback,omitnil" name:"Callback"`
 }
 
@@ -4091,7 +3831,7 @@ type SetWhiteboardPushCallbackRequest struct {
 	// SdkAppId of the whiteboard application.
 	SdkAppId *int64 `json:"SdkAppId,omitnil" name:"SdkAppId"`
 
-	// Callback URL of the whiteboard push task result. If an empty string is passed in, the existing callback URL is deleted. The callback URL only supports the HTTP or HTTPS protocol, and therefore the callback URL must start with `http://` or `https://`. For the callback format, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+	// Callback URL of the whiteboard push task result. If an empty string is passed in, the existing callback URL is deleted. The callback URL only supports the HTTP or HTTPS protocol, and therefore the callback URL must start with `http://` or `https://`. For the callback format, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
 	Callback *string `json:"Callback,omitnil" name:"Callback"`
 }
 

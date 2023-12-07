@@ -161,79 +161,6 @@ func (c *Client) CreateApplicationWithContext(ctx context.Context, request *Crea
     return
 }
 
-func NewCreateOfflineRecordRequest() (request *CreateOfflineRecordRequest) {
-    request = &CreateOfflineRecordRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tiw", APIVersion, "CreateOfflineRecord")
-    
-    
-    return
-}
-
-func NewCreateOfflineRecordResponse() (response *CreateOfflineRecordResponse) {
-    response = &CreateOfflineRecordResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// CreateOfflineRecord
-// 课后录制服务已下线
-//
-// 
-//
-// This API is used to create an offline recording task.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
-//  INVALIDPARAMETER_RECORDPARAMETER = "InvalidParameter.RecordParameter"
-//  INVALIDPARAMETER_SDKAPPIDNOTFOUND = "InvalidParameter.SdkAppIdNotFound"
-//  LIMITEXCEEDED_TASKCONCURRENCY = "LimitExceeded.TaskConcurrency"
-//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
-//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
-//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
-func (c *Client) CreateOfflineRecord(request *CreateOfflineRecordRequest) (response *CreateOfflineRecordResponse, err error) {
-    return c.CreateOfflineRecordWithContext(context.Background(), request)
-}
-
-// CreateOfflineRecord
-// 课后录制服务已下线
-//
-// 
-//
-// This API is used to create an offline recording task.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
-//  INVALIDPARAMETER_RECORDPARAMETER = "InvalidParameter.RecordParameter"
-//  INVALIDPARAMETER_SDKAPPIDNOTFOUND = "InvalidParameter.SdkAppIdNotFound"
-//  LIMITEXCEEDED_TASKCONCURRENCY = "LimitExceeded.TaskConcurrency"
-//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
-//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
-//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
-func (c *Client) CreateOfflineRecordWithContext(ctx context.Context, request *CreateOfflineRecordRequest) (response *CreateOfflineRecordResponse, err error) {
-    if request == nil {
-        request = NewCreateOfflineRecordRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateOfflineRecord require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateOfflineRecordResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateSnapshotTaskRequest() (request *CreateSnapshotTaskRequest) {
     request = &CreateSnapshotTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -708,142 +635,6 @@ func (c *Client) DescribeIMApplicationsWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeIMApplicationsResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeOfflineRecordRequest() (request *DescribeOfflineRecordRequest) {
-    request = &DescribeOfflineRecordRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tiw", APIVersion, "DescribeOfflineRecord")
-    
-    
-    return
-}
-
-func NewDescribeOfflineRecordResponse() (response *DescribeOfflineRecordResponse) {
-    response = &DescribeOfflineRecordResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeOfflineRecord
-// 课后录制服务已下线
-//
-// 
-//
-// This API is used to query the information about an offline recording task, including the recording progress and recording result.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  FAILEDOPERATION_RECORD = "FailedOperation.Record"
-//  FAILEDOPERATION_TRANSCODE = "FailedOperation.Transcode"
-//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
-//  INVALIDPARAMETER_TASKNOTFOUND = "InvalidParameter.TaskNotFound"
-//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
-//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
-//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
-func (c *Client) DescribeOfflineRecord(request *DescribeOfflineRecordRequest) (response *DescribeOfflineRecordResponse, err error) {
-    return c.DescribeOfflineRecordWithContext(context.Background(), request)
-}
-
-// DescribeOfflineRecord
-// 课后录制服务已下线
-//
-// 
-//
-// This API is used to query the information about an offline recording task, including the recording progress and recording result.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  FAILEDOPERATION_RECORD = "FailedOperation.Record"
-//  FAILEDOPERATION_TRANSCODE = "FailedOperation.Transcode"
-//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
-//  INVALIDPARAMETER_TASKNOTFOUND = "InvalidParameter.TaskNotFound"
-//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
-//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
-//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
-func (c *Client) DescribeOfflineRecordWithContext(ctx context.Context, request *DescribeOfflineRecordRequest) (response *DescribeOfflineRecordResponse, err error) {
-    if request == nil {
-        request = NewDescribeOfflineRecordRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeOfflineRecord require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeOfflineRecordResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeOfflineRecordCallbackRequest() (request *DescribeOfflineRecordCallbackRequest) {
-    request = &DescribeOfflineRecordCallbackRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tiw", APIVersion, "DescribeOfflineRecordCallback")
-    
-    
-    return
-}
-
-func NewDescribeOfflineRecordCallbackResponse() (response *DescribeOfflineRecordCallbackResponse) {
-    response = &DescribeOfflineRecordCallbackResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeOfflineRecordCallback
-// 课后录制服务已下线
-//
-// 
-//
-// This API is used to query the offline recording callback URL.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
-//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
-//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
-//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
-func (c *Client) DescribeOfflineRecordCallback(request *DescribeOfflineRecordCallbackRequest) (response *DescribeOfflineRecordCallbackResponse, err error) {
-    return c.DescribeOfflineRecordCallbackWithContext(context.Background(), request)
-}
-
-// DescribeOfflineRecordCallback
-// 课后录制服务已下线
-//
-// 
-//
-// This API is used to query the offline recording callback URL.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
-//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
-//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
-//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
-func (c *Client) DescribeOfflineRecordCallbackWithContext(ctx context.Context, request *DescribeOfflineRecordCallbackRequest) (response *DescribeOfflineRecordCallbackResponse, err error) {
-    if request == nil {
-        request = NewDescribeOfflineRecordCallbackRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeOfflineRecordCallback require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeOfflineRecordCallbackResponse()
     err = c.Send(request, response)
     return
 }
@@ -2637,73 +2428,6 @@ func (c *Client) ResumeOnlineRecordWithContext(ctx context.Context, request *Res
     return
 }
 
-func NewSetOfflineRecordCallbackRequest() (request *SetOfflineRecordCallbackRequest) {
-    request = &SetOfflineRecordCallbackRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("tiw", APIVersion, "SetOfflineRecordCallback")
-    
-    
-    return
-}
-
-func NewSetOfflineRecordCallbackResponse() (response *SetOfflineRecordCallbackResponse) {
-    response = &SetOfflineRecordCallbackResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// SetOfflineRecordCallback
-// 课后录制服务已下线
-//
-// 
-//
-// This API is used to set the offline recording callback URL.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
-//  INVALIDPARAMETER_CALLBACKADDRESSFORMATERROR = "InvalidParameter.CallbackAddressFormatError"
-//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
-//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
-//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
-func (c *Client) SetOfflineRecordCallback(request *SetOfflineRecordCallbackRequest) (response *SetOfflineRecordCallbackResponse, err error) {
-    return c.SetOfflineRecordCallbackWithContext(context.Background(), request)
-}
-
-// SetOfflineRecordCallback
-// 课后录制服务已下线
-//
-// 
-//
-// This API is used to set the offline recording callback URL.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  INVALIDPARAMETER_BODYPARAMETERTYPEUNMATCHED = "InvalidParameter.BodyParameterTypeUnmatched"
-//  INVALIDPARAMETER_CALLBACKADDRESSFORMATERROR = "InvalidParameter.CallbackAddressFormatError"
-//  RESOURCEUNAVAILABLE_NOTREGISTERED = "ResourceUnavailable.NotRegistered"
-//  RESOURCEUNAVAILABLE_SERVICEEXPIRED = "ResourceUnavailable.ServiceExpired"
-//  UNAUTHORIZEDOPERATION_SDKAPPID = "UnauthorizedOperation.SdkAppId"
-func (c *Client) SetOfflineRecordCallbackWithContext(ctx context.Context, request *SetOfflineRecordCallbackRequest) (response *SetOfflineRecordCallbackResponse, err error) {
-    if request == nil {
-        request = NewSetOfflineRecordCallbackRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("SetOfflineRecordCallback require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewSetOfflineRecordCallbackResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewSetOnlineRecordCallbackRequest() (request *SetOnlineRecordCallbackRequest) {
     request = &SetOnlineRecordCallbackRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2724,7 +2448,7 @@ func NewSetOnlineRecordCallbackResponse() (response *SetOnlineRecordCallbackResp
 }
 
 // SetOnlineRecordCallback
-// This API is used to set the real-time recording callback address. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40258?from_cn_redirect=1).
+// This API is used to set the real-time recording callback address. For the callback format, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2738,7 +2462,7 @@ func (c *Client) SetOnlineRecordCallback(request *SetOnlineRecordCallbackRequest
 }
 
 // SetOnlineRecordCallback
-// This API is used to set the real-time recording callback address. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40258?from_cn_redirect=1).
+// This API is used to set the real-time recording callback address. For the callback format, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2783,7 +2507,7 @@ func NewSetOnlineRecordCallbackKeyResponse() (response *SetOnlineRecordCallbackK
 }
 
 // SetOnlineRecordCallbackKey
-// This API is used to set the callback authentication key for real-time recording. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+// This API is used to set the callback authentication key for real-time recording. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2797,7 +2521,7 @@ func (c *Client) SetOnlineRecordCallbackKey(request *SetOnlineRecordCallbackKeyR
 }
 
 // SetOnlineRecordCallbackKey
-// This API is used to set the callback authentication key for real-time recording. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+// This API is used to set the callback authentication key for real-time recording. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2842,7 +2566,7 @@ func NewSetTranscodeCallbackResponse() (response *SetTranscodeCallbackResponse) 
 }
 
 // SetTranscodeCallback
-// This API is used to set the callback address for document transcoding. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40260?from_cn_redirect=1).
+// This API is used to set the callback address for document transcoding. For the callback format, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2856,7 +2580,7 @@ func (c *Client) SetTranscodeCallback(request *SetTranscodeCallbackRequest) (res
 }
 
 // SetTranscodeCallback
-// This API is used to set the callback address for document transcoding. For the callback format, please [see here](https://intl.cloud.tencent.com/document/product/1137/40260?from_cn_redirect=1).
+// This API is used to set the callback address for document transcoding. For the callback format, please [see here](https://www.tencentcloud.com/document/product/1176/55569).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2901,7 +2625,7 @@ func NewSetTranscodeCallbackKeyResponse() (response *SetTranscodeCallbackKeyResp
 }
 
 // SetTranscodeCallbackKey
-// This API is used to set the callback authentication key for document transcoding. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+// This API is used to set the callback authentication key for document transcoding. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2915,7 +2639,7 @@ func (c *Client) SetTranscodeCallbackKey(request *SetTranscodeCallbackKeyRequest
 }
 
 // SetTranscodeCallbackKey
-// This API is used to set the callback authentication key for document transcoding. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+// This API is used to set the callback authentication key for document transcoding. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3078,7 +2802,7 @@ func NewSetWhiteboardPushCallbackResponse() (response *SetWhiteboardPushCallback
 }
 
 // SetWhiteboardPushCallback
-// This API is used to set the whiteboard push callback URL. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+// This API is used to set the whiteboard push callback URL. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3092,7 +2816,7 @@ func (c *Client) SetWhiteboardPushCallback(request *SetWhiteboardPushCallbackReq
 }
 
 // SetWhiteboardPushCallback
-// This API is used to set the whiteboard push callback URL. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+// This API is used to set the whiteboard push callback URL. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3137,7 +2861,7 @@ func NewSetWhiteboardPushCallbackKeyResponse() (response *SetWhiteboardPushCallb
 }
 
 // SetWhiteboardPushCallbackKey
-// This API is used to set the callback authentication key for whiteboard push. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+// This API is used to set the callback authentication key for whiteboard push. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3151,7 +2875,7 @@ func (c *Client) SetWhiteboardPushCallbackKey(request *SetWhiteboardPushCallback
 }
 
 // SetWhiteboardPushCallbackKey
-// This API is used to set the callback authentication key for whiteboard push. For more information, see [Event Notification](https://intl.cloud.tencent.com/document/product/1137/40257?from_cn_redirect=1).
+// This API is used to set the callback authentication key for whiteboard push. For more information, see [Event Notification](https://www.tencentcloud.com/document/product/1176/55569).
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
