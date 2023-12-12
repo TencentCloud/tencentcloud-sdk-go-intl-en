@@ -2,7 +2,7 @@ package common
 
 import (
 	"fmt"
-	"io/ioutil"
+    "io/ioutil"
 	"strings"
 
 	tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
