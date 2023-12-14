@@ -521,10 +521,10 @@ type DescribeBillDetailRequestParams struct {
 	// The queried month in u200dthe format of “YYYY-MM”, such as 2023-01.
 	Month *string `json:"Month,omitnil" name:"Month"`
 
-	// Page parameter: Indicates the number of entries per page. The maximum value is 200.
+	// Page parameter: Indicates the number of entries per page. Value range: [1, 200]
 	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
-	// A pagination parameter that specifies the current page number
+	// Page parameter: Indicates the current page number. The minimum value is 1.
 	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// Billing mode. Valid values: `prePay` (Monthly subscription), postPay` (Pay-As-You-Go resources).
@@ -540,10 +540,10 @@ type DescribeBillDetailRequest struct {
 	// The queried month in u200dthe format of “YYYY-MM”, such as 2023-01.
 	Month *string `json:"Month,omitnil" name:"Month"`
 
-	// Page parameter: Indicates the number of entries per page. The maximum value is 200.
+	// Page parameter: Indicates the number of entries per page. Value range: [1, 200]
 	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
-	// A pagination parameter that specifies the current page number
+	// Page parameter: Indicates the current page number. The minimum value is 1.
 	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// Billing mode. Valid values: `prePay` (Monthly subscription), postPay` (Pay-As-You-Go resources).
@@ -809,10 +809,10 @@ type DescribeCustomerBillDetailRequestParams struct {
 	// The queried month in “YYYY-MM” format, such as 2023-01.
 	Month *string `json:"Month,omitnil" name:"Month"`
 
-	// Page parameter: Indicates the number of entries per page. The maximum value is 200.
+	// Page parameter: Indicates the number of entries per page. Value range: [1, 200]
 	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
-	// A pagination parameter that specifies the current page number
+	// Page parameter: Indicates the current page number. The minimum value is 1.
 	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// Billing mode. Valid values:
@@ -864,10 +864,10 @@ type DescribeCustomerBillDetailRequest struct {
 	// The queried month in “YYYY-MM” format, such as 2023-01.
 	Month *string `json:"Month,omitnil" name:"Month"`
 
-	// Page parameter: Indicates the number of entries per page. The maximum value is 200.
+	// Page parameter: Indicates the number of entries per page. Value range: [1, 200]
 	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
 
-	// A pagination parameter that specifies the current page number
+	// Page parameter: Indicates the current page number. The minimum value is 1.
 	Page *int64 `json:"Page,omitnil" name:"Page"`
 
 	// Billing mode. Valid values:

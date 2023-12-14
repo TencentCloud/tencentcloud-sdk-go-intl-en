@@ -399,6 +399,60 @@ func (r *ApplyWebVerificationTokenResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type CardInfo struct {
+	// Hong Kong ID Card
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HKIDCard *HKIDCard `json:"HKIDCard,omitnil" name:"HKIDCard"`
+
+	// Malaysia ID Card
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MLIDCard *MLIDCard `json:"MLIDCard,omitnil" name:"MLIDCard"`
+
+	// Philippines VoteID Card
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PhilippinesVoteID *PhilippinesVoteID `json:"PhilippinesVoteID,omitnil" name:"PhilippinesVoteID"`
+
+	// Indonesia ID Card
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IndonesiaIDCard *IndonesiaIDCard `json:"IndonesiaIDCard,omitnil" name:"IndonesiaIDCard"`
+
+	// Philippines Driving License
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PhilippinesDrivingLicense *PhilippinesDrivingLicense `json:"PhilippinesDrivingLicense,omitnil" name:"PhilippinesDrivingLicense"`
+
+	// Philippines TinID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PhilippinesTinID *PhilippinesTinID `json:"PhilippinesTinID,omitnil" name:"PhilippinesTinID"`
+
+	// Philippines SSSID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PhilippinesSSSID *PhilippinesSSSID `json:"PhilippinesSSSID,omitnil" name:"PhilippinesSSSID"`
+
+	// Philippines UMID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PhilippinesUMID *PhilippinesUMID `json:"PhilippinesUMID,omitnil" name:"PhilippinesUMID"`
+
+	// ID Cards of Hong Kong, Macao and Taiwan (China), and International Passport
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InternationalIDPassport *InternationalIDPassport `json:"InternationalIDPassport,omitnil" name:"InternationalIDPassport"`
+
+	// General license information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GeneralCard *GeneralCard `json:"GeneralCard,omitnil" name:"GeneralCard"`
+
+	// Indonesia Driving License
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IndonesiaDrivingLicense *IndonesiaDrivingLicense `json:"IndonesiaDrivingLicense,omitnil" name:"IndonesiaDrivingLicense"`
+
+	// Thailand ID Card
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ThailandIDCard *ThailandIDCard `json:"ThailandIDCard,omitnil" name:"ThailandIDCard"`
+
+	// Singapore ID Card
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SingaporeIDCard *SingaporeIDCard `json:"SingaporeIDCard,omitnil" name:"SingaporeIDCard"`
+}
+
 type CardVerifyResult struct {
 	// Whether the authentication or OCR process is successful.
 	IsPass *bool `json:"IsPass,omitnil" name:"IsPass"`
@@ -875,6 +929,86 @@ type FileInfo struct {
 	Size *int64 `json:"Size,omitnil" name:"Size"`
 }
 
+type GeneralCard struct {
+	// License number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LicenseNumber *string `json:"LicenseNumber,omitnil" name:"LicenseNumber"`
+
+	// Personal number, which is returned when it is a passport
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PersonalNumber *string `json:"PersonalNumber,omitnil" name:"PersonalNumber"`
+
+	// The first line of passport machine reading code
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PassportCodeFirst *string `json:"PassportCodeFirst,omitnil" name:"PassportCodeFirst"`
+
+	// The first line of passport machine reading code
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PassportCodeSecond *string `json:"PassportCodeSecond,omitnil" name:"PassportCodeSecond"`
+
+	// Date of expiry in the format of YYYY-MM-DD
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpirationDate *string `json:"ExpirationDate,omitnil" name:"ExpirationDate"`
+
+	// Valid date in the format of YYYY-MM-DD
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DueDate *string `json:"DueDate,omitnil" name:"DueDate"`
+
+	// Date of issue in the format of YYYY-MM-DD
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedDate *string `json:"IssuedDate,omitnil" name:"IssuedDate"`
+
+	// Issuing authority
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedAuthority *string `json:"IssuedAuthority,omitnil" name:"IssuedAuthority"`
+
+	// Issuing country, which is returned following the ISO 3166 country coding specification
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Example: MYS
+	IssuedCountry *string `json:"IssuedCountry,omitnil" name:"IssuedCountry"`
+
+	// Full Name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FullName *string `json:"FullName,omitnil" name:"FullName"`
+
+	// First name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
+
+	// Last name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastName *string `json:"LastName,omitnil" name:"LastName"`
+
+	// Gender on the license
+	// - M：male
+	// - F：female
+	// - X：other gender
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Example: M
+	Sex *string `json:"Sex,omitnil" name:"Sex"`
+
+	// Age. 0 indicates that no valid information is obtained.
+	// Example: 0
+	Age *string `json:"Age,omitnil" name:"Age"`
+
+	// Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+
+	// Birth place
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BirthPlace *string `json:"BirthPlace,omitnil" name:"BirthPlace"`
+
+	// Nationality, which is returned following the ISO 3166 country coding specification
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Example: IND
+	Nationality *string `json:"Nationality,omitnil" name:"Nationality"`
+
+	// Registration number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegistrationNumber *string `json:"RegistrationNumber,omitnil" name:"RegistrationNumber"`
+}
+
 // Predefined struct for user
 type GenerateReflectSequenceRequestParams struct {
 	// The resource URL of the data package generated by the SDK.
@@ -1326,6 +1460,13 @@ type GetWebVerificationResultIntlResponseParams struct {
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
 	BestFrameBase64 *string `json:"BestFrameBase64,omitnil" name:"BestFrameBase64"`
 
+	// Card recognize result.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OCRResult []*OCRResult `json:"OCRResult,omitnil" name:"OCRResult"`
+
+	// The passthrough parameter of the business, max 1,000 characters, which will be returned in GetWebVerificationResultIntl.
+	Extra *string `json:"Extra,omitnil" name:"Extra"`
+
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
 }
@@ -1426,6 +1567,200 @@ func (r *GetWebVerificationResultResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *GetWebVerificationResultResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type HKIDCard struct {
+
+	CnName *string `json:"CnName,omitnil" name:"CnName"`
+
+	// English name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Example: SAN, Nan
+	EnName *string `json:"EnName,omitnil" name:"EnName"`
+
+	// Telex code correspondint to the Chinese name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TelexCode *string `json:"TelexCode,omitnil" name:"TelexCode"`
+
+	// Gender: "Male-M" or "Female-F"
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Sex *string `json:"Sex,omitnil" name:"Sex"`
+
+	// Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Example: 01-01-2001
+	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+
+	// Permanent resident ID card: 0-non-permanent; 1-permanent; -1-unknown
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Permanent *string `json:"Permanent,omitnil" name:"Permanent"`
+
+	// ID card number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Example: C000000(E)
+	IdNum *string `json:"IdNum,omitnil" name:"IdNum"`
+
+	// Lisence symbol, which is the symbol below Birthday. Example: "***AZ"
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Symbol *string `json:"Symbol,omitnil" name:"Symbol"`
+
+	// The first date of issue
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FirstIssueDate *string `json:"FirstIssueDate,omitnil" name:"FirstIssueDate"`
+
+	// The current date of issue
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CurrentIssueDate *string `json:"CurrentIssueDate,omitnil" name:"CurrentIssueDate"`
+}
+
+type IndonesiaDrivingLicense struct {
+	// Last name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastName *string `json:"LastName,omitnil" name:"LastName"`
+
+	// First name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
+
+	// License number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LicenseNumber *string `json:"LicenseNumber,omitnil" name:"LicenseNumber"`
+
+	// Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+
+	// Address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitnil" name:"Address"`
+
+	// Expiration date
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpirationDate *string `json:"ExpirationDate,omitnil" name:"ExpirationDate"`
+
+	// Date of issue
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedDate *string `json:"IssuedDate,omitnil" name:"IssuedDate"`
+
+	// Issuing country
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedCountry *string `json:"IssuedCountry,omitnil" name:"IssuedCountry"`
+}
+
+type IndonesiaIDCard struct {
+	// License number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NIK *string `json:"NIK,omitnil" name:"NIK"`
+
+	// Name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Nama *string `json:"Nama,omitnil" name:"Nama"`
+
+	// Birth place/Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TempatTglLahir *string `json:"TempatTglLahir,omitnil" name:"TempatTglLahir"`
+
+	// Gender
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	JenisKelamin *string `json:"JenisKelamin,omitnil" name:"JenisKelamin"`
+
+	// Blood type
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GolDarah *string `json:"GolDarah,omitnil" name:"GolDarah"`
+
+	// Address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Alamat *string `json:"Alamat,omitnil" name:"Alamat"`
+
+	// Street
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RTRW *string `json:"RTRW,omitnil" name:"RTRW"`
+
+	// Village
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	KelDesa *string `json:"KelDesa,omitnil" name:"KelDesa"`
+
+	// Region
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Kecamatan *string `json:"Kecamatan,omitnil" name:"Kecamatan"`
+
+	// Religious beliefs
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Agama *string `json:"Agama,omitnil" name:"Agama"`
+
+	// Marital status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StatusPerkawinan *string `json:"StatusPerkawinan,omitnil" name:"StatusPerkawinan"`
+
+	// Job
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Perkerjaan *string `json:"Perkerjaan,omitnil" name:"Perkerjaan"`
+
+	// Nationality
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	KewargaNegaraan *string `json:"KewargaNegaraan,omitnil" name:"KewargaNegaraan"`
+
+	// ID card validity period
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BerlakuHingga *string `json:"BerlakuHingga,omitnil" name:"BerlakuHingga"`
+
+	// Date of issue
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedDate *string `json:"IssuedDate,omitnil" name:"IssuedDate"`
+
+	// Province
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Provinsi *string `json:"Provinsi,omitnil" name:"Provinsi"`
+
+	// City
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Kota *string `json:"Kota,omitnil" name:"Kota"`
+}
+
+type InternationalIDPassport struct {
+	// Passport ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LicenseNumber *string `json:"LicenseNumber,omitnil" name:"LicenseNumber"`
+
+	// Full name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FullName *string `json:"FullName,omitnil" name:"FullName"`
+
+	// Last name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Surname *string `json:"Surname,omitnil" name:"Surname"`
+
+	// First name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GivenName *string `json:"GivenName,omitnil" name:"GivenName"`
+
+	// Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+
+	// Gender (F-Female, M-Male)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Sex *string `json:"Sex,omitnil" name:"Sex"`
+
+	// Expiration date
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DateOfExpiration *string `json:"DateOfExpiration,omitnil" name:"DateOfExpiration"`
+
+	// Issuing country
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuingCountry *string `json:"IssuingCountry,omitnil" name:"IssuingCountry"`
+
+	// Nationality code
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NationalityCode *string `json:"NationalityCode,omitnil" name:"NationalityCode"`
+
+	// The first line at the bottom, the MRZ Code sequence
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PassportCodeFirst *string `json:"PassportCodeFirst,omitnil" name:"PassportCodeFirst"`
+
+	// The second line at the bottom, the MRZ Code sequence
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PassportCodeSecond *string `json:"PassportCodeSecond,omitnil" name:"PassportCodeSecond"`
 }
 
 // Predefined struct for user
@@ -1583,6 +1918,281 @@ func (r *LivenessCompareResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type MLIDCard struct {
+	// Full Name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// License number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ID *string `json:"ID,omitnil" name:"ID"`
+
+	// Gender
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Sex *string `json:"Sex,omitnil" name:"Sex"`
+
+	// Address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitnil" name:"Address"`
+
+	// Lisence type
+	// MyKad ID card
+	// MyPR Permanent resident ID card
+	// MyTentera Military ID card
+	// MyKAS Temporary ID card
+	// POLIS Police ID card
+	// IKAD Labor ID card
+	// MyKid Juvenile ID card
+	// Example: MyKad
+	Type *string `json:"Type,omitnil" name:"Type"`
+
+	// Birthday (Currently, this filed only supports IKAD labor ID card and MyKad ID card)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+}
+
+type OCRResult struct {
+	// Is the indentity verification or OCR process passed
+	IsPass *bool `json:"IsPass,omitnil" name:"IsPass"`
+
+	// The Base64 of ID card image
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CardImageBase64 *string `json:"CardImageBase64,omitnil" name:"CardImageBase64"`
+
+	// OCR result of the ID card.
+	CardInfo *CardInfo `json:"CardInfo,omitnil" name:"CardInfo"`
+
+	// The request id
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type PhilippinesDrivingLicense struct {
+	// Full Name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil" name:"Name"`
+
+	// Last name
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastName *string `json:"LastName,omitnil" name:"LastName"`
+
+	// First name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
+
+	// Middle name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MiddleName *string `json:"MiddleName,omitnil" name:"MiddleName"`
+
+	// Nationality
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Nationality *string `json:"Nationality,omitnil" name:"Nationality"`
+
+	// Gender
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Sex *string `json:"Sex,omitnil" name:"Sex"`
+
+	// Address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitnil" name:"Address"`
+
+	// License number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LicenseNo *string `json:"LicenseNo,omitnil" name:"LicenseNo"`
+
+	// Date of expiry
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpiresDate *string `json:"ExpiresDate,omitnil" name:"ExpiresDate"`
+
+	// Agency code
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	AgencyCode *string `json:"AgencyCode,omitnil" name:"AgencyCode"`
+
+	// Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+}
+
+type PhilippinesSSSID struct {
+	// License number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LicenseNumber *string `json:"LicenseNumber,omitnil" name:"LicenseNumber"`
+
+	// Full name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FullName *string `json:"FullName,omitnil" name:"FullName"`
+
+	// Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+}
+
+type PhilippinesTinID struct {
+	// License number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LicenseNumber *string `json:"LicenseNumber,omitnil" name:"LicenseNumber"`
+
+	// Full name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FullName *string `json:"FullName,omitnil" name:"FullName"`
+
+	// Address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitnil" name:"Address"`
+
+	// Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+
+	// Date of issue
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssueDate *string `json:"IssueDate,omitnil" name:"IssueDate"`
+}
+
+type PhilippinesUMID struct {
+	// Surname
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Surname *string `json:"Surname,omitnil" name:"Surname"`
+
+	// Middle Name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MiddleName *string `json:"MiddleName,omitnil" name:"MiddleName"`
+
+	// First name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GivenName *string `json:"GivenName,omitnil" name:"GivenName"`
+
+	// Gender
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Sex *string `json:"Sex,omitnil" name:"Sex"`
+
+	// Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+
+	// Address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitnil" name:"Address"`
+
+	// CRN code
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CRN *string `json:"CRN,omitnil" name:"CRN"`
+}
+
+type PhilippinesVoteID struct {
+	// VIN of Philippines VoteID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	VIN *string `json:"VIN,omitnil" name:"VIN"`
+
+	// First name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
+
+	// Last name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastName *string `json:"LastName,omitnil" name:"LastName"`
+
+	// Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+
+	// Civil status
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CivilStatus *string `json:"CivilStatus,omitnil" name:"CivilStatus"`
+
+	// Nationality
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Citizenship *string `json:"Citizenship,omitnil" name:"Citizenship"`
+
+	// Address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitnil" name:"Address"`
+
+	// Region
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PrecinctNo *string `json:"PrecinctNo,omitnil" name:"PrecinctNo"`
+}
+
+type SingaporeIDCard struct {
+	// Chinese name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ChName *string `json:"ChName,omitnil" name:"ChName"`
+
+	// English name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EnName *string `json:"EnName,omitnil" name:"EnName"`
+
+	// License number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ID *string `json:"ID,omitnil" name:"ID"`
+
+	// Gender
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Sex *string `json:"Sex,omitnil" name:"Sex"`
+
+	// Country of birth
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CountryOfBirth *string `json:"CountryOfBirth,omitnil" name:"CountryOfBirth"`
+
+	// Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+
+	// Address (on the back)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Address *string `json:"Address,omitnil" name:"Address"`
+
+	// Nationality (on the back)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Race *string `json:"Race,omitnil" name:"Race"`
+
+	//  NRIC number (on the back)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NRICCode *string `json:"NRICCode,omitnil" name:"NRICCode"`
+
+	// Post number (on the front)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PostCode *string `json:"PostCode,omitnil" name:"PostCode"`
+
+	// Date of expiry (on the back)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DateOfExpiration *string `json:"DateOfExpiration,omitnil" name:"DateOfExpiration"`
+
+	// Date of issue (on the back)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DateOfIssue *string `json:"DateOfIssue,omitnil" name:"DateOfIssue"`
+}
+
+type ThailandIDCard struct {
+	// Last name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LastName *string `json:"LastName,omitnil" name:"LastName"`
+
+	// First name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
+
+	// License number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LicenseNumber *string `json:"LicenseNumber,omitnil" name:"LicenseNumber"`
+
+	// Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DateOfBirth *string `json:"DateOfBirth,omitnil" name:"DateOfBirth"`
+
+	// Date of expiry
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DateOfExpiry *string `json:"DateOfExpiry,omitnil" name:"DateOfExpiry"`
+
+	// Date of issue
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DateOfIssue *string `json:"DateOfIssue,omitnil" name:"DateOfIssue"`
+
+	// Issuing country
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedCountry *string `json:"IssuedCountry,omitnil" name:"IssuedCountry"`
+}
+
 type VerificationDetail struct {
 	// The final result of this verification. `0` indicates that the person is the same as that in the photo.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
@@ -1738,6 +2348,28 @@ func (r *VideoLivenessCompareResponse) FromJsonString(s string) error {
 }
 
 type WebVerificationConfigIntl struct {
-	// Whether to automatically redirect to RedirectUrl after successful verification. Default value: false.
+	// When the verification passed, whether to skip the result page and automatically jump to RedirectURL. The default value is false.
+	// Example value: false
 	AutoSkip *bool `json:"AutoSkip,omitnil" name:"AutoSkip"`
+
+	// Detection mode, parameter values are as follows:
+	// 1: OCR+living detection & face comparison;
+	// 2: Living detection & face comparison;
+	// 3: Living detection;
+	// The default value is 2.
+	// Example value: 3
+	CheckMode *int64 `json:"CheckMode,omitnil" name:"CheckMode"`
+
+	// The type of lisence used for verification. The following types are supported.
+	// 1.HKIDCard: Hong Kong (China) ID card
+	// 2.MLIDCard: Malaysia ID card
+	// 3.IndonesiaIDCard: Indonesia ID card
+	// 4.PhilippinesVoteID: Philippines VoteID card
+	// 5.PhilippinesDrivingLicense: Philippines driving license
+	// 6.PhilippinesTinID: Philippines TinID card
+	// 7.PhilippinesSSSID: Philippines SSSID card
+	// 8.PhilippinesUMID: Philippines UMID card
+	// 9.InternationalIDPassport: ID cards of Hong Kong, Macao and Taiwan (China), and international passport.
+	// Example: HKIDCard
+	IDCardType *string `json:"IDCardType,omitnil" name:"IDCardType"`
 }
