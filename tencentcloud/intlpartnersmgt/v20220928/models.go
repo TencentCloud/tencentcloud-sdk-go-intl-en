@@ -518,7 +518,7 @@ type CustomerBillDetailData struct {
 
 // Predefined struct for user
 type DescribeBillDetailRequestParams struct {
-	// The queried month in u200dthe format of “YYYY-MM”, such as 2023-01.
+	// The queried month in the format of “YYYY-MM”, such as 2023-01.
 	Month *string `json:"Month,omitnil" name:"Month"`
 
 	// Page parameter: Indicates the number of entries per page. Value range: [1, 200]
@@ -537,7 +537,7 @@ type DescribeBillDetailRequestParams struct {
 type DescribeBillDetailRequest struct {
 	*tchttp.BaseRequest
 	
-	// The queried month in u200dthe format of “YYYY-MM”, such as 2023-01.
+	// The queried month in the format of “YYYY-MM”, such as 2023-01.
 	Month *string `json:"Month,omitnil" name:"Month"`
 
 	// Page parameter: Indicates the number of entries per page. Value range: [1, 200]

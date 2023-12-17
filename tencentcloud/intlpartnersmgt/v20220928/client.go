@@ -825,9 +825,12 @@ func NewQueryCreditByUinListResponse() (response *QueryCreditByUinListResponse) 
 // This API is used to query the credit of users in the list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_UINNOTAGENT = "FailedOperation.UinNotAgent"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_UINLIST = "InvalidParameterValue.UinList"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  UNAUTHORIZEDOPERATION_NOTCUSTOMERUIN = "UnauthorizedOperation.NotCustomerUin"
 func (c *Client) QueryCreditByUinList(request *QueryCreditByUinListRequest) (response *QueryCreditByUinListResponse, err error) {
@@ -838,9 +841,12 @@ func (c *Client) QueryCreditByUinList(request *QueryCreditByUinListRequest) (res
 // This API is used to query the credit of users in the list.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_UINNOTAGENT = "FailedOperation.UinNotAgent"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_UINLIST = "InvalidParameterValue.UinList"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  UNAUTHORIZEDOPERATION_NOTCUSTOMERUIN = "UnauthorizedOperation.NotCustomerUin"
 func (c *Client) QueryCreditByUinListWithContext(ctx context.Context, request *QueryCreditByUinListRequest) (response *QueryCreditByUinListResponse, err error) {
