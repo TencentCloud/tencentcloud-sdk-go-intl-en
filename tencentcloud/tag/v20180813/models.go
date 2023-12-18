@@ -22,26 +22,26 @@ import (
 
 // Predefined struct for user
 type AddResourceTagRequestParams struct {
-	// Tag key.
+	// The tag key that needs to be bound. For the requirements, refer to: https://intl.cloud.tencent.com/document/product/651/13354?from_cn_redirect=1
 	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
 
-	// Tag value.
+	// The tag value that needs to be bound. For the requirements, refer to: https://intl.cloud.tencent.com/document/product/651/13354?from_cn_redirect=1
 	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
 
-	// [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
+	// Resource to be associated, represented in the standard six-segment resource format. For the correct format, see https://intl.cloud.tencent.com/document/product/651/89122?from_cn_redirect=1
 	Resource *string `json:"Resource,omitnil" name:"Resource"`
 }
 
 type AddResourceTagRequest struct {
 	*tchttp.BaseRequest
 	
-	// Tag key.
+	// The tag key that needs to be bound. For the requirements, refer to: https://intl.cloud.tencent.com/document/product/651/13354?from_cn_redirect=1
 	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
 
-	// Tag value.
+	// The tag value that needs to be bound. For the requirements, refer to: https://intl.cloud.tencent.com/document/product/651/13354?from_cn_redirect=1
 	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
 
-	// [Six-segment resource description](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1)
+	// Resource to be associated, represented in the standard six-segment resource format. For the correct format, see https://intl.cloud.tencent.com/document/product/651/89122?from_cn_redirect=1
 	Resource *string `json:"Resource,omitnil" name:"Resource"`
 }
 
@@ -90,19 +90,19 @@ func (r *AddResourceTagResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type AttachResourcesTagRequestParams struct {
-	// Resource service name (the third segment in the six-segment resource description)
+	// Service short name, which is the third segment of the six-segment resource format. For more information on the format, see https://intl.cloud.tencent.com/document/product/651/89122?from_cn_redirect=1
 	ServiceType *string `json:"ServiceType,omitnil" name:"ServiceType"`
 
 	// Resource ID array, which can contain up to 50 resources
 	ResourceIds []*string `json:"ResourceIds,omitnil" name:"ResourceIds"`
 
-	// Tag key
+	// The tag key that needs to be bound. For the requirements, refer to: https://intl.cloud.tencent.com/document/product/651/13354?from_cn_redirect=1
 	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
 
-	// Tag value
+	// The tag value that needs to be bound. For the requirements, refer to: https://intl.cloud.tencent.com/document/product/651/13354?from_cn_redirect=1
 	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
 
-	// Resource region. If resources have the region attribute, this field is required; otherwise, it is optional.
+	// Region of the resource. This parameter can be left blank if region is not involved. The region must correspond to resources specified by ResourceIds.N. Once the region is specified, all resources specified by ResourceIds.N must locate in this region. Example: ap-beijing.
 	ResourceRegion *string `json:"ResourceRegion,omitnil" name:"ResourceRegion"`
 
 	// Resource prefix (the part before "/" in the last segment in the six-segment resource description), which is optional for COS buckets but required for other Tencent Cloud resources.
@@ -112,19 +112,19 @@ type AttachResourcesTagRequestParams struct {
 type AttachResourcesTagRequest struct {
 	*tchttp.BaseRequest
 	
-	// Resource service name (the third segment in the six-segment resource description)
+	// Service short name, which is the third segment of the six-segment resource format. For more information on the format, see https://intl.cloud.tencent.com/document/product/651/89122?from_cn_redirect=1
 	ServiceType *string `json:"ServiceType,omitnil" name:"ServiceType"`
 
 	// Resource ID array, which can contain up to 50 resources
 	ResourceIds []*string `json:"ResourceIds,omitnil" name:"ResourceIds"`
 
-	// Tag key
+	// The tag key that needs to be bound. For the requirements, refer to: https://intl.cloud.tencent.com/document/product/651/13354?from_cn_redirect=1
 	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
 
-	// Tag value
+	// The tag value that needs to be bound. For the requirements, refer to: https://intl.cloud.tencent.com/document/product/651/13354?from_cn_redirect=1
 	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
 
-	// Resource region. If resources have the region attribute, this field is required; otherwise, it is optional.
+	// Region of the resource. This parameter can be left blank if region is not involved. The region must correspond to resources specified by ResourceIds.N. Once the region is specified, all resources specified by ResourceIds.N must locate in this region. Example: ap-beijing.
 	ResourceRegion *string `json:"ResourceRegion,omitnil" name:"ResourceRegion"`
 
 	// Resource prefix (the part before "/" in the last segment in the six-segment resource description), which is optional for COS buckets but required for other Tencent Cloud resources.
@@ -565,6 +565,9 @@ type DescribeResourceTagsByResourceIdsRequestParams struct {
 
 	// Page size. The default value is 0.
 	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 type DescribeResourceTagsByResourceIdsRequest struct {
@@ -587,6 +590,9 @@ type DescribeResourceTagsByResourceIdsRequest struct {
 
 	// Page size. The default value is 0.
 	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 func (r *DescribeResourceTagsByResourceIdsRequest) ToJsonString() string {
@@ -607,6 +613,7 @@ func (r *DescribeResourceTagsByResourceIdsRequest) FromJsonString(s string) erro
 	delete(f, "ResourceRegion")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "Category")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeResourceTagsByResourceIdsRequest has unknown keys!", "")
 	}
@@ -759,10 +766,10 @@ type DescribeResourceTagsByTagKeysRequestParams struct {
 	// Resource region
 	ResourceRegion *string `json:"ResourceRegion,omitnil" name:"ResourceRegion"`
 
-	// Unique resource ID
+	// List of unique resource IDs, which can contain no more than 20 IDs.
 	ResourceIds []*string `json:"ResourceIds,omitnil" name:"ResourceIds"`
 
-	// Resource tag key
+	// List of resource tag keys, which can contain no more than 20 keys.
 	TagKeys []*string `json:"TagKeys,omitnil" name:"TagKeys"`
 
 	// Number of entries per page. Default value: 400
@@ -784,10 +791,10 @@ type DescribeResourceTagsByTagKeysRequest struct {
 	// Resource region
 	ResourceRegion *string `json:"ResourceRegion,omitnil" name:"ResourceRegion"`
 
-	// Unique resource ID
+	// List of unique resource IDs, which can contain no more than 20 IDs.
 	ResourceIds []*string `json:"ResourceIds,omitnil" name:"ResourceIds"`
 
-	// Resource tag key
+	// List of resource tag keys, which can contain no more than 20 keys.
 	TagKeys []*string `json:"TagKeys,omitnil" name:"TagKeys"`
 
 	// Number of entries per page. Default value: 400
@@ -1211,11 +1218,14 @@ type DescribeTagKeysRequestParams struct {
 	// Data offset. The default value is 0. Must be an integral multiple of the `Limit` parameter.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// Page size. The default value is 0.
+	// Number of entries per page. Default: 15; maximum: 1,000.
 	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Whether to show project
 	ShowProject *uint64 `json:"ShowProject,omitnil" name:"ShowProject"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 type DescribeTagKeysRequest struct {
@@ -1227,11 +1237,14 @@ type DescribeTagKeysRequest struct {
 	// Data offset. The default value is 0. Must be an integral multiple of the `Limit` parameter.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// Page size. The default value is 0.
+	// Number of entries per page. Default: 15; maximum: 1,000.
 	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
 
 	// Whether to show project
 	ShowProject *uint64 `json:"ShowProject,omitnil" name:"ShowProject"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 func (r *DescribeTagKeysRequest) ToJsonString() string {
@@ -1250,6 +1263,7 @@ func (r *DescribeTagKeysRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "ShowProject")
+	delete(f, "Category")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTagKeysRequest has unknown keys!", "")
 	}
@@ -1303,6 +1317,9 @@ type DescribeTagValuesRequestParams struct {
 
 	// Page size. The default value is 0.
 	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 type DescribeTagValuesRequest struct {
@@ -1319,6 +1336,9 @@ type DescribeTagValuesRequest struct {
 
 	// Page size. The default value is 0.
 	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 func (r *DescribeTagValuesRequest) ToJsonString() string {
@@ -1337,6 +1357,7 @@ func (r *DescribeTagValuesRequest) FromJsonString(s string) error {
 	delete(f, "CreateUin")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "Category")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTagValuesRequest has unknown keys!", "")
 	}
@@ -1879,6 +1900,9 @@ type GetTagKeysRequestParams struct {
 	// Number of data entries to return per page (up to 1,000).
 	// Default value: 50.
 	MaxResults *uint64 `json:"MaxResults,omitnil" name:"MaxResults"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 type GetTagKeysRequest struct {
@@ -1891,6 +1915,9 @@ type GetTagKeysRequest struct {
 	// Number of data entries to return per page (up to 1,000).
 	// Default value: 50.
 	MaxResults *uint64 `json:"MaxResults,omitnil" name:"MaxResults"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 func (r *GetTagKeysRequest) ToJsonString() string {
@@ -1907,6 +1934,7 @@ func (r *GetTagKeysRequest) FromJsonString(s string) error {
 	}
 	delete(f, "PaginationToken")
 	delete(f, "MaxResults")
+	delete(f, "Category")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetTagKeysRequest has unknown keys!", "")
 	}
@@ -1955,6 +1983,9 @@ type GetTagValuesRequestParams struct {
 	// Number of data entries to return per page (up to 1,000).
 	// Default value: 50.
 	MaxResults *uint64 `json:"MaxResults,omitnil" name:"MaxResults"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 type GetTagValuesRequest struct {
@@ -1972,6 +2003,9 @@ type GetTagValuesRequest struct {
 	// Number of data entries to return per page (up to 1,000).
 	// Default value: 50.
 	MaxResults *uint64 `json:"MaxResults,omitnil" name:"MaxResults"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 func (r *GetTagValuesRequest) ToJsonString() string {
@@ -1989,6 +2023,7 @@ func (r *GetTagValuesRequest) FromJsonString(s string) error {
 	delete(f, "TagKeys")
 	delete(f, "PaginationToken")
 	delete(f, "MaxResults")
+	delete(f, "Category")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetTagValuesRequest has unknown keys!", "")
 	}
@@ -2037,6 +2072,9 @@ type GetTagsRequestParams struct {
 	// All tags corresponding to the list of tag keys.
 	// Maximum length: 20
 	TagKeys []*string `json:"TagKeys,omitnil" name:"TagKeys"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 type GetTagsRequest struct {
@@ -2054,6 +2092,9 @@ type GetTagsRequest struct {
 	// All tags corresponding to the list of tag keys.
 	// Maximum length: 20
 	TagKeys []*string `json:"TagKeys,omitnil" name:"TagKeys"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 func (r *GetTagsRequest) ToJsonString() string {
@@ -2071,6 +2112,7 @@ func (r *GetTagsRequest) FromJsonString(s string) error {
 	delete(f, "PaginationToken")
 	delete(f, "MaxResults")
 	delete(f, "TagKeys")
+	delete(f, "Category")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetTagsRequest has unknown keys!", "")
 	}
@@ -2326,6 +2368,9 @@ type Tag struct {
 
 	// Tag value.
 	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.Note: This field may return null, indicating that no value is obtained.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 type TagFilter struct {
@@ -2360,13 +2405,15 @@ type TagResource struct {
 	// Resource type
 	// Note: this field may return null, indicating that no valid values found.
 	ServiceType *string `json:"ServiceType,omitnil" name:"ServiceType"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag.Note: This field may return null, indicating that no value is obtained.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 // Predefined struct for user
 type TagResourcesRequestParams struct {
-	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
-	// For example: ResourceList.1 = qcs::${ServiceType}:${Region}:uin/${Account}:${ResourcePrefix}/${ResourceId}.
-	// Value range of N: 0–9
+	// Cloud resource to be bound, represented in the standard six-segment resource format. For the correct format, see [Resource Description Method](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1) and [Tagging-enabled Resources](https://intl.cloud.tencent.com/document/product/651/89122?from_cn_redirect=1).
+	// Value range of N: 0-9.
 	ResourceList []*string `json:"ResourceList,omitnil" name:"ResourceList"`
 
 	// Tag key and value.
@@ -2380,9 +2427,8 @@ type TagResourcesRequestParams struct {
 type TagResourcesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Six-segment resource description list. Tencent Cloud uses a six-segment value to describe a resource. For more information, see [CAM](https://intl.cloud.tencent.com/document/product/598/67350?from_cn_redirect=1) > Overview > API List > Six-Segment Resource Information.
-	// For example: ResourceList.1 = qcs::${ServiceType}:${Region}:uin/${Account}:${ResourcePrefix}/${ResourceId}.
-	// Value range of N: 0–9
+	// Cloud resource to be bound, represented in the standard six-segment resource format. For the correct format, see [Resource Description Method](https://intl.cloud.tencent.com/document/product/598/10606?from_cn_redirect=1) and [Tagging-enabled Resources](https://intl.cloud.tencent.com/document/product/651/89122?from_cn_redirect=1).
+	// Value range of N: 0-9.
 	ResourceList []*string `json:"ResourceList,omitnil" name:"ResourceList"`
 
 	// Tag key and value.
@@ -2449,6 +2495,9 @@ type TagWithDelete struct {
 
 	// If deletion is allowed.
 	CanDelete *uint64 `json:"CanDelete,omitnil" name:"CanDelete"`
+
+	// Tag type. Valid values: Custom: custom tag; System: system tag; All: all tags. Default value: All.Note: This field may return null, indicating that no value is obtained.
+	Category *string `json:"Category,omitnil" name:"Category"`
 }
 
 // Predefined struct for user
