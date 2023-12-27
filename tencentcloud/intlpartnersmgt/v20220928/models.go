@@ -1147,14 +1147,14 @@ type DescribeCustomerInfoData struct {
 
 // Predefined struct for user
 type DescribeCustomerInfoRequestParams struct {
-	// List of customer UINs
+	// List of customer UIN. Array length value: 1-20.
 	CustomerUin []*int64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 }
 
 type DescribeCustomerInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of customer UINs
+	// List of customer UIN. Array length value: 1-20.
 	CustomerUin []*int64 `json:"CustomerUin,omitnil" name:"CustomerUin"`
 }
 
@@ -1507,14 +1507,14 @@ func (r *QueryCreditAllocationHistoryResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type QueryCreditByUinListRequestParams struct {
-	// User list
+	// List of user. Array length value: 1-50.
 	UinList []*uint64 `json:"UinList,omitnil" name:"UinList"`
 }
 
 type QueryCreditByUinListRequest struct {
 	*tchttp.BaseRequest
 	
-	// User list
+	// List of user. Array length value: 1-50.
 	UinList []*uint64 `json:"UinList,omitnil" name:"UinList"`
 }
 
@@ -1887,14 +1887,14 @@ type QueryVoucherAmountByUinItem struct {
 
 // Predefined struct for user
 type QueryVoucherAmountByUinRequestParams struct {
-	// Customer UIN list
+	// List of customer UIN. Array length value: 1-20.
 	ClientUins []*uint64 `json:"ClientUins,omitnil" name:"ClientUins"`
 }
 
 type QueryVoucherAmountByUinRequest struct {
 	*tchttp.BaseRequest
 	
-	// Customer UIN list
+	// List of customer UIN. Array length value: 1-20.
 	ClientUins []*uint64 `json:"ClientUins,omitnil" name:"ClientUins"`
 }
 
@@ -1955,7 +1955,7 @@ type QueryVoucherListByUinItem struct {
 
 // Predefined struct for user
 type QueryVoucherListByUinRequestParams struct {
-	// Customer UIN list
+	// List of customer UIN. Array length value:1-20.
 	ClientUins []*uint64 `json:"ClientUins,omitnil" name:"ClientUins"`
 
 	// Voucher status. If this parameter is not passed in, all status will be queried by default. Valid values: `Unused`, `Used`, `Expired`.
@@ -1965,7 +1965,7 @@ type QueryVoucherListByUinRequestParams struct {
 type QueryVoucherListByUinRequest struct {
 	*tchttp.BaseRequest
 	
-	// Customer UIN list
+	// List of customer UIN. Array length value:1-20.
 	ClientUins []*uint64 `json:"ClientUins,omitnil" name:"ClientUins"`
 
 	// Voucher status. If this parameter is not passed in, all status will be queried by default. Valid values: `Unused`, `Used`, `Expired`.
