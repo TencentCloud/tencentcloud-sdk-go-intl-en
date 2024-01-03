@@ -1924,7 +1924,7 @@ type ApplyUploadRequestParams struct {
 	// Media type. For the detailed valid values, please see [Upload Overview](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B).
 	MediaType *string `json:"MediaType,omitnil" name:"MediaType"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Media name.
@@ -1962,7 +1962,7 @@ type ApplyUploadRequest struct {
 	// Media type. For the detailed valid values, please see [Upload Overview](https://intl.cloud.tencent.com/document/product/266/9760?from_cn_redirect=1#.E6.96.87.E4.BB.B6.E7.B1.BB.E5.9E.8B).
 	MediaType *string `json:"MediaType,omitnil" name:"MediaType"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Media name.
@@ -2156,7 +2156,7 @@ type AttachMediaSubtitlesRequestParams struct {
 	// Unique IDs of the subtitles
 	SubtitleIds []*string `json:"SubtitleIds,omitnil" name:"SubtitleIds"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -2177,7 +2177,7 @@ type AttachMediaSubtitlesRequest struct {
 	// Unique IDs of the subtitles
 	SubtitleIds []*string `json:"SubtitleIds,omitnil" name:"SubtitleIds"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -2796,7 +2796,7 @@ type CloneCDNDomainRequestParams struct {
 	// The cloned domain.
 	ReferenceDomain *string `json:"ReferenceDomain,omitnil" name:"ReferenceDomain"`
 
-	// VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -2809,7 +2809,7 @@ type CloneCDNDomainRequest struct {
 	// The cloned domain.
 	ReferenceDomain *string `json:"ReferenceDomain,omitnil" name:"ReferenceDomain"`
 
-	// VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -2875,7 +2875,7 @@ type CommitUploadRequestParams struct {
 	// VOD session, which takes the returned value (VodSessionKey) of the `ApplyUpload` API.
 	VodSessionKey *string `json:"VodSessionKey,omitnil" name:"VodSessionKey"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -2885,7 +2885,7 @@ type CommitUploadRequest struct {
 	// VOD session, which takes the returned value (VodSessionKey) of the `ApplyUpload` API.
 	VodSessionKey *string `json:"VodSessionKey,omitnil" name:"VodSessionKey"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -2986,7 +2986,7 @@ type ComposeMediaRequestParams struct {
 	// Information of output media file.
 	Output *ComposeMediaOutput `json:"Output,omitnil" name:"Output"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Canvas used for composing video file.
@@ -3008,7 +3008,7 @@ type ComposeMediaRequest struct {
 	// Information of output media file.
 	Output *ComposeMediaOutput `json:"Output,omitnil" name:"Output"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Canvas used for composing video file.
@@ -3186,7 +3186,7 @@ type ConfirmEventsRequestParams struct {
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -3200,7 +3200,7 @@ type ConfirmEventsRequest struct {
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -3405,7 +3405,7 @@ type CrashScreenConfigureInfoForUpdate struct {
 
 // Predefined struct for user
 type CreateAIAnalysisTemplateRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Video content analysis template name. Length limit: 64 characters.
@@ -3433,7 +3433,7 @@ type CreateAIAnalysisTemplateRequestParams struct {
 type CreateAIAnalysisTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Video content analysis template name. Length limit: 64 characters.
@@ -3511,7 +3511,7 @@ func (r *CreateAIAnalysisTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAIRecognitionTemplateRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Video content recognition template name. Length limit: 64 characters.
@@ -3551,7 +3551,7 @@ type CreateAIRecognitionTemplateRequestParams struct {
 type CreateAIRecognitionTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Video content recognition template name. Length limit: 64 characters.
@@ -3654,7 +3654,7 @@ type CreateAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
 	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitnil" name:"StreamInfos"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template name. Length limit: 64 characters.
@@ -3707,7 +3707,7 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 	// Note: the frame rate of all substreams must be the same; otherwise, the frame rate of the first substream will be used as the output frame rate.
 	StreamInfos []*AdaptiveStreamTemplate `json:"StreamInfos,omitnil" name:"StreamInfos"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template name. Length limit: 64 characters.
@@ -3806,7 +3806,7 @@ type CreateAnimatedGraphicsTemplateRequestParams struct {
 	// Video frame rate in Hz. Value range: [1, 30].
 	Fps *uint64 `json:"Fps,omitnil" name:"Fps"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Maximum value of the width (or long side) of an animated image in px. Value range: 0 and [128, 4,096].
@@ -3850,7 +3850,7 @@ type CreateAnimatedGraphicsTemplateRequest struct {
 	// Video frame rate in Hz. Value range: [1, 30].
 	Fps *uint64 `json:"Fps,omitnil" name:"Fps"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Maximum value of the width (or long side) of an animated image in px. Value range: 0 and [128, 4,096].
@@ -3948,7 +3948,7 @@ type CreateCDNDomainRequestParams struct {
 	// Domain Config
 	Config *CDNDomainConfig `json:"Config,omitnil" name:"Config"`
 
-	// VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -3961,7 +3961,7 @@ type CreateCDNDomainRequest struct {
 	// Domain Config
 	Config *CDNDomainConfig `json:"Config,omitnil" name:"Config"`
 
-	// VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -4016,7 +4016,7 @@ type CreateClassRequestParams struct {
 	// Category name. Length limit: 1-64 characters.
 	ClassName *string `json:"ClassName,omitnil" name:"ClassName"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -4029,7 +4029,7 @@ type CreateClassRequest struct {
 	// Category name. Length limit: 1-64 characters.
 	ClassName *string `json:"ClassName,omitnil" name:"ClassName"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -4086,7 +4086,7 @@ type CreateContentReviewTemplateRequestParams struct {
 	// <li>OFF: no</li>
 	ReviewWallSwitch *string `json:"ReviewWallSwitch,omitnil" name:"ReviewWallSwitch"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of an intelligent content recognition template. Length limit: 64 characters.
@@ -4124,7 +4124,7 @@ type CreateContentReviewTemplateRequest struct {
 	// <li>OFF: no</li>
 	ReviewWallSwitch *string `json:"ReviewWallSwitch,omitnil" name:"ReviewWallSwitch"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of an intelligent content recognition template. Length limit: 64 characters.
@@ -4269,7 +4269,7 @@ type CreateEnhanceMediaTemplateRequestParams struct {
 	// Output file encapsulation format, optional values: mp4, flv, hls.
 	Container *string `json:"Container,omitnil" name:"Container"`
 
-	// VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Audio and video quality rebirth template name, length limit: 64 characters.
@@ -4309,7 +4309,7 @@ type CreateEnhanceMediaTemplateRequest struct {
 	// Output file encapsulation format, optional values: mp4, flv, hls.
 	Container *string `json:"Container,omitnil" name:"Container"`
 
-	// VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Audio and video quality rebirth template name, length limit: 64 characters.
@@ -4401,7 +4401,7 @@ type CreateHeadTailTemplateRequestParams struct {
 	// Template name, length limit is 64 characters.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template description information, length limit is 256 characters.
@@ -4428,7 +4428,7 @@ type CreateHeadTailTemplateRequest struct {
 	// Template name, length limit is 64 characters.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template description information, length limit is 256 characters.
@@ -4504,7 +4504,7 @@ type CreateImageProcessingTemplateRequestParams struct {
 	// <li>Length limit: 10.</li>
 	Operations []*ImageOperation `json:"Operations,omitnil" name:"Operations"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The name of the image processing template. Length limit: 64 characters.
@@ -4521,7 +4521,7 @@ type CreateImageProcessingTemplateRequest struct {
 	// <li>Length limit: 10.</li>
 	Operations []*ImageOperation `json:"Operations,omitnil" name:"Operations"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The name of the image processing template. Length limit: 64 characters.
@@ -4633,7 +4633,7 @@ type CreateImageSpriteTemplateRequestParams struct {
 	// Note: The number of columns of the small image will affect the width of the final large image. The maximum width of the large image is 15,000 pixels. The width of the large image is the product of the number of columns of the small image and the width of the small image.
 	ColumnCount *uint64 `json:"ColumnCount,omitnil" name:"ColumnCount"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of an image sprite generating template. Length limit: 64 characters.
@@ -4701,7 +4701,7 @@ type CreateImageSpriteTemplateRequest struct {
 	// Note: The number of columns of the small image will affect the width of the final large image. The maximum width of the large image is 15,000 pixels. The width of the large image is the product of the number of columns of the small image and the width of the small image.
 	ColumnCount *uint64 `json:"ColumnCount,omitnil" name:"ColumnCount"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of an image sprite generating template. Length limit: 64 characters.
@@ -4811,7 +4811,7 @@ type CreateJustInTimeTranscodeTemplateRequestParams struct {
 	// Video parameter configuration.
 	VideoConfigure *VideoConfigureInfo `json:"VideoConfigure,omitnil" name:"VideoConfigure"`
 
-	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Watermark parameter configuration.
@@ -4830,7 +4830,7 @@ type CreateJustInTimeTranscodeTemplateRequest struct {
 	// Video parameter configuration.
 	VideoConfigure *VideoConfigureInfo `json:"VideoConfigure,omitnil" name:"VideoConfigure"`
 
-	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Watermark parameter configuration.
@@ -4896,7 +4896,7 @@ type CreatePersonSampleRequestParams struct {
 	// 3. All: equivalent to 1+2.
 	Usages []*string `json:"Usages,omitnil" name:"Usages"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Description of a sample. Length limit: 1024 characters.
@@ -4924,7 +4924,7 @@ type CreatePersonSampleRequest struct {
 	// 3. All: equivalent to 1+2.
 	Usages []*string `json:"Usages,omitnil" name:"Usages"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Description of a sample. Length limit: 1024 characters.
@@ -4997,7 +4997,7 @@ type CreateProcedureTemplateRequestParams struct {
 	// Task flow name (up to 20 characters).
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template description. Length limit: 256 characters.
@@ -5026,7 +5026,7 @@ type CreateProcedureTemplateRequest struct {
 	// Task flow name (up to 20 characters).
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template description. Length limit: 256 characters.
@@ -5099,7 +5099,7 @@ func (r *CreateProcedureTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateQualityInspectTemplateRequestParams struct {
-	// <b>The VOD [subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?has_map=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Media quality inspect template name.Length limit: 64 characters.
@@ -5145,7 +5145,7 @@ type CreateQualityInspectTemplateRequestParams struct {
 type CreateQualityInspectTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?has_map=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Media quality inspect template name.Length limit: 64 characters.
@@ -5250,7 +5250,7 @@ type CreateRebuildMediaTemplateRequestParams struct {
 	// The output container format. Valid values: `mp4`, `flv`, `hls`.
 	Container *string `json:"Container,omitnil" name:"Container"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The remaster template name.
@@ -5290,7 +5290,7 @@ type CreateRebuildMediaTemplateRequest struct {
 	// The output container format. Valid values: `mp4`, `flv`, `hls`.
 	Container *string `json:"Container,omitnil" name:"Container"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The remaster template name.
@@ -5382,7 +5382,7 @@ type CreateReviewTemplateRequestParams struct {
 	// The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>`Moan`: Moaning</li>
 	Labels []*string `json:"Labels,omitnil" name:"Labels"`
 
-
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil" name:"SubAppId"`
 
 
@@ -5398,6 +5398,7 @@ type CreateReviewTemplateRequest struct {
 	// The violation labels to use. Valid values: <li>`Porn`: Pornographic content</li> <li>`Terror`: Terrorist content</li> <li>`Moan`: Moaning</li>
 	Labels []*string `json:"Labels,omitnil" name:"Labels"`
 
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	Name *string `json:"Name,omitnil" name:"Name"`
@@ -5461,7 +5462,7 @@ type CreateRoundPlayRequestParams struct {
 	// <li>Array length limit: 100.</li>
 	RoundPlaylist []*RoundPlayListItemInfo `json:"RoundPlaylist,omitnil" name:"RoundPlaylist"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The playlist name (not longer than 64 characters).
@@ -5473,7 +5474,7 @@ type CreateRoundPlayRequestParams struct {
 	// Play mode, optional values:
 	// <li>Loop: Play the playlist in a loop;</li>
 	// <li>Linear: Play once, stop playing after the playlist is played. </li>
-	// Default value：Loop。
+	// Default value: Loop.
 	PlayBackMode *string `json:"PlayBackMode,omitnil" name:"PlayBackMode"`
 }
 
@@ -5487,7 +5488,7 @@ type CreateRoundPlayRequest struct {
 	// <li>Array length limit: 100.</li>
 	RoundPlaylist []*RoundPlayListItemInfo `json:"RoundPlaylist,omitnil" name:"RoundPlaylist"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The playlist name (not longer than 64 characters).
@@ -5499,7 +5500,7 @@ type CreateRoundPlayRequest struct {
 	// Play mode, optional values:
 	// <li>Loop: Play the playlist in a loop;</li>
 	// <li>Linear: Play once, stop playing after the playlist is played. </li>
-	// Default value：Loop。
+	// Default value: Loop.
 	PlayBackMode *string `json:"PlayBackMode,omitnil" name:"PlayBackMode"`
 }
 
@@ -5567,7 +5568,7 @@ type CreateSampleSnapshotTemplateRequestParams struct {
 	// <li>If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.</li>
 	SampleInterval *uint64 `json:"SampleInterval,omitnil" name:"SampleInterval"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of a sampled screencapturing template. Length limit: 64 characters.
@@ -5623,7 +5624,7 @@ type CreateSampleSnapshotTemplateRequest struct {
 	// <li>If `SampleType` is `Time`, sampling will be performed at the specified time interval in seconds.</li>
 	SampleInterval *uint64 `json:"SampleInterval,omitnil" name:"SampleInterval"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of a sampled screencapturing template. Length limit: 64 characters.
@@ -5721,7 +5722,7 @@ func (r *CreateSampleSnapshotTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSnapshotByTimeOffsetTemplateRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of a time point screencapturing template. Length limit: 64 characters.
@@ -5767,7 +5768,7 @@ type CreateSnapshotByTimeOffsetTemplateRequestParams struct {
 type CreateSnapshotByTimeOffsetTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of a time point screencapturing template. Length limit: 64 characters.
@@ -5866,7 +5867,7 @@ type CreateStorageRegionRequestParams struct {
 	// The region to enable storage in, which must be a storage region supported by VOD.
 	StorageRegion *string `json:"StorageRegion,omitnil" name:"StorageRegion"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -5876,7 +5877,7 @@ type CreateStorageRegionRequest struct {
 	// The region to enable storage in, which must be a storage region supported by VOD.
 	StorageRegion *string `json:"StorageRegion,omitnil" name:"StorageRegion"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -5991,7 +5992,7 @@ type CreateSuperPlayerConfigRequestParams struct {
 	// Player configuration name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Type of audio/video played. Valid values:
@@ -6054,7 +6055,7 @@ type CreateSuperPlayerConfigRequest struct {
 	// Player configuration name, which can contain up to 64 letters, digits, underscores, and hyphens (such as test_ABC-123) and must be unique under a user.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Type of audio/video played. Valid values:
@@ -6168,7 +6169,7 @@ type CreateTranscodeTemplateRequestParams struct {
 	// The container format. Valid values: `mp4`, `flv`, `hls`, `mp3`, `flac`, `ogg`, `m4a`, `wav` ( `mp3`, `flac`, `ogg`, `m4a`, and `wav` are audio file formats).
 	Container *string `json:"Container,omitnil" name:"Container"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Transcoding template name. Length limit: 64 characters.
@@ -6211,7 +6212,7 @@ type CreateTranscodeTemplateRequest struct {
 	// The container format. Valid values: `mp4`, `flv`, `hls`, `mp3`, `flac`, `ogg`, `m4a`, `wav` ( `mp3`, `flac`, `ogg`, `m4a`, and `wav` are audio file formats).
 	Container *string `json:"Container,omitnil" name:"Container"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Transcoding template name. Length limit: 64 characters.
@@ -6313,7 +6314,7 @@ type CreateVodDomainRequestParams struct {
 	// If `AccelerateArea` is not specified, VOD will enable acceleration in or outside Chinese mainland based on the regional information a user has configured with Tencent Cloud.
 	AccelerateArea *string `json:"AccelerateArea,omitnil" name:"AccelerateArea"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6330,7 +6331,7 @@ type CreateVodDomainRequest struct {
 	// If `AccelerateArea` is not specified, VOD will enable acceleration in or outside Chinese mainland based on the regional information a user has configured with Tencent Cloud.
 	AccelerateArea *string `json:"AccelerateArea,omitnil" name:"AccelerateArea"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6385,7 +6386,7 @@ type CreateWatermarkTemplateRequestParams struct {
 	// <li>svg: SVG watermark.</li>
 	Type *string `json:"Type,omitnil" name:"Type"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Watermarking template name. Length limit: 64 characters.
@@ -6433,7 +6434,7 @@ type CreateWatermarkTemplateRequest struct {
 	// <li>svg: SVG watermark.</li>
 	Type *string `json:"Type,omitnil" name:"Type"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Watermarking template name. Length limit: 64 characters.
@@ -6544,7 +6545,7 @@ type CreateWordSamplesRequestParams struct {
 	// Keyword. Array length limit: 100.
 	Words []*AiSampleWordInfo `json:"Words,omitnil" name:"Words"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6565,7 +6566,7 @@ type CreateWordSamplesRequest struct {
 	// Keyword. Array length limit: 100.
 	Words []*AiSampleWordInfo `json:"Words,omitnil" name:"Words"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6628,7 +6629,7 @@ type DeleteAIAnalysisTemplateRequestParams struct {
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6638,7 +6639,7 @@ type DeleteAIAnalysisTemplateRequest struct {
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6689,7 +6690,7 @@ type DeleteAIRecognitionTemplateRequestParams struct {
 	// Unique ID of video content recognition template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6699,7 +6700,7 @@ type DeleteAIRecognitionTemplateRequest struct {
 	// Unique ID of video content recognition template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6750,7 +6751,7 @@ type DeleteAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// Unique ID of adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6760,7 +6761,7 @@ type DeleteAdaptiveDynamicStreamingTemplateRequest struct {
 	// Unique ID of adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6811,7 +6812,7 @@ type DeleteAnimatedGraphicsTemplateRequestParams struct {
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6821,7 +6822,7 @@ type DeleteAnimatedGraphicsTemplateRequest struct {
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6872,7 +6873,7 @@ type DeleteCDNDomainRequestParams struct {
 	// Domain.
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6882,7 +6883,7 @@ type DeleteCDNDomainRequest struct {
 	// Domain.
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6933,7 +6934,7 @@ type DeleteClassRequestParams struct {
 	// Category ID
 	ClassId *int64 `json:"ClassId,omitnil" name:"ClassId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6943,7 +6944,7 @@ type DeleteClassRequest struct {
 	// Category ID
 	ClassId *int64 `json:"ClassId,omitnil" name:"ClassId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -6994,7 +6995,7 @@ type DeleteContentReviewTemplateRequestParams struct {
 	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7004,7 +7005,7 @@ type DeleteContentReviewTemplateRequest struct {
 	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7055,7 +7056,7 @@ type DeleteEnhanceMediaTemplateRequestParams struct {
 	// Enhance Media Template ID
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7065,7 +7066,7 @@ type DeleteEnhanceMediaTemplateRequest struct {
 	// Enhance Media Template ID
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7116,7 +7117,7 @@ type DeleteHeadTailTemplateRequestParams struct {
 	// Head Tail Template Number.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7126,7 +7127,7 @@ type DeleteHeadTailTemplateRequest struct {
 	// Head Tail Template Number.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7177,7 +7178,7 @@ type DeleteImageProcessingTemplateRequestParams struct {
 	// The template ID.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7187,7 +7188,7 @@ type DeleteImageProcessingTemplateRequest struct {
 	// The template ID.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7238,7 +7239,7 @@ type DeleteImageSpriteTemplateRequestParams struct {
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7248,7 +7249,7 @@ type DeleteImageSpriteTemplateRequest struct {
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7299,7 +7300,7 @@ type DeleteJustInTimeTranscodeTemplateRequestParams struct {
 	// Template name.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7309,7 +7310,7 @@ type DeleteJustInTimeTranscodeTemplateRequest struct {
 	// Template name.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7360,7 +7361,7 @@ type DeleteMediaRequestParams struct {
 	// Unique media file ID.
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Content to be deleted. The default value is "[]", which indicates to delete the media file and all its corresponding files generated by video processing.
@@ -7373,7 +7374,7 @@ type DeleteMediaRequest struct {
 	// Unique media file ID.
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Content to be deleted. The default value is "[]", which indicates to delete the media file and all its corresponding files generated by video processing.
@@ -7428,7 +7429,7 @@ type DeletePersonSampleRequestParams struct {
 	// ID of a sample.
 	PersonId *string `json:"PersonId,omitnil" name:"PersonId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7438,7 +7439,7 @@ type DeletePersonSampleRequest struct {
 	// ID of a sample.
 	PersonId *string `json:"PersonId,omitnil" name:"PersonId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7489,7 +7490,7 @@ type DeleteProcedureTemplateRequestParams struct {
 	// Task flow name.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7499,7 +7500,7 @@ type DeleteProcedureTemplateRequest struct {
 	// Task flow name.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7550,7 +7551,7 @@ type DeleteQualityInspectTemplateRequestParams struct {
 	// Media quality inspection template ID.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?has_map=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7560,7 +7561,7 @@ type DeleteQualityInspectTemplateRequest struct {
 	// Media quality inspection template ID.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?has_map=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7611,7 +7612,7 @@ type DeleteRebuildMediaTemplateRequestParams struct {
 	// Rebuild Media Template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7621,7 +7622,7 @@ type DeleteRebuildMediaTemplateRequest struct {
 	// Rebuild Media Template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7672,7 +7673,7 @@ type DeleteReviewTemplateRequestParams struct {
 	// The unique ID of the moderation template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7682,7 +7683,7 @@ type DeleteReviewTemplateRequest struct {
 	// The unique ID of the moderation template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7733,7 +7734,7 @@ type DeleteRoundPlayRequestParams struct {
 	// The playlist ID, which is unique.
 	RoundPlayId *string `json:"RoundPlayId,omitnil" name:"RoundPlayId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7743,7 +7744,7 @@ type DeleteRoundPlayRequest struct {
 	// The playlist ID, which is unique.
 	RoundPlayId *string `json:"RoundPlayId,omitnil" name:"RoundPlayId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7794,7 +7795,7 @@ type DeleteSampleSnapshotTemplateRequestParams struct {
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7804,7 +7805,7 @@ type DeleteSampleSnapshotTemplateRequest struct {
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7855,7 +7856,7 @@ type DeleteSnapshotByTimeOffsetTemplateRequestParams struct {
 	// Unique ID of a specified time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7865,7 +7866,7 @@ type DeleteSnapshotByTimeOffsetTemplateRequest struct {
 	// Unique ID of a specified time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7916,7 +7917,7 @@ type DeleteSuperPlayerConfigRequestParams struct {
 	// Player configuration name.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7926,7 +7927,7 @@ type DeleteSuperPlayerConfigRequest struct {
 	// Player configuration name.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7977,7 +7978,7 @@ type DeleteTranscodeTemplateRequestParams struct {
 	// Unique ID of transcoding template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -7987,7 +7988,7 @@ type DeleteTranscodeTemplateRequest struct {
 	// Unique ID of transcoding template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -8038,7 +8039,7 @@ type DeleteVodDomainRequestParams struct {
 	// Domain name to delete from VOD
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -8048,7 +8049,7 @@ type DeleteVodDomainRequest struct {
 	// Domain name to delete from VOD
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -8099,7 +8100,7 @@ type DeleteWatermarkTemplateRequestParams struct {
 	// Unique ID of watermarking template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -8109,7 +8110,7 @@ type DeleteWatermarkTemplateRequest struct {
 	// Unique ID of watermarking template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -8160,7 +8161,7 @@ type DeleteWordSamplesRequestParams struct {
 	// Keyword. Array length limit: 100 words.
 	Keywords []*string `json:"Keywords,omitnil" name:"Keywords"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -8170,7 +8171,7 @@ type DeleteWordSamplesRequest struct {
 	// Keyword. Array length limit: 100 words.
 	Keywords []*string `json:"Keywords,omitnil" name:"Keywords"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -8218,7 +8219,7 @@ func (r *DeleteWordSamplesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAIAnalysisTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of video content analysis templates. Array length limit: 100.
@@ -8234,7 +8235,7 @@ type DescribeAIAnalysisTemplatesRequestParams struct {
 type DescribeAIAnalysisTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of video content analysis templates. Array length limit: 100.
@@ -8299,7 +8300,7 @@ func (r *DescribeAIAnalysisTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAIRecognitionTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of video content recognition templates. Array length limit: 100.
@@ -8315,7 +8316,7 @@ type DescribeAIRecognitionTemplatesRequestParams struct {
 type DescribeAIRecognitionTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of video content recognition templates. Array length limit: 100.
@@ -8380,7 +8381,7 @@ func (r *DescribeAIRecognitionTemplatesResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeAdaptiveDynamicStreamingTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of transcoding to adaptive bitrate streaming templates. Array length limit: 100.
@@ -8401,7 +8402,7 @@ type DescribeAdaptiveDynamicStreamingTemplatesRequestParams struct {
 type DescribeAdaptiveDynamicStreamingTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of transcoding to adaptive bitrate streaming templates. Array length limit: 100.
@@ -8472,14 +8473,14 @@ func (r *DescribeAdaptiveDynamicStreamingTemplatesResponse) FromJsonString(s str
 
 // Predefined struct for user
 type DescribeAllClassRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
 type DescribeAllClassRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -8530,7 +8531,7 @@ func (r *DescribeAllClassResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAnimatedGraphicsTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of animated image generating templates. Array length limit: 100.
@@ -8551,7 +8552,7 @@ type DescribeAnimatedGraphicsTemplatesRequestParams struct {
 type DescribeAnimatedGraphicsTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of animated image generating templates. Array length limit: 100.
@@ -8631,7 +8632,7 @@ type DescribeCDNDomainsRequestParams struct {
 	// The starting offset of paged pull. Default value: 0.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// VOD [Subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?from_cn_redirect=1) ID. If you want to access resources in the Subapplication, enter the Subapplication ID in this field; otherwise, you do not need to fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -8647,7 +8648,7 @@ type DescribeCDNDomainsRequest struct {
 	// The starting offset of paged pull. Default value: 0.
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// VOD [Subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?from_cn_redirect=1) ID. If you want to access resources in the Subapplication, enter the Subapplication ID in this field; otherwise, you do not need to fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -8717,7 +8718,7 @@ type DescribeCDNStatDetailsRequestParams struct {
 	// End time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// List of domain names. The usage data of up to 20 domain names can be queried at a time. The usage data of all domain names is returned by default.
@@ -8808,7 +8809,7 @@ type DescribeCDNStatDetailsRequest struct {
 	// End time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// List of domain names. The usage data of up to 20 domain names can be queried at a time. The usage data of all domain names is returned by default.
@@ -8950,8 +8951,7 @@ type DescribeCDNUsageDataRequestParams struct {
 	// <li>Bandwidth: bandwidth in bps.</li>
 	DataType *string `json:"DataType,omitnil" name:"DataType"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	// You can set this parameter to 1 to query the total usage of all applications (including the primary application) as an admin (only 1-day granularity is supported).</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Time granularity of usage data in minutes. Valid values:
@@ -8979,8 +8979,7 @@ type DescribeCDNUsageDataRequest struct {
 	// <li>Bandwidth: bandwidth in bps.</li>
 	DataType *string `json:"DataType,omitnil" name:"DataType"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	// You can set this parameter to 1 to query the total usage of all applications (including the primary application) as an admin (only 1-day granularity is supported).</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Time granularity of usage data in minutes. Valid values:
@@ -9057,7 +9056,7 @@ type DescribeCdnLogsRequestParams struct {
 	// End time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F), which must be after the start time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Maximum return results of pulling paginated queries. Default value: 100; maximum value: 1000
@@ -9079,7 +9078,7 @@ type DescribeCdnLogsRequest struct {
 	// End time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F), which must be after the start time.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Maximum return results of pulling paginated queries. Default value: 100; maximum value: 1000
@@ -9155,7 +9154,7 @@ type DescribeClientUploadAccelerationUsageDataRequestParams struct {
 	// The end date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format). The end date must be later than the start date.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The client upload acceleration type. Valid values:
@@ -9174,7 +9173,7 @@ type DescribeClientUploadAccelerationUsageDataRequest struct {
 	// The end date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format). The end date must be later than the start date.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The client upload acceleration type. Valid values:
@@ -9233,7 +9232,7 @@ func (r *DescribeClientUploadAccelerationUsageDataResponse) FromJsonString(s str
 
 // Predefined struct for user
 type DescribeContentReviewTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique IDs for filters of an intelligent content recognition template. Array length limit: 100.
@@ -9249,7 +9248,7 @@ type DescribeContentReviewTemplatesRequestParams struct {
 type DescribeContentReviewTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique IDs for filters of an intelligent content recognition template. Array length limit: 100.
@@ -9320,7 +9319,7 @@ type DescribeDailyPlayStatFileListRequestParams struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -9333,7 +9332,7 @@ type DescribeDailyPlayStatFileListRequest struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -9385,14 +9384,14 @@ func (r *DescribeDailyPlayStatFileListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDrmKeyProviderInfoRequestParams struct {
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
 type DescribeDrmKeyProviderInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -9443,7 +9442,7 @@ func (r *DescribeDrmKeyProviderInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeEnhanceMediaTemplatesRequestParams struct {
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// List of Enhance media templates. Length limit: 100.
@@ -9464,7 +9463,7 @@ type DescribeEnhanceMediaTemplatesRequestParams struct {
 type DescribeEnhanceMediaTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// List of Enhance media templates. Length limit: 100.
@@ -9538,7 +9537,7 @@ type DescribeFileAttributesRequestParams struct {
 	// The file ID.
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
@@ -9560,7 +9559,7 @@ type DescribeFileAttributesRequest struct {
 	// The file ID.
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last three days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
@@ -9671,7 +9670,7 @@ type DescribeFileAttributesTaskOutput struct {
 
 // Predefined struct for user
 type DescribeHeadTailTemplatesRequestParams struct {
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Head Tail template number, array length limit: 100.
@@ -9687,7 +9686,7 @@ type DescribeHeadTailTemplatesRequestParams struct {
 type DescribeHeadTailTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Head Tail template number, array length limit: 100.
@@ -9752,7 +9751,7 @@ func (r *DescribeHeadTailTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeImageProcessingTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The IDs of the templates to query. Length limit: 100.
@@ -9773,7 +9772,7 @@ type DescribeImageProcessingTemplatesRequestParams struct {
 type DescribeImageProcessingTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The IDs of the templates to query. Length limit: 100.
@@ -9850,7 +9849,7 @@ type DescribeImageReviewUsageDataRequestParams struct {
 	// The end date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format). The end date must be later than the start date.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -9863,7 +9862,7 @@ type DescribeImageReviewUsageDataRequest struct {
 	// The end date for the query in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format). The end date must be later than the start date.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -9915,7 +9914,7 @@ func (r *DescribeImageReviewUsageDataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeImageSpriteTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of image sprite generating templates. Array length limit: 100.
@@ -9936,7 +9935,7 @@ type DescribeImageSpriteTemplatesRequestParams struct {
 type DescribeImageSpriteTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of image sprite generating templates. Array length limit: 100.
@@ -10010,7 +10009,7 @@ type DescribeJustInTimeTranscodeTemplatesRequestParams struct {
 	// Template name filter condition, array length limit: 100.
 	Names []*string `json:"Names,omitnil" name:"Names"`
 
-	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template type filter conditions, optional values:
@@ -10031,7 +10030,7 @@ type DescribeJustInTimeTranscodeTemplatesRequest struct {
 	// Template name filter condition, array length limit: 100.
 	Names []*string `json:"Names,omitnil" name:"Names"`
 
-	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template type filter conditions, optional values:
@@ -10109,7 +10108,7 @@ type DescribeLicenseUsageDataRequestParams struct {
 	// <li> DRM</li>
 	LicenseType *string `json:"LicenseType,omitnil" name:"LicenseType"`
 
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -10126,7 +10125,7 @@ type DescribeLicenseUsageDataRequest struct {
 	// <li> DRM</li>
 	LicenseType *string `json:"LicenseType,omitnil" name:"LicenseType"`
 
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -10182,7 +10181,7 @@ type DescribeMediaInfosRequestParams struct {
 	// List of media file IDs. N starts from 0 and can be up to 19.
 	FileIds []*string `json:"FileIds,omitnil" name:"FileIds"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The types of information to return. You can specify multiple information types. `N` starts from 0. If you do not specify this parameter, all information will be returned. The supported information types are as follows:
@@ -10207,7 +10206,7 @@ type DescribeMediaInfosRequest struct {
 	// List of media file IDs. N starts from 0 and can be up to 19.
 	FileIds []*string `json:"FileIds,omitnil" name:"FileIds"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The types of information to return. You can specify multiple information types. `N` starts from 0. If you do not specify this parameter, all information will be returned. The supported information types are as follows:
@@ -10286,7 +10285,7 @@ type DescribeMediaPlayStatDetailsRequestParams struct {
 	// The end time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Granularity. Valid values:
@@ -10308,7 +10307,7 @@ type DescribeMediaPlayStatDetailsRequest struct {
 	// The end time in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Granularity. Valid values:
@@ -10374,7 +10373,7 @@ type DescribeMediaProcessUsageDataRequestParams struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Query the video processing task type. Currently supported task types include:
@@ -10408,7 +10407,7 @@ type DescribeMediaProcessUsageDataRequest struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F). The end date must be on or after the start date.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Query the video processing task type. Currently supported task types include:
@@ -10482,7 +10481,7 @@ func (r *DescribeMediaProcessUsageDataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePersonSamplesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Type of samples to pull. Valid values:
@@ -10512,7 +10511,7 @@ type DescribePersonSamplesRequestParams struct {
 type DescribePersonSamplesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Type of samples to pull. Valid values:
@@ -10594,7 +10593,7 @@ func (r *DescribePersonSamplesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeProcedureTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name filter of task flow template. Array length limit: 100.
@@ -10615,7 +10614,7 @@ type DescribeProcedureTemplatesRequestParams struct {
 type DescribeProcedureTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name filter of task flow template. Array length limit: 100.
@@ -10686,7 +10685,7 @@ func (r *DescribeProcedureTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeQualityInspectTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?has_map=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Media quality inspect template list. Length limit: 100.
@@ -10705,7 +10704,7 @@ type DescribeQualityInspectTemplatesRequestParams struct {
 type DescribeQualityInspectTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?has_map=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Media quality inspect template list. Length limit: 100.
@@ -10777,7 +10776,7 @@ type DescribeRebuildMediaTemplatesRequestParams struct {
 	// List of rebuild media templates.
 	Definitions []*int64 `json:"Definitions,omitnil" name:"Definitions"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The template type. Valid values:
@@ -10798,7 +10797,7 @@ type DescribeRebuildMediaTemplatesRequest struct {
 	// List of rebuild media templates.
 	Definitions []*int64 `json:"Definitions,omitnil" name:"Definitions"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The template type. Valid values:
@@ -10872,7 +10871,7 @@ type DescribeReviewDetailsRequestParams struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). The end date must be after the start date.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -10885,7 +10884,7 @@ type DescribeReviewDetailsRequest struct {
 	// End date in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I). The end date must be after the start date.
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -10943,7 +10942,7 @@ func (r *DescribeReviewDetailsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeReviewTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The audit template uniquely identifies the filtering conditions, and the array length limit is: 100.
@@ -10964,7 +10963,7 @@ type DescribeReviewTemplatesRequestParams struct {
 type DescribeReviewTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The audit template uniquely identifies the filtering conditions, and the array length limit is: 100.
@@ -11035,7 +11034,7 @@ func (r *DescribeReviewTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRoundPlaysRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The playlist IDs. Array length limit: 100.
@@ -11051,7 +11050,7 @@ type DescribeRoundPlaysRequestParams struct {
 type DescribeRoundPlaysRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The playlist IDs. Array length limit: 100.
@@ -11115,7 +11114,7 @@ func (r *DescribeRoundPlaysResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSampleSnapshotTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of sampled screencapturing templates. Array length limit: 100.
@@ -11136,7 +11135,7 @@ type DescribeSampleSnapshotTemplatesRequestParams struct {
 type DescribeSampleSnapshotTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of sampled screencapturing templates. Array length limit: 100.
@@ -11207,7 +11206,7 @@ func (r *DescribeSampleSnapshotTemplatesResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type DescribeSnapshotByTimeOffsetTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of time point screencapturing templates. Array length limit: 100.
@@ -11228,7 +11227,7 @@ type DescribeSnapshotByTimeOffsetTemplatesRequestParams struct {
 type DescribeSnapshotByTimeOffsetTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of time point screencapturing templates. Array length limit: 100.
@@ -11299,14 +11298,14 @@ func (r *DescribeSnapshotByTimeOffsetTemplatesResponse) FromJsonString(s string)
 
 // Predefined struct for user
 type DescribeStorageDataRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
 type DescribeStorageDataRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -11380,8 +11379,7 @@ type DescribeStorageDetailsRequestParams struct {
 	// End time in ISO 8601 format, which should be larger than the start time. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	// You can set this parameter to 1 to query the total usage of all applications (including the primary application) as an admin.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Time granularity. Valid values:
@@ -11424,8 +11422,7 @@ type DescribeStorageDetailsRequest struct {
 	// End time in ISO 8601 format, which should be larger than the start time. For more information, please see [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
-	// You can set this parameter to 1 to query the total usage of all applications (including the primary application) as an admin.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Time granularity. Valid values:
@@ -11510,14 +11507,14 @@ func (r *DescribeStorageDetailsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeStorageRegionsRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
 type DescribeStorageRegionsRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -11648,7 +11645,7 @@ func (r *DescribeSubAppIdsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSuperPlayerConfigsRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Player configuration name filter. Array length limit: 100.
@@ -11669,7 +11666,7 @@ type DescribeSuperPlayerConfigsRequestParams struct {
 type DescribeSuperPlayerConfigsRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Player configuration name filter. Array length limit: 100.
@@ -11743,7 +11740,7 @@ type DescribeTaskDetailRequestParams struct {
 	// Video processing task ID.
 	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -11753,7 +11750,7 @@ type DescribeTaskDetailRequest struct {
 	// Video processing task ID.
 	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -11792,7 +11789,7 @@ type DescribeTaskDetailResponseParams struct {
 	// <li>`DescribeFileAttributesTask`: Getting file attributes</li>
 	// <li> `ReviewAudioVideo`: Moderation</li>
 	// <li>`ExtractTraceWatermark`: Digital watermark extraction</li>
-	// <li>`QualityEnhance`：Enhance audio/video</li>
+	// <li>`QualityEnhance`: Enhance audio/video</li>
 	TaskType *string `json:"TaskType,omitnil" name:"TaskType"`
 
 	// Task status. Valid values:
@@ -11916,7 +11913,7 @@ func (r *DescribeTaskDetailResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTasksRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Filter: Task status. Valid values: WAITING (waiting), PROCESSING (processing), FINISH (completed).
@@ -11946,7 +11943,7 @@ type DescribeTasksRequestParams struct {
 type DescribeTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Filter: Task status. Valid values: WAITING (waiting), PROCESSING (processing), FINISH (completed).
@@ -12029,7 +12026,7 @@ func (r *DescribeTasksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTranscodeTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of transcoding templates. Array length limit: 100.
@@ -12060,7 +12057,7 @@ type DescribeTranscodeTemplatesRequestParams struct {
 type DescribeTranscodeTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Unique ID filter of transcoding templates. Array length limit: 100.
@@ -12154,7 +12151,7 @@ type DescribeVodDomainsRequestParams struct {
 	// Page number offset from the beginning of paginated queries. Default value: 0
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -12171,7 +12168,7 @@ type DescribeVodDomainsRequest struct {
 	// Page number offset from the beginning of paginated queries. Default value: 0
 	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
 
-	// VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -12227,7 +12224,7 @@ func (r *DescribeVodDomainsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeWatermarkTemplatesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Watermark type filter. Valid values:
@@ -12250,7 +12247,7 @@ type DescribeWatermarkTemplatesRequestParams struct {
 type DescribeWatermarkTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Watermark type filter. Valid values:
@@ -12324,7 +12321,7 @@ func (r *DescribeWatermarkTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeWordSamplesRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// <b>Keyword usage. Valid values:</b>
@@ -12354,7 +12351,7 @@ type DescribeWordSamplesRequestParams struct {
 type DescribeWordSamplesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// <b>Keyword usage. Valid values:</b>
@@ -12555,7 +12552,7 @@ type EditMediaRequestParams struct {
 	// Input the type of video. The possible values u200bu200bare File and Stream.
 	InputType *string `json:"InputType,omitnil" name:"InputType"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Input video file information, required when InputType is File.
@@ -12594,7 +12591,7 @@ type EditMediaRequest struct {
 	// Input the type of video. The possible values u200bu200bare File and Stream.
 	InputType *string `json:"InputType,omitnil" name:"InputType"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Input video file information, required when InputType is File.
@@ -12843,7 +12840,7 @@ type EnhanceMediaByTemplateRequestParams struct {
 	// Enhance Media Template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Starting offset time, unit: seconds, leaving it blank means intercepting from the beginning of the video.
@@ -12877,7 +12874,7 @@ type EnhanceMediaByTemplateRequest struct {
 	// Enhance Media Template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Starting offset time, unit: seconds, leaving it blank means intercepting from the beginning of the video.
@@ -13178,7 +13175,7 @@ type ExecuteFunctionRequestParams struct {
 	// API parameter. For specific parameter format, negotiate with the backend before calling.
 	FunctionArg *string `json:"FunctionArg,omitnil" name:"FunctionArg"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
@@ -13200,7 +13197,7 @@ type ExecuteFunctionRequest struct {
 	// API parameter. For specific parameter format, negotiate with the backend before calling.
 	FunctionArg *string `json:"FunctionArg,omitnil" name:"FunctionArg"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
@@ -13268,7 +13265,7 @@ type ExtractCopyRightWatermarkRequestParams struct {
 	// The media URL from which the watermark needs to be extracted.
 	Url *string `json:"Url,omitnil" name:"Url"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Identifies the source context, which is used to transparently transmit user request information. This field value will be returned in the ExtractCopyRightWatermarkComplete callback and task flow status change callback, with a maximum length of 1000 characters.
@@ -13290,7 +13287,7 @@ type ExtractCopyRightWatermarkRequest struct {
 	// The media URL from which the watermark needs to be extracted.
 	Url *string `json:"Url,omitnil" name:"Url"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Identifies the source context, which is used to transparently transmit user request information. This field value will be returned in the ExtractCopyRightWatermarkComplete callback and task flow status change callback, with a maximum length of 1000 characters.
@@ -13410,7 +13407,7 @@ type ExtractTraceWatermarkRequestParams struct {
 	// <li><font color=red>Note</font>: This parameter is required.</li>
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The source context, which is used to pass through user request information. The `ExtractTraceWatermarkComplete` callback and the `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
@@ -13436,7 +13433,7 @@ type ExtractTraceWatermarkRequest struct {
 	// <li><font color=red>Note</font>: This parameter is required.</li>
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The source context, which is used to pass through user request information. The `ExtractTraceWatermarkComplete` callback and the `ProcedureStateChanged` callback will return the value of this parameter. It can contain up to 1,000 characters.
@@ -13690,7 +13687,7 @@ type ForbidMediaDistributionRequestParams struct {
 	// forbid: forbids, recover: unblocks.
 	Operation *string `json:"Operation,omitnil" name:"Operation"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -13703,7 +13700,7 @@ type ForbidMediaDistributionRequest struct {
 	// forbid: forbids, recover: unblocks.
 	Operation *string `json:"Operation,omitnil" name:"Operation"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -14206,7 +14203,7 @@ type InspectMediaQualityRequestParams struct {
 	// Media quality inspect template ID.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?has_map=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The priority of the task, the higher the numeric value, the higher the priority. The range is from -10 to 10, and not filled represents 0.
@@ -14231,7 +14228,7 @@ type InspectMediaQualityRequest struct {
 	// Media quality inspect template ID.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?has_map=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The priority of the task, the higher the numeric value, the higher the priority. The range is from -10 to 10, and not filled represents 0.
@@ -14390,7 +14387,7 @@ type LiveRealTimeClipRequestParams struct {
 	// End time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Whether to clip persistently. 0: no, 1: yes. Default: no.
@@ -14402,8 +14399,8 @@ type LiveRealTimeClipRequestParams struct {
 	// VOD task flow processing for video generated by persistent clipping. For more information, please see [Specifying Task Flow After Upload](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1). This parameter will be valid only when `IsPersistence` is 1.
 	Procedure *string `json:"Procedure,omitnil" name:"Procedure"`
 
-	// The ID of the media file’s category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
-	// <li>The default value is `0`, which means the “Other” category.</li>
+	// The ID of the media file's category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+	// <li>The default value is `0`, which means the "Other" category.</li>
 	// This parameter is valid only if `IsPersistence` is `1`.
 	ClassId *int64 `json:"ClassId,omitnil" name:"ClassId"`
 
@@ -14440,7 +14437,7 @@ type LiveRealTimeClipRequest struct {
 	// End time of stream clipping in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Whether to clip persistently. 0: no, 1: yes. Default: no.
@@ -14452,8 +14449,8 @@ type LiveRealTimeClipRequest struct {
 	// VOD task flow processing for video generated by persistent clipping. For more information, please see [Specifying Task Flow After Upload](https://intl.cloud.tencent.com/document/product/266/9759?from_cn_redirect=1). This parameter will be valid only when `IsPersistence` is 1.
 	Procedure *string `json:"Procedure,omitnil" name:"Procedure"`
 
-	// The ID of the media file’s category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
-	// <li>The default value is `0`, which means the “Other” category.</li>
+	// The ID of the media file's category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+	// <li>The default value is `0`, which means the "Other" category.</li>
 	// This parameter is valid only if `IsPersistence` is `1`.
 	ClassId *int64 `json:"ClassId,omitnil" name:"ClassId"`
 
@@ -14593,7 +14590,7 @@ type ManageTaskRequestParams struct {
 	// <li>Abort: terminate a task. You can only terminate initiated tasks in `WAITING` status.</li>
 	OperationType *string `json:"OperationType,omitnil" name:"OperationType"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -14607,7 +14604,7 @@ type ManageTaskRequest struct {
 	// <li>Abort: terminate a task. You can only terminate initiated tasks in `WAITING` status.</li>
 	OperationType *string `json:"OperationType,omitnil" name:"OperationType"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -15863,7 +15860,7 @@ type ModifyAIAnalysisTemplateRequestParams struct {
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Video content analysis template name. Length limit: 64 characters.
@@ -15894,7 +15891,7 @@ type ModifyAIAnalysisTemplateRequest struct {
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Video content analysis template name. Length limit: 64 characters.
@@ -15973,7 +15970,7 @@ type ModifyAIRecognitionTemplateRequestParams struct {
 	// Unique ID of video content recognition template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Video content recognition template name. Length limit: 64 characters.
@@ -16016,7 +16013,7 @@ type ModifyAIRecognitionTemplateRequest struct {
 	// Unique ID of video content recognition template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Video content recognition template name. Length limit: 64 characters.
@@ -16111,7 +16108,7 @@ type ModifyAdaptiveDynamicStreamingTemplateRequestParams struct {
 	// Unique ID of adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template name. Length limit: 64 characters.
@@ -16151,7 +16148,7 @@ type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
 	// Unique ID of adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template name. Length limit: 64 characters.
@@ -16239,7 +16236,7 @@ type ModifyAnimatedGraphicsTemplateRequestParams struct {
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of an animated image generating template. Length limit: 64 characters.
@@ -16286,7 +16283,7 @@ type ModifyAnimatedGraphicsTemplateRequest struct {
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of an animated image generating template. Length limit: 64 characters.
@@ -16385,7 +16382,7 @@ type ModifyCDNDomainConfigRequestParams struct {
 	// Domain Config.
 	Config *CDNDomainConfigForUpdate `json:"Config,omitnil" name:"Config"`
 
-	// VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -16398,7 +16395,7 @@ type ModifyCDNDomainConfigRequest struct {
 	// Domain Config.
 	Config *CDNDomainConfigForUpdate `json:"Config,omitnil" name:"Config"`
 
-	// VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -16450,10 +16447,10 @@ type ModifyClassRequestParams struct {
 	// Category ID
 	ClassId *uint64 `json:"ClassId,omitnil" name:"ClassId"`
 
-	// Category name, which can contain 1–64 characters.
+	// Category name, which can contain 1-64 characters.
 	ClassName *string `json:"ClassName,omitnil" name:"ClassName"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -16463,10 +16460,10 @@ type ModifyClassRequest struct {
 	// Category ID
 	ClassId *uint64 `json:"ClassId,omitnil" name:"ClassId"`
 
-	// Category name, which can contain 1–64 characters.
+	// Category name, which can contain 1-64 characters.
 	ClassName *string `json:"ClassName,omitnil" name:"ClassName"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -16518,7 +16515,7 @@ type ModifyContentReviewTemplateRequestParams struct {
 	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of an intelligent content recognition template. Length limit: 64 characters.
@@ -16559,7 +16556,7 @@ type ModifyContentReviewTemplateRequest struct {
 	// Unique ID of an intelligent content recognition template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of an intelligent content recognition template. Length limit: 64 characters.
@@ -16650,7 +16647,7 @@ type ModifyDefaultStorageRegionRequestParams struct {
 	// The default storage region, which must be a region you have storage access to. You can use the `DescribeStorageRegions` API to query such regions.
 	StorageRegion *string `json:"StorageRegion,omitnil" name:"StorageRegion"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -16660,7 +16657,7 @@ type ModifyDefaultStorageRegionRequest struct {
 	// The default storage region, which must be a region you have storage access to. You can use the `DescribeStorageRegions` API to query such regions.
 	StorageRegion *string `json:"StorageRegion,omitnil" name:"StorageRegion"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -16711,7 +16708,7 @@ type ModifyEnhanceMediaTemplateRequestParams struct {
 	// Enhance Media Template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Audio and video quality rebirth template name, length limit: 64 characters.
@@ -16754,7 +16751,7 @@ type ModifyEnhanceMediaTemplateRequest struct {
 	// Enhance Media Template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Audio and video quality rebirth template name, length limit: 64 characters.
@@ -16859,7 +16856,7 @@ type ModifyEventConfigRequestParams struct {
 	// Whether to receive [Video deletion completed](https://www.tencentcloud.com/document/product/266/33952) event notification, the default "OFF" means to ignore the event notification, "ON" means to receive the event notification .
 	DeleteMediaCompleteEventSwitch *string `json:"DeleteMediaCompleteEventSwitch,omitnil" name:"DeleteMediaCompleteEventSwitch"`
 
-	// VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -16881,7 +16878,7 @@ type ModifyEventConfigRequest struct {
 	// Whether to receive [Video deletion completed](https://www.tencentcloud.com/document/product/266/33952) event notification, the default "OFF" means to ignore the event notification, "ON" means to receive the event notification .
 	DeleteMediaCompleteEventSwitch *string `json:"DeleteMediaCompleteEventSwitch,omitnil" name:"DeleteMediaCompleteEventSwitch"`
 
-	// VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -16935,7 +16932,7 @@ type ModifyHeadTailTemplateRequestParams struct {
 	// HeadTail template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template name, length limit is 64 characters. Not passing means not modifying.
@@ -16965,7 +16962,7 @@ type ModifyHeadTailTemplateRequest struct {
 	// HeadTail template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template name, length limit is 64 characters. Not passing means not modifying.
@@ -17041,7 +17038,7 @@ type ModifyImageSpriteTemplateRequestParams struct {
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of an image sprite generating template. Length limit: 64 characters.
@@ -17097,7 +17094,7 @@ type ModifyImageSpriteTemplateRequest struct {
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of an image sprite generating template. Length limit: 64 characters.
@@ -17205,7 +17202,7 @@ type ModifyJustInTimeTranscodeTemplateRequestParams struct {
 	// Template name.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Video parameter configuration.
@@ -17224,7 +17221,7 @@ type ModifyJustInTimeTranscodeTemplateRequest struct {
 	// Template name.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>VOD application ID. If you want to access resources in a sub-application, fill this field with the SubAppID; when empty, it means accessing the resources of the default application.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *int64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Video parameter configuration.
@@ -17287,7 +17284,7 @@ type ModifyMediaInfoRequestParams struct {
 	// Unique media file ID.
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Media filename, which can contain up to 64 characters.
@@ -17342,7 +17339,7 @@ type ModifyMediaInfoRequest struct {
 	// Unique media file ID.
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Media filename, which can contain up to 64 characters.
@@ -17466,7 +17463,7 @@ type ModifyMediaStorageClassRequestParams struct {
 	// <li>DEEP_ARCHIVE</li>
 	StorageClass *string `json:"StorageClass,omitnil" name:"StorageClass"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The retrieval mode. When switching files from DEEP ARCHIVE or ARCHIVE to STANDARD, you need to specify the retrieval mode. For details, see [Data retrieval and retrieval mode](https://intl.cloud.tencent.com/document/product/266/43051#data-retrieval-and-retrieval-mode.3Ca-id.3D.22retake.22.3E.3C.2Fa.3E).
@@ -17493,7 +17490,7 @@ type ModifyMediaStorageClassRequest struct {
 	// <li>DEEP_ARCHIVE</li>
 	StorageClass *string `json:"StorageClass,omitnil" name:"StorageClass"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The retrieval mode. When switching files from DEEP ARCHIVE or ARCHIVE to STANDARD, you need to specify the retrieval mode. For details, see [Data retrieval and retrieval mode](https://intl.cloud.tencent.com/document/product/266/43051#data-retrieval-and-retrieval-mode.3Ca-id.3D.22retake.22.3E.3C.2Fa.3E).
@@ -17556,7 +17553,7 @@ type ModifyPersonSampleRequestParams struct {
 	// ID of a sample.
 	PersonId *string `json:"PersonId,omitnil" name:"PersonId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name. Length limit: 128 characters.
@@ -17584,7 +17581,7 @@ type ModifyPersonSampleRequest struct {
 	// ID of a sample.
 	PersonId *string `json:"PersonId,omitnil" name:"PersonId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name. Length limit: 128 characters.
@@ -17665,7 +17662,7 @@ type ModifyQualityInspectTemplateRequestParams struct {
 	// Media quality inspection template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?has_map=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Media quality inspection template name.Length limit: 64 characters.
@@ -17714,7 +17711,7 @@ type ModifyQualityInspectTemplateRequest struct {
 	// Media quality inspection template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://www.tencentcloud.com/zh/document/product/266/33987?has_map=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Media quality inspection template name.Length limit: 64 characters.
@@ -17817,7 +17814,7 @@ type ModifyRebuildMediaTemplateRequestParams struct {
 	// Rebuild Media Template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Rebuild Media Template Name.
@@ -17858,7 +17855,7 @@ type ModifyRebuildMediaTemplateRequest struct {
 	// Rebuild Media Template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Rebuild Media Template Name.
@@ -17949,7 +17946,7 @@ type ModifyReviewTemplateRequestParams struct {
 
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 
@@ -17967,6 +17964,7 @@ type ModifyReviewTemplateRequest struct {
 	
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	Name *string `json:"Name,omitnil" name:"Name"`
@@ -18027,7 +18025,7 @@ type ModifyRoundPlayRequestParams struct {
 	// The playlist ID, which is unique.
 	RoundPlayId *string `json:"RoundPlayId,omitnil" name:"RoundPlayId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The playback start time, in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
@@ -18059,7 +18057,7 @@ type ModifyRoundPlayRequest struct {
 	// The playlist ID, which is unique.
 	RoundPlayId *string `json:"RoundPlayId,omitnil" name:"RoundPlayId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The playback start time, in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
@@ -18138,7 +18136,7 @@ type ModifySampleSnapshotTemplateRequestParams struct {
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of a sampled screencapturing template. Length limit: 64 characters.
@@ -18197,7 +18195,7 @@ type ModifySampleSnapshotTemplateRequest struct {
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of a sampled screencapturing template. Length limit: 64 characters.
@@ -18306,7 +18304,7 @@ type ModifySnapshotByTimeOffsetTemplateRequestParams struct {
 	// Unique ID of a specified time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of a time point screencapturing template. Length limit: 64 characters.
@@ -18355,7 +18353,7 @@ type ModifySnapshotByTimeOffsetTemplateRequest struct {
 	// Unique ID of a specified time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Name of a time point screencapturing template. Length limit: 64 characters.
@@ -18449,7 +18447,7 @@ func (r *ModifySnapshotByTimeOffsetTemplateResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type ModifySubAppIdInfoRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Subapplication name. Length limit: 40 characters.
@@ -18462,7 +18460,7 @@ type ModifySubAppIdInfoRequestParams struct {
 type ModifySubAppIdInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Subapplication name. Length limit: 40 characters.
@@ -18517,28 +18515,28 @@ func (r *ModifySubAppIdInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySubAppIdStatusRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Subapplication status. Valid values:
 	// <li>On: enabled</li>
 	// <li>Off: disabled</li>
 	// <li>Destroyed: terminated</li>
-	// You cannot enable a subapplication whose status is “Destroying”. You can enable it after it was terminated.
+	// You cannot enable a subapplication whose status is "Destroying". You can enable it after it was terminated.
 	Status *string `json:"Status,omitnil" name:"Status"`
 }
 
 type ModifySubAppIdStatusRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Subapplication status. Valid values:
 	// <li>On: enabled</li>
 	// <li>Off: disabled</li>
 	// <li>Destroyed: terminated</li>
-	// You cannot enable a subapplication whose status is “Destroying”. You can enable it after it was terminated.
+	// You cannot enable a subapplication whose status is "Destroying". You can enable it after it was terminated.
 	Status *string `json:"Status,omitnil" name:"Status"`
 }
 
@@ -18589,7 +18587,7 @@ type ModifySuperPlayerConfigRequestParams struct {
 	// Player configuration name.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Type of audio/video played. Valid values:
@@ -18637,7 +18635,7 @@ type ModifySuperPlayerConfigRequest struct {
 	// Player configuration name.
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Type of audio/video played. Valid values:
@@ -18736,7 +18734,7 @@ type ModifyTranscodeTemplateRequestParams struct {
 	// Unique ID of transcoding template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The container format. Valid values: `mp4`, `flv`, `hls`, `mp3`, `flac`, `ogg`, `m4a`, `wav` ( `mp3`, `flac`, `ogg`, `m4a`, and `wav` are audio file formats).
@@ -18779,7 +18777,7 @@ type ModifyTranscodeTemplateRequest struct {
 	// Unique ID of transcoding template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The container format. Valid values: `mp4`, `flv`, `hls`, `mp3`, `flac`, `ogg`, `m4a`, `wav` ( `mp3`, `flac`, `ogg`, `m4a`, and `wav` are audio file formats).
@@ -18883,7 +18881,7 @@ type ModifyVodDomainAccelerateConfigRequestParams struct {
 	// <li>`Disabled`: disable</li>
 	Status *string `json:"Status,omitnil" name:"Status"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -18904,7 +18902,7 @@ type ModifyVodDomainAccelerateConfigRequest struct {
 	// <li>`Disabled`: disable</li>
 	Status *string `json:"Status,omitnil" name:"Status"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -18957,7 +18955,7 @@ type ModifyVodDomainConfigRequestParams struct {
 	// Domain name
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/14046?from_cn_redirect=1) policy
@@ -18976,7 +18974,7 @@ type ModifyVodDomainConfigRequest struct {
 	// Domain name
 	Domain *string `json:"Domain,omitnil" name:"Domain"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// [Referer hotlink protection](https://intl.cloud.tencent.com/document/product/266/14046?from_cn_redirect=1) policy
@@ -19039,7 +19037,7 @@ type ModifyWatermarkTemplateRequestParams struct {
 	// Unique ID of watermarking template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Watermarking template name. Length limit: 64 characters.
@@ -19081,7 +19079,7 @@ type ModifyWatermarkTemplateRequest struct {
 	// Unique ID of watermarking template.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Watermarking template name. Length limit: 64 characters.
@@ -19176,7 +19174,7 @@ type ModifyWordSampleRequestParams struct {
 	// Keyword. Length limit: 128 characters.
 	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// <b>Keyword usage. Valid values:</b>
@@ -19200,7 +19198,7 @@ type ModifyWordSampleRequest struct {
 	// Keyword. Length limit: 128 characters.
 	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// <b>Keyword usage. Valid values:</b>
@@ -20069,7 +20067,7 @@ type ProcessMediaByProcedureRequestParams struct {
 	// [Task flow template](https://intl.cloud.tencent.com/document/product/266/11700?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name.
 	ProcedureName *string `json:"ProcedureName,omitnil" name:"ProcedureName"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
@@ -20097,7 +20095,7 @@ type ProcessMediaByProcedureRequest struct {
 	// [Task flow template](https://intl.cloud.tencent.com/document/product/266/11700?from_cn_redirect=1#.E4.BB.BB.E5.8A.A1.E6.B5.81.E6.A8.A1.E6.9D.BF) name.
 	ProcedureName *string `json:"ProcedureName,omitnil" name:"ProcedureName"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Task flow priority. The higher the value, the higher the priority. Value range: -10-10. If this parameter is left empty, 0 will be used.
@@ -20199,7 +20197,7 @@ type ProcessMediaByUrlRequestParams struct {
 	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -20233,7 +20231,7 @@ type ProcessMediaByUrlRequest struct {
 	// Used to identify duplicate requests. After you send a request, if any request with the same `SessionId` has already been sent in the last three days (72 hours), an error message will be returned. `SessionId` contains up to 50 characters. If this parameter is not carried or is an empty string, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitnil" name:"SessionId"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -20295,7 +20293,7 @@ type ProcessMediaRequestParams struct {
 	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Parameter of video processing task.
@@ -20333,7 +20331,7 @@ type ProcessMediaRequest struct {
 	// Media file ID, i.e., the globally unique ID of a file in VOD assigned by the VOD backend after successful upload. This field can be obtained through the [video upload completion event notification](https://intl.cloud.tencent.com/document/product/266/7830?from_cn_redirect=1) or [VOD Console](https://console.cloud.tencent.com/vod/media).
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Parameter of video processing task.
@@ -20494,7 +20492,7 @@ type PullEventsRequestParams struct {
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -20504,7 +20502,7 @@ type PullEventsRequest struct {
 	// Reserved field for special purposes.
 	ExtInfo *string `json:"ExtInfo,omitnil" name:"ExtInfo"`
 
-	// [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID in VOD. If you need to access a resource in a subapplication, enter the subapplication ID in this field; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -20564,7 +20562,7 @@ type PullUploadRequestParams struct {
 	// If you do not specify this parameter or pass in an empty string, the file obtained will have the same extension as `MediaUrl`.
 	MediaType *string `json:"MediaType,omitnil" name:"MediaType"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Media name.
@@ -20611,7 +20609,7 @@ type PullUploadRequest struct {
 	// If you do not specify this parameter or pass in an empty string, the file obtained will have the same extension as `MediaUrl`.
 	MediaType *string `json:"MediaType,omitnil" name:"MediaType"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Media name.
@@ -20755,7 +20753,7 @@ type PushUrlCacheRequestParams struct {
 	// List of prefetched URLs. Up to 20 ones can be specified at a time.
 	Urls []*string `json:"Urls,omitnil" name:"Urls"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -20765,7 +20763,7 @@ type PushUrlCacheRequest struct {
 	// List of prefetched URLs. Up to 20 ones can be specified at a time.
 	Urls []*string `json:"Urls,omitnil" name:"Urls"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -21068,7 +21066,7 @@ type RebuildMediaByTemplateRequestParams struct {
 	// Rebuild Media Template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The start offset (seconds). If you do not specify this, the segment will start from the beginning of the video.
@@ -21102,7 +21100,7 @@ type RebuildMediaByTemplateRequest struct {
 	// Rebuild Media Template ID.
 	Definition *int64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *string `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The start offset (seconds). If you do not specify this, the segment will start from the beginning of the video.
@@ -21197,7 +21195,7 @@ type RebuildMediaRequestParams struct {
 	// The file ID.
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The start offset (seconds). If you do not specify this, the segment will start from the beginning of the video.
@@ -21264,7 +21262,7 @@ type RebuildMediaRequest struct {
 	// The file ID.
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The start offset (seconds). If you do not specify this, the segment will start from the beginning of the video.
@@ -21886,7 +21884,7 @@ type RefreshUrlCacheRequestParams struct {
 	// The URLs to purge. You can specify up to 20 URLs per request.
 	Urls []*string `json:"Urls,omitnil" name:"Urls"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -21896,7 +21894,7 @@ type RefreshUrlCacheRequest struct {
 	// The URLs to purge. You can specify up to 20 URLs per request.
 	Urls []*string `json:"Urls,omitnil" name:"Urls"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -21969,7 +21967,7 @@ type RemoveWatermarkRequestParams struct {
 	// The ID of the media file.
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
@@ -21991,7 +21989,7 @@ type RemoveWatermarkRequest struct {
 	// The ID of the media file.
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The session ID, which is used for de-duplication. If there was a request with the same session ID in the last seven days, an error will be returned for the current request. The session ID can contain up to 50 characters. If you do not pass this parameter or pass in an empty string, duplicate sessions will not be identified.
@@ -22119,7 +22117,7 @@ type ResetProcedureTemplateRequestParams struct {
 	// Task flow name
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template description. Length limit: 256 characters.
@@ -22148,7 +22146,7 @@ type ResetProcedureTemplateRequest struct {
 	// Task flow name
 	Name *string `json:"Name,omitnil" name:"Name"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Template description. Length limit: 256 characters.
@@ -22248,7 +22246,7 @@ type RestoreMediaRequestParams struct {
 	// Media file unique identifier list, maximum length: 100.
 	FileIds []*string `json:"FileIds,omitnil" name:"FileIds"`
 
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The accessible duration of the unfrozen temporary media files must be greater than 0, and the unit is "days".
@@ -22270,7 +22268,7 @@ type RestoreMediaRequest struct {
 	// Media file unique identifier list, maximum length: 100.
 	FileIds []*string `json:"FileIds,omitnil" name:"FileIds"`
 
-	// The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The accessible duration of the unfrozen temporary media files must be greater than 0, and the unit is "days".
@@ -22361,7 +22359,7 @@ type ReviewAudioVideoRequestParams struct {
 	// The media file ID, which is assigned after upload and uniquely identifies a file in VOD. You can view the ID of a file in the [NewFileUpload](https://www.tencentcloud.com/document/product/266/33950) callback or in the [VOD console](https://console.tencentcloud.com/vod/media).
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://www.tencentcloud.com/document/product/266/33987) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The type of moderated content. Valid values:
@@ -22392,7 +22390,7 @@ type ReviewAudioVideoRequest struct {
 	// The media file ID, which is assigned after upload and uniquely identifies a file in VOD. You can view the ID of a file in the [NewFileUpload](https://www.tencentcloud.com/document/product/266/33950) callback or in the [VOD console](https://console.tencentcloud.com/vod/media).
 	FileId *string `json:"FileId,omitnil" name:"FileId"`
 
-	// <b>The VOD [subapplication](https://www.tencentcloud.com/document/product/266/33987) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// The type of moderated content. Valid values:
@@ -22614,7 +22612,7 @@ type ReviewImageRequestParams struct {
 	// The image moderation template ID. Valid values: <li>10: The preset template, whose violation labels are `Porn` and `Terror`.</li>
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>	
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -22627,7 +22625,7 @@ type ReviewImageRequest struct {
 	// The image moderation template ID. Valid values: <li>10: The preset template, whose violation labels are `Porn` and `Terror`.</li>
 	Definition *uint64 `json:"Definition,omitnil" name:"Definition"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>	
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -22965,7 +22963,7 @@ type ScratchRepairInfo struct {
 
 // Predefined struct for user
 type SearchMediaRequestParams struct {
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// File ID set. Any element in the set can be matched.
@@ -23119,7 +23117,7 @@ type SearchMediaRequestParams struct {
 type SearchMediaRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// File ID set. Any element in the set can be matched.
@@ -23366,7 +23364,7 @@ type SetDrmKeyProviderInfoRequestParams struct {
 	// The DRM key information provided by SDMC.
 	SDMCInfo *SDMCDrmKeyProviderInfo `json:"SDMCInfo,omitnil" name:"SDMCInfo"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -23376,7 +23374,7 @@ type SetDrmKeyProviderInfoRequest struct {
 	// The DRM key information provided by SDMC.
 	SDMCInfo *SDMCDrmKeyProviderInfo `json:"SDMCInfo,omitnil" name:"SDMCInfo"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -23432,7 +23430,7 @@ type SetVodDomainCertificateRequestParams struct {
 	// <li>Clear: Clear the domain name HTTPS configuration, after clearing, the domain name cannot support </li>
 	Operation *string `json:"Operation,omitnil" name:"Operation"`
 
-	// <b>VOD [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you want to access resources in the Subapplication, enter the Subapplication ID in this field; otherwise, you do not need to fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// [Tencent Cloud SSL](https://intl.cloud.tencent.com/document/product/400/7572?from_cn_redirect=1) uploaded certificate ID. No need to fill in this field when clearing domain HTTPS configuration
@@ -23450,7 +23448,7 @@ type SetVodDomainCertificateRequest struct {
 	// <li>Clear: Clear the domain name HTTPS configuration, after clearing, the domain name cannot support </li>
 	Operation *string `json:"Operation,omitnil" name:"Operation"`
 
-	// <b>VOD [Subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you want to access resources in the Subapplication, enter the Subapplication ID in this field; otherwise, you do not need to fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// [Tencent Cloud SSL](https://intl.cloud.tencent.com/document/product/400/7572?from_cn_redirect=1) uploaded certificate ID. No need to fill in this field when clearing domain HTTPS configuration
@@ -23517,7 +23515,7 @@ type SimpleHlsClipRequestParams struct {
 	// URL of the HLS video in VOD that needs to be clipped.
 	Url *string `json:"Url,omitnil" name:"Url"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Start offset time of clipping in seconds. Default value: 0, which means to clip from the beginning of the video. A negative number indicates how many seconds from the end of the video clipping will start at. For example, -10 means that clipping will start at the 10th second from the end.
@@ -23535,8 +23533,8 @@ type SimpleHlsClipRequestParams struct {
 	// The task flow to execute on the video clipped for persistent storage. For details, see [Upload from Server](https://intl.cloud.tencent.com/document/product/266/33912). This parameter is valid only if `IsPersistence` is 1.
 	Procedure *string `json:"Procedure,omitnil" name:"Procedure"`
 
-	// The ID of the media file’s category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
-	// <li>The default value is `0`, which means the “Other” category.</li>
+	// The ID of the media file's category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+	// <li>The default value is `0`, which means the "Other" category.</li>
 	// This parameter is valid only if `IsPersistence` is `1`.
 	ClassId *int64 `json:"ClassId,omitnil" name:"ClassId"`
 
@@ -23553,7 +23551,7 @@ type SimpleHlsClipRequest struct {
 	// URL of the HLS video in VOD that needs to be clipped.
 	Url *string `json:"Url,omitnil" name:"Url"`
 
-	// <b>The VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) ID. If you need to access a resource in a subapplication, set this parameter to the subapplication ID; otherwise, leave it empty.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Start offset time of clipping in seconds. Default value: 0, which means to clip from the beginning of the video. A negative number indicates how many seconds from the end of the video clipping will start at. For example, -10 means that clipping will start at the 10th second from the end.
@@ -23571,8 +23569,8 @@ type SimpleHlsClipRequest struct {
 	// The task flow to execute on the video clipped for persistent storage. For details, see [Upload from Server](https://intl.cloud.tencent.com/document/product/266/33912). This parameter is valid only if `IsPersistence` is 1.
 	Procedure *string `json:"Procedure,omitnil" name:"Procedure"`
 
-	// The ID of the media file’s category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
-	// <li>The default value is `0`, which means the “Other” category.</li>
+	// The ID of the media file's category. You can use the [CreateClass](https://intl.cloud.tencent.com/document/product/266/7812?from_cn_redirect=1) API to create a category and get the category ID.
+	// <li>The default value is `0`, which means the "Other" category.</li>
 	// This parameter is valid only if `IsPersistence` is `1`.
 	ClassId *int64 `json:"ClassId,omitnil" name:"ClassId"`
 
@@ -23787,7 +23785,7 @@ type SplitMediaRequestParams struct {
 	// Video splitting task information list, supporting up to 100 splitting messages at the same time.
 	Segments []*SplitMediaTaskConfig `json:"Segments,omitnil" name:"Segments"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Identifies the source context, which is used to transparently transmit user request information. This field value will be returned in the SplitMediaComplete callback and task flow status change callback, with a maximum length of 1000 characters.
@@ -23809,7 +23807,7 @@ type SplitMediaRequest struct {
 	// Video splitting task information list, supporting up to 100 splitting messages at the same time.
 	Segments []*SplitMediaTaskConfig `json:"Segments,omitnil" name:"Segments"`
 
-	// </b>VOD Application ID. If you want to access resources in a sub-app, fill in this field with the sub-app ID; otherwise, don't fill in this field.</b>
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 
 	// Identifies the source context, which is used to transparently transmit user request information. This field value will be returned in the SplitMediaComplete callback and task flow status change callback, with a maximum length of 1000 characters.
@@ -23968,7 +23966,7 @@ type StartCDNDomainRequestParams struct {
 	// Domain name operation, value: <li>start: enable;</li> <li>stop: disable. </li>
 	Operation *string `json:"Operation,omitnil" name:"Operation"`
 
-	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 
@@ -23981,7 +23979,7 @@ type StartCDNDomainRequest struct {
 	// Domain name operation, value: <li>start: enable;</li> <li>stop: disable. </li>
 	Operation *string `json:"Operation,omitnil" name:"Operation"`
 
-	// VOD[Subapplication](/document/product/266/14574) ID。If you want to access resources in a Subapplication, fill this field with the Subapplication ID; otherwise, you don't need to fill in this field.
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
 	SubAppId *uint64 `json:"SubAppId,omitnil" name:"SubAppId"`
 }
 

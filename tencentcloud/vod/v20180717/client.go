@@ -1899,6 +1899,7 @@ func NewCreateStorageRegionResponse() (response *CreateStorageRegionResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_STORAGEREGION = "InvalidParameterValue.StorageRegion"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateStorageRegion(request *CreateStorageRegionRequest) (response *CreateStorageRegionResponse, err error) {
@@ -1919,6 +1920,7 @@ func (c *Client) CreateStorageRegion(request *CreateStorageRegionRequest) (respo
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_STORAGEREGION = "InvalidParameterValue.StorageRegion"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateStorageRegionWithContext(ctx context.Context, request *CreateStorageRegionRequest) (response *CreateStorageRegionResponse, err error) {
@@ -2195,6 +2197,7 @@ func NewCreateVodDomainResponse() (response *CreateVodDomainResponse) {
 //  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_DOMAINNAMEINBLACKLIST = "InvalidParameterValue.DomainNameInBlackList"
+//  UNAUTHORIZEDOPERATION_DOMAINRECORDNOTVERIFIED = "UnauthorizedOperation.DomainRecordNotVerified"
 func (c *Client) CreateVodDomain(request *CreateVodDomainRequest) (response *CreateVodDomainResponse, err error) {
     return c.CreateVodDomainWithContext(context.Background(), request)
 }
@@ -2211,6 +2214,7 @@ func (c *Client) CreateVodDomain(request *CreateVodDomainRequest) (response *Cre
 //  FAILEDOPERATION_INVALIDVODUSER = "FailedOperation.InvalidVodUser"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_DOMAINNAMEINBLACKLIST = "InvalidParameterValue.DomainNameInBlackList"
+//  UNAUTHORIZEDOPERATION_DOMAINRECORDNOTVERIFIED = "UnauthorizedOperation.DomainRecordNotVerified"
 func (c *Client) CreateVodDomainWithContext(ctx context.Context, request *CreateVodDomainRequest) (response *CreateVodDomainResponse, err error) {
     if request == nil {
         request = NewCreateVodDomainRequest()
@@ -9929,7 +9933,7 @@ func NewPullEventsResponse() (response *PullEventsResponse) {
 //
 // * The API gets event data through long polling. That is, if there is any unconsumed event on the server, the event notification will be returned to the requester immediately. If there is no unconsumed event on the server, the request will be suspended in the backend until a new event is generated.
 //
-// * The request can be suspended for up to 5 seconds. It’s recommended to set the request timeout period to 10 seconds.
+// * The request can be suspended for up to 5 seconds. It's recommended to set the request timeout period to 10 seconds.
 //
 // * Event notifications not pulled will be retained for up to 4 days and may be cleared after this period.
 //
@@ -9953,7 +9957,7 @@ func (c *Client) PullEvents(request *PullEventsRequest) (response *PullEventsRes
 //
 // * The API gets event data through long polling. That is, if there is any unconsumed event on the server, the event notification will be returned to the requester immediately. If there is no unconsumed event on the server, the request will be suspended in the backend until a new event is generated.
 //
-// * The request can be suspended for up to 5 seconds. It’s recommended to set the request timeout period to 10 seconds.
+// * The request can be suspended for up to 5 seconds. It's recommended to set the request timeout period to 10 seconds.
 //
 // * Event notifications not pulled will be retained for up to 4 days and may be cleared after this period.
 //
@@ -11079,7 +11083,7 @@ func NewSimpleHlsClipResponse() (response *SimpleHlsClipResponse) {
 //
 // 
 //
-// Because the video clip is not an independent video, it’s not displayed as a media asset in the VOD console, and cannot be transcoded or published to WeChat.
+// Because the video clip is not an independent video, it's not displayed as a media asset in the VOD console, and cannot be transcoded or published to WeChat.
 //
 // 
 //
@@ -11141,7 +11145,7 @@ func (c *Client) SimpleHlsClip(request *SimpleHlsClipRequest) (response *SimpleH
 //
 // 
 //
-// Because the video clip is not an independent video, it’s not displayed as a media asset in the VOD console, and cannot be transcoded or published to WeChat.
+// Because the video clip is not an independent video, it's not displayed as a media asset in the VOD console, and cannot be transcoded or published to WeChat.
 //
 // 
 //

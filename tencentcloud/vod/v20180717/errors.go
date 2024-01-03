@@ -650,6 +650,9 @@ const (
 	// Unauthorized operation.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 
+	// 
+	UNAUTHORIZEDOPERATION_DOMAINRECORDNOTVERIFIED = "UnauthorizedOperation.DomainRecordNotVerified"
+
 	// Unknown parameter error.
 	UNKNOWNPARAMETER = "UnknownParameter"
 
