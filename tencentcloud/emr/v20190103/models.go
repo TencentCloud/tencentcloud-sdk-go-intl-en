@@ -149,6 +149,49 @@ type ApplicationStatics struct {
 	CountApps *int64 `json:"CountApps,omitnil" name:"CountApps"`
 }
 
+type AutoScaleRecord struct {
+	// Name of the scale-in or scale-out rule.
+	StrategyName *string `json:"StrategyName,omitnil" name:"StrategyName"`
+
+	// "SCALE_OUT" and "SCALE_IN", representing expansion and reduction respectively.
+	ScaleAction *string `json:"ScaleAction,omitnil" name:"ScaleAction"`
+
+	// The values are "SUCCESS", "FAILED", "PART_SUCCESS", "IN_PROCESS", which indicate success, failure, partial success, and in-progress, respectively.
+	ActionStatus *string `json:"ActionStatus,omitnil" name:"ActionStatus"`
+
+	// Process initiation time.
+	ActionTime *string `json:"ActionTime,omitnil" name:"ActionTime"`
+
+	// Description related to auto-scaling.
+	ScaleInfo *string `json:"ScaleInfo,omitnil" name:"ScaleInfo"`
+
+	// Valid only when ScaleAction is SCALE_OUT.
+	ExpectScaleNum *int64 `json:"ExpectScaleNum,omitnil" name:"ExpectScaleNum"`
+
+	// Process termination time.
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+
+	// Policy type. Valid values: 1 (load-based scaling), 2 (time-based scaling).
+	StrategyType *int64 `json:"StrategyType,omitnil" name:"StrategyType"`
+
+	// Specification information used during scale-out.
+	SpecInfo *string `json:"SpecInfo,omitnil" name:"SpecInfo"`
+
+	// Compensatory scale-out. Valid values: 0 (disabled), 1 (enabled).
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CompensateFlag *int64 `json:"CompensateFlag,omitnil" name:"CompensateFlag"`
+
+	// Number of compensations
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CompensateCount *int64 `json:"CompensateCount,omitnil" name:"CompensateCount"`
+
+
+	RetryCount *uint64 `json:"RetryCount,omitnil" name:"RetryCount"`
+
+
+	RetryInfo *string `json:"RetryInfo,omitnil" name:"RetryInfo"`
+}
+
 type COSSettings struct {
 	// COS `SecretId`
 	CosSecretId *string `json:"CosSecretId,omitnil" name:"CosSecretId"`
@@ -238,6 +281,15 @@ type ClusterExternalServiceInfo struct {
 	// Sharing cluster status
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ClusterStatus *int64 `json:"ClusterStatus,omitnil" name:"ClusterStatus"`
+}
+
+type ClusterIDToFlowID struct {
+	// Cluster IDNote: This field may return null, indicating that no valid values can be obtained.
+	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+
+	// Process ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FlowId *uint64 `json:"FlowId,omitnil" name:"FlowId"`
 }
 
 type ClusterInstancesInfo struct {
@@ -676,19 +728,21 @@ func (r *CreateClusterResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateInstanceRequestParams struct {
-	// The product ID. Different product IDs represent different EMR product versions. Valid values:
-	// <li>16: EMR v2.3.0</li>
-	// <li>20: EMR v2.5.0</li>
-	// <li>25: EMR v3.1.0</li>
-	// <li>27: Kafka v1.0.0</li>
-	// <li>30: EMR v2.6.0</li>
-	// <li>33: EMR v3.2.1</li>
-	// <li>34: EMR v3.3.0</li>
-	// <li>36: StarRocks v1.0.0</li>
-	// <li>37: EMR v3.4.0</li>
-	// <li>38: EMR v2.7.0</li>
-	// <li>39: StarRocks v1.1.0</li>
-	// <li>41: Druid v1.1.0</li>
+	// Product ID. Different product IDs stand for different EMR product versions. Valid range:
+	// 51: STARROCKS-V1.4.0
+	// 54: STARROCKS-V2.0.0
+	// 27: KAFKA-V1.0.0
+	// 50: KAFKA-V2.0.0
+	// 16: EMR-V2.3.0
+	// 20: EMR-V2.5.0
+	// 30: EMR-V2.6.0
+	// 38: EMR-V2.7.0
+	// 25: EMR-V3.1.0
+	// 33: EMR-V3.2.1
+	// 34: EMR-V3.3.0
+	// 37: EMR-V3.4.0
+	// 44: EMR-V3.5.0
+	// 53: EMR-V3.6.0
 	ProductId *uint64 `json:"ProductId,omitnil" name:"ProductId"`
 
 	// List of deployed components. The list of component options varies by EMR product ID (i.e., `ProductId`; for specific meanings, please see the `ProductId` input parameter). For more information, please see [Component Version](https://intl.cloud.tencent.com/document/product/589/20279?from_cn_redirect=1).
@@ -812,19 +866,21 @@ type CreateInstanceRequestParams struct {
 type CreateInstanceRequest struct {
 	*tchttp.BaseRequest
 	
-	// The product ID. Different product IDs represent different EMR product versions. Valid values:
-	// <li>16: EMR v2.3.0</li>
-	// <li>20: EMR v2.5.0</li>
-	// <li>25: EMR v3.1.0</li>
-	// <li>27: Kafka v1.0.0</li>
-	// <li>30: EMR v2.6.0</li>
-	// <li>33: EMR v3.2.1</li>
-	// <li>34: EMR v3.3.0</li>
-	// <li>36: StarRocks v1.0.0</li>
-	// <li>37: EMR v3.4.0</li>
-	// <li>38: EMR v2.7.0</li>
-	// <li>39: StarRocks v1.1.0</li>
-	// <li>41: Druid v1.1.0</li>
+	// Product ID. Different product IDs stand for different EMR product versions. Valid range:
+	// 51: STARROCKS-V1.4.0
+	// 54: STARROCKS-V2.0.0
+	// 27: KAFKA-V1.0.0
+	// 50: KAFKA-V2.0.0
+	// 16: EMR-V2.3.0
+	// 20: EMR-V2.5.0
+	// 30: EMR-V2.6.0
+	// 38: EMR-V2.7.0
+	// 25: EMR-V3.1.0
+	// 33: EMR-V3.2.1
+	// 34: EMR-V3.3.0
+	// 37: EMR-V3.4.0
+	// 44: EMR-V3.5.0
+	// 53: EMR-V3.6.0
 	ProductId *uint64 `json:"ProductId,omitnil" name:"ProductId"`
 
 	// List of deployed components. The list of component options varies by EMR product ID (i.e., `ProductId`; for specific meanings, please see the `ProductId` input parameter). For more information, please see [Component Version](https://intl.cloud.tencent.com/document/product/589/20279?from_cn_redirect=1).
@@ -1065,6 +1121,87 @@ type DependService struct {
 
 	// The cluster to which the shared component belongs.
 	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+}
+
+// Predefined struct for user
+type DescribeAutoScaleRecordsRequestParams struct {
+	// The instance ID.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Parameter for record filtration. Valid values: "StartTime", "EndTime" and "StrategyName". StartTime and EndTime support the time format of 2006-01-02 15:04:05 or 2006/01/02 15:04:05.
+	Filters []*KeyValue `json:"Filters,omitnil" name:"Filters"`
+
+	// Pagination parameters.
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Pagination parameters. Maximum value: 100
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+}
+
+type DescribeAutoScaleRecordsRequest struct {
+	*tchttp.BaseRequest
+	
+	// The instance ID.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Parameter for record filtration. Valid values: "StartTime", "EndTime" and "StrategyName". StartTime and EndTime support the time format of 2006-01-02 15:04:05 or 2006/01/02 15:04:05.
+	Filters []*KeyValue `json:"Filters,omitnil" name:"Filters"`
+
+	// Pagination parameters.
+	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Pagination parameters. Maximum value: 100
+	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+}
+
+func (r *DescribeAutoScaleRecordsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAutoScaleRecordsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAutoScaleRecordsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAutoScaleRecordsResponseParams struct {
+	// Total scale-in and scale-out records.
+	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+
+	// Record list.
+	RecordList []*AutoScaleRecord `json:"RecordList,omitnil" name:"RecordList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeAutoScaleRecordsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAutoScaleRecordsResponseParams `json:"Response"`
+}
+
+func (r *DescribeAutoScaleRecordsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAutoScaleRecordsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1341,6 +1478,94 @@ func (r *DescribeEmrApplicationStaticsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeHiveQueriesRequestParams struct {
+	// The cluster ID.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// The start time in seconds.
+	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
+
+	// The end time in seconds. EndTime-StartTime should not exceed one day's duration, which is 86400 seconds.
+	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
+
+	// Starting offset for pagination. Start value: 0
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Page size. Valid range: [1,100]
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+}
+
+type DescribeHiveQueriesRequest struct {
+	*tchttp.BaseRequest
+	
+	// The cluster ID.
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// The start time in seconds.
+	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
+
+	// The end time in seconds. EndTime-StartTime should not exceed one day's duration, which is 86400 seconds.
+	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
+
+	// Starting offset for pagination. Start value: 0
+	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+
+	// Page size. Valid range: [1,100]
+	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+}
+
+func (r *DescribeHiveQueriesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHiveQueriesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeHiveQueriesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHiveQueriesResponseParams struct {
+	// Total items
+	Total *int64 `json:"Total,omitnil" name:"Total"`
+
+	// Result list
+	Results []*HiveQuery `json:"Results,omitnil" name:"Results"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeHiveQueriesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeHiveQueriesResponseParams `json:"Response"`
+}
+
+func (r *DescribeHiveQueriesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHiveQueriesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeInstancesListRequestParams struct {
 	// Cluster filtering policy. Valid values: <li>clusterList: Queries the list of clusters excluding terminated ones.</li><li>monitorManage: Queries the list of clusters excluding those terminated, under creation and not successfully created.</li><li>cloudHardwareManage/componentManage: Two reserved values, which have the same implications as those of `monitorManage`.</li>
 	DisplayStrategy *string `json:"DisplayStrategy,omitnil" name:"DisplayStrategy"`
@@ -1354,7 +1579,7 @@ type DescribeInstancesListRequestParams struct {
 	// Sorting field. Valid values: <li>clusterId: Sorting by instance ID. </li><li>addTime: Sorting by instance creation time.</li><li>status: Sorting by instance status code.</li>
 	OrderField *string `json:"OrderField,omitnil" name:"OrderField"`
 
-	// Sort ascending or descending based on `OrderField`. Valid values:<li>0: Descending.</li><li>1: Ascending.</li>Default value: `0`.
+	// Sort according to OrderField in ascending or descending order. Valid range:<li>0: Descending order.</li><li>1: Ascending order.</li>Default: 0.
 	Asc *int64 `json:"Asc,omitnil" name:"Asc"`
 
 	// Custom query
@@ -1376,7 +1601,7 @@ type DescribeInstancesListRequest struct {
 	// Sorting field. Valid values: <li>clusterId: Sorting by instance ID. </li><li>addTime: Sorting by instance creation time.</li><li>status: Sorting by instance status code.</li>
 	OrderField *string `json:"OrderField,omitnil" name:"OrderField"`
 
-	// Sort ascending or descending based on `OrderField`. Valid values:<li>0: Descending.</li><li>1: Ascending.</li>Default value: `0`.
+	// Sort according to OrderField in ascending or descending order. Valid range:<li>0: Descending order.</li><li>1: Ascending order.</li>Default: 0.
 	Asc *int64 `json:"Asc,omitnil" name:"Asc"`
 
 	// Custom query
@@ -1988,6 +2213,41 @@ type Filters struct {
 
 	// Filters by the field value
 	Values []*string `json:"Values,omitnil" name:"Values"`
+}
+
+type HiveQuery struct {
+	// Query statementNote: This field may return null, indicating that no valid values can be obtained.
+	Statement *string `json:"Statement,omitnil" name:"Statement"`
+
+	// Execution Duration
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Duration *string `json:"Duration,omitnil" name:"Duration"`
+
+	// Start Time in Milliseconds
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+
+	// End Time in Milliseconds
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+
+	// StatusNote: This field may return null, indicating that no valid values can be obtained.
+	State *string `json:"State,omitnil" name:"State"`
+
+	// UserNote: This field may return null, indicating that no valid values can be obtained.
+	User *string `json:"User,omitnil" name:"User"`
+
+	// AppId List
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	JobIds []*string `json:"JobIds,omitnil" name:"JobIds"`
+
+	// Execution Engine
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutionEngine *string `json:"ExecutionEngine,omitnil" name:"ExecutionEngine"`
+
+	// Query ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Id *string `json:"Id,omitnil" name:"Id"`
 }
 
 type HostVolumeContext struct {
@@ -2614,6 +2874,15 @@ type InstanceChargePrepaid struct {
 	RenewFlag *bool `json:"RenewFlag,omitnil" name:"RenewFlag"`
 }
 
+type KeyValue struct {
+	// Key
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Key *string `json:"Key,omitnil" name:"Key"`
+
+	// ValueNote: This field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitnil" name:"Value"`
+}
+
 type LoginSettings struct {
 	// The login password of the instance, which contains 8 to 16 uppercase letters, lowercase letters, digits, and special characters (only !@%^*) and cannot start with a special character.
 	Password *string `json:"Password,omitnil" name:"Password"`
@@ -2769,17 +3038,189 @@ func (r *ModifyResourceSchedulerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ModifyResourceTags struct {
+	// Cluster ID or CVM ID
+	ResourceId *string `json:"ResourceId,omitnil" name:"ResourceId"`
+
+	// 6-segment resource expression
+	Resource *string `json:"Resource,omitnil" name:"Resource"`
+
+	// Resource prefix
+	ResourcePrefix *string `json:"ResourcePrefix,omitnil" name:"ResourcePrefix"`
+
+	// ap-beijing
+	ResourceRegion *string `json:"ResourceRegion,omitnil" name:"ResourceRegion"`
+
+	// emr
+	ServiceType *string `json:"ServiceType,omitnil" name:"ServiceType"`
+
+	// List of deleted tags
+	DeleteTags []*Tag `json:"DeleteTags,omitnil" name:"DeleteTags"`
+
+	// List of added tags
+	AddTags []*Tag `json:"AddTags,omitnil" name:"AddTags"`
+
+	// List of modified tags
+	ModifyTags []*Tag `json:"ModifyTags,omitnil" name:"ModifyTags"`
+}
+
+// Predefined struct for user
+type ModifyResourcesTagsRequestParams struct {
+	// Tag type. Valid values: Cluster and Node
+	ModifyType *string `json:"ModifyType,omitnil" name:"ModifyType"`
+
+	// Tag information
+	ModifyResourceTagsInfoList []*ModifyResourceTags `json:"ModifyResourceTagsInfoList,omitnil" name:"ModifyResourceTagsInfoList"`
+}
+
+type ModifyResourcesTagsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Tag type. Valid values: Cluster and Node
+	ModifyType *string `json:"ModifyType,omitnil" name:"ModifyType"`
+
+	// Tag information
+	ModifyResourceTagsInfoList []*ModifyResourceTags `json:"ModifyResourceTagsInfoList,omitnil" name:"ModifyResourceTagsInfoList"`
+}
+
+func (r *ModifyResourcesTagsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyResourcesTagsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ModifyType")
+	delete(f, "ModifyResourceTagsInfoList")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyResourcesTagsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyResourcesTagsResponseParams struct {
+	// List of resource IDs with successful modification
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SuccessList []*string `json:"SuccessList,omitnil" name:"SuccessList"`
+
+	// List of resource IDs with failed modification
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FailList []*string `json:"FailList,omitnil" name:"FailList"`
+
+	// List of resource IDs with partial successful modification
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PartSuccessList []*string `json:"PartSuccessList,omitnil" name:"PartSuccessList"`
+
+	// Mapping list of cluster IDs and process IDs
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ClusterToFlowIdList []*ClusterIDToFlowID `json:"ClusterToFlowIdList,omitnil" name:"ClusterToFlowIdList"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ModifyResourcesTagsResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyResourcesTagsResponseParams `json:"Response"`
+}
+
+func (r *ModifyResourcesTagsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyResourcesTagsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyUserManagerPwdRequestParams struct {
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Username
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
+
+	// Password
+	PassWord *string `json:"PassWord,omitnil" name:"PassWord"`
+}
+
+type ModifyUserManagerPwdRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cluster instance ID
+	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+
+	// Username
+	UserName *string `json:"UserName,omitnil" name:"UserName"`
+
+	// Password
+	PassWord *string `json:"PassWord,omitnil" name:"PassWord"`
+}
+
+func (r *ModifyUserManagerPwdRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyUserManagerPwdRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceId")
+	delete(f, "UserName")
+	delete(f, "PassWord")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyUserManagerPwdRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyUserManagerPwdResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ModifyUserManagerPwdResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyUserManagerPwdResponseParams `json:"Response"`
+}
+
+func (r *ModifyUserManagerPwdResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyUserManagerPwdResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type MultiDisk struct {
-	// Cloud disk type
-	// <li>`CLOUD_SSD`: SSD</li>
-	// <li>`CLOUD_PREMIUM`: Premium Cloud Storage</li>
-	// <li>`CLOUD_HSSD`: Enhanced SSD</li>
+	// Disk type
+	// <li>CLOUD_SSD: Cloud SSD.</li>
+	// <li>CLOUD_PREMIUM: Premium cloud disk.</li>
+	// <li>CLOUD_HSSD: Enhanced SSD.</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DiskType *string `json:"DiskType,omitnil" name:"DiskType"`
 
-	// Cloud disk size
+	// Cloud disk sizeNote: This field may return null, indicating that no valid values can be obtained.
 	Volume *int64 `json:"Volume,omitnil" name:"Volume"`
 
-	// Number of cloud disks of this type
+	// Number of cloud disks of this typeNote: This field may return null, indicating that no valid values can be obtained.
 	Count *int64 `json:"Count,omitnil" name:"Count"`
 }
 
@@ -3047,6 +3488,10 @@ type NodeHardwareInfo struct {
 	// The billing version. Valid values: `0` (original billing) and `1` (new billing)
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TradeVersion *int64 `json:"TradeVersion,omitnil" name:"TradeVersion"`
+
+	// Status of each component. Zookeeper: STARTED; ResourceManager: STARTED. STARTED indicates "already in operation"; STOPPED indicates "ceased".
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ServicesStatus *string `json:"ServicesStatus,omitnil" name:"ServicesStatus"`
 }
 
 type NodeResourceSpec struct {
@@ -3548,6 +3993,9 @@ type PreExecuteFileSettings struct {
 
 	// COS `appid`, which has been disused
 	AppId *string `json:"AppId,omitnil" name:"AppId"`
+
+	// Remarks
+	Remark *string `json:"Remark,omitnil" name:"Remark"`
 }
 
 type PriceDetail struct {
@@ -3700,10 +4148,10 @@ type ScaleOutClusterRequestParams struct {
 	// The [Bootstrap action](https://intl.cloud.tencent.com/document/product/589/35656?from_cn_redirect=1) script settings.
 	ScriptBootstrapActionConfig []*ScriptBootstrapActionConfig `json:"ScriptBootstrapActionConfig,omitnil" name:"ScriptBootstrapActionConfig"`
 
-	// The services to be deployed for new nodes. By default, new nodes will inherit all services deployed for the current node type. Deployed services include default optional services. This parameter only supports optional services. For example, if `HDFS`, `YARN`, and `Impala` have been deployed for existing task nodes, only `HDFS` and `YARN` are passed in with this parameter if `Impala` is not deployed during the task node scale-out with API.
+	// The services to be deployed for new nodes. By default, new nodes will inherit services deployed for the current node type, including default optional services. This parameter only supports the inclusion of optional services. For example, if HDFS, YARN, and Impala have been deployed for existing task nodes, when using the API for task node scale-out without deploying Impala, only HDFS and YARN are included in with this parameter. Refer to the [component name mapping table](https://intl.cloud.tencent.com/document/product/589/98760?from_cn_redirect=1).
 	SoftDeployInfo []*int64 `json:"SoftDeployInfo,omitnil" name:"SoftDeployInfo"`
 
-	// The processes to be deployed. All processes for services to be added are deployed by default. Deployed processes can be changed. For example, `HDFS`, `YARN`, and `Impala` have been deployed for current task nodes, and default services are `DataNode`, `NodeManager`, and `ImpalaServer`; if you want to change deployed processes, you can set this parameter to `DataNode,NodeManager,ImpalaServerCoordinator` or `DataNode,NodeManager,ImpalaServerExecutor`.
+	// The processes to be deployed. All processes for services to be added are deployed by default. Deployed processes can be changed. For example, HDFS, YARN, and Impala have been deployed for current task nodes, and default services are DataNode, NodeManager, and ImpalaServer; if you want to change deployed processes, you can set this parameter to DataNode,NodeManager,ImpalaServerCoordinator or DataNode,NodeManager,ImpalaServerExecutor. Refer to the [process name mapping table](https://intl.cloud.tencent.com/document/product/589/98760?from_cn_redirect=1).
 	ServiceNodeInfo []*int64 `json:"ServiceNodeInfo,omitnil" name:"ServiceNodeInfo"`
 
 	// The list of spread placement group IDs. Only one can be specified.
@@ -3766,10 +4214,10 @@ type ScaleOutClusterRequest struct {
 	// The [Bootstrap action](https://intl.cloud.tencent.com/document/product/589/35656?from_cn_redirect=1) script settings.
 	ScriptBootstrapActionConfig []*ScriptBootstrapActionConfig `json:"ScriptBootstrapActionConfig,omitnil" name:"ScriptBootstrapActionConfig"`
 
-	// The services to be deployed for new nodes. By default, new nodes will inherit all services deployed for the current node type. Deployed services include default optional services. This parameter only supports optional services. For example, if `HDFS`, `YARN`, and `Impala` have been deployed for existing task nodes, only `HDFS` and `YARN` are passed in with this parameter if `Impala` is not deployed during the task node scale-out with API.
+	// The services to be deployed for new nodes. By default, new nodes will inherit services deployed for the current node type, including default optional services. This parameter only supports the inclusion of optional services. For example, if HDFS, YARN, and Impala have been deployed for existing task nodes, when using the API for task node scale-out without deploying Impala, only HDFS and YARN are included in with this parameter. Refer to the [component name mapping table](https://intl.cloud.tencent.com/document/product/589/98760?from_cn_redirect=1).
 	SoftDeployInfo []*int64 `json:"SoftDeployInfo,omitnil" name:"SoftDeployInfo"`
 
-	// The processes to be deployed. All processes for services to be added are deployed by default. Deployed processes can be changed. For example, `HDFS`, `YARN`, and `Impala` have been deployed for current task nodes, and default services are `DataNode`, `NodeManager`, and `ImpalaServer`; if you want to change deployed processes, you can set this parameter to `DataNode,NodeManager,ImpalaServerCoordinator` or `DataNode,NodeManager,ImpalaServerExecutor`.
+	// The processes to be deployed. All processes for services to be added are deployed by default. Deployed processes can be changed. For example, HDFS, YARN, and Impala have been deployed for current task nodes, and default services are DataNode, NodeManager, and ImpalaServer; if you want to change deployed processes, you can set this parameter to DataNode,NodeManager,ImpalaServerCoordinator or DataNode,NodeManager,ImpalaServerExecutor. Refer to the [process name mapping table](https://intl.cloud.tencent.com/document/product/589/98760?from_cn_redirect=1).
 	ServiceNodeInfo []*int64 `json:"ServiceNodeInfo,omitnil" name:"ServiceNodeInfo"`
 
 	// The list of spread placement group IDs. Only one can be specified.
@@ -4311,7 +4759,7 @@ type StrategyConfig struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RollingRestartSwitch *int64 `json:"RollingRestartSwitch,omitnil" name:"RollingRestartSwitch"`
 
-	// The number of nodes to be restarted per batch in rolling restart, with a maximum value of 99,999.
+	// The quantity of restarts per batch during a rolling restart, with the maximum number of restarts being 99999
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	BatchSize *int64 `json:"BatchSize,omitnil" name:"BatchSize"`
 
