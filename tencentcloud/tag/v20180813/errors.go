@@ -26,6 +26,9 @@ const (
 	// The operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
+	// 
+	FAILEDOPERATION_POLICYENFORCEDINVALID = "FailedOperation.PolicyEnforcedInvalid"
+
 	// The `appId` of resources in one single request must be the same.
 	FAILEDOPERATION_RESOURCEAPPIDNOTSAME = "FailedOperation.ResourceAppIdNotSame"
 
