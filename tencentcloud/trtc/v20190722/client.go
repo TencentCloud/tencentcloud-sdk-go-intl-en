@@ -2139,6 +2139,7 @@ func NewStartStreamIngestResponse() (response *StartStreamIngestResponse) {
 // Push an online media stream to the TRTC room.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_NOTRTMPFUNCTION = "FailedOperation.NotRtmpFunction"
 //  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
 //  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
 //  INTERNALERROR_HTTPPARSEFAILED = "InternalError.HttpParseFailed"
@@ -2148,6 +2149,7 @@ func NewStartStreamIngestResponse() (response *StartStreamIngestResponse) {
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETER_STRROOMID = "InvalidParameter.StrRoomId"
 //  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  INVALIDPARAMETER_USERSIG = "InvalidParameter.UserSig"
 //  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
@@ -2160,6 +2162,7 @@ func (c *Client) StartStreamIngest(request *StartStreamIngestRequest) (response 
 // Push an online media stream to the TRTC room.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_NOTRTMPFUNCTION = "FailedOperation.NotRtmpFunction"
 //  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
 //  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
 //  INTERNALERROR_HTTPPARSEFAILED = "InternalError.HttpParseFailed"
@@ -2169,6 +2172,7 @@ func (c *Client) StartStreamIngest(request *StartStreamIngestRequest) (response 
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETER_STRROOMID = "InvalidParameter.StrRoomId"
 //  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  INVALIDPARAMETER_USERSIG = "InvalidParameter.UserSig"
 //  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
 //  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
 //  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
