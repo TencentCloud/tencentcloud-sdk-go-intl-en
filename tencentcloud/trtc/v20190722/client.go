@@ -897,6 +897,306 @@ func (c *Client) DescribeStreamIngestWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeTRTCMarketQualityDataRequest() (request *DescribeTRTCMarketQualityDataRequest) {
+    request = &DescribeTRTCMarketQualityDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeTRTCMarketQualityData")
+    
+    
+    return
+}
+
+func NewDescribeTRTCMarketQualityDataResponse() (response *DescribeTRTCMarketQualityDataResponse) {
+    response = &DescribeTRTCMarketQualityDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTRTCMarketQualityData
+// Query TRTC Monitoring Dashboard - Data Dashboard Quality Metrics (including the following metrics)
+//
+// joinSuccessRate: Join channel success rate.
+//
+// joinSuccessIn5sRate: Join channel success rate within 5s.
+//
+// audioFreezeRate: Audio stutter rate.
+//
+// videoFreezeRate: Video stutter rate.
+//
+// networkDelay: Lag rate.
+//
+// Note:
+//
+// 1. To call the API, you need to activate the monitoring dashboard Standard Edition and Premium Edition, the monitoring dashboard Free Edition does not support calling. Monitoring dashboard version features and billing overview: https://trtc.io/document/54481.
+//
+// 2. The query time range depends on the monitoring dashboard function version, premium edition can query the last 30 days.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYTASKINFOFAILED = "FailedOperation.QueryTaskInfoFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+func (c *Client) DescribeTRTCMarketQualityData(request *DescribeTRTCMarketQualityDataRequest) (response *DescribeTRTCMarketQualityDataResponse, err error) {
+    return c.DescribeTRTCMarketQualityDataWithContext(context.Background(), request)
+}
+
+// DescribeTRTCMarketQualityData
+// Query TRTC Monitoring Dashboard - Data Dashboard Quality Metrics (including the following metrics)
+//
+// joinSuccessRate: Join channel success rate.
+//
+// joinSuccessIn5sRate: Join channel success rate within 5s.
+//
+// audioFreezeRate: Audio stutter rate.
+//
+// videoFreezeRate: Video stutter rate.
+//
+// networkDelay: Lag rate.
+//
+// Note:
+//
+// 1. To call the API, you need to activate the monitoring dashboard Standard Edition and Premium Edition, the monitoring dashboard Free Edition does not support calling. Monitoring dashboard version features and billing overview: https://trtc.io/document/54481.
+//
+// 2. The query time range depends on the monitoring dashboard function version, premium edition can query the last 30 days.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYTASKINFOFAILED = "FailedOperation.QueryTaskInfoFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+func (c *Client) DescribeTRTCMarketQualityDataWithContext(ctx context.Context, request *DescribeTRTCMarketQualityDataRequest) (response *DescribeTRTCMarketQualityDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeTRTCMarketQualityDataRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTRTCMarketQualityData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTRTCMarketQualityDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTRTCMarketScaleDataRequest() (request *DescribeTRTCMarketScaleDataRequest) {
+    request = &DescribeTRTCMarketScaleDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeTRTCMarketScaleData")
+    
+    
+    return
+}
+
+func NewDescribeTRTCMarketScaleDataResponse() (response *DescribeTRTCMarketScaleDataResponse) {
+    response = &DescribeTRTCMarketScaleDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTRTCMarketScaleData
+// Query TRTC Monitoring Dashboard - Data Dashboard Scale Metrics (will return userCount, roomCount, peakCurrentUsers, peakCurrentChannels)
+//
+// - userCount: number of users in the call,
+//
+// - roomCount: number of rooms in the call, counted as one call channel from the time a user joins the channel to the time all users leave the channel.
+//
+// - peakCurrentChannels: peak number of channels online at the same time.
+//
+// - peakCurrentUsers: peak number of users online at the same time.
+//
+// Note:
+//
+// 1. To call the interface, you need to activate the monitoring dashboard Standard Edition and Premium Edition, the monitoring dashboard Free Edition does not support calling, for monitoring dashboard version features and billing overview: https://trtc.io/document/54481.
+//
+// 2. The query time range depends on the monitoring dashboard function version, premium edition can query up to 60 days.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYTASKINFOFAILED = "FailedOperation.QueryTaskInfoFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+func (c *Client) DescribeTRTCMarketScaleData(request *DescribeTRTCMarketScaleDataRequest) (response *DescribeTRTCMarketScaleDataResponse, err error) {
+    return c.DescribeTRTCMarketScaleDataWithContext(context.Background(), request)
+}
+
+// DescribeTRTCMarketScaleData
+// Query TRTC Monitoring Dashboard - Data Dashboard Scale Metrics (will return userCount, roomCount, peakCurrentUsers, peakCurrentChannels)
+//
+// - userCount: number of users in the call,
+//
+// - roomCount: number of rooms in the call, counted as one call channel from the time a user joins the channel to the time all users leave the channel.
+//
+// - peakCurrentChannels: peak number of channels online at the same time.
+//
+// - peakCurrentUsers: peak number of users online at the same time.
+//
+// Note:
+//
+// 1. To call the interface, you need to activate the monitoring dashboard Standard Edition and Premium Edition, the monitoring dashboard Free Edition does not support calling, for monitoring dashboard version features and billing overview: https://trtc.io/document/54481.
+//
+// 2. The query time range depends on the monitoring dashboard function version, premium edition can query up to 60 days.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYTASKINFOFAILED = "FailedOperation.QueryTaskInfoFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+func (c *Client) DescribeTRTCMarketScaleDataWithContext(ctx context.Context, request *DescribeTRTCMarketScaleDataRequest) (response *DescribeTRTCMarketScaleDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeTRTCMarketScaleDataRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTRTCMarketScaleData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTRTCMarketScaleDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTRTCRealTimeQualityDataRequest() (request *DescribeTRTCRealTimeQualityDataRequest) {
+    request = &DescribeTRTCRealTimeQualityDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeTRTCRealTimeQualityData")
+    
+    
+    return
+}
+
+func NewDescribeTRTCRealTimeQualityDataResponse() (response *DescribeTRTCRealTimeQualityDataResponse) {
+    response = &DescribeTRTCRealTimeQualityDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTRTCRealTimeQualityData
+// Query TRTC Monitoring Dashboard - Real-Time Monitoring Quality Metrics (return the following metrics)
+//
+//  -Video stutter rate
+//
+//  -Audio stutter rate
+//
+//  Note:
+//
+//  1. To call the API, you need to activate the Monitoring Dashboard Standard Edition and Premium Edition. The Monitoring Dashboard Free Edition does not support calling. For monitoring dashboard version features and billing overview, please visit: https://trtc.io/document/54481.
+//
+//  2. The query time range depends on the monitoring dashboard function version. The premium edition can query up to 1 hours
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYTASKINFOFAILED = "FailedOperation.QueryTaskInfoFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+func (c *Client) DescribeTRTCRealTimeQualityData(request *DescribeTRTCRealTimeQualityDataRequest) (response *DescribeTRTCRealTimeQualityDataResponse, err error) {
+    return c.DescribeTRTCRealTimeQualityDataWithContext(context.Background(), request)
+}
+
+// DescribeTRTCRealTimeQualityData
+// Query TRTC Monitoring Dashboard - Real-Time Monitoring Quality Metrics (return the following metrics)
+//
+//  -Video stutter rate
+//
+//  -Audio stutter rate
+//
+//  Note:
+//
+//  1. To call the API, you need to activate the Monitoring Dashboard Standard Edition and Premium Edition. The Monitoring Dashboard Free Edition does not support calling. For monitoring dashboard version features and billing overview, please visit: https://trtc.io/document/54481.
+//
+//  2. The query time range depends on the monitoring dashboard function version. The premium edition can query up to 1 hours
+//
+// error code that may be returned:
+//  FAILEDOPERATION_QUERYTASKINFOFAILED = "FailedOperation.QueryTaskInfoFailed"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+func (c *Client) DescribeTRTCRealTimeQualityDataWithContext(ctx context.Context, request *DescribeTRTCRealTimeQualityDataRequest) (response *DescribeTRTCRealTimeQualityDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeTRTCRealTimeQualityDataRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTRTCRealTimeQualityData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTRTCRealTimeQualityDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTRTCRealTimeScaleDataRequest() (request *DescribeTRTCRealTimeScaleDataRequest) {
+    request = &DescribeTRTCRealTimeScaleDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeTRTCRealTimeScaleData")
+    
+    
+    return
+}
+
+func NewDescribeTRTCRealTimeScaleDataResponse() (response *DescribeTRTCRealTimeScaleDataResponse) {
+    response = &DescribeTRTCRealTimeScaleDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTRTCRealTimeScaleData
+// Query TRTC Monitoring Dashboard - Real-Time Monitoring Scale Metrics (the following metrics will be returned) -userCount (Online users) -roomCount (Online rooms) Note: 1. To call the interface, you need to activate the monitoring dashboard Standard Edition and Premium Edition, the monitoring dashboard Free Edition does not support calling. For monitoring dashboard version features and billing overview, please visit: https://trtc.io/document/54481. 2. The query time range depends on the function version of the monitoring dashboard. The premium edition can query the last 1 hours
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTRTCRealTimeScaleData(request *DescribeTRTCRealTimeScaleDataRequest) (response *DescribeTRTCRealTimeScaleDataResponse, err error) {
+    return c.DescribeTRTCRealTimeScaleDataWithContext(context.Background(), request)
+}
+
+// DescribeTRTCRealTimeScaleData
+// Query TRTC Monitoring Dashboard - Real-Time Monitoring Scale Metrics (the following metrics will be returned) -userCount (Online users) -roomCount (Online rooms) Note: 1. To call the interface, you need to activate the monitoring dashboard Standard Edition and Premium Edition, the monitoring dashboard Free Edition does not support calling. For monitoring dashboard version features and billing overview, please visit: https://trtc.io/document/54481. 2. The query time range depends on the function version of the monitoring dashboard. The premium edition can query the last 1 hours
+//
+// error code that may be returned:
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeTRTCRealTimeScaleDataWithContext(ctx context.Context, request *DescribeTRTCRealTimeScaleDataRequest) (response *DescribeTRTCRealTimeScaleDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeTRTCRealTimeScaleDataRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTRTCRealTimeScaleData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTRTCRealTimeScaleDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTrtcRoomUsageRequest() (request *DescribeTrtcRoomUsageRequest) {
     request = &DescribeTrtcRoomUsageRequest{
         BaseRequest: &tchttp.BaseRequest{},

@@ -21,7 +21,7 @@ import (
 )
 
 type AbnormalEvent struct {
-	// The error event ID. For details, see https://intl.cloud.tencent.com/document/product/647/44916?from_cn_redirect=1
+	// The error event ID. For details, see https://www.tencentcloud.com/document/product/647/37906?has_map=1
 	AbnormalEventId *uint64 `json:"AbnormalEventId,omitnil" name:"AbnormalEventId"`
 
 	// The remote user ID. If this parameter is empty, it indicates that the error event is not associated with a remote user.
@@ -1027,6 +1027,327 @@ func (r *DescribeStreamIngestResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeTRTCMarketQualityDataRequestParams struct {
+	// User SDKAppId (e.g., 1400xxxxxx)
+	SdkAppId *string `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// Query start time, format is YYYY-MM-DD. (The query time range depends on the monitoring dashboard function version, the premium edition can query up to 30 days)
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+
+	// Query end time, format is YYYY-MM-DD.
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+
+	// The granularity of the returned data, which can be set to the following values:
+	// d: by day. This returns data for the entire UTC day of the query time range. 
+	// h: by hour. This returns data for the entire UTC hour of the query time range.
+	Period *string `json:"Period,omitnil" name:"Period"`
+}
+
+type DescribeTRTCMarketQualityDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// User SDKAppId (e.g., 1400xxxxxx)
+	SdkAppId *string `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// Query start time, format is YYYY-MM-DD. (The query time range depends on the monitoring dashboard function version, the premium edition can query up to 30 days)
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+
+	// Query end time, format is YYYY-MM-DD.
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+
+	// The granularity of the returned data, which can be set to the following values:
+	// d: by day. This returns data for the entire UTC day of the query time range. 
+	// h: by hour. This returns data for the entire UTC hour of the query time range.
+	Period *string `json:"Period,omitnil" name:"Period"`
+}
+
+func (r *DescribeTRTCMarketQualityDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTRTCMarketQualityDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Period")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTRTCMarketQualityDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTRTCMarketQualityDataResponseParams struct {
+	// TRTC Data Dashboard output parameters
+	Data *TRTCDataResult `json:"Data,omitnil" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeTRTCMarketQualityDataResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTRTCMarketQualityDataResponseParams `json:"Response"`
+}
+
+func (r *DescribeTRTCMarketQualityDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTRTCMarketQualityDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTRTCMarketScaleDataRequestParams struct {
+	// User SDKAppId
+	SdkAppId *string `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// Query start time, format is YYYY-MM-DD. (The query time range depends on the monitoring dashboard function version, the premium edition can query up to 60 days)
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+
+	// Query end time, format is YYYY-MM-DD.
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+
+	// The granularity of the returned data, which can be set to the following values:
+	//  d: by day. This returns data for the entire UTC day of the query time range.
+	//  h: by hour. This returns data for the entire UTC hour of the query time range.
+	Period *string `json:"Period,omitnil" name:"Period"`
+}
+
+type DescribeTRTCMarketScaleDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// User SDKAppId
+	SdkAppId *string `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// Query start time, format is YYYY-MM-DD. (The query time range depends on the monitoring dashboard function version, the premium edition can query up to 60 days)
+	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+
+	// Query end time, format is YYYY-MM-DD.
+	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+
+	// The granularity of the returned data, which can be set to the following values:
+	//  d: by day. This returns data for the entire UTC day of the query time range.
+	//  h: by hour. This returns data for the entire UTC hour of the query time range.
+	Period *string `json:"Period,omitnil" name:"Period"`
+}
+
+func (r *DescribeTRTCMarketScaleDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTRTCMarketScaleDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Period")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTRTCMarketScaleDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTRTCMarketScaleDataResponseParams struct {
+	// TRTC Data Dashboard output parameters
+	Data *TRTCDataResult `json:"Data,omitnil" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeTRTCMarketScaleDataResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTRTCMarketScaleDataResponseParams `json:"Response"`
+}
+
+func (r *DescribeTRTCMarketScaleDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTRTCMarketScaleDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTRTCRealTimeQualityDataRequestParams struct {
+	// User SDKAppId (e.g., 1400xxxxxx)
+	SdkAppId *string `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// Start time, unix timestamp, Unit: seconds (Query time range depends on the monitoring dashboard function version, standard edition can query the last 3 hours, premium edition can query the last 12 hours)
+	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+
+	// End time, unix timestamp, Unit: seconds
+	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+
+	// Room ID
+	RoomId *string `json:"RoomId,omitnil" name:"RoomId"`
+}
+
+type DescribeTRTCRealTimeQualityDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// User SDKAppId (e.g., 1400xxxxxx)
+	SdkAppId *string `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// Start time, unix timestamp, Unit: seconds (Query time range depends on the monitoring dashboard function version, standard edition can query the last 3 hours, premium edition can query the last 12 hours)
+	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+
+	// End time, unix timestamp, Unit: seconds
+	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+
+	// Room ID
+	RoomId *string `json:"RoomId,omitnil" name:"RoomId"`
+}
+
+func (r *DescribeTRTCRealTimeQualityDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTRTCRealTimeQualityDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "RoomId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTRTCRealTimeQualityDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTRTCRealTimeQualityDataResponseParams struct {
+	// TRTC Real- Time Monitoring output parameters
+	Data *TRTCDataResult `json:"Data,omitnil" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeTRTCRealTimeQualityDataResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTRTCRealTimeQualityDataResponseParams `json:"Response"`
+}
+
+func (r *DescribeTRTCRealTimeQualityDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTRTCRealTimeQualityDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTRTCRealTimeScaleDataRequestParams struct {
+	// User SDKAppId (e.g., 1400xxxxxx)
+	SdkAppId *string `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// Start time, unix timestamp, Unit: seconds (Query time range depends on the function version of the monitoring dashboard, premium edition can query up to 1 hours)
+	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+
+	// End time, unix timestamp, Unit: seconds
+	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+
+	// Room ID
+	RoomId *string `json:"RoomId,omitnil" name:"RoomId"`
+}
+
+type DescribeTRTCRealTimeScaleDataRequest struct {
+	*tchttp.BaseRequest
+	
+	// User SDKAppId (e.g., 1400xxxxxx)
+	SdkAppId *string `json:"SdkAppId,omitnil" name:"SdkAppId"`
+
+	// Start time, unix timestamp, Unit: seconds (Query time range depends on the function version of the monitoring dashboard, premium edition can query up to 1 hours)
+	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+
+	// End time, unix timestamp, Unit: seconds
+	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+
+	// Room ID
+	RoomId *string `json:"RoomId,omitnil" name:"RoomId"`
+}
+
+func (r *DescribeTRTCRealTimeScaleDataRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTRTCRealTimeScaleDataRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "RoomId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTRTCRealTimeScaleDataRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTRTCRealTimeScaleDataResponseParams struct {
+	// TRTC Real- Time Monitoring
+	//  output parameter
+	Data *TRTCDataResult `json:"Data,omitnil" name:"Data"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeTRTCRealTimeScaleDataResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTRTCRealTimeScaleDataResponseParams `json:"Response"`
+}
+
+func (r *DescribeTRTCRealTimeScaleDataResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTRTCRealTimeScaleDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTrtcRoomUsageRequestParams struct {
 	// The `SDKAppID` of the room.
 	SdkAppid *uint64 `json:"SdkAppid,omitnil" name:"SdkAppid"`
@@ -1607,7 +1928,7 @@ type EventMessage struct {
 	// The event reporting time in the format of UNIX timestamp (milliseconds), such as `1589891188801`.
 	Time *uint64 `json:"Time,omitnil" name:"Time"`
 
-	// The event ID. Events are classified into SDK events and WebRTC events. For more information, see https://intl.cloud.tencent.com/document/product/647/44916?from_cn_redirect=1
+	// The event ID. Events are classified into SDK events and WebRTC events. For more information, see https://www.tencentcloud.com/document/product/647/37906?has_map=1
 	EventId *uint64 `json:"EventId,omitnil" name:"EventId"`
 
 	// The first event parameter, such as the video width.
@@ -2251,6 +2572,11 @@ type RoomState struct {
 	UserId *string `json:"UserId,omitnil" name:"UserId"`
 }
 
+type RowValues struct {
+	// Data value
+	RowValue []*int64 `json:"RowValue,omitnil" name:"RowValue"`
+}
+
 type ScaleInfomation struct {
 	// Start time for each day
 	Time *uint64 `json:"Time,omitnil" name:"Time"`
@@ -2266,6 +2592,14 @@ type ScaleInfomation struct {
 	// The total number of rooms of the application on a day.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RoomNumbers *uint64 `json:"RoomNumbers,omitnil" name:"RoomNumbers"`
+}
+
+type SeriesInfos struct {
+	// Data columns
+	Columns []*string `json:"Columns,omitnil" name:"Columns"`
+
+	// Data values
+	Values []*RowValues `json:"Values,omitnil" name:"Values"`
 }
 
 // Predefined struct for user
@@ -2829,6 +3163,17 @@ type SubscribeStreamUserIds struct {
 
 	// The blocklist for video subscription. For example, `["1", "2", "3"]` means to not subscribe to the videos of users 1, 2, and 3, and `["1.*$"]` means to not subscribe to the videos of users whose ID prefix is `1`. If this parameter is left empty, the videos of all anchors in the room will be received. The array can contain at most 32 elements.
 	UnSubscribeVideoUserIds []*string `json:"UnSubscribeVideoUserIds,omitnil" name:"UnSubscribeVideoUserIds"`
+}
+
+type TRTCDataResult struct {
+	// StatementID value, fixed at 0 for Monitoring Dashboard.
+	StatementID *int64 `json:"StatementID,omitnil" name:"StatementID"`
+
+	// Query result data, returned in Columns-Values format.
+	Series []*SeriesInfos `json:"Series,omitnil" name:"Series"`
+
+	// Total value, fixed at 1 for Monitoring Dashboard.
+	Total *int64 `json:"Total,omitnil" name:"Total"`
 }
 
 type TencentVod struct {
