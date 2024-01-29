@@ -183,6 +183,7 @@ func NewAdjustCdbProxyAddressResponse() (response *AdjustCdbProxyAddressResponse
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
 //  OPERATIONDENIED_UNSUPPORTCREATEADDRESSERROR = "OperationDenied.UnsupportCreateAddressError"
 //  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
 func (c *Client) AdjustCdbProxyAddress(request *AdjustCdbProxyAddressRequest) (response *AdjustCdbProxyAddressResponse, err error) {
@@ -198,6 +199,7 @@ func (c *Client) AdjustCdbProxyAddress(request *AdjustCdbProxyAddressRequest) (r
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED_PROXYUPGRADETASKSTATUSERROR = "OperationDenied.ProxyUpgradeTaskStatusError"
 //  OPERATIONDENIED_UNSUPPORTCREATEADDRESSERROR = "OperationDenied.UnsupportCreateAddressError"
 //  RESOURCENOTFOUND_INSTANCENOTFUNDERROR = "ResourceNotFound.InstanceNotFundError"
 func (c *Client) AdjustCdbProxyAddressWithContext(ctx context.Context, request *AdjustCdbProxyAddressRequest) (response *AdjustCdbProxyAddressResponse, err error) {
@@ -3015,6 +3017,8 @@ func NewDescribeCdbZoneConfigResponse() (response *DescribeCdbZoneConfigResponse
 // This API is used to query the purchasable specifications of TencentDB instances in a region.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONACTIONERROR = "FailedOperation.DBOperationActionError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_EXECHTTPREQUESTERROR = "InternalError.ExecHttpRequestError"
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INVALIDPARAMETER_JSONUNMARSHALERROR = "InvalidParameter.JsonUnmarshalError"
@@ -3026,6 +3030,8 @@ func (c *Client) DescribeCdbZoneConfig(request *DescribeCdbZoneConfigRequest) (r
 // This API is used to query the purchasable specifications of TencentDB instances in a region.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONACTIONERROR = "FailedOperation.DBOperationActionError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INTERNALERROR_EXECHTTPREQUESTERROR = "InternalError.ExecHttpRequestError"
 //  INTERNALERROR_HTTPERROR = "InternalError.HttpError"
 //  INVALIDPARAMETER_JSONUNMARSHALERROR = "InvalidParameter.JsonUnmarshalError"
@@ -5076,6 +5082,7 @@ func NewDescribeSlowLogDataResponse() (response *DescribeSlowLogDataResponse) {
 // Note: the HTTP response packet will be very large if it contain a single large slow log, which causes the API call to time out. If this happens, we recommend you lower the value of the input parameter `Limit` to reduce the packet size so that the API can respond timely.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_LOGCONTENTOVERLIMIT = "FailedOperation.LogContentOverLimit"
 //  FAILEDOPERATION_QUERYLOGERROR = "FailedOperation.QueryLogError"
 //  FAILEDOPERATION_RESULTSETOVERLIMIT = "FailedOperation.ResultSetOverLimit"
 //  FAILEDOPERATION_TIMEOUTERROR = "FailedOperation.TimeoutError"
@@ -5101,6 +5108,7 @@ func (c *Client) DescribeSlowLogData(request *DescribeSlowLogDataRequest) (respo
 // Note: the HTTP response packet will be very large if it contain a single large slow log, which causes the API call to time out. If this happens, we recommend you lower the value of the input parameter `Limit` to reduce the packet size so that the API can respond timely.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_LOGCONTENTOVERLIMIT = "FailedOperation.LogContentOverLimit"
 //  FAILEDOPERATION_QUERYLOGERROR = "FailedOperation.QueryLogError"
 //  FAILEDOPERATION_RESULTSETOVERLIMIT = "FailedOperation.ResultSetOverLimit"
 //  FAILEDOPERATION_TIMEOUTERROR = "FailedOperation.TimeoutError"
@@ -7768,6 +7776,7 @@ func NewOpenDBInstanceEncryptionResponse() (response *OpenDBInstanceEncryptionRe
 // This API calling may take up to 10 seconds, causing the client to time out. If it returns `InternalError`, call `DescribeDBInstanceInfo` to confirm whether the backend encryption is enabled successfully.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
 //  INTERNALERROR_HTTPREQUESTERROR = "InternalError.HttpRequestError"
 //  INTERNALERROR_KMSERROR = "InternalError.KmsError"
@@ -7803,6 +7812,7 @@ func (c *Client) OpenDBInstanceEncryption(request *OpenDBInstanceEncryptionReque
 // This API calling may take up to 10 seconds, causing the client to time out. If it returns `InternalError`, call `DescribeDBInstanceInfo` to confirm whether the backend encryption is enabled successfully.
 //
 // error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
 //  CDBERROR = "CdbError"
 //  INTERNALERROR_HTTPREQUESTERROR = "InternalError.HttpRequestError"
 //  INTERNALERROR_KMSERROR = "InternalError.KmsError"
@@ -7910,6 +7920,7 @@ func NewOpenWanServiceResponse() (response *OpenWanServiceResponse) {
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
@@ -7929,6 +7940,7 @@ func (c *Client) OpenWanService(request *OpenWanServiceRequest) (response *OpenW
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_STATUSCONFLICT = "FailedOperation.StatusConflict"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
@@ -8364,7 +8376,9 @@ func NewStartCpuExpandResponse() (response *StartCpuExpandResponse) {
 //  FAILEDOPERATION_INSTANCETASKCONFLICTERROR = "FailedOperation.InstanceTaskConflictError"
 //  FAILEDOPERATION_NOTCHANGESTRATEGY = "FailedOperation.NotChangeStrategy"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  MISSINGPARAMETER_MISSINGPARAMERROR = "MissingParameter.MissingParamError"
 //  UNSUPPORTEDOPERATION_NOTSUPPORTNORMALINSTANCE = "UnsupportedOperation.NotSupportNormalInstance"
 func (c *Client) StartCpuExpand(request *StartCpuExpandRequest) (response *StartCpuExpandResponse, err error) {
     return c.StartCpuExpandWithContext(context.Background(), request)
@@ -8377,7 +8391,9 @@ func (c *Client) StartCpuExpand(request *StartCpuExpandRequest) (response *Start
 //  FAILEDOPERATION_INSTANCETASKCONFLICTERROR = "FailedOperation.InstanceTaskConflictError"
 //  FAILEDOPERATION_NOTCHANGESTRATEGY = "FailedOperation.NotChangeStrategy"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER_EXCEPTIONPARAM = "InvalidParameter.ExceptionParam"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  MISSINGPARAMETER_MISSINGPARAMERROR = "MissingParameter.MissingParamError"
 //  UNSUPPORTEDOPERATION_NOTSUPPORTNORMALINSTANCE = "UnsupportedOperation.NotSupportNormalInstance"
 func (c *Client) StartCpuExpandWithContext(ctx context.Context, request *StartCpuExpandRequest) (response *StartCpuExpandResponse, err error) {
     if request == nil {
@@ -9084,6 +9100,7 @@ func NewUpgradeDBInstanceEngineVersionResponse() (response *UpgradeDBInstanceEng
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) UpgradeDBInstanceEngineVersion(request *UpgradeDBInstanceEngineVersionRequest) (response *UpgradeDBInstanceEngineVersionResponse, err error) {
     return c.UpgradeDBInstanceEngineVersionWithContext(context.Background(), request)
@@ -9102,6 +9119,7 @@ func (c *Client) UpgradeDBInstanceEngineVersion(request *UpgradeDBInstanceEngine
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACTIONNOTSUPPORT = "OperationDenied.ActionNotSupport"
 //  OPERATIONDENIED_USERHASNOSTRATEGY = "OperationDenied.UserHasNoStrategy"
 func (c *Client) UpgradeDBInstanceEngineVersionWithContext(ctx context.Context, request *UpgradeDBInstanceEngineVersionRequest) (response *UpgradeDBInstanceEngineVersionResponse, err error) {
     if request == nil {
