@@ -11548,7 +11548,7 @@ func (r *ReloadBalanceProxyNodeResponse) FromJsonString(s string) error {
 
 type RemoteBackupInfo struct {
 	// ID of the remote backup subtask
-	SubBackupId []*int64 `json:"SubBackupId,omitnil" name:"SubBackupId"`
+	SubBackupId *int64 `json:"SubBackupId,omitnil" name:"SubBackupId"`
 
 	// The region where the remote backup resides
 	Region *string `json:"Region,omitnil" name:"Region"`
