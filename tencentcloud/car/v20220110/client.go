@@ -183,6 +183,81 @@ func (c *Client) CreateSessionWithContext(ctx context.Context, request *CreateSe
     return
 }
 
+func NewDescribeConcurrentCountRequest() (request *DescribeConcurrentCountRequest) {
+    request = &DescribeConcurrentCountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DescribeConcurrentCount")
+    
+    
+    return
+}
+
+func NewDescribeConcurrentCountResponse() (response *DescribeConcurrentCountResponse) {
+    response = &DescribeConcurrentCountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeConcurrentCount
+// Obtain the concurrency count.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_LOCKTIMEOUT = "FailedOperation.LockTimeout"
+//  FAILEDOPERATION_PATHNOTFOUND = "FailedOperation.PathNotFound"
+//  FAILEDOPERATION_PROCESSTIMEOUT = "FailedOperation.ProcessTimeout"
+//  FAILEDOPERATION_SLOWDOWN = "FailedOperation.SlowDown"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_ROLE = "LimitExceeded.Role"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_NOIDLE = "ResourceNotFound.NoIdle"
+//  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
+//  RESOURCEUNAVAILABLE_INITIALIZATION = "ResourceUnavailable.Initialization"
+//  UNSUPPORTEDOPERATION_STOPPING = "UnsupportedOperation.Stopping"
+func (c *Client) DescribeConcurrentCount(request *DescribeConcurrentCountRequest) (response *DescribeConcurrentCountResponse, err error) {
+    return c.DescribeConcurrentCountWithContext(context.Background(), request)
+}
+
+// DescribeConcurrentCount
+// Obtain the concurrency count.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_LOCKTIMEOUT = "FailedOperation.LockTimeout"
+//  FAILEDOPERATION_PATHNOTFOUND = "FailedOperation.PathNotFound"
+//  FAILEDOPERATION_PROCESSTIMEOUT = "FailedOperation.ProcessTimeout"
+//  FAILEDOPERATION_SLOWDOWN = "FailedOperation.SlowDown"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_ROLE = "LimitExceeded.Role"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_NOIDLE = "ResourceNotFound.NoIdle"
+//  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
+//  RESOURCEUNAVAILABLE_INITIALIZATION = "ResourceUnavailable.Initialization"
+//  UNSUPPORTEDOPERATION_STOPPING = "UnsupportedOperation.Stopping"
+func (c *Client) DescribeConcurrentCountWithContext(ctx context.Context, request *DescribeConcurrentCountRequest) (response *DescribeConcurrentCountResponse, err error) {
+    if request == nil {
+        request = NewDescribeConcurrentCountRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConcurrentCount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeConcurrentCountResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDestroySessionRequest() (request *DestroySessionRequest) {
     request = &DestroySessionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -203,7 +278,7 @@ func NewDestroySessionResponse() (response *DestroySessionResponse) {
 }
 
 // DestroySession
-// This API is used to terminate a session.
+// Terminate the session. If stream push has been initiated in this session, then the stream push will end upon session termination.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -216,7 +291,7 @@ func (c *Client) DestroySession(request *DestroySessionRequest) (response *Destr
 }
 
 // DestroySession
-// This API is used to terminate a session.
+// Terminate the session. If stream push has been initiated in this session, then the stream push will end upon session termination.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -260,7 +335,7 @@ func NewStartPublishStreamResponse() (response *StartPublishStreamResponse) {
 }
 
 // StartPublishStream
-// This API is used to start stream push.
+// Initiate stream push. The codec for the stream push is automatically adjusted based on the client's (SDK) capabilities, with a default order of H265, H264, VP8, and VP9.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -274,7 +349,7 @@ func (c *Client) StartPublishStream(request *StartPublishStreamRequest) (respons
 }
 
 // StartPublishStream
-// This API is used to start stream push.
+// Initiate stream push. The codec for the stream push is automatically adjusted based on the client's (SDK) capabilities, with a default order of H265, H264, VP8, and VP9.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -319,7 +394,7 @@ func NewStartPublishStreamWithURLResponse() (response *StartPublishStreamWithURL
 }
 
 // StartPublishStreamWithURL
-// This API is used to start stream push to the specified URL. It is billed separately. For billing details, see the [Push to third-party address](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6) section.
+// Initiate stream push to the specified URL. The codec for the stream push is automatically adjusted based on the client's (SDK) capabilities, with a default order of H265, H264, VP8, and VP9. This stream push method will be charged separately. For details about the charging method, see [Charging for Stream Push to Specified URL](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -333,7 +408,7 @@ func (c *Client) StartPublishStreamWithURL(request *StartPublishStreamWithURLReq
 }
 
 // StartPublishStreamWithURL
-// This API is used to start stream push to the specified URL. It is billed separately. For billing details, see the [Push to third-party address](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6) section.
+// Initiate stream push to the specified URL. The codec for the stream push is automatically adjusted based on the client's (SDK) capabilities, with a default order of H265, H264, VP8, and VP9. This stream push method will be charged separately. For details about the charging method, see [Charging for Stream Push to Specified URL](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

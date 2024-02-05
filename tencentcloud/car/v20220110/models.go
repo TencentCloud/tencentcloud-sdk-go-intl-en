@@ -31,7 +31,7 @@ type ApplyConcurrentRequestParams struct {
 	// The project ID.
 	ProjectId *string `json:"ProjectId,omitnil" name:"ProjectId"`
 
-	// The application version ID.
+	// Application version ID. If the application of the current version is requested, you do not need to fill in this field. If the application of other versions is requested, you need to specify the version through this field.
 	ApplicationVersionId *string `json:"ApplicationVersionId,omitnil" name:"ApplicationVersionId"`
 
 	// Application ID, which is used only by the multi-application project to specify applications. For a single-application project, this parameter is ignored, and the application bound to the project will be used.
@@ -50,7 +50,7 @@ type ApplyConcurrentRequest struct {
 	// The project ID.
 	ProjectId *string `json:"ProjectId,omitnil" name:"ProjectId"`
 
-	// The application version ID.
+	// Application version ID. If the application of the current version is requested, you do not need to fill in this field. If the application of other versions is requested, you need to specify the version through this field.
 	ApplicationVersionId *string `json:"ApplicationVersionId,omitnil" name:"ApplicationVersionId"`
 
 	// Application ID, which is used only by the multi-application project to specify applications. For a single-application project, this parameter is ignored, and the application bound to the project will be used.
@@ -220,6 +220,66 @@ func (r *CreateSessionResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateSessionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConcurrentCountRequestParams struct {
+	// Project ID
+	ProjectId *string `json:"ProjectId,omitnil" name:"ProjectId"`
+}
+
+type DescribeConcurrentCountRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project ID
+	ProjectId *string `json:"ProjectId,omitnil" name:"ProjectId"`
+}
+
+func (r *DescribeConcurrentCountRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConcurrentCountRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConcurrentCountRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConcurrentCountResponseParams struct {
+	// Total Concurrency Count
+	Total *uint64 `json:"Total,omitnil" name:"Total"`
+
+	// The number of concurrent executions, including those in pre-launch, connected, waiting for reconnection, to be cleaned up or recovered, and all non-idle concurrent executions. Therefore, refreshing projects or disconnecting user connections with concurrency packages will affect this value.
+	Running *uint64 `json:"Running,omitnil" name:"Running"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type DescribeConcurrentCountResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConcurrentCountResponseParams `json:"Response"`
+}
+
+func (r *DescribeConcurrentCountResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConcurrentCountResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
