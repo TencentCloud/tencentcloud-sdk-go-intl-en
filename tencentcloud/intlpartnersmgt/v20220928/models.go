@@ -514,6 +514,9 @@ type CustomerBillDetailData struct {
 	// ID
 	// Note: The return value may be null, indicating that no valid data can be obtained.
 	Id *string `json:"Id,omitnil" name:"Id"`
+
+	// Tag informationNote: This field may return null, indicating that no valid values can be obtained.
+	Tags []*TagInfo `json:"Tags,omitnil" name:"Tags"`
 }
 
 // Predefined struct for user
@@ -1887,14 +1890,14 @@ type QueryVoucherAmountByUinItem struct {
 
 // Predefined struct for user
 type QueryVoucherAmountByUinRequestParams struct {
-	// List of customer UIN. Array length value: 1-20.
+	// Customer UIN list. Array length value: 1-20.
 	ClientUins []*uint64 `json:"ClientUins,omitnil" name:"ClientUins"`
 }
 
 type QueryVoucherAmountByUinRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of customer UIN. Array length value: 1-20.
+	// Customer UIN list. Array length value: 1-20.
 	ClientUins []*uint64 `json:"ClientUins,omitnil" name:"ClientUins"`
 }
 
@@ -1955,7 +1958,7 @@ type QueryVoucherListByUinItem struct {
 
 // Predefined struct for user
 type QueryVoucherListByUinRequestParams struct {
-	// List of customer UIN. Array length value:1-20.
+	// Customer UIN list. Array length value: 1-20.
 	ClientUins []*uint64 `json:"ClientUins,omitnil" name:"ClientUins"`
 
 	// Voucher status. If this parameter is not passed in, all status will be queried by default. Valid values: `Unused`, `Used`, `Expired`.
@@ -1965,7 +1968,7 @@ type QueryVoucherListByUinRequestParams struct {
 type QueryVoucherListByUinRequest struct {
 	*tchttp.BaseRequest
 	
-	// List of customer UIN. Array length value:1-20.
+	// Customer UIN list. Array length value: 1-20.
 	ClientUins []*uint64 `json:"ClientUins,omitnil" name:"ClientUins"`
 
 	// Voucher status. If this parameter is not passed in, all status will be queried by default. Valid values: `Unused`, `Used`, `Expired`.
@@ -2117,4 +2120,12 @@ type RegionSummaryOverviewItem struct {
 	// Total consumption amount accurate down to eight decimal places
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TotalCost *string `json:"TotalCost,omitnil" name:"TotalCost"`
+}
+
+type TagInfo struct {
+	// Tag keyNote: This field may return null, indicating that no valid values can be obtained.
+	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
+
+	// Tag valueNote: This field may return null, indicating that no valid values can be obtained.
+	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
 }
