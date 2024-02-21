@@ -573,6 +573,9 @@ type CardVerifyResult struct {
 
 	// The request ID of a single process.
 	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+
+	// The recognition results of ID card
+	CardInfo *CardInfo `json:"CardInfo,omitnil" name:"CardInfo"`
 }
 
 // Predefined struct for user
