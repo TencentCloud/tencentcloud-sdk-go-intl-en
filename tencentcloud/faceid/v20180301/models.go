@@ -20,6 +20,38 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
+type Address struct {
+	// Nationality.
+	Country *string `json:"Country,omitnil" name:"Country"`
+
+	// Post code.
+	PostalCode *string `json:"PostalCode,omitnil" name:"PostalCode"`
+
+	// Subregion.
+	Subdivision *string `json:"Subdivision,omitnil" name:"Subdivision"`
+
+	// City.
+	City *string `json:"City,omitnil" name:"City"`
+
+	// Complete address.
+	FormattedAddress *string `json:"FormattedAddress,omitnil" name:"FormattedAddress"`
+
+	// The first line of address.
+	LineOne *string `json:"LineOne,omitnil" name:"LineOne"`
+
+	// The second line of address.
+	LineTwo *string `json:"LineTwo,omitnil" name:"LineTwo"`
+
+	// The third line of address.
+	LineThree *string `json:"LineThree,omitnil" name:"LineThree"`
+
+	// The fourth line of address.
+	LineFour *string `json:"LineFour,omitnil" name:"LineFour"`
+
+	// The fifth line of address.
+	LineFive *string `json:"LineFive,omitnil" name:"LineFive"`
+}
+
 // Predefined struct for user
 type ApplyLivenessTokenRequestParams struct {
 	// Enumerated value. Valid values: `1`, `2`, `3`, and `4`.
@@ -990,9 +1022,9 @@ type GeneralCard struct {
 	LastName *string `json:"LastName,omitnil" name:"LastName"`
 
 	// Gender on the license
-	// - M：male
-	// - F：female
-	// - X：other gender
+	// - M: male
+	// - F: female
+	// - X: other gender
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	// Example: M
 	Sex *string `json:"Sex,omitnil" name:"Sex"`
@@ -1017,6 +1049,10 @@ type GeneralCard struct {
 	// Registration number
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RegistrationNumber *string `json:"RegistrationNumber,omitnil" name:"RegistrationNumber"`
+
+	// Address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Address *Address `json:"Address,omitnil" name:"Address"`
 }
 
 // Predefined struct for user
@@ -2358,6 +2394,9 @@ func (r *VideoLivenessCompareResponse) FromJsonString(s string) error {
 }
 
 type WebVerificationConfigIntl struct {
+	// When starting verification, whether to skip the starting verification page. If true, enter the verification process directly. The default is false. This configuration will not take effect if the downgrade policy is triggered.
+	AutoSkipStartPage *bool `json:"AutoSkipStartPage,omitnil" name:"AutoSkipStartPage"`
+
 	// When the verification passed, whether to skip the result page and automatically jump to RedirectURL. The default value is false.
 	// Example value: false
 	AutoSkip *bool `json:"AutoSkip,omitnil" name:"AutoSkip"`
@@ -2382,4 +2421,7 @@ type WebVerificationConfigIntl struct {
 	// 9.InternationalIDPassport: ID cards of Hong Kong, Macao and Taiwan (China), and international passport.
 	// Example: HKIDCard
 	IDCardType *string `json:"IDCardType,omitnil" name:"IDCardType"`
+
+	// Whether to turn off document alarms, the default is false (the alarm detection function is turned on). When enabled, the identity authentication process will be intercepted based on the alarm status of the certificate. If you need to use the document authentication function, please contact us.
+	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil" name:"DisableCheckOcrWarnings"`
 }
