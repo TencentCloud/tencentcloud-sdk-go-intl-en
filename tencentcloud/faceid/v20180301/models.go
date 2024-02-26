@@ -53,6 +53,128 @@ type Address struct {
 }
 
 // Predefined struct for user
+type ApplyCardVerificationRequestParams struct {
+	// Please select the country code of ID document.
+	// IDN: Indonesia
+	// HKG: Hong Kong
+	// THA: Thailand
+	// MYS: Malaysia
+	// SGP: Singapore
+	// JPN: Japan
+	// AUTO: Automatic Identification
+	Nationality *string `json:"Nationality,omitnil" name:"Nationality"`
+
+	// Please select the type of ID document. The supported options are:
+	// ID_CARD
+	// PASSPORT
+	// DRIVING_LICENSE
+	// AUTO
+	CardType *string `json:"CardType,omitnil" name:"CardType"`
+
+	// Base64 value for the front of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. 
+	// The image download takes no more than 3 seconds. Supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64 Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
+	ImageBase64Front *string `json:"ImageBase64Front,omitnil" name:"ImageBase64Front"`
+
+	// Base64 value of the reverse side of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
+	ImageBase64Back *string `json:"ImageBase64Back,omitnil" name:"ImageBase64Back"`
+
+	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
+	ImageUrlFront *string `json:"ImageUrlFront,omitnil" name:"ImageUrlFront"`
+
+	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
+	ImageUrlBack *string `json:"ImageUrlBack,omitnil" name:"ImageUrlBack"`
+}
+
+type ApplyCardVerificationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Please select the country code of ID document.
+	// IDN: Indonesia
+	// HKG: Hong Kong
+	// THA: Thailand
+	// MYS: Malaysia
+	// SGP: Singapore
+	// JPN: Japan
+	// AUTO: Automatic Identification
+	Nationality *string `json:"Nationality,omitnil" name:"Nationality"`
+
+	// Please select the type of ID document. The supported options are:
+	// ID_CARD
+	// PASSPORT
+	// DRIVING_LICENSE
+	// AUTO
+	CardType *string `json:"CardType,omitnil" name:"CardType"`
+
+	// Base64 value for the front of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. 
+	// The image download takes no more than 3 seconds. Supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64 Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
+	ImageBase64Front *string `json:"ImageBase64Front,omitnil" name:"ImageBase64Front"`
+
+	// Base64 value of the reverse side of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
+	ImageBase64Back *string `json:"ImageBase64Back,omitnil" name:"ImageBase64Back"`
+
+	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
+	ImageUrlFront *string `json:"ImageUrlFront,omitnil" name:"ImageUrlFront"`
+
+	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
+	ImageUrlBack *string `json:"ImageUrlBack,omitnil" name:"ImageUrlBack"`
+}
+
+func (r *ApplyCardVerificationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplyCardVerificationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Nationality")
+	delete(f, "CardType")
+	delete(f, "ImageBase64Front")
+	delete(f, "ImageBase64Back")
+	delete(f, "ImageUrlFront")
+	delete(f, "ImageUrlBack")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplyCardVerificationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ApplyCardVerificationResponseParams struct {
+	// The token used to identify an verification process. It can be used to get the verification result after the process is completed.
+	CardVerificationToken *string `json:"CardVerificationToken,omitnil" name:"CardVerificationToken"`
+
+	// The maximum number of polls for calling the pull result interface polling.
+	AsyncCardVerificationMaxPollingTimes *uint64 `json:"AsyncCardVerificationMaxPollingTimes,omitnil" name:"AsyncCardVerificationMaxPollingTimes"`
+
+	// The interval for polling when calling the pull result interface (in seconds).
+	AsyncCardVerificationPollingWaitTime *uint64 `json:"AsyncCardVerificationPollingWaitTime,omitnil" name:"AsyncCardVerificationPollingWaitTime"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type ApplyCardVerificationResponse struct {
+	*tchttp.BaseResponse
+	Response *ApplyCardVerificationResponseParams `json:"Response"`
+}
+
+func (r *ApplyCardVerificationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ApplyCardVerificationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ApplyLivenessTokenRequestParams struct {
 	// Enumerated value. Valid values: `1`, `2`, `3`, and `4`.
 	// Their meanings are as follows:
@@ -1132,6 +1254,92 @@ func (r *GenerateReflectSequenceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *GenerateReflectSequenceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetCardVerificationResultRequestParams struct {
+	// The token used to identify an verification process. It can be used to get the verification result after the process is completed.
+	CardVerificationToken *string `json:"CardVerificationToken,omitnil" name:"CardVerificationToken"`
+}
+
+type GetCardVerificationResultRequest struct {
+	*tchttp.BaseRequest
+	
+	// The token used to identify an verification process. It can be used to get the verification result after the process is completed.
+	CardVerificationToken *string `json:"CardVerificationToken,omitnil" name:"CardVerificationToken"`
+}
+
+func (r *GetCardVerificationResultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetCardVerificationResultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CardVerificationToken")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetCardVerificationResultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetCardVerificationResultResponseParams struct {
+	// Pass status. When Warning and Rejected are returned, please check the specific reasons in the WarnInfo structure return. Example values are as follows:
+	// Passed
+	// Warning
+	// Rejected
+	Status *string `json:"Status,omitnil" name:"Status"`
+
+	// Warning information returned by document verification.
+	WarnInfo []*string `json:"WarnInfo,omitnil" name:"WarnInfo"`
+
+	// Nationality code. Complies with standard ISO 3166-1 alpha-3. 
+	// 
+	// Example value: IDN
+	Nationality *string `json:"Nationality,omitnil" name:"Nationality"`
+
+	// Card Type. The supported options are:
+	// ID_CARD
+	// PASSPORT
+	// DRIVING_LICENSE
+	// AUTO
+	// 
+	// Example value: ID_CARD
+	CardType *string `json:"CardType,omitnil" name:"CardType"`
+
+	// Subtype of the ID document.
+	CardSubType *string `json:"CardSubType,omitnil" name:"CardSubType"`
+
+	// Recognition results of the ID document.
+	CardInfo *CardInfo `json:"CardInfo,omitnil" name:"CardInfo"`
+
+	// The token used to identify an verification process. It can be used to get the verification result after the process is completed.
+	IDVerificationToken *string `json:"IDVerificationToken,omitnil" name:"IDVerificationToken"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+}
+
+type GetCardVerificationResultResponse struct {
+	*tchttp.BaseResponse
+	Response *GetCardVerificationResultResponseParams `json:"Response"`
+}
+
+func (r *GetCardVerificationResultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetCardVerificationResultResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
