@@ -23,50 +23,50 @@ import (
 // Predefined struct for user
 type CreateLogExportRequestParams struct {
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Log export start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Log export end time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Log export search statement
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// Number of logs to be exported. Maximum value: 10 million
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Exported log sorting order by time. Valid values: asc: ascending; desc: descending. Default value: desc
-	Order *string `json:"Order,omitnil" name:"Order"`
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
 	// Exported log data format. Valid values: json, csv. Default value: json
-	Format *string `json:"Format,omitnil" name:"Format"`
+	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
 }
 
 type CreateLogExportRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Log export start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Log export end time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Log export search statement
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// Number of logs to be exported. Maximum value: 10 million
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Exported log sorting order by time. Valid values: asc: ascending; desc: descending. Default value: desc
-	Order *string `json:"Order,omitnil" name:"Order"`
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
 	// Exported log data format. Valid values: json, csv. Default value: json
-	Format *string `json:"Format,omitnil" name:"Format"`
+	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
 }
 
 func (r *CreateLogExportRequest) ToJsonString() string {
@@ -97,10 +97,10 @@ func (r *CreateLogExportRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLogExportResponseParams struct {
 	// Log export ID
-	ExportID *string `json:"ExportID,omitnil" name:"ExportID"`
+	ExportID *string `json:"ExportID,omitnil,omitempty" name:"ExportID"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLogExportResponse struct {
@@ -122,20 +122,20 @@ func (r *CreateLogExportResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateOfflineLogConfigRequestParams struct {
 	// Unique project key for reporting
-	ProjectKey *string `json:"ProjectKey,omitnil" name:"ProjectKey"`
+	ProjectKey *string `json:"ProjectKey,omitnil,omitempty" name:"ProjectKey"`
 
 	// Unique identifier of the user to be listened on (`aid` or `uin`)
-	UniqueID *string `json:"UniqueID,omitnil" name:"UniqueID"`
+	UniqueID *string `json:"UniqueID,omitnil,omitempty" name:"UniqueID"`
 }
 
 type CreateOfflineLogConfigRequest struct {
 	*tchttp.BaseRequest
 	
 	// Unique project key for reporting
-	ProjectKey *string `json:"ProjectKey,omitnil" name:"ProjectKey"`
+	ProjectKey *string `json:"ProjectKey,omitnil,omitempty" name:"ProjectKey"`
 
 	// Unique identifier of the user to be listened on (`aid` or `uin`)
-	UniqueID *string `json:"UniqueID,omitnil" name:"UniqueID"`
+	UniqueID *string `json:"UniqueID,omitnil,omitempty" name:"UniqueID"`
 }
 
 func (r *CreateOfflineLogConfigRequest) ToJsonString() string {
@@ -161,10 +161,10 @@ func (r *CreateOfflineLogConfigRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateOfflineLogConfigResponseParams struct {
 	// API response information
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateOfflineLogConfigResponse struct {
@@ -186,56 +186,56 @@ func (r *CreateOfflineLogConfigResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateProjectRequestParams struct {
 	// Name of the created project (required and up to 200 characters)
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Business system ID
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// Project sampling rate (greater than or equal to 0)
-	Rate *string `json:"Rate,omitnil" name:"Rate"`
+	Rate *string `json:"Rate,omitnil,omitempty" name:"Rate"`
 
 	// Whether to enable aggregation
-	EnableURLGroup *uint64 `json:"EnableURLGroup,omitnil" name:"EnableURLGroup"`
+	EnableURLGroup *uint64 `json:"EnableURLGroup,omitnil,omitempty" name:"EnableURLGroup"`
 
 	// Project type (valid values: "web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn")
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Repository address of the project (optional and up to 256 characters)
-	Repo *string `json:"Repo,omitnil" name:"Repo"`
+	Repo *string `json:"Repo,omitnil,omitempty" name:"Repo"`
 
 	// Webpage address of the project (optional and up to 256 characters)
-	URL *string `json:"URL,omitnil" name:"URL"`
+	URL *string `json:"URL,omitnil,omitempty" name:"URL"`
 
 	// Description of the created project (optional and up to 1,000 characters)
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 }
 
 type CreateProjectRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of the created project (required and up to 200 characters)
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Business system ID
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// Project sampling rate (greater than or equal to 0)
-	Rate *string `json:"Rate,omitnil" name:"Rate"`
+	Rate *string `json:"Rate,omitnil,omitempty" name:"Rate"`
 
 	// Whether to enable aggregation
-	EnableURLGroup *uint64 `json:"EnableURLGroup,omitnil" name:"EnableURLGroup"`
+	EnableURLGroup *uint64 `json:"EnableURLGroup,omitnil,omitempty" name:"EnableURLGroup"`
 
 	// Project type (valid values: "web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn")
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Repository address of the project (optional and up to 256 characters)
-	Repo *string `json:"Repo,omitnil" name:"Repo"`
+	Repo *string `json:"Repo,omitnil,omitempty" name:"Repo"`
 
 	// Webpage address of the project (optional and up to 256 characters)
-	URL *string `json:"URL,omitnil" name:"URL"`
+	URL *string `json:"URL,omitnil,omitempty" name:"URL"`
 
 	// Description of the created project (optional and up to 1,000 characters)
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 }
 
 func (r *CreateProjectRequest) ToJsonString() string {
@@ -267,13 +267,13 @@ func (r *CreateProjectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateProjectResponseParams struct {
 	// Project ID
-	ID *uint64 `json:"ID,omitnil" name:"ID"`
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Unique project key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateProjectResponse struct {
@@ -295,20 +295,20 @@ func (r *CreateProjectResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateReleaseFileRequestParams struct {
 	// Project ID
-	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
 
 	// File information list
-	Files []*ReleaseFile `json:"Files,omitnil" name:"Files"`
+	Files []*ReleaseFile `json:"Files,omitnil,omitempty" name:"Files"`
 }
 
 type CreateReleaseFileRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
 
 	// File information list
-	Files []*ReleaseFile `json:"Files,omitnil" name:"Files"`
+	Files []*ReleaseFile `json:"Files,omitnil,omitempty" name:"Files"`
 }
 
 func (r *CreateReleaseFileRequest) ToJsonString() string {
@@ -334,10 +334,10 @@ func (r *CreateReleaseFileRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateReleaseFileResponseParams struct {
 	// Call result
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateReleaseFileResponse struct {
@@ -359,20 +359,20 @@ func (r *CreateReleaseFileResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateStarProjectRequestParams struct {
 	// Instance ID, such as taw-123
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 type CreateStarProjectRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID, such as taw-123
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 func (r *CreateStarProjectRequest) ToJsonString() string {
@@ -398,10 +398,10 @@ func (r *CreateStarProjectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateStarProjectResponseParams struct {
 	// API response information
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateStarProjectResponse struct {
@@ -423,80 +423,80 @@ func (r *CreateStarProjectResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTawInstanceRequestParams struct {
 	// Region ID (at least greater than 0)
-	AreaId *int64 `json:"AreaId,omitnil" name:"AreaId"`
+	AreaId *int64 `json:"AreaId,omitnil,omitempty" name:"AreaId"`
 
 	// Billing type (1: Pay-as-you-go).
-	ChargeType *int64 `json:"ChargeType,omitnil" name:"ChargeType"`
+	ChargeType *int64 `json:"ChargeType,omitnil,omitempty" name:"ChargeType"`
 
 	// Data retention period (at least greater than 0)
-	DataRetentionDays *int64 `json:"DataRetentionDays,omitnil" name:"DataRetentionDays"`
+	DataRetentionDays *int64 `json:"DataRetentionDays,omitnil,omitempty" name:"DataRetentionDays"`
 
 	// Instance name (up to 255 bytes)
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Tag list
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Instance description (up to 1,024 bytes)
-	InstanceDesc *string `json:"InstanceDesc,omitnil" name:"InstanceDesc"`
+	InstanceDesc *string `json:"InstanceDesc,omitnil,omitempty" name:"InstanceDesc"`
 
 	// Number of data entries reported per day
-	CountNum *string `json:"CountNum,omitnil" name:"CountNum"`
+	CountNum *string `json:"CountNum,omitnil,omitempty" name:"CountNum"`
 
 	// Billing for data storage
-	PeriodRetain *string `json:"PeriodRetain,omitnil" name:"PeriodRetain"`
+	PeriodRetain *string `json:"PeriodRetain,omitnil,omitempty" name:"PeriodRetain"`
 
 	// Instance purchase channel. Valid value: `cdn`.
-	BuyingChannel *string `json:"BuyingChannel,omitnil" name:"BuyingChannel"`
+	BuyingChannel *string `json:"BuyingChannel,omitnil,omitempty" name:"BuyingChannel"`
 
 	// Type of prepaid resource pack (only required for prepaid mode)
-	ResourcePackageType *uint64 `json:"ResourcePackageType,omitnil" name:"ResourcePackageType"`
+	ResourcePackageType *uint64 `json:"ResourcePackageType,omitnil,omitempty" name:"ResourcePackageType"`
 
 	// The number of prepaid resource packs (only required for prepaid mode)
-	ResourcePackageNum *uint64 `json:"ResourcePackageNum,omitnil" name:"ResourcePackageNum"`
+	ResourcePackageNum *uint64 `json:"ResourcePackageNum,omitnil,omitempty" name:"ResourcePackageNum"`
 
 	// Instance type. `1`: Web; `2`: Application
-	InstanceType *int64 `json:"InstanceType,omitnil" name:"InstanceType"`
+	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 }
 
 type CreateTawInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Region ID (at least greater than 0)
-	AreaId *int64 `json:"AreaId,omitnil" name:"AreaId"`
+	AreaId *int64 `json:"AreaId,omitnil,omitempty" name:"AreaId"`
 
 	// Billing type (1: Pay-as-you-go).
-	ChargeType *int64 `json:"ChargeType,omitnil" name:"ChargeType"`
+	ChargeType *int64 `json:"ChargeType,omitnil,omitempty" name:"ChargeType"`
 
 	// Data retention period (at least greater than 0)
-	DataRetentionDays *int64 `json:"DataRetentionDays,omitnil" name:"DataRetentionDays"`
+	DataRetentionDays *int64 `json:"DataRetentionDays,omitnil,omitempty" name:"DataRetentionDays"`
 
 	// Instance name (up to 255 bytes)
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Tag list
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Instance description (up to 1,024 bytes)
-	InstanceDesc *string `json:"InstanceDesc,omitnil" name:"InstanceDesc"`
+	InstanceDesc *string `json:"InstanceDesc,omitnil,omitempty" name:"InstanceDesc"`
 
 	// Number of data entries reported per day
-	CountNum *string `json:"CountNum,omitnil" name:"CountNum"`
+	CountNum *string `json:"CountNum,omitnil,omitempty" name:"CountNum"`
 
 	// Billing for data storage
-	PeriodRetain *string `json:"PeriodRetain,omitnil" name:"PeriodRetain"`
+	PeriodRetain *string `json:"PeriodRetain,omitnil,omitempty" name:"PeriodRetain"`
 
 	// Instance purchase channel. Valid value: `cdn`.
-	BuyingChannel *string `json:"BuyingChannel,omitnil" name:"BuyingChannel"`
+	BuyingChannel *string `json:"BuyingChannel,omitnil,omitempty" name:"BuyingChannel"`
 
 	// Type of prepaid resource pack (only required for prepaid mode)
-	ResourcePackageType *uint64 `json:"ResourcePackageType,omitnil" name:"ResourcePackageType"`
+	ResourcePackageType *uint64 `json:"ResourcePackageType,omitnil,omitempty" name:"ResourcePackageType"`
 
 	// The number of prepaid resource packs (only required for prepaid mode)
-	ResourcePackageNum *uint64 `json:"ResourcePackageNum,omitnil" name:"ResourcePackageNum"`
+	ResourcePackageNum *uint64 `json:"ResourcePackageNum,omitnil,omitempty" name:"ResourcePackageNum"`
 
 	// Instance type. `1`: Web; `2`: Application
-	InstanceType *int64 `json:"InstanceType,omitnil" name:"InstanceType"`
+	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 }
 
 func (r *CreateTawInstanceRequest) ToJsonString() string {
@@ -532,14 +532,14 @@ func (r *CreateTawInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTawInstanceResponseParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ID of prepaid order
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DealName *string `json:"DealName,omitnil" name:"DealName"`
+	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateTawInstanceResponse struct {
@@ -561,32 +561,32 @@ func (r *CreateTawInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateWhitelistRequestParams struct {
 	// Instance ID, such as taw-123
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// Remarks
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// uin: business identifier
-	WhitelistUin *string `json:"WhitelistUin,omitnil" name:"WhitelistUin"`
+	WhitelistUin *string `json:"WhitelistUin,omitnil,omitempty" name:"WhitelistUin"`
 
 	// Business identifier
-	Aid *string `json:"Aid,omitnil" name:"Aid"`
+	Aid *string `json:"Aid,omitnil,omitempty" name:"Aid"`
 }
 
 type CreateWhitelistRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID, such as taw-123
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// Remarks
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// uin: business identifier
-	WhitelistUin *string `json:"WhitelistUin,omitnil" name:"WhitelistUin"`
+	WhitelistUin *string `json:"WhitelistUin,omitnil,omitempty" name:"WhitelistUin"`
 
 	// Business identifier
-	Aid *string `json:"Aid,omitnil" name:"Aid"`
+	Aid *string `json:"Aid,omitnil,omitempty" name:"Aid"`
 }
 
 func (r *CreateWhitelistRequest) ToJsonString() string {
@@ -614,13 +614,13 @@ func (r *CreateWhitelistRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateWhitelistResponseParams struct {
 	// Message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// Allowlist ID
-	ID *uint64 `json:"ID,omitnil" name:"ID"`
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateWhitelistResponse struct {
@@ -642,14 +642,14 @@ func (r *CreateWhitelistResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteInstanceRequestParams struct {
 	// ID of the instance to be deleted
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DeleteInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the instance to be deleted
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DeleteInstanceRequest) ToJsonString() string {
@@ -674,7 +674,7 @@ func (r *DeleteInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteInstanceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteInstanceResponse struct {
@@ -696,20 +696,20 @@ func (r *DeleteInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLogExportRequestParams struct {
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Log export ID
-	ExportID *string `json:"ExportID,omitnil" name:"ExportID"`
+	ExportID *string `json:"ExportID,omitnil,omitempty" name:"ExportID"`
 }
 
 type DeleteLogExportRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Log export ID
-	ExportID *string `json:"ExportID,omitnil" name:"ExportID"`
+	ExportID *string `json:"ExportID,omitnil,omitempty" name:"ExportID"`
 }
 
 func (r *DeleteLogExportRequest) ToJsonString() string {
@@ -736,10 +736,10 @@ func (r *DeleteLogExportRequest) FromJsonString(s string) error {
 type DeleteLogExportResponseParams struct {
 	// Whether it is successful. If so, `success` will be returned; otherwise, `Error` rather than this parameter will be returned
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLogExportResponse struct {
@@ -761,20 +761,20 @@ func (r *DeleteLogExportResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteOfflineLogConfigRequestParams struct {
 	// Unique project key for reporting
-	ProjectKey *string `json:"ProjectKey,omitnil" name:"ProjectKey"`
+	ProjectKey *string `json:"ProjectKey,omitnil,omitempty" name:"ProjectKey"`
 
 	// Unique user identifier (uin or aid)
-	UniqueID *string `json:"UniqueID,omitnil" name:"UniqueID"`
+	UniqueID *string `json:"UniqueID,omitnil,omitempty" name:"UniqueID"`
 }
 
 type DeleteOfflineLogConfigRequest struct {
 	*tchttp.BaseRequest
 	
 	// Unique project key for reporting
-	ProjectKey *string `json:"ProjectKey,omitnil" name:"ProjectKey"`
+	ProjectKey *string `json:"ProjectKey,omitnil,omitempty" name:"ProjectKey"`
 
 	// Unique user identifier (uin or aid)
-	UniqueID *string `json:"UniqueID,omitnil" name:"UniqueID"`
+	UniqueID *string `json:"UniqueID,omitnil,omitempty" name:"UniqueID"`
 }
 
 func (r *DeleteOfflineLogConfigRequest) ToJsonString() string {
@@ -800,10 +800,10 @@ func (r *DeleteOfflineLogConfigRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteOfflineLogConfigResponseParams struct {
 	// API call information
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteOfflineLogConfigResponse struct {
@@ -825,20 +825,20 @@ func (r *DeleteOfflineLogConfigResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteOfflineLogRecordRequestParams struct {
 	// Unique project key for reporting
-	ProjectKey *string `json:"ProjectKey,omitnil" name:"ProjectKey"`
+	ProjectKey *string `json:"ProjectKey,omitnil,omitempty" name:"ProjectKey"`
 
 	// Offline log file ID
-	FileID *string `json:"FileID,omitnil" name:"FileID"`
+	FileID *string `json:"FileID,omitnil,omitempty" name:"FileID"`
 }
 
 type DeleteOfflineLogRecordRequest struct {
 	*tchttp.BaseRequest
 	
 	// Unique project key for reporting
-	ProjectKey *string `json:"ProjectKey,omitnil" name:"ProjectKey"`
+	ProjectKey *string `json:"ProjectKey,omitnil,omitempty" name:"ProjectKey"`
 
 	// Offline log file ID
-	FileID *string `json:"FileID,omitnil" name:"FileID"`
+	FileID *string `json:"FileID,omitnil,omitempty" name:"FileID"`
 }
 
 func (r *DeleteOfflineLogRecordRequest) ToJsonString() string {
@@ -864,10 +864,10 @@ func (r *DeleteOfflineLogRecordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteOfflineLogRecordResponseParams struct {
 	// API call information
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteOfflineLogRecordResponse struct {
@@ -889,14 +889,14 @@ func (r *DeleteOfflineLogRecordResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteProjectRequestParams struct {
 	// ID of the project to be deleted
-	ID *uint64 `json:"ID,omitnil" name:"ID"`
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 type DeleteProjectRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the project to be deleted
-	ID *uint64 `json:"ID,omitnil" name:"ID"`
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 func (r *DeleteProjectRequest) ToJsonString() string {
@@ -921,10 +921,10 @@ func (r *DeleteProjectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteProjectResponseParams struct {
 	// Operation information
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteProjectResponse struct {
@@ -946,14 +946,14 @@ func (r *DeleteProjectResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteReleaseFileRequestParams struct {
 	// File ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 type DeleteReleaseFileRequest struct {
 	*tchttp.BaseRequest
 	
 	// File ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 func (r *DeleteReleaseFileRequest) ToJsonString() string {
@@ -978,10 +978,10 @@ func (r *DeleteReleaseFileRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteReleaseFileResponseParams struct {
 	// Response string of the API request
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteReleaseFileResponse struct {
@@ -1003,20 +1003,20 @@ func (r *DeleteReleaseFileResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteStarProjectRequestParams struct {
 	// Instance ID, such as taw-123
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 type DeleteStarProjectRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID, such as taw-123
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 func (r *DeleteStarProjectRequest) ToJsonString() string {
@@ -1043,10 +1043,10 @@ func (r *DeleteStarProjectRequest) FromJsonString(s string) error {
 type DeleteStarProjectResponseParams struct {
 	// Response message
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteStarProjectResponse struct {
@@ -1068,20 +1068,20 @@ func (r *DeleteStarProjectResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteWhitelistRequestParams struct {
 	// Instance ID
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// List ID
-	ID *string `json:"ID,omitnil" name:"ID"`
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 type DeleteWhitelistRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// List ID
-	ID *string `json:"ID,omitnil" name:"ID"`
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 func (r *DeleteWhitelistRequest) ToJsonString() string {
@@ -1107,10 +1107,10 @@ func (r *DeleteWhitelistRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteWhitelistResponseParams struct {
 	// Success message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteWhitelistResponse struct {
@@ -1132,146 +1132,146 @@ func (r *DeleteWhitelistResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataCustomUrlRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `top`: top resources view; `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `pagepv`: PV view; `area`: request speed distribution; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Key value of the custom speed test
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 type DescribeDataCustomUrlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `top`: top resources view; `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `pagepv`: PV view; `area`: request speed distribution; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Key value of the custom speed test
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 func (r *DescribeDataCustomUrlRequest) ToJsonString() string {
@@ -1318,10 +1318,10 @@ func (r *DescribeDataCustomUrlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataCustomUrlResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataCustomUrlResponse struct {
@@ -1343,140 +1343,140 @@ func (r *DescribeDataCustomUrlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataEventUrlRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `ckuv`: UV trend; `ckpv`: PV trend; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Filter
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 type DescribeDataEventUrlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `ckuv`: UV trend; `ckpv`: PV trend; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Filter
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 func (r *DescribeDataEventUrlRequest) ToJsonString() string {
@@ -1522,10 +1522,10 @@ func (r *DescribeDataEventUrlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataEventUrlResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataEventUrlResponse struct {
@@ -1547,158 +1547,158 @@ func (r *DescribeDataEventUrlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataFetchProjectRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `area`: request speed distribution; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Source
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 
 	// HTTP status code.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// retcode
-	Ret *string `json:"Ret,omitnil" name:"Ret"`
+	Ret *string `json:"Ret,omitnil,omitempty" name:"Ret"`
 }
 
 type DescribeDataFetchProjectRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `area`: request speed distribution; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Source
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 
 	// HTTP status code.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// retcode
-	Ret *string `json:"Ret,omitnil" name:"Ret"`
+	Ret *string `json:"Ret,omitnil,omitempty" name:"Ret"`
 }
 
 func (r *DescribeDataFetchProjectRequest) ToJsonString() string {
@@ -1747,10 +1747,10 @@ func (r *DescribeDataFetchProjectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataFetchProjectResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataFetchProjectResponse struct {
@@ -1772,146 +1772,146 @@ func (r *DescribeDataFetchProjectResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataFetchUrlInfoRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Source
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 type DescribeDataFetchUrlInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Source
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 func (r *DescribeDataFetchUrlInfoRequest) ToJsonString() string {
@@ -1958,10 +1958,10 @@ func (r *DescribeDataFetchUrlInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataFetchUrlInfoResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataFetchUrlInfoResponse struct {
@@ -1983,164 +1983,164 @@ func (r *DescribeDataFetchUrlInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataFetchUrlRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`: performance view; `day`: 14-day data; `count40x`: HTTP status codes 40X view; `count50x`: HTTP status codes 50X view; `count5xand4x`: HTTP status codes 40X∑50X view; `top`: top resources view; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Source
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 
 	// HTTP status code.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// retcode
-	Ret *string `json:"Ret,omitnil" name:"Ret"`
+	Ret *string `json:"Ret,omitnil,omitempty" name:"Ret"`
 
 	// Network status
-	NetStatus *string `json:"NetStatus,omitnil" name:"NetStatus"`
+	NetStatus *string `json:"NetStatus,omitnil,omitempty" name:"NetStatus"`
 }
 
 type DescribeDataFetchUrlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`: performance view; `day`: 14-day data; `count40x`: HTTP status codes 40X view; `count50x`: HTTP status codes 50X view; `count5xand4x`: HTTP status codes 40X∑50X view; `top`: top resources view; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Source
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 
 	// HTTP status code.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// retcode
-	Ret *string `json:"Ret,omitnil" name:"Ret"`
+	Ret *string `json:"Ret,omitnil,omitempty" name:"Ret"`
 
 	// Network status
-	NetStatus *string `json:"NetStatus,omitnil" name:"NetStatus"`
+	NetStatus *string `json:"NetStatus,omitnil,omitempty" name:"NetStatus"`
 }
 
 func (r *DescribeDataFetchUrlRequest) ToJsonString() string {
@@ -2190,10 +2190,10 @@ func (r *DescribeDataFetchUrlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataFetchUrlResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataFetchUrlResponse struct {
@@ -2215,26 +2215,26 @@ func (r *DescribeDataFetchUrlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataLogUrlInfoRequestParams struct {
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Timestamp
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Timestamp
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type DescribeDataLogUrlInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Timestamp
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Timestamp
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 func (r *DescribeDataLogUrlInfoRequest) ToJsonString() string {
@@ -2261,10 +2261,10 @@ func (r *DescribeDataLogUrlInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataLogUrlInfoResponseParams struct {
 	// Response string
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataLogUrlInfoResponse struct {
@@ -2286,134 +2286,134 @@ func (r *DescribeDataLogUrlInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataLogUrlStatisticsRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `analysis`: exception analysis; `compare`: exception list comparison; `allcount`: performance view; `condition`: condition list; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 type DescribeDataLogUrlStatisticsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `analysis`: exception analysis; `compare`: exception list comparison; `allcount`: performance view; `condition`: condition list; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 func (r *DescribeDataLogUrlStatisticsRequest) ToJsonString() string {
@@ -2458,10 +2458,10 @@ func (r *DescribeDataLogUrlStatisticsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataLogUrlStatisticsResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataLogUrlStatisticsResponse struct {
@@ -2483,146 +2483,146 @@ func (r *DescribeDataLogUrlStatisticsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataPerformancePageRequestParams struct {
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// `pagepv`: PV view; `allcount`: performance view; `falls`: page loading waterfall plot; `samp`: FMP, `day`: 14-day data, `nettype`: network/platform view; `performance`: top underperformed pages view; `version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: version view; device view; ISP view; region view; browser view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Environment variable
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 
 	// Network status
-	NetStatus *string `json:"NetStatus,omitnil" name:"NetStatus"`
+	NetStatus *string `json:"NetStatus,omitnil,omitempty" name:"NetStatus"`
 }
 
 type DescribeDataPerformancePageRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// `pagepv`: PV view; `allcount`: performance view; `falls`: page loading waterfall plot; `samp`: FMP, `day`: 14-day data, `nettype`: network/platform view; `performance`: top underperformed pages view; `version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: version view; device view; ISP view; region view; browser view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Environment variable
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 
 	// Network status
-	NetStatus *string `json:"NetStatus,omitnil" name:"NetStatus"`
+	NetStatus *string `json:"NetStatus,omitnil,omitempty" name:"NetStatus"`
 }
 
 func (r *DescribeDataPerformancePageRequest) ToJsonString() string {
@@ -2669,10 +2669,10 @@ func (r *DescribeDataPerformancePageRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataPerformancePageResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataPerformancePageResponse struct {
@@ -2694,140 +2694,140 @@ func (r *DescribeDataPerformancePageResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataPerformanceProjectRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`; performance view; `falls`: page loading waterfall plot; `samp`: FMP, `day`: 14-day data, `nettype`: network/platform view; `performance`: top underperformed pages view; `condition`: condition list; `area`: request speed distribution; `version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: version view; device view; ISP view; region view; browser view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 type DescribeDataPerformanceProjectRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`; performance view; `falls`: page loading waterfall plot; `samp`: FMP, `day`: 14-day data, `nettype`: network/platform view; `performance`: top underperformed pages view; `condition`: condition list; `area`: request speed distribution; `version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: version view; device view; ISP view; region view; browser view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 func (r *DescribeDataPerformanceProjectRequest) ToJsonString() string {
@@ -2873,10 +2873,10 @@ func (r *DescribeDataPerformanceProjectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataPerformanceProjectResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataPerformanceProjectResponse struct {
@@ -2898,134 +2898,134 @@ func (r *DescribeDataPerformanceProjectResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeDataPvUrlInfoRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 type DescribeDataPvUrlInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 func (r *DescribeDataPvUrlInfoRequest) ToJsonString() string {
@@ -3070,10 +3070,10 @@ func (r *DescribeDataPvUrlInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataPvUrlInfoResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataPvUrlInfoResponse struct {
@@ -3095,134 +3095,134 @@ func (r *DescribeDataPvUrlInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataPvUrlStatisticsRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`; performance view; `day`: 14-day data, `vp`: performance; `ckuv`: UV; `ckpv`: PV; `condition`: condition list; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 type DescribeDataPvUrlStatisticsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`; performance view; `day`: 14-day data, `vp`: performance; `ckuv`: UV; `ckpv`: PV; `condition`: condition list; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 func (r *DescribeDataPvUrlStatisticsRequest) ToJsonString() string {
@@ -3267,10 +3267,10 @@ func (r *DescribeDataPvUrlStatisticsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataPvUrlStatisticsResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataPvUrlStatisticsResponse struct {
@@ -3292,38 +3292,38 @@ func (r *DescribeDataPvUrlStatisticsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataReportCountRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Reporting type
-	ReportType *string `json:"ReportType,omitnil" name:"ReportType"`
+	ReportType *string `json:"ReportType,omitnil,omitempty" name:"ReportType"`
 
 	// Instance ID
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 }
 
 type DescribeDataReportCountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Reporting type
-	ReportType *string `json:"ReportType,omitnil" name:"ReportType"`
+	ReportType *string `json:"ReportType,omitnil,omitempty" name:"ReportType"`
 
 	// Instance ID
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 }
 
 func (r *DescribeDataReportCountRequest) ToJsonString() string {
@@ -3352,10 +3352,10 @@ func (r *DescribeDataReportCountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataReportCountResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataReportCountResponse struct {
@@ -3377,20 +3377,20 @@ func (r *DescribeDataReportCountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataRequestParams struct {
 	// Query string
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 type DescribeDataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Query string
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 func (r *DescribeDataRequest) ToJsonString() string {
@@ -3416,10 +3416,10 @@ func (r *DescribeDataRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataResponseParams struct {
 	// Response string
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataResponse struct {
@@ -3441,146 +3441,146 @@ func (r *DescribeDataResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataSetUrlStatisticsRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`: performance view; `data`: mini program; `component`: mini program-related components; `day`: 14-day data; `nettype`: network/platform view; `performance`: top underperformed pages view; `version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: version view; device view; ISP view; region view; browser view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 
 	// The obtained package.
-	PackageType *string `json:"PackageType,omitnil" name:"PackageType"`
+	PackageType *string `json:"PackageType,omitnil,omitempty" name:"PackageType"`
 }
 
 type DescribeDataSetUrlStatisticsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`: performance view; `data`: mini program; `component`: mini program-related components; `day`: 14-day data; `nettype`: network/platform view; `performance`: top underperformed pages view; `version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: version view; device view; ISP view; region view; browser view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 
 	// The obtained package.
-	PackageType *string `json:"PackageType,omitnil" name:"PackageType"`
+	PackageType *string `json:"PackageType,omitnil,omitempty" name:"PackageType"`
 }
 
 func (r *DescribeDataSetUrlStatisticsRequest) ToJsonString() string {
@@ -3627,10 +3627,10 @@ func (r *DescribeDataSetUrlStatisticsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataSetUrlStatisticsResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataSetUrlStatisticsResponse struct {
@@ -3652,146 +3652,146 @@ func (r *DescribeDataSetUrlStatisticsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataStaticProjectRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `area`: request speed distribution; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Source
-	Url []*string `json:"Url,omitnil" name:"Url"`
+	Url []*string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 type DescribeDataStaticProjectRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `allcount`: performance view; `day`: 14-day data; `condition`: condition list; `area`: request speed distribution; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Source
-	Url []*string `json:"Url,omitnil" name:"Url"`
+	Url []*string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 func (r *DescribeDataStaticProjectRequest) ToJsonString() string {
@@ -3838,10 +3838,10 @@ func (r *DescribeDataStaticProjectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataStaticProjectResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataStaticProjectResponse struct {
@@ -3863,146 +3863,146 @@ func (r *DescribeDataStaticProjectResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataStaticResourceRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `top`: top resources view; `count40x`: HTTP status codes 40X view; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Source
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 type DescribeDataStaticResourceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `top`: top resources view; `count40x`: HTTP status codes 40X view; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Source
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 func (r *DescribeDataStaticResourceRequest) ToJsonString() string {
@@ -4049,10 +4049,10 @@ func (r *DescribeDataStaticResourceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataStaticResourceResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataStaticResourceResponse struct {
@@ -4074,146 +4074,146 @@ func (r *DescribeDataStaticResourceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataStaticUrlRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `pagepv`: page view; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Source
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 type DescribeDataStaticUrlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `pagepv`: page view; `nettype`/`version`/`platform`/`isp`/`region`/`device`/`browser`/`ext1`/`ext2`/`ext3`/`ret`/`status`/`from`/`url`/`env`: network/platform view; version view; device view; ISP view; region view; browser view; custom view, and so on.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation method
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Source
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 func (r *DescribeDataStaticUrlRequest) ToJsonString() string {
@@ -4260,10 +4260,10 @@ func (r *DescribeDataStaticUrlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataStaticUrlResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataStaticUrlResponse struct {
@@ -4285,140 +4285,140 @@ func (r *DescribeDataStaticUrlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataWebVitalsPageRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// No type yet
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 type DescribeDataWebVitalsPageRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Custom 2
-	ExtSecond *string `json:"ExtSecond,omitnil" name:"ExtSecond"`
+	ExtSecond *string `json:"ExtSecond,omitnil,omitempty" name:"ExtSecond"`
 
 	// Browser engine
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// ISP
-	Isp *string `json:"Isp,omitnil" name:"Isp"`
+	Isp *string `json:"Isp,omitnil,omitempty" name:"Isp"`
 
 	// Source page
-	From *string `json:"From,omitnil" name:"From"`
+	From *string `json:"From,omitnil,omitempty" name:"From"`
 
 	// Log level
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// No type yet
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Brand
-	Brand *string `json:"Brand,omitnil" name:"Brand"`
+	Brand *string `json:"Brand,omitnil,omitempty" name:"Brand"`
 
 	// Region
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Version
-	VersionNum *string `json:"VersionNum,omitnil" name:"VersionNum"`
+	VersionNum *string `json:"VersionNum,omitnil,omitempty" name:"VersionNum"`
 
 	// Platform
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// Custom 3
-	ExtThird *string `json:"ExtThird,omitnil" name:"ExtThird"`
+	ExtThird *string `json:"ExtThird,omitnil,omitempty" name:"ExtThird"`
 
 	// Custom 1
-	ExtFirst *string `json:"ExtFirst,omitnil" name:"ExtFirst"`
+	ExtFirst *string `json:"ExtFirst,omitnil,omitempty" name:"ExtFirst"`
 
 	// Network type
-	NetType *string `json:"NetType,omitnil" name:"NetType"`
+	NetType *string `json:"NetType,omitnil,omitempty" name:"NetType"`
 
 	// Model
-	Device *string `json:"Device,omitnil" name:"Device"`
+	Device *string `json:"Device,omitnil,omitempty" name:"Device"`
 
 	// Whether it is outside the Chinese mainland
-	IsAbroad *string `json:"IsAbroad,omitnil" name:"IsAbroad"`
+	IsAbroad *string `json:"IsAbroad,omitnil,omitempty" name:"IsAbroad"`
 
 	// OS
-	Os *string `json:"Os,omitnil" name:"Os"`
+	Os *string `json:"Os,omitnil,omitempty" name:"Os"`
 
 	// Browser
-	Browser *string `json:"Browser,omitnil" name:"Browser"`
+	Browser *string `json:"Browser,omitnil,omitempty" name:"Browser"`
 
 	// Duration calculation
-	CostType *string `json:"CostType,omitnil" name:"CostType"`
+	CostType *string `json:"CostType,omitnil,omitempty" name:"CostType"`
 
 	// Environment
-	Env *string `json:"Env,omitnil" name:"Env"`
+	Env *string `json:"Env,omitnil,omitempty" name:"Env"`
 }
 
 func (r *DescribeDataWebVitalsPageRequest) ToJsonString() string {
@@ -4464,10 +4464,10 @@ func (r *DescribeDataWebVitalsPageRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataWebVitalsPageResponseParams struct {
 	// Returned value
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataWebVitalsPageResponse struct {
@@ -4489,20 +4489,20 @@ func (r *DescribeDataWebVitalsPageResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeErrorRequestParams struct {
 	// Date
-	Date *string `json:"Date,omitnil" name:"Date"`
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 type DescribeErrorRequest struct {
 	*tchttp.BaseRequest
 	
 	// Date
-	Date *string `json:"Date,omitnil" name:"Date"`
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 func (r *DescribeErrorRequest) ToJsonString() string {
@@ -4528,16 +4528,16 @@ func (r *DescribeErrorRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeErrorResponseParams struct {
 	// Content
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeErrorResponse struct {
@@ -4559,14 +4559,14 @@ func (r *DescribeErrorResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLogExportsRequestParams struct {
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 type DescribeLogExportsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 func (r *DescribeLogExportsRequest) ToJsonString() string {
@@ -4591,10 +4591,10 @@ func (r *DescribeLogExportsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLogExportsResponseParams struct {
 	// List of log export records
-	LogExportSet []*LogExport `json:"LogExportSet,omitnil" name:"LogExportSet"`
+	LogExportSet []*LogExport `json:"LogExportSet,omitnil,omitempty" name:"LogExportSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLogExportsResponse struct {
@@ -4616,56 +4616,56 @@ func (r *DescribeLogExportsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLogListRequestParams struct {
 	// Sorting order (required). Valid values: `desc`, `asc`.
-	Sort *string `json:"Sort,omitnil" name:"Sort"`
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
 
 	// This parameter is required. Valid values: `searchlog`, `histogram`.
-	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
 	// Project ID (required)
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Start time (required)
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The number of raw logs returned for a single query. This parameter is required. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Context, which is used to load more logs. Pass through the last `Context` value returned to get more log content (up to 10,000 raw logs). It will expire after 1 hour
-	Context *string `json:"Context,omitnil" name:"Context"`
+	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 
 	// Query statement, which is required and can contain up to 4,096 characters, such as "id:120001 AND type:\"log\"".
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// End time (required)
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type DescribeLogListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Sorting order (required). Valid values: `desc`, `asc`.
-	Sort *string `json:"Sort,omitnil" name:"Sort"`
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
 
 	// This parameter is required. Valid values: `searchlog`, `histogram`.
-	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
 	// Project ID (required)
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Start time (required)
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The number of raw logs returned for a single query. This parameter is required. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Context, which is used to load more logs. Pass through the last `Context` value returned to get more log content (up to 10,000 raw logs). It will expire after 1 hour
-	Context *string `json:"Context,omitnil" name:"Context"`
+	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 
 	// Query statement, which is required and can contain up to 4,096 characters, such as "id:120001 AND type:\"log\"".
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// End time (required)
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 func (r *DescribeLogListRequest) ToJsonString() string {
@@ -4697,10 +4697,10 @@ func (r *DescribeLogListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLogListResponseParams struct {
 	// Response string
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLogListResponse struct {
@@ -4722,14 +4722,14 @@ func (r *DescribeLogListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOfflineLogConfigsRequestParams struct {
 	// Unique project key for reporting
-	ProjectKey *string `json:"ProjectKey,omitnil" name:"ProjectKey"`
+	ProjectKey *string `json:"ProjectKey,omitnil,omitempty" name:"ProjectKey"`
 }
 
 type DescribeOfflineLogConfigsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Unique project key for reporting
-	ProjectKey *string `json:"ProjectKey,omitnil" name:"ProjectKey"`
+	ProjectKey *string `json:"ProjectKey,omitnil,omitempty" name:"ProjectKey"`
 }
 
 func (r *DescribeOfflineLogConfigsRequest) ToJsonString() string {
@@ -4754,13 +4754,13 @@ func (r *DescribeOfflineLogConfigsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOfflineLogConfigsResponseParams struct {
 	// API call information
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// Array of unique user identifiers
-	UniqueIDSet []*string `json:"UniqueIDSet,omitnil" name:"UniqueIDSet"`
+	UniqueIDSet []*string `json:"UniqueIDSet,omitnil,omitempty" name:"UniqueIDSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeOfflineLogConfigsResponse struct {
@@ -4782,14 +4782,14 @@ func (r *DescribeOfflineLogConfigsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOfflineLogRecordsRequestParams struct {
 	// Unique project key for reporting
-	ProjectKey *string `json:"ProjectKey,omitnil" name:"ProjectKey"`
+	ProjectKey *string `json:"ProjectKey,omitnil,omitempty" name:"ProjectKey"`
 }
 
 type DescribeOfflineLogRecordsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Unique project key for reporting
-	ProjectKey *string `json:"ProjectKey,omitnil" name:"ProjectKey"`
+	ProjectKey *string `json:"ProjectKey,omitnil,omitempty" name:"ProjectKey"`
 }
 
 func (r *DescribeOfflineLogRecordsRequest) ToJsonString() string {
@@ -4814,13 +4814,13 @@ func (r *DescribeOfflineLogRecordsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOfflineLogRecordsResponseParams struct {
 	// API call information
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// Array of record IDs
-	RecordSet []*string `json:"RecordSet,omitnil" name:"RecordSet"`
+	RecordSet []*string `json:"RecordSet,omitnil,omitempty" name:"RecordSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeOfflineLogRecordsResponse struct {
@@ -4842,20 +4842,20 @@ func (r *DescribeOfflineLogRecordsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOfflineLogsRequestParams struct {
 	// Unique project key for reporting
-	ProjectKey *string `json:"ProjectKey,omitnil" name:"ProjectKey"`
+	ProjectKey *string `json:"ProjectKey,omitnil,omitempty" name:"ProjectKey"`
 
 	// List of offline log file IDs
-	FileIDs []*string `json:"FileIDs,omitnil" name:"FileIDs"`
+	FileIDs []*string `json:"FileIDs,omitnil,omitempty" name:"FileIDs"`
 }
 
 type DescribeOfflineLogsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Unique project key for reporting
-	ProjectKey *string `json:"ProjectKey,omitnil" name:"ProjectKey"`
+	ProjectKey *string `json:"ProjectKey,omitnil,omitempty" name:"ProjectKey"`
 
 	// List of offline log file IDs
-	FileIDs []*string `json:"FileIDs,omitnil" name:"FileIDs"`
+	FileIDs []*string `json:"FileIDs,omitnil,omitempty" name:"FileIDs"`
 }
 
 func (r *DescribeOfflineLogsRequest) ToJsonString() string {
@@ -4881,13 +4881,13 @@ func (r *DescribeOfflineLogsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOfflineLogsResponseParams struct {
 	// API call response
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// Log list
-	LogSet []*string `json:"LogSet,omitnil" name:"LogSet"`
+	LogSet []*string `json:"LogSet,omitnil,omitempty" name:"LogSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeOfflineLogsResponse struct {
@@ -4909,14 +4909,14 @@ func (r *DescribeOfflineLogsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProjectLimitsRequestParams struct {
 	// Project ID
-	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
 }
 
 type DescribeProjectLimitsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
 }
 
 func (r *DescribeProjectLimitsRequest) ToJsonString() string {
@@ -4941,10 +4941,10 @@ func (r *DescribeProjectLimitsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProjectLimitsResponseParams struct {
 	// Array of reporting rates
-	ProjectLimitSet []*ProjectLimit `json:"ProjectLimitSet,omitnil" name:"ProjectLimitSet"`
+	ProjectLimitSet []*ProjectLimit `json:"ProjectLimitSet,omitnil,omitempty" name:"ProjectLimitSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeProjectLimitsResponse struct {
@@ -4966,32 +4966,32 @@ func (r *DescribeProjectLimitsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProjectsRequestParams struct {
 	// Number of items per page (integer)
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number (integer)
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Filter parameter. Pass in {"Name": "IsDemo", "Values":["1"]} for the demo mode.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// This parameter has been disused. You need to indicate whether the demo mode is used in `Filters`.
-	IsDemo *int64 `json:"IsDemo,omitnil" name:"IsDemo"`
+	IsDemo *int64 `json:"IsDemo,omitnil,omitempty" name:"IsDemo"`
 }
 
 type DescribeProjectsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Number of items per page (integer)
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number (integer)
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Filter parameter. Pass in {"Name": "IsDemo", "Values":["1"]} for the demo mode.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// This parameter has been disused. You need to indicate whether the demo mode is used in `Filters`.
-	IsDemo *int64 `json:"IsDemo,omitnil" name:"IsDemo"`
+	IsDemo *int64 `json:"IsDemo,omitnil,omitempty" name:"IsDemo"`
 }
 
 func (r *DescribeProjectsRequest) ToJsonString() string {
@@ -5019,13 +5019,13 @@ func (r *DescribeProjectsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProjectsResponseParams struct {
 	// Total number of items in the list
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Project list
-	ProjectSet []*RumProject `json:"ProjectSet,omitnil" name:"ProjectSet"`
+	ProjectSet []*RumProject `json:"ProjectSet,omitnil,omitempty" name:"ProjectSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeProjectsResponse struct {
@@ -5047,32 +5047,32 @@ func (r *DescribeProjectsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribePvListRequestParams struct {
 	// ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Get day:d (leave this parameter empty if to get min)
-	Dimension *string `json:"Dimension,omitnil" name:"Dimension"`
+	Dimension *string `json:"Dimension,omitnil,omitempty" name:"Dimension"`
 }
 
 type DescribePvListRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Get day:d (leave this parameter empty if to get min)
-	Dimension *string `json:"Dimension,omitnil" name:"Dimension"`
+	Dimension *string `json:"Dimension,omitnil,omitempty" name:"Dimension"`
 }
 
 func (r *DescribePvListRequest) ToJsonString() string {
@@ -5101,10 +5101,10 @@ func (r *DescribePvListRequest) FromJsonString(s string) error {
 type DescribePvListResponseParams struct {
 	// PV list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ProjectPvSet []*RumPvInfo `json:"ProjectPvSet,omitnil" name:"ProjectPvSet"`
+	ProjectPvSet []*RumPvInfo `json:"ProjectPvSet,omitnil,omitempty" name:"ProjectPvSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribePvListResponse struct {
@@ -5126,20 +5126,20 @@ func (r *DescribePvListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeReleaseFileSignRequestParams struct {
 	// Timeout period. If it is not set, it will be 5 minutes by default
-	Timeout *int64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Bucket type. Valid values: `1`: (Web, which is the default value), `2` (Application).
-	FileType *int64 `json:"FileType,omitnil" name:"FileType"`
+	FileType *int64 `json:"FileType,omitnil,omitempty" name:"FileType"`
 }
 
 type DescribeReleaseFileSignRequest struct {
 	*tchttp.BaseRequest
 	
 	// Timeout period. If it is not set, it will be 5 minutes by default
-	Timeout *int64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Bucket type. Valid values: `1`: (Web, which is the default value), `2` (Application).
-	FileType *int64 `json:"FileType,omitnil" name:"FileType"`
+	FileType *int64 `json:"FileType,omitnil,omitempty" name:"FileType"`
 }
 
 func (r *DescribeReleaseFileSignRequest) ToJsonString() string {
@@ -5165,22 +5165,22 @@ func (r *DescribeReleaseFileSignRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeReleaseFileSignResponseParams struct {
 	// Temporary key
-	SecretKey *string `json:"SecretKey,omitnil" name:"SecretKey"`
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
 
 	// Temporary key ID
-	SecretID *string `json:"SecretID,omitnil" name:"SecretID"`
+	SecretID *string `json:"SecretID,omitnil,omitempty" name:"SecretID"`
 
 	// Temporary key token
-	SessionToken *string `json:"SessionToken,omitnil" name:"SessionToken"`
+	SessionToken *string `json:"SessionToken,omitnil,omitempty" name:"SessionToken"`
 
 	// Start timestamp
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Expiration timestamp
-	ExpiredTime *int64 `json:"ExpiredTime,omitnil" name:"ExpiredTime"`
+	ExpiredTime *int64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeReleaseFileSignResponse struct {
@@ -5202,20 +5202,20 @@ func (r *DescribeReleaseFileSignResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeReleaseFilesRequestParams struct {
 	// Project ID
-	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
 
 	// File version
-	FileVersion *string `json:"FileVersion,omitnil" name:"FileVersion"`
+	FileVersion *string `json:"FileVersion,omitnil,omitempty" name:"FileVersion"`
 }
 
 type DescribeReleaseFilesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
 
 	// File version
-	FileVersion *string `json:"FileVersion,omitnil" name:"FileVersion"`
+	FileVersion *string `json:"FileVersion,omitnil,omitempty" name:"FileVersion"`
 }
 
 func (r *DescribeReleaseFilesRequest) ToJsonString() string {
@@ -5241,10 +5241,10 @@ func (r *DescribeReleaseFilesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeReleaseFilesResponseParams struct {
 	// File information list
-	Files []*ReleaseFile `json:"Files,omitnil" name:"Files"`
+	Files []*ReleaseFile `json:"Files,omitnil,omitempty" name:"Files"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeReleaseFilesResponse struct {
@@ -5266,56 +5266,56 @@ func (r *DescribeReleaseFilesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRumGroupLogRequestParams struct {
 	// Sorting order (required). Valid values: `desc`, `asc`.
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Start time (required)
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The number of raw logs returned for a single query. This parameter is required. Maximum value: `100`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number
-	Page *int64 `json:"Page,omitnil" name:"Page"`
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
 	// Query statement, which is required and can contain up to 4,096 characters.
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// End time (required)
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID (required)
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Aggregate field
-	GroupField *string `json:"GroupField,omitnil" name:"GroupField"`
+	GroupField *string `json:"GroupField,omitnil,omitempty" name:"GroupField"`
 }
 
 type DescribeRumGroupLogRequest struct {
 	*tchttp.BaseRequest
 	
 	// Sorting order (required). Valid values: `desc`, `asc`.
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Start time (required)
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The number of raw logs returned for a single query. This parameter is required. Maximum value: `100`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number
-	Page *int64 `json:"Page,omitnil" name:"Page"`
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
 	// Query statement, which is required and can contain up to 4,096 characters.
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// End time (required)
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID (required)
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Aggregate field
-	GroupField *string `json:"GroupField,omitnil" name:"GroupField"`
+	GroupField *string `json:"GroupField,omitnil,omitempty" name:"GroupField"`
 }
 
 func (r *DescribeRumGroupLogRequest) ToJsonString() string {
@@ -5347,10 +5347,10 @@ func (r *DescribeRumGroupLogRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRumGroupLogResponseParams struct {
 	// Response string
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRumGroupLogResponse struct {
@@ -5372,44 +5372,44 @@ func (r *DescribeRumGroupLogResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRumLogExportRequestParams struct {
 	// Export identifier name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Start time (required)
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Query statement, which is required and can contain up to 4,096 characters.
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// End time (required)
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID (required)
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Filter field
-	Fields []*string `json:"Fields,omitnil" name:"Fields"`
+	Fields []*string `json:"Fields,omitnil,omitempty" name:"Fields"`
 }
 
 type DescribeRumLogExportRequest struct {
 	*tchttp.BaseRequest
 	
 	// Export identifier name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Start time (required)
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Query statement, which is required and can contain up to 4,096 characters.
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// End time (required)
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID (required)
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Filter field
-	Fields []*string `json:"Fields,omitnil" name:"Fields"`
+	Fields []*string `json:"Fields,omitnil,omitempty" name:"Fields"`
 }
 
 func (r *DescribeRumLogExportRequest) ToJsonString() string {
@@ -5439,10 +5439,10 @@ func (r *DescribeRumLogExportRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRumLogExportResponseParams struct {
 	// Response string
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRumLogExportResponse struct {
@@ -5464,26 +5464,26 @@ func (r *DescribeRumLogExportResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRumLogExportsRequestParams struct {
 	// Page size
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Page number
-	PageNum *int64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *int64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Project ID (required)
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 type DescribeRumLogExportsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Page size
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Page number
-	PageNum *int64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *int64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Project ID (required)
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 func (r *DescribeRumLogExportsRequest) ToJsonString() string {
@@ -5510,10 +5510,10 @@ func (r *DescribeRumLogExportsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRumLogExportsResponseParams struct {
 	// Response string
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRumLogExportsResponse struct {
@@ -5535,50 +5535,50 @@ func (r *DescribeRumLogExportsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRumLogListRequestParams struct {
 	// Sorting order (required). Valid values: `desc`, `asc`.
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Start time in milliseconds. It is in timestamp format and is required.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The number of raw logs returned for a single query. This parameter is required. Maximum value: `100`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number
-	Page *int64 `json:"Page,omitnil" name:"Page"`
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
 	// Query statement, which is required and can contain up to 4,096 characters.
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// End time in milliseconds. It is in timestamp format and is required.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID (required)
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 type DescribeRumLogListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Sorting order (required). Valid values: `desc`, `asc`.
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Start time in milliseconds. It is in timestamp format and is required.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The number of raw logs returned for a single query. This parameter is required. Maximum value: `100`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number
-	Page *int64 `json:"Page,omitnil" name:"Page"`
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
 	// Query statement, which is required and can contain up to 4,096 characters.
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// End time in milliseconds. It is in timestamp format and is required.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID (required)
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 func (r *DescribeRumLogListRequest) ToJsonString() string {
@@ -5609,10 +5609,10 @@ func (r *DescribeRumLogListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRumLogListResponseParams struct {
 	// Response string
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRumLogListResponse struct {
@@ -5634,38 +5634,38 @@ func (r *DescribeRumLogListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRumStatsLogListRequestParams struct {
 	// Start time (required)
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The number of raw logs returned for a single query. This parameter is required. Maximum value: `100`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Query statement, which is required and can contain up to 4,096 characters.
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// End time (required)
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID (required)
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 type DescribeRumStatsLogListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time (required)
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The number of raw logs returned for a single query. This parameter is required. Maximum value: `100`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Query statement, which is required and can contain up to 4,096 characters.
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// End time (required)
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Project ID (required)
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 func (r *DescribeRumStatsLogListRequest) ToJsonString() string {
@@ -5694,10 +5694,10 @@ func (r *DescribeRumStatsLogListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRumStatsLogListResponseParams struct {
 	// Response string
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRumStatsLogListResponse struct {
@@ -5719,32 +5719,32 @@ func (r *DescribeRumStatsLogListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeScoresRequestParams struct {
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// This parameter has been disused.
-	IsDemo *int64 `json:"IsDemo,omitnil" name:"IsDemo"`
+	IsDemo *int64 `json:"IsDemo,omitnil,omitempty" name:"IsDemo"`
 }
 
 type DescribeScoresRequest struct {
 	*tchttp.BaseRequest
 	
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// This parameter has been disused.
-	IsDemo *int64 `json:"IsDemo,omitnil" name:"IsDemo"`
+	IsDemo *int64 `json:"IsDemo,omitnil,omitempty" name:"IsDemo"`
 }
 
 func (r *DescribeScoresRequest) ToJsonString() string {
@@ -5772,10 +5772,10 @@ func (r *DescribeScoresRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeScoresResponseParams struct {
 	// Array
-	ScoreSet []*ScoreInfo `json:"ScoreSet,omitnil" name:"ScoreSet"`
+	ScoreSet []*ScoreInfo `json:"ScoreSet,omitnil,omitempty" name:"ScoreSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeScoresResponse struct {
@@ -5797,38 +5797,38 @@ func (r *DescribeScoresResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTawAreasRequestParams struct {
 	// Region ID
-	AreaIds []*int64 `json:"AreaIds,omitnil" name:"AreaIds"`
+	AreaIds []*int64 `json:"AreaIds,omitnil,omitempty" name:"AreaIds"`
 
 	// Region key
-	AreaKeys []*string `json:"AreaKeys,omitnil" name:"AreaKeys"`
+	AreaKeys []*string `json:"AreaKeys,omitnil,omitempty" name:"AreaKeys"`
 
 	// Pagination limit
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Region status (1: valid; 2: invalid)
-	AreaStatuses []*int64 `json:"AreaStatuses,omitnil" name:"AreaStatuses"`
+	AreaStatuses []*int64 `json:"AreaStatuses,omitnil,omitempty" name:"AreaStatuses"`
 
 	// Pagination offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeTawAreasRequest struct {
 	*tchttp.BaseRequest
 	
 	// Region ID
-	AreaIds []*int64 `json:"AreaIds,omitnil" name:"AreaIds"`
+	AreaIds []*int64 `json:"AreaIds,omitnil,omitempty" name:"AreaIds"`
 
 	// Region key
-	AreaKeys []*string `json:"AreaKeys,omitnil" name:"AreaKeys"`
+	AreaKeys []*string `json:"AreaKeys,omitnil,omitempty" name:"AreaKeys"`
 
 	// Pagination limit
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Region status (1: valid; 2: invalid)
-	AreaStatuses []*int64 `json:"AreaStatuses,omitnil" name:"AreaStatuses"`
+	AreaStatuses []*int64 `json:"AreaStatuses,omitnil,omitempty" name:"AreaStatuses"`
 
 	// Pagination offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeTawAreasRequest) ToJsonString() string {
@@ -5857,13 +5857,13 @@ func (r *DescribeTawAreasRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTawAreasResponseParams struct {
 	// Total number of regions
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Region list
-	AreaSet []*RumAreaInfo `json:"AreaSet,omitnil" name:"AreaSet"`
+	AreaSet []*RumAreaInfo `json:"AreaSet,omitnil,omitempty" name:"AreaSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTawAreasResponse struct {
@@ -5885,32 +5885,32 @@ func (r *DescribeTawAreasResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeUvListRequestParams struct {
 	// ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Get day:d min:m
-	Dimension *string `json:"Dimension,omitnil" name:"Dimension"`
+	Dimension *string `json:"Dimension,omitnil,omitempty" name:"Dimension"`
 }
 
 type DescribeUvListRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Get day:d min:m
-	Dimension *string `json:"Dimension,omitnil" name:"Dimension"`
+	Dimension *string `json:"Dimension,omitnil,omitempty" name:"Dimension"`
 }
 
 func (r *DescribeUvListRequest) ToJsonString() string {
@@ -5938,10 +5938,10 @@ func (r *DescribeUvListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeUvListResponseParams struct {
 	// UV list
-	ProjectUvSet []*RumUvInfo `json:"ProjectUvSet,omitnil" name:"ProjectUvSet"`
+	ProjectUvSet []*RumUvInfo `json:"ProjectUvSet,omitnil,omitempty" name:"ProjectUvSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeUvListResponse struct {
@@ -5963,14 +5963,14 @@ func (r *DescribeUvListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeWhitelistsRequestParams struct {
 	// Instance ID
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 }
 
 type DescribeWhitelistsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 }
 
 func (r *DescribeWhitelistsRequest) ToJsonString() string {
@@ -5995,10 +5995,10 @@ func (r *DescribeWhitelistsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeWhitelistsResponseParams struct {
 	// Allowlist list
-	WhitelistSet []*Whitelist `json:"WhitelistSet,omitnil" name:"WhitelistSet"`
+	WhitelistSet []*Whitelist `json:"WhitelistSet,omitnil,omitempty" name:"WhitelistSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeWhitelistsResponse struct {
@@ -6019,73 +6019,73 @@ func (r *DescribeWhitelistsResponse) FromJsonString(s string) error {
 
 type Filter struct {
 	// One or more filter values.
-	Values []*string `json:"Values,omitnil" name:"Values"`
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 
 	// Filter name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type LogExport struct {
 	// Log export path
-	CosPath *string `json:"CosPath,omitnil" name:"CosPath"`
+	CosPath *string `json:"CosPath,omitnil,omitempty" name:"CosPath"`
 
 	// Number of logs to be exported
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Log export task creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Log export task ID
-	ExportID *string `json:"ExportID,omitnil" name:"ExportID"`
+	ExportID *string `json:"ExportID,omitnil,omitempty" name:"ExportID"`
 
 	// Log export filename
-	FileName *string `json:"FileName,omitnil" name:"FileName"`
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
 	// Log file size
-	FileSize *int64 `json:"FileSize,omitnil" name:"FileSize"`
+	FileSize *int64 `json:"FileSize,omitnil,omitempty" name:"FileSize"`
 
 	// Log export format
-	Format *string `json:"Format,omitnil" name:"Format"`
+	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
 
 	// Log export time sorting
-	Order *string `json:"Order,omitnil" name:"Order"`
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
 	// Log export query statement
-	Query *string `json:"Query,omitnil" name:"Query"`
+	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
 	// Log export start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Log export end time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Log download status. Valid values: Queuing: queuing; Processing: exporting; Complete: completed; Failed: failed; Expired: expired (3-day validity period).
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 // Predefined struct for user
 type ModifyInstanceRequestParams struct {
 	// ID of the instance to be modified
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// New instance name (up to 255 characters)
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// New instance description (up to 1,024 characters)
-	InstanceDesc *string `json:"InstanceDesc,omitnil" name:"InstanceDesc"`
+	InstanceDesc *string `json:"InstanceDesc,omitnil,omitempty" name:"InstanceDesc"`
 }
 
 type ModifyInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the instance to be modified
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// New instance name (up to 255 characters)
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// New instance description (up to 1,024 characters)
-	InstanceDesc *string `json:"InstanceDesc,omitnil" name:"InstanceDesc"`
+	InstanceDesc *string `json:"InstanceDesc,omitnil,omitempty" name:"InstanceDesc"`
 }
 
 func (r *ModifyInstanceRequest) ToJsonString() string {
@@ -6112,7 +6112,7 @@ func (r *ModifyInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstanceResponse struct {
@@ -6134,38 +6134,38 @@ func (r *ModifyInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyProjectLimitRequestParams struct {
 	// Project ID
-	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
 
 	// Project API
-	ProjectInterface *string `json:"ProjectInterface,omitnil" name:"ProjectInterface"`
+	ProjectInterface *string `json:"ProjectInterface,omitnil,omitempty" name:"ProjectInterface"`
 
 	// Reporting rate. 10 means 10%
-	ReportRate *int64 `json:"ReportRate,omitnil" name:"ReportRate"`
+	ReportRate *int64 `json:"ReportRate,omitnil,omitempty" name:"ReportRate"`
 
 	// Reporting type. 1: rate; 2: number of reported data entries
-	ReportType *int64 `json:"ReportType,omitnil" name:"ReportType"`
+	ReportType *int64 `json:"ReportType,omitnil,omitempty" name:"ReportType"`
 
 	// Primary key ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 type ModifyProjectLimitRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
 
 	// Project API
-	ProjectInterface *string `json:"ProjectInterface,omitnil" name:"ProjectInterface"`
+	ProjectInterface *string `json:"ProjectInterface,omitnil,omitempty" name:"ProjectInterface"`
 
 	// Reporting rate. 10 means 10%
-	ReportRate *int64 `json:"ReportRate,omitnil" name:"ReportRate"`
+	ReportRate *int64 `json:"ReportRate,omitnil,omitempty" name:"ReportRate"`
 
 	// Reporting type. 1: rate; 2: number of reported data entries
-	ReportType *int64 `json:"ReportType,omitnil" name:"ReportType"`
+	ReportType *int64 `json:"ReportType,omitnil,omitempty" name:"ReportType"`
 
 	// Primary key ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 func (r *ModifyProjectLimitRequest) ToJsonString() string {
@@ -6195,10 +6195,10 @@ func (r *ModifyProjectLimitRequest) FromJsonString(s string) error {
 type ModifyProjectLimitResponseParams struct {
 	// Returned message
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyProjectLimitResponse struct {
@@ -6220,62 +6220,62 @@ func (r *ModifyProjectLimitResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyProjectRequestParams struct {
 	// Project ID
-	ID *uint64 `json:"ID,omitnil" name:"ID"`
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Project name (optional, not empty, and up to 200 characters)
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Project webpage URL (optional and up to 256 characters)
-	URL *string `json:"URL,omitnil" name:"URL"`
+	URL *string `json:"URL,omitnil,omitempty" name:"URL"`
 
 	// Project repository address (optional and up to 256 characters)
-	Repo *string `json:"Repo,omitnil" name:"Repo"`
+	Repo *string `json:"Repo,omitnil,omitempty" name:"Repo"`
 
 	// ID of the instance to which to move the project (optional)
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// Project sample rate (optional)
-	Rate *string `json:"Rate,omitnil" name:"Rate"`
+	Rate *string `json:"Rate,omitnil,omitempty" name:"Rate"`
 
 	// Whether to enable aggregation (optional)
-	EnableURLGroup *uint64 `json:"EnableURLGroup,omitnil" name:"EnableURLGroup"`
+	EnableURLGroup *uint64 `json:"EnableURLGroup,omitnil,omitempty" name:"EnableURLGroup"`
 
 	// Project type (valid values: "web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn")
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Project description (optional and up to 1,000 characters)
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 }
 
 type ModifyProjectRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ID *uint64 `json:"ID,omitnil" name:"ID"`
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Project name (optional, not empty, and up to 200 characters)
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Project webpage URL (optional and up to 256 characters)
-	URL *string `json:"URL,omitnil" name:"URL"`
+	URL *string `json:"URL,omitnil,omitempty" name:"URL"`
 
 	// Project repository address (optional and up to 256 characters)
-	Repo *string `json:"Repo,omitnil" name:"Repo"`
+	Repo *string `json:"Repo,omitnil,omitempty" name:"Repo"`
 
 	// ID of the instance to which to move the project (optional)
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// Project sample rate (optional)
-	Rate *string `json:"Rate,omitnil" name:"Rate"`
+	Rate *string `json:"Rate,omitnil,omitempty" name:"Rate"`
 
 	// Whether to enable aggregation (optional)
-	EnableURLGroup *uint64 `json:"EnableURLGroup,omitnil" name:"EnableURLGroup"`
+	EnableURLGroup *uint64 `json:"EnableURLGroup,omitnil,omitempty" name:"EnableURLGroup"`
 
 	// Project type (valid values: "web", "mp", "android", "ios", "node", "hippy", "weex", "viola", "rn")
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Project description (optional and up to 1,000 characters)
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 }
 
 func (r *ModifyProjectRequest) ToJsonString() string {
@@ -6308,13 +6308,13 @@ func (r *ModifyProjectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyProjectResponseParams struct {
 	// Operation information
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// Project ID
-	ID *uint64 `json:"ID,omitnil" name:"ID"`
+	ID *uint64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyProjectResponse struct {
@@ -6335,50 +6335,50 @@ func (r *ModifyProjectResponse) FromJsonString(s string) error {
 
 type ProjectLimit struct {
 	// Primary key ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Project ID
-	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
 
 	// API
-	ProjectInterface *string `json:"ProjectInterface,omitnil" name:"ProjectInterface"`
+	ProjectInterface *string `json:"ProjectInterface,omitnil,omitempty" name:"ProjectInterface"`
 
 	// Reporting rate
-	ReportRate *int64 `json:"ReportRate,omitnil" name:"ReportRate"`
+	ReportRate *int64 `json:"ReportRate,omitnil,omitempty" name:"ReportRate"`
 
 	// Reporting type. 1: reporting rate; 2: reporting count limit
-	ReportType *int64 `json:"ReportType,omitnil" name:"ReportType"`
+	ReportType *int64 `json:"ReportType,omitnil,omitempty" name:"ReportType"`
 }
 
 type ReleaseFile struct {
 	// File version
-	Version *string `json:"Version,omitnil" name:"Version"`
+	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
 	// Unique file key
-	FileKey *string `json:"FileKey,omitnil" name:"FileKey"`
+	FileKey *string `json:"FileKey,omitnil,omitempty" name:"FileKey"`
 
 	// Filename
-	FileName *string `json:"FileName,omitnil" name:"FileName"`
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
 	// File hash
-	FileHash *string `json:"FileHash,omitnil" name:"FileHash"`
+	FileHash *string `json:"FileHash,omitnil,omitempty" name:"FileHash"`
 
 	// File ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 }
 
 // Predefined struct for user
 type ResumeInstanceRequestParams struct {
 	// ID of the instance to be resumed
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type ResumeInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the instance to be resumed
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *ResumeInstanceRequest) ToJsonString() string {
@@ -6403,7 +6403,7 @@ func (r *ResumeInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ResumeInstanceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ResumeInstanceResponse struct {
@@ -6425,14 +6425,14 @@ func (r *ResumeInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ResumeProjectRequestParams struct {
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 type ResumeProjectRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 func (r *ResumeProjectRequest) ToJsonString() string {
@@ -6457,7 +6457,7 @@ func (r *ResumeProjectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ResumeProjectResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ResumeProjectResponse struct {
@@ -6478,165 +6478,165 @@ func (r *ResumeProjectResponse) FromJsonString(s string) error {
 
 type RumAreaInfo struct {
 	// Region ID
-	AreaId *int64 `json:"AreaId,omitnil" name:"AreaId"`
+	AreaId *int64 `json:"AreaId,omitnil,omitempty" name:"AreaId"`
 
 	// Region status (1: valid; 2: invalid)
-	AreaStatus *int64 `json:"AreaStatus,omitnil" name:"AreaStatus"`
+	AreaStatus *int64 `json:"AreaStatus,omitnil,omitempty" name:"AreaStatus"`
 
 	// Region name
-	AreaName *string `json:"AreaName,omitnil" name:"AreaName"`
+	AreaName *string `json:"AreaName,omitnil,omitempty" name:"AreaName"`
 
 	// Region key
-	AreaKey *string `json:"AreaKey,omitnil" name:"AreaKey"`
+	AreaKey *string `json:"AreaKey,omitnil,omitempty" name:"AreaKey"`
 
 	// Region ID.
-	AreaRegionID *string `json:"AreaRegionID,omitnil" name:"AreaRegionID"`
+	AreaRegionID *string `json:"AreaRegionID,omitnil,omitempty" name:"AreaRegionID"`
 
 	// Region code, such as “ap-xxx” (xxx is the region name).
-	AreaRegionCode *string `json:"AreaRegionCode,omitnil" name:"AreaRegionCode"`
+	AreaRegionCode *string `json:"AreaRegionCode,omitnil,omitempty" name:"AreaRegionCode"`
 
 	// Region abbreviation.
-	AreaAbbr *string `json:"AreaAbbr,omitnil" name:"AreaAbbr"`
+	AreaAbbr *string `json:"AreaAbbr,omitnil,omitempty" name:"AreaAbbr"`
 }
 
 type RumProject struct {
 	// Project name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Creator ID
-	Creator *string `json:"Creator,omitnil" name:"Creator"`
+	Creator *string `json:"Creator,omitnil,omitempty" name:"Creator"`
 
 	// Instance ID
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// Project type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Project repository address
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Repo *string `json:"Repo,omitnil" name:"Repo"`
+	Repo *string `json:"Repo,omitnil,omitempty" name:"Repo"`
 
 	// Project URL
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	URL *string `json:"URL,omitnil" name:"URL"`
+	URL *string `json:"URL,omitnil,omitempty" name:"URL"`
 
 	// Project sample rate
-	Rate *string `json:"Rate,omitnil" name:"Rate"`
+	Rate *string `json:"Rate,omitnil,omitempty" name:"Rate"`
 
 	// Unique project key (12 characters)
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Whether to enable URL aggregation
-	EnableURLGroup *int64 `json:"EnableURLGroup,omitnil" name:"EnableURLGroup"`
+	EnableURLGroup *int64 `json:"EnableURLGroup,omitnil,omitempty" name:"EnableURLGroup"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Project ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Instance key
-	InstanceKey *string `json:"InstanceKey,omitnil" name:"InstanceKey"`
+	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
 
 	// Project description
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
 	// Starred status. 1: yes; 0: no
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	IsStar *int64 `json:"IsStar,omitnil" name:"IsStar"`
+	IsStar *int64 `json:"IsStar,omitnil,omitempty" name:"IsStar"`
 
 	// Project status (`1`: Creating; `2`: Running; `3`: Abnormal; `4`: Restarting; `5`: Stopping; `6`: Stopped; `7`: Terminating; `8`: Terminated)
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	ProjectStatus *int64 `json:"ProjectStatus,omitnil" name:"ProjectStatus"`
+	ProjectStatus *int64 `json:"ProjectStatus,omitnil,omitempty" name:"ProjectStatus"`
 
 	// Log access point, which can be ignored. 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	AccessPoint *string `json:"AccessPoint,omitnil" name:"AccessPoint"`
+	AccessPoint *string `json:"AccessPoint,omitnil,omitempty" name:"AccessPoint"`
 }
 
 type RumPvInfo struct {
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Number of PVs
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Pv *string `json:"Pv,omitnil" name:"Pv"`
+	Pv *string `json:"Pv,omitnil,omitempty" name:"Pv"`
 
 	// Time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 }
 
 type RumUvInfo struct {
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Number of UVs
-	Uv *string `json:"Uv,omitnil" name:"Uv"`
+	Uv *string `json:"Uv,omitnil,omitempty" name:"Uv"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 }
 
 type ScoreInfo struct {
 	// duration
-	StaticDuration *string `json:"StaticDuration,omitnil" name:"StaticDuration"`
+	StaticDuration *string `json:"StaticDuration,omitnil,omitempty" name:"StaticDuration"`
 
 	// pv
-	PagePv *string `json:"PagePv,omitnil" name:"PagePv"`
+	PagePv *string `json:"PagePv,omitnil,omitempty" name:"PagePv"`
 
 	// Failure
-	ApiFail *string `json:"ApiFail,omitnil" name:"ApiFail"`
+	ApiFail *string `json:"ApiFail,omitnil,omitempty" name:"ApiFail"`
 
 	// Request
-	ApiNum *string `json:"ApiNum,omitnil" name:"ApiNum"`
+	ApiNum *string `json:"ApiNum,omitnil,omitempty" name:"ApiNum"`
 
 	// fail
-	StaticFail *string `json:"StaticFail,omitnil" name:"StaticFail"`
+	StaticFail *string `json:"StaticFail,omitnil,omitempty" name:"StaticFail"`
 
 	// Project ID
-	ProjectID *int64 `json:"ProjectID,omitnil" name:"ProjectID"`
+	ProjectID *int64 `json:"ProjectID,omitnil,omitempty" name:"ProjectID"`
 
 	// uv
-	PageUv *string `json:"PageUv,omitnil" name:"PageUv"`
+	PageUv *string `json:"PageUv,omitnil,omitempty" name:"PageUv"`
 
 	// Number of requests
-	ApiDuration *string `json:"ApiDuration,omitnil" name:"ApiDuration"`
+	ApiDuration *string `json:"ApiDuration,omitnil,omitempty" name:"ApiDuration"`
 
 	// Score
-	Score *string `json:"Score,omitnil" name:"Score"`
+	Score *string `json:"Score,omitnil,omitempty" name:"Score"`
 
 	// error
-	PageError *string `json:"PageError,omitnil" name:"PageError"`
+	PageError *string `json:"PageError,omitnil,omitempty" name:"PageError"`
 
 	// num
-	StaticNum *string `json:"StaticNum,omitnil" name:"StaticNum"`
+	StaticNum *string `json:"StaticNum,omitnil,omitempty" name:"StaticNum"`
 
 	// num
-	RecordNum *int64 `json:"RecordNum,omitnil" name:"RecordNum"`
+	RecordNum *int64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
 
 	// Duration
-	PageDuration *string `json:"PageDuration,omitnil" name:"PageDuration"`
+	PageDuration *string `json:"PageDuration,omitnil,omitempty" name:"PageDuration"`
 
 	// Time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 }
 
 // Predefined struct for user
 type StopInstanceRequestParams struct {
 	// ID of the instance to be stopped
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type StopInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the instance to be stopped
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *StopInstanceRequest) ToJsonString() string {
@@ -6661,7 +6661,7 @@ func (r *StopInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StopInstanceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StopInstanceResponse struct {
@@ -6683,14 +6683,14 @@ func (r *StopInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type StopProjectRequestParams struct {
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 type StopProjectRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 func (r *StopProjectRequest) ToJsonString() string {
@@ -6715,7 +6715,7 @@ func (r *StopProjectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StopProjectResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StopProjectResponse struct {
@@ -6736,34 +6736,34 @@ func (r *StopProjectResponse) FromJsonString(s string) error {
 
 type Tag struct {
 	// Tag key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Tag value
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type Whitelist struct {
 	// Remarks
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Instance ID
-	InstanceID *string `json:"InstanceID,omitnil" name:"InstanceID"`
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
 
 	// End time
-	Ttl *string `json:"Ttl,omitnil" name:"Ttl"`
+	Ttl *string `json:"Ttl,omitnil,omitempty" name:"Ttl"`
 
 	// Auto-Increment allowlist ID
-	ID *string `json:"ID,omitnil" name:"ID"`
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Unique business identifier
-	WhitelistUin *string `json:"WhitelistUin,omitnil" name:"WhitelistUin"`
+	WhitelistUin *string `json:"WhitelistUin,omitnil,omitempty" name:"WhitelistUin"`
 
 	// Creator ID
-	CreateUser *string `json:"CreateUser,omitnil" name:"CreateUser"`
+	CreateUser *string `json:"CreateUser,omitnil,omitempty" name:"CreateUser"`
 
 	// aid
-	Aid *string `json:"Aid,omitnil" name:"Aid"`
+	Aid *string `json:"Aid,omitnil,omitempty" name:"Aid"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 }

@@ -23,74 +23,74 @@ import (
 // Predefined struct for user
 type DescribeCaptchaResultRequestParams struct {
 	// It must be `9` here. You can configure the CAPTCHA types in the console.
-	CaptchaType *uint64 `json:"CaptchaType,omitnil" name:"CaptchaType"`
+	CaptchaType *uint64 `json:"CaptchaType,omitnil,omitempty" name:"CaptchaType"`
 
 	// The user verification ticket returned by the frontend callback function
-	Ticket *string `json:"Ticket,omitnil" name:"Ticket"`
+	Ticket *string `json:"Ticket,omitnil,omitempty" name:"Ticket"`
 
 	// The user public IP obtained from the customer backend server
-	UserIp *string `json:"UserIp,omitnil" name:"UserIp"`
+	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
 
 	// A random string returned by the frontend callback function
-	Randstr *string `json:"Randstr,omitnil" name:"Randstr"`
+	Randstr *string `json:"Randstr,omitnil,omitempty" name:"Randstr"`
 
 	// CAPTCHA's app ID. Log in to the [Captcha console](https://console.cloud.tencent.com/captcha/graphical) and you can view the CaptchaAppId in the "Key" column of the CAPTCHA list.
-	CaptchaAppId *uint64 `json:"CaptchaAppId,omitnil" name:"CaptchaAppId"`
+	CaptchaAppId *uint64 `json:"CaptchaAppId,omitnil,omitempty" name:"CaptchaAppId"`
 
 	// CAPTCHA's app key. Log in to the [Captcha console](https://console.cloud.tencent.com/captcha/graphical) and you can view the AppSecretKey in the "Key" column of the CAPTCHA list. AppSecretKey is the key for CAPTCHA ticket verification performed by the server. Please keep it confidential and do not disclose it to any third parties.
-	AppSecretKey *string `json:"AppSecretKey,omitnil" name:"AppSecretKey"`
+	AppSecretKey *string `json:"AppSecretKey,omitnil,omitempty" name:"AppSecretKey"`
 
 	// Reserved field.
-	BusinessId *uint64 `json:"BusinessId,omitnil" name:"BusinessId"`
+	BusinessId *uint64 `json:"BusinessId,omitnil,omitempty" name:"BusinessId"`
 
 	// Reserved field.
-	SceneId *uint64 `json:"SceneId,omitnil" name:"SceneId"`
+	SceneId *uint64 `json:"SceneId,omitnil,omitempty" name:"SceneId"`
 
 	// MAC address or unique identifier of a device
-	MacAddress *string `json:"MacAddress,omitnil" name:"MacAddress"`
+	MacAddress *string `json:"MacAddress,omitnil,omitempty" name:"MacAddress"`
 
 	// Mobile equipment identity number
-	Imei *string `json:"Imei,omitnil" name:"Imei"`
+	Imei *string `json:"Imei,omitnil,omitempty" name:"Imei"`
 
 	// Indicates whether to return the time when the frontend obtains the CAPTCHA. Valid values: 1 (return the time) and others.
-	NeedGetCaptchaTime *int64 `json:"NeedGetCaptchaTime,omitnil" name:"NeedGetCaptchaTime"`
+	NeedGetCaptchaTime *int64 `json:"NeedGetCaptchaTime,omitnil,omitempty" name:"NeedGetCaptchaTime"`
 }
 
 type DescribeCaptchaResultRequest struct {
 	*tchttp.BaseRequest
 	
 	// It must be `9` here. You can configure the CAPTCHA types in the console.
-	CaptchaType *uint64 `json:"CaptchaType,omitnil" name:"CaptchaType"`
+	CaptchaType *uint64 `json:"CaptchaType,omitnil,omitempty" name:"CaptchaType"`
 
 	// The user verification ticket returned by the frontend callback function
-	Ticket *string `json:"Ticket,omitnil" name:"Ticket"`
+	Ticket *string `json:"Ticket,omitnil,omitempty" name:"Ticket"`
 
 	// The user public IP obtained from the customer backend server
-	UserIp *string `json:"UserIp,omitnil" name:"UserIp"`
+	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
 
 	// A random string returned by the frontend callback function
-	Randstr *string `json:"Randstr,omitnil" name:"Randstr"`
+	Randstr *string `json:"Randstr,omitnil,omitempty" name:"Randstr"`
 
 	// CAPTCHA's app ID. Log in to the [Captcha console](https://console.cloud.tencent.com/captcha/graphical) and you can view the CaptchaAppId in the "Key" column of the CAPTCHA list.
-	CaptchaAppId *uint64 `json:"CaptchaAppId,omitnil" name:"CaptchaAppId"`
+	CaptchaAppId *uint64 `json:"CaptchaAppId,omitnil,omitempty" name:"CaptchaAppId"`
 
 	// CAPTCHA's app key. Log in to the [Captcha console](https://console.cloud.tencent.com/captcha/graphical) and you can view the AppSecretKey in the "Key" column of the CAPTCHA list. AppSecretKey is the key for CAPTCHA ticket verification performed by the server. Please keep it confidential and do not disclose it to any third parties.
-	AppSecretKey *string `json:"AppSecretKey,omitnil" name:"AppSecretKey"`
+	AppSecretKey *string `json:"AppSecretKey,omitnil,omitempty" name:"AppSecretKey"`
 
 	// Reserved field.
-	BusinessId *uint64 `json:"BusinessId,omitnil" name:"BusinessId"`
+	BusinessId *uint64 `json:"BusinessId,omitnil,omitempty" name:"BusinessId"`
 
 	// Reserved field.
-	SceneId *uint64 `json:"SceneId,omitnil" name:"SceneId"`
+	SceneId *uint64 `json:"SceneId,omitnil,omitempty" name:"SceneId"`
 
 	// MAC address or unique identifier of a device
-	MacAddress *string `json:"MacAddress,omitnil" name:"MacAddress"`
+	MacAddress *string `json:"MacAddress,omitnil,omitempty" name:"MacAddress"`
 
 	// Mobile equipment identity number
-	Imei *string `json:"Imei,omitnil" name:"Imei"`
+	Imei *string `json:"Imei,omitnil,omitempty" name:"Imei"`
 
 	// Indicates whether to return the time when the frontend obtains the CAPTCHA. Valid values: 1 (return the time) and others.
-	NeedGetCaptchaTime *int64 `json:"NeedGetCaptchaTime,omitnil" name:"NeedGetCaptchaTime"`
+	NeedGetCaptchaTime *int64 `json:"NeedGetCaptchaTime,omitnil,omitempty" name:"NeedGetCaptchaTime"`
 }
 
 func (r *DescribeCaptchaResultRequest) ToJsonString() string {
@@ -132,31 +132,31 @@ type DescribeCaptchaResultResponseParams struct {
 	// `16 appid-ticket mismatch`: The specified `CaptchaAppId` is invalid. Make sure it’s the same as the `CaptchaAppId` returned from the frontend. You can obtain it from the CAPTCHA console in **Verification management** > **Basic configuration**.
 	// `21 diff`. Ticket verification error. Possible reasons: 1) If the ticket contains the `terror` prefix, it’s usually the case that a disaster recovery ticket is generated due to the network connection problems of the user. You can choose to ignore it or verify again. 2) If the ticket does not include the `terror` prefix, Captcha detects security risk on this request . You can choose to block it or not.
 	// `100 appid-secretkey-ticket mismatch`: Parameter error. 1) Make sure `CaptchaAppId` and `AppSecretKey` are correct. `CaptchaAppId` and `AppSecretKey` in the CAPTACHA console under **Verification management** > **Basic configuration**. 2) Make sure the passed-in `Ticket` is generated by using the passed-in `CaptchaAppId`.
-	CaptchaCode *int64 `json:"CaptchaCode,omitnil" name:"CaptchaCode"`
+	CaptchaCode *int64 `json:"CaptchaCode,omitnil,omitempty" name:"CaptchaCode"`
 
 	// Status description and verification error message
 	// Note: This field may return `null`, indicating that no valid value was found.
-	CaptchaMsg *string `json:"CaptchaMsg,omitnil" name:"CaptchaMsg"`
+	CaptchaMsg *string `json:"CaptchaMsg,omitnil,omitempty" name:"CaptchaMsg"`
 
 	// This parameter returns the result of imperceptible verification. This parameter is not available for Tencent Cloud International yet.
 	// `0`: The request is trusted.
 	// `100`: The request is malicious.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	EvilLevel *int64 `json:"EvilLevel,omitnil" name:"EvilLevel"`
+	EvilLevel *int64 `json:"EvilLevel,omitnil,omitempty" name:"EvilLevel"`
 
 	// The timestamp when the frontend obtains the CAPTCHA.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	GetCaptchaTime *int64 `json:"GetCaptchaTime,omitnil" name:"GetCaptchaTime"`
+	GetCaptchaTime *int64 `json:"GetCaptchaTime,omitnil,omitempty" name:"GetCaptchaTime"`
 
 	// Blocking type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EvilBitmap *int64 `json:"EvilBitmap,omitnil" name:"EvilBitmap"`
+	EvilBitmap *int64 `json:"EvilBitmap,omitnil,omitempty" name:"EvilBitmap"`
 
 	// The time when the CAPTCHA is submitted.
-	SubmitCaptchaTime *int64 `json:"SubmitCaptchaTime,omitnil" name:"SubmitCaptchaTime"`
+	SubmitCaptchaTime *int64 `json:"SubmitCaptchaTime,omitnil,omitempty" name:"SubmitCaptchaTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeCaptchaResultResponse struct {

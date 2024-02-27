@@ -22,29 +22,29 @@ import (
 
 type AccessVpc struct {
 	// VPC ID
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Subnet ID
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Private network access status
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Private network access IP
-	AccessIp *string `json:"AccessIp,omitnil" name:"AccessIp"`
+	AccessIp *string `json:"AccessIp,omitnil,omitempty" name:"AccessIp"`
 }
 
 // Predefined struct for user
 type CheckInstanceNameRequestParams struct {
 	// Name of the instance to be created
-	RegistryName *string `json:"RegistryName,omitnil" name:"RegistryName"`
+	RegistryName *string `json:"RegistryName,omitnil,omitempty" name:"RegistryName"`
 }
 
 type CheckInstanceNameRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of the instance to be created
-	RegistryName *string `json:"RegistryName,omitnil" name:"RegistryName"`
+	RegistryName *string `json:"RegistryName,omitnil,omitempty" name:"RegistryName"`
 }
 
 func (r *CheckInstanceNameRequest) ToJsonString() string {
@@ -69,10 +69,10 @@ func (r *CheckInstanceNameRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CheckInstanceNameResponseParams struct {
 	// Verification result. Valid values: true: Valid; false: Invalid.
-	IsValidated *bool `json:"IsValidated,omitnil" name:"IsValidated"`
+	IsValidated *bool `json:"IsValidated,omitnil,omitempty" name:"IsValidated"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CheckInstanceNameResponse struct {
@@ -94,14 +94,14 @@ func (r *CheckInstanceNameResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CheckInstanceRequestParams struct {
 	// ID of the instance to be verified.
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 type CheckInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the instance to be verified.
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 func (r *CheckInstanceRequest) ToJsonString() string {
@@ -126,13 +126,13 @@ func (r *CheckInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CheckInstanceResponseParams struct {
 	// Verification result. true: valid, false: invalid
-	IsValidated *bool `json:"IsValidated,omitnil" name:"IsValidated"`
+	IsValidated *bool `json:"IsValidated,omitnil,omitempty" name:"IsValidated"`
 
 	// ID of the region where the instance is located.
-	RegionId *uint64 `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *uint64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CheckInstanceResponse struct {
@@ -154,50 +154,50 @@ func (r *CheckInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateCustomAccountRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Custom account name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Policy list
-	Permissions []*Permission `json:"Permissions,omitnil" name:"Permissions"`
+	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
 
 	// Custom account description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
-	Duration *int64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Expiry time of the custom account (timestamp, in milliseconds)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil" name:"ExpiresAt"`
+	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
 
 	// Whether to disable the custom account
-	Disable *bool `json:"Disable,omitnil" name:"Disable"`
+	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
 }
 
 type CreateCustomAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Custom account name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Policy list
-	Permissions []*Permission `json:"Permissions,omitnil" name:"Permissions"`
+	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
 
 	// Custom account description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
-	Duration *int64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Expiry time of the custom account (timestamp, in milliseconds)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil" name:"ExpiresAt"`
+	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
 
 	// Whether to disable the custom account
-	Disable *bool `json:"Disable,omitnil" name:"Disable"`
+	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
 }
 
 func (r *CreateCustomAccountRequest) ToJsonString() string {
@@ -228,19 +228,19 @@ func (r *CreateCustomAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateCustomAccountResponseParams struct {
 	// Custom username (the prefix `tcr$` is automatically added)
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Custom password, which is displayed only once
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// Custom expiry time (timestamp)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil" name:"ExpiresAt"`
+	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
 
 	// Custom account creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateCustomAccountResponse struct {
@@ -262,50 +262,50 @@ func (r *CreateCustomAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateImageAccelerationServiceRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// ID of the VPC where the CFS file system to be created resides
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// ID of the subnet where the CFS file system to be created resides
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Storage class of the CFS file system to be created. Valid values: SD: Standard; HP: High-Performance.
-	StorageType *string `json:"StorageType,omitnil" name:"StorageType"`
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
 
 	// Permission group ID
-	PGroupId *string `json:"PGroupId,omitnil" name:"PGroupId"`
+	PGroupId *string `json:"PGroupId,omitnil,omitempty" name:"PGroupId"`
 
 	// AZ name, such as `ap-beijing-1`. For more information, see the list of regions and AZs in Overview.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Cloud tag description
-	TagSpecification *TagSpecification `json:"TagSpecification,omitnil" name:"TagSpecification"`
+	TagSpecification *TagSpecification `json:"TagSpecification,omitnil,omitempty" name:"TagSpecification"`
 }
 
 type CreateImageAccelerationServiceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// ID of the VPC where the CFS file system to be created resides
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// ID of the subnet where the CFS file system to be created resides
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Storage class of the CFS file system to be created. Valid values: SD: Standard; HP: High-Performance.
-	StorageType *string `json:"StorageType,omitnil" name:"StorageType"`
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
 
 	// Permission group ID
-	PGroupId *string `json:"PGroupId,omitnil" name:"PGroupId"`
+	PGroupId *string `json:"PGroupId,omitnil,omitempty" name:"PGroupId"`
 
 	// AZ name, such as `ap-beijing-1`. For more information, see the list of regions and AZs in Overview.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Cloud tag description
-	TagSpecification *TagSpecification `json:"TagSpecification,omitnil" name:"TagSpecification"`
+	TagSpecification *TagSpecification `json:"TagSpecification,omitnil,omitempty" name:"TagSpecification"`
 }
 
 func (r *CreateImageAccelerationServiceRequest) ToJsonString() string {
@@ -336,10 +336,10 @@ func (r *CreateImageAccelerationServiceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateImageAccelerationServiceResponseParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateImageAccelerationServiceResponse struct {
@@ -361,26 +361,26 @@ func (r *CreateImageAccelerationServiceResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type CreateImmutableTagRulesRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Rule
-	Rule *ImmutableTagRule `json:"Rule,omitnil" name:"Rule"`
+	Rule *ImmutableTagRule `json:"Rule,omitnil,omitempty" name:"Rule"`
 }
 
 type CreateImmutableTagRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Rule
-	Rule *ImmutableTagRule `json:"Rule,omitnil" name:"Rule"`
+	Rule *ImmutableTagRule `json:"Rule,omitnil,omitempty" name:"Rule"`
 }
 
 func (r *CreateImmutableTagRulesRequest) ToJsonString() string {
@@ -407,7 +407,7 @@ func (r *CreateImmutableTagRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateImmutableTagRulesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateImmutableTagRulesResponse struct {
@@ -429,26 +429,26 @@ func (r *CreateImmutableTagRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateInstanceCustomizedDomainRequestParams struct {
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Custom domain name
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Certificate ID
-	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+	CertificateId *string `json:"CertificateId,omitnil,omitempty" name:"CertificateId"`
 }
 
 type CreateInstanceCustomizedDomainRequest struct {
 	*tchttp.BaseRequest
 	
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Custom domain name
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Certificate ID
-	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+	CertificateId *string `json:"CertificateId,omitnil,omitempty" name:"CertificateId"`
 }
 
 func (r *CreateInstanceCustomizedDomainRequest) ToJsonString() string {
@@ -475,7 +475,7 @@ func (r *CreateInstanceCustomizedDomainRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateInstanceCustomizedDomainResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateInstanceCustomizedDomainResponse struct {
@@ -497,56 +497,56 @@ func (r *CreateInstanceCustomizedDomainResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type CreateInstanceRequestParams struct {
 	// Enterprise Edition instance name
-	RegistryName *string `json:"RegistryName,omitnil" name:"RegistryName"`
+	RegistryName *string `json:"RegistryName,omitnil,omitempty" name:"RegistryName"`
 
 	// Enterprise Edition instance type. Valid values: basic: Basic; standard: Standard; premium: Premium.
-	RegistryType *string `json:"RegistryType,omitnil" name:"RegistryType"`
+	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
 	// Cloud tag description
-	TagSpecification *TagSpecification `json:"TagSpecification,omitnil" name:"TagSpecification"`
+	TagSpecification *TagSpecification `json:"TagSpecification,omitnil,omitempty" name:"TagSpecification"`
 
 	// Instance billing mode. Valid values: 0: Pay-as-you-go billing; 1: Prepaid. Default value: 0.
-	RegistryChargeType *int64 `json:"RegistryChargeType,omitnil" name:"RegistryChargeType"`
+	RegistryChargeType *int64 `json:"RegistryChargeType,omitnil,omitempty" name:"RegistryChargeType"`
 
 	// Auto-renewal setting and purchase period
-	RegistryChargePrepaid *RegistryChargePrepaid `json:"RegistryChargePrepaid,omitnil" name:"RegistryChargePrepaid"`
+	RegistryChargePrepaid *RegistryChargePrepaid `json:"RegistryChargePrepaid,omitnil,omitempty" name:"RegistryChargePrepaid"`
 
 	// Whether to sync TCR cloud tags to the COS bucket
-	SyncTag *bool `json:"SyncTag,omitnil" name:"SyncTag"`
+	SyncTag *bool `json:"SyncTag,omitnil,omitempty" name:"SyncTag"`
 
 	// Whether to enable the COS Multi-AZ feature
-	EnableCosMAZ *bool `json:"EnableCosMAZ,omitnil" name:"EnableCosMAZ"`
+	EnableCosMAZ *bool `json:"EnableCosMAZ,omitnil,omitempty" name:"EnableCosMAZ"`
 
 	// Whether to enable deletion protection
-	DeletionProtection *bool `json:"DeletionProtection,omitnil" name:"DeletionProtection"`
+	DeletionProtection *bool `json:"DeletionProtection,omitnil,omitempty" name:"DeletionProtection"`
 }
 
 type CreateInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Enterprise Edition instance name
-	RegistryName *string `json:"RegistryName,omitnil" name:"RegistryName"`
+	RegistryName *string `json:"RegistryName,omitnil,omitempty" name:"RegistryName"`
 
 	// Enterprise Edition instance type. Valid values: basic: Basic; standard: Standard; premium: Premium.
-	RegistryType *string `json:"RegistryType,omitnil" name:"RegistryType"`
+	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
 	// Cloud tag description
-	TagSpecification *TagSpecification `json:"TagSpecification,omitnil" name:"TagSpecification"`
+	TagSpecification *TagSpecification `json:"TagSpecification,omitnil,omitempty" name:"TagSpecification"`
 
 	// Instance billing mode. Valid values: 0: Pay-as-you-go billing; 1: Prepaid. Default value: 0.
-	RegistryChargeType *int64 `json:"RegistryChargeType,omitnil" name:"RegistryChargeType"`
+	RegistryChargeType *int64 `json:"RegistryChargeType,omitnil,omitempty" name:"RegistryChargeType"`
 
 	// Auto-renewal setting and purchase period
-	RegistryChargePrepaid *RegistryChargePrepaid `json:"RegistryChargePrepaid,omitnil" name:"RegistryChargePrepaid"`
+	RegistryChargePrepaid *RegistryChargePrepaid `json:"RegistryChargePrepaid,omitnil,omitempty" name:"RegistryChargePrepaid"`
 
 	// Whether to sync TCR cloud tags to the COS bucket
-	SyncTag *bool `json:"SyncTag,omitnil" name:"SyncTag"`
+	SyncTag *bool `json:"SyncTag,omitnil,omitempty" name:"SyncTag"`
 
 	// Whether to enable the COS Multi-AZ feature
-	EnableCosMAZ *bool `json:"EnableCosMAZ,omitnil" name:"EnableCosMAZ"`
+	EnableCosMAZ *bool `json:"EnableCosMAZ,omitnil,omitempty" name:"EnableCosMAZ"`
 
 	// Whether to enable deletion protection
-	DeletionProtection *bool `json:"DeletionProtection,omitnil" name:"DeletionProtection"`
+	DeletionProtection *bool `json:"DeletionProtection,omitnil,omitempty" name:"DeletionProtection"`
 }
 
 func (r *CreateInstanceRequest) ToJsonString() string {
@@ -578,10 +578,10 @@ func (r *CreateInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateInstanceResponseParams struct {
 	// Enterprise Edition instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateInstanceResponse struct {
@@ -603,26 +603,26 @@ func (r *CreateInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateInstanceTokenRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Access credential type. Values: `longterm` and `temp` (default, valid for one hour)
-	TokenType *string `json:"TokenType,omitnil" name:"TokenType"`
+	TokenType *string `json:"TokenType,omitnil,omitempty" name:"TokenType"`
 
 	// Description of the long-term access credential
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 }
 
 type CreateInstanceTokenRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Access credential type. Values: `longterm` and `temp` (default, valid for one hour)
-	TokenType *string `json:"TokenType,omitnil" name:"TokenType"`
+	TokenType *string `json:"TokenType,omitnil,omitempty" name:"TokenType"`
 
 	// Description of the long-term access credential
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 }
 
 func (r *CreateInstanceTokenRequest) ToJsonString() string {
@@ -650,20 +650,20 @@ func (r *CreateInstanceTokenRequest) FromJsonString(s string) error {
 type CreateInstanceTokenResponseParams struct {
 	// Username
 	// Note: this field may return `null`, indicating that no valid value can be found.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// Access credential
-	Token *string `json:"Token,omitnil" name:"Token"`
+	Token *string `json:"Token,omitnil,omitempty" name:"Token"`
 
 	// Expiration timestamp of access credential. It is a string of numbers without unit.
-	ExpTime *int64 `json:"ExpTime,omitnil" name:"ExpTime"`
+	ExpTime *int64 `json:"ExpTime,omitnil,omitempty" name:"ExpTime"`
 
 	// Token ID of long-term access credential. It is not available to temporary access credential.
 	// Note: this field may return `null`, indicating that no valid value can be found.
-	TokenId *string `json:"TokenId,omitnil" name:"TokenId"`
+	TokenId *string `json:"TokenId,omitnil,omitempty" name:"TokenId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateInstanceTokenResponse struct {
@@ -685,20 +685,20 @@ func (r *CreateInstanceTokenResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateMultipleSecurityPolicyRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Security group policy
-	SecurityGroupPolicySet []*SecurityPolicy `json:"SecurityGroupPolicySet,omitnil" name:"SecurityGroupPolicySet"`
+	SecurityGroupPolicySet []*SecurityPolicy `json:"SecurityGroupPolicySet,omitnil,omitempty" name:"SecurityGroupPolicySet"`
 }
 
 type CreateMultipleSecurityPolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Security group policy
-	SecurityGroupPolicySet []*SecurityPolicy `json:"SecurityGroupPolicySet,omitnil" name:"SecurityGroupPolicySet"`
+	SecurityGroupPolicySet []*SecurityPolicy `json:"SecurityGroupPolicySet,omitnil,omitempty" name:"SecurityGroupPolicySet"`
 }
 
 func (r *CreateMultipleSecurityPolicyRequest) ToJsonString() string {
@@ -724,10 +724,10 @@ func (r *CreateMultipleSecurityPolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateMultipleSecurityPolicyResponseParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateMultipleSecurityPolicyResponse struct {
@@ -749,32 +749,32 @@ func (r *CreateMultipleSecurityPolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateNamespaceRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name, which can contain 2–30 lowercase letters, digits, and separators (".", "_", and "-") but can neither start or end with a separator nor contain consecutive separators.
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Whether to make public. Valid values: true: Yes; false: No.
-	IsPublic *bool `json:"IsPublic,omitnil" name:"IsPublic"`
+	IsPublic *bool `json:"IsPublic,omitnil,omitempty" name:"IsPublic"`
 
 	// Cloud tag description
-	TagSpecification *TagSpecification `json:"TagSpecification,omitnil" name:"TagSpecification"`
+	TagSpecification *TagSpecification `json:"TagSpecification,omitnil,omitempty" name:"TagSpecification"`
 }
 
 type CreateNamespaceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name, which can contain 2–30 lowercase letters, digits, and separators (".", "_", and "-") but can neither start or end with a separator nor contain consecutive separators.
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Whether to make public. Valid values: true: Yes; false: No.
-	IsPublic *bool `json:"IsPublic,omitnil" name:"IsPublic"`
+	IsPublic *bool `json:"IsPublic,omitnil,omitempty" name:"IsPublic"`
 
 	// Cloud tag description
-	TagSpecification *TagSpecification `json:"TagSpecification,omitnil" name:"TagSpecification"`
+	TagSpecification *TagSpecification `json:"TagSpecification,omitnil,omitempty" name:"TagSpecification"`
 }
 
 func (r *CreateNamespaceRequest) ToJsonString() string {
@@ -802,7 +802,7 @@ func (r *CreateNamespaceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateNamespaceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateNamespaceResponse struct {
@@ -824,32 +824,32 @@ func (r *CreateNamespaceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateReplicationInstanceRequestParams struct {
 	// Master instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Region ID of the replication instance
-	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil" name:"ReplicationRegionId"`
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil,omitempty" name:"ReplicationRegionId"`
 
 	// Region name of the replication instance
-	ReplicationRegionName *string `json:"ReplicationRegionName,omitnil" name:"ReplicationRegionName"`
+	ReplicationRegionName *string `json:"ReplicationRegionName,omitnil,omitempty" name:"ReplicationRegionName"`
 
 	// Whether to sync TCR cloud tags to the COS Bucket
-	SyncTag *bool `json:"SyncTag,omitnil" name:"SyncTag"`
+	SyncTag *bool `json:"SyncTag,omitnil,omitempty" name:"SyncTag"`
 }
 
 type CreateReplicationInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Master instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Region ID of the replication instance
-	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil" name:"ReplicationRegionId"`
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil,omitempty" name:"ReplicationRegionId"`
 
 	// Region name of the replication instance
-	ReplicationRegionName *string `json:"ReplicationRegionName,omitnil" name:"ReplicationRegionName"`
+	ReplicationRegionName *string `json:"ReplicationRegionName,omitnil,omitempty" name:"ReplicationRegionName"`
 
 	// Whether to sync TCR cloud tags to the COS Bucket
-	SyncTag *bool `json:"SyncTag,omitnil" name:"SyncTag"`
+	SyncTag *bool `json:"SyncTag,omitnil,omitempty" name:"SyncTag"`
 }
 
 func (r *CreateReplicationInstanceRequest) ToJsonString() string {
@@ -877,10 +877,10 @@ func (r *CreateReplicationInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateReplicationInstanceResponseParams struct {
 	// Enterprise Registry Instance ID
-	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil" name:"ReplicationRegistryId"`
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil,omitempty" name:"ReplicationRegistryId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateReplicationInstanceResponse struct {
@@ -902,38 +902,38 @@ func (r *CreateReplicationInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateRepositoryRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Brief repository description
-	BriefDescription *string `json:"BriefDescription,omitnil" name:"BriefDescription"`
+	BriefDescription *string `json:"BriefDescription,omitnil,omitempty" name:"BriefDescription"`
 
 	// Detailed repository description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type CreateRepositoryRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Brief repository description
-	BriefDescription *string `json:"BriefDescription,omitnil" name:"BriefDescription"`
+	BriefDescription *string `json:"BriefDescription,omitnil,omitempty" name:"BriefDescription"`
 
 	// Detailed repository description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 func (r *CreateRepositoryRequest) ToJsonString() string {
@@ -962,7 +962,7 @@ func (r *CreateRepositoryRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateRepositoryResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateRepositoryResponse struct {
@@ -984,26 +984,26 @@ func (r *CreateRepositoryResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSecurityPolicyRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// 192.168.0.0/24
-	CidrBlock *string `json:"CidrBlock,omitnil" name:"CidrBlock"`
+	CidrBlock *string `json:"CidrBlock,omitnil,omitempty" name:"CidrBlock"`
 
 	// Remarks
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type CreateSecurityPolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// 192.168.0.0/24
-	CidrBlock *string `json:"CidrBlock,omitnil" name:"CidrBlock"`
+	CidrBlock *string `json:"CidrBlock,omitnil,omitempty" name:"CidrBlock"`
 
 	// Remarks
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 func (r *CreateSecurityPolicyRequest) ToJsonString() string {
@@ -1030,10 +1030,10 @@ func (r *CreateSecurityPolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSecurityPolicyResponseParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateSecurityPolicyResponse struct {
@@ -1055,50 +1055,50 @@ func (r *CreateSecurityPolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateServiceAccountRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Service account name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Policy list
-	Permissions []*Permission `json:"Permissions,omitnil" name:"Permissions"`
+	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
 
 	// Service account description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
-	Duration *int64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Expiry time (timestamp, in milliseconds)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil" name:"ExpiresAt"`
+	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
 
 	// Whether to disable the service account
-	Disable *bool `json:"Disable,omitnil" name:"Disable"`
+	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
 }
 
 type CreateServiceAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Service account name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Policy list
-	Permissions []*Permission `json:"Permissions,omitnil" name:"Permissions"`
+	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
 
 	// Service account description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
-	Duration *int64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Expiry time (timestamp, in milliseconds)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil" name:"ExpiresAt"`
+	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
 
 	// Whether to disable the service account
-	Disable *bool `json:"Disable,omitnil" name:"Disable"`
+	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
 }
 
 func (r *CreateServiceAccountRequest) ToJsonString() string {
@@ -1129,19 +1129,19 @@ func (r *CreateServiceAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateServiceAccountResponseParams struct {
 	// Service account name (the prefix `tcr$` is automatically added)
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Service account password, which is displayed only once
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// Expiry time of the service account (timestamp)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil" name:"ExpiresAt"`
+	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
 
 	// Creation time of the service account
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateServiceAccountResponse struct {
@@ -1163,50 +1163,50 @@ func (r *CreateServiceAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSignaturePolicyRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Policy name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// KMS key
-	KmsId *string `json:"KmsId,omitnil" name:"KmsId"`
+	KmsId *string `json:"KmsId,omitnil,omitempty" name:"KmsId"`
 
 	// Region of the KMS key
-	KmsRegion *string `json:"KmsRegion,omitnil" name:"KmsRegion"`
+	KmsRegion *string `json:"KmsRegion,omitnil,omitempty" name:"KmsRegion"`
 
 	// Custom domain name. If this parameter is left empty, the default domain name of the TCR instance will be used to generate the signature.
-	Domain *string `json:"Domain,omitnil" name:"Domain"`
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// Whether to disable the signing policy. Default value: false.
-	Disabled *bool `json:"Disabled,omitnil" name:"Disabled"`
+	Disabled *bool `json:"Disabled,omitnil,omitempty" name:"Disabled"`
 }
 
 type CreateSignaturePolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Policy name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// KMS key
-	KmsId *string `json:"KmsId,omitnil" name:"KmsId"`
+	KmsId *string `json:"KmsId,omitnil,omitempty" name:"KmsId"`
 
 	// Region of the KMS key
-	KmsRegion *string `json:"KmsRegion,omitnil" name:"KmsRegion"`
+	KmsRegion *string `json:"KmsRegion,omitnil,omitempty" name:"KmsRegion"`
 
 	// Custom domain name. If this parameter is left empty, the default domain name of the TCR instance will be used to generate the signature.
-	Domain *string `json:"Domain,omitnil" name:"Domain"`
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// Whether to disable the signing policy. Default value: false.
-	Disabled *bool `json:"Disabled,omitnil" name:"Disabled"`
+	Disabled *bool `json:"Disabled,omitnil,omitempty" name:"Disabled"`
 }
 
 func (r *CreateSignaturePolicyRequest) ToJsonString() string {
@@ -1237,7 +1237,7 @@ func (r *CreateSignaturePolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSignaturePolicyResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateSignaturePolicyResponse struct {
@@ -1259,32 +1259,32 @@ func (r *CreateSignaturePolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSignatureRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Tag name
-	ImageVersion *string `json:"ImageVersion,omitnil" name:"ImageVersion"`
+	ImageVersion *string `json:"ImageVersion,omitnil,omitempty" name:"ImageVersion"`
 }
 
 type CreateSignatureRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Tag name
-	ImageVersion *string `json:"ImageVersion,omitnil" name:"ImageVersion"`
+	ImageVersion *string `json:"ImageVersion,omitnil,omitempty" name:"ImageVersion"`
 }
 
 func (r *CreateSignatureRequest) ToJsonString() string {
@@ -1312,7 +1312,7 @@ func (r *CreateSignatureRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSignatureResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateSignatureResponse struct {
@@ -1334,26 +1334,26 @@ func (r *CreateSignatureResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTagRetentionExecutionRequestParams struct {
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Tag retention rule ID
-	RetentionId *int64 `json:"RetentionId,omitnil" name:"RetentionId"`
+	RetentionId *int64 `json:"RetentionId,omitnil,omitempty" name:"RetentionId"`
 
 	// Whether the execution is simulated. Default value: false (not simulated)
-	DryRun *bool `json:"DryRun,omitnil" name:"DryRun"`
+	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 }
 
 type CreateTagRetentionExecutionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Tag retention rule ID
-	RetentionId *int64 `json:"RetentionId,omitnil" name:"RetentionId"`
+	RetentionId *int64 `json:"RetentionId,omitnil,omitempty" name:"RetentionId"`
 
 	// Whether the execution is simulated. Default value: false (not simulated)
-	DryRun *bool `json:"DryRun,omitnil" name:"DryRun"`
+	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 }
 
 func (r *CreateTagRetentionExecutionRequest) ToJsonString() string {
@@ -1380,7 +1380,7 @@ func (r *CreateTagRetentionExecutionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTagRetentionExecutionResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateTagRetentionExecutionResponse struct {
@@ -1402,38 +1402,38 @@ func (r *CreateTagRetentionExecutionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTagRetentionRuleRequestParams struct {
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace ID
-	NamespaceId *int64 `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *int64 `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Retention policy
-	RetentionRule *RetentionRule `json:"RetentionRule,omitnil" name:"RetentionRule"`
+	RetentionRule *RetentionRule `json:"RetentionRule,omitnil,omitempty" name:"RetentionRule"`
 
 	// Execution cycle. Valid values: manual, daily, weekly, monthly.
-	CronSetting *string `json:"CronSetting,omitnil" name:"CronSetting"`
+	CronSetting *string `json:"CronSetting,omitnil,omitempty" name:"CronSetting"`
 
 	// Whether to disable the rule. Default value: false.
-	Disabled *bool `json:"Disabled,omitnil" name:"Disabled"`
+	Disabled *bool `json:"Disabled,omitnil,omitempty" name:"Disabled"`
 }
 
 type CreateTagRetentionRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace ID
-	NamespaceId *int64 `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *int64 `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Retention policy
-	RetentionRule *RetentionRule `json:"RetentionRule,omitnil" name:"RetentionRule"`
+	RetentionRule *RetentionRule `json:"RetentionRule,omitnil,omitempty" name:"RetentionRule"`
 
 	// Execution cycle. Valid values: manual, daily, weekly, monthly.
-	CronSetting *string `json:"CronSetting,omitnil" name:"CronSetting"`
+	CronSetting *string `json:"CronSetting,omitnil,omitempty" name:"CronSetting"`
 
 	// Whether to disable the rule. Default value: false.
-	Disabled *bool `json:"Disabled,omitnil" name:"Disabled"`
+	Disabled *bool `json:"Disabled,omitnil,omitempty" name:"Disabled"`
 }
 
 func (r *CreateTagRetentionRuleRequest) ToJsonString() string {
@@ -1462,7 +1462,7 @@ func (r *CreateTagRetentionRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTagRetentionRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateTagRetentionRuleResponse struct {
@@ -1484,26 +1484,26 @@ func (r *CreateTagRetentionRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateWebhookTriggerRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Trigger parameter
-	Trigger *WebhookTrigger `json:"Trigger,omitnil" name:"Trigger"`
+	Trigger *WebhookTrigger `json:"Trigger,omitnil,omitempty" name:"Trigger"`
 
 	// Namespace
-	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 }
 
 type CreateWebhookTriggerRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Trigger parameter
-	Trigger *WebhookTrigger `json:"Trigger,omitnil" name:"Trigger"`
+	Trigger *WebhookTrigger `json:"Trigger,omitnil,omitempty" name:"Trigger"`
 
 	// Namespace
-	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 }
 
 func (r *CreateWebhookTriggerRequest) ToJsonString() string {
@@ -1530,10 +1530,10 @@ func (r *CreateWebhookTriggerRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateWebhookTriggerResponseParams struct {
 	// Newly created trigger
-	Trigger *WebhookTrigger `json:"Trigger,omitnil" name:"Trigger"`
+	Trigger *WebhookTrigger `json:"Trigger,omitnil,omitempty" name:"Trigger"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateWebhookTriggerResponse struct {
@@ -1555,64 +1555,64 @@ func (r *CreateWebhookTriggerResponse) FromJsonString(s string) error {
 type CustomAccount struct {
 	// Custom account name
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Description
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Whether to disable
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Disable *bool `json:"Disable,omitnil" name:"Disable"`
+	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
 
 	// Expiry time
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil" name:"ExpiresAt"`
+	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
 
 	// Creation time
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Update time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Policy
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Permissions []*Permission `json:"Permissions,omitnil" name:"Permissions"`
+	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
 }
 
 type CustomizedDomainInfo struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Certificate ID
-	CertId *string `json:"CertId,omitnil" name:"CertId"`
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
 
 	// Domain name
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Domain name creation status. Valid values: SUCCESS, FAILURE, CREATING, DELETING.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 // Predefined struct for user
 type DeleteCustomAccountRequestParams struct {
 	// Instance ID	
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Custom account name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DeleteCustomAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID	
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Custom account name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DeleteCustomAccountRequest) ToJsonString() string {
@@ -1638,7 +1638,7 @@ func (r *DeleteCustomAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteCustomAccountResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteCustomAccountResponse struct {
@@ -1660,14 +1660,14 @@ func (r *DeleteCustomAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteImageAccelerateServiceRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 type DeleteImageAccelerateServiceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 func (r *DeleteImageAccelerateServiceRequest) ToJsonString() string {
@@ -1692,7 +1692,7 @@ func (r *DeleteImageAccelerateServiceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteImageAccelerateServiceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteImageAccelerateServiceResponse struct {
@@ -1714,32 +1714,32 @@ func (r *DeleteImageAccelerateServiceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteImageRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Image repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Image tag
-	ImageVersion *string `json:"ImageVersion,omitnil" name:"ImageVersion"`
+	ImageVersion *string `json:"ImageVersion,omitnil,omitempty" name:"ImageVersion"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 }
 
 type DeleteImageRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Image repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Image tag
-	ImageVersion *string `json:"ImageVersion,omitnil" name:"ImageVersion"`
+	ImageVersion *string `json:"ImageVersion,omitnil,omitempty" name:"ImageVersion"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 }
 
 func (r *DeleteImageRequest) ToJsonString() string {
@@ -1767,7 +1767,7 @@ func (r *DeleteImageRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteImageResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteImageResponse struct {
@@ -1789,26 +1789,26 @@ func (r *DeleteImageResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteImmutableTagRulesRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Rule ID
-	RuleId *int64 `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *int64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 }
 
 type DeleteImmutableTagRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Rule ID
-	RuleId *int64 `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *int64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 }
 
 func (r *DeleteImmutableTagRulesRequest) ToJsonString() string {
@@ -1835,7 +1835,7 @@ func (r *DeleteImmutableTagRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteImmutableTagRulesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteImmutableTagRulesResponse struct {
@@ -1857,26 +1857,26 @@ func (r *DeleteImmutableTagRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteInstanceCustomizedDomainRequestParams struct {
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Custom domain name
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Certificate ID
-	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+	CertificateId *string `json:"CertificateId,omitnil,omitempty" name:"CertificateId"`
 }
 
 type DeleteInstanceCustomizedDomainRequest struct {
 	*tchttp.BaseRequest
 	
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Custom domain name
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Certificate ID
-	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+	CertificateId *string `json:"CertificateId,omitnil,omitempty" name:"CertificateId"`
 }
 
 func (r *DeleteInstanceCustomizedDomainRequest) ToJsonString() string {
@@ -1903,7 +1903,7 @@ func (r *DeleteInstanceCustomizedDomainRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteInstanceCustomizedDomainResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteInstanceCustomizedDomainResponse struct {
@@ -1925,26 +1925,26 @@ func (r *DeleteInstanceCustomizedDomainResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DeleteInstanceRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Whether to delete the bucket. Default value: false.
-	DeleteBucket *bool `json:"DeleteBucket,omitnil" name:"DeleteBucket"`
+	DeleteBucket *bool `json:"DeleteBucket,omitnil,omitempty" name:"DeleteBucket"`
 
 	// Whether to enable the `dryRun` mode. Default value: false.
-	DryRun *bool `json:"DryRun,omitnil" name:"DryRun"`
+	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 }
 
 type DeleteInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Whether to delete the bucket. Default value: false.
-	DeleteBucket *bool `json:"DeleteBucket,omitnil" name:"DeleteBucket"`
+	DeleteBucket *bool `json:"DeleteBucket,omitnil,omitempty" name:"DeleteBucket"`
 
 	// Whether to enable the `dryRun` mode. Default value: false.
-	DryRun *bool `json:"DryRun,omitnil" name:"DryRun"`
+	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 }
 
 func (r *DeleteInstanceRequest) ToJsonString() string {
@@ -1971,7 +1971,7 @@ func (r *DeleteInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteInstanceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteInstanceResponse struct {
@@ -1993,20 +1993,20 @@ func (r *DeleteInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteInstanceTokenRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Access credential ID
-	TokenId *string `json:"TokenId,omitnil" name:"TokenId"`
+	TokenId *string `json:"TokenId,omitnil,omitempty" name:"TokenId"`
 }
 
 type DeleteInstanceTokenRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Access credential ID
-	TokenId *string `json:"TokenId,omitnil" name:"TokenId"`
+	TokenId *string `json:"TokenId,omitnil,omitempty" name:"TokenId"`
 }
 
 func (r *DeleteInstanceTokenRequest) ToJsonString() string {
@@ -2032,7 +2032,7 @@ func (r *DeleteInstanceTokenRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteInstanceTokenResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteInstanceTokenResponse struct {
@@ -2054,20 +2054,20 @@ func (r *DeleteInstanceTokenResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteMultipleSecurityPolicyRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Security group policy
-	SecurityGroupPolicySet []*SecurityPolicy `json:"SecurityGroupPolicySet,omitnil" name:"SecurityGroupPolicySet"`
+	SecurityGroupPolicySet []*SecurityPolicy `json:"SecurityGroupPolicySet,omitnil,omitempty" name:"SecurityGroupPolicySet"`
 }
 
 type DeleteMultipleSecurityPolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Security group policy
-	SecurityGroupPolicySet []*SecurityPolicy `json:"SecurityGroupPolicySet,omitnil" name:"SecurityGroupPolicySet"`
+	SecurityGroupPolicySet []*SecurityPolicy `json:"SecurityGroupPolicySet,omitnil,omitempty" name:"SecurityGroupPolicySet"`
 }
 
 func (r *DeleteMultipleSecurityPolicyRequest) ToJsonString() string {
@@ -2093,10 +2093,10 @@ func (r *DeleteMultipleSecurityPolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteMultipleSecurityPolicyResponseParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteMultipleSecurityPolicyResponse struct {
@@ -2118,20 +2118,20 @@ func (r *DeleteMultipleSecurityPolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteNamespaceRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 }
 
 type DeleteNamespaceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 }
 
 func (r *DeleteNamespaceRequest) ToJsonString() string {
@@ -2157,7 +2157,7 @@ func (r *DeleteNamespaceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteNamespaceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteNamespaceResponse struct {
@@ -2179,26 +2179,26 @@ func (r *DeleteNamespaceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteReplicationInstanceRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Replica instance ID
-	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil" name:"ReplicationRegistryId"`
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil,omitempty" name:"ReplicationRegistryId"`
 
 	// Region ID of the replica instance
-	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil" name:"ReplicationRegionId"`
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil,omitempty" name:"ReplicationRegionId"`
 }
 
 type DeleteReplicationInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Replica instance ID
-	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil" name:"ReplicationRegistryId"`
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil,omitempty" name:"ReplicationRegistryId"`
 
 	// Region ID of the replica instance
-	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil" name:"ReplicationRegionId"`
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil,omitempty" name:"ReplicationRegionId"`
 }
 
 func (r *DeleteReplicationInstanceRequest) ToJsonString() string {
@@ -2225,7 +2225,7 @@ func (r *DeleteReplicationInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteReplicationInstanceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteReplicationInstanceResponse struct {
@@ -2247,26 +2247,26 @@ func (r *DeleteReplicationInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteRepositoryRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Image repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 }
 
 type DeleteRepositoryRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Image repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 }
 
 func (r *DeleteRepositoryRequest) ToJsonString() string {
@@ -2293,7 +2293,7 @@ func (r *DeleteRepositoryRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteRepositoryResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteRepositoryResponse struct {
@@ -2315,32 +2315,32 @@ func (r *DeleteRepositoryResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteRepositoryTagsRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// List of tags. Up to 20 tags can be returned for a request.
-	Tags []*string `json:"Tags,omitnil" name:"Tags"`
+	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type DeleteRepositoryTagsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// List of tags. Up to 20 tags can be returned for a request.
-	Tags []*string `json:"Tags,omitnil" name:"Tags"`
+	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *DeleteRepositoryTagsRequest) ToJsonString() string {
@@ -2368,7 +2368,7 @@ func (r *DeleteRepositoryTagsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteRepositoryTagsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteRepositoryTagsResponse struct {
@@ -2390,32 +2390,32 @@ func (r *DeleteRepositoryTagsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSecurityPolicyRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Allowlist ID
-	PolicyIndex *int64 `json:"PolicyIndex,omitnil" name:"PolicyIndex"`
+	PolicyIndex *int64 `json:"PolicyIndex,omitnil,omitempty" name:"PolicyIndex"`
 
 	// Allowlist version
-	PolicyVersion *string `json:"PolicyVersion,omitnil" name:"PolicyVersion"`
+	PolicyVersion *string `json:"PolicyVersion,omitnil,omitempty" name:"PolicyVersion"`
 
 	// IP range or IP address (mutually exclusive).
-	CidrBlock *string `json:"CidrBlock,omitnil" name:"CidrBlock"`
+	CidrBlock *string `json:"CidrBlock,omitnil,omitempty" name:"CidrBlock"`
 }
 
 type DeleteSecurityPolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Allowlist ID
-	PolicyIndex *int64 `json:"PolicyIndex,omitnil" name:"PolicyIndex"`
+	PolicyIndex *int64 `json:"PolicyIndex,omitnil,omitempty" name:"PolicyIndex"`
 
 	// Allowlist version
-	PolicyVersion *string `json:"PolicyVersion,omitnil" name:"PolicyVersion"`
+	PolicyVersion *string `json:"PolicyVersion,omitnil,omitempty" name:"PolicyVersion"`
 
 	// IP range or IP address (mutually exclusive).
-	CidrBlock *string `json:"CidrBlock,omitnil" name:"CidrBlock"`
+	CidrBlock *string `json:"CidrBlock,omitnil,omitempty" name:"CidrBlock"`
 }
 
 func (r *DeleteSecurityPolicyRequest) ToJsonString() string {
@@ -2443,10 +2443,10 @@ func (r *DeleteSecurityPolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSecurityPolicyResponseParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteSecurityPolicyResponse struct {
@@ -2468,20 +2468,20 @@ func (r *DeleteSecurityPolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteServiceAccountRequestParams struct {
 	// Instance ID	
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Service account name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DeleteServiceAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID	
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Service account name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DeleteServiceAccountRequest) ToJsonString() string {
@@ -2507,7 +2507,7 @@ func (r *DeleteServiceAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteServiceAccountResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteServiceAccountResponse struct {
@@ -2529,20 +2529,20 @@ func (r *DeleteServiceAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSignaturePolicyRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 }
 
 type DeleteSignaturePolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 }
 
 func (r *DeleteSignaturePolicyRequest) ToJsonString() string {
@@ -2568,7 +2568,7 @@ func (r *DeleteSignaturePolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSignaturePolicyResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteSignaturePolicyResponse struct {
@@ -2590,20 +2590,20 @@ func (r *DeleteSignaturePolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteTagRetentionRuleRequestParams struct {
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Tag retention rule ID
-	RetentionId *int64 `json:"RetentionId,omitnil" name:"RetentionId"`
+	RetentionId *int64 `json:"RetentionId,omitnil,omitempty" name:"RetentionId"`
 }
 
 type DeleteTagRetentionRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Tag retention rule ID
-	RetentionId *int64 `json:"RetentionId,omitnil" name:"RetentionId"`
+	RetentionId *int64 `json:"RetentionId,omitnil,omitempty" name:"RetentionId"`
 }
 
 func (r *DeleteTagRetentionRuleRequest) ToJsonString() string {
@@ -2629,7 +2629,7 @@ func (r *DeleteTagRetentionRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteTagRetentionRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteTagRetentionRuleResponse struct {
@@ -2651,26 +2651,26 @@ func (r *DeleteTagRetentionRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteWebhookTriggerRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace
-	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
 	// Trigger ID
-	Id *int64 `json:"Id,omitnil" name:"Id"`
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 type DeleteWebhookTriggerRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace
-	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
 	// Trigger ID
-	Id *int64 `json:"Id,omitnil" name:"Id"`
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 func (r *DeleteWebhookTriggerRequest) ToJsonString() string {
@@ -2697,7 +2697,7 @@ func (r *DeleteWebhookTriggerRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteWebhookTriggerResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteWebhookTriggerResponse struct {
@@ -2719,32 +2719,32 @@ func (r *DeleteWebhookTriggerResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeChartDownloadInfoRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Chart name
-	ChartName *string `json:"ChartName,omitnil" name:"ChartName"`
+	ChartName *string `json:"ChartName,omitnil,omitempty" name:"ChartName"`
 
 	// Chart version
-	ChartVersion *string `json:"ChartVersion,omitnil" name:"ChartVersion"`
+	ChartVersion *string `json:"ChartVersion,omitnil,omitempty" name:"ChartVersion"`
 }
 
 type DescribeChartDownloadInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Chart name
-	ChartName *string `json:"ChartName,omitnil" name:"ChartName"`
+	ChartName *string `json:"ChartName,omitnil,omitempty" name:"ChartName"`
 
 	// Chart version
-	ChartVersion *string `json:"ChartVersion,omitnil" name:"ChartVersion"`
+	ChartVersion *string `json:"ChartVersion,omitnil,omitempty" name:"ChartVersion"`
 }
 
 func (r *DescribeChartDownloadInfoRequest) ToJsonString() string {
@@ -2772,10 +2772,10 @@ func (r *DescribeChartDownloadInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeChartDownloadInfoResponseParams struct {
 	// Presigned URL for download
-	PreSignedDownloadURL *string `json:"PreSignedDownloadURL,omitnil" name:"PreSignedDownloadURL"`
+	PreSignedDownloadURL *string `json:"PreSignedDownloadURL,omitnil,omitempty" name:"PreSignedDownloadURL"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeChartDownloadInfoResponse struct {
@@ -2797,44 +2797,44 @@ func (r *DescribeChartDownloadInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCustomAccountsRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// All custom accounts
-	All *bool `json:"All,omitnil" name:"All"`
+	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
 	// Whether to enter the policy
-	EmbedPermission *bool `json:"EmbedPermission,omitnil" name:"EmbedPermission"`
+	EmbedPermission *bool `json:"EmbedPermission,omitnil,omitempty" name:"EmbedPermission"`
 
 	// Filters
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: `0`
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of output entries. Default value: `20`. Maximum value: 100`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeCustomAccountsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// All custom accounts
-	All *bool `json:"All,omitnil" name:"All"`
+	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
 	// Whether to enter the policy
-	EmbedPermission *bool `json:"EmbedPermission,omitnil" name:"EmbedPermission"`
+	EmbedPermission *bool `json:"EmbedPermission,omitnil,omitempty" name:"EmbedPermission"`
 
 	// Filters
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: `0`
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of output entries. Default value: `20`. Maximum value: 100`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeCustomAccountsRequest) ToJsonString() string {
@@ -2865,13 +2865,13 @@ func (r *DescribeCustomAccountsRequest) FromJsonString(s string) error {
 type DescribeCustomAccountsResponseParams struct {
 	// List of custom accounts
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	CustomAccounts []*CustomAccount `json:"CustomAccounts,omitnil" name:"CustomAccounts"`
+	CustomAccounts []*CustomAccount `json:"CustomAccounts,omitnil,omitempty" name:"CustomAccounts"`
 
 	// Number of custom accounts
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeCustomAccountsResponse struct {
@@ -2893,14 +2893,14 @@ func (r *DescribeCustomAccountsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeExternalEndpointStatusRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 type DescribeExternalEndpointStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 func (r *DescribeExternalEndpointStatusRequest) ToJsonString() string {
@@ -2925,14 +2925,14 @@ func (r *DescribeExternalEndpointStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeExternalEndpointStatusResponseParams struct {
 	// Public network access status. Valid values: Opening, Opened, Closed.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Reason
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Reason *string `json:"Reason,omitnil" name:"Reason"`
+	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeExternalEndpointStatusResponse struct {
@@ -2954,14 +2954,14 @@ func (r *DescribeExternalEndpointStatusResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeGCJobsRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 type DescribeGCJobsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 func (r *DescribeGCJobsRequest) ToJsonString() string {
@@ -2986,10 +2986,10 @@ func (r *DescribeGCJobsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeGCJobsResponseParams struct {
 	// List of GC jobs
-	Jobs []*GCJobInfo `json:"Jobs,omitnil" name:"Jobs"`
+	Jobs []*GCJobInfo `json:"Jobs,omitnil,omitempty" name:"Jobs"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeGCJobsResponse struct {
@@ -3011,14 +3011,14 @@ func (r *DescribeGCJobsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeImageAccelerateServiceRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 type DescribeImageAccelerateServiceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 func (r *DescribeImageAccelerateServiceRequest) ToJsonString() string {
@@ -3043,16 +3043,16 @@ func (r *DescribeImageAccelerateServiceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeImageAccelerateServiceResponseParams struct {
 	// Image acceleration status
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// CFS VIP
-	CFSVIP *string `json:"CFSVIP,omitnil" name:"CFSVIP"`
+	CFSVIP *string `json:"CFSVIP,omitnil,omitempty" name:"CFSVIP"`
 
 	// Whether to enable
-	IsEnable *bool `json:"IsEnable,omitnil" name:"IsEnable"`
+	IsEnable *bool `json:"IsEnable,omitnil,omitempty" name:"IsEnable"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeImageAccelerateServiceResponse struct {
@@ -3074,32 +3074,32 @@ func (r *DescribeImageAccelerateServiceResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeImageManifestsRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Image repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Image tag
-	ImageVersion *string `json:"ImageVersion,omitnil" name:"ImageVersion"`
+	ImageVersion *string `json:"ImageVersion,omitnil,omitempty" name:"ImageVersion"`
 }
 
 type DescribeImageManifestsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Image repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Image tag
-	ImageVersion *string `json:"ImageVersion,omitnil" name:"ImageVersion"`
+	ImageVersion *string `json:"ImageVersion,omitnil,omitempty" name:"ImageVersion"`
 }
 
 func (r *DescribeImageManifestsRequest) ToJsonString() string {
@@ -3127,13 +3127,13 @@ func (r *DescribeImageManifestsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeImageManifestsResponseParams struct {
 	// Image manifest information
-	Manifest *string `json:"Manifest,omitnil" name:"Manifest"`
+	Manifest *string `json:"Manifest,omitnil,omitempty" name:"Manifest"`
 
 	// Image configuration information
-	Config *string `json:"Config,omitnil" name:"Config"`
+	Config *string `json:"Config,omitnil,omitempty" name:"Config"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeImageManifestsResponse struct {
@@ -3155,56 +3155,56 @@ func (r *DescribeImageManifestsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeImagesRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Image repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Image tag specified for fuzzy search
-	ImageVersion *string `json:"ImageVersion,omitnil" name:"ImageVersion"`
+	ImageVersion *string `json:"ImageVersion,omitnil,omitempty" name:"ImageVersion"`
 
 	// Number of entries per page, which is used for pagination. Default value: 20.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number. Default value: 1.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Image digest specified for search
-	Digest *string `json:"Digest,omitnil" name:"Digest"`
+	Digest *string `json:"Digest,omitnil,omitempty" name:"Digest"`
 
 	// Whether to use exact matching. Valid values: `true` (exact matching), `null` (fuzzy matching).
-	ExactMatch *bool `json:"ExactMatch,omitnil" name:"ExactMatch"`
+	ExactMatch *bool `json:"ExactMatch,omitnil,omitempty" name:"ExactMatch"`
 }
 
 type DescribeImagesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Image repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Image tag specified for fuzzy search
-	ImageVersion *string `json:"ImageVersion,omitnil" name:"ImageVersion"`
+	ImageVersion *string `json:"ImageVersion,omitnil,omitempty" name:"ImageVersion"`
 
 	// Number of entries per page, which is used for pagination. Default value: 20.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number. Default value: 1.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Image digest specified for search
-	Digest *string `json:"Digest,omitnil" name:"Digest"`
+	Digest *string `json:"Digest,omitnil,omitempty" name:"Digest"`
 
 	// Whether to use exact matching. Valid values: `true` (exact matching), `null` (fuzzy matching).
-	ExactMatch *bool `json:"ExactMatch,omitnil" name:"ExactMatch"`
+	ExactMatch *bool `json:"ExactMatch,omitnil,omitempty" name:"ExactMatch"`
 }
 
 func (r *DescribeImagesRequest) ToJsonString() string {
@@ -3236,13 +3236,13 @@ func (r *DescribeImagesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeImagesResponseParams struct {
 	// List of container images
-	ImageInfoList []*TcrImageInfo `json:"ImageInfoList,omitnil" name:"ImageInfoList"`
+	ImageInfoList []*TcrImageInfo `json:"ImageInfoList,omitnil,omitempty" name:"ImageInfoList"`
 
 	// Total number of container images
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeImagesResponse struct {
@@ -3264,14 +3264,14 @@ func (r *DescribeImagesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeImmutableTagRulesRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 type DescribeImmutableTagRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 func (r *DescribeImmutableTagRulesRequest) ToJsonString() string {
@@ -3297,17 +3297,17 @@ func (r *DescribeImmutableTagRulesRequest) FromJsonString(s string) error {
 type DescribeImmutableTagRulesResponseParams struct {
 	// Rule list
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	Rules []*ImmutableTagRule `json:"Rules,omitnil" name:"Rules"`
+	Rules []*ImmutableTagRule `json:"Rules,omitnil,omitempty" name:"Rules"`
 
 	// Namespace with no rules created
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	EmptyNs []*string `json:"EmptyNs,omitnil" name:"EmptyNs"`
+	EmptyNs []*string `json:"EmptyNs,omitnil,omitempty" name:"EmptyNs"`
 
 	// Total rules
-	Total *int64 `json:"Total,omitnil" name:"Total"`
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeImmutableTagRulesResponse struct {
@@ -3329,20 +3329,20 @@ func (r *DescribeImmutableTagRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceAllNamespacesRequestParams struct {
 	// Number of entries per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Start position offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeInstanceAllNamespacesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Number of entries per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Start position offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeInstanceAllNamespacesRequest) ToJsonString() string {
@@ -3368,7 +3368,7 @@ func (r *DescribeInstanceAllNamespacesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceAllNamespacesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceAllNamespacesResponse struct {
@@ -3390,26 +3390,26 @@ func (r *DescribeInstanceAllNamespacesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceCustomizedDomainRequestParams struct {
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Pagination limit
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeInstanceCustomizedDomainRequest struct {
 	*tchttp.BaseRequest
 	
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Pagination limit
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeInstanceCustomizedDomainRequest) ToJsonString() string {
@@ -3437,13 +3437,13 @@ func (r *DescribeInstanceCustomizedDomainRequest) FromJsonString(s string) error
 type DescribeInstanceCustomizedDomainResponseParams struct {
 	// List of domain names
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DomainInfoList []*CustomizedDomainInfo `json:"DomainInfoList,omitnil" name:"DomainInfoList"`
+	DomainInfoList []*CustomizedDomainInfo `json:"DomainInfoList,omitnil,omitempty" name:"DomainInfoList"`
 
 	// Total number
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceCustomizedDomainResponse struct {
@@ -3465,14 +3465,14 @@ func (r *DescribeInstanceCustomizedDomainResponse) FromJsonString(s string) erro
 // Predefined struct for user
 type DescribeInstanceStatusRequestParams struct {
 	// Array of instance IDs
-	RegistryIds []*string `json:"RegistryIds,omitnil" name:"RegistryIds"`
+	RegistryIds []*string `json:"RegistryIds,omitnil,omitempty" name:"RegistryIds"`
 }
 
 type DescribeInstanceStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Array of instance IDs
-	RegistryIds []*string `json:"RegistryIds,omitnil" name:"RegistryIds"`
+	RegistryIds []*string `json:"RegistryIds,omitnil,omitempty" name:"RegistryIds"`
 }
 
 func (r *DescribeInstanceStatusRequest) ToJsonString() string {
@@ -3498,10 +3498,10 @@ func (r *DescribeInstanceStatusRequest) FromJsonString(s string) error {
 type DescribeInstanceStatusResponseParams struct {
 	// List of instance statuses
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RegistryStatusSet []*RegistryStatus `json:"RegistryStatusSet,omitnil" name:"RegistryStatusSet"`
+	RegistryStatusSet []*RegistryStatus `json:"RegistryStatusSet,omitnil,omitempty" name:"RegistryStatusSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceStatusResponse struct {
@@ -3523,26 +3523,26 @@ func (r *DescribeInstanceStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceTokenRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Number of entries per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeInstanceTokenRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Number of entries per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeInstanceTokenRequest) ToJsonString() string {
@@ -3569,13 +3569,13 @@ func (r *DescribeInstanceTokenRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceTokenResponseParams struct {
 	// Total number of long-term access credentials
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of long-term access credentials
-	Tokens []*TcrInstanceToken `json:"Tokens,omitnil" name:"Tokens"`
+	Tokens []*TcrInstanceToken `json:"Tokens,omitnil,omitempty" name:"Tokens"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceTokenResponse struct {
@@ -3598,19 +3598,19 @@ func (r *DescribeInstanceTokenResponse) FromJsonString(s string) error {
 type DescribeInstancesRequestParams struct {
 	// List of instance IDs (if it is empty,
 	// it indicates to get all instances under the current account)
-	Registryids []*string `json:"Registryids,omitnil" name:"Registryids"`
+	Registryids []*string `json:"Registryids,omitnil,omitempty" name:"Registryids"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of output entries. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filters
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Whether to get the instances in all regions. Default value: False.
-	AllRegion *bool `json:"AllRegion,omitnil" name:"AllRegion"`
+	AllRegion *bool `json:"AllRegion,omitnil,omitempty" name:"AllRegion"`
 }
 
 type DescribeInstancesRequest struct {
@@ -3618,19 +3618,19 @@ type DescribeInstancesRequest struct {
 	
 	// List of instance IDs (if it is empty,
 	// it indicates to get all instances under the current account)
-	Registryids []*string `json:"Registryids,omitnil" name:"Registryids"`
+	Registryids []*string `json:"Registryids,omitnil,omitempty" name:"Registryids"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of output entries. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filters
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Whether to get the instances in all regions. Default value: False.
-	AllRegion *bool `json:"AllRegion,omitnil" name:"AllRegion"`
+	AllRegion *bool `json:"AllRegion,omitnil,omitempty" name:"AllRegion"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -3659,14 +3659,14 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstancesResponseParams struct {
 	// Total number of instances
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of instances
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Registries []*Registry `json:"Registries,omitnil" name:"Registries"`
+	Registries []*Registry `json:"Registries,omitnil,omitempty" name:"Registries"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstancesResponse struct {
@@ -3688,14 +3688,14 @@ func (r *DescribeInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInternalEndpointsRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 type DescribeInternalEndpointsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 func (r *DescribeInternalEndpointsRequest) ToJsonString() string {
@@ -3721,13 +3721,13 @@ func (r *DescribeInternalEndpointsRequest) FromJsonString(s string) error {
 type DescribeInternalEndpointsResponseParams struct {
 	// List of private network access addresses
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AccessVpcSet []*AccessVpc `json:"AccessVpcSet,omitnil" name:"AccessVpcSet"`
+	AccessVpcSet []*AccessVpc `json:"AccessVpcSet,omitnil,omitempty" name:"AccessVpcSet"`
 
 	// Total number of private network access addresses
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInternalEndpointsResponse struct {
@@ -3749,50 +3749,50 @@ func (r *DescribeInternalEndpointsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeNamespacesRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Specified namespace. If this parameter is left empty, all namespaces will be queried.
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Number of entries per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page offset (page number from which to return the results)
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Whether to list all namespaces
-	All *bool `json:"All,omitnil" name:"All"`
+	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
 	// Filters
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Whether to query only namespaces for which the KMS image signature is enabled
-	KmsSignPolicy *bool `json:"KmsSignPolicy,omitnil" name:"KmsSignPolicy"`
+	KmsSignPolicy *bool `json:"KmsSignPolicy,omitnil,omitempty" name:"KmsSignPolicy"`
 }
 
 type DescribeNamespacesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Specified namespace. If this parameter is left empty, all namespaces will be queried.
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Number of entries per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page offset (page number from which to return the results)
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Whether to list all namespaces
-	All *bool `json:"All,omitnil" name:"All"`
+	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
 	// Filters
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Whether to query only namespaces for which the KMS image signature is enabled
-	KmsSignPolicy *bool `json:"KmsSignPolicy,omitnil" name:"KmsSignPolicy"`
+	KmsSignPolicy *bool `json:"KmsSignPolicy,omitnil,omitempty" name:"KmsSignPolicy"`
 }
 
 func (r *DescribeNamespacesRequest) ToJsonString() string {
@@ -3823,13 +3823,13 @@ func (r *DescribeNamespacesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeNamespacesResponseParams struct {
 	// List of namespaces
-	NamespaceList []*TcrNamespaceInfo `json:"NamespaceList,omitnil" name:"NamespaceList"`
+	NamespaceList []*TcrNamespaceInfo `json:"NamespaceList,omitnil,omitempty" name:"NamespaceList"`
 
 	// Total number
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeNamespacesResponse struct {
@@ -3880,13 +3880,13 @@ func (r *DescribeRegionsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRegionsResponseParams struct {
 	// Total number of returned results
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of regions
-	Regions []*Region `json:"Regions,omitnil" name:"Regions"`
+	Regions []*Region `json:"Regions,omitnil,omitempty" name:"Regions"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRegionsResponse struct {
@@ -3908,20 +3908,20 @@ func (r *DescribeRegionsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeReplicationInstanceCreateTasksRequestParams struct {
 	// Replication instance ID
-	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil" name:"ReplicationRegistryId"`
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil,omitempty" name:"ReplicationRegistryId"`
 
 	// Region ID of the replication instance
-	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil" name:"ReplicationRegionId"`
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil,omitempty" name:"ReplicationRegionId"`
 }
 
 type DescribeReplicationInstanceCreateTasksRequest struct {
 	*tchttp.BaseRequest
 	
 	// Replication instance ID
-	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil" name:"ReplicationRegistryId"`
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil,omitempty" name:"ReplicationRegistryId"`
 
 	// Region ID of the replication instance
-	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil" name:"ReplicationRegionId"`
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil,omitempty" name:"ReplicationRegionId"`
 }
 
 func (r *DescribeReplicationInstanceCreateTasksRequest) ToJsonString() string {
@@ -3947,13 +3947,13 @@ func (r *DescribeReplicationInstanceCreateTasksRequest) FromJsonString(s string)
 // Predefined struct for user
 type DescribeReplicationInstanceCreateTasksResponseParams struct {
 	// Task details
-	TaskDetail []*TaskDetail `json:"TaskDetail,omitnil" name:"TaskDetail"`
+	TaskDetail []*TaskDetail `json:"TaskDetail,omitnil,omitempty" name:"TaskDetail"`
 
 	// Overall task status
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeReplicationInstanceCreateTasksResponse struct {
@@ -3975,44 +3975,44 @@ func (r *DescribeReplicationInstanceCreateTasksResponse) FromJsonString(s string
 // Predefined struct for user
 type DescribeReplicationInstanceSyncStatusRequestParams struct {
 	// Master instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Replication instance ID
-	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil" name:"ReplicationRegistryId"`
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil,omitempty" name:"ReplicationRegistryId"`
 
 	// Region ID of the replication instance
-	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil" name:"ReplicationRegionId"`
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil,omitempty" name:"ReplicationRegionId"`
 
 	// Whether to show the synchronization log
-	ShowReplicationLog *bool `json:"ShowReplicationLog,omitnil" name:"ShowReplicationLog"`
+	ShowReplicationLog *bool `json:"ShowReplicationLog,omitnil,omitempty" name:"ShowReplicationLog"`
 
 	// Page offset for log display. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of output entries. Default value: 5, maximum value: 20.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeReplicationInstanceSyncStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Master instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Replication instance ID
-	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil" name:"ReplicationRegistryId"`
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil,omitempty" name:"ReplicationRegistryId"`
 
 	// Region ID of the replication instance
-	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil" name:"ReplicationRegionId"`
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil,omitempty" name:"ReplicationRegionId"`
 
 	// Whether to show the synchronization log
-	ShowReplicationLog *bool `json:"ShowReplicationLog,omitnil" name:"ShowReplicationLog"`
+	ShowReplicationLog *bool `json:"ShowReplicationLog,omitnil,omitempty" name:"ShowReplicationLog"`
 
 	// Page offset for log display. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of output entries. Default value: 5, maximum value: 20.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeReplicationInstanceSyncStatusRequest) ToJsonString() string {
@@ -4042,17 +4042,17 @@ func (r *DescribeReplicationInstanceSyncStatusRequest) FromJsonString(s string) 
 // Predefined struct for user
 type DescribeReplicationInstanceSyncStatusResponseParams struct {
 	// Synchronization status
-	ReplicationStatus *string `json:"ReplicationStatus,omitnil" name:"ReplicationStatus"`
+	ReplicationStatus *string `json:"ReplicationStatus,omitnil,omitempty" name:"ReplicationStatus"`
 
 	// Synchronization completion time
-	ReplicationTime *string `json:"ReplicationTime,omitnil" name:"ReplicationTime"`
+	ReplicationTime *string `json:"ReplicationTime,omitnil,omitempty" name:"ReplicationTime"`
 
 	// Synchronization log
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ReplicationLog *ReplicationLog `json:"ReplicationLog,omitnil" name:"ReplicationLog"`
+	ReplicationLog *ReplicationLog `json:"ReplicationLog,omitnil,omitempty" name:"ReplicationLog"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeReplicationInstanceSyncStatusResponse struct {
@@ -4074,26 +4074,26 @@ func (r *DescribeReplicationInstanceSyncStatusResponse) FromJsonString(s string)
 // Predefined struct for user
 type DescribeReplicationInstancesRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Offset. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of output entries. Default value: 20, maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeReplicationInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Offset. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of output entries. Default value: 20, maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeReplicationInstancesRequest) ToJsonString() string {
@@ -4120,14 +4120,14 @@ func (r *DescribeReplicationInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeReplicationInstancesResponseParams struct {
 	// Total number of instances
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Replication instance list
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ReplicationRegistries []*ReplicationRegistry `json:"ReplicationRegistries,omitnil" name:"ReplicationRegistries"`
+	ReplicationRegistries []*ReplicationRegistry `json:"ReplicationRegistries,omitnil,omitempty" name:"ReplicationRegistries"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeReplicationInstancesResponse struct {
@@ -4149,44 +4149,44 @@ func (r *DescribeReplicationInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRepositoriesRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Specified namespace. If this parameter is left empty, image repositories in all namespaces will be queried.
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Specified image repository. If this parameter is left empty, all image repositories in the specified namespace will be queried.
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Page number, which is used for pagination
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of entries per page, which is used for pagination
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Sort field. Valid values: -creation_time, -name, -update_time.
-	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
 }
 
 type DescribeRepositoriesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Specified namespace. If this parameter is left empty, image repositories in all namespaces will be queried.
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Specified image repository. If this parameter is left empty, all image repositories in the specified namespace will be queried.
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Page number, which is used for pagination
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of entries per page, which is used for pagination
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Sort field. Valid values: -creation_time, -name, -update_time.
-	SortBy *string `json:"SortBy,omitnil" name:"SortBy"`
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
 }
 
 func (r *DescribeRepositoriesRequest) ToJsonString() string {
@@ -4216,13 +4216,13 @@ func (r *DescribeRepositoriesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRepositoriesResponseParams struct {
 	// Repository information list
-	RepositoryList []*TcrRepositoryInfo `json:"RepositoryList,omitnil" name:"RepositoryList"`
+	RepositoryList []*TcrRepositoryInfo `json:"RepositoryList,omitnil,omitempty" name:"RepositoryList"`
 
 	// Total number
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRepositoriesResponse struct {
@@ -4244,14 +4244,14 @@ func (r *DescribeRepositoriesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecurityPoliciesRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 type DescribeSecurityPoliciesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 }
 
 func (r *DescribeSecurityPoliciesRequest) ToJsonString() string {
@@ -4277,10 +4277,10 @@ func (r *DescribeSecurityPoliciesRequest) FromJsonString(s string) error {
 type DescribeSecurityPoliciesResponseParams struct {
 	// Instance security policy group
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SecurityPolicySet []*SecurityPolicy `json:"SecurityPolicySet,omitnil" name:"SecurityPolicySet"`
+	SecurityPolicySet []*SecurityPolicy `json:"SecurityPolicySet,omitnil,omitempty" name:"SecurityPolicySet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeSecurityPoliciesResponse struct {
@@ -4302,44 +4302,44 @@ func (r *DescribeSecurityPoliciesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeServiceAccountsRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// All service accounts
-	All *bool `json:"All,omitnil" name:"All"`
+	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
 	// Whether to fill in permission information
-	EmbedPermission *bool `json:"EmbedPermission,omitnil" name:"EmbedPermission"`
+	EmbedPermission *bool `json:"EmbedPermission,omitnil,omitempty" name:"EmbedPermission"`
 
 	// Filters
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: `0`
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of output entries. Default value: `20`. Maximum value: `100`. The maximum value is automatically applied when a value exceeding it is entered.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeServiceAccountsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// All service accounts
-	All *bool `json:"All,omitnil" name:"All"`
+	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
 	// Whether to fill in permission information
-	EmbedPermission *bool `json:"EmbedPermission,omitnil" name:"EmbedPermission"`
+	EmbedPermission *bool `json:"EmbedPermission,omitnil,omitempty" name:"EmbedPermission"`
 
 	// Filters
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: `0`
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of output entries. Default value: `20`. Maximum value: `100`. The maximum value is automatically applied when a value exceeding it is entered.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeServiceAccountsRequest) ToJsonString() string {
@@ -4370,13 +4370,13 @@ func (r *DescribeServiceAccountsRequest) FromJsonString(s string) error {
 type DescribeServiceAccountsResponseParams struct {
 	// List of service accounts
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	ServiceAccounts []*ServiceAccount `json:"ServiceAccounts,omitnil" name:"ServiceAccounts"`
+	ServiceAccounts []*ServiceAccount `json:"ServiceAccounts,omitnil,omitempty" name:"ServiceAccounts"`
 
 	// Number of service accounts
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeServiceAccountsResponse struct {
@@ -4398,32 +4398,32 @@ func (r *DescribeServiceAccountsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTagRetentionExecutionRequestParams struct {
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Rule ID
-	RetentionId *int64 `json:"RetentionId,omitnil" name:"RetentionId"`
+	RetentionId *int64 `json:"RetentionId,omitnil,omitempty" name:"RetentionId"`
 
 	// `PageSize` for pagination
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeTagRetentionExecutionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Rule ID
-	RetentionId *int64 `json:"RetentionId,omitnil" name:"RetentionId"`
+	RetentionId *int64 `json:"RetentionId,omitnil,omitempty" name:"RetentionId"`
 
 	// `PageSize` for pagination
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeTagRetentionExecutionRequest) ToJsonString() string {
@@ -4451,13 +4451,13 @@ func (r *DescribeTagRetentionExecutionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTagRetentionExecutionResponseParams struct {
 	// List of tag retention execution records
-	RetentionExecutionList []*RetentionExecution `json:"RetentionExecutionList,omitnil" name:"RetentionExecutionList"`
+	RetentionExecutionList []*RetentionExecution `json:"RetentionExecutionList,omitnil,omitempty" name:"RetentionExecutionList"`
 
 	// Total number of tag retention execution records
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTagRetentionExecutionResponse struct {
@@ -4479,38 +4479,38 @@ func (r *DescribeTagRetentionExecutionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTagRetentionExecutionTaskRequestParams struct {
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Rule ID
-	RetentionId *int64 `json:"RetentionId,omitnil" name:"RetentionId"`
+	RetentionId *int64 `json:"RetentionId,omitnil,omitempty" name:"RetentionId"`
 
 	// Rule execution ID
-	ExecutionId *int64 `json:"ExecutionId,omitnil" name:"ExecutionId"`
+	ExecutionId *int64 `json:"ExecutionId,omitnil,omitempty" name:"ExecutionId"`
 
 	// Page offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// `PageSize` for pagination
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeTagRetentionExecutionTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Rule ID
-	RetentionId *int64 `json:"RetentionId,omitnil" name:"RetentionId"`
+	RetentionId *int64 `json:"RetentionId,omitnil,omitempty" name:"RetentionId"`
 
 	// Rule execution ID
-	ExecutionId *int64 `json:"ExecutionId,omitnil" name:"ExecutionId"`
+	ExecutionId *int64 `json:"ExecutionId,omitnil,omitempty" name:"ExecutionId"`
 
 	// Page offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// `PageSize` for pagination
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeTagRetentionExecutionTaskRequest) ToJsonString() string {
@@ -4539,13 +4539,13 @@ func (r *DescribeTagRetentionExecutionTaskRequest) FromJsonString(s string) erro
 // Predefined struct for user
 type DescribeTagRetentionExecutionTaskResponseParams struct {
 	// List of tag retention execution tasks
-	RetentionTaskList []*RetentionTask `json:"RetentionTaskList,omitnil" name:"RetentionTaskList"`
+	RetentionTaskList []*RetentionTask `json:"RetentionTaskList,omitnil,omitempty" name:"RetentionTaskList"`
 
 	// Total number of tag retention execution tasks
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTagRetentionExecutionTaskResponse struct {
@@ -4567,32 +4567,32 @@ func (r *DescribeTagRetentionExecutionTaskResponse) FromJsonString(s string) err
 // Predefined struct for user
 type DescribeTagRetentionRulesRequestParams struct {
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// `PageSize` for pagination
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeTagRetentionRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// `PageSize` for pagination
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeTagRetentionRulesRequest) ToJsonString() string {
@@ -4620,13 +4620,13 @@ func (r *DescribeTagRetentionRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTagRetentionRulesResponseParams struct {
 	// List of tag retention policies
-	RetentionPolicyList []*RetentionPolicy `json:"RetentionPolicyList,omitnil" name:"RetentionPolicyList"`
+	RetentionPolicyList []*RetentionPolicy `json:"RetentionPolicyList,omitnil,omitempty" name:"RetentionPolicyList"`
 
 	// Total number of tag retention policies
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTagRetentionRulesResponse struct {
@@ -4648,38 +4648,38 @@ func (r *DescribeTagRetentionRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeWebhookTriggerLogRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace
-	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
 	// Trigger ID
-	Id *int64 `json:"Id,omitnil" name:"Id"`
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Number of entries per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeWebhookTriggerLogRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace
-	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
 	// Trigger ID
-	Id *int64 `json:"Id,omitnil" name:"Id"`
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Number of entries per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeWebhookTriggerLogRequest) ToJsonString() string {
@@ -4708,13 +4708,13 @@ func (r *DescribeWebhookTriggerLogRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeWebhookTriggerLogResponseParams struct {
 	// Total number
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of logs
-	Logs []*WebhookTriggerLog `json:"Logs,omitnil" name:"Logs"`
+	Logs []*WebhookTriggerLog `json:"Logs,omitnil,omitempty" name:"Logs"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeWebhookTriggerLogResponse struct {
@@ -4736,32 +4736,32 @@ func (r *DescribeWebhookTriggerLogResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeWebhookTriggerRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Number of entries per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Namespace
-	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 }
 
 type DescribeWebhookTriggerRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Number of entries per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Namespace
-	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 }
 
 func (r *DescribeWebhookTriggerRequest) ToJsonString() string {
@@ -4789,13 +4789,13 @@ func (r *DescribeWebhookTriggerRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeWebhookTriggerResponseParams struct {
 	// Total number of triggers
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of triggers
-	Triggers []*WebhookTrigger `json:"Triggers,omitnil" name:"Triggers"`
+	Triggers []*WebhookTrigger `json:"Triggers,omitnil,omitempty" name:"Triggers"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeWebhookTriggerResponse struct {
@@ -4817,32 +4817,32 @@ func (r *DescribeWebhookTriggerResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DownloadHelmChartRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Helm chart name
-	ChartName *string `json:"ChartName,omitnil" name:"ChartName"`
+	ChartName *string `json:"ChartName,omitnil,omitempty" name:"ChartName"`
 
 	// Helm chart version
-	ChartVersion *string `json:"ChartVersion,omitnil" name:"ChartVersion"`
+	ChartVersion *string `json:"ChartVersion,omitnil,omitempty" name:"ChartVersion"`
 }
 
 type DownloadHelmChartRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Helm chart name
-	ChartName *string `json:"ChartName,omitnil" name:"ChartName"`
+	ChartName *string `json:"ChartName,omitnil,omitempty" name:"ChartName"`
 
 	// Helm chart version
-	ChartVersion *string `json:"ChartVersion,omitnil" name:"ChartVersion"`
+	ChartVersion *string `json:"ChartVersion,omitnil,omitempty" name:"ChartVersion"`
 }
 
 func (r *DownloadHelmChartRequest) ToJsonString() string {
@@ -4870,31 +4870,31 @@ func (r *DownloadHelmChartRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DownloadHelmChartResponseParams struct {
 	// Temporary token
-	TmpToken *string `json:"TmpToken,omitnil" name:"TmpToken"`
+	TmpToken *string `json:"TmpToken,omitnil,omitempty" name:"TmpToken"`
 
 	// Temporary `secretId`
-	TmpSecretId *string `json:"TmpSecretId,omitnil" name:"TmpSecretId"`
+	TmpSecretId *string `json:"TmpSecretId,omitnil,omitempty" name:"TmpSecretId"`
 
 	// Temporary `secretKey`
-	TmpSecretKey *string `json:"TmpSecretKey,omitnil" name:"TmpSecretKey"`
+	TmpSecretKey *string `json:"TmpSecretKey,omitnil,omitempty" name:"TmpSecretKey"`
 
 	// Bucket information
-	Bucket *string `json:"Bucket,omitnil" name:"Bucket"`
+	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
 	// Instance ID
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Chart information
-	Path *string `json:"Path,omitnil" name:"Path"`
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
 	// Start timestamp
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Token expiration timestamp
-	ExpiredTime *int64 `json:"ExpiredTime,omitnil" name:"ExpiredTime"`
+	ExpiredTime *int64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DownloadHelmChartResponse struct {
@@ -4915,85 +4915,85 @@ func (r *DownloadHelmChartResponse) FromJsonString(s string) error {
 
 type Filter struct {
 	// Attribute name. If more than one filter exists, the logical relationship between these filters is `AND`.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Attribute value. If multiple values exist in one filter, the logical relationship between these values is `OR`.
-	Values []*string `json:"Values,omitnil" name:"Values"`
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
 type GCJobInfo struct {
 	// Job ID
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Job status
-	JobStatus *string `json:"JobStatus,omitnil" name:"JobStatus"`
+	JobStatus *string `json:"JobStatus,omitnil,omitempty" name:"JobStatus"`
 
 	// Creation time
-	CreationTime *string `json:"CreationTime,omitnil" name:"CreationTime"`
+	CreationTime *string `json:"CreationTime,omitnil,omitempty" name:"CreationTime"`
 
 	// Update time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Scheduling information
-	Schedule *Schedule `json:"Schedule,omitnil" name:"Schedule"`
+	Schedule *Schedule `json:"Schedule,omitnil,omitempty" name:"Schedule"`
 }
 
 type Header struct {
 	// Header Key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Header Values
-	Values []*string `json:"Values,omitnil" name:"Values"`
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
 type ImmutableTagRule struct {
 	// Repository matching rule
-	RepositoryPattern *string `json:"RepositoryPattern,omitnil" name:"RepositoryPattern"`
+	RepositoryPattern *string `json:"RepositoryPattern,omitnil,omitempty" name:"RepositoryPattern"`
 
 	// Tag matching rule
-	TagPattern *string `json:"TagPattern,omitnil" name:"TagPattern"`
+	TagPattern *string `json:"TagPattern,omitnil,omitempty" name:"TagPattern"`
 
 	// repoMatches or repoExcludes
-	RepositoryDecoration *string `json:"RepositoryDecoration,omitnil" name:"RepositoryDecoration"`
+	RepositoryDecoration *string `json:"RepositoryDecoration,omitnil,omitempty" name:"RepositoryDecoration"`
 
 	// matches or excludes
-	TagDecoration *string `json:"TagDecoration,omitnil" name:"TagDecoration"`
+	TagDecoration *string `json:"TagDecoration,omitnil,omitempty" name:"TagDecoration"`
 
 	// Disabling rule
-	Disabled *bool `json:"Disabled,omitnil" name:"Disabled"`
+	Disabled *bool `json:"Disabled,omitnil,omitempty" name:"Disabled"`
 
 	// Rule ID
-	RuleId *int64 `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *int64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Namespace
-	NsName *string `json:"NsName,omitnil" name:"NsName"`
+	NsName *string `json:"NsName,omitnil,omitempty" name:"NsName"`
 }
 
 type KeyValueString struct {
 	// Key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Value
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 // Predefined struct for user
 type ManageExternalEndpointRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Operation. Valid values: Create, Delete.
-	Operation *string `json:"Operation,omitnil" name:"Operation"`
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 }
 
 type ManageExternalEndpointRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Operation. Valid values: Create, Delete.
-	Operation *string `json:"Operation,omitnil" name:"Operation"`
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 }
 
 func (r *ManageExternalEndpointRequest) ToJsonString() string {
@@ -5019,10 +5019,10 @@ func (r *ManageExternalEndpointRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ManageExternalEndpointResponseParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ManageExternalEndpointResponse struct {
@@ -5044,44 +5044,44 @@ func (r *ManageExternalEndpointResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ManageInternalEndpointRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Create/Delete
-	Operation *string `json:"Operation,omitnil" name:"Operation"`
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
 	// ID of the VPC to be connected to
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// ID of the subnet to be connected to
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// ID of the requested region, which is used as the region of the replica instance
-	RegionId *uint64 `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *uint64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Name of the requested region, which is used as the region of the replica instance
-	RegionName *string `json:"RegionName,omitnil" name:"RegionName"`
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
 }
 
 type ManageInternalEndpointRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Create/Delete
-	Operation *string `json:"Operation,omitnil" name:"Operation"`
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
 	// ID of the VPC to be connected to
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// ID of the subnet to be connected to
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// ID of the requested region, which is used as the region of the replica instance
-	RegionId *uint64 `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *uint64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Name of the requested region, which is used as the region of the replica instance
-	RegionName *string `json:"RegionName,omitnil" name:"RegionName"`
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
 }
 
 func (r *ManageInternalEndpointRequest) ToJsonString() string {
@@ -5111,10 +5111,10 @@ func (r *ManageInternalEndpointRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ManageInternalEndpointResponseParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ManageInternalEndpointResponse struct {
@@ -5136,44 +5136,44 @@ func (r *ManageInternalEndpointResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ManageReplicationRequestParams struct {
 	// Source instance ID
-	SourceRegistryId *string `json:"SourceRegistryId,omitnil" name:"SourceRegistryId"`
+	SourceRegistryId *string `json:"SourceRegistryId,omitnil,omitempty" name:"SourceRegistryId"`
 
 	// Destination instance ID
-	DestinationRegistryId *string `json:"DestinationRegistryId,omitnil" name:"DestinationRegistryId"`
+	DestinationRegistryId *string `json:"DestinationRegistryId,omitnil,omitempty" name:"DestinationRegistryId"`
 
 	// Synchronization rule
-	Rule *ReplicationRule `json:"Rule,omitnil" name:"Rule"`
+	Rule *ReplicationRule `json:"Rule,omitnil,omitempty" name:"Rule"`
 
 	// Rule description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Region ID of the destination instance. For example, `1` represents Guangzhou
-	DestinationRegionId *uint64 `json:"DestinationRegionId,omitnil" name:"DestinationRegionId"`
+	DestinationRegionId *uint64 `json:"DestinationRegionId,omitnil,omitempty" name:"DestinationRegionId"`
 
 	// Configuration of the synchronization rule
-	PeerReplicationOption *PeerReplicationOption `json:"PeerReplicationOption,omitnil" name:"PeerReplicationOption"`
+	PeerReplicationOption *PeerReplicationOption `json:"PeerReplicationOption,omitnil,omitempty" name:"PeerReplicationOption"`
 }
 
 type ManageReplicationRequest struct {
 	*tchttp.BaseRequest
 	
 	// Source instance ID
-	SourceRegistryId *string `json:"SourceRegistryId,omitnil" name:"SourceRegistryId"`
+	SourceRegistryId *string `json:"SourceRegistryId,omitnil,omitempty" name:"SourceRegistryId"`
 
 	// Destination instance ID
-	DestinationRegistryId *string `json:"DestinationRegistryId,omitnil" name:"DestinationRegistryId"`
+	DestinationRegistryId *string `json:"DestinationRegistryId,omitnil,omitempty" name:"DestinationRegistryId"`
 
 	// Synchronization rule
-	Rule *ReplicationRule `json:"Rule,omitnil" name:"Rule"`
+	Rule *ReplicationRule `json:"Rule,omitnil,omitempty" name:"Rule"`
 
 	// Rule description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Region ID of the destination instance. For example, `1` represents Guangzhou
-	DestinationRegionId *uint64 `json:"DestinationRegionId,omitnil" name:"DestinationRegionId"`
+	DestinationRegionId *uint64 `json:"DestinationRegionId,omitnil,omitempty" name:"DestinationRegionId"`
 
 	// Configuration of the synchronization rule
-	PeerReplicationOption *PeerReplicationOption `json:"PeerReplicationOption,omitnil" name:"PeerReplicationOption"`
+	PeerReplicationOption *PeerReplicationOption `json:"PeerReplicationOption,omitnil,omitempty" name:"PeerReplicationOption"`
 }
 
 func (r *ManageReplicationRequest) ToJsonString() string {
@@ -5203,7 +5203,7 @@ func (r *ManageReplicationRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ManageReplicationResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ManageReplicationResponse struct {
@@ -5225,50 +5225,50 @@ func (r *ManageReplicationResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyCustomAccountRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Custom account name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Custom account description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
-	Duration *int64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Expiry time of the custom account (timestamp)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil" name:"ExpiresAt"`
+	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
 
 	// Whether to disable the custom account
-	Disable *bool `json:"Disable,omitnil" name:"Disable"`
+	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
 
 	// Policy list
-	Permissions []*Permission `json:"Permissions,omitnil" name:"Permissions"`
+	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
 }
 
 type ModifyCustomAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Custom account name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Custom account description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
-	Duration *int64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Expiry time of the custom account (timestamp)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil" name:"ExpiresAt"`
+	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
 
 	// Whether to disable the custom account
-	Disable *bool `json:"Disable,omitnil" name:"Disable"`
+	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
 
 	// Policy list
-	Permissions []*Permission `json:"Permissions,omitnil" name:"Permissions"`
+	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
 }
 
 func (r *ModifyCustomAccountRequest) ToJsonString() string {
@@ -5299,7 +5299,7 @@ func (r *ModifyCustomAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyCustomAccountResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyCustomAccountResponse struct {
@@ -5321,32 +5321,32 @@ func (r *ModifyCustomAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyImmutableTagRulesRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Rule ID
-	RuleId *int64 `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *int64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Rule
-	Rule *ImmutableTagRule `json:"Rule,omitnil" name:"Rule"`
+	Rule *ImmutableTagRule `json:"Rule,omitnil,omitempty" name:"Rule"`
 }
 
 type ModifyImmutableTagRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Rule ID
-	RuleId *int64 `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *int64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Rule
-	Rule *ImmutableTagRule `json:"Rule,omitnil" name:"Rule"`
+	Rule *ImmutableTagRule `json:"Rule,omitnil,omitempty" name:"Rule"`
 }
 
 func (r *ModifyImmutableTagRulesRequest) ToJsonString() string {
@@ -5374,7 +5374,7 @@ func (r *ModifyImmutableTagRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyImmutableTagRulesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyImmutableTagRulesResponse struct {
@@ -5396,32 +5396,32 @@ func (r *ModifyImmutableTagRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Instance edition
 	// Basic: `basic`
 	// Standard: `standard`
 	// Premium: `premium`
-	RegistryType *string `json:"RegistryType,omitnil" name:"RegistryType"`
+	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
 	// Whether to enable deletion protection. It defaults to `false`. 
-	DeletionProtection *bool `json:"DeletionProtection,omitnil" name:"DeletionProtection"`
+	DeletionProtection *bool `json:"DeletionProtection,omitnil,omitempty" name:"DeletionProtection"`
 }
 
 type ModifyInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Instance edition
 	// Basic: `basic`
 	// Standard: `standard`
 	// Premium: `premium`
-	RegistryType *string `json:"RegistryType,omitnil" name:"RegistryType"`
+	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
 	// Whether to enable deletion protection. It defaults to `false`. 
-	DeletionProtection *bool `json:"DeletionProtection,omitnil" name:"DeletionProtection"`
+	DeletionProtection *bool `json:"DeletionProtection,omitnil,omitempty" name:"DeletionProtection"`
 }
 
 func (r *ModifyInstanceRequest) ToJsonString() string {
@@ -5448,7 +5448,7 @@ func (r *ModifyInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstanceResponse struct {
@@ -5470,38 +5470,38 @@ func (r *ModifyInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceTokenRequestParams struct {
 	// ID of the long-term access credential of the instance
-	TokenId *string `json:"TokenId,omitnil" name:"TokenId"`
+	TokenId *string `json:"TokenId,omitnil,omitempty" name:"TokenId"`
 
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Whether to enable the long-term access credential of the instance
-	Enable *bool `json:"Enable,omitnil" name:"Enable"`
+	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// Access credential description
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
 	// Valid values: 1: Modify the description; 2: Enable/Disable. Default value: 2.
-	ModifyFlag *int64 `json:"ModifyFlag,omitnil" name:"ModifyFlag"`
+	ModifyFlag *int64 `json:"ModifyFlag,omitnil,omitempty" name:"ModifyFlag"`
 }
 
 type ModifyInstanceTokenRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the long-term access credential of the instance
-	TokenId *string `json:"TokenId,omitnil" name:"TokenId"`
+	TokenId *string `json:"TokenId,omitnil,omitempty" name:"TokenId"`
 
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Whether to enable the long-term access credential of the instance
-	Enable *bool `json:"Enable,omitnil" name:"Enable"`
+	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// Access credential description
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
 	// Valid values: 1: Modify the description; 2: Enable/Disable. Default value: 2.
-	ModifyFlag *int64 `json:"ModifyFlag,omitnil" name:"ModifyFlag"`
+	ModifyFlag *int64 `json:"ModifyFlag,omitnil,omitempty" name:"ModifyFlag"`
 }
 
 func (r *ModifyInstanceTokenRequest) ToJsonString() string {
@@ -5530,7 +5530,7 @@ func (r *ModifyInstanceTokenRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceTokenResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstanceTokenResponse struct {
@@ -5552,26 +5552,26 @@ func (r *ModifyInstanceTokenResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyNamespaceRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Access level. Valid values: True: Public; False: Private.
-	IsPublic *bool `json:"IsPublic,omitnil" name:"IsPublic"`
+	IsPublic *bool `json:"IsPublic,omitnil,omitempty" name:"IsPublic"`
 }
 
 type ModifyNamespaceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Access level. Valid values: True: Public; False: Private.
-	IsPublic *bool `json:"IsPublic,omitnil" name:"IsPublic"`
+	IsPublic *bool `json:"IsPublic,omitnil,omitempty" name:"IsPublic"`
 }
 
 func (r *ModifyNamespaceRequest) ToJsonString() string {
@@ -5598,7 +5598,7 @@ func (r *ModifyNamespaceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyNamespaceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyNamespaceResponse struct {
@@ -5620,38 +5620,38 @@ func (r *ModifyNamespaceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyRepositoryRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Image repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Brief repository description
-	BriefDescription *string `json:"BriefDescription,omitnil" name:"BriefDescription"`
+	BriefDescription *string `json:"BriefDescription,omitnil,omitempty" name:"BriefDescription"`
 
 	// Detailed repository description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type ModifyRepositoryRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Image repository name
-	RepositoryName *string `json:"RepositoryName,omitnil" name:"RepositoryName"`
+	RepositoryName *string `json:"RepositoryName,omitnil,omitempty" name:"RepositoryName"`
 
 	// Brief repository description
-	BriefDescription *string `json:"BriefDescription,omitnil" name:"BriefDescription"`
+	BriefDescription *string `json:"BriefDescription,omitnil,omitempty" name:"BriefDescription"`
 
 	// Detailed repository description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 func (r *ModifyRepositoryRequest) ToJsonString() string {
@@ -5680,7 +5680,7 @@ func (r *ModifyRepositoryRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyRepositoryResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyRepositoryResponse struct {
@@ -5702,32 +5702,32 @@ func (r *ModifyRepositoryResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifySecurityPolicyRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// PolicyId
-	PolicyIndex *int64 `json:"PolicyIndex,omitnil" name:"PolicyIndex"`
+	PolicyIndex *int64 `json:"PolicyIndex,omitnil,omitempty" name:"PolicyIndex"`
 
 	// Allowed IP, such as `192.168.0.0/24`
-	CidrBlock *string `json:"CidrBlock,omitnil" name:"CidrBlock"`
+	CidrBlock *string `json:"CidrBlock,omitnil,omitempty" name:"CidrBlock"`
 
 	// Remarks
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type ModifySecurityPolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// PolicyId
-	PolicyIndex *int64 `json:"PolicyIndex,omitnil" name:"PolicyIndex"`
+	PolicyIndex *int64 `json:"PolicyIndex,omitnil,omitempty" name:"PolicyIndex"`
 
 	// Allowed IP, such as `192.168.0.0/24`
-	CidrBlock *string `json:"CidrBlock,omitnil" name:"CidrBlock"`
+	CidrBlock *string `json:"CidrBlock,omitnil,omitempty" name:"CidrBlock"`
 
 	// Remarks
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 func (r *ModifySecurityPolicyRequest) ToJsonString() string {
@@ -5755,10 +5755,10 @@ func (r *ModifySecurityPolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifySecurityPolicyResponseParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifySecurityPolicyResponse struct {
@@ -5780,50 +5780,50 @@ func (r *ModifySecurityPolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyServiceAccountRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Service account name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Service account description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Validity in days starting from the current day, It takes a higher priority than `ExpiresAt`.
-	Duration *int64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Expiry time (timestamp, in milliseconds)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil" name:"ExpiresAt"`
+	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
 
 	// Whether to disable the service account
-	Disable *bool `json:"Disable,omitnil" name:"Disable"`
+	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
 
 	// Policy list
-	Permissions []*Permission `json:"Permissions,omitnil" name:"Permissions"`
+	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
 }
 
 type ModifyServiceAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Service account name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Service account description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Validity in days starting from the current day, It takes a higher priority than `ExpiresAt`.
-	Duration *int64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Expiry time (timestamp, in milliseconds)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil" name:"ExpiresAt"`
+	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
 
 	// Whether to disable the service account
-	Disable *bool `json:"Disable,omitnil" name:"Disable"`
+	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
 
 	// Policy list
-	Permissions []*Permission `json:"Permissions,omitnil" name:"Permissions"`
+	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
 }
 
 func (r *ModifyServiceAccountRequest) ToJsonString() string {
@@ -5854,7 +5854,7 @@ func (r *ModifyServiceAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyServiceAccountResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyServiceAccountResponse struct {
@@ -5876,44 +5876,44 @@ func (r *ModifyServiceAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyTagRetentionRuleRequestParams struct {
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// ID of the original namespace
-	NamespaceId *int64 `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *int64 `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Retention policy
-	RetentionRule *RetentionRule `json:"RetentionRule,omitnil" name:"RetentionRule"`
+	RetentionRule *RetentionRule `json:"RetentionRule,omitnil,omitempty" name:"RetentionRule"`
 
 	// Original execution cycle
-	CronSetting *string `json:"CronSetting,omitnil" name:"CronSetting"`
+	CronSetting *string `json:"CronSetting,omitnil,omitempty" name:"CronSetting"`
 
 	// Rule ID
-	RetentionId *int64 `json:"RetentionId,omitnil" name:"RetentionId"`
+	RetentionId *int64 `json:"RetentionId,omitnil,omitempty" name:"RetentionId"`
 
 	// Whether to disable the rule
-	Disabled *bool `json:"Disabled,omitnil" name:"Disabled"`
+	Disabled *bool `json:"Disabled,omitnil,omitempty" name:"Disabled"`
 }
 
 type ModifyTagRetentionRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Primary instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// ID of the original namespace
-	NamespaceId *int64 `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *int64 `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Retention policy
-	RetentionRule *RetentionRule `json:"RetentionRule,omitnil" name:"RetentionRule"`
+	RetentionRule *RetentionRule `json:"RetentionRule,omitnil,omitempty" name:"RetentionRule"`
 
 	// Original execution cycle
-	CronSetting *string `json:"CronSetting,omitnil" name:"CronSetting"`
+	CronSetting *string `json:"CronSetting,omitnil,omitempty" name:"CronSetting"`
 
 	// Rule ID
-	RetentionId *int64 `json:"RetentionId,omitnil" name:"RetentionId"`
+	RetentionId *int64 `json:"RetentionId,omitnil,omitempty" name:"RetentionId"`
 
 	// Whether to disable the rule
-	Disabled *bool `json:"Disabled,omitnil" name:"Disabled"`
+	Disabled *bool `json:"Disabled,omitnil,omitempty" name:"Disabled"`
 }
 
 func (r *ModifyTagRetentionRuleRequest) ToJsonString() string {
@@ -5943,7 +5943,7 @@ func (r *ModifyTagRetentionRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyTagRetentionRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyTagRetentionRuleResponse struct {
@@ -5965,26 +5965,26 @@ func (r *ModifyTagRetentionRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyWebhookTriggerRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Trigger parameter
-	Trigger *WebhookTrigger `json:"Trigger,omitnil" name:"Trigger"`
+	Trigger *WebhookTrigger `json:"Trigger,omitnil,omitempty" name:"Trigger"`
 
 	// Namespace
-	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 }
 
 type ModifyWebhookTriggerRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Trigger parameter
-	Trigger *WebhookTrigger `json:"Trigger,omitnil" name:"Trigger"`
+	Trigger *WebhookTrigger `json:"Trigger,omitnil,omitempty" name:"Trigger"`
 
 	// Namespace
-	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 }
 
 func (r *ModifyWebhookTriggerRequest) ToJsonString() string {
@@ -6011,7 +6011,7 @@ func (r *ModifyWebhookTriggerRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyWebhookTriggerResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyWebhookTriggerResponse struct {
@@ -6032,157 +6032,157 @@ func (r *ModifyWebhookTriggerResponse) FromJsonString(s string) error {
 
 type PeerReplicationOption struct {
 	// UIN of the destination instance
-	PeerRegistryUin *string `json:"PeerRegistryUin,omitnil" name:"PeerRegistryUin"`
+	PeerRegistryUin *string `json:"PeerRegistryUin,omitnil,omitempty" name:"PeerRegistryUin"`
 
 	// Permanent access Token for the destination instance
-	PeerRegistryToken *string `json:"PeerRegistryToken,omitnil" name:"PeerRegistryToken"`
+	PeerRegistryToken *string `json:"PeerRegistryToken,omitnil,omitempty" name:"PeerRegistryToken"`
 
 	// Whether to enable cross-account synchronization
-	EnablePeerReplication *bool `json:"EnablePeerReplication,omitnil" name:"EnablePeerReplication"`
+	EnablePeerReplication *bool `json:"EnablePeerReplication,omitnil,omitempty" name:"EnablePeerReplication"`
 }
 
 type Permission struct {
 	// Resource path. Valid value: `Namespace`
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Resource *string `json:"Resource,omitnil" name:"Resource"`
+	Resource *string `json:"Resource,omitnil,omitempty" name:"Resource"`
 
 	// Action. Valid values: `tcr:PushRepository`, `tcr:PullRepository`
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Actions []*string `json:"Actions,omitnil" name:"Actions"`
+	Actions []*string `json:"Actions,omitnil,omitempty" name:"Actions"`
 }
 
 type Region struct {
 	// gz
-	Alias *string `json:"Alias,omitnil" name:"Alias"`
+	Alias *string `json:"Alias,omitnil,omitempty" name:"Alias"`
 
 	// 1
-	RegionId *uint64 `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *uint64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// ap-guangzhou
-	RegionName *string `json:"RegionName,omitnil" name:"RegionName"`
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
 
 	// alluser
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// remark
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Creation time
-	CreatedAt *string `json:"CreatedAt,omitnil" name:"CreatedAt"`
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
 
 	// Update time
-	UpdatedAt *string `json:"UpdatedAt,omitnil" name:"UpdatedAt"`
+	UpdatedAt *string `json:"UpdatedAt,omitnil,omitempty" name:"UpdatedAt"`
 
 	// id
-	Id *int64 `json:"Id,omitnil" name:"Id"`
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 type Registry struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Instance name
-	RegistryName *string `json:"RegistryName,omitnil" name:"RegistryName"`
+	RegistryName *string `json:"RegistryName,omitnil,omitempty" name:"RegistryName"`
 
 	// Instance specification
-	RegistryType *string `json:"RegistryType,omitnil" name:"RegistryType"`
+	RegistryType *string `json:"RegistryType,omitnil,omitempty" name:"RegistryType"`
 
 	// Instance status
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Public access URL of the instance
-	PublicDomain *string `json:"PublicDomain,omitnil" name:"PublicDomain"`
+	PublicDomain *string `json:"PublicDomain,omitnil,omitempty" name:"PublicDomain"`
 
 	// Instance creation time
-	CreatedAt *string `json:"CreatedAt,omitnil" name:"CreatedAt"`
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
 
 	// Region name
-	RegionName *string `json:"RegionName,omitnil" name:"RegionName"`
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
 
 	// Region ID
-	RegionId *uint64 `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *uint64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Whether to enable anonymity
-	EnableAnonymous *bool `json:"EnableAnonymous,omitnil" name:"EnableAnonymous"`
+	EnableAnonymous *bool `json:"EnableAnonymous,omitnil,omitempty" name:"EnableAnonymous"`
 
 	// Token validity period
-	TokenValidTime *uint64 `json:"TokenValidTime,omitnil" name:"TokenValidTime"`
+	TokenValidTime *uint64 `json:"TokenValidTime,omitnil,omitempty" name:"TokenValidTime"`
 
 	// Internal access address of the instance
-	InternalEndpoint *string `json:"InternalEndpoint,omitnil" name:"InternalEndpoint"`
+	InternalEndpoint *string `json:"InternalEndpoint,omitnil,omitempty" name:"InternalEndpoint"`
 
 	// Cloud tag of the instance
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TagSpecification *TagSpecification `json:"TagSpecification,omitnil" name:"TagSpecification"`
+	TagSpecification *TagSpecification `json:"TagSpecification,omitnil,omitempty" name:"TagSpecification"`
 
 	// Instance expiration time (for prepayment)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ExpiredAt *string `json:"ExpiredAt,omitnil" name:"ExpiredAt"`
+	ExpiredAt *string `json:"ExpiredAt,omitnil,omitempty" name:"ExpiredAt"`
 
 	// Instance billing mode. Valid values: 0: Postpayment; 1: Prepayment.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PayMod *int64 `json:"PayMod,omitnil" name:"PayMod"`
+	PayMod *int64 `json:"PayMod,omitnil,omitempty" name:"PayMod"`
 
 	// Prepayment renewal flag. Valid values: 0: Manual renewal; 1: Auto-renewal; 2: No renewal and no notification.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RenewFlag *int64 `json:"RenewFlag,omitnil" name:"RenewFlag"`
+	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 }
 
 type RegistryChargePrepaid struct {
 	// Instance purchase duration in months
-	Period *int64 `json:"Period,omitnil" name:"Period"`
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Auto-renewal flag. Valid values: 0: Manual renewal; 1: Auto-renewal; 2: No renewal and no notification.
-	RenewFlag *int64 `json:"RenewFlag,omitnil" name:"RenewFlag"`
+	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 }
 
 type RegistryCondition struct {
 	// Instance creation process type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Instance creation process status
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Reasons for transiting to the process
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Reason *string `json:"Reason,omitnil" name:"Reason"`
+	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 }
 
 type RegistryStatus struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Instance status
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Additional status
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Conditions []*RegistryCondition `json:"Conditions,omitnil" name:"Conditions"`
+	Conditions []*RegistryCondition `json:"Conditions,omitnil,omitempty" name:"Conditions"`
 }
 
 // Predefined struct for user
 type RenewInstanceRequestParams struct {
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Auto-renewal flag and purchase duration in months for prepayment. Valid values: 0: Manual renewal; 1: Auto-renewal; 2: No renewal and no notification.
-	RegistryChargePrepaid *RegistryChargePrepaid `json:"RegistryChargePrepaid,omitnil" name:"RegistryChargePrepaid"`
+	RegistryChargePrepaid *RegistryChargePrepaid `json:"RegistryChargePrepaid,omitnil,omitempty" name:"RegistryChargePrepaid"`
 
 	// Valid values: 0: renewal; 1: change from pay-as-you-go to monthly subscription billing
-	Flag *int64 `json:"Flag,omitnil" name:"Flag"`
+	Flag *int64 `json:"Flag,omitnil,omitempty" name:"Flag"`
 }
 
 type RenewInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Auto-renewal flag and purchase duration in months for prepayment. Valid values: 0: Manual renewal; 1: Auto-renewal; 2: No renewal and no notification.
-	RegistryChargePrepaid *RegistryChargePrepaid `json:"RegistryChargePrepaid,omitnil" name:"RegistryChargePrepaid"`
+	RegistryChargePrepaid *RegistryChargePrepaid `json:"RegistryChargePrepaid,omitnil,omitempty" name:"RegistryChargePrepaid"`
 
 	// Valid values: 0: renewal; 1: change from pay-as-you-go to monthly subscription billing
-	Flag *int64 `json:"Flag,omitnil" name:"Flag"`
+	Flag *int64 `json:"Flag,omitnil,omitempty" name:"Flag"`
 }
 
 func (r *RenewInstanceRequest) ToJsonString() string {
@@ -6209,10 +6209,10 @@ func (r *RenewInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RenewInstanceResponseParams struct {
 	// Enterprise Edition instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RenewInstanceResponse struct {
@@ -6233,377 +6233,377 @@ func (r *RenewInstanceResponse) FromJsonString(s string) error {
 
 type ReplicationFilter struct {
 	// Type (`name`, `tag` and `resource`)
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// It is left blank by default
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type ReplicationLog struct {
 	// Resource type
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
 	// Path of the source resource
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Source *string `json:"Source,omitnil" name:"Source"`
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
 
 	// Path of the destination resource
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Destination *string `json:"Destination,omitnil" name:"Destination"`
+	Destination *string `json:"Destination,omitnil,omitempty" name:"Destination"`
 
 	// Synchronization status
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Start time
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type ReplicationRegistry struct {
 	// Master instance ID
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Replication instance ID
-	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil" name:"ReplicationRegistryId"`
+	ReplicationRegistryId *string `json:"ReplicationRegistryId,omitnil,omitempty" name:"ReplicationRegistryId"`
 
 	// Region ID of the replication instance
-	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil" name:"ReplicationRegionId"`
+	ReplicationRegionId *uint64 `json:"ReplicationRegionId,omitnil,omitempty" name:"ReplicationRegionId"`
 
 	// Region name of the replication instance
-	ReplicationRegionName *string `json:"ReplicationRegionName,omitnil" name:"ReplicationRegionName"`
+	ReplicationRegionName *string `json:"ReplicationRegionName,omitnil,omitempty" name:"ReplicationRegionName"`
 
 	// Status of the replication instance
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Creation time
-	CreatedAt *string `json:"CreatedAt,omitnil" name:"CreatedAt"`
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
 }
 
 type ReplicationRule struct {
 	// Name of synchronization rule
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Destination namespace
-	DestNamespace *string `json:"DestNamespace,omitnil" name:"DestNamespace"`
+	DestNamespace *string `json:"DestNamespace,omitnil,omitempty" name:"DestNamespace"`
 
 	// Whether to override
-	Override *bool `json:"Override,omitnil" name:"Override"`
+	Override *bool `json:"Override,omitnil,omitempty" name:"Override"`
 
 	// Synchronization filters
-	Filters []*ReplicationFilter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*ReplicationFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type RetentionExecution struct {
 	// Execution ID
-	ExecutionId *int64 `json:"ExecutionId,omitnil" name:"ExecutionId"`
+	ExecutionId *int64 `json:"ExecutionId,omitnil,omitempty" name:"ExecutionId"`
 
 	// Rule ID
-	RetentionId *int64 `json:"RetentionId,omitnil" name:"RetentionId"`
+	RetentionId *int64 `json:"RetentionId,omitnil,omitempty" name:"RetentionId"`
 
 	// Execution start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Execution end time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Execution status. Valid values: Failed, Succeed, Stopped, InProgress.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type RetentionPolicy struct {
 	// Tag retention policy ID
-	RetentionId *int64 `json:"RetentionId,omitnil" name:"RetentionId"`
+	RetentionId *int64 `json:"RetentionId,omitnil,omitempty" name:"RetentionId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// List of rules
-	RetentionRuleList []*RetentionRule `json:"RetentionRuleList,omitnil" name:"RetentionRuleList"`
+	RetentionRuleList []*RetentionRule `json:"RetentionRuleList,omitnil,omitempty" name:"RetentionRuleList"`
 
 	// Regular execution mode
-	CronSetting *string `json:"CronSetting,omitnil" name:"CronSetting"`
+	CronSetting *string `json:"CronSetting,omitnil,omitempty" name:"CronSetting"`
 
 	// Whether to enable the rule
-	Disabled *bool `json:"Disabled,omitnil" name:"Disabled"`
+	Disabled *bool `json:"Disabled,omitnil,omitempty" name:"Disabled"`
 
 	// The execution time of the next task based on the current time and `cronSetting`, which is for reference only
-	NextExecutionTime *string `json:"NextExecutionTime,omitnil" name:"NextExecutionTime"`
+	NextExecutionTime *string `json:"NextExecutionTime,omitnil,omitempty" name:"NextExecutionTime"`
 }
 
 type RetentionRule struct {
 	// Supported policy. Valid values: latestPushedK: Retain the latest specified number of pushed tags; nDaysSinceLastPush: Retain the tags pushed in the past specified number of days.
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Rule value
-	Value *int64 `json:"Value,omitnil" name:"Value"`
+	Value *int64 `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type RetentionTask struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// Rule execution ID
-	ExecutionId *int64 `json:"ExecutionId,omitnil" name:"ExecutionId"`
+	ExecutionId *int64 `json:"ExecutionId,omitnil,omitempty" name:"ExecutionId"`
 
 	// Task start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Task end time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Task execution status. Valid values: Failed, Succeed, Stopped, InProgress.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Total number of tags
-	Total *int64 `json:"Total,omitnil" name:"Total"`
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// Number of retained tags
-	Retained *int64 `json:"Retained,omitnil" name:"Retained"`
+	Retained *int64 `json:"Retained,omitnil,omitempty" name:"Retained"`
 
 	// Application repository
-	Repository *string `json:"Repository,omitnil" name:"Repository"`
+	Repository *string `json:"Repository,omitnil,omitempty" name:"Repository"`
 }
 
 type Schedule struct {
 	// Type. Valid values: Hourly, Daily, Weekly, Custom, Manual, Dryrun, None.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type SecurityPolicy struct {
 	// Policy index
-	PolicyIndex *int64 `json:"PolicyIndex,omitnil" name:"PolicyIndex"`
+	PolicyIndex *int64 `json:"PolicyIndex,omitnil,omitempty" name:"PolicyIndex"`
 
 	// Remarks
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// The public network IP address of the access source
-	CidrBlock *string `json:"CidrBlock,omitnil" name:"CidrBlock"`
+	CidrBlock *string `json:"CidrBlock,omitnil,omitempty" name:"CidrBlock"`
 
 	// The version of the security policy
-	PolicyVersion *string `json:"PolicyVersion,omitnil" name:"PolicyVersion"`
+	PolicyVersion *string `json:"PolicyVersion,omitnil,omitempty" name:"PolicyVersion"`
 }
 
 type ServiceAccount struct {
 	// Service account name
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Description
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Whether to disable
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Disable *bool `json:"Disable,omitnil" name:"Disable"`
+	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
 
 	// Expiry time
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil" name:"ExpiresAt"`
+	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
 
 	// Creation time
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Update time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Policy
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Permissions []*Permission `json:"Permissions,omitnil" name:"Permissions"`
+	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
 }
 
 type Tag struct {
 	// Cloud tag key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Cloud tag value
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type TagSpecification struct {
 	// Default value: instance.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
 	// Cloud tag array
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type TaskDetail struct {
 	// Task
-	TaskName *string `json:"TaskName,omitnil" name:"TaskName"`
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 
 	// Task UUID
-	TaskUUID *string `json:"TaskUUID,omitnil" name:"TaskUUID"`
+	TaskUUID *string `json:"TaskUUID,omitnil,omitempty" name:"TaskUUID"`
 
 	// Task status
-	TaskStatus *string `json:"TaskStatus,omitnil" name:"TaskStatus"`
+	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// Task details
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	TaskMessage *string `json:"TaskMessage,omitnil" name:"TaskMessage"`
+	TaskMessage *string `json:"TaskMessage,omitnil,omitempty" name:"TaskMessage"`
 
 	// Start time of the task
-	CreatedTime *string `json:"CreatedTime,omitnil" name:"CreatedTime"`
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
 	// End time of the task
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	FinishedTime *string `json:"FinishedTime,omitnil" name:"FinishedTime"`
+	FinishedTime *string `json:"FinishedTime,omitnil,omitempty" name:"FinishedTime"`
 }
 
 type TcrImageInfo struct {
 	// Hash value
-	Digest *string `json:"Digest,omitnil" name:"Digest"`
+	Digest *string `json:"Digest,omitnil,omitempty" name:"Digest"`
 
 	// Image size in bytes
-	Size *int64 `json:"Size,omitnil" name:"Size"`
+	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// Tag name
-	ImageVersion *string `json:"ImageVersion,omitnil" name:"ImageVersion"`
+	ImageVersion *string `json:"ImageVersion,omitnil,omitempty" name:"ImageVersion"`
 
 	// Update time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Artifact type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Kind *string `json:"Kind,omitnil" name:"Kind"`
+	Kind *string `json:"Kind,omitnil,omitempty" name:"Kind"`
 
 	// KMS signature information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	KmsSignature *string `json:"KmsSignature,omitnil" name:"KmsSignature"`
+	KmsSignature *string `json:"KmsSignature,omitnil,omitempty" name:"KmsSignature"`
 }
 
 type TcrInstanceToken struct {
 	// Token ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Token description
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
 	// ID of the instance of the token
-	RegistryId *string `json:"RegistryId,omitnil" name:"RegistryId"`
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
 
 	// Token status
-	Enabled *bool `json:"Enabled,omitnil" name:"Enabled"`
+	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
 	// Token creation time
-	CreatedAt *string `json:"CreatedAt,omitnil" name:"CreatedAt"`
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
 
 	// Token expiration timestamp
-	ExpiredAt *int64 `json:"ExpiredAt,omitnil" name:"ExpiredAt"`
+	ExpiredAt *int64 `json:"ExpiredAt,omitnil,omitempty" name:"ExpiredAt"`
 }
 
 type TcrNamespaceInfo struct {
 	// Namespace name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Creation time
-	CreationTime *string `json:"CreationTime,omitnil" name:"CreationTime"`
+	CreationTime *string `json:"CreationTime,omitnil,omitempty" name:"CreationTime"`
 
 	// Access level
-	Public *bool `json:"Public,omitnil" name:"Public"`
+	Public *bool `json:"Public,omitnil,omitempty" name:"Public"`
 
 	// Namespace ID
-	NamespaceId *int64 `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *int64 `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Cloud tag of the instance
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TagSpecification *TagSpecification `json:"TagSpecification,omitnil" name:"TagSpecification"`
+	TagSpecification *TagSpecification `json:"TagSpecification,omitnil,omitempty" name:"TagSpecification"`
 
 	// Namespace metadata
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Metadata []*KeyValueString `json:"Metadata,omitnil" name:"Metadata"`
+	Metadata []*KeyValueString `json:"Metadata,omitnil,omitempty" name:"Metadata"`
 }
 
 type TcrRepositoryInfo struct {
 	// Repository name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Namespace name
-	Namespace *string `json:"Namespace,omitnil" name:"Namespace"`
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
 
 	// Creation time, such as `2006-01-02 15:04:05.999999999 -0700 MST`
-	CreationTime *string `json:"CreationTime,omitnil" name:"CreationTime"`
+	CreationTime *string `json:"CreationTime,omitnil,omitempty" name:"CreationTime"`
 
 	// Whether to make public
-	Public *bool `json:"Public,omitnil" name:"Public"`
+	Public *bool `json:"Public,omitnil,omitempty" name:"Public"`
 
 	// Detailed repository description
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Brief description
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BriefDescription *string `json:"BriefDescription,omitnil" name:"BriefDescription"`
+	BriefDescription *string `json:"BriefDescription,omitnil,omitempty" name:"BriefDescription"`
 
 	// Update time, such as `2006-01-02 15:04:05.999999999 -0700 MST`
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type WebhookTarget struct {
 	// Target address
-	Address *string `json:"Address,omitnil" name:"Address"`
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
 	// Custom headers
-	Headers []*Header `json:"Headers,omitnil" name:"Headers"`
+	Headers []*Header `json:"Headers,omitnil,omitempty" name:"Headers"`
 }
 
 type WebhookTrigger struct {
 	// Trigger name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Trigger target
-	Targets []*WebhookTarget `json:"Targets,omitnil" name:"Targets"`
+	Targets []*WebhookTarget `json:"Targets,omitnil,omitempty" name:"Targets"`
 
 	// Action to be triggered
-	EventTypes []*string `json:"EventTypes,omitnil" name:"EventTypes"`
+	EventTypes []*string `json:"EventTypes,omitnil,omitempty" name:"EventTypes"`
 
 	// Trigger rule
-	Condition *string `json:"Condition,omitnil" name:"Condition"`
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
 	// Whether to enable the trigger
-	Enabled *bool `json:"Enabled,omitnil" name:"Enabled"`
+	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 
 	// Trigger ID
-	Id *int64 `json:"Id,omitnil" name:"Id"`
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Trigger description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// ID of the namespace of the trigger
-	NamespaceId *int64 `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *int64 `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 }
 
 type WebhookTriggerLog struct {
 	// Log ID
-	Id *int64 `json:"Id,omitnil" name:"Id"`
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Trigger ID
-	TriggerId *int64 `json:"TriggerId,omitnil" name:"TriggerId"`
+	TriggerId *int64 `json:"TriggerId,omitnil,omitempty" name:"TriggerId"`
 
 	// Event type
-	EventType *string `json:"EventType,omitnil" name:"EventType"`
+	EventType *string `json:"EventType,omitnil,omitempty" name:"EventType"`
 
 	// Notification type
-	NotifyType *string `json:"NotifyType,omitnil" name:"NotifyType"`
+	NotifyType *string `json:"NotifyType,omitnil,omitempty" name:"NotifyType"`
 
 	// Details
-	Detail *string `json:"Detail,omitnil" name:"Detail"`
+	Detail *string `json:"Detail,omitnil,omitempty" name:"Detail"`
 
 	// Creation time
-	CreationTime *string `json:"CreationTime,omitnil" name:"CreationTime"`
+	CreationTime *string `json:"CreationTime,omitnil,omitempty" name:"CreationTime"`
 
 	// Update time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Status
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }

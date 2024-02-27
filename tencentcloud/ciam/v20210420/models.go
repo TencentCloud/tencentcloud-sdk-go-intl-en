@@ -23,32 +23,32 @@ import (
 // Predefined struct for user
 type ListUserGroupsRequestParams struct {
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil,omitempty" name:"UserStoreId"`
 
 	// Number of queried pages
-	Page *int64 `json:"Page,omitnil" name:"Page"`
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
 	// Number of entries per page
-	Size *int64 `json:"Size,omitnil" name:"Size"`
+	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// Query conditions (user group ID or user group name)
-	Condition *string `json:"Condition,omitnil" name:"Condition"`
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 }
 
 type ListUserGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil,omitempty" name:"UserStoreId"`
 
 	// Number of queried pages
-	Page *int64 `json:"Page,omitnil" name:"Page"`
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
 	// Number of entries per page
-	Size *int64 `json:"Size,omitnil" name:"Size"`
+	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// Query conditions (user group ID or user group name)
-	Condition *string `json:"Condition,omitnil" name:"Condition"`
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 }
 
 func (r *ListUserGroupsRequest) ToJsonString() string {
@@ -77,18 +77,18 @@ func (r *ListUserGroupsRequest) FromJsonString(s string) error {
 type ListUserGroupsResponseParams struct {
 	// User group list
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Content []*UserGroup `json:"Content,omitnil" name:"Content"`
+	Content []*UserGroup `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// Total number
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Total *int64 `json:"Total,omitnil" name:"Total"`
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// Pagination
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Pageable *Pageable `json:"Pageable,omitnil" name:"Pageable"`
+	Pageable *Pageable `json:"Pageable,omitnil,omitempty" name:"Pageable"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ListUserGroupsResponse struct {
@@ -109,26 +109,26 @@ func (r *ListUserGroupsResponse) FromJsonString(s string) error {
 
 type Pageable struct {
 	// Number of entries per page
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page number
-	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 }
 
 type UserGroup struct {
 	// User group ID
-	UserGroupId *string `json:"UserGroupId,omitnil" name:"UserGroupId"`
+	UserGroupId *string `json:"UserGroupId,omitnil,omitempty" name:"UserGroupId"`
 
 	// User group name
-	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil,omitempty" name:"DisplayName"`
 
 	// User group description
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// User directory ID
-	UserStoreId *string `json:"UserStoreId,omitnil" name:"UserStoreId"`
+	UserStoreId *string `json:"UserStoreId,omitnil,omitempty" name:"UserStoreId"`
 
 	// Tenant ID
-	TenantId *string `json:"TenantId,omitnil" name:"TenantId"`
+	TenantId *string `json:"TenantId,omitnil,omitempty" name:"TenantId"`
 }

@@ -22,68 +22,68 @@ import (
 
 type CosToken struct {
 	// Unique request ID
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 
 	// Bucket name
-	Bucket *string `json:"Bucket,omitnil" name:"Bucket"`
+	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
 
 	// Bucket region
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// `SecretId` of temporary key
-	TmpSecretId *string `json:"TmpSecretId,omitnil" name:"TmpSecretId"`
+	TmpSecretId *string `json:"TmpSecretId,omitnil,omitempty" name:"TmpSecretId"`
 
 	// `SecretKey` of temporary key
-	TmpSecretKey *string `json:"TmpSecretKey,omitnil" name:"TmpSecretKey"`
+	TmpSecretKey *string `json:"TmpSecretKey,omitnil,omitempty" name:"TmpSecretKey"`
 
 	// `sessionToken` of temporary key
-	SessionToken *string `json:"SessionToken,omitnil" name:"SessionToken"`
+	SessionToken *string `json:"SessionToken,omitnil,omitempty" name:"SessionToken"`
 
 	// `StartTime` of temporary key acquisition
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// `ExpiredTime` of temporary key
-	ExpiredTime *string `json:"ExpiredTime,omitnil" name:"ExpiredTime"`
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 
 	// Full package path
-	FullPath *string `json:"FullPath,omitnil" name:"FullPath"`
+	FullPath *string `json:"FullPath,omitnil,omitempty" name:"FullPath"`
 }
 
 // Predefined struct for user
 type CreateCosTokenV2RequestParams struct {
 	// Service ID
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Package name
-	PkgName *string `json:"PkgName,omitnil" name:"PkgName"`
+	PkgName *string `json:"PkgName,omitnil,omitempty" name:"PkgName"`
 
 	// optType. 1: upload; 2: query
-	OptType *int64 `json:"OptType,omitnil" name:"OptType"`
+	OptType *int64 `json:"OptType,omitnil,omitempty" name:"OptType"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 
 	// Input parameter of `deployVersion`
-	TimeVersion *string `json:"TimeVersion,omitnil" name:"TimeVersion"`
+	TimeVersion *string `json:"TimeVersion,omitnil,omitempty" name:"TimeVersion"`
 }
 
 type CreateCosTokenV2Request struct {
 	*tchttp.BaseRequest
 	
 	// Service ID
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Package name
-	PkgName *string `json:"PkgName,omitnil" name:"PkgName"`
+	PkgName *string `json:"PkgName,omitnil,omitempty" name:"PkgName"`
 
 	// optType. 1: upload; 2: query
-	OptType *int64 `json:"OptType,omitnil" name:"OptType"`
+	OptType *int64 `json:"OptType,omitnil,omitempty" name:"OptType"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 
 	// Input parameter of `deployVersion`
-	TimeVersion *string `json:"TimeVersion,omitnil" name:"TimeVersion"`
+	TimeVersion *string `json:"TimeVersion,omitnil,omitempty" name:"TimeVersion"`
 }
 
 func (r *CreateCosTokenV2Request) ToJsonString() string {
@@ -113,10 +113,10 @@ func (r *CreateCosTokenV2Request) FromJsonString(s string) error {
 type CreateCosTokenV2ResponseParams struct {
 	// `CosToken` object in case of success and `null` in case of failure
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Result *CosToken `json:"Result,omitnil" name:"Result"`
+	Result *CosToken `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateCosTokenV2Response struct {
@@ -138,50 +138,50 @@ func (r *CreateCosTokenV2Response) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateNamespaceRequestParams struct {
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// VPC name
-	Vpc *string `json:"Vpc,omitnil" name:"Vpc"`
+	Vpc *string `json:"Vpc,omitnil,omitempty" name:"Vpc"`
 
 	// Subnet list
-	SubnetIds []*string `json:"SubnetIds,omitnil" name:"SubnetIds"`
+	SubnetIds []*string `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
 	// Namespace description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// K8s version
-	K8sVersion *string `json:"K8sVersion,omitnil" name:"K8sVersion"`
+	K8sVersion *string `json:"K8sVersion,omitnil,omitempty" name:"K8sVersion"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 
 	// Whether to enable the TSW service.
-	EnableTswTraceService *bool `json:"EnableTswTraceService,omitnil" name:"EnableTswTraceService"`
+	EnableTswTraceService *bool `json:"EnableTswTraceService,omitnil,omitempty" name:"EnableTswTraceService"`
 }
 
 type CreateNamespaceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// VPC name
-	Vpc *string `json:"Vpc,omitnil" name:"Vpc"`
+	Vpc *string `json:"Vpc,omitnil,omitempty" name:"Vpc"`
 
 	// Subnet list
-	SubnetIds []*string `json:"SubnetIds,omitnil" name:"SubnetIds"`
+	SubnetIds []*string `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
 	// Namespace description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// K8s version
-	K8sVersion *string `json:"K8sVersion,omitnil" name:"K8sVersion"`
+	K8sVersion *string `json:"K8sVersion,omitnil,omitempty" name:"K8sVersion"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 
 	// Whether to enable the TSW service.
-	EnableTswTraceService *bool `json:"EnableTswTraceService,omitnil" name:"EnableTswTraceService"`
+	EnableTswTraceService *bool `json:"EnableTswTraceService,omitnil,omitempty" name:"EnableTswTraceService"`
 }
 
 func (r *CreateNamespaceRequest) ToJsonString() string {
@@ -213,10 +213,10 @@ func (r *CreateNamespaceRequest) FromJsonString(s string) error {
 type CreateNamespaceResponseParams struct {
 	// Namespace ID in case of success and `null` in case of failure
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateNamespaceResponse struct {
@@ -238,32 +238,32 @@ func (r *CreateNamespaceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateResourceRequestParams struct {
 	// Namespace ID
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Resource type. Valid values: CFS (file system), CLS (log service), TSE_SRE (registry)
-	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
 	// Resource ID
-	ResourceId *string `json:"ResourceId,omitnil" name:"ResourceId"`
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 type CreateResourceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Namespace ID
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Resource type. Valid values: CFS (file system), CLS (log service), TSE_SRE (registry)
-	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
 	// Resource ID
-	ResourceId *string `json:"ResourceId,omitnil" name:"ResourceId"`
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 func (r *CreateResourceRequest) ToJsonString() string {
@@ -292,10 +292,10 @@ func (r *CreateResourceRequest) FromJsonString(s string) error {
 type CreateResourceResponseParams struct {
 	// Success or failure
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Result *bool `json:"Result,omitnil" name:"Result"`
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateResourceResponse struct {
@@ -317,84 +317,84 @@ func (r *CreateResourceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateServiceV2RequestParams struct {
 	// Service name
-	ServiceName *string `json:"ServiceName,omitnil" name:"ServiceName"`
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 
 	// Description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Whether to use the default image service. 1: yes; 0: no
-	UseDefaultImageService *int64 `json:"UseDefaultImageService,omitnil" name:"UseDefaultImageService"`
+	UseDefaultImageService *int64 `json:"UseDefaultImageService,omitnil,omitempty" name:"UseDefaultImageService"`
 
 	// Type of the bound repository. 0: Personal Edition; 1: Enterprise Edition
-	RepoType *int64 `json:"RepoType,omitnil" name:"RepoType"`
+	RepoType *int64 `json:"RepoType,omitnil,omitempty" name:"RepoType"`
 
 	// Instance ID of Enterprise Edition image service
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Address of the bound image server
-	RepoServer *string `json:"RepoServer,omitnil" name:"RepoServer"`
+	RepoServer *string `json:"RepoServer,omitnil,omitempty" name:"RepoServer"`
 
 	// Name of the bound image repository
-	RepoName *string `json:"RepoName,omitnil" name:"RepoName"`
+	RepoName *string `json:"RepoName,omitnil,omitempty" name:"RepoName"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 
 	// Service subnet
-	SubnetList []*string `json:"SubnetList,omitnil" name:"SubnetList"`
+	SubnetList []*string `json:"SubnetList,omitnil,omitempty" name:"SubnetList"`
 
 	// Programming language 
 	// - JAVA
 	// - OTHER
-	CodingLanguage *string `json:"CodingLanguage,omitnil" name:"CodingLanguage"`
+	CodingLanguage *string `json:"CodingLanguage,omitnil,omitempty" name:"CodingLanguage"`
 
 	// Deployment mode 
 	// - IMAGE
 	// - JAR
 	// - WAR
-	DeployMode *string `json:"DeployMode,omitnil" name:"DeployMode"`
+	DeployMode *string `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 }
 
 type CreateServiceV2Request struct {
 	*tchttp.BaseRequest
 	
 	// Service name
-	ServiceName *string `json:"ServiceName,omitnil" name:"ServiceName"`
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 
 	// Description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Whether to use the default image service. 1: yes; 0: no
-	UseDefaultImageService *int64 `json:"UseDefaultImageService,omitnil" name:"UseDefaultImageService"`
+	UseDefaultImageService *int64 `json:"UseDefaultImageService,omitnil,omitempty" name:"UseDefaultImageService"`
 
 	// Type of the bound repository. 0: Personal Edition; 1: Enterprise Edition
-	RepoType *int64 `json:"RepoType,omitnil" name:"RepoType"`
+	RepoType *int64 `json:"RepoType,omitnil,omitempty" name:"RepoType"`
 
 	// Instance ID of Enterprise Edition image service
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Address of the bound image server
-	RepoServer *string `json:"RepoServer,omitnil" name:"RepoServer"`
+	RepoServer *string `json:"RepoServer,omitnil,omitempty" name:"RepoServer"`
 
 	// Name of the bound image repository
-	RepoName *string `json:"RepoName,omitnil" name:"RepoName"`
+	RepoName *string `json:"RepoName,omitnil,omitempty" name:"RepoName"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 
 	// Service subnet
-	SubnetList []*string `json:"SubnetList,omitnil" name:"SubnetList"`
+	SubnetList []*string `json:"SubnetList,omitnil,omitempty" name:"SubnetList"`
 
 	// Programming language 
 	// - JAVA
 	// - OTHER
-	CodingLanguage *string `json:"CodingLanguage,omitnil" name:"CodingLanguage"`
+	CodingLanguage *string `json:"CodingLanguage,omitnil,omitempty" name:"CodingLanguage"`
 
 	// Deployment mode 
 	// - IMAGE
 	// - JAR
 	// - WAR
-	DeployMode *string `json:"DeployMode,omitnil" name:"DeployMode"`
+	DeployMode *string `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 }
 
 func (r *CreateServiceV2Request) ToJsonString() string {
@@ -429,10 +429,10 @@ func (r *CreateServiceV2Request) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateServiceV2ResponseParams struct {
 	// Service code
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateServiceV2Response struct {
@@ -454,32 +454,32 @@ func (r *CreateServiceV2Response) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteIngressRequestParams struct {
 	// tem NamespaceId
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// EKS namespace name
-	EksNamespace *string `json:"EksNamespace,omitnil" name:"EksNamespace"`
+	EksNamespace *string `json:"EksNamespace,omitnil,omitempty" name:"EksNamespace"`
 
 	// Ingress rule name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 type DeleteIngressRequest struct {
 	*tchttp.BaseRequest
 	
 	// tem NamespaceId
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// EKS namespace name
-	EksNamespace *string `json:"EksNamespace,omitnil" name:"EksNamespace"`
+	EksNamespace *string `json:"EksNamespace,omitnil,omitempty" name:"EksNamespace"`
 
 	// Ingress rule name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 func (r *DeleteIngressRequest) ToJsonString() string {
@@ -507,10 +507,10 @@ func (r *DeleteIngressRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteIngressResponseParams struct {
 	// Whether deletion succeeded
-	Result *bool `json:"Result,omitnil" name:"Result"`
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteIngressResponse struct {
@@ -532,224 +532,224 @@ func (r *DeleteIngressResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeployServiceV2RequestParams struct {
 	// Service ID
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Container port
-	ContainerPort *uint64 `json:"ContainerPort,omitnil" name:"ContainerPort"`
+	ContainerPort *uint64 `json:"ContainerPort,omitnil,omitempty" name:"ContainerPort"`
 
 	// Number of initialized pods
-	InitPodNum *uint64 `json:"InitPodNum,omitnil" name:"InitPodNum"`
+	InitPodNum *uint64 `json:"InitPodNum,omitnil,omitempty" name:"InitPodNum"`
 
 	// CPU specification
-	CpuSpec *float64 `json:"CpuSpec,omitnil" name:"CpuSpec"`
+	CpuSpec *float64 `json:"CpuSpec,omitnil,omitempty" name:"CpuSpec"`
 
 	// Memory specification
-	MemorySpec *float64 `json:"MemorySpec,omitnil" name:"MemorySpec"`
+	MemorySpec *float64 `json:"MemorySpec,omitnil,omitempty" name:"MemorySpec"`
 
 	// Environment ID
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Image repository
-	ImgRepo *string `json:"ImgRepo,omitnil" name:"ImgRepo"`
+	ImgRepo *string `json:"ImgRepo,omitnil,omitempty" name:"ImgRepo"`
 
 	// Version description
-	VersionDesc *string `json:"VersionDesc,omitnil" name:"VersionDesc"`
+	VersionDesc *string `json:"VersionDesc,omitnil,omitempty" name:"VersionDesc"`
 
 	// Launch parameters
-	JvmOpts *string `json:"JvmOpts,omitnil" name:"JvmOpts"`
+	JvmOpts *string `json:"JvmOpts,omitnil,omitempty" name:"JvmOpts"`
 
 	// Auto scaling configuration. If this parameter is left empty, auto scaling will not be enabled
-	EsInfo *EsInfo `json:"EsInfo,omitnil" name:"EsInfo"`
+	EsInfo *EsInfo `json:"EsInfo,omitnil,omitempty" name:"EsInfo"`
 
 	// Environment variable configuration
-	EnvConf []*Pair `json:"EnvConf,omitnil" name:"EnvConf"`
+	EnvConf []*Pair `json:"EnvConf,omitnil,omitempty" name:"EnvConf"`
 
 	// Log configuration
-	LogConfs []*string `json:"LogConfs,omitnil" name:"LogConfs"`
+	LogConfs []*string `json:"LogConfs,omitnil,omitempty" name:"LogConfs"`
 
 	// Data volume configuration
-	StorageConfs []*StorageConf `json:"StorageConfs,omitnil" name:"StorageConfs"`
+	StorageConfs []*StorageConf `json:"StorageConfs,omitnil,omitempty" name:"StorageConfs"`
 
 	// Data volume mount configuration
-	StorageMountConfs []*StorageMountConf `json:"StorageMountConfs,omitnil" name:"StorageMountConfs"`
+	StorageMountConfs []*StorageMountConf `json:"StorageMountConfs,omitnil,omitempty" name:"StorageMountConfs"`
 
 	// Deployment type.
 	// - JAR: deployment through JAR package
 	// - WAR: deployment through WAR package
 	// - IMAGE: deployment through image
-	DeployMode *string `json:"DeployMode,omitnil" name:"DeployMode"`
+	DeployMode *string `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
 	// When the deployment type is `IMAGE`, this parameter indicates the image tag.
 	// When the deployment type is `JAR` or `WAR`, this parameter indicates the package version number.
-	DeployVersion *string `json:"DeployVersion,omitnil" name:"DeployVersion"`
+	DeployVersion *string `json:"DeployVersion,omitnil,omitempty" name:"DeployVersion"`
 
 	// Package name, which is required when using JAR or WAR packages for deployment.
-	PkgName *string `json:"PkgName,omitnil" name:"PkgName"`
+	PkgName *string `json:"PkgName,omitnil,omitempty" name:"PkgName"`
 
 	// JDK version.
 	// - KONA: use KONA JDK.
 	// - OPEN: use open JDK.
-	JdkVersion *string `json:"JdkVersion,omitnil" name:"JdkVersion"`
+	JdkVersion *string `json:"JdkVersion,omitnil,omitempty" name:"JdkVersion"`
 
 	// Security group IDs
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
 	// Log output configuration
-	LogOutputConf *LogOutputConf `json:"LogOutputConf,omitnil" name:"LogOutputConf"`
+	LogOutputConf *LogOutputConf `json:"LogOutputConf,omitnil,omitempty" name:"LogOutputConf"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 
 	// Version description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Image command
-	ImageCommand *string `json:"ImageCommand,omitnil" name:"ImageCommand"`
+	ImageCommand *string `json:"ImageCommand,omitnil,omitempty" name:"ImageCommand"`
 
 	// Image command parameters
-	ImageArgs []*string `json:"ImageArgs,omitnil" name:"ImageArgs"`
+	ImageArgs []*string `json:"ImageArgs,omitnil,omitempty" name:"ImageArgs"`
 
 	// Service port mapping.
-	PortMappings []*PortMapping `json:"PortMappings,omitnil" name:"PortMappings"`
+	PortMappings []*PortMapping `json:"PortMappings,omitnil,omitempty" name:"PortMappings"`
 
 	// Whether to add the registry’s default configurations.
-	UseRegistryDefaultConfig *bool `json:"UseRegistryDefaultConfig,omitnil" name:"UseRegistryDefaultConfig"`
+	UseRegistryDefaultConfig *bool `json:"UseRegistryDefaultConfig,omitnil,omitempty" name:"UseRegistryDefaultConfig"`
 
 	// Mounting configurations
-	SettingConfs []*MountedSettingConf `json:"SettingConfs,omitnil" name:"SettingConfs"`
+	SettingConfs []*MountedSettingConf `json:"SettingConfs,omitnil,omitempty" name:"SettingConfs"`
 
 	// EKS access configuration
-	EksService *EksService `json:"EksService,omitnil" name:"EksService"`
+	EksService *EksService `json:"EksService,omitnil,omitempty" name:"EksService"`
 
 	// ID of the version that you want to roll back to
-	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil,omitempty" name:"VersionId"`
 
 	// The script to run after startup
-	PostStart *string `json:"PostStart,omitnil" name:"PostStart"`
+	PostStart *string `json:"PostStart,omitnil,omitempty" name:"PostStart"`
 
 	// The script to run before stop
-	PreStop *string `json:"PreStop,omitnil" name:"PreStop"`
+	PreStop *string `json:"PreStop,omitnil,omitempty" name:"PreStop"`
 
 	// Configuration of 
-	DeployStrategyConf *DeployStrategyConf `json:"DeployStrategyConf,omitnil" name:"DeployStrategyConf"`
+	DeployStrategyConf *DeployStrategyConf `json:"DeployStrategyConf,omitnil,omitempty" name:"DeployStrategyConf"`
 
 	// Configuration of aliveness probe
-	Liveness *HealthCheckConfig `json:"Liveness,omitnil" name:"Liveness"`
+	Liveness *HealthCheckConfig `json:"Liveness,omitnil,omitempty" name:"Liveness"`
 
 	// Configuration of readiness probe
-	Readiness *HealthCheckConfig `json:"Readiness,omitnil" name:"Readiness"`
+	Readiness *HealthCheckConfig `json:"Readiness,omitnil,omitempty" name:"Readiness"`
 }
 
 type DeployServiceV2Request struct {
 	*tchttp.BaseRequest
 	
 	// Service ID
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Container port
-	ContainerPort *uint64 `json:"ContainerPort,omitnil" name:"ContainerPort"`
+	ContainerPort *uint64 `json:"ContainerPort,omitnil,omitempty" name:"ContainerPort"`
 
 	// Number of initialized pods
-	InitPodNum *uint64 `json:"InitPodNum,omitnil" name:"InitPodNum"`
+	InitPodNum *uint64 `json:"InitPodNum,omitnil,omitempty" name:"InitPodNum"`
 
 	// CPU specification
-	CpuSpec *float64 `json:"CpuSpec,omitnil" name:"CpuSpec"`
+	CpuSpec *float64 `json:"CpuSpec,omitnil,omitempty" name:"CpuSpec"`
 
 	// Memory specification
-	MemorySpec *float64 `json:"MemorySpec,omitnil" name:"MemorySpec"`
+	MemorySpec *float64 `json:"MemorySpec,omitnil,omitempty" name:"MemorySpec"`
 
 	// Environment ID
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Image repository
-	ImgRepo *string `json:"ImgRepo,omitnil" name:"ImgRepo"`
+	ImgRepo *string `json:"ImgRepo,omitnil,omitempty" name:"ImgRepo"`
 
 	// Version description
-	VersionDesc *string `json:"VersionDesc,omitnil" name:"VersionDesc"`
+	VersionDesc *string `json:"VersionDesc,omitnil,omitempty" name:"VersionDesc"`
 
 	// Launch parameters
-	JvmOpts *string `json:"JvmOpts,omitnil" name:"JvmOpts"`
+	JvmOpts *string `json:"JvmOpts,omitnil,omitempty" name:"JvmOpts"`
 
 	// Auto scaling configuration. If this parameter is left empty, auto scaling will not be enabled
-	EsInfo *EsInfo `json:"EsInfo,omitnil" name:"EsInfo"`
+	EsInfo *EsInfo `json:"EsInfo,omitnil,omitempty" name:"EsInfo"`
 
 	// Environment variable configuration
-	EnvConf []*Pair `json:"EnvConf,omitnil" name:"EnvConf"`
+	EnvConf []*Pair `json:"EnvConf,omitnil,omitempty" name:"EnvConf"`
 
 	// Log configuration
-	LogConfs []*string `json:"LogConfs,omitnil" name:"LogConfs"`
+	LogConfs []*string `json:"LogConfs,omitnil,omitempty" name:"LogConfs"`
 
 	// Data volume configuration
-	StorageConfs []*StorageConf `json:"StorageConfs,omitnil" name:"StorageConfs"`
+	StorageConfs []*StorageConf `json:"StorageConfs,omitnil,omitempty" name:"StorageConfs"`
 
 	// Data volume mount configuration
-	StorageMountConfs []*StorageMountConf `json:"StorageMountConfs,omitnil" name:"StorageMountConfs"`
+	StorageMountConfs []*StorageMountConf `json:"StorageMountConfs,omitnil,omitempty" name:"StorageMountConfs"`
 
 	// Deployment type.
 	// - JAR: deployment through JAR package
 	// - WAR: deployment through WAR package
 	// - IMAGE: deployment through image
-	DeployMode *string `json:"DeployMode,omitnil" name:"DeployMode"`
+	DeployMode *string `json:"DeployMode,omitnil,omitempty" name:"DeployMode"`
 
 	// When the deployment type is `IMAGE`, this parameter indicates the image tag.
 	// When the deployment type is `JAR` or `WAR`, this parameter indicates the package version number.
-	DeployVersion *string `json:"DeployVersion,omitnil" name:"DeployVersion"`
+	DeployVersion *string `json:"DeployVersion,omitnil,omitempty" name:"DeployVersion"`
 
 	// Package name, which is required when using JAR or WAR packages for deployment.
-	PkgName *string `json:"PkgName,omitnil" name:"PkgName"`
+	PkgName *string `json:"PkgName,omitnil,omitempty" name:"PkgName"`
 
 	// JDK version.
 	// - KONA: use KONA JDK.
 	// - OPEN: use open JDK.
-	JdkVersion *string `json:"JdkVersion,omitnil" name:"JdkVersion"`
+	JdkVersion *string `json:"JdkVersion,omitnil,omitempty" name:"JdkVersion"`
 
 	// Security group IDs
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
 	// Log output configuration
-	LogOutputConf *LogOutputConf `json:"LogOutputConf,omitnil" name:"LogOutputConf"`
+	LogOutputConf *LogOutputConf `json:"LogOutputConf,omitnil,omitempty" name:"LogOutputConf"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 
 	// Version description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Image command
-	ImageCommand *string `json:"ImageCommand,omitnil" name:"ImageCommand"`
+	ImageCommand *string `json:"ImageCommand,omitnil,omitempty" name:"ImageCommand"`
 
 	// Image command parameters
-	ImageArgs []*string `json:"ImageArgs,omitnil" name:"ImageArgs"`
+	ImageArgs []*string `json:"ImageArgs,omitnil,omitempty" name:"ImageArgs"`
 
 	// Service port mapping.
-	PortMappings []*PortMapping `json:"PortMappings,omitnil" name:"PortMappings"`
+	PortMappings []*PortMapping `json:"PortMappings,omitnil,omitempty" name:"PortMappings"`
 
 	// Whether to add the registry’s default configurations.
-	UseRegistryDefaultConfig *bool `json:"UseRegistryDefaultConfig,omitnil" name:"UseRegistryDefaultConfig"`
+	UseRegistryDefaultConfig *bool `json:"UseRegistryDefaultConfig,omitnil,omitempty" name:"UseRegistryDefaultConfig"`
 
 	// Mounting configurations
-	SettingConfs []*MountedSettingConf `json:"SettingConfs,omitnil" name:"SettingConfs"`
+	SettingConfs []*MountedSettingConf `json:"SettingConfs,omitnil,omitempty" name:"SettingConfs"`
 
 	// EKS access configuration
-	EksService *EksService `json:"EksService,omitnil" name:"EksService"`
+	EksService *EksService `json:"EksService,omitnil,omitempty" name:"EksService"`
 
 	// ID of the version that you want to roll back to
-	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil,omitempty" name:"VersionId"`
 
 	// The script to run after startup
-	PostStart *string `json:"PostStart,omitnil" name:"PostStart"`
+	PostStart *string `json:"PostStart,omitnil,omitempty" name:"PostStart"`
 
 	// The script to run before stop
-	PreStop *string `json:"PreStop,omitnil" name:"PreStop"`
+	PreStop *string `json:"PreStop,omitnil,omitempty" name:"PreStop"`
 
 	// Configuration of 
-	DeployStrategyConf *DeployStrategyConf `json:"DeployStrategyConf,omitnil" name:"DeployStrategyConf"`
+	DeployStrategyConf *DeployStrategyConf `json:"DeployStrategyConf,omitnil,omitempty" name:"DeployStrategyConf"`
 
 	// Configuration of aliveness probe
-	Liveness *HealthCheckConfig `json:"Liveness,omitnil" name:"Liveness"`
+	Liveness *HealthCheckConfig `json:"Liveness,omitnil,omitempty" name:"Liveness"`
 
 	// Configuration of readiness probe
-	Readiness *HealthCheckConfig `json:"Readiness,omitnil" name:"Readiness"`
+	Readiness *HealthCheckConfig `json:"Readiness,omitnil,omitempty" name:"Readiness"`
 }
 
 func (r *DeployServiceV2Request) ToJsonString() string {
@@ -807,10 +807,10 @@ func (r *DeployServiceV2Request) FromJsonString(s string) error {
 // Predefined struct for user
 type DeployServiceV2ResponseParams struct {
 	// Version ID (which can be ignored for the frontend)
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeployServiceV2Response struct {
@@ -831,47 +831,47 @@ func (r *DeployServiceV2Response) FromJsonString(s string) error {
 
 type DeployStrategyConf struct {
 	// Total batches
-	TotalBatchCount *int64 `json:"TotalBatchCount,omitnil" name:"TotalBatchCount"`
+	TotalBatchCount *int64 `json:"TotalBatchCount,omitnil,omitempty" name:"TotalBatchCount"`
 
 	// Number of instances for the beta batch
-	BetaBatchNum *int64 `json:"BetaBatchNum,omitnil" name:"BetaBatchNum"`
+	BetaBatchNum *int64 `json:"BetaBatchNum,omitnil,omitempty" name:"BetaBatchNum"`
 
 	// Batch deploy policy. `0`: automatically; `1`: manually. If you use beta batch, the policy for beta batch must be `0`. The policy specified here only applies to the rest batches.
-	DeployStrategyType *int64 `json:"DeployStrategyType,omitnil" name:"DeployStrategyType"`
+	DeployStrategyType *int64 `json:"DeployStrategyType,omitnil,omitempty" name:"DeployStrategyType"`
 
 	// Interval between batches
-	BatchInterval *int64 `json:"BatchInterval,omitnil" name:"BatchInterval"`
+	BatchInterval *int64 `json:"BatchInterval,omitnil,omitempty" name:"BatchInterval"`
 }
 
 // Predefined struct for user
 type DescribeIngressRequestParams struct {
 	// tem namespaceId
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// EKS namespace name
-	EksNamespace *string `json:"EksNamespace,omitnil" name:"EksNamespace"`
+	EksNamespace *string `json:"EksNamespace,omitnil,omitempty" name:"EksNamespace"`
 
 	// Ingress rule name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 type DescribeIngressRequest struct {
 	*tchttp.BaseRequest
 	
 	// tem namespaceId
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// EKS namespace name
-	EksNamespace *string `json:"EksNamespace,omitnil" name:"EksNamespace"`
+	EksNamespace *string `json:"EksNamespace,omitnil,omitempty" name:"EksNamespace"`
 
 	// Ingress rule name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 func (r *DescribeIngressRequest) ToJsonString() string {
@@ -899,10 +899,10 @@ func (r *DescribeIngressRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIngressResponseParams struct {
 	// Ingress rule configuration
-	Result *IngressInfo `json:"Result,omitnil" name:"Result"`
+	Result *IngressInfo `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeIngressResponse struct {
@@ -924,32 +924,32 @@ func (r *DescribeIngressResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIngressesRequestParams struct {
 	// namespace id
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// namespace
-	EksNamespace *string `json:"EksNamespace,omitnil" name:"EksNamespace"`
+	EksNamespace *string `json:"EksNamespace,omitnil,omitempty" name:"EksNamespace"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 
 	// Ingress rule name list.
-	Names []*string `json:"Names,omitnil" name:"Names"`
+	Names []*string `json:"Names,omitnil,omitempty" name:"Names"`
 }
 
 type DescribeIngressesRequest struct {
 	*tchttp.BaseRequest
 	
 	// namespace id
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// namespace
-	EksNamespace *string `json:"EksNamespace,omitnil" name:"EksNamespace"`
+	EksNamespace *string `json:"EksNamespace,omitnil,omitempty" name:"EksNamespace"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 
 	// Ingress rule name list.
-	Names []*string `json:"Names,omitnil" name:"Names"`
+	Names []*string `json:"Names,omitnil,omitempty" name:"Names"`
 }
 
 func (r *DescribeIngressesRequest) ToJsonString() string {
@@ -978,10 +978,10 @@ func (r *DescribeIngressesRequest) FromJsonString(s string) error {
 type DescribeIngressesResponseParams struct {
 	// Ingress array
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Result []*IngressInfo `json:"Result,omitnil" name:"Result"`
+	Result []*IngressInfo `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeIngressesResponse struct {
@@ -1003,26 +1003,26 @@ func (r *DescribeIngressesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeNamespacesRequestParams struct {
 	// Number of items per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Source
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 type DescribeNamespacesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Number of items per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Source
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 func (r *DescribeNamespacesRequest) ToJsonString() string {
@@ -1049,10 +1049,10 @@ func (r *DescribeNamespacesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeNamespacesResponseParams struct {
 	// Returned result
-	Result *NamespacePage `json:"Result,omitnil" name:"Result"`
+	Result *NamespacePage `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeNamespacesResponse struct {
@@ -1074,32 +1074,32 @@ func (r *DescribeNamespacesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRelatedIngressesRequestParams struct {
 	// Environment ID.
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// EKS namespace.
-	EksNamespace *string `json:"EksNamespace,omitnil" name:"EksNamespace"`
+	EksNamespace *string `json:"EksNamespace,omitnil,omitempty" name:"EksNamespace"`
 
 	// Source channel.
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 
 	// Service ID.
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 }
 
 type DescribeRelatedIngressesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Environment ID.
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// EKS namespace.
-	EksNamespace *string `json:"EksNamespace,omitnil" name:"EksNamespace"`
+	EksNamespace *string `json:"EksNamespace,omitnil,omitempty" name:"EksNamespace"`
 
 	// Source channel.
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 
 	// Service ID.
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 }
 
 func (r *DescribeRelatedIngressesRequest) ToJsonString() string {
@@ -1128,10 +1128,10 @@ func (r *DescribeRelatedIngressesRequest) FromJsonString(s string) error {
 type DescribeRelatedIngressesResponseParams struct {
 	// Ingress array.
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	Result []*IngressInfo `json:"Result,omitnil" name:"Result"`
+	Result []*IngressInfo `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRelatedIngressesResponse struct {
@@ -1152,74 +1152,74 @@ func (r *DescribeRelatedIngressesResponse) FromJsonString(s string) error {
 
 type DescribeRunPodPage struct {
 	// Page number
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of items per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Total number
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Request ID
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 
 	// Number of items
-	PodList []*RunVersionPod `json:"PodList,omitnil" name:"PodList"`
+	PodList []*RunVersionPod `json:"PodList,omitnil,omitempty" name:"PodList"`
 }
 
 // Predefined struct for user
 type DescribeServiceRunPodListV2RequestParams struct {
 	// Environment ID
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Service name ID
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Number of items per page. Default value: 20
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Pod status 
 	// - Running 
 	// - Pending 
 	// - Error
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Pod name
-	PodName *string `json:"PodName,omitnil" name:"PodName"`
+	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 type DescribeServiceRunPodListV2Request struct {
 	*tchttp.BaseRequest
 	
 	// Environment ID
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Service name ID
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Number of items per page. Default value: 20
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Pod status 
 	// - Running 
 	// - Pending 
 	// - Error
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Pod name
-	PodName *string `json:"PodName,omitnil" name:"PodName"`
+	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 func (r *DescribeServiceRunPodListV2Request) ToJsonString() string {
@@ -1250,10 +1250,10 @@ func (r *DescribeServiceRunPodListV2Request) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeServiceRunPodListV2ResponseParams struct {
 	// Returned result
-	Result *DescribeRunPodPage `json:"Result,omitnil" name:"Result"`
+	Result *DescribeRunPodPage `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeServiceRunPodListV2Response struct {
@@ -1274,96 +1274,96 @@ func (r *DescribeServiceRunPodListV2Response) FromJsonString(s string) error {
 
 type EksService struct {
 	// Service name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Available ports
-	Ports []*int64 `json:"Ports,omitnil" name:"Ports"`
+	Ports []*int64 `json:"Ports,omitnil,omitempty" name:"Ports"`
 
 	// Yaml contents
-	Yaml *string `json:"Yaml,omitnil" name:"Yaml"`
+	Yaml *string `json:"Yaml,omitnil,omitempty" name:"Yaml"`
 
 	// Service name
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	ServiceName *string `json:"ServiceName,omitnil" name:"ServiceName"`
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 
 	// Version name
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	VersionName *string `json:"VersionName,omitnil" name:"VersionName"`
+	VersionName *string `json:"VersionName,omitnil,omitempty" name:"VersionName"`
 
 	// Private IP
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	ClusterIp []*string `json:"ClusterIp,omitnil" name:"ClusterIp"`
+	ClusterIp []*string `json:"ClusterIp,omitnil,omitempty" name:"ClusterIp"`
 
 	// Public IP
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	ExternalIp *string `json:"ExternalIp,omitnil" name:"ExternalIp"`
+	ExternalIp *string `json:"ExternalIp,omitnil,omitempty" name:"ExternalIp"`
 
 	// The access type. Valid values:
 	// - EXTERNAL (internet access)
 	// - VPC（Intra-VPC access)
 	// - CLUSTER (Intra-cluster access)
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Subnet ID. It is filled when the access type is `VPC`.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Load balancer ID. It is filled when the access type is `EXTERNAL` or `CLUSTER`. It’s created automatically by default.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	LoadBalanceId *string `json:"LoadBalanceId,omitnil" name:"LoadBalanceId"`
+	LoadBalanceId *string `json:"LoadBalanceId,omitnil,omitempty" name:"LoadBalanceId"`
 
 	// Port Mapping
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	PortMappings []*PortMapping `json:"PortMappings,omitnil" name:"PortMappings"`
+	PortMappings []*PortMapping `json:"PortMappings,omitnil,omitempty" name:"PortMappings"`
 }
 
 type EsInfo struct {
 	// Minimum number of instances
-	MinAliveInstances *int64 `json:"MinAliveInstances,omitnil" name:"MinAliveInstances"`
+	MinAliveInstances *int64 `json:"MinAliveInstances,omitnil,omitempty" name:"MinAliveInstances"`
 
 	// Maximum number of instances
-	MaxAliveInstances *int64 `json:"MaxAliveInstances,omitnil" name:"MaxAliveInstances"`
+	MaxAliveInstances *int64 `json:"MaxAliveInstances,omitnil,omitempty" name:"MaxAliveInstances"`
 
 	// Auto scaling policy. 1: CPU; 2: memory
-	EsStrategy *int64 `json:"EsStrategy,omitnil" name:"EsStrategy"`
+	EsStrategy *int64 `json:"EsStrategy,omitnil,omitempty" name:"EsStrategy"`
 
 	// Auto scaling condition value
-	Threshold *uint64 `json:"Threshold,omitnil" name:"Threshold"`
+	Threshold *uint64 `json:"Threshold,omitnil,omitempty" name:"Threshold"`
 
 	// Version ID
-	VersionId *string `json:"VersionId,omitnil" name:"VersionId"`
+	VersionId *string `json:"VersionId,omitnil,omitempty" name:"VersionId"`
 }
 
 // Predefined struct for user
 type GenerateDownloadUrlRequestParams struct {
 	// Service ID
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Package Name
-	PkgName *string `json:"PkgName,omitnil" name:"PkgName"`
+	PkgName *string `json:"PkgName,omitnil,omitempty" name:"PkgName"`
 
 	// Version of the package to download
-	DeployVersion *string `json:"DeployVersion,omitnil" name:"DeployVersion"`
+	DeployVersion *string `json:"DeployVersion,omitnil,omitempty" name:"DeployVersion"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 type GenerateDownloadUrlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Service ID
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Package Name
-	PkgName *string `json:"PkgName,omitnil" name:"PkgName"`
+	PkgName *string `json:"PkgName,omitnil,omitempty" name:"PkgName"`
 
 	// Version of the package to download
-	DeployVersion *string `json:"DeployVersion,omitnil" name:"DeployVersion"`
+	DeployVersion *string `json:"DeployVersion,omitnil,omitempty" name:"DeployVersion"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 func (r *GenerateDownloadUrlRequest) ToJsonString() string {
@@ -1392,10 +1392,10 @@ func (r *GenerateDownloadUrlRequest) FromJsonString(s string) error {
 type GenerateDownloadUrlResponseParams struct {
 	// Temp download URL for the package
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GenerateDownloadUrlResponse struct {
@@ -1416,149 +1416,149 @@ func (r *GenerateDownloadUrlResponse) FromJsonString(s string) error {
 
 type HealthCheckConfig struct {
 	// Health check type. Valid values: `HttpGet`，`TcpSocket`，`Exec`
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The protocol type. It’s only valid when the health check type is `HttpGet`.
-	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// The request path. It’s only valid when the health check type is `HttpGet`.
-	Path *string `json:"Path,omitnil" name:"Path"`
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
 	// The script to be executed. It’s only valid when the health check type is `Exec`.
-	Exec *string `json:"Exec,omitnil" name:"Exec"`
+	Exec *string `json:"Exec,omitnil,omitempty" name:"Exec"`
 
 	// The request port. It’s only valid when the health check type is `HttpGet` or `TcpSocket `.
-	Port *int64 `json:"Port,omitnil" name:"Port"`
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// The initial delay for health check in seconds. Default: `0`
-	InitialDelaySeconds *int64 `json:"InitialDelaySeconds,omitnil" name:"InitialDelaySeconds"`
+	InitialDelaySeconds *int64 `json:"InitialDelaySeconds,omitnil,omitempty" name:"InitialDelaySeconds"`
 
 	// Timeout period in seconds. Default: `1`
-	TimeoutSeconds *int64 `json:"TimeoutSeconds,omitnil" name:"TimeoutSeconds"`
+	TimeoutSeconds *int64 `json:"TimeoutSeconds,omitnil,omitempty" name:"TimeoutSeconds"`
 
 	// Interval period in seconds. Default: `10`
-	PeriodSeconds *int64 `json:"PeriodSeconds,omitnil" name:"PeriodSeconds"`
+	PeriodSeconds *int64 `json:"PeriodSeconds,omitnil,omitempty" name:"PeriodSeconds"`
 }
 
 type IngressInfo struct {
 	// tem namespaceId
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// eks namespace
-	EksNamespace *string `json:"EksNamespace,omitnil" name:"EksNamespace"`
+	EksNamespace *string `json:"EksNamespace,omitnil,omitempty" name:"EksNamespace"`
 
 	// ip version
-	AddressIPVersion *string `json:"AddressIPVersion,omitnil" name:"AddressIPVersion"`
+	AddressIPVersion *string `json:"AddressIPVersion,omitnil,omitempty" name:"AddressIPVersion"`
 
 	// ingress name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Rules configuration
-	Rules []*IngressRule `json:"Rules,omitnil" name:"Rules"`
+	Rules []*IngressRule `json:"Rules,omitnil,omitempty" name:"Rules"`
 
 	// clb ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ClbId *string `json:"ClbId,omitnil" name:"ClbId"`
+	ClbId *string `json:"ClbId,omitnil,omitempty" name:"ClbId"`
 
 	// TLS configuration
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Tls []*IngressTls `json:"Tls,omitnil" name:"Tls"`
+	Tls []*IngressTls `json:"Tls,omitnil,omitempty" name:"Tls"`
 
 	// eks clusterId
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// clb ip
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// Creation time.
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Whether to listen on both the HTTP Port 80 and HTTPS Port 443. The default value is `false`. The optional value `true` means listening on both the HTTP Port 80 and HTTPS Port 443.
-	Mixed *bool `json:"Mixed,omitnil" name:"Mixed"`
+	Mixed *bool `json:"Mixed,omitnil,omitempty" name:"Mixed"`
 }
 
 type IngressRule struct {
 	// ingress rule value
-	Http *IngressRuleValue `json:"Http,omitnil" name:"Http"`
+	Http *IngressRuleValue `json:"Http,omitnil,omitempty" name:"Http"`
 
 	// Host address
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Protocol. Options include HTTP and HTTPS. The default option is HTTP.
-	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 }
 
 type IngressRuleBackend struct {
 	// EKS service name
-	ServiceName *string `json:"ServiceName,omitnil" name:"ServiceName"`
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 
 	// EKS service port
-	ServicePort *int64 `json:"ServicePort,omitnil" name:"ServicePort"`
+	ServicePort *int64 `json:"ServicePort,omitnil,omitempty" name:"ServicePort"`
 }
 
 type IngressRulePath struct {
 	// Path information
-	Path *string `json:"Path,omitnil" name:"Path"`
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
 	// Backend configuration
-	Backend *IngressRuleBackend `json:"Backend,omitnil" name:"Backend"`
+	Backend *IngressRuleBackend `json:"Backend,omitnil,omitempty" name:"Backend"`
 }
 
 type IngressRuleValue struct {
 	// Overall rule configuration
-	Paths []*IngressRulePath `json:"Paths,omitnil" name:"Paths"`
+	Paths []*IngressRulePath `json:"Paths,omitnil,omitempty" name:"Paths"`
 }
 
 type IngressTls struct {
 	// Host array. An empty array indicates the default certificate for all domain names.
-	Hosts []*string `json:"Hosts,omitnil" name:"Hosts"`
+	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
 
 	// Secret name. If a certificate is used, this field is left empty.
-	SecretName *string `json:"SecretName,omitnil" name:"SecretName"`
+	SecretName *string `json:"SecretName,omitnil,omitempty" name:"SecretName"`
 
 	// SSL Certificate Id
-	CertificateId *string `json:"CertificateId,omitnil" name:"CertificateId"`
+	CertificateId *string `json:"CertificateId,omitnil,omitempty" name:"CertificateId"`
 }
 
 type LogOutputConf struct {
 	// Log consumer type
-	OutputType *string `json:"OutputType,omitnil" name:"OutputType"`
+	OutputType *string `json:"OutputType,omitnil,omitempty" name:"OutputType"`
 
 	// CLS logset
-	ClsLogsetName *string `json:"ClsLogsetName,omitnil" name:"ClsLogsetName"`
+	ClsLogsetName *string `json:"ClsLogsetName,omitnil,omitempty" name:"ClsLogsetName"`
 
 	// CLS log topic
-	ClsLogTopicId *string `json:"ClsLogTopicId,omitnil" name:"ClsLogTopicId"`
+	ClsLogTopicId *string `json:"ClsLogTopicId,omitnil,omitempty" name:"ClsLogTopicId"`
 
 	// CLS logset ID
-	ClsLogsetId *string `json:"ClsLogsetId,omitnil" name:"ClsLogsetId"`
+	ClsLogsetId *string `json:"ClsLogsetId,omitnil,omitempty" name:"ClsLogsetId"`
 
 	// CLS log topic name
-	ClsLogTopicName *string `json:"ClsLogTopicName,omitnil" name:"ClsLogTopicName"`
+	ClsLogTopicName *string `json:"ClsLogTopicName,omitnil,omitempty" name:"ClsLogTopicName"`
 }
 
 // Predefined struct for user
 type ModifyIngressRequestParams struct {
 	// Ingress rule configuration
-	Ingress *IngressInfo `json:"Ingress,omitnil" name:"Ingress"`
+	Ingress *IngressInfo `json:"Ingress,omitnil,omitempty" name:"Ingress"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 type ModifyIngressRequest struct {
 	*tchttp.BaseRequest
 	
 	// Ingress rule configuration
-	Ingress *IngressInfo `json:"Ingress,omitnil" name:"Ingress"`
+	Ingress *IngressInfo `json:"Ingress,omitnil,omitempty" name:"Ingress"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 func (r *ModifyIngressRequest) ToJsonString() string {
@@ -1585,10 +1585,10 @@ func (r *ModifyIngressRequest) FromJsonString(s string) error {
 type ModifyIngressResponseParams struct {
 	// Created successfully
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Result *bool `json:"Result,omitnil" name:"Result"`
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyIngressResponse struct {
@@ -1610,44 +1610,44 @@ func (r *ModifyIngressResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyNamespaceRequestParams struct {
 	// Environment ID
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Namespace description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// VPC name
-	Vpc *string `json:"Vpc,omitnil" name:"Vpc"`
+	Vpc *string `json:"Vpc,omitnil,omitempty" name:"Vpc"`
 
 	// Subnet
-	SubnetIds []*string `json:"SubnetIds,omitnil" name:"SubnetIds"`
+	SubnetIds []*string `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 type ModifyNamespaceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Environment ID
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Namespace description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// VPC name
-	Vpc *string `json:"Vpc,omitnil" name:"Vpc"`
+	Vpc *string `json:"Vpc,omitnil,omitempty" name:"Vpc"`
 
 	// Subnet
-	SubnetIds []*string `json:"SubnetIds,omitnil" name:"SubnetIds"`
+	SubnetIds []*string `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
 	// Source channel
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 func (r *ModifyNamespaceRequest) ToJsonString() string {
@@ -1678,10 +1678,10 @@ func (r *ModifyNamespaceRequest) FromJsonString(s string) error {
 type ModifyNamespaceResponseParams struct {
 	// Namespace ID in case of success and `null` in case of failure
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Result *bool `json:"Result,omitnil" name:"Result"`
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyNamespaceResponse struct {
@@ -1703,26 +1703,26 @@ func (r *ModifyNamespaceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyServiceInfoRequestParams struct {
 	// Service ID.
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Source channel.
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 type ModifyServiceInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Service ID.
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Source channel.
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 func (r *ModifyServiceInfoRequest) ToJsonString() string {
@@ -1750,10 +1750,10 @@ func (r *ModifyServiceInfoRequest) FromJsonString(s string) error {
 type ModifyServiceInfoResponseParams struct {
 	// Results.
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	Result *bool `json:"Result,omitnil" name:"Result"`
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyServiceInfoResponse struct {
@@ -1774,95 +1774,95 @@ func (r *ModifyServiceInfoResponse) FromJsonString(s string) error {
 
 type MountedSettingConf struct {
 	// Configuration Name
-	ConfigDataName *string `json:"ConfigDataName,omitnil" name:"ConfigDataName"`
+	ConfigDataName *string `json:"ConfigDataName,omitnil,omitempty" name:"ConfigDataName"`
 
 	// Mount point path
-	MountedPath *string `json:"MountedPath,omitnil" name:"MountedPath"`
+	MountedPath *string `json:"MountedPath,omitnil,omitempty" name:"MountedPath"`
 
 	// Configuration Content
-	Data []*Pair `json:"Data,omitnil" name:"Data"`
+	Data []*Pair `json:"Data,omitnil,omitempty" name:"Data"`
 }
 
 type NamespacePage struct {
 	// Records
-	Records []*TemNamespaceInfo `json:"Records,omitnil" name:"Records"`
+	Records []*TemNamespaceInfo `json:"Records,omitnil,omitempty" name:"Records"`
 
 	// Total number
-	Total *int64 `json:"Total,omitnil" name:"Total"`
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// Number of items
-	Size *int64 `json:"Size,omitnil" name:"Size"`
+	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// Number of pages
-	Pages *int64 `json:"Pages,omitnil" name:"Pages"`
+	Pages *int64 `json:"Pages,omitnil,omitempty" name:"Pages"`
 }
 
 type Pair struct {
 	// Key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Value
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type PortMapping struct {
 	// Port.
-	Port *int64 `json:"Port,omitnil" name:"Port"`
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Mapped port.
-	TargetPort *int64 `json:"TargetPort,omitnil" name:"TargetPort"`
+	TargetPort *int64 `json:"TargetPort,omitnil,omitempty" name:"TargetPort"`
 
 	// TCP/UDP protocol stack.
-	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 }
 
 // Predefined struct for user
 type RestartServiceRunPodRequestParams struct {
 	// Environment ID.
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Service ID.
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Pod name.
-	PodName *string `json:"PodName,omitnil" name:"PodName"`
+	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
 
 	// Number of items per page.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Pod status.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Source channel.
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 type RestartServiceRunPodRequest struct {
 	*tchttp.BaseRequest
 	
 	// Environment ID.
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Service ID.
-	ServiceId *string `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Pod name.
-	PodName *string `json:"PodName,omitnil" name:"PodName"`
+	PodName *string `json:"PodName,omitnil,omitempty" name:"PodName"`
 
 	// Number of items per page.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Page number.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Pod status.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Source channel.
-	SourceChannel *int64 `json:"SourceChannel,omitnil" name:"SourceChannel"`
+	SourceChannel *int64 `json:"SourceChannel,omitnil,omitempty" name:"SourceChannel"`
 }
 
 func (r *RestartServiceRunPodRequest) ToJsonString() string {
@@ -1894,10 +1894,10 @@ func (r *RestartServiceRunPodRequest) FromJsonString(s string) error {
 type RestartServiceRunPodResponseParams struct {
 	// Returned results.
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	Result *bool `json:"Result,omitnil" name:"Result"`
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RestartServiceRunPodResponse struct {
@@ -1918,103 +1918,103 @@ func (r *RestartServiceRunPodResponse) FromJsonString(s string) error {
 
 type RunVersionPod struct {
 	// Shell address
-	Webshell *string `json:"Webshell,omitnil" name:"Webshell"`
+	Webshell *string `json:"Webshell,omitnil,omitempty" name:"Webshell"`
 
 	// Pod ID
-	PodId *string `json:"PodId,omitnil" name:"PodId"`
+	PodId *string `json:"PodId,omitnil,omitempty" name:"PodId"`
 
 	// Status
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Pod IP.
-	PodIp *string `json:"PodIp,omitnil" name:"PodIp"`
+	PodIp *string `json:"PodIp,omitnil,omitempty" name:"PodIp"`
 
 	// Availability zone.
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Deployed version.
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
-	DeployVersion *string `json:"DeployVersion,omitnil" name:"DeployVersion"`
+	DeployVersion *string `json:"DeployVersion,omitnil,omitempty" name:"DeployVersion"`
 
 	// Number of Restarts
 	// Note: This is field may return `null`, indicating that no valid value can be obtained.
-	RestartCount *int64 `json:"RestartCount,omitnil" name:"RestartCount"`
+	RestartCount *int64 `json:"RestartCount,omitnil,omitempty" name:"RestartCount"`
 }
 
 type StorageConf struct {
 	// Storage volume name
-	StorageVolName *string `json:"StorageVolName,omitnil" name:"StorageVolName"`
+	StorageVolName *string `json:"StorageVolName,omitnil,omitempty" name:"StorageVolName"`
 
 	// Storage volume path
-	StorageVolPath *string `json:"StorageVolPath,omitnil" name:"StorageVolPath"`
+	StorageVolPath *string `json:"StorageVolPath,omitnil,omitempty" name:"StorageVolPath"`
 
 	// Storage volume IP
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	StorageVolIp *string `json:"StorageVolIp,omitnil" name:"StorageVolIp"`
+	StorageVolIp *string `json:"StorageVolIp,omitnil,omitempty" name:"StorageVolIp"`
 }
 
 type StorageMountConf struct {
 	// Data volume name
-	VolumeName *string `json:"VolumeName,omitnil" name:"VolumeName"`
+	VolumeName *string `json:"VolumeName,omitnil,omitempty" name:"VolumeName"`
 
 	// Data volume binding path
-	MountPath *string `json:"MountPath,omitnil" name:"MountPath"`
+	MountPath *string `json:"MountPath,omitnil,omitempty" name:"MountPath"`
 }
 
 type TemNamespaceInfo struct {
 	// Namespace ID
-	NamespaceId *string `json:"NamespaceId,omitnil" name:"NamespaceId"`
+	NamespaceId *string `json:"NamespaceId,omitnil,omitempty" name:"NamespaceId"`
 
 	// Channel
-	Channel *string `json:"Channel,omitnil" name:"Channel"`
+	Channel *string `json:"Channel,omitnil,omitempty" name:"Channel"`
 
 	// Namespace name
-	NamespaceName *string `json:"NamespaceName,omitnil" name:"NamespaceName"`
+	NamespaceName *string `json:"NamespaceName,omitnil,omitempty" name:"NamespaceName"`
 
 	// Region name
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Namespace description
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Status. 1: terminated; 0: normal
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// VPC
-	Vpc *string `json:"Vpc,omitnil" name:"Vpc"`
+	Vpc *string `json:"Vpc,omitnil,omitempty" name:"Vpc"`
 
 	// Creation time
-	CreateDate *string `json:"CreateDate,omitnil" name:"CreateDate"`
+	CreateDate *string `json:"CreateDate,omitnil,omitempty" name:"CreateDate"`
 
 	// Modification time
-	ModifyDate *string `json:"ModifyDate,omitnil" name:"ModifyDate"`
+	ModifyDate *string `json:"ModifyDate,omitnil,omitempty" name:"ModifyDate"`
 
 	// Modifier
-	Modifier *string `json:"Modifier,omitnil" name:"Modifier"`
+	Modifier *string `json:"Modifier,omitnil,omitempty" name:"Modifier"`
 
 	// Creator
-	Creator *string `json:"Creator,omitnil" name:"Creator"`
+	Creator *string `json:"Creator,omitnil,omitempty" name:"Creator"`
 
 	// Number of services
-	ServiceNum *int64 `json:"ServiceNum,omitnil" name:"ServiceNum"`
+	ServiceNum *int64 `json:"ServiceNum,omitnil,omitempty" name:"ServiceNum"`
 
 	// Number of running instances
-	RunInstancesNum *int64 `json:"RunInstancesNum,omitnil" name:"RunInstancesNum"`
+	RunInstancesNum *int64 `json:"RunInstancesNum,omitnil,omitempty" name:"RunInstancesNum"`
 
 	// Subnet
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// TCB environment status
-	TcbEnvStatus *string `json:"TcbEnvStatus,omitnil" name:"TcbEnvStatus"`
+	TcbEnvStatus *string `json:"TcbEnvStatus,omitnil,omitempty" name:"TcbEnvStatus"`
 
 	// eks cluster status
-	ClusterStatus *string `json:"ClusterStatus,omitnil" name:"ClusterStatus"`
+	ClusterStatus *string `json:"ClusterStatus,omitnil,omitempty" name:"ClusterStatus"`
 
 	// Whether to enable TSW
-	EnableTswTraceService *bool `json:"EnableTswTraceService,omitnil" name:"EnableTswTraceService"`
+	EnableTswTraceService *bool `json:"EnableTswTraceService,omitnil,omitempty" name:"EnableTswTraceService"`
 }

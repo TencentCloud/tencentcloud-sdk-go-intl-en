@@ -23,40 +23,40 @@ import (
 type Account struct {
 	// Instance ID 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Account name 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 
 	// Account description information 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Read/write permission policy. Valid values: `r` (read-only),  `w` (write-only),  `rw`  (read/write). 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	Privilege *string `json:"Privilege,omitnil" name:"Privilege"`
+	Privilege *string `json:"Privilege,omitnil,omitempty" name:"Privilege"`
 
 	// Read-only routing policy. Valid values: `master` (master node),  `replication`  (replica node). 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil" name:"ReadonlyPolicy"`
+	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 
 	// Sub-account status. Valid values:  `1` (being changed),  `2` (valid). `4` (deleted). 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 // Predefined struct for user
 type AllocateWanAddressRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type AllocateWanAddressRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *AllocateWanAddressRequest) ToJsonString() string {
@@ -81,13 +81,13 @@ func (r *AllocateWanAddressRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AllocateWanAddressResponseParams struct {
 	// Async task ID
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// Status of enabling public network access
-	WanStatus *string `json:"WanStatus,omitnil" name:"WanStatus"`
+	WanStatus *string `json:"WanStatus,omitnil,omitempty" name:"WanStatus"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type AllocateWanAddressResponse struct {
@@ -109,20 +109,20 @@ func (r *AllocateWanAddressResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplyParamsTemplateRequestParams struct {
 	// List of instance IDs
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// ID of the parameter template to be applied
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type ApplyParamsTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of instance IDs
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// ID of the parameter template to be applied
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *ApplyParamsTemplateRequest) ToJsonString() string {
@@ -148,10 +148,10 @@ func (r *ApplyParamsTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplyParamsTemplateResponseParams struct {
 	// Task ID
-	TaskIds []*int64 `json:"TaskIds,omitnil" name:"TaskIds"`
+	TaskIds []*int64 `json:"TaskIds,omitnil,omitempty" name:"TaskIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ApplyParamsTemplateResponse struct {
@@ -173,26 +173,26 @@ func (r *ApplyParamsTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type AssociateSecurityGroupsRequestParams struct {
 	// Database engine name, which is `redis` for this API.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// ID of the security group to be associated in the format of sg-efil73jd.
-	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
 	// ID(s) of the instance(s) to be associated in the format of ins-lesecurk. You can specify multiple instances.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type AssociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Database engine name, which is `redis` for this API.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// ID of the security group to be associated in the format of sg-efil73jd.
-	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
 	// ID(s) of the instance(s) to be associated in the format of ins-lesecurk. You can specify multiple instances.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *AssociateSecurityGroupsRequest) ToJsonString() string {
@@ -219,7 +219,7 @@ func (r *AssociateSecurityGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AssociateSecurityGroupsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type AssociateSecurityGroupsResponse struct {
@@ -240,80 +240,80 @@ func (r *AssociateSecurityGroupsResponse) FromJsonString(s string) error {
 
 type BackupDownloadInfo struct {
 	// Backup file name
-	FileName *string `json:"FileName,omitnil" name:"FileName"`
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
 	// Backup file size in bytes. If the parameter value is `0`, the backup file size is unknown.
-	FileSize *uint64 `json:"FileSize,omitnil" name:"FileSize"`
+	FileSize *uint64 `json:"FileSize,omitnil,omitempty" name:"FileSize"`
 
 	// Address (valid for six hours) used to download the backup file over the public network
-	DownloadUrl *string `json:"DownloadUrl,omitnil" name:"DownloadUrl"`
+	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
 
 	// Address (valid for six hours) used to download the backup file over the private network
-	InnerDownloadUrl *string `json:"InnerDownloadUrl,omitnil" name:"InnerDownloadUrl"`
+	InnerDownloadUrl *string `json:"InnerDownloadUrl,omitnil,omitempty" name:"InnerDownloadUrl"`
 }
 
 type BackupLimitVpcItem struct {
 	// The region of the VPC that corresponds to the download address of the backup file
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// The list of VPCs that correspond to the download addresses of the backup files
-	VpcList []*string `json:"VpcList,omitnil" name:"VpcList"`
+	VpcList []*string `json:"VpcList,omitnil,omitempty" name:"VpcList"`
 }
 
 type BigKeyInfo struct {
 	// Database
-	DB *int64 `json:"DB,omitnil" name:"DB"`
+	DB *int64 `json:"DB,omitnil,omitempty" name:"DB"`
 
 	// Big key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Size
-	Size *int64 `json:"Size,omitnil" name:"Size"`
+	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// Data timestamp
-	Updatetime *int64 `json:"Updatetime,omitnil" name:"Updatetime"`
+	Updatetime *int64 `json:"Updatetime,omitnil,omitempty" name:"Updatetime"`
 }
 
 type BigKeyTypeInfo struct {
 	// Type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Count
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Size
-	Size *int64 `json:"Size,omitnil" name:"Size"`
+	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// Timestamp
-	Updatetime *int64 `json:"Updatetime,omitnil" name:"Updatetime"`
+	Updatetime *int64 `json:"Updatetime,omitnil,omitempty" name:"Updatetime"`
 }
 
 // Predefined struct for user
 type ChangeInstanceRoleRequestParams struct {
 	// Replication group ID
-	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance role. Valid values: `rw` (read-write), `r`( read-only).
-	InstanceRole *string `json:"InstanceRole,omitnil" name:"InstanceRole"`
+	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 }
 
 type ChangeInstanceRoleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Replication group ID
-	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance role. Valid values: `rw` (read-write), `r`( read-only).
-	InstanceRole *string `json:"InstanceRole,omitnil" name:"InstanceRole"`
+	InstanceRole *string `json:"InstanceRole,omitnil,omitempty" name:"InstanceRole"`
 }
 
 func (r *ChangeInstanceRoleRequest) ToJsonString() string {
@@ -340,10 +340,10 @@ func (r *ChangeInstanceRoleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ChangeInstanceRoleResponseParams struct {
 	// Async task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ChangeInstanceRoleResponse struct {
@@ -365,32 +365,32 @@ func (r *ChangeInstanceRoleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ChangeMasterInstanceRequestParams struct {
 	// Replication group ID, such as `crs-rpl-m3zt****`. It is the unique identifier automatically assigned by the system when creating a replication group. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get it in the global replication list.
-	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// ID of the read-only instance to be promoted to the master instance, such as `crs-xjhsdj****`. Log in to the the [TencentDB for Redis console](https://console.cloud.tencent.com/redis), and copy it in the instance list.
 	// 
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Whether to promote the read-only instance to the master instance forcibly. Valid values:
 	// - `true`: Yes
 	// - `false`: No
-	ForceSwitch *bool `json:"ForceSwitch,omitnil" name:"ForceSwitch"`
+	ForceSwitch *bool `json:"ForceSwitch,omitnil,omitempty" name:"ForceSwitch"`
 }
 
 type ChangeMasterInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Replication group ID, such as `crs-rpl-m3zt****`. It is the unique identifier automatically assigned by the system when creating a replication group. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get it in the global replication list.
-	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// ID of the read-only instance to be promoted to the master instance, such as `crs-xjhsdj****`. Log in to the the [TencentDB for Redis console](https://console.cloud.tencent.com/redis), and copy it in the instance list.
 	// 
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Whether to promote the read-only instance to the master instance forcibly. Valid values:
 	// - `true`: Yes
 	// - `false`: No
-	ForceSwitch *bool `json:"ForceSwitch,omitnil" name:"ForceSwitch"`
+	ForceSwitch *bool `json:"ForceSwitch,omitnil,omitempty" name:"ForceSwitch"`
 }
 
 func (r *ChangeMasterInstanceRequest) ToJsonString() string {
@@ -417,10 +417,10 @@ func (r *ChangeMasterInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ChangeMasterInstanceResponseParams struct {
 	// Async task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ChangeMasterInstanceResponse struct {
@@ -442,20 +442,20 @@ func (r *ChangeMasterInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ChangeReplicaToMasterRequestParams struct {
 	// ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ID of the replica node group. You can get more ID information of the multi-AZ replica node group though the [DescribeInstanceZoneInfo](https://intl.cloud.tencent.com/document/product/239/50312?from_cn_redirect=1) API.  This parameter is not required for a single-AZ replica node group.
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 type ChangeReplicaToMasterRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// ID of the replica node group. You can get more ID information of the multi-AZ replica node group though the [DescribeInstanceZoneInfo](https://intl.cloud.tencent.com/document/product/239/50312?from_cn_redirect=1) API.  This parameter is not required for a single-AZ replica node group.
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 func (r *ChangeReplicaToMasterRequest) ToJsonString() string {
@@ -481,10 +481,10 @@ func (r *ChangeReplicaToMasterRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ChangeReplicaToMasterResponseParams struct {
 	// Async task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ChangeReplicaToMasterResponse struct {
@@ -506,14 +506,14 @@ func (r *ChangeReplicaToMasterResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CleanUpInstanceRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type CleanUpInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *CleanUpInstanceRequest) ToJsonString() string {
@@ -538,10 +538,10 @@ func (r *CleanUpInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CleanUpInstanceResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CleanUpInstanceResponse struct {
@@ -563,20 +563,20 @@ func (r *CleanUpInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ClearInstanceRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Redis instance password (this parameter is required for password-enabled instances but not for password-free instances)
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
 type ClearInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Redis instance password (this parameter is required for password-enabled instances but not for password-free instances)
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
 func (r *ClearInstanceRequest) ToJsonString() string {
@@ -602,10 +602,10 @@ func (r *ClearInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ClearInstanceResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ClearInstanceResponse struct {
@@ -627,130 +627,130 @@ func (r *ClearInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CloneInstancesRequestParams struct {
 	// The ID of the source instance to be cloned, such as "crs-xjhsdj****". Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The number of clone instances at a time
 	// - The maximum number of monthly subscribed instances is 100 for each purchase.
 	// - The maximum number of pay-as-you-go instances is 30 for each purchase.
-	GoodsNum *uint64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
+	GoodsNum *uint64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
 	// ID of the AZ where the clone instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
-	ZoneId *uint64 `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Billing mode. Valid values: <ul><li>`0` (Pay-as-you-go) </li><li>`1` (Monthly subscription) </li></ul>
-	BillingMode *int64 `json:"BillingMode,omitnil" name:"BillingMode"`
+	BillingMode *int64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
 	// Purchase duration of an instance. <ul><li>Unit: Month</li><li>Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60` (for monthly subscription mode).</li><li> Valid value: `1` (for pay-as-you-go mode).</li></ul>
-	Period *uint64 `json:"Period,omitnil" name:"Period"`
+	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Security group ID, which can be obtained on the <b>Security Group</b> page in the console.
-	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitnil" name:"SecurityGroupIdList"`
+	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitnil,omitempty" name:"SecurityGroupIdList"`
 
 	// Backup ID of the clone instance, which can be obtained through the [DescribeInstanceBackups](https://intl.cloud.tencent.com/document/product/239/20011?from_cn_redirect=1) API.
-	BackupId *string `json:"BackupId,omitnil" name:"BackupId"`
+	BackupId *string `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 
 	// Whether the clone instance supports password-free access. Valid values: <ul><li>`true` (Yes)</li><li>`false` (No. When SSL or public network is enabled). Default value: `false`.</li></ul>
-	NoAuth *bool `json:"NoAuth,omitnil" name:"NoAuth"`
+	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
 
 	// The VPC ID of the clone instance. If this parameter is not passed in, the classic network will be selected by default.
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// The VPC subnet ID to which the clone instance belongs, which is not required for the classic network.
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Name of the clone instance. <br>Enter up to 60 letters, digits, hyphens, and underscores.</br>
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// The access password of the clone instance. <ul><li>When the input parameter <b>NoAuth</b> is <b>true</b>, this parameter is not required. </li><li>When the instance is Redis 2.8, 4.0, or 5.0, the password must contain 8–30 characters in at least two of the following types: lowercase letters, uppercase letters, digits, and special characters `()`~!@#$%^&*-+=_|{}[]:;<>,.?/` and cannot start with `/`.</li><li>When the instance is CKV 3.2, the password must and can only contain 8–30 letters and digits.</li></ul>
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// The auto-renewal flag. Valid values <ul><li>`0`: Manual renewal (default). </li><li>`1`: Auto-renewal. </li><li>`2`: Not auto-renewal (set by user).</ul>
-	AutoRenew *uint64 `json:"AutoRenew,omitnil" name:"AutoRenew"`
+	AutoRenew *uint64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
 
 	// Customized port. Valid range: 1024-65535. Default value: `6379`.
-	VPort *uint64 `json:"VPort,omitnil" name:"VPort"`
+	VPort *uint64 `json:"VPort,omitnil,omitempty" name:"VPort"`
 
 	// Node information of an instance. <ul><li>Currently supported type and AZ information of a node to be configured (master node or replica node) For more information, see [RedisNodeInfo](https://intl.cloud.tencent.com/document/product/239/20022?from_cn_redirect=1#RedisNodeInfo).</li><li>This parameter is not required for single-AZ deployment.</li></ul>
-	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil" name:"NodeSet"`
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil,omitempty" name:"NodeSet"`
 
 	// Project ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), and find the project ID in <b>Account Center</b> > <b>Project Management</b> in the top-right corner.
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Tag to be bound for the clone instance
-	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil" name:"ResourceTags"`
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// The parameter template ID associated with the clone instance
 	// - If this parameter is not configured, the system will automatically adapt the corresponding default template based on the selected compatible version and architecture.
 	// - You can query the parameter template list of the instance to get the template ID through the [DescribeParamTemplates](https://intl.cloud.tencent.com/document/product/239/58750?from_cn_redirect=1) API.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The alarm policy ID of the instance to be cloned. Log in to the [Tencent Cloud Observable Platform console](https://console.cloud.tencent.com/monitor/alarm2/policy), and get the policy ID in <b>Alarm Management</b> > <b>Policy Management</b>.
-	AlarmPolicyList []*string `json:"AlarmPolicyList,omitnil" name:"AlarmPolicyList"`
+	AlarmPolicyList []*string `json:"AlarmPolicyList,omitnil,omitempty" name:"AlarmPolicyList"`
 }
 
 type CloneInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// The ID of the source instance to be cloned, such as "crs-xjhsdj****". Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The number of clone instances at a time
 	// - The maximum number of monthly subscribed instances is 100 for each purchase.
 	// - The maximum number of pay-as-you-go instances is 30 for each purchase.
-	GoodsNum *uint64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
+	GoodsNum *uint64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
 	// ID of the AZ where the clone instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
-	ZoneId *uint64 `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Billing mode. Valid values: <ul><li>`0` (Pay-as-you-go) </li><li>`1` (Monthly subscription) </li></ul>
-	BillingMode *int64 `json:"BillingMode,omitnil" name:"BillingMode"`
+	BillingMode *int64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
 	// Purchase duration of an instance. <ul><li>Unit: Month</li><li>Valid values: `1`, `2`, `3`, `4`, `5`, `6`, `7`, `8`, `9`, `10`, `11`, `12`, `24`, `36`, `48`, `60` (for monthly subscription mode).</li><li> Valid value: `1` (for pay-as-you-go mode).</li></ul>
-	Period *uint64 `json:"Period,omitnil" name:"Period"`
+	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Security group ID, which can be obtained on the <b>Security Group</b> page in the console.
-	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitnil" name:"SecurityGroupIdList"`
+	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitnil,omitempty" name:"SecurityGroupIdList"`
 
 	// Backup ID of the clone instance, which can be obtained through the [DescribeInstanceBackups](https://intl.cloud.tencent.com/document/product/239/20011?from_cn_redirect=1) API.
-	BackupId *string `json:"BackupId,omitnil" name:"BackupId"`
+	BackupId *string `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 
 	// Whether the clone instance supports password-free access. Valid values: <ul><li>`true` (Yes)</li><li>`false` (No. When SSL or public network is enabled). Default value: `false`.</li></ul>
-	NoAuth *bool `json:"NoAuth,omitnil" name:"NoAuth"`
+	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
 
 	// The VPC ID of the clone instance. If this parameter is not passed in, the classic network will be selected by default.
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// The VPC subnet ID to which the clone instance belongs, which is not required for the classic network.
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Name of the clone instance. <br>Enter up to 60 letters, digits, hyphens, and underscores.</br>
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// The access password of the clone instance. <ul><li>When the input parameter <b>NoAuth</b> is <b>true</b>, this parameter is not required. </li><li>When the instance is Redis 2.8, 4.0, or 5.0, the password must contain 8–30 characters in at least two of the following types: lowercase letters, uppercase letters, digits, and special characters `()`~!@#$%^&*-+=_|{}[]:;<>,.?/` and cannot start with `/`.</li><li>When the instance is CKV 3.2, the password must and can only contain 8–30 letters and digits.</li></ul>
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// The auto-renewal flag. Valid values <ul><li>`0`: Manual renewal (default). </li><li>`1`: Auto-renewal. </li><li>`2`: Not auto-renewal (set by user).</ul>
-	AutoRenew *uint64 `json:"AutoRenew,omitnil" name:"AutoRenew"`
+	AutoRenew *uint64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
 
 	// Customized port. Valid range: 1024-65535. Default value: `6379`.
-	VPort *uint64 `json:"VPort,omitnil" name:"VPort"`
+	VPort *uint64 `json:"VPort,omitnil,omitempty" name:"VPort"`
 
 	// Node information of an instance. <ul><li>Currently supported type and AZ information of a node to be configured (master node or replica node) For more information, see [RedisNodeInfo](https://intl.cloud.tencent.com/document/product/239/20022?from_cn_redirect=1#RedisNodeInfo).</li><li>This parameter is not required for single-AZ deployment.</li></ul>
-	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil" name:"NodeSet"`
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil,omitempty" name:"NodeSet"`
 
 	// Project ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), and find the project ID in <b>Account Center</b> > <b>Project Management</b> in the top-right corner.
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Tag to be bound for the clone instance
-	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil" name:"ResourceTags"`
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// The parameter template ID associated with the clone instance
 	// - If this parameter is not configured, the system will automatically adapt the corresponding default template based on the selected compatible version and architecture.
 	// - You can query the parameter template list of the instance to get the template ID through the [DescribeParamTemplates](https://intl.cloud.tencent.com/document/product/239/58750?from_cn_redirect=1) API.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The alarm policy ID of the instance to be cloned. Log in to the [Tencent Cloud Observable Platform console](https://console.cloud.tencent.com/monitor/alarm2/policy), and get the policy ID in <b>Alarm Management</b> > <b>Policy Management</b>.
-	AlarmPolicyList []*string `json:"AlarmPolicyList,omitnil" name:"AlarmPolicyList"`
+	AlarmPolicyList []*string `json:"AlarmPolicyList,omitnil,omitempty" name:"AlarmPolicyList"`
 }
 
 func (r *CloneInstancesRequest) ToJsonString() string {
@@ -793,13 +793,13 @@ func (r *CloneInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CloneInstancesResponseParams struct {
 	// Request task ID
-	DealId *string `json:"DealId,omitnil" name:"DealId"`
+	DealId *string `json:"DealId,omitnil,omitempty" name:"DealId"`
 
 	// Clone instance ID
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CloneInstancesResponse struct {
@@ -821,14 +821,14 @@ func (r *CloneInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CloseSSLRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type CloseSSLRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *CloseSSLRequest) ToJsonString() string {
@@ -853,10 +853,10 @@ func (r *CloseSSLRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CloseSSLResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CloseSSLResponse struct {
@@ -877,19 +877,19 @@ func (r *CloseSSLResponse) FromJsonString(s string) error {
 
 type CommandTake struct {
 	// Command
-	Cmd *string `json:"Cmd,omitnil" name:"Cmd"`
+	Cmd *string `json:"Cmd,omitnil,omitempty" name:"Cmd"`
 
 	// Duration
-	Took *int64 `json:"Took,omitnil" name:"Took"`
+	Took *int64 `json:"Took,omitnil,omitempty" name:"Took"`
 }
 
 // Predefined struct for user
 type CreateInstanceAccountRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Sub-account name
-	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 
 	// 1. The password must contain 8–30 characters. A password of 12 or more characters is recommended.
 	// 2. It cannot start with a slash (/).
@@ -898,26 +898,26 @@ type CreateInstanceAccountRequestParams struct {
 	//     b. Uppercase letters (A–Z)
 	//     c. Digits (0–9)
 	//     d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
-	AccountPassword *string `json:"AccountPassword,omitnil" name:"AccountPassword"`
+	AccountPassword *string `json:"AccountPassword,omitnil,omitempty" name:"AccountPassword"`
 
 	// Routing policy. Valid values: master (master node); replication (replica node)
-	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil" name:"ReadonlyPolicy"`
+	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 
 	// Read/Write policy. Valid values: r (read-only); rw (read/write).
-	Privilege *string `json:"Privilege,omitnil" name:"Privilege"`
+	Privilege *string `json:"Privilege,omitnil,omitempty" name:"Privilege"`
 
 	// Sub-account description information
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 }
 
 type CreateInstanceAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Sub-account name
-	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 
 	// 1. The password must contain 8–30 characters. A password of 12 or more characters is recommended.
 	// 2. It cannot start with a slash (/).
@@ -926,16 +926,16 @@ type CreateInstanceAccountRequest struct {
 	//     b. Uppercase letters (A–Z)
 	//     c. Digits (0–9)
 	//     d. ()`~!@#$%^&*-+=_|{}[]:;<>,.?/
-	AccountPassword *string `json:"AccountPassword,omitnil" name:"AccountPassword"`
+	AccountPassword *string `json:"AccountPassword,omitnil,omitempty" name:"AccountPassword"`
 
 	// Routing policy. Valid values: master (master node); replication (replica node)
-	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil" name:"ReadonlyPolicy"`
+	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 
 	// Read/Write policy. Valid values: r (read-only); rw (read/write).
-	Privilege *string `json:"Privilege,omitnil" name:"Privilege"`
+	Privilege *string `json:"Privilege,omitnil,omitempty" name:"Privilege"`
 
 	// Sub-account description information
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 }
 
 func (r *CreateInstanceAccountRequest) ToJsonString() string {
@@ -965,10 +965,10 @@ func (r *CreateInstanceAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateInstanceAccountResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateInstanceAccountResponse struct {
@@ -991,106 +991,106 @@ func (r *CreateInstanceAccountResponse) FromJsonString(s string) error {
 type CreateInstancesRequestParams struct {
 	// Instance type
 	// <ul><li>`2`: Redis 2.8 Memory Edition (Standard Architecture). </li><li>`3`: CKV 3.2 Memory Edition (Standard Architecture). </li><li>`4`: CKV 3.2 Memory Edition (Cluster Architecture). </li><li>`6`: Redis 4.0 Memory Edition (Standard Architecture). </li><li>`7`: Redis 4.0 Memory Edition (Cluster Architecture). </li><li>`8`: Redis 5.0 Memory Edition (Standard Architecture). </li><li>`9`: Redis 5.0 Memory Edition (Cluster Architecture). </li><li>`15`: Redis 6.2 Memory Edition (Standard Architecture). </li><li>`16`: Redis 6.2 Memory Edition (Cluster Architecture).</li></ul>
-	TypeId *uint64 `json:"TypeId,omitnil" name:"TypeId"`
+	TypeId *uint64 `json:"TypeId,omitnil,omitempty" name:"TypeId"`
 
 	// Memory capacity in MB, which must be an integer multiple of 1024. For specific specifications, query the sales specifications in all regions through the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
 	// - When **TypeId** is a standard architecture, **MemSize** is the total memory capacity of the instance;
 	// - When **TypeId** is a cluster architecture, **MemSize** is the single-shard memory capacity.
-	MemSize *uint64 `json:"MemSize,omitnil" name:"MemSize"`
+	MemSize *uint64 `json:"MemSize,omitnil,omitempty" name:"MemSize"`
 
 	// The number of instances for each purchase. For details, query the sales specifications in all regions through the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
-	GoodsNum *uint64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
+	GoodsNum *uint64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
 	// The purchase duration of an instance
 	// - If `BillingMode` is `1`, that is, when the billing mode is monthly subscription, you need to set this parameter to specify the duration of the purchased instance. Unit: month. Value range: [1,2,3,4,5,6,7,8,9,10,11,12,24,36].
 	// - If `BillingMode` is `0`, that is, when the billing mode is pay-as-you-go, you need to set this parameter to `1`.
-	Period *uint64 `json:"Period,omitnil" name:"Period"`
+	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Billing mode. 0: pay-as-you-go
-	BillingMode *int64 `json:"BillingMode,omitnil" name:"BillingMode"`
+	BillingMode *int64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
 	// ID of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
-	ZoneId *uint64 `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Instance access password
 	// - When the input parameter `NoAuth` is `true`, it means that the instance access is set to be password-free, and the `Password` field does not need to be configured; otherwise, `Password` is a required parameter.
 	// - When the instance type `TypeId` is Redis 2.8 Memory Edition (Standard Architecture), Redis 4.0, 5.0, 6.0 (regardless of architecture), the password must contains 8-30 characters in at least two of the following types: lowercase letters, uppercase letters, digits, and symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/), and it cannot start with a slash (/).
 	// - When the instance type **TypeId** is CKV 3.2 Memory Edition (regardless of architecture), the password contains 8-30 letters and digits and excludes other characters.
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// VPC ID. If this parameter is not passed in, the classic network will be selected by default. You can query the specific VPC ID in the [VPC console](https://console.cloud.tencent.com/vpc).
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// VPC subnet ID. This parameter is not required for the classic network. You can get the specific subnet ID by querying the subnet list in the [VPC console](https://console.cloud.tencent.com/vpc).
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Project ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), go to the account information menu in the top-right corner, and select **Project Management** to query the project ID.
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Auto-renewal flag
 	// - `0`: Manual renewal (default).
 	// - `1`: Auto-renewal.
 	// - `2`: Not auto-renewal (set by user).
-	AutoRenew *uint64 `json:"AutoRenew,omitnil" name:"AutoRenew"`
+	AutoRenew *uint64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
 
 	// Array of security group IDs. Get the security group ID of the instance through the [DescribeInstanceSecurityGroup](https://intl.cloud.tencent.com/document/product/239/34447?from_cn_redirect=1) API.
-	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitnil" name:"SecurityGroupIdList"`
+	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitnil,omitempty" name:"SecurityGroupIdList"`
 
 	// User-defined network port. Default value: `6379`. Range: [1024,65535].
-	VPort *uint64 `json:"VPort,omitnil" name:"VPort"`
+	VPort *uint64 `json:"VPort,omitnil,omitempty" name:"VPort"`
 
 	// Quantity of instance shards
 	// - This parameter is not required for instances of Standard Edition.
 	// - For instances of Cluster Edition, the range of shard quantity is [1, 3, 5, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 128].
-	RedisShardNum *int64 `json:"RedisShardNum,omitnil" name:"RedisShardNum"`
+	RedisShardNum *int64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
 	// Quantity of instance replicas
 	// - For Redis Memory Edition 4.0, 5.0, 6.2 (regardless of architecture), the range of replica quantity is [1,5].
 	// - For Redis 2.8 Standard Edition and CKV Standard Edition, the replica quantity is `1`.
-	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitnil" name:"RedisReplicasNum"`
+	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitnil,omitempty" name:"RedisReplicasNum"`
 
 	// Whether to support read-only replicas.
 	// - Redis 2.8 Standard Edition and CKV Standard Edition don’t support read-only replicas.
 	// - If read-only replicas are enabled, read/write separation will be automatically enabled for an instance, with write requests routed to the master node and read requests to the replica node.
 	// - To enable read-only replicas, we recommend that you create two or more replicas.
-	ReplicasReadonly *bool `json:"ReplicasReadonly,omitnil" name:"ReplicasReadonly"`
+	ReplicasReadonly *bool `json:"ReplicasReadonly,omitnil,omitempty" name:"ReplicasReadonly"`
 
 	// Instance name, which can contain up to 60 letters, digits, hyphens, and underscores.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Whether to support password-free access for an instance
 	// - `true`: The instance access is password-free.
 	// - `false`: The instance access is password-enabled. Default value: `false`. Only instances in a VPC support the password-free access.
-	NoAuth *bool `json:"NoAuth,omitnil" name:"NoAuth"`
+	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
 
 	// The node information of the instance, including node ID, type, and AZ. For more information, see [RedisNodeInfo](https://intl.cloud.tencent.com/document/product/239/20022?from_cn_redirect=1).
 	// Node information of an instance. Currently, information about the node type (master or replica) and node AZ can be passed in. This parameter is not required for instances deployed in a single AZ.
-	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil" name:"NodeSet"`
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil,omitempty" name:"NodeSet"`
 
 	// The tag for an instance
-	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil" name:"ResourceTags"`
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// The parameter template ID associated with the instance
 	// - If this parameter is not configured, the system will automatically adapt the corresponding default template based on the selected compatible version and architecture.
 	// - Query the list of parameter templates of an instance to get the template ID through the [DescribeParamTemplates](https://intl.cloud.tencent.com/document/product/239/58750?from_cn_redirect=1) API.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// An internal parameter used to indicate whether to check when creating an instance.
 	// - `false`: Default value. Send a normal request and create an instance if all the requirements are met.
 	// - `true`: Send a check request and create no instance.
-	DryRun *bool `json:"DryRun,omitnil" name:"DryRun"`
+	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
 	// The product edition of the instance
 	// - `local`: Local Disk Edition.
 	// - `cloud`: Cloud Disk Edition.
 	// - `cdc`: Dedicated Cluster Edition. Default value: `local`.
-	ProductVersion *string `json:"ProductVersion,omitnil" name:"ProductVersion"`
+	ProductVersion *string `json:"ProductVersion,omitnil,omitempty" name:"ProductVersion"`
 
 	// Exclusive cluster ID. When `ProductVersion` is set to `cdc`, this parameter is required.
-	RedisClusterId *string `json:"RedisClusterId,omitnil" name:"RedisClusterId"`
+	RedisClusterId *string `json:"RedisClusterId,omitnil,omitempty" name:"RedisClusterId"`
 }
 
 type CreateInstancesRequest struct {
@@ -1098,106 +1098,106 @@ type CreateInstancesRequest struct {
 	
 	// Instance type
 	// <ul><li>`2`: Redis 2.8 Memory Edition (Standard Architecture). </li><li>`3`: CKV 3.2 Memory Edition (Standard Architecture). </li><li>`4`: CKV 3.2 Memory Edition (Cluster Architecture). </li><li>`6`: Redis 4.0 Memory Edition (Standard Architecture). </li><li>`7`: Redis 4.0 Memory Edition (Cluster Architecture). </li><li>`8`: Redis 5.0 Memory Edition (Standard Architecture). </li><li>`9`: Redis 5.0 Memory Edition (Cluster Architecture). </li><li>`15`: Redis 6.2 Memory Edition (Standard Architecture). </li><li>`16`: Redis 6.2 Memory Edition (Cluster Architecture).</li></ul>
-	TypeId *uint64 `json:"TypeId,omitnil" name:"TypeId"`
+	TypeId *uint64 `json:"TypeId,omitnil,omitempty" name:"TypeId"`
 
 	// Memory capacity in MB, which must be an integer multiple of 1024. For specific specifications, query the sales specifications in all regions through the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
 	// - When **TypeId** is a standard architecture, **MemSize** is the total memory capacity of the instance;
 	// - When **TypeId** is a cluster architecture, **MemSize** is the single-shard memory capacity.
-	MemSize *uint64 `json:"MemSize,omitnil" name:"MemSize"`
+	MemSize *uint64 `json:"MemSize,omitnil,omitempty" name:"MemSize"`
 
 	// The number of instances for each purchase. For details, query the sales specifications in all regions through the [DescribeProductInfo](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1) API.
-	GoodsNum *uint64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
+	GoodsNum *uint64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
 	// The purchase duration of an instance
 	// - If `BillingMode` is `1`, that is, when the billing mode is monthly subscription, you need to set this parameter to specify the duration of the purchased instance. Unit: month. Value range: [1,2,3,4,5,6,7,8,9,10,11,12,24,36].
 	// - If `BillingMode` is `0`, that is, when the billing mode is pay-as-you-go, you need to set this parameter to `1`.
-	Period *uint64 `json:"Period,omitnil" name:"Period"`
+	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Billing mode. 0: pay-as-you-go
-	BillingMode *int64 `json:"BillingMode,omitnil" name:"BillingMode"`
+	BillingMode *int64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
 	// ID of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
-	ZoneId *uint64 `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Instance access password
 	// - When the input parameter `NoAuth` is `true`, it means that the instance access is set to be password-free, and the `Password` field does not need to be configured; otherwise, `Password` is a required parameter.
 	// - When the instance type `TypeId` is Redis 2.8 Memory Edition (Standard Architecture), Redis 4.0, 5.0, 6.0 (regardless of architecture), the password must contains 8-30 characters in at least two of the following types: lowercase letters, uppercase letters, digits, and symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/), and it cannot start with a slash (/).
 	// - When the instance type **TypeId** is CKV 3.2 Memory Edition (regardless of architecture), the password contains 8-30 letters and digits and excludes other characters.
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// VPC ID. If this parameter is not passed in, the classic network will be selected by default. You can query the specific VPC ID in the [VPC console](https://console.cloud.tencent.com/vpc).
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// VPC subnet ID. This parameter is not required for the classic network. You can get the specific subnet ID by querying the subnet list in the [VPC console](https://console.cloud.tencent.com/vpc).
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Project ID. Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), go to the account information menu in the top-right corner, and select **Project Management** to query the project ID.
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Auto-renewal flag
 	// - `0`: Manual renewal (default).
 	// - `1`: Auto-renewal.
 	// - `2`: Not auto-renewal (set by user).
-	AutoRenew *uint64 `json:"AutoRenew,omitnil" name:"AutoRenew"`
+	AutoRenew *uint64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
 
 	// Array of security group IDs. Get the security group ID of the instance through the [DescribeInstanceSecurityGroup](https://intl.cloud.tencent.com/document/product/239/34447?from_cn_redirect=1) API.
-	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitnil" name:"SecurityGroupIdList"`
+	SecurityGroupIdList []*string `json:"SecurityGroupIdList,omitnil,omitempty" name:"SecurityGroupIdList"`
 
 	// User-defined network port. Default value: `6379`. Range: [1024,65535].
-	VPort *uint64 `json:"VPort,omitnil" name:"VPort"`
+	VPort *uint64 `json:"VPort,omitnil,omitempty" name:"VPort"`
 
 	// Quantity of instance shards
 	// - This parameter is not required for instances of Standard Edition.
 	// - For instances of Cluster Edition, the range of shard quantity is [1, 3, 5, 8, 12, 16, 24, 32, 40, 48, 64, 80, 96, 128].
-	RedisShardNum *int64 `json:"RedisShardNum,omitnil" name:"RedisShardNum"`
+	RedisShardNum *int64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
 	// Quantity of instance replicas
 	// - For Redis Memory Edition 4.0, 5.0, 6.2 (regardless of architecture), the range of replica quantity is [1,5].
 	// - For Redis 2.8 Standard Edition and CKV Standard Edition, the replica quantity is `1`.
-	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitnil" name:"RedisReplicasNum"`
+	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitnil,omitempty" name:"RedisReplicasNum"`
 
 	// Whether to support read-only replicas.
 	// - Redis 2.8 Standard Edition and CKV Standard Edition don’t support read-only replicas.
 	// - If read-only replicas are enabled, read/write separation will be automatically enabled for an instance, with write requests routed to the master node and read requests to the replica node.
 	// - To enable read-only replicas, we recommend that you create two or more replicas.
-	ReplicasReadonly *bool `json:"ReplicasReadonly,omitnil" name:"ReplicasReadonly"`
+	ReplicasReadonly *bool `json:"ReplicasReadonly,omitnil,omitempty" name:"ReplicasReadonly"`
 
 	// Instance name, which can contain up to 60 letters, digits, hyphens, and underscores.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Whether to support password-free access for an instance
 	// - `true`: The instance access is password-free.
 	// - `false`: The instance access is password-enabled. Default value: `false`. Only instances in a VPC support the password-free access.
-	NoAuth *bool `json:"NoAuth,omitnil" name:"NoAuth"`
+	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
 
 	// The node information of the instance, including node ID, type, and AZ. For more information, see [RedisNodeInfo](https://intl.cloud.tencent.com/document/product/239/20022?from_cn_redirect=1).
 	// Node information of an instance. Currently, information about the node type (master or replica) and node AZ can be passed in. This parameter is not required for instances deployed in a single AZ.
-	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil" name:"NodeSet"`
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil,omitempty" name:"NodeSet"`
 
 	// The tag for an instance
-	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil" name:"ResourceTags"`
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// The parameter template ID associated with the instance
 	// - If this parameter is not configured, the system will automatically adapt the corresponding default template based on the selected compatible version and architecture.
 	// - Query the list of parameter templates of an instance to get the template ID through the [DescribeParamTemplates](https://intl.cloud.tencent.com/document/product/239/58750?from_cn_redirect=1) API.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// An internal parameter used to indicate whether to check when creating an instance.
 	// - `false`: Default value. Send a normal request and create an instance if all the requirements are met.
 	// - `true`: Send a check request and create no instance.
-	DryRun *bool `json:"DryRun,omitnil" name:"DryRun"`
+	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
 	// The product edition of the instance
 	// - `local`: Local Disk Edition.
 	// - `cloud`: Cloud Disk Edition.
 	// - `cdc`: Dedicated Cluster Edition. Default value: `local`.
-	ProductVersion *string `json:"ProductVersion,omitnil" name:"ProductVersion"`
+	ProductVersion *string `json:"ProductVersion,omitnil,omitempty" name:"ProductVersion"`
 
 	// Exclusive cluster ID. When `ProductVersion` is set to `cdc`, this parameter is required.
-	RedisClusterId *string `json:"RedisClusterId,omitnil" name:"RedisClusterId"`
+	RedisClusterId *string `json:"RedisClusterId,omitnil,omitempty" name:"RedisClusterId"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -1246,13 +1246,13 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateInstancesResponseParams struct {
 	// Transaction ID
-	DealId *string `json:"DealId,omitnil" name:"DealId"`
+	DealId *string `json:"DealId,omitnil,omitempty" name:"DealId"`
 
 	// Instance ID
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateInstancesResponse struct {
@@ -1274,38 +1274,38 @@ func (r *CreateInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateParamTemplateRequestParams struct {
 	// Parameter template name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Parameter template description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Instance type. Valid values: `1` (Redis 2.8 Memory Edition in cluster architecture), `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture). If `TempateId` is specified, this parameter can be left blank; otherwise, it is required.
-	ProductType *uint64 `json:"ProductType,omitnil" name:"ProductType"`
+	ProductType *uint64 `json:"ProductType,omitnil,omitempty" name:"ProductType"`
 
 	// ID of the source parameter template.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Parameter list.
-	ParamList []*InstanceParam `json:"ParamList,omitnil" name:"ParamList"`
+	ParamList []*InstanceParam `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 }
 
 type CreateParamTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Parameter template name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Parameter template description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Instance type. Valid values: `1` (Redis 2.8 Memory Edition in cluster architecture), `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture). If `TempateId` is specified, this parameter can be left blank; otherwise, it is required.
-	ProductType *uint64 `json:"ProductType,omitnil" name:"ProductType"`
+	ProductType *uint64 `json:"ProductType,omitnil,omitempty" name:"ProductType"`
 
 	// ID of the source parameter template.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Parameter list.
-	ParamList []*InstanceParam `json:"ParamList,omitnil" name:"ParamList"`
+	ParamList []*InstanceParam `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 }
 
 func (r *CreateParamTemplateRequest) ToJsonString() string {
@@ -1334,10 +1334,10 @@ func (r *CreateParamTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateParamTemplateResponseParams struct {
 	// Parameter template ID.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateParamTemplateResponse struct {
@@ -1358,32 +1358,32 @@ func (r *CreateParamTemplateResponse) FromJsonString(s string) error {
 
 type DelayDistribution struct {
 	// The delay distribution. The mapping between delay range and `Ladder` value is as follows:  - `1`: [0ms,1ms]. - `5`: [1ms,5ms]. - `10`: [5ms,10ms]. - `50`: [10ms,50ms]. - `200`:  [50ms,200ms]. - `-1`: [200ms,∞].
-	Ladder *int64 `json:"Ladder,omitnil" name:"Ladder"`
+	Ladder *int64 `json:"Ladder,omitnil,omitempty" name:"Ladder"`
 
 	// The number of commands with delay falling within the current delay range -
-	Size *int64 `json:"Size,omitnil" name:"Size"`
+	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// Modification time
-	Updatetime *int64 `json:"Updatetime,omitnil" name:"Updatetime"`
+	Updatetime *int64 `json:"Updatetime,omitnil,omitempty" name:"Updatetime"`
 }
 
 // Predefined struct for user
 type DeleteInstanceAccountRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Sub-account name
-	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 }
 
 type DeleteInstanceAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Sub-account name
-	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 }
 
 func (r *DeleteInstanceAccountRequest) ToJsonString() string {
@@ -1409,10 +1409,10 @@ func (r *DeleteInstanceAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteInstanceAccountResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteInstanceAccountResponse struct {
@@ -1434,14 +1434,14 @@ func (r *DeleteInstanceAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteParamTemplateRequestParams struct {
 	// Parameter template ID.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DeleteParamTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Parameter template ID.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *DeleteParamTemplateRequest) ToJsonString() string {
@@ -1466,7 +1466,7 @@ func (r *DeleteParamTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteParamTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteParamTemplateResponse struct {
@@ -1488,14 +1488,14 @@ func (r *DeleteParamTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAutoBackupConfigRequestParams struct {
 	// ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeAutoBackupConfigRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeAutoBackupConfigRequest) ToJsonString() string {
@@ -1520,22 +1520,22 @@ func (r *DescribeAutoBackupConfigRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAutoBackupConfigResponseParams struct {
 	// This parameter is retained due to compatibility and can be ignored.
-	AutoBackupType *int64 `json:"AutoBackupType,omitnil" name:"AutoBackupType"`
+	AutoBackupType *int64 `json:"AutoBackupType,omitnil,omitempty" name:"AutoBackupType"`
 
 	// Backup cycle, which will be daily by default. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`.
-	WeekDays []*string `json:"WeekDays,omitnil" name:"WeekDays"`
+	WeekDays []*string `json:"WeekDays,omitnil,omitempty" name:"WeekDays"`
 
 	// Time period for backup task initialization
-	TimePeriod *string `json:"TimePeriod,omitnil" name:"TimePeriod"`
+	TimePeriod *string `json:"TimePeriod,omitnil,omitempty" name:"TimePeriod"`
 
 	// Retention time of full backup files in days.  Default value: `7`.  To retain the files for more days, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application.
-	BackupStorageDays *int64 `json:"BackupStorageDays,omitnil" name:"BackupStorageDays"`
+	BackupStorageDays *int64 `json:"BackupStorageDays,omitnil,omitempty" name:"BackupStorageDays"`
 
 	// This parameter has been disused.
-	BinlogStorageDays *int64 `json:"BinlogStorageDays,omitnil" name:"BinlogStorageDays"`
+	BinlogStorageDays *int64 `json:"BinlogStorageDays,omitnil,omitempty" name:"BinlogStorageDays"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeAutoBackupConfigResponse struct {
@@ -1590,25 +1590,25 @@ type DescribeBackupDownloadRestrictionResponseParams struct {
 	// - `NoLimit`: Backup files can be downloaded over both public and private networks.
 	// - `LimitOnlyIntranet`: Backup files can be downloaded only at private network addresses auto-assigned by Tencent Cloud.
 	// - `Customize`: Backup files can be downloaded only in the customized VPC.
-	LimitType *string `json:"LimitType,omitnil" name:"LimitType"`
+	LimitType *string `json:"LimitType,omitnil,omitempty" name:"LimitType"`
 
 	// Only `In` can be passed in for this parameter, indicating that backup files can be downloaded in the custom `LimitVpc`.
-	VpcComparisonSymbol *string `json:"VpcComparisonSymbol,omitnil" name:"VpcComparisonSymbol"`
+	VpcComparisonSymbol *string `json:"VpcComparisonSymbol,omitnil,omitempty" name:"VpcComparisonSymbol"`
 
 	// Whether backups can be downloaded at the custom `LimitIp` address.
 	// 
 	// - `In`: Download is allowed for the custom IP.
 	// - `NotIn`: Download is not allowed for the custom IP.
-	IpComparisonSymbol *string `json:"IpComparisonSymbol,omitnil" name:"IpComparisonSymbol"`
+	IpComparisonSymbol *string `json:"IpComparisonSymbol,omitnil,omitempty" name:"IpComparisonSymbol"`
 
 	// VPC ID of the custom backup file download address, which will be displayed if `LimitType` is `Customize`.
-	LimitVpc []*BackupLimitVpcItem `json:"LimitVpc,omitnil" name:"LimitVpc"`
+	LimitVpc []*BackupLimitVpcItem `json:"LimitVpc,omitnil,omitempty" name:"LimitVpc"`
 
 	// VPC ID of the custom backup file download address, which will be displayed if `LimitType` is `Customize`.
-	LimitIp []*string `json:"LimitIp,omitnil" name:"LimitIp"`
+	LimitIp []*string `json:"LimitIp,omitnil,omitempty" name:"LimitIp"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeBackupDownloadRestrictionResponse struct {
@@ -1630,64 +1630,64 @@ func (r *DescribeBackupDownloadRestrictionResponse) FromJsonString(s string) err
 // Predefined struct for user
 type DescribeBackupUrlRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Backup ID, which can be obtained through the `RedisBackupSet` parameter returned by the [DescribeInstanceBackups](https://intl.cloud.tencent.com/document/product/239/20011?from_cn_redirect=1) API.
-	BackupId *string `json:"BackupId,omitnil" name:"BackupId"`
+	BackupId *string `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 
 	// Type of the network restriction for downloading backup files. If this parameter is not configured, the user-defined configuration will be used.
 	// 
 	// - `NoLimit`: Backup files can be downloaded over both public and private networks.
 	// - `LimitOnlyIntranet`: Backup files can be downloaded only at private network addresses auto-assigned by Tencent Cloud.
 	// - `Customize`: Backup files can be downloaded only in the customized VPC.
-	LimitType *string `json:"LimitType,omitnil" name:"LimitType"`
+	LimitType *string `json:"LimitType,omitnil,omitempty" name:"LimitType"`
 
 	// Only `In` can be passed in for this parameter, indicating that backup files can be downloaded in the custom `LimitVpc`.
-	VpcComparisonSymbol *string `json:"VpcComparisonSymbol,omitnil" name:"VpcComparisonSymbol"`
+	VpcComparisonSymbol *string `json:"VpcComparisonSymbol,omitnil,omitempty" name:"VpcComparisonSymbol"`
 
 	// Whether backups can be downloaded at the custom `LimitIp` address.
 	// 
 	// - `In` (default value): Download is allowed for the custom IP.
 	// - `NotIn`: Download is not allowed for the custom IP.
-	IpComparisonSymbol *string `json:"IpComparisonSymbol,omitnil" name:"IpComparisonSymbol"`
+	IpComparisonSymbol *string `json:"IpComparisonSymbol,omitnil,omitempty" name:"IpComparisonSymbol"`
 
 	// VPC ID of the custom backup file download address, which is required if `LimitType` is `Customize`.
-	LimitVpc []*BackupLimitVpcItem `json:"LimitVpc,omitnil" name:"LimitVpc"`
+	LimitVpc []*BackupLimitVpcItem `json:"LimitVpc,omitnil,omitempty" name:"LimitVpc"`
 
 	// VPC IP of the custom backup file download address, which is required if `LimitType` is `Customize`.
-	LimitIp []*string `json:"LimitIp,omitnil" name:"LimitIp"`
+	LimitIp []*string `json:"LimitIp,omitnil,omitempty" name:"LimitIp"`
 }
 
 type DescribeBackupUrlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Backup ID, which can be obtained through the `RedisBackupSet` parameter returned by the [DescribeInstanceBackups](https://intl.cloud.tencent.com/document/product/239/20011?from_cn_redirect=1) API.
-	BackupId *string `json:"BackupId,omitnil" name:"BackupId"`
+	BackupId *string `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 
 	// Type of the network restriction for downloading backup files. If this parameter is not configured, the user-defined configuration will be used.
 	// 
 	// - `NoLimit`: Backup files can be downloaded over both public and private networks.
 	// - `LimitOnlyIntranet`: Backup files can be downloaded only at private network addresses auto-assigned by Tencent Cloud.
 	// - `Customize`: Backup files can be downloaded only in the customized VPC.
-	LimitType *string `json:"LimitType,omitnil" name:"LimitType"`
+	LimitType *string `json:"LimitType,omitnil,omitempty" name:"LimitType"`
 
 	// Only `In` can be passed in for this parameter, indicating that backup files can be downloaded in the custom `LimitVpc`.
-	VpcComparisonSymbol *string `json:"VpcComparisonSymbol,omitnil" name:"VpcComparisonSymbol"`
+	VpcComparisonSymbol *string `json:"VpcComparisonSymbol,omitnil,omitempty" name:"VpcComparisonSymbol"`
 
 	// Whether backups can be downloaded at the custom `LimitIp` address.
 	// 
 	// - `In` (default value): Download is allowed for the custom IP.
 	// - `NotIn`: Download is not allowed for the custom IP.
-	IpComparisonSymbol *string `json:"IpComparisonSymbol,omitnil" name:"IpComparisonSymbol"`
+	IpComparisonSymbol *string `json:"IpComparisonSymbol,omitnil,omitempty" name:"IpComparisonSymbol"`
 
 	// VPC ID of the custom backup file download address, which is required if `LimitType` is `Customize`.
-	LimitVpc []*BackupLimitVpcItem `json:"LimitVpc,omitnil" name:"LimitVpc"`
+	LimitVpc []*BackupLimitVpcItem `json:"LimitVpc,omitnil,omitempty" name:"LimitVpc"`
 
 	// VPC IP of the custom backup file download address, which is required if `LimitType` is `Customize`.
-	LimitIp []*string `json:"LimitIp,omitnil" name:"LimitIp"`
+	LimitIp []*string `json:"LimitIp,omitnil,omitempty" name:"LimitIp"`
 }
 
 func (r *DescribeBackupUrlRequest) ToJsonString() string {
@@ -1718,21 +1718,21 @@ func (r *DescribeBackupUrlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBackupUrlResponseParams struct {
 	// Public network download address (valid for six hours). This field will be disused soon.
-	DownloadUrl []*string `json:"DownloadUrl,omitnil" name:"DownloadUrl"`
+	DownloadUrl []*string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
 
 	// Private network download address (valid for six hours). This field will be disused soon.
-	InnerDownloadUrl []*string `json:"InnerDownloadUrl,omitnil" name:"InnerDownloadUrl"`
+	InnerDownloadUrl []*string `json:"InnerDownloadUrl,omitnil,omitempty" name:"InnerDownloadUrl"`
 
 	// Filename. This field will be disused soon.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Filenames []*string `json:"Filenames,omitnil" name:"Filenames"`
+	Filenames []*string `json:"Filenames,omitnil,omitempty" name:"Filenames"`
 
 	// List of backup file information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BackupInfos []*BackupDownloadInfo `json:"BackupInfos,omitnil" name:"BackupInfos"`
+	BackupInfos []*BackupDownloadInfo `json:"BackupInfos,omitnil,omitempty" name:"BackupInfos"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeBackupUrlResponse struct {
@@ -1754,14 +1754,14 @@ func (r *DescribeBackupUrlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBandwidthRangeRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeBandwidthRangeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeBandwidthRangeRequest) ToJsonString() string {
@@ -1786,19 +1786,19 @@ func (r *DescribeBandwidthRangeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBandwidthRangeResponseParams struct {
 	// Standard bandwidth, which is the bandwidth allocated by the system to each node when an instance is purchased.
-	BaseBandwidth *int64 `json:"BaseBandwidth,omitnil" name:"BaseBandwidth"`
+	BaseBandwidth *int64 `json:"BaseBandwidth,omitnil,omitempty" name:"BaseBandwidth"`
 
 	// The additional bandwidth of the instance. If the standard bandwidth does not meet your needs, you can increase the bandwidth on your own. <ul><li>If read-only replica is enabled, the total instance bandwidth = additional bandwidth * shard quantity + standard bandwidth * shard quantity * Max ([read-only replica quantity, 1]). The shard quantity in the standard architecture is 1. </li><li>If read-only replica is not enabled, the total instance bandwidth = additional bandwidth * shard quantity + standard bandwidth * shard quantity. The shard quantity in the standard architecture is 1.</li></ul>
-	AddBandwidth *int64 `json:"AddBandwidth,omitnil" name:"AddBandwidth"`
+	AddBandwidth *int64 `json:"AddBandwidth,omitnil,omitempty" name:"AddBandwidth"`
 
 	// The lower limit for additional bandwidth
-	MinAddBandwidth *int64 `json:"MinAddBandwidth,omitnil" name:"MinAddBandwidth"`
+	MinAddBandwidth *int64 `json:"MinAddBandwidth,omitnil,omitempty" name:"MinAddBandwidth"`
 
 	// The upper limit for additional bandwidth
-	MaxAddBandwidth *int64 `json:"MaxAddBandwidth,omitnil" name:"MaxAddBandwidth"`
+	MaxAddBandwidth *int64 `json:"MaxAddBandwidth,omitnil,omitempty" name:"MaxAddBandwidth"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeBandwidthRangeResponse struct {
@@ -1820,86 +1820,86 @@ func (r *DescribeBandwidthRangeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCommonDBInstancesRequestParams struct {
 	// List of VPC IDs
-	VpcIds []*int64 `json:"VpcIds,omitnil" name:"VpcIds"`
+	VpcIds []*int64 `json:"VpcIds,omitnil,omitempty" name:"VpcIds"`
 
 	// List of subnet IDs
-	SubnetIds []*int64 `json:"SubnetIds,omitnil" name:"SubnetIds"`
+	SubnetIds []*int64 `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
 	// List of billing modes. 0: monthly subscription; 1: pay-as-you-go
-	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// List of instance IDs
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// List of instance names
-	InstanceNames []*string `json:"InstanceNames,omitnil" name:"InstanceNames"`
+	InstanceNames []*string `json:"InstanceNames,omitnil,omitempty" name:"InstanceNames"`
 
 	// List of instance status
-	Status []*string `json:"Status,omitnil" name:"Status"`
+	Status []*string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Sorting field
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Sorting order
-	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 
 	// List of instance VIPs
-	Vips []*string `json:"Vips,omitnil" name:"Vips"`
+	Vips []*string `json:"Vips,omitnil,omitempty" name:"Vips"`
 
 	// List of VPC IDs
-	UniqVpcIds []*string `json:"UniqVpcIds,omitnil" name:"UniqVpcIds"`
+	UniqVpcIds []*string `json:"UniqVpcIds,omitnil,omitempty" name:"UniqVpcIds"`
 
 	// List of unique subnet IDs
-	UniqSubnetIds []*string `json:"UniqSubnetIds,omitnil" name:"UniqSubnetIds"`
+	UniqSubnetIds []*string `json:"UniqSubnetIds,omitnil,omitempty" name:"UniqSubnetIds"`
 
 	// Quantity limit. Recommended default value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeCommonDBInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of VPC IDs
-	VpcIds []*int64 `json:"VpcIds,omitnil" name:"VpcIds"`
+	VpcIds []*int64 `json:"VpcIds,omitnil,omitempty" name:"VpcIds"`
 
 	// List of subnet IDs
-	SubnetIds []*int64 `json:"SubnetIds,omitnil" name:"SubnetIds"`
+	SubnetIds []*int64 `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
 	// List of billing modes. 0: monthly subscription; 1: pay-as-you-go
-	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// List of instance IDs
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// List of instance names
-	InstanceNames []*string `json:"InstanceNames,omitnil" name:"InstanceNames"`
+	InstanceNames []*string `json:"InstanceNames,omitnil,omitempty" name:"InstanceNames"`
 
 	// List of instance status
-	Status []*string `json:"Status,omitnil" name:"Status"`
+	Status []*string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Sorting field
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Sorting order
-	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 
 	// List of instance VIPs
-	Vips []*string `json:"Vips,omitnil" name:"Vips"`
+	Vips []*string `json:"Vips,omitnil,omitempty" name:"Vips"`
 
 	// List of VPC IDs
-	UniqVpcIds []*string `json:"UniqVpcIds,omitnil" name:"UniqVpcIds"`
+	UniqVpcIds []*string `json:"UniqVpcIds,omitnil,omitempty" name:"UniqVpcIds"`
 
 	// List of unique subnet IDs
-	UniqSubnetIds []*string `json:"UniqSubnetIds,omitnil" name:"UniqSubnetIds"`
+	UniqSubnetIds []*string `json:"UniqSubnetIds,omitnil,omitempty" name:"UniqSubnetIds"`
 
 	// Quantity limit. Recommended default value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeCommonDBInstancesRequest) ToJsonString() string {
@@ -1936,13 +1936,13 @@ func (r *DescribeCommonDBInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCommonDBInstancesResponseParams struct {
 	// Number of instances
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Instance information
-	InstanceDetails []*RedisCommonInstanceList `json:"InstanceDetails,omitnil" name:"InstanceDetails"`
+	InstanceDetails []*RedisCommonInstanceList `json:"InstanceDetails,omitnil,omitempty" name:"InstanceDetails"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeCommonDBInstancesResponse struct {
@@ -1964,20 +1964,20 @@ func (r *DescribeCommonDBInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBSecurityGroupsRequestParams struct {
 	// Database engine name, which is `redis` for this API.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeDBSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Database engine name, which is `redis` for this API.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// ID of the specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeDBSecurityGroupsRequest) ToJsonString() string {
@@ -2003,16 +2003,16 @@ func (r *DescribeDBSecurityGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBSecurityGroupsResponseParams struct {
 	// Security group rules
-	Groups []*SecurityGroup `json:"Groups,omitnil" name:"Groups"`
+	Groups []*SecurityGroup `json:"Groups,omitnil,omitempty" name:"Groups"`
 
 	// Private IPv4 address of an instance
-	VIP *string `json:"VIP,omitnil" name:"VIP"`
+	VIP *string `json:"VIP,omitnil,omitempty" name:"VIP"`
 
 	// Private network port
-	VPort *string `json:"VPort,omitnil" name:"VPort"`
+	VPort *string `json:"VPort,omitnil,omitempty" name:"VPort"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDBSecurityGroupsResponse struct {
@@ -2034,26 +2034,26 @@ func (r *DescribeDBSecurityGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceAccountRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Number of entries per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset,  which is an integral multiple of `Limit`.  Calculation formula:  `offset` = `limit` * (page number - 1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeInstanceAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Number of entries per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset,  which is an integral multiple of `Limit`.  Calculation formula:  `offset` = `limit` * (page number - 1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeInstanceAccountRequest) ToJsonString() string {
@@ -2081,14 +2081,14 @@ func (r *DescribeInstanceAccountRequest) FromJsonString(s string) error {
 type DescribeInstanceAccountResponseParams struct {
 	// Account details 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	Accounts []*Account `json:"Accounts,omitnil" name:"Accounts"`
+	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 
 	// Number of accounts 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceAccountResponse struct {
@@ -2110,19 +2110,19 @@ func (r *DescribeInstanceAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceBackupsRequestParams struct {
 	// Number of backups returned per page. Default value: `20`. Maximum value: `100`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstance` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Start time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-02-08 16:46:34. This parameter is used to query the list of instance backups started during the [beginTime, endTime] range.
-	BeginTime *string `json:"BeginTime,omitnil" name:"BeginTime"`
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
 	// End time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-02-08 19:09:26. This parameter is used to query the list of instance backups started during the [beginTime, endTime] range.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Backup task status:
 	// `1`: The backup is in the process.
@@ -2131,29 +2131,29 @@ type DescribeInstanceBackupsRequestParams struct {
 	// `4`: Conversion to RDB has been completed.
 	// `-1`: The backup expired.
 	// `-2`: The backup has been deleted.
-	Status []*int64 `json:"Status,omitnil" name:"Status"`
+	Status []*int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Instance name, which can be fuzzily searched.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 }
 
 type DescribeInstanceBackupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Number of backups returned per page. Default value: `20`. Maximum value: `100`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstance` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Start time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-02-08 16:46:34. This parameter is used to query the list of instance backups started during the [beginTime, endTime] range.
-	BeginTime *string `json:"BeginTime,omitnil" name:"BeginTime"`
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
 	// End time in the format of yyyy-MM-dd HH:mm:ss, such as 2017-02-08 19:09:26. This parameter is used to query the list of instance backups started during the [beginTime, endTime] range.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Backup task status:
 	// `1`: The backup is in the process.
@@ -2162,10 +2162,10 @@ type DescribeInstanceBackupsRequest struct {
 	// `4`: Conversion to RDB has been completed.
 	// `-1`: The backup expired.
 	// `-2`: The backup has been deleted.
-	Status []*int64 `json:"Status,omitnil" name:"Status"`
+	Status []*int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Instance name, which can be fuzzily searched.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 }
 
 func (r *DescribeInstanceBackupsRequest) ToJsonString() string {
@@ -2196,13 +2196,13 @@ func (r *DescribeInstanceBackupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceBackupsResponseParams struct {
 	// Total number of backups.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Array of instance backups.
-	BackupSet []*RedisBackupSet `json:"BackupSet,omitnil" name:"BackupSet"`
+	BackupSet []*RedisBackupSet `json:"BackupSet,omitnil,omitempty" name:"BackupSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceBackupsResponse struct {
@@ -2224,14 +2224,14 @@ func (r *DescribeInstanceBackupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceDTSInfoRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeInstanceDTSInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeInstanceDTSInfoRequest) ToJsonString() string {
@@ -2257,38 +2257,38 @@ func (r *DescribeInstanceDTSInfoRequest) FromJsonString(s string) error {
 type DescribeInstanceDTSInfoResponseParams struct {
 	// DTS task ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	JobId *string `json:"JobId,omitnil" name:"JobId"`
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// DTS task name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	JobName *string `json:"JobName,omitnil" name:"JobName"`
+	JobName *string `json:"JobName,omitnil,omitempty" name:"JobName"`
 
 	// Task status. Valid values: 1 (Creating), 3 (Checking), 4 (CheckPass), 5 (CheckNotPass), 7 (Running), 8 (ReadyComplete), 9 (Success), 10 (Failed), 11 (Stopping), 12 (Completing)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Status description
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StatusDesc *string `json:"StatusDesc,omitnil" name:"StatusDesc"`
+	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
 
 	// Sync latency in bytes
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Disconnection time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CutDownTime *string `json:"CutDownTime,omitnil" name:"CutDownTime"`
+	CutDownTime *string `json:"CutDownTime,omitnil,omitempty" name:"CutDownTime"`
 
 	// Source instance information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SrcInfo *DescribeInstanceDTSInstanceInfo `json:"SrcInfo,omitnil" name:"SrcInfo"`
+	SrcInfo *DescribeInstanceDTSInstanceInfo `json:"SrcInfo,omitnil,omitempty" name:"SrcInfo"`
 
 	// Target instance information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DstInfo *DescribeInstanceDTSInstanceInfo `json:"DstInfo,omitnil" name:"DstInfo"`
+	DstInfo *DescribeInstanceDTSInstanceInfo `json:"DstInfo,omitnil,omitempty" name:"DstInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceDTSInfoResponse struct {
@@ -2310,48 +2310,48 @@ func (r *DescribeInstanceDTSInfoResponse) FromJsonString(s string) error {
 type DescribeInstanceDTSInstanceInfo struct {
 	// Region ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RegionId *int64 `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *int64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Instance ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Repository ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SetId *int64 `json:"SetId,omitnil" name:"SetId"`
+	SetId *int64 `json:"SetId,omitnil,omitempty" name:"SetId"`
 
 	// AZ ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ZoneId *int64 `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Instance type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Type *int64 `json:"Type,omitnil" name:"Type"`
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Instance name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Instance access address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// Status
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 // Predefined struct for user
 type DescribeInstanceDealDetailRequestParams struct {
 	// Array of order transaction IDs, i.e., the `DealId` output parameter of the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
-	DealIds []*string `json:"DealIds,omitnil" name:"DealIds"`
+	DealIds []*string `json:"DealIds,omitnil,omitempty" name:"DealIds"`
 }
 
 type DescribeInstanceDealDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Array of order transaction IDs, i.e., the `DealId` output parameter of the [CreateInstances](https://intl.cloud.tencent.com/document/api/239/20026?from_cn_redirect=1) API.
-	DealIds []*string `json:"DealIds,omitnil" name:"DealIds"`
+	DealIds []*string `json:"DealIds,omitnil,omitempty" name:"DealIds"`
 }
 
 func (r *DescribeInstanceDealDetailRequest) ToJsonString() string {
@@ -2376,10 +2376,10 @@ func (r *DescribeInstanceDealDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceDealDetailResponseParams struct {
 	// Order details
-	DealDetails []*TradeDealDetail `json:"DealDetails,omitnil" name:"DealDetails"`
+	DealDetails []*TradeDealDetail `json:"DealDetails,omitnil,omitempty" name:"DealDetails"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceDealDetailResponse struct {
@@ -2401,26 +2401,26 @@ func (r *DescribeInstanceDealDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceMonitorBigKeyRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Request type. 1: string type; 2: all types
-	ReqType *int64 `json:"ReqType,omitnil" name:"ReqType"`
+	ReqType *int64 `json:"ReqType,omitnil,omitempty" name:"ReqType"`
 
 	// Time, such as "20190219"
-	Date *string `json:"Date,omitnil" name:"Date"`
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 }
 
 type DescribeInstanceMonitorBigKeyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Request type. 1: string type; 2: all types
-	ReqType *int64 `json:"ReqType,omitnil" name:"ReqType"`
+	ReqType *int64 `json:"ReqType,omitnil,omitempty" name:"ReqType"`
 
 	// Time, such as "20190219"
-	Date *string `json:"Date,omitnil" name:"Date"`
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 }
 
 func (r *DescribeInstanceMonitorBigKeyRequest) ToJsonString() string {
@@ -2447,10 +2447,10 @@ func (r *DescribeInstanceMonitorBigKeyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceMonitorBigKeyResponseParams struct {
 	// Big key details
-	Data []*BigKeyInfo `json:"Data,omitnil" name:"Data"`
+	Data []*BigKeyInfo `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceMonitorBigKeyResponse struct {
@@ -2472,20 +2472,20 @@ func (r *DescribeInstanceMonitorBigKeyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceMonitorBigKeySizeDistRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time, such as "20190219"
-	Date *string `json:"Date,omitnil" name:"Date"`
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 }
 
 type DescribeInstanceMonitorBigKeySizeDistRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time, such as "20190219"
-	Date *string `json:"Date,omitnil" name:"Date"`
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 }
 
 func (r *DescribeInstanceMonitorBigKeySizeDistRequest) ToJsonString() string {
@@ -2511,10 +2511,10 @@ func (r *DescribeInstanceMonitorBigKeySizeDistRequest) FromJsonString(s string) 
 // Predefined struct for user
 type DescribeInstanceMonitorBigKeySizeDistResponseParams struct {
 	// Big key size distribution details
-	Data []*DelayDistribution `json:"Data,omitnil" name:"Data"`
+	Data []*DelayDistribution `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceMonitorBigKeySizeDistResponse struct {
@@ -2536,20 +2536,20 @@ func (r *DescribeInstanceMonitorBigKeySizeDistResponse) FromJsonString(s string)
 // Predefined struct for user
 type DescribeInstanceMonitorBigKeyTypeDistRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time, such as "20190219"
-	Date *string `json:"Date,omitnil" name:"Date"`
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 }
 
 type DescribeInstanceMonitorBigKeyTypeDistRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time, such as "20190219"
-	Date *string `json:"Date,omitnil" name:"Date"`
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 }
 
 func (r *DescribeInstanceMonitorBigKeyTypeDistRequest) ToJsonString() string {
@@ -2575,10 +2575,10 @@ func (r *DescribeInstanceMonitorBigKeyTypeDistRequest) FromJsonString(s string) 
 // Predefined struct for user
 type DescribeInstanceMonitorBigKeyTypeDistResponseParams struct {
 	// Big key type distribution details
-	Data []*BigKeyTypeInfo `json:"Data,omitnil" name:"Data"`
+	Data []*BigKeyTypeInfo `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceMonitorBigKeyTypeDistResponse struct {
@@ -2600,20 +2600,20 @@ func (r *DescribeInstanceMonitorBigKeyTypeDistResponse) FromJsonString(s string)
 // Predefined struct for user
 type DescribeInstanceMonitorHotKeyRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time span. 1: real time; 2: past 30 minutes; 3: past 6 hours; 4: past 24 hours
-	SpanType *int64 `json:"SpanType,omitnil" name:"SpanType"`
+	SpanType *int64 `json:"SpanType,omitnil,omitempty" name:"SpanType"`
 }
 
 type DescribeInstanceMonitorHotKeyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time span. 1: real time; 2: past 30 minutes; 3: past 6 hours; 4: past 24 hours
-	SpanType *int64 `json:"SpanType,omitnil" name:"SpanType"`
+	SpanType *int64 `json:"SpanType,omitnil,omitempty" name:"SpanType"`
 }
 
 func (r *DescribeInstanceMonitorHotKeyRequest) ToJsonString() string {
@@ -2639,10 +2639,10 @@ func (r *DescribeInstanceMonitorHotKeyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceMonitorHotKeyResponseParams struct {
 	// Hot key details
-	Data []*HotKeyInfo `json:"Data,omitnil" name:"Data"`
+	Data []*HotKeyInfo `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceMonitorHotKeyResponse struct {
@@ -2664,14 +2664,14 @@ func (r *DescribeInstanceMonitorHotKeyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceMonitorSIPRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeInstanceMonitorSIPRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeInstanceMonitorSIPRequest) ToJsonString() string {
@@ -2696,10 +2696,10 @@ func (r *DescribeInstanceMonitorSIPRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceMonitorSIPResponseParams struct {
 	// Access source information
-	Data []*SourceInfo `json:"Data,omitnil" name:"Data"`
+	Data []*SourceInfo `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceMonitorSIPResponse struct {
@@ -2721,26 +2721,26 @@ func (r *DescribeInstanceMonitorSIPResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceMonitorTookDistRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time, such as "20190219"
-	Date *string `json:"Date,omitnil" name:"Date"`
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 
 	// Time span. 1: real time; 2: last 30 minutes; 3: last 6 hours; 4: last 24 hours
-	SpanType *int64 `json:"SpanType,omitnil" name:"SpanType"`
+	SpanType *int64 `json:"SpanType,omitnil,omitempty" name:"SpanType"`
 }
 
 type DescribeInstanceMonitorTookDistRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time, such as "20190219"
-	Date *string `json:"Date,omitnil" name:"Date"`
+	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 
 	// Time span. 1: real time; 2: last 30 minutes; 3: last 6 hours; 4: last 24 hours
-	SpanType *int64 `json:"SpanType,omitnil" name:"SpanType"`
+	SpanType *int64 `json:"SpanType,omitnil,omitempty" name:"SpanType"`
 }
 
 func (r *DescribeInstanceMonitorTookDistRequest) ToJsonString() string {
@@ -2767,10 +2767,10 @@ func (r *DescribeInstanceMonitorTookDistRequest) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeInstanceMonitorTookDistResponseParams struct {
 	// Latency distribution information
-	Data []*DelayDistribution `json:"Data,omitnil" name:"Data"`
+	Data []*DelayDistribution `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceMonitorTookDistResponse struct {
@@ -2792,20 +2792,20 @@ func (r *DescribeInstanceMonitorTookDistResponse) FromJsonString(s string) error
 // Predefined struct for user
 type DescribeInstanceMonitorTopNCmdRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time span. 1: real time; 2: last 30 minutes; 3: last 6 hours; 4: last 24 hours
-	SpanType *int64 `json:"SpanType,omitnil" name:"SpanType"`
+	SpanType *int64 `json:"SpanType,omitnil,omitempty" name:"SpanType"`
 }
 
 type DescribeInstanceMonitorTopNCmdRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time span. 1: real time; 2: last 30 minutes; 3: last 6 hours; 4: last 24 hours
-	SpanType *int64 `json:"SpanType,omitnil" name:"SpanType"`
+	SpanType *int64 `json:"SpanType,omitnil,omitempty" name:"SpanType"`
 }
 
 func (r *DescribeInstanceMonitorTopNCmdRequest) ToJsonString() string {
@@ -2831,10 +2831,10 @@ func (r *DescribeInstanceMonitorTopNCmdRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceMonitorTopNCmdResponseParams struct {
 	// Access command information
-	Data []*SourceCommand `json:"Data,omitnil" name:"Data"`
+	Data []*SourceCommand `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceMonitorTopNCmdResponse struct {
@@ -2856,20 +2856,20 @@ func (r *DescribeInstanceMonitorTopNCmdResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeInstanceMonitorTopNCmdTookRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time span. 1: real time; 2: last 30 minutes; 3: last 6 hours; 4: last 24 hours
-	SpanType *int64 `json:"SpanType,omitnil" name:"SpanType"`
+	SpanType *int64 `json:"SpanType,omitnil,omitempty" name:"SpanType"`
 }
 
 type DescribeInstanceMonitorTopNCmdTookRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Time span. 1: real time; 2: last 30 minutes; 3: last 6 hours; 4: last 24 hours
-	SpanType *int64 `json:"SpanType,omitnil" name:"SpanType"`
+	SpanType *int64 `json:"SpanType,omitnil,omitempty" name:"SpanType"`
 }
 
 func (r *DescribeInstanceMonitorTopNCmdTookRequest) ToJsonString() string {
@@ -2895,10 +2895,10 @@ func (r *DescribeInstanceMonitorTopNCmdTookRequest) FromJsonString(s string) err
 // Predefined struct for user
 type DescribeInstanceMonitorTopNCmdTookResponseParams struct {
 	// Duration details
-	Data []*CommandTake `json:"Data,omitnil" name:"Data"`
+	Data []*CommandTake `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceMonitorTopNCmdTookResponse struct {
@@ -2920,26 +2920,26 @@ func (r *DescribeInstanceMonitorTopNCmdTookResponse) FromJsonString(s string) er
 // Predefined struct for user
 type DescribeInstanceNodeInfoRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// List size Size of node information returned per page.  Default value: `20`. Maximum value: `1000`.  This field has been disused.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1). This field has been disused.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeInstanceNodeInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// List size Size of node information returned per page.  Default value: `20`. Maximum value: `1000`.  This field has been disused.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1). This field has been disused.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeInstanceNodeInfoRequest) ToJsonString() string {
@@ -2966,28 +2966,28 @@ func (r *DescribeInstanceNodeInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceNodeInfoResponseParams struct {
 	// The number of proxy nodes
-	ProxyCount *int64 `json:"ProxyCount,omitnil" name:"ProxyCount"`
+	ProxyCount *int64 `json:"ProxyCount,omitnil,omitempty" name:"ProxyCount"`
 
 	// Proxy node information 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	Proxy []*ProxyNodes `json:"Proxy,omitnil" name:"Proxy"`
+	Proxy []*ProxyNodes `json:"Proxy,omitnil,omitempty" name:"Proxy"`
 
 	// The number of Redis nodes
-	RedisCount *int64 `json:"RedisCount,omitnil" name:"RedisCount"`
+	RedisCount *int64 `json:"RedisCount,omitnil,omitempty" name:"RedisCount"`
 
 	// Redis node information 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	Redis []*RedisNodes `json:"Redis,omitnil" name:"Redis"`
+	Redis []*RedisNodes `json:"Redis,omitnil,omitempty" name:"Redis"`
 
 	// This parameter has been disused.
-	TendisCount *int64 `json:"TendisCount,omitnil" name:"TendisCount"`
+	TendisCount *int64 `json:"TendisCount,omitnil,omitempty" name:"TendisCount"`
 
 	// This parameter has been disused. 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	Tendis []*TendisNodes `json:"Tendis,omitnil" name:"Tendis"`
+	Tendis []*TendisNodes `json:"Tendis,omitnil,omitempty" name:"Tendis"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceNodeInfoResponse struct {
@@ -3009,26 +3009,26 @@ func (r *DescribeInstanceNodeInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceParamRecordsRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Maximum number of results returned per page
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset, which is an integral multiple of `Limit`.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeInstanceParamRecordsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Maximum number of results returned per page
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset, which is an integral multiple of `Limit`.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeInstanceParamRecordsRequest) ToJsonString() string {
@@ -3055,13 +3055,13 @@ func (r *DescribeInstanceParamRecordsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceParamRecordsResponseParams struct {
 	// Total number of modifications.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Information of modifications.
-	InstanceParamHistory []*InstanceParamHistory `json:"InstanceParamHistory,omitnil" name:"InstanceParamHistory"`
+	InstanceParamHistory []*InstanceParamHistory `json:"InstanceParamHistory,omitnil,omitempty" name:"InstanceParamHistory"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceParamRecordsResponse struct {
@@ -3083,14 +3083,14 @@ func (r *DescribeInstanceParamRecordsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceParamsRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeInstanceParamsRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeInstanceParamsRequest) ToJsonString() string {
@@ -3115,22 +3115,22 @@ func (r *DescribeInstanceParamsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceParamsResponseParams struct {
 	// Total number of the parameter lists
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Instance parameter in Enum type
-	InstanceEnumParam []*InstanceEnumParam `json:"InstanceEnumParam,omitnil" name:"InstanceEnumParam"`
+	InstanceEnumParam []*InstanceEnumParam `json:"InstanceEnumParam,omitnil,omitempty" name:"InstanceEnumParam"`
 
 	// Instance parameter in Integer type
-	InstanceIntegerParam []*InstanceIntegerParam `json:"InstanceIntegerParam,omitnil" name:"InstanceIntegerParam"`
+	InstanceIntegerParam []*InstanceIntegerParam `json:"InstanceIntegerParam,omitnil,omitempty" name:"InstanceIntegerParam"`
 
 	// Instance parameter in Char type
-	InstanceTextParam []*InstanceTextParam `json:"InstanceTextParam,omitnil" name:"InstanceTextParam"`
+	InstanceTextParam []*InstanceTextParam `json:"InstanceTextParam,omitnil,omitempty" name:"InstanceTextParam"`
 
 	// Instance parameter in Multi type
-	InstanceMultiParam []*InstanceMultiParam `json:"InstanceMultiParam,omitnil" name:"InstanceMultiParam"`
+	InstanceMultiParam []*InstanceMultiParam `json:"InstanceMultiParam,omitnil,omitempty" name:"InstanceMultiParam"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceParamsResponse struct {
@@ -3152,14 +3152,14 @@ func (r *DescribeInstanceParamsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceSecurityGroupRequestParams struct {
 	// List of instance IDs,  such as "crs-f2ho5rsz\n".
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type DescribeInstanceSecurityGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of instance IDs,  such as "crs-f2ho5rsz\n".
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *DescribeInstanceSecurityGroupRequest) ToJsonString() string {
@@ -3184,10 +3184,10 @@ func (r *DescribeInstanceSecurityGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceSecurityGroupResponseParams struct {
 	// Security group information of an instance
-	InstanceSecurityGroupsDetail []*InstanceSecurityGroupDetail `json:"InstanceSecurityGroupsDetail,omitnil" name:"InstanceSecurityGroupsDetail"`
+	InstanceSecurityGroupsDetail []*InstanceSecurityGroupDetail `json:"InstanceSecurityGroupsDetail,omitnil,omitempty" name:"InstanceSecurityGroupsDetail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceSecurityGroupResponse struct {
@@ -3209,20 +3209,20 @@ func (r *DescribeInstanceSecurityGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceShardsRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Whether to filter out the replica node information. Valid values: `true` (yes),  `false` (no).
-	FilterSlave *bool `json:"FilterSlave,omitnil" name:"FilterSlave"`
+	FilterSlave *bool `json:"FilterSlave,omitnil,omitempty" name:"FilterSlave"`
 }
 
 type DescribeInstanceShardsRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Whether to filter out the replica node information. Valid values: `true` (yes),  `false` (no).
-	FilterSlave *bool `json:"FilterSlave,omitnil" name:"FilterSlave"`
+	FilterSlave *bool `json:"FilterSlave,omitnil,omitempty" name:"FilterSlave"`
 }
 
 func (r *DescribeInstanceShardsRequest) ToJsonString() string {
@@ -3248,13 +3248,13 @@ func (r *DescribeInstanceShardsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceShardsResponseParams struct {
 	// List information of the instance shards, which includes  node information, node ID, key count, used capacity, and capacity slope.
-	InstanceShards []*InstanceClusterShard `json:"InstanceShards,omitnil" name:"InstanceShards"`
+	InstanceShards []*InstanceClusterShard `json:"InstanceShards,omitnil,omitempty" name:"InstanceShards"`
 
 	// Number of instance shard nodes
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceShardsResponse struct {
@@ -3276,14 +3276,14 @@ func (r *DescribeInstanceShardsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceZoneInfoRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeInstanceZoneInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeInstanceZoneInfoRequest) ToJsonString() string {
@@ -3308,13 +3308,13 @@ func (r *DescribeInstanceZoneInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceZoneInfoResponseParams struct {
 	// Number of instance node groups
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of instance node groups
-	ReplicaGroups []*ReplicaGroup `json:"ReplicaGroups,omitnil" name:"ReplicaGroups"`
+	ReplicaGroups []*ReplicaGroup `json:"ReplicaGroups,omitnil,omitempty" name:"ReplicaGroups"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceZoneInfoResponse struct {
@@ -3336,172 +3336,172 @@ func (r *DescribeInstanceZoneInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstancesRequestParams struct {
 	// Number of instances returned per page. Default value: `20`. Maximum value: `1000`.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	// 
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance list sorting criteria. The enumerated values are as listed below:  <ul><li>`projectId`:  Project ID.  </li><li>`createtime`:  Instance creation time.  </li><li>`instancename`:  Instance name.  </li><li>`type`:  Instance type. </li><li>`curDeadline`:  Instance expiration time. </li></ul>
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Instance sorting order. <ul><li>`1`: Descending. </li><li>`0`: Ascending. Default value: `1`.</li></ul>
-	OrderType *int64 `json:"OrderType,omitnil" name:"OrderType"`
+	OrderType *int64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
 
 	// Array of VPC IDs such as 47525. If this parameter is not passed in or the array is empty, the classic network will be selected by default. This parameter is retained and can be ignored. It is set based on `UniqVpcIds` parameter format.
-	VpcIds []*string `json:"VpcIds,omitnil" name:"VpcIds"`
+	VpcIds []*string `json:"VpcIds,omitnil,omitempty" name:"VpcIds"`
 
 	// Array of VPC subnet IDs such as 56854. This parameter is retained and can be ignored. It is set based on `UniqSubnetIds` parameter format.
-	SubnetIds []*string `json:"SubnetIds,omitnil" name:"SubnetIds"`
+	SubnetIds []*string `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
 	// Keywords for fuzzy query. which can be used to fuzzy query an instance by its ID or name.
-	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
 
 	// Array of project IDs
-	ProjectIds []*int64 `json:"ProjectIds,omitnil" name:"ProjectIds"`
+	ProjectIds []*int64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Array of VPC IDs such as vpc-sad23jfdfk. If this parameter is not passed in or or the array is empty, the classic network will be selected by default.
-	UniqVpcIds []*string `json:"UniqVpcIds,omitnil" name:"UniqVpcIds"`
+	UniqVpcIds []*string `json:"UniqVpcIds,omitnil,omitempty" name:"UniqVpcIds"`
 
 	// Array of VPC subnet IDs such as subnet-fdj24n34j2
-	UniqSubnetIds []*string `json:"UniqSubnetIds,omitnil" name:"UniqSubnetIds"`
+	UniqSubnetIds []*string `json:"UniqSubnetIds,omitnil,omitempty" name:"UniqSubnetIds"`
 
 	// Array of region IDs (disused). The corresponding region can be queried through the common parameter `Region`.
-	RegionIds []*int64 `json:"RegionIds,omitnil" name:"RegionIds"`
+	RegionIds []*int64 `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
 
 	// Instance status. <ul><li>`0`: Uninitialized. </li><li>`1`: In the process. </li><li>`2`: Running. </li><li>`-2`: Isolated. </li><li>`-3`: To be deleted. </li></ul>
-	Status []*int64 `json:"Status,omitnil" name:"Status"`
+	Status []*int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Instance architecture. <ul><li>`1`: Standalone edition. </li><li>`2`: Master-replica edition. </li><li>`3`: Cluster edition. </li></ul>
-	TypeVersion *int64 `json:"TypeVersion,omitnil" name:"TypeVersion"`
+	TypeVersion *int64 `json:"TypeVersion,omitnil,omitempty" name:"TypeVersion"`
 
 	// Storage engine information. Valid values: `Redis-2.8`, `Redis-4.0`, `Redis-5.0`, `Redis-6.0` or `CKV`.
-	EngineName *string `json:"EngineName,omitnil" name:"EngineName"`
+	EngineName *string `json:"EngineName,omitnil,omitempty" name:"EngineName"`
 
 	// Renewal mode. Valid values:  <ul><li>`0`:  Manual renewal </li><li>`1`:  Auto-renewal </li><li>`2`:  No renewal upon expiration </ul>
-	AutoRenew []*int64 `json:"AutoRenew,omitnil" name:"AutoRenew"`
+	AutoRenew []*int64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
 
 	// Billing mode. Only pay-as-you-go billing is supported.
-	BillingMode *string `json:"BillingMode,omitnil" name:"BillingMode"`
+	BillingMode *string `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
 	// Instance type. Valid values:  - `2`: Redis 2.8 Memory Edition (Standard Architecture). - `3`: CKV 3.2 Memory Edition (Standard Architecture). - `4`: CKV 3.2 Memory Edition (Cluster Architecture). - `5`: Redis 2.8 Memory Edition (Standalone). - `6`: Redis 4.0 Memory Edition (Standard Architecture). - `7`: Redis 4.0 Memory Edition (Cluster Architecture). - `8`: Redis 5.0 Memory Edition (Standard Architecture). - `9`: Redis 5.0 Memory Edition (Cluster Architecture). - `15`: Redis 6.2 Memory Edition (Standard Architecture). - `16`: Redis 6.2 Memory Edition (Cluster Architecture).
-	Type *int64 `json:"Type,omitnil" name:"Type"`
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Array of the search keywords, which can query the instance by its ID, name, IP address.
-	SearchKeys []*string `json:"SearchKeys,omitnil" name:"SearchKeys"`
+	SearchKeys []*string `json:"SearchKeys,omitnil,omitempty" name:"SearchKeys"`
 
 	// Internal parameter, which can be ignored.
-	TypeList []*int64 `json:"TypeList,omitnil" name:"TypeList"`
+	TypeList []*int64 `json:"TypeList,omitnil,omitempty" name:"TypeList"`
 
 	// Internal parameter, which can be ignored.
-	MonitorVersion *string `json:"MonitorVersion,omitnil" name:"MonitorVersion"`
+	MonitorVersion *string `json:"MonitorVersion,omitnil,omitempty" name:"MonitorVersion"`
 
 	// Resources filter by tag key and value. If this parameter is not specified or is an empty array, resources will not be filtered.
-	InstanceTags []*InstanceTagInfo `json:"InstanceTags,omitnil" name:"InstanceTags"`
+	InstanceTags []*InstanceTagInfo `json:"InstanceTags,omitnil,omitempty" name:"InstanceTags"`
 
 	// Resources filter by tag key. If this parameter is not specified or is an empty array, resources will not be filtered.
-	TagKeys []*string `json:"TagKeys,omitnil" name:"TagKeys"`
+	TagKeys []*string `json:"TagKeys,omitnil,omitempty" name:"TagKeys"`
 
 	// Instance product version.  If this parameter is not passed in or the array is empty, the instances will not be filtered based this parameter by default.  <ul><li>`local`:  Local disk edition.  </li><li>`cdc`:  Dedicated cluster edition.  </li></ul>
-	ProductVersions []*string `json:"ProductVersions,omitnil" name:"ProductVersions"`
+	ProductVersions []*string `json:"ProductVersions,omitnil,omitempty" name:"ProductVersions"`
 
 	// Batch query of the specified instances ID. The number of results returned is based on `Limit`.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// AZ deployment mode. <ul><li>`singleaz`: Single-AZ. </li><li>`1`: Multi-AZ. </li></ul>
-	AzMode *string `json:"AzMode,omitnil" name:"AzMode"`
+	AzMode *string `json:"AzMode,omitnil,omitempty" name:"AzMode"`
 }
 
 type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Number of instances returned per page. Default value: `20`. Maximum value: `1000`.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
 	// 
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance list sorting criteria. The enumerated values are as listed below:  <ul><li>`projectId`:  Project ID.  </li><li>`createtime`:  Instance creation time.  </li><li>`instancename`:  Instance name.  </li><li>`type`:  Instance type. </li><li>`curDeadline`:  Instance expiration time. </li></ul>
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Instance sorting order. <ul><li>`1`: Descending. </li><li>`0`: Ascending. Default value: `1`.</li></ul>
-	OrderType *int64 `json:"OrderType,omitnil" name:"OrderType"`
+	OrderType *int64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
 
 	// Array of VPC IDs such as 47525. If this parameter is not passed in or the array is empty, the classic network will be selected by default. This parameter is retained and can be ignored. It is set based on `UniqVpcIds` parameter format.
-	VpcIds []*string `json:"VpcIds,omitnil" name:"VpcIds"`
+	VpcIds []*string `json:"VpcIds,omitnil,omitempty" name:"VpcIds"`
 
 	// Array of VPC subnet IDs such as 56854. This parameter is retained and can be ignored. It is set based on `UniqSubnetIds` parameter format.
-	SubnetIds []*string `json:"SubnetIds,omitnil" name:"SubnetIds"`
+	SubnetIds []*string `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
 	// Keywords for fuzzy query. which can be used to fuzzy query an instance by its ID or name.
-	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
 
 	// Array of project IDs
-	ProjectIds []*int64 `json:"ProjectIds,omitnil" name:"ProjectIds"`
+	ProjectIds []*int64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Array of VPC IDs such as vpc-sad23jfdfk. If this parameter is not passed in or or the array is empty, the classic network will be selected by default.
-	UniqVpcIds []*string `json:"UniqVpcIds,omitnil" name:"UniqVpcIds"`
+	UniqVpcIds []*string `json:"UniqVpcIds,omitnil,omitempty" name:"UniqVpcIds"`
 
 	// Array of VPC subnet IDs such as subnet-fdj24n34j2
-	UniqSubnetIds []*string `json:"UniqSubnetIds,omitnil" name:"UniqSubnetIds"`
+	UniqSubnetIds []*string `json:"UniqSubnetIds,omitnil,omitempty" name:"UniqSubnetIds"`
 
 	// Array of region IDs (disused). The corresponding region can be queried through the common parameter `Region`.
-	RegionIds []*int64 `json:"RegionIds,omitnil" name:"RegionIds"`
+	RegionIds []*int64 `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
 
 	// Instance status. <ul><li>`0`: Uninitialized. </li><li>`1`: In the process. </li><li>`2`: Running. </li><li>`-2`: Isolated. </li><li>`-3`: To be deleted. </li></ul>
-	Status []*int64 `json:"Status,omitnil" name:"Status"`
+	Status []*int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Instance architecture. <ul><li>`1`: Standalone edition. </li><li>`2`: Master-replica edition. </li><li>`3`: Cluster edition. </li></ul>
-	TypeVersion *int64 `json:"TypeVersion,omitnil" name:"TypeVersion"`
+	TypeVersion *int64 `json:"TypeVersion,omitnil,omitempty" name:"TypeVersion"`
 
 	// Storage engine information. Valid values: `Redis-2.8`, `Redis-4.0`, `Redis-5.0`, `Redis-6.0` or `CKV`.
-	EngineName *string `json:"EngineName,omitnil" name:"EngineName"`
+	EngineName *string `json:"EngineName,omitnil,omitempty" name:"EngineName"`
 
 	// Renewal mode. Valid values:  <ul><li>`0`:  Manual renewal </li><li>`1`:  Auto-renewal </li><li>`2`:  No renewal upon expiration </ul>
-	AutoRenew []*int64 `json:"AutoRenew,omitnil" name:"AutoRenew"`
+	AutoRenew []*int64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
 
 	// Billing mode. Only pay-as-you-go billing is supported.
-	BillingMode *string `json:"BillingMode,omitnil" name:"BillingMode"`
+	BillingMode *string `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
 	// Instance type. Valid values:  - `2`: Redis 2.8 Memory Edition (Standard Architecture). - `3`: CKV 3.2 Memory Edition (Standard Architecture). - `4`: CKV 3.2 Memory Edition (Cluster Architecture). - `5`: Redis 2.8 Memory Edition (Standalone). - `6`: Redis 4.0 Memory Edition (Standard Architecture). - `7`: Redis 4.0 Memory Edition (Cluster Architecture). - `8`: Redis 5.0 Memory Edition (Standard Architecture). - `9`: Redis 5.0 Memory Edition (Cluster Architecture). - `15`: Redis 6.2 Memory Edition (Standard Architecture). - `16`: Redis 6.2 Memory Edition (Cluster Architecture).
-	Type *int64 `json:"Type,omitnil" name:"Type"`
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Array of the search keywords, which can query the instance by its ID, name, IP address.
-	SearchKeys []*string `json:"SearchKeys,omitnil" name:"SearchKeys"`
+	SearchKeys []*string `json:"SearchKeys,omitnil,omitempty" name:"SearchKeys"`
 
 	// Internal parameter, which can be ignored.
-	TypeList []*int64 `json:"TypeList,omitnil" name:"TypeList"`
+	TypeList []*int64 `json:"TypeList,omitnil,omitempty" name:"TypeList"`
 
 	// Internal parameter, which can be ignored.
-	MonitorVersion *string `json:"MonitorVersion,omitnil" name:"MonitorVersion"`
+	MonitorVersion *string `json:"MonitorVersion,omitnil,omitempty" name:"MonitorVersion"`
 
 	// Resources filter by tag key and value. If this parameter is not specified or is an empty array, resources will not be filtered.
-	InstanceTags []*InstanceTagInfo `json:"InstanceTags,omitnil" name:"InstanceTags"`
+	InstanceTags []*InstanceTagInfo `json:"InstanceTags,omitnil,omitempty" name:"InstanceTags"`
 
 	// Resources filter by tag key. If this parameter is not specified or is an empty array, resources will not be filtered.
-	TagKeys []*string `json:"TagKeys,omitnil" name:"TagKeys"`
+	TagKeys []*string `json:"TagKeys,omitnil,omitempty" name:"TagKeys"`
 
 	// Instance product version.  If this parameter is not passed in or the array is empty, the instances will not be filtered based this parameter by default.  <ul><li>`local`:  Local disk edition.  </li><li>`cdc`:  Dedicated cluster edition.  </li></ul>
-	ProductVersions []*string `json:"ProductVersions,omitnil" name:"ProductVersions"`
+	ProductVersions []*string `json:"ProductVersions,omitnil,omitempty" name:"ProductVersions"`
 
 	// Batch query of the specified instances ID. The number of results returned is based on `Limit`.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// AZ deployment mode. <ul><li>`singleaz`: Single-AZ. </li><li>`1`: Multi-AZ. </li></ul>
-	AzMode *string `json:"AzMode,omitnil" name:"AzMode"`
+	AzMode *string `json:"AzMode,omitnil,omitempty" name:"AzMode"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -3552,13 +3552,13 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstancesResponseParams struct {
 	// Total number of instances
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of instance details
-	InstanceSet []*InstanceSet `json:"InstanceSet,omitnil" name:"InstanceSet"`
+	InstanceSet []*InstanceSet `json:"InstanceSet,omitnil,omitempty" name:"InstanceSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstancesResponse struct {
@@ -3580,14 +3580,14 @@ func (r *DescribeInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMaintenanceWindowRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeMaintenanceWindowRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeMaintenanceWindowRequest) ToJsonString() string {
@@ -3612,13 +3612,13 @@ func (r *DescribeMaintenanceWindowRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMaintenanceWindowResponseParams struct {
 	// Start time of the maintenance window, such as 17:00.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time of the maintenance window, such as 19:00.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeMaintenanceWindowResponse struct {
@@ -3640,14 +3640,14 @@ func (r *DescribeMaintenanceWindowResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeParamTemplateInfoRequestParams struct {
 	// The parameter template ID for query. Get parameter template list information through the [DescribeParamTemplates](https://intl.cloud.tencent.com/document/product/239/58750?from_cn_redirect=1) API.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DescribeParamTemplateInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// The parameter template ID for query. Get parameter template list information through the [DescribeParamTemplates](https://intl.cloud.tencent.com/document/product/239/58750?from_cn_redirect=1) API.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *DescribeParamTemplateInfoRequest) ToJsonString() string {
@@ -3672,13 +3672,13 @@ func (r *DescribeParamTemplateInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeParamTemplateInfoResponseParams struct {
 	// Quantity of parameters in the parameter template
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Parameter template ID.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Parameter template name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Product type
 	// - `2`: Redis 2.8 Memory Edition (Standard Architecture).
@@ -3691,16 +3691,16 @@ type DescribeParamTemplateInfoResponseParams struct {
 	// - `9`: Redis 5.0 Memory Edition (Cluster Architecture).
 	// - `15`: Redis 6.2 Memory Edition (Standard Architecture).
 	// - `16`: Redis 6.2 Memory Edition (Cluster Architecture).
-	ProductType *uint64 `json:"ProductType,omitnil" name:"ProductType"`
+	ProductType *uint64 `json:"ProductType,omitnil,omitempty" name:"ProductType"`
 
 	// Parameter template description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Parameter details, including parameter name, current value, default value, maximum value, minimum value, enumeration value and other information.
-	Items []*ParameterDetail `json:"Items,omitnil" name:"Items"`
+	Items []*ParameterDetail `json:"Items,omitnil,omitempty" name:"Items"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeParamTemplateInfoResponse struct {
@@ -3722,26 +3722,26 @@ func (r *DescribeParamTemplateInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeParamTemplatesRequestParams struct {
 	// Array of instance types. Valid values: `1` (Redis 2.8 Memory Edition in cluster architecture), `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture).
-	ProductTypes []*int64 `json:"ProductTypes,omitnil" name:"ProductTypes"`
+	ProductTypes []*int64 `json:"ProductTypes,omitnil,omitempty" name:"ProductTypes"`
 
 	// Array of template names.
-	TemplateNames []*string `json:"TemplateNames,omitnil" name:"TemplateNames"`
+	TemplateNames []*string `json:"TemplateNames,omitnil,omitempty" name:"TemplateNames"`
 
 	// Array of template IDs.
-	TemplateIds []*string `json:"TemplateIds,omitnil" name:"TemplateIds"`
+	TemplateIds []*string `json:"TemplateIds,omitnil,omitempty" name:"TemplateIds"`
 }
 
 type DescribeParamTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Array of instance types. Valid values: `1` (Redis 2.8 Memory Edition in cluster architecture), `2` (Redis 2.8 Memory Edition in standard architecture), `3` (CKV 3.2 Memory Edition in standard architecture), `4` (CKV 3.2 Memory Edition in cluster architecture), `5` (Redis 2.8 Memory Edition in standalone architecture), `6` (Redis 4.0 Memory Edition in standard architecture), `7` (Redis 4.0 Memory Edition in cluster architecture), `8` (Redis 5.0 Memory Edition in standard architecture), `9` (Redis 5.0 Memory Edition in cluster architecture).
-	ProductTypes []*int64 `json:"ProductTypes,omitnil" name:"ProductTypes"`
+	ProductTypes []*int64 `json:"ProductTypes,omitnil,omitempty" name:"ProductTypes"`
 
 	// Array of template names.
-	TemplateNames []*string `json:"TemplateNames,omitnil" name:"TemplateNames"`
+	TemplateNames []*string `json:"TemplateNames,omitnil,omitempty" name:"TemplateNames"`
 
 	// Array of template IDs.
-	TemplateIds []*string `json:"TemplateIds,omitnil" name:"TemplateIds"`
+	TemplateIds []*string `json:"TemplateIds,omitnil,omitempty" name:"TemplateIds"`
 }
 
 func (r *DescribeParamTemplatesRequest) ToJsonString() string {
@@ -3768,13 +3768,13 @@ func (r *DescribeParamTemplatesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeParamTemplatesResponseParams struct {
 	// Number of parameter templates of the user.
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Parameter template details.
-	Items []*ParamTemplateInfo `json:"Items,omitnil" name:"Items"`
+	Items []*ParamTemplateInfo `json:"Items,omitnil,omitempty" name:"Items"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeParamTemplatesResponse struct {
@@ -3825,10 +3825,10 @@ func (r *DescribeProductInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProductInfoResponseParams struct {
 	// Sale information of a region.
-	RegionSet []*RegionConf `json:"RegionSet,omitnil" name:"RegionSet"`
+	RegionSet []*RegionConf `json:"RegionSet,omitnil,omitempty" name:"RegionSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeProductInfoResponse struct {
@@ -3850,20 +3850,20 @@ func (r *DescribeProductInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProjectSecurityGroupRequestParams struct {
 	// 0: default project; -1: all projects; >0: specified project
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Security group ID
-	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 }
 
 type DescribeProjectSecurityGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// 0: default project; -1: all projects; >0: specified project
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Security group ID
-	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 }
 
 func (r *DescribeProjectSecurityGroupRequest) ToJsonString() string {
@@ -3889,10 +3889,10 @@ func (r *DescribeProjectSecurityGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProjectSecurityGroupResponseParams struct {
 	// Security group of the project
-	SecurityGroupDetails []*SecurityGroupDetail `json:"SecurityGroupDetails,omitnil" name:"SecurityGroupDetails"`
+	SecurityGroupDetails []*SecurityGroupDetail `json:"SecurityGroupDetails,omitnil,omitempty" name:"SecurityGroupDetails"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeProjectSecurityGroupResponse struct {
@@ -3914,38 +3914,38 @@ func (r *DescribeProjectSecurityGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProjectSecurityGroupsRequestParams struct {
 	// Database engine name, which is `redis` for this API.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// Project ID
-	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Offset, which is an integral multiple of `Limit`.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// The number of security groups to be pulled. Default value: `20`.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Search criteria. You can enter a security group ID or name.
-	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
 }
 
 type DescribeProjectSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Database engine name, which is `redis` for this API.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// Project ID
-	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Offset, which is an integral multiple of `Limit`.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// The number of security groups to be pulled. Default value: `20`.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Search criteria. You can enter a security group ID or name.
-	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
 }
 
 func (r *DescribeProjectSecurityGroupsRequest) ToJsonString() string {
@@ -3974,13 +3974,13 @@ func (r *DescribeProjectSecurityGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProjectSecurityGroupsResponseParams struct {
 	// Security group rules.
-	Groups []*SecurityGroup `json:"Groups,omitnil" name:"Groups"`
+	Groups []*SecurityGroup `json:"Groups,omitnil,omitempty" name:"Groups"`
 
 	// Total number of eligible security groups.
-	Total *uint64 `json:"Total,omitnil" name:"Total"`
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeProjectSecurityGroupsResponse struct {
@@ -4002,44 +4002,44 @@ func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProxySlowLogRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Start time of slow query
-	BeginTime *string `json:"BeginTime,omitnil" name:"BeginTime"`
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
 	// End time of slow query
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Slow query threshold  in milliseconds
-	MinQueryTime *int64 `json:"MinQueryTime,omitnil" name:"MinQueryTime"`
+	MinQueryTime *int64 `json:"MinQueryTime,omitnil,omitempty" name:"MinQueryTime"`
 
 	// Number of results per page.  Default value: `20`. Value range: [20,1000].
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset, which is an integral multiple of `Limit`.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeProxySlowLogRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Start time of slow query
-	BeginTime *string `json:"BeginTime,omitnil" name:"BeginTime"`
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
 	// End time of slow query
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Slow query threshold  in milliseconds
-	MinQueryTime *int64 `json:"MinQueryTime,omitnil" name:"MinQueryTime"`
+	MinQueryTime *int64 `json:"MinQueryTime,omitnil,omitempty" name:"MinQueryTime"`
 
 	// Number of results per page.  Default value: `20`. Value range: [20,1000].
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset, which is an integral multiple of `Limit`.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeProxySlowLogRequest) ToJsonString() string {
@@ -4069,13 +4069,13 @@ func (r *DescribeProxySlowLogRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProxySlowLogResponseParams struct {
 	// Total number of slow queries
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Slow query details
-	InstanceProxySlowLogDetail []*InstanceProxySlowlogDetail `json:"InstanceProxySlowLogDetail,omitnil" name:"InstanceProxySlowLogDetail"`
+	InstanceProxySlowLogDetail []*InstanceProxySlowlogDetail `json:"InstanceProxySlowLogDetail,omitnil,omitempty" name:"InstanceProxySlowLogDetail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeProxySlowLogResponse struct {
@@ -4097,32 +4097,32 @@ func (r *DescribeProxySlowLogResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeReplicationGroupRequestParams struct {
 	// Number of instances returned per page. Default value: `20`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// ID of the specified replication group, such as `crs-rpl-m3zt****`. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get it in the global replication group list.
-	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// Keyword for fuzzy query, which can be a replication group ID or name. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get them in the global replication group list.
-	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
 }
 
 type DescribeReplicationGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Number of instances returned per page. Default value: `20`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset, which is an integral multiple of `Limit`. `offset` = `limit` * (page number - 1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// ID of the specified replication group, such as `crs-rpl-m3zt****`. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get it in the global replication group list.
-	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// Keyword for fuzzy query, which can be a replication group ID or name. Log in to the [TencentDB for Redis console](https://console.cloud.tencent.com/redis/replication), and get them in the global replication group list.
-	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
 }
 
 func (r *DescribeReplicationGroupRequest) ToJsonString() string {
@@ -4150,13 +4150,13 @@ func (r *DescribeReplicationGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeReplicationGroupResponseParams struct {
 	// Number of replication groups
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Replication group information
-	Groups []*Groups `json:"Groups,omitnil" name:"Groups"`
+	Groups []*Groups `json:"Groups,omitnil,omitempty" name:"Groups"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeReplicationGroupResponse struct {
@@ -4178,14 +4178,14 @@ func (r *DescribeReplicationGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSSLStatusRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeSSLStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeSSLStatusRequest) ToJsonString() string {
@@ -4210,28 +4210,28 @@ func (r *DescribeSSLStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSSLStatusResponseParams struct {
 	// Download address for SSL certificate
-	CertDownloadUrl *string `json:"CertDownloadUrl,omitnil" name:"CertDownloadUrl"`
+	CertDownloadUrl *string `json:"CertDownloadUrl,omitnil,omitempty" name:"CertDownloadUrl"`
 
 	// Expiration time of the certificate download address
-	UrlExpiredTime *string `json:"UrlExpiredTime,omitnil" name:"UrlExpiredTime"`
+	UrlExpiredTime *string `json:"UrlExpiredTime,omitnil,omitempty" name:"UrlExpiredTime"`
 
 	// Whether the SSL is enabled for the identified instance.
 	// - `true`: Enabled
 	// - `false`: Disabled
-	SSLConfig *bool `json:"SSLConfig,omitnil" name:"SSLConfig"`
+	SSLConfig *bool `json:"SSLConfig,omitnil,omitempty" name:"SSLConfig"`
 
 	// Whether SSL is supported for the identified instance.
 	// -`true`: Supported
 	// -`false`: Not supported
-	FeatureSupport *bool `json:"FeatureSupport,omitnil" name:"FeatureSupport"`
+	FeatureSupport *bool `json:"FeatureSupport,omitnil,omitempty" name:"FeatureSupport"`
 
 	// Status of SSL configuration
 	// - `1`: Configuring
 	// - `2`: Configured successfully
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeSSLStatusResponse struct {
@@ -4253,50 +4253,50 @@ func (r *DescribeSSLStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSlowLogRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Start time for prequerying a slow log
-	BeginTime *string `json:"BeginTime,omitnil" name:"BeginTime"`
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
 	// End time for prequerying a slow log
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The average execution time threshold of slow query  in microseconds
-	MinQueryTime *int64 `json:"MinQueryTime,omitnil" name:"MinQueryTime"`
+	MinQueryTime *int64 `json:"MinQueryTime,omitnil,omitempty" name:"MinQueryTime"`
 
 	// Number of slow queries displayed per page. Default value: `20`. Value range:  [20,1000].
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Slow query offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Node role. <ul><li>`Master`: Master node</li><li>`Slave`: Replica node</li></ul>
-	Role *string `json:"Role,omitnil" name:"Role"`
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 }
 
 type DescribeSlowLogRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Start time for prequerying a slow log
-	BeginTime *string `json:"BeginTime,omitnil" name:"BeginTime"`
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
 	// End time for prequerying a slow log
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The average execution time threshold of slow query  in microseconds
-	MinQueryTime *int64 `json:"MinQueryTime,omitnil" name:"MinQueryTime"`
+	MinQueryTime *int64 `json:"MinQueryTime,omitnil,omitempty" name:"MinQueryTime"`
 
 	// Number of slow queries displayed per page. Default value: `20`. Value range:  [20,1000].
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Slow query offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Node role. <ul><li>`Master`: Master node</li><li>`Slave`: Replica node</li></ul>
-	Role *string `json:"Role,omitnil" name:"Role"`
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 }
 
 func (r *DescribeSlowLogRequest) ToJsonString() string {
@@ -4327,13 +4327,13 @@ func (r *DescribeSlowLogRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSlowLogResponseParams struct {
 	// Total number of slow queries
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Slow query details
-	InstanceSlowlogDetail []*InstanceSlowlogDetail `json:"InstanceSlowlogDetail,omitnil" name:"InstanceSlowlogDetail"`
+	InstanceSlowlogDetail []*InstanceSlowlogDetail `json:"InstanceSlowlogDetail,omitnil,omitempty" name:"InstanceSlowlogDetail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeSlowLogResponse struct {
@@ -4355,14 +4355,14 @@ func (r *DescribeSlowLogResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTaskInfoRequestParams struct {
 	// Task ID
-	TaskId *uint64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type DescribeTaskInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Task ID
-	TaskId *uint64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 func (r *DescribeTaskInfoRequest) ToJsonString() string {
@@ -4392,22 +4392,22 @@ type DescribeTaskInfoResponseParams struct {
 	// - `succeed`: Succeeded
 	// - `failed`: Failed
 	// - `Error`: Error occurred while running
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Task start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Task type, including `Create`, `Configure`, `Disable Instance`, `Clear Instance`, `Reset Password`, `Upgrade Version`, `Back up Instance`, `Modify Network`, `Migrate to New AZ` and `Promote to Master`.
-	TaskType *string `json:"TaskType,omitnil" name:"TaskType"`
+	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Message returned by task execution, which will be an error message when execution fails or be empty when the status is `running `or `succeed-`.
-	TaskMessage *string `json:"TaskMessage,omitnil" name:"TaskMessage"`
+	TaskMessage *string `json:"TaskMessage,omitnil,omitempty" name:"TaskMessage"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTaskInfoResponse struct {
@@ -4429,80 +4429,80 @@ func (r *DescribeTaskInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTaskListRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Number of taskss returned per page.  Default value: `20`. Maximum value: `100`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Project ID Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), go to the account information menu in the top-right corner, and select **Project Management** to query the project ID.
-	ProjectIds []*int64 `json:"ProjectIds,omitnil" name:"ProjectIds"`
+	ProjectIds []*int64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
 
 	// Task type. Valid values:  - `FLOW_CREATE`: Create an instance. - `FLOW_MODIFYCONNECTIONCONFIG`: Adjust the number of bandwidth connections. - `FLOW_MODIFYINSTANCEPASSWORDFREE`: Modify the process of password-free access. - `FLOW_CLEARNETWORK`: Returning VPC - `FLOW_SETPWD`: Set the access password. - `FLOW_EXPORSHR`: Expand or reduce the capacity. - `FLOW_UpgradeArch`: Upgrade the instance architecture. - `FLOW_MODIFYINSTANCEPARAMS`: Modify the instance parameters. - `FLOW_MODIFYINSTACEREADONLY`: Modify read-only process. - `FLOW_CLOSE`: Disable the instance. - `FLOW_DELETE`: Delete the instance. - `FLOW_OPEN_WAN`: Enable the public network. - `FLOW_FLOW_CLEAN`: Clear the instance. - `FLOW_MODIFYINSTANCEACCOUNT`: Modify the instance account. - `FLOW_ENABLEINSTANCE_REPLICATE`: Enable the replica read-only feature. - `FLOW_DISABLEINSTANCE_REPLICATE`: Disable the replica read-only feature. - `FLOW_SWITCHINSTANCEVIP`: Swap the VIPs of instances. - FLOW_CHANGE_REPLICA_TO_MSTER: Promote the replica node to the mater node. - `FLOW_BACKUPINSTANCE`: Back up an instance.
-	TaskTypes []*string `json:"TaskTypes,omitnil" name:"TaskTypes"`
+	TaskTypes []*string `json:"TaskTypes,omitnil,omitempty" name:"TaskTypes"`
 
 	// Start time for executing a task,  in the format of  “2020-10-12 00:00:00”.
-	BeginTime *string `json:"BeginTime,omitnil" name:"BeginTime"`
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
 	// End time for executing a task,  in the format of  “2021-12-30 20:59:35”.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// This parameter is only for internal use and can be ignored.
-	TaskStatus []*int64 `json:"TaskStatus,omitnil" name:"TaskStatus"`
+	TaskStatus []*int64 `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// Task execution status. Valid values: - `0` (initilized) - `1` (executing) - `2` (completed) - `4` (failed)
-	Result []*int64 `json:"Result,omitnil" name:"Result"`
+	Result []*int64 `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The field `OperatorUin` has been disused and replaced by `OperateUin`.
-	OperatorUin []*int64 `json:"OperatorUin,omitnil" name:"OperatorUin"`
+	OperatorUin []*int64 `json:"OperatorUin,omitnil,omitempty" name:"OperatorUin"`
 
 	// Operator account ID or UIN
-	OperateUin []*string `json:"OperateUin,omitnil" name:"OperateUin"`
+	OperateUin []*string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
 }
 
 type DescribeTaskListRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Number of taskss returned per page.  Default value: `20`. Maximum value: `100`.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination offset, which is an integral multiple of `Limit`. Calculation formula:  `offset` = `limit` * (page number - 1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Project ID Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), go to the account information menu in the top-right corner, and select **Project Management** to query the project ID.
-	ProjectIds []*int64 `json:"ProjectIds,omitnil" name:"ProjectIds"`
+	ProjectIds []*int64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
 
 	// Task type. Valid values:  - `FLOW_CREATE`: Create an instance. - `FLOW_MODIFYCONNECTIONCONFIG`: Adjust the number of bandwidth connections. - `FLOW_MODIFYINSTANCEPASSWORDFREE`: Modify the process of password-free access. - `FLOW_CLEARNETWORK`: Returning VPC - `FLOW_SETPWD`: Set the access password. - `FLOW_EXPORSHR`: Expand or reduce the capacity. - `FLOW_UpgradeArch`: Upgrade the instance architecture. - `FLOW_MODIFYINSTANCEPARAMS`: Modify the instance parameters. - `FLOW_MODIFYINSTACEREADONLY`: Modify read-only process. - `FLOW_CLOSE`: Disable the instance. - `FLOW_DELETE`: Delete the instance. - `FLOW_OPEN_WAN`: Enable the public network. - `FLOW_FLOW_CLEAN`: Clear the instance. - `FLOW_MODIFYINSTANCEACCOUNT`: Modify the instance account. - `FLOW_ENABLEINSTANCE_REPLICATE`: Enable the replica read-only feature. - `FLOW_DISABLEINSTANCE_REPLICATE`: Disable the replica read-only feature. - `FLOW_SWITCHINSTANCEVIP`: Swap the VIPs of instances. - FLOW_CHANGE_REPLICA_TO_MSTER: Promote the replica node to the mater node. - `FLOW_BACKUPINSTANCE`: Back up an instance.
-	TaskTypes []*string `json:"TaskTypes,omitnil" name:"TaskTypes"`
+	TaskTypes []*string `json:"TaskTypes,omitnil,omitempty" name:"TaskTypes"`
 
 	// Start time for executing a task,  in the format of  “2020-10-12 00:00:00”.
-	BeginTime *string `json:"BeginTime,omitnil" name:"BeginTime"`
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
 	// End time for executing a task,  in the format of  “2021-12-30 20:59:35”.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// This parameter is only for internal use and can be ignored.
-	TaskStatus []*int64 `json:"TaskStatus,omitnil" name:"TaskStatus"`
+	TaskStatus []*int64 `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// Task execution status. Valid values: - `0` (initilized) - `1` (executing) - `2` (completed) - `4` (failed)
-	Result []*int64 `json:"Result,omitnil" name:"Result"`
+	Result []*int64 `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The field `OperatorUin` has been disused and replaced by `OperateUin`.
-	OperatorUin []*int64 `json:"OperatorUin,omitnil" name:"OperatorUin"`
+	OperatorUin []*int64 `json:"OperatorUin,omitnil,omitempty" name:"OperatorUin"`
 
 	// Operator account ID or UIN
-	OperateUin []*string `json:"OperateUin,omitnil" name:"OperateUin"`
+	OperateUin []*string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
 }
 
 func (r *DescribeTaskListRequest) ToJsonString() string {
@@ -4538,13 +4538,13 @@ func (r *DescribeTaskListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTaskListResponseParams struct {
 	// Total number of tasks
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Task details
-	Tasks []*TaskInfoDetail `json:"Tasks,omitnil" name:"Tasks"`
+	Tasks []*TaskInfoDetail `json:"Tasks,omitnil,omitempty" name:"Tasks"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTaskListResponse struct {
@@ -4566,44 +4566,44 @@ func (r *DescribeTaskListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTendisSlowLogRequestParams struct {
 	// Instance ID in the format of crs-ngvou0i1
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Start time in the format of 2019-09-08 12:12:41
-	BeginTime *string `json:"BeginTime,omitnil" name:"BeginTime"`
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
 	// End time in the format of 2019-09-09 12:12:41
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Slow query threshold in ms
-	MinQueryTime *int64 `json:"MinQueryTime,omitnil" name:"MinQueryTime"`
+	MinQueryTime *int64 `json:"MinQueryTime,omitnil,omitempty" name:"MinQueryTime"`
 
 	// Maximum number of results returned per page. Default value: 20.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset, which is an integral multiple of `Limit`.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeTendisSlowLogRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of crs-ngvou0i1
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Start time in the format of 2019-09-08 12:12:41
-	BeginTime *string `json:"BeginTime,omitnil" name:"BeginTime"`
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
 	// End time in the format of 2019-09-09 12:12:41
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Slow query threshold in ms
-	MinQueryTime *int64 `json:"MinQueryTime,omitnil" name:"MinQueryTime"`
+	MinQueryTime *int64 `json:"MinQueryTime,omitnil,omitempty" name:"MinQueryTime"`
 
 	// Maximum number of results returned per page. Default value: 20.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset, which is an integral multiple of `Limit`.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeTendisSlowLogRequest) ToJsonString() string {
@@ -4633,13 +4633,13 @@ func (r *DescribeTendisSlowLogRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTendisSlowLogResponseParams struct {
 	// Total number of slow queries
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Slow query details
-	TendisSlowLogDetail []*TendisSlowLogDetail `json:"TendisSlowLogDetail,omitnil" name:"TendisSlowLogDetail"`
+	TendisSlowLogDetail []*TendisSlowLogDetail `json:"TendisSlowLogDetail,omitnil,omitempty" name:"TendisSlowLogDetail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTendisSlowLogResponse struct {
@@ -4661,14 +4661,14 @@ func (r *DescribeTendisSlowLogResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DestroyPostpaidInstanceRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DestroyPostpaidInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DestroyPostpaidInstanceRequest) ToJsonString() string {
@@ -4693,10 +4693,10 @@ func (r *DestroyPostpaidInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DestroyPostpaidInstanceResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DestroyPostpaidInstanceResponse struct {
@@ -4718,14 +4718,14 @@ func (r *DestroyPostpaidInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DestroyPrepaidInstanceRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DestroyPrepaidInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DestroyPrepaidInstanceRequest) ToJsonString() string {
@@ -4750,10 +4750,10 @@ func (r *DestroyPrepaidInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DestroyPrepaidInstanceResponseParams struct {
 	// Order ID
-	DealId *string `json:"DealId,omitnil" name:"DealId"`
+	DealId *string `json:"DealId,omitnil,omitempty" name:"DealId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DestroyPrepaidInstanceResponse struct {
@@ -4775,14 +4775,14 @@ func (r *DestroyPrepaidInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DisableReplicaReadonlyRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DisableReplicaReadonlyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DisableReplicaReadonlyRequest) ToJsonString() string {
@@ -4808,10 +4808,10 @@ func (r *DisableReplicaReadonlyRequest) FromJsonString(s string) error {
 type DisableReplicaReadonlyResponseParams struct {
 	// Task ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DisableReplicaReadonlyResponse struct {
@@ -4833,26 +4833,26 @@ func (r *DisableReplicaReadonlyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DisassociateSecurityGroupsRequestParams struct {
 	// Database engine name, which is `redis` for this API.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// Security group ID
-	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
 	// List of instance IDs, which is an array of one or more instance IDs.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type DisassociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Database engine name, which is `redis` for this API.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// Security group ID
-	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
 	// List of instance IDs, which is an array of one or more instance IDs.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *DisassociateSecurityGroupsRequest) ToJsonString() string {
@@ -4879,7 +4879,7 @@ func (r *DisassociateSecurityGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DisassociateSecurityGroupsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DisassociateSecurityGroupsResponse struct {
@@ -4901,20 +4901,20 @@ func (r *DisassociateSecurityGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type EnableReplicaReadonlyRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Account routing policy. If `master` or `replication` is entered, it means to route to the master or replica node; if this parameter is left empty, it means to write into the master node and read from the replica node by default.
-	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil" name:"ReadonlyPolicy"`
+	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 }
 
 type EnableReplicaReadonlyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Account routing policy. If `master` or `replication` is entered, it means to route to the master or replica node; if this parameter is left empty, it means to write into the master node and read from the replica node by default.
-	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil" name:"ReadonlyPolicy"`
+	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 }
 
 func (r *EnableReplicaReadonlyRequest) ToJsonString() string {
@@ -4941,14 +4941,14 @@ func (r *EnableReplicaReadonlyRequest) FromJsonString(s string) error {
 type EnableReplicaReadonlyResponseParams struct {
 	// Valid values: `ERROR`, `OK`. This field has been disused.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Task ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type EnableReplicaReadonlyResponse struct {
@@ -4969,7 +4969,7 @@ func (r *EnableReplicaReadonlyResponse) FromJsonString(s string) error {
 
 type Groups struct {
 	// User APPID, which is the unique application ID that matches an account. Some Tencent Cloud products use this APPID.
-	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// Region ID. Valid values:
 	// - `1`: Guangzhou 
@@ -4989,14 +4989,14 @@ type Groups struct {
 	// - `22`: Virginia (East US)
 	// - `23`: Thailand 
 	// - `25`: Japan
-	RegionId *int64 `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *int64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Replication group ID in the format of "crs-rpl-deind****"
-	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// Replication group name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
 	// Status of replication group
 	// - `37`: Associating replication group
@@ -5004,130 +5004,130 @@ type Groups struct {
 	// - `51`: Disassociating replication group
 	// - `52`: Switching with master instance in replication group
 	// - `53`: Modifying the roles
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Number of replication groups
-	InstanceCount *int64 `json:"InstanceCount,omitnil" name:"InstanceCount"`
+	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
 	// Instance information in replication groups
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Instances []*Instances `json:"Instances,omitnil" name:"Instances"`
+	Instances []*Instances `json:"Instances,omitnil,omitempty" name:"Instances"`
 
 	// Remarks
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 }
 
 type HotKeyInfo struct {
 	// Hot key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Count
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 }
 
 type Inbound struct {
 	// Policy. Valid values: ACCEPT, DROP.
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// All the addresses that the address group ID represents.
-	AddressModule *string `json:"AddressModule,omitnil" name:"AddressModule"`
+	AddressModule *string `json:"AddressModule,omitnil,omitempty" name:"AddressModule"`
 
 	// Source IP or IP address range, such as 192.168.0.0/16.
-	CidrIp *string `json:"CidrIp,omitnil" name:"CidrIp"`
+	CidrIp *string `json:"CidrIp,omitnil,omitempty" name:"CidrIp"`
 
 	// Description.
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
 	// Network protocol, such as UDP and TCP.
-	IpProtocol *string `json:"IpProtocol,omitnil" name:"IpProtocol"`
+	IpProtocol *string `json:"IpProtocol,omitnil,omitempty" name:"IpProtocol"`
 
 	// Port.
-	PortRange *string `json:"PortRange,omitnil" name:"PortRange"`
+	PortRange *string `json:"PortRange,omitnil,omitempty" name:"PortRange"`
 
 	// All the protocols and ports that the service group ID represents.
-	ServiceModule *string `json:"ServiceModule,omitnil" name:"ServiceModule"`
+	ServiceModule *string `json:"ServiceModule,omitnil,omitempty" name:"ServiceModule"`
 
 	// All the addresses that the security group ID represents.
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 // Predefined struct for user
 type InquiryPriceCreateInstanceRequestParams struct {
 	// Instance type. Valid values: `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture).
-	TypeId *uint64 `json:"TypeId,omitnil" name:"TypeId"`
+	TypeId *uint64 `json:"TypeId,omitnil,omitempty" name:"TypeId"`
 
 	// Memory capacity in MB, which must be a multiple of 1,024. It is subject to the purchasable specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
 	// If `TypeId` indicates the standard architecture, `MemSize` indicates the total memory capacity of an instance; if `TypeId` indicates the cluster architecture, `MemSize` indicates the memory capacity per shard.
-	MemSize *uint64 `json:"MemSize,omitnil" name:"MemSize"`
+	MemSize *uint64 `json:"MemSize,omitnil,omitempty" name:"MemSize"`
 
 	// Number of instances. The actual quantity purchasable at a time is subject to the specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
-	GoodsNum *uint64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
+	GoodsNum *uint64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
 	// Length of purchase in months, which is required when creating a monthly-subscribed instance. Value range: [1,2,3,4,5,6,7,8,9,10,11,12,24,36]. For pay-as-you-go instances, set the parameter to `1`.
-	Period *uint64 `json:"Period,omitnil" name:"Period"`
+	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Billing mode. Valid values: `0` (pay-as-you-go), `1` (monthly subscription).
-	BillingMode *int64 `json:"BillingMode,omitnil" name:"BillingMode"`
+	BillingMode *int64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
 	// ID of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
-	ZoneId *uint64 `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Instance shard quantity. This field is not required by Redis 2.8 standard architecture, CKV standard architecture, Redis 2.8 standalone edition, and Redis 4.0 standard architecture.
-	RedisShardNum *int64 `json:"RedisShardNum,omitnil" name:"RedisShardNum"`
+	RedisShardNum *int64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
 	// Instance replica quantity. This field is not required by Redis 2.8 standard architecture, CKV standard architecture, and Redis 2.8 standalone edition.
-	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitnil" name:"RedisReplicasNum"`
+	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitnil,omitempty" name:"RedisReplicasNum"`
 
 	// Whether to support read-only replicas. This field is not required by Redis 2.8 standard architecture, CKV standard architecture, and Redis 2.8 standalone edition.
-	ReplicasReadonly *bool `json:"ReplicasReadonly,omitnil" name:"ReplicasReadonly"`
+	ReplicasReadonly *bool `json:"ReplicasReadonly,omitnil,omitempty" name:"ReplicasReadonly"`
 
 	// Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). Default value: `local` (local disk edition)
-	ProductVersion *string `json:"ProductVersion,omitnil" name:"ProductVersion"`
+	ProductVersion *string `json:"ProductVersion,omitnil,omitempty" name:"ProductVersion"`
 }
 
 type InquiryPriceCreateInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance type. Valid values: `2` (Redis 2.8 memory edition in standard architecture), `3` (CKV 3.2 memory edition in standard architecture), `4` (CKV 3.2 memory edition in cluster architecture), `6` (Redis 4.0 memory edition in standard architecture), `7` (Redis 4.0 memory edition in cluster architecture), `8` (Redis 5.0 memory edition in standard architecture), `9` (Redis 5.0 memory edition in cluster architecture).
-	TypeId *uint64 `json:"TypeId,omitnil" name:"TypeId"`
+	TypeId *uint64 `json:"TypeId,omitnil,omitempty" name:"TypeId"`
 
 	// Memory capacity in MB, which must be a multiple of 1,024. It is subject to the purchasable specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
 	// If `TypeId` indicates the standard architecture, `MemSize` indicates the total memory capacity of an instance; if `TypeId` indicates the cluster architecture, `MemSize` indicates the memory capacity per shard.
-	MemSize *uint64 `json:"MemSize,omitnil" name:"MemSize"`
+	MemSize *uint64 `json:"MemSize,omitnil,omitempty" name:"MemSize"`
 
 	// Number of instances. The actual quantity purchasable at a time is subject to the specifications returned by the [DescribeProductInfo API](https://intl.cloud.tencent.com/document/api/239/30600?from_cn_redirect=1).
-	GoodsNum *uint64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
+	GoodsNum *uint64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
 	// Length of purchase in months, which is required when creating a monthly-subscribed instance. Value range: [1,2,3,4,5,6,7,8,9,10,11,12,24,36]. For pay-as-you-go instances, set the parameter to `1`.
-	Period *uint64 `json:"Period,omitnil" name:"Period"`
+	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Billing mode. Valid values: `0` (pay-as-you-go), `1` (monthly subscription).
-	BillingMode *int64 `json:"BillingMode,omitnil" name:"BillingMode"`
+	BillingMode *int64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
 	// ID of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
-	ZoneId *uint64 `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Instance shard quantity. This field is not required by Redis 2.8 standard architecture, CKV standard architecture, Redis 2.8 standalone edition, and Redis 4.0 standard architecture.
-	RedisShardNum *int64 `json:"RedisShardNum,omitnil" name:"RedisShardNum"`
+	RedisShardNum *int64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
 	// Instance replica quantity. This field is not required by Redis 2.8 standard architecture, CKV standard architecture, and Redis 2.8 standalone edition.
-	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitnil" name:"RedisReplicasNum"`
+	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitnil,omitempty" name:"RedisReplicasNum"`
 
 	// Whether to support read-only replicas. This field is not required by Redis 2.8 standard architecture, CKV standard architecture, and Redis 2.8 standalone edition.
-	ReplicasReadonly *bool `json:"ReplicasReadonly,omitnil" name:"ReplicasReadonly"`
+	ReplicasReadonly *bool `json:"ReplicasReadonly,omitnil,omitempty" name:"ReplicasReadonly"`
 
 	// Name of the AZ where the instance resides. For more information, see [Regions and AZs](https://intl.cloud.tencent.com/document/product/239/4106?from_cn_redirect=1).
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// Valid values: `local` (local disk edition), `cloud` (cloud disk edition), `cdc` (dedicated cluster edition). Default value: `local` (local disk edition)
-	ProductVersion *string `json:"ProductVersion,omitnil" name:"ProductVersion"`
+	ProductVersion *string `json:"ProductVersion,omitnil,omitempty" name:"ProductVersion"`
 }
 
 func (r *InquiryPriceCreateInstanceRequest) ToJsonString() string {
@@ -5163,10 +5163,10 @@ func (r *InquiryPriceCreateInstanceRequest) FromJsonString(s string) error {
 type InquiryPriceCreateInstanceResponseParams struct {
 	// Price. Unit: USD (accurate down to the cent)
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Price *float64 `json:"Price,omitnil" name:"Price"`
+	Price *float64 `json:"Price,omitnil,omitempty" name:"Price"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type InquiryPriceCreateInstanceResponse struct {
@@ -5188,32 +5188,32 @@ func (r *InquiryPriceCreateInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type InquiryPriceUpgradeInstanceRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Shard size in MB.
-	MemSize *uint64 `json:"MemSize,omitnil" name:"MemSize"`
+	MemSize *uint64 `json:"MemSize,omitnil,omitempty" name:"MemSize"`
 
 	// Number of shards. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
-	RedisShardNum *uint64 `json:"RedisShardNum,omitnil" name:"RedisShardNum"`
+	RedisShardNum *uint64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
 	// Number of replicas. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
-	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitnil" name:"RedisReplicasNum"`
+	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitnil,omitempty" name:"RedisReplicasNum"`
 }
 
 type InquiryPriceUpgradeInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Shard size in MB.
-	MemSize *uint64 `json:"MemSize,omitnil" name:"MemSize"`
+	MemSize *uint64 `json:"MemSize,omitnil,omitempty" name:"MemSize"`
 
 	// Number of shards. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
-	RedisShardNum *uint64 `json:"RedisShardNum,omitnil" name:"RedisShardNum"`
+	RedisShardNum *uint64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
 	// Number of replicas. This parameter can be left blank for Redis 2.8 in standard architecture, CKV in standard architecture, and Redis 2.8 in standalone architecture.
-	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitnil" name:"RedisReplicasNum"`
+	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitnil,omitempty" name:"RedisReplicasNum"`
 }
 
 func (r *InquiryPriceUpgradeInstanceRequest) ToJsonString() string {
@@ -5242,10 +5242,10 @@ func (r *InquiryPriceUpgradeInstanceRequest) FromJsonString(s string) error {
 type InquiryPriceUpgradeInstanceResponseParams struct {
 	// Price. Unit: USD
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Price *float64 `json:"Price,omitnil" name:"Price"`
+	Price *float64 `json:"Price,omitnil,omitempty" name:"Price"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type InquiryPriceUpgradeInstanceResponse struct {
@@ -5266,266 +5266,266 @@ func (r *InquiryPriceUpgradeInstanceResponse) FromJsonString(s string) error {
 
 type InstanceClusterNode struct {
 	// Node name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// ID of the runtime node of an instance
-	RunId *string `json:"RunId,omitnil" name:"RunId"`
+	RunId *string `json:"RunId,omitnil,omitempty" name:"RunId"`
 
 	// Cluster role. Valid values:  - `0` (master) - `1` (replica)
-	Role *int64 `json:"Role,omitnil" name:"Role"`
+	Role *int64 `json:"Role,omitnil,omitempty" name:"Role"`
 
 	// Node status. Valid values:  - `0` (read/write) - `1` (read) - `2` (backup)
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Service status. Valid values: `0` (down), `1` (on).
-	Connected *int64 `json:"Connected,omitnil" name:"Connected"`
+	Connected *int64 `json:"Connected,omitnil,omitempty" name:"Connected"`
 
 	// Node creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Node elimination time
-	DownTime *string `json:"DownTime,omitnil" name:"DownTime"`
+	DownTime *string `json:"DownTime,omitnil,omitempty" name:"DownTime"`
 
 	// Node slot distribution range
-	Slots *string `json:"Slots,omitnil" name:"Slots"`
+	Slots *string `json:"Slots,omitnil,omitempty" name:"Slots"`
 
 	// Distribution of node keys
-	Keys *int64 `json:"Keys,omitnil" name:"Keys"`
+	Keys *int64 `json:"Keys,omitnil,omitempty" name:"Keys"`
 
 	// Node QPS Number of executions per second on sharded nodes Unit: Counts/sec
-	Qps *int64 `json:"Qps,omitnil" name:"Qps"`
+	Qps *int64 `json:"Qps,omitnil,omitempty" name:"Qps"`
 
 	// QPS slope of a node
-	QpsSlope *float64 `json:"QpsSlope,omitnil" name:"QpsSlope"`
+	QpsSlope *float64 `json:"QpsSlope,omitnil,omitempty" name:"QpsSlope"`
 
 	// Node storage
-	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Node storage slope
-	StorageSlope *float64 `json:"StorageSlope,omitnil" name:"StorageSlope"`
+	StorageSlope *float64 `json:"StorageSlope,omitnil,omitempty" name:"StorageSlope"`
 }
 
 type InstanceClusterShard struct {
 	// The name of a shard node
-	ShardName *string `json:"ShardName,omitnil" name:"ShardName"`
+	ShardName *string `json:"ShardName,omitnil,omitempty" name:"ShardName"`
 
 	// The serial number of a shard node
-	ShardId *string `json:"ShardId,omitnil" name:"ShardId"`
+	ShardId *string `json:"ShardId,omitnil,omitempty" name:"ShardId"`
 
 	// The role of a shard node
 	// - `0`: Master node.
 	// - `1`: Replica node.
-	Role *int64 `json:"Role,omitnil" name:"Role"`
+	Role *int64 `json:"Role,omitnil,omitempty" name:"Role"`
 
 	// Number of keys
-	Keys *int64 `json:"Keys,omitnil" name:"Keys"`
+	Keys *int64 `json:"Keys,omitnil,omitempty" name:"Keys"`
 
 	// Slot information
-	Slots *string `json:"Slots,omitnil" name:"Slots"`
+	Slots *string `json:"Slots,omitnil,omitempty" name:"Slots"`
 
 	// Used Capacity
-	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Capacity slope
-	StorageSlope *float64 `json:"StorageSlope,omitnil" name:"StorageSlope"`
+	StorageSlope *float64 `json:"StorageSlope,omitnil,omitempty" name:"StorageSlope"`
 
 	// Instance runtime node ID
-	Runid *string `json:"Runid,omitnil" name:"Runid"`
+	Runid *string `json:"Runid,omitnil,omitempty" name:"Runid"`
 
 	// Service status
 	// - `0`: Down.
 	// - `1`: On.
-	Connected *int64 `json:"Connected,omitnil" name:"Connected"`
+	Connected *int64 `json:"Connected,omitnil,omitempty" name:"Connected"`
 }
 
 type InstanceEnumParam struct {
 	// Parameter name
-	ParamName *string `json:"ParamName,omitnil" name:"ParamName"`
+	ParamName *string `json:"ParamName,omitnil,omitempty" name:"ParamName"`
 
 	// Parameter type, such as `Enum`.
-	ValueType *string `json:"ValueType,omitnil" name:"ValueType"`
+	ValueType *string `json:"ValueType,omitnil,omitempty" name:"ValueType"`
 
 	// Whether to restart the database after modifying the parameters. Valid values: - `true` (required) - `false` (not required)
-	NeedRestart *string `json:"NeedRestart,omitnil" name:"NeedRestart"`
+	NeedRestart *string `json:"NeedRestart,omitnil,omitempty" name:"NeedRestart"`
 
 	// Default value of the parameter
-	DefaultValue *string `json:"DefaultValue,omitnil" name:"DefaultValue"`
+	DefaultValue *string `json:"DefaultValue,omitnil,omitempty" name:"DefaultValue"`
 
 	// Current value
-	CurrentValue *string `json:"CurrentValue,omitnil" name:"CurrentValue"`
+	CurrentValue *string `json:"CurrentValue,omitnil,omitempty" name:"CurrentValue"`
 
 	// Description
-	Tips *string `json:"Tips,omitnil" name:"Tips"`
+	Tips *string `json:"Tips,omitnil,omitempty" name:"Tips"`
 
 	// Acceptable values for the parameter
-	EnumValue []*string `json:"EnumValue,omitnil" name:"EnumValue"`
+	EnumValue []*string `json:"EnumValue,omitnil,omitempty" name:"EnumValue"`
 
 	// Parameter modification status. Valid values: - `1` (modifying) - `2` (modified)
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type InstanceIntegerParam struct {
 	// Parameter name
-	ParamName *string `json:"ParamName,omitnil" name:"ParamName"`
+	ParamName *string `json:"ParamName,omitnil,omitempty" name:"ParamName"`
 
 	// Parameter type: Integer
-	ValueType *string `json:"ValueType,omitnil" name:"ValueType"`
+	ValueType *string `json:"ValueType,omitnil,omitempty" name:"ValueType"`
 
 	// Whether restart is required after a modification is made. Valid values: true, false
-	NeedRestart *string `json:"NeedRestart,omitnil" name:"NeedRestart"`
+	NeedRestart *string `json:"NeedRestart,omitnil,omitempty" name:"NeedRestart"`
 
 	// Default value of the parameter
-	DefaultValue *string `json:"DefaultValue,omitnil" name:"DefaultValue"`
+	DefaultValue *string `json:"DefaultValue,omitnil,omitempty" name:"DefaultValue"`
 
 	// Current value
-	CurrentValue *string `json:"CurrentValue,omitnil" name:"CurrentValue"`
+	CurrentValue *string `json:"CurrentValue,omitnil,omitempty" name:"CurrentValue"`
 
 	// Parameter description
-	Tips *string `json:"Tips,omitnil" name:"Tips"`
+	Tips *string `json:"Tips,omitnil,omitempty" name:"Tips"`
 
 	// Minimum value of the parameter
-	Min *string `json:"Min,omitnil" name:"Min"`
+	Min *string `json:"Min,omitnil,omitempty" name:"Min"`
 
 	// Maximum value of the parameter
-	Max *string `json:"Max,omitnil" name:"Max"`
+	Max *string `json:"Max,omitnil,omitempty" name:"Max"`
 
 	// Parameter status. 1: modifying; 2: modified
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Parameter unit
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Unit *string `json:"Unit,omitnil" name:"Unit"`
+	Unit *string `json:"Unit,omitnil,omitempty" name:"Unit"`
 }
 
 type InstanceMultiParam struct {
 	// Parameter name
-	ParamName *string `json:"ParamName,omitnil" name:"ParamName"`
+	ParamName *string `json:"ParamName,omitnil,omitempty" name:"ParamName"`
 
 	// Parameter Type such as  `MULTI`
-	ValueType *string `json:"ValueType,omitnil" name:"ValueType"`
+	ValueType *string `json:"ValueType,omitnil,omitempty" name:"ValueType"`
 
 	// Whether to restart the database after modifying the parameter. Valid values:  - `true` (required) - `false` (not required)
-	NeedRestart *string `json:"NeedRestart,omitnil" name:"NeedRestart"`
+	NeedRestart *string `json:"NeedRestart,omitnil,omitempty" name:"NeedRestart"`
 
 	// Default value of the parameter
-	DefaultValue *string `json:"DefaultValue,omitnil" name:"DefaultValue"`
+	DefaultValue *string `json:"DefaultValue,omitnil,omitempty" name:"DefaultValue"`
 
 	// Current value
-	CurrentValue *string `json:"CurrentValue,omitnil" name:"CurrentValue"`
+	CurrentValue *string `json:"CurrentValue,omitnil,omitempty" name:"CurrentValue"`
 
 	// Description
-	Tips *string `json:"Tips,omitnil" name:"Tips"`
+	Tips *string `json:"Tips,omitnil,omitempty" name:"Tips"`
 
 	// Description
-	EnumValue []*string `json:"EnumValue,omitnil" name:"EnumValue"`
+	EnumValue []*string `json:"EnumValue,omitnil,omitempty" name:"EnumValue"`
 
 	// Parameter modification status. Valid values: - `1` (modifying) - `2` (modified)
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type InstanceNode struct {
 	// Instance ID
-	Id *int64 `json:"Id,omitnil" name:"Id"`
+	Id *int64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Node details
-	InstanceClusterNode []*InstanceClusterNode `json:"InstanceClusterNode,omitnil" name:"InstanceClusterNode"`
+	InstanceClusterNode []*InstanceClusterNode `json:"InstanceClusterNode,omitnil,omitempty" name:"InstanceClusterNode"`
 }
 
 type InstanceParam struct {
 	// Parameter name, such as “timeout”. For supported custom parameters, see <a href="https://www.tencentcloud.com/document/product/239/39796">Setting Instance Parameters</a>
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Current parameter value. For example, if you set the current value of “timeout” to 120 (in seconds), the client connections that remain idle longer than 120 seconds will be closed. For more information on parameter values, see <a href="https://www.tencentcloud.com/document/product/239/39796">Setting Instance Parameters</a>
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type InstanceParamHistory struct {
 	// Parameter name
-	ParamName *string `json:"ParamName,omitnil" name:"ParamName"`
+	ParamName *string `json:"ParamName,omitnil,omitempty" name:"ParamName"`
 
 	// The value of the parameter before modification
-	PreValue *string `json:"PreValue,omitnil" name:"PreValue"`
+	PreValue *string `json:"PreValue,omitnil,omitempty" name:"PreValue"`
 
 	// The value of the parameter after modification
-	NewValue *string `json:"NewValue,omitnil" name:"NewValue"`
+	NewValue *string `json:"NewValue,omitnil,omitempty" name:"NewValue"`
 
 	// Parameter configuration status
 	// - `1`: The parameter configuration is being modified.
 	// - `2`: The parameter configuration has been modified successfully.
 	// - `3`: Failed to modify the parameter configuration.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Modification time
-	ModifyTime *string `json:"ModifyTime,omitnil" name:"ModifyTime"`
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
 }
 
 type InstanceProxySlowlogDetail struct {
 	// Slow query duration in milliseconds
-	Duration *int64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Client address
-	Client *string `json:"Client,omitnil" name:"Client"`
+	Client *string `json:"Client,omitnil,omitempty" name:"Client"`
 
 	// Slow query command
-	Command *string `json:"Command,omitnil" name:"Command"`
+	Command *string `json:"Command,omitnil,omitempty" name:"Command"`
 
 	// Detailed command line information of slow query
-	CommandLine *string `json:"CommandLine,omitnil" name:"CommandLine"`
+	CommandLine *string `json:"CommandLine,omitnil,omitempty" name:"CommandLine"`
 
 	// Execution time
-	ExecuteTime *string `json:"ExecuteTime,omitnil" name:"ExecuteTime"`
+	ExecuteTime *string `json:"ExecuteTime,omitnil,omitempty" name:"ExecuteTime"`
 }
 
 type InstanceSecurityGroupDetail struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Security group information, which includes  security group ID, name, outbound and inbound rules.
-	SecurityGroupDetails []*SecurityGroupDetail `json:"SecurityGroupDetails,omitnil" name:"SecurityGroupDetails"`
+	SecurityGroupDetails []*SecurityGroupDetail `json:"SecurityGroupDetails,omitnil,omitempty" name:"SecurityGroupDetails"`
 }
 
 type InstanceSet struct {
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// User APPID, which is the unique application ID that matches an account. Some Tencent Cloud products use this APPID.
-	Appid *int64 `json:"Appid,omitnil" name:"Appid"`
+	Appid *int64 `json:"Appid,omitnil,omitempty" name:"Appid"`
 
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Region ID. <ul><li>`1`: Guangzhou. </li><li>`4`: Shanghai. </li><li>`5`: Hong Kong (China). </li><li>`6`: Toronto. </li> <li>`7`: Shanghai Finance. </li> <li>`8`: Beijing. </li> <li>`9`: Singapore. </li> <li>`11`: Shenzhen Finance. </li> <li>`15`: West US (Silicon Valley). </li><li>`16`: Chengdu. </li><li>`17`: Frankfurt. </li><li>`18`: Seoul. </li><li>`19`: Chongqing. </li><li>`21`: Mumbai. </li><li>`22`: East US (Virginia). </li><li>`23`: Bangkok. </li><li>`24`: Moscow. </li><li>`25`: Tokyo. </li></ul>
-	RegionId *int64 `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *int64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Region ID
-	ZoneId *int64 `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// VPC ID, such as `75101`.
-	VpcId *int64 `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *int64 `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Subnet ID, such as `46315`.
-	SubnetId *int64 `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *int64 `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Current instance status. <ul><li>`0`: To be initialized. </li><li>`1`: In the process. </li><li>`2`: Running. </li><li>`-2`: Isolated. </li><li>`-3`: To be deleted. </li></ul>
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Instance VIP
-	WanIp *string `json:"WanIp,omitnil" name:"WanIp"`
+	WanIp *string `json:"WanIp,omitnil,omitempty" name:"WanIp"`
 
 	// Port number of an instance
-	Port *int64 `json:"Port,omitnil" name:"Port"`
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Instance creation time in the format of "2020-01-15 10:20:00"
-	Createtime *string `json:"Createtime,omitnil" name:"Createtime"`
+	Createtime *string `json:"Createtime,omitnil,omitempty" name:"Createtime"`
 
 	// Instance memory capacity in MB (1 MB = 1024 KB)
-	Size *float64 `json:"Size,omitnil" name:"Size"`
+	Size *float64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// This field has been disused. You can use the TCOP’s [GetMonitorData](https://intl.cloud.tencent.com/document/product/248/31014?from_cn_redirect=1) API to query the capacity used by the instance.
-	SizeUsed *float64 `json:"SizeUsed,omitnil" name:"SizeUsed"`
+	SizeUsed *float64 `json:"SizeUsed,omitnil,omitempty" name:"SizeUsed"`
 
 	// Instance type
 	// - `2`: Redis 2.8 Memory Edition (Standard Architecture).
@@ -5538,258 +5538,258 @@ type InstanceSet struct {
 	// - `9`: Redis 5.0 Memory Edition (Cluster Architecture).
 	// - `15`: Redis 6.2 Memory Edition (Standard Architecture).
 	// - `16`: Redis 6.2 Memory Edition (Cluster Architecture).
-	Type *int64 `json:"Type,omitnil" name:"Type"`
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Whether to set the auto-renewal flag for an instance. <ul><li>`1`: Auto-renewal set. </li><li>`0`: Auto-renewal not set.</li></ul>
-	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// The time when a monthly subscribed instance expires
-	DeadlineTime *string `json:"DeadlineTime,omitnil" name:"DeadlineTime"`
+	DeadlineTime *string `json:"DeadlineTime,omitnil,omitempty" name:"DeadlineTime"`
 
 	// Engine: Redis community edition, Tencent Cloud CKV
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// Product type. <ul><li>`standalone`: Standard edition. </li><li>`cluster`: Cluster edition. </li></ul>
-	ProductType *string `json:"ProductType,omitnil" name:"ProductType"`
+	ProductType *string `json:"ProductType,omitnil,omitempty" name:"ProductType"`
 
 	// VPC ID, such as vpc-fk33jsf43kgv.
-	UniqVpcId *string `json:"UniqVpcId,omitnil" name:"UniqVpcId"`
+	UniqVpcId *string `json:"UniqVpcId,omitnil,omitempty" name:"UniqVpcId"`
 
 	// VPC subnet ID, such as subnet-fd3j6l35mm0.
-	UniqSubnetId *string `json:"UniqSubnetId,omitnil" name:"UniqSubnetId"`
+	UniqSubnetId *string `json:"UniqSubnetId,omitnil,omitempty" name:"UniqSubnetId"`
 
 	// Billing mode. Only pay-as-you-go billing is supported.
-	BillingMode *int64 `json:"BillingMode,omitnil" name:"BillingMode"`
+	BillingMode *int64 `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
 	// Description of an instance status, such as "Running".
-	InstanceTitle *string `json:"InstanceTitle,omitnil" name:"InstanceTitle"`
+	InstanceTitle *string `json:"InstanceTitle,omitnil,omitempty" name:"InstanceTitle"`
 
 	// The default termination time for isolated instances in the format of "2020-02-15 10:20:00". By default, a pay-as-you-go instance will be terminated after two hours of isolation, and a monthly subscribed instance will be terminated after seven days by default.
-	OfflineTime *string `json:"OfflineTime,omitnil" name:"OfflineTime"`
+	OfflineTime *string `json:"OfflineTime,omitnil,omitempty" name:"OfflineTime"`
 
 	// Sub-status returned for an instance in process
-	SubStatus *int64 `json:"SubStatus,omitnil" name:"SubStatus"`
+	SubStatus *int64 `json:"SubStatus,omitnil,omitempty" name:"SubStatus"`
 
 	// Anti-affinity tag
-	Tags []*string `json:"Tags,omitnil" name:"Tags"`
+	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Instance node information
-	InstanceNode []*InstanceNode `json:"InstanceNode,omitnil" name:"InstanceNode"`
+	InstanceNode []*InstanceNode `json:"InstanceNode,omitnil,omitempty" name:"InstanceNode"`
 
 	// Shard size
-	RedisShardSize *int64 `json:"RedisShardSize,omitnil" name:"RedisShardSize"`
+	RedisShardSize *int64 `json:"RedisShardSize,omitnil,omitempty" name:"RedisShardSize"`
 
 	// Number of shards
-	RedisShardNum *int64 `json:"RedisShardNum,omitnil" name:"RedisShardNum"`
+	RedisShardNum *int64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
 	// Number of replicas
-	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitnil" name:"RedisReplicasNum"`
+	RedisReplicasNum *int64 `json:"RedisReplicasNum,omitnil,omitempty" name:"RedisReplicasNum"`
 
 	// Billing ID
-	PriceId *int64 `json:"PriceId,omitnil" name:"PriceId"`
+	PriceId *int64 `json:"PriceId,omitnil,omitempty" name:"PriceId"`
 
 	// The time when an instance start to be isolated
-	CloseTime *string `json:"CloseTime,omitnil" name:"CloseTime"`
+	CloseTime *string `json:"CloseTime,omitnil,omitempty" name:"CloseTime"`
 
 	// Read weight of a replica node
-	SlaveReadWeight *int64 `json:"SlaveReadWeight,omitnil" name:"SlaveReadWeight"`
+	SlaveReadWeight *int64 `json:"SlaveReadWeight,omitnil,omitempty" name:"SlaveReadWeight"`
 
 	// Instance tag information
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	InstanceTags []*InstanceTagInfo `json:"InstanceTags,omitnil" name:"InstanceTags"`
+	InstanceTags []*InstanceTagInfo `json:"InstanceTags,omitnil,omitempty" name:"InstanceTags"`
 
 	// Project name
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	ProjectName *string `json:"ProjectName,omitnil" name:"ProjectName"`
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
 
 	// Whether an instance is password-free. <ul><li>`true`: Yes. </li><li>`false`: No. </li></ul>
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	NoAuth *bool `json:"NoAuth,omitnil" name:"NoAuth"`
+	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
 
 	// Number of client connections
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	ClientLimit *int64 `json:"ClientLimit,omitnil" name:"ClientLimit"`
+	ClientLimit *int64 `json:"ClientLimit,omitnil,omitempty" name:"ClientLimit"`
 
 	// DTS status (internal parameter, which can be ignored)
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	DtsStatus *int64 `json:"DtsStatus,omitnil" name:"DtsStatus"`
+	DtsStatus *int64 `json:"DtsStatus,omitnil,omitempty" name:"DtsStatus"`
 
 	// Upper shard bandwidth limit in MB
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	NetLimit *int64 `json:"NetLimit,omitnil" name:"NetLimit"`
+	NetLimit *int64 `json:"NetLimit,omitnil,omitempty" name:"NetLimit"`
 
 	// Password-free instance flag (internal parameter, which can be ignored)
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	PasswordFree *int64 `json:"PasswordFree,omitnil" name:"PasswordFree"`
+	PasswordFree *int64 `json:"PasswordFree,omitnil,omitempty" name:"PasswordFree"`
 
 	// Internal parameter, which can be ignored.
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	Vip6 *string `json:"Vip6,omitnil" name:"Vip6"`
+	Vip6 *string `json:"Vip6,omitnil,omitempty" name:"Vip6"`
 
 	// Read-only instance flag (internal parameter, which can be ignored)
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	ReadOnly *int64 `json:"ReadOnly,omitnil" name:"ReadOnly"`
+	ReadOnly *int64 `json:"ReadOnly,omitnil,omitempty" name:"ReadOnly"`
 
 	// Internal parameter, which can be ignored.
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	RemainBandwidthDuration *string `json:"RemainBandwidthDuration,omitnil" name:"RemainBandwidthDuration"`
+	RemainBandwidthDuration *string `json:"RemainBandwidthDuration,omitnil,omitempty" name:"RemainBandwidthDuration"`
 
 	// This parameter can be ignored for Redis instance.
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	DiskSize *int64 `json:"DiskSize,omitnil" name:"DiskSize"`
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// Monitoring granularity. <ul><li>`1m`: Monitoring at one-minute granularity. This granularity has been disused. For more information, see [1-Minute Granularity Will Be Disused](https://www.tencentcloud.com/document/product/239/50440).</li><li>`5s`: Monitoring at five-second granularity.</li></ul>
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MonitorVersion *string `json:"MonitorVersion,omitnil" name:"MonitorVersion"`
+	MonitorVersion *string `json:"MonitorVersion,omitnil,omitempty" name:"MonitorVersion"`
 
 	// The minimum number of max client connections
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	ClientLimitMin *int64 `json:"ClientLimitMin,omitnil" name:"ClientLimitMin"`
+	ClientLimitMin *int64 `json:"ClientLimitMin,omitnil,omitempty" name:"ClientLimitMin"`
 
 	// The maximum number of max client connections
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	ClientLimitMax *int64 `json:"ClientLimitMax,omitnil" name:"ClientLimitMax"`
+	ClientLimitMax *int64 `json:"ClientLimitMax,omitnil,omitempty" name:"ClientLimitMax"`
 
 	// Instance node details
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil" name:"NodeSet"`
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil,omitempty" name:"NodeSet"`
 
 	// Information of the region where the instance is deployed, such as `ap-guangzhou`.
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Public IP
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	WanAddress *string `json:"WanAddress,omitnil" name:"WanAddress"`
+	WanAddress *string `json:"WanAddress,omitnil,omitempty" name:"WanAddress"`
 
 	// Polaris service address, which is for internal use.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PolarisServer *string `json:"PolarisServer,omitnil" name:"PolarisServer"`
+	PolarisServer *string `json:"PolarisServer,omitnil,omitempty" name:"PolarisServer"`
 
 	// The current proxy version of an instance
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitnil" name:"CurrentProxyVersion"`
+	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitnil,omitempty" name:"CurrentProxyVersion"`
 
 	// The current cache minor version of an instance
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	CurrentRedisVersion *string `json:"CurrentRedisVersion,omitnil" name:"CurrentRedisVersion"`
+	CurrentRedisVersion *string `json:"CurrentRedisVersion,omitnil,omitempty" name:"CurrentRedisVersion"`
 
 	// Proxy version, which can be upgraded for the instance
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	UpgradeProxyVersion *string `json:"UpgradeProxyVersion,omitnil" name:"UpgradeProxyVersion"`
+	UpgradeProxyVersion *string `json:"UpgradeProxyVersion,omitnil,omitempty" name:"UpgradeProxyVersion"`
 
 	// Cache minor version, which can be upgraded for the instance
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	UpgradeRedisVersion *string `json:"UpgradeRedisVersion,omitnil" name:"UpgradeRedisVersion"`
+	UpgradeRedisVersion *string `json:"UpgradeRedisVersion,omitnil,omitempty" name:"UpgradeRedisVersion"`
 }
 
 type InstanceSlowlogDetail struct {
 	// Slow log duration
-	Duration *int64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Client address
-	Client *string `json:"Client,omitnil" name:"Client"`
+	Client *string `json:"Client,omitnil,omitempty" name:"Client"`
 
 	// Command
-	Command *string `json:"Command,omitnil" name:"Command"`
+	Command *string `json:"Command,omitnil,omitempty" name:"Command"`
 
 	// Command line details
-	CommandLine *string `json:"CommandLine,omitnil" name:"CommandLine"`
+	CommandLine *string `json:"CommandLine,omitnil,omitempty" name:"CommandLine"`
 
 	// Execution duration
-	ExecuteTime *string `json:"ExecuteTime,omitnil" name:"ExecuteTime"`
+	ExecuteTime *string `json:"ExecuteTime,omitnil,omitempty" name:"ExecuteTime"`
 
 	// Node ID
-	Node *string `json:"Node,omitnil" name:"Node"`
+	Node *string `json:"Node,omitnil,omitempty" name:"Node"`
 }
 
 type InstanceTagInfo struct {
 	// Tag key
-	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
 	// Tag value
-	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
+	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
 }
 
 type InstanceTextParam struct {
 	// Parameter name
-	ParamName *string `json:"ParamName,omitnil" name:"ParamName"`
+	ParamName *string `json:"ParamName,omitnil,omitempty" name:"ParamName"`
 
 	// Parameter type such as  `Text`.
-	ValueType *string `json:"ValueType,omitnil" name:"ValueType"`
+	ValueType *string `json:"ValueType,omitnil,omitempty" name:"ValueType"`
 
 	// Whether to restart the database after modifying the parameter. Valid values:  - `true` (required) - `false` (not required)
-	NeedRestart *string `json:"NeedRestart,omitnil" name:"NeedRestart"`
+	NeedRestart *string `json:"NeedRestart,omitnil,omitempty" name:"NeedRestart"`
 
 	// Default value of the parameter
-	DefaultValue *string `json:"DefaultValue,omitnil" name:"DefaultValue"`
+	DefaultValue *string `json:"DefaultValue,omitnil,omitempty" name:"DefaultValue"`
 
 	// Current value
-	CurrentValue *string `json:"CurrentValue,omitnil" name:"CurrentValue"`
+	CurrentValue *string `json:"CurrentValue,omitnil,omitempty" name:"CurrentValue"`
 
 	// Description
-	Tips *string `json:"Tips,omitnil" name:"Tips"`
+	Tips *string `json:"Tips,omitnil,omitempty" name:"Tips"`
 
 	// Acceptable values of the parameter
-	TextValue []*string `json:"TextValue,omitnil" name:"TextValue"`
+	TextValue []*string `json:"TextValue,omitnil,omitempty" name:"TextValue"`
 
 	// Parameter modification status. Valid values: - `1` (modifying) - `2` (modified)
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type Instances struct {
 	// User APPID, which is the unique application ID that matches an account. Some Tencent Cloud products use this APPID.
-	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Region ID. <ul><li>`1`: Guangzhou. </li><li>`4`: Shanghai. </li><li>`5`: Hong Kong (China). </li> <li>`6`: Toronto. </li> <li>`7`: Shanghai Finance. </li> <li>`8`: Beijing. </li> <li>`9`: Singapore. </li> <li>`11`: Shenzhen Finance. </li> <li>`15`: West US (Silicon Valley). </li> </ul>
-	RegionId *uint64 `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *uint64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Region ID
-	ZoneId *uint64 `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Number of replicas
-	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitnil" name:"RedisReplicasNum"`
+	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitnil,omitempty" name:"RedisReplicasNum"`
 
 	// Number of shards
-	RedisShardNum *int64 `json:"RedisShardNum,omitnil" name:"RedisShardNum"`
+	RedisShardNum *int64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
 	// Shard memory size.
-	RedisShardSize *int64 `json:"RedisShardSize,omitnil" name:"RedisShardSize"`
+	RedisShardSize *int64 `json:"RedisShardSize,omitnil,omitempty" name:"RedisShardSize"`
 
 	// Instance disk size
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DiskSize *int64 `json:"DiskSize,omitnil" name:"DiskSize"`
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// Engine: Redis Community Edition, Tencent Cloud CKV.
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// Read-write permission of the instance. <ul><li>`rw`: Read/Write. </li><li>`r`: Read-only. </li></ul>
-	Role *string `json:"Role,omitnil" name:"Role"`
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 
 	// Instance VIP
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// Internal parameter, which can be ignored.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Vip6 *string `json:"Vip6,omitnil" name:"Vip6"`
+	Vip6 *string `json:"Vip6,omitnil,omitempty" name:"Vip6"`
 
 	// VPC ID, such as `75101`.
-	VpcID *int64 `json:"VpcID,omitnil" name:"VpcID"`
+	VpcID *int64 `json:"VpcID,omitnil,omitempty" name:"VpcID"`
 
 	// Instance port
-	VPort *int64 `json:"VPort,omitnil" name:"VPort"`
+	VPort *int64 `json:"VPort,omitnil,omitempty" name:"VPort"`
 
 	// Instance status. <ul><li>`0`: Uninitialized. </li><li>`1`: In the process. </li><li>`2`: Running. </li><li>`-2`: Isolated. </li><li>`-3`: To be deleted. </li></ul>
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Repository ID
-	GrocerySysId *int64 `json:"GrocerySysId,omitnil" name:"GrocerySysId"`
+	GrocerySysId *int64 `json:"GrocerySysId,omitnil,omitempty" name:"GrocerySysId"`
 
 	// Instance type
 	// - `2`: Redis 2.8 Memory Edition (Standard Architecture).
@@ -5802,38 +5802,38 @@ type Instances struct {
 	// - `9`: Redis 5.0 Memory Edition (Cluster Architecture)
 	// - `15`: Redis 6.2 Memory Edition (Standard Architecture).
 	// - `16`: Redis 6.2 Memory Edition (Cluster Architecture)
-	ProductType *int64 `json:"ProductType,omitnil" name:"ProductType"`
+	ProductType *int64 `json:"ProductType,omitnil,omitempty" name:"ProductType"`
 
 	// The time when the instance was added to the replication group.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The time when instances in the replication group were updated.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 // Predefined struct for user
 type KillMasterGroupRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// A parameter used to configure the access password for a specified instance. If password-free authentication is enabled, this parameter will not be required. Required password strength. - It must contains 8-30 characters. We recommend that you use a password of more than 12 characters. - It must contain at least two of the following types: lowercase letters, uppercase letters, digits, and symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/), and it cannot start with a slash (/).
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// Shard ID of a sharded cluster
-	ShardIds []*int64 `json:"ShardIds,omitnil" name:"ShardIds"`
+	ShardIds []*int64 `json:"ShardIds,omitnil,omitempty" name:"ShardIds"`
 }
 
 type KillMasterGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// A parameter used to configure the access password for a specified instance. If password-free authentication is enabled, this parameter will not be required. Required password strength. - It must contains 8-30 characters. We recommend that you use a password of more than 12 characters. - It must contain at least two of the following types: lowercase letters, uppercase letters, digits, and symbols (()`~!@#$%^&*-+=_|{}[]:;<>,.?/), and it cannot start with a slash (/).
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// Shard ID of a sharded cluster
-	ShardIds []*int64 `json:"ShardIds,omitnil" name:"ShardIds"`
+	ShardIds []*int64 `json:"ShardIds,omitnil,omitempty" name:"ShardIds"`
 }
 
 func (r *KillMasterGroupRequest) ToJsonString() string {
@@ -5860,10 +5860,10 @@ func (r *KillMasterGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type KillMasterGroupResponseParams struct {
 	// Async task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type KillMasterGroupResponse struct {
@@ -5885,26 +5885,26 @@ func (r *KillMasterGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ManualBackupInstanceRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Remarks for manual backup task
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Retention period of backup data in days.  Default value: 7 days.  Value range: [0,1825].  If the value exceeds 7 days, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application. - If this parameter is not configured, it will set to be the same as the period of automatic backup retention. - If automatic backup is not set, the default value will be 7 days.
-	StorageDays *int64 `json:"StorageDays,omitnil" name:"StorageDays"`
+	StorageDays *int64 `json:"StorageDays,omitnil,omitempty" name:"StorageDays"`
 }
 
 type ManualBackupInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Remarks for manual backup task
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Retention period of backup data in days.  Default value: 7 days.  Value range: [0,1825].  If the value exceeds 7 days, [submit a ticket](https://console.cloud.tencent.com/workorder/category) for application. - If this parameter is not configured, it will set to be the same as the period of automatic backup retention. - If automatic backup is not set, the default value will be 7 days.
-	StorageDays *int64 `json:"StorageDays,omitnil" name:"StorageDays"`
+	StorageDays *int64 `json:"StorageDays,omitnil,omitempty" name:"StorageDays"`
 }
 
 func (r *ManualBackupInstanceRequest) ToJsonString() string {
@@ -5931,10 +5931,10 @@ func (r *ManualBackupInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ManualBackupInstanceResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ManualBackupInstanceResponse struct {
@@ -5956,32 +5956,32 @@ func (r *ManualBackupInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModfiyInstancePasswordRequestParams struct {
 	// Instance ID, such as "crs-xjhsdj****". Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Old password of an instance
-	OldPassword *string `json:"OldPassword,omitnil" name:"OldPassword"`
+	OldPassword *string `json:"OldPassword,omitnil,omitempty" name:"OldPassword"`
 
 	// New instance password, which has the following requirements:
 	// - It must contain 8-30 characters, preferably 12 or more.
 	// - It cannot start with a slash (/)
 	// - It must contain two of the following three types: lowercase letters, uppercase letters, and symbols (()~!@#$%^&*-+=_|{}[]:;<>,.?/)
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
 type ModfiyInstancePasswordRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID, such as "crs-xjhsdj****". Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Old password of an instance
-	OldPassword *string `json:"OldPassword,omitnil" name:"OldPassword"`
+	OldPassword *string `json:"OldPassword,omitnil,omitempty" name:"OldPassword"`
 
 	// New instance password, which has the following requirements:
 	// - It must contain 8-30 characters, preferably 12 or more.
 	// - It cannot start with a slash (/)
 	// - It must contain two of the following three types: lowercase letters, uppercase letters, and symbols (()~!@#$%^&*-+=_|{}[]:;<>,.?/)
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
 func (r *ModfiyInstancePasswordRequest) ToJsonString() string {
@@ -6008,10 +6008,10 @@ func (r *ModfiyInstancePasswordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModfiyInstancePasswordResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModfiyInstancePasswordResponse struct {
@@ -6033,32 +6033,32 @@ func (r *ModfiyInstancePasswordResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAutoBackupConfigRequestParams struct {
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Automatic backup cycle. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. This parameter currently cannot be modified.
-	WeekDays []*string `json:"WeekDays,omitnil" name:"WeekDays"`
+	WeekDays []*string `json:"WeekDays,omitnil,omitempty" name:"WeekDays"`
 
 	// Automatic backup time in the format of 00:00-01:00, 01:00-02:00... 23:00-00:00.
-	TimePeriod *string `json:"TimePeriod,omitnil" name:"TimePeriod"`
+	TimePeriod *string `json:"TimePeriod,omitnil,omitempty" name:"TimePeriod"`
 
 	// Automatic backup type.  Valid value:  `1` (scheduled backup).
-	AutoBackupType *int64 `json:"AutoBackupType,omitnil" name:"AutoBackupType"`
+	AutoBackupType *int64 `json:"AutoBackupType,omitnil,omitempty" name:"AutoBackupType"`
 }
 
 type ModifyAutoBackupConfigRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of a specified instance,  such as  "crs-xjhsdj****" Log in to the [Redis console](https://console.cloud.tencent.com/redis) and copy the instance ID in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Automatic backup cycle. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`. This parameter currently cannot be modified.
-	WeekDays []*string `json:"WeekDays,omitnil" name:"WeekDays"`
+	WeekDays []*string `json:"WeekDays,omitnil,omitempty" name:"WeekDays"`
 
 	// Automatic backup time in the format of 00:00-01:00, 01:00-02:00... 23:00-00:00.
-	TimePeriod *string `json:"TimePeriod,omitnil" name:"TimePeriod"`
+	TimePeriod *string `json:"TimePeriod,omitnil,omitempty" name:"TimePeriod"`
 
 	// Automatic backup type.  Valid value:  `1` (scheduled backup).
-	AutoBackupType *int64 `json:"AutoBackupType,omitnil" name:"AutoBackupType"`
+	AutoBackupType *int64 `json:"AutoBackupType,omitnil,omitempty" name:"AutoBackupType"`
 }
 
 func (r *ModifyAutoBackupConfigRequest) ToJsonString() string {
@@ -6086,19 +6086,19 @@ func (r *ModifyAutoBackupConfigRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAutoBackupConfigResponseParams struct {
 	// Automatic backup type.  Valid value:  `1` (scheduled backup).
-	AutoBackupType *int64 `json:"AutoBackupType,omitnil" name:"AutoBackupType"`
+	AutoBackupType *int64 `json:"AutoBackupType,omitnil,omitempty" name:"AutoBackupType"`
 
 	// Automatic backup cycle. Valid values: `Monday`, `Tuesday`, `Wednesday`, `Thursday`, `Friday`, `Saturday`, `Sunday`.
-	WeekDays []*string `json:"WeekDays,omitnil" name:"WeekDays"`
+	WeekDays []*string `json:"WeekDays,omitnil,omitempty" name:"WeekDays"`
 
 	// Time period for automatic scheduled backup  in the format of  “00:00-01:00, 01:00-02:00...... 23:00-00:00”.
-	TimePeriod *string `json:"TimePeriod,omitnil" name:"TimePeriod"`
+	TimePeriod *string `json:"TimePeriod,omitnil,omitempty" name:"TimePeriod"`
 
 	// Retention time of full backup files in days
-	BackupStorageDays *int64 `json:"BackupStorageDays,omitnil" name:"BackupStorageDays"`
+	BackupStorageDays *int64 `json:"BackupStorageDays,omitnil,omitempty" name:"BackupStorageDays"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyAutoBackupConfigResponse struct {
@@ -6124,22 +6124,22 @@ type ModifyBackupDownloadRestrictionRequestParams struct {
 	// - `NoLimit`: Backup files can be downloaded over both public and private networks.
 	// - `LimitOnlyIntranet`: Backup files can be downloaded only at private network addresses auto-assigned by Tencent Cloud.
 	// - `Customize`: Backup files can be downloaded only in the customized VPC.
-	LimitType *string `json:"LimitType,omitnil" name:"LimitType"`
+	LimitType *string `json:"LimitType,omitnil,omitempty" name:"LimitType"`
 
 	// Only `In` can be passed in for this parameter, indicating that backup files can be downloaded in the custom `LimitVpc`.
-	VpcComparisonSymbol *string `json:"VpcComparisonSymbol,omitnil" name:"VpcComparisonSymbol"`
+	VpcComparisonSymbol *string `json:"VpcComparisonSymbol,omitnil,omitempty" name:"VpcComparisonSymbol"`
 
 	// Whether backups can be downloaded at the custom `LimitIp` address.
 	// 
 	// - `In`: Download is allowed for the custom IP.
 	// - `NotIn`: Download is not allowed for the custom IP.
-	IpComparisonSymbol *string `json:"IpComparisonSymbol,omitnil" name:"IpComparisonSymbol"`
+	IpComparisonSymbol *string `json:"IpComparisonSymbol,omitnil,omitempty" name:"IpComparisonSymbol"`
 
 	// VPC ID of the custom backup file download address, which is required if `LimitType` is `Customize`.
-	LimitVpc []*BackupLimitVpcItem `json:"LimitVpc,omitnil" name:"LimitVpc"`
+	LimitVpc []*BackupLimitVpcItem `json:"LimitVpc,omitnil,omitempty" name:"LimitVpc"`
 
 	// VPC IP of the custom backup file download address, which is required if `LimitType` is `Customize`.
-	LimitIp []*string `json:"LimitIp,omitnil" name:"LimitIp"`
+	LimitIp []*string `json:"LimitIp,omitnil,omitempty" name:"LimitIp"`
 }
 
 type ModifyBackupDownloadRestrictionRequest struct {
@@ -6150,22 +6150,22 @@ type ModifyBackupDownloadRestrictionRequest struct {
 	// - `NoLimit`: Backup files can be downloaded over both public and private networks.
 	// - `LimitOnlyIntranet`: Backup files can be downloaded only at private network addresses auto-assigned by Tencent Cloud.
 	// - `Customize`: Backup files can be downloaded only in the customized VPC.
-	LimitType *string `json:"LimitType,omitnil" name:"LimitType"`
+	LimitType *string `json:"LimitType,omitnil,omitempty" name:"LimitType"`
 
 	// Only `In` can be passed in for this parameter, indicating that backup files can be downloaded in the custom `LimitVpc`.
-	VpcComparisonSymbol *string `json:"VpcComparisonSymbol,omitnil" name:"VpcComparisonSymbol"`
+	VpcComparisonSymbol *string `json:"VpcComparisonSymbol,omitnil,omitempty" name:"VpcComparisonSymbol"`
 
 	// Whether backups can be downloaded at the custom `LimitIp` address.
 	// 
 	// - `In`: Download is allowed for the custom IP.
 	// - `NotIn`: Download is not allowed for the custom IP.
-	IpComparisonSymbol *string `json:"IpComparisonSymbol,omitnil" name:"IpComparisonSymbol"`
+	IpComparisonSymbol *string `json:"IpComparisonSymbol,omitnil,omitempty" name:"IpComparisonSymbol"`
 
 	// VPC ID of the custom backup file download address, which is required if `LimitType` is `Customize`.
-	LimitVpc []*BackupLimitVpcItem `json:"LimitVpc,omitnil" name:"LimitVpc"`
+	LimitVpc []*BackupLimitVpcItem `json:"LimitVpc,omitnil,omitempty" name:"LimitVpc"`
 
 	// VPC IP of the custom backup file download address, which is required if `LimitType` is `Customize`.
-	LimitIp []*string `json:"LimitIp,omitnil" name:"LimitIp"`
+	LimitIp []*string `json:"LimitIp,omitnil,omitempty" name:"LimitIp"`
 }
 
 func (r *ModifyBackupDownloadRestrictionRequest) ToJsonString() string {
@@ -6194,7 +6194,7 @@ func (r *ModifyBackupDownloadRestrictionRequest) FromJsonString(s string) error 
 // Predefined struct for user
 type ModifyBackupDownloadRestrictionResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyBackupDownloadRestrictionResponse struct {
@@ -6216,26 +6216,26 @@ func (r *ModifyBackupDownloadRestrictionResponse) FromJsonString(s string) error
 // Predefined struct for user
 type ModifyDBInstanceSecurityGroupsRequestParams struct {
 	// Database engine name, which is `redis` for this API.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
 	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type ModifyDBInstanceSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Database engine name, which is `redis` for this API.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// List of IDs of security groups to be modified, which is an array of one or more security group IDs.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
 	// Instance ID in the format of cdb-c1nl9rpv or cdbro-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *ModifyDBInstanceSecurityGroupsRequest) ToJsonString() string {
@@ -6262,7 +6262,7 @@ func (r *ModifyDBInstanceSecurityGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDBInstanceSecurityGroupsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDBInstanceSecurityGroupsResponse struct {
@@ -6284,50 +6284,50 @@ func (r *ModifyDBInstanceSecurityGroupsResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type ModifyInstanceAccountRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Sub-account name. If the root account is to be modified, enter `root`.
-	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 
 	// Sub-account password
-	AccountPassword *string `json:"AccountPassword,omitnil" name:"AccountPassword"`
+	AccountPassword *string `json:"AccountPassword,omitnil,omitempty" name:"AccountPassword"`
 
 	// Sub-account description information
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Routing policy. Valid values: master (master node); replication (replica node)
-	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil" name:"ReadonlyPolicy"`
+	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 
 	// Sub-account read/write policy. Valid values: r (read-only); w (write-only); rw (read/write).
-	Privilege *string `json:"Privilege,omitnil" name:"Privilege"`
+	Privilege *string `json:"Privilege,omitnil,omitempty" name:"Privilege"`
 
 	// true: make the root account password-free. This is applicable to root accounts only. Sub-accounts cannot be made password-free.
-	NoAuth *bool `json:"NoAuth,omitnil" name:"NoAuth"`
+	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
 }
 
 type ModifyInstanceAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Sub-account name. If the root account is to be modified, enter `root`.
-	AccountName *string `json:"AccountName,omitnil" name:"AccountName"`
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
 
 	// Sub-account password
-	AccountPassword *string `json:"AccountPassword,omitnil" name:"AccountPassword"`
+	AccountPassword *string `json:"AccountPassword,omitnil,omitempty" name:"AccountPassword"`
 
 	// Sub-account description information
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Routing policy. Valid values: master (master node); replication (replica node)
-	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil" name:"ReadonlyPolicy"`
+	ReadonlyPolicy []*string `json:"ReadonlyPolicy,omitnil,omitempty" name:"ReadonlyPolicy"`
 
 	// Sub-account read/write policy. Valid values: r (read-only); w (write-only); rw (read/write).
-	Privilege *string `json:"Privilege,omitnil" name:"Privilege"`
+	Privilege *string `json:"Privilege,omitnil,omitempty" name:"Privilege"`
 
 	// true: make the root account password-free. This is applicable to root accounts only. Sub-accounts cannot be made password-free.
-	NoAuth *bool `json:"NoAuth,omitnil" name:"NoAuth"`
+	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
 }
 
 func (r *ModifyInstanceAccountRequest) ToJsonString() string {
@@ -6358,10 +6358,10 @@ func (r *ModifyInstanceAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceAccountResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstanceAccountResponse struct {
@@ -6383,20 +6383,20 @@ func (r *ModifyInstanceAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceParamsRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// List of instance parameters modified
-	InstanceParams []*InstanceParam `json:"InstanceParams,omitnil" name:"InstanceParams"`
+	InstanceParams []*InstanceParam `json:"InstanceParams,omitnil,omitempty" name:"InstanceParams"`
 }
 
 type ModifyInstanceParamsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// List of instance parameters modified
-	InstanceParams []*InstanceParam `json:"InstanceParams,omitnil" name:"InstanceParams"`
+	InstanceParams []*InstanceParam `json:"InstanceParams,omitnil,omitempty" name:"InstanceParams"`
 }
 
 func (r *ModifyInstanceParamsRequest) ToJsonString() string {
@@ -6422,13 +6422,13 @@ func (r *ModifyInstanceParamsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceParamsResponseParams struct {
 	// Whether the parameter is modified successfully. <br><li>`True`: Yes<br><li>`False`: No<br>
-	Changed *bool `json:"Changed,omitnil" name:"Changed"`
+	Changed *bool `json:"Changed,omitnil,omitempty" name:"Changed"`
 
 	// ID of the task
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstanceParamsResponse struct {
@@ -6450,20 +6450,20 @@ func (r *ModifyInstanceParamsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceReadOnlyRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance input mode. Valid values: `0` (read/write), `1` (read-only)
-	InputMode *string `json:"InputMode,omitnil" name:"InputMode"`
+	InputMode *string `json:"InputMode,omitnil,omitempty" name:"InputMode"`
 }
 
 type ModifyInstanceReadOnlyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance input mode. Valid values: `0` (read/write), `1` (read-only)
-	InputMode *string `json:"InputMode,omitnil" name:"InputMode"`
+	InputMode *string `json:"InputMode,omitnil,omitempty" name:"InputMode"`
 }
 
 func (r *ModifyInstanceReadOnlyRequest) ToJsonString() string {
@@ -6489,10 +6489,10 @@ func (r *ModifyInstanceReadOnlyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceReadOnlyResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstanceReadOnlyResponse struct {
@@ -6514,56 +6514,56 @@ func (r *ModifyInstanceReadOnlyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceRequestParams struct {
 	// Instance modification type. rename: rename an instance; modifyProject: modify the project of an instance; modifyAutoRenew: modify the auto-renewal flag of an instance.
-	Operation *string `json:"Operation,omitnil" name:"Operation"`
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
 	// Instance ID
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// New name of the instance
-	InstanceNames []*string `json:"InstanceNames,omitnil" name:"InstanceNames"`
+	InstanceNames []*string `json:"InstanceNames,omitnil,omitempty" name:"InstanceNames"`
 
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Auto-renewal flag. 0: default status (manual renewal); 1: auto-renewal enabled; 2: auto-renewal disabled
-	AutoRenews []*int64 `json:"AutoRenews,omitnil" name:"AutoRenews"`
+	AutoRenews []*int64 `json:"AutoRenews,omitnil,omitempty" name:"AutoRenews"`
 
 	// Disused
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Disused
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Disused
-	AutoRenew *int64 `json:"AutoRenew,omitnil" name:"AutoRenew"`
+	AutoRenew *int64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
 }
 
 type ModifyInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance modification type. rename: rename an instance; modifyProject: modify the project of an instance; modifyAutoRenew: modify the auto-renewal flag of an instance.
-	Operation *string `json:"Operation,omitnil" name:"Operation"`
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
 	// Instance ID
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// New name of the instance
-	InstanceNames []*string `json:"InstanceNames,omitnil" name:"InstanceNames"`
+	InstanceNames []*string `json:"InstanceNames,omitnil,omitempty" name:"InstanceNames"`
 
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Auto-renewal flag. 0: default status (manual renewal); 1: auto-renewal enabled; 2: auto-renewal disabled
-	AutoRenews []*int64 `json:"AutoRenews,omitnil" name:"AutoRenews"`
+	AutoRenews []*int64 `json:"AutoRenews,omitnil,omitempty" name:"AutoRenews"`
 
 	// Disused
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Disused
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Disused
-	AutoRenew *int64 `json:"AutoRenew,omitnil" name:"AutoRenew"`
+	AutoRenew *int64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
 }
 
 func (r *ModifyInstanceRequest) ToJsonString() string {
@@ -6595,7 +6595,7 @@ func (r *ModifyInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstanceResponse struct {
@@ -6617,26 +6617,26 @@ func (r *ModifyInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyMaintenanceWindowRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Maintenance start time, such as 17:00
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Maintenance end time, such as 19:00
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type ModifyMaintenanceWindowRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Maintenance start time, such as 17:00
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Maintenance end time, such as 19:00
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 func (r *ModifyMaintenanceWindowRequest) ToJsonString() string {
@@ -6663,10 +6663,10 @@ func (r *ModifyMaintenanceWindowRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyMaintenanceWindowResponseParams struct {
 	// Modification status. Valid values: success, failed.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyMaintenanceWindowResponse struct {
@@ -6688,66 +6688,66 @@ func (r *ModifyMaintenanceWindowResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyNetworkConfigRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Network change type. Valid values:
 	// - `changeVip`: VPC change, including the private IPv4 address and port.
 	// - `changeVpc`: Subnet change.
 	// - `changeBaseToVpc`: Change from classic network to VPC.
 	// - `changeVPort`: Port change.
-	Operation *string `json:"Operation,omitnil" name:"Operation"`
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
 	// Private IPv4 address of the instance, which is required if `Operation` is `changeVip`.
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// VPC ID after the change, which is required if `Operation` is `changeVpc` or `changeBaseToVpc`.
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Subnet ID after the change, which is required if `Operation` is `changeVpc` or `changeBaseToVpc`.
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Retention period of the original private IPv4 address
 	// - Unit: Days.
 	// - Valid values: `0`, `1`, `2`, `3`, `7`, `15`.
 	// 
 	// **Note**: You can set the retention period of the original address only in the latest SDK. In earlier SDKs, the original address is released immediately. To view the SDK version, go to [SDK Center](https://intl.cloud.tencent.com/document/sdk?from_cn_redirect=1).
-	Recycle *int64 `json:"Recycle,omitnil" name:"Recycle"`
+	Recycle *int64 `json:"Recycle,omitnil,omitempty" name:"Recycle"`
 
 	// Network port after the change, which is required if `Operation` is `changeVPort` or `changeVip`. Value range: [1024,65535].
-	VPort *int64 `json:"VPort,omitnil" name:"VPort"`
+	VPort *int64 `json:"VPort,omitnil,omitempty" name:"VPort"`
 }
 
 type ModifyNetworkConfigRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Network change type. Valid values:
 	// - `changeVip`: VPC change, including the private IPv4 address and port.
 	// - `changeVpc`: Subnet change.
 	// - `changeBaseToVpc`: Change from classic network to VPC.
 	// - `changeVPort`: Port change.
-	Operation *string `json:"Operation,omitnil" name:"Operation"`
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
 	// Private IPv4 address of the instance, which is required if `Operation` is `changeVip`.
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// VPC ID after the change, which is required if `Operation` is `changeVpc` or `changeBaseToVpc`.
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Subnet ID after the change, which is required if `Operation` is `changeVpc` or `changeBaseToVpc`.
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Retention period of the original private IPv4 address
 	// - Unit: Days.
 	// - Valid values: `0`, `1`, `2`, `3`, `7`, `15`.
 	// 
 	// **Note**: You can set the retention period of the original address only in the latest SDK. In earlier SDKs, the original address is released immediately. To view the SDK version, go to [SDK Center](https://intl.cloud.tencent.com/document/sdk?from_cn_redirect=1).
-	Recycle *int64 `json:"Recycle,omitnil" name:"Recycle"`
+	Recycle *int64 `json:"Recycle,omitnil,omitempty" name:"Recycle"`
 
 	// Network port after the change, which is required if `Operation` is `changeVPort` or `changeVip`. Value range: [1024,65535].
-	VPort *int64 `json:"VPort,omitnil" name:"VPort"`
+	VPort *int64 `json:"VPort,omitnil,omitempty" name:"VPort"`
 }
 
 func (r *ModifyNetworkConfigRequest) ToJsonString() string {
@@ -6778,22 +6778,22 @@ func (r *ModifyNetworkConfigRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyNetworkConfigResponseParams struct {
 	// Execution status. Ignore this parameter.
-	Status *bool `json:"Status,omitnil" name:"Status"`
+	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// New subnet ID of the instance
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// New VPC ID of the instance
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// New private IPv4 address of the instance
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// Task ID, which can be used to query the task execution status through the `DescribeTaskInfo` API.
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyNetworkConfigResponse struct {
@@ -6815,32 +6815,32 @@ func (r *ModifyNetworkConfigResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyParamTemplateRequestParams struct {
 	// ID of the source parameter template.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// New name after the parameter template is modified.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// New description after the parameter template is modified.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// New parameter list after the parameter template is modified.
-	ParamList []*InstanceParam `json:"ParamList,omitnil" name:"ParamList"`
+	ParamList []*InstanceParam `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 }
 
 type ModifyParamTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the source parameter template.
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// New name after the parameter template is modified.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// New description after the parameter template is modified.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// New parameter list after the parameter template is modified.
-	ParamList []*InstanceParam `json:"ParamList,omitnil" name:"ParamList"`
+	ParamList []*InstanceParam `json:"ParamList,omitnil,omitempty" name:"ParamList"`
 }
 
 func (r *ModifyParamTemplateRequest) ToJsonString() string {
@@ -6868,7 +6868,7 @@ func (r *ModifyParamTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyParamTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyParamTemplateResponse struct {
@@ -6890,14 +6890,14 @@ func (r *ModifyParamTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type OpenSSLRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type OpenSSLRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *OpenSSLRequest) ToJsonString() string {
@@ -6922,10 +6922,10 @@ func (r *OpenSSLRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type OpenSSLResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type OpenSSLResponse struct {
@@ -6946,39 +6946,39 @@ func (r *OpenSSLResponse) FromJsonString(s string) error {
 
 type Outbound struct {
 	// Policy. Valid values: ACCEPT, DROP.
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// All the addresses that the address group ID represents.
-	AddressModule *string `json:"AddressModule,omitnil" name:"AddressModule"`
+	AddressModule *string `json:"AddressModule,omitnil,omitempty" name:"AddressModule"`
 
 	// Source IP or IP address range, such as 192.168.0.0/16.
-	CidrIp *string `json:"CidrIp,omitnil" name:"CidrIp"`
+	CidrIp *string `json:"CidrIp,omitnil,omitempty" name:"CidrIp"`
 
 	// Description.
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
 	// Network protocol, such as UDP and TCP.
-	IpProtocol *string `json:"IpProtocol,omitnil" name:"IpProtocol"`
+	IpProtocol *string `json:"IpProtocol,omitnil,omitempty" name:"IpProtocol"`
 
 	// Port.
-	PortRange *string `json:"PortRange,omitnil" name:"PortRange"`
+	PortRange *string `json:"PortRange,omitnil,omitempty" name:"PortRange"`
 
 	// All the protocols and ports that the service group ID represents.
-	ServiceModule *string `json:"ServiceModule,omitnil" name:"ServiceModule"`
+	ServiceModule *string `json:"ServiceModule,omitnil,omitempty" name:"ServiceModule"`
 
 	// All the addresses that the security group ID represents.
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 type ParamTemplateInfo struct {
 	// Parameter template ID
-	TemplateId *string `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Parameter template name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Parameter template description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Instance type
 	// - `2`: Redis 2.8 Memory Edition (Standard Architecture).
@@ -6991,41 +6991,41 @@ type ParamTemplateInfo struct {
 	// - `9`: Redis 5.0 Memory Edition (Cluster Architecture).
 	// - `15`: Redis 6.2 Memory Edition (Standard Architecture).
 	// - `16`: Redis 6.2 Memory Edition (Cluster Architecture).
-	ProductType *uint64 `json:"ProductType,omitnil" name:"ProductType"`
+	ProductType *uint64 `json:"ProductType,omitnil,omitempty" name:"ProductType"`
 }
 
 type ParameterDetail struct {
 	// Parameter name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Parameter Type
-	ParamType *string `json:"ParamType,omitnil" name:"ParamType"`
+	ParamType *string `json:"ParamType,omitnil,omitempty" name:"ParamType"`
 
 	// Default value of the parameter
-	Default *string `json:"Default,omitnil" name:"Default"`
+	Default *string `json:"Default,omitnil,omitempty" name:"Default"`
 
 	// Parameter description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Current value of the parameter
-	CurrentValue *string `json:"CurrentValue,omitnil" name:"CurrentValue"`
+	CurrentValue *string `json:"CurrentValue,omitnil,omitempty" name:"CurrentValue"`
 
 	// Whether to restart the database for the modified parameters to take effect
 	// - `0`: No restart.
 	// - `1`: Restart required.
-	NeedReboot *int64 `json:"NeedReboot,omitnil" name:"NeedReboot"`
+	NeedReboot *int64 `json:"NeedReboot,omitnil,omitempty" name:"NeedReboot"`
 
 	// Maximum value of the parameter
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Max *string `json:"Max,omitnil" name:"Max"`
+	Max *string `json:"Max,omitnil,omitempty" name:"Max"`
 
 	// Minimum value of the parameter
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Min *string `json:"Min,omitnil" name:"Min"`
+	Min *string `json:"Min,omitnil,omitempty" name:"Min"`
 
 	// Enumerated values of the parameter. It is null if the parameter is non-enumerated
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EnumValue []*string `json:"EnumValue,omitnil" name:"EnumValue"`
+	EnumValue []*string `json:"EnumValue,omitnil,omitempty" name:"EnumValue"`
 }
 
 type ProductConf struct {
@@ -7040,135 +7040,135 @@ type ProductConf struct {
 	// - `9`: Redis 5.0 Memory Edition (Cluster Architecture).
 	// - `15`: Redis 6.2 Memory Edition (Standard Architecture).
 	// - `16`: Redis 6.2 Memory Edition (Cluster Architecture).
-	Type *int64 `json:"Type,omitnil" name:"Type"`
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Product names, including Redis Master-Replica Edition, Redis Standalone Edition, Redis 4.0 Cluster Edition, CKV Master-Replica Edition, and CKV Standalone Edition.
-	TypeName *string `json:"TypeName,omitnil" name:"TypeName"`
+	TypeName *string `json:"TypeName,omitnil,omitempty" name:"TypeName"`
 
 	// Minimum purchasable quantity
-	MinBuyNum *int64 `json:"MinBuyNum,omitnil" name:"MinBuyNum"`
+	MinBuyNum *int64 `json:"MinBuyNum,omitnil,omitempty" name:"MinBuyNum"`
 
 	// Maximum purchasable quantity
-	MaxBuyNum *int64 `json:"MaxBuyNum,omitnil" name:"MaxBuyNum"`
+	MaxBuyNum *int64 `json:"MaxBuyNum,omitnil,omitempty" name:"MaxBuyNum"`
 
 	// Whether a product is sold out
 	// - `true`: Sold out.
 	// - `false`: Not sold out.
-	Saleout *bool `json:"Saleout,omitnil" name:"Saleout"`
+	Saleout *bool `json:"Saleout,omitnil,omitempty" name:"Saleout"`
 
 	// Product engines, including Tencent Cloud CKV and Redis Community Edition.
-	Engine *string `json:"Engine,omitnil" name:"Engine"`
+	Engine *string `json:"Engine,omitnil,omitempty" name:"Engine"`
 
 	// Compatible versions, including Redis 2.8, 3.2, 4.0, 5.0, and 6.2.
-	Version *string `json:"Version,omitnil" name:"Version"`
+	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
 	// Total capacity in GB
-	TotalSize []*string `json:"TotalSize,omitnil" name:"TotalSize"`
+	TotalSize []*string `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
 
 	// Shard size in GB
-	ShardSize []*string `json:"ShardSize,omitnil" name:"ShardSize"`
+	ShardSize []*string `json:"ShardSize,omitnil,omitempty" name:"ShardSize"`
 
 	// Quantity of replicas
-	ReplicaNum []*string `json:"ReplicaNum,omitnil" name:"ReplicaNum"`
+	ReplicaNum []*string `json:"ReplicaNum,omitnil,omitempty" name:"ReplicaNum"`
 
 	// Quantity of shards
-	ShardNum []*string `json:"ShardNum,omitnil" name:"ShardNum"`
+	ShardNum []*string `json:"ShardNum,omitnil,omitempty" name:"ShardNum"`
 
 	// Supported billing modes
 	// - `1`: Monthly subscription.
 	// - `0`: Pay-as-you-go.
-	PayMode *string `json:"PayMode,omitnil" name:"PayMode"`
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// Whether to support read-only replicas
 	// - `true`: Supported.
 	// -`false`: Not supported.
-	EnableRepicaReadOnly *bool `json:"EnableRepicaReadOnly,omitnil" name:"EnableRepicaReadOnly"`
+	EnableRepicaReadOnly *bool `json:"EnableRepicaReadOnly,omitnil,omitempty" name:"EnableRepicaReadOnly"`
 }
 
 type ProxyNodes struct {
 	// Node ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NodeId *string `json:"NodeId,omitnil" name:"NodeId"`
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
 
 	// AZ ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ZoneId *int64 `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type RedisBackupSet struct {
 	// Backup start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Backup task ID
-	BackupId *string `json:"BackupId,omitnil" name:"BackupId"`
+	BackupId *string `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 
 	// Backup type. Valid values:  `1` (Automatic backup in the early morning initiated by the system.) `0`: Manual backup initiated by the user.
-	BackupType *string `json:"BackupType,omitnil" name:"BackupType"`
+	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 
 	// Backup status. Valid values:  - `1`: The backup is locked by another process. - `2`: The backup is normal and not locked by any process. - `-1`: The backup is expired. - `3`: The backup is being exported. - `4`: Exported the backup successfully.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Backup remarks
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Whether the backup is locked. Valid values:  - `0` (no) - `1` (yes)
-	Locked *int64 `json:"Locked,omitnil" name:"Locked"`
+	Locked *int64 `json:"Locked,omitnil,omitempty" name:"Locked"`
 
 	// Internal field, which can be ignored.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BackupSize *int64 `json:"BackupSize,omitnil" name:"BackupSize"`
+	BackupSize *int64 `json:"BackupSize,omitnil,omitempty" name:"BackupSize"`
 
 	// Internal field, which can be ignored.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FullBackup *int64 `json:"FullBackup,omitnil" name:"FullBackup"`
+	FullBackup *int64 `json:"FullBackup,omitnil,omitempty" name:"FullBackup"`
 
 	// Internal field, which can be ignored.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceType *int64 `json:"InstanceType,omitnil" name:"InstanceType"`
+	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// The region where the local backup resides.
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Backup end time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Backup file type
-	FileType *string `json:"FileType,omitnil" name:"FileType"`
+	FileType *string `json:"FileType,omitnil,omitempty" name:"FileType"`
 
 	// Backup file expiration time
-	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 }
 
 type RedisCommonInstanceList struct {
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// User APPID, which is the unique application ID that matches an account. Some Tencent Cloud products use this APPID.
-	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// Project ID of the instance
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Instance region
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Instance AZ
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Instance VPC ID
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// VPC subnet ID
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Instance status information
 	// - `1`: Task running.
@@ -7176,101 +7176,101 @@ type RedisCommonInstanceList struct {
 	// - `-2`: Instance isolated.
 	// - `-3`: Instance being eliminated.
 	// - `-4`: Instance eliminated.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Private network IP address of an instance
-	Vips []*string `json:"Vips,omitnil" name:"Vips"`
+	Vips []*string `json:"Vips,omitnil,omitempty" name:"Vips"`
 
 	// Instance network port
-	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 
 	// Instance creation time
-	Createtime *string `json:"Createtime,omitnil" name:"Createtime"`
+	Createtime *string `json:"Createtime,omitnil,omitempty" name:"Createtime"`
 
 	// Billing type
 	// - `0`: Pay-as-you-go.
 	// - `1`: Monthly subscription.
-	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// Network Type
 	// - `0`: Classic network.
 	// - `1`: VPC.
-	NetType *int64 `json:"NetType,omitnil" name:"NetType"`
+	NetType *int64 `json:"NetType,omitnil,omitempty" name:"NetType"`
 }
 
 type RedisNode struct {
 	// Number of keys on Redis nodes
-	Keys *int64 `json:"Keys,omitnil" name:"Keys"`
+	Keys *int64 `json:"Keys,omitnil,omitempty" name:"Keys"`
 
 	// Slot distribution range for Redis node.  Value range:  0-5460.
-	Slot *string `json:"Slot,omitnil" name:"Slot"`
+	Slot *string `json:"Slot,omitnil,omitempty" name:"Slot"`
 
 	// Node sequence ID
-	NodeId *string `json:"NodeId,omitnil" name:"NodeId"`
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
 
 	// Node status
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Node role
-	Role *string `json:"Role,omitnil" name:"Role"`
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 }
 
 type RedisNodeInfo struct {
 	// Node type. <ul><li>`0`: Master node.</li><li>`1`: Replica node.</li></ul>
-	NodeType *int64 `json:"NodeType,omitnil" name:"NodeType"`
+	NodeType *int64 `json:"NodeType,omitnil,omitempty" name:"NodeType"`
 
 	// ID of the master or replica node <ul><li>This parameter is optional when the [CreateInstances](https://intl.cloud.tencent.com/document/product/239/20026?from_cn_redirect=1) API is used to create a TencentDB for Redis instance, but it is required when the [UpgradeInstance](https://intl.cloud.tencent.com/document/product/239/20013?from_cn_redirect=1) API is used to adjust the configuration of an instance by deleting a replica.  </li><li>You can use the [DescribeInstances](https://intl.cloud.tencent.com/document/product/239/20018?from_cn_redirect=1) API to get the node ID of integer type. </li></ul> </li></ul>
-	NodeId *int64 `json:"NodeId,omitnil" name:"NodeId"`
+	NodeId *int64 `json:"NodeId,omitnil,omitempty" name:"NodeId"`
 
 	// ID of the AZ of the master or replica node
-	ZoneId *uint64 `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *uint64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Name of the AZ of the master or replica node
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 }
 
 type RedisNodes struct {
 	// Node ID
-	NodeId *string `json:"NodeId,omitnil" name:"NodeId"`
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
 
 	// Node role
-	NodeRole *string `json:"NodeRole,omitnil" name:"NodeRole"`
+	NodeRole *string `json:"NodeRole,omitnil,omitempty" name:"NodeRole"`
 
 	// Shard ID
-	ClusterId *int64 `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *int64 `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// AZ ID
-	ZoneId *int64 `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type RegionConf struct {
 	// Region ID
-	RegionId *string `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Region name
-	RegionName *string `json:"RegionName,omitnil" name:"RegionName"`
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
 
 	// Region abbreviation
-	RegionShortName *string `json:"RegionShortName,omitnil" name:"RegionShortName"`
+	RegionShortName *string `json:"RegionShortName,omitnil,omitempty" name:"RegionShortName"`
 
 	// Name of the area where a region is located
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// AZ information
-	ZoneSet []*ZoneCapacityConf `json:"ZoneSet,omitnil" name:"ZoneSet"`
+	ZoneSet []*ZoneCapacityConf `json:"ZoneSet,omitnil,omitempty" name:"ZoneSet"`
 }
 
 // Predefined struct for user
 type ReleaseWanAddressRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type ReleaseWanAddressRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *ReleaseWanAddressRequest) ToJsonString() string {
@@ -7295,13 +7295,13 @@ func (r *ReleaseWanAddressRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ReleaseWanAddressResponseParams struct {
 	// Async task ID
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// Status of disabling public network access
-	WanStatus *string `json:"WanStatus,omitnil" name:"WanStatus"`
+	WanStatus *string `json:"WanStatus,omitnil,omitempty" name:"WanStatus"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ReleaseWanAddressResponse struct {
@@ -7323,26 +7323,26 @@ func (r *ReleaseWanAddressResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RemoveReplicationInstanceRequestParams struct {
 	// Replication group ID
-	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Data sync type. Valid values: `true` (strong sync is required), `false` (strong sync is not required, only the master instance can be deleted).
-	SyncType *bool `json:"SyncType,omitnil" name:"SyncType"`
+	SyncType *bool `json:"SyncType,omitnil,omitempty" name:"SyncType"`
 }
 
 type RemoveReplicationInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Replication group ID
-	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Data sync type. Valid values: `true` (strong sync is required), `false` (strong sync is not required, only the master instance can be deleted).
-	SyncType *bool `json:"SyncType,omitnil" name:"SyncType"`
+	SyncType *bool `json:"SyncType,omitnil,omitempty" name:"SyncType"`
 }
 
 func (r *RemoveReplicationInstanceRequest) ToJsonString() string {
@@ -7369,10 +7369,10 @@ func (r *RemoveReplicationInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RemoveReplicationInstanceResponseParams struct {
 	// Async task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RemoveReplicationInstanceResponse struct {
@@ -7394,26 +7394,26 @@ func (r *RemoveReplicationInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RenewInstanceRequestParams struct {
 	// Validity period in months
-	Period *uint64 `json:"Period,omitnil" name:"Period"`
+	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The parameter used to determine whether to modify the billing mode. <ul><li>If you want to change the billing mode from pay-as-you-go to monthly subscription, specify this parameter as <b>prepaid</b>. </li><li>If the current instance is monthly subscribed, this parameter is not required. </li></ul>
-	ModifyPayMode *string `json:"ModifyPayMode,omitnil" name:"ModifyPayMode"`
+	ModifyPayMode *string `json:"ModifyPayMode,omitnil,omitempty" name:"ModifyPayMode"`
 }
 
 type RenewInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Validity period in months
-	Period *uint64 `json:"Period,omitnil" name:"Period"`
+	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The parameter used to determine whether to modify the billing mode. <ul><li>If you want to change the billing mode from pay-as-you-go to monthly subscription, specify this parameter as <b>prepaid</b>. </li><li>If the current instance is monthly subscribed, this parameter is not required. </li></ul>
-	ModifyPayMode *string `json:"ModifyPayMode,omitnil" name:"ModifyPayMode"`
+	ModifyPayMode *string `json:"ModifyPayMode,omitnil,omitempty" name:"ModifyPayMode"`
 }
 
 func (r *RenewInstanceRequest) ToJsonString() string {
@@ -7440,10 +7440,10 @@ func (r *RenewInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RenewInstanceResponseParams struct {
 	// Transaction ID
-	DealId *string `json:"DealId,omitnil" name:"DealId"`
+	DealId *string `json:"DealId,omitnil,omitempty" name:"DealId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RenewInstanceResponse struct {
@@ -7464,44 +7464,44 @@ func (r *RenewInstanceResponse) FromJsonString(s string) error {
 
 type ReplicaGroup struct {
 	// Node group ID
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// Node group name, which is empty for the master node
-	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 
 	// Node AZ ID, such as ap-guangzhou-1
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Node group type. Valid values: master (master node group); replica (replica node group)
-	Role *string `json:"Role,omitnil" name:"Role"`
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 
 	// List of nodes in the node group
-	RedisNodes []*RedisNode `json:"RedisNodes,omitnil" name:"RedisNodes"`
+	RedisNodes []*RedisNode `json:"RedisNodes,omitnil,omitempty" name:"RedisNodes"`
 }
 
 // Predefined struct for user
 type ResetPasswordRequestParams struct {
 	// Redis instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Password reset (this parameter can be left blank when switching to password-free instance mode and is required in other cases)
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// Whether to switch to password-free instance mode. false: switch to password-enabled instance mode; true: switch to password-free instance mode. Default value: false.
-	NoAuth *bool `json:"NoAuth,omitnil" name:"NoAuth"`
+	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
 }
 
 type ResetPasswordRequest struct {
 	*tchttp.BaseRequest
 	
 	// Redis instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Password reset (this parameter can be left blank when switching to password-free instance mode and is required in other cases)
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// Whether to switch to password-free instance mode. false: switch to password-enabled instance mode; true: switch to password-free instance mode. Default value: false.
-	NoAuth *bool `json:"NoAuth,omitnil" name:"NoAuth"`
+	NoAuth *bool `json:"NoAuth,omitnil,omitempty" name:"NoAuth"`
 }
 
 func (r *ResetPasswordRequest) ToJsonString() string {
@@ -7528,10 +7528,10 @@ func (r *ResetPasswordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ResetPasswordResponseParams struct {
 	// Task ID (this parameter is the task ID when changing a password. If you are switching between password-free and password-enabled instance mode, you can leave this parameter alone)
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ResetPasswordResponse struct {
@@ -7552,35 +7552,35 @@ func (r *ResetPasswordResponse) FromJsonString(s string) error {
 
 type ResourceTag struct {
 	// Tag key
-	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
 	// The value corresponding to the tag key
-	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
+	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
 }
 
 // Predefined struct for user
 type RestoreInstanceRequestParams struct {
 	// ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Backup ID, which can be obtained through the `backupId` field in the return value of the `GetRedisBackupList` API.
-	BackupId *string `json:"BackupId,omitnil" name:"BackupId"`
+	BackupId *string `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 
 	// Instance password, which needs to be validated during instance restoration (this parameter is not required for password-free instances)
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
 type RestoreInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the instance to be operated on, which can be obtained through the `InstanceId` field in the return value of the `DescribeInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Backup ID, which can be obtained through the `backupId` field in the return value of the `GetRedisBackupList` API.
-	BackupId *string `json:"BackupId,omitnil" name:"BackupId"`
+	BackupId *string `json:"BackupId,omitnil,omitempty" name:"BackupId"`
 
 	// Instance password, which needs to be validated during instance restoration (this parameter is not required for password-free instances)
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
 func (r *RestoreInstanceRequest) ToJsonString() string {
@@ -7607,10 +7607,10 @@ func (r *RestoreInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RestoreInstanceResponseParams struct {
 	// Task ID, which can be used to query the task execution status through the `DescribeTaskInfo` API.
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RestoreInstanceResponse struct {
@@ -7631,94 +7631,94 @@ func (r *RestoreInstanceResponse) FromJsonString(s string) error {
 
 type SecurityGroup struct {
 	// Creation time in the format of yyyy-mm-dd hh:mm:ss.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Project ID.
-	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Security group ID.
-	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
 	// Security group name.
-	SecurityGroupName *string `json:"SecurityGroupName,omitnil" name:"SecurityGroupName"`
+	SecurityGroupName *string `json:"SecurityGroupName,omitnil,omitempty" name:"SecurityGroupName"`
 
 	// Security group remarks.
-	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitnil" name:"SecurityGroupRemark"`
+	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitnil,omitempty" name:"SecurityGroupRemark"`
 
 	// Outbound rule.
-	Outbound []*Outbound `json:"Outbound,omitnil" name:"Outbound"`
+	Outbound []*Outbound `json:"Outbound,omitnil,omitempty" name:"Outbound"`
 
 	// Inbound rule.
-	Inbound []*Inbound `json:"Inbound,omitnil" name:"Inbound"`
+	Inbound []*Inbound `json:"Inbound,omitnil,omitempty" name:"Inbound"`
 }
 
 type SecurityGroupDetail struct {
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Security group creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Security group ID
-	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
 	// Security group name
-	SecurityGroupName *string `json:"SecurityGroupName,omitnil" name:"SecurityGroupName"`
+	SecurityGroupName *string `json:"SecurityGroupName,omitnil,omitempty" name:"SecurityGroupName"`
 
 	// Security group remarks
-	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitnil" name:"SecurityGroupRemark"`
+	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitnil,omitempty" name:"SecurityGroupRemark"`
 
 	// Inbound rules of the security group, which control the access source to the database.
-	InboundRule []*SecurityGroupsInboundAndOutbound `json:"InboundRule,omitnil" name:"InboundRule"`
+	InboundRule []*SecurityGroupsInboundAndOutbound `json:"InboundRule,omitnil,omitempty" name:"InboundRule"`
 
 	// Security group outbound rule
-	OutboundRule []*SecurityGroupsInboundAndOutbound `json:"OutboundRule,omitnil" name:"OutboundRule"`
+	OutboundRule []*SecurityGroupsInboundAndOutbound `json:"OutboundRule,omitnil,omitempty" name:"OutboundRule"`
 }
 
 type SecurityGroupsInboundAndOutbound struct {
 	// Identify whether the IP and port for accessing the database are allowed
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// IP address for accessing the database
-	Ip *string `json:"Ip,omitnil" name:"Ip"`
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
 	// Port number
-	Port *string `json:"Port,omitnil" name:"Port"`
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Protocol type
-	Proto *string `json:"Proto,omitnil" name:"Proto"`
+	Proto *string `json:"Proto,omitnil,omitempty" name:"Proto"`
 }
 
 type SourceCommand struct {
 	// Command
-	Cmd *string `json:"Cmd,omitnil" name:"Cmd"`
+	Cmd *string `json:"Cmd,omitnil,omitempty" name:"Cmd"`
 
 	// Number of executions
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 }
 
 type SourceInfo struct {
 	// Source IP
-	Ip *string `json:"Ip,omitnil" name:"Ip"`
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
 	// Number of connections
-	Conn *int64 `json:"Conn,omitnil" name:"Conn"`
+	Conn *int64 `json:"Conn,omitnil,omitempty" name:"Conn"`
 
 	// Command
-	Cmd *int64 `json:"Cmd,omitnil" name:"Cmd"`
+	Cmd *int64 `json:"Cmd,omitnil,omitempty" name:"Cmd"`
 }
 
 // Predefined struct for user
 type StartupInstanceRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type StartupInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *StartupInstanceRequest) ToJsonString() string {
@@ -7743,10 +7743,10 @@ func (r *StartupInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StartupInstanceResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StartupInstanceResponse struct {
@@ -7768,38 +7768,38 @@ func (r *StartupInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type SwitchInstanceVipRequestParams struct {
 	// Source instance ID
-	SrcInstanceId *string `json:"SrcInstanceId,omitnil" name:"SrcInstanceId"`
+	SrcInstanceId *string `json:"SrcInstanceId,omitnil,omitempty" name:"SrcInstanceId"`
 
 	// Target instance ID
-	DstInstanceId *string `json:"DstInstanceId,omitnil" name:"DstInstanceId"`
+	DstInstanceId *string `json:"DstInstanceId,omitnil,omitempty" name:"DstInstanceId"`
 
 	// The time that lapses in seconds since DTS is disconnected between the source instance and the target instance. If the DTS disconnection time period is greater than TimeDelay, the VIP will not be switched. We recommend you set an acceptable value based on the actual business conditions.
-	TimeDelay *int64 `json:"TimeDelay,omitnil" name:"TimeDelay"`
+	TimeDelay *int64 `json:"TimeDelay,omitnil,omitempty" name:"TimeDelay"`
 
 	// Whether to force the switch when DTS is disconnected. 1: yes; 0: no.
-	ForceSwitch *int64 `json:"ForceSwitch,omitnil" name:"ForceSwitch"`
+	ForceSwitch *int64 `json:"ForceSwitch,omitnil,omitempty" name:"ForceSwitch"`
 
 	// now: switch now; syncComplete: switch after sync is completed
-	SwitchTime *string `json:"SwitchTime,omitnil" name:"SwitchTime"`
+	SwitchTime *string `json:"SwitchTime,omitnil,omitempty" name:"SwitchTime"`
 }
 
 type SwitchInstanceVipRequest struct {
 	*tchttp.BaseRequest
 	
 	// Source instance ID
-	SrcInstanceId *string `json:"SrcInstanceId,omitnil" name:"SrcInstanceId"`
+	SrcInstanceId *string `json:"SrcInstanceId,omitnil,omitempty" name:"SrcInstanceId"`
 
 	// Target instance ID
-	DstInstanceId *string `json:"DstInstanceId,omitnil" name:"DstInstanceId"`
+	DstInstanceId *string `json:"DstInstanceId,omitnil,omitempty" name:"DstInstanceId"`
 
 	// The time that lapses in seconds since DTS is disconnected between the source instance and the target instance. If the DTS disconnection time period is greater than TimeDelay, the VIP will not be switched. We recommend you set an acceptable value based on the actual business conditions.
-	TimeDelay *int64 `json:"TimeDelay,omitnil" name:"TimeDelay"`
+	TimeDelay *int64 `json:"TimeDelay,omitnil,omitempty" name:"TimeDelay"`
 
 	// Whether to force the switch when DTS is disconnected. 1: yes; 0: no.
-	ForceSwitch *int64 `json:"ForceSwitch,omitnil" name:"ForceSwitch"`
+	ForceSwitch *int64 `json:"ForceSwitch,omitnil,omitempty" name:"ForceSwitch"`
 
 	// now: switch now; syncComplete: switch after sync is completed
-	SwitchTime *string `json:"SwitchTime,omitnil" name:"SwitchTime"`
+	SwitchTime *string `json:"SwitchTime,omitnil,omitempty" name:"SwitchTime"`
 }
 
 func (r *SwitchInstanceVipRequest) ToJsonString() string {
@@ -7828,10 +7828,10 @@ func (r *SwitchInstanceVipRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SwitchInstanceVipResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type SwitchInstanceVipResponse struct {
@@ -7853,20 +7853,20 @@ func (r *SwitchInstanceVipResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type SwitchProxyRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance ProxyID
-	ProxyID *string `json:"ProxyID,omitnil" name:"ProxyID"`
+	ProxyID *string `json:"ProxyID,omitnil,omitempty" name:"ProxyID"`
 }
 
 type SwitchProxyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance ProxyID
-	ProxyID *string `json:"ProxyID,omitnil" name:"ProxyID"`
+	ProxyID *string `json:"ProxyID,omitnil,omitempty" name:"ProxyID"`
 }
 
 func (r *SwitchProxyRequest) ToJsonString() string {
@@ -7892,7 +7892,7 @@ func (r *SwitchProxyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SwitchProxyResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type SwitchProxyResponse struct {
@@ -7914,139 +7914,139 @@ func (r *SwitchProxyResponse) FromJsonString(s string) error {
 type TaskInfoDetail struct {
 	// Task ID 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// Task start time 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Task type. Valid values:  - `FLOW_CREATE`: Create an instance. - `FLOW_MODIFYCONNECTIONCONFIG`: Adjust the number of bandwidth connections. - `FLOW_MODIFYINSTANCEPASSWORDFREE`: Modify the process of password-free access. - `FLOW_CLEARNETWORK`: Returning VPC - `FLOW_SETPWD`: Set the access password. - `FLOW_EXPORSHR`: Expand or reduce the capacity. - `FLOW_UpgradeArch`: Upgrade the instance architecture. - `FLOW_MODIFYINSTANCEPARAMS`: Modify the instance parameters. - `FLOW_MODIFYINSTACEREADONLY`: Modify read-only process. - `FLOW_CLOSE`: Disable the instance. - `FLOW_DELETE`: Delete the instance. - `FLOW_OPEN_WAN`: Enable the public network. - `FLOW_FLOW_CLEAN`: Clear the instance. - `FLOW_MODIFYINSTANCEACCOUNT`: Modify the instance account. - `FLOW_ENABLEINSTANCE_REPLICATE`: Enable the replica read-only feature. - `FLOW_DISABLEINSTANCE_REPLICATE`: Disable the replica read-only feature. - `FLOW_SWITCHINSTANCEVIP`: Swap the VIPs of instances. - FLOW_CHANGE_REPLICA_TO_MSTER: Promote the replica node to the mater node. Backup instance 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	TaskType *string `json:"TaskType,omitnil" name:"TaskType"`
+	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
 	// Instance name 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Instance ID 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Project ID 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Task progress 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	Progress *float64 `json:"Progress,omitnil" name:"Progress"`
+	Progress *float64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 
 	// Task end time 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Task execution status. Valid values: - `0` (initilized) - `1` (executing) - `2` (completed) - `4` (failed) 
 	// Note:  This field may return null, indicating that no valid values can be obtained.
-	Result *int64 `json:"Result,omitnil" name:"Result"`
+	Result *int64 `json:"Result,omitnil,omitempty" name:"Result"`
 }
 
 type TendisNodes struct {
 	// Node ID
-	NodeId *string `json:"NodeId,omitnil" name:"NodeId"`
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
 
 	// Node role
-	NodeRole *string `json:"NodeRole,omitnil" name:"NodeRole"`
+	NodeRole *string `json:"NodeRole,omitnil,omitempty" name:"NodeRole"`
 }
 
 type TendisSlowLogDetail struct {
 	// Execution time
-	ExecuteTime *string `json:"ExecuteTime,omitnil" name:"ExecuteTime"`
+	ExecuteTime *string `json:"ExecuteTime,omitnil,omitempty" name:"ExecuteTime"`
 
 	// Duration of the slow query (ms)
-	Duration *int64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Command
-	Command *string `json:"Command,omitnil" name:"Command"`
+	Command *string `json:"Command,omitnil,omitempty" name:"Command"`
 
 	// Command line details
-	CommandLine *string `json:"CommandLine,omitnil" name:"CommandLine"`
+	CommandLine *string `json:"CommandLine,omitnil,omitempty" name:"CommandLine"`
 
 	// Node ID
-	Node *string `json:"Node,omitnil" name:"Node"`
+	Node *string `json:"Node,omitnil,omitempty" name:"Node"`
 }
 
 type TradeDealDetail struct {
 	// Order ID, which is used when a TencentCloud API is called.
-	DealId *string `json:"DealId,omitnil" name:"DealId"`
+	DealId *string `json:"DealId,omitnil,omitempty" name:"DealId"`
 
 	// Long order ID, which is used when an order issue is submitted for assistance.
-	DealName *string `json:"DealName,omitnil" name:"DealName"`
+	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
 
 	// AZ ID
-	ZoneId *int64 `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *int64 `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Number of instances associated with the order
-	GoodsNum *int64 `json:"GoodsNum,omitnil" name:"GoodsNum"`
+	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
 	// Creator UIN
-	Creater *string `json:"Creater,omitnil" name:"Creater"`
+	Creater *string `json:"Creater,omitnil,omitempty" name:"Creater"`
 
 	// Order creation time
-	CreatTime *string `json:"CreatTime,omitnil" name:"CreatTime"`
+	CreatTime *string `json:"CreatTime,omitnil,omitempty" name:"CreatTime"`
 
 	// Order timeout period
-	OverdueTime *string `json:"OverdueTime,omitnil" name:"OverdueTime"`
+	OverdueTime *string `json:"OverdueTime,omitnil,omitempty" name:"OverdueTime"`
 
 	// Order completion time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Order status. 1: unpaid; 2: paid but not delivered; 3: In delivery; 4: successfully delivered; 5: delivery failed; 6: refunded; 7: order closed; 8: order expired; 9: order invalidated; 10: product invalidated; 11: requested payment rejected; 12: paying
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Order status description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Actual total price of the order in 0.01 CNY
-	Price *int64 `json:"Price,omitnil" name:"Price"`
+	Price *int64 `json:"Price,omitnil,omitempty" name:"Price"`
 
 	// Instance ID
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 // Predefined struct for user
 type UpgradeInstanceRequestParams struct {
 	// The ID of instance to be modified.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// New memory size of an instance shard. <ul><li>Unit: MB. </li><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li><li>In case of capacity reduction, the new specification must be at least 1.3 times the used capacity; otherwise, the operation will fail.</li></ul>
-	MemSize *uint64 `json:"MemSize,omitnil" name:"MemSize"`
+	MemSize *uint64 `json:"MemSize,omitnil,omitempty" name:"MemSize"`
 
 	// New number of instance shards. <ul><li>This parameter is not required for standard architecture instances, but for cluster architecture instances. </li><li>For cluster architecture, you can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li></ul>
-	RedisShardNum *uint64 `json:"RedisShardNum,omitnil" name:"RedisShardNum"`
+	RedisShardNum *uint64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
 	// New replica quantity. <ul><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li></ul>To modify the number of replicas in a multi-AZ instance, `NodeSet` must be passed in.</li></ul>
-	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitnil" name:"RedisReplicasNum"`
+	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitnil,omitempty" name:"RedisReplicasNum"`
 
 	// Additional information for adding replicas for multi-AZ instances, including replica AZ and type (`NodeType` is `1`). This parameter is not required for single-AZ instances.
-	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil" name:"NodeSet"`
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil,omitempty" name:"NodeSet"`
 }
 
 type UpgradeInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// The ID of instance to be modified.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// New memory size of an instance shard. <ul><li>Unit: MB. </li><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li><li>In case of capacity reduction, the new specification must be at least 1.3 times the used capacity; otherwise, the operation will fail.</li></ul>
-	MemSize *uint64 `json:"MemSize,omitnil" name:"MemSize"`
+	MemSize *uint64 `json:"MemSize,omitnil,omitempty" name:"MemSize"`
 
 	// New number of instance shards. <ul><li>This parameter is not required for standard architecture instances, but for cluster architecture instances. </li><li>For cluster architecture, you can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li></ul>
-	RedisShardNum *uint64 `json:"RedisShardNum,omitnil" name:"RedisShardNum"`
+	RedisShardNum *uint64 `json:"RedisShardNum,omitnil,omitempty" name:"RedisShardNum"`
 
 	// New replica quantity. <ul><li>You can only modify one of the three parameters at a time: `MemSize`, `RedisShardNum`, and `RedisReplicasNum`. To modify one of them, you need to enter the other two, which are consistent with the original configuration specifications of the instance. </li></ul>To modify the number of replicas in a multi-AZ instance, `NodeSet` must be passed in.</li></ul>
-	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitnil" name:"RedisReplicasNum"`
+	RedisReplicasNum *uint64 `json:"RedisReplicasNum,omitnil,omitempty" name:"RedisReplicasNum"`
 
 	// Additional information for adding replicas for multi-AZ instances, including replica AZ and type (`NodeType` is `1`). This parameter is not required for single-AZ instances.
-	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil" name:"NodeSet"`
+	NodeSet []*RedisNodeInfo `json:"NodeSet,omitnil,omitempty" name:"NodeSet"`
 }
 
 func (r *UpgradeInstanceRequest) ToJsonString() string {
@@ -8075,10 +8075,10 @@ func (r *UpgradeInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeInstanceResponseParams struct {
 	// Order ID
-	DealId *string `json:"DealId,omitnil" name:"DealId"`
+	DealId *string `json:"DealId,omitnil,omitempty" name:"DealId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type UpgradeInstanceResponse struct {
@@ -8104,15 +8104,15 @@ type UpgradeInstanceVersionRequestParams struct {
 	// - Cross-version architecture upgrade is not supported; for example, you cannot upgrade from Redis 4.0 Standard Architecture to Redis 5.0 Cluster Architecture.
 	// - The architecture of Redis 2.8 cannot be upgraded.
 	// - Cluster architecture cannot be downgraded to standard architecture.
-	TargetInstanceType *string `json:"TargetInstanceType,omitnil" name:"TargetInstanceType"`
+	TargetInstanceType *string `json:"TargetInstanceType,omitnil,omitempty" name:"TargetInstanceType"`
 
 	// Switch time. Valid values:
 	// - `1`: Switch in the maintenance time.
 	// - `2` (default value): Switch now.
-	SwitchOption *int64 `json:"SwitchOption,omitnil" name:"SwitchOption"`
+	SwitchOption *int64 `json:"SwitchOption,omitnil,omitempty" name:"SwitchOption"`
 
 	// ID of the specified instance, such as `crs-xjhsdj****`. Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), and copy it in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type UpgradeInstanceVersionRequest struct {
@@ -8123,15 +8123,15 @@ type UpgradeInstanceVersionRequest struct {
 	// - Cross-version architecture upgrade is not supported; for example, you cannot upgrade from Redis 4.0 Standard Architecture to Redis 5.0 Cluster Architecture.
 	// - The architecture of Redis 2.8 cannot be upgraded.
 	// - Cluster architecture cannot be downgraded to standard architecture.
-	TargetInstanceType *string `json:"TargetInstanceType,omitnil" name:"TargetInstanceType"`
+	TargetInstanceType *string `json:"TargetInstanceType,omitnil,omitempty" name:"TargetInstanceType"`
 
 	// Switch time. Valid values:
 	// - `1`: Switch in the maintenance time.
 	// - `2` (default value): Switch now.
-	SwitchOption *int64 `json:"SwitchOption,omitnil" name:"SwitchOption"`
+	SwitchOption *int64 `json:"SwitchOption,omitnil,omitempty" name:"SwitchOption"`
 
 	// ID of the specified instance, such as `crs-xjhsdj****`. Log in to the [Redis console](https://console.cloud.tencent.com/redis#/), and copy it in the instance list.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *UpgradeInstanceVersionRequest) ToJsonString() string {
@@ -8158,10 +8158,10 @@ func (r *UpgradeInstanceVersionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeInstanceVersionResponseParams struct {
 	// Order ID
-	DealId *string `json:"DealId,omitnil" name:"DealId"`
+	DealId *string `json:"DealId,omitnil,omitempty" name:"DealId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type UpgradeInstanceVersionResponse struct {
@@ -8183,32 +8183,32 @@ func (r *UpgradeInstanceVersionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeProxyVersionRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The current proxy version
-	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitnil" name:"CurrentProxyVersion"`
+	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitnil,omitempty" name:"CurrentProxyVersion"`
 
 	// Upgradeable redis version
-	UpgradeProxyVersion *string `json:"UpgradeProxyVersion,omitnil" name:"UpgradeProxyVersion"`
+	UpgradeProxyVersion *string `json:"UpgradeProxyVersion,omitnil,omitempty" name:"UpgradeProxyVersion"`
 
 	// `1` (upgrade immediately), `0` (upgrade during maintenance time)
-	InstanceTypeUpgradeNow *int64 `json:"InstanceTypeUpgradeNow,omitnil" name:"InstanceTypeUpgradeNow"`
+	InstanceTypeUpgradeNow *int64 `json:"InstanceTypeUpgradeNow,omitnil,omitempty" name:"InstanceTypeUpgradeNow"`
 }
 
 type UpgradeProxyVersionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The current proxy version
-	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitnil" name:"CurrentProxyVersion"`
+	CurrentProxyVersion *string `json:"CurrentProxyVersion,omitnil,omitempty" name:"CurrentProxyVersion"`
 
 	// Upgradeable redis version
-	UpgradeProxyVersion *string `json:"UpgradeProxyVersion,omitnil" name:"UpgradeProxyVersion"`
+	UpgradeProxyVersion *string `json:"UpgradeProxyVersion,omitnil,omitempty" name:"UpgradeProxyVersion"`
 
 	// `1` (upgrade immediately), `0` (upgrade during maintenance time)
-	InstanceTypeUpgradeNow *int64 `json:"InstanceTypeUpgradeNow,omitnil" name:"InstanceTypeUpgradeNow"`
+	InstanceTypeUpgradeNow *int64 `json:"InstanceTypeUpgradeNow,omitnil,omitempty" name:"InstanceTypeUpgradeNow"`
 }
 
 func (r *UpgradeProxyVersionRequest) ToJsonString() string {
@@ -8236,10 +8236,10 @@ func (r *UpgradeProxyVersionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeProxyVersionResponseParams struct {
 	// Async task ID
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type UpgradeProxyVersionResponse struct {
@@ -8261,32 +8261,32 @@ func (r *UpgradeProxyVersionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeSmallVersionRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The current redis version
-	CurrentRedisVersion *string `json:"CurrentRedisVersion,omitnil" name:"CurrentRedisVersion"`
+	CurrentRedisVersion *string `json:"CurrentRedisVersion,omitnil,omitempty" name:"CurrentRedisVersion"`
 
 	// Upgradeable redis version
-	UpgradeRedisVersion *string `json:"UpgradeRedisVersion,omitnil" name:"UpgradeRedisVersion"`
+	UpgradeRedisVersion *string `json:"UpgradeRedisVersion,omitnil,omitempty" name:"UpgradeRedisVersion"`
 
 	// `1` (upgrade immediately), `0` (upgrade during maintenance time)
-	InstanceTypeUpgradeNow *int64 `json:"InstanceTypeUpgradeNow,omitnil" name:"InstanceTypeUpgradeNow"`
+	InstanceTypeUpgradeNow *int64 `json:"InstanceTypeUpgradeNow,omitnil,omitempty" name:"InstanceTypeUpgradeNow"`
 }
 
 type UpgradeSmallVersionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The current redis version
-	CurrentRedisVersion *string `json:"CurrentRedisVersion,omitnil" name:"CurrentRedisVersion"`
+	CurrentRedisVersion *string `json:"CurrentRedisVersion,omitnil,omitempty" name:"CurrentRedisVersion"`
 
 	// Upgradeable redis version
-	UpgradeRedisVersion *string `json:"UpgradeRedisVersion,omitnil" name:"UpgradeRedisVersion"`
+	UpgradeRedisVersion *string `json:"UpgradeRedisVersion,omitnil,omitempty" name:"UpgradeRedisVersion"`
 
 	// `1` (upgrade immediately), `0` (upgrade during maintenance time)
-	InstanceTypeUpgradeNow *int64 `json:"InstanceTypeUpgradeNow,omitnil" name:"InstanceTypeUpgradeNow"`
+	InstanceTypeUpgradeNow *int64 `json:"InstanceTypeUpgradeNow,omitnil,omitempty" name:"InstanceTypeUpgradeNow"`
 }
 
 func (r *UpgradeSmallVersionRequest) ToJsonString() string {
@@ -8314,10 +8314,10 @@ func (r *UpgradeSmallVersionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeSmallVersionResponseParams struct {
 	// Async task ID
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type UpgradeSmallVersionResponse struct {
@@ -8339,22 +8339,22 @@ func (r *UpgradeSmallVersionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeVersionToMultiAvailabilityZonesRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Whether to support “Reading Local Nodes Only” feature after upgrading to multi-AZ deployment.
 	// ul><li>`true`: The “Read Local Nodes Only” feature is supported. During the upgrade, you need to upgrade the proxy version and Redis kernel minor version simultaneously, which will involve data migration and may take hours to complete. </li><li>`false`: The “Read Local Nodes Only” feature is not supported. Upgrading to multi-AZ deployment will involve metadata migration only without affecting the service, which generally take less than three minutes to complete.</li></ul>
-	UpgradeProxyAndRedisServer *bool `json:"UpgradeProxyAndRedisServer,omitnil" name:"UpgradeProxyAndRedisServer"`
+	UpgradeProxyAndRedisServer *bool `json:"UpgradeProxyAndRedisServer,omitnil,omitempty" name:"UpgradeProxyAndRedisServer"`
 }
 
 type UpgradeVersionToMultiAvailabilityZonesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Whether to support “Reading Local Nodes Only” feature after upgrading to multi-AZ deployment.
 	// ul><li>`true`: The “Read Local Nodes Only” feature is supported. During the upgrade, you need to upgrade the proxy version and Redis kernel minor version simultaneously, which will involve data migration and may take hours to complete. </li><li>`false`: The “Read Local Nodes Only” feature is not supported. Upgrading to multi-AZ deployment will involve metadata migration only without affecting the service, which generally take less than three minutes to complete.</li></ul>
-	UpgradeProxyAndRedisServer *bool `json:"UpgradeProxyAndRedisServer,omitnil" name:"UpgradeProxyAndRedisServer"`
+	UpgradeProxyAndRedisServer *bool `json:"UpgradeProxyAndRedisServer,omitnil,omitempty" name:"UpgradeProxyAndRedisServer"`
 }
 
 func (r *UpgradeVersionToMultiAvailabilityZonesRequest) ToJsonString() string {
@@ -8380,10 +8380,10 @@ func (r *UpgradeVersionToMultiAvailabilityZonesRequest) FromJsonString(s string)
 // Predefined struct for user
 type UpgradeVersionToMultiAvailabilityZonesResponseParams struct {
 	// Task ID
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type UpgradeVersionToMultiAvailabilityZonesResponse struct {
@@ -8404,23 +8404,23 @@ func (r *UpgradeVersionToMultiAvailabilityZonesResponse) FromJsonString(s string
 
 type ZoneCapacityConf struct {
 	// AZ ID, such as ap-guangzhou-3
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// AZ name
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// Whether a product is sold out in an AZ
-	IsSaleout *bool `json:"IsSaleout,omitnil" name:"IsSaleout"`
+	IsSaleout *bool `json:"IsSaleout,omitnil,omitempty" name:"IsSaleout"`
 
 	// Whether it is a default AZ
-	IsDefault *bool `json:"IsDefault,omitnil" name:"IsDefault"`
+	IsDefault *bool `json:"IsDefault,omitnil,omitempty" name:"IsDefault"`
 
 	// Network type. basenet: basic network; vpcnet: VPC
-	NetWorkType []*string `json:"NetWorkType,omitnil" name:"NetWorkType"`
+	NetWorkType []*string `json:"NetWorkType,omitnil,omitempty" name:"NetWorkType"`
 
 	// Information of an AZ, such as product specifications in it
-	ProductSet []*ProductConf `json:"ProductSet,omitnil" name:"ProductSet"`
+	ProductSet []*ProductConf `json:"ProductSet,omitnil,omitempty" name:"ProductSet"`
 
 	// AZ ID, such as 100003
-	OldZoneId *int64 `json:"OldZoneId,omitnil" name:"OldZoneId"`
+	OldZoneId *int64 `json:"OldZoneId,omitnil,omitempty" name:"OldZoneId"`
 }

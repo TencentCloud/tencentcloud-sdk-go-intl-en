@@ -22,58 +22,58 @@ import (
 
 type AccessGroup struct {
 	// Permission group ID
-	AccessGroupId *string `json:"AccessGroupId,omitnil" name:"AccessGroupId"`
+	AccessGroupId *string `json:"AccessGroupId,omitnil,omitempty" name:"AccessGroupId"`
 
 	// Permission group name
-	AccessGroupName *string `json:"AccessGroupName,omitnil" name:"AccessGroupName"`
+	AccessGroupName *string `json:"AccessGroupName,omitnil,omitempty" name:"AccessGroupName"`
 
 	// Permission group description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// VPC type (1: CVM; 2: BM 1.0)
-	VpcType *uint64 `json:"VpcType,omitnil" name:"VpcType"`
+	VpcType *uint64 `json:"VpcType,omitnil,omitempty" name:"VpcType"`
 
 	// VPC ID
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 }
 
 type AccessRule struct {
 	// Permission rule ID
-	AccessRuleId *uint64 `json:"AccessRuleId,omitnil" name:"AccessRuleId"`
+	AccessRuleId *uint64 `json:"AccessRuleId,omitnil,omitempty" name:"AccessRuleId"`
 
 	// Permission rule address (IP range or IP)
-	Address *string `json:"Address,omitnil" name:"Address"`
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
 	// Permission rule access mode (1: read-only; 2: read-write)
-	AccessMode *uint64 `json:"AccessMode,omitnil" name:"AccessMode"`
+	AccessMode *uint64 `json:"AccessMode,omitnil,omitempty" name:"AccessMode"`
 
 	// Priority (value range: 1–100. The smaller the value, the higher the priority)
-	Priority *uint64 `json:"Priority,omitnil" name:"Priority"`
+	Priority *uint64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 }
 
 // Predefined struct for user
 type AssociateAccessGroupsRequestParams struct {
 	// Mount point ID
-	MountPointId *string `json:"MountPointId,omitnil" name:"MountPointId"`
+	MountPointId *string `json:"MountPointId,omitnil,omitempty" name:"MountPointId"`
 
 	// List of permission group IDs
-	AccessGroupIds []*string `json:"AccessGroupIds,omitnil" name:"AccessGroupIds"`
+	AccessGroupIds []*string `json:"AccessGroupIds,omitnil,omitempty" name:"AccessGroupIds"`
 }
 
 type AssociateAccessGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Mount point ID
-	MountPointId *string `json:"MountPointId,omitnil" name:"MountPointId"`
+	MountPointId *string `json:"MountPointId,omitnil,omitempty" name:"MountPointId"`
 
 	// List of permission group IDs
-	AccessGroupIds []*string `json:"AccessGroupIds,omitnil" name:"AccessGroupIds"`
+	AccessGroupIds []*string `json:"AccessGroupIds,omitnil,omitempty" name:"AccessGroupIds"`
 }
 
 func (r *AssociateAccessGroupsRequest) ToJsonString() string {
@@ -99,7 +99,7 @@ func (r *AssociateAccessGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AssociateAccessGroupsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type AssociateAccessGroupsResponse struct {
@@ -121,32 +121,32 @@ func (r *AssociateAccessGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAccessGroupRequestParams struct {
 	// Permission group name
-	AccessGroupName *string `json:"AccessGroupName,omitnil" name:"AccessGroupName"`
+	AccessGroupName *string `json:"AccessGroupName,omitnil,omitempty" name:"AccessGroupName"`
 
 	// VPC type (1: CVM; 2: BM 1.0)
-	VpcType *uint64 `json:"VpcType,omitnil" name:"VpcType"`
+	VpcType *uint64 `json:"VpcType,omitnil,omitempty" name:"VpcType"`
 
 	// VPC ID
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Permission group description, which is an empty string by default
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type CreateAccessGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Permission group name
-	AccessGroupName *string `json:"AccessGroupName,omitnil" name:"AccessGroupName"`
+	AccessGroupName *string `json:"AccessGroupName,omitnil,omitempty" name:"AccessGroupName"`
 
 	// VPC type (1: CVM; 2: BM 1.0)
-	VpcType *uint64 `json:"VpcType,omitnil" name:"VpcType"`
+	VpcType *uint64 `json:"VpcType,omitnil,omitempty" name:"VpcType"`
 
 	// VPC ID
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Permission group description, which is an empty string by default
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 func (r *CreateAccessGroupRequest) ToJsonString() string {
@@ -174,10 +174,10 @@ func (r *CreateAccessGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAccessGroupResponseParams struct {
 	// Permission group
-	AccessGroup *AccessGroup `json:"AccessGroup,omitnil" name:"AccessGroup"`
+	AccessGroup *AccessGroup `json:"AccessGroup,omitnil,omitempty" name:"AccessGroup"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateAccessGroupResponse struct {
@@ -199,20 +199,20 @@ func (r *CreateAccessGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAccessRulesRequestParams struct {
 	// Multiple permission rules (up to 10)
-	AccessRules []*AccessRule `json:"AccessRules,omitnil" name:"AccessRules"`
+	AccessRules []*AccessRule `json:"AccessRules,omitnil,omitempty" name:"AccessRules"`
 
 	// Permission group ID
-	AccessGroupId *string `json:"AccessGroupId,omitnil" name:"AccessGroupId"`
+	AccessGroupId *string `json:"AccessGroupId,omitnil,omitempty" name:"AccessGroupId"`
 }
 
 type CreateAccessRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Multiple permission rules (up to 10)
-	AccessRules []*AccessRule `json:"AccessRules,omitnil" name:"AccessRules"`
+	AccessRules []*AccessRule `json:"AccessRules,omitnil,omitempty" name:"AccessRules"`
 
 	// Permission group ID
-	AccessGroupId *string `json:"AccessGroupId,omitnil" name:"AccessGroupId"`
+	AccessGroupId *string `json:"AccessGroupId,omitnil,omitempty" name:"AccessGroupId"`
 }
 
 func (r *CreateAccessRulesRequest) ToJsonString() string {
@@ -239,10 +239,10 @@ func (r *CreateAccessRulesRequest) FromJsonString(s string) error {
 type CreateAccessRulesResponseParams struct {
 	// List of permission rules
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AccessRules []*AccessRule `json:"AccessRules,omitnil" name:"AccessRules"`
+	AccessRules []*AccessRule `json:"AccessRules,omitnil,omitempty" name:"AccessRules"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateAccessRulesResponse struct {
@@ -264,68 +264,68 @@ func (r *CreateAccessRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateFileSystemRequestParams struct {
 	// File system name
-	FileSystemName *string `json:"FileSystemName,omitnil" name:"FileSystemName"`
+	FileSystemName *string `json:"FileSystemName,omitnil,omitempty" name:"FileSystemName"`
 
 	// File system capacity (in bytes), which can range from 1 GB to 1 PB and must be an integer multiple of 1 GB
-	CapacityQuota *uint64 `json:"CapacityQuota,omitnil" name:"CapacityQuota"`
+	CapacityQuota *uint64 `json:"CapacityQuota,omitnil,omitempty" name:"CapacityQuota"`
 
 	// Whether to verify POSIX ACL
-	PosixAcl *bool `json:"PosixAcl,omitnil" name:"PosixAcl"`
+	PosixAcl *bool `json:"PosixAcl,omitnil,omitempty" name:"PosixAcl"`
 
 	// File system description, which is an empty string by default
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// List of superuser names, which is an empty array by default
-	SuperUsers []*string `json:"SuperUsers,omitnil" name:"SuperUsers"`
+	SuperUsers []*string `json:"SuperUsers,omitnil,omitempty" name:"SuperUsers"`
 
 	// Username of the root directory Inode, which is `hadoop` by default
-	RootInodeUser *string `json:"RootInodeUser,omitnil" name:"RootInodeUser"`
+	RootInodeUser *string `json:"RootInodeUser,omitnil,omitempty" name:"RootInodeUser"`
 
 	// Group name of the root directory Inode, which is `supergroup` by default
-	RootInodeGroup *string `json:"RootInodeGroup,omitnil" name:"RootInodeGroup"`
+	RootInodeGroup *string `json:"RootInodeGroup,omitnil,omitempty" name:"RootInodeGroup"`
 
 	// Whether to enable verification of Ranger service addresses
-	EnableRanger *bool `json:"EnableRanger,omitnil" name:"EnableRanger"`
+	EnableRanger *bool `json:"EnableRanger,omitnil,omitempty" name:"EnableRanger"`
 
 	// List of Ranger service addresses (empty array by default)
-	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitnil" name:"RangerServiceAddresses"`
+	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitnil,omitempty" name:"RangerServiceAddresses"`
 
 	// Multiple resource tags, which can be an empty array
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type CreateFileSystemRequest struct {
 	*tchttp.BaseRequest
 	
 	// File system name
-	FileSystemName *string `json:"FileSystemName,omitnil" name:"FileSystemName"`
+	FileSystemName *string `json:"FileSystemName,omitnil,omitempty" name:"FileSystemName"`
 
 	// File system capacity (in bytes), which can range from 1 GB to 1 PB and must be an integer multiple of 1 GB
-	CapacityQuota *uint64 `json:"CapacityQuota,omitnil" name:"CapacityQuota"`
+	CapacityQuota *uint64 `json:"CapacityQuota,omitnil,omitempty" name:"CapacityQuota"`
 
 	// Whether to verify POSIX ACL
-	PosixAcl *bool `json:"PosixAcl,omitnil" name:"PosixAcl"`
+	PosixAcl *bool `json:"PosixAcl,omitnil,omitempty" name:"PosixAcl"`
 
 	// File system description, which is an empty string by default
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// List of superuser names, which is an empty array by default
-	SuperUsers []*string `json:"SuperUsers,omitnil" name:"SuperUsers"`
+	SuperUsers []*string `json:"SuperUsers,omitnil,omitempty" name:"SuperUsers"`
 
 	// Username of the root directory Inode, which is `hadoop` by default
-	RootInodeUser *string `json:"RootInodeUser,omitnil" name:"RootInodeUser"`
+	RootInodeUser *string `json:"RootInodeUser,omitnil,omitempty" name:"RootInodeUser"`
 
 	// Group name of the root directory Inode, which is `supergroup` by default
-	RootInodeGroup *string `json:"RootInodeGroup,omitnil" name:"RootInodeGroup"`
+	RootInodeGroup *string `json:"RootInodeGroup,omitnil,omitempty" name:"RootInodeGroup"`
 
 	// Whether to enable verification of Ranger service addresses
-	EnableRanger *bool `json:"EnableRanger,omitnil" name:"EnableRanger"`
+	EnableRanger *bool `json:"EnableRanger,omitnil,omitempty" name:"EnableRanger"`
 
 	// List of Ranger service addresses (empty array by default)
-	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitnil" name:"RangerServiceAddresses"`
+	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitnil,omitempty" name:"RangerServiceAddresses"`
 
 	// Multiple resource tags, which can be an empty array
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *CreateFileSystemRequest) ToJsonString() string {
@@ -359,10 +359,10 @@ func (r *CreateFileSystemRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateFileSystemResponseParams struct {
 	// File system
-	FileSystem *FileSystem `json:"FileSystem,omitnil" name:"FileSystem"`
+	FileSystem *FileSystem `json:"FileSystem,omitnil,omitempty" name:"FileSystem"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateFileSystemResponse struct {
@@ -384,20 +384,20 @@ func (r *CreateFileSystemResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLifeCycleRulesRequestParams struct {
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Multiple lifecycle rules (up to 10)
-	LifeCycleRules []*LifeCycleRule `json:"LifeCycleRules,omitnil" name:"LifeCycleRules"`
+	LifeCycleRules []*LifeCycleRule `json:"LifeCycleRules,omitnil,omitempty" name:"LifeCycleRules"`
 }
 
 type CreateLifeCycleRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Multiple lifecycle rules (up to 10)
-	LifeCycleRules []*LifeCycleRule `json:"LifeCycleRules,omitnil" name:"LifeCycleRules"`
+	LifeCycleRules []*LifeCycleRule `json:"LifeCycleRules,omitnil,omitempty" name:"LifeCycleRules"`
 }
 
 func (r *CreateLifeCycleRulesRequest) ToJsonString() string {
@@ -423,7 +423,7 @@ func (r *CreateLifeCycleRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLifeCycleRulesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLifeCycleRulesResponse struct {
@@ -445,26 +445,26 @@ func (r *CreateLifeCycleRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateMountPointRequestParams struct {
 	// Mount point name
-	MountPointName *string `json:"MountPointName,omitnil" name:"MountPointName"`
+	MountPointName *string `json:"MountPointName,omitnil,omitempty" name:"MountPointName"`
 
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Mount point status (1: enabled; 2: disabled)
-	MountPointStatus *uint64 `json:"MountPointStatus,omitnil" name:"MountPointStatus"`
+	MountPointStatus *uint64 `json:"MountPointStatus,omitnil,omitempty" name:"MountPointStatus"`
 }
 
 type CreateMountPointRequest struct {
 	*tchttp.BaseRequest
 	
 	// Mount point name
-	MountPointName *string `json:"MountPointName,omitnil" name:"MountPointName"`
+	MountPointName *string `json:"MountPointName,omitnil,omitempty" name:"MountPointName"`
 
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Mount point status (1: enabled; 2: disabled)
-	MountPointStatus *uint64 `json:"MountPointStatus,omitnil" name:"MountPointStatus"`
+	MountPointStatus *uint64 `json:"MountPointStatus,omitnil,omitempty" name:"MountPointStatus"`
 }
 
 func (r *CreateMountPointRequest) ToJsonString() string {
@@ -491,10 +491,10 @@ func (r *CreateMountPointRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateMountPointResponseParams struct {
 	// Mount point
-	MountPoint *MountPoint `json:"MountPoint,omitnil" name:"MountPoint"`
+	MountPoint *MountPoint `json:"MountPoint,omitnil,omitempty" name:"MountPoint"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateMountPointResponse struct {
@@ -516,20 +516,20 @@ func (r *CreateMountPointResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateRestoreTasksRequestParams struct {
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Multiple restoration tasks (up to 10)
-	RestoreTasks []*RestoreTask `json:"RestoreTasks,omitnil" name:"RestoreTasks"`
+	RestoreTasks []*RestoreTask `json:"RestoreTasks,omitnil,omitempty" name:"RestoreTasks"`
 }
 
 type CreateRestoreTasksRequest struct {
 	*tchttp.BaseRequest
 	
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Multiple restoration tasks (up to 10)
-	RestoreTasks []*RestoreTask `json:"RestoreTasks,omitnil" name:"RestoreTasks"`
+	RestoreTasks []*RestoreTask `json:"RestoreTasks,omitnil,omitempty" name:"RestoreTasks"`
 }
 
 func (r *CreateRestoreTasksRequest) ToJsonString() string {
@@ -555,7 +555,7 @@ func (r *CreateRestoreTasksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateRestoreTasksResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateRestoreTasksResponse struct {
@@ -577,14 +577,14 @@ func (r *CreateRestoreTasksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAccessGroupRequestParams struct {
 	// Permission group ID
-	AccessGroupId *string `json:"AccessGroupId,omitnil" name:"AccessGroupId"`
+	AccessGroupId *string `json:"AccessGroupId,omitnil,omitempty" name:"AccessGroupId"`
 }
 
 type DeleteAccessGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Permission group ID
-	AccessGroupId *string `json:"AccessGroupId,omitnil" name:"AccessGroupId"`
+	AccessGroupId *string `json:"AccessGroupId,omitnil,omitempty" name:"AccessGroupId"`
 }
 
 func (r *DeleteAccessGroupRequest) ToJsonString() string {
@@ -609,7 +609,7 @@ func (r *DeleteAccessGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAccessGroupResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteAccessGroupResponse struct {
@@ -631,14 +631,14 @@ func (r *DeleteAccessGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAccessRulesRequestParams struct {
 	// Multiple permission rule IDs (up to 10)
-	AccessRuleIds []*uint64 `json:"AccessRuleIds,omitnil" name:"AccessRuleIds"`
+	AccessRuleIds []*uint64 `json:"AccessRuleIds,omitnil,omitempty" name:"AccessRuleIds"`
 }
 
 type DeleteAccessRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Multiple permission rule IDs (up to 10)
-	AccessRuleIds []*uint64 `json:"AccessRuleIds,omitnil" name:"AccessRuleIds"`
+	AccessRuleIds []*uint64 `json:"AccessRuleIds,omitnil,omitempty" name:"AccessRuleIds"`
 }
 
 func (r *DeleteAccessRulesRequest) ToJsonString() string {
@@ -663,7 +663,7 @@ func (r *DeleteAccessRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAccessRulesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteAccessRulesResponse struct {
@@ -685,14 +685,14 @@ func (r *DeleteAccessRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteFileSystemRequestParams struct {
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 }
 
 type DeleteFileSystemRequest struct {
 	*tchttp.BaseRequest
 	
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 }
 
 func (r *DeleteFileSystemRequest) ToJsonString() string {
@@ -717,7 +717,7 @@ func (r *DeleteFileSystemRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteFileSystemResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteFileSystemResponse struct {
@@ -739,14 +739,14 @@ func (r *DeleteFileSystemResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLifeCycleRulesRequestParams struct {
 	// Multiple lifecycle rule IDs (up to 10)
-	LifeCycleRuleIds []*uint64 `json:"LifeCycleRuleIds,omitnil" name:"LifeCycleRuleIds"`
+	LifeCycleRuleIds []*uint64 `json:"LifeCycleRuleIds,omitnil,omitempty" name:"LifeCycleRuleIds"`
 }
 
 type DeleteLifeCycleRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Multiple lifecycle rule IDs (up to 10)
-	LifeCycleRuleIds []*uint64 `json:"LifeCycleRuleIds,omitnil" name:"LifeCycleRuleIds"`
+	LifeCycleRuleIds []*uint64 `json:"LifeCycleRuleIds,omitnil,omitempty" name:"LifeCycleRuleIds"`
 }
 
 func (r *DeleteLifeCycleRulesRequest) ToJsonString() string {
@@ -771,7 +771,7 @@ func (r *DeleteLifeCycleRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLifeCycleRulesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLifeCycleRulesResponse struct {
@@ -793,14 +793,14 @@ func (r *DeleteLifeCycleRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteMountPointRequestParams struct {
 	// Mount point ID
-	MountPointId *string `json:"MountPointId,omitnil" name:"MountPointId"`
+	MountPointId *string `json:"MountPointId,omitnil,omitempty" name:"MountPointId"`
 }
 
 type DeleteMountPointRequest struct {
 	*tchttp.BaseRequest
 	
 	// Mount point ID
-	MountPointId *string `json:"MountPointId,omitnil" name:"MountPointId"`
+	MountPointId *string `json:"MountPointId,omitnil,omitempty" name:"MountPointId"`
 }
 
 func (r *DeleteMountPointRequest) ToJsonString() string {
@@ -825,7 +825,7 @@ func (r *DeleteMountPointRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteMountPointResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteMountPointResponse struct {
@@ -847,14 +847,14 @@ func (r *DeleteMountPointResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccessGroupRequestParams struct {
 	// Permission group ID
-	AccessGroupId *string `json:"AccessGroupId,omitnil" name:"AccessGroupId"`
+	AccessGroupId *string `json:"AccessGroupId,omitnil,omitempty" name:"AccessGroupId"`
 }
 
 type DescribeAccessGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Permission group ID
-	AccessGroupId *string `json:"AccessGroupId,omitnil" name:"AccessGroupId"`
+	AccessGroupId *string `json:"AccessGroupId,omitnil,omitempty" name:"AccessGroupId"`
 }
 
 func (r *DescribeAccessGroupRequest) ToJsonString() string {
@@ -879,10 +879,10 @@ func (r *DescribeAccessGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccessGroupResponseParams struct {
 	// Permission group
-	AccessGroup *AccessGroup `json:"AccessGroup,omitnil" name:"AccessGroup"`
+	AccessGroup *AccessGroup `json:"AccessGroup,omitnil,omitempty" name:"AccessGroup"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeAccessGroupResponse struct {
@@ -905,10 +905,10 @@ func (r *DescribeAccessGroupResponse) FromJsonString(s string) error {
 type DescribeAccessGroupsRequestParams struct {
 	// VPC ID
 	// Note: either `VpcId` or `OwnerUin` can be specified as the input parameter
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Resource owner `Uin`
-	OwnerUin *uint64 `json:"OwnerUin,omitnil" name:"OwnerUin"`
+	OwnerUin *uint64 `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
 }
 
 type DescribeAccessGroupsRequest struct {
@@ -916,10 +916,10 @@ type DescribeAccessGroupsRequest struct {
 	
 	// VPC ID
 	// Note: either `VpcId` or `OwnerUin` can be specified as the input parameter
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Resource owner `Uin`
-	OwnerUin *uint64 `json:"OwnerUin,omitnil" name:"OwnerUin"`
+	OwnerUin *uint64 `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
 }
 
 func (r *DescribeAccessGroupsRequest) ToJsonString() string {
@@ -945,10 +945,10 @@ func (r *DescribeAccessGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccessGroupsResponseParams struct {
 	// List of permission groups
-	AccessGroups []*AccessGroup `json:"AccessGroups,omitnil" name:"AccessGroups"`
+	AccessGroups []*AccessGroup `json:"AccessGroups,omitnil,omitempty" name:"AccessGroups"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeAccessGroupsResponse struct {
@@ -970,14 +970,14 @@ func (r *DescribeAccessGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccessRulesRequestParams struct {
 	// Permission group ID
-	AccessGroupId *string `json:"AccessGroupId,omitnil" name:"AccessGroupId"`
+	AccessGroupId *string `json:"AccessGroupId,omitnil,omitempty" name:"AccessGroupId"`
 }
 
 type DescribeAccessRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Permission group ID
-	AccessGroupId *string `json:"AccessGroupId,omitnil" name:"AccessGroupId"`
+	AccessGroupId *string `json:"AccessGroupId,omitnil,omitempty" name:"AccessGroupId"`
 }
 
 func (r *DescribeAccessRulesRequest) ToJsonString() string {
@@ -1002,10 +1002,10 @@ func (r *DescribeAccessRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccessRulesResponseParams struct {
 	// List of permission rules
-	AccessRules []*AccessRule `json:"AccessRules,omitnil" name:"AccessRules"`
+	AccessRules []*AccessRule `json:"AccessRules,omitnil,omitempty" name:"AccessRules"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeAccessRulesResponse struct {
@@ -1027,14 +1027,14 @@ func (r *DescribeAccessRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeFileSystemRequestParams struct {
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 }
 
 type DescribeFileSystemRequest struct {
 	*tchttp.BaseRequest
 	
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 }
 
 func (r *DescribeFileSystemRequest) ToJsonString() string {
@@ -1059,34 +1059,34 @@ func (r *DescribeFileSystemRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeFileSystemResponseParams struct {
 	// File system
-	FileSystem *FileSystem `json:"FileSystem,omitnil" name:"FileSystem"`
+	FileSystem *FileSystem `json:"FileSystem,omitnil,omitempty" name:"FileSystem"`
 
 	// Used capacity of the file system, in bytes
 	// Note: this field may return `null`, indicating that no valid value was found.
-	CapacityUsed *uint64 `json:"CapacityUsed,omitnil" name:"CapacityUsed"`
+	CapacityUsed *uint64 `json:"CapacityUsed,omitnil,omitempty" name:"CapacityUsed"`
 
 	// Used ARCHIVE capacity of COS, in bytes
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ArchiveCapacityUsed *uint64 `json:"ArchiveCapacityUsed,omitnil" name:"ArchiveCapacityUsed"`
+	ArchiveCapacityUsed *uint64 `json:"ArchiveCapacityUsed,omitnil,omitempty" name:"ArchiveCapacityUsed"`
 
 	// Used STANDARD capacity of COS, in bytes
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	StandardCapacityUsed *uint64 `json:"StandardCapacityUsed,omitnil" name:"StandardCapacityUsed"`
+	StandardCapacityUsed *uint64 `json:"StandardCapacityUsed,omitnil,omitempty" name:"StandardCapacityUsed"`
 
 	// Used STANDARD_IA capacity of COS, in bytes
 	// Note: this field may return `null`, indicating that no valid value was found.
-	DegradeCapacityUsed *uint64 `json:"DegradeCapacityUsed,omitnil" name:"DegradeCapacityUsed"`
+	DegradeCapacityUsed *uint64 `json:"DegradeCapacityUsed,omitnil,omitempty" name:"DegradeCapacityUsed"`
 
 	// COS DEEP ARCHIVE storage usage, in bytes
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DeepArchiveCapacityUsed *uint64 `json:"DeepArchiveCapacityUsed,omitnil" name:"DeepArchiveCapacityUsed"`
+	DeepArchiveCapacityUsed *uint64 `json:"DeepArchiveCapacityUsed,omitnil,omitempty" name:"DeepArchiveCapacityUsed"`
 
 	// COS INTELLIGENT TIERING storage usage, in bytes
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IntelligentCapacityUsed *uint64 `json:"IntelligentCapacityUsed,omitnil" name:"IntelligentCapacityUsed"`
+	IntelligentCapacityUsed *uint64 `json:"IntelligentCapacityUsed,omitnil,omitempty" name:"IntelligentCapacityUsed"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeFileSystemResponse struct {
@@ -1137,10 +1137,10 @@ func (r *DescribeFileSystemsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeFileSystemsResponseParams struct {
 	// List of file systems
-	FileSystems []*FileSystem `json:"FileSystems,omitnil" name:"FileSystems"`
+	FileSystems []*FileSystem `json:"FileSystems,omitnil,omitempty" name:"FileSystems"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeFileSystemsResponse struct {
@@ -1162,14 +1162,14 @@ func (r *DescribeFileSystemsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLifeCycleRulesRequestParams struct {
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 }
 
 type DescribeLifeCycleRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 }
 
 func (r *DescribeLifeCycleRulesRequest) ToJsonString() string {
@@ -1194,10 +1194,10 @@ func (r *DescribeLifeCycleRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLifeCycleRulesResponseParams struct {
 	// List of lifecycle rules
-	LifeCycleRules []*LifeCycleRule `json:"LifeCycleRules,omitnil" name:"LifeCycleRules"`
+	LifeCycleRules []*LifeCycleRule `json:"LifeCycleRules,omitnil,omitempty" name:"LifeCycleRules"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLifeCycleRulesResponse struct {
@@ -1219,14 +1219,14 @@ func (r *DescribeLifeCycleRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMountPointRequestParams struct {
 	// Mount point ID
-	MountPointId *string `json:"MountPointId,omitnil" name:"MountPointId"`
+	MountPointId *string `json:"MountPointId,omitnil,omitempty" name:"MountPointId"`
 }
 
 type DescribeMountPointRequest struct {
 	*tchttp.BaseRequest
 	
 	// Mount point ID
-	MountPointId *string `json:"MountPointId,omitnil" name:"MountPointId"`
+	MountPointId *string `json:"MountPointId,omitnil,omitempty" name:"MountPointId"`
 }
 
 func (r *DescribeMountPointRequest) ToJsonString() string {
@@ -1251,10 +1251,10 @@ func (r *DescribeMountPointRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMountPointResponseParams struct {
 	// Mount point
-	MountPoint *MountPoint `json:"MountPoint,omitnil" name:"MountPoint"`
+	MountPoint *MountPoint `json:"MountPoint,omitnil,omitempty" name:"MountPoint"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeMountPointResponse struct {
@@ -1277,13 +1277,13 @@ func (r *DescribeMountPointResponse) FromJsonString(s string) error {
 type DescribeMountPointsRequestParams struct {
 	// File system ID
 	// Note: only one of `AccessGroupId`, `FileSystemId`, and `OwnerUin` can be specified as the input parameter
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Permission group ID
-	AccessGroupId *string `json:"AccessGroupId,omitnil" name:"AccessGroupId"`
+	AccessGroupId *string `json:"AccessGroupId,omitnil,omitempty" name:"AccessGroupId"`
 
 	// Resource owner `Uin`
-	OwnerUin *uint64 `json:"OwnerUin,omitnil" name:"OwnerUin"`
+	OwnerUin *uint64 `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
 }
 
 type DescribeMountPointsRequest struct {
@@ -1291,13 +1291,13 @@ type DescribeMountPointsRequest struct {
 	
 	// File system ID
 	// Note: only one of `AccessGroupId`, `FileSystemId`, and `OwnerUin` can be specified as the input parameter
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Permission group ID
-	AccessGroupId *string `json:"AccessGroupId,omitnil" name:"AccessGroupId"`
+	AccessGroupId *string `json:"AccessGroupId,omitnil,omitempty" name:"AccessGroupId"`
 
 	// Resource owner `Uin`
-	OwnerUin *uint64 `json:"OwnerUin,omitnil" name:"OwnerUin"`
+	OwnerUin *uint64 `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
 }
 
 func (r *DescribeMountPointsRequest) ToJsonString() string {
@@ -1324,10 +1324,10 @@ func (r *DescribeMountPointsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMountPointsResponseParams struct {
 	// List of mount points
-	MountPoints []*MountPoint `json:"MountPoints,omitnil" name:"MountPoints"`
+	MountPoints []*MountPoint `json:"MountPoints,omitnil,omitempty" name:"MountPoints"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeMountPointsResponse struct {
@@ -1349,14 +1349,14 @@ func (r *DescribeMountPointsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeResourceTagsRequestParams struct {
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 }
 
 type DescribeResourceTagsRequest struct {
 	*tchttp.BaseRequest
 	
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 }
 
 func (r *DescribeResourceTagsRequest) ToJsonString() string {
@@ -1381,10 +1381,10 @@ func (r *DescribeResourceTagsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeResourceTagsResponseParams struct {
 	// List of resource tags
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeResourceTagsResponse struct {
@@ -1406,14 +1406,14 @@ func (r *DescribeResourceTagsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRestoreTasksRequestParams struct {
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 }
 
 type DescribeRestoreTasksRequest struct {
 	*tchttp.BaseRequest
 	
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 }
 
 func (r *DescribeRestoreTasksRequest) ToJsonString() string {
@@ -1438,10 +1438,10 @@ func (r *DescribeRestoreTasksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRestoreTasksResponseParams struct {
 	// List of restoration tasks
-	RestoreTasks []*RestoreTask `json:"RestoreTasks,omitnil" name:"RestoreTasks"`
+	RestoreTasks []*RestoreTask `json:"RestoreTasks,omitnil,omitempty" name:"RestoreTasks"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRestoreTasksResponse struct {
@@ -1463,20 +1463,20 @@ func (r *DescribeRestoreTasksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DisassociateAccessGroupsRequestParams struct {
 	// Mount point ID
-	MountPointId *string `json:"MountPointId,omitnil" name:"MountPointId"`
+	MountPointId *string `json:"MountPointId,omitnil,omitempty" name:"MountPointId"`
 
 	// List of permission group IDs
-	AccessGroupIds []*string `json:"AccessGroupIds,omitnil" name:"AccessGroupIds"`
+	AccessGroupIds []*string `json:"AccessGroupIds,omitnil,omitempty" name:"AccessGroupIds"`
 }
 
 type DisassociateAccessGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Mount point ID
-	MountPointId *string `json:"MountPointId,omitnil" name:"MountPointId"`
+	MountPointId *string `json:"MountPointId,omitnil,omitempty" name:"MountPointId"`
 
 	// List of permission group IDs
-	AccessGroupIds []*string `json:"AccessGroupIds,omitnil" name:"AccessGroupIds"`
+	AccessGroupIds []*string `json:"AccessGroupIds,omitnil,omitempty" name:"AccessGroupIds"`
 }
 
 func (r *DisassociateAccessGroupsRequest) ToJsonString() string {
@@ -1502,7 +1502,7 @@ func (r *DisassociateAccessGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DisassociateAccessGroupsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DisassociateAccessGroupsResponse struct {
@@ -1523,96 +1523,96 @@ func (r *DisassociateAccessGroupsResponse) FromJsonString(s string) error {
 
 type FileSystem struct {
 	// Resource owner `AppId`
-	AppId *uint64 `json:"AppId,omitnil" name:"AppId"`
+	AppId *uint64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// File system name
-	FileSystemName *string `json:"FileSystemName,omitnil" name:"FileSystemName"`
+	FileSystemName *string `json:"FileSystemName,omitnil,omitempty" name:"FileSystemName"`
 
 	// File system description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Region
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// File system block size (in bytes)
-	BlockSize *uint64 `json:"BlockSize,omitnil" name:"BlockSize"`
+	BlockSize *uint64 `json:"BlockSize,omitnil,omitempty" name:"BlockSize"`
 
 	// File system capacity (in bytes)
-	CapacityQuota *uint64 `json:"CapacityQuota,omitnil" name:"CapacityQuota"`
+	CapacityQuota *uint64 `json:"CapacityQuota,omitnil,omitempty" name:"CapacityQuota"`
 
 	// File system status (1: creating; 2: created successfully; 3: failed to create)
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// List of superuser names
-	SuperUsers []*string `json:"SuperUsers,omitnil" name:"SuperUsers"`
+	SuperUsers []*string `json:"SuperUsers,omitnil,omitempty" name:"SuperUsers"`
 
 	// POSIX permission control
-	PosixAcl *bool `json:"PosixAcl,omitnil" name:"PosixAcl"`
+	PosixAcl *bool `json:"PosixAcl,omitnil,omitempty" name:"PosixAcl"`
 
 	// Whether to enable verification of Ranger service addresses
 	// Note: this field may return `null`, indicating that no valid value was found.
-	EnableRanger *bool `json:"EnableRanger,omitnil" name:"EnableRanger"`
+	EnableRanger *bool `json:"EnableRanger,omitnil,omitempty" name:"EnableRanger"`
 
 	// List of Ranger service addresses
 	// Note: this field may return `null`, indicating that no valid value was found.
-	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitnil" name:"RangerServiceAddresses"`
+	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitnil,omitempty" name:"RangerServiceAddresses"`
 }
 
 type LifeCycleRule struct {
 	// Lifecycle rule ID
-	LifeCycleRuleId *uint64 `json:"LifeCycleRuleId,omitnil" name:"LifeCycleRuleId"`
+	LifeCycleRuleId *uint64 `json:"LifeCycleRuleId,omitnil,omitempty" name:"LifeCycleRuleId"`
 
 	// Lifecycle rule name
-	LifeCycleRuleName *string `json:"LifeCycleRuleName,omitnil" name:"LifeCycleRuleName"`
+	LifeCycleRuleName *string `json:"LifeCycleRuleName,omitnil,omitempty" name:"LifeCycleRuleName"`
 
 	// Lifecycle rule path (directory or file)
-	Path *string `json:"Path,omitnil" name:"Path"`
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
 	// List of lifecycle rule transitions
-	Transitions []*Transition `json:"Transitions,omitnil" name:"Transitions"`
+	Transitions []*Transition `json:"Transitions,omitnil,omitempty" name:"Transitions"`
 
 	// Lifecycle rule status (1: enabled; 2: disabled)
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Detailed storage usage of the current lifecycle rule path
-	Summary *Summary `json:"Summary,omitnil" name:"Summary"`
+	Summary *Summary `json:"Summary,omitnil,omitempty" name:"Summary"`
 
 	// Update time of `Summary`
-	LastSummaryTime *string `json:"LastSummaryTime,omitnil" name:"LastSummaryTime"`
+	LastSummaryTime *string `json:"LastSummaryTime,omitnil,omitempty" name:"LastSummaryTime"`
 }
 
 // Predefined struct for user
 type ModifyAccessGroupRequestParams struct {
 	// Permission group ID
-	AccessGroupId *string `json:"AccessGroupId,omitnil" name:"AccessGroupId"`
+	AccessGroupId *string `json:"AccessGroupId,omitnil,omitempty" name:"AccessGroupId"`
 
 	// Permission group name
-	AccessGroupName *string `json:"AccessGroupName,omitnil" name:"AccessGroupName"`
+	AccessGroupName *string `json:"AccessGroupName,omitnil,omitempty" name:"AccessGroupName"`
 
 	// Permission group description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type ModifyAccessGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Permission group ID
-	AccessGroupId *string `json:"AccessGroupId,omitnil" name:"AccessGroupId"`
+	AccessGroupId *string `json:"AccessGroupId,omitnil,omitempty" name:"AccessGroupId"`
 
 	// Permission group name
-	AccessGroupName *string `json:"AccessGroupName,omitnil" name:"AccessGroupName"`
+	AccessGroupName *string `json:"AccessGroupName,omitnil,omitempty" name:"AccessGroupName"`
 
 	// Permission group description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 func (r *ModifyAccessGroupRequest) ToJsonString() string {
@@ -1639,7 +1639,7 @@ func (r *ModifyAccessGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAccessGroupResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyAccessGroupResponse struct {
@@ -1661,14 +1661,14 @@ func (r *ModifyAccessGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAccessRulesRequestParams struct {
 	// Multiple permission rules (up to 10)
-	AccessRules []*AccessRule `json:"AccessRules,omitnil" name:"AccessRules"`
+	AccessRules []*AccessRule `json:"AccessRules,omitnil,omitempty" name:"AccessRules"`
 }
 
 type ModifyAccessRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Multiple permission rules (up to 10)
-	AccessRules []*AccessRule `json:"AccessRules,omitnil" name:"AccessRules"`
+	AccessRules []*AccessRule `json:"AccessRules,omitnil,omitempty" name:"AccessRules"`
 }
 
 func (r *ModifyAccessRulesRequest) ToJsonString() string {
@@ -1693,7 +1693,7 @@ func (r *ModifyAccessRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAccessRulesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyAccessRulesResponse struct {
@@ -1715,58 +1715,58 @@ func (r *ModifyAccessRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyFileSystemRequestParams struct {
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// File system name
-	FileSystemName *string `json:"FileSystemName,omitnil" name:"FileSystemName"`
+	FileSystemName *string `json:"FileSystemName,omitnil,omitempty" name:"FileSystemName"`
 
 	// File system description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// File system capacity (in bytes), which can range from 1 GB to 1 PB and must be an integer multiple of 1 GB
 	// Note: the file system capacity after change cannot be smaller than the currently used capacity
-	CapacityQuota *uint64 `json:"CapacityQuota,omitnil" name:"CapacityQuota"`
+	CapacityQuota *uint64 `json:"CapacityQuota,omitnil,omitempty" name:"CapacityQuota"`
 
 	// List of superuser names, which can be an empty array
-	SuperUsers []*string `json:"SuperUsers,omitnil" name:"SuperUsers"`
+	SuperUsers []*string `json:"SuperUsers,omitnil,omitempty" name:"SuperUsers"`
 
 	// Whether to verify POSIX ACL
-	PosixAcl *bool `json:"PosixAcl,omitnil" name:"PosixAcl"`
+	PosixAcl *bool `json:"PosixAcl,omitnil,omitempty" name:"PosixAcl"`
 
 	// Whether to enable verification of Ranger service addresses
-	EnableRanger *bool `json:"EnableRanger,omitnil" name:"EnableRanger"`
+	EnableRanger *bool `json:"EnableRanger,omitnil,omitempty" name:"EnableRanger"`
 
 	// List of Ranger service addresses, which can be an empty array
-	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitnil" name:"RangerServiceAddresses"`
+	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitnil,omitempty" name:"RangerServiceAddresses"`
 }
 
 type ModifyFileSystemRequest struct {
 	*tchttp.BaseRequest
 	
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// File system name
-	FileSystemName *string `json:"FileSystemName,omitnil" name:"FileSystemName"`
+	FileSystemName *string `json:"FileSystemName,omitnil,omitempty" name:"FileSystemName"`
 
 	// File system description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// File system capacity (in bytes), which can range from 1 GB to 1 PB and must be an integer multiple of 1 GB
 	// Note: the file system capacity after change cannot be smaller than the currently used capacity
-	CapacityQuota *uint64 `json:"CapacityQuota,omitnil" name:"CapacityQuota"`
+	CapacityQuota *uint64 `json:"CapacityQuota,omitnil,omitempty" name:"CapacityQuota"`
 
 	// List of superuser names, which can be an empty array
-	SuperUsers []*string `json:"SuperUsers,omitnil" name:"SuperUsers"`
+	SuperUsers []*string `json:"SuperUsers,omitnil,omitempty" name:"SuperUsers"`
 
 	// Whether to verify POSIX ACL
-	PosixAcl *bool `json:"PosixAcl,omitnil" name:"PosixAcl"`
+	PosixAcl *bool `json:"PosixAcl,omitnil,omitempty" name:"PosixAcl"`
 
 	// Whether to enable verification of Ranger service addresses
-	EnableRanger *bool `json:"EnableRanger,omitnil" name:"EnableRanger"`
+	EnableRanger *bool `json:"EnableRanger,omitnil,omitempty" name:"EnableRanger"`
 
 	// List of Ranger service addresses, which can be an empty array
-	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitnil" name:"RangerServiceAddresses"`
+	RangerServiceAddresses []*string `json:"RangerServiceAddresses,omitnil,omitempty" name:"RangerServiceAddresses"`
 }
 
 func (r *ModifyFileSystemRequest) ToJsonString() string {
@@ -1798,7 +1798,7 @@ func (r *ModifyFileSystemRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyFileSystemResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyFileSystemResponse struct {
@@ -1820,14 +1820,14 @@ func (r *ModifyFileSystemResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLifeCycleRulesRequestParams struct {
 	// Multiple lifecycle rules (up to 10)
-	LifeCycleRules []*LifeCycleRule `json:"LifeCycleRules,omitnil" name:"LifeCycleRules"`
+	LifeCycleRules []*LifeCycleRule `json:"LifeCycleRules,omitnil,omitempty" name:"LifeCycleRules"`
 }
 
 type ModifyLifeCycleRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Multiple lifecycle rules (up to 10)
-	LifeCycleRules []*LifeCycleRule `json:"LifeCycleRules,omitnil" name:"LifeCycleRules"`
+	LifeCycleRules []*LifeCycleRule `json:"LifeCycleRules,omitnil,omitempty" name:"LifeCycleRules"`
 }
 
 func (r *ModifyLifeCycleRulesRequest) ToJsonString() string {
@@ -1852,7 +1852,7 @@ func (r *ModifyLifeCycleRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLifeCycleRulesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLifeCycleRulesResponse struct {
@@ -1874,26 +1874,26 @@ func (r *ModifyLifeCycleRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyMountPointRequestParams struct {
 	// Mount point ID
-	MountPointId *string `json:"MountPointId,omitnil" name:"MountPointId"`
+	MountPointId *string `json:"MountPointId,omitnil,omitempty" name:"MountPointId"`
 
 	// Mount point name
-	MountPointName *string `json:"MountPointName,omitnil" name:"MountPointName"`
+	MountPointName *string `json:"MountPointName,omitnil,omitempty" name:"MountPointName"`
 
 	// Mount point status
-	MountPointStatus *uint64 `json:"MountPointStatus,omitnil" name:"MountPointStatus"`
+	MountPointStatus *uint64 `json:"MountPointStatus,omitnil,omitempty" name:"MountPointStatus"`
 }
 
 type ModifyMountPointRequest struct {
 	*tchttp.BaseRequest
 	
 	// Mount point ID
-	MountPointId *string `json:"MountPointId,omitnil" name:"MountPointId"`
+	MountPointId *string `json:"MountPointId,omitnil,omitempty" name:"MountPointId"`
 
 	// Mount point name
-	MountPointName *string `json:"MountPointName,omitnil" name:"MountPointName"`
+	MountPointName *string `json:"MountPointName,omitnil,omitempty" name:"MountPointName"`
 
 	// Mount point status
-	MountPointStatus *uint64 `json:"MountPointStatus,omitnil" name:"MountPointStatus"`
+	MountPointStatus *uint64 `json:"MountPointStatus,omitnil,omitempty" name:"MountPointStatus"`
 }
 
 func (r *ModifyMountPointRequest) ToJsonString() string {
@@ -1920,7 +1920,7 @@ func (r *ModifyMountPointRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyMountPointResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyMountPointResponse struct {
@@ -1942,20 +1942,20 @@ func (r *ModifyMountPointResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyResourceTagsRequestParams struct {
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Multiple resource tags, which can be an empty array
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type ModifyResourceTagsRequest struct {
 	*tchttp.BaseRequest
 	
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Multiple resource tags, which can be an empty array
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *ModifyResourceTagsRequest) ToJsonString() string {
@@ -1981,7 +1981,7 @@ func (r *ModifyResourceTagsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyResourceTagsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyResourceTagsResponse struct {
@@ -2002,82 +2002,82 @@ func (r *ModifyResourceTagsResponse) FromJsonString(s string) error {
 
 type MountPoint struct {
 	// Mount point ID
-	MountPointId *string `json:"MountPointId,omitnil" name:"MountPointId"`
+	MountPointId *string `json:"MountPointId,omitnil,omitempty" name:"MountPointId"`
 
 	// Mount point name
-	MountPointName *string `json:"MountPointName,omitnil" name:"MountPointName"`
+	MountPointName *string `json:"MountPointName,omitnil,omitempty" name:"MountPointName"`
 
 	// File system ID
-	FileSystemId *string `json:"FileSystemId,omitnil" name:"FileSystemId"`
+	FileSystemId *string `json:"FileSystemId,omitnil,omitempty" name:"FileSystemId"`
 
 	// Mount point status (1: enabled; 2: disabled)
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// List of IDs of the bound permission groups
-	AccessGroupIds []*string `json:"AccessGroupIds,omitnil" name:"AccessGroupIds"`
+	AccessGroupIds []*string `json:"AccessGroupIds,omitnil,omitempty" name:"AccessGroupIds"`
 }
 
 type RestoreTask struct {
 	// Restoration task ID
-	RestoreTaskId *uint64 `json:"RestoreTaskId,omitnil" name:"RestoreTaskId"`
+	RestoreTaskId *uint64 `json:"RestoreTaskId,omitnil,omitempty" name:"RestoreTaskId"`
 
 	// Restoration task file path
-	FilePath *string `json:"FilePath,omitnil" name:"FilePath"`
+	FilePath *string `json:"FilePath,omitnil,omitempty" name:"FilePath"`
 
 	// Restoration task type (`1`: standard; `2`: expedited; `3`: bulk, with only the expedited type available currently)
-	Type *uint64 `json:"Type,omitnil" name:"Type"`
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Validity period (in days) of the temporary copy generated during restoration
-	Days *uint64 `json:"Days,omitnil" name:"Days"`
+	Days *uint64 `json:"Days,omitnil,omitempty" name:"Days"`
 
 	// Restoration task status (1: binding file; 2: file binding completed; 3: restoring file; 4: file restoration completed)
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 }
 
 type Summary struct {
 	// Capacity usage in bytes
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CapacityUsed *uint64 `json:"CapacityUsed,omitnil" name:"CapacityUsed"`
+	CapacityUsed *uint64 `json:"CapacityUsed,omitnil,omitempty" name:"CapacityUsed"`
 
 	// COS STANDARD storage usage in bytes
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StandardCapacityUsed *uint64 `json:"StandardCapacityUsed,omitnil" name:"StandardCapacityUsed"`
+	StandardCapacityUsed *uint64 `json:"StandardCapacityUsed,omitnil,omitempty" name:"StandardCapacityUsed"`
 
 	// COS STANDARD_IA storage usage in bytes
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DegradeCapacityUsed *uint64 `json:"DegradeCapacityUsed,omitnil" name:"DegradeCapacityUsed"`
+	DegradeCapacityUsed *uint64 `json:"DegradeCapacityUsed,omitnil,omitempty" name:"DegradeCapacityUsed"`
 
 	// COS ARCHIVE storage usage in bytes
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ArchiveCapacityUsed *uint64 `json:"ArchiveCapacityUsed,omitnil" name:"ArchiveCapacityUsed"`
+	ArchiveCapacityUsed *uint64 `json:"ArchiveCapacityUsed,omitnil,omitempty" name:"ArchiveCapacityUsed"`
 
 	// COS DEEP ARCHIVE storage usage in bytes
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DeepArchiveCapacityUsed *uint64 `json:"DeepArchiveCapacityUsed,omitnil" name:"DeepArchiveCapacityUsed"`
+	DeepArchiveCapacityUsed *uint64 `json:"DeepArchiveCapacityUsed,omitnil,omitempty" name:"DeepArchiveCapacityUsed"`
 
 	// COS INTELLIGENT TIERING storage usage in bytes
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IntelligentCapacityUsed *uint64 `json:"IntelligentCapacityUsed,omitnil" name:"IntelligentCapacityUsed"`
+	IntelligentCapacityUsed *uint64 `json:"IntelligentCapacityUsed,omitnil,omitempty" name:"IntelligentCapacityUsed"`
 }
 
 type Tag struct {
 	// Tag key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Tag value
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type Transition struct {
 	// Trigger time (in days)
-	Days *uint64 `json:"Days,omitnil" name:"Days"`
+	Days *uint64 `json:"Days,omitnil,omitempty" name:"Days"`
 
 	// Transition type (`1`: ARCHIVE; `2`: Delete; `3`: STANDARD_IA; `4`: DEEP ARCHIVE; `5`: INTELLIGENT TIERING)
-	Type *uint64 `json:"Type,omitnil" name:"Type"`
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 }

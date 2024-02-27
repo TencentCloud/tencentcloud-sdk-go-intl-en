@@ -23,7 +23,7 @@ import (
 // Predefined struct for user
 type TextTranslateRequestParams struct {
 	// The texts to be translated, which must be encoded in UTF-8 and can contain up to 2,000 characters in a request. For non-pure texts such as those with HTML tags, the translation may fail.
-	SourceText *string `json:"SourceText,omitnil" name:"SourceText"`
+	SourceText *string `json:"SourceText,omitnil,omitempty" name:"SourceText"`
 
 	// Supported source languages:
 	// auto: Automatic language detection
@@ -45,7 +45,7 @@ type TextTranslateRequestParams struct {
 	// ms: Malay
 	// ar: Arabic
 	// hi: Hindi
-	Source *string `json:"Source,omitnil" name:"Source"`
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
 
 	// Supported target languages for the above source languages:
 	// 
@@ -67,20 +67,20 @@ type TextTranslateRequestParams struct {
 	// <li>ms (Malay): zh (Simplified Chinese) and en (English)</li
 	// <li>ar (Arabic): en (English)</li>
 	// <li>hi (Hindi): en (English)</li
-	Target *string `json:"Target,omitnil" name:"Target"`
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 
 	// The project ID, which can be obtained from **Console -> Account Center -> Project Management**. If no one is set, enter the default project ID `0`.
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// The parameter used to mark the text content that needs to remain untranslated, such as special symbols and names of people and places. You can set only one word for this parameter in each request. Only nouns (like names of people and places) are supported, and verbs or phrases may cause poor translation outcomes.
-	UntranslatedText *string `json:"UntranslatedText,omitnil" name:"UntranslatedText"`
+	UntranslatedText *string `json:"UntranslatedText,omitnil,omitempty" name:"UntranslatedText"`
 }
 
 type TextTranslateRequest struct {
 	*tchttp.BaseRequest
 	
 	// The texts to be translated, which must be encoded in UTF-8 and can contain up to 2,000 characters in a request. For non-pure texts such as those with HTML tags, the translation may fail.
-	SourceText *string `json:"SourceText,omitnil" name:"SourceText"`
+	SourceText *string `json:"SourceText,omitnil,omitempty" name:"SourceText"`
 
 	// Supported source languages:
 	// auto: Automatic language detection
@@ -102,7 +102,7 @@ type TextTranslateRequest struct {
 	// ms: Malay
 	// ar: Arabic
 	// hi: Hindi
-	Source *string `json:"Source,omitnil" name:"Source"`
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
 
 	// Supported target languages for the above source languages:
 	// 
@@ -124,13 +124,13 @@ type TextTranslateRequest struct {
 	// <li>ms (Malay): zh (Simplified Chinese) and en (English)</li
 	// <li>ar (Arabic): en (English)</li>
 	// <li>hi (Hindi): en (English)</li
-	Target *string `json:"Target,omitnil" name:"Target"`
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 
 	// The project ID, which can be obtained from **Console -> Account Center -> Project Management**. If no one is set, enter the default project ID `0`.
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// The parameter used to mark the text content that needs to remain untranslated, such as special symbols and names of people and places. You can set only one word for this parameter in each request. Only nouns (like names of people and places) are supported, and verbs or phrases may cause poor translation outcomes.
-	UntranslatedText *string `json:"UntranslatedText,omitnil" name:"UntranslatedText"`
+	UntranslatedText *string `json:"UntranslatedText,omitnil,omitempty" name:"UntranslatedText"`
 }
 
 func (r *TextTranslateRequest) ToJsonString() string {
@@ -159,16 +159,16 @@ func (r *TextTranslateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type TextTranslateResponseParams struct {
 	// The translation outcome.
-	TargetText *string `json:"TargetText,omitnil" name:"TargetText"`
+	TargetText *string `json:"TargetText,omitnil,omitempty" name:"TargetText"`
 
 	// The source language. See the request parameter `Source` for details.
-	Source *string `json:"Source,omitnil" name:"Source"`
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
 
 	// The target language. See the request parameter `Target` for details.
-	Target *string `json:"Target,omitnil" name:"Target"`
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type TextTranslateResponse struct {

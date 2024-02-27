@@ -23,38 +23,38 @@ import (
 // Predefined struct for user
 type ApplyConcurrentRequestParams struct {
 	// The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
-	UserId *string `json:"UserId,omitnil" name:"UserId"`
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
 	// Public IP of user’s application client, which is used for nearby scheduling.
-	UserIp *string `json:"UserIp,omitnil" name:"UserIp"`
+	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
 
 	// The project ID.
-	ProjectId *string `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Application version ID. If the application of the current version is requested, you do not need to fill in this field. If the application of other versions is requested, you need to specify the version through this field.
-	ApplicationVersionId *string `json:"ApplicationVersionId,omitnil" name:"ApplicationVersionId"`
+	ApplicationVersionId *string `json:"ApplicationVersionId,omitnil,omitempty" name:"ApplicationVersionId"`
 
 	// Application ID, which is used only by the multi-application project to specify applications. For a single-application project, this parameter is ignored, and the application bound to the project will be used.
-	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
 }
 
 type ApplyConcurrentRequest struct {
 	*tchttp.BaseRequest
 	
 	// The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
-	UserId *string `json:"UserId,omitnil" name:"UserId"`
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
 	// Public IP of user’s application client, which is used for nearby scheduling.
-	UserIp *string `json:"UserIp,omitnil" name:"UserIp"`
+	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
 
 	// The project ID.
-	ProjectId *string `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Application version ID. If the application of the current version is requested, you do not need to fill in this field. If the application of other versions is requested, you need to specify the version through this field.
-	ApplicationVersionId *string `json:"ApplicationVersionId,omitnil" name:"ApplicationVersionId"`
+	ApplicationVersionId *string `json:"ApplicationVersionId,omitnil,omitempty" name:"ApplicationVersionId"`
 
 	// Application ID, which is used only by the multi-application project to specify applications. For a single-application project, this parameter is ignored, and the application bound to the project will be used.
-	ApplicationId *string `json:"ApplicationId,omitnil" name:"ApplicationId"`
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
 }
 
 func (r *ApplyConcurrentRequest) ToJsonString() string {
@@ -83,7 +83,7 @@ func (r *ApplyConcurrentRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplyConcurrentResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ApplyConcurrentResponse struct {
@@ -105,18 +105,18 @@ func (r *ApplyConcurrentResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSessionRequestParams struct {
 	// The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
-	UserId *string `json:"UserId,omitnil" name:"UserId"`
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
 	// Public IP of user’s application client, which is used for nearby scheduling.
-	UserIp *string `json:"UserIp,omitnil" name:"UserIp"`
+	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
 
 	// The client-side session data, which is obtained from the SDK. If `RunMode` is `RunWithoutClient`, this parameter can be null.
-	ClientSession *string `json:"ClientSession,omitnil" name:"ClientSession"`
+	ClientSession *string `json:"ClientSession,omitnil,omitempty" name:"ClientSession"`
 
 	// The on-cloud running mode.
 	// `RunWithoutClient`: Keep the application running on the cloud even when there are no client connections.
 	// Empty string (default): Keep the application running on the cloud only when there are client connections.
-	RunMode *string `json:"RunMode,omitnil" name:"RunMode"`
+	RunMode *string `json:"RunMode,omitnil,omitempty" name:"RunMode"`
 
 	// Application startup parameter.
 	// If the user requests a multi-application project or a prelaunch-disabled single-application project, this parameter takes effect.
@@ -125,34 +125,34 @@ type CreateSessionRequestParams struct {
 	// 
 	// Note: When this parameter takes effect, the `ApplicationParameters` parameter will be appended to the end of the application startup parameter. The application startup parameter is set in the application or project configuration in the console.
 	// For example, for a prelaunch-disabled single-application project, if its application startup parameter `bar` is `0` and the `ApplicationParameters` parameter `foo` is `1`, the actual application startup parameters will be `bar=0 foo=1`.
-	ApplicationParameters *string `json:"ApplicationParameters,omitnil" name:"ApplicationParameters"`
+	ApplicationParameters *string `json:"ApplicationParameters,omitnil,omitempty" name:"ApplicationParameters"`
 
 	// The user ID of the host in **multi-person interaction** scenarios, which is required.
 	// If the current user is the host, `HostUserId` must be the same as their `UserId`; otherwise, `HostUserId` should be the host's `UserId`.
-	HostUserId *string `json:"HostUserId,omitnil" name:"HostUserId"`
+	HostUserId *string `json:"HostUserId,omitnil,omitempty" name:"HostUserId"`
 
 	// The role in **multi-person interaction** scenarios. Valid values:
 	// `Player`: A user who can operate an application by using a keyboard and mouse
 	// `Viewer`: A user who can only watch the video in the room but cannot operate the application
-	Role *string `json:"Role,omitnil" name:"Role"`
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 }
 
 type CreateSessionRequest struct {
 	*tchttp.BaseRequest
 	
 	// The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
-	UserId *string `json:"UserId,omitnil" name:"UserId"`
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
 	// Public IP of user’s application client, which is used for nearby scheduling.
-	UserIp *string `json:"UserIp,omitnil" name:"UserIp"`
+	UserIp *string `json:"UserIp,omitnil,omitempty" name:"UserIp"`
 
 	// The client-side session data, which is obtained from the SDK. If `RunMode` is `RunWithoutClient`, this parameter can be null.
-	ClientSession *string `json:"ClientSession,omitnil" name:"ClientSession"`
+	ClientSession *string `json:"ClientSession,omitnil,omitempty" name:"ClientSession"`
 
 	// The on-cloud running mode.
 	// `RunWithoutClient`: Keep the application running on the cloud even when there are no client connections.
 	// Empty string (default): Keep the application running on the cloud only when there are client connections.
-	RunMode *string `json:"RunMode,omitnil" name:"RunMode"`
+	RunMode *string `json:"RunMode,omitnil,omitempty" name:"RunMode"`
 
 	// Application startup parameter.
 	// If the user requests a multi-application project or a prelaunch-disabled single-application project, this parameter takes effect.
@@ -161,16 +161,16 @@ type CreateSessionRequest struct {
 	// 
 	// Note: When this parameter takes effect, the `ApplicationParameters` parameter will be appended to the end of the application startup parameter. The application startup parameter is set in the application or project configuration in the console.
 	// For example, for a prelaunch-disabled single-application project, if its application startup parameter `bar` is `0` and the `ApplicationParameters` parameter `foo` is `1`, the actual application startup parameters will be `bar=0 foo=1`.
-	ApplicationParameters *string `json:"ApplicationParameters,omitnil" name:"ApplicationParameters"`
+	ApplicationParameters *string `json:"ApplicationParameters,omitnil,omitempty" name:"ApplicationParameters"`
 
 	// The user ID of the host in **multi-person interaction** scenarios, which is required.
 	// If the current user is the host, `HostUserId` must be the same as their `UserId`; otherwise, `HostUserId` should be the host's `UserId`.
-	HostUserId *string `json:"HostUserId,omitnil" name:"HostUserId"`
+	HostUserId *string `json:"HostUserId,omitnil,omitempty" name:"HostUserId"`
 
 	// The role in **multi-person interaction** scenarios. Valid values:
 	// `Player`: A user who can operate an application by using a keyboard and mouse
 	// `Viewer`: A user who can only watch the video in the room but cannot operate the application
-	Role *string `json:"Role,omitnil" name:"Role"`
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 }
 
 func (r *CreateSessionRequest) ToJsonString() string {
@@ -201,10 +201,10 @@ func (r *CreateSessionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSessionResponseParams struct {
 	// The server-side session data, which is returned to the SDK.
-	ServerSession *string `json:"ServerSession,omitnil" name:"ServerSession"`
+	ServerSession *string `json:"ServerSession,omitnil,omitempty" name:"ServerSession"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateSessionResponse struct {
@@ -226,14 +226,14 @@ func (r *CreateSessionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeConcurrentCountRequestParams struct {
 	// Project ID
-	ProjectId *string `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 type DescribeConcurrentCountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Project ID
-	ProjectId *string `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 func (r *DescribeConcurrentCountRequest) ToJsonString() string {
@@ -258,13 +258,13 @@ func (r *DescribeConcurrentCountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeConcurrentCountResponseParams struct {
 	// Total Concurrency Count
-	Total *uint64 `json:"Total,omitnil" name:"Total"`
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// The number of concurrent executions, including those in pre-launch, connected, waiting for reconnection, to be cleaned up or recovered, and all non-idle concurrent executions. Therefore, refreshing projects or disconnecting user connections with concurrency packages will affect this value.
-	Running *uint64 `json:"Running,omitnil" name:"Running"`
+	Running *uint64 `json:"Running,omitnil,omitempty" name:"Running"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeConcurrentCountResponse struct {
@@ -286,14 +286,14 @@ func (r *DescribeConcurrentCountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DestroySessionRequestParams struct {
 	// The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
-	UserId *string `json:"UserId,omitnil" name:"UserId"`
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 }
 
 type DestroySessionRequest struct {
 	*tchttp.BaseRequest
 	
 	// The user’s unique ID. Tencent Cloud does not parse the ID. You need to manage your own user IDs. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
-	UserId *string `json:"UserId,omitnil" name:"UserId"`
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 }
 
 func (r *DestroySessionRequest) ToJsonString() string {
@@ -318,7 +318,7 @@ func (r *DestroySessionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DestroySessionResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DestroySessionResponse struct {
@@ -340,20 +340,20 @@ func (r *DestroySessionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type StartPublishStreamRequestParams struct {
 	// Unique user ID, which is customized by you and is not understood by CAR. It will be used as the `StreamId` for pushing streams. For example, if the bound push domain is **abc.livepush.myqcloud.com**, the push address will be **rtmp://abc.livepush.myqcloud.com/live/UserId?txSecret=xxx&txTime=xxx**.
-	UserId *string `json:"UserId,omitnil" name:"UserId"`
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
 	// Push parameter, which is a custom parameter carried during stream pushing.
-	PublishStreamArgs *string `json:"PublishStreamArgs,omitnil" name:"PublishStreamArgs"`
+	PublishStreamArgs *string `json:"PublishStreamArgs,omitnil,omitempty" name:"PublishStreamArgs"`
 }
 
 type StartPublishStreamRequest struct {
 	*tchttp.BaseRequest
 	
 	// Unique user ID, which is customized by you and is not understood by CAR. It will be used as the `StreamId` for pushing streams. For example, if the bound push domain is **abc.livepush.myqcloud.com**, the push address will be **rtmp://abc.livepush.myqcloud.com/live/UserId?txSecret=xxx&txTime=xxx**.
-	UserId *string `json:"UserId,omitnil" name:"UserId"`
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
 	// Push parameter, which is a custom parameter carried during stream pushing.
-	PublishStreamArgs *string `json:"PublishStreamArgs,omitnil" name:"PublishStreamArgs"`
+	PublishStreamArgs *string `json:"PublishStreamArgs,omitnil,omitempty" name:"PublishStreamArgs"`
 }
 
 func (r *StartPublishStreamRequest) ToJsonString() string {
@@ -379,7 +379,7 @@ func (r *StartPublishStreamRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StartPublishStreamResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StartPublishStreamResponse struct {
@@ -401,20 +401,20 @@ func (r *StartPublishStreamResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type StartPublishStreamWithURLRequestParams struct {
 	// Unique user ID, which is customized by you and is not understood by CAR.
-	UserId *string `json:"UserId,omitnil" name:"UserId"`
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
 	// Push address. Only RTMP is supported for push currently.
-	PublishStreamURL *string `json:"PublishStreamURL,omitnil" name:"PublishStreamURL"`
+	PublishStreamURL *string `json:"PublishStreamURL,omitnil,omitempty" name:"PublishStreamURL"`
 }
 
 type StartPublishStreamWithURLRequest struct {
 	*tchttp.BaseRequest
 	
 	// Unique user ID, which is customized by you and is not understood by CAR.
-	UserId *string `json:"UserId,omitnil" name:"UserId"`
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
 	// Push address. Only RTMP is supported for push currently.
-	PublishStreamURL *string `json:"PublishStreamURL,omitnil" name:"PublishStreamURL"`
+	PublishStreamURL *string `json:"PublishStreamURL,omitnil,omitempty" name:"PublishStreamURL"`
 }
 
 func (r *StartPublishStreamWithURLRequest) ToJsonString() string {
@@ -440,7 +440,7 @@ func (r *StartPublishStreamWithURLRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StartPublishStreamWithURLResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StartPublishStreamWithURLResponse struct {
@@ -462,14 +462,14 @@ func (r *StartPublishStreamWithURLResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type StopPublishStreamRequestParams struct {
 	// Unique user ID, which is customized by you and is not understood by CAR. It can also be randomly generated using the timestamp and should be kept unchanged during user reconnection.
-	UserId *string `json:"UserId,omitnil" name:"UserId"`
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 }
 
 type StopPublishStreamRequest struct {
 	*tchttp.BaseRequest
 	
 	// Unique user ID, which is customized by you and is not understood by CAR. It can also be randomly generated using the timestamp and should be kept unchanged during user reconnection.
-	UserId *string `json:"UserId,omitnil" name:"UserId"`
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 }
 
 func (r *StopPublishStreamRequest) ToJsonString() string {
@@ -494,7 +494,7 @@ func (r *StopPublishStreamRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StopPublishStreamResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StopPublishStreamResponse struct {

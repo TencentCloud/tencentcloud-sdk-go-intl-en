@@ -22,29 +22,29 @@ import (
 
 type AttributeMap struct {
 	// Map key, supporting [a-zA-Z0-9-\.]*
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Map value
-	Value *int64 `json:"Value,omitnil" name:"Value"`
+	Value *int64 `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 // Predefined struct for user
 type CancelMatchingRequestParams struct {
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 
 	// The MatchTicket ID of the matchmaking to cancel
-	MatchTicketId *string `json:"MatchTicketId,omitnil" name:"MatchTicketId"`
+	MatchTicketId *string `json:"MatchTicketId,omitnil,omitempty" name:"MatchTicketId"`
 }
 
 type CancelMatchingRequest struct {
 	*tchttp.BaseRequest
 	
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 
 	// The MatchTicket ID of the matchmaking to cancel
-	MatchTicketId *string `json:"MatchTicketId,omitnil" name:"MatchTicketId"`
+	MatchTicketId *string `json:"MatchTicketId,omitnil,omitempty" name:"MatchTicketId"`
 }
 
 func (r *CancelMatchingRequest) ToJsonString() string {
@@ -70,10 +70,10 @@ func (r *CancelMatchingRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CancelMatchingResponseParams struct {
 	// Error code
-	ErrCode *uint64 `json:"ErrCode,omitnil" name:"ErrCode"`
+	ErrCode *uint64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CancelMatchingResponse struct {
@@ -95,86 +95,86 @@ func (r *CancelMatchingResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateMatchRequestParams struct {
 	// Match name. It can contain up to 128 bytes, supporting [a-zA-Z0-9-\.]*.
-	MatchName *string `json:"MatchName,omitnil" name:"MatchName"`
+	MatchName *string `json:"MatchName,omitnil,omitempty" name:"MatchName"`
 
 	// RuleCode
-	RuleCode *string `json:"RuleCode,omitnil" name:"RuleCode"`
+	RuleCode *string `json:"RuleCode,omitnil,omitempty" name:"RuleCode"`
 
 	// Timeout period in seconds. Value range: 1 600
-	Timeout *int64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Whether to request server resources for the matchmaking results. 0: no, 1: request GSE resources
-	ServerType *int64 `json:"ServerType,omitnil" name:"ServerType"`
+	ServerType *int64 `json:"ServerType,omitnil,omitempty" name:"ServerType"`
 
 	// Matchmaking description. Up to 1024 bytes are allowed.
-	MatchDesc *string `json:"MatchDesc,omitnil" name:"MatchDesc"`
+	MatchDesc *string `json:"MatchDesc,omitnil,omitempty" name:"MatchDesc"`
 
 	// Only HTTP and HTTPS protocols are supported.
-	NotifyUrl *string `json:"NotifyUrl,omitnil" name:"NotifyUrl"`
+	NotifyUrl *string `json:"NotifyUrl,omitnil,omitempty" name:"NotifyUrl"`
 
 	// Region of the game server queue
-	ServerRegion *string `json:"ServerRegion,omitnil" name:"ServerRegion"`
+	ServerRegion *string `json:"ServerRegion,omitnil,omitempty" name:"ServerRegion"`
 
 	// Game server queue
-	ServerQueue *string `json:"ServerQueue,omitnil" name:"ServerQueue"`
+	ServerQueue *string `json:"ServerQueue,omitnil,omitempty" name:"ServerQueue"`
 
 	// Custom push data
-	CustomPushData *string `json:"CustomPushData,omitnil" name:"CustomPushData"`
+	CustomPushData *string `json:"CustomPushData,omitnil,omitempty" name:"CustomPushData"`
 
 	// Game server session data
-	ServerSessionData *string `json:"ServerSessionData,omitnil" name:"ServerSessionData"`
+	ServerSessionData *string `json:"ServerSessionData,omitnil,omitempty" name:"ServerSessionData"`
 
 	// Game attribute. It is an array of key-value structure.
-	GameProperties []*StringKV `json:"GameProperties,omitnil" name:"GameProperties"`
+	GameProperties []*StringKV `json:"GameProperties,omitnil,omitempty" name:"GameProperties"`
 
 	// Enable or disable the log. 0: disable, 1: enable
-	LogSwitch *int64 `json:"LogSwitch,omitnil" name:"LogSwitch"`
+	LogSwitch *int64 `json:"LogSwitch,omitnil,omitempty" name:"LogSwitch"`
 
 	// Tag. It is an array of key-value structure.
-	Tags []*StringKV `json:"Tags,omitnil" name:"Tags"`
+	Tags []*StringKV `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type CreateMatchRequest struct {
 	*tchttp.BaseRequest
 	
 	// Match name. It can contain up to 128 bytes, supporting [a-zA-Z0-9-\.]*.
-	MatchName *string `json:"MatchName,omitnil" name:"MatchName"`
+	MatchName *string `json:"MatchName,omitnil,omitempty" name:"MatchName"`
 
 	// RuleCode
-	RuleCode *string `json:"RuleCode,omitnil" name:"RuleCode"`
+	RuleCode *string `json:"RuleCode,omitnil,omitempty" name:"RuleCode"`
 
 	// Timeout period in seconds. Value range: 1 600
-	Timeout *int64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Whether to request server resources for the matchmaking results. 0: no, 1: request GSE resources
-	ServerType *int64 `json:"ServerType,omitnil" name:"ServerType"`
+	ServerType *int64 `json:"ServerType,omitnil,omitempty" name:"ServerType"`
 
 	// Matchmaking description. Up to 1024 bytes are allowed.
-	MatchDesc *string `json:"MatchDesc,omitnil" name:"MatchDesc"`
+	MatchDesc *string `json:"MatchDesc,omitnil,omitempty" name:"MatchDesc"`
 
 	// Only HTTP and HTTPS protocols are supported.
-	NotifyUrl *string `json:"NotifyUrl,omitnil" name:"NotifyUrl"`
+	NotifyUrl *string `json:"NotifyUrl,omitnil,omitempty" name:"NotifyUrl"`
 
 	// Region of the game server queue
-	ServerRegion *string `json:"ServerRegion,omitnil" name:"ServerRegion"`
+	ServerRegion *string `json:"ServerRegion,omitnil,omitempty" name:"ServerRegion"`
 
 	// Game server queue
-	ServerQueue *string `json:"ServerQueue,omitnil" name:"ServerQueue"`
+	ServerQueue *string `json:"ServerQueue,omitnil,omitempty" name:"ServerQueue"`
 
 	// Custom push data
-	CustomPushData *string `json:"CustomPushData,omitnil" name:"CustomPushData"`
+	CustomPushData *string `json:"CustomPushData,omitnil,omitempty" name:"CustomPushData"`
 
 	// Game server session data
-	ServerSessionData *string `json:"ServerSessionData,omitnil" name:"ServerSessionData"`
+	ServerSessionData *string `json:"ServerSessionData,omitnil,omitempty" name:"ServerSessionData"`
 
 	// Game attribute. It is an array of key-value structure.
-	GameProperties []*StringKV `json:"GameProperties,omitnil" name:"GameProperties"`
+	GameProperties []*StringKV `json:"GameProperties,omitnil,omitempty" name:"GameProperties"`
 
 	// Enable or disable the log. 0: disable, 1: enable
-	LogSwitch *int64 `json:"LogSwitch,omitnil" name:"LogSwitch"`
+	LogSwitch *int64 `json:"LogSwitch,omitnil,omitempty" name:"LogSwitch"`
 
 	// Tag. It is an array of key-value structure.
-	Tags []*StringKV `json:"Tags,omitnil" name:"Tags"`
+	Tags []*StringKV `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *CreateMatchRequest) ToJsonString() string {
@@ -211,10 +211,10 @@ func (r *CreateMatchRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateMatchResponseParams struct {
 	// Matchmaking information
-	MatchInfo *MatchInfo `json:"MatchInfo,omitnil" name:"MatchInfo"`
+	MatchInfo *MatchInfo `json:"MatchInfo,omitnil,omitempty" name:"MatchInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateMatchResponse struct {
@@ -236,32 +236,32 @@ func (r *CreateMatchResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateRuleRequestParams struct {
 	// Rule name. It can contain up to 128 bytes, supporting [a-zA-Z0-9-\.]*.
-	RuleName *string `json:"RuleName,omitnil" name:"RuleName"`
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
 	// Rule script. Up to 65535 bytes are allowed.
-	RuleScript *string `json:"RuleScript,omitnil" name:"RuleScript"`
+	RuleScript *string `json:"RuleScript,omitnil,omitempty" name:"RuleScript"`
 
 	// Rule description. Up to 1024 bytes are allowed.
-	RuleDesc *string `json:"RuleDesc,omitnil" name:"RuleDesc"`
+	RuleDesc *string `json:"RuleDesc,omitnil,omitempty" name:"RuleDesc"`
 
 	// Tag. It is an array of key-value structure. Up to 50 tags can be associated.
-	Tags []*StringKV `json:"Tags,omitnil" name:"Tags"`
+	Tags []*StringKV `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type CreateRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Rule name. It can contain up to 128 bytes, supporting [a-zA-Z0-9-\.]*.
-	RuleName *string `json:"RuleName,omitnil" name:"RuleName"`
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
 	// Rule script. Up to 65535 bytes are allowed.
-	RuleScript *string `json:"RuleScript,omitnil" name:"RuleScript"`
+	RuleScript *string `json:"RuleScript,omitnil,omitempty" name:"RuleScript"`
 
 	// Rule description. Up to 1024 bytes are allowed.
-	RuleDesc *string `json:"RuleDesc,omitnil" name:"RuleDesc"`
+	RuleDesc *string `json:"RuleDesc,omitnil,omitempty" name:"RuleDesc"`
 
 	// Tag. It is an array of key-value structure. Up to 50 tags can be associated.
-	Tags []*StringKV `json:"Tags,omitnil" name:"Tags"`
+	Tags []*StringKV `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *CreateRuleRequest) ToJsonString() string {
@@ -289,10 +289,10 @@ func (r *CreateRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateRuleResponseParams struct {
 	// Rule information
-	RuleInfo *RuleInfo `json:"RuleInfo,omitnil" name:"RuleInfo"`
+	RuleInfo *RuleInfo `json:"RuleInfo,omitnil,omitempty" name:"RuleInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateRuleResponse struct {
@@ -314,14 +314,14 @@ func (r *CreateRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteMatchRequestParams struct {
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 }
 
 type DeleteMatchRequest struct {
 	*tchttp.BaseRequest
 	
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 }
 
 func (r *DeleteMatchRequest) ToJsonString() string {
@@ -346,7 +346,7 @@ func (r *DeleteMatchRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteMatchResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteMatchResponse struct {
@@ -368,14 +368,14 @@ func (r *DeleteMatchResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteRuleRequestParams struct {
 	// RuleCode
-	RuleCode *string `json:"RuleCode,omitnil" name:"RuleCode"`
+	RuleCode *string `json:"RuleCode,omitnil,omitempty" name:"RuleCode"`
 }
 
 type DeleteRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// RuleCode
-	RuleCode *string `json:"RuleCode,omitnil" name:"RuleCode"`
+	RuleCode *string `json:"RuleCode,omitnil,omitempty" name:"RuleCode"`
 }
 
 func (r *DeleteRuleRequest) ToJsonString() string {
@@ -400,7 +400,7 @@ func (r *DeleteRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteRuleResponse struct {
@@ -422,32 +422,32 @@ func (r *DeleteRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDataRequestParams struct {
 	// Start time in seconds
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time in seconds
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Time granularity. Valid values: 1: 1 day, 2: 1 hour, 3: 1 minute, 4: 10 minutes, 5: 30 minutes
-	TimeType *int64 `json:"TimeType,omitnil" name:"TimeType"`
+	TimeType *int64 `json:"TimeType,omitnil,omitempty" name:"TimeType"`
 
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 }
 
 type DescribeDataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time in seconds
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time in seconds
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Time granularity. Valid values: 1: 1 day, 2: 1 hour, 3: 1 minute, 4: 10 minutes, 5: 30 minutes
-	TimeType *int64 `json:"TimeType,omitnil" name:"TimeType"`
+	TimeType *int64 `json:"TimeType,omitnil,omitempty" name:"TimeType"`
 
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 }
 
 func (r *DescribeDataRequest) ToJsonString() string {
@@ -476,14 +476,14 @@ func (r *DescribeDataRequest) FromJsonString(s string) error {
 type DescribeDataResponseParams struct {
 	// Matchmaking statistics overview
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	OverviewData *ReportOverviewData `json:"OverviewData,omitnil" name:"OverviewData"`
+	OverviewData *ReportOverviewData `json:"OverviewData,omitnil,omitempty" name:"OverviewData"`
 
 	// Trend data of the number of matchmaking requests
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	TrendData *ReportTrendData `json:"TrendData,omitnil" name:"TrendData"`
+	TrendData *ReportTrendData `json:"TrendData,omitnil,omitempty" name:"TrendData"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDataResponse struct {
@@ -505,26 +505,26 @@ func (r *DescribeDataResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMatchCodesRequestParams struct {
 	// Offset, number of pages.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// The number of MatchCodes per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Query by the MatchCode value (a string).
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 }
 
 type DescribeMatchCodesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Offset, number of pages.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// The number of MatchCodes per page
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Query by the MatchCode value (a string).
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 }
 
 func (r *DescribeMatchCodesRequest) ToJsonString() string {
@@ -552,14 +552,14 @@ func (r *DescribeMatchCodesRequest) FromJsonString(s string) error {
 type DescribeMatchCodesResponseParams struct {
 	// MatchCode
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	MatchCodes []*MatchCodeAttr `json:"MatchCodes,omitnil" name:"MatchCodes"`
+	MatchCodes []*MatchCodeAttr `json:"MatchCodes,omitnil,omitempty" name:"MatchCodes"`
 
 	// The total number of queried MatchCodes
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeMatchCodesResponse struct {
@@ -581,14 +581,14 @@ func (r *DescribeMatchCodesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMatchRequestParams struct {
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 }
 
 type DescribeMatchRequest struct {
 	*tchttp.BaseRequest
 	
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 }
 
 func (r *DescribeMatchRequest) ToJsonString() string {
@@ -614,10 +614,10 @@ func (r *DescribeMatchRequest) FromJsonString(s string) error {
 type DescribeMatchResponseParams struct {
 	// Matchmaking information
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	MatchInfo *MatchInfo `json:"MatchInfo,omitnil" name:"MatchInfo"`
+	MatchInfo *MatchInfo `json:"MatchInfo,omitnil,omitempty" name:"MatchInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeMatchResponse struct {
@@ -639,38 +639,38 @@ func (r *DescribeMatchResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMatchesRequestParams struct {
 	// The current page number. If this parameter is left empty, all queried matches will be obtained.
-	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// Number of matchmaking lists per page. If this parameter is left empty, all queried matches will be obtained.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Query type (optional). Valid values: match (query by matchCode or matchName), rule (query by ruleCode or ruleName), and other types (not filtered)
-	SearchType *string `json:"SearchType,omitnil" name:"SearchType"`
+	SearchType *string `json:"SearchType,omitnil,omitempty" name:"SearchType"`
 
 	// Keyword. Enter a keyword about SearchType to query.
-	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
 
 	// Tags. Enter a tag for querying.
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type DescribeMatchesRequest struct {
 	*tchttp.BaseRequest
 	
 	// The current page number. If this parameter is left empty, all queried matches will be obtained.
-	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// Number of matchmaking lists per page. If this parameter is left empty, all queried matches will be obtained.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Query type (optional). Valid values: match (query by matchCode or matchName), rule (query by ruleCode or ruleName), and other types (not filtered)
-	SearchType *string `json:"SearchType,omitnil" name:"SearchType"`
+	SearchType *string `json:"SearchType,omitnil,omitempty" name:"SearchType"`
 
 	// Keyword. Enter a keyword about SearchType to query.
-	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
 
 	// Tags. Enter a tag for querying.
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *DescribeMatchesRequest) ToJsonString() string {
@@ -700,25 +700,25 @@ func (r *DescribeMatchesRequest) FromJsonString(s string) error {
 type DescribeMatchesResponseParams struct {
 	// Matchmaking information list
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	MatchInfoList []*MatchInfo `json:"MatchInfoList,omitnil" name:"MatchInfoList"`
+	MatchInfoList []*MatchInfo `json:"MatchInfoList,omitnil,omitempty" name:"MatchInfoList"`
 
 	// Total number of results
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The current page number. The first page will be returned by default if this parameter is left empty.
-	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// The number of matches per page. If this parameter is left empty, 30 matches are displayed per page by default. Maximum value: 30
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Query type (optional). Valid values: matchName (query by match name), matchCode (query by matchCode), ruleName (query by rule name), and tag (query by tag key/value)
-	SearchType *string `json:"SearchType,omitnil" name:"SearchType"`
+	SearchType *string `json:"SearchType,omitnil,omitempty" name:"SearchType"`
 
 	// Keyword for querying (optional)
-	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeMatchesResponse struct {
@@ -740,14 +740,14 @@ func (r *DescribeMatchesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMatchingProgressRequestParams struct {
 	// List of MatchTicket IDs. It can contain up to 12 IDs.
-	MatchTicketIds []*MTicket `json:"MatchTicketIds,omitnil" name:"MatchTicketIds"`
+	MatchTicketIds []*MTicket `json:"MatchTicketIds,omitnil,omitempty" name:"MatchTicketIds"`
 }
 
 type DescribeMatchingProgressRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of MatchTicket IDs. It can contain up to 12 IDs.
-	MatchTicketIds []*MTicket `json:"MatchTicketIds,omitnil" name:"MatchTicketIds"`
+	MatchTicketIds []*MTicket `json:"MatchTicketIds,omitnil,omitempty" name:"MatchTicketIds"`
 }
 
 func (r *DescribeMatchingProgressRequest) ToJsonString() string {
@@ -773,14 +773,14 @@ func (r *DescribeMatchingProgressRequest) FromJsonString(s string) error {
 type DescribeMatchingProgressResponseParams struct {
 	// MatchTicket list
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	MatchTickets []*MatchTicket `json:"MatchTickets,omitnil" name:"MatchTickets"`
+	MatchTickets []*MatchTicket `json:"MatchTickets,omitnil,omitempty" name:"MatchTickets"`
 
 	// Error code
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	ErrCode *uint64 `json:"ErrCode,omitnil" name:"ErrCode"`
+	ErrCode *uint64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeMatchingProgressResponse struct {
@@ -802,14 +802,14 @@ func (r *DescribeMatchingProgressResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRuleRequestParams struct {
 	// RuleCode
-	RuleCode *string `json:"RuleCode,omitnil" name:"RuleCode"`
+	RuleCode *string `json:"RuleCode,omitnil,omitempty" name:"RuleCode"`
 }
 
 type DescribeRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// RuleCode
-	RuleCode *string `json:"RuleCode,omitnil" name:"RuleCode"`
+	RuleCode *string `json:"RuleCode,omitnil,omitempty" name:"RuleCode"`
 }
 
 func (r *DescribeRuleRequest) ToJsonString() string {
@@ -835,10 +835,10 @@ func (r *DescribeRuleRequest) FromJsonString(s string) error {
 type DescribeRuleResponseParams struct {
 	// Rule information
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	RuleInfo *RuleInfo `json:"RuleInfo,omitnil" name:"RuleInfo"`
+	RuleInfo *RuleInfo `json:"RuleInfo,omitnil,omitempty" name:"RuleInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRuleResponse struct {
@@ -860,38 +860,38 @@ func (r *DescribeRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRulesRequestParams struct {
 	// The current page number. The first page will be returned if this parameter is left empty.
-	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// The number of rules per page. If this parameter is left empty, 30 rules are displayed per page by default. Maximum value: 30
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Query type (optional). Valid values: match (query by matchCode or matchName), rule (query by ruleCode or ruleName), and other types (not filtered)
-	SearchType *string `json:"SearchType,omitnil" name:"SearchType"`
+	SearchType *string `json:"SearchType,omitnil,omitempty" name:"SearchType"`
 
 	// Keyword. Enter a keyword about SearchType to query.
-	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
 
 	// Tags. Enter a tag for querying.
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type DescribeRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// The current page number. The first page will be returned if this parameter is left empty.
-	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// The number of rules per page. If this parameter is left empty, 30 rules are displayed per page by default. Maximum value: 30
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Query type (optional). Valid values: match (query by matchCode or matchName), rule (query by ruleCode or ruleName), and other types (not filtered)
-	SearchType *string `json:"SearchType,omitnil" name:"SearchType"`
+	SearchType *string `json:"SearchType,omitnil,omitempty" name:"SearchType"`
 
 	// Keyword. Enter a keyword about SearchType to query.
-	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
 
 	// Tags. Enter a tag for querying.
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *DescribeRulesRequest) ToJsonString() string {
@@ -921,25 +921,25 @@ func (r *DescribeRulesRequest) FromJsonString(s string) error {
 type DescribeRulesResponseParams struct {
 	// Rule information list
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	RuleInfoList []*RuleBriefInfo `json:"RuleInfoList,omitnil" name:"RuleInfoList"`
+	RuleInfoList []*RuleBriefInfo `json:"RuleInfoList,omitnil,omitempty" name:"RuleInfoList"`
 
 	// Total number of results
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The current page number
-	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// Number of rules per page
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Query type (optional). Valid values: matchName (query by match name), matchCode (query by matchCode), ruleName (query by rule name), and tag (query by tag key/value)
-	SearchType *string `json:"SearchType,omitnil" name:"SearchType"`
+	SearchType *string `json:"SearchType,omitnil,omitempty" name:"SearchType"`
 
 	// Keyword for querying (optional)
-	Keyword *string `json:"Keyword,omitnil" name:"Keyword"`
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRulesResponse struct {
@@ -961,14 +961,14 @@ func (r *DescribeRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTokenRequestParams struct {
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 }
 
 type DescribeTokenRequest struct {
 	*tchttp.BaseRequest
 	
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 }
 
 func (r *DescribeTokenRequest) ToJsonString() string {
@@ -994,14 +994,14 @@ func (r *DescribeTokenRequest) FromJsonString(s string) error {
 type DescribeTokenResponseParams struct {
 	// The token corresponding to the current MatchCode. If the current MatchCode does not have a token, this parameter may not obtain a valid value.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	MatchToken *string `json:"MatchToken,omitnil" name:"MatchToken"`
+	MatchToken *string `json:"MatchToken,omitnil,omitempty" name:"MatchToken"`
 
 	// The time period during which GPM will continuously push the original token in seconds when the token is replaced.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	CompatibleSpan *uint64 `json:"CompatibleSpan,omitnil" name:"CompatibleSpan"`
+	CompatibleSpan *uint64 `json:"CompatibleSpan,omitnil,omitempty" name:"CompatibleSpan"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTokenResponse struct {
@@ -1022,258 +1022,258 @@ func (r *DescribeTokenResponse) FromJsonString(s string) error {
 
 type MTicket struct {
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 
 	// MatchTicket ID
-	MatchTicketId *string `json:"MatchTicketId,omitnil" name:"MatchTicketId"`
+	MatchTicketId *string `json:"MatchTicketId,omitnil,omitempty" name:"MatchTicketId"`
 }
 
 type MatchAttribute struct {
 	// Attribute name. It can contain up to 128 characters, supporting [a-zA-Z0-9-\.]*.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Attribute type. 0: number, 1: string. Default value: 0
-	Type *uint64 `json:"Type,omitnil" name:"Type"`
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Numeric attribute value. Default value: 0.0
-	NumberValue *float64 `json:"NumberValue,omitnil" name:"NumberValue"`
+	NumberValue *float64 `json:"NumberValue,omitnil,omitempty" name:"NumberValue"`
 
 	// String attribute value. Up to 128 characters are allowed. Default value: ""
-	StringValue *string `json:"StringValue,omitnil" name:"StringValue"`
+	StringValue *string `json:"StringValue,omitnil,omitempty" name:"StringValue"`
 
 	// List attribute value
-	ListValue []*string `json:"ListValue,omitnil" name:"ListValue"`
+	ListValue []*string `json:"ListValue,omitnil,omitempty" name:"ListValue"`
 
 	// Map attribute value
-	MapValue []*AttributeMap `json:"MapValue,omitnil" name:"MapValue"`
+	MapValue []*AttributeMap `json:"MapValue,omitnil,omitempty" name:"MapValue"`
 }
 
 type MatchCodeAttr struct {
 	// MatchCode
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 }
 
 type MatchInfo struct {
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 
 	// Match name
-	MatchName *string `json:"MatchName,omitnil" name:"MatchName"`
+	MatchName *string `json:"MatchName,omitnil,omitempty" name:"MatchName"`
 
 	// Matchmaking description
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	MatchDesc *string `json:"MatchDesc,omitnil" name:"MatchDesc"`
+	MatchDesc *string `json:"MatchDesc,omitnil,omitempty" name:"MatchDesc"`
 
 	// RuleCode
-	RuleCode *string `json:"RuleCode,omitnil" name:"RuleCode"`
+	RuleCode *string `json:"RuleCode,omitnil,omitempty" name:"RuleCode"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Timeout period
-	Timeout *int64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Receiving notification address
-	NotifyUrl *string `json:"NotifyUrl,omitnil" name:"NotifyUrl"`
+	NotifyUrl *string `json:"NotifyUrl,omitnil,omitempty" name:"NotifyUrl"`
 
 	// Whether to request server resources for the match results. 0: no, 1: request GSE resources
-	ServerType *int64 `json:"ServerType,omitnil" name:"ServerType"`
+	ServerType *int64 `json:"ServerType,omitnil,omitempty" name:"ServerType"`
 
 	// Region of the server queue
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	ServerRegion *string `json:"ServerRegion,omitnil" name:"ServerRegion"`
+	ServerRegion *string `json:"ServerRegion,omitnil,omitempty" name:"ServerRegion"`
 
 	// Server queue
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	ServerQueue *string `json:"ServerQueue,omitnil" name:"ServerQueue"`
+	ServerQueue *string `json:"ServerQueue,omitnil,omitempty" name:"ServerQueue"`
 
 	// Custom push data
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	CustomPushData *string `json:"CustomPushData,omitnil" name:"CustomPushData"`
+	CustomPushData *string `json:"CustomPushData,omitnil,omitempty" name:"CustomPushData"`
 
 	// Game server session data
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	ServerSessionData *string `json:"ServerSessionData,omitnil" name:"ServerSessionData"`
+	ServerSessionData *string `json:"ServerSessionData,omitnil,omitempty" name:"ServerSessionData"`
 
 	// Game attributes
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	GameProperties []*StringKV `json:"GameProperties,omitnil" name:"GameProperties"`
+	GameProperties []*StringKV `json:"GameProperties,omitnil,omitempty" name:"GameProperties"`
 
 	// Enable or disable the log. 0: disable, 1: enable
-	LogSwitch *int64 `json:"LogSwitch,omitnil" name:"LogSwitch"`
+	LogSwitch *int64 `json:"LogSwitch,omitnil,omitempty" name:"LogSwitch"`
 
 	// Logset ID
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	LogsetId *string `json:"LogsetId,omitnil" name:"LogsetId"`
+	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
 
 	// Logset name
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	LogsetName *string `json:"LogsetName,omitnil" name:"LogsetName"`
+	LogsetName *string `json:"LogsetName,omitnil,omitempty" name:"LogsetName"`
 
 	// Log topic ID
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	LogTopicId *string `json:"LogTopicId,omitnil" name:"LogTopicId"`
+	LogTopicId *string `json:"LogTopicId,omitnil,omitempty" name:"LogTopicId"`
 
 	// Log topic name
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	LogTopicName *string `json:"LogTopicName,omitnil" name:"LogTopicName"`
+	LogTopicName *string `json:"LogTopicName,omitnil,omitempty" name:"LogTopicName"`
 
 	// Tag
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Tags []*StringKV `json:"Tags,omitnil" name:"Tags"`
+	Tags []*StringKV `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Region
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// User AppId
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	AppId *string `json:"AppId,omitnil" name:"AppId"`
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// User root account UIN
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Uin *string `json:"Uin,omitnil" name:"Uin"`
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
 
 	// Create user account UIN
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	CreateUin *string `json:"CreateUin,omitnil" name:"CreateUin"`
+	CreateUin *string `json:"CreateUin,omitnil,omitempty" name:"CreateUin"`
 
 	// Rule Name
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	RuleName *string `json:"RuleName,omitnil" name:"RuleName"`
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
 	// Log status. 0: normal, 1: the log set does not exist, 2: the log topic does not exist, 3: neither the log set nor the log topic exists.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	LogStatus *int64 `json:"LogStatus,omitnil" name:"LogStatus"`
+	LogStatus *int64 `json:"LogStatus,omitnil,omitempty" name:"LogStatus"`
 }
 
 type MatchTicket struct {
 	// MatchTicket ID. It can contain up to 128 characters, supporting [a-zA-Z0-9-\.]*.
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 
 	// Different structure serialized results will be returned according to the MatchType.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	MatchResult *string `json:"MatchResult,omitnil" name:"MatchResult"`
+	MatchResult *string `json:"MatchResult,omitnil,omitempty" name:"MatchResult"`
 
 	// Matchmaking type. Valid values: NORMAL, GSE
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	MatchType *string `json:"MatchType,omitnil" name:"MatchType"`
+	MatchType *string `json:"MatchType,omitnil,omitempty" name:"MatchType"`
 
 	// Player information list
-	Players []*Player `json:"Players,omitnil" name:"Players"`
+	Players []*Player `json:"Players,omitnil,omitempty" name:"Players"`
 
 	// Matching status. Valid values: SEARCHING (matching), PLACING (pending match), COMPLETED (match completed), CANCELLED (match cancelled), TIMEDOUT (match timeouts), FAILED (match failed)
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Matching status descriptions
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	StatusMessage *string `json:"StatusMessage,omitnil" name:"StatusMessage"`
+	StatusMessage *string `json:"StatusMessage,omitnil,omitempty" name:"StatusMessage"`
 
 	// Reason for the matching status
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	StatusReason *string `json:"StatusReason,omitnil" name:"StatusReason"`
+	StatusReason *string `json:"StatusReason,omitnil,omitempty" name:"StatusReason"`
 
 	// The time when the GPM received the matchmaking request, for example "2020-08-17T08:14:38.077Z".
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The time when the matchmaking request stopped executing due to the completion, failure, timeout, or cancellation, for example "2020-08-17T08:14:38.077Z".
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 // Predefined struct for user
 type ModifyMatchRequestParams struct {
 	// Match name. It can contain up to 128 bytes, supporting [a-zA-Z0-9-\.]*.
-	MatchName *string `json:"MatchName,omitnil" name:"MatchName"`
+	MatchName *string `json:"MatchName,omitnil,omitempty" name:"MatchName"`
 
 	// RuleCode
-	RuleCode *string `json:"RuleCode,omitnil" name:"RuleCode"`
+	RuleCode *string `json:"RuleCode,omitnil,omitempty" name:"RuleCode"`
 
 	// Timeout period in seconds. Value range: 1 600
-	Timeout *int64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Whether to request server resources for the matchmaking results. 0: no, 1: request GSE resources
-	ServerType *int64 `json:"ServerType,omitnil" name:"ServerType"`
+	ServerType *int64 `json:"ServerType,omitnil,omitempty" name:"ServerType"`
 
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 
 	// Matchmaking description. Up to 1024 bytes are allowed.
-	MatchDesc *string `json:"MatchDesc,omitnil" name:"MatchDesc"`
+	MatchDesc *string `json:"MatchDesc,omitnil,omitempty" name:"MatchDesc"`
 
 	// Only HTTP and HTTPS protocols are supported.
-	NotifyUrl *string `json:"NotifyUrl,omitnil" name:"NotifyUrl"`
+	NotifyUrl *string `json:"NotifyUrl,omitnil,omitempty" name:"NotifyUrl"`
 
 	// Region of the game server queue
-	ServerRegion *string `json:"ServerRegion,omitnil" name:"ServerRegion"`
+	ServerRegion *string `json:"ServerRegion,omitnil,omitempty" name:"ServerRegion"`
 
 	// Game server queue
-	ServerQueue *string `json:"ServerQueue,omitnil" name:"ServerQueue"`
+	ServerQueue *string `json:"ServerQueue,omitnil,omitempty" name:"ServerQueue"`
 
 	// Custom push data
-	CustomPushData *string `json:"CustomPushData,omitnil" name:"CustomPushData"`
+	CustomPushData *string `json:"CustomPushData,omitnil,omitempty" name:"CustomPushData"`
 
 	// Game server session data
-	ServerSessionData *string `json:"ServerSessionData,omitnil" name:"ServerSessionData"`
+	ServerSessionData *string `json:"ServerSessionData,omitnil,omitempty" name:"ServerSessionData"`
 
 	// Game attribute. It is an array of key-value structure.
-	GameProperties []*StringKV `json:"GameProperties,omitnil" name:"GameProperties"`
+	GameProperties []*StringKV `json:"GameProperties,omitnil,omitempty" name:"GameProperties"`
 
 	// Enable or disable the log. 0: disable, 1: enable
-	LogSwitch *int64 `json:"LogSwitch,omitnil" name:"LogSwitch"`
+	LogSwitch *int64 `json:"LogSwitch,omitnil,omitempty" name:"LogSwitch"`
 
 	// Tag. It is an array of key-value structure.
-	Tags []*StringKV `json:"Tags,omitnil" name:"Tags"`
+	Tags []*StringKV `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type ModifyMatchRequest struct {
 	*tchttp.BaseRequest
 	
 	// Match name. It can contain up to 128 bytes, supporting [a-zA-Z0-9-\.]*.
-	MatchName *string `json:"MatchName,omitnil" name:"MatchName"`
+	MatchName *string `json:"MatchName,omitnil,omitempty" name:"MatchName"`
 
 	// RuleCode
-	RuleCode *string `json:"RuleCode,omitnil" name:"RuleCode"`
+	RuleCode *string `json:"RuleCode,omitnil,omitempty" name:"RuleCode"`
 
 	// Timeout period in seconds. Value range: 1 600
-	Timeout *int64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Whether to request server resources for the matchmaking results. 0: no, 1: request GSE resources
-	ServerType *int64 `json:"ServerType,omitnil" name:"ServerType"`
+	ServerType *int64 `json:"ServerType,omitnil,omitempty" name:"ServerType"`
 
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 
 	// Matchmaking description. Up to 1024 bytes are allowed.
-	MatchDesc *string `json:"MatchDesc,omitnil" name:"MatchDesc"`
+	MatchDesc *string `json:"MatchDesc,omitnil,omitempty" name:"MatchDesc"`
 
 	// Only HTTP and HTTPS protocols are supported.
-	NotifyUrl *string `json:"NotifyUrl,omitnil" name:"NotifyUrl"`
+	NotifyUrl *string `json:"NotifyUrl,omitnil,omitempty" name:"NotifyUrl"`
 
 	// Region of the game server queue
-	ServerRegion *string `json:"ServerRegion,omitnil" name:"ServerRegion"`
+	ServerRegion *string `json:"ServerRegion,omitnil,omitempty" name:"ServerRegion"`
 
 	// Game server queue
-	ServerQueue *string `json:"ServerQueue,omitnil" name:"ServerQueue"`
+	ServerQueue *string `json:"ServerQueue,omitnil,omitempty" name:"ServerQueue"`
 
 	// Custom push data
-	CustomPushData *string `json:"CustomPushData,omitnil" name:"CustomPushData"`
+	CustomPushData *string `json:"CustomPushData,omitnil,omitempty" name:"CustomPushData"`
 
 	// Game server session data
-	ServerSessionData *string `json:"ServerSessionData,omitnil" name:"ServerSessionData"`
+	ServerSessionData *string `json:"ServerSessionData,omitnil,omitempty" name:"ServerSessionData"`
 
 	// Game attribute. It is an array of key-value structure.
-	GameProperties []*StringKV `json:"GameProperties,omitnil" name:"GameProperties"`
+	GameProperties []*StringKV `json:"GameProperties,omitnil,omitempty" name:"GameProperties"`
 
 	// Enable or disable the log. 0: disable, 1: enable
-	LogSwitch *int64 `json:"LogSwitch,omitnil" name:"LogSwitch"`
+	LogSwitch *int64 `json:"LogSwitch,omitnil,omitempty" name:"LogSwitch"`
 
 	// Tag. It is an array of key-value structure.
-	Tags []*StringKV `json:"Tags,omitnil" name:"Tags"`
+	Tags []*StringKV `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *ModifyMatchRequest) ToJsonString() string {
@@ -1311,10 +1311,10 @@ func (r *ModifyMatchRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyMatchResponseParams struct {
 	// Matchmaking information
-	MatchInfo *MatchInfo `json:"MatchInfo,omitnil" name:"MatchInfo"`
+	MatchInfo *MatchInfo `json:"MatchInfo,omitnil,omitempty" name:"MatchInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyMatchResponse struct {
@@ -1336,32 +1336,32 @@ func (r *ModifyMatchResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyRuleRequestParams struct {
 	// RuleCode
-	RuleCode *string `json:"RuleCode,omitnil" name:"RuleCode"`
+	RuleCode *string `json:"RuleCode,omitnil,omitempty" name:"RuleCode"`
 
 	// Rule name. It can only contain numbers, letters, ".", and "-".
-	RuleName *string `json:"RuleName,omitnil" name:"RuleName"`
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
 	// Rule description. Up to 1024 bytes are allowed.
-	RuleDesc *string `json:"RuleDesc,omitnil" name:"RuleDesc"`
+	RuleDesc *string `json:"RuleDesc,omitnil,omitempty" name:"RuleDesc"`
 
 	// Tag. It is an array of key-value structure. Up to 50 tags can be associated.
-	Tags []*StringKV `json:"Tags,omitnil" name:"Tags"`
+	Tags []*StringKV `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type ModifyRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// RuleCode
-	RuleCode *string `json:"RuleCode,omitnil" name:"RuleCode"`
+	RuleCode *string `json:"RuleCode,omitnil,omitempty" name:"RuleCode"`
 
 	// Rule name. It can only contain numbers, letters, ".", and "-".
-	RuleName *string `json:"RuleName,omitnil" name:"RuleName"`
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
 	// Rule description. Up to 1024 bytes are allowed.
-	RuleDesc *string `json:"RuleDesc,omitnil" name:"RuleDesc"`
+	RuleDesc *string `json:"RuleDesc,omitnil,omitempty" name:"RuleDesc"`
 
 	// Tag. It is an array of key-value structure. Up to 50 tags can be associated.
-	Tags []*StringKV `json:"Tags,omitnil" name:"Tags"`
+	Tags []*StringKV `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *ModifyRuleRequest) ToJsonString() string {
@@ -1389,10 +1389,10 @@ func (r *ModifyRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyRuleResponseParams struct {
 	// Rule information
-	RuleInfo *RuleInfo `json:"RuleInfo,omitnil" name:"RuleInfo"`
+	RuleInfo *RuleInfo `json:"RuleInfo,omitnil,omitempty" name:"RuleInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyRuleResponse struct {
@@ -1414,26 +1414,26 @@ func (r *ModifyRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyTokenRequestParams struct {
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 
 	// The time period during which GPM will continuously push the original token in seconds to the user when the token is replaced. Value range: 0 - 1800. Within the CompatibleSpan time period, user will receive the current and original token in the event notification.
-	CompatibleSpan *uint64 `json:"CompatibleSpan,omitnil" name:"CompatibleSpan"`
+	CompatibleSpan *uint64 `json:"CompatibleSpan,omitnil,omitempty" name:"CompatibleSpan"`
 
 	// Token. It can contain 0 - 64 characters, supporting [a-zA-Z0-9-_.]. If this parameter is left empty, the token will be randomly generated by GPM.
-	MatchToken *string `json:"MatchToken,omitnil" name:"MatchToken"`
+	MatchToken *string `json:"MatchToken,omitnil,omitempty" name:"MatchToken"`
 }
 
 type ModifyTokenRequest struct {
 	*tchttp.BaseRequest
 	
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 
 	// The time period during which GPM will continuously push the original token in seconds to the user when the token is replaced. Value range: 0 - 1800. Within the CompatibleSpan time period, user will receive the current and original token in the event notification.
-	CompatibleSpan *uint64 `json:"CompatibleSpan,omitnil" name:"CompatibleSpan"`
+	CompatibleSpan *uint64 `json:"CompatibleSpan,omitnil,omitempty" name:"CompatibleSpan"`
 
 	// Token. It can contain 0 - 64 characters, supporting [a-zA-Z0-9-_.]. If this parameter is left empty, the token will be randomly generated by GPM.
-	MatchToken *string `json:"MatchToken,omitnil" name:"MatchToken"`
+	MatchToken *string `json:"MatchToken,omitnil,omitempty" name:"MatchToken"`
 }
 
 func (r *ModifyTokenRequest) ToJsonString() string {
@@ -1460,14 +1460,14 @@ func (r *ModifyTokenRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyTokenResponseParams struct {
 	// Token that has been set successfully.
-	MatchToken *string `json:"MatchToken,omitnil" name:"MatchToken"`
+	MatchToken *string `json:"MatchToken,omitnil,omitempty" name:"MatchToken"`
 
 	// The time period during which GPM will continuously push the original token in seconds to the user when the token is replaced.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	CompatibleSpan *uint64 `json:"CompatibleSpan,omitnil" name:"CompatibleSpan"`
+	CompatibleSpan *uint64 `json:"CompatibleSpan,omitnil,omitempty" name:"CompatibleSpan"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyTokenResponse struct {
@@ -1488,25 +1488,25 @@ func (r *ModifyTokenResponse) FromJsonString(s string) error {
 
 type Player struct {
 	// Player ID. It can contain up to 128 characters, supporting [a-zA-Z\d-\._]*.
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Player nickname. Up to 128 characters are allowed.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Player attribute for matching. Up to 10 attributes are supported.
-	MatchAttributes []*MatchAttribute `json:"MatchAttributes,omitnil" name:"MatchAttributes"`
+	MatchAttributes []*MatchAttribute `json:"MatchAttributes,omitnil,omitempty" name:"MatchAttributes"`
 
 	// Team name. A player can pass in a different team name, which can contain up to 128 characters, and support [a-zA-Z0-9-\.]*.
-	Team *string `json:"Team,omitnil" name:"Team"`
+	Team *string `json:"Team,omitnil,omitempty" name:"Team"`
 
 	// Custom player status. This parameter will be passed through. Value range: [0, 99999]
-	CustomPlayerStatus *uint64 `json:"CustomPlayerStatus,omitnil" name:"CustomPlayerStatus"`
+	CustomPlayerStatus *uint64 `json:"CustomPlayerStatus,omitnil,omitempty" name:"CustomPlayerStatus"`
 
 	// Custom player information. Up to 1024 characters are allowed. This parameter will be passed through.
-	CustomProfile *string `json:"CustomProfile,omitnil" name:"CustomProfile"`
+	CustomProfile *string `json:"CustomProfile,omitnil,omitempty" name:"CustomProfile"`
 
 	// Number of delays in each area. Up to 20 delays are supported.
-	RegionLatencies []*RegionLatency `json:"RegionLatencies,omitnil" name:"RegionLatencies"`
+	RegionLatencies []*RegionLatency `json:"RegionLatencies,omitnil,omitempty" name:"RegionLatencies"`
 }
 
 type RegionLatency struct {
@@ -1526,134 +1526,134 @@ type RegionLatency struct {
 	// ap-bangkok           Asia Pacific (Bangkok)
 	// eu-moscow           Europe (Moscow)
 	// ap-tokyo           Asia Pacific (Tokyo)
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Delay time in ms. Value range: 0 - 999999
-	Latency *uint64 `json:"Latency,omitnil" name:"Latency"`
+	Latency *uint64 `json:"Latency,omitnil,omitempty" name:"Latency"`
 }
 
 type ReportOverviewData struct {
 	// Total count
-	TotalTimes *string `json:"TotalTimes,omitnil" name:"TotalTimes"`
+	TotalTimes *string `json:"TotalTimes,omitnil,omitempty" name:"TotalTimes"`
 
 	// Success rate
-	SuccessPercent *float64 `json:"SuccessPercent,omitnil" name:"SuccessPercent"`
+	SuccessPercent *float64 `json:"SuccessPercent,omitnil,omitempty" name:"SuccessPercent"`
 
 	// Timeout rate
-	TimeoutPercent *float64 `json:"TimeoutPercent,omitnil" name:"TimeoutPercent"`
+	TimeoutPercent *float64 `json:"TimeoutPercent,omitnil,omitempty" name:"TimeoutPercent"`
 
 	// Failure rate
-	FailPercent *float64 `json:"FailPercent,omitnil" name:"FailPercent"`
+	FailPercent *float64 `json:"FailPercent,omitnil,omitempty" name:"FailPercent"`
 
 	// Average matching time
-	AverageSec *float64 `json:"AverageSec,omitnil" name:"AverageSec"`
+	AverageSec *float64 `json:"AverageSec,omitnil,omitempty" name:"AverageSec"`
 }
 
 type ReportTrendData struct {
 	// Total count
-	TotalList []*string `json:"TotalList,omitnil" name:"TotalList"`
+	TotalList []*string `json:"TotalList,omitnil,omitempty" name:"TotalList"`
 
 	// Number of requests cancelled
-	CancelList []*string `json:"CancelList,omitnil" name:"CancelList"`
+	CancelList []*string `json:"CancelList,omitnil,omitempty" name:"CancelList"`
 
 	// Number of successes
-	SuccessList []*string `json:"SuccessList,omitnil" name:"SuccessList"`
+	SuccessList []*string `json:"SuccessList,omitnil,omitempty" name:"SuccessList"`
 
 	// Number of failures
-	FailList []*string `json:"FailList,omitnil" name:"FailList"`
+	FailList []*string `json:"FailList,omitnil,omitempty" name:"FailList"`
 
 	// Number of request timeout
-	TimeoutList []*string `json:"TimeoutList,omitnil" name:"TimeoutList"`
+	TimeoutList []*string `json:"TimeoutList,omitnil,omitempty" name:"TimeoutList"`
 
 	// Time array in seconds
-	TimeList []*string `json:"TimeList,omitnil" name:"TimeList"`
+	TimeList []*string `json:"TimeList,omitnil,omitempty" name:"TimeList"`
 }
 
 type RuleBriefInfo struct {
 	// Rule name. It supports [a-zA-Z\d-\.]*.
-	RuleName *string `json:"RuleName,omitnil" name:"RuleName"`
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
 	// The associated match
-	MatchCodeList []*StringKV `json:"MatchCodeList,omitnil" name:"MatchCodeList"`
+	MatchCodeList []*StringKV `json:"MatchCodeList,omitnil,omitempty" name:"MatchCodeList"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// RuleCode
-	RuleCode *string `json:"RuleCode,omitnil" name:"RuleCode"`
+	RuleCode *string `json:"RuleCode,omitnil,omitempty" name:"RuleCode"`
 }
 
 type RuleInfo struct {
 	// Rule name. It supports [a-zA-Z0-9-\.]*.
-	RuleName *string `json:"RuleName,omitnil" name:"RuleName"`
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Rule description
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	RuleDesc *string `json:"RuleDesc,omitnil" name:"RuleDesc"`
+	RuleDesc *string `json:"RuleDesc,omitnil,omitempty" name:"RuleDesc"`
 
 	// Rule script
-	RuleScript *string `json:"RuleScript,omitnil" name:"RuleScript"`
+	RuleScript *string `json:"RuleScript,omitnil,omitempty" name:"RuleScript"`
 
 	// Tag
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Tags []*StringKV `json:"Tags,omitnil" name:"Tags"`
+	Tags []*StringKV `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// The associated match
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	MatchCodeList []*StringKV `json:"MatchCodeList,omitnil" name:"MatchCodeList"`
+	MatchCodeList []*StringKV `json:"MatchCodeList,omitnil,omitempty" name:"MatchCodeList"`
 
 	// RuleCode
-	RuleCode *string `json:"RuleCode,omitnil" name:"RuleCode"`
+	RuleCode *string `json:"RuleCode,omitnil,omitempty" name:"RuleCode"`
 
 	// Region
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// User AppId
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	AppId *string `json:"AppId,omitnil" name:"AppId"`
+	AppId *string `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// User UIN
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Uin *string `json:"Uin,omitnil" name:"Uin"`
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
 
 	// User OwnerUin
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	CreateUin *string `json:"CreateUin,omitnil" name:"CreateUin"`
+	CreateUin *string `json:"CreateUin,omitnil,omitempty" name:"CreateUin"`
 }
 
 // Predefined struct for user
 type StartMatchingBackfillRequestParams struct {
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 
 	// Player information
-	Players []*Player `json:"Players,omitnil" name:"Players"`
+	Players []*Player `json:"Players,omitnil,omitempty" name:"Players"`
 
 	// Game server session ID. It should contain 1 to 256 ASCII characters.
-	GameServerSessionId *string `json:"GameServerSessionId,omitnil" name:"GameServerSessionId"`
+	GameServerSessionId *string `json:"GameServerSessionId,omitnil,omitempty" name:"GameServerSessionId"`
 
 	// MatchTicket ID, which can contain 1 to 128 characters. This parameter is left empty by default, and in this case, MatchTicket ID will be automatically generated by GPM.
-	MatchTicketId *string `json:"MatchTicketId,omitnil" name:"MatchTicketId"`
+	MatchTicketId *string `json:"MatchTicketId,omitnil,omitempty" name:"MatchTicketId"`
 }
 
 type StartMatchingBackfillRequest struct {
 	*tchttp.BaseRequest
 	
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 
 	// Player information
-	Players []*Player `json:"Players,omitnil" name:"Players"`
+	Players []*Player `json:"Players,omitnil,omitempty" name:"Players"`
 
 	// Game server session ID. It should contain 1 to 256 ASCII characters.
-	GameServerSessionId *string `json:"GameServerSessionId,omitnil" name:"GameServerSessionId"`
+	GameServerSessionId *string `json:"GameServerSessionId,omitnil,omitempty" name:"GameServerSessionId"`
 
 	// MatchTicket ID, which can contain 1 to 128 characters. This parameter is left empty by default, and in this case, MatchTicket ID will be automatically generated by GPM.
-	MatchTicketId *string `json:"MatchTicketId,omitnil" name:"MatchTicketId"`
+	MatchTicketId *string `json:"MatchTicketId,omitnil,omitempty" name:"MatchTicketId"`
 }
 
 func (r *StartMatchingBackfillRequest) ToJsonString() string {
@@ -1682,10 +1682,10 @@ func (r *StartMatchingBackfillRequest) FromJsonString(s string) error {
 type StartMatchingBackfillResponseParams struct {
 	// MatchTicket
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	MatchTicket *MatchTicket `json:"MatchTicket,omitnil" name:"MatchTicket"`
+	MatchTicket *MatchTicket `json:"MatchTicket,omitnil,omitempty" name:"MatchTicket"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StartMatchingBackfillResponse struct {
@@ -1707,26 +1707,26 @@ func (r *StartMatchingBackfillResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type StartMatchingRequestParams struct {
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 
 	// Player information. Up to 200 entries can be entered.
-	Players []*Player `json:"Players,omitnil" name:"Players"`
+	Players []*Player `json:"Players,omitnil,omitempty" name:"Players"`
 
 	// MatchTicket ID, which can contain up to 128 characters and can only contain numbers, letters, “.”, and “-”. This parameter is left empty by default. When it is empty, the MatchTicket ID will be automatically generated by GPM.
-	MatchTicketId *string `json:"MatchTicketId,omitnil" name:"MatchTicketId"`
+	MatchTicketId *string `json:"MatchTicketId,omitnil,omitempty" name:"MatchTicketId"`
 }
 
 type StartMatchingRequest struct {
 	*tchttp.BaseRequest
 	
 	// MatchCode
-	MatchCode *string `json:"MatchCode,omitnil" name:"MatchCode"`
+	MatchCode *string `json:"MatchCode,omitnil,omitempty" name:"MatchCode"`
 
 	// Player information. Up to 200 entries can be entered.
-	Players []*Player `json:"Players,omitnil" name:"Players"`
+	Players []*Player `json:"Players,omitnil,omitempty" name:"Players"`
 
 	// MatchTicket ID, which can contain up to 128 characters and can only contain numbers, letters, “.”, and “-”. This parameter is left empty by default. When it is empty, the MatchTicket ID will be automatically generated by GPM.
-	MatchTicketId *string `json:"MatchTicketId,omitnil" name:"MatchTicketId"`
+	MatchTicketId *string `json:"MatchTicketId,omitnil,omitempty" name:"MatchTicketId"`
 }
 
 func (r *StartMatchingRequest) ToJsonString() string {
@@ -1753,13 +1753,13 @@ func (r *StartMatchingRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StartMatchingResponseParams struct {
 	// Error code
-	ErrCode *uint64 `json:"ErrCode,omitnil" name:"ErrCode"`
+	ErrCode *uint64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
 	// MatchTicket ID. Up to 128 characters are allowed.
-	MatchTicketId *string `json:"MatchTicketId,omitnil" name:"MatchTicketId"`
+	MatchTicketId *string `json:"MatchTicketId,omitnil,omitempty" name:"MatchTicketId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StartMatchingResponse struct {
@@ -1780,16 +1780,16 @@ func (r *StartMatchingResponse) FromJsonString(s string) error {
 
 type StringKV struct {
 	// Key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Value
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type Tag struct {
 	// Tag key
-	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
 	// Tag value
-	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
+	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
 }

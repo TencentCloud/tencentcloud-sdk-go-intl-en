@@ -22,35 +22,35 @@ import (
 
 type Account struct {
 	// Account name
-	User *string `json:"User,omitnil" name:"User"`
+	User *string `json:"User,omitnil,omitempty" name:"User"`
 
 	// Host address
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 }
 
 // Predefined struct for user
 type AssociateSecurityGroupsRequestParams struct {
 	// Database engine name. Valid value: `mariadb`.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// ID of the security group to be associated in the format of sg-efil73jd.
-	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
 	// ID(s) of the instance(s) to be associated in the format of tdsql-lesecurk. You can specify multiple instances.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type AssociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Database engine name. Valid value: `mariadb`.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// ID of the security group to be associated in the format of sg-efil73jd.
-	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
 	// ID(s) of the instance(s) to be associated in the format of tdsql-lesecurk. You can specify multiple instances.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *AssociateSecurityGroupsRequest) ToJsonString() string {
@@ -77,7 +77,7 @@ func (r *AssociateSecurityGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AssociateSecurityGroupsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type AssociateSecurityGroupsResponse struct {
@@ -99,14 +99,14 @@ func (r *AssociateSecurityGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CancelDcnJobRequestParams struct {
 	// Disaster recovery instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type CancelDcnJobRequest struct {
 	*tchttp.BaseRequest
 	
 	// Disaster recovery instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *CancelDcnJobRequest) ToJsonString() string {
@@ -131,10 +131,10 @@ func (r *CancelDcnJobRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CancelDcnJobResponseParams struct {
 	// Task ID
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CancelDcnJobResponse struct {
@@ -156,44 +156,44 @@ func (r *CancelDcnJobResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CloneAccountRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Source user account name
-	SrcUser *string `json:"SrcUser,omitnil" name:"SrcUser"`
+	SrcUser *string `json:"SrcUser,omitnil,omitempty" name:"SrcUser"`
 
 	// Source user host
-	SrcHost *string `json:"SrcHost,omitnil" name:"SrcHost"`
+	SrcHost *string `json:"SrcHost,omitnil,omitempty" name:"SrcHost"`
 
 	// Target user account name
-	DstUser *string `json:"DstUser,omitnil" name:"DstUser"`
+	DstUser *string `json:"DstUser,omitnil,omitempty" name:"DstUser"`
 
 	// Target user host
-	DstHost *string `json:"DstHost,omitnil" name:"DstHost"`
+	DstHost *string `json:"DstHost,omitnil,omitempty" name:"DstHost"`
 
 	// Target account description
-	DstDesc *string `json:"DstDesc,omitnil" name:"DstDesc"`
+	DstDesc *string `json:"DstDesc,omitnil,omitempty" name:"DstDesc"`
 }
 
 type CloneAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Source user account name
-	SrcUser *string `json:"SrcUser,omitnil" name:"SrcUser"`
+	SrcUser *string `json:"SrcUser,omitnil,omitempty" name:"SrcUser"`
 
 	// Source user host
-	SrcHost *string `json:"SrcHost,omitnil" name:"SrcHost"`
+	SrcHost *string `json:"SrcHost,omitnil,omitempty" name:"SrcHost"`
 
 	// Target user account name
-	DstUser *string `json:"DstUser,omitnil" name:"DstUser"`
+	DstUser *string `json:"DstUser,omitnil,omitempty" name:"DstUser"`
 
 	// Target user host
-	DstHost *string `json:"DstHost,omitnil" name:"DstHost"`
+	DstHost *string `json:"DstHost,omitnil,omitempty" name:"DstHost"`
 
 	// Target account description
-	DstDesc *string `json:"DstDesc,omitnil" name:"DstDesc"`
+	DstDesc *string `json:"DstDesc,omitnil,omitempty" name:"DstDesc"`
 }
 
 func (r *CloneAccountRequest) ToJsonString() string {
@@ -223,10 +223,10 @@ func (r *CloneAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CloneAccountResponseParams struct {
 	// Async task flow ID.
-	FlowId *uint64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *uint64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CloneAccountResponse struct {
@@ -248,20 +248,20 @@ func (r *CloneAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CloseDBExtranetAccessRequestParams struct {
 	// ID of instance for which to disable public network access. The ID is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Whether IPv6 is used. Default value: 0
-	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil,omitempty" name:"Ipv6Flag"`
 }
 
 type CloseDBExtranetAccessRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of instance for which to disable public network access. The ID is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Whether IPv6 is used. Default value: 0
-	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil,omitempty" name:"Ipv6Flag"`
 }
 
 func (r *CloseDBExtranetAccessRequest) ToJsonString() string {
@@ -287,10 +287,10 @@ func (r *CloseDBExtranetAccessRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CloseDBExtranetAccessResponseParams struct {
 	// Async task ID. The task status can be queried through the `DescribeFlow` API.
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CloseDBExtranetAccessResponse struct {
@@ -311,73 +311,73 @@ func (r *CloseDBExtranetAccessResponse) FromJsonString(s string) error {
 
 type ColumnPrivilege struct {
 	// Database name
-	Database *string `json:"Database,omitnil" name:"Database"`
+	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 
 	// Table name
-	Table *string `json:"Table,omitnil" name:"Table"`
+	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
 
 	// Column name
-	Column *string `json:"Column,omitnil" name:"Column"`
+	Column *string `json:"Column,omitnil,omitempty" name:"Column"`
 
 	// Permission information
-	Privileges []*string `json:"Privileges,omitnil" name:"Privileges"`
+	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
 }
 
 type ConstraintRange struct {
 	// Minimum value when the constraint type is `section`
-	Min *string `json:"Min,omitnil" name:"Min"`
+	Min *string `json:"Min,omitnil,omitempty" name:"Min"`
 
 	// Maximum value when the constraint type is `section`
-	Max *string `json:"Max,omitnil" name:"Max"`
+	Max *string `json:"Max,omitnil,omitempty" name:"Max"`
 }
 
 // Predefined struct for user
 type CopyAccountPrivilegesRequestParams struct {
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Source username
-	SrcUserName *string `json:"SrcUserName,omitnil" name:"SrcUserName"`
+	SrcUserName *string `json:"SrcUserName,omitnil,omitempty" name:"SrcUserName"`
 
 	// Access host allowed for source user
-	SrcHost *string `json:"SrcHost,omitnil" name:"SrcHost"`
+	SrcHost *string `json:"SrcHost,omitnil,omitempty" name:"SrcHost"`
 
 	// Target username
-	DstUserName *string `json:"DstUserName,omitnil" name:"DstUserName"`
+	DstUserName *string `json:"DstUserName,omitnil,omitempty" name:"DstUserName"`
 
 	// Access host allowed for target user
-	DstHost *string `json:"DstHost,omitnil" name:"DstHost"`
+	DstHost *string `json:"DstHost,omitnil,omitempty" name:"DstHost"`
 
 	// `ReadOnly` attribute of source account
-	SrcReadOnly *string `json:"SrcReadOnly,omitnil" name:"SrcReadOnly"`
+	SrcReadOnly *string `json:"SrcReadOnly,omitnil,omitempty" name:"SrcReadOnly"`
 
 	// `ReadOnly` attribute of target account
-	DstReadOnly *string `json:"DstReadOnly,omitnil" name:"DstReadOnly"`
+	DstReadOnly *string `json:"DstReadOnly,omitnil,omitempty" name:"DstReadOnly"`
 }
 
 type CopyAccountPrivilegesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Source username
-	SrcUserName *string `json:"SrcUserName,omitnil" name:"SrcUserName"`
+	SrcUserName *string `json:"SrcUserName,omitnil,omitempty" name:"SrcUserName"`
 
 	// Access host allowed for source user
-	SrcHost *string `json:"SrcHost,omitnil" name:"SrcHost"`
+	SrcHost *string `json:"SrcHost,omitnil,omitempty" name:"SrcHost"`
 
 	// Target username
-	DstUserName *string `json:"DstUserName,omitnil" name:"DstUserName"`
+	DstUserName *string `json:"DstUserName,omitnil,omitempty" name:"DstUserName"`
 
 	// Access host allowed for target user
-	DstHost *string `json:"DstHost,omitnil" name:"DstHost"`
+	DstHost *string `json:"DstHost,omitnil,omitempty" name:"DstHost"`
 
 	// `ReadOnly` attribute of source account
-	SrcReadOnly *string `json:"SrcReadOnly,omitnil" name:"SrcReadOnly"`
+	SrcReadOnly *string `json:"SrcReadOnly,omitnil,omitempty" name:"SrcReadOnly"`
 
 	// `ReadOnly` attribute of target account
-	DstReadOnly *string `json:"DstReadOnly,omitnil" name:"DstReadOnly"`
+	DstReadOnly *string `json:"DstReadOnly,omitnil,omitempty" name:"DstReadOnly"`
 }
 
 func (r *CopyAccountPrivilegesRequest) ToJsonString() string {
@@ -408,7 +408,7 @@ func (r *CopyAccountPrivilegesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CopyAccountPrivilegesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CopyAccountPrivilegesResponse struct {
@@ -430,62 +430,62 @@ func (r *CopyAccountPrivilegesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAccountRequestParams struct {
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Login username, which can contain 1-32 letters, digits, underscores, and hyphens.
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Host that can be logged in to, which is in the same format as the host of the MySQL account and supports wildcards, such as %, 10.%, and 10.20.%.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Account password. It must contain 8-32 characters in all of the following four types: lowercase letters, uppercase letters, digits, and symbols (()~!@#$%^&*-+=_|{}[]:<>,.?/), and cannot start with a slash (/).
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// Whether to create a read-only account. 0: no; 1: for the account's SQL requests, the secondary will be used first, and if it is unavailable, the primary will be used; 2: the secondary will be used first, and if it is unavailable, the operation will fail.
-	ReadOnly *int64 `json:"ReadOnly,omitnil" name:"ReadOnly"`
+	ReadOnly *int64 `json:"ReadOnly,omitnil,omitempty" name:"ReadOnly"`
 
 	// Account remarks, which can contain 0-256 letters, digits, and common symbols.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Determines whether the secondary is unavailable based on the passed-in time
-	DelayThresh *int64 `json:"DelayThresh,omitnil" name:"DelayThresh"`
+	DelayThresh *int64 `json:"DelayThresh,omitnil,omitempty" name:"DelayThresh"`
 
 	// Whether to specify a replica server for read-only account. Valid values: `0` (No replica server is specified, which means that the proxy will select another available replica server to keep connection with the client if the current replica server doesn’t meet the requirement). `1` (The replica server is specified, which means that the connection will be disconnected if the specified replica server doesn’t meet the requirement.)
-	SlaveConst *int64 `json:"SlaveConst,omitnil" name:"SlaveConst"`
+	SlaveConst *int64 `json:"SlaveConst,omitnil,omitempty" name:"SlaveConst"`
 
 	// Maximum number of connections. If left empty or `0` is passed in, the connections will be unlimited. This parameter configuration is not supported for kernel version 10.1.
-	MaxUserConnections *uint64 `json:"MaxUserConnections,omitnil" name:"MaxUserConnections"`
+	MaxUserConnections *uint64 `json:"MaxUserConnections,omitnil,omitempty" name:"MaxUserConnections"`
 }
 
 type CreateAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Login username, which can contain 1-32 letters, digits, underscores, and hyphens.
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Host that can be logged in to, which is in the same format as the host of the MySQL account and supports wildcards, such as %, 10.%, and 10.20.%.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Account password. It must contain 8-32 characters in all of the following four types: lowercase letters, uppercase letters, digits, and symbols (()~!@#$%^&*-+=_|{}[]:<>,.?/), and cannot start with a slash (/).
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// Whether to create a read-only account. 0: no; 1: for the account's SQL requests, the secondary will be used first, and if it is unavailable, the primary will be used; 2: the secondary will be used first, and if it is unavailable, the operation will fail.
-	ReadOnly *int64 `json:"ReadOnly,omitnil" name:"ReadOnly"`
+	ReadOnly *int64 `json:"ReadOnly,omitnil,omitempty" name:"ReadOnly"`
 
 	// Account remarks, which can contain 0-256 letters, digits, and common symbols.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Determines whether the secondary is unavailable based on the passed-in time
-	DelayThresh *int64 `json:"DelayThresh,omitnil" name:"DelayThresh"`
+	DelayThresh *int64 `json:"DelayThresh,omitnil,omitempty" name:"DelayThresh"`
 
 	// Whether to specify a replica server for read-only account. Valid values: `0` (No replica server is specified, which means that the proxy will select another available replica server to keep connection with the client if the current replica server doesn’t meet the requirement). `1` (The replica server is specified, which means that the connection will be disconnected if the specified replica server doesn’t meet the requirement.)
-	SlaveConst *int64 `json:"SlaveConst,omitnil" name:"SlaveConst"`
+	SlaveConst *int64 `json:"SlaveConst,omitnil,omitempty" name:"SlaveConst"`
 
 	// Maximum number of connections. If left empty or `0` is passed in, the connections will be unlimited. This parameter configuration is not supported for kernel version 10.1.
-	MaxUserConnections *uint64 `json:"MaxUserConnections,omitnil" name:"MaxUserConnections"`
+	MaxUserConnections *uint64 `json:"MaxUserConnections,omitnil,omitempty" name:"MaxUserConnections"`
 }
 
 func (r *CreateAccountRequest) ToJsonString() string {
@@ -518,19 +518,19 @@ func (r *CreateAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAccountResponseParams struct {
 	// Instance ID, which is passed through from the input parameters.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Username, which is passed through from the input parameters.
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Host allowed for access, which is passed through from the input parameters.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Passed through from the input parameters.
-	ReadOnly *int64 `json:"ReadOnly,omitnil" name:"ReadOnly"`
+	ReadOnly *int64 `json:"ReadOnly,omitnil,omitempty" name:"ReadOnly"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateAccountResponse struct {
@@ -552,134 +552,134 @@ func (r *CreateAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateDBInstanceRequestParams struct {
 	// AZs to deploy instance nodes. You can specify up to two AZs (one as primary AZ and another as replica AZ). When the shard specification is 1-primary-2-replica, the primary and one of the replicas are deployed in the primary AZ.
-	Zones []*string `json:"Zones,omitnil" name:"Zones"`
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
 	// Number of nodes, which can be obtained 
 	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
-	NodeCount *int64 `json:"NodeCount,omitnil" name:"NodeCount"`
+	NodeCount *int64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
 	// Memory size in GB, which can be obtained 
 	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
-	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// Storage capacity in GB. The maximum and minimum storage space can be obtained 
 	//  by querying instance specification through the `DescribeDBInstanceSpecs` API.
-	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Validity period in months
-	Period *int64 `json:"Period,omitnil" name:"Period"`
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// The number of instances to be purchased. Only one instance is queried for price by default.
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Whether to automatically use vouchers. This option is disabled by default.
-	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
 	// Voucher ID list. Currently, you can specify only one voucher.
-	VoucherIds []*string `json:"VoucherIds,omitnil" name:"VoucherIds"`
+	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
 
 	// VPC ID. If this parameter is not passed in, the instance will be created on the classic network.
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// VPC subnet ID, which is required when `VpcId` is specified.
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Project ID, which can be obtained through the `DescribeProjects` API. If this parameter is not passed in, the instance will be associated with the default project.
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Database engine version. Valid values: `5.7`, `8.0`, `10.0`, `10.1`.
-	DbVersionId *string `json:"DbVersionId,omitnil" name:"DbVersionId"`
+	DbVersionId *string `json:"DbVersionId,omitnil,omitempty" name:"DbVersionId"`
 
 	// Name of the instance, which can be customized.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// List of security group IDs
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
 	// Auto-renewal flag. Valid values: `1` (auto-renewal), `2` (no renewal upon expiration).
-	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
-	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil,omitempty" name:"Ipv6Flag"`
 
 	// Array of tag key-value pairs
-	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil" name:"ResourceTags"`
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// List of parameters. Valid values: `character_set_server` (character set; required); `lower_case_table_names` (table name case sensitivity; required; `0`: case-sensitive; `1`: case-insensitive); `innodb_page_size` (InnoDB data page size; default size: 16 KB); `sync_mode` (sync mode; `0`: async; `1`: strong sync; `2`: downgradable strong sync; default value: `2`).
-	InitParams []*DBParamValue `json:"InitParams,omitnil" name:"InitParams"`
+	InitParams []*DBParamValue `json:"InitParams,omitnil,omitempty" name:"InitParams"`
 
 	// DCN source region
-	DcnRegion *string `json:"DcnRegion,omitnil" name:"DcnRegion"`
+	DcnRegion *string `json:"DcnRegion,omitnil,omitempty" name:"DcnRegion"`
 
 	// DCN source instance ID
-	DcnInstanceId *string `json:"DcnInstanceId,omitnil" name:"DcnInstanceId"`
+	DcnInstanceId *string `json:"DcnInstanceId,omitnil,omitempty" name:"DcnInstanceId"`
 }
 
 type CreateDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// AZs to deploy instance nodes. You can specify up to two AZs (one as primary AZ and another as replica AZ). When the shard specification is 1-primary-2-replica, the primary and one of the replicas are deployed in the primary AZ.
-	Zones []*string `json:"Zones,omitnil" name:"Zones"`
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
 	// Number of nodes, which can be obtained 
 	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
-	NodeCount *int64 `json:"NodeCount,omitnil" name:"NodeCount"`
+	NodeCount *int64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
 	// Memory size in GB, which can be obtained 
 	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
-	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// Storage capacity in GB. The maximum and minimum storage space can be obtained 
 	//  by querying instance specification through the `DescribeDBInstanceSpecs` API.
-	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Validity period in months
-	Period *int64 `json:"Period,omitnil" name:"Period"`
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// The number of instances to be purchased. Only one instance is queried for price by default.
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Whether to automatically use vouchers. This option is disabled by default.
-	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
 	// Voucher ID list. Currently, you can specify only one voucher.
-	VoucherIds []*string `json:"VoucherIds,omitnil" name:"VoucherIds"`
+	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
 
 	// VPC ID. If this parameter is not passed in, the instance will be created on the classic network.
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// VPC subnet ID, which is required when `VpcId` is specified.
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Project ID, which can be obtained through the `DescribeProjects` API. If this parameter is not passed in, the instance will be associated with the default project.
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Database engine version. Valid values: `5.7`, `8.0`, `10.0`, `10.1`.
-	DbVersionId *string `json:"DbVersionId,omitnil" name:"DbVersionId"`
+	DbVersionId *string `json:"DbVersionId,omitnil,omitempty" name:"DbVersionId"`
 
 	// Name of the instance, which can be customized.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// List of security group IDs
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
 	// Auto-renewal flag. Valid values: `1` (auto-renewal), `2` (no renewal upon expiration).
-	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
-	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil,omitempty" name:"Ipv6Flag"`
 
 	// Array of tag key-value pairs
-	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil" name:"ResourceTags"`
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// List of parameters. Valid values: `character_set_server` (character set; required); `lower_case_table_names` (table name case sensitivity; required; `0`: case-sensitive; `1`: case-insensitive); `innodb_page_size` (InnoDB data page size; default size: 16 KB); `sync_mode` (sync mode; `0`: async; `1`: strong sync; `2`: downgradable strong sync; default value: `2`).
-	InitParams []*DBParamValue `json:"InitParams,omitnil" name:"InitParams"`
+	InitParams []*DBParamValue `json:"InitParams,omitnil,omitempty" name:"InitParams"`
 
 	// DCN source region
-	DcnRegion *string `json:"DcnRegion,omitnil" name:"DcnRegion"`
+	DcnRegion *string `json:"DcnRegion,omitnil,omitempty" name:"DcnRegion"`
 
 	// DCN source instance ID
-	DcnInstanceId *string `json:"DcnInstanceId,omitnil" name:"DcnInstanceId"`
+	DcnInstanceId *string `json:"DcnInstanceId,omitnil,omitempty" name:"DcnInstanceId"`
 }
 
 func (r *CreateDBInstanceRequest) ToJsonString() string {
@@ -724,14 +724,14 @@ func (r *CreateDBInstanceRequest) FromJsonString(s string) error {
 type CreateDBInstanceResponseParams struct {
 	// Order ID, which is used for calling the `DescribeOrders` API.
 	//  The parameter can be used to either query order details or call the user account APIs to make another payment when this payment fails.
-	DealName *string `json:"DealName,omitnil" name:"DealName"`
+	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
 
 	// IDs of the instances you have purchased in this order. If no instance IDs are returned, you can query them with the `DescribeOrders` API. You can also use the `DescribeDBInstances` API to check whether an instance has been created successfully.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateDBInstanceResponse struct {
@@ -753,120 +753,120 @@ func (r *CreateDBInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateHourDBInstanceRequestParams struct {
 	// AZs to deploy instance nodes. You can specify up to two AZs.
-	Zones []*string `json:"Zones,omitnil" name:"Zones"`
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
 	// Number of nodes.
-	NodeCount *int64 `json:"NodeCount,omitnil" name:"NodeCount"`
+	NodeCount *int64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
 	// Memory size in GB.
-	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// Storage size in GB.
-	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Number of instances to purchase.
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Project ID. If this parameter is not passed in, the default project will be used.
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Unique ID of the network. If this parameter is not passed in, the classic network will be used.
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Unique ID of the subnet. If `VpcId` is specified, this parameter is required.
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Database engine version. Valid values: `5.7`, `8.0`, `10.0`, `10.1`.
-	DbVersionId *string `json:"DbVersionId,omitnil" name:"DbVersionId"`
+	DbVersionId *string `json:"DbVersionId,omitnil,omitempty" name:"DbVersionId"`
 
 	// Custom name of the instance.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Security group ID. If this parameter is not passed in, no security groups will be associated when the instance is created.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
 	// Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
-	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil,omitempty" name:"Ipv6Flag"`
 
 	// Array of tag key-value pairs.
-	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil" name:"ResourceTags"`
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// If you create a disaster recovery instance, you need to use this parameter to specify the region of the associated primary instance so that the disaster recovery instance can sync data with the primary instance over the Data Communication Network (DCN).
-	DcnRegion *string `json:"DcnRegion,omitnil" name:"DcnRegion"`
+	DcnRegion *string `json:"DcnRegion,omitnil,omitempty" name:"DcnRegion"`
 
 	// If you create a disaster recovery instance, you need to use this parameter to specify the ID of the associated primary instance so that the disaster recovery instance can sync data with the primary instance over the Data Communication Network (DCN).
-	DcnInstanceId *string `json:"DcnInstanceId,omitnil" name:"DcnInstanceId"`
+	DcnInstanceId *string `json:"DcnInstanceId,omitnil,omitempty" name:"DcnInstanceId"`
 
 	// List of parameters. Valid values: 
 	// `character_set_server` (character set; required); `lower_case_table_names` (table name case sensitivity; required; 0: case-sensitive; 1: case-insensitive);
 	// `innodb_page_size` (innoDB data page size; default size: 16 KB); `sync_mode` (sync mode; 0: async; 1: strong sync; 2: downgradable strong sync; default value: 2).
-	InitParams []*DBParamValue `json:"InitParams,omitnil" name:"InitParams"`
+	InitParams []*DBParamValue `json:"InitParams,omitnil,omitempty" name:"InitParams"`
 
 	// ID of the instance to be rolled back, such as “2021-11-22 00:00:00”.
-	RollbackInstanceId *string `json:"RollbackInstanceId,omitnil" name:"RollbackInstanceId"`
+	RollbackInstanceId *string `json:"RollbackInstanceId,omitnil,omitempty" name:"RollbackInstanceId"`
 
 	// Rollback time.
-	RollbackTime *string `json:"RollbackTime,omitnil" name:"RollbackTime"`
+	RollbackTime *string `json:"RollbackTime,omitnil,omitempty" name:"RollbackTime"`
 }
 
 type CreateHourDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// AZs to deploy instance nodes. You can specify up to two AZs.
-	Zones []*string `json:"Zones,omitnil" name:"Zones"`
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
 	// Number of nodes.
-	NodeCount *int64 `json:"NodeCount,omitnil" name:"NodeCount"`
+	NodeCount *int64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
 	// Memory size in GB.
-	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// Storage size in GB.
-	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Number of instances to purchase.
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Project ID. If this parameter is not passed in, the default project will be used.
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Unique ID of the network. If this parameter is not passed in, the classic network will be used.
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Unique ID of the subnet. If `VpcId` is specified, this parameter is required.
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Database engine version. Valid values: `5.7`, `8.0`, `10.0`, `10.1`.
-	DbVersionId *string `json:"DbVersionId,omitnil" name:"DbVersionId"`
+	DbVersionId *string `json:"DbVersionId,omitnil,omitempty" name:"DbVersionId"`
 
 	// Custom name of the instance.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Security group ID. If this parameter is not passed in, no security groups will be associated when the instance is created.
-	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil" name:"SecurityGroupIds"`
+	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
 	// Whether IPv6 is supported. Valid values: `0` (unsupported), `1` (supported).
-	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil,omitempty" name:"Ipv6Flag"`
 
 	// Array of tag key-value pairs.
-	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil" name:"ResourceTags"`
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// If you create a disaster recovery instance, you need to use this parameter to specify the region of the associated primary instance so that the disaster recovery instance can sync data with the primary instance over the Data Communication Network (DCN).
-	DcnRegion *string `json:"DcnRegion,omitnil" name:"DcnRegion"`
+	DcnRegion *string `json:"DcnRegion,omitnil,omitempty" name:"DcnRegion"`
 
 	// If you create a disaster recovery instance, you need to use this parameter to specify the ID of the associated primary instance so that the disaster recovery instance can sync data with the primary instance over the Data Communication Network (DCN).
-	DcnInstanceId *string `json:"DcnInstanceId,omitnil" name:"DcnInstanceId"`
+	DcnInstanceId *string `json:"DcnInstanceId,omitnil,omitempty" name:"DcnInstanceId"`
 
 	// List of parameters. Valid values: 
 	// `character_set_server` (character set; required); `lower_case_table_names` (table name case sensitivity; required; 0: case-sensitive; 1: case-insensitive);
 	// `innodb_page_size` (innoDB data page size; default size: 16 KB); `sync_mode` (sync mode; 0: async; 1: strong sync; 2: downgradable strong sync; default value: 2).
-	InitParams []*DBParamValue `json:"InitParams,omitnil" name:"InitParams"`
+	InitParams []*DBParamValue `json:"InitParams,omitnil,omitempty" name:"InitParams"`
 
 	// ID of the instance to be rolled back, such as “2021-11-22 00:00:00”.
-	RollbackInstanceId *string `json:"RollbackInstanceId,omitnil" name:"RollbackInstanceId"`
+	RollbackInstanceId *string `json:"RollbackInstanceId,omitnil,omitempty" name:"RollbackInstanceId"`
 
 	// Rollback time.
-	RollbackTime *string `json:"RollbackTime,omitnil" name:"RollbackTime"`
+	RollbackTime *string `json:"RollbackTime,omitnil,omitempty" name:"RollbackTime"`
 }
 
 func (r *CreateHourDBInstanceRequest) ToJsonString() string {
@@ -909,18 +909,18 @@ func (r *CreateHourDBInstanceRequest) FromJsonString(s string) error {
 type CreateHourDBInstanceResponseParams struct {
 	// Order ID, which is used for calling the `DescribeOrders` API.
 	//  The parameter can be used to either query order details or call the user account APIs to make another payment when this payment fails.
-	DealName *string `json:"DealName,omitnil" name:"DealName"`
+	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
 
 	// IDs of the instances you have purchased in this order. If no instance IDs are returned, you can query them with the `DescribeOrders` API. You can also use the `DescribeDBInstances` API to check whether an instance has been created successfully.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Async task ID, which can be used in the [DescribeFlow](https://www.tencentcloud.com/document/product/237/16177) API to query the async task result.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateHourDBInstanceResponse struct {
@@ -941,387 +941,387 @@ func (r *CreateHourDBInstanceResponse) FromJsonString(s string) error {
 
 type DBAccount struct {
 	// Username
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Host from which a user can log in (corresponding to the `host` field for a MySQL user; a user is uniquely identified by username and host; this parameter is in IP format and ends with % for IP range; % can be entered; if this parameter is left empty, % will be used by default).
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// User remarks
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Last updated time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Read-only flag. 0: no; 1: for the account's SQL requests, the replica will be used first, and if it is unavailable, the primary will be used; 2: the replica will be used first, and if it is unavailable, the operation will fail.
-	ReadOnly *int64 `json:"ReadOnly,omitnil" name:"ReadOnly"`
+	ReadOnly *int64 `json:"ReadOnly,omitnil,omitempty" name:"ReadOnly"`
 
 	// This field is meaningful for read-only accounts, indicating that a replica should be selected if its delay from the primary is less than this value.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DelayThresh *int64 `json:"DelayThresh,omitnil" name:"DelayThresh"`
+	DelayThresh *int64 `json:"DelayThresh,omitnil,omitempty" name:"DelayThresh"`
 
 	// Whether to specify a replica server for read-only account. Valid values: `0` (No replica server is specified, which means that the proxy will select another available replica server to keep connection with the client if the current replica server doesn’t meet the requirement). `1` (The replica server is specified, which means that the connection will be disconnected if the specified replica server doesn’t meet the requirement.)
-	SlaveConst *int64 `json:"SlaveConst,omitnil" name:"SlaveConst"`
+	SlaveConst *int64 `json:"SlaveConst,omitnil,omitempty" name:"SlaveConst"`
 
 	// Maximum number of connections. `0` indicates no limit.
-	MaxUserConnections *int64 `json:"MaxUserConnections,omitnil" name:"MaxUserConnections"`
+	MaxUserConnections *int64 `json:"MaxUserConnections,omitnil,omitempty" name:"MaxUserConnections"`
 }
 
 type DBInstance struct {
 	// Instance ID, which uniquely identifies a TDSQL instance
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Customizable instance name
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Application ID of instance
-	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// Project ID of instance
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Instance region name, such as ap-shanghai
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Instance AZ name, such as ap-guangzhou-1
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// VPC ID, which is 0 if the basic network is used
-	VpcId *int64 `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *int64 `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Subnet ID, which is 0 if the basic network is used
-	SubnetId *int64 `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *int64 `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Instance status. Valid values: `0` (creating), `1` (running task), `2` (running), `3` (uninitialized), `-1` (isolated), `4` (initializing), `5` (eliminating), `6` (restarting), `7` (migrating data)
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Private IP address
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// Private network port
-	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 
 	// Domain name for public network access, which can be resolved by the public network
-	WanDomain *string `json:"WanDomain,omitnil" name:"WanDomain"`
+	WanDomain *string `json:"WanDomain,omitnil,omitempty" name:"WanDomain"`
 
 	// Public IP address, which can be accessed over the public network
-	WanVip *string `json:"WanVip,omitnil" name:"WanVip"`
+	WanVip *string `json:"WanVip,omitnil,omitempty" name:"WanVip"`
 
 	// Public network port
-	WanPort *int64 `json:"WanPort,omitnil" name:"WanPort"`
+	WanPort *int64 `json:"WanPort,omitnil,omitempty" name:"WanPort"`
 
 	// Instance creation time in the format of `2006-01-02 15:04:05`
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Last updated time of instance in the format of `2006-01-02 15:04:05`
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Auto-renewal flag. 0: no, 1: yes
-	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// Instance expiration time in the format of `2006-01-02 15:04:05`
-	PeriodEndTime *string `json:"PeriodEndTime,omitnil" name:"PeriodEndTime"`
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil,omitempty" name:"PeriodEndTime"`
 
 	// Instance account
-	Uin *string `json:"Uin,omitnil" name:"Uin"`
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
 
 	// TDSQL version information
-	TdsqlVersion *string `json:"TdsqlVersion,omitnil" name:"TdsqlVersion"`
+	TdsqlVersion *string `json:"TdsqlVersion,omitnil,omitempty" name:"TdsqlVersion"`
 
 	// Instance memory size in GB
-	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// Instance storage capacity in GB
-	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// VPC ID in string type
-	UniqueVpcId *string `json:"UniqueVpcId,omitnil" name:"UniqueVpcId"`
+	UniqueVpcId *string `json:"UniqueVpcId,omitnil,omitempty" name:"UniqueVpcId"`
 
 	// VPC subnet ID in string type
-	UniqueSubnetId *string `json:"UniqueSubnetId,omitnil" name:"UniqueSubnetId"`
+	UniqueSubnetId *string `json:"UniqueSubnetId,omitnil,omitempty" name:"UniqueSubnetId"`
 
 	// Original ID of instance (this field is obsolete and should not be depended on)
-	OriginSerialId *string `json:"OriginSerialId,omitnil" name:"OriginSerialId"`
+	OriginSerialId *string `json:"OriginSerialId,omitnil,omitempty" name:"OriginSerialId"`
 
 	// Number of nodes. 2: one master and one slave, 3: one master and two slaves
-	NodeCount *uint64 `json:"NodeCount,omitnil" name:"NodeCount"`
+	NodeCount *uint64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
 	// Whether it is a temp instance. 0: no, non-zero value: yes
-	IsTmp *uint64 `json:"IsTmp,omitnil" name:"IsTmp"`
+	IsTmp *uint64 `json:"IsTmp,omitnil,omitempty" name:"IsTmp"`
 
 	// Dedicated cluster ID. If this parameter is empty, the instance is a general instance
-	ExclusterId *string `json:"ExclusterId,omitnil" name:"ExclusterId"`
+	ExclusterId *string `json:"ExclusterId,omitnil,omitempty" name:"ExclusterId"`
 
 	// Numeric ID of instance (this field is obsolete and should not be depended on)
-	Id *uint64 `json:"Id,omitnil" name:"Id"`
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Product type ID
-	Pid *int64 `json:"Pid,omitnil" name:"Pid"`
+	Pid *int64 `json:"Pid,omitnil,omitempty" name:"Pid"`
 
 	// Maximum QPS value
-	Qps *int64 `json:"Qps,omitnil" name:"Qps"`
+	Qps *int64 `json:"Qps,omitnil,omitempty" name:"Qps"`
 
 	// Billing mode
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Paymode *string `json:"Paymode,omitnil" name:"Paymode"`
+	Paymode *string `json:"Paymode,omitnil,omitempty" name:"Paymode"`
 
 	// Async task flow ID when an async task is in progress on an instance
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Locker *int64 `json:"Locker,omitnil" name:"Locker"`
+	Locker *int64 `json:"Locker,omitnil,omitempty" name:"Locker"`
 
 	// Current instance running status description
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	StatusDesc *string `json:"StatusDesc,omitnil" name:"StatusDesc"`
+	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
 
 	// Public network access status. 0: not enabled, 1: enabled, 2: disabled, 3: enabling
-	WanStatus *int64 `json:"WanStatus,omitnil" name:"WanStatus"`
+	WanStatus *int64 `json:"WanStatus,omitnil,omitempty" name:"WanStatus"`
 
 	// Whether the instance supports audit. 1: yes, 0: no
-	IsAuditSupported *uint64 `json:"IsAuditSupported,omitnil" name:"IsAuditSupported"`
+	IsAuditSupported *uint64 `json:"IsAuditSupported,omitnil,omitempty" name:"IsAuditSupported"`
 
 	// Model
-	Machine *string `json:"Machine,omitnil" name:"Machine"`
+	Machine *string `json:"Machine,omitnil,omitempty" name:"Machine"`
 
 	// Whether data encryption is supported. 1: yes, 0: no
-	IsEncryptSupported *int64 `json:"IsEncryptSupported,omitnil" name:"IsEncryptSupported"`
+	IsEncryptSupported *int64 `json:"IsEncryptSupported,omitnil,omitempty" name:"IsEncryptSupported"`
 
 	// Number of CPU cores of instance
-	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
 	// Indicates whether the instance uses IPv6
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Ipv6Flag *uint64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+	Ipv6Flag *uint64 `json:"Ipv6Flag,omitnil,omitempty" name:"Ipv6Flag"`
 
 	// Private network IPv6 address
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Vipv6 *string `json:"Vipv6,omitnil" name:"Vipv6"`
+	Vipv6 *string `json:"Vipv6,omitnil,omitempty" name:"Vipv6"`
 
 	// Public network IPv6 address
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	WanVipv6 *string `json:"WanVipv6,omitnil" name:"WanVipv6"`
+	WanVipv6 *string `json:"WanVipv6,omitnil,omitempty" name:"WanVipv6"`
 
 	// Public network IPv6 port
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	WanPortIpv6 *uint64 `json:"WanPortIpv6,omitnil" name:"WanPortIpv6"`
+	WanPortIpv6 *uint64 `json:"WanPortIpv6,omitnil,omitempty" name:"WanPortIpv6"`
 
 	// Public network IPv6 status
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	WanStatusIpv6 *uint64 `json:"WanStatusIpv6,omitnil" name:"WanStatusIpv6"`
+	WanStatusIpv6 *uint64 `json:"WanStatusIpv6,omitnil,omitempty" name:"WanStatusIpv6"`
 
 	// Database engine
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DbEngine *string `json:"DbEngine,omitnil" name:"DbEngine"`
+	DbEngine *string `json:"DbEngine,omitnil,omitempty" name:"DbEngine"`
 
 	// Database version
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DbVersion *string `json:"DbVersion,omitnil" name:"DbVersion"`
+	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
 
 	// DCN type. Valid values: 0 (null), 1 (primary instance), 2 (disaster recovery instance)
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DcnFlag *int64 `json:"DcnFlag,omitnil" name:"DcnFlag"`
+	DcnFlag *int64 `json:"DcnFlag,omitnil,omitempty" name:"DcnFlag"`
 
 	// DCN status. Valid values: 0 (null), 1 (creating), 2 (syncing), 3 (disconnected)
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DcnStatus *int64 `json:"DcnStatus,omitnil" name:"DcnStatus"`
+	DcnStatus *int64 `json:"DcnStatus,omitnil,omitempty" name:"DcnStatus"`
 
 	// The number of DCN disaster recovery instances
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DcnDstNum *int64 `json:"DcnDstNum,omitnil" name:"DcnDstNum"`
+	DcnDstNum *int64 `json:"DcnDstNum,omitnil,omitempty" name:"DcnDstNum"`
 
 	// Instance type. Valid values: `1` (dedicated primary instance), `2` (primary instance), `3` (disaster recovery instance), and `4` (dedicated disaster recovery instance).
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	InstanceType *int64 `json:"InstanceType,omitnil" name:"InstanceType"`
+	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// Instance tag information
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil" name:"ResourceTags"`
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// Database version
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DbVersionId *string `json:"DbVersionId,omitnil" name:"DbVersionId"`
+	DbVersionId *string `json:"DbVersionId,omitnil,omitempty" name:"DbVersionId"`
 }
 
 type DBParamValue struct {
 	// Parameter name
-	Param *string `json:"Param,omitnil" name:"Param"`
+	Param *string `json:"Param,omitnil,omitempty" name:"Param"`
 
 	// Parameter value
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type DCNReplicaConfig struct {
 	// DCN running status. Valid values: `START` (running), `STOP` (pause)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RoReplicationMode *string `json:"RoReplicationMode,omitnil" name:"RoReplicationMode"`
+	RoReplicationMode *string `json:"RoReplicationMode,omitnil,omitempty" name:"RoReplicationMode"`
 
 	// Delayed replication type. Valid values: `DEFAULT` (no delay), `DUE_TIME` (specified replication time)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DelayReplicationType *string `json:"DelayReplicationType,omitnil" name:"DelayReplicationType"`
+	DelayReplicationType *string `json:"DelayReplicationType,omitnil,omitempty" name:"DelayReplicationType"`
 
 	// Specified time for delayed replication
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DueTime *string `json:"DueTime,omitnil" name:"DueTime"`
+	DueTime *string `json:"DueTime,omitnil,omitempty" name:"DueTime"`
 
 	// The number of seconds to delay the replication
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ReplicationDelay *int64 `json:"ReplicationDelay,omitnil" name:"ReplicationDelay"`
+	ReplicationDelay *int64 `json:"ReplicationDelay,omitnil,omitempty" name:"ReplicationDelay"`
 }
 
 type DCNReplicaStatus struct {
 	// DCN running status. Valid values: `START` (running), `STOP` (pause).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The current delay, which takes the delay value of the replica instance.
-	Delay *int64 `json:"Delay,omitnil" name:"Delay"`
+	Delay *int64 `json:"Delay,omitnil,omitempty" name:"Delay"`
 }
 
 type Database struct {
 	// Database name
-	DbName *string `json:"DbName,omitnil" name:"DbName"`
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 }
 
 type DatabaseFunction struct {
 	// Function name
-	Func *string `json:"Func,omitnil" name:"Func"`
+	Func *string `json:"Func,omitnil,omitempty" name:"Func"`
 }
 
 type DatabasePrivilege struct {
 	// Permission information
-	Privileges []*string `json:"Privileges,omitnil" name:"Privileges"`
+	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
 
 	// Database name
-	Database *string `json:"Database,omitnil" name:"Database"`
+	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 }
 
 type DatabaseProcedure struct {
 	// Stored procedure name
-	Proc *string `json:"Proc,omitnil" name:"Proc"`
+	Proc *string `json:"Proc,omitnil,omitempty" name:"Proc"`
 }
 
 type DatabaseTable struct {
 	// Table name
-	Table *string `json:"Table,omitnil" name:"Table"`
+	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
 }
 
 type DatabaseView struct {
 	// View name
-	View *string `json:"View,omitnil" name:"View"`
+	View *string `json:"View,omitnil,omitempty" name:"View"`
 }
 
 type DcnDetailItem struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Region where the instance resides
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Availability zone where the instance resides
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Instance IP address
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// Instance IPv6 address
-	Vipv6 *string `json:"Vipv6,omitnil" name:"Vipv6"`
+	Vipv6 *string `json:"Vipv6,omitnil,omitempty" name:"Vipv6"`
 
 	// Instance port
-	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 
 	// Instance status
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Instance status description
-	StatusDesc *string `json:"StatusDesc,omitnil" name:"StatusDesc"`
+	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
 
 	// DCN flag. Valid values: `1` (primary), `2` (disaster recovery)
-	DcnFlag *int64 `json:"DcnFlag,omitnil" name:"DcnFlag"`
+	DcnFlag *int64 `json:"DcnFlag,omitnil,omitempty" name:"DcnFlag"`
 
 	// DCN status. Valid values: `0` (none), `1` (creating), `2` (syncing), `3` (disconnected)
-	DcnStatus *int64 `json:"DcnStatus,omitnil" name:"DcnStatus"`
+	DcnStatus *int64 `json:"DcnStatus,omitnil,omitempty" name:"DcnStatus"`
 
 	// Number of CPU cores of the instance
-	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
 	// Instance memory capacity in GB
-	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// Instance storage capacity in GB
-	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Billing mode
-	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// Creation time of the instance in the format of 2006-01-02 15:04:05
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Expiration time of the instance in the format of 2006-01-02 15:04:05
-	PeriodEndTime *string `json:"PeriodEndTime,omitnil" name:"PeriodEndTime"`
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil,omitempty" name:"PeriodEndTime"`
 
 	// Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery instance), `4` (dedicated disaster recovery instance)
-	InstanceType *int64 `json:"InstanceType,omitnil" name:"InstanceType"`
+	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// Configuration information of DCN replication. This field is null for a primary instance.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ReplicaConfig *DCNReplicaConfig `json:"ReplicaConfig,omitnil" name:"ReplicaConfig"`
+	ReplicaConfig *DCNReplicaConfig `json:"ReplicaConfig,omitnil,omitempty" name:"ReplicaConfig"`
 
 	// DCN replication status. This field is null for the primary instance.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ReplicaStatus *DCNReplicaStatus `json:"ReplicaStatus,omitnil" name:"ReplicaStatus"`
+	ReplicaStatus *DCNReplicaStatus `json:"ReplicaStatus,omitnil,omitempty" name:"ReplicaStatus"`
 
 	// Whether KMS is enabled.
-	EncryptStatus *int64 `json:"EncryptStatus,omitnil" name:"EncryptStatus"`
+	EncryptStatus *int64 `json:"EncryptStatus,omitnil,omitempty" name:"EncryptStatus"`
 }
 
 type Deal struct {
 	// Order number
-	DealName *string `json:"DealName,omitnil" name:"DealName"`
+	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
 
 	// Account
-	OwnerUin *string `json:"OwnerUin,omitnil" name:"OwnerUin"`
+	OwnerUin *string `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
 
 	// Number of items
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// ID of the associated process, which can be used to query the process execution status.
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The ID of the created instance, which is required only for the order that creates an instance.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Payment mode. Valid values: 0 (postpaid), 1 (prepaid)
-	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 }
 
 // Predefined struct for user
 type DeleteAccountRequestParams struct {
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Username
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Access host allowed for user
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 }
 
 type DeleteAccountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Username
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Access host allowed for user
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 }
 
 func (r *DeleteAccountRequest) ToJsonString() string {
@@ -1348,7 +1348,7 @@ func (r *DeleteAccountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAccountResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteAccountResponse struct {
@@ -1370,50 +1370,50 @@ func (r *DeleteAccountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccountPrivilegesRequestParams struct {
 	// Instance ID in the form of `tdsql-ow728lmc`, which can be obtained by querying the instance details through `DescribeDBInstances`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Login username.
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Access host allowed for a user. An account is uniquely identified by username and host.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Database name. `\*` indicates that global permissions will be queried (i.e., `\*.\*`), in which case the `Type` and `Object ` parameters will be ignored.
-	DbName *string `json:"DbName,omitnil" name:"DbName"`
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
 	// Type. Valid values: table, view, proc, func, \*. If `DbName` is a specific database name and `Type` is `\*`, the permissions of the database will be queried (i.e., `db.\*`), in which case the `Object` parameter will be ignored.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Type name. For example, if `Type` is `table`, `Object` indicates a specific table name; if both `DbName` and `Type` are specific names, it indicates a specific object name and cannot be `\*` or empty.
-	Object *string `json:"Object,omitnil" name:"Object"`
+	Object *string `json:"Object,omitnil,omitempty" name:"Object"`
 
 	// If `Type` is `table` and `ColName` is `\*`, the permissions of the table will be queried; if `ColName` is a specific field name, the permissions of the corresponding field will be queried.
-	ColName *string `json:"ColName,omitnil" name:"ColName"`
+	ColName *string `json:"ColName,omitnil,omitempty" name:"ColName"`
 }
 
 type DescribeAccountPrivilegesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the form of `tdsql-ow728lmc`, which can be obtained by querying the instance details through `DescribeDBInstances`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Login username.
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Access host allowed for a user. An account is uniquely identified by username and host.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Database name. `\*` indicates that global permissions will be queried (i.e., `\*.\*`), in which case the `Type` and `Object ` parameters will be ignored.
-	DbName *string `json:"DbName,omitnil" name:"DbName"`
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
 	// Type. Valid values: table, view, proc, func, \*. If `DbName` is a specific database name and `Type` is `\*`, the permissions of the database will be queried (i.e., `db.\*`), in which case the `Object` parameter will be ignored.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Type name. For example, if `Type` is `table`, `Object` indicates a specific table name; if both `DbName` and `Type` are specific names, it indicates a specific object name and cannot be `\*` or empty.
-	Object *string `json:"Object,omitnil" name:"Object"`
+	Object *string `json:"Object,omitnil,omitempty" name:"Object"`
 
 	// If `Type` is `table` and `ColName` is `\*`, the permissions of the table will be queried; if `ColName` is a specific field name, the permissions of the corresponding field will be queried.
-	ColName *string `json:"ColName,omitnil" name:"ColName"`
+	ColName *string `json:"ColName,omitnil,omitempty" name:"ColName"`
 }
 
 func (r *DescribeAccountPrivilegesRequest) ToJsonString() string {
@@ -1444,19 +1444,19 @@ func (r *DescribeAccountPrivilegesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccountPrivilegesResponseParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Permission list.
-	Privileges []*string `json:"Privileges,omitnil" name:"Privileges"`
+	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
 
 	// Database account username
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Database account host
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeAccountPrivilegesResponse struct {
@@ -1478,14 +1478,14 @@ func (r *DescribeAccountPrivilegesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccountsRequestParams struct {
 	// Instance ID in the form of `tdsql-ow728lmc`, which can be obtained by querying the instance details through `DescribeDBInstances`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeAccountsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the form of `tdsql-ow728lmc`, which can be obtained by querying the instance details through `DescribeDBInstances`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeAccountsRequest) ToJsonString() string {
@@ -1510,13 +1510,13 @@ func (r *DescribeAccountsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccountsResponseParams struct {
 	// Instance ID, which is passed through from the input parameters.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance user list.
-	Users []*DBAccount `json:"Users,omitnil" name:"Users"`
+	Users []*DBAccount `json:"Users,omitnil,omitempty" name:"Users"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeAccountsResponse struct {
@@ -1538,56 +1538,56 @@ func (r *DescribeAccountsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBackupFilesRequestParams struct {
 	// Query by instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Backup type. Valid values: `Data` (data backup), `Binlog` (Binlog backup), `Errlog` (error log), `Slowlog` (slow log).
-	BackupType *string `json:"BackupType,omitnil" name:"BackupType"`
+	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 
 	// Query by start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Query by end time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Pagination parameter
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination parameter
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Sorting dimension. Valid values: `Time`, `Size`.
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Sorting order. Valid values: `DESC`, `ASC`.
-	OrderType *string `json:"OrderType,omitnil" name:"OrderType"`
+	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
 }
 
 type DescribeBackupFilesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Query by instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Backup type. Valid values: `Data` (data backup), `Binlog` (Binlog backup), `Errlog` (error log), `Slowlog` (slow log).
-	BackupType *string `json:"BackupType,omitnil" name:"BackupType"`
+	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 
 	// Query by start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Query by end time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Pagination parameter
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Pagination parameter
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Sorting dimension. Valid values: `Time`, `Size`.
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Sorting order. Valid values: `DESC`, `ASC`.
-	OrderType *string `json:"OrderType,omitnil" name:"OrderType"`
+	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
 }
 
 func (r *DescribeBackupFilesRequest) ToJsonString() string {
@@ -1619,13 +1619,13 @@ func (r *DescribeBackupFilesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBackupFilesResponseParams struct {
 	// List of backup files
-	Files []*InstanceBackupFileItem `json:"Files,omitnil" name:"Files"`
+	Files []*InstanceBackupFileItem `json:"Files,omitnil,omitempty" name:"Files"`
 
 	// Total number
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeBackupFilesResponse struct {
@@ -1647,14 +1647,14 @@ func (r *DescribeBackupFilesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBEncryptAttributesRequestParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeDBEncryptAttributesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `tdsql-ow728lmc`
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeDBEncryptAttributesRequest) ToJsonString() string {
@@ -1679,16 +1679,16 @@ func (r *DescribeDBEncryptAttributesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBEncryptAttributesResponseParams struct {
 	// Whether encryption is enabled. Valid values: `1` (enabled), `2` (disabled).
-	EncryptStatus *int64 `json:"EncryptStatus,omitnil" name:"EncryptStatus"`
+	EncryptStatus *int64 `json:"EncryptStatus,omitnil,omitempty" name:"EncryptStatus"`
 
 	// DEK key
-	CipherText *string `json:"CipherText,omitnil" name:"CipherText"`
+	CipherText *string `json:"CipherText,omitnil,omitempty" name:"CipherText"`
 
 	// DEK key expiration date
-	ExpireDate *string `json:"ExpireDate,omitnil" name:"ExpireDate"`
+	ExpireDate *string `json:"ExpireDate,omitnil,omitempty" name:"ExpireDate"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDBEncryptAttributesResponse struct {
@@ -1710,14 +1710,14 @@ func (r *DescribeDBEncryptAttributesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBInstanceDetailRequestParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeDBInstanceDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `tdsql-ow728lmc`
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeDBInstanceDetailRequest) ToJsonString() string {
@@ -1742,197 +1742,197 @@ func (r *DescribeDBInstanceDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBInstanceDetailResponseParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Instance status
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Current status of the instance
-	StatusDesc *string `json:"StatusDesc,omitnil" name:"StatusDesc"`
+	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
 
 	// Private IP address
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// Private port
-	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 
 	// Whether it is a temp instance. Valid values: `0` (no), non-zero value (yes).
-	IsTmp *int64 `json:"IsTmp,omitnil" name:"IsTmp"`
+	IsTmp *int64 `json:"IsTmp,omitnil,omitempty" name:"IsTmp"`
 
 	// Number of nodes. Valid values: `2` (1 primary-1 replica), `3` (1 primary-2 replicas).
-	NodeCount *int64 `json:"NodeCount,omitnil" name:"NodeCount"`
+	NodeCount *int64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
 	// Instance region name, such as ap-shanghai.
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Instance AZ name, such as ap-guangzhou-1.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// VPC ID in string type
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// VPC subnet ID in string type
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Public network status. Valid values: `0` (not enabled), `1` (enabled), `2` (disabled), `3`: (enabling), `4` (disabling).
-	WanStatus *int64 `json:"WanStatus,omitnil" name:"WanStatus"`
+	WanStatus *int64 `json:"WanStatus,omitnil,omitempty" name:"WanStatus"`
 
 	// Domain name for public network access, which can be resolved by the public network.
-	WanDomain *string `json:"WanDomain,omitnil" name:"WanDomain"`
+	WanDomain *string `json:"WanDomain,omitnil,omitempty" name:"WanDomain"`
 
 	// Public IP address, which can be accessed over the public network.
-	WanVip *string `json:"WanVip,omitnil" name:"WanVip"`
+	WanVip *string `json:"WanVip,omitnil,omitempty" name:"WanVip"`
 
 	// Public network port
-	WanPort *int64 `json:"WanPort,omitnil" name:"WanPort"`
+	WanPort *int64 `json:"WanPort,omitnil,omitempty" name:"WanPort"`
 
 	// Project ID of the instance
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// TDSQL version information
-	TdsqlVersion *string `json:"TdsqlVersion,omitnil" name:"TdsqlVersion"`
+	TdsqlVersion *string `json:"TdsqlVersion,omitnil,omitempty" name:"TdsqlVersion"`
 
 	// Instance memory capacity in GB
-	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// Instance storage capacity in GB
-	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Primary AZ, such as ap-shanghai-1.
-	MasterZone *string `json:"MasterZone,omitnil" name:"MasterZone"`
+	MasterZone *string `json:"MasterZone,omitnil,omitempty" name:"MasterZone"`
 
 	// List of replica AZs, such as ap-shanghai-2.
-	SlaveZones []*string `json:"SlaveZones,omitnil" name:"SlaveZones"`
+	SlaveZones []*string `json:"SlaveZones,omitnil,omitempty" name:"SlaveZones"`
 
 	// Auto-renewal flag. Valid values: `0` (no), `1` (yes).
-	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// Dedicated cluster ID, which is empty for a non-dedicated cluster instance.
-	ExclusterId *string `json:"ExclusterId,omitnil" name:"ExclusterId"`
+	ExclusterId *string `json:"ExclusterId,omitnil,omitempty" name:"ExclusterId"`
 
 	// Billing mode. Valid values: `prepaid` (monthly subscription), `postpaid` (pay-as-you-go).
-	PayMode *string `json:"PayMode,omitnil" name:"PayMode"`
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// Creation time of the instance in the format of 2006-01-02 15:04:05
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Whether the instance supports audit
-	IsAuditSupported *bool `json:"IsAuditSupported,omitnil" name:"IsAuditSupported"`
+	IsAuditSupported *bool `json:"IsAuditSupported,omitnil,omitempty" name:"IsAuditSupported"`
 
 	// Expiration time of the instance in the format of 2006-01-02 15:04:05
-	PeriodEndTime *string `json:"PeriodEndTime,omitnil" name:"PeriodEndTime"`
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil,omitempty" name:"PeriodEndTime"`
 
 	// Model information
-	Machine *string `json:"Machine,omitnil" name:"Machine"`
+	Machine *string `json:"Machine,omitnil,omitempty" name:"Machine"`
 
 	// Storage space utilization
-	StorageUsage *string `json:"StorageUsage,omitnil" name:"StorageUsage"`
+	StorageUsage *string `json:"StorageUsage,omitnil,omitempty" name:"StorageUsage"`
 
 	// Size of log storage space in GB
-	LogStorage *int64 `json:"LogStorage,omitnil" name:"LogStorage"`
+	LogStorage *int64 `json:"LogStorage,omitnil,omitempty" name:"LogStorage"`
 
 	// Whether data encryption is supported. Valid values: `1` (yes), `0`: (no).
-	IsEncryptSupported *int64 `json:"IsEncryptSupported,omitnil" name:"IsEncryptSupported"`
+	IsEncryptSupported *int64 `json:"IsEncryptSupported,omitnil,omitempty" name:"IsEncryptSupported"`
 
 	// Private network IPv6 address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Vip6 *string `json:"Vip6,omitnil" name:"Vip6"`
+	Vip6 *string `json:"Vip6,omitnil,omitempty" name:"Vip6"`
 
 	// Number of CPU cores of an instance.
-	Cpu *int64 `json:"Cpu,omitnil" name:"Cpu"`
+	Cpu *int64 `json:"Cpu,omitnil,omitempty" name:"Cpu"`
 
 	// Product type ID
-	Pid *int64 `json:"Pid,omitnil" name:"Pid"`
+	Pid *int64 `json:"Pid,omitnil,omitempty" name:"Pid"`
 
 	// Max QPS
-	Qps *int64 `json:"Qps,omitnil" name:"Qps"`
+	Qps *int64 `json:"Qps,omitnil,omitempty" name:"Qps"`
 
 	// Whether IPv6 is supported.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+	Ipv6Flag *int64 `json:"Ipv6Flag,omitnil,omitempty" name:"Ipv6Flag"`
 
 	// Public IPv6 address, which can be accessed over the public network
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WanVipv6 *string `json:"WanVipv6,omitnil" name:"WanVipv6"`
+	WanVipv6 *string `json:"WanVipv6,omitnil,omitempty" name:"WanVipv6"`
 
 	// Public network status. Valid values: `0` (not enabled), `1` (enabled), `2` (disabled), `3`: (enabling), `4` (disabling).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WanStatusIpv6 *int64 `json:"WanStatusIpv6,omitnil" name:"WanStatusIpv6"`
+	WanStatusIpv6 *int64 `json:"WanStatusIpv6,omitnil,omitempty" name:"WanStatusIpv6"`
 
 	// Public network IPv6 port
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WanPortIpv6 *int64 `json:"WanPortIpv6,omitnil" name:"WanPortIpv6"`
+	WanPortIpv6 *int64 `json:"WanPortIpv6,omitnil,omitempty" name:"WanPortIpv6"`
 
 	// Database engine
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DbEngine *string `json:"DbEngine,omitnil" name:"DbEngine"`
+	DbEngine *string `json:"DbEngine,omitnil,omitempty" name:"DbEngine"`
 
 	// Database version
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DbVersion *string `json:"DbVersion,omitnil" name:"DbVersion"`
+	DbVersion *string `json:"DbVersion,omitnil,omitempty" name:"DbVersion"`
 
 	// Tag information
-	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil" name:"ResourceTags"`
+	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// DCN type. Valid values: `0` (N/A), `1` (primary instance), `2` (disaster recovery read-only instance)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DcnFlag *int64 `json:"DcnFlag,omitnil" name:"DcnFlag"`
+	DcnFlag *int64 `json:"DcnFlag,omitnil,omitempty" name:"DcnFlag"`
 
 	// DCN status. Valid values: `0` (N/A), `1` (creating), `2` (syncing), `3` (disconnected)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DcnStatus *int64 `json:"DcnStatus,omitnil" name:"DcnStatus"`
+	DcnStatus *int64 `json:"DcnStatus,omitnil,omitempty" name:"DcnStatus"`
 
 	// Number of disaster recovery read-only instances
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DcnDstNum *int64 `json:"DcnDstNum,omitnil" name:"DcnDstNum"`
+	DcnDstNum *int64 `json:"DcnDstNum,omitnil,omitempty" name:"DcnDstNum"`
 
 	// Instance type. Valid values: `1` (dedicated primary instance), `2` (non-dedicated primary instance), `3` (non-dedicated disaster recovery read-only instance), `4` (dedicated disaster recovery read-only instance)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InstanceType *int64 `json:"InstanceType,omitnil" name:"InstanceType"`
+	InstanceType *int64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// Instance node information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NodesInfo []*NodeInfo `json:"NodesInfo,omitnil" name:"NodesInfo"`
+	NodesInfo []*NodeInfo `json:"NodesInfo,omitnil,omitempty" name:"NodesInfo"`
 
 	// Whether the instance supports setting the connection limit, which is not supported for kernel version 10.1.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsMaxUserConnectionsSupported *bool `json:"IsMaxUserConnectionsSupported,omitnil" name:"IsMaxUserConnectionsSupported"`
+	IsMaxUserConnectionsSupported *bool `json:"IsMaxUserConnectionsSupported,omitnil,omitempty" name:"IsMaxUserConnectionsSupported"`
 
 	// The displayed database version
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DbVersionId *string `json:"DbVersionId,omitnil" name:"DbVersionId"`
+	DbVersionId *string `json:"DbVersionId,omitnil,omitempty" name:"DbVersionId"`
 
 	// Encryption status. Valid values: `0` (disabled), `1` (enabled).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EncryptStatus *int64 `json:"EncryptStatus,omitnil" name:"EncryptStatus"`
+	EncryptStatus *int64 `json:"EncryptStatus,omitnil,omitempty" name:"EncryptStatus"`
 
 	// Configuration information of DCN
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ReplicaConfig *DCNReplicaConfig `json:"ReplicaConfig,omitnil" name:"ReplicaConfig"`
+	ReplicaConfig *DCNReplicaConfig `json:"ReplicaConfig,omitnil,omitempty" name:"ReplicaConfig"`
 
 	// Running status of DCN
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ReplicaStatus *DCNReplicaStatus `json:"ReplicaStatus,omitnil" name:"ReplicaStatus"`
+	ReplicaStatus *DCNReplicaStatus `json:"ReplicaStatus,omitnil,omitempty" name:"ReplicaStatus"`
 
 	// Type of dedicated cluster. Valid values: `0` (public cloud), `1` (finance cage), `2` (CDC cluster).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ExclusterType *int64 `json:"ExclusterType,omitnil" name:"ExclusterType"`
+	ExclusterType *int64 `json:"ExclusterType,omitnil,omitempty" name:"ExclusterType"`
 
 	// Nearby VPC access
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RsAccessStrategy *int64 `json:"RsAccessStrategy,omitnil" name:"RsAccessStrategy"`
+	RsAccessStrategy *int64 `json:"RsAccessStrategy,omitnil,omitempty" name:"RsAccessStrategy"`
 
 	// Unclaimed network resource
-	ReservedNetResources []*ReservedNetResource `json:"ReservedNetResources,omitnil" name:"ReservedNetResources"`
+	ReservedNetResources []*ReservedNetResource `json:"ReservedNetResources,omitnil,omitempty" name:"ReservedNetResources"`
 
 	// Whether physical replication is supported.
-	IsPhysicalReplicationSupported *bool `json:"IsPhysicalReplicationSupported,omitnil" name:"IsPhysicalReplicationSupported"`
+	IsPhysicalReplicationSupported *bool `json:"IsPhysicalReplicationSupported,omitnil,omitempty" name:"IsPhysicalReplicationSupported"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDBInstanceDetailResponse struct {
@@ -1954,122 +1954,122 @@ func (r *DescribeDBInstanceDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBInstancesRequestParams struct {
 	// Queries by instance ID or IDs. Instance ID is in the format of `tdsql-ow728lmc`. Up to 100 instances can be queried in one request.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Search field name. Valid values: instancename (search by instance name), vip (search by private IP), all (search by instance ID, instance name, and private IP).
-	SearchName *string `json:"SearchName,omitnil" name:"SearchName"`
+	SearchName *string `json:"SearchName,omitnil,omitempty" name:"SearchName"`
 
 	// Search keyword. Fuzzy search is supported. Multiple keywords should be separated by line breaks (`\n`).
-	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
 
 	// Queries by project ID
-	ProjectIds []*int64 `json:"ProjectIds,omitnil" name:"ProjectIds"`
+	ProjectIds []*int64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
 
 	// Whether to search by VPC
-	IsFilterVpc *bool `json:"IsFilterVpc,omitnil" name:"IsFilterVpc"`
+	IsFilterVpc *bool `json:"IsFilterVpc,omitnil,omitempty" name:"IsFilterVpc"`
 
 	// VPC ID, which is valid when `IsFilterVpc` is 1
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// VPC subnet ID, which is valid when `IsFilterVpc` is 1
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Sort by field. Valid values: projectId, createtime, instancename
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Sorting order. Valid values: desc, asc
-	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 
 	// Offset. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of results to be returned. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Queries by `OriginSerialId`
-	OriginSerialIds []*string `json:"OriginSerialIds,omitnil" name:"OriginSerialIds"`
+	OriginSerialIds []*string `json:"OriginSerialIds,omitnil,omitempty" name:"OriginSerialIds"`
 
 	// Identifies whether to use the `ExclusterType` field. false: no, true: yes
-	IsFilterExcluster *bool `json:"IsFilterExcluster,omitnil" name:"IsFilterExcluster"`
+	IsFilterExcluster *bool `json:"IsFilterExcluster,omitnil,omitempty" name:"IsFilterExcluster"`
 
 	// Instance cluster type. 1: non-dedicated cluster, 2: dedicated cluster, 0: all
-	ExclusterType *int64 `json:"ExclusterType,omitnil" name:"ExclusterType"`
+	ExclusterType *int64 `json:"ExclusterType,omitnil,omitempty" name:"ExclusterType"`
 
 	// Filters instances by dedicated cluster ID in the format of `dbdc-4ih6uct9`
-	ExclusterIds []*string `json:"ExclusterIds,omitnil" name:"ExclusterIds"`
+	ExclusterIds []*string `json:"ExclusterIds,omitnil,omitempty" name:"ExclusterIds"`
 
 	// Tag key used in queries
-	TagKeys []*string `json:"TagKeys,omitnil" name:"TagKeys"`
+	TagKeys []*string `json:"TagKeys,omitnil,omitempty" name:"TagKeys"`
 
 	// Instance types used in filtering. Valid values: 1 (dedicated instance), 2 (primary instance), 3 (disaster recovery instance). Multiple values should be separated by commas.
-	FilterInstanceType *string `json:"FilterInstanceType,omitnil" name:"FilterInstanceType"`
+	FilterInstanceType *string `json:"FilterInstanceType,omitnil,omitempty" name:"FilterInstanceType"`
 
 	// Use this filter to include instances in specific statuses
-	Status []*int64 `json:"Status,omitnil" name:"Status"`
+	Status []*int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Use this filter to exclude instances in specific statuses
-	ExcludeStatus []*int64 `json:"ExcludeStatus,omitnil" name:"ExcludeStatus"`
+	ExcludeStatus []*int64 `json:"ExcludeStatus,omitnil,omitempty" name:"ExcludeStatus"`
 }
 
 type DescribeDBInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Queries by instance ID or IDs. Instance ID is in the format of `tdsql-ow728lmc`. Up to 100 instances can be queried in one request.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Search field name. Valid values: instancename (search by instance name), vip (search by private IP), all (search by instance ID, instance name, and private IP).
-	SearchName *string `json:"SearchName,omitnil" name:"SearchName"`
+	SearchName *string `json:"SearchName,omitnil,omitempty" name:"SearchName"`
 
 	// Search keyword. Fuzzy search is supported. Multiple keywords should be separated by line breaks (`\n`).
-	SearchKey *string `json:"SearchKey,omitnil" name:"SearchKey"`
+	SearchKey *string `json:"SearchKey,omitnil,omitempty" name:"SearchKey"`
 
 	// Queries by project ID
-	ProjectIds []*int64 `json:"ProjectIds,omitnil" name:"ProjectIds"`
+	ProjectIds []*int64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
 
 	// Whether to search by VPC
-	IsFilterVpc *bool `json:"IsFilterVpc,omitnil" name:"IsFilterVpc"`
+	IsFilterVpc *bool `json:"IsFilterVpc,omitnil,omitempty" name:"IsFilterVpc"`
 
 	// VPC ID, which is valid when `IsFilterVpc` is 1
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// VPC subnet ID, which is valid when `IsFilterVpc` is 1
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Sort by field. Valid values: projectId, createtime, instancename
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Sorting order. Valid values: desc, asc
-	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 
 	// Offset. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of results to be returned. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Queries by `OriginSerialId`
-	OriginSerialIds []*string `json:"OriginSerialIds,omitnil" name:"OriginSerialIds"`
+	OriginSerialIds []*string `json:"OriginSerialIds,omitnil,omitempty" name:"OriginSerialIds"`
 
 	// Identifies whether to use the `ExclusterType` field. false: no, true: yes
-	IsFilterExcluster *bool `json:"IsFilterExcluster,omitnil" name:"IsFilterExcluster"`
+	IsFilterExcluster *bool `json:"IsFilterExcluster,omitnil,omitempty" name:"IsFilterExcluster"`
 
 	// Instance cluster type. 1: non-dedicated cluster, 2: dedicated cluster, 0: all
-	ExclusterType *int64 `json:"ExclusterType,omitnil" name:"ExclusterType"`
+	ExclusterType *int64 `json:"ExclusterType,omitnil,omitempty" name:"ExclusterType"`
 
 	// Filters instances by dedicated cluster ID in the format of `dbdc-4ih6uct9`
-	ExclusterIds []*string `json:"ExclusterIds,omitnil" name:"ExclusterIds"`
+	ExclusterIds []*string `json:"ExclusterIds,omitnil,omitempty" name:"ExclusterIds"`
 
 	// Tag key used in queries
-	TagKeys []*string `json:"TagKeys,omitnil" name:"TagKeys"`
+	TagKeys []*string `json:"TagKeys,omitnil,omitempty" name:"TagKeys"`
 
 	// Instance types used in filtering. Valid values: 1 (dedicated instance), 2 (primary instance), 3 (disaster recovery instance). Multiple values should be separated by commas.
-	FilterInstanceType *string `json:"FilterInstanceType,omitnil" name:"FilterInstanceType"`
+	FilterInstanceType *string `json:"FilterInstanceType,omitnil,omitempty" name:"FilterInstanceType"`
 
 	// Use this filter to include instances in specific statuses
-	Status []*int64 `json:"Status,omitnil" name:"Status"`
+	Status []*int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Use this filter to exclude instances in specific statuses
-	ExcludeStatus []*int64 `json:"ExcludeStatus,omitnil" name:"ExcludeStatus"`
+	ExcludeStatus []*int64 `json:"ExcludeStatus,omitnil,omitempty" name:"ExcludeStatus"`
 }
 
 func (r *DescribeDBInstancesRequest) ToJsonString() string {
@@ -2112,13 +2112,13 @@ func (r *DescribeDBInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBInstancesResponseParams struct {
 	// Number of eligible instances
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Instance details list
-	Instances []*DBInstance `json:"Instances,omitnil" name:"Instances"`
+	Instances []*DBInstance `json:"Instances,omitnil,omitempty" name:"Instances"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDBInstancesResponse struct {
@@ -2140,20 +2140,20 @@ func (r *DescribeDBInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBLogFilesRequestParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Requested log type. Valid values: 1 (binlog), 2 (cold backup), 3 (errlog), 4 (slowlog).
-	Type *uint64 `json:"Type,omitnil" name:"Type"`
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type DescribeDBLogFilesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `tdsql-ow728lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Requested log type. Valid values: 1 (binlog), 2 (cold backup), 3 (errlog), 4 (slowlog).
-	Type *uint64 `json:"Type,omitnil" name:"Type"`
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 func (r *DescribeDBLogFilesRequest) ToJsonString() string {
@@ -2179,25 +2179,25 @@ func (r *DescribeDBLogFilesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBLogFilesResponseParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Requested log type. Valid values: 1 (binlog), 2 (cold backup), 3 (errlog), 4 (slowlog).
-	Type *uint64 `json:"Type,omitnil" name:"Type"`
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Total number of requested logs
-	Total *uint64 `json:"Total,omitnil" name:"Total"`
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// Information such as `uri`, `length`, and `mtime` (modification time)
-	Files []*LogFileInfo `json:"Files,omitnil" name:"Files"`
+	Files []*LogFileInfo `json:"Files,omitnil,omitempty" name:"Files"`
 
 	// For an instance in a VPC, this prefix plus URI can be used as the download address
-	VpcPrefix *string `json:"VpcPrefix,omitnil" name:"VpcPrefix"`
+	VpcPrefix *string `json:"VpcPrefix,omitnil,omitempty" name:"VpcPrefix"`
 
 	// For an instance in a common network, this prefix plus URI can be used as the download address
-	NormalPrefix *string `json:"NormalPrefix,omitnil" name:"NormalPrefix"`
+	NormalPrefix *string `json:"NormalPrefix,omitnil,omitempty" name:"NormalPrefix"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDBLogFilesResponse struct {
@@ -2219,14 +2219,14 @@ func (r *DescribeDBLogFilesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBParametersRequestParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeDBParametersRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `tdsql-ow728lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeDBParametersRequest) ToJsonString() string {
@@ -2251,13 +2251,13 @@ func (r *DescribeDBParametersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBParametersResponseParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Requests the current parameter values of the database
-	Params []*ParamDesc `json:"Params,omitnil" name:"Params"`
+	Params []*ParamDesc `json:"Params,omitnil,omitempty" name:"Params"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDBParametersResponse struct {
@@ -2279,20 +2279,20 @@ func (r *DescribeDBParametersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBSecurityGroupsRequestParams struct {
 	// Database engine name. Valid value: `mariadb`.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeDBSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Database engine name. Valid value: `mariadb`.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeDBSecurityGroupsRequest) ToJsonString() string {
@@ -2318,18 +2318,18 @@ func (r *DescribeDBSecurityGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBSecurityGroupsResponseParams struct {
 	// Security group details
-	Groups []*SecurityGroup `json:"Groups,omitnil" name:"Groups"`
+	Groups []*SecurityGroup `json:"Groups,omitnil,omitempty" name:"Groups"`
 
 	// Instance VIP
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	VIP *string `json:"VIP,omitnil" name:"VIP"`
+	VIP *string `json:"VIP,omitnil,omitempty" name:"VIP"`
 
 	// Instance port
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	VPort *int64 `json:"VPort,omitnil" name:"VPort"`
+	VPort *int64 `json:"VPort,omitnil,omitempty" name:"VPort"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDBSecurityGroupsResponse struct {
@@ -2351,62 +2351,62 @@ func (r *DescribeDBSecurityGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBSlowLogsRequestParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Data entry number starting from which to return results
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of results to be returned
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Query start time in the format of 2016-07-23 14:55:20
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Query end time in the format of 2016-08-22 14:55:20
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Specific name of the database to be queried
-	Db *string `json:"Db,omitnil" name:"Db"`
+	Db *string `json:"Db,omitnil,omitempty" name:"Db"`
 
 	// Sorting metric. Valid values: query_time_sum, query_count
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Sorting order. Valid values: desc, asc
-	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 
 	// Query slow queries from either the primary or the replica. Valid values: 0 (primary), 1 (replica)
-	Slave *int64 `json:"Slave,omitnil" name:"Slave"`
+	Slave *int64 `json:"Slave,omitnil,omitempty" name:"Slave"`
 }
 
 type DescribeDBSlowLogsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `tdsql-ow728lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Data entry number starting from which to return results
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of results to be returned
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Query start time in the format of 2016-07-23 14:55:20
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Query end time in the format of 2016-08-22 14:55:20
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Specific name of the database to be queried
-	Db *string `json:"Db,omitnil" name:"Db"`
+	Db *string `json:"Db,omitnil,omitempty" name:"Db"`
 
 	// Sorting metric. Valid values: query_time_sum, query_count
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 
 	// Sorting order. Valid values: desc, asc
-	OrderByType *string `json:"OrderByType,omitnil" name:"OrderByType"`
+	OrderByType *string `json:"OrderByType,omitnil,omitempty" name:"OrderByType"`
 
 	// Query slow queries from either the primary or the replica. Valid values: 0 (primary), 1 (replica)
-	Slave *int64 `json:"Slave,omitnil" name:"Slave"`
+	Slave *int64 `json:"Slave,omitnil,omitempty" name:"Slave"`
 }
 
 func (r *DescribeDBSlowLogsRequest) ToJsonString() string {
@@ -2439,22 +2439,22 @@ func (r *DescribeDBSlowLogsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBSlowLogsResponseParams struct {
 	// Slow query log data
-	Data []*SlowLogData `json:"Data,omitnil" name:"Data"`
+	Data []*SlowLogData `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Total statement lock time
-	LockTimeSum *float64 `json:"LockTimeSum,omitnil" name:"LockTimeSum"`
+	LockTimeSum *float64 `json:"LockTimeSum,omitnil,omitempty" name:"LockTimeSum"`
 
 	// Total number of statement queries
-	QueryCount *int64 `json:"QueryCount,omitnil" name:"QueryCount"`
+	QueryCount *int64 `json:"QueryCount,omitnil,omitempty" name:"QueryCount"`
 
 	// Total number of results
-	Total *int64 `json:"Total,omitnil" name:"Total"`
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// Total statement query time
-	QueryTimeSum *float64 `json:"QueryTimeSum,omitnil" name:"QueryTimeSum"`
+	QueryTimeSum *float64 `json:"QueryTimeSum,omitnil,omitempty" name:"QueryTimeSum"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDBSlowLogsResponse struct {
@@ -2476,14 +2476,14 @@ func (r *DescribeDBSlowLogsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBTmpInstancesRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeDBTmpInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeDBTmpInstancesRequest) ToJsonString() string {
@@ -2508,10 +2508,10 @@ func (r *DescribeDBTmpInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDBTmpInstancesResponseParams struct {
 	// Temp instance
-	TmpInstances []*TmpInstance `json:"TmpInstances,omitnil" name:"TmpInstances"`
+	TmpInstances []*TmpInstance `json:"TmpInstances,omitnil,omitempty" name:"TmpInstances"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDBTmpInstancesResponse struct {
@@ -2533,20 +2533,20 @@ func (r *DescribeDBTmpInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDatabaseObjectsRequestParams struct {
 	// Instance ID in the format of `dcdbt-ow7t8lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Database name, which can be obtained through the `DescribeDatabases` API.
-	DbName *string `json:"DbName,omitnil" name:"DbName"`
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 }
 
 type DescribeDatabaseObjectsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `dcdbt-ow7t8lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Database name, which can be obtained through the `DescribeDatabases` API.
-	DbName *string `json:"DbName,omitnil" name:"DbName"`
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 }
 
 func (r *DescribeDatabaseObjectsRequest) ToJsonString() string {
@@ -2572,25 +2572,25 @@ func (r *DescribeDatabaseObjectsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDatabaseObjectsResponseParams struct {
 	// Passed through from input parameters.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Database name.
-	DbName *string `json:"DbName,omitnil" name:"DbName"`
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
 	// Table list.
-	Tables []*DatabaseTable `json:"Tables,omitnil" name:"Tables"`
+	Tables []*DatabaseTable `json:"Tables,omitnil,omitempty" name:"Tables"`
 
 	// View list.
-	Views []*DatabaseView `json:"Views,omitnil" name:"Views"`
+	Views []*DatabaseView `json:"Views,omitnil,omitempty" name:"Views"`
 
 	// Stored procedure list.
-	Procs []*DatabaseProcedure `json:"Procs,omitnil" name:"Procs"`
+	Procs []*DatabaseProcedure `json:"Procs,omitnil,omitempty" name:"Procs"`
 
 	// Function list.
-	Funcs []*DatabaseFunction `json:"Funcs,omitnil" name:"Funcs"`
+	Funcs []*DatabaseFunction `json:"Funcs,omitnil,omitempty" name:"Funcs"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDatabaseObjectsResponse struct {
@@ -2612,26 +2612,26 @@ func (r *DescribeDatabaseObjectsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDatabaseTableRequestParams struct {
 	// Instance ID in the format of `dcdbt-ow7t8lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Database name, which can be obtained through the `DescribeDatabases` API.
-	DbName *string `json:"DbName,omitnil" name:"DbName"`
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
 	// Table name, which can be obtained through the `DescribeDatabaseObjects` API.
-	Table *string `json:"Table,omitnil" name:"Table"`
+	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
 }
 
 type DescribeDatabaseTableRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `dcdbt-ow7t8lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Database name, which can be obtained through the `DescribeDatabases` API.
-	DbName *string `json:"DbName,omitnil" name:"DbName"`
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
 	// Table name, which can be obtained through the `DescribeDatabaseObjects` API.
-	Table *string `json:"Table,omitnil" name:"Table"`
+	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
 }
 
 func (r *DescribeDatabaseTableRequest) ToJsonString() string {
@@ -2658,19 +2658,19 @@ func (r *DescribeDatabaseTableRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDatabaseTableResponseParams struct {
 	// Instance name.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Database name.
-	DbName *string `json:"DbName,omitnil" name:"DbName"`
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
 	// Table name.
-	Table *string `json:"Table,omitnil" name:"Table"`
+	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
 
 	// Column information.
-	Cols []*TableColumn `json:"Cols,omitnil" name:"Cols"`
+	Cols []*TableColumn `json:"Cols,omitnil,omitempty" name:"Cols"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDatabaseTableResponse struct {
@@ -2692,14 +2692,14 @@ func (r *DescribeDatabaseTableResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDatabasesRequestParams struct {
 	// Instance ID in the format of `dcdbt-ow7t8lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeDatabasesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `dcdbt-ow7t8lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeDatabasesRequest) ToJsonString() string {
@@ -2724,13 +2724,13 @@ func (r *DescribeDatabasesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDatabasesResponseParams struct {
 	// The database list of this instance.
-	Databases []*Database `json:"Databases,omitnil" name:"Databases"`
+	Databases []*Database `json:"Databases,omitnil,omitempty" name:"Databases"`
 
 	// Passed through from input parameters.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDatabasesResponse struct {
@@ -2752,14 +2752,14 @@ func (r *DescribeDatabasesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDcnDetailRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeDcnDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeDcnDetailRequest) ToJsonString() string {
@@ -2784,10 +2784,10 @@ func (r *DescribeDcnDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDcnDetailResponseParams struct {
 	// DCN synchronization details
-	DcnDetails []*DcnDetailItem `json:"DcnDetails,omitnil" name:"DcnDetails"`
+	DcnDetails []*DcnDetailItem `json:"DcnDetails,omitnil,omitempty" name:"DcnDetails"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDcnDetailResponse struct {
@@ -2809,20 +2809,20 @@ func (r *DescribeDcnDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeFileDownloadUrlRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Unsigned file path
-	FilePath *string `json:"FilePath,omitnil" name:"FilePath"`
+	FilePath *string `json:"FilePath,omitnil,omitempty" name:"FilePath"`
 }
 
 type DescribeFileDownloadUrlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Unsigned file path
-	FilePath *string `json:"FilePath,omitnil" name:"FilePath"`
+	FilePath *string `json:"FilePath,omitnil,omitempty" name:"FilePath"`
 }
 
 func (r *DescribeFileDownloadUrlRequest) ToJsonString() string {
@@ -2848,10 +2848,10 @@ func (r *DescribeFileDownloadUrlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeFileDownloadUrlResponseParams struct {
 	// Signed download URL
-	PreSignedUrl *string `json:"PreSignedUrl,omitnil" name:"PreSignedUrl"`
+	PreSignedUrl *string `json:"PreSignedUrl,omitnil,omitempty" name:"PreSignedUrl"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeFileDownloadUrlResponse struct {
@@ -2873,26 +2873,26 @@ func (r *DescribeFileDownloadUrlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceNodeInfoRequestParams struct {
 	// Instance ID, such as tdsql-6ltok4u9
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The maximum number of results returned at a time. By default, there is no upper limit to this value, that is, all results can be returned.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset of the returned results. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeInstanceNodeInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID, such as tdsql-6ltok4u9
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The maximum number of results returned at a time. By default, there is no upper limit to this value, that is, all results can be returned.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset of the returned results. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeInstanceNodeInfoRequest) ToJsonString() string {
@@ -2919,13 +2919,13 @@ func (r *DescribeInstanceNodeInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceNodeInfoResponseParams struct {
 	// Total number of nodes
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Node information
-	NodesInfo []*NodeInfo `json:"NodesInfo,omitnil" name:"NodesInfo"`
+	NodesInfo []*NodeInfo `json:"NodesInfo,omitnil,omitempty" name:"NodesInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceNodeInfoResponse struct {
@@ -2947,14 +2947,14 @@ func (r *DescribeInstanceNodeInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLogFileRetentionPeriodRequestParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeLogFileRetentionPeriodRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `tdsql-ow728lmc`
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeLogFileRetentionPeriodRequest) ToJsonString() string {
@@ -2979,13 +2979,13 @@ func (r *DescribeLogFileRetentionPeriodRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLogFileRetentionPeriodResponseParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Backup log retention days
-	Days *uint64 `json:"Days,omitnil" name:"Days"`
+	Days *uint64 `json:"Days,omitnil,omitempty" name:"Days"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLogFileRetentionPeriodResponse struct {
@@ -3007,14 +3007,14 @@ func (r *DescribeLogFileRetentionPeriodResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeOrdersRequestParams struct {
 	// List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.
-	DealNames []*string `json:"DealNames,omitnil" name:"DealNames"`
+	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
 }
 
 type DescribeOrdersRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of long order numbers to be queried, which are returned for the APIs for creating, renewing, or scaling instances.
-	DealNames []*string `json:"DealNames,omitnil" name:"DealNames"`
+	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
 }
 
 func (r *DescribeOrdersRequest) ToJsonString() string {
@@ -3039,13 +3039,13 @@ func (r *DescribeOrdersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOrdersResponseParams struct {
 	// Returned number of orders.
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Order information list.
-	Deals []*Deal `json:"Deals,omitnil" name:"Deals"`
+	Deals []*Deal `json:"Deals,omitnil,omitempty" name:"Deals"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeOrdersResponse struct {
@@ -3067,66 +3067,66 @@ func (r *DescribeOrdersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribePriceRequestParams struct {
 	// AZ ID of the purchased instance.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Number of instance nodes, which can be obtained 
 	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
-	NodeCount *int64 `json:"NodeCount,omitnil" name:"NodeCount"`
+	NodeCount *int64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
 	// Memory size in GB, which can be obtained 
 	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
-	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// Storage capacity in GB. The maximum and minimum storage space can be obtained 
 	//  by querying instance specification through the `DescribeDBInstanceSpecs` API.
-	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Purchase period in months
-	Period *int64 `json:"Period,omitnil" name:"Period"`
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// The number of instances to be purchased. Only one instance is queried for price by default.
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Billing type. Valid values: `postpaid` (pay-as-you-go), `prepaid` (monthly subscription).
-	Paymode *string `json:"Paymode,omitnil" name:"Paymode"`
+	Paymode *string `json:"Paymode,omitnil,omitempty" name:"Paymode"`
 
 	// Price unit. Valid values:   
 	// `* pent` (cent), 
 	// `* microPent` (microcent).
-	AmountUnit *string `json:"AmountUnit,omitnil" name:"AmountUnit"`
+	AmountUnit *string `json:"AmountUnit,omitnil,omitempty" name:"AmountUnit"`
 }
 
 type DescribePriceRequest struct {
 	*tchttp.BaseRequest
 	
 	// AZ ID of the purchased instance.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Number of instance nodes, which can be obtained 
 	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
-	NodeCount *int64 `json:"NodeCount,omitnil" name:"NodeCount"`
+	NodeCount *int64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
 	// Memory size in GB, which can be obtained 
 	//  by querying the instance specification through the `DescribeDBInstanceSpecs` API.
-	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// Storage capacity in GB. The maximum and minimum storage space can be obtained 
 	//  by querying instance specification through the `DescribeDBInstanceSpecs` API.
-	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Purchase period in months
-	Period *int64 `json:"Period,omitnil" name:"Period"`
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// The number of instances to be purchased. Only one instance is queried for price by default.
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Billing type. Valid values: `postpaid` (pay-as-you-go), `prepaid` (monthly subscription).
-	Paymode *string `json:"Paymode,omitnil" name:"Paymode"`
+	Paymode *string `json:"Paymode,omitnil,omitempty" name:"Paymode"`
 
 	// Price unit. Valid values:   
 	// `* pent` (cent), 
 	// `* microPent` (microcent).
-	AmountUnit *string `json:"AmountUnit,omitnil" name:"AmountUnit"`
+	AmountUnit *string `json:"AmountUnit,omitnil,omitempty" name:"AmountUnit"`
 }
 
 func (r *DescribePriceRequest) ToJsonString() string {
@@ -3160,15 +3160,15 @@ type DescribePriceResponseParams struct {
 	// Original price  
 	// * Unit: Cent (default). If the request parameter contains `AmountUnit`, see `AmountUnit` description.
 	// * Currency: CNY (Chinese site), USD (international site)
-	OriginalPrice *int64 `json:"OriginalPrice,omitnil" name:"OriginalPrice"`
+	OriginalPrice *int64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
 	// The actual price may be different from the original price due to discounts. 
 	// * Unit: Cent (default). If the request parameter contains `AmountUnit`, see `AmountUnit` description.
 	// * Currency: CNY (Chinese site), USD (international site)
-	Price *int64 `json:"Price,omitnil" name:"Price"`
+	Price *int64 `json:"Price,omitnil,omitempty" name:"Price"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribePriceResponse struct {
@@ -3190,20 +3190,20 @@ func (r *DescribePriceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProjectSecurityGroupsRequestParams struct {
 	// Database engine name. Valid value: `mariadb`.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 type DescribeProjectSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Database engine name. Valid value: `mariadb`.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 func (r *DescribeProjectSecurityGroupsRequest) ToJsonString() string {
@@ -3229,13 +3229,13 @@ func (r *DescribeProjectSecurityGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeProjectSecurityGroupsResponseParams struct {
 	// Security group details
-	Groups []*SecurityGroup `json:"Groups,omitnil" name:"Groups"`
+	Groups []*SecurityGroup `json:"Groups,omitnil,omitempty" name:"Groups"`
 
 	// Total number of security groups.
-	Total *uint64 `json:"Total,omitnil" name:"Total"`
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeProjectSecurityGroupsResponse struct {
@@ -3257,14 +3257,14 @@ func (r *DescribeProjectSecurityGroupsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DestroyDBInstanceRequestParams struct {
 	// Instance ID in the format of “tdsqlshard-c1nl9rpv”. It is the same as the instance ID displayed in the TencentDB for MariaDB console.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DestroyDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of “tdsqlshard-c1nl9rpv”. It is the same as the instance ID displayed in the TencentDB for MariaDB console.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DestroyDBInstanceRequest) ToJsonString() string {
@@ -3289,13 +3289,13 @@ func (r *DestroyDBInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DestroyDBInstanceResponseParams struct {
 	// Instance ID, which is the same as the request parameter `InstanceId`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Async task ID, which can be used in the [DescribeFlow](https://intl.cloud.tencent.com/document/product/557/56485?from_cn_redirect=1) API to query the async task result.
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DestroyDBInstanceResponse struct {
@@ -3317,14 +3317,14 @@ func (r *DestroyDBInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DestroyHourDBInstanceRequestParams struct {
 	// Instance ID in the format of tdsql-avw0207d. It is the same as the instance ID displayed in the TencentDB console.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DestroyHourDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of tdsql-avw0207d. It is the same as the instance ID displayed in the TencentDB console.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DestroyHourDBInstanceRequest) ToJsonString() string {
@@ -3349,13 +3349,13 @@ func (r *DestroyHourDBInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DestroyHourDBInstanceResponseParams struct {
 	// Async task ID, which can be used in the [DescribeFlow](https://intl.cloud.tencent.com/document/product/237/16177?from_cn_redirect=1) API to query the async task result.
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// Instance ID, which is the same as the request parameter `InstanceId`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DestroyHourDBInstanceResponse struct {
@@ -3377,26 +3377,26 @@ func (r *DestroyHourDBInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DisassociateSecurityGroupsRequestParams struct {
 	// Database engine name. Valid value: `mariadb`.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// Security group ID
-	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
 	// Instance ID list, which is an array of one or more instance IDs.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type DisassociateSecurityGroupsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Database engine name. Valid value: `mariadb`.
-	Product *string `json:"Product,omitnil" name:"Product"`
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
 
 	// Security group ID
-	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
 	// Instance ID list, which is an array of one or more instance IDs.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *DisassociateSecurityGroupsRequest) ToJsonString() string {
@@ -3423,7 +3423,7 @@ func (r *DisassociateSecurityGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DisassociateSecurityGroupsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DisassociateSecurityGroupsResponse struct {
@@ -3444,76 +3444,76 @@ func (r *DisassociateSecurityGroupsResponse) FromJsonString(s string) error {
 
 type FunctionPrivilege struct {
 	// Database name
-	Database *string `json:"Database,omitnil" name:"Database"`
+	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 
 	// Function name
-	FunctionName *string `json:"FunctionName,omitnil" name:"FunctionName"`
+	FunctionName *string `json:"FunctionName,omitnil,omitempty" name:"FunctionName"`
 
 	// Permission information
-	Privileges []*string `json:"Privileges,omitnil" name:"Privileges"`
+	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
 }
 
 // Predefined struct for user
 type GrantAccountPrivilegesRequestParams struct {
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Login username.
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Access host allowed for user. An account is uniquely identified by username and host.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Database name. `\*` indicates that global permissions will be set (i.e., `\*.\*`), in which case the `Type` and `Object ` parameters will be ignored. If `DbName` is not `\*`, the input parameter `Type` is required.
-	DbName *string `json:"DbName,omitnil" name:"DbName"`
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
 	// Global permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`, `SHOW DATABASES`, `REPLICATION CLIENT`, `REPLICATION SLAVE`. 
 	// Database permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`. 
 	// Table/View permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`. 
 	// Stored procedure/function permission. Valid values: `ALTER ROUTINE`, `EXECUTE`. 
 	// Field permission. Valid values: `INSERT`, `REFERENCES`, `SELECT`, `UPDATE`.
-	Privileges []*string `json:"Privileges,omitnil" name:"Privileges"`
+	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
 
 	// Type. Valid values: table, view, proc, func, \*. If `DbName` is a specific database name and `Type` is `\*`, the permissions of the database will be set (i.e., `db.\*`), in which case the `Object` parameter will be ignored
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Type name. For example, if `Type` is `table`, `Object` indicates a specific table name; if both `DbName` and `Type` are specific names, it indicates a specific object name and cannot be `\*` or empty
-	Object *string `json:"Object,omitnil" name:"Object"`
+	Object *string `json:"Object,omitnil,omitempty" name:"Object"`
 
 	// If `Type` is `table` and `ColName` is `\*`, the permissions will be granted to the table; if `ColName` is a specific field name, the permissions will be granted to the field
-	ColName *string `json:"ColName,omitnil" name:"ColName"`
+	ColName *string `json:"ColName,omitnil,omitempty" name:"ColName"`
 }
 
 type GrantAccountPrivilegesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Login username.
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Access host allowed for user. An account is uniquely identified by username and host.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Database name. `\*` indicates that global permissions will be set (i.e., `\*.\*`), in which case the `Type` and `Object ` parameters will be ignored. If `DbName` is not `\*`, the input parameter `Type` is required.
-	DbName *string `json:"DbName,omitnil" name:"DbName"`
+	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
 	// Global permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`, `SHOW DATABASES`, `REPLICATION CLIENT`, `REPLICATION SLAVE`. 
 	// Database permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE TEMPORARY TABLES`, `LOCK TABLES`, `EXECUTE`, `CREATE VIEW`, `SHOW VIEW`, `CREATE ROUTINE`, `ALTER ROUTINE`, `EVENT`, `TRIGGER`. 
 	// Table/View permission. Valid values: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`. 
 	// Stored procedure/function permission. Valid values: `ALTER ROUTINE`, `EXECUTE`. 
 	// Field permission. Valid values: `INSERT`, `REFERENCES`, `SELECT`, `UPDATE`.
-	Privileges []*string `json:"Privileges,omitnil" name:"Privileges"`
+	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
 
 	// Type. Valid values: table, view, proc, func, \*. If `DbName` is a specific database name and `Type` is `\*`, the permissions of the database will be set (i.e., `db.\*`), in which case the `Object` parameter will be ignored
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Type name. For example, if `Type` is `table`, `Object` indicates a specific table name; if both `DbName` and `Type` are specific names, it indicates a specific object name and cannot be `\*` or empty
-	Object *string `json:"Object,omitnil" name:"Object"`
+	Object *string `json:"Object,omitnil,omitempty" name:"Object"`
 
 	// If `Type` is `table` and `ColName` is `\*`, the permissions will be granted to the table; if `ColName` is a specific field name, the permissions will be granted to the field
-	ColName *string `json:"ColName,omitnil" name:"ColName"`
+	ColName *string `json:"ColName,omitnil,omitempty" name:"ColName"`
 }
 
 func (r *GrantAccountPrivilegesRequest) ToJsonString() string {
@@ -3545,7 +3545,7 @@ func (r *GrantAccountPrivilegesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GrantAccountPrivilegesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GrantAccountPrivilegesResponse struct {
@@ -3566,51 +3566,51 @@ func (r *GrantAccountPrivilegesResponse) FromJsonString(s string) error {
 
 type InstanceBackupFileItem struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance name
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Instance status
-	InstanceStatus *int64 `json:"InstanceStatus,omitnil" name:"InstanceStatus"`
+	InstanceStatus *int64 `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
 
 	// Shard ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ShardId *string `json:"ShardId,omitnil" name:"ShardId"`
+	ShardId *string `json:"ShardId,omitnil,omitempty" name:"ShardId"`
 
 	// File path
-	FilePath *string `json:"FilePath,omitnil" name:"FilePath"`
+	FilePath *string `json:"FilePath,omitnil,omitempty" name:"FilePath"`
 
 	// File name
-	FileName *string `json:"FileName,omitnil" name:"FileName"`
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
 	// File size
-	FileSize *int64 `json:"FileSize,omitnil" name:"FileSize"`
+	FileSize *int64 `json:"FileSize,omitnil,omitempty" name:"FileSize"`
 
 	// Backup type. Valid values: `Data` (data backup), `Binlog` (Binlog backup), `Errlog` (error log), `Slowlog` (slow log).
-	BackupType *string `json:"BackupType,omitnil" name:"BackupType"`
+	BackupType *string `json:"BackupType,omitnil,omitempty" name:"BackupType"`
 
 	// Manual backup. Valid values: `0` (no), `1` (yes).
-	ManualBackup *int64 `json:"ManualBackup,omitnil" name:"ManualBackup"`
+	ManualBackup *int64 `json:"ManualBackup,omitnil,omitempty" name:"ManualBackup"`
 
 	// Backup start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Backup end time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 // Predefined struct for user
 type IsolateDBInstanceRequestParams struct {
 	// Instance ID in the format of `tdsql-dasjkhd`. It is the same as the instance ID displayed on the TencentDB console. You can use the `DescribeDBInstances` API to query the ID, which is the value of the `InstanceId` output parameter.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type IsolateDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `tdsql-dasjkhd`. It is the same as the instance ID displayed on the TencentDB console. You can use the `DescribeDBInstances` API to query the ID, which is the value of the `InstanceId` output parameter.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *IsolateDBInstanceRequest) ToJsonString() string {
@@ -3635,13 +3635,13 @@ func (r *IsolateDBInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type IsolateDBInstanceResponseParams struct {
 	// IDs of isolated instances
-	SuccessInstanceIds []*string `json:"SuccessInstanceIds,omitnil" name:"SuccessInstanceIds"`
+	SuccessInstanceIds []*string `json:"SuccessInstanceIds,omitnil,omitempty" name:"SuccessInstanceIds"`
 
 	// IDs of instances failed to be isolated
-	FailedInstanceIds []*string `json:"FailedInstanceIds,omitnil" name:"FailedInstanceIds"`
+	FailedInstanceIds []*string `json:"FailedInstanceIds,omitnil,omitempty" name:"FailedInstanceIds"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type IsolateDBInstanceResponse struct {
@@ -3663,14 +3663,14 @@ func (r *IsolateDBInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type IsolateDedicatedDBInstanceRequestParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type IsolateDedicatedDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `tdsql-ow728lmc`
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *IsolateDedicatedDBInstanceRequest) ToJsonString() string {
@@ -3695,7 +3695,7 @@ func (r *IsolateDedicatedDBInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type IsolateDedicatedDBInstanceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type IsolateDedicatedDBInstanceResponse struct {
@@ -3717,20 +3717,20 @@ func (r *IsolateDedicatedDBInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type KillSessionRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// List of session IDs
-	SessionId []*int64 `json:"SessionId,omitnil" name:"SessionId"`
+	SessionId []*int64 `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 }
 
 type KillSessionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// List of session IDs
-	SessionId []*int64 `json:"SessionId,omitnil" name:"SessionId"`
+	SessionId []*int64 `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 }
 
 func (r *KillSessionRequest) ToJsonString() string {
@@ -3756,10 +3756,10 @@ func (r *KillSessionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type KillSessionResponseParams struct {
 	// Task ID
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type KillSessionResponse struct {
@@ -3780,47 +3780,47 @@ func (r *KillSessionResponse) FromJsonString(s string) error {
 
 type LogFileInfo struct {
 	// Last modified time of log
-	Mtime *uint64 `json:"Mtime,omitnil" name:"Mtime"`
+	Mtime *uint64 `json:"Mtime,omitnil,omitempty" name:"Mtime"`
 
 	// File length
-	Length *uint64 `json:"Length,omitnil" name:"Length"`
+	Length *uint64 `json:"Length,omitnil,omitempty" name:"Length"`
 
 	// Uniform resource identifier (URI) used during log download
-	Uri *string `json:"Uri,omitnil" name:"Uri"`
+	Uri *string `json:"Uri,omitnil,omitempty" name:"Uri"`
 
 	// Filename
-	FileName *string `json:"FileName,omitnil" name:"FileName"`
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 }
 
 // Predefined struct for user
 type ModifyAccountDescriptionRequestParams struct {
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Login username.
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Access host allowed for user. An account is uniquely identified by username and host.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// New account remarks, which can contain 0-256 characters.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type ModifyAccountDescriptionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Login username.
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Access host allowed for user. An account is uniquely identified by username and host.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// New account remarks, which can contain 0-256 characters.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 func (r *ModifyAccountDescriptionRequest) ToJsonString() string {
@@ -3848,7 +3848,7 @@ func (r *ModifyAccountDescriptionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAccountDescriptionResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyAccountDescriptionResponse struct {
@@ -3870,76 +3870,76 @@ func (r *ModifyAccountDescriptionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAccountPrivilegesRequestParams struct {
 	// Instance ID in the format of tdsql-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Database account, including username and host address.
-	Accounts []*Account `json:"Accounts,omitnil" name:"Accounts"`
+	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 
 	// Global permission. Valid values of `GlobalPrivileges`: `"SELECT"`, `"INSERT"`, `"UPDATE"`, `"DELETE"`, `"CREATE"`, `"PROCESS"`, `"DROP"`, `"REFERENCES"`, `"INDEX"`, `"ALTER"`, `"SHOW DATABASES"`, `"CREATE TEMPORARY TABLES"`, `"LOCK TABLES"`, `"EXECUTE"`, `"CREATE VIEW"`, `"SHOW VIEW"`, `"CREATE ROUTINE"`, `"ALTER ROUTINE"`, `"EVENT"`, `"TRIGGER"`.
 	// Note: if the parameter is left empty, no change will be made to the granted global permissions. To clear the granted global permissions, set the parameter to an empty array.
-	GlobalPrivileges []*string `json:"GlobalPrivileges,omitnil" name:"GlobalPrivileges"`
+	GlobalPrivileges []*string `json:"GlobalPrivileges,omitnil,omitempty" name:"GlobalPrivileges"`
 
 	// Database permission. Valid values of `Privileges`: `"SELECT"`, `"INSERT"`, `"UPDATE"`, `"DELETE"`, `"CREATE"`, `"DROP"`, `"REFERENCES"`, `"INDEX"`, `"ALTER"`, `"CREATE TEMPORARY TABLES"`, `"LOCK TABLES"`, `"EXECUTE"`, `"CREATE VIEW"`, `"SHOW VIEW"`, `"CREATE ROUTINE"`, `"ALTER ROUTINE"`, `"EVENT"`, `"TRIGGER"`.
 	// Note: if the parameter is left empty, no change will be made to the granted database permissions. To clear the granted database permissions, set `Privileges` to an empty array.
-	DatabasePrivileges []*DatabasePrivilege `json:"DatabasePrivileges,omitnil" name:"DatabasePrivileges"`
+	DatabasePrivileges []*DatabasePrivilege `json:"DatabasePrivileges,omitnil,omitempty" name:"DatabasePrivileges"`
 
 	// Database table permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.
 	// Note: if the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted table permissions, set `Privileges` to an empty array.
-	TablePrivileges []*TablePrivilege `json:"TablePrivileges,omitnil" name:"TablePrivileges"`
+	TablePrivileges []*TablePrivilege `json:"TablePrivileges,omitnil,omitempty" name:"TablePrivileges"`
 
 	// Column permission. Valid values of `Privileges`: `"SELECT"`, `"INSERT"`, `"UPDATE"`, `"REFERENCES"`.
 	// Note: if the parameter is left empty, no change will be made to the granted column permissions. To clear the granted column permissions, set `Privileges` to an empty array.
-	ColumnPrivileges []*ColumnPrivilege `json:"ColumnPrivileges,omitnil" name:"ColumnPrivileges"`
+	ColumnPrivileges []*ColumnPrivilege `json:"ColumnPrivileges,omitnil,omitempty" name:"ColumnPrivileges"`
 
 	// Database view permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.
 	// Note: if the parameter is not passed in, no change will be made to the granted view permissions. To clear the granted view permissions, set `Privileges` to an empty array.
-	ViewPrivileges []*ViewPrivileges `json:"ViewPrivileges,omitnil" name:"ViewPrivileges"`
+	ViewPrivileges []*ViewPrivileges `json:"ViewPrivileges,omitnil,omitempty" name:"ViewPrivileges"`
 
 	// Database function permissions. Valid values of `Privileges`: `ALTER ROUTINE`, `EXECUTE`.
 	// Note: if the parameter is not passed in, no change will be made to the granted function permissions. To clear the granted function permissions, set `Privileges` to an empty array.
-	FunctionPrivileges []*FunctionPrivilege `json:"FunctionPrivileges,omitnil" name:"FunctionPrivileges"`
+	FunctionPrivileges []*FunctionPrivilege `json:"FunctionPrivileges,omitnil,omitempty" name:"FunctionPrivileges"`
 
 	// Database stored procedure permission. Valid values of `Privileges`: `ALTER ROUTINE`, `EXECUTE`.
 	// Note: if the parameter is not passed in, no change will be made to the granted stored procedure permissions. To clear the granted stored procedure permissions, set `Privileges` to an empty array.
-	ProcedurePrivileges []*ProcedurePrivilege `json:"ProcedurePrivileges,omitnil" name:"ProcedurePrivileges"`
+	ProcedurePrivileges []*ProcedurePrivilege `json:"ProcedurePrivileges,omitnil,omitempty" name:"ProcedurePrivileges"`
 }
 
 type ModifyAccountPrivilegesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of tdsql-c1nl9rpv. It is the same as the instance ID displayed in the TencentDB console.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Database account, including username and host address.
-	Accounts []*Account `json:"Accounts,omitnil" name:"Accounts"`
+	Accounts []*Account `json:"Accounts,omitnil,omitempty" name:"Accounts"`
 
 	// Global permission. Valid values of `GlobalPrivileges`: `"SELECT"`, `"INSERT"`, `"UPDATE"`, `"DELETE"`, `"CREATE"`, `"PROCESS"`, `"DROP"`, `"REFERENCES"`, `"INDEX"`, `"ALTER"`, `"SHOW DATABASES"`, `"CREATE TEMPORARY TABLES"`, `"LOCK TABLES"`, `"EXECUTE"`, `"CREATE VIEW"`, `"SHOW VIEW"`, `"CREATE ROUTINE"`, `"ALTER ROUTINE"`, `"EVENT"`, `"TRIGGER"`.
 	// Note: if the parameter is left empty, no change will be made to the granted global permissions. To clear the granted global permissions, set the parameter to an empty array.
-	GlobalPrivileges []*string `json:"GlobalPrivileges,omitnil" name:"GlobalPrivileges"`
+	GlobalPrivileges []*string `json:"GlobalPrivileges,omitnil,omitempty" name:"GlobalPrivileges"`
 
 	// Database permission. Valid values of `Privileges`: `"SELECT"`, `"INSERT"`, `"UPDATE"`, `"DELETE"`, `"CREATE"`, `"DROP"`, `"REFERENCES"`, `"INDEX"`, `"ALTER"`, `"CREATE TEMPORARY TABLES"`, `"LOCK TABLES"`, `"EXECUTE"`, `"CREATE VIEW"`, `"SHOW VIEW"`, `"CREATE ROUTINE"`, `"ALTER ROUTINE"`, `"EVENT"`, `"TRIGGER"`.
 	// Note: if the parameter is left empty, no change will be made to the granted database permissions. To clear the granted database permissions, set `Privileges` to an empty array.
-	DatabasePrivileges []*DatabasePrivilege `json:"DatabasePrivileges,omitnil" name:"DatabasePrivileges"`
+	DatabasePrivileges []*DatabasePrivilege `json:"DatabasePrivileges,omitnil,omitempty" name:"DatabasePrivileges"`
 
 	// Database table permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.
 	// Note: if the parameter is not passed in, no change will be made to the granted table permissions. To clear the granted table permissions, set `Privileges` to an empty array.
-	TablePrivileges []*TablePrivilege `json:"TablePrivileges,omitnil" name:"TablePrivileges"`
+	TablePrivileges []*TablePrivilege `json:"TablePrivileges,omitnil,omitempty" name:"TablePrivileges"`
 
 	// Column permission. Valid values of `Privileges`: `"SELECT"`, `"INSERT"`, `"UPDATE"`, `"REFERENCES"`.
 	// Note: if the parameter is left empty, no change will be made to the granted column permissions. To clear the granted column permissions, set `Privileges` to an empty array.
-	ColumnPrivileges []*ColumnPrivilege `json:"ColumnPrivileges,omitnil" name:"ColumnPrivileges"`
+	ColumnPrivileges []*ColumnPrivilege `json:"ColumnPrivileges,omitnil,omitempty" name:"ColumnPrivileges"`
 
 	// Database view permission. Valid values of `Privileges`: `SELECT`, `INSERT`, `UPDATE`, `DELETE`, `CREATE`, `DROP`, `REFERENCES`, `INDEX`, `ALTER`, `CREATE VIEW`, `SHOW VIEW`, `TRIGGER`.
 	// Note: if the parameter is not passed in, no change will be made to the granted view permissions. To clear the granted view permissions, set `Privileges` to an empty array.
-	ViewPrivileges []*ViewPrivileges `json:"ViewPrivileges,omitnil" name:"ViewPrivileges"`
+	ViewPrivileges []*ViewPrivileges `json:"ViewPrivileges,omitnil,omitempty" name:"ViewPrivileges"`
 
 	// Database function permissions. Valid values of `Privileges`: `ALTER ROUTINE`, `EXECUTE`.
 	// Note: if the parameter is not passed in, no change will be made to the granted function permissions. To clear the granted function permissions, set `Privileges` to an empty array.
-	FunctionPrivileges []*FunctionPrivilege `json:"FunctionPrivileges,omitnil" name:"FunctionPrivileges"`
+	FunctionPrivileges []*FunctionPrivilege `json:"FunctionPrivileges,omitnil,omitempty" name:"FunctionPrivileges"`
 
 	// Database stored procedure permission. Valid values of `Privileges`: `ALTER ROUTINE`, `EXECUTE`.
 	// Note: if the parameter is not passed in, no change will be made to the granted stored procedure permissions. To clear the granted stored procedure permissions, set `Privileges` to an empty array.
-	ProcedurePrivileges []*ProcedurePrivilege `json:"ProcedurePrivileges,omitnil" name:"ProcedurePrivileges"`
+	ProcedurePrivileges []*ProcedurePrivilege `json:"ProcedurePrivileges,omitnil,omitempty" name:"ProcedurePrivileges"`
 }
 
 func (r *ModifyAccountPrivilegesRequest) ToJsonString() string {
@@ -3972,10 +3972,10 @@ func (r *ModifyAccountPrivilegesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAccountPrivilegesResponseParams struct {
 	// Async task ID, which can be used in the [DescribeFlow](https://intl.cloud.tencent.com/document/product/237/16177?from_cn_redirect=1) API to query the async task result.
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyAccountPrivilegesResponse struct {
@@ -3997,20 +3997,20 @@ func (r *ModifyAccountPrivilegesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDBEncryptAttributesRequestParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Whether to enable the data encryption (Once enabled, it can’t be disabled). Valid values: `1` (Yes), `0` (No. Default）
-	EncryptEnabled *int64 `json:"EncryptEnabled,omitnil" name:"EncryptEnabled"`
+	EncryptEnabled *int64 `json:"EncryptEnabled,omitnil,omitempty" name:"EncryptEnabled"`
 }
 
 type ModifyDBEncryptAttributesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `tdsql-ow728lmc`
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Whether to enable the data encryption (Once enabled, it can’t be disabled). Valid values: `1` (Yes), `0` (No. Default）
-	EncryptEnabled *int64 `json:"EncryptEnabled,omitnil" name:"EncryptEnabled"`
+	EncryptEnabled *int64 `json:"EncryptEnabled,omitnil,omitempty" name:"EncryptEnabled"`
 }
 
 func (r *ModifyDBEncryptAttributesRequest) ToJsonString() string {
@@ -4036,7 +4036,7 @@ func (r *ModifyDBEncryptAttributesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDBEncryptAttributesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDBEncryptAttributesResponse struct {
@@ -4058,20 +4058,20 @@ func (r *ModifyDBEncryptAttributesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDBInstancesProjectRequestParams struct {
 	// List of IDs of instances to be modified. The ID is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// ID of the project to be assigned, which can be obtained through the `DescribeProjects` API.
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 type ModifyDBInstancesProjectRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of IDs of instances to be modified. The ID is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// ID of the project to be assigned, which can be obtained through the `DescribeProjects` API.
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 func (r *ModifyDBInstancesProjectRequest) ToJsonString() string {
@@ -4097,7 +4097,7 @@ func (r *ModifyDBInstancesProjectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDBInstancesProjectResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDBInstancesProjectResponse struct {
@@ -4119,20 +4119,20 @@ func (r *ModifyDBInstancesProjectResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDBParametersRequestParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Parameter list. Each element is a combination of `Param` and `Value`.
-	Params []*DBParamValue `json:"Params,omitnil" name:"Params"`
+	Params []*DBParamValue `json:"Params,omitnil,omitempty" name:"Params"`
 }
 
 type ModifyDBParametersRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `tdsql-ow728lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Parameter list. Each element is a combination of `Param` and `Value`.
-	Params []*DBParamValue `json:"Params,omitnil" name:"Params"`
+	Params []*DBParamValue `json:"Params,omitnil,omitempty" name:"Params"`
 }
 
 func (r *ModifyDBParametersRequest) ToJsonString() string {
@@ -4158,13 +4158,13 @@ func (r *ModifyDBParametersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDBParametersResponseParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Parameter modification result
-	Result []*ParamModifyResult `json:"Result,omitnil" name:"Result"`
+	Result []*ParamModifyResult `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDBParametersResponse struct {
@@ -4186,20 +4186,20 @@ func (r *ModifyDBParametersResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDBSyncModeRequestParams struct {
 	// ID of the instance for which to modify the sync mode. The ID is in the format of `tdsql-ow728lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Sync mode. Valid values: `0` (async), `1` (strong sync), `2` (downgradable strong sync).
-	SyncMode *int64 `json:"SyncMode,omitnil" name:"SyncMode"`
+	SyncMode *int64 `json:"SyncMode,omitnil,omitempty" name:"SyncMode"`
 }
 
 type ModifyDBSyncModeRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the instance for which to modify the sync mode. The ID is in the format of `tdsql-ow728lmc`.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Sync mode. Valid values: `0` (async), `1` (strong sync), `2` (downgradable strong sync).
-	SyncMode *int64 `json:"SyncMode,omitnil" name:"SyncMode"`
+	SyncMode *int64 `json:"SyncMode,omitnil,omitempty" name:"SyncMode"`
 }
 
 func (r *ModifyDBSyncModeRequest) ToJsonString() string {
@@ -4225,10 +4225,10 @@ func (r *ModifyDBSyncModeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDBSyncModeResponseParams struct {
 	// Async task ID. The task status can be queried through the `DescribeFlow` API.
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDBSyncModeResponse struct {
@@ -4250,44 +4250,44 @@ func (r *ModifyDBSyncModeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceNetworkRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// VpcId, ID of the desired VPC network.
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// SubnetId, subnet ID of the desired VPC network.
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// The field is required to specify VIP.
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// The field is required to specify VIPv6.
-	Vipv6 *string `json:"Vipv6,omitnil" name:"Vipv6"`
+	Vipv6 *string `json:"Vipv6,omitnil,omitempty" name:"Vipv6"`
 
 	// VIP retention period in hours. Value range: 0-168. Default value: `24`. `0` indicates that the VIP will be released immediately, but there will be 1-minute delay.
-	VipReleaseDelay *uint64 `json:"VipReleaseDelay,omitnil" name:"VipReleaseDelay"`
+	VipReleaseDelay *uint64 `json:"VipReleaseDelay,omitnil,omitempty" name:"VipReleaseDelay"`
 }
 
 type ModifyInstanceNetworkRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// VpcId, ID of the desired VPC network.
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// SubnetId, subnet ID of the desired VPC network.
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// The field is required to specify VIP.
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// The field is required to specify VIPv6.
-	Vipv6 *string `json:"Vipv6,omitnil" name:"Vipv6"`
+	Vipv6 *string `json:"Vipv6,omitnil,omitempty" name:"Vipv6"`
 
 	// VIP retention period in hours. Value range: 0-168. Default value: `24`. `0` indicates that the VIP will be released immediately, but there will be 1-minute delay.
-	VipReleaseDelay *uint64 `json:"VipReleaseDelay,omitnil" name:"VipReleaseDelay"`
+	VipReleaseDelay *uint64 `json:"VipReleaseDelay,omitnil,omitempty" name:"VipReleaseDelay"`
 }
 
 func (r *ModifyInstanceNetworkRequest) ToJsonString() string {
@@ -4317,10 +4317,10 @@ func (r *ModifyInstanceNetworkRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceNetworkResponseParams struct {
 	// Async task ID, which can be used to query the task status through `DescribeFlow` API.
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstanceNetworkResponse struct {
@@ -4342,32 +4342,32 @@ func (r *ModifyInstanceNetworkResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceVipRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance VIP
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// IPv6 flag
-	Ipv6Flag *uint64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+	Ipv6Flag *uint64 `json:"Ipv6Flag,omitnil,omitempty" name:"Ipv6Flag"`
 
 	// VIP retention period in hours. Value range: 0-168. Default value: `24`. `0` indicates that the VIP will be released immediately, but there will be 1-minute delay.
-	VipReleaseDelay *uint64 `json:"VipReleaseDelay,omitnil" name:"VipReleaseDelay"`
+	VipReleaseDelay *uint64 `json:"VipReleaseDelay,omitnil,omitempty" name:"VipReleaseDelay"`
 }
 
 type ModifyInstanceVipRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance VIP
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// IPv6 flag
-	Ipv6Flag *uint64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+	Ipv6Flag *uint64 `json:"Ipv6Flag,omitnil,omitempty" name:"Ipv6Flag"`
 
 	// VIP retention period in hours. Value range: 0-168. Default value: `24`. `0` indicates that the VIP will be released immediately, but there will be 1-minute delay.
-	VipReleaseDelay *uint64 `json:"VipReleaseDelay,omitnil" name:"VipReleaseDelay"`
+	VipReleaseDelay *uint64 `json:"VipReleaseDelay,omitnil,omitempty" name:"VipReleaseDelay"`
 }
 
 func (r *ModifyInstanceVipRequest) ToJsonString() string {
@@ -4395,10 +4395,10 @@ func (r *ModifyInstanceVipRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceVipResponseParams struct {
 	// Async task flow ID
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstanceVipResponse struct {
@@ -4420,20 +4420,20 @@ func (r *ModifyInstanceVipResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceVportRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance Vport
-	Vport *uint64 `json:"Vport,omitnil" name:"Vport"`
+	Vport *uint64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 }
 
 type ModifyInstanceVportRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Instance Vport
-	Vport *uint64 `json:"Vport,omitnil" name:"Vport"`
+	Vport *uint64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 }
 
 func (r *ModifyInstanceVportRequest) ToJsonString() string {
@@ -4459,7 +4459,7 @@ func (r *ModifyInstanceVportRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstanceVportResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstanceVportResponse struct {
@@ -4481,20 +4481,20 @@ func (r *ModifyInstanceVportResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifySyncTaskAttributeRequestParams struct {
 	// IDs of tasks for which to modify the attributes. The IDs can be obtained by the return value of the `DescribeSyncTasks` API. Up to 100 tasks can be operated at a time.
-	TaskIds []*string `json:"TaskIds,omitnil" name:"TaskIds"`
+	TaskIds []*string `json:"TaskIds,omitnil,omitempty" name:"TaskIds"`
 
 	// Task name. You can specify any name you like, but its length cannot exceed 100 characters.
-	TaskName *string `json:"TaskName,omitnil" name:"TaskName"`
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 }
 
 type ModifySyncTaskAttributeRequest struct {
 	*tchttp.BaseRequest
 	
 	// IDs of tasks for which to modify the attributes. The IDs can be obtained by the return value of the `DescribeSyncTasks` API. Up to 100 tasks can be operated at a time.
-	TaskIds []*string `json:"TaskIds,omitnil" name:"TaskIds"`
+	TaskIds []*string `json:"TaskIds,omitnil,omitempty" name:"TaskIds"`
 
 	// Task name. You can specify any name you like, but its length cannot exceed 100 characters.
-	TaskName *string `json:"TaskName,omitnil" name:"TaskName"`
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 }
 
 func (r *ModifySyncTaskAttributeRequest) ToJsonString() string {
@@ -4520,7 +4520,7 @@ func (r *ModifySyncTaskAttributeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifySyncTaskAttributeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifySyncTaskAttributeResponse struct {
@@ -4541,117 +4541,117 @@ func (r *ModifySyncTaskAttributeResponse) FromJsonString(s string) error {
 
 type NodeInfo struct {
 	// Node ID
-	NodeId *string `json:"NodeId,omitnil" name:"NodeId"`
+	NodeId *string `json:"NodeId,omitnil,omitempty" name:"NodeId"`
 
 	// Node role. Valid values: `master`, `slave`
-	Role *string `json:"Role,omitnil" name:"Role"`
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 }
 
 type ParamConstraint struct {
 	// Constraint type, such as `enum` and `section`.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// List of valid values when constraint type is `enum`
-	Enum *string `json:"Enum,omitnil" name:"Enum"`
+	Enum *string `json:"Enum,omitnil,omitempty" name:"Enum"`
 
 	// Range when constraint type is `section`
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Range *ConstraintRange `json:"Range,omitnil" name:"Range"`
+	Range *ConstraintRange `json:"Range,omitnil,omitempty" name:"Range"`
 
 	// List of valid values when constraint type is `string`
-	String *string `json:"String,omitnil" name:"String"`
+	String *string `json:"String,omitnil,omitempty" name:"String"`
 }
 
 type ParamDesc struct {
 	// Parameter name
-	Param *string `json:"Param,omitnil" name:"Param"`
+	Param *string `json:"Param,omitnil,omitempty" name:"Param"`
 
 	// Current parameter value
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 
 	// Previously set value, which is the same as `value` after the parameter takes effect.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SetValue *string `json:"SetValue,omitnil" name:"SetValue"`
+	SetValue *string `json:"SetValue,omitnil,omitempty" name:"SetValue"`
 
 	// Default value
-	Default *string `json:"Default,omitnil" name:"Default"`
+	Default *string `json:"Default,omitnil,omitempty" name:"Default"`
 
 	// Parameter constraint
-	Constraint *ParamConstraint `json:"Constraint,omitnil" name:"Constraint"`
+	Constraint *ParamConstraint `json:"Constraint,omitnil,omitempty" name:"Constraint"`
 
 	// Whether a value has been set. false: no, true: yes
-	HaveSetValue *bool `json:"HaveSetValue,omitnil" name:"HaveSetValue"`
+	HaveSetValue *bool `json:"HaveSetValue,omitnil,omitempty" name:"HaveSetValue"`
 
 	// Whether restart is required. false: no;
 	// true: yes.
-	NeedRestart *bool `json:"NeedRestart,omitnil" name:"NeedRestart"`
+	NeedRestart *bool `json:"NeedRestart,omitnil,omitempty" name:"NeedRestart"`
 }
 
 type ParamModifyResult struct {
 	// Renames parameter
-	Param *string `json:"Param,omitnil" name:"Param"`
+	Param *string `json:"Param,omitnil,omitempty" name:"Param"`
 
 	// Result of parameter modification. 0: success; -1: failure; -2: invalid parameter value.
-	Code *int64 `json:"Code,omitnil" name:"Code"`
+	Code *int64 `json:"Code,omitnil,omitempty" name:"Code"`
 }
 
 type ProcedurePrivilege struct {
 	// Database name
-	Database *string `json:"Database,omitnil" name:"Database"`
+	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 
 	// Stored procedure name
-	Procedure *string `json:"Procedure,omitnil" name:"Procedure"`
+	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
 	// Permission information
-	Privileges []*string `json:"Privileges,omitnil" name:"Privileges"`
+	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
 }
 
 type ReservedNetResource struct {
 	// VPC
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Subnet
-	SubnetId *string `json:"SubnetId,omitnil" name:"SubnetId"`
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
 	// Reserved private network IP under `VpcId` and `SubnetId`
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// Port under `Vip`
-	Vports []*int64 `json:"Vports,omitnil" name:"Vports"`
+	Vports []*int64 `json:"Vports,omitnil,omitempty" name:"Vports"`
 
 	// Valid hours of VIP
-	RecycleTime *string `json:"RecycleTime,omitnil" name:"RecycleTime"`
+	RecycleTime *string `json:"RecycleTime,omitnil,omitempty" name:"RecycleTime"`
 }
 
 // Predefined struct for user
 type ResetAccountPasswordRequestParams struct {
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Login username.
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Access host allowed for user. An account is uniquely identified by username and host.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// New password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
 type ResetAccountPasswordRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID, which is in the format of `tdsql-ow728lmc` and can be obtained through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Login username.
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 
 	// Access host allowed for user. An account is uniquely identified by username and host.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// New password, which can contain 6-32 letters, digits, and common symbols but not semicolons, single quotation marks, and double quotation marks.
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
 func (r *ResetAccountPasswordRequest) ToJsonString() string {
@@ -4679,7 +4679,7 @@ func (r *ResetAccountPasswordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ResetAccountPasswordResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ResetAccountPasswordResponse struct {
@@ -4700,139 +4700,139 @@ func (r *ResetAccountPasswordResponse) FromJsonString(s string) error {
 
 type ResourceTag struct {
 	// Tag key
-	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
 	// Tag value
-	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
+	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
 }
 
 type SecurityGroup struct {
 	// Project ID
-	ProjectId *int64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Creation time in the format of yyyy-mm-dd hh:mm:ss
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Security group ID
-	SecurityGroupId *string `json:"SecurityGroupId,omitnil" name:"SecurityGroupId"`
+	SecurityGroupId *string `json:"SecurityGroupId,omitnil,omitempty" name:"SecurityGroupId"`
 
 	// Security group name
-	SecurityGroupName *string `json:"SecurityGroupName,omitnil" name:"SecurityGroupName"`
+	SecurityGroupName *string `json:"SecurityGroupName,omitnil,omitempty" name:"SecurityGroupName"`
 
 	// Security group remarks
-	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitnil" name:"SecurityGroupRemark"`
+	SecurityGroupRemark *string `json:"SecurityGroupRemark,omitnil,omitempty" name:"SecurityGroupRemark"`
 
 	// Inbound rule
-	Inbound []*SecurityGroupBound `json:"Inbound,omitnil" name:"Inbound"`
+	Inbound []*SecurityGroupBound `json:"Inbound,omitnil,omitempty" name:"Inbound"`
 
 	// Outbound rule
-	Outbound []*SecurityGroupBound `json:"Outbound,omitnil" name:"Outbound"`
+	Outbound []*SecurityGroupBound `json:"Outbound,omitnil,omitempty" name:"Outbound"`
 }
 
 type SecurityGroupBound struct {
 	// Policy, which can be `ACCEPT` or `DROP`
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// Source IP or source IP range, such as 192.168.0.0/16
-	CidrIp *string `json:"CidrIp,omitnil" name:"CidrIp"`
+	CidrIp *string `json:"CidrIp,omitnil,omitempty" name:"CidrIp"`
 
 	// Port
-	PortRange *string `json:"PortRange,omitnil" name:"PortRange"`
+	PortRange *string `json:"PortRange,omitnil,omitempty" name:"PortRange"`
 
 	// Network protocol. UDP and TCP are supported.
-	IpProtocol *string `json:"IpProtocol,omitnil" name:"IpProtocol"`
+	IpProtocol *string `json:"IpProtocol,omitnil,omitempty" name:"IpProtocol"`
 }
 
 type SlowLogData struct {
 	// Statement checksum for querying details
-	CheckSum *string `json:"CheckSum,omitnil" name:"CheckSum"`
+	CheckSum *string `json:"CheckSum,omitnil,omitempty" name:"CheckSum"`
 
 	// Database name
-	Db *string `json:"Db,omitnil" name:"Db"`
+	Db *string `json:"Db,omitnil,omitempty" name:"Db"`
 
 	// Abstracted SQL statement
-	FingerPrint *string `json:"FingerPrint,omitnil" name:"FingerPrint"`
+	FingerPrint *string `json:"FingerPrint,omitnil,omitempty" name:"FingerPrint"`
 
 	// Average lock time
-	LockTimeAvg *string `json:"LockTimeAvg,omitnil" name:"LockTimeAvg"`
+	LockTimeAvg *string `json:"LockTimeAvg,omitnil,omitempty" name:"LockTimeAvg"`
 
 	// Maximum lock time
-	LockTimeMax *string `json:"LockTimeMax,omitnil" name:"LockTimeMax"`
+	LockTimeMax *string `json:"LockTimeMax,omitnil,omitempty" name:"LockTimeMax"`
 
 	// Minimum lock time
-	LockTimeMin *string `json:"LockTimeMin,omitnil" name:"LockTimeMin"`
+	LockTimeMin *string `json:"LockTimeMin,omitnil,omitempty" name:"LockTimeMin"`
 
 	// Total lock time
-	LockTimeSum *string `json:"LockTimeSum,omitnil" name:"LockTimeSum"`
+	LockTimeSum *string `json:"LockTimeSum,omitnil,omitempty" name:"LockTimeSum"`
 
 	// Number of queries
-	QueryCount *string `json:"QueryCount,omitnil" name:"QueryCount"`
+	QueryCount *string `json:"QueryCount,omitnil,omitempty" name:"QueryCount"`
 
 	// Average query time
-	QueryTimeAvg *string `json:"QueryTimeAvg,omitnil" name:"QueryTimeAvg"`
+	QueryTimeAvg *string `json:"QueryTimeAvg,omitnil,omitempty" name:"QueryTimeAvg"`
 
 	// Maximum query time
-	QueryTimeMax *string `json:"QueryTimeMax,omitnil" name:"QueryTimeMax"`
+	QueryTimeMax *string `json:"QueryTimeMax,omitnil,omitempty" name:"QueryTimeMax"`
 
 	// Minimum query time
-	QueryTimeMin *string `json:"QueryTimeMin,omitnil" name:"QueryTimeMin"`
+	QueryTimeMin *string `json:"QueryTimeMin,omitnil,omitempty" name:"QueryTimeMin"`
 
 	// Total query time
-	QueryTimeSum *string `json:"QueryTimeSum,omitnil" name:"QueryTimeSum"`
+	QueryTimeSum *string `json:"QueryTimeSum,omitnil,omitempty" name:"QueryTimeSum"`
 
 	// Number of scanned rows
-	RowsExaminedSum *string `json:"RowsExaminedSum,omitnil" name:"RowsExaminedSum"`
+	RowsExaminedSum *string `json:"RowsExaminedSum,omitnil,omitempty" name:"RowsExaminedSum"`
 
 	// Number of sent rows
-	RowsSentSum *string `json:"RowsSentSum,omitnil" name:"RowsSentSum"`
+	RowsSentSum *string `json:"RowsSentSum,omitnil,omitempty" name:"RowsSentSum"`
 
 	// Last execution time
-	TsMax *string `json:"TsMax,omitnil" name:"TsMax"`
+	TsMax *string `json:"TsMax,omitnil,omitempty" name:"TsMax"`
 
 	// First execution time
-	TsMin *string `json:"TsMin,omitnil" name:"TsMin"`
+	TsMin *string `json:"TsMin,omitnil,omitempty" name:"TsMin"`
 
 	// Account
-	User *string `json:"User,omitnil" name:"User"`
+	User *string `json:"User,omitnil,omitempty" name:"User"`
 
 	// Sample SQL
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ExampleSql *string `json:"ExampleSql,omitnil" name:"ExampleSql"`
+	ExampleSql *string `json:"ExampleSql,omitnil,omitempty" name:"ExampleSql"`
 
 	// Host address of account
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 }
 
 type TableColumn struct {
 	// Column name
-	Col *string `json:"Col,omitnil" name:"Col"`
+	Col *string `json:"Col,omitnil,omitempty" name:"Col"`
 
 	// Column type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type TablePrivilege struct {
 	// Database name
-	Database *string `json:"Database,omitnil" name:"Database"`
+	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 
 	// Table name
-	Table *string `json:"Table,omitnil" name:"Table"`
+	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
 
 	// Permission information
-	Privileges []*string `json:"Privileges,omitnil" name:"Privileges"`
+	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
 }
 
 // Predefined struct for user
 type TerminateDedicatedDBInstanceRequestParams struct {
 	// Instance ID in the format of `tdsql-ow728lmc`
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type TerminateDedicatedDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID in the format of `tdsql-ow728lmc`
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *TerminateDedicatedDBInstanceRequest) ToJsonString() string {
@@ -4857,10 +4857,10 @@ func (r *TerminateDedicatedDBInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type TerminateDedicatedDBInstanceResponseParams struct {
 	// Async task ID
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type TerminateDedicatedDBInstanceResponse struct {
@@ -4882,106 +4882,106 @@ func (r *TerminateDedicatedDBInstanceResponse) FromJsonString(s string) error {
 type TmpInstance struct {
 	// Application ID
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// Creation time
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Instance remarks
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	InstanceRemark *string `json:"InstanceRemark,omitnil" name:"InstanceRemark"`
+	InstanceRemark *string `json:"InstanceRemark,omitnil,omitempty" name:"InstanceRemark"`
 
 	// Whether it is a temp instance. Valid values: `0` (non-temp instance), `1` (invalid temp instance), `2` (valid temp rollback instance).
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	TempType *int64 `json:"TempType,omitnil" name:"TempType"`
+	TempType *int64 `json:"TempType,omitnil,omitempty" name:"TempType"`
 
 	// Instance status. Valid values: `0` (to be initialized), `1` (in process), `2` (running), `-1` (isolated), `-2` (eliminated).
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Instance ID in the format of `tdsql-ow728lmc`
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Virtual instance IP
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	Vip *string `json:"Vip,omitnil" name:"Vip"`
+	Vip *string `json:"Vip,omitnil,omitempty" name:"Vip"`
 
 	// Virtual instance port
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	Vport *int64 `json:"Vport,omitnil" name:"Vport"`
+	Vport *int64 `json:"Vport,omitnil,omitempty" name:"Vport"`
 
 	// Validity end time
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	PeriodEndTime *string `json:"PeriodEndTime,omitnil" name:"PeriodEndTime"`
+	PeriodEndTime *string `json:"PeriodEndTime,omitnil,omitempty" name:"PeriodEndTime"`
 
 	// Source instance ID in the format of `tdsql-ow728lmc`
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	SrcInstanceId *string `json:"SrcInstanceId,omitnil" name:"SrcInstanceId"`
+	SrcInstanceId *string `json:"SrcInstanceId,omitnil,omitempty" name:"SrcInstanceId"`
 
 	// Instance status description
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	StatusDesc *string `json:"StatusDesc,omitnil" name:"StatusDesc"`
+	StatusDesc *string `json:"StatusDesc,omitnil,omitempty" name:"StatusDesc"`
 
 	// Instance region
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// AZ of the instance
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Virtual IPv6 of the instance
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	Vipv6 *string `json:"Vipv6,omitnil" name:"Vipv6"`
+	Vipv6 *string `json:"Vipv6,omitnil,omitempty" name:"Vipv6"`
 
 	// Instance IPv6 flag
 	// Note: u200dThis field may returnu200d·nullu200d, indicating that no valid values can be obtained.
-	Ipv6Flag *uint64 `json:"Ipv6Flag,omitnil" name:"Ipv6Flag"`
+	Ipv6Flag *uint64 `json:"Ipv6Flag,omitnil,omitempty" name:"Ipv6Flag"`
 }
 
 // Predefined struct for user
 type UpgradeDedicatedDBInstanceRequestParams struct {
 	// ID of the instance to be upgraded.  It is in the form of  `tdsql-ow728lmc`, which can be obtained by querying the instance details through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Memory size in GB,  which can be obtained through the `DescribeFenceDBInstanceSpecs` API.
-	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// Storage space size in GB.  You can obtain the disk space limits by querying instance specification through the `DescribeDBInstanceSpecs` API.
-	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Whether to retry again when missing the switch time window. Valid values: `0` (no), `1` (yes).
-	SwitchAutoRetry *int64 `json:"SwitchAutoRetry,omitnil" name:"SwitchAutoRetry"`
+	SwitchAutoRetry *int64 `json:"SwitchAutoRetry,omitnil,omitempty" name:"SwitchAutoRetry"`
 
 	// Switch start time
-	SwitchStartTime *string `json:"SwitchStartTime,omitnil" name:"SwitchStartTime"`
+	SwitchStartTime *string `json:"SwitchStartTime,omitnil,omitempty" name:"SwitchStartTime"`
 
 	// Switch end time
-	SwitchEndTime *string `json:"SwitchEndTime,omitnil" name:"SwitchEndTime"`
+	SwitchEndTime *string `json:"SwitchEndTime,omitnil,omitempty" name:"SwitchEndTime"`
 }
 
 type UpgradeDedicatedDBInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the instance to be upgraded.  It is in the form of  `tdsql-ow728lmc`, which can be obtained by querying the instance details through the `DescribeDBInstances` API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Memory size in GB,  which can be obtained through the `DescribeFenceDBInstanceSpecs` API.
-	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// Storage space size in GB.  You can obtain the disk space limits by querying instance specification through the `DescribeDBInstanceSpecs` API.
-	Storage *int64 `json:"Storage,omitnil" name:"Storage"`
+	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Whether to retry again when missing the switch time window. Valid values: `0` (no), `1` (yes).
-	SwitchAutoRetry *int64 `json:"SwitchAutoRetry,omitnil" name:"SwitchAutoRetry"`
+	SwitchAutoRetry *int64 `json:"SwitchAutoRetry,omitnil,omitempty" name:"SwitchAutoRetry"`
 
 	// Switch start time
-	SwitchStartTime *string `json:"SwitchStartTime,omitnil" name:"SwitchStartTime"`
+	SwitchStartTime *string `json:"SwitchStartTime,omitnil,omitempty" name:"SwitchStartTime"`
 
 	// Switch end time
-	SwitchEndTime *string `json:"SwitchEndTime,omitnil" name:"SwitchEndTime"`
+	SwitchEndTime *string `json:"SwitchEndTime,omitnil,omitempty" name:"SwitchEndTime"`
 }
 
 func (r *UpgradeDedicatedDBInstanceRequest) ToJsonString() string {
@@ -5011,10 +5011,10 @@ func (r *UpgradeDedicatedDBInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpgradeDedicatedDBInstanceResponseParams struct {
 	// Async task ID
-	FlowId *int64 `json:"FlowId,omitnil" name:"FlowId"`
+	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type UpgradeDedicatedDBInstanceResponse struct {
@@ -5035,11 +5035,11 @@ func (r *UpgradeDedicatedDBInstanceResponse) FromJsonString(s string) error {
 
 type ViewPrivileges struct {
 	// Database name
-	Database *string `json:"Database,omitnil" name:"Database"`
+	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 
 	// View name
-	View *string `json:"View,omitnil" name:"View"`
+	View *string `json:"View,omitnil,omitempty" name:"View"`
 
 	// Permission information
-	Privileges []*string `json:"Privileges,omitnil" name:"Privileges"`
+	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
 }

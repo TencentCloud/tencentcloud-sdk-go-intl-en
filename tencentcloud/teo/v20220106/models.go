@@ -22,111 +22,111 @@ import (
 
 type ACLCondition struct {
 	// Field to match
-	MatchFrom *string `json:"MatchFrom,omitnil" name:"MatchFrom"`
+	MatchFrom *string `json:"MatchFrom,omitnil,omitempty" name:"MatchFrom"`
 
 	// String to match
-	MatchParam *string `json:"MatchParam,omitnil" name:"MatchParam"`
+	MatchParam *string `json:"MatchParam,omitnil,omitempty" name:"MatchParam"`
 
 	// Relation between the field and content
-	Operator *string `json:"Operator,omitnil" name:"Operator"`
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
 	// Content to match
-	MatchContent *string `json:"MatchContent,omitnil" name:"MatchContent"`
+	MatchContent *string `json:"MatchContent,omitnil,omitempty" name:"MatchContent"`
 }
 
 type ACLUserRule struct {
 	// Name of the rule
-	RuleName *string `json:"RuleName,omitnil" name:"RuleName"`
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
 	// Action
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// Status of the rule
-	RuleStatus *string `json:"RuleStatus,omitnil" name:"RuleStatus"`
+	RuleStatus *string `json:"RuleStatus,omitnil,omitempty" name:"RuleStatus"`
 
 	// ACL rule
-	Conditions []*ACLCondition `json:"Conditions,omitnil" name:"Conditions"`
+	Conditions []*ACLCondition `json:"Conditions,omitnil,omitempty" name:"Conditions"`
 
 	// Priority of the rule
-	RulePriority *int64 `json:"RulePriority,omitnil" name:"RulePriority"`
+	RulePriority *int64 `json:"RulePriority,omitnil,omitempty" name:"RulePriority"`
 
 	// ID of the rule
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	RuleID *int64 `json:"RuleID,omitnil" name:"RuleID"`
+	RuleID *int64 `json:"RuleID,omitnil,omitempty" name:"RuleID"`
 
 	// Update time
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// IP blocking time
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	PunishTime *int64 `json:"PunishTime,omitnil" name:"PunishTime"`
+	PunishTime *int64 `json:"PunishTime,omitnil,omitempty" name:"PunishTime"`
 
 	// IP blocking time unit
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	PunishTimeUnit *string `json:"PunishTimeUnit,omitnil" name:"PunishTimeUnit"`
+	PunishTimeUnit *string `json:"PunishTimeUnit,omitnil,omitempty" name:"PunishTimeUnit"`
 
 	// Name of the custom block page
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// ID of the custom block page
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	PageId *int64 `json:"PageId,omitnil" name:"PageId"`
+	PageId *int64 `json:"PageId,omitnil,omitempty" name:"PageId"`
 
 	// Redirection URL, which must be a subdomain name of the site
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	RedirectUrl *string `json:"RedirectUrl,omitnil" name:"RedirectUrl"`
+	RedirectUrl *string `json:"RedirectUrl,omitnil,omitempty" name:"RedirectUrl"`
 
 	// Return code configured on the custom block page
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ResponseCode *int64 `json:"ResponseCode,omitnil" name:"ResponseCode"`
+	ResponseCode *int64 `json:"ResponseCode,omitnil,omitempty" name:"ResponseCode"`
 }
 
 type AclConfig struct {
 	// Switch
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// ACL user rule
-	UserRules []*ACLUserRule `json:"UserRules,omitnil" name:"UserRules"`
+	UserRules []*ACLUserRule `json:"UserRules,omitnil,omitempty" name:"UserRules"`
 }
 
 type AiRule struct {
 	// `smart_status_close`: Disable; `smart_status_open`: Block;
 	// `smart_status_observe`: Observe.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Mode *string `json:"Mode,omitnil" name:"Mode"`
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 }
 
 type ApplicationProxy struct {
 	// ID of the proxy
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Name of the proxy:
 	// Domain name or subdomain name when `ProxyType=hostname`
 	// Instance name when `ProxyType=instance`
-	ProxyName *string `json:"ProxyName,omitnil" name:"ProxyName"`
+	ProxyName *string `json:"ProxyName,omitnil,omitempty" name:"ProxyName"`
 
 	// Scheduling mode:
 	// `ip`: Anycast IP
 	// `domain`: CNAME
-	PlatType *string `json:"PlatType,omitnil" name:"PlatType"`
+	PlatType *string `json:"PlatType,omitnil,omitempty" name:"PlatType"`
 
 	// `0`: Disable security protection; `1`: Enable security protection.
-	SecurityType *int64 `json:"SecurityType,omitnil" name:"SecurityType"`
+	SecurityType *int64 `json:"SecurityType,omitnil,omitempty" name:"SecurityType"`
 
 	// `0`: Disable acceleration; `1`: Enable acceleration.
-	AccelerateType *int64 `json:"AccelerateType,omitnil" name:"AccelerateType"`
+	AccelerateType *int64 `json:"AccelerateType,omitnil,omitempty" name:"AccelerateType"`
 
 	// This field is moved to `Rule.ForwardClientIp`.
-	ForwardClientIp *string `json:"ForwardClientIp,omitnil" name:"ForwardClientIp"`
+	ForwardClientIp *string `json:"ForwardClientIp,omitnil,omitempty" name:"ForwardClientIp"`
 
 	// This field is moved to `Rule.SessionPersist`.
-	SessionPersist *bool `json:"SessionPersist,omitnil" name:"SessionPersist"`
+	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 
 	// Rule list
-	Rule []*ApplicationProxyRule `json:"Rule,omitnil" name:"Rule"`
+	Rule []*ApplicationProxyRule `json:"Rule,omitnil,omitempty" name:"Rule"`
 
 	// Status:
 	// `online`: Enable
@@ -135,54 +135,54 @@ type ApplicationProxy struct {
 	// `stopping`: Disabling
 	// `fail`: Deployment/Disabling failed
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Scheduling information
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ScheduleValue []*string `json:"ScheduleValue,omitnil" name:"ScheduleValue"`
+	ScheduleValue []*string `json:"ScheduleValue,omitnil,omitempty" name:"ScheduleValue"`
 
 	// Update time
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Site ID
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Site name
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// Session persistence duration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil" name:"SessionPersistTime"`
+	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// Specifies how a layer-4 proxy is created.
 	// `hostname`: Create by subdomain name
 	// `instance`: Create by instance
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ProxyType *string `json:"ProxyType,omitnil" name:"ProxyType"`
+	ProxyType *string `json:"ProxyType,omitnil,omitempty" name:"ProxyType"`
 
 	// When `ProxyType=hostname`:
 	// `ProxyName` indicates a specified domain name;
 	// `HostId` indicates a unique ID of the domain name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	HostId *string `json:"HostId,omitnil" name:"HostId"`
+	HostId *string `json:"HostId,omitnil,omitempty" name:"HostId"`
 }
 
 type ApplicationProxyRule struct {
 	// Protocol. Valid values: `TCP` and `UDP`.
-	Proto *string `json:"Proto,omitnil" name:"Proto"`
+	Proto *string `json:"Proto,omitnil,omitempty" name:"Proto"`
 
 	// Port. Valid values:
 	// `80`: Port 80
 	// `81-90`: Port range 81-90
-	Port []*string `json:"Port,omitnil" name:"Port"`
+	Port []*string `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Origin server type. Valid values:
 	// `custom`: Specified origins
 	// `origins`: Origin group
-	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
+	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 
 	// Origin server information:
 	// When `OriginType=custom`, it indicates one or more origin servers. Example:
@@ -191,11 +191,11 @@ type ApplicationProxyRule struct {
 	// 
 	// When `OriginType=origins`, it indicates an origin group ID. Example:
 	// OriginValue=["origin-xxx"]
-	OriginValue []*string `json:"OriginValue,omitnil" name:"OriginValue"`
+	OriginValue []*string `json:"OriginValue,omitnil,omitempty" name:"OriginValue"`
 
 	// Rule ID
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	RuleId *string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Status:
 	// `online`: Enable
@@ -203,7 +203,7 @@ type ApplicationProxyRule struct {
 	// `progress`: Deploying
 	// `stopping`: Disabling
 	// `fail`: Deployment/Disabling failed
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Passes the client IP. When `Proto=TCP`, valid values:
 	// `TOA`: Pass the client IP via TOA
@@ -213,336 +213,336 @@ type ApplicationProxyRule struct {
 	// When `Proto=UDP`, valid values:
 	// `PPV2`: Pass the client IP via Proxy Protocol V2
 	// `OFF`: Do not pass the client IP.
-	ForwardClientIp *string `json:"ForwardClientIp,omitnil" name:"ForwardClientIp"`
+	ForwardClientIp *string `json:"ForwardClientIp,omitnil,omitempty" name:"ForwardClientIp"`
 
 	// Specifies whether to enable session persistence
-	SessionPersist *bool `json:"SessionPersist,omitnil" name:"SessionPersist"`
+	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 }
 
 type BotConfig struct {
 	// Whether to enable bot security configuration
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Preset rules
-	ManagedRule *BotManagedRule `json:"ManagedRule,omitnil" name:"ManagedRule"`
+	ManagedRule *BotManagedRule `json:"ManagedRule,omitnil,omitempty" name:"ManagedRule"`
 
 	// Not supported currently
-	UaBotRule *BotManagedRule `json:"UaBotRule,omitnil" name:"UaBotRule"`
+	UaBotRule *BotManagedRule `json:"UaBotRule,omitnil,omitempty" name:"UaBotRule"`
 
 	// Not supported currently
-	IspBotRule *BotManagedRule `json:"IspBotRule,omitnil" name:"IspBotRule"`
+	IspBotRule *BotManagedRule `json:"IspBotRule,omitnil,omitempty" name:"IspBotRule"`
 
 	// User portrait rules
-	PortraitRule *BotPortraitRule `json:"PortraitRule,omitnil" name:"PortraitRule"`
+	PortraitRule *BotPortraitRule `json:"PortraitRule,omitnil,omitempty" name:"PortraitRule"`
 
 	// Bot intelligence rules
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IntelligenceRule *IntelligenceRule `json:"IntelligenceRule,omitnil" name:"IntelligenceRule"`
+	IntelligenceRule *IntelligenceRule `json:"IntelligenceRule,omitnil,omitempty" name:"IntelligenceRule"`
 }
 
 type BotLog struct {
 	// Attack time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackTime *uint64 `json:"AttackTime,omitnil" name:"AttackTime"`
+	AttackTime *uint64 `json:"AttackTime,omitnil,omitempty" name:"AttackTime"`
 
 	// Attack IP
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackIp *string `json:"AttackIp,omitnil" name:"AttackIp"`
+	AttackIp *string `json:"AttackIp,omitnil,omitempty" name:"AttackIp"`
 
 	// Domain name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Domain *string `json:"Domain,omitnil" name:"Domain"`
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// Request URI
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RequestUri *string `json:"RequestUri,omitnil" name:"RequestUri"`
+	RequestUri *string `json:"RequestUri,omitnil,omitempty" name:"RequestUri"`
 
 	// Attack type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 
 	// Request method
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RequestMethod *string `json:"RequestMethod,omitnil" name:"RequestMethod"`
+	RequestMethod *string `json:"RequestMethod,omitnil,omitempty" name:"RequestMethod"`
 
 	// Attack content
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackContent *string `json:"AttackContent,omitnil" name:"AttackContent"`
+	AttackContent *string `json:"AttackContent,omitnil,omitempty" name:"AttackContent"`
 
 	// Risk grade
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RiskLevel *string `json:"RiskLevel,omitnil" name:"RiskLevel"`
+	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
 
 	// Rule number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RuleId *uint64 `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// IP country/region
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SipCountryCode *string `json:"SipCountryCode,omitnil" name:"SipCountryCode"`
+	SipCountryCode *string `json:"SipCountryCode,omitnil,omitempty" name:"SipCountryCode"`
 
 	// Event ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EventId *string `json:"EventId,omitnil" name:"EventId"`
+	EventId *string `json:"EventId,omitnil,omitempty" name:"EventId"`
 
 	// Processing method
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DisposalMethod *string `json:"DisposalMethod,omitnil" name:"DisposalMethod"`
+	DisposalMethod *string `json:"DisposalMethod,omitnil,omitempty" name:"DisposalMethod"`
 
 	// http_log
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	HttpLog *string `json:"HttpLog,omitnil" name:"HttpLog"`
+	HttpLog *string `json:"HttpLog,omitnil,omitempty" name:"HttpLog"`
 
 	// user agent
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Ua *string `json:"Ua,omitnil" name:"Ua"`
+	Ua *string `json:"Ua,omitnil,omitempty" name:"Ua"`
 
 	// Detection method
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DetectionMethod *string `json:"DetectionMethod,omitnil" name:"DetectionMethod"`
+	DetectionMethod *string `json:"DetectionMethod,omitnil,omitempty" name:"DetectionMethod"`
 
 	// Confidence
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Confidence *string `json:"Confidence,omitnil" name:"Confidence"`
+	Confidence *string `json:"Confidence,omitnil,omitempty" name:"Confidence"`
 
 	// Maliciousness
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Maliciousness *string `json:"Maliciousness,omitnil" name:"Maliciousness"`
+	Maliciousness *string `json:"Maliciousness,omitnil,omitempty" name:"Maliciousness"`
 }
 
 type BotLogData struct {
 	// Data set of bot attack logs
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	List []*BotLog `json:"List,omitnil" name:"List"`
+	List []*BotLog `json:"List,omitnil,omitempty" name:"List"`
 
 	// Current page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Number of items per page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Total number of pages
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Pages *int64 `json:"Pages,omitnil" name:"Pages"`
+	Pages *int64 `json:"Pages,omitnil,omitempty" name:"Pages"`
 
 	// Total number of items
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalSize *int64 `json:"TotalSize,omitnil" name:"TotalSize"`
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
 }
 
 type BotManagedRule struct {
 	// ID of the rule to be enabled
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ManagedIds []*int64 `json:"ManagedIds,omitnil" name:"ManagedIds"`
+	ManagedIds []*int64 `json:"ManagedIds,omitnil,omitempty" name:"ManagedIds"`
 
 	// ID of the rule being applied
-	RuleID *int64 `json:"RuleID,omitnil" name:"RuleID"`
+	RuleID *int64 `json:"RuleID,omitnil,omitempty" name:"RuleID"`
 
 	// Action of the rule. Values: `drop`; `trans`; `monitor`; `alg`.
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// The amount of time the IP is blocked
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	PunishTime *int64 `json:"PunishTime,omitnil" name:"PunishTime"`
+	PunishTime *int64 `json:"PunishTime,omitnil,omitempty" name:"PunishTime"`
 
 	// Unit of IP blocking time
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	PunishTimeUnit *string `json:"PunishTimeUnit,omitnil" name:"PunishTimeUnit"`
+	PunishTimeUnit *string `json:"PunishTimeUnit,omitnil,omitempty" name:"PunishTimeUnit"`
 
 	// Name of the custom block page
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// ID of the custom block page
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	PageId *int64 `json:"PageId,omitnil" name:"PageId"`
+	PageId *int64 `json:"PageId,omitnil,omitempty" name:"PageId"`
 
 	// Redirection URL, which must be a subdomain name of your site encoded by URLEncode
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	RedirectUrl *string `json:"RedirectUrl,omitnil" name:"RedirectUrl"`
+	RedirectUrl *string `json:"RedirectUrl,omitnil,omitempty" name:"RedirectUrl"`
 
 	// Response code returned after redirection
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ResponseCode *int64 `json:"ResponseCode,omitnil" name:"ResponseCode"`
+	ResponseCode *int64 `json:"ResponseCode,omitnil,omitempty" name:"ResponseCode"`
 
 	// ID of the rule that is set to allow requests
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	TransManagedIds []*int64 `json:"TransManagedIds,omitnil" name:"TransManagedIds"`
+	TransManagedIds []*int64 `json:"TransManagedIds,omitnil,omitempty" name:"TransManagedIds"`
 
 	// ID of the rule that is set to verify requests by JavaScript challenge
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	AlgManagedIds []*int64 `json:"AlgManagedIds,omitnil" name:"AlgManagedIds"`
+	AlgManagedIds []*int64 `json:"AlgManagedIds,omitnil,omitempty" name:"AlgManagedIds"`
 
 	// ID of the rule that is set to verify requests by CAPTCHA
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CapManagedIds []*int64 `json:"CapManagedIds,omitnil" name:"CapManagedIds"`
+	CapManagedIds []*int64 `json:"CapManagedIds,omitnil,omitempty" name:"CapManagedIds"`
 
 	// ID of the rule that is set to observe requests
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	MonManagedIds []*int64 `json:"MonManagedIds,omitnil" name:"MonManagedIds"`
+	MonManagedIds []*int64 `json:"MonManagedIds,omitnil,omitempty" name:"MonManagedIds"`
 
 	// ID of the rule that is set to block requests
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	DropManagedIds []*int64 `json:"DropManagedIds,omitnil" name:"DropManagedIds"`
+	DropManagedIds []*int64 `json:"DropManagedIds,omitnil,omitempty" name:"DropManagedIds"`
 }
 
 type BotManagedRuleDetail struct {
 	// ID of the rule
-	RuleId *int64 `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *int64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Rule description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Rule type
-	RuleTypeName *string `json:"RuleTypeName,omitnil" name:"RuleTypeName"`
+	RuleTypeName *string `json:"RuleTypeName,omitnil,omitempty" name:"RuleTypeName"`
 
 	// Whether the rule is enabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type BotPortraitRule struct {
 	// ID of the rule being applied
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	RuleID *int64 `json:"RuleID,omitnil" name:"RuleID"`
+	RuleID *int64 `json:"RuleID,omitnil,omitempty" name:"RuleID"`
 
 	// ID of the rule that is set to verify requests by JavaScript challenge
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	AlgManagedIds []*int64 `json:"AlgManagedIds,omitnil" name:"AlgManagedIds"`
+	AlgManagedIds []*int64 `json:"AlgManagedIds,omitnil,omitempty" name:"AlgManagedIds"`
 
 	// ID of the rule that is set to verify requests by CAPTCHA
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CapManagedIds []*int64 `json:"CapManagedIds,omitnil" name:"CapManagedIds"`
+	CapManagedIds []*int64 `json:"CapManagedIds,omitnil,omitempty" name:"CapManagedIds"`
 
 	// ID of the rule that is set to observe requests
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	MonManagedIds []*int64 `json:"MonManagedIds,omitnil" name:"MonManagedIds"`
+	MonManagedIds []*int64 `json:"MonManagedIds,omitnil,omitempty" name:"MonManagedIds"`
 
 	// ID of the rule that is set to block requests
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	DropManagedIds []*int64 `json:"DropManagedIds,omitnil" name:"DropManagedIds"`
+	DropManagedIds []*int64 `json:"DropManagedIds,omitnil,omitempty" name:"DropManagedIds"`
 
 	// Feature switch
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type CCInterceptEvent struct {
 	// Client IP
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ClientIp *string `json:"ClientIp,omitnil" name:"ClientIp"`
+	ClientIp *string `json:"ClientIp,omitnil,omitempty" name:"ClientIp"`
 
 	// Number of blocks per minute
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InterceptNum *int64 `json:"InterceptNum,omitnil" name:"InterceptNum"`
+	InterceptNum *int64 `json:"InterceptNum,omitnil,omitempty" name:"InterceptNum"`
 
 	// Block time in rate-limiting policy per minute in seconds
-	InterceptTime *int64 `json:"InterceptTime,omitnil" name:"InterceptTime"`
+	InterceptTime *int64 `json:"InterceptTime,omitnil,omitempty" name:"InterceptTime"`
 }
 
 type CCInterceptEventData struct {
 	// Data set of attack events
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	List []*CCInterceptEvent `json:"List,omitnil" name:"List"`
+	List []*CCInterceptEvent `json:"List,omitnil,omitempty" name:"List"`
 
 	// Current page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Number of items per page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Total number of pages
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Pages *int64 `json:"Pages,omitnil" name:"Pages"`
+	Pages *int64 `json:"Pages,omitnil,omitempty" name:"Pages"`
 
 	// Total number of items
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalSize *int64 `json:"TotalSize,omitnil" name:"TotalSize"`
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
 }
 
 type CCLog struct {
 	// Attack time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackTime *uint64 `json:"AttackTime,omitnil" name:"AttackTime"`
+	AttackTime *uint64 `json:"AttackTime,omitnil,omitempty" name:"AttackTime"`
 
 	// Attack source IP
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackSip *string `json:"AttackSip,omitnil" name:"AttackSip"`
+	AttackSip *string `json:"AttackSip,omitnil,omitempty" name:"AttackSip"`
 
 	// Attack domain name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackDomain *string `json:"AttackDomain,omitnil" name:"AttackDomain"`
+	AttackDomain *string `json:"AttackDomain,omitnil,omitempty" name:"AttackDomain"`
 
 	// Request URI
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RequestUri *string `json:"RequestUri,omitnil" name:"RequestUri"`
+	RequestUri *string `json:"RequestUri,omitnil,omitempty" name:"RequestUri"`
 
 	// Number of hits
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	HitCount *uint64 `json:"HitCount,omitnil" name:"HitCount"`
+	HitCount *uint64 `json:"HitCount,omitnil,omitempty" name:"HitCount"`
 
 	// IP country/region
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SipCountryCode *string `json:"SipCountryCode,omitnil" name:"SipCountryCode"`
+	SipCountryCode *string `json:"SipCountryCode,omitnil,omitempty" name:"SipCountryCode"`
 
 	// Event ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EventId *string `json:"EventId,omitnil" name:"EventId"`
+	EventId *string `json:"EventId,omitnil,omitempty" name:"EventId"`
 
 	// Processing method
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DisposalMethod *string `json:"DisposalMethod,omitnil" name:"DisposalMethod"`
+	DisposalMethod *string `json:"DisposalMethod,omitnil,omitempty" name:"DisposalMethod"`
 
 	// http_log
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	HttpLog *string `json:"HttpLog,omitnil" name:"HttpLog"`
+	HttpLog *string `json:"HttpLog,omitnil,omitempty" name:"HttpLog"`
 
 	// Rule number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RuleId *uint64 `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Risk grade
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RiskLevel *string `json:"RiskLevel,omitnil" name:"RiskLevel"`
+	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
 }
 
 type CCLogData struct {
 	// Data set of CC block logs
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	List []*CCLog `json:"List,omitnil" name:"List"`
+	List []*CCLog `json:"List,omitnil,omitempty" name:"List"`
 
 	// Current page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Number of items per page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Total number of pages
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Pages *int64 `json:"Pages,omitnil" name:"Pages"`
+	Pages *int64 `json:"Pages,omitnil,omitempty" name:"Pages"`
 
 	// Total number of items
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalSize *int64 `json:"TotalSize,omitnil" name:"TotalSize"`
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
 }
 
 type CacheConfig struct {
 	// Cache configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Cache *CacheConfigCache `json:"Cache,omitnil" name:"Cache"`
+	Cache *CacheConfigCache `json:"Cache,omitnil,omitempty" name:"Cache"`
 
 	// No-cache configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	NoCache *CacheConfigNoCache `json:"NoCache,omitnil" name:"NoCache"`
+	NoCache *CacheConfigNoCache `json:"NoCache,omitnil,omitempty" name:"NoCache"`
 
 	// Follows the origin server configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	FollowOrigin *CacheConfigFollowOrigin `json:"FollowOrigin,omitnil" name:"FollowOrigin"`
+	FollowOrigin *CacheConfigFollowOrigin `json:"FollowOrigin,omitnil,omitempty" name:"FollowOrigin"`
 }
 
 type CacheConfigCache struct {
@@ -550,18 +550,18 @@ type CacheConfigCache struct {
 	// `on`: Enable
 	// `off`: Disable
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Cache expiration time settings
 	// Unit: second. The maximum value is 365 days.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CacheTime *int64 `json:"CacheTime,omitnil" name:"CacheTime"`
+	CacheTime *int64 `json:"CacheTime,omitnil,omitempty" name:"CacheTime"`
 
 	// Specifies whether to enable force cache
 	// `on`: Enable
 	// `off`: Disable
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	IgnoreCacheControl *string `json:"IgnoreCacheControl,omitnil" name:"IgnoreCacheControl"`
+	IgnoreCacheControl *string `json:"IgnoreCacheControl,omitnil,omitempty" name:"IgnoreCacheControl"`
 }
 
 type CacheConfigFollowOrigin struct {
@@ -569,7 +569,7 @@ type CacheConfigFollowOrigin struct {
 	// `on`: Enable
 	// `off`: Disable
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type CacheConfigNoCache struct {
@@ -577,7 +577,7 @@ type CacheConfigNoCache struct {
 	// `on`: Do not cache
 	// `off`: Cache
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type CacheKey struct {
@@ -585,24 +585,24 @@ type CacheKey struct {
 	// `on`: Enable full-path cache (i.e., disable Ignore Query String)
 	// `off`: Disable full-path cache (i.e., enable Ignore Query String)
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	FullUrlCache *string `json:"FullUrlCache,omitnil" name:"FullUrlCache"`
+	FullUrlCache *string `json:"FullUrlCache,omitnil,omitempty" name:"FullUrlCache"`
 
 	// Specifies whether the cache key is case sensitive
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	IgnoreCase *string `json:"IgnoreCase,omitnil" name:"IgnoreCase"`
+	IgnoreCase *string `json:"IgnoreCase,omitnil,omitempty" name:"IgnoreCase"`
 
 	// Request parameter contained in `CacheKey`
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	QueryString *QueryString `json:"QueryString,omitnil" name:"QueryString"`
+	QueryString *QueryString `json:"QueryString,omitnil,omitempty" name:"QueryString"`
 }
 
 type CachePrefresh struct {
 	// Configuration switch
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Cache prefresh percentage. Values: 1-99
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Percent *int64 `json:"Percent,omitnil" name:"Percent"`
+	Percent *int64 `json:"Percent,omitnil,omitempty" name:"Percent"`
 }
 
 type CertFilter struct {
@@ -611,14 +611,14 @@ type CertFilter struct {
 	//  - `certId`: Certificate ID
 	//  - `certAlias`: Certificate alias
 	//  - `certType: default`: Default certificate; `upload`: External certificate; `managed`: Tencent Cloud certificate.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Filters by the field value
-	Values []*string `json:"Values,omitnil" name:"Values"`
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 
 	// Specifies whether to enable fuzzy query, which only supports the `host` field.
 	// If it is enabled, the length of `Value` must be 1.
-	Fuzzy *bool `json:"Fuzzy,omitnil" name:"Fuzzy"`
+	Fuzzy *bool `json:"Fuzzy,omitnil,omitempty" name:"Fuzzy"`
 }
 
 type CertSort struct {
@@ -626,29 +626,29 @@ type CertSort struct {
 	// `createTime`: Domain name creation time
 	// `certExpireTime`: Certificate expiration time
 	// `certDeployTime`: Certificate deployment time
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Sorting order. Valid values: `asc` and `desc` (default).
-	Sequence *string `json:"Sequence,omitnil" name:"Sequence"`
+	Sequence *string `json:"Sequence,omitnil,omitempty" name:"Sequence"`
 }
 
 // Predefined struct for user
 type CheckCertificateRequestParams struct {
 	// Certificate
-	Certificate *string `json:"Certificate,omitnil" name:"Certificate"`
+	Certificate *string `json:"Certificate,omitnil,omitempty" name:"Certificate"`
 
 	// Private key
-	PrivateKey *string `json:"PrivateKey,omitnil" name:"PrivateKey"`
+	PrivateKey *string `json:"PrivateKey,omitnil,omitempty" name:"PrivateKey"`
 }
 
 type CheckCertificateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Certificate
-	Certificate *string `json:"Certificate,omitnil" name:"Certificate"`
+	Certificate *string `json:"Certificate,omitnil,omitempty" name:"Certificate"`
 
 	// Private key
-	PrivateKey *string `json:"PrivateKey,omitnil" name:"PrivateKey"`
+	PrivateKey *string `json:"PrivateKey,omitnil,omitempty" name:"PrivateKey"`
 }
 
 func (r *CheckCertificateRequest) ToJsonString() string {
@@ -674,7 +674,7 @@ func (r *CheckCertificateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CheckCertificateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CheckCertificateResponse struct {
@@ -696,118 +696,118 @@ func (r *CheckCertificateResponse) FromJsonString(s string) error {
 type ClientIp struct {
 	// Specifies whether to enable client IP header
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Name of the origin-pull client IP request header
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	HeaderName *string `json:"HeaderName,omitnil" name:"HeaderName"`
+	HeaderName *string `json:"HeaderName,omitnil,omitempty" name:"HeaderName"`
 }
 
 type CnameStatus struct {
 	// Record name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// CNAME address
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Cname *string `json:"Cname,omitnil" name:"Cname"`
+	Cname *string `json:"Cname,omitnil,omitempty" name:"Cname"`
 
 	// Status
 	// `active`: Activated
 	// `moved`: Not activated
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type Compression struct {
 	// Whether to enable Smart compression
 	// `on`: Enable
 	// `off`: Disable
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 // Predefined struct for user
 type CreateApplicationProxyRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Site name
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// Name of the proxy:
 	// Domain name or subdomain name when `ProxyType=hostname`
 	// Instance name when `ProxyType=instance`
-	ProxyName *string `json:"ProxyName,omitnil" name:"ProxyName"`
+	ProxyName *string `json:"ProxyName,omitnil,omitempty" name:"ProxyName"`
 
 	// Scheduling mode. Values:
 	// `ip`: Anycast IP
 	// `domain`: CNAME
-	PlatType *string `json:"PlatType,omitnil" name:"PlatType"`
+	PlatType *string `json:"PlatType,omitnil,omitempty" name:"PlatType"`
 
 	// `0`: Disable security protection; `1`: Enable security protection.
-	SecurityType *int64 `json:"SecurityType,omitnil" name:"SecurityType"`
+	SecurityType *int64 `json:"SecurityType,omitnil,omitempty" name:"SecurityType"`
 
 	// `0`: Disable acceleration; `1`: Enable acceleration.
-	AccelerateType *int64 `json:"AccelerateType,omitnil" name:"AccelerateType"`
+	AccelerateType *int64 `json:"AccelerateType,omitnil,omitempty" name:"AccelerateType"`
 
 	// This field is moved to `Rule.ForwardClientIp`.
-	ForwardClientIp *string `json:"ForwardClientIp,omitnil" name:"ForwardClientIp"`
+	ForwardClientIp *string `json:"ForwardClientIp,omitnil,omitempty" name:"ForwardClientIp"`
 
 	// This field is moved to `Rule.SessionPersist`.
-	SessionPersist *bool `json:"SessionPersist,omitnil" name:"SessionPersist"`
+	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 
 	// Rule details
-	Rule []*ApplicationProxyRule `json:"Rule,omitnil" name:"Rule"`
+	Rule []*ApplicationProxyRule `json:"Rule,omitnil,omitempty" name:"Rule"`
 
 	// Session persistence duration. Value range: 30-3600 (in seconds).
-	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil" name:"SessionPersistTime"`
+	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// Specifies how a layer-4 proxy is created.
 	// `hostname`: Create by subdomain name
 	// `instance`: Create by instance
-	ProxyType *string `json:"ProxyType,omitnil" name:"ProxyType"`
+	ProxyType *string `json:"ProxyType,omitnil,omitempty" name:"ProxyType"`
 }
 
 type CreateApplicationProxyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Site name
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// Name of the proxy:
 	// Domain name or subdomain name when `ProxyType=hostname`
 	// Instance name when `ProxyType=instance`
-	ProxyName *string `json:"ProxyName,omitnil" name:"ProxyName"`
+	ProxyName *string `json:"ProxyName,omitnil,omitempty" name:"ProxyName"`
 
 	// Scheduling mode. Values:
 	// `ip`: Anycast IP
 	// `domain`: CNAME
-	PlatType *string `json:"PlatType,omitnil" name:"PlatType"`
+	PlatType *string `json:"PlatType,omitnil,omitempty" name:"PlatType"`
 
 	// `0`: Disable security protection; `1`: Enable security protection.
-	SecurityType *int64 `json:"SecurityType,omitnil" name:"SecurityType"`
+	SecurityType *int64 `json:"SecurityType,omitnil,omitempty" name:"SecurityType"`
 
 	// `0`: Disable acceleration; `1`: Enable acceleration.
-	AccelerateType *int64 `json:"AccelerateType,omitnil" name:"AccelerateType"`
+	AccelerateType *int64 `json:"AccelerateType,omitnil,omitempty" name:"AccelerateType"`
 
 	// This field is moved to `Rule.ForwardClientIp`.
-	ForwardClientIp *string `json:"ForwardClientIp,omitnil" name:"ForwardClientIp"`
+	ForwardClientIp *string `json:"ForwardClientIp,omitnil,omitempty" name:"ForwardClientIp"`
 
 	// This field is moved to `Rule.SessionPersist`.
-	SessionPersist *bool `json:"SessionPersist,omitnil" name:"SessionPersist"`
+	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 
 	// Rule details
-	Rule []*ApplicationProxyRule `json:"Rule,omitnil" name:"Rule"`
+	Rule []*ApplicationProxyRule `json:"Rule,omitnil,omitempty" name:"Rule"`
 
 	// Session persistence duration. Value range: 30-3600 (in seconds).
-	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil" name:"SessionPersistTime"`
+	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// Specifies how a layer-4 proxy is created.
 	// `hostname`: Create by subdomain name
 	// `instance`: Create by instance
-	ProxyType *string `json:"ProxyType,omitnil" name:"ProxyType"`
+	ProxyType *string `json:"ProxyType,omitnil,omitempty" name:"ProxyType"`
 }
 
 func (r *CreateApplicationProxyRequest) ToJsonString() string {
@@ -842,10 +842,10 @@ func (r *CreateApplicationProxyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateApplicationProxyResponseParams struct {
 	// Layer-4 application proxy ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateApplicationProxyResponse struct {
@@ -867,30 +867,30 @@ func (r *CreateApplicationProxyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateApplicationProxyRuleRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Proxy ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Protocol. Valid values: `TCP` and `UDP`.
-	Proto *string `json:"Proto,omitnil" name:"Proto"`
+	Proto *string `json:"Proto,omitnil,omitempty" name:"Proto"`
 
 	// Port. Valid values:
 	// `80`: Port 80
 	// `81-90`: Port range 81-90
-	Port []*string `json:"Port,omitnil" name:"Port"`
+	Port []*string `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Origin type. Valid values:
 	// `custom`: Specified origins
 	// `origins`: Origin group
-	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
+	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 
 	// Origin information:
 	// When `OriginType=custom`, it can include one or more origins in either of the following formats:
 	// IP:Port
 	// Domain name:Port
 	// When `OriginType=origins`, it is an origin group ID.
-	OriginValue []*string `json:"OriginValue,omitnil" name:"OriginValue"`
+	OriginValue []*string `json:"OriginValue,omitnil,omitempty" name:"OriginValue"`
 
 	// Passes the client IP. When `Proto=TCP`, valid values:
 	// `TOA`: Pass the client IP via TOA
@@ -900,40 +900,40 @@ type CreateApplicationProxyRuleRequestParams struct {
 	// When `Proto=UDP`, valid values:
 	// `PPV2`: Pass the client IP via Proxy Protocol V2
 	// `OFF`: Do not pass the client IP.
-	ForwardClientIp *string `json:"ForwardClientIp,omitnil" name:"ForwardClientIp"`
+	ForwardClientIp *string `json:"ForwardClientIp,omitnil,omitempty" name:"ForwardClientIp"`
 
 	// Specifies whether to enable session persistence 
-	SessionPersist *bool `json:"SessionPersist,omitnil" name:"SessionPersist"`
+	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 }
 
 type CreateApplicationProxyRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Proxy ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Protocol. Valid values: `TCP` and `UDP`.
-	Proto *string `json:"Proto,omitnil" name:"Proto"`
+	Proto *string `json:"Proto,omitnil,omitempty" name:"Proto"`
 
 	// Port. Valid values:
 	// `80`: Port 80
 	// `81-90`: Port range 81-90
-	Port []*string `json:"Port,omitnil" name:"Port"`
+	Port []*string `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Origin type. Valid values:
 	// `custom`: Specified origins
 	// `origins`: Origin group
-	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
+	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 
 	// Origin information:
 	// When `OriginType=custom`, it can include one or more origins in either of the following formats:
 	// IP:Port
 	// Domain name:Port
 	// When `OriginType=origins`, it is an origin group ID.
-	OriginValue []*string `json:"OriginValue,omitnil" name:"OriginValue"`
+	OriginValue []*string `json:"OriginValue,omitnil,omitempty" name:"OriginValue"`
 
 	// Passes the client IP. When `Proto=TCP`, valid values:
 	// `TOA`: Pass the client IP via TOA
@@ -943,10 +943,10 @@ type CreateApplicationProxyRuleRequest struct {
 	// When `Proto=UDP`, valid values:
 	// `PPV2`: Pass the client IP via Proxy Protocol V2
 	// `OFF`: Do not pass the client IP.
-	ForwardClientIp *string `json:"ForwardClientIp,omitnil" name:"ForwardClientIp"`
+	ForwardClientIp *string `json:"ForwardClientIp,omitnil,omitempty" name:"ForwardClientIp"`
 
 	// Specifies whether to enable session persistence 
-	SessionPersist *bool `json:"SessionPersist,omitnil" name:"SessionPersist"`
+	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 }
 
 func (r *CreateApplicationProxyRuleRequest) ToJsonString() string {
@@ -978,10 +978,10 @@ func (r *CreateApplicationProxyRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateApplicationProxyRuleResponseParams struct {
 	// Rule ID
-	RuleId *string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateApplicationProxyRuleResponse struct {
@@ -1003,26 +1003,26 @@ func (r *CreateApplicationProxyRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateApplicationProxyRulesRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Proxy ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Rule list
-	Rule []*ApplicationProxyRule `json:"Rule,omitnil" name:"Rule"`
+	Rule []*ApplicationProxyRule `json:"Rule,omitnil,omitempty" name:"Rule"`
 }
 
 type CreateApplicationProxyRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Proxy ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Rule list
-	Rule []*ApplicationProxyRule `json:"Rule,omitnil" name:"Rule"`
+	Rule []*ApplicationProxyRule `json:"Rule,omitnil,omitempty" name:"Rule"`
 }
 
 func (r *CreateApplicationProxyRulesRequest) ToJsonString() string {
@@ -1049,10 +1049,10 @@ func (r *CreateApplicationProxyRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateApplicationProxyRulesResponseParams struct {
 	// Array of rule IDs
-	RuleId []*string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId []*string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateApplicationProxyRulesResponse struct {
@@ -1074,32 +1074,32 @@ func (r *CreateApplicationProxyRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateCustomErrorPageRequestParams struct {
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name of the site
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
 	// Name of the file specified to be returned
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Content of the custom page
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 }
 
 type CreateCustomErrorPageRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name of the site
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
 	// Name of the file specified to be returned
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Content of the custom page
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 }
 
 func (r *CreateCustomErrorPageRequest) ToJsonString() string {
@@ -1127,10 +1127,10 @@ func (r *CreateCustomErrorPageRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateCustomErrorPageResponseParams struct {
 	// ID of the custom page
-	PageId *int64 `json:"PageId,omitnil" name:"PageId"`
+	PageId *int64 `json:"PageId,omitnil,omitempty" name:"PageId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateCustomErrorPageResponse struct {
@@ -1152,49 +1152,49 @@ func (r *CreateCustomErrorPageResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateDnsRecordRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Record type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Record name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Record content
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// Proxy mode. Valid values: `dns_only`, `cdn_only`, and `secure_cdn`.
-	Mode *string `json:"Mode,omitnil" name:"Mode"`
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 
-	Ttl *int64 `json:"Ttl,omitnil" name:"Ttl"`
+	Ttl *int64 `json:"Ttl,omitnil,omitempty" name:"Ttl"`
 
 	// Priority
-	Priority *int64 `json:"Priority,omitnil" name:"Priority"`
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 }
 
 type CreateDnsRecordRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Record type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Record name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Record content
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// Proxy mode. Valid values: `dns_only`, `cdn_only`, and `secure_cdn`.
-	Mode *string `json:"Mode,omitnil" name:"Mode"`
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
-	Ttl *int64 `json:"Ttl,omitnil" name:"Ttl"`
+	Ttl *int64 `json:"Ttl,omitnil,omitempty" name:"Ttl"`
 
 	// Priority
-	Priority *int64 `json:"Priority,omitnil" name:"Priority"`
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 }
 
 func (r *CreateDnsRecordRequest) ToJsonString() string {
@@ -1225,52 +1225,52 @@ func (r *CreateDnsRecordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateDnsRecordResponseParams struct {
 	// Record ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Record type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Record name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Record content
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 
-	Ttl *int64 `json:"Ttl,omitnil" name:"Ttl"`
+	Ttl *int64 `json:"Ttl,omitnil,omitempty" name:"Ttl"`
 
 	// Priority
-	Priority *int64 `json:"Priority,omitnil" name:"Priority"`
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
 	// Proxy mode
-	Mode *string `json:"Mode,omitnil" name:"Mode"`
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 	// Resolution status. Valid values:
 	// `active`: Activated
 	// `pending`: Not activated
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Whether the DNS record is locked
-	Locked *bool `json:"Locked,omitnil" name:"Locked"`
+	Locked *bool `json:"Locked,omitnil,omitempty" name:"Locked"`
 
 	// Creation time
-	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
+	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
 
 	// Modification time
-	ModifiedOn *string `json:"ModifiedOn,omitnil" name:"ModifiedOn"`
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Site name
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// CNAME address
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Cname *string `json:"Cname,omitnil" name:"Cname"`
+	Cname *string `json:"Cname,omitnil,omitempty" name:"Cname"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateDnsRecordResponse struct {
@@ -1292,42 +1292,42 @@ func (r *CreateDnsRecordResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLoadBalancingRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Proxy mode. Valid values:
 	// `dns_only`: Only DNS
 	// `proxied`: Enable proxy
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// ID of the origin group used
-	OriginId []*string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId []*string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Indicates DNS TTL time when `Type=dns_only` 
-	TTL *uint64 `json:"TTL,omitnil" name:"TTL"`
+	TTL *uint64 `json:"TTL,omitnil,omitempty" name:"TTL"`
 }
 
 type CreateLoadBalancingRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Proxy mode. Valid values:
 	// `dns_only`: Only DNS
 	// `proxied`: Enable proxy
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// ID of the origin group used
-	OriginId []*string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId []*string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Indicates DNS TTL time when `Type=dns_only` 
-	TTL *uint64 `json:"TTL,omitnil" name:"TTL"`
+	TTL *uint64 `json:"TTL,omitnil,omitempty" name:"TTL"`
 }
 
 func (r *CreateLoadBalancingRequest) ToJsonString() string {
@@ -1356,10 +1356,10 @@ func (r *CreateLoadBalancingRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLoadBalancingResponseParams struct {
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLoadBalancingResponse struct {
@@ -1381,50 +1381,50 @@ func (r *CreateLoadBalancingResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateOriginGroupRequestParams struct {
 	// Name of the origin group
-	OriginName *string `json:"OriginName,omitnil" name:"OriginName"`
+	OriginName *string `json:"OriginName,omitnil,omitempty" name:"OriginName"`
 
 	// Origin-pull configuration type. This field is required when `OriginType=self`.
 	// `area`: Origin-pull by region
 	// `weight`: Origin-pull by weight
 	// When `OriginType=third_party/cos`, it can be left empty.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Origin records
-	Record []*OriginRecord `json:"Record,omitnil" name:"Record"`
+	Record []*OriginRecord `json:"Record,omitnil,omitempty" name:"Record"`
 
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Origin type
 	// `self`: Customer origin
 	// `third_party`: Third-party origin
 	// `cos`: Tencent Cloud COS origin
-	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
+	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 }
 
 type CreateOriginGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Name of the origin group
-	OriginName *string `json:"OriginName,omitnil" name:"OriginName"`
+	OriginName *string `json:"OriginName,omitnil,omitempty" name:"OriginName"`
 
 	// Origin-pull configuration type. This field is required when `OriginType=self`.
 	// `area`: Origin-pull by region
 	// `weight`: Origin-pull by weight
 	// When `OriginType=third_party/cos`, it can be left empty.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Origin records
-	Record []*OriginRecord `json:"Record,omitnil" name:"Record"`
+	Record []*OriginRecord `json:"Record,omitnil,omitempty" name:"Record"`
 
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Origin type
 	// `self`: Customer origin
 	// `third_party`: Third-party origin
 	// `cos`: Tencent Cloud COS origin
-	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
+	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 }
 
 func (r *CreateOriginGroupRequest) ToJsonString() string {
@@ -1453,10 +1453,10 @@ func (r *CreateOriginGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateOriginGroupResponseParams struct {
 	// ID of the newly added origin group
-	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateOriginGroupResponse struct {
@@ -1478,36 +1478,36 @@ func (r *CreateOriginGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreatePrefetchTaskRequestParams struct {
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// List of resources to be pre-warmed, for example:
 	// http://www.example.com/example.txt
-	Targets []*string `json:"Targets,omitnil" name:"Targets"`
+	Targets []*string `json:"Targets,omitnil,omitempty" name:"Targets"`
 
 	// Specifies whether to encode the URL
 	// Note that if it’s enabled, the purging is based on the converted URLs.
-	EncodeUrl *bool `json:"EncodeUrl,omitnil" name:"EncodeUrl"`
+	EncodeUrl *bool `json:"EncodeUrl,omitnil,omitempty" name:"EncodeUrl"`
 
 	// HTTP header information
-	Headers []*Header `json:"Headers,omitnil" name:"Headers"`
+	Headers []*Header `json:"Headers,omitnil,omitempty" name:"Headers"`
 }
 
 type CreatePrefetchTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// List of resources to be pre-warmed, for example:
 	// http://www.example.com/example.txt
-	Targets []*string `json:"Targets,omitnil" name:"Targets"`
+	Targets []*string `json:"Targets,omitnil,omitempty" name:"Targets"`
 
 	// Specifies whether to encode the URL
 	// Note that if it’s enabled, the purging is based on the converted URLs.
-	EncodeUrl *bool `json:"EncodeUrl,omitnil" name:"EncodeUrl"`
+	EncodeUrl *bool `json:"EncodeUrl,omitnil,omitempty" name:"EncodeUrl"`
 
 	// HTTP header information
-	Headers []*Header `json:"Headers,omitnil" name:"Headers"`
+	Headers []*Header `json:"Headers,omitnil,omitempty" name:"Headers"`
 }
 
 func (r *CreatePrefetchTaskRequest) ToJsonString() string {
@@ -1535,14 +1535,14 @@ func (r *CreatePrefetchTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreatePrefetchTaskResponseParams struct {
 	// Task ID
-	JobId *string `json:"JobId,omitnil" name:"JobId"`
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// List of failed tasks
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	FailedList []*FailReason `json:"FailedList,omitnil" name:"FailedList"`
+	FailedList []*FailReason `json:"FailedList,omitnil,omitempty" name:"FailedList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreatePrefetchTaskResponse struct {
@@ -1564,14 +1564,14 @@ func (r *CreatePrefetchTaskResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreatePurgeTaskRequestParams struct {
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Type of the purging task. Values:
 	// - `purge_url`: Purge by the URL
 	// - `purge_prefix`: Purge by the prefix
 	// - `purge_host`: Purge by the Hostname
 	// - `purge_all`: Purge all cached contents
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Target resource to be purged, which depends on the `Type` field.
 	// 1. When `Type = purge_host`:
@@ -1582,25 +1582,25 @@ type CreatePurgeTaskRequestParams struct {
 	// URLs are purged, such as https://www.example.com/example.jpg.
 	// 4. When `Type = purge_all`: All types of resources are purged.
 	// `Targets` is not a required field.
-	Targets []*string `json:"Targets,omitnil" name:"Targets"`
+	Targets []*string `json:"Targets,omitnil,omitempty" name:"Targets"`
 
 	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
 	// Note that if it’s enabled, the purging is based on the converted URLs.
-	EncodeUrl *bool `json:"EncodeUrl,omitnil" name:"EncodeUrl"`
+	EncodeUrl *bool `json:"EncodeUrl,omitnil,omitempty" name:"EncodeUrl"`
 }
 
 type CreatePurgeTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Type of the purging task. Values:
 	// - `purge_url`: Purge by the URL
 	// - `purge_prefix`: Purge by the prefix
 	// - `purge_host`: Purge by the Hostname
 	// - `purge_all`: Purge all cached contents
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Target resource to be purged, which depends on the `Type` field.
 	// 1. When `Type = purge_host`:
@@ -1611,11 +1611,11 @@ type CreatePurgeTaskRequest struct {
 	// URLs are purged, such as https://www.example.com/example.jpg.
 	// 4. When `Type = purge_all`: All types of resources are purged.
 	// `Targets` is not a required field.
-	Targets []*string `json:"Targets,omitnil" name:"Targets"`
+	Targets []*string `json:"Targets,omitnil,omitempty" name:"Targets"`
 
 	// Specifies whether to transcode non-ASCII URLs according to RFC3986.
 	// Note that if it’s enabled, the purging is based on the converted URLs.
-	EncodeUrl *bool `json:"EncodeUrl,omitnil" name:"EncodeUrl"`
+	EncodeUrl *bool `json:"EncodeUrl,omitnil,omitempty" name:"EncodeUrl"`
 }
 
 func (r *CreatePurgeTaskRequest) ToJsonString() string {
@@ -1643,14 +1643,14 @@ func (r *CreatePurgeTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreatePurgeTaskResponseParams struct {
 	// Task ID
-	JobId *string `json:"JobId,omitnil" name:"JobId"`
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// List of failed tasks and reasons
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	FailedList []*FailReason `json:"FailedList,omitnil" name:"FailedList"`
+	FailedList []*FailReason `json:"FailedList,omitnil,omitempty" name:"FailedList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreatePurgeTaskResponse struct {
@@ -1672,36 +1672,36 @@ func (r *CreatePurgeTaskResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateZoneRequestParams struct {
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Access mode. Valid values:
 	// - `full` (default): Access via NS
 	// - `partial`: Access via CNAME
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Specifies whether to skip resolution record scanning
-	JumpStart *bool `json:"JumpStart,omitnil" name:"JumpStart"`
+	JumpStart *bool `json:"JumpStart,omitnil,omitempty" name:"JumpStart"`
 
 	// Resource tag
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type CreateZoneRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Access mode. Valid values:
 	// - `full` (default): Access via NS
 	// - `partial`: Access via CNAME
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Specifies whether to skip resolution record scanning
-	JumpStart *bool `json:"JumpStart,omitnil" name:"JumpStart"`
+	JumpStart *bool `json:"JumpStart,omitnil,omitempty" name:"JumpStart"`
 
 	// Resource tag
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *CreateZoneRequest) ToJsonString() string {
@@ -1729,34 +1729,34 @@ func (r *CreateZoneRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateZoneResponseParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Specifies how the site is connected to EdgeOne.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Site status
 	// - `pending`: The name server is not switched.
 	// - `active`: The name server is switched to another assigned.
 	// - `moved`: Move the NS out of Tencent Cloud
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// List of name servers
-	OriginalNameServers []*string `json:"OriginalNameServers,omitnil" name:"OriginalNameServers"`
+	OriginalNameServers []*string `json:"OriginalNameServers,omitnil,omitempty" name:"OriginalNameServers"`
 
 	// List of name servers assigned to users
-	NameServers []*string `json:"NameServers,omitnil" name:"NameServers"`
+	NameServers []*string `json:"NameServers,omitnil,omitempty" name:"NameServers"`
 
 	// Site creation date
-	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
+	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
 
 	// Site update time
-	ModifiedOn *string `json:"ModifiedOn,omitnil" name:"ModifiedOn"`
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateZoneResponse struct {
@@ -1777,76 +1777,76 @@ func (r *CreateZoneResponse) FromJsonString(s string) error {
 
 type DDoSAcl struct {
 	// Destination port used as the end port
-	DportEnd *int64 `json:"DportEnd,omitnil" name:"DportEnd"`
+	DportEnd *int64 `json:"DportEnd,omitnil,omitempty" name:"DportEnd"`
 
 	// Destination port used as the start port
-	DportStart *int64 `json:"DportStart,omitnil" name:"DportStart"`
+	DportStart *int64 `json:"DportStart,omitnil,omitempty" name:"DportStart"`
 
 	// Source port used as the end port
-	SportEnd *int64 `json:"SportEnd,omitnil" name:"SportEnd"`
+	SportEnd *int64 `json:"SportEnd,omitnil,omitempty" name:"SportEnd"`
 
 	// Source port used as the start port
-	SportStart *int64 `json:"SportStart,omitnil" name:"SportStart"`
+	SportStart *int64 `json:"SportStart,omitnil,omitempty" name:"SportStart"`
 
 	// Protocol. Values: `tcp`, `udp`, and `all`.
-	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// Action. Values: `drop` (Drop the request); `transmit` (Allow the request); `forward` (Continue to offer protection).
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// Whether it is a system configuration. Values: `0` (manual configuration); `1` (system configuration).
-	Default *int64 `json:"Default,omitnil" name:"Default"`
+	Default *int64 `json:"Default,omitnil,omitempty" name:"Default"`
 }
 
 type DDoSAntiPly struct {
 	// Enables TCP protocol blocking. `on` (enable); `off` (disable).
-	DropTcp *string `json:"DropTcp,omitnil" name:"DropTcp"`
+	DropTcp *string `json:"DropTcp,omitnil,omitempty" name:"DropTcp"`
 
 	// Enables UDP protocol blocking. `on` (enable); `off` (disable).
-	DropUdp *string `json:"DropUdp,omitnil" name:"DropUdp"`
+	DropUdp *string `json:"DropUdp,omitnil,omitempty" name:"DropUdp"`
 
 	// Enables ICMP protocol blocking. `on` (enable); `off` (disable).
-	DropIcmp *string `json:"DropIcmp,omitnil" name:"DropIcmp"`
+	DropIcmp *string `json:"DropIcmp,omitnil,omitempty" name:"DropIcmp"`
 
 	// Enables blocking for other protocols. `on` (enable); `off` (disable).
-	DropOther *string `json:"DropOther,omitnil" name:"DropOther"`
+	DropOther *string `json:"DropOther,omitnil,omitempty" name:"DropOther"`
 
 	// Number of new connections the source port can establish. Value range: 0-4294967295.
-	SourceCreateLimit *int64 `json:"SourceCreateLimit,omitnil" name:"SourceCreateLimit"`
+	SourceCreateLimit *int64 `json:"SourceCreateLimit,omitnil,omitempty" name:"SourceCreateLimit"`
 
 	// Number of concurrent connections the source port can establish. Value range: 0-4294967295.
-	SourceConnectLimit *int64 `json:"SourceConnectLimit,omitnil" name:"SourceConnectLimit"`
+	SourceConnectLimit *int64 `json:"SourceConnectLimit,omitnil,omitempty" name:"SourceConnectLimit"`
 
 	// Number of new connections the destination port can establish. Value range: 0-4294967295.
-	DestinationCreateLimit *int64 `json:"DestinationCreateLimit,omitnil" name:"DestinationCreateLimit"`
+	DestinationCreateLimit *int64 `json:"DestinationCreateLimit,omitnil,omitempty" name:"DestinationCreateLimit"`
 
 	// Number of concurrent connections the destination port can establish. Value range: 0-4294967295.
-	DestinationConnectLimit *int64 `json:"DestinationConnectLimit,omitnil" name:"DestinationConnectLimit"`
+	DestinationConnectLimit *int64 `json:"DestinationConnectLimit,omitnil,omitempty" name:"DestinationConnectLimit"`
 
 	// Number of abnormal connections allowed. Value range: 0-4294967295.
-	AbnormalConnectNum *int64 `json:"AbnormalConnectNum,omitnil" name:"AbnormalConnectNum"`
+	AbnormalConnectNum *int64 `json:"AbnormalConnectNum,omitnil,omitempty" name:"AbnormalConnectNum"`
 
 	// Specifies the ratio of SYN exceptions to trigger alerts. Value range: 0-100
-	AbnormalSynRatio *int64 `json:"AbnormalSynRatio,omitnil" name:"AbnormalSynRatio"`
+	AbnormalSynRatio *int64 `json:"AbnormalSynRatio,omitnil,omitempty" name:"AbnormalSynRatio"`
 
 	// Specifies a max number of SYN packets that triggers alarms. Value range: 0-65535
-	AbnormalSynNum *int64 `json:"AbnormalSynNum,omitnil" name:"AbnormalSynNum"`
+	AbnormalSynNum *int64 `json:"AbnormalSynNum,omitnil,omitempty" name:"AbnormalSynNum"`
 
 	// Connection timeout period. Value range: 0-65535.
-	ConnectTimeout *int64 `json:"ConnectTimeout,omitnil" name:"ConnectTimeout"`
+	ConnectTimeout *int64 `json:"ConnectTimeout,omitnil,omitempty" name:"ConnectTimeout"`
 
 	// Whether to enable null session protection. `0`: Disable; `1`: Enable.
-	EmptyConnectProtect *string `json:"EmptyConnectProtect,omitnil" name:"EmptyConnectProtect"`
+	EmptyConnectProtect *string `json:"EmptyConnectProtect,omitnil,omitempty" name:"EmptyConnectProtect"`
 
 	// Whether to enable UDP fragmentation. `off`: Disable; `on`: Enable.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UdpShard *string `json:"UdpShard,omitnil" name:"UdpShard"`
+	UdpShard *string `json:"UdpShard,omitnil,omitempty" name:"UdpShard"`
 }
 
 type DDoSApplication struct {
 	// Second-level domain name
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Status of the domain name
 	// `init`: NS to be switched
@@ -1854,391 +1854,391 @@ type DDoSApplication struct {
 	// `process`: Deployment in progress
 	// `online`: Normal
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Site acceleration switch. `on`: Enable site acceleration; `off`: Disable site acceleration. This field can be used together with `SecurityType`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	AccelerateType *string `json:"AccelerateType,omitnil" name:"AccelerateType"`
+	AccelerateType *string `json:"AccelerateType,omitnil,omitempty" name:"AccelerateType"`
 
 	// Security acceleration switch. `on`: Enable site acceleration; `off`: Disable site acceleration. This field can be used together with `AccelerateType`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	SecurityType *string `json:"SecurityType,omitnil" name:"SecurityType"`
+	SecurityType *string `json:"SecurityType,omitnil,omitempty" name:"SecurityType"`
 }
 
 type DDoSConfig struct {
 	// Switch
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type DDoSFeaturesFilter struct {
 	// Action. `drop`: Drop the request; `transmit`: Allow the request; `drop_block`: Drop the request and block it; `forward`: Continue to offer protection.
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// Sets how far from the first search position
-	Depth *int64 `json:"Depth,omitnil" name:"Depth"`
+	Depth *int64 `json:"Depth,omitnil,omitempty" name:"Depth"`
 
 	// Sets how far from the second search position
-	Depth2 *int64 `json:"Depth2,omitnil" name:"Depth2"`
+	Depth2 *int64 `json:"Depth2,omitnil,omitempty" name:"Depth2"`
 
 	// End of the destination port
-	DportEnd *int64 `json:"DportEnd,omitnil" name:"DportEnd"`
+	DportEnd *int64 `json:"DportEnd,omitnil,omitempty" name:"DportEnd"`
 
 	// Start of the destination port
-	DportStart *int64 `json:"DportStart,omitnil" name:"DportStart"`
+	DportStart *int64 `json:"DportStart,omitnil,omitempty" name:"DportStart"`
 
 	// Whether to match string 1 that does not contain all the specified elements
-	IsNot *int64 `json:"IsNot,omitnil" name:"IsNot"`
+	IsNot *int64 `json:"IsNot,omitnil,omitempty" name:"IsNot"`
 
 	// Whether to match string 2 that does not contain all the specified elements
-	IsNot2 *int64 `json:"IsNot2,omitnil" name:"IsNot2"`
+	IsNot2 *int64 `json:"IsNot2,omitnil,omitempty" name:"IsNot2"`
 
 	// Logical operator that combines two conditions. Values: `none`, `and` and `or`. If there is only one condition, pass in `none` for this condition only.
-	MatchLogic *string `json:"MatchLogic,omitnil" name:"MatchLogic"`
+	MatchLogic *string `json:"MatchLogic,omitnil,omitempty" name:"MatchLogic"`
 
 	// Matching method of the first condition. `pcre`: Regex match; `sunday`: String match.
-	MatchType *string `json:"MatchType,omitnil" name:"MatchType"`
+	MatchType *string `json:"MatchType,omitnil,omitempty" name:"MatchType"`
 
 	// Matching method of the second condition. `pcre`: Regex match; `sunday`: String match.
-	MatchType2 *string `json:"MatchType2,omitnil" name:"MatchType2"`
+	MatchType2 *string `json:"MatchType2,omitnil,omitempty" name:"MatchType2"`
 
 	// Offset from the first search position
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Offset from the second search position
-	Offset2 *int64 `json:"Offset2,omitnil" name:"Offset2"`
+	Offset2 *int64 `json:"Offset2,omitnil,omitempty" name:"Offset2"`
 
 	// Maximum packet length
-	PacketMax *int64 `json:"PacketMax,omitnil" name:"PacketMax"`
+	PacketMax *int64 `json:"PacketMax,omitnil,omitempty" name:"PacketMax"`
 
 	// Minimum packet length
-	PacketMin *int64 `json:"PacketMin,omitnil" name:"PacketMin"`
+	PacketMin *int64 `json:"PacketMin,omitnil,omitempty" name:"PacketMin"`
 
 	// Protocol. Values: `tcp`, `udp`, `icmp` and `all`.
-	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// End of the source port
-	SportEnd *int64 `json:"SportEnd,omitnil" name:"SportEnd"`
+	SportEnd *int64 `json:"SportEnd,omitnil,omitempty" name:"SportEnd"`
 
 	// Start of the source port
-	SportStart *int64 `json:"SportStart,omitnil" name:"SportStart"`
+	SportStart *int64 `json:"SportStart,omitnil,omitempty" name:"SportStart"`
 
 	// String in the first condition
-	Str *string `json:"Str,omitnil" name:"Str"`
+	Str *string `json:"Str,omitnil,omitempty" name:"Str"`
 
 	// String in the second condition
-	Str2 *string `json:"Str2,omitnil" name:"Str2"`
+	Str2 *string `json:"Str2,omitnil,omitempty" name:"Str2"`
 
 	// Layer at which each match starts. Values: `begin_l5`, `no_match`, `begin_l3` and `begin_l4`.
-	MatchBegin *string `json:"MatchBegin,omitnil" name:"MatchBegin"`
+	MatchBegin *string `json:"MatchBegin,omitnil,omitempty" name:"MatchBegin"`
 
 	// Layer at which each match starts. Values: `begin_l5`, `no_match`, `begin_l3` and `begin_l4`.
-	MatchBegin2 *string `json:"MatchBegin2,omitnil" name:"MatchBegin2"`
+	MatchBegin2 *string `json:"MatchBegin2,omitnil,omitempty" name:"MatchBegin2"`
 }
 
 type DDoSGeoIp struct {
 	// Region information
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	RegionId []*int64 `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId []*int64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Whether to remove all settings when empty strings are passed in. Default value: `off` (remove)
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type DDoSStatusInfo struct {
 	// This field is not supported. Value: `off`.
-	AiStatus *string `json:"AiStatus,omitnil" name:"AiStatus"`
+	AiStatus *string `json:"AiStatus,omitnil,omitempty" name:"AiStatus"`
 
 	// User appid
-	Appid *string `json:"Appid,omitnil" name:"Appid"`
+	Appid *string `json:"Appid,omitnil,omitempty" name:"Appid"`
 
 	// Protection level. Values: `low`, `middle`, and `high`.
-	PlyLevel *string `json:"PlyLevel,omitnil" name:"PlyLevel"`
+	PlyLevel *string `json:"PlyLevel,omitnil,omitempty" name:"PlyLevel"`
 }
 
 type DDoSUserAllowBlockIP struct {
 	// Start IP address in a specific range
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Ip *string `json:"Ip,omitnil" name:"Ip"`
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
 	// Start mask in a specific range
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Mask *int64 `json:"Mask,omitnil" name:"Mask"`
+	Mask *int64 `json:"Mask,omitnil,omitempty" name:"Mask"`
 
 	// IP type. `block`: IP blocklist; `allow`: IP allowlist.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Timestamp
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	UpdateTime *int64 `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *int64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// End IP address in a specific range
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Ip2 *string `json:"Ip2,omitnil" name:"Ip2"`
+	Ip2 *string `json:"Ip2,omitnil,omitempty" name:"Ip2"`
 
 	// End mask in a specific range
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Mask2 *int64 `json:"Mask2,omitnil" name:"Mask2"`
+	Mask2 *int64 `json:"Mask2,omitnil,omitempty" name:"Mask2"`
 }
 
 type DDosAttackEvent struct {
 	// DDoS policy group ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 
 	// Attack type (corresponding to interaction event name)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 
 	// Attack status
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackStatus *int64 `json:"AttackStatus,omitnil" name:"AttackStatus"`
+	AttackStatus *int64 `json:"AttackStatus,omitnil,omitempty" name:"AttackStatus"`
 
 	// Maximum attack bandwidth
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackMaxBandWidth *int64 `json:"AttackMaxBandWidth,omitnil" name:"AttackMaxBandWidth"`
+	AttackMaxBandWidth *int64 `json:"AttackMaxBandWidth,omitnil,omitempty" name:"AttackMaxBandWidth"`
 
 	// Peak attack packet rate
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackPacketMaxRate *int64 `json:"AttackPacketMaxRate,omitnil" name:"AttackPacketMaxRate"`
+	AttackPacketMaxRate *int64 `json:"AttackPacketMaxRate,omitnil,omitempty" name:"AttackPacketMaxRate"`
 
 	// Attack start time in seconds
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackStartTime *int64 `json:"AttackStartTime,omitnil" name:"AttackStartTime"`
+	AttackStartTime *int64 `json:"AttackStartTime,omitnil,omitempty" name:"AttackStartTime"`
 
 	// Attack end time in seconds
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackEndTime *int64 `json:"AttackEndTime,omitnil" name:"AttackEndTime"`
+	AttackEndTime *int64 `json:"AttackEndTime,omitnil,omitempty" name:"AttackEndTime"`
 
 	// Event ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EventId *string `json:"EventId,omitnil" name:"EventId"`
+	EventId *string `json:"EventId,omitnil,omitempty" name:"EventId"`
 
 	// Site ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type DDosAttackEventData struct {
 	// Data set of attack events
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	List []*DDosAttackEvent `json:"List,omitnil" name:"List"`
+	List []*DDosAttackEvent `json:"List,omitnil,omitempty" name:"List"`
 
 	// Current page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Number of items per page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Total number of pages
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Pages *int64 `json:"Pages,omitnil" name:"Pages"`
+	Pages *int64 `json:"Pages,omitnil,omitempty" name:"Pages"`
 
 	// Total number of items
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalSize *int64 `json:"TotalSize,omitnil" name:"TotalSize"`
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
 }
 
 type DDosAttackEventDetailData struct {
 	// Attack status
-	AttackStatus *int64 `json:"AttackStatus,omitnil" name:"AttackStatus"`
+	AttackStatus *int64 `json:"AttackStatus,omitnil,omitempty" name:"AttackStatus"`
 
 	// Attack type
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Maximum bandwidth
-	MaxBandWidth *int64 `json:"MaxBandWidth,omitnil" name:"MaxBandWidth"`
+	MaxBandWidth *int64 `json:"MaxBandWidth,omitnil,omitempty" name:"MaxBandWidth"`
 
 	// Maximum packet rate
-	PacketMaxRate *int64 `json:"PacketMaxRate,omitnil" name:"PacketMaxRate"`
+	PacketMaxRate *int64 `json:"PacketMaxRate,omitnil,omitempty" name:"PacketMaxRate"`
 
 	// Event ID
-	EventId *string `json:"EventId,omitnil" name:"EventId"`
+	EventId *string `json:"EventId,omitnil,omitempty" name:"EventId"`
 
 	// DDoS policy group ID
-	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 }
 
 type DDosAttackSourceEvent struct {
 	// Attack source IP
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackSourceIp *string `json:"AttackSourceIp,omitnil" name:"AttackSourceIp"`
+	AttackSourceIp *string `json:"AttackSourceIp,omitnil,omitempty" name:"AttackSourceIp"`
 
 	// Country/Region
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackRegion *string `json:"AttackRegion,omitnil" name:"AttackRegion"`
+	AttackRegion *string `json:"AttackRegion,omitnil,omitempty" name:"AttackRegion"`
 
 	// Accumulative attack traffic
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackFlow *uint64 `json:"AttackFlow,omitnil" name:"AttackFlow"`
+	AttackFlow *uint64 `json:"AttackFlow,omitnil,omitempty" name:"AttackFlow"`
 
 	// Accumulative number of attack packets
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackPacketNum *uint64 `json:"AttackPacketNum,omitnil" name:"AttackPacketNum"`
+	AttackPacketNum *uint64 `json:"AttackPacketNum,omitnil,omitempty" name:"AttackPacketNum"`
 }
 
 type DDosAttackSourceEventData struct {
 	// DDoS attack source data set
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	List []*DDosAttackSourceEvent `json:"List,omitnil" name:"List"`
+	List []*DDosAttackSourceEvent `json:"List,omitnil,omitempty" name:"List"`
 
 	// Current page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Number of items per page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Total number of pages
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Pages *int64 `json:"Pages,omitnil" name:"Pages"`
+	Pages *int64 `json:"Pages,omitnil,omitempty" name:"Pages"`
 
 	// Total number of items
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalSize *int64 `json:"TotalSize,omitnil" name:"TotalSize"`
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
 }
 
 type DDosMajorAttackEvent struct {
 	// DDoS policy group ID
-	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 
 	// Maximum attack bandwidth
-	AttackMaxBandWidth *int64 `json:"AttackMaxBandWidth,omitnil" name:"AttackMaxBandWidth"`
+	AttackMaxBandWidth *int64 `json:"AttackMaxBandWidth,omitnil,omitempty" name:"AttackMaxBandWidth"`
 
 	// Attack time in seconds
-	AttackTime *int64 `json:"AttackTime,omitnil" name:"AttackTime"`
+	AttackTime *int64 `json:"AttackTime,omitnil,omitempty" name:"AttackTime"`
 }
 
 type DDosMajorAttackEventData struct {
 	// `DDosMajorAttackEvent` DDoS attack event
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	List []*DDosMajorAttackEvent `json:"List,omitnil" name:"List"`
+	List []*DDosMajorAttackEvent `json:"List,omitnil,omitempty" name:"List"`
 
 	// Current page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Number of items per page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Total number of pages
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Pages *int64 `json:"Pages,omitnil" name:"Pages"`
+	Pages *int64 `json:"Pages,omitnil,omitempty" name:"Pages"`
 
 	// Total number of items
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalSize *int64 `json:"TotalSize,omitnil" name:"TotalSize"`
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
 }
 
 type DataItem struct {
 	// Time
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Value
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Value *uint64 `json:"Value,omitnil" name:"Value"`
+	Value *uint64 `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type DdosAcls struct {
 	// Whether to remove all settings when empty strings are passed in. Default value: `off` (remove)
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// DDoS port filtering parameters
-	Acl []*DDoSAcl `json:"Acl,omitnil" name:"Acl"`
+	Acl []*DDoSAcl `json:"Acl,omitnil,omitempty" name:"Acl"`
 }
 
 type DdosAllowBlock struct {
 	// Whether to remove all settings when empty strings are passed in. Default value: `off` (remove)
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Array of objects in blocklist/allowlist configuration
-	UserAllowBlockIp []*DDoSUserAllowBlockIP `json:"UserAllowBlockIp,omitnil" name:"UserAllowBlockIp"`
+	UserAllowBlockIp []*DDoSUserAllowBlockIP `json:"UserAllowBlockIp,omitnil,omitempty" name:"UserAllowBlockIp"`
 }
 
 type DdosPacketFilter struct {
 	// Whether to remove all settings when empty strings are passed in. Default value: `off` (remove)
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Array of objects in feature filtering configuration
-	PacketFilter []*DDoSFeaturesFilter `json:"PacketFilter,omitnil" name:"PacketFilter"`
+	PacketFilter []*DDoSFeaturesFilter `json:"PacketFilter,omitnil,omitempty" name:"PacketFilter"`
 }
 
 type DdosRule struct {
 	// DDoS mitigation level
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	DdosStatusInfo *DDoSStatusInfo `json:"DdosStatusInfo,omitnil" name:"DdosStatusInfo"`
+	DdosStatusInfo *DDoSStatusInfo `json:"DdosStatusInfo,omitnil,omitempty" name:"DdosStatusInfo"`
 
 	// DDoS regional blocking
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	DdosGeoIp *DDoSGeoIp `json:"DdosGeoIp,omitnil" name:"DdosGeoIp"`
+	DdosGeoIp *DDoSGeoIp `json:"DdosGeoIp,omitnil,omitempty" name:"DdosGeoIp"`
 
 	// DDoS blocklist/allowlist
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	DdosAllowBlock *DdosAllowBlock `json:"DdosAllowBlock,omitnil" name:"DdosAllowBlock"`
+	DdosAllowBlock *DdosAllowBlock `json:"DdosAllowBlock,omitnil,omitempty" name:"DdosAllowBlock"`
 
 	// Protocol blocking and null session protection
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	DdosAntiPly *DDoSAntiPly `json:"DdosAntiPly,omitnil" name:"DdosAntiPly"`
+	DdosAntiPly *DDoSAntiPly `json:"DdosAntiPly,omitnil,omitempty" name:"DdosAntiPly"`
 
 	// DDoS feature filtering
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	DdosPacketFilter *DdosPacketFilter `json:"DdosPacketFilter,omitnil" name:"DdosPacketFilter"`
+	DdosPacketFilter *DdosPacketFilter `json:"DdosPacketFilter,omitnil,omitempty" name:"DdosPacketFilter"`
 
 	// DDoS port filtering
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	DdosAcl *DdosAcls `json:"DdosAcl,omitnil" name:"DdosAcl"`
+	DdosAcl *DdosAcls `json:"DdosAcl,omitnil,omitempty" name:"DdosAcl"`
 
 	// DDoS mitigation switch. `on`: Enable; `off`: Disable.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Whether to enable UDP fragmentation. `on`: Enable; `off`: Disable.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UdpShardOpen *string `json:"UdpShardOpen,omitnil" name:"UdpShardOpen"`
+	UdpShardOpen *string `json:"UdpShardOpen,omitnil,omitempty" name:"UdpShardOpen"`
 }
 
 type DefaultServerCertInfo struct {
 	// Server certificate ID, which is the ID of the default certificate. If you choose to upload an external certificate for SSL certificate management, a certificate ID will be generated.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CertId *string `json:"CertId,omitnil" name:"CertId"`
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
 
 	// Certificate alias
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Alias *string `json:"Alias,omitnil" name:"Alias"`
+	Alias *string `json:"Alias,omitnil,omitempty" name:"Alias"`
 
 	// Certificate type. Valid values:
 	// `default`: Default certificate
 	// `upload`: External certificate
 	// `managed`: Tencent Cloud managed certificate
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Time when the certificate expires
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// Time when the certificate takes effect
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	EffectiveTime *string `json:"EffectiveTime,omitnil" name:"EffectiveTime"`
+	EffectiveTime *string `json:"EffectiveTime,omitnil,omitempty" name:"EffectiveTime"`
 
 	// Certificate common name
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CommonName *string `json:"CommonName,omitnil" name:"CommonName"`
+	CommonName *string `json:"CommonName,omitnil,omitempty" name:"CommonName"`
 
 	// Domain names added to the SAN certificate
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	SubjectAltName []*string `json:"SubjectAltName,omitnil" name:"SubjectAltName"`
+	SubjectAltName []*string `json:"SubjectAltName,omitnil,omitempty" name:"SubjectAltName"`
 
 	// Certificate status. Valid values:
 	// `applying`: Application in progress
@@ -2247,30 +2247,30 @@ type DefaultServerCertInfo struct {
 	// `deployed`: Certificate deployed
 	// `disabled`: Certificate disabled
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returns a message to display failure causes when `Status=failed`
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Message *string `json:"Message,omitnil" name:"Message"`
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
 // Predefined struct for user
 type DeleteApplicationProxyRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Proxy ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 }
 
 type DeleteApplicationProxyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Proxy ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 }
 
 func (r *DeleteApplicationProxyRequest) ToJsonString() string {
@@ -2296,10 +2296,10 @@ func (r *DeleteApplicationProxyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteApplicationProxyResponseParams struct {
 	// Proxy ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteApplicationProxyResponse struct {
@@ -2321,26 +2321,26 @@ func (r *DeleteApplicationProxyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteApplicationProxyRuleRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Proxy ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Rule ID
-	RuleId *string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 }
 
 type DeleteApplicationProxyRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Proxy ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Rule ID
-	RuleId *string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 }
 
 func (r *DeleteApplicationProxyRuleRequest) ToJsonString() string {
@@ -2367,10 +2367,10 @@ func (r *DeleteApplicationProxyRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteApplicationProxyRuleResponseParams struct {
 	// Rule ID
-	RuleId *string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteApplicationProxyRuleResponse struct {
@@ -2392,20 +2392,20 @@ func (r *DeleteApplicationProxyRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteDnsRecordsRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Record ID
-	Ids []*string `json:"Ids,omitnil" name:"Ids"`
+	Ids []*string `json:"Ids,omitnil,omitempty" name:"Ids"`
 }
 
 type DeleteDnsRecordsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Record ID
-	Ids []*string `json:"Ids,omitnil" name:"Ids"`
+	Ids []*string `json:"Ids,omitnil,omitempty" name:"Ids"`
 }
 
 func (r *DeleteDnsRecordsRequest) ToJsonString() string {
@@ -2431,10 +2431,10 @@ func (r *DeleteDnsRecordsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteDnsRecordsResponseParams struct {
 	// Record ID
-	Ids []*string `json:"Ids,omitnil" name:"Ids"`
+	Ids []*string `json:"Ids,omitnil,omitempty" name:"Ids"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteDnsRecordsResponse struct {
@@ -2456,20 +2456,20 @@ func (r *DeleteDnsRecordsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLoadBalancingRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 }
 
 type DeleteLoadBalancingRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 }
 
 func (r *DeleteLoadBalancingRequest) ToJsonString() string {
@@ -2495,10 +2495,10 @@ func (r *DeleteLoadBalancingRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLoadBalancingResponseParams struct {
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLoadBalancingResponse struct {
@@ -2520,20 +2520,20 @@ func (r *DeleteLoadBalancingResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteOriginGroupRequestParams struct {
 	// Origin group ID
-	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type DeleteOriginGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Origin group ID
-	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 func (r *DeleteOriginGroupRequest) ToJsonString() string {
@@ -2559,10 +2559,10 @@ func (r *DeleteOriginGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteOriginGroupResponseParams struct {
 	// Origin group ID
-	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteOriginGroupResponse struct {
@@ -2584,14 +2584,14 @@ func (r *DeleteOriginGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteZoneRequestParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 type DeleteZoneRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 func (r *DeleteZoneRequest) ToJsonString() string {
@@ -2616,10 +2616,10 @@ func (r *DeleteZoneRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteZoneResponseParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteZoneResponse struct {
@@ -2641,20 +2641,20 @@ func (r *DeleteZoneResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeApplicationProxyDetailRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Instance ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 }
 
 type DescribeApplicationProxyDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Instance ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 }
 
 func (r *DescribeApplicationProxyDetailRequest) ToJsonString() string {
@@ -2680,66 +2680,66 @@ func (r *DescribeApplicationProxyDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeApplicationProxyDetailResponseParams struct {
 	// Instance ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Name of the proxy:
 	// Domain name or subdomain name when `ProxyType=hostname`
 	// Instance name when `ProxyType=instance`
-	ProxyName *string `json:"ProxyName,omitnil" name:"ProxyName"`
+	ProxyName *string `json:"ProxyName,omitnil,omitempty" name:"ProxyName"`
 
 	// Proxy mode. Valid values:
 	// `ip`: Anycast IP
 	// `domain`: CNAME
-	PlatType *string `json:"PlatType,omitnil" name:"PlatType"`
+	PlatType *string `json:"PlatType,omitnil,omitempty" name:"PlatType"`
 
 	// `0`: Disable security protection; `1`: Enable security protection.
-	SecurityType *int64 `json:"SecurityType,omitnil" name:"SecurityType"`
+	SecurityType *int64 `json:"SecurityType,omitnil,omitempty" name:"SecurityType"`
 
 	// `0`: Disable acceleration; `1`: Enable acceleration.
-	AccelerateType *int64 `json:"AccelerateType,omitnil" name:"AccelerateType"`
+	AccelerateType *int64 `json:"AccelerateType,omitnil,omitempty" name:"AccelerateType"`
 
 	// This field is moved to `Rule.ForwardClientIp`.
-	ForwardClientIp *string `json:"ForwardClientIp,omitnil" name:"ForwardClientIp"`
+	ForwardClientIp *string `json:"ForwardClientIp,omitnil,omitempty" name:"ForwardClientIp"`
 
 	// This field is moved to `Rule.SessionPersist`.
-	SessionPersist *bool `json:"SessionPersist,omitnil" name:"SessionPersist"`
+	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 
 	// List of rules
-	Rule []*ApplicationProxyRule `json:"Rule,omitnil" name:"Rule"`
+	Rule []*ApplicationProxyRule `json:"Rule,omitnil,omitempty" name:"Rule"`
 
 	// Status. Valid values:
 	// `online`: Enable
 	// `offline`: Disable
 	// `progress`: Deploying
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Scheduling information
-	ScheduleValue []*string `json:"ScheduleValue,omitnil" name:"ScheduleValue"`
+	ScheduleValue []*string `json:"ScheduleValue,omitnil,omitempty" name:"ScheduleValue"`
 
 	// Update time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Site name
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// Session persistence time
-	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil" name:"SessionPersistTime"`
+	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// Specifies how a layer-4 proxy is created.
 	// `hostname`: Create by subdomain name
 	// `instance`: Create by instance
-	ProxyType *string `json:"ProxyType,omitnil" name:"ProxyType"`
+	ProxyType *string `json:"ProxyType,omitnil,omitempty" name:"ProxyType"`
 
 	// When `ProxyType=hostname`:
 	// `ProxyName` indicates a specified domain name, such as test.123.com
 	// `HostId` indicates a unique ID of the domain name.
-	HostId *string `json:"HostId,omitnil" name:"HostId"`
+	HostId *string `json:"HostId,omitnil,omitempty" name:"HostId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeApplicationProxyDetailResponse struct {
@@ -2761,26 +2761,26 @@ func (r *DescribeApplicationProxyDetailResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeApplicationProxyRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Pagination parameter
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Pagination parameter
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeApplicationProxyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Pagination parameter
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Pagination parameter
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeApplicationProxyRequest) ToJsonString() string {
@@ -2808,26 +2808,26 @@ func (r *DescribeApplicationProxyRequest) FromJsonString(s string) error {
 type DescribeApplicationProxyResponseParams struct {
 	// List of data
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Data []*ApplicationProxy `json:"Data,omitnil" name:"Data"`
+	Data []*ApplicationProxy `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Total number of records
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Disused
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Quota *int64 `json:"Quota,omitnil" name:"Quota"`
+	Quota *int64 `json:"Quota,omitnil,omitempty" name:"Quota"`
 
 	// When `PlatType` is `ip`, it indicates the number of proxies that schedule via Anycast IP.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	IpCount *uint64 `json:"IpCount,omitnil" name:"IpCount"`
+	IpCount *uint64 `json:"IpCount,omitnil,omitempty" name:"IpCount"`
 
 	// When `PlatType` is `domain`, it indicates the number of proxies that schedule via CNAME.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	DomainCount *uint64 `json:"DomainCount,omitnil" name:"DomainCount"`
+	DomainCount *uint64 `json:"DomainCount,omitnil,omitempty" name:"DomainCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeApplicationProxyResponse struct {
@@ -2849,50 +2849,50 @@ func (r *DescribeApplicationProxyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBotLogRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items per page
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Domain name set
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Query condition
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitnil" name:"QueryCondition"`
+	QueryCondition []*QueryCondition `json:"QueryCondition,omitnil,omitempty" name:"QueryCondition"`
 }
 
 type DescribeBotLogRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items per page
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Domain name set
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Query condition
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitnil" name:"QueryCondition"`
+	QueryCondition []*QueryCondition `json:"QueryCondition,omitnil,omitempty" name:"QueryCondition"`
 }
 
 func (r *DescribeBotLogRequest) ToJsonString() string {
@@ -2923,16 +2923,16 @@ func (r *DescribeBotLogRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBotLogResponseParams struct {
 	// Bot attack data
-	Data *BotLogData `json:"Data,omitnil" name:"Data"`
+	Data *BotLogData `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returned message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeBotLogResponse struct {
@@ -2954,38 +2954,38 @@ func (r *DescribeBotLogResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBotManagedRulesRequestParams struct {
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name/layer-4 proxy
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
 	// Total number of pages
-	Page *int64 `json:"Page,omitnil" name:"Page"`
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
 	// Number of rules per page
-	PerPage *int64 `json:"PerPage,omitnil" name:"PerPage"`
+	PerPage *int64 `json:"PerPage,omitnil,omitempty" name:"PerPage"`
 
 	// Rule type. Values: `idcid`, `sipbot` and `uabot`. All rules will be returned if this field is not specified.
-	RuleType *string `json:"RuleType,omitnil" name:"RuleType"`
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
 }
 
 type DescribeBotManagedRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name/layer-4 proxy
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
 	// Total number of pages
-	Page *int64 `json:"Page,omitnil" name:"Page"`
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
 	// Number of rules per page
-	PerPage *int64 `json:"PerPage,omitnil" name:"PerPage"`
+	PerPage *int64 `json:"PerPage,omitnil,omitempty" name:"PerPage"`
 
 	// Rule type. Values: `idcid`, `sipbot` and `uabot`. All rules will be returned if this field is not specified.
-	RuleType *string `json:"RuleType,omitnil" name:"RuleType"`
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
 }
 
 func (r *DescribeBotManagedRulesRequest) ToJsonString() string {
@@ -3014,16 +3014,16 @@ func (r *DescribeBotManagedRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBotManagedRulesResponseParams struct {
 	// Number of bot managed rules returned
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Bot managed rules
-	Rules []*BotManagedRuleDetail `json:"Rules,omitnil" name:"Rules"`
+	Rules []*BotManagedRuleDetail `json:"Rules,omitnil,omitempty" name:"Rules"`
 
 	// Total number of bot managed rules
-	Total *int64 `json:"Total,omitnil" name:"Total"`
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeBotManagedRulesResponse struct {
@@ -3045,20 +3045,20 @@ func (r *DescribeBotManagedRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCnameStatusRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// List of domain names
-	Names []*string `json:"Names,omitnil" name:"Names"`
+	Names []*string `json:"Names,omitnil,omitempty" name:"Names"`
 }
 
 type DescribeCnameStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// List of domain names
-	Names []*string `json:"Names,omitnil" name:"Names"`
+	Names []*string `json:"Names,omitnil,omitempty" name:"Names"`
 }
 
 func (r *DescribeCnameStatusRequest) ToJsonString() string {
@@ -3084,10 +3084,10 @@ func (r *DescribeCnameStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCnameStatusResponseParams struct {
 	// List of CNAME statuses
-	Status []*CnameStatus `json:"Status,omitnil" name:"Status"`
+	Status []*CnameStatus `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeCnameStatusResponse struct {
@@ -3109,20 +3109,20 @@ func (r *DescribeCnameStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDDoSPolicyRequestParams struct {
 	// Policy group ID
-	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 
 	// Top-level domain name (site)
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type DescribeDDoSPolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Policy group ID
-	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 
 	// Top-level domain name (site)
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 func (r *DescribeDDoSPolicyRequest) ToJsonString() string {
@@ -3148,7 +3148,7 @@ func (r *DescribeDDoSPolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDDoSPolicyResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDDoSPolicyResponse struct {
@@ -3170,62 +3170,62 @@ func (r *DescribeDDoSPolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDDosAttackDataRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// List of statistical metrics
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// List of site IDs
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Port number
-	Port *int64 `json:"Port,omitnil" name:"Port"`
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Protocol type. Valid values: tcp, udp, all
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// Attack type. Valid values: flood, icmpFlood..., all
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 
 	// Query time granularity. Valid values: {min,5min,hour,day}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 }
 
 type DescribeDDosAttackDataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// List of statistical metrics
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// List of site IDs
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Port number
-	Port *int64 `json:"Port,omitnil" name:"Port"`
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Protocol type. Valid values: tcp, udp, all
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// Attack type. Valid values: flood, icmpFlood..., all
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 
 	// Query time granularity. Valid values: {min,5min,hour,day}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 }
 
 func (r *DescribeDDosAttackDataRequest) ToJsonString() string {
@@ -3259,19 +3259,19 @@ func (r *DescribeDDosAttackDataRequest) FromJsonString(s string) error {
 type DescribeDDosAttackDataResponseParams struct {
 	// DDoS attack data
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*SecEntry `json:"Data,omitnil" name:"Data"`
+	Data []*SecEntry `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returned data
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// Query time granularity. Valid values: {min,5min,hour,day}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDDosAttackDataResponse struct {
@@ -3293,14 +3293,14 @@ func (r *DescribeDDosAttackDataResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDDosAttackEventDetailRequestParams struct {
 	// Event ID
-	EventId *string `json:"EventId,omitnil" name:"EventId"`
+	EventId *string `json:"EventId,omitnil,omitempty" name:"EventId"`
 }
 
 type DescribeDDosAttackEventDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Event ID
-	EventId *string `json:"EventId,omitnil" name:"EventId"`
+	EventId *string `json:"EventId,omitnil,omitempty" name:"EventId"`
 }
 
 func (r *DescribeDDosAttackEventDetailRequest) ToJsonString() string {
@@ -3325,16 +3325,16 @@ func (r *DescribeDDosAttackEventDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDDosAttackEventDetailResponseParams struct {
 	// DDoS attack event details
-	Data *DDosAttackEventDetailData `json:"Data,omitnil" name:"Data"`
+	Data *DDosAttackEventDetailData `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returned message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDDosAttackEventDetailResponse struct {
@@ -3356,56 +3356,56 @@ func (r *DescribeDDosAttackEventDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDDosAttackEventRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Set of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Protocol type. Valid values: {tcp,udp,all}
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// Whether to show details. Valid values: Y (yes), N (no).
-	IsShowDetail *string `json:"IsShowDetail,omitnil" name:"IsShowDetail"`
+	IsShowDetail *string `json:"IsShowDetail,omitnil,omitempty" name:"IsShowDetail"`
 }
 
 type DescribeDDosAttackEventRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Set of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Protocol type. Valid values: {tcp,udp,all}
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// Whether to show details. Valid values: Y (yes), N (no).
-	IsShowDetail *string `json:"IsShowDetail,omitnil" name:"IsShowDetail"`
+	IsShowDetail *string `json:"IsShowDetail,omitnil,omitempty" name:"IsShowDetail"`
 }
 
 func (r *DescribeDDosAttackEventRequest) ToJsonString() string {
@@ -3437,16 +3437,16 @@ func (r *DescribeDDosAttackEventRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDDosAttackEventResponseParams struct {
 	// DDoS attack event data
-	Data *DDosAttackEventData `json:"Data,omitnil" name:"Data"`
+	Data *DDosAttackEventData `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returned message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDDosAttackEventResponse struct {
@@ -3468,50 +3468,50 @@ func (r *DescribeDDosAttackEventResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDDosAttackSourceEventRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Set of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Protocol type. Valid values: {tcp,udp,all}
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 }
 
 type DescribeDDosAttackSourceEventRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Set of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Protocol type. Valid values: {tcp,udp,all}
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 }
 
 func (r *DescribeDDosAttackSourceEventRequest) ToJsonString() string {
@@ -3542,16 +3542,16 @@ func (r *DescribeDDosAttackSourceEventRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDDosAttackSourceEventResponseParams struct {
 	// DDoS attack source data
-	Data *DDosAttackSourceEventData `json:"Data,omitnil" name:"Data"`
+	Data *DDosAttackSourceEventData `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returned message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDDosAttackSourceEventResponse struct {
@@ -3573,62 +3573,62 @@ func (r *DescribeDDosAttackSourceEventResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDDosAttackTopDataRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Filter metric
-	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// Number of the top data entries to query. 0: queries all data entries.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Set of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Port number
-	Port *int64 `json:"Port,omitnil" name:"Port"`
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Protocol type. Valid values: tcp, udp, all
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// Attack type. Valid values: flood, icmpFlood..., all
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 }
 
 type DescribeDDosAttackTopDataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Filter metric
-	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// Number of the top data entries to query. 0: queries all data entries.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Set of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Port number
-	Port *int64 `json:"Port,omitnil" name:"Port"`
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Protocol type. Valid values: tcp, udp, all
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// Attack type. Valid values: flood, icmpFlood..., all
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 }
 
 func (r *DescribeDDosAttackTopDataRequest) ToJsonString() string {
@@ -3661,16 +3661,16 @@ func (r *DescribeDDosAttackTopDataRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDDosAttackTopDataResponseParams struct {
 	// Top N data
-	Data []*TopNEntry `json:"Data,omitnil" name:"Data"`
+	Data []*TopNEntry `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returned message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDDosAttackTopDataResponse struct {
@@ -3692,50 +3692,50 @@ func (r *DescribeDDosAttackTopDataResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDDosMajorAttackEventRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Set of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Protocol type. Valid values: {tcp,udp,all}
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 }
 
 type DescribeDDosMajorAttackEventRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Set of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Protocol type. Valid values: {tcp,udp,all}
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 }
 
 func (r *DescribeDDosMajorAttackEventRequest) ToJsonString() string {
@@ -3766,16 +3766,16 @@ func (r *DescribeDDosMajorAttackEventRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDDosMajorAttackEventResponseParams struct {
 	// Major DDoS attack event
-	Data *DDosMajorAttackEventData `json:"Data,omitnil" name:"Data"`
+	Data *DDosMajorAttackEventData `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returned message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDDosMajorAttackEventResponse struct {
@@ -3797,14 +3797,14 @@ func (r *DescribeDDosMajorAttackEventResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDefaultCertificatesRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type DescribeDefaultCertificatesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 func (r *DescribeDefaultCertificatesRequest) ToJsonString() string {
@@ -3829,14 +3829,14 @@ func (r *DescribeDefaultCertificatesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDefaultCertificatesResponseParams struct {
 	// Total number of certificates
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of default certificates
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CertInfo []*DefaultServerCertInfo `json:"CertInfo,omitnil" name:"CertInfo"`
+	CertInfo []*DefaultServerCertInfo `json:"CertInfo,omitnil,omitempty" name:"CertInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDefaultCertificatesResponse struct {
@@ -3858,13 +3858,13 @@ func (r *DescribeDefaultCertificatesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDnsDataRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Filter parameters
-	Filters []*DnsDataFilter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*DnsDataFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Time granularity. The default value is `min`. The server can adapt to the time granularity specified.
 	// Valid values:
@@ -3872,20 +3872,20 @@ type DescribeDnsDataRequestParams struct {
 	// `5min`: 5 minutes
 	// `hour`: 1 hour
 	// `day`: 1 day
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 }
 
 type DescribeDnsDataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Filter parameters
-	Filters []*DnsDataFilter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*DnsDataFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Time granularity. The default value is `min`. The server can adapt to the time granularity specified.
 	// Valid values:
@@ -3893,7 +3893,7 @@ type DescribeDnsDataRequest struct {
 	// `5min`: 5 minutes
 	// `hour`: 1 hour
 	// `day`: 1 day
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 }
 
 func (r *DescribeDnsDataRequest) ToJsonString() string {
@@ -3922,14 +3922,14 @@ func (r *DescribeDnsDataRequest) FromJsonString(s string) error {
 type DescribeDnsDataResponseParams struct {
 	// DNS request data
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Data []*DataItem `json:"Data,omitnil" name:"Data"`
+	Data []*DataItem `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Interval
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDnsDataResponse struct {
@@ -3951,50 +3951,50 @@ func (r *DescribeDnsDataResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDnsRecordsRequestParams struct {
 	// Query filter
-	Filters []*DnsRecordFilter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*DnsRecordFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sorts the order
-	Order *string `json:"Order,omitnil" name:"Order"`
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
 	// Valid values: `asc`, and `desc`.
-	Direction *string `json:"Direction,omitnil" name:"Direction"`
+	Direction *string `json:"Direction,omitnil,omitempty" name:"Direction"`
 
 	// Valid values: `all`, and `any`.
-	Match *string `json:"Match,omitnil" name:"Match"`
+	Match *string `json:"Match,omitnil,omitempty" name:"Match"`
 
 	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset for paginated queries. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type DescribeDnsRecordsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Query filter
-	Filters []*DnsRecordFilter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*DnsRecordFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sorts the order
-	Order *string `json:"Order,omitnil" name:"Order"`
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 
 	// Valid values: `asc`, and `desc`.
-	Direction *string `json:"Direction,omitnil" name:"Direction"`
+	Direction *string `json:"Direction,omitnil,omitempty" name:"Direction"`
 
 	// Valid values: `all`, and `any`.
-	Match *string `json:"Match,omitnil" name:"Match"`
+	Match *string `json:"Match,omitnil,omitempty" name:"Match"`
 
 	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset for paginated queries. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 func (r *DescribeDnsRecordsRequest) ToJsonString() string {
@@ -4025,13 +4025,13 @@ func (r *DescribeDnsRecordsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDnsRecordsResponseParams struct {
 	// Used for paginated query by total count
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of DNS records
-	Records []*DnsRecord `json:"Records,omitnil" name:"Records"`
+	Records []*DnsRecord `json:"Records,omitnil,omitempty" name:"Records"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDnsRecordsResponse struct {
@@ -4053,14 +4053,14 @@ func (r *DescribeDnsRecordsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDnssecRequestParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 type DescribeDnssecRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 func (r *DescribeDnssecRequest) ToJsonString() string {
@@ -4085,24 +4085,24 @@ func (r *DescribeDnssecRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDnssecResponseParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// DNSSEC status. Valid values:
 	// - `enabled`: Enabled
 	// - `disabled`: Disabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 
-	Dnssec *DnssecInfo `json:"Dnssec,omitnil" name:"Dnssec"`
+	Dnssec *DnssecInfo `json:"Dnssec,omitnil,omitempty" name:"Dnssec"`
 
 	// Modification time
-	ModifiedOn *string `json:"ModifiedOn,omitnil" name:"ModifiedOn"`
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDnssecResponse struct {
@@ -4124,38 +4124,38 @@ func (r *DescribeDnssecResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeHostsCertificateRequestParams struct {
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Offset for paginated queries. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Query filter
-	Filters []*CertFilter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*CertFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sorting order
-	Sort *CertSort `json:"Sort,omitnil" name:"Sort"`
+	Sort *CertSort `json:"Sort,omitnil,omitempty" name:"Sort"`
 }
 
 type DescribeHostsCertificateRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Offset for paginated queries. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Query filter
-	Filters []*CertFilter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*CertFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Sorting order
-	Sort *CertSort `json:"Sort,omitnil" name:"Sort"`
+	Sort *CertSort `json:"Sort,omitnil,omitempty" name:"Sort"`
 }
 
 func (r *DescribeHostsCertificateRequest) ToJsonString() string {
@@ -4184,14 +4184,14 @@ func (r *DescribeHostsCertificateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeHostsCertificateResponseParams struct {
 	// Used for paginated query by total count
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of certificate configurations for domain names
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Hosts []*HostCertSetting `json:"Hosts,omitnil" name:"Hosts"`
+	Hosts []*HostCertSetting `json:"Hosts,omitnil,omitempty" name:"Hosts"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeHostsCertificateResponse struct {
@@ -4213,32 +4213,32 @@ func (r *DescribeHostsCertificateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeHostsSettingRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Offset for paginated queries. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Specifies a domain name for the query
-	Hosts []*string `json:"Hosts,omitnil" name:"Hosts"`
+	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
 }
 
 type DescribeHostsSettingRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Offset for paginated queries. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Specifies a domain name for the query
-	Hosts []*string `json:"Hosts,omitnil" name:"Hosts"`
+	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
 }
 
 func (r *DescribeHostsSettingRequest) ToJsonString() string {
@@ -4266,13 +4266,13 @@ func (r *DescribeHostsSettingRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeHostsSettingResponseParams struct {
 	// List of domain names
-	Hosts []*DetailHost `json:"Hosts,omitnil" name:"Hosts"`
+	Hosts []*DetailHost `json:"Hosts,omitnil,omitempty" name:"Hosts"`
 
 	// Number of domain names
-	TotalNumber *int64 `json:"TotalNumber,omitnil" name:"TotalNumber"`
+	TotalNumber *int64 `json:"TotalNumber,omitnil,omitempty" name:"TotalNumber"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeHostsSettingResponse struct {
@@ -4294,14 +4294,14 @@ func (r *DescribeHostsSettingResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIdentificationRequestParams struct {
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DescribeIdentificationRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DescribeIdentificationRequest) ToJsonString() string {
@@ -4326,28 +4326,28 @@ func (r *DescribeIdentificationRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeIdentificationResponseParams struct {
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Verification status. Valid values:
 	// - `pending`: Verifying
 	// - `finished`: The site is verified.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 
-	Subdomain *string `json:"Subdomain,omitnil" name:"Subdomain"`
+	Subdomain *string `json:"Subdomain,omitnil,omitempty" name:"Subdomain"`
 
 	// Record type
-	RecordType *string `json:"RecordType,omitnil" name:"RecordType"`
+	RecordType *string `json:"RecordType,omitnil,omitempty" name:"RecordType"`
 
 	// Record value
-	RecordValue *string `json:"RecordValue,omitnil" name:"RecordValue"`
+	RecordValue *string `json:"RecordValue,omitnil,omitempty" name:"RecordValue"`
 
 	// NS records of the domain name
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	OriginalNameServers []*string `json:"OriginalNameServers,omitnil" name:"OriginalNameServers"`
+	OriginalNameServers []*string `json:"OriginalNameServers,omitnil,omitempty" name:"OriginalNameServers"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeIdentificationResponse struct {
@@ -4369,20 +4369,20 @@ func (r *DescribeIdentificationResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLoadBalancingDetailRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 }
 
 type DescribeLoadBalancingDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 }
 
 func (r *DescribeLoadBalancingDetailRequest) ToJsonString() string {
@@ -4408,40 +4408,40 @@ func (r *DescribeLoadBalancingDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLoadBalancingDetailResponseParams struct {
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name. You can use @ to represent the root domain.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Proxy mode. Valid values:
 	// `dns_only`: Only DNS
 	// `proxied`: Enable proxy
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Indicates DNS TTL time when `Type=dns_only`
-	TTL *uint64 `json:"TTL,omitnil" name:"TTL"`
+	TTL *uint64 `json:"TTL,omitnil,omitempty" name:"TTL"`
 
 	// ID of the origin group used
-	OriginId []*string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId []*string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Information of the origin server used
-	Origin []*OriginGroup `json:"Origin,omitnil" name:"Origin"`
+	Origin []*OriginGroup `json:"Origin,omitnil,omitempty" name:"Origin"`
 
 	// Update time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Status of the task
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Schedules domain names
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Cname *string `json:"Cname,omitnil" name:"Cname"`
+	Cname *string `json:"Cname,omitnil,omitempty" name:"Cname"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLoadBalancingDetailResponse struct {
@@ -4463,38 +4463,38 @@ func (r *DescribeLoadBalancingDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLoadBalancingRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Pagination parameter
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Pagination parameter
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Ignore query string parameter
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Specifies whether the `Host` parameter supports fuzzy match
-	Fuzzy *bool `json:"Fuzzy,omitnil" name:"Fuzzy"`
+	Fuzzy *bool `json:"Fuzzy,omitnil,omitempty" name:"Fuzzy"`
 }
 
 type DescribeLoadBalancingRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Pagination parameter
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Pagination parameter
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Ignore query string parameter
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Specifies whether the `Host` parameter supports fuzzy match
-	Fuzzy *bool `json:"Fuzzy,omitnil" name:"Fuzzy"`
+	Fuzzy *bool `json:"Fuzzy,omitnil,omitempty" name:"Fuzzy"`
 }
 
 func (r *DescribeLoadBalancingRequest) ToJsonString() string {
@@ -4523,13 +4523,13 @@ func (r *DescribeLoadBalancingRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLoadBalancingResponseParams struct {
 	// Total number of records
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// CLB information
-	Data []*LoadBalancing `json:"Data,omitnil" name:"Data"`
+	Data []*LoadBalancing `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLoadBalancingResponse struct {
@@ -4551,20 +4551,20 @@ func (r *DescribeLoadBalancingResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOriginGroupDetailRequestParams struct {
 	// Origin group ID
-	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type DescribeOriginGroupDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Origin group ID
-	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 func (r *DescribeOriginGroupDetailRequest) ToJsonString() string {
@@ -4590,39 +4590,39 @@ func (r *DescribeOriginGroupDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOriginGroupDetailResponseParams struct {
 	// Origin group ID
-	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Origin group name
-	OriginName *string `json:"OriginName,omitnil" name:"OriginName"`
+	OriginName *string `json:"OriginName,omitnil,omitempty" name:"OriginName"`
 
 	// Origin-pull configuration type
 	// `area`: Origin-pull by the client IP’s region specified by `Area` in OriginRecord.
 	// `weight`: Origin-pull by the weight specified by `Weight` in OriginRecord.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Record
-	Record []*OriginRecord `json:"Record,omitnil" name:"Record"`
+	Record []*OriginRecord `json:"Record,omitnil,omitempty" name:"Record"`
 
 	// Update time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Site name
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// Origin type
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
+	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 
 	// Whether the origin group uses layer-4 proxy.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ApplicationProxyUsed *bool `json:"ApplicationProxyUsed,omitnil" name:"ApplicationProxyUsed"`
+	ApplicationProxyUsed *bool `json:"ApplicationProxyUsed,omitnil,omitempty" name:"ApplicationProxyUsed"`
 
 	// Whether the origin group is used for load balancing.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LoadBalancingUsed *bool `json:"LoadBalancingUsed,omitnil" name:"LoadBalancingUsed"`
+	LoadBalancingUsed *bool `json:"LoadBalancingUsed,omitnil,omitempty" name:"LoadBalancingUsed"`
 
 	// Proxy mode of the load balancing task associated with the origin group.
 	// `none`: Not used for load balancing.
@@ -4630,10 +4630,10 @@ type DescribeOriginGroupDetailResponseParams struct {
 	// `proxied`: Used for proxied load balancing.
 	// `both`: Used for both DNS-only and proxied load balancing.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LoadBalancingUsedType *string `json:"LoadBalancingUsedType,omitnil" name:"LoadBalancingUsedType"`
+	LoadBalancingUsedType *string `json:"LoadBalancingUsedType,omitnil,omitempty" name:"LoadBalancingUsedType"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeOriginGroupDetailResponse struct {
@@ -4655,34 +4655,34 @@ func (r *DescribeOriginGroupDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOriginGroupRequestParams struct {
 	// Pagination parameter
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Pagination parameter
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter parameters
-	Filters []*OriginFilter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*OriginFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Site ID
 	// If it’s not specified, all origin groups will be obtained.
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type DescribeOriginGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// Pagination parameter
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Pagination parameter
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter parameters
-	Filters []*OriginFilter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*OriginFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Site ID
 	// If it’s not specified, all origin groups will be obtained.
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 func (r *DescribeOriginGroupRequest) ToJsonString() string {
@@ -4710,13 +4710,13 @@ func (r *DescribeOriginGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOriginGroupResponseParams struct {
 	// Origin group information
-	Data []*OriginGroup `json:"Data,omitnil" name:"Data"`
+	Data []*OriginGroup `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Total number of records
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeOriginGroupResponse struct {
@@ -4738,56 +4738,56 @@ func (r *DescribeOriginGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOverviewL7DataRequestParams struct {
 	// Client time in RFC 3339 format
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Client time in RFC 3339 format
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Supported metrics for data query:
 	// `l7Flow_outFlux`: Access traffic
 	// `l7Flow_request`: Access requests
 	// `l7Flow_outBandwidth`: Access bandwidth
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// Time interval. Valid values: {min, 5min, hour, day, week}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// List of `ZoneId` values. This parameter takes effect only when querying in the zone/domain dimension.
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of `Domain` values. This parameter takes effect only when querying in the domain dimension.
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Protocol type. Valid values: {http,http2,https,all}
-	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 }
 
 type DescribeOverviewL7DataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Client time in RFC 3339 format
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Client time in RFC 3339 format
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Supported metrics for data query:
 	// `l7Flow_outFlux`: Access traffic
 	// `l7Flow_request`: Access requests
 	// `l7Flow_outBandwidth`: Access bandwidth
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// Time interval. Valid values: {min, 5min, hour, day, week}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// List of `ZoneId` values. This parameter takes effect only when querying in the zone/domain dimension.
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of `Domain` values. This parameter takes effect only when querying in the domain dimension.
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Protocol type. Valid values: {http,http2,https,all}
-	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 }
 
 func (r *DescribeOverviewL7DataRequest) ToJsonString() string {
@@ -4818,16 +4818,16 @@ func (r *DescribeOverviewL7DataRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeOverviewL7DataResponseParams struct {
 	// Query dimension
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Time interval
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Detailed data
-	Data []*TimingDataRecord `json:"Data,omitnil" name:"Data"`
+	Data []*TimingDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeOverviewL7DataResponse struct {
@@ -4849,64 +4849,64 @@ func (r *DescribeOverviewL7DataResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribePrefetchTasksRequestParams struct {
 	// Task ID
-	JobId *string `json:"JobId,omitnil" name:"JobId"`
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// Start time of the query
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time of the query
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Offset of the query
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of results returned
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Statuses of tasks to be queried. Values:
 	// `processing`, `success`, `failed`, `timeout` and `invalid`
-	Statuses []*string `json:"Statuses,omitnil" name:"Statuses"`
+	Statuses []*string `json:"Statuses,omitnil,omitempty" name:"Statuses"`
 
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// List of domain names queried
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Resources queried
-	Target *string `json:"Target,omitnil" name:"Target"`
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 }
 
 type DescribePrefetchTasksRequest struct {
 	*tchttp.BaseRequest
 	
 	// Task ID
-	JobId *string `json:"JobId,omitnil" name:"JobId"`
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// Start time of the query
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time of the query
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Offset of the query
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of results returned
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Statuses of tasks to be queried. Values:
 	// `processing`, `success`, `failed`, `timeout` and `invalid`
-	Statuses []*string `json:"Statuses,omitnil" name:"Statuses"`
+	Statuses []*string `json:"Statuses,omitnil,omitempty" name:"Statuses"`
 
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// List of domain names queried
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Resources queried
-	Target *string `json:"Target,omitnil" name:"Target"`
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 }
 
 func (r *DescribePrefetchTasksRequest) ToJsonString() string {
@@ -4939,13 +4939,13 @@ func (r *DescribePrefetchTasksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribePrefetchTasksResponseParams struct {
 	// Total entries that match the specified query condition
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of tasks returned
-	Tasks []*Task `json:"Tasks,omitnil" name:"Tasks"`
+	Tasks []*Task `json:"Tasks,omitnil,omitempty" name:"Tasks"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribePrefetchTasksResponse struct {
@@ -4967,70 +4967,70 @@ func (r *DescribePrefetchTasksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribePurgeTasksRequestParams struct {
 	// Task ID
-	JobId *string `json:"JobId,omitnil" name:"JobId"`
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// Type of the purging task
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Start time of the query
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time of the query
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Offset of the query
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of results returned
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Statuses of tasks to be queried. Values:
 	// `processing`, `success`, `failed`, `timeout` and `invalid`
-	Statuses []*string `json:"Statuses,omitnil" name:"Statuses"`
+	Statuses []*string `json:"Statuses,omitnil,omitempty" name:"Statuses"`
 
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// List of domain names queried
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Queries content
-	Target *string `json:"Target,omitnil" name:"Target"`
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 }
 
 type DescribePurgeTasksRequest struct {
 	*tchttp.BaseRequest
 	
 	// Task ID
-	JobId *string `json:"JobId,omitnil" name:"JobId"`
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// Type of the purging task
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Start time of the query
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time of the query
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Offset of the query
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of results returned
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Statuses of tasks to be queried. Values:
 	// `processing`, `success`, `failed`, `timeout` and `invalid`
-	Statuses []*string `json:"Statuses,omitnil" name:"Statuses"`
+	Statuses []*string `json:"Statuses,omitnil,omitempty" name:"Statuses"`
 
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// List of domain names queried
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Queries content
-	Target *string `json:"Target,omitnil" name:"Target"`
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 }
 
 func (r *DescribePurgeTasksRequest) ToJsonString() string {
@@ -5064,13 +5064,13 @@ func (r *DescribePurgeTasksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribePurgeTasksResponseParams struct {
 	// Total entries that match the specified query condition
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of tasks returned
-	Tasks []*Task `json:"Tasks,omitnil" name:"Tasks"`
+	Tasks []*Task `json:"Tasks,omitnil,omitempty" name:"Tasks"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribePurgeTasksResponse struct {
@@ -5092,14 +5092,14 @@ func (r *DescribePurgeTasksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecurityPolicyListRequestParams struct {
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type DescribeSecurityPolicyListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 func (r *DescribeSecurityPolicyListRequest) ToJsonString() string {
@@ -5124,10 +5124,10 @@ func (r *DescribeSecurityPolicyListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecurityPolicyListResponseParams struct {
 	// List of protected resources
-	Entities []*SecurityEntity `json:"Entities,omitnil" name:"Entities"`
+	Entities []*SecurityEntity `json:"Entities,omitnil,omitempty" name:"Entities"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeSecurityPolicyListResponse struct {
@@ -5149,14 +5149,14 @@ func (r *DescribeSecurityPolicyListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecurityPolicyManagedRulesIdRequestParams struct {
 	// List of rule IDs
-	RuleId []*int64 `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId []*int64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 }
 
 type DescribeSecurityPolicyManagedRulesIdRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of rule IDs
-	RuleId []*int64 `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId []*int64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 }
 
 func (r *DescribeSecurityPolicyManagedRulesIdRequest) ToJsonString() string {
@@ -5181,16 +5181,16 @@ func (r *DescribeSecurityPolicyManagedRulesIdRequest) FromJsonString(s string) e
 // Predefined struct for user
 type DescribeSecurityPolicyManagedRulesIdResponseParams struct {
 	// Total number of returned items
-	Total *int64 `json:"Total,omitnil" name:"Total"`
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// Managed rule
-	Rules []*ManagedRule `json:"Rules,omitnil" name:"Rules"`
+	Rules []*ManagedRule `json:"Rules,omitnil,omitempty" name:"Rules"`
 
 	// Total number of returned items
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeSecurityPolicyManagedRulesIdResponse struct {
@@ -5212,32 +5212,32 @@ func (r *DescribeSecurityPolicyManagedRulesIdResponse) FromJsonString(s string) 
 // Predefined struct for user
 type DescribeSecurityPolicyManagedRulesRequestParams struct {
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name/layer-4 proxy
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
 	// Total number of pages
-	Page *int64 `json:"Page,omitnil" name:"Page"`
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
 	// Number of rules per page
-	PerPage *int64 `json:"PerPage,omitnil" name:"PerPage"`
+	PerPage *int64 `json:"PerPage,omitnil,omitempty" name:"PerPage"`
 }
 
 type DescribeSecurityPolicyManagedRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name/layer-4 proxy
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
 	// Total number of pages
-	Page *int64 `json:"Page,omitnil" name:"Page"`
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
 
 	// Number of rules per page
-	PerPage *int64 `json:"PerPage,omitnil" name:"PerPage"`
+	PerPage *int64 `json:"PerPage,omitnil,omitempty" name:"PerPage"`
 }
 
 func (r *DescribeSecurityPolicyManagedRulesRequest) ToJsonString() string {
@@ -5265,16 +5265,16 @@ func (r *DescribeSecurityPolicyManagedRulesRequest) FromJsonString(s string) err
 // Predefined struct for user
 type DescribeSecurityPolicyManagedRulesResponseParams struct {
 	// Number of rules returned
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Managed rule
-	Rules []*ManagedRule `json:"Rules,omitnil" name:"Rules"`
+	Rules []*ManagedRule `json:"Rules,omitnil,omitempty" name:"Rules"`
 
 	// Total number of rules
-	Total *int64 `json:"Total,omitnil" name:"Total"`
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeSecurityPolicyManagedRulesResponse struct {
@@ -5325,13 +5325,13 @@ func (r *DescribeSecurityPolicyRegionsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecurityPolicyRegionsResponseParams struct {
 	// Total number of regions
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Region information
-	GeoIp []*GeoIp `json:"GeoIp,omitnil" name:"GeoIp"`
+	GeoIp []*GeoIp `json:"GeoIp,omitnil,omitempty" name:"GeoIp"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeSecurityPolicyRegionsResponse struct {
@@ -5353,20 +5353,20 @@ func (r *DescribeSecurityPolicyRegionsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecurityPolicyRequestParams struct {
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Second-level domain name
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 }
 
 type DescribeSecurityPolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Second-level domain name
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 }
 
 func (r *DescribeSecurityPolicyRequest) ToJsonString() string {
@@ -5392,20 +5392,20 @@ func (r *DescribeSecurityPolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecurityPolicyResponseParams struct {
 	// User ID
-	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Second-level domain name
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
 	// Security configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Config *SecurityConfig `json:"Config,omitnil" name:"Config"`
+	Config *SecurityConfig `json:"Config,omitnil,omitempty" name:"Config"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeSecurityPolicyResponse struct {
@@ -5427,20 +5427,20 @@ func (r *DescribeSecurityPolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecurityPortraitRulesRequestParams struct {
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name/Application name
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 }
 
 type DescribeSecurityPortraitRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name/Application name
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 }
 
 func (r *DescribeSecurityPortraitRulesRequest) ToJsonString() string {
@@ -5466,16 +5466,16 @@ func (r *DescribeSecurityPortraitRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSecurityPortraitRulesResponseParams struct {
 	// Number of rules returned in this request
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Bot user profiling rule
-	Rules []*PortraitManagedRuleDetail `json:"Rules,omitnil" name:"Rules"`
+	Rules []*PortraitManagedRuleDetail `json:"Rules,omitnil,omitempty" name:"Rules"`
 
 	// Total number of rules
-	Total *int64 `json:"Total,omitnil" name:"Total"`
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeSecurityPortraitRulesResponse struct {
@@ -5497,76 +5497,76 @@ func (r *DescribeSecurityPortraitRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTimingL4DataRequestParams struct {
 	// Client time in RFC 3339 format
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Client time in RFC 3339 format
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Supported metrics for data query:
 	// `l4Flow_connections`: Access connections
 	// `l4Flow_flux`: Access traffic
 	// `l4Flow_inFlux`: Inbound traffic
 	// `l4Flow_outFlux`: Outbound traffic
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// List of site IDs
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// This field has been disused. Use `ProxyIds` instead.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// This field is not supported currently.
-	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// Time interval. Valid values: {min, 5min, hour, day}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// This field is not supported currently. Use `Filter` instead.
-	RuleId *string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Supported filters: `proxyd`, `ruleId`
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// List of layer-4 proxies
-	ProxyIds []*string `json:"ProxyIds,omitnil" name:"ProxyIds"`
+	ProxyIds []*string `json:"ProxyIds,omitnil,omitempty" name:"ProxyIds"`
 }
 
 type DescribeTimingL4DataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Client time in RFC 3339 format
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Client time in RFC 3339 format
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Supported metrics for data query:
 	// `l4Flow_connections`: Access connections
 	// `l4Flow_flux`: Access traffic
 	// `l4Flow_inFlux`: Inbound traffic
 	// `l4Flow_outFlux`: Outbound traffic
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// List of site IDs
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// This field has been disused. Use `ProxyIds` instead.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// This field is not supported currently.
-	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// Time interval. Valid values: {min, 5min, hour, day}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// This field is not supported currently. Use `Filter` instead.
-	RuleId *string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Supported filters: `proxyd`, `ruleId`
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// List of layer-4 proxies
-	ProxyIds []*string `json:"ProxyIds,omitnil" name:"ProxyIds"`
+	ProxyIds []*string `json:"ProxyIds,omitnil,omitempty" name:"ProxyIds"`
 }
 
 func (r *DescribeTimingL4DataRequest) ToJsonString() string {
@@ -5600,17 +5600,17 @@ func (r *DescribeTimingL4DataRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTimingL4DataResponseParams struct {
 	// Query dimension
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Time interval
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Detailed data
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*TimingDataRecord `json:"Data,omitnil" name:"Data"`
+	Data []*TimingDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTimingL4DataResponse struct {
@@ -5632,50 +5632,50 @@ func (r *DescribeTimingL4DataResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTimingL7AnalysisDataRequestParams struct {
 	// Client time in RFC 3339 format
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Client time in RFC 3339 format
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Supported metrics for data query:
 	// `l7Flow_outFlux`: Access traffic
 	// `l7Flow_request`: Access requests
 	// `l7Flow_outBandwidth`: Access bandwidth
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// Time interval. Valid values: {min, 5min, hour, day, week}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Array of `ZoneId` values
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Filter
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeTimingL7AnalysisDataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Client time in RFC 3339 format
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Client time in RFC 3339 format
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Supported metrics for data query:
 	// `l7Flow_outFlux`: Access traffic
 	// `l7Flow_request`: Access requests
 	// `l7Flow_outBandwidth`: Access bandwidth
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// Time interval. Valid values: {min, 5min, hour, day, week}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Array of `ZoneId` values
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Filter
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *DescribeTimingL7AnalysisDataRequest) ToJsonString() string {
@@ -5706,16 +5706,16 @@ func (r *DescribeTimingL7AnalysisDataRequest) FromJsonString(s string) error {
 type DescribeTimingL7AnalysisDataResponseParams struct {
 	// Detailed data
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*TimingDataRecord `json:"Data,omitnil" name:"Data"`
+	Data []*TimingDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Query dimension
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Time interval
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTimingL7AnalysisDataResponse struct {
@@ -5737,52 +5737,52 @@ func (r *DescribeTimingL7AnalysisDataResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTimingL7CacheDataRequestParams struct {
 	// Start time of the query (client time in RFC 3339)
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Start time of the query (client time in RFC 3339)
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Supported metrics for data query:
 	// `l7Cache_outFlux`: Access traffic
 	// `l7Cache_request`: Access requests
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// Time interval. Values: {min, 5min, hour, day, week}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// List of site IDs
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Filter condition:
 	// {Key: "cacheType", Value: ["hit"], Operator: "equals"}: Filter by data responded from EdgeOne
 	// {Key: "cacheType", Value: ["miss", "dynamic"], Operator: "equals"}: Filter by data responded from the origin server
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeTimingL7CacheDataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time of the query (client time in RFC 3339)
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Start time of the query (client time in RFC 3339)
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Supported metrics for data query:
 	// `l7Cache_outFlux`: Access traffic
 	// `l7Cache_request`: Access requests
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// Time interval. Values: {min, 5min, hour, day, week}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// List of site IDs
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Filter condition:
 	// {Key: "cacheType", Value: ["hit"], Operator: "equals"}: Filter by data responded from EdgeOne
 	// {Key: "cacheType", Value: ["miss", "dynamic"], Operator: "equals"}: Filter by data responded from the origin server
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *DescribeTimingL7CacheDataRequest) ToJsonString() string {
@@ -5813,16 +5813,16 @@ func (r *DescribeTimingL7CacheDataRequest) FromJsonString(s string) error {
 type DescribeTimingL7CacheDataResponseParams struct {
 	// Details
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*TimingDataRecord `json:"Data,omitnil" name:"Data"`
+	Data []*TimingDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Metric specified for data query
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Time interval
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTimingL7CacheDataResponse struct {
@@ -5844,50 +5844,50 @@ func (r *DescribeTimingL7CacheDataResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTopL7AnalysisDataRequestParams struct {
 	// Client time in RFC 3339 format
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Client time in RFC 3339 format
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Time series-type access traffic metric
-	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// Top N. 0 indicates to return the full data.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Time interval. Valid values: {min, 5min, hour, day, week}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Array of `ZoneId` values
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Filter
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeTopL7AnalysisDataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Client time in RFC 3339 format
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Client time in RFC 3339 format
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Time series-type access traffic metric
-	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// Top N. 0 indicates to return the full data.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Time interval. Valid values: {min, 5min, hour, day, week}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Array of `ZoneId` values
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Filter
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *DescribeTopL7AnalysisDataRequest) ToJsonString() string {
@@ -5919,16 +5919,16 @@ func (r *DescribeTopL7AnalysisDataRequest) FromJsonString(s string) error {
 type DescribeTopL7AnalysisDataResponseParams struct {
 	// Top detailed data
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*TopDataRecord `json:"Data,omitnil" name:"Data"`
+	Data []*TopDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Query dimension
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Query metric
-	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTopL7AnalysisDataResponse struct {
@@ -5950,50 +5950,50 @@ func (r *DescribeTopL7AnalysisDataResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTopL7CacheDataRequestParams struct {
 	// Start time of the query (client time in RFC 3339)
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time of the query (client time in RFC 3339)
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Metric for time-series data query
-	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// Specifies the number of data records to return. If `0` is passed in, all data is returned.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Time interval. Values: {min, 5min, hour, day, week}. This field is optional.
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Array of site IDs
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Filter condition
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeTopL7CacheDataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time of the query (client time in RFC 3339)
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time of the query (client time in RFC 3339)
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Metric for time-series data query
-	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// Specifies the number of data records to return. If `0` is passed in, all data is returned.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Time interval. Values: {min, 5min, hour, day, week}. This field is optional.
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Array of site IDs
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Filter condition
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *DescribeTopL7CacheDataRequest) ToJsonString() string {
@@ -6025,16 +6025,16 @@ func (r *DescribeTopL7CacheDataRequest) FromJsonString(s string) error {
 type DescribeTopL7CacheDataResponseParams struct {
 	// Top-ranked data details
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*TopDataRecord `json:"Data,omitnil" name:"Data"`
+	Data []*TopDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Dimension specified for data query
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Metric specified for data query
-	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTopL7CacheDataResponse struct {
@@ -6056,56 +6056,56 @@ func (r *DescribeTopL7CacheDataResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeWebManagedRulesAttackEventsRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// List of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of subdomain names
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Whether to show details. Valid values: Y (yes), N (no).
-	IsShowDetail *string `json:"IsShowDetail,omitnil" name:"IsShowDetail"`
+	IsShowDetail *string `json:"IsShowDetail,omitnil,omitempty" name:"IsShowDetail"`
 }
 
 type DescribeWebManagedRulesAttackEventsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// List of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of subdomain names
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Whether to show details. Valid values: Y (yes), N (no).
-	IsShowDetail *string `json:"IsShowDetail,omitnil" name:"IsShowDetail"`
+	IsShowDetail *string `json:"IsShowDetail,omitnil,omitempty" name:"IsShowDetail"`
 }
 
 func (r *DescribeWebManagedRulesAttackEventsRequest) ToJsonString() string {
@@ -6137,16 +6137,16 @@ func (r *DescribeWebManagedRulesAttackEventsRequest) FromJsonString(s string) er
 // Predefined struct for user
 type DescribeWebManagedRulesAttackEventsResponseParams struct {
 	// Web attack event data
-	Data *WebEventData `json:"Data,omitnil" name:"Data"`
+	Data *WebEventData `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returned data
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeWebManagedRulesAttackEventsResponse struct {
@@ -6168,22 +6168,22 @@ func (r *DescribeWebManagedRulesAttackEventsResponse) FromJsonString(s string) e
 // Predefined struct for user
 type DescribeWebManagedRulesDataRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// List of statistical metrics
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// List of site IDs
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of subdomain names
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Protocol type
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// "webshell" : WebShell detection prevention
 	// "oa" : Common OA vulnerability prevention
@@ -6200,32 +6200,32 @@ type DescribeWebManagedRulesDataRequestParams struct {
 	// "other" : Other vulnerability prevention
 	// 
 	// "all":"All"
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 
 	// Query time granularity. Valid values: {min,5min,hour,day}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 }
 
 type DescribeWebManagedRulesDataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// List of statistical metrics
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// List of site IDs
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of subdomain names
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Protocol type
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// "webshell" : WebShell detection prevention
 	// "oa" : Common OA vulnerability prevention
@@ -6242,10 +6242,10 @@ type DescribeWebManagedRulesDataRequest struct {
 	// "other" : Other vulnerability prevention
 	// 
 	// "all":"All"
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 
 	// Query time granularity. Valid values: {min,5min,hour,day}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 }
 
 func (r *DescribeWebManagedRulesDataRequest) ToJsonString() string {
@@ -6278,19 +6278,19 @@ func (r *DescribeWebManagedRulesDataRequest) FromJsonString(s string) error {
 type DescribeWebManagedRulesDataResponseParams struct {
 	// Web attack log entity
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*SecEntry `json:"Data,omitnil" name:"Data"`
+	Data []*SecEntry `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returned message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// Query time granularity. Valid values: {min,5min,hour,day}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeWebManagedRulesDataResponse struct {
@@ -6312,50 +6312,50 @@ func (r *DescribeWebManagedRulesDataResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeWebManagedRulesLogRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items per page
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Domain name set
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Query condition
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitnil" name:"QueryCondition"`
+	QueryCondition []*QueryCondition `json:"QueryCondition,omitnil,omitempty" name:"QueryCondition"`
 }
 
 type DescribeWebManagedRulesLogRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items per page
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Domain name set
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Query condition
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitnil" name:"QueryCondition"`
+	QueryCondition []*QueryCondition `json:"QueryCondition,omitnil,omitempty" name:"QueryCondition"`
 }
 
 func (r *DescribeWebManagedRulesLogRequest) ToJsonString() string {
@@ -6386,16 +6386,16 @@ func (r *DescribeWebManagedRulesLogRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeWebManagedRulesLogResponseParams struct {
 	// Web attack log data
-	Data *WebLogData `json:"Data,omitnil" name:"Data"`
+	Data *WebLogData `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returned message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeWebManagedRulesLogResponse struct {
@@ -6417,68 +6417,68 @@ func (r *DescribeWebManagedRulesLogResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeWebManagedRulesTopDataRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Filter metric
-	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// Number of the top data entries to query. 0: queries all data entries.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Set of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Port number
-	Port *int64 `json:"Port,omitnil" name:"Port"`
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Protocol type. Valid values: tcp, udp, all
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// Attack type. Valid values: flood, icmpFlood..., all
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 
 	// Domain name set
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 }
 
 type DescribeWebManagedRulesTopDataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Filter metric
-	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// Number of the top data entries to query. 0: queries all data entries.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Set of DDoS policy group IDs
-	PolicyIds []*int64 `json:"PolicyIds,omitnil" name:"PolicyIds"`
+	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
 	// Port number
-	Port *int64 `json:"Port,omitnil" name:"Port"`
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Protocol type. Valid values: tcp, udp, all
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// Attack type. Valid values: flood, icmpFlood..., all
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 
 	// Domain name set
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 }
 
 func (r *DescribeWebManagedRulesTopDataRequest) ToJsonString() string {
@@ -6512,16 +6512,16 @@ func (r *DescribeWebManagedRulesTopDataRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeWebManagedRulesTopDataResponseParams struct {
 	// Top N data
-	Data []*TopNEntry `json:"Data,omitnil" name:"Data"`
+	Data []*TopNEntry `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returned message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeWebManagedRulesTopDataResponse struct {
@@ -6543,44 +6543,44 @@ func (r *DescribeWebManagedRulesTopDataResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeWebProtectionAttackEventsRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Domain name
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 }
 
 type DescribeWebProtectionAttackEventsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Domain name
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 }
 
 func (r *DescribeWebProtectionAttackEventsRequest) ToJsonString() string {
@@ -6610,16 +6610,16 @@ func (r *DescribeWebProtectionAttackEventsRequest) FromJsonString(s string) erro
 // Predefined struct for user
 type DescribeWebProtectionAttackEventsResponseParams struct {
 	// DDoS attack event data
-	Data *CCInterceptEventData `json:"Data,omitnil" name:"Data"`
+	Data *CCInterceptEventData `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returned message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeWebProtectionAttackEventsResponse struct {
@@ -6641,22 +6641,22 @@ func (r *DescribeWebProtectionAttackEventsResponse) FromJsonString(s string) err
 // Predefined struct for user
 type DescribeWebProtectionDataRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// List of statistical metrics
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// List of site IDs
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of subdomain names
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Protocol type
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// "webshell" : WebShell detection prevention
 	// "oa" : Common OA vulnerability prevention
@@ -6673,32 +6673,32 @@ type DescribeWebProtectionDataRequestParams struct {
 	// "other" : Other vulnerability prevention
 	// 
 	// "all":"All"
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 
 	// Query time granularity. Valid values: {min,5min,hour,day}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 }
 
 type DescribeWebProtectionDataRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// List of statistical metrics
-	MetricNames []*string `json:"MetricNames,omitnil" name:"MetricNames"`
+	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// List of site IDs
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of subdomain names
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Protocol type
-	ProtocolType *string `json:"ProtocolType,omitnil" name:"ProtocolType"`
+	ProtocolType *string `json:"ProtocolType,omitnil,omitempty" name:"ProtocolType"`
 
 	// "webshell" : WebShell detection prevention
 	// "oa" : Common OA vulnerability prevention
@@ -6715,10 +6715,10 @@ type DescribeWebProtectionDataRequest struct {
 	// "other" : Other vulnerability prevention
 	// 
 	// "all":"All"
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 
 	// Query time granularity. Valid values: {min,5min,hour,day}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 }
 
 func (r *DescribeWebProtectionDataRequest) ToJsonString() string {
@@ -6751,19 +6751,19 @@ func (r *DescribeWebProtectionDataRequest) FromJsonString(s string) error {
 type DescribeWebProtectionDataResponseParams struct {
 	// Data details
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Data []*SecEntry `json:"Data,omitnil" name:"Data"`
+	Data []*SecEntry `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// Query time granularity. Valid values: {min,5min,hour,day}
-	Interval *string `json:"Interval,omitnil" name:"Interval"`
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeWebProtectionDataResponse struct {
@@ -6785,50 +6785,50 @@ func (r *DescribeWebProtectionDataResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeWebProtectionLogRequestParams struct {
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items per page
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Domain name set
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Query condition
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitnil" name:"QueryCondition"`
+	QueryCondition []*QueryCondition `json:"QueryCondition,omitnil,omitempty" name:"QueryCondition"`
 }
 
 type DescribeWebProtectionLogRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of items per page
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Site set
-	ZoneIds []*string `json:"ZoneIds,omitnil" name:"ZoneIds"`
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Domain name set
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Query condition
-	QueryCondition []*QueryCondition `json:"QueryCondition,omitnil" name:"QueryCondition"`
+	QueryCondition []*QueryCondition `json:"QueryCondition,omitnil,omitempty" name:"QueryCondition"`
 }
 
 func (r *DescribeWebProtectionLogRequest) ToJsonString() string {
@@ -6859,16 +6859,16 @@ func (r *DescribeWebProtectionLogRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeWebProtectionLogResponseParams struct {
 	// Block data in rate-limiting policy
-	Data *CCLogData `json:"Data,omitnil" name:"Data"`
+	Data *CCLogData `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Status. 1: failed; 0: succeeded
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Returned message
-	Msg *string `json:"Msg,omitnil" name:"Msg"`
+	Msg *string `json:"Msg,omitnil,omitempty" name:"Msg"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeWebProtectionLogResponse struct {
@@ -6890,14 +6890,14 @@ func (r *DescribeWebProtectionLogResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeZoneDDoSPolicyRequestParams struct {
 	// ID of the site (top-level domain name)
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type DescribeZoneDDoSPolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the site (top-level domain name)
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 func (r *DescribeZoneDDoSPolicyRequest) ToJsonString() string {
@@ -6922,17 +6922,17 @@ func (r *DescribeZoneDDoSPolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeZoneDDoSPolicyResponseParams struct {
 	// User APPID
-	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// DDoS mitigation configuration
-	ShieldAreas []*ShieldArea `json:"ShieldAreas,omitnil" name:"ShieldAreas"`
+	ShieldAreas []*ShieldArea `json:"ShieldAreas,omitnil,omitempty" name:"ShieldAreas"`
 
 	// Includes the details of all subdomain names
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Domains []*DDoSApplication `json:"Domains,omitnil" name:"Domains"`
+	Domains []*DDoSApplication `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeZoneDDoSPolicyResponse struct {
@@ -6954,14 +6954,14 @@ func (r *DescribeZoneDDoSPolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeZoneDetailsRequestParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 type DescribeZoneDetailsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 func (r *DescribeZoneDetailsRequest) ToJsonString() string {
@@ -6986,72 +6986,72 @@ func (r *DescribeZoneDetailsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeZoneDetailsResponseParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// List of name servers used
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	OriginalNameServers []*string `json:"OriginalNameServers,omitnil" name:"OriginalNameServers"`
+	OriginalNameServers []*string `json:"OriginalNameServers,omitnil,omitempty" name:"OriginalNameServers"`
 
 	// List of name servers assigned to users by Tencent Cloud
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	NameServers []*string `json:"NameServers,omitnil" name:"NameServers"`
+	NameServers []*string `json:"NameServers,omitnil,omitempty" name:"NameServers"`
 
 	// Site status
 	// - `active`: The name server is switched.
 	// - `pending`: The name server is not switched.
 	// - `moved`: The name server is moved.
 	// - `deactivated`: The name server is blocked.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Specifies how the site is connected to EdgeOne.
 	// - `full`: The site is connected via name server.
 	// - `partial`: The site is connected via CNAME.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Indicates whether the site is disabled
-	Paused *bool `json:"Paused,omitnil" name:"Paused"`
+	Paused *bool `json:"Paused,omitnil,omitempty" name:"Paused"`
 
 	// Specifies whether to enable CNAME acceleration
 	// - `enabled`: Enable
 	// - `disabled`: Disable
-	CnameSpeedUp *string `json:"CnameSpeedUp,omitnil" name:"CnameSpeedUp"`
+	CnameSpeedUp *string `json:"CnameSpeedUp,omitnil,omitempty" name:"CnameSpeedUp"`
 
 	// Ownership verification status of the site when it accesses via CNAME.
 	// - `finished`: The site is verified.
 	// - `pending`: The site is waiting for verification.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CnameStatus *string `json:"CnameStatus,omitnil" name:"CnameStatus"`
+	CnameStatus *string `json:"CnameStatus,omitnil,omitempty" name:"CnameStatus"`
 
 	// Resource tag
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Billable resource
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Resources []*Resource `json:"Resources,omitnil" name:"Resources"`
+	Resources []*Resource `json:"Resources,omitnil,omitempty" name:"Resources"`
 
 	// Site modification date
-	ModifiedOn *string `json:"ModifiedOn,omitnil" name:"ModifiedOn"`
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 
 	// Site creation date
-	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
+	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
 
 	// User-defined name server information
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitnil" name:"VanityNameServers"`
+	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitnil,omitempty" name:"VanityNameServers"`
 
 	// User-defined name server IP information
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	VanityNameServersIps []*VanityNameServersIps `json:"VanityNameServersIps,omitnil" name:"VanityNameServersIps"`
+	VanityNameServersIps []*VanityNameServersIps `json:"VanityNameServersIps,omitnil,omitempty" name:"VanityNameServersIps"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeZoneDetailsResponse struct {
@@ -7073,14 +7073,14 @@ func (r *DescribeZoneDetailsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeZoneSettingRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type DescribeZoneSettingRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 func (r *DescribeZoneSettingRequest) ToJsonString() string {
@@ -7106,72 +7106,72 @@ func (r *DescribeZoneSettingRequest) FromJsonString(s string) error {
 type DescribeZoneSettingResponseParams struct {
 	// Cache expiration time configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Cache *CacheConfig `json:"Cache,omitnil" name:"Cache"`
+	Cache *CacheConfig `json:"Cache,omitnil,omitempty" name:"Cache"`
 
 	// Node cache key configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CacheKey *CacheKey `json:"CacheKey,omitnil" name:"CacheKey"`
+	CacheKey *CacheKey `json:"CacheKey,omitnil,omitempty" name:"CacheKey"`
 
 	// Browser cache configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	MaxAge *MaxAge `json:"MaxAge,omitnil" name:"MaxAge"`
+	MaxAge *MaxAge `json:"MaxAge,omitnil,omitempty" name:"MaxAge"`
 
 	// Offline cache
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	OfflineCache *OfflineCache `json:"OfflineCache,omitnil" name:"OfflineCache"`
+	OfflineCache *OfflineCache `json:"OfflineCache,omitnil,omitempty" name:"OfflineCache"`
 
 	// QUIC access
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Quic *Quic `json:"Quic,omitnil" name:"Quic"`
+	Quic *Quic `json:"Quic,omitnil,omitempty" name:"Quic"`
 
 	// POST transport configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	PostMaxSize *PostMaxSize `json:"PostMaxSize,omitnil" name:"PostMaxSize"`
+	PostMaxSize *PostMaxSize `json:"PostMaxSize,omitnil,omitempty" name:"PostMaxSize"`
 
 	// Smart compression configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Compression *Compression `json:"Compression,omitnil" name:"Compression"`
+	Compression *Compression `json:"Compression,omitnil,omitempty" name:"Compression"`
 
 	// HTTP2 origin-pull configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	UpstreamHttp2 *UpstreamHttp2 `json:"UpstreamHttp2,omitnil" name:"UpstreamHttp2"`
+	UpstreamHttp2 *UpstreamHttp2 `json:"UpstreamHttp2,omitnil,omitempty" name:"UpstreamHttp2"`
 
 	// Force HTTPS redirect configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitnil" name:"ForceRedirect"`
+	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitnil,omitempty" name:"ForceRedirect"`
 
 	// HTTPS acceleration configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Https *Https `json:"Https,omitnil" name:"Https"`
+	Https *Https `json:"Https,omitnil,omitempty" name:"Https"`
 
 	// Origin server configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Origin *Origin `json:"Origin,omitnil" name:"Origin"`
+	Origin *Origin `json:"Origin,omitnil,omitempty" name:"Origin"`
 
 	// Dynamic acceleration configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	SmartRouting *SmartRouting `json:"SmartRouting,omitnil" name:"SmartRouting"`
+	SmartRouting *SmartRouting `json:"SmartRouting,omitnil,omitempty" name:"SmartRouting"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Domain name of the site
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// WebSocket configuration.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	WebSocket *WebSocket `json:"WebSocket,omitnil" name:"WebSocket"`
+	WebSocket *WebSocket `json:"WebSocket,omitnil,omitempty" name:"WebSocket"`
 
 	// Origin-pull client IP header configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ClientIpHeader *ClientIp `json:"ClientIpHeader,omitnil" name:"ClientIpHeader"`
+	ClientIpHeader *ClientIp `json:"ClientIpHeader,omitnil,omitempty" name:"ClientIpHeader"`
 
 	// Cache prefresh configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CachePrefresh *CachePrefresh `json:"CachePrefresh,omitnil" name:"CachePrefresh"`
+	CachePrefresh *CachePrefresh `json:"CachePrefresh,omitnil,omitempty" name:"CachePrefresh"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeZoneSettingResponse struct {
@@ -7193,26 +7193,26 @@ func (r *DescribeZoneSettingResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeZonesRequestParams struct {
 	// Pagination parameter, which specifies the offset.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Pagination parameter, which specifies the number of sites returned in each page.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Query condition filter, which supports complex type.
-	Filters []*ZoneFilter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*ZoneFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeZonesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Pagination parameter, which specifies the offset.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Pagination parameter, which specifies the number of sites returned in each page.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Query condition filter, which supports complex type.
-	Filters []*ZoneFilter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*ZoneFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *DescribeZonesRequest) ToJsonString() string {
@@ -7239,14 +7239,14 @@ func (r *DescribeZonesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeZonesResponseParams struct {
 	// Number of sites that match the specified conditions
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Details of sites
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Zones []*Zone `json:"Zones,omitnil" name:"Zones"`
+	Zones []*Zone `json:"Zones,omitnil,omitempty" name:"Zones"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeZonesResponse struct {
@@ -7267,19 +7267,19 @@ func (r *DescribeZonesResponse) FromJsonString(s string) error {
 
 type DetailHost struct {
 	// Tencent Cloud account ID
-	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Acceleration service status
 	// `process`: Deploying
 	// `online`: Enabled
 	// `offline`: Disabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Domain name
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 }
 
 type DnsDataFilter struct {
@@ -7289,7 +7289,7 @@ type DnsDataFilter struct {
 	// `type`: DNS resolution type
 	// `code`: DNS response code
 	// `area`: Region of the resolution server
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Parameter value
 	// When `Name=area`, valid values:
@@ -7304,7 +7304,7 @@ type DnsDataFilter struct {
 	// `NXDomain`: Non-existent domain in the request. It is only valid when the response is from the authoritative name server.
 	// `NotImp`: Request type not supported.
 	// `Refused`: The name server refuses to perform the requested operation for policy reasons.
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 
 	// Parameter value
 	// When `Name=area`, valid values:
@@ -7319,147 +7319,147 @@ type DnsDataFilter struct {
 	// `NXDomain`: Non-existent domain in the request. It is only valid when the response is from the authoritative name server.
 	// `NotImp`: Request type not supported.
 	// `Refused`: The name server refuses to perform the requested operation for policy reasons.
-	Values []*string `json:"Values,omitnil" name:"Values"`
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
 type DnsRecord struct {
 	// Record ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Record type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Host record
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Record value
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// Proxy mode
-	Mode *string `json:"Mode,omitnil" name:"Mode"`
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 	// TTL value
-	Ttl *int64 `json:"Ttl,omitnil" name:"Ttl"`
+	Ttl *int64 `json:"Ttl,omitnil,omitempty" name:"Ttl"`
 
 	// Priority
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Priority *int64 `json:"Priority,omitnil" name:"Priority"`
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
 	// Creation time
-	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
+	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
 
 	// Modification time
-	ModifiedOn *string `json:"ModifiedOn,omitnil" name:"ModifiedOn"`
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 
 	// Domain name lock
-	Locked *bool `json:"Locked,omitnil" name:"Locked"`
+	Locked *bool `json:"Locked,omitnil,omitempty" name:"Locked"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Site name
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// Resolution status
 	// `active`: Activated
 	// `pending`: Not activated
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// CNAME address
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Cname *string `json:"Cname,omitnil" name:"Cname"`
+	Cname *string `json:"Cname,omitnil,omitempty" name:"Cname"`
 
 	// Which service is enabled for the domain name.
 	// - `lb`: Load balancing
 	// - `security`: Security acceleration
 	// - `l4`: L4 proxy
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DomainStatus []*string `json:"DomainStatus,omitnil" name:"DomainStatus"`
+	DomainStatus []*string `json:"DomainStatus,omitnil,omitempty" name:"DomainStatus"`
 }
 
 type DnsRecordFilter struct {
 	// Filters by the field name. Vaules:
 	// - `name`: Site name.
 	// - `status`: Site status.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Filters by the field value
-	Values []*string `json:"Values,omitnil" name:"Values"`
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 
 	// Specifies whether to enable fuzzy query. It’s only available when the filter name is `name`. If it’s enabled, the length of `Values` must be 1.
-	Fuzzy *bool `json:"Fuzzy,omitnil" name:"Fuzzy"`
+	Fuzzy *bool `json:"Fuzzy,omitnil,omitempty" name:"Fuzzy"`
 }
 
 type DnssecInfo struct {
 	// Flag
-	Flags *int64 `json:"Flags,omitnil" name:"Flags"`
+	Flags *int64 `json:"Flags,omitnil,omitempty" name:"Flags"`
 
 	// Encryption algorithm
-	Algorithm *string `json:"Algorithm,omitnil" name:"Algorithm"`
+	Algorithm *string `json:"Algorithm,omitnil,omitempty" name:"Algorithm"`
 
 	// Encryption type
-	KeyType *string `json:"KeyType,omitnil" name:"KeyType"`
+	KeyType *string `json:"KeyType,omitnil,omitempty" name:"KeyType"`
 
 	// Digest type
-	DigestType *string `json:"DigestType,omitnil" name:"DigestType"`
+	DigestType *string `json:"DigestType,omitnil,omitempty" name:"DigestType"`
 
 	// Digest algorithm
-	DigestAlgorithm *string `json:"DigestAlgorithm,omitnil" name:"DigestAlgorithm"`
+	DigestAlgorithm *string `json:"DigestAlgorithm,omitnil,omitempty" name:"DigestAlgorithm"`
 
 	// Digest message
-	Digest *string `json:"Digest,omitnil" name:"Digest"`
+	Digest *string `json:"Digest,omitnil,omitempty" name:"Digest"`
 
 	// DS record value
-	DS *string `json:"DS,omitnil" name:"DS"`
+	DS *string `json:"DS,omitnil,omitempty" name:"DS"`
 
 	// Key tag
-	KeyTag *int64 `json:"KeyTag,omitnil" name:"KeyTag"`
+	KeyTag *int64 `json:"KeyTag,omitnil,omitempty" name:"KeyTag"`
 
 	// Public key
-	PublicKey *string `json:"PublicKey,omitnil" name:"PublicKey"`
+	PublicKey *string `json:"PublicKey,omitnil,omitempty" name:"PublicKey"`
 }
 
 // Predefined struct for user
 type DownloadL7LogsRequestParams struct {
 	// Start time. It must conform to the RFC3339 standard.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time. It must conform to the RFC3339 standard.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of entries per page
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Array of site names
-	Zones []*string `json:"Zones,omitnil" name:"Zones"`
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
 	// Array of subdomain names
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 }
 
 type DownloadL7LogsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time. It must conform to the RFC3339 standard.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time. It must conform to the RFC3339 standard.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Number of entries per page
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Current page
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Array of site names
-	Zones []*string `json:"Zones,omitnil" name:"Zones"`
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
 	// Array of subdomain names
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 }
 
 func (r *DownloadL7LogsRequest) ToJsonString() string {
@@ -7490,26 +7490,26 @@ func (r *DownloadL7LogsRequest) FromJsonString(s string) error {
 type DownloadL7LogsResponseParams struct {
 	// Layer-7 offline log data
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Data []*L7OfflineLog `json:"Data,omitnil" name:"Data"`
+	Data []*L7OfflineLog `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// Page size
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Page number
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Total number of pages
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Pages *int64 `json:"Pages,omitnil" name:"Pages"`
+	Pages *int64 `json:"Pages,omitnil,omitempty" name:"Pages"`
 
 	// Total number of entries
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	TotalSize *int64 `json:"TotalSize,omitnil" name:"TotalSize"`
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DownloadL7LogsResponse struct {
@@ -7530,87 +7530,87 @@ func (r *DownloadL7LogsResponse) FromJsonString(s string) error {
 
 type FailReason struct {
 	// Failure reason
-	Reason *string `json:"Reason,omitnil" name:"Reason"`
+	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 
 	// List of resources failed to be processed. 
 	//  
-	Targets []*string `json:"Targets,omitnil" name:"Targets"`
+	Targets []*string `json:"Targets,omitnil,omitempty" name:"Targets"`
 }
 
 type Filter struct {
 	// Filter dimension
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Operator
-	Operator *string `json:"Operator,omitnil" name:"Operator"`
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
 	// Filter dimension value
-	Value []*string `json:"Value,omitnil" name:"Value"`
+	Value []*string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type ForceRedirect struct {
 	// Force redirect configuration switch
 	// `on`: Enable
 	// `off`: Disable
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Redirection status code
 	// 301
 	// 302
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	RedirectStatusCode *int64 `json:"RedirectStatusCode,omitnil" name:"RedirectStatusCode"`
+	RedirectStatusCode *int64 `json:"RedirectStatusCode,omitnil,omitempty" name:"RedirectStatusCode"`
 }
 
 type GeoIp struct {
 	// Region ID
-	RegionId *int64 `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *int64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Country name
-	Country *string `json:"Country,omitnil" name:"Country"`
+	Country *string `json:"Country,omitnil,omitempty" name:"Country"`
 
 	// Continent name
-	Continent *string `json:"Continent,omitnil" name:"Continent"`
+	Continent *string `json:"Continent,omitnil,omitempty" name:"Continent"`
 
 	// Country name in English
-	CountryEn *string `json:"CountryEn,omitnil" name:"CountryEn"`
+	CountryEn *string `json:"CountryEn,omitnil,omitempty" name:"CountryEn"`
 
 	// Continent name in English
-	ContinentEn *string `json:"ContinentEn,omitnil" name:"ContinentEn"`
+	ContinentEn *string `json:"ContinentEn,omitnil,omitempty" name:"ContinentEn"`
 }
 
 type Header struct {
 	// HTTP header name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// HTTP header value
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type HostCertSetting struct {
 	// Domain name
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Server certificate configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CertInfo []*ServerCertInfo `json:"CertInfo,omitnil" name:"CertInfo"`
+	CertInfo []*ServerCertInfo `json:"CertInfo,omitnil,omitempty" name:"CertInfo"`
 }
 
 type Hsts struct {
 	// Specifies whether to enable. Valid values: `on` and `off`.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// `MaxAge` value.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	MaxAge *int64 `json:"MaxAge,omitnil" name:"MaxAge"`
+	MaxAge *int64 `json:"MaxAge,omitnil,omitempty" name:"MaxAge"`
 
 	// Specifies whether to include subdomain names. Valid values: `on` and `off`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	IncludeSubDomains *string `json:"IncludeSubDomains,omitnil" name:"IncludeSubDomains"`
+	IncludeSubDomains *string `json:"IncludeSubDomains,omitnil,omitempty" name:"IncludeSubDomains"`
 
 	// Specifies whether to preload. Valid values: `on` and `off`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Preload *string `json:"Preload,omitnil" name:"Preload"`
+	Preload *string `json:"Preload,omitnil,omitempty" name:"Preload"`
 }
 
 type Https struct {
@@ -7618,35 +7618,35 @@ type Https struct {
 	// `on`: Enable
 	// `off`: Disable
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Http2 *string `json:"Http2,omitnil" name:"Http2"`
+	Http2 *string `json:"Http2,omitnil,omitempty" name:"Http2"`
 
 	// OCSP configuration switch
 	// `on`: Enable
 	// `off`: Disable
 	// It is disabled by default.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	OcspStapling *string `json:"OcspStapling,omitnil" name:"OcspStapling"`
+	OcspStapling *string `json:"OcspStapling,omitnil,omitempty" name:"OcspStapling"`
 
 	// TLS version settings. Valid values: `TLSv1`, `TLSV1.1`, `TLSV1.2`, and `TLSv1.3`. Only consecutive versions can be enabled at the same time.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	TlsVersion []*string `json:"TlsVersion,omitnil" name:"TlsVersion"`
+	TlsVersion []*string `json:"TlsVersion,omitnil,omitempty" name:"TlsVersion"`
 
 	// HSTS Configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Hsts *Hsts `json:"Hsts,omitnil" name:"Hsts"`
+	Hsts *Hsts `json:"Hsts,omitnil,omitempty" name:"Hsts"`
 }
 
 // Predefined struct for user
 type IdentifyZoneRequestParams struct {
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type IdentifyZoneRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *IdentifyZoneRequest) ToJsonString() string {
@@ -7671,19 +7671,19 @@ func (r *IdentifyZoneRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type IdentifyZoneResponseParams struct {
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 
-	Subdomain *string `json:"Subdomain,omitnil" name:"Subdomain"`
+	Subdomain *string `json:"Subdomain,omitnil,omitempty" name:"Subdomain"`
 
 	// Record type
-	RecordType *string `json:"RecordType,omitnil" name:"RecordType"`
+	RecordType *string `json:"RecordType,omitnil,omitempty" name:"RecordType"`
 
 	// Record value
-	RecordValue *string `json:"RecordValue,omitnil" name:"RecordValue"`
+	RecordValue *string `json:"RecordValue,omitnil,omitempty" name:"RecordValue"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type IdentifyZoneResponse struct {
@@ -7705,20 +7705,20 @@ func (r *IdentifyZoneResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ImportDnsRecordsRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// File content
-	File *string `json:"File,omitnil" name:"File"`
+	File *string `json:"File,omitnil,omitempty" name:"File"`
 }
 
 type ImportDnsRecordsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// File content
-	File *string `json:"File,omitnil" name:"File"`
+	File *string `json:"File,omitnil,omitempty" name:"File"`
 }
 
 func (r *ImportDnsRecordsRequest) ToJsonString() string {
@@ -7744,10 +7744,10 @@ func (r *ImportDnsRecordsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ImportDnsRecordsResponseParams struct {
 	// Record ID
-	Ids []*string `json:"Ids,omitnil" name:"Ids"`
+	Ids []*string `json:"Ids,omitnil,omitempty" name:"Ids"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ImportDnsRecordsResponse struct {
@@ -7769,210 +7769,210 @@ func (r *ImportDnsRecordsResponse) FromJsonString(s string) error {
 type IntelligenceRule struct {
 	// Switch
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Items in a bot intelligence rule
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Items []*IntelligenceRuleItem `json:"Items,omitnil" name:"Items"`
+	Items []*IntelligenceRuleItem `json:"Items,omitnil,omitempty" name:"Items"`
 }
 
 type IntelligenceRuleItem struct {
 	// Malicious bot, which is used to tag bad bots
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Label *string `json:"Label,omitnil" name:"Label"`
+	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 
 	// Action
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
 type IpTableConfig struct {
 	// Switch
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// []
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Rules []*IpTableRule `json:"Rules,omitnil" name:"Rules"`
+	Rules []*IpTableRule `json:"Rules,omitnil,omitempty" name:"Rules"`
 }
 
 type IpTableRule struct {
 	// Action: `drop` (block), `trans` (allow), `monitor` (observe)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// Matches by IP or region. Values: `ip` and `area`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MatchFrom *string `json:"MatchFrom,omitnil" name:"MatchFrom"`
+	MatchFrom *string `json:"MatchFrom,omitnil,omitempty" name:"MatchFrom"`
 
 	// Matching content
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MatchContent *string `json:"MatchContent,omitnil" name:"MatchContent"`
+	MatchContent *string `json:"MatchContent,omitnil,omitempty" name:"MatchContent"`
 
 	// Rule ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RuleID *int64 `json:"RuleID,omitnil" name:"RuleID"`
+	RuleID *int64 `json:"RuleID,omitnil,omitempty" name:"RuleID"`
 
 	// Update time
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type L7OfflineLog struct {
 	// Start time of the log packaging
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	LogTime *int64 `json:"LogTime,omitnil" name:"LogTime"`
+	LogTime *int64 `json:"LogTime,omitnil,omitempty" name:"LogTime"`
 
 	// Subdomain name
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Domain *string `json:"Domain,omitnil" name:"Domain"`
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// Log size, in bytes
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Size *int64 `json:"Size,omitnil" name:"Size"`
+	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// Download address
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Log package name
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	LogPacketName *string `json:"LogPacketName,omitnil" name:"LogPacketName"`
+	LogPacketName *string `json:"LogPacketName,omitnil,omitempty" name:"LogPacketName"`
 }
 
 type LoadBalancing struct {
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name. You can use @ to represent the root domain.
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Proxy mode. Valid values:
 	// `dns_only`: Only DNS
 	// `proxied`: Enable proxy
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Indicates DNS TTL time when `Type=dns_only`
-	TTL *uint64 `json:"TTL,omitnil" name:"TTL"`
+	TTL *uint64 `json:"TTL,omitnil,omitempty" name:"TTL"`
 
 	// ID of the origin group used
-	OriginId []*string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId []*string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Information of the origin server used
-	Origin []*OriginGroup `json:"Origin,omitnil" name:"Origin"`
+	Origin []*OriginGroup `json:"Origin,omitnil,omitempty" name:"Origin"`
 
 	// Update time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Status
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Schedules domain names
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Cname *string `json:"Cname,omitnil" name:"Cname"`
+	Cname *string `json:"Cname,omitnil,omitempty" name:"Cname"`
 }
 
 type ManagedRule struct {
 	// ID of the rule
-	RuleId *int64 `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *int64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Rule description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Rule type
-	RuleTypeName *string `json:"RuleTypeName,omitnil" name:"RuleTypeName"`
+	RuleTypeName *string `json:"RuleTypeName,omitnil,omitempty" name:"RuleTypeName"`
 
 	// Rule level
-	RuleLevelDesc *string `json:"RuleLevelDesc,omitnil" name:"RuleLevelDesc"`
+	RuleLevelDesc *string `json:"RuleLevelDesc,omitnil,omitempty" name:"RuleLevelDesc"`
 
 	// Update time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Rule status: `block`, `allow`
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Tag of the rule
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	RuleTags []*string `json:"RuleTags,omitnil" name:"RuleTags"`
+	RuleTags []*string `json:"RuleTags,omitnil,omitempty" name:"RuleTags"`
 
 	// Description of the rule type
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	RuleTypeDesc *string `json:"RuleTypeDesc,omitnil" name:"RuleTypeDesc"`
+	RuleTypeDesc *string `json:"RuleTypeDesc,omitnil,omitempty" name:"RuleTypeDesc"`
 
 	// ID of the rule type
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	RuleTypeId *int64 `json:"RuleTypeId,omitnil" name:"RuleTypeId"`
+	RuleTypeId *int64 `json:"RuleTypeId,omitnil,omitempty" name:"RuleTypeId"`
 }
 
 type MaxAge struct {
 	// Specifies the max age of the cache (in seconds). The maximum value is 365 days.
 	// Note: the value `0` means not to cache.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	MaxAgeTime *int64 `json:"MaxAgeTime,omitnil" name:"MaxAgeTime"`
+	MaxAgeTime *int64 `json:"MaxAgeTime,omitnil,omitempty" name:"MaxAgeTime"`
 
 	// Specifies whether to follow the max cache age of the origin server. Valid values: `on` and `off`. If it's on, `MaxAgeTime` is ignored.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	FollowOrigin *string `json:"FollowOrigin,omitnil" name:"FollowOrigin"`
+	FollowOrigin *string `json:"FollowOrigin,omitnil,omitempty" name:"FollowOrigin"`
 }
 
 // Predefined struct for user
 type ModifyApplicationProxyRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// ID of the proxy
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Name of the proxy:
 	// Domain name or subdomain name when `ProxyType=hostname`
 	// Instance name when `ProxyType=instance`
-	ProxyName *string `json:"ProxyName,omitnil" name:"ProxyName"`
+	ProxyName *string `json:"ProxyName,omitnil,omitempty" name:"ProxyName"`
 
 	// This parameter is disused.
-	ForwardClientIp *string `json:"ForwardClientIp,omitnil" name:"ForwardClientIp"`
+	ForwardClientIp *string `json:"ForwardClientIp,omitnil,omitempty" name:"ForwardClientIp"`
 
 	// This parameter is disused.
-	SessionPersist *bool `json:"SessionPersist,omitnil" name:"SessionPersist"`
+	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 
 	// Session persistence time. Value range: 30-3600 (in seconds).
-	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil" name:"SessionPersistTime"`
+	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// Specifies how a layer-4 proxy is created.
 	// `hostname`: Create by subdomain name
 	// `instance`: Create by instance
-	ProxyType *string `json:"ProxyType,omitnil" name:"ProxyType"`
+	ProxyType *string `json:"ProxyType,omitnil,omitempty" name:"ProxyType"`
 }
 
 type ModifyApplicationProxyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// ID of the proxy
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Name of the proxy:
 	// Domain name or subdomain name when `ProxyType=hostname`
 	// Instance name when `ProxyType=instance`
-	ProxyName *string `json:"ProxyName,omitnil" name:"ProxyName"`
+	ProxyName *string `json:"ProxyName,omitnil,omitempty" name:"ProxyName"`
 
 	// This parameter is disused.
-	ForwardClientIp *string `json:"ForwardClientIp,omitnil" name:"ForwardClientIp"`
+	ForwardClientIp *string `json:"ForwardClientIp,omitnil,omitempty" name:"ForwardClientIp"`
 
 	// This parameter is disused.
-	SessionPersist *bool `json:"SessionPersist,omitnil" name:"SessionPersist"`
+	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 
 	// Session persistence time. Value range: 30-3600 (in seconds).
-	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil" name:"SessionPersistTime"`
+	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// Specifies how a layer-4 proxy is created.
 	// `hostname`: Create by subdomain name
 	// `instance`: Create by instance
-	ProxyType *string `json:"ProxyType,omitnil" name:"ProxyType"`
+	ProxyType *string `json:"ProxyType,omitnil,omitempty" name:"ProxyType"`
 }
 
 func (r *ModifyApplicationProxyRequest) ToJsonString() string {
@@ -8003,10 +8003,10 @@ func (r *ModifyApplicationProxyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyApplicationProxyResponseParams struct {
 	// ID of the proxy
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyApplicationProxyResponse struct {
@@ -8028,26 +8028,26 @@ func (r *ModifyApplicationProxyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyApplicationProxyRuleRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Proxy ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Rule ID
-	RuleId *string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Protocol. Valid values: `TCP` and `UDP`.
-	Proto *string `json:"Proto,omitnil" name:"Proto"`
+	Proto *string `json:"Proto,omitnil,omitempty" name:"Proto"`
 
 	// Port. Valid values:
 	// `80`: Port 80
 	// `81-90`: Port range 81-90
-	Port []*string `json:"Port,omitnil" name:"Port"`
+	Port []*string `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Origin server type. Valid values:
 	// `custom`: Specified origins
 	// `origins`: Origin group
-	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
+	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 
 	// Origin server information:
 	// When `OriginType=custom`, it indicates one or more origin servers. Example:
@@ -8056,7 +8056,7 @@ type ModifyApplicationProxyRuleRequestParams struct {
 	// 
 	// When `OriginType=origins`, it indicates an origin group ID. Example:
 	// OriginValue=["origin-xxx"]
-	OriginValue []*string `json:"OriginValue,omitnil" name:"OriginValue"`
+	OriginValue []*string `json:"OriginValue,omitnil,omitempty" name:"OriginValue"`
 
 	// Passes the client IP. When `Proto=TCP`, valid values:
 	// `TOA`: Pass the client IP via TOA.
@@ -8066,36 +8066,36 @@ type ModifyApplicationProxyRuleRequestParams struct {
 	// When `Proto=UDP`, valid values:
 	// `PPV2`: Pass the client IP via Proxy Protocol V2.
 	// `OFF`: Do not pass the client IP.
-	ForwardClientIp *string `json:"ForwardClientIp,omitnil" name:"ForwardClientIp"`
+	ForwardClientIp *string `json:"ForwardClientIp,omitnil,omitempty" name:"ForwardClientIp"`
 
 	// Specifies whether to enable session persistence
-	SessionPersist *bool `json:"SessionPersist,omitnil" name:"SessionPersist"`
+	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 }
 
 type ModifyApplicationProxyRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Proxy ID
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Rule ID
-	RuleId *string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Protocol. Valid values: `TCP` and `UDP`.
-	Proto *string `json:"Proto,omitnil" name:"Proto"`
+	Proto *string `json:"Proto,omitnil,omitempty" name:"Proto"`
 
 	// Port. Valid values:
 	// `80`: Port 80
 	// `81-90`: Port range 81-90
-	Port []*string `json:"Port,omitnil" name:"Port"`
+	Port []*string `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Origin server type. Valid values:
 	// `custom`: Specified origins
 	// `origins`: Origin group
-	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
+	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 
 	// Origin server information:
 	// When `OriginType=custom`, it indicates one or more origin servers. Example:
@@ -8104,7 +8104,7 @@ type ModifyApplicationProxyRuleRequest struct {
 	// 
 	// When `OriginType=origins`, it indicates an origin group ID. Example:
 	// OriginValue=["origin-xxx"]
-	OriginValue []*string `json:"OriginValue,omitnil" name:"OriginValue"`
+	OriginValue []*string `json:"OriginValue,omitnil,omitempty" name:"OriginValue"`
 
 	// Passes the client IP. When `Proto=TCP`, valid values:
 	// `TOA`: Pass the client IP via TOA.
@@ -8114,10 +8114,10 @@ type ModifyApplicationProxyRuleRequest struct {
 	// When `Proto=UDP`, valid values:
 	// `PPV2`: Pass the client IP via Proxy Protocol V2.
 	// `OFF`: Do not pass the client IP.
-	ForwardClientIp *string `json:"ForwardClientIp,omitnil" name:"ForwardClientIp"`
+	ForwardClientIp *string `json:"ForwardClientIp,omitnil,omitempty" name:"ForwardClientIp"`
 
 	// Specifies whether to enable session persistence
-	SessionPersist *bool `json:"SessionPersist,omitnil" name:"SessionPersist"`
+	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 }
 
 func (r *ModifyApplicationProxyRuleRequest) ToJsonString() string {
@@ -8150,10 +8150,10 @@ func (r *ModifyApplicationProxyRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyApplicationProxyRuleResponseParams struct {
 	// Rule ID
-	RuleId *string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyApplicationProxyRuleResponse struct {
@@ -8175,36 +8175,36 @@ func (r *ModifyApplicationProxyRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyApplicationProxyRuleStatusRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// ID of the proxy
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Rule ID
-	RuleId *string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Status
 	// `offline`: Disabled
 	// `online`: Enabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type ModifyApplicationProxyRuleStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// ID of the proxy
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Rule ID
-	RuleId *string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Status
 	// `offline`: Disabled
 	// `online`: Enabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 func (r *ModifyApplicationProxyRuleStatusRequest) ToJsonString() string {
@@ -8232,10 +8232,10 @@ func (r *ModifyApplicationProxyRuleStatusRequest) FromJsonString(s string) error
 // Predefined struct for user
 type ModifyApplicationProxyRuleStatusResponseParams struct {
 	// Rule ID
-	RuleId *string `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyApplicationProxyRuleStatusResponse struct {
@@ -8257,30 +8257,30 @@ func (r *ModifyApplicationProxyRuleStatusResponse) FromJsonString(s string) erro
 // Predefined struct for user
 type ModifyApplicationProxyStatusRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// ID of the proxy
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Status
 	// `offline`: Disabled
 	// `online`: Enabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type ModifyApplicationProxyStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// ID of the proxy
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// Status
 	// `offline`: Disabled
 	// `online`: Enabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 func (r *ModifyApplicationProxyStatusRequest) ToJsonString() string {
@@ -8307,10 +8307,10 @@ func (r *ModifyApplicationProxyStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyApplicationProxyStatusResponseParams struct {
 	// ID of the proxy
-	ProxyId *string `json:"ProxyId,omitnil" name:"ProxyId"`
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyApplicationProxyStatusResponse struct {
@@ -8332,38 +8332,38 @@ func (r *ModifyApplicationProxyStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDDoSPolicyHostRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Second-level domain name
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Whether to enable content acceleration. Values: `on` (enable content acceleration), and `off` (disable content acceleration). It can be used together with `SecurityType`.
-	AccelerateType *string `json:"AccelerateType,omitnil" name:"AccelerateType"`
+	AccelerateType *string `json:"AccelerateType,omitnil,omitempty" name:"AccelerateType"`
 
 	// Policy ID
-	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 
 	// Whether to enable security protection. Values: `on` (enable security protection) and `off` (disable security protection). It can be used together with `AccelerateType`.
-	SecurityType *string `json:"SecurityType,omitnil" name:"SecurityType"`
+	SecurityType *string `json:"SecurityType,omitnil,omitempty" name:"SecurityType"`
 }
 
 type ModifyDDoSPolicyHostRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Second-level domain name
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// Whether to enable content acceleration. Values: `on` (enable content acceleration), and `off` (disable content acceleration). It can be used together with `SecurityType`.
-	AccelerateType *string `json:"AccelerateType,omitnil" name:"AccelerateType"`
+	AccelerateType *string `json:"AccelerateType,omitnil,omitempty" name:"AccelerateType"`
 
 	// Policy ID
-	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 
 	// Whether to enable security protection. Values: `on` (enable security protection) and `off` (disable security protection). It can be used together with `AccelerateType`.
-	SecurityType *string `json:"SecurityType,omitnil" name:"SecurityType"`
+	SecurityType *string `json:"SecurityType,omitnil,omitempty" name:"SecurityType"`
 }
 
 func (r *ModifyDDoSPolicyHostRequest) ToJsonString() string {
@@ -8392,10 +8392,10 @@ func (r *ModifyDDoSPolicyHostRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDDoSPolicyHostResponseParams struct {
 	// Subdomain name
-	Host *string `json:"Host,omitnil" name:"Host"`
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDDoSPolicyHostResponse struct {
@@ -8417,26 +8417,26 @@ func (r *ModifyDDoSPolicyHostResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDDoSPolicyRequestParams struct {
 	// ID of the policy group
-	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Detailed DDoS mitigation configuration
-	DdosRule *DdosRule `json:"DdosRule,omitnil" name:"DdosRule"`
+	DdosRule *DdosRule `json:"DdosRule,omitnil,omitempty" name:"DdosRule"`
 }
 
 type ModifyDDoSPolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the policy group
-	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Detailed DDoS mitigation configuration
-	DdosRule *DdosRule `json:"DdosRule,omitnil" name:"DdosRule"`
+	DdosRule *DdosRule `json:"DdosRule,omitnil,omitempty" name:"DdosRule"`
 }
 
 func (r *ModifyDDoSPolicyRequest) ToJsonString() string {
@@ -8463,10 +8463,10 @@ func (r *ModifyDDoSPolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDDoSPolicyResponseParams struct {
 	// ID of the policy group
-	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDDoSPolicyResponse struct {
@@ -8488,32 +8488,32 @@ func (r *ModifyDDoSPolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDefaultCertificateRequestParams struct {
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Certificate ID
-	CertId *string `json:"CertId,omitnil" name:"CertId"`
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
 
 	// Certificate status
 	// `deployed`: The certificate is deployed.
 	// `disabled`: The certificate is disabled.
 	// If the deployment fails, you can pass in `Status = deployed` again.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type ModifyDefaultCertificateRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Certificate ID
-	CertId *string `json:"CertId,omitnil" name:"CertId"`
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
 
 	// Certificate status
 	// `deployed`: The certificate is deployed.
 	// `disabled`: The certificate is disabled.
 	// If the deployment fails, you can pass in `Status = deployed` again.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 func (r *ModifyDefaultCertificateRequest) ToJsonString() string {
@@ -8540,7 +8540,7 @@ func (r *ModifyDefaultCertificateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDefaultCertificateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDefaultCertificateResponse struct {
@@ -8562,55 +8562,55 @@ func (r *ModifyDefaultCertificateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDnsRecordRequestParams struct {
 	// Record ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Record type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Record name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Record content
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 
-	Ttl *int64 `json:"Ttl,omitnil" name:"Ttl"`
+	Ttl *int64 `json:"Ttl,omitnil,omitempty" name:"Ttl"`
 
 	// Priority
-	Priority *int64 `json:"Priority,omitnil" name:"Priority"`
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
 	// Proxy mode
-	Mode *string `json:"Mode,omitnil" name:"Mode"`
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 }
 
 type ModifyDnsRecordRequest struct {
 	*tchttp.BaseRequest
 	
 	// Record ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Record type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Record name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Record content
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-	Ttl *int64 `json:"Ttl,omitnil" name:"Ttl"`
+	Ttl *int64 `json:"Ttl,omitnil,omitempty" name:"Ttl"`
 
 	// Priority
-	Priority *int64 `json:"Priority,omitnil" name:"Priority"`
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
 	// Proxy mode
-	Mode *string `json:"Mode,omitnil" name:"Mode"`
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 }
 
 func (r *ModifyDnsRecordRequest) ToJsonString() string {
@@ -8642,50 +8642,50 @@ func (r *ModifyDnsRecordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDnsRecordResponseParams struct {
 	// Record ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Record type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Record name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Record content
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 
-	Ttl *int64 `json:"Ttl,omitnil" name:"Ttl"`
+	Ttl *int64 `json:"Ttl,omitnil,omitempty" name:"Ttl"`
 
 	// Priority
-	Priority *int64 `json:"Priority,omitnil" name:"Priority"`
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
 	// Proxy mode
-	Mode *string `json:"Mode,omitnil" name:"Mode"`
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 	// Resolution status
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// CNAME address
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Cname *string `json:"Cname,omitnil" name:"Cname"`
+	Cname *string `json:"Cname,omitnil,omitempty" name:"Cname"`
 
 	// Whether the DNS record is locked
-	Locked *bool `json:"Locked,omitnil" name:"Locked"`
+	Locked *bool `json:"Locked,omitnil,omitempty" name:"Locked"`
 
 	// Creation time
-	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
+	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
 
 	// Modification time
-	ModifiedOn *string `json:"ModifiedOn,omitnil" name:"ModifiedOn"`
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Site name
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDnsRecordResponse struct {
@@ -8707,24 +8707,24 @@ func (r *ModifyDnsRecordResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDnssecRequestParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// DNSSEC status
 	// - `enabled`: Enabled
 	// - `disabled`: Disabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type ModifyDnssecRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// DNSSEC status
 	// - `enabled`: Enabled
 	// - `disabled`: Disabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 func (r *ModifyDnssecRequest) ToJsonString() string {
@@ -8750,25 +8750,25 @@ func (r *ModifyDnssecRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDnssecResponseParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// DNSSEC status.
 	// - `enabled`: Enabled
 	// - `disabled`: Disabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// DNSSEC information
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Dnssec *DnssecInfo `json:"Dnssec,omitnil" name:"Dnssec"`
+	Dnssec *DnssecInfo `json:"Dnssec,omitnil,omitempty" name:"Dnssec"`
 
 	// Modification time
-	ModifiedOn *string `json:"ModifiedOn,omitnil" name:"ModifiedOn"`
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDnssecResponse struct {
@@ -8790,26 +8790,26 @@ func (r *ModifyDnssecResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyHostsCertificateRequestParams struct {
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Domain name that the certificate will be attached to
-	Hosts []*string `json:"Hosts,omitnil" name:"Hosts"`
+	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
 
 	// Certificate information. Note that only `CertId` is required. If it is not specified, the default certificate will be used.
-	CertInfo []*ServerCertInfo `json:"CertInfo,omitnil" name:"CertInfo"`
+	CertInfo []*ServerCertInfo `json:"CertInfo,omitnil,omitempty" name:"CertInfo"`
 }
 
 type ModifyHostsCertificateRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the site
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Domain name that the certificate will be attached to
-	Hosts []*string `json:"Hosts,omitnil" name:"Hosts"`
+	Hosts []*string `json:"Hosts,omitnil,omitempty" name:"Hosts"`
 
 	// Certificate information. Note that only `CertId` is required. If it is not specified, the default certificate will be used.
-	CertInfo []*ServerCertInfo `json:"CertInfo,omitnil" name:"CertInfo"`
+	CertInfo []*ServerCertInfo `json:"CertInfo,omitnil,omitempty" name:"CertInfo"`
 }
 
 func (r *ModifyHostsCertificateRequest) ToJsonString() string {
@@ -8836,7 +8836,7 @@ func (r *ModifyHostsCertificateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyHostsCertificateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyHostsCertificateResponse struct {
@@ -8858,42 +8858,42 @@ func (r *ModifyHostsCertificateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLoadBalancingRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 
 	// Proxy mode.
 	// `dns_only`: Only DNS
 	// `proxied`: Enable proxy
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// ID of the origin group used
-	OriginId []*string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId []*string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Indicates DNS TTL time when `Type=dns_only`
-	TTL *uint64 `json:"TTL,omitnil" name:"TTL"`
+	TTL *uint64 `json:"TTL,omitnil,omitempty" name:"TTL"`
 }
 
 type ModifyLoadBalancingRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 
 	// Proxy mode.
 	// `dns_only`: Only DNS
 	// `proxied`: Enable proxy
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// ID of the origin group used
-	OriginId []*string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId []*string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Indicates DNS TTL time when `Type=dns_only`
-	TTL *uint64 `json:"TTL,omitnil" name:"TTL"`
+	TTL *uint64 `json:"TTL,omitnil,omitempty" name:"TTL"`
 }
 
 func (r *ModifyLoadBalancingRequest) ToJsonString() string {
@@ -8922,10 +8922,10 @@ func (r *ModifyLoadBalancingRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLoadBalancingResponseParams struct {
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLoadBalancingResponse struct {
@@ -8947,30 +8947,30 @@ func (r *ModifyLoadBalancingResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLoadBalancingStatusRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 
 	// Status.
 	// `online`: Enabled
 	// `offline`: Disabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type ModifyLoadBalancingStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 
 	// Status.
 	// `online`: Enabled
 	// `offline`: Disabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 func (r *ModifyLoadBalancingStatusRequest) ToJsonString() string {
@@ -8997,10 +8997,10 @@ func (r *ModifyLoadBalancingStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLoadBalancingStatusResponseParams struct {
 	// CLB instance ID
-	LoadBalancingId *string `json:"LoadBalancingId,omitnil" name:"LoadBalancingId"`
+	LoadBalancingId *string `json:"LoadBalancingId,omitnil,omitempty" name:"LoadBalancingId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLoadBalancingStatusResponse struct {
@@ -9022,56 +9022,56 @@ func (r *ModifyLoadBalancingStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyOriginGroupRequestParams struct {
 	// ID of the origin group
-	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Name of the origin group
-	OriginName *string `json:"OriginName,omitnil" name:"OriginName"`
+	OriginName *string `json:"OriginName,omitnil,omitempty" name:"OriginName"`
 
 	// Origin-pull configuration type. This field is required when `OriginType=self`.
 	// `area`: Origin-pull by region
 	// `weight`: Origin-pull by weight
 	// When `OriginType=third_party/cos`, it can be left empty.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Origin record
-	Record []*OriginRecord `json:"Record,omitnil" name:"Record"`
+	Record []*OriginRecord `json:"Record,omitnil,omitempty" name:"Record"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Origin type
 	// `self`: Customer origin
 	// `third_party`: Third-party origin
 	// `cos`: Tencent Cloud COS origin
-	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
+	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 }
 
 type ModifyOriginGroupRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the origin group
-	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Name of the origin group
-	OriginName *string `json:"OriginName,omitnil" name:"OriginName"`
+	OriginName *string `json:"OriginName,omitnil,omitempty" name:"OriginName"`
 
 	// Origin-pull configuration type. This field is required when `OriginType=self`.
 	// `area`: Origin-pull by region
 	// `weight`: Origin-pull by weight
 	// When `OriginType=third_party/cos`, it can be left empty.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Origin record
-	Record []*OriginRecord `json:"Record,omitnil" name:"Record"`
+	Record []*OriginRecord `json:"Record,omitnil,omitempty" name:"Record"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Origin type
 	// `self`: Customer origin
 	// `third_party`: Third-party origin
 	// `cos`: Tencent Cloud COS origin
-	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
+	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 }
 
 func (r *ModifyOriginGroupRequest) ToJsonString() string {
@@ -9101,10 +9101,10 @@ func (r *ModifyOriginGroupRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyOriginGroupResponseParams struct {
 	// Origin group ID
-	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyOriginGroupResponse struct {
@@ -9126,26 +9126,26 @@ func (r *ModifyOriginGroupResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifySecurityPolicyRequestParams struct {
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name/layer-4 proxy
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
 	// Security configuration
-	Config *SecurityConfig `json:"Config,omitnil" name:"Config"`
+	Config *SecurityConfig `json:"Config,omitnil,omitempty" name:"Config"`
 }
 
 type ModifySecurityPolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Subdomain name/layer-4 proxy
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
 	// Security configuration
-	Config *SecurityConfig `json:"Config,omitnil" name:"Config"`
+	Config *SecurityConfig `json:"Config,omitnil,omitempty" name:"Config"`
 }
 
 func (r *ModifySecurityPolicyRequest) ToJsonString() string {
@@ -9172,7 +9172,7 @@ func (r *ModifySecurityPolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifySecurityPolicyResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifySecurityPolicyResponse struct {
@@ -9194,24 +9194,24 @@ func (r *ModifySecurityPolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyZoneCnameSpeedUpRequestParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// CNAME acceleration status.
 	// - `enabled`: Enabled
 	// - `disabled`: Disabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type ModifyZoneCnameSpeedUpRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// CNAME acceleration status.
 	// - `enabled`: Enabled
 	// - `disabled`: Disabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 func (r *ModifyZoneCnameSpeedUpRequest) ToJsonString() string {
@@ -9237,21 +9237,21 @@ func (r *ModifyZoneCnameSpeedUpRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyZoneCnameSpeedUpResponseParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// CNAME acceleration status.
 	// - `enabled`: Enabled
 	// - `disabled`: Disabled
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Update time
-	ModifiedOn *string `json:"ModifiedOn,omitnil" name:"ModifiedOn"`
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyZoneCnameSpeedUpResponse struct {
@@ -9273,30 +9273,30 @@ func (r *ModifyZoneCnameSpeedUpResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyZoneRequestParams struct {
 	// Site ID, which is used to identify the site.
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Specifies how the site is connected to EdgeOne.
 	// - `full`: Connect via the name server.
 	// - `partial`: Connect via the CNAME.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Custom site information
-	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitnil" name:"VanityNameServers"`
+	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitnil,omitempty" name:"VanityNameServers"`
 }
 
 type ModifyZoneRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID, which is used to identify the site.
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Specifies how the site is connected to EdgeOne.
 	// - `full`: Connect via the name server.
 	// - `partial`: Connect via the CNAME.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Custom site information
-	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitnil" name:"VanityNameServers"`
+	VanityNameServers *VanityNameServers `json:"VanityNameServers,omitnil,omitempty" name:"VanityNameServers"`
 }
 
 func (r *ModifyZoneRequest) ToJsonString() string {
@@ -9323,42 +9323,42 @@ func (r *ModifyZoneRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyZoneResponseParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Name server used by the site
-	OriginalNameServers []*string `json:"OriginalNameServers,omitnil" name:"OriginalNameServers"`
+	OriginalNameServers []*string `json:"OriginalNameServers,omitnil,omitempty" name:"OriginalNameServers"`
 
 	// Site status.
 	// - `pending`: The name server is not connected.
 	// - `active`: The name server is connected.
 	// - `moved`: The name server is moved.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Specifies how the site is connected to EdgeOne.
 	// - `full`: Connect via the name server.
 	// - `partial`: Connect via the CNAME.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// List of name servers assigned by Tencent Cloud
-	NameServers []*string `json:"NameServers,omitnil" name:"NameServers"`
+	NameServers []*string `json:"NameServers,omitnil,omitempty" name:"NameServers"`
 
 	// Creation time
-	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
+	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
 
 	// Modification time
-	ModifiedOn *string `json:"ModifiedOn,omitnil" name:"ModifiedOn"`
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 
 	// CNAME access status.
 	// - `finished`: Ownership of the site is verified.
 	// - `pending`: Verifying the ownership of the site.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CnameStatus *string `json:"CnameStatus,omitnil" name:"CnameStatus"`
+	CnameStatus *string `json:"CnameStatus,omitnil,omitempty" name:"CnameStatus"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyZoneResponse struct {
@@ -9380,104 +9380,104 @@ func (r *ModifyZoneResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyZoneSettingRequestParams struct {
 	// ID of the site to be modified
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Cache expiration time
-	Cache *CacheConfig `json:"Cache,omitnil" name:"Cache"`
+	Cache *CacheConfig `json:"Cache,omitnil,omitempty" name:"Cache"`
 
 	// Node cache key
-	CacheKey *CacheKey `json:"CacheKey,omitnil" name:"CacheKey"`
+	CacheKey *CacheKey `json:"CacheKey,omitnil,omitempty" name:"CacheKey"`
 
 	// Browser cache configuration
-	MaxAge *MaxAge `json:"MaxAge,omitnil" name:"MaxAge"`
+	MaxAge *MaxAge `json:"MaxAge,omitnil,omitempty" name:"MaxAge"`
 
 	// Offline cache
-	OfflineCache *OfflineCache `json:"OfflineCache,omitnil" name:"OfflineCache"`
+	OfflineCache *OfflineCache `json:"OfflineCache,omitnil,omitempty" name:"OfflineCache"`
 
 	// QUIC access
-	Quic *Quic `json:"Quic,omitnil" name:"Quic"`
+	Quic *Quic `json:"Quic,omitnil,omitempty" name:"Quic"`
 
 	// Maximum size of files transferred over POST request
-	PostMaxSize *PostMaxSize `json:"PostMaxSize,omitnil" name:"PostMaxSize"`
+	PostMaxSize *PostMaxSize `json:"PostMaxSize,omitnil,omitempty" name:"PostMaxSize"`
 
 	// Smart compression configuration
-	Compression *Compression `json:"Compression,omitnil" name:"Compression"`
+	Compression *Compression `json:"Compression,omitnil,omitempty" name:"Compression"`
 
 	// HTTP2 origin-pull configuration
-	UpstreamHttp2 *UpstreamHttp2 `json:"UpstreamHttp2,omitnil" name:"UpstreamHttp2"`
+	UpstreamHttp2 *UpstreamHttp2 `json:"UpstreamHttp2,omitnil,omitempty" name:"UpstreamHttp2"`
 
 	// Force HTTPS redirect configuration
-	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitnil" name:"ForceRedirect"`
+	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitnil,omitempty" name:"ForceRedirect"`
 
 	// HTTPS acceleration configuration
-	Https *Https `json:"Https,omitnil" name:"Https"`
+	Https *Https `json:"Https,omitnil,omitempty" name:"Https"`
 
 	// Origin server configuration
-	Origin *Origin `json:"Origin,omitnil" name:"Origin"`
+	Origin *Origin `json:"Origin,omitnil,omitempty" name:"Origin"`
 
 	// Smart acceleration configuration
-	SmartRouting *SmartRouting `json:"SmartRouting,omitnil" name:"SmartRouting"`
+	SmartRouting *SmartRouting `json:"SmartRouting,omitnil,omitempty" name:"SmartRouting"`
 
 	// WebSocket configuration
-	WebSocket *WebSocket `json:"WebSocket,omitnil" name:"WebSocket"`
+	WebSocket *WebSocket `json:"WebSocket,omitnil,omitempty" name:"WebSocket"`
 
 	// Origin-pull client IP header configuration
-	ClientIpHeader *ClientIp `json:"ClientIpHeader,omitnil" name:"ClientIpHeader"`
+	ClientIpHeader *ClientIp `json:"ClientIpHeader,omitnil,omitempty" name:"ClientIpHeader"`
 
 	// Cache prefresh configuration
-	CachePrefresh *CachePrefresh `json:"CachePrefresh,omitnil" name:"CachePrefresh"`
+	CachePrefresh *CachePrefresh `json:"CachePrefresh,omitnil,omitempty" name:"CachePrefresh"`
 }
 
 type ModifyZoneSettingRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the site to be modified
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Cache expiration time
-	Cache *CacheConfig `json:"Cache,omitnil" name:"Cache"`
+	Cache *CacheConfig `json:"Cache,omitnil,omitempty" name:"Cache"`
 
 	// Node cache key
-	CacheKey *CacheKey `json:"CacheKey,omitnil" name:"CacheKey"`
+	CacheKey *CacheKey `json:"CacheKey,omitnil,omitempty" name:"CacheKey"`
 
 	// Browser cache configuration
-	MaxAge *MaxAge `json:"MaxAge,omitnil" name:"MaxAge"`
+	MaxAge *MaxAge `json:"MaxAge,omitnil,omitempty" name:"MaxAge"`
 
 	// Offline cache
-	OfflineCache *OfflineCache `json:"OfflineCache,omitnil" name:"OfflineCache"`
+	OfflineCache *OfflineCache `json:"OfflineCache,omitnil,omitempty" name:"OfflineCache"`
 
 	// QUIC access
-	Quic *Quic `json:"Quic,omitnil" name:"Quic"`
+	Quic *Quic `json:"Quic,omitnil,omitempty" name:"Quic"`
 
 	// Maximum size of files transferred over POST request
-	PostMaxSize *PostMaxSize `json:"PostMaxSize,omitnil" name:"PostMaxSize"`
+	PostMaxSize *PostMaxSize `json:"PostMaxSize,omitnil,omitempty" name:"PostMaxSize"`
 
 	// Smart compression configuration
-	Compression *Compression `json:"Compression,omitnil" name:"Compression"`
+	Compression *Compression `json:"Compression,omitnil,omitempty" name:"Compression"`
 
 	// HTTP2 origin-pull configuration
-	UpstreamHttp2 *UpstreamHttp2 `json:"UpstreamHttp2,omitnil" name:"UpstreamHttp2"`
+	UpstreamHttp2 *UpstreamHttp2 `json:"UpstreamHttp2,omitnil,omitempty" name:"UpstreamHttp2"`
 
 	// Force HTTPS redirect configuration
-	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitnil" name:"ForceRedirect"`
+	ForceRedirect *ForceRedirect `json:"ForceRedirect,omitnil,omitempty" name:"ForceRedirect"`
 
 	// HTTPS acceleration configuration
-	Https *Https `json:"Https,omitnil" name:"Https"`
+	Https *Https `json:"Https,omitnil,omitempty" name:"Https"`
 
 	// Origin server configuration
-	Origin *Origin `json:"Origin,omitnil" name:"Origin"`
+	Origin *Origin `json:"Origin,omitnil,omitempty" name:"Origin"`
 
 	// Smart acceleration configuration
-	SmartRouting *SmartRouting `json:"SmartRouting,omitnil" name:"SmartRouting"`
+	SmartRouting *SmartRouting `json:"SmartRouting,omitnil,omitempty" name:"SmartRouting"`
 
 	// WebSocket configuration
-	WebSocket *WebSocket `json:"WebSocket,omitnil" name:"WebSocket"`
+	WebSocket *WebSocket `json:"WebSocket,omitnil,omitempty" name:"WebSocket"`
 
 	// Origin-pull client IP header configuration
-	ClientIpHeader *ClientIp `json:"ClientIpHeader,omitnil" name:"ClientIpHeader"`
+	ClientIpHeader *ClientIp `json:"ClientIpHeader,omitnil,omitempty" name:"ClientIpHeader"`
 
 	// Cache prefresh configuration
-	CachePrefresh *CachePrefresh `json:"CachePrefresh,omitnil" name:"CachePrefresh"`
+	CachePrefresh *CachePrefresh `json:"CachePrefresh,omitnil,omitempty" name:"CachePrefresh"`
 }
 
 func (r *ModifyZoneSettingRequest) ToJsonString() string {
@@ -9517,10 +9517,10 @@ func (r *ModifyZoneSettingRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyZoneSettingResponseParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyZoneSettingResponse struct {
@@ -9542,24 +9542,24 @@ func (r *ModifyZoneSettingResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyZoneStatusRequestParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Site status.
 	// - `false`: Enable the site.
 	// - `true`: Disable the site.
-	Paused *bool `json:"Paused,omitnil" name:"Paused"`
+	Paused *bool `json:"Paused,omitnil,omitempty" name:"Paused"`
 }
 
 type ModifyZoneStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Site status.
 	// - `false`: Enable the site.
 	// - `true`: Disable the site.
-	Paused *bool `json:"Paused,omitnil" name:"Paused"`
+	Paused *bool `json:"Paused,omitnil,omitempty" name:"Paused"`
 }
 
 func (r *ModifyZoneStatusRequest) ToJsonString() string {
@@ -9585,21 +9585,21 @@ func (r *ModifyZoneStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyZoneStatusResponseParams struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Site status.
 	// - `false`: Enable the site.
 	// - `true`: Disable the site.
-	Paused *bool `json:"Paused,omitnil" name:"Paused"`
+	Paused *bool `json:"Paused,omitnil,omitempty" name:"Paused"`
 
 	// Update time
-	ModifiedOn *string `json:"ModifiedOn,omitnil" name:"ModifiedOn"`
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyZoneStatusResponse struct {
@@ -9621,7 +9621,7 @@ func (r *ModifyZoneStatusResponse) FromJsonString(s string) error {
 type OfflineCache struct {
 	// Whether to enable offline cache. Valid values: `on` and `off`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type Origin struct {
@@ -9630,65 +9630,65 @@ type Origin struct {
 	// `follow`: Follow the protocol of the request.
 	// `https`: Switch HTTP requests to HTTPS. This only supports port 443 on the origin server.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	OriginPullProtocol *string `json:"OriginPullProtocol,omitnil" name:"OriginPullProtocol"`
+	OriginPullProtocol *string `json:"OriginPullProtocol,omitnil,omitempty" name:"OriginPullProtocol"`
 }
 
 type OriginCheckOriginStatus struct {
 	// `healthy`: Healthy; `unhealthy`: Unhealthy; `process`: Checking origin.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// List of unhealthy origin groups when `Status = unhealthy`
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Host []*string `json:"Host,omitnil" name:"Host"`
+	Host []*string `json:"Host,omitnil,omitempty" name:"Host"`
 }
 
 type OriginFilter struct {
 	// Field to be filtered. Supported field: name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Value of the field
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type OriginGroup struct {
 	// Origin group ID
-	OriginId *string `json:"OriginId,omitnil" name:"OriginId"`
+	OriginId *string `json:"OriginId,omitnil,omitempty" name:"OriginId"`
 
 	// Origin group name
-	OriginName *string `json:"OriginName,omitnil" name:"OriginName"`
+	OriginName *string `json:"OriginName,omitnil,omitempty" name:"OriginName"`
 
 	// Origin-pull configuration type
 	// `area`: Origin-pull by the client IP’s region specified by `Area` in `OriginRecord`.
 	// `weight`: Origin-pull by the weight specified by `Weight` in `OriginRecord`.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Record
-	Record []*OriginRecord `json:"Record,omitnil" name:"Record"`
+	Record []*OriginRecord `json:"Record,omitnil,omitempty" name:"Record"`
 
 	// Update time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Site name
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// Origin server type
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	OriginType *string `json:"OriginType,omitnil" name:"OriginType"`
+	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 
 	// Whether the origin group uses layer-4 proxy.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ApplicationProxyUsed *bool `json:"ApplicationProxyUsed,omitnil" name:"ApplicationProxyUsed"`
+	ApplicationProxyUsed *bool `json:"ApplicationProxyUsed,omitnil,omitempty" name:"ApplicationProxyUsed"`
 
 	// Whether the origin group is used for load balancing.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LoadBalancingUsed *bool `json:"LoadBalancingUsed,omitnil" name:"LoadBalancingUsed"`
+	LoadBalancingUsed *bool `json:"LoadBalancingUsed,omitnil,omitempty" name:"LoadBalancingUsed"`
 
 	// Origin status 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Status *OriginCheckOriginStatus `json:"Status,omitnil" name:"Status"`
+	Status *OriginCheckOriginStatus `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Proxy mode of the load balancing task associated with the origin group.
 	// `none`: This origin group is not used for load balancing.
@@ -9696,230 +9696,230 @@ type OriginGroup struct {
 	// `proxied`: Used for proxied load balancing
 	// `both`: It’s used for both DNS-only and proxied load balancing.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LoadBalancingUsedType *string `json:"LoadBalancingUsedType,omitnil" name:"LoadBalancingUsedType"`
+	LoadBalancingUsedType *string `json:"LoadBalancingUsedType,omitnil,omitempty" name:"LoadBalancingUsedType"`
 }
 
 type OriginRecord struct {
 	// Record value
-	Record *string `json:"Record,omitnil" name:"Record"`
+	Record *string `json:"Record,omitnil,omitempty" name:"Record"`
 
 	// A specific region when `Type=area`.
 	// The default region when `Type` is not specified.
-	Area []*string `json:"Area,omitnil" name:"Area"`
+	Area []*string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// A specific weight when `Type=weight`.
 	// The value range is [1-100].
 	// The total weight of multiple origins in an origin group should be 100.
-	Weight *uint64 `json:"Weight,omitnil" name:"Weight"`
+	Weight *uint64 `json:"Weight,omitnil,omitempty" name:"Weight"`
 
 	// Port
-	Port *uint64 `json:"Port,omitnil" name:"Port"`
+	Port *uint64 `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Record ID
-	RecordId *string `json:"RecordId,omitnil" name:"RecordId"`
+	RecordId *string `json:"RecordId,omitnil,omitempty" name:"RecordId"`
 
 	// Specifies whether to run private origin authentication.
 	// It is valid only when `OriginType=third_part`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Private *bool `json:"Private,omitnil" name:"Private"`
+	Private *bool `json:"Private,omitnil,omitempty" name:"Private"`
 
 	// Private origin parameter.
 	// It is valid only when `Private=true`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	PrivateParameter []*OriginRecordPrivateParameter `json:"PrivateParameter,omitnil" name:"PrivateParameter"`
+	PrivateParameter []*OriginRecordPrivateParameter `json:"PrivateParameter,omitnil,omitempty" name:"PrivateParameter"`
 
 
-	Proto *string `json:"Proto,omitnil" name:"Proto"`
+	Proto *string `json:"Proto,omitnil,omitempty" name:"Proto"`
 }
 
 type OriginRecordPrivateParameter struct {
 	// Name of the private origin authentication parameter.
 	// `AccessKeyId`: Access key ID
 	// `SecretAccessKey`: Secret access key
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Value of the private origin authentication parameter
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type PortraitManagedRuleDetail struct {
 	// Unique rule ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RuleId *int64 `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *int64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// Rule description
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Rule type name: botdb (user profile)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RuleTypeName *string `json:"RuleTypeName,omitnil" name:"RuleTypeName"`
+	RuleTypeName *string `json:"RuleTypeName,omitnil,omitempty" name:"RuleTypeName"`
 
 	// Rule feature category ID (scanner, bot behavior, etc.)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ClassificationId *int64 `json:"ClassificationId,omitnil" name:"ClassificationId"`
+	ClassificationId *int64 `json:"ClassificationId,omitnil,omitempty" name:"ClassificationId"`
 
 	// Current rule action status (block, alg, etc.)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type PostMaxSize struct {
 	// Specifies whether to enable custom setting of the maximum file size. 
 	// `off`: Disable. In this case, the max size defaults to 32 MB.
 	// `on`: Enable. You can set a custom max size.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Maximum size. Value range: 1-500 MB.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	MaxSize *int64 `json:"MaxSize,omitnil" name:"MaxSize"`
+	MaxSize *int64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 }
 
 type QueryCondition struct {
 	// Dimension
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Operator
-	Operator *string `json:"Operator,omitnil" name:"Operator"`
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
 	// Dimension value
-	Value []*string `json:"Value,omitnil" name:"Value"`
+	Value []*string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type QueryString struct {
 	// Whether to use `QueryString` as part of `CacheKey`. Valid values: `on` and `off`.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// `includeCustom`: Include the specified query strings.
 	// `excludeCustom`: Exclude the specified query strings.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// Array of query strings used/excluded
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Value []*string `json:"Value,omitnil" name:"Value"`
+	Value []*string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type Quic struct {
 	// Whether to enable QUIC
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type RateLimitConfig struct {
 	// Switch
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Rate limit rule
-	UserRules []*RateLimitUserRule `json:"UserRules,omitnil" name:"UserRules"`
+	UserRules []*RateLimitUserRule `json:"UserRules,omitnil,omitempty" name:"UserRules"`
 
 	// Default template
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Template *RateLimitTemplate `json:"Template,omitnil" name:"Template"`
+	Template *RateLimitTemplate `json:"Template,omitnil,omitempty" name:"Template"`
 
 	// Client filtering
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Intelligence *RateLimitIntelligence `json:"Intelligence,omitnil" name:"Intelligence"`
+	Intelligence *RateLimitIntelligence `json:"Intelligence,omitnil,omitempty" name:"Intelligence"`
 }
 
 type RateLimitIntelligence struct {
 	// Whether to enable this feature
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Action. Values: `monitor` (observe), `alg` (JS/Managed challenge)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
 type RateLimitTemplate struct {
 	// Template name
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Mode *string `json:"Mode,omitnil" name:"Mode"`
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 	// Template details
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Detail *RateLimitTemplateDetail `json:"Detail,omitnil" name:"Detail"`
+	Detail *RateLimitTemplateDetail `json:"Detail,omitnil,omitempty" name:"Detail"`
 }
 
 type RateLimitTemplateDetail struct {
 	// Template name
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Mode *string `json:"Mode,omitnil" name:"Mode"`
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 	// Unique ID
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ID *int64 `json:"ID,omitnil" name:"ID"`
+	ID *int64 `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Action
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// Time it takes to perform the action
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	PunishTime *int64 `json:"PunishTime,omitnil" name:"PunishTime"`
+	PunishTime *int64 `json:"PunishTime,omitnil,omitempty" name:"PunishTime"`
 
 	// Request rate threshold
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Threshold *int64 `json:"Threshold,omitnil" name:"Threshold"`
+	Threshold *int64 `json:"Threshold,omitnil,omitempty" name:"Threshold"`
 
 	// Statistical period
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Period *int64 `json:"Period,omitnil" name:"Period"`
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 }
 
 type RateLimitUserRule struct {
 	// Rate threshold
-	Threshold *int64 `json:"Threshold,omitnil" name:"Threshold"`
+	Threshold *int64 `json:"Threshold,omitnil,omitempty" name:"Threshold"`
 
 	// Data collection time
-	Period *int64 `json:"Period,omitnil" name:"Period"`
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Name of the rule
-	RuleName *string `json:"RuleName,omitnil" name:"RuleName"`
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
 
 	// Action: `monitor` (Observe), `drop` (Block)
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// Time it takes to perform the action
-	PunishTime *int64 `json:"PunishTime,omitnil" name:"PunishTime"`
+	PunishTime *int64 `json:"PunishTime,omitnil,omitempty" name:"PunishTime"`
 
 	// Time unit: second
-	PunishTimeUnit *string `json:"PunishTimeUnit,omitnil" name:"PunishTimeUnit"`
+	PunishTimeUnit *string `json:"PunishTimeUnit,omitnil,omitempty" name:"PunishTimeUnit"`
 
 	// Status of the rule
-	RuleStatus *string `json:"RuleStatus,omitnil" name:"RuleStatus"`
+	RuleStatus *string `json:"RuleStatus,omitnil,omitempty" name:"RuleStatus"`
 
 	// Rule
-	Conditions []*ACLCondition `json:"Conditions,omitnil" name:"Conditions"`
+	Conditions []*ACLCondition `json:"Conditions,omitnil,omitempty" name:"Conditions"`
 
 	// Priority of the rule
-	RulePriority *int64 `json:"RulePriority,omitnil" name:"RulePriority"`
+	RulePriority *int64 `json:"RulePriority,omitnil,omitempty" name:"RulePriority"`
 
 	// ID of the rule
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	RuleID *int64 `json:"RuleID,omitnil" name:"RuleID"`
+	RuleID *int64 `json:"RuleID,omitnil,omitempty" name:"RuleID"`
 
 	// Word filter
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	FreqFields []*string `json:"FreqFields,omitnil" name:"FreqFields"`
+	FreqFields []*string `json:"FreqFields,omitnil,omitempty" name:"FreqFields"`
 
 	// Update time
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 // Predefined struct for user
 type ReclaimZoneRequestParams struct {
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type ReclaimZoneRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *ReclaimZoneRequest) ToJsonString() string {
@@ -9944,10 +9944,10 @@ func (r *ReclaimZoneRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ReclaimZoneResponseParams struct {
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ReclaimZoneResponse struct {
@@ -9968,51 +9968,51 @@ func (r *ReclaimZoneResponse) FromJsonString(s string) error {
 
 type Resource struct {
 	// Resource ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Billing mode
 	// `0`: Pay-as-you-go
-	PayMode *int64 `json:"PayMode,omitnil" name:"PayMode"`
+	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// Creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Effective time
-	EnableTime *string `json:"EnableTime,omitnil" name:"EnableTime"`
+	EnableTime *string `json:"EnableTime,omitnil,omitempty" name:"EnableTime"`
 
 	// Expiration time
-	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// Status of the plan
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Pricing query parameter
-	Sv []*Sv `json:"Sv,omitnil" name:"Sv"`
+	Sv []*Sv `json:"Sv,omitnil,omitempty" name:"Sv"`
 
 	// Specifies whether to enable auto-renewal
 	// `0`: Default
 	// `1`: Enable auto-renewal
 	// `2`: Disable auto-renewal
-	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// ID of the plan
-	PlanId *string `json:"PlanId,omitnil" name:"PlanId"`
+	PlanId *string `json:"PlanId,omitnil,omitempty" name:"PlanId"`
 
 
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
 // Predefined struct for user
 type ScanDnsRecordsRequestParams struct {
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 type ScanDnsRecordsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Site ID
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 }
 
 func (r *ScanDnsRecordsRequest) ToJsonString() string {
@@ -10039,13 +10039,13 @@ type ScanDnsRecordsResponseParams struct {
 	// Scan status
 	// - `doing`: Scanning
 	// - `done`: Scanned
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Number of DNS records added after scanning
-	RecordsAdded *int64 `json:"RecordsAdded,omitnil" name:"RecordsAdded"`
+	RecordsAdded *int64 `json:"RecordsAdded,omitnil,omitempty" name:"RecordsAdded"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ScanDnsRecordsResponse struct {
@@ -10067,511 +10067,511 @@ func (r *ScanDnsRecordsResponse) FromJsonString(s string) error {
 type SecEntry struct {
 	// Entry key
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Entry value
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Value []*SecEntryValue `json:"Value,omitnil" name:"Value"`
+	Value []*SecEntryValue `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type SecEntryValue struct {
 	// Metric name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Metric *string `json:"Metric,omitnil" name:"Metric"`
+	Metric *string `json:"Metric,omitnil,omitempty" name:"Metric"`
 
 	// Metric data details
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Detail []*TimingDataItem `json:"Detail,omitnil" name:"Detail"`
+	Detail []*TimingDataItem `json:"Detail,omitnil,omitempty" name:"Detail"`
 
 	// Maximum
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Max *int64 `json:"Max,omitnil" name:"Max"`
+	Max *int64 `json:"Max,omitnil,omitempty" name:"Max"`
 
 	// Average
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Avg *float64 `json:"Avg,omitnil" name:"Avg"`
+	Avg *float64 `json:"Avg,omitnil,omitempty" name:"Avg"`
 
 	// Sum
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Sum *float64 `json:"Sum,omitnil" name:"Sum"`
+	Sum *float64 `json:"Sum,omitnil,omitempty" name:"Sum"`
 }
 
 type SecurityConfig struct {
 	// WAF configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	WafConfig *WafConfig `json:"WafConfig,omitnil" name:"WafConfig"`
+	WafConfig *WafConfig `json:"WafConfig,omitnil,omitempty" name:"WafConfig"`
 
 	// Rate limit configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	RateLimitConfig *RateLimitConfig `json:"RateLimitConfig,omitnil" name:"RateLimitConfig"`
+	RateLimitConfig *RateLimitConfig `json:"RateLimitConfig,omitnil,omitempty" name:"RateLimitConfig"`
 
 	// DDoS mitigation configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	DdosConfig *DDoSConfig `json:"DdosConfig,omitnil" name:"DdosConfig"`
+	DdosConfig *DDoSConfig `json:"DdosConfig,omitnil,omitempty" name:"DdosConfig"`
 
 	// ACL configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	AclConfig *AclConfig `json:"AclConfig,omitnil" name:"AclConfig"`
+	AclConfig *AclConfig `json:"AclConfig,omitnil,omitempty" name:"AclConfig"`
 
 	// Bot configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	BotConfig *BotConfig `json:"BotConfig,omitnil" name:"BotConfig"`
+	BotConfig *BotConfig `json:"BotConfig,omitnil,omitempty" name:"BotConfig"`
 
 	// Switch that controls all web security configuration
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	SwitchConfig *SwitchConfig `json:"SwitchConfig,omitnil" name:"SwitchConfig"`
+	SwitchConfig *SwitchConfig `json:"SwitchConfig,omitnil,omitempty" name:"SwitchConfig"`
 
 	// IP blocklist/allowlist
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IpTableConfig *IpTableConfig `json:"IpTableConfig,omitnil" name:"IpTableConfig"`
+	IpTableConfig *IpTableConfig `json:"IpTableConfig,omitnil,omitempty" name:"IpTableConfig"`
 }
 
 type SecurityEntity struct {
 	// User APPID
-	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// Top-level domain name
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Second-level domain name
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
 	// Type of protected resource. Values: `domain` and `application`.
-	EntityType *string `json:"EntityType,omitnil" name:"EntityType"`
+	EntityType *string `json:"EntityType,omitnil,omitempty" name:"EntityType"`
 }
 
 type ServerCertInfo struct {
 	// Server certificate ID, which is the ID of the default certificate. If you choose to upload an external certificate for SSL certificate management, a certificate ID will be generated.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CertId *string `json:"CertId,omitnil" name:"CertId"`
+	CertId *string `json:"CertId,omitnil,omitempty" name:"CertId"`
 
 	// Alias of the certificate
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Alias *string `json:"Alias,omitnil" name:"Alias"`
+	Alias *string `json:"Alias,omitnil,omitempty" name:"Alias"`
 
 	// Certificate type.
 	// `default`: Default certificate
 	// `upload`: External certificate
 	// `managed`: Tencent Cloud managed certificate
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Time when the certificate expires
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// Certificate deployment time
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	DeployTime *string `json:"DeployTime,omitnil" name:"DeployTime"`
+	DeployTime *string `json:"DeployTime,omitnil,omitempty" name:"DeployTime"`
 
 	// Certificate deployment status.
 	// `processing`: Deploying
 	// `deployed`: Deployed
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type ShieldArea struct {
 	// ID of the site (top-level domain name)
-	ZoneId *string `json:"ZoneId,omitnil" name:"ZoneId"`
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Policy ID
-	PolicyId *int64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *int64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 
 	// Type of protected resource. Values: `domain` and `application`.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Layer-4 proxy name
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	EntityName *string `json:"EntityName,omitnil" name:"EntityName"`
+	EntityName *string `json:"EntityName,omitnil,omitempty" name:"EntityName"`
 
 	// Layer-7 domain name parameters
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Application []*DDoSApplication `json:"Application,omitnil" name:"Application"`
+	Application []*DDoSApplication `json:"Application,omitnil,omitempty" name:"Application"`
 
 	// Number of layer-4 TCP forwarding rules
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	TcpNum *int64 `json:"TcpNum,omitnil" name:"TcpNum"`
+	TcpNum *int64 `json:"TcpNum,omitnil,omitempty" name:"TcpNum"`
 
 	// Number of layer-4 UDP forwarding rules
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	UdpNum *int64 `json:"UdpNum,omitnil" name:"UdpNum"`
+	UdpNum *int64 `json:"UdpNum,omitnil,omitempty" name:"UdpNum"`
 
 	// Name of the protected resource
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Entity *string `json:"Entity,omitnil" name:"Entity"`
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
 	// Whether the shared resource is used. Values: `true` (yes) and `false` (no). The proxy mode cannot be switched when the shared resource is used.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Share *bool `json:"Share,omitnil" name:"Share"`
+	Share *bool `json:"Share,omitnil,omitempty" name:"Share"`
 }
 
 type SmartRouting struct {
 	// Whether to enable smart acceleration
 	// `on`: Enable
 	// `off`: Disable
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type Sv struct {
 	// Parameter key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Parameter value
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type SwitchConfig struct {
 	// Switch that controls all web security configuration: basic web protection, custom rules, and rate limiting
-	WebSwitch *string `json:"WebSwitch,omitnil" name:"WebSwitch"`
+	WebSwitch *string `json:"WebSwitch,omitnil,omitempty" name:"WebSwitch"`
 }
 
 type Tag struct {
 	// Tag key
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TagKey *string `json:"TagKey,omitnil" name:"TagKey"`
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
 
 	// Tag value
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TagValue *string `json:"TagValue,omitnil" name:"TagValue"`
+	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
 }
 
 type Task struct {
 	// Task ID
-	JobId *string `json:"JobId,omitnil" name:"JobId"`
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
 
 	// Status of the task
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Resource
-	Target *string `json:"Target,omitnil" name:"Target"`
+	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 
 	// Task type
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Task creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Task completion time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type TimingDataItem struct {
 	// Second-level timestamp
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Timestamp *int64 `json:"Timestamp,omitnil" name:"Timestamp"`
+	Timestamp *int64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
 
 	// Value
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Value *int64 `json:"Value,omitnil" name:"Value"`
+	Value *int64 `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type TimingDataRecord struct {
 	// Query dimension value
-	TypeKey *string `json:"TypeKey,omitnil" name:"TypeKey"`
+	TypeKey *string `json:"TypeKey,omitnil,omitempty" name:"TypeKey"`
 
 	// Detailed time series data
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TypeValue []*TimingTypeValue `json:"TypeValue,omitnil" name:"TypeValue"`
+	TypeValue []*TimingTypeValue `json:"TypeValue,omitnil,omitempty" name:"TypeValue"`
 }
 
 type TimingTypeValue struct {
 	// Sum
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Sum *int64 `json:"Sum,omitnil" name:"Sum"`
+	Sum *int64 `json:"Sum,omitnil,omitempty" name:"Sum"`
 
 	// Maximum
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Max *int64 `json:"Max,omitnil" name:"Max"`
+	Max *int64 `json:"Max,omitnil,omitempty" name:"Max"`
 
 	// Average
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Avg *int64 `json:"Avg,omitnil" name:"Avg"`
+	Avg *int64 `json:"Avg,omitnil,omitempty" name:"Avg"`
 
 	// Metric name
-	MetricName *string `json:"MetricName,omitnil" name:"MetricName"`
+	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// This field will be disused soon. Use the `Detail` field instead.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DetailData []*int64 `json:"DetailData,omitnil" name:"DetailData"`
+	DetailData []*int64 `json:"DetailData,omitnil,omitempty" name:"DetailData"`
 
 	// Detailed data
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Detail []*TimingDataItem `json:"Detail,omitnil" name:"Detail"`
+	Detail []*TimingDataItem `json:"Detail,omitnil,omitempty" name:"Detail"`
 }
 
 type TopDataRecord struct {
 	// Query dimension value
-	TypeKey *string `json:"TypeKey,omitnil" name:"TypeKey"`
+	TypeKey *string `json:"TypeKey,omitnil,omitempty" name:"TypeKey"`
 
 	// Top data rankings
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DetailData []*TopDetailData `json:"DetailData,omitnil" name:"DetailData"`
+	DetailData []*TopDetailData `json:"DetailData,omitnil,omitempty" name:"DetailData"`
 }
 
 type TopDetailData struct {
 	// Field name
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Field value
-	Value *int64 `json:"Value,omitnil" name:"Value"`
+	Value *int64 `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type TopNEntry struct {
 	// Entry key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Top N data
-	Value []*TopNEntryValue `json:"Value,omitnil" name:"Value"`
+	Value []*TopNEntryValue `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type TopNEntryValue struct {
 	// Entry name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Quantity
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 }
 
 type UpstreamHttp2 struct {
 	// Whether to enable HTTP2 origin-pull
 	// `on`: Enable
 	// `off`: Disable
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type VanityNameServers struct {
 	// Whether to enable the custom name server
 	// `on`: Enable
 	// `off`: Disable
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// List of custom name servers
-	Servers []*string `json:"Servers,omitnil" name:"Servers"`
+	Servers []*string `json:"Servers,omitnil,omitempty" name:"Servers"`
 }
 
 type VanityNameServersIps struct {
 	// Name of the custom name server
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// IPv4 address of the custom name server
-	IPv4 *string `json:"IPv4,omitnil" name:"IPv4"`
+	IPv4 *string `json:"IPv4,omitnil,omitempty" name:"IPv4"`
 }
 
 type WafConfig struct {
 	// Switch
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Protection level: `loose`, `normal`, `strict`, `stricter`, `custom`
-	Level *string `json:"Level,omitnil" name:"Level"`
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
 
 	// Mode: `block`, `observe`, `close`
-	Mode *string `json:"Mode,omitnil" name:"Mode"`
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
 	// WAF rule allowlist/blocklist
-	WafRules *WafRule `json:"WafRules,omitnil" name:"WafRules"`
+	WafRules *WafRule `json:"WafRules,omitnil,omitempty" name:"WafRules"`
 
 	// AI rule engine
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	AiRule *AiRule `json:"AiRule,omitnil" name:"AiRule"`
+	AiRule *AiRule `json:"AiRule,omitnil,omitempty" name:"AiRule"`
 }
 
 type WafRule struct {
 	// Blocklist
-	BlockRuleIDs []*int64 `json:"BlockRuleIDs,omitnil" name:"BlockRuleIDs"`
+	BlockRuleIDs []*int64 `json:"BlockRuleIDs,omitnil,omitempty" name:"BlockRuleIDs"`
 
 	// Whether the WAF rule is enabled or disabled
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Observe mode
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	ObserveRuleIDs []*int64 `json:"ObserveRuleIDs,omitnil" name:"ObserveRuleIDs"`
+	ObserveRuleIDs []*int64 `json:"ObserveRuleIDs,omitnil,omitempty" name:"ObserveRuleIDs"`
 }
 
 type WebAttackEvent struct {
 	// Client IP
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ClientIp *string `json:"ClientIp,omitnil" name:"ClientIp"`
+	ClientIp *string `json:"ClientIp,omitnil,omitempty" name:"ClientIp"`
 
 	// Attack URL
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackUrl *string `json:"AttackUrl,omitnil" name:"AttackUrl"`
+	AttackUrl *string `json:"AttackUrl,omitnil,omitempty" name:"AttackUrl"`
 
 	// Attack time in seconds
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackTime *int64 `json:"AttackTime,omitnil" name:"AttackTime"`
+	AttackTime *int64 `json:"AttackTime,omitnil,omitempty" name:"AttackTime"`
 }
 
 type WebEventData struct {
 	// Data set of attack events
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	List []*WebAttackEvent `json:"List,omitnil" name:"List"`
+	List []*WebAttackEvent `json:"List,omitnil,omitempty" name:"List"`
 
 	// Current page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Number of items per page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Total number of pages
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Pages *int64 `json:"Pages,omitnil" name:"Pages"`
+	Pages *int64 `json:"Pages,omitnil,omitempty" name:"Pages"`
 
 	// Total number of items
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalSize *int64 `json:"TotalSize,omitnil" name:"TotalSize"`
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
 }
 
 type WebLogData struct {
 	// Data
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	List []*WebLogs `json:"List,omitnil" name:"List"`
+	List []*WebLogs `json:"List,omitnil,omitempty" name:"List"`
 
 	// Current page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageNo *int64 `json:"PageNo,omitnil" name:"PageNo"`
+	PageNo *int64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
 
 	// Number of items per page
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Total number of pages
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Pages *int64 `json:"Pages,omitnil" name:"Pages"`
+	Pages *int64 `json:"Pages,omitnil,omitempty" name:"Pages"`
 
 	// Total number of items
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalSize *int64 `json:"TotalSize,omitnil" name:"TotalSize"`
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
 }
 
 type WebLogs struct {
 	// Attack content
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackContent *string `json:"AttackContent,omitnil" name:"AttackContent"`
+	AttackContent *string `json:"AttackContent,omitnil,omitempty" name:"AttackContent"`
 
 	// Attack IP
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackIp *string `json:"AttackIp,omitnil" name:"AttackIp"`
+	AttackIp *string `json:"AttackIp,omitnil,omitempty" name:"AttackIp"`
 
 	// Attack type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackType *string `json:"AttackType,omitnil" name:"AttackType"`
+	AttackType *string `json:"AttackType,omitnil,omitempty" name:"AttackType"`
 
 	// Domain name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Domain *string `json:"Domain,omitnil" name:"Domain"`
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// uuid
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Msuuid *string `json:"Msuuid,omitnil" name:"Msuuid"`
+	Msuuid *string `json:"Msuuid,omitnil,omitempty" name:"Msuuid"`
 
 	// Request method
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RequestMethod *string `json:"RequestMethod,omitnil" name:"RequestMethod"`
+	RequestMethod *string `json:"RequestMethod,omitnil,omitempty" name:"RequestMethod"`
 
 	// Request URI
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RequestUri *string `json:"RequestUri,omitnil" name:"RequestUri"`
+	RequestUri *string `json:"RequestUri,omitnil,omitempty" name:"RequestUri"`
 
 	// Risk grade
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RiskLevel *string `json:"RiskLevel,omitnil" name:"RiskLevel"`
+	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
 
 	// Rule ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RuleId *uint64 `json:"RuleId,omitnil" name:"RuleId"`
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
 	// IP country/region
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SipCountryCode *string `json:"SipCountryCode,omitnil" name:"SipCountryCode"`
+	SipCountryCode *string `json:"SipCountryCode,omitnil,omitempty" name:"SipCountryCode"`
 
 	// Event ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EventId *string `json:"EventId,omitnil" name:"EventId"`
+	EventId *string `json:"EventId,omitnil,omitempty" name:"EventId"`
 
 	// Processing method
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DisposalMethod *string `json:"DisposalMethod,omitnil" name:"DisposalMethod"`
+	DisposalMethod *string `json:"DisposalMethod,omitnil,omitempty" name:"DisposalMethod"`
 
 	// http_log
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	HttpLog *string `json:"HttpLog,omitnil" name:"HttpLog"`
+	HttpLog *string `json:"HttpLog,omitnil,omitempty" name:"HttpLog"`
 
 	// user agent
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Ua *string `json:"Ua,omitnil" name:"Ua"`
+	Ua *string `json:"Ua,omitnil,omitempty" name:"Ua"`
 
 	// Attack time. For consistency considerations, the original parameter `time` was renamed `AttackTime`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AttackTime *uint64 `json:"AttackTime,omitnil" name:"AttackTime"`
+	AttackTime *uint64 `json:"AttackTime,omitnil,omitempty" name:"AttackTime"`
 }
 
 type WebSocket struct {
 	// Whether to enable custom WebSocket timeout setting. When it’s `off`: it means to keep the default WebSocket connection timeout period, which is 15 seconds. To change the timeout period, please set it to `on`.
-	Switch *string `json:"Switch,omitnil" name:"Switch"`
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
 	// Sets timeout period in seconds. Maximum value: 120
-	Timeout *int64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 }
 
 type Zone struct {
 	// Site ID
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// Site name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// List of name servers used by the site
-	OriginalNameServers []*string `json:"OriginalNameServers,omitnil" name:"OriginalNameServers"`
+	OriginalNameServers []*string `json:"OriginalNameServers,omitnil,omitempty" name:"OriginalNameServers"`
 
 	// List of name servers assigned by Tencent Cloud
-	NameServers []*string `json:"NameServers,omitnil" name:"NameServers"`
+	NameServers []*string `json:"NameServers,omitnil,omitempty" name:"NameServers"`
 
 	// Site status
 	// - `active`: The name server is switched.
 	// - `pending`: The name server is not switched.
 	// - `moved`: The name server is moved.
 	// - `deactivated`: The name server is blocked.
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// How the site is connected to EdgeOne.
 	// - `full`: The site is connected via name server.
 	// - `partial`: The site is connected via CNAME.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Indicates whether the site is disabled
-	Paused *bool `json:"Paused,omitnil" name:"Paused"`
+	Paused *bool `json:"Paused,omitnil,omitempty" name:"Paused"`
 
 	// Specifies whether to enable CNAME acceleration
 	// - `enabled`: Enable
 	// - `disabled`: Disable
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CnameSpeedUp *string `json:"CnameSpeedUp,omitnil" name:"CnameSpeedUp"`
+	CnameSpeedUp *string `json:"CnameSpeedUp,omitnil,omitempty" name:"CnameSpeedUp"`
 
 	// Ownership verification status of the site when it is connected to EdgeOne via CNAME.
 	// - `finished`: The site is verified.
 	// - `pending`: Verifying the ownership of the site.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	CnameStatus *string `json:"CnameStatus,omitnil" name:"CnameStatus"`
+	CnameStatus *string `json:"CnameStatus,omitnil,omitempty" name:"CnameStatus"`
 
 	// Resource tag
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Billable resource
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	Resources []*Resource `json:"Resources,omitnil" name:"Resources"`
+	Resources []*Resource `json:"Resources,omitnil,omitempty" name:"Resources"`
 
 	// Site creation date
-	CreatedOn *string `json:"CreatedOn,omitnil" name:"CreatedOn"`
+	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
 
 	// Site modification date
-	ModifiedOn *string `json:"ModifiedOn,omitnil" name:"ModifiedOn"`
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 
 
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
 type ZoneFilter struct {
@@ -10580,11 +10580,11 @@ type ZoneFilter struct {
 	// - `status`: Site status.
 	// - `tagKey`: Tag key.
 	// - `tagValue`: Tag value.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Filters by the field value
-	Values []*string `json:"Values,omitnil" name:"Values"`
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 
 	// Specifies whether to enable fuzzy query. It’s only available when filter name is `name`. If it’s enabled, the length of `Values` must be 1.
-	Fuzzy *bool `json:"Fuzzy,omitnil" name:"Fuzzy"`
+	Fuzzy *bool `json:"Fuzzy,omitnil,omitempty" name:"Fuzzy"`
 }

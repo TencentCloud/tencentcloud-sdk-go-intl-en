@@ -23,20 +23,20 @@ import (
 // Predefined struct for user
 type ApplyInstanceSnapshotRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Snapshot ID.
-	SnapshotId *string `json:"SnapshotId,omitnil" name:"SnapshotId"`
+	SnapshotId *string `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
 }
 
 type ApplyInstanceSnapshotRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Snapshot ID.
-	SnapshotId *string `json:"SnapshotId,omitnil" name:"SnapshotId"`
+	SnapshotId *string `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
 }
 
 func (r *ApplyInstanceSnapshotRequest) ToJsonString() string {
@@ -62,7 +62,7 @@ func (r *ApplyInstanceSnapshotRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplyInstanceSnapshotResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ApplyInstanceSnapshotResponse struct {
@@ -84,20 +84,20 @@ func (r *ApplyInstanceSnapshotResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type AssociateInstancesKeyPairsRequestParams struct {
 	// Key pair ID list. Each request can contain up to 100 key pairs.
-	KeyIds []*string `json:"KeyIds,omitnil" name:"KeyIds"`
+	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
 
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type AssociateInstancesKeyPairsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Key pair ID list. Each request can contain up to 100 key pairs.
-	KeyIds []*string `json:"KeyIds,omitnil" name:"KeyIds"`
+	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
 
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *AssociateInstancesKeyPairsRequest) ToJsonString() string {
@@ -123,7 +123,7 @@ func (r *AssociateInstancesKeyPairsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AssociateInstancesKeyPairsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type AssociateInstancesKeyPairsResponse struct {
@@ -145,14 +145,14 @@ func (r *AssociateInstancesKeyPairsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type AttachCcnRequestParams struct {
 	// CCN instance ID.
-	CcnId *string `json:"CcnId,omitnil" name:"CcnId"`
+	CcnId *string `json:"CcnId,omitnil,omitempty" name:"CcnId"`
 }
 
 type AttachCcnRequest struct {
 	*tchttp.BaseRequest
 	
 	// CCN instance ID.
-	CcnId *string `json:"CcnId,omitnil" name:"CcnId"`
+	CcnId *string `json:"CcnId,omitnil,omitempty" name:"CcnId"`
 }
 
 func (r *AttachCcnRequest) ToJsonString() string {
@@ -177,7 +177,7 @@ func (r *AttachCcnRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AttachCcnResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type AttachCcnResponse struct {
@@ -198,46 +198,46 @@ func (r *AttachCcnResponse) FromJsonString(s string) error {
 
 type AttachDetail struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Number of elastic cloud disks attached to the instance
-	AttachedDiskCount *int64 `json:"AttachedDiskCount,omitnil" name:"AttachedDiskCount"`
+	AttachedDiskCount *int64 `json:"AttachedDiskCount,omitnil,omitempty" name:"AttachedDiskCount"`
 
 	// Upper limit of attached elastic cloud disks
-	MaxAttachCount *int64 `json:"MaxAttachCount,omitnil" name:"MaxAttachCount"`
+	MaxAttachCount *int64 `json:"MaxAttachCount,omitnil,omitempty" name:"MaxAttachCount"`
 }
 
 // Predefined struct for user
 type AttachDisksRequestParams struct {
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Specify whether to renew an instance automatically when it expires. Values: 
 	// 
 	// `NOTIFY_AND_AUTO_RENEW`: Trigger expiration notification and renew automatically; `NOTIFY_AND_MANUAL_RENEW`: Trigger expiration notification but do not renew; `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Do not trigger the notification and do not renew.
 	// 
 	// Default: `NOTIFY_AND_MANUAL_RENEW`. If `NOTIFY_AND_AUTO_RENEW` is specified, the instance is automatically renewed on a monthly basis when the account balance is sufficient.
-	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 }
 
 type AttachDisksRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Specify whether to renew an instance automatically when it expires. Values: 
 	// 
 	// `NOTIFY_AND_AUTO_RENEW`: Trigger expiration notification and renew automatically; `NOTIFY_AND_MANUAL_RENEW`: Trigger expiration notification but do not renew; `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Do not trigger the notification and do not renew.
 	// 
 	// Default: `NOTIFY_AND_MANUAL_RENEW`. If `NOTIFY_AND_AUTO_RENEW` is specified, the instance is automatically renewed on a monthly basis when the account balance is sufficient.
-	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 }
 
 func (r *AttachDisksRequest) ToJsonString() string {
@@ -264,7 +264,7 @@ func (r *AttachDisksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AttachDisksResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type AttachDisksResponse struct {
@@ -285,146 +285,146 @@ func (r *AttachDisksResponse) FromJsonString(s string) error {
 
 type AutoMountConfiguration struct {
 	// ID of the instance to be mounted to. The instance must be **Running**.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The mount point within the instance. Only Linux instances are supported. If it's not specified, the default mount point is "/data/disk".
-	MountPoint *string `json:"MountPoint,omitnil" name:"MountPoint"`
+	MountPoint *string `json:"MountPoint,omitnil,omitempty" name:"MountPoint"`
 
 	// The file system type. Values: `ext4` (default) and `xfs`. Only Linux instances are supported. 
-	FileSystemType *string `json:"FileSystemType,omitnil" name:"FileSystemType"`
+	FileSystemType *string `json:"FileSystemType,omitnil,omitempty" name:"FileSystemType"`
 }
 
 type Blueprint struct {
 	// Image ID, which is the unique identifier of `Blueprint`.
-	BlueprintId *string `json:"BlueprintId,omitnil" name:"BlueprintId"`
+	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
 	// Image title to be displayed.
-	DisplayTitle *string `json:"DisplayTitle,omitnil" name:"DisplayTitle"`
+	DisplayTitle *string `json:"DisplayTitle,omitnil,omitempty" name:"DisplayTitle"`
 
 	// Image version to be displayed.
-	DisplayVersion *string `json:"DisplayVersion,omitnil" name:"DisplayVersion"`
+	DisplayVersion *string `json:"DisplayVersion,omitnil,omitempty" name:"DisplayVersion"`
 
 	// Image description information.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// OS name.
-	OsName *string `json:"OsName,omitnil" name:"OsName"`
+	OsName *string `json:"OsName,omitnil,omitempty" name:"OsName"`
 
 	// OS type.
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// OS type, such as LINUX_UNIX and WINDOWS.
-	PlatformType *string `json:"PlatformType,omitnil" name:"PlatformType"`
+	PlatformType *string `json:"PlatformType,omitnil,omitempty" name:"PlatformType"`
 
 	// Image type, such as APP_OS, PURE_OS, and PRIVATE.
-	BlueprintType *string `json:"BlueprintType,omitnil" name:"BlueprintType"`
+	BlueprintType *string `json:"BlueprintType,omitnil,omitempty" name:"BlueprintType"`
 
 	// Image picture URL.
-	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
 	// System disk size required by image in GB.
-	RequiredSystemDiskSize *int64 `json:"RequiredSystemDiskSize,omitnil" name:"RequiredSystemDiskSize"`
+	RequiredSystemDiskSize *int64 `json:"RequiredSystemDiskSize,omitnil,omitempty" name:"RequiredSystemDiskSize"`
 
 	// Image status.
-	BlueprintState *string `json:"BlueprintState,omitnil" name:"BlueprintState"`
+	BlueprintState *string `json:"BlueprintState,omitnil,omitempty" name:"BlueprintState"`
 
 	// Creation time according to ISO 8601 standard. UTC time is used. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreatedTime *string `json:"CreatedTime,omitnil" name:"CreatedTime"`
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
 	// Image name.
-	BlueprintName *string `json:"BlueprintName,omitnil" name:"BlueprintName"`
+	BlueprintName *string `json:"BlueprintName,omitnil,omitempty" name:"BlueprintName"`
 
 	// Whether the image supports automation tools.
-	SupportAutomationTools *bool `json:"SupportAutomationTools,omitnil" name:"SupportAutomationTools"`
+	SupportAutomationTools *bool `json:"SupportAutomationTools,omitnil,omitempty" name:"SupportAutomationTools"`
 
 	// Memory size required by image in GB.
-	RequiredMemorySize *int64 `json:"RequiredMemorySize,omitnil" name:"RequiredMemorySize"`
+	RequiredMemorySize *int64 `json:"RequiredMemorySize,omitnil,omitempty" name:"RequiredMemorySize"`
 
 	// ID of the Lighthouse image shared from a CVM image
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ImageId *string `json:"ImageId,omitnil" name:"ImageId"`
+	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
 	// URL of official website of the open-source project
-	CommunityUrl *string `json:"CommunityUrl,omitnil" name:"CommunityUrl"`
+	CommunityUrl *string `json:"CommunityUrl,omitnil,omitempty" name:"CommunityUrl"`
 
 	// Guide documentation URL
-	GuideUrl *string `json:"GuideUrl,omitnil" name:"GuideUrl"`
+	GuideUrl *string `json:"GuideUrl,omitnil,omitempty" name:"GuideUrl"`
 
 	// Array of IDs of scenes associated with an image
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	SceneIdSet []*string `json:"SceneIdSet,omitnil" name:"SceneIdSet"`
+	SceneIdSet []*string `json:"SceneIdSet,omitnil,omitempty" name:"SceneIdSet"`
 
 	// Docker version.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	DockerVersion *string `json:"DockerVersion,omitnil" name:"DockerVersion"`
+	DockerVersion *string `json:"DockerVersion,omitnil,omitempty" name:"DockerVersion"`
 }
 
 type BlueprintInstance struct {
 	// Image information.
-	Blueprint *Blueprint `json:"Blueprint,omitnil" name:"Blueprint"`
+	Blueprint *Blueprint `json:"Blueprint,omitnil,omitempty" name:"Blueprint"`
 
 	// Software list.
-	SoftwareSet []*Software `json:"SoftwareSet,omitnil" name:"SoftwareSet"`
+	SoftwareSet []*Software `json:"SoftwareSet,omitnil,omitempty" name:"SoftwareSet"`
 
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type BlueprintPrice struct {
 	// Original image unit price in USD.
-	OriginalBlueprintPrice *float64 `json:"OriginalBlueprintPrice,omitnil" name:"OriginalBlueprintPrice"`
+	OriginalBlueprintPrice *float64 `json:"OriginalBlueprintPrice,omitnil,omitempty" name:"OriginalBlueprintPrice"`
 
 	// Original image total price in USD.
-	OriginalPrice *float64 `json:"OriginalPrice,omitnil" name:"OriginalPrice"`
+	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
 	// Discount.
-	Discount *int64 `json:"Discount,omitnil" name:"Discount"`
+	Discount *int64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
 	// Discounted image total price in USD.
-	DiscountPrice *float64 `json:"DiscountPrice,omitnil" name:"DiscountPrice"`
+	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 }
 
 type Bundle struct {
 	// Package ID.
-	BundleId *string `json:"BundleId,omitnil" name:"BundleId"`
+	BundleId *string `json:"BundleId,omitnil,omitempty" name:"BundleId"`
 
 	// Memory size in GB.
-	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// System disk type.
 	// Values: 
 	// <li>`CLOUD_SSD`: SSD cloud disks</li><li>`CLOUD_PREMIUM`: Premium cloud disks</li>
-	SystemDiskType *string `json:"SystemDiskType,omitnil" name:"SystemDiskType"`
+	SystemDiskType *string `json:"SystemDiskType,omitnil,omitempty" name:"SystemDiskType"`
 
 	// System disk size in GB.
-	SystemDiskSize *int64 `json:"SystemDiskSize,omitnil" name:"SystemDiskSize"`
+	SystemDiskSize *int64 `json:"SystemDiskSize,omitnil,omitempty" name:"SystemDiskSize"`
 
 	// Monthly network traffic in GB.
-	MonthlyTraffic *int64 `json:"MonthlyTraffic,omitnil" name:"MonthlyTraffic"`
+	MonthlyTraffic *int64 `json:"MonthlyTraffic,omitnil,omitempty" name:"MonthlyTraffic"`
 
 	// Whether Linux/Unix is supported.
-	SupportLinuxUnixPlatform *bool `json:"SupportLinuxUnixPlatform,omitnil" name:"SupportLinuxUnixPlatform"`
+	SupportLinuxUnixPlatform *bool `json:"SupportLinuxUnixPlatform,omitnil,omitempty" name:"SupportLinuxUnixPlatform"`
 
 	// Whether Windows is supported.
-	SupportWindowsPlatform *bool `json:"SupportWindowsPlatform,omitnil" name:"SupportWindowsPlatform"`
+	SupportWindowsPlatform *bool `json:"SupportWindowsPlatform,omitnil,omitempty" name:"SupportWindowsPlatform"`
 
 	// Current package unit price information.
-	Price *Price `json:"Price,omitnil" name:"Price"`
+	Price *Price `json:"Price,omitnil,omitempty" name:"Price"`
 
 	// Number of CPU cores.
-	CPU *int64 `json:"CPU,omitnil" name:"CPU"`
+	CPU *int64 `json:"CPU,omitnil,omitempty" name:"CPU"`
 
 	// Peak bandwidth in Mbps.
-	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil" name:"InternetMaxBandwidthOut"`
+	InternetMaxBandwidthOut *uint64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
 
 	// Network billing mode.
-	InternetChargeType *string `json:"InternetChargeType,omitnil" name:"InternetChargeType"`
+	InternetChargeType *string `json:"InternetChargeType,omitnil,omitempty" name:"InternetChargeType"`
 
 	// Package sale status. Valid values: AVAILABLE, SOLD_OUT
-	BundleSalesState *string `json:"BundleSalesState,omitnil" name:"BundleSalesState"`
+	BundleSalesState *string `json:"BundleSalesState,omitnil,omitempty" name:"BundleSalesState"`
 
 	// Bundle type. 
 	// Valid values: 
@@ -436,26 +436,26 @@ type Bundle struct {
 	// <li>HK_EXCLUSIVE_BUNDLE: Hong Kong-dedicated bundle </li>
 	// <li>CAREFREE_BUNDLE: Lighthouse Care bundle</li>
 	// <li>BEFAST_BUNDLE: BeFast bundle </li>
-	BundleType *string `json:"BundleType,omitnil" name:"BundleType"`
+	BundleType *string `json:"BundleType,omitnil,omitempty" name:"BundleType"`
 
 	// Bundle type description 
 	// Note: This parameter may return null, indicating that no valid values can be obtained.
-	BundleTypeDescription *string `json:"BundleTypeDescription,omitnil" name:"BundleTypeDescription"`
+	BundleTypeDescription *string `json:"BundleTypeDescription,omitnil,omitempty" name:"BundleTypeDescription"`
 
 	// Package tag.
 	// Valid values:
 	// "ACTIVITY": promotional package
 	// "NORMAL": regular package
 	// "CAREFREE": carefree package
-	BundleDisplayLabel *string `json:"BundleDisplayLabel,omitnil" name:"BundleDisplayLabel"`
+	BundleDisplayLabel *string `json:"BundleDisplayLabel,omitnil,omitempty" name:"BundleDisplayLabel"`
 }
 
 type CcnAttachedInstance struct {
 	// CCN instance ID.
-	CcnId *string `json:"CcnId,omitnil" name:"CcnId"`
+	CcnId *string `json:"CcnId,omitnil,omitempty" name:"CcnId"`
 
 	// CIDR block of associated instance.
-	CidrBlock []*string `json:"CidrBlock,omitnil" name:"CidrBlock"`
+	CidrBlock []*string `json:"CidrBlock,omitnil,omitempty" name:"CidrBlock"`
 
 	// Associated instance status:
 	// 
@@ -468,34 +468,34 @@ type CcnAttachedInstance struct {
 	// •  ATTACHING: associating
 	// •  DETACHING: unassociating
 	// •  DETACHFAILED: failed to unassociate (it will be asynchronously unassociated after 2 hours)
-	State *string `json:"State,omitnil" name:"State"`
+	State *string `json:"State,omitnil,omitempty" name:"State"`
 
 	// Association time.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AttachedTime *string `json:"AttachedTime,omitnil" name:"AttachedTime"`
+	AttachedTime *string `json:"AttachedTime,omitnil,omitempty" name:"AttachedTime"`
 
 	// Remarks
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type ContainerEnv struct {
 	// Environment variable key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Environment variable value
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 // Predefined struct for user
 type CreateBlueprintRequestParams struct {
 	// Image name, which can contain up to 60 characters.
-	BlueprintName *string `json:"BlueprintName,omitnil" name:"BlueprintName"`
+	BlueprintName *string `json:"BlueprintName,omitnil,omitempty" name:"BlueprintName"`
 
 	// Image description, which can contain up to 60 characters.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// ID of the instance for which to make an image.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Whether to forcibly shut down the instance before creating the image 
 	// Valid values: 
@@ -503,20 +503,20 @@ type CreateBlueprintRequestParams struct {
 	// `False`: Create the image when the instance is running 
 	// Default: `True` 
 	// Note that if you create an image when the instance is running, there might be data loss.
-	ForcePowerOff *bool `json:"ForcePowerOff,omitnil" name:"ForcePowerOff"`
+	ForcePowerOff *bool `json:"ForcePowerOff,omitnil,omitempty" name:"ForcePowerOff"`
 }
 
 type CreateBlueprintRequest struct {
 	*tchttp.BaseRequest
 	
 	// Image name, which can contain up to 60 characters.
-	BlueprintName *string `json:"BlueprintName,omitnil" name:"BlueprintName"`
+	BlueprintName *string `json:"BlueprintName,omitnil,omitempty" name:"BlueprintName"`
 
 	// Image description, which can contain up to 60 characters.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// ID of the instance for which to make an image.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Whether to forcibly shut down the instance before creating the image 
 	// Valid values: 
@@ -524,7 +524,7 @@ type CreateBlueprintRequest struct {
 	// `False`: Create the image when the instance is running 
 	// Default: `True` 
 	// Note that if you create an image when the instance is running, there might be data loss.
-	ForcePowerOff *bool `json:"ForcePowerOff,omitnil" name:"ForcePowerOff"`
+	ForcePowerOff *bool `json:"ForcePowerOff,omitnil,omitempty" name:"ForcePowerOff"`
 }
 
 func (r *CreateBlueprintRequest) ToJsonString() string {
@@ -552,10 +552,10 @@ func (r *CreateBlueprintRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateBlueprintResponseParams struct {
 	// Custom image ID.
-	BlueprintId *string `json:"BlueprintId,omitnil" name:"BlueprintId"`
+	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateBlueprintResponse struct {
@@ -577,62 +577,62 @@ func (r *CreateBlueprintResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateDisksRequestParams struct {
 	// Availability zone. You can call [DescribeZones](https://intl.cloud.tencent.com/document/product/1207/57513?from_cn_redirect=1) and get the information in the `Zone` parameter re 
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Cloud disk size in GB.
-	DiskSize *int64 `json:"DiskSize,omitnil" name:"DiskSize"`
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// Cloud disk media type. Valid values: "CLOUD_PREMIUM" (premium cloud disk), "CLOUD_SSD" (SSD cloud disk).
-	DiskType *string `json:"DiskType,omitnil" name:"DiskType"`
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
 	// Parameters of monthly subscribed cloud disks
-	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil" name:"DiskChargePrepaid"`
+	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
 
 	// Image name, which can contain up to 60 characters.
-	DiskName *string `json:"DiskName,omitnil" name:"DiskName"`
+	DiskName *string `json:"DiskName,omitnil,omitempty" name:"DiskName"`
 
 	// Number of cloud disks. Range: [1, 30]. Default value: 1.
-	DiskCount *int64 `json:"DiskCount,omitnil" name:"DiskCount"`
+	DiskCount *int64 `json:"DiskCount,omitnil,omitempty" name:"DiskCount"`
 
 	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
-	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil" name:"DiskBackupQuota"`
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 
 	// Whether to use the vouchers automatically. It defaults to No.
-	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
 	// Automatically mount and initialize the data disk.
-	AutoMountConfiguration *AutoMountConfiguration `json:"AutoMountConfiguration,omitnil" name:"AutoMountConfiguration"`
+	AutoMountConfiguration *AutoMountConfiguration `json:"AutoMountConfiguration,omitnil,omitempty" name:"AutoMountConfiguration"`
 }
 
 type CreateDisksRequest struct {
 	*tchttp.BaseRequest
 	
 	// Availability zone. You can call [DescribeZones](https://intl.cloud.tencent.com/document/product/1207/57513?from_cn_redirect=1) and get the information in the `Zone` parameter re 
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Cloud disk size in GB.
-	DiskSize *int64 `json:"DiskSize,omitnil" name:"DiskSize"`
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// Cloud disk media type. Valid values: "CLOUD_PREMIUM" (premium cloud disk), "CLOUD_SSD" (SSD cloud disk).
-	DiskType *string `json:"DiskType,omitnil" name:"DiskType"`
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
 	// Parameters of monthly subscribed cloud disks
-	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil" name:"DiskChargePrepaid"`
+	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
 
 	// Image name, which can contain up to 60 characters.
-	DiskName *string `json:"DiskName,omitnil" name:"DiskName"`
+	DiskName *string `json:"DiskName,omitnil,omitempty" name:"DiskName"`
 
 	// Number of cloud disks. Range: [1, 30]. Default value: 1.
-	DiskCount *int64 `json:"DiskCount,omitnil" name:"DiskCount"`
+	DiskCount *int64 `json:"DiskCount,omitnil,omitempty" name:"DiskCount"`
 
 	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
-	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil" name:"DiskBackupQuota"`
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 
 	// Whether to use the vouchers automatically. It defaults to No.
-	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
 	// Automatically mount and initialize the data disk.
-	AutoMountConfiguration *AutoMountConfiguration `json:"AutoMountConfiguration,omitnil" name:"AutoMountConfiguration"`
+	AutoMountConfiguration *AutoMountConfiguration `json:"AutoMountConfiguration,omitnil,omitempty" name:"AutoMountConfiguration"`
 }
 
 func (r *CreateDisksRequest) ToJsonString() string {
@@ -667,10 +667,10 @@ type CreateDisksResponseParams struct {
 	// List of IDs created by using this API. The returning of IDs does not mean that the instances are created successfully.
 	// 
 	// You can call `DescribeDisks` API, and find the disk ID in the `DiskSet` returned to check its status. If the status changes from `PENDING` to `UNATTACHED` or `ATTACHED`, the instance is created successfully.
-	DiskIdSet []*string `json:"DiskIdSet,omitnil" name:"DiskIdSet"`
+	DiskIdSet []*string `json:"DiskIdSet,omitnil,omitempty" name:"DiskIdSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateDisksResponse struct {
@@ -692,26 +692,26 @@ func (r *CreateDisksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateFirewallRulesRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Firewall rule list.
-	FirewallRules []*FirewallRule `json:"FirewallRules,omitnil" name:"FirewallRules"`
+	FirewallRules []*FirewallRule `json:"FirewallRules,omitnil,omitempty" name:"FirewallRules"`
 
 	// Current firewall version number. Every time you update the firewall rule version, it will be automatically increased by 1 to prevent the rule from expiring. If it is left empty, conflicts will not be considered.
-	FirewallVersion *uint64 `json:"FirewallVersion,omitnil" name:"FirewallVersion"`
+	FirewallVersion *uint64 `json:"FirewallVersion,omitnil,omitempty" name:"FirewallVersion"`
 }
 
 type CreateFirewallRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Firewall rule list.
-	FirewallRules []*FirewallRule `json:"FirewallRules,omitnil" name:"FirewallRules"`
+	FirewallRules []*FirewallRule `json:"FirewallRules,omitnil,omitempty" name:"FirewallRules"`
 
 	// Current firewall version number. Every time you update the firewall rule version, it will be automatically increased by 1 to prevent the rule from expiring. If it is left empty, conflicts will not be considered.
-	FirewallVersion *uint64 `json:"FirewallVersion,omitnil" name:"FirewallVersion"`
+	FirewallVersion *uint64 `json:"FirewallVersion,omitnil,omitempty" name:"FirewallVersion"`
 }
 
 func (r *CreateFirewallRulesRequest) ToJsonString() string {
@@ -738,7 +738,7 @@ func (r *CreateFirewallRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateFirewallRulesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateFirewallRulesResponse struct {
@@ -760,20 +760,20 @@ func (r *CreateFirewallRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateInstanceSnapshotRequestParams struct {
 	// ID of the instance for which to create a snapshot.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Snapshot name, which can contain up to 60 characters.
-	SnapshotName *string `json:"SnapshotName,omitnil" name:"SnapshotName"`
+	SnapshotName *string `json:"SnapshotName,omitnil,omitempty" name:"SnapshotName"`
 }
 
 type CreateInstanceSnapshotRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the instance for which to create a snapshot.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Snapshot name, which can contain up to 60 characters.
-	SnapshotName *string `json:"SnapshotName,omitnil" name:"SnapshotName"`
+	SnapshotName *string `json:"SnapshotName,omitnil,omitempty" name:"SnapshotName"`
 }
 
 func (r *CreateInstanceSnapshotRequest) ToJsonString() string {
@@ -799,10 +799,10 @@ func (r *CreateInstanceSnapshotRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateInstanceSnapshotResponseParams struct {
 	// Snapshot ID.
-	SnapshotId *string `json:"SnapshotId,omitnil" name:"SnapshotId"`
+	SnapshotId *string `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateInstanceSnapshotResponse struct {
@@ -824,82 +824,82 @@ func (r *CreateInstanceSnapshotResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateInstancesRequestParams struct {
 	// Bundle ID. You can get it via the [DescribeBundles](https://intl.cloud.tencent.com/document/api/1207/47575?from_cn_redirect=1) API.
-	BundleId *string `json:"BundleId,omitnil" name:"BundleId"`
+	BundleId *string `json:"BundleId,omitnil,omitempty" name:"BundleId"`
 
 	// Image ID. You can get it via the [DescribeBlueprints](https://intl.cloud.tencent.com/document/api/1207/47689?from_cn_redirect=1) API.
-	BlueprintId *string `json:"BlueprintId,omitnil" name:"BlueprintId"`
+	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
 	// Monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil" name:"InstanceChargePrepaid"`
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// Instance display name.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Number of the instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
-	InstanceCount *uint64 `json:"InstanceCount,omitnil" name:"InstanceCount"`
+	InstanceCount *uint64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
 	// List of availability zones. A random AZ is selected by default.
-	Zones []*string `json:"Zones,omitnil" name:"Zones"`
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
 	// Whether the request is a dry run only.
 	// `true`: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
 	// If the dry run fails, the corresponding error code will be returned.
 	// If the dry run succeeds, the RequestId will be returned.
 	// `false` (default value): send a normal request and create instance(s) if all the requirements are met.
-	DryRun *bool `json:"DryRun,omitnil" name:"DryRun"`
+	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
-	ClientToken *string `json:"ClientToken,omitnil" name:"ClientToken"`
+	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
 	// Login password of the instance. It’s only available for Windows instances. If it’s not specified, it means that the user choose to set the login password after the instance creation.
-	LoginConfiguration *LoginConfiguration `json:"LoginConfiguration,omitnil" name:"LoginConfiguration"`
+	LoginConfiguration *LoginConfiguration `json:"LoginConfiguration,omitnil,omitempty" name:"LoginConfiguration"`
 
 	// Configuration of the containers to create
-	Containers []*DockerContainerConfiguration `json:"Containers,omitnil" name:"Containers"`
+	Containers []*DockerContainerConfiguration `json:"Containers,omitnil,omitempty" name:"Containers"`
 
 	// Whether to use the vouchers automatically. It defaults to No.
-	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 }
 
 type CreateInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Bundle ID. You can get it via the [DescribeBundles](https://intl.cloud.tencent.com/document/api/1207/47575?from_cn_redirect=1) API.
-	BundleId *string `json:"BundleId,omitnil" name:"BundleId"`
+	BundleId *string `json:"BundleId,omitnil,omitempty" name:"BundleId"`
 
 	// Image ID. You can get it via the [DescribeBlueprints](https://intl.cloud.tencent.com/document/api/1207/47689?from_cn_redirect=1) API.
-	BlueprintId *string `json:"BlueprintId,omitnil" name:"BlueprintId"`
+	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
 	// Monthly subscription information for the instance, including the purchase period, setting of auto-renewal, etc.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil" name:"InstanceChargePrepaid"`
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// Instance display name.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Number of the instances to purchase. For monthly subscribed instances, the value can be 1 to 30. The default value is `1`. Note that this number can not exceed the remaining quota under the current account.
-	InstanceCount *uint64 `json:"InstanceCount,omitnil" name:"InstanceCount"`
+	InstanceCount *uint64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
 	// List of availability zones. A random AZ is selected by default.
-	Zones []*string `json:"Zones,omitnil" name:"Zones"`
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
 	// Whether the request is a dry run only.
 	// `true`: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
 	// If the dry run fails, the corresponding error code will be returned.
 	// If the dry run succeeds, the RequestId will be returned.
 	// `false` (default value): send a normal request and create instance(s) if all the requirements are met.
-	DryRun *bool `json:"DryRun,omitnil" name:"DryRun"`
+	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
 
 	// A unique string supplied by the client to ensure that the request is idempotent. Its maximum length is 64 ASCII characters. If this parameter is not specified, the idem-potency of the request cannot be guaranteed.
-	ClientToken *string `json:"ClientToken,omitnil" name:"ClientToken"`
+	ClientToken *string `json:"ClientToken,omitnil,omitempty" name:"ClientToken"`
 
 	// Login password of the instance. It’s only available for Windows instances. If it’s not specified, it means that the user choose to set the login password after the instance creation.
-	LoginConfiguration *LoginConfiguration `json:"LoginConfiguration,omitnil" name:"LoginConfiguration"`
+	LoginConfiguration *LoginConfiguration `json:"LoginConfiguration,omitnil,omitempty" name:"LoginConfiguration"`
 
 	// Configuration of the containers to create
-	Containers []*DockerContainerConfiguration `json:"Containers,omitnil" name:"Containers"`
+	Containers []*DockerContainerConfiguration `json:"Containers,omitnil,omitempty" name:"Containers"`
 
 	// Whether to use the vouchers automatically. It defaults to No.
-	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -936,10 +936,10 @@ type CreateInstancesResponseParams struct {
 	// List of IDs created by using this API. The returning of IDs does not mean that the instances are created successfully.
 	// 
 	// You can call `DescribeInstances` API, and find the instance ID in the `InstancesSet` returned to check its status. If the `status` is `running`, the instance is created successfully.
-	InstanceIdSet []*string `json:"InstanceIdSet,omitnil" name:"InstanceIdSet"`
+	InstanceIdSet []*string `json:"InstanceIdSet,omitnil,omitempty" name:"InstanceIdSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateInstancesResponse struct {
@@ -961,14 +961,14 @@ func (r *CreateInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateKeyPairRequestParams struct {
 	// Key pair name, which can contain up to 25 digits, letters, and underscores.
-	KeyName *string `json:"KeyName,omitnil" name:"KeyName"`
+	KeyName *string `json:"KeyName,omitnil,omitempty" name:"KeyName"`
 }
 
 type CreateKeyPairRequest struct {
 	*tchttp.BaseRequest
 	
 	// Key pair name, which can contain up to 25 digits, letters, and underscores.
-	KeyName *string `json:"KeyName,omitnil" name:"KeyName"`
+	KeyName *string `json:"KeyName,omitnil,omitempty" name:"KeyName"`
 }
 
 func (r *CreateKeyPairRequest) ToJsonString() string {
@@ -993,10 +993,10 @@ func (r *CreateKeyPairRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateKeyPairResponseParams struct {
 	// Key pair information.
-	KeyPair *KeyPair `json:"KeyPair,omitnil" name:"KeyPair"`
+	KeyPair *KeyPair `json:"KeyPair,omitnil,omitempty" name:"KeyPair"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateKeyPairResponse struct {
@@ -1017,36 +1017,36 @@ func (r *CreateKeyPairResponse) FromJsonString(s string) error {
 
 type DataDiskPrice struct {
 	// Cloud disk ID.
-	DiskId *string `json:"DiskId,omitnil" name:"DiskId"`
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
 	// Cloud disk unit price.
-	OriginalDiskPrice *float64 `json:"OriginalDiskPrice,omitnil" name:"OriginalDiskPrice"`
+	OriginalDiskPrice *float64 `json:"OriginalDiskPrice,omitnil,omitempty" name:"OriginalDiskPrice"`
 
 	// Total price of cloud disk
-	OriginalPrice *float64 `json:"OriginalPrice,omitnil" name:"OriginalPrice"`
+	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
 	// Discount.
-	Discount *float64 `json:"Discount,omitnil" name:"Discount"`
+	Discount *float64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
 	// Discounted total price.
-	DiscountPrice *float64 `json:"DiscountPrice,omitnil" name:"DiscountPrice"`
+	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 
 	// ID of the instance to which the data disk is mounted.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 // Predefined struct for user
 type DeleteBlueprintsRequestParams struct {
 	// Image ID list, which can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
-	BlueprintIds []*string `json:"BlueprintIds,omitnil" name:"BlueprintIds"`
+	BlueprintIds []*string `json:"BlueprintIds,omitnil,omitempty" name:"BlueprintIds"`
 }
 
 type DeleteBlueprintsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Image ID list, which can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
-	BlueprintIds []*string `json:"BlueprintIds,omitnil" name:"BlueprintIds"`
+	BlueprintIds []*string `json:"BlueprintIds,omitnil,omitempty" name:"BlueprintIds"`
 }
 
 func (r *DeleteBlueprintsRequest) ToJsonString() string {
@@ -1071,7 +1071,7 @@ func (r *DeleteBlueprintsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteBlueprintsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteBlueprintsResponse struct {
@@ -1093,26 +1093,26 @@ func (r *DeleteBlueprintsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteFirewallRulesRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Firewall rule list.
-	FirewallRules []*FirewallRule `json:"FirewallRules,omitnil" name:"FirewallRules"`
+	FirewallRules []*FirewallRule `json:"FirewallRules,omitnil,omitempty" name:"FirewallRules"`
 
 	// Current firewall version number. Every time you update the firewall rule version, it will be automatically increased by 1 to prevent the rule from expiring. If it is left empty, conflicts will not be considered.
-	FirewallVersion *uint64 `json:"FirewallVersion,omitnil" name:"FirewallVersion"`
+	FirewallVersion *uint64 `json:"FirewallVersion,omitnil,omitempty" name:"FirewallVersion"`
 }
 
 type DeleteFirewallRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Firewall rule list.
-	FirewallRules []*FirewallRule `json:"FirewallRules,omitnil" name:"FirewallRules"`
+	FirewallRules []*FirewallRule `json:"FirewallRules,omitnil,omitempty" name:"FirewallRules"`
 
 	// Current firewall version number. Every time you update the firewall rule version, it will be automatically increased by 1 to prevent the rule from expiring. If it is left empty, conflicts will not be considered.
-	FirewallVersion *uint64 `json:"FirewallVersion,omitnil" name:"FirewallVersion"`
+	FirewallVersion *uint64 `json:"FirewallVersion,omitnil,omitempty" name:"FirewallVersion"`
 }
 
 func (r *DeleteFirewallRulesRequest) ToJsonString() string {
@@ -1139,7 +1139,7 @@ func (r *DeleteFirewallRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteFirewallRulesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteFirewallRulesResponse struct {
@@ -1161,14 +1161,14 @@ func (r *DeleteFirewallRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteKeyPairsRequestParams struct {
 	// Key pair ID list. Each request can contain up to 10 key pairs.
-	KeyIds []*string `json:"KeyIds,omitnil" name:"KeyIds"`
+	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
 }
 
 type DeleteKeyPairsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Key pair ID list. Each request can contain up to 10 key pairs.
-	KeyIds []*string `json:"KeyIds,omitnil" name:"KeyIds"`
+	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
 }
 
 func (r *DeleteKeyPairsRequest) ToJsonString() string {
@@ -1193,7 +1193,7 @@ func (r *DeleteKeyPairsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteKeyPairsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteKeyPairsResponse struct {
@@ -1215,14 +1215,14 @@ func (r *DeleteKeyPairsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSnapshotsRequestParams struct {
 	// List of IDs of snapshots to be deleted, which can be queried through `DescribeSnapshots`.
-	SnapshotIds []*string `json:"SnapshotIds,omitnil" name:"SnapshotIds"`
+	SnapshotIds []*string `json:"SnapshotIds,omitnil,omitempty" name:"SnapshotIds"`
 }
 
 type DeleteSnapshotsRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of IDs of snapshots to be deleted, which can be queried through `DescribeSnapshots`.
-	SnapshotIds []*string `json:"SnapshotIds,omitnil" name:"SnapshotIds"`
+	SnapshotIds []*string `json:"SnapshotIds,omitnil,omitempty" name:"SnapshotIds"`
 }
 
 func (r *DeleteSnapshotsRequest) ToJsonString() string {
@@ -1247,7 +1247,7 @@ func (r *DeleteSnapshotsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteSnapshotsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteSnapshotsResponse struct {
@@ -1268,38 +1268,38 @@ func (r *DeleteSnapshotsResponse) FromJsonString(s string) error {
 
 type DeniedAction struct {
 	// Restricted operation name.
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// Restricted operation message code.
-	Code *string `json:"Code,omitnil" name:"Code"`
+	Code *string `json:"Code,omitnil,omitempty" name:"Code"`
 
 	// Restricted operation message.
-	Message *string `json:"Message,omitnil" name:"Message"`
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
 // Predefined struct for user
 type DescribeAllScenesRequestParams struct {
 	// List of scene IDs
-	SceneIds []*string `json:"SceneIds,omitnil" name:"SceneIds"`
+	SceneIds []*string `json:"SceneIds,omitnil,omitempty" name:"SceneIds"`
 
 	// Offset. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeAllScenesRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of scene IDs
-	SceneIds []*string `json:"SceneIds,omitnil" name:"SceneIds"`
+	SceneIds []*string `json:"SceneIds,omitnil,omitempty" name:"SceneIds"`
 
 	// Offset. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeAllScenesRequest) ToJsonString() string {
@@ -1326,13 +1326,13 @@ func (r *DescribeAllScenesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAllScenesResponseParams struct {
 	// List of scenes
-	SceneInfoSet []*SceneInfo `json:"SceneInfoSet,omitnil" name:"SceneInfoSet"`
+	SceneInfoSet []*SceneInfo `json:"SceneInfoSet,omitnil,omitempty" name:"SceneInfoSet"`
 
 	// Total count of scenes
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeAllScenesResponse struct {
@@ -1354,14 +1354,14 @@ func (r *DescribeAllScenesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBlueprintInstancesRequestParams struct {
 	// Instance ID list, which currently can contain only one instance.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type DescribeBlueprintInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID list, which currently can contain only one instance.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *DescribeBlueprintInstancesRequest) ToJsonString() string {
@@ -1386,13 +1386,13 @@ func (r *DescribeBlueprintInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBlueprintInstancesResponseParams struct {
 	// Number of eligible image instances.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Image instance list information.
-	BlueprintInstanceSet []*BlueprintInstance `json:"BlueprintInstanceSet,omitnil" name:"BlueprintInstanceSet"`
+	BlueprintInstanceSet []*BlueprintInstance `json:"BlueprintInstanceSet,omitnil,omitempty" name:"BlueprintInstanceSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeBlueprintInstancesResponse struct {
@@ -1414,13 +1414,13 @@ func (r *DescribeBlueprintInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBlueprintsRequestParams struct {
 	// Image ID list.
-	BlueprintIds []*string `json:"BlueprintIds,omitnil" name:"BlueprintIds"`
+	BlueprintIds []*string `json:"BlueprintIds,omitnil,omitempty" name:"BlueprintIds"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter list.
 	// <li>blueprint-id</li>Filter by the **image ID**.
@@ -1445,20 +1445,20 @@ type DescribeBlueprintsRequestParams struct {
 	// Required: no
 	// 
 	// Each request can contain up to 10 `Filters`, each of which can contain up to 100 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeBlueprintsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Image ID list.
-	BlueprintIds []*string `json:"BlueprintIds,omitnil" name:"BlueprintIds"`
+	BlueprintIds []*string `json:"BlueprintIds,omitnil,omitempty" name:"BlueprintIds"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter list.
 	// <li>blueprint-id</li>Filter by the **image ID**.
@@ -1483,7 +1483,7 @@ type DescribeBlueprintsRequest struct {
 	// Required: no
 	// 
 	// Each request can contain up to 10 `Filters`, each of which can contain up to 100 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *DescribeBlueprintsRequest) ToJsonString() string {
@@ -1511,13 +1511,13 @@ func (r *DescribeBlueprintsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBlueprintsResponseParams struct {
 	// Number of eligible images.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Image details list.
-	BlueprintSet []*Blueprint `json:"BlueprintSet,omitnil" name:"BlueprintSet"`
+	BlueprintSet []*Blueprint `json:"BlueprintSet,omitnil,omitempty" name:"BlueprintSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeBlueprintsResponse struct {
@@ -1539,14 +1539,14 @@ func (r *DescribeBlueprintsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBundleDiscountRequestParams struct {
 	// Package ID.
-	BundleId *string `json:"BundleId,omitnil" name:"BundleId"`
+	BundleId *string `json:"BundleId,omitnil,omitempty" name:"BundleId"`
 }
 
 type DescribeBundleDiscountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Package ID.
-	BundleId *string `json:"BundleId,omitnil" name:"BundleId"`
+	BundleId *string `json:"BundleId,omitnil,omitempty" name:"BundleId"`
 }
 
 func (r *DescribeBundleDiscountRequest) ToJsonString() string {
@@ -1571,13 +1571,13 @@ func (r *DescribeBundleDiscountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBundleDiscountResponseParams struct {
 	// Currency: CNY, USD.
-	Currency *string `json:"Currency,omitnil" name:"Currency"`
+	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
 
 	// Discount tier details. The information of each tier includes the duration, discounted quantity, total price, discounted price, and discount details (user discount, official website discount, or final discount).
-	DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitnil" name:"DiscountDetail"`
+	DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitnil,omitempty" name:"DiscountDetail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeBundleDiscountResponse struct {
@@ -1599,13 +1599,13 @@ func (r *DescribeBundleDiscountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBundlesRequestParams struct {
 	// Package ID list.
-	BundleIds []*string `json:"BundleIds,omitnil" name:"BundleIds"`
+	BundleIds []*string `json:"BundleIds,omitnil,omitempty" name:"BundleIds"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter list.
 	// <li>bundle-id</li>Filter by the **bundle ID**.
@@ -1624,23 +1624,23 @@ type DescribeBundlesRequestParams struct {
 	// Type: String
 	// Required: No
 	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot specify both `BundleIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// AZ list, which contains all AZs by default.
-	Zones []*string `json:"Zones,omitnil" name:"Zones"`
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 }
 
 type DescribeBundlesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Package ID list.
-	BundleIds []*string `json:"BundleIds,omitnil" name:"BundleIds"`
+	BundleIds []*string `json:"BundleIds,omitnil,omitempty" name:"BundleIds"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter list.
 	// <li>bundle-id</li>Filter by the **bundle ID**.
@@ -1659,10 +1659,10 @@ type DescribeBundlesRequest struct {
 	// Type: String
 	// Required: No
 	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot specify both `BundleIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// AZ list, which contains all AZs by default.
-	Zones []*string `json:"Zones,omitnil" name:"Zones"`
+	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 }
 
 func (r *DescribeBundlesRequest) ToJsonString() string {
@@ -1691,13 +1691,13 @@ func (r *DescribeBundlesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeBundlesResponseParams struct {
 	// List of package details.
-	BundleSet []*Bundle `json:"BundleSet,omitnil" name:"BundleSet"`
+	BundleSet []*Bundle `json:"BundleSet,omitnil,omitempty" name:"BundleSet"`
 
 	// Total number of eligible packages, which is used for pagination.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeBundlesResponse struct {
@@ -1749,10 +1749,10 @@ func (r *DescribeCcnAttachedInstancesRequest) FromJsonString(s string) error {
 type DescribeCcnAttachedInstancesResponseParams struct {
 	// List of instances associated with the CCN instance.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CcnAttachedInstanceSet []*CcnAttachedInstance `json:"CcnAttachedInstanceSet,omitnil" name:"CcnAttachedInstanceSet"`
+	CcnAttachedInstanceSet []*CcnAttachedInstance `json:"CcnAttachedInstanceSet,omitnil,omitempty" name:"CcnAttachedInstanceSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeCcnAttachedInstancesResponse struct {
@@ -1777,7 +1777,7 @@ type DescribeDiskConfigsRequestParams struct {
 	// <li>zone</li>Filter by availability zone.
 	// Type: String
 	// Required: no
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeDiskConfigsRequest struct {
@@ -1787,7 +1787,7 @@ type DescribeDiskConfigsRequest struct {
 	// <li>zone</li>Filter by availability zone.
 	// Type: String
 	// Required: no
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *DescribeDiskConfigsRequest) ToJsonString() string {
@@ -1812,10 +1812,10 @@ func (r *DescribeDiskConfigsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDiskConfigsResponseParams struct {
 	// List of cloud disk configurations.
-	DiskConfigSet []*DiskConfig `json:"DiskConfigSet,omitnil" name:"DiskConfigSet"`
+	DiskConfigSet []*DiskConfig `json:"DiskConfigSet,omitnil,omitempty" name:"DiskConfigSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDiskConfigsResponse struct {
@@ -1837,26 +1837,26 @@ func (r *DescribeDiskConfigsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDiskDiscountRequestParams struct {
 	// Cloud disk type. Valid values: "CLOUD_PREMIUM".
-	DiskType *string `json:"DiskType,omitnil" name:"DiskType"`
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
 	// Cloud disk size.
-	DiskSize *int64 `json:"DiskSize,omitnil" name:"DiskSize"`
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
-	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil" name:"DiskBackupQuota"`
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 }
 
 type DescribeDiskDiscountRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cloud disk type. Valid values: "CLOUD_PREMIUM".
-	DiskType *string `json:"DiskType,omitnil" name:"DiskType"`
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
 	// Cloud disk size.
-	DiskSize *int64 `json:"DiskSize,omitnil" name:"DiskSize"`
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
-	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil" name:"DiskBackupQuota"`
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 }
 
 func (r *DescribeDiskDiscountRequest) ToJsonString() string {
@@ -1883,13 +1883,13 @@ func (r *DescribeDiskDiscountRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDiskDiscountResponseParams struct {
 	// Currency: CNY, USD.
-	Currency *string `json:"Currency,omitnil" name:"Currency"`
+	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
 
 	// Discount tier details. The information of each tier includes the duration, discounted quantity, total price, discounted price, and discount details (user discount, official website discount, or final discount).
-	DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitnil" name:"DiscountDetail"`
+	DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitnil,omitempty" name:"DiscountDetail"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDiskDiscountResponse struct {
@@ -1911,14 +1911,14 @@ func (r *DescribeDiskDiscountResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDisksDeniedActionsRequestParams struct {
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 }
 
 type DescribeDisksDeniedActionsRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 }
 
 func (r *DescribeDisksDeniedActionsRequest) ToJsonString() string {
@@ -1943,10 +1943,10 @@ func (r *DescribeDisksDeniedActionsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDisksDeniedActionsResponseParams struct {
 	// List of operation limits of cloud disks.
-	DiskDeniedActionSet []*DiskDeniedActions `json:"DiskDeniedActionSet,omitnil" name:"DiskDeniedActionSet"`
+	DiskDeniedActionSet []*DiskDeniedActions `json:"DiskDeniedActionSet,omitnil,omitempty" name:"DiskDeniedActionSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDisksDeniedActionsResponse struct {
@@ -1968,7 +1968,7 @@ func (r *DescribeDisksDeniedActionsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDisksRequestParams struct {
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Filter list
 	// disk-id
@@ -1998,26 +1998,26 @@ type DescribeDisksRequestParams struct {
 	// Required: No
 	// Values: See `DiskState` in [Disk](https://intl.cloud.tencent.com/document/api/1207/47576?from_cn_redirect=1#Disk)
 	// Each request can contain up to 10 `Filters` and 100 `Filter.Values`. `DiskIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// The field by which the cloud disks are sorted. Valid values: "CREATED_TIME" (creation time), "EXPIRED_TIME" (expiration time), "DISK_SIZE" (size of cloud disks). Default value: "CREATED_TIME".
-	OrderField *string `json:"OrderField,omitnil" name:"OrderField"`
+	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
 
 	// Sorting order of the output cloud disks. Valid values: "ASC" (ascending order), "DESC" (descending order). Default value: "DESC".
-	Order *string `json:"Order,omitnil" name:"Order"`
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
 type DescribeDisksRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Filter list
 	// disk-id
@@ -2047,19 +2047,19 @@ type DescribeDisksRequest struct {
 	// Required: No
 	// Values: See `DiskState` in [Disk](https://intl.cloud.tencent.com/document/api/1207/47576?from_cn_redirect=1#Disk)
 	// Each request can contain up to 10 `Filters` and 100 `Filter.Values`. `DiskIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// The field by which the cloud disks are sorted. Valid values: "CREATED_TIME" (creation time), "EXPIRED_TIME" (expiration time), "DISK_SIZE" (size of cloud disks). Default value: "CREATED_TIME".
-	OrderField *string `json:"OrderField,omitnil" name:"OrderField"`
+	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
 
 	// Sorting order of the output cloud disks. Valid values: "ASC" (ascending order), "DESC" (descending order). Default value: "DESC".
-	Order *string `json:"Order,omitnil" name:"Order"`
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
 func (r *DescribeDisksRequest) ToJsonString() string {
@@ -2089,13 +2089,13 @@ func (r *DescribeDisksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDisksResponseParams struct {
 	// List of cloud disk information.
-	DiskSet []*Disk `json:"DiskSet,omitnil" name:"DiskSet"`
+	DiskSet []*Disk `json:"DiskSet,omitnil,omitempty" name:"DiskSet"`
 
 	// Number of eligible cloud disks.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDisksResponse struct {
@@ -2117,26 +2117,26 @@ func (r *DescribeDisksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDisksReturnableRequestParams struct {
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeDisksReturnableRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeDisksReturnableRequest) ToJsonString() string {
@@ -2163,13 +2163,13 @@ func (r *DescribeDisksReturnableRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDisksReturnableResponseParams struct {
 	// List of returnable cloud disks.
-	DiskReturnableSet []*DiskReturnable `json:"DiskReturnableSet,omitnil" name:"DiskReturnableSet"`
+	DiskReturnableSet []*DiskReturnable `json:"DiskReturnableSet,omitnil,omitempty" name:"DiskReturnableSet"`
 
 	// Number of eligible cloud disks.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDisksReturnableResponse struct {
@@ -2191,26 +2191,26 @@ func (r *DescribeDisksReturnableResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeFirewallRulesRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeFirewallRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeFirewallRulesRequest) ToJsonString() string {
@@ -2237,16 +2237,16 @@ func (r *DescribeFirewallRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeFirewallRulesResponseParams struct {
 	// Number of eligible firewall rules.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Firewall rule details list.
-	FirewallRuleSet []*FirewallRuleInfo `json:"FirewallRuleSet,omitnil" name:"FirewallRuleSet"`
+	FirewallRuleSet []*FirewallRuleInfo `json:"FirewallRuleSet,omitnil,omitempty" name:"FirewallRuleSet"`
 
 	// Firewall version number.
-	FirewallVersion *uint64 `json:"FirewallVersion,omitnil" name:"FirewallVersion"`
+	FirewallVersion *uint64 `json:"FirewallVersion,omitnil,omitempty" name:"FirewallVersion"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeFirewallRulesResponse struct {
@@ -2297,13 +2297,13 @@ func (r *DescribeFirewallRulesTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeFirewallRulesTemplateResponseParams struct {
 	// Number of eligible firewall rules.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Firewall rule details list.
-	FirewallRuleSet []*FirewallRuleInfo `json:"FirewallRuleSet,omitnil" name:"FirewallRuleSet"`
+	FirewallRuleSet []*FirewallRuleInfo `json:"FirewallRuleSet,omitnil,omitempty" name:"FirewallRuleSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeFirewallRulesTemplateResponse struct {
@@ -2336,7 +2336,7 @@ type DescribeGeneralResourceQuotasRequestParams struct {
 	// - `FREE_BLUEPRINT`: Free custom image
 	// - `DATA_DISK`: Data disk
 	// - `FIREWALL_RULE`: Firewall rules
-	ResourceNames []*string `json:"ResourceNames,omitnil" name:"ResourceNames"`
+	ResourceNames []*string `json:"ResourceNames,omitnil,omitempty" name:"ResourceNames"`
 }
 
 type DescribeGeneralResourceQuotasRequest struct {
@@ -2354,7 +2354,7 @@ type DescribeGeneralResourceQuotasRequest struct {
 	// - `FREE_BLUEPRINT`: Free custom image
 	// - `DATA_DISK`: Data disk
 	// - `FIREWALL_RULE`: Firewall rules
-	ResourceNames []*string `json:"ResourceNames,omitnil" name:"ResourceNames"`
+	ResourceNames []*string `json:"ResourceNames,omitnil,omitempty" name:"ResourceNames"`
 }
 
 func (r *DescribeGeneralResourceQuotasRequest) ToJsonString() string {
@@ -2379,10 +2379,10 @@ func (r *DescribeGeneralResourceQuotasRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeGeneralResourceQuotasResponseParams struct {
 	// List of general resource quota details.
-	GeneralResourceQuotaSet []*GeneralResourceQuota `json:"GeneralResourceQuotaSet,omitnil" name:"GeneralResourceQuotaSet"`
+	GeneralResourceQuotaSet []*GeneralResourceQuota `json:"GeneralResourceQuotaSet,omitnil,omitempty" name:"GeneralResourceQuotaSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeGeneralResourceQuotasResponse struct {
@@ -2404,14 +2404,14 @@ func (r *DescribeGeneralResourceQuotasResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceLoginKeyPairAttributeRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeInstanceLoginKeyPairAttributeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeInstanceLoginKeyPairAttributeRequest) ToJsonString() string {
@@ -2436,10 +2436,10 @@ func (r *DescribeInstanceLoginKeyPairAttributeRequest) FromJsonString(s string) 
 // Predefined struct for user
 type DescribeInstanceLoginKeyPairAttributeResponseParams struct {
 	// Whether to allow login with the default key pair. Valid values: YES, NO.
-	PermitLogin *string `json:"PermitLogin,omitnil" name:"PermitLogin"`
+	PermitLogin *string `json:"PermitLogin,omitnil,omitempty" name:"PermitLogin"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceLoginKeyPairAttributeResponse struct {
@@ -2461,14 +2461,14 @@ func (r *DescribeInstanceLoginKeyPairAttributeResponse) FromJsonString(s string)
 // Predefined struct for user
 type DescribeInstanceVncUrlRequestParams struct {
 	// Instance ID, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DescribeInstanceVncUrlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DescribeInstanceVncUrlRequest) ToJsonString() string {
@@ -2493,10 +2493,10 @@ func (r *DescribeInstanceVncUrlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstanceVncUrlResponseParams struct {
 	// Instance VNC URL.
-	InstanceVncUrl *string `json:"InstanceVncUrl,omitnil" name:"InstanceVncUrl"`
+	InstanceVncUrl *string `json:"InstanceVncUrl,omitnil,omitempty" name:"InstanceVncUrl"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstanceVncUrlResponse struct {
@@ -2518,14 +2518,14 @@ func (r *DescribeInstanceVncUrlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstancesDeniedActionsRequestParams struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type DescribeInstancesDeniedActionsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *DescribeInstancesDeniedActionsRequest) ToJsonString() string {
@@ -2550,10 +2550,10 @@ func (r *DescribeInstancesDeniedActionsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstancesDeniedActionsResponseParams struct {
 	// List of instance operation limit details.
-	InstanceDeniedActionSet []*InstanceDeniedActions `json:"InstanceDeniedActionSet,omitnil" name:"InstanceDeniedActionSet"`
+	InstanceDeniedActionSet []*InstanceDeniedActions `json:"InstanceDeniedActionSet,omitnil,omitempty" name:"InstanceDeniedActionSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstancesDeniedActionsResponse struct {
@@ -2575,14 +2575,14 @@ func (r *DescribeInstancesDeniedActionsResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeInstancesDiskNumRequestParams struct {
 	// List of instance IDs.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type DescribeInstancesDiskNumRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of instance IDs.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *DescribeInstancesDiskNumRequest) ToJsonString() string {
@@ -2607,13 +2607,13 @@ func (r *DescribeInstancesDiskNumRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstancesDiskNumResponseParams struct {
 	// Information of all attached disks
-	AttachDetailSet []*AttachDetail `json:"AttachDetailSet,omitnil" name:"AttachDetailSet"`
+	AttachDetailSet []*AttachDetail `json:"AttachDetailSet,omitnil,omitempty" name:"AttachDetailSet"`
 
 	// Number of attached cloud disks
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstancesDiskNumResponse struct {
@@ -2635,7 +2635,7 @@ func (r *DescribeInstancesDiskNumResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstancesRequestParams struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Filter list. 
 	// <li>instance-name</li>Filter by the **instance name**. 
@@ -2663,20 +2663,20 @@ type DescribeInstancesRequestParams struct {
 	// Type: String 
 	// Required: No 
 	// Each request can contain up to 10 `Filters` and 100 `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID list. Each request can contain up to 100 instances at a time.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Filter list. 
 	// <li>instance-name</li>Filter by the **instance name**. 
@@ -2704,13 +2704,13 @@ type DescribeInstancesRequest struct {
 	// Type: String 
 	// Required: No 
 	// Each request can contain up to 10 `Filters` and 100 `Filter.Values`. You cannot specify both `InstanceIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeInstancesRequest) ToJsonString() string {
@@ -2738,13 +2738,13 @@ func (r *DescribeInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstancesResponseParams struct {
 	// Number of eligible instances.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of instance details
-	InstanceSet []*Instance `json:"InstanceSet,omitnil" name:"InstanceSet"`
+	InstanceSet []*Instance `json:"InstanceSet,omitnil,omitempty" name:"InstanceSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstancesResponse struct {
@@ -2766,26 +2766,26 @@ func (r *DescribeInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstancesReturnableRequestParams struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeInstancesReturnableRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeInstancesReturnableRequest) ToJsonString() string {
@@ -2812,13 +2812,13 @@ func (r *DescribeInstancesReturnableRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstancesReturnableResponseParams struct {
 	// Number of eligible instances.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of returnable instance details.
-	InstanceReturnableSet []*InstanceReturnable `json:"InstanceReturnableSet,omitnil" name:"InstanceReturnableSet"`
+	InstanceReturnableSet []*InstanceReturnable `json:"InstanceReturnableSet,omitnil,omitempty" name:"InstanceReturnableSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstancesReturnableResponse struct {
@@ -2840,26 +2840,26 @@ func (r *DescribeInstancesReturnableResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInstancesTrafficPackagesRequestParams struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeInstancesTrafficPackagesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeInstancesTrafficPackagesRequest) ToJsonString() string {
@@ -2886,13 +2886,13 @@ func (r *DescribeInstancesTrafficPackagesRequest) FromJsonString(s string) error
 // Predefined struct for user
 type DescribeInstancesTrafficPackagesResponseParams struct {
 	// Number of eligible instance traffic package details.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of instance traffic package details.
-	InstanceTrafficPackageSet []*InstanceTrafficPackage `json:"InstanceTrafficPackageSet,omitnil" name:"InstanceTrafficPackageSet"`
+	InstanceTrafficPackageSet []*InstanceTrafficPackage `json:"InstanceTrafficPackageSet,omitnil,omitempty" name:"InstanceTrafficPackageSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInstancesTrafficPackagesResponse struct {
@@ -2914,13 +2914,13 @@ func (r *DescribeInstancesTrafficPackagesResponse) FromJsonString(s string) erro
 // Predefined struct for user
 type DescribeKeyPairsRequestParams struct {
 	// Key pair ID list.
-	KeyIds []*string `json:"KeyIds,omitnil" name:"KeyIds"`
+	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter list.
 	// <li>key-id</li>Filter by **key pair ID**.
@@ -2930,20 +2930,20 @@ type DescribeKeyPairsRequestParams struct {
 	// Type: String
 	// Required: no
 	// Each request can contain up to 10 `Filters` and up to 5 `Filter.Values` for each filter. `KeyIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeKeyPairsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Key pair ID list.
-	KeyIds []*string `json:"KeyIds,omitnil" name:"KeyIds"`
+	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter list.
 	// <li>key-id</li>Filter by **key pair ID**.
@@ -2953,7 +2953,7 @@ type DescribeKeyPairsRequest struct {
 	// Type: String
 	// Required: no
 	// Each request can contain up to 10 `Filters` and up to 5 `Filter.Values` for each filter. `KeyIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *DescribeKeyPairsRequest) ToJsonString() string {
@@ -2981,13 +2981,13 @@ func (r *DescribeKeyPairsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeKeyPairsResponseParams struct {
 	// Number of eligible key pairs.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of key pair details.
-	KeyPairSet []*KeyPair `json:"KeyPairSet,omitnil" name:"KeyPairSet"`
+	KeyPairSet []*KeyPair `json:"KeyPairSet,omitnil,omitempty" name:"KeyPairSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeKeyPairsResponse struct {
@@ -3009,7 +3009,7 @@ func (r *DescribeKeyPairsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeModifyInstanceBundlesRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Filter list
 	// <li>bundle-id</li>Filter by the **bundle ID**.
@@ -3028,20 +3028,20 @@ type DescribeModifyInstanceBundlesRequestParams struct {
 	// Type: String
 	// Required: No
 	// Each request can contain up to 10 `Filters`, and each filter can have up to 5 `Filter.Values`.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeModifyInstanceBundlesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Filter list
 	// <li>bundle-id</li>Filter by the **bundle ID**.
@@ -3060,13 +3060,13 @@ type DescribeModifyInstanceBundlesRequest struct {
 	// Type: String
 	// Required: No
 	// Each request can contain up to 10 `Filters`, and each filter can have up to 5 `Filter.Values`.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeModifyInstanceBundlesRequest) ToJsonString() string {
@@ -3094,13 +3094,13 @@ func (r *DescribeModifyInstanceBundlesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeModifyInstanceBundlesResponseParams struct {
 	// Number of matched instances.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// New package details
-	ModifyBundleSet []*ModifyBundle `json:"ModifyBundleSet,omitnil" name:"ModifyBundleSet"`
+	ModifyBundleSet []*ModifyBundle `json:"ModifyBundleSet,omitnil,omitempty" name:"ModifyBundleSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeModifyInstanceBundlesResponse struct {
@@ -3151,13 +3151,13 @@ func (r *DescribeRegionsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRegionsResponseParams struct {
 	// Number of regions.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Region information list.
-	RegionSet []*RegionInfo `json:"RegionSet,omitnil" name:"RegionSet"`
+	RegionSet []*RegionInfo `json:"RegionSet,omitnil,omitempty" name:"RegionSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRegionsResponse struct {
@@ -3179,13 +3179,13 @@ func (r *DescribeRegionsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeResetInstanceBlueprintsRequestParams struct {
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter list
 	// <li>blueprint-id</li>Filter by **image ID**.
@@ -3207,20 +3207,20 @@ type DescribeResetInstanceBlueprintsRequestParams struct {
 	// Required: no
 	// 
 	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeResetInstanceBlueprintsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Offset. Default value: 0. For more information on `Offset`, please see the relevant section in [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, please see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/product/1207/47578?from_cn_redirect=1).
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter list
 	// <li>blueprint-id</li>Filter by **image ID**.
@@ -3242,7 +3242,7 @@ type DescribeResetInstanceBlueprintsRequest struct {
 	// Required: no
 	// 
 	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. `BlueprintIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *DescribeResetInstanceBlueprintsRequest) ToJsonString() string {
@@ -3270,13 +3270,13 @@ func (r *DescribeResetInstanceBlueprintsRequest) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeResetInstanceBlueprintsResponseParams struct {
 	// Number of eligible images.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Image reset information list
-	ResetInstanceBlueprintSet []*ResetInstanceBlueprint `json:"ResetInstanceBlueprintSet,omitnil" name:"ResetInstanceBlueprintSet"`
+	ResetInstanceBlueprintSet []*ResetInstanceBlueprint `json:"ResetInstanceBlueprintSet,omitnil,omitempty" name:"ResetInstanceBlueprintSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeResetInstanceBlueprintsResponse struct {
@@ -3298,26 +3298,26 @@ func (r *DescribeResetInstanceBlueprintsResponse) FromJsonString(s string) error
 // Predefined struct for user
 type DescribeScenesRequestParams struct {
 	// List of scene IDs
-	SceneIds []*string `json:"SceneIds,omitnil" name:"SceneIds"`
+	SceneIds []*string `json:"SceneIds,omitnil,omitempty" name:"SceneIds"`
 
 	// Offset. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeScenesRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of scene IDs
-	SceneIds []*string `json:"SceneIds,omitnil" name:"SceneIds"`
+	SceneIds []*string `json:"SceneIds,omitnil,omitempty" name:"SceneIds"`
 
 	// Offset. Default value: 0
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeScenesRequest) ToJsonString() string {
@@ -3344,13 +3344,13 @@ func (r *DescribeScenesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeScenesResponseParams struct {
 	// List of scenes
-	SceneSet []*Scene `json:"SceneSet,omitnil" name:"SceneSet"`
+	SceneSet []*Scene `json:"SceneSet,omitnil,omitempty" name:"SceneSet"`
 
 	// Total number of scenes
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeScenesResponse struct {
@@ -3372,14 +3372,14 @@ func (r *DescribeScenesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSnapshotsDeniedActionsRequestParams struct {
 	// Snapshot ID list, which can be queried through `DescribeSnapshots`.
-	SnapshotIds []*string `json:"SnapshotIds,omitnil" name:"SnapshotIds"`
+	SnapshotIds []*string `json:"SnapshotIds,omitnil,omitempty" name:"SnapshotIds"`
 }
 
 type DescribeSnapshotsDeniedActionsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Snapshot ID list, which can be queried through `DescribeSnapshots`.
-	SnapshotIds []*string `json:"SnapshotIds,omitnil" name:"SnapshotIds"`
+	SnapshotIds []*string `json:"SnapshotIds,omitnil,omitempty" name:"SnapshotIds"`
 }
 
 func (r *DescribeSnapshotsDeniedActionsRequest) ToJsonString() string {
@@ -3404,10 +3404,10 @@ func (r *DescribeSnapshotsDeniedActionsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSnapshotsDeniedActionsResponseParams struct {
 	// List of snapshot operation limit details.
-	SnapshotDeniedActionSet []*SnapshotDeniedActions `json:"SnapshotDeniedActionSet,omitnil" name:"SnapshotDeniedActionSet"`
+	SnapshotDeniedActionSet []*SnapshotDeniedActions `json:"SnapshotDeniedActionSet,omitnil,omitempty" name:"SnapshotDeniedActionSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeSnapshotsDeniedActionsResponse struct {
@@ -3430,7 +3430,7 @@ func (r *DescribeSnapshotsDeniedActionsResponse) FromJsonString(s string) error 
 type DescribeSnapshotsRequestParams struct {
 	// List of IDs of snapshots to be queried.
 	// You cannot specify `SnapshotIds` and `Filters` at the same time.
-	SnapshotIds []*string `json:"SnapshotIds,omitnil" name:"SnapshotIds"`
+	SnapshotIds []*string `json:"SnapshotIds,omitnil,omitempty" name:"SnapshotIds"`
 
 	// Filter list.
 	// <li>snapshot-id</li>Filter by **snapshot ID**.
@@ -3446,13 +3446,13 @@ type DescribeSnapshotsRequestParams struct {
 	// Type: String
 	// Required: no
 	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot specify both `SnapshotIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeSnapshotsRequest struct {
@@ -3460,7 +3460,7 @@ type DescribeSnapshotsRequest struct {
 	
 	// List of IDs of snapshots to be queried.
 	// You cannot specify `SnapshotIds` and `Filters` at the same time.
-	SnapshotIds []*string `json:"SnapshotIds,omitnil" name:"SnapshotIds"`
+	SnapshotIds []*string `json:"SnapshotIds,omitnil,omitempty" name:"SnapshotIds"`
 
 	// Filter list.
 	// <li>snapshot-id</li>Filter by **snapshot ID**.
@@ -3476,13 +3476,13 @@ type DescribeSnapshotsRequest struct {
 	// Type: String
 	// Required: no
 	// Each request can contain up to 10 `Filters` and 5 `Filter.Values`. You cannot specify both `SnapshotIds` and `Filters` at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeSnapshotsRequest) ToJsonString() string {
@@ -3510,13 +3510,13 @@ func (r *DescribeSnapshotsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeSnapshotsResponseParams struct {
 	// Number of snapshots.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of snapshot details.
-	SnapshotSet []*Snapshot `json:"SnapshotSet,omitnil" name:"SnapshotSet"`
+	SnapshotSet []*Snapshot `json:"SnapshotSet,omitnil,omitempty" name:"SnapshotSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeSnapshotsResponse struct {
@@ -3541,13 +3541,13 @@ type DescribeZonesRequestParams struct {
 	// <li>`ZONE`: Sort by the availability zone.
 	// <li>`INSTANCE_DISPLAY_LABEL`: Sort by visibility labels (`HIDDEN`, `NORMAL` and `SELECTED`). Default: ['HIDDEN', 'NORMAL', 'SELECTED'].
 	// The default value is `ZONE`.
-	OrderField *string `json:"OrderField,omitnil" name:"OrderField"`
+	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
 
 	// Specifies how availability zones are listed. Valid values:
 	// <li>ASC: Ascending sort. 
 	// <li>DESC: Descending sort.
 	// The default value is `ASC`.
-	Order *string `json:"Order,omitnil" name:"Order"`
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
 type DescribeZonesRequest struct {
@@ -3557,13 +3557,13 @@ type DescribeZonesRequest struct {
 	// <li>`ZONE`: Sort by the availability zone.
 	// <li>`INSTANCE_DISPLAY_LABEL`: Sort by visibility labels (`HIDDEN`, `NORMAL` and `SELECTED`). Default: ['HIDDEN', 'NORMAL', 'SELECTED'].
 	// The default value is `ZONE`.
-	OrderField *string `json:"OrderField,omitnil" name:"OrderField"`
+	OrderField *string `json:"OrderField,omitnil,omitempty" name:"OrderField"`
 
 	// Specifies how availability zones are listed. Valid values:
 	// <li>ASC: Ascending sort. 
 	// <li>DESC: Descending sort.
 	// The default value is `ASC`.
-	Order *string `json:"Order,omitnil" name:"Order"`
+	Order *string `json:"Order,omitnil,omitempty" name:"Order"`
 }
 
 func (r *DescribeZonesRequest) ToJsonString() string {
@@ -3589,13 +3589,13 @@ func (r *DescribeZonesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeZonesResponseParams struct {
 	// Number of AZs
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of AZ details
-	ZoneInfoSet []*ZoneInfo `json:"ZoneInfoSet,omitnil" name:"ZoneInfoSet"`
+	ZoneInfoSet []*ZoneInfo `json:"ZoneInfoSet,omitnil,omitempty" name:"ZoneInfoSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeZonesResponse struct {
@@ -3617,14 +3617,14 @@ func (r *DescribeZonesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DetachCcnRequestParams struct {
 	// CCN instance ID.
-	CcnId *string `json:"CcnId,omitnil" name:"CcnId"`
+	CcnId *string `json:"CcnId,omitnil,omitempty" name:"CcnId"`
 }
 
 type DetachCcnRequest struct {
 	*tchttp.BaseRequest
 	
 	// CCN instance ID.
-	CcnId *string `json:"CcnId,omitnil" name:"CcnId"`
+	CcnId *string `json:"CcnId,omitnil,omitempty" name:"CcnId"`
 }
 
 func (r *DetachCcnRequest) ToJsonString() string {
@@ -3649,7 +3649,7 @@ func (r *DetachCcnRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DetachCcnResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DetachCcnResponse struct {
@@ -3671,14 +3671,14 @@ func (r *DetachCcnResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DetachDisksRequestParams struct {
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 }
 
 type DetachDisksRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 }
 
 func (r *DetachDisksRequest) ToJsonString() string {
@@ -3703,7 +3703,7 @@ func (r *DetachDisksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DetachDisksResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DetachDisksResponse struct {
@@ -3726,38 +3726,38 @@ type DetailPrice struct {
 	// Values: 
 	// <li>"DiskSpace": Cloud disk space</li>
 	// <li>"DiskBackupQuota": Cloud disk backups</li>
-	PriceName *string `json:"PriceName,omitnil" name:"PriceName"`
+	PriceName *string `json:"PriceName,omitnil,omitempty" name:"PriceName"`
 
 	// Official unit price of the billable item
-	OriginUnitPrice *float64 `json:"OriginUnitPrice,omitnil" name:"OriginUnitPrice"`
+	OriginUnitPrice *float64 `json:"OriginUnitPrice,omitnil,omitempty" name:"OriginUnitPrice"`
 
 	// Official total price of the billable item
-	OriginalPrice *float64 `json:"OriginalPrice,omitnil" name:"OriginalPrice"`
+	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
 	// Discount of the billable item
-	Discount *float64 `json:"Discount,omitnil" name:"Discount"`
+	Discount *float64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
 	// Discounted total price of the billable item
-	DiscountPrice *float64 `json:"DiscountPrice,omitnil" name:"DiscountPrice"`
+	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 }
 
 // Predefined struct for user
 type DisassociateInstancesKeyPairsRequestParams struct {
 	// Key pair ID list. Each request can contain up to 100 key pairs.
-	KeyIds []*string `json:"KeyIds,omitnil" name:"KeyIds"`
+	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
 
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type DisassociateInstancesKeyPairsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Key pair ID list. Each request can contain up to 100 key pairs.
-	KeyIds []*string `json:"KeyIds,omitnil" name:"KeyIds"`
+	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
 
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *DisassociateInstancesKeyPairsRequest) ToJsonString() string {
@@ -3783,7 +3783,7 @@ func (r *DisassociateInstancesKeyPairsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DisassociateInstancesKeyPairsResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DisassociateInstancesKeyPairsResponse struct {
@@ -3804,51 +3804,51 @@ func (r *DisassociateInstancesKeyPairsResponse) FromJsonString(s string) error {
 
 type DiscountDetail struct {
 	// Billing duration.
-	TimeSpan *int64 `json:"TimeSpan,omitnil" name:"TimeSpan"`
+	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
 	// Billing unit.
-	TimeUnit *string `json:"TimeUnit,omitnil" name:"TimeUnit"`
+	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
 
 	// Total price.
-	TotalCost *float64 `json:"TotalCost,omitnil" name:"TotalCost"`
+	TotalCost *float64 `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 
 	// Discounted total price.
-	RealTotalCost *float64 `json:"RealTotalCost,omitnil" name:"RealTotalCost"`
+	RealTotalCost *float64 `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
 
 	// Discount.
-	Discount *int64 `json:"Discount,omitnil" name:"Discount"`
+	Discount *int64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
 	// Discount details.
-	PolicyDetail *PolicyDetail `json:"PolicyDetail,omitnil" name:"PolicyDetail"`
+	PolicyDetail *PolicyDetail `json:"PolicyDetail,omitnil,omitempty" name:"PolicyDetail"`
 }
 
 type Disk struct {
 	// Disk ID
-	DiskId *string `json:"DiskId,omitnil" name:"DiskId"`
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
 	// Instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Availability zone
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Disk name
-	DiskName *string `json:"DiskName,omitnil" name:"DiskName"`
+	DiskName *string `json:"DiskName,omitnil,omitempty" name:"DiskName"`
 
 	// Disk type
-	DiskUsage *string `json:"DiskUsage,omitnil" name:"DiskUsage"`
+	DiskUsage *string `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
 
 	// Disk media type
-	DiskType *string `json:"DiskType,omitnil" name:"DiskType"`
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
 	// Disk payment type
-	DiskChargeType *string `json:"DiskChargeType,omitnil" name:"DiskChargeType"`
+	DiskChargeType *string `json:"DiskChargeType,omitnil,omitempty" name:"DiskChargeType"`
 
 	// Disk size
-	DiskSize *int64 `json:"DiskSize,omitnil" name:"DiskSize"`
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// Renewal flag
-	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
 	// Disk status. Values: 
 	// <li>`PENDING`: Creating</li>
@@ -3861,48 +3861,48 @@ type Disk struct {
 	// <li>`TERMINATING`: Terminating</li>
 	// <li>`DELETING`: Deleting</li>
 	// <li>`FREEZING`: Freezing</li>
-	DiskState *string `json:"DiskState,omitnil" name:"DiskState"`
+	DiskState *string `json:"DiskState,omitnil,omitempty" name:"DiskState"`
 
 	// Whether the disk is attached to an instance
-	Attached *bool `json:"Attached,omitnil" name:"Attached"`
+	Attached *bool `json:"Attached,omitnil,omitempty" name:"Attached"`
 
 	// Whether to release the disk along with the instance
-	DeleteWithInstance *bool `json:"DeleteWithInstance,omitnil" name:"DeleteWithInstance"`
+	DeleteWithInstance *bool `json:"DeleteWithInstance,omitnil,omitempty" name:"DeleteWithInstance"`
 
 	// Last operation
-	LatestOperation *string `json:"LatestOperation,omitnil" name:"LatestOperation"`
+	LatestOperation *string `json:"LatestOperation,omitnil,omitempty" name:"LatestOperation"`
 
 	// Last operation status
-	LatestOperationState *string `json:"LatestOperationState,omitnil" name:"LatestOperationState"`
+	LatestOperationState *string `json:"LatestOperationState,omitnil,omitempty" name:"LatestOperationState"`
 
 	// Last request ID
-	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitnil" name:"LatestOperationRequestId"`
+	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitnil,omitempty" name:"LatestOperationRequestId"`
 
 	// Creation time according to ISO 8601 standard. UTC time is used. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	CreatedTime *string `json:"CreatedTime,omitnil" name:"CreatedTime"`
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
 	// Expiration time according to ISO 8601 standard. UTC time is used. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ExpiredTime *string `json:"ExpiredTime,omitnil" name:"ExpiredTime"`
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 
 	// Isolation time according to ISO 8601 standard. UTC time is used. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IsolatedTime *string `json:"IsolatedTime,omitnil" name:"IsolatedTime"`
+	IsolatedTime *string `json:"IsolatedTime,omitnil,omitempty" name:"IsolatedTime"`
 
 	// Total disk backups
-	DiskBackupCount *int64 `json:"DiskBackupCount,omitnil" name:"DiskBackupCount"`
+	DiskBackupCount *int64 `json:"DiskBackupCount,omitnil,omitempty" name:"DiskBackupCount"`
 
 	// Disk backup quota
-	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil" name:"DiskBackupQuota"`
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 }
 
 type DiskChargePrepaid struct {
 	// Purchase duration.
-	Period *int64 `json:"Period,omitnil" name:"Period"`
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Auto-Renewal flag. Valid values:
 	// 
@@ -3911,188 +3911,188 @@ type DiskChargePrepaid struct {
 	// `u200cDISABLE_NOTIFY_AND_AUTO_RENEW`: Neither trigger expiration notification nor renew
 	// 
 	// Default: `NOTIFY_AND_MANUAL_RENEW`. If `NOTIFY_AND_AUTO_RENEW` is specified, the instance is automatically renewed on a monthly basis when the account balance is sufficient.
-	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
 	// Purchase duration unit. Default value: "m" (month)
-	TimeUnit *string `json:"TimeUnit,omitnil" name:"TimeUnit"`
+	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
 }
 
 type DiskConfig struct {
 	// Availability zone.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Cloud disk type.
-	DiskType *string `json:"DiskType,omitnil" name:"DiskType"`
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
 	// Cloud disk sale status.
-	DiskSalesState *string `json:"DiskSalesState,omitnil" name:"DiskSalesState"`
+	DiskSalesState *string `json:"DiskSalesState,omitnil,omitempty" name:"DiskSalesState"`
 
 	// Maximum cloud disk size.
-	MaxDiskSize *int64 `json:"MaxDiskSize,omitnil" name:"MaxDiskSize"`
+	MaxDiskSize *int64 `json:"MaxDiskSize,omitnil,omitempty" name:"MaxDiskSize"`
 
 	// Minimum cloud disk size.
-	MinDiskSize *int64 `json:"MinDiskSize,omitnil" name:"MinDiskSize"`
+	MinDiskSize *int64 `json:"MinDiskSize,omitnil,omitempty" name:"MinDiskSize"`
 
 	// Cloud disk increment.
-	DiskStepSize *int64 `json:"DiskStepSize,omitnil" name:"DiskStepSize"`
+	DiskStepSize *int64 `json:"DiskStepSize,omitnil,omitempty" name:"DiskStepSize"`
 }
 
 type DiskDeniedActions struct {
 	// Cloud disk ID.
-	DiskId *string `json:"DiskId,omitnil" name:"DiskId"`
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
 	// List of operation limits.
-	DeniedActions []*DeniedAction `json:"DeniedActions,omitnil" name:"DeniedActions"`
+	DeniedActions []*DeniedAction `json:"DeniedActions,omitnil,omitempty" name:"DeniedActions"`
 }
 
 type DiskPrice struct {
 	// Cloud disk unit price.
-	OriginalDiskPrice *float64 `json:"OriginalDiskPrice,omitnil" name:"OriginalDiskPrice"`
+	OriginalDiskPrice *float64 `json:"OriginalDiskPrice,omitnil,omitempty" name:"OriginalDiskPrice"`
 
 	// Total cloud disk price.
-	OriginalPrice *float64 `json:"OriginalPrice,omitnil" name:"OriginalPrice"`
+	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
 	// Discount.
-	Discount *float64 `json:"Discount,omitnil" name:"Discount"`
+	Discount *float64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
 	// Discounted total price.
-	DiscountPrice *float64 `json:"DiscountPrice,omitnil" name:"DiscountPrice"`
+	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 
 	// Detailed billing items
-	DetailPrices []*DetailPrice `json:"DetailPrices,omitnil" name:"DetailPrices"`
+	DetailPrices []*DetailPrice `json:"DetailPrices,omitnil,omitempty" name:"DetailPrices"`
 }
 
 type DiskReturnable struct {
 	// Cloud disk ID.
-	DiskId *string `json:"DiskId,omitnil" name:"DiskId"`
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
 	// Whether the cloud disk can be returned.
-	IsReturnable *bool `json:"IsReturnable,omitnil" name:"IsReturnable"`
+	IsReturnable *bool `json:"IsReturnable,omitnil,omitempty" name:"IsReturnable"`
 
 	// Error code of cloud disk return failure.
-	ReturnFailCode *int64 `json:"ReturnFailCode,omitnil" name:"ReturnFailCode"`
+	ReturnFailCode *int64 `json:"ReturnFailCode,omitnil,omitempty" name:"ReturnFailCode"`
 
 	// Error message of cloud disk return failure.
-	ReturnFailMessage *string `json:"ReturnFailMessage,omitnil" name:"ReturnFailMessage"`
+	ReturnFailMessage *string `json:"ReturnFailMessage,omitnil,omitempty" name:"ReturnFailMessage"`
 }
 
 type DockerContainerConfiguration struct {
 	// Container image address
-	ContainerImage *string `json:"ContainerImage,omitnil" name:"ContainerImage"`
+	ContainerImage *string `json:"ContainerImage,omitnil,omitempty" name:"ContainerImage"`
 
 	// Container name
-	ContainerName *string `json:"ContainerName,omitnil" name:"ContainerName"`
+	ContainerName *string `json:"ContainerName,omitnil,omitempty" name:"ContainerName"`
 
 	// List of environment variables
-	Envs []*ContainerEnv `json:"Envs,omitnil" name:"Envs"`
+	Envs []*ContainerEnv `json:"Envs,omitnil,omitempty" name:"Envs"`
 
 	// List of mappings of container ports and host ports
-	PublishPorts []*DockerContainerPublishPort `json:"PublishPorts,omitnil" name:"PublishPorts"`
+	PublishPorts []*DockerContainerPublishPort `json:"PublishPorts,omitnil,omitempty" name:"PublishPorts"`
 
 	// List of container mount volumes
-	Volumes []*DockerContainerVolume `json:"Volumes,omitnil" name:"Volumes"`
+	Volumes []*DockerContainerVolume `json:"Volumes,omitnil,omitempty" name:"Volumes"`
 
 	// The command to run
-	Command *string `json:"Command,omitnil" name:"Command"`
+	Command *string `json:"Command,omitnil,omitempty" name:"Command"`
 }
 
 type DockerContainerPublishPort struct {
 	// Host port
-	HostPort *int64 `json:"HostPort,omitnil" name:"HostPort"`
+	HostPort *int64 `json:"HostPort,omitnil,omitempty" name:"HostPort"`
 
 	// Container port
-	ContainerPort *int64 `json:"ContainerPort,omitnil" name:"ContainerPort"`
+	ContainerPort *int64 `json:"ContainerPort,omitnil,omitempty" name:"ContainerPort"`
 
 	// External IP. It defaults to 0.0.0.0.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Ip *string `json:"Ip,omitnil" name:"Ip"`
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
 	// The protocol defaults to `tcp`. Valid values: `tcp`, `udp` and `sctp`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 }
 
 type DockerContainerVolume struct {
 	// Container path
-	ContainerPath *string `json:"ContainerPath,omitnil" name:"ContainerPath"`
+	ContainerPath *string `json:"ContainerPath,omitnil,omitempty" name:"ContainerPath"`
 
 	// Host path
-	HostPath *string `json:"HostPath,omitnil" name:"HostPath"`
+	HostPath *string `json:"HostPath,omitnil,omitempty" name:"HostPath"`
 }
 
 type Filter struct {
 	// Field to be filtered.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Filter value of field.
-	Values []*string `json:"Values,omitnil" name:"Values"`
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
 type FirewallRule struct {
 	// Protocol. Valid values: TCP, UDP, ICMP, ALL.
-	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// Port. Valid values: ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign
-	Port *string `json:"Port,omitnil" name:"Port"`
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// IP range or IP (mutually exclusive). Default value: 0.0.0.0/0, which indicates all sources.
-	CidrBlock *string `json:"CidrBlock,omitnil" name:"CidrBlock"`
+	CidrBlock *string `json:"CidrBlock,omitnil,omitempty" name:"CidrBlock"`
 
 	// Valid values: ACCEPT, DROP. Default value: ACCEPT.
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// Firewall rule description.
-	FirewallRuleDescription *string `json:"FirewallRuleDescription,omitnil" name:"FirewallRuleDescription"`
+	FirewallRuleDescription *string `json:"FirewallRuleDescription,omitnil,omitempty" name:"FirewallRuleDescription"`
 }
 
 type FirewallRuleInfo struct {
 	// Application type. Valid values: custom, HTTP (80), HTTPS (443), Linux login (22), Windows login (3389), MySQL (3306), SQL Server (1433), all TCP ports, all UDP ports, Ping-ICMP, ALL.
-	AppType *string `json:"AppType,omitnil" name:"AppType"`
+	AppType *string `json:"AppType,omitnil,omitempty" name:"AppType"`
 
 	// Protocol. Valid values: TCP, UDP, ICMP, ALL.
-	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// Port. Valid values: ALL, one single port, multiple ports separated by commas, or port range indicated by a minus sign
-	Port *string `json:"Port,omitnil" name:"Port"`
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// IP range or IP (mutually exclusive). Default value: 0.0.0.0/0, which indicates all sources.
-	CidrBlock *string `json:"CidrBlock,omitnil" name:"CidrBlock"`
+	CidrBlock *string `json:"CidrBlock,omitnil,omitempty" name:"CidrBlock"`
 
 	// Valid values: ACCEPT, DROP. Default value: ACCEPT.
-	Action *string `json:"Action,omitnil" name:"Action"`
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
 	// Firewall rule description.
-	FirewallRuleDescription *string `json:"FirewallRuleDescription,omitnil" name:"FirewallRuleDescription"`
+	FirewallRuleDescription *string `json:"FirewallRuleDescription,omitnil,omitempty" name:"FirewallRuleDescription"`
 }
 
 type GeneralResourceQuota struct {
 	// Resource name.
-	ResourceName *string `json:"ResourceName,omitnil" name:"ResourceName"`
+	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
 
 	// Number of available resources.
-	ResourceQuotaAvailable *int64 `json:"ResourceQuotaAvailable,omitnil" name:"ResourceQuotaAvailable"`
+	ResourceQuotaAvailable *int64 `json:"ResourceQuotaAvailable,omitnil,omitempty" name:"ResourceQuotaAvailable"`
 
 	// Total number of resources.
-	ResourceQuotaTotal *int64 `json:"ResourceQuotaTotal,omitnil" name:"ResourceQuotaTotal"`
+	ResourceQuotaTotal *int64 `json:"ResourceQuotaTotal,omitnil,omitempty" name:"ResourceQuotaTotal"`
 }
 
 // Predefined struct for user
 type ImportKeyPairRequestParams struct {
 	// Key pair name, which can contain up to 25 digits, letters, and underscores.
-	KeyName *string `json:"KeyName,omitnil" name:"KeyName"`
+	KeyName *string `json:"KeyName,omitnil,omitempty" name:"KeyName"`
 
 	// Public key content of the key pair, which is in the OpenSSH RSA format.
-	PublicKey *string `json:"PublicKey,omitnil" name:"PublicKey"`
+	PublicKey *string `json:"PublicKey,omitnil,omitempty" name:"PublicKey"`
 }
 
 type ImportKeyPairRequest struct {
 	*tchttp.BaseRequest
 	
 	// Key pair name, which can contain up to 25 digits, letters, and underscores.
-	KeyName *string `json:"KeyName,omitnil" name:"KeyName"`
+	KeyName *string `json:"KeyName,omitnil,omitempty" name:"KeyName"`
 
 	// Public key content of the key pair, which is in the OpenSSH RSA format.
-	PublicKey *string `json:"PublicKey,omitnil" name:"PublicKey"`
+	PublicKey *string `json:"PublicKey,omitnil,omitempty" name:"PublicKey"`
 }
 
 func (r *ImportKeyPairRequest) ToJsonString() string {
@@ -4118,10 +4118,10 @@ func (r *ImportKeyPairRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ImportKeyPairResponseParams struct {
 	// Key pair ID.
-	KeyId *string `json:"KeyId,omitnil" name:"KeyId"`
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ImportKeyPairResponse struct {
@@ -4143,14 +4143,14 @@ func (r *ImportKeyPairResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type InquirePriceCreateBlueprintRequestParams struct {
 	// Number of custom images. Default value: 1.
-	BlueprintCount *int64 `json:"BlueprintCount,omitnil" name:"BlueprintCount"`
+	BlueprintCount *int64 `json:"BlueprintCount,omitnil,omitempty" name:"BlueprintCount"`
 }
 
 type InquirePriceCreateBlueprintRequest struct {
 	*tchttp.BaseRequest
 	
 	// Number of custom images. Default value: 1.
-	BlueprintCount *int64 `json:"BlueprintCount,omitnil" name:"BlueprintCount"`
+	BlueprintCount *int64 `json:"BlueprintCount,omitnil,omitempty" name:"BlueprintCount"`
 }
 
 func (r *InquirePriceCreateBlueprintRequest) ToJsonString() string {
@@ -4175,10 +4175,10 @@ func (r *InquirePriceCreateBlueprintRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type InquirePriceCreateBlueprintResponseParams struct {
 	// Custom image price.
-	BlueprintPrice *BlueprintPrice `json:"BlueprintPrice,omitnil" name:"BlueprintPrice"`
+	BlueprintPrice *BlueprintPrice `json:"BlueprintPrice,omitnil,omitempty" name:"BlueprintPrice"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type InquirePriceCreateBlueprintResponse struct {
@@ -4200,38 +4200,38 @@ func (r *InquirePriceCreateBlueprintResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type InquirePriceCreateDisksRequestParams struct {
 	// Cloud disk size in GB.
-	DiskSize *int64 `json:"DiskSize,omitnil" name:"DiskSize"`
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// Cloud disk media type. Valid values: "CLOUD_PREMIUM" (premium cloud storage), "CLOUD_SSD" (SSD cloud disk).
-	DiskType *string `json:"DiskType,omitnil" name:"DiskType"`
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
 	// Parameter settings for purchasing the monthly subscribed cloud disk.
-	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil" name:"DiskChargePrepaid"`
+	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
 
 	// Number of cloud disks. Default value: 1.
-	DiskCount *int64 `json:"DiskCount,omitnil" name:"DiskCount"`
+	DiskCount *int64 `json:"DiskCount,omitnil,omitempty" name:"DiskCount"`
 
 	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
-	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil" name:"DiskBackupQuota"`
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 }
 
 type InquirePriceCreateDisksRequest struct {
 	*tchttp.BaseRequest
 	
 	// Cloud disk size in GB.
-	DiskSize *int64 `json:"DiskSize,omitnil" name:"DiskSize"`
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// Cloud disk media type. Valid values: "CLOUD_PREMIUM" (premium cloud storage), "CLOUD_SSD" (SSD cloud disk).
-	DiskType *string `json:"DiskType,omitnil" name:"DiskType"`
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
 	// Parameter settings for purchasing the monthly subscribed cloud disk.
-	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil" name:"DiskChargePrepaid"`
+	DiskChargePrepaid *DiskChargePrepaid `json:"DiskChargePrepaid,omitnil,omitempty" name:"DiskChargePrepaid"`
 
 	// Number of cloud disks. Default value: 1.
-	DiskCount *int64 `json:"DiskCount,omitnil" name:"DiskCount"`
+	DiskCount *int64 `json:"DiskCount,omitnil,omitempty" name:"DiskCount"`
 
 	// Specify the quota of disk backups. No quota if it’s left empty. Only one quota is allowed.
-	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil" name:"DiskBackupQuota"`
+	DiskBackupQuota *int64 `json:"DiskBackupQuota,omitnil,omitempty" name:"DiskBackupQuota"`
 }
 
 func (r *InquirePriceCreateDisksRequest) ToJsonString() string {
@@ -4260,10 +4260,10 @@ func (r *InquirePriceCreateDisksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type InquirePriceCreateDisksResponseParams struct {
 	// Cloud disk price.
-	DiskPrice *DiskPrice `json:"DiskPrice,omitnil" name:"DiskPrice"`
+	DiskPrice *DiskPrice `json:"DiskPrice,omitnil,omitempty" name:"DiskPrice"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type InquirePriceCreateDisksResponse struct {
@@ -4285,32 +4285,32 @@ func (r *InquirePriceCreateDisksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type InquirePriceCreateInstancesRequestParams struct {
 	// Instance package ID.
-	BundleId *string `json:"BundleId,omitnil" name:"BundleId"`
+	BundleId *string `json:"BundleId,omitnil,omitempty" name:"BundleId"`
 
 	// Parameter setting for prepaid mode. This parameter can specify the purchase period, whether to enable auto-renewal, and other attributes of the monthly subscribed instances.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil" name:"InstanceChargePrepaid"`
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// Number of instances to be created. Default value: 1.
-	InstanceCount *int64 `json:"InstanceCount,omitnil" name:"InstanceCount"`
+	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
 	// Application image ID, which is required if a paid application image is used and can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
-	BlueprintId *string `json:"BlueprintId,omitnil" name:"BlueprintId"`
+	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 }
 
 type InquirePriceCreateInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance package ID.
-	BundleId *string `json:"BundleId,omitnil" name:"BundleId"`
+	BundleId *string `json:"BundleId,omitnil,omitempty" name:"BundleId"`
 
 	// Parameter setting for prepaid mode. This parameter can specify the purchase period, whether to enable auto-renewal, and other attributes of the monthly subscribed instances.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil" name:"InstanceChargePrepaid"`
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// Number of instances to be created. Default value: 1.
-	InstanceCount *int64 `json:"InstanceCount,omitnil" name:"InstanceCount"`
+	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
 
 	// Application image ID, which is required if a paid application image is used and can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
-	BlueprintId *string `json:"BlueprintId,omitnil" name:"BlueprintId"`
+	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 }
 
 func (r *InquirePriceCreateInstancesRequest) ToJsonString() string {
@@ -4338,10 +4338,10 @@ func (r *InquirePriceCreateInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type InquirePriceCreateInstancesResponseParams struct {
 	// Price query information.
-	Price *Price `json:"Price,omitnil" name:"Price"`
+	Price *Price `json:"Price,omitnil,omitempty" name:"Price"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type InquirePriceCreateInstancesResponse struct {
@@ -4363,20 +4363,20 @@ func (r *InquirePriceCreateInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type InquirePriceRenewDisksRequestParams struct {
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Parameter settings for renewing the monthly subscribed cloud disk.
-	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil" name:"RenewDiskChargePrepaid"`
+	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil,omitempty" name:"RenewDiskChargePrepaid"`
 }
 
 type InquirePriceRenewDisksRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Parameter settings for renewing the monthly subscribed cloud disk.
-	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil" name:"RenewDiskChargePrepaid"`
+	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil,omitempty" name:"RenewDiskChargePrepaid"`
 }
 
 func (r *InquirePriceRenewDisksRequest) ToJsonString() string {
@@ -4402,10 +4402,10 @@ func (r *InquirePriceRenewDisksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type InquirePriceRenewDisksResponseParams struct {
 	// Cloud disk price.
-	DiskPrice *DiskPrice `json:"DiskPrice,omitnil" name:"DiskPrice"`
+	DiskPrice *DiskPrice `json:"DiskPrice,omitnil,omitempty" name:"DiskPrice"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type InquirePriceRenewDisksResponse struct {
@@ -4427,32 +4427,32 @@ func (r *InquirePriceRenewDisksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type InquirePriceRenewInstancesRequestParams struct {
 	// IDs of the instances to be renewed. Each request can contain up to 50 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Parameter setting for prepaid mode. This parameter can specify the renewal period, whether to enable auto-renewal, and other attributes of the monthly subscribed instances.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil" name:"InstanceChargePrepaid"`
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// Whether to renew the data disk. Default: `false`.
-	RenewDataDisk *bool `json:"RenewDataDisk,omitnil" name:"RenewDataDisk"`
+	RenewDataDisk *bool `json:"RenewDataDisk,omitnil,omitempty" name:"RenewDataDisk"`
 
 	// Whether to align the data disk expiration with the instance expiration time. Default: `false`.
-	AlignInstanceExpiredTime *bool `json:"AlignInstanceExpiredTime,omitnil" name:"AlignInstanceExpiredTime"`
+	AlignInstanceExpiredTime *bool `json:"AlignInstanceExpiredTime,omitnil,omitempty" name:"AlignInstanceExpiredTime"`
 }
 
 type InquirePriceRenewInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// IDs of the instances to be renewed. Each request can contain up to 50 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Parameter setting for prepaid mode. This parameter can specify the renewal period, whether to enable auto-renewal, and other attributes of the monthly subscribed instances.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil" name:"InstanceChargePrepaid"`
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// Whether to renew the data disk. Default: `false`.
-	RenewDataDisk *bool `json:"RenewDataDisk,omitnil" name:"RenewDataDisk"`
+	RenewDataDisk *bool `json:"RenewDataDisk,omitnil,omitempty" name:"RenewDataDisk"`
 
 	// Whether to align the data disk expiration with the instance expiration time. Default: `false`.
-	AlignInstanceExpiredTime *bool `json:"AlignInstanceExpiredTime,omitnil" name:"AlignInstanceExpiredTime"`
+	AlignInstanceExpiredTime *bool `json:"AlignInstanceExpiredTime,omitnil,omitempty" name:"AlignInstanceExpiredTime"`
 }
 
 func (r *InquirePriceRenewInstancesRequest) ToJsonString() string {
@@ -4480,21 +4480,21 @@ func (r *InquirePriceRenewInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type InquirePriceRenewInstancesResponseParams struct {
 	// Price information. It defaults to the price information of the first instance in the list.
-	Price *Price `json:"Price,omitnil" name:"Price"`
+	Price *Price `json:"Price,omitnil,omitempty" name:"Price"`
 
 	// List of data disk price information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DataDiskPriceSet []*DataDiskPrice `json:"DataDiskPriceSet,omitnil" name:"DataDiskPriceSet"`
+	DataDiskPriceSet []*DataDiskPrice `json:"DataDiskPriceSet,omitnil,omitempty" name:"DataDiskPriceSet"`
 
 	// Price list of the instances to be renewed.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	InstancePriceDetailSet []*InstancePriceDetail `json:"InstancePriceDetailSet,omitnil" name:"InstancePriceDetailSet"`
+	InstancePriceDetailSet []*InstancePriceDetail `json:"InstancePriceDetailSet,omitnil,omitempty" name:"InstancePriceDetailSet"`
 
 	// Total price
-	TotalPrice *TotalPrice `json:"TotalPrice,omitnil" name:"TotalPrice"`
+	TotalPrice *TotalPrice `json:"TotalPrice,omitnil,omitempty" name:"TotalPrice"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type InquirePriceRenewInstancesResponse struct {
@@ -4515,200 +4515,200 @@ func (r *InquirePriceRenewInstancesResponse) FromJsonString(s string) error {
 
 type Instance struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Package ID.
-	BundleId *string `json:"BundleId,omitnil" name:"BundleId"`
+	BundleId *string `json:"BundleId,omitnil,omitempty" name:"BundleId"`
 
 	// Image ID.
-	BlueprintId *string `json:"BlueprintId,omitnil" name:"BlueprintId"`
+	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
 	// Number of instance CPU cores.
-	CPU *int64 `json:"CPU,omitnil" name:"CPU"`
+	CPU *int64 `json:"CPU,omitnil,omitempty" name:"CPU"`
 
 	// Instance memory capacity in GB.
-	Memory *int64 `json:"Memory,omitnil" name:"Memory"`
+	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
 	// Instance name.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Instance billing mode. Valid values: 
 	// PREPAID: prepaid (i.e., monthly subscription).
-	InstanceChargeType *string `json:"InstanceChargeType,omitnil" name:"InstanceChargeType"`
+	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
 	// Instance system disk information.
-	SystemDisk *SystemDisk `json:"SystemDisk,omitnil" name:"SystemDisk"`
+	SystemDisk *SystemDisk `json:"SystemDisk,omitnil,omitempty" name:"SystemDisk"`
 
 	// Private IP of instance primary ENI. 
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PrivateAddresses []*string `json:"PrivateAddresses,omitnil" name:"PrivateAddresses"`
+	PrivateAddresses []*string `json:"PrivateAddresses,omitnil,omitempty" name:"PrivateAddresses"`
 
 	// Public IP of instance primary ENI. 
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PublicAddresses []*string `json:"PublicAddresses,omitnil" name:"PublicAddresses"`
+	PublicAddresses []*string `json:"PublicAddresses,omitnil,omitempty" name:"PublicAddresses"`
 
 	// Instance bandwidth information.
-	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil" name:"InternetAccessible"`
+	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil,omitempty" name:"InternetAccessible"`
 
 	// Auto-Renewal flag. Valid values: 
 	// NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically  
 	// NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically.
-	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
 	// Instance login settings.
-	LoginSettings *LoginSettings `json:"LoginSettings,omitnil" name:"LoginSettings"`
+	LoginSettings *LoginSettings `json:"LoginSettings,omitnil,omitempty" name:"LoginSettings"`
 
 	// Instance status. Valid values: 
 	// <li>PENDING: Creating</li><li>LAUNCH_FAILED: Failed to create</li><li>RUNNING: Running</li><li>STOPPED: Shut down</li><li>STARTING: Starting up</li><li>STOPPING: Shutting down</li><li>REBOOTING: Restarting</li><li>SHUTDOWN: Shutdown and to be terminated</li><li>TERMINATING: Terminating</li><li>DELETING: Deleting</li><li>FREEZING: Frozen</li><li>ENTER_RESCUE_MODE: Entering the rescue mode</li><li>RESCUE_MODE: Rescue mode</li><li>EXIT_RESCUE_MODE: Exiting from the rescue mode</li>
-	InstanceState *string `json:"InstanceState,omitnil" name:"InstanceState"`
+	InstanceState *string `json:"InstanceState,omitnil,omitempty" name:"InstanceState"`
 
 	// Globally unique ID of instance.
-	Uuid *string `json:"Uuid,omitnil" name:"Uuid"`
+	Uuid *string `json:"Uuid,omitnil,omitempty" name:"Uuid"`
 
 	// Last instance operation, such as `StopInstances` and `ResetInstance`. Note: this field may return null, indicating that no valid values can be obtained.
-	LatestOperation *string `json:"LatestOperation,omitnil" name:"LatestOperation"`
+	LatestOperation *string `json:"LatestOperation,omitnil,omitempty" name:"LatestOperation"`
 
 	// Last instance operation status. Valid values: 
 	// SUCCESS: operation succeeded 
 	// OPERATING: the operation is being executed 
 	// FAILED: operation failed 
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LatestOperationState *string `json:"LatestOperationState,omitnil" name:"LatestOperationState"`
+	LatestOperationState *string `json:"LatestOperationState,omitnil,omitempty" name:"LatestOperationState"`
 
 	// Unique request ID for the last operation of the instance. 
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitnil" name:"LatestOperationRequestId"`
+	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitnil,omitempty" name:"LatestOperationRequestId"`
 
 	// Isolation time according to ISO 8601 standard. UTC time is used. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	IsolatedTime *string `json:"IsolatedTime,omitnil" name:"IsolatedTime"`
+	IsolatedTime *string `json:"IsolatedTime,omitnil,omitempty" name:"IsolatedTime"`
 
 	// Creation time according to ISO 8601 standard. UTC time is used. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreatedTime *string `json:"CreatedTime,omitnil" name:"CreatedTime"`
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
 	// Expiration time according to ISO 8601 standard. UTC time is used. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ExpiredTime *string `json:"ExpiredTime,omitnil" name:"ExpiredTime"`
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 
 	// OS type, such as LINUX_UNIX and WINDOWS.
-	PlatformType *string `json:"PlatformType,omitnil" name:"PlatformType"`
+	PlatformType *string `json:"PlatformType,omitnil,omitempty" name:"PlatformType"`
 
 	// OS type.
-	Platform *string `json:"Platform,omitnil" name:"Platform"`
+	Platform *string `json:"Platform,omitnil,omitempty" name:"Platform"`
 
 	// OS name.
-	OsName *string `json:"OsName,omitnil" name:"OsName"`
+	OsName *string `json:"OsName,omitnil,omitempty" name:"OsName"`
 
 	// AZ.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// The list of tags associated with the instance
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// Obtain instance status
 	// <li>NORMAL: The instance is normal</li><li>NETWORK_RESTRICT: The instance is blocked from the network.</li>
-	InstanceRestrictState *string `json:"InstanceRestrictState,omitnil" name:"InstanceRestrictState"`
+	InstanceRestrictState *string `json:"InstanceRestrictState,omitnil,omitempty" name:"InstanceRestrictState"`
 }
 
 type InstanceChargePrepaid struct {
 	// Subscription period in months. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36, 48, 60.
-	Period *int64 `json:"Period,omitnil" name:"Period"`
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Auto-Renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically. You need to manually renew <br><li>DISABLE_NOTIFY_AND_AUTO_RENEW: neither notify upon expiration nor renew automatically<br><br>Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed monthly if the account balance is sufficient.
-	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 }
 
 type InstanceDeniedActions struct {
 	// Instance ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// List of operation limits.
-	DeniedActions []*DeniedAction `json:"DeniedActions,omitnil" name:"DeniedActions"`
+	DeniedActions []*DeniedAction `json:"DeniedActions,omitnil,omitempty" name:"DeniedActions"`
 }
 
 type InstancePrice struct {
 	// Original package unit price.
-	OriginalBundlePrice *float64 `json:"OriginalBundlePrice,omitnil" name:"OriginalBundlePrice"`
+	OriginalBundlePrice *float64 `json:"OriginalBundlePrice,omitnil,omitempty" name:"OriginalBundlePrice"`
 
 	// Original price.
-	OriginalPrice *float64 `json:"OriginalPrice,omitnil" name:"OriginalPrice"`
+	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
 	// Discount.
-	Discount *int64 `json:"Discount,omitnil" name:"Discount"`
+	Discount *int64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
 	// Discounted price.
-	DiscountPrice *float64 `json:"DiscountPrice,omitnil" name:"DiscountPrice"`
+	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 
 	// Currency unit. Valid values: `CNY` and `USD`.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Currency *string `json:"Currency,omitnil" name:"Currency"`
+	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
 }
 
 type InstancePriceDetail struct {
 	// Instance ID.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Price query information.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	InstancePrice *InstancePrice `json:"InstancePrice,omitnil" name:"InstancePrice"`
+	InstancePrice *InstancePrice `json:"InstancePrice,omitnil,omitempty" name:"InstancePrice"`
 
 	// Tiered-pricing details. The information of each tier includes the billable period, discount percentage, total price, discounted price, and discount details (`UserDiscount`, `CommonDiscount` and `FinalDiscount`).
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitnil" name:"DiscountDetail"`
+	DiscountDetail []*DiscountDetail `json:"DiscountDetail,omitnil,omitempty" name:"DiscountDetail"`
 }
 
 type InstanceReturnable struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Whether the instance can be returned.
-	IsReturnable *bool `json:"IsReturnable,omitnil" name:"IsReturnable"`
+	IsReturnable *bool `json:"IsReturnable,omitnil,omitempty" name:"IsReturnable"`
 
 	// Error code of instance return failure.
-	ReturnFailCode *int64 `json:"ReturnFailCode,omitnil" name:"ReturnFailCode"`
+	ReturnFailCode *int64 `json:"ReturnFailCode,omitnil,omitempty" name:"ReturnFailCode"`
 
 	// Error message of instance return failure.
-	ReturnFailMessage *string `json:"ReturnFailMessage,omitnil" name:"ReturnFailMessage"`
+	ReturnFailMessage *string `json:"ReturnFailMessage,omitnil,omitempty" name:"ReturnFailMessage"`
 }
 
 type InstanceTrafficPackage struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// List of traffic package details.
-	TrafficPackageSet []*TrafficPackage `json:"TrafficPackageSet,omitnil" name:"TrafficPackageSet"`
+	TrafficPackageSet []*TrafficPackage `json:"TrafficPackageSet,omitnil,omitempty" name:"TrafficPackageSet"`
 }
 
 type InternetAccessible struct {
 	// Network billing mode. Valid values:
 	// <li>Bill by traffic package: TRAFFIC_POSTPAID_BY_HOUR</li>
 	// <li>Bill by bandwidth: BANDWIDTH_POSTPAID_BY_HOUR</li>
-	InternetChargeType *string `json:"InternetChargeType,omitnil" name:"InternetChargeType"`
+	InternetChargeType *string `json:"InternetChargeType,omitnil,omitempty" name:"InternetChargeType"`
 
 	// Public network outbound bandwidth cap in Mbps.
-	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil" name:"InternetMaxBandwidthOut"`
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
 
 	// Whether to assign a public IP.
-	PublicIpAssigned *bool `json:"PublicIpAssigned,omitnil" name:"PublicIpAssigned"`
+	PublicIpAssigned *bool `json:"PublicIpAssigned,omitnil,omitempty" name:"PublicIpAssigned"`
 }
 
 // Predefined struct for user
 type IsolateDisksRequestParams struct {
 	// IDs of cloud disks. The value can be obtained from the `InstanceId` parameter returned by the [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1) API. Up to 20 disks can be processed at a time.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 }
 
 type IsolateDisksRequest struct {
 	*tchttp.BaseRequest
 	
 	// IDs of cloud disks. The value can be obtained from the `InstanceId` parameter returned by the [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1) API. Up to 20 disks can be processed at a time.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 }
 
 func (r *IsolateDisksRequest) ToJsonString() string {
@@ -4733,7 +4733,7 @@ func (r *IsolateDisksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type IsolateDisksResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type IsolateDisksResponse struct {
@@ -4755,26 +4755,26 @@ func (r *IsolateDisksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type IsolateInstancesRequestParams struct {
 	// IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 20 instances can be specified at the same time.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Whether to return data disks mounted on the instance together with the instance. Valid values: 
 	// `TRUE`: Return the mounted data disks at the same time 
 	// `FALSE`: Do not return the mounted data disks at the same time 
 	// Default value: `TRUE`.
-	IsolateDataDisk *bool `json:"IsolateDataDisk,omitnil" name:"IsolateDataDisk"`
+	IsolateDataDisk *bool `json:"IsolateDataDisk,omitnil,omitempty" name:"IsolateDataDisk"`
 }
 
 type IsolateInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 20 instances can be specified at the same time.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Whether to return data disks mounted on the instance together with the instance. Valid values: 
 	// `TRUE`: Return the mounted data disks at the same time 
 	// `FALSE`: Do not return the mounted data disks at the same time 
 	// Default value: `TRUE`.
-	IsolateDataDisk *bool `json:"IsolateDataDisk,omitnil" name:"IsolateDataDisk"`
+	IsolateDataDisk *bool `json:"IsolateDataDisk,omitnil,omitempty" name:"IsolateDataDisk"`
 }
 
 func (r *IsolateInstancesRequest) ToJsonString() string {
@@ -4800,7 +4800,7 @@ func (r *IsolateInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type IsolateInstancesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type IsolateInstancesResponse struct {
@@ -4821,31 +4821,31 @@ func (r *IsolateInstancesResponse) FromJsonString(s string) error {
 
 type KeyPair struct {
 	// Key pair ID, which is the unique identifier of a key pair.
-	KeyId *string `json:"KeyId,omitnil" name:"KeyId"`
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
 	// Key pair name.
-	KeyName *string `json:"KeyName,omitnil" name:"KeyName"`
+	KeyName *string `json:"KeyName,omitnil,omitempty" name:"KeyName"`
 
 	// Public key (in plain text) of key pair.
-	PublicKey *string `json:"PublicKey,omitnil" name:"PublicKey"`
+	PublicKey *string `json:"PublicKey,omitnil,omitempty" name:"PublicKey"`
 
 	// List of IDs of instances associated with the key pair.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AssociatedInstanceIds []*string `json:"AssociatedInstanceIds,omitnil" name:"AssociatedInstanceIds"`
+	AssociatedInstanceIds []*string `json:"AssociatedInstanceIds,omitnil,omitempty" name:"AssociatedInstanceIds"`
 
 	// Creation time in the format of YYYY-MM-DDThh:mm:ssZ according to ISO 8601 standard. UTC time is used
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CreatedTime *string `json:"CreatedTime,omitnil" name:"CreatedTime"`
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
 	// Private key of key pair.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	PrivateKey *string `json:"PrivateKey,omitnil" name:"PrivateKey"`
+	PrivateKey *string `json:"PrivateKey,omitnil,omitempty" name:"PrivateKey"`
 }
 
 type LoginConfiguration struct {
 	// <li>`YES`: Random password. In this case, `Password` cannot be specified. </li>
 	// <li>`No`: Custom. `Password` must be specified. </li>
-	AutoGeneratePassword *string `json:"AutoGeneratePassword,omitnil" name:"AutoGeneratePassword"`
+	AutoGeneratePassword *string `json:"AutoGeneratePassword,omitnil,omitempty" name:"AutoGeneratePassword"`
 
 	// Instance login password. 
 	// For Windows instances, the password must contain 12 to 30 characters of the following types. It cannot start with “/” and cannot include the username. 
@@ -4853,40 +4853,40 @@ type LoginConfiguration struct {
 	// <li>Uppercase letters: [A–Z]</li>
 	// <li>Digits: 0-9</li>
 	// <li>Symbols: ()`~!@#$%^&*-+=_|{}[]:;'<>,.?/</li>
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 
-	KeyIds []*string `json:"KeyIds,omitnil" name:"KeyIds"`
+	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
 }
 
 type LoginSettings struct {
 	// Key ID list. After a key is associated, you can use it to access the instance. Note: this field may return [], indicating that no valid values can be obtained.
-	KeyIds []*string `json:"KeyIds,omitnil" name:"KeyIds"`
+	KeyIds []*string `json:"KeyIds,omitnil,omitempty" name:"KeyIds"`
 }
 
 // Predefined struct for user
 type ModifyBlueprintAttributeRequestParams struct {
 	// Image ID, which can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
-	BlueprintId *string `json:"BlueprintId,omitnil" name:"BlueprintId"`
+	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
 	// New image name, which can contain up to 60 characters.
-	BlueprintName *string `json:"BlueprintName,omitnil" name:"BlueprintName"`
+	BlueprintName *string `json:"BlueprintName,omitnil,omitempty" name:"BlueprintName"`
 
 	// New image description, which can contain up to 60 characters.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type ModifyBlueprintAttributeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Image ID, which can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
-	BlueprintId *string `json:"BlueprintId,omitnil" name:"BlueprintId"`
+	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 
 	// New image name, which can contain up to 60 characters.
-	BlueprintName *string `json:"BlueprintName,omitnil" name:"BlueprintName"`
+	BlueprintName *string `json:"BlueprintName,omitnil,omitempty" name:"BlueprintName"`
 
 	// New image description, which can contain up to 60 characters.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 func (r *ModifyBlueprintAttributeRequest) ToJsonString() string {
@@ -4913,7 +4913,7 @@ func (r *ModifyBlueprintAttributeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyBlueprintAttributeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyBlueprintAttributeResponse struct {
@@ -4934,39 +4934,39 @@ func (r *ModifyBlueprintAttributeResponse) FromJsonString(s string) error {
 
 type ModifyBundle struct {
 	// Price difference that you need to pay for the new instance package after change.
-	ModifyPrice *Price `json:"ModifyPrice,omitnil" name:"ModifyPrice"`
+	ModifyPrice *Price `json:"ModifyPrice,omitnil,omitempty" name:"ModifyPrice"`
 
 	// Package change status. Valid values:
 	// <li>SOLD_OUT: packages are sold out</li>
 	// <li>AVAILABLE: packages can be changed</li>
 	// <li>UNAVAILABLE: packages cannot be changed currently</li>
-	ModifyBundleState *string `json:"ModifyBundleState,omitnil" name:"ModifyBundleState"`
+	ModifyBundleState *string `json:"ModifyBundleState,omitnil,omitempty" name:"ModifyBundleState"`
 
 	// Package information.
-	Bundle *Bundle `json:"Bundle,omitnil" name:"Bundle"`
+	Bundle *Bundle `json:"Bundle,omitnil,omitempty" name:"Bundle"`
 
 	// The reason of package changing failure. It’s empty if the package change status is `AVAILABLE`.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	NotSupportModifyMessage *string `json:"NotSupportModifyMessage,omitnil" name:"NotSupportModifyMessage"`
+	NotSupportModifyMessage *string `json:"NotSupportModifyMessage,omitnil,omitempty" name:"NotSupportModifyMessage"`
 }
 
 // Predefined struct for user
 type ModifyDisksAttributeRequestParams struct {
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Cloud disk name.
-	DiskName *string `json:"DiskName,omitnil" name:"DiskName"`
+	DiskName *string `json:"DiskName,omitnil,omitempty" name:"DiskName"`
 }
 
 type ModifyDisksAttributeRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Cloud disk name.
-	DiskName *string `json:"DiskName,omitnil" name:"DiskName"`
+	DiskName *string `json:"DiskName,omitnil,omitempty" name:"DiskName"`
 }
 
 func (r *ModifyDisksAttributeRequest) ToJsonString() string {
@@ -4992,7 +4992,7 @@ func (r *ModifyDisksAttributeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDisksAttributeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDisksAttributeResponse struct {
@@ -5014,20 +5014,20 @@ func (r *ModifyDisksAttributeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDisksRenewFlagRequestParams struct {
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Whether Auto-Renewal is enabled 
-	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 }
 
 type ModifyDisksRenewFlagRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Whether Auto-Renewal is enabled 
-	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 }
 
 func (r *ModifyDisksRenewFlagRequest) ToJsonString() string {
@@ -5053,7 +5053,7 @@ func (r *ModifyDisksRenewFlagRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDisksRenewFlagResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDisksRenewFlagResponse struct {
@@ -5075,26 +5075,26 @@ func (r *ModifyDisksRenewFlagResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyFirewallRuleDescriptionRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Firewall rule.
-	FirewallRule *FirewallRule `json:"FirewallRule,omitnil" name:"FirewallRule"`
+	FirewallRule *FirewallRule `json:"FirewallRule,omitnil,omitempty" name:"FirewallRule"`
 
 	// Current firewall version number. Every time you update the firewall rule version, it will be automatically increased by 1 to prevent the rule from expiring. If it is left empty, conflicts will not be considered.
-	FirewallVersion *uint64 `json:"FirewallVersion,omitnil" name:"FirewallVersion"`
+	FirewallVersion *uint64 `json:"FirewallVersion,omitnil,omitempty" name:"FirewallVersion"`
 }
 
 type ModifyFirewallRuleDescriptionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Firewall rule.
-	FirewallRule *FirewallRule `json:"FirewallRule,omitnil" name:"FirewallRule"`
+	FirewallRule *FirewallRule `json:"FirewallRule,omitnil,omitempty" name:"FirewallRule"`
 
 	// Current firewall version number. Every time you update the firewall rule version, it will be automatically increased by 1 to prevent the rule from expiring. If it is left empty, conflicts will not be considered.
-	FirewallVersion *uint64 `json:"FirewallVersion,omitnil" name:"FirewallVersion"`
+	FirewallVersion *uint64 `json:"FirewallVersion,omitnil,omitempty" name:"FirewallVersion"`
 }
 
 func (r *ModifyFirewallRuleDescriptionRequest) ToJsonString() string {
@@ -5121,7 +5121,7 @@ func (r *ModifyFirewallRuleDescriptionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyFirewallRuleDescriptionResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyFirewallRuleDescriptionResponse struct {
@@ -5143,26 +5143,26 @@ func (r *ModifyFirewallRuleDescriptionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyFirewallRulesRequestParams struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Firewall rule list.
-	FirewallRules []*FirewallRule `json:"FirewallRules,omitnil" name:"FirewallRules"`
+	FirewallRules []*FirewallRule `json:"FirewallRules,omitnil,omitempty" name:"FirewallRules"`
 
 	// Current firewall version number. Every time you update the firewall rule version, it will be automatically increased by 1 to prevent the rule from expiring. If it is left empty, conflicts will not be considered.
-	FirewallVersion *uint64 `json:"FirewallVersion,omitnil" name:"FirewallVersion"`
+	FirewallVersion *uint64 `json:"FirewallVersion,omitnil,omitempty" name:"FirewallVersion"`
 }
 
 type ModifyFirewallRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Firewall rule list.
-	FirewallRules []*FirewallRule `json:"FirewallRules,omitnil" name:"FirewallRules"`
+	FirewallRules []*FirewallRule `json:"FirewallRules,omitnil,omitempty" name:"FirewallRules"`
 
 	// Current firewall version number. Every time you update the firewall rule version, it will be automatically increased by 1 to prevent the rule from expiring. If it is left empty, conflicts will not be considered.
-	FirewallVersion *uint64 `json:"FirewallVersion,omitnil" name:"FirewallVersion"`
+	FirewallVersion *uint64 `json:"FirewallVersion,omitnil,omitempty" name:"FirewallVersion"`
 }
 
 func (r *ModifyFirewallRulesRequest) ToJsonString() string {
@@ -5189,7 +5189,7 @@ func (r *ModifyFirewallRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyFirewallRulesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyFirewallRulesResponse struct {
@@ -5211,20 +5211,20 @@ func (r *ModifyFirewallRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstancesAttributeRequestParams struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Instance name, which is customizable and can contain up to 60 characters.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 }
 
 type ModifyInstancesAttributeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Instance name, which is customizable and can contain up to 60 characters.
-	InstanceName *string `json:"InstanceName,omitnil" name:"InstanceName"`
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 }
 
 func (r *ModifyInstancesAttributeRequest) ToJsonString() string {
@@ -5250,7 +5250,7 @@ func (r *ModifyInstancesAttributeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstancesAttributeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstancesAttributeResponse struct {
@@ -5272,32 +5272,32 @@ func (r *ModifyInstancesAttributeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstancesBundleRequestParams struct {
 	// IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 15 instances can be specified at the same time.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// ID of bundles to change. You can get the IDs from the `BundleId` returned by the [DescribeBundles](https://intl.cloud.tencent.com/document/api/1207/47575?from_cn_redirect=1).
-	BundleId *string `json:"BundleId,omitnil" name:"BundleId"`
+	BundleId *string `json:"BundleId,omitnil,omitempty" name:"BundleId"`
 
 	// Whether to use existing vouchers under the current account automatically. Valid values: 
 	// `true`: Deduct from existing vouchers automatically 
 	// `false`: Do not deduct from existing vouchers automatically 
 	// Default value: `false`.
-	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 }
 
 type ModifyInstancesBundleRequest struct {
 	*tchttp.BaseRequest
 	
 	// IDs of target instances. You can get the IDs from the `InstanceId` parameter returned by the `DescribeInstances` API. Up to 15 instances can be specified at the same time.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// ID of bundles to change. You can get the IDs from the `BundleId` returned by the [DescribeBundles](https://intl.cloud.tencent.com/document/api/1207/47575?from_cn_redirect=1).
-	BundleId *string `json:"BundleId,omitnil" name:"BundleId"`
+	BundleId *string `json:"BundleId,omitnil,omitempty" name:"BundleId"`
 
 	// Whether to use existing vouchers under the current account automatically. Valid values: 
 	// `true`: Deduct from existing vouchers automatically 
 	// `false`: Do not deduct from existing vouchers automatically 
 	// Default value: `false`.
-	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 }
 
 func (r *ModifyInstancesBundleRequest) ToJsonString() string {
@@ -5324,7 +5324,7 @@ func (r *ModifyInstancesBundleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstancesBundleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstancesBundleResponse struct {
@@ -5346,20 +5346,20 @@ func (r *ModifyInstancesBundleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstancesLoginKeyPairAttributeRequestParams struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Whether to allow login with the default key pair. Valid values: YES: yes; NO: no.
-	PermitLogin *string `json:"PermitLogin,omitnil" name:"PermitLogin"`
+	PermitLogin *string `json:"PermitLogin,omitnil,omitempty" name:"PermitLogin"`
 }
 
 type ModifyInstancesLoginKeyPairAttributeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID list. Each request can contain up to 100 instances at a time.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Whether to allow login with the default key pair. Valid values: YES: yes; NO: no.
-	PermitLogin *string `json:"PermitLogin,omitnil" name:"PermitLogin"`
+	PermitLogin *string `json:"PermitLogin,omitnil,omitempty" name:"PermitLogin"`
 }
 
 func (r *ModifyInstancesLoginKeyPairAttributeRequest) ToJsonString() string {
@@ -5385,7 +5385,7 @@ func (r *ModifyInstancesLoginKeyPairAttributeRequest) FromJsonString(s string) e
 // Predefined struct for user
 type ModifyInstancesLoginKeyPairAttributeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstancesLoginKeyPairAttributeResponse struct {
@@ -5407,20 +5407,20 @@ func (r *ModifyInstancesLoginKeyPairAttributeResponse) FromJsonString(s string) 
 // Predefined struct for user
 type ModifyInstancesRenewFlagRequestParams struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Auto-Renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically <br><br>If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed monthly if the account balance is sufficient.
-	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 }
 
 type ModifyInstancesRenewFlagRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Auto-Renewal flag. Valid values: <br><li>NOTIFY_AND_AUTO_RENEW: notify upon expiration and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: notify upon expiration but do not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: neither notify upon expiration nor renew automatically <br><br>If this parameter is specified as `NOTIFY_AND_AUTO_RENEW`, the instance will be automatically renewed monthly if the account balance is sufficient.
-	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 }
 
 func (r *ModifyInstancesRenewFlagRequest) ToJsonString() string {
@@ -5446,7 +5446,7 @@ func (r *ModifyInstancesRenewFlagRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInstancesRenewFlagResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInstancesRenewFlagResponse struct {
@@ -5468,20 +5468,20 @@ func (r *ModifyInstancesRenewFlagResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifySnapshotAttributeRequestParams struct {
 	// Snapshot ID, which can be queried through `DescribeSnapshots`.
-	SnapshotId *string `json:"SnapshotId,omitnil" name:"SnapshotId"`
+	SnapshotId *string `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
 
 	// New snapshot name, which can contain up to 60 characters.
-	SnapshotName *string `json:"SnapshotName,omitnil" name:"SnapshotName"`
+	SnapshotName *string `json:"SnapshotName,omitnil,omitempty" name:"SnapshotName"`
 }
 
 type ModifySnapshotAttributeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Snapshot ID, which can be queried through `DescribeSnapshots`.
-	SnapshotId *string `json:"SnapshotId,omitnil" name:"SnapshotId"`
+	SnapshotId *string `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
 
 	// New snapshot name, which can contain up to 60 characters.
-	SnapshotName *string `json:"SnapshotName,omitnil" name:"SnapshotName"`
+	SnapshotName *string `json:"SnapshotName,omitnil,omitempty" name:"SnapshotName"`
 }
 
 func (r *ModifySnapshotAttributeRequest) ToJsonString() string {
@@ -5507,7 +5507,7 @@ func (r *ModifySnapshotAttributeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifySnapshotAttributeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifySnapshotAttributeResponse struct {
@@ -5528,40 +5528,40 @@ func (r *ModifySnapshotAttributeResponse) FromJsonString(s string) error {
 
 type PolicyDetail struct {
 	// User discount.
-	UserDiscount *int64 `json:"UserDiscount,omitnil" name:"UserDiscount"`
+	UserDiscount *int64 `json:"UserDiscount,omitnil,omitempty" name:"UserDiscount"`
 
 	// Public discount.
-	CommonDiscount *int64 `json:"CommonDiscount,omitnil" name:"CommonDiscount"`
+	CommonDiscount *int64 `json:"CommonDiscount,omitnil,omitempty" name:"CommonDiscount"`
 
 	// Final discount.
-	FinalDiscount *int64 `json:"FinalDiscount,omitnil" name:"FinalDiscount"`
+	FinalDiscount *int64 `json:"FinalDiscount,omitnil,omitempty" name:"FinalDiscount"`
 
 	// Activity discount. The value `null` indicates no discount.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	ActivityDiscount *float64 `json:"ActivityDiscount,omitnil" name:"ActivityDiscount"`
+	ActivityDiscount *float64 `json:"ActivityDiscount,omitnil,omitempty" name:"ActivityDiscount"`
 
 	// Discount type.
 	// Valid values: `user` (user discount), `common` (discount displayed on the official website), `activity` (activity discount), `null` (no discount).
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	DiscountType *string `json:"DiscountType,omitnil" name:"DiscountType"`
+	DiscountType *string `json:"DiscountType,omitnil,omitempty" name:"DiscountType"`
 }
 
 type Price struct {
 	// Instance price.
-	InstancePrice *InstancePrice `json:"InstancePrice,omitnil" name:"InstancePrice"`
+	InstancePrice *InstancePrice `json:"InstancePrice,omitnil,omitempty" name:"InstancePrice"`
 }
 
 // Predefined struct for user
 type RebootInstancesRequestParams struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type RebootInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *RebootInstancesRequest) ToJsonString() string {
@@ -5586,7 +5586,7 @@ func (r *RebootInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RebootInstancesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RebootInstancesResponse struct {
@@ -5607,59 +5607,59 @@ func (r *RebootInstancesResponse) FromJsonString(s string) error {
 
 type RegionInfo struct {
 	// Region name, such as `ap-guangzhou`.
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Region description, such as South China (Guangzhou).
-	RegionName *string `json:"RegionName,omitnil" name:"RegionName"`
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
 
 	// Region availability status. Its value can only be `AVAILABLE`.
-	RegionState *string `json:"RegionState,omitnil" name:"RegionState"`
+	RegionState *string `json:"RegionState,omitnil,omitempty" name:"RegionState"`
 
 	// Whether the region is in the Chinese mainland
-	IsChinaMainland *bool `json:"IsChinaMainland,omitnil" name:"IsChinaMainland"`
+	IsChinaMainland *bool `json:"IsChinaMainland,omitnil,omitempty" name:"IsChinaMainland"`
 }
 
 type RenewDiskChargePrepaid struct {
 	// Renewal period
-	Period *int64 `json:"Period,omitnil" name:"Period"`
+	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
 	// Whether to renew the disk automatically. Values:
 	// 
 	// `NOTIFY_AND_AUTO_RENEW`: Trigger expiration notification and renew automatically; `NOTIFY_AND_MANUAL_RENEW`: Trigger expiration notification but do not renew; `DISABLE_NOTIFY_AND_MANUAL_RENEW`: Do not trigger the notification and do not renew.
 	// 
 	// Default: `NOTIFY_AND_MANUAL_RENEW`. If `NOTIFY_AND_AUTO_RENEW` is specified, the instance is automatically renewed on a monthly basis when the account balance is sufficient.
-	RenewFlag *string `json:"RenewFlag,omitnil" name:"RenewFlag"`
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
 	// Unit of the period. Values: `m` (month).
-	TimeUnit *string `json:"TimeUnit,omitnil" name:"TimeUnit"`
+	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
 
 	// Expiration time of the current instance, such as "2018-01-01 00:00:00". Specify this parameter to align the expiration time of the instance and attached cloud disks. `CurInstanceDeadline` and `Period` cannot be both specified.
-	CurInstanceDeadline *string `json:"CurInstanceDeadline,omitnil" name:"CurInstanceDeadline"`
+	CurInstanceDeadline *string `json:"CurInstanceDeadline,omitnil,omitempty" name:"CurInstanceDeadline"`
 }
 
 // Predefined struct for user
 type RenewDisksRequestParams struct {
 	// IDs of cloud disks. The value can be obtained from the `DiskId` parameter returned by the [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1) API. Up to 50 disks can be requested at a time.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Parameter settings for renewing the monthly subscribed cloud disk.
-	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil" name:"RenewDiskChargePrepaid"`
+	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil,omitempty" name:"RenewDiskChargePrepaid"`
 
 	// Whether to use the vouchers automatically. It defaults to No.
-	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 }
 
 type RenewDisksRequest struct {
 	*tchttp.BaseRequest
 	
 	// IDs of cloud disks. The value can be obtained from the `DiskId` parameter returned by the [DescribeDisks](https://intl.cloud.tencent.com/document/product/1207/66093?from_cn_redirect=1) API. Up to 50 disks can be requested at a time.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 
 	// Parameter settings for renewing the monthly subscribed cloud disk.
-	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil" name:"RenewDiskChargePrepaid"`
+	RenewDiskChargePrepaid *RenewDiskChargePrepaid `json:"RenewDiskChargePrepaid,omitnil,omitempty" name:"RenewDiskChargePrepaid"`
 
 	// Whether to use the vouchers automatically. It defaults to No.
-	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 }
 
 func (r *RenewDisksRequest) ToJsonString() string {
@@ -5686,7 +5686,7 @@ func (r *RenewDisksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RenewDisksResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RenewDisksResponse struct {
@@ -5708,44 +5708,44 @@ func (r *RenewDisksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RenewInstancesRequestParams struct {
 	// IDs of one or more instances to be operated. The value can be obtained from the `InstanceId` parameter returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API. Up to 100 instances can be requested at a time.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil" name:"InstanceChargePrepaid"`
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// Whether to renew elastic data disks. Values: 
 	// `TRUE`: Renew the elastic data disks attached to the instance as well when the related instance is renewed.
 	// `FALSE`: Do not renew the elastic data disks attached to the instance as well when the related instance is renewed.
 	// Default: `TRUE`
-	RenewDataDisk *bool `json:"RenewDataDisk,omitnil" name:"RenewDataDisk"`
+	RenewDataDisk *bool `json:"RenewDataDisk,omitnil,omitempty" name:"RenewDataDisk"`
 
 	// Whether to automatically use vouchers. Values:
 	// `TRUE`: Use vouchers for payment automatically.
 	// `FALSE`: Do not use vouchers for payment automatically.
 	// Default: `FALSE`.
-	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 }
 
 type RenewInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// IDs of one or more instances to be operated. The value can be obtained from the `InstanceId` parameter returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API. Up to 100 instances can be requested at a time.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Prepaid mode, i.e., monthly subscription. This parameter can specify the purchase period and other attributes such as auto-renewal. It is required for prepaid instances.
-	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil" name:"InstanceChargePrepaid"`
+	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
 	// Whether to renew elastic data disks. Values: 
 	// `TRUE`: Renew the elastic data disks attached to the instance as well when the related instance is renewed.
 	// `FALSE`: Do not renew the elastic data disks attached to the instance as well when the related instance is renewed.
 	// Default: `TRUE`
-	RenewDataDisk *bool `json:"RenewDataDisk,omitnil" name:"RenewDataDisk"`
+	RenewDataDisk *bool `json:"RenewDataDisk,omitnil,omitempty" name:"RenewDataDisk"`
 
 	// Whether to automatically use vouchers. Values:
 	// `TRUE`: Use vouchers for payment automatically.
 	// `FALSE`: Do not use vouchers for payment automatically.
 	// Default: `FALSE`.
-	AutoVoucher *bool `json:"AutoVoucher,omitnil" name:"AutoVoucher"`
+	AutoVoucher *bool `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 }
 
 func (r *RenewInstancesRequest) ToJsonString() string {
@@ -5773,7 +5773,7 @@ func (r *RenewInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RenewInstancesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RenewInstancesResponse struct {
@@ -5795,14 +5795,14 @@ func (r *RenewInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ResetAttachCcnRequestParams struct {
 	// CCN instance ID.
-	CcnId *string `json:"CcnId,omitnil" name:"CcnId"`
+	CcnId *string `json:"CcnId,omitnil,omitempty" name:"CcnId"`
 }
 
 type ResetAttachCcnRequest struct {
 	*tchttp.BaseRequest
 	
 	// CCN instance ID.
-	CcnId *string `json:"CcnId,omitnil" name:"CcnId"`
+	CcnId *string `json:"CcnId,omitnil,omitempty" name:"CcnId"`
 }
 
 func (r *ResetAttachCcnRequest) ToJsonString() string {
@@ -5827,7 +5827,7 @@ func (r *ResetAttachCcnRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ResetAttachCcnResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ResetAttachCcnResponse struct {
@@ -5848,32 +5848,32 @@ func (r *ResetAttachCcnResponse) FromJsonString(s string) error {
 
 type ResetInstanceBlueprint struct {
 	// Image details
-	BlueprintInfo *Blueprint `json:"BlueprintInfo,omitnil" name:"BlueprintInfo"`
+	BlueprintInfo *Blueprint `json:"BlueprintInfo,omitnil,omitempty" name:"BlueprintInfo"`
 
 	// Whether the image can be reset as the target image
-	IsResettable *bool `json:"IsResettable,omitnil" name:"IsResettable"`
+	IsResettable *bool `json:"IsResettable,omitnil,omitempty" name:"IsResettable"`
 
 	// Non-Resettable flag. If the image is resettable, it will be ""
-	NonResettableMessage *string `json:"NonResettableMessage,omitnil" name:"NonResettableMessage"`
+	NonResettableMessage *string `json:"NonResettableMessage,omitnil,omitempty" name:"NonResettableMessage"`
 }
 
 // Predefined struct for user
 type ResetInstanceRequestParams struct {
 	// Instance ID, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Image ID, which can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
-	BlueprintId *string `json:"BlueprintId,omitnil" name:"BlueprintId"`
+	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 }
 
 type ResetInstanceRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Image ID, which can be obtained from the `BlueprintId` returned by the [DescribeBlueprints](https://intl.cloud.tencent.com/document/product/1207/47689?from_cn_redirect=1) API.
-	BlueprintId *string `json:"BlueprintId,omitnil" name:"BlueprintId"`
+	BlueprintId *string `json:"BlueprintId,omitnil,omitempty" name:"BlueprintId"`
 }
 
 func (r *ResetInstanceRequest) ToJsonString() string {
@@ -5899,7 +5899,7 @@ func (r *ResetInstanceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ResetInstanceResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ResetInstanceResponse struct {
@@ -5921,30 +5921,30 @@ func (r *ResetInstanceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ResetInstancesPasswordRequestParams struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Login password of the instance(s). The password requirements vary among different operating systems:
 	// The password of a `LINUX_UNIX` instance must contain 8–30 characters (above 12 characters preferably) in at least three of the following types and cannot begin with "/": <br><li>Lowercase letters: [a–z]<br><li>Uppercase letters: [A–Z]<br><li>Digits: 0–9<br><li>Special symbols: ()\`~!@#$%^&\*-+=\_|{}[]:;'<>,.?/</li>
 	// The password of a `WINDOWS` instance must contain 12–30 characters in at least three of the following types and cannot begin with "/" or include the username: <br><li>Lowercase letters: [a–z]<br><li>Uppercase letters: [A–Z]<br><li>Digits: 0–9<br><li>Special symbols: ()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/<br><li>If both `LINUX_UNIX` and `WINDOWS` instances exist, the requirements for password complexity of `WINDOWS` instances shall prevail.
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// OS username of the instance for which you want to reset the password, which can contain up to 64 characters.
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 }
 
 type ResetInstancesPasswordRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID list. Each request can contain up to 100 instances at a time.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Login password of the instance(s). The password requirements vary among different operating systems:
 	// The password of a `LINUX_UNIX` instance must contain 8–30 characters (above 12 characters preferably) in at least three of the following types and cannot begin with "/": <br><li>Lowercase letters: [a–z]<br><li>Uppercase letters: [A–Z]<br><li>Digits: 0–9<br><li>Special symbols: ()\`~!@#$%^&\*-+=\_|{}[]:;'<>,.?/</li>
 	// The password of a `WINDOWS` instance must contain 12–30 characters in at least three of the following types and cannot begin with "/" or include the username: <br><li>Lowercase letters: [a–z]<br><li>Uppercase letters: [A–Z]<br><li>Digits: 0–9<br><li>Special symbols: ()\`~!@#$%^&\*-+=\_|{}[]:;' <>,.?/<br><li>If both `LINUX_UNIX` and `WINDOWS` instances exist, the requirements for password complexity of `WINDOWS` instances shall prevail.
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// OS username of the instance for which you want to reset the password, which can contain up to 64 characters.
-	UserName *string `json:"UserName,omitnil" name:"UserName"`
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
 }
 
 func (r *ResetInstancesPasswordRequest) ToJsonString() string {
@@ -5971,7 +5971,7 @@ func (r *ResetInstancesPasswordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ResetInstancesPasswordResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ResetInstancesPasswordResponse struct {
@@ -5992,55 +5992,55 @@ func (r *ResetInstancesPasswordResponse) FromJsonString(s string) error {
 
 type Scene struct {
 	// Scene ID
-	SceneId *string `json:"SceneId,omitnil" name:"SceneId"`
+	SceneId *string `json:"SceneId,omitnil,omitempty" name:"SceneId"`
 
 	// Display name of the scene
-	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil,omitempty" name:"DisplayName"`
 
 	// Scene description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type SceneInfo struct {
 	// Scene ID
-	SceneId *string `json:"SceneId,omitnil" name:"SceneId"`
+	SceneId *string `json:"SceneId,omitnil,omitempty" name:"SceneId"`
 
 	// Display name of the scene
-	DisplayName *string `json:"DisplayName,omitnil" name:"DisplayName"`
+	DisplayName *string `json:"DisplayName,omitnil,omitempty" name:"DisplayName"`
 
 	// Scene description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type Snapshot struct {
 	// Snapshot ID.
-	SnapshotId *string `json:"SnapshotId,omitnil" name:"SnapshotId"`
+	SnapshotId *string `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
 
 	// Type of the disk for which the snapshot is created. Valid values: <li>SYSTEM_DISK: system disk</li>
-	DiskUsage *string `json:"DiskUsage,omitnil" name:"DiskUsage"`
+	DiskUsage *string `json:"DiskUsage,omitnil,omitempty" name:"DiskUsage"`
 
 	// ID of the disk for which the snapshot is created.
-	DiskId *string `json:"DiskId,omitnil" name:"DiskId"`
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 
 	// Size of the disk in GB for which the snapshot is created.
-	DiskSize *int64 `json:"DiskSize,omitnil" name:"DiskSize"`
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// Snapshot name, which is a custom snapshot alias.
-	SnapshotName *string `json:"SnapshotName,omitnil" name:"SnapshotName"`
+	SnapshotName *string `json:"SnapshotName,omitnil,omitempty" name:"SnapshotName"`
 
 	// Snapshot status. Valid values:
 	// <li>NORMAL: normal </li>
 	// <li>CREATING: creating</li>
 	// <li>ROLLBACKING: rolling back</li>
-	SnapshotState *string `json:"SnapshotState,omitnil" name:"SnapshotState"`
+	SnapshotState *string `json:"SnapshotState,omitnil,omitempty" name:"SnapshotState"`
 
 	// Snapshot creation or rollback progress in percentage. After success, the value of this field will become 100.
-	Percent *int64 `json:"Percent,omitnil" name:"Percent"`
+	Percent *int64 `json:"Percent,omitnil,omitempty" name:"Percent"`
 
 	// Last snapshot operation. It is recorded only during snapshot creation and rollback.
 	// Example values: CreateInstanceSnapshot, RollbackInstanceSnapshot.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LatestOperation *string `json:"LatestOperation,omitnil" name:"LatestOperation"`
+	LatestOperation *string `json:"LatestOperation,omitnil,omitempty" name:"LatestOperation"`
 
 	// Last snapshot operation status. It is recorded only during snapshot creation and rollback.
 	// Valid values:
@@ -6048,64 +6048,64 @@ type Snapshot struct {
 	// <li>OPERATING: the operation is being executed</li>
 	// <li>FAILED: operation failed</li>
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LatestOperationState *string `json:"LatestOperationState,omitnil" name:"LatestOperationState"`
+	LatestOperationState *string `json:"LatestOperationState,omitnil,omitempty" name:"LatestOperationState"`
 
 	// Unique request ID for the last snapshot operation. It is recorded only during snapshot creation and rollback.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitnil" name:"LatestOperationRequestId"`
+	LatestOperationRequestId *string `json:"LatestOperationRequestId,omitnil,omitempty" name:"LatestOperationRequestId"`
 
 	// Snapshot creation time.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	CreatedTime *string `json:"CreatedTime,omitnil" name:"CreatedTime"`
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 }
 
 type SnapshotDeniedActions struct {
 	// Snapshot ID.
-	SnapshotId *string `json:"SnapshotId,omitnil" name:"SnapshotId"`
+	SnapshotId *string `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
 
 	// List of operation limits.
-	DeniedActions []*DeniedAction `json:"DeniedActions,omitnil" name:"DeniedActions"`
+	DeniedActions []*DeniedAction `json:"DeniedActions,omitnil,omitempty" name:"DeniedActions"`
 }
 
 type Software struct {
 	// Software name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Software version.
-	Version *string `json:"Version,omitnil" name:"Version"`
+	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
 	// Software picture URL.
-	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
 	// Software installation directory.
-	InstallDir *string `json:"InstallDir,omitnil" name:"InstallDir"`
+	InstallDir *string `json:"InstallDir,omitnil,omitempty" name:"InstallDir"`
 
 	// List of software details.
-	DetailSet []*SoftwareDetail `json:"DetailSet,omitnil" name:"DetailSet"`
+	DetailSet []*SoftwareDetail `json:"DetailSet,omitnil,omitempty" name:"DetailSet"`
 }
 
 type SoftwareDetail struct {
 	// Unique detail key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Detail title.
-	Title *string `json:"Title,omitnil" name:"Title"`
+	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
 
 	// Detail value.
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 // Predefined struct for user
 type StartInstancesRequestParams struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type StartInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *StartInstancesRequest) ToJsonString() string {
@@ -6130,7 +6130,7 @@ func (r *StartInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StartInstancesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StartInstancesResponse struct {
@@ -6152,14 +6152,14 @@ func (r *StartInstancesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type StopInstancesRequestParams struct {
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type StopInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID list. Each request can contain up to 100 instances at a time. You can get an instance ID from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *StopInstancesRequest) ToJsonString() string {
@@ -6184,7 +6184,7 @@ func (r *StopInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StopInstancesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StopInstancesResponse struct {
@@ -6207,35 +6207,35 @@ type SystemDisk struct {
 	// System disk type.
 	// Valid values: 
 	// <li> LOCAL_BASIC: local disk</li><li> LOCAL_SSD: local SSD disk</li><li> CLOUD_BASIC: HDD cloud disk</li><li> CLOUD_SSD: SSD cloud disk</li><li> CLOUD_PREMIUM: Premium Cloud Storage</li>
-	DiskType *string `json:"DiskType,omitnil" name:"DiskType"`
+	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
 	// System disk size in GB.
-	DiskSize *int64 `json:"DiskSize,omitnil" name:"DiskSize"`
+	DiskSize *int64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// System disk ID.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DiskId *string `json:"DiskId,omitnil" name:"DiskId"`
+	DiskId *string `json:"DiskId,omitnil,omitempty" name:"DiskId"`
 }
 
 type Tag struct {
 	// Tag key
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Tag value
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 // Predefined struct for user
 type TerminateDisksRequestParams struct {
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 }
 
 type TerminateDisksRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of cloud disk IDs.
-	DiskIds []*string `json:"DiskIds,omitnil" name:"DiskIds"`
+	DiskIds []*string `json:"DiskIds,omitnil,omitempty" name:"DiskIds"`
 }
 
 func (r *TerminateDisksRequest) ToJsonString() string {
@@ -6260,7 +6260,7 @@ func (r *TerminateDisksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type TerminateDisksResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type TerminateDisksResponse struct {
@@ -6282,14 +6282,14 @@ func (r *TerminateDisksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type TerminateInstancesRequestParams struct {
 	// Instance ID list, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type TerminateInstancesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Instance ID list, which can be obtained from the `InstanceId` returned by the [DescribeInstances](https://intl.cloud.tencent.com/document/api/1207/47573?from_cn_redirect=1) API.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *TerminateInstancesRequest) ToJsonString() string {
@@ -6314,7 +6314,7 @@ func (r *TerminateInstancesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type TerminateInstancesResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type TerminateInstancesResponse struct {
@@ -6336,57 +6336,57 @@ func (r *TerminateInstancesResponse) FromJsonString(s string) error {
 type TotalPrice struct {
 	// Total original price
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	OriginalPrice *float64 `json:"OriginalPrice,omitnil" name:"OriginalPrice"`
+	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 
 	// Total discounted price
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	DiscountPrice *float64 `json:"DiscountPrice,omitnil" name:"DiscountPrice"`
+	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
 }
 
 type TrafficPackage struct {
 	// Traffic package ID.
-	TrafficPackageId *string `json:"TrafficPackageId,omitnil" name:"TrafficPackageId"`
+	TrafficPackageId *string `json:"TrafficPackageId,omitnil,omitempty" name:"TrafficPackageId"`
 
 	// Used traffic in bytes during traffic package validity period.
-	TrafficUsed *int64 `json:"TrafficUsed,omitnil" name:"TrafficUsed"`
+	TrafficUsed *int64 `json:"TrafficUsed,omitnil,omitempty" name:"TrafficUsed"`
 
 	// Total traffic in bytes during traffic package validity period.
-	TrafficPackageTotal *int64 `json:"TrafficPackageTotal,omitnil" name:"TrafficPackageTotal"`
+	TrafficPackageTotal *int64 `json:"TrafficPackageTotal,omitnil,omitempty" name:"TrafficPackageTotal"`
 
 	// Remaining traffic in bytes during traffic package validity period.
-	TrafficPackageRemaining *int64 `json:"TrafficPackageRemaining,omitnil" name:"TrafficPackageRemaining"`
+	TrafficPackageRemaining *int64 `json:"TrafficPackageRemaining,omitnil,omitempty" name:"TrafficPackageRemaining"`
 
 	// Traffic exceeding package amount in bytes during traffic package validity period.
-	TrafficOverflow *int64 `json:"TrafficOverflow,omitnil" name:"TrafficOverflow"`
+	TrafficOverflow *int64 `json:"TrafficOverflow,omitnil,omitempty" name:"TrafficOverflow"`
 
 	// Start time of traffic package validity period according to ISO 8601 standard. UTC time is used. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time of traffic package validity period according to ISO 8601 standard. UTC time is used. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Traffic package expiration time according to ISO 8601 standard. UTC time is used. 
 	// Format: YYYY-MM-DDThh:mm:ssZ.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Deadline *string `json:"Deadline,omitnil" name:"Deadline"`
+	Deadline *string `json:"Deadline,omitnil,omitempty" name:"Deadline"`
 
 	// Traffic package status:
 	// <li>NETWORK_NORMAL: normal</li>
 	// <li>OVERDUE_NETWORK_DISABLED: the network is disconnected due to overdue payments</li>
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type ZoneInfo struct {
 	// AZ
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Chinese name of AZ
-	ZoneName *string `json:"ZoneName,omitnil" name:"ZoneName"`
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
 
 	// AZ tags on instance purchase page
-	InstanceDisplayLabel *string `json:"InstanceDisplayLabel,omitnil" name:"InstanceDisplayLabel"`
+	InstanceDisplayLabel *string `json:"InstanceDisplayLabel,omitnil,omitempty" name:"InstanceDisplayLabel"`
 }

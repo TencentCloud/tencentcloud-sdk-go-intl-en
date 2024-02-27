@@ -22,10 +22,10 @@ import (
 
 type Attachment struct {
 	// Attachment name, which cannot exceed 255 characters. Some attachment types are not supported. For details, see [Attachment Types](https://intl.cloud.tencent.com/document/product/1288/51951?from_cn_redirect=1).
-	FileName *string `json:"FileName,omitnil" name:"FileName"`
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
 	// Base64-encoded attachment content. You can send attachments of up to 4 MB in the total size. Note: The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachment content will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of all attachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 }
 
 // Predefined struct for user
@@ -33,40 +33,40 @@ type BatchSendEmailRequestParams struct {
 	// Sender address. Enter a sender address such as `noreply@mail.qcloud.com`. To display the sender name, enter the address in the following format:
 	// sender &lt;email address&gt;. For example:
 	// Tencent Cloud team &lt;noreply@mail.qcloud.com&gt;
-	FromEmailAddress *string `json:"FromEmailAddress,omitnil" name:"FromEmailAddress"`
+	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
 	// Recipient group ID
-	ReceiverId *uint64 `json:"ReceiverId,omitnil" name:"ReceiverId"`
+	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 
 	// Email subject
-	Subject *string `json:"Subject,omitnil" name:"Subject"`
+	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
 	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring
-	TaskType *uint64 `json:"TaskType,omitnil" name:"TaskType"`
+	TaskType *uint64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
 	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
-	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil" name:"ReplyToAddresses"`
+	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil,omitempty" name:"ReplyToAddresses"`
 
 	// Template when emails are sent using a template
-	Template *Template `json:"Template,omitnil" name:"Template"`
+	Template *Template `json:"Template,omitnil,omitempty" name:"Template"`
 
 	// Disused
-	Simple *Simple `json:"Simple,omitnil" name:"Simple"`
+	Simple *Simple `json:"Simple,omitnil,omitempty" name:"Simple"`
 
 	// Attachment parameters to set when you need to send attachments. This parameter is currently unavailable.
-	Attachments []*Attachment `json:"Attachments,omitnil" name:"Attachments"`
+	Attachments []*Attachment `json:"Attachments,omitnil,omitempty" name:"Attachments"`
 
 	// Parameter required for a recurring sending task
-	CycleParam *CycleEmailParam `json:"CycleParam,omitnil" name:"CycleParam"`
+	CycleParam *CycleEmailParam `json:"CycleParam,omitnil,omitempty" name:"CycleParam"`
 
 	// Parameter required for a scheduled sending task
-	TimedParam *TimedEmailParam `json:"TimedParam,omitnil" name:"TimedParam"`
+	TimedParam *TimedEmailParam `json:"TimedParam,omitnil,omitempty" name:"TimedParam"`
 
 	// Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic; `10`: Thai
-	Unsubscribe *string `json:"Unsubscribe,omitnil" name:"Unsubscribe"`
+	Unsubscribe *string `json:"Unsubscribe,omitnil,omitempty" name:"Unsubscribe"`
 
 	// Whether to add an ad tag. `0`: Add no tag; `1`: Add before the subject; `2`: Add after the subject.
-	ADLocation *uint64 `json:"ADLocation,omitnil" name:"ADLocation"`
+	ADLocation *uint64 `json:"ADLocation,omitnil,omitempty" name:"ADLocation"`
 }
 
 type BatchSendEmailRequest struct {
@@ -75,40 +75,40 @@ type BatchSendEmailRequest struct {
 	// Sender address. Enter a sender address such as `noreply@mail.qcloud.com`. To display the sender name, enter the address in the following format:
 	// sender &lt;email address&gt;. For example:
 	// Tencent Cloud team &lt;noreply@mail.qcloud.com&gt;
-	FromEmailAddress *string `json:"FromEmailAddress,omitnil" name:"FromEmailAddress"`
+	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
 	// Recipient group ID
-	ReceiverId *uint64 `json:"ReceiverId,omitnil" name:"ReceiverId"`
+	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 
 	// Email subject
-	Subject *string `json:"Subject,omitnil" name:"Subject"`
+	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
 	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring
-	TaskType *uint64 `json:"TaskType,omitnil" name:"TaskType"`
+	TaskType *uint64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
 	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
-	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil" name:"ReplyToAddresses"`
+	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil,omitempty" name:"ReplyToAddresses"`
 
 	// Template when emails are sent using a template
-	Template *Template `json:"Template,omitnil" name:"Template"`
+	Template *Template `json:"Template,omitnil,omitempty" name:"Template"`
 
 	// Disused
-	Simple *Simple `json:"Simple,omitnil" name:"Simple"`
+	Simple *Simple `json:"Simple,omitnil,omitempty" name:"Simple"`
 
 	// Attachment parameters to set when you need to send attachments. This parameter is currently unavailable.
-	Attachments []*Attachment `json:"Attachments,omitnil" name:"Attachments"`
+	Attachments []*Attachment `json:"Attachments,omitnil,omitempty" name:"Attachments"`
 
 	// Parameter required for a recurring sending task
-	CycleParam *CycleEmailParam `json:"CycleParam,omitnil" name:"CycleParam"`
+	CycleParam *CycleEmailParam `json:"CycleParam,omitnil,omitempty" name:"CycleParam"`
 
 	// Parameter required for a scheduled sending task
-	TimedParam *TimedEmailParam `json:"TimedParam,omitnil" name:"TimedParam"`
+	TimedParam *TimedEmailParam `json:"TimedParam,omitnil,omitempty" name:"TimedParam"`
 
 	// Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic; `10`: Thai
-	Unsubscribe *string `json:"Unsubscribe,omitnil" name:"Unsubscribe"`
+	Unsubscribe *string `json:"Unsubscribe,omitnil,omitempty" name:"Unsubscribe"`
 
 	// Whether to add an ad tag. `0`: Add no tag; `1`: Add before the subject; `2`: Add after the subject.
-	ADLocation *uint64 `json:"ADLocation,omitnil" name:"ADLocation"`
+	ADLocation *uint64 `json:"ADLocation,omitnil,omitempty" name:"ADLocation"`
 }
 
 func (r *BatchSendEmailRequest) ToJsonString() string {
@@ -144,10 +144,10 @@ func (r *BatchSendEmailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type BatchSendEmailResponseParams struct {
 	// Sending task ID
-	TaskId *uint64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type BatchSendEmailResponse struct {
@@ -168,29 +168,29 @@ func (r *BatchSendEmailResponse) FromJsonString(s string) error {
 
 type BlackEmailAddress struct {
 	// Time when the email address is blocklisted.
-	BounceTime *string `json:"BounceTime,omitnil" name:"BounceTime"`
+	BounceTime *string `json:"BounceTime,omitnil,omitempty" name:"BounceTime"`
 
 	// Blocklisted email address.
-	EmailAddress *string `json:"EmailAddress,omitnil" name:"EmailAddress"`
+	EmailAddress *string `json:"EmailAddress,omitnil,omitempty" name:"EmailAddress"`
 }
 
 // Predefined struct for user
 type CreateEmailAddressRequestParams struct {
 	// Your sender address. (You can create up to 10 sender addresses for each domain.)
-	EmailAddress *string `json:"EmailAddress,omitnil" name:"EmailAddress"`
+	EmailAddress *string `json:"EmailAddress,omitnil,omitempty" name:"EmailAddress"`
 
 	// Sender name.
-	EmailSenderName *string `json:"EmailSenderName,omitnil" name:"EmailSenderName"`
+	EmailSenderName *string `json:"EmailSenderName,omitnil,omitempty" name:"EmailSenderName"`
 }
 
 type CreateEmailAddressRequest struct {
 	*tchttp.BaseRequest
 	
 	// Your sender address. (You can create up to 10 sender addresses for each domain.)
-	EmailAddress *string `json:"EmailAddress,omitnil" name:"EmailAddress"`
+	EmailAddress *string `json:"EmailAddress,omitnil,omitempty" name:"EmailAddress"`
 
 	// Sender name.
-	EmailSenderName *string `json:"EmailSenderName,omitnil" name:"EmailSenderName"`
+	EmailSenderName *string `json:"EmailSenderName,omitnil,omitempty" name:"EmailSenderName"`
 }
 
 func (r *CreateEmailAddressRequest) ToJsonString() string {
@@ -216,7 +216,7 @@ func (r *CreateEmailAddressRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateEmailAddressResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateEmailAddressResponse struct {
@@ -238,14 +238,14 @@ func (r *CreateEmailAddressResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateEmailIdentityRequestParams struct {
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
-	EmailIdentity *string `json:"EmailIdentity,omitnil" name:"EmailIdentity"`
+	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 }
 
 type CreateEmailIdentityRequest struct {
 	*tchttp.BaseRequest
 	
 	// Your sender domain. You are advised to use a third-level domain, for example, mail.qcloud.com.
-	EmailIdentity *string `json:"EmailIdentity,omitnil" name:"EmailIdentity"`
+	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 }
 
 func (r *CreateEmailIdentityRequest) ToJsonString() string {
@@ -270,16 +270,16 @@ func (r *CreateEmailIdentityRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateEmailIdentityResponseParams struct {
 	// Verification type. The value is fixed to `DOMAIN`.
-	IdentityType *string `json:"IdentityType,omitnil" name:"IdentityType"`
+	IdentityType *string `json:"IdentityType,omitnil,omitempty" name:"IdentityType"`
 
 	// Verification passed or not.
-	VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitnil" name:"VerifiedForSendingStatus"`
+	VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitnil,omitempty" name:"VerifiedForSendingStatus"`
 
 	// DNS information that needs to be configured.
-	Attributes []*DNSAttributes `json:"Attributes,omitnil" name:"Attributes"`
+	Attributes []*DNSAttributes `json:"Attributes,omitnil,omitempty" name:"Attributes"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateEmailIdentityResponse struct {
@@ -301,20 +301,20 @@ func (r *CreateEmailIdentityResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateEmailTemplateRequestParams struct {
 	// Template name.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Template content.
-	TemplateContent *TemplateContent `json:"TemplateContent,omitnil" name:"TemplateContent"`
+	TemplateContent *TemplateContent `json:"TemplateContent,omitnil,omitempty" name:"TemplateContent"`
 }
 
 type CreateEmailTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Template name.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Template content.
-	TemplateContent *TemplateContent `json:"TemplateContent,omitnil" name:"TemplateContent"`
+	TemplateContent *TemplateContent `json:"TemplateContent,omitnil,omitempty" name:"TemplateContent"`
 }
 
 func (r *CreateEmailTemplateRequest) ToJsonString() string {
@@ -340,10 +340,10 @@ func (r *CreateEmailTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateEmailTemplateResponseParams struct {
 	// Template ID
-	TemplateID *uint64 `json:"TemplateID,omitnil" name:"TemplateID"`
+	TemplateID *uint64 `json:"TemplateID,omitnil,omitempty" name:"TemplateID"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateEmailTemplateResponse struct {
@@ -365,20 +365,20 @@ func (r *CreateEmailTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateReceiverDetailRequestParams struct {
 	// Recipient group ID
-	ReceiverId *uint64 `json:"ReceiverId,omitnil" name:"ReceiverId"`
+	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 
 	// Email address
-	Emails []*string `json:"Emails,omitnil" name:"Emails"`
+	Emails []*string `json:"Emails,omitnil,omitempty" name:"Emails"`
 }
 
 type CreateReceiverDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Recipient group ID
-	ReceiverId *uint64 `json:"ReceiverId,omitnil" name:"ReceiverId"`
+	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 
 	// Email address
-	Emails []*string `json:"Emails,omitnil" name:"Emails"`
+	Emails []*string `json:"Emails,omitnil,omitempty" name:"Emails"`
 }
 
 func (r *CreateReceiverDetailRequest) ToJsonString() string {
@@ -404,7 +404,7 @@ func (r *CreateReceiverDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateReceiverDetailResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateReceiverDetailResponse struct {
@@ -426,20 +426,20 @@ func (r *CreateReceiverDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateReceiverRequestParams struct {
 	// Recipient group name
-	ReceiversName *string `json:"ReceiversName,omitnil" name:"ReceiversName"`
+	ReceiversName *string `json:"ReceiversName,omitnil,omitempty" name:"ReceiversName"`
 
 	// Recipient group description
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 }
 
 type CreateReceiverRequest struct {
 	*tchttp.BaseRequest
 	
 	// Recipient group name
-	ReceiversName *string `json:"ReceiversName,omitnil" name:"ReceiversName"`
+	ReceiversName *string `json:"ReceiversName,omitnil,omitempty" name:"ReceiversName"`
 
 	// Recipient group description
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 }
 
 func (r *CreateReceiverRequest) ToJsonString() string {
@@ -465,10 +465,10 @@ func (r *CreateReceiverRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateReceiverResponseParams struct {
 	// Recipient group ID, by which recipient email addresses are uploaded
-	ReceiverId *uint64 `json:"ReceiverId,omitnil" name:"ReceiverId"`
+	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateReceiverResponse struct {
@@ -489,43 +489,43 @@ func (r *CreateReceiverResponse) FromJsonString(s string) error {
 
 type CycleEmailParam struct {
 	// Start time of the task
-	BeginTime *string `json:"BeginTime,omitnil" name:"BeginTime"`
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
 	// Task recurrence in hours
-	IntervalTime *uint64 `json:"IntervalTime,omitnil" name:"IntervalTime"`
+	IntervalTime *uint64 `json:"IntervalTime,omitnil,omitempty" name:"IntervalTime"`
 
 	// Specifies whether to end the cycle. This parameter is used to update the task. Valid values: 0: No; 1: Yes.
-	TermCycle *uint64 `json:"TermCycle,omitnil" name:"TermCycle"`
+	TermCycle *uint64 `json:"TermCycle,omitnil,omitempty" name:"TermCycle"`
 }
 
 type DNSAttributes struct {
 	// Record types: CNAME, A, TXT, and MX.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Domain name.
-	SendDomain *string `json:"SendDomain,omitnil" name:"SendDomain"`
+	SendDomain *string `json:"SendDomain,omitnil,omitempty" name:"SendDomain"`
 
 	// Expected value.
-	ExpectedValue *string `json:"ExpectedValue,omitnil" name:"ExpectedValue"`
+	ExpectedValue *string `json:"ExpectedValue,omitnil,omitempty" name:"ExpectedValue"`
 
 	// Currently configured value.
-	CurrentValue *string `json:"CurrentValue,omitnil" name:"CurrentValue"`
+	CurrentValue *string `json:"CurrentValue,omitnil,omitempty" name:"CurrentValue"`
 
 	// Approved or not. The default value is `false`.
-	Status *bool `json:"Status,omitnil" name:"Status"`
+	Status *bool `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 // Predefined struct for user
 type DeleteBlackListRequestParams struct {
 	// List of email addresses to be unblocklisted. Enter at least one address.
-	EmailAddressList []*string `json:"EmailAddressList,omitnil" name:"EmailAddressList"`
+	EmailAddressList []*string `json:"EmailAddressList,omitnil,omitempty" name:"EmailAddressList"`
 }
 
 type DeleteBlackListRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of email addresses to be unblocklisted. Enter at least one address.
-	EmailAddressList []*string `json:"EmailAddressList,omitnil" name:"EmailAddressList"`
+	EmailAddressList []*string `json:"EmailAddressList,omitnil,omitempty" name:"EmailAddressList"`
 }
 
 func (r *DeleteBlackListRequest) ToJsonString() string {
@@ -550,7 +550,7 @@ func (r *DeleteBlackListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteBlackListResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteBlackListResponse struct {
@@ -572,14 +572,14 @@ func (r *DeleteBlackListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteEmailAddressRequestParams struct {
 	// Sender address.
-	EmailAddress *string `json:"EmailAddress,omitnil" name:"EmailAddress"`
+	EmailAddress *string `json:"EmailAddress,omitnil,omitempty" name:"EmailAddress"`
 }
 
 type DeleteEmailAddressRequest struct {
 	*tchttp.BaseRequest
 	
 	// Sender address.
-	EmailAddress *string `json:"EmailAddress,omitnil" name:"EmailAddress"`
+	EmailAddress *string `json:"EmailAddress,omitnil,omitempty" name:"EmailAddress"`
 }
 
 func (r *DeleteEmailAddressRequest) ToJsonString() string {
@@ -604,7 +604,7 @@ func (r *DeleteEmailAddressRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteEmailAddressResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteEmailAddressResponse struct {
@@ -626,14 +626,14 @@ func (r *DeleteEmailAddressResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteEmailIdentityRequestParams struct {
 	// Sender domain.
-	EmailIdentity *string `json:"EmailIdentity,omitnil" name:"EmailIdentity"`
+	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 }
 
 type DeleteEmailIdentityRequest struct {
 	*tchttp.BaseRequest
 	
 	// Sender domain.
-	EmailIdentity *string `json:"EmailIdentity,omitnil" name:"EmailIdentity"`
+	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 }
 
 func (r *DeleteEmailIdentityRequest) ToJsonString() string {
@@ -658,7 +658,7 @@ func (r *DeleteEmailIdentityRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteEmailIdentityResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteEmailIdentityResponse struct {
@@ -680,14 +680,14 @@ func (r *DeleteEmailIdentityResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteEmailTemplateRequestParams struct {
 	// Template ID
-	TemplateID *uint64 `json:"TemplateID,omitnil" name:"TemplateID"`
+	TemplateID *uint64 `json:"TemplateID,omitnil,omitempty" name:"TemplateID"`
 }
 
 type DeleteEmailTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Template ID
-	TemplateID *uint64 `json:"TemplateID,omitnil" name:"TemplateID"`
+	TemplateID *uint64 `json:"TemplateID,omitnil,omitempty" name:"TemplateID"`
 }
 
 func (r *DeleteEmailTemplateRequest) ToJsonString() string {
@@ -712,7 +712,7 @@ func (r *DeleteEmailTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteEmailTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteEmailTemplateResponse struct {
@@ -734,14 +734,14 @@ func (r *DeleteEmailTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteReceiverRequestParams struct {
 	// Recipient group ID, which is returned when a recipient group is created.
-	ReceiverId *uint64 `json:"ReceiverId,omitnil" name:"ReceiverId"`
+	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 }
 
 type DeleteReceiverRequest struct {
 	*tchttp.BaseRequest
 	
 	// Recipient group ID, which is returned when a recipient group is created.
-	ReceiverId *uint64 `json:"ReceiverId,omitnil" name:"ReceiverId"`
+	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 }
 
 func (r *DeleteReceiverRequest) ToJsonString() string {
@@ -766,7 +766,7 @@ func (r *DeleteReceiverRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteReceiverResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteReceiverResponse struct {
@@ -787,45 +787,45 @@ func (r *DeleteReceiverResponse) FromJsonString(s string) error {
 
 type EmailIdentity struct {
 	// Sender domain.
-	IdentityName *string `json:"IdentityName,omitnil" name:"IdentityName"`
+	IdentityName *string `json:"IdentityName,omitnil,omitempty" name:"IdentityName"`
 
 	// Verification type. The value is fixed to `DOMAIN`.
-	IdentityType *string `json:"IdentityType,omitnil" name:"IdentityType"`
+	IdentityType *string `json:"IdentityType,omitnil,omitempty" name:"IdentityType"`
 
 	// Verification passed or not.
-	SendingEnabled *bool `json:"SendingEnabled,omitnil" name:"SendingEnabled"`
+	SendingEnabled *bool `json:"SendingEnabled,omitnil,omitempty" name:"SendingEnabled"`
 
 	// Current reputation level
-	CurrentReputationLevel *uint64 `json:"CurrentReputationLevel,omitnil" name:"CurrentReputationLevel"`
+	CurrentReputationLevel *uint64 `json:"CurrentReputationLevel,omitnil,omitempty" name:"CurrentReputationLevel"`
 
 	// Maximum number of messages sent per day
-	DailyQuota *uint64 `json:"DailyQuota,omitnil" name:"DailyQuota"`
+	DailyQuota *uint64 `json:"DailyQuota,omitnil,omitempty" name:"DailyQuota"`
 }
 
 type EmailSender struct {
 	// Sender address.
-	EmailAddress *string `json:"EmailAddress,omitnil" name:"EmailAddress"`
+	EmailAddress *string `json:"EmailAddress,omitnil,omitempty" name:"EmailAddress"`
 
 	// Sender name.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	EmailSenderName *string `json:"EmailSenderName,omitnil" name:"EmailSenderName"`
+	EmailSenderName *string `json:"EmailSenderName,omitnil,omitempty" name:"EmailSenderName"`
 
 	// Creation time.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	CreatedTimestamp *uint64 `json:"CreatedTimestamp,omitnil" name:"CreatedTimestamp"`
+	CreatedTimestamp *uint64 `json:"CreatedTimestamp,omitnil,omitempty" name:"CreatedTimestamp"`
 }
 
 // Predefined struct for user
 type GetEmailIdentityRequestParams struct {
 	// Sender domain.
-	EmailIdentity *string `json:"EmailIdentity,omitnil" name:"EmailIdentity"`
+	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 }
 
 type GetEmailIdentityRequest struct {
 	*tchttp.BaseRequest
 	
 	// Sender domain.
-	EmailIdentity *string `json:"EmailIdentity,omitnil" name:"EmailIdentity"`
+	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 }
 
 func (r *GetEmailIdentityRequest) ToJsonString() string {
@@ -850,16 +850,16 @@ func (r *GetEmailIdentityRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetEmailIdentityResponseParams struct {
 	// Verification type. The value is fixed to `DOMAIN`.
-	IdentityType *string `json:"IdentityType,omitnil" name:"IdentityType"`
+	IdentityType *string `json:"IdentityType,omitnil,omitempty" name:"IdentityType"`
 
 	// Verification passed or not.
-	VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitnil" name:"VerifiedForSendingStatus"`
+	VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitnil,omitempty" name:"VerifiedForSendingStatus"`
 
 	// DNS configuration details.
-	Attributes []*DNSAttributes `json:"Attributes,omitnil" name:"Attributes"`
+	Attributes []*DNSAttributes `json:"Attributes,omitnil,omitempty" name:"Attributes"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetEmailIdentityResponse struct {
@@ -881,14 +881,14 @@ func (r *GetEmailIdentityResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetEmailTemplateRequestParams struct {
 	// Template ID.
-	TemplateID *uint64 `json:"TemplateID,omitnil" name:"TemplateID"`
+	TemplateID *uint64 `json:"TemplateID,omitnil,omitempty" name:"TemplateID"`
 }
 
 type GetEmailTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Template ID.
-	TemplateID *uint64 `json:"TemplateID,omitnil" name:"TemplateID"`
+	TemplateID *uint64 `json:"TemplateID,omitnil,omitempty" name:"TemplateID"`
 }
 
 func (r *GetEmailTemplateRequest) ToJsonString() string {
@@ -913,16 +913,16 @@ func (r *GetEmailTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetEmailTemplateResponseParams struct {
 	// Template content.
-	TemplateContent *TemplateContent `json:"TemplateContent,omitnil" name:"TemplateContent"`
+	TemplateContent *TemplateContent `json:"TemplateContent,omitnil,omitempty" name:"TemplateContent"`
 
 	// Template status. Valid values: `0` (approved); `1` (pending approval); `2` (rejected).
-	TemplateStatus *uint64 `json:"TemplateStatus,omitnil" name:"TemplateStatus"`
+	TemplateStatus *uint64 `json:"TemplateStatus,omitnil,omitempty" name:"TemplateStatus"`
 
 	// Template name
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetEmailTemplateResponse struct {
@@ -944,38 +944,38 @@ func (r *GetEmailTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetSendEmailStatusRequestParams struct {
 	// Date sent. This parameter is required. You can only query the sending status for a single date at a time.
-	RequestDate *string `json:"RequestDate,omitnil" name:"RequestDate"`
+	RequestDate *string `json:"RequestDate,omitnil,omitempty" name:"RequestDate"`
 
 	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of pulled entries. Maximum value: `100`.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// The `MessageId` field returned by the `SendMail` API.
-	MessageId *string `json:"MessageId,omitnil" name:"MessageId"`
+	MessageId *string `json:"MessageId,omitnil,omitempty" name:"MessageId"`
 
 	// Recipient email address.
-	ToEmailAddress *string `json:"ToEmailAddress,omitnil" name:"ToEmailAddress"`
+	ToEmailAddress *string `json:"ToEmailAddress,omitnil,omitempty" name:"ToEmailAddress"`
 }
 
 type GetSendEmailStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Date sent. This parameter is required. You can only query the sending status for a single date at a time.
-	RequestDate *string `json:"RequestDate,omitnil" name:"RequestDate"`
+	RequestDate *string `json:"RequestDate,omitnil,omitempty" name:"RequestDate"`
 
 	// Offset. Default value: `0`.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Maximum number of pulled entries. Maximum value: `100`.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// The `MessageId` field returned by the `SendMail` API.
-	MessageId *string `json:"MessageId,omitnil" name:"MessageId"`
+	MessageId *string `json:"MessageId,omitnil,omitempty" name:"MessageId"`
 
 	// Recipient email address.
-	ToEmailAddress *string `json:"ToEmailAddress,omitnil" name:"ToEmailAddress"`
+	ToEmailAddress *string `json:"ToEmailAddress,omitnil,omitempty" name:"ToEmailAddress"`
 }
 
 func (r *GetSendEmailStatusRequest) ToJsonString() string {
@@ -1004,10 +1004,10 @@ func (r *GetSendEmailStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetSendEmailStatusResponseParams struct {
 	// Status of sent emails
-	EmailStatusList []*SendEmailStatus `json:"EmailStatusList,omitnil" name:"EmailStatusList"`
+	EmailStatusList []*SendEmailStatus `json:"EmailStatusList,omitnil,omitempty" name:"EmailStatusList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetSendEmailStatusResponse struct {
@@ -1029,32 +1029,32 @@ func (r *GetSendEmailStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetStatisticsReportRequestParams struct {
 	// Start date.
-	StartDate *string `json:"StartDate,omitnil" name:"StartDate"`
+	StartDate *string `json:"StartDate,omitnil,omitempty" name:"StartDate"`
 
 	// End date.
-	EndDate *string `json:"EndDate,omitnil" name:"EndDate"`
+	EndDate *string `json:"EndDate,omitnil,omitempty" name:"EndDate"`
 
 	// Sender domain.
-	Domain *string `json:"Domain,omitnil" name:"Domain"`
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// Recipient address type, for example, gmail.com.
-	ReceivingMailboxType *string `json:"ReceivingMailboxType,omitnil" name:"ReceivingMailboxType"`
+	ReceivingMailboxType *string `json:"ReceivingMailboxType,omitnil,omitempty" name:"ReceivingMailboxType"`
 }
 
 type GetStatisticsReportRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start date.
-	StartDate *string `json:"StartDate,omitnil" name:"StartDate"`
+	StartDate *string `json:"StartDate,omitnil,omitempty" name:"StartDate"`
 
 	// End date.
-	EndDate *string `json:"EndDate,omitnil" name:"EndDate"`
+	EndDate *string `json:"EndDate,omitnil,omitempty" name:"EndDate"`
 
 	// Sender domain.
-	Domain *string `json:"Domain,omitnil" name:"Domain"`
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// Recipient address type, for example, gmail.com.
-	ReceivingMailboxType *string `json:"ReceivingMailboxType,omitnil" name:"ReceivingMailboxType"`
+	ReceivingMailboxType *string `json:"ReceivingMailboxType,omitnil,omitempty" name:"ReceivingMailboxType"`
 }
 
 func (r *GetStatisticsReportRequest) ToJsonString() string {
@@ -1082,13 +1082,13 @@ func (r *GetStatisticsReportRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetStatisticsReportResponseParams struct {
 	// Daily email sending statistics.
-	DailyVolumes []*Volume `json:"DailyVolumes,omitnil" name:"DailyVolumes"`
+	DailyVolumes []*Volume `json:"DailyVolumes,omitnil,omitempty" name:"DailyVolumes"`
 
 	// Overall email sending statistics.
-	OverallVolume *Volume `json:"OverallVolume,omitnil" name:"OverallVolume"`
+	OverallVolume *Volume `json:"OverallVolume,omitnil,omitempty" name:"OverallVolume"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetStatisticsReportResponse struct {
@@ -1110,44 +1110,44 @@ func (r *GetStatisticsReportResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListBlackEmailAddressRequestParams struct {
 	// Start date in the format of `YYYY-MM-DD`
-	StartDate *string `json:"StartDate,omitnil" name:"StartDate"`
+	StartDate *string `json:"StartDate,omitnil,omitempty" name:"StartDate"`
 
 	// End date in the format of `YYYY-MM-DD`
-	EndDate *string `json:"EndDate,omitnil" name:"EndDate"`
+	EndDate *string `json:"EndDate,omitnil,omitempty" name:"EndDate"`
 
 	// Common parameter. It must be used with `Offset`.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Common parameter. It must be used with `Limit`. Maximum value of `Limit`: `100`.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// You can specify an email address to query.
-	EmailAddress *string `json:"EmailAddress,omitnil" name:"EmailAddress"`
+	EmailAddress *string `json:"EmailAddress,omitnil,omitempty" name:"EmailAddress"`
 
 	// You can specify a task ID to query.
-	TaskID *string `json:"TaskID,omitnil" name:"TaskID"`
+	TaskID *string `json:"TaskID,omitnil,omitempty" name:"TaskID"`
 }
 
 type ListBlackEmailAddressRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start date in the format of `YYYY-MM-DD`
-	StartDate *string `json:"StartDate,omitnil" name:"StartDate"`
+	StartDate *string `json:"StartDate,omitnil,omitempty" name:"StartDate"`
 
 	// End date in the format of `YYYY-MM-DD`
-	EndDate *string `json:"EndDate,omitnil" name:"EndDate"`
+	EndDate *string `json:"EndDate,omitnil,omitempty" name:"EndDate"`
 
 	// Common parameter. It must be used with `Offset`.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Common parameter. It must be used with `Limit`. Maximum value of `Limit`: `100`.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// You can specify an email address to query.
-	EmailAddress *string `json:"EmailAddress,omitnil" name:"EmailAddress"`
+	EmailAddress *string `json:"EmailAddress,omitnil,omitempty" name:"EmailAddress"`
 
 	// You can specify a task ID to query.
-	TaskID *string `json:"TaskID,omitnil" name:"TaskID"`
+	TaskID *string `json:"TaskID,omitnil,omitempty" name:"TaskID"`
 }
 
 func (r *ListBlackEmailAddressRequest) ToJsonString() string {
@@ -1177,13 +1177,13 @@ func (r *ListBlackEmailAddressRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ListBlackEmailAddressResponseParams struct {
 	// List of blocklisted addresses.
-	BlackList []*BlackEmailAddress `json:"BlackList,omitnil" name:"BlackList"`
+	BlackList []*BlackEmailAddress `json:"BlackList,omitnil,omitempty" name:"BlackList"`
 
 	// Total number of blocklisted addresses.
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ListBlackEmailAddressResponse struct {
@@ -1235,10 +1235,10 @@ func (r *ListEmailAddressRequest) FromJsonString(s string) error {
 type ListEmailAddressResponseParams struct {
 	// Details of sender addresses.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	EmailSenders []*EmailSender `json:"EmailSenders,omitnil" name:"EmailSenders"`
+	EmailSenders []*EmailSender `json:"EmailSenders,omitnil,omitempty" name:"EmailSenders"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ListEmailAddressResponse struct {
@@ -1289,16 +1289,16 @@ func (r *ListEmailIdentitiesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ListEmailIdentitiesResponseParams struct {
 	// List of sender domains.
-	EmailIdentities []*EmailIdentity `json:"EmailIdentities,omitnil" name:"EmailIdentities"`
+	EmailIdentities []*EmailIdentity `json:"EmailIdentities,omitnil,omitempty" name:"EmailIdentities"`
 
 	// Maximum reputation level
-	MaxReputationLevel *uint64 `json:"MaxReputationLevel,omitnil" name:"MaxReputationLevel"`
+	MaxReputationLevel *uint64 `json:"MaxReputationLevel,omitnil,omitempty" name:"MaxReputationLevel"`
 
 	// Maximum number of emails sent per domain name
-	MaxDailyQuota *uint64 `json:"MaxDailyQuota,omitnil" name:"MaxDailyQuota"`
+	MaxDailyQuota *uint64 `json:"MaxDailyQuota,omitnil,omitempty" name:"MaxDailyQuota"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ListEmailIdentitiesResponse struct {
@@ -1320,20 +1320,20 @@ func (r *ListEmailIdentitiesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListEmailTemplatesRequestParams struct {
 	// Number of templates to get. This parameter is used for pagination.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Template offset to get. This parameter is used for pagination.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type ListEmailTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
 	// Number of templates to get. This parameter is used for pagination.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Template offset to get. This parameter is used for pagination.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *ListEmailTemplatesRequest) ToJsonString() string {
@@ -1359,13 +1359,13 @@ func (r *ListEmailTemplatesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ListEmailTemplatesResponseParams struct {
 	// List of email templates.
-	TemplatesMetadata []*TemplatesMetadata `json:"TemplatesMetadata,omitnil" name:"TemplatesMetadata"`
+	TemplatesMetadata []*TemplatesMetadata `json:"TemplatesMetadata,omitnil,omitempty" name:"TemplatesMetadata"`
 
 	// Total number of templates
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ListEmailTemplatesResponse struct {
@@ -1387,32 +1387,32 @@ func (r *ListEmailTemplatesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListReceiversRequestParams struct {
 	// Offset, starting from 0. The value is an integer.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of records to query. The value is an integer not exceeding 100.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Group status (`1`: to be uploaded; `2` uploading; `3` uploaded). To query groups in all states, do not pass in this parameter.
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Group name keyword for fuzzy query
-	KeyWord *string `json:"KeyWord,omitnil" name:"KeyWord"`
+	KeyWord *string `json:"KeyWord,omitnil,omitempty" name:"KeyWord"`
 }
 
 type ListReceiversRequest struct {
 	*tchttp.BaseRequest
 	
 	// Offset, starting from 0. The value is an integer.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of records to query. The value is an integer not exceeding 100.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Group status (`1`: to be uploaded; `2` uploading; `3` uploaded). To query groups in all states, do not pass in this parameter.
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Group name keyword for fuzzy query
-	KeyWord *string `json:"KeyWord,omitnil" name:"KeyWord"`
+	KeyWord *string `json:"KeyWord,omitnil,omitempty" name:"KeyWord"`
 }
 
 func (r *ListReceiversRequest) ToJsonString() string {
@@ -1440,13 +1440,13 @@ func (r *ListReceiversRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ListReceiversResponseParams struct {
 	// Total number
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Data record
-	Data []*ReceiverData `json:"Data,omitnil" name:"Data"`
+	Data []*ReceiverData `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ListReceiversResponse struct {
@@ -1468,38 +1468,38 @@ func (r *ListReceiversResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListSendTasksRequestParams struct {
 	// Offset, starting from 0. The value is an integer. `0` means to skip 0 entries.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of records to query. The value is an integer not exceeding 100.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent. To query tasks in all states, do not pass in this parameter.
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Recipient group ID
-	ReceiverId *uint64 `json:"ReceiverId,omitnil" name:"ReceiverId"`
+	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 
 	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring. To query tasks of all types, do not pass in this parameter.
-	TaskType *uint64 `json:"TaskType,omitnil" name:"TaskType"`
+	TaskType *uint64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 }
 
 type ListSendTasksRequest struct {
 	*tchttp.BaseRequest
 	
 	// Offset, starting from 0. The value is an integer. `0` means to skip 0 entries.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of records to query. The value is an integer not exceeding 100.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent. To query tasks in all states, do not pass in this parameter.
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Recipient group ID
-	ReceiverId *uint64 `json:"ReceiverId,omitnil" name:"ReceiverId"`
+	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 
 	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring. To query tasks of all types, do not pass in this parameter.
-	TaskType *uint64 `json:"TaskType,omitnil" name:"TaskType"`
+	TaskType *uint64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 }
 
 func (r *ListSendTasksRequest) ToJsonString() string {
@@ -1528,13 +1528,13 @@ func (r *ListSendTasksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ListSendTasksResponseParams struct {
 	// Total number
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Data record
-	Data []*SendTaskData `json:"Data,omitnil" name:"Data"`
+	Data []*SendTaskData `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ListSendTasksResponse struct {
@@ -1555,24 +1555,24 @@ func (r *ListSendTasksResponse) FromJsonString(s string) error {
 
 type ReceiverData struct {
 	// Recipient group ID
-	ReceiverId *uint64 `json:"ReceiverId,omitnil" name:"ReceiverId"`
+	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 
 	// Recipient group name
-	ReceiversName *string `json:"ReceiversName,omitnil" name:"ReceiversName"`
+	ReceiversName *string `json:"ReceiversName,omitnil,omitempty" name:"ReceiversName"`
 
 	// Total number of recipient email addresses
-	Count *uint64 `json:"Count,omitnil" name:"Count"`
+	Count *uint64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// Recipient group description
 	// Note: This field may return `null`, indicating that no valid value can be found.
-	Desc *string `json:"Desc,omitnil" name:"Desc"`
+	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
 	// Group status (`1`: to be uploaded; `2` uploading; `3` uploaded)
 	// Note: This field may return `null`, indicating that no valid value can be found.
-	ReceiversStatus *uint64 `json:"ReceiversStatus,omitnil" name:"ReceiversStatus"`
+	ReceiversStatus *uint64 `json:"ReceiversStatus,omitnil,omitempty" name:"ReceiversStatus"`
 
 	// Creation time, such as 2021-09-28 16:40:35
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 }
 
 // Predefined struct for user
@@ -1580,37 +1580,37 @@ type SendEmailRequestParams struct {
 	// Sender address. Enter a sender address, for example, noreply@mail.qcloud.com.
 	// To display the sender name, enter the address in the following format: 
 	// Sender <email address>
-	FromEmailAddress *string `json:"FromEmailAddress,omitnil" name:"FromEmailAddress"`
+	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
 	// Recipient email addresses. You can send an email to up to 50 recipients at a time. Note: the email content will display all recipient addresses. To send one-to-one emails to several recipients, please call the API multiple times to send the emails.
-	Destination []*string `json:"Destination,omitnil" name:"Destination"`
+	Destination []*string `json:"Destination,omitnil,omitempty" name:"Destination"`
 
 	// Email subject.
-	Subject *string `json:"Subject,omitnil" name:"Subject"`
+	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
 	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
-	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil" name:"ReplyToAddresses"`
+	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil,omitempty" name:"ReplyToAddresses"`
 
 
-	Cc []*string `json:"Cc,omitnil" name:"Cc"`
+	Cc []*string `json:"Cc,omitnil,omitempty" name:"Cc"`
 
 
-	Bcc []*string `json:"Bcc,omitnil" name:"Bcc"`
+	Bcc []*string `json:"Bcc,omitnil,omitempty" name:"Bcc"`
 
 	// Template parameters for template-based sending. As `Simple` has been disused, `Template` is required.
-	Template *Template `json:"Template,omitnil" name:"Template"`
+	Template *Template `json:"Template,omitnil,omitempty" name:"Template"`
 
 	// Disused
-	Simple *Simple `json:"Simple,omitnil" name:"Simple"`
+	Simple *Simple `json:"Simple,omitnil,omitempty" name:"Simple"`
 
 	// Parameters for the attachments to be sent. The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachment content will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of all attachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
-	Attachments []*Attachment `json:"Attachments,omitnil" name:"Attachments"`
+	Attachments []*Attachment `json:"Attachments,omitnil,omitempty" name:"Attachments"`
 
 	// Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic; `10`: Thai
-	Unsubscribe *string `json:"Unsubscribe,omitnil" name:"Unsubscribe"`
+	Unsubscribe *string `json:"Unsubscribe,omitnil,omitempty" name:"Unsubscribe"`
 
 	// Email triggering type. `0` (default): non-trigger-based, suitable for marketing emails and non-immediate emails; `1`: trigger-based, suitable for immediate emails such as emails containing verification codes. If the size of an email exceeds a specified value, the system will automatically choose the non-trigger-based type.
-	TriggerType *uint64 `json:"TriggerType,omitnil" name:"TriggerType"`
+	TriggerType *uint64 `json:"TriggerType,omitnil,omitempty" name:"TriggerType"`
 }
 
 type SendEmailRequest struct {
@@ -1619,35 +1619,35 @@ type SendEmailRequest struct {
 	// Sender address. Enter a sender address, for example, noreply@mail.qcloud.com.
 	// To display the sender name, enter the address in the following format: 
 	// Sender <email address>
-	FromEmailAddress *string `json:"FromEmailAddress,omitnil" name:"FromEmailAddress"`
+	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
 	// Recipient email addresses. You can send an email to up to 50 recipients at a time. Note: the email content will display all recipient addresses. To send one-to-one emails to several recipients, please call the API multiple times to send the emails.
-	Destination []*string `json:"Destination,omitnil" name:"Destination"`
+	Destination []*string `json:"Destination,omitnil,omitempty" name:"Destination"`
 
 	// Email subject.
-	Subject *string `json:"Subject,omitnil" name:"Subject"`
+	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
 	// Reply-to address. You can enter a valid personal email address that can receive emails. If this parameter is left empty, reply emails will fail to be sent.
-	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil" name:"ReplyToAddresses"`
+	ReplyToAddresses *string `json:"ReplyToAddresses,omitnil,omitempty" name:"ReplyToAddresses"`
 
-	Cc []*string `json:"Cc,omitnil" name:"Cc"`
+	Cc []*string `json:"Cc,omitnil,omitempty" name:"Cc"`
 
-	Bcc []*string `json:"Bcc,omitnil" name:"Bcc"`
+	Bcc []*string `json:"Bcc,omitnil,omitempty" name:"Bcc"`
 
 	// Template parameters for template-based sending. As `Simple` has been disused, `Template` is required.
-	Template *Template `json:"Template,omitnil" name:"Template"`
+	Template *Template `json:"Template,omitnil,omitempty" name:"Template"`
 
 	// Disused
-	Simple *Simple `json:"Simple,omitnil" name:"Simple"`
+	Simple *Simple `json:"Simple,omitnil,omitempty" name:"Simple"`
 
 	// Parameters for the attachments to be sent. The TencentCloud API supports a request packet of up to 8 MB in size, and the size of the attachment content will increase by 1.5 times after Base64 encoding. Therefore, you need to keep the total size of all attachments below 4 MB. If the entire request exceeds 8 MB, the API will return an error.
-	Attachments []*Attachment `json:"Attachments,omitnil" name:"Attachments"`
+	Attachments []*Attachment `json:"Attachments,omitnil,omitempty" name:"Attachments"`
 
 	// Unsubscribe link option. `0`: Do not add unsubscribe link; `1`: English `2`: Simplified Chinese; `3`: Traditional Chinese; `4`: Spanish; `5`: French; `6`: German; `7`: Japanese; `8`: Korean; `9`: Arabic; `10`: Thai
-	Unsubscribe *string `json:"Unsubscribe,omitnil" name:"Unsubscribe"`
+	Unsubscribe *string `json:"Unsubscribe,omitnil,omitempty" name:"Unsubscribe"`
 
 	// Email triggering type. `0` (default): non-trigger-based, suitable for marketing emails and non-immediate emails; `1`: trigger-based, suitable for immediate emails such as emails containing verification codes. If the size of an email exceeds a specified value, the system will automatically choose the non-trigger-based type.
-	TriggerType *uint64 `json:"TriggerType,omitnil" name:"TriggerType"`
+	TriggerType *uint64 `json:"TriggerType,omitnil,omitempty" name:"TriggerType"`
 }
 
 func (r *SendEmailRequest) ToJsonString() string {
@@ -1682,10 +1682,10 @@ func (r *SendEmailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SendEmailResponseParams struct {
 	// Unique ID generated when receiving the message
-	MessageId *string `json:"MessageId,omitnil" name:"MessageId"`
+	MessageId *string `json:"MessageId,omitnil,omitempty" name:"MessageId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type SendEmailResponse struct {
@@ -1706,13 +1706,13 @@ func (r *SendEmailResponse) FromJsonString(s string) error {
 
 type SendEmailStatus struct {
 	// The `MessageId` field returned by the `SendEmail` API
-	MessageId *string `json:"MessageId,omitnil" name:"MessageId"`
+	MessageId *string `json:"MessageId,omitnil,omitempty" name:"MessageId"`
 
 	// Recipient email address
-	ToEmailAddress *string `json:"ToEmailAddress,omitnil" name:"ToEmailAddress"`
+	ToEmailAddress *string `json:"ToEmailAddress,omitnil,omitempty" name:"ToEmailAddress"`
 
 	// Sender email address
-	FromEmailAddress *string `json:"FromEmailAddress,omitnil" name:"FromEmailAddress"`
+	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
 	// Tencent Cloud processing status
 	// 0: Successful.
@@ -1739,7 +1739,7 @@ type SendEmailStatus struct {
 	// 3024: Failed to precheck the email address format.
 	// 3030: Email sending is restricted temporarily due to a high bounce rate.
 	// 3033: The account has insufficient balance or overdue payment.
-	SendStatus *int64 `json:"SendStatus,omitnil" name:"SendStatus"`
+	SendStatus *int64 `json:"SendStatus,omitnil,omitempty" name:"SendStatus"`
 
 	// Recipient processing status
 	// 0: Tencent Cloud has accepted the request and added it to the send queue.
@@ -1747,143 +1747,143 @@ type SendEmailStatus struct {
 	// 2: The email is discarded. `DeliverMessage` indicates the reason for discarding.
 	// 3: The recipient's ESP rejects the email, probably because the email address does not exist or due to other reasons.
 	// 8: The email is delayed by the ESP. `DeliverMessage` indicates the reason for delay.
-	DeliverStatus *int64 `json:"DeliverStatus,omitnil" name:"DeliverStatus"`
+	DeliverStatus *int64 `json:"DeliverStatus,omitnil,omitempty" name:"DeliverStatus"`
 
 	// Description of the recipient processing status
-	DeliverMessage *string `json:"DeliverMessage,omitnil" name:"DeliverMessage"`
+	DeliverMessage *string `json:"DeliverMessage,omitnil,omitempty" name:"DeliverMessage"`
 
 	// Timestamp when the request arrives at Tencent Cloud
-	RequestTime *int64 `json:"RequestTime,omitnil" name:"RequestTime"`
+	RequestTime *int64 `json:"RequestTime,omitnil,omitempty" name:"RequestTime"`
 
 	// Timestamp when Tencent Cloud delivers the email
-	DeliverTime *int64 `json:"DeliverTime,omitnil" name:"DeliverTime"`
+	DeliverTime *int64 `json:"DeliverTime,omitnil,omitempty" name:"DeliverTime"`
 
 	// Whether the recipient has opened the email
-	UserOpened *bool `json:"UserOpened,omitnil" name:"UserOpened"`
+	UserOpened *bool `json:"UserOpened,omitnil,omitempty" name:"UserOpened"`
 
 	// Whether the recipient has clicked the links in the email
-	UserClicked *bool `json:"UserClicked,omitnil" name:"UserClicked"`
+	UserClicked *bool `json:"UserClicked,omitnil,omitempty" name:"UserClicked"`
 
 	// Whether the recipient has unsubscribed from the email sent by the sender
-	UserUnsubscribed *bool `json:"UserUnsubscribed,omitnil" name:"UserUnsubscribed"`
+	UserUnsubscribed *bool `json:"UserUnsubscribed,omitnil,omitempty" name:"UserUnsubscribed"`
 
 	// Whether the recipient has reported the sender
-	UserComplainted *bool `json:"UserComplainted,omitnil" name:"UserComplainted"`
+	UserComplainted *bool `json:"UserComplainted,omitnil,omitempty" name:"UserComplainted"`
 }
 
 type SendTaskData struct {
 	// Task ID
-	TaskId *uint64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// Sender address
-	FromEmailAddress *string `json:"FromEmailAddress,omitnil" name:"FromEmailAddress"`
+	FromEmailAddress *string `json:"FromEmailAddress,omitnil,omitempty" name:"FromEmailAddress"`
 
 	// Recipient group ID
-	ReceiverId *uint64 `json:"ReceiverId,omitnil" name:"ReceiverId"`
+	ReceiverId *uint64 `json:"ReceiverId,omitnil,omitempty" name:"ReceiverId"`
 
 	// Task status. `1`: to start; `5`: sending; `6`: sending suspended today; `7`: sending error; `10`: sent
-	TaskStatus *uint64 `json:"TaskStatus,omitnil" name:"TaskStatus"`
+	TaskStatus *uint64 `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// Task type. `1`: immediate; `2`: scheduled; `3`: recurring
-	TaskType *uint64 `json:"TaskType,omitnil" name:"TaskType"`
+	TaskType *uint64 `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
 	// Number of emails requested to be sent
-	RequestCount *uint64 `json:"RequestCount,omitnil" name:"RequestCount"`
+	RequestCount *uint64 `json:"RequestCount,omitnil,omitempty" name:"RequestCount"`
 
 	// Number of emails sent
-	SendCount *uint64 `json:"SendCount,omitnil" name:"SendCount"`
+	SendCount *uint64 `json:"SendCount,omitnil,omitempty" name:"SendCount"`
 
 	// Number of emails cached
-	CacheCount *uint64 `json:"CacheCount,omitnil" name:"CacheCount"`
+	CacheCount *uint64 `json:"CacheCount,omitnil,omitempty" name:"CacheCount"`
 
 	// Task creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Task update time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Email subject
-	Subject *string `json:"Subject,omitnil" name:"Subject"`
+	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
 	// Template and template data
 	// Note: This field may return `null`, indicating that no valid value can be found.
-	Template *Template `json:"Template,omitnil" name:"Template"`
+	Template *Template `json:"Template,omitnil,omitempty" name:"Template"`
 
 	// Parameters of a recurring task
 	// Note: This field may return `null`, indicating that no valid value can be found.
-	CycleParam *CycleEmailParam `json:"CycleParam,omitnil" name:"CycleParam"`
+	CycleParam *CycleEmailParam `json:"CycleParam,omitnil,omitempty" name:"CycleParam"`
 
 	// Parameters of a scheduled task
 	// Note: This field may return `null`, indicating that no valid value can be found.
-	TimedParam *TimedEmailParam `json:"TimedParam,omitnil" name:"TimedParam"`
+	TimedParam *TimedEmailParam `json:"TimedParam,omitnil,omitempty" name:"TimedParam"`
 
 	// Task exception information
 	// Note: This field may return `null`, indicating that no valid value can be found.
-	ErrMsg *string `json:"ErrMsg,omitnil" name:"ErrMsg"`
+	ErrMsg *string `json:"ErrMsg,omitnil,omitempty" name:"ErrMsg"`
 
 	// Recipient group name
-	ReceiversName *string `json:"ReceiversName,omitnil" name:"ReceiversName"`
+	ReceiversName *string `json:"ReceiversName,omitnil,omitempty" name:"ReceiversName"`
 }
 
 type Simple struct {
 	// HTML code after base64 encoding. To ensure correct display, this parameter should include all code information and cannot contain external CSS.
-	Html *string `json:"Html,omitnil" name:"Html"`
+	Html *string `json:"Html,omitnil,omitempty" name:"Html"`
 
 	// Plain text content after base64 encoding. If HTML is not involved, the plain text will be displayed in the email. Otherwise, this parameter represents the plain text style of the email.
-	Text *string `json:"Text,omitnil" name:"Text"`
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 }
 
 type Template struct {
 	// Template ID. If you don’t have any template, please create one.
-	TemplateID *uint64 `json:"TemplateID,omitnil" name:"TemplateID"`
+	TemplateID *uint64 `json:"TemplateID,omitnil,omitempty" name:"TemplateID"`
 
 	// Variable parameters in the template. Please use `json.dump` to format the JSON object into a string type. The object is a set of key-value pairs. Each key denotes a variable, which is represented by {{key}}. The key will be replaced with the corresponding value (represented by {{value}}) when sending the email.
 	// Note: The parameter value cannot be data of a complex type such as HTML.
 	// Example: {"name":"xxx","age":"xx"}
-	TemplateData *string `json:"TemplateData,omitnil" name:"TemplateData"`
+	TemplateData *string `json:"TemplateData,omitnil,omitempty" name:"TemplateData"`
 }
 
 type TemplateContent struct {
 	// HTML code after base64 encoding.
-	Html *string `json:"Html,omitnil" name:"Html"`
+	Html *string `json:"Html,omitnil,omitempty" name:"Html"`
 
 	// Text content after base64 encoding.
-	Text *string `json:"Text,omitnil" name:"Text"`
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 }
 
 type TemplatesMetadata struct {
 	// Creation time.
-	CreatedTimestamp *uint64 `json:"CreatedTimestamp,omitnil" name:"CreatedTimestamp"`
+	CreatedTimestamp *uint64 `json:"CreatedTimestamp,omitnil,omitempty" name:"CreatedTimestamp"`
 
 	// Template name.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Template status. 1: under review; 0: approved; 2: rejected; other values: unavailable.
-	TemplateStatus *int64 `json:"TemplateStatus,omitnil" name:"TemplateStatus"`
+	TemplateStatus *int64 `json:"TemplateStatus,omitnil,omitempty" name:"TemplateStatus"`
 
 	// Template ID.
-	TemplateID *uint64 `json:"TemplateID,omitnil" name:"TemplateID"`
+	TemplateID *uint64 `json:"TemplateID,omitnil,omitempty" name:"TemplateID"`
 
 	// Review reply
-	ReviewReason *string `json:"ReviewReason,omitnil" name:"ReviewReason"`
+	ReviewReason *string `json:"ReviewReason,omitnil,omitempty" name:"ReviewReason"`
 }
 
 type TimedEmailParam struct {
 	// Start time of a scheduled sending task
-	BeginTime *string `json:"BeginTime,omitnil" name:"BeginTime"`
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 }
 
 // Predefined struct for user
 type UpdateEmailIdentityRequestParams struct {
 	// Domain to be verified.
-	EmailIdentity *string `json:"EmailIdentity,omitnil" name:"EmailIdentity"`
+	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 }
 
 type UpdateEmailIdentityRequest struct {
 	*tchttp.BaseRequest
 	
 	// Domain to be verified.
-	EmailIdentity *string `json:"EmailIdentity,omitnil" name:"EmailIdentity"`
+	EmailIdentity *string `json:"EmailIdentity,omitnil,omitempty" name:"EmailIdentity"`
 }
 
 func (r *UpdateEmailIdentityRequest) ToJsonString() string {
@@ -1908,16 +1908,16 @@ func (r *UpdateEmailIdentityRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateEmailIdentityResponseParams struct {
 	// Verification type. The value is fixed to `DOMAIN`.
-	IdentityType *string `json:"IdentityType,omitnil" name:"IdentityType"`
+	IdentityType *string `json:"IdentityType,omitnil,omitempty" name:"IdentityType"`
 
 	// Verification passed or not.
-	VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitnil" name:"VerifiedForSendingStatus"`
+	VerifiedForSendingStatus *bool `json:"VerifiedForSendingStatus,omitnil,omitempty" name:"VerifiedForSendingStatus"`
 
 	// DNS information that needs to be configured.
-	Attributes []*DNSAttributes `json:"Attributes,omitnil" name:"Attributes"`
+	Attributes []*DNSAttributes `json:"Attributes,omitnil,omitempty" name:"Attributes"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type UpdateEmailIdentityResponse struct {
@@ -1939,20 +1939,20 @@ func (r *UpdateEmailIdentityResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateEmailSmtpPassWordRequestParams struct {
 	// SMTP password. Length limit: 64.
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// Email address. Length limit: 128.
-	EmailAddress *string `json:"EmailAddress,omitnil" name:"EmailAddress"`
+	EmailAddress *string `json:"EmailAddress,omitnil,omitempty" name:"EmailAddress"`
 }
 
 type UpdateEmailSmtpPassWordRequest struct {
 	*tchttp.BaseRequest
 	
 	// SMTP password. Length limit: 64.
-	Password *string `json:"Password,omitnil" name:"Password"`
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// Email address. Length limit: 128.
-	EmailAddress *string `json:"EmailAddress,omitnil" name:"EmailAddress"`
+	EmailAddress *string `json:"EmailAddress,omitnil,omitempty" name:"EmailAddress"`
 }
 
 func (r *UpdateEmailSmtpPassWordRequest) ToJsonString() string {
@@ -1978,7 +1978,7 @@ func (r *UpdateEmailSmtpPassWordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateEmailSmtpPassWordResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type UpdateEmailSmtpPassWordResponse struct {
@@ -2000,26 +2000,26 @@ func (r *UpdateEmailSmtpPassWordResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateEmailTemplateRequestParams struct {
 	// Template content.
-	TemplateContent *TemplateContent `json:"TemplateContent,omitnil" name:"TemplateContent"`
+	TemplateContent *TemplateContent `json:"TemplateContent,omitnil,omitempty" name:"TemplateContent"`
 
 	// Template ID.
-	TemplateID *uint64 `json:"TemplateID,omitnil" name:"TemplateID"`
+	TemplateID *uint64 `json:"TemplateID,omitnil,omitempty" name:"TemplateID"`
 
 	// Template name
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 }
 
 type UpdateEmailTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Template content.
-	TemplateContent *TemplateContent `json:"TemplateContent,omitnil" name:"TemplateContent"`
+	TemplateContent *TemplateContent `json:"TemplateContent,omitnil,omitempty" name:"TemplateContent"`
 
 	// Template ID.
-	TemplateID *uint64 `json:"TemplateID,omitnil" name:"TemplateID"`
+	TemplateID *uint64 `json:"TemplateID,omitnil,omitempty" name:"TemplateID"`
 
 	// Template name
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 }
 
 func (r *UpdateEmailTemplateRequest) ToJsonString() string {
@@ -2046,7 +2046,7 @@ func (r *UpdateEmailTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateEmailTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type UpdateEmailTemplateResponse struct {
@@ -2068,27 +2068,27 @@ func (r *UpdateEmailTemplateResponse) FromJsonString(s string) error {
 type Volume struct {
 	// Date
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	SendDate *string `json:"SendDate,omitnil" name:"SendDate"`
+	SendDate *string `json:"SendDate,omitnil,omitempty" name:"SendDate"`
 
 	// Number of email requests.
-	RequestCount *uint64 `json:"RequestCount,omitnil" name:"RequestCount"`
+	RequestCount *uint64 `json:"RequestCount,omitnil,omitempty" name:"RequestCount"`
 
 	// Number of email requests accepted by Tencent Cloud.
-	AcceptedCount *uint64 `json:"AcceptedCount,omitnil" name:"AcceptedCount"`
+	AcceptedCount *uint64 `json:"AcceptedCount,omitnil,omitempty" name:"AcceptedCount"`
 
 	// Number of delivered emails.
-	DeliveredCount *uint64 `json:"DeliveredCount,omitnil" name:"DeliveredCount"`
+	DeliveredCount *uint64 `json:"DeliveredCount,omitnil,omitempty" name:"DeliveredCount"`
 
 	// Number of users (deduplicated) who opened emails.
-	OpenedCount *uint64 `json:"OpenedCount,omitnil" name:"OpenedCount"`
+	OpenedCount *uint64 `json:"OpenedCount,omitnil,omitempty" name:"OpenedCount"`
 
 	// Number of recipients who clicked on links in emails.
-	ClickedCount *uint64 `json:"ClickedCount,omitnil" name:"ClickedCount"`
+	ClickedCount *uint64 `json:"ClickedCount,omitnil,omitempty" name:"ClickedCount"`
 
 	// Number of bounced emails.
-	BounceCount *uint64 `json:"BounceCount,omitnil" name:"BounceCount"`
+	BounceCount *uint64 `json:"BounceCount,omitnil,omitempty" name:"BounceCount"`
 
 	// Number of users who canceled subscriptions.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	UnsubscribeCount *uint64 `json:"UnsubscribeCount,omitnil" name:"UnsubscribeCount"`
+	UnsubscribeCount *uint64 `json:"UnsubscribeCount,omitnil,omitempty" name:"UnsubscribeCount"`
 }

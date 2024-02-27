@@ -22,134 +22,134 @@ import (
 
 type AttributeKeyDetail struct {
 	// Input box type
-	LabelType *string `json:"LabelType,omitnil" name:"LabelType"`
+	LabelType *string `json:"LabelType,omitnil,omitempty" name:"LabelType"`
 
 	// Initial display
-	Starter *string `json:"Starter,omitnil" name:"Starter"`
+	Starter *string `json:"Starter,omitnil,omitempty" name:"Starter"`
 
 	// Display sort order
-	Order *int64 `json:"Order,omitnil" name:"Order"`
+	Order *int64 `json:"Order,omitnil,omitempty" name:"Order"`
 
 	// `AttributeKey` value
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 
 	// Tag
-	Label *string `json:"Label,omitnil" name:"Label"`
+	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
 }
 
 type AuditSummary struct {
 	// Tracking set status. 1: enabled, 0: disabled
-	AuditStatus *int64 `json:"AuditStatus,omitnil" name:"AuditStatus"`
+	AuditStatus *int64 `json:"AuditStatus,omitnil,omitempty" name:"AuditStatus"`
 
 	// COS bucket name
-	CosBucketName *string `json:"CosBucketName,omitnil" name:"CosBucketName"`
+	CosBucketName *string `json:"CosBucketName,omitnil,omitempty" name:"CosBucketName"`
 
 	// Tracking set name
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 
 	// Log prefix
-	LogFilePrefix *string `json:"LogFilePrefix,omitnil" name:"LogFilePrefix"`
+	LogFilePrefix *string `json:"LogFilePrefix,omitnil,omitempty" name:"LogFilePrefix"`
 }
 
 type CmqRegionInfo struct {
 	// Region description
-	CmqRegionName *string `json:"CmqRegionName,omitnil" name:"CmqRegionName"`
+	CmqRegionName *string `json:"CmqRegionName,omitnil,omitempty" name:"CmqRegionName"`
 
 	// CMQ region
-	CmqRegion *string `json:"CmqRegion,omitnil" name:"CmqRegion"`
+	CmqRegion *string `json:"CmqRegion,omitnil,omitempty" name:"CmqRegion"`
 }
 
 type CosRegionInfo struct {
 	// COS region
-	CosRegion *string `json:"CosRegion,omitnil" name:"CosRegion"`
+	CosRegion *string `json:"CosRegion,omitnil,omitempty" name:"CosRegion"`
 
 	// Region description
-	CosRegionName *string `json:"CosRegionName,omitnil" name:"CosRegionName"`
+	CosRegionName *string `json:"CosRegionName,omitnil,omitempty" name:"CosRegionName"`
 }
 
 // Predefined struct for user
 type CreateAuditRequestParams struct {
 	// Whether to enable CMQ message notification. 1: Yes; 0: No. Only CMQ queue service is currently supported. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
-	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitnil" name:"IsEnableCmqNotify"`
+	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitnil,omitempty" name:"IsEnableCmqNotify"`
 
 	// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write).
-	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitnil" name:"ReadWriteAttribute"`
+	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitnil,omitempty" name:"ReadWriteAttribute"`
 
 	// Tracking set name, which can contain 3–128 ASCII letters (a–z; A–Z), digits (0–9), and underscores (_).
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 
 	// COS region. Supported regions can be queried through the `ListCosEnableRegion` API.
-	CosRegion *string `json:"CosRegion,omitnil" name:"CosRegion"`
+	CosRegion *string `json:"CosRegion,omitnil,omitempty" name:"CosRegion"`
 
 	// Whether to create a COS bucket. 1: Yes; 0: No.
-	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitnil" name:"IsCreateNewBucket"`
+	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitnil,omitempty" name:"IsCreateNewBucket"`
 
 	// User-defined COS bucket name, which can only contain 1–40 lowercase letters (a–z), digits (0–9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Enter the name with caution to avoid log delivery failure and consequent data loss.
-	CosBucketName *string `json:"CosBucketName,omitnil" name:"CosBucketName"`
+	CosBucketName *string `json:"CosBucketName,omitnil,omitempty" name:"CosBucketName"`
 
 	// Globally unique ID of the CMK. This value is required if it is not a newly created KMS element. It can be obtained through `ListKeyAliasByRegion`. CloudAudit will not verify the validity of the `KeyId`. Enter it carefully to avoid data loss.
-	KeyId *string `json:"KeyId,omitnil" name:"KeyId"`
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
 	// Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of `IsEnableCmqNotify` is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Enter the name with caution to avoid log delivery failure and consequent data loss.
-	CmqQueueName *string `json:"CmqQueueName,omitnil" name:"CmqQueueName"`
+	CmqQueueName *string `json:"CmqQueueName,omitnil,omitempty" name:"CmqQueueName"`
 
 	// KMS region. Currently supported regions can be obtained through `ListKmsEnableRegion`. This must be the same as the COS region.
-	KmsRegion *string `json:"KmsRegion,omitnil" name:"KmsRegion"`
+	KmsRegion *string `json:"KmsRegion,omitnil,omitempty" name:"KmsRegion"`
 
 	// Whether to enable KMS encryption. 1: Yes, 0: No. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
-	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitnil" name:"IsEnableKmsEncry"`
+	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitnil,omitempty" name:"IsEnableKmsEncry"`
 
 	// Region where the queue is located. Supported CMQ regions can be queried through the `ListCmqEnableRegion` API. This field is required if the value of `IsEnableCmqNotify` is 1.
-	CmqRegion *string `json:"CmqRegion,omitnil" name:"CmqRegion"`
+	CmqRegion *string `json:"CmqRegion,omitnil,omitempty" name:"CmqRegion"`
 
 	// Log file prefix, which can only contain 3–40 ASCII letters (a–z; A–Z) and digits (0–9). It can be left empty and is the account ID by default.
-	LogFilePrefix *string `json:"LogFilePrefix,omitnil" name:"LogFilePrefix"`
+	LogFilePrefix *string `json:"LogFilePrefix,omitnil,omitempty" name:"LogFilePrefix"`
 
 	// Whether to create a queue. 1: Yes; 0: No. This field is required if the value of `IsEnableCmqNotify` is 1.
-	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitnil" name:"IsCreateNewQueue"`
+	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitnil,omitempty" name:"IsCreateNewQueue"`
 }
 
 type CreateAuditRequest struct {
 	*tchttp.BaseRequest
 	
 	// Whether to enable CMQ message notification. 1: Yes; 0: No. Only CMQ queue service is currently supported. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
-	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitnil" name:"IsEnableCmqNotify"`
+	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitnil,omitempty" name:"IsEnableCmqNotify"`
 
 	// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write).
-	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitnil" name:"ReadWriteAttribute"`
+	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitnil,omitempty" name:"ReadWriteAttribute"`
 
 	// Tracking set name, which can contain 3–128 ASCII letters (a–z; A–Z), digits (0–9), and underscores (_).
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 
 	// COS region. Supported regions can be queried through the `ListCosEnableRegion` API.
-	CosRegion *string `json:"CosRegion,omitnil" name:"CosRegion"`
+	CosRegion *string `json:"CosRegion,omitnil,omitempty" name:"CosRegion"`
 
 	// Whether to create a COS bucket. 1: Yes; 0: No.
-	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitnil" name:"IsCreateNewBucket"`
+	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitnil,omitempty" name:"IsCreateNewBucket"`
 
 	// User-defined COS bucket name, which can only contain 1–40 lowercase letters (a–z), digits (0–9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Enter the name with caution to avoid log delivery failure and consequent data loss.
-	CosBucketName *string `json:"CosBucketName,omitnil" name:"CosBucketName"`
+	CosBucketName *string `json:"CosBucketName,omitnil,omitempty" name:"CosBucketName"`
 
 	// Globally unique ID of the CMK. This value is required if it is not a newly created KMS element. It can be obtained through `ListKeyAliasByRegion`. CloudAudit will not verify the validity of the `KeyId`. Enter it carefully to avoid data loss.
-	KeyId *string `json:"KeyId,omitnil" name:"KeyId"`
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
 	// Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of `IsEnableCmqNotify` is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Enter the name with caution to avoid log delivery failure and consequent data loss.
-	CmqQueueName *string `json:"CmqQueueName,omitnil" name:"CmqQueueName"`
+	CmqQueueName *string `json:"CmqQueueName,omitnil,omitempty" name:"CmqQueueName"`
 
 	// KMS region. Currently supported regions can be obtained through `ListKmsEnableRegion`. This must be the same as the COS region.
-	KmsRegion *string `json:"KmsRegion,omitnil" name:"KmsRegion"`
+	KmsRegion *string `json:"KmsRegion,omitnil,omitempty" name:"KmsRegion"`
 
 	// Whether to enable KMS encryption. 1: Yes, 0: No. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
-	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitnil" name:"IsEnableKmsEncry"`
+	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitnil,omitempty" name:"IsEnableKmsEncry"`
 
 	// Region where the queue is located. Supported CMQ regions can be queried through the `ListCmqEnableRegion` API. This field is required if the value of `IsEnableCmqNotify` is 1.
-	CmqRegion *string `json:"CmqRegion,omitnil" name:"CmqRegion"`
+	CmqRegion *string `json:"CmqRegion,omitnil,omitempty" name:"CmqRegion"`
 
 	// Log file prefix, which can only contain 3–40 ASCII letters (a–z; A–Z) and digits (0–9). It can be left empty and is the account ID by default.
-	LogFilePrefix *string `json:"LogFilePrefix,omitnil" name:"LogFilePrefix"`
+	LogFilePrefix *string `json:"LogFilePrefix,omitnil,omitempty" name:"LogFilePrefix"`
 
 	// Whether to create a queue. 1: Yes; 0: No. This field is required if the value of `IsEnableCmqNotify` is 1.
-	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitnil" name:"IsCreateNewQueue"`
+	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitnil,omitempty" name:"IsCreateNewQueue"`
 }
 
 func (r *CreateAuditRequest) ToJsonString() string {
@@ -186,10 +186,10 @@ func (r *CreateAuditRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAuditResponseParams struct {
 	// Whether creation succeeded.
-	IsSuccess *int64 `json:"IsSuccess,omitnil" name:"IsSuccess"`
+	IsSuccess *int64 `json:"IsSuccess,omitnil,omitempty" name:"IsSuccess"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateAuditResponse struct {
@@ -211,50 +211,50 @@ func (r *CreateAuditResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAuditTrackRequestParams struct {
 	// Tracking set name, which can only contain 3-48 letters, digits, hyphens, and underscores.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
-	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
 	// The product to which the tracking set event belongs. The value can be a single product such as `cos`, or `*` that indicates all products.
-	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
 	// Tracking set status (0: Not enabled; 1: Enabled)
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The list of API names of tracking set events. When `ResourceType` is `*`, the value of `EventNames` must be `*`. When `ResourceType` is a specified product, the value of `EventNames` can be `*`. When `ResourceType` is `cos` or `cls`, up to 10 APIs are supported.
-	EventNames []*string `json:"EventNames,omitnil" name:"EventNames"`
+	EventNames []*string `json:"EventNames,omitnil,omitempty" name:"EventNames"`
 
 	// Storage type of shipped data. Valid values: `cos`, `cls`.
-	Storage *Storage `json:"Storage,omitnil" name:"Storage"`
+	Storage *Storage `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Whether to enable the feature of shipping organization members’ operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account)
-	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitnil" name:"TrackForAllMembers"`
+	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitnil,omitempty" name:"TrackForAllMembers"`
 }
 
 type CreateAuditTrackRequest struct {
 	*tchttp.BaseRequest
 	
 	// Tracking set name, which can only contain 3-48 letters, digits, hyphens, and underscores.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
-	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
 	// The product to which the tracking set event belongs. The value can be a single product such as `cos`, or `*` that indicates all products.
-	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
 	// Tracking set status (0: Not enabled; 1: Enabled)
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The list of API names of tracking set events. When `ResourceType` is `*`, the value of `EventNames` must be `*`. When `ResourceType` is a specified product, the value of `EventNames` can be `*`. When `ResourceType` is `cos` or `cls`, up to 10 APIs are supported.
-	EventNames []*string `json:"EventNames,omitnil" name:"EventNames"`
+	EventNames []*string `json:"EventNames,omitnil,omitempty" name:"EventNames"`
 
 	// Storage type of shipped data. Valid values: `cos`, `cls`.
-	Storage *Storage `json:"Storage,omitnil" name:"Storage"`
+	Storage *Storage `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Whether to enable the feature of shipping organization members’ operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account)
-	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitnil" name:"TrackForAllMembers"`
+	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitnil,omitempty" name:"TrackForAllMembers"`
 }
 
 func (r *CreateAuditTrackRequest) ToJsonString() string {
@@ -285,10 +285,10 @@ func (r *CreateAuditTrackRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateAuditTrackResponseParams struct {
 	// Tracking set ID
-	TrackId *uint64 `json:"TrackId,omitnil" name:"TrackId"`
+	TrackId *uint64 `json:"TrackId,omitnil,omitempty" name:"TrackId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateAuditTrackResponse struct {
@@ -310,14 +310,14 @@ func (r *CreateAuditTrackResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAuditRequestParams struct {
 	// Tracking set name
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 }
 
 type DeleteAuditRequest struct {
 	*tchttp.BaseRequest
 	
 	// Tracking set name
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 }
 
 func (r *DeleteAuditRequest) ToJsonString() string {
@@ -342,10 +342,10 @@ func (r *DeleteAuditRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAuditResponseParams struct {
 	// Whether deletion succeeded
-	IsSuccess *int64 `json:"IsSuccess,omitnil" name:"IsSuccess"`
+	IsSuccess *int64 `json:"IsSuccess,omitnil,omitempty" name:"IsSuccess"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteAuditResponse struct {
@@ -367,14 +367,14 @@ func (r *DeleteAuditResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAuditTrackRequestParams struct {
 	// Tracking set ID
-	TrackId *uint64 `json:"TrackId,omitnil" name:"TrackId"`
+	TrackId *uint64 `json:"TrackId,omitnil,omitempty" name:"TrackId"`
 }
 
 type DeleteAuditTrackRequest struct {
 	*tchttp.BaseRequest
 	
 	// Tracking set ID
-	TrackId *uint64 `json:"TrackId,omitnil" name:"TrackId"`
+	TrackId *uint64 `json:"TrackId,omitnil,omitempty" name:"TrackId"`
 }
 
 func (r *DeleteAuditTrackRequest) ToJsonString() string {
@@ -399,7 +399,7 @@ func (r *DeleteAuditTrackRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteAuditTrackResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteAuditTrackResponse struct {
@@ -421,14 +421,14 @@ func (r *DeleteAuditTrackResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAuditRequestParams struct {
 	// Tracking set name
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 }
 
 type DescribeAuditRequest struct {
 	*tchttp.BaseRequest
 	
 	// Tracking set name
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 }
 
 func (r *DescribeAuditRequest) ToJsonString() string {
@@ -453,46 +453,46 @@ func (r *DescribeAuditRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAuditResponseParams struct {
 	// Whether to enable CMQ message notification. 1: Yes; 0: No.
-	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitnil" name:"IsEnableCmqNotify"`
+	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitnil,omitempty" name:"IsEnableCmqNotify"`
 
 	// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write)
-	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitnil" name:"ReadWriteAttribute"`
+	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitnil,omitempty" name:"ReadWriteAttribute"`
 
 	// Globally unique CMK ID.
-	KeyId *string `json:"KeyId,omitnil" name:"KeyId"`
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
 	// Tracking set status. 1: enabled, 0: disabled.
-	AuditStatus *int64 `json:"AuditStatus,omitnil" name:"AuditStatus"`
+	AuditStatus *int64 `json:"AuditStatus,omitnil,omitempty" name:"AuditStatus"`
 
 	// Tracking set name.
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 
 	// COS bucket region.
-	CosRegion *string `json:"CosRegion,omitnil" name:"CosRegion"`
+	CosRegion *string `json:"CosRegion,omitnil,omitempty" name:"CosRegion"`
 
 	// Queue name.
-	CmqQueueName *string `json:"CmqQueueName,omitnil" name:"CmqQueueName"`
+	CmqQueueName *string `json:"CmqQueueName,omitnil,omitempty" name:"CmqQueueName"`
 
 	// CMK alias.
-	KmsAlias *string `json:"KmsAlias,omitnil" name:"KmsAlias"`
+	KmsAlias *string `json:"KmsAlias,omitnil,omitempty" name:"KmsAlias"`
 
 	// KMS region.
-	KmsRegion *string `json:"KmsRegion,omitnil" name:"KmsRegion"`
+	KmsRegion *string `json:"KmsRegion,omitnil,omitempty" name:"KmsRegion"`
 
 	// Whether to enable KMS encryption. 1: Yes, 0: No. If KMS encryption is enabled, the data will be encrypted when it is delivered to COS.
-	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitnil" name:"IsEnableKmsEncry"`
+	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitnil,omitempty" name:"IsEnableKmsEncry"`
 
 	// COS bucket name.
-	CosBucketName *string `json:"CosBucketName,omitnil" name:"CosBucketName"`
+	CosBucketName *string `json:"CosBucketName,omitnil,omitempty" name:"CosBucketName"`
 
 	// Queue region.
-	CmqRegion *string `json:"CmqRegion,omitnil" name:"CmqRegion"`
+	CmqRegion *string `json:"CmqRegion,omitnil,omitempty" name:"CmqRegion"`
 
 	// Log prefix.
-	LogFilePrefix *string `json:"LogFilePrefix,omitnil" name:"LogFilePrefix"`
+	LogFilePrefix *string `json:"LogFilePrefix,omitnil,omitempty" name:"LogFilePrefix"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeAuditResponse struct {
@@ -514,14 +514,14 @@ func (r *DescribeAuditResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAuditTrackRequestParams struct {
 	// Tracking set ID
-	TrackId *uint64 `json:"TrackId,omitnil" name:"TrackId"`
+	TrackId *uint64 `json:"TrackId,omitnil,omitempty" name:"TrackId"`
 }
 
 type DescribeAuditTrackRequest struct {
 	*tchttp.BaseRequest
 	
 	// Tracking set ID
-	TrackId *uint64 `json:"TrackId,omitnil" name:"TrackId"`
+	TrackId *uint64 `json:"TrackId,omitnil,omitempty" name:"TrackId"`
 }
 
 func (r *DescribeAuditTrackRequest) ToJsonString() string {
@@ -546,32 +546,32 @@ func (r *DescribeAuditTrackRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAuditTrackResponseParams struct {
 	// Tracking set name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
-	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
 	// The product to which the tracking set event belongs, such as `cos`, or `*` that indicates all products
-	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
 	// Tracking set status (0: Not enabled; 1: Enabled)
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The list of API names of tracking set events (`*`: All)
-	EventNames []*string `json:"EventNames,omitnil" name:"EventNames"`
+	EventNames []*string `json:"EventNames,omitnil,omitempty" name:"EventNames"`
 
 	// Storage type of shipped data. Valid values: `cos`, `cls`.
-	Storage *Storage `json:"Storage,omitnil" name:"Storage"`
+	Storage *Storage `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Creation time of the tracking set
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Whether to enable the feature of shipping organization members’ operation logs to the organization admin account or the trusted service admin account
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitnil" name:"TrackForAllMembers"`
+	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitnil,omitempty" name:"TrackForAllMembers"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeAuditTrackResponse struct {
@@ -593,20 +593,20 @@ func (r *DescribeAuditTrackResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAuditTracksRequestParams struct {
 	// Page number
-	PageNumber *uint64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// The number of tracking sets per page
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 }
 
 type DescribeAuditTracksRequest struct {
 	*tchttp.BaseRequest
 	
 	// Page number
-	PageNumber *uint64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// The number of tracking sets per page
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 }
 
 func (r *DescribeAuditTracksRequest) ToJsonString() string {
@@ -632,13 +632,13 @@ func (r *DescribeAuditTracksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAuditTracksResponseParams struct {
 	// Tracking set list
-	Tracks []*Tracks `json:"Tracks,omitnil" name:"Tracks"`
+	Tracks []*Tracks `json:"Tracks,omitnil,omitempty" name:"Tracks"`
 
 	// Total number of tracking sets
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeAuditTracksResponse struct {
@@ -660,44 +660,44 @@ func (r *DescribeAuditTracksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeEventsRequestParams struct {
 	// Start timestamp in seconds (cannot be 90 days after the current time).
-	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End timestamp in seconds (the time range for query is less than 30 days).
-	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Credential for viewing more logs.
-	NextToken *uint64 `json:"NextToken,omitnil" name:"NextToken"`
+	NextToken *uint64 `json:"NextToken,omitnil,omitempty" name:"NextToken"`
 
 	// Max number of returned logs (up to 50).
-	MaxResults *uint64 `json:"MaxResults,omitnil" name:"MaxResults"`
+	MaxResults *uint64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
 
 	// Search condition. Valid values: `RequestId`, `EventName`, `ActionType` (write/read), `PrincipalId` (sub-account), `ResourceType`, `ResourceName`, `AccessKeyId`, `SensitiveAction`, `ApiErrorCode`, `CamErrorCode`, and `Tags` (Format of AttributeValue: [{"key":"*","value":"*"}])
-	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitnil" name:"LookupAttributes"`
+	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitnil,omitempty" name:"LookupAttributes"`
 
 	// Whether to return the IP location. `1`: yes, `0`: no.
-	IsReturnLocation *uint64 `json:"IsReturnLocation,omitnil" name:"IsReturnLocation"`
+	IsReturnLocation *uint64 `json:"IsReturnLocation,omitnil,omitempty" name:"IsReturnLocation"`
 }
 
 type DescribeEventsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start timestamp in seconds (cannot be 90 days after the current time).
-	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End timestamp in seconds (the time range for query is less than 30 days).
-	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Credential for viewing more logs.
-	NextToken *uint64 `json:"NextToken,omitnil" name:"NextToken"`
+	NextToken *uint64 `json:"NextToken,omitnil,omitempty" name:"NextToken"`
 
 	// Max number of returned logs (up to 50).
-	MaxResults *uint64 `json:"MaxResults,omitnil" name:"MaxResults"`
+	MaxResults *uint64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
 
 	// Search condition. Valid values: `RequestId`, `EventName`, `ActionType` (write/read), `PrincipalId` (sub-account), `ResourceType`, `ResourceName`, `AccessKeyId`, `SensitiveAction`, `ApiErrorCode`, `CamErrorCode`, and `Tags` (Format of AttributeValue: [{"key":"*","value":"*"}])
-	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitnil" name:"LookupAttributes"`
+	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitnil,omitempty" name:"LookupAttributes"`
 
 	// Whether to return the IP location. `1`: yes, `0`: no.
-	IsReturnLocation *uint64 `json:"IsReturnLocation,omitnil" name:"IsReturnLocation"`
+	IsReturnLocation *uint64 `json:"IsReturnLocation,omitnil,omitempty" name:"IsReturnLocation"`
 }
 
 func (r *DescribeEventsRequest) ToJsonString() string {
@@ -727,21 +727,21 @@ func (r *DescribeEventsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeEventsResponseParams struct {
 	// Whether the log list has come to an end. `true`: Yes. Pagination is not required.
-	ListOver *bool `json:"ListOver,omitnil" name:"ListOver"`
+	ListOver *bool `json:"ListOver,omitnil,omitempty" name:"ListOver"`
 
 	// Credential for viewing more logs.
-	NextToken *uint64 `json:"NextToken,omitnil" name:"NextToken"`
+	NextToken *uint64 `json:"NextToken,omitnil,omitempty" name:"NextToken"`
 
 	// Logset.
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	Events []*Event `json:"Events,omitnil" name:"Events"`
+	Events []*Event `json:"Events,omitnil,omitempty" name:"Events"`
 
 	// This parameter has been deprecated. Please use `ListOver` and `NextToken` for pagination, and read data of the next page when the value of `ListOver` is `false`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeEventsResponse struct {
@@ -762,70 +762,70 @@ func (r *DescribeEventsResponse) FromJsonString(s string) error {
 
 type Event struct {
 	// Log ID
-	EventId *string `json:"EventId,omitnil" name:"EventId"`
+	EventId *string `json:"EventId,omitnil,omitempty" name:"EventId"`
 
 	// Username
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// Event Time
-	EventTime *string `json:"EventTime,omitnil" name:"EventTime"`
+	EventTime *string `json:"EventTime,omitnil,omitempty" name:"EventTime"`
 
 	// Log details
-	CloudAuditEvent *string `json:"CloudAuditEvent,omitnil" name:"CloudAuditEvent"`
+	CloudAuditEvent *string `json:"CloudAuditEvent,omitnil,omitempty" name:"CloudAuditEvent"`
 
 	// Description of resource type in Chinese (please use this field as required; if you are using other languages, ignore this field)
-	ResourceTypeCn *string `json:"ResourceTypeCn,omitnil" name:"ResourceTypeCn"`
+	ResourceTypeCn *string `json:"ResourceTypeCn,omitnil,omitempty" name:"ResourceTypeCn"`
 
 	// Authentication error code
-	ErrorCode *int64 `json:"ErrorCode,omitnil" name:"ErrorCode"`
+	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
 	// Event name
-	EventName *string `json:"EventName,omitnil" name:"EventName"`
+	EventName *string `json:"EventName,omitnil,omitempty" name:"EventName"`
 
 	// Certificate ID
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	SecretId *string `json:"SecretId,omitnil" name:"SecretId"`
+	SecretId *string `json:"SecretId,omitnil,omitempty" name:"SecretId"`
 
 	// Request source
-	EventSource *string `json:"EventSource,omitnil" name:"EventSource"`
+	EventSource *string `json:"EventSource,omitnil,omitempty" name:"EventSource"`
 
 	// Request ID
-	RequestID *string `json:"RequestID,omitnil" name:"RequestID"`
+	RequestID *string `json:"RequestID,omitnil,omitempty" name:"RequestID"`
 
 	// Resource region
-	ResourceRegion *string `json:"ResourceRegion,omitnil" name:"ResourceRegion"`
+	ResourceRegion *string `json:"ResourceRegion,omitnil,omitempty" name:"ResourceRegion"`
 
 	// Root account ID
-	AccountID *int64 `json:"AccountID,omitnil" name:"AccountID"`
+	AccountID *int64 `json:"AccountID,omitnil,omitempty" name:"AccountID"`
 
 	// Source IP
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	SourceIPAddress *string `json:"SourceIPAddress,omitnil" name:"SourceIPAddress"`
+	SourceIPAddress *string `json:"SourceIPAddress,omitnil,omitempty" name:"SourceIPAddress"`
 
 	// Description of event name in Chinese (please use this field as required; if you are using other languages, ignore this field)
-	EventNameCn *string `json:"EventNameCn,omitnil" name:"EventNameCn"`
+	EventNameCn *string `json:"EventNameCn,omitnil,omitempty" name:"EventNameCn"`
 
 	// Resource pair
-	Resources *Resource `json:"Resources,omitnil" name:"Resources"`
+	Resources *Resource `json:"Resources,omitnil,omitempty" name:"Resources"`
 
 	// Event region
-	EventRegion *string `json:"EventRegion,omitnil" name:"EventRegion"`
+	EventRegion *string `json:"EventRegion,omitnil,omitempty" name:"EventRegion"`
 
 	// IP location
-	Location *string `json:"Location,omitnil" name:"Location"`
+	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
 }
 
 // Predefined struct for user
 type GetAttributeKeyRequestParams struct {
 	// Website type. Valid values: zh, en. If this parameter is left empty, `zh` will be used by default
-	WebsiteType *string `json:"WebsiteType,omitnil" name:"WebsiteType"`
+	WebsiteType *string `json:"WebsiteType,omitnil,omitempty" name:"WebsiteType"`
 }
 
 type GetAttributeKeyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Website type. Valid values: zh, en. If this parameter is left empty, `zh` will be used by default
-	WebsiteType *string `json:"WebsiteType,omitnil" name:"WebsiteType"`
+	WebsiteType *string `json:"WebsiteType,omitnil,omitempty" name:"WebsiteType"`
 }
 
 func (r *GetAttributeKeyRequest) ToJsonString() string {
@@ -850,10 +850,10 @@ func (r *GetAttributeKeyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetAttributeKeyResponseParams struct {
 	// Valid values of `AttributeKey`
-	AttributeKeyDetails []*AttributeKeyDetail `json:"AttributeKeyDetails,omitnil" name:"AttributeKeyDetails"`
+	AttributeKeyDetails []*AttributeKeyDetail `json:"AttributeKeyDetails,omitnil,omitempty" name:"AttributeKeyDetails"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetAttributeKeyResponse struct {
@@ -904,10 +904,10 @@ func (r *InquireAuditCreditRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type InquireAuditCreditResponseParams struct {
 	// Number of tracking sets that can be created
-	AuditAmount *int64 `json:"AuditAmount,omitnil" name:"AuditAmount"`
+	AuditAmount *int64 `json:"AuditAmount,omitnil,omitempty" name:"AuditAmount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type InquireAuditCreditResponse struct {
@@ -959,10 +959,10 @@ func (r *ListAuditsRequest) FromJsonString(s string) error {
 type ListAuditsResponseParams struct {
 	// Set of queried tracking set summaries
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AuditSummarys []*AuditSummary `json:"AuditSummarys,omitnil" name:"AuditSummarys"`
+	AuditSummarys []*AuditSummary `json:"AuditSummarys,omitnil,omitempty" name:"AuditSummarys"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ListAuditsResponse struct {
@@ -984,14 +984,14 @@ func (r *ListAuditsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListCmqEnableRegionRequestParams struct {
 	// Website type. zh: Chinese mainland (default); en: outside Chinese mainland.
-	WebsiteType *string `json:"WebsiteType,omitnil" name:"WebsiteType"`
+	WebsiteType *string `json:"WebsiteType,omitnil,omitempty" name:"WebsiteType"`
 }
 
 type ListCmqEnableRegionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Website type. zh: Chinese mainland (default); en: outside Chinese mainland.
-	WebsiteType *string `json:"WebsiteType,omitnil" name:"WebsiteType"`
+	WebsiteType *string `json:"WebsiteType,omitnil,omitempty" name:"WebsiteType"`
 }
 
 func (r *ListCmqEnableRegionRequest) ToJsonString() string {
@@ -1016,10 +1016,10 @@ func (r *ListCmqEnableRegionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ListCmqEnableRegionResponseParams struct {
 	// CloudAudit-enabled CMQ AZs
-	EnableRegions []*CmqRegionInfo `json:"EnableRegions,omitnil" name:"EnableRegions"`
+	EnableRegions []*CmqRegionInfo `json:"EnableRegions,omitnil,omitempty" name:"EnableRegions"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ListCmqEnableRegionResponse struct {
@@ -1041,14 +1041,14 @@ func (r *ListCmqEnableRegionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListCosEnableRegionRequestParams struct {
 	// Website type. zh: Chinese mainland (default); en: outside Chinese mainland.
-	WebsiteType *string `json:"WebsiteType,omitnil" name:"WebsiteType"`
+	WebsiteType *string `json:"WebsiteType,omitnil,omitempty" name:"WebsiteType"`
 }
 
 type ListCosEnableRegionRequest struct {
 	*tchttp.BaseRequest
 	
 	// Website type. zh: Chinese mainland (default); en: outside Chinese mainland.
-	WebsiteType *string `json:"WebsiteType,omitnil" name:"WebsiteType"`
+	WebsiteType *string `json:"WebsiteType,omitnil,omitempty" name:"WebsiteType"`
 }
 
 func (r *ListCosEnableRegionRequest) ToJsonString() string {
@@ -1073,10 +1073,10 @@ func (r *ListCosEnableRegionRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ListCosEnableRegionResponseParams struct {
 	// CloudAudit-enabled COS AZs
-	EnableRegions []*CosRegionInfo `json:"EnableRegions,omitnil" name:"EnableRegions"`
+	EnableRegions []*CosRegionInfo `json:"EnableRegions,omitnil,omitempty" name:"EnableRegions"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ListCosEnableRegionResponse struct {
@@ -1098,44 +1098,44 @@ func (r *ListCosEnableRegionResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type LookUpEventsRequestParams struct {
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Search criteria
-	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitnil" name:"LookupAttributes"`
+	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitnil,omitempty" name:"LookupAttributes"`
 
 	// Credential for viewing more logs
-	NextToken *string `json:"NextToken,omitnil" name:"NextToken"`
+	NextToken *string `json:"NextToken,omitnil,omitempty" name:"NextToken"`
 
 	// Maximum number of logs to be returned
-	MaxResults *int64 `json:"MaxResults,omitnil" name:"MaxResults"`
+	MaxResults *int64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
 
 	// CloudAudit mode. Valid values: standard, quick. Default value: standard
-	Mode *string `json:"Mode,omitnil" name:"Mode"`
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 }
 
 type LookUpEventsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Search criteria
-	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitnil" name:"LookupAttributes"`
+	LookupAttributes []*LookupAttribute `json:"LookupAttributes,omitnil,omitempty" name:"LookupAttributes"`
 
 	// Credential for viewing more logs
-	NextToken *string `json:"NextToken,omitnil" name:"NextToken"`
+	NextToken *string `json:"NextToken,omitnil,omitempty" name:"NextToken"`
 
 	// Maximum number of logs to be returned
-	MaxResults *int64 `json:"MaxResults,omitnil" name:"MaxResults"`
+	MaxResults *int64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
 
 	// CloudAudit mode. Valid values: standard, quick. Default value: standard
-	Mode *string `json:"Mode,omitnil" name:"Mode"`
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 }
 
 func (r *LookUpEventsRequest) ToJsonString() string {
@@ -1166,18 +1166,18 @@ func (r *LookUpEventsRequest) FromJsonString(s string) error {
 type LookUpEventsResponseParams struct {
 	// Credential for viewing more logs
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NextToken *string `json:"NextToken,omitnil" name:"NextToken"`
+	NextToken *string `json:"NextToken,omitnil,omitempty" name:"NextToken"`
 
 	// Logset
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Events []*Event `json:"Events,omitnil" name:"Events"`
+	Events []*Event `json:"Events,omitnil,omitempty" name:"Events"`
 
 	// Whether the logset ends
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ListOver *bool `json:"ListOver,omitnil" name:"ListOver"`
+	ListOver *bool `json:"ListOver,omitnil,omitempty" name:"ListOver"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type LookUpEventsResponse struct {
@@ -1199,66 +1199,66 @@ func (r *LookUpEventsResponse) FromJsonString(s string) error {
 type LookupAttribute struct {
 	// Valid values: RequestId, EventName, ReadOnly, Username, ResourceType, ResourceName, AccessKeyId, and EventId
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	AttributeKey *string `json:"AttributeKey,omitnil" name:"AttributeKey"`
+	AttributeKey *string `json:"AttributeKey,omitnil,omitempty" name:"AttributeKey"`
 
 	// Value of `AttributeValue`
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	AttributeValue *string `json:"AttributeValue,omitnil" name:"AttributeValue"`
+	AttributeValue *string `json:"AttributeValue,omitnil,omitempty" name:"AttributeValue"`
 }
 
 // Predefined struct for user
 type ModifyAuditTrackRequestParams struct {
 	// Tracking set ID
-	TrackId *uint64 `json:"TrackId,omitnil" name:"TrackId"`
+	TrackId *uint64 `json:"TrackId,omitnil,omitempty" name:"TrackId"`
 
 	// Tracking set name, which can only contain 3-48 letters, digits, hyphens, and underscores.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
-	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
 	// The product to which the tracking set event belongs. The value can be a single product such as `cos`, or `*` that indicates all products.
-	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
 	// Tracking set status (0: Not enabled; 1: Enabled)
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The list of API names of tracking set events. When `ResourceType` is `*`, the value of `EventNames` must be `*`. When `ResourceType` is a specified product, the value of `EventNames` can be `*`. When `ResourceType` is `cos` or `cls`, up to 10 APIs are supported.
-	EventNames []*string `json:"EventNames,omitnil" name:"EventNames"`
+	EventNames []*string `json:"EventNames,omitnil,omitempty" name:"EventNames"`
 
 	// Storage type of shipped data. Valid values: `cos`, `cls`.
-	Storage *Storage `json:"Storage,omitnil" name:"Storage"`
+	Storage *Storage `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Whether to enable the feature of shipping organization members’ operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account)
-	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitnil" name:"TrackForAllMembers"`
+	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitnil,omitempty" name:"TrackForAllMembers"`
 }
 
 type ModifyAuditTrackRequest struct {
 	*tchttp.BaseRequest
 	
 	// Tracking set ID
-	TrackId *uint64 `json:"TrackId,omitnil" name:"TrackId"`
+	TrackId *uint64 `json:"TrackId,omitnil,omitempty" name:"TrackId"`
 
 	// Tracking set name, which can only contain 3-48 letters, digits, hyphens, and underscores.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
-	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
 	// The product to which the tracking set event belongs. The value can be a single product such as `cos`, or `*` that indicates all products.
-	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
 	// Tracking set status (0: Not enabled; 1: Enabled)
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The list of API names of tracking set events. When `ResourceType` is `*`, the value of `EventNames` must be `*`. When `ResourceType` is a specified product, the value of `EventNames` can be `*`. When `ResourceType` is `cos` or `cls`, up to 10 APIs are supported.
-	EventNames []*string `json:"EventNames,omitnil" name:"EventNames"`
+	EventNames []*string `json:"EventNames,omitnil,omitempty" name:"EventNames"`
 
 	// Storage type of shipped data. Valid values: `cos`, `cls`.
-	Storage *Storage `json:"Storage,omitnil" name:"Storage"`
+	Storage *Storage `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Whether to enable the feature of shipping organization members’ operation logs to the organization admin account or the trusted service admin account (0: Not enabled; 1: Enabled. This feature can only be enabled by the organization admin account or the trusted service admin account)
-	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitnil" name:"TrackForAllMembers"`
+	TrackForAllMembers *uint64 `json:"TrackForAllMembers,omitnil,omitempty" name:"TrackForAllMembers"`
 }
 
 func (r *ModifyAuditTrackRequest) ToJsonString() string {
@@ -1290,7 +1290,7 @@ func (r *ModifyAuditTrackRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyAuditTrackResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyAuditTrackResponse struct {
@@ -1311,24 +1311,24 @@ func (r *ModifyAuditTrackResponse) FromJsonString(s string) error {
 
 type Resource struct {
 	// Resource type
-	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
 	// Resource name
 	// Note: `null` may be returned for this field, indicating that no valid values can be obtained.
-	ResourceName *string `json:"ResourceName,omitnil" name:"ResourceName"`
+	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
 }
 
 // Predefined struct for user
 type StartLoggingRequestParams struct {
 	// Tracking set name
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 }
 
 type StartLoggingRequest struct {
 	*tchttp.BaseRequest
 	
 	// Tracking set name
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 }
 
 func (r *StartLoggingRequest) ToJsonString() string {
@@ -1353,10 +1353,10 @@ func (r *StartLoggingRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StartLoggingResponseParams struct {
 	// Whether enablement succeeded
-	IsSuccess *int64 `json:"IsSuccess,omitnil" name:"IsSuccess"`
+	IsSuccess *int64 `json:"IsSuccess,omitnil,omitempty" name:"IsSuccess"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StartLoggingResponse struct {
@@ -1378,14 +1378,14 @@ func (r *StartLoggingResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type StopLoggingRequestParams struct {
 	// Tracking set name
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 }
 
 type StopLoggingRequest struct {
 	*tchttp.BaseRequest
 	
 	// Tracking set name
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 }
 
 func (r *StopLoggingRequest) ToJsonString() string {
@@ -1410,10 +1410,10 @@ func (r *StopLoggingRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StopLoggingResponseParams struct {
 	// Whether disablement succeeded
-	IsSuccess *int64 `json:"IsSuccess,omitnil" name:"IsSuccess"`
+	IsSuccess *int64 `json:"IsSuccess,omitnil,omitempty" name:"IsSuccess"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StopLoggingResponse struct {
@@ -1434,127 +1434,127 @@ func (r *StopLoggingResponse) FromJsonString(s string) error {
 
 type Storage struct {
 	// Storage type (Valid values: cos, cls)
-	StorageType *string `json:"StorageType,omitnil" name:"StorageType"`
+	StorageType *string `json:"StorageType,omitnil,omitempty" name:"StorageType"`
 
 	// Storage region
-	StorageRegion *string `json:"StorageRegion,omitnil" name:"StorageRegion"`
+	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
 
 	// Storage name. For COS, the storage name is the custom bucket name, which can contain up to 50 lowercase letters, digits, and hyphens. It cannot contain "-APPID" and cannot start or end with a hyphen. For CLS, the storage name is the log topic ID, which can contain 1-50 characters.
-	StorageName *string `json:"StorageName,omitnil" name:"StorageName"`
+	StorageName *string `json:"StorageName,omitnil,omitempty" name:"StorageName"`
 
 	// Storage directory prefix. The COS log file prefix can only contain 3-40 letters and digits.
-	StoragePrefix *string `json:"StoragePrefix,omitnil" name:"StoragePrefix"`
+	StoragePrefix *string `json:"StoragePrefix,omitnil,omitempty" name:"StoragePrefix"`
 }
 
 type Tracks struct {
 	// Tracking set name
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Tracking set event type (`Read`: Read; `Write`: Write; `*`: All)
-	ActionType *string `json:"ActionType,omitnil" name:"ActionType"`
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
 	// The product to which the tracking set event belongs, such as `cos`, or `*` that indicates all products
-	ResourceType *string `json:"ResourceType,omitnil" name:"ResourceType"`
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
 
 	// Tracking set status (0: Not enabled; 1: Enabled)
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The list of API names of tracking set events (`*`: All)
-	EventNames []*string `json:"EventNames,omitnil" name:"EventNames"`
+	EventNames []*string `json:"EventNames,omitnil,omitempty" name:"EventNames"`
 
 	// Storage type of shipped data. Valid values: `cos`, `cls`.
-	Storage *Storage `json:"Storage,omitnil" name:"Storage"`
+	Storage *Storage `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Creation time of the tracking set
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Tracking set ID
-	TrackId *uint64 `json:"TrackId,omitnil" name:"TrackId"`
+	TrackId *uint64 `json:"TrackId,omitnil,omitempty" name:"TrackId"`
 }
 
 // Predefined struct for user
 type UpdateAuditRequestParams struct {
 	// Tracking set name
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 
 	// Whether to enable CMQ message notification. 1: Yes; 0: No. Only CMQ queue service is currently supported. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
-	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitnil" name:"IsEnableCmqNotify"`
+	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitnil,omitempty" name:"IsEnableCmqNotify"`
 
 	// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write).
-	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitnil" name:"ReadWriteAttribute"`
+	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitnil,omitempty" name:"ReadWriteAttribute"`
 
 	// Globally unique ID of the CMK. This value is required if it is not a newly created KMS element. It can be obtained through `ListKeyAliasByRegion`. CloudAudit will not verify the validity of the `KeyId`. Enter it carefully to avoid data loss.
-	KeyId *string `json:"KeyId,omitnil" name:"KeyId"`
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
 	// COS region. Supported regions can be queried through the `ListCosEnableRegion` API.
-	CosRegion *string `json:"CosRegion,omitnil" name:"CosRegion"`
+	CosRegion *string `json:"CosRegion,omitnil,omitempty" name:"CosRegion"`
 
 	// Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of `IsEnableCmqNotify` is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Enter the name with caution to avoid log delivery failure and consequent data loss.
-	CmqQueueName *string `json:"CmqQueueName,omitnil" name:"CmqQueueName"`
+	CmqQueueName *string `json:"CmqQueueName,omitnil,omitempty" name:"CmqQueueName"`
 
 	// Whether to create a COS bucket. 1: Yes; 0: No.
-	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitnil" name:"IsCreateNewBucket"`
+	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitnil,omitempty" name:"IsCreateNewBucket"`
 
 	// KMS region. Currently supported regions can be obtained through `ListKmsEnableRegion`. This must be the same as the COS region.
-	KmsRegion *string `json:"KmsRegion,omitnil" name:"KmsRegion"`
+	KmsRegion *string `json:"KmsRegion,omitnil,omitempty" name:"KmsRegion"`
 
 	// Whether to enable KMS encryption. 1: Yes, 0: No. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
-	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitnil" name:"IsEnableKmsEncry"`
+	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitnil,omitempty" name:"IsEnableKmsEncry"`
 
 	// User-defined COS bucket name, which can only contain 1–40 lowercase letters (a–z), digits (0–9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Enter the name with caution to avoid log delivery failure and consequent data loss.
-	CosBucketName *string `json:"CosBucketName,omitnil" name:"CosBucketName"`
+	CosBucketName *string `json:"CosBucketName,omitnil,omitempty" name:"CosBucketName"`
 
 	// Region where the queue is located. Supported CMQ regions can be queried through the `ListCmqEnableRegion` API. This field is required if the value of `IsEnableCmqNotify` is 1.
-	CmqRegion *string `json:"CmqRegion,omitnil" name:"CmqRegion"`
+	CmqRegion *string `json:"CmqRegion,omitnil,omitempty" name:"CmqRegion"`
 
 	// Log file prefix, which can only contain 3–40 ASCII letters (a–z; A–Z) and digits (0–9).
-	LogFilePrefix *string `json:"LogFilePrefix,omitnil" name:"LogFilePrefix"`
+	LogFilePrefix *string `json:"LogFilePrefix,omitnil,omitempty" name:"LogFilePrefix"`
 
 	// Whether to create a queue. 1: Yes; 0: No. This field is required if the value of `IsEnableCmqNotify` is 1.
-	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitnil" name:"IsCreateNewQueue"`
+	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitnil,omitempty" name:"IsCreateNewQueue"`
 }
 
 type UpdateAuditRequest struct {
 	*tchttp.BaseRequest
 	
 	// Tracking set name
-	AuditName *string `json:"AuditName,omitnil" name:"AuditName"`
+	AuditName *string `json:"AuditName,omitnil,omitempty" name:"AuditName"`
 
 	// Whether to enable CMQ message notification. 1: Yes; 0: No. Only CMQ queue service is currently supported. If CMQ message notification is enabled, CloudAudit will deliver your log contents to the designated queue in the specified region in real time.
-	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitnil" name:"IsEnableCmqNotify"`
+	IsEnableCmqNotify *int64 `json:"IsEnableCmqNotify,omitnil,omitempty" name:"IsEnableCmqNotify"`
 
 	// Manages the read/write attribute of event. Valid values: 1 (read-only), 2 (write-only), 3 (read/write).
-	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitnil" name:"ReadWriteAttribute"`
+	ReadWriteAttribute *int64 `json:"ReadWriteAttribute,omitnil,omitempty" name:"ReadWriteAttribute"`
 
 	// Globally unique ID of the CMK. This value is required if it is not a newly created KMS element. It can be obtained through `ListKeyAliasByRegion`. CloudAudit will not verify the validity of the `KeyId`. Enter it carefully to avoid data loss.
-	KeyId *string `json:"KeyId,omitnil" name:"KeyId"`
+	KeyId *string `json:"KeyId,omitnil,omitempty" name:"KeyId"`
 
 	// COS region. Supported regions can be queried through the `ListCosEnableRegion` API.
-	CosRegion *string `json:"CosRegion,omitnil" name:"CosRegion"`
+	CosRegion *string `json:"CosRegion,omitnil,omitempty" name:"CosRegion"`
 
 	// Queue name, which must begin with a letter and can contain up to 64 letters, digits, and dashes (-). This field is required if the value of `IsEnableCmqNotify` is 1. If a queue is not newly created, CloudAudit will not verify whether it actually exists. Enter the name with caution to avoid log delivery failure and consequent data loss.
-	CmqQueueName *string `json:"CmqQueueName,omitnil" name:"CmqQueueName"`
+	CmqQueueName *string `json:"CmqQueueName,omitnil,omitempty" name:"CmqQueueName"`
 
 	// Whether to create a COS bucket. 1: Yes; 0: No.
-	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitnil" name:"IsCreateNewBucket"`
+	IsCreateNewBucket *int64 `json:"IsCreateNewBucket,omitnil,omitempty" name:"IsCreateNewBucket"`
 
 	// KMS region. Currently supported regions can be obtained through `ListKmsEnableRegion`. This must be the same as the COS region.
-	KmsRegion *string `json:"KmsRegion,omitnil" name:"KmsRegion"`
+	KmsRegion *string `json:"KmsRegion,omitnil,omitempty" name:"KmsRegion"`
 
 	// Whether to enable KMS encryption. 1: Yes, 0: No. If KMS encryption is enabled, the data will be encrypted when delivered to COS.
-	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitnil" name:"IsEnableKmsEncry"`
+	IsEnableKmsEncry *int64 `json:"IsEnableKmsEncry,omitnil,omitempty" name:"IsEnableKmsEncry"`
 
 	// User-defined COS bucket name, which can only contain 1–40 lowercase letters (a–z), digits (0–9), and dashes (-) and cannot begin or end with "-". If a bucket is not newly created, CloudAudit will not verify whether it actually exists. Enter the name with caution to avoid log delivery failure and consequent data loss.
-	CosBucketName *string `json:"CosBucketName,omitnil" name:"CosBucketName"`
+	CosBucketName *string `json:"CosBucketName,omitnil,omitempty" name:"CosBucketName"`
 
 	// Region where the queue is located. Supported CMQ regions can be queried through the `ListCmqEnableRegion` API. This field is required if the value of `IsEnableCmqNotify` is 1.
-	CmqRegion *string `json:"CmqRegion,omitnil" name:"CmqRegion"`
+	CmqRegion *string `json:"CmqRegion,omitnil,omitempty" name:"CmqRegion"`
 
 	// Log file prefix, which can only contain 3–40 ASCII letters (a–z; A–Z) and digits (0–9).
-	LogFilePrefix *string `json:"LogFilePrefix,omitnil" name:"LogFilePrefix"`
+	LogFilePrefix *string `json:"LogFilePrefix,omitnil,omitempty" name:"LogFilePrefix"`
 
 	// Whether to create a queue. 1: Yes; 0: No. This field is required if the value of `IsEnableCmqNotify` is 1.
-	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitnil" name:"IsCreateNewQueue"`
+	IsCreateNewQueue *int64 `json:"IsCreateNewQueue,omitnil,omitempty" name:"IsCreateNewQueue"`
 }
 
 func (r *UpdateAuditRequest) ToJsonString() string {
@@ -1591,10 +1591,10 @@ func (r *UpdateAuditRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateAuditResponseParams struct {
 	// Whether update succeeded
-	IsSuccess *int64 `json:"IsSuccess,omitnil" name:"IsSuccess"`
+	IsSuccess *int64 `json:"IsSuccess,omitnil,omitempty" name:"IsSuccess"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type UpdateAuditResponse struct {

@@ -23,14 +23,14 @@ import (
 // Predefined struct for user
 type DeregisterMigrationTaskRequestParams struct {
 	// Task ID
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type DeregisterMigrationTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// Task ID
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 func (r *DeregisterMigrationTaskRequest) ToJsonString() string {
@@ -55,7 +55,7 @@ func (r *DeregisterMigrationTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeregisterMigrationTaskResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeregisterMigrationTaskResponse struct {
@@ -77,14 +77,14 @@ func (r *DeregisterMigrationTaskResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMigrationTaskRequestParams struct {
 	// Task ID, such as msp-jitoh33n
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type DescribeMigrationTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// Task ID, such as msp-jitoh33n
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 func (r *DescribeMigrationTaskRequest) ToJsonString() string {
@@ -109,10 +109,10 @@ func (r *DescribeMigrationTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMigrationTaskResponseParams struct {
 	// Migration details list
-	TaskStatus []*TaskStatus `json:"TaskStatus,omitnil" name:"TaskStatus"`
+	TaskStatus []*TaskStatus `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeMigrationTaskResponse struct {
@@ -133,35 +133,35 @@ func (r *DescribeMigrationTaskResponse) FromJsonString(s string) error {
 
 type DstInfo struct {
 	// Migration destination region
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 
-	Ip *string `json:"Ip,omitnil" name:"Ip"`
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
 	// Migration destination port
-	Port *string `json:"Port,omitnil" name:"Port"`
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Migration destination instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 // Predefined struct for user
 type ListMigrationProjectRequestParams struct {
 	// The initial number of records, default value: 0
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// The number of records returned, default value: 500
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type ListMigrationProjectRequest struct {
 	*tchttp.BaseRequest
 	
 	// The initial number of records, default value: 0
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// The number of records returned, default value: 500
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *ListMigrationProjectRequest) ToJsonString() string {
@@ -187,13 +187,13 @@ func (r *ListMigrationProjectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ListMigrationProjectResponseParams struct {
 	// Project list
-	Projects []*Project `json:"Projects,omitnil" name:"Projects"`
+	Projects []*Project `json:"Projects,omitnil,omitempty" name:"Projects"`
 
 	// Total number of projects
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ListMigrationProjectResponse struct {
@@ -215,26 +215,26 @@ func (r *ListMigrationProjectResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ListMigrationTaskRequestParams struct {
 	// The initial number of records, default value: 0
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of records, default value: 10
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Project ID, the default value is empty.
-	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 type ListMigrationTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// The initial number of records, default value: 0
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of records, default value: 10
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Project ID, the default value is empty.
-	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 func (r *ListMigrationTaskRequest) ToJsonString() string {
@@ -261,13 +261,13 @@ func (r *ListMigrationTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ListMigrationTaskResponseParams struct {
 	// Total number of records
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Migration task list
-	Tasks []*Task `json:"Tasks,omitnil" name:"Tasks"`
+	Tasks []*Task `json:"Tasks,omitnil,omitempty" name:"Tasks"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ListMigrationTaskResponse struct {
@@ -289,20 +289,20 @@ func (r *ListMigrationTaskResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyMigrationTaskBelongToProjectRequestParams struct {
 	// Task ID, such as msp-jitoh33n
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// Project ID, such as 10005
-	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 type ModifyMigrationTaskBelongToProjectRequest struct {
 	*tchttp.BaseRequest
 	
 	// Task ID, such as msp-jitoh33n
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// Project ID, such as 10005
-	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 }
 
 func (r *ModifyMigrationTaskBelongToProjectRequest) ToJsonString() string {
@@ -328,7 +328,7 @@ func (r *ModifyMigrationTaskBelongToProjectRequest) FromJsonString(s string) err
 // Predefined struct for user
 type ModifyMigrationTaskBelongToProjectResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyMigrationTaskBelongToProjectResponse struct {
@@ -350,20 +350,20 @@ func (r *ModifyMigrationTaskBelongToProjectResponse) FromJsonString(s string) er
 // Predefined struct for user
 type ModifyMigrationTaskStatusRequestParams struct {
 	// Task status, valid values include `unstart` (migration has not started), `migrating` (migration in progress), `finish` (migration completed) or `fail` (migration failed).
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Task ID, such as msp-jitoh33n
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type ModifyMigrationTaskStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// Task status, valid values include `unstart` (migration has not started), `migrating` (migration in progress), `finish` (migration completed) or `fail` (migration failed).
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Task ID, such as msp-jitoh33n
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 func (r *ModifyMigrationTaskStatusRequest) ToJsonString() string {
@@ -389,7 +389,7 @@ func (r *ModifyMigrationTaskStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyMigrationTaskStatusResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyMigrationTaskStatusResponse struct {
@@ -410,89 +410,89 @@ func (r *ModifyMigrationTaskStatusResponse) FromJsonString(s string) error {
 
 type Project struct {
 	// Project ID
-	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Project name
-	ProjectName *string `json:"ProjectName,omitnil" name:"ProjectName"`
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
 }
 
 // Predefined struct for user
 type RegisterMigrationTaskRequestParams struct {
 	// Task type, valid values include `database` (database migration), `file` (file migration) or `host` (host migration).
-	TaskType *string `json:"TaskType,omitnil" name:"TaskType"`
+	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
 	// Task name
-	TaskName *string `json:"TaskName,omitnil" name:"TaskName"`
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 
 	// Service supplier name
-	ServiceSupplier *string `json:"ServiceSupplier,omitnil" name:"ServiceSupplier"`
+	ServiceSupplier *string `json:"ServiceSupplier,omitnil,omitempty" name:"ServiceSupplier"`
 
 	// Migration task creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Migration task update time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Migration type, for example `mysql:mysql` in database migration means migration from mysql to mysql and `oss:cos` in file migration means migration from Alibaba Cloud OSS to Tencent COS.
-	MigrateClass *string `json:"MigrateClass,omitnil" name:"MigrateClass"`
+	MigrateClass *string `json:"MigrateClass,omitnil,omitempty" name:"MigrateClass"`
 
 	// Migration task source information
-	SrcInfo *SrcInfo `json:"SrcInfo,omitnil" name:"SrcInfo"`
+	SrcInfo *SrcInfo `json:"SrcInfo,omitnil,omitempty" name:"SrcInfo"`
 
 	// Migration task destination information
-	DstInfo *DstInfo `json:"DstInfo,omitnil" name:"DstInfo"`
+	DstInfo *DstInfo `json:"DstInfo,omitnil,omitempty" name:"DstInfo"`
 
 	// Source instance access type. Valid values for database migration include `extranet` (public network), `cvm` (CVM-created instance), `dcg` (Direct Connect-enabled instance), `vpncloud` (Tencent Cloud VPN-enabled instance), `vpnselfbuild` (self-built VPN-enabled instance), `cdb` (TencentDB instance)
-	SrcAccessType *string `json:"SrcAccessType,omitnil" name:"SrcAccessType"`
+	SrcAccessType *string `json:"SrcAccessType,omitnil,omitempty" name:"SrcAccessType"`
 
 	// Database type of the source instance. Valid values for database migration: `mysql`, `redis`, `percona`, `mongodb`, `postgresql`, `sqlserver`, `mariadb`
-	SrcDatabaseType *string `json:"SrcDatabaseType,omitnil" name:"SrcDatabaseType"`
+	SrcDatabaseType *string `json:"SrcDatabaseType,omitnil,omitempty" name:"SrcDatabaseType"`
 
 	// Target instance access type. Valid values for database migration include `extranet` (public network), `cvm` (CVM-created instance), `dcg` (Direct Connect-enabled instance), `vpncloud` (Tencent Cloud VPN-enabled instance), `vpnselfbuild` (self-built VPN-enabled instance), `cdb` (TencentDB instance)
-	DstAccessType *string `json:"DstAccessType,omitnil" name:"DstAccessType"`
+	DstAccessType *string `json:"DstAccessType,omitnil,omitempty" name:"DstAccessType"`
 
 	// Database type of the target instance. Valid values for database migration: `mysql`, `redis`, `percona`, `mongodb`, `postgresql`, `sqlserver`, `mariadb`
-	DstDatabaseType *string `json:"DstDatabaseType,omitnil" name:"DstDatabaseType"`
+	DstDatabaseType *string `json:"DstDatabaseType,omitnil,omitempty" name:"DstDatabaseType"`
 }
 
 type RegisterMigrationTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// Task type, valid values include `database` (database migration), `file` (file migration) or `host` (host migration).
-	TaskType *string `json:"TaskType,omitnil" name:"TaskType"`
+	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
 	// Task name
-	TaskName *string `json:"TaskName,omitnil" name:"TaskName"`
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 
 	// Service supplier name
-	ServiceSupplier *string `json:"ServiceSupplier,omitnil" name:"ServiceSupplier"`
+	ServiceSupplier *string `json:"ServiceSupplier,omitnil,omitempty" name:"ServiceSupplier"`
 
 	// Migration task creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Migration task update time
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Migration type, for example `mysql:mysql` in database migration means migration from mysql to mysql and `oss:cos` in file migration means migration from Alibaba Cloud OSS to Tencent COS.
-	MigrateClass *string `json:"MigrateClass,omitnil" name:"MigrateClass"`
+	MigrateClass *string `json:"MigrateClass,omitnil,omitempty" name:"MigrateClass"`
 
 	// Migration task source information
-	SrcInfo *SrcInfo `json:"SrcInfo,omitnil" name:"SrcInfo"`
+	SrcInfo *SrcInfo `json:"SrcInfo,omitnil,omitempty" name:"SrcInfo"`
 
 	// Migration task destination information
-	DstInfo *DstInfo `json:"DstInfo,omitnil" name:"DstInfo"`
+	DstInfo *DstInfo `json:"DstInfo,omitnil,omitempty" name:"DstInfo"`
 
 	// Source instance access type. Valid values for database migration include `extranet` (public network), `cvm` (CVM-created instance), `dcg` (Direct Connect-enabled instance), `vpncloud` (Tencent Cloud VPN-enabled instance), `vpnselfbuild` (self-built VPN-enabled instance), `cdb` (TencentDB instance)
-	SrcAccessType *string `json:"SrcAccessType,omitnil" name:"SrcAccessType"`
+	SrcAccessType *string `json:"SrcAccessType,omitnil,omitempty" name:"SrcAccessType"`
 
 	// Database type of the source instance. Valid values for database migration: `mysql`, `redis`, `percona`, `mongodb`, `postgresql`, `sqlserver`, `mariadb`
-	SrcDatabaseType *string `json:"SrcDatabaseType,omitnil" name:"SrcDatabaseType"`
+	SrcDatabaseType *string `json:"SrcDatabaseType,omitnil,omitempty" name:"SrcDatabaseType"`
 
 	// Target instance access type. Valid values for database migration include `extranet` (public network), `cvm` (CVM-created instance), `dcg` (Direct Connect-enabled instance), `vpncloud` (Tencent Cloud VPN-enabled instance), `vpnselfbuild` (self-built VPN-enabled instance), `cdb` (TencentDB instance)
-	DstAccessType *string `json:"DstAccessType,omitnil" name:"DstAccessType"`
+	DstAccessType *string `json:"DstAccessType,omitnil,omitempty" name:"DstAccessType"`
 
 	// Database type of the target instance. Valid values for database migration: `mysql`, `redis`, `percona`, `mongodb`, `postgresql`, `sqlserver`, `mariadb`
-	DstDatabaseType *string `json:"DstDatabaseType,omitnil" name:"DstDatabaseType"`
+	DstDatabaseType *string `json:"DstDatabaseType,omitnil,omitempty" name:"DstDatabaseType"`
 }
 
 func (r *RegisterMigrationTaskRequest) ToJsonString() string {
@@ -528,10 +528,10 @@ func (r *RegisterMigrationTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RegisterMigrationTaskResponseParams struct {
 	// Task ID
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RegisterMigrationTaskResponse struct {
@@ -552,65 +552,65 @@ func (r *RegisterMigrationTaskResponse) FromJsonString(s string) error {
 
 type SrcInfo struct {
 	// Migration source region
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 
-	Ip *string `json:"Ip,omitnil" name:"Ip"`
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
 
 	// Migration source port
-	Port *string `json:"Port,omitnil" name:"Port"`
+	Port *string `json:"Port,omitnil,omitempty" name:"Port"`
 
 	// Migration source instance ID
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type Task struct {
 	// Task ID
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// Task name
-	TaskName *string `json:"TaskName,omitnil" name:"TaskName"`
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 
 	// Migration type
-	MigrationType *string `json:"MigrationType,omitnil" name:"MigrationType"`
+	MigrationType *string `json:"MigrationType,omitnil,omitempty" name:"MigrationType"`
 
 	// Migration status
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Project ID
-	ProjectId *uint64 `json:"ProjectId,omitnil" name:"ProjectId"`
+	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
 	// Project name
-	ProjectName *string `json:"ProjectName,omitnil" name:"ProjectName"`
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
 
 	// Migration source information
-	SrcInfo *SrcInfo `json:"SrcInfo,omitnil" name:"SrcInfo"`
+	SrcInfo *SrcInfo `json:"SrcInfo,omitnil,omitempty" name:"SrcInfo"`
 
 	// Migration time information
-	MigrationTimeLine *TimeObj `json:"MigrationTimeLine,omitnil" name:"MigrationTimeLine"`
+	MigrationTimeLine *TimeObj `json:"MigrationTimeLine,omitnil,omitempty" name:"MigrationTimeLine"`
 
 	// Status update time
-	Updated *string `json:"Updated,omitnil" name:"Updated"`
+	Updated *string `json:"Updated,omitnil,omitempty" name:"Updated"`
 
 	// Migration destination information
-	DstInfo *DstInfo `json:"DstInfo,omitnil" name:"DstInfo"`
+	DstInfo *DstInfo `json:"DstInfo,omitnil,omitempty" name:"DstInfo"`
 }
 
 type TaskStatus struct {
 	// Migration status
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Migration progress
-	Progress *string `json:"Progress,omitnil" name:"Progress"`
+	Progress *string `json:"Progress,omitnil,omitempty" name:"Progress"`
 
 	// Migration date
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type TimeObj struct {
 	// The creation time
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// End time
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }

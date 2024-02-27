@@ -23,50 +23,50 @@ import (
 // Predefined struct for user
 type SendEmailRequestParams struct {
 	// Sender
-	FromAddress *string `json:"FromAddress,omitnil" name:"FromAddress"`
+	FromAddress *string `json:"FromAddress,omitnil,omitempty" name:"FromAddress"`
 
 	// Recipient
-	ToAddress *string `json:"ToAddress,omitnil" name:"ToAddress"`
+	ToAddress *string `json:"ToAddress,omitnil,omitempty" name:"ToAddress"`
 
 	// Email summary
-	Subject *string `json:"Subject,omitnil" name:"Subject"`
+	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
 	// Sender name
-	FromName *string `json:"FromName,omitnil" name:"FromName"`
+	FromName *string `json:"FromName,omitnil,omitempty" name:"FromName"`
 
 	// Reply-to address
-	ReplyAddress *string `json:"ReplyAddress,omitnil" name:"ReplyAddress"`
+	ReplyAddress *string `json:"ReplyAddress,omitnil,omitempty" name:"ReplyAddress"`
 
 	// The body of an HTML email
-	HtmlContent *string `json:"HtmlContent,omitnil" name:"HtmlContent"`
+	HtmlContent *string `json:"HtmlContent,omitnil,omitempty" name:"HtmlContent"`
 
 	// The body of a plain-text email
-	TextContent *string `json:"TextContent,omitnil" name:"TextContent"`
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
 }
 
 type SendEmailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Sender
-	FromAddress *string `json:"FromAddress,omitnil" name:"FromAddress"`
+	FromAddress *string `json:"FromAddress,omitnil,omitempty" name:"FromAddress"`
 
 	// Recipient
-	ToAddress *string `json:"ToAddress,omitnil" name:"ToAddress"`
+	ToAddress *string `json:"ToAddress,omitnil,omitempty" name:"ToAddress"`
 
 	// Email summary
-	Subject *string `json:"Subject,omitnil" name:"Subject"`
+	Subject *string `json:"Subject,omitnil,omitempty" name:"Subject"`
 
 	// Sender name
-	FromName *string `json:"FromName,omitnil" name:"FromName"`
+	FromName *string `json:"FromName,omitnil,omitempty" name:"FromName"`
 
 	// Reply-to address
-	ReplyAddress *string `json:"ReplyAddress,omitnil" name:"ReplyAddress"`
+	ReplyAddress *string `json:"ReplyAddress,omitnil,omitempty" name:"ReplyAddress"`
 
 	// The body of an HTML email
-	HtmlContent *string `json:"HtmlContent,omitnil" name:"HtmlContent"`
+	HtmlContent *string `json:"HtmlContent,omitnil,omitempty" name:"HtmlContent"`
 
 	// The body of a plain-text email
-	TextContent *string `json:"TextContent,omitnil" name:"TextContent"`
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
 }
 
 func (r *SendEmailRequest) ToJsonString() string {
@@ -97,10 +97,10 @@ func (r *SendEmailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SendEmailResponseParams struct {
 	// The result of creating an email task
-	Result *bool `json:"Result,omitnil" name:"Result"`
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type SendEmailResponse struct {
@@ -122,44 +122,44 @@ func (r *SendEmailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type SendTemplatedEmailRequestParams struct {
 	// Sender address.
-	FromAddress *string `json:"FromAddress,omitnil" name:"FromAddress"`
+	FromAddress *string `json:"FromAddress,omitnil,omitempty" name:"FromAddress"`
 
 	// Recipient address. Up to 100 recipient addresses are supported. Multiple addresses should be separated by semicolons (;).
-	ToAddress *string `json:"ToAddress,omitnil" name:"ToAddress"`
+	ToAddress *string `json:"ToAddress,omitnil,omitempty" name:"ToAddress"`
 
 	// The name of the template created in advance.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Template variable value, which is a JSON string.
-	TemplateValue *string `json:"TemplateValue,omitnil" name:"TemplateValue"`
+	TemplateValue *string `json:"TemplateValue,omitnil,omitempty" name:"TemplateValue"`
 
 	// Sender name.
-	FromName *string `json:"FromName,omitnil" name:"FromName"`
+	FromName *string `json:"FromName,omitnil,omitempty" name:"FromName"`
 
 	// Reply-to address.
-	ReplyAddress *string `json:"ReplyAddress,omitnil" name:"ReplyAddress"`
+	ReplyAddress *string `json:"ReplyAddress,omitnil,omitempty" name:"ReplyAddress"`
 }
 
 type SendTemplatedEmailRequest struct {
 	*tchttp.BaseRequest
 	
 	// Sender address.
-	FromAddress *string `json:"FromAddress,omitnil" name:"FromAddress"`
+	FromAddress *string `json:"FromAddress,omitnil,omitempty" name:"FromAddress"`
 
 	// Recipient address. Up to 100 recipient addresses are supported. Multiple addresses should be separated by semicolons (;).
-	ToAddress *string `json:"ToAddress,omitnil" name:"ToAddress"`
+	ToAddress *string `json:"ToAddress,omitnil,omitempty" name:"ToAddress"`
 
 	// The name of the template created in advance.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Template variable value, which is a JSON string.
-	TemplateValue *string `json:"TemplateValue,omitnil" name:"TemplateValue"`
+	TemplateValue *string `json:"TemplateValue,omitnil,omitempty" name:"TemplateValue"`
 
 	// Sender name.
-	FromName *string `json:"FromName,omitnil" name:"FromName"`
+	FromName *string `json:"FromName,omitnil,omitempty" name:"FromName"`
 
 	// Reply-to address.
-	ReplyAddress *string `json:"ReplyAddress,omitnil" name:"ReplyAddress"`
+	ReplyAddress *string `json:"ReplyAddress,omitnil,omitempty" name:"ReplyAddress"`
 }
 
 func (r *SendTemplatedEmailRequest) ToJsonString() string {
@@ -189,10 +189,10 @@ func (r *SendTemplatedEmailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SendTemplatedEmailResponseParams struct {
 	// The result of creating a template email task
-	Result *bool `json:"Result,omitnil" name:"Result"`
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type SendTemplatedEmailResponse struct {

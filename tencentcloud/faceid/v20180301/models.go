@@ -22,34 +22,34 @@ import (
 
 type Address struct {
 	// Nationality.
-	Country *string `json:"Country,omitnil" name:"Country"`
+	Country *string `json:"Country,omitnil,omitempty" name:"Country"`
 
 	// Post code.
-	PostalCode *string `json:"PostalCode,omitnil" name:"PostalCode"`
+	PostalCode *string `json:"PostalCode,omitnil,omitempty" name:"PostalCode"`
 
 	// Subregion.
-	Subdivision *string `json:"Subdivision,omitnil" name:"Subdivision"`
+	Subdivision *string `json:"Subdivision,omitnil,omitempty" name:"Subdivision"`
 
 	// City.
-	City *string `json:"City,omitnil" name:"City"`
+	City *string `json:"City,omitnil,omitempty" name:"City"`
 
 	// Complete address.
-	FormattedAddress *string `json:"FormattedAddress,omitnil" name:"FormattedAddress"`
+	FormattedAddress *string `json:"FormattedAddress,omitnil,omitempty" name:"FormattedAddress"`
 
 	// The first line of address.
-	LineOne *string `json:"LineOne,omitnil" name:"LineOne"`
+	LineOne *string `json:"LineOne,omitnil,omitempty" name:"LineOne"`
 
 	// The second line of address.
-	LineTwo *string `json:"LineTwo,omitnil" name:"LineTwo"`
+	LineTwo *string `json:"LineTwo,omitnil,omitempty" name:"LineTwo"`
 
 	// The third line of address.
-	LineThree *string `json:"LineThree,omitnil" name:"LineThree"`
+	LineThree *string `json:"LineThree,omitnil,omitempty" name:"LineThree"`
 
 	// The fourth line of address.
-	LineFour *string `json:"LineFour,omitnil" name:"LineFour"`
+	LineFour *string `json:"LineFour,omitnil,omitempty" name:"LineFour"`
 
 	// The fifth line of address.
-	LineFive *string `json:"LineFive,omitnil" name:"LineFive"`
+	LineFive *string `json:"LineFive,omitnil,omitempty" name:"LineFive"`
 }
 
 // Predefined struct for user
@@ -62,27 +62,27 @@ type ApplyCardVerificationRequestParams struct {
 	// SGP: Singapore
 	// JPN: Japan
 	// AUTO: Automatic Identification
-	Nationality *string `json:"Nationality,omitnil" name:"Nationality"`
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
 	// Please select the type of ID document. The supported options are:
 	// ID_CARD
 	// PASSPORT
 	// DRIVING_LICENSE
 	// AUTO
-	CardType *string `json:"CardType,omitnil" name:"CardType"`
+	CardType *string `json:"CardType,omitnil,omitempty" name:"CardType"`
 
 	// Base64 value for the front of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. 
 	// The image download takes no more than 3 seconds. Supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64 Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
-	ImageBase64Front *string `json:"ImageBase64Front,omitnil" name:"ImageBase64Front"`
+	ImageBase64Front *string `json:"ImageBase64Front,omitnil,omitempty" name:"ImageBase64Front"`
 
 	// Base64 value of the reverse side of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
-	ImageBase64Back *string `json:"ImageBase64Back,omitnil" name:"ImageBase64Back"`
+	ImageBase64Back *string `json:"ImageBase64Back,omitnil,omitempty" name:"ImageBase64Back"`
 
 	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
-	ImageUrlFront *string `json:"ImageUrlFront,omitnil" name:"ImageUrlFront"`
+	ImageUrlFront *string `json:"ImageUrlFront,omitnil,omitempty" name:"ImageUrlFront"`
 
 	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
-	ImageUrlBack *string `json:"ImageUrlBack,omitnil" name:"ImageUrlBack"`
+	ImageUrlBack *string `json:"ImageUrlBack,omitnil,omitempty" name:"ImageUrlBack"`
 }
 
 type ApplyCardVerificationRequest struct {
@@ -96,27 +96,27 @@ type ApplyCardVerificationRequest struct {
 	// SGP: Singapore
 	// JPN: Japan
 	// AUTO: Automatic Identification
-	Nationality *string `json:"Nationality,omitnil" name:"Nationality"`
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
 	// Please select the type of ID document. The supported options are:
 	// ID_CARD
 	// PASSPORT
 	// DRIVING_LICENSE
 	// AUTO
-	CardType *string `json:"CardType,omitnil" name:"CardType"`
+	CardType *string `json:"CardType,omitnil,omitempty" name:"CardType"`
 
 	// Base64 value for the front of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. 
 	// The image download takes no more than 3 seconds. Supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64 Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
-	ImageBase64Front *string `json:"ImageBase64Front,omitnil" name:"ImageBase64Front"`
+	ImageBase64Front *string `json:"ImageBase64Front,omitnil,omitempty" name:"ImageBase64Front"`
 
 	// Base64 value of the reverse side of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
-	ImageBase64Back *string `json:"ImageBase64Back,omitnil" name:"ImageBase64Back"`
+	ImageBase64Back *string `json:"ImageBase64Back,omitnil,omitempty" name:"ImageBase64Back"`
 
 	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
-	ImageUrlFront *string `json:"ImageUrlFront,omitnil" name:"ImageUrlFront"`
+	ImageUrlFront *string `json:"ImageUrlFront,omitnil,omitempty" name:"ImageUrlFront"`
 
 	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
-	ImageUrlBack *string `json:"ImageUrlBack,omitnil" name:"ImageUrlBack"`
+	ImageUrlBack *string `json:"ImageUrlBack,omitnil,omitempty" name:"ImageUrlBack"`
 }
 
 func (r *ApplyCardVerificationRequest) ToJsonString() string {
@@ -146,16 +146,16 @@ func (r *ApplyCardVerificationRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplyCardVerificationResponseParams struct {
 	// The token used to identify an verification process. It can be used to get the verification result after the process is completed.
-	CardVerificationToken *string `json:"CardVerificationToken,omitnil" name:"CardVerificationToken"`
+	CardVerificationToken *string `json:"CardVerificationToken,omitnil,omitempty" name:"CardVerificationToken"`
 
 	// The maximum number of polls for calling the pull result interface polling.
-	AsyncCardVerificationMaxPollingTimes *uint64 `json:"AsyncCardVerificationMaxPollingTimes,omitnil" name:"AsyncCardVerificationMaxPollingTimes"`
+	AsyncCardVerificationMaxPollingTimes *uint64 `json:"AsyncCardVerificationMaxPollingTimes,omitnil,omitempty" name:"AsyncCardVerificationMaxPollingTimes"`
 
 	// The interval for polling when calling the pull result interface (in seconds).
-	AsyncCardVerificationPollingWaitTime *uint64 `json:"AsyncCardVerificationPollingWaitTime,omitnil" name:"AsyncCardVerificationPollingWaitTime"`
+	AsyncCardVerificationPollingWaitTime *uint64 `json:"AsyncCardVerificationPollingWaitTime,omitnil,omitempty" name:"AsyncCardVerificationPollingWaitTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ApplyCardVerificationResponse struct {
@@ -182,7 +182,7 @@ type ApplyLivenessTokenRequestParams struct {
 	// 2 - blinking
 	// 3 - light
 	// 4 - blinking + light (default)
-	SecureLevel *string `json:"SecureLevel,omitnil" name:"SecureLevel"`
+	SecureLevel *string `json:"SecureLevel,omitnil,omitempty" name:"SecureLevel"`
 }
 
 type ApplyLivenessTokenRequest struct {
@@ -194,7 +194,7 @@ type ApplyLivenessTokenRequest struct {
 	// 2 - blinking
 	// 3 - light
 	// 4 - blinking + light (default)
-	SecureLevel *string `json:"SecureLevel,omitnil" name:"SecureLevel"`
+	SecureLevel *string `json:"SecureLevel,omitnil,omitempty" name:"SecureLevel"`
 }
 
 func (r *ApplyLivenessTokenRequest) ToJsonString() string {
@@ -219,10 +219,10 @@ func (r *ApplyLivenessTokenRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplyLivenessTokenResponseParams struct {
 	// The token used to identify an SDK-based verification process. It is valid for 10 minutes and can be used to get the verification result after the process is completed.
-	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ApplyLivenessTokenResponse struct {
@@ -244,14 +244,14 @@ func (r *ApplyLivenessTokenResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplySdkVerificationTokenRequestParams struct {
 	// Whether ID card authentication is required. If not, only document OCR will be performed. Currently, authentication is available only when the value of `IdCardType` is `HK`.
-	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitnil" name:"NeedVerifyIdCard"`
+	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitnil,omitempty" name:"NeedVerifyIdCard"`
 
 	// The verification mode. Valid values:
 	// 1: OCR + liveness detection + face comparison
 	// 2: Liveness detection + face comparison
 	// 3: Liveness detection
 	// Default value: 1
-	CheckMode *int64 `json:"CheckMode,omitnil" name:"CheckMode"`
+	CheckMode *int64 `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
 	// The security level of the verification. Valid values:
 	// 1: Video-based liveness detection
@@ -259,7 +259,7 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// 3: Reflection-based liveness detection
 	// 4: Motion- and reflection-based liveness detection
 	// Default value: 4
-	SecurityLevel *int64 `json:"SecurityLevel,omitnil" name:"SecurityLevel"`
+	SecurityLevel *int64 `json:"SecurityLevel,omitnil,omitempty" name:"SecurityLevel"`
 
 	// The identity document type. Valid values: 
 	// 1. `HK` (default): Identity card of Hong Kong (China)
@@ -271,34 +271,34 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// 7. `PhilippinesSSSID`: Philippine SSS ID card
 	// 8. `PhilippinesUMID`: Philippine UMID card
 	// 9. `MLIDPassport`: Passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions
-	IdCardType *string `json:"IdCardType,omitnil" name:"IdCardType"`
+	IdCardType *string `json:"IdCardType,omitnil,omitempty" name:"IdCardType"`
 
 	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
-	CompareImage *string `json:"CompareImage,omitnil" name:"CompareImage"`
+	CompareImage *string `json:"CompareImage,omitnil,omitempty" name:"CompareImage"`
 
 	// Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed). (Currently, this parameter is not applied.)
-	DisableChangeOcrResult *bool `json:"DisableChangeOcrResult,omitnil" name:"DisableChangeOcrResult"`
+	DisableChangeOcrResult *bool `json:"DisableChangeOcrResult,omitnil,omitempty" name:"DisableChangeOcrResult"`
 
 	// Whether to disable the OCR warnings. Default value: `false` (not disable), where OCR warnings are enabled and the OCR result will not be returned if there is a warning.
 	// This feature applies only to Hong Kong (China) identity cards, Malaysian identity cards, and passports.
-	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil" name:"DisableCheckOcrWarnings"`
+	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil,omitempty" name:"DisableCheckOcrWarnings"`
 
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
-	Extra *string `json:"Extra,omitnil" name:"Extra"`
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 }
 
 type ApplySdkVerificationTokenRequest struct {
 	*tchttp.BaseRequest
 	
 	// Whether ID card authentication is required. If not, only document OCR will be performed. Currently, authentication is available only when the value of `IdCardType` is `HK`.
-	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitnil" name:"NeedVerifyIdCard"`
+	NeedVerifyIdCard *bool `json:"NeedVerifyIdCard,omitnil,omitempty" name:"NeedVerifyIdCard"`
 
 	// The verification mode. Valid values:
 	// 1: OCR + liveness detection + face comparison
 	// 2: Liveness detection + face comparison
 	// 3: Liveness detection
 	// Default value: 1
-	CheckMode *int64 `json:"CheckMode,omitnil" name:"CheckMode"`
+	CheckMode *int64 `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
 	// The security level of the verification. Valid values:
 	// 1: Video-based liveness detection
@@ -306,7 +306,7 @@ type ApplySdkVerificationTokenRequest struct {
 	// 3: Reflection-based liveness detection
 	// 4: Motion- and reflection-based liveness detection
 	// Default value: 4
-	SecurityLevel *int64 `json:"SecurityLevel,omitnil" name:"SecurityLevel"`
+	SecurityLevel *int64 `json:"SecurityLevel,omitnil,omitempty" name:"SecurityLevel"`
 
 	// The identity document type. Valid values: 
 	// 1. `HK` (default): Identity card of Hong Kong (China)
@@ -318,20 +318,20 @@ type ApplySdkVerificationTokenRequest struct {
 	// 7. `PhilippinesSSSID`: Philippine SSS ID card
 	// 8. `PhilippinesUMID`: Philippine UMID card
 	// 9. `MLIDPassport`: Passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions
-	IdCardType *string `json:"IdCardType,omitnil" name:"IdCardType"`
+	IdCardType *string `json:"IdCardType,omitnil,omitempty" name:"IdCardType"`
 
 	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
-	CompareImage *string `json:"CompareImage,omitnil" name:"CompareImage"`
+	CompareImage *string `json:"CompareImage,omitnil,omitempty" name:"CompareImage"`
 
 	// Whether to forbid the modification of the OCR result by users. Default value: `false` (modification allowed). (Currently, this parameter is not applied.)
-	DisableChangeOcrResult *bool `json:"DisableChangeOcrResult,omitnil" name:"DisableChangeOcrResult"`
+	DisableChangeOcrResult *bool `json:"DisableChangeOcrResult,omitnil,omitempty" name:"DisableChangeOcrResult"`
 
 	// Whether to disable the OCR warnings. Default value: `false` (not disable), where OCR warnings are enabled and the OCR result will not be returned if there is a warning.
 	// This feature applies only to Hong Kong (China) identity cards, Malaysian identity cards, and passports.
-	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil" name:"DisableCheckOcrWarnings"`
+	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil,omitempty" name:"DisableCheckOcrWarnings"`
 
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
-	Extra *string `json:"Extra,omitnil" name:"Extra"`
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 }
 
 func (r *ApplySdkVerificationTokenRequest) ToJsonString() string {
@@ -363,10 +363,10 @@ func (r *ApplySdkVerificationTokenRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplySdkVerificationTokenResponseParams struct {
 	// The token used to identify an SDK-based verification process. It is valid for 7,200s and can be used to get the verification result after the process is completed.
-	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ApplySdkVerificationTokenResponse struct {
@@ -390,18 +390,18 @@ type ApplyWebVerificationBizTokenIntlRequestParams struct {
 	// The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. 
 	// After the verification process is completed, the BizToken of this process will be spliced to the callback URL in the format of https://www.tencentcloud.com/products/faceid?token={BizToken} before redirect.
 	// Example: https://www.tencentcloud.com/products/faceid.
-	RedirectURL *string `json:"RedirectURL,omitnil" name:"RedirectURL"`
+	RedirectURL *string `json:"RedirectURL,omitnil,omitempty" name:"RedirectURL"`
 
 	// The Base64-encoded string (max 8 MB in size) of the photo to be compared.The Data URI scheme header needs to be removed from the encoded string
 	// Example: xhBQAAACBjSFJNAAB6****AAAASUVORK5CYII=
-	CompareImageBase64 *string `json:"CompareImageBase64,omitnil" name:"CompareImageBase64"`
+	CompareImageBase64 *string `json:"CompareImageBase64,omitnil,omitempty" name:"CompareImageBase64"`
 
 	// The passthrough parameter of the business, max 1,000 characters, which will be returned in GetWebVerificationResultIntl.
-	Extra *string `json:"Extra,omitnil" name:"Extra"`
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
 	// The parameter control the page configuration.
 	// Example: {"AutoSkip": true,"CheckMode": 1,"IdCardType": "HKIDCard"}
-	Config *WebVerificationConfigIntl `json:"Config,omitnil" name:"Config"`
+	Config *WebVerificationConfigIntl `json:"Config,omitnil,omitempty" name:"Config"`
 }
 
 type ApplyWebVerificationBizTokenIntlRequest struct {
@@ -410,18 +410,18 @@ type ApplyWebVerificationBizTokenIntlRequest struct {
 	// The web callback URL to redirect to after the verification is completed, including the protocol, hostname, and path. 
 	// After the verification process is completed, the BizToken of this process will be spliced to the callback URL in the format of https://www.tencentcloud.com/products/faceid?token={BizToken} before redirect.
 	// Example: https://www.tencentcloud.com/products/faceid.
-	RedirectURL *string `json:"RedirectURL,omitnil" name:"RedirectURL"`
+	RedirectURL *string `json:"RedirectURL,omitnil,omitempty" name:"RedirectURL"`
 
 	// The Base64-encoded string (max 8 MB in size) of the photo to be compared.The Data URI scheme header needs to be removed from the encoded string
 	// Example: xhBQAAACBjSFJNAAB6****AAAASUVORK5CYII=
-	CompareImageBase64 *string `json:"CompareImageBase64,omitnil" name:"CompareImageBase64"`
+	CompareImageBase64 *string `json:"CompareImageBase64,omitnil,omitempty" name:"CompareImageBase64"`
 
 	// The passthrough parameter of the business, max 1,000 characters, which will be returned in GetWebVerificationResultIntl.
-	Extra *string `json:"Extra,omitnil" name:"Extra"`
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
 	// The parameter control the page configuration.
 	// Example: {"AutoSkip": true,"CheckMode": 1,"IdCardType": "HKIDCard"}
-	Config *WebVerificationConfigIntl `json:"Config,omitnil" name:"Config"`
+	Config *WebVerificationConfigIntl `json:"Config,omitnil,omitempty" name:"Config"`
 }
 
 func (r *ApplyWebVerificationBizTokenIntlRequest) ToJsonString() string {
@@ -452,18 +452,18 @@ type ApplyWebVerificationBizTokenIntlResponseParams struct {
 	// Example: https://intl.faceid.qq.com/reflect/?token=81EEF678-28EE-4759-A82E-6CBBBE6BC442
 	//
 	// Deprecated: VerificationUrl is deprecated.
-	VerificationUrl *string `json:"VerificationUrl,omitnil" name:"VerificationUrl"`
+	VerificationUrl *string `json:"VerificationUrl,omitnil,omitempty" name:"VerificationUrl"`
 
 	// The token for the web-based verification, which is generated using the ApplyWebVerificationBizTokenIntl API.
 	// Example: 81EEF678-28EE-4759-A82E-6CBBBE6BC442
-	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
+	BizToken *string `json:"BizToken,omitnil,omitempty" name:"BizToken"`
 
 	// The verification URL to be opened with a browser to start the verification process.
 	// Example: https://intl.faceid.qq.com/reflect/?token=81EEF678-28EE-4759-A82E-6CBBBE6BC442
-	VerificationURL *string `json:"VerificationURL,omitnil" name:"VerificationURL"`
+	VerificationURL *string `json:"VerificationURL,omitnil,omitempty" name:"VerificationURL"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ApplyWebVerificationBizTokenIntlResponse struct {
@@ -485,30 +485,30 @@ func (r *ApplyWebVerificationBizTokenIntlResponse) FromJsonString(s string) erro
 // Predefined struct for user
 type ApplyWebVerificationTokenRequestParams struct {
 	// The web redirect URL after the verification is completed.
-	RedirectUrl *string `json:"RedirectUrl,omitnil" name:"RedirectUrl"`
+	RedirectUrl *string `json:"RedirectUrl,omitnil,omitempty" name:"RedirectUrl"`
 
 	// The COS URL of the image for face comparison, which can be obtained with one of the following methods:
 	// 1. Call the `CreateUploadUrl` API to generate a URL and call it again after the image is successfully uploaded.
 	// 2. Use an existing COS URL. For a private bucket, grant the download permission with a pre-signed URL. The corresponding COS bucket must be in the same region as the input parameter `Region`.
-	CompareImageUrl *string `json:"CompareImageUrl,omitnil" name:"CompareImageUrl"`
+	CompareImageUrl *string `json:"CompareImageUrl,omitnil,omitempty" name:"CompareImageUrl"`
 
 	// The MD5 hash values of the image for face comparison (CompareImageUrl).
-	CompareImageMd5 *string `json:"CompareImageMd5,omitnil" name:"CompareImageMd5"`
+	CompareImageMd5 *string `json:"CompareImageMd5,omitnil,omitempty" name:"CompareImageMd5"`
 }
 
 type ApplyWebVerificationTokenRequest struct {
 	*tchttp.BaseRequest
 	
 	// The web redirect URL after the verification is completed.
-	RedirectUrl *string `json:"RedirectUrl,omitnil" name:"RedirectUrl"`
+	RedirectUrl *string `json:"RedirectUrl,omitnil,omitempty" name:"RedirectUrl"`
 
 	// The COS URL of the image for face comparison, which can be obtained with one of the following methods:
 	// 1. Call the `CreateUploadUrl` API to generate a URL and call it again after the image is successfully uploaded.
 	// 2. Use an existing COS URL. For a private bucket, grant the download permission with a pre-signed URL. The corresponding COS bucket must be in the same region as the input parameter `Region`.
-	CompareImageUrl *string `json:"CompareImageUrl,omitnil" name:"CompareImageUrl"`
+	CompareImageUrl *string `json:"CompareImageUrl,omitnil,omitempty" name:"CompareImageUrl"`
 
 	// The MD5 hash values of the image for face comparison (CompareImageUrl).
-	CompareImageMd5 *string `json:"CompareImageMd5,omitnil" name:"CompareImageMd5"`
+	CompareImageMd5 *string `json:"CompareImageMd5,omitnil,omitempty" name:"CompareImageMd5"`
 }
 
 func (r *ApplyWebVerificationTokenRequest) ToJsonString() string {
@@ -535,13 +535,13 @@ func (r *ApplyWebVerificationTokenRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ApplyWebVerificationTokenResponseParams struct {
 	// The verification URL to be opened with a browser to start the verification process.
-	VerificationUrl *string `json:"VerificationUrl,omitnil" name:"VerificationUrl"`
+	VerificationUrl *string `json:"VerificationUrl,omitnil,omitempty" name:"VerificationUrl"`
 
 	// The token used to identify a web-based verification process. It is valid for 7,200s and can be used to get the verification result after the process is completed.
-	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
+	BizToken *string `json:"BizToken,omitnil,omitempty" name:"BizToken"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ApplyWebVerificationTokenResponse struct {
@@ -563,68 +563,68 @@ func (r *ApplyWebVerificationTokenResponse) FromJsonString(s string) error {
 type CardInfo struct {
 	// Hong Kong ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	HKIDCard *HKIDCard `json:"HKIDCard,omitnil" name:"HKIDCard"`
+	HKIDCard *HKIDCard `json:"HKIDCard,omitnil,omitempty" name:"HKIDCard"`
 
 	// Malaysia ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MLIDCard *MLIDCard `json:"MLIDCard,omitnil" name:"MLIDCard"`
+	MLIDCard *MLIDCard `json:"MLIDCard,omitnil,omitempty" name:"MLIDCard"`
 
 	// Philippines VoteID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PhilippinesVoteID *PhilippinesVoteID `json:"PhilippinesVoteID,omitnil" name:"PhilippinesVoteID"`
+	PhilippinesVoteID *PhilippinesVoteID `json:"PhilippinesVoteID,omitnil,omitempty" name:"PhilippinesVoteID"`
 
 	// Indonesia ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IndonesiaIDCard *IndonesiaIDCard `json:"IndonesiaIDCard,omitnil" name:"IndonesiaIDCard"`
+	IndonesiaIDCard *IndonesiaIDCard `json:"IndonesiaIDCard,omitnil,omitempty" name:"IndonesiaIDCard"`
 
 	// Philippines Driving License
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PhilippinesDrivingLicense *PhilippinesDrivingLicense `json:"PhilippinesDrivingLicense,omitnil" name:"PhilippinesDrivingLicense"`
+	PhilippinesDrivingLicense *PhilippinesDrivingLicense `json:"PhilippinesDrivingLicense,omitnil,omitempty" name:"PhilippinesDrivingLicense"`
 
 	// Philippines TinID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PhilippinesTinID *PhilippinesTinID `json:"PhilippinesTinID,omitnil" name:"PhilippinesTinID"`
+	PhilippinesTinID *PhilippinesTinID `json:"PhilippinesTinID,omitnil,omitempty" name:"PhilippinesTinID"`
 
 	// Philippines SSSID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PhilippinesSSSID *PhilippinesSSSID `json:"PhilippinesSSSID,omitnil" name:"PhilippinesSSSID"`
+	PhilippinesSSSID *PhilippinesSSSID `json:"PhilippinesSSSID,omitnil,omitempty" name:"PhilippinesSSSID"`
 
 	// Philippines UMID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PhilippinesUMID *PhilippinesUMID `json:"PhilippinesUMID,omitnil" name:"PhilippinesUMID"`
+	PhilippinesUMID *PhilippinesUMID `json:"PhilippinesUMID,omitnil,omitempty" name:"PhilippinesUMID"`
 
 	// ID Cards of Hong Kong, Macao and Taiwan (China), and International Passport
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	InternationalIDPassport *InternationalIDPassport `json:"InternationalIDPassport,omitnil" name:"InternationalIDPassport"`
+	InternationalIDPassport *InternationalIDPassport `json:"InternationalIDPassport,omitnil,omitempty" name:"InternationalIDPassport"`
 
 	// General license information
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	GeneralCard *GeneralCard `json:"GeneralCard,omitnil" name:"GeneralCard"`
+	GeneralCard *GeneralCard `json:"GeneralCard,omitnil,omitempty" name:"GeneralCard"`
 
 	// Indonesia Driving License
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IndonesiaDrivingLicense *IndonesiaDrivingLicense `json:"IndonesiaDrivingLicense,omitnil" name:"IndonesiaDrivingLicense"`
+	IndonesiaDrivingLicense *IndonesiaDrivingLicense `json:"IndonesiaDrivingLicense,omitnil,omitempty" name:"IndonesiaDrivingLicense"`
 
 	// Thailand ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ThailandIDCard *ThailandIDCard `json:"ThailandIDCard,omitnil" name:"ThailandIDCard"`
+	ThailandIDCard *ThailandIDCard `json:"ThailandIDCard,omitnil,omitempty" name:"ThailandIDCard"`
 
 	// Singapore ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SingaporeIDCard *SingaporeIDCard `json:"SingaporeIDCard,omitnil" name:"SingaporeIDCard"`
+	SingaporeIDCard *SingaporeIDCard `json:"SingaporeIDCard,omitnil,omitempty" name:"SingaporeIDCard"`
 }
 
 type CardVerifyResult struct {
 	// Whether the authentication or OCR process is successful.
-	IsPass *bool `json:"IsPass,omitnil" name:"IsPass"`
+	IsPass *bool `json:"IsPass,omitnil,omitempty" name:"IsPass"`
 
 	// The download URL of the video used for identity document verification, which is valid for 10 minutes. This parameter is returned only if video-based identity document verification is enabled.
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	CardVideo *FileInfo `json:"CardVideo,omitnil" name:"CardVideo"`
+	CardVideo *FileInfo `json:"CardVideo,omitnil,omitempty" name:"CardVideo"`
 
 	// The download URL of the identity document image, which is valid for 10 minutes.
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	CardImage *FileInfo `json:"CardImage,omitnil" name:"CardImage"`
+	CardImage *FileInfo `json:"CardImage,omitnil,omitempty" name:"CardImage"`
 
 	// The OCR result (in JSON) of the identity document image. If verification or OCR fails, this parameter is left empty. The URL is valid for 10 minutes.
 	// (1) Hong Kong (China) identity card
@@ -723,13 +723,13 @@ type CardVerifyResult struct {
 	// - IssuingCountry (string): Issuing country.
 	// - NationalityCode (string): Country/region code.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CardInfoOcrJson *FileInfo `json:"CardInfoOcrJson,omitnil" name:"CardInfoOcrJson"`
+	CardInfoOcrJson *FileInfo `json:"CardInfoOcrJson,omitnil,omitempty" name:"CardInfoOcrJson"`
 
 	// The request ID of a single process.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 
 	// The recognition results of ID card
-	CardInfo *CardInfo `json:"CardInfo,omitnil" name:"CardInfo"`
+	CardInfo *CardInfo `json:"CardInfo,omitnil,omitempty" name:"CardInfo"`
 }
 
 // Predefined struct for user
@@ -738,18 +738,18 @@ type CompareFaceLivenessRequestParams struct {
 	// The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
 	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
 	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
-	ImageBase64 *string `json:"ImageBase64,omitnil" name:"ImageBase64"`
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// Base64 value of photos used for face comparison. 
 	// The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
 	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
 	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
-	VideoBase64 *string `json:"VideoBase64,omitnil" name:"VideoBase64"`
+	VideoBase64 *string `json:"VideoBase64,omitnil,omitempty" name:"VideoBase64"`
 
 	// The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
 	// `LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
 	// Example value: "SILENT"
-	LivenessType *string `json:"LivenessType,omitnil" name:"LivenessType"`
+	LivenessType *string `json:"LivenessType,omitnil,omitempty" name:"LivenessType"`
 
 	// When the “LivenessType” parameter is “ACTION”, it must be specified.
 	// It is used to control the action sequence. Action types: 
@@ -762,7 +762,7 @@ type CompareFaceLivenessRequestParams struct {
 	// Example of passing multiple action parameters: "4,2".
 	// When the “LivenessType” parameter value is “SILENT”, it shall be unspecified.
 	// Example value: ""
-	ValidateData *string `json:"ValidateData,omitnil" name:"ValidateData"`
+	ValidateData *string `json:"ValidateData,omitnil,omitempty" name:"ValidateData"`
 }
 
 type CompareFaceLivenessRequest struct {
@@ -772,18 +772,18 @@ type CompareFaceLivenessRequest struct {
 	// The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
 	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
 	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
-	ImageBase64 *string `json:"ImageBase64,omitnil" name:"ImageBase64"`
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// Base64 value of photos used for face comparison. 
 	// The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
 	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
 	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
-	VideoBase64 *string `json:"VideoBase64,omitnil" name:"VideoBase64"`
+	VideoBase64 *string `json:"VideoBase64,omitnil,omitempty" name:"VideoBase64"`
 
 	// The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
 	// `LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
 	// Example value: "SILENT"
-	LivenessType *string `json:"LivenessType,omitnil" name:"LivenessType"`
+	LivenessType *string `json:"LivenessType,omitnil,omitempty" name:"LivenessType"`
 
 	// When the “LivenessType” parameter is “ACTION”, it must be specified.
 	// It is used to control the action sequence. Action types: 
@@ -796,7 +796,7 @@ type CompareFaceLivenessRequest struct {
 	// Example of passing multiple action parameters: "4,2".
 	// When the “LivenessType” parameter value is “SILENT”, it shall be unspecified.
 	// Example value: ""
-	ValidateData *string `json:"ValidateData,omitnil" name:"ValidateData"`
+	ValidateData *string `json:"ValidateData,omitnil,omitempty" name:"ValidateData"`
 }
 
 func (r *CompareFaceLivenessRequest) ToJsonString() string {
@@ -825,24 +825,24 @@ func (r *CompareFaceLivenessRequest) FromJsonString(s string) error {
 type CompareFaceLivenessResponseParams struct {
 	// Service error code. When the return value is "Success", it indicates that the liveness detection and face comparison succeeded. It is determined that they are the same person. When the return value is "FailedOperation.CompareLowSimilarity", it indicates that the liveness detection succeeded, and the face comparison similarity is lower than 70 points. It is determined that they are not the same person. For other error cases, please refer to Liveness Face Comparison (Pure API) Error Code (https://www.tencentcloud.com/document/product/1061/55390). 
 	// Example Value: "Success".
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// Description of business results. 
 	// Example value: "Success"
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// This value is valid when the “Result” parameter is "Success" or "FailedOperation.CompareLowSimilarity." 
 	// This value indicates the similarity of face comparison. Value range: [0.00, 100.00]. The false pass rate for threshold 70 is 1 in 1,000, and the false pass rate for threshold 80 is 1 in 1,000. 
 	// Example value: 80.00
-	Sim *float64 `json:"Sim,omitnil" name:"Sim"`
+	Sim *float64 `json:"Sim,omitnil,omitempty" name:"Sim"`
 
 	// The optimal screenshot of the video after verification is the value encoded by BASE64, jpg format. 
 	// Note: This field may return “null”, indicating that no valid value can be obtained. 
 	// Example values: "/9j/4AAQSk... (total length:142036)s97n//2Q=="
-	BestFrameBase64 *string `json:"BestFrameBase64,omitnil" name:"BestFrameBase64"`
+	BestFrameBase64 *string `json:"BestFrameBase64,omitnil,omitempty" name:"BestFrameBase64"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CompareFaceLivenessResponse struct {
@@ -872,32 +872,32 @@ type CompareResult struct {
 	// 2014: The resolution of the uploaded image is too low . Please upload a new one.
 	// 2015: Face comparison failed.
 	// 2016: The similarity did not reach the passing standard.
-	ErrorCode *string `json:"ErrorCode,omitnil" name:"ErrorCode"`
+	ErrorCode *string `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
 	// The description of the final verification result.
-	ErrorMsg *string `json:"ErrorMsg,omitnil" name:"ErrorMsg"`
+	ErrorMsg *string `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
 
 	// The liveness algorithm package generated during this SDK-based liveness detection.
-	LiveData *FileInfo `json:"LiveData,omitnil" name:"LiveData"`
+	LiveData *FileInfo `json:"LiveData,omitnil,omitempty" name:"LiveData"`
 
 	// The download URL of the video used for verification, which is valid for 10 minutes.
-	LiveVideo *FileInfo `json:"LiveVideo,omitnil" name:"LiveVideo"`
+	LiveVideo *FileInfo `json:"LiveVideo,omitnil,omitempty" name:"LiveVideo"`
 
 	// The liveness detection result code.
 	// 0: Success.
 	// 1001: Failed to call the liveness detection engine.
 	// 1004: Face detection failed.
-	LiveErrorCode *string `json:"LiveErrorCode,omitnil" name:"LiveErrorCode"`
+	LiveErrorCode *string `json:"LiveErrorCode,omitnil,omitempty" name:"LiveErrorCode"`
 
 	// The description of the liveness detection result.
-	LiveErrorMsg *string `json:"LiveErrorMsg,omitnil" name:"LiveErrorMsg"`
+	LiveErrorMsg *string `json:"LiveErrorMsg,omitnil,omitempty" name:"LiveErrorMsg"`
 
 	// The download URL of the face screenshot during verification, which is valid for 10 minutes.
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	BestFrame *FileInfo `json:"BestFrame,omitnil" name:"BestFrame"`
+	BestFrame *FileInfo `json:"BestFrame,omitnil,omitempty" name:"BestFrame"`
 
 	// The download URL of the profile photo screenshot from the identity document, which is valid for 10 minutes.
-	ProfileImage *FileInfo `json:"ProfileImage,omitnil" name:"ProfileImage"`
+	ProfileImage *FileInfo `json:"ProfileImage,omitnil,omitempty" name:"ProfileImage"`
 
 	// The face comparison result code.
 	// 0: Success.
@@ -908,38 +908,38 @@ type CompareResult struct {
 	// 2015: Face comparison failed.
 	// 2016: The similarity did not reach the passing standard.
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	CompareErrorCode *string `json:"CompareErrorCode,omitnil" name:"CompareErrorCode"`
+	CompareErrorCode *string `json:"CompareErrorCode,omitnil,omitempty" name:"CompareErrorCode"`
 
 	// The description of the face comparison result.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CompareErrorMsg *string `json:"CompareErrorMsg,omitnil" name:"CompareErrorMsg"`
+	CompareErrorMsg *string `json:"CompareErrorMsg,omitnil,omitempty" name:"CompareErrorMsg"`
 
 	// The similarity score of face comparison.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Sim *float64 `json:"Sim,omitnil" name:"Sim"`
+	Sim *float64 `json:"Sim,omitnil,omitempty" name:"Sim"`
 
 	// This parameter is disused.
-	IsNeedCharge *bool `json:"IsNeedCharge,omitnil" name:"IsNeedCharge"`
+	IsNeedCharge *bool `json:"IsNeedCharge,omitnil,omitempty" name:"IsNeedCharge"`
 
 	// The identity document photo info edited by the user. Currently, this parameter is not applied.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CardInfoInputJson *FileInfo `json:"CardInfoInputJson,omitnil" name:"CardInfoInputJson"`
+	CardInfoInputJson *FileInfo `json:"CardInfoInputJson,omitnil,omitempty" name:"CardInfoInputJson"`
 
 	// The request ID of this verification process.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 // Predefined struct for user
 type CreateUploadUrlRequestParams struct {
 	// Target API
-	TargetAction *string `json:"TargetAction,omitnil" name:"TargetAction"`
+	TargetAction *string `json:"TargetAction,omitnil,omitempty" name:"TargetAction"`
 }
 
 type CreateUploadUrlRequest struct {
 	*tchttp.BaseRequest
 	
 	// Target API
-	TargetAction *string `json:"TargetAction,omitnil" name:"TargetAction"`
+	TargetAction *string `json:"TargetAction,omitnil,omitempty" name:"TargetAction"`
 }
 
 func (r *CreateUploadUrlRequest) ToJsonString() string {
@@ -964,16 +964,16 @@ func (r *CreateUploadUrlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateUploadUrlResponseParams struct {
 	// The URL for uploading contents with the `HTTP PUT` method.
-	UploadUrl *string `json:"UploadUrl,omitnil" name:"UploadUrl"`
+	UploadUrl *string `json:"UploadUrl,omitnil,omitempty" name:"UploadUrl"`
 
 	// The resource URL obtained after this upload is completed and to be passed in where it is required later.
-	ResourceUrl *string `json:"ResourceUrl,omitnil" name:"ResourceUrl"`
+	ResourceUrl *string `json:"ResourceUrl,omitnil,omitempty" name:"ResourceUrl"`
 
 	// The point in time when the upload/download link expires, which is a 10-bit Unix timestamp.
-	ExpiredTimestamp *int64 `json:"ExpiredTimestamp,omitnil" name:"ExpiredTimestamp"`
+	ExpiredTimestamp *int64 `json:"ExpiredTimestamp,omitnil,omitempty" name:"ExpiredTimestamp"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateUploadUrlResponse struct {
@@ -995,32 +995,32 @@ func (r *CreateUploadUrlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DetectReflectLivenessAndCompareRequestParams struct {
 	// URL of the liveness detection data package generated by the SDK
-	LiveDataUrl *string `json:"LiveDataUrl,omitnil" name:"LiveDataUrl"`
+	LiveDataUrl *string `json:"LiveDataUrl,omitnil,omitempty" name:"LiveDataUrl"`
 
 	// MD5 hash value (32-bit) of the liveness detection data package generated by the SDK, which is used to verify the LiveData consistency.
-	LiveDataMd5 *string `json:"LiveDataMd5,omitnil" name:"LiveDataMd5"`
+	LiveDataMd5 *string `json:"LiveDataMd5,omitnil,omitempty" name:"LiveDataMd5"`
 
 	// URL of the target image for comparison
-	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
 	// MD5 hash value (32-bit) of the target image for comparison, which is used to verify the `Image` consistency.
-	ImageMd5 *string `json:"ImageMd5,omitnil" name:"ImageMd5"`
+	ImageMd5 *string `json:"ImageMd5,omitnil,omitempty" name:"ImageMd5"`
 }
 
 type DetectReflectLivenessAndCompareRequest struct {
 	*tchttp.BaseRequest
 	
 	// URL of the liveness detection data package generated by the SDK
-	LiveDataUrl *string `json:"LiveDataUrl,omitnil" name:"LiveDataUrl"`
+	LiveDataUrl *string `json:"LiveDataUrl,omitnil,omitempty" name:"LiveDataUrl"`
 
 	// MD5 hash value (32-bit) of the liveness detection data package generated by the SDK, which is used to verify the LiveData consistency.
-	LiveDataMd5 *string `json:"LiveDataMd5,omitnil" name:"LiveDataMd5"`
+	LiveDataMd5 *string `json:"LiveDataMd5,omitnil,omitempty" name:"LiveDataMd5"`
 
 	// URL of the target image for comparison
-	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
 	// MD5 hash value (32-bit) of the target image for comparison, which is used to verify the `Image` consistency.
-	ImageMd5 *string `json:"ImageMd5,omitnil" name:"ImageMd5"`
+	ImageMd5 *string `json:"ImageMd5,omitnil,omitempty" name:"ImageMd5"`
 }
 
 func (r *DetectReflectLivenessAndCompareRequest) ToJsonString() string {
@@ -1048,22 +1048,22 @@ func (r *DetectReflectLivenessAndCompareRequest) FromJsonString(s string) error 
 // Predefined struct for user
 type DetectReflectLivenessAndCompareResponseParams struct {
 	// Temporary URL of the best screenshot (.jpg) of the video after successful verification. Both the screenshot and the URL are valid for two hours only, so you need to download the screenshot within this period.
-	BestFrameUrl *string `json:"BestFrameUrl,omitnil" name:"BestFrameUrl"`
+	BestFrameUrl *string `json:"BestFrameUrl,omitnil,omitempty" name:"BestFrameUrl"`
 
 	// MD5 hash value (32-bit) of the best screenshot of the video after successful verification, which is used to verify the `BestFrame` consistency.
-	BestFrameMd5 *string `json:"BestFrameMd5,omitnil" name:"BestFrameMd5"`
+	BestFrameMd5 *string `json:"BestFrameMd5,omitnil,omitempty" name:"BestFrameMd5"`
 
 	// Service error code. `Success` will be returned for success. For error information, see the `FailedOperation` section in the error code list below.
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// Service result description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Similarity. Value range: [0.00, 100.00]. As a recommendation, when the similarity is greater than or equal to 70, it can be determined that the two faces are of the same person. You can adjust the threshold according to your specific scenario (the FAR at the threshold of 70 is 0.1%, and FAR at the threshold of 80 is 0.01%).
-	Sim *float64 `json:"Sim,omitnil" name:"Sim"`
+	Sim *float64 `json:"Sim,omitnil,omitempty" name:"Sim"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DetectReflectLivenessAndCompareResponse struct {
@@ -1084,64 +1084,64 @@ func (r *DetectReflectLivenessAndCompareResponse) FromJsonString(s string) error
 
 type FileInfo struct {
 	// The URL for downloading the file
-	Url *string `json:"Url,omitnil" name:"Url"`
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// The 32-bit MD5 checksum of the file
-	MD5 *string `json:"MD5,omitnil" name:"MD5"`
+	MD5 *string `json:"MD5,omitnil,omitempty" name:"MD5"`
 
 	// The file size
-	Size *int64 `json:"Size,omitnil" name:"Size"`
+	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 }
 
 type GeneralCard struct {
 	// License number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LicenseNumber *string `json:"LicenseNumber,omitnil" name:"LicenseNumber"`
+	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
 
 	// Personal number, which is returned when it is a passport
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PersonalNumber *string `json:"PersonalNumber,omitnil" name:"PersonalNumber"`
+	PersonalNumber *string `json:"PersonalNumber,omitnil,omitempty" name:"PersonalNumber"`
 
 	// The first line of passport machine reading code
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PassportCodeFirst *string `json:"PassportCodeFirst,omitnil" name:"PassportCodeFirst"`
+	PassportCodeFirst *string `json:"PassportCodeFirst,omitnil,omitempty" name:"PassportCodeFirst"`
 
 	// The first line of passport machine reading code
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PassportCodeSecond *string `json:"PassportCodeSecond,omitnil" name:"PassportCodeSecond"`
+	PassportCodeSecond *string `json:"PassportCodeSecond,omitnil,omitempty" name:"PassportCodeSecond"`
 
 	// Date of expiry in the format of YYYY-MM-DD
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ExpirationDate *string `json:"ExpirationDate,omitnil" name:"ExpirationDate"`
+	ExpirationDate *string `json:"ExpirationDate,omitnil,omitempty" name:"ExpirationDate"`
 
 	// Valid date in the format of YYYY-MM-DD
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DueDate *string `json:"DueDate,omitnil" name:"DueDate"`
+	DueDate *string `json:"DueDate,omitnil,omitempty" name:"DueDate"`
 
 	// Date of issue in the format of YYYY-MM-DD
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IssuedDate *string `json:"IssuedDate,omitnil" name:"IssuedDate"`
+	IssuedDate *string `json:"IssuedDate,omitnil,omitempty" name:"IssuedDate"`
 
 	// Issuing authority
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IssuedAuthority *string `json:"IssuedAuthority,omitnil" name:"IssuedAuthority"`
+	IssuedAuthority *string `json:"IssuedAuthority,omitnil,omitempty" name:"IssuedAuthority"`
 
 	// Issuing country, which is returned following the ISO 3166 country coding specification
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	// Example: MYS
-	IssuedCountry *string `json:"IssuedCountry,omitnil" name:"IssuedCountry"`
+	IssuedCountry *string `json:"IssuedCountry,omitnil,omitempty" name:"IssuedCountry"`
 
 	// Full Name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FullName *string `json:"FullName,omitnil" name:"FullName"`
+	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
 
 	// First name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
+	FirstName *string `json:"FirstName,omitnil,omitempty" name:"FirstName"`
 
 	// Last name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LastName *string `json:"LastName,omitnil" name:"LastName"`
+	LastName *string `json:"LastName,omitnil,omitempty" name:"LastName"`
 
 	// Gender on the license
 	// - M: male
@@ -1149,63 +1149,63 @@ type GeneralCard struct {
 	// - X: other gender
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	// Example: M
-	Sex *string `json:"Sex,omitnil" name:"Sex"`
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
 	// Age. 0 indicates that no valid information is obtained.
 	// Example: 0
-	Age *string `json:"Age,omitnil" name:"Age"`
+	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
 
 	// Birthday
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 
 	// Birth place
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BirthPlace *string `json:"BirthPlace,omitnil" name:"BirthPlace"`
+	BirthPlace *string `json:"BirthPlace,omitnil,omitempty" name:"BirthPlace"`
 
 	// Nationality, which is returned following the ISO 3166 country coding specification
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	// Example: IND
-	Nationality *string `json:"Nationality,omitnil" name:"Nationality"`
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
 	// Registration number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RegistrationNumber *string `json:"RegistrationNumber,omitnil" name:"RegistrationNumber"`
+	RegistrationNumber *string `json:"RegistrationNumber,omitnil,omitempty" name:"RegistrationNumber"`
 
 	// Address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Address *Address `json:"Address,omitnil" name:"Address"`
+	Address *Address `json:"Address,omitnil,omitempty" name:"Address"`
 }
 
 // Predefined struct for user
 type GenerateReflectSequenceRequestParams struct {
 	// The resource URL of the data package generated by the SDK.
-	DeviceDataUrl *string `json:"DeviceDataUrl,omitnil" name:"DeviceDataUrl"`
+	DeviceDataUrl *string `json:"DeviceDataUrl,omitnil,omitempty" name:"DeviceDataUrl"`
 
 	// The MD5 hash value of the data package generated by the SDK.
-	DeviceDataMd5 *string `json:"DeviceDataMd5,omitnil" name:"DeviceDataMd5"`
+	DeviceDataMd5 *string `json:"DeviceDataMd5,omitnil,omitempty" name:"DeviceDataMd5"`
 
 	// 1 - silent
 	// 2 - blinking
 	// 3 - light
 	// 4 - blinking + light (default)
-	SecurityLevel *string `json:"SecurityLevel,omitnil" name:"SecurityLevel"`
+	SecurityLevel *string `json:"SecurityLevel,omitnil,omitempty" name:"SecurityLevel"`
 }
 
 type GenerateReflectSequenceRequest struct {
 	*tchttp.BaseRequest
 	
 	// The resource URL of the data package generated by the SDK.
-	DeviceDataUrl *string `json:"DeviceDataUrl,omitnil" name:"DeviceDataUrl"`
+	DeviceDataUrl *string `json:"DeviceDataUrl,omitnil,omitempty" name:"DeviceDataUrl"`
 
 	// The MD5 hash value of the data package generated by the SDK.
-	DeviceDataMd5 *string `json:"DeviceDataMd5,omitnil" name:"DeviceDataMd5"`
+	DeviceDataMd5 *string `json:"DeviceDataMd5,omitnil,omitempty" name:"DeviceDataMd5"`
 
 	// 1 - silent
 	// 2 - blinking
 	// 3 - light
 	// 4 - blinking + light (default)
-	SecurityLevel *string `json:"SecurityLevel,omitnil" name:"SecurityLevel"`
+	SecurityLevel *string `json:"SecurityLevel,omitnil,omitempty" name:"SecurityLevel"`
 }
 
 func (r *GenerateReflectSequenceRequest) ToJsonString() string {
@@ -1232,13 +1232,13 @@ func (r *GenerateReflectSequenceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GenerateReflectSequenceResponseParams struct {
 	// The resource URL of the light sequence, which needs to be downloaded and passed through to the SDK to start the identity verification process.
-	ReflectSequenceUrl *string `json:"ReflectSequenceUrl,omitnil" name:"ReflectSequenceUrl"`
+	ReflectSequenceUrl *string `json:"ReflectSequenceUrl,omitnil,omitempty" name:"ReflectSequenceUrl"`
 
 	// The MD5 hash value of the light sequence, which is used to check whether the light sequence is altered.
-	ReflectSequenceMd5 *string `json:"ReflectSequenceMd5,omitnil" name:"ReflectSequenceMd5"`
+	ReflectSequenceMd5 *string `json:"ReflectSequenceMd5,omitnil,omitempty" name:"ReflectSequenceMd5"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GenerateReflectSequenceResponse struct {
@@ -1260,14 +1260,14 @@ func (r *GenerateReflectSequenceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCardVerificationResultRequestParams struct {
 	// The token used to identify an verification process. It can be used to get the verification result after the process is completed.
-	CardVerificationToken *string `json:"CardVerificationToken,omitnil" name:"CardVerificationToken"`
+	CardVerificationToken *string `json:"CardVerificationToken,omitnil,omitempty" name:"CardVerificationToken"`
 }
 
 type GetCardVerificationResultRequest struct {
 	*tchttp.BaseRequest
 	
 	// The token used to identify an verification process. It can be used to get the verification result after the process is completed.
-	CardVerificationToken *string `json:"CardVerificationToken,omitnil" name:"CardVerificationToken"`
+	CardVerificationToken *string `json:"CardVerificationToken,omitnil,omitempty" name:"CardVerificationToken"`
 }
 
 func (r *GetCardVerificationResultRequest) ToJsonString() string {
@@ -1295,15 +1295,15 @@ type GetCardVerificationResultResponseParams struct {
 	// Passed
 	// Warning
 	// Rejected
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Warning information returned by document verification.
-	WarnInfo []*string `json:"WarnInfo,omitnil" name:"WarnInfo"`
+	WarnInfo []*string `json:"WarnInfo,omitnil,omitempty" name:"WarnInfo"`
 
 	// Nationality code. Complies with standard ISO 3166-1 alpha-3. 
 	// 
 	// Example value: IDN
-	Nationality *string `json:"Nationality,omitnil" name:"Nationality"`
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
 	// Card Type. The supported options are:
 	// ID_CARD
@@ -1312,19 +1312,19 @@ type GetCardVerificationResultResponseParams struct {
 	// AUTO
 	// 
 	// Example value: ID_CARD
-	CardType *string `json:"CardType,omitnil" name:"CardType"`
+	CardType *string `json:"CardType,omitnil,omitempty" name:"CardType"`
 
 	// Subtype of the ID document.
-	CardSubType *string `json:"CardSubType,omitnil" name:"CardSubType"`
+	CardSubType *string `json:"CardSubType,omitnil,omitempty" name:"CardSubType"`
 
 	// Recognition results of the ID document.
-	CardInfo *CardInfo `json:"CardInfo,omitnil" name:"CardInfo"`
+	CardInfo *CardInfo `json:"CardInfo,omitnil,omitempty" name:"CardInfo"`
 
 	// The token used to identify an verification process. It can be used to get the verification result after the process is completed.
-	IDVerificationToken *string `json:"IDVerificationToken,omitnil" name:"IDVerificationToken"`
+	IDVerificationToken *string `json:"IDVerificationToken,omitnil,omitempty" name:"IDVerificationToken"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetCardVerificationResultResponse struct {
@@ -1346,14 +1346,14 @@ func (r *GetCardVerificationResultResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetFaceIdResultIntlRequestParams struct {
 	// The ID of the SDK-based liveness detection and face comparison process, which is generated when the `GetFaceIdTokenIntl` API is called.	
-	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 }
 
 type GetFaceIdResultIntlRequest struct {
 	*tchttp.BaseRequest
 	
 	// The ID of the SDK-based liveness detection and face comparison process, which is generated when the `GetFaceIdTokenIntl` API is called.	
-	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 }
 
 func (r *GetFaceIdResultIntlRequest) ToJsonString() string {
@@ -1388,27 +1388,27 @@ type GetFaceIdResultIntlResponseParams struct {
 	// 2015: Face comparison failed.
 	// 2016: The similarity did not reach the standard passing threshold.
 	// -999: The verification process wasn't finished.
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The description of the verification result.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// The best frame screenshot (in Base64) obtained during the verification.
-	BestFrame *string `json:"BestFrame,omitnil" name:"BestFrame"`
+	BestFrame *string `json:"BestFrame,omitnil,omitempty" name:"BestFrame"`
 
 	// The video file (Base64) for verification.
-	Video *string `json:"Video,omitnil" name:"Video"`
+	Video *string `json:"Video,omitnil,omitempty" name:"Video"`
 
 	// The similarity, with a value range of 0-100. A greater value indicates higher similarity. This parameter is returned only in the `compare` (liveness detection and face comparison) mode.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Similarity *float64 `json:"Similarity,omitnil" name:"Similarity"`
+	Similarity *float64 `json:"Similarity,omitnil,omitempty" name:"Similarity"`
 
 	// The pass-through parameter.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Extra *string `json:"Extra,omitnil" name:"Extra"`
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetFaceIdResultIntlResponse struct {
@@ -1433,7 +1433,7 @@ type GetFaceIdTokenIntlRequestParams struct {
 	// `liveness`: Liveness detection only.
 	// `compare`: Liveness detection and face comparison.
 	// Default value: `liveness`.
-	CheckMode *string `json:"CheckMode,omitnil" name:"CheckMode"`
+	CheckMode *string `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
 	// The verification security level. Valid values:
 	// `1`: Video-based liveness detection.
@@ -1441,13 +1441,13 @@ type GetFaceIdTokenIntlRequestParams struct {
 	// `3`: Reflection-based liveness detection.
 	// `4`: Motion- and reflection-based liveness detection.
 	// Default value: `4`.
-	SecureLevel *string `json:"SecureLevel,omitnil" name:"SecureLevel"`
+	SecureLevel *string `json:"SecureLevel,omitnil,omitempty" name:"SecureLevel"`
 
 	// The photo (in Base64) to compare. This parameter is required when the value of `CheckMode` is `compare`.
-	Image *string `json:"Image,omitnil" name:"Image"`
+	Image *string `json:"Image,omitnil,omitempty" name:"Image"`
 
 	// The pass-through parameter, which can be omitted if there are no special requirements.
-	Extra *string `json:"Extra,omitnil" name:"Extra"`
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 }
 
 type GetFaceIdTokenIntlRequest struct {
@@ -1457,7 +1457,7 @@ type GetFaceIdTokenIntlRequest struct {
 	// `liveness`: Liveness detection only.
 	// `compare`: Liveness detection and face comparison.
 	// Default value: `liveness`.
-	CheckMode *string `json:"CheckMode,omitnil" name:"CheckMode"`
+	CheckMode *string `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
 	// The verification security level. Valid values:
 	// `1`: Video-based liveness detection.
@@ -1465,13 +1465,13 @@ type GetFaceIdTokenIntlRequest struct {
 	// `3`: Reflection-based liveness detection.
 	// `4`: Motion- and reflection-based liveness detection.
 	// Default value: `4`.
-	SecureLevel *string `json:"SecureLevel,omitnil" name:"SecureLevel"`
+	SecureLevel *string `json:"SecureLevel,omitnil,omitempty" name:"SecureLevel"`
 
 	// The photo (in Base64) to compare. This parameter is required when the value of `CheckMode` is `compare`.
-	Image *string `json:"Image,omitnil" name:"Image"`
+	Image *string `json:"Image,omitnil,omitempty" name:"Image"`
 
 	// The pass-through parameter, which can be omitted if there are no special requirements.
-	Extra *string `json:"Extra,omitnil" name:"Extra"`
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 }
 
 func (r *GetFaceIdTokenIntlRequest) ToJsonString() string {
@@ -1499,10 +1499,10 @@ func (r *GetFaceIdTokenIntlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetFaceIdTokenIntlResponseParams struct {
 	// The SDK token, which is used throughout the verification process and to get the verification result.
-	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetFaceIdTokenIntlResponse struct {
@@ -1524,14 +1524,14 @@ func (r *GetFaceIdTokenIntlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetLivenessResultRequestParams struct {
 	// The token used to identify an SDK-based verification process.
-	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 }
 
 type GetLivenessResultRequest struct {
 	*tchttp.BaseRequest
 	
 	// The token used to identify an SDK-based verification process.
-	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 }
 
 func (r *GetLivenessResultRequest) ToJsonString() string {
@@ -1556,19 +1556,19 @@ func (r *GetLivenessResultRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetLivenessResultResponseParams struct {
 	// The final verification result.
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The description of the final verification result.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// The face screenshot.
-	BestFrame *FileInfo `json:"BestFrame,omitnil" name:"BestFrame"`
+	BestFrame *FileInfo `json:"BestFrame,omitnil,omitempty" name:"BestFrame"`
 
 	// The video for the detection.
-	Video *FileInfo `json:"Video,omitnil" name:"Video"`
+	Video *FileInfo `json:"Video,omitnil,omitempty" name:"Video"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetLivenessResultResponse struct {
@@ -1590,14 +1590,14 @@ func (r *GetLivenessResultResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetSdkVerificationResultRequestParams struct {
 	// The token used to identify an SDK-based verification process.
-	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 }
 
 type GetSdkVerificationResultRequest struct {
 	*tchttp.BaseRequest
 	
 	// The token used to identify an SDK-based verification process.
-	SdkToken *string `json:"SdkToken,omitnil" name:"SdkToken"`
+	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 }
 
 func (r *GetSdkVerificationResultRequest) ToJsonString() string {
@@ -1622,25 +1622,25 @@ func (r *GetSdkVerificationResultRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetSdkVerificationResultResponseParams struct {
 	// The result code of the verification result.
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The verification result description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// The charge count.
-	ChargeCount *int64 `json:"ChargeCount,omitnil" name:"ChargeCount"`
+	ChargeCount *int64 `json:"ChargeCount,omitnil,omitempty" name:"ChargeCount"`
 
 	// The results of multiple OCR processes (in order). The result of the final process is used as the valid result.
-	CardVerifyResults []*CardVerifyResult `json:"CardVerifyResults,omitnil" name:"CardVerifyResults"`
+	CardVerifyResults []*CardVerifyResult `json:"CardVerifyResults,omitnil,omitempty" name:"CardVerifyResults"`
 
 	// The results of multiple liveness detection processes (in order). The result of the final process is used as the valid result.
-	CompareResults []*CompareResult `json:"CompareResults,omitnil" name:"CompareResults"`
+	CompareResults []*CompareResult `json:"CompareResults,omitnil,omitempty" name:"CompareResults"`
 
 	// Data passed through in the process of getting the token.
-	Extra *string `json:"Extra,omitnil" name:"Extra"`
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetSdkVerificationResultResponse struct {
@@ -1662,14 +1662,14 @@ func (r *GetSdkVerificationResultResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetWebVerificationResultIntlRequestParams struct {
 	// The token for the web-based verification, which is generated using the `ApplyWebVerificationBizTokenIntl` API.
-	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
+	BizToken *string `json:"BizToken,omitnil,omitempty" name:"BizToken"`
 }
 
 type GetWebVerificationResultIntlRequest struct {
 	*tchttp.BaseRequest
 	
 	// The token for the web-based verification, which is generated using the `ApplyWebVerificationBizTokenIntl` API.
-	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
+	BizToken *string `json:"BizToken,omitnil,omitempty" name:"BizToken"`
 }
 
 func (r *GetWebVerificationResultIntlRequest) ToJsonString() string {
@@ -1696,33 +1696,33 @@ type GetWebVerificationResultIntlResponseParams struct {
 	// The final result of this verification. `0` indicates that the person is the same as that in the photo.
 	// For other error codes, see <a href="https://www.tencentcloud.com/document/product/1061/55390?lang=en&pg=#8a960e1e-39c0-42cb-b181-b3164d77f81e">Liveness Detection and Face Comparison (Mobile HTML5) Error Codes</a>
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	ErrorCode *int64 `json:"ErrorCode,omitnil" name:"ErrorCode"`
+	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
 	// The description of the final verification result.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	ErrorMsg *string `json:"ErrorMsg,omitnil" name:"ErrorMsg"`
+	ErrorMsg *string `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
 
 	// The detailed verification result list of this process. Retries are allowed, so a verification process may have several entries of results.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	VerificationDetailList []*VerificationDetail `json:"VerificationDetailList,omitnil" name:"VerificationDetailList"`
+	VerificationDetailList []*VerificationDetail `json:"VerificationDetailList,omitnil,omitempty" name:"VerificationDetailList"`
 
 	// The Base64-encoded string of the video collected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no video is collected, null is returned.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	VideoBase64 *string `json:"VideoBase64,omitnil" name:"VideoBase64"`
+	VideoBase64 *string `json:"VideoBase64,omitnil,omitempty" name:"VideoBase64"`
 
 	// The Base64-encoded string of the best face screenshot u200dcollected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no best face screenshot is collected, null is returned.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	BestFrameBase64 *string `json:"BestFrameBase64,omitnil" name:"BestFrameBase64"`
+	BestFrameBase64 *string `json:"BestFrameBase64,omitnil,omitempty" name:"BestFrameBase64"`
 
 	// Card recognize result.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	OCRResult []*OCRResult `json:"OCRResult,omitnil" name:"OCRResult"`
+	OCRResult []*OCRResult `json:"OCRResult,omitnil,omitempty" name:"OCRResult"`
 
 	// The passthrough parameter of the business, max 1,000 characters, which will be returned in GetWebVerificationResultIntl.
-	Extra *string `json:"Extra,omitnil" name:"Extra"`
+	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetWebVerificationResultIntlResponse struct {
@@ -1744,14 +1744,14 @@ func (r *GetWebVerificationResultIntlResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetWebVerificationResultRequestParams struct {
 	// The token for the web-based verification, which is generated with the `ApplyWebVerificationToken` API.
-	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
+	BizToken *string `json:"BizToken,omitnil,omitempty" name:"BizToken"`
 }
 
 type GetWebVerificationResultRequest struct {
 	*tchttp.BaseRequest
 	
 	// The token for the web-based verification, which is generated with the `ApplyWebVerificationToken` API.
-	BizToken *string `json:"BizToken,omitnil" name:"BizToken"`
+	BizToken *string `json:"BizToken,omitnil,omitempty" name:"BizToken"`
 }
 
 func (r *GetWebVerificationResultRequest) ToJsonString() string {
@@ -1777,34 +1777,34 @@ func (r *GetWebVerificationResultRequest) FromJsonString(s string) error {
 type GetWebVerificationResultResponseParams struct {
 	// The final result of this verification. `0` indicates that the person is the same as that in the photo.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ErrorCode *int64 `json:"ErrorCode,omitnil" name:"ErrorCode"`
+	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
 	// The description of the final verification result.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ErrorMsg *string `json:"ErrorMsg,omitnil" name:"ErrorMsg"`
+	ErrorMsg *string `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
 
 	// The temporary URL of the best face screenshot collected from the video stream. It is valid for 10 minutes. Download the image if needed.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VideoBestFrameUrl *string `json:"VideoBestFrameUrl,omitnil" name:"VideoBestFrameUrl"`
+	VideoBestFrameUrl *string `json:"VideoBestFrameUrl,omitnil,omitempty" name:"VideoBestFrameUrl"`
 
 	// The MD5 hash value of the best face screenshot collected from the video stream. It can be used to check whether the image content is consistent with the file content.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VideoBestFrameMd5 *string `json:"VideoBestFrameMd5,omitnil" name:"VideoBestFrameMd5"`
+	VideoBestFrameMd5 *string `json:"VideoBestFrameMd5,omitnil,omitempty" name:"VideoBestFrameMd5"`
 
 	// The details list of this verification process.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VerificationDetailList []*VerificationDetail `json:"VerificationDetailList,omitnil" name:"VerificationDetailList"`
+	VerificationDetailList []*VerificationDetail `json:"VerificationDetailList,omitnil,omitempty" name:"VerificationDetailList"`
 
 	// The temporary URL of the video collected from the video stream. It is valid for 10 minutes. Download the video if needed.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VideoUrl *string `json:"VideoUrl,omitnil" name:"VideoUrl"`
+	VideoUrl *string `json:"VideoUrl,omitnil,omitempty" name:"VideoUrl"`
 
 	// The MD5 hash value of the video collected from the video stream. It can be used to check whether the video content is consistent with the file content.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VideoMd5 *string `json:"VideoMd5,omitnil" name:"VideoMd5"`
+	VideoMd5 *string `json:"VideoMd5,omitnil,omitempty" name:"VideoMd5"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetWebVerificationResultResponse struct {
@@ -1825,242 +1825,242 @@ func (r *GetWebVerificationResultResponse) FromJsonString(s string) error {
 
 type HKIDCard struct {
 
-	CnName *string `json:"CnName,omitnil" name:"CnName"`
+	CnName *string `json:"CnName,omitnil,omitempty" name:"CnName"`
 
 	// English name
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	// Example: SAN, Nan
-	EnName *string `json:"EnName,omitnil" name:"EnName"`
+	EnName *string `json:"EnName,omitnil,omitempty" name:"EnName"`
 
 	// Telex code correspondint to the Chinese name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TelexCode *string `json:"TelexCode,omitnil" name:"TelexCode"`
+	TelexCode *string `json:"TelexCode,omitnil,omitempty" name:"TelexCode"`
 
 	// Gender: "Male-M" or "Female-F"
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Sex *string `json:"Sex,omitnil" name:"Sex"`
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
 	// Birthday
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	// Example: 01-01-2001
-	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 
 	// Permanent resident ID card: 0-non-permanent; 1-permanent; -1-unknown
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Permanent *string `json:"Permanent,omitnil" name:"Permanent"`
+	Permanent *string `json:"Permanent,omitnil,omitempty" name:"Permanent"`
 
 	// ID card number
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	// Example: C000000(E)
-	IdNum *string `json:"IdNum,omitnil" name:"IdNum"`
+	IdNum *string `json:"IdNum,omitnil,omitempty" name:"IdNum"`
 
 	// Lisence symbol, which is the symbol below Birthday. Example: "***AZ"
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Symbol *string `json:"Symbol,omitnil" name:"Symbol"`
+	Symbol *string `json:"Symbol,omitnil,omitempty" name:"Symbol"`
 
 	// The first date of issue
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FirstIssueDate *string `json:"FirstIssueDate,omitnil" name:"FirstIssueDate"`
+	FirstIssueDate *string `json:"FirstIssueDate,omitnil,omitempty" name:"FirstIssueDate"`
 
 	// The current date of issue
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CurrentIssueDate *string `json:"CurrentIssueDate,omitnil" name:"CurrentIssueDate"`
+	CurrentIssueDate *string `json:"CurrentIssueDate,omitnil,omitempty" name:"CurrentIssueDate"`
 }
 
 type IndonesiaDrivingLicense struct {
 	// Last name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LastName *string `json:"LastName,omitnil" name:"LastName"`
+	LastName *string `json:"LastName,omitnil,omitempty" name:"LastName"`
 
 	// First name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
+	FirstName *string `json:"FirstName,omitnil,omitempty" name:"FirstName"`
 
 	// License number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LicenseNumber *string `json:"LicenseNumber,omitnil" name:"LicenseNumber"`
+	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
 
 	// Birthday
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 
 	// Address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Address *string `json:"Address,omitnil" name:"Address"`
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
 	// Expiration date
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ExpirationDate *string `json:"ExpirationDate,omitnil" name:"ExpirationDate"`
+	ExpirationDate *string `json:"ExpirationDate,omitnil,omitempty" name:"ExpirationDate"`
 
 	// Date of issue
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IssuedDate *string `json:"IssuedDate,omitnil" name:"IssuedDate"`
+	IssuedDate *string `json:"IssuedDate,omitnil,omitempty" name:"IssuedDate"`
 
 	// Issuing country
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IssuedCountry *string `json:"IssuedCountry,omitnil" name:"IssuedCountry"`
+	IssuedCountry *string `json:"IssuedCountry,omitnil,omitempty" name:"IssuedCountry"`
 }
 
 type IndonesiaIDCard struct {
 	// License number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NIK *string `json:"NIK,omitnil" name:"NIK"`
+	NIK *string `json:"NIK,omitnil,omitempty" name:"NIK"`
 
 	// Name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Nama *string `json:"Nama,omitnil" name:"Nama"`
+	Nama *string `json:"Nama,omitnil,omitempty" name:"Nama"`
 
 	// Birth place/Birthday
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TempatTglLahir *string `json:"TempatTglLahir,omitnil" name:"TempatTglLahir"`
+	TempatTglLahir *string `json:"TempatTglLahir,omitnil,omitempty" name:"TempatTglLahir"`
 
 	// Gender
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	JenisKelamin *string `json:"JenisKelamin,omitnil" name:"JenisKelamin"`
+	JenisKelamin *string `json:"JenisKelamin,omitnil,omitempty" name:"JenisKelamin"`
 
 	// Blood type
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	GolDarah *string `json:"GolDarah,omitnil" name:"GolDarah"`
+	GolDarah *string `json:"GolDarah,omitnil,omitempty" name:"GolDarah"`
 
 	// Address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Alamat *string `json:"Alamat,omitnil" name:"Alamat"`
+	Alamat *string `json:"Alamat,omitnil,omitempty" name:"Alamat"`
 
 	// Street
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RTRW *string `json:"RTRW,omitnil" name:"RTRW"`
+	RTRW *string `json:"RTRW,omitnil,omitempty" name:"RTRW"`
 
 	// Village
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	KelDesa *string `json:"KelDesa,omitnil" name:"KelDesa"`
+	KelDesa *string `json:"KelDesa,omitnil,omitempty" name:"KelDesa"`
 
 	// Region
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Kecamatan *string `json:"Kecamatan,omitnil" name:"Kecamatan"`
+	Kecamatan *string `json:"Kecamatan,omitnil,omitempty" name:"Kecamatan"`
 
 	// Religious beliefs
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Agama *string `json:"Agama,omitnil" name:"Agama"`
+	Agama *string `json:"Agama,omitnil,omitempty" name:"Agama"`
 
 	// Marital status
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StatusPerkawinan *string `json:"StatusPerkawinan,omitnil" name:"StatusPerkawinan"`
+	StatusPerkawinan *string `json:"StatusPerkawinan,omitnil,omitempty" name:"StatusPerkawinan"`
 
 	// Job
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Perkerjaan *string `json:"Perkerjaan,omitnil" name:"Perkerjaan"`
+	Perkerjaan *string `json:"Perkerjaan,omitnil,omitempty" name:"Perkerjaan"`
 
 	// Nationality
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	KewargaNegaraan *string `json:"KewargaNegaraan,omitnil" name:"KewargaNegaraan"`
+	KewargaNegaraan *string `json:"KewargaNegaraan,omitnil,omitempty" name:"KewargaNegaraan"`
 
 	// ID card validity period
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BerlakuHingga *string `json:"BerlakuHingga,omitnil" name:"BerlakuHingga"`
+	BerlakuHingga *string `json:"BerlakuHingga,omitnil,omitempty" name:"BerlakuHingga"`
 
 	// Date of issue
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IssuedDate *string `json:"IssuedDate,omitnil" name:"IssuedDate"`
+	IssuedDate *string `json:"IssuedDate,omitnil,omitempty" name:"IssuedDate"`
 
 	// Province
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Provinsi *string `json:"Provinsi,omitnil" name:"Provinsi"`
+	Provinsi *string `json:"Provinsi,omitnil,omitempty" name:"Provinsi"`
 
 	// City
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Kota *string `json:"Kota,omitnil" name:"Kota"`
+	Kota *string `json:"Kota,omitnil,omitempty" name:"Kota"`
 }
 
 type InternationalIDPassport struct {
 	// Passport ID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LicenseNumber *string `json:"LicenseNumber,omitnil" name:"LicenseNumber"`
+	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
 
 	// Full name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FullName *string `json:"FullName,omitnil" name:"FullName"`
+	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
 
 	// Last name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Surname *string `json:"Surname,omitnil" name:"Surname"`
+	Surname *string `json:"Surname,omitnil,omitempty" name:"Surname"`
 
 	// First name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	GivenName *string `json:"GivenName,omitnil" name:"GivenName"`
+	GivenName *string `json:"GivenName,omitnil,omitempty" name:"GivenName"`
 
 	// Birthday
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 
 	// Gender (F-Female, M-Male)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Sex *string `json:"Sex,omitnil" name:"Sex"`
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
 	// Expiration date
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DateOfExpiration *string `json:"DateOfExpiration,omitnil" name:"DateOfExpiration"`
+	DateOfExpiration *string `json:"DateOfExpiration,omitnil,omitempty" name:"DateOfExpiration"`
 
 	// Issuing country
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IssuingCountry *string `json:"IssuingCountry,omitnil" name:"IssuingCountry"`
+	IssuingCountry *string `json:"IssuingCountry,omitnil,omitempty" name:"IssuingCountry"`
 
 	// Nationality code
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NationalityCode *string `json:"NationalityCode,omitnil" name:"NationalityCode"`
+	NationalityCode *string `json:"NationalityCode,omitnil,omitempty" name:"NationalityCode"`
 
 	// The first line at the bottom, the MRZ Code sequence
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PassportCodeFirst *string `json:"PassportCodeFirst,omitnil" name:"PassportCodeFirst"`
+	PassportCodeFirst *string `json:"PassportCodeFirst,omitnil,omitempty" name:"PassportCodeFirst"`
 
 	// The second line at the bottom, the MRZ Code sequence
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PassportCodeSecond *string `json:"PassportCodeSecond,omitnil" name:"PassportCodeSecond"`
+	PassportCodeSecond *string `json:"PassportCodeSecond,omitnil,omitempty" name:"PassportCodeSecond"`
 }
 
 // Predefined struct for user
 type LivenessCompareRequestParams struct {
 	// Liveness detection type. Valid values: LIP/ACTION/SILENT.
 	// LIP: numeric mode; ACTION: motion mode; SILENT: silent mode. You need to select a mode to input.
-	LivenessType *string `json:"LivenessType,omitnil" name:"LivenessType"`
+	LivenessType *string `json:"LivenessType,omitnil,omitempty" name:"LivenessType"`
 
 	// Base64 string of the image for face comparison.
 	// The size of the Base64-encoded image data can be up to 3 MB. JPG and PNG formats are supported.
 	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
 	// 
 	// Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageBase64` will be used.
-	ImageBase64 *string `json:"ImageBase64,omitnil" name:"ImageBase64"`
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// URL of the image for face comparison. The size of the downloaded image after Base64 encoding can be up to 3 MB. JPG and PNG formats are supported.
 	// 
 	// Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageBase64` will be used.
 	// 
 	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
-	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
 	// Lip mode: set this parameter to a custom 4-digit verification code.
 	// Action mode: set this parameter to a custom action sequence (e.g., `2,1` or `1,2`).
 	// Silent mode: do not pass in this parameter.
-	ValidateData *string `json:"ValidateData,omitnil" name:"ValidateData"`
+	ValidateData *string `json:"ValidateData,omitnil,omitempty" name:"ValidateData"`
 
 	// Optional configuration (a JSON string)
 	// {
 	// "BestFrameNum": 2  // Return multiple best screenshots. Value range: 2−10
 	// }
-	Optional *string `json:"Optional,omitnil" name:"Optional"`
+	Optional *string `json:"Optional,omitnil,omitempty" name:"Optional"`
 
 	// Base64 string of the video for liveness detection.
 	// The size of the Base64-encoded video data can be up to 8 MB. MP4, AVI, and FLV formats are supported.
 	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
 	// 
 	// Either the `VideoUrl` or `VideoBase64` of the video must be provided. If both are provided, only `VideoBase64` will be used.
-	VideoBase64 *string `json:"VideoBase64,omitnil" name:"VideoBase64"`
+	VideoBase64 *string `json:"VideoBase64,omitnil,omitempty" name:"VideoBase64"`
 
 	// URL of the video for liveness detection. The size of the downloaded video after Base64 encoding can be up to 8 MB. It takes no more than 4 seconds to download. MP4, AVI, and FLV formats are supported.
 	// 
 	// Either the `VideoUrl` or `VideoBase64` of the video must be provided. If both are provided, only `VideoBase64` will be used.
 	// 
 	// We recommend you store the video in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
-	VideoUrl *string `json:"VideoUrl,omitnil" name:"VideoUrl"`
+	VideoUrl *string `json:"VideoUrl,omitnil,omitempty" name:"VideoUrl"`
 }
 
 type LivenessCompareRequest struct {
@@ -2068,46 +2068,46 @@ type LivenessCompareRequest struct {
 	
 	// Liveness detection type. Valid values: LIP/ACTION/SILENT.
 	// LIP: numeric mode; ACTION: motion mode; SILENT: silent mode. You need to select a mode to input.
-	LivenessType *string `json:"LivenessType,omitnil" name:"LivenessType"`
+	LivenessType *string `json:"LivenessType,omitnil,omitempty" name:"LivenessType"`
 
 	// Base64 string of the image for face comparison.
 	// The size of the Base64-encoded image data can be up to 3 MB. JPG and PNG formats are supported.
 	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
 	// 
 	// Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageBase64` will be used.
-	ImageBase64 *string `json:"ImageBase64,omitnil" name:"ImageBase64"`
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// URL of the image for face comparison. The size of the downloaded image after Base64 encoding can be up to 3 MB. JPG and PNG formats are supported.
 	// 
 	// Either the `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageBase64` will be used.
 	// 
 	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
-	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
 	// Lip mode: set this parameter to a custom 4-digit verification code.
 	// Action mode: set this parameter to a custom action sequence (e.g., `2,1` or `1,2`).
 	// Silent mode: do not pass in this parameter.
-	ValidateData *string `json:"ValidateData,omitnil" name:"ValidateData"`
+	ValidateData *string `json:"ValidateData,omitnil,omitempty" name:"ValidateData"`
 
 	// Optional configuration (a JSON string)
 	// {
 	// "BestFrameNum": 2  // Return multiple best screenshots. Value range: 2−10
 	// }
-	Optional *string `json:"Optional,omitnil" name:"Optional"`
+	Optional *string `json:"Optional,omitnil,omitempty" name:"Optional"`
 
 	// Base64 string of the video for liveness detection.
 	// The size of the Base64-encoded video data can be up to 8 MB. MP4, AVI, and FLV formats are supported.
 	// Please use the standard Base64 encoding scheme (with the "=" padding). For the encoding conventions, please see RFC 4648.
 	// 
 	// Either the `VideoUrl` or `VideoBase64` of the video must be provided. If both are provided, only `VideoBase64` will be used.
-	VideoBase64 *string `json:"VideoBase64,omitnil" name:"VideoBase64"`
+	VideoBase64 *string `json:"VideoBase64,omitnil,omitempty" name:"VideoBase64"`
 
 	// URL of the video for liveness detection. The size of the downloaded video after Base64 encoding can be up to 8 MB. It takes no more than 4 seconds to download. MP4, AVI, and FLV formats are supported.
 	// 
 	// Either the `VideoUrl` or `VideoBase64` of the video must be provided. If both are provided, only `VideoBase64` will be used.
 	// 
 	// We recommend you store the video in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability. The download speed and stability of non-Tencent Cloud URLs may be low.
-	VideoUrl *string `json:"VideoUrl,omitnil" name:"VideoUrl"`
+	VideoUrl *string `json:"VideoUrl,omitnil,omitempty" name:"VideoUrl"`
 }
 
 func (r *LivenessCompareRequest) ToJsonString() string {
@@ -2138,22 +2138,22 @@ func (r *LivenessCompareRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type LivenessCompareResponseParams struct {
 	// The best screenshot of the video after successful verification. The photo is Base64-encoded and in JPG format.
-	BestFrameBase64 *string `json:"BestFrameBase64,omitnil" name:"BestFrameBase64"`
+	BestFrameBase64 *string `json:"BestFrameBase64,omitnil,omitempty" name:"BestFrameBase64"`
 
 	// Similarity. Value range: [0.00, 100.00]. As a recommendation, when the similarity is greater than or equal to 70, it can be determined that the two faces are of the same person. You can adjust the threshold according to your specific scenario (the FAR at the threshold of 70 is 0.1%, and FAR at the threshold of 80 is 0.01%).
-	Sim *float64 `json:"Sim,omitnil" name:"Sim"`
+	Sim *float64 `json:"Sim,omitnil,omitempty" name:"Sim"`
 
 	// Service error code. `Success` will be returned for success. For error information, please see the `FailedOperation` section in the error code list below.
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// Service result description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 
-	BestFrameList []*string `json:"BestFrameList,omitnil" name:"BestFrameList"`
+	BestFrameList []*string `json:"BestFrameList,omitnil,omitempty" name:"BestFrameList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type LivenessCompareResponse struct {
@@ -2175,19 +2175,19 @@ func (r *LivenessCompareResponse) FromJsonString(s string) error {
 type MLIDCard struct {
 	// Full Name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// License number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ID *string `json:"ID,omitnil" name:"ID"`
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Gender
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Sex *string `json:"Sex,omitnil" name:"Sex"`
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
 	// Address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Address *string `json:"Address,omitnil" name:"Address"`
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
 	// Lisence type
 	// MyKad ID card
@@ -2198,291 +2198,291 @@ type MLIDCard struct {
 	// IKAD Labor ID card
 	// MyKid Juvenile ID card
 	// Example: MyKad
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Birthday (Currently, this filed only supports IKAD labor ID card and MyKad ID card)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 }
 
 type OCRResult struct {
 	// Is the indentity verification or OCR process passed
-	IsPass *bool `json:"IsPass,omitnil" name:"IsPass"`
+	IsPass *bool `json:"IsPass,omitnil,omitempty" name:"IsPass"`
 
 	// The Base64 of ID card image
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CardImageBase64 *string `json:"CardImageBase64,omitnil" name:"CardImageBase64"`
+	CardImageBase64 *string `json:"CardImageBase64,omitnil,omitempty" name:"CardImageBase64"`
 
 	// OCR result of the ID card.
-	CardInfo *CardInfo `json:"CardInfo,omitnil" name:"CardInfo"`
+	CardInfo *CardInfo `json:"CardInfo,omitnil,omitempty" name:"CardInfo"`
 
 	// The request id
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type PhilippinesDrivingLicense struct {
 	// Full Name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Last name
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LastName *string `json:"LastName,omitnil" name:"LastName"`
+	LastName *string `json:"LastName,omitnil,omitempty" name:"LastName"`
 
 	// First name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
+	FirstName *string `json:"FirstName,omitnil,omitempty" name:"FirstName"`
 
 	// Middle name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MiddleName *string `json:"MiddleName,omitnil" name:"MiddleName"`
+	MiddleName *string `json:"MiddleName,omitnil,omitempty" name:"MiddleName"`
 
 	// Nationality
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Nationality *string `json:"Nationality,omitnil" name:"Nationality"`
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
 	// Gender
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Sex *string `json:"Sex,omitnil" name:"Sex"`
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
 	// Address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Address *string `json:"Address,omitnil" name:"Address"`
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
 	// License number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LicenseNo *string `json:"LicenseNo,omitnil" name:"LicenseNo"`
+	LicenseNo *string `json:"LicenseNo,omitnil,omitempty" name:"LicenseNo"`
 
 	// Date of expiry
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ExpiresDate *string `json:"ExpiresDate,omitnil" name:"ExpiresDate"`
+	ExpiresDate *string `json:"ExpiresDate,omitnil,omitempty" name:"ExpiresDate"`
 
 	// Agency code
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AgencyCode *string `json:"AgencyCode,omitnil" name:"AgencyCode"`
+	AgencyCode *string `json:"AgencyCode,omitnil,omitempty" name:"AgencyCode"`
 
 	// Birthday
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 }
 
 type PhilippinesSSSID struct {
 	// License number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LicenseNumber *string `json:"LicenseNumber,omitnil" name:"LicenseNumber"`
+	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
 
 	// Full name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FullName *string `json:"FullName,omitnil" name:"FullName"`
+	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
 
 	// Birthday
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 }
 
 type PhilippinesTinID struct {
 	// License number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LicenseNumber *string `json:"LicenseNumber,omitnil" name:"LicenseNumber"`
+	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
 
 	// Full name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FullName *string `json:"FullName,omitnil" name:"FullName"`
+	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
 
 	// Address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Address *string `json:"Address,omitnil" name:"Address"`
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
 	// Birthday
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 
 	// Date of issue
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IssueDate *string `json:"IssueDate,omitnil" name:"IssueDate"`
+	IssueDate *string `json:"IssueDate,omitnil,omitempty" name:"IssueDate"`
 }
 
 type PhilippinesUMID struct {
 	// Surname
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Surname *string `json:"Surname,omitnil" name:"Surname"`
+	Surname *string `json:"Surname,omitnil,omitempty" name:"Surname"`
 
 	// Middle Name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	MiddleName *string `json:"MiddleName,omitnil" name:"MiddleName"`
+	MiddleName *string `json:"MiddleName,omitnil,omitempty" name:"MiddleName"`
 
 	// First name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	GivenName *string `json:"GivenName,omitnil" name:"GivenName"`
+	GivenName *string `json:"GivenName,omitnil,omitempty" name:"GivenName"`
 
 	// Gender
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Sex *string `json:"Sex,omitnil" name:"Sex"`
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
 	// Birthday
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 
 	// Address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Address *string `json:"Address,omitnil" name:"Address"`
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
 	// CRN code
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CRN *string `json:"CRN,omitnil" name:"CRN"`
+	CRN *string `json:"CRN,omitnil,omitempty" name:"CRN"`
 }
 
 type PhilippinesVoteID struct {
 	// VIN of Philippines VoteID
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VIN *string `json:"VIN,omitnil" name:"VIN"`
+	VIN *string `json:"VIN,omitnil,omitempty" name:"VIN"`
 
 	// First name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
+	FirstName *string `json:"FirstName,omitnil,omitempty" name:"FirstName"`
 
 	// Last name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LastName *string `json:"LastName,omitnil" name:"LastName"`
+	LastName *string `json:"LastName,omitnil,omitempty" name:"LastName"`
 
 	// Birthday
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 
 	// Civil status
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CivilStatus *string `json:"CivilStatus,omitnil" name:"CivilStatus"`
+	CivilStatus *string `json:"CivilStatus,omitnil,omitempty" name:"CivilStatus"`
 
 	// Nationality
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Citizenship *string `json:"Citizenship,omitnil" name:"Citizenship"`
+	Citizenship *string `json:"Citizenship,omitnil,omitempty" name:"Citizenship"`
 
 	// Address
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Address *string `json:"Address,omitnil" name:"Address"`
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
 	// Region
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PrecinctNo *string `json:"PrecinctNo,omitnil" name:"PrecinctNo"`
+	PrecinctNo *string `json:"PrecinctNo,omitnil,omitempty" name:"PrecinctNo"`
 }
 
 type SingaporeIDCard struct {
 	// Chinese name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ChName *string `json:"ChName,omitnil" name:"ChName"`
+	ChName *string `json:"ChName,omitnil,omitempty" name:"ChName"`
 
 	// English name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	EnName *string `json:"EnName,omitnil" name:"EnName"`
+	EnName *string `json:"EnName,omitnil,omitempty" name:"EnName"`
 
 	// License number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ID *string `json:"ID,omitnil" name:"ID"`
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
 
 	// Gender
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Sex *string `json:"Sex,omitnil" name:"Sex"`
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
 	// Country of birth
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	CountryOfBirth *string `json:"CountryOfBirth,omitnil" name:"CountryOfBirth"`
+	CountryOfBirth *string `json:"CountryOfBirth,omitnil,omitempty" name:"CountryOfBirth"`
 
 	// Birthday
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Birthday *string `json:"Birthday,omitnil" name:"Birthday"`
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 
 	// Address (on the back)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Address *string `json:"Address,omitnil" name:"Address"`
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
 	// Nationality (on the back)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Race *string `json:"Race,omitnil" name:"Race"`
+	Race *string `json:"Race,omitnil,omitempty" name:"Race"`
 
 	//  NRIC number (on the back)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	NRICCode *string `json:"NRICCode,omitnil" name:"NRICCode"`
+	NRICCode *string `json:"NRICCode,omitnil,omitempty" name:"NRICCode"`
 
 	// Post number (on the front)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PostCode *string `json:"PostCode,omitnil" name:"PostCode"`
+	PostCode *string `json:"PostCode,omitnil,omitempty" name:"PostCode"`
 
 	// Date of expiry (on the back)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DateOfExpiration *string `json:"DateOfExpiration,omitnil" name:"DateOfExpiration"`
+	DateOfExpiration *string `json:"DateOfExpiration,omitnil,omitempty" name:"DateOfExpiration"`
 
 	// Date of issue (on the back)
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DateOfIssue *string `json:"DateOfIssue,omitnil" name:"DateOfIssue"`
+	DateOfIssue *string `json:"DateOfIssue,omitnil,omitempty" name:"DateOfIssue"`
 }
 
 type ThailandIDCard struct {
 	// Last name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LastName *string `json:"LastName,omitnil" name:"LastName"`
+	LastName *string `json:"LastName,omitnil,omitempty" name:"LastName"`
 
 	// First name
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	FirstName *string `json:"FirstName,omitnil" name:"FirstName"`
+	FirstName *string `json:"FirstName,omitnil,omitempty" name:"FirstName"`
 
 	// License number
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LicenseNumber *string `json:"LicenseNumber,omitnil" name:"LicenseNumber"`
+	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
 
 	// Birthday
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DateOfBirth *string `json:"DateOfBirth,omitnil" name:"DateOfBirth"`
+	DateOfBirth *string `json:"DateOfBirth,omitnil,omitempty" name:"DateOfBirth"`
 
 	// Date of expiry
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DateOfExpiry *string `json:"DateOfExpiry,omitnil" name:"DateOfExpiry"`
+	DateOfExpiry *string `json:"DateOfExpiry,omitnil,omitempty" name:"DateOfExpiry"`
 
 	// Date of issue
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DateOfIssue *string `json:"DateOfIssue,omitnil" name:"DateOfIssue"`
+	DateOfIssue *string `json:"DateOfIssue,omitnil,omitempty" name:"DateOfIssue"`
 
 	// Issuing country
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	IssuedCountry *string `json:"IssuedCountry,omitnil" name:"IssuedCountry"`
+	IssuedCountry *string `json:"IssuedCountry,omitnil,omitempty" name:"IssuedCountry"`
 }
 
 type VerificationDetail struct {
 	// The final result of this verification. `0` indicates that the person is the same as that in the photo.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	ErrorCode *int64 `json:"ErrorCode,omitnil" name:"ErrorCode"`
+	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
 	// The description of the final verification result.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	ErrorMsg *string `json:"ErrorMsg,omitnil" name:"ErrorMsg"`
+	ErrorMsg *string `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
 
 	// The result of this liveness detection process. `0` indicates success.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	LivenessErrorCode *int64 `json:"LivenessErrorCode,omitnil" name:"LivenessErrorCode"`
+	LivenessErrorCode *int64 `json:"LivenessErrorCode,omitnil,omitempty" name:"LivenessErrorCode"`
 
 	// The result description of this liveness detection process.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	LivenessErrorMsg *string `json:"LivenessErrorMsg,omitnil" name:"LivenessErrorMsg"`
+	LivenessErrorMsg *string `json:"LivenessErrorMsg,omitnil,omitempty" name:"LivenessErrorMsg"`
 
 	// The result of this comparison process. `0` indicates that the person in the best face screenshot collected from the video stream is the same as that in the uploaded image for comparison.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	CompareErrorCode *int64 `json:"CompareErrorCode,omitnil" name:"CompareErrorCode"`
+	CompareErrorCode *int64 `json:"CompareErrorCode,omitnil,omitempty" name:"CompareErrorCode"`
 
 	// The result description of this comparison process.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	CompareErrorMsg *string `json:"CompareErrorMsg,omitnil" name:"CompareErrorMsg"`
+	CompareErrorMsg *string `json:"CompareErrorMsg,omitnil,omitempty" name:"CompareErrorMsg"`
 
 	// The timestamp (ms) of this verification process.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ReqTimestamp *uint64 `json:"ReqTimestamp,omitnil" name:"ReqTimestamp"`
+	ReqTimestamp *uint64 `json:"ReqTimestamp,omitnil,omitempty" name:"ReqTimestamp"`
 
 	// The similarity of the best face screenshot collected from the video stream and the uploaded image for comparison in this verification process. Value range: [0.00, 100.00]. By default, the person in the screenshot is determined to be the same person in the image if the similarity is greater than or equal to 70.
 	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
-	Similarity *float64 `json:"Similarity,omitnil" name:"Similarity"`
+	Similarity *float64 `json:"Similarity,omitnil,omitempty" name:"Similarity"`
 
 	// Unique ID of this verification process.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Seq *string `json:"Seq,omitnil" name:"Seq"`
+	Seq *string `json:"Seq,omitnil,omitempty" name:"Seq"`
 }
 
 // Predefined struct for user
@@ -2490,27 +2490,27 @@ type VideoLivenessCompareRequestParams struct {
 	// The URL of the photo for face comparison. The downloaded image after Base64 encoding can be up to 3 MB and must be in JPG or PNG.
 	// 
 	// The image must be stored in a COS bucket in the region where the FaceID service resides to ensure a higher download speed and better stability. You can generate an image URL by using `CreateUploadUrl` or purchase the COS service.
-	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
 	// The 32-bit MD5 checksum of the image for comparison
-	ImageMd5 *string `json:"ImageMd5,omitnil" name:"ImageMd5"`
+	ImageMd5 *string `json:"ImageMd5,omitnil,omitempty" name:"ImageMd5"`
 
 	// The URL of the video for liveness detection. The downloaded video after Base64 encoding can be up to 8 MB and must be in MP4, AVI, or FLV. It takes no more than 4s to download the video.
 	// 
 	// The video must be stored in a COS bucket in the region where the FaceID service resides to ensure a higher download speed and better stability. You can generate a video URL by using `CreateUploadUrl` or purchase the COS service.
-	VideoUrl *string `json:"VideoUrl,omitnil" name:"VideoUrl"`
+	VideoUrl *string `json:"VideoUrl,omitnil,omitempty" name:"VideoUrl"`
 
 	// The 32-bit MD5 checksum of the video
-	VideoMd5 *string `json:"VideoMd5,omitnil" name:"VideoMd5"`
+	VideoMd5 *string `json:"VideoMd5,omitnil,omitempty" name:"VideoMd5"`
 
 	// The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
 	// `LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
-	LivenessType *string `json:"LivenessType,omitnil" name:"LivenessType"`
+	LivenessType *string `json:"LivenessType,omitnil,omitempty" name:"LivenessType"`
 
 	// LIP parameter: Pass in a custom 4-digit verification code.
 	// ACTION parameter: Pass in a custom action sequence (`2,1` or `1,2`).
 	// SILENT parameter: Null.
-	ValidateData *string `json:"ValidateData,omitnil" name:"ValidateData"`
+	ValidateData *string `json:"ValidateData,omitnil,omitempty" name:"ValidateData"`
 }
 
 type VideoLivenessCompareRequest struct {
@@ -2519,27 +2519,27 @@ type VideoLivenessCompareRequest struct {
 	// The URL of the photo for face comparison. The downloaded image after Base64 encoding can be up to 3 MB and must be in JPG or PNG.
 	// 
 	// The image must be stored in a COS bucket in the region where the FaceID service resides to ensure a higher download speed and better stability. You can generate an image URL by using `CreateUploadUrl` or purchase the COS service.
-	ImageUrl *string `json:"ImageUrl,omitnil" name:"ImageUrl"`
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
 	// The 32-bit MD5 checksum of the image for comparison
-	ImageMd5 *string `json:"ImageMd5,omitnil" name:"ImageMd5"`
+	ImageMd5 *string `json:"ImageMd5,omitnil,omitempty" name:"ImageMd5"`
 
 	// The URL of the video for liveness detection. The downloaded video after Base64 encoding can be up to 8 MB and must be in MP4, AVI, or FLV. It takes no more than 4s to download the video.
 	// 
 	// The video must be stored in a COS bucket in the region where the FaceID service resides to ensure a higher download speed and better stability. You can generate a video URL by using `CreateUploadUrl` or purchase the COS service.
-	VideoUrl *string `json:"VideoUrl,omitnil" name:"VideoUrl"`
+	VideoUrl *string `json:"VideoUrl,omitnil,omitempty" name:"VideoUrl"`
 
 	// The 32-bit MD5 checksum of the video
-	VideoMd5 *string `json:"VideoMd5,omitnil" name:"VideoMd5"`
+	VideoMd5 *string `json:"VideoMd5,omitnil,omitempty" name:"VideoMd5"`
 
 	// The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
 	// `LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
-	LivenessType *string `json:"LivenessType,omitnil" name:"LivenessType"`
+	LivenessType *string `json:"LivenessType,omitnil,omitempty" name:"LivenessType"`
 
 	// LIP parameter: Pass in a custom 4-digit verification code.
 	// ACTION parameter: Pass in a custom action sequence (`2,1` or `1,2`).
 	// SILENT parameter: Null.
-	ValidateData *string `json:"ValidateData,omitnil" name:"ValidateData"`
+	ValidateData *string `json:"ValidateData,omitnil,omitempty" name:"ValidateData"`
 }
 
 func (r *VideoLivenessCompareRequest) ToJsonString() string {
@@ -2569,20 +2569,20 @@ func (r *VideoLivenessCompareRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type VideoLivenessCompareResponseParams struct {
 	// The similarity. Value range: [0.00, 100.00]. As a recommendation, when the similarity is greater than or equal to 70, it can be determined that the two persons are of the same person. You can adjust the threshold according to your specific scenario (the FARs at the thresholds of 70 and 80 are 0.1% and 0.01%, respectively).
-	Sim *float64 `json:"Sim,omitnil" name:"Sim"`
+	Sim *float64 `json:"Sim,omitnil,omitempty" name:"Sim"`
 
 	// The service error code. `Success` will be returned for success. For error information, see the `FailedOperation` section in the error code list below.
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The service result description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// The best video screenshot after successful verification
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BestFrame *FileInfo `json:"BestFrame,omitnil" name:"BestFrame"`
+	BestFrame *FileInfo `json:"BestFrame,omitnil,omitempty" name:"BestFrame"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type VideoLivenessCompareResponse struct {
@@ -2603,11 +2603,11 @@ func (r *VideoLivenessCompareResponse) FromJsonString(s string) error {
 
 type WebVerificationConfigIntl struct {
 	// When starting verification, whether to skip the starting verification page. If true, enter the verification process directly. The default is false. This configuration will not take effect if the downgrade policy is triggered.
-	AutoSkipStartPage *bool `json:"AutoSkipStartPage,omitnil" name:"AutoSkipStartPage"`
+	AutoSkipStartPage *bool `json:"AutoSkipStartPage,omitnil,omitempty" name:"AutoSkipStartPage"`
 
 	// When the verification passed, whether to skip the result page and automatically jump to RedirectURL. The default value is false.
 	// Example value: false
-	AutoSkip *bool `json:"AutoSkip,omitnil" name:"AutoSkip"`
+	AutoSkip *bool `json:"AutoSkip,omitnil,omitempty" name:"AutoSkip"`
 
 	// Detection mode, parameter values are as follows:
 	// 1: OCR+living detection & face comparison;
@@ -2615,7 +2615,7 @@ type WebVerificationConfigIntl struct {
 	// 3: Living detection;
 	// The default value is 2.
 	// Example value: 3
-	CheckMode *int64 `json:"CheckMode,omitnil" name:"CheckMode"`
+	CheckMode *int64 `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
 	// The type of lisence used for verification. The following types are supported.
 	// 1.HKIDCard: Hong Kong (China) ID card
@@ -2628,8 +2628,8 @@ type WebVerificationConfigIntl struct {
 	// 8.PhilippinesUMID: Philippines UMID card
 	// 9.InternationalIDPassport: ID cards of Hong Kong, Macao and Taiwan (China), and international passport.
 	// Example: HKIDCard
-	IDCardType *string `json:"IDCardType,omitnil" name:"IDCardType"`
+	IDCardType *string `json:"IDCardType,omitnil,omitempty" name:"IDCardType"`
 
 	// Whether to turn off document alarms, the default is false (the alarm detection function is turned on). When enabled, the identity authentication process will be intercepted based on the alarm status of the certificate. If you need to use the document authentication function, please contact us.
-	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil" name:"DisableCheckOcrWarnings"`
+	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil,omitempty" name:"DisableCheckOcrWarnings"`
 }

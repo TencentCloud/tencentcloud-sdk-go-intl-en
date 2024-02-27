@@ -23,14 +23,14 @@ import (
 // Predefined struct for user
 type AcceptDirectConnectTunnelRequestParams struct {
 	// The connection owner accepts an application for sharing the dedicated tunnel
-	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil" name:"DirectConnectTunnelId"`
+	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil,omitempty" name:"DirectConnectTunnelId"`
 }
 
 type AcceptDirectConnectTunnelRequest struct {
 	*tchttp.BaseRequest
 	
 	// The connection owner accepts an application for sharing the dedicated tunnel
-	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil" name:"DirectConnectTunnelId"`
+	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil,omitempty" name:"DirectConnectTunnelId"`
 }
 
 func (r *AcceptDirectConnectTunnelRequest) ToJsonString() string {
@@ -55,7 +55,7 @@ func (r *AcceptDirectConnectTunnelRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AcceptDirectConnectTunnelResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type AcceptDirectConnectTunnelResponse struct {
@@ -76,75 +76,75 @@ func (r *AcceptDirectConnectTunnelResponse) FromJsonString(s string) error {
 
 type AccessPoint struct {
 	// Access point name.
-	AccessPointName *string `json:"AccessPointName,omitnil" name:"AccessPointName"`
+	AccessPointName *string `json:"AccessPointName,omitnil,omitempty" name:"AccessPointName"`
 
 	// Unique access point ID.
-	AccessPointId *string `json:"AccessPointId,omitnil" name:"AccessPointId"`
+	AccessPointId *string `json:"AccessPointId,omitnil,omitempty" name:"AccessPointId"`
 
 	// Access point status. Valid values: available, unavailable.
-	State *string `json:"State,omitnil" name:"State"`
+	State *string `json:"State,omitnil,omitempty" name:"State"`
 
 	// Access point location.
-	Location *string `json:"Location,omitnil" name:"Location"`
+	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
 
 	// List of ISPs supported by access point.
-	LineOperator []*string `json:"LineOperator,omitnil" name:"LineOperator"`
+	LineOperator []*string `json:"LineOperator,omitnil,omitempty" name:"LineOperator"`
 
 	// ID of the region that manages the access point.
-	RegionId *string `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Available port type at the access point. Valid values: 1000BASE-T: gigabit electrical port; 1000BASE-LX: 10 km gigabit single-mode optical port; 1000BASE-ZX: 80 km gigabit single-mode optical port; 10GBASE-LR: 10 km 10-gigabit single-mode optical port; 10GBASE-ZR: 80 km 10-gigabit single-mode optical port; 10GBASE-LH: 40 km 10-gigabit single-mode optical port; 100GBASE-LR4: 10 km 100-gigabit single-mode optical portfiber optic port.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	AvailablePortType []*string `json:"AvailablePortType,omitnil" name:"AvailablePortType"`
+	AvailablePortType []*string `json:"AvailablePortType,omitnil,omitempty" name:"AvailablePortType"`
 
 	// Latitude and longitude of the access point
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Coordinate *Coordinate `json:"Coordinate,omitnil" name:"Coordinate"`
+	Coordinate *Coordinate `json:"Coordinate,omitnil,omitempty" name:"Coordinate"`
 
 	// City where the access point is located
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	City *string `json:"City,omitnil" name:"City"`
+	City *string `json:"City,omitnil,omitempty" name:"City"`
 
 	// Access point region
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Access point type. Valid values: `VXLAN`, `QCPL`, and `QCAR`.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	AccessPointType *string `json:"AccessPointType,omitnil" name:"AccessPointType"`
+	AccessPointType *string `json:"AccessPointType,omitnil,omitempty" name:"AccessPointType"`
 }
 
 // Predefined struct for user
 type ApplyInternetAddressRequestParams struct {
 	// Mask length of a CIDR block
-	MaskLen *int64 `json:"MaskLen,omitnil" name:"MaskLen"`
+	MaskLen *int64 `json:"MaskLen,omitnil,omitempty" name:"MaskLen"`
 
 	// Address type. Valid values: 0: BGP
 	// 1: China Telecom
 	// 2: China Mobile
 	// 3: China Unicom
-	AddrType *int64 `json:"AddrType,omitnil" name:"AddrType"`
+	AddrType *int64 `json:"AddrType,omitnil,omitempty" name:"AddrType"`
 
 	// Address protocol. Valid values: 0: IPv4
 	// 1: IPv6
-	AddrProto *int64 `json:"AddrProto,omitnil" name:"AddrProto"`
+	AddrProto *int64 `json:"AddrProto,omitnil,omitempty" name:"AddrProto"`
 }
 
 type ApplyInternetAddressRequest struct {
 	*tchttp.BaseRequest
 	
 	// Mask length of a CIDR block
-	MaskLen *int64 `json:"MaskLen,omitnil" name:"MaskLen"`
+	MaskLen *int64 `json:"MaskLen,omitnil,omitempty" name:"MaskLen"`
 
 	// Address type. Valid values: 0: BGP
 	// 1: China Telecom
 	// 2: China Mobile
 	// 3: China Unicom
-	AddrType *int64 `json:"AddrType,omitnil" name:"AddrType"`
+	AddrType *int64 `json:"AddrType,omitnil,omitempty" name:"AddrType"`
 
 	// Address protocol. Valid values: 0: IPv4
 	// 1: IPv6
-	AddrProto *int64 `json:"AddrProto,omitnil" name:"AddrProto"`
+	AddrProto *int64 `json:"AddrProto,omitnil,omitempty" name:"AddrProto"`
 }
 
 func (r *ApplyInternetAddressRequest) ToJsonString() string {
@@ -172,10 +172,10 @@ func (r *ApplyInternetAddressRequest) FromJsonString(s string) error {
 type ApplyInternetAddressResponseParams struct {
 	// ID of the internet tunnel’s public IP address
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ApplyInternetAddressResponse struct {
@@ -196,137 +196,137 @@ func (r *ApplyInternetAddressResponse) FromJsonString(s string) error {
 
 type BFDInfo struct {
 	// Number of health checks
-	ProbeFailedTimes *int64 `json:"ProbeFailedTimes,omitnil" name:"ProbeFailedTimes"`
+	ProbeFailedTimes *int64 `json:"ProbeFailedTimes,omitnil,omitempty" name:"ProbeFailedTimes"`
 
 	// Health check interval
-	Interval *int64 `json:"Interval,omitnil" name:"Interval"`
+	Interval *int64 `json:"Interval,omitnil,omitempty" name:"Interval"`
 }
 
 type BgpPeer struct {
 	// User-side BGP Asn.
-	Asn *int64 `json:"Asn,omitnil" name:"Asn"`
+	Asn *int64 `json:"Asn,omitnil,omitempty" name:"Asn"`
 
 	// User-side BGP key.
-	AuthKey *string `json:"AuthKey,omitnil" name:"AuthKey"`
+	AuthKey *string `json:"AuthKey,omitnil,omitempty" name:"AuthKey"`
 }
 
 type Coordinate struct {
 	// Latitude
-	Lat *float64 `json:"Lat,omitnil" name:"Lat"`
+	Lat *float64 `json:"Lat,omitnil,omitempty" name:"Lat"`
 
 	// Longitude
-	Lng *float64 `json:"Lng,omitnil" name:"Lng"`
+	Lng *float64 `json:"Lng,omitnil,omitempty" name:"Lng"`
 }
 
 // Predefined struct for user
 type CreateDirectConnectRequestParams struct {
 	// Connection name.
-	DirectConnectName *string `json:"DirectConnectName,omitnil" name:"DirectConnectName"`
+	DirectConnectName *string `json:"DirectConnectName,omitnil,omitempty" name:"DirectConnectName"`
 
 	// Access point of connection.
 	// You can call `DescribeAccessPoints` to get the region ID. The selected access point must exist and be available.
-	AccessPointId *string `json:"AccessPointId,omitnil" name:"AccessPointId"`
+	AccessPointId *string `json:"AccessPointId,omitnil,omitempty" name:"AccessPointId"`
 
 	// ISP that provides connections. Valid values: ChinaTelecom (China Telecom), ChinaMobile (China Mobile), ChinaUnicom (China Unicom), In-houseWiring (in-house wiring), ChinaOther (other Chinese ISPs), InternationalOperator (international ISPs).
-	LineOperator *string `json:"LineOperator,omitnil" name:"LineOperator"`
+	LineOperator *string `json:"LineOperator,omitnil,omitempty" name:"LineOperator"`
 
 	// Port type of connection. Valid values: 100Base-T (100-Megabit electrical Ethernet interface), 1000Base-T (1-Gigabit electrical Ethernet interface), 1000Base-LX (1-Gigabit single-module optical Ethernet interface; 10 KM), 10GBase-T (10-Gigabit electrical Ethernet interface), 10GBase-LR (10-Gigabit single-module optical Ethernet interface; 10 KM). Default value: 1000Base-LX.
-	PortType *string `json:"PortType,omitnil" name:"PortType"`
+	PortType *string `json:"PortType,omitnil,omitempty" name:"PortType"`
 
 	// Circuit code of a connection, which is provided by the ISP or connection provider.
-	CircuitCode *string `json:"CircuitCode,omitnil" name:"CircuitCode"`
+	CircuitCode *string `json:"CircuitCode,omitnil,omitempty" name:"CircuitCode"`
 
 	// Local IDC location.
-	Location *string `json:"Location,omitnil" name:"Location"`
+	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
 
 	// Connection port bandwidth in Mbps. Value range: [2,10240]. Default value: 1000.
-	Bandwidth *int64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// ID of redundant connection.
-	RedundantDirectConnectId *string `json:"RedundantDirectConnectId,omitnil" name:"RedundantDirectConnectId"`
+	RedundantDirectConnectId *string `json:"RedundantDirectConnectId,omitnil,omitempty" name:"RedundantDirectConnectId"`
 
 	// VLAN for connection debugging, which is enabled and automatically assigned by default.
-	Vlan *int64 `json:"Vlan,omitnil" name:"Vlan"`
+	Vlan *int64 `json:"Vlan,omitnil,omitempty" name:"Vlan"`
 
 	// Tencent-side IP address for connection debugging, which is automatically assigned by default.
-	TencentAddress *string `json:"TencentAddress,omitnil" name:"TencentAddress"`
+	TencentAddress *string `json:"TencentAddress,omitnil,omitempty" name:"TencentAddress"`
 
 	// User-side IP address for connection debugging, which is automatically assigned by default.
-	CustomerAddress *string `json:"CustomerAddress,omitnil" name:"CustomerAddress"`
+	CustomerAddress *string `json:"CustomerAddress,omitnil,omitempty" name:"CustomerAddress"`
 
 	// Name of connection applicant, which is obtained from the account system by default.
-	CustomerName *string `json:"CustomerName,omitnil" name:"CustomerName"`
+	CustomerName *string `json:"CustomerName,omitnil,omitempty" name:"CustomerName"`
 
 	// Email address of connection applicant, which is obtained from the account system by default.
-	CustomerContactMail *string `json:"CustomerContactMail,omitnil" name:"CustomerContactMail"`
+	CustomerContactMail *string `json:"CustomerContactMail,omitnil,omitempty" name:"CustomerContactMail"`
 
 	// Contact number of connection applicant, which is obtained from the account system by default.
-	CustomerContactNumber *string `json:"CustomerContactNumber,omitnil" name:"CustomerContactNumber"`
+	CustomerContactNumber *string `json:"CustomerContactNumber,omitnil,omitempty" name:"CustomerContactNumber"`
 
 	// Fault reporting contact person.
-	FaultReportContactPerson *string `json:"FaultReportContactPerson,omitnil" name:"FaultReportContactPerson"`
+	FaultReportContactPerson *string `json:"FaultReportContactPerson,omitnil,omitempty" name:"FaultReportContactPerson"`
 
 	// Fault reporting contact number.
-	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitnil" name:"FaultReportContactNumber"`
+	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitnil,omitempty" name:"FaultReportContactNumber"`
 
 	// Whether the connection applicant has signed the service agreement. Default value: true.
-	SignLaw *bool `json:"SignLaw,omitnil" name:"SignLaw"`
+	SignLaw *bool `json:"SignLaw,omitnil,omitempty" name:"SignLaw"`
 }
 
 type CreateDirectConnectRequest struct {
 	*tchttp.BaseRequest
 	
 	// Connection name.
-	DirectConnectName *string `json:"DirectConnectName,omitnil" name:"DirectConnectName"`
+	DirectConnectName *string `json:"DirectConnectName,omitnil,omitempty" name:"DirectConnectName"`
 
 	// Access point of connection.
 	// You can call `DescribeAccessPoints` to get the region ID. The selected access point must exist and be available.
-	AccessPointId *string `json:"AccessPointId,omitnil" name:"AccessPointId"`
+	AccessPointId *string `json:"AccessPointId,omitnil,omitempty" name:"AccessPointId"`
 
 	// ISP that provides connections. Valid values: ChinaTelecom (China Telecom), ChinaMobile (China Mobile), ChinaUnicom (China Unicom), In-houseWiring (in-house wiring), ChinaOther (other Chinese ISPs), InternationalOperator (international ISPs).
-	LineOperator *string `json:"LineOperator,omitnil" name:"LineOperator"`
+	LineOperator *string `json:"LineOperator,omitnil,omitempty" name:"LineOperator"`
 
 	// Port type of connection. Valid values: 100Base-T (100-Megabit electrical Ethernet interface), 1000Base-T (1-Gigabit electrical Ethernet interface), 1000Base-LX (1-Gigabit single-module optical Ethernet interface; 10 KM), 10GBase-T (10-Gigabit electrical Ethernet interface), 10GBase-LR (10-Gigabit single-module optical Ethernet interface; 10 KM). Default value: 1000Base-LX.
-	PortType *string `json:"PortType,omitnil" name:"PortType"`
+	PortType *string `json:"PortType,omitnil,omitempty" name:"PortType"`
 
 	// Circuit code of a connection, which is provided by the ISP or connection provider.
-	CircuitCode *string `json:"CircuitCode,omitnil" name:"CircuitCode"`
+	CircuitCode *string `json:"CircuitCode,omitnil,omitempty" name:"CircuitCode"`
 
 	// Local IDC location.
-	Location *string `json:"Location,omitnil" name:"Location"`
+	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
 
 	// Connection port bandwidth in Mbps. Value range: [2,10240]. Default value: 1000.
-	Bandwidth *int64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// ID of redundant connection.
-	RedundantDirectConnectId *string `json:"RedundantDirectConnectId,omitnil" name:"RedundantDirectConnectId"`
+	RedundantDirectConnectId *string `json:"RedundantDirectConnectId,omitnil,omitempty" name:"RedundantDirectConnectId"`
 
 	// VLAN for connection debugging, which is enabled and automatically assigned by default.
-	Vlan *int64 `json:"Vlan,omitnil" name:"Vlan"`
+	Vlan *int64 `json:"Vlan,omitnil,omitempty" name:"Vlan"`
 
 	// Tencent-side IP address for connection debugging, which is automatically assigned by default.
-	TencentAddress *string `json:"TencentAddress,omitnil" name:"TencentAddress"`
+	TencentAddress *string `json:"TencentAddress,omitnil,omitempty" name:"TencentAddress"`
 
 	// User-side IP address for connection debugging, which is automatically assigned by default.
-	CustomerAddress *string `json:"CustomerAddress,omitnil" name:"CustomerAddress"`
+	CustomerAddress *string `json:"CustomerAddress,omitnil,omitempty" name:"CustomerAddress"`
 
 	// Name of connection applicant, which is obtained from the account system by default.
-	CustomerName *string `json:"CustomerName,omitnil" name:"CustomerName"`
+	CustomerName *string `json:"CustomerName,omitnil,omitempty" name:"CustomerName"`
 
 	// Email address of connection applicant, which is obtained from the account system by default.
-	CustomerContactMail *string `json:"CustomerContactMail,omitnil" name:"CustomerContactMail"`
+	CustomerContactMail *string `json:"CustomerContactMail,omitnil,omitempty" name:"CustomerContactMail"`
 
 	// Contact number of connection applicant, which is obtained from the account system by default.
-	CustomerContactNumber *string `json:"CustomerContactNumber,omitnil" name:"CustomerContactNumber"`
+	CustomerContactNumber *string `json:"CustomerContactNumber,omitnil,omitempty" name:"CustomerContactNumber"`
 
 	// Fault reporting contact person.
-	FaultReportContactPerson *string `json:"FaultReportContactPerson,omitnil" name:"FaultReportContactPerson"`
+	FaultReportContactPerson *string `json:"FaultReportContactPerson,omitnil,omitempty" name:"FaultReportContactPerson"`
 
 	// Fault reporting contact number.
-	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitnil" name:"FaultReportContactNumber"`
+	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitnil,omitempty" name:"FaultReportContactNumber"`
 
 	// Whether the connection applicant has signed the service agreement. Default value: true.
-	SignLaw *bool `json:"SignLaw,omitnil" name:"SignLaw"`
+	SignLaw *bool `json:"SignLaw,omitnil,omitempty" name:"SignLaw"`
 }
 
 func (r *CreateDirectConnectRequest) ToJsonString() string {
@@ -367,10 +367,10 @@ func (r *CreateDirectConnectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateDirectConnectResponseParams struct {
 	// Connection ID.
-	DirectConnectIdSet []*string `json:"DirectConnectIdSet,omitnil" name:"DirectConnectIdSet"`
+	DirectConnectIdSet []*string `json:"DirectConnectIdSet,omitnil,omitempty" name:"DirectConnectIdSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateDirectConnectResponse struct {
@@ -392,146 +392,146 @@ func (r *CreateDirectConnectResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateDirectConnectTunnelRequestParams struct {
 	// Direct Connect ID, such as `dc-kd7d06of`.
-	DirectConnectId *string `json:"DirectConnectId,omitnil" name:"DirectConnectId"`
+	DirectConnectId *string `json:"DirectConnectId,omitnil,omitempty" name:"DirectConnectId"`
 
 	// Dedicated tunnel name.
-	DirectConnectTunnelName *string `json:"DirectConnectTunnelName,omitnil" name:"DirectConnectTunnelName"`
+	DirectConnectTunnelName *string `json:"DirectConnectTunnelName,omitnil,omitempty" name:"DirectConnectTunnelName"`
 
 	// Connection owner, who is the current customer by default.
 	// The developer account ID should be entered for shared connections.
-	DirectConnectOwnerAccount *string `json:"DirectConnectOwnerAccount,omitnil" name:"DirectConnectOwnerAccount"`
+	DirectConnectOwnerAccount *string `json:"DirectConnectOwnerAccount,omitnil,omitempty" name:"DirectConnectOwnerAccount"`
 
 	// Network type. Valid values: VPC, BMVPC, CCN. Default value: VPC.
 	// VPC: Virtual Private Cloud.
 	// BMVPC: BM VPC.
 	// CCN: Cloud Connect Network.
-	NetworkType *string `json:"NetworkType,omitnil" name:"NetworkType"`
+	NetworkType *string `json:"NetworkType,omitnil,omitempty" name:"NetworkType"`
 
 	// Network region.
-	NetworkRegion *string `json:"NetworkRegion,omitnil" name:"NetworkRegion"`
+	NetworkRegion *string `json:"NetworkRegion,omitnil,omitempty" name:"NetworkRegion"`
 
 	// Unified VPC ID or BMVPC ID.
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Direct connect gateway ID, such as `dcg-d545ddf`.
-	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitnil" name:"DirectConnectGatewayId"`
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitnil,omitempty" name:"DirectConnectGatewayId"`
 
 	// Direct Connect bandwidth in Mbps.
 	// Default value: connection bandwidth value.
-	Bandwidth *int64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// BGP: BGP routing.
 	// STATIC: Static routing.
 	// Default value: BGP routing.
-	RouteType *string `json:"RouteType,omitnil" name:"RouteType"`
+	RouteType *string `json:"RouteType,omitnil,omitempty" name:"RouteType"`
 
 	// BgpPeer, which is BGP information on the user side and includes Asn and AuthKey.
-	BgpPeer *BgpPeer `json:"BgpPeer,omitnil" name:"BgpPeer"`
+	BgpPeer *BgpPeer `json:"BgpPeer,omitnil,omitempty" name:"BgpPeer"`
 
 	// Static routing, i.e., IP range of the user's IDC.
-	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitnil" name:"RouteFilterPrefixes"`
+	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitnil,omitempty" name:"RouteFilterPrefixes"`
 
 	// VLAN. Value range: 0-3,000.
 	// 0: sub-interface not enabled.
 	// Default value: Non-zero.
-	Vlan *int64 `json:"Vlan,omitnil" name:"Vlan"`
+	Vlan *int64 `json:"Vlan,omitnil,omitempty" name:"Vlan"`
 
 	// TencentAddress: Tencent-side IP address.
-	TencentAddress *string `json:"TencentAddress,omitnil" name:"TencentAddress"`
+	TencentAddress *string `json:"TencentAddress,omitnil,omitempty" name:"TencentAddress"`
 
 	// CustomerAddress: User-side IP address.
-	CustomerAddress *string `json:"CustomerAddress,omitnil" name:"CustomerAddress"`
+	CustomerAddress *string `json:"CustomerAddress,omitnil,omitempty" name:"CustomerAddress"`
 
 	// TencentBackupAddress, i.e., Tencent-side standby IP address
-	TencentBackupAddress *string `json:"TencentBackupAddress,omitnil" name:"TencentBackupAddress"`
+	TencentBackupAddress *string `json:"TencentBackupAddress,omitnil,omitempty" name:"TencentBackupAddress"`
 
 	// Cloud Attached Connection Service ID
-	CloudAttachId *string `json:"CloudAttachId,omitnil" name:"CloudAttachId"`
+	CloudAttachId *string `json:"CloudAttachId,omitnil,omitempty" name:"CloudAttachId"`
 
 	// Whether to enable BFD
-	BfdEnable *int64 `json:"BfdEnable,omitnil" name:"BfdEnable"`
+	BfdEnable *int64 `json:"BfdEnable,omitnil,omitempty" name:"BfdEnable"`
 
 	// Whether to enable NQA
-	NqaEnable *int64 `json:"NqaEnable,omitnil" name:"NqaEnable"`
+	NqaEnable *int64 `json:"NqaEnable,omitnil,omitempty" name:"NqaEnable"`
 
 	// BFD configuration information
-	BfdInfo *BFDInfo `json:"BfdInfo,omitnil" name:"BfdInfo"`
+	BfdInfo *BFDInfo `json:"BfdInfo,omitnil,omitempty" name:"BfdInfo"`
 
 	// NQA configuration information
-	NqaInfo *NQAInfo `json:"NqaInfo,omitnil" name:"NqaInfo"`
+	NqaInfo *NQAInfo `json:"NqaInfo,omitnil,omitempty" name:"NqaInfo"`
 }
 
 type CreateDirectConnectTunnelRequest struct {
 	*tchttp.BaseRequest
 	
 	// Direct Connect ID, such as `dc-kd7d06of`.
-	DirectConnectId *string `json:"DirectConnectId,omitnil" name:"DirectConnectId"`
+	DirectConnectId *string `json:"DirectConnectId,omitnil,omitempty" name:"DirectConnectId"`
 
 	// Dedicated tunnel name.
-	DirectConnectTunnelName *string `json:"DirectConnectTunnelName,omitnil" name:"DirectConnectTunnelName"`
+	DirectConnectTunnelName *string `json:"DirectConnectTunnelName,omitnil,omitempty" name:"DirectConnectTunnelName"`
 
 	// Connection owner, who is the current customer by default.
 	// The developer account ID should be entered for shared connections.
-	DirectConnectOwnerAccount *string `json:"DirectConnectOwnerAccount,omitnil" name:"DirectConnectOwnerAccount"`
+	DirectConnectOwnerAccount *string `json:"DirectConnectOwnerAccount,omitnil,omitempty" name:"DirectConnectOwnerAccount"`
 
 	// Network type. Valid values: VPC, BMVPC, CCN. Default value: VPC.
 	// VPC: Virtual Private Cloud.
 	// BMVPC: BM VPC.
 	// CCN: Cloud Connect Network.
-	NetworkType *string `json:"NetworkType,omitnil" name:"NetworkType"`
+	NetworkType *string `json:"NetworkType,omitnil,omitempty" name:"NetworkType"`
 
 	// Network region.
-	NetworkRegion *string `json:"NetworkRegion,omitnil" name:"NetworkRegion"`
+	NetworkRegion *string `json:"NetworkRegion,omitnil,omitempty" name:"NetworkRegion"`
 
 	// Unified VPC ID or BMVPC ID.
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Direct connect gateway ID, such as `dcg-d545ddf`.
-	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitnil" name:"DirectConnectGatewayId"`
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitnil,omitempty" name:"DirectConnectGatewayId"`
 
 	// Direct Connect bandwidth in Mbps.
 	// Default value: connection bandwidth value.
-	Bandwidth *int64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// BGP: BGP routing.
 	// STATIC: Static routing.
 	// Default value: BGP routing.
-	RouteType *string `json:"RouteType,omitnil" name:"RouteType"`
+	RouteType *string `json:"RouteType,omitnil,omitempty" name:"RouteType"`
 
 	// BgpPeer, which is BGP information on the user side and includes Asn and AuthKey.
-	BgpPeer *BgpPeer `json:"BgpPeer,omitnil" name:"BgpPeer"`
+	BgpPeer *BgpPeer `json:"BgpPeer,omitnil,omitempty" name:"BgpPeer"`
 
 	// Static routing, i.e., IP range of the user's IDC.
-	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitnil" name:"RouteFilterPrefixes"`
+	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitnil,omitempty" name:"RouteFilterPrefixes"`
 
 	// VLAN. Value range: 0-3,000.
 	// 0: sub-interface not enabled.
 	// Default value: Non-zero.
-	Vlan *int64 `json:"Vlan,omitnil" name:"Vlan"`
+	Vlan *int64 `json:"Vlan,omitnil,omitempty" name:"Vlan"`
 
 	// TencentAddress: Tencent-side IP address.
-	TencentAddress *string `json:"TencentAddress,omitnil" name:"TencentAddress"`
+	TencentAddress *string `json:"TencentAddress,omitnil,omitempty" name:"TencentAddress"`
 
 	// CustomerAddress: User-side IP address.
-	CustomerAddress *string `json:"CustomerAddress,omitnil" name:"CustomerAddress"`
+	CustomerAddress *string `json:"CustomerAddress,omitnil,omitempty" name:"CustomerAddress"`
 
 	// TencentBackupAddress, i.e., Tencent-side standby IP address
-	TencentBackupAddress *string `json:"TencentBackupAddress,omitnil" name:"TencentBackupAddress"`
+	TencentBackupAddress *string `json:"TencentBackupAddress,omitnil,omitempty" name:"TencentBackupAddress"`
 
 	// Cloud Attached Connection Service ID
-	CloudAttachId *string `json:"CloudAttachId,omitnil" name:"CloudAttachId"`
+	CloudAttachId *string `json:"CloudAttachId,omitnil,omitempty" name:"CloudAttachId"`
 
 	// Whether to enable BFD
-	BfdEnable *int64 `json:"BfdEnable,omitnil" name:"BfdEnable"`
+	BfdEnable *int64 `json:"BfdEnable,omitnil,omitempty" name:"BfdEnable"`
 
 	// Whether to enable NQA
-	NqaEnable *int64 `json:"NqaEnable,omitnil" name:"NqaEnable"`
+	NqaEnable *int64 `json:"NqaEnable,omitnil,omitempty" name:"NqaEnable"`
 
 	// BFD configuration information
-	BfdInfo *BFDInfo `json:"BfdInfo,omitnil" name:"BfdInfo"`
+	BfdInfo *BFDInfo `json:"BfdInfo,omitnil,omitempty" name:"BfdInfo"`
 
 	// NQA configuration information
-	NqaInfo *NQAInfo `json:"NqaInfo,omitnil" name:"NqaInfo"`
+	NqaInfo *NQAInfo `json:"NqaInfo,omitnil,omitempty" name:"NqaInfo"`
 }
 
 func (r *CreateDirectConnectTunnelRequest) ToJsonString() string {
@@ -575,10 +575,10 @@ func (r *CreateDirectConnectTunnelRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateDirectConnectTunnelResponseParams struct {
 	// Dedicated tunnel ID.
-	DirectConnectTunnelIdSet []*string `json:"DirectConnectTunnelIdSet,omitnil" name:"DirectConnectTunnelIdSet"`
+	DirectConnectTunnelIdSet []*string `json:"DirectConnectTunnelIdSet,omitnil,omitempty" name:"DirectConnectTunnelIdSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateDirectConnectTunnelResponse struct {
@@ -600,14 +600,14 @@ func (r *CreateDirectConnectTunnelResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteDirectConnectRequestParams struct {
 	// Connection ID.
-	DirectConnectId *string `json:"DirectConnectId,omitnil" name:"DirectConnectId"`
+	DirectConnectId *string `json:"DirectConnectId,omitnil,omitempty" name:"DirectConnectId"`
 }
 
 type DeleteDirectConnectRequest struct {
 	*tchttp.BaseRequest
 	
 	// Connection ID.
-	DirectConnectId *string `json:"DirectConnectId,omitnil" name:"DirectConnectId"`
+	DirectConnectId *string `json:"DirectConnectId,omitnil,omitempty" name:"DirectConnectId"`
 }
 
 func (r *DeleteDirectConnectRequest) ToJsonString() string {
@@ -632,7 +632,7 @@ func (r *DeleteDirectConnectRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteDirectConnectResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteDirectConnectResponse struct {
@@ -654,14 +654,14 @@ func (r *DeleteDirectConnectResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteDirectConnectTunnelRequestParams struct {
 	// Dedicated tunnel ID.
-	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil" name:"DirectConnectTunnelId"`
+	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil,omitempty" name:"DirectConnectTunnelId"`
 }
 
 type DeleteDirectConnectTunnelRequest struct {
 	*tchttp.BaseRequest
 	
 	// Dedicated tunnel ID.
-	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil" name:"DirectConnectTunnelId"`
+	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil,omitempty" name:"DirectConnectTunnelId"`
 }
 
 func (r *DeleteDirectConnectTunnelRequest) ToJsonString() string {
@@ -686,7 +686,7 @@ func (r *DeleteDirectConnectTunnelRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteDirectConnectTunnelResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteDirectConnectTunnelResponse struct {
@@ -710,13 +710,13 @@ type DescribeAccessPointsRequestParams struct {
 	// Access point region, which can be queried through `DescribeRegions`.
 	// 
 	// You can call `DescribeRegions` to get the region ID.
-	RegionId *string `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of results to be returned. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeAccessPointsRequest struct {
@@ -725,13 +725,13 @@ type DescribeAccessPointsRequest struct {
 	// Access point region, which can be queried through `DescribeRegions`.
 	// 
 	// You can call `DescribeRegions` to get the region ID.
-	RegionId *string `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of results to be returned. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeAccessPointsRequest) ToJsonString() string {
@@ -758,13 +758,13 @@ func (r *DescribeAccessPointsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAccessPointsResponseParams struct {
 	// Access point information.
-	AccessPointSet []*AccessPoint `json:"AccessPointSet,omitnil" name:"AccessPointSet"`
+	AccessPointSet []*AccessPoint `json:"AccessPointSet,omitnil,omitempty" name:"AccessPointSet"`
 
 	// Number of eligible access points.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeAccessPointsResponse struct {
@@ -790,16 +790,16 @@ type DescribeDirectConnectTunnelsRequestParams struct {
 	// <li> direct-connect-tunnel-name: Dedicated tunnel name.</li>
 	// <li> direct-connect-tunnel-id: Dedicated tunnel instance ID, such as `dcx-abcdefgh`.</li>
 	// <li>direct-connect-id: Connection instance ID, such as `dc-abcdefgh`.</li>
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Array of dedicated tunnel IDs.
-	DirectConnectTunnelIds []*string `json:"DirectConnectTunnelIds,omitnil" name:"DirectConnectTunnelIds"`
+	DirectConnectTunnelIds []*string `json:"DirectConnectTunnelIds,omitnil,omitempty" name:"DirectConnectTunnelIds"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeDirectConnectTunnelsRequest struct {
@@ -810,16 +810,16 @@ type DescribeDirectConnectTunnelsRequest struct {
 	// <li> direct-connect-tunnel-name: Dedicated tunnel name.</li>
 	// <li> direct-connect-tunnel-id: Dedicated tunnel instance ID, such as `dcx-abcdefgh`.</li>
 	// <li>direct-connect-id: Connection instance ID, such as `dc-abcdefgh`.</li>
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Array of dedicated tunnel IDs.
-	DirectConnectTunnelIds []*string `json:"DirectConnectTunnelIds,omitnil" name:"DirectConnectTunnelIds"`
+	DirectConnectTunnelIds []*string `json:"DirectConnectTunnelIds,omitnil,omitempty" name:"DirectConnectTunnelIds"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeDirectConnectTunnelsRequest) ToJsonString() string {
@@ -847,13 +847,13 @@ func (r *DescribeDirectConnectTunnelsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDirectConnectTunnelsResponseParams struct {
 	// List of dedicated tunnels.
-	DirectConnectTunnelSet []*DirectConnectTunnel `json:"DirectConnectTunnelSet,omitnil" name:"DirectConnectTunnelSet"`
+	DirectConnectTunnelSet []*DirectConnectTunnel `json:"DirectConnectTunnelSet,omitnil,omitempty" name:"DirectConnectTunnelSet"`
 
 	// Number of eligible dedicated tunnels.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDirectConnectTunnelsResponse struct {
@@ -875,32 +875,32 @@ func (r *DescribeDirectConnectTunnelsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDirectConnectsRequestParams struct {
 	// Filter conditions:
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Array of connection IDs.
-	DirectConnectIds []*string `json:"DirectConnectIds,omitnil" name:"DirectConnectIds"`
+	DirectConnectIds []*string `json:"DirectConnectIds,omitnil,omitempty" name:"DirectConnectIds"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeDirectConnectsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Filter conditions:
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Array of connection IDs.
-	DirectConnectIds []*string `json:"DirectConnectIds,omitnil" name:"DirectConnectIds"`
+	DirectConnectIds []*string `json:"DirectConnectIds,omitnil,omitempty" name:"DirectConnectIds"`
 
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 func (r *DescribeDirectConnectsRequest) ToJsonString() string {
@@ -928,17 +928,17 @@ func (r *DescribeDirectConnectsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDirectConnectsResponseParams struct {
 	// List of connections.
-	DirectConnectSet []*DirectConnect `json:"DirectConnectSet,omitnil" name:"DirectConnectSet"`
+	DirectConnectSet []*DirectConnect `json:"DirectConnectSet,omitnil,omitempty" name:"DirectConnectSet"`
 
 	// Number of eligible connection lists.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Whether all connections under the account have the service agreement signed.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	AllSignLaw *bool `json:"AllSignLaw,omitnil" name:"AllSignLaw"`
+	AllSignLaw *bool `json:"AllSignLaw,omitnil,omitempty" name:"AllSignLaw"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDirectConnectsResponse struct {
@@ -990,26 +990,26 @@ func (r *DescribeInternetAddressQuotaRequest) FromJsonString(s string) error {
 type DescribeInternetAddressQuotaResponseParams struct {
 	// Minimum prefix length allowed for a public IPv6 address
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Ipv6PrefixLen *int64 `json:"Ipv6PrefixLen,omitnil" name:"Ipv6PrefixLen"`
+	Ipv6PrefixLen *int64 `json:"Ipv6PrefixLen,omitnil,omitempty" name:"Ipv6PrefixLen"`
 
 	// Quota of BGP IPv4 addresses
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Ipv4BgpQuota *int64 `json:"Ipv4BgpQuota,omitnil" name:"Ipv4BgpQuota"`
+	Ipv4BgpQuota *int64 `json:"Ipv4BgpQuota,omitnil,omitempty" name:"Ipv4BgpQuota"`
 
 	// Quota of non-BGP IPv4 addresses
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Ipv4OtherQuota *int64 `json:"Ipv4OtherQuota,omitnil" name:"Ipv4OtherQuota"`
+	Ipv4OtherQuota *int64 `json:"Ipv4OtherQuota,omitnil,omitempty" name:"Ipv4OtherQuota"`
 
 	// Used number of BGP IPv4 addresses
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Ipv4BgpNum *int64 `json:"Ipv4BgpNum,omitnil" name:"Ipv4BgpNum"`
+	Ipv4BgpNum *int64 `json:"Ipv4BgpNum,omitnil,omitempty" name:"Ipv4BgpNum"`
 
 	// Used number of non-BGP IPv4 addresses
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Ipv4OtherNum *int64 `json:"Ipv4OtherNum,omitnil" name:"Ipv4OtherNum"`
+	Ipv4OtherNum *int64 `json:"Ipv4OtherNum,omitnil,omitempty" name:"Ipv4OtherNum"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInternetAddressQuotaResponse struct {
@@ -1031,10 +1031,10 @@ func (r *DescribeInternetAddressQuotaResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInternetAddressRequestParams struct {
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter conditions:
 	// <li>AddrType, address type. Valid values: 0: BGP; 1: China Telecom; 2: China Mobile; 3: China Unicom</li>
@@ -1042,17 +1042,17 @@ type DescribeInternetAddressRequestParams struct {
 	// <li>Status, address status. Valid values: 0: in use; 1: disabled; 2: returned</li>
 	// <li>Subnet, public IP address array</li>
 	// <InstanceIds>Public IP address ID array</li>
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribeInternetAddressRequest struct {
 	*tchttp.BaseRequest
 	
 	// Offset. Default value: 0.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *int64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Filter conditions:
 	// <li>AddrType, address type. Valid values: 0: BGP; 1: China Telecom; 2: China Mobile; 3: China Unicom</li>
@@ -1060,7 +1060,7 @@ type DescribeInternetAddressRequest struct {
 	// <li>Status, address status. Valid values: 0: in use; 1: disabled; 2: returned</li>
 	// <li>Subnet, public IP address array</li>
 	// <InstanceIds>Public IP address ID array</li>
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 func (r *DescribeInternetAddressRequest) ToJsonString() string {
@@ -1087,14 +1087,14 @@ func (r *DescribeInternetAddressRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInternetAddressResponseParams struct {
 	// Number of public IP addresses for internet tunnels
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of the public IP addresses for internet tunnels
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Subnets []*InternetAddressDetail `json:"Subnets,omitnil" name:"Subnets"`
+	Subnets []*InternetAddressDetail `json:"Subnets,omitnil,omitempty" name:"Subnets"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInternetAddressResponse struct {
@@ -1145,14 +1145,14 @@ func (r *DescribeInternetAddressStatisticsRequest) FromJsonString(s string) erro
 // Predefined struct for user
 type DescribeInternetAddressStatisticsResponseParams struct {
 	// Number of public IP address statistics for internet tunnels
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of the public IP address statistics for internet tunnels
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	InternetAddressStatistics []*InternetAddressStatistics `json:"InternetAddressStatistics,omitnil" name:"InternetAddressStatistics"`
+	InternetAddressStatistics []*InternetAddressStatistics `json:"InternetAddressStatistics,omitnil,omitempty" name:"InternetAddressStatistics"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInternetAddressStatisticsResponse struct {
@@ -1173,13 +1173,13 @@ func (r *DescribeInternetAddressStatisticsResponse) FromJsonString(s string) err
 
 type DirectConnect struct {
 	// Connection ID.
-	DirectConnectId *string `json:"DirectConnectId,omitnil" name:"DirectConnectId"`
+	DirectConnectId *string `json:"DirectConnectId,omitnil,omitempty" name:"DirectConnectId"`
 
 	// Connection name.
-	DirectConnectName *string `json:"DirectConnectName,omitnil" name:"DirectConnectName"`
+	DirectConnectName *string `json:"DirectConnectName,omitnil,omitempty" name:"DirectConnectName"`
 
 	// Access point ID of a connection.
-	AccessPointId *string `json:"AccessPointId,omitnil" name:"AccessPointId"`
+	AccessPointId *string `json:"AccessPointId,omitnil,omitempty" name:"AccessPointId"`
 
 	// Connection status.
 	// PENDING: Applying. 
@@ -1190,119 +1190,119 @@ type DirectConnect struct {
 	// AVAILABLE: Available.  
 	// DELETING: Deleting.
 	// DELETED: Deleted.
-	State *string `json:"State,omitnil" name:"State"`
+	State *string `json:"State,omitnil,omitempty" name:"State"`
 
 	// Connection creation time.
-	CreatedTime *string `json:"CreatedTime,omitnil" name:"CreatedTime"`
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
 	// Connection activation time.
-	EnabledTime *string `json:"EnabledTime,omitnil" name:"EnabledTime"`
+	EnabledTime *string `json:"EnabledTime,omitnil,omitempty" name:"EnabledTime"`
 
 	// ISP that provides connections. Valid values: ChinaTelecom (China Telecom), ChinaMobile (China Mobile), ChinaUnicom (China Unicom), In-houseWiring (in-house wiring), ChinaOther (other Chinese ISPs), InternationalOperator (international ISPs).
-	LineOperator *string `json:"LineOperator,omitnil" name:"LineOperator"`
+	LineOperator *string `json:"LineOperator,omitnil,omitempty" name:"LineOperator"`
 
 	// Location of a local IDC.
-	Location *string `json:"Location,omitnil" name:"Location"`
+	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
 
 	// Connection port bandwidth in Mbps.
-	Bandwidth *int64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// User-side port type of a connection. Valid values: 100Base-T (100-Megabit electrical Ethernet interface), 1000Base-T (1-Gigabit electrical Ethernet interface; it is the default value), 1000Base-LX (1-Gigabit single-mode optical Ethernet interface; 10 KM), 10GBase-T (10-Gigabit electrical Ethernet interface), 10GBase-LR (10-Gigabit single-mode optical Ethernet interface; 10 KM).
-	PortType *string `json:"PortType,omitnil" name:"PortType"`
+	PortType *string `json:"PortType,omitnil,omitempty" name:"PortType"`
 
 	// Circuit code of a connection, which is provided by the ISP or service provider.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CircuitCode *string `json:"CircuitCode,omitnil" name:"CircuitCode"`
+	CircuitCode *string `json:"CircuitCode,omitnil,omitempty" name:"CircuitCode"`
 
 	// ID of a redundant connection.
-	RedundantDirectConnectId *string `json:"RedundantDirectConnectId,omitnil" name:"RedundantDirectConnectId"`
+	RedundantDirectConnectId *string `json:"RedundantDirectConnectId,omitnil,omitempty" name:"RedundantDirectConnectId"`
 
 	// VLAN for connection debugging, which is enabled and automatically assigned by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Vlan *int64 `json:"Vlan,omitnil" name:"Vlan"`
+	Vlan *int64 `json:"Vlan,omitnil,omitempty" name:"Vlan"`
 
 	// Tencent-side IP address for connection debugging.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TencentAddress *string `json:"TencentAddress,omitnil" name:"TencentAddress"`
+	TencentAddress *string `json:"TencentAddress,omitnil,omitempty" name:"TencentAddress"`
 
 	// User-side IP address for connection debugging.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CustomerAddress *string `json:"CustomerAddress,omitnil" name:"CustomerAddress"`
+	CustomerAddress *string `json:"CustomerAddress,omitnil,omitempty" name:"CustomerAddress"`
 
 	// Name of the connection applicant, which is obtained from the account system by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CustomerName *string `json:"CustomerName,omitnil" name:"CustomerName"`
+	CustomerName *string `json:"CustomerName,omitnil,omitempty" name:"CustomerName"`
 
 	// Email address of the connection applicant, which is obtained from the account system by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CustomerContactMail *string `json:"CustomerContactMail,omitnil" name:"CustomerContactMail"`
+	CustomerContactMail *string `json:"CustomerContactMail,omitnil,omitempty" name:"CustomerContactMail"`
 
 	// Contact number of the connection applicant, which is obtained from the account system by default.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CustomerContactNumber *string `json:"CustomerContactNumber,omitnil" name:"CustomerContactNumber"`
+	CustomerContactNumber *string `json:"CustomerContactNumber,omitnil,omitempty" name:"CustomerContactNumber"`
 
 	// Connection expiration time.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ExpiredTime *string `json:"ExpiredTime,omitnil" name:"ExpiredTime"`
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 
 	// Connection billing mode. NON_RECURRING_CHARGE: One-time charge for accessing service
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ChargeType *string `json:"ChargeType,omitnil" name:"ChargeType"`
+	ChargeType *string `json:"ChargeType,omitnil,omitempty" name:"ChargeType"`
 
 	// Fault reporting contact person.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	FaultReportContactPerson *string `json:"FaultReportContactPerson,omitnil" name:"FaultReportContactPerson"`
+	FaultReportContactPerson *string `json:"FaultReportContactPerson,omitnil,omitempty" name:"FaultReportContactPerson"`
 
 	// Fault reporting contact number.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitnil" name:"FaultReportContactNumber"`
+	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitnil,omitempty" name:"FaultReportContactNumber"`
 
 	// Tag key-value pair
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	TagSet []*Tag `json:"TagSet,omitnil" name:"TagSet"`
+	TagSet []*Tag `json:"TagSet,omitnil,omitempty" name:"TagSet"`
 
 	// Access point type of a connection.
-	AccessPointType *string `json:"AccessPointType,omitnil" name:"AccessPointType"`
+	AccessPointType *string `json:"AccessPointType,omitnil,omitempty" name:"AccessPointType"`
 
 	// IDC city.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	IdcCity *string `json:"IdcCity,omitnil" name:"IdcCity"`
+	IdcCity *string `json:"IdcCity,omitnil,omitempty" name:"IdcCity"`
 
 	// Billing status
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	ChargeState *string `json:"ChargeState,omitnil" name:"ChargeState"`
+	ChargeState *string `json:"ChargeState,omitnil,omitempty" name:"ChargeState"`
 
 	// Connection activation time.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Whether the connection has the service agreement signed.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	SignLaw *bool `json:"SignLaw,omitnil" name:"SignLaw"`
+	SignLaw *bool `json:"SignLaw,omitnil,omitempty" name:"SignLaw"`
 
 	// Whether the connection is an edge zone.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	LocalZone *bool `json:"LocalZone,omitnil" name:"LocalZone"`
+	LocalZone *bool `json:"LocalZone,omitnil,omitempty" name:"LocalZone"`
 
 	// Number of dedicated tunnels with disabled VLAN in the connection
 	// Note: this field may return `null`, indicating that no valid value can be found.
-	VlanZeroDirectConnectTunnelCount *uint64 `json:"VlanZeroDirectConnectTunnelCount,omitnil" name:"VlanZeroDirectConnectTunnelCount"`
+	VlanZeroDirectConnectTunnelCount *uint64 `json:"VlanZeroDirectConnectTunnelCount,omitnil,omitempty" name:"VlanZeroDirectConnectTunnelCount"`
 
 	// Number of dedicated tunnels with enabled VLAN in the connection
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	OtherVlanDirectConnectTunnelCount *uint64 `json:"OtherVlanDirectConnectTunnelCount,omitnil" name:"OtherVlanDirectConnectTunnelCount"`
+	OtherVlanDirectConnectTunnelCount *uint64 `json:"OtherVlanDirectConnectTunnelCount,omitnil,omitempty" name:"OtherVlanDirectConnectTunnelCount"`
 
 	// Minimum bandwidth of the connection
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	MinBandwidth *uint64 `json:"MinBandwidth,omitnil" name:"MinBandwidth"`
+	MinBandwidth *uint64 `json:"MinBandwidth,omitnil,omitempty" name:"MinBandwidth"`
 }
 
 type DirectConnectTunnel struct {
 	// Dedicated tunnel ID.
-	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil" name:"DirectConnectTunnelId"`
+	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil,omitempty" name:"DirectConnectTunnelId"`
 
 	// Connection ID.
-	DirectConnectId *string `json:"DirectConnectId,omitnil" name:"DirectConnectId"`
+	DirectConnectId *string `json:"DirectConnectId,omitnil,omitempty" name:"DirectConnectId"`
 
 	// Dedicated tunnel status.
 	// AVAILABLE: Ready or connected.
@@ -1314,112 +1314,112 @@ type DirectConnectTunnel struct {
 	// DELETED: Deleted.
 	// COMFIRMING: To be accepted.
 	// REJECTED: Rejected.
-	State *string `json:"State,omitnil" name:"State"`
+	State *string `json:"State,omitnil,omitempty" name:"State"`
 
 	// Connection owner, i.e., developer account ID.
-	DirectConnectOwnerAccount *string `json:"DirectConnectOwnerAccount,omitnil" name:"DirectConnectOwnerAccount"`
+	DirectConnectOwnerAccount *string `json:"DirectConnectOwnerAccount,omitnil,omitempty" name:"DirectConnectOwnerAccount"`
 
 	// Dedicated tunnel owner, i.e., developer account ID.
-	OwnerAccount *string `json:"OwnerAccount,omitnil" name:"OwnerAccount"`
+	OwnerAccount *string `json:"OwnerAccount,omitnil,omitempty" name:"OwnerAccount"`
 
 	// Network type. Valid values: VPC, BMVPC, CCN.
 	//  VPC: Virtual Private Cloud; BMVPC: BM VPC; CCN: Cloud Connect Network.
-	NetworkType *string `json:"NetworkType,omitnil" name:"NetworkType"`
+	NetworkType *string `json:"NetworkType,omitnil,omitempty" name:"NetworkType"`
 
 	// Network of the VPC region, such as `ap-guangzhou`.
-	NetworkRegion *string `json:"NetworkRegion,omitnil" name:"NetworkRegion"`
+	NetworkRegion *string `json:"NetworkRegion,omitnil,omitempty" name:"NetworkRegion"`
 
 	// Unified VPC ID or BMVPC ID.
-	VpcId *string `json:"VpcId,omitnil" name:"VpcId"`
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
 	// Direct connect gateway ID.
-	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitnil" name:"DirectConnectGatewayId"`
+	DirectConnectGatewayId *string `json:"DirectConnectGatewayId,omitnil,omitempty" name:"DirectConnectGatewayId"`
 
 	// BGP: BGP routing; STATIC: Static routing. Default value: BGP routing.
-	RouteType *string `json:"RouteType,omitnil" name:"RouteType"`
+	RouteType *string `json:"RouteType,omitnil,omitempty" name:"RouteType"`
 
 	// User-side BGP, including Asn and AuthKey.
-	BgpPeer *BgpPeer `json:"BgpPeer,omitnil" name:"BgpPeer"`
+	BgpPeer *BgpPeer `json:"BgpPeer,omitnil,omitempty" name:"BgpPeer"`
 
 	// User-side IP range.
-	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitnil" name:"RouteFilterPrefixes"`
+	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitnil,omitempty" name:"RouteFilterPrefixes"`
 
 	// VLAN of a dedicated tunnel.
-	Vlan *int64 `json:"Vlan,omitnil" name:"Vlan"`
+	Vlan *int64 `json:"Vlan,omitnil,omitempty" name:"Vlan"`
 
 	// TencentAddress: Tencent-side IP address.
-	TencentAddress *string `json:"TencentAddress,omitnil" name:"TencentAddress"`
+	TencentAddress *string `json:"TencentAddress,omitnil,omitempty" name:"TencentAddress"`
 
 	// CustomerAddress: User-side IP address.
-	CustomerAddress *string `json:"CustomerAddress,omitnil" name:"CustomerAddress"`
+	CustomerAddress *string `json:"CustomerAddress,omitnil,omitempty" name:"CustomerAddress"`
 
 	// Dedicated tunnel name.
-	DirectConnectTunnelName *string `json:"DirectConnectTunnelName,omitnil" name:"DirectConnectTunnelName"`
+	DirectConnectTunnelName *string `json:"DirectConnectTunnelName,omitnil,omitempty" name:"DirectConnectTunnelName"`
 
 	// Creation time of a dedicated tunnel.
-	CreatedTime *string `json:"CreatedTime,omitnil" name:"CreatedTime"`
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
 	// Bandwidth value of a dedicated tunnel.
-	Bandwidth *int64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// Tag value of a dedicated tunnel.
-	TagSet []*Tag `json:"TagSet,omitnil" name:"TagSet"`
+	TagSet []*Tag `json:"TagSet,omitnil,omitempty" name:"TagSet"`
 
 	// Associated custom network probe ID
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	NetDetectId *string `json:"NetDetectId,omitnil" name:"NetDetectId"`
+	NetDetectId *string `json:"NetDetectId,omitnil,omitempty" name:"NetDetectId"`
 
 	// BGP community switch
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	EnableBGPCommunity *bool `json:"EnableBGPCommunity,omitnil" name:"EnableBGPCommunity"`
+	EnableBGPCommunity *bool `json:"EnableBGPCommunity,omitnil,omitempty" name:"EnableBGPCommunity"`
 
 	// Whether it is a NAT tunnel
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	NatType *int64 `json:"NatType,omitnil" name:"NatType"`
+	NatType *int64 `json:"NatType,omitnil,omitempty" name:"NatType"`
 
 	// VPC region abbreviation, such as `gz`, `cd`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	VpcRegion *string `json:"VpcRegion,omitnil" name:"VpcRegion"`
+	VpcRegion *string `json:"VpcRegion,omitnil,omitempty" name:"VpcRegion"`
 
 	// Whether to enable BFD
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	BfdEnable *int64 `json:"BfdEnable,omitnil" name:"BfdEnable"`
+	BfdEnable *int64 `json:"BfdEnable,omitnil,omitempty" name:"BfdEnable"`
 
 	// Access point type of a dedicated tunnel.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	AccessPointType *string `json:"AccessPointType,omitnil" name:"AccessPointType"`
+	AccessPointType *string `json:"AccessPointType,omitnil,omitempty" name:"AccessPointType"`
 
 	// Direct connect gateway name.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	DirectConnectGatewayName *string `json:"DirectConnectGatewayName,omitnil" name:"DirectConnectGatewayName"`
+	DirectConnectGatewayName *string `json:"DirectConnectGatewayName,omitnil,omitempty" name:"DirectConnectGatewayName"`
 
 	// VPC name.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	VpcName *string `json:"VpcName,omitnil" name:"VpcName"`
+	VpcName *string `json:"VpcName,omitnil,omitempty" name:"VpcName"`
 
 	// Backup IP address on the Tencent side.
-	TencentBackupAddress *string `json:"TencentBackupAddress,omitnil" name:"TencentBackupAddress"`
+	TencentBackupAddress *string `json:"TencentBackupAddress,omitnil,omitempty" name:"TencentBackupAddress"`
 
 	// Whether the connection associated with the dedicated tunnel has the service agreement signed.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	SignLaw *bool `json:"SignLaw,omitnil" name:"SignLaw"`
+	SignLaw *bool `json:"SignLaw,omitnil,omitempty" name:"SignLaw"`
 
 	// Cloud Attached Connection Service ID
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	CloudAttachId *string `json:"CloudAttachId,omitnil" name:"CloudAttachId"`
+	CloudAttachId *string `json:"CloudAttachId,omitnil,omitempty" name:"CloudAttachId"`
 }
 
 // Predefined struct for user
 type DisableInternetAddressRequestParams struct {
 	// ID of the internet tunnel’s public IP address
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type DisableInternetAddressRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the internet tunnel’s public IP address
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *DisableInternetAddressRequest) ToJsonString() string {
@@ -1444,7 +1444,7 @@ func (r *DisableInternetAddressRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DisableInternetAddressResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DisableInternetAddressResponse struct {
@@ -1466,14 +1466,14 @@ func (r *DisableInternetAddressResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type EnableInternetAddressRequestParams struct {
 	// ID of the internet tunnel’s public IP address
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type EnableInternetAddressRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the internet tunnel’s public IP address
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *EnableInternetAddressRequest) ToJsonString() string {
@@ -1498,7 +1498,7 @@ func (r *EnableInternetAddressRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type EnableInternetAddressResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type EnableInternetAddressResponse struct {
@@ -1519,159 +1519,159 @@ func (r *EnableInternetAddressResponse) FromJsonString(s string) error {
 
 type Filter struct {
 	// Fields to be filtered.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Filter values of the field.
-	Values []*string `json:"Values,omitnil" name:"Values"`
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
 type InternetAddressDetail struct {
 	// Internet tunnel’s IP address ID
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Internet tunnel’s network address
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Subnet *string `json:"Subnet,omitnil" name:"Subnet"`
+	Subnet *string `json:"Subnet,omitnil,omitempty" name:"Subnet"`
 
 	// Mask length of a network address
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	MaskLen *int64 `json:"MaskLen,omitnil" name:"MaskLen"`
+	MaskLen *int64 `json:"MaskLen,omitnil,omitempty" name:"MaskLen"`
 
 	// Address type. Valid values: 0: BGP
 	// 1: China Telecom
 	// 2: China Mobile
 	// 3: China Unicom
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	AddrType *int64 `json:"AddrType,omitnil" name:"AddrType"`
+	AddrType *int64 `json:"AddrType,omitnil,omitempty" name:"AddrType"`
 
 	// Address status. Valid values: 0: in use
 	// 1: disabled
 	// 2: returned
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Applied at
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ApplyTime *string `json:"ApplyTime,omitnil" name:"ApplyTime"`
+	ApplyTime *string `json:"ApplyTime,omitnil,omitempty" name:"ApplyTime"`
 
 	// Disabled at
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	StopTime *string `json:"StopTime,omitnil" name:"StopTime"`
+	StopTime *string `json:"StopTime,omitnil,omitempty" name:"StopTime"`
 
 	// Returned at
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ReleaseTime *string `json:"ReleaseTime,omitnil" name:"ReleaseTime"`
+	ReleaseTime *string `json:"ReleaseTime,omitnil,omitempty" name:"ReleaseTime"`
 
 	// Region
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// User ID
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	AppId *int64 `json:"AppId,omitnil" name:"AppId"`
+	AppId *int64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// Address protocol. Valid values: 0: IPv4; 1: IPv6
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	AddrProto *int64 `json:"AddrProto,omitnil" name:"AddrProto"`
+	AddrProto *int64 `json:"AddrProto,omitnil,omitempty" name:"AddrProto"`
 
 	// Retention period of a released IP address, in days
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	ReserveTime *int64 `json:"ReserveTime,omitnil" name:"ReserveTime"`
+	ReserveTime *int64 `json:"ReserveTime,omitnil,omitempty" name:"ReserveTime"`
 }
 
 type InternetAddressStatistics struct {
 	// Region
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Number of public IP addresses for internet tunnels
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	SubnetNum *int64 `json:"SubnetNum,omitnil" name:"SubnetNum"`
+	SubnetNum *int64 `json:"SubnetNum,omitnil,omitempty" name:"SubnetNum"`
 }
 
 // Predefined struct for user
 type ModifyDirectConnectAttributeRequestParams struct {
 	// Connection ID.
-	DirectConnectId *string `json:"DirectConnectId,omitnil" name:"DirectConnectId"`
+	DirectConnectId *string `json:"DirectConnectId,omitnil,omitempty" name:"DirectConnectId"`
 
 	// Connection name.
-	DirectConnectName *string `json:"DirectConnectName,omitnil" name:"DirectConnectName"`
+	DirectConnectName *string `json:"DirectConnectName,omitnil,omitempty" name:"DirectConnectName"`
 
 	// Circuit code of a connection, which is provided by the ISP or connection provider.
-	CircuitCode *string `json:"CircuitCode,omitnil" name:"CircuitCode"`
+	CircuitCode *string `json:"CircuitCode,omitnil,omitempty" name:"CircuitCode"`
 
 	// VLAN for connection debugging.
-	Vlan *int64 `json:"Vlan,omitnil" name:"Vlan"`
+	Vlan *int64 `json:"Vlan,omitnil,omitempty" name:"Vlan"`
 
 	// Tencent-side IP address for connection debugging.
-	TencentAddress *string `json:"TencentAddress,omitnil" name:"TencentAddress"`
+	TencentAddress *string `json:"TencentAddress,omitnil,omitempty" name:"TencentAddress"`
 
 	// User-side IP address for connection debugging.
-	CustomerAddress *string `json:"CustomerAddress,omitnil" name:"CustomerAddress"`
+	CustomerAddress *string `json:"CustomerAddress,omitnil,omitempty" name:"CustomerAddress"`
 
 	// Name of connection applicant, which is obtained from the account system by default.
-	CustomerName *string `json:"CustomerName,omitnil" name:"CustomerName"`
+	CustomerName *string `json:"CustomerName,omitnil,omitempty" name:"CustomerName"`
 
 	// Email address of connection applicant, which is obtained from the account system by default.
-	CustomerContactMail *string `json:"CustomerContactMail,omitnil" name:"CustomerContactMail"`
+	CustomerContactMail *string `json:"CustomerContactMail,omitnil,omitempty" name:"CustomerContactMail"`
 
 	// Contact number of connection applicant, which is obtained from the account system by default.
-	CustomerContactNumber *string `json:"CustomerContactNumber,omitnil" name:"CustomerContactNumber"`
+	CustomerContactNumber *string `json:"CustomerContactNumber,omitnil,omitempty" name:"CustomerContactNumber"`
 
 	// Fault reporting contact person.
-	FaultReportContactPerson *string `json:"FaultReportContactPerson,omitnil" name:"FaultReportContactPerson"`
+	FaultReportContactPerson *string `json:"FaultReportContactPerson,omitnil,omitempty" name:"FaultReportContactPerson"`
 
 	// Fault reporting contact number.
-	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitnil" name:"FaultReportContactNumber"`
+	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitnil,omitempty" name:"FaultReportContactNumber"`
 
 	// Whether the connection applicant has signed the service agreement.
-	SignLaw *bool `json:"SignLaw,omitnil" name:"SignLaw"`
+	SignLaw *bool `json:"SignLaw,omitnil,omitempty" name:"SignLaw"`
 
 	// Connection’s bandwidth
-	Bandwidth *uint64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *uint64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 }
 
 type ModifyDirectConnectAttributeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Connection ID.
-	DirectConnectId *string `json:"DirectConnectId,omitnil" name:"DirectConnectId"`
+	DirectConnectId *string `json:"DirectConnectId,omitnil,omitempty" name:"DirectConnectId"`
 
 	// Connection name.
-	DirectConnectName *string `json:"DirectConnectName,omitnil" name:"DirectConnectName"`
+	DirectConnectName *string `json:"DirectConnectName,omitnil,omitempty" name:"DirectConnectName"`
 
 	// Circuit code of a connection, which is provided by the ISP or connection provider.
-	CircuitCode *string `json:"CircuitCode,omitnil" name:"CircuitCode"`
+	CircuitCode *string `json:"CircuitCode,omitnil,omitempty" name:"CircuitCode"`
 
 	// VLAN for connection debugging.
-	Vlan *int64 `json:"Vlan,omitnil" name:"Vlan"`
+	Vlan *int64 `json:"Vlan,omitnil,omitempty" name:"Vlan"`
 
 	// Tencent-side IP address for connection debugging.
-	TencentAddress *string `json:"TencentAddress,omitnil" name:"TencentAddress"`
+	TencentAddress *string `json:"TencentAddress,omitnil,omitempty" name:"TencentAddress"`
 
 	// User-side IP address for connection debugging.
-	CustomerAddress *string `json:"CustomerAddress,omitnil" name:"CustomerAddress"`
+	CustomerAddress *string `json:"CustomerAddress,omitnil,omitempty" name:"CustomerAddress"`
 
 	// Name of connection applicant, which is obtained from the account system by default.
-	CustomerName *string `json:"CustomerName,omitnil" name:"CustomerName"`
+	CustomerName *string `json:"CustomerName,omitnil,omitempty" name:"CustomerName"`
 
 	// Email address of connection applicant, which is obtained from the account system by default.
-	CustomerContactMail *string `json:"CustomerContactMail,omitnil" name:"CustomerContactMail"`
+	CustomerContactMail *string `json:"CustomerContactMail,omitnil,omitempty" name:"CustomerContactMail"`
 
 	// Contact number of connection applicant, which is obtained from the account system by default.
-	CustomerContactNumber *string `json:"CustomerContactNumber,omitnil" name:"CustomerContactNumber"`
+	CustomerContactNumber *string `json:"CustomerContactNumber,omitnil,omitempty" name:"CustomerContactNumber"`
 
 	// Fault reporting contact person.
-	FaultReportContactPerson *string `json:"FaultReportContactPerson,omitnil" name:"FaultReportContactPerson"`
+	FaultReportContactPerson *string `json:"FaultReportContactPerson,omitnil,omitempty" name:"FaultReportContactPerson"`
 
 	// Fault reporting contact number.
-	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitnil" name:"FaultReportContactNumber"`
+	FaultReportContactNumber *string `json:"FaultReportContactNumber,omitnil,omitempty" name:"FaultReportContactNumber"`
 
 	// Whether the connection applicant has signed the service agreement.
-	SignLaw *bool `json:"SignLaw,omitnil" name:"SignLaw"`
+	SignLaw *bool `json:"SignLaw,omitnil,omitempty" name:"SignLaw"`
 
 	// Connection’s bandwidth
-	Bandwidth *uint64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *uint64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 }
 
 func (r *ModifyDirectConnectAttributeRequest) ToJsonString() string {
@@ -1708,7 +1708,7 @@ func (r *ModifyDirectConnectAttributeRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDirectConnectAttributeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDirectConnectAttributeResponse struct {
@@ -1730,56 +1730,56 @@ func (r *ModifyDirectConnectAttributeResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyDirectConnectTunnelAttributeRequestParams struct {
 	// Dedicated tunnel ID.
-	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil" name:"DirectConnectTunnelId"`
+	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil,omitempty" name:"DirectConnectTunnelId"`
 
 	// Dedicated tunnel name.
-	DirectConnectTunnelName *string `json:"DirectConnectTunnelName,omitnil" name:"DirectConnectTunnelName"`
+	DirectConnectTunnelName *string `json:"DirectConnectTunnelName,omitnil,omitempty" name:"DirectConnectTunnelName"`
 
 	// User-side BGP, including Asn and AuthKey.
-	BgpPeer *BgpPeer `json:"BgpPeer,omitnil" name:"BgpPeer"`
+	BgpPeer *BgpPeer `json:"BgpPeer,omitnil,omitempty" name:"BgpPeer"`
 
 	// User-side IP range.
-	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitnil" name:"RouteFilterPrefixes"`
+	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitnil,omitempty" name:"RouteFilterPrefixes"`
 
 	// Tencent-side IP address.
-	TencentAddress *string `json:"TencentAddress,omitnil" name:"TencentAddress"`
+	TencentAddress *string `json:"TencentAddress,omitnil,omitempty" name:"TencentAddress"`
 
 	// User-side IP address.
-	CustomerAddress *string `json:"CustomerAddress,omitnil" name:"CustomerAddress"`
+	CustomerAddress *string `json:"CustomerAddress,omitnil,omitempty" name:"CustomerAddress"`
 
 	// Bandwidth value of a dedicated tunnel in Mbps.
-	Bandwidth *int64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// Tencent-side standby IP address
-	TencentBackupAddress *string `json:"TencentBackupAddress,omitnil" name:"TencentBackupAddress"`
+	TencentBackupAddress *string `json:"TencentBackupAddress,omitnil,omitempty" name:"TencentBackupAddress"`
 }
 
 type ModifyDirectConnectTunnelAttributeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Dedicated tunnel ID.
-	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil" name:"DirectConnectTunnelId"`
+	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil,omitempty" name:"DirectConnectTunnelId"`
 
 	// Dedicated tunnel name.
-	DirectConnectTunnelName *string `json:"DirectConnectTunnelName,omitnil" name:"DirectConnectTunnelName"`
+	DirectConnectTunnelName *string `json:"DirectConnectTunnelName,omitnil,omitempty" name:"DirectConnectTunnelName"`
 
 	// User-side BGP, including Asn and AuthKey.
-	BgpPeer *BgpPeer `json:"BgpPeer,omitnil" name:"BgpPeer"`
+	BgpPeer *BgpPeer `json:"BgpPeer,omitnil,omitempty" name:"BgpPeer"`
 
 	// User-side IP range.
-	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitnil" name:"RouteFilterPrefixes"`
+	RouteFilterPrefixes []*RouteFilterPrefix `json:"RouteFilterPrefixes,omitnil,omitempty" name:"RouteFilterPrefixes"`
 
 	// Tencent-side IP address.
-	TencentAddress *string `json:"TencentAddress,omitnil" name:"TencentAddress"`
+	TencentAddress *string `json:"TencentAddress,omitnil,omitempty" name:"TencentAddress"`
 
 	// User-side IP address.
-	CustomerAddress *string `json:"CustomerAddress,omitnil" name:"CustomerAddress"`
+	CustomerAddress *string `json:"CustomerAddress,omitnil,omitempty" name:"CustomerAddress"`
 
 	// Bandwidth value of a dedicated tunnel in Mbps.
-	Bandwidth *int64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *int64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// Tencent-side standby IP address
-	TencentBackupAddress *string `json:"TencentBackupAddress,omitnil" name:"TencentBackupAddress"`
+	TencentBackupAddress *string `json:"TencentBackupAddress,omitnil,omitempty" name:"TencentBackupAddress"`
 }
 
 func (r *ModifyDirectConnectTunnelAttributeRequest) ToJsonString() string {
@@ -1811,7 +1811,7 @@ func (r *ModifyDirectConnectTunnelAttributeRequest) FromJsonString(s string) err
 // Predefined struct for user
 type ModifyDirectConnectTunnelAttributeResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyDirectConnectTunnelAttributeResponse struct {
@@ -1832,26 +1832,26 @@ func (r *ModifyDirectConnectTunnelAttributeResponse) FromJsonString(s string) er
 
 type NQAInfo struct {
 	// Number of health checks
-	ProbeFailedTimes *int64 `json:"ProbeFailedTimes,omitnil" name:"ProbeFailedTimes"`
+	ProbeFailedTimes *int64 `json:"ProbeFailedTimes,omitnil,omitempty" name:"ProbeFailedTimes"`
 
 	// Health check interval
-	Interval *int64 `json:"Interval,omitnil" name:"Interval"`
+	Interval *int64 `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// IP address for the health check
-	DestinationIp *string `json:"DestinationIp,omitnil" name:"DestinationIp"`
+	DestinationIp *string `json:"DestinationIp,omitnil,omitempty" name:"DestinationIp"`
 }
 
 // Predefined struct for user
 type RejectDirectConnectTunnelRequestParams struct {
 	// None.
-	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil" name:"DirectConnectTunnelId"`
+	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil,omitempty" name:"DirectConnectTunnelId"`
 }
 
 type RejectDirectConnectTunnelRequest struct {
 	*tchttp.BaseRequest
 	
 	// None.
-	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil" name:"DirectConnectTunnelId"`
+	DirectConnectTunnelId *string `json:"DirectConnectTunnelId,omitnil,omitempty" name:"DirectConnectTunnelId"`
 }
 
 func (r *RejectDirectConnectTunnelRequest) ToJsonString() string {
@@ -1876,7 +1876,7 @@ func (r *RejectDirectConnectTunnelRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RejectDirectConnectTunnelResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RejectDirectConnectTunnelResponse struct {
@@ -1898,14 +1898,14 @@ func (r *RejectDirectConnectTunnelResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ReleaseInternetAddressRequestParams struct {
 	// ID of the internet tunnel’s public IP address
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type ReleaseInternetAddressRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the internet tunnel’s public IP address
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *ReleaseInternetAddressRequest) ToJsonString() string {
@@ -1930,7 +1930,7 @@ func (r *ReleaseInternetAddressRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ReleaseInternetAddressResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ReleaseInternetAddressResponse struct {
@@ -1951,15 +1951,15 @@ func (r *ReleaseInternetAddressResponse) FromJsonString(s string) error {
 
 type RouteFilterPrefix struct {
 	// User-side IP range.
-	Cidr *string `json:"Cidr,omitnil" name:"Cidr"`
+	Cidr *string `json:"Cidr,omitnil,omitempty" name:"Cidr"`
 }
 
 type Tag struct {
 	// Tag key
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Tag value
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }

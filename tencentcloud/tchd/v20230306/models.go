@@ -23,28 +23,28 @@ import (
 // Predefined struct for user
 type DescribeEventsRequestParams struct {
 	// event occurrence date
-	EventDate *string `json:"EventDate,omitnil" name:"EventDate"`
+	EventDate *string `json:"EventDate,omitnil,omitempty" name:"EventDate"`
 
 	// Query by Product ID(s). Product ID examples: cvm, lb, cdb, cdn, crs.
-	ProductIds []*string `json:"ProductIds,omitnil" name:"ProductIds"`
+	ProductIds []*string `json:"ProductIds,omitnil,omitempty" name:"ProductIds"`
 
 	//  1. Query by Region ID(s). Region ID examples: ap-guangzhou、ap-shanghai、ap-singapore.
 	// 2. The region ID for non-region-specific products should be set to non-regional.
-	RegionIds []*string `json:"RegionIds,omitnil" name:"RegionIds"`
+	RegionIds []*string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
 }
 
 type DescribeEventsRequest struct {
 	*tchttp.BaseRequest
 	
 	// event occurrence date
-	EventDate *string `json:"EventDate,omitnil" name:"EventDate"`
+	EventDate *string `json:"EventDate,omitnil,omitempty" name:"EventDate"`
 
 	// Query by Product ID(s). Product ID examples: cvm, lb, cdb, cdn, crs.
-	ProductIds []*string `json:"ProductIds,omitnil" name:"ProductIds"`
+	ProductIds []*string `json:"ProductIds,omitnil,omitempty" name:"ProductIds"`
 
 	//  1. Query by Region ID(s). Region ID examples: ap-guangzhou、ap-shanghai、ap-singapore.
 	// 2. The region ID for non-region-specific products should be set to non-regional.
-	RegionIds []*string `json:"RegionIds,omitnil" name:"RegionIds"`
+	RegionIds []*string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
 }
 
 func (r *DescribeEventsRequest) ToJsonString() string {
@@ -71,10 +71,10 @@ func (r *DescribeEventsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeEventsResponseParams struct {
 	// Detailed event information.
-	Data *ProductEventList `json:"Data,omitnil" name:"Data"`
+	Data *ProductEventList `json:"Data,omitnil,omitempty" name:"Data"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeEventsResponse struct {
@@ -95,29 +95,29 @@ func (r *DescribeEventsResponse) FromJsonString(s string) error {
 
 type EventDetail struct {
 	// Product ID.
-	ProductId *string `json:"ProductId,omitnil" name:"ProductId"`
+	ProductId *string `json:"ProductId,omitnil,omitempty" name:"ProductId"`
 
 	// Product name.
-	ProductName *string `json:"ProductName,omitnil" name:"ProductName"`
+	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
 	// Region ID.
-	RegionId *string `json:"RegionId,omitnil" name:"RegionId"`
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 
 	// Region name.
-	RegionName *string `json:"RegionName,omitnil" name:"RegionName"`
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
 
 	// Event start time.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Event end time. If the event is still ongoing and has not ended, the end time will be empty.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Current status: Normally, Informational, Degradation.
-	CurrentStatus *string `json:"CurrentStatus,omitnil" name:"CurrentStatus"`
+	CurrentStatus *string `json:"CurrentStatus,omitnil,omitempty" name:"CurrentStatus"`
 }
 
 type ProductEventList struct {
 	// Detailed event information.
 	// Note: this field may return null, indicating that no valid value is obtained.
-	EventList []*EventDetail `json:"EventList,omitnil" name:"EventList"`
+	EventList []*EventDetail `json:"EventList,omitnil,omitempty" name:"EventList"`
 }

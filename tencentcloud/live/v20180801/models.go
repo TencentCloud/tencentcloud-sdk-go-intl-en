@@ -23,44 +23,44 @@ import (
 // Predefined struct for user
 type AddDelayLiveStreamRequestParams struct {
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Delay time in seconds, up to 600s.
-	DelayTime *uint64 `json:"DelayTime,omitnil" name:"DelayTime"`
+	DelayTime *uint64 `json:"DelayTime,omitnil,omitempty" name:"DelayTime"`
 
 	// Expiration time of the configured delayed playback in UTC format, such as 2018-11-29T19:00:00Z.
 	// Notes:
 	// 1. The configuration will expire after 7 days by default and can last up to 7 days.
 	// 2. The Beijing time is in UTC+8. This value should be in the format as required by ISO 8601. For more information, please see [ISO Date and Time Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 }
 
 type AddDelayLiveStreamRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Delay time in seconds, up to 600s.
-	DelayTime *uint64 `json:"DelayTime,omitnil" name:"DelayTime"`
+	DelayTime *uint64 `json:"DelayTime,omitnil,omitempty" name:"DelayTime"`
 
 	// Expiration time of the configured delayed playback in UTC format, such as 2018-11-29T19:00:00Z.
 	// Notes:
 	// 1. The configuration will expire after 7 days by default and can last up to 7 days.
 	// 2. The Beijing time is in UTC+8. This value should be in the format as required by ISO 8601. For more information, please see [ISO Date and Time Format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
-	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 }
 
 func (r *AddDelayLiveStreamRequest) ToJsonString() string {
@@ -89,7 +89,7 @@ func (r *AddDelayLiveStreamRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AddDelayLiveStreamResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type AddDelayLiveStreamResponse struct {
@@ -111,31 +111,31 @@ func (r *AddDelayLiveStreamResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type AddLiveDomainRequestParams struct {
 	// Domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Domain name type.
 	// 0: push domain name.
 	// 1: playback domain name.
-	DomainType *uint64 `json:"DomainType,omitnil" name:"DomainType"`
+	DomainType *uint64 `json:"DomainType,omitnil,omitempty" name:"DomainType"`
 
 	// Pull domain name type:
 	// 1: Mainland China.
 	// 2: global.
 	// 3: outside Mainland China.
 	// Default value: 1.
-	PlayType *uint64 `json:"PlayType,omitnil" name:"PlayType"`
+	PlayType *uint64 `json:"PlayType,omitnil,omitempty" name:"PlayType"`
 
 	// Whether it is LCB:
 	// 0: LVB,
 	// 1: LCB.
 	// Default value: 0.
-	IsDelayLive *int64 `json:"IsDelayLive,omitnil" name:"IsDelayLive"`
+	IsDelayLive *int64 `json:"IsDelayLive,omitnil,omitempty" name:"IsDelayLive"`
 
 	// Whether it is LVB on Mini Program.
 	// 0: LVB.
 	// 1: LVB on Mini Program.
 	// Default value: 0.
-	IsMiniProgramLive *int64 `json:"IsMiniProgramLive,omitnil" name:"IsMiniProgramLive"`
+	IsMiniProgramLive *int64 `json:"IsMiniProgramLive,omitnil,omitempty" name:"IsMiniProgramLive"`
 
 	// The domain verification type.
 	// Valid values (the value of this parameter must be the same as `VerifyType` of the `AuthenticateDomainOwner` API):
@@ -143,38 +143,38 @@ type AddLiveDomainRequestParams struct {
 	// fileCheck: Check immediately whether the verification HTML file has been uploaded successfully. If so, record this verification result.
 	// dbCheck: Check whether the domain has already been verified.
 	// If you do not pass a value, `dbCheck` will be used.
-	VerifyOwnerType *string `json:"VerifyOwnerType,omitnil" name:"VerifyOwnerType"`
+	VerifyOwnerType *string `json:"VerifyOwnerType,omitnil,omitempty" name:"VerifyOwnerType"`
 }
 
 type AddLiveDomainRequest struct {
 	*tchttp.BaseRequest
 	
 	// Domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Domain name type.
 	// 0: push domain name.
 	// 1: playback domain name.
-	DomainType *uint64 `json:"DomainType,omitnil" name:"DomainType"`
+	DomainType *uint64 `json:"DomainType,omitnil,omitempty" name:"DomainType"`
 
 	// Pull domain name type:
 	// 1: Mainland China.
 	// 2: global.
 	// 3: outside Mainland China.
 	// Default value: 1.
-	PlayType *uint64 `json:"PlayType,omitnil" name:"PlayType"`
+	PlayType *uint64 `json:"PlayType,omitnil,omitempty" name:"PlayType"`
 
 	// Whether it is LCB:
 	// 0: LVB,
 	// 1: LCB.
 	// Default value: 0.
-	IsDelayLive *int64 `json:"IsDelayLive,omitnil" name:"IsDelayLive"`
+	IsDelayLive *int64 `json:"IsDelayLive,omitnil,omitempty" name:"IsDelayLive"`
 
 	// Whether it is LVB on Mini Program.
 	// 0: LVB.
 	// 1: LVB on Mini Program.
 	// Default value: 0.
-	IsMiniProgramLive *int64 `json:"IsMiniProgramLive,omitnil" name:"IsMiniProgramLive"`
+	IsMiniProgramLive *int64 `json:"IsMiniProgramLive,omitnil,omitempty" name:"IsMiniProgramLive"`
 
 	// The domain verification type.
 	// Valid values (the value of this parameter must be the same as `VerifyType` of the `AuthenticateDomainOwner` API):
@@ -182,7 +182,7 @@ type AddLiveDomainRequest struct {
 	// fileCheck: Check immediately whether the verification HTML file has been uploaded successfully. If so, record this verification result.
 	// dbCheck: Check whether the domain has already been verified.
 	// If you do not pass a value, `dbCheck` will be used.
-	VerifyOwnerType *string `json:"VerifyOwnerType,omitnil" name:"VerifyOwnerType"`
+	VerifyOwnerType *string `json:"VerifyOwnerType,omitnil,omitempty" name:"VerifyOwnerType"`
 }
 
 func (r *AddLiveDomainRequest) ToJsonString() string {
@@ -212,7 +212,7 @@ func (r *AddLiveDomainRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AddLiveDomainResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type AddLiveDomainResponse struct {
@@ -236,23 +236,23 @@ type AddLiveWatermarkRequestParams struct {
 	// Watermark image URL.
 	// Unallowed characters in the URL:
 	//  ;(){}$>`#"\'|
-	PictureUrl *string `json:"PictureUrl,omitnil" name:"PictureUrl"`
+	PictureUrl *string `json:"PictureUrl,omitnil,omitempty" name:"PictureUrl"`
 
 	// Watermark name.
 	// Up to 16 bytes.
-	WatermarkName *string `json:"WatermarkName,omitnil" name:"WatermarkName"`
+	WatermarkName *string `json:"WatermarkName,omitnil,omitempty" name:"WatermarkName"`
 
 	// Display position: X-axis offset in %. Default value: 0.
-	XPosition *int64 `json:"XPosition,omitnil" name:"XPosition"`
+	XPosition *int64 `json:"XPosition,omitnil,omitempty" name:"XPosition"`
 
 	// Display position: Y-axis offset in %. Default value: 0.
-	YPosition *int64 `json:"YPosition,omitnil" name:"YPosition"`
+	YPosition *int64 `json:"YPosition,omitnil,omitempty" name:"YPosition"`
 
 	// Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Watermark height, which is set by entering a percentage of the live stream image’s original height. You are advised to set either the height or width as the other will be scaled proportionally to avoid distortions. Default value: original height.
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 }
 
 type AddLiveWatermarkRequest struct {
@@ -261,23 +261,23 @@ type AddLiveWatermarkRequest struct {
 	// Watermark image URL.
 	// Unallowed characters in the URL:
 	//  ;(){}$>`#"\'|
-	PictureUrl *string `json:"PictureUrl,omitnil" name:"PictureUrl"`
+	PictureUrl *string `json:"PictureUrl,omitnil,omitempty" name:"PictureUrl"`
 
 	// Watermark name.
 	// Up to 16 bytes.
-	WatermarkName *string `json:"WatermarkName,omitnil" name:"WatermarkName"`
+	WatermarkName *string `json:"WatermarkName,omitnil,omitempty" name:"WatermarkName"`
 
 	// Display position: X-axis offset in %. Default value: 0.
-	XPosition *int64 `json:"XPosition,omitnil" name:"XPosition"`
+	XPosition *int64 `json:"XPosition,omitnil,omitempty" name:"XPosition"`
 
 	// Display position: Y-axis offset in %. Default value: 0.
-	YPosition *int64 `json:"YPosition,omitnil" name:"YPosition"`
+	YPosition *int64 `json:"YPosition,omitnil,omitempty" name:"YPosition"`
 
 	// Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Watermark height, which is set by entering a percentage of the live stream image’s original height. You are advised to set either the height or width as the other will be scaled proportionally to avoid distortions. Default value: original height.
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 }
 
 func (r *AddLiveWatermarkRequest) ToJsonString() string {
@@ -307,10 +307,10 @@ func (r *AddLiveWatermarkRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AddLiveWatermarkResponseParams struct {
 	// Watermark ID.
-	WatermarkId *uint64 `json:"WatermarkId,omitnil" name:"WatermarkId"`
+	WatermarkId *uint64 `json:"WatermarkId,omitnil,omitempty" name:"WatermarkId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type AddLiveWatermarkResponse struct {
@@ -332,26 +332,26 @@ func (r *AddLiveWatermarkResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type AuthenticateDomainOwnerRequestParams struct {
 	// The domain to verify.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The verification type. Valid values:
 	// dnsCheck: Check immediately whether the verification DNS record has been added successfully. If so, record this verification result.
 	// fileCheck: Check immediately whether the verification HTML file has been uploaded successfully. If so, record this verification result.
 	// dbCheck: Check whether the domain has already been successfully verified.
-	VerifyType *string `json:"VerifyType,omitnil" name:"VerifyType"`
+	VerifyType *string `json:"VerifyType,omitnil,omitempty" name:"VerifyType"`
 }
 
 type AuthenticateDomainOwnerRequest struct {
 	*tchttp.BaseRequest
 	
 	// The domain to verify.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The verification type. Valid values:
 	// dnsCheck: Check immediately whether the verification DNS record has been added successfully. If so, record this verification result.
 	// fileCheck: Check immediately whether the verification HTML file has been uploaded successfully. If so, record this verification result.
 	// dbCheck: Check whether the domain has already been successfully verified.
-	VerifyType *string `json:"VerifyType,omitnil" name:"VerifyType"`
+	VerifyType *string `json:"VerifyType,omitnil,omitempty" name:"VerifyType"`
 }
 
 func (r *AuthenticateDomainOwnerRequest) ToJsonString() string {
@@ -379,19 +379,19 @@ type AuthenticateDomainOwnerResponseParams struct {
 	// The content verified.
 	// If `VerifyType` is `dnsCheck`, this is the TXT record that should be added for verification.
 	// If `VerifyType` is `fileCheck`, this is the file that should be uploaded for verification.
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// The verification status.
 	// If the value of this parameter is 0 or greater, the domain has been verified.
 	// If the value of this parameter is smaller than 0, the domain has not been verified.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The primary domain of the domain verified.
 	// Verification is not required if another domain under the same primary domain has been successfully verified.
-	MainDomain *string `json:"MainDomain,omitnil" name:"MainDomain"`
+	MainDomain *string `json:"MainDomain,omitnil,omitempty" name:"MainDomain"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type AuthenticateDomainOwnerResponse struct {
@@ -414,101 +414,101 @@ type BandwidthInfo struct {
 	// Format of return value:
 	// yyyy-mm-dd HH:MM:SS
 	// The time accuracy matches with the query granularity.
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Bandwidth.
-	Bandwidth *float64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *float64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 }
 
 type BatchDomainOperateErrors struct {
 	// The domain that the API failed to operate.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The API 3.0 error code.
-	Code *string `json:"Code,omitnil" name:"Code"`
+	Code *string `json:"Code,omitnil,omitempty" name:"Code"`
 
 	// The API 3.0 error message.
-	Message *string `json:"Message,omitnil" name:"Message"`
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
 type BillDataInfo struct {
 	// Time point in the format of `yyyy-mm-dd HH:MM:SS`.
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Bandwidth in Mbps.
-	Bandwidth *float64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *float64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// Traffic in MB.
-	Flux *float64 `json:"Flux,omitnil" name:"Flux"`
+	Flux *float64 `json:"Flux,omitnil,omitempty" name:"Flux"`
 
 	// Time point of peak value in the format of `yyyy-mm-dd HH:MM:SS`. As raw data is at a 5-minute granularity, if data at a 1-hour or 1-day granularity is queried, the time point of peak bandwidth value at the corresponding granularity will be returned.
-	PeakTime *string `json:"PeakTime,omitnil" name:"PeakTime"`
+	PeakTime *string `json:"PeakTime,omitnil,omitempty" name:"PeakTime"`
 }
 
 type CallBackRuleInfo struct {
 	// The rule creation time.
 	// Note: Beijing time (UTC+8) is used.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The rule update time.
 	// Note: Beijing time (UTC+8) is used.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 }
 
 type CallBackTemplateInfo struct {
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Template name.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Stream starting callback URL.
-	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitnil" name:"StreamBeginNotifyUrl"`
+	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitnil,omitempty" name:"StreamBeginNotifyUrl"`
 
 	// Stream mixing callback URL (disused)
-	StreamMixNotifyUrl *string `json:"StreamMixNotifyUrl,omitnil" name:"StreamMixNotifyUrl"`
+	StreamMixNotifyUrl *string `json:"StreamMixNotifyUrl,omitnil,omitempty" name:"StreamMixNotifyUrl"`
 
 	// Interruption callback URL.
-	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitnil" name:"StreamEndNotifyUrl"`
+	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitnil,omitempty" name:"StreamEndNotifyUrl"`
 
 	// Recording callback URL.
-	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitnil" name:"RecordNotifyUrl"`
+	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitnil,omitempty" name:"RecordNotifyUrl"`
 
 	// Screencapturing callback URL.
-	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitnil" name:"SnapshotNotifyUrl"`
+	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitnil,omitempty" name:"SnapshotNotifyUrl"`
 
 	// Porn detection callback URL.
-	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitnil" name:"PornCensorshipNotifyUrl"`
+	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitnil,omitempty" name:"PornCensorshipNotifyUrl"`
 
 	// Callback authentication key.
-	CallbackKey *string `json:"CallbackKey,omitnil" name:"CallbackKey"`
+	CallbackKey *string `json:"CallbackKey,omitnil,omitempty" name:"CallbackKey"`
 
 	// The push error callback URL.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitnil" name:"PushExceptionNotifyUrl"`
+	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitnil,omitempty" name:"PushExceptionNotifyUrl"`
 
 	// The audio/video moderation callback URL.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AudioAuditNotifyUrl *string `json:"AudioAuditNotifyUrl,omitnil" name:"AudioAuditNotifyUrl"`
+	AudioAuditNotifyUrl *string `json:"AudioAuditNotifyUrl,omitnil,omitempty" name:"AudioAuditNotifyUrl"`
 }
 
 // Predefined struct for user
 type CancelCommonMixStreamRequestParams struct {
 	// ID of stream mix session (from applying for stream mix to canceling stream mix).
 	// This value is the same as the `MixStreamSessionId` in `CreateCommonMixStream`.
-	MixStreamSessionId *string `json:"MixStreamSessionId,omitnil" name:"MixStreamSessionId"`
+	MixStreamSessionId *string `json:"MixStreamSessionId,omitnil,omitempty" name:"MixStreamSessionId"`
 }
 
 type CancelCommonMixStreamRequest struct {
@@ -516,7 +516,7 @@ type CancelCommonMixStreamRequest struct {
 	
 	// ID of stream mix session (from applying for stream mix to canceling stream mix).
 	// This value is the same as the `MixStreamSessionId` in `CreateCommonMixStream`.
-	MixStreamSessionId *string `json:"MixStreamSessionId,omitnil" name:"MixStreamSessionId"`
+	MixStreamSessionId *string `json:"MixStreamSessionId,omitnil,omitempty" name:"MixStreamSessionId"`
 }
 
 func (r *CancelCommonMixStreamRequest) ToJsonString() string {
@@ -541,7 +541,7 @@ func (r *CancelCommonMixStreamRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CancelCommonMixStreamResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CancelCommonMixStreamResponse struct {
@@ -562,110 +562,110 @@ func (r *CancelCommonMixStreamResponse) FromJsonString(s string) error {
 
 type CdnPlayStatData struct {
 	// Time point in the format of `yyyy-mm-dd HH:MM:SS`.
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Bandwidth in Mbps.
-	Bandwidth *float64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *float64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// Traffic in MB.
-	Flux *float64 `json:"Flux,omitnil" name:"Flux"`
+	Flux *float64 `json:"Flux,omitnil,omitempty" name:"Flux"`
 
 	// Number of new requests.
-	Request *uint64 `json:"Request,omitnil" name:"Request"`
+	Request *uint64 `json:"Request,omitnil,omitempty" name:"Request"`
 
 	// Number of concurrent connections.
-	Online *uint64 `json:"Online,omitnil" name:"Online"`
+	Online *uint64 `json:"Online,omitnil,omitempty" name:"Online"`
 }
 
 type CertInfo struct {
 	// Certificate ID.
-	CertId *int64 `json:"CertId,omitnil" name:"CertId"`
+	CertId *int64 `json:"CertId,omitnil,omitempty" name:"CertId"`
 
 	// Certificate name.
-	CertName *string `json:"CertName,omitnil" name:"CertName"`
+	CertName *string `json:"CertName,omitnil,omitempty" name:"CertName"`
 
 	// Description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// The creation time in UTC format.
 	// Note: Beijing time (UTC+8) is used.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Certificate content.
-	HttpsCrt *string `json:"HttpsCrt,omitnil" name:"HttpsCrt"`
+	HttpsCrt *string `json:"HttpsCrt,omitnil,omitempty" name:"HttpsCrt"`
 
 	// Certificate type.
 	// 0: user-added certificate
 	// 1: Tencent Cloud-hosted certificate
-	CertType *int64 `json:"CertType,omitnil" name:"CertType"`
+	CertType *int64 `json:"CertType,omitnil,omitempty" name:"CertType"`
 
 	// The certificate expiration time in UTC format.
 	// Note: Beijing time (UTC+8) is used.
-	CertExpireTime *string `json:"CertExpireTime,omitnil" name:"CertExpireTime"`
+	CertExpireTime *string `json:"CertExpireTime,omitnil,omitempty" name:"CertExpireTime"`
 
 	// List of domain names that use this certificate.
-	DomainList []*string `json:"DomainList,omitnil" name:"DomainList"`
+	DomainList []*string `json:"DomainList,omitnil,omitempty" name:"DomainList"`
 }
 
 type ClientIpPlaySumInfo struct {
 	// Client IP in dotted-decimal notation.
-	ClientIp *string `json:"ClientIp,omitnil" name:"ClientIp"`
+	ClientIp *string `json:"ClientIp,omitnil,omitempty" name:"ClientIp"`
 
 	// District where the client is located.
-	Province *string `json:"Province,omitnil" name:"Province"`
+	Province *string `json:"Province,omitnil,omitempty" name:"Province"`
 
 	// Total traffic.
-	TotalFlux *float64 `json:"TotalFlux,omitnil" name:"TotalFlux"`
+	TotalFlux *float64 `json:"TotalFlux,omitnil,omitempty" name:"TotalFlux"`
 
 	// Total number of requests.
-	TotalRequest *uint64 `json:"TotalRequest,omitnil" name:"TotalRequest"`
+	TotalRequest *uint64 `json:"TotalRequest,omitnil,omitempty" name:"TotalRequest"`
 
 	// Total number of failed requests.
-	TotalFailedRequest *uint64 `json:"TotalFailedRequest,omitnil" name:"TotalFailedRequest"`
+	TotalFailedRequest *uint64 `json:"TotalFailedRequest,omitnil,omitempty" name:"TotalFailedRequest"`
 
 	// Country/region where the client is located.
-	CountryArea *string `json:"CountryArea,omitnil" name:"CountryArea"`
+	CountryArea *string `json:"CountryArea,omitnil,omitempty" name:"CountryArea"`
 }
 
 type CommonMixControlParams struct {
 	// Value range: [0,1]. 
 	// If 1 is entered, when the layer resolution in the parameter is different from the actual video resolution, the video will be automatically cropped according to the resolution set by the layer.
-	UseMixCropCenter *int64 `json:"UseMixCropCenter,omitnil" name:"UseMixCropCenter"`
+	UseMixCropCenter *int64 `json:"UseMixCropCenter,omitnil,omitempty" name:"UseMixCropCenter"`
 
 	// Value range: [0,1].
 	// If this parameter is set to 1, when both `InputStreamList` and `OutputParams.OutputStreamType` are set to 1, you can copy a stream instead of canceling it.
-	AllowCopy *int64 `json:"AllowCopy,omitnil" name:"AllowCopy"`
+	AllowCopy *int64 `json:"AllowCopy,omitnil,omitempty" name:"AllowCopy"`
 
 	// Valid values: 0, 1
 	// If you set this parameter to 1, SEI (Supplemental Enhanced Information) of the input streams will be passed through.
-	PassInputSei *int64 `json:"PassInputSei,omitnil" name:"PassInputSei"`
+	PassInputSei *int64 `json:"PassInputSei,omitnil,omitempty" name:"PassInputSei"`
 }
 
 type CommonMixCropParams struct {
 	// Crop width. Value range: [0,2000].
-	CropWidth *float64 `json:"CropWidth,omitnil" name:"CropWidth"`
+	CropWidth *float64 `json:"CropWidth,omitnil,omitempty" name:"CropWidth"`
 
 	// Crop height. Value range: [0,2000].
-	CropHeight *float64 `json:"CropHeight,omitnil" name:"CropHeight"`
+	CropHeight *float64 `json:"CropHeight,omitnil,omitempty" name:"CropHeight"`
 
 	// Starting crop X coordinate. Value range: [0,2000].
-	CropStartLocationX *float64 `json:"CropStartLocationX,omitnil" name:"CropStartLocationX"`
+	CropStartLocationX *float64 `json:"CropStartLocationX,omitnil,omitempty" name:"CropStartLocationX"`
 
 	// Starting crop Y coordinate. Value range: [0,2000].
-	CropStartLocationY *float64 `json:"CropStartLocationY,omitnil" name:"CropStartLocationY"`
+	CropStartLocationY *float64 `json:"CropStartLocationY,omitnil,omitempty" name:"CropStartLocationY"`
 }
 
 type CommonMixInputParam struct {
 	// Input stream name, which can contain up to 80 bytes of letters, digits, and underscores.
 	// The value should be the name of an input stream for stream mix when `LayoutParams.InputType` is set to `0` (audio and video), `4` (pure audio), or `5` (pure video).
 	// The value can be a random name for identification, such as `Canvas1` or `Picture1`, when `LayoutParams.InputType` is set to `2` (image) or `3` (canvas).
-	InputStreamName *string `json:"InputStreamName,omitnil" name:"InputStreamName"`
+	InputStreamName *string `json:"InputStreamName,omitnil,omitempty" name:"InputStreamName"`
 
 	// Input stream layout parameter.
-	LayoutParams *CommonMixLayoutParams `json:"LayoutParams,omitnil" name:"LayoutParams"`
+	LayoutParams *CommonMixLayoutParams `json:"LayoutParams,omitnil,omitempty" name:"LayoutParams"`
 
 	// Input stream crop parameter.
-	CropParams *CommonMixCropParams `json:"CropParams,omitnil" name:"CropParams"`
+	CropParams *CommonMixCropParams `json:"CropParams,omitnil,omitempty" name:"CropParams"`
 }
 
 type CommonMixLayoutParams struct {
@@ -673,7 +673,7 @@ type CommonMixLayoutParams struct {
 	// (1) For the background stream, i.e., the room owner’s image or the canvas, set this parameter to `1`.
 	// (2) This parameter is required for audio-only stream mixing as well.
 	// Note that two inputs cannot have the same `ImageLayer` value.
-	ImageLayer *int64 `json:"ImageLayer,omitnil" name:"ImageLayer"`
+	ImageLayer *int64 `json:"ImageLayer,omitnil,omitempty" name:"ImageLayer"`
 
 	// Input type. Value range: [0,5].
 	// If this parameter is left empty, 0 will be used by default.
@@ -682,21 +682,21 @@ type CommonMixLayoutParams struct {
 	// 3: the input stream is canvas. 
 	// 4: the input stream is audio.
 	// 5: the input stream is pure video.
-	InputType *int64 `json:"InputType,omitnil" name:"InputType"`
+	InputType *int64 `json:"InputType,omitnil,omitempty" name:"InputType"`
 
 	// Output height of input video image. Value range:
 	// Pixel: [0,2000]
 	// Percentage: [0.01,0.99]
 	// If this parameter is left empty, the input stream height will be used by default.
 	// If percentage is used, the expected output is (percentage * background height).
-	ImageHeight *float64 `json:"ImageHeight,omitnil" name:"ImageHeight"`
+	ImageHeight *float64 `json:"ImageHeight,omitnil,omitempty" name:"ImageHeight"`
 
 	// Output width of input video image. Value range:
 	// Pixel: [0,2000]
 	// Percentage: [0.01,0.99]
 	// If this parameter is left empty, the input stream width will be used by default.
 	// If percentage is used, the expected output is (percentage * background width).
-	ImageWidth *float64 `json:"ImageWidth,omitnil" name:"ImageWidth"`
+	ImageWidth *float64 `json:"ImageWidth,omitnil,omitempty" name:"ImageWidth"`
 
 	// X-axis offset of input in output video image. Value range:
 	// Pixel: [0,2000]
@@ -704,7 +704,7 @@ type CommonMixLayoutParams struct {
 	// If this parameter is left empty, 0 will be used by default.
 	// Horizontal offset from the top-left corner of main host background video image. 
 	// If percentage is used, the expected output is (percentage * background width).
-	LocationX *float64 `json:"LocationX,omitnil" name:"LocationX"`
+	LocationX *float64 `json:"LocationX,omitnil,omitempty" name:"LocationX"`
 
 	// Y-axis offset of input in output video image. Value range:
 	// Pixel: [0,2000]
@@ -712,7 +712,7 @@ type CommonMixLayoutParams struct {
 	// If this parameter is left empty, 0 will be used by default.
 	// Vertical offset from the top-left corner of main host background video image. 
 	// If percentage is used, the expected output is (percentage * background width)
-	LocationY *float64 `json:"LocationY,omitnil" name:"LocationY"`
+	LocationY *float64 `json:"LocationY,omitnil,omitempty" name:"LocationY"`
 
 	// When `InputType` is 3 (canvas), this value indicates the canvas color.
 	// Commonly used colors include:
@@ -723,69 +723,69 @@ type CommonMixLayoutParams struct {
 	// Black: 0x000000.
 	// White: 0xFFFFFF.
 	// Gray: 0x999999
-	Color *string `json:"Color,omitnil" name:"Color"`
+	Color *string `json:"Color,omitnil,omitempty" name:"Color"`
 
 	// When `InputType` is 2 (image), this value is the watermark ID.
-	WatermarkId *int64 `json:"WatermarkId,omitnil" name:"WatermarkId"`
+	WatermarkId *int64 `json:"WatermarkId,omitnil,omitempty" name:"WatermarkId"`
 }
 
 type CommonMixOutputParams struct {
 	// Output stream name.
-	OutputStreamName *string `json:"OutputStreamName,omitnil" name:"OutputStreamName"`
+	OutputStreamName *string `json:"OutputStreamName,omitnil,omitempty" name:"OutputStreamName"`
 
 	// Output stream type. Valid values: [0,1].
 	// If this parameter is left empty, 0 will be used by default.
 	// If the output stream is a stream in the input stream list, enter 0.
 	// If you want the stream mix result to be a new stream, enter 1.
 	// If this value is 1, `output_stream_id` cannot appear in `input_stram_list`, and there cannot be a stream with the same ID on the LVB backend.
-	OutputStreamType *int64 `json:"OutputStreamType,omitnil" name:"OutputStreamType"`
+	OutputStreamType *int64 `json:"OutputStreamType,omitnil,omitempty" name:"OutputStreamType"`
 
 	// The output bitrate. Value range: 1-10000.
 	// If you do not specify this, the system will select a bitrate automatically.
-	OutputStreamBitRate *int64 `json:"OutputStreamBitRate,omitnil" name:"OutputStreamBitRate"`
+	OutputStreamBitRate *int64 `json:"OutputStreamBitRate,omitnil,omitempty" name:"OutputStreamBitRate"`
 
 	// Output stream GOP size. Value range: [1,10].
 	// If this parameter is left empty, the system will automatically determine.
-	OutputStreamGop *int64 `json:"OutputStreamGop,omitnil" name:"OutputStreamGop"`
+	OutputStreamGop *int64 `json:"OutputStreamGop,omitnil,omitempty" name:"OutputStreamGop"`
 
 	// Output stream frame rate. Value range: [1,60].
 	// If this parameter is left empty, the system will automatically determine.
-	OutputStreamFrameRate *int64 `json:"OutputStreamFrameRate,omitnil" name:"OutputStreamFrameRate"`
+	OutputStreamFrameRate *int64 `json:"OutputStreamFrameRate,omitnil,omitempty" name:"OutputStreamFrameRate"`
 
 	// Output stream audio bitrate. Value range: [1,500]
 	// If this parameter is left empty, the system will automatically determine.
-	OutputAudioBitRate *int64 `json:"OutputAudioBitRate,omitnil" name:"OutputAudioBitRate"`
+	OutputAudioBitRate *int64 `json:"OutputAudioBitRate,omitnil,omitempty" name:"OutputAudioBitRate"`
 
 	// Output stream audio sample rate. Valid values: [96000, 88200, 64000, 48000, 44100, 32000,24000, 22050, 16000, 12000, 11025, 8000].
 	// If this parameter is left empty, the system will automatically determine.
-	OutputAudioSampleRate *int64 `json:"OutputAudioSampleRate,omitnil" name:"OutputAudioSampleRate"`
+	OutputAudioSampleRate *int64 `json:"OutputAudioSampleRate,omitnil,omitempty" name:"OutputAudioSampleRate"`
 
 	// Output stream audio sound channel. Valid values: [1,2].
 	// If this parameter is left empty, the system will automatically determine.
-	OutputAudioChannels *int64 `json:"OutputAudioChannels,omitnil" name:"OutputAudioChannels"`
+	OutputAudioChannels *int64 `json:"OutputAudioChannels,omitnil,omitempty" name:"OutputAudioChannels"`
 
 	// SEI information in output stream. If there are no special needs, leave it empty.
-	MixSei *string `json:"MixSei,omitnil" name:"MixSei"`
+	MixSei *string `json:"MixSei,omitnil,omitempty" name:"MixSei"`
 }
 
 type ConcurrentRecordStreamNum struct {
 	// Time point.
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Number of channels.
-	Num *uint64 `json:"Num,omitnil" name:"Num"`
+	Num *uint64 `json:"Num,omitnil,omitempty" name:"Num"`
 }
 
 // Predefined struct for user
 type CreateCommonMixStreamRequestParams struct {
 	// ID of a stream mix session (from applying for the stream mix to cancelling it). This parameter can contain up to 80 bytes of letters, digits, and underscores.
-	MixStreamSessionId *string `json:"MixStreamSessionId,omitnil" name:"MixStreamSessionId"`
+	MixStreamSessionId *string `json:"MixStreamSessionId,omitnil,omitempty" name:"MixStreamSessionId"`
 
 	// Input stream list for stream mix.
-	InputStreamList []*CommonMixInputParam `json:"InputStreamList,omitnil" name:"InputStreamList"`
+	InputStreamList []*CommonMixInputParam `json:"InputStreamList,omitnil,omitempty" name:"InputStreamList"`
 
 	// Output stream parameter for stream mix.
-	OutputParams *CommonMixOutputParams `json:"OutputParams,omitnil" name:"OutputParams"`
+	OutputParams *CommonMixOutputParams `json:"OutputParams,omitnil,omitempty" name:"OutputParams"`
 
 	// Input template ID. If this parameter is set, the output will be generated according to the default template layout, and there is no need to enter the custom position parameters.
 	// If this parameter is left empty, 0 will be used by default.
@@ -794,23 +794,23 @@ type CreateCommonMixStreamRequestParams struct {
 	// For four input sources, 410 is supported.
 	// For five input sources, 510 and 590 are supported.
 	// For six input sources, 610 is supported.
-	MixStreamTemplateId *int64 `json:"MixStreamTemplateId,omitnil" name:"MixStreamTemplateId"`
+	MixStreamTemplateId *int64 `json:"MixStreamTemplateId,omitnil,omitempty" name:"MixStreamTemplateId"`
 
 	// Special control parameter for stream mix. If there are no special needs, leave it empty.
-	ControlParams *CommonMixControlParams `json:"ControlParams,omitnil" name:"ControlParams"`
+	ControlParams *CommonMixControlParams `json:"ControlParams,omitnil,omitempty" name:"ControlParams"`
 }
 
 type CreateCommonMixStreamRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of a stream mix session (from applying for the stream mix to cancelling it). This parameter can contain up to 80 bytes of letters, digits, and underscores.
-	MixStreamSessionId *string `json:"MixStreamSessionId,omitnil" name:"MixStreamSessionId"`
+	MixStreamSessionId *string `json:"MixStreamSessionId,omitnil,omitempty" name:"MixStreamSessionId"`
 
 	// Input stream list for stream mix.
-	InputStreamList []*CommonMixInputParam `json:"InputStreamList,omitnil" name:"InputStreamList"`
+	InputStreamList []*CommonMixInputParam `json:"InputStreamList,omitnil,omitempty" name:"InputStreamList"`
 
 	// Output stream parameter for stream mix.
-	OutputParams *CommonMixOutputParams `json:"OutputParams,omitnil" name:"OutputParams"`
+	OutputParams *CommonMixOutputParams `json:"OutputParams,omitnil,omitempty" name:"OutputParams"`
 
 	// Input template ID. If this parameter is set, the output will be generated according to the default template layout, and there is no need to enter the custom position parameters.
 	// If this parameter is left empty, 0 will be used by default.
@@ -819,10 +819,10 @@ type CreateCommonMixStreamRequest struct {
 	// For four input sources, 410 is supported.
 	// For five input sources, 510 and 590 are supported.
 	// For six input sources, 610 is supported.
-	MixStreamTemplateId *int64 `json:"MixStreamTemplateId,omitnil" name:"MixStreamTemplateId"`
+	MixStreamTemplateId *int64 `json:"MixStreamTemplateId,omitnil,omitempty" name:"MixStreamTemplateId"`
 
 	// Special control parameter for stream mix. If there are no special needs, leave it empty.
-	ControlParams *CommonMixControlParams `json:"ControlParams,omitnil" name:"ControlParams"`
+	ControlParams *CommonMixControlParams `json:"ControlParams,omitnil,omitempty" name:"ControlParams"`
 }
 
 func (r *CreateCommonMixStreamRequest) ToJsonString() string {
@@ -851,7 +851,7 @@ func (r *CreateCommonMixStreamRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateCommonMixStreamResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateCommonMixStreamResponse struct {
@@ -873,26 +873,26 @@ func (r *CreateCommonMixStreamResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveCallbackRuleRequestParams struct {
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type CreateLiveCallbackRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *CreateLiveCallbackRuleRequest) ToJsonString() string {
@@ -919,7 +919,7 @@ func (r *CreateLiveCallbackRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveCallbackRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLiveCallbackRuleResponse struct {
@@ -943,42 +943,42 @@ type CreateLiveCallbackTemplateRequestParams struct {
 	// Template name.
 	// Maximum length: 255 bytes.
 	// Only letters, digits, underscores, and hyphens can be contained.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Description.
 	// Maximum length: 1,024 bytes.
 	// Only letters, digits, underscores, and hyphens can be contained.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Stream starting callback URL,
 	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
-	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitnil" name:"StreamBeginNotifyUrl"`
+	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitnil,omitempty" name:"StreamBeginNotifyUrl"`
 
 	// Interruption callback URL,
 	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
-	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitnil" name:"StreamEndNotifyUrl"`
+	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitnil,omitempty" name:"StreamEndNotifyUrl"`
 
 	// Recording callback URL,
 	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
-	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitnil" name:"RecordNotifyUrl"`
+	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitnil,omitempty" name:"RecordNotifyUrl"`
 
 	// Screencapturing callback URL,
 	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
-	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitnil" name:"SnapshotNotifyUrl"`
+	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitnil,omitempty" name:"SnapshotNotifyUrl"`
 
 	// Porn detection callback URL,
 	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32741?from_cn_redirect=1).
-	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitnil" name:"PornCensorshipNotifyUrl"`
+	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitnil,omitempty" name:"PornCensorshipNotifyUrl"`
 
 	// Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
 	// [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
-	CallbackKey *string `json:"CallbackKey,omitnil" name:"CallbackKey"`
+	CallbackKey *string `json:"CallbackKey,omitnil,omitempty" name:"CallbackKey"`
 
 	// Disused
-	StreamMixNotifyUrl *string `json:"StreamMixNotifyUrl,omitnil" name:"StreamMixNotifyUrl"`
+	StreamMixNotifyUrl *string `json:"StreamMixNotifyUrl,omitnil,omitempty" name:"StreamMixNotifyUrl"`
 
 	// The push error callback URL.
-	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitnil" name:"PushExceptionNotifyUrl"`
+	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitnil,omitempty" name:"PushExceptionNotifyUrl"`
 }
 
 type CreateLiveCallbackTemplateRequest struct {
@@ -987,42 +987,42 @@ type CreateLiveCallbackTemplateRequest struct {
 	// Template name.
 	// Maximum length: 255 bytes.
 	// Only letters, digits, underscores, and hyphens can be contained.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Description.
 	// Maximum length: 1,024 bytes.
 	// Only letters, digits, underscores, and hyphens can be contained.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Stream starting callback URL,
 	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
-	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitnil" name:"StreamBeginNotifyUrl"`
+	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitnil,omitempty" name:"StreamBeginNotifyUrl"`
 
 	// Interruption callback URL,
 	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
-	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitnil" name:"StreamEndNotifyUrl"`
+	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitnil,omitempty" name:"StreamEndNotifyUrl"`
 
 	// Recording callback URL,
 	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
-	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitnil" name:"RecordNotifyUrl"`
+	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitnil,omitempty" name:"RecordNotifyUrl"`
 
 	// Screencapturing callback URL,
 	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
-	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitnil" name:"SnapshotNotifyUrl"`
+	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitnil,omitempty" name:"SnapshotNotifyUrl"`
 
 	// Porn detection callback URL,
 	// Protocol document: [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32741?from_cn_redirect=1).
-	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitnil" name:"PornCensorshipNotifyUrl"`
+	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitnil,omitempty" name:"PornCensorshipNotifyUrl"`
 
 	// Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
 	// [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
-	CallbackKey *string `json:"CallbackKey,omitnil" name:"CallbackKey"`
+	CallbackKey *string `json:"CallbackKey,omitnil,omitempty" name:"CallbackKey"`
 
 	// Disused
-	StreamMixNotifyUrl *string `json:"StreamMixNotifyUrl,omitnil" name:"StreamMixNotifyUrl"`
+	StreamMixNotifyUrl *string `json:"StreamMixNotifyUrl,omitnil,omitempty" name:"StreamMixNotifyUrl"`
 
 	// The push error callback URL.
-	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitnil" name:"PushExceptionNotifyUrl"`
+	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitnil,omitempty" name:"PushExceptionNotifyUrl"`
 }
 
 func (r *CreateLiveCallbackTemplateRequest) ToJsonString() string {
@@ -1056,10 +1056,10 @@ func (r *CreateLiveCallbackTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveCallbackTemplateResponseParams struct {
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLiveCallbackTemplateResponse struct {
@@ -1084,7 +1084,7 @@ type CreateLivePullStreamTaskRequestParams struct {
 	// PullLivePushLive: Live streaming
 	// PullVodPushLive: Video files
 	// PullPicPushLive: Images
-	SourceType *string `json:"SourceType,omitnil" name:"SourceType"`
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
 
 	// The source URL(s).
 	// If `SourceType` is `PullLivePushLive`, you can specify only one source URL.
@@ -1098,26 +1098,26 @@ type CreateLivePullStreamTaskRequestParams struct {
 	// 4. Supported video coding formats: H.264, H.265.
 	// 5. Supported audio coding format: AAC.
 	// 6. Use small video files, preferably not longer than one hour. Large files may take a long time to load or resume after pause. Relay may fail if the time consumed exceeds 15 seconds.
-	SourceUrls []*string `json:"SourceUrls,omitnil" name:"SourceUrls"`
+	SourceUrls []*string `json:"SourceUrls,omitnil,omitempty" name:"SourceUrls"`
 
 	// The push domain name.
 	// The pulled stream is pushed to this domain.
 	// Note: If the destination is not a CSS address and its format is different from that of CSS addresses, pass the full address to `ToUrl`. For details, see the description of the `ToUrl` parameter.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The application to push to.
 	// The pulled stream is pushed to this application.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The stream name.
 	// The pulled stream is pushed under this name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The start time.
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time. Notes:
 	// 1. The end time must be later than the start time.
@@ -1126,16 +1126,16 @@ type CreateLivePullStreamTaskRequestParams struct {
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The operator.
-	Operator *string `json:"Operator,omitnil" name:"Operator"`
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
 	// The push parameter.
 	// This is a custom parameter carried during push.
 	// Example:
 	// bak=1&test=2
-	PushArgs *string `json:"PushArgs,omitnil" name:"PushArgs"`
+	PushArgs *string `json:"PushArgs,omitnil,omitempty" name:"PushArgs"`
 
 	// The events to listen for. If you do not pass this parameter, all events will be listened for.
 	// TaskStart: Callback for starting a task
@@ -1150,38 +1150,38 @@ type CreateLivePullStreamTaskRequestParams struct {
 	// PullFileFailed: Error pulling from video files.
 	// PushStreamFailed: Push error.
 	// FileEndEarly: The video file ended prematurely.
-	CallbackEvents []*string `json:"CallbackEvents,omitnil" name:"CallbackEvents"`
+	CallbackEvents []*string `json:"CallbackEvents,omitnil,omitempty" name:"CallbackEvents"`
 
 	// The number of times to loop video files. Default value: -1.
 	// -1: Loop indefinitely
 	// 0: Do not loop
 	// > 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
 	// This parameter is valid only when the source is video files.
-	VodLoopTimes *string `json:"VodLoopTimes,omitnil" name:"VodLoopTimes"`
+	VodLoopTimes *string `json:"VodLoopTimes,omitnil,omitempty" name:"VodLoopTimes"`
 
 	// The behavior after the source video files (`SourceUrls`) are changed.
 	// ImmediateNewSource: Play the new videos immediately
 	// ContinueBreakPoint: Play the new videos after the current video is finished playing (the remaining videos in the old playlist will not be played).
 	// 
 	// This parameter is valid only if the source before the change is video files.
-	VodRefreshType *string `json:"VodRefreshType,omitnil" name:"VodRefreshType"`
+	VodRefreshType *string `json:"VodRefreshType,omitnil,omitempty" name:"VodRefreshType"`
 
 	// A custom callback URL.
 	// Callbacks about pull and relay events will be sent to this URL.
-	CallbackUrl *string `json:"CallbackUrl,omitnil" name:"CallbackUrl"`
+	CallbackUrl *string `json:"CallbackUrl,omitnil,omitempty" name:"CallbackUrl"`
 
 	// Other parameters.
 	// For example, you can use `ignore_region` to ignore the region passed in and assign a region based on load distribution.
-	ExtraCmd *string `json:"ExtraCmd,omitnil" name:"ExtraCmd"`
+	ExtraCmd *string `json:"ExtraCmd,omitnil,omitempty" name:"ExtraCmd"`
 
 	// The remarks for a task, not longer than 512 bytes.
-	Comment *string `json:"Comment,omitnil" name:"Comment"`
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
 	// The complete destination URL.
 	// If you specify this parameter, make sure you pass in an empty string for `DomainName`, `AppName`, and `StreamName`.
 	// 
 	// Note: Make sure that the expiration time of the signature is later than the task end time.
-	ToUrl *string `json:"ToUrl,omitnil" name:"ToUrl"`
+	ToUrl *string `json:"ToUrl,omitnil,omitempty" name:"ToUrl"`
 
 	// The backup source type.
 	// PullLivePushLive: Live streaming
@@ -1190,24 +1190,24 @@ type CreateLivePullStreamTaskRequestParams struct {
 	// 1. Backup sources are supported only if the primary source type is live streaming.
 	// 2. When pull from the primary source is interrupted, the system will pull from the backup source.
 	// 3. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
-	BackupSourceType *string `json:"BackupSourceType,omitnil" name:"BackupSourceType"`
+	BackupSourceType *string `json:"BackupSourceType,omitnil,omitempty" name:"BackupSourceType"`
 
 	// The URL of the backup source.
 	// You can specify only one backup source URL.
-	BackupSourceUrl *string `json:"BackupSourceUrl,omitnil" name:"BackupSourceUrl"`
+	BackupSourceUrl *string `json:"BackupSourceUrl,omitnil,omitempty" name:"BackupSourceUrl"`
 
 	// The information of watermarks to add.
 	// Notes:
 	// 1. You can add up to four watermarks to different locations of the video.
 	// 2. Make sure you use publicly accessible URLs for the watermark images.
 	// 3. Supported image formats include PNG, JPG, and GIF.
-	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitnil" name:"WatermarkList"`
+	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitnil,omitempty" name:"WatermarkList"`
 
 	// Whether to use local mode when the source type is video files. The default is `0`.
 	// 0: Do not use local mode
 	// 1: Use local mode
 	// Note: If you enable local mode, MP4 files will be downloaded to local storage, and the local files will be used for push. This ensures more reliable push. Pushing a local file will incur additional fees.
-	VodLocalMode *int64 `json:"VodLocalMode,omitnil" name:"VodLocalMode"`
+	VodLocalMode *int64 `json:"VodLocalMode,omitnil,omitempty" name:"VodLocalMode"`
 }
 
 type CreateLivePullStreamTaskRequest struct {
@@ -1217,7 +1217,7 @@ type CreateLivePullStreamTaskRequest struct {
 	// PullLivePushLive: Live streaming
 	// PullVodPushLive: Video files
 	// PullPicPushLive: Images
-	SourceType *string `json:"SourceType,omitnil" name:"SourceType"`
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
 
 	// The source URL(s).
 	// If `SourceType` is `PullLivePushLive`, you can specify only one source URL.
@@ -1231,26 +1231,26 @@ type CreateLivePullStreamTaskRequest struct {
 	// 4. Supported video coding formats: H.264, H.265.
 	// 5. Supported audio coding format: AAC.
 	// 6. Use small video files, preferably not longer than one hour. Large files may take a long time to load or resume after pause. Relay may fail if the time consumed exceeds 15 seconds.
-	SourceUrls []*string `json:"SourceUrls,omitnil" name:"SourceUrls"`
+	SourceUrls []*string `json:"SourceUrls,omitnil,omitempty" name:"SourceUrls"`
 
 	// The push domain name.
 	// The pulled stream is pushed to this domain.
 	// Note: If the destination is not a CSS address and its format is different from that of CSS addresses, pass the full address to `ToUrl`. For details, see the description of the `ToUrl` parameter.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The application to push to.
 	// The pulled stream is pushed to this application.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The stream name.
 	// The pulled stream is pushed under this name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The start time.
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time. Notes:
 	// 1. The end time must be later than the start time.
@@ -1259,16 +1259,16 @@ type CreateLivePullStreamTaskRequest struct {
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The operator.
-	Operator *string `json:"Operator,omitnil" name:"Operator"`
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
 	// The push parameter.
 	// This is a custom parameter carried during push.
 	// Example:
 	// bak=1&test=2
-	PushArgs *string `json:"PushArgs,omitnil" name:"PushArgs"`
+	PushArgs *string `json:"PushArgs,omitnil,omitempty" name:"PushArgs"`
 
 	// The events to listen for. If you do not pass this parameter, all events will be listened for.
 	// TaskStart: Callback for starting a task
@@ -1283,38 +1283,38 @@ type CreateLivePullStreamTaskRequest struct {
 	// PullFileFailed: Error pulling from video files.
 	// PushStreamFailed: Push error.
 	// FileEndEarly: The video file ended prematurely.
-	CallbackEvents []*string `json:"CallbackEvents,omitnil" name:"CallbackEvents"`
+	CallbackEvents []*string `json:"CallbackEvents,omitnil,omitempty" name:"CallbackEvents"`
 
 	// The number of times to loop video files. Default value: -1.
 	// -1: Loop indefinitely
 	// 0: Do not loop
 	// > 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
 	// This parameter is valid only when the source is video files.
-	VodLoopTimes *string `json:"VodLoopTimes,omitnil" name:"VodLoopTimes"`
+	VodLoopTimes *string `json:"VodLoopTimes,omitnil,omitempty" name:"VodLoopTimes"`
 
 	// The behavior after the source video files (`SourceUrls`) are changed.
 	// ImmediateNewSource: Play the new videos immediately
 	// ContinueBreakPoint: Play the new videos after the current video is finished playing (the remaining videos in the old playlist will not be played).
 	// 
 	// This parameter is valid only if the source before the change is video files.
-	VodRefreshType *string `json:"VodRefreshType,omitnil" name:"VodRefreshType"`
+	VodRefreshType *string `json:"VodRefreshType,omitnil,omitempty" name:"VodRefreshType"`
 
 	// A custom callback URL.
 	// Callbacks about pull and relay events will be sent to this URL.
-	CallbackUrl *string `json:"CallbackUrl,omitnil" name:"CallbackUrl"`
+	CallbackUrl *string `json:"CallbackUrl,omitnil,omitempty" name:"CallbackUrl"`
 
 	// Other parameters.
 	// For example, you can use `ignore_region` to ignore the region passed in and assign a region based on load distribution.
-	ExtraCmd *string `json:"ExtraCmd,omitnil" name:"ExtraCmd"`
+	ExtraCmd *string `json:"ExtraCmd,omitnil,omitempty" name:"ExtraCmd"`
 
 	// The remarks for a task, not longer than 512 bytes.
-	Comment *string `json:"Comment,omitnil" name:"Comment"`
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
 	// The complete destination URL.
 	// If you specify this parameter, make sure you pass in an empty string for `DomainName`, `AppName`, and `StreamName`.
 	// 
 	// Note: Make sure that the expiration time of the signature is later than the task end time.
-	ToUrl *string `json:"ToUrl,omitnil" name:"ToUrl"`
+	ToUrl *string `json:"ToUrl,omitnil,omitempty" name:"ToUrl"`
 
 	// The backup source type.
 	// PullLivePushLive: Live streaming
@@ -1323,24 +1323,24 @@ type CreateLivePullStreamTaskRequest struct {
 	// 1. Backup sources are supported only if the primary source type is live streaming.
 	// 2. When pull from the primary source is interrupted, the system will pull from the backup source.
 	// 3. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
-	BackupSourceType *string `json:"BackupSourceType,omitnil" name:"BackupSourceType"`
+	BackupSourceType *string `json:"BackupSourceType,omitnil,omitempty" name:"BackupSourceType"`
 
 	// The URL of the backup source.
 	// You can specify only one backup source URL.
-	BackupSourceUrl *string `json:"BackupSourceUrl,omitnil" name:"BackupSourceUrl"`
+	BackupSourceUrl *string `json:"BackupSourceUrl,omitnil,omitempty" name:"BackupSourceUrl"`
 
 	// The information of watermarks to add.
 	// Notes:
 	// 1. You can add up to four watermarks to different locations of the video.
 	// 2. Make sure you use publicly accessible URLs for the watermark images.
 	// 3. Supported image formats include PNG, JPG, and GIF.
-	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitnil" name:"WatermarkList"`
+	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitnil,omitempty" name:"WatermarkList"`
 
 	// Whether to use local mode when the source type is video files. The default is `0`.
 	// 0: Do not use local mode
 	// 1: Use local mode
 	// Note: If you enable local mode, MP4 files will be downloaded to local storage, and the local files will be used for push. This ensures more reliable push. Pushing a local file will incur additional fees.
-	VodLocalMode *int64 `json:"VodLocalMode,omitnil" name:"VodLocalMode"`
+	VodLocalMode *int64 `json:"VodLocalMode,omitnil,omitempty" name:"VodLocalMode"`
 }
 
 func (r *CreateLivePullStreamTaskRequest) ToJsonString() string {
@@ -1384,10 +1384,10 @@ func (r *CreateLivePullStreamTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLivePullStreamTaskResponseParams struct {
 	// The task ID.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLivePullStreamTaskResponse struct {
@@ -1409,43 +1409,43 @@ func (r *CreateLivePullStreamTaskResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveRecordRequestParams struct {
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Push domain name. This parameter must be set for multi-domain name push.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Recording start time, which is China standard time and should be URL-encoded (RFC3986). For example, the encoding of 2017-01-01 10:10:01 is 2017-01-01+10%3a10%3a01.
 	// In scheduled recording mode, this field must be set; in real-time video recording mode, this field is ignored.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Recording end time, which is China standard time and should be URL-encoded (RFC3986). For example, the encoding of 2017-01-01 10:30:01 is 2017-01-01+10%3a30%3a01.
 	// In scheduled recording mode, this field must be set; in real-time video recording mode, this field is optional. If the recording is set to real-time video recording mode through the `Highlight` parameter, the set end time should not be more than 30 minutes after the current time. If the set end time is more than 30 minutes after the current time, earlier than the current time, or left empty, the actual end time will be 30 minutes after the current time.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Recording type.
 	// "video": Audio-video recording **(default)**.
 	// "audio": audio recording.
 	// In both scheduled and real-time video recording modes, this parameter is valid and is not case sensitive.
-	RecordType *string `json:"RecordType,omitnil" name:"RecordType"`
+	RecordType *string `json:"RecordType,omitnil,omitempty" name:"RecordType"`
 
 	// Recording file format. Valid values:
 	// "flv" **(default)**, "hls", "mp4", "aac", "mp3".
 	// In both scheduled and real-time video recording modes, this parameter is valid and is not case sensitive.
-	FileFormat *string `json:"FileFormat,omitnil" name:"FileFormat"`
+	FileFormat *string `json:"FileFormat,omitnil,omitempty" name:"FileFormat"`
 
 	// Mark for enabling real-time video recording mode.
 	// 0: Real-time video recording mode is not enabled, i.e., the scheduled recording mode is used **(default)**. See [Sample 1](#.E7.A4.BA.E4.BE.8B1-.E5.88.9B.E5.BB.BA.E5.AE.9A.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1).
 	// 1: Real-time video recording mode is enabled. See [Sample 2](#.E7.A4.BA.E4.BE.8B2-.E5.88.9B.E5.BB.BA.E5.AE.9E.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1).
-	Highlight *int64 `json:"Highlight,omitnil" name:"Highlight"`
+	Highlight *int64 `json:"Highlight,omitnil,omitempty" name:"Highlight"`
 
 	// Flag for enabling A+B=C mixed stream recording.
 	// 0: A+B=C mixed stream recording is not enabled **(default)**.
 	// 1: A+B=C mixed stream recording is enabled.
 	// In both scheduled and real-time video recording modes, this parameter is valid.
-	MixStream *int64 `json:"MixStream,omitnil" name:"MixStream"`
+	MixStream *int64 `json:"MixStream,omitnil,omitempty" name:"MixStream"`
 
 	// Recording stream parameter. The following parameters are supported currently:
 	// record_interval: recording interval in seconds. Value range: 1800-7200.
@@ -1453,50 +1453,50 @@ type CreateLiveRecordRequestParams struct {
 	// Example: record_interval=3600&storage_time=2592000.
 	// Note: the parameter needs to be URL-encoded.
 	// In both scheduled and real-time video recording modes, this parameter is valid.
-	StreamParam *string `json:"StreamParam,omitnil" name:"StreamParam"`
+	StreamParam *string `json:"StreamParam,omitnil,omitempty" name:"StreamParam"`
 }
 
 type CreateLiveRecordRequest struct {
 	*tchttp.BaseRequest
 	
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Push domain name. This parameter must be set for multi-domain name push.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Recording start time, which is China standard time and should be URL-encoded (RFC3986). For example, the encoding of 2017-01-01 10:10:01 is 2017-01-01+10%3a10%3a01.
 	// In scheduled recording mode, this field must be set; in real-time video recording mode, this field is ignored.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Recording end time, which is China standard time and should be URL-encoded (RFC3986). For example, the encoding of 2017-01-01 10:30:01 is 2017-01-01+10%3a30%3a01.
 	// In scheduled recording mode, this field must be set; in real-time video recording mode, this field is optional. If the recording is set to real-time video recording mode through the `Highlight` parameter, the set end time should not be more than 30 minutes after the current time. If the set end time is more than 30 minutes after the current time, earlier than the current time, or left empty, the actual end time will be 30 minutes after the current time.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Recording type.
 	// "video": Audio-video recording **(default)**.
 	// "audio": audio recording.
 	// In both scheduled and real-time video recording modes, this parameter is valid and is not case sensitive.
-	RecordType *string `json:"RecordType,omitnil" name:"RecordType"`
+	RecordType *string `json:"RecordType,omitnil,omitempty" name:"RecordType"`
 
 	// Recording file format. Valid values:
 	// "flv" **(default)**, "hls", "mp4", "aac", "mp3".
 	// In both scheduled and real-time video recording modes, this parameter is valid and is not case sensitive.
-	FileFormat *string `json:"FileFormat,omitnil" name:"FileFormat"`
+	FileFormat *string `json:"FileFormat,omitnil,omitempty" name:"FileFormat"`
 
 	// Mark for enabling real-time video recording mode.
 	// 0: Real-time video recording mode is not enabled, i.e., the scheduled recording mode is used **(default)**. See [Sample 1](#.E7.A4.BA.E4.BE.8B1-.E5.88.9B.E5.BB.BA.E5.AE.9A.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1).
 	// 1: Real-time video recording mode is enabled. See [Sample 2](#.E7.A4.BA.E4.BE.8B2-.E5.88.9B.E5.BB.BA.E5.AE.9E.E6.97.B6.E5.BD.95.E5.88.B6.E4.BB.BB.E5.8A.A1).
-	Highlight *int64 `json:"Highlight,omitnil" name:"Highlight"`
+	Highlight *int64 `json:"Highlight,omitnil,omitempty" name:"Highlight"`
 
 	// Flag for enabling A+B=C mixed stream recording.
 	// 0: A+B=C mixed stream recording is not enabled **(default)**.
 	// 1: A+B=C mixed stream recording is enabled.
 	// In both scheduled and real-time video recording modes, this parameter is valid.
-	MixStream *int64 `json:"MixStream,omitnil" name:"MixStream"`
+	MixStream *int64 `json:"MixStream,omitnil,omitempty" name:"MixStream"`
 
 	// Recording stream parameter. The following parameters are supported currently:
 	// record_interval: recording interval in seconds. Value range: 1800-7200.
@@ -1504,7 +1504,7 @@ type CreateLiveRecordRequest struct {
 	// Example: record_interval=3600&storage_time=2592000.
 	// Note: the parameter needs to be URL-encoded.
 	// In both scheduled and real-time video recording modes, this parameter is valid.
-	StreamParam *string `json:"StreamParam,omitnil" name:"StreamParam"`
+	StreamParam *string `json:"StreamParam,omitnil,omitempty" name:"StreamParam"`
 }
 
 func (r *CreateLiveRecordRequest) ToJsonString() string {
@@ -1538,10 +1538,10 @@ func (r *CreateLiveRecordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveRecordResponseParams struct {
 	// Task ID, which uniquely identifies a recording task globally.
-	TaskId *uint64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLiveRecordResponse struct {
@@ -1563,34 +1563,34 @@ func (r *CreateLiveRecordResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveRecordRuleRequestParams struct {
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
 	// Note: If the parameter is a non-empty string, the rule will be only applicable to the particular stream.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 type CreateLiveRecordRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
 	// Note: If the parameter is a non-empty string, the rule will be only applicable to the particular stream.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 func (r *CreateLiveRecordRuleRequest) ToJsonString() string {
@@ -1618,7 +1618,7 @@ func (r *CreateLiveRecordRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveRecordRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLiveRecordRuleResponse struct {
@@ -1640,78 +1640,78 @@ func (r *CreateLiveRecordRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveRecordTemplateRequestParams struct {
 	// Template name. Only letters, digits, underscores, and hyphens can be contained.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Message description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// FLV recording parameter, which is set when FLV recording is enabled.
-	FlvParam *RecordParam `json:"FlvParam,omitnil" name:"FlvParam"`
+	FlvParam *RecordParam `json:"FlvParam,omitnil,omitempty" name:"FlvParam"`
 
 	// HLS recording parameter, which is set when HLS recording is enabled.
-	HlsParam *RecordParam `json:"HlsParam,omitnil" name:"HlsParam"`
+	HlsParam *RecordParam `json:"HlsParam,omitnil,omitempty" name:"HlsParam"`
 
 	// Mp4 recording parameter, which is set when Mp4 recording is enabled.
-	Mp4Param *RecordParam `json:"Mp4Param,omitnil" name:"Mp4Param"`
+	Mp4Param *RecordParam `json:"Mp4Param,omitnil,omitempty" name:"Mp4Param"`
 
 	// AAC recording parameter, which is set when AAC recording is enabled.
-	AacParam *RecordParam `json:"AacParam,omitnil" name:"AacParam"`
+	AacParam *RecordParam `json:"AacParam,omitnil,omitempty" name:"AacParam"`
 
 	// LVB type. Default value: 0.
 	// 0: LVB.
 	// 1: LCB.
-	IsDelayLive *int64 `json:"IsDelayLive,omitnil" name:"IsDelayLive"`
+	IsDelayLive *int64 `json:"IsDelayLive,omitnil,omitempty" name:"IsDelayLive"`
 
 	// HLS-specific recording parameter.
-	HlsSpecialParam *HlsSpecialParam `json:"HlsSpecialParam,omitnil" name:"HlsSpecialParam"`
+	HlsSpecialParam *HlsSpecialParam `json:"HlsSpecialParam,omitnil,omitempty" name:"HlsSpecialParam"`
 
 	// Mp3 recording parameter, which is set when Mp3 recording is enabled.
-	Mp3Param *RecordParam `json:"Mp3Param,omitnil" name:"Mp3Param"`
+	Mp3Param *RecordParam `json:"Mp3Param,omitnil,omitempty" name:"Mp3Param"`
 
 	// Whether to remove the watermark. This parameter is invalid if `IsDelayLive` is `1`.
-	RemoveWatermark *bool `json:"RemoveWatermark,omitnil" name:"RemoveWatermark"`
+	RemoveWatermark *bool `json:"RemoveWatermark,omitnil,omitempty" name:"RemoveWatermark"`
 
 	// A special parameter for FLV recording.
-	FlvSpecialParam *FlvSpecialParam `json:"FlvSpecialParam,omitnil" name:"FlvSpecialParam"`
+	FlvSpecialParam *FlvSpecialParam `json:"FlvSpecialParam,omitnil,omitempty" name:"FlvSpecialParam"`
 }
 
 type CreateLiveRecordTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Template name. Only letters, digits, underscores, and hyphens can be contained.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Message description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// FLV recording parameter, which is set when FLV recording is enabled.
-	FlvParam *RecordParam `json:"FlvParam,omitnil" name:"FlvParam"`
+	FlvParam *RecordParam `json:"FlvParam,omitnil,omitempty" name:"FlvParam"`
 
 	// HLS recording parameter, which is set when HLS recording is enabled.
-	HlsParam *RecordParam `json:"HlsParam,omitnil" name:"HlsParam"`
+	HlsParam *RecordParam `json:"HlsParam,omitnil,omitempty" name:"HlsParam"`
 
 	// Mp4 recording parameter, which is set when Mp4 recording is enabled.
-	Mp4Param *RecordParam `json:"Mp4Param,omitnil" name:"Mp4Param"`
+	Mp4Param *RecordParam `json:"Mp4Param,omitnil,omitempty" name:"Mp4Param"`
 
 	// AAC recording parameter, which is set when AAC recording is enabled.
-	AacParam *RecordParam `json:"AacParam,omitnil" name:"AacParam"`
+	AacParam *RecordParam `json:"AacParam,omitnil,omitempty" name:"AacParam"`
 
 	// LVB type. Default value: 0.
 	// 0: LVB.
 	// 1: LCB.
-	IsDelayLive *int64 `json:"IsDelayLive,omitnil" name:"IsDelayLive"`
+	IsDelayLive *int64 `json:"IsDelayLive,omitnil,omitempty" name:"IsDelayLive"`
 
 	// HLS-specific recording parameter.
-	HlsSpecialParam *HlsSpecialParam `json:"HlsSpecialParam,omitnil" name:"HlsSpecialParam"`
+	HlsSpecialParam *HlsSpecialParam `json:"HlsSpecialParam,omitnil,omitempty" name:"HlsSpecialParam"`
 
 	// Mp3 recording parameter, which is set when Mp3 recording is enabled.
-	Mp3Param *RecordParam `json:"Mp3Param,omitnil" name:"Mp3Param"`
+	Mp3Param *RecordParam `json:"Mp3Param,omitnil,omitempty" name:"Mp3Param"`
 
 	// Whether to remove the watermark. This parameter is invalid if `IsDelayLive` is `1`.
-	RemoveWatermark *bool `json:"RemoveWatermark,omitnil" name:"RemoveWatermark"`
+	RemoveWatermark *bool `json:"RemoveWatermark,omitnil,omitempty" name:"RemoveWatermark"`
 
 	// A special parameter for FLV recording.
-	FlvSpecialParam *FlvSpecialParam `json:"FlvSpecialParam,omitnil" name:"FlvSpecialParam"`
+	FlvSpecialParam *FlvSpecialParam `json:"FlvSpecialParam,omitnil,omitempty" name:"FlvSpecialParam"`
 }
 
 func (r *CreateLiveRecordTemplateRequest) ToJsonString() string {
@@ -1746,10 +1746,10 @@ func (r *CreateLiveRecordTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveRecordTemplateResponseParams struct {
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLiveRecordTemplateResponse struct {
@@ -1771,34 +1771,34 @@ func (r *CreateLiveRecordTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveSnapshotRuleRequestParams struct {
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
 	// Note: if this parameter is a non-empty string, the rule will take effect only for the particular stream.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 type CreateLiveSnapshotRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
 	// Note: if this parameter is a non-empty string, the rule will take effect only for the particular stream.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 func (r *CreateLiveSnapshotRuleRequest) ToJsonString() string {
@@ -1826,7 +1826,7 @@ func (r *CreateLiveSnapshotRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveSnapshotRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLiveSnapshotRuleResponse struct {
@@ -1850,49 +1850,49 @@ type CreateLiveSnapshotTemplateRequestParams struct {
 	// Template name.
 	// Maximum length: 255 bytes.
 	// Only letters, digits, underscores, and hyphens can be contained.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// COS application ID.
-	CosAppId *int64 `json:"CosAppId,omitnil" name:"CosAppId"`
+	CosAppId *int64 `json:"CosAppId,omitnil,omitempty" name:"CosAppId"`
 
 	// COS bucket name.
 	// Note: the value of `CosBucket` cannot contain `-[appid]`.
-	CosBucket *string `json:"CosBucket,omitnil" name:"CosBucket"`
+	CosBucket *string `json:"CosBucket,omitnil,omitempty" name:"CosBucket"`
 
 	// COS region.
-	CosRegion *string `json:"CosRegion,omitnil" name:"CosRegion"`
+	CosRegion *string `json:"CosRegion,omitnil,omitempty" name:"CosRegion"`
 
 	// Description.
 	// Maximum length: 1,024 bytes.
 	// Only letters, digits, underscores, and hyphens can be contained.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Screencapturing interval (s). Default value: 10
 	// Value range: 2-300
-	SnapshotInterval *int64 `json:"SnapshotInterval,omitnil" name:"SnapshotInterval"`
+	SnapshotInterval *int64 `json:"SnapshotInterval,omitnil,omitempty" name:"SnapshotInterval"`
 
 	// Screenshot width. Default value: `0` (original width)
 	// Value range: 0-3000
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Screenshot height. Default value: `0` (original height)
 	// Value range: 0-2000
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// Whether to enable porn detection. 0: no, 1: yes. Default value: 0
-	PornFlag *int64 `json:"PornFlag,omitnil" name:"PornFlag"`
+	PornFlag *int64 `json:"PornFlag,omitnil,omitempty" name:"PornFlag"`
 
 	// COS Bucket folder prefix.
 	// If no value is entered, the default value
 	// `/{Year}-{Month}-{Day}`
 	// will be used.
-	CosPrefix *string `json:"CosPrefix,omitnil" name:"CosPrefix"`
+	CosPrefix *string `json:"CosPrefix,omitnil,omitempty" name:"CosPrefix"`
 
 	// COS filename.
 	// If no value is entered, the default value 
 	// `{StreamID}-screenshot-{Hour}-{Minute}-{Second}-{Width}x{Height}{Ext}`
 	// will be used.
-	CosFileName *string `json:"CosFileName,omitnil" name:"CosFileName"`
+	CosFileName *string `json:"CosFileName,omitnil,omitempty" name:"CosFileName"`
 }
 
 type CreateLiveSnapshotTemplateRequest struct {
@@ -1901,49 +1901,49 @@ type CreateLiveSnapshotTemplateRequest struct {
 	// Template name.
 	// Maximum length: 255 bytes.
 	// Only letters, digits, underscores, and hyphens can be contained.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// COS application ID.
-	CosAppId *int64 `json:"CosAppId,omitnil" name:"CosAppId"`
+	CosAppId *int64 `json:"CosAppId,omitnil,omitempty" name:"CosAppId"`
 
 	// COS bucket name.
 	// Note: the value of `CosBucket` cannot contain `-[appid]`.
-	CosBucket *string `json:"CosBucket,omitnil" name:"CosBucket"`
+	CosBucket *string `json:"CosBucket,omitnil,omitempty" name:"CosBucket"`
 
 	// COS region.
-	CosRegion *string `json:"CosRegion,omitnil" name:"CosRegion"`
+	CosRegion *string `json:"CosRegion,omitnil,omitempty" name:"CosRegion"`
 
 	// Description.
 	// Maximum length: 1,024 bytes.
 	// Only letters, digits, underscores, and hyphens can be contained.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Screencapturing interval (s). Default value: 10
 	// Value range: 2-300
-	SnapshotInterval *int64 `json:"SnapshotInterval,omitnil" name:"SnapshotInterval"`
+	SnapshotInterval *int64 `json:"SnapshotInterval,omitnil,omitempty" name:"SnapshotInterval"`
 
 	// Screenshot width. Default value: `0` (original width)
 	// Value range: 0-3000
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Screenshot height. Default value: `0` (original height)
 	// Value range: 0-2000
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// Whether to enable porn detection. 0: no, 1: yes. Default value: 0
-	PornFlag *int64 `json:"PornFlag,omitnil" name:"PornFlag"`
+	PornFlag *int64 `json:"PornFlag,omitnil,omitempty" name:"PornFlag"`
 
 	// COS Bucket folder prefix.
 	// If no value is entered, the default value
 	// `/{Year}-{Month}-{Day}`
 	// will be used.
-	CosPrefix *string `json:"CosPrefix,omitnil" name:"CosPrefix"`
+	CosPrefix *string `json:"CosPrefix,omitnil,omitempty" name:"CosPrefix"`
 
 	// COS filename.
 	// If no value is entered, the default value 
 	// `{StreamID}-screenshot-{Hour}-{Minute}-{Second}-{Width}x{Height}{Ext}`
 	// will be used.
-	CosFileName *string `json:"CosFileName,omitnil" name:"CosFileName"`
+	CosFileName *string `json:"CosFileName,omitnil,omitempty" name:"CosFileName"`
 }
 
 func (r *CreateLiveSnapshotTemplateRequest) ToJsonString() string {
@@ -1978,10 +1978,10 @@ func (r *CreateLiveSnapshotTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveSnapshotTemplateResponseParams struct {
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLiveSnapshotTemplateResponse struct {
@@ -2003,34 +2003,34 @@ func (r *CreateLiveSnapshotTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveTimeShiftRuleRequestParams struct {
 	// The push domain.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The push path, which should be the same as `AppName` in the push and playback URLs. The default value is `live`.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The stream name.
 	// Note: If you pass in a non-empty string, the rule will only be applied to the specified stream.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type CreateLiveTimeShiftRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// The push domain.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The push path, which should be the same as `AppName` in the push and playback URLs. The default value is `live`.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The stream name.
 	// Note: If you pass in a non-empty string, the rule will only be applied to the specified stream.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *CreateLiveTimeShiftRuleRequest) ToJsonString() string {
@@ -2058,7 +2058,7 @@ func (r *CreateLiveTimeShiftRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveTimeShiftRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLiveTimeShiftRuleResponse struct {
@@ -2082,36 +2082,36 @@ type CreateLiveTimeShiftTemplateRequestParams struct {
 	// The template name.
 	// Maximum length: 255 bytes.
 	// Only letters, numbers, underscores, and hyphens are supported.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// The time shifting duration.
 	// Unit: Second.
-	Duration *uint64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// The template description.
 	// Only letters, numbers, underscores, and hyphens are supported.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// The region.
 	// `Mainland`: The Chinese mainland.
 	// `Overseas`: Outside the Chinese mainland.
 	// Default value: `Mainland`.
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// The segment size.
 	// Value range: 3-10.
 	// Unit: Second.
 	// Default value: 5
-	ItemDuration *uint64 `json:"ItemDuration,omitnil" name:"ItemDuration"`
+	ItemDuration *uint64 `json:"ItemDuration,omitnil,omitempty" name:"ItemDuration"`
 
 	// Whether to remove watermarks.
 	// If you pass in `true`, the original stream will be recorded.
 	// Default value: `false`.
-	RemoveWatermark *bool `json:"RemoveWatermark,omitnil" name:"RemoveWatermark"`
+	RemoveWatermark *bool `json:"RemoveWatermark,omitnil,omitempty" name:"RemoveWatermark"`
 
 	// The transcoding template IDs.
 	// This API works only if `RemoveWatermark` is `false`.
-	TranscodeTemplateIds []*int64 `json:"TranscodeTemplateIds,omitnil" name:"TranscodeTemplateIds"`
+	TranscodeTemplateIds []*int64 `json:"TranscodeTemplateIds,omitnil,omitempty" name:"TranscodeTemplateIds"`
 }
 
 type CreateLiveTimeShiftTemplateRequest struct {
@@ -2120,36 +2120,36 @@ type CreateLiveTimeShiftTemplateRequest struct {
 	// The template name.
 	// Maximum length: 255 bytes.
 	// Only letters, numbers, underscores, and hyphens are supported.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// The time shifting duration.
 	// Unit: Second.
-	Duration *uint64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// The template description.
 	// Only letters, numbers, underscores, and hyphens are supported.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// The region.
 	// `Mainland`: The Chinese mainland.
 	// `Overseas`: Outside the Chinese mainland.
 	// Default value: `Mainland`.
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// The segment size.
 	// Value range: 3-10.
 	// Unit: Second.
 	// Default value: 5
-	ItemDuration *uint64 `json:"ItemDuration,omitnil" name:"ItemDuration"`
+	ItemDuration *uint64 `json:"ItemDuration,omitnil,omitempty" name:"ItemDuration"`
 
 	// Whether to remove watermarks.
 	// If you pass in `true`, the original stream will be recorded.
 	// Default value: `false`.
-	RemoveWatermark *bool `json:"RemoveWatermark,omitnil" name:"RemoveWatermark"`
+	RemoveWatermark *bool `json:"RemoveWatermark,omitnil,omitempty" name:"RemoveWatermark"`
 
 	// The transcoding template IDs.
 	// This API works only if `RemoveWatermark` is `false`.
-	TranscodeTemplateIds []*int64 `json:"TranscodeTemplateIds,omitnil" name:"TranscodeTemplateIds"`
+	TranscodeTemplateIds []*int64 `json:"TranscodeTemplateIds,omitnil,omitempty" name:"TranscodeTemplateIds"`
 }
 
 func (r *CreateLiveTimeShiftTemplateRequest) ToJsonString() string {
@@ -2180,10 +2180,10 @@ func (r *CreateLiveTimeShiftTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveTimeShiftTemplateResponseParams struct {
 	// The template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLiveTimeShiftTemplateResponse struct {
@@ -2205,32 +2205,32 @@ func (r *CreateLiveTimeShiftTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveTranscodeRuleRequestParams struct {
 	// Playback domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The push path, which is the same as `AppName` in the push and playback addresses and is `live` by default. If you only want to bind the template to a domain, pass in an empty string.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name. If only the domain name or path is bound, leave this parameter blank.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Designates an existing template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type CreateLiveTranscodeRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Playback domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The push path, which is the same as `AppName` in the push and playback addresses and is `live` by default. If you only want to bind the template to a domain, pass in an empty string.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name. If only the domain name or path is bound, leave this parameter blank.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Designates an existing template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *CreateLiveTranscodeRuleRequest) ToJsonString() string {
@@ -2258,7 +2258,7 @@ func (r *CreateLiveTranscodeRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveTranscodeRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLiveTranscodeRuleResponse struct {
@@ -2283,95 +2283,95 @@ type CreateLiveTranscodeTemplateRequestParams struct {
 	// Length limit:
 	//   Standard transcoding: 1-10 characters
 	//   Top speed codec transcoding: 3-10 characters
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Video bitrate in Kbps. Value range: 100-8000.
 	// Note: the transcoding template requires that the bitrate be unique. Therefore, the final saved bitrate may be different from the input bitrate.
-	VideoBitrate *int64 `json:"VideoBitrate,omitnil" name:"VideoBitrate"`
+	VideoBitrate *int64 `json:"VideoBitrate,omitnil,omitempty" name:"VideoBitrate"`
 
 	// Audio codec. Default value: aac.
 	// Note: this parameter is unsupported now.
-	Acodec *string `json:"Acodec,omitnil" name:"Acodec"`
+	Acodec *string `json:"Acodec,omitnil,omitempty" name:"Acodec"`
 
 	// Audio bitrate. Default value: 0.
 	// Value range: 0-500.
-	AudioBitrate *int64 `json:"AudioBitrate,omitnil" name:"AudioBitrate"`
+	AudioBitrate *int64 `json:"AudioBitrate,omitnil,omitempty" name:"AudioBitrate"`
 
 	// Video codec. Valid values: h264, h265, origin (default)
 	// 
 	// origin: original codec as the output codec
-	Vcodec *string `json:"Vcodec,omitnil" name:"Vcodec"`
+	Vcodec *string `json:"Vcodec,omitnil,omitempty" name:"Vcodec"`
 
 	// Template description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Whether to keep the video. 0: no; 1: yes. Default value: 1.
-	NeedVideo *int64 `json:"NeedVideo,omitnil" name:"NeedVideo"`
+	NeedVideo *int64 `json:"NeedVideo,omitnil,omitempty" name:"NeedVideo"`
 
 	// Width. Default value: 0.
 	// Value range: 0-3000
 	// It must be a multiple of 2. The original width is 0.
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Whether to keep the audio. 0: no; 1: yes. Default value: 1.
-	NeedAudio *int64 `json:"NeedAudio,omitnil" name:"NeedAudio"`
+	NeedAudio *int64 `json:"NeedAudio,omitnil,omitempty" name:"NeedAudio"`
 
 	// Height. Default value: 0
 	// Value range: 0-3000
 	// The value must be a multiple of 2. The original height is `0`.
 	// This parameter is required for a top speed codec template (when `AiTransCode` is `1`).
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// Frame rate. Default value: 0.
 	// Value range: 0-60
-	Fps *int64 `json:"Fps,omitnil" name:"Fps"`
+	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 
 	// Keyframe interval in seconds. Default value: original interval
 	// Value range: 2-6
-	Gop *int64 `json:"Gop,omitnil" name:"Gop"`
+	Gop *int64 `json:"Gop,omitnil,omitempty" name:"Gop"`
 
 	// Rotation angle. Default value: 0.
 	// Valid values: 0, 90, 180, 270
-	Rotate *int64 `json:"Rotate,omitnil" name:"Rotate"`
+	Rotate *int64 `json:"Rotate,omitnil,omitempty" name:"Rotate"`
 
 	// Encoding quality:
 	// baseline/main/high. Default value: baseline.
-	Profile *string `json:"Profile,omitnil" name:"Profile"`
+	Profile *string `json:"Profile,omitnil,omitempty" name:"Profile"`
 
 	// Whether to use the original bitrate when the set bitrate is larger than the original bitrate.
 	// 0: no, 1: yes
 	// Default value: 0.
-	BitrateToOrig *int64 `json:"BitrateToOrig,omitnil" name:"BitrateToOrig"`
+	BitrateToOrig *int64 `json:"BitrateToOrig,omitnil,omitempty" name:"BitrateToOrig"`
 
 	// Whether to use the original height when the set height is higher than the original height.
 	// 0: no, 1: yes
 	// Default value: 0.
-	HeightToOrig *int64 `json:"HeightToOrig,omitnil" name:"HeightToOrig"`
+	HeightToOrig *int64 `json:"HeightToOrig,omitnil,omitempty" name:"HeightToOrig"`
 
 	// Whether to use the original frame rate when the set frame rate is larger than the original frame rate.
 	// 0: no, 1: yes
 	// Default value: 0.
-	FpsToOrig *int64 `json:"FpsToOrig,omitnil" name:"FpsToOrig"`
+	FpsToOrig *int64 `json:"FpsToOrig,omitnil,omitempty" name:"FpsToOrig"`
 
 	// Whether it is a top speed codec template. 0: no, 1: yes. Default value: 0.
-	AiTransCode *int64 `json:"AiTransCode,omitnil" name:"AiTransCode"`
+	AiTransCode *int64 `json:"AiTransCode,omitnil,omitempty" name:"AiTransCode"`
 
 	// Bitrate compression ratio of top speed codec video.
 	// Target bitrate of top speed code = VideoBitrate * (1-AdaptBitratePercent)
 	// 
 	// Value range: 0.0-0.5.
-	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitnil" name:"AdaptBitratePercent"`
+	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitnil,omitempty" name:"AdaptBitratePercent"`
 
 	// Whether to use the short side as the video height. 0: no, 1: yes. Default value: 0.
-	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitnil" name:"ShortEdgeAsHeight"`
+	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitnil,omitempty" name:"ShortEdgeAsHeight"`
 
 	// The DRM encryption type. Valid values: fairplay, normalaes, widevine.
 	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
-	DRMType *string `json:"DRMType,omitnil" name:"DRMType"`
+	DRMType *string `json:"DRMType,omitnil,omitempty" name:"DRMType"`
 
 	// The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. You can choose only one video track (SD, HD, UHD1, or UHD2).
 	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
-	DRMTracks *string `json:"DRMTracks,omitnil" name:"DRMTracks"`
+	DRMTracks *string `json:"DRMTracks,omitnil,omitempty" name:"DRMTracks"`
 }
 
 type CreateLiveTranscodeTemplateRequest struct {
@@ -2381,95 +2381,95 @@ type CreateLiveTranscodeTemplateRequest struct {
 	// Length limit:
 	//   Standard transcoding: 1-10 characters
 	//   Top speed codec transcoding: 3-10 characters
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Video bitrate in Kbps. Value range: 100-8000.
 	// Note: the transcoding template requires that the bitrate be unique. Therefore, the final saved bitrate may be different from the input bitrate.
-	VideoBitrate *int64 `json:"VideoBitrate,omitnil" name:"VideoBitrate"`
+	VideoBitrate *int64 `json:"VideoBitrate,omitnil,omitempty" name:"VideoBitrate"`
 
 	// Audio codec. Default value: aac.
 	// Note: this parameter is unsupported now.
-	Acodec *string `json:"Acodec,omitnil" name:"Acodec"`
+	Acodec *string `json:"Acodec,omitnil,omitempty" name:"Acodec"`
 
 	// Audio bitrate. Default value: 0.
 	// Value range: 0-500.
-	AudioBitrate *int64 `json:"AudioBitrate,omitnil" name:"AudioBitrate"`
+	AudioBitrate *int64 `json:"AudioBitrate,omitnil,omitempty" name:"AudioBitrate"`
 
 	// Video codec. Valid values: h264, h265, origin (default)
 	// 
 	// origin: original codec as the output codec
-	Vcodec *string `json:"Vcodec,omitnil" name:"Vcodec"`
+	Vcodec *string `json:"Vcodec,omitnil,omitempty" name:"Vcodec"`
 
 	// Template description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Whether to keep the video. 0: no; 1: yes. Default value: 1.
-	NeedVideo *int64 `json:"NeedVideo,omitnil" name:"NeedVideo"`
+	NeedVideo *int64 `json:"NeedVideo,omitnil,omitempty" name:"NeedVideo"`
 
 	// Width. Default value: 0.
 	// Value range: 0-3000
 	// It must be a multiple of 2. The original width is 0.
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Whether to keep the audio. 0: no; 1: yes. Default value: 1.
-	NeedAudio *int64 `json:"NeedAudio,omitnil" name:"NeedAudio"`
+	NeedAudio *int64 `json:"NeedAudio,omitnil,omitempty" name:"NeedAudio"`
 
 	// Height. Default value: 0
 	// Value range: 0-3000
 	// The value must be a multiple of 2. The original height is `0`.
 	// This parameter is required for a top speed codec template (when `AiTransCode` is `1`).
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// Frame rate. Default value: 0.
 	// Value range: 0-60
-	Fps *int64 `json:"Fps,omitnil" name:"Fps"`
+	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 
 	// Keyframe interval in seconds. Default value: original interval
 	// Value range: 2-6
-	Gop *int64 `json:"Gop,omitnil" name:"Gop"`
+	Gop *int64 `json:"Gop,omitnil,omitempty" name:"Gop"`
 
 	// Rotation angle. Default value: 0.
 	// Valid values: 0, 90, 180, 270
-	Rotate *int64 `json:"Rotate,omitnil" name:"Rotate"`
+	Rotate *int64 `json:"Rotate,omitnil,omitempty" name:"Rotate"`
 
 	// Encoding quality:
 	// baseline/main/high. Default value: baseline.
-	Profile *string `json:"Profile,omitnil" name:"Profile"`
+	Profile *string `json:"Profile,omitnil,omitempty" name:"Profile"`
 
 	// Whether to use the original bitrate when the set bitrate is larger than the original bitrate.
 	// 0: no, 1: yes
 	// Default value: 0.
-	BitrateToOrig *int64 `json:"BitrateToOrig,omitnil" name:"BitrateToOrig"`
+	BitrateToOrig *int64 `json:"BitrateToOrig,omitnil,omitempty" name:"BitrateToOrig"`
 
 	// Whether to use the original height when the set height is higher than the original height.
 	// 0: no, 1: yes
 	// Default value: 0.
-	HeightToOrig *int64 `json:"HeightToOrig,omitnil" name:"HeightToOrig"`
+	HeightToOrig *int64 `json:"HeightToOrig,omitnil,omitempty" name:"HeightToOrig"`
 
 	// Whether to use the original frame rate when the set frame rate is larger than the original frame rate.
 	// 0: no, 1: yes
 	// Default value: 0.
-	FpsToOrig *int64 `json:"FpsToOrig,omitnil" name:"FpsToOrig"`
+	FpsToOrig *int64 `json:"FpsToOrig,omitnil,omitempty" name:"FpsToOrig"`
 
 	// Whether it is a top speed codec template. 0: no, 1: yes. Default value: 0.
-	AiTransCode *int64 `json:"AiTransCode,omitnil" name:"AiTransCode"`
+	AiTransCode *int64 `json:"AiTransCode,omitnil,omitempty" name:"AiTransCode"`
 
 	// Bitrate compression ratio of top speed codec video.
 	// Target bitrate of top speed code = VideoBitrate * (1-AdaptBitratePercent)
 	// 
 	// Value range: 0.0-0.5.
-	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitnil" name:"AdaptBitratePercent"`
+	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitnil,omitempty" name:"AdaptBitratePercent"`
 
 	// Whether to use the short side as the video height. 0: no, 1: yes. Default value: 0.
-	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitnil" name:"ShortEdgeAsHeight"`
+	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitnil,omitempty" name:"ShortEdgeAsHeight"`
 
 	// The DRM encryption type. Valid values: fairplay, normalaes, widevine.
 	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
-	DRMType *string `json:"DRMType,omitnil" name:"DRMType"`
+	DRMType *string `json:"DRMType,omitnil,omitempty" name:"DRMType"`
 
 	// The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. You can choose only one video track (SD, HD, UHD1, or UHD2).
 	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
-	DRMTracks *string `json:"DRMTracks,omitnil" name:"DRMTracks"`
+	DRMTracks *string `json:"DRMTracks,omitnil,omitempty" name:"DRMTracks"`
 }
 
 func (r *CreateLiveTranscodeTemplateRequest) ToJsonString() string {
@@ -2515,10 +2515,10 @@ func (r *CreateLiveTranscodeTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveTranscodeTemplateResponseParams struct {
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLiveTranscodeTemplateResponse struct {
@@ -2540,32 +2540,32 @@ func (r *CreateLiveTranscodeTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveWatermarkRuleRequestParams struct {
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Watermark ID, which is the `WatermarkId` returned by the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type CreateLiveWatermarkRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Watermark ID, which is the `WatermarkId` returned by the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *CreateLiveWatermarkRuleRequest) ToJsonString() string {
@@ -2593,7 +2593,7 @@ func (r *CreateLiveWatermarkRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLiveWatermarkRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLiveWatermarkRuleResponse struct {
@@ -2615,60 +2615,60 @@ func (r *CreateLiveWatermarkRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateRecordTaskRequestParams struct {
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Recording end time in UNIX timestamp format. `EndTime` should be later than `StartTime` and the current time, and the duration between `EndTime` and `StartTime` is up to 24 hours.
-	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Recording start time in UNIX timestamp format. Leaving this parameter empty means starting recording now. `StartTime` cannot be later than the current time plus 6 days.
-	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Push type. Default value: 0. Valid values:
 	// 0: LVB push.
 	// 1: mixed stream, i.e., A + B = C mixed stream.
-	StreamType *uint64 `json:"StreamType,omitnil" name:"StreamType"`
+	StreamType *uint64 `json:"StreamType,omitnil,omitempty" name:"StreamType"`
 
 	// Recording template ID, which is the returned value of `CreateLiveRecordTemplate`. If this parameter is left empty or incorrect, the stream will be recorded in HLS format and retained permanently by default.
-	TemplateId *uint64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *uint64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Extension field which is not defined now. It is empty by default.
-	Extension *string `json:"Extension,omitnil" name:"Extension"`
+	Extension *string `json:"Extension,omitnil,omitempty" name:"Extension"`
 }
 
 type CreateRecordTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Recording end time in UNIX timestamp format. `EndTime` should be later than `StartTime` and the current time, and the duration between `EndTime` and `StartTime` is up to 24 hours.
-	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Recording start time in UNIX timestamp format. Leaving this parameter empty means starting recording now. `StartTime` cannot be later than the current time plus 6 days.
-	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Push type. Default value: 0. Valid values:
 	// 0: LVB push.
 	// 1: mixed stream, i.e., A + B = C mixed stream.
-	StreamType *uint64 `json:"StreamType,omitnil" name:"StreamType"`
+	StreamType *uint64 `json:"StreamType,omitnil,omitempty" name:"StreamType"`
 
 	// Recording template ID, which is the returned value of `CreateLiveRecordTemplate`. If this parameter is left empty or incorrect, the stream will be recorded in HLS format and retained permanently by default.
-	TemplateId *uint64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *uint64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Extension field which is not defined now. It is empty by default.
-	Extension *string `json:"Extension,omitnil" name:"Extension"`
+	Extension *string `json:"Extension,omitnil,omitempty" name:"Extension"`
 }
 
 func (r *CreateRecordTaskRequest) ToJsonString() string {
@@ -2700,10 +2700,10 @@ func (r *CreateRecordTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateRecordTaskResponseParams struct {
 	// A globally unique task ID. If `TaskId` is returned, the recording task has been successfully created.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateRecordTaskResponse struct {
@@ -2725,60 +2725,60 @@ func (r *CreateRecordTaskResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateScreenshotTaskRequestParams struct {
 	// The stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The push domain.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The task end time, which must be a Unix timestamp and later than `StartTime` and the current time. The end time and start time cannot be more than 24 hours apart.
-	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The ID of the screencapturing template, which is returned by `CreateLiveSnapshotTemplate`. If an incorrect template ID is passed in, the screencapturing task will fail.
-	TemplateId *uint64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *uint64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The task start time, which must be a Unix timestamp and cannot be later than six days from the current time. If you do not specify this parameter, the task will start immediately.
-	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The publishing type. Valid values:
 	// `0` (default): Live stream
 	// `1`: Mixed stream
-	StreamType *uint64 `json:"StreamType,omitnil" name:"StreamType"`
+	StreamType *uint64 `json:"StreamType,omitnil,omitempty" name:"StreamType"`
 
 	// An extension field, which is not defined currently and is empty by default.
-	Extension *string `json:"Extension,omitnil" name:"Extension"`
+	Extension *string `json:"Extension,omitnil,omitempty" name:"Extension"`
 }
 
 type CreateScreenshotTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// The stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The push domain.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The task end time, which must be a Unix timestamp and later than `StartTime` and the current time. The end time and start time cannot be more than 24 hours apart.
-	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The ID of the screencapturing template, which is returned by `CreateLiveSnapshotTemplate`. If an incorrect template ID is passed in, the screencapturing task will fail.
-	TemplateId *uint64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *uint64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The task start time, which must be a Unix timestamp and cannot be later than six days from the current time. If you do not specify this parameter, the task will start immediately.
-	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The publishing type. Valid values:
 	// `0` (default): Live stream
 	// `1`: Mixed stream
-	StreamType *uint64 `json:"StreamType,omitnil" name:"StreamType"`
+	StreamType *uint64 `json:"StreamType,omitnil,omitempty" name:"StreamType"`
 
 	// An extension field, which is not defined currently and is empty by default.
-	Extension *string `json:"Extension,omitnil" name:"Extension"`
+	Extension *string `json:"Extension,omitnil,omitempty" name:"Extension"`
 }
 
 func (r *CreateScreenshotTaskRequest) ToJsonString() string {
@@ -2810,10 +2810,10 @@ func (r *CreateScreenshotTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateScreenshotTaskResponseParams struct {
 	// A unique task ID. If this parameter is returned, the screencapturing task is created successfully.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateScreenshotTaskResponse struct {
@@ -2834,68 +2834,68 @@ func (r *CreateScreenshotTaskResponse) FromJsonString(s string) error {
 
 type DayStreamPlayInfo struct {
 	// Data point in time in the format of `yyyy-mm-dd HH:MM:SS`.
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Bandwidth in Mbps.
-	Bandwidth *float64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *float64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// Traffic in MB.
-	Flux *float64 `json:"Flux,omitnil" name:"Flux"`
+	Flux *float64 `json:"Flux,omitnil,omitempty" name:"Flux"`
 
 	// Number of requests.
-	Request *uint64 `json:"Request,omitnil" name:"Request"`
+	Request *uint64 `json:"Request,omitnil,omitempty" name:"Request"`
 
 	// Number of online viewers.
-	Online *uint64 `json:"Online,omitnil" name:"Online"`
+	Online *uint64 `json:"Online,omitnil,omitempty" name:"Online"`
 }
 
 type DelayInfo struct {
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the 
 	//  `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Delay time in seconds.
-	DelayInterval *uint64 `json:"DelayInterval,omitnil" name:"DelayInterval"`
+	DelayInterval *uint64 `json:"DelayInterval,omitnil,omitempty" name:"DelayInterval"`
 
 	// Creation time in UTC time.
 	// Note: the difference between UTC time and Beijing time is 8 hours.
 	// Example: 2019-06-18T12:00:00Z (i.e., June 18, 2019 20:00:00 Beijing time).
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Expiration time in UTC time.
 	// Note: the difference between UTC time and Beijing time is 8 hours.
 	// Example: 2019-06-18T12:00:00Z (i.e., June 18, 2019 20:00:00 Beijing time).
-	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// Current status:
 	// -1: expired.
 	// 1: in effect.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 // Predefined struct for user
 type DeleteLiveCallbackRuleRequestParams struct {
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 }
 
 type DeleteLiveCallbackRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 }
 
 func (r *DeleteLiveCallbackRuleRequest) ToJsonString() string {
@@ -2921,7 +2921,7 @@ func (r *DeleteLiveCallbackRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveCallbackRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveCallbackRuleResponse struct {
@@ -2945,7 +2945,7 @@ type DeleteLiveCallbackTemplateRequestParams struct {
 	// Template ID.
 	// 1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](https://intl.cloud.tencent.com/document/product/267/32637?from_cn_redirect=1) API call.
 	// 2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](https://intl.cloud.tencent.com/document/product/267/32632?from_cn_redirect=1) API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DeleteLiveCallbackTemplateRequest struct {
@@ -2954,7 +2954,7 @@ type DeleteLiveCallbackTemplateRequest struct {
 	// Template ID.
 	// 1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](https://intl.cloud.tencent.com/document/product/267/32637?from_cn_redirect=1) API call.
 	// 2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](https://intl.cloud.tencent.com/document/product/267/32632?from_cn_redirect=1) API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *DeleteLiveCallbackTemplateRequest) ToJsonString() string {
@@ -2979,7 +2979,7 @@ func (r *DeleteLiveCallbackTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveCallbackTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveCallbackTemplateResponse struct {
@@ -3001,20 +3001,20 @@ func (r *DeleteLiveCallbackTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveDomainRequestParams struct {
 	// Domain name to be deleted.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Type. 0: push, 1: playback.
-	DomainType *uint64 `json:"DomainType,omitnil" name:"DomainType"`
+	DomainType *uint64 `json:"DomainType,omitnil,omitempty" name:"DomainType"`
 }
 
 type DeleteLiveDomainRequest struct {
 	*tchttp.BaseRequest
 	
 	// Domain name to be deleted.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Type. 0: push, 1: playback.
-	DomainType *uint64 `json:"DomainType,omitnil" name:"DomainType"`
+	DomainType *uint64 `json:"DomainType,omitnil,omitempty" name:"DomainType"`
 }
 
 func (r *DeleteLiveDomainRequest) ToJsonString() string {
@@ -3040,7 +3040,7 @@ func (r *DeleteLiveDomainRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveDomainResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveDomainResponse struct {
@@ -3062,20 +3062,20 @@ func (r *DeleteLiveDomainResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLivePullStreamTaskRequestParams struct {
 	// The task ID.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The operator.
-	Operator *string `json:"Operator,omitnil" name:"Operator"`
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 }
 
 type DeleteLivePullStreamTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// The task ID.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The operator.
-	Operator *string `json:"Operator,omitnil" name:"Operator"`
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 }
 
 func (r *DeleteLivePullStreamTaskRequest) ToJsonString() string {
@@ -3101,7 +3101,7 @@ func (r *DeleteLivePullStreamTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLivePullStreamTaskResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLivePullStreamTaskResponse struct {
@@ -3123,20 +3123,20 @@ func (r *DeleteLivePullStreamTaskResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveRecordRequestParams struct {
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Task ID returned by the `CreateLiveRecord` API.
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type DeleteLiveRecordRequest struct {
 	*tchttp.BaseRequest
 	
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Task ID returned by the `CreateLiveRecord` API.
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 func (r *DeleteLiveRecordRequest) ToJsonString() string {
@@ -3162,7 +3162,7 @@ func (r *DeleteLiveRecordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveRecordResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveRecordResponse struct {
@@ -3185,15 +3185,15 @@ func (r *DeleteLiveRecordResponse) FromJsonString(s string) error {
 type DeleteLiveRecordRuleRequestParams struct {
 	// Push domain name.
 	// Domain name+AppName+StreamName uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. For example, even if AppName is blank, you need to pass in a blank string to make a strong match.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
 	// Domain name+AppName+StreamName uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. For example, even if AppName is blank, you need to pass in a blank string to make a strong match.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
 	// Domain name+AppName+StreamName uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. For example, even if AppName is blank, you need to pass in a blank string to make a strong match.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 type DeleteLiveRecordRuleRequest struct {
@@ -3201,15 +3201,15 @@ type DeleteLiveRecordRuleRequest struct {
 	
 	// Push domain name.
 	// Domain name+AppName+StreamName uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. For example, even if AppName is blank, you need to pass in a blank string to make a strong match.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
 	// Domain name+AppName+StreamName uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. For example, even if AppName is blank, you need to pass in a blank string to make a strong match.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
 	// Domain name+AppName+StreamName uniquely identifies a single transcoding rule. If you need to delete it, strong match is required. For example, even if AppName is blank, you need to pass in a blank string to make a strong match.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 func (r *DeleteLiveRecordRuleRequest) ToJsonString() string {
@@ -3236,7 +3236,7 @@ func (r *DeleteLiveRecordRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveRecordRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveRecordRuleResponse struct {
@@ -3258,14 +3258,14 @@ func (r *DeleteLiveRecordRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveRecordTemplateRequestParams struct {
 	// Template ID obtained through the `DescribeRecordTemplates` API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DeleteLiveRecordTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Template ID obtained through the `DescribeRecordTemplates` API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *DeleteLiveRecordTemplateRequest) ToJsonString() string {
@@ -3290,7 +3290,7 @@ func (r *DeleteLiveRecordTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveRecordTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveRecordTemplateResponse struct {
@@ -3312,26 +3312,26 @@ func (r *DeleteLiveRecordTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveSnapshotRuleRequestParams struct {
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 type DeleteLiveSnapshotRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 func (r *DeleteLiveSnapshotRuleRequest) ToJsonString() string {
@@ -3358,7 +3358,7 @@ func (r *DeleteLiveSnapshotRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveSnapshotRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveSnapshotRuleResponse struct {
@@ -3382,7 +3382,7 @@ type DeleteLiveSnapshotTemplateRequestParams struct {
 	// Template ID.
 	// 1. Get from the returned value of the [CreateLiveSnapshotTemplate](https://intl.cloud.tencent.com/document/product/267/32624?from_cn_redirect=1) API call.
 	// 2. You can query the list of created screencapturing templates through the [DescribeLiveSnapshotTemplates](https://intl.cloud.tencent.com/document/product/267/32619?from_cn_redirect=1) API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DeleteLiveSnapshotTemplateRequest struct {
@@ -3391,7 +3391,7 @@ type DeleteLiveSnapshotTemplateRequest struct {
 	// Template ID.
 	// 1. Get from the returned value of the [CreateLiveSnapshotTemplate](https://intl.cloud.tencent.com/document/product/267/32624?from_cn_redirect=1) API call.
 	// 2. You can query the list of created screencapturing templates through the [DescribeLiveSnapshotTemplates](https://intl.cloud.tencent.com/document/product/267/32619?from_cn_redirect=1) API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *DeleteLiveSnapshotTemplateRequest) ToJsonString() string {
@@ -3416,7 +3416,7 @@ func (r *DeleteLiveSnapshotTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveSnapshotTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveSnapshotTemplateResponse struct {
@@ -3439,15 +3439,15 @@ func (r *DeleteLiveSnapshotTemplateResponse) FromJsonString(s string) error {
 type DeleteLiveTimeShiftRuleRequestParams struct {
 	// The push domain.
 	// `Domain name+AppName+StreamName` uniquely identifies a time shifting rule. To delete a time shifting rule, exact match is required. This means if the `AppName` of a time shifting rule is empty, to delete the rule, you need to pass in an empty string for `AppName`.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The push path, which should be the same as `AppName` in the push and playback URLs. The default value is `live`.
 	// `Domain name+AppName+StreamName` uniquely identifies a time shifting rule. To delete a time shifting rule, exact match is required. This means if the `AppName` of a time shifting rule is empty, to delete the rule, you need to pass in an empty string for `AppName`.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The stream name.
 	// `Domain name+AppName+StreamName` uniquely identifies a time shifting rule. To delete a time shifting rule, exact match is required. This means if the `AppName` of a time shifting rule is empty, to delete the rule, you need to pass in an empty string for `AppName`.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 type DeleteLiveTimeShiftRuleRequest struct {
@@ -3455,15 +3455,15 @@ type DeleteLiveTimeShiftRuleRequest struct {
 	
 	// The push domain.
 	// `Domain name+AppName+StreamName` uniquely identifies a time shifting rule. To delete a time shifting rule, exact match is required. This means if the `AppName` of a time shifting rule is empty, to delete the rule, you need to pass in an empty string for `AppName`.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The push path, which should be the same as `AppName` in the push and playback URLs. The default value is `live`.
 	// `Domain name+AppName+StreamName` uniquely identifies a time shifting rule. To delete a time shifting rule, exact match is required. This means if the `AppName` of a time shifting rule is empty, to delete the rule, you need to pass in an empty string for `AppName`.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The stream name.
 	// `Domain name+AppName+StreamName` uniquely identifies a time shifting rule. To delete a time shifting rule, exact match is required. This means if the `AppName` of a time shifting rule is empty, to delete the rule, you need to pass in an empty string for `AppName`.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 func (r *DeleteLiveTimeShiftRuleRequest) ToJsonString() string {
@@ -3490,7 +3490,7 @@ func (r *DeleteLiveTimeShiftRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveTimeShiftRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveTimeShiftRuleResponse struct {
@@ -3512,14 +3512,14 @@ func (r *DeleteLiveTimeShiftRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveTimeShiftTemplateRequestParams struct {
 	// The template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DeleteLiveTimeShiftTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// The template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *DeleteLiveTimeShiftTemplateRequest) ToJsonString() string {
@@ -3544,7 +3544,7 @@ func (r *DeleteLiveTimeShiftTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveTimeShiftTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveTimeShiftTemplateResponse struct {
@@ -3566,32 +3566,32 @@ func (r *DeleteLiveTimeShiftTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveTranscodeRuleRequestParams struct {
 	// Playback domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DeleteLiveTranscodeRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Playback domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *DeleteLiveTranscodeRuleRequest) ToJsonString() string {
@@ -3619,7 +3619,7 @@ func (r *DeleteLiveTranscodeRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveTranscodeRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveTranscodeRuleResponse struct {
@@ -3643,7 +3643,7 @@ type DeleteLiveTranscodeTemplateRequestParams struct {
 	// Template ID.
 	// 1. Get the template ID in the returned value of the [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/32646?from_cn_redirect=1) API call.
 	// 2. You can query the list of created templates through the [DescribeLiveTranscodeTemplates](https://intl.cloud.tencent.com/document/product/267/32641?from_cn_redirect=1) API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DeleteLiveTranscodeTemplateRequest struct {
@@ -3652,7 +3652,7 @@ type DeleteLiveTranscodeTemplateRequest struct {
 	// Template ID.
 	// 1. Get the template ID in the returned value of the [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/32646?from_cn_redirect=1) API call.
 	// 2. You can query the list of created templates through the [DescribeLiveTranscodeTemplates](https://intl.cloud.tencent.com/document/product/267/32641?from_cn_redirect=1) API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *DeleteLiveTranscodeTemplateRequest) ToJsonString() string {
@@ -3677,7 +3677,7 @@ func (r *DeleteLiveTranscodeTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveTranscodeTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveTranscodeTemplateResponse struct {
@@ -3701,7 +3701,7 @@ type DeleteLiveWatermarkRequestParams struct {
 	// Watermark ID.
 	// Watermark ID obtained in the returned value of the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API call.
 	// Watermark ID returned by the `DescribeLiveWatermarks` API.
-	WatermarkId *int64 `json:"WatermarkId,omitnil" name:"WatermarkId"`
+	WatermarkId *int64 `json:"WatermarkId,omitnil,omitempty" name:"WatermarkId"`
 }
 
 type DeleteLiveWatermarkRequest struct {
@@ -3710,7 +3710,7 @@ type DeleteLiveWatermarkRequest struct {
 	// Watermark ID.
 	// Watermark ID obtained in the returned value of the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API call.
 	// Watermark ID returned by the `DescribeLiveWatermarks` API.
-	WatermarkId *int64 `json:"WatermarkId,omitnil" name:"WatermarkId"`
+	WatermarkId *int64 `json:"WatermarkId,omitnil,omitempty" name:"WatermarkId"`
 }
 
 func (r *DeleteLiveWatermarkRequest) ToJsonString() string {
@@ -3735,7 +3735,7 @@ func (r *DeleteLiveWatermarkRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveWatermarkResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveWatermarkResponse struct {
@@ -3757,26 +3757,26 @@ func (r *DeleteLiveWatermarkResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveWatermarkRuleRequestParams struct {
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 type DeleteLiveWatermarkRuleRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 func (r *DeleteLiveWatermarkRuleRequest) ToJsonString() string {
@@ -3803,7 +3803,7 @@ func (r *DeleteLiveWatermarkRuleRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteLiveWatermarkRuleResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteLiveWatermarkRuleResponse struct {
@@ -3825,14 +3825,14 @@ func (r *DeleteLiveWatermarkRuleResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteRecordTaskRequestParams struct {
 	// Task ID returned by `CreateRecordTask`. The recording task specified by `TaskId` will be deleted.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type DeleteRecordTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// Task ID returned by `CreateRecordTask`. The recording task specified by `TaskId` will be deleted.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 func (r *DeleteRecordTaskRequest) ToJsonString() string {
@@ -3857,7 +3857,7 @@ func (r *DeleteRecordTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteRecordTaskResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteRecordTaskResponse struct {
@@ -3881,10 +3881,10 @@ type DescribeAllStreamPlayInfoListRequestParams struct {
 	// The query time of the request, supports data query for the last one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	QueryTime *string `json:"QueryTime,omitnil" name:"QueryTime"`
+	QueryTime *string `json:"QueryTime,omitnil,omitempty" name:"QueryTime"`
 
 	// The playback domains to query. If you leave this empty, all playback domains will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 }
 
 type DescribeAllStreamPlayInfoListRequest struct {
@@ -3893,10 +3893,10 @@ type DescribeAllStreamPlayInfoListRequest struct {
 	// The query time of the request, supports data query for the last one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	QueryTime *string `json:"QueryTime,omitnil" name:"QueryTime"`
+	QueryTime *string `json:"QueryTime,omitnil,omitempty" name:"QueryTime"`
 
 	// The playback domains to query. If you leave this empty, all playback domains will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 }
 
 func (r *DescribeAllStreamPlayInfoListRequest) ToJsonString() string {
@@ -3922,13 +3922,13 @@ func (r *DescribeAllStreamPlayInfoListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAllStreamPlayInfoListResponseParams struct {
 	// The time point queried, whose format is the same as that of the corresponding request parameter.
-	QueryTime *string `json:"QueryTime,omitnil" name:"QueryTime"`
+	QueryTime *string `json:"QueryTime,omitnil,omitempty" name:"QueryTime"`
 
 	// The playback data.
-	DataInfoList []*MonitorStreamPlayInfo `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*MonitorStreamPlayInfo `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeAllStreamPlayInfoListResponse struct {
@@ -3952,32 +3952,32 @@ type DescribeBillBandwidthAndFluxListRequestParams struct {
 	// The start time of the request, supports data query for the last three years, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last three years, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// LVB playback domain name. If this parameter is left empty, full data will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// Valid values:
 	// Mainland: query data for Mainland China,
 	// Oversea: query data for regions outside Mainland China,
 	// Default: query data for all regions.
 	// Note: LEB only supports querying data for all regions.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 
 	// Data granularity. Valid values:
 	// 5: 5-minute granularity (the query time span should be within 1 day),
 	// 60: 1-hour granularity (the query time span should be within one month),
 	// 1440: 1-day granularity (the query time span should be within one month).
 	// Default value: 5.
-	Granularity *uint64 `json:"Granularity,omitnil" name:"Granularity"`
+	Granularity *uint64 `json:"Granularity,omitnil,omitempty" name:"Granularity"`
 
 	// Service name. Valid values: LVB, LEB. The sum of LVB and LEB usage will be returned if this parameter is left empty.
-	ServiceName *string `json:"ServiceName,omitnil" name:"ServiceName"`
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 
 	// Region. Valid values:
 	// China Mainland
@@ -3989,7 +3989,7 @@ type DescribeBillBandwidthAndFluxListRequestParams struct {
 	// South America
 	// Middle East
 	// Africa
-	RegionNames []*string `json:"RegionNames,omitnil" name:"RegionNames"`
+	RegionNames []*string `json:"RegionNames,omitnil,omitempty" name:"RegionNames"`
 }
 
 type DescribeBillBandwidthAndFluxListRequest struct {
@@ -3998,32 +3998,32 @@ type DescribeBillBandwidthAndFluxListRequest struct {
 	// The start time of the request, supports data query for the last three years, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last three years, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// LVB playback domain name. If this parameter is left empty, full data will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// Valid values:
 	// Mainland: query data for Mainland China,
 	// Oversea: query data for regions outside Mainland China,
 	// Default: query data for all regions.
 	// Note: LEB only supports querying data for all regions.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 
 	// Data granularity. Valid values:
 	// 5: 5-minute granularity (the query time span should be within 1 day),
 	// 60: 1-hour granularity (the query time span should be within one month),
 	// 1440: 1-day granularity (the query time span should be within one month).
 	// Default value: 5.
-	Granularity *uint64 `json:"Granularity,omitnil" name:"Granularity"`
+	Granularity *uint64 `json:"Granularity,omitnil,omitempty" name:"Granularity"`
 
 	// Service name. Valid values: LVB, LEB. The sum of LVB and LEB usage will be returned if this parameter is left empty.
-	ServiceName *string `json:"ServiceName,omitnil" name:"ServiceName"`
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 
 	// Region. Valid values:
 	// China Mainland
@@ -4035,7 +4035,7 @@ type DescribeBillBandwidthAndFluxListRequest struct {
 	// South America
 	// Middle East
 	// Africa
-	RegionNames []*string `json:"RegionNames,omitnil" name:"RegionNames"`
+	RegionNames []*string `json:"RegionNames,omitnil,omitempty" name:"RegionNames"`
 }
 
 func (r *DescribeBillBandwidthAndFluxListRequest) ToJsonString() string {
@@ -4066,25 +4066,25 @@ func (r *DescribeBillBandwidthAndFluxListRequest) FromJsonString(s string) error
 // Predefined struct for user
 type DescribeBillBandwidthAndFluxListResponseParams struct {
 	// Time point of peak bandwidth value in the format of `yyyy-mm-dd HH:MM:SS`.
-	PeakBandwidthTime *string `json:"PeakBandwidthTime,omitnil" name:"PeakBandwidthTime"`
+	PeakBandwidthTime *string `json:"PeakBandwidthTime,omitnil,omitempty" name:"PeakBandwidthTime"`
 
 	// Peak bandwidth in Mbps.
-	PeakBandwidth *float64 `json:"PeakBandwidth,omitnil" name:"PeakBandwidth"`
+	PeakBandwidth *float64 `json:"PeakBandwidth,omitnil,omitempty" name:"PeakBandwidth"`
 
 	// Time point of 95th percentile bandwidth value in the format of `yyyy-mm-dd HH:MM:SS`.
-	P95PeakBandwidthTime *string `json:"P95PeakBandwidthTime,omitnil" name:"P95PeakBandwidthTime"`
+	P95PeakBandwidthTime *string `json:"P95PeakBandwidthTime,omitnil,omitempty" name:"P95PeakBandwidthTime"`
 
 	// 95th percentile bandwidth in Mbps.
-	P95PeakBandwidth *float64 `json:"P95PeakBandwidth,omitnil" name:"P95PeakBandwidth"`
+	P95PeakBandwidth *float64 `json:"P95PeakBandwidth,omitnil,omitempty" name:"P95PeakBandwidth"`
 
 	// Total traffic in MB.
-	SumFlux *float64 `json:"SumFlux,omitnil" name:"SumFlux"`
+	SumFlux *float64 `json:"SumFlux,omitnil,omitempty" name:"SumFlux"`
 
 	// Detailed data information.
-	DataInfoList []*BillDataInfo `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*BillDataInfo `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeBillBandwidthAndFluxListResponse struct {
@@ -4107,23 +4107,23 @@ func (r *DescribeBillBandwidthAndFluxListResponse) FromJsonString(s string) erro
 type DescribeConcurrentRecordStreamNumRequestParams struct {
 	// Live streaming type. SlowLive: LCB.
 	// NormalLive: LVB.
-	LiveType *string `json:"LiveType,omitnil" name:"LiveType"`
+	LiveType *string `json:"LiveType,omitnil,omitempty" name:"LiveType"`
 
 	// The start time of the request, supports data query for the last six months, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last six months, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China). If this parameter is left empty, data for all regions will be queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 
 	// Playback domain name list. If this parameter is left empty, full data will be queried.
-	PushDomains []*string `json:"PushDomains,omitnil" name:"PushDomains"`
+	PushDomains []*string `json:"PushDomains,omitnil,omitempty" name:"PushDomains"`
 }
 
 type DescribeConcurrentRecordStreamNumRequest struct {
@@ -4131,23 +4131,23 @@ type DescribeConcurrentRecordStreamNumRequest struct {
 	
 	// Live streaming type. SlowLive: LCB.
 	// NormalLive: LVB.
-	LiveType *string `json:"LiveType,omitnil" name:"LiveType"`
+	LiveType *string `json:"LiveType,omitnil,omitempty" name:"LiveType"`
 
 	// The start time of the request, supports data query for the last six months, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last six months, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China). If this parameter is left empty, data for all regions will be queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 
 	// Playback domain name list. If this parameter is left empty, full data will be queried.
-	PushDomains []*string `json:"PushDomains,omitnil" name:"PushDomains"`
+	PushDomains []*string `json:"PushDomains,omitnil,omitempty" name:"PushDomains"`
 }
 
 func (r *DescribeConcurrentRecordStreamNumRequest) ToJsonString() string {
@@ -4176,10 +4176,10 @@ func (r *DescribeConcurrentRecordStreamNumRequest) FromJsonString(s string) erro
 // Predefined struct for user
 type DescribeConcurrentRecordStreamNumResponseParams struct {
 	// Statistics list.
-	DataInfoList []*ConcurrentRecordStreamNum `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*ConcurrentRecordStreamNum `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeConcurrentRecordStreamNumResponse struct {
@@ -4203,12 +4203,12 @@ type DescribeDeliverBandwidthListRequestParams struct {
 	// The start time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed a month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed a month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type DescribeDeliverBandwidthListRequest struct {
@@ -4217,12 +4217,12 @@ type DescribeDeliverBandwidthListRequest struct {
 	// The start time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed a month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed a month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 func (r *DescribeDeliverBandwidthListRequest) ToJsonString() string {
@@ -4248,10 +4248,10 @@ func (r *DescribeDeliverBandwidthListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeDeliverBandwidthListResponseParams struct {
 	// Billable bandwidth of live stream relaying.
-	DataInfoList []*BandwidthInfo `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*BandwidthInfo `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeDeliverBandwidthListResponse struct {
@@ -4275,24 +4275,24 @@ type DescribeGroupProIspPlayInfoListRequestParams struct {
 	// The start time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Playback domain name. If this parameter is left empty, full data will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// District list. If this parameter is left empty, data for all districts will be returned.
-	ProvinceNames []*string `json:"ProvinceNames,omitnil" name:"ProvinceNames"`
+	ProvinceNames []*string `json:"ProvinceNames,omitnil,omitempty" name:"ProvinceNames"`
 
 	// ISP list. If this parameter is left empty, data of all ISPs will be returned.
-	IspNames []*string `json:"IspNames,omitnil" name:"IspNames"`
+	IspNames []*string `json:"IspNames,omitnil,omitempty" name:"IspNames"`
 
 	// Within or outside Mainland China. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China). If this parameter is left empty, data for all regions will be queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 }
 
 type DescribeGroupProIspPlayInfoListRequest struct {
@@ -4301,24 +4301,24 @@ type DescribeGroupProIspPlayInfoListRequest struct {
 	// The start time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Playback domain name. If this parameter is left empty, full data will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// District list. If this parameter is left empty, data for all districts will be returned.
-	ProvinceNames []*string `json:"ProvinceNames,omitnil" name:"ProvinceNames"`
+	ProvinceNames []*string `json:"ProvinceNames,omitnil,omitempty" name:"ProvinceNames"`
 
 	// ISP list. If this parameter is left empty, data of all ISPs will be returned.
-	IspNames []*string `json:"IspNames,omitnil" name:"IspNames"`
+	IspNames []*string `json:"IspNames,omitnil,omitempty" name:"IspNames"`
 
 	// Within or outside Mainland China. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China). If this parameter is left empty, data for all regions will be queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 }
 
 func (r *DescribeGroupProIspPlayInfoListRequest) ToJsonString() string {
@@ -4348,10 +4348,10 @@ func (r *DescribeGroupProIspPlayInfoListRequest) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeGroupProIspPlayInfoListResponseParams struct {
 	// Data content.
-	DataInfoList []*GroupProIspDataInfo `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*GroupProIspDataInfo `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeGroupProIspPlayInfoListResponse struct {
@@ -4375,15 +4375,15 @@ type DescribeHttpStatusInfoListRequestParams struct {
 	// The start time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Playback domain name list.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 }
 
 type DescribeHttpStatusInfoListRequest struct {
@@ -4392,15 +4392,15 @@ type DescribeHttpStatusInfoListRequest struct {
 	// The start time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Playback domain name list.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 }
 
 func (r *DescribeHttpStatusInfoListRequest) ToJsonString() string {
@@ -4427,10 +4427,10 @@ func (r *DescribeHttpStatusInfoListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeHttpStatusInfoListResponseParams struct {
 	// Playback status code list.
-	DataInfoList []*HttpStatusData `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*HttpStatusData `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeHttpStatusInfoListResponse struct {
@@ -4481,10 +4481,10 @@ func (r *DescribeLiveCallbackRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveCallbackRulesResponseParams struct {
 	// Rule information list.
-	Rules []*CallBackRuleInfo `json:"Rules,omitnil" name:"Rules"`
+	Rules []*CallBackRuleInfo `json:"Rules,omitnil,omitempty" name:"Rules"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveCallbackRulesResponse struct {
@@ -4508,7 +4508,7 @@ type DescribeLiveCallbackTemplateRequestParams struct {
 	// Template ID.
 	// 1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](https://intl.cloud.tencent.com/document/product/267/32637?from_cn_redirect=1) API call.
 	// 2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](https://intl.cloud.tencent.com/document/product/267/32632?from_cn_redirect=1) API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DescribeLiveCallbackTemplateRequest struct {
@@ -4517,7 +4517,7 @@ type DescribeLiveCallbackTemplateRequest struct {
 	// Template ID.
 	// 1. Get the template ID in the returned value of the [CreateLiveCallbackTemplate](https://intl.cloud.tencent.com/document/product/267/32637?from_cn_redirect=1) API call.
 	// 2. You can query the list of created templates through the [DescribeLiveCallbackTemplates](https://intl.cloud.tencent.com/document/product/267/32632?from_cn_redirect=1) API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *DescribeLiveCallbackTemplateRequest) ToJsonString() string {
@@ -4542,10 +4542,10 @@ func (r *DescribeLiveCallbackTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveCallbackTemplateResponseParams struct {
 	// Callback template information.
-	Template *CallBackTemplateInfo `json:"Template,omitnil" name:"Template"`
+	Template *CallBackTemplateInfo `json:"Template,omitnil,omitempty" name:"Template"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveCallbackTemplateResponse struct {
@@ -4596,10 +4596,10 @@ func (r *DescribeLiveCallbackTemplatesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveCallbackTemplatesResponseParams struct {
 	// Template information list.
-	Templates []*CallBackTemplateInfo `json:"Templates,omitnil" name:"Templates"`
+	Templates []*CallBackTemplateInfo `json:"Templates,omitnil,omitempty" name:"Templates"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveCallbackTemplatesResponse struct {
@@ -4621,14 +4621,14 @@ func (r *DescribeLiveCallbackTemplatesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveCertRequestParams struct {
 	// Certificate ID obtained through the `DescribeLiveCerts` API.
-	CertId *int64 `json:"CertId,omitnil" name:"CertId"`
+	CertId *int64 `json:"CertId,omitnil,omitempty" name:"CertId"`
 }
 
 type DescribeLiveCertRequest struct {
 	*tchttp.BaseRequest
 	
 	// Certificate ID obtained through the `DescribeLiveCerts` API.
-	CertId *int64 `json:"CertId,omitnil" name:"CertId"`
+	CertId *int64 `json:"CertId,omitnil,omitempty" name:"CertId"`
 }
 
 func (r *DescribeLiveCertRequest) ToJsonString() string {
@@ -4653,10 +4653,10 @@ func (r *DescribeLiveCertRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveCertResponseParams struct {
 	// Certificate information.
-	CertInfo *CertInfo `json:"CertInfo,omitnil" name:"CertInfo"`
+	CertInfo *CertInfo `json:"CertInfo,omitnil,omitempty" name:"CertInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveCertResponse struct {
@@ -4707,10 +4707,10 @@ func (r *DescribeLiveCertsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveCertsResponseParams struct {
 	// Certificate information list.
-	CertInfoSet []*CertInfo `json:"CertInfoSet,omitnil" name:"CertInfoSet"`
+	CertInfoSet []*CertInfo `json:"CertInfoSet,omitnil,omitempty" name:"CertInfoSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveCertsResponse struct {
@@ -4761,10 +4761,10 @@ func (r *DescribeLiveDelayInfoListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveDelayInfoListResponseParams struct {
 	// Delayed playback information list.
-	DelayInfoList []*DelayInfo `json:"DelayInfoList,omitnil" name:"DelayInfoList"`
+	DelayInfoList []*DelayInfo `json:"DelayInfoList,omitnil,omitempty" name:"DelayInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveDelayInfoListResponse struct {
@@ -4786,44 +4786,44 @@ func (r *DescribeLiveDelayInfoListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveDomainCertBindingsRequestParams struct {
 	// The keyword to use to search for domains.
-	DomainSearch *string `json:"DomainSearch,omitnil" name:"DomainSearch"`
+	DomainSearch *string `json:"DomainSearch,omitnil,omitempty" name:"DomainSearch"`
 
 	// The number of records to skip before starting to return any results. 0 means to start from the first record and is the default.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// The maximum number of records to return. The default is 50.
 	// If this parameter is not specified, up to 50 records will be returned.
-	Length *int64 `json:"Length,omitnil" name:"Length"`
+	Length *int64 `json:"Length,omitnil,omitempty" name:"Length"`
 
 	// The name of a particular domain to query.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Valid values:
 	// ExpireTimeAsc: Sort the records by certificate expiration time in ascending order.
 	// ExpireTimeDesc: Sort the records by certificate expiration time in descending order.
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 }
 
 type DescribeLiveDomainCertBindingsRequest struct {
 	*tchttp.BaseRequest
 	
 	// The keyword to use to search for domains.
-	DomainSearch *string `json:"DomainSearch,omitnil" name:"DomainSearch"`
+	DomainSearch *string `json:"DomainSearch,omitnil,omitempty" name:"DomainSearch"`
 
 	// The number of records to skip before starting to return any results. 0 means to start from the first record and is the default.
-	Offset *int64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// The maximum number of records to return. The default is 50.
 	// If this parameter is not specified, up to 50 records will be returned.
-	Length *int64 `json:"Length,omitnil" name:"Length"`
+	Length *int64 `json:"Length,omitnil,omitempty" name:"Length"`
 
 	// The name of a particular domain to query.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Valid values:
 	// ExpireTimeAsc: Sort the records by certificate expiration time in ascending order.
 	// ExpireTimeDesc: Sort the records by certificate expiration time in descending order.
-	OrderBy *string `json:"OrderBy,omitnil" name:"OrderBy"`
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
 }
 
 func (r *DescribeLiveDomainCertBindingsRequest) ToJsonString() string {
@@ -4852,13 +4852,13 @@ func (r *DescribeLiveDomainCertBindingsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveDomainCertBindingsResponseParams struct {
 	// The information of domains that meet the query criteria.
-	LiveDomainCertBindings []*LiveDomainCertBindings `json:"LiveDomainCertBindings,omitnil" name:"LiveDomainCertBindings"`
+	LiveDomainCertBindings []*LiveDomainCertBindings `json:"LiveDomainCertBindings,omitnil,omitempty" name:"LiveDomainCertBindings"`
 
 	// The number of records returned, which is needed for pagination.
-	TotalNum *int64 `json:"TotalNum,omitnil" name:"TotalNum"`
+	TotalNum *int64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveDomainCertBindingsResponse struct {
@@ -4880,14 +4880,14 @@ func (r *DescribeLiveDomainCertBindingsResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeLiveDomainCertRequestParams struct {
 	// Playback domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 type DescribeLiveDomainCertRequest struct {
 	*tchttp.BaseRequest
 	
 	// Playback domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 func (r *DescribeLiveDomainCertRequest) ToJsonString() string {
@@ -4912,10 +4912,10 @@ func (r *DescribeLiveDomainCertRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveDomainCertResponseParams struct {
 	// Certificate information.
-	DomainCertInfo *DomainCertInfo `json:"DomainCertInfo,omitnil" name:"DomainCertInfo"`
+	DomainCertInfo *DomainCertInfo `json:"DomainCertInfo,omitnil,omitempty" name:"DomainCertInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveDomainCertResponse struct {
@@ -4937,14 +4937,14 @@ func (r *DescribeLiveDomainCertResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveDomainRefererRequestParams struct {
 	// Playback domain name
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 type DescribeLiveDomainRefererRequest struct {
 	*tchttp.BaseRequest
 	
 	// Playback domain name
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 func (r *DescribeLiveDomainRefererRequest) ToJsonString() string {
@@ -4969,10 +4969,10 @@ func (r *DescribeLiveDomainRefererRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveDomainRefererResponseParams struct {
 	// Referer allowlist/blocklist configuration of a domain name
-	RefererAuthConfig *RefererAuthConfig `json:"RefererAuthConfig,omitnil" name:"RefererAuthConfig"`
+	RefererAuthConfig *RefererAuthConfig `json:"RefererAuthConfig,omitnil,omitempty" name:"RefererAuthConfig"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveDomainRefererResponse struct {
@@ -4994,14 +4994,14 @@ func (r *DescribeLiveDomainRefererResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveDomainRequestParams struct {
 	// Domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 type DescribeLiveDomainRequest struct {
 	*tchttp.BaseRequest
 	
 	// Domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 func (r *DescribeLiveDomainRequest) ToJsonString() string {
@@ -5027,10 +5027,10 @@ func (r *DescribeLiveDomainRequest) FromJsonString(s string) error {
 type DescribeLiveDomainResponseParams struct {
 	// Domain name information.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	DomainInfo *DomainInfo `json:"DomainInfo,omitnil" name:"DomainInfo"`
+	DomainInfo *DomainInfo `json:"DomainInfo,omitnil,omitempty" name:"DomainInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveDomainResponse struct {
@@ -5052,56 +5052,56 @@ func (r *DescribeLiveDomainResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveDomainsRequestParams struct {
 	// Filter by domain name status. 0: disabled, 1: enabled.
-	DomainStatus *uint64 `json:"DomainStatus,omitnil" name:"DomainStatus"`
+	DomainStatus *uint64 `json:"DomainStatus,omitnil,omitempty" name:"DomainStatus"`
 
 	// Filter by domain name type. 0: push. 1: playback
-	DomainType *uint64 `json:"DomainType,omitnil" name:"DomainType"`
+	DomainType *uint64 `json:"DomainType,omitnil,omitempty" name:"DomainType"`
 
 	// Number of entries per page. Value range: 10-100. Default value: 10.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Page number to get. Value range: 1-100000. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// 0: LVB, 1: LCB. Default value: 0.
-	IsDelayLive *uint64 `json:"IsDelayLive,omitnil" name:"IsDelayLive"`
+	IsDelayLive *uint64 `json:"IsDelayLive,omitnil,omitempty" name:"IsDelayLive"`
 
 	// Domain name prefix.
-	DomainPrefix *string `json:"DomainPrefix,omitnil" name:"DomainPrefix"`
+	DomainPrefix *string `json:"DomainPrefix,omitnil,omitempty" name:"DomainPrefix"`
 
 	// Playback region. This parameter is valid only when `DomainType` is set to `1`.
 	// `1`: Chinese mainland
 	// `2`: global
 	// `3`: outside Chinese mainland
-	PlayType *uint64 `json:"PlayType,omitnil" name:"PlayType"`
+	PlayType *uint64 `json:"PlayType,omitnil,omitempty" name:"PlayType"`
 }
 
 type DescribeLiveDomainsRequest struct {
 	*tchttp.BaseRequest
 	
 	// Filter by domain name status. 0: disabled, 1: enabled.
-	DomainStatus *uint64 `json:"DomainStatus,omitnil" name:"DomainStatus"`
+	DomainStatus *uint64 `json:"DomainStatus,omitnil,omitempty" name:"DomainStatus"`
 
 	// Filter by domain name type. 0: push. 1: playback
-	DomainType *uint64 `json:"DomainType,omitnil" name:"DomainType"`
+	DomainType *uint64 `json:"DomainType,omitnil,omitempty" name:"DomainType"`
 
 	// Number of entries per page. Value range: 10-100. Default value: 10.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Page number to get. Value range: 1-100000. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// 0: LVB, 1: LCB. Default value: 0.
-	IsDelayLive *uint64 `json:"IsDelayLive,omitnil" name:"IsDelayLive"`
+	IsDelayLive *uint64 `json:"IsDelayLive,omitnil,omitempty" name:"IsDelayLive"`
 
 	// Domain name prefix.
-	DomainPrefix *string `json:"DomainPrefix,omitnil" name:"DomainPrefix"`
+	DomainPrefix *string `json:"DomainPrefix,omitnil,omitempty" name:"DomainPrefix"`
 
 	// Playback region. This parameter is valid only when `DomainType` is set to `1`.
 	// `1`: Chinese mainland
 	// `2`: global
 	// `3`: outside Chinese mainland
-	PlayType *uint64 `json:"PlayType,omitnil" name:"PlayType"`
+	PlayType *uint64 `json:"PlayType,omitnil,omitempty" name:"PlayType"`
 }
 
 func (r *DescribeLiveDomainsRequest) ToJsonString() string {
@@ -5132,21 +5132,21 @@ func (r *DescribeLiveDomainsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveDomainsResponseParams struct {
 	// Total number of results.
-	AllCount *uint64 `json:"AllCount,omitnil" name:"AllCount"`
+	AllCount *uint64 `json:"AllCount,omitnil,omitempty" name:"AllCount"`
 
 	// List of domain name details.
-	DomainList []*DomainInfo `json:"DomainList,omitnil" name:"DomainList"`
+	DomainList []*DomainInfo `json:"DomainList,omitnil,omitempty" name:"DomainList"`
 
 	// The number of domain names that can be added
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	CreateLimitCount *int64 `json:"CreateLimitCount,omitnil" name:"CreateLimitCount"`
+	CreateLimitCount *int64 `json:"CreateLimitCount,omitnil,omitempty" name:"CreateLimitCount"`
 
 	// The number of domains accelerated in the Chinese mainland, globally, and outside the Chinese mainland respectively.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	PlayTypeCount []*int64 `json:"PlayTypeCount,omitnil" name:"PlayTypeCount"`
+	PlayTypeCount []*int64 `json:"PlayTypeCount,omitnil,omitempty" name:"PlayTypeCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveDomainsResponse struct {
@@ -5168,30 +5168,30 @@ func (r *DescribeLiveDomainsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveForbidStreamListRequestParams struct {
 	// Page number to get. Default value: 1.
-	PageNum *int64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *int64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Maximum value: 100. 
 	// Value: any integer between 1 and 100.
 	// Default value: 10.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Stream name for query
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 type DescribeLiveForbidStreamListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Page number to get. Default value: 1.
-	PageNum *int64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *int64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Maximum value: 100. 
 	// Value: any integer between 1 and 100.
 	// Default value: 10.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Stream name for query
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 func (r *DescribeLiveForbidStreamListRequest) ToJsonString() string {
@@ -5218,22 +5218,22 @@ func (r *DescribeLiveForbidStreamListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveForbidStreamListResponseParams struct {
 	// Total number of eligible ones.
-	TotalNum *int64 `json:"TotalNum,omitnil" name:"TotalNum"`
+	TotalNum *int64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
 
 	// Total number of pages.
-	TotalPage *int64 `json:"TotalPage,omitnil" name:"TotalPage"`
+	TotalPage *int64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
 
 	// Page number.
-	PageNum *int64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *int64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries displayed per page.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// List of forbidden streams.
-	ForbidStreamList []*ForbidStreamInfo `json:"ForbidStreamList,omitnil" name:"ForbidStreamList"`
+	ForbidStreamList []*ForbidStreamInfo `json:"ForbidStreamList,omitnil,omitempty" name:"ForbidStreamList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveForbidStreamListResponse struct {
@@ -5255,14 +5255,14 @@ func (r *DescribeLiveForbidStreamListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLivePlayAuthKeyRequestParams struct {
 	// Domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 type DescribeLivePlayAuthKeyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 func (r *DescribeLivePlayAuthKeyRequest) ToJsonString() string {
@@ -5287,10 +5287,10 @@ func (r *DescribeLivePlayAuthKeyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLivePlayAuthKeyResponseParams struct {
 	// Playback authentication key information.
-	PlayAuthKeyInfo *PlayAuthKeyInfo `json:"PlayAuthKeyInfo,omitnil" name:"PlayAuthKeyInfo"`
+	PlayAuthKeyInfo *PlayAuthKeyInfo `json:"PlayAuthKeyInfo,omitnil,omitempty" name:"PlayAuthKeyInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLivePlayAuthKeyResponse struct {
@@ -5314,14 +5314,14 @@ type DescribeLivePullStreamTasksRequestParams struct {
 	// The task ID. 
 	// A task ID is returned by the `CreateLivePullStreamTask` API.
 	// If you do not pass this parameter, all tasks will be returned, sorted by last updated time in descending order.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The number of page to start from. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// The maximum number of records per page. Default value: 10.
 	// Valid values: Any integer between 1 and 20.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 }
 
 type DescribeLivePullStreamTasksRequest struct {
@@ -5330,14 +5330,14 @@ type DescribeLivePullStreamTasksRequest struct {
 	// The task ID. 
 	// A task ID is returned by the `CreateLivePullStreamTask` API.
 	// If you do not pass this parameter, all tasks will be returned, sorted by last updated time in descending order.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The number of page to start from. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// The maximum number of records per page. Default value: 10.
 	// Valid values: Any integer between 1 and 20.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 }
 
 func (r *DescribeLivePullStreamTasksRequest) ToJsonString() string {
@@ -5364,25 +5364,25 @@ func (r *DescribeLivePullStreamTasksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLivePullStreamTasksResponseParams struct {
 	// The information of stream pulling tasks.
-	TaskInfos []*PullStreamTaskInfo `json:"TaskInfos,omitnil" name:"TaskInfos"`
+	TaskInfos []*PullStreamTaskInfo `json:"TaskInfos,omitnil,omitempty" name:"TaskInfos"`
 
 	// The page number.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// The number of records per page.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// The total number of records.
-	TotalNum *uint64 `json:"TotalNum,omitnil" name:"TotalNum"`
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
 
 	// The total number of pages.
-	TotalPage *uint64 `json:"TotalPage,omitnil" name:"TotalPage"`
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
 
 	// The maximum number of tasks allowed.
-	LimitTaskNum *uint64 `json:"LimitTaskNum,omitnil" name:"LimitTaskNum"`
+	LimitTaskNum *uint64 `json:"LimitTaskNum,omitnil,omitempty" name:"LimitTaskNum"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLivePullStreamTasksResponse struct {
@@ -5404,14 +5404,14 @@ func (r *DescribeLivePullStreamTasksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLivePushAuthKeyRequestParams struct {
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 type DescribeLivePushAuthKeyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 func (r *DescribeLivePushAuthKeyRequest) ToJsonString() string {
@@ -5436,10 +5436,10 @@ func (r *DescribeLivePushAuthKeyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLivePushAuthKeyResponseParams struct {
 	// Push authentication key information.
-	PushAuthKeyInfo *PushAuthKeyInfo `json:"PushAuthKeyInfo,omitnil" name:"PushAuthKeyInfo"`
+	PushAuthKeyInfo *PushAuthKeyInfo `json:"PushAuthKeyInfo,omitnil,omitempty" name:"PushAuthKeyInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLivePushAuthKeyResponse struct {
@@ -5490,10 +5490,10 @@ func (r *DescribeLiveRecordRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveRecordRulesResponseParams struct {
 	// List of rules.
-	Rules []*RuleInfo `json:"Rules,omitnil" name:"Rules"`
+	Rules []*RuleInfo `json:"Rules,omitnil,omitempty" name:"Rules"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveRecordRulesResponse struct {
@@ -5515,14 +5515,14 @@ func (r *DescribeLiveRecordRulesResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveRecordTemplateRequestParams struct {
 	// Template ID obtained by [DescribeLiveRecordTemplates](https://intl.cloud.tencent.com/document/product/267/32609?from_cn_redirect=1).
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DescribeLiveRecordTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Template ID obtained by [DescribeLiveRecordTemplates](https://intl.cloud.tencent.com/document/product/267/32609?from_cn_redirect=1).
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *DescribeLiveRecordTemplateRequest) ToJsonString() string {
@@ -5547,10 +5547,10 @@ func (r *DescribeLiveRecordTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveRecordTemplateResponseParams struct {
 	// Recording template information.
-	Template *RecordTemplateInfo `json:"Template,omitnil" name:"Template"`
+	Template *RecordTemplateInfo `json:"Template,omitnil,omitempty" name:"Template"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveRecordTemplateResponse struct {
@@ -5574,7 +5574,7 @@ type DescribeLiveRecordTemplatesRequestParams struct {
 	// Whether it is an LCB template. Default value: 0.
 	// 0: LVB.
 	// 1: LCB.
-	IsDelayLive *int64 `json:"IsDelayLive,omitnil" name:"IsDelayLive"`
+	IsDelayLive *int64 `json:"IsDelayLive,omitnil,omitempty" name:"IsDelayLive"`
 }
 
 type DescribeLiveRecordTemplatesRequest struct {
@@ -5583,7 +5583,7 @@ type DescribeLiveRecordTemplatesRequest struct {
 	// Whether it is an LCB template. Default value: 0.
 	// 0: LVB.
 	// 1: LCB.
-	IsDelayLive *int64 `json:"IsDelayLive,omitnil" name:"IsDelayLive"`
+	IsDelayLive *int64 `json:"IsDelayLive,omitnil,omitempty" name:"IsDelayLive"`
 }
 
 func (r *DescribeLiveRecordTemplatesRequest) ToJsonString() string {
@@ -5608,10 +5608,10 @@ func (r *DescribeLiveRecordTemplatesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveRecordTemplatesResponseParams struct {
 	// Recording template information list.
-	Templates []*RecordTemplateInfo `json:"Templates,omitnil" name:"Templates"`
+	Templates []*RecordTemplateInfo `json:"Templates,omitnil,omitempty" name:"Templates"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveRecordTemplatesResponse struct {
@@ -5662,10 +5662,10 @@ func (r *DescribeLiveSnapshotRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveSnapshotRulesResponseParams struct {
 	// Rule list.
-	Rules []*RuleInfo `json:"Rules,omitnil" name:"Rules"`
+	Rules []*RuleInfo `json:"Rules,omitnil,omitempty" name:"Rules"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveSnapshotRulesResponse struct {
@@ -5688,7 +5688,7 @@ func (r *DescribeLiveSnapshotRulesResponse) FromJsonString(s string) error {
 type DescribeLiveSnapshotTemplateRequestParams struct {
 	// Template ID.
 	// Template ID returned by the [CreateLiveSnapshotTemplate](https://intl.cloud.tencent.com/document/product/267/32624?from_cn_redirect=1) API call.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DescribeLiveSnapshotTemplateRequest struct {
@@ -5696,7 +5696,7 @@ type DescribeLiveSnapshotTemplateRequest struct {
 	
 	// Template ID.
 	// Template ID returned by the [CreateLiveSnapshotTemplate](https://intl.cloud.tencent.com/document/product/267/32624?from_cn_redirect=1) API call.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *DescribeLiveSnapshotTemplateRequest) ToJsonString() string {
@@ -5721,10 +5721,10 @@ func (r *DescribeLiveSnapshotTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveSnapshotTemplateResponseParams struct {
 	// Screencapturing template information.
-	Template *SnapshotTemplateInfo `json:"Template,omitnil" name:"Template"`
+	Template *SnapshotTemplateInfo `json:"Template,omitnil,omitempty" name:"Template"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveSnapshotTemplateResponse struct {
@@ -5775,10 +5775,10 @@ func (r *DescribeLiveSnapshotTemplatesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveSnapshotTemplatesResponseParams struct {
 	// Screencapturing template list.
-	Templates []*SnapshotTemplateInfo `json:"Templates,omitnil" name:"Templates"`
+	Templates []*SnapshotTemplateInfo `json:"Templates,omitnil,omitempty" name:"Templates"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveSnapshotTemplatesResponse struct {
@@ -5802,50 +5802,50 @@ type DescribeLiveStreamEventListRequestParams struct {
 	// Start time. 
 	// In UTC format, such as 2018-12-29T19:00:00Z.
 	// This supports querying the history of 60 days.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time.
 	// In UTC format, such as 2018-12-29T20:00:00Z.
 	// This cannot be after the current time and cannot be more than 30 days after the start time.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Stream name; query with wildcard (*) is not supported; fuzzy match by default.
 	// The IsStrict field can be used to change to exact query.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Page number to get.
 	// Default value: 1.
 	// Note: Currently, query for up to 10,000 entries is supported.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page.
 	// Maximum value: 100.
 	// Value range: any integer between 1 and 100.
 	// Default value: 10.
 	// Note: currently, query for up to 10,000 entries is supported.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Whether to filter. No filtering by default.
 	// 0: No filtering at all.
 	// 1: Filter out the failing streams and return only the successful ones.
-	IsFilter *int64 `json:"IsFilter,omitnil" name:"IsFilter"`
+	IsFilter *int64 `json:"IsFilter,omitnil,omitempty" name:"IsFilter"`
 
 	// Whether to query exactly. Fuzzy match by default.
 	// 0: Fuzzy match.
 	// 1: Exact query.
 	// Note: This parameter takes effect when StreamName is used.
-	IsStrict *int64 `json:"IsStrict,omitnil" name:"IsStrict"`
+	IsStrict *int64 `json:"IsStrict,omitnil,omitempty" name:"IsStrict"`
 
 	// Whether to display in ascending order by end time. Descending order by default.
 	// 0: Descending.
 	// 1: Ascending.
-	IsAsc *int64 `json:"IsAsc,omitnil" name:"IsAsc"`
+	IsAsc *int64 `json:"IsAsc,omitnil,omitempty" name:"IsAsc"`
 }
 
 type DescribeLiveStreamEventListRequest struct {
@@ -5854,50 +5854,50 @@ type DescribeLiveStreamEventListRequest struct {
 	// Start time. 
 	// In UTC format, such as 2018-12-29T19:00:00Z.
 	// This supports querying the history of 60 days.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time.
 	// In UTC format, such as 2018-12-29T20:00:00Z.
 	// This cannot be after the current time and cannot be more than 30 days after the start time.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Stream name; query with wildcard (*) is not supported; fuzzy match by default.
 	// The IsStrict field can be used to change to exact query.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Page number to get.
 	// Default value: 1.
 	// Note: Currently, query for up to 10,000 entries is supported.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page.
 	// Maximum value: 100.
 	// Value range: any integer between 1 and 100.
 	// Default value: 10.
 	// Note: currently, query for up to 10,000 entries is supported.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Whether to filter. No filtering by default.
 	// 0: No filtering at all.
 	// 1: Filter out the failing streams and return only the successful ones.
-	IsFilter *int64 `json:"IsFilter,omitnil" name:"IsFilter"`
+	IsFilter *int64 `json:"IsFilter,omitnil,omitempty" name:"IsFilter"`
 
 	// Whether to query exactly. Fuzzy match by default.
 	// 0: Fuzzy match.
 	// 1: Exact query.
 	// Note: This parameter takes effect when StreamName is used.
-	IsStrict *int64 `json:"IsStrict,omitnil" name:"IsStrict"`
+	IsStrict *int64 `json:"IsStrict,omitnil,omitempty" name:"IsStrict"`
 
 	// Whether to display in ascending order by end time. Descending order by default.
 	// 0: Descending.
 	// 1: Ascending.
-	IsAsc *int64 `json:"IsAsc,omitnil" name:"IsAsc"`
+	IsAsc *int64 `json:"IsAsc,omitnil,omitempty" name:"IsAsc"`
 }
 
 func (r *DescribeLiveStreamEventListRequest) ToJsonString() string {
@@ -5931,22 +5931,22 @@ func (r *DescribeLiveStreamEventListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveStreamEventListResponseParams struct {
 	// List of streaming events.
-	EventList []*StreamEventInfo `json:"EventList,omitnil" name:"EventList"`
+	EventList []*StreamEventInfo `json:"EventList,omitnil,omitempty" name:"EventList"`
 
 	// Page number.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Total number of eligible ones.
-	TotalNum *uint64 `json:"TotalNum,omitnil" name:"TotalNum"`
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
 
 	// Total number of pages.
-	TotalPage *uint64 `json:"TotalPage,omitnil" name:"TotalPage"`
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveStreamEventListResponse struct {
@@ -5968,42 +5968,42 @@ func (r *DescribeLiveStreamEventListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveStreamOnlineListRequestParams struct {
 	// Push domain name. If you use multiple paths, enter the `DomainName`.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default. If you use multiple paths, enter the `AppName`.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Page number to get. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Maximum value: 100. 
 	// Value: any integer between 10 and 100.
 	// Default value: 10.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Stream name, which is used for exact query.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 type DescribeLiveStreamOnlineListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push domain name. If you use multiple paths, enter the `DomainName`.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default. If you use multiple paths, enter the `AppName`.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Page number to get. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Maximum value: 100. 
 	// Value: any integer between 10 and 100.
 	// Default value: 10.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Stream name, which is used for exact query.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 func (r *DescribeLiveStreamOnlineListRequest) ToJsonString() string {
@@ -6032,22 +6032,22 @@ func (r *DescribeLiveStreamOnlineListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveStreamOnlineListResponseParams struct {
 	// Total number of eligible ones.
-	TotalNum *uint64 `json:"TotalNum,omitnil" name:"TotalNum"`
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
 
 	// Total number of pages.
-	TotalPage *uint64 `json:"TotalPage,omitnil" name:"TotalPage"`
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
 
 	// Page number.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries displayed per page.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Active push information list.
-	OnlineInfo []*StreamOnlineInfo `json:"OnlineInfo,omitnil" name:"OnlineInfo"`
+	OnlineInfo []*StreamOnlineInfo `json:"OnlineInfo,omitnil,omitempty" name:"OnlineInfo"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveStreamOnlineListResponse struct {
@@ -6069,68 +6069,68 @@ func (r *DescribeLiveStreamOnlineListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveStreamPublishedListRequestParams struct {
 	// Your push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// End time.
 	// In UTC format, such as 2016-06-30T19:00:00Z.
 	// This cannot be after the current time.
 	// Note: The difference between EndTime and StartTime cannot be greater than 30 days.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Start time. 
 	// In UTC format, such as 2016-06-29T19:00:00Z.
 	// This supports querying data in the past 60 days.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default. Fuzzy match is not supported.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Page number to get.
 	// Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page.
 	// Maximum value: 100
 	// Valid values: integers between 10 and 100
 	// Default value: 10
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Stream name, which supports fuzzy match.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 type DescribeLiveStreamPublishedListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Your push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// End time.
 	// In UTC format, such as 2016-06-30T19:00:00Z.
 	// This cannot be after the current time.
 	// Note: The difference between EndTime and StartTime cannot be greater than 30 days.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Start time. 
 	// In UTC format, such as 2016-06-29T19:00:00Z.
 	// This supports querying data in the past 60 days.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default. Fuzzy match is not supported.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Page number to get.
 	// Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page.
 	// Maximum value: 100
 	// Valid values: integers between 10 and 100
 	// Default value: 10
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Stream name, which supports fuzzy match.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 func (r *DescribeLiveStreamPublishedListRequest) ToJsonString() string {
@@ -6161,22 +6161,22 @@ func (r *DescribeLiveStreamPublishedListRequest) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeLiveStreamPublishedListResponseParams struct {
 	// Push record information.
-	PublishInfo []*StreamName `json:"PublishInfo,omitnil" name:"PublishInfo"`
+	PublishInfo []*StreamName `json:"PublishInfo,omitnil,omitempty" name:"PublishInfo"`
 
 	// Page number.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Total number of eligible ones.
-	TotalNum *uint64 `json:"TotalNum,omitnil" name:"TotalNum"`
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
 
 	// Total number of pages.
-	TotalPage *uint64 `json:"TotalPage,omitnil" name:"TotalPage"`
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveStreamPublishedListResponse struct {
@@ -6198,40 +6198,40 @@ func (r *DescribeLiveStreamPublishedListResponse) FromJsonString(s string) error
 // Predefined struct for user
 type DescribeLiveStreamPushInfoListRequestParams struct {
 	// Push domain name.
-	PushDomain *string `json:"PushDomain,omitnil" name:"PushDomain"`
+	PushDomain *string `json:"PushDomain,omitnil,omitempty" name:"PushDomain"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Number of pages,
 	// Value range: [1,10000],
 	// Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page,
 	// Value range: [1,1000],
 	// Default value: 200.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 }
 
 type DescribeLiveStreamPushInfoListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push domain name.
-	PushDomain *string `json:"PushDomain,omitnil" name:"PushDomain"`
+	PushDomain *string `json:"PushDomain,omitnil,omitempty" name:"PushDomain"`
 
 	// Push path, which is the same as the `AppName` in push and playback addresses and is `live` by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Number of pages,
 	// Value range: [1,10000],
 	// Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page,
 	// Value range: [1,1000],
 	// Default value: 200.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 }
 
 func (r *DescribeLiveStreamPushInfoListRequest) ToJsonString() string {
@@ -6259,22 +6259,22 @@ func (r *DescribeLiveStreamPushInfoListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveStreamPushInfoListResponseParams struct {
 	// Live stream statistics list.
-	DataInfoList []*PushDataInfo `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*PushDataInfo `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// Total number of live streams.
-	TotalNum *uint64 `json:"TotalNum,omitnil" name:"TotalNum"`
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
 
 	// Total number of pages.
-	TotalPage *uint64 `json:"TotalPage,omitnil" name:"TotalPage"`
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
 
 	// Page number where the current data resides.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of live streams per page.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveStreamPushInfoListResponse struct {
@@ -6296,26 +6296,26 @@ func (r *DescribeLiveStreamPushInfoListResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeLiveStreamStateRequestParams struct {
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Your push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 type DescribeLiveStreamStateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Your push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 func (r *DescribeLiveStreamStateRequest) ToJsonString() string {
@@ -6345,10 +6345,10 @@ type DescribeLiveStreamStateResponseParams struct {
 	// active: active
 	// inactive: Inactive
 	// forbid: forbidden.
-	StreamState *string `json:"StreamState,omitnil" name:"StreamState"`
+	StreamState *string `json:"StreamState,omitnil,omitempty" name:"StreamState"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveStreamStateResponse struct {
@@ -6374,17 +6374,17 @@ type DescribeLiveTimeShiftBillInfoListRequestParams struct {
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time for query. You can query data from the past three months. The longest time period that can be queried is one month.
 	// 
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The push domains to query. If you leave this empty, the time shifting billing data of all push domains will be returned.
-	PushDomains []*string `json:"PushDomains,omitnil" name:"PushDomains"`
+	PushDomains []*string `json:"PushDomains,omitnil,omitempty" name:"PushDomains"`
 }
 
 type DescribeLiveTimeShiftBillInfoListRequest struct {
@@ -6395,17 +6395,17 @@ type DescribeLiveTimeShiftBillInfoListRequest struct {
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time for query. You can query data from the past three months. The longest time period that can be queried is one month.
 	// 
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The push domains to query. If you leave this empty, the time shifting billing data of all push domains will be returned.
-	PushDomains []*string `json:"PushDomains,omitnil" name:"PushDomains"`
+	PushDomains []*string `json:"PushDomains,omitnil,omitempty" name:"PushDomains"`
 }
 
 func (r *DescribeLiveTimeShiftBillInfoListRequest) ToJsonString() string {
@@ -6432,10 +6432,10 @@ func (r *DescribeLiveTimeShiftBillInfoListRequest) FromJsonString(s string) erro
 // Predefined struct for user
 type DescribeLiveTimeShiftBillInfoListResponseParams struct {
 	// The time shifting billing data.
-	DataInfoList []*TimeShiftBillData `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*TimeShiftBillData `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveTimeShiftBillInfoListResponse struct {
@@ -6486,10 +6486,10 @@ func (r *DescribeLiveTimeShiftRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveTimeShiftRulesResponseParams struct {
 	// The information of the rules.
-	Rules []*RuleInfo `json:"Rules,omitnil" name:"Rules"`
+	Rules []*RuleInfo `json:"Rules,omitnil,omitempty" name:"Rules"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveTimeShiftRulesResponse struct {
@@ -6540,10 +6540,10 @@ func (r *DescribeLiveTimeShiftTemplatesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveTimeShiftTemplatesResponseParams struct {
 	// The information of the templates.
-	Templates []*TimeShiftTemplate `json:"Templates,omitnil" name:"Templates"`
+	Templates []*TimeShiftTemplate `json:"Templates,omitnil,omitempty" name:"Templates"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveTimeShiftTemplatesResponse struct {
@@ -6565,66 +6565,66 @@ func (r *DescribeLiveTimeShiftTemplatesResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeLiveTranscodeDetailInfoRequestParams struct {
 	// Push domain name.
-	PushDomain *string `json:"PushDomain,omitnil" name:"PushDomain"`
+	PushDomain *string `json:"PushDomain,omitnil,omitempty" name:"PushDomain"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Query date (UTC+8)
 	// Format: yyyymmdd
 	// Note: you can query the statistics for a day in the past three months, with yesterday as the latest date allowed.
-	DayTime *string `json:"DayTime,omitnil" name:"DayTime"`
+	DayTime *string `json:"DayTime,omitnil,omitempty" name:"DayTime"`
 
 	// Number of pages. Default value: 1.
 	// Up to 100 pages.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Default value: 20,
 	// Value range: [10,1000].
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Start date (UTC+8)
 	// Format: yyyymmdd
 	// Note: details for the last three months can be queried.
-	StartDayTime *string `json:"StartDayTime,omitnil" name:"StartDayTime"`
+	StartDayTime *string `json:"StartDayTime,omitnil,omitempty" name:"StartDayTime"`
 
 	// End date (UTC+8)
 	// Format: yyyymmdd
 	// Note: you can query the statistics for a period in the past three months, with yesterday as the latest date allowed. You must specify either `DayTime`, or `StartDayTime` and `EndDayTime`. If you specify all three parameters, only `DayTime` will be applied.
-	EndDayTime *string `json:"EndDayTime,omitnil" name:"EndDayTime"`
+	EndDayTime *string `json:"EndDayTime,omitnil,omitempty" name:"EndDayTime"`
 }
 
 type DescribeLiveTranscodeDetailInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push domain name.
-	PushDomain *string `json:"PushDomain,omitnil" name:"PushDomain"`
+	PushDomain *string `json:"PushDomain,omitnil,omitempty" name:"PushDomain"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Query date (UTC+8)
 	// Format: yyyymmdd
 	// Note: you can query the statistics for a day in the past three months, with yesterday as the latest date allowed.
-	DayTime *string `json:"DayTime,omitnil" name:"DayTime"`
+	DayTime *string `json:"DayTime,omitnil,omitempty" name:"DayTime"`
 
 	// Number of pages. Default value: 1.
 	// Up to 100 pages.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Default value: 20,
 	// Value range: [10,1000].
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Start date (UTC+8)
 	// Format: yyyymmdd
 	// Note: details for the last three months can be queried.
-	StartDayTime *string `json:"StartDayTime,omitnil" name:"StartDayTime"`
+	StartDayTime *string `json:"StartDayTime,omitnil,omitempty" name:"StartDayTime"`
 
 	// End date (UTC+8)
 	// Format: yyyymmdd
 	// Note: you can query the statistics for a period in the past three months, with yesterday as the latest date allowed. You must specify either `DayTime`, or `StartDayTime` and `EndDayTime`. If you specify all three parameters, only `DayTime` will be applied.
-	EndDayTime *string `json:"EndDayTime,omitnil" name:"EndDayTime"`
+	EndDayTime *string `json:"EndDayTime,omitnil,omitempty" name:"EndDayTime"`
 }
 
 func (r *DescribeLiveTranscodeDetailInfoRequest) ToJsonString() string {
@@ -6655,22 +6655,22 @@ func (r *DescribeLiveTranscodeDetailInfoRequest) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeLiveTranscodeDetailInfoResponseParams struct {
 	// Statistics list.
-	DataInfoList []*TranscodeDetailInfo `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*TranscodeDetailInfo `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// Page number.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Total number.
-	TotalNum *uint64 `json:"TotalNum,omitnil" name:"TotalNum"`
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
 
 	// Total number of pages.
-	TotalPage *uint64 `json:"TotalPage,omitnil" name:"TotalPage"`
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveTranscodeDetailInfoResponse struct {
@@ -6692,20 +6692,20 @@ func (r *DescribeLiveTranscodeDetailInfoResponse) FromJsonString(s string) error
 // Predefined struct for user
 type DescribeLiveTranscodeRulesRequestParams struct {
 	// An array of template IDs to be filtered.
-	TemplateIds []*int64 `json:"TemplateIds,omitnil" name:"TemplateIds"`
+	TemplateIds []*int64 `json:"TemplateIds,omitnil,omitempty" name:"TemplateIds"`
 
 	// An array of domain names to be filtered.
-	DomainNames []*string `json:"DomainNames,omitnil" name:"DomainNames"`
+	DomainNames []*string `json:"DomainNames,omitnil,omitempty" name:"DomainNames"`
 }
 
 type DescribeLiveTranscodeRulesRequest struct {
 	*tchttp.BaseRequest
 	
 	// An array of template IDs to be filtered.
-	TemplateIds []*int64 `json:"TemplateIds,omitnil" name:"TemplateIds"`
+	TemplateIds []*int64 `json:"TemplateIds,omitnil,omitempty" name:"TemplateIds"`
 
 	// An array of domain names to be filtered.
-	DomainNames []*string `json:"DomainNames,omitnil" name:"DomainNames"`
+	DomainNames []*string `json:"DomainNames,omitnil,omitempty" name:"DomainNames"`
 }
 
 func (r *DescribeLiveTranscodeRulesRequest) ToJsonString() string {
@@ -6731,10 +6731,10 @@ func (r *DescribeLiveTranscodeRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveTranscodeRulesResponseParams struct {
 	// List of transcoding rules.
-	Rules []*RuleInfo `json:"Rules,omitnil" name:"Rules"`
+	Rules []*RuleInfo `json:"Rules,omitnil,omitempty" name:"Rules"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveTranscodeRulesResponse struct {
@@ -6757,7 +6757,7 @@ func (r *DescribeLiveTranscodeRulesResponse) FromJsonString(s string) error {
 type DescribeLiveTranscodeTemplateRequestParams struct {
 	// Template ID.
 	// Note: get the template ID in the returned value of the [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/32646?from_cn_redirect=1) API call.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type DescribeLiveTranscodeTemplateRequest struct {
@@ -6765,7 +6765,7 @@ type DescribeLiveTranscodeTemplateRequest struct {
 	
 	// Template ID.
 	// Note: get the template ID in the returned value of the [CreateLiveTranscodeTemplate](https://intl.cloud.tencent.com/document/product/267/32646?from_cn_redirect=1) API call.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 func (r *DescribeLiveTranscodeTemplateRequest) ToJsonString() string {
@@ -6790,10 +6790,10 @@ func (r *DescribeLiveTranscodeTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveTranscodeTemplateResponseParams struct {
 	// Template information.
-	Template *TemplateInfo `json:"Template,omitnil" name:"Template"`
+	Template *TemplateInfo `json:"Template,omitnil,omitempty" name:"Template"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveTranscodeTemplateResponse struct {
@@ -6844,10 +6844,10 @@ func (r *DescribeLiveTranscodeTemplatesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveTranscodeTemplatesResponseParams struct {
 	// List of transcoding templates.
-	Templates []*TemplateInfo `json:"Templates,omitnil" name:"Templates"`
+	Templates []*TemplateInfo `json:"Templates,omitnil,omitempty" name:"Templates"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveTranscodeTemplatesResponse struct {
@@ -6871,22 +6871,22 @@ type DescribeLiveTranscodeTotalInfoRequestParams struct {
 	// The start time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed three months. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed three months. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// List of push domains to query. If this parameter is left empty, the data of all domains is queried.
 	// If this parameter is specified, the data returned will be on an hourly basis.
-	PushDomains []*string `json:"PushDomains,omitnil" name:"PushDomains"`
+	PushDomains []*string `json:"PushDomains,omitnil,omitempty" name:"PushDomains"`
 
 	// Valid values:
 	// `Mainland`: queries transcoding data in the Chinese mainland
 	// `Oversea`: queries transcoding data outside the Chinese mainland
 	// By default, the data both in and outside the Chinese mainland is queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 }
 
 type DescribeLiveTranscodeTotalInfoRequest struct {
@@ -6895,22 +6895,22 @@ type DescribeLiveTranscodeTotalInfoRequest struct {
 	// The start time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed three months. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last three months, the gap between the start time and the end time cannot exceed three months. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// List of push domains to query. If this parameter is left empty, the data of all domains is queried.
 	// If this parameter is specified, the data returned will be on an hourly basis.
-	PushDomains []*string `json:"PushDomains,omitnil" name:"PushDomains"`
+	PushDomains []*string `json:"PushDomains,omitnil,omitempty" name:"PushDomains"`
 
 	// Valid values:
 	// `Mainland`: queries transcoding data in the Chinese mainland
 	// `Oversea`: queries transcoding data outside the Chinese mainland
 	// By default, the data both in and outside the Chinese mainland is queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 }
 
 func (r *DescribeLiveTranscodeTotalInfoRequest) ToJsonString() string {
@@ -6939,10 +6939,10 @@ func (r *DescribeLiveTranscodeTotalInfoRequest) FromJsonString(s string) error {
 type DescribeLiveTranscodeTotalInfoResponseParams struct {
 	// List of transcoding data
 	// Note: This field may return `null`, indicating that no valid value can be found.
-	DataInfoList []*TranscodeTotalInfo `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*TranscodeTotalInfo `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveTranscodeTotalInfoResponse struct {
@@ -6964,14 +6964,14 @@ func (r *DescribeLiveTranscodeTotalInfoResponse) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeLiveWatermarkRequestParams struct {
 	// Watermark ID returned by the `DescribeLiveWatermarks` API.
-	WatermarkId *uint64 `json:"WatermarkId,omitnil" name:"WatermarkId"`
+	WatermarkId *uint64 `json:"WatermarkId,omitnil,omitempty" name:"WatermarkId"`
 }
 
 type DescribeLiveWatermarkRequest struct {
 	*tchttp.BaseRequest
 	
 	// Watermark ID returned by the `DescribeLiveWatermarks` API.
-	WatermarkId *uint64 `json:"WatermarkId,omitnil" name:"WatermarkId"`
+	WatermarkId *uint64 `json:"WatermarkId,omitnil,omitempty" name:"WatermarkId"`
 }
 
 func (r *DescribeLiveWatermarkRequest) ToJsonString() string {
@@ -6996,10 +6996,10 @@ func (r *DescribeLiveWatermarkRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveWatermarkResponseParams struct {
 	// Watermark information.
-	Watermark *WatermarkInfo `json:"Watermark,omitnil" name:"Watermark"`
+	Watermark *WatermarkInfo `json:"Watermark,omitnil,omitempty" name:"Watermark"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveWatermarkResponse struct {
@@ -7050,10 +7050,10 @@ func (r *DescribeLiveWatermarkRulesRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveWatermarkRulesResponseParams struct {
 	// Watermarking rule list.
-	Rules []*RuleInfo `json:"Rules,omitnil" name:"Rules"`
+	Rules []*RuleInfo `json:"Rules,omitnil,omitempty" name:"Rules"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveWatermarkRulesResponse struct {
@@ -7104,13 +7104,13 @@ func (r *DescribeLiveWatermarksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeLiveWatermarksResponseParams struct {
 	// Total number of watermarks.
-	TotalNum *uint64 `json:"TotalNum,omitnil" name:"TotalNum"`
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
 
 	// Watermark information list.
-	WatermarkList []*WatermarkInfo `json:"WatermarkList,omitnil" name:"WatermarkList"`
+	WatermarkList []*WatermarkInfo `json:"WatermarkList,omitnil,omitempty" name:"WatermarkList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeLiveWatermarksResponse struct {
@@ -7134,25 +7134,25 @@ type DescribePlayErrorCodeDetailInfoListRequestParams struct {
 	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Query granularity:
 	// 1: 1-minute granularity.
-	Granularity *uint64 `json:"Granularity,omitnil" name:"Granularity"`
+	Granularity *uint64 `json:"Granularity,omitnil,omitempty" name:"Granularity"`
 
 	// Yes. Valid values: "4xx", "5xx". Mixed codes in the format of `4xx,5xx` are also supported.
-	StatType *string `json:"StatType,omitnil" name:"StatType"`
+	StatType *string `json:"StatType,omitnil,omitempty" name:"StatType"`
 
 	// Playback domain name list.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// Region. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China), China (data for China, including Hong Kong, Macao, and Taiwan), Foreign (data for regions outside China, excluding Hong Kong, Macao, and Taiwan), Global (default). If this parameter is left empty, data for all regions will be queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 }
 
 type DescribePlayErrorCodeDetailInfoListRequest struct {
@@ -7161,25 +7161,25 @@ type DescribePlayErrorCodeDetailInfoListRequest struct {
 	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Query granularity:
 	// 1: 1-minute granularity.
-	Granularity *uint64 `json:"Granularity,omitnil" name:"Granularity"`
+	Granularity *uint64 `json:"Granularity,omitnil,omitempty" name:"Granularity"`
 
 	// Yes. Valid values: "4xx", "5xx". Mixed codes in the format of `4xx,5xx` are also supported.
-	StatType *string `json:"StatType,omitnil" name:"StatType"`
+	StatType *string `json:"StatType,omitnil,omitempty" name:"StatType"`
 
 	// Playback domain name list.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// Region. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China), China (data for China, including Hong Kong, Macao, and Taiwan), Foreign (data for regions outside China, excluding Hong Kong, Macao, and Taiwan), Global (default). If this parameter is left empty, data for all regions will be queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 }
 
 func (r *DescribePlayErrorCodeDetailInfoListRequest) ToJsonString() string {
@@ -7209,13 +7209,13 @@ func (r *DescribePlayErrorCodeDetailInfoListRequest) FromJsonString(s string) er
 // Predefined struct for user
 type DescribePlayErrorCodeDetailInfoListResponseParams struct {
 	// Statistics list.
-	HttpCodeList []*HttpCodeInfo `json:"HttpCodeList,omitnil" name:"HttpCodeList"`
+	HttpCodeList []*HttpCodeInfo `json:"HttpCodeList,omitnil,omitempty" name:"HttpCodeList"`
 
 	// Statistics type.
-	StatType *string `json:"StatType,omitnil" name:"StatType"`
+	StatType *string `json:"StatType,omitnil,omitempty" name:"StatType"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribePlayErrorCodeDetailInfoListResponse struct {
@@ -7239,30 +7239,30 @@ type DescribePlayErrorCodeSumInfoListRequestParams struct {
 	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Playback domain name list. If this parameter is left empty, full data will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// Number of pages. Value range: [1,1000]. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Value range: [1,1000]. Default value: 20.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Region. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China), China (data for China, including Hong Kong, Macao, and Taiwan), Foreign (data for regions outside China, excluding Hong Kong, Macao, and Taiwan), Global (default). If this parameter is left empty, data for all regions will be queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 
 	// Grouping parameter. Valid values: CountryProIsp (default value), Country (country/region). Grouping is made by country/region + district + ISP by default. Currently, districts and ISPs outside Mainland China cannot be recognized.
-	GroupType *string `json:"GroupType,omitnil" name:"GroupType"`
+	GroupType *string `json:"GroupType,omitnil,omitempty" name:"GroupType"`
 
 	// Language used in the output field. Valid values: Chinese (default), English. Currently, country/region, district, and ISP parameters support multiple languages.
-	OutLanguage *string `json:"OutLanguage,omitnil" name:"OutLanguage"`
+	OutLanguage *string `json:"OutLanguage,omitnil,omitempty" name:"OutLanguage"`
 }
 
 type DescribePlayErrorCodeSumInfoListRequest struct {
@@ -7271,30 +7271,30 @@ type DescribePlayErrorCodeSumInfoListRequest struct {
 	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Playback domain name list. If this parameter is left empty, full data will be queried.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// Number of pages. Value range: [1,1000]. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Value range: [1,1000]. Default value: 20.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Region. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China), China (data for China, including Hong Kong, Macao, and Taiwan), Foreign (data for regions outside China, excluding Hong Kong, Macao, and Taiwan), Global (default). If this parameter is left empty, data for all regions will be queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 
 	// Grouping parameter. Valid values: CountryProIsp (default value), Country (country/region). Grouping is made by country/region + district + ISP by default. Currently, districts and ISPs outside Mainland China cannot be recognized.
-	GroupType *string `json:"GroupType,omitnil" name:"GroupType"`
+	GroupType *string `json:"GroupType,omitnil,omitempty" name:"GroupType"`
 
 	// Language used in the output field. Valid values: Chinese (default), English. Currently, country/region, district, and ISP parameters support multiple languages.
-	OutLanguage *string `json:"OutLanguage,omitnil" name:"OutLanguage"`
+	OutLanguage *string `json:"OutLanguage,omitnil,omitempty" name:"OutLanguage"`
 }
 
 func (r *DescribePlayErrorCodeSumInfoListRequest) ToJsonString() string {
@@ -7326,40 +7326,40 @@ func (r *DescribePlayErrorCodeSumInfoListRequest) FromJsonString(s string) error
 // Predefined struct for user
 type DescribePlayErrorCodeSumInfoListResponseParams struct {
 	// Information of error codes starting with 2, 3, 4, or 5 by district and ISP.
-	ProIspInfoList []*ProIspPlayCodeDataInfo `json:"ProIspInfoList,omitnil" name:"ProIspInfoList"`
+	ProIspInfoList []*ProIspPlayCodeDataInfo `json:"ProIspInfoList,omitnil,omitempty" name:"ProIspInfoList"`
 
 	// Total occurrences of all status codes.
-	TotalCodeAll *uint64 `json:"TotalCodeAll,omitnil" name:"TotalCodeAll"`
+	TotalCodeAll *uint64 `json:"TotalCodeAll,omitnil,omitempty" name:"TotalCodeAll"`
 
 	// Occurrences of 4xx status codes.
-	TotalCode4xx *uint64 `json:"TotalCode4xx,omitnil" name:"TotalCode4xx"`
+	TotalCode4xx *uint64 `json:"TotalCode4xx,omitnil,omitempty" name:"TotalCode4xx"`
 
 	// Occurrences of 5xx status codes.
-	TotalCode5xx *uint64 `json:"TotalCode5xx,omitnil" name:"TotalCode5xx"`
+	TotalCode5xx *uint64 `json:"TotalCode5xx,omitnil,omitempty" name:"TotalCode5xx"`
 
 	// Total occurrences of each status code.
-	TotalCodeList []*PlayCodeTotalInfo `json:"TotalCodeList,omitnil" name:"TotalCodeList"`
+	TotalCodeList []*PlayCodeTotalInfo `json:"TotalCodeList,omitnil,omitempty" name:"TotalCodeList"`
 
 	// Page number.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Total number of pages.
-	TotalPage *uint64 `json:"TotalPage,omitnil" name:"TotalPage"`
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
 
 	// Total number of results.
-	TotalNum *uint64 `json:"TotalNum,omitnil" name:"TotalNum"`
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
 
 	// Occurrences of 2xx status codes.
-	TotalCode2xx *uint64 `json:"TotalCode2xx,omitnil" name:"TotalCode2xx"`
+	TotalCode2xx *uint64 `json:"TotalCode2xx,omitnil,omitempty" name:"TotalCode2xx"`
 
 	// Occurrences of 3xx status codes.
-	TotalCode3xx *uint64 `json:"TotalCode3xx,omitnil" name:"TotalCode3xx"`
+	TotalCode3xx *uint64 `json:"TotalCode3xx,omitnil,omitempty" name:"TotalCode3xx"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribePlayErrorCodeSumInfoListResponse struct {
@@ -7383,16 +7383,16 @@ type DescribeProvinceIspPlayInfoListRequestParams struct {
 	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Supported granularities:
 	// 1: 1-minute granularity (the query interval should be within 1 day)
-	Granularity *uint64 `json:"Granularity,omitnil" name:"Granularity"`
+	Granularity *uint64 `json:"Granularity,omitnil,omitempty" name:"Granularity"`
 
 	// Statistical metric type:
 	// "Bandwidth": bandwidth
@@ -7400,24 +7400,24 @@ type DescribeProvinceIspPlayInfoListRequestParams struct {
 	// "Flux": traffic
 	// "Request": number of requests
 	// "Online": number of concurrent connections
-	StatType *string `json:"StatType,omitnil" name:"StatType"`
+	StatType *string `json:"StatType,omitnil,omitempty" name:"StatType"`
 
 	// Playback domain name list.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// List of the districts to be queried, such as Beijing.
-	ProvinceNames []*string `json:"ProvinceNames,omitnil" name:"ProvinceNames"`
+	ProvinceNames []*string `json:"ProvinceNames,omitnil,omitempty" name:"ProvinceNames"`
 
 	// List of the ISPs to be queried, such as China Mobile. If this parameter is left empty, the data of all ISPs will be queried.
-	IspNames []*string `json:"IspNames,omitnil" name:"IspNames"`
+	IspNames []*string `json:"IspNames,omitnil,omitempty" name:"IspNames"`
 
 	// Region. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China), China (data for China, including Hong Kong, Macao, and Taiwan), Foreign (data for regions outside China, excluding Hong Kong, Macao, and Taiwan), Global (default). If this parameter is left empty, data for all regions will be queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 
 	// IP type:
 	// "Ipv6": IPv6 data
 	// Data of all IPs will be returned if this parameter is left empty.
-	IpType *string `json:"IpType,omitnil" name:"IpType"`
+	IpType *string `json:"IpType,omitnil,omitempty" name:"IpType"`
 }
 
 type DescribeProvinceIspPlayInfoListRequest struct {
@@ -7426,16 +7426,16 @@ type DescribeProvinceIspPlayInfoListRequest struct {
 	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Supported granularities:
 	// 1: 1-minute granularity (the query interval should be within 1 day)
-	Granularity *uint64 `json:"Granularity,omitnil" name:"Granularity"`
+	Granularity *uint64 `json:"Granularity,omitnil,omitempty" name:"Granularity"`
 
 	// Statistical metric type:
 	// "Bandwidth": bandwidth
@@ -7443,24 +7443,24 @@ type DescribeProvinceIspPlayInfoListRequest struct {
 	// "Flux": traffic
 	// "Request": number of requests
 	// "Online": number of concurrent connections
-	StatType *string `json:"StatType,omitnil" name:"StatType"`
+	StatType *string `json:"StatType,omitnil,omitempty" name:"StatType"`
 
 	// Playback domain name list.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// List of the districts to be queried, such as Beijing.
-	ProvinceNames []*string `json:"ProvinceNames,omitnil" name:"ProvinceNames"`
+	ProvinceNames []*string `json:"ProvinceNames,omitnil,omitempty" name:"ProvinceNames"`
 
 	// List of the ISPs to be queried, such as China Mobile. If this parameter is left empty, the data of all ISPs will be queried.
-	IspNames []*string `json:"IspNames,omitnil" name:"IspNames"`
+	IspNames []*string `json:"IspNames,omitnil,omitempty" name:"IspNames"`
 
 	// Region. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China), China (data for China, including Hong Kong, Macao, and Taiwan), Foreign (data for regions outside China, excluding Hong Kong, Macao, and Taiwan), Global (default). If this parameter is left empty, data for all regions will be queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 
 	// IP type:
 	// "Ipv6": IPv6 data
 	// Data of all IPs will be returned if this parameter is left empty.
-	IpType *string `json:"IpType,omitnil" name:"IpType"`
+	IpType *string `json:"IpType,omitnil,omitempty" name:"IpType"`
 }
 
 func (r *DescribeProvinceIspPlayInfoListRequest) ToJsonString() string {
@@ -7493,13 +7493,13 @@ func (r *DescribeProvinceIspPlayInfoListRequest) FromJsonString(s string) error 
 // Predefined struct for user
 type DescribeProvinceIspPlayInfoListResponseParams struct {
 	// Playback information list.
-	DataInfoList []*PlayStatInfo `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*PlayStatInfo `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// Statistics type, which is the same as the input parameter.
-	StatType *string `json:"StatType,omitnil" name:"StatType"`
+	StatType *string `json:"StatType,omitnil,omitempty" name:"StatType"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeProvinceIspPlayInfoListResponse struct {
@@ -7521,44 +7521,44 @@ func (r *DescribeProvinceIspPlayInfoListResponse) FromJsonString(s string) error
 // Predefined struct for user
 type DescribeRecordTaskRequestParams struct {
 	// The start time of the tasks to retrieve in Unix timestamp. The time range should not be earlier than 90 days before the current time, and the query span should not exceed one week.
-	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the tasks to retrieve in Unix timestamp. The EndTime must be greater than the StartTime. The time range should not be earlier than 90 days before the current time, and the query span should not exceed one week. (Note: the start and end times of the task must be within the query time range).
-	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Page token used for batch retrieval: If a single request cannot retrieve all data, the interface will return a ScrollToken. The next request carrying this token will start retrieving from the next record.
-	ScrollToken *string `json:"ScrollToken,omitnil" name:"ScrollToken"`
+	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
 }
 
 type DescribeRecordTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// The start time of the tasks to retrieve in Unix timestamp. The time range should not be earlier than 90 days before the current time, and the query span should not exceed one week.
-	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the tasks to retrieve in Unix timestamp. The EndTime must be greater than the StartTime. The time range should not be earlier than 90 days before the current time, and the query span should not exceed one week. (Note: the start and end times of the task must be within the query time range).
-	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Page token used for batch retrieval: If a single request cannot retrieve all data, the interface will return a ScrollToken. The next request carrying this token will start retrieving from the next record.
-	ScrollToken *string `json:"ScrollToken,omitnil" name:"ScrollToken"`
+	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
 }
 
 func (r *DescribeRecordTaskRequest) ToJsonString() string {
@@ -7588,13 +7588,13 @@ func (r *DescribeRecordTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRecordTaskResponseParams struct {
 	// Page token: When the request does not return all data, this field indicates the token of the next record. When this field is empty, it means there is no more data.
-	ScrollToken *string `json:"ScrollToken,omitnil" name:"ScrollToken"`
+	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
 
 	// List of recording tasks. When this field is empty, it means all data has been returned.
-	TaskList []*RecordTask `json:"TaskList,omitnil" name:"TaskList"`
+	TaskList []*RecordTask `json:"TaskList,omitnil,omitempty" name:"TaskList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRecordTaskResponse struct {
@@ -7616,38 +7616,38 @@ func (r *DescribeRecordTaskResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeScreenShotSheetNumListRequestParams struct {
 	// Start time in UTC time in the format of `yyyy-mm-ddTHH:MM:SSZ`.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time in UTC time in the format of `yyyy-mm-ddTHH:MM:SSZ`. Data for the last year can be queried.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Region information. Valid values: Mainland, Oversea. The former is to query data within Mainland China, while the latter outside Mainland China. If this parameter is left empty, data of all regions will be queried.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Push domain name (data at the domain name level after November 1, 2019 can be queried).
-	PushDomains []*string `json:"PushDomains,omitnil" name:"PushDomains"`
+	PushDomains []*string `json:"PushDomains,omitnil,omitempty" name:"PushDomains"`
 
 	// Data granularity. There is a 1.5-hour delay in data reporting. Valid values: `Minute` (5-minute granularity; query period of up to 31 days); `Day` (1-day granularity based on UTC+8:00; query period of up to 186 days)
-	Granularity *string `json:"Granularity,omitnil" name:"Granularity"`
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
 }
 
 type DescribeScreenShotSheetNumListRequest struct {
 	*tchttp.BaseRequest
 	
 	// Start time in UTC time in the format of `yyyy-mm-ddTHH:MM:SSZ`.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time in UTC time in the format of `yyyy-mm-ddTHH:MM:SSZ`. Data for the last year can be queried.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Region information. Valid values: Mainland, Oversea. The former is to query data within Mainland China, while the latter outside Mainland China. If this parameter is left empty, data of all regions will be queried.
-	Zone *string `json:"Zone,omitnil" name:"Zone"`
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
 	// Push domain name (data at the domain name level after November 1, 2019 can be queried).
-	PushDomains []*string `json:"PushDomains,omitnil" name:"PushDomains"`
+	PushDomains []*string `json:"PushDomains,omitnil,omitempty" name:"PushDomains"`
 
 	// Data granularity. There is a 1.5-hour delay in data reporting. Valid values: `Minute` (5-minute granularity; query period of up to 31 days); `Day` (1-day granularity based on UTC+8:00; query period of up to 186 days)
-	Granularity *string `json:"Granularity,omitnil" name:"Granularity"`
+	Granularity *string `json:"Granularity,omitnil,omitempty" name:"Granularity"`
 }
 
 func (r *DescribeScreenShotSheetNumListRequest) ToJsonString() string {
@@ -7676,10 +7676,10 @@ func (r *DescribeScreenShotSheetNumListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeScreenShotSheetNumListResponseParams struct {
 	// Data information list.
-	DataInfoList []*TimeValue `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*TimeValue `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeScreenShotSheetNumListResponse struct {
@@ -7702,25 +7702,25 @@ func (r *DescribeScreenShotSheetNumListResponse) FromJsonString(s string) error 
 type DescribeStreamDayPlayInfoListRequestParams struct {
 	// Date in the format of YYYY-mm-dd
 	// Data is available at 3am Beijing Time the next day. You are recommended to query the latest data after this time point. Data in the last 3 months can be queried.
-	DayTime *string `json:"DayTime,omitnil" name:"DayTime"`
+	DayTime *string `json:"DayTime,omitnil,omitempty" name:"DayTime"`
 
 	// Playback domain name.
-	PlayDomain *string `json:"PlayDomain,omitnil" name:"PlayDomain"`
+	PlayDomain *string `json:"PlayDomain,omitnil,omitempty" name:"PlayDomain"`
 
 	// Page number. Value range: [1,1000]. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Value range: [100,1000]. Default value: 1,000.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Valid values:
 	// Mainland: query data for Mainland China,
 	// Oversea: query data for regions outside Mainland China,
 	// Default: query data for all regions.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 
 	// Service name. Valid values: LVB, LEB. If this parameter is left empty, all data of LVB and LEB will be queried.
-	ServiceName *string `json:"ServiceName,omitnil" name:"ServiceName"`
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 }
 
 type DescribeStreamDayPlayInfoListRequest struct {
@@ -7728,25 +7728,25 @@ type DescribeStreamDayPlayInfoListRequest struct {
 	
 	// Date in the format of YYYY-mm-dd
 	// Data is available at 3am Beijing Time the next day. You are recommended to query the latest data after this time point. Data in the last 3 months can be queried.
-	DayTime *string `json:"DayTime,omitnil" name:"DayTime"`
+	DayTime *string `json:"DayTime,omitnil,omitempty" name:"DayTime"`
 
 	// Playback domain name.
-	PlayDomain *string `json:"PlayDomain,omitnil" name:"PlayDomain"`
+	PlayDomain *string `json:"PlayDomain,omitnil,omitempty" name:"PlayDomain"`
 
 	// Page number. Value range: [1,1000]. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Value range: [100,1000]. Default value: 1,000.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Valid values:
 	// Mainland: query data for Mainland China,
 	// Oversea: query data for regions outside Mainland China,
 	// Default: query data for all regions.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 
 	// Service name. Valid values: LVB, LEB. If this parameter is left empty, all data of LVB and LEB will be queried.
-	ServiceName *string `json:"ServiceName,omitnil" name:"ServiceName"`
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 }
 
 func (r *DescribeStreamDayPlayInfoListRequest) ToJsonString() string {
@@ -7776,22 +7776,22 @@ func (r *DescribeStreamDayPlayInfoListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeStreamDayPlayInfoListResponseParams struct {
 	// Playback data information list.
-	DataInfoList []*PlayDataInfoByStream `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*PlayDataInfoByStream `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// Total number.
-	TotalNum *uint64 `json:"TotalNum,omitnil" name:"TotalNum"`
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
 
 	// Total number of pages.
-	TotalPage *uint64 `json:"TotalPage,omitnil" name:"TotalPage"`
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
 
 	// Page number where the current data resides.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeStreamDayPlayInfoListResponse struct {
@@ -7815,28 +7815,28 @@ type DescribeStreamPlayInfoListRequestParams struct {
 	// The start time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed twenty-four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed twenty-four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Playback domain name,
 	// If this parameter is left empty, data of live streams of all playback domain names will be queried.
-	PlayDomain *string `json:"PlayDomain,omitnil" name:"PlayDomain"`
+	PlayDomain *string `json:"PlayDomain,omitnil,omitempty" name:"PlayDomain"`
 
 	// Stream name (exact match).
 	// If this parameter is left empty, full playback data will be queried.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Push address. Its value is the same as the `AppName` in playback address. It supports exact match, and takes effect only when `StreamName` is passed at the same time.
 	// If it is left empty, the full playback data will be queried.
 	// Note: to query by `AppName`, you need to submit a ticket first. After your application succeeds, it will take about 5 business days (subject to the time in the reply) for the configuration to take effect.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Service name. Valid values: LVB, LEB. If this parameter is left empty, all data of LVB and LEB will be queried.
-	ServiceName *string `json:"ServiceName,omitnil" name:"ServiceName"`
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 }
 
 type DescribeStreamPlayInfoListRequest struct {
@@ -7845,28 +7845,28 @@ type DescribeStreamPlayInfoListRequest struct {
 	// The start time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed twenty-four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed twenty-four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Playback domain name,
 	// If this parameter is left empty, data of live streams of all playback domain names will be queried.
-	PlayDomain *string `json:"PlayDomain,omitnil" name:"PlayDomain"`
+	PlayDomain *string `json:"PlayDomain,omitnil,omitempty" name:"PlayDomain"`
 
 	// Stream name (exact match).
 	// If this parameter is left empty, full playback data will be queried.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Push address. Its value is the same as the `AppName` in playback address. It supports exact match, and takes effect only when `StreamName` is passed at the same time.
 	// If it is left empty, the full playback data will be queried.
 	// Note: to query by `AppName`, you need to submit a ticket first. After your application succeeds, it will take about 5 business days (subject to the time in the reply) for the configuration to take effect.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Service name. Valid values: LVB, LEB. If this parameter is left empty, all data of LVB and LEB will be queried.
-	ServiceName *string `json:"ServiceName,omitnil" name:"ServiceName"`
+	ServiceName *string `json:"ServiceName,omitnil,omitempty" name:"ServiceName"`
 }
 
 func (r *DescribeStreamPlayInfoListRequest) ToJsonString() string {
@@ -7896,10 +7896,10 @@ func (r *DescribeStreamPlayInfoListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeStreamPlayInfoListResponseParams struct {
 	// Statistics list at a 1-minute granularity.
-	DataInfoList []*DayStreamPlayInfo `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*DayStreamPlayInfo `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeStreamPlayInfoListResponse struct {
@@ -7921,46 +7921,46 @@ func (r *DescribeStreamPlayInfoListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeStreamPushInfoListRequestParams struct {
 	// The stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The start time of the request, supports data query for the last seven days, the gap between the start time and the end time cannot exceed three hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last seven days, the gap between the start time and the end time cannot exceed three hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The push domain.
-	PushDomain *string `json:"PushDomain,omitnil" name:"PushDomain"`
+	PushDomain *string `json:"PushDomain,omitnil,omitempty" name:"PushDomain"`
 
 	// The push path, which should be the same as `AppName` in the push and playback URL. The default value is `live`.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 }
 
 type DescribeStreamPushInfoListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The start time of the request, supports data query for the last seven days, the gap between the start time and the end time cannot exceed three hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last seven days, the gap between the start time and the end time cannot exceed three hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The push domain.
-	PushDomain *string `json:"PushDomain,omitnil" name:"PushDomain"`
+	PushDomain *string `json:"PushDomain,omitnil,omitempty" name:"PushDomain"`
 
 	// The push path, which should be the same as `AppName` in the push and playback URL. The default value is `live`.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 }
 
 func (r *DescribeStreamPushInfoListRequest) ToJsonString() string {
@@ -7989,10 +7989,10 @@ func (r *DescribeStreamPushInfoListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeStreamPushInfoListResponseParams struct {
 	// Returned data list.
-	DataInfoList []*PushQualityData `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*PushQualityData `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeStreamPushInfoListResponse struct {
@@ -8014,50 +8014,50 @@ func (r *DescribeStreamPushInfoListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTimeShiftRecordDetailRequestParams struct {
 	// The push domain.
-	Domain *string `json:"Domain,omitnil" name:"Domain"`
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// The push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The start time, which must be a Unix timestamp.
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time, which must be a Unix timestamp. 
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The group the push domain belongs to. You don’t need to specify this parameter if the domain doesn’t belong to any group or the group name is an empty string.
-	DomainGroup *string `json:"DomainGroup,omitnil" name:"DomainGroup"`
+	DomainGroup *string `json:"DomainGroup,omitnil,omitempty" name:"DomainGroup"`
 
 	// The transcoding template ID. You don’t need to specify this parameter if the transcoding template ID is `0`.
-	TransCodeId *uint64 `json:"TransCodeId,omitnil" name:"TransCodeId"`
+	TransCodeId *uint64 `json:"TransCodeId,omitnil,omitempty" name:"TransCodeId"`
 }
 
 type DescribeTimeShiftRecordDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// The push domain.
-	Domain *string `json:"Domain,omitnil" name:"Domain"`
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// The push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The start time, which must be a Unix timestamp.
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time, which must be a Unix timestamp. 
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The group the push domain belongs to. You don’t need to specify this parameter if the domain doesn’t belong to any group or the group name is an empty string.
-	DomainGroup *string `json:"DomainGroup,omitnil" name:"DomainGroup"`
+	DomainGroup *string `json:"DomainGroup,omitnil,omitempty" name:"DomainGroup"`
 
 	// The transcoding template ID. You don’t need to specify this parameter if the transcoding template ID is `0`.
-	TransCodeId *uint64 `json:"TransCodeId,omitnil" name:"TransCodeId"`
+	TransCodeId *uint64 `json:"TransCodeId,omitnil,omitempty" name:"TransCodeId"`
 }
 
 func (r *DescribeTimeShiftRecordDetailRequest) ToJsonString() string {
@@ -8089,10 +8089,10 @@ func (r *DescribeTimeShiftRecordDetailRequest) FromJsonString(s string) error {
 type DescribeTimeShiftRecordDetailResponseParams struct {
 	// The number of sessions recorded.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	RecordList []*TimeShiftRecord `json:"RecordList,omitnil" name:"RecordList"`
+	RecordList []*TimeShiftRecord `json:"RecordList,omitnil,omitempty" name:"RecordList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTimeShiftRecordDetailResponse struct {
@@ -8114,52 +8114,52 @@ func (r *DescribeTimeShiftRecordDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTimeShiftStreamListRequestParams struct {
 	// The start time, which must be a Unix timestamp.
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time, which must be a Unix timestamp.
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The push domain.
-	Domain *string `json:"Domain,omitnil" name:"Domain"`
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// The group the push domain belongs to.
-	DomainGroup *string `json:"DomainGroup,omitnil" name:"DomainGroup"`
+	DomainGroup *string `json:"DomainGroup,omitnil,omitempty" name:"DomainGroup"`
 
 	// The maximum number of records to return. Value range: 0-100. If you do not specify this parameter or pass in `0`, 
 	// the default value `100` will be used. If you pass in a negative number or a value greater than 100, an error will be returned.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// The number of page to pull records from. If you do not specify this parameter, the default value `1` will be used.
-	PageNum *int64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *int64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 }
 
 type DescribeTimeShiftStreamListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The start time, which must be a Unix timestamp.
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time, which must be a Unix timestamp.
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The push domain.
-	Domain *string `json:"Domain,omitnil" name:"Domain"`
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// The group the push domain belongs to.
-	DomainGroup *string `json:"DomainGroup,omitnil" name:"DomainGroup"`
+	DomainGroup *string `json:"DomainGroup,omitnil,omitempty" name:"DomainGroup"`
 
 	// The maximum number of records to return. Value range: 0-100. If you do not specify this parameter or pass in `0`, 
 	// the default value `100` will be used. If you pass in a negative number or a value greater than 100, an error will be returned.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// The number of page to pull records from. If you do not specify this parameter, the default value `1` will be used.
-	PageNum *int64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *int64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 }
 
 func (r *DescribeTimeShiftStreamListRequest) ToJsonString() string {
@@ -8190,14 +8190,14 @@ func (r *DescribeTimeShiftStreamListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTimeShiftStreamListResponseParams struct {
 	// The total number of records in the specified time period.
-	TotalSize *int64 `json:"TotalSize,omitnil" name:"TotalSize"`
+	TotalSize *int64 `json:"TotalSize,omitnil,omitempty" name:"TotalSize"`
 
 	// The information of the streams.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	StreamList []*TimeShiftStreamInfo `json:"StreamList,omitnil" name:"StreamList"`
+	StreamList []*TimeShiftStreamInfo `json:"StreamList,omitnil,omitempty" name:"StreamList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTimeShiftStreamListResponse struct {
@@ -8221,30 +8221,30 @@ type DescribeTopClientIpSumInfoListRequestParams struct {
 	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Playback domain name. If this parameter is left empty, full data will be queried by default.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// Page number. Value range: [1,1000]. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Value range: [1,1000]. Default value: 20.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Sorting metric. Valid values: TotalRequest (default value), FailedRequest, TotalFlux.
-	OrderParam *string `json:"OrderParam,omitnil" name:"OrderParam"`
+	OrderParam *string `json:"OrderParam,omitnil,omitempty" name:"OrderParam"`
 
 	// Region. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China), China (data for China, including Hong Kong, Macao, and Taiwan), Foreign (data for regions outside China, excluding Hong Kong, Macao, and Taiwan), Global (default). If this parameter is left empty, data for all regions will be queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 
 	// Language used in the output field. Valid values: Chinese (default), English. Currently, country/region, district, and ISP parameters support multiple languages.
-	OutLanguage *string `json:"OutLanguage,omitnil" name:"OutLanguage"`
+	OutLanguage *string `json:"OutLanguage,omitnil,omitempty" name:"OutLanguage"`
 }
 
 type DescribeTopClientIpSumInfoListRequest struct {
@@ -8253,30 +8253,30 @@ type DescribeTopClientIpSumInfoListRequest struct {
 	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Playback domain name. If this parameter is left empty, full data will be queried by default.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// Page number. Value range: [1,1000]. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Value range: [1,1000]. Default value: 20.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Sorting metric. Valid values: TotalRequest (default value), FailedRequest, TotalFlux.
-	OrderParam *string `json:"OrderParam,omitnil" name:"OrderParam"`
+	OrderParam *string `json:"OrderParam,omitnil,omitempty" name:"OrderParam"`
 
 	// Region. Valid values: Mainland (data for Mainland China), Oversea (data for regions outside Mainland China), China (data for China, including Hong Kong, Macao, and Taiwan), Foreign (data for regions outside China, excluding Hong Kong, Macao, and Taiwan), Global (default). If this parameter is left empty, data for all regions will be queried.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 
 	// Language used in the output field. Valid values: Chinese (default), English. Currently, country/region, district, and ISP parameters support multiple languages.
-	OutLanguage *string `json:"OutLanguage,omitnil" name:"OutLanguage"`
+	OutLanguage *string `json:"OutLanguage,omitnil,omitempty" name:"OutLanguage"`
 }
 
 func (r *DescribeTopClientIpSumInfoListRequest) ToJsonString() string {
@@ -8308,25 +8308,25 @@ func (r *DescribeTopClientIpSumInfoListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTopClientIpSumInfoListResponseParams struct {
 	// Page number. Value range: [1,1000]. Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Value range: [1,1000]. Default value: 20.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Sorting metric. Valid values: "TotalRequest", "FailedRequest", "TotalFlux".
-	OrderParam *string `json:"OrderParam,omitnil" name:"OrderParam"`
+	OrderParam *string `json:"OrderParam,omitnil,omitempty" name:"OrderParam"`
 
 	// Total number of results.
-	TotalNum *uint64 `json:"TotalNum,omitnil" name:"TotalNum"`
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
 
 	// Total number of result pages.
-	TotalPage *uint64 `json:"TotalPage,omitnil" name:"TotalPage"`
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
 
 	// Data content.
-	DataInfoList []*ClientIpPlaySumInfo `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*ClientIpPlaySumInfo `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTopClientIpSumInfoListResponse struct {
@@ -8350,15 +8350,15 @@ type DescribeTranscodeTaskNumRequestParams struct {
 	// The start time of the request, supports data query for the last forty days, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last forty days, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The push domains to query. If you do not pass a value, all push domains will be queried.
-	PushDomains []*string `json:"PushDomains,omitnil" name:"PushDomains"`
+	PushDomains []*string `json:"PushDomains,omitnil,omitempty" name:"PushDomains"`
 }
 
 type DescribeTranscodeTaskNumRequest struct {
@@ -8367,15 +8367,15 @@ type DescribeTranscodeTaskNumRequest struct {
 	// The start time of the request, supports data query for the last forty days, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last forty days, the gap between the start time and the end time cannot exceed one day. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The push domains to query. If you do not pass a value, all push domains will be queried.
-	PushDomains []*string `json:"PushDomains,omitnil" name:"PushDomains"`
+	PushDomains []*string `json:"PushDomains,omitnil,omitempty" name:"PushDomains"`
 }
 
 func (r *DescribeTranscodeTaskNumRequest) ToJsonString() string {
@@ -8402,10 +8402,10 @@ func (r *DescribeTranscodeTaskNumRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeTranscodeTaskNumResponseParams struct {
 	// The number of tasks.
-	DataInfoList []*TranscodeTaskNum `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*TranscodeTaskNum `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeTranscodeTaskNumResponse struct {
@@ -8429,21 +8429,21 @@ type DescribeUploadStreamNumsRequestParams struct {
 	// The start time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// LVB domain names. If this parameter is left empty, data of all domain names will be queried.
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Time granularity of the data. Valid values:
 	// 5: 5-minute granularity (the query period is up to 1 day)
 	// 1440: 1-day granularity (the query period is up to 1 month)
 	// Default value: 5
-	Granularity *uint64 `json:"Granularity,omitnil" name:"Granularity"`
+	Granularity *uint64 `json:"Granularity,omitnil,omitempty" name:"Granularity"`
 }
 
 type DescribeUploadStreamNumsRequest struct {
@@ -8452,21 +8452,21 @@ type DescribeUploadStreamNumsRequest struct {
 	// The start time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one month, the gap between the start time and the end time cannot exceed one month. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// LVB domain names. If this parameter is left empty, data of all domain names will be queried.
-	Domains []*string `json:"Domains,omitnil" name:"Domains"`
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
 
 	// Time granularity of the data. Valid values:
 	// 5: 5-minute granularity (the query period is up to 1 day)
 	// 1440: 1-day granularity (the query period is up to 1 month)
 	// Default value: 5
-	Granularity *uint64 `json:"Granularity,omitnil" name:"Granularity"`
+	Granularity *uint64 `json:"Granularity,omitnil,omitempty" name:"Granularity"`
 }
 
 func (r *DescribeUploadStreamNumsRequest) ToJsonString() string {
@@ -8494,10 +8494,10 @@ func (r *DescribeUploadStreamNumsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeUploadStreamNumsResponseParams struct {
 	// Detailed data.
-	DataInfoList []*ConcurrentRecordStreamNum `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*ConcurrentRecordStreamNum `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeUploadStreamNumsResponse struct {
@@ -8521,30 +8521,30 @@ type DescribeVisitTopSumInfoListRequestParams struct {
 	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Bandwidth metric. Valid values: "Domain", "StreamId".
-	TopIndex *string `json:"TopIndex,omitnil" name:"TopIndex"`
+	TopIndex *string `json:"TopIndex,omitnil,omitempty" name:"TopIndex"`
 
 	// Playback domain name. If this parameter is left empty, full data will be queried by default.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// Page number,
 	// Value range: [1,1000],
 	// Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Value range: [1,1000].
 	// Default value: 20.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Sorting metric. Valid values: "AvgFluxPerSecond", "TotalRequest" (default), "TotalFlux".
-	OrderParam *string `json:"OrderParam,omitnil" name:"OrderParam"`
+	OrderParam *string `json:"OrderParam,omitnil,omitempty" name:"OrderParam"`
 }
 
 type DescribeVisitTopSumInfoListRequest struct {
@@ -8553,30 +8553,30 @@ type DescribeVisitTopSumInfoListRequest struct {
 	// The start time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format, for details, see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the request, supports data query for the last one day, the gap between the start time and the end time cannot exceed four hours. Interface request supports two time formats:
 	// 1) YYYY-MM-DDThh:mm:ssZ: ISO time format,for details,see [ISO Date Format Description](https://cloud.tencent.com/document/product/267/38543#:~:text=I- ,ISO,-%E6%97%A5%E6%9C%9F%E6%A0%BC%E5%BC%8F)
 	// 2) YYYY-MM-DD hh:mm:ss: When using this format, it represents Beijing time by default.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Bandwidth metric. Valid values: "Domain", "StreamId".
-	TopIndex *string `json:"TopIndex,omitnil" name:"TopIndex"`
+	TopIndex *string `json:"TopIndex,omitnil,omitempty" name:"TopIndex"`
 
 	// Playback domain name. If this parameter is left empty, full data will be queried by default.
-	PlayDomains []*string `json:"PlayDomains,omitnil" name:"PlayDomains"`
+	PlayDomains []*string `json:"PlayDomains,omitnil,omitempty" name:"PlayDomains"`
 
 	// Page number,
 	// Value range: [1,1000],
 	// Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Value range: [1,1000].
 	// Default value: 20.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Sorting metric. Valid values: "AvgFluxPerSecond", "TotalRequest" (default), "TotalFlux".
-	OrderParam *string `json:"OrderParam,omitnil" name:"OrderParam"`
+	OrderParam *string `json:"OrderParam,omitnil,omitempty" name:"OrderParam"`
 }
 
 func (r *DescribeVisitTopSumInfoListRequest) ToJsonString() string {
@@ -8609,29 +8609,29 @@ type DescribeVisitTopSumInfoListResponseParams struct {
 	// Page number,
 	// Value range: [1,1000],
 	// Default value: 1.
-	PageNum *uint64 `json:"PageNum,omitnil" name:"PageNum"`
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
 	// Number of entries per page. Value range: [1,1000].
 	// Default value: 20.
-	PageSize *uint64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Bandwidth metric. Valid values: "Domain", "StreamId".
-	TopIndex *string `json:"TopIndex,omitnil" name:"TopIndex"`
+	TopIndex *string `json:"TopIndex,omitnil,omitempty" name:"TopIndex"`
 
 	// Sorting metric. Valid values: AvgFluxPerSecond (sort by average traffic per second), TotalRequest (sort by total requests), TotalFlux (sort by total traffic). Default value: TotalRequest.
-	OrderParam *string `json:"OrderParam,omitnil" name:"OrderParam"`
+	OrderParam *string `json:"OrderParam,omitnil,omitempty" name:"OrderParam"`
 
 	// Total number of results.
-	TotalNum *uint64 `json:"TotalNum,omitnil" name:"TotalNum"`
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
 
 	// Total number of result pages.
-	TotalPage *uint64 `json:"TotalPage,omitnil" name:"TotalPage"`
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
 
 	// Data content.
-	DataInfoList []*PlaySumStatInfo `json:"DataInfoList,omitnil" name:"DataInfoList"`
+	DataInfoList []*PlaySumStatInfo `json:"DataInfoList,omitnil,omitempty" name:"DataInfoList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeVisitTopSumInfoListResponse struct {
@@ -8652,122 +8652,122 @@ func (r *DescribeVisitTopSumInfoListResponse) FromJsonString(s string) error {
 
 type DomainCertInfo struct {
 	// Certificate ID.
-	CertId *int64 `json:"CertId,omitnil" name:"CertId"`
+	CertId *int64 `json:"CertId,omitnil,omitempty" name:"CertId"`
 
 	// Certificate name.
-	CertName *string `json:"CertName,omitnil" name:"CertName"`
+	CertName *string `json:"CertName,omitnil,omitempty" name:"CertName"`
 
 	// Description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// The creation time in UTC format.
 	// Note: Beijing time (UTC+8) is used.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Certificate content.
-	HttpsCrt *string `json:"HttpsCrt,omitnil" name:"HttpsCrt"`
+	HttpsCrt *string `json:"HttpsCrt,omitnil,omitempty" name:"HttpsCrt"`
 
 	// Certificate type.
 	// 0: user-added certificate
 	// 1: Tencent Cloud-hosted certificate.
-	CertType *int64 `json:"CertType,omitnil" name:"CertType"`
+	CertType *int64 `json:"CertType,omitnil,omitempty" name:"CertType"`
 
 	// The certificate expiration time in UTC format.
 	// Note: Beijing time (UTC+8) is used.
-	CertExpireTime *string `json:"CertExpireTime,omitnil" name:"CertExpireTime"`
+	CertExpireTime *string `json:"CertExpireTime,omitnil,omitempty" name:"CertExpireTime"`
 
 	// Domain name that uses this certificate.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Certificate status.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// List of domain names in the certificate.
 	// ["*.x.com"] for example.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	CertDomains []*string `json:"CertDomains,omitnil" name:"CertDomains"`
+	CertDomains []*string `json:"CertDomains,omitnil,omitempty" name:"CertDomains"`
 
 	// Tencent Cloud SSL certificate ID.
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
-	CloudCertId *string `json:"CloudCertId,omitnil" name:"CloudCertId"`
+	CloudCertId *string `json:"CloudCertId,omitnil,omitempty" name:"CloudCertId"`
 }
 
 type DomainInfo struct {
 	// LVB domain name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Domain name type:
 	// 0: push.
 	// 1: playback.
-	Type *uint64 `json:"Type,omitnil" name:"Type"`
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Domain name status:
 	// 0: deactivated.
 	// 1: activated.
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The time when the domain was added.
 	// Note: Beijing time (UTC+8) is used.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Whether there is a CNAME record pointing to a fixed rule domain name:
 	// 0: no.
 	// 1: yes.
-	BCName *uint64 `json:"BCName,omitnil" name:"BCName"`
+	BCName *uint64 `json:"BCName,omitnil,omitempty" name:"BCName"`
 
 	// Domain name corresponding to CNAME record.
-	TargetDomain *string `json:"TargetDomain,omitnil" name:"TargetDomain"`
+	TargetDomain *string `json:"TargetDomain,omitnil,omitempty" name:"TargetDomain"`
 
 	// Playback region. This parameter is valid only if `Type` is 1.
 	// 1: in Mainland China.
 	// 2: global.
 	// 3: outside Mainland China.
-	PlayType *int64 `json:"PlayType,omitnil" name:"PlayType"`
+	PlayType *int64 `json:"PlayType,omitnil,omitempty" name:"PlayType"`
 
 	// Whether it is LCB:
 	// 0: LVB.
 	// 1: LCB.
-	IsDelayLive *int64 `json:"IsDelayLive,omitnil" name:"IsDelayLive"`
+	IsDelayLive *int64 `json:"IsDelayLive,omitnil,omitempty" name:"IsDelayLive"`
 
 	// Information of currently used CNAME record.
-	CurrentCName *string `json:"CurrentCName,omitnil" name:"CurrentCName"`
+	CurrentCName *string `json:"CurrentCName,omitnil,omitempty" name:"CurrentCName"`
 
 	// Disused parameter, which can be ignored.
-	RentTag *int64 `json:"RentTag,omitnil" name:"RentTag"`
+	RentTag *int64 `json:"RentTag,omitnil,omitempty" name:"RentTag"`
 
 	// A disused parameter.
 	// Note: Beijing time (UTC+8) is used.
-	RentExpireTime *string `json:"RentExpireTime,omitnil" name:"RentExpireTime"`
+	RentExpireTime *string `json:"RentExpireTime,omitnil,omitempty" name:"RentExpireTime"`
 
 	// 0: LVB.
 	// 1: LVB on Mini Program.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	IsMiniProgramLive *int64 `json:"IsMiniProgramLive,omitnil" name:"IsMiniProgramLive"`
+	IsMiniProgramLive *int64 `json:"IsMiniProgramLive,omitnil,omitempty" name:"IsMiniProgramLive"`
 }
 
 // Predefined struct for user
 type DropLiveStreamRequestParams struct {
 	// The stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Your push domain.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The push path, which should be the same as `AppName` in the push and playback URL. The default value is `live`.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 }
 
 type DropLiveStreamRequest struct {
 	*tchttp.BaseRequest
 	
 	// The stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Your push domain.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The push path, which should be the same as `AppName` in the push and playback URL. The default value is `live`.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 }
 
 func (r *DropLiveStreamRequest) ToJsonString() string {
@@ -8794,7 +8794,7 @@ func (r *DropLiveStreamRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DropLiveStreamResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DropLiveStreamResponse struct {
@@ -8816,14 +8816,14 @@ func (r *DropLiveStreamResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type EnableLiveDomainRequestParams struct {
 	// LVB domain name to be enabled.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 type EnableLiveDomainRequest struct {
 	*tchttp.BaseRequest
 	
 	// LVB domain name to be enabled.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 func (r *EnableLiveDomainRequest) ToJsonString() string {
@@ -8848,7 +8848,7 @@ func (r *EnableLiveDomainRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type EnableLiveDomainResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type EnableLiveDomainResponse struct {
@@ -8869,20 +8869,20 @@ func (r *EnableLiveDomainResponse) FromJsonString(s string) error {
 
 type FlvSpecialParam struct {
 	// Whether to enable upload while recording. This parameter is only valid for FLV recording.
-	UploadInRecording *bool `json:"UploadInRecording,omitnil" name:"UploadInRecording"`
+	UploadInRecording *bool `json:"UploadInRecording,omitnil,omitempty" name:"UploadInRecording"`
 }
 
 // Predefined struct for user
 type ForbidLiveDomainRequestParams struct {
 	// LVB domain name to be disabled.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 type ForbidLiveDomainRequest struct {
 	*tchttp.BaseRequest
 	
 	// LVB domain name to be disabled.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 func (r *ForbidLiveDomainRequest) ToJsonString() string {
@@ -8907,7 +8907,7 @@ func (r *ForbidLiveDomainRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ForbidLiveDomainResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ForbidLiveDomainResponse struct {
@@ -8929,48 +8929,48 @@ func (r *ForbidLiveDomainResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ForbidLiveStreamRequestParams struct {
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Your push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The time (in UTC format) to resume the stream, such as 2018-11-29T19:00:00Z.
 	// Notes:
 	// 1. The default stream disabling period is seven days. A stream can be disabled for up to 90 days.
 	// 2. Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	ResumeTime *string `json:"ResumeTime,omitnil" name:"ResumeTime"`
+	ResumeTime *string `json:"ResumeTime,omitnil,omitempty" name:"ResumeTime"`
 
 	// Reason for forbidding.
 	// Note: Be sure to enter the reason for forbidding to avoid any faulty operations.
 	// Length limit: 2,048 bytes.
-	Reason *string `json:"Reason,omitnil" name:"Reason"`
+	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 }
 
 type ForbidLiveStreamRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Your push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The time (in UTC format) to resume the stream, such as 2018-11-29T19:00:00Z.
 	// Notes:
 	// 1. The default stream disabling period is seven days. A stream can be disabled for up to 90 days.
 	// 2. Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	ResumeTime *string `json:"ResumeTime,omitnil" name:"ResumeTime"`
+	ResumeTime *string `json:"ResumeTime,omitnil,omitempty" name:"ResumeTime"`
 
 	// Reason for forbidding.
 	// Note: Be sure to enter the reason for forbidding to avoid any faulty operations.
 	// Length limit: 2,048 bytes.
-	Reason *string `json:"Reason,omitnil" name:"Reason"`
+	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 }
 
 func (r *ForbidLiveStreamRequest) ToJsonString() string {
@@ -8999,7 +8999,7 @@ func (r *ForbidLiveStreamRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ForbidLiveStreamResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ForbidLiveStreamResponse struct {
@@ -9020,190 +9020,190 @@ func (r *ForbidLiveStreamResponse) FromJsonString(s string) error {
 
 type ForbidStreamInfo struct {
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The creation time.
 	// Note: Beijing time (UTC+8) is used.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The end time.
 	// Note: Beijing time (UTC+8) is used.
-	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// The push path.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The push domain name.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 type GroupProIspDataInfo struct {
 	// District.
-	ProvinceName *string `json:"ProvinceName,omitnil" name:"ProvinceName"`
+	ProvinceName *string `json:"ProvinceName,omitnil,omitempty" name:"ProvinceName"`
 
 	// ISP.
-	IspName *string `json:"IspName,omitnil" name:"IspName"`
+	IspName *string `json:"IspName,omitnil,omitempty" name:"IspName"`
 
 	// Detailed data at the minute level.
-	DetailInfoList []*CdnPlayStatData `json:"DetailInfoList,omitnil" name:"DetailInfoList"`
+	DetailInfoList []*CdnPlayStatData `json:"DetailInfoList,omitnil,omitempty" name:"DetailInfoList"`
 }
 
 type HlsSpecialParam struct {
 	// Timeout period for restarting an interrupted HLS push.
 	// Value range: [0, 1,800].
-	FlowContinueDuration *uint64 `json:"FlowContinueDuration,omitnil" name:"FlowContinueDuration"`
+	FlowContinueDuration *uint64 `json:"FlowContinueDuration,omitnil,omitempty" name:"FlowContinueDuration"`
 }
 
 type HttpCodeInfo struct {
 	// HTTP return code.
 	// Example: "2xx", "3xx", "4xx", "5xx".
-	HttpCode *string `json:"HttpCode,omitnil" name:"HttpCode"`
+	HttpCode *string `json:"HttpCode,omitnil,omitempty" name:"HttpCode"`
 
 	// Statistics. 0 will be added for points in time when there is no data.
-	ValueList []*HttpCodeValue `json:"ValueList,omitnil" name:"ValueList"`
+	ValueList []*HttpCodeValue `json:"ValueList,omitnil,omitempty" name:"ValueList"`
 }
 
 type HttpCodeValue struct {
 	// Time in the format of `yyyy-mm-dd HH:MM:SS`.
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Occurrences.
-	Numbers *uint64 `json:"Numbers,omitnil" name:"Numbers"`
+	Numbers *uint64 `json:"Numbers,omitnil,omitempty" name:"Numbers"`
 
 	// Proportion.
-	Percentage *float64 `json:"Percentage,omitnil" name:"Percentage"`
+	Percentage *float64 `json:"Percentage,omitnil,omitempty" name:"Percentage"`
 }
 
 type HttpStatusData struct {
 	// Data point in time,
 	// In the format of `yyyy-mm-dd HH:MM:SS`.
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Playback status code details.
-	HttpStatusInfoList []*HttpStatusInfo `json:"HttpStatusInfoList,omitnil" name:"HttpStatusInfoList"`
+	HttpStatusInfoList []*HttpStatusInfo `json:"HttpStatusInfoList,omitnil,omitempty" name:"HttpStatusInfoList"`
 }
 
 type HttpStatusInfo struct {
 	// Playback HTTP status code.
-	HttpStatus *string `json:"HttpStatus,omitnil" name:"HttpStatus"`
+	HttpStatus *string `json:"HttpStatus,omitnil,omitempty" name:"HttpStatus"`
 
 	// Quantity.
-	Num *uint64 `json:"Num,omitnil" name:"Num"`
+	Num *uint64 `json:"Num,omitnil,omitempty" name:"Num"`
 }
 
 type LiveCertDomainInfo struct {
 	// The domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Whether to enable HTTPS for the domain.
 	// 1: Enable
 	// 0: Disable
 	// -1: Keep the current configuration
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type LiveDomainCertBindings struct {
 	// The domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The remarks for the certificate. This parameter is the same as `CertName`.
-	CertificateAlias *string `json:"CertificateAlias,omitnil" name:"CertificateAlias"`
+	CertificateAlias *string `json:"CertificateAlias,omitnil,omitempty" name:"CertificateAlias"`
 
 	// The certificate type.
 	// 0: Self-owned certificate
 	// 1: Tencent Cloud-hosted certificate
-	CertType *int64 `json:"CertType,omitnil" name:"CertType"`
+	CertType *int64 `json:"CertType,omitnil,omitempty" name:"CertType"`
 
 	// Whether HTTPS is enabled.
 	// 1: Enabled
 	// 0: Disabled
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The certificate expiration time.
 	// Note: Beijing time (UTC+8) is used.
-	CertExpireTime *string `json:"CertExpireTime,omitnil" name:"CertExpireTime"`
+	CertExpireTime *string `json:"CertExpireTime,omitnil,omitempty" name:"CertExpireTime"`
 
 	// The certificate ID.
-	CertId *int64 `json:"CertId,omitnil" name:"CertId"`
+	CertId *int64 `json:"CertId,omitnil,omitempty" name:"CertId"`
 
 	// The SSL certificate ID assigned by Tencent Cloud.
-	CloudCertId *string `json:"CloudCertId,omitnil" name:"CloudCertId"`
+	CloudCertId *string `json:"CloudCertId,omitnil,omitempty" name:"CloudCertId"`
 
 	// The last updated time.
 	// Note: Beijing time (UTC+8) is used.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 // Predefined struct for user
 type ModifyLiveCallbackTemplateRequestParams struct {
 	// Template ID returned by the `DescribeLiveCallbackTemplates` API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Template name.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Stream starting callback URL.
-	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitnil" name:"StreamBeginNotifyUrl"`
+	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitnil,omitempty" name:"StreamBeginNotifyUrl"`
 
 	// Interruption callback URL.
-	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitnil" name:"StreamEndNotifyUrl"`
+	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitnil,omitempty" name:"StreamEndNotifyUrl"`
 
 	// Recording callback URL.
-	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitnil" name:"RecordNotifyUrl"`
+	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitnil,omitempty" name:"RecordNotifyUrl"`
 
 	// Screencapturing callback URL.
-	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitnil" name:"SnapshotNotifyUrl"`
+	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitnil,omitempty" name:"SnapshotNotifyUrl"`
 
 	// Porn detection callback URL.
-	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitnil" name:"PornCensorshipNotifyUrl"`
+	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitnil,omitempty" name:"PornCensorshipNotifyUrl"`
 
 	// Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
 	// [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
-	CallbackKey *string `json:"CallbackKey,omitnil" name:"CallbackKey"`
+	CallbackKey *string `json:"CallbackKey,omitnil,omitempty" name:"CallbackKey"`
 
 	// The push error callback URL.
-	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitnil" name:"PushExceptionNotifyUrl"`
+	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitnil,omitempty" name:"PushExceptionNotifyUrl"`
 }
 
 type ModifyLiveCallbackTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Template ID returned by the `DescribeLiveCallbackTemplates` API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Template name.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Stream starting callback URL.
-	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitnil" name:"StreamBeginNotifyUrl"`
+	StreamBeginNotifyUrl *string `json:"StreamBeginNotifyUrl,omitnil,omitempty" name:"StreamBeginNotifyUrl"`
 
 	// Interruption callback URL.
-	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitnil" name:"StreamEndNotifyUrl"`
+	StreamEndNotifyUrl *string `json:"StreamEndNotifyUrl,omitnil,omitempty" name:"StreamEndNotifyUrl"`
 
 	// Recording callback URL.
-	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitnil" name:"RecordNotifyUrl"`
+	RecordNotifyUrl *string `json:"RecordNotifyUrl,omitnil,omitempty" name:"RecordNotifyUrl"`
 
 	// Screencapturing callback URL.
-	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitnil" name:"SnapshotNotifyUrl"`
+	SnapshotNotifyUrl *string `json:"SnapshotNotifyUrl,omitnil,omitempty" name:"SnapshotNotifyUrl"`
 
 	// Porn detection callback URL.
-	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitnil" name:"PornCensorshipNotifyUrl"`
+	PornCensorshipNotifyUrl *string `json:"PornCensorshipNotifyUrl,omitnil,omitempty" name:"PornCensorshipNotifyUrl"`
 
 	// Callback key. The callback URL is public. For the callback signature, please see the event message notification document.
 	// [Event Message Notification](https://intl.cloud.tencent.com/document/product/267/32744?from_cn_redirect=1).
-	CallbackKey *string `json:"CallbackKey,omitnil" name:"CallbackKey"`
+	CallbackKey *string `json:"CallbackKey,omitnil,omitempty" name:"CallbackKey"`
 
 	// The push error callback URL.
-	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitnil" name:"PushExceptionNotifyUrl"`
+	PushExceptionNotifyUrl *string `json:"PushExceptionNotifyUrl,omitnil,omitempty" name:"PushExceptionNotifyUrl"`
 }
 
 func (r *ModifyLiveCallbackTemplateRequest) ToJsonString() string {
@@ -9237,7 +9237,7 @@ func (r *ModifyLiveCallbackTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLiveCallbackTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLiveCallbackTemplateResponse struct {
@@ -9260,22 +9260,22 @@ func (r *ModifyLiveCallbackTemplateResponse) FromJsonString(s string) error {
 type ModifyLiveDomainCertBindingsRequestParams struct {
 	// The playback domains to bind and whether to enable HTTPS for them.
 	// If neither `CloudCertId` nor the public/private key is specified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain and, if the certificate is a self-owned certificate, upload it to Tencent Cloud.
-	DomainInfos []*LiveCertDomainInfo `json:"DomainInfos,omitnil" name:"DomainInfos"`
+	DomainInfos []*LiveCertDomainInfo `json:"DomainInfos,omitnil,omitempty" name:"DomainInfos"`
 
 	// The SSL certificate ID assigned by Tencent Cloud.
 	// For details, see https://intl.cloud.tencent.com/document/api/400/41665?from_cn_redirect=1
-	CloudCertId *string `json:"CloudCertId,omitnil" name:"CloudCertId"`
+	CloudCertId *string `json:"CloudCertId,omitnil,omitempty" name:"CloudCertId"`
 
 	// The public key of the certificate.
 	// You can specify either `CloudCertId` or the public/private key. If both are specified, the private and public key parameters will be ignored. If you pass in only the public and private keys, the corresponding certificate will be uploaded to Tencent Cloud SSL Certificate Service, which will generate a `CloudCertId` for the certificate.
-	CertificatePublicKey *string `json:"CertificatePublicKey,omitnil" name:"CertificatePublicKey"`
+	CertificatePublicKey *string `json:"CertificatePublicKey,omitnil,omitempty" name:"CertificatePublicKey"`
 
 	// The private key of the certificate.
 	// You can specify either `CloudCertId` or the public/private key. If both are specified, the private and public key parameters will be ignored. If you pass in only the public and private keys, the corresponding certificate will be uploaded to Tencent Cloud SSL Certificate Service, which will generate a `CloudCertId` for the certificate.
-	CertificatePrivateKey *string `json:"CertificatePrivateKey,omitnil" name:"CertificatePrivateKey"`
+	CertificatePrivateKey *string `json:"CertificatePrivateKey,omitnil,omitempty" name:"CertificatePrivateKey"`
 
 	// The remarks for the certificate in Tencent Cloud SSL Certificate Service. This parameter will be ignored if `CloudCertId` is specified.
-	CertificateAlias *string `json:"CertificateAlias,omitnil" name:"CertificateAlias"`
+	CertificateAlias *string `json:"CertificateAlias,omitnil,omitempty" name:"CertificateAlias"`
 }
 
 type ModifyLiveDomainCertBindingsRequest struct {
@@ -9283,22 +9283,22 @@ type ModifyLiveDomainCertBindingsRequest struct {
 	
 	// The playback domains to bind and whether to enable HTTPS for them.
 	// If neither `CloudCertId` nor the public/private key is specified, and a domain is already bound with a certificate, this API will only update the HTTPS configuration of the domain and, if the certificate is a self-owned certificate, upload it to Tencent Cloud.
-	DomainInfos []*LiveCertDomainInfo `json:"DomainInfos,omitnil" name:"DomainInfos"`
+	DomainInfos []*LiveCertDomainInfo `json:"DomainInfos,omitnil,omitempty" name:"DomainInfos"`
 
 	// The SSL certificate ID assigned by Tencent Cloud.
 	// For details, see https://intl.cloud.tencent.com/document/api/400/41665?from_cn_redirect=1
-	CloudCertId *string `json:"CloudCertId,omitnil" name:"CloudCertId"`
+	CloudCertId *string `json:"CloudCertId,omitnil,omitempty" name:"CloudCertId"`
 
 	// The public key of the certificate.
 	// You can specify either `CloudCertId` or the public/private key. If both are specified, the private and public key parameters will be ignored. If you pass in only the public and private keys, the corresponding certificate will be uploaded to Tencent Cloud SSL Certificate Service, which will generate a `CloudCertId` for the certificate.
-	CertificatePublicKey *string `json:"CertificatePublicKey,omitnil" name:"CertificatePublicKey"`
+	CertificatePublicKey *string `json:"CertificatePublicKey,omitnil,omitempty" name:"CertificatePublicKey"`
 
 	// The private key of the certificate.
 	// You can specify either `CloudCertId` or the public/private key. If both are specified, the private and public key parameters will be ignored. If you pass in only the public and private keys, the corresponding certificate will be uploaded to Tencent Cloud SSL Certificate Service, which will generate a `CloudCertId` for the certificate.
-	CertificatePrivateKey *string `json:"CertificatePrivateKey,omitnil" name:"CertificatePrivateKey"`
+	CertificatePrivateKey *string `json:"CertificatePrivateKey,omitnil,omitempty" name:"CertificatePrivateKey"`
 
 	// The remarks for the certificate in Tencent Cloud SSL Certificate Service. This parameter will be ignored if `CloudCertId` is specified.
-	CertificateAlias *string `json:"CertificateAlias,omitnil" name:"CertificateAlias"`
+	CertificateAlias *string `json:"CertificateAlias,omitnil,omitempty" name:"CertificateAlias"`
 }
 
 func (r *ModifyLiveDomainCertBindingsRequest) ToJsonString() string {
@@ -9327,14 +9327,14 @@ func (r *ModifyLiveDomainCertBindingsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLiveDomainCertBindingsResponseParams struct {
 	// The domains skipped due to certificate mismatch.
-	MismatchedDomainNames []*string `json:"MismatchedDomainNames,omitnil" name:"MismatchedDomainNames"`
+	MismatchedDomainNames []*string `json:"MismatchedDomainNames,omitnil,omitempty" name:"MismatchedDomainNames"`
 
 	// The domains that the API failed to bind, including those in `MismatchedDomainNames`, and the error information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Errors []*BatchDomainOperateErrors `json:"Errors,omitnil" name:"Errors"`
+	Errors []*BatchDomainOperateErrors `json:"Errors,omitnil,omitempty" name:"Errors"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLiveDomainCertBindingsResponse struct {
@@ -9356,38 +9356,38 @@ func (r *ModifyLiveDomainCertBindingsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLiveDomainRefererRequestParams struct {
 	// Playback domain name
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Whether to enable referer allowlist/blocklist authentication for the current domain name
-	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// List type. Valid values: `0` (blocklist), `1` (allowlist)
-	Type *int64 `json:"Type,omitnil" name:"Type"`
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Whether to allow empty referer. Valid values: `0` (no), `1` (yes)
-	AllowEmpty *int64 `json:"AllowEmpty,omitnil" name:"AllowEmpty"`
+	AllowEmpty *int64 `json:"AllowEmpty,omitnil,omitempty" name:"AllowEmpty"`
 
 	// Referer list. Separate items in it with semicolons (;).
-	Rules *string `json:"Rules,omitnil" name:"Rules"`
+	Rules *string `json:"Rules,omitnil,omitempty" name:"Rules"`
 }
 
 type ModifyLiveDomainRefererRequest struct {
 	*tchttp.BaseRequest
 	
 	// Playback domain name
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Whether to enable referer allowlist/blocklist authentication for the current domain name
-	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// List type. Valid values: `0` (blocklist), `1` (allowlist)
-	Type *int64 `json:"Type,omitnil" name:"Type"`
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Whether to allow empty referer. Valid values: `0` (no), `1` (yes)
-	AllowEmpty *int64 `json:"AllowEmpty,omitnil" name:"AllowEmpty"`
+	AllowEmpty *int64 `json:"AllowEmpty,omitnil,omitempty" name:"AllowEmpty"`
 
 	// Referer list. Separate items in it with semicolons (;).
-	Rules *string `json:"Rules,omitnil" name:"Rules"`
+	Rules *string `json:"Rules,omitnil,omitempty" name:"Rules"`
 }
 
 func (r *ModifyLiveDomainRefererRequest) ToJsonString() string {
@@ -9416,7 +9416,7 @@ func (r *ModifyLiveDomainRefererRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLiveDomainRefererResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLiveDomainRefererResponse struct {
@@ -9438,46 +9438,46 @@ func (r *ModifyLiveDomainRefererResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLivePlayAuthKeyRequestParams struct {
 	// Playback domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Whether to enable. 0: disabled; 1: enabled.
 	// If this parameter is left empty, the current value will not be modified.
-	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// Authentication key.
 	// If this parameter is left empty, the current value will not be modified.
-	AuthKey *string `json:"AuthKey,omitnil" name:"AuthKey"`
+	AuthKey *string `json:"AuthKey,omitnil,omitempty" name:"AuthKey"`
 
 	// Validity period in seconds.
 	// If this parameter is left empty, the current value will not be modified.
-	AuthDelta *uint64 `json:"AuthDelta,omitnil" name:"AuthDelta"`
+	AuthDelta *uint64 `json:"AuthDelta,omitnil,omitempty" name:"AuthDelta"`
 
 	// Backup authentication key.
 	// If this parameter is left empty, the current value will not be modified.
-	AuthBackKey *string `json:"AuthBackKey,omitnil" name:"AuthBackKey"`
+	AuthBackKey *string `json:"AuthBackKey,omitnil,omitempty" name:"AuthBackKey"`
 }
 
 type ModifyLivePlayAuthKeyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Playback domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Whether to enable. 0: disabled; 1: enabled.
 	// If this parameter is left empty, the current value will not be modified.
-	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// Authentication key.
 	// If this parameter is left empty, the current value will not be modified.
-	AuthKey *string `json:"AuthKey,omitnil" name:"AuthKey"`
+	AuthKey *string `json:"AuthKey,omitnil,omitempty" name:"AuthKey"`
 
 	// Validity period in seconds.
 	// If this parameter is left empty, the current value will not be modified.
-	AuthDelta *uint64 `json:"AuthDelta,omitnil" name:"AuthDelta"`
+	AuthDelta *uint64 `json:"AuthDelta,omitnil,omitempty" name:"AuthDelta"`
 
 	// Backup authentication key.
 	// If this parameter is left empty, the current value will not be modified.
-	AuthBackKey *string `json:"AuthBackKey,omitnil" name:"AuthBackKey"`
+	AuthBackKey *string `json:"AuthBackKey,omitnil,omitempty" name:"AuthBackKey"`
 }
 
 func (r *ModifyLivePlayAuthKeyRequest) ToJsonString() string {
@@ -9506,7 +9506,7 @@ func (r *ModifyLivePlayAuthKeyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLivePlayAuthKeyResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLivePlayAuthKeyResponse struct {
@@ -9528,20 +9528,20 @@ func (r *ModifyLivePlayAuthKeyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLivePlayDomainRequestParams struct {
 	// Playback domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Pull domain name type. 1: Mainland China. 2: global, 3: outside Mainland China
-	PlayType *int64 `json:"PlayType,omitnil" name:"PlayType"`
+	PlayType *int64 `json:"PlayType,omitnil,omitempty" name:"PlayType"`
 }
 
 type ModifyLivePlayDomainRequest struct {
 	*tchttp.BaseRequest
 	
 	// Playback domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Pull domain name type. 1: Mainland China. 2: global, 3: outside Mainland China
-	PlayType *int64 `json:"PlayType,omitnil" name:"PlayType"`
+	PlayType *int64 `json:"PlayType,omitnil,omitempty" name:"PlayType"`
 }
 
 func (r *ModifyLivePlayDomainRequest) ToJsonString() string {
@@ -9567,7 +9567,7 @@ func (r *ModifyLivePlayDomainRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLivePlayDomainResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLivePlayDomainResponse struct {
@@ -9589,21 +9589,21 @@ func (r *ModifyLivePlayDomainResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLivePullStreamTaskRequestParams struct {
 	// The task ID.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The operator.
-	Operator *string `json:"Operator,omitnil" name:"Operator"`
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
 	// The source URL(s).
 	// If `SourceType` is `PullLivePushLive`, you can specify only one source URL.
 	// If `SourceType` is `PullVodPushLive`, you can specify at most 30 source URLs.
-	SourceUrls []*string `json:"SourceUrls,omitnil" name:"SourceUrls"`
+	SourceUrls []*string `json:"SourceUrls,omitnil,omitempty" name:"SourceUrls"`
 
 	// The start time.
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time. Notes:
 	// 1. The end time must be later than the start time.
@@ -9612,25 +9612,25 @@ type ModifyLivePullStreamTaskRequestParams struct {
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The number of times to loop video files.
 	// -1: Loop indefinitely
 	// 0: Do not loop
 	// > 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
 	// This parameter is valid only if the source is video files.
-	VodLoopTimes *int64 `json:"VodLoopTimes,omitnil" name:"VodLoopTimes"`
+	VodLoopTimes *int64 `json:"VodLoopTimes,omitnil,omitempty" name:"VodLoopTimes"`
 
 	// The behavior after the source video files (`SourceUrls`) are changed.
 	// ImmediateNewSource: Play the new videos immediately
 	// ContinueBreakPoint: Finish the current video first and then pull from the new source.
 	// This parameter is valid only if the source is video files.
-	VodRefreshType *string `json:"VodRefreshType,omitnil" name:"VodRefreshType"`
+	VodRefreshType *string `json:"VodRefreshType,omitnil,omitempty" name:"VodRefreshType"`
 
 	// Whether to enable or pause the task. Valid values:
 	// enable
 	// pause
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The events to listen for. If you do not pass this parameter, all events will be listened for.
 	// TaskStart: Callback for starting a task
@@ -9638,23 +9638,23 @@ type ModifyLivePullStreamTaskRequestParams struct {
 	// VodSourceFileStart: Callback for starting to pull from video files
 	// VodSourceFileFinish: Callback for stopping pulling from video files
 	// ResetTaskConfig: Callback for modifying a task
-	CallbackEvents []*string `json:"CallbackEvents,omitnil" name:"CallbackEvents"`
+	CallbackEvents []*string `json:"CallbackEvents,omitnil,omitempty" name:"CallbackEvents"`
 
 	// A custom callback URL.
 	// Callbacks will be sent to this URL.
-	CallbackUrl *string `json:"CallbackUrl,omitnil" name:"CallbackUrl"`
+	CallbackUrl *string `json:"CallbackUrl,omitnil,omitempty" name:"CallbackUrl"`
 
 	// The index of the video to start from.
 	// The value of this parameter cannot be smaller than 1 or larger than the number of elements in `SourceUrls`.
-	FileIndex *int64 `json:"FileIndex,omitnil" name:"FileIndex"`
+	FileIndex *int64 `json:"FileIndex,omitnil,omitempty" name:"FileIndex"`
 
 	// The playback offset (seconds).
 	// Notes:
 	// 1. This parameter should be used together with `FileIndex`.
-	OffsetTime *int64 `json:"OffsetTime,omitnil" name:"OffsetTime"`
+	OffsetTime *int64 `json:"OffsetTime,omitnil,omitempty" name:"OffsetTime"`
 
 	// The remarks for the task.
-	Comment *string `json:"Comment,omitnil" name:"Comment"`
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
 	// The backup source type.
 	// PullLivePushLive: Live streaming
@@ -9664,11 +9664,11 @@ type ModifyLivePullStreamTaskRequestParams struct {
 	// 2. Leaving this parameter empty will reset the backup source.
 	// 3. When pull from the primary source is interrupted, the system will pull from the backup source.
 	// 4. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
-	BackupSourceType *string `json:"BackupSourceType,omitnil" name:"BackupSourceType"`
+	BackupSourceType *string `json:"BackupSourceType,omitnil,omitempty" name:"BackupSourceType"`
 
 	// The URL of the backup source.
 	// You can specify only one backup source URL.
-	BackupSourceUrl *string `json:"BackupSourceUrl,omitnil" name:"BackupSourceUrl"`
+	BackupSourceUrl *string `json:"BackupSourceUrl,omitnil,omitempty" name:"BackupSourceUrl"`
 
 	// The information of watermarks to add.
 	// Notes:
@@ -9679,34 +9679,34 @@ type ModifyLivePullStreamTaskRequestParams struct {
 	// 5. If you change the watermark configuration of a task whose source is a live stream, the new configuration will take effect immediately.
 	// 6. If you want to stop using watermarks, pass in an empty array.
 	// 7. Currently, animated watermarks are not supported.
-	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitnil" name:"WatermarkList"`
+	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitnil,omitempty" name:"WatermarkList"`
 
 	// Whether to use local mode when the source type is video files. The default is `0`.
 	// 0: Do not use local mode
 	// 1: Use local mode
 	// Note: If you enable local mode, MP4 files will be downloaded to local storage, and the local files will be used for push. This ensures more reliable push. Pushing a local file will incur additional fees.
-	VodLocalMode *int64 `json:"VodLocalMode,omitnil" name:"VodLocalMode"`
+	VodLocalMode *int64 `json:"VodLocalMode,omitnil,omitempty" name:"VodLocalMode"`
 }
 
 type ModifyLivePullStreamTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// The task ID.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The operator.
-	Operator *string `json:"Operator,omitnil" name:"Operator"`
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
 	// The source URL(s).
 	// If `SourceType` is `PullLivePushLive`, you can specify only one source URL.
 	// If `SourceType` is `PullVodPushLive`, you can specify at most 30 source URLs.
-	SourceUrls []*string `json:"SourceUrls,omitnil" name:"SourceUrls"`
+	SourceUrls []*string `json:"SourceUrls,omitnil,omitempty" name:"SourceUrls"`
 
 	// The start time.
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time. Notes:
 	// 1. The end time must be later than the start time.
@@ -9715,25 +9715,25 @@ type ModifyLivePullStreamTaskRequest struct {
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The number of times to loop video files.
 	// -1: Loop indefinitely
 	// 0: Do not loop
 	// > 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
 	// This parameter is valid only if the source is video files.
-	VodLoopTimes *int64 `json:"VodLoopTimes,omitnil" name:"VodLoopTimes"`
+	VodLoopTimes *int64 `json:"VodLoopTimes,omitnil,omitempty" name:"VodLoopTimes"`
 
 	// The behavior after the source video files (`SourceUrls`) are changed.
 	// ImmediateNewSource: Play the new videos immediately
 	// ContinueBreakPoint: Finish the current video first and then pull from the new source.
 	// This parameter is valid only if the source is video files.
-	VodRefreshType *string `json:"VodRefreshType,omitnil" name:"VodRefreshType"`
+	VodRefreshType *string `json:"VodRefreshType,omitnil,omitempty" name:"VodRefreshType"`
 
 	// Whether to enable or pause the task. Valid values:
 	// enable
 	// pause
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The events to listen for. If you do not pass this parameter, all events will be listened for.
 	// TaskStart: Callback for starting a task
@@ -9741,23 +9741,23 @@ type ModifyLivePullStreamTaskRequest struct {
 	// VodSourceFileStart: Callback for starting to pull from video files
 	// VodSourceFileFinish: Callback for stopping pulling from video files
 	// ResetTaskConfig: Callback for modifying a task
-	CallbackEvents []*string `json:"CallbackEvents,omitnil" name:"CallbackEvents"`
+	CallbackEvents []*string `json:"CallbackEvents,omitnil,omitempty" name:"CallbackEvents"`
 
 	// A custom callback URL.
 	// Callbacks will be sent to this URL.
-	CallbackUrl *string `json:"CallbackUrl,omitnil" name:"CallbackUrl"`
+	CallbackUrl *string `json:"CallbackUrl,omitnil,omitempty" name:"CallbackUrl"`
 
 	// The index of the video to start from.
 	// The value of this parameter cannot be smaller than 1 or larger than the number of elements in `SourceUrls`.
-	FileIndex *int64 `json:"FileIndex,omitnil" name:"FileIndex"`
+	FileIndex *int64 `json:"FileIndex,omitnil,omitempty" name:"FileIndex"`
 
 	// The playback offset (seconds).
 	// Notes:
 	// 1. This parameter should be used together with `FileIndex`.
-	OffsetTime *int64 `json:"OffsetTime,omitnil" name:"OffsetTime"`
+	OffsetTime *int64 `json:"OffsetTime,omitnil,omitempty" name:"OffsetTime"`
 
 	// The remarks for the task.
-	Comment *string `json:"Comment,omitnil" name:"Comment"`
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
 	// The backup source type.
 	// PullLivePushLive: Live streaming
@@ -9767,11 +9767,11 @@ type ModifyLivePullStreamTaskRequest struct {
 	// 2. Leaving this parameter empty will reset the backup source.
 	// 3. When pull from the primary source is interrupted, the system will pull from the backup source.
 	// 4. If the backup source is a video file, each time the video is finished, the system will check if the primary source is recovered and will switch back if it is.
-	BackupSourceType *string `json:"BackupSourceType,omitnil" name:"BackupSourceType"`
+	BackupSourceType *string `json:"BackupSourceType,omitnil,omitempty" name:"BackupSourceType"`
 
 	// The URL of the backup source.
 	// You can specify only one backup source URL.
-	BackupSourceUrl *string `json:"BackupSourceUrl,omitnil" name:"BackupSourceUrl"`
+	BackupSourceUrl *string `json:"BackupSourceUrl,omitnil,omitempty" name:"BackupSourceUrl"`
 
 	// The information of watermarks to add.
 	// Notes:
@@ -9782,13 +9782,13 @@ type ModifyLivePullStreamTaskRequest struct {
 	// 5. If you change the watermark configuration of a task whose source is a live stream, the new configuration will take effect immediately.
 	// 6. If you want to stop using watermarks, pass in an empty array.
 	// 7. Currently, animated watermarks are not supported.
-	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitnil" name:"WatermarkList"`
+	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitnil,omitempty" name:"WatermarkList"`
 
 	// Whether to use local mode when the source type is video files. The default is `0`.
 	// 0: Do not use local mode
 	// 1: Use local mode
 	// Note: If you enable local mode, MP4 files will be downloaded to local storage, and the local files will be used for push. This ensures more reliable push. Pushing a local file will incur additional fees.
-	VodLocalMode *int64 `json:"VodLocalMode,omitnil" name:"VodLocalMode"`
+	VodLocalMode *int64 `json:"VodLocalMode,omitnil,omitempty" name:"VodLocalMode"`
 }
 
 func (r *ModifyLivePullStreamTaskRequest) ToJsonString() string {
@@ -9829,7 +9829,7 @@ func (r *ModifyLivePullStreamTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLivePullStreamTaskResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLivePullStreamTaskResponse struct {
@@ -9851,44 +9851,44 @@ func (r *ModifyLivePullStreamTaskResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLivePushAuthKeyRequestParams struct {
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Whether to enable. 0: disabled; 1: enabled.
 	// If this parameter is left empty, the current value will not be modified.
-	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// Master authentication key.
 	// If this parameter is left empty, the current value will not be modified.
-	MasterAuthKey *string `json:"MasterAuthKey,omitnil" name:"MasterAuthKey"`
+	MasterAuthKey *string `json:"MasterAuthKey,omitnil,omitempty" name:"MasterAuthKey"`
 
 	// Backup authentication key.
 	// If this parameter is left empty, the current value will not be modified.
-	BackupAuthKey *string `json:"BackupAuthKey,omitnil" name:"BackupAuthKey"`
+	BackupAuthKey *string `json:"BackupAuthKey,omitnil,omitempty" name:"BackupAuthKey"`
 
 	// Validity period in seconds.
-	AuthDelta *uint64 `json:"AuthDelta,omitnil" name:"AuthDelta"`
+	AuthDelta *uint64 `json:"AuthDelta,omitnil,omitempty" name:"AuthDelta"`
 }
 
 type ModifyLivePushAuthKeyRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Whether to enable. 0: disabled; 1: enabled.
 	// If this parameter is left empty, the current value will not be modified.
-	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// Master authentication key.
 	// If this parameter is left empty, the current value will not be modified.
-	MasterAuthKey *string `json:"MasterAuthKey,omitnil" name:"MasterAuthKey"`
+	MasterAuthKey *string `json:"MasterAuthKey,omitnil,omitempty" name:"MasterAuthKey"`
 
 	// Backup authentication key.
 	// If this parameter is left empty, the current value will not be modified.
-	BackupAuthKey *string `json:"BackupAuthKey,omitnil" name:"BackupAuthKey"`
+	BackupAuthKey *string `json:"BackupAuthKey,omitnil,omitempty" name:"BackupAuthKey"`
 
 	// Validity period in seconds.
-	AuthDelta *uint64 `json:"AuthDelta,omitnil" name:"AuthDelta"`
+	AuthDelta *uint64 `json:"AuthDelta,omitnil,omitempty" name:"AuthDelta"`
 }
 
 func (r *ModifyLivePushAuthKeyRequest) ToJsonString() string {
@@ -9917,7 +9917,7 @@ func (r *ModifyLivePushAuthKeyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLivePushAuthKeyResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLivePushAuthKeyResponse struct {
@@ -9939,74 +9939,74 @@ func (r *ModifyLivePushAuthKeyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLiveRecordTemplateRequestParams struct {
 	// Template ID obtained through the `DescribeRecordTemplates` API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Template name.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Message description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// FLV recording parameter, which is set when FLV recording is enabled.
-	FlvParam *RecordParam `json:"FlvParam,omitnil" name:"FlvParam"`
+	FlvParam *RecordParam `json:"FlvParam,omitnil,omitempty" name:"FlvParam"`
 
 	// HLS recording parameter, which is set when HLS recording is enabled.
-	HlsParam *RecordParam `json:"HlsParam,omitnil" name:"HlsParam"`
+	HlsParam *RecordParam `json:"HlsParam,omitnil,omitempty" name:"HlsParam"`
 
 	// MP4 recording parameter, which is set when MP4 recording is enabled.
-	Mp4Param *RecordParam `json:"Mp4Param,omitnil" name:"Mp4Param"`
+	Mp4Param *RecordParam `json:"Mp4Param,omitnil,omitempty" name:"Mp4Param"`
 
 	// AAC recording parameter, which is set when AAC recording is enabled.
-	AacParam *RecordParam `json:"AacParam,omitnil" name:"AacParam"`
+	AacParam *RecordParam `json:"AacParam,omitnil,omitempty" name:"AacParam"`
 
 	// Custom HLS recording parameter.
-	HlsSpecialParam *HlsSpecialParam `json:"HlsSpecialParam,omitnil" name:"HlsSpecialParam"`
+	HlsSpecialParam *HlsSpecialParam `json:"HlsSpecialParam,omitnil,omitempty" name:"HlsSpecialParam"`
 
 	// MP3 recording parameter, which is set when MP3 recording is enabled.
-	Mp3Param *RecordParam `json:"Mp3Param,omitnil" name:"Mp3Param"`
+	Mp3Param *RecordParam `json:"Mp3Param,omitnil,omitempty" name:"Mp3Param"`
 
 	// Whether to remove the watermark. This parameter is invalid if `IsDelayLive` is `1`.
-	RemoveWatermark *bool `json:"RemoveWatermark,omitnil" name:"RemoveWatermark"`
+	RemoveWatermark *bool `json:"RemoveWatermark,omitnil,omitempty" name:"RemoveWatermark"`
 
 	// A special parameter for FLV recording.
-	FlvSpecialParam *FlvSpecialParam `json:"FlvSpecialParam,omitnil" name:"FlvSpecialParam"`
+	FlvSpecialParam *FlvSpecialParam `json:"FlvSpecialParam,omitnil,omitempty" name:"FlvSpecialParam"`
 }
 
 type ModifyLiveRecordTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Template ID obtained through the `DescribeRecordTemplates` API.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Template name.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Message description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// FLV recording parameter, which is set when FLV recording is enabled.
-	FlvParam *RecordParam `json:"FlvParam,omitnil" name:"FlvParam"`
+	FlvParam *RecordParam `json:"FlvParam,omitnil,omitempty" name:"FlvParam"`
 
 	// HLS recording parameter, which is set when HLS recording is enabled.
-	HlsParam *RecordParam `json:"HlsParam,omitnil" name:"HlsParam"`
+	HlsParam *RecordParam `json:"HlsParam,omitnil,omitempty" name:"HlsParam"`
 
 	// MP4 recording parameter, which is set when MP4 recording is enabled.
-	Mp4Param *RecordParam `json:"Mp4Param,omitnil" name:"Mp4Param"`
+	Mp4Param *RecordParam `json:"Mp4Param,omitnil,omitempty" name:"Mp4Param"`
 
 	// AAC recording parameter, which is set when AAC recording is enabled.
-	AacParam *RecordParam `json:"AacParam,omitnil" name:"AacParam"`
+	AacParam *RecordParam `json:"AacParam,omitnil,omitempty" name:"AacParam"`
 
 	// Custom HLS recording parameter.
-	HlsSpecialParam *HlsSpecialParam `json:"HlsSpecialParam,omitnil" name:"HlsSpecialParam"`
+	HlsSpecialParam *HlsSpecialParam `json:"HlsSpecialParam,omitnil,omitempty" name:"HlsSpecialParam"`
 
 	// MP3 recording parameter, which is set when MP3 recording is enabled.
-	Mp3Param *RecordParam `json:"Mp3Param,omitnil" name:"Mp3Param"`
+	Mp3Param *RecordParam `json:"Mp3Param,omitnil,omitempty" name:"Mp3Param"`
 
 	// Whether to remove the watermark. This parameter is invalid if `IsDelayLive` is `1`.
-	RemoveWatermark *bool `json:"RemoveWatermark,omitnil" name:"RemoveWatermark"`
+	RemoveWatermark *bool `json:"RemoveWatermark,omitnil,omitempty" name:"RemoveWatermark"`
 
 	// A special parameter for FLV recording.
-	FlvSpecialParam *FlvSpecialParam `json:"FlvSpecialParam,omitnil" name:"FlvSpecialParam"`
+	FlvSpecialParam *FlvSpecialParam `json:"FlvSpecialParam,omitnil,omitempty" name:"FlvSpecialParam"`
 }
 
 func (r *ModifyLiveRecordTemplateRequest) ToJsonString() string {
@@ -10041,7 +10041,7 @@ func (r *ModifyLiveRecordTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLiveRecordTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLiveRecordTemplateResponse struct {
@@ -10063,98 +10063,98 @@ func (r *ModifyLiveRecordTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLiveSnapshotTemplateRequestParams struct {
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The COS application ID.
 	// **Please note that this parameter is required now**.
-	CosAppId *int64 `json:"CosAppId,omitnil" name:"CosAppId"`
+	CosAppId *int64 `json:"CosAppId,omitnil,omitempty" name:"CosAppId"`
 
 	// The COS bucket name.
 	// Note: Do not include the `-[appid]` part in the value of `CosBucket`.
 	// **Please note that this parameter is required now**.
-	CosBucket *string `json:"CosBucket,omitnil" name:"CosBucket"`
+	CosBucket *string `json:"CosBucket,omitnil,omitempty" name:"CosBucket"`
 
 	// The COS region.
 	// **Please note that this parameter is required now**.
-	CosRegion *string `json:"CosRegion,omitnil" name:"CosRegion"`
+	CosRegion *string `json:"CosRegion,omitnil,omitempty" name:"CosRegion"`
 
 	// Template name.
 	// Maximum length: 255 bytes.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Description.
 	// Maximum length: 1,024 bytes.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Screencapturing interval in seconds. Default value: 10s.
 	// Value range: 5-300s.
-	SnapshotInterval *int64 `json:"SnapshotInterval,omitnil" name:"SnapshotInterval"`
+	SnapshotInterval *int64 `json:"SnapshotInterval,omitnil,omitempty" name:"SnapshotInterval"`
 
 	// Screenshot width. Default value: 0 (original width).
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Screenshot height. Default value: 0 (original height).
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// Whether to enable porn detection. Default value: 0.
 	// 0: do not enable.
 	// 1: enable.
-	PornFlag *int64 `json:"PornFlag,omitnil" name:"PornFlag"`
+	PornFlag *int64 `json:"PornFlag,omitnil,omitempty" name:"PornFlag"`
 
 	// COS bucket folder prefix.
-	CosPrefix *string `json:"CosPrefix,omitnil" name:"CosPrefix"`
+	CosPrefix *string `json:"CosPrefix,omitnil,omitempty" name:"CosPrefix"`
 
 	// COS filename.
-	CosFileName *string `json:"CosFileName,omitnil" name:"CosFileName"`
+	CosFileName *string `json:"CosFileName,omitnil,omitempty" name:"CosFileName"`
 }
 
 type ModifyLiveSnapshotTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The COS application ID.
 	// **Please note that this parameter is required now**.
-	CosAppId *int64 `json:"CosAppId,omitnil" name:"CosAppId"`
+	CosAppId *int64 `json:"CosAppId,omitnil,omitempty" name:"CosAppId"`
 
 	// The COS bucket name.
 	// Note: Do not include the `-[appid]` part in the value of `CosBucket`.
 	// **Please note that this parameter is required now**.
-	CosBucket *string `json:"CosBucket,omitnil" name:"CosBucket"`
+	CosBucket *string `json:"CosBucket,omitnil,omitempty" name:"CosBucket"`
 
 	// The COS region.
 	// **Please note that this parameter is required now**.
-	CosRegion *string `json:"CosRegion,omitnil" name:"CosRegion"`
+	CosRegion *string `json:"CosRegion,omitnil,omitempty" name:"CosRegion"`
 
 	// Template name.
 	// Maximum length: 255 bytes.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Description.
 	// Maximum length: 1,024 bytes.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Screencapturing interval in seconds. Default value: 10s.
 	// Value range: 5-300s.
-	SnapshotInterval *int64 `json:"SnapshotInterval,omitnil" name:"SnapshotInterval"`
+	SnapshotInterval *int64 `json:"SnapshotInterval,omitnil,omitempty" name:"SnapshotInterval"`
 
 	// Screenshot width. Default value: 0 (original width).
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Screenshot height. Default value: 0 (original height).
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// Whether to enable porn detection. Default value: 0.
 	// 0: do not enable.
 	// 1: enable.
-	PornFlag *int64 `json:"PornFlag,omitnil" name:"PornFlag"`
+	PornFlag *int64 `json:"PornFlag,omitnil,omitempty" name:"PornFlag"`
 
 	// COS bucket folder prefix.
-	CosPrefix *string `json:"CosPrefix,omitnil" name:"CosPrefix"`
+	CosPrefix *string `json:"CosPrefix,omitnil,omitempty" name:"CosPrefix"`
 
 	// COS filename.
-	CosFileName *string `json:"CosFileName,omitnil" name:"CosFileName"`
+	CosFileName *string `json:"CosFileName,omitnil,omitempty" name:"CosFileName"`
 }
 
 func (r *ModifyLiveSnapshotTemplateRequest) ToJsonString() string {
@@ -10190,7 +10190,7 @@ func (r *ModifyLiveSnapshotTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLiveSnapshotTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLiveSnapshotTemplateResponse struct {
@@ -10212,82 +10212,82 @@ func (r *ModifyLiveSnapshotTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLiveTimeShiftTemplateRequestParams struct {
 	// The time shifting template ID.
-	TemplateId *uint64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *uint64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The template name.
 	// Only letters, numbers, underscores, and hyphens are supported.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// The template description.
 	// Maximum length: 1,024 bytes.
 	// Only letters, numbers, underscores, and hyphens are supported.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// The time shifting duration.
 	// Unit: Second.
-	Duration *uint64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// The segment size.
 	// Value range: 3-10.
 	// Unit: Second.
 	// Default value: 5
-	ItemDuration *uint64 `json:"ItemDuration,omitnil" name:"ItemDuration"`
+	ItemDuration *uint64 `json:"ItemDuration,omitnil,omitempty" name:"ItemDuration"`
 
 	// Whether to remove watermarks.
 	// If you pass in `true`, the original stream will be recorded.
 	// Default value: `false`.
-	RemoveWatermark *bool `json:"RemoveWatermark,omitnil" name:"RemoveWatermark"`
+	RemoveWatermark *bool `json:"RemoveWatermark,omitnil,omitempty" name:"RemoveWatermark"`
 
 	// The transcoding template IDs.
 	// This API works only if `RemoveWatermark` is `false`.
-	TranscodeTemplateIds []*int64 `json:"TranscodeTemplateIds,omitnil" name:"TranscodeTemplateIds"`
+	TranscodeTemplateIds []*int64 `json:"TranscodeTemplateIds,omitnil,omitempty" name:"TranscodeTemplateIds"`
 
 	// The region.
 	// `Mainland`: The Chinese mainland.
 	// `Overseas`: Outside the Chinese mainland.
 	// Default value: `Mainland`.
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
 type ModifyLiveTimeShiftTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// The time shifting template ID.
-	TemplateId *uint64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *uint64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The template name.
 	// Only letters, numbers, underscores, and hyphens are supported.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// The template description.
 	// Maximum length: 1,024 bytes.
 	// Only letters, numbers, underscores, and hyphens are supported.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// The time shifting duration.
 	// Unit: Second.
-	Duration *uint64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// The segment size.
 	// Value range: 3-10.
 	// Unit: Second.
 	// Default value: 5
-	ItemDuration *uint64 `json:"ItemDuration,omitnil" name:"ItemDuration"`
+	ItemDuration *uint64 `json:"ItemDuration,omitnil,omitempty" name:"ItemDuration"`
 
 	// Whether to remove watermarks.
 	// If you pass in `true`, the original stream will be recorded.
 	// Default value: `false`.
-	RemoveWatermark *bool `json:"RemoveWatermark,omitnil" name:"RemoveWatermark"`
+	RemoveWatermark *bool `json:"RemoveWatermark,omitnil,omitempty" name:"RemoveWatermark"`
 
 	// The transcoding template IDs.
 	// This API works only if `RemoveWatermark` is `false`.
-	TranscodeTemplateIds []*int64 `json:"TranscodeTemplateIds,omitnil" name:"TranscodeTemplateIds"`
+	TranscodeTemplateIds []*int64 `json:"TranscodeTemplateIds,omitnil,omitempty" name:"TranscodeTemplateIds"`
 
 	// The region.
 	// `Mainland`: The Chinese mainland.
 	// `Overseas`: Outside the Chinese mainland.
 	// Default value: `Mainland`.
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
 func (r *ModifyLiveTimeShiftTemplateRequest) ToJsonString() string {
@@ -10319,7 +10319,7 @@ func (r *ModifyLiveTimeShiftTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLiveTimeShiftTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLiveTimeShiftTemplateResponse struct {
@@ -10341,178 +10341,178 @@ func (r *ModifyLiveTimeShiftTemplateResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLiveTranscodeTemplateRequestParams struct {
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Video codec. Valid values: h264, h265, origin (default)
 	// 
 	// origin: original codec as the output codec
-	Vcodec *string `json:"Vcodec,omitnil" name:"Vcodec"`
+	Vcodec *string `json:"Vcodec,omitnil,omitempty" name:"Vcodec"`
 
 	// Audio codec. Defaut value: aac.
 	// Note: this parameter is unsupported now.
-	Acodec *string `json:"Acodec,omitnil" name:"Acodec"`
+	Acodec *string `json:"Acodec,omitnil,omitempty" name:"Acodec"`
 
 	// Audio bitrate. Default value: 0.
 	// Value range: 0-500.
-	AudioBitrate *int64 `json:"AudioBitrate,omitnil" name:"AudioBitrate"`
+	AudioBitrate *int64 `json:"AudioBitrate,omitnil,omitempty" name:"AudioBitrate"`
 
 	// Template description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Video bitrate in Kbps. Value range: 100-8000.
 	// Note: the transcoding template requires that the bitrate be unique. Therefore, the final saved bitrate may be different from the input bitrate.
-	VideoBitrate *int64 `json:"VideoBitrate,omitnil" name:"VideoBitrate"`
+	VideoBitrate *int64 `json:"VideoBitrate,omitnil,omitempty" name:"VideoBitrate"`
 
 	// Width in pixels. Value range: 0-3000.
 	// It must be a multiple of 2. The original width is 0.
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Whether to keep the video. 0: no; 1: yes. Default value: 1.
-	NeedVideo *int64 `json:"NeedVideo,omitnil" name:"NeedVideo"`
+	NeedVideo *int64 `json:"NeedVideo,omitnil,omitempty" name:"NeedVideo"`
 
 	// Whether to keep the audio. 0: no; 1: yes. Default value: 1.
-	NeedAudio *int64 `json:"NeedAudio,omitnil" name:"NeedAudio"`
+	NeedAudio *int64 `json:"NeedAudio,omitnil,omitempty" name:"NeedAudio"`
 
 	// Height in pixels. Value range: 0-3000.
 	// It must be a multiple of 2. The original height is 0.
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// Frame rate in fps. Default value: 0.
 	// Value range: 0-60
-	Fps *int64 `json:"Fps,omitnil" name:"Fps"`
+	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 
 	// Keyframe interval in seconds.
 	// Value range: 2-6
-	Gop *int64 `json:"Gop,omitnil" name:"Gop"`
+	Gop *int64 `json:"Gop,omitnil,omitempty" name:"Gop"`
 
 	// Rotation angle. Default value: 0.
 	// Valid values: 0, 90, 180, 270
-	Rotate *int64 `json:"Rotate,omitnil" name:"Rotate"`
+	Rotate *int64 `json:"Rotate,omitnil,omitempty" name:"Rotate"`
 
 	// Encoding quality:
 	// baseline/main/high.
-	Profile *string `json:"Profile,omitnil" name:"Profile"`
+	Profile *string `json:"Profile,omitnil,omitempty" name:"Profile"`
 
 	// Whether to use the original bitrate when the set bitrate is larger than the original bitrate.
 	// 0: no, 1: yes
 	// Default value: 0.
-	BitrateToOrig *int64 `json:"BitrateToOrig,omitnil" name:"BitrateToOrig"`
+	BitrateToOrig *int64 `json:"BitrateToOrig,omitnil,omitempty" name:"BitrateToOrig"`
 
 	// Whether to use the original height when the set height is higher than the original height.
 	// 0: no, 1: yes
 	// Default value: 0.
-	HeightToOrig *int64 `json:"HeightToOrig,omitnil" name:"HeightToOrig"`
+	HeightToOrig *int64 `json:"HeightToOrig,omitnil,omitempty" name:"HeightToOrig"`
 
 	// Whether to use the original frame rate when the set frame rate is larger than the original frame rate.
 	// 0: no, 1: yes
 	// Default value: 0.
-	FpsToOrig *int64 `json:"FpsToOrig,omitnil" name:"FpsToOrig"`
+	FpsToOrig *int64 `json:"FpsToOrig,omitnil,omitempty" name:"FpsToOrig"`
 
 	// Bitrate compression ratio of top speed codec video.
 	// Target bitrate of top speed code = VideoBitrate * (1-AdaptBitratePercent)
 	// 
 	// Value range: 0.0-0.5.
-	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitnil" name:"AdaptBitratePercent"`
+	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitnil,omitempty" name:"AdaptBitratePercent"`
 
 	// Whether to use the short side as the video height. 0: no, 1: yes. Default value: 0.
-	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitnil" name:"ShortEdgeAsHeight"`
+	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitnil,omitempty" name:"ShortEdgeAsHeight"`
 
 	// The DRM encryption type. Valid values: fairplay, normalaes, widevine.
 	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
-	DRMType *string `json:"DRMType,omitnil" name:"DRMType"`
+	DRMType *string `json:"DRMType,omitnil,omitempty" name:"DRMType"`
 
 	// The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. You can choose only one video track (SD, HD, UHD1, or UHD2).
 	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
-	DRMTracks *string `json:"DRMTracks,omitnil" name:"DRMTracks"`
+	DRMTracks *string `json:"DRMTracks,omitnil,omitempty" name:"DRMTracks"`
 }
 
 type ModifyLiveTranscodeTemplateRequest struct {
 	*tchttp.BaseRequest
 	
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Video codec. Valid values: h264, h265, origin (default)
 	// 
 	// origin: original codec as the output codec
-	Vcodec *string `json:"Vcodec,omitnil" name:"Vcodec"`
+	Vcodec *string `json:"Vcodec,omitnil,omitempty" name:"Vcodec"`
 
 	// Audio codec. Defaut value: aac.
 	// Note: this parameter is unsupported now.
-	Acodec *string `json:"Acodec,omitnil" name:"Acodec"`
+	Acodec *string `json:"Acodec,omitnil,omitempty" name:"Acodec"`
 
 	// Audio bitrate. Default value: 0.
 	// Value range: 0-500.
-	AudioBitrate *int64 `json:"AudioBitrate,omitnil" name:"AudioBitrate"`
+	AudioBitrate *int64 `json:"AudioBitrate,omitnil,omitempty" name:"AudioBitrate"`
 
 	// Template description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Video bitrate in Kbps. Value range: 100-8000.
 	// Note: the transcoding template requires that the bitrate be unique. Therefore, the final saved bitrate may be different from the input bitrate.
-	VideoBitrate *int64 `json:"VideoBitrate,omitnil" name:"VideoBitrate"`
+	VideoBitrate *int64 `json:"VideoBitrate,omitnil,omitempty" name:"VideoBitrate"`
 
 	// Width in pixels. Value range: 0-3000.
 	// It must be a multiple of 2. The original width is 0.
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Whether to keep the video. 0: no; 1: yes. Default value: 1.
-	NeedVideo *int64 `json:"NeedVideo,omitnil" name:"NeedVideo"`
+	NeedVideo *int64 `json:"NeedVideo,omitnil,omitempty" name:"NeedVideo"`
 
 	// Whether to keep the audio. 0: no; 1: yes. Default value: 1.
-	NeedAudio *int64 `json:"NeedAudio,omitnil" name:"NeedAudio"`
+	NeedAudio *int64 `json:"NeedAudio,omitnil,omitempty" name:"NeedAudio"`
 
 	// Height in pixels. Value range: 0-3000.
 	// It must be a multiple of 2. The original height is 0.
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// Frame rate in fps. Default value: 0.
 	// Value range: 0-60
-	Fps *int64 `json:"Fps,omitnil" name:"Fps"`
+	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 
 	// Keyframe interval in seconds.
 	// Value range: 2-6
-	Gop *int64 `json:"Gop,omitnil" name:"Gop"`
+	Gop *int64 `json:"Gop,omitnil,omitempty" name:"Gop"`
 
 	// Rotation angle. Default value: 0.
 	// Valid values: 0, 90, 180, 270
-	Rotate *int64 `json:"Rotate,omitnil" name:"Rotate"`
+	Rotate *int64 `json:"Rotate,omitnil,omitempty" name:"Rotate"`
 
 	// Encoding quality:
 	// baseline/main/high.
-	Profile *string `json:"Profile,omitnil" name:"Profile"`
+	Profile *string `json:"Profile,omitnil,omitempty" name:"Profile"`
 
 	// Whether to use the original bitrate when the set bitrate is larger than the original bitrate.
 	// 0: no, 1: yes
 	// Default value: 0.
-	BitrateToOrig *int64 `json:"BitrateToOrig,omitnil" name:"BitrateToOrig"`
+	BitrateToOrig *int64 `json:"BitrateToOrig,omitnil,omitempty" name:"BitrateToOrig"`
 
 	// Whether to use the original height when the set height is higher than the original height.
 	// 0: no, 1: yes
 	// Default value: 0.
-	HeightToOrig *int64 `json:"HeightToOrig,omitnil" name:"HeightToOrig"`
+	HeightToOrig *int64 `json:"HeightToOrig,omitnil,omitempty" name:"HeightToOrig"`
 
 	// Whether to use the original frame rate when the set frame rate is larger than the original frame rate.
 	// 0: no, 1: yes
 	// Default value: 0.
-	FpsToOrig *int64 `json:"FpsToOrig,omitnil" name:"FpsToOrig"`
+	FpsToOrig *int64 `json:"FpsToOrig,omitnil,omitempty" name:"FpsToOrig"`
 
 	// Bitrate compression ratio of top speed codec video.
 	// Target bitrate of top speed code = VideoBitrate * (1-AdaptBitratePercent)
 	// 
 	// Value range: 0.0-0.5.
-	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitnil" name:"AdaptBitratePercent"`
+	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitnil,omitempty" name:"AdaptBitratePercent"`
 
 	// Whether to use the short side as the video height. 0: no, 1: yes. Default value: 0.
-	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitnil" name:"ShortEdgeAsHeight"`
+	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitnil,omitempty" name:"ShortEdgeAsHeight"`
 
 	// The DRM encryption type. Valid values: fairplay, normalaes, widevine.
 	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
-	DRMType *string `json:"DRMType,omitnil" name:"DRMType"`
+	DRMType *string `json:"DRMType,omitnil,omitempty" name:"DRMType"`
 
 	// The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. You can choose only one video track (SD, HD, UHD1, or UHD2).
 	// If you do not pass this parameter or pass in an empty string, the existing configuration will be reset.
-	DRMTracks *string `json:"DRMTracks,omitnil" name:"DRMTracks"`
+	DRMTracks *string `json:"DRMTracks,omitnil,omitempty" name:"DRMTracks"`
 }
 
 func (r *ModifyLiveTranscodeTemplateRequest) ToJsonString() string {
@@ -10557,7 +10557,7 @@ func (r *ModifyLiveTranscodeTemplateRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyLiveTranscodeTemplateResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyLiveTranscodeTemplateResponse struct {
@@ -10578,179 +10578,179 @@ func (r *ModifyLiveTranscodeTemplateResponse) FromJsonString(s string) error {
 
 type MonitorStreamPlayInfo struct {
 	// The playback domain.
-	PlayDomain *string `json:"PlayDomain,omitnil" name:"PlayDomain"`
+	PlayDomain *string `json:"PlayDomain,omitnil,omitempty" name:"PlayDomain"`
 
 	// The stream ID.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The playback bitrate. `0` indicates the original bitrate.
-	Rate *uint64 `json:"Rate,omitnil" name:"Rate"`
+	Rate *uint64 `json:"Rate,omitnil,omitempty" name:"Rate"`
 
 	// The playback protocol. Valid values: `Unknown`, `Flv`, `Hls`, `Rtmp`, `Huyap2p`.
-	Protocol *string `json:"Protocol,omitnil" name:"Protocol"`
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// The bandwidth (Mbps).
-	Bandwidth *float64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *float64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// The number of online users, which is represented by the number of TCP connections (data collected every minute).
-	Online *uint64 `json:"Online,omitnil" name:"Online"`
+	Online *uint64 `json:"Online,omitnil,omitempty" name:"Online"`
 
 	// The number of requests.
-	Request *uint64 `json:"Request,omitnil" name:"Request"`
+	Request *uint64 `json:"Request,omitnil,omitempty" name:"Request"`
 }
 
 type PlayAuthKeyInfo struct {
 	// Domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Whether to enable:
 	// 0: disable.
 	// 1: enable.
-	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// Authentication key.
-	AuthKey *string `json:"AuthKey,omitnil" name:"AuthKey"`
+	AuthKey *string `json:"AuthKey,omitnil,omitempty" name:"AuthKey"`
 
 	// Validity period in seconds.
-	AuthDelta *uint64 `json:"AuthDelta,omitnil" name:"AuthDelta"`
+	AuthDelta *uint64 `json:"AuthDelta,omitnil,omitempty" name:"AuthDelta"`
 
 	// Authentication `BackKey`.
-	AuthBackKey *string `json:"AuthBackKey,omitnil" name:"AuthBackKey"`
+	AuthBackKey *string `json:"AuthBackKey,omitnil,omitempty" name:"AuthBackKey"`
 }
 
 type PlayCodeTotalInfo struct {
 	// HTTP code. Valid values:
 	// 400, 403, 404, 500, 502, 503, 504.
-	Code *string `json:"Code,omitnil" name:"Code"`
+	Code *string `json:"Code,omitnil,omitempty" name:"Code"`
 
 	// Total occurrences.
-	Num *uint64 `json:"Num,omitnil" name:"Num"`
+	Num *uint64 `json:"Num,omitnil,omitempty" name:"Num"`
 }
 
 type PlayDataInfoByStream struct {
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Total traffic in MB.
-	TotalFlux *float64 `json:"TotalFlux,omitnil" name:"TotalFlux"`
+	TotalFlux *float64 `json:"TotalFlux,omitnil,omitempty" name:"TotalFlux"`
 }
 
 type PlayStatInfo struct {
 	// Data point in time.
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Value of bandwidth/traffic/number of requests/number of concurrent connections/download speed. If there is no data returned, the value is 0.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	Value *float64 `json:"Value,omitnil" name:"Value"`
+	Value *float64 `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type PlaySumStatInfo struct {
 	// Domain name or stream ID.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Average download speed,
 	// In MB/s.
 	// Calculation formula: average download speed per minute.
-	AvgFluxPerSecond *float64 `json:"AvgFluxPerSecond,omitnil" name:"AvgFluxPerSecond"`
+	AvgFluxPerSecond *float64 `json:"AvgFluxPerSecond,omitnil,omitempty" name:"AvgFluxPerSecond"`
 
 	// Total traffic in MB.
-	TotalFlux *float64 `json:"TotalFlux,omitnil" name:"TotalFlux"`
+	TotalFlux *float64 `json:"TotalFlux,omitnil,omitempty" name:"TotalFlux"`
 
 	// Total number of requests.
-	TotalRequest *uint64 `json:"TotalRequest,omitnil" name:"TotalRequest"`
+	TotalRequest *uint64 `json:"TotalRequest,omitnil,omitempty" name:"TotalRequest"`
 }
 
 type ProIspPlayCodeDataInfo struct {
 	// Country or region.
-	CountryAreaName *string `json:"CountryAreaName,omitnil" name:"CountryAreaName"`
+	CountryAreaName *string `json:"CountryAreaName,omitnil,omitempty" name:"CountryAreaName"`
 
 	// District.
-	ProvinceName *string `json:"ProvinceName,omitnil" name:"ProvinceName"`
+	ProvinceName *string `json:"ProvinceName,omitnil,omitempty" name:"ProvinceName"`
 
 	// ISP.
-	IspName *string `json:"IspName,omitnil" name:"IspName"`
+	IspName *string `json:"IspName,omitnil,omitempty" name:"IspName"`
 
 	// Occurrences of 2xx error codes.
-	Code2xx *uint64 `json:"Code2xx,omitnil" name:"Code2xx"`
+	Code2xx *uint64 `json:"Code2xx,omitnil,omitempty" name:"Code2xx"`
 
 	// Occurrences of 3xx error codes.
-	Code3xx *uint64 `json:"Code3xx,omitnil" name:"Code3xx"`
+	Code3xx *uint64 `json:"Code3xx,omitnil,omitempty" name:"Code3xx"`
 
 	// Occurrences of 4xx error codes.
-	Code4xx *uint64 `json:"Code4xx,omitnil" name:"Code4xx"`
+	Code4xx *uint64 `json:"Code4xx,omitnil,omitempty" name:"Code4xx"`
 
 	// Occurrences of 5xx error codes.
-	Code5xx *uint64 `json:"Code5xx,omitnil" name:"Code5xx"`
+	Code5xx *uint64 `json:"Code5xx,omitnil,omitempty" name:"Code5xx"`
 }
 
 type PublishTime struct {
 	// Push time.
 	// In UTC format, such as 2018-06-29T19:00:00Z.
-	PublishTime *string `json:"PublishTime,omitnil" name:"PublishTime"`
+	PublishTime *string `json:"PublishTime,omitnil,omitempty" name:"PublishTime"`
 }
 
 type PullPushWatermarkInfo struct {
 	// The watermark image URL.
 	// Characters not allowed:
 	// ;(){}$>`#"'|
-	PictureUrl *string `json:"PictureUrl,omitnil" name:"PictureUrl"`
+	PictureUrl *string `json:"PictureUrl,omitnil,omitempty" name:"PictureUrl"`
 
 	// The horizontal offset (%) of the watermark. The default value is 0.
-	XPosition *int64 `json:"XPosition,omitnil" name:"XPosition"`
+	XPosition *int64 `json:"XPosition,omitnil,omitempty" name:"XPosition"`
 
 	// The vertical offset (%) of the watermark. The default value is 0.
-	YPosition *int64 `json:"YPosition,omitnil" name:"YPosition"`
+	YPosition *int64 `json:"YPosition,omitnil,omitempty" name:"YPosition"`
 
 	// The watermark width as a percentage of the video width. To avoid distorted images, we recommend you specify only the width or height so that the other side can be scaled proportionally. By default, the original width of the watermark image is used.
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// The watermark height as a percentage of the video height. To avoid distorted images, we recommend you specify only the width or height so that the other side can be scaled proportionally. By default, the original height of the watermark image is used.
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// The origin. The default value is 0.
 	// 0: Top left corner
 	// 1: Top right corner
 	// 2: Bottom right corner
 	// 3: Bottom left corner
-	Location *int64 `json:"Location,omitnil" name:"Location"`
+	Location *int64 `json:"Location,omitnil,omitempty" name:"Location"`
 }
 
 type PullStreamTaskInfo struct {
 	// The task ID.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The source type. Valid values:
 	// PullLivePushLive: Live streaming
 	// PullVodPushLive: Video files
 	// PullPicPushLive: Images
-	SourceType *string `json:"SourceType,omitnil" name:"SourceType"`
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
 
 	// The source URL(s).
 	// If `SourceType` is `PullLiveToLive`, there can be only one source URL.
 	// If `SourceType` is `PullVodToLive`, there can be at most 10 source URLs.
-	SourceUrls []*string `json:"SourceUrls,omitnil" name:"SourceUrls"`
+	SourceUrls []*string `json:"SourceUrls,omitnil,omitempty" name:"SourceUrls"`
 
 	// The push domain name.
 	// The pulled stream is pushed to this domain.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// The application to push to.
 	// The pulled stream is pushed to this application.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The stream name.
 	// The pulled stream is pushed under this name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The push parameter.
 	// A custom push parameter.
-	PushArgs *string `json:"PushArgs,omitnil" name:"PushArgs"`
+	PushArgs *string `json:"PushArgs,omitnil,omitempty" name:"PushArgs"`
 
 	// The start time.
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time. Notes:
 	// 1. The end time must be later than the start time.
@@ -10759,7 +10759,7 @@ type PullStreamTaskInfo struct {
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The region where the task was created.
 	// `ap-beijing`: North China (Beijing)
@@ -10774,42 +10774,42 @@ type PullStreamTaskInfo struct {
 	// `na-siliconvalley`: Western US
 	// `na-ashburn`: Eastern US
 	// `ap-tokyo`: Japan
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// The number of times to loop video files.
 	// -1: Loop indefinitely
 	// 0: Do not loop
 	// > 0: The number of loop times. A task will end either when the videos are looped for the specified number of times or at the specified task end time, whichever is earlier.
 	// This parameter is valid only if the source is video files.
-	VodLoopTimes *int64 `json:"VodLoopTimes,omitnil" name:"VodLoopTimes"`
+	VodLoopTimes *int64 `json:"VodLoopTimes,omitnil,omitempty" name:"VodLoopTimes"`
 
 	// The behavior after the source video files (`SourceUrls`) are changed.
 	// ImmediateNewSource: Play the new videos immediately
 	// ContinueBreakPoint: Finish the current video first and then pull from the new source.
 	// 
 	// This parameter is valid only if the source is video files.
-	VodRefreshType *string `json:"VodRefreshType,omitnil" name:"VodRefreshType"`
+	VodRefreshType *string `json:"VodRefreshType,omitnil,omitempty" name:"VodRefreshType"`
 
 	// The task creation time.
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The last updated time.
 	// It must be in UTC format.
 	// Example: 2019-01-08T10:00:00Z.
 	// Note: Beijing time is 8 hours ahead of UTC. The [ISO 8601 format](https://intl.cloud.tencent.com/document/product/266/11732#iso-date-format) is used.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// The task creator.
-	CreateBy *string `json:"CreateBy,omitnil" name:"CreateBy"`
+	CreateBy *string `json:"CreateBy,omitnil,omitempty" name:"CreateBy"`
 
 	// The operator of the last update.
-	UpdateBy *string `json:"UpdateBy,omitnil" name:"UpdateBy"`
+	UpdateBy *string `json:"UpdateBy,omitnil,omitempty" name:"UpdateBy"`
 
 	// The callback URL.
-	CallbackUrl *string `json:"CallbackUrl,omitnil" name:"CallbackUrl"`
+	CallbackUrl *string `json:"CallbackUrl,omitnil,omitempty" name:"CallbackUrl"`
 
 	// The events to listen for.
 	// TaskStart: Callback for starting a task
@@ -10817,214 +10817,214 @@ type PullStreamTaskInfo struct {
 	// VodSourceFileStart: Callback for starting to pull from video files
 	// VodSourceFileFinish: Callback for stopping pulling from video files
 	// ResetTaskConfig: Callback for modifying a task
-	CallbackEvents []*string `json:"CallbackEvents,omitnil" name:"CallbackEvents"`
+	CallbackEvents []*string `json:"CallbackEvents,omitnil,omitempty" name:"CallbackEvents"`
 
 	// Note: This parameter is not returned currently.
 	// The information of the last callback.
-	CallbackInfo *string `json:"CallbackInfo,omitnil" name:"CallbackInfo"`
+	CallbackInfo *string `json:"CallbackInfo,omitnil,omitempty" name:"CallbackInfo"`
 
 	// Note: This parameter is not returned currently.
 	// Error message.
-	ErrorInfo *string `json:"ErrorInfo,omitnil" name:"ErrorInfo"`
+	ErrorInfo *string `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
 
 	// The task status.
 	// enable: Enabled
 	// pause: Paused
-	Status *string `json:"Status,omitnil" name:"Status"`
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Note: This parameter is returned only if one task is queried.
 	// The latest pull information.
 	// The information includes the source URL, offset, and report time.
-	RecentPullInfo *RecentPullInfo `json:"RecentPullInfo,omitnil" name:"RecentPullInfo"`
+	RecentPullInfo *RecentPullInfo `json:"RecentPullInfo,omitnil,omitempty" name:"RecentPullInfo"`
 
 	// The remarks for the task.
-	Comment *string `json:"Comment,omitnil" name:"Comment"`
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
 	// The backup source type. Valid values:
 	// PullLivePushLive: Live streaming
 	// PullVodPushLive: Video files
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BackupSourceType *string `json:"BackupSourceType,omitnil" name:"BackupSourceType"`
+	BackupSourceType *string `json:"BackupSourceType,omitnil,omitempty" name:"BackupSourceType"`
 
 	// The URL of the backup source.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	BackupSourceUrl *string `json:"BackupSourceUrl,omitnil" name:"BackupSourceUrl"`
+	BackupSourceUrl *string `json:"BackupSourceUrl,omitnil,omitempty" name:"BackupSourceUrl"`
 
 	// The information of watermarks to add.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitnil" name:"WatermarkList"`
+	WatermarkList []*PullPushWatermarkInfo `json:"WatermarkList,omitnil,omitempty" name:"WatermarkList"`
 
 	// Whether to use local mode when the source type is video files. The default is `0`.
 	// 0: Do not use local mode
 	// 1: Use local mode
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	VodLocalMode *int64 `json:"VodLocalMode,omitnil" name:"VodLocalMode"`
+	VodLocalMode *int64 `json:"VodLocalMode,omitnil,omitempty" name:"VodLocalMode"`
 
 	//  Recording template ID.
-	RecordTemplateId *string `json:"RecordTemplateId,omitnil" name:"RecordTemplateId"`
+	RecordTemplateId *string `json:"RecordTemplateId,omitnil,omitempty" name:"RecordTemplateId"`
 
 	// Newly added streaming address. Used for the scenario of pushing two streams with a single task.
-	BackupToUrl *string `json:"BackupToUrl,omitnil" name:"BackupToUrl"`
+	BackupToUrl *string `json:"BackupToUrl,omitnil,omitempty" name:"BackupToUrl"`
 }
 
 type PushAuthKeyInfo struct {
 	// Domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Whether to enable. 0: disabled; 1: enabled.
-	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// Master authentication key.
-	MasterAuthKey *string `json:"MasterAuthKey,omitnil" name:"MasterAuthKey"`
+	MasterAuthKey *string `json:"MasterAuthKey,omitnil,omitempty" name:"MasterAuthKey"`
 
 	// Standby authentication key.
-	BackupAuthKey *string `json:"BackupAuthKey,omitnil" name:"BackupAuthKey"`
+	BackupAuthKey *string `json:"BackupAuthKey,omitnil,omitempty" name:"BackupAuthKey"`
 
 	// Validity period in seconds.
-	AuthDelta *uint64 `json:"AuthDelta,omitnil" name:"AuthDelta"`
+	AuthDelta *uint64 `json:"AuthDelta,omitnil,omitempty" name:"AuthDelta"`
 }
 
 type PushDataInfo struct {
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Push client IP.
-	ClientIp *string `json:"ClientIp,omitnil" name:"ClientIp"`
+	ClientIp *string `json:"ClientIp,omitnil,omitempty" name:"ClientIp"`
 
 	// IP of the server that receives the stream.
-	ServerIp *string `json:"ServerIp,omitnil" name:"ServerIp"`
+	ServerIp *string `json:"ServerIp,omitnil,omitempty" name:"ServerIp"`
 
 	// Pushed video frame rate in Hz.
-	VideoFps *uint64 `json:"VideoFps,omitnil" name:"VideoFps"`
+	VideoFps *uint64 `json:"VideoFps,omitnil,omitempty" name:"VideoFps"`
 
 	// Video bitrate (bps) for publishing
-	VideoSpeed *uint64 `json:"VideoSpeed,omitnil" name:"VideoSpeed"`
+	VideoSpeed *uint64 `json:"VideoSpeed,omitnil,omitempty" name:"VideoSpeed"`
 
 	// Pushed audio frame rate in Hz.
-	AudioFps *uint64 `json:"AudioFps,omitnil" name:"AudioFps"`
+	AudioFps *uint64 `json:"AudioFps,omitnil,omitempty" name:"AudioFps"`
 
 	// Audio bitrate (bps) for publishing
-	AudioSpeed *uint64 `json:"AudioSpeed,omitnil" name:"AudioSpeed"`
+	AudioSpeed *uint64 `json:"AudioSpeed,omitnil,omitempty" name:"AudioSpeed"`
 
 	// Push domain name.
-	PushDomain *string `json:"PushDomain,omitnil" name:"PushDomain"`
+	PushDomain *string `json:"PushDomain,omitnil,omitempty" name:"PushDomain"`
 
 	// Push start time.
-	BeginPushTime *string `json:"BeginPushTime,omitnil" name:"BeginPushTime"`
+	BeginPushTime *string `json:"BeginPushTime,omitnil,omitempty" name:"BeginPushTime"`
 
 	// Audio codec,
 	// Example: AAC.
-	Acodec *string `json:"Acodec,omitnil" name:"Acodec"`
+	Acodec *string `json:"Acodec,omitnil,omitempty" name:"Acodec"`
 
 	// Video codec,
 	// Example: H.264.
-	Vcodec *string `json:"Vcodec,omitnil" name:"Vcodec"`
+	Vcodec *string `json:"Vcodec,omitnil,omitempty" name:"Vcodec"`
 
 	// Resolution.
-	Resolution *string `json:"Resolution,omitnil" name:"Resolution"`
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 
 	// Sample rate.
-	AsampleRate *uint64 `json:"AsampleRate,omitnil" name:"AsampleRate"`
+	AsampleRate *uint64 `json:"AsampleRate,omitnil,omitempty" name:"AsampleRate"`
 
 	// Audio bitrate (bps) in metadata
-	MetaAudioSpeed *uint64 `json:"MetaAudioSpeed,omitnil" name:"MetaAudioSpeed"`
+	MetaAudioSpeed *uint64 `json:"MetaAudioSpeed,omitnil,omitempty" name:"MetaAudioSpeed"`
 
 	// Video bitrate (bps) in metadata
-	MetaVideoSpeed *uint64 `json:"MetaVideoSpeed,omitnil" name:"MetaVideoSpeed"`
+	MetaVideoSpeed *uint64 `json:"MetaVideoSpeed,omitnil,omitempty" name:"MetaVideoSpeed"`
 
 	// Frame rate in `metadata`.
-	MetaFps *uint64 `json:"MetaFps,omitnil" name:"MetaFps"`
+	MetaFps *uint64 `json:"MetaFps,omitnil,omitempty" name:"MetaFps"`
 }
 
 type PushQualityData struct {
 	// The time of the data in the format of “%Y-%m-%d %H:%M:%S.%ms” (accurate to the millisecond).
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// The push domain.
-	PushDomain *string `json:"PushDomain,omitnil" name:"PushDomain"`
+	PushDomain *string `json:"PushDomain,omitnil,omitempty" name:"PushDomain"`
 
 	// The push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The IP address of the push client.
-	ClientIp *string `json:"ClientIp,omitnil" name:"ClientIp"`
+	ClientIp *string `json:"ClientIp,omitnil,omitempty" name:"ClientIp"`
 
 	// The push start time in the format of “%Y-%m-%d %H:%M:%S.%ms” (accurate to the millisecond).
-	BeginPushTime *string `json:"BeginPushTime,omitnil" name:"BeginPushTime"`
+	BeginPushTime *string `json:"BeginPushTime,omitnil,omitempty" name:"BeginPushTime"`
 
 	// The resolution.
-	Resolution *string `json:"Resolution,omitnil" name:"Resolution"`
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 
 	// The video codec.
-	VCodec *string `json:"VCodec,omitnil" name:"VCodec"`
+	VCodec *string `json:"VCodec,omitnil,omitempty" name:"VCodec"`
 
 	// The audio codec.
-	ACodec *string `json:"ACodec,omitnil" name:"ACodec"`
+	ACodec *string `json:"ACodec,omitnil,omitempty" name:"ACodec"`
 
 	// The push sequence number, which uniquely identifies a push.
-	Sequence *string `json:"Sequence,omitnil" name:"Sequence"`
+	Sequence *string `json:"Sequence,omitnil,omitempty" name:"Sequence"`
 
 	// The video frame rate.
-	VideoFps *uint64 `json:"VideoFps,omitnil" name:"VideoFps"`
+	VideoFps *uint64 `json:"VideoFps,omitnil,omitempty" name:"VideoFps"`
 
 	// The video bitrate (bps).
-	VideoRate *uint64 `json:"VideoRate,omitnil" name:"VideoRate"`
+	VideoRate *uint64 `json:"VideoRate,omitnil,omitempty" name:"VideoRate"`
 
 	// The audio frame rate.
-	AudioFps *uint64 `json:"AudioFps,omitnil" name:"AudioFps"`
+	AudioFps *uint64 `json:"AudioFps,omitnil,omitempty" name:"AudioFps"`
 
 	// The audio bitrate (bps).
-	AudioRate *uint64 `json:"AudioRate,omitnil" name:"AudioRate"`
+	AudioRate *uint64 `json:"AudioRate,omitnil,omitempty" name:"AudioRate"`
 
 	// The local elapsed time (milliseconds). The greater the difference between the local elapsed time and audio/video elapsed time, the poorer the push quality and the more severe the upstream lag.
-	LocalTs *uint64 `json:"LocalTs,omitnil" name:"LocalTs"`
+	LocalTs *uint64 `json:"LocalTs,omitnil,omitempty" name:"LocalTs"`
 
 	// The video elapsed time (milliseconds).
-	VideoTs *uint64 `json:"VideoTs,omitnil" name:"VideoTs"`
+	VideoTs *uint64 `json:"VideoTs,omitnil,omitempty" name:"VideoTs"`
 
 	// The audio elapsed time (milliseconds).
-	AudioTs *uint64 `json:"AudioTs,omitnil" name:"AudioTs"`
+	AudioTs *uint64 `json:"AudioTs,omitnil,omitempty" name:"AudioTs"`
 
 	// The video bitrate (Kbps) in the metadata.
-	MetaVideoRate *uint64 `json:"MetaVideoRate,omitnil" name:"MetaVideoRate"`
+	MetaVideoRate *uint64 `json:"MetaVideoRate,omitnil,omitempty" name:"MetaVideoRate"`
 
 	// The audio bitrate (Kbps) in the metadata.
-	MetaAudioRate *uint64 `json:"MetaAudioRate,omitnil" name:"MetaAudioRate"`
+	MetaAudioRate *uint64 `json:"MetaAudioRate,omitnil,omitempty" name:"MetaAudioRate"`
 
 	// The frame rate in the metadata.
-	MateFps *uint64 `json:"MateFps,omitnil" name:"MateFps"`
+	MateFps *uint64 `json:"MateFps,omitnil,omitempty" name:"MateFps"`
 
 	// The push parameter.
-	StreamParam *string `json:"StreamParam,omitnil" name:"StreamParam"`
+	StreamParam *string `json:"StreamParam,omitnil,omitempty" name:"StreamParam"`
 
 	// The bandwidth (Mbps).
-	Bandwidth *float64 `json:"Bandwidth,omitnil" name:"Bandwidth"`
+	Bandwidth *float64 `json:"Bandwidth,omitnil,omitempty" name:"Bandwidth"`
 
 	// The traffic (MB).
-	Flux *float64 `json:"Flux,omitnil" name:"Flux"`
+	Flux *float64 `json:"Flux,omitnil,omitempty" name:"Flux"`
 
 	// The IP address of the push client.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	ServerIp *string `json:"ServerIp,omitnil" name:"ServerIp"`
+	ServerIp *string `json:"ServerIp,omitnil,omitempty" name:"ServerIp"`
 }
 
 type RecentPullInfo struct {
 	// The URL of the file currently pulled.
-	FileUrl *string `json:"FileUrl,omitnil" name:"FileUrl"`
+	FileUrl *string `json:"FileUrl,omitnil,omitempty" name:"FileUrl"`
 
 	// The offset of the file currently pulled.
-	OffsetTime *uint64 `json:"OffsetTime,omitnil" name:"OffsetTime"`
+	OffsetTime *uint64 `json:"OffsetTime,omitnil,omitempty" name:"OffsetTime"`
 
 	// The time when the offset is reported, in UTC format.
 	// Example: 2020-07-23T03:20:39Z
 	// Note: Beijing time is 8 hours ahead of UTC.
-	ReportTime *string `json:"ReportTime,omitnil" name:"ReportTime"`
+	ReportTime *string `json:"ReportTime,omitnil,omitempty" name:"ReportTime"`
 
 	// The number of times looped.
-	LoopedTimes *int64 `json:"LoopedTimes,omitnil" name:"LoopedTimes"`
+	LoopedTimes *int64 `json:"LoopedTimes,omitnil,omitempty" name:"LoopedTimes"`
 }
 
 type RecordParam struct {
@@ -11032,18 +11032,18 @@ type RecordParam struct {
 	// Default value: `1800` (seconds)
 	// Value range: 30-7200
 	// This parameter is invalid for HLS. Only one HLS file will be generated from push start to push end.
-	RecordInterval *int64 `json:"RecordInterval,omitnil" name:"RecordInterval"`
+	RecordInterval *int64 `json:"RecordInterval,omitnil,omitempty" name:"RecordInterval"`
 
 	// Storage duration of the recording file
 	// Value range: 0-129600000 seconds (0-1500 days)
 	// `0`: permanent
-	StorageTime *int64 `json:"StorageTime,omitnil" name:"StorageTime"`
+	StorageTime *int64 `json:"StorageTime,omitnil,omitempty" name:"StorageTime"`
 
 	// Whether to enable recording in the current format. Default value: 0. 0: no, 1: yes.
-	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// VOD subapplication ID.
-	VodSubAppId *int64 `json:"VodSubAppId,omitnil" name:"VodSubAppId"`
+	VodSubAppId *int64 `json:"VodSubAppId,omitnil,omitempty" name:"VodSubAppId"`
 
 	// Recording filename.
 	// Supported special placeholders include:
@@ -11064,124 +11064,124 @@ type RecordParam struct {
 	// {EndMillisecond}: end time - millisecond
 	// 
 	// If this parameter is not set, the recording filename will be `{StreamID}_{StartYear}-{StartMonth}-{StartDay}-{StartHour}-{StartMinute}-{StartSecond}_{EndYear}-{EndMonth}-{EndDay}-{EndHour}-{EndMinute}-{EndSecond}` by default
-	VodFileName *string `json:"VodFileName,omitnil" name:"VodFileName"`
+	VodFileName *string `json:"VodFileName,omitnil,omitempty" name:"VodFileName"`
 
 	// Task flow
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	Procedure *string `json:"Procedure,omitnil" name:"Procedure"`
+	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
 
 	// Video storage class. Valid values:
 	// `normal`: STANDARD
 	// `cold`: STANDARD_IA
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	StorageMode *string `json:"StorageMode,omitnil" name:"StorageMode"`
+	StorageMode *string `json:"StorageMode,omitnil,omitempty" name:"StorageMode"`
 
 	// VOD subapplication category
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	ClassId *int64 `json:"ClassId,omitnil" name:"ClassId"`
+	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 }
 
 type RecordTask struct {
 	// Recording task ID.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The start time of the recording task in Unix timestamp. 
-	StartTime *uint64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end time of the recording task in Unix timestamp. 
-	EndTime *uint64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Recording template ID.
-	TemplateId *uint64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *uint64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The StopRecordTask API call stops the task at the Unix timestamp. A value of 0 indicates that the API has not been called to stop the task.
-	Stopped *uint64 `json:"Stopped,omitnil" name:"Stopped"`
+	Stopped *uint64 `json:"Stopped,omitnil,omitempty" name:"Stopped"`
 }
 
 type RecordTemplateInfo struct {
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Template name.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Message description
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// FLV recording parameter.
-	FlvParam *RecordParam `json:"FlvParam,omitnil" name:"FlvParam"`
+	FlvParam *RecordParam `json:"FlvParam,omitnil,omitempty" name:"FlvParam"`
 
 	// HLS recording parameter.
-	HlsParam *RecordParam `json:"HlsParam,omitnil" name:"HlsParam"`
+	HlsParam *RecordParam `json:"HlsParam,omitnil,omitempty" name:"HlsParam"`
 
 	// MP4 recording parameter.
-	Mp4Param *RecordParam `json:"Mp4Param,omitnil" name:"Mp4Param"`
+	Mp4Param *RecordParam `json:"Mp4Param,omitnil,omitempty" name:"Mp4Param"`
 
 	// AAC recording parameter.
-	AacParam *RecordParam `json:"AacParam,omitnil" name:"AacParam"`
+	AacParam *RecordParam `json:"AacParam,omitnil,omitempty" name:"AacParam"`
 
 	// 0: LVB,
 	// 1: LCB.
-	IsDelayLive *int64 `json:"IsDelayLive,omitnil" name:"IsDelayLive"`
+	IsDelayLive *int64 `json:"IsDelayLive,omitnil,omitempty" name:"IsDelayLive"`
 
 	// A special parameter for HLS recording.
-	HlsSpecialParam *HlsSpecialParam `json:"HlsSpecialParam,omitnil" name:"HlsSpecialParam"`
+	HlsSpecialParam *HlsSpecialParam `json:"HlsSpecialParam,omitnil,omitempty" name:"HlsSpecialParam"`
 
 	// MP3 recording parameter.
-	Mp3Param *RecordParam `json:"Mp3Param,omitnil" name:"Mp3Param"`
+	Mp3Param *RecordParam `json:"Mp3Param,omitnil,omitempty" name:"Mp3Param"`
 
 	// Whether the watermark is removed.
 	// Note: This field may return `null`, indicating that no valid value was found.
-	RemoveWatermark *bool `json:"RemoveWatermark,omitnil" name:"RemoveWatermark"`
+	RemoveWatermark *bool `json:"RemoveWatermark,omitnil,omitempty" name:"RemoveWatermark"`
 
 	// A special parameter for FLV recording.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
-	FlvSpecialParam *FlvSpecialParam `json:"FlvSpecialParam,omitnil" name:"FlvSpecialParam"`
+	FlvSpecialParam *FlvSpecialParam `json:"FlvSpecialParam,omitnil,omitempty" name:"FlvSpecialParam"`
 }
 
 type RefererAuthConfig struct {
 	// Domain name
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Whether to enable referer. Valid values: `0` (no), `1` (yes)
-	Enable *int64 `json:"Enable,omitnil" name:"Enable"`
+	Enable *int64 `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// List type. Valid values: `0` (blocklist), `1` (allowlist)
-	Type *int64 `json:"Type,omitnil" name:"Type"`
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Whether to allow empty referer. Valid values: `0` (no), `1` (yes)
-	AllowEmpty *int64 `json:"AllowEmpty,omitnil" name:"AllowEmpty"`
+	AllowEmpty *int64 `json:"AllowEmpty,omitnil,omitempty" name:"AllowEmpty"`
 
 	// Referer list. Separate items in it with semicolons (;).
-	Rules *string `json:"Rules,omitnil" name:"Rules"`
+	Rules *string `json:"Rules,omitnil,omitempty" name:"Rules"`
 }
 
 // Predefined struct for user
 type RestartLivePullStreamTaskRequestParams struct {
 	// Task Id.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// task operator.
-	Operator *string `json:"Operator,omitnil" name:"Operator"`
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 }
 
 type RestartLivePullStreamTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// Task Id.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// task operator.
-	Operator *string `json:"Operator,omitnil" name:"Operator"`
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 }
 
 func (r *RestartLivePullStreamTaskRequest) ToJsonString() string {
@@ -11207,7 +11207,7 @@ func (r *RestartLivePullStreamTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RestartLivePullStreamTaskResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RestartLivePullStreamTaskResponse struct {
@@ -11229,26 +11229,26 @@ func (r *RestartLivePullStreamTaskResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ResumeDelayLiveStreamRequestParams struct {
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 type ResumeDelayLiveStreamRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 func (r *ResumeDelayLiveStreamRequest) ToJsonString() string {
@@ -11275,7 +11275,7 @@ func (r *ResumeDelayLiveStreamRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ResumeDelayLiveStreamResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ResumeDelayLiveStreamResponse struct {
@@ -11297,26 +11297,26 @@ func (r *ResumeDelayLiveStreamResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ResumeLiveStreamRequestParams struct {
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Your push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 type ResumeLiveStreamRequest struct {
 	*tchttp.BaseRequest
 	
 	// Push path, which is the same as the AppName in push and playback addresses and is "live" by default.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Your push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 func (r *ResumeLiveStreamRequest) ToJsonString() string {
@@ -11343,7 +11343,7 @@ func (r *ResumeLiveStreamRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ResumeLiveStreamResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ResumeLiveStreamResponse struct {
@@ -11365,84 +11365,84 @@ func (r *ResumeLiveStreamResponse) FromJsonString(s string) error {
 type RuleInfo struct {
 	// The rule creation time.
 	// Note: Beijing time (UTC+8) is used.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The rule update time.
 	// Note: Beijing time (UTC+8) is used.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 }
 
 type SnapshotTemplateInfo struct {
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Template name.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Screencapturing interval. Value range: 5-300s.
-	SnapshotInterval *int64 `json:"SnapshotInterval,omitnil" name:"SnapshotInterval"`
+	SnapshotInterval *int64 `json:"SnapshotInterval,omitnil,omitempty" name:"SnapshotInterval"`
 
 	// Screenshot width. Value range: 0-3000. 
 	// 0: original width and fit to the original ratio.
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Screenshot height. Value range: 0-2000.
 	// 0: original height and fit to the original ratio.
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// Whether to enable porn detection. 0: no, 1: yes.
-	PornFlag *int64 `json:"PornFlag,omitnil" name:"PornFlag"`
+	PornFlag *int64 `json:"PornFlag,omitnil,omitempty" name:"PornFlag"`
 
 	// COS application ID.
-	CosAppId *int64 `json:"CosAppId,omitnil" name:"CosAppId"`
+	CosAppId *int64 `json:"CosAppId,omitnil,omitempty" name:"CosAppId"`
 
 	// COS bucket name.
-	CosBucket *string `json:"CosBucket,omitnil" name:"CosBucket"`
+	CosBucket *string `json:"CosBucket,omitnil,omitempty" name:"CosBucket"`
 
 	// COS region.
-	CosRegion *string `json:"CosRegion,omitnil" name:"CosRegion"`
+	CosRegion *string `json:"CosRegion,omitnil,omitempty" name:"CosRegion"`
 
 	// Template description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// COS bucket folder prefix.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CosPrefix *string `json:"CosPrefix,omitnil" name:"CosPrefix"`
+	CosPrefix *string `json:"CosPrefix,omitnil,omitempty" name:"CosPrefix"`
 
 	// COS filename.
 	// Note: this field may return null, indicating that no valid values can be obtained.
-	CosFileName *string `json:"CosFileName,omitnil" name:"CosFileName"`
+	CosFileName *string `json:"CosFileName,omitnil,omitempty" name:"CosFileName"`
 }
 
 // Predefined struct for user
 type StopLiveRecordRequestParams struct {
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Task ID returned by the `CreateLiveRecord` API.
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type StopLiveRecordRequest struct {
 	*tchttp.BaseRequest
 	
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Task ID returned by the `CreateLiveRecord` API.
-	TaskId *int64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *int64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 func (r *StopLiveRecordRequest) ToJsonString() string {
@@ -11468,7 +11468,7 @@ func (r *StopLiveRecordRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StopLiveRecordResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StopLiveRecordResponse struct {
@@ -11490,14 +11490,14 @@ func (r *StopLiveRecordResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type StopRecordTaskRequestParams struct {
 	// Recording task ID.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type StopRecordTaskRequest struct {
 	*tchttp.BaseRequest
 	
 	// Recording task ID.
-	TaskId *string `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 func (r *StopRecordTaskRequest) ToJsonString() string {
@@ -11522,7 +11522,7 @@ func (r *StopRecordTaskRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type StopRecordTaskResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type StopRecordTaskResponse struct {
@@ -11543,296 +11543,296 @@ func (r *StopRecordTaskResponse) FromJsonString(s string) error {
 
 type StreamEventInfo struct {
 	// Application name.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Push start time.
 	// In UTC format, such as 2019-01-07T12:00:00Z.
-	StreamStartTime *string `json:"StreamStartTime,omitnil" name:"StreamStartTime"`
+	StreamStartTime *string `json:"StreamStartTime,omitnil,omitempty" name:"StreamStartTime"`
 
 	// Push end time.
 	// In UTC format, such as 2019-01-07T15:00:00Z.
-	StreamEndTime *string `json:"StreamEndTime,omitnil" name:"StreamEndTime"`
+	StreamEndTime *string `json:"StreamEndTime,omitnil,omitempty" name:"StreamEndTime"`
 
 	// Stop reason.
-	StopReason *string `json:"StopReason,omitnil" name:"StopReason"`
+	StopReason *string `json:"StopReason,omitnil,omitempty" name:"StopReason"`
 
 	// Push duration in seconds.
-	Duration *uint64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// The IP address of the host.
 	// If the stream is published from a private network, this parameter will be `-`.
-	ClientIp *string `json:"ClientIp,omitnil" name:"ClientIp"`
+	ClientIp *string `json:"ClientIp,omitnil,omitempty" name:"ClientIp"`
 
 	// Resolution.
-	Resolution *string `json:"Resolution,omitnil" name:"Resolution"`
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 }
 
 type StreamName struct {
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Application name.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Push start time.
 	// In UTC format, such as 2019-01-07T12:00:00Z.
-	StreamStartTime *string `json:"StreamStartTime,omitnil" name:"StreamStartTime"`
+	StreamStartTime *string `json:"StreamStartTime,omitnil,omitempty" name:"StreamStartTime"`
 
 	// Push end time.
 	// In UTC format, such as 2019-01-07T15:00:00Z.
-	StreamEndTime *string `json:"StreamEndTime,omitnil" name:"StreamEndTime"`
+	StreamEndTime *string `json:"StreamEndTime,omitnil,omitempty" name:"StreamEndTime"`
 
 	// Stop reason.
-	StopReason *string `json:"StopReason,omitnil" name:"StopReason"`
+	StopReason *string `json:"StopReason,omitnil,omitempty" name:"StopReason"`
 
 	// Push duration in seconds.
-	Duration *uint64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Host IP.
-	ClientIp *string `json:"ClientIp,omitnil" name:"ClientIp"`
+	ClientIp *string `json:"ClientIp,omitnil,omitempty" name:"ClientIp"`
 
 	// Resolution.
-	Resolution *string `json:"Resolution,omitnil" name:"Resolution"`
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 }
 
 type StreamOnlineInfo struct {
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Push time list
-	PublishTimeList []*PublishTime `json:"PublishTimeList,omitnil" name:"PublishTimeList"`
+	PublishTimeList []*PublishTime `json:"PublishTimeList,omitnil,omitempty" name:"PublishTimeList"`
 
 	// Application name.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// Push domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 }
 
 type TemplateInfo struct {
 	// Codec: h264/h265/origin. Default value: h264.
 	// 
 	// origin: keep the original codec.
-	Vcodec *string `json:"Vcodec,omitnil" name:"Vcodec"`
+	Vcodec *string `json:"Vcodec,omitnil,omitempty" name:"Vcodec"`
 
 	// Video bitrate. Value range: 0–8,000 Kbps.
 	// If the value is 0, the original bitrate will be retained.
 	// Note: transcoding templates require a unique bitrate. The final saved bitrate may differ from the input bitrate.
-	VideoBitrate *int64 `json:"VideoBitrate,omitnil" name:"VideoBitrate"`
+	VideoBitrate *int64 `json:"VideoBitrate,omitnil,omitempty" name:"VideoBitrate"`
 
 	// Audio codec: aac. Default value: aac.
 	// Note: This parameter will not take effect for now and will be supported soon.
-	Acodec *string `json:"Acodec,omitnil" name:"Acodec"`
+	Acodec *string `json:"Acodec,omitnil,omitempty" name:"Acodec"`
 
 	// Audio bitrate. Value range: 0–500 Kbps.
 	// 0 by default.
-	AudioBitrate *int64 `json:"AudioBitrate,omitnil" name:"AudioBitrate"`
+	AudioBitrate *int64 `json:"AudioBitrate,omitnil,omitempty" name:"AudioBitrate"`
 
 	// Width. Default value: 0.
 	// Value range: [0-3,000].
 	// The value must be a multiple of 2. The original width is 0.
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Height. Default value: 0.
 	// Value range: [0-3,000].
 	// The value must be a multiple of 2. The original width is 0.
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// Frame rate. Default value: 0.
 	// Range: 0-60 Fps.
-	Fps *int64 `json:"Fps,omitnil" name:"Fps"`
+	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 
 	// Keyframe interval, unit: second.
 	// Original interval by default
 	// Range: 2-6
-	Gop *int64 `json:"Gop,omitnil" name:"Gop"`
+	Gop *int64 `json:"Gop,omitnil,omitempty" name:"Gop"`
 
 	// Rotation angle. Default value: 0.
 	// Value range: 0, 90, 180, 270
-	Rotate *int64 `json:"Rotate,omitnil" name:"Rotate"`
+	Rotate *int64 `json:"Rotate,omitnil,omitempty" name:"Rotate"`
 
 	// Encoding quality:
 	// baseline/main/high. Default value: baseline.
-	Profile *string `json:"Profile,omitnil" name:"Profile"`
+	Profile *string `json:"Profile,omitnil,omitempty" name:"Profile"`
 
 	// Whether to use the original bitrate when the set bitrate is larger than the original bitrate.
 	// 0: no, 1: yes
 	// Default value: 0.
-	BitrateToOrig *int64 `json:"BitrateToOrig,omitnil" name:"BitrateToOrig"`
+	BitrateToOrig *int64 `json:"BitrateToOrig,omitnil,omitempty" name:"BitrateToOrig"`
 
 	// Whether to use the original height when the set height is higher than the original height.
 	// 0: no, 1: yes
 	// Default value: 0.
-	HeightToOrig *int64 `json:"HeightToOrig,omitnil" name:"HeightToOrig"`
+	HeightToOrig *int64 `json:"HeightToOrig,omitnil,omitempty" name:"HeightToOrig"`
 
 	// Whether to use the original frame rate when the set frame rate is larger than the original frame rate.
 	// 0: no, 1: yes
 	// Default value: 0.
-	FpsToOrig *int64 `json:"FpsToOrig,omitnil" name:"FpsToOrig"`
+	FpsToOrig *int64 `json:"FpsToOrig,omitnil,omitempty" name:"FpsToOrig"`
 
 	// Whether to keep the video. 0: no; 1: yes.
-	NeedVideo *int64 `json:"NeedVideo,omitnil" name:"NeedVideo"`
+	NeedVideo *int64 `json:"NeedVideo,omitnil,omitempty" name:"NeedVideo"`
 
 	// Whether to keep the audio. 0: no; 1: yes.
-	NeedAudio *int64 `json:"NeedAudio,omitnil" name:"NeedAudio"`
+	NeedAudio *int64 `json:"NeedAudio,omitnil,omitempty" name:"NeedAudio"`
 
 	// Template ID.
-	TemplateId *int64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *int64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Template name.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// Template description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Whether it is a top speed codec template. 0: no, 1: yes. Default value: 0.
-	AiTransCode *int64 `json:"AiTransCode,omitnil" name:"AiTransCode"`
+	AiTransCode *int64 `json:"AiTransCode,omitnil,omitempty" name:"AiTransCode"`
 
 	// Bitrate compression ratio of top speed code video.
 	// Target bitrate of top speed code = VideoBitrate * (1-AdaptBitratePercent)
 	// 
 	// Value range: 0.0-0.5.
-	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitnil" name:"AdaptBitratePercent"`
+	AdaptBitratePercent *float64 `json:"AdaptBitratePercent,omitnil,omitempty" name:"AdaptBitratePercent"`
 
 	// Whether to take the shorter side as height. 0: no, 1: yes. Default value: 0.
 	// Note: this field may return `null`, indicating that no valid value is obtained.
-	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitnil" name:"ShortEdgeAsHeight"`
+	ShortEdgeAsHeight *int64 `json:"ShortEdgeAsHeight,omitnil,omitempty" name:"ShortEdgeAsHeight"`
 
 	// The DRM encryption type. Valid values: fairplay, normalaes, widevine.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DRMType *string `json:"DRMType,omitnil" name:"DRMType"`
+	DRMType *string `json:"DRMType,omitnil,omitempty" name:"DRMType"`
 
 	// The tracks to encrypt. Valid values: AUDIO, SD, HD, UHD1, UHD2. Separate multiple tracks with “|”. You can choose only one video track (SD, HD, UHD1, or UHD2).
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DRMTracks *string `json:"DRMTracks,omitnil" name:"DRMTracks"`
+	DRMTracks *string `json:"DRMTracks,omitnil,omitempty" name:"DRMTracks"`
 }
 
 type TimeShiftBillData struct {
 	// The push domain name.
-	Domain *string `json:"Domain,omitnil" name:"Domain"`
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// The time-shift video length (minutes).
-	Duration *float64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// The time-shift days.
-	StoragePeriod *float64 `json:"StoragePeriod,omitnil" name:"StoragePeriod"`
+	StoragePeriod *float64 `json:"StoragePeriod,omitnil,omitempty" name:"StoragePeriod"`
 
 	// The time for the data returned. Format: YYYY-MM-DDThh:mm:ssZ.
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// The total time-shift duration (minutes).
-	TotalDuration *float64 `json:"TotalDuration,omitnil" name:"TotalDuration"`
+	TotalDuration *float64 `json:"TotalDuration,omitnil,omitempty" name:"TotalDuration"`
 }
 
 type TimeShiftRecord struct {
 	// The session ID.
-	Sid *string `json:"Sid,omitnil" name:"Sid"`
+	Sid *string `json:"Sid,omitnil,omitempty" name:"Sid"`
 
 	// The recording start time, which is a Unix timestamp.
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The recording end time, which is a Unix timestamp.
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type TimeShiftStreamInfo struct {
 	// The group the push domain belongs to.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	DomainGroup *string `json:"DomainGroup,omitnil" name:"DomainGroup"`
+	DomainGroup *string `json:"DomainGroup,omitnil,omitempty" name:"DomainGroup"`
 
 	// The push domain.
-	Domain *string `json:"Domain,omitnil" name:"Domain"`
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
 	// The push path.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// The stream start time, which is a Unix timestamp.
-	StartTime *int64 `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The stream end time (for streams that ended before the time of query), which is a Unix timestamp.
-	EndTime *int64 `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The transcoding template ID.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	TransCodeId *uint64 `json:"TransCodeId,omitnil" name:"TransCodeId"`
+	TransCodeId *uint64 `json:"TransCodeId,omitnil,omitempty" name:"TransCodeId"`
 
 	// The stream type. `0`: The original stream; `1`: The watermarked stream; `2`: The transcoded stream.
-	StreamType *int64 `json:"StreamType,omitnil" name:"StreamType"`
+	StreamType *int64 `json:"StreamType,omitnil,omitempty" name:"StreamType"`
 
 	// The storage duration (seconds) of the recording.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	Duration *uint64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 }
 
 type TimeShiftTemplate struct {
 	// The template name.
-	TemplateName *string `json:"TemplateName,omitnil" name:"TemplateName"`
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
 
 	// The time shifting duration.
 	// Unit: second
-	Duration *uint64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// The segment size.
 	// Value range: 3-10.
 	// Unit: Second.
 	// Default value: 5
-	ItemDuration *uint64 `json:"ItemDuration,omitnil" name:"ItemDuration"`
+	ItemDuration *uint64 `json:"ItemDuration,omitnil,omitempty" name:"ItemDuration"`
 
 	// The template ID.
-	TemplateId *uint64 `json:"TemplateId,omitnil" name:"TemplateId"`
+	TemplateId *uint64 `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// The template description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// The region. Valid values:
 	// `Mainland`: The Chinese mainland.
 	// `Overseas`: Outside the Chinese mainland.
 	// Default value: `Mainland`.
-	Area *string `json:"Area,omitnil" name:"Area"`
+	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Whether to remove watermarks.
 	// If you pass in `true`, the original stream will be recorded.
 	// Default value: `false`.
-	RemoveWatermark *bool `json:"RemoveWatermark,omitnil" name:"RemoveWatermark"`
+	RemoveWatermark *bool `json:"RemoveWatermark,omitnil,omitempty" name:"RemoveWatermark"`
 
 	// The transcoding template IDs.
 	// This API works only if `RemoveWatermark` is `false`.
-	TranscodeTemplateIds []*uint64 `json:"TranscodeTemplateIds,omitnil" name:"TranscodeTemplateIds"`
+	TranscodeTemplateIds []*uint64 `json:"TranscodeTemplateIds,omitnil,omitempty" name:"TranscodeTemplateIds"`
 }
 
 type TimeValue struct {
 	// UTC time in the format of `yyyy-mm-ddTHH:MM:SSZ`.
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Value.
-	Num *uint64 `json:"Num,omitnil" name:"Num"`
+	Num *uint64 `json:"Num,omitnil,omitempty" name:"Num"`
 }
 
 type TranscodeDetailInfo struct {
 	// Stream name.
-	StreamName *string `json:"StreamName,omitnil" name:"StreamName"`
+	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
 	// Start time (Beijing time) in the format of `yyyy-mm-dd HH:MM`.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time (Beijing time) in the format of `yyyy-mm-dd HH:MM`.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Transcoding duration in minutes.
 	// Note: given the possible interruptions during push, duration here is the sum of actual duration of transcoding instead of the interval between the start time and end time.
-	Duration *uint64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Codec with modules,
 	// Example:
@@ -11840,44 +11840,44 @@ type TranscodeDetailInfo struct {
 	// liveprocessor_H265: LVB transcoding - H265,
 	// topspeed_H264: top speed codec - H264,
 	// topspeed_H265: top speed codec - H265.
-	ModuleCodec *string `json:"ModuleCodec,omitnil" name:"ModuleCodec"`
+	ModuleCodec *string `json:"ModuleCodec,omitnil,omitempty" name:"ModuleCodec"`
 
 	// Bitrate.
-	Bitrate *uint64 `json:"Bitrate,omitnil" name:"Bitrate"`
+	Bitrate *uint64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
 	// The task type. Valid values: Transcode, MixStream, WaterMark, Webrtc.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Push domain name.
-	PushDomain *string `json:"PushDomain,omitnil" name:"PushDomain"`
+	PushDomain *string `json:"PushDomain,omitnil,omitempty" name:"PushDomain"`
 
 	// Resolution.
-	Resolution *string `json:"Resolution,omitnil" name:"Resolution"`
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 
 	// The region. Valid values:
 	// `Mainland`: Inside the Chinese mainland.
 	// `Overseas`: Outside the Chinese mainland.
-	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil" name:"MainlandOrOversea"`
+	MainlandOrOversea *string `json:"MainlandOrOversea,omitnil,omitempty" name:"MainlandOrOversea"`
 }
 
 type TranscodeTaskNum struct {
 	// The time of query.
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// The bitrate.
-	CodeRate *uint64 `json:"CodeRate,omitnil" name:"CodeRate"`
+	CodeRate *uint64 `json:"CodeRate,omitnil,omitempty" name:"CodeRate"`
 
 	// The number of tasks.
-	Num *uint64 `json:"Num,omitnil" name:"Num"`
+	Num *uint64 `json:"Num,omitnil,omitempty" name:"Num"`
 }
 
 type TranscodeTotalInfo struct {
 	// Usage time (Beijing time)
 	// Example: 2019-03-01 00:00:00
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Transcoding duration in minutes
-	Duration *uint64 `json:"Duration,omitnil" name:"Duration"`
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// Codec, with modules
 	// Examples:
@@ -11885,38 +11885,38 @@ type TranscodeTotalInfo struct {
 	// `liveprocessor_H265`: live transcoding-H265
 	// `topspeed_H264`: top speed codec-H264
 	// `topspeed_H265`: top speed codec-H265
-	ModuleCodec *string `json:"ModuleCodec,omitnil" name:"ModuleCodec"`
+	ModuleCodec *string `json:"ModuleCodec,omitnil,omitempty" name:"ModuleCodec"`
 
 	// Resolution
 	// Example: 540*480
-	Resolution *string `json:"Resolution,omitnil" name:"Resolution"`
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 }
 
 // Predefined struct for user
 type UnBindLiveDomainCertRequestParams struct {
 	// Playback domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Valid values:
 	// `gray`: unbind the canary certificate
 	// `formal` (default): unbind the formal certificate
 	// 
 	// `formal` will be used if no value is passed in
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type UnBindLiveDomainCertRequest struct {
 	*tchttp.BaseRequest
 	
 	// Playback domain name.
-	DomainName *string `json:"DomainName,omitnil" name:"DomainName"`
+	DomainName *string `json:"DomainName,omitnil,omitempty" name:"DomainName"`
 
 	// Valid values:
 	// `gray`: unbind the canary certificate
 	// `formal` (default): unbind the formal certificate
 	// 
 	// `formal` will be used if no value is passed in
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 func (r *UnBindLiveDomainCertRequest) ToJsonString() string {
@@ -11942,7 +11942,7 @@ func (r *UnBindLiveDomainCertRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UnBindLiveDomainCertResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type UnBindLiveDomainCertResponse struct {
@@ -11965,28 +11965,28 @@ func (r *UnBindLiveDomainCertResponse) FromJsonString(s string) error {
 type UpdateLiveWatermarkRequestParams struct {
 	// Watermark ID.
 	// Get the watermark ID in the returned value of the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API call.
-	WatermarkId *int64 `json:"WatermarkId,omitnil" name:"WatermarkId"`
+	WatermarkId *int64 `json:"WatermarkId,omitnil,omitempty" name:"WatermarkId"`
 
 	// Watermark image URL.
 	// Unallowed characters in the URL:
 	//  ;(){}$>`#"\'|
-	PictureUrl *string `json:"PictureUrl,omitnil" name:"PictureUrl"`
+	PictureUrl *string `json:"PictureUrl,omitnil,omitempty" name:"PictureUrl"`
 
 	// Display position: X-axis offset in %. Default value: 0.
-	XPosition *int64 `json:"XPosition,omitnil" name:"XPosition"`
+	XPosition *int64 `json:"XPosition,omitnil,omitempty" name:"XPosition"`
 
 	// Display position: Y-axis offset in %. Default value: 0.
-	YPosition *int64 `json:"YPosition,omitnil" name:"YPosition"`
+	YPosition *int64 `json:"YPosition,omitnil,omitempty" name:"YPosition"`
 
 	// Watermark name.
 	// Up to 16 bytes.
-	WatermarkName *string `json:"WatermarkName,omitnil" name:"WatermarkName"`
+	WatermarkName *string `json:"WatermarkName,omitnil,omitempty" name:"WatermarkName"`
 
 	// Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original height is used by default.
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 }
 
 type UpdateLiveWatermarkRequest struct {
@@ -11994,28 +11994,28 @@ type UpdateLiveWatermarkRequest struct {
 	
 	// Watermark ID.
 	// Get the watermark ID in the returned value of the [AddLiveWatermark](https://intl.cloud.tencent.com/document/product/267/30154?from_cn_redirect=1) API call.
-	WatermarkId *int64 `json:"WatermarkId,omitnil" name:"WatermarkId"`
+	WatermarkId *int64 `json:"WatermarkId,omitnil,omitempty" name:"WatermarkId"`
 
 	// Watermark image URL.
 	// Unallowed characters in the URL:
 	//  ;(){}$>`#"\'|
-	PictureUrl *string `json:"PictureUrl,omitnil" name:"PictureUrl"`
+	PictureUrl *string `json:"PictureUrl,omitnil,omitempty" name:"PictureUrl"`
 
 	// Display position: X-axis offset in %. Default value: 0.
-	XPosition *int64 `json:"XPosition,omitnil" name:"XPosition"`
+	XPosition *int64 `json:"XPosition,omitnil,omitempty" name:"XPosition"`
 
 	// Display position: Y-axis offset in %. Default value: 0.
-	YPosition *int64 `json:"YPosition,omitnil" name:"YPosition"`
+	YPosition *int64 `json:"YPosition,omitnil,omitempty" name:"YPosition"`
 
 	// Watermark name.
 	// Up to 16 bytes.
-	WatermarkName *string `json:"WatermarkName,omitnil" name:"WatermarkName"`
+	WatermarkName *string `json:"WatermarkName,omitnil,omitempty" name:"WatermarkName"`
 
 	// Watermark width or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original width is used by default.
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Watermark height or its percentage of the live streaming video width. It is recommended to just specify either height or width as the other will be scaled proportionally to avoid distortions. The original height is used by default.
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 }
 
 func (r *UpdateLiveWatermarkRequest) ToJsonString() string {
@@ -12046,7 +12046,7 @@ func (r *UpdateLiveWatermarkRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type UpdateLiveWatermarkResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type UpdateLiveWatermarkResponse struct {
@@ -12067,30 +12067,30 @@ func (r *UpdateLiveWatermarkResponse) FromJsonString(s string) error {
 
 type WatermarkInfo struct {
 	// Watermark ID.
-	WatermarkId *int64 `json:"WatermarkId,omitnil" name:"WatermarkId"`
+	WatermarkId *int64 `json:"WatermarkId,omitnil,omitempty" name:"WatermarkId"`
 
 	// Watermark image URL.
-	PictureUrl *string `json:"PictureUrl,omitnil" name:"PictureUrl"`
+	PictureUrl *string `json:"PictureUrl,omitnil,omitempty" name:"PictureUrl"`
 
 	// Display position: X-axis offset.
-	XPosition *int64 `json:"XPosition,omitnil" name:"XPosition"`
+	XPosition *int64 `json:"XPosition,omitnil,omitempty" name:"XPosition"`
 
 	// Display position: Y-axis offset.
-	YPosition *int64 `json:"YPosition,omitnil" name:"YPosition"`
+	YPosition *int64 `json:"YPosition,omitnil,omitempty" name:"YPosition"`
 
 	// Watermark name.
-	WatermarkName *string `json:"WatermarkName,omitnil" name:"WatermarkName"`
+	WatermarkName *string `json:"WatermarkName,omitnil,omitempty" name:"WatermarkName"`
 
 	// Current status. 0: not used. 1: in use.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The time when the watermark was added.
 	// Note: Beijing time (UTC+8) is used.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Watermark width.
-	Width *int64 `json:"Width,omitnil" name:"Width"`
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Watermark height.
-	Height *int64 `json:"Height,omitnil" name:"Height"`
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
 }

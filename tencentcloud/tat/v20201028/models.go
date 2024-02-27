@@ -22,49 +22,49 @@ import (
 
 type AutomationAgentInfo struct {
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Agent version.
-	Version *string `json:"Version,omitnil" name:"Version"`
+	Version *string `json:"Version,omitnil,omitempty" name:"Version"`
 
 	// Last heartbeat time
-	LastHeartbeatTime *string `json:"LastHeartbeatTime,omitnil" name:"LastHeartbeatTime"`
+	LastHeartbeatTime *string `json:"LastHeartbeatTime,omitnil,omitempty" name:"LastHeartbeatTime"`
 
 	// Agent status. Valid values:
 	// <li> `Online`
 	// <li> `Offline`
-	AgentStatus *string `json:"AgentStatus,omitnil" name:"AgentStatus"`
+	AgentStatus *string `json:"AgentStatus,omitnil,omitempty" name:"AgentStatus"`
 
 	// Agent runtime environment. Valid values:
 	// <li> `Linux`: Linux instance
 	// <li> `Windows`: Windows instance
-	Environment *string `json:"Environment,omitnil" name:"Environment"`
+	Environment *string `json:"Environment,omitnil,omitempty" name:"Environment"`
 
 	// Features supported by the TAT agent.
-	SupportFeatures []*string `json:"SupportFeatures,omitnil" name:"SupportFeatures"`
+	SupportFeatures []*string `json:"SupportFeatures,omitnil,omitempty" name:"SupportFeatures"`
 }
 
 // Predefined struct for user
 type CancelInvocationRequestParams struct {
 	// Execution activity ID
-	InvocationId *string `json:"InvocationId,omitnil" name:"InvocationId"`
+	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
 	// Instance ID list. A maximum of 100 IDs are allowed. Supported instance types:
 	// <li> `CVM`
 	// <li> `LIGHTHOUSE`
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 type CancelInvocationRequest struct {
 	*tchttp.BaseRequest
 	
 	// Execution activity ID
-	InvocationId *string `json:"InvocationId,omitnil" name:"InvocationId"`
+	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
 	// Instance ID list. A maximum of 100 IDs are allowed. Supported instance types:
 	// <li> `CVM`
 	// <li> `LIGHTHOUSE`
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 }
 
 func (r *CancelInvocationRequest) ToJsonString() string {
@@ -90,7 +90,7 @@ func (r *CancelInvocationRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CancelInvocationResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CancelInvocationResponse struct {
@@ -111,177 +111,177 @@ func (r *CancelInvocationResponse) FromJsonString(s string) error {
 
 type Command struct {
 	// Command ID.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Command name.
-	CommandName *string `json:"CommandName,omitnil" name:"CommandName"`
+	CommandName *string `json:"CommandName,omitnil,omitempty" name:"CommandName"`
 
 	// Command description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Base64-encoded command.
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// Command type.
-	CommandType *string `json:"CommandType,omitnil" name:"CommandType"`
+	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
 	// Command execution path.
-	WorkingDirectory *string `json:"WorkingDirectory,omitnil" name:"WorkingDirectory"`
+	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
 	// Command timeout period.
-	Timeout *uint64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Command creation time.
-	CreatedTime *string `json:"CreatedTime,omitnil" name:"CreatedTime"`
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
 	// Command update time.
-	UpdatedTime *string `json:"UpdatedTime,omitnil" name:"UpdatedTime"`
+	UpdatedTime *string `json:"UpdatedTime,omitnil,omitempty" name:"UpdatedTime"`
 
 	// Whether to enable the custom parameter feature.
-	EnableParameter *bool `json:"EnableParameter,omitnil" name:"EnableParameter"`
+	EnableParameter *bool `json:"EnableParameter,omitnil,omitempty" name:"EnableParameter"`
 
 	// Default custom parameter value.
-	DefaultParameters *string `json:"DefaultParameters,omitnil" name:"DefaultParameters"`
+	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
 	// Formatted description of the command. This parameter is an empty string for user commands and contains values for public commands.
-	FormattedDescription *string `json:"FormattedDescription,omitnil" name:"FormattedDescription"`
+	FormattedDescription *string `json:"FormattedDescription,omitnil,omitempty" name:"FormattedDescription"`
 
 	// Command creator. `TAT` indicates a public command and `USER` indicates a personal command.
-	CreatedBy *string `json:"CreatedBy,omitnil" name:"CreatedBy"`
+	CreatedBy *string `json:"CreatedBy,omitnil,omitempty" name:"CreatedBy"`
 
 	// The list of tags bound to the command.
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// The user who executes the command on the instance.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// The COS bucket URL for uploading logs.
-	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil" name:"OutputCOSBucketUrl"`
+	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
 	// The COS bucket directory where the logs are saved.
-	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil" name:"OutputCOSKeyPrefix"`
+	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
 type CommandDocument struct {
 	// Base64-encoded command.
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// Command type.
-	CommandType *string `json:"CommandType,omitnil" name:"CommandType"`
+	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
 	// Timeout period.
-	Timeout *uint64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Execution path.
-	WorkingDirectory *string `json:"WorkingDirectory,omitnil" name:"WorkingDirectory"`
+	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
 	// The user who executes the command.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// URL of the COS bucket to store the output
-	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil" name:"OutputCOSBucketUrl"`
+	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
 	// Prefix of the output file name 
-	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil" name:"OutputCOSKeyPrefix"`
+	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
 // Predefined struct for user
 type CreateCommandRequestParams struct {
 	// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
-	CommandName *string `json:"CommandName,omitnil" name:"CommandName"`
+	CommandName *string `json:"CommandName,omitnil,omitempty" name:"CommandName"`
 
 	// Base64-encoded command. The maximum length is 64 KB.
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// Command description. The maximum length is 120 characters.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Command type. `SHELL` and `POWERSHELL` are supported. The default value is `SHELL`.
-	CommandType *string `json:"CommandType,omitnil" name:"CommandType"`
+	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
 	// Command execution path. The default value is /root for `SHELL` commands and C:\Program Files\qcloud\tat_agent\workdir for `POWERSHELL` commands.
-	WorkingDirectory *string `json:"WorkingDirectory,omitnil" name:"WorkingDirectory"`
+	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
 	// Command timeout period. Default value: 60 seconds. Value range: [1, 86400].
-	Timeout *uint64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Whether to enable the custom parameter feature.
 	// This cannot be modified once created.
 	// Default value: `false`.
-	EnableParameter *bool `json:"EnableParameter,omitnil" name:"EnableParameter"`
+	EnableParameter *bool `json:"EnableParameter,omitnil,omitempty" name:"EnableParameter"`
 
 	// The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
 	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
 	// If no parameter value is provided in the `InvokeCommand` API, the default value is used.
 	// Up to 20 custom parameters are supported.
 	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
-	DefaultParameters *string `json:"DefaultParameters,omitnil" name:"DefaultParameters"`
+	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
 	// Tags bound to the command. At most 10 tags are allowed.
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// The username used to execute the command on the CVM or Lighthouse instance.
 	// The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user. By default, the root user is used to execute commands on Linux and the System user is used on Windows.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// The COS bucket URL for uploading logs. The URL must start with `https`, such as `https://BucketName-123454321.cos.ap-beijing.myqcloud.com`.
-	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil" name:"OutputCOSBucketUrl"`
+	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
 	// The COS bucket directory where the logs are saved. Check below for the rules of the directory name. 
 	// 1. It must be a combination of number, letters, and visible characters. Up to 60 characters are allowed.
 	// 2. Use a slash (/) to create a subdirectory.
 	// 3. Consecutive dots (.) and slashes (/) are not allowed. It can not start with a slash (/). 
-	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil" name:"OutputCOSKeyPrefix"`
+	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
 type CreateCommandRequest struct {
 	*tchttp.BaseRequest
 	
 	// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
-	CommandName *string `json:"CommandName,omitnil" name:"CommandName"`
+	CommandName *string `json:"CommandName,omitnil,omitempty" name:"CommandName"`
 
 	// Base64-encoded command. The maximum length is 64 KB.
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// Command description. The maximum length is 120 characters.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Command type. `SHELL` and `POWERSHELL` are supported. The default value is `SHELL`.
-	CommandType *string `json:"CommandType,omitnil" name:"CommandType"`
+	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
 	// Command execution path. The default value is /root for `SHELL` commands and C:\Program Files\qcloud\tat_agent\workdir for `POWERSHELL` commands.
-	WorkingDirectory *string `json:"WorkingDirectory,omitnil" name:"WorkingDirectory"`
+	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
 	// Command timeout period. Default value: 60 seconds. Value range: [1, 86400].
-	Timeout *uint64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Whether to enable the custom parameter feature.
 	// This cannot be modified once created.
 	// Default value: `false`.
-	EnableParameter *bool `json:"EnableParameter,omitnil" name:"EnableParameter"`
+	EnableParameter *bool `json:"EnableParameter,omitnil,omitempty" name:"EnableParameter"`
 
 	// The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
 	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
 	// If no parameter value is provided in the `InvokeCommand` API, the default value is used.
 	// Up to 20 custom parameters are supported.
 	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
-	DefaultParameters *string `json:"DefaultParameters,omitnil" name:"DefaultParameters"`
+	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
 	// Tags bound to the command. At most 10 tags are allowed.
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// The username used to execute the command on the CVM or Lighthouse instance.
 	// The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user. By default, the root user is used to execute commands on Linux and the System user is used on Windows.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// The COS bucket URL for uploading logs. The URL must start with `https`, such as `https://BucketName-123454321.cos.ap-beijing.myqcloud.com`.
-	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil" name:"OutputCOSBucketUrl"`
+	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
 	// The COS bucket directory where the logs are saved. Check below for the rules of the directory name. 
 	// 1. It must be a combination of number, letters, and visible characters. Up to 60 characters are allowed.
 	// 2. Use a slash (/) to create a subdirectory.
 	// 3. Consecutive dots (.) and slashes (/) are not allowed. It can not start with a slash (/). 
-	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil" name:"OutputCOSKeyPrefix"`
+	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
 func (r *CreateCommandRequest) ToJsonString() string {
@@ -317,10 +317,10 @@ func (r *CreateCommandRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateCommandResponseParams struct {
 	// Command ID.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateCommandResponse struct {
@@ -342,50 +342,50 @@ func (r *CreateCommandResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateInvokerRequestParams struct {
 	// Invoker name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Invoker type. It can only be `SCHEDULE` (recurring invokers).
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Remote command ID.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// ID of the instance bound to the trigger. Up to 100 IDs are allowed.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// The user who executes the command.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// Custom parameters of the command.
-	Parameters *string `json:"Parameters,omitnil" name:"Parameters"`
+	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// Settings required for a recurring invoker.
-	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil" name:"ScheduleSettings"`
+	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil,omitempty" name:"ScheduleSettings"`
 }
 
 type CreateInvokerRequest struct {
 	*tchttp.BaseRequest
 	
 	// Invoker name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Invoker type. It can only be `SCHEDULE` (recurring invokers).
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Remote command ID.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// ID of the instance bound to the trigger. Up to 100 IDs are allowed.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// The user who executes the command.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// Custom parameters of the command.
-	Parameters *string `json:"Parameters,omitnil" name:"Parameters"`
+	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// Settings required for a recurring invoker.
-	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil" name:"ScheduleSettings"`
+	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil,omitempty" name:"ScheduleSettings"`
 }
 
 func (r *CreateInvokerRequest) ToJsonString() string {
@@ -416,10 +416,10 @@ func (r *CreateInvokerRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateInvokerResponseParams struct {
 	// Invoker ID.
-	InvokerId *string `json:"InvokerId,omitnil" name:"InvokerId"`
+	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateInvokerResponse struct {
@@ -441,14 +441,14 @@ func (r *CreateInvokerResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteCommandRequestParams struct {
 	// ID of the command to be deleted.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 }
 
 type DeleteCommandRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the command to be deleted.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 }
 
 func (r *DeleteCommandRequest) ToJsonString() string {
@@ -473,7 +473,7 @@ func (r *DeleteCommandRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteCommandResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteCommandResponse struct {
@@ -495,14 +495,14 @@ func (r *DeleteCommandResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteInvokerRequestParams struct {
 	// ID of the invoker to be deleted.
-	InvokerId *string `json:"InvokerId,omitnil" name:"InvokerId"`
+	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
 type DeleteInvokerRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the invoker to be deleted.
-	InvokerId *string `json:"InvokerId,omitnil" name:"InvokerId"`
+	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
 func (r *DeleteInvokerRequest) ToJsonString() string {
@@ -527,7 +527,7 @@ func (r *DeleteInvokerRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeleteInvokerResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeleteInvokerResponse struct {
@@ -549,32 +549,32 @@ func (r *DeleteInvokerResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAutomationAgentStatusRequestParams struct {
 	// List of instance IDs for the query.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Filter conditions.<br> <li>`agent-status` - String - Required: No - (Filter condition) Filter by agent status. Valid values: `Online`, `Offline`.<br> <li> `environment` - String - Required: No - (Filter condition) Filter by the agent environment. Valid value: `Linux`.<br> <li> `instance-id` - String - Required: No - (Filter condition) Filter by the instance ID. <br>Up to 10 `Filters` allowed in one request. For each filter, five `Filter.Values` can be specified. `InstanceIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeAutomationAgentStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of instance IDs for the query.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Filter conditions.<br> <li>`agent-status` - String - Required: No - (Filter condition) Filter by agent status. Valid values: `Online`, `Offline`.<br> <li> `environment` - String - Required: No - (Filter condition) Filter by the agent environment. Valid value: `Linux`.<br> <li> `instance-id` - String - Required: No - (Filter condition) Filter by the instance ID. <br>Up to 10 `Filters` allowed in one request. For each filter, five `Filter.Values` can be specified. `InstanceIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeAutomationAgentStatusRequest) ToJsonString() string {
@@ -602,13 +602,13 @@ func (r *DescribeAutomationAgentStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeAutomationAgentStatusResponseParams struct {
 	// Agent information list.
-	AutomationAgentSet []*AutomationAgentInfo `json:"AutomationAgentSet,omitnil" name:"AutomationAgentSet"`
+	AutomationAgentSet []*AutomationAgentInfo `json:"AutomationAgentSet,omitnil,omitempty" name:"AutomationAgentSet"`
 
 	// Total number of matching agents.
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeAutomationAgentStatusResponse struct {
@@ -630,7 +630,7 @@ func (r *DescribeAutomationAgentStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCommandsRequestParams struct {
 	// List of command IDs. Up to 100 IDs are allowed for each request. `CommandIds` and `Filters` cannot be specified at the same time.
-	CommandIds []*string `json:"CommandIds,omitnil" name:"CommandIds"`
+	CommandIds []*string `json:"CommandIds,omitnil,omitempty" name:"CommandIds"`
 
 	// Filter conditions.
 	// <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID.
@@ -642,20 +642,20 @@ type DescribeCommandsRequestParams struct {
 	// <li> `tag:tag-key` - String - Required: No - (Filter) Filter by the tag key-value pair. The tag-key should be replaced with a specified tag key. For detailed usage, see sample 4.</li>
 	// 
 	// Up to 10 `Filters` are allowed in one request. Each filter can have up to 5 `Filter.Values`. `CommandIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeCommandsRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of command IDs. Up to 100 IDs are allowed for each request. `CommandIds` and `Filters` cannot be specified at the same time.
-	CommandIds []*string `json:"CommandIds,omitnil" name:"CommandIds"`
+	CommandIds []*string `json:"CommandIds,omitnil,omitempty" name:"CommandIds"`
 
 	// Filter conditions.
 	// <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID.
@@ -667,13 +667,13 @@ type DescribeCommandsRequest struct {
 	// <li> `tag:tag-key` - String - Required: No - (Filter) Filter by the tag key-value pair. The tag-key should be replaced with a specified tag key. For detailed usage, see sample 4.</li>
 	// 
 	// Up to 10 `Filters` are allowed in one request. Each filter can have up to 5 `Filter.Values`. `CommandIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeCommandsRequest) ToJsonString() string {
@@ -701,13 +701,13 @@ func (r *DescribeCommandsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeCommandsResponseParams struct {
 	// Total number of matching commands.
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of command details.
-	CommandSet []*Command `json:"CommandSet,omitnil" name:"CommandSet"`
+	CommandSet []*Command `json:"CommandSet,omitnil,omitempty" name:"CommandSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeCommandsResponse struct {
@@ -729,38 +729,38 @@ func (r *DescribeCommandsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInvocationTasksRequestParams struct {
 	// List of execution task IDs. Up to 100 IDs are allowed for each request. `InvocationTaskIds` and `Filters` cannot be specified at the same time.
-	InvocationTaskIds []*string `json:"InvocationTaskIds,omitnil" name:"InvocationTaskIds"`
+	InvocationTaskIds []*string `json:"InvocationTaskIds,omitnil,omitempty" name:"InvocationTaskIds"`
 
 	// Filter conditions.<br> <li> `invocation-id` - String - Required: No - (Filter condition) Filter by the execution activity ID.<br> <li> `invocation-task-id` - String - Required: No - (Filter condition) Filter by the execution task ID.<br> <li> `instance-id` - String - Required: No - (Filter condition) Filter by the instance ID. <br> <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID. <br>Up to 10 `Filters` are allowed for each request. Each filter can have up to five `Filter.Values`. `InvocationTaskIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Whether to hide the output. Valid values:<br><li>`True` (default): Hide the output <br><li>`False`: Show the output <br>
-	HideOutput *bool `json:"HideOutput,omitnil" name:"HideOutput"`
+	HideOutput *bool `json:"HideOutput,omitnil,omitempty" name:"HideOutput"`
 }
 
 type DescribeInvocationTasksRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of execution task IDs. Up to 100 IDs are allowed for each request. `InvocationTaskIds` and `Filters` cannot be specified at the same time.
-	InvocationTaskIds []*string `json:"InvocationTaskIds,omitnil" name:"InvocationTaskIds"`
+	InvocationTaskIds []*string `json:"InvocationTaskIds,omitnil,omitempty" name:"InvocationTaskIds"`
 
 	// Filter conditions.<br> <li> `invocation-id` - String - Required: No - (Filter condition) Filter by the execution activity ID.<br> <li> `invocation-task-id` - String - Required: No - (Filter condition) Filter by the execution task ID.<br> <li> `instance-id` - String - Required: No - (Filter condition) Filter by the instance ID. <br> <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID. <br>Up to 10 `Filters` are allowed for each request. Each filter can have up to five `Filter.Values`. `InvocationTaskIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Whether to hide the output. Valid values:<br><li>`True` (default): Hide the output <br><li>`False`: Show the output <br>
-	HideOutput *bool `json:"HideOutput,omitnil" name:"HideOutput"`
+	HideOutput *bool `json:"HideOutput,omitnil,omitempty" name:"HideOutput"`
 }
 
 func (r *DescribeInvocationTasksRequest) ToJsonString() string {
@@ -789,13 +789,13 @@ func (r *DescribeInvocationTasksRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInvocationTasksResponseParams struct {
 	// Total number of matching execution tasks.
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of execution tasks.
-	InvocationTaskSet []*InvocationTask `json:"InvocationTaskSet,omitnil" name:"InvocationTaskSet"`
+	InvocationTaskSet []*InvocationTask `json:"InvocationTaskSet,omitnil,omitempty" name:"InvocationTaskSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInvocationTasksResponse struct {
@@ -817,40 +817,40 @@ func (r *DescribeInvocationTasksResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInvocationsRequestParams struct {
 	// List of execution activity IDs. Up to 100 IDs are allowed for each request. `InvocationIds` and `Filters` cannot be specified at the same time.
-	InvocationIds []*string `json:"InvocationIds,omitnil" name:"InvocationIds"`
+	InvocationIds []*string `json:"InvocationIds,omitnil,omitempty" name:"InvocationIds"`
 
 	// Filter conditions.<br> <li> `invocation-id` - String - Required: No - (Filter condition) Filter by the execution activity ID.<br> 
 	// <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID. 
 	// <li> `command-created-by` - String - Required: No - (Filter condition) Filter by the command type. Valid values: `TAT` (public commands) or `USER` (custom commands).
 	// <li> `instance-kind` - String - Required: No - (Filter condition) Filter by the instance type. Valid values: `CVM` or `LIGHTHOUSE`. 
 	// <br>Up to 10 `Filters` are allowed for each request. Each filter can have up to five `Filter.Values`. `InvocationIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeInvocationsRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of execution activity IDs. Up to 100 IDs are allowed for each request. `InvocationIds` and `Filters` cannot be specified at the same time.
-	InvocationIds []*string `json:"InvocationIds,omitnil" name:"InvocationIds"`
+	InvocationIds []*string `json:"InvocationIds,omitnil,omitempty" name:"InvocationIds"`
 
 	// Filter conditions.<br> <li> `invocation-id` - String - Required: No - (Filter condition) Filter by the execution activity ID.<br> 
 	// <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID. 
 	// <li> `command-created-by` - String - Required: No - (Filter condition) Filter by the command type. Valid values: `TAT` (public commands) or `USER` (custom commands).
 	// <li> `instance-kind` - String - Required: No - (Filter condition) Filter by the instance type. Valid values: `CVM` or `LIGHTHOUSE`. 
 	// <br>Up to 10 `Filters` are allowed for each request. Each filter can have up to five `Filter.Values`. `InvocationIds` and `Filters` cannot be specified at the same time.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. It defaults to `20`. The maximum is 100. For more information on `Limit`, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. The default value is `0`. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeInvocationsRequest) ToJsonString() string {
@@ -878,13 +878,13 @@ func (r *DescribeInvocationsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInvocationsResponseParams struct {
 	// Total number of matching execution activities.
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of execution activities.
-	InvocationSet []*Invocation `json:"InvocationSet,omitnil" name:"InvocationSet"`
+	InvocationSet []*Invocation `json:"InvocationSet,omitnil,omitempty" name:"InvocationSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInvocationsResponse struct {
@@ -906,26 +906,26 @@ func (r *DescribeInvocationsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInvokerRecordsRequestParams struct {
 	// List of invoker IDs. Up to 100 IDs are allowed.
-	InvokerIds []*string `json:"InvokerIds,omitnil" name:"InvokerIds"`
+	InvokerIds []*string `json:"InvokerIds,omitnil,omitempty" name:"InvokerIds"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeInvokerRecordsRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of invoker IDs. Up to 100 IDs are allowed.
-	InvokerIds []*string `json:"InvokerIds,omitnil" name:"InvokerIds"`
+	InvokerIds []*string `json:"InvokerIds,omitnil,omitempty" name:"InvokerIds"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeInvokerRecordsRequest) ToJsonString() string {
@@ -952,13 +952,13 @@ func (r *DescribeInvokerRecordsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInvokerRecordsResponseParams struct {
 	// Number of matching records.
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Execution history of an invoker.
-	InvokerRecordSet []*InvokerRecord `json:"InvokerRecordSet,omitnil" name:"InvokerRecordSet"`
+	InvokerRecordSet []*InvokerRecord `json:"InvokerRecordSet,omitnil,omitempty" name:"InvokerRecordSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInvokerRecordsResponse struct {
@@ -980,40 +980,40 @@ func (r *DescribeInvokerRecordsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInvokersRequestParams struct {
 	// List of invoker IDs.
-	InvokerIds []*string `json:"InvokerIds,omitnil" name:"InvokerIds"`
+	InvokerIds []*string `json:"InvokerIds,omitnil,omitempty" name:"InvokerIds"`
 
 	// Filter conditions:
 	// 
 	// <li> `invoker-id` - String - Required: No - (Filter condition) Filter by the invoker ID.
 	// <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID.
 	// <li> `type` - String - Required: No - (Filter condition) Filter by the invoker type.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type DescribeInvokersRequest struct {
 	*tchttp.BaseRequest
 	
 	// List of invoker IDs.
-	InvokerIds []*string `json:"InvokerIds,omitnil" name:"InvokerIds"`
+	InvokerIds []*string `json:"InvokerIds,omitnil,omitempty" name:"InvokerIds"`
 
 	// Filter conditions:
 	// 
 	// <li> `invoker-id` - String - Required: No - (Filter condition) Filter by the invoker ID.
 	// <li> `command-id` - String - Required: No - (Filter condition) Filter by the command ID.
 	// <li> `type` - String - Required: No - (Filter condition) Filter by the invoker type.
-	Filters []*Filter `json:"Filters,omitnil" name:"Filters"`
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Number of returned results. Default value: 20. Maximum value: 100.
-	Limit *uint64 `json:"Limit,omitnil" name:"Limit"`
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Offset. Default value: 0.
-	Offset *uint64 `json:"Offset,omitnil" name:"Offset"`
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *DescribeInvokersRequest) ToJsonString() string {
@@ -1041,13 +1041,13 @@ func (r *DescribeInvokersRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeInvokersResponseParams struct {
 	// Number of matching invokers.
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Invoker information.
-	InvokerSet []*Invoker `json:"InvokerSet,omitnil" name:"InvokerSet"`
+	InvokerSet []*Invoker `json:"InvokerSet,omitnil,omitempty" name:"InvokerSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeInvokersResponse struct {
@@ -1098,13 +1098,13 @@ func (r *DescribeRegionsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeRegionsResponseParams struct {
 	// Number of regions
-	TotalCount *uint64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Region information list
-	RegionSet []*RegionInfo `json:"RegionSet,omitnil" name:"RegionSet"`
+	RegionSet []*RegionInfo `json:"RegionSet,omitnil,omitempty" name:"RegionSet"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DescribeRegionsResponse struct {
@@ -1126,14 +1126,14 @@ func (r *DescribeRegionsResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type DisableInvokerRequestParams struct {
 	// ID of the invoker to be disabled.
-	InvokerId *string `json:"InvokerId,omitnil" name:"InvokerId"`
+	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
 type DisableInvokerRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the invoker to be disabled.
-	InvokerId *string `json:"InvokerId,omitnil" name:"InvokerId"`
+	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
 func (r *DisableInvokerRequest) ToJsonString() string {
@@ -1158,7 +1158,7 @@ func (r *DisableInvokerRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DisableInvokerResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DisableInvokerResponse struct {
@@ -1180,14 +1180,14 @@ func (r *DisableInvokerResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type EnableInvokerRequestParams struct {
 	// ID of the invoker to be enabled.
-	InvokerId *string `json:"InvokerId,omitnil" name:"InvokerId"`
+	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
 type EnableInvokerRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the invoker to be enabled.
-	InvokerId *string `json:"InvokerId,omitnil" name:"InvokerId"`
+	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 }
 
 func (r *EnableInvokerRequest) ToJsonString() string {
@@ -1212,7 +1212,7 @@ func (r *EnableInvokerRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type EnableInvokerResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type EnableInvokerResponse struct {
@@ -1233,18 +1233,18 @@ func (r *EnableInvokerResponse) FromJsonString(s string) error {
 
 type Filter struct {
 	// Field to be filtered.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Filter values of the field.
-	Values []*string `json:"Values,omitnil" name:"Values"`
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 }
 
 type Invocation struct {
 	// Execution activity ID.
-	InvocationId *string `json:"InvocationId,omitnil" name:"InvocationId"`
+	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
 	// Command ID.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Execution task status. Valid values:
 	// <li> PENDING: Pending 
@@ -1253,69 +1253,69 @@ type Invocation struct {
 	// <li> FAILED: Failed
 	// <li> TIMEOUT: Command timed out
 	// <li> PARTIAL_FAILED: Partial failure
-	InvocationStatus *string `json:"InvocationStatus,omitnil" name:"InvocationStatus"`
+	InvocationStatus *string `json:"InvocationStatus,omitnil,omitempty" name:"InvocationStatus"`
 
 	// Execution task information list.
-	InvocationTaskBasicInfoSet []*InvocationTaskBasicInfo `json:"InvocationTaskBasicInfoSet,omitnil" name:"InvocationTaskBasicInfoSet"`
+	InvocationTaskBasicInfoSet []*InvocationTaskBasicInfo `json:"InvocationTaskBasicInfoSet,omitnil,omitempty" name:"InvocationTaskBasicInfoSet"`
 
 	// Execution activity description.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Start time of the execution activity.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time of the execution activity.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Time when the execution activity is created.
-	CreatedTime *string `json:"CreatedTime,omitnil" name:"CreatedTime"`
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
 	// Time when the execution activity is updated.
-	UpdatedTime *string `json:"UpdatedTime,omitnil" name:"UpdatedTime"`
+	UpdatedTime *string `json:"UpdatedTime,omitnil,omitempty" name:"UpdatedTime"`
 
 	// Values of custom parameters.
-	Parameters *string `json:"Parameters,omitnil" name:"Parameters"`
+	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// Default custom parameter value.
-	DefaultParameters *string `json:"DefaultParameters,omitnil" name:"DefaultParameters"`
+	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
 	// Type of the instance executing the command. Valid values: `CVM`, `LIGHTHOUSE`.
-	InstanceKind *string `json:"InstanceKind,omitnil" name:"InstanceKind"`
+	InstanceKind *string `json:"InstanceKind,omitnil,omitempty" name:"InstanceKind"`
 
 	// The user who executes the command on the instance.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// Invocation source.
-	InvocationSource *string `json:"InvocationSource,omitnil" name:"InvocationSource"`
+	InvocationSource *string `json:"InvocationSource,omitnil,omitempty" name:"InvocationSource"`
 
 	// Base64-encoded command
-	CommandContent *string `json:"CommandContent,omitnil" name:"CommandContent"`
+	CommandContent *string `json:"CommandContent,omitnil,omitempty" name:"CommandContent"`
 
 	// Command type
-	CommandType *string `json:"CommandType,omitnil" name:"CommandType"`
+	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
 	// Command timeout period, in seconds.
-	Timeout *uint64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Working directory for executing the command.
-	WorkingDirectory *string `json:"WorkingDirectory,omitnil" name:"WorkingDirectory"`
+	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
 	// The COS bucket URL for uploading logs.
-	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil" name:"OutputCOSBucketUrl"`
+	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
 	// The COS bucket directory where the logs are saved.
-	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil" name:"OutputCOSKeyPrefix"`
+	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
 type InvocationTask struct {
 	// Execution activity ID.
-	InvocationId *string `json:"InvocationId,omitnil" name:"InvocationId"`
+	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
 	// Execution task ID.
-	InvocationTaskId *string `json:"InvocationTaskId,omitnil" name:"InvocationTaskId"`
+	InvocationTaskId *string `json:"InvocationTaskId,omitnil,omitempty" name:"InvocationTaskId"`
 
 	// Command ID.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Execution task status. Valid values:
 	// <li> PENDING: Pending 
@@ -1331,39 +1331,39 @@ type InvocationTask struct {
 	// <li> CANCELLING: Canceling
 	// <li> CANCELLED: Canceled (canceled before execution)
 	// <li> TERMINATED: Terminated (canceled during execution)
-	TaskStatus *string `json:"TaskStatus,omitnil" name:"TaskStatus"`
+	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Execution result.
-	TaskResult *TaskResult `json:"TaskResult,omitnil" name:"TaskResult"`
+	TaskResult *TaskResult `json:"TaskResult,omitnil,omitempty" name:"TaskResult"`
 
 	// Start time of the execution task.
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// End time of the execution task.
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Creation time.
-	CreatedTime *string `json:"CreatedTime,omitnil" name:"CreatedTime"`
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
 	// Update time.
-	UpdatedTime *string `json:"UpdatedTime,omitnil" name:"UpdatedTime"`
+	UpdatedTime *string `json:"UpdatedTime,omitnil,omitempty" name:"UpdatedTime"`
 
 	// Command details of the execution task.
-	CommandDocument *CommandDocument `json:"CommandDocument,omitnil" name:"CommandDocument"`
+	CommandDocument *CommandDocument `json:"CommandDocument,omitnil,omitempty" name:"CommandDocument"`
 
 	// Error message displayed when the execution task fails.
-	ErrorInfo *string `json:"ErrorInfo,omitnil" name:"ErrorInfo"`
+	ErrorInfo *string `json:"ErrorInfo,omitnil,omitempty" name:"ErrorInfo"`
 
 	// Invocation source.
-	InvocationSource *string `json:"InvocationSource,omitnil" name:"InvocationSource"`
+	InvocationSource *string `json:"InvocationSource,omitnil,omitempty" name:"InvocationSource"`
 }
 
 type InvocationTaskBasicInfo struct {
 	// Execution task ID.
-	InvocationTaskId *string `json:"InvocationTaskId,omitnil" name:"InvocationTaskId"`
+	InvocationTaskId *string `json:"InvocationTaskId,omitnil,omitempty" name:"InvocationTaskId"`
 
 	// Execution task status. Valid values:
 	// <li> PENDING: Pending 
@@ -1379,81 +1379,81 @@ type InvocationTaskBasicInfo struct {
 	// <li> CANCELLING: Canceling
 	// <li> CANCELLED: Canceled (canceled before execution)
 	// <li> TERMINATED: Terminated (canceled during execution)
-	TaskStatus *string `json:"TaskStatus,omitnil" name:"TaskStatus"`
+	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
 	// Instance ID.
-	InstanceId *string `json:"InstanceId,omitnil" name:"InstanceId"`
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 // Predefined struct for user
 type InvokeCommandRequestParams struct {
 	// ID of the command to be triggered.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// IDs of instances about to execute commands. At most 100 IDs are allowed.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Custom parameters of the command. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
 	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
 	// If no parameter value is provided, the DefaultParameters of the command is used.
 	// Up to 20 custom parameters are supported.
 	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
-	Parameters *string `json:"Parameters,omitnil" name:"Parameters"`
+	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// The username used to execute the command on the CVM or Lighthouse instance.
 	// The principle of the least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user. If this is not specified, the Username of the command is used by default.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// Execution path of the command. The WorkingDirectory of the command is used by default.
-	WorkingDirectory *string `json:"WorkingDirectory,omitnil" name:"WorkingDirectory"`
+	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
 	// Command timeout period. Value range: [1, 86400]. The Timeout of the command is used by default.
-	Timeout *uint64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// The COS bucket URL for uploading logs. The URL must start with `https`, such as `https://BucketName-123454321.cos.ap-beijing.myqcloud.com`.
-	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil" name:"OutputCOSBucketUrl"`
+	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
 	// The COS bucket directory where the logs are saved. Check below for the rules of the directory name. 
 	// 1. It must be a combination of number, letters, and visible characters. Up to 60 characters are allowed.
 	// 2. Use a slash (/) to create a subdirectory.
 	// 3. ".." can not be used as the folder name. It cannot start with a slash (/), and cannot contain consecutive slashes.
-	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil" name:"OutputCOSKeyPrefix"`
+	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
 type InvokeCommandRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the command to be triggered.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// IDs of instances about to execute commands. At most 100 IDs are allowed.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Custom parameters of the command. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
 	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
 	// If no parameter value is provided, the DefaultParameters of the command is used.
 	// Up to 20 custom parameters are supported.
 	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
-	Parameters *string `json:"Parameters,omitnil" name:"Parameters"`
+	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// The username used to execute the command on the CVM or Lighthouse instance.
 	// The principle of the least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user. If this is not specified, the Username of the command is used by default.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// Execution path of the command. The WorkingDirectory of the command is used by default.
-	WorkingDirectory *string `json:"WorkingDirectory,omitnil" name:"WorkingDirectory"`
+	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
 	// Command timeout period. Value range: [1, 86400]. The Timeout of the command is used by default.
-	Timeout *uint64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// The COS bucket URL for uploading logs. The URL must start with `https`, such as `https://BucketName-123454321.cos.ap-beijing.myqcloud.com`.
-	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil" name:"OutputCOSBucketUrl"`
+	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
 	// The COS bucket directory where the logs are saved. Check below for the rules of the directory name. 
 	// 1. It must be a combination of number, letters, and visible characters. Up to 60 characters are allowed.
 	// 2. Use a slash (/) to create a subdirectory.
 	// 3. ".." can not be used as the folder name. It cannot start with a slash (/), and cannot contain consecutive slashes.
-	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil" name:"OutputCOSKeyPrefix"`
+	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
 func (r *InvokeCommandRequest) ToJsonString() string {
@@ -1485,10 +1485,10 @@ func (r *InvokeCommandRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type InvokeCommandResponseParams struct {
 	// Execution activity ID.
-	InvocationId *string `json:"InvocationId,omitnil" name:"InvocationId"`
+	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type InvokeCommandResponse struct {
@@ -1509,79 +1509,79 @@ func (r *InvokeCommandResponse) FromJsonString(s string) error {
 
 type Invoker struct {
 	// Invoker ID.
-	InvokerId *string `json:"InvokerId,omitnil" name:"InvokerId"`
+	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 
 	// Invoker name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Invoker type.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Command ID.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Username.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// Custom parameters.
-	Parameters *string `json:"Parameters,omitnil" name:"Parameters"`
+	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// Instance ID list.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Whether to enable the invoker.
-	Enable *bool `json:"Enable,omitnil" name:"Enable"`
+	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// Execution schedule of the invoker. This field is returned for recurring invokers.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil" name:"ScheduleSettings"`
+	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil,omitempty" name:"ScheduleSettings"`
 
 	// Creation time.
-	CreatedTime *string `json:"CreatedTime,omitnil" name:"CreatedTime"`
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
 
 	// Modification time.
-	UpdatedTime *string `json:"UpdatedTime,omitnil" name:"UpdatedTime"`
+	UpdatedTime *string `json:"UpdatedTime,omitnil,omitempty" name:"UpdatedTime"`
 }
 
 type InvokerRecord struct {
 	// Invoker ID.
-	InvokerId *string `json:"InvokerId,omitnil" name:"InvokerId"`
+	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 
 	// Execution time.
-	InvokeTime *string `json:"InvokeTime,omitnil" name:"InvokeTime"`
+	InvokeTime *string `json:"InvokeTime,omitnil,omitempty" name:"InvokeTime"`
 
 	// Execution reason.
-	Reason *string `json:"Reason,omitnil" name:"Reason"`
+	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 
 	// Command execution ID.
-	InvocationId *string `json:"InvocationId,omitnil" name:"InvocationId"`
+	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
 	// Trigger result.
-	Result *string `json:"Result,omitnil" name:"Result"`
+	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 }
 
 // Predefined struct for user
 type ModifyCommandRequestParams struct {
 	// Command ID.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
-	CommandName *string `json:"CommandName,omitnil" name:"CommandName"`
+	CommandName *string `json:"CommandName,omitnil,omitempty" name:"CommandName"`
 
 	// Command description. The maximum length is 120 characters.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Base64-encoded command. The maximum length is 64 KB.
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// Command type. `SHELL` and `POWERSHELL` are supported.
-	CommandType *string `json:"CommandType,omitnil" name:"CommandType"`
+	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
 	// Command execution path.
-	WorkingDirectory *string `json:"WorkingDirectory,omitnil" name:"WorkingDirectory"`
+	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
 	// Command timeout period. Value range: [1, 86400].
-	Timeout *uint64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
 	// All parameters are overwritten. All default values are required for modification.
@@ -1589,45 +1589,45 @@ type ModifyCommandRequestParams struct {
 	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
 	// Up to 20 custom parameters are supported.
 	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
-	DefaultParameters *string `json:"DefaultParameters,omitnil" name:"DefaultParameters"`
+	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
 	// The username used to execute the command on the CVM or Lighthouse instance.
 	// The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// The COS bucket URL for uploading logs. The URL must start with `https`, such as `https://BucketName-123454321.cos.ap-beijing.myqcloud.com`.
-	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil" name:"OutputCOSBucketUrl"`
+	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
 	// The COS bucket directory where the logs are saved. Check below for the rules of the directory name. 
 	// 1. It must be a combination of number, letters, and visible characters. Up to 60 characters are allowed.
 	// 2. Use a slash (/) to create a subdirectory.
 	// 3. ".." can not be used as the folder name. It cannot start with a slash (/), and cannot contain consecutive slashes.
-	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil" name:"OutputCOSKeyPrefix"`
+	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
 type ModifyCommandRequest struct {
 	*tchttp.BaseRequest
 	
 	// Command ID.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
-	CommandName *string `json:"CommandName,omitnil" name:"CommandName"`
+	CommandName *string `json:"CommandName,omitnil,omitempty" name:"CommandName"`
 
 	// Command description. The maximum length is 120 characters.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Base64-encoded command. The maximum length is 64 KB.
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// Command type. `SHELL` and `POWERSHELL` are supported.
-	CommandType *string `json:"CommandType,omitnil" name:"CommandType"`
+	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
 	// Command execution path.
-	WorkingDirectory *string `json:"WorkingDirectory,omitnil" name:"WorkingDirectory"`
+	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
 	// Command timeout period. Value range: [1, 86400].
-	Timeout *uint64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
 	// All parameters are overwritten. All default values are required for modification.
@@ -1635,20 +1635,20 @@ type ModifyCommandRequest struct {
 	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
 	// Up to 20 custom parameters are supported.
 	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
-	DefaultParameters *string `json:"DefaultParameters,omitnil" name:"DefaultParameters"`
+	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
 	// The username used to execute the command on the CVM or Lighthouse instance.
 	// The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// The COS bucket URL for uploading logs. The URL must start with `https`, such as `https://BucketName-123454321.cos.ap-beijing.myqcloud.com`.
-	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil" name:"OutputCOSBucketUrl"`
+	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
 	// The COS bucket directory where the logs are saved. Check below for the rules of the directory name. 
 	// 1. It must be a combination of number, letters, and visible characters. Up to 60 characters are allowed.
 	// 2. Use a slash (/) to create a subdirectory.
 	// 3. ".." can not be used as the folder name. It cannot start with a slash (/), and cannot contain consecutive slashes.
-	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil" name:"OutputCOSKeyPrefix"`
+	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
 func (r *ModifyCommandRequest) ToJsonString() string {
@@ -1683,7 +1683,7 @@ func (r *ModifyCommandRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyCommandResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyCommandResponse struct {
@@ -1705,56 +1705,56 @@ func (r *ModifyCommandResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInvokerRequestParams struct {
 	// ID of the invoker to be modified.
-	InvokerId *string `json:"InvokerId,omitnil" name:"InvokerId"`
+	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 
 	// Name of the invoker to be modified.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Invoker type. It can only be `SCHEDULE` (recurring invokers).
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// ID of the command to be modified.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// The username to be modified.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// Custom parameters to be modified.
-	Parameters *string `json:"Parameters,omitnil" name:"Parameters"`
+	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// List of instance IDs to be modified. Up to 100 IDs are allowed.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Scheduled invoker settings to be modified.
-	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil" name:"ScheduleSettings"`
+	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil,omitempty" name:"ScheduleSettings"`
 }
 
 type ModifyInvokerRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the invoker to be modified.
-	InvokerId *string `json:"InvokerId,omitnil" name:"InvokerId"`
+	InvokerId *string `json:"InvokerId,omitnil,omitempty" name:"InvokerId"`
 
 	// Name of the invoker to be modified.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Invoker type. It can only be `SCHEDULE` (recurring invokers).
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// ID of the command to be modified.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// The username to be modified.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// Custom parameters to be modified.
-	Parameters *string `json:"Parameters,omitnil" name:"Parameters"`
+	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// List of instance IDs to be modified. Up to 100 IDs are allowed.
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Scheduled invoker settings to be modified.
-	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil" name:"ScheduleSettings"`
+	ScheduleSettings *ScheduleSettings `json:"ScheduleSettings,omitnil,omitempty" name:"ScheduleSettings"`
 }
 
 func (r *ModifyInvokerRequest) ToJsonString() string {
@@ -1786,7 +1786,7 @@ func (r *ModifyInvokerRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type ModifyInvokerResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type ModifyInvokerResponse struct {
@@ -1812,15 +1812,15 @@ type PreviewReplacedCommandContentRequestParams struct {
 	// At most 20 custom parameters are supported.
 	// The name of the custom parameter cannot exceed 64 characters and can only contain [a-z], [A-Z], [0-9], [-_].
 	// This parameter can be left empty if DefaultParameters is set for the previewed CommandId.
-	Parameters *string `json:"Parameters,omitnil" name:"Parameters"`
+	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// The command to be previewed. If DefaultParameters is set, it is combined with Parameters and Parameters takes priority.
 	// `CommandId` or `Content` must be specified.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Base64-encoded command to be previewed. The maximum length is 64 KB.
 	// CommandId or Content must be specified.
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 }
 
 type PreviewReplacedCommandContentRequest struct {
@@ -1831,15 +1831,15 @@ type PreviewReplacedCommandContentRequest struct {
 	// At most 20 custom parameters are supported.
 	// The name of the custom parameter cannot exceed 64 characters and can only contain [a-z], [A-Z], [0-9], [-_].
 	// This parameter can be left empty if DefaultParameters is set for the previewed CommandId.
-	Parameters *string `json:"Parameters,omitnil" name:"Parameters"`
+	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// The command to be previewed. If DefaultParameters is set, it is combined with Parameters and Parameters takes priority.
 	// `CommandId` or `Content` must be specified.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Base64-encoded command to be previewed. The maximum length is 64 KB.
 	// CommandId or Content must be specified.
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 }
 
 func (r *PreviewReplacedCommandContentRequest) ToJsonString() string {
@@ -1866,10 +1866,10 @@ func (r *PreviewReplacedCommandContentRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type PreviewReplacedCommandContentResponseParams struct {
 	// Base64-encoded command with custom parameters.
-	ReplacedContent *string `json:"ReplacedContent,omitnil" name:"ReplacedContent"`
+	ReplacedContent *string `json:"ReplacedContent,omitnil,omitempty" name:"ReplacedContent"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type PreviewReplacedCommandContentResponse struct {
@@ -1890,148 +1890,148 @@ func (r *PreviewReplacedCommandContentResponse) FromJsonString(s string) error {
 
 type RegionInfo struct {
 	// Region name, such as `ap-guangzhou`
-	Region *string `json:"Region,omitnil" name:"Region"`
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
 
 	// Region description, such as `Guangzhou`
-	RegionName *string `json:"RegionName,omitnil" name:"RegionName"`
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
 
 	// Region status. `AVAILABLE` indicates the region is available.
-	RegionState *string `json:"RegionState,omitnil" name:"RegionState"`
+	RegionState *string `json:"RegionState,omitnil,omitempty" name:"RegionState"`
 }
 
 // Predefined struct for user
 type RunCommandRequestParams struct {
 	// Base64-encoded command. The maximum length is 64 KB.
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// IDs of instances about to execute commands. Up to 100 IDs are allowed. Supported instance types:
 	// <li> `CVM`
 	// <li> `LIGHTHOUSE`
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
-	CommandName *string `json:"CommandName,omitnil" name:"CommandName"`
+	CommandName *string `json:"CommandName,omitnil,omitempty" name:"CommandName"`
 
 	// Command description. The maximum length is 120 characters.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Command type. `SHELL` and `POWERSHELL` are supported. The default value is `SHELL`.
-	CommandType *string `json:"CommandType,omitnil" name:"CommandType"`
+	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
 	// Command execution path. The default value is /root for `SHELL` commands and C:\Program Files\qcloud\tat_agent\workdir for `POWERSHELL` commands.
-	WorkingDirectory *string `json:"WorkingDirectory,omitnil" name:"WorkingDirectory"`
+	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
 	// Command timeout period. Default value: 60 seconds. Value range: [1, 86400].
-	Timeout *uint64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Whether to save the command. Valid values:
 	// <li> `True`: Save
 	// <li> `False`: Do not save
 	// The default value is `False`.
-	SaveCommand *bool `json:"SaveCommand,omitnil" name:"SaveCommand"`
+	SaveCommand *bool `json:"SaveCommand,omitnil,omitempty" name:"SaveCommand"`
 
 	// Whether to enable the custom parameter feature.
 	// This cannot be modified once created.
 	// Default value: `false`.
-	EnableParameter *bool `json:"EnableParameter,omitnil" name:"EnableParameter"`
+	EnableParameter *bool `json:"EnableParameter,omitnil,omitempty" name:"EnableParameter"`
 
 	// The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
 	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
 	// If Parameters is not provided, the default values specified here are used.
 	// Up to 20 custom parameters are supported.
 	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
-	DefaultParameters *string `json:"DefaultParameters,omitnil" name:"DefaultParameters"`
+	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
 	// Custom parameters of `Command`. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
 	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
 	// If no parameter value is provided, the `DefaultParameters` is used.
 	// Up to 20 custom parameters are supported.
 	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
-	Parameters *string `json:"Parameters,omitnil" name:"Parameters"`
+	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// The tags of the command. It is available when `SaveCommand` is `True`. A maximum of 10 tags are allowed.
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// The username used to execute the command on the CVM or Lighthouse instance.
 	// The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user. By default, the user `root` is used to execute commands on Linux and the user `System` is used on Windows.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// The COS bucket URL for uploading logs. The URL must start with `https`, such as `https://BucketName-123454321.cos.ap-beijing.myqcloud.com`.
-	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil" name:"OutputCOSBucketUrl"`
+	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
 	// The COS bucket directory where the logs are saved. Check below for the rules of the directory name. 
 	// 1. It must be a combination of number, letters, and visible characters. Up to 60 characters are allowed.
 	// 2. Use a slash (/) to create a subdirectory.
 	// 3. ".." can not be used as the folder name. It cannot start with a slash (/), and cannot contain consecutive slashes.
-	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil" name:"OutputCOSKeyPrefix"`
+	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
 type RunCommandRequest struct {
 	*tchttp.BaseRequest
 	
 	// Base64-encoded command. The maximum length is 64 KB.
-	Content *string `json:"Content,omitnil" name:"Content"`
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// IDs of instances about to execute commands. Up to 100 IDs are allowed. Supported instance types:
 	// <li> `CVM`
 	// <li> `LIGHTHOUSE`
-	InstanceIds []*string `json:"InstanceIds,omitnil" name:"InstanceIds"`
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
 	// Command name. The name can be up to 60 bytes, and contain [a-z], [A-Z], [0-9] and [_-.].
-	CommandName *string `json:"CommandName,omitnil" name:"CommandName"`
+	CommandName *string `json:"CommandName,omitnil,omitempty" name:"CommandName"`
 
 	// Command description. The maximum length is 120 characters.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Command type. `SHELL` and `POWERSHELL` are supported. The default value is `SHELL`.
-	CommandType *string `json:"CommandType,omitnil" name:"CommandType"`
+	CommandType *string `json:"CommandType,omitnil,omitempty" name:"CommandType"`
 
 	// Command execution path. The default value is /root for `SHELL` commands and C:\Program Files\qcloud\tat_agent\workdir for `POWERSHELL` commands.
-	WorkingDirectory *string `json:"WorkingDirectory,omitnil" name:"WorkingDirectory"`
+	WorkingDirectory *string `json:"WorkingDirectory,omitnil,omitempty" name:"WorkingDirectory"`
 
 	// Command timeout period. Default value: 60 seconds. Value range: [1, 86400].
-	Timeout *uint64 `json:"Timeout,omitnil" name:"Timeout"`
+	Timeout *uint64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 
 	// Whether to save the command. Valid values:
 	// <li> `True`: Save
 	// <li> `False`: Do not save
 	// The default value is `False`.
-	SaveCommand *bool `json:"SaveCommand,omitnil" name:"SaveCommand"`
+	SaveCommand *bool `json:"SaveCommand,omitnil,omitempty" name:"SaveCommand"`
 
 	// Whether to enable the custom parameter feature.
 	// This cannot be modified once created.
 	// Default value: `false`.
-	EnableParameter *bool `json:"EnableParameter,omitnil" name:"EnableParameter"`
+	EnableParameter *bool `json:"EnableParameter,omitnil,omitempty" name:"EnableParameter"`
 
 	// The default value of the custom parameter value when it is enabled. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
 	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
 	// If Parameters is not provided, the default values specified here are used.
 	// Up to 20 custom parameters are supported.
 	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
-	DefaultParameters *string `json:"DefaultParameters,omitnil" name:"DefaultParameters"`
+	DefaultParameters *string `json:"DefaultParameters,omitnil,omitempty" name:"DefaultParameters"`
 
 	// Custom parameters of `Command`. The field type is JSON encoded string. For example, {\"varA\": \"222\"}.
 	// `key` is the name of the custom parameter and `value` is the default value. Both `key` and `value` are strings.
 	// If no parameter value is provided, the `DefaultParameters` is used.
 	// Up to 20 custom parameters are supported.
 	// The name of the custom parameter cannot exceed 64 characters and can contain [a-z], [A-Z], [0-9] and [-_].
-	Parameters *string `json:"Parameters,omitnil" name:"Parameters"`
+	Parameters *string `json:"Parameters,omitnil,omitempty" name:"Parameters"`
 
 	// The tags of the command. It is available when `SaveCommand` is `True`. A maximum of 10 tags are allowed.
-	Tags []*Tag `json:"Tags,omitnil" name:"Tags"`
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 
 	// The username used to execute the command on the CVM or Lighthouse instance.
 	// The principle of least privilege is the best practice for permission management. We recommend you execute TAT commands as a general user. By default, the user `root` is used to execute commands on Linux and the user `System` is used on Windows.
-	Username *string `json:"Username,omitnil" name:"Username"`
+	Username *string `json:"Username,omitnil,omitempty" name:"Username"`
 
 	// The COS bucket URL for uploading logs. The URL must start with `https`, such as `https://BucketName-123454321.cos.ap-beijing.myqcloud.com`.
-	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil" name:"OutputCOSBucketUrl"`
+	OutputCOSBucketUrl *string `json:"OutputCOSBucketUrl,omitnil,omitempty" name:"OutputCOSBucketUrl"`
 
 	// The COS bucket directory where the logs are saved. Check below for the rules of the directory name. 
 	// 1. It must be a combination of number, letters, and visible characters. Up to 60 characters are allowed.
 	// 2. Use a slash (/) to create a subdirectory.
 	// 3. ".." can not be used as the folder name. It cannot start with a slash (/), and cannot contain consecutive slashes.
-	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil" name:"OutputCOSKeyPrefix"`
+	OutputCOSKeyPrefix *string `json:"OutputCOSKeyPrefix,omitnil,omitempty" name:"OutputCOSKeyPrefix"`
 }
 
 func (r *RunCommandRequest) ToJsonString() string {
@@ -2070,13 +2070,13 @@ func (r *RunCommandRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RunCommandResponseParams struct {
 	// Command ID.
-	CommandId *string `json:"CommandId,omitnil" name:"CommandId"`
+	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
 	// Execution activity ID.
-	InvocationId *string `json:"InvocationId,omitnil" name:"InvocationId"`
+	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RunCommandResponse struct {
@@ -2099,42 +2099,42 @@ type ScheduleSettings struct {
 	// Execution policy:
 	// <br><li>`ONCE`: Execute once
 	// <br><li>`RECURRENCE`: Execute repeatedly
-	Policy *string `json:"Policy,omitnil" name:"Policy"`
+	Policy *string `json:"Policy,omitnil,omitempty" name:"Policy"`
 
 	// Trigger the crontab expression. This field is required if `Policy` is `RECURRENCE`. The crontab expression is parsed in UTC+8.
-	Recurrence *string `json:"Recurrence,omitnil" name:"Recurrence"`
+	Recurrence *string `json:"Recurrence,omitnil,omitempty" name:"Recurrence"`
 
 	// The next execution time of the invoker. This field is required if `Policy` is `ONCE`.
-	InvokeTime *string `json:"InvokeTime,omitnil" name:"InvokeTime"`
+	InvokeTime *string `json:"InvokeTime,omitnil,omitempty" name:"InvokeTime"`
 }
 
 type Tag struct {
 	// Tag key.
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// Tag value.
-	Value *string `json:"Value,omitnil" name:"Value"`
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type TaskResult struct {
 	// ExitCode of the execution.
-	ExitCode *int64 `json:"ExitCode,omitnil" name:"ExitCode"`
+	ExitCode *int64 `json:"ExitCode,omitnil,omitempty" name:"ExitCode"`
 
 	// Base64-encoded command output. The maximum length is 24 KB.
-	Output *string `json:"Output,omitnil" name:"Output"`
+	Output *string `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Time when the execution is started.
-	ExecStartTime *string `json:"ExecStartTime,omitnil" name:"ExecStartTime"`
+	ExecStartTime *string `json:"ExecStartTime,omitnil,omitempty" name:"ExecStartTime"`
 
 	// Time when the execution is ended.
-	ExecEndTime *string `json:"ExecEndTime,omitnil" name:"ExecEndTime"`
+	ExecEndTime *string `json:"ExecEndTime,omitnil,omitempty" name:"ExecEndTime"`
 
 	// Dropped bytes of the command output.
-	Dropped *uint64 `json:"Dropped,omitnil" name:"Dropped"`
+	Dropped *uint64 `json:"Dropped,omitnil,omitempty" name:"Dropped"`
 
 	// COS URL of the logs.
-	OutputUrl *string `json:"OutputUrl,omitnil" name:"OutputUrl"`
+	OutputUrl *string `json:"OutputUrl,omitnil,omitempty" name:"OutputUrl"`
 
 	// Error message for uploading logs to COS.
-	OutputUploadCOSErrorInfo *string `json:"OutputUploadCOSErrorInfo,omitnil" name:"OutputUploadCOSErrorInfo"`
+	OutputUploadCOSErrorInfo *string `json:"OutputUploadCOSErrorInfo,omitnil,omitempty" name:"OutputUploadCOSErrorInfo"`
 }

@@ -22,29 +22,29 @@ import (
 
 type BatchContent struct {
 	// Message body
-	Body *string `json:"Body,omitnil" name:"Body"`
+	Body *string `json:"Body,omitnil,omitempty" name:"Body"`
 
 	// Key of a message
-	Key *string `json:"Key,omitnil" name:"Key"`
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 }
 
 // Predefined struct for user
 type SendMessageRequestParams struct {
 	// ID of the integrated resource
-	DataHubId *string `json:"DataHubId,omitnil" name:"DataHubId"`
+	DataHubId *string `json:"DataHubId,omitnil,omitempty" name:"DataHubId"`
 
 	// A batch of messages
-	Message []*BatchContent `json:"Message,omitnil" name:"Message"`
+	Message []*BatchContent `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
 type SendMessageRequest struct {
 	*tchttp.BaseRequest
 	
 	// ID of the integrated resource
-	DataHubId *string `json:"DataHubId,omitnil" name:"DataHubId"`
+	DataHubId *string `json:"DataHubId,omitnil,omitempty" name:"DataHubId"`
 
 	// A batch of messages
-	Message []*BatchContent `json:"Message,omitnil" name:"Message"`
+	Message []*BatchContent `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
 func (r *SendMessageRequest) ToJsonString() string {
@@ -70,10 +70,10 @@ func (r *SendMessageRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SendMessageResponseParams struct {
 	// Message ID
-	MessageId []*string `json:"MessageId,omitnil" name:"MessageId"`
+	MessageId []*string `json:"MessageId,omitnil,omitempty" name:"MessageId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type SendMessageResponse struct {

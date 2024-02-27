@@ -23,19 +23,19 @@ import (
 // Predefined struct for user
 type AddLabelRequestParams struct {
 	// The label ID.
-	LabelId *uint64 `json:"LabelId,omitnil" name:"LabelId"`
+	LabelId *uint64 `json:"LabelId,omitnil,omitempty" name:"LabelId"`
 
 
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 type AddLabelRequest struct {
 	*tchttp.BaseRequest
 	
 	// The label ID.
-	LabelId *uint64 `json:"LabelId,omitnil" name:"LabelId"`
+	LabelId *uint64 `json:"LabelId,omitnil,omitempty" name:"LabelId"`
 
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 func (r *AddLabelRequest) ToJsonString() string {
@@ -61,7 +61,7 @@ func (r *AddLabelRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type AddLabelResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type AddLabelResponse struct {
@@ -82,116 +82,116 @@ func (r *AddLabelResponse) FromJsonString(s string) error {
 
 type Authority struct {
 	// The authority ID.
-	Id *uint64 `json:"Id,omitnil" name:"Id"`
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// The DID.
-	DidId *uint64 `json:"DidId,omitnil" name:"DidId"`
+	DidId *uint64 `json:"DidId,omitnil,omitempty" name:"DidId"`
 
 	// The details of the DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// The authority name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Whether the authority is certified. `1`: Yes; `2`: No.
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The DID service ID.
-	DidServiceId *uint64 `json:"DidServiceId,omitnil" name:"DidServiceId"`
+	DidServiceId *uint64 `json:"DidServiceId,omitnil,omitempty" name:"DidServiceId"`
 
 	// The application ID.
-	ContractAppId *uint64 `json:"ContractAppId,omitnil" name:"ContractAppId"`
+	ContractAppId *uint64 `json:"ContractAppId,omitnil,omitempty" name:"ContractAppId"`
 
 	// Remarks
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// The registration time.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	RegisterTime *string `json:"RegisterTime,omitnil" name:"RegisterTime"`
+	RegisterTime *string `json:"RegisterTime,omitnil,omitempty" name:"RegisterTime"`
 
 	// The recognition time.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	RecognizeTime *string `json:"RecognizeTime,omitnil" name:"RecognizeTime"`
+	RecognizeTime *string `json:"RecognizeTime,omitnil,omitempty" name:"RecognizeTime"`
 
 	// The creation time.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The last updated time.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The application name.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The on-chain label.
-	LabelName *string `json:"LabelName,omitnil" name:"LabelName"`
+	LabelName *string `json:"LabelName,omitnil,omitempty" name:"LabelName"`
 }
 
 type BcosClusterItem struct {
 	// The network ID.
-	ChainId *uint64 `json:"ChainId,omitnil" name:"ChainId"`
+	ChainId *uint64 `json:"ChainId,omitnil,omitempty" name:"ChainId"`
 
 	// The network name.
-	ChainName *string `json:"ChainName,omitnil" name:"ChainName"`
+	ChainName *string `json:"ChainName,omitnil,omitempty" name:"ChainName"`
 
 	// The number of organizations.
-	AgencyCount *uint64 `json:"AgencyCount,omitnil" name:"AgencyCount"`
+	AgencyCount *uint64 `json:"AgencyCount,omitnil,omitempty" name:"AgencyCount"`
 
 	// The consortium ID.
-	ConsortiumId *uint64 `json:"ConsortiumId,omitnil" name:"ConsortiumId"`
+	ConsortiumId *uint64 `json:"ConsortiumId,omitnil,omitempty" name:"ConsortiumId"`
 
 	// The creation time.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The expiration time.
-	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// The network status.
-	ChainStatus *uint64 `json:"ChainStatus,omitnil" name:"ChainStatus"`
+	ChainStatus *uint64 `json:"ChainStatus,omitnil,omitempty" name:"ChainStatus"`
 
 	// The resource ID.
-	ResourceId *string `json:"ResourceId,omitnil" name:"ResourceId"`
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
 	// The cluster ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The consortium name.
-	ConsortiumName *string `json:"ConsortiumName,omitnil" name:"ConsortiumName"`
+	ConsortiumName *string `json:"ConsortiumName,omitnil,omitempty" name:"ConsortiumName"`
 
 	// The organization ID.
-	AgencyId *uint64 `json:"AgencyId,omitnil" name:"AgencyId"`
+	AgencyId *uint64 `json:"AgencyId,omitnil,omitempty" name:"AgencyId"`
 
 	// The renewal status.
-	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
+	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// The network mode.
-	TotalNetworkNode *uint64 `json:"TotalNetworkNode,omitnil" name:"TotalNetworkNode"`
+	TotalNetworkNode *uint64 `json:"TotalNetworkNode,omitnil,omitempty" name:"TotalNetworkNode"`
 
 	// The number of nodes created.
-	TotalCreateNode *uint64 `json:"TotalCreateNode,omitnil" name:"TotalCreateNode"`
+	TotalCreateNode *uint64 `json:"TotalCreateNode,omitnil,omitempty" name:"TotalCreateNode"`
 
 	// The total number of groups.
-	TotalGroups *uint64 `json:"TotalGroups,omitnil" name:"TotalGroups"`
+	TotalGroups *uint64 `json:"TotalGroups,omitnil,omitempty" name:"TotalGroups"`
 }
 
 // Predefined struct for user
 type CancelAuthorityIssuerRequestParams struct {
 	// The details of the DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 type CancelAuthorityIssuerRequest struct {
 	*tchttp.BaseRequest
 	
 	// The details of the DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 func (r *CancelAuthorityIssuerRequest) ToJsonString() string {
@@ -216,7 +216,7 @@ func (r *CancelAuthorityIssuerRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CancelAuthorityIssuerResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CancelAuthorityIssuerResponse struct {
@@ -238,26 +238,26 @@ func (r *CancelAuthorityIssuerResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CheckChainRequestParams struct {
 	// The group ID.
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The name of the DID organization.
-	AgencyName *string `json:"AgencyName,omitnil" name:"AgencyName"`
+	AgencyName *string `json:"AgencyName,omitnil,omitempty" name:"AgencyName"`
 }
 
 type CheckChainRequest struct {
 	*tchttp.BaseRequest
 	
 	// The group ID.
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The name of the DID organization.
-	AgencyName *string `json:"AgencyName,omitnil" name:"AgencyName"`
+	AgencyName *string `json:"AgencyName,omitnil,omitempty" name:"AgencyName"`
 }
 
 func (r *CheckChainRequest) ToJsonString() string {
@@ -284,16 +284,16 @@ func (r *CheckChainRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CheckChainResponseParams struct {
 	// Whether you are the owner of the consortium. `1`: Yes; `0`: No.
-	RoleType *int64 `json:"RoleType,omitnil" name:"RoleType"`
+	RoleType *int64 `json:"RoleType,omitnil,omitempty" name:"RoleType"`
 
 	// The chain ID.
-	ChainId *string `json:"ChainId,omitnil" name:"ChainId"`
+	ChainId *string `json:"ChainId,omitnil,omitempty" name:"ChainId"`
 
 	// The application name.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CheckChainResponse struct {
@@ -315,14 +315,14 @@ func (r *CheckChainResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CheckDidDeployRequestParams struct {
 	// The task ID.
-	TaskId *uint64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type CheckDidDeployRequest struct {
 	*tchttp.BaseRequest
 	
 	// The task ID.
-	TaskId *uint64 `json:"TaskId,omitnil" name:"TaskId"`
+	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 func (r *CheckDidDeployRequest) ToJsonString() string {
@@ -347,10 +347,10 @@ func (r *CheckDidDeployRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CheckDidDeployResponseParams struct {
 	// The service information.
-	Task *Task `json:"Task,omitnil" name:"Task"`
+	Task *Task `json:"Task,omitnil,omitempty" name:"Task"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CheckDidDeployResponse struct {
@@ -371,128 +371,128 @@ func (r *CheckDidDeployResponse) FromJsonString(s string) error {
 
 type ConsortiumItem struct {
 	// The consortium ID.
-	Id *uint64 `json:"Id,omitnil" name:"Id"`
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// The consortium name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type Contract struct {
 	// The application name.
-	ApplyName *string `json:"ApplyName,omitnil" name:"ApplyName"`
+	ApplyName *string `json:"ApplyName,omitnil,omitempty" name:"ApplyName"`
 
 	// The contract status. `true`: Enabled; `false`: Not enabled.
-	Enable *bool `json:"Enable,omitnil" name:"Enable"`
+	Enable *bool `json:"Enable,omitnil,omitempty" name:"Enable"`
 
 	// The CNS address of the contract.
-	Hash *string `json:"Hash,omitnil" name:"Hash"`
+	Hash *string `json:"Hash,omitnil,omitempty" name:"Hash"`
 
 	// The desensitized CNS address.
-	HashShow *string `json:"HashShow,omitnil" name:"HashShow"`
+	HashShow *string `json:"HashShow,omitnil,omitempty" name:"HashShow"`
 
 	// The DID of the organization that deployed the contract.
-	WeId *string `json:"WeId,omitnil" name:"WeId"`
+	WeId *string `json:"WeId,omitnil,omitempty" name:"WeId"`
 
 	// The name of the organization that deployed the contract.
-	DeployName *string `json:"DeployName,omitnil" name:"DeployName"`
+	DeployName *string `json:"DeployName,omitnil,omitempty" name:"DeployName"`
 
 	// The group.
-	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The deployment time.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 }
 
 type CptIssueRank struct {
 	// The (claim protocol type) CPT name.
-	CptName *string `json:"CptName,omitnil" name:"CptName"`
+	CptName *string `json:"CptName,omitnil,omitempty" name:"CptName"`
 
 	// The ranking.
-	Rank *int64 `json:"Rank,omitnil" name:"Rank"`
+	Rank *int64 `json:"Rank,omitnil,omitempty" name:"Rank"`
 
 	// The number of credentials issued.
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 
 	// The application name.
-	ApplyName *string `json:"ApplyName,omitnil" name:"ApplyName"`
+	ApplyName *string `json:"ApplyName,omitnil,omitempty" name:"ApplyName"`
 
 	// The application ID.
-	ApplyId *uint64 `json:"ApplyId,omitnil" name:"ApplyId"`
+	ApplyId *uint64 `json:"ApplyId,omitnil,omitempty" name:"ApplyId"`
 }
 
 type CptListData struct {
 	// The CPT ID.
-	Id *uint64 `json:"Id,omitnil" name:"Id"`
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// The name of the claim protocol type (CPT).
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The service ID.
-	ServiceId *uint64 `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *uint64 `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// The application ID of the contract.
-	ContractAppId *uint64 `json:"ContractAppId,omitnil" name:"ContractAppId"`
+	ContractAppId *uint64 `json:"ContractAppId,omitnil,omitempty" name:"ContractAppId"`
 
 	// The claim protocol type (CPT) ID.
-	CptId *uint64 `json:"CptId,omitnil" name:"CptId"`
+	CptId *uint64 `json:"CptId,omitnil,omitempty" name:"CptId"`
 
 	// The type. `1`: System CPTs; `2`: Authorization CPTs; `3`: General CPTs
-	CptType *uint64 `json:"CptType,omitnil" name:"CptType"`
+	CptType *uint64 `json:"CptType,omitnil,omitempty" name:"CptType"`
 
 	// The description of the claim protocol type (CPT).
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// The JSON file of the claim protocol type (CPT).
-	CptJson *string `json:"CptJson,omitnil" name:"CptJson"`
+	CptJson *string `json:"CptJson,omitnil,omitempty" name:"CptJson"`
 
 	// The creation time.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The last updated time.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// The DID of the creator.
-	CreatorDid *string `json:"CreatorDid,omitnil" name:"CreatorDid"`
+	CreatorDid *string `json:"CreatorDid,omitnil,omitempty" name:"CreatorDid"`
 
 	// The application name.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 }
 
 // Predefined struct for user
 type CreateCredentialRequestParams struct {
 	// A parameter set. For details, see the example.
-	FunctionArg *FunctionArg `json:"FunctionArg,omitnil" name:"FunctionArg"`
+	FunctionArg *FunctionArg `json:"FunctionArg,omitnil,omitempty" name:"FunctionArg"`
 
 	// A parameter set. For details, see the example.
-	TransactionArg *TransactionArg `json:"TransactionArg,omitnil" name:"TransactionArg"`
+	TransactionArg *TransactionArg `json:"TransactionArg,omitnil,omitempty" name:"TransactionArg"`
 
 	// The version.
-	VersionCredential *string `json:"VersionCredential,omitnil" name:"VersionCredential"`
+	VersionCredential *string `json:"VersionCredential,omitnil,omitempty" name:"VersionCredential"`
 
 	// Whether the credential is unsigned.
-	UnSigned *bool `json:"UnSigned,omitnil" name:"UnSigned"`
+	UnSigned *bool `json:"UnSigned,omitnil,omitempty" name:"UnSigned"`
 }
 
 type CreateCredentialRequest struct {
 	*tchttp.BaseRequest
 	
 	// A parameter set. For details, see the example.
-	FunctionArg *FunctionArg `json:"FunctionArg,omitnil" name:"FunctionArg"`
+	FunctionArg *FunctionArg `json:"FunctionArg,omitnil,omitempty" name:"FunctionArg"`
 
 	// A parameter set. For details, see the example.
-	TransactionArg *TransactionArg `json:"TransactionArg,omitnil" name:"TransactionArg"`
+	TransactionArg *TransactionArg `json:"TransactionArg,omitnil,omitempty" name:"TransactionArg"`
 
 	// The version.
-	VersionCredential *string `json:"VersionCredential,omitnil" name:"VersionCredential"`
+	VersionCredential *string `json:"VersionCredential,omitnil,omitempty" name:"VersionCredential"`
 
 	// Whether the credential is unsigned.
-	UnSigned *bool `json:"UnSigned,omitnil" name:"UnSigned"`
+	UnSigned *bool `json:"UnSigned,omitnil,omitempty" name:"UnSigned"`
 }
 
 func (r *CreateCredentialRequest) ToJsonString() string {
@@ -520,10 +520,10 @@ func (r *CreateCredentialRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateCredentialResponseParams struct {
 	// The information of the credential.
-	CredentialData *string `json:"CredentialData,omitnil" name:"CredentialData"`
+	CredentialData *string `json:"CredentialData,omitnil,omitempty" name:"CredentialData"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateCredentialResponse struct {
@@ -545,50 +545,50 @@ func (r *CreateCredentialResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateDidServiceRequestParams struct {
 	// The consortium name.
-	ConsortiumName *string `json:"ConsortiumName,omitnil" name:"ConsortiumName"`
+	ConsortiumName *string `json:"ConsortiumName,omitnil,omitempty" name:"ConsortiumName"`
 
 	// The consortium ID.
-	ConsortiumId *int64 `json:"ConsortiumId,omitnil" name:"ConsortiumId"`
+	ConsortiumId *int64 `json:"ConsortiumId,omitnil,omitempty" name:"ConsortiumId"`
 
 	// The group ID.
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The organization name.
-	AgencyName *string `json:"AgencyName,omitnil" name:"AgencyName"`
+	AgencyName *string `json:"AgencyName,omitnil,omitempty" name:"AgencyName"`
 
 	// The application name.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group name.
-	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 }
 
 type CreateDidServiceRequest struct {
 	*tchttp.BaseRequest
 	
 	// The consortium name.
-	ConsortiumName *string `json:"ConsortiumName,omitnil" name:"ConsortiumName"`
+	ConsortiumName *string `json:"ConsortiumName,omitnil,omitempty" name:"ConsortiumName"`
 
 	// The consortium ID.
-	ConsortiumId *int64 `json:"ConsortiumId,omitnil" name:"ConsortiumId"`
+	ConsortiumId *int64 `json:"ConsortiumId,omitnil,omitempty" name:"ConsortiumId"`
 
 	// The group ID.
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The organization name.
-	AgencyName *string `json:"AgencyName,omitnil" name:"AgencyName"`
+	AgencyName *string `json:"AgencyName,omitnil,omitempty" name:"AgencyName"`
 
 	// The application name.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group name.
-	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 }
 
 func (r *CreateDidServiceRequest) ToJsonString() string {
@@ -619,10 +619,10 @@ func (r *CreateDidServiceRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateDidServiceResponseParams struct {
 	// The service information.
-	Task *Task `json:"Task,omitnil" name:"Task"`
+	Task *Task `json:"Task,omitnil,omitempty" name:"Task"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateDidServiceResponse struct {
@@ -644,26 +644,26 @@ func (r *CreateDidServiceResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLabelRequestParams struct {
 	// The label name.
-	LabelName *string `json:"LabelName,omitnil" name:"LabelName"`
+	LabelName *string `json:"LabelName,omitnil,omitempty" name:"LabelName"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 type CreateLabelRequest struct {
 	*tchttp.BaseRequest
 	
 	// The label name.
-	LabelName *string `json:"LabelName,omitnil" name:"LabelName"`
+	LabelName *string `json:"LabelName,omitnil,omitempty" name:"LabelName"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 func (r *CreateLabelRequest) ToJsonString() string {
@@ -690,7 +690,7 @@ func (r *CreateLabelRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateLabelResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateLabelResponse struct {
@@ -712,20 +712,20 @@ func (r *CreateLabelResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSelectiveCredentialRequestParams struct {
 	// A parameter set.
-	FunctionArg *VerifyFunctionArg `json:"FunctionArg,omitnil" name:"FunctionArg"`
+	FunctionArg *VerifyFunctionArg `json:"FunctionArg,omitnil,omitempty" name:"FunctionArg"`
 
 	// The disclosure policy ID.
-	PolicyId *uint64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *uint64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 }
 
 type CreateSelectiveCredentialRequest struct {
 	*tchttp.BaseRequest
 	
 	// A parameter set.
-	FunctionArg *VerifyFunctionArg `json:"FunctionArg,omitnil" name:"FunctionArg"`
+	FunctionArg *VerifyFunctionArg `json:"FunctionArg,omitnil,omitempty" name:"FunctionArg"`
 
 	// The disclosure policy ID.
-	PolicyId *uint64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *uint64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 }
 
 func (r *CreateSelectiveCredentialRequest) ToJsonString() string {
@@ -751,10 +751,10 @@ func (r *CreateSelectiveCredentialRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateSelectiveCredentialResponseParams struct {
 	// The credential string.
-	CredentialData *string `json:"CredentialData,omitnil" name:"CredentialData"`
+	CredentialData *string `json:"CredentialData,omitnil,omitempty" name:"CredentialData"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateSelectiveCredentialResponse struct {
@@ -776,26 +776,26 @@ func (r *CreateSelectiveCredentialResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTDidByPrivateKeyRequestParams struct {
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The private key.
-	PrivateKey *string `json:"PrivateKey,omitnil" name:"PrivateKey"`
+	PrivateKey *string `json:"PrivateKey,omitnil,omitempty" name:"PrivateKey"`
 }
 
 type CreateTDidByPrivateKeyRequest struct {
 	*tchttp.BaseRequest
 	
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The private key.
-	PrivateKey *string `json:"PrivateKey,omitnil" name:"PrivateKey"`
+	PrivateKey *string `json:"PrivateKey,omitnil,omitempty" name:"PrivateKey"`
 }
 
 func (r *CreateTDidByPrivateKeyRequest) ToJsonString() string {
@@ -822,10 +822,10 @@ func (r *CreateTDidByPrivateKeyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTDidByPrivateKeyResponseParams struct {
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateTDidByPrivateKeyResponse struct {
@@ -847,32 +847,32 @@ func (r *CreateTDidByPrivateKeyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTDidByPublicKeyRequestParams struct {
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The public key.
-	PublicKey *string `json:"PublicKey,omitnil" name:"PublicKey"`
+	PublicKey *string `json:"PublicKey,omitnil,omitempty" name:"PublicKey"`
 
 	// The encrypted public key.
-	EncryptPubKey *string `json:"EncryptPubKey,omitnil" name:"EncryptPubKey"`
+	EncryptPubKey *string `json:"EncryptPubKey,omitnil,omitempty" name:"EncryptPubKey"`
 }
 
 type CreateTDidByPublicKeyRequest struct {
 	*tchttp.BaseRequest
 	
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The public key.
-	PublicKey *string `json:"PublicKey,omitnil" name:"PublicKey"`
+	PublicKey *string `json:"PublicKey,omitnil,omitempty" name:"PublicKey"`
 
 	// The encrypted public key.
-	EncryptPubKey *string `json:"EncryptPubKey,omitnil" name:"EncryptPubKey"`
+	EncryptPubKey *string `json:"EncryptPubKey,omitnil,omitempty" name:"EncryptPubKey"`
 }
 
 func (r *CreateTDidByPublicKeyRequest) ToJsonString() string {
@@ -900,10 +900,10 @@ func (r *CreateTDidByPublicKeyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTDidByPublicKeyResponseParams struct {
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateTDidByPublicKeyResponse struct {
@@ -925,26 +925,26 @@ func (r *CreateTDidByPublicKeyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTDidRequestParams struct {
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	//  
-	Relegation *uint64 `json:"Relegation,omitnil" name:"Relegation"`
+	Relegation *uint64 `json:"Relegation,omitnil,omitempty" name:"Relegation"`
 }
 
 type CreateTDidRequest struct {
 	*tchttp.BaseRequest
 	
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	//  
-	Relegation *uint64 `json:"Relegation,omitnil" name:"Relegation"`
+	Relegation *uint64 `json:"Relegation,omitnil,omitempty" name:"Relegation"`
 }
 
 func (r *CreateTDidRequest) ToJsonString() string {
@@ -971,10 +971,10 @@ func (r *CreateTDidRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateTDidResponseParams struct {
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type CreateTDidResponse struct {
@@ -995,50 +995,50 @@ func (r *CreateTDidResponse) FromJsonString(s string) error {
 
 type CredentialStatus struct {
 	// The credential ID.
-	CredentialId *string `json:"CredentialId,omitnil" name:"CredentialId"`
+	CredentialId *string `json:"CredentialId,omitnil,omitempty" name:"CredentialId"`
 
 	// The credential status. `0`: Invalid; `1`: Valid.
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The DID of the issuer.
-	Issuer *string `json:"Issuer,omitnil" name:"Issuer"`
+	Issuer *string `json:"Issuer,omitnil,omitempty" name:"Issuer"`
 
 	// A summary of the credential.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Digest *string `json:"Digest,omitnil" name:"Digest"`
+	Digest *string `json:"Digest,omitnil,omitempty" name:"Digest"`
 
 	// The credential signature.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Signature *string `json:"Signature,omitnil" name:"Signature"`
+	Signature *string `json:"Signature,omitnil,omitempty" name:"Signature"`
 
 	// The last updated timestamp.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	TimeStamp *uint64 `json:"TimeStamp,omitnil" name:"TimeStamp"`
+	TimeStamp *uint64 `json:"TimeStamp,omitnil,omitempty" name:"TimeStamp"`
 }
 
 // Predefined struct for user
 type DeployByNameRequestParams struct {
 	// The application name.
-	ApplicationName *string `json:"ApplicationName,omitnil" name:"ApplicationName"`
+	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 type DeployByNameRequest struct {
 	*tchttp.BaseRequest
 	
 	// The application name.
-	ApplicationName *string `json:"ApplicationName,omitnil" name:"ApplicationName"`
+	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 func (r *DeployByNameRequest) ToJsonString() string {
@@ -1065,10 +1065,10 @@ func (r *DeployByNameRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DeployByNameResponseParams struct {
 	// The hash value.
-	Hash *string `json:"Hash,omitnil" name:"Hash"`
+	Hash *string `json:"Hash,omitnil,omitempty" name:"Hash"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DeployByNameResponse struct {
@@ -1089,147 +1089,147 @@ func (r *DeployByNameResponse) FromJsonString(s string) error {
 
 type DidCluster struct {
 	// The chain ID.
-	ChainId *uint64 `json:"ChainId,omitnil" name:"ChainId"`
+	ChainId *uint64 `json:"ChainId,omitnil,omitempty" name:"ChainId"`
 
 	// The chain name.
-	ChainName *string `json:"ChainName,omitnil" name:"ChainName"`
+	ChainName *string `json:"ChainName,omitnil,omitempty" name:"ChainName"`
 
 	// The number of organizations.
-	AgencyCount *uint64 `json:"AgencyCount,omitnil" name:"AgencyCount"`
+	AgencyCount *uint64 `json:"AgencyCount,omitnil,omitempty" name:"AgencyCount"`
 
 	// The consortium ID.
-	ConsortiumId *uint64 `json:"ConsortiumId,omitnil" name:"ConsortiumId"`
+	ConsortiumId *uint64 `json:"ConsortiumId,omitnil,omitempty" name:"ConsortiumId"`
 
 	// The creation time.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The expiration time.
-	ExpireTime *string `json:"ExpireTime,omitnil" name:"ExpireTime"`
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 
 	// The network status.
-	ChainStatus *uint64 `json:"ChainStatus,omitnil" name:"ChainStatus"`
+	ChainStatus *uint64 `json:"ChainStatus,omitnil,omitempty" name:"ChainStatus"`
 
 	// The resource ID.
-	ResourceId *string `json:"ResourceId,omitnil" name:"ResourceId"`
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The consortium name.
-	ConsortiumName *string `json:"ConsortiumName,omitnil" name:"ConsortiumName"`
+	ConsortiumName *string `json:"ConsortiumName,omitnil,omitempty" name:"ConsortiumName"`
 
 	// The organization ID.
-	AgencyId *uint64 `json:"AgencyId,omitnil" name:"AgencyId"`
+	AgencyId *uint64 `json:"AgencyId,omitnil,omitempty" name:"AgencyId"`
 
 	// Whether auto-renewal is enabled.
-	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitnil" name:"AutoRenewFlag"`
+	AutoRenewFlag *uint64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
 
 	// The total number of network nodes.
-	TotalNetworkNode *uint64 `json:"TotalNetworkNode,omitnil" name:"TotalNetworkNode"`
+	TotalNetworkNode *uint64 `json:"TotalNetworkNode,omitnil,omitempty" name:"TotalNetworkNode"`
 
 	// The number of nodes of the current organization.
-	TotalCreateNode *uint64 `json:"TotalCreateNode,omitnil" name:"TotalCreateNode"`
+	TotalCreateNode *uint64 `json:"TotalCreateNode,omitnil,omitempty" name:"TotalCreateNode"`
 
 	// The total number of groups.
-	TotalGroups *uint64 `json:"TotalGroups,omitnil" name:"TotalGroups"`
+	TotalGroups *uint64 `json:"TotalGroups,omitnil,omitempty" name:"TotalGroups"`
 
 	// The total number of DIDs.
-	DidCount *uint64 `json:"DidCount,omitnil" name:"DidCount"`
+	DidCount *uint64 `json:"DidCount,omitnil,omitempty" name:"DidCount"`
 }
 
 type DidData struct {
 	// The service ID.
-	ServiceId *uint64 `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *uint64 `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The application name.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// Remarks
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// The status of the authority. `1`: Not registered; `2`: Not certified; `3`: Certified.
-	AuthorityState *int64 `json:"AuthorityState,omitnil" name:"AuthorityState"`
+	AuthorityState *int64 `json:"AuthorityState,omitnil,omitempty" name:"AuthorityState"`
 
 	// The label of the DID.
-	LabelName *string `json:"LabelName,omitnil" name:"LabelName"`
+	LabelName *string `json:"LabelName,omitnil,omitempty" name:"LabelName"`
 
 	// The DID creation time.
-	CreatedAt *string `json:"CreatedAt,omitnil" name:"CreatedAt"`
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The consortium name.
-	AllianceName *string `json:"AllianceName,omitnil" name:"AllianceName"`
+	AllianceName *string `json:"AllianceName,omitnil,omitempty" name:"AllianceName"`
 
 	// The label ID.
-	LabelId *uint64 `json:"LabelId,omitnil" name:"LabelId"`
+	LabelId *uint64 `json:"LabelId,omitnil,omitempty" name:"LabelId"`
 }
 
 type DidServiceInfo struct {
 	// The DID service ID.
-	Id *uint64 `json:"Id,omitnil" name:"Id"`
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// The application ID.
-	Appid *uint64 `json:"Appid,omitnil" name:"Appid"`
+	Appid *uint64 `json:"Appid,omitnil,omitempty" name:"Appid"`
 
 	// The account ID.
-	Uin *string `json:"Uin,omitnil" name:"Uin"`
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
 
 	// The consortium ID.
-	ConsortiumId *int64 `json:"ConsortiumId,omitnil" name:"ConsortiumId"`
+	ConsortiumId *int64 `json:"ConsortiumId,omitnil,omitempty" name:"ConsortiumId"`
 
 	// The consortium name.
-	ConsortiumName *string `json:"ConsortiumName,omitnil" name:"ConsortiumName"`
+	ConsortiumName *string `json:"ConsortiumName,omitnil,omitempty" name:"ConsortiumName"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The chain ID.
-	ChainId *string `json:"ChainId,omitnil" name:"ChainId"`
+	ChainId *string `json:"ChainId,omitnil,omitempty" name:"ChainId"`
 
 	// Whether you are the owner of the consortium. `1`: Yes; `0`: No.
-	RoleType *uint64 `json:"RoleType,omitnil" name:"RoleType"`
+	RoleType *uint64 `json:"RoleType,omitnil,omitempty" name:"RoleType"`
 
 	// The organization DID.
-	AgencyDid *string `json:"AgencyDid,omitnil" name:"AgencyDid"`
+	AgencyDid *string `json:"AgencyDid,omitnil,omitempty" name:"AgencyDid"`
 
 	// The organization name.
-	CreateOrg *string `json:"CreateOrg,omitnil" name:"CreateOrg"`
+	CreateOrg *string `json:"CreateOrg,omitnil,omitempty" name:"CreateOrg"`
 
 	// The endpoint.
-	Endpoint *string `json:"Endpoint,omitnil" name:"Endpoint"`
+	Endpoint *string `json:"Endpoint,omitnil,omitempty" name:"Endpoint"`
 
 	// The creation time.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The last updated time.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// The group name.
-	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 }
 
 // Predefined struct for user
 type DownCptRequestParams struct {
 	// The claim protocol type (CPT) index.
-	CptIndex *uint64 `json:"CptIndex,omitnil" name:"CptIndex"`
+	CptIndex *uint64 `json:"CptIndex,omitnil,omitempty" name:"CptIndex"`
 }
 
 type DownCptRequest struct {
 	*tchttp.BaseRequest
 	
 	// The claim protocol type (CPT) index.
-	CptIndex *uint64 `json:"CptIndex,omitnil" name:"CptIndex"`
+	CptIndex *uint64 `json:"CptIndex,omitnil,omitempty" name:"CptIndex"`
 }
 
 func (r *DownCptRequest) ToJsonString() string {
@@ -1254,7 +1254,7 @@ func (r *DownCptRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DownCptResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type DownCptResponse struct {
@@ -1276,14 +1276,14 @@ func (r *DownCptResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type EnableHashRequestParams struct {
 	// The CNS address of the contract.
-	Hash *string `json:"Hash,omitnil" name:"Hash"`
+	Hash *string `json:"Hash,omitnil,omitempty" name:"Hash"`
 }
 
 type EnableHashRequest struct {
 	*tchttp.BaseRequest
 	
 	// The CNS address of the contract.
-	Hash *string `json:"Hash,omitnil" name:"Hash"`
+	Hash *string `json:"Hash,omitnil,omitempty" name:"Hash"`
 }
 
 func (r *EnableHashRequest) ToJsonString() string {
@@ -1308,7 +1308,7 @@ func (r *EnableHashRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type EnableHashResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type EnableHashResponse struct {
@@ -1329,29 +1329,29 @@ func (r *EnableHashResponse) FromJsonString(s string) error {
 
 type FunctionArg struct {
 	// The claim protocol type (CPT) ID.
-	CptId *uint64 `json:"CptId,omitnil" name:"CptId"`
+	CptId *uint64 `json:"CptId,omitnil,omitempty" name:"CptId"`
 
 	// The DID of the issuer.
-	Issuer *string `json:"Issuer,omitnil" name:"Issuer"`
+	Issuer *string `json:"Issuer,omitnil,omitempty" name:"Issuer"`
 
 	// The expiration time.
-	ExpirationDate *string `json:"ExpirationDate,omitnil" name:"ExpirationDate"`
+	ExpirationDate *string `json:"ExpirationDate,omitnil,omitempty" name:"ExpirationDate"`
 
 	// The claim.
-	ClaimJson *string `json:"ClaimJson,omitnil" name:"ClaimJson"`
+	ClaimJson *string `json:"ClaimJson,omitnil,omitempty" name:"ClaimJson"`
 }
 
 // Predefined struct for user
 type GetAgencyTDidRequestParams struct {
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 type GetAgencyTDidRequest struct {
 	*tchttp.BaseRequest
 	
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 func (r *GetAgencyTDidRequest) ToJsonString() string {
@@ -1376,13 +1376,13 @@ func (r *GetAgencyTDidRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetAgencyTDidResponseParams struct {
 	// The prefix (fixed).
-	Prefix *string `json:"Prefix,omitnil" name:"Prefix"`
+	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
 
 	// The details of the DID.
-	Identity []*Identity `json:"Identity,omitnil" name:"Identity"`
+	Identity []*Identity `json:"Identity,omitnil,omitempty" name:"Identity"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetAgencyTDidResponse struct {
@@ -1404,32 +1404,32 @@ func (r *GetAgencyTDidResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetAuthoritiesListRequestParams struct {
 	// The page number, beginning from 1.
-	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// The number of records per page.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// Whether to query certified or uncertified authorities. `1`: Certified; `2`: Uncertified.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 type GetAuthoritiesListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The page number, beginning from 1.
-	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// The number of records per page.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// Whether to query certified or uncertified authorities. `1`: Certified; `2`: Uncertified.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 func (r *GetAuthoritiesListRequest) ToJsonString() string {
@@ -1457,13 +1457,13 @@ func (r *GetAuthoritiesListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetAuthoritiesListResponseParams struct {
 	// A data set.
-	ResultList []*Authority `json:"ResultList,omitnil" name:"ResultList"`
+	ResultList []*Authority `json:"ResultList,omitnil,omitempty" name:"ResultList"`
 
 	// The total number of records.
-	AllCount *int64 `json:"AllCount,omitnil" name:"AllCount"`
+	AllCount *int64 `json:"AllCount,omitnil,omitempty" name:"AllCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetAuthoritiesListResponse struct {
@@ -1485,14 +1485,14 @@ func (r *GetAuthoritiesListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetAuthorityIssuerRequestParams struct {
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 type GetAuthorityIssuerRequest struct {
 	*tchttp.BaseRequest
 	
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 func (r *GetAuthorityIssuerRequest) ToJsonString() string {
@@ -1517,28 +1517,28 @@ func (r *GetAuthorityIssuerRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetAuthorityIssuerResponseParams struct {
 	// The authority name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// The blockchain network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The blockchain group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The DID of the authority.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// Remarks.
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// The registration time.
-	RegisterTime *string `json:"RegisterTime,omitnil" name:"RegisterTime"`
+	RegisterTime *string `json:"RegisterTime,omitnil,omitempty" name:"RegisterTime"`
 
 	// The recognition time.
-	RecognizeTime *string `json:"RecognizeTime,omitnil" name:"RecognizeTime"`
+	RecognizeTime *string `json:"RecognizeTime,omitnil,omitempty" name:"RecognizeTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetAuthorityIssuerResponse struct {
@@ -1560,14 +1560,14 @@ func (r *GetAuthorityIssuerResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetConsortiumClusterListRequestParams struct {
 	// The consortium ID.
-	ConsortiumId *uint64 `json:"ConsortiumId,omitnil" name:"ConsortiumId"`
+	ConsortiumId *uint64 `json:"ConsortiumId,omitnil,omitempty" name:"ConsortiumId"`
 }
 
 type GetConsortiumClusterListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The consortium ID.
-	ConsortiumId *uint64 `json:"ConsortiumId,omitnil" name:"ConsortiumId"`
+	ConsortiumId *uint64 `json:"ConsortiumId,omitnil,omitempty" name:"ConsortiumId"`
 }
 
 func (r *GetConsortiumClusterListRequest) ToJsonString() string {
@@ -1592,10 +1592,10 @@ func (r *GetConsortiumClusterListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetConsortiumClusterListResponseParams struct {
 	// A list of networks.
-	ClusterList []*BcosClusterItem `json:"ClusterList,omitnil" name:"ClusterList"`
+	ClusterList []*BcosClusterItem `json:"ClusterList,omitnil,omitempty" name:"ClusterList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetConsortiumClusterListResponse struct {
@@ -1646,10 +1646,10 @@ func (r *GetConsortiumListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetConsortiumListResponseParams struct {
 	// A list of the consortiums.
-	ConsortiumList []*ConsortiumItem `json:"ConsortiumList,omitnil" name:"ConsortiumList"`
+	ConsortiumList []*ConsortiumItem `json:"ConsortiumList,omitnil,omitempty" name:"ConsortiumList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetConsortiumListResponse struct {
@@ -1671,14 +1671,14 @@ func (r *GetConsortiumListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCptInfoRequestParams struct {
 	// The claim protocol type (CPT) index.
-	CptIndex *uint64 `json:"CptIndex,omitnil" name:"CptIndex"`
+	CptIndex *uint64 `json:"CptIndex,omitnil,omitempty" name:"CptIndex"`
 }
 
 type GetCptInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// The claim protocol type (CPT) index.
-	CptIndex *uint64 `json:"CptIndex,omitnil" name:"CptIndex"`
+	CptIndex *uint64 `json:"CptIndex,omitnil,omitempty" name:"CptIndex"`
 }
 
 func (r *GetCptInfoRequest) ToJsonString() string {
@@ -1703,10 +1703,10 @@ func (r *GetCptInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCptInfoResponseParams struct {
 	// The JSON data of the claim protocol type (CPT).
-	CptJsonData *string `json:"CptJsonData,omitnil" name:"CptJsonData"`
+	CptJsonData *string `json:"CptJsonData,omitnil,omitempty" name:"CptJsonData"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetCptInfoResponse struct {
@@ -1728,26 +1728,26 @@ func (r *GetCptInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCptListRequestParams struct {
 	// The start.
-	DisplayStart *uint64 `json:"DisplayStart,omitnil" name:"DisplayStart"`
+	DisplayStart *uint64 `json:"DisplayStart,omitnil,omitempty" name:"DisplayStart"`
 
 	// The maximum number of records to return.
-	DisplayLength *uint64 `json:"DisplayLength,omitnil" name:"DisplayLength"`
+	DisplayLength *uint64 `json:"DisplayLength,omitnil,omitempty" name:"DisplayLength"`
 
 	// The type. `0`: All CPTs; `1`: System CPTs; `2`: Authorization CPTs; `3`: General CPTs
-	CptType *uint64 `json:"CptType,omitnil" name:"CptType"`
+	CptType *uint64 `json:"CptType,omitnil,omitempty" name:"CptType"`
 }
 
 type GetCptListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The start.
-	DisplayStart *uint64 `json:"DisplayStart,omitnil" name:"DisplayStart"`
+	DisplayStart *uint64 `json:"DisplayStart,omitnil,omitempty" name:"DisplayStart"`
 
 	// The maximum number of records to return.
-	DisplayLength *uint64 `json:"DisplayLength,omitnil" name:"DisplayLength"`
+	DisplayLength *uint64 `json:"DisplayLength,omitnil,omitempty" name:"DisplayLength"`
 
 	// The type. `0`: All CPTs; `1`: System CPTs; `2`: Authorization CPTs; `3`: General CPTs
-	CptType *uint64 `json:"CptType,omitnil" name:"CptType"`
+	CptType *uint64 `json:"CptType,omitnil,omitempty" name:"CptType"`
 }
 
 func (r *GetCptListRequest) ToJsonString() string {
@@ -1774,13 +1774,13 @@ func (r *GetCptListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCptListResponseParams struct {
 	// The information of claim protocol types (CPT).
-	CptDataList []*CptListData `json:"CptDataList,omitnil" name:"CptDataList"`
+	CptDataList []*CptListData `json:"CptDataList,omitnil,omitempty" name:"CptDataList"`
 
 	// The total number of claim protocol types (CPT).
-	AllCount *uint64 `json:"AllCount,omitnil" name:"AllCount"`
+	AllCount *uint64 `json:"AllCount,omitnil,omitempty" name:"AllCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetCptListResponse struct {
@@ -1802,26 +1802,26 @@ func (r *GetCptListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCredentialCptRankRequestParams struct {
 	// The start date (as early as 2021-4-23).
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end date (as early as 2021-4-23).
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 type GetCredentialCptRankRequest struct {
 	*tchttp.BaseRequest
 	
 	// The start date (as early as 2021-4-23).
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end date (as early as 2021-4-23).
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 func (r *GetCredentialCptRankRequest) ToJsonString() string {
@@ -1848,10 +1848,10 @@ func (r *GetCredentialCptRankRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCredentialCptRankResponseParams struct {
 	// The rankings.
-	RankIssueResult []*CptIssueRank `json:"RankIssueResult,omitnil" name:"RankIssueResult"`
+	RankIssueResult []*CptIssueRank `json:"RankIssueResult,omitnil,omitempty" name:"RankIssueResult"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetCredentialCptRankResponse struct {
@@ -1873,26 +1873,26 @@ func (r *GetCredentialCptRankResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCredentialIssueRankRequestParams struct {
 	// The start date (as early as 2021-4-23).
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end date (as early as 2021-4-23).
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 type GetCredentialIssueRankRequest struct {
 	*tchttp.BaseRequest
 	
 	// The start date (as early as 2021-4-23).
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end date (as early as 2021-4-23).
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 func (r *GetCredentialIssueRankRequest) ToJsonString() string {
@@ -1919,10 +1919,10 @@ func (r *GetCredentialIssueRankRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCredentialIssueRankResponseParams struct {
 	// The rankings.
-	RankIssueResult []*CptIssueRank `json:"RankIssueResult,omitnil" name:"RankIssueResult"`
+	RankIssueResult []*CptIssueRank `json:"RankIssueResult,omitnil,omitempty" name:"RankIssueResult"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetCredentialIssueRankResponse struct {
@@ -1944,26 +1944,26 @@ func (r *GetCredentialIssueRankResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCredentialIssueTrendRequestParams struct {
 	// The start date (as early as 2021-4-23).
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end date (as early as 2021-4-23).
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 type GetCredentialIssueTrendRequest struct {
 	*tchttp.BaseRequest
 	
 	// The start date (as early as 2021-4-23).
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end date (as early as 2021-4-23).
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 func (r *GetCredentialIssueTrendRequest) ToJsonString() string {
@@ -1990,10 +1990,10 @@ func (r *GetCredentialIssueTrendRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCredentialIssueTrendResponseParams struct {
 	// The trend information.
-	Trend []*Trend `json:"Trend,omitnil" name:"Trend"`
+	Trend []*Trend `json:"Trend,omitnil,omitempty" name:"Trend"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetCredentialIssueTrendResponse struct {
@@ -2015,14 +2015,14 @@ func (r *GetCredentialIssueTrendResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCredentialStatusRequestParams struct {
 	// The credential ID.
-	CredentialId *string `json:"CredentialId,omitnil" name:"CredentialId"`
+	CredentialId *string `json:"CredentialId,omitnil,omitempty" name:"CredentialId"`
 }
 
 type GetCredentialStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// The credential ID.
-	CredentialId *string `json:"CredentialId,omitnil" name:"CredentialId"`
+	CredentialId *string `json:"CredentialId,omitnil,omitempty" name:"CredentialId"`
 }
 
 func (r *GetCredentialStatusRequest) ToJsonString() string {
@@ -2047,10 +2047,10 @@ func (r *GetCredentialStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCredentialStatusResponseParams struct {
 	// The credential status.
-	CredentialStatus *CredentialStatus `json:"CredentialStatus,omitnil" name:"CredentialStatus"`
+	CredentialStatus *CredentialStatus `json:"CredentialStatus,omitnil,omitempty" name:"CredentialStatus"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetCredentialStatusResponse struct {
@@ -2072,14 +2072,14 @@ func (r *GetCredentialStatusResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDataPanelRequestParams struct {
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 type GetDataPanelRequest struct {
 	*tchttp.BaseRequest
 	
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 func (r *GetDataPanelRequest) ToJsonString() string {
@@ -2104,43 +2104,43 @@ func (r *GetDataPanelRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDataPanelResponseParams struct {
 	// The number of blockchain networks.
-	BlockNetworkCount *int64 `json:"BlockNetworkCount,omitnil" name:"BlockNetworkCount"`
+	BlockNetworkCount *int64 `json:"BlockNetworkCount,omitnil,omitempty" name:"BlockNetworkCount"`
 
 	// The blockchain network name.
-	BlockNetworkName *string `json:"BlockNetworkName,omitnil" name:"BlockNetworkName"`
+	BlockNetworkName *string `json:"BlockNetworkName,omitnil,omitempty" name:"BlockNetworkName"`
 
 	// The current block height.
-	BlockHeight *int64 `json:"BlockHeight,omitnil" name:"BlockHeight"`
+	BlockHeight *int64 `json:"BlockHeight,omitnil,omitempty" name:"BlockHeight"`
 
 	// The blockchain network type.
-	BlockNetworkType *int64 `json:"BlockNetworkType,omitnil" name:"BlockNetworkType"`
+	BlockNetworkType *int64 `json:"BlockNetworkType,omitnil,omitempty" name:"BlockNetworkType"`
 
 	// The number of DIDs.
-	DidCount *int64 `json:"DidCount,omitnil" name:"DidCount"`
+	DidCount *int64 `json:"DidCount,omitnil,omitempty" name:"DidCount"`
 
 	// The number of claim protocol types (CPT).
-	CptCount *int64 `json:"CptCount,omitnil" name:"CptCount"`
+	CptCount *int64 `json:"CptCount,omitnil,omitempty" name:"CptCount"`
 
 	// The number of certified authorities.
-	CertificatedAuthCount *int64 `json:"CertificatedAuthCount,omitnil" name:"CertificatedAuthCount"`
+	CertificatedAuthCount *int64 `json:"CertificatedAuthCount,omitnil,omitempty" name:"CertificatedAuthCount"`
 
 	// The number of credentials issued.
-	IssueCptCount *int64 `json:"IssueCptCount,omitnil" name:"IssueCptCount"`
+	IssueCptCount *int64 `json:"IssueCptCount,omitnil,omitempty" name:"IssueCptCount"`
 
 	// The number of new DIDs in the current week.
-	NewDidCount *int64 `json:"NewDidCount,omitnil" name:"NewDidCount"`
+	NewDidCount *int64 `json:"NewDidCount,omitnil,omitempty" name:"NewDidCount"`
 
 	// The number of BCOS networks.
-	BcosCount *int64 `json:"BcosCount,omitnil" name:"BcosCount"`
+	BcosCount *int64 `json:"BcosCount,omitnil,omitempty" name:"BcosCount"`
 
 	// The number of Fabric networks.
-	FabricCount *int64 `json:"FabricCount,omitnil" name:"FabricCount"`
+	FabricCount *int64 `json:"FabricCount,omitnil,omitempty" name:"FabricCount"`
 
 	// The number of ChainMaker networks.
-	ChainMakerCount *int64 `json:"ChainMakerCount,omitnil" name:"ChainMakerCount"`
+	ChainMakerCount *int64 `json:"ChainMakerCount,omitnil,omitempty" name:"ChainMakerCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetDataPanelResponse struct {
@@ -2162,14 +2162,14 @@ func (r *GetDataPanelResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDeployInfoRequestParams struct {
 	// The CNS address of the contract.
-	Hash *string `json:"Hash,omitnil" name:"Hash"`
+	Hash *string `json:"Hash,omitnil,omitempty" name:"Hash"`
 }
 
 type GetDeployInfoRequest struct {
 	*tchttp.BaseRequest
 	
 	// The CNS address of the contract.
-	Hash *string `json:"Hash,omitnil" name:"Hash"`
+	Hash *string `json:"Hash,omitnil,omitempty" name:"Hash"`
 }
 
 func (r *GetDeployInfoRequest) ToJsonString() string {
@@ -2194,46 +2194,46 @@ func (r *GetDeployInfoRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDeployInfoResponseParams struct {
 	// The CNS address of the contract.
-	Hash *string `json:"Hash,omitnil" name:"Hash"`
+	Hash *string `json:"Hash,omitnil,omitempty" name:"Hash"`
 
 	// The main group ID of the contract.
-	GroupId *string `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The DID of the organization that deployed the contract.
-	DeployDid *string `json:"DeployDid,omitnil" name:"DeployDid"`
+	DeployDid *string `json:"DeployDid,omitnil,omitempty" name:"DeployDid"`
 
 	// The TDID SDK version.
-	SdkVersion *string `json:"SdkVersion,omitnil" name:"SdkVersion"`
+	SdkVersion *string `json:"SdkVersion,omitnil,omitempty" name:"SdkVersion"`
 
 	// The TDID contract version.
-	ContractVersion *string `json:"ContractVersion,omitnil" name:"ContractVersion"`
+	ContractVersion *string `json:"ContractVersion,omitnil,omitempty" name:"ContractVersion"`
 
 	// The blockchain node version.
-	BlockVersion *string `json:"BlockVersion,omitnil" name:"BlockVersion"`
+	BlockVersion *string `json:"BlockVersion,omitnil,omitempty" name:"BlockVersion"`
 
 	// The IP address of the blockchain node.
-	BlockIp *string `json:"BlockIp,omitnil" name:"BlockIp"`
+	BlockIp *string `json:"BlockIp,omitnil,omitempty" name:"BlockIp"`
 
 	// The address of the DID contract.
-	DidAddress *string `json:"DidAddress,omitnil" name:"DidAddress"`
+	DidAddress *string `json:"DidAddress,omitnil,omitempty" name:"DidAddress"`
 
 	// The address of the claim protocol type (CPT) contract.
-	CptAddress *string `json:"CptAddress,omitnil" name:"CptAddress"`
+	CptAddress *string `json:"CptAddress,omitnil,omitempty" name:"CptAddress"`
 
 	// The address of the authority.
-	AuthorityAddress *string `json:"AuthorityAddress,omitnil" name:"AuthorityAddress"`
+	AuthorityAddress *string `json:"AuthorityAddress,omitnil,omitempty" name:"AuthorityAddress"`
 
 	// The evidence contract address.
-	EvidenceAddress *string `json:"EvidenceAddress,omitnil" name:"EvidenceAddress"`
+	EvidenceAddress *string `json:"EvidenceAddress,omitnil,omitempty" name:"EvidenceAddress"`
 
 	// The contract address of the specific issuer.
-	SpecificAddress *string `json:"SpecificAddress,omitnil" name:"SpecificAddress"`
+	SpecificAddress *string `json:"SpecificAddress,omitnil,omitempty" name:"SpecificAddress"`
 
 	// The chain ID.
-	ChainId *string `json:"ChainId,omitnil" name:"ChainId"`
+	ChainId *string `json:"ChainId,omitnil,omitempty" name:"ChainId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetDeployInfoResponse struct {
@@ -2255,32 +2255,32 @@ func (r *GetDeployInfoResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDeployListRequestParams struct {
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The start.
-	DisplayStart *uint64 `json:"DisplayStart,omitnil" name:"DisplayStart"`
+	DisplayStart *uint64 `json:"DisplayStart,omitnil,omitempty" name:"DisplayStart"`
 
 	// The maximum number of records to return.
-	DisplayLength *uint64 `json:"DisplayLength,omitnil" name:"DisplayLength"`
+	DisplayLength *uint64 `json:"DisplayLength,omitnil,omitempty" name:"DisplayLength"`
 }
 
 type GetDeployListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The start.
-	DisplayStart *uint64 `json:"DisplayStart,omitnil" name:"DisplayStart"`
+	DisplayStart *uint64 `json:"DisplayStart,omitnil,omitempty" name:"DisplayStart"`
 
 	// The maximum number of records to return.
-	DisplayLength *uint64 `json:"DisplayLength,omitnil" name:"DisplayLength"`
+	DisplayLength *uint64 `json:"DisplayLength,omitnil,omitempty" name:"DisplayLength"`
 }
 
 func (r *GetDeployListRequest) ToJsonString() string {
@@ -2308,13 +2308,13 @@ func (r *GetDeployListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDeployListResponseParams struct {
 	// The total number of contracts.
-	AllCount *uint64 `json:"AllCount,omitnil" name:"AllCount"`
+	AllCount *uint64 `json:"AllCount,omitnil,omitempty" name:"AllCount"`
 
 	// A list of deployed contracts.
-	Result []*Contract `json:"Result,omitnil" name:"Result"`
+	Result []*Contract `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetDeployListResponse struct {
@@ -2336,14 +2336,14 @@ func (r *GetDeployListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidClusterDetailRequestParams struct {
 	// The DID network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 type GetDidClusterDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// The DID network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 func (r *GetDidClusterDetailRequest) ToJsonString() string {
@@ -2368,16 +2368,16 @@ func (r *GetDidClusterDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidClusterDetailResponseParams struct {
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The consortium name.
-	ConsortiumName *string `json:"ConsortiumName,omitnil" name:"ConsortiumName"`
+	ConsortiumName *string `json:"ConsortiumName,omitnil,omitempty" name:"ConsortiumName"`
 
 	// The name of the blockchain organization.
-	ChainAgency *string `json:"ChainAgency,omitnil" name:"ChainAgency"`
+	ChainAgency *string `json:"ChainAgency,omitnil,omitempty" name:"ChainAgency"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetDidClusterDetailResponse struct {
@@ -2428,10 +2428,10 @@ func (r *GetDidClusterListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidClusterListResponseParams struct {
 	// A list of the DID networks.
-	DidClusterList []*DidCluster `json:"DidClusterList,omitnil" name:"DidClusterList"`
+	DidClusterList []*DidCluster `json:"DidClusterList,omitnil,omitempty" name:"DidClusterList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetDidClusterListResponse struct {
@@ -2453,14 +2453,14 @@ func (r *GetDidClusterListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidDetailRequestParams struct {
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 type GetDidDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 func (r *GetDidDetailRequest) ToJsonString() string {
@@ -2485,37 +2485,37 @@ func (r *GetDidDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidDetailResponseParams struct {
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// Remarks
-	Remark *string `json:"Remark,omitnil" name:"Remark"`
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// The public key.
-	PublicKey *string `json:"PublicKey,omitnil" name:"PublicKey"`
+	PublicKey *string `json:"PublicKey,omitnil,omitempty" name:"PublicKey"`
 
 	// Whether the DID is a certified authority.
-	AuthorityState *int64 `json:"AuthorityState,omitnil" name:"AuthorityState"`
+	AuthorityState *int64 `json:"AuthorityState,omitnil,omitempty" name:"AuthorityState"`
 
 	// The consortium ID.
-	ConsortiumId *int64 `json:"ConsortiumId,omitnil" name:"ConsortiumId"`
+	ConsortiumId *int64 `json:"ConsortiumId,omitnil,omitempty" name:"ConsortiumId"`
 
 	// The consortium name.
-	ConsortiumName *string `json:"ConsortiumName,omitnil" name:"ConsortiumName"`
+	ConsortiumName *string `json:"ConsortiumName,omitnil,omitempty" name:"ConsortiumName"`
 
 	// The group ID.
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The BCOS resource ID.
-	ResChainId *string `json:"ResChainId,omitnil" name:"ResChainId"`
+	ResChainId *string `json:"ResChainId,omitnil,omitempty" name:"ResChainId"`
 
 	// The creation time.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetDidDetailResponse struct {
@@ -2537,14 +2537,14 @@ func (r *GetDidDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidDocumentRequestParams struct {
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 type GetDidDocumentRequest struct {
 	*tchttp.BaseRequest
 	
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 func (r *GetDidDocumentRequest) ToJsonString() string {
@@ -2569,13 +2569,13 @@ func (r *GetDidDocumentRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidDocumentResponseParams struct {
 	// The name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// The DID document.
-	Document *string `json:"Document,omitnil" name:"Document"`
+	Document *string `json:"Document,omitnil,omitempty" name:"Document"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetDidDocumentResponse struct {
@@ -2597,38 +2597,38 @@ func (r *GetDidDocumentResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidListRequestParams struct {
 	// The number of records per page.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// The page number, beginning from 1.
-	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 type GetDidListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The number of records per page.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// The page number, beginning from 1.
-	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 func (r *GetDidListRequest) ToJsonString() string {
@@ -2657,13 +2657,13 @@ func (r *GetDidListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidListResponseParams struct {
 	// A list of DIDs.
-	DataList []*DidData `json:"DataList,omitnil" name:"DataList"`
+	DataList []*DidData `json:"DataList,omitnil,omitempty" name:"DataList"`
 
 	// The total number of records.
-	AllCount *int64 `json:"AllCount,omitnil" name:"AllCount"`
+	AllCount *int64 `json:"AllCount,omitnil,omitempty" name:"AllCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetDidListResponse struct {
@@ -2685,26 +2685,26 @@ func (r *GetDidListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidRegisterTrendRequestParams struct {
 	// The start date (as early as 2021-4-23).
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end date (as early as 2021-4-23).
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 type GetDidRegisterTrendRequest struct {
 	*tchttp.BaseRequest
 	
 	// The start date (as early as 2021-4-23).
-	StartTime *string `json:"StartTime,omitnil" name:"StartTime"`
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The end date (as early as 2021-4-23).
-	EndTime *string `json:"EndTime,omitnil" name:"EndTime"`
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 func (r *GetDidRegisterTrendRequest) ToJsonString() string {
@@ -2731,10 +2731,10 @@ func (r *GetDidRegisterTrendRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidRegisterTrendResponseParams struct {
 	// The trend information.
-	Trend []*Trend `json:"Trend,omitnil" name:"Trend"`
+	Trend []*Trend `json:"Trend,omitnil,omitempty" name:"Trend"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetDidRegisterTrendResponse struct {
@@ -2756,14 +2756,14 @@ func (r *GetDidRegisterTrendResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidServiceDetailRequestParams struct {
 	// The DID service ID.
-	ServiceId *uint64 `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *uint64 `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 }
 
 type GetDidServiceDetailRequest struct {
 	*tchttp.BaseRequest
 	
 	// The DID service ID.
-	ServiceId *uint64 `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *uint64 `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 }
 
 func (r *GetDidServiceDetailRequest) ToJsonString() string {
@@ -2788,10 +2788,10 @@ func (r *GetDidServiceDetailRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidServiceDetailResponseParams struct {
 	// The DID service information.
-	DidService *DidServiceInfo `json:"DidService,omitnil" name:"DidService"`
+	DidService *DidServiceInfo `json:"DidService,omitnil,omitempty" name:"DidService"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetDidServiceDetailResponse struct {
@@ -2813,14 +2813,14 @@ func (r *GetDidServiceDetailResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidServiceListRequestParams struct {
 	// `1`: Return results at the network level; `0`: Return results at the service level.
-	Type *uint64 `json:"Type,omitnil" name:"Type"`
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type GetDidServiceListRequest struct {
 	*tchttp.BaseRequest
 	
 	// `1`: Return results at the network level; `0`: Return results at the service level.
-	Type *uint64 `json:"Type,omitnil" name:"Type"`
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 func (r *GetDidServiceListRequest) ToJsonString() string {
@@ -2845,10 +2845,10 @@ func (r *GetDidServiceListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetDidServiceListResponseParams struct {
 	// A list of DID services.
-	DidServiceList []*DidServiceInfo `json:"DidServiceList,omitnil" name:"DidServiceList"`
+	DidServiceList []*DidServiceInfo `json:"DidServiceList,omitnil,omitempty" name:"DidServiceList"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetDidServiceListResponse struct {
@@ -2870,20 +2870,20 @@ func (r *GetDidServiceListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetGroupListRequestParams struct {
 	// `0`: Groups with no DID services; `1`: Groups with DID services.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 type GetGroupListRequest struct {
 	*tchttp.BaseRequest
 	
 	// `0`: Groups with no DID services; `1`: Groups with DID services.
-	Status *int64 `json:"Status,omitnil" name:"Status"`
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 }
 
 func (r *GetGroupListRequest) ToJsonString() string {
@@ -2909,10 +2909,10 @@ func (r *GetGroupListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetGroupListResponseParams struct {
 	// A list of groups.
-	Result []*Group `json:"Result,omitnil" name:"Result"`
+	Result []*Group `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetGroupListResponse struct {
@@ -2934,32 +2934,32 @@ func (r *GetGroupListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetLabelListRequestParams struct {
 	// The number of records per page.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// The page number, beginning from 1.
-	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 type GetLabelListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The number of records per page.
-	PageSize *int64 `json:"PageSize,omitnil" name:"PageSize"`
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// The page number, beginning from 1.
-	PageNumber *int64 `json:"PageNumber,omitnil" name:"PageNumber"`
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 func (r *GetLabelListRequest) ToJsonString() string {
@@ -2987,13 +2987,13 @@ func (r *GetLabelListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetLabelListResponseParams struct {
 	// A data set.
-	Result []*Label `json:"Result,omitnil" name:"Result"`
+	Result []*Label `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The total number of records.
-	TotalCount *int64 `json:"TotalCount,omitnil" name:"TotalCount"`
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetLabelListResponse struct {
@@ -3015,20 +3015,20 @@ func (r *GetLabelListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetPolicyListRequestParams struct {
 	// The start.
-	DisplayStart *int64 `json:"DisplayStart,omitnil" name:"DisplayStart"`
+	DisplayStart *int64 `json:"DisplayStart,omitnil,omitempty" name:"DisplayStart"`
 
 	// The maximum number of records to return.
-	DisplayLength *int64 `json:"DisplayLength,omitnil" name:"DisplayLength"`
+	DisplayLength *int64 `json:"DisplayLength,omitnil,omitempty" name:"DisplayLength"`
 }
 
 type GetPolicyListRequest struct {
 	*tchttp.BaseRequest
 	
 	// The start.
-	DisplayStart *int64 `json:"DisplayStart,omitnil" name:"DisplayStart"`
+	DisplayStart *int64 `json:"DisplayStart,omitnil,omitempty" name:"DisplayStart"`
 
 	// The maximum number of records to return.
-	DisplayLength *int64 `json:"DisplayLength,omitnil" name:"DisplayLength"`
+	DisplayLength *int64 `json:"DisplayLength,omitnil,omitempty" name:"DisplayLength"`
 }
 
 func (r *GetPolicyListRequest) ToJsonString() string {
@@ -3054,13 +3054,13 @@ func (r *GetPolicyListRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetPolicyListResponseParams struct {
 	// A list of disclosure policies.
-	PolicyDataList []*Policy `json:"PolicyDataList,omitnil" name:"PolicyDataList"`
+	PolicyDataList []*Policy `json:"PolicyDataList,omitnil,omitempty" name:"PolicyDataList"`
 
 	// The total number of records.
-	AllCount *int64 `json:"AllCount,omitnil" name:"AllCount"`
+	AllCount *int64 `json:"AllCount,omitnil,omitempty" name:"AllCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetPolicyListResponse struct {
@@ -3082,14 +3082,14 @@ func (r *GetPolicyListResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type GetPublicKeyRequestParams struct {
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 type GetPublicKeyRequest struct {
 	*tchttp.BaseRequest
 	
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 func (r *GetPublicKeyRequest) ToJsonString() string {
@@ -3114,13 +3114,13 @@ func (r *GetPublicKeyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetPublicKeyResponseParams struct {
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// The public key.
-	PublicKey *string `json:"PublicKey,omitnil" name:"PublicKey"`
+	PublicKey *string `json:"PublicKey,omitnil,omitempty" name:"PublicKey"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type GetPublicKeyResponse struct {
@@ -3141,136 +3141,136 @@ func (r *GetPublicKeyResponse) FromJsonString(s string) error {
 
 type Group struct {
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The number of nodes.
-	NodeCount *uint64 `json:"NodeCount,omitnil" name:"NodeCount"`
+	NodeCount *uint64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
 
 	// The number of nodes of the organization.
-	NodeCountOfAgency *uint64 `json:"NodeCountOfAgency,omitnil" name:"NodeCountOfAgency"`
+	NodeCountOfAgency *uint64 `json:"NodeCountOfAgency,omitnil,omitempty" name:"NodeCountOfAgency"`
 
 	// The description of the group.
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Whether you are the owner of the consortium or not.
-	RoleType *uint64 `json:"RoleType,omitnil" name:"RoleType"`
+	RoleType *uint64 `json:"RoleType,omitnil,omitempty" name:"RoleType"`
 
 	// The chain ID.
-	ChainId *string `json:"ChainId,omitnil" name:"ChainId"`
+	ChainId *string `json:"ChainId,omitnil,omitempty" name:"ChainId"`
 }
 
 type Identity struct {
 	// The account identifier.
-	AccountIdentifier *string `json:"AccountIdentifier,omitnil" name:"AccountIdentifier"`
+	AccountIdentifier *string `json:"AccountIdentifier,omitnil,omitempty" name:"AccountIdentifier"`
 
 	// The chain ID.
-	ChainID *string `json:"ChainID,omitnil" name:"ChainID"`
+	ChainID *string `json:"ChainID,omitnil,omitempty" name:"ChainID"`
 
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The group name.
-	GroupName *string `json:"GroupName,omitnil" name:"GroupName"`
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
 }
 
 type Label struct {
 	// The label ID.
-	LabelId *uint64 `json:"LabelId,omitnil" name:"LabelId"`
+	LabelId *uint64 `json:"LabelId,omitnil,omitempty" name:"LabelId"`
 
 	// The label name.
-	LabelName *string `json:"LabelName,omitnil" name:"LabelName"`
+	LabelName *string `json:"LabelName,omitnil,omitempty" name:"LabelName"`
 
 	// The number of DIDs.
-	DidCount *int64 `json:"DidCount,omitnil" name:"DidCount"`
+	DidCount *int64 `json:"DidCount,omitnil,omitempty" name:"DidCount"`
 
 	// The DID of the creator.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The creation time.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The group ID.
-	GroupId *int64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *int64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 }
 
 type Policy struct {
 	// The policy index.
-	Id *uint64 `json:"Id,omitnil" name:"Id"`
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// The policy name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The service ID.
-	ServiceId *uint64 `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *uint64 `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// The application ID of the contract.
-	ContractAppId *uint64 `json:"ContractAppId,omitnil" name:"ContractAppId"`
+	ContractAppId *uint64 `json:"ContractAppId,omitnil,omitempty" name:"ContractAppId"`
 
 	// The policy ID.
-	PolicyId *uint64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *uint64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 
 	// The claim protocol type (CPT) ID.
-	CptId *uint64 `json:"CptId,omitnil" name:"CptId"`
+	CptId *uint64 `json:"CptId,omitnil,omitempty" name:"CptId"`
 
 	// The JSON data.
-	PolicyJson *string `json:"PolicyJson,omitnil" name:"PolicyJson"`
+	PolicyJson *string `json:"PolicyJson,omitnil,omitempty" name:"PolicyJson"`
 
 	// The creation time.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The last updated time.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// The DID of the creator.
-	CreatorDid *string `json:"CreatorDid,omitnil" name:"CreatorDid"`
+	CreatorDid *string `json:"CreatorDid,omitnil,omitempty" name:"CreatorDid"`
 
 	// The application name.
-	AppName *string `json:"AppName,omitnil" name:"AppName"`
+	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
 	// The claim protocol type (CPT) index.
-	CptIndex *uint64 `json:"CptIndex,omitnil" name:"CptIndex"`
+	CptIndex *uint64 `json:"CptIndex,omitnil,omitempty" name:"CptIndex"`
 }
 
 type Proof struct {
 	// The creation time.
-	Created *int64 `json:"Created,omitnil" name:"Created"`
+	Created *int64 `json:"Created,omitnil,omitempty" name:"Created"`
 
 	// The DID of the creator.
-	Creator *string `json:"Creator,omitnil" name:"Creator"`
+	Creator *string `json:"Creator,omitnil,omitempty" name:"Creator"`
 
 	// The salt value.
-	SaltJson *string `json:"SaltJson,omitnil" name:"SaltJson"`
+	SaltJson *string `json:"SaltJson,omitnil,omitempty" name:"SaltJson"`
 
 	// The signature.
-	SignatureValue *string `json:"SignatureValue,omitnil" name:"SignatureValue"`
+	SignatureValue *string `json:"SignatureValue,omitnil,omitempty" name:"SignatureValue"`
 
 	// The type.
-	Type *string `json:"Type,omitnil" name:"Type"`
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 // Predefined struct for user
 type QueryPolicyRequestParams struct {
 	// The policy index.
-	PolicyIndex *int64 `json:"PolicyIndex,omitnil" name:"PolicyIndex"`
+	PolicyIndex *int64 `json:"PolicyIndex,omitnil,omitempty" name:"PolicyIndex"`
 }
 
 type QueryPolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// The policy index.
-	PolicyIndex *int64 `json:"PolicyIndex,omitnil" name:"PolicyIndex"`
+	PolicyIndex *int64 `json:"PolicyIndex,omitnil,omitempty" name:"PolicyIndex"`
 }
 
 func (r *QueryPolicyRequest) ToJsonString() string {
@@ -3295,19 +3295,19 @@ func (r *QueryPolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type QueryPolicyResponseParams struct {
 	// The policy index.
-	Id *uint64 `json:"Id,omitnil" name:"Id"`
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// The policy ID.
-	PolicyId *uint64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *uint64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 
 	// The claim protocol type (CPT) ID.
-	CptId *uint64 `json:"CptId,omitnil" name:"CptId"`
+	CptId *uint64 `json:"CptId,omitnil,omitempty" name:"CptId"`
 
 	// The content of the policy.
-	PolicyData *string `json:"PolicyData,omitnil" name:"PolicyData"`
+	PolicyData *string `json:"PolicyData,omitnil,omitempty" name:"PolicyData"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type QueryPolicyResponse struct {
@@ -3329,14 +3329,14 @@ func (r *QueryPolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RecognizeAuthorityIssuerRequestParams struct {
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 type RecognizeAuthorityIssuerRequest struct {
 	*tchttp.BaseRequest
 	
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 }
 
 func (r *RecognizeAuthorityIssuerRequest) ToJsonString() string {
@@ -3361,7 +3361,7 @@ func (r *RecognizeAuthorityIssuerRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RecognizeAuthorityIssuerResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RecognizeAuthorityIssuerResponse struct {
@@ -3383,20 +3383,20 @@ func (r *RecognizeAuthorityIssuerResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RegisterClaimPolicyRequestParams struct {
 	// The claim protocol type (CPT) index.
-	CptIndex *uint64 `json:"CptIndex,omitnil" name:"CptIndex"`
+	CptIndex *uint64 `json:"CptIndex,omitnil,omitempty" name:"CptIndex"`
 
 	// The disclosure policy.
-	Policy *string `json:"Policy,omitnil" name:"Policy"`
+	Policy *string `json:"Policy,omitnil,omitempty" name:"Policy"`
 }
 
 type RegisterClaimPolicyRequest struct {
 	*tchttp.BaseRequest
 	
 	// The claim protocol type (CPT) index.
-	CptIndex *uint64 `json:"CptIndex,omitnil" name:"CptIndex"`
+	CptIndex *uint64 `json:"CptIndex,omitnil,omitempty" name:"CptIndex"`
 
 	// The disclosure policy.
-	Policy *string `json:"Policy,omitnil" name:"Policy"`
+	Policy *string `json:"Policy,omitnil,omitempty" name:"Policy"`
 }
 
 func (r *RegisterClaimPolicyRequest) ToJsonString() string {
@@ -3422,13 +3422,13 @@ func (r *RegisterClaimPolicyRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RegisterClaimPolicyResponseParams struct {
 	// The policy index.
-	Id *uint64 `json:"Id,omitnil" name:"Id"`
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// The policy ID.
-	PolicyId *uint64 `json:"PolicyId,omitnil" name:"PolicyId"`
+	PolicyId *uint64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RegisterClaimPolicyResponse struct {
@@ -3450,32 +3450,32 @@ func (r *RegisterClaimPolicyResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RegisterCptRequestParams struct {
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The JSON data of the credential claim type (CPT).
-	CptJson *string `json:"CptJson,omitnil" name:"CptJson"`
+	CptJson *string `json:"CptJson,omitnil,omitempty" name:"CptJson"`
 
 	// If you do not specify this, the ID will auto increment.
-	CptId *uint64 `json:"CptId,omitnil" name:"CptId"`
+	CptId *uint64 `json:"CptId,omitnil,omitempty" name:"CptId"`
 }
 
 type RegisterCptRequest struct {
 	*tchttp.BaseRequest
 	
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The JSON data of the credential claim type (CPT).
-	CptJson *string `json:"CptJson,omitnil" name:"CptJson"`
+	CptJson *string `json:"CptJson,omitnil,omitempty" name:"CptJson"`
 
 	// If you do not specify this, the ID will auto increment.
-	CptId *uint64 `json:"CptId,omitnil" name:"CptId"`
+	CptId *uint64 `json:"CptId,omitnil,omitempty" name:"CptId"`
 }
 
 func (r *RegisterCptRequest) ToJsonString() string {
@@ -3503,13 +3503,13 @@ func (r *RegisterCptRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RegisterCptResponseParams struct {
 	// The claim protocol type (CPT) index.
-	Id *uint64 `json:"Id,omitnil" name:"Id"`
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// The claim protocol type (CPT) ID.
-	CptId *uint64 `json:"CptId,omitnil" name:"CptId"`
+	CptId *uint64 `json:"CptId,omitnil,omitempty" name:"CptId"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RegisterCptResponse struct {
@@ -3531,26 +3531,26 @@ func (r *RegisterCptResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RegisterIssuerRequestParams struct {
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// The issuing authority name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Remarks
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 type RegisterIssuerRequest struct {
 	*tchttp.BaseRequest
 	
 	// The DID.
-	Did *string `json:"Did,omitnil" name:"Did"`
+	Did *string `json:"Did,omitnil,omitempty" name:"Did"`
 
 	// The issuing authority name.
-	Name *string `json:"Name,omitnil" name:"Name"`
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Remarks
-	Description *string `json:"Description,omitnil" name:"Description"`
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 }
 
 func (r *RegisterIssuerRequest) ToJsonString() string {
@@ -3577,7 +3577,7 @@ func (r *RegisterIssuerRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RegisterIssuerResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RegisterIssuerResponse struct {
@@ -3599,14 +3599,14 @@ func (r *RegisterIssuerResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type RemoveHashRequestParams struct {
 	// The CNS address of the contract.
-	Hash *string `json:"Hash,omitnil" name:"Hash"`
+	Hash *string `json:"Hash,omitnil,omitempty" name:"Hash"`
 }
 
 type RemoveHashRequest struct {
 	*tchttp.BaseRequest
 	
 	// The CNS address of the contract.
-	Hash *string `json:"Hash,omitnil" name:"Hash"`
+	Hash *string `json:"Hash,omitnil,omitempty" name:"Hash"`
 }
 
 func (r *RemoveHashRequest) ToJsonString() string {
@@ -3631,7 +3631,7 @@ func (r *RemoveHashRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type RemoveHashResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type RemoveHashResponse struct {
@@ -3653,14 +3653,14 @@ func (r *RemoveHashResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type SetCredentialStatusRequestParams struct {
 	// The credential status.
-	CredentialStatus *CredentialStatus `json:"CredentialStatus,omitnil" name:"CredentialStatus"`
+	CredentialStatus *CredentialStatus `json:"CredentialStatus,omitnil,omitempty" name:"CredentialStatus"`
 }
 
 type SetCredentialStatusRequest struct {
 	*tchttp.BaseRequest
 	
 	// The credential status.
-	CredentialStatus *CredentialStatus `json:"CredentialStatus,omitnil" name:"CredentialStatus"`
+	CredentialStatus *CredentialStatus `json:"CredentialStatus,omitnil,omitempty" name:"CredentialStatus"`
 }
 
 func (r *SetCredentialStatusRequest) ToJsonString() string {
@@ -3685,7 +3685,7 @@ func (r *SetCredentialStatusRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type SetCredentialStatusResponseParams struct {
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type SetCredentialStatusResponse struct {
@@ -3706,60 +3706,60 @@ func (r *SetCredentialStatusResponse) FromJsonString(s string) error {
 
 type Task struct {
 	// The task ID.
-	Id *uint64 `json:"Id,omitnil" name:"Id"`
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// The application ID.
-	AppId *uint64 `json:"AppId,omitnil" name:"AppId"`
+	AppId *uint64 `json:"AppId,omitnil,omitempty" name:"AppId"`
 
 	// The network ID.
-	ClusterId *string `json:"ClusterId,omitnil" name:"ClusterId"`
+	ClusterId *string `json:"ClusterId,omitnil,omitempty" name:"ClusterId"`
 
 	// The group ID.
-	GroupId *uint64 `json:"GroupId,omitnil" name:"GroupId"`
+	GroupId *uint64 `json:"GroupId,omitnil,omitempty" name:"GroupId"`
 
 	// The service ID.
-	ServiceId *uint64 `json:"ServiceId,omitnil" name:"ServiceId"`
+	ServiceId *uint64 `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// `0`: Under deployment; `1`: Deployed successfully; other values: Deployment failed.
-	Status *uint64 `json:"Status,omitnil" name:"Status"`
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The error code.
-	ErrorCode *string `json:"ErrorCode,omitnil" name:"ErrorCode"`
+	ErrorCode *string `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
 	// The error message.
-	ErrorMsg *string `json:"ErrorMsg,omitnil" name:"ErrorMsg"`
+	ErrorMsg *string `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
 
 	// The creation time.
-	CreateTime *string `json:"CreateTime,omitnil" name:"CreateTime"`
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// The last updated time.
-	UpdateTime *string `json:"UpdateTime,omitnil" name:"UpdateTime"`
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type TransactionArg struct {
 	// The credential ID.
-	InvokerTDid *string `json:"InvokerTDid,omitnil" name:"InvokerTDid"`
+	InvokerTDid *string `json:"InvokerTDid,omitnil,omitempty" name:"InvokerTDid"`
 }
 
 type Trend struct {
 	// The time point.
-	Time *string `json:"Time,omitnil" name:"Time"`
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// The count.
-	Count *int64 `json:"Count,omitnil" name:"Count"`
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 }
 
 // Predefined struct for user
 type VerifyCredentialRequestParams struct {
 	// A parameter set.
-	FunctionArg *VerifyFunctionArg `json:"FunctionArg,omitnil" name:"FunctionArg"`
+	FunctionArg *VerifyFunctionArg `json:"FunctionArg,omitnil,omitempty" name:"FunctionArg"`
 }
 
 type VerifyCredentialRequest struct {
 	*tchttp.BaseRequest
 	
 	// A parameter set.
-	FunctionArg *VerifyFunctionArg `json:"FunctionArg,omitnil" name:"FunctionArg"`
+	FunctionArg *VerifyFunctionArg `json:"FunctionArg,omitnil,omitempty" name:"FunctionArg"`
 }
 
 func (r *VerifyCredentialRequest) ToJsonString() string {
@@ -3784,16 +3784,16 @@ func (r *VerifyCredentialRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type VerifyCredentialResponseParams struct {
 	// Whether the verification is successful.
-	Result *bool `json:"Result,omitnil" name:"Result"`
+	Result *bool `json:"Result,omitnil,omitempty" name:"Result"`
 
 	// The verification code.
-	VerifyCode *uint64 `json:"VerifyCode,omitnil" name:"VerifyCode"`
+	VerifyCode *uint64 `json:"VerifyCode,omitnil,omitempty" name:"VerifyCode"`
 
 	// The verification message.
-	VerifyMessage *string `json:"VerifyMessage,omitnil" name:"VerifyMessage"`
+	VerifyMessage *string `json:"VerifyMessage,omitnil,omitempty" name:"VerifyMessage"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil" name:"RequestId"`
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
 type VerifyCredentialResponse struct {
@@ -3814,29 +3814,29 @@ func (r *VerifyCredentialResponse) FromJsonString(s string) error {
 
 type VerifyFunctionArg struct {
 	// The claim protocol type (CPT) ID.
-	CptId *uint64 `json:"CptId,omitnil" name:"CptId"`
+	CptId *uint64 `json:"CptId,omitnil,omitempty" name:"CptId"`
 
 	// The issuer DID.
-	Issuer *string `json:"Issuer,omitnil" name:"Issuer"`
+	Issuer *string `json:"Issuer,omitnil,omitempty" name:"Issuer"`
 
 	// The expiration time.
-	ExpirationDate *int64 `json:"ExpirationDate,omitnil" name:"ExpirationDate"`
+	ExpirationDate *int64 `json:"ExpirationDate,omitnil,omitempty" name:"ExpirationDate"`
 
 	// The claim.
-	ClaimJson *string `json:"ClaimJson,omitnil" name:"ClaimJson"`
+	ClaimJson *string `json:"ClaimJson,omitnil,omitempty" name:"ClaimJson"`
 
 	// The time when the credential was issued.
-	IssuanceDate *int64 `json:"IssuanceDate,omitnil" name:"IssuanceDate"`
+	IssuanceDate *int64 `json:"IssuanceDate,omitnil,omitempty" name:"IssuanceDate"`
 
 	// The context.
-	Context *string `json:"Context,omitnil" name:"Context"`
+	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 
 	// The ID.
-	Id *string `json:"Id,omitnil" name:"Id"`
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
 	// The signature.
-	Proof *Proof `json:"Proof,omitnil" name:"Proof"`
+	Proof *Proof `json:"Proof,omitnil,omitempty" name:"Proof"`
 
 	// The type.
-	Type []*string `json:"Type,omitnil" name:"Type"`
+	Type []*string `json:"Type,omitnil,omitempty" name:"Type"`
 }
