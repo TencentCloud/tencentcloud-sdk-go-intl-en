@@ -172,6 +172,7 @@ func NewAttachLoadBalancersResponse() (response *AttachLoadBalancersResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDCLBREGION = "InvalidParameterValue.InvalidClbRegion"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_LISTENERTARGETTYPENOTSUPPORTED = "InvalidParameterValue.ListenerTargetTypeNotSupported"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_TARGETPORTDUPLICATED = "InvalidParameterValue.TargetPortDuplicated"
 //  LIMITEXCEEDED_AFTERATTACHLBLIMITEXCEEDED = "LimitExceeded.AfterAttachLbLimitExceeded"
@@ -206,6 +207,7 @@ func (c *Client) AttachLoadBalancers(request *AttachLoadBalancersRequest) (respo
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  INVALIDPARAMETERVALUE_INVALIDCLBREGION = "InvalidParameterValue.InvalidClbRegion"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_LISTENERTARGETTYPENOTSUPPORTED = "InvalidParameterValue.ListenerTargetTypeNotSupported"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_TARGETPORTDUPLICATED = "InvalidParameterValue.TargetPortDuplicated"
 //  LIMITEXCEEDED_AFTERATTACHLBLIMITEXCEEDED = "LimitExceeded.AfterAttachLbLimitExceeded"
@@ -231,6 +233,71 @@ func (c *Client) AttachLoadBalancersWithContext(ctx context.Context, request *At
     request.SetContext(ctx)
     
     response = NewAttachLoadBalancersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCancelInstanceRefreshRequest() (request *CancelInstanceRefreshRequest) {
+    request = &CancelInstanceRefreshRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("as", APIVersion, "CancelInstanceRefresh")
+    
+    
+    return
+}
+
+func NewCancelInstanceRefreshResponse() (response *CancelInstanceRefreshResponse) {
+    response = &CancelInstanceRefreshResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CancelInstanceRefresh
+// This API is used to cancel the instance refresh activity of the scaling group.
+//
+// * Batches that have already been refreshed or are currently being refreshed remain unaffected; batches pending refresh will be canceled.
+//
+// * If a refresh fails, the affected instances will remain in the standby status and require manual intervention by the user to either attempt to exit the standby status or destroy the instances.
+//
+// * Rollback operations are not allowed after cancellation, and resuming is also unsupported.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_REFRESHACTIVITYNOTFOUND = "ResourceNotFound.RefreshActivityNotFound"
+//  RESOURCEUNAVAILABLE_REFRESHACTIVITYSTATUSCONFLICTWITHOPERATION = "ResourceUnavailable.RefreshActivityStatusConflictWithOperation"
+//  UNAUTHORIZEDOPERATION_AUTOSCALINGROLEUNAUTHORIZED = "UnauthorizedOperation.AutoScalingRoleUnauthorized"
+func (c *Client) CancelInstanceRefresh(request *CancelInstanceRefreshRequest) (response *CancelInstanceRefreshResponse, err error) {
+    return c.CancelInstanceRefreshWithContext(context.Background(), request)
+}
+
+// CancelInstanceRefresh
+// This API is used to cancel the instance refresh activity of the scaling group.
+//
+// * Batches that have already been refreshed or are currently being refreshed remain unaffected; batches pending refresh will be canceled.
+//
+// * If a refresh fails, the affected instances will remain in the standby status and require manual intervention by the user to either attempt to exit the standby status or destroy the instances.
+//
+// * Rollback operations are not allowed after cancellation, and resuming is also unsupported.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_REFRESHACTIVITYNOTFOUND = "ResourceNotFound.RefreshActivityNotFound"
+//  RESOURCEUNAVAILABLE_REFRESHACTIVITYSTATUSCONFLICTWITHOPERATION = "ResourceUnavailable.RefreshActivityStatusConflictWithOperation"
+//  UNAUTHORIZEDOPERATION_AUTOSCALINGROLEUNAUTHORIZED = "UnauthorizedOperation.AutoScalingRoleUnauthorized"
+func (c *Client) CancelInstanceRefreshWithContext(ctx context.Context, request *CancelInstanceRefreshRequest) (response *CancelInstanceRefreshResponse, err error) {
+    if request == nil {
+        request = NewCancelInstanceRefreshRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CancelInstanceRefresh require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCancelInstanceRefreshResponse()
     err = c.Send(request, response)
     return
 }
@@ -649,6 +716,7 @@ func NewCreateLaunchConfigurationResponse() (response *CreateLaunchConfiguration
 //  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
 //  INVALIDPARAMETERVALUE_HOSTNAMEILLEGAL = "InvalidParameterValue.HostNameIllegal"
 //  INVALIDPARAMETERVALUE_IPV6INTERNETCHARGETYPE = "InvalidParameterValue.IPv6InternetChargeType"
+//  INVALIDPARAMETERVALUE_IMAGENOTFOUND = "InvalidParameterValue.ImageNotFound"
 //  INVALIDPARAMETERVALUE_INSTANCENAMEILLEGAL = "InvalidParameterValue.InstanceNameIllegal"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTED = "InvalidParameterValue.InstanceTypeNotSupported"
 //  INVALIDPARAMETERVALUE_INVALIDDISASTERRECOVERGROUPID = "InvalidParameterValue.InvalidDisasterRecoverGroupId"
@@ -703,6 +771,7 @@ func (c *Client) CreateLaunchConfiguration(request *CreateLaunchConfigurationReq
 //  INVALIDPARAMETERVALUE_CVMCONFIGURATIONERROR = "InvalidParameterValue.CvmConfigurationError"
 //  INVALIDPARAMETERVALUE_HOSTNAMEILLEGAL = "InvalidParameterValue.HostNameIllegal"
 //  INVALIDPARAMETERVALUE_IPV6INTERNETCHARGETYPE = "InvalidParameterValue.IPv6InternetChargeType"
+//  INVALIDPARAMETERVALUE_IMAGENOTFOUND = "InvalidParameterValue.ImageNotFound"
 //  INVALIDPARAMETERVALUE_INSTANCENAMEILLEGAL = "InvalidParameterValue.InstanceNameIllegal"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTED = "InvalidParameterValue.InstanceTypeNotSupported"
 //  INVALIDPARAMETERVALUE_INVALIDDISASTERRECOVERGROUPID = "InvalidParameterValue.InvalidDisasterRecoverGroupId"
@@ -2217,6 +2286,69 @@ func (c *Client) DescribeNotificationConfigurationsWithContext(ctx context.Conte
     return
 }
 
+func NewDescribeRefreshActivitiesRequest() (request *DescribeRefreshActivitiesRequest) {
+    request = &DescribeRefreshActivitiesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("as", APIVersion, "DescribeRefreshActivities")
+    
+    
+    return
+}
+
+func NewDescribeRefreshActivitiesResponse() (response *DescribeRefreshActivitiesResponse) {
+    response = &DescribeRefreshActivitiesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRefreshActivities
+// This API (DescribeRefreshActivities) is used to query the instance refresh activity records of a scaling group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
+//  INVALIDPARAMETERVALUE_FILTER = "InvalidParameterValue.Filter"
+//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  LIMITEXCEEDED_FILTERVALUESTOOLONG = "LimitExceeded.FilterValuesTooLong"
+func (c *Client) DescribeRefreshActivities(request *DescribeRefreshActivitiesRequest) (response *DescribeRefreshActivitiesResponse, err error) {
+    return c.DescribeRefreshActivitiesWithContext(context.Background(), request)
+}
+
+// DescribeRefreshActivities
+// This API (DescribeRefreshActivities) is used to query the instance refresh activity records of a scaling group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETER_CONFLICT = "InvalidParameter.Conflict"
+//  INVALIDPARAMETERVALUE_FILTER = "InvalidParameterValue.Filter"
+//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
+//  INVALIDPARAMETERVALUE_INVALIDFILTER = "InvalidParameterValue.InvalidFilter"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  LIMITEXCEEDED_FILTERVALUESTOOLONG = "LimitExceeded.FilterValuesTooLong"
+func (c *Client) DescribeRefreshActivitiesWithContext(ctx context.Context, request *DescribeRefreshActivitiesRequest) (response *DescribeRefreshActivitiesResponse, err error) {
+    if request == nil {
+        request = NewDescribeRefreshActivitiesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRefreshActivities require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRefreshActivitiesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeScalingPoliciesRequest() (request *DescribeScalingPoliciesRequest) {
     request = &DescribeScalingPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2667,6 +2799,7 @@ func NewEnableAutoScalingGroupResponse() (response *EnableAutoScalingGroupRespon
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINREFRESHACTIVITY = "ResourceUnavailable.AutoScalingGroupInRefreshActivity"
 func (c *Client) EnableAutoScalingGroup(request *EnableAutoScalingGroupRequest) (response *EnableAutoScalingGroupResponse, err error) {
     return c.EnableAutoScalingGroupWithContext(context.Background(), request)
 }
@@ -2679,6 +2812,7 @@ func (c *Client) EnableAutoScalingGroup(request *EnableAutoScalingGroupRequest) 
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
 //  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINREFRESHACTIVITY = "ResourceUnavailable.AutoScalingGroupInRefreshActivity"
 func (c *Client) EnableAutoScalingGroupWithContext(ctx context.Context, request *EnableAutoScalingGroupRequest) (response *EnableAutoScalingGroupResponse, err error) {
     if request == nil {
         request = NewEnableAutoScalingGroupRequest()
@@ -2774,6 +2908,87 @@ func (c *Client) ExecuteScalingPolicyWithContext(ctx context.Context, request *E
     request.SetContext(ctx)
     
     response = NewExecuteScalingPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewExitStandbyRequest() (request *ExitStandbyRequest) {
+    request = &ExitStandbyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("as", APIVersion, "ExitStandby")
+    
+    
+    return
+}
+
+func NewExitStandbyResponse() (response *ExitStandbyResponse) {
+    response = &ExitStandbyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExitStandby
+// This API is used to exit instances from the standby status in the scaling group.
+//
+// * When an instance is in standby status, its load balancer weight is set to 0. Upon exiting the standby status, the weight value automatically gets restored.
+//
+// * Initiating power-on/power-off actions on instances that are in standby status also results in them exiting from the standby status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
+//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
+//  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
+//  RESOURCENOTFOUND_INSTANCESNOTFOUND = "ResourceNotFound.InstancesNotFound"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+//  RESOURCEUNAVAILABLE_INSTANCEINOPERATION = "ResourceUnavailable.InstanceInOperation"
+//  RESOURCEUNAVAILABLE_LOADBALANCERINOPERATION = "ResourceUnavailable.LoadBalancerInOperation"
+func (c *Client) ExitStandby(request *ExitStandbyRequest) (response *ExitStandbyResponse, err error) {
+    return c.ExitStandbyWithContext(context.Background(), request)
+}
+
+// ExitStandby
+// This API is used to exit instances from the standby status in the scaling group.
+//
+// * When an instance is in standby status, its load balancer weight is set to 0. Upon exiting the standby status, the weight value automatically gets restored.
+//
+// * Initiating power-on/power-off actions on instances that are in standby status also results in them exiting from the standby status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
+//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
+//  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
+//  RESOURCENOTFOUND_INSTANCESNOTFOUND = "ResourceNotFound.InstancesNotFound"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+//  RESOURCEUNAVAILABLE_INSTANCEINOPERATION = "ResourceUnavailable.InstanceInOperation"
+//  RESOURCEUNAVAILABLE_LOADBALANCERINOPERATION = "ResourceUnavailable.LoadBalancerInOperation"
+func (c *Client) ExitStandbyWithContext(ctx context.Context, request *ExitStandbyRequest) (response *ExitStandbyResponse, err error) {
+    if request == nil {
+        request = NewExitStandbyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExitStandby require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExitStandbyResponse()
     err = c.Send(request, response)
     return
 }
@@ -3194,6 +3409,7 @@ func NewModifyLoadBalancerTargetAttributesResponse() (response *ModifyLoadBalanc
 //  RESOURCENOTFOUND_LOADBALANCERNOTINAUTOSCALINGGROUP = "ResourceNotFound.LoadBalancerNotInAutoScalingGroup"
 //  RESOURCENOTFOUND_LOCATIONNOTFOUND = "ResourceNotFound.LocationNotFound"
 //  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+//  RESOURCEUNAVAILABLE_INSTANCEINOPERATION = "ResourceUnavailable.InstanceInOperation"
 //  RESOURCEUNAVAILABLE_LBBACKENDREGIONINCONSISTENT = "ResourceUnavailable.LbBackendRegionInconsistent"
 //  RESOURCEUNAVAILABLE_LBPROJECTINCONSISTENT = "ResourceUnavailable.LbProjectInconsistent"
 //  RESOURCEUNAVAILABLE_LBVPCINCONSISTENT = "ResourceUnavailable.LbVpcInconsistent"
@@ -3227,6 +3443,7 @@ func (c *Client) ModifyLoadBalancerTargetAttributes(request *ModifyLoadBalancerT
 //  RESOURCENOTFOUND_LOADBALANCERNOTINAUTOSCALINGGROUP = "ResourceNotFound.LoadBalancerNotInAutoScalingGroup"
 //  RESOURCENOTFOUND_LOCATIONNOTFOUND = "ResourceNotFound.LocationNotFound"
 //  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+//  RESOURCEUNAVAILABLE_INSTANCEINOPERATION = "ResourceUnavailable.InstanceInOperation"
 //  RESOURCEUNAVAILABLE_LBBACKENDREGIONINCONSISTENT = "ResourceUnavailable.LbBackendRegionInconsistent"
 //  RESOURCEUNAVAILABLE_LBPROJECTINCONSISTENT = "ResourceUnavailable.LbProjectInconsistent"
 //  RESOURCEUNAVAILABLE_LBVPCINCONSISTENT = "ResourceUnavailable.LbVpcInconsistent"
@@ -3656,6 +3873,146 @@ func (c *Client) RemoveInstancesWithContext(ctx context.Context, request *Remove
     return
 }
 
+func NewResumeInstanceRefreshRequest() (request *ResumeInstanceRefreshRequest) {
+    request = &ResumeInstanceRefreshRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("as", APIVersion, "ResumeInstanceRefresh")
+    
+    
+    return
+}
+
+func NewResumeInstanceRefreshResponse() (response *ResumeInstanceRefreshResponse) {
+    response = &ResumeInstanceRefreshResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ResumeInstanceRefresh
+// This API is used to resume the paused instance refresh activity, allowing it to retry failed instances in the current batch or proceed with refreshing subsequent batches. Note that calling this interface is ineffective when the activity is not in a paused status.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_REFRESHACTIVITYNOTFOUND = "ResourceNotFound.RefreshActivityNotFound"
+//  RESOURCEUNAVAILABLE_REFRESHACTIVITYSTATUSCONFLICTWITHOPERATION = "ResourceUnavailable.RefreshActivityStatusConflictWithOperation"
+//  UNAUTHORIZEDOPERATION_AUTOSCALINGROLEUNAUTHORIZED = "UnauthorizedOperation.AutoScalingRoleUnauthorized"
+func (c *Client) ResumeInstanceRefresh(request *ResumeInstanceRefreshRequest) (response *ResumeInstanceRefreshResponse, err error) {
+    return c.ResumeInstanceRefreshWithContext(context.Background(), request)
+}
+
+// ResumeInstanceRefresh
+// This API is used to resume the paused instance refresh activity, allowing it to retry failed instances in the current batch or proceed with refreshing subsequent batches. Note that calling this interface is ineffective when the activity is not in a paused status.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_REFRESHACTIVITYNOTFOUND = "ResourceNotFound.RefreshActivityNotFound"
+//  RESOURCEUNAVAILABLE_REFRESHACTIVITYSTATUSCONFLICTWITHOPERATION = "ResourceUnavailable.RefreshActivityStatusConflictWithOperation"
+//  UNAUTHORIZEDOPERATION_AUTOSCALINGROLEUNAUTHORIZED = "UnauthorizedOperation.AutoScalingRoleUnauthorized"
+func (c *Client) ResumeInstanceRefreshWithContext(ctx context.Context, request *ResumeInstanceRefreshRequest) (response *ResumeInstanceRefreshResponse, err error) {
+    if request == nil {
+        request = NewResumeInstanceRefreshRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResumeInstanceRefresh require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResumeInstanceRefreshResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRollbackInstanceRefreshRequest() (request *RollbackInstanceRefreshRequest) {
+    request = &RollbackInstanceRefreshRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("as", APIVersion, "RollbackInstanceRefresh")
+    
+    
+    return
+}
+
+func NewRollbackInstanceRefreshResponse() (response *RollbackInstanceRefreshResponse) {
+    response = &RollbackInstanceRefreshResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RollbackInstanceRefresh
+// This API is used to generate a new instance refresh activity, which also supports batched refreshing and operations such as pausing, resuming, and canceling. The interface returns the RefreshActivityId for the rollback activity.
+//
+// * Instances pending refresh in the original activity are updated to a canceled status. Nonexistent instances are disregarded, while instances in all other statuses proceed to enter the rollback process.
+//
+// * Instances that were being refreshed in the original activity will not be immediately terminated; instead, the rollback activity will be executed after their refresh has been completed.
+//
+// * Rollback is supported for activities that are in a paused status or those with the most recent successful refresh; it is not supported for activities in other statuses.
+//
+// * When the original refresh activity involves reinstalling instances, for the ImageId parameter, it will automatically restore to the image ID before the rollback; for parameters such as UserData, EnhancedService, LoginSettings, and HostName, they will still be retrieved from the launch configuration, requiring users to manually modify the launch configuration before initiating the rollback.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_BATCHNUMBERTOOLARGE = "InvalidParameterValue.BatchNumberTooLarge"
+//  RESOURCENOTFOUND_AUTOSCALINGGROUPIDNOTFOUND = "ResourceNotFound.AutoScalingGroupIdNotFound"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPABNORMALSTATUS = "ResourceUnavailable.AutoScalingGroupAbnormalStatus"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINREFRESHACTIVITY = "ResourceUnavailable.AutoScalingGroupInRefreshActivity"
+//  RESOURCEUNAVAILABLE_INQUIRYPRICERESETINSTANCEFAILED = "ResourceUnavailable.InquiryPriceResetInstanceFailed"
+//  RESOURCEUNAVAILABLE_NOINSTANCECANREFRESH = "ResourceUnavailable.NoInstanceCanRefresh"
+//  RESOURCEUNAVAILABLE_NOINSTANCECANROLLBACK = "ResourceUnavailable.NoInstanceCanRollback"
+//  RESOURCEUNAVAILABLE_REFRESHACTIVITYCANNOTROLLBACK = "ResourceUnavailable.RefreshActivityCanNotRollback"
+//  RESOURCEUNAVAILABLE_REFRESHACTIVITYSTATUSCONFLICTWITHOPERATION = "ResourceUnavailable.RefreshActivityStatusConflictWithOperation"
+//  RESOURCEUNAVAILABLE_ROLLBACKTYPEACTIVITYCANNOTROLLBACKAGAIN = "ResourceUnavailable.RollbackTypeActivityCanNotRollbackAgain"
+//  UNAUTHORIZEDOPERATION_AUTOSCALINGROLEUNAUTHORIZED = "UnauthorizedOperation.AutoScalingRoleUnauthorized"
+func (c *Client) RollbackInstanceRefresh(request *RollbackInstanceRefreshRequest) (response *RollbackInstanceRefreshResponse, err error) {
+    return c.RollbackInstanceRefreshWithContext(context.Background(), request)
+}
+
+// RollbackInstanceRefresh
+// This API is used to generate a new instance refresh activity, which also supports batched refreshing and operations such as pausing, resuming, and canceling. The interface returns the RefreshActivityId for the rollback activity.
+//
+// * Instances pending refresh in the original activity are updated to a canceled status. Nonexistent instances are disregarded, while instances in all other statuses proceed to enter the rollback process.
+//
+// * Instances that were being refreshed in the original activity will not be immediately terminated; instead, the rollback activity will be executed after their refresh has been completed.
+//
+// * Rollback is supported for activities that are in a paused status or those with the most recent successful refresh; it is not supported for activities in other statuses.
+//
+// * When the original refresh activity involves reinstalling instances, for the ImageId parameter, it will automatically restore to the image ID before the rollback; for parameters such as UserData, EnhancedService, LoginSettings, and HostName, they will still be retrieved from the launch configuration, requiring users to manually modify the launch configuration before initiating the rollback.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_BATCHNUMBERTOOLARGE = "InvalidParameterValue.BatchNumberTooLarge"
+//  RESOURCENOTFOUND_AUTOSCALINGGROUPIDNOTFOUND = "ResourceNotFound.AutoScalingGroupIdNotFound"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPABNORMALSTATUS = "ResourceUnavailable.AutoScalingGroupAbnormalStatus"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINREFRESHACTIVITY = "ResourceUnavailable.AutoScalingGroupInRefreshActivity"
+//  RESOURCEUNAVAILABLE_INQUIRYPRICERESETINSTANCEFAILED = "ResourceUnavailable.InquiryPriceResetInstanceFailed"
+//  RESOURCEUNAVAILABLE_NOINSTANCECANREFRESH = "ResourceUnavailable.NoInstanceCanRefresh"
+//  RESOURCEUNAVAILABLE_NOINSTANCECANROLLBACK = "ResourceUnavailable.NoInstanceCanRollback"
+//  RESOURCEUNAVAILABLE_REFRESHACTIVITYCANNOTROLLBACK = "ResourceUnavailable.RefreshActivityCanNotRollback"
+//  RESOURCEUNAVAILABLE_REFRESHACTIVITYSTATUSCONFLICTWITHOPERATION = "ResourceUnavailable.RefreshActivityStatusConflictWithOperation"
+//  RESOURCEUNAVAILABLE_ROLLBACKTYPEACTIVITYCANNOTROLLBACKAGAIN = "ResourceUnavailable.RollbackTypeActivityCanNotRollbackAgain"
+//  UNAUTHORIZEDOPERATION_AUTOSCALINGROLEUNAUTHORIZED = "UnauthorizedOperation.AutoScalingRoleUnauthorized"
+func (c *Client) RollbackInstanceRefreshWithContext(ctx context.Context, request *RollbackInstanceRefreshRequest) (response *RollbackInstanceRefreshResponse, err error) {
+    if request == nil {
+        request = NewRollbackInstanceRefreshRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RollbackInstanceRefresh require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRollbackInstanceRefreshResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewScaleInInstancesRequest() (request *ScaleInInstancesRequest) {
     request = &ScaleInInstancesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3921,6 +4278,7 @@ func NewStartAutoScalingInstancesResponse() (response *StartAutoScalingInstances
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
 //  RESOURCENOTFOUND_INSTANCESNOTINAUTOSCALINGGROUP = "ResourceNotFound.InstancesNotInAutoScalingGroup"
 //  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+//  RESOURCEUNAVAILABLE_INSTANCEINOPERATION = "ResourceUnavailable.InstanceInOperation"
 //  RESOURCEUNAVAILABLE_LOADBALANCERINOPERATION = "ResourceUnavailable.LoadBalancerInOperation"
 func (c *Client) StartAutoScalingInstances(request *StartAutoScalingInstancesRequest) (response *StartAutoScalingInstancesResponse, err error) {
     return c.StartAutoScalingInstancesWithContext(context.Background(), request)
@@ -3943,6 +4301,7 @@ func (c *Client) StartAutoScalingInstances(request *StartAutoScalingInstancesReq
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
 //  RESOURCENOTFOUND_INSTANCESNOTINAUTOSCALINGGROUP = "ResourceNotFound.InstancesNotInAutoScalingGroup"
 //  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+//  RESOURCEUNAVAILABLE_INSTANCEINOPERATION = "ResourceUnavailable.InstanceInOperation"
 //  RESOURCEUNAVAILABLE_LOADBALANCERINOPERATION = "ResourceUnavailable.LoadBalancerInOperation"
 func (c *Client) StartAutoScalingInstancesWithContext(ctx context.Context, request *StartAutoScalingInstancesRequest) (response *StartAutoScalingInstancesResponse, err error) {
     if request == nil {
@@ -3956,6 +4315,91 @@ func (c *Client) StartAutoScalingInstancesWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewStartAutoScalingInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartInstanceRefreshRequest() (request *StartInstanceRefreshRequest) {
+    request = &StartInstanceRefreshRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("as", APIVersion, "StartInstanceRefresh")
+    
+    
+    return
+}
+
+func NewStartInstanceRefreshResponse() (response *StartInstanceRefreshResponse) {
+    response = &StartInstanceRefreshResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StartInstanceRefresh
+// This API is used to refresh running CVM instances in the scaling group and return the RefreshActivityId for the instance refresh activity based on parameters in the launch configuration.
+//
+// * For refresh methods involving reinstallation (currently only reinstallation is supported), during reinstallation, only the ImageId, UserData, EnhancedService, HostName, and LoginSettings parameters will be fetched from the launch configuration for refreshing; other parameters of the instance will not be refreshed.
+//
+// * During the instance refresh process (including paused status), the scaling group will be disabled. It is not recommended to modify the associated launch configuration during a refresh, as this may impact the refresh parameters, leading to inconsistent instance configurations.
+//
+// * In rolling update mode, instance refreshes are performed in multiple batches. If there are failed refreshes within a batch, the activity will enter a failed paused status.
+//
+// * Instances pending refresh that are removed or destroyed will be marked as NOT_FOUND status, but they will not block the instance refresh activity.
+//
+// * Even if a running instance has parameters consistent with the latest launch configuration, it can still undergo another refresh.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_BATCHNUMBERTOOLARGE = "InvalidParameterValue.BatchNumberTooLarge"
+//  RESOURCENOTFOUND_AUTOSCALINGGROUPIDNOTFOUND = "ResourceNotFound.AutoScalingGroupIdNotFound"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPABNORMALSTATUS = "ResourceUnavailable.AutoScalingGroupAbnormalStatus"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINREFRESHACTIVITY = "ResourceUnavailable.AutoScalingGroupInRefreshActivity"
+//  RESOURCEUNAVAILABLE_INQUIRYPRICERESETINSTANCEFAILED = "ResourceUnavailable.InquiryPriceResetInstanceFailed"
+//  RESOURCEUNAVAILABLE_NOINSTANCECANREFRESH = "ResourceUnavailable.NoInstanceCanRefresh"
+//  RESOURCEUNAVAILABLE_REFRESHACTIVITYSTATUSCONFLICTWITHOPERATION = "ResourceUnavailable.RefreshActivityStatusConflictWithOperation"
+//  UNAUTHORIZEDOPERATION_AUTOSCALINGROLEUNAUTHORIZED = "UnauthorizedOperation.AutoScalingRoleUnauthorized"
+func (c *Client) StartInstanceRefresh(request *StartInstanceRefreshRequest) (response *StartInstanceRefreshResponse, err error) {
+    return c.StartInstanceRefreshWithContext(context.Background(), request)
+}
+
+// StartInstanceRefresh
+// This API is used to refresh running CVM instances in the scaling group and return the RefreshActivityId for the instance refresh activity based on parameters in the launch configuration.
+//
+// * For refresh methods involving reinstallation (currently only reinstallation is supported), during reinstallation, only the ImageId, UserData, EnhancedService, HostName, and LoginSettings parameters will be fetched from the launch configuration for refreshing; other parameters of the instance will not be refreshed.
+//
+// * During the instance refresh process (including paused status), the scaling group will be disabled. It is not recommended to modify the associated launch configuration during a refresh, as this may impact the refresh parameters, leading to inconsistent instance configurations.
+//
+// * In rolling update mode, instance refreshes are performed in multiple batches. If there are failed refreshes within a batch, the activity will enter a failed paused status.
+//
+// * Instances pending refresh that are removed or destroyed will be marked as NOT_FOUND status, but they will not block the instance refresh activity.
+//
+// * Even if a running instance has parameters consistent with the latest launch configuration, it can still undergo another refresh.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_BATCHNUMBERTOOLARGE = "InvalidParameterValue.BatchNumberTooLarge"
+//  RESOURCENOTFOUND_AUTOSCALINGGROUPIDNOTFOUND = "ResourceNotFound.AutoScalingGroupIdNotFound"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPABNORMALSTATUS = "ResourceUnavailable.AutoScalingGroupAbnormalStatus"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINREFRESHACTIVITY = "ResourceUnavailable.AutoScalingGroupInRefreshActivity"
+//  RESOURCEUNAVAILABLE_INQUIRYPRICERESETINSTANCEFAILED = "ResourceUnavailable.InquiryPriceResetInstanceFailed"
+//  RESOURCEUNAVAILABLE_NOINSTANCECANREFRESH = "ResourceUnavailable.NoInstanceCanRefresh"
+//  RESOURCEUNAVAILABLE_REFRESHACTIVITYSTATUSCONFLICTWITHOPERATION = "ResourceUnavailable.RefreshActivityStatusConflictWithOperation"
+//  UNAUTHORIZEDOPERATION_AUTOSCALINGROLEUNAUTHORIZED = "UnauthorizedOperation.AutoScalingRoleUnauthorized"
+func (c *Client) StartInstanceRefreshWithContext(ctx context.Context, request *StartInstanceRefreshRequest) (response *StartInstanceRefreshResponse, err error) {
+    if request == nil {
+        request = NewStartInstanceRefreshRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartInstanceRefresh require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartInstanceRefreshResponse()
     err = c.Send(request, response)
     return
 }
@@ -4053,6 +4497,67 @@ func (c *Client) StopAutoScalingInstancesWithContext(ctx context.Context, reques
     return
 }
 
+func NewStopInstanceRefreshRequest() (request *StopInstanceRefreshRequest) {
+    request = &StopInstanceRefreshRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("as", APIVersion, "StopInstanceRefresh")
+    
+    
+    return
+}
+
+func NewStopInstanceRefreshResponse() (response *StopInstanceRefreshResponse) {
+    response = &StopInstanceRefreshResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StopInstanceRefresh
+// This API is used to pause the ongoing instance refresh activity.
+//
+// * In the paused status, the scaling group will also be disabled.
+//
+// * Instances that are currently being updated will not be paused, instances pending updates will have their updates paused.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_REFRESHACTIVITYNOTFOUND = "ResourceNotFound.RefreshActivityNotFound"
+//  RESOURCEUNAVAILABLE_REFRESHACTIVITYSTATUSCONFLICTWITHOPERATION = "ResourceUnavailable.RefreshActivityStatusConflictWithOperation"
+//  UNAUTHORIZEDOPERATION_AUTOSCALINGROLEUNAUTHORIZED = "UnauthorizedOperation.AutoScalingRoleUnauthorized"
+func (c *Client) StopInstanceRefresh(request *StopInstanceRefreshRequest) (response *StopInstanceRefreshResponse, err error) {
+    return c.StopInstanceRefreshWithContext(context.Background(), request)
+}
+
+// StopInstanceRefresh
+// This API is used to pause the ongoing instance refresh activity.
+//
+// * In the paused status, the scaling group will also be disabled.
+//
+// * Instances that are currently being updated will not be paused, instances pending updates will have their updates paused.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_REFRESHACTIVITYNOTFOUND = "ResourceNotFound.RefreshActivityNotFound"
+//  RESOURCEUNAVAILABLE_REFRESHACTIVITYSTATUSCONFLICTWITHOPERATION = "ResourceUnavailable.RefreshActivityStatusConflictWithOperation"
+//  UNAUTHORIZEDOPERATION_AUTOSCALINGROLEUNAUTHORIZED = "UnauthorizedOperation.AutoScalingRoleUnauthorized"
+func (c *Client) StopInstanceRefreshWithContext(ctx context.Context, request *StopInstanceRefreshRequest) (response *StopInstanceRefreshResponse, err error) {
+    if request == nil {
+        request = NewStopInstanceRefreshRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopInstanceRefresh require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStopInstanceRefreshResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpgradeLaunchConfigurationRequest() (request *UpgradeLaunchConfigurationRequest) {
     request = &UpgradeLaunchConfigurationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4073,13 +4578,17 @@ func NewUpgradeLaunchConfigurationResponse() (response *UpgradeLaunchConfigurati
 }
 
 // UpgradeLaunchConfiguration
-// This API is used to upgrade a launch configuration.
+// 已有替代接口ModifyLaunchConfiguration。该接口存在覆盖参数风险，目前官网已隐藏
 //
 // 
 //
-// * This API is used to upgrade a launch configuration in a "completely overriding" manner, i.e., it uniformly sets a new configuration according to the API parameters regardless of the original parameters. If optional fields are left empty, their default values will be used.
+// There is a replacement API: ModifyLaunchConfiguration. This API carries the risk of parameter overwriting, and it has currently been hidden on the official website.
 //
-// * After the launch configuration is upgraded, the existing instances that have been created by it will not be changed, but new instances will be created according to the new configuration.
+// This API (UpgradeLaunchConfiguration) is used to upgrade the launch configuration.
+//
+// * This API is used to upgrade the launch configuration, adopting an "entirely overwrite" approach. Regardless of previous parameter settings, they will be uniformly replaced with new configurations as specified in the interface parameters. For non-mandatory fields, if not filled in, default values will be assigned.
+//
+// * After upgrading and modifying the launch configuration, existing instances that have been scaled out using this configuration will not undergo any changes. Subsequently, newly added instances using this upgraded launch configuration will be scaled out according to the new configuration.
 //
 // error code that may be returned:
 //  CALLCVMERROR = "CallCvmError"
@@ -4116,13 +4625,17 @@ func (c *Client) UpgradeLaunchConfiguration(request *UpgradeLaunchConfigurationR
 }
 
 // UpgradeLaunchConfiguration
-// This API is used to upgrade a launch configuration.
+// 已有替代接口ModifyLaunchConfiguration。该接口存在覆盖参数风险，目前官网已隐藏
 //
 // 
 //
-// * This API is used to upgrade a launch configuration in a "completely overriding" manner, i.e., it uniformly sets a new configuration according to the API parameters regardless of the original parameters. If optional fields are left empty, their default values will be used.
+// There is a replacement API: ModifyLaunchConfiguration. This API carries the risk of parameter overwriting, and it has currently been hidden on the official website.
 //
-// * After the launch configuration is upgraded, the existing instances that have been created by it will not be changed, but new instances will be created according to the new configuration.
+// This API (UpgradeLaunchConfiguration) is used to upgrade the launch configuration.
+//
+// * This API is used to upgrade the launch configuration, adopting an "entirely overwrite" approach. Regardless of previous parameter settings, they will be uniformly replaced with new configurations as specified in the interface parameters. For non-mandatory fields, if not filled in, default values will be assigned.
+//
+// * After upgrading and modifying the launch configuration, existing instances that have been scaled out using this configuration will not undergo any changes. Subsequently, newly added instances using this upgraded launch configuration will be scaled out according to the new configuration.
 //
 // error code that may be returned:
 //  CALLCVMERROR = "CallCvmError"

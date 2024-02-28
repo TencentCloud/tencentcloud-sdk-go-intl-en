@@ -369,6 +369,10 @@ type AutoScalingGroup struct {
 	// <br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
 	// <br><li>`FALSE`: no. AS will add instances to meet the desired capacity only after the spot instances are terminated.
 	CapacityRebalance *bool `json:"CapacityRebalance,omitnil,omitempty" name:"CapacityRebalance"`
+
+	// Instance name sequencing settings.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	InstanceNameIndexSettings *InstanceNameIndexSettings `json:"InstanceNameIndexSettings,omitnil,omitempty" name:"InstanceNameIndexSettings"`
 }
 
 type AutoScalingGroupAbstract struct {
@@ -400,6 +404,67 @@ type AutoScalingNotification struct {
 
 	// CMQ topic name.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+}
+
+// Predefined struct for user
+type CancelInstanceRefreshRequestParams struct {
+	// Scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
+
+	// Refresh activity ID.
+	RefreshActivityId *string `json:"RefreshActivityId,omitnil,omitempty" name:"RefreshActivityId"`
+}
+
+type CancelInstanceRefreshRequest struct {
+	*tchttp.BaseRequest
+	
+	// Scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
+
+	// Refresh activity ID.
+	RefreshActivityId *string `json:"RefreshActivityId,omitnil,omitempty" name:"RefreshActivityId"`
+}
+
+func (r *CancelInstanceRefreshRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CancelInstanceRefreshRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoScalingGroupId")
+	delete(f, "RefreshActivityId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CancelInstanceRefreshRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CancelInstanceRefreshResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CancelInstanceRefreshResponse struct {
+	*tchttp.BaseResponse
+	Response *CancelInstanceRefreshResponseParams `json:"Response"`
+}
+
+func (r *CancelInstanceRefreshResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CancelInstanceRefreshResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -756,6 +821,9 @@ type CreateAutoScalingGroupRequestParams struct {
 	// 
 	// Default value: `False`.
 	CapacityRebalance *bool `json:"CapacityRebalance,omitnil,omitempty" name:"CapacityRebalance"`
+
+	// Instance name sequencing settings. If this parameter is not specified, the default is not enabled. When enabled, an incremental numeric sequence will be appended to the names of instances automatically created within the scaling group.
+	InstanceNameIndexSettings *InstanceNameIndexSettings `json:"InstanceNameIndexSettings,omitnil,omitempty" name:"InstanceNameIndexSettings"`
 }
 
 type CreateAutoScalingGroupRequest struct {
@@ -856,6 +924,9 @@ type CreateAutoScalingGroupRequest struct {
 	// 
 	// Default value: `False`.
 	CapacityRebalance *bool `json:"CapacityRebalance,omitnil,omitempty" name:"CapacityRebalance"`
+
+	// Instance name sequencing settings. If this parameter is not specified, the default is not enabled. When enabled, an incremental numeric sequence will be appended to the names of instances automatically created within the scaling group.
+	InstanceNameIndexSettings *InstanceNameIndexSettings `json:"InstanceNameIndexSettings,omitnil,omitempty" name:"InstanceNameIndexSettings"`
 }
 
 func (r *CreateAutoScalingGroupRequest) ToJsonString() string {
@@ -894,6 +965,7 @@ func (r *CreateAutoScalingGroupRequest) FromJsonString(s string) error {
 	delete(f, "InstanceAllocationPolicy")
 	delete(f, "SpotMixedAllocationPolicy")
 	delete(f, "CapacityRebalance")
+	delete(f, "InstanceNameIndexSettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAutoScalingGroupRequest has unknown keys!", "")
 	}
@@ -2742,6 +2814,97 @@ func (r *DescribeNotificationConfigurationsResponse) FromJsonString(s string) er
 }
 
 // Predefined struct for user
+type DescribeRefreshActivitiesRequestParams struct {
+	// List of refresh activity IDs. IDs are formatted like: 'asr-5l2ejpfo'. The upper limit per request is 100. Parameters do not support specifying both RefreshActivityIds and Filters simultaneously.
+	RefreshActivityIds []*string `json:"RefreshActivityIds,omitnil,omitempty" name:"RefreshActivityIds"`
+
+	// Filtering conditions.
+	// <li> auto-scaling-group-id - String - Required or not: No - (Filtering conditions) Filters by scaling group ID. </li>
+	// <li> refresh-activity-status-code - String - Required or not: No - (Filtering conditions) Filters by refresh activity status. (INIT: Initializing. | RUNNING: In progress. | SUCCESSFUL: Activity successful. | FAILED_PAUSE: Failed paused. | AUTO_PAUSE: Automatic pause. | MANUAL_PAUSE: Manual pause. | CANCELLED: Activity canceled. | FAILED: Activity failed.)</li>
+	// <li> refresh-activity-type - String - Required or not: No - (Filtering conditions) Filters by refresh activity type. (NORMAL: Normal refresh activity. | ROLLBACK: Rollback refresh activity.)</li>
+	// <li> refresh-activity-id - String - Required or not: No - (Filtering conditions) Filters by refresh activity ID. </li>
+	// <li> The maximum limit for Filters per request is 10, and the upper limit for Filter.Values is 5. Parameters do not support specifying both RefreshActivityIds and Filters simultaneously.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of returned pieces. Default value: 20. Maximum value: 100. For further information on Limit, please refer to relevant sections in API [Overview] (https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset, 0 by default. For further information on Offset, please refer to relevant sections in API [Overview] (https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeRefreshActivitiesRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of refresh activity IDs. IDs are formatted like: 'asr-5l2ejpfo'. The upper limit per request is 100. Parameters do not support specifying both RefreshActivityIds and Filters simultaneously.
+	RefreshActivityIds []*string `json:"RefreshActivityIds,omitnil,omitempty" name:"RefreshActivityIds"`
+
+	// Filtering conditions.
+	// <li> auto-scaling-group-id - String - Required or not: No - (Filtering conditions) Filters by scaling group ID. </li>
+	// <li> refresh-activity-status-code - String - Required or not: No - (Filtering conditions) Filters by refresh activity status. (INIT: Initializing. | RUNNING: In progress. | SUCCESSFUL: Activity successful. | FAILED_PAUSE: Failed paused. | AUTO_PAUSE: Automatic pause. | MANUAL_PAUSE: Manual pause. | CANCELLED: Activity canceled. | FAILED: Activity failed.)</li>
+	// <li> refresh-activity-type - String - Required or not: No - (Filtering conditions) Filters by refresh activity type. (NORMAL: Normal refresh activity. | ROLLBACK: Rollback refresh activity.)</li>
+	// <li> refresh-activity-id - String - Required or not: No - (Filtering conditions) Filters by refresh activity ID. </li>
+	// <li> The maximum limit for Filters per request is 10, and the upper limit for Filter.Values is 5. Parameters do not support specifying both RefreshActivityIds and Filters simultaneously.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number of returned pieces. Default value: 20. Maximum value: 100. For further information on Limit, please refer to relevant sections in API [Overview] (https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset, 0 by default. For further information on Offset, please refer to relevant sections in API [Overview] (https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeRefreshActivitiesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRefreshActivitiesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RefreshActivityIds")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeRefreshActivitiesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeRefreshActivitiesResponseParams struct {
+	// Number of refresh activities that meet the conditions.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// A collection of information about refresh activities that meet the conditions.
+	RefreshActivitySet []*RefreshActivity `json:"RefreshActivitySet,omitnil,omitempty" name:"RefreshActivitySet"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeRefreshActivitiesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeRefreshActivitiesResponseParams `json:"Response"`
+}
+
+func (r *DescribeRefreshActivitiesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeRefreshActivitiesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeScalingPoliciesRequestParams struct {
 	// Queries by one or more alarm policy IDs in the format of asp-i9vkg894. The maximum number of instances per request is 100. This parameter does not support specifying both `AutoScalingPolicyIds` and `Filters` at the same time.
 	AutoScalingPolicyIds []*string `json:"AutoScalingPolicyIds,omitnil,omitempty" name:"AutoScalingPolicyIds"`
@@ -3270,6 +3433,71 @@ func (r *ExecuteScalingPolicyResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ExitStandbyRequestParams struct {
+	// Scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
+
+	// List of CVM instances in standby status.
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+}
+
+type ExitStandbyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
+
+	// List of CVM instances in standby status.
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+}
+
+func (r *ExitStandbyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExitStandbyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoScalingGroupId")
+	delete(f, "InstanceIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExitStandbyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ExitStandbyResponseParams struct {
+	// Scaling activity ID.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ActivityId *string `json:"ActivityId,omitnil,omitempty" name:"ActivityId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ExitStandbyResponse struct {
+	*tchttp.BaseResponse
+	Response *ExitStandbyResponseParams `json:"Response"`
+}
+
+func (r *ExitStandbyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExitStandbyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Filter struct {
 	// Field to be filtered.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -3412,7 +3640,7 @@ type InstanceChargePrepaid struct {
 	// Purchased usage period of an instance in months. Value range: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Auto-renewal flag. Value range: <br><li>NOTIFY_AND_AUTO_RENEW: Notify expiry and renew automatically <br><li>NOTIFY_AND_MANUAL_RENEW: Notify expiry but not renew automatically <br><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: Neither notify expiry nor renew automatically <br><br>Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is specified as NOTIFY_AND_AUTO_RENEW, the instance will be automatically renewed on a monthly basis if the account balance is sufficient.
+	// Auto-renewal flag. Valid values: <li>NOTIFY_AND_AUTO_RENEW: Notify upon expiration and automatically renew.</li> <li>NOTIFY_AND_MANUAL_RENEW: Notify upon expiration but do not auto-renew.</li> <li>DISABLE_NOTIFY_AND_MANUAL_RENEW: Do not notify and do not auto-renew</li> Default value: NOTIFY_AND_MANUAL_RENEW. If this parameter is set to NOTIFY_AND_AUTO_RENEW, and the account balance is sufficient, the instance will automatically renew monthly upon its expiration date.
 	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 }
 
@@ -3425,11 +3653,18 @@ type InstanceMarketOptionsRequest struct {
 	MarketType *string `json:"MarketType,omitnil,omitempty" name:"MarketType"`
 }
 
+type InstanceNameIndexSettings struct {
+	// Whether to enable instance creation sequencing, which is disabled by default. Valid values: <li>TRUE: Indicates that instance creation sequencing is enabled. <li>FALSE: Indicates that instance creation sequencing is disabled.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Initial sequence number, with a value range of [0, 99,999,999]. When the sequence number exceeds this range after incrementing, scale-out activities will fail. <li>Upon the first enabling of instance name sequencing: The default value is 0. <li>Upon the enabling of instance name sequencing (not for the first time): If this parameter is not specified, the historical sequence number will be carried forward. Lowering the initial sequence number may result in duplicate instance name sequences within the scaling group.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BeginIndex *int64 `json:"BeginIndex,omitnil,omitempty" name:"BeginIndex"`
+}
+
 type InstanceNameSettings struct {
-	// CVM instance name
-	// 
-	// The `InstanceName` cannot start or end with a dot (.) or hyphen (-), and cannot contain consecutive dots and hyphens.
-	// The name contains 2 to 40 characters, and supports multiple dots (.). The string between two dots can consist of letters (case-insensitive), numbers, and hyphens (-), and cannot be all numbers.
+	// CVM instance name. Value range: 2-108.
 	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
 
 	// Type of CVM instance name. Valid values: `ORIGINAL` and `UNIQUE`. Default value: `ORIGINAL`.
@@ -3536,12 +3771,10 @@ type LaunchConfiguration struct {
 	// Image ID.
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// Current status of the launch configuration. Value range: <br><li>NORMAL: normal <br><li>IMAGE_ABNORMAL: Exception with the image of the launch configuration <br><li>CBS_SNAP_ABNORMAL: Exception with the data disk snapshot of the launch configuration <br><li>SECURITY_GROUP_ABNORMAL: Exception with the security group of the launch configuration<br>
+	// Current status of the launch configuration. Valid values: <li>NORMAL: Normal.</li> <li>IMAGE_ABNORMAL: Image exception in the launch configuration.</li> <li>CBS_SNAP_ABNORMAL: Exception with data disk snapshot in the launch configuration.</li> <li>SECURITY_GROUP_ABNORMAL: Security group exception in the launch configuration.</li>
 	LaunchConfigurationStatus *string `json:"LaunchConfigurationStatus,omitnil,omitempty" name:"LaunchConfigurationStatus"`
 
-	// Instance billing mode. CVM instances take `POSTPAID_BY_HOUR` by default. Valid values:
-	// <br><li>POSTPAID_BY_HOUR: pay-as-you-go hourly
-	// <br><li>SPOTPAID: spot instance
+	// Instance billing type, with the CVM default value processed as POSTPAID_BY_HOUR. <li>POSTPAID_BY_HOUR: Hourly postpaid billing.</li> <li>SPOTPAID: Spot billing.</li>
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
 	// Market options of the instance, such as parameters related to spot instances. This parameter is required for spot instances.
@@ -3579,9 +3812,7 @@ type LaunchConfiguration struct {
 	// Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
-	// Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
-	// <br><li>ORIGINAL: uses the configured cloud disk type
-	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type in the current availability zone
+	// Cloud disk type selection policy. Valid values: <li>ORIGINAL: Use the set cloud disk type.</li> <li>AUTOMATIC: Automatically select available cloud disk types in the current availability zone.</li>
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitnil,omitempty" name:"DiskTypePolicy"`
 
 	// HPC ID<br>
@@ -3590,6 +3821,9 @@ type LaunchConfiguration struct {
 
 	// IPv6 public network bandwidth configuration.
 	IPv6InternetAccessible *IPv6InternetAccessible `json:"IPv6InternetAccessible,omitnil,omitempty" name:"IPv6InternetAccessible"`
+
+	// Placement group ID, supporting specification of only one.
+	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitnil,omitempty" name:"DisasterRecoverGroupIds"`
 }
 
 type LifecycleActionResultInfo struct {
@@ -3698,10 +3932,10 @@ type MetricAlarm struct {
 	// Comparison operator. Value range: <br><li>GREATER_THAN: greater than </li><li>GREATER_THAN_OR_EQUAL_TO: greater than or equal to </li><li>LESS_THAN: less than </li><li> LESS_THAN_OR_EQUAL_TO: less than or equal to </li><li> EQUAL_TO: equal to </li> <li>NOT_EQUAL_TO: not equal to </li>
 	ComparisonOperator *string `json:"ComparisonOperator,omitnil,omitempty" name:"ComparisonOperator"`
 
-	// Metric name. Value range: <br><li>CPU_UTILIZATION: CPU utilization </li><li>MEM_UTILIZATION: memory utilization </li><li>LAN_TRAFFIC_OUT: private network outbound bandwidth </li><li>LAN_TRAFFIC_IN: private network inbound bandwidth </li><li>WAN_TRAFFIC_OUT: public network outbound bandwidth </li><li>WAN_TRAFFIC_IN: public network inbound bandwidth </li>
+	// Metric names, with the following optional fields: <br><li>CPU_UTILIZATION: CPU utilization.</li> <li>MEM_UTILIZATION: Memory utilization.</li> <li>LAN_TRAFFIC_OUT: Private network outbound bandwidth.</li> <li>LAN_TRAFFIC_IN: Private network inbound bandwidth.</li> <li>WAN_TRAFFIC_OUT: Public network outbound bandwidth.</li> <li>WAN_TRAFFIC_IN: Public network inbound bandwidth.</li> <li>TCP_CURR_ESTAB: TCP connections.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Alarming threshold: <br><li>CPU_UTILIZATION: [1, 100] in % </li><li>MEM_UTILIZATION: [1, 100] in % </li><li>LAN_TRAFFIC_OUT: >0 in Mbps </li><li>LAN_TRAFFIC_IN: >0 in Mbps </li><li>WAN_TRAFFIC_OUT: >0 in Mbps </li><li>WAN_TRAFFIC_IN: >0 in Mbps </li>
+	// Alarm threshold values: <br><li>CPU_UTILIZATION: [1, 100], Unit: %.</li> <li>MEM_UTILIZATION: [1, 100], Unit: %.</li> <li>LAN_TRAFFIC_OUT: >0, Unit: Mbps.</li> <li>LAN_TRAFFIC_IN: >0, Unit: Mbps.</li> <li>WAN_TRAFFIC_OUT: >0, Unit: Mbps.</li> <li>WAN_TRAFFIC_IN: >0, Unit: Mbps.</li> <li>TCP_CURR_ESTAB: >0, Unit: Count.</li>
 	Threshold *uint64 `json:"Threshold,omitnil,omitempty" name:"Threshold"`
 
 	// Time period in seconds. Enumerated values: 60, 300.
@@ -3713,7 +3947,7 @@ type MetricAlarm struct {
 	// Statistics type. Value range: <br><li>AVERAGE: average </li><li>MAXIMUM: maximum <li>MINIMUM: minimum </li><br> Default value: AVERAGE
 	Statistic *string `json:"Statistic,omitnil,omitempty" name:"Statistic"`
 
-	// Exact alarming threshold. This parameter is only used in API outputs. Values: <br><li>`CPU_UTILIZATION` (in %): (0, 100]</li><li>`MEM_UTILIZATION` (in %): (0, 100]</li><li>`LAN_TRAFFIC_OUT` (in Mbps): > 0</li><li>`LAN_TRAFFIC_IN` (in Mbps): > 0</li><li>`WAN_TRAFFIC_OUT` (in Mbps): > 0</li><li>`WAN_TRAFFIC_IN` (in Mbps): > 0</li>
+	// Precise alarm threshold values. This parameter is not used as an input argument but is used solely as an output parameter for the query API: <br><li>CPU_UTILIZATION: (0, 100], Unit: %.</li> <li>MEM_UTILIZATION: (0, 100], Unit: %.</li> <li>LAN_TRAFFIC_OUT: >0, Unit: Mbps.</li> <li>LAN_TRAFFIC_IN: >0, Unit: Mbps.</li> <li>WAN_TRAFFIC_OUT: >0, Unit: Mbps.</li> <li>WAN_TRAFFIC_IN: >0, Unit: Mbps.</li> <li>TCP_CURR_ESTAB: >0, Unit: Count.</li>
 	PreciseThreshold *float64 `json:"PreciseThreshold,omitnil,omitempty" name:"PreciseThreshold"`
 }
 
@@ -3808,6 +4042,9 @@ type ModifyAutoScalingGroupRequestParams struct {
 	// <br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
 	// <br><li>`FALSE`: no. In this case, AS will add instances to meet the desired capacity only after the spot instances are terminated.
 	CapacityRebalance *bool `json:"CapacityRebalance,omitnil,omitempty" name:"CapacityRebalance"`
+
+	// Instance name sequencing settings. When enabled, an incremental numeric sequence will be appended to the names of instances automatically created within the scaling group.
+	InstanceNameIndexSettings *InstanceNameIndexSettings `json:"InstanceNameIndexSettings,omitnil,omitempty" name:"InstanceNameIndexSettings"`
 }
 
 type ModifyAutoScalingGroupRequest struct {
@@ -3902,6 +4139,9 @@ type ModifyAutoScalingGroupRequest struct {
 	// <br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
 	// <br><li>`FALSE`: no. In this case, AS will add instances to meet the desired capacity only after the spot instances are terminated.
 	CapacityRebalance *bool `json:"CapacityRebalance,omitnil,omitempty" name:"CapacityRebalance"`
+
+	// Instance name sequencing settings. When enabled, an incremental numeric sequence will be appended to the names of instances automatically created within the scaling group.
+	InstanceNameIndexSettings *InstanceNameIndexSettings `json:"InstanceNameIndexSettings,omitnil,omitempty" name:"InstanceNameIndexSettings"`
 }
 
 func (r *ModifyAutoScalingGroupRequest) ToJsonString() string {
@@ -3938,6 +4178,7 @@ func (r *ModifyAutoScalingGroupRequest) FromJsonString(s string) error {
 	delete(f, "InstanceAllocationPolicy")
 	delete(f, "SpotMixedAllocationPolicy")
 	delete(f, "CapacityRebalance")
+	delete(f, "InstanceNameIndexSettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAutoScalingGroupRequest has unknown keys!", "")
 	}
@@ -4130,6 +4371,9 @@ type ModifyLaunchConfigurationAttributesRequestParams struct {
 
 	// Placement group ID. Only one is allowed.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitnil,omitempty" name:"DisasterRecoverGroupIds"`
+
+	// Instance login settings, which include passwords, keys, or the original login settings inherited from the image. <br>Please note that specifying new login settings will overwrite the existing ones. For instance, if you previously used a password for login and then use this parameter to switch the login settings to a key, the original password will be removed.
+	LoginSettings *LoginSettings `json:"LoginSettings,omitnil,omitempty" name:"LoginSettings"`
 }
 
 type ModifyLaunchConfigurationAttributesRequest struct {
@@ -4222,6 +4466,9 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 
 	// Placement group ID. Only one is allowed.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitnil,omitempty" name:"DisasterRecoverGroupIds"`
+
+	// Instance login settings, which include passwords, keys, or the original login settings inherited from the image. <br>Please note that specifying new login settings will overwrite the existing ones. For instance, if you previously used a password for login and then use this parameter to switch the login settings to a key, the original password will be removed.
+	LoginSettings *LoginSettings `json:"LoginSettings,omitnil,omitempty" name:"LoginSettings"`
 }
 
 func (r *ModifyLaunchConfigurationAttributesRequest) ToJsonString() string {
@@ -4257,6 +4504,7 @@ func (r *ModifyLaunchConfigurationAttributesRequest) FromJsonString(s string) er
 	delete(f, "HpcClusterId")
 	delete(f, "IPv6InternetAccessible")
 	delete(f, "DisasterRecoverGroupIds")
+	delete(f, "LoginSettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLaunchConfigurationAttributesRequest has unknown keys!", "")
 	}
@@ -4887,6 +5135,93 @@ type NotificationTarget struct {
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 }
 
+type RefreshActivity struct {
+	// Scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
+
+	// Refresh activity ID.
+	RefreshActivityId *string `json:"RefreshActivityId,omitnil,omitempty" name:"RefreshActivityId"`
+
+	// Original refresh activity ID, which exists only in the rollback refresh activity.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	OriginRefreshActivityId *string `json:"OriginRefreshActivityId,omitnil,omitempty" name:"OriginRefreshActivityId"`
+
+	// Refresh batch information list.
+	RefreshBatchSet []*RefreshBatch `json:"RefreshBatchSet,omitnil,omitempty" name:"RefreshBatchSet"`
+
+	// Refresh mode.
+	RefreshMode *string `json:"RefreshMode,omitnil,omitempty" name:"RefreshMode"`
+
+	// Instance update setting parameters.
+	RefreshSettings *RefreshSettings `json:"RefreshSettings,omitnil,omitempty" name:"RefreshSettings"`
+
+	// Refresh activity type. Valid values: <br><li>NORMAL: Normal refresh activity.</li> <li>ROLLBACK: Rollback refresh activity.
+	ActivityType *string `json:"ActivityType,omitnil,omitempty" name:"ActivityType"`
+
+	// Refresh activity status. Valid values: <br><li>INIT: Initializing.</li> <li>RUNNING: Running.</li> <li>SUCCESSFUL: Activity successful.</li> <li>FAILED_PAUSE: Paused due to a failed refresh batch.</li> <li>AUTO_PAUSE: Automatically paused according to pause policy.</li> <li>MANUAL_PAUSE: Manually paused.</li> <li>CANCELLED: Activity canceled.</li> <li>FAILED: Activity failed.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Current refresh batch number. For example, a value of 2 indicates that the current activity is refreshing the second batch of instances.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CurrentRefreshBatchNum *uint64 `json:"CurrentRefreshBatchNum,omitnil,omitempty" name:"CurrentRefreshBatchNum"`
+
+	// Refresh activity start time.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Refresh activity end time.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Refresh activity creation time.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CreatedTime *string `json:"CreatedTime,omitnil,omitempty" name:"CreatedTime"`
+}
+
+type RefreshBatch struct {
+	// Refresh batch number. For example, a value of 2 indicates that the current batch of instances will be refreshed in the second batch.
+	RefreshBatchNum *uint64 `json:"RefreshBatchNum,omitnil,omitempty" name:"RefreshBatchNum"`
+
+	// Refresh batch status. Valid values: <br><li>WAITING: Pending refresh.</li> <li>INIT: Initializing.</li> <li>RUNNING: Refreshing.</li> <li>FAILED: Refresh failed.</li> <li>PARTIALLY_SUCCESSFUL: Partially successful in the batch.</li> <li>CANCELLED: Canceled.</li> <li>SUCCESSFUL: Refreshed.
+	RefreshBatchStatus *string `json:"RefreshBatchStatus,omitnil,omitempty" name:"RefreshBatchStatus"`
+
+	// List of instances linked to a refresh batch.
+	RefreshBatchRelatedInstanceSet []*RefreshBatchRelatedInstance `json:"RefreshBatchRelatedInstanceSet,omitnil,omitempty" name:"RefreshBatchRelatedInstanceSet"`
+
+	// Refresh batch start time.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Refresh batch end time.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+type RefreshBatchRelatedInstance struct {
+	// Instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Refresh instance status. If an instance is removed or destroyed during the refresh process, its status will be updated to NOT_FOUND. Valid values: <br><li>WAITING: pending refresh.</li> <li>INIT: Initializing.</li> <li>RUNNING: Refreshing in progress.</li> <li>FAILED: Refresh failed.</li> <li>CANCELLED: Canceled.</li> <li>SUCCESSFUL: Refreshed.</li> <li>NOT_FOUND: Instance not found.
+	InstanceStatus *string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
+
+	// The most recent scaling activity ID during instance refresh can be queried via the DescribeAutoScalingActivities API.
+	// Please note that scaling activities differ from instance refresh activities; a single instance refresh activity may involve multiple scaling activities.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	LastActivityId *string `json:"LastActivityId,omitnil,omitempty" name:"LastActivityId"`
+
+	// Instance refresh status information.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	InstanceStatusMessage *string `json:"InstanceStatusMessage,omitnil,omitempty" name:"InstanceStatusMessage"`
+}
+
+type RefreshSettings struct {
+	// Rolling update settings parameters. RefreshMode is the rolling update. This parameter must be filled in.Note: This field may return null, indicating that no valid value can be obtained.
+	RollingUpdateSettings *RollingUpdateSettings `json:"RollingUpdateSettings,omitnil,omitempty" name:"RollingUpdateSettings"`
+
+	// Backend service health check status for instances, defaults to FALSE. This setting takes effect only for scaling groups bound with application load balancers. When enabled, if an instance fails the check after being refreshed, its load balancer port weight remains 0 and is marked as a refresh failure. Valid values: <br><li>TRUE: Enable the check.</li> <li>FALSE: Do not enable the check.
+	CheckInstanceTargetHealth *bool `json:"CheckInstanceTargetHealth,omitnil,omitempty" name:"CheckInstanceTargetHealth"`
+}
+
 type RelatedInstance struct {
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -4961,6 +5296,160 @@ func (r *RemoveInstancesResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *RemoveInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResumeInstanceRefreshRequestParams struct {
+	// Scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
+
+	// Refresh activity ID.
+	RefreshActivityId *string `json:"RefreshActivityId,omitnil,omitempty" name:"RefreshActivityId"`
+
+	// The recovery method for the current batch's failed instances. If there are no failed instances, this parameter becomes invalid. Default value: RETRY. Valid values: <br><li>RETRY: Retry refreshing failed instances in the current batch.</li> <li>CONTINUE: Skip failed instances in the current batch.
+	ResumeMode *string `json:"ResumeMode,omitnil,omitempty" name:"ResumeMode"`
+}
+
+type ResumeInstanceRefreshRequest struct {
+	*tchttp.BaseRequest
+	
+	// Scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
+
+	// Refresh activity ID.
+	RefreshActivityId *string `json:"RefreshActivityId,omitnil,omitempty" name:"RefreshActivityId"`
+
+	// The recovery method for the current batch's failed instances. If there are no failed instances, this parameter becomes invalid. Default value: RETRY. Valid values: <br><li>RETRY: Retry refreshing failed instances in the current batch.</li> <li>CONTINUE: Skip failed instances in the current batch.
+	ResumeMode *string `json:"ResumeMode,omitnil,omitempty" name:"ResumeMode"`
+}
+
+func (r *ResumeInstanceRefreshRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeInstanceRefreshRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoScalingGroupId")
+	delete(f, "RefreshActivityId")
+	delete(f, "ResumeMode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResumeInstanceRefreshRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResumeInstanceRefreshResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ResumeInstanceRefreshResponse struct {
+	*tchttp.BaseResponse
+	Response *ResumeInstanceRefreshResponseParams `json:"Response"`
+}
+
+func (r *ResumeInstanceRefreshResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeInstanceRefreshResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RollbackInstanceRefreshRequestParams struct {
+	// Scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
+
+	// Refresh settings.
+	RefreshSettings *RefreshSettings `json:"RefreshSettings,omitnil,omitempty" name:"RefreshSettings"`
+
+	// Original refresh activity ID.
+	OriginRefreshActivityId *string `json:"OriginRefreshActivityId,omitnil,omitempty" name:"OriginRefreshActivityId"`
+
+	// Refresh mode, currently, only rolling updates are supported, with the default value being ROLLING_UPDATE_RESET.
+	RefreshMode *string `json:"RefreshMode,omitnil,omitempty" name:"RefreshMode"`
+}
+
+type RollbackInstanceRefreshRequest struct {
+	*tchttp.BaseRequest
+	
+	// Scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
+
+	// Refresh settings.
+	RefreshSettings *RefreshSettings `json:"RefreshSettings,omitnil,omitempty" name:"RefreshSettings"`
+
+	// Original refresh activity ID.
+	OriginRefreshActivityId *string `json:"OriginRefreshActivityId,omitnil,omitempty" name:"OriginRefreshActivityId"`
+
+	// Refresh mode, currently, only rolling updates are supported, with the default value being ROLLING_UPDATE_RESET.
+	RefreshMode *string `json:"RefreshMode,omitnil,omitempty" name:"RefreshMode"`
+}
+
+func (r *RollbackInstanceRefreshRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RollbackInstanceRefreshRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoScalingGroupId")
+	delete(f, "RefreshSettings")
+	delete(f, "OriginRefreshActivityId")
+	delete(f, "RefreshMode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RollbackInstanceRefreshRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RollbackInstanceRefreshResponseParams struct {
+	// Refresh activity ID.
+	RefreshActivityId *string `json:"RefreshActivityId,omitnil,omitempty" name:"RefreshActivityId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RollbackInstanceRefreshResponse struct {
+	*tchttp.BaseResponse
+	Response *RollbackInstanceRefreshResponseParams `json:"Response"`
+}
+
+func (r *RollbackInstanceRefreshResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RollbackInstanceRefreshResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type RollingUpdateSettings struct {
+	// Batch quantity. The batch quantity should be a positive integer greater than 0, but cannot exceed the total number of instances pending refresh.
+	BatchNumber *uint64 `json:"BatchNumber,omitnil,omitempty" name:"BatchNumber"`
+
+	// Pause policy between batches. Default value: Automatic. Valid values: <br><li>FIRST_BATCH_PAUSE: Pause after the first batch update completes.</li> <li>BATCH_INTERVAL_PAUSE: Pause between each batch update.</li> <li>AUTOMATIC: No pauses.
+	BatchPause *string `json:"BatchPause,omitnil,omitempty" name:"BatchPause"`
 }
 
 type RunAutomationServiceEnabled struct {
@@ -5376,6 +5865,77 @@ func (r *StartAutoScalingInstancesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type StartInstanceRefreshRequestParams struct {
+	// Scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
+
+	// Refresh settings.
+	RefreshSettings *RefreshSettings `json:"RefreshSettings,omitnil,omitempty" name:"RefreshSettings"`
+
+	// Refresh mode, currently, only rolling updates are supported, with the default value being ROLLING_UPDATE_RESET.
+	RefreshMode *string `json:"RefreshMode,omitnil,omitempty" name:"RefreshMode"`
+}
+
+type StartInstanceRefreshRequest struct {
+	*tchttp.BaseRequest
+	
+	// Scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
+
+	// Refresh settings.
+	RefreshSettings *RefreshSettings `json:"RefreshSettings,omitnil,omitempty" name:"RefreshSettings"`
+
+	// Refresh mode, currently, only rolling updates are supported, with the default value being ROLLING_UPDATE_RESET.
+	RefreshMode *string `json:"RefreshMode,omitnil,omitempty" name:"RefreshMode"`
+}
+
+func (r *StartInstanceRefreshRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartInstanceRefreshRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoScalingGroupId")
+	delete(f, "RefreshSettings")
+	delete(f, "RefreshMode")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartInstanceRefreshRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartInstanceRefreshResponseParams struct {
+	// Refresh activity ID.
+	RefreshActivityId *string `json:"RefreshActivityId,omitnil,omitempty" name:"RefreshActivityId"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type StartInstanceRefreshResponse struct {
+	*tchttp.BaseResponse
+	Response *StartInstanceRefreshResponseParams `json:"Response"`
+}
+
+func (r *StartInstanceRefreshResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartInstanceRefreshResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type StopAutoScalingInstancesRequestParams struct {
 	// The scaling group ID.
 	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
@@ -5452,6 +6012,67 @@ func (r *StopAutoScalingInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type StopInstanceRefreshRequestParams struct {
+	// Scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
+
+	// Refresh activity ID.
+	RefreshActivityId *string `json:"RefreshActivityId,omitnil,omitempty" name:"RefreshActivityId"`
+}
+
+type StopInstanceRefreshRequest struct {
+	*tchttp.BaseRequest
+	
+	// Scaling group ID.
+	AutoScalingGroupId *string `json:"AutoScalingGroupId,omitnil,omitempty" name:"AutoScalingGroupId"`
+
+	// Refresh activity ID.
+	RefreshActivityId *string `json:"RefreshActivityId,omitnil,omitempty" name:"RefreshActivityId"`
+}
+
+func (r *StopInstanceRefreshRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopInstanceRefreshRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AutoScalingGroupId")
+	delete(f, "RefreshActivityId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopInstanceRefreshRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopInstanceRefreshResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type StopInstanceRefreshResponse struct {
+	*tchttp.BaseResponse
+	Response *StopInstanceRefreshResponseParams `json:"Response"`
+}
+
+func (r *StopInstanceRefreshResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopInstanceRefreshResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type SystemDisk struct {
 	// System disk type. For more information on limits of system disk types, see [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/31636). Valid values:<br><li>`LOCAL_BASIC`: local disk <br><li>`LOCAL_SSD`: local SSD disk <br><li>`CLOUD_BASIC`: HDD cloud disk <br><li>`CLOUD_PREMIUM`: premium cloud storage<br><li>`CLOUD_SSD`: SSD cloud disk <br><br>Default value: `CLOUD_PREMIUM`.
 	// Note: this field may return `null`, indicating that no valid value can be obtained.
@@ -5521,7 +6142,7 @@ type UpgradeLaunchConfigurationRequestParams struct {
 	// Configuration of public network bandwidth. If this parameter is not specified, 0 Mbps will be used by default.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil,omitempty" name:"InternetAccessible"`
 
-	// Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
+	// This parameter is now invalid and should not be used. Upgrading the launch configuration API does not allow modification or overwriting of the LoginSettings parameter. LoginSettings will not change after upgrade.
 	LoginSettings *LoginSettings `json:"LoginSettings,omitnil,omitempty" name:"LoginSettings"`
 
 	// Project ID of the instance. Leave it blank as the default.
@@ -5600,7 +6221,7 @@ type UpgradeLaunchConfigurationRequest struct {
 	// Configuration of public network bandwidth. If this parameter is not specified, 0 Mbps will be used by default.
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil,omitempty" name:"InternetAccessible"`
 
-	// Login settings of the instance. You can use this parameter to set the login method, password, and key of the instance or keep the login settings of the original image. By default, a random password will be generated and sent to you via the Message Center.
+	// This parameter is now invalid and should not be used. Upgrading the launch configuration API does not allow modification or overwriting of the LoginSettings parameter. LoginSettings will not change after upgrade.
 	LoginSettings *LoginSettings `json:"LoginSettings,omitnil,omitempty" name:"LoginSettings"`
 
 	// Project ID of the instance. Leave it blank as the default.
