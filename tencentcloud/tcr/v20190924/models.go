@@ -152,114 +152,6 @@ func (r *CheckInstanceResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type CreateCustomAccountRequestParams struct {
-	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
-
-	// Custom account name
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-
-	// Policy list
-	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
-
-	// Custom account description
-	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
-
-	// Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
-	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
-
-	// Expiry time of the custom account (timestamp, in milliseconds)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
-
-	// Whether to disable the custom account
-	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
-}
-
-type CreateCustomAccountRequest struct {
-	*tchttp.BaseRequest
-	
-	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
-
-	// Custom account name
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-
-	// Policy list
-	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
-
-	// Custom account description
-	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
-
-	// Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
-	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
-
-	// Expiry time of the custom account (timestamp, in milliseconds)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
-
-	// Whether to disable the custom account
-	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
-}
-
-func (r *CreateCustomAccountRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateCustomAccountRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "RegistryId")
-	delete(f, "Name")
-	delete(f, "Permissions")
-	delete(f, "Description")
-	delete(f, "Duration")
-	delete(f, "ExpiresAt")
-	delete(f, "Disable")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateCustomAccountRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type CreateCustomAccountResponseParams struct {
-	// Custom username (the prefix `tcr$` is automatically added)
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-
-	// Custom password, which is displayed only once
-	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
-
-	// Custom expiry time (timestamp)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
-
-	// Custom account creation time
-	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type CreateCustomAccountResponse struct {
-	*tchttp.BaseResponse
-	Response *CreateCustomAccountResponseParams `json:"Response"`
-}
-
-func (r *CreateCustomAccountResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *CreateCustomAccountResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
 type CreateImageAccelerationServiceRequestParams struct {
 	// Instance ID
 	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
@@ -1552,36 +1444,6 @@ func (r *CreateWebhookTriggerResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-type CustomAccount struct {
-	// Custom account name
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-
-	// Description
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
-
-	// Whether to disable
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
-
-	// Expiry time
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
-
-	// Creation time
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
-
-	// Update time
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
-
-	// Policy
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
-}
-
 type CustomizedDomainInfo struct {
 	// Instance ID
 	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
@@ -1594,67 +1456,6 @@ type CustomizedDomainInfo struct {
 
 	// Domain name creation status. Valid values: SUCCESS, FAILURE, CREATING, DELETING.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
-}
-
-// Predefined struct for user
-type DeleteCustomAccountRequestParams struct {
-	// Instance ID	
-	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
-
-	// Custom account name
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-}
-
-type DeleteCustomAccountRequest struct {
-	*tchttp.BaseRequest
-	
-	// Instance ID	
-	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
-
-	// Custom account name
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-}
-
-func (r *DeleteCustomAccountRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteCustomAccountRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "RegistryId")
-	delete(f, "Name")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteCustomAccountRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DeleteCustomAccountResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DeleteCustomAccountResponse struct {
-	*tchttp.BaseResponse
-	Response *DeleteCustomAccountResponseParams `json:"Response"`
-}
-
-func (r *DeleteCustomAccountResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DeleteCustomAccountResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -2791,102 +2592,6 @@ func (r *DescribeChartDownloadInfoResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeChartDownloadInfoResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeCustomAccountsRequestParams struct {
-	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
-
-	// All custom accounts
-	All *bool `json:"All,omitnil,omitempty" name:"All"`
-
-	// Whether to enter the policy
-	EmbedPermission *bool `json:"EmbedPermission,omitnil,omitempty" name:"EmbedPermission"`
-
-	// Filters
-	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Offset. Default value: `0`
-	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Maximum number of output entries. Default value: `20`. Maximum value: 100`.
-	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-}
-
-type DescribeCustomAccountsRequest struct {
-	*tchttp.BaseRequest
-	
-	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
-
-	// All custom accounts
-	All *bool `json:"All,omitnil,omitempty" name:"All"`
-
-	// Whether to enter the policy
-	EmbedPermission *bool `json:"EmbedPermission,omitnil,omitempty" name:"EmbedPermission"`
-
-	// Filters
-	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
-
-	// Offset. Default value: `0`
-	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
-
-	// Maximum number of output entries. Default value: `20`. Maximum value: 100`.
-	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
-}
-
-func (r *DescribeCustomAccountsRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCustomAccountsRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "RegistryId")
-	delete(f, "All")
-	delete(f, "EmbedPermission")
-	delete(f, "Filters")
-	delete(f, "Offset")
-	delete(f, "Limit")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCustomAccountsRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeCustomAccountsResponseParams struct {
-	// List of custom accounts
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
-	CustomAccounts []*CustomAccount `json:"CustomAccounts,omitnil,omitempty" name:"CustomAccounts"`
-
-	// Number of custom accounts
-	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
-
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DescribeCustomAccountsResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeCustomAccountsResponseParams `json:"Response"`
-}
-
-func (r *DescribeCustomAccountsResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeCustomAccountsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4307,7 +4012,7 @@ type DescribeServiceAccountsRequestParams struct {
 	// All service accounts
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// Whether to fill in permission information
+	// Whether to fill in permission information.
 	EmbedPermission *bool `json:"EmbedPermission,omitnil,omitempty" name:"EmbedPermission"`
 
 	// Filters
@@ -4329,7 +4034,7 @@ type DescribeServiceAccountsRequest struct {
 	// All service accounts
 	All *bool `json:"All,omitnil,omitempty" name:"All"`
 
-	// Whether to fill in permission information
+	// Whether to fill in permission information.
 	EmbedPermission *bool `json:"EmbedPermission,omitnil,omitempty" name:"EmbedPermission"`
 
 	// Filters
@@ -4372,7 +4077,7 @@ type DescribeServiceAccountsResponseParams struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	ServiceAccounts []*ServiceAccount `json:"ServiceAccounts,omitnil,omitempty" name:"ServiceAccounts"`
 
-	// Number of service accounts
+	// Number of service level accounts.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
@@ -4913,6 +4618,109 @@ func (r *DownloadHelmChartResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DuplicateImageRequestParams struct {
+	// Instance ID.
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
+
+	// Source namespace name.
+	SourceNamespace *string `json:"SourceNamespace,omitnil,omitempty" name:"SourceNamespace"`
+
+	// Source image repository name.
+	SourceRepo *string `json:"SourceRepo,omitnil,omitempty" name:"SourceRepo"`
+
+	// Source image tag or digest value. Currently, only tag is supported.
+	SourceReference *string `json:"SourceReference,omitnil,omitempty" name:"SourceReference"`
+
+	// Destination image version.
+	DestinationTag *string `json:"DestinationTag,omitnil,omitempty" name:"DestinationTag"`
+
+	// Destination namespace. Defaults to the same as the source if not filled.
+	DestinationNamespace *string `json:"DestinationNamespace,omitnil,omitempty" name:"DestinationNamespace"`
+
+	// Destination image repository. Defaults to the same as the source if not filled.
+	DestinationRepo *string `json:"DestinationRepo,omitnil,omitempty" name:"DestinationRepo"`
+
+	// Whether to overwrite.
+	Override *bool `json:"Override,omitnil,omitempty" name:"Override"`
+}
+
+type DuplicateImageRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID.
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
+
+	// Source namespace name.
+	SourceNamespace *string `json:"SourceNamespace,omitnil,omitempty" name:"SourceNamespace"`
+
+	// Source image repository name.
+	SourceRepo *string `json:"SourceRepo,omitnil,omitempty" name:"SourceRepo"`
+
+	// Source image tag or digest value. Currently, only tag is supported.
+	SourceReference *string `json:"SourceReference,omitnil,omitempty" name:"SourceReference"`
+
+	// Destination image version.
+	DestinationTag *string `json:"DestinationTag,omitnil,omitempty" name:"DestinationTag"`
+
+	// Destination namespace. Defaults to the same as the source if not filled.
+	DestinationNamespace *string `json:"DestinationNamespace,omitnil,omitempty" name:"DestinationNamespace"`
+
+	// Destination image repository. Defaults to the same as the source if not filled.
+	DestinationRepo *string `json:"DestinationRepo,omitnil,omitempty" name:"DestinationRepo"`
+
+	// Whether to overwrite.
+	Override *bool `json:"Override,omitnil,omitempty" name:"Override"`
+}
+
+func (r *DuplicateImageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DuplicateImageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RegistryId")
+	delete(f, "SourceNamespace")
+	delete(f, "SourceRepo")
+	delete(f, "SourceReference")
+	delete(f, "DestinationTag")
+	delete(f, "DestinationNamespace")
+	delete(f, "DestinationRepo")
+	delete(f, "Override")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DuplicateImageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DuplicateImageResponseParams struct {
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DuplicateImageResponse struct {
+	*tchttp.BaseResponse
+	Response *DuplicateImageResponseParams `json:"Response"`
+}
+
+func (r *DuplicateImageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DuplicateImageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Filter struct {
 	// Attribute name. If more than one filter exists, the logical relationship between these filters is `AND`.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -5219,102 +5027,6 @@ func (r *ManageReplicationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ManageReplicationResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyCustomAccountRequestParams struct {
-	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
-
-	// Custom account name
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-
-	// Custom account description
-	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
-
-	// Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
-	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
-
-	// Expiry time of the custom account (timestamp)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
-
-	// Whether to disable the custom account
-	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
-
-	// Policy list
-	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
-}
-
-type ModifyCustomAccountRequest struct {
-	*tchttp.BaseRequest
-	
-	// Instance ID
-	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
-
-	// Custom account name
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-
-	// Custom account description
-	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
-
-	// Validity in days starting from the current day. It takes a higher priority than `ExpiresAt`.
-	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
-
-	// Expiry time of the custom account (timestamp)
-	ExpiresAt *int64 `json:"ExpiresAt,omitnil,omitempty" name:"ExpiresAt"`
-
-	// Whether to disable the custom account
-	Disable *bool `json:"Disable,omitnil,omitempty" name:"Disable"`
-
-	// Policy list
-	Permissions []*Permission `json:"Permissions,omitnil,omitempty" name:"Permissions"`
-}
-
-func (r *ModifyCustomAccountRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyCustomAccountRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "RegistryId")
-	delete(f, "Name")
-	delete(f, "Description")
-	delete(f, "Duration")
-	delete(f, "ExpiresAt")
-	delete(f, "Disable")
-	delete(f, "Permissions")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCustomAccountRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type ModifyCustomAccountResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type ModifyCustomAccountResponse struct {
-	*tchttp.BaseResponse
-	Response *ModifyCustomAccountResponseParams `json:"Response"`
-}
-
-func (r *ModifyCustomAccountResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *ModifyCustomAccountResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5778,6 +5490,84 @@ func (r *ModifySecurityPolicyResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyServiceAccountPasswordRequestParams struct {
+	// Instance ID.
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
+
+	// Service level account name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Whether to randomly generate a password.
+	Random *bool `json:"Random,omitnil,omitempty" name:"Random"`
+
+	// Service level account password, 8 to 20 characters, contains at least one uppercase letter, one lowercase letter, and one number.
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+}
+
+type ModifyServiceAccountPasswordRequest struct {
+	*tchttp.BaseRequest
+	
+	// Instance ID.
+	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
+
+	// Service level account name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Whether to randomly generate a password.
+	Random *bool `json:"Random,omitnil,omitempty" name:"Random"`
+
+	// Service level account password, 8 to 20 characters, contains at least one uppercase letter, one lowercase letter, and one number.
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+}
+
+func (r *ModifyServiceAccountPasswordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyServiceAccountPasswordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RegistryId")
+	delete(f, "Name")
+	delete(f, "Random")
+	delete(f, "Password")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyServiceAccountPasswordRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyServiceAccountPasswordResponseParams struct {
+	// Custom user password, displayed only once. Please make sure to retain it securely.
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyServiceAccountPasswordResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyServiceAccountPasswordResponseParams `json:"Response"`
+}
+
+func (r *ModifyServiceAccountPasswordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyServiceAccountPasswordResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyServiceAccountRequestParams struct {
 	// Instance ID
 	RegistryId *string `json:"RegistryId,omitnil,omitempty" name:"RegistryId"`
@@ -6046,8 +5836,8 @@ type Permission struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Resource *string `json:"Resource,omitnil,omitempty" name:"Resource"`
 
-	// Action. Valid values: `tcr:PushRepository`, `tcr:PullRepository`
-	// Note: This field may return `null`, indicating that no valid values can be obtained.
+	// Actions. Currently only support: tcr:PushRepository, tcr:PullRepository, tcr:CreateRepository, tcr:CreateHelmChart, tcr:DescribeHelmCharts.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	Actions []*string `json:"Actions,omitnil,omitempty" name:"Actions"`
 }
 
@@ -6126,6 +5916,9 @@ type Registry struct {
 	// Prepayment renewal flag. Valid values: 0: Manual renewal; 1: Auto-renewal; 2: No renewal and no notification.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	RenewFlag *int64 `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+
+	// Whether to enable instance deletion protection. false indicates it is not enabled.
+	DeletionProtection *bool `json:"DeletionProtection,omitnil,omitempty" name:"DeletionProtection"`
 }
 
 type RegistryChargePrepaid struct {
@@ -6420,10 +6213,10 @@ type ServiceAccount struct {
 }
 
 type Tag struct {
-	// Cloud tag key
+	// Cloud tag key.Note: This field may return null, indicating that no valid value can be obtained.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Cloud tag value
+	// Cloud tag value.Note: This field may return null, indicating that no valid value can be obtained.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
