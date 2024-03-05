@@ -235,7 +235,7 @@ type CreateCloudRecordingResponseParams struct {
 	// The task ID assigned by the recording service, which uniquely identifies a recording process and becomes invalid after a recording task ends. After a recording task starts, if you want to perform other actions on the task, you need to specify the task ID when making API requests.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -299,7 +299,7 @@ type DeleteCloudRecordingResponseParams struct {
 	// The task ID assigned by the recording service, which uniquely identifies a recording process and becomes invalid after a recording task ends.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -451,7 +451,7 @@ type DescribeCallDetailInfoResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*QualityData `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -525,7 +525,7 @@ type DescribeCloudRecordingResponseParams struct {
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	StorageFileList []*StorageFile `json:"StorageFileList,omitnil,omitempty" name:"StorageFileList"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -601,7 +601,7 @@ type DescribeMixTranscodingUsageResponseParams struct {
 	// The usage data in each time unit.
 	UsageList []*TrtcUsage `json:"UsageList,omitnil,omitempty" name:"UsageList"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -684,7 +684,7 @@ type DescribeRecordingUsageResponseParams struct {
 	// The usage data in each time unit.
 	UsageList []*TrtcUsage `json:"UsageList,omitnil,omitempty" name:"UsageList"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -760,7 +760,7 @@ type DescribeRelayUsageResponseParams struct {
 	// The usage data in each time unit.
 	UsageList []*TrtcUsage `json:"UsageList,omitnil,omitempty" name:"UsageList"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -863,7 +863,7 @@ type DescribeRoomInfoResponseParams struct {
 	// The room information.
 	RoomList []*RoomState `json:"RoomList,omitnil,omitempty" name:"RoomList"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -942,7 +942,7 @@ type DescribeScaleInfoResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ScaleList []*ScaleInfomation `json:"ScaleList,omitnil,omitempty" name:"ScaleList"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1006,7 +1006,7 @@ type DescribeStreamIngestResponseParams struct {
 	// Task status information. InProgress: Indicates that the current task is in progress. NotExist: Indicates that the current task does not exist. Example value: InProgress
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1088,7 +1088,7 @@ type DescribeTRTCMarketQualityDataResponseParams struct {
 	// TRTC Data Dashboard output parameters
 	Data *TRTCDataResult `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1170,7 +1170,7 @@ type DescribeTRTCMarketScaleDataResponseParams struct {
 	// TRTC Data Dashboard output parameters
 	Data *TRTCDataResult `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1248,7 +1248,7 @@ type DescribeTRTCRealTimeQualityDataResponseParams struct {
 	// TRTC Real- Time Monitoring output parameters
 	Data *TRTCDataResult `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1327,7 +1327,7 @@ type DescribeTRTCRealTimeScaleDataResponseParams struct {
 	//  output parameter
 	Data *TRTCDataResult `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1398,7 +1398,7 @@ type DescribeTrtcRoomUsageResponseParams struct {
 	// The usage data grouped by room, in CSV format.
 	Data *string `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1474,7 +1474,7 @@ type DescribeTrtcUsageResponseParams struct {
 	// The usage data in each time unit.
 	UsageList []*TrtcUsage `json:"UsageList,omitnil,omitempty" name:"UsageList"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1558,7 +1558,7 @@ type DescribeUnusualEventResponseParams struct {
 	// The information of the abnormal user experiences.
 	AbnormalExperienceList []*AbnormalExperience `json:"AbnormalExperienceList,omitnil,omitempty" name:"AbnormalExperienceList"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1654,7 +1654,7 @@ type DescribeUserEventResponseParams struct {
 	// The event list. An empty array will be returned if no data is obtained.
 	Data []*EventList `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1767,7 +1767,7 @@ type DescribeUserInfoResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UserList []*UserInformation `json:"UserList,omitnil,omitempty" name:"UserList"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1828,7 +1828,7 @@ func (r *DismissRoomByStrRoomIdRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DismissRoomByStrRoomIdResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1889,7 +1889,7 @@ func (r *DismissRoomRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DismissRoomResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2349,7 +2349,7 @@ type ModifyCloudRecordingResponseParams struct {
 	// The task ID assigned by the recording service, which uniquely identifies a recording process and becomes invalid after a recording task ends.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2464,7 +2464,7 @@ func (r *RemoveUserByStrRoomIdRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type RemoveUserByStrRoomIdResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2532,7 +2532,7 @@ func (r *RemoveUserRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type RemoveUserResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2657,7 +2657,7 @@ func (r *SetUserBlockedByStrRoomIdRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SetUserBlockedByStrRoomIdResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2732,7 +2732,7 @@ func (r *SetUserBlockedRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SetUserBlockedResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2864,7 +2864,7 @@ type StartPublishCdnStreamResponseParams struct {
 	// The task ID, which is generated by the Tencent Cloud server. You need to pass in the task ID when making a request to update or stop a relaying task.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2979,7 +2979,7 @@ type StartStreamIngestResponseParams struct {
 	// The Task ID of the Pull stream Relay. The Task ID is a unique identifier for a Pull stream Relay lifecycle process, and it loses its meaning when the task ends. The Task ID needs to be saved by the business as a parameter for the next operation on this task.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3043,7 +3043,7 @@ type StopPublishCdnStreamResponseParams struct {
 	// The task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3104,7 +3104,7 @@ func (r *StopStreamIngestRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StopStreamIngestResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3322,7 +3322,7 @@ type UpdatePublishCdnStreamResponseParams struct {
 	// The task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// 唯一请求 ID，每次请求都会返回。定位问题时需要提供该次请求的 RequestId。
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
