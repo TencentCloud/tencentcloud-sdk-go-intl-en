@@ -5638,7 +5638,7 @@ type InstanceSet struct {
 	// Instance memory capacity in MB (1 MB = 1024 KB)
 	Size *float64 `json:"Size,omitnil,omitempty" name:"Size"`
 
-	// This field has been disused. You can use the TCOP’s [GetMonitorData](https://intl.cloud.tencent.com/document/product/248/31014?from_cn_redirect=1) API to query the capacity used by the instance.
+	// This field has been disused. You can use the TCOP [GetMonitorData](https://www.tencentcloud.com/zh/document/product/248/33881) API to query the capacity used by the instance.
 	SizeUsed *float64 `json:"SizeUsed,omitnil,omitempty" name:"SizeUsed"`
 
 	// Instance type
