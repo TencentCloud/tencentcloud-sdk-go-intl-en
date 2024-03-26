@@ -7145,6 +7145,59 @@ func (c *Client) ExtractTraceWatermarkWithContext(ctx context.Context, request *
     return
 }
 
+func NewFastEditMediaRequest() (request *FastEditMediaRequest) {
+    request = &FastEditMediaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "FastEditMedia")
+    
+    
+    return
+}
+
+func NewFastEditMediaResponse() (response *FastEditMediaResponse) {
+    response = &FastEditMediaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// FastEditMedia
+// Implement fast splicing and editing of HLS videos to generate new HLS format media.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) FastEditMedia(request *FastEditMediaRequest) (response *FastEditMediaResponse, err error) {
+    return c.FastEditMediaWithContext(context.Background(), request)
+}
+
+// FastEditMedia
+// Implement fast splicing and editing of HLS videos to generate new HLS format media.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) FastEditMediaWithContext(ctx context.Context, request *FastEditMediaRequest) (response *FastEditMediaResponse, err error) {
+    if request == nil {
+        request = NewFastEditMediaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("FastEditMedia require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewFastEditMediaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewForbidMediaDistributionRequest() (request *ForbidMediaDistributionRequest) {
     request = &ForbidMediaDistributionRequest{
         BaseRequest: &tchttp.BaseRequest{},
