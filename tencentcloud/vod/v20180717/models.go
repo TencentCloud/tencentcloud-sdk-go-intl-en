@@ -13614,19 +13614,19 @@ type FaceEnhanceInfo struct {
 }
 
 type FastEditMediaFileInfo struct {
-
+	// Media file ID.
 	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-
+	// The types of media. Valid values: <li>Transcode:Transcoded output; </li> <li>Original: Original audio and video. </li>The audio and video being operated on must be in HLS format.
 	AudioVideoType *string `json:"AudioVideoType,omitnil,omitempty" name:"AudioVideoType"`
 
-
+	// When AudioVideoType is set to Transcode, it is valid and indicates the transcoding template ID for the media being operated on.
 	TranscodeDefinition *int64 `json:"TranscodeDefinition,omitnil,omitempty" name:"TranscodeDefinition"`
 
-
+	// Offset time of the start of the video clip, unit: seconds.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-
+	// Offset time at the end of the video clip, unit: seconds.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 }
 
