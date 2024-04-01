@@ -760,6 +760,7 @@ func NewCreateDocumentResponse() (response *CreateDocumentResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
@@ -772,6 +773,7 @@ func (c *Client) CreateDocument(request *CreateDocumentRequest) (response *Creat
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  RESOURCENOTFOUND_USER = "ResourceNotFound.User"
@@ -995,6 +997,7 @@ func NewCreateRoomResponse() (response *CreateRoomResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
 //  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ROOMTYPEINVALID = "InvalidParameter.RoomTypeInvalid"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
@@ -1019,6 +1022,7 @@ func (c *Client) CreateRoom(request *CreateRoomRequest) (response *CreateRoomRes
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
 //  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_ROOMTYPEINVALID = "InvalidParameter.RoomTypeInvalid"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
@@ -1620,6 +1624,7 @@ func NewDescribeCurrentMemberListResponse() (response *DescribeCurrentMemberList
 // A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
 //  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
 //  INTERNALERROR = "InternalError"
@@ -1634,6 +1639,7 @@ func (c *Client) DescribeCurrentMemberList(request *DescribeCurrentMemberListReq
 // A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
 //  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
 //  INTERNALERROR = "InternalError"
@@ -2055,6 +2061,7 @@ func NewDescribeGroupListResponse() (response *DescribeGroupListResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
@@ -2078,6 +2085,7 @@ func (c *Client) DescribeGroupList(request *DescribeGroupListRequest) (response 
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_GROUPMEMBEROVERLIMIT = "InvalidParameter.GroupMemberOverLimit"
@@ -2277,6 +2285,7 @@ func NewDescribeRoomResponse() (response *DescribeRoomResponse) {
 // A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
 func (c *Client) DescribeRoom(request *DescribeRoomRequest) (response *DescribeRoomResponse, err error) {
@@ -2289,6 +2298,7 @@ func (c *Client) DescribeRoom(request *DescribeRoomRequest) (response *DescribeR
 // A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
 func (c *Client) DescribeRoomWithContext(ctx context.Context, request *DescribeRoomRequest) (response *DescribeRoomResponse, err error) {
@@ -2332,6 +2342,7 @@ func NewDescribeRoomStatisticsResponse() (response *DescribeRoomStatisticsRespon
 // A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
@@ -2346,6 +2357,7 @@ func (c *Client) DescribeRoomStatistics(request *DescribeRoomStatisticsRequest) 
 // A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ROOMNOTEND = "FailedOperation.RoomNotEnd"
 //  INTERNALERROR = "InternalError"
 //  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
@@ -2697,6 +2709,7 @@ func NewGetRoomEventResponse() (response *GetRoomEventResponse) {
 // This API is used to get the events of a room. It only works within one hour after a class ends.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
@@ -2708,6 +2721,7 @@ func (c *Client) GetRoomEvent(request *GetRoomEventRequest) (response *GetRoomEv
 // This API is used to get the events of a room. It only works within one hour after a class ends.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  RESOURCENOTFOUND_ROOM = "ResourceNotFound.Room"
@@ -3270,6 +3284,7 @@ func NewModifyRoomResponse() (response *ModifyRoomResponse) {
 // A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
 //  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
 //  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
@@ -3278,6 +3293,7 @@ func NewModifyRoomResponse() (response *ModifyRoomResponse) {
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
 //  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -3294,6 +3310,7 @@ func (c *Client) ModifyRoom(request *ModifyRoomRequest) (response *ModifyRoomRes
 // A maximum of 20 requests can be initiated per second for this API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CLASSENDED = "FailedOperation.ClassEnded"
 //  FAILEDOPERATION_CLASSEXPIRED = "FailedOperation.ClassExpired"
 //  FAILEDOPERATION_CLASSSTARTED = "FailedOperation.ClassStarted"
@@ -3302,6 +3319,7 @@ func (c *Client) ModifyRoom(request *ModifyRoomRequest) (response *ModifyRoomRes
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
 //  INVALIDPARAMETER_ENDTIME = "InvalidParameter.EndTime"
+//  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETER_STARTTIME = "InvalidParameter.StartTime"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -3519,6 +3537,7 @@ func NewSetAppCustomContentResponse() (response *SetAppCustomContentResponse) {
 // This API is used to set or update the custom content of an application, including the application icon and custom code. After you update JS and CSS content, you also need to call this API for the updates to take effect.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3532,6 +3551,7 @@ func (c *Client) SetAppCustomContent(request *SetAppCustomContentRequest) (respo
 // This API is used to set or update the custom content of an application, including the application icon and custom code. After you update JS and CSS content, you also need to call this API for the updates to take effect.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_REQUESTTIMEDOUT = "FailedOperation.RequestTimedOut"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3580,6 +3600,7 @@ func NewSetWatermarkResponse() (response *SetWatermarkResponse) {
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -3596,6 +3617,7 @@ func (c *Client) SetWatermark(request *SetWatermarkRequest) (response *SetWaterm
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTENT = "InvalidParameter.Content"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  MISSINGPARAMETER = "MissingParameter"
