@@ -2218,6 +2218,12 @@ type OCRResult struct {
 
 	// The request id
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+
+	// Base64 of cropped image of ID card
+	CardCutImageBase64 *string `json:"CardCutImageBase64,omitnil,omitempty" name:"CardCutImageBase64"`
+
+	// Base64 of the cropped image on the reverse side of the ID card
+	CardBackCutImageBase64 *string `json:"CardBackCutImageBase64,omitnil,omitempty" name:"CardBackCutImageBase64"`
 }
 
 type PhilippinesDrivingLicense struct {
