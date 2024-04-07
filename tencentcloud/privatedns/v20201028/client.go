@@ -190,6 +190,7 @@ func NewCreatePrivateZoneResponse() (response *CreatePrivateZoneResponse) {
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_SERVICENOTSUBSCRIBED = "ResourceNotFound.ServiceNotSubscribed"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_TLDPACKAGEEXPIRED = "ResourceUnavailable.TldPackageExpired"
 //  RESOURCESSOLDOUT = "ResourcesSoldOut"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnAuthorized"
@@ -235,6 +236,7 @@ func (c *Client) CreatePrivateZone(request *CreatePrivateZoneRequest) (response 
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_SERVICENOTSUBSCRIBED = "ResourceNotFound.ServiceNotSubscribed"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCEUNAVAILABLE_TLDPACKAGEEXPIRED = "ResourceUnavailable.TldPackageExpired"
 //  RESOURCESSOLDOUT = "ResourcesSoldOut"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 //  UNAUTHORIZEDOPERATION_ROLEUNAUTHORIZED = "UnauthorizedOperation.RoleUnAuthorized"
@@ -294,6 +296,7 @@ func NewCreatePrivateZoneRecordResponse() (response *CreatePrivateZoneRecordResp
 //  INVALIDPARAMETER_ILLEGALRECORD = "InvalidParameter.IllegalRecord"
 //  INVALIDPARAMETER_ILLEGALRECORDVALUE = "InvalidParameter.IllegalRecordValue"
 //  INVALIDPARAMETER_INVALIDMX = "InvalidParameter.InvalidMX"
+//  INVALIDPARAMETER_MXNOTSUPPORTED = "InvalidParameter.MXNotSupported"
 //  INVALIDPARAMETER_RECORDAAAACOUNTEXCEED = "InvalidParameter.RecordAAAACountExceed"
 //  INVALIDPARAMETER_RECORDACOUNTEXCEED = "InvalidParameter.RecordACountExceed"
 //  INVALIDPARAMETER_RECORDCNAMECOUNTEXCEED = "InvalidParameter.RecordCNAMECountExceed"
@@ -344,6 +347,7 @@ func (c *Client) CreatePrivateZoneRecord(request *CreatePrivateZoneRecordRequest
 //  INVALIDPARAMETER_ILLEGALRECORD = "InvalidParameter.IllegalRecord"
 //  INVALIDPARAMETER_ILLEGALRECORDVALUE = "InvalidParameter.IllegalRecordValue"
 //  INVALIDPARAMETER_INVALIDMX = "InvalidParameter.InvalidMX"
+//  INVALIDPARAMETER_MXNOTSUPPORTED = "InvalidParameter.MXNotSupported"
 //  INVALIDPARAMETER_RECORDAAAACOUNTEXCEED = "InvalidParameter.RecordAAAACountExceed"
 //  INVALIDPARAMETER_RECORDACOUNTEXCEED = "InvalidParameter.RecordACountExceed"
 //  INVALIDPARAMETER_RECORDCNAMECOUNTEXCEED = "InvalidParameter.RecordCNAMECountExceed"
@@ -386,6 +390,105 @@ func (c *Client) CreatePrivateZoneRecordWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewCreatePrivateZoneRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeletePrivateZoneRecordRequest() (request *DeletePrivateZoneRecordRequest) {
+    request = &DeletePrivateZoneRecordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("privatedns", APIVersion, "DeletePrivateZoneRecord")
+    
+    
+    return
+}
+
+func NewDeletePrivateZoneRecordResponse() (response *DeletePrivateZoneRecordResponse) {
+    response = &DeletePrivateZoneRecordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeletePrivateZoneRecord
+// This API is used to delete a DNS record for a private domain.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DELETELASTBINDVPCRECORDFAILED = "FailedOperation.DeleteLastBindVpcRecordFailed"
+//  FAILEDOPERATION_DELETERECORDFAILED = "FailedOperation.DeleteRecordFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RECORDNOTEXIST = "InvalidParameter.RecordNotExist"
+//  INVALIDPARAMETER_ZONENOTEXISTS = "InvalidParameter.ZoneNotExists"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_SERVICENOTSUBSCRIBED = "ResourceNotFound.ServiceNotSubscribed"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDACCOUNT = "UnauthorizedOperation.UnauthorizedAccount"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_FREQUENCYLIMIT = "UnsupportedOperation.FrequencyLimit"
+func (c *Client) DeletePrivateZoneRecord(request *DeletePrivateZoneRecordRequest) (response *DeletePrivateZoneRecordResponse, err error) {
+    return c.DeletePrivateZoneRecordWithContext(context.Background(), request)
+}
+
+// DeletePrivateZoneRecord
+// This API is used to delete a DNS record for a private domain.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_DELETELASTBINDVPCRECORDFAILED = "FailedOperation.DeleteLastBindVpcRecordFailed"
+//  FAILEDOPERATION_DELETERECORDFAILED = "FailedOperation.DeleteRecordFailed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_RECORDNOTEXIST = "InvalidParameter.RecordNotExist"
+//  INVALIDPARAMETER_ZONENOTEXISTS = "InvalidParameter.ZoneNotExists"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_SERVICENOTSUBSCRIBED = "ResourceNotFound.ServiceNotSubscribed"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDACCOUNT = "UnauthorizedOperation.UnauthorizedAccount"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_FREQUENCYLIMIT = "UnsupportedOperation.FrequencyLimit"
+func (c *Client) DeletePrivateZoneRecordWithContext(ctx context.Context, request *DeletePrivateZoneRecordRequest) (response *DeletePrivateZoneRecordResponse, err error) {
+    if request == nil {
+        request = NewDeletePrivateZoneRecordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeletePrivateZoneRecord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeletePrivateZoneRecordResponse()
     err = c.Send(request, response)
     return
 }
@@ -736,6 +839,164 @@ func (c *Client) DescribePrivateDNSAccountListWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribePrivateDNSAccountListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrivateZoneListRequest() (request *DescribePrivateZoneListRequest) {
+    request = &DescribePrivateZoneListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("privatedns", APIVersion, "DescribePrivateZoneList")
+    
+    
+    return
+}
+
+func NewDescribePrivateZoneListResponse() (response *DescribePrivateZoneListResponse) {
+    response = &DescribePrivateZoneListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePrivateZoneList
+// This API is used to get the list of private domains.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_SERVICENOTSUBSCRIBED = "ResourceNotFound.ServiceNotSubscribed"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDACCOUNT = "UnauthorizedOperation.UnauthorizedAccount"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribePrivateZoneList(request *DescribePrivateZoneListRequest) (response *DescribePrivateZoneListResponse, err error) {
+    return c.DescribePrivateZoneListWithContext(context.Background(), request)
+}
+
+// DescribePrivateZoneList
+// This API is used to get the list of private domains.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_SERVICENOTSUBSCRIBED = "ResourceNotFound.ServiceNotSubscribed"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDACCOUNT = "UnauthorizedOperation.UnauthorizedAccount"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribePrivateZoneListWithContext(ctx context.Context, request *DescribePrivateZoneListRequest) (response *DescribePrivateZoneListResponse, err error) {
+    if request == nil {
+        request = NewDescribePrivateZoneListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrivateZoneList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrivateZoneListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePrivateZoneRecordListRequest() (request *DescribePrivateZoneRecordListRequest) {
+    request = &DescribePrivateZoneRecordListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("privatedns", APIVersion, "DescribePrivateZoneRecordList")
+    
+    
+    return
+}
+
+func NewDescribePrivateZoneRecordListResponse() (response *DescribePrivateZoneRecordListResponse) {
+    response = &DescribePrivateZoneRecordListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePrivateZoneRecordList
+// This API is used to get the list of records for a private domain.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ZONENOTEXISTS = "InvalidParameter.ZoneNotExists"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_SERVICENOTSUBSCRIBED = "ResourceNotFound.ServiceNotSubscribed"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDACCOUNT = "UnauthorizedOperation.UnauthorizedAccount"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribePrivateZoneRecordList(request *DescribePrivateZoneRecordListRequest) (response *DescribePrivateZoneRecordListResponse, err error) {
+    return c.DescribePrivateZoneRecordListWithContext(context.Background(), request)
+}
+
+// DescribePrivateZoneRecordList
+// This API is used to get the list of records for a private domain.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ZONENOTEXISTS = "InvalidParameter.ZoneNotExists"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_SERVICENOTSUBSCRIBED = "ResourceNotFound.ServiceNotSubscribed"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDACCOUNT = "UnauthorizedOperation.UnauthorizedAccount"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribePrivateZoneRecordListWithContext(ctx context.Context, request *DescribePrivateZoneRecordListRequest) (response *DescribePrivateZoneRecordListResponse, err error) {
+    if request == nil {
+        request = NewDescribePrivateZoneRecordListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePrivateZoneRecordList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePrivateZoneRecordListResponse()
     err = c.Send(request, response)
     return
 }
@@ -1312,6 +1573,7 @@ func NewModifyRecordsStatusResponse() (response *ModifyRecordsStatusResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_MODIFYRECORDFAILED = "FailedOperation.ModifyRecordFailed"
+//  FAILEDOPERATION_UPDATERECORDFAILED = "FailedOperation.UpdateRecordFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1329,6 +1591,7 @@ func (c *Client) ModifyRecordsStatus(request *ModifyRecordsStatusRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_MODIFYRECORDFAILED = "FailedOperation.ModifyRecordFailed"
+//  FAILEDOPERATION_UPDATERECORDFAILED = "FailedOperation.UpdateRecordFailed"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_UNDEFIENDERROR = "InternalError.UndefiendError"
 //  INVALIDPARAMETER = "InvalidParameter"
