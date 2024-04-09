@@ -225,33 +225,35 @@ type AclUserRule struct {
 }
 
 type Action struct {
-	// Common operation. Values:
-	// <li>`AccessUrlRedirect`: Access URL rewrite</li>
-	// <li>`UpstreamUrlRedirect`: Origin-pull URL rewrite</li>
-	// <li>`QUIC`: QUIC</li>
-	// <li>`WebSocket`: WebSocket</li>
-	// <li>`VideoSeek`: Video dragging</li>
-	// <li>`Authentication`: Token authentication</li>
-	// <li>`CacheKey`: Custom cache key</li>
-	// <li>`Cache`: Node cache TTL</li>
-	// <li>`MaxAge`: Browser cache TTL</li>
-	// <li>`OfflineCache`: Offline cache</li>
-	// <li>`SmartRouting`: Smart acceleration</li>
-	// <li>`RangeOriginPull`: Range GETs</li>
-	// <li>`UpstreamHttp2`: HTTP/2 forwarding</li>
-	// <li>`HostHeader`: Host header rewrite</li>
-	// <li>`ForceRedirect`: Force HTTPS</li>
-	// <li>`OriginPullProtocol`: Origin-pull HTTPS</li>
-	// <li>`CachePrefresh`: Cache prefresh</li>
-	// <li>`Compression`: Smart compression</li>
-	// <li>`Hsts`</li>
-	// <li>`ClientIpHeader`</li>
-	// <li>`SslTlsSecureConf`</li>
-	// <li>`OcspStapling`</li>
-	// <li>`Http2`: HTTP/2 access</li>
-	// <li>`UpstreamFollowRedirect`: Follow origin redirect</li>
-	// <li>`Origin`: Origin</li>
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Common feature operations. The options for this category include:
+	// <li> Access URL overriding (AccessUrlRedirect);</li>
+	// <li> Origin URL overriding (UpstreamUrlRedirect);</li>
+	// <li> QUIC;</li>
+	// <li> WebSocket;</li>
+	// <li> Video dragging (VideoSeek);</li>
+	// <li> Token authentication (Authentication);</li>
+	// <li> Custom CacheKey (CacheKey);</li>
+	// <li> Node caching TTL (Cache);</li>
+	// <li> Browser caching TTL (MaxAge);</li>
+	// <li> Offline caching (OfflineCache);</li>
+	// <li> Smart routing (SmartRouting);</li>
+	// <li> Range-based origin pull (RangeOriginPull);</li>
+	// <li> HTTP/2 origin pull (UpstreamHttp2);</li>
+	// <li> Host header overriding (HostHeader);</li>
+	// <li> Forced HTTPS (ForceRedirect);</li>
+	// <li> HTTPS origin pull (OriginPullProtocol);</li>
+	// <li> Cache pre-refresh (CachePrefresh);</li>
+	// <li> Smart compression (Compression);</li>
+	// <li> Hsts;</li>
+	// <li> ClientIpHeader;</li>
+	// <li> SslTlsSecureConf;</li>
+	// <li> OcspStapling;</li>
+	// <li> HTTP/2 access (Http2);</li>
+	// <li> Redirection during origin pull (UpstreamFollowRedirect);</li>
+	// <li> Modifying origin server (Origin);</li>
+	// <li> Layer 7 origin pull timeout (HTTPUpstreamTimeout);</li>
+	// <li> HTTP response (HttpResponse).</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	NormalAction *NormalAction `json:"NormalAction,omitnil,omitempty" name:"NormalAction"`
 
 	// Feature operation with a request/response header. Features of this type include:
@@ -588,7 +590,11 @@ type BindSecurityTemplateToEntityRequestParams struct {
 	// <li>`unbind-use-default`: Unbind domain names from policy templates and use default blank policy.</li> Note: Only one domain name can be unbound at one time. When `Operate` is `unbind-keep-policy` or `unbind-use-default`, there can only be one domain name specified in `Entities`.
 	Operate *string `json:"Operate,omitnil,omitempty" name:"Operate"`
 
-	// Specifies the policy template ID to bind or unbind.
+	// Specifies the ID of the policy template or the site's global policy to be bound or unbound.
+	// - To bind to a policy template, or unbind from it, specify the policy template ID.
+	// - To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.
+	// 
+	// Note: After unbinding, the domain name will use an independent policy and rule quota will be calculated separately. Please make sure there is sufficient rule quota before unbinding.
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Whether to replace the existing policy template bound with the domain name. Values: 
@@ -612,7 +618,11 @@ type BindSecurityTemplateToEntityRequest struct {
 	// <li>`unbind-use-default`: Unbind domain names from policy templates and use default blank policy.</li> Note: Only one domain name can be unbound at one time. When `Operate` is `unbind-keep-policy` or `unbind-use-default`, there can only be one domain name specified in `Entities`.
 	Operate *string `json:"Operate,omitnil,omitempty" name:"Operate"`
 
-	// Specifies the policy template ID to bind or unbind.
+	// Specifies the ID of the policy template or the site's global policy to be bound or unbound.
+	// - To bind to a policy template, or unbind from it, specify the policy template ID.
+	// - To bind to the site's global policy, or unbind from it, use the @ZoneLevel@domain parameter value.
+	// 
+	// Note: After unbinding, the domain name will use an independent policy and rule quota will be calculated separately. Please make sure there is sufficient rule quota before unbinding.
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 
 	// Whether to replace the existing policy template bound with the domain name. Values: 
@@ -4114,8 +4124,9 @@ type DescribeAliasDomainsRequestParams struct {
 	// The paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`target-name`:<br>   Filter by <strong>target domain name</strong><br>   Type: String<br>   Required: No</li><li>`alias-name`:<br>   Filter by <strong>alias domain name</strong><br>   Type: String<br>   Required: No</li>Only `alias-name` supports fuzzy query.
+	// Filter conditions. The maximum value for Filters.Values is 20. The detailed conditions are as follows:
+	// <li>target-name: Filter by the target domain name;</li>
+	// <li>alias-name: Filter by the alias of the domain name.</li>Fuzzy queries are only supported for the field name alias-name.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -4131,8 +4142,9 @@ type DescribeAliasDomainsRequest struct {
 	// The paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`target-name`:<br>   Filter by <strong>target domain name</strong><br>   Type: String<br>   Required: No</li><li>`alias-name`:<br>   Filter by <strong>alias domain name</strong><br>   Type: String<br>   Required: No</li>Only `alias-name` supports fuzzy query.
+	// Filter conditions. The maximum value for Filters.Values is 20. The detailed conditions are as follows:
+	// <li>target-name: Filter by the target domain name;</li>
+	// <li>alias-name: Filter by the alias of the domain name.</li>Fuzzy queries are only supported for the field name alias-name.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -5317,8 +5329,7 @@ type DescribeHostsSettingRequestParams struct {
 	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`host`:<br>   Filter by <strong>domain name </strong><br>   Type: String<br>   Required: No</li>
+	// Filter conditions. The maximum value for Filters.Values is 20. The detailed conditions are as follows:<li>host: Filter by domain name.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -5334,8 +5345,7 @@ type DescribeHostsSettingRequest struct {
 	// Limit on paginated queries. Default value: 100. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`host`:<br>   Filter by <strong>domain name </strong><br>   Type: String<br>   Required: No</li>
+	// Filter conditions. The maximum value for Filters.Values is 20. The detailed conditions are as follows:<li>host: Filter by domain name.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -5448,8 +5458,7 @@ func (r *DescribeIPRegionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeIdentificationsRequestParams struct {
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-name`: <br>Filter by <strong>site name</strong><br>   Type: String<br>   Required: No</li>
+	// Filter conditions. The maximum value for Filters.Values is 20. The detailed conditions are as follows:<li>zone-name: Filter by site name.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// The page offset. Default value: 0
@@ -5462,8 +5471,7 @@ type DescribeIdentificationsRequestParams struct {
 type DescribeIdentificationsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Filter criteria. Each filter criteria can have up to 20 entries.
-	// <li>`zone-name`: <br>Filter by <strong>site name</strong><br>   Type: String<br>   Required: No</li>
+	// Filter conditions. The maximum value for Filters.Values is 20. The detailed conditions are as follows:<li>zone-name: Filter by site name.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// The page offset. Default value: 0
@@ -5888,21 +5896,21 @@ type DescribeOverviewL7DataRequestParams struct {
 	// <li>`http`: HTTP protocol;</li>
 	// <li>`https`: HTTPS protocol;</li>
 	// <li>`http2`: HTTP2 protocol;</li>
-	// <li>`all`:   All protocols. </li>If it’s not specified, `all` is used. This parameter is not yet available now.
+	// <li>`all`: All protocols. </li>If it's not specified, `all` is used. This parameter is not yet available now.
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// The query granularity. Values:
 	// <li>`min`: 1 minute;</li>
 	// <li>`5min`: 5 minutes;</li>
 	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: One day</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
+	// <li>`day`: One day</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period <= 1 hour: `min`; <br>1 hour < Period <= 2 days: `5min`; <br>2 days < period <= 7 days: `hour`; <br>Period > 7 days: `day`.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Filtering condition. The detailed filtering condition key values are as follows: 
-	// <li>socket<br>u2003u2003 Filter based on [<strong>HTTP protocol type</strong>]. <br>u2003u2003 Corresponding value options: <br>u2003u2003 HTTP: HTTP protocol；<br>u2003u2003 HTTPS: HTTPS protocol;<br>u2003u2003 QUIC: QUIC protocol. </li>
-	// <li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. </li>
-	// <li>tagKey<br>u2003u2003 Filter based on [<strong>Tag Key</strong>]. </li>
-	// <li>tagValue<br>u2003u2003 Filter based on [<strong>Tag Value</strong>]. </li>
+	// <li>socket: Filter based on HTTP protocol type. Corresponding value options: <br> HTTP: HTTP protocol; <br> HTTPS: HTTPS protocol; <br> QUIC: QUIC protocol. </li>
+	// <li>domains: Filter based on domain name. </li>
+	// <li>tagKey: Filter based on Tag Key. </li>
+	// <li>tagValue: Filter based on Tag Value. </li>
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Geolocation scope. Values:
@@ -5942,21 +5950,21 @@ type DescribeOverviewL7DataRequest struct {
 	// <li>`http`: HTTP protocol;</li>
 	// <li>`https`: HTTPS protocol;</li>
 	// <li>`http2`: HTTP2 protocol;</li>
-	// <li>`all`:   All protocols. </li>If it’s not specified, `all` is used. This parameter is not yet available now.
+	// <li>`all`: All protocols. </li>If it's not specified, `all` is used. This parameter is not yet available now.
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	// The query granularity. Values:
 	// <li>`min`: 1 minute;</li>
 	// <li>`5min`: 5 minutes;</li>
 	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: One day</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
+	// <li>`day`: One day</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period <= 1 hour: `min`; <br>1 hour < Period <= 2 days: `5min`; <br>2 days < period <= 7 days: `hour`; <br>Period > 7 days: `day`.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Filtering condition. The detailed filtering condition key values are as follows: 
-	// <li>socket<br>u2003u2003 Filter based on [<strong>HTTP protocol type</strong>]. <br>u2003u2003 Corresponding value options: <br>u2003u2003 HTTP: HTTP protocol；<br>u2003u2003 HTTPS: HTTPS protocol;<br>u2003u2003 QUIC: QUIC protocol. </li>
-	// <li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. </li>
-	// <li>tagKey<br>u2003u2003 Filter based on [<strong>Tag Key</strong>]. </li>
-	// <li>tagValue<br>u2003u2003 Filter based on [<strong>Tag Value</strong>]. </li>
+	// <li>socket: Filter based on HTTP protocol type. Corresponding value options: <br> HTTP: HTTP protocol; <br> HTTPS: HTTPS protocol; <br> QUIC: QUIC protocol. </li>
+	// <li>domains: Filter based on domain name. </li>
+	// <li>tagKey: Filter based on Tag Key. </li>
+	// <li>tagValue: Filter based on Tag Value. </li>
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// Geolocation scope. Values:
@@ -6024,8 +6032,7 @@ func (r *DescribeOverviewL7DataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePrefetchTasksRequestParams struct {
-	// ZoneId. 
-	// The parameter is required.
+	// ZoneId. The parameter is required.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.
@@ -6040,15 +6047,18 @@ type DescribePrefetchTasksRequestParams struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>u2003u2003 Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>target<br>u2003u2003 Filter based on [<strong>target resource information</strong>]. target format: http://www.qq.com/1.txt. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. domains format: www.qq.com. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>statuses<br>u2003u2003 Filter based on [<strong>task status</strong>]. <br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. <br>u2003u2003 Options:<br>u2003u2003 processing: Processing<br>u2003u2003 success: Success<br>u2003u2003 failed: Failure<br>u2003u2003 timeout: Timeout</li>
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: 
+	// <li>job-id<br> Filter based on task ID.  job-id format: 1379afjk91u32h. Multiple values are not supported, Fuzzy search is not supported. </li>
+	// <li>target<br> Filter based on target resource information. target format: http://www.qq.com/1.txt. Multiple values are not supported, Fuzzy search is not supported. </li>
+	// <li>domains<br> Filter based on domain name. domains format: www.qq.com. Fuzzy search is not supported.</li>
+	// <li>statuses<br> Filter based on task status.  Fuzzy search is not supported. Options:<br> processing: Processing<br> success: Success<br> failed: Failure<br> timeout: Timeout</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribePrefetchTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// ZoneId. 
-	// The parameter is required.
+	// ZoneId. The parameter is required.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.
@@ -6063,7 +6073,11 @@ type DescribePrefetchTasksRequest struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>u2003u2003 Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>target<br>u2003u2003 Filter based on [<strong>target resource information</strong>]. target format: http://www.qq.com/1.txt. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. domains format: www.qq.com. <br>u2003u2003 Type: String<br>u2003u2003 Required: No. <br>u2003u2003 Fuzz query: Not supported. </li><li>statuses<br>u2003u2003 Filter based on [<strong>task status</strong>]. <br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. <br>u2003u2003 Options:<br>u2003u2003 processing: Processing<br>u2003u2003 success: Success<br>u2003u2003 failed: Failure<br>u2003u2003 timeout: Timeout</li>
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: 
+	// <li>job-id<br> Filter based on task ID.  job-id format: 1379afjk91u32h. Multiple values are not supported, Fuzzy search is not supported. </li>
+	// <li>target<br> Filter based on target resource information. target format: http://www.qq.com/1.txt. Multiple values are not supported, Fuzzy search is not supported. </li>
+	// <li>domains<br> Filter based on domain name. domains format: www.qq.com. Fuzzy search is not supported.</li>
+	// <li>statuses<br> Filter based on task status.  Fuzzy search is not supported. Options:<br> processing: Processing<br> success: Success<br> failed: Failure<br> timeout: Timeout</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -6121,8 +6135,7 @@ func (r *DescribePrefetchTasksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePurgeTasksRequestParams struct {
-	// ZoneId. 
-	// The parameter is required.
+	// ZoneId. The parameter is required.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.
@@ -6137,15 +6150,19 @@ type DescribePurgeTasksRequestParams struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>u2003u2003 Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.</li><li>target<br>u2003u2003 Filter based on: [strong>target resource information</strong>. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported.<br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.</li><li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. domains format: www.qq.com<br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. </li><li>statuses<br>u2003u2003 Filter based on <strong>task status</strong>.<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. <br>u2003u2003 Options:<br>u2003u2003 processing: Processing<br>u2003u2003 success: Success<br>u2003u2003 failed: Failure<br>u2003u2003 timeout: Timeout</li><li>type<br>u2003u2003 Filter based on [<strong>cleared cache type</strong>]. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.<br>u2003u2003 Options:<br>u2003u2003 purge_url: URL<br>u2003u2003 purge_prefix: Prefix<br>u2003u2003 purge_all: All cache content<br>u2003u2003 purge_host: Hostname<br>u2003u2003 purge_cache_tag: CacheTag</li>
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: 
+	// <li>job-id: Filter based on task ID. job-id format: 1379afjk91u32h. Multiple values are not supported, Fuzzy search is not supported;</li>
+	// <li>target: Filter based on: target resource information. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported, Fuzzy search is not supported; </li>
+	// <li>domains: Filter based on domain name. domains format: www.qq.com, Fuzzy search is not supported; </li>
+	// <li>statuses: Filter based on task status, Fuzzy search is not supported. Options: <br>processing: Processing<br>success: Success<br>failed: Failure<br>timeout: Timeout</li>
+	// <li>type: Filter based on cleared cache type. Multiple values are not supported, Fuzzy search is not supported. Options:<br> purge_url: URL<br> purge_prefix: Prefix<br> purge_all: All cache content<br> purge_host: Hostname<br> purge_cache_tag: CacheTag</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
 type DescribePurgeTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// ZoneId. 
-	// The parameter is required.
+	// ZoneId. The parameter is required.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Start time of the query. Either time or job-id is required.
@@ -6160,7 +6177,12 @@ type DescribePurgeTasksRequest struct {
 	// Limit on paginated queries. Default value: `20`. Maximum value: `1000`.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: <li>job-id<br>u2003u2003 Filter based on [<strong>task ID</strong>]. job-id format: 1379afjk91u32h. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.</li><li>target<br>u2003u2003 Filter based on: [strong>target resource information</strong>. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported.<br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.</li><li>domains<br>u2003u2003 Filter based on [<strong>domain name</strong>]. domains format: www.qq.com<br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. </li><li>statuses<br>u2003u2003 Filter based on <strong>task status</strong>.<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported. <br>u2003u2003 Options:<br>u2003u2003 processing: Processing<br>u2003u2003 success: Success<br>u2003u2003 failed: Failure<br>u2003u2003 timeout: Timeout</li><li>type<br>u2003u2003 Filter based on [<strong>cleared cache type</strong>]. Multiple values are not supported. <br>u2003u2003 Type: String<br>u2003u2003 Required: No<br>u2003u2003 Fuzz query: Not supported.<br>u2003u2003 Options:<br>u2003u2003 purge_url: URL<br>u2003u2003 purge_prefix: Prefix<br>u2003u2003 purge_all: All cache content<br>u2003u2003 purge_host: Hostname<br>u2003u2003 purge_cache_tag: CacheTag</li>
+	// Filtering condition. The maximum value of Filters.Values is 20. Detailed filtering conditions: 
+	// <li>job-id: Filter based on task ID. job-id format: 1379afjk91u32h. Multiple values are not supported, Fuzzy search is not supported;</li>
+	// <li>target: Filter based on: target resource information. target format: http://www.qq.com/1.txt or tag1. Multiple values are not supported, Fuzzy search is not supported; </li>
+	// <li>domains: Filter based on domain name. domains format: www.qq.com, Fuzzy search is not supported; </li>
+	// <li>statuses: Filter based on task status, Fuzzy search is not supported. Options: <br>processing: Processing<br>success: Success<br>failed: Failure<br>timeout: Timeout</li>
+	// <li>type: Filter based on cleared cache type. Multiple values are not supported, Fuzzy search is not supported. Options:<br> purge_url: URL<br> purge_prefix: Prefix<br> purge_all: All cache content<br> purge_host: Hostname<br> purge_cache_tag: CacheTag</li>
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -6425,6 +6447,80 @@ func (r *DescribeRulesSettingResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeRulesSettingResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecurityIPGroupInfoRequestParams struct {
+	// Site ID, used to specify the query scope.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Maximum number of entries returned in a single response. Default value: 20. Maximum query entries: 1000.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The starting entry offset for pagination queries. The default value is 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeSecurityIPGroupInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Site ID, used to specify the query scope.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Maximum number of entries returned in a single response. Default value: 20. Maximum query entries: 1000.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The starting entry offset for pagination queries. The default value is 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeSecurityIPGroupInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityIPGroupInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityIPGroupInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecurityIPGroupInfoResponseParams struct {
+	// The number of IP groups that meet the conditions.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Detailed configuration information of the IP group, including the ID, name, and IP/network segment list of each IP group.
+	IPGroups []*IPGroup `json:"IPGroups,omitnil,omitempty" name:"IPGroups"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSecurityIPGroupInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSecurityIPGroupInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeSecurityIPGroupInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityIPGroupInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6772,12 +6868,12 @@ func (r *DescribeTimingL7AnalysisDataRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTimingL7AnalysisDataResponseParams struct {
+	// Total number of query results.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
 	// The list of L7 traffic data recorded over time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*TimingDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
-
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -6909,12 +7005,12 @@ func (r *DescribeTimingL7CacheDataRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTimingL7CacheDataResponseParams struct {
+	// Total number of query results.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
 	// The list of cached L7 time-series data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*TimingDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
-
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -7107,12 +7203,12 @@ func (r *DescribeTopL7AnalysisDataRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTopL7AnalysisDataResponseParams struct {
+	// Total number of query results.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
 	// The list of top-ranked L7 traffic data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*TopDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
-
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -7253,12 +7349,12 @@ func (r *DescribeTopL7CacheDataRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTopL7CacheDataResponseParams struct {
+	// Total number of query results.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
 	// The list of cached L7 top-ranked traffic data.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Data []*TopDataRecord `json:"Data,omitnil,omitempty" name:"Data"`
-
-	// Total number of query results.
-	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -8960,9 +9056,9 @@ type ModifyApplicationProxyRuleRequestParams struct {
 	// The rule ID.
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
-	// The origin type. Values:
-	// <li>`custom`: Specified origins</li>
-	// <li>`origins`: Origin group</li></li>The original configuration will apply if this field is not specified.
+	// Origin server type. Valid values:
+	// <li>custom: Manually added;</li>
+	// <li>origins: Origin server group.</li>
 	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 
 	// The access port, which can be:
@@ -9018,9 +9114,9 @@ type ModifyApplicationProxyRuleRequest struct {
 	// The rule ID.
 	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
 
-	// The origin type. Values:
-	// <li>`custom`: Specified origins</li>
-	// <li>`origins`: Origin group</li></li>The original configuration will apply if this field is not specified.
+	// Origin server type. Valid values:
+	// <li>custom: Manually added;</li>
+	// <li>origins: Origin server group.</li>
 	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
 
 	// The access port, which can be:
@@ -10064,10 +10160,16 @@ type ModifySecurityPolicyRequestParams struct {
 	// Security configuration.
 	SecurityConfig *SecurityConfig `json:"SecurityConfig,omitnil,omitempty" name:"SecurityConfig"`
 
-	// The subdomain name/L4 proxy. You must specify either "Entity" or "TemplateId".
+	// Subdomain/application name.
+	// 
+	// Note: When both this parameter and the TemplateId parameter are specified, this parameter will not take effect. Do not specify this parameter and the TemplateId parameter at the same time.
 	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
-	// The template ID. You must specify either this field or "Entity".
+	// Specifies the policy template ID, or the site's global policy.
+	// - To configure a policy template, specify the policy template ID.
+	// - To configure the site's global policy, use the @ZoneLevel@Domain parameter value.
+	// 
+	// Note: When this parameter is used, the Entity parameter will not take effect. Do not use this parameter and the Entity parameter at the same time.
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
@@ -10080,10 +10182,16 @@ type ModifySecurityPolicyRequest struct {
 	// Security configuration.
 	SecurityConfig *SecurityConfig `json:"SecurityConfig,omitnil,omitempty" name:"SecurityConfig"`
 
-	// The subdomain name/L4 proxy. You must specify either "Entity" or "TemplateId".
+	// Subdomain/application name.
+	// 
+	// Note: When both this parameter and the TemplateId parameter are specified, this parameter will not take effect. Do not specify this parameter and the TemplateId parameter at the same time.
 	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
-	// The template ID. You must specify either this field or "Entity".
+	// Specifies the policy template ID, or the site's global policy.
+	// - To configure a policy template, specify the policy template ID.
+	// - To configure the site's global policy, use the @ZoneLevel@Domain parameter value.
+	// 
+	// Note: When this parameter is used, the Entity parameter will not take effect. Do not use this parameter and the Entity parameter at the same time.
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
@@ -11118,15 +11226,12 @@ type RealtimeLogDeliveryTask struct {
 	// The sampling ratio in permille. Value range: 1 to 1000. For example, 605 represents a sampling ratio of 60.5%.
 	Sample *uint64 `json:"Sample,omitnil,omitempty" name:"Sample"`
 
-	// The configuration information of CLS.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CLS *CLSTopic `json:"CLS,omitnil,omitempty" name:"CLS"`
 
-	// The configuration information of the custom HTTP service.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CustomEndpoint *CustomEndpoint `json:"CustomEndpoint,omitnil,omitempty" name:"CustomEndpoint"`
 
-	// The configuration information of the AWS S3-compatible bucket.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	S3 *S3 `json:"S3,omitnil,omitempty" name:"S3"`
 
@@ -11272,19 +11377,20 @@ type RuleCondition struct {
 	// <li>`notexist`: Does not exist</li>
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
-	// Match fields. Values: <li>`filename`: File name;</li><li>`extension`: File suffix;</li><li>`host`: HOST;</li><li>`full_url`: The complete URL path under the current site, including the HTTP protocol, Host and path;</li><li>`url`: The URL path request under the current site;</li><li>`client_country`: Client country;</li><li>`query_string`: The query string of the URL requested under the current site;</li><li>`request_header`: HTTP request header. </li>
+	// Match type. Valid values: <li> filename: File name; </li> <li> extension: File extension; </li> <li> host: Host name; </li> <li> full_url: The complete URL path under the current site, which must include the HTTP protocol, host, and path; </li> <li> url: Request for the URL path under the current site; </li><li> client_country: Client country/region;</li> <li> query_string: The query string of the URL requested under the current site; </li> <li> request_header: HTTP request header; </li><li> client_ip: Client IP address. </li>
 	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 
-	// The parameter value of the match type. It can be an empty string only when `Target=query string/request header` and `Operator=exist/notexist`.
-	// <li>When `Target=extension`, enter the file extension, such as "jpg" and "txt".</li>
-	// <li>When `Target=filename`, enter the file name, such as "foo" in "foo.jpg".</li>
-	// <li>When `Target=all`, it indicates any site request.</li>
-	// <li>When `Target=host`, enter the host under the current site, such as "www.maxx55.com".</li>
-	// <li>When `Target=url`, enter the partial URL path under the current site, such as "/example".</li>
-	// <li>When `Target=full_url`, enter the complete URL under the current site. It must contain the HTTP protocol, host, and path, such as "https://www.maxx55.cn/example".</li>
-	// <li>When `Target=client_country`, enter the ISO-3166 country/region code.</li>
-	// <li>When `Target=query_string`, enter the value of the query string, such as "cn" and "1" in "lang=cn&version=1".</li>
-	// <li>When `Target=request_header`, enter the HTTP request header value, such as "zh-CN,zh;q=0.9" in the "Accept-Language:zh-CN,zh;q=0.9" header.</li>
+	// The parameter values for match types. It is allowed to pass an empty array only when the match type is query_string or request_header and the operator value is Exist or Does Not Exist. The corresponding match types include:
+	// <li> File extension: Extensions like jpg, txt, etc.;</li>
+	// <li> File name: For example, foo in foo.jpg;</li>
+	// <li> All: All requests for domain names under the site; </li>
+	// <li> HOST: The host under the current site, for example, www.maxx55.com;</li>
+	// <li> URL Path: Request for the URL path under the current site, for example, /example;</li>
+	// <li> URL Full: The complete URL request under the current site, which must include the HTTP protocol, host, and path, for example, https://www.maxx55.cn/example;</li>
+	// <li> Client country/region: Country/region codes compliant with the ISO3166 standard;</li>
+	// <li> Query string: The parameter values in the query string of the URL requested under the current site, for example, cn and 1 in lang=cn&version=1; </li>
+	// <li> HTTP request header: The value of the HTTP request header field, for example, zh-CN,zh;q=0.9 in Accept-Language:zh-CN,zh;q=0.9; </li>
+	// <li> Client IP: The client IP address carried by the current request, supporting IPv4, IPv6, and an IP range. </li>
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 
 	// Whether the parameter value is case insensitive. Default value: false.

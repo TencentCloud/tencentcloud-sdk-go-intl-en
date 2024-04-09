@@ -68,18 +68,23 @@ func NewAttachPluginResponse() (response *AttachPluginResponse) {
 // This API is used to bind a plugin to an API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDINPUTJSON = "FailedOperation.InvalidInputJSON"
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  FAILEDOPERATION_TASKALREADYEXIST = "FailedOperation.TaskAlreadyExist"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_RETURNABLEEXCEPTION = "InternalError.ReturnableException"
 //  INVALIDPARAMETER_DUPLICATEPLUGINCONFIG = "InvalidParameter.DuplicatePluginConfig"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_DUPLICATEPLUGINCONFIG = "InvalidParameterValue.DuplicatePluginConfig"
 //  INVALIDPARAMETERVALUE_INVALIDENVSTATUS = "InvalidParameterValue.InvalidEnvStatus"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_TRAFFICCONTROL = "InvalidParameterValue.TrafficControl"
 //  LIMITEXCEEDED_SERVICECOUNTFORPLUGINLIMITEXCEEDED = "LimitExceeded.ServiceCountForPluginLimitExceeded"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
 //  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 //  UNSUPPORTEDOPERATION_ATTACHPLUGIN = "UnsupportedOperation.AttachPlugin"
 //  UNSUPPORTEDOPERATION_BASICSERVICENOTALLOWATTACHPLUGIN = "UnsupportedOperation.BasicServiceNotAllowAttachPlugin"
@@ -93,18 +98,23 @@ func (c *Client) AttachPlugin(request *AttachPluginRequest) (response *AttachPlu
 // This API is used to bind a plugin to an API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDINPUTJSON = "FailedOperation.InvalidInputJSON"
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  FAILEDOPERATION_TASKALREADYEXIST = "FailedOperation.TaskAlreadyExist"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_RETURNABLEEXCEPTION = "InternalError.ReturnableException"
 //  INVALIDPARAMETER_DUPLICATEPLUGINCONFIG = "InvalidParameter.DuplicatePluginConfig"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_DUPLICATEPLUGINCONFIG = "InvalidParameterValue.DuplicatePluginConfig"
 //  INVALIDPARAMETERVALUE_INVALIDENVSTATUS = "InvalidParameterValue.InvalidEnvStatus"
 //  INVALIDPARAMETERVALUE_INVALIDSERVICECONFIG = "InvalidParameterValue.InvalidServiceConfig"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_TRAFFICCONTROL = "InvalidParameterValue.TrafficControl"
 //  LIMITEXCEEDED_SERVICECOUNTFORPLUGINLIMITEXCEEDED = "LimitExceeded.ServiceCountForPluginLimitExceeded"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
 //  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 //  UNSUPPORTEDOPERATION_ATTACHPLUGIN = "UnsupportedOperation.AttachPlugin"
 //  UNSUPPORTEDOPERATION_BASICSERVICENOTALLOWATTACHPLUGIN = "UnsupportedOperation.BasicServiceNotAllowAttachPlugin"
@@ -159,6 +169,7 @@ func NewBindApiAppResponse() (response *BindApiAppResponse) {
 //  LIMITEXCEEDED_APIAPPCOUNTLIMITEXCEEDED = "LimitExceeded.ApiAppCountLimitExceeded"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
 //  RESOURCENOTFOUND_INVALIDAPIAPP = "ResourceNotFound.InvalidApiApp"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDBINDENVIRONMENT = "UnsupportedOperation.UnsupportedBindEnvironment"
 func (c *Client) BindApiApp(request *BindApiAppRequest) (response *BindApiAppResponse, err error) {
@@ -179,6 +190,7 @@ func (c *Client) BindApiApp(request *BindApiAppRequest) (response *BindApiAppRes
 //  LIMITEXCEEDED_APIAPPCOUNTLIMITEXCEEDED = "LimitExceeded.ApiAppCountLimitExceeded"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
 //  RESOURCENOTFOUND_INVALIDAPIAPP = "ResourceNotFound.InvalidApiApp"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNSUPPORTEDOPERATION_RESOURCEASSOCIATED = "UnsupportedOperation.ResourceAssociated"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDBINDENVIRONMENT = "UnsupportedOperation.UnsupportedBindEnvironment"
 func (c *Client) BindApiAppWithContext(ctx context.Context, request *BindApiAppRequest) (response *BindApiAppResponse, err error) {
@@ -547,6 +559,7 @@ func NewBuildAPIDocResponse() (response *BuildAPIDocResponse) {
 //  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
 //  FAILEDOPERATION_CODINGERROR = "FailedOperation.CodingError"
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  INTERNALERROR_RETURNABLEEXCEPTION = "InternalError.ReturnableException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
 //  RESOURCENOTFOUND_INVALIDAPIDOC = "ResourceNotFound.InvalidApiDoc"
@@ -562,6 +575,7 @@ func (c *Client) BuildAPIDoc(request *BuildAPIDocRequest) (response *BuildAPIDoc
 //  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
 //  FAILEDOPERATION_CODINGERROR = "FailedOperation.CodingError"
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
+//  INTERNALERROR_RETURNABLEEXCEPTION = "InternalError.ReturnableException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
 //  RESOURCENOTFOUND_INVALIDAPIDOC = "ResourceNotFound.InvalidApiDoc"
@@ -702,6 +716,7 @@ func NewCreateApiResponse() (response *CreateApiResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
 //  FAILEDOPERATION_BACKENDDOMAINERROR = "FailedOperation.BackendDomainError"
+//  FAILEDOPERATION_DOMAINNEEDBEIAN = "FailedOperation.DomainNeedBeian"
 //  FAILEDOPERATION_EIAMERROR = "FailedOperation.EIAMError"
 //  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
 //  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
@@ -749,6 +764,7 @@ func NewCreateApiResponse() (response *CreateApiResponse) {
 //  UNSUPPORTEDOPERATION_BASICSERVICENOMOREAPI = "UnsupportedOperation.BasicServiceNoMoreApi"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 //  UNSUPPORTEDOPERATION_INVALIDENDPOINTTYPE = "UnsupportedOperation.InvalidEndpointType"
+//  UNSUPPORTEDOPERATION_SERVICEEXIST = "UnsupportedOperation.ServiceExist"
 //  UNSUPPORTEDOPERATION_UNPACKERROR = "UnsupportedOperation.UnpackError"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDNETTYPE = "UnsupportedOperation.UnsupportedNetType"
 func (c *Client) CreateApi(request *CreateApiRequest) (response *CreateApiResponse, err error) {
@@ -761,6 +777,7 @@ func (c *Client) CreateApi(request *CreateApiRequest) (response *CreateApiRespon
 // error code that may be returned:
 //  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
 //  FAILEDOPERATION_BACKENDDOMAINERROR = "FailedOperation.BackendDomainError"
+//  FAILEDOPERATION_DOMAINNEEDBEIAN = "FailedOperation.DomainNeedBeian"
 //  FAILEDOPERATION_EIAMERROR = "FailedOperation.EIAMError"
 //  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
 //  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
@@ -808,6 +825,7 @@ func (c *Client) CreateApi(request *CreateApiRequest) (response *CreateApiRespon
 //  UNSUPPORTEDOPERATION_BASICSERVICENOMOREAPI = "UnsupportedOperation.BasicServiceNoMoreApi"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 //  UNSUPPORTEDOPERATION_INVALIDENDPOINTTYPE = "UnsupportedOperation.InvalidEndpointType"
+//  UNSUPPORTEDOPERATION_SERVICEEXIST = "UnsupportedOperation.ServiceExist"
 //  UNSUPPORTEDOPERATION_UNPACKERROR = "UnsupportedOperation.UnpackError"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDNETTYPE = "UnsupportedOperation.UnsupportedNetType"
 func (c *Client) CreateApiWithContext(ctx context.Context, request *CreateApiRequest) (response *CreateApiResponse, err error) {
@@ -1747,7 +1765,9 @@ func NewDeletePluginResponse() (response *DeletePluginResponse) {
 // This API is used to delete an API Gateway plugin.
 //
 // error code that may be returned:
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_RETURNABLEEXCEPTION = "InternalError.ReturnableException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
@@ -1761,7 +1781,9 @@ func (c *Client) DeletePlugin(request *DeletePluginRequest) (response *DeletePlu
 // This API is used to delete an API Gateway plugin.
 //
 // error code that may be returned:
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_RETURNABLEEXCEPTION = "InternalError.ReturnableException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
@@ -1808,6 +1830,7 @@ func NewDeleteServiceResponse() (response *DeleteServiceResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
@@ -1829,6 +1852,7 @@ func (c *Client) DeleteService(request *DeleteServiceRequest) (response *DeleteS
 // error code that may be returned:
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
@@ -2067,6 +2091,8 @@ func NewDemoteServiceUsagePlanResponse() (response *DemoteServiceUsagePlanRespon
 //
 // error code that may be returned:
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
 //  UNSUPPORTEDOPERATION_NOUSAGEPLANENV = "UnsupportedOperation.NoUsagePlanEnv"
 func (c *Client) DemoteServiceUsagePlan(request *DemoteServiceUsagePlanRequest) (response *DemoteServiceUsagePlanResponse, err error) {
@@ -2082,6 +2108,8 @@ func (c *Client) DemoteServiceUsagePlan(request *DemoteServiceUsagePlanRequest) 
 //
 // error code that may be returned:
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
 //  UNSUPPORTEDOPERATION_NOUSAGEPLANENV = "UnsupportedOperation.NoUsagePlanEnv"
 func (c *Client) DemoteServiceUsagePlanWithContext(ctx context.Context, request *DemoteServiceUsagePlanRequest) (response *DemoteServiceUsagePlanResponse, err error) {
@@ -2251,6 +2279,8 @@ func NewDescribeAllPluginApisResponse() (response *DescribeAllPluginApisResponse
 // error code that may be returned:
 //  FAILEDOPERATION_FORMATERROR = "FailedOperation.FormatError"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 func (c *Client) DescribeAllPluginApis(request *DescribeAllPluginApisRequest) (response *DescribeAllPluginApisResponse, err error) {
@@ -2263,6 +2293,8 @@ func (c *Client) DescribeAllPluginApis(request *DescribeAllPluginApisRequest) (r
 // error code that may be returned:
 //  FAILEDOPERATION_FORMATERROR = "FailedOperation.FormatError"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
+//  RESOURCENOTFOUND_INVALIDPLUGIN = "ResourceNotFound.InvalidPlugin"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 func (c *Client) DescribeAllPluginApisWithContext(ctx context.Context, request *DescribeAllPluginApisRequest) (response *DescribeAllPluginApisResponse, err error) {
@@ -2308,6 +2340,7 @@ func NewDescribeApiResponse() (response *DescribeApiResponse) {
 //  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
 //  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBEXCEPTION = "InternalError.DbException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
@@ -2327,6 +2360,7 @@ func (c *Client) DescribeApi(request *DescribeApiRequest) (response *DescribeApi
 //  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
 //  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBEXCEPTION = "InternalError.DbException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
@@ -2484,6 +2518,7 @@ func NewDescribeApiAppsStatusResponse() (response *DescribeApiAppsStatusResponse
 //  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_CAMEXCEPTION = "InternalError.CamException"
 //  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETERVALUE_INVALIDTAGVALUES = "InvalidParameterValue.InvalidTagValues"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 //  UNSUPPORTEDOPERATION_REQUESTPOSTERROR = "UnsupportedOperation.RequestPostError"
 func (c *Client) DescribeApiAppsStatus(request *DescribeApiAppsStatusRequest) (response *DescribeApiAppsStatusResponse, err error) {
@@ -2497,6 +2532,7 @@ func (c *Client) DescribeApiAppsStatus(request *DescribeApiAppsStatusRequest) (r
 //  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_CAMEXCEPTION = "InternalError.CamException"
 //  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETERVALUE_INVALIDTAGVALUES = "InvalidParameterValue.InvalidTagValues"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 //  UNSUPPORTEDOPERATION_REQUESTPOSTERROR = "UnsupportedOperation.RequestPostError"
 func (c *Client) DescribeApiAppsStatusWithContext(ctx context.Context, request *DescribeApiAppsStatusRequest) (response *DescribeApiAppsStatusResponse, err error) {
@@ -2648,6 +2684,7 @@ func NewDescribeApiForApiAppResponse() (response *DescribeApiForApiAppResponse) 
 //  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_RETURNABLEEXCEPTION = "InternalError.ReturnableException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
@@ -2664,6 +2701,7 @@ func (c *Client) DescribeApiForApiApp(request *DescribeApiForApiAppRequest) (res
 //  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_RETURNABLEEXCEPTION = "InternalError.ReturnableException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
@@ -2709,6 +2747,7 @@ func NewDescribeApiKeyResponse() (response *DescribeApiKeyResponse) {
 // After creating an API key, you can query its details by using this API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CAMEXCEPTION = "FailedOperation.CamException"
 //  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
 func (c *Client) DescribeApiKey(request *DescribeApiKeyRequest) (response *DescribeApiKeyResponse, err error) {
     return c.DescribeApiKeyWithContext(context.Background(), request)
@@ -2720,6 +2759,7 @@ func (c *Client) DescribeApiKey(request *DescribeApiKeyRequest) (response *Descr
 // After creating an API key, you can query its details by using this API.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CAMEXCEPTION = "FailedOperation.CamException"
 //  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
 func (c *Client) DescribeApiKeyWithContext(ctx context.Context, request *DescribeApiKeyRequest) (response *DescribeApiKeyResponse, err error) {
     if request == nil {
@@ -2881,7 +2921,9 @@ func NewDescribeApisStatusResponse() (response *DescribeApisStatusResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_REQUESTPOSTERROR = "UnsupportedOperation.RequestPostError"
 func (c *Client) DescribeApisStatus(request *DescribeApisStatusRequest) (response *DescribeApisStatusResponse, err error) {
     return c.DescribeApisStatusWithContext(context.Background(), request)
 }
@@ -2895,7 +2937,9 @@ func (c *Client) DescribeApisStatus(request *DescribeApisStatusRequest) (respons
 //  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_REQUESTPOSTERROR = "UnsupportedOperation.RequestPostError"
 func (c *Client) DescribeApisStatusWithContext(ctx context.Context, request *DescribeApisStatusRequest) (response *DescribeApisStatusResponse, err error) {
     if request == nil {
         request = NewDescribeApisStatusRequest()
@@ -3094,7 +3138,9 @@ func NewDescribeLogSearchResponse() (response *DescribeLogSearchResponse) {
 // This API is used to search for logs.
 //
 // error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNSUPPORTEDOPERATION_CLSSEARCHTIME = "UnsupportedOperation.ClsSearchTime"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 func (c *Client) DescribeLogSearch(request *DescribeLogSearchRequest) (response *DescribeLogSearchResponse, err error) {
@@ -3105,7 +3151,9 @@ func (c *Client) DescribeLogSearch(request *DescribeLogSearchRequest) (response 
 // This API is used to search for logs.
 //
 // error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNSUPPORTEDOPERATION_CLSSEARCHTIME = "UnsupportedOperation.ClsSearchTime"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
 func (c *Client) DescribeLogSearchWithContext(ctx context.Context, request *DescribeLogSearchRequest) (response *DescribeLogSearchResponse, err error) {
@@ -3260,6 +3308,7 @@ func NewDescribePluginsByApiResponse() (response *DescribePluginsByApiResponse) 
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
@@ -3273,6 +3322,7 @@ func (c *Client) DescribePluginsByApi(request *DescribePluginsByApiRequest) (res
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
@@ -3319,6 +3369,7 @@ func NewDescribeServiceResponse() (response *DescribeServiceResponse) {
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CAMEXCEPTION = "FailedOperation.CamException"
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMEXCEPTION = "InternalError.CamException"
@@ -3328,6 +3379,7 @@ func NewDescribeServiceResponse() (response *DescribeServiceResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+//  UNSUPPORTEDOPERATION_REQUESTPOSTERROR = "UnsupportedOperation.RequestPostError"
 //  UNSUPPORTEDOPERATION_UNPACKERROR = "UnsupportedOperation.UnpackError"
 func (c *Client) DescribeService(request *DescribeServiceRequest) (response *DescribeServiceResponse, err error) {
     return c.DescribeServiceWithContext(context.Background(), request)
@@ -3340,6 +3392,7 @@ func (c *Client) DescribeService(request *DescribeServiceRequest) (response *Des
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CAMEXCEPTION = "FailedOperation.CamException"
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMEXCEPTION = "InternalError.CamException"
@@ -3349,6 +3402,7 @@ func (c *Client) DescribeService(request *DescribeServiceRequest) (response *Des
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 //  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+//  UNSUPPORTEDOPERATION_REQUESTPOSTERROR = "UnsupportedOperation.RequestPostError"
 //  UNSUPPORTEDOPERATION_UNPACKERROR = "UnsupportedOperation.UnpackError"
 func (c *Client) DescribeServiceWithContext(ctx context.Context, request *DescribeServiceRequest) (response *DescribeServiceResponse, err error) {
     if request == nil {
@@ -3442,6 +3496,7 @@ func NewDescribeServiceEnvironmentReleaseHistoryResponse() (response *DescribeSe
 // A service can only be used when it is published to an environment after creation. This API is used to query the release history in an environment under a service.
 //
 // error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 func (c *Client) DescribeServiceEnvironmentReleaseHistory(request *DescribeServiceEnvironmentReleaseHistoryRequest) (response *DescribeServiceEnvironmentReleaseHistoryResponse, err error) {
@@ -3454,6 +3509,7 @@ func (c *Client) DescribeServiceEnvironmentReleaseHistory(request *DescribeServi
 // A service can only be used when it is published to an environment after creation. This API is used to query the release history in an environment under a service.
 //
 // error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 func (c *Client) DescribeServiceEnvironmentReleaseHistoryWithContext(ctx context.Context, request *DescribeServiceEnvironmentReleaseHistoryRequest) (response *DescribeServiceEnvironmentReleaseHistoryResponse, err error) {
@@ -3599,6 +3655,7 @@ func NewDescribeServiceReleaseVersionResponse() (response *DescribeServiceReleas
 // A service is generally published on several versions. This API can be used to query the published versions.
 //
 // error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 func (c *Client) DescribeServiceReleaseVersion(request *DescribeServiceReleaseVersionRequest) (response *DescribeServiceReleaseVersionResponse, err error) {
@@ -3611,6 +3668,7 @@ func (c *Client) DescribeServiceReleaseVersion(request *DescribeServiceReleaseVe
 // A service is generally published on several versions. This API can be used to query the published versions.
 //
 // error code that may be returned:
+//  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 func (c *Client) DescribeServiceReleaseVersionWithContext(ctx context.Context, request *DescribeServiceReleaseVersionRequest) (response *DescribeServiceReleaseVersionResponse, err error) {
@@ -3657,6 +3715,7 @@ func NewDescribeServiceSubDomainMappingsResponse() (response *DescribeServiceSub
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
 //  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 func (c *Client) DescribeServiceSubDomainMappings(request *DescribeServiceSubDomainMappingsRequest) (response *DescribeServiceSubDomainMappingsResponse, err error) {
     return c.DescribeServiceSubDomainMappingsWithContext(context.Background(), request)
 }
@@ -3670,6 +3729,7 @@ func (c *Client) DescribeServiceSubDomainMappings(request *DescribeServiceSubDom
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
 //  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 func (c *Client) DescribeServiceSubDomainMappingsWithContext(ctx context.Context, request *DescribeServiceSubDomainMappingsRequest) (response *DescribeServiceSubDomainMappingsResponse, err error) {
     if request == nil {
         request = NewDescribeServiceSubDomainMappingsRequest()
@@ -3830,8 +3890,10 @@ func NewDescribeServicesStatusResponse() (response *DescribeServicesStatusRespon
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CAMEXCEPTION = "FailedOperation.CamException"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMEXCEPTION = "InternalError.CamException"
+//  INTERNALERROR_DBEXCEPTION = "InternalError.DbException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
@@ -3860,8 +3922,10 @@ func (c *Client) DescribeServicesStatus(request *DescribeServicesStatusRequest) 
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CAMEXCEPTION = "FailedOperation.CamException"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMEXCEPTION = "InternalError.CamException"
+//  INTERNALERROR_DBEXCEPTION = "InternalError.DbException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
@@ -3988,6 +4052,7 @@ func NewDescribeUpstreamsResponse() (response *DescribeUpstreamsResponse) {
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CAMEXCEPTION = "FailedOperation.CamException"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMEXCEPTION = "InternalError.CamException"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3997,6 +4062,7 @@ func NewDescribeUpstreamsResponse() (response *DescribeUpstreamsResponse) {
 //  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_REQUESTPOSTERROR = "UnsupportedOperation.RequestPostError"
 func (c *Client) DescribeUpstreams(request *DescribeUpstreamsRequest) (response *DescribeUpstreamsResponse, err error) {
     return c.DescribeUpstreamsWithContext(context.Background(), request)
 }
@@ -4008,6 +4074,7 @@ func (c *Client) DescribeUpstreams(request *DescribeUpstreamsRequest) (response 
 //  AUTHFAILURE = "AuthFailure"
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CAMEXCEPTION = "FailedOperation.CamException"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMEXCEPTION = "InternalError.CamException"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4017,6 +4084,7 @@ func (c *Client) DescribeUpstreams(request *DescribeUpstreamsRequest) (response 
 //  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_REQUESTPOSTERROR = "UnsupportedOperation.RequestPostError"
 func (c *Client) DescribeUpstreamsWithContext(ctx context.Context, request *DescribeUpstreamsRequest) (response *DescribeUpstreamsResponse, err error) {
     if request == nil {
         request = NewDescribeUpstreamsRequest()
@@ -4582,6 +4650,7 @@ func NewModifyApiResponse() (response *ModifyApiResponse) {
 //  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
 //  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
 //  FAILEDOPERATION_BACKENDDOMAINERROR = "FailedOperation.BackendDomainError"
+//  FAILEDOPERATION_DOMAINNEEDBEIAN = "FailedOperation.DomainNeedBeian"
 //  FAILEDOPERATION_EIAMERROR = "FailedOperation.EIAMError"
 //  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
 //  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
@@ -4641,6 +4710,7 @@ func (c *Client) ModifyApi(request *ModifyApiRequest) (response *ModifyApiRespon
 //  FAILEDOPERATION_APIERROR = "FailedOperation.ApiError"
 //  FAILEDOPERATION_APIINOPERATION = "FailedOperation.ApiInOperation"
 //  FAILEDOPERATION_BACKENDDOMAINERROR = "FailedOperation.BackendDomainError"
+//  FAILEDOPERATION_DOMAINNEEDBEIAN = "FailedOperation.DomainNeedBeian"
 //  FAILEDOPERATION_EIAMERROR = "FailedOperation.EIAMError"
 //  FAILEDOPERATION_EBERROR = "FailedOperation.EbError"
 //  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
@@ -4802,6 +4872,7 @@ func NewModifyApiEnvironmentStrategyResponse() (response *ModifyApiEnvironmentSt
 //
 // error code that may be returned:
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDREQUESTPARAMETERS = "InvalidParameterValue.InvalidRequestParameters"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
@@ -4815,6 +4886,7 @@ func (c *Client) ModifyApiEnvironmentStrategy(request *ModifyApiEnvironmentStrat
 //
 // error code that may be returned:
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDREQUESTPARAMETERS = "InvalidParameterValue.InvalidRequestParameters"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
@@ -4967,7 +5039,10 @@ func NewModifyPluginResponse() (response *ModifyPluginResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FORMATERROR = "FailedOperation.FormatError"
+//  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
+//  FAILEDOPERATION_INVALIDINPUTJSON = "FailedOperation.InvalidInputJSON"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_RETURNABLEEXCEPTION = "InternalError.ReturnableException"
 //  INTERNALERROR_TSFEXCEPTION = "InternalError.TsfException"
 //  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
@@ -5006,7 +5081,10 @@ func (c *Client) ModifyPlugin(request *ModifyPluginRequest) (response *ModifyPlu
 //
 // error code that may be returned:
 //  FAILEDOPERATION_FORMATERROR = "FailedOperation.FormatError"
+//  FAILEDOPERATION_GETROLEERROR = "FailedOperation.GetRoleError"
+//  FAILEDOPERATION_INVALIDINPUTJSON = "FailedOperation.InvalidInputJSON"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_RETURNABLEEXCEPTION = "InternalError.ReturnableException"
 //  INTERNALERROR_TSFEXCEPTION = "InternalError.TsfException"
 //  INTERNALERROR_VPCEXCEPTION = "InternalError.VpcException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
@@ -5144,6 +5222,7 @@ func NewModifyServiceEnvironmentStrategyResponse() (response *ModifyServiceEnvir
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  INVALIDPARAMETERVALUE_INVALIDREQUESTPARAMETERS = "InvalidParameterValue.InvalidRequestParameters"
 //  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 func (c *Client) ModifyServiceEnvironmentStrategy(request *ModifyServiceEnvironmentStrategyRequest) (response *ModifyServiceEnvironmentStrategyResponse, err error) {
     return c.ModifyServiceEnvironmentStrategyWithContext(context.Background(), request)
 }
@@ -5156,6 +5235,7 @@ func (c *Client) ModifyServiceEnvironmentStrategy(request *ModifyServiceEnvironm
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
 //  INVALIDPARAMETERVALUE_INVALIDREQUESTPARAMETERS = "InvalidParameterValue.InvalidRequestParameters"
 //  INVALIDPARAMETERVALUE_RANGEEXCEEDED = "InvalidParameterValue.RangeExceeded"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
 func (c *Client) ModifyServiceEnvironmentStrategyWithContext(ctx context.Context, request *ModifyServiceEnvironmentStrategyRequest) (response *ModifyServiceEnvironmentStrategyResponse, err error) {
     if request == nil {
         request = NewModifyServiceEnvironmentStrategyRequest()
@@ -5406,6 +5486,8 @@ func NewReleaseServiceResponse() (response *ReleaseServiceResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  FAILEDOPERATION_TASKALREADYEXIST = "FailedOperation.TaskAlreadyExist"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
@@ -5426,6 +5508,8 @@ func (c *Client) ReleaseService(request *ReleaseServiceRequest) (response *Relea
 // error code that may be returned:
 //  FAILEDOPERATION_SERVICEERROR = "FailedOperation.ServiceError"
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
+//  FAILEDOPERATION_TASKALREADYEXIST = "FailedOperation.TaskAlreadyExist"
+//  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
@@ -5641,6 +5725,7 @@ func NewUnBindSecretIdsResponse() (response *UnBindSecretIdsResponse) {
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
 //  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
+//  UNSUPPORTEDOPERATION_REQUESTPOSTERROR = "UnsupportedOperation.RequestPostError"
 func (c *Client) UnBindSecretIds(request *UnBindSecretIdsRequest) (response *UnBindSecretIdsResponse, err error) {
     return c.UnBindSecretIdsWithContext(context.Background(), request)
 }
@@ -5652,6 +5737,7 @@ func (c *Client) UnBindSecretIds(request *UnBindSecretIdsRequest) (response *UnB
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
 //  RESOURCENOTFOUND_INVALIDACCESSKEYID = "ResourceNotFound.InvalidAccessKeyId"
 //  RESOURCENOTFOUND_INVALIDUSAGEPLAN = "ResourceNotFound.InvalidUsagePlan"
+//  UNSUPPORTEDOPERATION_REQUESTPOSTERROR = "UnsupportedOperation.RequestPostError"
 func (c *Client) UnBindSecretIdsWithContext(ctx context.Context, request *UnBindSecretIdsRequest) (response *UnBindSecretIdsResponse, err error) {
     if request == nil {
         request = NewUnBindSecretIdsRequest()
@@ -5836,6 +5922,7 @@ func NewUnbindApiAppResponse() (response *UnbindApiAppResponse) {
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_RETURNABLEEXCEPTION = "InternalError.ReturnableException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDENV = "InvalidParameterValue.InvalidEnv"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"
@@ -5854,6 +5941,7 @@ func (c *Client) UnbindApiApp(request *UnbindApiAppRequest) (response *UnbindApi
 //  FAILEDOPERATION_SERVICEINOPERATION = "FailedOperation.ServiceInOperation"
 //  INTERNALERROR_APIGWEXCEPTION = "InternalError.ApigwException"
 //  INTERNALERROR_OSSEXCEPTION = "InternalError.OssException"
+//  INTERNALERROR_RETURNABLEEXCEPTION = "InternalError.ReturnableException"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
 //  INVALIDPARAMETERVALUE_INVALIDENV = "InvalidParameterValue.InvalidEnv"
 //  RESOURCENOTFOUND_INVALIDAPI = "ResourceNotFound.InvalidApi"

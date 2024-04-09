@@ -1287,9 +1287,9 @@ func NewCreateRealtimeLogDeliveryTaskResponse() (response *CreateRealtimeLogDeli
 }
 
 // CreateRealtimeLogDeliveryTask
-// This API is used to create real-time log delivery tasks. This API has the following restrictions:
+// This API is used to create a real-time log delivery task. The following limits apply:
 //
-// Under the same combination of data delivery type (LogType) and data delivery area (Area), an entity (Layer 7 domain or Layer 4 proxy instance) can be added to only one real-time log delivery task. It is recommended to first query the real-time log delivery task list by entity through the [DescribeRealtimeLogDeliveryTasks](https://tcloud4api.woa.com/document/product/1657/343539?!preview&!document=1) API to check whether an entity has been added to a real-time log delivery task.
+// An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combination of the same data delivery type (LogType) and data delivery area (Area) can be added to only one real-time log delivery task. It is recommended to first query the real-time log delivery task list by entity through the [DescribeRealtimeLogDeliveryTasks](https://intl.cloud.tencent.com/document/product/1552/104110?from_cn_redirect=1) API to check whether the entity has been added to another real-time log delivery task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1315,9 +1315,9 @@ func (c *Client) CreateRealtimeLogDeliveryTask(request *CreateRealtimeLogDeliver
 }
 
 // CreateRealtimeLogDeliveryTask
-// This API is used to create real-time log delivery tasks. This API has the following restrictions:
+// This API is used to create a real-time log delivery task. The following limits apply:
 //
-// Under the same combination of data delivery type (LogType) and data delivery area (Area), an entity (Layer 7 domain or Layer 4 proxy instance) can be added to only one real-time log delivery task. It is recommended to first query the real-time log delivery task list by entity through the [DescribeRealtimeLogDeliveryTasks](https://tcloud4api.woa.com/document/product/1657/343539?!preview&!document=1) API to check whether an entity has been added to a real-time log delivery task.
+// An entity (a Layer 7 domain name or a Layer 4 proxy instance) under the combination of the same data delivery type (LogType) and data delivery area (Area) can be added to only one real-time log delivery task. It is recommended to first query the real-time log delivery task list by entity through the [DescribeRealtimeLogDeliveryTasks](https://intl.cloud.tencent.com/document/product/1552/104110?from_cn_redirect=1) API to check whether the entity has been added to another real-time log delivery task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4064,6 +4064,59 @@ func (c *Client) DescribeRulesSettingWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeRulesSettingResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSecurityIPGroupInfoRequest() (request *DescribeSecurityIPGroupInfoRequest) {
+    request = &DescribeSecurityIPGroupInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeSecurityIPGroupInfo")
+    
+    
+    return
+}
+
+func NewDescribeSecurityIPGroupInfoResponse() (response *DescribeSecurityIPGroupInfoResponse) {
+    response = &DescribeSecurityIPGroupInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSecurityIPGroupInfo
+// This API is used to query the configuration information of an IP group, including the IP group name, IP group content, and the site the IP group belongs to.
+//
+// error code that may be returned:
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeSecurityIPGroupInfo(request *DescribeSecurityIPGroupInfoRequest) (response *DescribeSecurityIPGroupInfoResponse, err error) {
+    return c.DescribeSecurityIPGroupInfoWithContext(context.Background(), request)
+}
+
+// DescribeSecurityIPGroupInfo
+// This API is used to query the configuration information of an IP group, including the IP group name, IP group content, and the site the IP group belongs to.
+//
+// error code that may be returned:
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeSecurityIPGroupInfoWithContext(ctx context.Context, request *DescribeSecurityIPGroupInfoRequest) (response *DescribeSecurityIPGroupInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeSecurityIPGroupInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSecurityIPGroupInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSecurityIPGroupInfoResponse()
     err = c.Send(request, response)
     return
 }
