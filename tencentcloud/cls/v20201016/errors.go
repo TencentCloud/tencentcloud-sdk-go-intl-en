@@ -20,11 +20,26 @@ const (
 	// CAM signature/authentication error.
 	AUTHFAILURE = "AuthFailure"
 
+	// Request unauthorized.
+	AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+
 	// Operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
 	// The alarm notification template has already been bound to an alarm policy.
 	FAILEDOPERATION_BINDEDALARM = "FailedOperation.BindedAlarm"
+
+	// No corresponding prefix files in the bucket. Please use the correct bucket, file prefix, and compression method.
+	FAILEDOPERATION_BUCKETNOFILE = "FailedOperation.BucketNoFile"
+
+	// File decompression failed. Please choose the correct compression method.
+	FAILEDOPERATION_DECOMPRESSFILE = "FailedOperation.DecompressFile"
+
+	// Failed to download file. Please try again later.
+	FAILEDOPERATION_DOWNLOADFILE = "FailedOperation.DownLoadFile"
+
+	// Failed to get the file list. Please try again later.
+	FAILEDOPERATION_GETLISTFILE = "FailedOperation.GetListFile"
 
 	// The number of searched logs has reached the upper limit.
 	FAILEDOPERATION_GETLOGREACHLIMIT = "FailedOperation.GetlogReachLimit"
@@ -53,8 +68,14 @@ const (
 	// The modified lifecycle is prohibited.
 	FAILEDOPERATION_PERIODMODIFYFORBIDDEN = "FailedOperation.PeriodModifyForbidden"
 
+	// File preview failed. Please try again later.
+	FAILEDOPERATION_PREVIEWFILE = "FailedOperation.PreviewFile"
+
 	// The query statement failed to run.
 	FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
+
+	// Failed to read file content. Please make sure the file is readable.
+	FAILEDOPERATION_READFILE = "FailedOperation.ReadFile"
 
 	// The read QPS exceeds the limit.
 	FAILEDOPERATION_READQPSLIMIT = "FailedOperation.ReadQpsLimit"
@@ -70,6 +91,9 @@ const (
 
 	// The frequency of tag service requests is limited.
 	FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+
+	// Operation timed out
+	FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 
 	// The log topic has been disabled.
 	FAILEDOPERATION_TOPICCLOSED = "FailedOperation.TopicClosed"
@@ -88,6 +112,18 @@ const (
 
 	// Internal error.
 	INTERNALERROR = "InternalError"
+
+	// DB Error.
+	INTERNALERROR_DBERROR = "InternalError.DbError"
+
+	// Illegal role.
+	INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+
+	// Retrieval error
+	INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
+
+	// Retrieval failed
+	INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 
 	// Incorrect parameter.
 	INVALIDPARAMETER = "InvalidParameter"
@@ -131,6 +167,9 @@ const (
 	// The same machine group already exists.
 	INVALIDPARAMETER_MACHINEGROUPCONFLICT = "InvalidParameter.MachineGroupConflict"
 
+	// Parameter error.
+	INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+
 	// Shipping rule naming conflict.
 	INVALIDPARAMETER_SHIPPERCONFLICT = "InvalidParameter.ShipperConflict"
 
@@ -172,6 +211,9 @@ const (
 
 	// The number of partitions exceeds the limit.
 	LIMITEXCEEDED_PARTITION = "LimitExceeded.Partition"
+
+	// Record exceeds limit
+	LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
 
 	// Out of search memory.
 	LIMITEXCEEDED_SEARCHRESOURCES = "LimitExceeded.SearchResources"
@@ -248,6 +290,9 @@ const (
 	// The specified collection rule configuration does not exist.
 	RESOURCENOTFOUND_CONFIGNOTEXIST = "ResourceNotFound.ConfigNotExist"
 
+	// Data processing task does not exist.
+	RESOURCENOTFOUND_DATAFROMTASKNOTEXIST = "ResourceNotFound.DataFromTaskNotExist"
+
 	// The log export does not exist.
 	RESOURCENOTFOUND_EXPORTNOTEXIST = "ResourceNotFound.ExportNotExist"
 
@@ -263,6 +308,9 @@ const (
 	// The partition does not exist.
 	RESOURCENOTFOUND_PARTITIONNOTEXIST = "ResourceNotFound.PartitionNotExist"
 
+	// Record does not exist
+	RESOURCENOTFOUND_RECORDNOTEXIST = "ResourceNotFound.RecordNotExist"
+
 	// The shipping rule does not exist.
 	RESOURCENOTFOUND_SHIPPERNOTEXIST = "ResourceNotFound.ShipperNotExist"
 
@@ -271,6 +319,12 @@ const (
 
 	// The log topic does not exist.
 	RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+
+	// Unauthorized operation.
+	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+
+	// Unknown parameter error.
+	UNKNOWNPARAMETER = "UnknownParameter"
 
 	// Unsupported operation.
 	UNSUPPORTEDOPERATION = "UnsupportedOperation"

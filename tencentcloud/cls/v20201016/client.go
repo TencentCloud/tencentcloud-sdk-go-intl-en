@@ -165,6 +165,71 @@ func (c *Client) ApplyConfigToMachineGroupWithContext(ctx context.Context, reque
     return
 }
 
+func NewCheckFunctionRequest() (request *CheckFunctionRequest) {
+    request = &CheckFunctionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CheckFunction")
+    
+    
+    return
+}
+
+func NewCheckFunctionResponse() (response *CheckFunctionResponse) {
+    response = &CheckFunctionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CheckFunction
+// This API is used to verify the syntax of data processing DSL functions.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CheckFunction(request *CheckFunctionRequest) (response *CheckFunctionResponse, err error) {
+    return c.CheckFunctionWithContext(context.Background(), request)
+}
+
+// CheckFunction
+// This API is used to verify the syntax of data processing DSL functions.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CheckFunctionWithContext(ctx context.Context, request *CheckFunctionRequest) (response *CheckFunctionResponse, err error) {
+    if request == nil {
+        request = NewCheckFunctionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckFunction require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckFunctionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCheckRechargeKafkaServerRequest() (request *CheckRechargeKafkaServerRequest) {
     request = &CheckRechargeKafkaServerRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -425,6 +490,71 @@ func (c *Client) CreateAlarmNoticeWithContext(ctx context.Context, request *Crea
     return
 }
 
+func NewCreateAlarmShieldRequest() (request *CreateAlarmShieldRequest) {
+    request = &CreateAlarmShieldRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateAlarmShield")
+    
+    
+    return
+}
+
+func NewCreateAlarmShieldResponse() (response *CreateAlarmShieldResponse) {
+    response = &CreateAlarmShieldResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAlarmShield
+// This API is used to create an alarm blocking rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateAlarmShield(request *CreateAlarmShieldRequest) (response *CreateAlarmShieldResponse, err error) {
+    return c.CreateAlarmShieldWithContext(context.Background(), request)
+}
+
+// CreateAlarmShield
+// This API is used to create an alarm blocking rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) CreateAlarmShieldWithContext(ctx context.Context, request *CreateAlarmShieldRequest) (response *CreateAlarmShieldResponse, err error) {
+    if request == nil {
+        request = NewCreateAlarmShieldRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAlarmShield require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAlarmShieldResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateConfigRequest() (request *CreateConfigRequest) {
     request = &CreateConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -520,7 +650,7 @@ func NewCreateConsumerResponse() (response *CreateConsumerResponse) {
 }
 
 // CreateConsumer
-// This API is used to create a shipping task.
+// This API is used to create a CKafka delivery task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -539,7 +669,7 @@ func (c *Client) CreateConsumer(request *CreateConsumerRequest) (response *Creat
 }
 
 // CreateConsumer
-// This API is used to create a shipping task.
+// This API is used to create a CKafka delivery task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -711,6 +841,55 @@ func (c *Client) CreateDataTransformWithContext(ctx context.Context, request *Cr
     return
 }
 
+func NewCreateDeliverCloudFunctionRequest() (request *CreateDeliverCloudFunctionRequest) {
+    request = &CreateDeliverCloudFunctionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateDeliverCloudFunction")
+    
+    
+    return
+}
+
+func NewCreateDeliverCloudFunctionResponse() (response *CreateDeliverCloudFunctionResponse) {
+    response = &CreateDeliverCloudFunctionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDeliverCloudFunction
+// This API is used to create a delivery SCF task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateDeliverCloudFunction(request *CreateDeliverCloudFunctionRequest) (response *CreateDeliverCloudFunctionResponse, err error) {
+    return c.CreateDeliverCloudFunctionWithContext(context.Background(), request)
+}
+
+// CreateDeliverCloudFunction
+// This API is used to create a delivery SCF task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateDeliverCloudFunctionWithContext(ctx context.Context, request *CreateDeliverCloudFunctionRequest) (response *CreateDeliverCloudFunctionResponse, err error) {
+    if request == nil {
+        request = NewCreateDeliverCloudFunctionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDeliverCloudFunction require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDeliverCloudFunctionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateExportRequest() (request *CreateExportRequest) {
     request = &CreateExportRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -817,6 +996,7 @@ func NewCreateIndexResponse() (response *CreateIndexResponse) {
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_INDEXNOTEXIST = "ResourceNotFound.IndexNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateIndex(request *CreateIndexRequest) (response *CreateIndexResponse, err error) {
@@ -841,6 +1021,7 @@ func (c *Client) CreateIndex(request *CreateIndexRequest) (response *CreateIndex
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_INDEXNOTEXIST = "ResourceNotFound.IndexNotExist"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) CreateIndexWithContext(ctx context.Context, request *CreateIndexRequest) (response *CreateIndexResponse, err error) {
@@ -1072,6 +1253,79 @@ func (c *Client) CreateMachineGroupWithContext(ctx context.Context, request *Cre
     request.SetContext(ctx)
     
     response = NewCreateMachineGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateScheduledSqlRequest() (request *CreateScheduledSqlRequest) {
+    request = &CreateScheduledSqlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "CreateScheduledSql")
+    
+    
+    return
+}
+
+func NewCreateScheduledSqlResponse() (response *CreateScheduledSqlResponse) {
+    response = &CreateScheduledSqlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateScheduledSql
+// This API is used to create a scheduled SQL analysis task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATAFROMTASKCONFLICT = "InvalidParameter.DataFromTaskConflict"
+//  INVALIDPARAMETER_INVALIDETLCONTENT = "InvalidParameter.InvalidEtlContent"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateScheduledSql(request *CreateScheduledSqlRequest) (response *CreateScheduledSqlResponse, err error) {
+    return c.CreateScheduledSqlWithContext(context.Background(), request)
+}
+
+// CreateScheduledSql
+// This API is used to create a scheduled SQL analysis task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATAFROMTASKCONFLICT = "InvalidParameter.DataFromTaskConflict"
+//  INVALIDPARAMETER_INVALIDETLCONTENT = "InvalidParameter.InvalidEtlContent"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) CreateScheduledSqlWithContext(ctx context.Context, request *CreateScheduledSqlRequest) (response *CreateScheduledSqlResponse, err error) {
+    if request == nil {
+        request = NewCreateScheduledSqlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateScheduledSql require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateScheduledSqlResponse()
     err = c.Send(request, response)
     return
 }
@@ -1354,6 +1608,71 @@ func (c *Client) DeleteAlarmNoticeWithContext(ctx context.Context, request *Dele
     request.SetContext(ctx)
     
     response = NewDeleteAlarmNoticeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteAlarmShieldRequest() (request *DeleteAlarmShieldRequest) {
+    request = &DeleteAlarmShieldRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteAlarmShield")
+    
+    
+    return
+}
+
+func NewDeleteAlarmShieldResponse() (response *DeleteAlarmShieldResponse) {
+    response = &DeleteAlarmShieldResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteAlarmShield
+// This API is used to delete an alarm blocking rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DeleteAlarmShield(request *DeleteAlarmShieldRequest) (response *DeleteAlarmShieldResponse, err error) {
+    return c.DeleteAlarmShieldWithContext(context.Background(), request)
+}
+
+// DeleteAlarmShield
+// This API is used to delete an alarm blocking rule.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) DeleteAlarmShieldWithContext(ctx context.Context, request *DeleteAlarmShieldRequest) (response *DeleteAlarmShieldResponse, err error) {
+    if request == nil {
+        request = NewDeleteAlarmShieldRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAlarmShield require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAlarmShieldResponse()
     err = c.Send(request, response)
     return
 }
@@ -2022,6 +2341,79 @@ func (c *Client) DeleteMachineGroupInfoWithContext(ctx context.Context, request 
     return
 }
 
+func NewDeleteScheduledSqlRequest() (request *DeleteScheduledSqlRequest) {
+    request = &DeleteScheduledSqlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DeleteScheduledSql")
+    
+    
+    return
+}
+
+func NewDeleteScheduledSqlResponse() (response *DeleteScheduledSqlResponse) {
+    response = &DeleteScheduledSqlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteScheduledSql
+// This API is used to delete scheduled SQL analysis tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATAFROMTASKNOTEXIST = "InvalidParameter.DataFromTaskNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DATAFROMTASKNOTEXIST = "ResourceNotFound.DataFromTaskNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteScheduledSql(request *DeleteScheduledSqlRequest) (response *DeleteScheduledSqlResponse, err error) {
+    return c.DeleteScheduledSqlWithContext(context.Background(), request)
+}
+
+// DeleteScheduledSql
+// This API is used to delete scheduled SQL analysis tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATAFROMTASKNOTEXIST = "InvalidParameter.DataFromTaskNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DATAFROMTASKNOTEXIST = "ResourceNotFound.DataFromTaskNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DeleteScheduledSqlWithContext(ctx context.Context, request *DeleteScheduledSqlRequest) (response *DeleteScheduledSqlResponse, err error) {
+    if request == nil {
+        request = NewDeleteScheduledSqlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteScheduledSql require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteScheduledSqlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteShipperRequest() (request *DeleteShipperRequest) {
     request = &DeleteShipperRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2116,6 +2508,7 @@ func NewDeleteTopicResponse() (response *DeleteTopicResponse) {
 // This API is used to delete a log topic.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  INTERNALERROR = "InternalError"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -2138,6 +2531,7 @@ func (c *Client) DeleteTopic(request *DeleteTopicRequest) (response *DeleteTopic
 // This API is used to delete a log topic.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  INTERNALERROR = "InternalError"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -2233,6 +2627,85 @@ func (c *Client) DescribeAlarmNoticesWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDescribeAlarmShieldsRequest() (request *DescribeAlarmShieldsRequest) {
+    request = &DescribeAlarmShieldsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeAlarmShields")
+    
+    
+    return
+}
+
+func NewDescribeAlarmShieldsResponse() (response *DescribeAlarmShieldsResponse) {
+    response = &DescribeAlarmShieldsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAlarmShields
+// Accesses alarm blocking configuration rules
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAlarmShields(request *DescribeAlarmShieldsRequest) (response *DescribeAlarmShieldsResponse, err error) {
+    return c.DescribeAlarmShieldsWithContext(context.Background(), request)
+}
+
+// DescribeAlarmShields
+// Accesses alarm blocking configuration rules
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DbError"
+//  INTERNALERROR_ILLEGALROLE = "InternalError.IllegalRole"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAMERROR = "InvalidParameter.ParamError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_RECORDOUTOFLIMIT = "LimitExceeded.RecordOutOfLimit"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAlarmShieldsWithContext(ctx context.Context, request *DescribeAlarmShieldsRequest) (response *DescribeAlarmShieldsResponse, err error) {
+    if request == nil {
+        request = NewDescribeAlarmShieldsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAlarmShields require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAlarmShieldsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAlarmsRequest() (request *DescribeAlarmsRequest) {
     request = &DescribeAlarmsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2261,6 +2734,7 @@ func NewDescribeAlarmsResponse() (response *DescribeAlarmsResponse) {
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DescribeAlarms(request *DescribeAlarmsRequest) (response *DescribeAlarmsResponse, err error) {
     return c.DescribeAlarmsWithContext(context.Background(), request)
 }
@@ -2274,6 +2748,7 @@ func (c *Client) DescribeAlarms(request *DescribeAlarmsRequest) (response *Descr
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) DescribeAlarmsWithContext(ctx context.Context, request *DescribeAlarmsRequest) (response *DescribeAlarmsResponse, err error) {
     if request == nil {
         request = NewDescribeAlarmsRequest()
@@ -2315,7 +2790,10 @@ func NewDescribeAlertRecordHistoryResponse() (response *DescribeAlertRecordHisto
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -2331,7 +2809,10 @@ func (c *Client) DescribeAlertRecordHistory(request *DescribeAlertRecordHistoryR
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED = "OperationDenied"
@@ -2458,6 +2939,7 @@ func NewDescribeConfigsResponse() (response *DescribeConfigsResponse) {
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeConfigs(request *DescribeConfigsRequest) (response *DescribeConfigsResponse, err error) {
     return c.DescribeConfigsWithContext(context.Background(), request)
 }
@@ -2477,6 +2959,7 @@ func (c *Client) DescribeConfigs(request *DescribeConfigsRequest) (response *Des
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeConfigsWithContext(ctx context.Context, request *DescribeConfigsRequest) (response *DescribeConfigsResponse, err error) {
     if request == nil {
         request = NewDescribeConfigsRequest()
@@ -2842,6 +3325,75 @@ func (c *Client) DescribeIndexWithContext(ctx context.Context, request *Describe
     return
 }
 
+func NewDescribeKafkaConsumerRequest() (request *DescribeKafkaConsumerRequest) {
+    request = &DescribeKafkaConsumerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeKafkaConsumer")
+    
+    
+    return
+}
+
+func NewDescribeKafkaConsumerResponse() (response *DescribeKafkaConsumerResponse) {
+    response = &DescribeKafkaConsumerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeKafkaConsumer
+// Accesses Kafka protocol consumption information
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeKafkaConsumer(request *DescribeKafkaConsumerRequest) (response *DescribeKafkaConsumerResponse, err error) {
+    return c.DescribeKafkaConsumerWithContext(context.Background(), request)
+}
+
+// DescribeKafkaConsumer
+// Accesses Kafka protocol consumption information
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeKafkaConsumerWithContext(ctx context.Context, request *DescribeKafkaConsumerRequest) (response *DescribeKafkaConsumerResponse, err error) {
+    if request == nil {
+        request = NewDescribeKafkaConsumerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeKafkaConsumer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeKafkaConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeKafkaRechargesRequest() (request *DescribeKafkaRechargesRequest) {
     request = &DescribeKafkaRechargesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2933,7 +3485,7 @@ func NewDescribeLogContextResponse() (response *DescribeLogContextResponse) {
 }
 
 // DescribeLogContext
-// This API is used to search for content in the log context.
+// This API is used to search for content near the log context. For more details, see [Context Search](https://intl.cloud.tencent.com/document/product/614/53248?from_cn_redirect=1).The maximum value of API's return data packet is 49MB. It is recommended to enable gzip compression (HTTP Request Header Accept-Encoding: gzip).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2943,6 +3495,7 @@ func NewDescribeLogContextResponse() (response *DescribeLogContextResponse) {
 //  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  LIMITEXCEEDED_SEARCHRESULTTOOLARGE = "LimitExceeded.SearchResultTooLarge"
@@ -2957,7 +3510,7 @@ func (c *Client) DescribeLogContext(request *DescribeLogContextRequest) (respons
 }
 
 // DescribeLogContext
-// This API is used to search for content in the log context.
+// This API is used to search for content near the log context. For more details, see [Context Search](https://intl.cloud.tencent.com/document/product/614/53248?from_cn_redirect=1).The maximum value of API's return data packet is 49MB. It is recommended to enable gzip compression (HTTP Request Header Accept-Encoding: gzip).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2967,6 +3520,7 @@ func (c *Client) DescribeLogContext(request *DescribeLogContextRequest) (respons
 //  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  LIMITEXCEEDED_SEARCHRESULTTOOLARGE = "LimitExceeded.SearchResultTooLarge"
@@ -3023,6 +3577,8 @@ func NewDescribeLogHistogramResponse() (response *DescribeLogHistogramResponse) 
 //  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -3048,6 +3604,8 @@ func (c *Client) DescribeLogHistogram(request *DescribeLogHistogramRequest) (res
 //  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -3302,7 +3860,7 @@ func NewDescribeMachinesResponse() (response *DescribeMachinesResponse) {
 }
 
 // DescribeMachines
-// This API is used to get the machine status in the specified machine group.
+// Gets the status of a machine under the specified machine group
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3322,7 +3880,7 @@ func (c *Client) DescribeMachines(request *DescribeMachinesRequest) (response *D
 }
 
 // DescribeMachines
-// This API is used to get the machine status in the specified machine group.
+// Gets the status of a machine under the specified machine group
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3418,6 +3976,75 @@ func (c *Client) DescribePartitionsWithContext(ctx context.Context, request *Des
     request.SetContext(ctx)
     
     response = NewDescribePartitionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeScheduledSqlInfoRequest() (request *DescribeScheduledSqlInfoRequest) {
+    request = &DescribeScheduledSqlInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "DescribeScheduledSqlInfo")
+    
+    
+    return
+}
+
+func NewDescribeScheduledSqlInfoResponse() (response *DescribeScheduledSqlInfoResponse) {
+    response = &DescribeScheduledSqlInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeScheduledSqlInfo
+// This API is used to access the scheduled SQL analysis task list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeScheduledSqlInfo(request *DescribeScheduledSqlInfoRequest) (response *DescribeScheduledSqlInfoResponse, err error) {
+    return c.DescribeScheduledSqlInfoWithContext(context.Background(), request)
+}
+
+// DescribeScheduledSqlInfo
+// This API is used to access the scheduled SQL analysis task list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TAGQPSLIMIT = "FailedOperation.TagQpsLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) DescribeScheduledSqlInfoWithContext(ctx context.Context, request *DescribeScheduledSqlInfoRequest) (response *DescribeScheduledSqlInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeScheduledSqlInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeScheduledSqlInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeScheduledSqlInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -3663,7 +4290,7 @@ func NewGetAlarmLogResponse() (response *GetAlarmLogResponse) {
 }
 
 // GetAlarmLog
-// This API is used to get the records of alarm tasks.
+// This API is used to access alarm policy execution details.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3672,8 +4299,11 @@ func NewGetAlarmLogResponse() (response *GetAlarmLogResponse) {
 //  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
 //  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
 //  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -3688,7 +4318,7 @@ func (c *Client) GetAlarmLog(request *GetAlarmLogRequest) (response *GetAlarmLog
 }
 
 // GetAlarmLog
-// This API is used to get the records of alarm tasks.
+// This API is used to access alarm policy execution details.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3697,8 +4327,11 @@ func (c *Client) GetAlarmLog(request *GetAlarmLogRequest) (response *GetAlarmLog
 //  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
 //  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
 //  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  MISSINGPARAMETER = "MissingParameter"
@@ -3825,6 +4458,7 @@ func NewModifyAlarmResponse() (response *ModifyAlarmResponse) {
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ALARMCONFLICT = "InvalidParameter.AlarmConflict"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
@@ -3846,6 +4480,7 @@ func (c *Client) ModifyAlarm(request *ModifyAlarmRequest) (response *ModifyAlarm
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ALARMCONFLICT = "InvalidParameter.AlarmConflict"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
@@ -3937,6 +4572,71 @@ func (c *Client) ModifyAlarmNoticeWithContext(ctx context.Context, request *Modi
     request.SetContext(ctx)
     
     response = NewModifyAlarmNoticeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyAlarmShieldRequest() (request *ModifyAlarmShieldRequest) {
+    request = &ModifyAlarmShieldRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyAlarmShield")
+    
+    
+    return
+}
+
+func NewModifyAlarmShieldResponse() (response *ModifyAlarmShieldResponse) {
+    response = &ModifyAlarmShieldResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyAlarmShield
+// This API is used to modify alarm blocking rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) ModifyAlarmShield(request *ModifyAlarmShieldRequest) (response *ModifyAlarmShieldResponse, err error) {
+    return c.ModifyAlarmShieldWithContext(context.Background(), request)
+}
+
+// ModifyAlarmShield
+// This API is used to modify alarm blocking rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ALARMNOTICECONFLICT = "InvalidParameter.AlarmNoticeConflict"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+func (c *Client) ModifyAlarmShieldWithContext(ctx context.Context, request *ModifyAlarmShieldRequest) (response *ModifyAlarmShieldResponse, err error) {
+    if request == nil {
+        request = NewModifyAlarmShieldRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAlarmShield require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyAlarmShieldResponse()
     err = c.Send(request, response)
     return
 }
@@ -4036,7 +4736,7 @@ func NewModifyConsumerResponse() (response *ModifyConsumerResponse) {
 }
 
 // ModifyConsumer
-// This API is used to modify a shipping task.
+// This API is used to modify a CKafka delivery task
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4048,12 +4748,13 @@ func NewModifyConsumerResponse() (response *ModifyConsumerResponse) {
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_RECORDNOTEXIST = "ResourceNotFound.RecordNotExist"
 func (c *Client) ModifyConsumer(request *ModifyConsumerRequest) (response *ModifyConsumerResponse, err error) {
     return c.ModifyConsumerWithContext(context.Background(), request)
 }
 
 // ModifyConsumer
-// This API is used to modify a shipping task.
+// This API is used to modify a CKafka delivery task
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4065,6 +4766,7 @@ func (c *Client) ModifyConsumer(request *ModifyConsumerRequest) (response *Modif
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_RECORDNOTEXIST = "ResourceNotFound.RecordNotExist"
 func (c *Client) ModifyConsumerWithContext(ctx context.Context, request *ModifyConsumerRequest) (response *ModifyConsumerResponse, err error) {
     if request == nil {
         request = NewModifyConsumerRequest()
@@ -4304,6 +5006,77 @@ func (c *Client) ModifyIndexWithContext(ctx context.Context, request *ModifyInde
     return
 }
 
+func NewModifyKafkaConsumerRequest() (request *ModifyKafkaConsumerRequest) {
+    request = &ModifyKafkaConsumerRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyKafkaConsumer")
+    
+    
+    return
+}
+
+func NewModifyKafkaConsumerResponse() (response *ModifyKafkaConsumerResponse) {
+    response = &ModifyKafkaConsumerResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyKafkaConsumer
+// Modifies Kafka Protocol consumption information
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyKafkaConsumer(request *ModifyKafkaConsumerRequest) (response *ModifyKafkaConsumerResponse, err error) {
+    return c.ModifyKafkaConsumerWithContext(context.Background(), request)
+}
+
+// ModifyKafkaConsumer
+// Modifies Kafka Protocol consumption information
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyKafkaConsumerWithContext(ctx context.Context, request *ModifyKafkaConsumerRequest) (response *ModifyKafkaConsumerResponse, err error) {
+    if request == nil {
+        request = NewModifyKafkaConsumerRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyKafkaConsumer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyKafkaConsumerResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyKafkaRechargeRequest() (request *ModifyKafkaRechargeRequest) {
     request = &ModifyKafkaRechargeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4515,6 +5288,81 @@ func (c *Client) ModifyMachineGroupWithContext(ctx context.Context, request *Mod
     return
 }
 
+func NewModifyScheduledSqlRequest() (request *ModifyScheduledSqlRequest) {
+    request = &ModifyScheduledSqlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "ModifyScheduledSql")
+    
+    
+    return
+}
+
+func NewModifyScheduledSqlResponse() (response *ModifyScheduledSqlResponse) {
+    response = &ModifyScheduledSqlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyScheduledSql
+// This API is used to modify scheduled SQL analysis tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATAFROMTASKCONFLICT = "InvalidParameter.DataFromTaskConflict"
+//  INVALIDPARAMETER_INVALIDETLCONTENT = "InvalidParameter.InvalidEtlContent"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DATAFROMTASKNOTEXIST = "ResourceNotFound.DataFromTaskNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyScheduledSql(request *ModifyScheduledSqlRequest) (response *ModifyScheduledSqlResponse, err error) {
+    return c.ModifyScheduledSqlWithContext(context.Background(), request)
+}
+
+// ModifyScheduledSql
+// This API is used to modify scheduled SQL analysis tasks.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DATAFROMTASKCONFLICT = "InvalidParameter.DataFromTaskConflict"
+//  INVALIDPARAMETER_INVALIDETLCONTENT = "InvalidParameter.InvalidEtlContent"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DATAFROMTASKNOTEXIST = "ResourceNotFound.DataFromTaskNotExist"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) ModifyScheduledSqlWithContext(ctx context.Context, request *ModifyScheduledSqlRequest) (response *ModifyScheduledSqlResponse, err error) {
+    if request == nil {
+        request = NewModifyScheduledSqlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyScheduledSql require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyScheduledSqlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyShipperRequest() (request *ModifyShipperRequest) {
     request = &ModifyShipperRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4621,6 +5469,7 @@ func NewModifyTopicResponse() (response *ModifyTopicResponse) {
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_TOPICHASSCHEDULESQLTASK = "OperationDenied.TopicHasScheduleSqlTask"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) ModifyTopic(request *ModifyTopicRequest) (response *ModifyTopicResponse, err error) {
@@ -4645,6 +5494,7 @@ func (c *Client) ModifyTopic(request *ModifyTopicRequest) (response *ModifyTopic
 //  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
 //  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
 //  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  OPERATIONDENIED_TOPICHASSCHEDULESQLTASK = "OperationDenied.TopicHasScheduleSqlTask"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 //  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
 func (c *Client) ModifyTopicWithContext(ctx context.Context, request *ModifyTopicRequest) (response *ModifyTopicResponse, err error) {
@@ -4801,6 +5651,128 @@ func (c *Client) PreviewKafkaRechargeWithContext(ctx context.Context, request *P
     return
 }
 
+func NewQueryMetricRequest() (request *QueryMetricRequest) {
+    request = &QueryMetricRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "QueryMetric")
+    
+    
+    return
+}
+
+func NewQueryMetricResponse() (response *QueryMetricResponse) {
+    response = &QueryMetricResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryMetric
+// Queries the latest metric value at a specified time
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) QueryMetric(request *QueryMetricRequest) (response *QueryMetricResponse, err error) {
+    return c.QueryMetricWithContext(context.Background(), request)
+}
+
+// QueryMetric
+// Queries the latest metric value at a specified time
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) QueryMetricWithContext(ctx context.Context, request *QueryMetricRequest) (response *QueryMetricResponse, err error) {
+    if request == nil {
+        request = NewQueryMetricRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryMetric require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryMetricResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewQueryRangeMetricRequest() (request *QueryRangeMetricRequest) {
+    request = &QueryRangeMetricRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "QueryRangeMetric")
+    
+    
+    return
+}
+
+func NewQueryRangeMetricResponse() (response *QueryRangeMetricResponse) {
+    response = &QueryRangeMetricResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryRangeMetric
+// This API is used to query the trend of metrics within a specified time range.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) QueryRangeMetric(request *QueryRangeMetricRequest) (response *QueryRangeMetricResponse, err error) {
+    return c.QueryRangeMetricWithContext(context.Background(), request)
+}
+
+// QueryRangeMetric
+// This API is used to query the trend of metrics within a specified time range.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) QueryRangeMetricWithContext(ctx context.Context, request *QueryRangeMetricRequest) (response *QueryRangeMetricResponse, err error) {
+    if request == nil {
+        request = NewQueryRangeMetricRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryRangeMetric require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryRangeMetricResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRetryShipperTaskRequest() (request *RetryShipperTaskRequest) {
     request = &RetryShipperTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4876,6 +5848,89 @@ func (c *Client) RetryShipperTaskWithContext(ctx context.Context, request *Retry
     return
 }
 
+func NewSearchCosRechargeInfoRequest() (request *SearchCosRechargeInfoRequest) {
+    request = &SearchCosRechargeInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cls", APIVersion, "SearchCosRechargeInfo")
+    
+    
+    return
+}
+
+func NewSearchCosRechargeInfoResponse() (response *SearchCosRechargeInfoResponse) {
+    response = &SearchCosRechargeInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SearchCosRechargeInfo
+// This API is used to preview COS import information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BUCKETNOFILE = "FailedOperation.BucketNoFile"
+//  FAILEDOPERATION_DECOMPRESSFILE = "FailedOperation.DecompressFile"
+//  FAILEDOPERATION_DOWNLOADFILE = "FailedOperation.DownLoadFile"
+//  FAILEDOPERATION_GETLISTFILE = "FailedOperation.GetListFile"
+//  FAILEDOPERATION_PREVIEWFILE = "FailedOperation.PreviewFile"
+//  FAILEDOPERATION_READFILE = "FailedOperation.ReadFile"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) SearchCosRechargeInfo(request *SearchCosRechargeInfoRequest) (response *SearchCosRechargeInfoResponse, err error) {
+    return c.SearchCosRechargeInfoWithContext(context.Background(), request)
+}
+
+// SearchCosRechargeInfo
+// This API is used to preview COS import information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BUCKETNOFILE = "FailedOperation.BucketNoFile"
+//  FAILEDOPERATION_DECOMPRESSFILE = "FailedOperation.DecompressFile"
+//  FAILEDOPERATION_DOWNLOADFILE = "FailedOperation.DownLoadFile"
+//  FAILEDOPERATION_GETLISTFILE = "FailedOperation.GetListFile"
+//  FAILEDOPERATION_PREVIEWFILE = "FailedOperation.PreviewFile"
+//  FAILEDOPERATION_READFILE = "FailedOperation.ReadFile"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_ACLFAILED = "OperationDenied.ACLFailed"
+//  OPERATIONDENIED_ACCOUNTDESTROY = "OperationDenied.AccountDestroy"
+//  OPERATIONDENIED_ACCOUNTISOLATE = "OperationDenied.AccountIsolate"
+//  OPERATIONDENIED_ACCOUNTNOTEXISTS = "OperationDenied.AccountNotExists"
+//  RESOURCENOTFOUND_TOPICNOTEXIST = "ResourceNotFound.TopicNotExist"
+func (c *Client) SearchCosRechargeInfoWithContext(ctx context.Context, request *SearchCosRechargeInfoRequest) (response *SearchCosRechargeInfoResponse, err error) {
+    if request == nil {
+        request = NewSearchCosRechargeInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SearchCosRechargeInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSearchCosRechargeInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSearchLogRequest() (request *SearchLogRequest) {
     request = &SearchLogRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4896,7 +5951,9 @@ func NewSearchLogResponse() (response *SearchLogResponse) {
 }
 
 // SearchLog
-// This API is used to search logs. It is subject to the default API rate limit, and the number of concurrent queries to the same log topic cannot exceed 15.
+// This API is used to search and analyze logs. When using this API, please note the following:1. Besides being subject to the default API request frequency limit by this API, for a single log topic, the concurrency number cannot exceed 15. 2. For search syntax, it's recommended to use the CQL syntax rule. Please use the SyntaxRule parameter and set its value to 1.
+//
+// 3. The maximum value of API's response data packet is 49MB. It is recommended to enable gzip compression (HTTP Request Header Accept-Encoding: gzip).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4904,8 +5961,11 @@ func NewSearchLogResponse() (response *SearchLogResponse) {
 //  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
 //  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
 //  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  LIMITEXCEEDED_SEARCHRESOURCES = "LimitExceeded.SearchResources"
@@ -4923,7 +5983,9 @@ func (c *Client) SearchLog(request *SearchLogRequest) (response *SearchLogRespon
 }
 
 // SearchLog
-// This API is used to search logs. It is subject to the default API rate limit, and the number of concurrent queries to the same log topic cannot exceed 15.
+// This API is used to search and analyze logs. When using this API, please note the following:1. Besides being subject to the default API request frequency limit by this API, for a single log topic, the concurrency number cannot exceed 15. 2. For search syntax, it's recommended to use the CQL syntax rule. Please use the SyntaxRule parameter and set its value to 1.
+//
+// 3. The maximum value of API's response data packet is 49MB. It is recommended to enable gzip compression (HTTP Request Header Accept-Encoding: gzip).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4931,8 +5993,11 @@ func (c *Client) SearchLog(request *SearchLogRequest) (response *SearchLogRespon
 //  FAILEDOPERATION_QUERYERROR = "FailedOperation.QueryError"
 //  FAILEDOPERATION_SEARCHTIMEOUT = "FailedOperation.SearchTimeout"
 //  FAILEDOPERATION_SYNTAXERROR = "FailedOperation.SyntaxError"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  FAILEDOPERATION_TOPICISOLATED = "FailedOperation.TopicIsolated"
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_SEARCHERROR = "InternalError.SearchError"
+//  INTERNALERROR_SEARCHFAILED = "InternalError.SearchFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_LOGSEARCH = "LimitExceeded.LogSearch"
 //  LIMITEXCEEDED_SEARCHRESOURCES = "LimitExceeded.SearchResources"
