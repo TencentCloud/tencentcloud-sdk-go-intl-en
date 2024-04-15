@@ -116,7 +116,7 @@ func NewApplyConfigToMachineGroupResponse() (response *ApplyConfigToMachineGroup
 }
 
 // ApplyConfigToMachineGroup
-// This API is used to apply the collection configuration to the specified machine group.
+// This API is used to apply the collection configuration to a specified machine group.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -135,7 +135,7 @@ func (c *Client) ApplyConfigToMachineGroup(request *ApplyConfigToMachineGroupReq
 }
 
 // ApplyConfigToMachineGroup
-// This API is used to apply the collection configuration to the specified machine group.
+// This API is used to apply the collection configuration to a specified machine group.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -575,7 +575,7 @@ func NewCreateConfigResponse() (response *CreateConfigResponse) {
 }
 
 // CreateConfig
-// This API is used to create a collection rule configuration.
+// This API is used to create collection rule configuration.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -597,7 +597,7 @@ func (c *Client) CreateConfig(request *CreateConfigRequest) (response *CreateCon
 }
 
 // CreateConfig
-// This API is used to create a collection rule configuration.
+// This API is used to create collection rule configuration.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -910,7 +910,7 @@ func NewCreateExportResponse() (response *CreateExportResponse) {
 }
 
 // CreateExport
-// This API is used to create a download task. To get the returned download address, call `DescribeExports` to view the task list. The `CosPath` parameter is also included for download address. For more information, visit https://intl.cloud.tencent.com/document/product/614/56449.?from_cn_redirect=1
+// This API is used to create a download task. To get the returned download address, call DescribeExports to view the task list. The CosPath parameter is also included for download address. For more information, visit https://intl.cloud.tencent.com/document/product/614/56449.?from_cn_redirect=1
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -929,7 +929,7 @@ func (c *Client) CreateExport(request *CreateExportRequest) (response *CreateExp
 }
 
 // CreateExport
-// This API is used to create a download task. To get the returned download address, call `DescribeExports` to view the task list. The `CosPath` parameter is also included for download address. For more information, visit https://intl.cloud.tencent.com/document/product/614/56449.?from_cn_redirect=1
+// This API is used to create a download task. To get the returned download address, call DescribeExports to view the task list. The CosPath parameter is also included for download address. For more information, visit https://intl.cloud.tencent.com/document/product/614/56449.?from_cn_redirect=1
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1697,7 +1697,7 @@ func NewDeleteConfigResponse() (response *DeleteConfigResponse) {
 }
 
 // DeleteConfig
-// This API is used to delete a collection rule configuration.
+// This API is used to delete collection rule configuration.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1717,7 +1717,7 @@ func (c *Client) DeleteConfig(request *DeleteConfigRequest) (response *DeleteCon
 }
 
 // DeleteConfig
-// This API is used to delete a collection rule configuration.
+// This API is used to delete collection rule configuration.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2361,7 +2361,7 @@ func NewDeleteScheduledSqlResponse() (response *DeleteScheduledSqlResponse) {
 }
 
 // DeleteScheduledSql
-// This API is used to delete scheduled SQL analysis tasks.
+// This API is used to delete a scheduled SQL analysis task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2382,7 +2382,7 @@ func (c *Client) DeleteScheduledSql(request *DeleteScheduledSqlRequest) (respons
 }
 
 // DeleteScheduledSql
-// This API is used to delete scheduled SQL analysis tasks.
+// This API is used to delete a scheduled SQL analysis task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2647,7 +2647,7 @@ func NewDescribeAlarmShieldsResponse() (response *DescribeAlarmShieldsResponse) 
 }
 
 // DescribeAlarmShields
-// Accesses alarm blocking configuration rules
+// This API is used to access alarm blocking configuration rules.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2671,7 +2671,7 @@ func (c *Client) DescribeAlarmShields(request *DescribeAlarmShieldsRequest) (res
 }
 
 // DescribeAlarmShields
-// Accesses alarm blocking configuration rules
+// This API is used to access alarm blocking configuration rules.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2854,7 +2854,7 @@ func NewDescribeConfigMachineGroupsResponse() (response *DescribeConfigMachineGr
 }
 
 // DescribeConfigMachineGroups
-// This API is used to get the machine group bound to a collection rule configuration.
+// This API is used to get the machine group bound to collection rule configuration.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2874,7 +2874,7 @@ func (c *Client) DescribeConfigMachineGroups(request *DescribeConfigMachineGroup
 }
 
 // DescribeConfigMachineGroups
-// This API is used to get the machine group bound to a collection rule configuration.
+// This API is used to get the machine group bound to collection rule configuration.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2925,7 +2925,7 @@ func NewDescribeConfigsResponse() (response *DescribeConfigsResponse) {
 }
 
 // DescribeConfigs
-// This API is used to get a collection rule configuration.
+// This API is used to get collection rule configuration.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -2945,7 +2945,7 @@ func (c *Client) DescribeConfigs(request *DescribeConfigsRequest) (response *Des
 }
 
 // DescribeConfigs
-// This API is used to get a collection rule configuration.
+// This API is used to get collection rule configuration.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3345,7 +3345,7 @@ func NewDescribeKafkaConsumerResponse() (response *DescribeKafkaConsumerResponse
 }
 
 // DescribeKafkaConsumer
-// Accesses Kafka protocol consumption information
+// This API is used to access Kafka protocol consumption information.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3364,7 +3364,7 @@ func (c *Client) DescribeKafkaConsumer(request *DescribeKafkaConsumerRequest) (r
 }
 
 // DescribeKafkaConsumer
-// Accesses Kafka protocol consumption information
+// This API is used to access Kafka protocol consumption information.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3566,7 +3566,7 @@ func NewDescribeLogHistogramResponse() (response *DescribeLogHistogramResponse) 
 }
 
 // DescribeLogHistogram
-// This API is used to get a log count histogram. 
+// This API is used to get a log count histogram.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3593,7 +3593,7 @@ func (c *Client) DescribeLogHistogram(request *DescribeLogHistogramRequest) (res
 }
 
 // DescribeLogHistogram
-// This API is used to get a log count histogram. 
+// This API is used to get a log count histogram.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3860,7 +3860,7 @@ func NewDescribeMachinesResponse() (response *DescribeMachinesResponse) {
 }
 
 // DescribeMachines
-// Gets the status of a machine under the specified machine group
+// This API is used to get the status of a machine under the specified machine group.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -3880,7 +3880,7 @@ func (c *Client) DescribeMachines(request *DescribeMachinesRequest) (response *D
 }
 
 // DescribeMachines
-// Gets the status of a machine under the specified machine group
+// This API is used to get the status of a machine under the specified machine group.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4140,7 +4140,7 @@ func NewDescribeShippersResponse() (response *DescribeShippersResponse) {
 }
 
 // DescribeShippers
-// This API is used to get the configuration of the task of shipping to COS.
+// This API is used to get the configuration of the task shipped to COS.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4161,7 +4161,7 @@ func (c *Client) DescribeShippers(request *DescribeShippersRequest) (response *D
 }
 
 // DescribeShippers
-// This API is used to get the configuration of the task of shipping to COS.
+// This API is used to get the configuration of the task shipped to COS.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4661,7 +4661,7 @@ func NewModifyConfigResponse() (response *ModifyConfigResponse) {
 }
 
 // ModifyConfig
-// This API is used to modify a collection rule configuration.
+// This API is used to modify collection rule configuration.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4683,7 +4683,7 @@ func (c *Client) ModifyConfig(request *ModifyConfigRequest) (response *ModifyCon
 }
 
 // ModifyConfig
-// This API is used to modify a collection rule configuration.
+// This API is used to modify collection rule configuration.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -4736,7 +4736,7 @@ func NewModifyConsumerResponse() (response *ModifyConsumerResponse) {
 }
 
 // ModifyConsumer
-// This API is used to modify a CKafka delivery task
+// This API is used to modify a CKafka delivery task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4754,7 +4754,7 @@ func (c *Client) ModifyConsumer(request *ModifyConsumerRequest) (response *Modif
 }
 
 // ModifyConsumer
-// This API is used to modify a CKafka delivery task
+// This API is used to modify a CKafka delivery task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5026,7 +5026,7 @@ func NewModifyKafkaConsumerResponse() (response *ModifyKafkaConsumerResponse) {
 }
 
 // ModifyKafkaConsumer
-// Modifies Kafka Protocol consumption information
+// This API is used to modify Kafka protocol consumption information.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -5046,7 +5046,7 @@ func (c *Client) ModifyKafkaConsumer(request *ModifyKafkaConsumerRequest) (respo
 }
 
 // ModifyKafkaConsumer
-// Modifies Kafka Protocol consumption information
+// This API is used to modify Kafka protocol consumption information.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -5308,7 +5308,7 @@ func NewModifyScheduledSqlResponse() (response *ModifyScheduledSqlResponse) {
 }
 
 // ModifyScheduledSql
-// This API is used to modify scheduled SQL analysis tasks.
+// This API is used to modify a scheduled SQL analysis task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5330,7 +5330,7 @@ func (c *Client) ModifyScheduledSql(request *ModifyScheduledSqlRequest) (respons
 }
 
 // ModifyScheduledSql
-// This API is used to modify scheduled SQL analysis tasks.
+// This API is used to modify a scheduled SQL analysis task.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5671,7 +5671,7 @@ func NewQueryMetricResponse() (response *QueryMetricResponse) {
 }
 
 // QueryMetric
-// Queries the latest metric value at a specified time
+// This API is used to query the latest metric value at a specified time.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -5688,7 +5688,7 @@ func (c *Client) QueryMetric(request *QueryMetricRequest) (response *QueryMetric
 }
 
 // QueryMetric
-// Queries the latest metric value at a specified time
+// This API is used to query the latest metric value at a specified time.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -6257,7 +6257,7 @@ func NewUploadLogResponse() (response *UploadLogResponse) {
 //
 // 
 //
-// #### 1. Install Protocol Buffers
+// #### 1. Install protocol buffers
 //
 // 
 //
@@ -6594,7 +6594,7 @@ func (c *Client) UploadLog(request *UploadLogRequest, data []byte) (response *Up
 //
 // 
 //
-// #### 1. Install Protocol Buffers
+// #### 1. Install protocol buffers
 //
 // 
 //
