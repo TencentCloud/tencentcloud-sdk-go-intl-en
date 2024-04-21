@@ -4148,10 +4148,10 @@ type ScaleOutClusterRequestParams struct {
 	// The [Bootstrap action](https://intl.cloud.tencent.com/document/product/589/35656?from_cn_redirect=1) script settings.
 	ScriptBootstrapActionConfig []*ScriptBootstrapActionConfig `json:"ScriptBootstrapActionConfig,omitnil,omitempty" name:"ScriptBootstrapActionConfig"`
 
-	// The services to be deployed for new nodes. By default, new nodes will inherit services deployed for the current node type, including default optional services. This parameter only supports the inclusion of optional services. For example, if HDFS, YARN, and Impala have been deployed for existing task nodes, when using the API for task node scale-out without deploying Impala, only HDFS and YARN are included in with this parameter. Refer to the [component name mapping table](https://intl.cloud.tencent.com/document/product/589/98760?from_cn_redirect=1).
+	// The services to be deployed for new nodes. By default, new nodes will inherit services deployed for the current node type, including default optional services. This parameter only supports the inclusion of optional services. For example, if HDFS, YARN, and Impala have been deployed for existing task nodes, when using the API for task node scale-out without deploying Impala, only HDFS and YARN are included in with this parameter. 
 	SoftDeployInfo []*int64 `json:"SoftDeployInfo,omitnil,omitempty" name:"SoftDeployInfo"`
 
-	// The processes to be deployed. All processes for services to be added are deployed by default. Deployed processes can be changed. For example, HDFS, YARN, and Impala have been deployed for current task nodes, and default services are DataNode, NodeManager, and ImpalaServer; if you want to change deployed processes, you can set this parameter to DataNode,NodeManager,ImpalaServerCoordinator or DataNode,NodeManager,ImpalaServerExecutor. Refer to the [process name mapping table](https://intl.cloud.tencent.com/document/product/589/98760?from_cn_redirect=1).
+	// The processes to be deployed. All processes for services to be added are deployed by default. Deployed processes can be changed. For example, HDFS, YARN, and Impala have been deployed for current task nodes, and default services are DataNode, NodeManager, and ImpalaServer; if you want to change deployed processes, you can set this parameter to DataNode,NodeManager,ImpalaServerCoordinator or DataNode,NodeManager,ImpalaServerExecutor. 
 	ServiceNodeInfo []*int64 `json:"ServiceNodeInfo,omitnil,omitempty" name:"ServiceNodeInfo"`
 
 	// The list of spread placement group IDs. Only one can be specified.
@@ -4189,6 +4189,9 @@ type ScaleOutClusterRequestParams struct {
 
 	// The subnet, which defaults to the subnet used when the cluster is created.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+
+	ScaleOutServiceConfGroupsInfo []*ScaleOutServiceConfGroupsInfo `json:"ScaleOutServiceConfGroupsInfo,omitnil,omitempty" name:"ScaleOutServiceConfGroupsInfo"`
 }
 
 type ScaleOutClusterRequest struct {
@@ -4214,10 +4217,10 @@ type ScaleOutClusterRequest struct {
 	// The [Bootstrap action](https://intl.cloud.tencent.com/document/product/589/35656?from_cn_redirect=1) script settings.
 	ScriptBootstrapActionConfig []*ScriptBootstrapActionConfig `json:"ScriptBootstrapActionConfig,omitnil,omitempty" name:"ScriptBootstrapActionConfig"`
 
-	// The services to be deployed for new nodes. By default, new nodes will inherit services deployed for the current node type, including default optional services. This parameter only supports the inclusion of optional services. For example, if HDFS, YARN, and Impala have been deployed for existing task nodes, when using the API for task node scale-out without deploying Impala, only HDFS and YARN are included in with this parameter. Refer to the [component name mapping table](https://intl.cloud.tencent.com/document/product/589/98760?from_cn_redirect=1).
+	// The services to be deployed for new nodes. By default, new nodes will inherit services deployed for the current node type, including default optional services. This parameter only supports the inclusion of optional services. For example, if HDFS, YARN, and Impala have been deployed for existing task nodes, when using the API for task node scale-out without deploying Impala, only HDFS and YARN are included in with this parameter. 
 	SoftDeployInfo []*int64 `json:"SoftDeployInfo,omitnil,omitempty" name:"SoftDeployInfo"`
 
-	// The processes to be deployed. All processes for services to be added are deployed by default. Deployed processes can be changed. For example, HDFS, YARN, and Impala have been deployed for current task nodes, and default services are DataNode, NodeManager, and ImpalaServer; if you want to change deployed processes, you can set this parameter to DataNode,NodeManager,ImpalaServerCoordinator or DataNode,NodeManager,ImpalaServerExecutor. Refer to the [process name mapping table](https://intl.cloud.tencent.com/document/product/589/98760?from_cn_redirect=1).
+	// The processes to be deployed. All processes for services to be added are deployed by default. Deployed processes can be changed. For example, HDFS, YARN, and Impala have been deployed for current task nodes, and default services are DataNode, NodeManager, and ImpalaServer; if you want to change deployed processes, you can set this parameter to DataNode,NodeManager,ImpalaServerCoordinator or DataNode,NodeManager,ImpalaServerExecutor. 
 	ServiceNodeInfo []*int64 `json:"ServiceNodeInfo,omitnil,omitempty" name:"ServiceNodeInfo"`
 
 	// The list of spread placement group IDs. Only one can be specified.
@@ -4255,6 +4258,8 @@ type ScaleOutClusterRequest struct {
 
 	// The subnet, which defaults to the subnet used when the cluster is created.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	ScaleOutServiceConfGroupsInfo []*ScaleOutServiceConfGroupsInfo `json:"ScaleOutServiceConfGroupsInfo,omitnil,omitempty" name:"ScaleOutServiceConfGroupsInfo"`
 }
 
 func (r *ScaleOutClusterRequest) ToJsonString() string {
@@ -4288,6 +4293,7 @@ func (r *ScaleOutClusterRequest) FromJsonString(s string) error {
 	delete(f, "ResourceSpec")
 	delete(f, "Zone")
 	delete(f, "SubnetId")
+	delete(f, "ScaleOutServiceConfGroupsInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ScaleOutClusterRequest has unknown keys!", "")
 	}
@@ -4307,7 +4313,7 @@ type ScaleOutClusterResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FlowId *int64 `json:"FlowId,omitnil,omitempty" name:"FlowId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4601,6 +4607,14 @@ type ScaleOutNodeConfig struct {
 
 	// The number of nodes.
 	NodeCount *uint64 `json:"NodeCount,omitnil,omitempty" name:"NodeCount"`
+}
+
+type ScaleOutServiceConfGroupsInfo struct {
+
+	ServiceComponentName *string `json:"ServiceComponentName,omitnil,omitempty" name:"ServiceComponentName"`
+
+
+	ConfGroupName *string `json:"ConfGroupName,omitnil,omitempty" name:"ConfGroupName"`
 }
 
 type SceneSoftwareConfig struct {

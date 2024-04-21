@@ -5245,7 +5245,7 @@ func (r *DescribeMachineGroupsRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type DescribeMachineGroupsResponseParams struct {
 	// Machine group information list
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Note: This field may return "null", indicating that no valid values can be obtained.
 	MachineGroups []*MachineGroupInfo `json:"MachineGroups,omitnil,omitempty" name:"MachineGroups"`
 
 	// Total number of pages
