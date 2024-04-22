@@ -1161,6 +1161,9 @@ type CreateInstancesRequestParams struct {
 
 	// Exclusive cluster ID. When `ProductVersion` is set to `cdc`, this parameter is required.
 	RedisClusterId *string `json:"RedisClusterId,omitnil,omitempty" name:"RedisClusterId"`
+
+	// Alarm policy ID array.- Please log in to [Tencent Cloud Observability Platform - Alarm Management - Policy Management](https://console.cloud.tencent.com/monitor/alarm/policy) to access the alarm policy ID.- If this parameter is not configured, the default alarm policy will be bound. For the specific information about the default alarm policy, please log in to [Tencent Cloud Observability Platform - Alarm Management - Policy Management](https://console.cloud.tencent.com/monitor/alarm/policy) to view.
+	AlarmPolicyList []*string `json:"AlarmPolicyList,omitnil,omitempty" name:"AlarmPolicyList"`
 }
 
 type CreateInstancesRequest struct {
@@ -1268,6 +1271,9 @@ type CreateInstancesRequest struct {
 
 	// Exclusive cluster ID. When `ProductVersion` is set to `cdc`, this parameter is required.
 	RedisClusterId *string `json:"RedisClusterId,omitnil,omitempty" name:"RedisClusterId"`
+
+	// Alarm policy ID array.- Please log in to [Tencent Cloud Observability Platform - Alarm Management - Policy Management](https://console.cloud.tencent.com/monitor/alarm/policy) to access the alarm policy ID.- If this parameter is not configured, the default alarm policy will be bound. For the specific information about the default alarm policy, please log in to [Tencent Cloud Observability Platform - Alarm Management - Policy Management](https://console.cloud.tencent.com/monitor/alarm/policy) to view.
+	AlarmPolicyList []*string `json:"AlarmPolicyList,omitnil,omitempty" name:"AlarmPolicyList"`
 }
 
 func (r *CreateInstancesRequest) ToJsonString() string {
@@ -1307,6 +1313,7 @@ func (r *CreateInstancesRequest) FromJsonString(s string) error {
 	delete(f, "DryRun")
 	delete(f, "ProductVersion")
 	delete(f, "RedisClusterId")
+	delete(f, "AlarmPolicyList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateInstancesRequest has unknown keys!", "")
 	}
