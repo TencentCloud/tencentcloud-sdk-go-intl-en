@@ -254,6 +254,116 @@ func (c *Client) DescribeBillDetailWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeBillDownloadUrlRequest() (request *DescribeBillDownloadUrlRequest) {
+    request = &DescribeBillDownloadUrlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeBillDownloadUrl")
+    
+    
+    return
+}
+
+func NewDescribeBillDownloadUrlResponse() (response *DescribeBillDownloadUrlResponse) {
+    response = &DescribeBillDownloadUrlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBillDownloadUrl
+// This API is used to download billing files and return billing file URLs by customers.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBillDownloadUrl(request *DescribeBillDownloadUrlRequest) (response *DescribeBillDownloadUrlResponse, err error) {
+    return c.DescribeBillDownloadUrlWithContext(context.Background(), request)
+}
+
+// DescribeBillDownloadUrl
+// This API is used to download billing files and return billing file URLs by customers.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeBillDownloadUrlWithContext(ctx context.Context, request *DescribeBillDownloadUrlRequest) (response *DescribeBillDownloadUrlResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillDownloadUrlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillDownloadUrl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillDownloadUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBillSummaryRequest() (request *DescribeBillSummaryRequest) {
+    request = &DescribeBillSummaryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeBillSummary")
+    
+    
+    return
+}
+
+func NewDescribeBillSummaryResponse() (response *DescribeBillSummaryResponse) {
+    response = &DescribeBillSummaryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBillSummary
+// External API for the L1 billing of the customer billing center
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDDIMENSION = "InvalidParameterValue.InvalidDimension"
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
+func (c *Client) DescribeBillSummary(request *DescribeBillSummaryRequest) (response *DescribeBillSummaryResponse, err error) {
+    return c.DescribeBillSummaryWithContext(context.Background(), request)
+}
+
+// DescribeBillSummary
+// External API for the L1 billing of the customer billing center
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDDIMENSION = "InvalidParameterValue.InvalidDimension"
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
+func (c *Client) DescribeBillSummaryWithContext(ctx context.Context, request *DescribeBillSummaryRequest) (response *DescribeBillSummaryResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillSummaryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillSummary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillSummaryResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBillSummaryByPayModeRequest() (request *DescribeBillSummaryByPayModeRequest) {
     request = &DescribeBillSummaryByPayModeRequest{
         BaseRequest: &tchttp.BaseRequest{},

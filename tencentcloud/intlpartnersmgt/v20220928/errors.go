@@ -86,6 +86,9 @@ const (
 	// The credit quota has exceeded the limit with the newly allocated quota.
 	INVALIDPARAMETERVALUE_CREDITAMOUNTOUTOFRANGE = "InvalidParameterValue.CreditAmountOutOfRange"
 
+	// The dimension data entered is incorrect.
+	INVALIDPARAMETERVALUE_INVALIDDIMENSION = "InvalidParameterValue.InvalidDimension"
+
 	// Incorrect month value
 	INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 
