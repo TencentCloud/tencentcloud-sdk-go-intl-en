@@ -2653,4 +2653,7 @@ type WebVerificationConfigIntl struct {
 
 	// International language, the default value is en (English). Currently supported: th: Thai; en: English;
 	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
+
+	// Automatic downgrade mode, with the following parameter values: 1: Downgrade to silent live mode; 2: Disable downgrade mode. The default value is 1.
+	AutoDowngrade *int64 `json:"AutoDowngrade,omitnil,omitempty" name:"AutoDowngrade"`
 }

@@ -92,6 +92,9 @@ const (
 	// Incorrect month value
 	INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 
+	// InvalidParameterValue.InvalidUin
+	INVALIDPARAMETERVALUE_INVALIDUIN = "InvalidParameterValue.InvalidUin"
+
 	// InvalidParameterValue.MailEmpty
 	INVALIDPARAMETERVALUE_MAILEMPTY = "InvalidParameterValue.MailEmpty"
 

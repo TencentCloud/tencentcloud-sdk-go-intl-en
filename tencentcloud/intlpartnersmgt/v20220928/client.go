@@ -784,6 +784,61 @@ func (c *Client) GetCountryCodesWithContext(ctx context.Context, request *GetCou
     return
 }
 
+func NewModifyClientRemarkRequest() (request *ModifyClientRemarkRequest) {
+    request = &ModifyClientRemarkRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "ModifyClientRemark")
+    
+    
+    return
+}
+
+func NewModifyClientRemarkResponse() (response *ModifyClientRemarkResponse) {
+    response = &ModifyClientRemarkResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyClientRemark
+// This API is used to modify customer remarks.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDUIN = "InvalidParameterValue.InvalidUin"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) ModifyClientRemark(request *ModifyClientRemarkRequest) (response *ModifyClientRemarkResponse, err error) {
+    return c.ModifyClientRemarkWithContext(context.Background(), request)
+}
+
+// ModifyClientRemark
+// This API is used to modify customer remarks.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_INVALIDUIN = "InvalidParameterValue.InvalidUin"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) ModifyClientRemarkWithContext(ctx context.Context, request *ModifyClientRemarkRequest) (response *ModifyClientRemarkResponse, err error) {
+    if request == nil {
+        request = NewModifyClientRemarkRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClientRemark require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyClientRemarkResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryAccountVerificationStatusRequest() (request *QueryAccountVerificationStatusRequest) {
     request = &QueryAccountVerificationStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
