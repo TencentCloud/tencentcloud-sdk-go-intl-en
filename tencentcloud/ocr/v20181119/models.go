@@ -2754,6 +2754,128 @@ func (r *RecognizeKoreanIDCardOCRResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type RecognizeMainlandIDCardOCRRequestParams struct {
+	// The Base64 value of the image. The image is required to be no larger than 7M after Base64 encoding, and the resolution is recommended to be 500*800 or above. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// The URL address of the image. The image is required to be no larger than 7M after Base64 encoding, and the resolution is recommended to be 500*800 or above. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. It is recommended that images be stored in Tencent Cloud to ensure higher download speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// FRONT: The side of the ID card with the photo (portrait side), BACK: The side of the ID card with the national emblem (national emblem side). If this parameter is not filled in, the front and back of the ID card will be automatically determined for you.
+	CardSide *string `json:"CardSide,omitnil,omitempty" name:"CardSide"`
+
+	// Whether to return the ID card portrait, the default is false
+	CropPortrait *bool `json:"CropPortrait,omitnil,omitempty" name:"CropPortrait"`
+
+	// Whether to enable ID card photo cropping (removing excess edges outside the ID, automatically correcting the shooting angle), the default value is false
+	CropIdCard *bool `json:"CropIdCard,omitnil,omitempty" name:"CropIdCard"`
+}
+
+type RecognizeMainlandIDCardOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64 value of the image. The image is required to be no larger than 7M after Base64 encoding, and the resolution is recommended to be 500*800 or above. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// The URL address of the image. The image is required to be no larger than 7M after Base64 encoding, and the resolution is recommended to be 500*800 or above. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. It is recommended that images be stored in Tencent Cloud to ensure higher download speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// FRONT: The side of the ID card with the photo (portrait side), BACK: The side of the ID card with the national emblem (national emblem side). If this parameter is not filled in, the front and back of the ID card will be automatically determined for you.
+	CardSide *string `json:"CardSide,omitnil,omitempty" name:"CardSide"`
+
+	// Whether to return the ID card portrait, the default is false
+	CropPortrait *bool `json:"CropPortrait,omitnil,omitempty" name:"CropPortrait"`
+
+	// Whether to enable ID card photo cropping (removing excess edges outside the ID, automatically correcting the shooting angle), the default value is false
+	CropIdCard *bool `json:"CropIdCard,omitnil,omitempty" name:"CropIdCard"`
+}
+
+func (r *RecognizeMainlandIDCardOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeMainlandIDCardOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "CardSide")
+	delete(f, "CropPortrait")
+	delete(f, "CropIdCard")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RecognizeMainlandIDCardOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RecognizeMainlandIDCardOCRResponseParams struct {
+	// Name((portrait side))
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Sex((portrait side))
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
+
+	// Nation((portrait side))
+	Nation *string `json:"Nation,omitnil,omitempty" name:"Nation"`
+
+	// Brithday((portrait side))
+	Birth *string `json:"Birth,omitnil,omitempty" name:"Birth"`
+
+	// Address(portrait side)
+	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
+
+	// ID number (portrait side)
+	IdNum *string `json:"IdNum,omitnil,omitempty" name:"IdNum"`
+
+	// Card authority(national emblem side)
+	Authority *string `json:"Authority,omitnil,omitempty" name:"Authority"`
+
+	// Card valid date (national emblem side)
+	ValidDate *string `json:"ValidDate,omitnil,omitempty" name:"ValidDate"`
+
+	// Card Warning Information
+	// 
+	// -9101 Alarm for covered certificate,
+	// -9102 Alarm for photocopied certificate,
+	// -9103 Alarm for photographed certificate,
+	// -9107 Alarm for reflective certificate,
+	// -9108 Alarm for blurry image,
+	// -9109 This capability is not enabled.
+	WarnCardInfos []*int64 `json:"WarnCardInfos,omitnil,omitempty" name:"WarnCardInfos"`
+
+	// Portrait image base64
+	PortraitImage *string `json:"PortraitImage,omitnil,omitempty" name:"PortraitImage"`
+
+	// ID card photo cropping results base64
+	IdCardImage *string `json:"IdCardImage,omitnil,omitempty" name:"IdCardImage"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RecognizeMainlandIDCardOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *RecognizeMainlandIDCardOCRResponseParams `json:"Response"`
+}
+
+func (r *RecognizeMainlandIDCardOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeMainlandIDCardOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type RecognizePhilippinesDrivingLicenseOCRRequestParams struct {
 	// The Base64-encoded value of an image.
 	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.

@@ -1888,6 +1888,97 @@ func (c *Client) RecognizeKoreanIDCardOCRWithContext(ctx context.Context, reques
     return
 }
 
+func NewRecognizeMainlandIDCardOCRRequest() (request *RecognizeMainlandIDCardOCRRequest) {
+    request = &RecognizeMainlandIDCardOCRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "RecognizeMainlandIDCardOCR")
+    
+    
+    return
+}
+
+func NewRecognizeMainlandIDCardOCRResponse() (response *RecognizeMainlandIDCardOCRResponse) {
+    response = &RecognizeMainlandIDCardOCRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RecognizeMainlandIDCardOCR
+// This interface supports the identification of all fields on the front and back of the second-generation ID card for mainland Chinese residents.Including name, gender, ethnicity, date of birth, address, citizen ID number, issuing authority, and validity period, the identification accuracy reaches more than 99%.In addition, this interface also supports a variety of value-added capabilities to meet the needs of different scenarios. Such as the cropping function of ID card photos and portrait photos, and also has 5 alarm functions.
+//
+// As shown in the table below. <table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default interface request frequency limit: 20 times/second
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CARDSIDEERROR = "FailedOperation.CardSideError"
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IDCARDINFOILLEGAL = "FailedOperation.IdCardInfoIllegal"
+//  FAILEDOPERATION_IDCARDTOOSMALL = "FailedOperation.IdCardTooSmall"
+//  FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
+//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
+//  FAILEDOPERATION_MULTICARDERROR = "FailedOperation.MultiCardError"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  FAILEDOPERATION_WARNINGSERVICEFAILED = "FailedOperation.WarningServiceFailed"
+//  INVALIDPARAMETER_CONFIGFORMATERROR = "InvalidParameter.ConfigFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) RecognizeMainlandIDCardOCR(request *RecognizeMainlandIDCardOCRRequest) (response *RecognizeMainlandIDCardOCRResponse, err error) {
+    return c.RecognizeMainlandIDCardOCRWithContext(context.Background(), request)
+}
+
+// RecognizeMainlandIDCardOCR
+// This interface supports the identification of all fields on the front and back of the second-generation ID card for mainland Chinese residents.Including name, gender, ethnicity, date of birth, address, citizen ID number, issuing authority, and validity period, the identification accuracy reaches more than 99%.In addition, this interface also supports a variety of value-added capabilities to meet the needs of different scenarios. Such as the cropping function of ID card photos and portrait photos, and also has 5 alarm functions.
+//
+// As shown in the table below. <table style="width:650px"> <thead> <tr> <th width="150">Value-added ability</th> <th width="500">Ability items</th> </tr> </thead> <tbody> <tr> <td rowspan="9">Alarm function</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>ID card copy warning</td> </tr> <tr> <td>Alarm for occlusion in the ID card frame</td> </tr> <tr> <td>ID card reflective warning</td> </tr> <tr> <td>Blurry picture warning</td> </tr> </tbody> </table> Default interface request frequency limit: 20 times/second
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CARDSIDEERROR = "FailedOperation.CardSideError"
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IDCARDINFOILLEGAL = "FailedOperation.IdCardInfoIllegal"
+//  FAILEDOPERATION_IDCARDTOOSMALL = "FailedOperation.IdCardTooSmall"
+//  FAILEDOPERATION_IMAGEBLUR = "FailedOperation.ImageBlur"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_IMAGENOIDCARD = "FailedOperation.ImageNoIdCard"
+//  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
+//  FAILEDOPERATION_MULTICARDERROR = "FailedOperation.MultiCardError"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  FAILEDOPERATION_WARNINGSERVICEFAILED = "FailedOperation.WarningServiceFailed"
+//  INVALIDPARAMETER_CONFIGFORMATERROR = "InvalidParameter.ConfigFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) RecognizeMainlandIDCardOCRWithContext(ctx context.Context, request *RecognizeMainlandIDCardOCRRequest) (response *RecognizeMainlandIDCardOCRResponse, err error) {
+    if request == nil {
+        request = NewRecognizeMainlandIDCardOCRRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RecognizeMainlandIDCardOCR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRecognizeMainlandIDCardOCRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRecognizePhilippinesDrivingLicenseOCRRequest() (request *RecognizePhilippinesDrivingLicenseOCRRequest) {
     request = &RecognizePhilippinesDrivingLicenseOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
