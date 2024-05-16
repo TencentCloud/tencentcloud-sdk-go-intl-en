@@ -910,6 +910,63 @@ func (c *Client) DescribeBillSummaryForOrganizationWithContext(ctx context.Conte
     return
 }
 
+func NewDescribeCostExplorerSummaryRequest() (request *DescribeCostExplorerSummaryRequest) {
+    request = &DescribeCostExplorerSummaryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeCostExplorerSummary")
+    
+    
+    return
+}
+
+func NewDescribeCostExplorerSummaryResponse() (response *DescribeCostExplorerSummaryResponse) {
+    response = &DescribeCostExplorerSummaryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCostExplorerSummary
+// This API is used to view cost analysis details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeCostExplorerSummary(request *DescribeCostExplorerSummaryRequest) (response *DescribeCostExplorerSummaryResponse, err error) {
+    return c.DescribeCostExplorerSummaryWithContext(context.Background(), request)
+}
+
+// DescribeCostExplorerSummary
+// This API is used to view cost analysis details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeCostExplorerSummaryWithContext(ctx context.Context, request *DescribeCostExplorerSummaryRequest) (response *DescribeCostExplorerSummaryResponse, err error) {
+    if request == nil {
+        request = NewDescribeCostExplorerSummaryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCostExplorerSummary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCostExplorerSummaryResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDosageCosDetailByDateRequest() (request *DescribeDosageCosDetailByDateRequest) {
     request = &DescribeDosageCosDetailByDateRequest{
         BaseRequest: &tchttp.BaseRequest{},

@@ -52,6 +52,172 @@ type ActionSummaryOverviewItem struct {
 	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 }
 
+type AnalyseActionTypeDetail struct {
+	// Transaction type codeNote: This field may return null, indicating that no valid values can be obtained.
+	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
+
+	// Transaction type nameNote: This field may return null, indicating that no valid values can be obtained.
+	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
+}
+
+type AnalyseAmountDetail struct {
+	// Fee typeNote: This field may return null, indicating that no valid values can be obtained.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Whether to displayNote: This field may return null, indicating that no valid values can be obtained.
+	Display *int64 `json:"Display,omitnil,omitempty" name:"Display"`
+}
+
+type AnalyseBusinessDetail struct {
+	// Product codeNote: This field may return null, indicating that no valid values can be obtained.
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Product nameNote: This field may return null, indicating that no valid values can be obtained.
+	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
+}
+
+type AnalyseConditionDetail struct {
+	// ProductNote: This field may return null, indicating that no valid values can be obtained.
+	Business []*AnalyseBusinessDetail `json:"Business,omitnil,omitempty" name:"Business"`
+
+	// ItemNote: This field may return null, indicating that no valid values can be obtained.
+	Project []*AnalyseProjectDetail `json:"Project,omitnil,omitempty" name:"Project"`
+
+	// RegionNote: This field may return null, indicating that no valid values can be obtained.
+	Region []*AnalyseRegionDetail `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Billing modeNote: This field may return null, indicating that no valid values can be obtained.
+	PayMode []*AnalysePayModeDetail `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Transaction typeNote: This field may return null, indicating that no valid values can be obtained.
+	ActionType []*AnalyseActionTypeDetail `json:"ActionType,omitnil,omitempty" name:"ActionType"`
+
+	// Availability zoneNote: This field may return null, indicating that no valid values can be obtained.
+	Zone []*AnalyseZoneDetail `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Resource owner UINNote: This field may return null, indicating that no valid values can be obtained.
+	OwnerUin []*AnalyseOwnerUinDetail `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
+
+	// Fee typeNote: This field may return null, indicating that no valid values can be obtained.
+	Amount []*AnalyseAmountDetail `json:"Amount,omitnil,omitempty" name:"Amount"`
+}
+
+type AnalyseConditions struct {
+	// Product name codeNote: This field may return null, indicating that no valid values can be obtained.
+	BusinessCodes *string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// Sub-product name codeNote: This field may return null, indicating that no valid values can be obtained.
+	ProductCodes *string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
+
+	// Component type codeNote: This field may return null, indicating that no valid values can be obtained.
+	ComponentCode *string `json:"ComponentCode,omitnil,omitempty" name:"ComponentCode"`
+
+	// Availability zone ID: The availability zone ID to which the resource belongsNote: This field may return null, indicating that no valid values can be obtained.
+	ZoneIds *string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+
+	// Region ID: The region ID to which the resource belongsNote: This field may return null, indicating that no valid values can be obtained.
+	RegionIds *string `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
+
+	// Project ID: The project ID to which the resource belongsNote: This field may return null, indicating that no valid values can be obtained.
+	ProjectIds *string `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+
+	// Billing mode prePay (indicates monthly subscription)/postPay (indicates pay-as-you-go billing)Note: This field may return null, indicating that no valid values can be obtained.
+	PayModes *string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
+
+	// Transaction type. Query transaction type. (Use transaction type code input parameter.)Note: This field may return null, indicating that no valid values can be obtained.
+	ActionTypes *string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
+
+	// Cost allocation tag keyNote: This field may return null, indicating that no valid values can be obtained.
+	Tags *string `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Fee type. Query fee type. (Use fee type code input parameter.) The input parameter enumeration is as follows:cashPayAmount: cash incentivePayAmount: free credits voucherPayAmount: coupons tax:taxes costBeforeTax: price before taxNote: This field may return null, indicating that no valid values can be obtained.
+	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
+
+	// User UIN for querying cost analysis dataNote: This field may return null, indicating that no valid values can be obtained.
+	PayerUins *string `json:"PayerUins,omitnil,omitempty" name:"PayerUins"`
+
+	// User UIN for using resourcesNote: This field may return null, indicating that no valid values can be obtained.
+	OwnerUins *string `json:"OwnerUins,omitnil,omitempty" name:"OwnerUins"`
+
+	// Consumption type. Query consumption type. (Use consumption type code input parameter.)Note: This field may return null, indicating that no valid values can be obtained.
+	ConsumptionTypes *string `json:"ConsumptionTypes,omitnil,omitempty" name:"ConsumptionTypes"`
+}
+
+type AnalyseDetail struct {
+	// Time
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Amount
+	Total *string `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Date detailed amountNote: This field may return null, indicating that no valid values can be obtained.
+	TimeDetail []*AnalyseTimeDetail `json:"TimeDetail,omitnil,omitempty" name:"TimeDetail"`
+}
+
+type AnalyseHeaderDetail struct {
+	// Header dateNote: This field may return null, indicating that no valid values can be obtained.
+	HeadDetail []*AnalyseHeaderTimeDetail `json:"HeadDetail,omitnil,omitempty" name:"HeadDetail"`
+
+	// TimeNote: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// TotalNote: This field may return null, indicating that no valid values can be obtained.
+	Total *string `json:"Total,omitnil,omitempty" name:"Total"`
+}
+
+type AnalyseHeaderTimeDetail struct {
+	// DateNote: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type AnalyseOwnerUinDetail struct {
+	// User UIN
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OwnerUin *string `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
+}
+
+type AnalysePayModeDetail struct {
+	// Billing mode codeNote: This field may return null, indicating that no valid values can be obtained.
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Billing mode nameNote: This field may return null, indicating that no valid values can be obtained.
+	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
+}
+
+type AnalyseProjectDetail struct {
+	// Project ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Default projectNote: This field may return null, indicating that no valid values can be obtained.
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+}
+
+type AnalyseRegionDetail struct {
+	// Region ID
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Region nameNote: This field may return null, indicating that no valid values can be obtained.
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
+}
+
+type AnalyseTimeDetail struct {
+	// DateNote: This field may return null, indicating that no valid values can be obtained.
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
+
+	// AmountNote: This field may return null, indicating that no valid values can be obtained.
+	Money *string `json:"Money,omitnil,omitempty" name:"Money"`
+}
+
+type AnalyseZoneDetail struct {
+	// Availability zone IDNote: This field may return null, indicating that no valid values can be obtained.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Availability zone nameNote: This field may return null, indicating that no valid values can be obtained.
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
+}
+
 type ApplicableProducts struct {
 	// Valid values: `all products` or names of the applicable products (string). Multiple names are separated by commas.
 	GoodsName *string `json:"GoodsName,omitnil,omitempty" name:"GoodsName"`
@@ -148,6 +314,24 @@ type BillDetail struct {
 	// Billing rules: Official website links for detailed billing rules of each product.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FormulaUrl *string `json:"FormulaUrl,omitnil,omitempty" name:"FormulaUrl"`
+
+	// Billing dayNote: This field may return null, indicating that no valid values can be obtained.
+	BillDay *string `json:"BillDay,omitnil,omitempty" name:"BillDay"`
+
+	// Billing monthNote: This field may return null, indicating that no valid values can be obtained.
+	BillMonth *string `json:"BillMonth,omitnil,omitempty" name:"BillMonth"`
+
+	// Billing record IDNote: This field may return null, indicating that no valid values can be obtained.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Domestic and international codesNote: This field may return null, indicating that no valid values can be obtained.
+	RegionType *string `json:"RegionType,omitnil,omitempty" name:"RegionType"`
+
+	// Domestic and International: The region type to which the resource belongs (domestic, international)Note: This field may return null, indicating that no valid values can be obtained.
+	RegionTypeName *string `json:"RegionTypeName,omitnil,omitempty" name:"RegionTypeName"`
+
+	// Note attributes (instance configuration): Other note information, such as the reserved instance, the reserved instance type, the transaction type, and the region information on both ends of the CCN product.Note: This field may return null, indicating that no valid values can be obtained.
+	ReserveDetail *string `json:"ReserveDetail,omitnil,omitempty" name:"ReserveDetail"`
 }
 
 type BillDetailAssociatedOrder struct {
@@ -398,6 +582,9 @@ type BillDistributionResourceSummary struct {
 
 	// SP deduction (cost): The amount of cost deducted by a savings plan based on the component's original cost. SP deduction (cost) = Cost deduction by SP / SP deduction rate	
 	OriginalCostWithSP *string `json:"OriginalCostWithSP,omitnil,omitempty" name:"OriginalCostWithSP"`
+
+	// Billing monthNote: This field may return null, indicating that no valid values can be obtained.
+	BillMonth *string `json:"BillMonth,omitnil,omitempty" name:"BillMonth"`
 }
 
 type BillResourceSummary struct {
@@ -516,6 +703,9 @@ type BillResourceSummary struct {
 
 	// SP deduction (cost): SP deduction (cost) = Cost deduction by SP / SP deduction rate	
 	OriginalCostWithSP *string `json:"OriginalCostWithSP,omitnil,omitempty" name:"OriginalCostWithSP"`
+
+	// Billing monthNote: This field may return null, indicating that no valid values can be obtained.
+	BillMonth *string `json:"BillMonth,omitnil,omitempty" name:"BillMonth"`
 }
 
 type BillTagInfo struct {
@@ -662,7 +852,7 @@ func (r *CreateAllocationTagRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAllocationTagResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -716,7 +906,7 @@ func (r *DeleteAllocationTagRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteAllocationTagResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -806,7 +996,7 @@ type DescribeAccountBalanceResponseParams struct {
 	// Available account balance in cents, which takes the same calculation rules as `Balance`, `RealBalance`, and `CreditBalance`.
 	RealCreditBalance *float64 `json:"RealCreditBalance,omitnil,omitempty" name:"RealCreditBalance"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -835,15 +1025,17 @@ type DescribeBillDetailForOrganizationRequestParams struct {
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// Cycle type, which can be `byUsedTime` (by billing cycle) or `byPayTime` (by deduction time). This value must be the same as the billing period type in Billing Center for that particular month. You can check your billing cycle at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
+	//
+	// Deprecated: PeriodType is deprecated.
 	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
 
-	// Bill month in the format of "yyyy-mm". You only have to enter either `Month` or `BeginTime` and `EndTime`. When you enter values for `BeginTime` and `EndTime`, `Month` becomes invalid. This value must be no earlier than the month when Bill 2.0 is activated; last 18 months data is available.
+	// The month is in the format of yyyy-mm. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. Data within the last 18 months can be pulled at most.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Start time of the cycle in the format of "yyyy-mm-dd hh:ii:ss". You only have to enter either `Month` or `BeginTime` and `EndTime`. When you enter values for `BeginTime` and `EndTime`, `Month` becomes invalid. `BeginTime` and `EndTime` must be passed together, and their values must be of the same month. Query period must start and end on the same month, andthe query result returned will be of the entire month. This value must be no earlier than the month when Bill 2.0 is activated; last 18 months data is available.
+	// The start time of the period in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. BeginTime and EndTime must be specified together and must be in the same month. Cross-month queries are not supported and the query results are data for the entire month. Data within the last 18 months can be pulled at most.
 	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
-	// End time of the cycle in the format of "yyyy-mm-dd hh:ii:ss". You only have to enter either `Month` or `BeginTime` and `EndTime`. When you enter values for `BeginTime` and `EndTime`, `Month` becomes invalid. `BeginTime` and `EndTime` must be passed together, and their values must be of the same month. Query period must start and end on the same month, andthe query result returned will be of the entire month. This value must be no earlier than the month when Bill 2.0 is activated; last 18 months data is available.
+	// The end time of the period in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. BeginTime and EndTime must be specified together and must be in the same month. Cross-month queries are not supported and the query results are data for the entire month. Data within the last 18 months can be pulled at most.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Indicates whether the total number of records is required, used for pagination.
@@ -910,13 +1102,13 @@ type DescribeBillDetailForOrganizationRequest struct {
 	// Cycle type, which can be `byUsedTime` (by billing cycle) or `byPayTime` (by deduction time). This value must be the same as the billing period type in Billing Center for that particular month. You can check your billing cycle at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
 	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
 
-	// Bill month in the format of "yyyy-mm". You only have to enter either `Month` or `BeginTime` and `EndTime`. When you enter values for `BeginTime` and `EndTime`, `Month` becomes invalid. This value must be no earlier than the month when Bill 2.0 is activated; last 18 months data is available.
+	// The month is in the format of yyyy-mm. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. Data within the last 18 months can be pulled at most.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// Start time of the cycle in the format of "yyyy-mm-dd hh:ii:ss". You only have to enter either `Month` or `BeginTime` and `EndTime`. When you enter values for `BeginTime` and `EndTime`, `Month` becomes invalid. `BeginTime` and `EndTime` must be passed together, and their values must be of the same month. Query period must start and end on the same month, andthe query result returned will be of the entire month. This value must be no earlier than the month when Bill 2.0 is activated; last 18 months data is available.
+	// The start time of the period in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. BeginTime and EndTime must be specified together and must be in the same month. Cross-month queries are not supported and the query results are data for the entire month. Data within the last 18 months can be pulled at most.
 	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
-	// End time of the cycle in the format of "yyyy-mm-dd hh:ii:ss". You only have to enter either `Month` or `BeginTime` and `EndTime`. When you enter values for `BeginTime` and `EndTime`, `Month` becomes invalid. `BeginTime` and `EndTime` must be passed together, and their values must be of the same month. Query period must start and end on the same month, andthe query result returned will be of the entire month. This value must be no earlier than the month when Bill 2.0 is activated; last 18 months data is available.
+	// The end time of the period in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be specified. If BeginTime&EndTime is specified, the Month field is invalid. BeginTime and EndTime must be specified together and must be in the same month. Cross-month queries are not supported and the query results are data for the entire month. Data within the last 18 months can be pulled at most.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Indicates whether the total number of records is required, used for pagination.
@@ -1015,7 +1207,7 @@ type DescribeBillDetailForOrganizationResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1044,6 +1236,8 @@ type DescribeBillDetailRequestParams struct {
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// The period type. byUsedTime: By usage period; byPayTime: By payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page. 
+	//
+	// Deprecated: PeriodType is deprecated.
 	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
 
 	// Month; format: yyyy-mm. You only have to enter either Month or BeginTime and EndTime. When you enter values for BeginTime and EndTime, Month becomes invalid. This value must be no earlier than the month when Bill 2.0 is activated; last 24 months data are available.
@@ -1245,7 +1439,7 @@ type DescribeBillDetailResponseParams struct {
 	// Context information returned by this request. The value can be passed in as the value of parameters in the next request to accelerate queries. Note: This field may return null, indicating that no valid values can be obtained.
 	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1334,7 +1528,7 @@ type DescribeBillDownloadUrlResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1527,7 +1721,7 @@ type DescribeBillResourceSummaryForOrganizationResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1708,7 +1902,7 @@ type DescribeBillResourceSummaryResponseParams struct {
 	// Total number of resource summary lists, which will not be returned when `NeedRecordNum` is `0`. This field may return null, indicating that no valid values can be obtained.
 	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1783,7 +1977,7 @@ type DescribeBillSummaryByPayModeResponseParams struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	SummaryOverview []*PayModeSummaryOverviewItem `json:"SummaryOverview,omitnil,omitempty" name:"SummaryOverview"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1879,7 +2073,7 @@ type DescribeBillSummaryByProductResponseParams struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	SummaryOverview []*BusinessSummaryOverviewItem `json:"SummaryOverview,omitnil,omitempty" name:"SummaryOverview"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1954,7 +2148,7 @@ type DescribeBillSummaryByProjectResponseParams struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	SummaryOverview []*ProjectSummaryOverviewItem `json:"SummaryOverview,omitnil,omitempty" name:"SummaryOverview"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2029,7 +2223,7 @@ type DescribeBillSummaryByRegionResponseParams struct {
 	// Note: This field may return null, indicating that no valid value was found.
 	SummaryOverview []*RegionSummaryOverviewItem `json:"SummaryOverview,omitnil,omitempty" name:"SummaryOverview"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2122,7 +2316,7 @@ type DescribeBillSummaryByTagResponseParams struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	SummaryTotal *SummaryTotal `json:"SummaryTotal,omitnil,omitempty" name:"SummaryTotal"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2196,7 +2390,7 @@ type DescribeBillSummaryForOrganizationResponseParams struct {
 	// Bills summarized by multiple dimensions.
 	SummaryDetail []*SummaryDetail `json:"SummaryDetail,omitnil,omitempty" name:"SummaryDetail"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2270,7 +2464,7 @@ type DescribeBillSummaryResponseParams struct {
 	// Detailed summary of costs by multiple dimensions
 	SummaryDetail []*SummaryDetail `json:"SummaryDetail,omitnil,omitempty" name:"SummaryDetail"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2287,6 +2481,152 @@ func (r *DescribeBillSummaryResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeBillSummaryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCostExplorerSummaryRequestParams struct {
+	// The start time of the period in the format of yyyy-mm-dd hh:ii:ss.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// The end time of the period in the format of yyyy-mm-dd hh:ii:ss.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Bill type: 1-cost bill, 2-consumption bill
+	BillType *string `json:"BillType,omitnil,omitempty" name:"BillType"`
+
+	// Statistical period: day-day, month-month;
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+
+	// Classification dimension (data aggregation dimension). Query classification dimension. (Use classification dimension code input parameter.) Input parameter enumeration value:default = Total only
+	// feeType = Fee typebillType = Bill typebusiness = Product
+	// product = Sub-productregion=Region
+	// zone = Availability zoneactionType = Transaction typepayMode = Billing modetags = Tagproject = ProjectpayerUin = Payer accountownerUin = User account
+	Dimensions *string `json:"Dimensions,omitnil,omitempty" name:"Dimensions"`
+
+	// Fee type: cost-total cost, totalCost-original price cost
+	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
+
+	// Quantity. The maximum value per page is 100.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Starting page, where PageNo=1 indicates the first page, PageNo=2 indicates the second page, and so on.
+	PageNo *uint64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Cost allocation tag value
+	TagKeyStr *string `json:"TagKeyStr,omitnil,omitempty" name:"TagKeyStr"`
+
+	// Whether the filter box is needed: 1- indicates it is needed, 0- indicates it is not needed. If it is not specified, it is not required by default.
+	NeedConditionValue *string `json:"NeedConditionValue,omitnil,omitempty" name:"NeedConditionValue"`
+
+	// Filter parameters
+	Conditions *AnalyseConditions `json:"Conditions,omitnil,omitempty" name:"Conditions"`
+}
+
+type DescribeCostExplorerSummaryRequest struct {
+	*tchttp.BaseRequest
+	
+	// The start time of the period in the format of yyyy-mm-dd hh:ii:ss.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// The end time of the period in the format of yyyy-mm-dd hh:ii:ss.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Bill type: 1-cost bill, 2-consumption bill
+	BillType *string `json:"BillType,omitnil,omitempty" name:"BillType"`
+
+	// Statistical period: day-day, month-month;
+	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
+
+	// Classification dimension (data aggregation dimension). Query classification dimension. (Use classification dimension code input parameter.) Input parameter enumeration value:default = Total only
+	// feeType = Fee typebillType = Bill typebusiness = Product
+	// product = Sub-productregion=Region
+	// zone = Availability zoneactionType = Transaction typepayMode = Billing modetags = Tagproject = ProjectpayerUin = Payer accountownerUin = User account
+	Dimensions *string `json:"Dimensions,omitnil,omitempty" name:"Dimensions"`
+
+	// Fee type: cost-total cost, totalCost-original price cost
+	FeeType *string `json:"FeeType,omitnil,omitempty" name:"FeeType"`
+
+	// Quantity. The maximum value per page is 100.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Starting page, where PageNo=1 indicates the first page, PageNo=2 indicates the second page, and so on.
+	PageNo *uint64 `json:"PageNo,omitnil,omitempty" name:"PageNo"`
+
+	// Cost allocation tag value
+	TagKeyStr *string `json:"TagKeyStr,omitnil,omitempty" name:"TagKeyStr"`
+
+	// Whether the filter box is needed: 1- indicates it is needed, 0- indicates it is not needed. If it is not specified, it is not required by default.
+	NeedConditionValue *string `json:"NeedConditionValue,omitnil,omitempty" name:"NeedConditionValue"`
+
+	// Filter parameters
+	Conditions *AnalyseConditions `json:"Conditions,omitnil,omitempty" name:"Conditions"`
+}
+
+func (r *DescribeCostExplorerSummaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCostExplorerSummaryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BeginTime")
+	delete(f, "EndTime")
+	delete(f, "BillType")
+	delete(f, "PeriodType")
+	delete(f, "Dimensions")
+	delete(f, "FeeType")
+	delete(f, "PageSize")
+	delete(f, "PageNo")
+	delete(f, "TagKeyStr")
+	delete(f, "NeedConditionValue")
+	delete(f, "Conditions")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCostExplorerSummaryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCostExplorerSummaryResponseParams struct {
+	// Number of data entries
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Header informationNote: This field may return null, indicating that no valid values can be obtained.
+	Header *AnalyseHeaderDetail `json:"Header,omitnil,omitempty" name:"Header"`
+
+	// Data detailsNote: This field may return null, indicating that no valid values can be obtained.
+	Detail []*AnalyseDetail `json:"Detail,omitnil,omitempty" name:"Detail"`
+
+	// Data amountNote: This field may return null, indicating that no valid values can be obtained.
+	TotalDetail *AnalyseDetail `json:"TotalDetail,omitnil,omitempty" name:"TotalDetail"`
+
+	// Filter boxNote: This field may return null, indicating that no valid values can be obtained.
+	ConditionValue *AnalyseConditionDetail `json:"ConditionValue,omitnil,omitempty" name:"ConditionValue"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCostExplorerSummaryResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCostExplorerSummaryResponseParams `json:"Response"`
+}
+
+func (r *DescribeCostExplorerSummaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCostExplorerSummaryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2341,7 +2681,7 @@ type DescribeDosageCosDetailByDateResponseParams struct {
 	// Array of usage
 	DetailSets []*CosDetailSets `json:"DetailSets,omitnil,omitempty" name:"DetailSets"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2429,7 +2769,7 @@ type DescribeTagListResponseParams struct {
 	// Tag information.
 	Data []*TagDataInfo `json:"Data,omitnil,omitempty" name:"Data"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2495,6 +2835,12 @@ type DescribeVoucherInfoRequestParams struct {
 
 	// The operator. The default is the UIN of the current user.
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
+
+	// The primary types of vouchers are has_price and no_price, which represent the cash voucher with a price and the cash voucher without a price respectively.
+	VoucherMainType *string `json:"VoucherMainType,omitnil,omitempty" name:"VoucherMainType"`
+
+	// Voucher subtype: Discount is a discount voucher, and deduct is a deduction voucher.
+	VoucherSubType *string `json:"VoucherSubType,omitnil,omitempty" name:"VoucherSubType"`
 }
 
 type DescribeVoucherInfoRequest struct {
@@ -2544,6 +2890,12 @@ type DescribeVoucherInfoRequest struct {
 
 	// The operator. The default is the UIN of the current user.
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
+
+	// The primary types of vouchers are has_price and no_price, which represent the cash voucher with a price and the cash voucher without a price respectively.
+	VoucherMainType *string `json:"VoucherMainType,omitnil,omitempty" name:"VoucherMainType"`
+
+	// Voucher subtype: Discount is a discount voucher, and deduct is a deduction voucher.
+	VoucherSubType *string `json:"VoucherSubType,omitnil,omitempty" name:"VoucherSubType"`
 }
 
 func (r *DescribeVoucherInfoRequest) ToJsonString() string {
@@ -2573,6 +2925,8 @@ func (r *DescribeVoucherInfoRequest) FromJsonString(s string) error {
 	delete(f, "PayMode")
 	delete(f, "PayScene")
 	delete(f, "Operator")
+	delete(f, "VoucherMainType")
+	delete(f, "VoucherSubType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeVoucherInfoRequest has unknown keys!", "")
 	}
@@ -2591,7 +2945,7 @@ type DescribeVoucherInfoResponseParams struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	VoucherInfos []*VoucherInfos `json:"VoucherInfos,omitnil,omitempty" name:"VoucherInfos"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2676,7 +3030,7 @@ type DescribeVoucherUsageDetailsResponseParams struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	UsageRecords []*UsageRecords `json:"UsageRecords,omitnil,omitempty" name:"UsageRecords"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2786,6 +3140,12 @@ type DistributionBillDetail struct {
 	// Billing rules: Official website links for detailed billing rules of each product.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FormulaUrl *string `json:"FormulaUrl,omitnil,omitempty" name:"FormulaUrl"`
+
+	// Billing monthNote: This field may return null, indicating that no valid values can be obtained.
+	BillMonth *string `json:"BillMonth,omitnil,omitempty" name:"BillMonth"`
+
+	// Billing dayNote: This field may return null, indicating that no valid values can be obtained.
+	BillDay *string `json:"BillDay,omitnil,omitempty" name:"BillDay"`
 }
 
 type ExcludedProducts struct {
