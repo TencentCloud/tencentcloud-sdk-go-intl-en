@@ -2235,34 +2235,44 @@ type MLIDCard struct {
 }
 
 type MacaoIDCard struct {
-
+	// First name
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FirstName *string `json:"FirstName,omitnil,omitempty" name:"FirstName"`
 
-
+	// Last name
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LastName *string `json:"LastName,omitnil,omitempty" name:"LastName"`
 
-
+	// Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 
-
+	// Expiration date
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExpirationDate *string `json:"ExpirationDate,omitnil,omitempty" name:"ExpirationDate"`
 
-
+	// License number
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
 
-
+	// Sex
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
 
-
+	// Age
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
 
-
+	// Issued country
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	IssuedCountry *string `json:"IssuedCountry,omitnil,omitempty" name:"IssuedCountry"`
 
-
+	// MRZ1 on card
+	// Note: This field may return null, indicating that no valid values can be obtained. 
 	Field1 *string `json:"Field1,omitnil,omitempty" name:"Field1"`
 
-
+	// MRZ2 on card
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Field2 *string `json:"Field2,omitnil,omitempty" name:"Field2"`
 }
 
