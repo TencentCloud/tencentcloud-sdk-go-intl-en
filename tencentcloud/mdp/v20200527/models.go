@@ -145,6 +145,18 @@ type CreateStreamPackageChannelEndpointRequestParams struct {
 
 	// Authentication information
 	AuthInfo *EndpointAuthInfo `json:"AuthInfo,omitnil,omitempty" name:"AuthInfo"`
+
+	// Endpoint protocol type, supports HLS, DASH, CMAF (only HLS type input can create CMAF Endpoint).
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// Mainifest name, default is main.
+	Manifest *string `json:"Manifest,omitnil,omitempty" name:"Manifest"`
+
+	// Whether to turn on the TimeShift function, true: on, false: off, the default is off.
+	TimeShiftEnable *bool `json:"TimeShiftEnable,omitnil,omitempty" name:"TimeShiftEnable"`
+
+	// The number of days to look back in TimeShift, up to 30 days is supported.
+	TimeShiftDuration *uint64 `json:"TimeShiftDuration,omitnil,omitempty" name:"TimeShiftDuration"`
 }
 
 type CreateStreamPackageChannelEndpointRequest struct {
@@ -158,6 +170,18 @@ type CreateStreamPackageChannelEndpointRequest struct {
 
 	// Authentication information
 	AuthInfo *EndpointAuthInfo `json:"AuthInfo,omitnil,omitempty" name:"AuthInfo"`
+
+	// Endpoint protocol type, supports HLS, DASH, CMAF (only HLS type input can create CMAF Endpoint).
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// Mainifest name, default is main.
+	Manifest *string `json:"Manifest,omitnil,omitempty" name:"Manifest"`
+
+	// Whether to turn on the TimeShift function, true: on, false: off, the default is off.
+	TimeShiftEnable *bool `json:"TimeShiftEnable,omitnil,omitempty" name:"TimeShiftEnable"`
+
+	// The number of days to look back in TimeShift, up to 30 days is supported.
+	TimeShiftDuration *uint64 `json:"TimeShiftDuration,omitnil,omitempty" name:"TimeShiftDuration"`
 }
 
 func (r *CreateStreamPackageChannelEndpointRequest) ToJsonString() string {
@@ -175,6 +199,10 @@ func (r *CreateStreamPackageChannelEndpointRequest) FromJsonString(s string) err
 	delete(f, "Id")
 	delete(f, "Name")
 	delete(f, "AuthInfo")
+	delete(f, "Protocol")
+	delete(f, "Manifest")
+	delete(f, "TimeShiftEnable")
+	delete(f, "TimeShiftDuration")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamPackageChannelEndpointRequest has unknown keys!", "")
 	}
