@@ -795,6 +795,339 @@ type BusinessSummaryTotal struct {
 	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 }
 
+type ConditionBusiness struct {
+	// Product name code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Product name
+	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
+}
+
+type ConditionPayMode struct {
+	// Payment mode
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Payment mode name
+	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
+}
+
+type ConditionProject struct {
+	// Project ID
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Project name
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+}
+
+type ConditionRegion struct {
+	// Region ID
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Region name
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
+}
+
+type Conditions struct {
+	// Only supports two values: 6 and 12.
+	TimeRange *uint64 `json:"TimeRange,omitnil,omitempty" name:"TimeRange"`
+
+	// Product name code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Region ID
+	RegionId *int64 `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Payment mode. Options include prePay and postPay.
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Resource keyword
+	ResourceKeyword *string `json:"ResourceKeyword,omitnil,omitempty" name:"ResourceKeyword"`
+
+	// Product name code
+	BusinessCodes []*string `json:"BusinessCodes,omitnil,omitempty" name:"BusinessCodes"`
+
+	// Subproduct name code
+	ProductCodes []*string `json:"ProductCodes,omitnil,omitempty" name:"ProductCodes"`
+
+	// Region ID
+	RegionIds []*int64 `json:"RegionIds,omitnil,omitempty" name:"RegionIds"`
+
+	// Project ID
+	ProjectIds []*int64 `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+
+	// Payment mode. Options include prePay and postPay.
+	PayModes []*string `json:"PayModes,omitnil,omitempty" name:"PayModes"`
+
+	// Transaction type
+	ActionTypes []*string `json:"ActionTypes,omitnil,omitempty" name:"ActionTypes"`
+
+	// Whether to hide zero-amount transactions
+	HideFreeCost *int64 `json:"HideFreeCost,omitnil,omitempty" name:"HideFreeCost"`
+
+	// Sorting rule. Options include desc and asc.
+	OrderByCost *string `json:"OrderByCost,omitnil,omitempty" name:"OrderByCost"`
+
+	// Transaction ID
+	BillIds []*string `json:"BillIds,omitnil,omitempty" name:"BillIds"`
+
+	// Component code
+	ComponentCodes []*string `json:"ComponentCodes,omitnil,omitempty" name:"ComponentCodes"`
+
+	// File ID
+	FileIds []*string `json:"FileIds,omitnil,omitempty" name:"FileIds"`
+
+	// File type
+	FileTypes []*string `json:"FileTypes,omitnil,omitempty" name:"FileTypes"`
+
+	// Status
+	Status []*uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+}
+
+type ConsumptionBusinessSummaryDataItem struct {
+	// Product name code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Product name
+	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
+
+	// Discounted total price
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+
+	// Cost trend
+	Trend *ConsumptionSummaryTrend `json:"Trend,omitnil,omitempty" name:"Trend"`
+
+	// Cash
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
+
+	// Bonus
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
+
+	// VoucherNote: This field may return null, indicating that no valid values can be obtained.
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
+
+	// Share revenueNote: This field may return null, indicating that no valid values can be obtained.
+	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
+
+	// Region name (only shown in regional summary)
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
+}
+
+type ConsumptionProjectSummaryDataItem struct {
+	// Project ID
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Project name
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// Discounted total price
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+
+	// Trend
+	Trend *ConsumptionSummaryTrend `json:"Trend,omitnil,omitempty" name:"Trend"`
+
+	// Product consumption details
+	Business []*ConsumptionBusinessSummaryDataItem `json:"Business,omitnil,omitempty" name:"Business"`
+
+	// Cash
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
+
+	// Bonus
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
+
+	// VoucherNote: This field may return null, indicating that no valid values can be obtained.
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
+
+	// Share revenueNote: This field may return null, indicating that no valid values can be obtained.
+	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
+}
+
+type ConsumptionRegionSummaryDataItem struct {
+	// Region ID
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Region name
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
+
+	// Discounted total price
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+
+	// Trend
+	Trend *ConsumptionSummaryTrend `json:"Trend,omitnil,omitempty" name:"Trend"`
+
+	// Product consumption details
+	Business []*ConsumptionBusinessSummaryDataItem `json:"Business,omitnil,omitempty" name:"Business"`
+
+	// Cash
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
+
+	// VoucherNote: This field may return null, indicating that no valid values can be obtained.
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
+
+	// Bonus
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
+
+	// Share revenueNote: This field may return null, indicating that no valid values can be obtained.
+	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
+}
+
+type ConsumptionResourceSummaryConditionValue struct {
+	// Product list
+	Business []*ConditionBusiness `json:"Business,omitnil,omitempty" name:"Business"`
+
+	// Project list
+	Project []*ConditionProject `json:"Project,omitnil,omitempty" name:"Project"`
+
+	// Region list
+	Region []*ConditionRegion `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Payment mode list
+	PayMode []*ConditionPayMode `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+}
+
+type ConsumptionResourceSummaryDataItem struct {
+	// Resource ID
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Resource name
+	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
+
+	// Discounted total price
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+
+	// Cash expenditure
+	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
+
+	// Project ID
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Project name
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// Region ID
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
+
+	// Region name
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
+
+	// Payment mode
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Payment mode name
+	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
+
+	// Product name code
+	BusinessCode *string `json:"BusinessCode,omitnil,omitempty" name:"BusinessCode"`
+
+	// Product name
+	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
+
+	// Consumption type
+	ConsumptionTypeName *string `json:"ConsumptionTypeName,omitnil,omitempty" name:"ConsumptionTypeName"`
+
+	// Pre-discount priceNote: This field may return null, indicating that no valid values can be obtained.
+	RealCost *string `json:"RealCost,omitnil,omitempty" name:"RealCost"`
+
+	// Start time of feesNote: This field may return null, indicating that no valid values can be obtained.
+	FeeBeginTime *string `json:"FeeBeginTime,omitnil,omitempty" name:"FeeBeginTime"`
+
+	// End time of feesNote: This field may return null, indicating that no valid values can be obtained.
+	FeeEndTime *string `json:"FeeEndTime,omitnil,omitempty" name:"FeeEndTime"`
+
+	// Days
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DayDiff *string `json:"DayDiff,omitnil,omitempty" name:"DayDiff"`
+
+	// Daily consumptionNote: This field may return null, indicating that no valid values can be obtained.
+	DailyTotalCost *string `json:"DailyTotalCost,omitnil,omitempty" name:"DailyTotalCost"`
+
+	// Order numberNote: This field may return null, indicating that no valid values can be obtained.
+	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
+
+	// VoucherNote: This field may return null, indicating that no valid values can be obtained.
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
+
+	// Bonus
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
+
+	// Share revenueNote: This field may return null, indicating that no valid values can be obtained.
+	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
+
+	// Payer UIN: the account ID of the payer, which is the unique identifier of a Tencent Cloud userNote: This field may return null, indicating that no valid values can be obtained.
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// User UIN: the account ID of the actual resource userNote: This field may return null, indicating that no valid values can be obtained.
+	OwnerUin *string `json:"OwnerUin,omitnil,omitempty" name:"OwnerUin"`
+
+	// Operator UIN: the account ID or role ID of the operator who places orders for prepaid resources or activates postpaid resourcesNote: This field may return null, indicating that no valid values can be obtained.
+	OperateUin *string `json:"OperateUin,omitnil,omitempty" name:"OperateUin"`
+
+	// Subproduct codeNote: This field may return null, indicating that no valid values can be obtained.
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Subproduct name: the subcategory of a product purchased by the user, such as CVM – Standard S1Note: This field may return null, indicating that no valid values can be obtained.
+	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
+
+	// Region typeNote: This field may return null, indicating that no valid values can be obtained.
+	RegionType *string `json:"RegionType,omitnil,omitempty" name:"RegionType"`
+
+	// Region type nameNote: This field may return null, indicating that no valid values can be obtained.
+	RegionTypeName *string `json:"RegionTypeName,omitnil,omitempty" name:"RegionTypeName"`
+
+	// Extended field 1Note: This field may return null, indicating that no valid values can be obtained.
+	Extend1 *string `json:"Extend1,omitnil,omitempty" name:"Extend1"`
+
+	// Extended field 2Note: This field may return null, indicating that no valid values can be obtained.
+	Extend2 *string `json:"Extend2,omitnil,omitempty" name:"Extend2"`
+
+	// Extended field 3Note: This field may return null, indicating that no valid values can be obtained.
+	Extend3 *string `json:"Extend3,omitnil,omitempty" name:"Extend3"`
+
+	// Extended field 4Note: This field may return null, indicating that no valid values can be obtained.
+	Extend4 *string `json:"Extend4,omitnil,omitempty" name:"Extend4"`
+
+	// Extended field 5Note: This field may return null, indicating that no valid values can be obtained.
+	Extend5 *string `json:"Extend5,omitnil,omitempty" name:"Extend5"`
+
+	// Instance typeNote: This field may return null, indicating that no valid values can be obtained.
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Instance type nameNote: This field may return null, indicating that no valid values can be obtained.
+	InstanceTypeName *string `json:"InstanceTypeName,omitnil,omitempty" name:"InstanceTypeName"`
+
+	// Deduction time: the time at which a payment is deductedNote: This field may return null, indicating that no valid values can be obtained.
+	PayTime *string `json:"PayTime,omitnil,omitempty" name:"PayTime"`
+
+	// Availability zone: availability zone of a resource, e.g. Guangzhou Zone 3Note: This field may return null, indicating that no valid values can be obtained.
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
+
+	// Configuration descriptionNote: This field may return null, indicating that no valid values can be obtained.
+	ComponentConfig *string `json:"ComponentConfig,omitnil,omitempty" name:"ComponentConfig"`
+}
+
+type ConsumptionSummaryTotal struct {
+	// Discounted total price
+	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+}
+
+type ConsumptionSummaryTrend struct {
+	// Trend type, upward for rising, downward for falling, none for no change
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Trend value. The value is null when Type is none.Note: This field may return null, indicating that no valid values can be obtained.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
 type CosDetailSets struct {
 	// Bucket name
 	BucketName *string `json:"BucketName,omitnil,omitempty" name:"BucketName"`
@@ -816,6 +1149,94 @@ type CosDetailSets struct {
 
 	// Unit of the billable item
 	Unit *string `json:"Unit,omitnil,omitempty" name:"Unit"`
+}
+
+type CostComponentSet struct {
+	// Component type name
+	ComponentCodeName *string `json:"ComponentCodeName,omitnil,omitempty" name:"ComponentCodeName"`
+
+	// Component name
+	ItemCodeName *string `json:"ItemCodeName,omitnil,omitempty" name:"ItemCodeName"`
+
+	// List price
+	SinglePrice *string `json:"SinglePrice,omitnil,omitempty" name:"SinglePrice"`
+
+	// List price unit
+	PriceUnit *string `json:"PriceUnit,omitnil,omitempty" name:"PriceUnit"`
+
+	// Usage
+	UsedAmount *string `json:"UsedAmount,omitnil,omitempty" name:"UsedAmount"`
+
+	// Usage unit
+	UsedAmountUnit *string `json:"UsedAmountUnit,omitnil,omitempty" name:"UsedAmountUnit"`
+
+	// Original price
+	Cost *string `json:"Cost,omitnil,omitempty" name:"Cost"`
+
+	// Discount
+	Discount *string `json:"Discount,omitnil,omitempty" name:"Discount"`
+
+	// Discounted price
+	RealCost *string `json:"RealCost,omitnil,omitempty" name:"RealCost"`
+
+	// Voucher payment amount
+	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
+
+	// Cash payment amount
+	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
+
+	// Bonus payment amount
+	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
+}
+
+type CostDetail struct {
+	// Payer UIN
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// Product name
+	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
+
+	// Subproduct name
+	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
+
+	// Billing mode name
+	PayModeName *string `json:"PayModeName,omitnil,omitempty" name:"PayModeName"`
+
+	// Project name
+	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
+
+	// Region Name
+	RegionName *string `json:"RegionName,omitnil,omitempty" name:"RegionName"`
+
+	// Zone name
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
+
+	// Resource ID
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Resource name
+	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
+
+	// Type nameNote: This field may return null, indicating that no valid values can be obtained.
+	ActionTypeName *string `json:"ActionTypeName,omitnil,omitempty" name:"ActionTypeName"`
+
+	// Order ID
+	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
+
+	// Transaction ID
+	BillId *string `json:"BillId,omitnil,omitempty" name:"BillId"`
+
+	// Start time of fees
+	FeeBeginTime *string `json:"FeeBeginTime,omitnil,omitempty" name:"FeeBeginTime"`
+
+	// End time of fees
+	FeeEndTime *string `json:"FeeEndTime,omitnil,omitempty" name:"FeeEndTime"`
+
+	// Component details
+	ComponentSet []*CostComponentSet `json:"ComponentSet,omitnil,omitempty" name:"ComponentSet"`
+
+	// Subproduct name code
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 }
 
 // Predefined struct for user
@@ -1436,7 +1857,7 @@ type DescribeBillDetailResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
 
-	// Context information returned by this request. The value can be passed in as the value of parameters in the next request to accelerate queries. Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1524,8 +1945,7 @@ type DescribeBillDownloadUrlResponseParams struct {
 	// Indicates whether the bill file is ready. Valid values: `0` (the file is being generated), `1` (the file has been generated).
 	Ready *int64 `json:"Ready,omitnil,omitempty" name:"Ready"`
 
-	// Bill download URL, valid for one hour.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Billing file download link, valid for 1 day. Note: This field may return null, indicating that no valid values can be obtained.
 	DownloadUrl *string `json:"DownloadUrl,omitnil,omitempty" name:"DownloadUrl"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2485,6 +2905,123 @@ func (r *DescribeBillSummaryResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeCostDetailRequestParams struct {
+	// The number of entries returned at a time. The maximum value is `100`.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Cycle start time in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be entered, and if this field is present, Month becomes invalid. BeginTime and EndTime must be entered together, and must be in the same month. Cross-month retrieval is not currently supported. Data retrievable is the data after cost analysis is activated and within the past 24 months.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// Cycle end time in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be entered, and if this field is present, Month becomes invalid. BeginTime and EndTime must be entered together, and must be in the same month. Cross-month retrieval is not currently supported. Data retrievable is the data after cost analysis is activated and within the past 24 months.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Whether the total number of records in the list is needed, for frontend pagination1: needed, 0: not needed
+	NeedRecordNum *uint64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
+
+	// Month, in the format of yyyy-mm. Either Month or BeginTime&EndTime must be entered, and if BeginTime&EndTime is entered, Month becomes invalid. It cannot be earlier than the month when cost analysis is activated. Data of up to 24 months can be retrieved.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Used to query information of a specified product (currently not available)
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Payment mode. Options include prePay and postPay.
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Used to query information of a specified resource
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+}
+
+type DescribeCostDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// The number of entries returned at a time. The maximum value is `100`.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Cycle start time in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be entered, and if this field is present, Month becomes invalid. BeginTime and EndTime must be entered together, and must be in the same month. Cross-month retrieval is not currently supported. Data retrievable is the data after cost analysis is activated and within the past 24 months.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// Cycle end time in the format of yyyy-mm-dd hh:ii:ss. Either Month or BeginTime&EndTime must be entered, and if this field is present, Month becomes invalid. BeginTime and EndTime must be entered together, and must be in the same month. Cross-month retrieval is not currently supported. Data retrievable is the data after cost analysis is activated and within the past 24 months.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Whether the total number of records in the list is needed, for frontend pagination1: needed, 0: not needed
+	NeedRecordNum *uint64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
+
+	// Month, in the format of yyyy-mm. Either Month or BeginTime&EndTime must be entered, and if BeginTime&EndTime is entered, Month becomes invalid. It cannot be earlier than the month when cost analysis is activated. Data of up to 24 months can be retrieved.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Used to query information of a specified product (currently not available)
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Payment mode. Options include prePay and postPay.
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Used to query information of a specified resource
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+}
+
+func (r *DescribeCostDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCostDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "BeginTime")
+	delete(f, "EndTime")
+	delete(f, "NeedRecordNum")
+	delete(f, "Month")
+	delete(f, "ProductCode")
+	delete(f, "PayMode")
+	delete(f, "ResourceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCostDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCostDetailResponseParams struct {
+	// Consumption details
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DetailSet []*CostDetail `json:"DetailSet,omitnil,omitempty" name:"DetailSet"`
+
+	// Record countNote: This field may return null, indicating that no valid values can be obtained.
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCostDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCostDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeCostDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCostDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeCostExplorerSummaryRequestParams struct {
 	// The start time of the period in the format of yyyy-mm-dd hh:ii:ss.
 	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
@@ -2627,6 +3164,428 @@ func (r *DescribeCostExplorerSummaryResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCostExplorerSummaryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCostSummaryByProductRequestParams struct {
+	// The value must be of the same month as `EndTime`. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// The value must be of the same month as `BeginTime`. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Data quantity per fetch. The maximum value is 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset, which starts from 0 by default
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// UIN of the user querying the bill data
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// Whether to return the record count. 0 for no, 1 for yes. Default is no.
+	NeedRecordNum *uint64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
+}
+
+type DescribeCostSummaryByProductRequest struct {
+	*tchttp.BaseRequest
+	
+	// The value must be of the same month as `EndTime`. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// The value must be of the same month as `BeginTime`. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Data quantity per fetch. The maximum value is 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset, which starts from 0 by default
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// UIN of the user querying the bill data
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// Whether to return the record count. 0 for no, 1 for yes. Default is no.
+	NeedRecordNum *uint64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
+}
+
+func (r *DescribeCostSummaryByProductRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCostSummaryByProductRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BeginTime")
+	delete(f, "EndTime")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "PayerUin")
+	delete(f, "NeedRecordNum")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCostSummaryByProductRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCostSummaryByProductResponseParams struct {
+	// Data readiness, 0 for not ready, 1 for ready
+	Ready *uint64 `json:"Ready,omitnil,omitempty" name:"Ready"`
+
+	// Consumption details
+	Total *ConsumptionSummaryTotal `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Consumption details summarized by productNote: This field may return null, indicating that no valid values can be obtained.
+	Data []*ConsumptionBusinessSummaryDataItem `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Record count. The system returns null when NeedRecordNum is 0.Note: This field may return null, indicating that no valid values can be obtained.
+	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCostSummaryByProductResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCostSummaryByProductResponseParams `json:"Response"`
+}
+
+func (r *DescribeCostSummaryByProductResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCostSummaryByProductResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCostSummaryByProjectRequestParams struct {
+	// The value must be of the same month as `EndTime`. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// The value must be of the same month as `BeginTime`. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Data quantity per fetch. The maximum value is `100`.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset, which starts from 0 by default
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// UIN of the user querying the bill data
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// Whether to return the record count. 0 for no, 1 for yes. Default is no.
+	NeedRecordNum *uint64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
+}
+
+type DescribeCostSummaryByProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// The value must be of the same month as `EndTime`. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// The value must be of the same month as `BeginTime`. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Data quantity per fetch. The maximum value is `100`.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset, which starts from 0 by default
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// UIN of the user querying the bill data
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// Whether to return the record count. 0 for no, 1 for yes. Default is no.
+	NeedRecordNum *uint64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
+}
+
+func (r *DescribeCostSummaryByProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCostSummaryByProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BeginTime")
+	delete(f, "EndTime")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "PayerUin")
+	delete(f, "NeedRecordNum")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCostSummaryByProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCostSummaryByProjectResponseParams struct {
+	// Data readiness, 0 for not ready, 1 for ready
+	Ready *uint64 `json:"Ready,omitnil,omitempty" name:"Ready"`
+
+	// Consumption details
+	Total *ConsumptionSummaryTotal `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Consumption details summarized by business
+	Data []*ConsumptionProjectSummaryDataItem `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Record count. The system returns null when NeedRecordNum is 0.
+	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCostSummaryByProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCostSummaryByProjectResponseParams `json:"Response"`
+}
+
+func (r *DescribeCostSummaryByProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCostSummaryByProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCostSummaryByRegionRequestParams struct {
+	// The value must be of the same month as `EndTime`. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// The value must be of the same month as `BeginTime`. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Data quantity per fetch. The maximum value is `100`.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset, which starts from 0 by default
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// UIN of the user querying the bill data
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// Whether to return the record count. 0 for no, 1 for yes. Default is no.
+	NeedRecordNum *uint64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
+}
+
+type DescribeCostSummaryByRegionRequest struct {
+	*tchttp.BaseRequest
+	
+	// The value must be of the same month as `EndTime`. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// The value must be of the same month as `BeginTime`. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both `BeginTime` and `EndTime` are `2018-09`, the data returned will be for the entire month of September 2018.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Data quantity per fetch. The maximum value is `100`.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset, which starts from 0 by default
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// UIN of the user querying the bill data
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// Whether to return the record count. 0 for no, 1 for yes. Default is no.
+	NeedRecordNum *uint64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
+}
+
+func (r *DescribeCostSummaryByRegionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCostSummaryByRegionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BeginTime")
+	delete(f, "EndTime")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "PayerUin")
+	delete(f, "NeedRecordNum")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCostSummaryByRegionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCostSummaryByRegionResponseParams struct {
+	// Data readiness, 0 for not ready, 1 for ready
+	Ready *uint64 `json:"Ready,omitnil,omitempty" name:"Ready"`
+
+	// Consumption details
+	Total *ConsumptionSummaryTotal `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Consumption details summarized by region
+	Data []*ConsumptionRegionSummaryDataItem `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Record count. The system returns null when NeedRecordNum is 0.Note: This field may return null, indicating that no valid values can be obtained.
+	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCostSummaryByRegionResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCostSummaryByRegionResponseParams `json:"Response"`
+}
+
+func (r *DescribeCostSummaryByRegionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCostSummaryByRegionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCostSummaryByResourceRequestParams struct {
+	// The value must be of the same month as EndTime. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both BeginTime and EndTime are 2018-09, the data returned will be for the entire month of September 2018.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// The value must be of the same month as BeginTime. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both BeginTime and EndTime are 2018-09, the data returned will be for the entire month of September 2018.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Data quantity per fetch. The maximum value is 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset, which starts from 0 by default
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// UIN of the user querying the bill data
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// Whether to return the record count. 0 for no, 1 for yes. Default is no.
+	NeedRecordNum *uint64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
+
+	// Whether to return filter criteria. 0 for no, 1 for yes. Default is no.
+	NeedConditionValue *uint64 `json:"NeedConditionValue,omitnil,omitempty" name:"NeedConditionValue"`
+
+	// Filter criteria. It only supports ResourceKeyword (resource keyword, which supports fuzzy query by resource ID or resource name), ProjectIds (project ID), RegionIds (region ID), PayModes (payment mode, prePay or postPay), HideFreeCost (whether to hide zero-amount transactions, 0 or 1), and OrderByCost (sorting rule by fees, desc or asc).
+	Conditions *Conditions `json:"Conditions,omitnil,omitempty" name:"Conditions"`
+}
+
+type DescribeCostSummaryByResourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// The value must be of the same month as EndTime. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both BeginTime and EndTime are 2018-09, the data returned will be for the entire month of September 2018.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// The value must be of the same month as BeginTime. The query period must start and end on the same month and the query result returned will be of the entire month. For example, if both BeginTime and EndTime are 2018-09, the data returned will be for the entire month of September 2018.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Data quantity per fetch. The maximum value is 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset, which starts from 0 by default
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// UIN of the user querying the bill data
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// Whether to return the record count. 0 for no, 1 for yes. Default is no.
+	NeedRecordNum *uint64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
+
+	// Whether to return filter criteria. 0 for no, 1 for yes. Default is no.
+	NeedConditionValue *uint64 `json:"NeedConditionValue,omitnil,omitempty" name:"NeedConditionValue"`
+
+	// Filter criteria. It only supports ResourceKeyword (resource keyword, which supports fuzzy query by resource ID or resource name), ProjectIds (project ID), RegionIds (region ID), PayModes (payment mode, prePay or postPay), HideFreeCost (whether to hide zero-amount transactions, 0 or 1), and OrderByCost (sorting rule by fees, desc or asc).
+	Conditions *Conditions `json:"Conditions,omitnil,omitempty" name:"Conditions"`
+}
+
+func (r *DescribeCostSummaryByResourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCostSummaryByResourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "BeginTime")
+	delete(f, "EndTime")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "PayerUin")
+	delete(f, "NeedRecordNum")
+	delete(f, "NeedConditionValue")
+	delete(f, "Conditions")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCostSummaryByResourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCostSummaryByResourceResponseParams struct {
+	// Data readiness, 0 for not ready, 1 for ready
+	Ready *uint64 `json:"Ready,omitnil,omitempty" name:"Ready"`
+
+	// Consumption detailsNote: This field may return null, indicating that no valid values can be obtained.
+	Total *ConsumptionSummaryTotal `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Filter criteria
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ConditionValue *ConsumptionResourceSummaryConditionValue `json:"ConditionValue,omitnil,omitempty" name:"ConditionValue"`
+
+	// Record countNote: This field may return null, indicating that no valid values can be obtained.
+	RecordNum *uint64 `json:"RecordNum,omitnil,omitempty" name:"RecordNum"`
+
+	// Resource consumption detailsNote: This field may return null, indicating that no valid values can be obtained.
+	Data []*ConsumptionResourceSummaryDataItem `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCostSummaryByResourceResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCostSummaryByResourceResponseParams `json:"Response"`
+}
+
+func (r *DescribeCostSummaryByResourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCostSummaryByResourceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

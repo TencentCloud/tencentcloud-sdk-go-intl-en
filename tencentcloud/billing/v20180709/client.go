@@ -910,6 +910,57 @@ func (c *Client) DescribeBillSummaryForOrganizationWithContext(ctx context.Conte
     return
 }
 
+func NewDescribeCostDetailRequest() (request *DescribeCostDetailRequest) {
+    request = &DescribeCostDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeCostDetail")
+    
+    
+    return
+}
+
+func NewDescribeCostDetailResponse() (response *DescribeCostDetailResponse) {
+    response = &DescribeCostDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCostDetail
+// This API is used to query consumption details.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+func (c *Client) DescribeCostDetail(request *DescribeCostDetailRequest) (response *DescribeCostDetailResponse, err error) {
+    return c.DescribeCostDetailWithContext(context.Background(), request)
+}
+
+// DescribeCostDetail
+// This API is used to query consumption details.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+func (c *Client) DescribeCostDetailWithContext(ctx context.Context, request *DescribeCostDetailRequest) (response *DescribeCostDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeCostDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCostDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCostDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCostExplorerSummaryRequest() (request *DescribeCostExplorerSummaryRequest) {
     request = &DescribeCostExplorerSummaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -933,11 +984,8 @@ func NewDescribeCostExplorerSummaryResponse() (response *DescribeCostExplorerSum
 // This API is used to view cost analysis details.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
-//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 func (c *Client) DescribeCostExplorerSummary(request *DescribeCostExplorerSummaryRequest) (response *DescribeCostExplorerSummaryResponse, err error) {
     return c.DescribeCostExplorerSummaryWithContext(context.Background(), request)
 }
@@ -946,11 +994,8 @@ func (c *Client) DescribeCostExplorerSummary(request *DescribeCostExplorerSummar
 // This API is used to view cost analysis details.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_TAGKEYNOTEXIST = "FailedOperation.TagKeyNotExist"
-//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 func (c *Client) DescribeCostExplorerSummaryWithContext(ctx context.Context, request *DescribeCostExplorerSummaryRequest) (response *DescribeCostExplorerSummaryResponse, err error) {
     if request == nil {
         request = NewDescribeCostExplorerSummaryRequest()
@@ -963,6 +1008,202 @@ func (c *Client) DescribeCostExplorerSummaryWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDescribeCostExplorerSummaryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCostSummaryByProductRequest() (request *DescribeCostSummaryByProductRequest) {
+    request = &DescribeCostSummaryByProductRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeCostSummaryByProduct")
+    
+    
+    return
+}
+
+func NewDescribeCostSummaryByProductResponse() (response *DescribeCostSummaryByProductResponse) {
+    response = &DescribeCostSummaryByProductResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCostSummaryByProduct
+// This API is used to obtain consumption details summarized by product.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+func (c *Client) DescribeCostSummaryByProduct(request *DescribeCostSummaryByProductRequest) (response *DescribeCostSummaryByProductResponse, err error) {
+    return c.DescribeCostSummaryByProductWithContext(context.Background(), request)
+}
+
+// DescribeCostSummaryByProduct
+// This API is used to obtain consumption details summarized by product.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+func (c *Client) DescribeCostSummaryByProductWithContext(ctx context.Context, request *DescribeCostSummaryByProductRequest) (response *DescribeCostSummaryByProductResponse, err error) {
+    if request == nil {
+        request = NewDescribeCostSummaryByProductRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCostSummaryByProduct require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCostSummaryByProductResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCostSummaryByProjectRequest() (request *DescribeCostSummaryByProjectRequest) {
+    request = &DescribeCostSummaryByProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeCostSummaryByProject")
+    
+    
+    return
+}
+
+func NewDescribeCostSummaryByProjectResponse() (response *DescribeCostSummaryByProjectResponse) {
+    response = &DescribeCostSummaryByProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCostSummaryByProject
+// This API is used to obtain consumption details summarized by project.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+func (c *Client) DescribeCostSummaryByProject(request *DescribeCostSummaryByProjectRequest) (response *DescribeCostSummaryByProjectResponse, err error) {
+    return c.DescribeCostSummaryByProjectWithContext(context.Background(), request)
+}
+
+// DescribeCostSummaryByProject
+// This API is used to obtain consumption details summarized by project.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+func (c *Client) DescribeCostSummaryByProjectWithContext(ctx context.Context, request *DescribeCostSummaryByProjectRequest) (response *DescribeCostSummaryByProjectResponse, err error) {
+    if request == nil {
+        request = NewDescribeCostSummaryByProjectRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCostSummaryByProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCostSummaryByProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCostSummaryByRegionRequest() (request *DescribeCostSummaryByRegionRequest) {
+    request = &DescribeCostSummaryByRegionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeCostSummaryByRegion")
+    
+    
+    return
+}
+
+func NewDescribeCostSummaryByRegionResponse() (response *DescribeCostSummaryByRegionResponse) {
+    response = &DescribeCostSummaryByRegionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCostSummaryByRegion
+// This API is used to obtain consumption details summarized by region.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+func (c *Client) DescribeCostSummaryByRegion(request *DescribeCostSummaryByRegionRequest) (response *DescribeCostSummaryByRegionResponse, err error) {
+    return c.DescribeCostSummaryByRegionWithContext(context.Background(), request)
+}
+
+// DescribeCostSummaryByRegion
+// This API is used to obtain consumption details summarized by region.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+func (c *Client) DescribeCostSummaryByRegionWithContext(ctx context.Context, request *DescribeCostSummaryByRegionRequest) (response *DescribeCostSummaryByRegionResponse, err error) {
+    if request == nil {
+        request = NewDescribeCostSummaryByRegionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCostSummaryByRegion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCostSummaryByRegionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCostSummaryByResourceRequest() (request *DescribeCostSummaryByResourceRequest) {
+    request = &DescribeCostSummaryByResourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeCostSummaryByResource")
+    
+    
+    return
+}
+
+func NewDescribeCostSummaryByResourceResponse() (response *DescribeCostSummaryByResourceResponse) {
+    response = &DescribeCostSummaryByResourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCostSummaryByResource
+// This API is used to obtain consumption details summarized by resource.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+func (c *Client) DescribeCostSummaryByResource(request *DescribeCostSummaryByResourceRequest) (response *DescribeCostSummaryByResourceResponse, err error) {
+    return c.DescribeCostSummaryByResourceWithContext(context.Background(), request)
+}
+
+// DescribeCostSummaryByResource
+// This API is used to obtain consumption details summarized by resource.
+//
+// error code that may be returned:
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+func (c *Client) DescribeCostSummaryByResourceWithContext(ctx context.Context, request *DescribeCostSummaryByResourceRequest) (response *DescribeCostSummaryByResourceResponse, err error) {
+    if request == nil {
+        request = NewDescribeCostSummaryByResourceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCostSummaryByResource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCostSummaryByResourceResponse()
     err = c.Send(request, response)
     return
 }
