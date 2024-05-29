@@ -874,8 +874,13 @@ func NewCreateL4ProxyResponse() (response *CreateL4ProxyResponse) {
 //  INVALIDPARAMETER_PROXYNAMEDUPLICATING = "InvalidParameter.ProxyNameDuplicating"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCELERATEMAINLANDDISABLE = "OperationDenied.AccelerateMainlandDisable"
+//  OPERATIONDENIED_ACCELERATEMAINLANDIPV6CONFLICT = "OperationDenied.AccelerateMainlandIpv6Conflict"
 //  OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
+//  OPERATIONDENIED_IPV6ADVANCEDCONFLICT = "OperationDenied.Ipv6AdvancedConflict"
+//  OPERATIONDENIED_IPV6STATICIPCONFLICT = "OperationDenied.Ipv6StaticIpConflict"
 //  OPERATIONDENIED_L4LACKOFRESOURCES = "OperationDenied.L4LackOfResources"
+//  OPERATIONDENIED_MSGIPV6ADVANCEDCONFLICT = "OperationDenied.MsgIpv6AdvancedConflict"
+//  OPERATIONDENIED_STATICIPAREACONFLICT = "OperationDenied.StaticIpAreaConflict"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) CreateL4Proxy(request *CreateL4ProxyRequest) (response *CreateL4ProxyResponse, err error) {
     return c.CreateL4ProxyWithContext(context.Background(), request)
@@ -889,8 +894,13 @@ func (c *Client) CreateL4Proxy(request *CreateL4ProxyRequest) (response *CreateL
 //  INVALIDPARAMETER_PROXYNAMEDUPLICATING = "InvalidParameter.ProxyNameDuplicating"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_ACCELERATEMAINLANDDISABLE = "OperationDenied.AccelerateMainlandDisable"
+//  OPERATIONDENIED_ACCELERATEMAINLANDIPV6CONFLICT = "OperationDenied.AccelerateMainlandIpv6Conflict"
 //  OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
+//  OPERATIONDENIED_IPV6ADVANCEDCONFLICT = "OperationDenied.Ipv6AdvancedConflict"
+//  OPERATIONDENIED_IPV6STATICIPCONFLICT = "OperationDenied.Ipv6StaticIpConflict"
 //  OPERATIONDENIED_L4LACKOFRESOURCES = "OperationDenied.L4LackOfResources"
+//  OPERATIONDENIED_MSGIPV6ADVANCEDCONFLICT = "OperationDenied.MsgIpv6AdvancedConflict"
+//  OPERATIONDENIED_STATICIPAREACONFLICT = "OperationDenied.StaticIpAreaConflict"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 func (c *Client) CreateL4ProxyWithContext(ctx context.Context, request *CreateL4ProxyRequest) (response *CreateL4ProxyResponse, err error) {
     if request == nil {
@@ -1044,6 +1054,69 @@ func (c *Client) CreateOriginGroupWithContext(ctx context.Context, request *Crea
     request.SetContext(ctx)
     
     response = NewCreateOriginGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreatePlanRequest() (request *CreatePlanRequest) {
+    request = &CreatePlanRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "CreatePlan")
+    
+    
+    return
+}
+
+func NewCreatePlanResponse() (response *CreatePlanResponse) {
+    response = &CreatePlanResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreatePlan
+// If you need to use the EdgeOne product, you must create a billing plan through this interface.
+//
+// > After creating a plan, you need to complete the process of creating a site and binding the plan through [CreateZone](https://intl.cloud.tencent.com/document/product/1552/80719?from_cn_redirect=1), so that the EdgeOne can provide services properly.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSUFFICIENTACCOUNTBALANCE = "FailedOperation.InsufficientAccountBalance"
+//  INVALIDPARAMETER_INVALIDAUTOUSEVOUCHER = "InvalidParameter.InvalidAutoUseVoucher"
+//  INVALIDPARAMETER_INVALIDPERIOD = "InvalidParameter.InvalidPeriod"
+//  INVALIDPARAMETER_INVALIDPLANTYPE = "InvalidParameter.InvalidPlanType"
+//  INVALIDPARAMETER_INVALIDRENEWFLAG = "InvalidParameter.InvalidRenewFlag"
+//  OPERATIONDENIED_PLEASECONTACTBUSINESSPERSONNEL = "OperationDenied.PleaseContactBusinessPersonnel"
+func (c *Client) CreatePlan(request *CreatePlanRequest) (response *CreatePlanResponse, err error) {
+    return c.CreatePlanWithContext(context.Background(), request)
+}
+
+// CreatePlan
+// If you need to use the EdgeOne product, you must create a billing plan through this interface.
+//
+// > After creating a plan, you need to complete the process of creating a site and binding the plan through [CreateZone](https://intl.cloud.tencent.com/document/product/1552/80719?from_cn_redirect=1), so that the EdgeOne can provide services properly.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSUFFICIENTACCOUNTBALANCE = "FailedOperation.InsufficientAccountBalance"
+//  INVALIDPARAMETER_INVALIDAUTOUSEVOUCHER = "InvalidParameter.InvalidAutoUseVoucher"
+//  INVALIDPARAMETER_INVALIDPERIOD = "InvalidParameter.InvalidPeriod"
+//  INVALIDPARAMETER_INVALIDPLANTYPE = "InvalidParameter.InvalidPlanType"
+//  INVALIDPARAMETER_INVALIDRENEWFLAG = "InvalidParameter.InvalidRenewFlag"
+//  OPERATIONDENIED_PLEASECONTACTBUSINESSPERSONNEL = "OperationDenied.PleaseContactBusinessPersonnel"
+func (c *Client) CreatePlanWithContext(ctx context.Context, request *CreatePlanRequest) (response *CreatePlanResponse, err error) {
+    if request == nil {
+        request = NewCreatePlanRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreatePlan require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreatePlanResponse()
     err = c.Send(request, response)
     return
 }
@@ -4609,6 +4682,85 @@ func (c *Client) DescribeZonesWithContext(ctx context.Context, request *Describe
     return
 }
 
+func NewDestroyPlanRequest() (request *DestroyPlanRequest) {
+    request = &DestroyPlanRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DestroyPlan")
+    
+    
+    return
+}
+
+func NewDestroyPlanResponse() (response *DestroyPlanResponse) {
+    response = &DestroyPlanResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DestroyPlan
+// To stop billing for your EdgeOne plan, you can use this interface to terminate the billing plan.
+//
+// > Terminating a billing plan requires the following conditions:
+//
+//     1. The plan has expired (except for the Enterprise Edition Plan);
+//
+//     2. All sites under the plan have been either shut down or deleted.
+//
+// 
+//
+// > The site status can be queried through the [Query Site List](https://intl.cloud.tencent.com/document/product/1552/80713?from_cn_redirect=1) interface.
+//
+// A site can be deactivated by switching the site to a closed status through the [Switch Site Status](https://intl.cloud.tencent.com/document/product/1552/80707?from_cn_redirect=1) interface.
+//
+// A site can be deleted by using the [Delete Site](https://intl.cloud.tencent.com/document/product/1552/80717?from_cn_redirect=1) interface.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PLANNOTFOUND = "InvalidParameter.PlanNotFound"
+//  OPERATIONDENIED_DISABLEZONENOTCOMPLETED = "OperationDenied.DisableZoneNotCompleted"
+func (c *Client) DestroyPlan(request *DestroyPlanRequest) (response *DestroyPlanResponse, err error) {
+    return c.DestroyPlanWithContext(context.Background(), request)
+}
+
+// DestroyPlan
+// To stop billing for your EdgeOne plan, you can use this interface to terminate the billing plan.
+//
+// > Terminating a billing plan requires the following conditions:
+//
+//     1. The plan has expired (except for the Enterprise Edition Plan);
+//
+//     2. All sites under the plan have been either shut down or deleted.
+//
+// 
+//
+// > The site status can be queried through the [Query Site List](https://intl.cloud.tencent.com/document/product/1552/80713?from_cn_redirect=1) interface.
+//
+// A site can be deactivated by switching the site to a closed status through the [Switch Site Status](https://intl.cloud.tencent.com/document/product/1552/80707?from_cn_redirect=1) interface.
+//
+// A site can be deleted by using the [Delete Site](https://intl.cloud.tencent.com/document/product/1552/80717?from_cn_redirect=1) interface.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PLANNOTFOUND = "InvalidParameter.PlanNotFound"
+//  OPERATIONDENIED_DISABLEZONENOTCOMPLETED = "OperationDenied.DisableZoneNotCompleted"
+func (c *Client) DestroyPlanWithContext(ctx context.Context, request *DestroyPlanRequest) (response *DestroyPlanResponse, err error) {
+    if request == nil {
+        request = NewDestroyPlanRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DestroyPlan require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDestroyPlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDownloadL4LogsRequest() (request *DownloadL4LogsRequest) {
     request = &DownloadL4LogsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4760,6 +4912,69 @@ func (c *Client) IdentifyZoneWithContext(ctx context.Context, request *IdentifyZ
     request.SetContext(ctx)
     
     response = NewIdentifyZoneResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewIncreasePlanQuotaRequest() (request *IncreasePlanQuotaRequest) {
+    request = &IncreasePlanQuotaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "IncreasePlanQuota")
+    
+    
+    return
+}
+
+func NewIncreasePlanQuotaResponse() (response *IncreasePlanQuotaResponse) {
+    response = &IncreasePlanQuotaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// IncreasePlanQuota
+// When the number of sites bound to your plan, the number of rules under "Web Protection - Custom Rules - Precision Matching Policy", or the number of rules under "Web Protection - Rate Limiting - Precision Rate Limiting Module" reaches the plan's quota, you can use this interface to purchase additional quotas.
+//
+// > This interface only supports the Enterprise Edition Plan.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSUFFICIENTACCOUNTBALANCE = "FailedOperation.InsufficientAccountBalance"
+//  INVALIDPARAMETER_INVALIDQUOTANUMBER = "InvalidParameter.InvalidQuotaNumber"
+//  INVALIDPARAMETER_INVALIDQUOTATYPE = "InvalidParameter.InvalidQuotaType"
+//  OPERATIONDENIED_PLANHASBEENISOLATED = "OperationDenied.PlanHasBeenIsolated"
+//  OPERATIONDENIED_PLANINCREASEPLANQUOTAUNSUPPORTED = "OperationDenied.PlanIncreasePlanQuotaUnsupported"
+//  OPERATIONDENIED_RESOURCEHASBEENLOCKED = "OperationDenied.ResourceHasBeenLocked"
+func (c *Client) IncreasePlanQuota(request *IncreasePlanQuotaRequest) (response *IncreasePlanQuotaResponse, err error) {
+    return c.IncreasePlanQuotaWithContext(context.Background(), request)
+}
+
+// IncreasePlanQuota
+// When the number of sites bound to your plan, the number of rules under "Web Protection - Custom Rules - Precision Matching Policy", or the number of rules under "Web Protection - Rate Limiting - Precision Rate Limiting Module" reaches the plan's quota, you can use this interface to purchase additional quotas.
+//
+// > This interface only supports the Enterprise Edition Plan.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSUFFICIENTACCOUNTBALANCE = "FailedOperation.InsufficientAccountBalance"
+//  INVALIDPARAMETER_INVALIDQUOTANUMBER = "InvalidParameter.InvalidQuotaNumber"
+//  INVALIDPARAMETER_INVALIDQUOTATYPE = "InvalidParameter.InvalidQuotaType"
+//  OPERATIONDENIED_PLANHASBEENISOLATED = "OperationDenied.PlanHasBeenIsolated"
+//  OPERATIONDENIED_PLANINCREASEPLANQUOTAUNSUPPORTED = "OperationDenied.PlanIncreasePlanQuotaUnsupported"
+//  OPERATIONDENIED_RESOURCEHASBEENLOCKED = "OperationDenied.ResourceHasBeenLocked"
+func (c *Client) IncreasePlanQuotaWithContext(ctx context.Context, request *IncreasePlanQuotaRequest) (response *IncreasePlanQuotaResponse, err error) {
+    if request == nil {
+        request = NewIncreasePlanQuotaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("IncreasePlanQuota require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewIncreasePlanQuotaResponse()
     err = c.Send(request, response)
     return
 }
@@ -5726,6 +5941,59 @@ func (c *Client) ModifyOriginGroupWithContext(ctx context.Context, request *Modi
     return
 }
 
+func NewModifyPlanRequest() (request *ModifyPlanRequest) {
+    request = &ModifyPlanRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyPlan")
+    
+    
+    return
+}
+
+func NewModifyPlanResponse() (response *ModifyPlanResponse) {
+    response = &ModifyPlanResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyPlan
+// Modify the plan settings. Currently, only the auto-renewal switch of prepaid plans can be modified.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PLANNOTFOUND = "InvalidParameter.PlanNotFound"
+//  OPERATIONDENIED_ENTERPRISEPLANAUTORENEWUNSUPPORTED = "OperationDenied.EnterprisePlanAutoRenewUnsupported"
+//  OPERATIONDENIED_PLANHASBEENISOLATED = "OperationDenied.PlanHasBeenIsolated"
+func (c *Client) ModifyPlan(request *ModifyPlanRequest) (response *ModifyPlanResponse, err error) {
+    return c.ModifyPlanWithContext(context.Background(), request)
+}
+
+// ModifyPlan
+// Modify the plan settings. Currently, only the auto-renewal switch of prepaid plans can be modified.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PLANNOTFOUND = "InvalidParameter.PlanNotFound"
+//  OPERATIONDENIED_ENTERPRISEPLANAUTORENEWUNSUPPORTED = "OperationDenied.EnterprisePlanAutoRenewUnsupported"
+//  OPERATIONDENIED_PLANHASBEENISOLATED = "OperationDenied.PlanHasBeenIsolated"
+func (c *Client) ModifyPlanWithContext(ctx context.Context, request *ModifyPlanRequest) (response *ModifyPlanResponse, err error) {
+    if request == nil {
+        request = NewModifyPlanRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyPlan require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyPlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyRealtimeLogDeliveryTaskRequest() (request *ModifyRealtimeLogDeliveryTaskRequest) {
     request = &ModifyRealtimeLogDeliveryTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5754,6 +6022,7 @@ func NewModifyRealtimeLogDeliveryTaskResponse() (response *ModifyRealtimeLogDeli
 //  INVALIDPARAMETER_INVALIDLOGFORMATFIELDDELIMITER = "InvalidParameter.InvalidLogFormatFieldDelimiter"
 //  INVALIDPARAMETER_INVALIDLOGFORMATFORMATTYPE = "InvalidParameter.InvalidLogFormatFormatType"
 //  INVALIDPARAMETER_INVALIDLOGFORMATRECORDDELIMITER = "InvalidParameter.InvalidLogFormatRecordDelimiter"
+//  LIMITEXCEEDED_CUSTOMLOGFIELDREGEXLIMITEXCEEDED = "LimitExceeded.CustomLogFieldRegexLimitExceeded"
 func (c *Client) ModifyRealtimeLogDeliveryTask(request *ModifyRealtimeLogDeliveryTaskRequest) (response *ModifyRealtimeLogDeliveryTaskResponse, err error) {
     return c.ModifyRealtimeLogDeliveryTaskWithContext(context.Background(), request)
 }
@@ -5767,6 +6036,7 @@ func (c *Client) ModifyRealtimeLogDeliveryTask(request *ModifyRealtimeLogDeliver
 //  INVALIDPARAMETER_INVALIDLOGFORMATFIELDDELIMITER = "InvalidParameter.InvalidLogFormatFieldDelimiter"
 //  INVALIDPARAMETER_INVALIDLOGFORMATFORMATTYPE = "InvalidParameter.InvalidLogFormatFormatType"
 //  INVALIDPARAMETER_INVALIDLOGFORMATRECORDDELIMITER = "InvalidParameter.InvalidLogFormatRecordDelimiter"
+//  LIMITEXCEEDED_CUSTOMLOGFIELDREGEXLIMITEXCEEDED = "LimitExceeded.CustomLogFieldRegexLimitExceeded"
 func (c *Client) ModifyRealtimeLogDeliveryTaskWithContext(ctx context.Context, request *ModifyRealtimeLogDeliveryTaskRequest) (response *ModifyRealtimeLogDeliveryTaskResponse, err error) {
     if request == nil {
         request = NewModifyRealtimeLogDeliveryTaskRequest()
@@ -6471,6 +6741,146 @@ func (c *Client) ModifyZoneStatusWithContext(ctx context.Context, request *Modif
     request.SetContext(ctx)
     
     response = NewModifyZoneStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRenewPlanRequest() (request *RenewPlanRequest) {
+    request = &RenewPlanRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "RenewPlan")
+    
+    
+    return
+}
+
+func NewRenewPlanResponse() (response *RenewPlanResponse) {
+    response = &RenewPlanResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RenewPlan
+// When your plan needs to be extended, you can use this interface to renew it. Plan renewal is only supported for the Personal, Basic, and Standard Editions.
+//
+// > For cost details, refer to [Plan Fees](https://intl.cloud.tencent.com/document/product/1552/94158?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSUFFICIENTACCOUNTBALANCE = "FailedOperation.InsufficientAccountBalance"
+//  INVALIDPARAMETER_INVALIDAUTOUSEVOUCHER = "InvalidParameter.InvalidAutoUseVoucher"
+//  INVALIDPARAMETER_INVALIDPERIOD = "InvalidParameter.InvalidPeriod"
+//  INVALIDPARAMETER_PLANNOTFOUND = "InvalidParameter.PlanNotFound"
+//  OPERATIONDENIED_ENTERPRISEPLANRENEWUNSUPPORTED = "OperationDenied.EnterprisePlanRenewUnsupported"
+//  OPERATIONDENIED_RESOURCEHASBEENLOCKED = "OperationDenied.ResourceHasBeenLocked"
+func (c *Client) RenewPlan(request *RenewPlanRequest) (response *RenewPlanResponse, err error) {
+    return c.RenewPlanWithContext(context.Background(), request)
+}
+
+// RenewPlan
+// When your plan needs to be extended, you can use this interface to renew it. Plan renewal is only supported for the Personal, Basic, and Standard Editions.
+//
+// > For cost details, refer to [Plan Fees](https://intl.cloud.tencent.com/document/product/1552/94158?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSUFFICIENTACCOUNTBALANCE = "FailedOperation.InsufficientAccountBalance"
+//  INVALIDPARAMETER_INVALIDAUTOUSEVOUCHER = "InvalidParameter.InvalidAutoUseVoucher"
+//  INVALIDPARAMETER_INVALIDPERIOD = "InvalidParameter.InvalidPeriod"
+//  INVALIDPARAMETER_PLANNOTFOUND = "InvalidParameter.PlanNotFound"
+//  OPERATIONDENIED_ENTERPRISEPLANRENEWUNSUPPORTED = "OperationDenied.EnterprisePlanRenewUnsupported"
+//  OPERATIONDENIED_RESOURCEHASBEENLOCKED = "OperationDenied.ResourceHasBeenLocked"
+func (c *Client) RenewPlanWithContext(ctx context.Context, request *RenewPlanRequest) (response *RenewPlanResponse, err error) {
+    if request == nil {
+        request = NewRenewPlanRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenewPlan require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenewPlanResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpgradePlanRequest() (request *UpgradePlanRequest) {
+    request = &UpgradePlanRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "UpgradePlan")
+    
+    
+    return
+}
+
+func NewUpgradePlanResponse() (response *UpgradePlanResponse) {
+    response = &UpgradePlanResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpgradePlan
+// When you need features available only in higher-tier plans, you can upgrade your plan through this interface. Upgrades are only supported for Personal and Basic Edition Plans.
+//
+// > For differences between EdgeOne billing plans, refer to [Comparison of EdgeOne Plans](https://intl.cloud.tencent.com/document/product/1552/94165?from_cn_redirect=1).
+//
+// For EdgeOne plan upgrade rules and pricing details, refer to [EdgeOne Plan Upgrade Guide](https://intl.cloud.tencent.com/document/product/1552/95291?from_cn_redirect=1).
+//
+// If your plan needs to upgrade to the Enterprise Edition, [Contact Us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSUFFICIENTACCOUNTBALANCE = "FailedOperation.InsufficientAccountBalance"
+//  INVALIDPARAMETER_INVALIDAUTOUSEVOUCHER = "InvalidParameter.InvalidAutoUseVoucher"
+//  INVALIDPARAMETER_INVALIDPLANTYPE = "InvalidParameter.InvalidPlanType"
+//  INVALIDPARAMETER_PLANNOTFOUND = "InvalidParameter.PlanNotFound"
+//  OPERATIONDENIED_ENTERPRISEPLANUPGRADEUNSUPPORTED = "OperationDenied.EnterprisePlanUpgradeUnsupported"
+//  OPERATIONDENIED_PLANDOWNGRADENOTALLOWED = "OperationDenied.PlanDowngradeNotAllowed"
+//  OPERATIONDENIED_PLANHASBEENEXPIRED = "OperationDenied.PlanHasBeenExpired"
+//  OPERATIONDENIED_PLANHASBEENISOLATED = "OperationDenied.PlanHasBeenIsolated"
+//  OPERATIONDENIED_RESOURCEHASBEENLOCKED = "OperationDenied.ResourceHasBeenLocked"
+func (c *Client) UpgradePlan(request *UpgradePlanRequest) (response *UpgradePlanResponse, err error) {
+    return c.UpgradePlanWithContext(context.Background(), request)
+}
+
+// UpgradePlan
+// When you need features available only in higher-tier plans, you can upgrade your plan through this interface. Upgrades are only supported for Personal and Basic Edition Plans.
+//
+// > For differences between EdgeOne billing plans, refer to [Comparison of EdgeOne Plans](https://intl.cloud.tencent.com/document/product/1552/94165?from_cn_redirect=1).
+//
+// For EdgeOne plan upgrade rules and pricing details, refer to [EdgeOne Plan Upgrade Guide](https://intl.cloud.tencent.com/document/product/1552/95291?from_cn_redirect=1).
+//
+// If your plan needs to upgrade to the Enterprise Edition, [Contact Us](https://intl.cloud.tencent.com/online?from_cn_redirect=1-service).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INSUFFICIENTACCOUNTBALANCE = "FailedOperation.InsufficientAccountBalance"
+//  INVALIDPARAMETER_INVALIDAUTOUSEVOUCHER = "InvalidParameter.InvalidAutoUseVoucher"
+//  INVALIDPARAMETER_INVALIDPLANTYPE = "InvalidParameter.InvalidPlanType"
+//  INVALIDPARAMETER_PLANNOTFOUND = "InvalidParameter.PlanNotFound"
+//  OPERATIONDENIED_ENTERPRISEPLANUPGRADEUNSUPPORTED = "OperationDenied.EnterprisePlanUpgradeUnsupported"
+//  OPERATIONDENIED_PLANDOWNGRADENOTALLOWED = "OperationDenied.PlanDowngradeNotAllowed"
+//  OPERATIONDENIED_PLANHASBEENEXPIRED = "OperationDenied.PlanHasBeenExpired"
+//  OPERATIONDENIED_PLANHASBEENISOLATED = "OperationDenied.PlanHasBeenIsolated"
+//  OPERATIONDENIED_RESOURCEHASBEENLOCKED = "OperationDenied.ResourceHasBeenLocked"
+func (c *Client) UpgradePlanWithContext(ctx context.Context, request *UpgradePlanRequest) (response *UpgradePlanResponse, err error) {
+    if request == nil {
+        request = NewUpgradePlanRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpgradePlan require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpgradePlanResponse()
     err = c.Send(request, response)
     return
 }
