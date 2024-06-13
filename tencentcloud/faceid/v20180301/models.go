@@ -2378,10 +2378,6 @@ type NormalCardInfo struct {
 	// Macao ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MacaoIDCard *MacaoIDCard `json:"MacaoIDCard,omitnil,omitempty" name:"MacaoIDCard"`
-
-	// Mainland ID Card
-	// Note: This field may return null, indicating that no valid values can be obtained.
-	MainlandIDCard *MainlandIDCard `json:"MainlandIDCard,omitnil,omitempty" name:"MainlandIDCard"`
 }
 
 type NormalHKIDCard struct {
@@ -2757,15 +2753,33 @@ type PhilippinesVoteID struct {
 type SingaporeIDCard struct {
 	// Chinese name
 	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: ChName is deprecated.
 	ChName *string `json:"ChName,omitnil,omitempty" name:"ChName"`
+
+	// Chinese name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ChineseName *string `json:"ChineseName,omitnil,omitempty" name:"ChineseName"`
 
 	// English name
 	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: EnName is deprecated.
 	EnName *string `json:"EnName,omitnil,omitempty" name:"EnName"`
+
+	// English name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
 
 	// License number
 	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: ID is deprecated.
 	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// License number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
 
 	// Gender
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2773,7 +2787,13 @@ type SingaporeIDCard struct {
 
 	// Country of birth
 	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: CountryOfBirth is deprecated.
 	CountryOfBirth *string `json:"CountryOfBirth,omitnil,omitempty" name:"CountryOfBirth"`
+
+	// Nationality
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
 	// Birthday
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2783,7 +2803,7 @@ type SingaporeIDCard struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Address *string `json:"Address,omitnil,omitempty" name:"Address"`
 
-	// Nationality (on the back)
+	// Race (on the back)
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Race *string `json:"Race,omitnil,omitempty" name:"Race"`
 
