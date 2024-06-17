@@ -221,7 +221,7 @@ func NewDescribeBillDetailResponse() (response *DescribeBillDetailResponse) {
 }
 
 // DescribeBillDetail
-// This API is used to query the customer bill details.
+// This API is used to query bill details by customers.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -232,7 +232,7 @@ func (c *Client) DescribeBillDetail(request *DescribeBillDetailRequest) (respons
 }
 
 // DescribeBillDetail
-// This API is used to query the customer bill details.
+// This API is used to query bill details by customers.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -543,7 +543,7 @@ func NewDescribeCustomerBillDetailResponse() (response *DescribeCustomerBillDeta
 }
 
 // DescribeCustomerBillDetail
-// This API is used to query the customer bill details.
+// This API is used to query the customer bill details by resellers.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -555,7 +555,7 @@ func (c *Client) DescribeCustomerBillDetail(request *DescribeCustomerBillDetailR
 }
 
 // DescribeCustomerBillDetail
-// This API is used to query the customer bill details.
+// This API is used to query the customer bill details by resellers.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
