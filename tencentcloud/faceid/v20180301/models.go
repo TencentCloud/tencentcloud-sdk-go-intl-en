@@ -1632,14 +1632,14 @@ func (r *GetLivenessResultResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GetSdkVerificationResultRequestParams struct {
-	// The token used to identify an SDK-based verification process.
+	// The token used to identify an SDK-based verification process. 
 	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 }
 
 type GetSdkVerificationResultRequest struct {
 	*tchttp.BaseRequest
 	
-	// The token used to identify an SDK-based verification process.
+	// The token used to identify an SDK-based verification process. 
 	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 }
 
@@ -2378,6 +2378,10 @@ type NormalCardInfo struct {
 	// Macao ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MacaoIDCard *MacaoIDCard `json:"MacaoIDCard,omitnil,omitempty" name:"MacaoIDCard"`
+
+	// Mainland ID Card
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MainlandIDCard *MainlandIDCard `json:"MainlandIDCard,omitnil,omitempty" name:"MainlandIDCard"`
 }
 
 type NormalHKIDCard struct {
@@ -3040,7 +3044,7 @@ type WebVerificationConfigIntl struct {
 	// Whether to turn off document alarms, the default is false (the alarm detection function is turned on). When enabled, the identity authentication process will be intercepted based on the alarm status of the certificate. If you need to use the document authentication function, please contact us.
 	DisableCheckOcrWarnings *bool `json:"DisableCheckOcrWarnings,omitnil,omitempty" name:"DisableCheckOcrWarnings"`
 
-	// Liveness security level: 1:Silent mode;2:Action mode;3:Lighting mode;4:Action+Lighting mode;default value is 3
+	// Liveness security level: 1:Silent mode;2:Action mode;3:Lighting mode;4:Action+Lighting mode;5:Action+Lighting(High security) mode; default value is 3
 	SecurityLevel *int64 `json:"SecurityLevel,omitnil,omitempty" name:"SecurityLevel"`
 
 	// Whether to skip the agreement page, the default is false. When SkipPrivacyPolicy is false, the agreement page will be displayed and the privacy agreement needs to be checked; when SkipPrivacyPolicy is true, the agreement page will be skipped and the liveness process will be entered directly without checking the privacy agreement page.

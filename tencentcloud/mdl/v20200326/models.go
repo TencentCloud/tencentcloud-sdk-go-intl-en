@@ -75,6 +75,59 @@ type AVTemplate struct {
 	// `chs2eng`: Chinese speech to English text. 
 	// `chs2chseng`: Chinese speech to Chinese and English text.
 	SubtitleConfiguration *string `json:"SubtitleConfiguration,omitnil,omitempty" name:"SubtitleConfiguration"`
+
+	// Whether to enable the face blur function, 1 is on, 0 is off, and the default is 0.
+	FaceBlurringEnabled *uint64 `json:"FaceBlurringEnabled,omitnil,omitempty" name:"FaceBlurringEnabled"`
+
+	// Only AttachedInputs.AudioSelectors.Name can be selected. The following types need to be filled in: 'RTP_PUSH', 'SRT_PUSH', 'UDP_PUSH', 'RTP-FEC_PUSH'.
+	AudioSelectorName *string `json:"AudioSelectorName,omitnil,omitempty" name:"AudioSelectorName"`
+
+	// Audio transcoding special configuration information.
+	AudioNormalization *AudioNormalizationSettings `json:"AudioNormalization,omitnil,omitempty" name:"AudioNormalization"`
+
+	// Audio sampling rate, unit HZ.
+	AudioSampleRate *uint64 `json:"AudioSampleRate,omitnil,omitempty" name:"AudioSampleRate"`
+
+	// This field indicates how to specify the output video frame rate. If FOLLOW_SOURCE is selected, the output video frame rate will be set equal to the input video frame rate of the first input. If SPECIFIED_FRACTION is selected, the output video frame rate is determined by the fraction (frame rate numerator and frame rate denominator). If SPECIFIED_HZ is selected, the frame rate of the output video is determined by the HZ you enter.
+	FrameRateType *string `json:"FrameRateType,omitnil,omitempty" name:"FrameRateType"`
+
+	// Valid when the FrameRateType type you select is SPECIFIED_FRACTION, the output frame rate numerator setting.
+	FrameRateNumerator *uint64 `json:"FrameRateNumerator,omitnil,omitempty" name:"FrameRateNumerator"`
+
+	// Valid when the FrameRateType type you select is SPECIFIED_FRACTION, the output frame rate denominator setting.
+	FrameRateDenominator *uint64 `json:"FrameRateDenominator,omitnil,omitempty" name:"FrameRateDenominator"`
+
+	// The number of B frames can be selected from 1 to 3.
+	BFramesNum *uint64 `json:"BFramesNum,omitnil,omitempty" name:"BFramesNum"`
+
+	// The number of reference frames can be selected from 1 to 16.
+	RefFramesNum *uint64 `json:"RefFramesNum,omitnil,omitempty" name:"RefFramesNum"`
+
+	// Additional video bitrate configuration.
+	AdditionalRateSettings *AdditionalRateSetting `json:"AdditionalRateSettings,omitnil,omitempty" name:"AdditionalRateSettings"`
+
+	// Video encoding configuration.
+	VideoCodecDetails *VideoCodecDetail `json:"VideoCodecDetails,omitnil,omitempty" name:"VideoCodecDetails"`
+
+	// Audio encoding configuration.
+	AudioCodecDetails *AudioCodecDetail `json:"AudioCodecDetails,omitnil,omitempty" name:"AudioCodecDetails"`
+
+	// Whether to enable multiple audio tracks 0: Not required 1: Required Default value 0.
+	MultiAudioTrackEnabled *uint64 `json:"MultiAudioTrackEnabled,omitnil,omitempty" name:"MultiAudioTrackEnabled"`
+
+	// Quantity limit 0-20 Valid when MultiAudioTrackEnabled is turned on.
+	AudioTracks []*AudioTrackInfo `json:"AudioTracks,omitnil,omitempty" name:"AudioTracks"`
+}
+
+type AdditionalRateSetting struct {
+	// The maximum bit rate in a VBR scenario must be a multiple of 1000 and between 50000 - 40000000.
+	VideoMaxBitrate *uint64 `json:"VideoMaxBitrate,omitnil,omitempty" name:"VideoMaxBitrate"`
+
+	// Cache configuration supports configuring a Max Bitrate value of 1-4 times.
+	BufferSize *uint64 `json:"BufferSize,omitnil,omitempty" name:"BufferSize"`
+
+	// VBR scene is valid, video quality level, only supports user input numbers between 1-51.
+	QualityLevel *uint64 `json:"QualityLevel,omitnil,omitempty" name:"QualityLevel"`
 }
 
 type AttachedInput struct {
@@ -92,6 +145,22 @@ type AttachedInput struct {
 	// Input failover configuration
 	// Note: this field may return `null`, indicating that no valid value was found.
 	FailOverSettings *FailOverSettings `json:"FailOverSettings,omitnil,omitempty" name:"FailOverSettings"`
+}
+
+type AudioCodecDetail struct {
+	// Channel configuration, optional values: MONO (mono), STEREO (two-channel), 5.1 (surround).
+	ChannelMode *string `json:"ChannelMode,omitnil,omitempty" name:"ChannelMode"`
+
+	// Level in aac case, optional values: "LC" "HE-AAC" "HE-AACV2".
+	Profile *string `json:"Profile,omitnil,omitempty" name:"Profile"`
+}
+
+type AudioNormalizationSettings struct {
+
+	AudioNormalizationEnabled *uint64 `json:"AudioNormalizationEnabled,omitnil,omitempty" name:"AudioNormalizationEnabled"`
+
+
+	TargetLUFS *float64 `json:"TargetLUFS,omitnil,omitempty" name:"TargetLUFS"`
 }
 
 type AudioPidSelectionInfo struct {
@@ -116,6 +185,12 @@ type AudioSelectorInfo struct {
 
 	// Audio `Pid` selection.
 	AudioPidSelection *AudioPidSelectionInfo `json:"AudioPidSelection,omitnil,omitempty" name:"AudioPidSelection"`
+
+	// Audio input type, optional values: 'PID_SELECTOR' 'TRACK_SELECTOR', default value PID_SELECTOR.
+	AudioSelectorType *string `json:"AudioSelectorType,omitnil,omitempty" name:"AudioSelectorType"`
+
+	// AudioTrack configuration.
+	AudioTrackSelection *InputTracks `json:"AudioTrackSelection,omitnil,omitempty" name:"AudioTrackSelection"`
 }
 
 type AudioTemplateInfo struct {
@@ -134,6 +209,35 @@ type AudioTemplateInfo struct {
 
 	// Audio language code, whose length is always 3 characters.
 	LanguageCode *string `json:"LanguageCode,omitnil,omitempty" name:"LanguageCode"`
+
+	// Audio transcoding special configuration information.
+	AudioNormalization *AudioNormalizationSettings `json:"AudioNormalization,omitnil,omitempty" name:"AudioNormalization"`
+
+	// Audio sampling rate, unit HZ.
+	AudioSampleRate *uint64 `json:"AudioSampleRate,omitnil,omitempty" name:"AudioSampleRate"`
+
+	// Audio encoding parameters.
+	AudioCodecDetails *AudioCodecDetail `json:"AudioCodecDetails,omitnil,omitempty" name:"AudioCodecDetails"`
+}
+
+type AudioTrackInfo struct {
+	// User input is limited to letters and numbers, the length should not exceed 20, and should not be repeated in the same channel.
+	TrackName *string `json:"TrackName,omitnil,omitempty" name:"TrackName"`
+
+	// Only AAC is supported.
+	AudioCodec *string `json:"AudioCodec,omitnil,omitempty" name:"AudioCodec"`
+
+	// Audio bitrate.
+	AudioBitrate *uint64 `json:"AudioBitrate,omitnil,omitempty" name:"AudioBitrate"`
+
+	// Audio sample rate.
+	AudioSampleRate *uint64 `json:"AudioSampleRate,omitnil,omitempty" name:"AudioSampleRate"`
+
+	// Only values defined by AttachedInputs.$.AudioSelectors.$.audioPidSelection.pid can be entered.
+	AudioSelectorName *string `json:"AudioSelectorName,omitnil,omitempty" name:"AudioSelectorName"`
+
+	// Audio loudness configuration.
+	AudioNormalization *AudioNormalizationSettings `json:"AudioNormalization,omitnil,omitempty" name:"AudioNormalization"`
 }
 
 type ChannelAlertInfos struct {
@@ -302,7 +406,7 @@ type CreateStreamLiveChannelResponseParams struct {
 	// Channel ID
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -384,7 +488,7 @@ type CreateStreamLiveInputResponseParams struct {
 	// Input ID
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -448,7 +552,7 @@ type CreateStreamLiveInputSecurityGroupResponseParams struct {
 	// Security group ID
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -509,7 +613,7 @@ func (r *CreateStreamLivePlanRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateStreamLivePlanResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -587,7 +691,7 @@ type CreateStreamLiveWatermarkResponseParams struct {
 	// Watermark ID
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -675,7 +779,7 @@ func (r *DeleteStreamLiveChannelRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteStreamLiveChannelResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -729,7 +833,7 @@ func (r *DeleteStreamLiveInputRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteStreamLiveInputResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -783,7 +887,7 @@ func (r *DeleteStreamLiveInputSecurityGroupRequest) FromJsonString(s string) err
 
 // Predefined struct for user
 type DeleteStreamLiveInputSecurityGroupResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -844,7 +948,7 @@ func (r *DeleteStreamLivePlanRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteStreamLivePlanResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -898,7 +1002,7 @@ func (r *DeleteStreamLiveWatermarkRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteStreamLiveWatermarkResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -986,7 +1090,7 @@ type DescribeStreamLiveChannelAlertsResponseParams struct {
 	// Alarm information of the channel’s two pipelines
 	Infos *ChannelAlertInfos `json:"Infos,omitnil,omitempty" name:"Infos"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1068,7 +1172,7 @@ type DescribeStreamLiveChannelInputStatisticsResponseParams struct {
 	// Channel input statistics
 	Infos []*ChannelInputStatistics `json:"Infos,omitnil,omitempty" name:"Infos"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1143,7 +1247,7 @@ type DescribeStreamLiveChannelLogsResponseParams struct {
 	// Pipeline push information
 	Infos *PipelineLogInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1225,7 +1329,7 @@ type DescribeStreamLiveChannelOutputStatisticsResponseParams struct {
 	// Channel output information
 	Infos []*ChannelOutputsStatistics `json:"Infos,omitnil,omitempty" name:"Infos"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1282,7 +1386,7 @@ type DescribeStreamLiveChannelResponseParams struct {
 	// Channel information
 	Info *StreamLiveChannelInfo `json:"Info,omitnil,omitempty" name:"Info"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1337,7 +1441,7 @@ type DescribeStreamLiveChannelsResponseParams struct {
 	// Note: this field may return `null`, indicating that no valid value was found.
 	Infos []*StreamLiveChannelInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1394,7 +1498,7 @@ type DescribeStreamLiveInputResponseParams struct {
 	// Input information
 	Info *InputInfo `json:"Info,omitnil,omitempty" name:"Info"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1451,7 +1555,7 @@ type DescribeStreamLiveInputSecurityGroupResponseParams struct {
 	// Input security group information
 	Info *InputSecurityGroupInfo `json:"Info,omitnil,omitempty" name:"Info"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1505,7 +1609,7 @@ type DescribeStreamLiveInputSecurityGroupsResponseParams struct {
 	// List of input security group information
 	Infos []*InputSecurityGroupInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1560,7 +1664,7 @@ type DescribeStreamLiveInputsResponseParams struct {
 	// Note: this field may return `null`, indicating that no valid value was found.
 	Infos []*InputInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1618,7 +1722,7 @@ type DescribeStreamLivePlansResponseParams struct {
 	// Note: this field may return `null`, indicating that no valid value was found.
 	Infos []*PlanResp `json:"Infos,omitnil,omitempty" name:"Infos"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1672,7 +1776,7 @@ type DescribeStreamLiveRegionsResponseParams struct {
 	// StreamLive region information
 	Info *StreamLiveRegionInfo `json:"Info,omitnil,omitempty" name:"Info"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1777,7 +1881,7 @@ type DescribeStreamLiveTranscodeDetailResponseParams struct {
 	// The total number of pages.
 	TotalPage *int64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1834,7 +1938,7 @@ type DescribeStreamLiveWatermarkResponseParams struct {
 	// Watermark information
 	Info *DescribeWatermarkInfo `json:"Info,omitnil,omitempty" name:"Info"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1888,7 +1992,7 @@ type DescribeStreamLiveWatermarksResponseParams struct {
 	// List of watermark information
 	Infos []*DescribeWatermarkInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2301,6 +2405,16 @@ type InputStreamInfo struct {
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
+type InputTrack struct {
+	// Audio track index 1-based index mapping to the specified audio track integer starting from 1.
+	TrackIndex *uint64 `json:"TrackIndex,omitnil,omitempty" name:"TrackIndex"`
+}
+
+type InputTracks struct {
+	// Audio track configuration information.
+	Tracks []*InputTrack `json:"Tracks,omitnil,omitempty" name:"Tracks"`
+}
+
 type LogInfo struct {
 	// Log type.
 	// It contains the value of `StreamStart` which refers to the push information.
@@ -2423,7 +2537,7 @@ func (r *ModifyStreamLiveChannelRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyStreamLiveChannelResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2504,7 +2618,7 @@ func (r *ModifyStreamLiveInputRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyStreamLiveInputResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2572,7 +2686,7 @@ func (r *ModifyStreamLiveInputSecurityGroupRequest) FromJsonString(s string) err
 
 // Predefined struct for user
 type ModifyStreamLiveInputSecurityGroupResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2647,7 +2761,7 @@ func (r *ModifyStreamLiveWatermarkRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyStreamLiveWatermarkResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2828,7 +2942,7 @@ type QueryInputStreamStateResponseParams struct {
 	// The information of the StreamLive input queried.
 	Info *QueryDispatchInputInfo `json:"Info,omitnil,omitempty" name:"Info"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2989,7 +3103,7 @@ func (r *StartStreamLiveChannelRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartStreamLiveChannelResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3043,7 +3157,7 @@ func (r *StopStreamLiveChannelRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StopStreamLiveChannelResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3284,6 +3398,23 @@ type TimingSettingsResp struct {
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
+type VideoCodecDetail struct {
+	// The three image quality levels of h264 include: BASELINE, HIGH, and MAIN. The default option is MAIN.
+	Profile *string `json:"Profile,omitnil,omitempty" name:"Profile"`
+
+	// Profile corresponding codec performance, options include: 1, 1.1, 1.2, 1.3, 2, 2.1, 2.2, 2.3, 3, 3.1, 3.2, 4, 4.1, 4.2, 5, 5.1, AUTO. The default option is AUTO.
+	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
+
+	// Codecs include entropy coding and lossless coding, and options include: CABAC and CAVLC. The default option is CABAC. .
+	EntropyEncoding *string `json:"EntropyEncoding,omitnil,omitempty" name:"EntropyEncoding"`
+
+	// Mode, options include: AUTO, HIGH, HIGHER, LOW, MAX, MEDIUM, OFF. The default option is: AUTO. .
+	AdaptiveQuantization *string `json:"AdaptiveQuantization,omitnil,omitempty" name:"AdaptiveQuantization"`
+
+	// Analyze subsequent encoded frames in advance, options include: HIGH, LOW, MEDIUM. The default option is: MEDIUM. .
+	LookAheadRateControl *string `json:"LookAheadRateControl,omitnil,omitempty" name:"LookAheadRateControl"`
+}
+
 type VideoPipelineInputStatistics struct {
 	// Video FPS.
 	Fps *uint64 `json:"Fps,omitnil,omitempty" name:"Fps"`
@@ -3326,4 +3457,28 @@ type VideoTemplateInfo struct {
 	// Watermark ID
 	// Note: This field may return `null`, indicating that no valid value was found.
 	WatermarkId *string `json:"WatermarkId,omitnil,omitempty" name:"WatermarkId"`
+
+	// Whether to enable the face blur function, 1 is on, 0 is off, and the default is 0.
+	FaceBlurringEnabled *uint64 `json:"FaceBlurringEnabled,omitnil,omitempty" name:"FaceBlurringEnabled"`
+
+	// This field indicates how to specify the output video frame rate. If FOLLOW_SOURCE is selected, the output video frame rate will be set equal to the input video frame rate of the first input. If SPECIFIED_FRACTION is selected, the output video frame rate is determined by the fraction (frame rate numerator and frame rate denominator). If SPECIFIED_HZ is selected, the frame rate of the output video is determined by the HZ you enter.
+	FrameRateType *string `json:"FrameRateType,omitnil,omitempty" name:"FrameRateType"`
+
+	// Valid when the FrameRateType type you select is SPECIFIED_FRACTION, the output frame rate numerator setting.
+	FrameRateNumerator *uint64 `json:"FrameRateNumerator,omitnil,omitempty" name:"FrameRateNumerator"`
+
+	// Valid when the FrameRateType type you select is SPECIFIED_FRACTION, the output frame rate denominator setting.
+	FrameRateDenominator *uint64 `json:"FrameRateDenominator,omitnil,omitempty" name:"FrameRateDenominator"`
+
+	// The number of B frames can be selected from 1 to 3.
+	BFramesNum *uint64 `json:"BFramesNum,omitnil,omitempty" name:"BFramesNum"`
+
+	// The number of reference frames can be selected from 1 to 16.
+	RefFramesNum *uint64 `json:"RefFramesNum,omitnil,omitempty" name:"RefFramesNum"`
+
+	// Additional video bitrate configuration.
+	AdditionalRateSettings *AdditionalRateSetting `json:"AdditionalRateSettings,omitnil,omitempty" name:"AdditionalRateSettings"`
+
+	// Video encoding configuration.
+	VideoCodecDetails *VideoCodecDetail `json:"VideoCodecDetails,omitnil,omitempty" name:"VideoCodecDetails"`
 }
