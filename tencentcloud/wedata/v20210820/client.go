@@ -1933,6 +1933,55 @@ func (c *Client) CreateTaskAlarmRegularWithContext(ctx context.Context, request 
     return
 }
 
+func NewCreateTaskFolderRequest() (request *CreateTaskFolderRequest) {
+    request = &CreateTaskFolderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "CreateTaskFolder")
+    
+    
+    return
+}
+
+func NewCreateTaskFolderResponse() (response *CreateTaskFolderResponse) {
+    response = &CreateTaskFolderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateTaskFolder
+// Orchestration Space - Workflow - Create Task Folder
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateTaskFolder(request *CreateTaskFolderRequest) (response *CreateTaskFolderResponse, err error) {
+    return c.CreateTaskFolderWithContext(context.Background(), request)
+}
+
+// CreateTaskFolder
+// Orchestration Space - Workflow - Create Task Folder
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateTaskFolderWithContext(ctx context.Context, request *CreateTaskFolderRequest) (response *CreateTaskFolderResponse, err error) {
+    if request == nil {
+        request = NewCreateTaskFolderRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTaskFolder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateTaskFolderResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateTaskVersionDsRequest() (request *CreateTaskVersionDsRequest) {
     request = &CreateTaskVersionDsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -8872,7 +8921,7 @@ func NewDiagnoseProResponse() (response *DiagnoseProResponse) {
 }
 
 // DiagnosePro
-// Instance Diagnosis
+// Instance diagnosis for diagnosing instances in INITIAL, DEPENDENCE, ALLOCATED, LAUNCHED, EVENT_LISTENING, BEFORE_ASPECT, EXPIRED, FAILED states
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -8881,7 +8930,7 @@ func (c *Client) DiagnosePro(request *DiagnoseProRequest) (response *DiagnosePro
 }
 
 // DiagnosePro
-// Instance Diagnosis
+// Instance diagnosis for diagnosing instances in INITIAL, DEPENDENCE, ALLOCATED, LAUNCHED, EVENT_LISTENING, BEFORE_ASPECT, EXPIRED, FAILED states
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -10611,6 +10660,55 @@ func (c *Client) ModifyWorkflowScheduleWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewModifyWorkflowScheduleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewMoveTasksToFolderRequest() (request *MoveTasksToFolderRequest) {
+    request = &MoveTasksToFolderRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "MoveTasksToFolder")
+    
+    
+    return
+}
+
+func NewMoveTasksToFolderResponse() (response *MoveTasksToFolderResponse) {
+    response = &MoveTasksToFolderResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// MoveTasksToFolder
+// Orchestration Space - Workflow - Move Task to Workflow Folder
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) MoveTasksToFolder(request *MoveTasksToFolderRequest) (response *MoveTasksToFolderResponse, err error) {
+    return c.MoveTasksToFolderWithContext(context.Background(), request)
+}
+
+// MoveTasksToFolder
+// Orchestration Space - Workflow - Move Task to Workflow Folder
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) MoveTasksToFolderWithContext(ctx context.Context, request *MoveTasksToFolderRequest) (response *MoveTasksToFolderResponse, err error) {
+    if request == nil {
+        request = NewMoveTasksToFolderRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("MoveTasksToFolder require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewMoveTasksToFolderResponse()
     err = c.Send(request, response)
     return
 }
