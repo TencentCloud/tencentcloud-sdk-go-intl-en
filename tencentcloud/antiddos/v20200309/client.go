@@ -2099,6 +2099,10 @@ func NewDescribeBlackWhiteIpListResponse() (response *DescribeBlackWhiteIpListRe
 }
 
 // DescribeBlackWhiteIpList
+// 接口变更
+//
+// 
+//
 // This API is used to get an Anti-DDoS IP blocklist/allowlist.
 //
 // error code that may be returned:
@@ -2124,6 +2128,10 @@ func (c *Client) DescribeBlackWhiteIpList(request *DescribeBlackWhiteIpListReque
 }
 
 // DescribeBlackWhiteIpList
+// 接口变更
+//
+// 
+//
 // This API is used to get an Anti-DDoS IP blocklist/allowlist.
 //
 // error code that may be returned:
@@ -3301,6 +3309,10 @@ func NewDescribeListProtectThresholdConfigResponse() (response *DescribeListProt
 }
 
 // DescribeListProtectThresholdConfig
+// 接口变更
+//
+// 
+//
 // This API is used to get a list of protection threshold configurations for AI protection switch, protection level, and CC threshold switch.
 //
 // error code that may be returned:
@@ -3310,6 +3322,10 @@ func (c *Client) DescribeListProtectThresholdConfig(request *DescribeListProtect
 }
 
 // DescribeListProtectThresholdConfig
+// 接口变更
+//
+// 
+//
 // This API is used to get a list of protection threshold configurations for AI protection switch, protection level, and CC threshold switch.
 //
 // error code that may be returned:
