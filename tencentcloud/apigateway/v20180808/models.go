@@ -8639,10 +8639,10 @@ type ServicesStatus struct {
 }
 
 type Tag struct {
-	// Tag key.
+	// Tag key
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Tag value.
+	// Tag value
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
