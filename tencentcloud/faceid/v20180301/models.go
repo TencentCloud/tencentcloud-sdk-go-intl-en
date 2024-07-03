@@ -3056,7 +3056,7 @@ type WebVerificationConfigIntl struct {
 	// Front-end theme color, in the format of RGB hexadecimal color code. The default value is "#2d72+1". If the format is incorrect, the default value color will be used.
 	ThemeColor *string `json:"ThemeColor,omitnil,omitempty" name:"ThemeColor"`
 
-	// International language, the default value is en (English). Currently supported: th: Thai; en: English;
+	// International language, the default value is en (English). Currently supported: th: Thai; en: English; zh-cn: Simplified Chinese; zh-tc: Tradionnal Chinese; id: Bahasa Indonesia.
 	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
 
 	// Automatic downgrade mode, with the following parameter values: 1: Downgrade to silent live mode; 2: Disable downgrade mode. The default value is 1.
