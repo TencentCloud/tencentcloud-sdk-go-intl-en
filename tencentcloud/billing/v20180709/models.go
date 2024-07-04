@@ -1113,6 +1113,9 @@ type ConsumptionResourceSummaryDataItem struct {
 
 	// Configuration descriptionNote: This field may return null, indicating that no valid values can be obtained.
 	ComponentConfig *string `json:"ComponentConfig,omitnil,omitempty" name:"ComponentConfig"`
+
+	// Tag information.Note: This field may return null, indicating that no valid values can be obtained.
+	Tags *string `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type ConsumptionSummaryTotal struct {
