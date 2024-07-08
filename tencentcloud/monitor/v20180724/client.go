@@ -3618,9 +3618,10 @@ func NewDescribeClusterAgentCreatingProgressResponse() (response *DescribeCluste
 }
 
 // DescribeClusterAgentCreatingProgress
-// This API is used to u200dobtain the binding status between the TencentCloud Managed Service for Prometheus instance and the TKE cluster.
+// This API is used to obtain the binding status between the TencentCloud Managed Service for Prometheus instance and the TKE cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) DescribeClusterAgentCreatingProgress(request *DescribeClusterAgentCreatingProgressRequest) (response *DescribeClusterAgentCreatingProgressResponse, err error) {
@@ -3628,9 +3629,10 @@ func (c *Client) DescribeClusterAgentCreatingProgress(request *DescribeClusterAg
 }
 
 // DescribeClusterAgentCreatingProgress
-// This API is used to u200dobtain the binding status between the TencentCloud Managed Service for Prometheus instance and the TKE cluster.
+// This API is used to obtain the binding status between the TencentCloud Managed Service for Prometheus instance and the TKE cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_DOTRPCTRANSFERFAILED = "FailedOperation.DoTRPCTransferFailed"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
 func (c *Client) DescribeClusterAgentCreatingProgressWithContext(ctx context.Context, request *DescribeClusterAgentCreatingProgressRequest) (response *DescribeClusterAgentCreatingProgressResponse, err error) {

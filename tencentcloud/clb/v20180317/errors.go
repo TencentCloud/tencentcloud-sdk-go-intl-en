@@ -29,6 +29,9 @@ const (
 	// Exceptional CLB instance status
 	FAILEDOPERATION_INVALIDLBSTATUS = "FailedOperation.InvalidLBStatus"
 
+	// 
+	FAILEDOPERATION_RESOURCEINOPERATING = "FailedOperation.ResourceInOperating"
+
 	// Internal error.
 	INTERNALERROR = "InternalError"
 

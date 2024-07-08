@@ -440,7 +440,7 @@ func NewCloneLoadBalancerResponse() (response *CloneLoadBalancerResponse) {
 //
 //   CLB instances without any billable items cannot be cloned.
 //
-//   Classic CLB instances and CLB u200dinstances created for Anti-DDoS service cannot be cloned.
+//   Classic CLB instances and CLB instances created for Anti-DDoS service cannot be cloned.
 //
 //   Classic network-based instances cannot be cloned.
 //
@@ -458,7 +458,7 @@ func NewCloneLoadBalancerResponse() (response *CloneLoadBalancerResponse) {
 //
 //   Instances with layer-7 listeners that have no forwarding rules cannot be cloned.
 //
-//   u200dInstances u200dwith more than 50 listeners cannot be cloned. 
+//   Instances with more than 50 listeners cannot be cloned. 
 //
 // Backend service restrictions
 //
@@ -479,6 +479,7 @@ func NewCloneLoadBalancerResponse() (response *CloneLoadBalancerResponse) {
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDLBSTATUS = "FailedOperation.InvalidLBStatus"
+//  FAILEDOPERATION_RESOURCEINOPERATING = "FailedOperation.ResourceInOperating"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
@@ -512,7 +513,7 @@ func (c *Client) CloneLoadBalancer(request *CloneLoadBalancerRequest) (response 
 //
 //   CLB instances without any billable items cannot be cloned.
 //
-//   Classic CLB instances and CLB u200dinstances created for Anti-DDoS service cannot be cloned.
+//   Classic CLB instances and CLB instances created for Anti-DDoS service cannot be cloned.
 //
 //   Classic network-based instances cannot be cloned.
 //
@@ -530,7 +531,7 @@ func (c *Client) CloneLoadBalancer(request *CloneLoadBalancerRequest) (response 
 //
 //   Instances with layer-7 listeners that have no forwarding rules cannot be cloned.
 //
-//   u200dInstances u200dwith more than 50 listeners cannot be cloned. 
+//   Instances with more than 50 listeners cannot be cloned. 
 //
 // Backend service restrictions
 //
@@ -551,6 +552,7 @@ func (c *Client) CloneLoadBalancer(request *CloneLoadBalancerRequest) (response 
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_INVALIDLBSTATUS = "FailedOperation.InvalidLBStatus"
+//  FAILEDOPERATION_RESOURCEINOPERATING = "FailedOperation.ResourceInOperating"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
@@ -674,6 +676,7 @@ func NewCreateListenerResponse() (response *CreateListenerResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCEINOPERATING = "FailedOperation.ResourceInOperating"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
@@ -695,6 +698,7 @@ func (c *Client) CreateListener(request *CreateListenerRequest) (response *Creat
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RESOURCEINOPERATING = "FailedOperation.ResourceInOperating"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"

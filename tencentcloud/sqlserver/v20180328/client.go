@@ -3556,13 +3556,14 @@ func NewModifyDBEncryptAttributesResponse() (response *ModifyDBEncryptAttributes
 }
 
 // ModifyDBEncryptAttributes
-// This API is used to u200denable or disable TDE of a database.
+// This API is used to enable or disable TDE of a database.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
 //  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
 //  FAILEDOPERATION_NOTSUPPORT = "FailedOperation.NotSupport"
 //  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 //  RESOURCENOTFOUND_PARAMSNOTFOUND = "ResourceNotFound.ParamsNotFound"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSINVALID = "ResourceUnavailable.InstanceStatusInvalid"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
@@ -3573,13 +3574,14 @@ func (c *Client) ModifyDBEncryptAttributes(request *ModifyDBEncryptAttributesReq
 }
 
 // ModifyDBEncryptAttributes
-// This API is used to u200denable or disable TDE of a database.
+// This API is used to enable or disable TDE of a database.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DBERROR = "FailedOperation.DBError"
 //  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
 //  FAILEDOPERATION_NOTSUPPORT = "FailedOperation.NotSupport"
 //  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
 //  RESOURCENOTFOUND_PARAMSNOTFOUND = "ResourceNotFound.ParamsNotFound"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSINVALID = "ResourceUnavailable.InstanceStatusInvalid"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"

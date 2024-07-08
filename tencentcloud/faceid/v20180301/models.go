@@ -773,6 +773,9 @@ type CardVerifyResult struct {
 	// -9108 Alarm for blurry image,
 	// -9109 This capability is not enabled.
 	WarnCardInfos []*int64 `json:"WarnCardInfos,omitnil,omitempty" name:"WarnCardInfos"`
+
+	// Details of the OCR modifications for this EKYC card, when the user manually modifies the card recognition results (IsEdit=true), EditDetails will return the modified fields. When IsEdit=false, EditDetails is empty.
+	EditDetails []*EditDetail `json:"EditDetails,omitnil,omitempty" name:"EditDetails"`
 }
 
 // Predefined struct for user
@@ -1123,6 +1126,17 @@ func (r *DetectReflectLivenessAndCompareResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DetectReflectLivenessAndCompareResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type EditDetail struct {
+	// Modified Field Name
+	FieldName *string `json:"FieldName,omitnil,omitempty" name:"FieldName"`
+
+	// Value of the field before modification, the original OCR result
+	OriginalFieldValue *string `json:"OriginalFieldValue,omitnil,omitempty" name:"OriginalFieldValue"`
+
+	// Value of the field after modification,the user's manually entered result
+	RevisedFieldValue *string `json:"RevisedFieldValue,omitnil,omitempty" name:"RevisedFieldValue"`
 }
 
 type FileInfo struct {
@@ -1738,23 +1752,23 @@ func (r *GetWebVerificationResultIntlRequest) FromJsonString(s string) error {
 type GetWebVerificationResultIntlResponseParams struct {
 	// The final result of this verification. `0` indicates that the person is the same as that in the photo.
 	// For other error codes, see <a href="https://www.tencentcloud.com/document/product/1061/55390?lang=en&pg=#8a960e1e-39c0-42cb-b181-b3164d77f81e">Liveness Detection and Face Comparison (Mobile HTML5) Error Codes</a>
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
 	// The description of the final verification result.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErrorMsg *string `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
 
 	// The detailed verification result list of this process. Retries are allowed, so a verification process may have several entries of results.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	VerificationDetailList []*VerificationDetail `json:"VerificationDetailList,omitnil,omitempty" name:"VerificationDetailList"`
 
 	// The Base64-encoded string of the video collected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no video is collected, null is returned.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	VideoBase64 *string `json:"VideoBase64,omitnil,omitempty" name:"VideoBase64"`
 
-	// The Base64-encoded string of the best face screenshot u200dcollected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no best face screenshot is collected, null is returned.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// The Base64-encoded string of the best face screenshot collected from the video stream. Retries are allowed, and this field returns only the data collected in the last verification. If no best face screenshot is collected, null is returned.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	BestFrameBase64 *string `json:"BestFrameBase64,omitnil,omitempty" name:"BestFrameBase64"`
 
 	// Card recognize result.
@@ -2860,15 +2874,15 @@ type ThailandIDCard struct {
 
 type VerificationDetail struct {
 	// The final result of this verification. `0` indicates that the person is the same as that in the photo.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
 	// The description of the final verification result.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErrorMsg *string `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
 
 	// The result of this liveness detection process. `0` indicates success.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LivenessErrorCode *int64 `json:"LivenessErrorCode,omitnil,omitempty" name:"LivenessErrorCode"`
 
 	// The result description of this liveness detection process.
@@ -2876,11 +2890,11 @@ type VerificationDetail struct {
 	LivenessErrorMsg *string `json:"LivenessErrorMsg,omitnil,omitempty" name:"LivenessErrorMsg"`
 
 	// The result of this comparison process. `0` indicates that the person in the best face screenshot collected from the video stream is the same as that in the uploaded image for comparison.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CompareErrorCode *int64 `json:"CompareErrorCode,omitnil,omitempty" name:"CompareErrorCode"`
 
 	// The result description of this comparison process.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	CompareErrorMsg *string `json:"CompareErrorMsg,omitnil,omitempty" name:"CompareErrorMsg"`
 
 	// The timestamp (ms) of this verification process.
@@ -2888,7 +2902,7 @@ type VerificationDetail struct {
 	ReqTimestamp *uint64 `json:"ReqTimestamp,omitnil,omitempty" name:"ReqTimestamp"`
 
 	// The similarity of the best face screenshot collected from the video stream and the uploaded image for comparison in this verification process. Value range: [0.00, 100.00]. By default, the person in the screenshot is determined to be the same person in the image if the similarity is greater than or equal to 70.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Similarity *float64 `json:"Similarity,omitnil,omitempty" name:"Similarity"`
 
 	// Unique ID of this verification process.
