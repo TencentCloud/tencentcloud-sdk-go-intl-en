@@ -536,7 +536,7 @@ type ApplicationProxyRule struct {
 	SessionPersist *bool `json:"SessionPersist,omitnil,omitempty" name:"SessionPersist"`
 
 	// Duration for the persistent session. The value takes effect only when `SessionPersist = true`.
-	// Note: u200dThis field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SessionPersistTime *uint64 `json:"SessionPersistTime,omitnil,omitempty" name:"SessionPersistTime"`
 
 	// The origin port, which can be:
@@ -545,7 +545,7 @@ type ApplicationProxyRule struct {
 	OriginPort *string `json:"OriginPort,omitnil,omitempty" name:"OriginPort"`
 
 	// Rule tag.
-	// Note: This field may return·`null`, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	RuleTag *string `json:"RuleTag,omitnil,omitempty" name:"RuleTag"`
 }
 

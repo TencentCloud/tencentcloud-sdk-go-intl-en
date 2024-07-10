@@ -238,6 +238,9 @@ type AudioTrackInfo struct {
 
 	// Audio loudness configuration.
 	AudioNormalization *AudioNormalizationSettings `json:"AudioNormalization,omitnil,omitempty" name:"AudioNormalization"`
+
+	// Audio encoding configuration.
+	AudioCodecDetails *AudioCodecDetail `json:"AudioCodecDetails,omitnil,omitempty" name:"AudioCodecDetails"`
 }
 
 type ChannelAlertInfos struct {
@@ -2108,6 +2111,9 @@ type DestinationInfo struct {
 	// Authentication password. Length limit: [1,128].
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// The destination type of the retweet. Currently available values are: Standard, AWS_MediaPackageV1, AWS_MediaPackageV2. The default is: Standard.
+	DestinationType *string `json:"DestinationType,omitnil,omitempty" name:"DestinationType"`
 }
 
 type DrmKey struct {
