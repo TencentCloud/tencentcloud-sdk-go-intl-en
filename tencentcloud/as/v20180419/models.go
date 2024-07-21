@@ -104,7 +104,7 @@ type Advice struct {
 	// Recommended resolutions
 	Solution *string `json:"Solution,omitnil,omitempty" name:"Solution"`
 
-	// u200dRisk level of the scaling group configuration. Valid values: <br>
+	// Risk level of the scaling group configuration. Valid values: <br>
 	// <li>WARNING<br>
 	// <li>CRITICAL<br>
 	Level *string `json:"Level,omitnil,omitempty" name:"Level"`
@@ -5228,7 +5228,7 @@ type RelatedInstance struct {
 
 	// Status of the instance in the scaling activity. Valid values:
 	// `INIT`: Initializing
-	// `RUNNING`: u200dProcessing u200dthe instance
+	// `RUNNING`: Processing the instance
 	// `SUCCESSFUL`: Task succeeded on the instance
 	// `FAILED`: Task failed on the instance
 	InstanceStatus *string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`

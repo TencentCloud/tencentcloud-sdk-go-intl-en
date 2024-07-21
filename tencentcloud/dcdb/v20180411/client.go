@@ -1058,6 +1058,7 @@ func NewDescribeDBEncryptAttributesResponse() (response *DescribeDBEncryptAttrib
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 //  UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
 func (c *Client) DescribeDBEncryptAttributes(request *DescribeDBEncryptAttributesRequest) (response *DescribeDBEncryptAttributesResponse, err error) {
     return c.DescribeDBEncryptAttributesWithContext(context.Background(), request)
@@ -1073,6 +1074,7 @@ func (c *Client) DescribeDBEncryptAttributes(request *DescribeDBEncryptAttribute
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
 //  UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
 func (c *Client) DescribeDBEncryptAttributesWithContext(ctx context.Context, request *DescribeDBEncryptAttributesRequest) (response *DescribeDBEncryptAttributesResponse, err error) {
     if request == nil {
@@ -1253,6 +1255,7 @@ func NewDescribeDBSecurityGroupsResponse() (response *DescribeDBSecurityGroupsRe
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_AUTHNOSTRATEGY = "FailedOperation.AuthNoStrategy"
+//  FAILEDOPERATION_GETSECURITYGROUPDETAILFAILED = "FailedOperation.GetSecurityGroupDetailFailed"
 //  INTERNALERROR_GETSECURITYGROUPDETAILFAILED = "InternalError.GetSecurityGroupDetailFailed"
 //  INTERNALERROR_INSTANCEOPERATEPERMISSIONERROR = "InternalError.InstanceOperatePermissionError"
 //  INTERNALERROR_LISTINSTANCERESPRESOURCECOUNTNOTMATCHERROR = "InternalError.ListInstanceRespResourceCountNotMatchError"
@@ -1279,6 +1282,7 @@ func (c *Client) DescribeDBSecurityGroups(request *DescribeDBSecurityGroupsReque
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_AUTHNOSTRATEGY = "FailedOperation.AuthNoStrategy"
+//  FAILEDOPERATION_GETSECURITYGROUPDETAILFAILED = "FailedOperation.GetSecurityGroupDetailFailed"
 //  INTERNALERROR_GETSECURITYGROUPDETAILFAILED = "InternalError.GetSecurityGroupDetailFailed"
 //  INTERNALERROR_INSTANCEOPERATEPERMISSIONERROR = "InternalError.InstanceOperatePermissionError"
 //  INTERNALERROR_LISTINSTANCERESPRESOURCECOUNTNOTMATCHERROR = "InternalError.ListInstanceRespResourceCountNotMatchError"
@@ -1459,7 +1463,7 @@ func NewDescribeDBTmpInstancesResponse() (response *DescribeDBTmpInstancesRespon
 }
 
 // DescribeDBTmpInstances
-// This API is used to obtain u200da temp rollback instance.
+// This API is used to obtain a temp rollback instance.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -1469,7 +1473,7 @@ func (c *Client) DescribeDBTmpInstances(request *DescribeDBTmpInstancesRequest) 
 }
 
 // DescribeDBTmpInstances
-// This API is used to obtain u200da temp rollback instance.
+// This API is used to obtain a temp rollback instance.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
@@ -3539,6 +3543,7 @@ func NewModifyInstanceNetworkResponse() (response *ModifyInstanceNetworkResponse
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
 //  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
 //  INTERNALERROR_VPCOPERATIONFAILED = "InternalError.VpcOperationFailed"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_SUBNETUNAVAILABLE = "InvalidParameter.SubnetUnavailable"
@@ -3560,6 +3565,7 @@ func (c *Client) ModifyInstanceNetwork(request *ModifyInstanceNetworkRequest) (r
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
 //  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
+//  INTERNALERROR_OPERATEDATABASEFAILED = "InternalError.OperateDatabaseFailed"
 //  INTERNALERROR_VPCOPERATIONFAILED = "InternalError.VpcOperationFailed"
 //  INVALIDPARAMETER_INSTANCENOTFOUND = "InvalidParameter.InstanceNotFound"
 //  INVALIDPARAMETER_SUBNETUNAVAILABLE = "InvalidParameter.SubnetUnavailable"
@@ -3930,7 +3936,7 @@ func NewUpgradeDedicatedDCDBInstanceResponse() (response *UpgradeDedicatedDCDBIn
 }
 
 // UpgradeDedicatedDCDBInstance
-// This API is used to u200dupgrade a dedicated TDSQL cluster instance.
+// This API is used to upgrade a dedicated TDSQL cluster instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_FENCEERROR = "InternalError.FenceError"
@@ -3946,7 +3952,7 @@ func (c *Client) UpgradeDedicatedDCDBInstance(request *UpgradeDedicatedDCDBInsta
 }
 
 // UpgradeDedicatedDCDBInstance
-// This API is used to u200dupgrade a dedicated TDSQL cluster instance.
+// This API is used to upgrade a dedicated TDSQL cluster instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_FENCEERROR = "InternalError.FenceError"
