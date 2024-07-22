@@ -2439,6 +2439,7 @@ func NewStartStreamIngestResponse() (response *StartStreamIngestResponse) {
 // Push an online media stream to the TRTC room.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_NOTALLOWED = "FailedOperation.NotAllowed"
 //  FAILEDOPERATION_NOTRTMPFUNCTION = "FailedOperation.NotRtmpFunction"
 //  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
 //  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
@@ -2462,6 +2463,7 @@ func (c *Client) StartStreamIngest(request *StartStreamIngestRequest) (response 
 // Push an online media stream to the TRTC room.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_NOTALLOWED = "FailedOperation.NotAllowed"
 //  FAILEDOPERATION_NOTRTMPFUNCTION = "FailedOperation.NotRtmpFunction"
 //  FAILEDOPERATION_RESTRICTEDCONCURRENCY = "FailedOperation.RestrictedConcurrency"
 //  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"

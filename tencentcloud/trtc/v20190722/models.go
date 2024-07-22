@@ -2892,13 +2892,13 @@ type StartStreamIngestRequestParams struct {
 	// TRTC's [RoomId](https://intl.cloud.tencent.com/document/product/647/46351?from_cn_redirect=1#roomid), the RoomId corresponding to the Record TRTC room.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
-	// Type of TRTC RoomId. 【*Note】Must be the same as the RoomId type corresponding to the Record room: 0: String type RoomId 1: 32-bit Integer type RoomId (default)
+	// Type of TRTC RoomId. [*Note] Must be the same as the RoomId type corresponding to the Record room: 0: String type RoomId 1: 32-bit Integer type RoomId (default)
 	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
 
 	// UserId of the Pull stream Relay Robot, used to enter the room and initiate the Pull stream Relay Task.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
-	// UserSig corresponding to the Pull stream Relay Robot UserId, i.e., UserId and UserSig are equivalent to the Robot's Login password for entering the room. For the specific Calculation method, please refer to the TRTC [UserSig](https://intl.cloud.tencent.com/document/product/647/45910?from_cn_redirect=1#UserSig) Scheme.
+	// UserSig corresponding to the Pull stream Relay Robot UserId, i.e., UserId and UserSig are equivalent to the Robot's Login password for entering the room. For the specific Calculation method, please refer to the TRTC [UserSig](https://www.tencentcloud.com/zh/document/product/647/39074) Scheme.
 	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
 
 	// 	
@@ -2913,6 +2913,9 @@ type StartStreamIngestRequestParams struct {
 
 	// Audio Codec Parameters. Optional, if not filled, Keep original stream Parameters.
 	AudioEncodeParams *AudioEncodeParams `json:"AudioEncodeParams,omitnil,omitempty" name:"AudioEncodeParams"`
+
+
+	StreamUrl *string `json:"StreamUrl,omitnil,omitempty" name:"StreamUrl"`
 }
 
 type StartStreamIngestRequest struct {
@@ -2924,13 +2927,13 @@ type StartStreamIngestRequest struct {
 	// TRTC's [RoomId](https://intl.cloud.tencent.com/document/product/647/46351?from_cn_redirect=1#roomid), the RoomId corresponding to the Record TRTC room.
 	RoomId *string `json:"RoomId,omitnil,omitempty" name:"RoomId"`
 
-	// Type of TRTC RoomId. 【*Note】Must be the same as the RoomId type corresponding to the Record room: 0: String type RoomId 1: 32-bit Integer type RoomId (default)
+	// Type of TRTC RoomId. [*Note] Must be the same as the RoomId type corresponding to the Record room: 0: String type RoomId 1: 32-bit Integer type RoomId (default)
 	RoomIdType *uint64 `json:"RoomIdType,omitnil,omitempty" name:"RoomIdType"`
 
 	// UserId of the Pull stream Relay Robot, used to enter the room and initiate the Pull stream Relay Task.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
-	// UserSig corresponding to the Pull stream Relay Robot UserId, i.e., UserId and UserSig are equivalent to the Robot's Login password for entering the room. For the specific Calculation method, please refer to the TRTC [UserSig](https://intl.cloud.tencent.com/document/product/647/45910?from_cn_redirect=1#UserSig) Scheme.
+	// UserSig corresponding to the Pull stream Relay Robot UserId, i.e., UserId and UserSig are equivalent to the Robot's Login password for entering the room. For the specific Calculation method, please refer to the TRTC [UserSig](https://www.tencentcloud.com/zh/document/product/647/39074) Scheme.
 	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
 
 	// 	
@@ -2945,6 +2948,8 @@ type StartStreamIngestRequest struct {
 
 	// Audio Codec Parameters. Optional, if not filled, Keep original stream Parameters.
 	AudioEncodeParams *AudioEncodeParams `json:"AudioEncodeParams,omitnil,omitempty" name:"AudioEncodeParams"`
+
+	StreamUrl *string `json:"StreamUrl,omitnil,omitempty" name:"StreamUrl"`
 }
 
 func (r *StartStreamIngestRequest) ToJsonString() string {
@@ -2968,6 +2973,7 @@ func (r *StartStreamIngestRequest) FromJsonString(s string) error {
 	delete(f, "PrivateMapKey")
 	delete(f, "VideoEncodeParams")
 	delete(f, "AudioEncodeParams")
+	delete(f, "StreamUrl")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartStreamIngestRequest has unknown keys!", "")
 	}
