@@ -6315,7 +6315,7 @@ type LogItems struct {
 }
 
 type LogRechargeRuleInfo struct {
-	// Import type. Valid values: `json_log` (JSON logs), `minimalist_log` (single-line full text), and fullregex_log u200d(single-line full regex)
+	// Import type. Valid values: `json_log` (JSON logs), `minimalist_log` (single-line full text), and fullregex_log (single-line full regex)
 	RechargeType *string `json:"RechargeType,omitnil,omitempty" name:"RechargeType"`
 
 	// Encoding format. Valid values: 0 (default, UTF-8) and 1 GBK).

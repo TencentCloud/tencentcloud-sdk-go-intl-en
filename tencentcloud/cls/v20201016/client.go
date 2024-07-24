@@ -1064,6 +1064,7 @@ func NewCreateKafkaRechargeResponse() (response *CreateKafkaRechargeResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
@@ -1082,6 +1083,7 @@ func (c *Client) CreateKafkaRecharge(request *CreateKafkaRechargeRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_DBDUPLICATION = "InvalidParameter.DbDuplication"
@@ -5610,6 +5612,7 @@ func NewPreviewKafkaRechargeResponse() (response *PreviewKafkaRechargeResponse) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -5627,6 +5630,7 @@ func (c *Client) PreviewKafkaRecharge(request *PreviewKafkaRechargeRequest) (res
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_TIMEOUT = "FailedOperation.Timeout"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
