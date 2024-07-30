@@ -2930,7 +2930,7 @@ func NewDescribeDBInstanceHAConfigResponse() (response *DescribeDBInstanceHAConf
 }
 
 // DescribeDBInstanceHAConfig
-// This API is used to query the HA configuration of an instance, u200cwhich includes:
+// This API is used to query the HA configuration of an instance, which includes:
 //
 // <li>Allow a standby node to promote to a primary node.
 //
@@ -2950,7 +2950,7 @@ func (c *Client) DescribeDBInstanceHAConfig(request *DescribeDBInstanceHAConfigR
 }
 
 // DescribeDBInstanceHAConfig
-// This API is used to query the HA configuration of an instance, u200cwhich includes:
+// This API is used to query the HA configuration of an instance, which includes:
 //
 // <li>Allow a standby node to promote to a primary node.
 //
@@ -5613,7 +5613,7 @@ func NewModifyDBInstanceHAConfigResponse() (response *ModifyDBInstanceHAConfigRe
 }
 
 // ModifyDBInstanceHAConfig
-// This API is used to modify the HA configuration of an instance. u200cwhich includes:
+// This API is used to modify the HA configuration of an instance. which includes:
 //
 // <li>Allow the standby node to promote to the primary node.
 //
@@ -5634,7 +5634,7 @@ func (c *Client) ModifyDBInstanceHAConfig(request *ModifyDBInstanceHAConfigReque
 }
 
 // ModifyDBInstanceHAConfig
-// This API is used to modify the HA configuration of an instance. u200cwhich includes:
+// This API is used to modify the HA configuration of an instance. which includes:
 //
 // <li>Allow the standby node to promote to the primary node.
 //

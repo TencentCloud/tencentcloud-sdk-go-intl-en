@@ -1349,9 +1349,10 @@ func (r *GetCardVerificationResultRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetCardVerificationResultResponseParams struct {
 	// Pass status. When Warning and Rejected are returned, please check the specific reasons in the WarnInfo structure return. Example values are as follows:
-	// Passed
-	// Warning
-	// Rejected
+	// PASSED
+	// WARNING
+	// REJECTED
+	// PROCESSING
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Warning information returned by document verification.
