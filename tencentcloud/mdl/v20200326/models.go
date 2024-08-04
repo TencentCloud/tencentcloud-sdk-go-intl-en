@@ -130,6 +130,32 @@ type AdditionalRateSetting struct {
 	QualityLevel *uint64 `json:"QualityLevel,omitnil,omitempty" name:"QualityLevel"`
 }
 
+type AmazonS3Settings struct {
+	// Access key ID of the S3 sub-account.
+	AccessKeyID *string `json:"AccessKeyID,omitnil,omitempty" name:"AccessKeyID"`
+
+	// Secret access key of the S3 sub-account.
+	SecretAccessKey *string `json:"SecretAccessKey,omitnil,omitempty" name:"SecretAccessKey"`
+
+	// Region of S3.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Bucket name of S3.
+	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
+
+	// File output path, which can be empty. If it is not empty, it starts with / and ends with /.
+	FilePath *string `json:"FilePath,omitnil,omitempty" name:"FilePath"`
+
+	// User-defined name, supports alphanumeric characters, underscores, and hyphens, with a length between 1 and 32 characters.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+	// File suffix, only supports `jpg`.
+	FileExt *string `json:"FileExt,omitnil,omitempty" name:"FileExt"`
+
+	// Support `unix` or `utc0`, default unix.
+	TimeFormat *string `json:"TimeFormat,omitnil,omitempty" name:"TimeFormat"`
+}
+
 type AttachedInput struct {
 	// Input ID
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
@@ -282,6 +308,26 @@ type ChannelPipelineAlerts struct {
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
+type CosSettings struct {
+	// Region of COS.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Bucket name of COS.
+	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
+
+	// File output path, which can be empty. If it is not empty, it  ends with /.
+	FilePath *string `json:"FilePath,omitnil,omitempty" name:"FilePath"`
+
+	// User-defined name, supports alphanumeric characters, underscores, and hyphens, with a length between 1 and 32 characters.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+	// File suffix, only supports `jpg`.
+	FileExt *string `json:"FileExt,omitnil,omitempty" name:"FileExt"`
+
+	// Support `unix` or `utc0`, default unix.
+	TimeFormat *string `json:"TimeFormat,omitnil,omitempty" name:"TimeFormat"`
+}
+
 type CreateImageSettings struct {
 	// Image file format. Valid values: png, jpg.
 	ImageType *string `json:"ImageType,omitnil,omitempty" name:"ImageType"`
@@ -349,6 +395,9 @@ type CreateStreamLiveChannelRequestParams struct {
 
 	// Console tag list.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Frame capture templates.
+	FrameCaptureTemplates []*FrameCaptureTemplate `json:"FrameCaptureTemplates,omitnil,omitempty" name:"FrameCaptureTemplates"`
 }
 
 type CreateStreamLiveChannelRequest struct {
@@ -392,6 +441,9 @@ type CreateStreamLiveChannelRequest struct {
 
 	// Console tag list.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Frame capture templates.
+	FrameCaptureTemplates []*FrameCaptureTemplate `json:"FrameCaptureTemplates,omitnil,omitempty" name:"FrameCaptureTemplates"`
 }
 
 func (r *CreateStreamLiveChannelRequest) ToJsonString() string {
@@ -419,6 +471,7 @@ func (r *CreateStreamLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "PipelineInputSettings")
 	delete(f, "InputAnalysisSettings")
 	delete(f, "Tags")
+	delete(f, "FrameCaptureTemplates")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamLiveChannelRequest has unknown keys!", "")
 	}
@@ -2236,8 +2289,14 @@ type DestinationInfo struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
-	// The destination type of the retweet. Currently available values are: Standard, AWS_MediaPackageV1, AWS_MediaPackageV2. The default is: Standard.
+	// The destination type of the retweet. Currently available values are: Standard, AWS_MediaPackageV1, AWS_MediaPackageV2. The default is: Standard. When the output group type is FRAME_CAPTURE, valid values are: AWS_AmazonS3, COS.
 	DestinationType *string `json:"DestinationType,omitnil,omitempty" name:"DestinationType"`
+
+	// Aws S3 destination setting.
+	AmazonS3Settings *AmazonS3Settings `json:"AmazonS3Settings,omitnil,omitempty" name:"AmazonS3Settings"`
+
+	// Cos destination setting.
+	CosSettings *CosSettings `json:"CosSettings,omitnil,omitempty" name:"CosSettings"`
 }
 
 type DrmKey struct {
@@ -2376,6 +2435,29 @@ type FailOverSettings struct {
 
 	// Failover policy. Valid values: `CURRENT_PREFERRED` (default), `PRIMARY_PREFERRED`
 	RecoverBehavior *string `json:"RecoverBehavior,omitnil,omitempty" name:"RecoverBehavior"`
+}
+
+type FrameCaptureTemplate struct {
+	// Name of frame capture template, limited to uppercase and lowercase letters and numbers, with a length between 1 and 20 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Width of frame capture, optional, input range is from 0 to 3000, must be a multiple of 2.
+	Width *uint64 `json:"Width,omitnil,omitempty" name:"Width"`
+
+	// Height of frame capture, optional, input range is from 0 to 3000, must be a multiple of 2.
+	Height *uint64 `json:"Height,omitnil,omitempty" name:"Height"`
+
+	// Interval of frame capture, an integer between 1 and 3600.
+	CaptureInterval *uint64 `json:"CaptureInterval,omitnil,omitempty" name:"CaptureInterval"`
+
+	// Interval units of frame capture, only supports SECONDS.
+	CaptureIntervalUnits *string `json:"CaptureIntervalUnits,omitnil,omitempty" name:"CaptureIntervalUnits"`
+
+	// Scaling behavior of frame capture, supports DEFAULT or STRETCH_TO_OUTPUT, with DEFAULT being the default option.
+	ScalingBehavior *string `json:"ScalingBehavior,omitnil,omitempty" name:"ScalingBehavior"`
+
+	// Sharpness, an integer between 0 and 100.
+	Sharpness *uint64 `json:"Sharpness,omitnil,omitempty" name:"Sharpness"`
 }
 
 type HighlightInfo struct {
@@ -2660,6 +2742,9 @@ type ModifyStreamLiveChannelRequestParams struct {
 
 	// Console tag list.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Frame capture templates.
+	FrameCaptureTemplates []*FrameCaptureTemplate `json:"FrameCaptureTemplates,omitnil,omitempty" name:"FrameCaptureTemplates"`
 }
 
 type ModifyStreamLiveChannelRequest struct {
@@ -2706,6 +2791,9 @@ type ModifyStreamLiveChannelRequest struct {
 
 	// Console tag list.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Frame capture templates.
+	FrameCaptureTemplates []*FrameCaptureTemplate `json:"FrameCaptureTemplates,omitnil,omitempty" name:"FrameCaptureTemplates"`
 }
 
 func (r *ModifyStreamLiveChannelRequest) ToJsonString() string {
@@ -2734,6 +2822,7 @@ func (r *ModifyStreamLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "PipelineInputSettings")
 	delete(f, "InputAnalysisSettings")
 	delete(f, "Tags")
+	delete(f, "FrameCaptureTemplates")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamLiveChannelRequest has unknown keys!", "")
 	}
@@ -3014,6 +3103,9 @@ type OutputInfo struct {
 
 	// Meta information controls configuration.
 	TimedMetadataSettings *TimedMetadataSettingInfo `json:"TimedMetadataSettings,omitnil,omitempty" name:"TimedMetadataSettings"`
+
+	// Frame capture template name array. Quantity limit: [0,1].
+	FrameCaptureTemplateNames []*string `json:"FrameCaptureTemplateNames,omitnil,omitempty" name:"FrameCaptureTemplateNames"`
 }
 
 type OutputsStatistics struct {
@@ -3474,6 +3566,9 @@ type StreamLiveChannelInfo struct {
 
 	// Console tag list.
 	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Frame capture templates.
+	FrameCaptureTemplates []*FrameCaptureTemplate `json:"FrameCaptureTemplates,omitnil,omitempty" name:"FrameCaptureTemplates"`
 }
 
 type StreamLiveOutputGroupsInfo struct {
@@ -3481,7 +3576,7 @@ type StreamLiveOutputGroupsInfo struct {
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Output protocol
-	// Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, `HLS_STREAM_PACKAGE`, `DASH_STREAM_PACKAGE`
+	// Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, `HLS_STREAM_PACKAGE`, `DASH_STREAM_PACKAGE`, `FRAME_CAPTURE`
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Output information

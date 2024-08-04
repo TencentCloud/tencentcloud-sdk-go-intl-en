@@ -1898,6 +1898,79 @@ func (c *Client) RecognizeKoreanIDCardOCRWithContext(ctx context.Context, reques
     return
 }
 
+func NewRecognizeMacaoIDCardOCRRequest() (request *RecognizeMacaoIDCardOCRRequest) {
+    request = &RecognizeMacaoIDCardOCRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "RecognizeMacaoIDCardOCR")
+    
+    
+    return
+}
+
+func NewRecognizeMacaoIDCardOCRResponse() (response *RecognizeMacaoIDCardOCRResponse) {
+    response = &RecognizeMacaoIDCardOCRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RecognizeMacaoIDCardOCR
+// This API is used to recognize key fields on the photo side of a Hong Kong (China) identity card, including name in Chinese, name in English, telecode for name, date of birth, gender, document symbol, date of the first issue, date of the last receipt, identity card number, and permanent residency attribute. 
+//
+// 
+//
+// This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETER_CONFIGFORMATERROR = "InvalidParameter.ConfigFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+func (c *Client) RecognizeMacaoIDCardOCR(request *RecognizeMacaoIDCardOCRRequest) (response *RecognizeMacaoIDCardOCRResponse, err error) {
+    return c.RecognizeMacaoIDCardOCRWithContext(context.Background(), request)
+}
+
+// RecognizeMacaoIDCardOCR
+// This API is used to recognize key fields on the photo side of a Hong Kong (China) identity card, including name in Chinese, name in English, telecode for name, date of birth, gender, document symbol, date of the first issue, date of the last receipt, identity card number, and permanent residency attribute. 
+//
+// 
+//
+// This API is not fully available for the time being. For more information, please contact your [Tencent Cloud sales rep](https://intl.cloud.tencent.com/contact-sales).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETER_CONFIGFORMATERROR = "InvalidParameter.ConfigFormatError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+func (c *Client) RecognizeMacaoIDCardOCRWithContext(ctx context.Context, request *RecognizeMacaoIDCardOCRRequest) (response *RecognizeMacaoIDCardOCRResponse, err error) {
+    if request == nil {
+        request = NewRecognizeMacaoIDCardOCRRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RecognizeMacaoIDCardOCR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRecognizeMacaoIDCardOCRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRecognizeMainlandIDCardOCRRequest() (request *RecognizeMainlandIDCardOCRRequest) {
     request = &RecognizeMainlandIDCardOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},

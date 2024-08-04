@@ -2794,6 +2794,132 @@ func (r *RecognizeKoreanIDCardOCRResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type RecognizeMacaoIDCardOCRRequestParams struct {
+	// The URL address of the image. 
+	// Supported image formats: PNG, JPG, JPEG. Not support GIF yet.
+	// Supported image size: The downloaded image should not exceed 7M. The image download takes no more than 3 seconds.Storing images in Tencent Cloud URLs can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// Base64 value of the image.Supported image formats: PNG, JPG, JPEG. Not support GIF yet.
+	// Supported image size: The downloaded image should not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds.
+	// One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// The following optional fields are of string type and are empty by default: 
+	// RetImage: whether to return the processed image (base64 encrypted string); the value and meaning of RetImage are as follows: 1.preprocess returns the preprocessed image data 2.portrait Return portrait image data 3."" Do not return image data SDK setting method reference: Config = Json.stringify({"RetImage":"preprocess"}) API 3.0 Explorer setting method reference: Config = {"RetImage":"portrait" }
+	Config *string `json:"Config,omitnil,omitempty" name:"Config"`
+}
+
+type RecognizeMacaoIDCardOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The URL address of the image. 
+	// Supported image formats: PNG, JPG, JPEG. Not support GIF yet.
+	// Supported image size: The downloaded image should not exceed 7M. The image download takes no more than 3 seconds.Storing images in Tencent Cloud URLs can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// Base64 value of the image.Supported image formats: PNG, JPG, JPEG. Not support GIF yet.
+	// Supported image size: The downloaded image should not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds.
+	// One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// The following optional fields are of string type and are empty by default: 
+	// RetImage: whether to return the processed image (base64 encrypted string); the value and meaning of RetImage are as follows: 1.preprocess returns the preprocessed image data 2.portrait Return portrait image data 3."" Do not return image data SDK setting method reference: Config = Json.stringify({"RetImage":"preprocess"}) API 3.0 Explorer setting method reference: Config = {"RetImage":"portrait" }
+	Config *string `json:"Config,omitnil,omitempty" name:"Config"`
+}
+
+func (r *RecognizeMacaoIDCardOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeMacaoIDCardOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageUrl")
+	delete(f, "ImageBase64")
+	delete(f, "Config")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RecognizeMacaoIDCardOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RecognizeMacaoIDCardOCRResponseParams struct {
+	// Chinese last name
+	CnLastName *string `json:"CnLastName,omitnil,omitempty" name:"CnLastName"`
+
+	// English last name
+	EnLastName *string `json:"EnLastName,omitnil,omitempty" name:"EnLastName"`
+
+	// Last name code
+	LastNameCode *string `json:"LastNameCode,omitnil,omitempty" name:"LastNameCode"`
+
+	// Chinese first name
+	CnFirstName *string `json:"CnFirstName,omitnil,omitempty" name:"CnFirstName"`
+
+	// English first name
+	EnFirstName *string `json:"EnFirstName,omitnil,omitempty" name:"EnFirstName"`
+
+	// First name code
+	FirstNameCode *string `json:"FirstNameCode,omitnil,omitempty" name:"FirstNameCode"`
+
+	// ID Number
+	ID *string `json:"ID,omitnil,omitempty" name:"ID"`
+
+	// Birthday(DD-MM-YYYY)
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
+
+	// gender
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
+
+	// First issue Date (DD-MM-YYYY)
+	FirstIssueDate *string `json:"FirstIssueDate,omitnil,omitempty" name:"FirstIssueDate"`
+
+	// Issue date (DD-MM-YYYY)
+	CurrentIssueDate *string `json:"CurrentIssueDate,omitnil,omitempty" name:"CurrentIssueDate"`
+
+	// Validity period (DD-MM-YYYY)
+	ValidityPeriod *string `json:"ValidityPeriod,omitnil,omitempty" name:"ValidityPeriod"`
+
+	// ID symbol
+	Symbol *string `json:"Symbol,omitnil,omitempty" name:"Symbol"`
+
+	// Height (unit: meters)
+	Height *string `json:"Height,omitnil,omitempty" name:"Height"`
+
+	// Processed image (Base64)
+	RetImage *string `json:"RetImage,omitnil,omitempty" name:"RetImage"`
+
+	// Image rotation angle, the horizontal direction of the text is 0, clockwise is positive, counterclockwise is negative
+	Angle *string `json:"Angle,omitnil,omitempty" name:"Angle"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RecognizeMacaoIDCardOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *RecognizeMacaoIDCardOCRResponseParams `json:"Response"`
+}
+
+func (r *RecognizeMacaoIDCardOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeMacaoIDCardOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type RecognizeMainlandIDCardOCRRequestParams struct {
 	// The Base64 value of the image. The image is required to be no larger than 7M after Base64 encoding, and the resolution is recommended to be 500*800 or above. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
