@@ -102,6 +102,61 @@ func (c *Client) AddUsersToWorkGroupWithContext(ctx context.Context, request *Ad
     return
 }
 
+func NewAlterDMSDatabaseRequest() (request *AlterDMSDatabaseRequest) {
+    request = &AlterDMSDatabaseRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "AlterDMSDatabase")
+    
+    
+    return
+}
+
+func NewAlterDMSDatabaseResponse() (response *AlterDMSDatabaseResponse) {
+    response = &AlterDMSDatabaseResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AlterDMSDatabase
+// This API is used to update databases in the DMS metadata module.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) AlterDMSDatabase(request *AlterDMSDatabaseRequest) (response *AlterDMSDatabaseResponse, err error) {
+    return c.AlterDMSDatabaseWithContext(context.Background(), request)
+}
+
+// AlterDMSDatabase
+// This API is used to update databases in the DMS metadata module.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) AlterDMSDatabaseWithContext(ctx context.Context, request *AlterDMSDatabaseRequest) (response *AlterDMSDatabaseResponse, err error) {
+    if request == nil {
+        request = NewAlterDMSDatabaseRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AlterDMSDatabase require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAlterDMSDatabaseResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAttachUserPolicyRequest() (request *AttachUserPolicyRequest) {
     request = &AttachUserPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -717,6 +772,61 @@ func (c *Client) CreateCHDFSBindingProductWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewCreateCHDFSBindingProductResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDMSDatabaseRequest() (request *CreateDMSDatabaseRequest) {
+    request = &CreateDMSDatabaseRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "CreateDMSDatabase")
+    
+    
+    return
+}
+
+func NewCreateDMSDatabaseResponse() (response *CreateDMSDatabaseResponse) {
+    response = &CreateDMSDatabaseResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDMSDatabase
+// This API is used to create databases in the DMS metadata module.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateDMSDatabase(request *CreateDMSDatabaseRequest) (response *CreateDMSDatabaseResponse, err error) {
+    return c.CreateDMSDatabaseWithContext(context.Background(), request)
+}
+
+// CreateDMSDatabase
+// This API is used to create databases in the DMS metadata module.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateDMSDatabaseWithContext(ctx context.Context, request *CreateDMSDatabaseRequest) (response *CreateDMSDatabaseResponse, err error) {
+    if request == nil {
+        request = NewCreateDMSDatabaseRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDMSDatabase require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDMSDatabaseResponse()
     err = c.Send(request, response)
     return
 }
@@ -2267,6 +2377,61 @@ func (c *Client) DescribeDLCCatalogAccessWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeDLCCatalogAccessResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDMSDatabaseRequest() (request *DescribeDMSDatabaseRequest) {
+    request = &DescribeDMSDatabaseRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeDMSDatabase")
+    
+    
+    return
+}
+
+func NewDescribeDMSDatabaseResponse() (response *DescribeDMSDatabaseResponse) {
+    response = &DescribeDMSDatabaseResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDMSDatabase
+// This API is used to obtain databases in the DMS metadata module.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeDMSDatabase(request *DescribeDMSDatabaseRequest) (response *DescribeDMSDatabaseResponse, err error) {
+    return c.DescribeDMSDatabaseWithContext(context.Background(), request)
+}
+
+// DescribeDMSDatabase
+// This API is used to obtain databases in the DMS metadata module.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeDMSDatabaseWithContext(ctx context.Context, request *DescribeDMSDatabaseRequest) (response *DescribeDMSDatabaseResponse, err error) {
+    if request == nil {
+        request = NewDescribeDMSDatabaseRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDMSDatabase require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDMSDatabaseResponse()
     err = c.Send(request, response)
     return
 }
@@ -4085,6 +4250,61 @@ func (c *Client) DetachWorkGroupPolicyWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDetachWorkGroupPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDropDMSDatabaseRequest() (request *DropDMSDatabaseRequest) {
+    request = &DropDMSDatabaseRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DropDMSDatabase")
+    
+    
+    return
+}
+
+func NewDropDMSDatabaseResponse() (response *DropDMSDatabaseResponse) {
+    response = &DropDMSDatabaseResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DropDMSDatabase
+// This API is used to delete databases in the DMS metadata module.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DropDMSDatabase(request *DropDMSDatabaseRequest) (response *DropDMSDatabaseResponse, err error) {
+    return c.DropDMSDatabaseWithContext(context.Background(), request)
+}
+
+// DropDMSDatabase
+// This API is used to delete databases in the DMS metadata module.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DropDMSDatabaseWithContext(ctx context.Context, request *DropDMSDatabaseRequest) (response *DropDMSDatabaseResponse, err error) {
+    if request == nil {
+        request = NewDropDMSDatabaseRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DropDMSDatabase require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDropDMSDatabaseResponse()
     err = c.Send(request, response)
     return
 }
