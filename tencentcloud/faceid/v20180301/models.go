@@ -71,17 +71,17 @@ type ApplyCardVerificationRequestParams struct {
 	// AUTO
 	CardType *string `json:"CardType,omitnil,omitempty" name:"CardType"`
 
-	// Base64 value for the front of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. 
+	// Base64 value for the front of the document. Supported image formats: PNG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding.
 	// The image download takes no more than 3 seconds. Supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64 Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
 	ImageBase64Front *string `json:"ImageBase64Front,omitnil,omitempty" name:"ImageBase64Front"`
 
-	// Base64 value of the reverse side of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
+	// Base64 value of the reverse side of the document. Supported image formats: PNG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
 	ImageBase64Back *string `json:"ImageBase64Back,omitnil,omitempty" name:"ImageBase64Back"`
 
-	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
+	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
 	ImageUrlFront *string `json:"ImageUrlFront,omitnil,omitempty" name:"ImageUrlFront"`
 
-	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
+	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
 	ImageUrlBack *string `json:"ImageUrlBack,omitnil,omitempty" name:"ImageUrlBack"`
 }
 
@@ -105,17 +105,17 @@ type ApplyCardVerificationRequest struct {
 	// AUTO
 	CardType *string `json:"CardType,omitnil,omitempty" name:"CardType"`
 
-	// Base64 value for the front of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. 
+	// Base64 value for the front of the document. Supported image formats: PNG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding.
 	// The image download takes no more than 3 seconds. Supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64 Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
 	ImageBase64Front *string `json:"ImageBase64Front,omitnil,omitempty" name:"ImageBase64Front"`
 
-	// Base64 value of the reverse side of the document. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
+	// Base64 value of the reverse side of the document. Supported image formats: PNG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
 	ImageBase64Back *string `json:"ImageBase64Back,omitnil,omitempty" name:"ImageBase64Back"`
 
-	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
+	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. One of ImageUrlFront and ImageBase64Front of the image must be provided. If both are provided, only ImageUrlFront will be used.
 	ImageUrlFront *string `json:"ImageUrlFront,omitnil,omitempty" name:"ImageUrlFront"`
 
-	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
+	// The URL value on the back of the certificate. Supported image formats: PNG, JPEG. GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 5M after Base64 encoding. The image download takes no more than 3 seconds. Maximum supported image resolution: 8000*8000. For some certificates, one of ImageUrlBack and ImageBase64Back must be provided. If both are provided, only ImageUrlBack will be used.
 	ImageUrlBack *string `json:"ImageUrlBack,omitnil,omitempty" name:"ImageUrlBack"`
 }
 
@@ -786,8 +786,8 @@ type CompareFaceLivenessRequestParams struct {
 	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
-	// Base64 value of photos used for face comparison. 
-	// The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
+	// Base64 value of videos used for face comparison. 
+	// The size of videos data encoded by Base64 shall not exceed 8M, only mp4,avi,flv are supported. 
 	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
 	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
 	VideoBase64 *string `json:"VideoBase64,omitnil,omitempty" name:"VideoBase64"`
@@ -797,7 +797,7 @@ type CompareFaceLivenessRequestParams struct {
 	// Example value: "SILENT"
 	LivenessType *string `json:"LivenessType,omitnil,omitempty" name:"LivenessType"`
 
-	// When the “LivenessType” parameter is “ACTION”, it must be specified.
+	// When the "LivenessType" parameter is "ACTION", it must be specified.
 	// It is used to control the action sequence. Action types: 
 	// 1 (open mouth)
 	// 2 (blink)
@@ -806,7 +806,7 @@ type CompareFaceLivenessRequestParams struct {
 	// Select one or two from the four actions.
 	// Example of passing single action parameter: "1".
 	// Example of passing multiple action parameters: "4,2".
-	// When the “LivenessType” parameter value is “SILENT”, it shall be unspecified.
+	// When the "LivenessType" parameter value is "SILENT", it shall be unspecified.
 	// Example value: ""
 	ValidateData *string `json:"ValidateData,omitnil,omitempty" name:"ValidateData"`
 }
@@ -820,8 +820,8 @@ type CompareFaceLivenessRequest struct {
 	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
-	// Base64 value of photos used for face comparison. 
-	// The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
+	// Base64 value of videos used for face comparison. 
+	// The size of videos data encoded by Base64 shall not exceed 8M, only mp4,avi,flv are supported. 
 	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
 	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
 	VideoBase64 *string `json:"VideoBase64,omitnil,omitempty" name:"VideoBase64"`
@@ -831,7 +831,7 @@ type CompareFaceLivenessRequest struct {
 	// Example value: "SILENT"
 	LivenessType *string `json:"LivenessType,omitnil,omitempty" name:"LivenessType"`
 
-	// When the “LivenessType” parameter is “ACTION”, it must be specified.
+	// When the "LivenessType" parameter is "ACTION", it must be specified.
 	// It is used to control the action sequence. Action types: 
 	// 1 (open mouth)
 	// 2 (blink)
@@ -840,7 +840,7 @@ type CompareFaceLivenessRequest struct {
 	// Select one or two from the four actions.
 	// Example of passing single action parameter: "1".
 	// Example of passing multiple action parameters: "4,2".
-	// When the “LivenessType” parameter value is “SILENT”, it shall be unspecified.
+	// When the "LivenessType" parameter value is "SILENT", it shall be unspecified.
 	// Example value: ""
 	ValidateData *string `json:"ValidateData,omitnil,omitempty" name:"ValidateData"`
 }
@@ -877,13 +877,13 @@ type CompareFaceLivenessResponseParams struct {
 	// Example value: "Success"
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// This value is valid when the “Result” parameter is "Success" or "FailedOperation.CompareLowSimilarity." 
-	// This value indicates the similarity of face comparison. Value range: [0.00, 100.00]. The false pass rate for threshold 70 is 1 in 1,000, and the false pass rate for threshold 80 is 1 in 1,000. 
+	// This value is valid when the "Result" parameter is "Success" or "FailedOperation.CompareLowSimilarity." 
+	// This value indicates the similarity of face comparison. Value range: [0.00, 100.00]. The false pass rate for threshold 70 is 1 in 1,000, and the false pass rate for threshold 80 is 1 in 10,000. 
 	// Example value: 80.00
 	Sim *float64 `json:"Sim,omitnil,omitempty" name:"Sim"`
 
 	// The optimal screenshot of the video after verification is the value encoded by BASE64, jpg format. 
-	// Note: This field may return “null”, indicating that no valid value can be obtained. 
+	// Note: This field may return "null", indicating that no valid value can be obtained. 
 	// Example values: "/9j/4AAQSk... (total length:142036)s97n//2Q=="
 	BestFrameBase64 *string `json:"BestFrameBase64,omitnil,omitempty" name:"BestFrameBase64"`
 
