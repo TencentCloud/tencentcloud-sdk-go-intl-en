@@ -4309,6 +4309,61 @@ func (c *Client) DropDMSDatabaseWithContext(ctx context.Context, request *DropDM
     return
 }
 
+func NewDropDMSTableRequest() (request *DropDMSTableRequest) {
+    request = &DropDMSTableRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DropDMSTable")
+    
+    
+    return
+}
+
+func NewDropDMSTableResponse() (response *DropDMSTableResponse) {
+    response = &DropDMSTableResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DropDMSTable
+// This API is used to delete tables in the DMS metadata module.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DropDMSTable(request *DropDMSTableRequest) (response *DropDMSTableResponse, err error) {
+    return c.DropDMSTableWithContext(context.Background(), request)
+}
+
+// DropDMSTable
+// This API is used to delete tables in the DMS metadata module.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DropDMSTableWithContext(ctx context.Context, request *DropDMSTableRequest) (response *DropDMSTableResponse, err error) {
+    if request == nil {
+        request = NewDropDMSTableRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DropDMSTable require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDropDMSTableResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGenerateCreateMangedTableSqlRequest() (request *GenerateCreateMangedTableSqlRequest) {
     request = &GenerateCreateMangedTableSqlRequest{
         BaseRequest: &tchttp.BaseRequest{},
