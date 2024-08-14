@@ -45,6 +45,55 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewAllocateCreditPoolRequest() (request *AllocateCreditPoolRequest) {
+    request = &AllocateCreditPoolRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "AllocateCreditPool")
+    
+    
+    return
+}
+
+func NewAllocateCreditPoolResponse() (response *AllocateCreditPoolResponse) {
+    response = &AllocateCreditPoolResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AllocateCreditPool
+// This API is used to allocate credit pools to second-level resellers by distributors.
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) AllocateCreditPool(request *AllocateCreditPoolRequest) (response *AllocateCreditPoolResponse, err error) {
+    return c.AllocateCreditPoolWithContext(context.Background(), request)
+}
+
+// AllocateCreditPool
+// This API is used to allocate credit pools to second-level resellers by distributors.
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) AllocateCreditPoolWithContext(ctx context.Context, request *AllocateCreditPoolRequest) (response *AllocateCreditPoolResponse, err error) {
+    if request == nil {
+        request = NewAllocateCreditPoolRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AllocateCreditPool require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAllocateCreditPoolResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAllocateCustomerCreditRequest() (request *AllocateCustomerCreditRequest) {
     request = &AllocateCustomerCreditRequest{
         BaseRequest: &tchttp.BaseRequest{},
