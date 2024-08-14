@@ -2901,21 +2901,39 @@ type StartStreamIngestRequestParams struct {
 	// UserSig corresponding to the Pull stream Relay Robot UserId, i.e., UserId and UserSig are equivalent to the Robot's Login password for entering the room. For the specific Calculation method, please refer to the TRTC [UserSig](https://www.tencentcloud.com/zh/document/product/647/39074) Scheme.
 	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
 
-	// 	
-	// Source URL. Example value: https://a.b/test.mp4
-	SourceUrl []*string `json:"SourceUrl,omitnil,omitempty" name:"SourceUrl"`
+	// The Url of the media resource.
+	StreamUrl *string `json:"StreamUrl,omitnil,omitempty" name:"StreamUrl"`
 
 	// TRTC room permission Encryption ticket, only needed when advanced permission control is enabled in the Console. After enabling advanced permission control in the TRTC Console, TRTC's backend service system will verify a so-called [PrivateMapKey] 'Permission ticket', which contains an encrypted RoomId and an encrypted 'Permission bit list'. Since PrivateMapKey contains RoomId, providing only UserSig without PrivateMapKey does not allow entry into the specified room.
 	PrivateMapKey *string `json:"PrivateMapKey,omitnil,omitempty" name:"PrivateMapKey"`
 
 	// Video Codec Parameters. Optional, if not filled, Keep original stream Parameters.
+	//
+	// Deprecated: VideoEncodeParams is deprecated.
 	VideoEncodeParams *VideoEncodeParams `json:"VideoEncodeParams,omitnil,omitempty" name:"VideoEncodeParams"`
 
 	// Audio Codec Parameters. Optional, if not filled, Keep original stream Parameters.
+	//
+	// Deprecated: AudioEncodeParams is deprecated.
 	AudioEncodeParams *AudioEncodeParams `json:"AudioEncodeParams,omitnil,omitempty" name:"AudioEncodeParams"`
 
+	// 	
+	// Source URL. Example value: https://a.b/test.mp4
+	//
+	// Deprecated: SourceUrl is deprecated.
+	SourceUrl []*string `json:"SourceUrl,omitnil,omitempty" name:"SourceUrl"`
 
-	StreamUrl *string `json:"StreamUrl,omitnil,omitempty" name:"StreamUrl"`
+
+	SeekSecond *int64 `json:"SeekSecond,omitnil,omitempty" name:"SeekSecond"`
+
+	// Enable auto relay to cdn, please make sure that this feature has been enabled in the console.
+	AutoPush *bool `json:"AutoPush,omitnil,omitempty" name:"AutoPush"`
+
+	// Loop playback count, value range: [-1, 1000], default is 1 time. - 0 is an invalid value - -1 is for loop playback, task termination requires actively calling the stop interface or setting MaxDuration.
+	RepeatNum *int64 `json:"RepeatNum,omitnil,omitempty" name:"RepeatNum"`
+
+	// Loop playback maximum duration, only effective when RepeatNum is set to -1, valid value range: [1, 10080], unit: minutes
+	MaxDuration *int64 `json:"MaxDuration,omitnil,omitempty" name:"MaxDuration"`
 }
 
 type StartStreamIngestRequest struct {
@@ -2936,9 +2954,8 @@ type StartStreamIngestRequest struct {
 	// UserSig corresponding to the Pull stream Relay Robot UserId, i.e., UserId and UserSig are equivalent to the Robot's Login password for entering the room. For the specific Calculation method, please refer to the TRTC [UserSig](https://www.tencentcloud.com/zh/document/product/647/39074) Scheme.
 	UserSig *string `json:"UserSig,omitnil,omitempty" name:"UserSig"`
 
-	// 	
-	// Source URL. Example value: https://a.b/test.mp4
-	SourceUrl []*string `json:"SourceUrl,omitnil,omitempty" name:"SourceUrl"`
+	// The Url of the media resource.
+	StreamUrl *string `json:"StreamUrl,omitnil,omitempty" name:"StreamUrl"`
 
 	// TRTC room permission Encryption ticket, only needed when advanced permission control is enabled in the Console. After enabling advanced permission control in the TRTC Console, TRTC's backend service system will verify a so-called [PrivateMapKey] 'Permission ticket', which contains an encrypted RoomId and an encrypted 'Permission bit list'. Since PrivateMapKey contains RoomId, providing only UserSig without PrivateMapKey does not allow entry into the specified room.
 	PrivateMapKey *string `json:"PrivateMapKey,omitnil,omitempty" name:"PrivateMapKey"`
@@ -2949,7 +2966,20 @@ type StartStreamIngestRequest struct {
 	// Audio Codec Parameters. Optional, if not filled, Keep original stream Parameters.
 	AudioEncodeParams *AudioEncodeParams `json:"AudioEncodeParams,omitnil,omitempty" name:"AudioEncodeParams"`
 
-	StreamUrl *string `json:"StreamUrl,omitnil,omitempty" name:"StreamUrl"`
+	// 	
+	// Source URL. Example value: https://a.b/test.mp4
+	SourceUrl []*string `json:"SourceUrl,omitnil,omitempty" name:"SourceUrl"`
+
+	SeekSecond *int64 `json:"SeekSecond,omitnil,omitempty" name:"SeekSecond"`
+
+	// Enable auto relay to cdn, please make sure that this feature has been enabled in the console.
+	AutoPush *bool `json:"AutoPush,omitnil,omitempty" name:"AutoPush"`
+
+	// Loop playback count, value range: [-1, 1000], default is 1 time. - 0 is an invalid value - -1 is for loop playback, task termination requires actively calling the stop interface or setting MaxDuration.
+	RepeatNum *int64 `json:"RepeatNum,omitnil,omitempty" name:"RepeatNum"`
+
+	// Loop playback maximum duration, only effective when RepeatNum is set to -1, valid value range: [1, 10080], unit: minutes
+	MaxDuration *int64 `json:"MaxDuration,omitnil,omitempty" name:"MaxDuration"`
 }
 
 func (r *StartStreamIngestRequest) ToJsonString() string {
@@ -2969,11 +2999,15 @@ func (r *StartStreamIngestRequest) FromJsonString(s string) error {
 	delete(f, "RoomIdType")
 	delete(f, "UserId")
 	delete(f, "UserSig")
-	delete(f, "SourceUrl")
+	delete(f, "StreamUrl")
 	delete(f, "PrivateMapKey")
 	delete(f, "VideoEncodeParams")
 	delete(f, "AudioEncodeParams")
-	delete(f, "StreamUrl")
+	delete(f, "SourceUrl")
+	delete(f, "SeekSecond")
+	delete(f, "AutoPush")
+	delete(f, "RepeatNum")
+	delete(f, "MaxDuration")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartStreamIngestRequest has unknown keys!", "")
 	}
@@ -3345,6 +3379,77 @@ func (r *UpdatePublishCdnStreamResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpdatePublishCdnStreamResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateStreamIngestRequestParams struct {
+	// The SDKAppId of TRTC should be the same as the SDKAppId corresponding to the task room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// The unique Id of the task, will return after successfully starting the task.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The new url of the media resource.
+	StreamUrl *string `json:"StreamUrl,omitnil,omitempty" name:"StreamUrl"`
+}
+
+type UpdateStreamIngestRequest struct {
+	*tchttp.BaseRequest
+	
+	// The SDKAppId of TRTC should be the same as the SDKAppId corresponding to the task room.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// The unique Id of the task, will return after successfully starting the task.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The new url of the media resource.
+	StreamUrl *string `json:"StreamUrl,omitnil,omitempty" name:"StreamUrl"`
+}
+
+func (r *UpdateStreamIngestRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateStreamIngestRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "TaskId")
+	delete(f, "StreamUrl")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateStreamIngestRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateStreamIngestResponseParams struct {
+	// Task status information. InProgress: Indicates that the current task is in progress. NotExist: Indicates that the current task does not exist. Example value: InProgress
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateStreamIngestResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateStreamIngestResponseParams `json:"Response"`
+}
+
+func (r *UpdateStreamIngestResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateStreamIngestResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

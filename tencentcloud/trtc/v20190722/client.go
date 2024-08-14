@@ -2449,6 +2449,7 @@ func NewStartStreamIngestResponse() (response *StartStreamIngestResponse) {
 //  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETER_STRROOMID = "InvalidParameter.StrRoomId"
+//  INVALIDPARAMETER_STREAMURL = "InvalidParameter.StreamUrl"
 //  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
 //  INVALIDPARAMETER_USERSIG = "InvalidParameter.UserSig"
 //  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
@@ -2473,6 +2474,7 @@ func (c *Client) StartStreamIngest(request *StartStreamIngestRequest) (response 
 //  INVALIDPARAMETER_ROOMID = "InvalidParameter.RoomId"
 //  INVALIDPARAMETER_SDKAPPID = "InvalidParameter.SdkAppId"
 //  INVALIDPARAMETER_STRROOMID = "InvalidParameter.StrRoomId"
+//  INVALIDPARAMETER_STREAMURL = "InvalidParameter.StreamUrl"
 //  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
 //  INVALIDPARAMETER_USERSIG = "InvalidParameter.UserSig"
 //  MISSINGPARAMETER_ROOMID = "MissingParameter.RoomId"
@@ -2682,6 +2684,65 @@ func (c *Client) UpdatePublishCdnStreamWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewUpdatePublishCdnStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateStreamIngestRequest() (request *UpdateStreamIngestRequest) {
+    request = &UpdateStreamIngestRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "UpdateStreamIngest")
+    
+    
+    return
+}
+
+func NewUpdateStreamIngestResponse() (response *UpdateStreamIngestResponse) {
+    response = &UpdateStreamIngestResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateStreamIngest
+// You can update the StreamUrl of the Relay task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_STREAMURL = "InvalidParameter.StreamUrl"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+func (c *Client) UpdateStreamIngest(request *UpdateStreamIngestRequest) (response *UpdateStreamIngestResponse, err error) {
+    return c.UpdateStreamIngestWithContext(context.Background(), request)
+}
+
+// UpdateStreamIngest
+// You can update the StreamUrl of the Relay task.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_STREAMURL = "InvalidParameter.StreamUrl"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+//  MISSINGPARAMETER_SDKAPPID = "MissingParameter.SdkAppId"
+//  MISSINGPARAMETER_TASKID = "MissingParameter.TaskId"
+func (c *Client) UpdateStreamIngestWithContext(ctx context.Context, request *UpdateStreamIngestRequest) (response *UpdateStreamIngestResponse, err error) {
+    if request == nil {
+        request = NewUpdateStreamIngestRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateStreamIngest require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateStreamIngestResponse()
     err = c.Send(request, response)
     return
 }
