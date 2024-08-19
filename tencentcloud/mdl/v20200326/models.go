@@ -171,6 +171,9 @@ type AttachedInput struct {
 	// Input failover configuration
 	// Note: this field may return `null`, indicating that no valid value was found.
 	FailOverSettings *FailOverSettings `json:"FailOverSettings,omitnil,omitempty" name:"FailOverSettings"`
+
+	// Caption selector for the input. There can be 0 to 1 audio selectors.
+	CaptionSelectors []*CaptionSelector `json:"CaptionSelectors,omitnil,omitempty" name:"CaptionSelectors"`
 }
 
 type AudioCodecDetail struct {
@@ -267,6 +270,14 @@ type AudioTrackInfo struct {
 
 	// Audio encoding configuration.
 	AudioCodecDetails *AudioCodecDetail `json:"AudioCodecDetails,omitnil,omitempty" name:"AudioCodecDetails"`
+}
+
+type CaptionSelector struct {
+	// Caption selector name, which can contain 1-32 letters, digits, and underscores.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Caption source type, only support `SCTE-128`.
+	CaptionSourceType *string `json:"CaptionSourceType,omitnil,omitempty" name:"CaptionSourceType"`
 }
 
 type ChannelAlertInfos struct {
@@ -3653,30 +3664,33 @@ type SubtitleConf struct {
 	// Template name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Optional values: INPUT (source subtitle information), ANALYSIS (intelligent speech recognition to subtitles, currently only supports this option).
+	// Name of caption selector. Required when CaptionSource selects `INPUT`.
+	CaptionSelectorName *string `json:"CaptionSelectorName,omitnil,omitempty" name:"CaptionSelectorName"`
+
+	// Optional values: INPUT (source subtitle information), ANALYSIS (intelligent speech recognition to subtitles).
 	CaptionSource *string `json:"CaptionSource,omitnil,omitempty" name:"CaptionSource"`
 
-	// Optional values: 1 Source, 2 Source+Target, 3 Target (original language only, original language + translation language, translation language).
+	// Optional values: 1 Source, 2 Source+Target, 3 Target (original language only, original language + translation language, translation language). Required when CaptionSource selects `ANALYSIS `.
 	ContentType *uint64 `json:"ContentType,omitnil,omitempty" name:"ContentType"`
 
-	// Output mode: 1 Burn in (currently only this option is supported).
+	// Output mode: 1 Burn in, 2 Embedded. Support `2` when CaptionSource selects `INPUT`. Support `1` when CaptionSource selects `ANALYSIS `.
 	TargetType *uint64 `json:"TargetType,omitnil,omitempty" name:"TargetType"`
 
 	// Original phonetic language.
-	// Optional values: Chinese, English, Japanese, Korean.
+	// Optional values: Chinese, English, Japanese, Korean. Required when CaptionSource selects `ANALYSIS `.
 	SourceLanguage *string `json:"SourceLanguage,omitnil,omitempty" name:"SourceLanguage"`
 
 	// Target language.
-	// Optional values: Chinese, English, Japanese, Korean.
+	// Optional values: Chinese, English, Japanese, Korean. Required when CaptionSource selects `ANALYSIS `.
 	TargetLanguage *string `json:"TargetLanguage,omitnil,omitempty" name:"TargetLanguage"`
 
-	// Font style configuration.
+	// Font style configuration. Required when CaptionSource selects `ANALYSIS `.
 	FontStyle *SubtitleFontConf `json:"FontStyle,omitnil,omitempty" name:"FontStyle"`
 
-	// There are two modes: STEADY and DYNAMIC, corresponding to steady state and unstable state respectively; the default is STEADY.
+	// There are two modes: STEADY and DYNAMIC, corresponding to steady state and unstable state respectively; the default is STEADY. Required when CaptionSource selects `ANALYSIS `.
 	StateEffectMode *string `json:"StateEffectMode,omitnil,omitempty" name:"StateEffectMode"`
 
-	// Steady-state delay time, unit seconds; optional values: 10, 20, default 10.
+	// Steady-state delay time, unit seconds; optional values: 10, 20, default 10. Required when CaptionSource selects `ANALYSIS `.
 	SteadyStateDelayedTime *uint64 `json:"SteadyStateDelayedTime,omitnil,omitempty" name:"SteadyStateDelayedTime"`
 }
 
