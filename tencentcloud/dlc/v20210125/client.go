@@ -721,6 +721,114 @@ func (c *Client) CheckDataEngineImageCanBeUpgradeWithContext(ctx context.Context
     return
 }
 
+func NewCheckGrantedPermissionRequest() (request *CheckGrantedPermissionRequest) {
+    request = &CheckGrantedPermissionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "CheckGrantedPermission")
+    
+    
+    return
+}
+
+func NewCheckGrantedPermissionResponse() (response *CheckGrantedPermissionResponse) {
+    response = &CheckGrantedPermissionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CheckGrantedPermission
+// This API is used to check the permission status.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CheckGrantedPermission(request *CheckGrantedPermissionRequest) (response *CheckGrantedPermissionResponse, err error) {
+    return c.CheckGrantedPermissionWithContext(context.Background(), request)
+}
+
+// CheckGrantedPermission
+// This API is used to check the permission status.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CheckGrantedPermissionWithContext(ctx context.Context, request *CheckGrantedPermissionRequest) (response *CheckGrantedPermissionResponse, err error) {
+    if request == nil {
+        request = NewCheckGrantedPermissionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckGrantedPermission require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckGrantedPermissionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCopyDLCTableRequest() (request *CopyDLCTableRequest) {
+    request = &CopyDLCTableRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "CopyDLCTable")
+    
+    
+    return
+}
+
+func NewCopyDLCTableResponse() (response *CopyDLCTableResponse) {
+    response = &CopyDLCTableResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CopyDLCTable
+// This API is used to copy a table.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CopyDLCTable(request *CopyDLCTableRequest) (response *CopyDLCTableResponse, err error) {
+    return c.CopyDLCTableWithContext(context.Background(), request)
+}
+
+// CopyDLCTable
+// This API is used to copy a table.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CopyDLCTableWithContext(ctx context.Context, request *CopyDLCTableRequest) (response *CopyDLCTableResponse, err error) {
+    if request == nil {
+        request = NewCopyDLCTableRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CopyDLCTable require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCopyDLCTableResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCHDFSBindingProductRequest() (request *CreateCHDFSBindingProductRequest) {
     request = &CreateCHDFSBindingProductRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -772,6 +880,61 @@ func (c *Client) CreateCHDFSBindingProductWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewCreateCHDFSBindingProductResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDLCTableRequest() (request *CreateDLCTableRequest) {
+    request = &CreateDLCTableRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "CreateDLCTable")
+    
+    
+    return
+}
+
+func NewCreateDLCTableResponse() (response *CreateDLCTableResponse) {
+    response = &CreateDLCTableResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDLCTable
+// This API is used to create a table.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateDLCTable(request *CreateDLCTableRequest) (response *CreateDLCTableResponse, err error) {
+    return c.CreateDLCTableWithContext(context.Background(), request)
+}
+
+// CreateDLCTable
+// This API is used to create a table.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateDLCTableWithContext(ctx context.Context, request *CreateDLCTableRequest) (response *CreateDLCTableResponse, err error) {
+    if request == nil {
+        request = NewCreateDLCTableRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDLCTable require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDLCTableResponse()
     err = c.Send(request, response)
     return
 }
@@ -2381,6 +2544,120 @@ func (c *Client) DescribeDLCCatalogAccessWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeDLCTableRequest() (request *DescribeDLCTableRequest) {
+    request = &DescribeDLCTableRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeDLCTable")
+    
+    
+    return
+}
+
+func NewDescribeDLCTableResponse() (response *DescribeDLCTableResponse) {
+    response = &DescribeDLCTableResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDLCTable
+// This API is used to obtain the table.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeDLCTable(request *DescribeDLCTableRequest) (response *DescribeDLCTableResponse, err error) {
+    return c.DescribeDLCTableWithContext(context.Background(), request)
+}
+
+// DescribeDLCTable
+// This API is used to obtain the table.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeDLCTableWithContext(ctx context.Context, request *DescribeDLCTableRequest) (response *DescribeDLCTableResponse, err error) {
+    if request == nil {
+        request = NewDescribeDLCTableRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDLCTable require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDLCTableResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDLCTableListRequest() (request *DescribeDLCTableListRequest) {
+    request = &DescribeDLCTableListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeDLCTableList")
+    
+    
+    return
+}
+
+func NewDescribeDLCTableListResponse() (response *DescribeDLCTableListResponse) {
+    response = &DescribeDLCTableListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDLCTableList
+// This API is used to obtain the list of tables.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeDLCTableList(request *DescribeDLCTableListRequest) (response *DescribeDLCTableListResponse, err error) {
+    return c.DescribeDLCTableListWithContext(context.Background(), request)
+}
+
+// DescribeDLCTableList
+// This API is used to obtain the list of tables.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeDLCTableListWithContext(ctx context.Context, request *DescribeDLCTableListRequest) (response *DescribeDLCTableListResponse, err error) {
+    if request == nil {
+        request = NewDescribeDLCTableListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDLCTableList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDLCTableListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDMSDatabaseRequest() (request *DescribeDMSDatabaseRequest) {
     request = &DescribeDMSDatabaseRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2432,6 +2709,61 @@ func (c *Client) DescribeDMSDatabaseWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDescribeDMSDatabaseResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDMSDatabaseListRequest() (request *DescribeDMSDatabaseListRequest) {
+    request = &DescribeDMSDatabaseListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeDMSDatabaseList")
+    
+    
+    return
+}
+
+func NewDescribeDMSDatabaseListResponse() (response *DescribeDMSDatabaseListResponse) {
+    response = &DescribeDMSDatabaseListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDMSDatabaseList
+// This API is used to obtain the list of databases.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeDMSDatabaseList(request *DescribeDMSDatabaseListRequest) (response *DescribeDMSDatabaseListResponse, err error) {
+    return c.DescribeDMSDatabaseListWithContext(context.Background(), request)
+}
+
+// DescribeDMSDatabaseList
+// This API is used to obtain the list of databases.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeDMSDatabaseListWithContext(ctx context.Context, request *DescribeDMSDatabaseListRequest) (response *DescribeDMSDatabaseListResponse, err error) {
+    if request == nil {
+        request = NewDescribeDMSDatabaseListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDMSDatabaseList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDMSDatabaseListResponse()
     err = c.Send(request, response)
     return
 }
@@ -2786,6 +3118,112 @@ func (c *Client) DescribeForbiddenTableProWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeJobRequest() (request *DescribeJobRequest) {
+    request = &DescribeJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeJob")
+    
+    
+    return
+}
+
+func NewDescribeJobResponse() (response *DescribeJobResponse) {
+    response = &DescribeJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeJob
+// This API is used to obtain the job information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER_JOBNOTFOUND = "InvalidParameter.JobNotFound"
+func (c *Client) DescribeJob(request *DescribeJobRequest) (response *DescribeJobResponse, err error) {
+    return c.DescribeJobWithContext(context.Background(), request)
+}
+
+// DescribeJob
+// This API is used to obtain the job information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER_JOBNOTFOUND = "InvalidParameter.JobNotFound"
+func (c *Client) DescribeJobWithContext(ctx context.Context, request *DescribeJobRequest) (response *DescribeJobResponse, err error) {
+    if request == nil {
+        request = NewDescribeJobRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeJobsRequest() (request *DescribeJobsRequest) {
+    request = &DescribeJobsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeJobs")
+    
+    
+    return
+}
+
+func NewDescribeJobsResponse() (response *DescribeJobsResponse) {
+    response = &DescribeJobsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeJobs
+// This API is used to obtain the list of job information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER_JOBNOTFOUND = "InvalidParameter.JobNotFound"
+func (c *Client) DescribeJobs(request *DescribeJobsRequest) (response *DescribeJobsResponse, err error) {
+    return c.DescribeJobsWithContext(context.Background(), request)
+}
+
+// DescribeJobs
+// This API is used to obtain the list of job information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER_JOBNOTFOUND = "InvalidParameter.JobNotFound"
+func (c *Client) DescribeJobsWithContext(ctx context.Context, request *DescribeJobsRequest) (response *DescribeJobsResponse, err error) {
+    if request == nil {
+        request = NewDescribeJobsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeJobs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeJobsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLakeFsDirSummaryRequest() (request *DescribeLakeFsDirSummaryRequest) {
     request = &DescribeLakeFsDirSummaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2961,6 +3399,59 @@ func (c *Client) DescribeOtherCHDFSBindingListWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeOtherCHDFSBindingListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeQueryRequest() (request *DescribeQueryRequest) {
+    request = &DescribeQueryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeQuery")
+    
+    
+    return
+}
+
+func NewDescribeQueryResponse() (response *DescribeQueryResponse) {
+    response = &DescribeQueryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeQuery
+// This API is used to obtain the query results.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER_TASKNOTFOUND = "InvalidParameter.TaskNotFound"
+func (c *Client) DescribeQuery(request *DescribeQueryRequest) (response *DescribeQueryResponse, err error) {
+    return c.DescribeQueryWithContext(context.Background(), request)
+}
+
+// DescribeQuery
+// This API is used to obtain the query results.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER_TASKNOTFOUND = "InvalidParameter.TaskNotFound"
+func (c *Client) DescribeQueryWithContext(ctx context.Context, request *DescribeQueryRequest) (response *DescribeQueryResponse, err error) {
+    if request == nil {
+        request = NewDescribeQueryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeQuery require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeQueryResponse()
     err = c.Send(request, response)
     return
 }
@@ -3492,6 +3983,59 @@ func (c *Client) DescribeTaskResultWithContext(ctx context.Context, request *Des
     request.SetContext(ctx)
     
     response = NewDescribeTaskResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTaskStatisticsRequest() (request *DescribeTaskStatisticsRequest) {
+    request = &DescribeTaskStatisticsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DescribeTaskStatistics")
+    
+    
+    return
+}
+
+func NewDescribeTaskStatisticsResponse() (response *DescribeTaskStatisticsResponse) {
+    response = &DescribeTaskStatisticsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTaskStatistics
+// This API is used to describe the information on task statistics.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER_TASKNOTFOUND = "InvalidParameter.TaskNotFound"
+func (c *Client) DescribeTaskStatistics(request *DescribeTaskStatisticsRequest) (response *DescribeTaskStatisticsResponse, err error) {
+    return c.DescribeTaskStatisticsWithContext(context.Background(), request)
+}
+
+// DescribeTaskStatistics
+// This API is used to describe the information on task statistics.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALSYSTEMEXCEPTION = "InternalError.InternalSystemException"
+//  INVALIDPARAMETER_TASKNOTFOUND = "InvalidParameter.TaskNotFound"
+func (c *Client) DescribeTaskStatisticsWithContext(ctx context.Context, request *DescribeTaskStatisticsRequest) (response *DescribeTaskStatisticsResponse, err error) {
+    if request == nil {
+        request = NewDescribeTaskStatisticsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTaskStatistics require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTaskStatisticsResponse()
     err = c.Send(request, response)
     return
 }
@@ -4250,6 +4794,61 @@ func (c *Client) DetachWorkGroupPolicyWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDetachWorkGroupPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDropDLCTableRequest() (request *DropDLCTableRequest) {
+    request = &DropDLCTableRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dlc", APIVersion, "DropDLCTable")
+    
+    
+    return
+}
+
+func NewDropDLCTableResponse() (response *DropDLCTableResponse) {
+    response = &DropDLCTableResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DropDLCTable
+// This API is used to delete the table.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DropDLCTable(request *DropDLCTableRequest) (response *DropDLCTableResponse, err error) {
+    return c.DropDLCTableWithContext(context.Background(), request)
+}
+
+// DropDLCTable
+// This API is used to delete the table.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DropDLCTableWithContext(ctx context.Context, request *DropDLCTableRequest) (response *DropDLCTableResponse, err error) {
+    if request == nil {
+        request = NewDropDLCTableRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DropDLCTable require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDropDLCTableResponse()
     err = c.Send(request, response)
     return
 }
