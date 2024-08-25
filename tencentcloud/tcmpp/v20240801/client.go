@@ -65,47 +65,35 @@ func NewAddTeamMemberResponse() (response *AddTeamMemberResponse) {
 }
 
 // AddTeamMember
-// This API is used to add users to a team
+// This API is used to add a team member.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDROLEID = "InvalidParameterValue.InvalidRoleId"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 //  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) AddTeamMember(request *AddTeamMemberRequest) (response *AddTeamMemberResponse, err error) {
     return c.AddTeamMemberWithContext(context.Background(), request)
 }
 
 // AddTeamMember
-// This API is used to add users to a team
+// This API is used to add a team member.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDROLEID = "InvalidParameterValue.InvalidRoleId"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 //  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
 func (c *Client) AddTeamMemberWithContext(ctx context.Context, request *AddTeamMemberRequest) (response *AddTeamMemberResponse, err error) {
     if request == nil {
         request = NewAddTeamMemberRequest()
@@ -203,6 +191,69 @@ func (c *Client) CheckGlobalDomainWithContext(ctx context.Context, request *Chec
     return
 }
 
+func NewConfigureMNPPreviewRequest() (request *ConfigureMNPPreviewRequest) {
+    request = &ConfigureMNPPreviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "ConfigureMNPPreview")
+    
+    
+    return
+}
+
+func NewConfigureMNPPreviewResponse() (response *ConfigureMNPPreviewResponse) {
+    response = &ConfigureMNPPreviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ConfigureMNPPreview
+// This API is used to configure the preview version of a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  FAILEDOPERATION_SHOWCASEVERSIONALREADYEXIST = "FailedOperation.ShowcaseVersionAlreadyExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) ConfigureMNPPreview(request *ConfigureMNPPreviewRequest) (response *ConfigureMNPPreviewResponse, err error) {
+    return c.ConfigureMNPPreviewWithContext(context.Background(), request)
+}
+
+// ConfigureMNPPreview
+// This API is used to configure the preview version of a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  FAILEDOPERATION_SHOWCASEVERSIONALREADYEXIST = "FailedOperation.ShowcaseVersionAlreadyExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) ConfigureMNPPreviewWithContext(ctx context.Context, request *ConfigureMNPPreviewRequest) (response *ConfigureMNPPreviewResponse, err error) {
+    if request == nil {
+        request = NewConfigureMNPPreviewRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ConfigureMNPPreview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewConfigureMNPPreviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateApplicationRequest() (request *CreateApplicationRequest) {
     request = &CreateApplicationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -223,37 +274,39 @@ func NewCreateApplicationResponse() (response *CreateApplicationResponse) {
 }
 
 // CreateApplication
-// This API is used to add an application
+// This API is used to create an application.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_OPERATIONSTEAMNOAPPLICATIONPERMISSION = "FailedOperation.OperationsTeamNoApplicationPermission"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_TEAMTYPEMISMATCH = "InvalidParameterValue.TeamTypeMismatch"
-//  MISSINGPARAMETER = "MissingParameter"
+//  FAILEDOPERATION_APPLICATIONNAMEALREADYEXISTED = "FailedOperation.ApplicationNameAlreadyExisted"
+//  FAILEDOPERATION_APPLICATIONNUMBEREXCEEDLIMIT = "FailedOperation.ApplicationNumberExceedLimit"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_APPPACKAGENAMENOTCONFIG = "InvalidParameterValue.AppPackageNameNotConfig"
+//  INVALIDPARAMETERVALUE_INVALIDAPPPACKAGENAMELAYOUT = "InvalidParameterValue.InvalidAppPackageNameLayout"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONINTRO = "InvalidParameterValue.InvalidApplicationIntro"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONNAME = "InvalidParameterValue.InvalidApplicationName"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONREMARK = "InvalidParameterValue.InvalidApplicationRemark"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) CreateApplication(request *CreateApplicationRequest) (response *CreateApplicationResponse, err error) {
     return c.CreateApplicationWithContext(context.Background(), request)
 }
 
 // CreateApplication
-// This API is used to add an application
+// This API is used to create an application.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_OPERATIONSTEAMNOAPPLICATIONPERMISSION = "FailedOperation.OperationsTeamNoApplicationPermission"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_TEAMTYPEMISMATCH = "InvalidParameterValue.TeamTypeMismatch"
-//  MISSINGPARAMETER = "MissingParameter"
+//  FAILEDOPERATION_APPLICATIONNAMEALREADYEXISTED = "FailedOperation.ApplicationNameAlreadyExisted"
+//  FAILEDOPERATION_APPLICATIONNUMBEREXCEEDLIMIT = "FailedOperation.ApplicationNumberExceedLimit"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_APPPACKAGENAMENOTCONFIG = "InvalidParameterValue.AppPackageNameNotConfig"
+//  INVALIDPARAMETERVALUE_INVALIDAPPPACKAGENAMELAYOUT = "InvalidParameterValue.InvalidAppPackageNameLayout"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONINTRO = "InvalidParameterValue.InvalidApplicationIntro"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONNAME = "InvalidParameterValue.InvalidApplicationName"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONREMARK = "InvalidParameterValue.InvalidApplicationRemark"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) CreateApplicationWithContext(ctx context.Context, request *CreateApplicationRequest) (response *CreateApplicationResponse, err error) {
     if request == nil {
         request = NewCreateApplicationRequest()
@@ -266,6 +319,71 @@ func (c *Client) CreateApplicationWithContext(ctx context.Context, request *Crea
     request.SetContext(ctx)
     
     response = NewCreateApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateApplicationSensitiveAPIRequest() (request *CreateApplicationSensitiveAPIRequest) {
+    request = &CreateApplicationSensitiveAPIRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "CreateApplicationSensitiveAPI")
+    
+    
+    return
+}
+
+func NewCreateApplicationSensitiveAPIResponse() (response *CreateApplicationSensitiveAPIResponse) {
+    response = &CreateApplicationSensitiveAPIResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateApplicationSensitiveAPI
+// This API is used to create a sensitive API of an application.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EXISTSENSITIVEAPI = "FailedOperation.ExistSensitiveAPI"
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) CreateApplicationSensitiveAPI(request *CreateApplicationSensitiveAPIRequest) (response *CreateApplicationSensitiveAPIResponse, err error) {
+    return c.CreateApplicationSensitiveAPIWithContext(context.Background(), request)
+}
+
+// CreateApplicationSensitiveAPI
+// This API is used to create a sensitive API of an application.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EXISTSENSITIVEAPI = "FailedOperation.ExistSensitiveAPI"
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) CreateApplicationSensitiveAPIWithContext(ctx context.Context, request *CreateApplicationSensitiveAPIRequest) (response *CreateApplicationSensitiveAPIResponse, err error) {
+    if request == nil {
+        request = NewCreateApplicationSensitiveAPIRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateApplicationSensitiveAPI require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateApplicationSensitiveAPIResponse()
     err = c.Send(request, response)
     return
 }
@@ -290,7 +408,7 @@ func NewCreateConsoleMNPVersionCompileTaskResponse() (response *CreateConsoleMNP
 }
 
 // CreateConsoleMNPVersionCompileTask
-// This API is used to add new mini program version to the console
+// This API is used to add a new mini program version
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -304,7 +422,7 @@ func (c *Client) CreateConsoleMNPVersionCompileTask(request *CreateConsoleMNPVer
 }
 
 // CreateConsoleMNPVersionCompileTask
-// This API is used to add new mini program version to the console
+// This API is used to add a new mini program version
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -475,6 +593,65 @@ func (c *Client) CreateGlobalDomainWithContext(ctx context.Context, request *Cre
     return
 }
 
+func NewCreateGlobalDomainACLRequest() (request *CreateGlobalDomainACLRequest) {
+    request = &CreateGlobalDomainACLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "CreateGlobalDomainACL")
+    
+    
+    return
+}
+
+func NewCreateGlobalDomainACLResponse() (response *CreateGlobalDomainACLResponse) {
+    response = &CreateGlobalDomainACLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateGlobalDomainACL
+// This API is used to create a global domain allowlist or blocklist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) CreateGlobalDomainACL(request *CreateGlobalDomainACLRequest) (response *CreateGlobalDomainACLResponse, err error) {
+    return c.CreateGlobalDomainACLWithContext(context.Background(), request)
+}
+
+// CreateGlobalDomainACL
+// This API is used to create a global domain allowlist or blocklist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) CreateGlobalDomainACLWithContext(ctx context.Context, request *CreateGlobalDomainACLRequest) (response *CreateGlobalDomainACLResponse, err error) {
+    if request == nil {
+        request = NewCreateGlobalDomainACLRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateGlobalDomainACL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateGlobalDomainACLResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateMNPRequest() (request *CreateMNPRequest) {
     request = &CreateMNPRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -498,17 +675,19 @@ func NewCreateMNPResponse() (response *CreateMNPResponse) {
 // This API is used to create a mini program
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_MINIPROGRAMICONANALYSISFAILED = "FailedOperation.MiniProgramIconAnalysisFailed"
+//  FAILEDOPERATION_MNPNUMBEREXCEEDLIMIT = "FailedOperation.MNPNumberExceedLimit"
 //  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPICON = "InvalidParameterValue.InvalidMNPIcon"
+//  INVALIDPARAMETERVALUE_INVALIDMNPINTRO = "InvalidParameterValue.InvalidMNPIntro"
+//  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
+//  INVALIDPARAMETERVALUE_INVALIDMNPTYPE = "InvalidParameterValue.InvalidMNPType"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_MNPTYPENUMBEREXCEEDLIMIT = "InvalidParameterValue.MNPTypeNumberExceedLimit"
 //  INVALIDPARAMETERVALUE_MINIPROGRAMNAMEALREADYEXIST = "InvalidParameterValue.MiniProgramNameAlreadyExist"
-//  INVALIDPARAMETERVALUE_TEAMTYPEMISMATCH = "InvalidParameterValue.TeamTypeMismatch"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) CreateMNP(request *CreateMNPRequest) (response *CreateMNPResponse, err error) {
     return c.CreateMNPWithContext(context.Background(), request)
@@ -518,17 +697,19 @@ func (c *Client) CreateMNP(request *CreateMNPRequest) (response *CreateMNPRespon
 // This API is used to create a mini program
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_MINIPROGRAMICONANALYSISFAILED = "FailedOperation.MiniProgramIconAnalysisFailed"
+//  FAILEDOPERATION_MNPNUMBEREXCEEDLIMIT = "FailedOperation.MNPNumberExceedLimit"
 //  FAILEDOPERATION_OPERATIONSTEAMNOMINIPROGRAMPERMISSION = "FailedOperation.OperationsTeamNoMiniProgramPermission"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPICON = "InvalidParameterValue.InvalidMNPIcon"
+//  INVALIDPARAMETERVALUE_INVALIDMNPINTRO = "InvalidParameterValue.InvalidMNPIntro"
+//  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
+//  INVALIDPARAMETERVALUE_INVALIDMNPTYPE = "InvalidParameterValue.InvalidMNPType"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_MNPTYPENUMBEREXCEEDLIMIT = "InvalidParameterValue.MNPTypeNumberExceedLimit"
 //  INVALIDPARAMETERVALUE_MINIPROGRAMNAMEALREADYEXIST = "InvalidParameterValue.MiniProgramNameAlreadyExist"
-//  INVALIDPARAMETERVALUE_TEAMTYPEMISMATCH = "InvalidParameterValue.TeamTypeMismatch"
 //  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) CreateMNPWithContext(ctx context.Context, request *CreateMNPRequest) (response *CreateMNPResponse, err error) {
     if request == nil {
@@ -542,6 +723,268 @@ func (c *Client) CreateMNPWithContext(ctx context.Context, request *CreateMNPReq
     request.SetContext(ctx)
     
     response = NewCreateMNPResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateMNPApprovalRequest() (request *CreateMNPApprovalRequest) {
+    request = &CreateMNPApprovalRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "CreateMNPApproval")
+    
+    
+    return
+}
+
+func NewCreateMNPApprovalResponse() (response *CreateMNPApprovalResponse) {
+    response = &CreateMNPApprovalResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateMNPApproval
+// This API is used to create a mini program approval request.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EXISTMNPAPPROVALRECORD = "FailedOperation.ExistMNPApprovalRecord"
+//  FAILEDOPERATION_MNPTEAMASSOCIATEDAPPLICATIONTEAMNOTCREATEAPPLICATION = "FailedOperation.MNPTeamAssociatedApplicationTeamNotCreateApplication"
+//  FAILEDOPERATION_MNPTEAMNOTASSOCIATEDAPPLICATIONTEAM = "FailedOperation.MNPTeamNotAssociatedApplicationTeam"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLYACTION = "InvalidParameterValue.InvalidApplyAction"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_MNPAPPROVALSTATUSERROR = "InvalidParameterValue.MNPApprovalStatusError"
+//  INVALIDPARAMETERVALUE_MNPVERSIONISNOTPLATFORMPHASE = "InvalidParameterValue.MNPVersionIsNotPlatformPhase"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreateMNPApproval(request *CreateMNPApprovalRequest) (response *CreateMNPApprovalResponse, err error) {
+    return c.CreateMNPApprovalWithContext(context.Background(), request)
+}
+
+// CreateMNPApproval
+// This API is used to create a mini program approval request.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EXISTMNPAPPROVALRECORD = "FailedOperation.ExistMNPApprovalRecord"
+//  FAILEDOPERATION_MNPTEAMASSOCIATEDAPPLICATIONTEAMNOTCREATEAPPLICATION = "FailedOperation.MNPTeamAssociatedApplicationTeamNotCreateApplication"
+//  FAILEDOPERATION_MNPTEAMNOTASSOCIATEDAPPLICATIONTEAM = "FailedOperation.MNPTeamNotAssociatedApplicationTeam"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLYACTION = "InvalidParameterValue.InvalidApplyAction"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_MNPAPPROVALSTATUSERROR = "InvalidParameterValue.MNPApprovalStatusError"
+//  INVALIDPARAMETERVALUE_MNPVERSIONISNOTPLATFORMPHASE = "InvalidParameterValue.MNPVersionIsNotPlatformPhase"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) CreateMNPApprovalWithContext(ctx context.Context, request *CreateMNPApprovalRequest) (response *CreateMNPApprovalResponse, err error) {
+    if request == nil {
+        request = NewCreateMNPApprovalRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMNPApproval require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMNPApprovalResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateMNPDomainACLRequest() (request *CreateMNPDomainACLRequest) {
+    request = &CreateMNPDomainACLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "CreateMNPDomainACL")
+    
+    
+    return
+}
+
+func NewCreateMNPDomainACLResponse() (response *CreateMNPDomainACLResponse) {
+    response = &CreateMNPDomainACLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateMNPDomainACL
+// This API is used to add a domain name to the allowlist/blocklist of a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXISTREPEATDOMAINURL = "FailedOperation.ExistRepeatDomainUrl"
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
+func (c *Client) CreateMNPDomainACL(request *CreateMNPDomainACLRequest) (response *CreateMNPDomainACLResponse, err error) {
+    return c.CreateMNPDomainACLWithContext(context.Background(), request)
+}
+
+// CreateMNPDomainACL
+// This API is used to add a domain name to the allowlist/blocklist of a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EXISTREPEATDOMAINURL = "FailedOperation.ExistRepeatDomainUrl"
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
+func (c *Client) CreateMNPDomainACLWithContext(ctx context.Context, request *CreateMNPDomainACLRequest) (response *CreateMNPDomainACLResponse, err error) {
+    if request == nil {
+        request = NewCreateMNPDomainACLRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMNPDomainACL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMNPDomainACLResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateMNPSensitiveAPIPermissionApprovalRequest() (request *CreateMNPSensitiveAPIPermissionApprovalRequest) {
+    request = &CreateMNPSensitiveAPIPermissionApprovalRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "CreateMNPSensitiveAPIPermissionApproval")
+    
+    
+    return
+}
+
+func NewCreateMNPSensitiveAPIPermissionApprovalResponse() (response *CreateMNPSensitiveAPIPermissionApprovalResponse) {
+    response = &CreateMNPSensitiveAPIPermissionApprovalResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateMNPSensitiveAPIPermissionApproval
+// This API is used to create a permission request to allow a mini program calling sensitive APIs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) CreateMNPSensitiveAPIPermissionApproval(request *CreateMNPSensitiveAPIPermissionApprovalRequest) (response *CreateMNPSensitiveAPIPermissionApprovalResponse, err error) {
+    return c.CreateMNPSensitiveAPIPermissionApprovalWithContext(context.Background(), request)
+}
+
+// CreateMNPSensitiveAPIPermissionApproval
+// This API is used to create a permission request to allow a mini program calling sensitive APIs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) CreateMNPSensitiveAPIPermissionApprovalWithContext(ctx context.Context, request *CreateMNPSensitiveAPIPermissionApprovalRequest) (response *CreateMNPSensitiveAPIPermissionApprovalResponse, err error) {
+    if request == nil {
+        request = NewCreateMNPSensitiveAPIPermissionApprovalRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMNPSensitiveAPIPermissionApproval require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMNPSensitiveAPIPermissionApprovalResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateMNPVersionRequest() (request *CreateMNPVersionRequest) {
+    request = &CreateMNPVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "CreateMNPVersion")
+    
+    
+    return
+}
+
+func NewCreateMNPVersionResponse() (response *CreateMNPVersionResponse) {
+    response = &CreateMNPVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateMNPVersion
+// This API is used to create a mini program version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FILEDOWNLOADFAILED = "FailedOperation.FileDownloadFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_EXISTMISMATCHPARAMETERTYPE = "InvalidParameterValue.ExistMismatchParameterType"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDMNPVERSION = "InvalidParameterValue.InvalidMNPVersion"
+//  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONINTRO = "InvalidParameterValue.InvalidMNPVersionIntro"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_MNPFILESIZEXCEEDLIMIT = "InvalidParameterValue.MNPFileSizExceedLimit"
+func (c *Client) CreateMNPVersion(request *CreateMNPVersionRequest) (response *CreateMNPVersionResponse, err error) {
+    return c.CreateMNPVersionWithContext(context.Background(), request)
+}
+
+// CreateMNPVersion
+// This API is used to create a mini program version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FILEDOWNLOADFAILED = "FailedOperation.FileDownloadFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_EXISTMISMATCHPARAMETERTYPE = "InvalidParameterValue.ExistMismatchParameterType"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDMNPVERSION = "InvalidParameterValue.InvalidMNPVersion"
+//  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONINTRO = "InvalidParameterValue.InvalidMNPVersionIntro"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_MNPFILESIZEXCEEDLIMIT = "InvalidParameterValue.MNPFileSizExceedLimit"
+func (c *Client) CreateMNPVersionWithContext(ctx context.Context, request *CreateMNPVersionRequest) (response *CreateMNPVersionResponse, err error) {
+    if request == nil {
+        request = NewCreateMNPVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateMNPVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateMNPVersionResponse()
     err = c.Send(request, response)
     return
 }
@@ -808,7 +1251,7 @@ func NewCreateSensitiveApiApplyResponse() (response *CreateSensitiveApiApplyResp
 }
 
 // CreateSensitiveApiApply
-// This API is used to apply for sensitive API call permissions
+// This API is used to apply for sensitive API permissions
 //
 // error code that may be returned:
 //  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
@@ -821,7 +1264,7 @@ func (c *Client) CreateSensitiveApiApply(request *CreateSensitiveApiApplyRequest
 }
 
 // CreateSensitiveApiApply
-// This API is used to apply for sensitive API call permissions
+// This API is used to apply for sensitive API permissions
 //
 // error code that may be returned:
 //  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
@@ -865,33 +1308,31 @@ func NewCreateTeamResponse() (response *CreateTeamResponse) {
 }
 
 // CreateTeam
-// This API is used to create a team
+// This API is used to create a team.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_EXISTENTERPRISENAME = "FailedOperation.ExistEnterpriseName"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_EXISTTEAMNAME = "InvalidParameterValue.ExistTeamName"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) CreateTeam(request *CreateTeamRequest) (response *CreateTeamResponse, err error) {
     return c.CreateTeamWithContext(context.Background(), request)
 }
 
 // CreateTeam
-// This API is used to create a team
+// This API is used to create a team.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_EXISTENTERPRISENAME = "FailedOperation.ExistEnterpriseName"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_EXISTTEAMNAME = "InvalidParameterValue.ExistTeamName"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) CreateTeamWithContext(ctx context.Context, request *CreateTeamRequest) (response *CreateTeamResponse, err error) {
     if request == nil {
         request = NewCreateTeamRequest()
@@ -1004,12 +1445,13 @@ func NewCreateUserResponse() (response *CreateUserResponse) {
 // This API is used to create a user
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_EXISTUSERACCOUNT = "InvalidParameterValue.ExistUserAccount"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) CreateUser(request *CreateUserRequest) (response *CreateUserResponse, err error) {
     return c.CreateUserWithContext(context.Background(), request)
 }
@@ -1018,12 +1460,13 @@ func (c *Client) CreateUser(request *CreateUserRequest) (response *CreateUserRes
 // This API is used to create a user
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_EXISTUSERACCOUNT = "InvalidParameterValue.ExistUserAccount"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) CreateUserWithContext(ctx context.Context, request *CreateUserRequest) (response *CreateUserResponse, err error) {
     if request == nil {
         request = NewCreateUserRequest()
@@ -1065,18 +1508,12 @@ func NewDeleteApplicationResponse() (response *DeleteApplicationResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_APPALREADYBINDAUDIT = "FailedOperation.AppAlreadyBindAudit"
 //  FAILEDOPERATION_APPALREADYBINDMINIPROGRAM = "FailedOperation.AppAlreadyBindMiniProgram"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  RESOURCENOTFOUND_NOTFOUNDPURCHASEDPACKAGE = "ResourceNotFound.NotFoundPurchasedPackage"
 func (c *Client) DeleteApplication(request *DeleteApplicationRequest) (response *DeleteApplicationResponse, err error) {
     return c.DeleteApplicationWithContext(context.Background(), request)
 }
@@ -1087,18 +1524,12 @@ func (c *Client) DeleteApplication(request *DeleteApplicationRequest) (response 
 // error code that may be returned:
 //  FAILEDOPERATION_APPALREADYBINDAUDIT = "FailedOperation.AppAlreadyBindAudit"
 //  FAILEDOPERATION_APPALREADYBINDMINIPROGRAM = "FailedOperation.AppAlreadyBindMiniProgram"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  RESOURCENOTFOUND_NOTFOUNDPURCHASEDPACKAGE = "ResourceNotFound.NotFoundPurchasedPackage"
 func (c *Client) DeleteApplicationWithContext(ctx context.Context, request *DeleteApplicationRequest) (response *DeleteApplicationResponse, err error) {
     if request == nil {
         request = NewDeleteApplicationRequest()
@@ -1111,6 +1542,69 @@ func (c *Client) DeleteApplicationWithContext(ctx context.Context, request *Dele
     request.SetContext(ctx)
     
     response = NewDeleteApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteApplicationSensitiveAPIRequest() (request *DeleteApplicationSensitiveAPIRequest) {
+    request = &DeleteApplicationSensitiveAPIRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DeleteApplicationSensitiveAPI")
+    
+    
+    return
+}
+
+func NewDeleteApplicationSensitiveAPIResponse() (response *DeleteApplicationSensitiveAPIResponse) {
+    response = &DeleteApplicationSensitiveAPIResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteApplicationSensitiveAPI
+// This API is used to delete a sensitive API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DeleteApplicationSensitiveAPI(request *DeleteApplicationSensitiveAPIRequest) (response *DeleteApplicationSensitiveAPIResponse, err error) {
+    return c.DeleteApplicationSensitiveAPIWithContext(context.Background(), request)
+}
+
+// DeleteApplicationSensitiveAPI
+// This API is used to delete a sensitive API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DeleteApplicationSensitiveAPIWithContext(ctx context.Context, request *DeleteApplicationSensitiveAPIRequest) (response *DeleteApplicationSensitiveAPIResponse, err error) {
+    if request == nil {
+        request = NewDeleteApplicationSensitiveAPIRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteApplicationSensitiveAPI require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteApplicationSensitiveAPIResponse()
     err = c.Send(request, response)
     return
 }
@@ -1139,20 +1633,11 @@ func NewDeleteGlobalDomainResponse() (response *DeleteGlobalDomainResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_USERTEAMRELATIONNOTEXIST = "InvalidParameterValue.UserTeamRelationNotExist"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNKNOWNPARAMETER = "UnknownParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DeleteGlobalDomain(request *DeleteGlobalDomainRequest) (response *DeleteGlobalDomainResponse, err error) {
     return c.DeleteGlobalDomainWithContext(context.Background(), request)
 }
@@ -1162,20 +1647,11 @@ func (c *Client) DeleteGlobalDomain(request *DeleteGlobalDomainRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_USERTEAMRELATIONNOTEXIST = "InvalidParameterValue.UserTeamRelationNotExist"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNKNOWNPARAMETER = "UnknownParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DeleteGlobalDomainWithContext(ctx context.Context, request *DeleteGlobalDomainRequest) (response *DeleteGlobalDomainResponse, err error) {
     if request == nil {
         request = NewDeleteGlobalDomainRequest()
@@ -1215,15 +1691,13 @@ func NewDeleteMNPResponse() (response *DeleteMNPResponse) {
 // This API is used to delete the mini program
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DeleteMNP(request *DeleteMNPRequest) (response *DeleteMNPResponse, err error) {
     return c.DeleteMNPWithContext(context.Background(), request)
 }
@@ -1232,15 +1706,13 @@ func (c *Client) DeleteMNP(request *DeleteMNPRequest) (response *DeleteMNPRespon
 // This API is used to delete the mini program
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  RESOURCENOTFOUND = "ResourceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DeleteMNPWithContext(ctx context.Context, request *DeleteMNPRequest) (response *DeleteMNPResponse, err error) {
     if request == nil {
         request = NewDeleteMNPRequest()
@@ -1277,7 +1749,7 @@ func NewDeleteSensitiveAPIResponse() (response *DeleteSensitiveAPIResponse) {
 }
 
 // DeleteSensitiveAPI
-// This API is used to delete a sensitive API
+// This API is used to delete sensitive API
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1293,7 +1765,7 @@ func (c *Client) DeleteSensitiveAPI(request *DeleteSensitiveAPIRequest) (respons
 }
 
 // DeleteSensitiveAPI
-// This API is used to delete a sensitive API
+// This API is used to delete sensitive API
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1344,19 +1816,11 @@ func NewDeleteTeamResponse() (response *DeleteTeamResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCENOTFOUND = "ResourceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DeleteTeam(request *DeleteTeamRequest) (response *DeleteTeamResponse, err error) {
     return c.DeleteTeamWithContext(context.Background(), request)
 }
@@ -1366,19 +1830,11 @@ func (c *Client) DeleteTeam(request *DeleteTeamRequest) (response *DeleteTeamRes
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
-//  RESOURCENOTFOUND = "ResourceNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DeleteTeamWithContext(ctx context.Context, request *DeleteTeamRequest) (response *DeleteTeamResponse, err error) {
     if request == nil {
         request = NewDeleteTeamRequest()
@@ -1419,21 +1875,12 @@ func NewDeleteTeamMemberResponse() (response *DeleteTeamMemberResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DeleteTeamMember(request *DeleteTeamMemberRequest) (response *DeleteTeamMemberResponse, err error) {
     return c.DeleteTeamMemberWithContext(context.Background(), request)
 }
@@ -1443,21 +1890,12 @@ func (c *Client) DeleteTeamMember(request *DeleteTeamMemberRequest) (response *D
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DeleteTeamMemberWithContext(ctx context.Context, request *DeleteTeamMemberRequest) (response *DeleteTeamMemberResponse, err error) {
     if request == nil {
         request = NewDeleteTeamMemberRequest()
@@ -1497,11 +1935,14 @@ func NewDeleteUserResponse() (response *DeleteUserResponse) {
 // This API is used to delete a user
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
 func (c *Client) DeleteUser(request *DeleteUserRequest) (response *DeleteUserResponse, err error) {
     return c.DeleteUserWithContext(context.Background(), request)
 }
@@ -1510,11 +1951,14 @@ func (c *Client) DeleteUser(request *DeleteUserRequest) (response *DeleteUserRes
 // This API is used to delete a user
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
 func (c *Client) DeleteUserWithContext(ctx context.Context, request *DeleteUserRequest) (response *DeleteUserResponse, err error) {
     if request == nil {
         request = NewDeleteUserRequest()
@@ -1551,31 +1995,29 @@ func NewDescribeApplicationResponse() (response *DescribeApplicationResponse) {
 }
 
 // DescribeApplication
-// This API is used to query application details
+// This API is used to query details of an application. 
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DescribeApplication(request *DescribeApplicationRequest) (response *DescribeApplicationResponse, err error) {
     return c.DescribeApplicationWithContext(context.Background(), request)
 }
 
 // DescribeApplication
-// This API is used to query application details
+// This API is used to query details of an application. 
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DescribeApplicationWithContext(ctx context.Context, request *DescribeApplicationRequest) (response *DescribeApplicationResponse, err error) {
     if request == nil {
         request = NewDescribeApplicationRequest()
@@ -1661,6 +2103,69 @@ func (c *Client) DescribeApplicationConfigWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeApplicationConfigFileRequest() (request *DescribeApplicationConfigFileRequest) {
+    request = &DescribeApplicationConfigFileRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeApplicationConfigFile")
+    
+    
+    return
+}
+
+func NewDescribeApplicationConfigFileResponse() (response *DescribeApplicationConfigFileResponse) {
+    response = &DescribeApplicationConfigFileResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApplicationConfigFile
+// This API is used to query the configuration files of an application.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeApplicationConfigFile(request *DescribeApplicationConfigFileRequest) (response *DescribeApplicationConfigFileResponse, err error) {
+    return c.DescribeApplicationConfigFileWithContext(context.Background(), request)
+}
+
+// DescribeApplicationConfigFile
+// This API is used to query the configuration files of an application.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  MISSINGPARAMETER = "MissingParameter"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeApplicationConfigFileWithContext(ctx context.Context, request *DescribeApplicationConfigFileRequest) (response *DescribeApplicationConfigFileResponse, err error) {
+    if request == nil {
+        request = NewDescribeApplicationConfigFileRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApplicationConfigFile require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApplicationConfigFileResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeApplicationListRequest() (request *DescribeApplicationListRequest) {
     request = &DescribeApplicationListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1681,41 +2186,29 @@ func NewDescribeApplicationListResponse() (response *DescribeApplicationListResp
 }
 
 // DescribeApplicationList
-// This API is used to query application list data
+// This API is used to query the list of application. 
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
 func (c *Client) DescribeApplicationList(request *DescribeApplicationListRequest) (response *DescribeApplicationListResponse, err error) {
     return c.DescribeApplicationListWithContext(context.Background(), request)
 }
 
 // DescribeApplicationList
-// This API is used to query application list data
+// This API is used to query the list of application. 
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
 func (c *Client) DescribeApplicationListWithContext(ctx context.Context, request *DescribeApplicationListRequest) (response *DescribeApplicationListResponse, err error) {
     if request == nil {
         request = NewDescribeApplicationListRequest()
@@ -1789,6 +2282,69 @@ func (c *Client) DescribeApplicationMNPVersionAuditListWithContext(ctx context.C
     return
 }
 
+func NewDescribeApplicationSensitiveAPIListRequest() (request *DescribeApplicationSensitiveAPIListRequest) {
+    request = &DescribeApplicationSensitiveAPIListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeApplicationSensitiveAPIList")
+    
+    
+    return
+}
+
+func NewDescribeApplicationSensitiveAPIListResponse() (response *DescribeApplicationSensitiveAPIListResponse) {
+    response = &DescribeApplicationSensitiveAPIListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApplicationSensitiveAPIList
+// This API is used to list sensitive APIs of an application. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeApplicationSensitiveAPIList(request *DescribeApplicationSensitiveAPIListRequest) (response *DescribeApplicationSensitiveAPIListResponse, err error) {
+    return c.DescribeApplicationSensitiveAPIListWithContext(context.Background(), request)
+}
+
+// DescribeApplicationSensitiveAPIList
+// This API is used to list sensitive APIs of an application. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) DescribeApplicationSensitiveAPIListWithContext(ctx context.Context, request *DescribeApplicationSensitiveAPIListRequest) (response *DescribeApplicationSensitiveAPIListResponse, err error) {
+    if request == nil {
+        request = NewDescribeApplicationSensitiveAPIListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApplicationSensitiveAPIList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApplicationSensitiveAPIListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeConsoleMNPVersionCompileTaskRequest() (request *DescribeConsoleMNPVersionCompileTaskRequest) {
     request = &DescribeConsoleMNPVersionCompileTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1809,7 +2365,7 @@ func NewDescribeConsoleMNPVersionCompileTaskResponse() (response *DescribeConsol
 }
 
 // DescribeConsoleMNPVersionCompileTask
-// This API is used to query if the mini program version is uploaded successfully
+// This API is used to query if the mini program version is created successfully
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1823,7 +2379,7 @@ func (c *Client) DescribeConsoleMNPVersionCompileTask(request *DescribeConsoleMN
 }
 
 // DescribeConsoleMNPVersionCompileTask
-// This API is used to query if the mini program version is uploaded successfully
+// This API is used to query if the mini program version is created successfully
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1996,6 +2552,65 @@ func (c *Client) DescribeDomainTeamListWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeGlobalDomainACLRequest() (request *DescribeGlobalDomainACLRequest) {
+    request = &DescribeGlobalDomainACLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeGlobalDomainACL")
+    
+    
+    return
+}
+
+func NewDescribeGlobalDomainACLResponse() (response *DescribeGlobalDomainACLResponse) {
+    response = &DescribeGlobalDomainACLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeGlobalDomainACL
+// This API is used to query the global domain allowlist and blocklist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
+func (c *Client) DescribeGlobalDomainACL(request *DescribeGlobalDomainACLRequest) (response *DescribeGlobalDomainACLResponse, err error) {
+    return c.DescribeGlobalDomainACLWithContext(context.Background(), request)
+}
+
+// DescribeGlobalDomainACL
+// This API is used to query the global domain allowlist and blocklist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
+func (c *Client) DescribeGlobalDomainACLWithContext(ctx context.Context, request *DescribeGlobalDomainACLRequest) (response *DescribeGlobalDomainACLResponse, err error) {
+    if request == nil {
+        request = NewDescribeGlobalDomainACLRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeGlobalDomainACL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeGlobalDomainACLResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeGlobalDomainListRequest() (request *DescribeGlobalDomainListRequest) {
     request = &DescribeGlobalDomainListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2081,6 +2696,185 @@ func (c *Client) DescribeGlobalDomainListWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeMNPRequest() (request *DescribeMNPRequest) {
+    request = &DescribeMNPRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeMNP")
+    
+    
+    return
+}
+
+func NewDescribeMNPResponse() (response *DescribeMNPResponse) {
+    response = &DescribeMNPResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNP
+// This API is used to query details of a mini program. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNP(request *DescribeMNPRequest) (response *DescribeMNPResponse, err error) {
+    return c.DescribeMNPWithContext(context.Background(), request)
+}
+
+// DescribeMNP
+// This API is used to query details of a mini program. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPWithContext(ctx context.Context, request *DescribeMNPRequest) (response *DescribeMNPResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNP require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPAllStageVersionsRequest() (request *DescribeMNPAllStageVersionsRequest) {
+    request = &DescribeMNPAllStageVersionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeMNPAllStageVersions")
+    
+    
+    return
+}
+
+func NewDescribeMNPAllStageVersionsResponse() (response *DescribeMNPAllStageVersionsResponse) {
+    response = &DescribeMNPAllStageVersionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPAllStageVersions
+// This API is used to query the mini program version management information
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPAllStageVersions(request *DescribeMNPAllStageVersionsRequest) (response *DescribeMNPAllStageVersionsResponse, err error) {
+    return c.DescribeMNPAllStageVersionsWithContext(context.Background(), request)
+}
+
+// DescribeMNPAllStageVersions
+// This API is used to query the mini program version management information
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPAllStageVersionsWithContext(ctx context.Context, request *DescribeMNPAllStageVersionsRequest) (response *DescribeMNPAllStageVersionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPAllStageVersionsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPAllStageVersions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPAllStageVersionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPApprovalListRequest() (request *DescribeMNPApprovalListRequest) {
+    request = &DescribeMNPApprovalListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeMNPApprovalList")
+    
+    
+    return
+}
+
+func NewDescribeMNPApprovalListResponse() (response *DescribeMNPApprovalListResponse) {
+    response = &DescribeMNPApprovalListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPApprovalList
+// This API is used to list the approval requests related with a mini program version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
+func (c *Client) DescribeMNPApprovalList(request *DescribeMNPApprovalListRequest) (response *DescribeMNPApprovalListResponse, err error) {
+    return c.DescribeMNPApprovalListWithContext(context.Background(), request)
+}
+
+// DescribeMNPApprovalList
+// This API is used to list the approval requests related with a mini program version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
+func (c *Client) DescribeMNPApprovalListWithContext(ctx context.Context, request *DescribeMNPApprovalListRequest) (response *DescribeMNPApprovalListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPApprovalListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPApprovalList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPApprovalListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMNPBoardRequest() (request *DescribeMNPBoardRequest) {
     request = &DescribeMNPBoardRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2132,6 +2926,63 @@ func (c *Client) DescribeMNPBoardWithContext(ctx context.Context, request *Descr
     request.SetContext(ctx)
     
     response = NewDescribeMNPBoardResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPCategoryRequest() (request *DescribeMNPCategoryRequest) {
+    request = &DescribeMNPCategoryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeMNPCategory")
+    
+    
+    return
+}
+
+func NewDescribeMNPCategoryResponse() (response *DescribeMNPCategoryResponse) {
+    response = &DescribeMNPCategoryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPCategory
+// This API is used to query the list of mini program types.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPCategory(request *DescribeMNPCategoryRequest) (response *DescribeMNPCategoryResponse, err error) {
+    return c.DescribeMNPCategoryWithContext(context.Background(), request)
+}
+
+// DescribeMNPCategory
+// This API is used to query the list of mini program types.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPCategoryWithContext(ctx context.Context, request *DescribeMNPCategoryRequest) (response *DescribeMNPCategoryResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPCategoryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPCategory require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPCategoryResponse()
     err = c.Send(request, response)
     return
 }
@@ -2197,6 +3048,124 @@ func (c *Client) DescribeMNPDetailWithContext(ctx context.Context, request *Desc
     request.SetContext(ctx)
     
     response = NewDescribeMNPDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPDomainACLRequest() (request *DescribeMNPDomainACLRequest) {
+    request = &DescribeMNPDomainACLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeMNPDomainACL")
+    
+    
+    return
+}
+
+func NewDescribeMNPDomainACLResponse() (response *DescribeMNPDomainACLResponse) {
+    response = &DescribeMNPDomainACLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPDomainACL
+// This API is used to query the domain name allowlist / blocklist of a mini program. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
+func (c *Client) DescribeMNPDomainACL(request *DescribeMNPDomainACLRequest) (response *DescribeMNPDomainACLResponse, err error) {
+    return c.DescribeMNPDomainACLWithContext(context.Background(), request)
+}
+
+// DescribeMNPDomainACL
+// This API is used to query the domain name allowlist / blocklist of a mini program. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
+func (c *Client) DescribeMNPDomainACLWithContext(ctx context.Context, request *DescribeMNPDomainACLRequest) (response *DescribeMNPDomainACLResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPDomainACLRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPDomainACL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPDomainACLResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPListRequest() (request *DescribeMNPListRequest) {
+    request = &DescribeMNPListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeMNPList")
+    
+    
+    return
+}
+
+func NewDescribeMNPListResponse() (response *DescribeMNPListResponse) {
+    response = &DescribeMNPListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPList
+// This API is used to query the list of mini programs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPList(request *DescribeMNPListRequest) (response *DescribeMNPListResponse, err error) {
+    return c.DescribeMNPListWithContext(context.Background(), request)
+}
+
+// DescribeMNPList
+// This API is used to query the list of mini programs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPListWithContext(ctx context.Context, request *DescribeMNPListRequest) (response *DescribeMNPListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPListResponse()
     err = c.Send(request, response)
     return
 }
@@ -2325,6 +3294,124 @@ func (c *Client) DescribeMNPManagerListWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeMNPOfflinePackageURLRequest() (request *DescribeMNPOfflinePackageURLRequest) {
+    request = &DescribeMNPOfflinePackageURLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeMNPOfflinePackageURL")
+    
+    
+    return
+}
+
+func NewDescribeMNPOfflinePackageURLResponse() (response *DescribeMNPOfflinePackageURLResponse) {
+    response = &DescribeMNPOfflinePackageURLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPOfflinePackageURL
+// DescribeMNPOfflinePackageURL
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MNPONLINEVERSIONNOTEXIST = "FailedOperation.MNPOnlineVersionNotExist"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPOfflinePackageURL(request *DescribeMNPOfflinePackageURLRequest) (response *DescribeMNPOfflinePackageURLResponse, err error) {
+    return c.DescribeMNPOfflinePackageURLWithContext(context.Background(), request)
+}
+
+// DescribeMNPOfflinePackageURL
+// DescribeMNPOfflinePackageURL
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MNPONLINEVERSIONNOTEXIST = "FailedOperation.MNPOnlineVersionNotExist"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPOfflinePackageURLWithContext(ctx context.Context, request *DescribeMNPOfflinePackageURLRequest) (response *DescribeMNPOfflinePackageURLResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPOfflinePackageURLRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPOfflinePackageURL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPOfflinePackageURLResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPPreviewRequest() (request *DescribeMNPPreviewRequest) {
+    request = &DescribeMNPPreviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeMNPPreview")
+    
+    
+    return
+}
+
+func NewDescribeMNPPreviewResponse() (response *DescribeMNPPreviewResponse) {
+    response = &DescribeMNPPreviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPPreview
+// This API is used to query the details of a mini program preview version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPPreview(request *DescribeMNPPreviewRequest) (response *DescribeMNPPreviewResponse, err error) {
+    return c.DescribeMNPPreviewWithContext(context.Background(), request)
+}
+
+// DescribeMNPPreview
+// This API is used to query the details of a mini program preview version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPPreviewWithContext(ctx context.Context, request *DescribeMNPPreviewRequest) (response *DescribeMNPPreviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPPreviewRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPPreview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPPreviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMNPPrivacyRequest() (request *DescribeMNPPrivacyRequest) {
     request = &DescribeMNPPrivacyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2380,6 +3467,246 @@ func (c *Client) DescribeMNPPrivacyWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeMNPReleasedVersionHistoryRequest() (request *DescribeMNPReleasedVersionHistoryRequest) {
+    request = &DescribeMNPReleasedVersionHistoryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeMNPReleasedVersionHistory")
+    
+    
+    return
+}
+
+func NewDescribeMNPReleasedVersionHistoryResponse() (response *DescribeMNPReleasedVersionHistoryResponse) {
+    response = &DescribeMNPReleasedVersionHistoryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPReleasedVersionHistory
+// This API is used to list all released versions of a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPReleasedVersionHistory(request *DescribeMNPReleasedVersionHistoryRequest) (response *DescribeMNPReleasedVersionHistoryResponse, err error) {
+    return c.DescribeMNPReleasedVersionHistoryWithContext(context.Background(), request)
+}
+
+// DescribeMNPReleasedVersionHistory
+// This API is used to list all released versions of a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPReleasedVersionHistoryWithContext(ctx context.Context, request *DescribeMNPReleasedVersionHistoryRequest) (response *DescribeMNPReleasedVersionHistoryResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPReleasedVersionHistoryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPReleasedVersionHistory require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPReleasedVersionHistoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPSensitiveAPIPermissionApprovalRequest() (request *DescribeMNPSensitiveAPIPermissionApprovalRequest) {
+    request = &DescribeMNPSensitiveAPIPermissionApprovalRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeMNPSensitiveAPIPermissionApproval")
+    
+    
+    return
+}
+
+func NewDescribeMNPSensitiveAPIPermissionApprovalResponse() (response *DescribeMNPSensitiveAPIPermissionApprovalResponse) {
+    response = &DescribeMNPSensitiveAPIPermissionApprovalResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPSensitiveAPIPermissionApproval
+// This API is used to query details of a specific permission request to call sensitive APIs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPSensitiveAPIPermissionApproval(request *DescribeMNPSensitiveAPIPermissionApprovalRequest) (response *DescribeMNPSensitiveAPIPermissionApprovalResponse, err error) {
+    return c.DescribeMNPSensitiveAPIPermissionApprovalWithContext(context.Background(), request)
+}
+
+// DescribeMNPSensitiveAPIPermissionApproval
+// This API is used to query details of a specific permission request to call sensitive APIs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPSensitiveAPIPermissionApprovalWithContext(ctx context.Context, request *DescribeMNPSensitiveAPIPermissionApprovalRequest) (response *DescribeMNPSensitiveAPIPermissionApprovalResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPSensitiveAPIPermissionApprovalRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPSensitiveAPIPermissionApproval require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPSensitiveAPIPermissionApprovalResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPSensitiveAPIPermissionApprovalListRequest() (request *DescribeMNPSensitiveAPIPermissionApprovalListRequest) {
+    request = &DescribeMNPSensitiveAPIPermissionApprovalListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeMNPSensitiveAPIPermissionApprovalList")
+    
+    
+    return
+}
+
+func NewDescribeMNPSensitiveAPIPermissionApprovalListResponse() (response *DescribeMNPSensitiveAPIPermissionApprovalListResponse) {
+    response = &DescribeMNPSensitiveAPIPermissionApprovalListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPSensitiveAPIPermissionApprovalList
+// This API is used to query permission requests to allow a mini program calling sensitive APIs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPSensitiveAPIPermissionApprovalList(request *DescribeMNPSensitiveAPIPermissionApprovalListRequest) (response *DescribeMNPSensitiveAPIPermissionApprovalListResponse, err error) {
+    return c.DescribeMNPSensitiveAPIPermissionApprovalListWithContext(context.Background(), request)
+}
+
+// DescribeMNPSensitiveAPIPermissionApprovalList
+// This API is used to query permission requests to allow a mini program calling sensitive APIs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPSensitiveAPIPermissionApprovalListWithContext(ctx context.Context, request *DescribeMNPSensitiveAPIPermissionApprovalListRequest) (response *DescribeMNPSensitiveAPIPermissionApprovalListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPSensitiveAPIPermissionApprovalListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPSensitiveAPIPermissionApprovalList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPSensitiveAPIPermissionApprovalListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeMNPSensitiveAPIPermissionListRequest() (request *DescribeMNPSensitiveAPIPermissionListRequest) {
+    request = &DescribeMNPSensitiveAPIPermissionListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeMNPSensitiveAPIPermissionList")
+    
+    
+    return
+}
+
+func NewDescribeMNPSensitiveAPIPermissionListResponse() (response *DescribeMNPSensitiveAPIPermissionListResponse) {
+    response = &DescribeMNPSensitiveAPIPermissionListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPSensitiveAPIPermissionList
+// This API is used to query the list of sensitive APIs that available to a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPSensitiveAPIPermissionList(request *DescribeMNPSensitiveAPIPermissionListRequest) (response *DescribeMNPSensitiveAPIPermissionListResponse, err error) {
+    return c.DescribeMNPSensitiveAPIPermissionListWithContext(context.Background(), request)
+}
+
+// DescribeMNPSensitiveAPIPermissionList
+// This API is used to query the list of sensitive APIs that available to a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPSensitiveAPIPermissionListWithContext(ctx context.Context, request *DescribeMNPSensitiveAPIPermissionListRequest) (response *DescribeMNPSensitiveAPIPermissionListResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPSensitiveAPIPermissionListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPSensitiveAPIPermissionList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPSensitiveAPIPermissionListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMNPTypeRequest() (request *DescribeMNPTypeRequest) {
     request = &DescribeMNPTypeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2431,6 +3758,65 @@ func (c *Client) DescribeMNPTypeWithContext(ctx context.Context, request *Descri
     return
 }
 
+func NewDescribeMNPVersionRequest() (request *DescribeMNPVersionRequest) {
+    request = &DescribeMNPVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeMNPVersion")
+    
+    
+    return
+}
+
+func NewDescribeMNPVersionResponse() (response *DescribeMNPVersionResponse) {
+    response = &DescribeMNPVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMNPVersion
+// This API is used to query the result of the task to create a mini program version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONTASKID = "InvalidParameterValue.InvalidMNPVersionTaskId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPVersion(request *DescribeMNPVersionRequest) (response *DescribeMNPVersionResponse, err error) {
+    return c.DescribeMNPVersionWithContext(context.Background(), request)
+}
+
+// DescribeMNPVersion
+// This API is used to query the result of the task to create a mini program version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONTASKID = "InvalidParameterValue.InvalidMNPVersionTaskId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DescribeMNPVersionWithContext(ctx context.Context, request *DescribeMNPVersionRequest) (response *DescribeMNPVersionResponse, err error) {
+    if request == nil {
+        request = NewDescribeMNPVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMNPVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMNPVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMNPVersionPreviewRequest() (request *DescribeMNPVersionPreviewRequest) {
     request = &DescribeMNPVersionPreviewRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2451,7 +3837,7 @@ func NewDescribeMNPVersionPreviewResponse() (response *DescribeMNPVersionPreview
 }
 
 // DescribeMNPVersionPreview
-// This API is used to query the details of the mini program trial version
+// This API is used to query the details of the mini program preview version
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2462,7 +3848,7 @@ func (c *Client) DescribeMNPVersionPreview(request *DescribeMNPVersionPreviewReq
 }
 
 // DescribeMNPVersionPreview
-// This API is used to query the details of the mini program trial version
+// This API is used to query the details of the mini program preview version
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2571,7 +3957,7 @@ func NewDescribeOnlineVersionResponse() (response *DescribeOnlineVersionResponse
 }
 
 // DescribeOnlineVersion
-// This API is used to query the current release version of the mini program
+// This API is used to query the release version history
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2584,7 +3970,7 @@ func (c *Client) DescribeOnlineVersion(request *DescribeOnlineVersionRequest) (r
 }
 
 // DescribeOnlineVersion
-// This API is used to query the current release version of the mini program
+// This API is used to query the release version history
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2685,27 +4071,27 @@ func NewDescribeRoleListResponse() (response *DescribeRoleListResponse) {
 }
 
 // DescribeRoleList
-// This API is used to query role list data
+// This API is used to query the list of roles. 
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DescribeRoleList(request *DescribeRoleListRequest) (response *DescribeRoleListResponse, err error) {
     return c.DescribeRoleListWithContext(context.Background(), request)
 }
 
 // DescribeRoleList
-// This API is used to query role list data
+// This API is used to query the list of roles. 
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DescribeRoleListWithContext(ctx context.Context, request *DescribeRoleListRequest) (response *DescribeRoleListResponse, err error) {
     if request == nil {
         request = NewDescribeRoleListRequest()
@@ -2878,7 +4264,7 @@ func NewDescribeSensitiveApiApplyDetailResponse() (response *DescribeSensitiveAp
 }
 
 // DescribeSensitiveApiApplyDetail
-// This API is used to query sensitive API call details
+// This API is used to query sensitive API permission approval details
 //
 // error code that may be returned:
 //  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
@@ -2891,7 +4277,7 @@ func (c *Client) DescribeSensitiveApiApplyDetail(request *DescribeSensitiveApiAp
 }
 
 // DescribeSensitiveApiApplyDetail
-// This API is used to query sensitive API call details
+// This API is used to query sensitive API permission approval details
 //
 // error code that may be returned:
 //  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
@@ -2935,7 +4321,7 @@ func NewDescribeSensitiveApiAuthListResponse() (response *DescribeSensitiveApiAu
 }
 
 // DescribeSensitiveApiAuthList
-// This API is used to query the sensitive APIs that require permission
+// This API is used to query the sensitive API permission list
 //
 // error code that may be returned:
 //  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
@@ -2948,7 +4334,7 @@ func (c *Client) DescribeSensitiveApiAuthList(request *DescribeSensitiveApiAuthL
 }
 
 // DescribeSensitiveApiAuthList
-// This API is used to query the sensitive APIs that require permission
+// This API is used to query the sensitive API permission list
 //
 // error code that may be returned:
 //  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
@@ -3134,43 +4520,27 @@ func NewDescribeTeamResponse() (response *DescribeTeamResponse) {
 }
 
 // DescribeTeam
-// This API is used to query team details
+// This API is used to query details of a team. 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DescribeTeam(request *DescribeTeamRequest) (response *DescribeTeamResponse, err error) {
     return c.DescribeTeamWithContext(context.Background(), request)
 }
 
 // DescribeTeam
-// This API is used to query team details
+// This API is used to query details of a team. 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DescribeTeamWithContext(ctx context.Context, request *DescribeTeamRequest) (response *DescribeTeamResponse, err error) {
     if request == nil {
         request = NewDescribeTeamRequest()
@@ -3290,41 +4660,27 @@ func NewDescribeTeamListResponse() (response *DescribeTeamListResponse) {
 }
 
 // DescribeTeamList
-// This API is used to query the team list that can be viewed by the current role permissions
+// This API is used to query the list of teams. 
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNKNOWNPARAMETER = "UnknownParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
 func (c *Client) DescribeTeamList(request *DescribeTeamListRequest) (response *DescribeTeamListResponse, err error) {
     return c.DescribeTeamListWithContext(context.Background(), request)
 }
 
 // DescribeTeamList
-// This API is used to query the team list that can be viewed by the current role permissions
+// This API is used to query the list of teams. 
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNKNOWNPARAMETER = "UnknownParameter"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_QUERYPARAMETERLENGTHEXCEEDLIMIT = "InvalidParameterValue.QueryParameterLengthExceedLimit"
 func (c *Client) DescribeTeamListWithContext(ctx context.Context, request *DescribeTeamListRequest) (response *DescribeTeamListResponse, err error) {
     if request == nil {
         request = NewDescribeTeamListRequest()
@@ -3365,18 +4721,10 @@ func NewDescribeTeamMemberListResponse() (response *DescribeTeamMemberListRespon
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DescribeTeamMemberList(request *DescribeTeamMemberListRequest) (response *DescribeTeamMemberListResponse, err error) {
     return c.DescribeTeamMemberListWithContext(context.Background(), request)
 }
@@ -3386,18 +4734,10 @@ func (c *Client) DescribeTeamMemberList(request *DescribeTeamMemberListRequest) 
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) DescribeTeamMemberListWithContext(ctx context.Context, request *DescribeTeamMemberListRequest) (response *DescribeTeamMemberListResponse, err error) {
     if request == nil {
         request = NewDescribeTeamMemberListRequest()
@@ -3544,6 +4884,65 @@ func (c *Client) DescribeTempSecret4UploadFile2CosWithContext(ctx context.Contex
     return
 }
 
+func NewDescribeUserRequest() (request *DescribeUserRequest) {
+    request = &DescribeUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DescribeUser")
+    
+    
+    return
+}
+
+func NewDescribeUserResponse() (response *DescribeUserResponse) {
+    response = &DescribeUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUser
+// This API is used to query details of a user. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
+func (c *Client) DescribeUser(request *DescribeUserRequest) (response *DescribeUserResponse, err error) {
+    return c.DescribeUserWithContext(context.Background(), request)
+}
+
+// DescribeUser
+// This API is used to query details of a user. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
+func (c *Client) DescribeUserWithContext(ctx context.Context, request *DescribeUserRequest) (response *DescribeUserResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeUserDetailRequest() (request *DescribeUserDetailRequest) {
     request = &DescribeUserDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3624,11 +5023,13 @@ func NewDescribeUserListResponse() (response *DescribeUserListResponse) {
 // This API is used to query the user list
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTTYPE = "InvalidParameterValue.InvalidAccountType"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DescribeUserList(request *DescribeUserListRequest) (response *DescribeUserListResponse, err error) {
     return c.DescribeUserListWithContext(context.Background(), request)
 }
@@ -3637,11 +5038,13 @@ func (c *Client) DescribeUserList(request *DescribeUserListRequest) (response *D
 // This API is used to query the user list
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTTYPE = "InvalidParameterValue.InvalidAccountType"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) DescribeUserListWithContext(ctx context.Context, request *DescribeUserListRequest) (response *DescribeUserListResponse, err error) {
     if request == nil {
         request = NewDescribeUserListRequest()
@@ -3654,6 +5057,67 @@ func (c *Client) DescribeUserListWithContext(ctx context.Context, request *Descr
     request.SetContext(ctx)
     
     response = NewDescribeUserListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDisableApplicationSensitiveAPIRequest() (request *DisableApplicationSensitiveAPIRequest) {
+    request = &DisableApplicationSensitiveAPIRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "DisableApplicationSensitiveAPI")
+    
+    
+    return
+}
+
+func NewDisableApplicationSensitiveAPIResponse() (response *DisableApplicationSensitiveAPIResponse) {
+    response = &DisableApplicationSensitiveAPIResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DisableApplicationSensitiveAPI
+// This API is used to set a sensitive API to Restricted.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DisableApplicationSensitiveAPI(request *DisableApplicationSensitiveAPIRequest) (response *DisableApplicationSensitiveAPIResponse, err error) {
+    return c.DisableApplicationSensitiveAPIWithContext(context.Background(), request)
+}
+
+// DisableApplicationSensitiveAPI
+// This API is used to set a sensitive API to Restricted.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) DisableApplicationSensitiveAPIWithContext(ctx context.Context, request *DisableApplicationSensitiveAPIRequest) (response *DisableApplicationSensitiveAPIResponse, err error) {
+    if request == nil {
+        request = NewDisableApplicationSensitiveAPIRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisableApplicationSensitiveAPI require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDisableApplicationSensitiveAPIResponse()
     err = c.Send(request, response)
     return
 }
@@ -3729,6 +5193,69 @@ func (c *Client) DisableTeamDomainWithContext(ctx context.Context, request *Disa
     return
 }
 
+func NewEnableApplicationSensitiveAPIRequest() (request *EnableApplicationSensitiveAPIRequest) {
+    request = &EnableApplicationSensitiveAPIRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "EnableApplicationSensitiveAPI")
+    
+    
+    return
+}
+
+func NewEnableApplicationSensitiveAPIResponse() (response *EnableApplicationSensitiveAPIResponse) {
+    response = &EnableApplicationSensitiveAPIResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EnableApplicationSensitiveAPI
+// This API is used to set an application sensitive API to public.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) EnableApplicationSensitiveAPI(request *EnableApplicationSensitiveAPIRequest) (response *EnableApplicationSensitiveAPIResponse, err error) {
+    return c.EnableApplicationSensitiveAPIWithContext(context.Background(), request)
+}
+
+// EnableApplicationSensitiveAPI
+// This API is used to set an application sensitive API to public.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) EnableApplicationSensitiveAPIWithContext(ctx context.Context, request *EnableApplicationSensitiveAPIRequest) (response *EnableApplicationSensitiveAPIResponse, err error) {
+    if request == nil {
+        request = NewEnableApplicationSensitiveAPIRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnableApplicationSensitiveAPI require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEnableApplicationSensitiveAPIResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyApplicationRequest() (request *ModifyApplicationRequest) {
     request = &ModifyApplicationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3752,19 +5279,16 @@ func NewModifyApplicationResponse() (response *ModifyApplicationResponse) {
 // This API is used to change application information
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_APPLICATIONNAMEALREADYEXISTED = "FailedOperation.ApplicationNameAlreadyExisted"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_APPNAMEALREADYEXIST = "InvalidParameterValue.AppNameAlreadyExist"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDAPPPACKAGENAMELAYOUT = "InvalidParameterValue.InvalidAppPackageNameLayout"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONINTRO = "InvalidParameterValue.InvalidApplicationIntro"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONNAME = "InvalidParameterValue.InvalidApplicationName"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONREMARK = "InvalidParameterValue.InvalidApplicationRemark"
+//  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) ModifyApplication(request *ModifyApplicationRequest) (response *ModifyApplicationResponse, err error) {
     return c.ModifyApplicationWithContext(context.Background(), request)
 }
@@ -3773,19 +5297,16 @@ func (c *Client) ModifyApplication(request *ModifyApplicationRequest) (response 
 // This API is used to change application information
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_APPLICATIONNAMEALREADYEXISTED = "FailedOperation.ApplicationNameAlreadyExisted"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_APPNAMEALREADYEXIST = "InvalidParameterValue.AppNameAlreadyExist"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDAPPPACKAGENAMELAYOUT = "InvalidParameterValue.InvalidAppPackageNameLayout"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONID = "InvalidParameterValue.InvalidApplicationId"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONINTRO = "InvalidParameterValue.InvalidApplicationIntro"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONNAME = "InvalidParameterValue.InvalidApplicationName"
+//  INVALIDPARAMETERVALUE_INVALIDAPPLICATIONREMARK = "InvalidParameterValue.InvalidApplicationRemark"
+//  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) ModifyApplicationWithContext(ctx context.Context, request *ModifyApplicationRequest) (response *ModifyApplicationResponse, err error) {
     if request == nil {
         request = NewModifyApplicationRequest()
@@ -4028,21 +5549,11 @@ func NewModifyGlobalDomainResponse() (response *ModifyGlobalDomainResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_USERTEAMRELATIONNOTEXIST = "InvalidParameterValue.UserTeamRelationNotExist"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) ModifyGlobalDomain(request *ModifyGlobalDomainRequest) (response *ModifyGlobalDomainResponse, err error) {
     return c.ModifyGlobalDomainWithContext(context.Background(), request)
 }
@@ -4053,21 +5564,11 @@ func (c *Client) ModifyGlobalDomain(request *ModifyGlobalDomainRequest) (respons
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_USERTEAMRELATIONNOTEXIST = "InvalidParameterValue.UserTeamRelationNotExist"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
 func (c *Client) ModifyGlobalDomainWithContext(ctx context.Context, request *ModifyGlobalDomainRequest) (response *ModifyGlobalDomainResponse, err error) {
     if request == nil {
         request = NewModifyGlobalDomainRequest()
@@ -4107,14 +5608,17 @@ func NewModifyMNPResponse() (response *ModifyMNPResponse) {
 // This API is used to modify mini program information
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_MINIPROGRAMICONANALYSISFAILED = "FailedOperation.MiniProgramIconAnalysisFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
+//  INVALIDPARAMETERVALUE_INVALIDMNPTYPE = "InvalidParameterValue.InvalidMNPType"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_MNPTYPENUMBEREXCEEDLIMIT = "InvalidParameterValue.MNPTypeNumberExceedLimit"
 //  INVALIDPARAMETERVALUE_MINIPROGRAMNAMEALREADYEXIST = "InvalidParameterValue.MiniProgramNameAlreadyExist"
-//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) ModifyMNP(request *ModifyMNPRequest) (response *ModifyMNPResponse, err error) {
     return c.ModifyMNPWithContext(context.Background(), request)
 }
@@ -4123,14 +5627,17 @@ func (c *Client) ModifyMNP(request *ModifyMNPRequest) (response *ModifyMNPRespon
 // This API is used to modify mini program information
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
+//  FAILEDOPERATION_MINIPROGRAMICONANALYSISFAILED = "FailedOperation.MiniProgramIconAnalysisFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDMNPNAME = "InvalidParameterValue.InvalidMNPName"
+//  INVALIDPARAMETERVALUE_INVALIDMNPTYPE = "InvalidParameterValue.InvalidMNPType"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_MNPTYPENUMBEREXCEEDLIMIT = "InvalidParameterValue.MNPTypeNumberExceedLimit"
 //  INVALIDPARAMETERVALUE_MINIPROGRAMNAMEALREADYEXIST = "InvalidParameterValue.MiniProgramNameAlreadyExist"
-//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) ModifyMNPWithContext(ctx context.Context, request *ModifyMNPRequest) (response *ModifyMNPResponse, err error) {
     if request == nil {
         request = NewModifyMNPRequest()
@@ -4143,6 +5650,67 @@ func (c *Client) ModifyMNPWithContext(ctx context.Context, request *ModifyMNPReq
     request.SetContext(ctx)
     
     response = NewModifyMNPResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyMNPDomainRequest() (request *ModifyMNPDomainRequest) {
+    request = &ModifyMNPDomainRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "ModifyMNPDomain")
+    
+    
+    return
+}
+
+func NewModifyMNPDomainResponse() (response *ModifyMNPDomainResponse) {
+    response = &ModifyMNPDomainResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyMNPDomain
+// This API is used to edit the mini program domain information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) ModifyMNPDomain(request *ModifyMNPDomainRequest) (response *ModifyMNPDomainResponse, err error) {
+    return c.ModifyMNPDomainWithContext(context.Background(), request)
+}
+
+// ModifyMNPDomain
+// This API is used to edit the mini program domain information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETOPERATERESOURCEFAILED = "FailedOperation.GetOperateResourceFailed"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) ModifyMNPDomainWithContext(ctx context.Context, request *ModifyMNPDomainRequest) (response *ModifyMNPDomainResponse, err error) {
+    if request == nil {
+        request = NewModifyMNPDomainRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMNPDomain require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMNPDomainResponse()
     err = c.Send(request, response)
     return
 }
@@ -4262,7 +5830,7 @@ func NewModifyMNPVersionPreviewResponse() (response *ModifyMNPVersionPreviewResp
 }
 
 // ModifyMNPVersionPreview
-// This API is used to configure the mini program trial version
+// This API is used to configure the mini program preview version
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4277,7 +5845,7 @@ func (c *Client) ModifyMNPVersionPreview(request *ModifyMNPVersionPreviewRequest
 }
 
 // ModifyMNPVersionPreview
-// This API is used to configure the mini program trial version
+// This API is used to configure the mini program preview version
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4402,7 +5970,7 @@ func NewModifyPlatformAuditStatusResponse() (response *ModifyPlatformAuditStatus
 }
 
 // ModifyPlatformAuditStatus
-// This API is used to approve the release of the mini program version
+// This API is used to approve or reject the release of the mini program version
 //
 // error code that may be returned:
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
@@ -4416,7 +5984,7 @@ func (c *Client) ModifyPlatformAuditStatus(request *ModifyPlatformAuditStatusReq
 }
 
 // ModifyPlatformAuditStatus
-// This API is used to approve the release of the mini program version
+// This API is used to approve or reject the release of the mini program version
 //
 // error code that may be returned:
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
@@ -4461,7 +6029,7 @@ func NewModifySensitiveAPIAuditStatusResponse() (response *ModifySensitiveAPIAud
 }
 
 // ModifySensitiveAPIAuditStatus
-// This API is used to approve sensitive API call permission
+// This API is used to approve or reject the sensitive API permission application
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4481,7 +6049,7 @@ func (c *Client) ModifySensitiveAPIAuditStatus(request *ModifySensitiveAPIAuditS
 }
 
 // ModifySensitiveAPIAuditStatus
-// This API is used to approve sensitive API call permission
+// This API is used to approve or reject the sensitive API permission application
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -4536,17 +6104,12 @@ func NewModifyTeamResponse() (response *ModifyTeamResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNKNOWNPARAMETER = "UnknownParameter"
+//  INVALIDPARAMETERVALUE_EXISTTEAMNAME = "InvalidParameterValue.ExistTeamName"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) ModifyTeam(request *ModifyTeamRequest) (response *ModifyTeamResponse, err error) {
     return c.ModifyTeamWithContext(context.Background(), request)
 }
@@ -4556,17 +6119,12 @@ func (c *Client) ModifyTeam(request *ModifyTeamRequest) (response *ModifyTeamRes
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_NOACCESSPERMISSION = "FailedOperation.NoAccessPermission"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNKNOWNPARAMETER = "UnknownParameter"
+//  INVALIDPARAMETERVALUE_EXISTTEAMNAME = "InvalidParameterValue.ExistTeamName"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 func (c *Client) ModifyTeamWithContext(ctx context.Context, request *ModifyTeamRequest) (response *ModifyTeamResponse, err error) {
     if request == nil {
         request = NewModifyTeamRequest()
@@ -4603,45 +6161,29 @@ func NewModifyTeamMemberResponse() (response *ModifyTeamMemberResponse) {
 }
 
 // ModifyTeamMember
-// This API is used to change team member roles
+// This API is used to modify team member information.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDROLEID = "InvalidParameterValue.InvalidRoleId"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 //  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyTeamMember(request *ModifyTeamMemberRequest) (response *ModifyTeamMemberResponse, err error) {
     return c.ModifyTeamMemberWithContext(context.Background(), request)
 }
 
 // ModifyTeamMember
-// This API is used to change team member roles
+// This API is used to modify team member information.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_INVALIDREQUESTENTERPRISEINFO = "FailedOperation.InvalidRequestEnterpriseInfo"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
-//  FAILEDOPERATION_SYSTEMERROR = "FailedOperation.SystemError"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDROLEID = "InvalidParameterValue.InvalidRoleId"
+//  INVALIDPARAMETERVALUE_INVALIDTEAMID = "InvalidParameterValue.InvalidTeamId"
 //  INVALIDPARAMETERVALUE_INVALIDUSERID = "InvalidParameterValue.InvalidUserId"
-//  MISSINGPARAMETER = "MissingParameter"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) ModifyTeamMemberWithContext(ctx context.Context, request *ModifyTeamMemberRequest) (response *ModifyTeamMemberResponse, err error) {
     if request == nil {
         request = NewModifyTeamMemberRequest()
@@ -4678,27 +6220,33 @@ func NewModifyUserResponse() (response *ModifyUserResponse) {
 }
 
 // ModifyUser
-// This API is used to edit user information
+// This API is used to modify user information.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTTYPE = "InvalidParameterValue.InvalidAccountType"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDUSERNAME = "InvalidParameterValue.InvalidUserName"
 func (c *Client) ModifyUser(request *ModifyUserRequest) (response *ModifyUserResponse, err error) {
     return c.ModifyUserWithContext(context.Background(), request)
 }
 
 // ModifyUser
-// This API is used to edit user information
+// This API is used to modify user information.
 //
 // error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOGINAUTHFAILED = "FailedOperation.LoginAuthFailed"
-//  FAILEDOPERATION_REQUESTPARAMANALYSISFAILED = "FailedOperation.RequestParamAnalysisFailed"
-//  MISSINGPARAMETER_LOGININFONOTFOUND = "MissingParameter.LoginInfoNotFound"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_UNABLEOPERATEADMINACCOUNT = "FailedOperation.UnableOperateAdminAccount"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDACCOUNTTYPE = "InvalidParameterValue.InvalidAccountType"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_INVALIDUSERNAME = "InvalidParameterValue.InvalidUserName"
 func (c *Client) ModifyUserWithContext(ctx context.Context, request *ModifyUserRequest) (response *ModifyUserResponse, err error) {
     if request == nil {
         request = NewModifyUserRequest()
@@ -4768,6 +6316,329 @@ func (c *Client) ModifyUserPasswordWithContext(ctx context.Context, request *Mod
     request.SetContext(ctx)
     
     response = NewModifyUserPasswordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewProcessMNPApprovalRequest() (request *ProcessMNPApprovalRequest) {
+    request = &ProcessMNPApprovalRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "ProcessMNPApproval")
+    
+    
+    return
+}
+
+func NewProcessMNPApprovalResponse() (response *ProcessMNPApprovalResponse) {
+    response = &ProcessMNPApprovalResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ProcessMNPApproval
+// This API is used to approve or reject the release of a mini program version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPPROVALNO = "InvalidParameterValue.InvalidApprovalNo"
+//  INVALIDPARAMETERVALUE_INVALIDAPPROVALNOTE = "InvalidParameterValue.InvalidApprovalNote"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_PROCESSAPPLICATIONANDAPPROVALAPPLICATIONMISMATCH = "InvalidParameterValue.ProcessApplicationAndApprovalApplicationMismatch"
+//  INVALIDPARAMETERVALUE_PROCESSAPPROVALITEMISEMPTY = "InvalidParameterValue.ProcessApprovalItemIsEmpty"
+//  INVALIDPARAMETERVALUE_PROCESSMNPAPPROVALSTATUSERROR = "InvalidParameterValue.ProcessMNPApprovalStatusError"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ProcessMNPApproval(request *ProcessMNPApprovalRequest) (response *ProcessMNPApprovalResponse, err error) {
+    return c.ProcessMNPApprovalWithContext(context.Background(), request)
+}
+
+// ProcessMNPApproval
+// This API is used to approve or reject the release of a mini program version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDAPPROVALNO = "InvalidParameterValue.InvalidApprovalNo"
+//  INVALIDPARAMETERVALUE_INVALIDAPPROVALNOTE = "InvalidParameterValue.InvalidApprovalNote"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  INVALIDPARAMETERVALUE_PROCESSAPPLICATIONANDAPPROVALAPPLICATIONMISMATCH = "InvalidParameterValue.ProcessApplicationAndApprovalApplicationMismatch"
+//  INVALIDPARAMETERVALUE_PROCESSAPPROVALITEMISEMPTY = "InvalidParameterValue.ProcessApprovalItemIsEmpty"
+//  INVALIDPARAMETERVALUE_PROCESSMNPAPPROVALSTATUSERROR = "InvalidParameterValue.ProcessMNPApprovalStatusError"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ProcessMNPApprovalWithContext(ctx context.Context, request *ProcessMNPApprovalRequest) (response *ProcessMNPApprovalResponse, err error) {
+    if request == nil {
+        request = NewProcessMNPApprovalRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ProcessMNPApproval require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewProcessMNPApprovalResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewProcessMNPSensitiveAPIPermissionApprovalRequest() (request *ProcessMNPSensitiveAPIPermissionApprovalRequest) {
+    request = &ProcessMNPSensitiveAPIPermissionApprovalRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "ProcessMNPSensitiveAPIPermissionApproval")
+    
+    
+    return
+}
+
+func NewProcessMNPSensitiveAPIPermissionApprovalResponse() (response *ProcessMNPSensitiveAPIPermissionApprovalResponse) {
+    response = &ProcessMNPSensitiveAPIPermissionApprovalResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ProcessMNPSensitiveAPIPermissionApproval
+// This API is used to approve or reject the sensitive API permission application. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) ProcessMNPSensitiveAPIPermissionApproval(request *ProcessMNPSensitiveAPIPermissionApprovalRequest) (response *ProcessMNPSensitiveAPIPermissionApprovalResponse, err error) {
+    return c.ProcessMNPSensitiveAPIPermissionApprovalWithContext(context.Background(), request)
+}
+
+// ProcessMNPSensitiveAPIPermissionApproval
+// This API is used to approve or reject the sensitive API permission application. 
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) ProcessMNPSensitiveAPIPermissionApprovalWithContext(ctx context.Context, request *ProcessMNPSensitiveAPIPermissionApprovalRequest) (response *ProcessMNPSensitiveAPIPermissionApprovalResponse, err error) {
+    if request == nil {
+        request = NewProcessMNPSensitiveAPIPermissionApprovalRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ProcessMNPSensitiveAPIPermissionApproval require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewProcessMNPSensitiveAPIPermissionApprovalResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewReleaseMNPVersionRequest() (request *ReleaseMNPVersionRequest) {
+    request = &ReleaseMNPVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "ReleaseMNPVersion")
+    
+    
+    return
+}
+
+func NewReleaseMNPVersionResponse() (response *ReleaseMNPVersionResponse) {
+    response = &ReleaseMNPVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ReleaseMNPVersion
+// This API is used to release a mini program version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_MNPRELEASENUMBEREXCEEDLIMIT = "FailedOperation.MNPReleaseNumberExceedLimit"
+//  FAILEDOPERATION_MNPVERSIONRELEASED = "FailedOperation.MNPVersionReleased"
+//  FAILEDOPERATION_ONLYRELEASEPLATFORMAPPROVEDMNPVERSION = "FailedOperation.OnlyReleasePlatformApprovedMNPVersion"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RELEASEMNPVERSIONNEEDGREATERTHANONLINEVERSION = "FailedOperation.ReleaseMNPVersionNeedGreaterThanOnlineVersion"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONID = "InvalidParameterValue.InvalidMNPVersionId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ReleaseMNPVersion(request *ReleaseMNPVersionRequest) (response *ReleaseMNPVersionResponse, err error) {
+    return c.ReleaseMNPVersionWithContext(context.Background(), request)
+}
+
+// ReleaseMNPVersion
+// This API is used to release a mini program version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_MNPRELEASENUMBEREXCEEDLIMIT = "FailedOperation.MNPReleaseNumberExceedLimit"
+//  FAILEDOPERATION_MNPVERSIONRELEASED = "FailedOperation.MNPVersionReleased"
+//  FAILEDOPERATION_ONLYRELEASEPLATFORMAPPROVEDMNPVERSION = "FailedOperation.OnlyReleasePlatformApprovedMNPVersion"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RELEASEMNPVERSIONNEEDGREATERTHANONLINEVERSION = "FailedOperation.ReleaseMNPVersionNeedGreaterThanOnlineVersion"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPVERSIONID = "InvalidParameterValue.InvalidMNPVersionId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) ReleaseMNPVersionWithContext(ctx context.Context, request *ReleaseMNPVersionRequest) (response *ReleaseMNPVersionResponse, err error) {
+    if request == nil {
+        request = NewReleaseMNPVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ReleaseMNPVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewReleaseMNPVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRemoveMNPRequest() (request *RemoveMNPRequest) {
+    request = &RemoveMNPRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "RemoveMNP")
+    
+    
+    return
+}
+
+func NewRemoveMNPResponse() (response *RemoveMNPResponse) {
+    response = &RemoveMNPResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RemoveMNP
+// This API is used to remove a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) RemoveMNP(request *RemoveMNPRequest) (response *RemoveMNPResponse, err error) {
+    return c.RemoveMNPWithContext(context.Background(), request)
+}
+
+// RemoveMNP
+// This API is used to remove a mini program.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMNPID = "InvalidParameterValue.InvalidMNPId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) RemoveMNPWithContext(ctx context.Context, request *RemoveMNPRequest) (response *RemoveMNPResponse, err error) {
+    if request == nil {
+        request = NewRemoveMNPRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RemoveMNP require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRemoveMNPResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRollbackMNPVersionRequest() (request *RollbackMNPVersionRequest) {
+    request = &RollbackMNPVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tcmpp", APIVersion, "RollbackMNPVersion")
+    
+    
+    return
+}
+
+func NewRollbackMNPVersionResponse() (response *RollbackMNPVersionResponse) {
+    response = &RollbackMNPVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RollbackMNPVersion
+// This API is used to rollback a mini program online version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMINIAPPID = "InvalidParameterValue.InvalidMiniAppId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) RollbackMNPVersion(request *RollbackMNPVersionRequest) (response *RollbackMNPVersionResponse, err error) {
+    return c.RollbackMNPVersionWithContext(context.Background(), request)
+}
+
+// RollbackMNPVersion
+// This API is used to rollback a mini program online version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PACKAGEALREADYEXPIRED = "FailedOperation.PackageAlreadyExpired"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMINIAPPID = "InvalidParameterValue.InvalidMiniAppId"
+//  INVALIDPARAMETERVALUE_INVALIDPLATFORMID = "InvalidParameterValue.InvalidPlatformId"
+func (c *Client) RollbackMNPVersionWithContext(ctx context.Context, request *RollbackMNPVersionRequest) (response *RollbackMNPVersionResponse, err error) {
+    if request == nil {
+        request = NewRollbackMNPVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RollbackMNPVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRollbackMNPVersionResponse()
     err = c.Send(request, response)
     return
 }
