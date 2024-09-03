@@ -65,7 +65,7 @@ func NewApplyConcurrentResponse() (response *ApplyConcurrentResponse) {
 }
 
 // ApplyConcurrent
-// This API is used to request a concurrency. The timeout period of the API is 20 seconds.
+// This API is used to request concurrency quota. The timeout period of the API is 20 seconds.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -81,7 +81,7 @@ func (c *Client) ApplyConcurrent(request *ApplyConcurrentRequest) (response *App
 }
 
 // ApplyConcurrent
-// This API is used to request a concurrency. The timeout period of the API is 20 seconds.
+// This API is used to request concurrency quota. The timeout period of the API is 20 seconds.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -104,6 +104,191 @@ func (c *Client) ApplyConcurrentWithContext(ctx context.Context, request *ApplyC
     request.SetContext(ctx)
     
     response = NewApplyConcurrentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateApplicationRequest() (request *CreateApplicationRequest) {
+    request = &CreateApplicationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "CreateApplication")
+    
+    
+    return
+}
+
+func NewCreateApplicationResponse() (response *CreateApplicationResponse) {
+    response = &CreateApplicationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateApplication
+// This API is used to create an application.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONCREATEFAIL = "FailedOperation.ApplicationCreateFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_APPLICATIONLIMITEXCEEDED = "OperationDenied.ApplicationLimitExceeded"
+func (c *Client) CreateApplication(request *CreateApplicationRequest) (response *CreateApplicationResponse, err error) {
+    return c.CreateApplicationWithContext(context.Background(), request)
+}
+
+// CreateApplication
+// This API is used to create an application.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONCREATEFAIL = "FailedOperation.ApplicationCreateFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_APPLICATIONLIMITEXCEEDED = "OperationDenied.ApplicationLimitExceeded"
+func (c *Client) CreateApplicationWithContext(ctx context.Context, request *CreateApplicationRequest) (response *CreateApplicationResponse, err error) {
+    if request == nil {
+        request = NewCreateApplicationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateApplication require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateApplicationSnapshotRequest() (request *CreateApplicationSnapshotRequest) {
+    request = &CreateApplicationSnapshotRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "CreateApplicationSnapshot")
+    
+    
+    return
+}
+
+func NewCreateApplicationSnapshotResponse() (response *CreateApplicationSnapshotResponse) {
+    response = &CreateApplicationSnapshotResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateApplicationSnapshot
+// This API is used to create a cloud application version snapshot.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) CreateApplicationSnapshot(request *CreateApplicationSnapshotRequest) (response *CreateApplicationSnapshotResponse, err error) {
+    return c.CreateApplicationSnapshotWithContext(context.Background(), request)
+}
+
+// CreateApplicationSnapshot
+// This API is used to create a cloud application version snapshot.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) CreateApplicationSnapshotWithContext(ctx context.Context, request *CreateApplicationSnapshotRequest) (response *CreateApplicationSnapshotResponse, err error) {
+    if request == nil {
+        request = NewCreateApplicationSnapshotRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateApplicationSnapshot require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateApplicationSnapshotResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateApplicationVersionRequest() (request *CreateApplicationVersionRequest) {
+    request = &CreateApplicationVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "CreateApplicationVersion")
+    
+    
+    return
+}
+
+func NewCreateApplicationVersionResponse() (response *CreateApplicationVersionResponse) {
+    response = &CreateApplicationVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateApplicationVersion
+// This API is used to create a cloud application version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_VERSIONCREATING = "OperationDenied.VersionCreating"
+//  OPERATIONDENIED_VERSIONLIMITEXCEEDED = "OperationDenied.VersionLimitExceeded"
+func (c *Client) CreateApplicationVersion(request *CreateApplicationVersionRequest) (response *CreateApplicationVersionResponse, err error) {
+    return c.CreateApplicationVersionWithContext(context.Background(), request)
+}
+
+// CreateApplicationVersion
+// This API is used to create a cloud application version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_VERSIONCREATING = "OperationDenied.VersionCreating"
+//  OPERATIONDENIED_VERSIONLIMITEXCEEDED = "OperationDenied.VersionLimitExceeded"
+func (c *Client) CreateApplicationVersionWithContext(ctx context.Context, request *CreateApplicationVersionRequest) (response *CreateApplicationVersionResponse, err error) {
+    if request == nil {
+        request = NewCreateApplicationVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateApplicationVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateApplicationVersionResponse()
     err = c.Send(request, response)
     return
 }
@@ -183,6 +368,395 @@ func (c *Client) CreateSessionWithContext(ctx context.Context, request *CreateSe
     return
 }
 
+func NewDeleteApplicationRequest() (request *DeleteApplicationRequest) {
+    request = &DeleteApplicationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DeleteApplication")
+    
+    
+    return
+}
+
+func NewDeleteApplicationResponse() (response *DeleteApplicationResponse) {
+    response = &DeleteApplicationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteApplication
+// This API is used to delete a cloud application.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  FAILEDOPERATION_VERSIONLOCKFAIL = "FailedOperation.VersionLockFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DeleteApplication(request *DeleteApplicationRequest) (response *DeleteApplicationResponse, err error) {
+    return c.DeleteApplicationWithContext(context.Background(), request)
+}
+
+// DeleteApplication
+// This API is used to delete a cloud application.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  FAILEDOPERATION_VERSIONLOCKFAIL = "FailedOperation.VersionLockFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DeleteApplicationWithContext(ctx context.Context, request *DeleteApplicationRequest) (response *DeleteApplicationResponse, err error) {
+    if request == nil {
+        request = NewDeleteApplicationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteApplication require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteApplicationVersionRequest() (request *DeleteApplicationVersionRequest) {
+    request = &DeleteApplicationVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DeleteApplicationVersion")
+    
+    
+    return
+}
+
+func NewDeleteApplicationVersionResponse() (response *DeleteApplicationVersionResponse) {
+    response = &DeleteApplicationVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteApplicationVersion
+// This API is used to delete a cloud application version.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  FAILEDOPERATION_VERSIONLOCKFAIL = "FailedOperation.VersionLockFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DeleteApplicationVersion(request *DeleteApplicationVersionRequest) (response *DeleteApplicationVersionResponse, err error) {
+    return c.DeleteApplicationVersionWithContext(context.Background(), request)
+}
+
+// DeleteApplicationVersion
+// This API is used to delete a cloud application version.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  FAILEDOPERATION_VERSIONLOCKFAIL = "FailedOperation.VersionLockFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DeleteApplicationVersionWithContext(ctx context.Context, request *DeleteApplicationVersionRequest) (response *DeleteApplicationVersionResponse, err error) {
+    if request == nil {
+        request = NewDeleteApplicationVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteApplicationVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteApplicationVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApplicationFileInfoRequest() (request *DescribeApplicationFileInfoRequest) {
+    request = &DescribeApplicationFileInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DescribeApplicationFileInfo")
+    
+    
+    return
+}
+
+func NewDescribeApplicationFileInfoResponse() (response *DescribeApplicationFileInfoResponse) {
+    response = &DescribeApplicationFileInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApplicationFileInfo
+// This API is used to query application file information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeApplicationFileInfo(request *DescribeApplicationFileInfoRequest) (response *DescribeApplicationFileInfoResponse, err error) {
+    return c.DescribeApplicationFileInfoWithContext(context.Background(), request)
+}
+
+// DescribeApplicationFileInfo
+// This API is used to query application file information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeApplicationFileInfoWithContext(ctx context.Context, request *DescribeApplicationFileInfoRequest) (response *DescribeApplicationFileInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeApplicationFileInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApplicationFileInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApplicationFileInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApplicationListRequest() (request *DescribeApplicationListRequest) {
+    request = &DescribeApplicationListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DescribeApplicationList")
+    
+    
+    return
+}
+
+func NewDescribeApplicationListResponse() (response *DescribeApplicationListResponse) {
+    response = &DescribeApplicationListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApplicationList
+// This API is used to query the cloud application list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeApplicationList(request *DescribeApplicationListRequest) (response *DescribeApplicationListResponse, err error) {
+    return c.DescribeApplicationListWithContext(context.Background(), request)
+}
+
+// DescribeApplicationList
+// This API is used to query the cloud application list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeApplicationListWithContext(ctx context.Context, request *DescribeApplicationListRequest) (response *DescribeApplicationListResponse, err error) {
+    if request == nil {
+        request = NewDescribeApplicationListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApplicationList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApplicationListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApplicationPathListRequest() (request *DescribeApplicationPathListRequest) {
+    request = &DescribeApplicationPathListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DescribeApplicationPathList")
+    
+    
+    return
+}
+
+func NewDescribeApplicationPathListResponse() (response *DescribeApplicationPathListResponse) {
+    response = &DescribeApplicationPathListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApplicationPathList
+// This API is used to query the cloud application startup path list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeApplicationPathList(request *DescribeApplicationPathListRequest) (response *DescribeApplicationPathListResponse, err error) {
+    return c.DescribeApplicationPathListWithContext(context.Background(), request)
+}
+
+// DescribeApplicationPathList
+// This API is used to query the cloud application startup path list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeApplicationPathListWithContext(ctx context.Context, request *DescribeApplicationPathListRequest) (response *DescribeApplicationPathListResponse, err error) {
+    if request == nil {
+        request = NewDescribeApplicationPathListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApplicationPathList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApplicationPathListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApplicationStatusRequest() (request *DescribeApplicationStatusRequest) {
+    request = &DescribeApplicationStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DescribeApplicationStatus")
+    
+    
+    return
+}
+
+func NewDescribeApplicationStatusResponse() (response *DescribeApplicationStatusResponse) {
+    response = &DescribeApplicationStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApplicationStatus
+// This API is used to query the running status of a cloud application and update status information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeApplicationStatus(request *DescribeApplicationStatusRequest) (response *DescribeApplicationStatusResponse, err error) {
+    return c.DescribeApplicationStatusWithContext(context.Background(), request)
+}
+
+// DescribeApplicationStatus
+// This API is used to query the running status of a cloud application and update status information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeApplicationStatusWithContext(ctx context.Context, request *DescribeApplicationStatusRequest) (response *DescribeApplicationStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeApplicationStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApplicationStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApplicationStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApplicationVersionRequest() (request *DescribeApplicationVersionRequest) {
+    request = &DescribeApplicationVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DescribeApplicationVersion")
+    
+    
+    return
+}
+
+func NewDescribeApplicationVersionResponse() (response *DescribeApplicationVersionResponse) {
+    response = &DescribeApplicationVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApplicationVersion
+// This API is used to query the version information of a cloud application.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeApplicationVersion(request *DescribeApplicationVersionRequest) (response *DescribeApplicationVersionResponse, err error) {
+    return c.DescribeApplicationVersionWithContext(context.Background(), request)
+}
+
+// DescribeApplicationVersion
+// This API is used to query the version information of a cloud application.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeApplicationVersionWithContext(ctx context.Context, request *DescribeApplicationVersionRequest) (response *DescribeApplicationVersionResponse, err error) {
+    if request == nil {
+        request = NewDescribeApplicationVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApplicationVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApplicationVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeConcurrentCountRequest() (request *DescribeConcurrentCountRequest) {
     request = &DescribeConcurrentCountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -203,45 +777,27 @@ func NewDescribeConcurrentCountResponse() (response *DescribeConcurrentCountResp
 }
 
 // DescribeConcurrentCount
-// Obtain the concurrency count.
+// This API is used to obtain the concurrency count.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOCKTIMEOUT = "FailedOperation.LockTimeout"
-//  FAILEDOPERATION_PATHNOTFOUND = "FailedOperation.PathNotFound"
-//  FAILEDOPERATION_PROCESSTIMEOUT = "FailedOperation.ProcessTimeout"
-//  FAILEDOPERATION_SLOWDOWN = "FailedOperation.SlowDown"
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED_ROLE = "LimitExceeded.Role"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCENOTFOUND_NOIDLE = "ResourceNotFound.NoIdle"
-//  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
-//  RESOURCEUNAVAILABLE_INITIALIZATION = "ResourceUnavailable.Initialization"
-//  UNSUPPORTEDOPERATION_STOPPING = "UnsupportedOperation.Stopping"
 func (c *Client) DescribeConcurrentCount(request *DescribeConcurrentCountRequest) (response *DescribeConcurrentCountResponse, err error) {
     return c.DescribeConcurrentCountWithContext(context.Background(), request)
 }
 
 // DescribeConcurrentCount
-// Obtain the concurrency count.
+// This API is used to obtain the concurrency count.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  FAILEDOPERATION_LOCKTIMEOUT = "FailedOperation.LockTimeout"
-//  FAILEDOPERATION_PATHNOTFOUND = "FailedOperation.PathNotFound"
-//  FAILEDOPERATION_PROCESSTIMEOUT = "FailedOperation.ProcessTimeout"
-//  FAILEDOPERATION_SLOWDOWN = "FailedOperation.SlowDown"
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED_ROLE = "LimitExceeded.Role"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCENOTFOUND_NOIDLE = "ResourceNotFound.NoIdle"
-//  RESOURCENOTFOUND_SESSIONNOTFOUND = "ResourceNotFound.SessionNotFound"
-//  RESOURCEUNAVAILABLE_INITIALIZATION = "ResourceUnavailable.Initialization"
-//  UNSUPPORTEDOPERATION_STOPPING = "UnsupportedOperation.Stopping"
 func (c *Client) DescribeConcurrentCountWithContext(ctx context.Context, request *DescribeConcurrentCountRequest) (response *DescribeConcurrentCountResponse, err error) {
     if request == nil {
         request = NewDescribeConcurrentCountRequest()
@@ -254,6 +810,69 @@ func (c *Client) DescribeConcurrentCountWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeConcurrentCountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCosCredentialRequest() (request *DescribeCosCredentialRequest) {
+    request = &DescribeCosCredentialRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DescribeCosCredential")
+    
+    
+    return
+}
+
+func NewDescribeCosCredentialResponse() (response *DescribeCosCredentialResponse) {
+    response = &DescribeCosCredentialResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCosCredential
+// This API is used to query COS key information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeCosCredential(request *DescribeCosCredentialRequest) (response *DescribeCosCredentialResponse, err error) {
+    return c.DescribeCosCredentialWithContext(context.Background(), request)
+}
+
+// DescribeCosCredential
+// This API is used to query COS key information.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DescribeCosCredentialWithContext(ctx context.Context, request *DescribeCosCredentialRequest) (response *DescribeCosCredentialResponse, err error) {
+    if request == nil {
+        request = NewDescribeCosCredentialRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCosCredential require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCosCredentialResponse()
     err = c.Send(request, response)
     return
 }
@@ -278,7 +897,7 @@ func NewDestroySessionResponse() (response *DestroySessionResponse) {
 }
 
 // DestroySession
-// Terminate the session. If stream push has been initiated in this session, then the stream push will end upon session termination.
+// This API is used to terminate a session. If cloud-based streaming has been enabled for this session, the cloud-based streaming will end upon session termination.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -291,7 +910,7 @@ func (c *Client) DestroySession(request *DestroySessionRequest) (response *Destr
 }
 
 // DestroySession
-// Terminate the session. If stream push has been initiated in this session, then the stream push will end upon session termination.
+// This API is used to terminate a session. If cloud-based streaming has been enabled for this session, the cloud-based streaming will end upon session termination.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -311,6 +930,242 @@ func (c *Client) DestroySessionWithContext(ctx context.Context, request *Destroy
     request.SetContext(ctx)
     
     response = NewDestroySessionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyApplicationBaseInfoRequest() (request *ModifyApplicationBaseInfoRequest) {
+    request = &ModifyApplicationBaseInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "ModifyApplicationBaseInfo")
+    
+    
+    return
+}
+
+func NewModifyApplicationBaseInfoResponse() (response *ModifyApplicationBaseInfoResponse) {
+    response = &ModifyApplicationBaseInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyApplicationBaseInfo
+// This API is used to modify basic information of a cloud application.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ModifyApplicationBaseInfo(request *ModifyApplicationBaseInfoRequest) (response *ModifyApplicationBaseInfoResponse, err error) {
+    return c.ModifyApplicationBaseInfoWithContext(context.Background(), request)
+}
+
+// ModifyApplicationBaseInfo
+// This API is used to modify basic information of a cloud application.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ModifyApplicationBaseInfoWithContext(ctx context.Context, request *ModifyApplicationBaseInfoRequest) (response *ModifyApplicationBaseInfoResponse, err error) {
+    if request == nil {
+        request = NewModifyApplicationBaseInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyApplicationBaseInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyApplicationBaseInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyApplicationVersionRequest() (request *ModifyApplicationVersionRequest) {
+    request = &ModifyApplicationVersionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "ModifyApplicationVersion")
+    
+    
+    return
+}
+
+func NewModifyApplicationVersionResponse() (response *ModifyApplicationVersionResponse) {
+    response = &ModifyApplicationVersionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyApplicationVersion
+// This API is used to modify the version information of a cloud application.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) ModifyApplicationVersion(request *ModifyApplicationVersionRequest) (response *ModifyApplicationVersionResponse, err error) {
+    return c.ModifyApplicationVersionWithContext(context.Background(), request)
+}
+
+// ModifyApplicationVersion
+// This API is used to modify the version information of a cloud application.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) ModifyApplicationVersionWithContext(ctx context.Context, request *ModifyApplicationVersionRequest) (response *ModifyApplicationVersionResponse, err error) {
+    if request == nil {
+        request = NewModifyApplicationVersionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyApplicationVersion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyApplicationVersionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyMobileApplicationInfoRequest() (request *ModifyMobileApplicationInfoRequest) {
+    request = &ModifyMobileApplicationInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "ModifyMobileApplicationInfo")
+    
+    
+    return
+}
+
+func NewModifyMobileApplicationInfoResponse() (response *ModifyMobileApplicationInfoResponse) {
+    response = &ModifyMobileApplicationInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyMobileApplicationInfo
+// This API is used to modify the mobile application data.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ModifyMobileApplicationInfo(request *ModifyMobileApplicationInfoRequest) (response *ModifyMobileApplicationInfoResponse, err error) {
+    return c.ModifyMobileApplicationInfoWithContext(context.Background(), request)
+}
+
+// ModifyMobileApplicationInfo
+// This API is used to modify the mobile application data.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ModifyMobileApplicationInfoWithContext(ctx context.Context, request *ModifyMobileApplicationInfoRequest) (response *ModifyMobileApplicationInfoResponse, err error) {
+    if request == nil {
+        request = NewModifyMobileApplicationInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMobileApplicationInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMobileApplicationInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSetApplicationVersionOnlineRequest() (request *SetApplicationVersionOnlineRequest) {
+    request = &SetApplicationVersionOnlineRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "SetApplicationVersionOnline")
+    
+    
+    return
+}
+
+func NewSetApplicationVersionOnlineResponse() (response *SetApplicationVersionOnlineResponse) {
+    response = &SetApplicationVersionOnlineResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SetApplicationVersionOnline
+// This API is used to launch an application version.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) SetApplicationVersionOnline(request *SetApplicationVersionOnlineRequest) (response *SetApplicationVersionOnlineResponse, err error) {
+    return c.SetApplicationVersionOnlineWithContext(context.Background(), request)
+}
+
+// SetApplicationVersionOnline
+// This API is used to launch an application version.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) SetApplicationVersionOnlineWithContext(ctx context.Context, request *SetApplicationVersionOnlineRequest) (response *SetApplicationVersionOnlineResponse, err error) {
+    if request == nil {
+        request = NewSetApplicationVersionOnlineRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SetApplicationVersionOnline require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSetApplicationVersionOnlineResponse()
     err = c.Send(request, response)
     return
 }
@@ -335,7 +1190,7 @@ func NewStartPublishStreamResponse() (response *StartPublishStreamResponse) {
 }
 
 // StartPublishStream
-// Initiate stream push. The codec for the stream push is automatically adjusted based on the client's (SDK) capabilities, with a default order of H265, H264, VP8, and VP9.
+// This API is used to start cloud-based streaming. The codec for the cloud-based streaming is automatically selected based on the client's (SDK) capabilities, with a default order of H.265, H.264, VP8, and VP9.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -349,7 +1204,7 @@ func (c *Client) StartPublishStream(request *StartPublishStreamRequest) (respons
 }
 
 // StartPublishStream
-// Initiate stream push. The codec for the stream push is automatically adjusted based on the client's (SDK) capabilities, with a default order of H265, H264, VP8, and VP9.
+// This API is used to start cloud-based streaming. The codec for the cloud-based streaming is automatically selected based on the client's (SDK) capabilities, with a default order of H.265, H.264, VP8, and VP9.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -394,7 +1249,7 @@ func NewStartPublishStreamWithURLResponse() (response *StartPublishStreamWithURL
 }
 
 // StartPublishStreamWithURL
-// Initiate stream push to the specified URL. The codec for the stream push is automatically adjusted based on the client's (SDK) capabilities, with a default order of H265, H264, VP8, and VP9. This stream push method will be charged separately. For details about the charging method, see [Charging for Stream Push to Specified URL](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6).
+// This API is used to start cloud-based streaming to the specified URL. The codec for the cloud-based streaming is automatically selected based on the client's (SDK) capabilities, with a default order of H.265, H.264, VP8, and VP9. This streaming method will be billed separately. For details about the billing method, see [Charging for Streaming to Specified URL](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -408,7 +1263,7 @@ func (c *Client) StartPublishStreamWithURL(request *StartPublishStreamWithURLReq
 }
 
 // StartPublishStreamWithURL
-// Initiate stream push to the specified URL. The codec for the stream push is automatically adjusted based on the client's (SDK) capabilities, with a default order of H265, H264, VP8, and VP9. This stream push method will be charged separately. For details about the charging method, see [Charging for Stream Push to Specified URL](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6).
+// This API is used to start cloud-based streaming to the specified URL. The codec for the cloud-based streaming is automatically selected based on the client's (SDK) capabilities, with a default order of H.265, H.264, VP8, and VP9. This streaming method will be billed separately. For details about the billing method, see [Charging for Streaming to Specified URL](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -453,7 +1308,7 @@ func NewStopPublishStreamResponse() (response *StopPublishStreamResponse) {
 }
 
 // StopPublishStream
-// This API is used to stop stream push.
+// This API is used to stop cloud-based streaming.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -467,7 +1322,7 @@ func (c *Client) StopPublishStream(request *StopPublishStreamRequest) (response 
 }
 
 // StopPublishStream
-// This API is used to stop stream push.
+// This API is used to stop cloud-based streaming.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

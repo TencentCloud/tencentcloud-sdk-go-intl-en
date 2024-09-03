@@ -523,14 +523,18 @@ type CreateStreamLiveInputRequestParams struct {
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Input type
-	// Valid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`
+	// Valid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`,`RTP-FEC_PUSH`,`RTSP_PULL`,`SRT_PUSH `,`SRT_PULL `
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// ID of the input security group to attach
 	// You can attach only one security group to an input.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// Input settings. For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+	// Input settings. 
+	// For the type:
+	// `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`,`RTSP_PULL`,`SRT_PULL` or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+	// For the type:
+	// `SRT_PUSH`, 0 or 2 inputs of the corresponding type can be configured.
 	InputSettings []*InputSettingInfo `json:"InputSettings,omitnil,omitempty" name:"InputSettings"`
 }
 
@@ -541,14 +545,18 @@ type CreateStreamLiveInputRequest struct {
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Input type
-	// Valid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`
+	// Valid values: `RTMP_PUSH`, `RTP_PUSH`, `UDP_PUSH`, `RTMP_PULL`, `HLS_PULL`, `MP4_PULL`,`RTP-FEC_PUSH`,`RTSP_PULL`,`SRT_PUSH `,`SRT_PULL `
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// ID of the input security group to attach
 	// You can attach only one security group to an input.
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// Input settings. For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+	// Input settings. 
+	// For the type:
+	// `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`,`RTSP_PULL`,`SRT_PULL` or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+	// For the type:
+	// `SRT_PUSH`, 0 or 2 inputs of the corresponding type can be configured.
 	InputSettings []*InputSettingInfo `json:"InputSettings,omitnil,omitempty" name:"InputSettings"`
 }
 

@@ -45,6 +45,55 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewActionAlterUserRequest() (request *ActionAlterUserRequest) {
+    request = &ActionAlterUserRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdwdoris", APIVersion, "ActionAlterUser")
+    
+    
+    return
+}
+
+func NewActionAlterUserResponse() (response *ActionAlterUserResponse) {
+    response = &ActionAlterUserResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ActionAlterUser
+// This API is used to add and modify a user.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) ActionAlterUser(request *ActionAlterUserRequest) (response *ActionAlterUserResponse, err error) {
+    return c.ActionAlterUserWithContext(context.Background(), request)
+}
+
+// ActionAlterUser
+// This API is used to add and modify a user.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) ActionAlterUserWithContext(ctx context.Context, request *ActionAlterUserRequest) (response *ActionAlterUserResponse, err error) {
+    if request == nil {
+        request = NewActionAlterUserRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ActionAlterUser require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewActionAlterUserResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCancelBackupJobRequest() (request *CancelBackupJobRequest) {
     request = &CancelBackupJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -66,12 +115,18 @@ func NewCancelBackupJobResponse() (response *CancelBackupJobResponse) {
 
 // CancelBackupJob
 // This API is used to cancel the corresponding backup instance task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CancelBackupJob(request *CancelBackupJobRequest) (response *CancelBackupJobResponse, err error) {
     return c.CancelBackupJobWithContext(context.Background(), request)
 }
 
 // CancelBackupJob
 // This API is used to cancel the corresponding backup instance task.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CancelBackupJobWithContext(ctx context.Context, request *CancelBackupJobRequest) (response *CancelBackupJobResponse, err error) {
     if request == nil {
         request = NewCancelBackupJobRequest()
@@ -84,6 +139,55 @@ func (c *Client) CancelBackupJobWithContext(ctx context.Context, request *Cancel
     request.SetContext(ctx)
     
     response = NewCancelBackupJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCheckCoolDownWorkingVariableConfigCorrectRequest() (request *CheckCoolDownWorkingVariableConfigCorrectRequest) {
+    request = &CheckCoolDownWorkingVariableConfigCorrectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdwdoris", APIVersion, "CheckCoolDownWorkingVariableConfigCorrect")
+    
+    
+    return
+}
+
+func NewCheckCoolDownWorkingVariableConfigCorrectResponse() (response *CheckCoolDownWorkingVariableConfigCorrectResponse) {
+    response = &CheckCoolDownWorkingVariableConfigCorrectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CheckCoolDownWorkingVariableConfigCorrect
+// This API is used to check whether variables and configurations for hot/cold data layering are correct.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) CheckCoolDownWorkingVariableConfigCorrect(request *CheckCoolDownWorkingVariableConfigCorrectRequest) (response *CheckCoolDownWorkingVariableConfigCorrectResponse, err error) {
+    return c.CheckCoolDownWorkingVariableConfigCorrectWithContext(context.Background(), request)
+}
+
+// CheckCoolDownWorkingVariableConfigCorrect
+// This API is used to check whether variables and configurations for hot/cold data layering are correct.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) CheckCoolDownWorkingVariableConfigCorrectWithContext(ctx context.Context, request *CheckCoolDownWorkingVariableConfigCorrectRequest) (response *CheckCoolDownWorkingVariableConfigCorrectResponse, err error) {
+    if request == nil {
+        request = NewCheckCoolDownWorkingVariableConfigCorrectRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckCoolDownWorkingVariableConfigCorrect require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckCoolDownWorkingVariableConfigCorrectResponse()
     err = c.Send(request, response)
     return
 }
@@ -109,12 +213,18 @@ func NewCopyTableDatasResponse() (response *CopyTableDatasResponse) {
 
 // CopyTableDatas
 // This API is used to copy the source table to the target table.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CopyTableDatas(request *CopyTableDatasRequest) (response *CopyTableDatasResponse, err error) {
     return c.CopyTableDatasWithContext(context.Background(), request)
 }
 
 // CopyTableDatas
 // This API is used to copy the source table to the target table.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CopyTableDatasWithContext(ctx context.Context, request *CopyTableDatasRequest) (response *CopyTableDatasResponse, err error) {
     if request == nil {
         request = NewCopyTableDatasRequest()
@@ -152,12 +262,18 @@ func NewCreateBackUpScheduleResponse() (response *CreateBackUpScheduleResponse) 
 
 // CreateBackUpSchedule
 // This API is used to create or modify backup policies.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CreateBackUpSchedule(request *CreateBackUpScheduleRequest) (response *CreateBackUpScheduleResponse, err error) {
     return c.CreateBackUpScheduleWithContext(context.Background(), request)
 }
 
 // CreateBackUpSchedule
 // This API is used to create or modify backup policies.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CreateBackUpScheduleWithContext(ctx context.Context, request *CreateBackUpScheduleRequest) (response *CreateBackUpScheduleResponse, err error) {
     if request == nil {
         request = NewCreateBackUpScheduleRequest()
@@ -170,6 +286,55 @@ func (c *Client) CreateBackUpScheduleWithContext(ctx context.Context, request *C
     request.SetContext(ctx)
     
     response = NewCreateBackUpScheduleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateCoolDownPolicyRequest() (request *CreateCoolDownPolicyRequest) {
+    request = &CreateCoolDownPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdwdoris", APIVersion, "CreateCoolDownPolicy")
+    
+    
+    return
+}
+
+func NewCreateCoolDownPolicyResponse() (response *CreateCoolDownPolicyResponse) {
+    response = &CreateCoolDownPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateCoolDownPolicy
+// This API is used to create a hot/cold data layering policy.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) CreateCoolDownPolicy(request *CreateCoolDownPolicyRequest) (response *CreateCoolDownPolicyResponse, err error) {
+    return c.CreateCoolDownPolicyWithContext(context.Background(), request)
+}
+
+// CreateCoolDownPolicy
+// This API is used to create a hot/cold data layering policy.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) CreateCoolDownPolicyWithContext(ctx context.Context, request *CreateCoolDownPolicyRequest) (response *CreateCoolDownPolicyResponse, err error) {
+    if request == nil {
+        request = NewCreateCoolDownPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCoolDownPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCoolDownPolicyResponse()
     err = c.Send(request, response)
     return
 }
@@ -195,12 +360,18 @@ func NewCreateDatabaseResponse() (response *CreateDatabaseResponse) {
 
 // CreateDatabase
 // This API is used to create a TCHouse-D database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CreateDatabase(request *CreateDatabaseRequest) (response *CreateDatabaseResponse, err error) {
     return c.CreateDatabaseWithContext(context.Background(), request)
 }
 
 // CreateDatabase
 // This API is used to create a TCHouse-D database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CreateDatabaseWithContext(ctx context.Context, request *CreateDatabaseRequest) (response *CreateDatabaseResponse, err error) {
     if request == nil {
         request = NewCreateDatabaseRequest()
@@ -238,12 +409,18 @@ func NewCreateInstanceNewResponse() (response *CreateInstanceNewResponse) {
 
 // CreateInstanceNew
 // This API is used to create clusters.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CreateInstanceNew(request *CreateInstanceNewRequest) (response *CreateInstanceNewResponse, err error) {
     return c.CreateInstanceNewWithContext(context.Background(), request)
 }
 
 // CreateInstanceNew
 // This API is used to create clusters.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CreateInstanceNewWithContext(ctx context.Context, request *CreateInstanceNewRequest) (response *CreateInstanceNewResponse, err error) {
     if request == nil {
         request = NewCreateInstanceNewRequest()
@@ -281,12 +458,18 @@ func NewCreateTableResponse() (response *CreateTableResponse) {
 
 // CreateTable
 // This API is used to create a TCHouse-D table under the specified database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CreateTable(request *CreateTableRequest) (response *CreateTableResponse, err error) {
     return c.CreateTableWithContext(context.Background(), request)
 }
 
 // CreateTable
 // This API is used to create a TCHouse-D table under the specified database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CreateTableWithContext(ctx context.Context, request *CreateTableRequest) (response *CreateTableResponse, err error) {
     if request == nil {
         request = NewCreateTableRequest()
@@ -324,12 +507,18 @@ func NewCreateWorkloadGroupResponse() (response *CreateWorkloadGroupResponse) {
 
 // CreateWorkloadGroup
 // This API is used to create resource groups.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CreateWorkloadGroup(request *CreateWorkloadGroupRequest) (response *CreateWorkloadGroupResponse, err error) {
     return c.CreateWorkloadGroupWithContext(context.Background(), request)
 }
 
 // CreateWorkloadGroup
 // This API is used to create resource groups.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) CreateWorkloadGroupWithContext(ctx context.Context, request *CreateWorkloadGroupRequest) (response *CreateWorkloadGroupResponse, err error) {
     if request == nil {
         request = NewCreateWorkloadGroupRequest()
@@ -367,12 +556,18 @@ func NewDeleteBackUpDataResponse() (response *DeleteBackUpDataResponse) {
 
 // DeleteBackUpData
 // This API is used to delete backup data.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DeleteBackUpData(request *DeleteBackUpDataRequest) (response *DeleteBackUpDataResponse, err error) {
     return c.DeleteBackUpDataWithContext(context.Background(), request)
 }
 
 // DeleteBackUpData
 // This API is used to delete backup data.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DeleteBackUpDataWithContext(ctx context.Context, request *DeleteBackUpDataRequest) (response *DeleteBackUpDataResponse, err error) {
     if request == nil {
         request = NewDeleteBackUpDataRequest()
@@ -410,12 +605,18 @@ func NewDeleteTableResponse() (response *DeleteTableResponse) {
 
 // DeleteTable
 // This API is used to delete the specified table in the specified database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DeleteTable(request *DeleteTableRequest) (response *DeleteTableResponse, err error) {
     return c.DeleteTableWithContext(context.Background(), request)
 }
 
 // DeleteTable
 // This API is used to delete the specified table in the specified database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DeleteTableWithContext(ctx context.Context, request *DeleteTableRequest) (response *DeleteTableResponse, err error) {
     if request == nil {
         request = NewDeleteTableRequest()
@@ -453,12 +654,18 @@ func NewDeleteWorkloadGroupResponse() (response *DeleteWorkloadGroupResponse) {
 
 // DeleteWorkloadGroup
 // This API is used to delete resource groups.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DeleteWorkloadGroup(request *DeleteWorkloadGroupRequest) (response *DeleteWorkloadGroupResponse, err error) {
     return c.DeleteWorkloadGroupWithContext(context.Background(), request)
 }
 
 // DeleteWorkloadGroup
 // This API is used to delete resource groups.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DeleteWorkloadGroupWithContext(ctx context.Context, request *DeleteWorkloadGroupRequest) (response *DeleteWorkloadGroupResponse, err error) {
     if request == nil {
         request = NewDeleteWorkloadGroupRequest()
@@ -496,12 +703,18 @@ func NewDescribeAreaRegionResponse() (response *DescribeAreaRegionResponse) {
 
 // DescribeAreaRegion
 // This API is used to display region information and the total number of clusters in each region on the cluster list page.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeAreaRegion(request *DescribeAreaRegionRequest) (response *DescribeAreaRegionResponse, err error) {
     return c.DescribeAreaRegionWithContext(context.Background(), request)
 }
 
 // DescribeAreaRegion
 // This API is used to display region information and the total number of clusters in each region on the cluster list page.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeAreaRegionWithContext(ctx context.Context, request *DescribeAreaRegionRequest) (response *DescribeAreaRegionResponse, err error) {
     if request == nil {
         request = NewDescribeAreaRegionRequest()
@@ -539,12 +752,18 @@ func NewDescribeBackUpJobResponse() (response *DescribeBackUpJobResponse) {
 
 // DescribeBackUpJob
 // This API is used to query the list of backup instances.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeBackUpJob(request *DescribeBackUpJobRequest) (response *DescribeBackUpJobResponse, err error) {
     return c.DescribeBackUpJobWithContext(context.Background(), request)
 }
 
 // DescribeBackUpJob
 // This API is used to query the list of backup instances.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeBackUpJobWithContext(ctx context.Context, request *DescribeBackUpJobRequest) (response *DescribeBackUpJobResponse, err error) {
     if request == nil {
         request = NewDescribeBackUpJobRequest()
@@ -582,12 +801,18 @@ func NewDescribeBackUpJobDetailResponse() (response *DescribeBackUpJobDetailResp
 
 // DescribeBackUpJobDetail
 // This API is used to query backup task details.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeBackUpJobDetail(request *DescribeBackUpJobDetailRequest) (response *DescribeBackUpJobDetailResponse, err error) {
     return c.DescribeBackUpJobDetailWithContext(context.Background(), request)
 }
 
 // DescribeBackUpJobDetail
 // This API is used to query backup task details.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeBackUpJobDetailWithContext(ctx context.Context, request *DescribeBackUpJobDetailRequest) (response *DescribeBackUpJobDetailResponse, err error) {
     if request == nil {
         request = NewDescribeBackUpJobDetailRequest()
@@ -625,12 +850,18 @@ func NewDescribeBackUpSchedulesResponse() (response *DescribeBackUpSchedulesResp
 
 // DescribeBackUpSchedules
 // This API is used to obtain the scheduled task information for the backup and migration.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeBackUpSchedules(request *DescribeBackUpSchedulesRequest) (response *DescribeBackUpSchedulesResponse, err error) {
     return c.DescribeBackUpSchedulesWithContext(context.Background(), request)
 }
 
 // DescribeBackUpSchedules
 // This API is used to obtain the scheduled task information for the backup and migration.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeBackUpSchedulesWithContext(ctx context.Context, request *DescribeBackUpSchedulesRequest) (response *DescribeBackUpSchedulesResponse, err error) {
     if request == nil {
         request = NewDescribeBackUpSchedulesRequest()
@@ -668,12 +899,18 @@ func NewDescribeBackUpTablesResponse() (response *DescribeBackUpTablesResponse) 
 
 // DescribeBackUpTables
 // This API is used to obtain the information of the table available for backup.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeBackUpTables(request *DescribeBackUpTablesRequest) (response *DescribeBackUpTablesResponse, err error) {
     return c.DescribeBackUpTablesWithContext(context.Background(), request)
 }
 
 // DescribeBackUpTables
 // This API is used to obtain the information of the table available for backup.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeBackUpTablesWithContext(ctx context.Context, request *DescribeBackUpTablesRequest) (response *DescribeBackUpTablesResponse, err error) {
     if request == nil {
         request = NewDescribeBackUpTablesRequest()
@@ -711,12 +948,18 @@ func NewDescribeBackUpTaskDetailResponse() (response *DescribeBackUpTaskDetailRe
 
 // DescribeBackUpTaskDetail
 // This API is used to query the progress details of backup tasks.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeBackUpTaskDetail(request *DescribeBackUpTaskDetailRequest) (response *DescribeBackUpTaskDetailResponse, err error) {
     return c.DescribeBackUpTaskDetailWithContext(context.Background(), request)
 }
 
 // DescribeBackUpTaskDetail
 // This API is used to query the progress details of backup tasks.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeBackUpTaskDetailWithContext(ctx context.Context, request *DescribeBackUpTaskDetailRequest) (response *DescribeBackUpTaskDetailResponse, err error) {
     if request == nil {
         request = NewDescribeBackUpTaskDetailRequest()
@@ -754,12 +997,18 @@ func NewDescribeClusterConfigsResponse() (response *DescribeClusterConfigsRespon
 
 // DescribeClusterConfigs
 // This API is used to get the contents of the latest configuration files (config.xml, metrika.xml, and user.xml) of the cluster and display them to the user.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeClusterConfigs(request *DescribeClusterConfigsRequest) (response *DescribeClusterConfigsResponse, err error) {
     return c.DescribeClusterConfigsWithContext(context.Background(), request)
 }
 
 // DescribeClusterConfigs
 // This API is used to get the contents of the latest configuration files (config.xml, metrika.xml, and user.xml) of the cluster and display them to the user.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
 func (c *Client) DescribeClusterConfigsWithContext(ctx context.Context, request *DescribeClusterConfigsRequest) (response *DescribeClusterConfigsResponse, err error) {
     if request == nil {
         request = NewDescribeClusterConfigsRequest()
@@ -821,6 +1070,202 @@ func (c *Client) DescribeClusterConfigsHistoryWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewDescribeClusterConfigsHistoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCoolDownBackendsRequest() (request *DescribeCoolDownBackendsRequest) {
+    request = &DescribeCoolDownBackendsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdwdoris", APIVersion, "DescribeCoolDownBackends")
+    
+    
+    return
+}
+
+func NewDescribeCoolDownBackendsResponse() (response *DescribeCoolDownBackendsResponse) {
+    response = &DescribeCoolDownBackendsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCoolDownBackends
+// This API is used to query the list of backend nodes supporting hot/cold data layering.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCoolDownBackends(request *DescribeCoolDownBackendsRequest) (response *DescribeCoolDownBackendsResponse, err error) {
+    return c.DescribeCoolDownBackendsWithContext(context.Background(), request)
+}
+
+// DescribeCoolDownBackends
+// This API is used to query the list of backend nodes supporting hot/cold data layering.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCoolDownBackendsWithContext(ctx context.Context, request *DescribeCoolDownBackendsRequest) (response *DescribeCoolDownBackendsResponse, err error) {
+    if request == nil {
+        request = NewDescribeCoolDownBackendsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCoolDownBackends require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCoolDownBackendsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCoolDownPoliciesRequest() (request *DescribeCoolDownPoliciesRequest) {
+    request = &DescribeCoolDownPoliciesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdwdoris", APIVersion, "DescribeCoolDownPolicies")
+    
+    
+    return
+}
+
+func NewDescribeCoolDownPoliciesResponse() (response *DescribeCoolDownPoliciesResponse) {
+    response = &DescribeCoolDownPoliciesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCoolDownPolicies
+// This API is used to query the list of hot/cold data layering policies.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCoolDownPolicies(request *DescribeCoolDownPoliciesRequest) (response *DescribeCoolDownPoliciesResponse, err error) {
+    return c.DescribeCoolDownPoliciesWithContext(context.Background(), request)
+}
+
+// DescribeCoolDownPolicies
+// This API is used to query the list of hot/cold data layering policies.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCoolDownPoliciesWithContext(ctx context.Context, request *DescribeCoolDownPoliciesRequest) (response *DescribeCoolDownPoliciesResponse, err error) {
+    if request == nil {
+        request = NewDescribeCoolDownPoliciesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCoolDownPolicies require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCoolDownPoliciesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCoolDownTableDataRequest() (request *DescribeCoolDownTableDataRequest) {
+    request = &DescribeCoolDownTableDataRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdwdoris", APIVersion, "DescribeCoolDownTableData")
+    
+    
+    return
+}
+
+func NewDescribeCoolDownTableDataResponse() (response *DescribeCoolDownTableDataResponse) {
+    response = &DescribeCoolDownTableDataResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCoolDownTableData
+// This API is used to query the layered hot and cold data in a table.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCoolDownTableData(request *DescribeCoolDownTableDataRequest) (response *DescribeCoolDownTableDataResponse, err error) {
+    return c.DescribeCoolDownTableDataWithContext(context.Background(), request)
+}
+
+// DescribeCoolDownTableData
+// This API is used to query the layered hot and cold data in a table.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCoolDownTableDataWithContext(ctx context.Context, request *DescribeCoolDownTableDataRequest) (response *DescribeCoolDownTableDataResponse, err error) {
+    if request == nil {
+        request = NewDescribeCoolDownTableDataRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCoolDownTableData require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCoolDownTableDataResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeCreateTablesDDLRequest() (request *DescribeCreateTablesDDLRequest) {
+    request = &DescribeCreateTablesDDLRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdwdoris", APIVersion, "DescribeCreateTablesDDL")
+    
+    
+    return
+}
+
+func NewDescribeCreateTablesDDLResponse() (response *DescribeCreateTablesDDLResponse) {
+    response = &DescribeCreateTablesDDLResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCreateTablesDDL
+// This API is used to batch obtain the table creation DDL.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCreateTablesDDL(request *DescribeCreateTablesDDLRequest) (response *DescribeCreateTablesDDLResponse, err error) {
+    return c.DescribeCreateTablesDDLWithContext(context.Background(), request)
+}
+
+// DescribeCreateTablesDDL
+// This API is used to batch obtain the table creation DDL.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeCreateTablesDDLWithContext(ctx context.Context, request *DescribeCreateTablesDDLRequest) (response *DescribeCreateTablesDDLResponse, err error) {
+    if request == nil {
+        request = NewDescribeCreateTablesDDLRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCreateTablesDDL require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCreateTablesDDLResponse()
     err = c.Send(request, response)
     return
 }
@@ -1727,7 +2172,7 @@ func NewDescribeSqlApisResponse() (response *DescribeSqlApisResponse) {
 }
 
 // DescribeSqlApis
-// This API is used to query the CK cluster API for the driver SQL command.
+// This API is used to query the cluster information by executing SQL commands.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1736,7 +2181,7 @@ func (c *Client) DescribeSqlApis(request *DescribeSqlApisRequest) (response *Des
 }
 
 // DescribeSqlApis
-// This API is used to query the CK cluster API for the driver SQL command.
+// This API is used to query the cluster information by executing SQL commands.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2197,6 +2642,104 @@ func (c *Client) InsertDatasToTableWithContext(ctx context.Context, request *Ins
     return
 }
 
+func NewModifyClusterConfigsRequest() (request *ModifyClusterConfigsRequest) {
+    request = &ModifyClusterConfigsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdwdoris", APIVersion, "ModifyClusterConfigs")
+    
+    
+    return
+}
+
+func NewModifyClusterConfigsResponse() (response *ModifyClusterConfigsResponse) {
+    response = &ModifyClusterConfigsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyClusterConfigs
+// This API is used to modify the XML cluster configuration file on the cluster configuration page.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) ModifyClusterConfigs(request *ModifyClusterConfigsRequest) (response *ModifyClusterConfigsResponse, err error) {
+    return c.ModifyClusterConfigsWithContext(context.Background(), request)
+}
+
+// ModifyClusterConfigs
+// This API is used to modify the XML cluster configuration file on the cluster configuration page.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) ModifyClusterConfigsWithContext(ctx context.Context, request *ModifyClusterConfigsRequest) (response *ModifyClusterConfigsResponse, err error) {
+    if request == nil {
+        request = NewModifyClusterConfigsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClusterConfigs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyClusterConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyCoolDownPolicyRequest() (request *ModifyCoolDownPolicyRequest) {
+    request = &ModifyCoolDownPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdwdoris", APIVersion, "ModifyCoolDownPolicy")
+    
+    
+    return
+}
+
+func NewModifyCoolDownPolicyResponse() (response *ModifyCoolDownPolicyResponse) {
+    response = &ModifyCoolDownPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyCoolDownPolicy
+// This API is used to modify the hot/cold data layering policy.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) ModifyCoolDownPolicy(request *ModifyCoolDownPolicyRequest) (response *ModifyCoolDownPolicyResponse, err error) {
+    return c.ModifyCoolDownPolicyWithContext(context.Background(), request)
+}
+
+// ModifyCoolDownPolicy
+// This API is used to modify the hot/cold data layering policy.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) ModifyCoolDownPolicyWithContext(ctx context.Context, request *ModifyCoolDownPolicyRequest) (response *ModifyCoolDownPolicyResponse, err error) {
+    if request == nil {
+        request = NewModifyCoolDownPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCoolDownPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCoolDownPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyDatabaseTableAccessRequest() (request *ModifyDatabaseTableAccessRequest) {
     request = &ModifyDatabaseTableAccessRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2638,6 +3181,104 @@ func (c *Client) ModifyWorkloadGroupStatusWithContext(ctx context.Context, reque
     return
 }
 
+func NewOpenCoolDownRequest() (request *OpenCoolDownRequest) {
+    request = &OpenCoolDownRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdwdoris", APIVersion, "OpenCoolDown")
+    
+    
+    return
+}
+
+func NewOpenCoolDownResponse() (response *OpenCoolDownResponse) {
+    response = &OpenCoolDownResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// OpenCoolDown
+// This API is used to enable hot/cold data layering.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) OpenCoolDown(request *OpenCoolDownRequest) (response *OpenCoolDownResponse, err error) {
+    return c.OpenCoolDownWithContext(context.Background(), request)
+}
+
+// OpenCoolDown
+// This API is used to enable hot/cold data layering.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) OpenCoolDownWithContext(ctx context.Context, request *OpenCoolDownRequest) (response *OpenCoolDownResponse, err error) {
+    if request == nil {
+        request = NewOpenCoolDownRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenCoolDown require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOpenCoolDownResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewOpenCoolDownPolicyRequest() (request *OpenCoolDownPolicyRequest) {
+    request = &OpenCoolDownPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdwdoris", APIVersion, "OpenCoolDownPolicy")
+    
+    
+    return
+}
+
+func NewOpenCoolDownPolicyResponse() (response *OpenCoolDownPolicyResponse) {
+    response = &OpenCoolDownPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// OpenCoolDownPolicy
+// This API is used to enable and describe the cold storage policy.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) OpenCoolDownPolicy(request *OpenCoolDownPolicyRequest) (response *OpenCoolDownPolicyResponse, err error) {
+    return c.OpenCoolDownPolicyWithContext(context.Background(), request)
+}
+
+// OpenCoolDownPolicy
+// This API is used to enable and describe the cold storage policy.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) OpenCoolDownPolicyWithContext(ctx context.Context, request *OpenCoolDownPolicyRequest) (response *OpenCoolDownPolicyResponse, err error) {
+    if request == nil {
+        request = NewOpenCoolDownPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("OpenCoolDownPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewOpenCoolDownPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryTableDataRequest() (request *QueryTableDataRequest) {
     request = &QueryTableDataRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3026,6 +3667,55 @@ func (c *Client) ScaleUpInstanceWithContext(ctx context.Context, request *ScaleU
     request.SetContext(ctx)
     
     response = NewScaleUpInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateCoolDownRequest() (request *UpdateCoolDownRequest) {
+    request = &UpdateCoolDownRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cdwdoris", APIVersion, "UpdateCoolDown")
+    
+    
+    return
+}
+
+func NewUpdateCoolDownResponse() (response *UpdateCoolDownResponse) {
+    response = &UpdateCoolDownResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateCoolDown
+// This API is used to update the hot/cold data layering information on a cluster.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) UpdateCoolDown(request *UpdateCoolDownRequest) (response *UpdateCoolDownResponse, err error) {
+    return c.UpdateCoolDownWithContext(context.Background(), request)
+}
+
+// UpdateCoolDown
+// This API is used to update the hot/cold data layering information on a cluster.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) UpdateCoolDownWithContext(ctx context.Context, request *UpdateCoolDownRequest) (response *UpdateCoolDownResponse, err error) {
+    if request == nil {
+        request = NewUpdateCoolDownRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateCoolDown require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateCoolDownResponse()
     err = c.Send(request, response)
     return
 }
