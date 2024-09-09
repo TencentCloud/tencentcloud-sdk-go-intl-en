@@ -45,6 +45,57 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewAbortAgentCruiseDialingCampaignRequest() (request *AbortAgentCruiseDialingCampaignRequest) {
+    request = &AbortAgentCruiseDialingCampaignRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "AbortAgentCruiseDialingCampaign")
+    
+    
+    return
+}
+
+func NewAbortAgentCruiseDialingCampaignResponse() (response *AbortAgentCruiseDialingCampaignResponse) {
+    response = &AbortAgentCruiseDialingCampaignResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AbortAgentCruiseDialingCampaign
+// If you want to stop running agent's individual auto task, then call AbortAgentCruiseDialingCampaign to terminate.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) AbortAgentCruiseDialingCampaign(request *AbortAgentCruiseDialingCampaignRequest) (response *AbortAgentCruiseDialingCampaignResponse, err error) {
+    return c.AbortAgentCruiseDialingCampaignWithContext(context.Background(), request)
+}
+
+// AbortAgentCruiseDialingCampaign
+// If you want to stop running agent's individual auto task, then call AbortAgentCruiseDialingCampaign to terminate.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) AbortAgentCruiseDialingCampaignWithContext(ctx context.Context, request *AbortAgentCruiseDialingCampaignRequest) (response *AbortAgentCruiseDialingCampaignResponse, err error) {
+    if request == nil {
+        request = NewAbortAgentCruiseDialingCampaignRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AbortAgentCruiseDialingCampaign require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAbortAgentCruiseDialingCampaignResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAbortPredictiveDialingCampaignRequest() (request *AbortPredictiveDialingCampaignRequest) {
     request = &AbortPredictiveDialingCampaignRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -65,7 +116,7 @@ func NewAbortPredictiveDialingCampaignResponse() (response *AbortPredictiveDiali
 }
 
 // AbortPredictiveDialingCampaign
-// This API is used to pause the predictive outbound call task.
+// This API is used to pause predictive dialing campaign
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -75,7 +126,7 @@ func (c *Client) AbortPredictiveDialingCampaign(request *AbortPredictiveDialingC
 }
 
 // AbortPredictiveDialingCampaign
-// This API is used to pause the predictive outbound call task.
+// This API is used to pause predictive dialing campaign
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -116,7 +167,7 @@ func NewBindNumberCallOutSkillGroupResponse() (response *BindNumberCallOutSkillG
 }
 
 // BindNumberCallOutSkillGroup
-// This API is used to bind outbound skill group of number.
+// This API is used to assign outbound skill group(s) to your number
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -125,7 +176,7 @@ func (c *Client) BindNumberCallOutSkillGroup(request *BindNumberCallOutSkillGrou
 }
 
 // BindNumberCallOutSkillGroup
-// This API is used to bind outbound skill group of number.
+// This API is used to assign outbound skill group(s) to your number
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -165,7 +216,7 @@ func NewBindStaffSkillGroupListResponse() (response *BindStaffSkillGroupListResp
 }
 
 // BindStaffSkillGroupList
-// This API is used to bind the agent's skill group.
+// This API is used to assign an agent to skill group
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -177,7 +228,7 @@ func (c *Client) BindStaffSkillGroupList(request *BindStaffSkillGroupListRequest
 }
 
 // BindStaffSkillGroupList
-// This API is used to bind the agent's skill group.
+// This API is used to assign an agent to skill group
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -251,6 +302,61 @@ func (c *Client) CreateAdminURLWithContext(ctx context.Context, request *CreateA
     request.SetContext(ctx)
     
     response = NewCreateAdminURLResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAgentCruiseDialingCampaignRequest() (request *CreateAgentCruiseDialingCampaignRequest) {
+    request = &CreateAgentCruiseDialingCampaignRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "CreateAgentCruiseDialingCampaign")
+    
+    
+    return
+}
+
+func NewCreateAgentCruiseDialingCampaignResponse() (response *CreateAgentCruiseDialingCampaignResponse) {
+    response = &CreateAgentCruiseDialingCampaignResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAgentCruiseDialingCampaign
+// This document shows how to call API to create an individual auto dialing campaign for agent
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_OUTOFCOUNTLIMIT = "LimitExceeded.OutOfCountLimit"
+func (c *Client) CreateAgentCruiseDialingCampaign(request *CreateAgentCruiseDialingCampaignRequest) (response *CreateAgentCruiseDialingCampaignResponse, err error) {
+    return c.CreateAgentCruiseDialingCampaignWithContext(context.Background(), request)
+}
+
+// CreateAgentCruiseDialingCampaign
+// This document shows how to call API to create an individual auto dialing campaign for agent
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_OUTOFCOUNTLIMIT = "LimitExceeded.OutOfCountLimit"
+func (c *Client) CreateAgentCruiseDialingCampaignWithContext(ctx context.Context, request *CreateAgentCruiseDialingCampaignRequest) (response *CreateAgentCruiseDialingCampaignResponse, err error) {
+    if request == nil {
+        request = NewCreateAgentCruiseDialingCampaignRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAgentCruiseDialingCampaign require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAgentCruiseDialingCampaignResponse()
     err = c.Send(request, response)
     return
 }
@@ -483,6 +589,79 @@ func (c *Client) CreateExtensionWithContext(ctx context.Context, request *Create
     request.SetContext(ctx)
     
     response = NewCreateExtensionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateIVRSessionRequest() (request *CreateIVRSessionRequest) {
+    request = &CreateIVRSessionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "CreateIVRSession")
+    
+    
+    return
+}
+
+func NewCreateIVRSessionResponse() (response *CreateIVRSessionResponse) {
+    response = &CreateIVRSessionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateIVRSession
+// Create a session associated with IVR. This feature is supported only in the Advanced Version. Currently, it supports inbound and automatic outbound IVR types. Upon receiving the request, TCCC will first attempt to call the callee, then enter the IVR flow.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
+//  FAILEDOPERATION_CALLEEISBLACKUSER = "FailedOperation.CalleeIsBlackUser"
+//  FAILEDOPERATION_CALLEROVERFREQUENCY = "FailedOperation.CallerOverFrequency"
+//  FAILEDOPERATION_CALLOUTRULEBLINDAREA = "FailedOperation.CalloutRuleBlindArea"
+//  FAILEDOPERATION_CALLOUTRULEMAXCALLCOUNTCALLEEINTERVALTIME = "FailedOperation.CalloutRuleMaxCallCountCalleeIntervalTime"
+//  FAILEDOPERATION_CALLOUTRULEMAXCALLCOUNTCALLEEPERDAYAPPID = "FailedOperation.CalloutRuleMaxCallCountCalleePerDayAppID"
+//  FAILEDOPERATION_CALLOUTRULENOTWORKTIME = "FailedOperation.CalloutRuleNotWorkTime"
+//  FAILEDOPERATION_NOCALLOUTNUMBER = "FailedOperation.NoCallOutNumber"
+//  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  LIMITEXCEEDED_BASEPACKAGEEXPIRED = "LimitExceeded.BasePackageExpired"
+func (c *Client) CreateIVRSession(request *CreateIVRSessionRequest) (response *CreateIVRSessionResponse, err error) {
+    return c.CreateIVRSessionWithContext(context.Background(), request)
+}
+
+// CreateIVRSession
+// Create a session associated with IVR. This feature is supported only in the Advanced Version. Currently, it supports inbound and automatic outbound IVR types. Upon receiving the request, TCCC will first attempt to call the callee, then enter the IVR flow.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
+//  FAILEDOPERATION_CALLEEISBLACKUSER = "FailedOperation.CalleeIsBlackUser"
+//  FAILEDOPERATION_CALLEROVERFREQUENCY = "FailedOperation.CallerOverFrequency"
+//  FAILEDOPERATION_CALLOUTRULEBLINDAREA = "FailedOperation.CalloutRuleBlindArea"
+//  FAILEDOPERATION_CALLOUTRULEMAXCALLCOUNTCALLEEINTERVALTIME = "FailedOperation.CalloutRuleMaxCallCountCalleeIntervalTime"
+//  FAILEDOPERATION_CALLOUTRULEMAXCALLCOUNTCALLEEPERDAYAPPID = "FailedOperation.CalloutRuleMaxCallCountCalleePerDayAppID"
+//  FAILEDOPERATION_CALLOUTRULENOTWORKTIME = "FailedOperation.CalloutRuleNotWorkTime"
+//  FAILEDOPERATION_NOCALLOUTNUMBER = "FailedOperation.NoCallOutNumber"
+//  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  LIMITEXCEEDED_BASEPACKAGEEXPIRED = "LimitExceeded.BasePackageExpired"
+func (c *Client) CreateIVRSessionWithContext(ctx context.Context, request *CreateIVRSessionRequest) (response *CreateIVRSessionResponse, err error) {
+    if request == nil {
+        request = NewCreateIVRSessionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateIVRSession require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateIVRSessionResponse()
     err = c.Send(request, response)
     return
 }
@@ -827,6 +1006,59 @@ func (c *Client) DeleteStaffWithContext(ctx context.Context, request *DeleteStaf
     return
 }
 
+func NewDescribeAgentCruiseDialingCampaignRequest() (request *DescribeAgentCruiseDialingCampaignRequest) {
+    request = &DescribeAgentCruiseDialingCampaignRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "DescribeAgentCruiseDialingCampaign")
+    
+    
+    return
+}
+
+func NewDescribeAgentCruiseDialingCampaignResponse() (response *DescribeAgentCruiseDialingCampaignResponse) {
+    response = &DescribeAgentCruiseDialingCampaignResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAgentCruiseDialingCampaign
+// Query Agent Cruise-style Outbound Call Task
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeAgentCruiseDialingCampaign(request *DescribeAgentCruiseDialingCampaignRequest) (response *DescribeAgentCruiseDialingCampaignResponse, err error) {
+    return c.DescribeAgentCruiseDialingCampaignWithContext(context.Background(), request)
+}
+
+// DescribeAgentCruiseDialingCampaign
+// Query Agent Cruise-style Outbound Call Task
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeAgentCruiseDialingCampaignWithContext(ctx context.Context, request *DescribeAgentCruiseDialingCampaignRequest) (response *DescribeAgentCruiseDialingCampaignResponse, err error) {
+    if request == nil {
+        request = NewDescribeAgentCruiseDialingCampaignRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAgentCruiseDialingCampaign require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAgentCruiseDialingCampaignResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeAutoCalloutTaskRequest() (request *DescribeAutoCalloutTaskRequest) {
     request = &DescribeAutoCalloutTaskRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -900,7 +1132,7 @@ func NewDescribeAutoCalloutTasksResponse() (response *DescribeAutoCalloutTasksRe
 }
 
 // DescribeAutoCalloutTasks
-// This API is used to query auto-task outbound calls in batch.
+// Batch Query Automatic Outbound Call Tasks
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -911,7 +1143,7 @@ func (c *Client) DescribeAutoCalloutTasks(request *DescribeAutoCalloutTasksReque
 }
 
 // DescribeAutoCalloutTasks
-// This API is used to query auto-task outbound calls in batch.
+// Batch Query Automatic Outbound Call Tasks
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -1147,6 +1379,59 @@ func (c *Client) DescribeExtensionsWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeIvrAudioListRequest() (request *DescribeIvrAudioListRequest) {
+    request = &DescribeIvrAudioListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "DescribeIvrAudioList")
+    
+    
+    return
+}
+
+func NewDescribeIvrAudioListResponse() (response *DescribeIvrAudioListResponse) {
+    response = &DescribeIvrAudioListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeIvrAudioList
+// Query IVR Audio File List Information
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeIvrAudioList(request *DescribeIvrAudioListRequest) (response *DescribeIvrAudioListResponse, err error) {
+    return c.DescribeIvrAudioListWithContext(context.Background(), request)
+}
+
+// DescribeIvrAudioList
+// Query IVR Audio File List Information
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeIvrAudioListWithContext(ctx context.Context, request *DescribeIvrAudioListRequest) (response *DescribeIvrAudioListResponse, err error) {
+    if request == nil {
+        request = NewDescribeIvrAudioListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIvrAudioList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeIvrAudioListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeNumbersRequest() (request *DescribeNumbersRequest) {
     request = &DescribeNumbersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1170,8 +1455,9 @@ func NewDescribeNumbersResponse() (response *DescribeNumbersResponse) {
 // This API is used to query the number list.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeNumbers(request *DescribeNumbersRequest) (response *DescribeNumbersResponse, err error) {
     return c.DescribeNumbersWithContext(context.Background(), request)
 }
@@ -1180,8 +1466,9 @@ func (c *Client) DescribeNumbers(request *DescribeNumbersRequest) (response *Des
 // This API is used to query the number list.
 //
 // error code that may be returned:
+//  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 func (c *Client) DescribeNumbersWithContext(ctx context.Context, request *DescribeNumbersRequest) (response *DescribeNumbersResponse, err error) {
     if request == nil {
         request = NewDescribeNumbersRequest()
@@ -1650,7 +1937,7 @@ func NewDescribeTelCallInfoResponse() (response *DescribeTelCallInfoResponse) {
 }
 
 // DescribeTelCallInfo
-// This API is used to access telephone consumption statistics by instance.
+// This API is used to access call detail records by application
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DUPLICATEDACCOUNT = "FailedOperation.DuplicatedAccount"
@@ -1664,7 +1951,7 @@ func (c *Client) DescribeTelCallInfo(request *DescribeTelCallInfoRequest) (respo
 }
 
 // DescribeTelCallInfo
-// This API is used to access telephone consumption statistics by instance.
+// This API is used to access call detail records by application
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DUPLICATEDACCOUNT = "FailedOperation.DuplicatedAccount"
@@ -1998,7 +2285,7 @@ func NewModifyStaffResponse() (response *ModifyStaffResponse) {
 }
 
 // ModifyStaff
-// This API is used to modify the customer service account.
+// This API is used to modify  customer service / agent account.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2014,7 +2301,7 @@ func (c *Client) ModifyStaff(request *ModifyStaffRequest) (response *ModifyStaff
 }
 
 // ModifyStaff
-// This API is used to modify the customer service account.
+// This API is used to modify  customer service / agent account.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2037,6 +2324,57 @@ func (c *Client) ModifyStaffWithContext(ctx context.Context, request *ModifyStaf
     request.SetContext(ctx)
     
     response = NewModifyStaffResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyStaffPasswordRequest() (request *ModifyStaffPasswordRequest) {
+    request = &ModifyStaffPasswordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "ModifyStaffPassword")
+    
+    
+    return
+}
+
+func NewModifyStaffPasswordResponse() (response *ModifyStaffPasswordResponse) {
+    response = &ModifyStaffPasswordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyStaffPassword
+// Modify Agent's Password
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_ACCOUNTNOTEXIST = "InvalidParameterValue.AccountNotExist"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+func (c *Client) ModifyStaffPassword(request *ModifyStaffPasswordRequest) (response *ModifyStaffPasswordResponse, err error) {
+    return c.ModifyStaffPasswordWithContext(context.Background(), request)
+}
+
+// ModifyStaffPassword
+// Modify Agent's Password
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_ACCOUNTNOTEXIST = "InvalidParameterValue.AccountNotExist"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+func (c *Client) ModifyStaffPasswordWithContext(ctx context.Context, request *ModifyStaffPasswordRequest) (response *ModifyStaffPasswordResponse, err error) {
+    if request == nil {
+        request = NewModifyStaffPasswordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStaffPassword require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyStaffPasswordResponse()
     err = c.Send(request, response)
     return
 }
@@ -2465,6 +2803,59 @@ func (c *Client) UpdatePredictiveDialingCampaignWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewUpdatePredictiveDialingCampaignResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUploadIvrAudioRequest() (request *UploadIvrAudioRequest) {
+    request = &UploadIvrAudioRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "UploadIvrAudio")
+    
+    
+    return
+}
+
+func NewUploadIvrAudioResponse() (response *UploadIvrAudioResponse) {
+    response = &UploadIvrAudioResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UploadIvrAudio
+// Upload audio files used in IVR, with a daily upload limit of 50 files. (It is recommended to use temporary links stored in Tencent Cloud Cos for the audio file URL in the parameters)
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UPLOADFILEOVERFLOW = "FailedOperation.UploadFileOverflow"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) UploadIvrAudio(request *UploadIvrAudioRequest) (response *UploadIvrAudioResponse, err error) {
+    return c.UploadIvrAudioWithContext(context.Background(), request)
+}
+
+// UploadIvrAudio
+// Upload audio files used in IVR, with a daily upload limit of 50 files. (It is recommended to use temporary links stored in Tencent Cloud Cos for the audio file URL in the parameters)
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UPLOADFILEOVERFLOW = "FailedOperation.UploadFileOverflow"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) UploadIvrAudioWithContext(ctx context.Context, request *UploadIvrAudioRequest) (response *UploadIvrAudioResponse, err error) {
+    if request == nil {
+        request = NewUploadIvrAudioRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UploadIvrAudio require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUploadIvrAudioResponse()
     err = c.Send(request, response)
     return
 }

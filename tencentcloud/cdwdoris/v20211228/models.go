@@ -1570,7 +1570,7 @@ type DeleteTableRequestParams struct {
 	// Resource ID, which is the TCHouse-D resource ID used for table creation.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// The name of the database where the table belongs needs to be deleted
+	// The name of the database where the table belongs needs to be deleted.
 	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
 	// Table name to be deleted
@@ -1592,7 +1592,7 @@ type DeleteTableRequest struct {
 	// Resource ID, which is the TCHouse-D resource ID used for table creation.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// The name of the database where the table belongs needs to be deleted
+	// The name of the database where the table belongs needs to be deleted.
 	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
 	// Table name to be deleted

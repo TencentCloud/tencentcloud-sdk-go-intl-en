@@ -2888,7 +2888,7 @@ type PostQuantumCryptoDecryptRequestParams struct {
 	// PEM-encoded public key (2048-bit RSA/SM2 key), which can be used to encrypt the `Plaintext` returned. If this field is left empty, the `Plaintext` will not be encrypted.
 	EncryptionPublicKey *string `json:"EncryptionPublicKey,omitnil,omitempty" name:"EncryptionPublicKey"`
 
-	// Asymmetric encryption algorithm. It is used in combination with `EncryptionPublicKey` to encrypt the returned data. Values: `SM2` u200d(Return the ciphertext in the format of "C1C3C2"), `SM2_C1C3C2_ASN1` (Return the ciphertext in the format of "C1C3C2 ASN1"), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, `RSAES_OAEP_SHA_256`. It defaults to `SM2` if it's not specified. 
+	// Asymmetric encryption algorithm. It is used in combination with `EncryptionPublicKey` to encrypt the returned data. Values: `SM2`(Return the ciphertext in the format of "C1C3C2"), `SM2_C1C3C2_ASN1` (Return the ciphertext in the format of "C1C3C2 ASN1"), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, `RSAES_OAEP_SHA_256`. It defaults to `SM2` if it's not specified. 
 	EncryptionAlgorithm *string `json:"EncryptionAlgorithm,omitnil,omitempty" name:"EncryptionAlgorithm"`
 }
 
@@ -2901,7 +2901,7 @@ type PostQuantumCryptoDecryptRequest struct {
 	// PEM-encoded public key (2048-bit RSA/SM2 key), which can be used to encrypt the `Plaintext` returned. If this field is left empty, the `Plaintext` will not be encrypted.
 	EncryptionPublicKey *string `json:"EncryptionPublicKey,omitnil,omitempty" name:"EncryptionPublicKey"`
 
-	// Asymmetric encryption algorithm. It is used in combination with `EncryptionPublicKey` to encrypt the returned data. Values: `SM2` u200d(Return the ciphertext in the format of "C1C3C2"), `SM2_C1C3C2_ASN1` (Return the ciphertext in the format of "C1C3C2 ASN1"), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, `RSAES_OAEP_SHA_256`. It defaults to `SM2` if it's not specified. 
+	// Asymmetric encryption algorithm. It is used in combination with `EncryptionPublicKey` to encrypt the returned data. Values: `SM2`(Return the ciphertext in the format of "C1C3C2"), `SM2_C1C3C2_ASN1` (Return the ciphertext in the format of "C1C3C2 ASN1"), `RSAES_PKCS1_V1_5`, `RSAES_OAEP_SHA_1`, `RSAES_OAEP_SHA_256`. It defaults to `SM2` if it's not specified. 
 	EncryptionAlgorithm *string `json:"EncryptionAlgorithm,omitnil,omitempty" name:"EncryptionAlgorithm"`
 }
 
