@@ -61,6 +61,7 @@ type ApplyCardVerificationRequestParams struct {
 	// MYS: Malaysia
 	// SGP: Singapore
 	// JPN: Japan
+	// TWN:Taiwan
 	// AUTO: Automatic Identification
 	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
@@ -95,6 +96,7 @@ type ApplyCardVerificationRequest struct {
 	// MYS: Malaysia
 	// SGP: Singapore
 	// JPN: Japan
+	// TWN:Taiwan
 	// AUTO: Automatic Identification
 	Nationality *string `json:"Nationality,omitnil,omitempty" name:"Nationality"`
 
@@ -638,6 +640,14 @@ type CardInfo struct {
 	// Macao ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MacaoIDCard *MacaoIDCard `json:"MacaoIDCard,omitnil,omitempty" name:"MacaoIDCard"`
+
+	// TaiWan ID Card
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaiWanIDCard *TaiWanIDCard `json:"TaiWanIDCard,omitnil,omitempty" name:"TaiWanIDCard"`
+
+	// Japan ID Card
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	JapanIDCard *JapanIDCard `json:"JapanIDCard,omitnil,omitempty" name:"JapanIDCard"`
 }
 
 type CardVerifyResult struct {
@@ -2075,6 +2085,32 @@ type InternationalIDPassport struct {
 	PassportCodeSecond *string `json:"PassportCodeSecond,omitnil,omitempty" name:"PassportCodeSecond"`
 }
 
+type JapanIDCard struct {
+	// Full name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
+
+	// License number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
+
+	// Age
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Age *string `json:"Age,omitnil,omitempty" name:"Age"`
+
+	// Birthday
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
+
+	// Expire date
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExpirationDate *string `json:"ExpirationDate,omitnil,omitempty" name:"ExpirationDate"`
+
+	// Address
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FormattedAddress *string `json:"FormattedAddress,omitnil,omitempty" name:"FormattedAddress"`
+}
+
 // Predefined struct for user
 type LivenessCompareRequestParams struct {
 	// Liveness detection type. Valid values: LIP/ACTION/SILENT.
@@ -2397,6 +2433,14 @@ type NormalCardInfo struct {
 	// Mainland ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MainlandIDCard *MainlandIDCard `json:"MainlandIDCard,omitnil,omitempty" name:"MainlandIDCard"`
+
+	// Japan ID Card
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	JapanIDCard *JapanIDCard `json:"JapanIDCard,omitnil,omitempty" name:"JapanIDCard"`
+
+	// Taiwan ID Card
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaiWanIDCard *TaiWanIDCard `json:"TaiWanIDCard,omitnil,omitempty" name:"TaiWanIDCard"`
 }
 
 type NormalHKIDCard struct {
@@ -2841,6 +2885,28 @@ type SingaporeIDCard struct {
 	// Date of issue (on the back)
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DateOfIssue *string `json:"DateOfIssue,omitnil,omitempty" name:"DateOfIssue"`
+}
+
+type TaiWanIDCard struct {
+	// Full name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FullName *string `json:"FullName,omitnil,omitempty" name:"FullName"`
+
+	// License number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LicenseNumber *string `json:"LicenseNumber,omitnil,omitempty" name:"LicenseNumber"`
+
+	// Gender
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
+
+	// Issued country
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IssuedCountry *string `json:"IssuedCountry,omitnil,omitempty" name:"IssuedCountry"`
+
+	// Registration number
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RegistrationNumber *string `json:"RegistrationNumber,omitnil,omitempty" name:"RegistrationNumber"`
 }
 
 type ThailandIDCard struct {
