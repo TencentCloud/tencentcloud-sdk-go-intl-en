@@ -2654,7 +2654,12 @@ type OCRResult struct {
 	CardImageBase64 *string `json:"CardImageBase64,omitnil,omitempty" name:"CardImageBase64"`
 
 	// OCR result of the ID card.
+	//
+	// Deprecated: CardInfo is deprecated.
 	CardInfo *CardInfo `json:"CardInfo,omitnil,omitempty" name:"CardInfo"`
+
+	// OCR result of the ID card.
+	NormalCardInfo *NormalCardInfo `json:"NormalCardInfo,omitnil,omitempty" name:"NormalCardInfo"`
 
 	// The request id
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -3119,6 +3124,17 @@ type WebVerificationConfigIntl struct {
 	// 7.PhilippinesSSSID: Philippines SSSID card
 	// 8.PhilippinesUMID: Philippines UMID card
 	// 9.InternationalIDPassport: ID cards of Hong Kong, Macao and Taiwan (China), and international passport.
+	// 10.IndonesiaDrivingLicense:Indonesia driving license
+	// 11.ThailandIDCard: Thailand ID card
+	// 12.ThailandDrivingLicense: Thailand driving license
+	// 13.MLDrivingLicense: Malaysia driving license
+	// 14.SingaporeIDCard: Singapore ID card
+	// 15.SingaporeDrivingLicense: Singapore driving license
+	// 16.JapanIDCard: Japan ID card
+	// 17.JapanDrivingLicense: Japan driving license
+	// 18.PhilippinesIDCard: Philippines ID card
+	// 19.MainlandIDCard: Mainland ID card
+	// 20.MacaoIDCard: Macao ID card
 	// Example: HKIDCard
 	IDCardType *string `json:"IDCardType,omitnil,omitempty" name:"IDCardType"`
 
