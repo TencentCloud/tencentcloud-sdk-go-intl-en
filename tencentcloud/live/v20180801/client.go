@@ -3361,7 +3361,7 @@ func NewDescribeBillBandwidthAndFluxListResponse() (response *DescribeBillBandwi
 }
 
 // DescribeBillBandwidthAndFluxList
-// This API is used to query the data of billable LVB bandwidth and traffic.
+// This API is used to query the data of billable bandwidth and traffic.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -3376,7 +3376,7 @@ func (c *Client) DescribeBillBandwidthAndFluxList(request *DescribeBillBandwidth
 }
 
 // DescribeBillBandwidthAndFluxList
-// This API is used to query the data of billable LVB bandwidth and traffic.
+// This API is used to query the data of billable bandwidth and traffic.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"

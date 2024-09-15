@@ -108,6 +108,69 @@ func (c *Client) ApplyConcurrentWithContext(ctx context.Context, request *ApplyC
     return
 }
 
+func NewBindConcurrentPackagesToProjectRequest() (request *BindConcurrentPackagesToProjectRequest) {
+    request = &BindConcurrentPackagesToProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "BindConcurrentPackagesToProject")
+    
+    
+    return
+}
+
+func NewBindConcurrentPackagesToProjectResponse() (response *BindConcurrentPackagesToProjectResponse) {
+    response = &BindConcurrentPackagesToProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// BindConcurrentPackagesToProject
+// This API is used to bind a concurrency pack to a project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PROCESSTIMEOUT = "FailedOperation.ProcessTimeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_NOIDLE = "ResourceNotFound.NoIdle"
+//  RESOURCEUNAVAILABLE_INITIALIZATION = "ResourceUnavailable.Initialization"
+//  UNSUPPORTEDOPERATION_STOPPING = "UnsupportedOperation.Stopping"
+func (c *Client) BindConcurrentPackagesToProject(request *BindConcurrentPackagesToProjectRequest) (response *BindConcurrentPackagesToProjectResponse, err error) {
+    return c.BindConcurrentPackagesToProjectWithContext(context.Background(), request)
+}
+
+// BindConcurrentPackagesToProject
+// This API is used to bind a concurrency pack to a project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PROCESSTIMEOUT = "FailedOperation.ProcessTimeout"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_JSONPARSEERROR = "InvalidParameter.JsonParseError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND_NOIDLE = "ResourceNotFound.NoIdle"
+//  RESOURCEUNAVAILABLE_INITIALIZATION = "ResourceUnavailable.Initialization"
+//  UNSUPPORTEDOPERATION_STOPPING = "UnsupportedOperation.Stopping"
+func (c *Client) BindConcurrentPackagesToProjectWithContext(ctx context.Context, request *BindConcurrentPackagesToProjectRequest) (response *BindConcurrentPackagesToProjectResponse, err error) {
+    if request == nil {
+        request = NewBindConcurrentPackagesToProjectRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BindConcurrentPackagesToProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBindConcurrentPackagesToProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateApplicationRequest() (request *CreateApplicationRequest) {
     request = &CreateApplicationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -163,6 +226,55 @@ func (c *Client) CreateApplicationWithContext(ctx context.Context, request *Crea
     request.SetContext(ctx)
     
     response = NewCreateApplicationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateApplicationProjectRequest() (request *CreateApplicationProjectRequest) {
+    request = &CreateApplicationProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "CreateApplicationProject")
+    
+    
+    return
+}
+
+func NewCreateApplicationProjectResponse() (response *CreateApplicationProjectResponse) {
+    response = &CreateApplicationProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateApplicationProject
+// This API is used to create a cloud application project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateApplicationProject(request *CreateApplicationProjectRequest) (response *CreateApplicationProjectResponse, err error) {
+    return c.CreateApplicationProjectWithContext(context.Background(), request)
+}
+
+// CreateApplicationProject
+// This API is used to create a cloud application project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateApplicationProjectWithContext(ctx context.Context, request *CreateApplicationProjectRequest) (response *CreateApplicationProjectResponse, err error) {
+    if request == nil {
+        request = NewCreateApplicationProjectRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateApplicationProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateApplicationProjectResponse()
     err = c.Send(request, response)
     return
 }
@@ -429,6 +541,67 @@ func (c *Client) DeleteApplicationWithContext(ctx context.Context, request *Dele
     return
 }
 
+func NewDeleteApplicationProjectsRequest() (request *DeleteApplicationProjectsRequest) {
+    request = &DeleteApplicationProjectsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DeleteApplicationProjects")
+    
+    
+    return
+}
+
+func NewDeleteApplicationProjectsResponse() (response *DeleteApplicationProjectsResponse) {
+    response = &DeleteApplicationProjectsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteApplicationProjects
+// This API is used to delete cloud application projects in batches.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  FAILEDOPERATION_VERSIONLOCKFAIL = "FailedOperation.VersionLockFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DeleteApplicationProjects(request *DeleteApplicationProjectsRequest) (response *DeleteApplicationProjectsResponse, err error) {
+    return c.DeleteApplicationProjectsWithContext(context.Background(), request)
+}
+
+// DeleteApplicationProjects
+// This API is used to delete cloud application projects in batches.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  FAILEDOPERATION_VERSIONLOCKFAIL = "FailedOperation.VersionLockFail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DeleteApplicationProjectsWithContext(ctx context.Context, request *DeleteApplicationProjectsRequest) (response *DeleteApplicationProjectsResponse, err error) {
+    if request == nil {
+        request = NewDeleteApplicationProjectsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteApplicationProjects require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteApplicationProjectsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteApplicationVersionRequest() (request *DeleteApplicationVersionRequest) {
     request = &DeleteApplicationVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -647,6 +820,104 @@ func (c *Client) DescribeApplicationPathListWithContext(ctx context.Context, req
     return
 }
 
+func NewDescribeApplicationProjectAdvancedConfigRequest() (request *DescribeApplicationProjectAdvancedConfigRequest) {
+    request = &DescribeApplicationProjectAdvancedConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DescribeApplicationProjectAdvancedConfig")
+    
+    
+    return
+}
+
+func NewDescribeApplicationProjectAdvancedConfigResponse() (response *DescribeApplicationProjectAdvancedConfigResponse) {
+    response = &DescribeApplicationProjectAdvancedConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApplicationProjectAdvancedConfig
+// This API is used to obtain the advanced configuration information of a cloud application project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeApplicationProjectAdvancedConfig(request *DescribeApplicationProjectAdvancedConfigRequest) (response *DescribeApplicationProjectAdvancedConfigResponse, err error) {
+    return c.DescribeApplicationProjectAdvancedConfigWithContext(context.Background(), request)
+}
+
+// DescribeApplicationProjectAdvancedConfig
+// This API is used to obtain the advanced configuration information of a cloud application project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeApplicationProjectAdvancedConfigWithContext(ctx context.Context, request *DescribeApplicationProjectAdvancedConfigRequest) (response *DescribeApplicationProjectAdvancedConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeApplicationProjectAdvancedConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApplicationProjectAdvancedConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApplicationProjectAdvancedConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeApplicationProjectsRequest() (request *DescribeApplicationProjectsRequest) {
+    request = &DescribeApplicationProjectsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DescribeApplicationProjects")
+    
+    
+    return
+}
+
+func NewDescribeApplicationProjectsResponse() (response *DescribeApplicationProjectsResponse) {
+    response = &DescribeApplicationProjectsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApplicationProjects
+// This API is used to obtain the cloud application project list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeApplicationProjects(request *DescribeApplicationProjectsRequest) (response *DescribeApplicationProjectsResponse, err error) {
+    return c.DescribeApplicationProjectsWithContext(context.Background(), request)
+}
+
+// DescribeApplicationProjects
+// This API is used to obtain the cloud application project list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeApplicationProjectsWithContext(ctx context.Context, request *DescribeApplicationProjectsRequest) (response *DescribeApplicationProjectsResponse, err error) {
+    if request == nil {
+        request = NewDescribeApplicationProjectsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApplicationProjects require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeApplicationProjectsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeApplicationStatusRequest() (request *DescribeApplicationStatusRequest) {
     request = &DescribeApplicationStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -810,6 +1081,104 @@ func (c *Client) DescribeConcurrentCountWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeConcurrentCountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeConcurrentPackagesRequest() (request *DescribeConcurrentPackagesRequest) {
+    request = &DescribeConcurrentPackagesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DescribeConcurrentPackages")
+    
+    
+    return
+}
+
+func NewDescribeConcurrentPackagesResponse() (response *DescribeConcurrentPackagesResponse) {
+    response = &DescribeConcurrentPackagesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeConcurrentPackages
+// This API is used to obtain the cloud application concurrency pack list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeConcurrentPackages(request *DescribeConcurrentPackagesRequest) (response *DescribeConcurrentPackagesResponse, err error) {
+    return c.DescribeConcurrentPackagesWithContext(context.Background(), request)
+}
+
+// DescribeConcurrentPackages
+// This API is used to obtain the cloud application concurrency pack list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeConcurrentPackagesWithContext(ctx context.Context, request *DescribeConcurrentPackagesRequest) (response *DescribeConcurrentPackagesResponse, err error) {
+    if request == nil {
+        request = NewDescribeConcurrentPackagesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConcurrentPackages require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeConcurrentPackagesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeConcurrentSummaryRequest() (request *DescribeConcurrentSummaryRequest) {
+    request = &DescribeConcurrentSummaryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "DescribeConcurrentSummary")
+    
+    
+    return
+}
+
+func NewDescribeConcurrentSummaryResponse() (response *DescribeConcurrentSummaryResponse) {
+    response = &DescribeConcurrentSummaryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeConcurrentSummary
+// This API is used to query the concurrency overview.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeConcurrentSummary(request *DescribeConcurrentSummaryRequest) (response *DescribeConcurrentSummaryResponse, err error) {
+    return c.DescribeConcurrentSummaryWithContext(context.Background(), request)
+}
+
+// DescribeConcurrentSummary
+// This API is used to query the concurrency overview.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeConcurrentSummaryWithContext(ctx context.Context, request *DescribeConcurrentSummaryRequest) (response *DescribeConcurrentSummaryResponse, err error) {
+    if request == nil {
+        request = NewDescribeConcurrentSummaryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConcurrentSummary require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeConcurrentSummaryResponse()
     err = c.Send(request, response)
     return
 }
@@ -991,6 +1360,55 @@ func (c *Client) ModifyApplicationBaseInfoWithContext(ctx context.Context, reque
     return
 }
 
+func NewModifyApplicationProjectRequest() (request *ModifyApplicationProjectRequest) {
+    request = &ModifyApplicationProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "ModifyApplicationProject")
+    
+    
+    return
+}
+
+func NewModifyApplicationProjectResponse() (response *ModifyApplicationProjectResponse) {
+    response = &ModifyApplicationProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyApplicationProject
+// This API is used to modify a cloud application project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ModifyApplicationProject(request *ModifyApplicationProjectRequest) (response *ModifyApplicationProjectResponse, err error) {
+    return c.ModifyApplicationProjectWithContext(context.Background(), request)
+}
+
+// ModifyApplicationProject
+// This API is used to modify a cloud application project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ModifyApplicationProjectWithContext(ctx context.Context, request *ModifyApplicationProjectRequest) (response *ModifyApplicationProjectResponse, err error) {
+    if request == nil {
+        request = NewModifyApplicationProjectRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyApplicationProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyApplicationProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyApplicationVersionRequest() (request *ModifyApplicationVersionRequest) {
     request = &ModifyApplicationVersionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1050,6 +1468,65 @@ func (c *Client) ModifyApplicationVersionWithContext(ctx context.Context, reques
     return
 }
 
+func NewModifyConcurrentPackageRequest() (request *ModifyConcurrentPackageRequest) {
+    request = &ModifyConcurrentPackageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "ModifyConcurrentPackage")
+    
+    
+    return
+}
+
+func NewModifyConcurrentPackageResponse() (response *ModifyConcurrentPackageResponse) {
+    response = &ModifyConcurrentPackageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyConcurrentPackage
+// This API is used to modify a cloud application concurrency pack.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) ModifyConcurrentPackage(request *ModifyConcurrentPackageRequest) (response *ModifyConcurrentPackageResponse, err error) {
+    return c.ModifyConcurrentPackageWithContext(context.Background(), request)
+}
+
+// ModifyConcurrentPackage
+// This API is used to modify a cloud application concurrency pack.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLICATIONLOCKFAIL = "FailedOperation.ApplicationLockFail"
+//  FAILEDOPERATION_APPLICATIONNOTFIND = "FailedOperation.ApplicationNotFind"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) ModifyConcurrentPackageWithContext(ctx context.Context, request *ModifyConcurrentPackageRequest) (response *ModifyConcurrentPackageResponse, err error) {
+    if request == nil {
+        request = NewModifyConcurrentPackageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyConcurrentPackage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyConcurrentPackageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyMobileApplicationInfoRequest() (request *ModifyMobileApplicationInfoRequest) {
     request = &ModifyMobileApplicationInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1105,6 +1582,55 @@ func (c *Client) ModifyMobileApplicationInfoWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewModifyMobileApplicationInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewResetConcurrentPackagesRequest() (request *ResetConcurrentPackagesRequest) {
+    request = &ResetConcurrentPackagesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "ResetConcurrentPackages")
+    
+    
+    return
+}
+
+func NewResetConcurrentPackagesResponse() (response *ResetConcurrentPackagesResponse) {
+    response = &ResetConcurrentPackagesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ResetConcurrentPackages
+// This API is used to reset a concurrency pack and disconnect all user connections.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ResetConcurrentPackages(request *ResetConcurrentPackagesRequest) (response *ResetConcurrentPackagesResponse, err error) {
+    return c.ResetConcurrentPackagesWithContext(context.Background(), request)
+}
+
+// ResetConcurrentPackages
+// This API is used to reset a concurrency pack and disconnect all user connections.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ResetConcurrentPackagesWithContext(ctx context.Context, request *ResetConcurrentPackagesRequest) (response *ResetConcurrentPackagesResponse, err error) {
+    if request == nil {
+        request = NewResetConcurrentPackagesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResetConcurrentPackages require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResetConcurrentPackagesResponse()
     err = c.Send(request, response)
     return
 }
@@ -1190,7 +1716,7 @@ func NewStartPublishStreamResponse() (response *StartPublishStreamResponse) {
 }
 
 // StartPublishStream
-// This API is used to start cloud-based streaming. The codec for the cloud-based streaming is automatically selected based on the client's (SDK) capabilities, with a default order of H.265, H.264, VP8, and VP9.
+// This API is used to start pushing your cloud application's video streams in real time to CSS. The codec for the streaming is automatically selected based on the client's (SDK) capabilities, with a default order of H.265, H.264, VP8, and VP9.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1204,7 +1730,7 @@ func (c *Client) StartPublishStream(request *StartPublishStreamRequest) (respons
 }
 
 // StartPublishStream
-// This API is used to start cloud-based streaming. The codec for the cloud-based streaming is automatically selected based on the client's (SDK) capabilities, with a default order of H.265, H.264, VP8, and VP9.
+// This API is used to start pushing your cloud application's video streams in real time to CSS. The codec for the streaming is automatically selected based on the client's (SDK) capabilities, with a default order of H.265, H.264, VP8, and VP9.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1249,7 +1775,7 @@ func NewStartPublishStreamWithURLResponse() (response *StartPublishStreamWithURL
 }
 
 // StartPublishStreamWithURL
-// This API is used to start cloud-based streaming to the specified URL. The codec for the cloud-based streaming is automatically selected based on the client's (SDK) capabilities, with a default order of H.265, H.264, VP8, and VP9. This streaming method will be billed separately. For details about the billing method, see [Charging for Streaming to Specified URL](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6).
+// This API is used to start pushing your cloud application's video streams to a specified URL. The codec for the streaming is automatically selected based on the client's (SDK) capabilities, with a default order of H.265, H.264, VP8, and VP9. This streaming method will be billed separately. For details about the billing method, see [Charging for Streaming to Specified URL](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1263,7 +1789,7 @@ func (c *Client) StartPublishStreamWithURL(request *StartPublishStreamWithURLReq
 }
 
 // StartPublishStreamWithURL
-// This API is used to start cloud-based streaming to the specified URL. The codec for the cloud-based streaming is automatically selected based on the client's (SDK) capabilities, with a default order of H.265, H.264, VP8, and VP9. This streaming method will be billed separately. For details about the billing method, see [Charging for Streaming to Specified URL](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6).
+// This API is used to start pushing your cloud application's video streams to a specified URL. The codec for the streaming is automatically selected based on the client's (SDK) capabilities, with a default order of H.265, H.264, VP8, and VP9. This streaming method will be billed separately. For details about the billing method, see [Charging for Streaming to Specified URL](https://intl.cloud.tencent.com/document/product/1547/72168?from_cn_redirect=1#98ac188a-d122-4caf-88be-05268ecefdf6).
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1308,7 +1834,7 @@ func NewStopPublishStreamResponse() (response *StopPublishStreamResponse) {
 }
 
 // StopPublishStream
-// This API is used to stop cloud-based streaming.
+// This API is used to stop pushing streams.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1322,7 +1848,7 @@ func (c *Client) StopPublishStream(request *StopPublishStreamRequest) (response 
 }
 
 // StopPublishStream
-// This API is used to stop cloud-based streaming.
+// This API is used to stop pushing streams.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1343,6 +1869,55 @@ func (c *Client) StopPublishStreamWithContext(ctx context.Context, request *Stop
     request.SetContext(ctx)
     
     response = NewStopPublishStreamResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUnbindConcurrentPackagesFromProjectRequest() (request *UnbindConcurrentPackagesFromProjectRequest) {
+    request = &UnbindConcurrentPackagesFromProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("car", APIVersion, "UnbindConcurrentPackagesFromProject")
+    
+    
+    return
+}
+
+func NewUnbindConcurrentPackagesFromProjectResponse() (response *UnbindConcurrentPackagesFromProjectResponse) {
+    response = &UnbindConcurrentPackagesFromProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UnbindConcurrentPackagesFromProject
+// This API is used to unbind a concurrency pack from a project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) UnbindConcurrentPackagesFromProject(request *UnbindConcurrentPackagesFromProjectRequest) (response *UnbindConcurrentPackagesFromProjectResponse, err error) {
+    return c.UnbindConcurrentPackagesFromProjectWithContext(context.Background(), request)
+}
+
+// UnbindConcurrentPackagesFromProject
+// This API is used to unbind a concurrency pack from a project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) UnbindConcurrentPackagesFromProjectWithContext(ctx context.Context, request *UnbindConcurrentPackagesFromProjectRequest) (response *UnbindConcurrentPackagesFromProjectResponse, err error) {
+    if request == nil {
+        request = NewUnbindConcurrentPackagesFromProjectRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnbindConcurrentPackagesFromProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUnbindConcurrentPackagesFromProjectResponse()
     err = c.Send(request, response)
     return
 }

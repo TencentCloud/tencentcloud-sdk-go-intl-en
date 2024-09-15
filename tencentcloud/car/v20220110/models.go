@@ -34,6 +34,72 @@ type ApplicationBaseInfo struct {
 	WindowCaptureMode *string `json:"WindowCaptureMode,omitnil,omitempty" name:"WindowCaptureMode"`
 }
 
+type ApplicationConcurrentPackage struct {
+
+}
+
+type ApplicationProject struct {
+	// Project ID.Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Project name.Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Project description.Note: This field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Concurrency type required for project operation.S1: concurrency for rendering small cloud applications.M1: concurrency for rendering medium cloud applications.L1: concurrency for rendering large cloud applications.L2: concurrency for rendering large cloud applications.XL2: concurrency for rendering extra large cloud applications.MM1_HD: concurrency for performance-based cloud ARM (HD).MM1_FHD: concurrency for performance-based cloud ARM (FHD).Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Cloud application ID.Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// Pre-launch.Note: This field may return null, indicating that no valid values can be obtained.
+	IsPreload *bool `json:"IsPreload,omitnil,omitempty" name:"IsPreload"`
+
+	// Number of concurrencies already configured.Note: This field may return null, indicating that no valid values can be obtained.
+	Amount *int64 `json:"Amount,omitnil,omitempty" name:"Amount"`
+
+	// Number of concurrencies in use.Note: This field may return null, indicating that no valid values can be obtained.
+	Using *int64 `json:"Using,omitnil,omitempty" name:"Using"`
+
+	// Application status. NoConcurrent: no concurrency pack configured; Online: activated. Cloud application status: applicationCreating: creating; applicationCreateFail: creation failed; applicationDeleting: deleting; applicationNoConfigured: startup parameters not configured.Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationStatus *string `json:"ApplicationStatus,omitnil,omitempty" name:"ApplicationStatus"`
+
+	// Application startup parameters.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationParams *string `json:"ApplicationParams,omitnil,omitempty" name:"ApplicationParams"`
+
+	// Creation time.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Application name.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationName *string `json:"ApplicationName,omitnil,omitempty" name:"ApplicationName"`
+
+	// Resolution, in the format of widthxheight, such as 1920x1080.Note: This field may return null, indicating that no valid values can be obtained.
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+
+	// Project type.SHARED: shared by all applications.EXCLUSIVE (default value): dedicated for one application.Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectType *string `json:"ProjectType,omitnil,omitempty" name:"ProjectType"`
+
+	// Purpose.EXPERIENCE: Experience.Note: This field may return null, indicating that no valid values can be obtained.
+	Purpose *string `json:"Purpose,omitnil,omitempty" name:"Purpose"`
+
+	// Application distribution area. Standard areas are as follows. ap-chinese-mainland: Chinese mainland; na-north-america: North America; eu-frankfurt: Frankfurt; ap-mumbai: Mumbai; ap-tokyo: Tokyo; ap-seoul: Seoul; ap-singapore: Singapore; ap-bangkok: Bangkok; ap-hongkong: Hong Kong (China). Fusion areas are as follows. me-middle-east-fusion: Middle East; na-north-america-fusion: North America; sa-south-america-fusion: South America; ap-tokyo-fusion: Tokyo; ap-seoul-fusion: Seoul; eu-frankfurt-fusion: Frankfurt; ap-singapore-fusion: Singapore; ap-hongkong-fusion: Hong Kong (China).Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationRegions []*string `json:"ApplicationRegions,omitnil,omitempty" name:"ApplicationRegions"`
+
+	// Concurrency area. Standard areas are as follows. ap-chinese-mainland: Chinese mainland; na-north-america: North America; eu-frankfurt: Frankfurt; ap-mumbai: Mumbai; ap-tokyo: Tokyo; ap-seoul: Seoul; ap-singapore: Singapore; ap-bangkok: Bangkok; ap-hongkong: Hong Kong (China). Fusion areas are as follows. me-middle-east-fusion: Middle East; na-north-america-fusion: North America; sa-south-america-fusion: South America; ap-tokyo-fusion: Tokyo; ap-seoul-fusion: Seoul; eu-frankfurt-fusion: Frankfurt; ap-singapore-fusion: Singapore; ap-hongkong-fusion: Hong Kong (China).Note: This field may return null, indicating that no valid values can be obtained.
+	ConcurrentRegions []*string `json:"ConcurrentRegions,omitnil,omitempty" name:"ConcurrentRegions"`
+
+	// Project category.DESKTOP: desktop (default value).MOBILE: mobile.Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectCategory *string `json:"ProjectCategory,omitnil,omitempty" name:"ProjectCategory"`
+}
+
 // Predefined struct for user
 type ApplyConcurrentRequestParams struct {
 	// Unique user ID, which is customized by you and is not parsed by CAR. Based on your needs, you can either define unique IDs for users or use timestamps to generate random IDs. Make sure the same ID is used when a user reconnects to your application.
@@ -113,6 +179,261 @@ func (r *ApplyConcurrentResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ApplyConcurrentResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type BackgroundImage struct {
+	// ID of the COS file.Note: This field may return null, indicating that no valid values can be obtained.
+	COSFileId *string `json:"COSFileId,omitnil,omitempty" name:"COSFileId"`
+
+	// Download URL.Note: This field may return null, indicating that no valid values can be obtained.
+	URL *string `json:"URL,omitnil,omitempty" name:"URL"`
+
+	// Name
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Creation time.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+}
+
+// Predefined struct for user
+type BindConcurrentPackagesToProjectRequestParams struct {
+	// Concurrency pack ID list.
+	ConcurrentIds []*string `json:"ConcurrentIds,omitnil,omitempty" name:"ConcurrentIds"`
+
+	// Cloud application project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+}
+
+type BindConcurrentPackagesToProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// Concurrency pack ID list.
+	ConcurrentIds []*string `json:"ConcurrentIds,omitnil,omitempty" name:"ConcurrentIds"`
+
+	// Cloud application project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+}
+
+func (r *BindConcurrentPackagesToProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindConcurrentPackagesToProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConcurrentIds")
+	delete(f, "ProjectId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BindConcurrentPackagesToProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type BindConcurrentPackagesToProjectResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type BindConcurrentPackagesToProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *BindConcurrentPackagesToProjectResponseParams `json:"Response"`
+}
+
+func (r *BindConcurrentPackagesToProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BindConcurrentPackagesToProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateApplicationProjectRequestParams struct {
+	// Project name, which is user-defined.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Bound application ID.
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// Concurrency type required for project operation.S1: concurrency for rendering small cloud applications.M1: concurrency for rendering medium cloud applications.L1: concurrency for rendering large cloud applications.L2: concurrency for rendering large cloud applications.XL2: concurrency for rendering extra large cloud applications.MM1_HD: concurrency for performance-based cloud ARM (HD).MM1_FHD: concurrency for performance-based cloud ARM (FHD).
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Whether to enable warm-up. The default value is false.
+	IsPreload *bool `json:"IsPreload,omitnil,omitempty" name:"IsPreload"`
+
+	// Application startup parameters.
+	ApplicationParams *string `json:"ApplicationParams,omitnil,omitempty" name:"ApplicationParams"`
+
+	// Resolution, in the format of widthxheight, such as 1920x1080.
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+
+	// Project type.SHARED: shared by all applications.EXCLUSIVE (default value): dedicated for one application.
+	ProjectType *string `json:"ProjectType,omitnil,omitempty" name:"ProjectType"`
+
+	// Frame rate.
+	FPS *int64 `json:"FPS,omitnil,omitempty" name:"FPS"`
+
+	// Waiting time for application pre-launch.
+	PreloadDuration *string `json:"PreloadDuration,omitnil,omitempty" name:"PreloadDuration"`
+
+	// Waiting time for reconnection.
+	ReconnectTimeout *string `json:"ReconnectTimeout,omitnil,omitempty" name:"ReconnectTimeout"`
+
+	// Minimum bitrate, in Mbps.
+	MinBitrate *int64 `json:"MinBitrate,omitnil,omitempty" name:"MinBitrate"`
+
+	// Maximum bitrate, in Mbps.
+	MaxBitrate *int64 `json:"MaxBitrate,omitnil,omitempty" name:"MaxBitrate"`
+
+	// Upstream audio options.DisableMixIntoStreamPush: not mixing upstream audio in streaming.
+	UpstreamAudioOption *string `json:"UpstreamAudioOption,omitnil,omitempty" name:"UpstreamAudioOption"`
+
+	// Video encoding configuration.
+	VideoEncodeConfig *VideoEncodeConfig `json:"VideoEncodeConfig,omitnil,omitempty" name:"VideoEncodeConfig"`
+
+	// Upper limit of the XR application resolution.If the project concurrency type is L or L2, the upper limit is 5000; if the project concurrency type is XL2, the upper limit is 6000.
+	XRMaxWidth *uint64 `json:"XRMaxWidth,omitnil,omitempty" name:"XRMaxWidth"`
+
+	// ID of the background image COS file.
+	BackgroundImageCOSFileId *string `json:"BackgroundImageCOSFileId,omitnil,omitempty" name:"BackgroundImageCOSFileId"`
+
+	// Project category.DESKTOP: desktop (default value).MOBILE: mobile.
+	ProjectCategory *string `json:"ProjectCategory,omitnil,omitempty" name:"ProjectCategory"`
+
+	// Disabled code list.
+	DisableVideoCodecs []*string `json:"DisableVideoCodecs,omitnil,omitempty" name:"DisableVideoCodecs"`
+}
+
+type CreateApplicationProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project name, which is user-defined.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Bound application ID.
+	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
+
+	// Concurrency type required for project operation.S1: concurrency for rendering small cloud applications.M1: concurrency for rendering medium cloud applications.L1: concurrency for rendering large cloud applications.L2: concurrency for rendering large cloud applications.XL2: concurrency for rendering extra large cloud applications.MM1_HD: concurrency for performance-based cloud ARM (HD).MM1_FHD: concurrency for performance-based cloud ARM (FHD).
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Whether to enable warm-up. The default value is false.
+	IsPreload *bool `json:"IsPreload,omitnil,omitempty" name:"IsPreload"`
+
+	// Application startup parameters.
+	ApplicationParams *string `json:"ApplicationParams,omitnil,omitempty" name:"ApplicationParams"`
+
+	// Resolution, in the format of widthxheight, such as 1920x1080.
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+
+	// Project type.SHARED: shared by all applications.EXCLUSIVE (default value): dedicated for one application.
+	ProjectType *string `json:"ProjectType,omitnil,omitempty" name:"ProjectType"`
+
+	// Frame rate.
+	FPS *int64 `json:"FPS,omitnil,omitempty" name:"FPS"`
+
+	// Waiting time for application pre-launch.
+	PreloadDuration *string `json:"PreloadDuration,omitnil,omitempty" name:"PreloadDuration"`
+
+	// Waiting time for reconnection.
+	ReconnectTimeout *string `json:"ReconnectTimeout,omitnil,omitempty" name:"ReconnectTimeout"`
+
+	// Minimum bitrate, in Mbps.
+	MinBitrate *int64 `json:"MinBitrate,omitnil,omitempty" name:"MinBitrate"`
+
+	// Maximum bitrate, in Mbps.
+	MaxBitrate *int64 `json:"MaxBitrate,omitnil,omitempty" name:"MaxBitrate"`
+
+	// Upstream audio options.DisableMixIntoStreamPush: not mixing upstream audio in streaming.
+	UpstreamAudioOption *string `json:"UpstreamAudioOption,omitnil,omitempty" name:"UpstreamAudioOption"`
+
+	// Video encoding configuration.
+	VideoEncodeConfig *VideoEncodeConfig `json:"VideoEncodeConfig,omitnil,omitempty" name:"VideoEncodeConfig"`
+
+	// Upper limit of the XR application resolution.If the project concurrency type is L or L2, the upper limit is 5000; if the project concurrency type is XL2, the upper limit is 6000.
+	XRMaxWidth *uint64 `json:"XRMaxWidth,omitnil,omitempty" name:"XRMaxWidth"`
+
+	// ID of the background image COS file.
+	BackgroundImageCOSFileId *string `json:"BackgroundImageCOSFileId,omitnil,omitempty" name:"BackgroundImageCOSFileId"`
+
+	// Project category.DESKTOP: desktop (default value).MOBILE: mobile.
+	ProjectCategory *string `json:"ProjectCategory,omitnil,omitempty" name:"ProjectCategory"`
+
+	// Disabled code list.
+	DisableVideoCodecs []*string `json:"DisableVideoCodecs,omitnil,omitempty" name:"DisableVideoCodecs"`
+}
+
+func (r *CreateApplicationProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateApplicationProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "ApplicationId")
+	delete(f, "Type")
+	delete(f, "IsPreload")
+	delete(f, "ApplicationParams")
+	delete(f, "Resolution")
+	delete(f, "ProjectType")
+	delete(f, "FPS")
+	delete(f, "PreloadDuration")
+	delete(f, "ReconnectTimeout")
+	delete(f, "MinBitrate")
+	delete(f, "MaxBitrate")
+	delete(f, "UpstreamAudioOption")
+	delete(f, "VideoEncodeConfig")
+	delete(f, "XRMaxWidth")
+	delete(f, "BackgroundImageCOSFileId")
+	delete(f, "ProjectCategory")
+	delete(f, "DisableVideoCodecs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApplicationProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateApplicationProjectResponseParams struct {
+	// Generated project ID.Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateApplicationProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateApplicationProjectResponseParams `json:"Response"`
+}
+
+func (r *CreateApplicationProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateApplicationProjectResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -429,6 +750,60 @@ func (r *CreateSessionResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateSessionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteApplicationProjectsRequestParams struct {
+	// ID list of cloud application projects.
+	ProjectIds []*string `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+}
+
+type DeleteApplicationProjectsRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID list of cloud application projects.
+	ProjectIds []*string `json:"ProjectIds,omitnil,omitempty" name:"ProjectIds"`
+}
+
+func (r *DeleteApplicationProjectsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteApplicationProjectsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteApplicationProjectsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteApplicationProjectsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteApplicationProjectsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteApplicationProjectsResponseParams `json:"Response"`
+}
+
+func (r *DeleteApplicationProjectsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteApplicationProjectsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -762,6 +1137,181 @@ func (r *DescribeApplicationPathListResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeApplicationProjectAdvancedConfigRequestParams struct {
+	// Application project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+}
+
+type DescribeApplicationProjectAdvancedConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+}
+
+func (r *DescribeApplicationProjectAdvancedConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationProjectAdvancedConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApplicationProjectAdvancedConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApplicationProjectAdvancedConfigResponseParams struct {
+	// Application startup parameters.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ApplicationParams *string `json:"ApplicationParams,omitnil,omitempty" name:"ApplicationParams"`
+
+	// Resolution, in the format of widthxheight, such as 1920x1080.Note: This field may return null, indicating that no valid values can be obtained.
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+
+	// Frame rate. Valid values: 0, 30, 60.Note: This field may return null, indicating that no valid values can be obtained.
+	FPS *int64 `json:"FPS,omitnil,omitempty" name:"FPS"`
+
+	// Minimum bitrate, in Mbps.Note: This field may return null, indicating that no valid values can be obtained.
+	MinBitrate *int64 `json:"MinBitrate,omitnil,omitempty" name:"MinBitrate"`
+
+	// Maximum bitrate, in Mbps.Note: This field may return null, indicating that no valid values can be obtained.
+	MaxBitrate *int64 `json:"MaxBitrate,omitnil,omitempty" name:"MaxBitrate"`
+
+	// Waiting time for application pre-launch.Note: This field may return null, indicating that no valid values can be obtained.
+	PreloadDuration *string `json:"PreloadDuration,omitnil,omitempty" name:"PreloadDuration"`
+
+	// Waiting time for reconnection.Note: This field may return null, indicating that no valid values can be obtained.
+	ReconnectTimeout *string `json:"ReconnectTimeout,omitnil,omitempty" name:"ReconnectTimeout"`
+
+	// Upstream audio options.DisableMixIntoStreamPush: not mixing upstream audio in streaming.Note: This field may return null, indicating that no valid values can be obtained.
+	UpstreamAudioOption *string `json:"UpstreamAudioOption,omitnil,omitempty" name:"UpstreamAudioOption"`
+
+	// Video encoding configuration.Note: This field may return null, indicating that no valid values can be obtained.
+	VideoEncodeConfig *VideoEncodeConfig `json:"VideoEncodeConfig,omitnil,omitempty" name:"VideoEncodeConfig"`
+
+	// Upper limit of the XR application resolution.If the project concurrency type is L or L2, the upper limit is 5000; if the project concurrency type is XL2, the upper limit is 6000.Note: This field may return null, indicating that no valid values can be obtained.
+	XRMaxWidth *uint64 `json:"XRMaxWidth,omitnil,omitempty" name:"XRMaxWidth"`
+
+	// Background image information.Note: This field may return null, indicating that no valid values can be obtained.
+	BackgroundImage *BackgroundImage `json:"BackgroundImage,omitnil,omitempty" name:"BackgroundImage"`
+
+	// Disabled code list.Note: This field may return null, indicating that no valid values can be obtained.
+	DisableVideoCodecs []*string `json:"DisableVideoCodecs,omitnil,omitempty" name:"DisableVideoCodecs"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeApplicationProjectAdvancedConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeApplicationProjectAdvancedConfigResponseParams `json:"Response"`
+}
+
+func (r *DescribeApplicationProjectAdvancedConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationProjectAdvancedConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApplicationProjectsRequestParams struct {
+	// Subscript.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of entries per page.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Project category.DESKTOP: desktop (default value).MOBILE: mobile.
+	ProjectCategory *string `json:"ProjectCategory,omitnil,omitempty" name:"ProjectCategory"`
+}
+
+type DescribeApplicationProjectsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Subscript.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of entries per page.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Project category.DESKTOP: desktop (default value).MOBILE: mobile.
+	ProjectCategory *string `json:"ProjectCategory,omitnil,omitempty" name:"ProjectCategory"`
+}
+
+func (r *DescribeApplicationProjectsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationProjectsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	delete(f, "ProjectCategory")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeApplicationProjectsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeApplicationProjectsResponseParams struct {
+	// Project list.Note: This field may return null, indicating that no valid values can be obtained.
+	Projects []*ApplicationProject `json:"Projects,omitnil,omitempty" name:"Projects"`
+
+	// Total number.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeApplicationProjectsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeApplicationProjectsResponseParams `json:"Response"`
+}
+
+func (r *DescribeApplicationProjectsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeApplicationProjectsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeApplicationStatusRequestParams struct {
 	// Application ID list.
 	ApplicationIdList []*string `json:"ApplicationIdList,omitnil,omitempty" name:"ApplicationIdList"`
@@ -932,6 +1482,139 @@ func (r *DescribeConcurrentCountResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeConcurrentCountResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConcurrentPackagesRequestParams struct {
+	// Subscript.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of entries per page.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter List
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeConcurrentPackagesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Subscript.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of entries per page.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter List
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeConcurrentPackagesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConcurrentPackagesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConcurrentPackagesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConcurrentPackagesResponseParams struct {
+	// Total number.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Concurrency pack list.Note: This field may return null, indicating that no valid values can be obtained.
+	ConcurrentPackages []*ApplicationConcurrentPackage `json:"ConcurrentPackages,omitnil,omitempty" name:"ConcurrentPackages"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeConcurrentPackagesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConcurrentPackagesResponseParams `json:"Response"`
+}
+
+func (r *DescribeConcurrentPackagesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConcurrentPackagesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConcurrentSummaryRequestParams struct {
+
+}
+
+type DescribeConcurrentSummaryRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DescribeConcurrentSummaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConcurrentSummaryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConcurrentSummaryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConcurrentSummaryResponseParams struct {
+	// Total number of prepaid (monthly subscription) concurrencies.
+	PrepaidConcurrentTotal *uint64 `json:"PrepaidConcurrentTotal,omitnil,omitempty" name:"PrepaidConcurrentTotal"`
+
+	// Remaining duration of an hourly package.
+	HourlyRemainDuration *string `json:"HourlyRemainDuration,omitnil,omitempty" name:"HourlyRemainDuration"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeConcurrentSummaryResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConcurrentSummaryResponseParams `json:"Response"`
+}
+
+func (r *DescribeConcurrentSummaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConcurrentSummaryResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1179,6 +1862,172 @@ func (r *ModifyApplicationBaseInfoResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyApplicationProjectRequestParams struct {
+	// Project ID returned by cloud.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Project name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Concurrency type required for project operation.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Whether to Enable Pre-launch.
+	IsPreload *bool `json:"IsPreload,omitnil,omitempty" name:"IsPreload"`
+
+	// Application startup parameters.
+	ApplicationParams *string `json:"ApplicationParams,omitnil,omitempty" name:"ApplicationParams"`
+
+	// Cloud application project description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Resolution, in the format of widthxheight, such as 1920x1080.
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+
+	// Frame rate.
+	FPS *int64 `json:"FPS,omitnil,omitempty" name:"FPS"`
+
+	// Waiting time for application pre-launch.
+	PreloadDuration *string `json:"PreloadDuration,omitnil,omitempty" name:"PreloadDuration"`
+
+	// Waiting time for reconnection.
+	ReconnectTimeout *string `json:"ReconnectTimeout,omitnil,omitempty" name:"ReconnectTimeout"`
+
+	// Minimum bitrate, in Mbps.
+	MinBitrate *int64 `json:"MinBitrate,omitnil,omitempty" name:"MinBitrate"`
+
+	// Maximum bitrate, in Mbps.
+	MaxBitrate *int64 `json:"MaxBitrate,omitnil,omitempty" name:"MaxBitrate"`
+
+	// Upstream audio options.DisableMixIntoStreamPush: not mixing upstream audio in streaming.
+	UpstreamAudioOption *string `json:"UpstreamAudioOption,omitnil,omitempty" name:"UpstreamAudioOption"`
+
+	// Video encoding configuration.
+	VideoEncodeConfig *VideoEncodeConfig `json:"VideoEncodeConfig,omitnil,omitempty" name:"VideoEncodeConfig"`
+
+	// Upper limit of the XR application resolution.If the project concurrency type is L or L2, the upper limit is 5000; if the project concurrency type is XL2, the upper limit is 6000.
+	XRMaxWidth *uint64 `json:"XRMaxWidth,omitnil,omitempty" name:"XRMaxWidth"`
+
+	// ID of the background image COS file.
+	BackgroundImageCOSFileId *string `json:"BackgroundImageCOSFileId,omitnil,omitempty" name:"BackgroundImageCOSFileId"`
+
+	// Disabled code list.
+	DisableVideoCodecs []*string `json:"DisableVideoCodecs,omitnil,omitempty" name:"DisableVideoCodecs"`
+}
+
+type ModifyApplicationProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// Project ID returned by cloud.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Project name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Concurrency type required for project operation.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Whether to Enable Pre-launch.
+	IsPreload *bool `json:"IsPreload,omitnil,omitempty" name:"IsPreload"`
+
+	// Application startup parameters.
+	ApplicationParams *string `json:"ApplicationParams,omitnil,omitempty" name:"ApplicationParams"`
+
+	// Cloud application project description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Resolution, in the format of widthxheight, such as 1920x1080.
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+
+	// Frame rate.
+	FPS *int64 `json:"FPS,omitnil,omitempty" name:"FPS"`
+
+	// Waiting time for application pre-launch.
+	PreloadDuration *string `json:"PreloadDuration,omitnil,omitempty" name:"PreloadDuration"`
+
+	// Waiting time for reconnection.
+	ReconnectTimeout *string `json:"ReconnectTimeout,omitnil,omitempty" name:"ReconnectTimeout"`
+
+	// Minimum bitrate, in Mbps.
+	MinBitrate *int64 `json:"MinBitrate,omitnil,omitempty" name:"MinBitrate"`
+
+	// Maximum bitrate, in Mbps.
+	MaxBitrate *int64 `json:"MaxBitrate,omitnil,omitempty" name:"MaxBitrate"`
+
+	// Upstream audio options.DisableMixIntoStreamPush: not mixing upstream audio in streaming.
+	UpstreamAudioOption *string `json:"UpstreamAudioOption,omitnil,omitempty" name:"UpstreamAudioOption"`
+
+	// Video encoding configuration.
+	VideoEncodeConfig *VideoEncodeConfig `json:"VideoEncodeConfig,omitnil,omitempty" name:"VideoEncodeConfig"`
+
+	// Upper limit of the XR application resolution.If the project concurrency type is L or L2, the upper limit is 5000; if the project concurrency type is XL2, the upper limit is 6000.
+	XRMaxWidth *uint64 `json:"XRMaxWidth,omitnil,omitempty" name:"XRMaxWidth"`
+
+	// ID of the background image COS file.
+	BackgroundImageCOSFileId *string `json:"BackgroundImageCOSFileId,omitnil,omitempty" name:"BackgroundImageCOSFileId"`
+
+	// Disabled code list.
+	DisableVideoCodecs []*string `json:"DisableVideoCodecs,omitnil,omitempty" name:"DisableVideoCodecs"`
+}
+
+func (r *ModifyApplicationProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyApplicationProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "Name")
+	delete(f, "Type")
+	delete(f, "IsPreload")
+	delete(f, "ApplicationParams")
+	delete(f, "Description")
+	delete(f, "Resolution")
+	delete(f, "FPS")
+	delete(f, "PreloadDuration")
+	delete(f, "ReconnectTimeout")
+	delete(f, "MinBitrate")
+	delete(f, "MaxBitrate")
+	delete(f, "UpstreamAudioOption")
+	delete(f, "VideoEncodeConfig")
+	delete(f, "XRMaxWidth")
+	delete(f, "BackgroundImageCOSFileId")
+	delete(f, "DisableVideoCodecs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyApplicationProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyApplicationProjectResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyApplicationProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyApplicationProjectResponseParams `json:"Response"`
+}
+
+func (r *ModifyApplicationProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyApplicationProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyApplicationVersionRequestParams struct {
 	// Application ID.
 	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
@@ -1247,6 +2096,67 @@ func (r *ModifyApplicationVersionResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyConcurrentPackageRequestParams struct {
+	// Concurrency pack ID.
+	ConcurrentId *string `json:"ConcurrentId,omitnil,omitempty" name:"ConcurrentId"`
+
+	// Concurrency pack name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type ModifyConcurrentPackageRequest struct {
+	*tchttp.BaseRequest
+	
+	// Concurrency pack ID.
+	ConcurrentId *string `json:"ConcurrentId,omitnil,omitempty" name:"ConcurrentId"`
+
+	// Concurrency pack name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *ModifyConcurrentPackageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConcurrentPackageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConcurrentId")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyConcurrentPackageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConcurrentPackageResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyConcurrentPackageResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyConcurrentPackageResponseParams `json:"Response"`
+}
+
+func (r *ModifyConcurrentPackageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConcurrentPackageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyMobileApplicationInfoRequestParams struct {
 	// Application ID.
 	ApplicationId *string `json:"ApplicationId,omitnil,omitempty" name:"ApplicationId"`
@@ -1304,6 +2214,60 @@ func (r *ModifyMobileApplicationInfoResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMobileApplicationInfoResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResetConcurrentPackagesRequestParams struct {
+	// Concurrency pack ID array.
+	ConcurrentPackageIds []*string `json:"ConcurrentPackageIds,omitnil,omitempty" name:"ConcurrentPackageIds"`
+}
+
+type ResetConcurrentPackagesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Concurrency pack ID array.
+	ConcurrentPackageIds []*string `json:"ConcurrentPackageIds,omitnil,omitempty" name:"ConcurrentPackageIds"`
+}
+
+func (r *ResetConcurrentPackagesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetConcurrentPackagesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConcurrentPackageIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetConcurrentPackagesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResetConcurrentPackagesResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ResetConcurrentPackagesResponse struct {
+	*tchttp.BaseResponse
+	Response *ResetConcurrentPackagesResponseParams `json:"Response"`
+}
+
+func (r *ResetConcurrentPackagesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetConcurrentPackagesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1547,6 +2511,67 @@ func (r *StopPublishStreamResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type UnbindConcurrentPackagesFromProjectRequestParams struct {
+	// Concurrency pack ID list.
+	ConcurrentIds []*string `json:"ConcurrentIds,omitnil,omitempty" name:"ConcurrentIds"`
+
+	// Cloud application project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+}
+
+type UnbindConcurrentPackagesFromProjectRequest struct {
+	*tchttp.BaseRequest
+	
+	// Concurrency pack ID list.
+	ConcurrentIds []*string `json:"ConcurrentIds,omitnil,omitempty" name:"ConcurrentIds"`
+
+	// Cloud application project ID.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+}
+
+func (r *UnbindConcurrentPackagesFromProjectRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindConcurrentPackagesFromProjectRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ConcurrentIds")
+	delete(f, "ProjectId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UnbindConcurrentPackagesFromProjectRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UnbindConcurrentPackagesFromProjectResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UnbindConcurrentPackagesFromProjectResponse struct {
+	*tchttp.BaseResponse
+	Response *UnbindConcurrentPackagesFromProjectResponseParams `json:"Response"`
+}
+
+func (r *UnbindConcurrentPackagesFromProjectResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UnbindConcurrentPackagesFromProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type UserApplicationFileInfo struct {
 	// Application file path.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -1708,4 +2733,9 @@ type UserMobileApplicationInfo struct {
 
 	// Application nature (PUBLIC: public application; PRIVATE: user application).
 	ApplicationNature *string `json:"ApplicationNature,omitnil,omitempty" name:"ApplicationNature"`
+}
+
+type VideoEncodeConfig struct {
+	// Streaming GOP length, in seconds.Note: This field may return null, indicating that no valid values can be obtained.
+	StreamPushGOPSeconds *uint64 `json:"StreamPushGOPSeconds,omitnil,omitempty" name:"StreamPushGOPSeconds"`
 }

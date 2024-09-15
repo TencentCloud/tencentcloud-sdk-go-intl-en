@@ -3273,11 +3273,6 @@ type DescribeInstanceOperationHistoryRequestParams struct {
 
 	// Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
 	PassWord *string `json:"PassWord,omitnil,omitempty" name:"PassWord"`
-
-	// Information, deprecated.
-	//
-	// Deprecated: Message is deprecated.
-	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
 type DescribeInstanceOperationHistoryRequest struct {
@@ -3303,9 +3298,6 @@ type DescribeInstanceOperationHistoryRequest struct {
 
 	// Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
 	PassWord *string `json:"PassWord,omitnil,omitempty" name:"PassWord"`
-
-	// Information, deprecated.
-	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
 func (r *DescribeInstanceOperationHistoryRequest) ToJsonString() string {
@@ -3327,7 +3319,6 @@ func (r *DescribeInstanceOperationHistoryRequest) FromJsonString(s string) error
 	delete(f, "EndTime")
 	delete(f, "UserName")
 	delete(f, "PassWord")
-	delete(f, "Message")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeInstanceOperationHistoryRequest has unknown keys!", "")
 	}
@@ -3836,6 +3827,12 @@ type DescribeQueryAnalyseRequestParams struct {
 
 	// Minimum query execution time, in milliseconds.
 	QueryTime *uint64 `json:"QueryTime,omitnil,omitempty" name:"QueryTime"`
+
+	// Page number, defaults to 1.
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Number of records per page, defaults to 10.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 }
 
 type DescribeQueryAnalyseRequest struct {
@@ -3876,6 +3873,12 @@ type DescribeQueryAnalyseRequest struct {
 
 	// Minimum query execution time, in milliseconds.
 	QueryTime *uint64 `json:"QueryTime,omitnil,omitempty" name:"QueryTime"`
+
+	// Page number, defaults to 1.
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Number of records per page, defaults to 10.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 }
 
 func (r *DescribeQueryAnalyseRequest) ToJsonString() string {
@@ -3902,6 +3905,8 @@ func (r *DescribeQueryAnalyseRequest) FromJsonString(s string) error {
 	delete(f, "SortField")
 	delete(f, "SortOrder")
 	delete(f, "QueryTime")
+	delete(f, "PageNum")
+	delete(f, "PageSize")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeQueryAnalyseRequest has unknown keys!", "")
 	}
@@ -4982,6 +4987,9 @@ type ExecuteParametrizedQueryRequestParams struct {
 	// SQL query statement
 	Sql *string `json:"Sql,omitnil,omitempty" name:"Sql"`
 
+	// InstanceId
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
 	// Query parameter array.
 	QueryParameter []*PropertiesMap `json:"QueryParameter,omitnil,omitempty" name:"QueryParameter"`
 
@@ -4999,9 +5007,6 @@ type ExecuteParametrizedQueryRequestParams struct {
 
 	// Catalog name, defaults to 'internal' if not specified.
 	CatalogName *string `json:"CatalogName,omitnil,omitempty" name:"CatalogName"`
-
-	// InstanceId
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type ExecuteParametrizedQueryRequest struct {
@@ -5013,6 +5018,9 @@ type ExecuteParametrizedQueryRequest struct {
 	// SQL query statement
 	Sql *string `json:"Sql,omitnil,omitempty" name:"Sql"`
 
+	// InstanceId
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
 	// Query parameter array.
 	QueryParameter []*PropertiesMap `json:"QueryParameter,omitnil,omitempty" name:"QueryParameter"`
 
@@ -5030,9 +5038,6 @@ type ExecuteParametrizedQueryRequest struct {
 
 	// Catalog name, defaults to 'internal' if not specified.
 	CatalogName *string `json:"CatalogName,omitnil,omitempty" name:"CatalogName"`
-
-	// InstanceId
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *ExecuteParametrizedQueryRequest) ToJsonString() string {
@@ -5049,13 +5054,13 @@ func (r *ExecuteParametrizedQueryRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Database")
 	delete(f, "Sql")
+	delete(f, "InstanceId")
 	delete(f, "QueryParameter")
 	delete(f, "PageNum")
 	delete(f, "PageSize")
 	delete(f, "UserName")
 	delete(f, "PassWord")
 	delete(f, "CatalogName")
-	delete(f, "InstanceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExecuteParametrizedQueryRequest has unknown keys!", "")
 	}
@@ -5107,6 +5112,9 @@ type ExecuteSelectQueryRequestParams struct {
 	// SQL query statements only support select statements.
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
+	// InstanceId
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
 	// Page number, which is 1 by default.
 	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
@@ -5121,9 +5129,6 @@ type ExecuteSelectQueryRequestParams struct {
 
 	// Catalog name, defaults to 'internal' if not specified.
 	CatalogName *string `json:"CatalogName,omitnil,omitempty" name:"CatalogName"`
-
-	// InstanceId
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type ExecuteSelectQueryRequest struct {
@@ -5135,6 +5140,9 @@ type ExecuteSelectQueryRequest struct {
 	// SQL query statements only support select statements.
 	Query *string `json:"Query,omitnil,omitempty" name:"Query"`
 
+	// InstanceId
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
 	// Page number, which is 1 by default.
 	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
 
@@ -5149,9 +5157,6 @@ type ExecuteSelectQueryRequest struct {
 
 	// Catalog name, defaults to 'internal' if not specified.
 	CatalogName *string `json:"CatalogName,omitnil,omitempty" name:"CatalogName"`
-
-	// InstanceId
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *ExecuteSelectQueryRequest) ToJsonString() string {
@@ -5168,12 +5173,12 @@ func (r *ExecuteSelectQueryRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Database")
 	delete(f, "Query")
+	delete(f, "InstanceId")
 	delete(f, "PageNum")
 	delete(f, "PageSize")
 	delete(f, "UserName")
 	delete(f, "PassWord")
 	delete(f, "CatalogName")
-	delete(f, "InstanceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExecuteSelectQueryRequest has unknown keys!", "")
 	}
@@ -5264,17 +5269,23 @@ type InsertDatasToTableRequestParams struct {
 	// Table name
 	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
 
-	// Whether to use the strict mode
-	Strict *bool `json:"Strict,omitnil,omitempty" name:"Strict"`
-
-	// Maximum filtration ratio, ranging from 0 to 1.0
-	MaxFilterRatio *float64 `json:"MaxFilterRatio,omitnil,omitempty" name:"MaxFilterRatio"`
-
 	// Array of column names
 	Columns []*string `json:"Columns,omitnil,omitempty" name:"Columns"`
 
 	// Data line
 	Rows []*Rows `json:"Rows,omitnil,omitempty" name:"Rows"`
+
+	// Array of column types
+	Types []*string `json:"Types,omitnil,omitempty" name:"Types"`
+
+	// InstanceId
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Whether to use the strict mode
+	Strict *bool `json:"Strict,omitnil,omitempty" name:"Strict"`
+
+	// Maximum filtration ratio, ranging from 0 to 1.0
+	MaxFilterRatio *float64 `json:"MaxFilterRatio,omitnil,omitempty" name:"MaxFilterRatio"`
 
 	// Tags for inserting data
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
@@ -5285,19 +5296,8 @@ type InsertDatasToTableRequestParams struct {
 	// Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
 	PassWord *string `json:"PassWord,omitnil,omitempty" name:"PassWord"`
 
-	// Column type, this field has been deprecated, please use Types
-	//
-	// Deprecated: ColumnTypes is deprecated.
-	ColumnTypes *string `json:"ColumnTypes,omitnil,omitempty" name:"ColumnTypes"`
-
-	// Array of column types
-	Types []*string `json:"Types,omitnil,omitempty" name:"Types"`
-
 	// Catalog name, defaults to 'internal' if not specified.
 	CatalogName *string `json:"CatalogName,omitnil,omitempty" name:"CatalogName"`
-
-	// InstanceId
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type InsertDatasToTableRequest struct {
@@ -5309,17 +5309,23 @@ type InsertDatasToTableRequest struct {
 	// Table name
 	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
 
-	// Whether to use the strict mode
-	Strict *bool `json:"Strict,omitnil,omitempty" name:"Strict"`
-
-	// Maximum filtration ratio, ranging from 0 to 1.0
-	MaxFilterRatio *float64 `json:"MaxFilterRatio,omitnil,omitempty" name:"MaxFilterRatio"`
-
 	// Array of column names
 	Columns []*string `json:"Columns,omitnil,omitempty" name:"Columns"`
 
 	// Data line
 	Rows []*Rows `json:"Rows,omitnil,omitempty" name:"Rows"`
+
+	// Array of column types
+	Types []*string `json:"Types,omitnil,omitempty" name:"Types"`
+
+	// InstanceId
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Whether to use the strict mode
+	Strict *bool `json:"Strict,omitnil,omitempty" name:"Strict"`
+
+	// Maximum filtration ratio, ranging from 0 to 1.0
+	MaxFilterRatio *float64 `json:"MaxFilterRatio,omitnil,omitempty" name:"MaxFilterRatio"`
 
 	// Tags for inserting data
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
@@ -5330,17 +5336,8 @@ type InsertDatasToTableRequest struct {
 	// Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
 	PassWord *string `json:"PassWord,omitnil,omitempty" name:"PassWord"`
 
-	// Column type, this field has been deprecated, please use Types
-	ColumnTypes *string `json:"ColumnTypes,omitnil,omitempty" name:"ColumnTypes"`
-
-	// Array of column types
-	Types []*string `json:"Types,omitnil,omitempty" name:"Types"`
-
 	// Catalog name, defaults to 'internal' if not specified.
 	CatalogName *string `json:"CatalogName,omitnil,omitempty" name:"CatalogName"`
-
-	// InstanceId
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *InsertDatasToTableRequest) ToJsonString() string {
@@ -5357,17 +5354,16 @@ func (r *InsertDatasToTableRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Database")
 	delete(f, "Table")
-	delete(f, "Strict")
-	delete(f, "MaxFilterRatio")
 	delete(f, "Columns")
 	delete(f, "Rows")
+	delete(f, "Types")
+	delete(f, "InstanceId")
+	delete(f, "Strict")
+	delete(f, "MaxFilterRatio")
 	delete(f, "Label")
 	delete(f, "UserName")
 	delete(f, "PassWord")
-	delete(f, "ColumnTypes")
-	delete(f, "Types")
 	delete(f, "CatalogName")
-	delete(f, "InstanceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InsertDatasToTableRequest has unknown keys!", "")
 	}
@@ -5383,7 +5379,7 @@ type InsertDatasToTableResponseParams struct {
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
 	// Number of inserted data rows
-	InsertCount *string `json:"InsertCount,omitnil,omitempty" name:"InsertCount"`
+	InsertCount *uint64 `json:"InsertCount,omitnil,omitempty" name:"InsertCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -5875,17 +5871,20 @@ type ModifyDatabaseTableAccessRequestParams struct {
 	// Database name
 	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 
-	// Table name. If it is null, it indicates that the entire database is authorized.
-	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
-
 	// Permission list
 	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
 
-	// Role name, if authorized to the role
-	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
-
 	// Operation type: GRANT or REVOKE
 	GrantOrRevoke *string `json:"GrantOrRevoke,omitnil,omitempty" name:"GrantOrRevoke"`
+
+	// InstanceId
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Table name. If it is null, it indicates that the entire database is authorized.
+	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
+
+	// Role name, if authorized to the role
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 
 	// Use the user who has corresponding permissions for operations. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
@@ -5895,9 +5894,6 @@ type ModifyDatabaseTableAccessRequestParams struct {
 
 	// Catalog name, defaults to internal if not specified.
 	CatalogName *string `json:"CatalogName,omitnil,omitempty" name:"CatalogName"`
-
-	// InstanceId
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Machine Group, defaults to % if not specified.
 	WhiteHost *string `json:"WhiteHost,omitnil,omitempty" name:"WhiteHost"`
@@ -5909,17 +5905,20 @@ type ModifyDatabaseTableAccessRequest struct {
 	// Database name
 	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
 
-	// Table name. If it is null, it indicates that the entire database is authorized.
-	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
-
 	// Permission list
 	Privileges []*string `json:"Privileges,omitnil,omitempty" name:"Privileges"`
 
-	// Role name, if authorized to the role
-	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
-
 	// Operation type: GRANT or REVOKE
 	GrantOrRevoke *string `json:"GrantOrRevoke,omitnil,omitempty" name:"GrantOrRevoke"`
+
+	// InstanceId
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Table name. If it is null, it indicates that the entire database is authorized.
+	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
+
+	// Role name, if authorized to the role
+	Role *string `json:"Role,omitnil,omitempty" name:"Role"`
 
 	// Use the user who has corresponding permissions for operations. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
 	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
@@ -5929,9 +5928,6 @@ type ModifyDatabaseTableAccessRequest struct {
 
 	// Catalog name, defaults to internal if not specified.
 	CatalogName *string `json:"CatalogName,omitnil,omitempty" name:"CatalogName"`
-
-	// InstanceId
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Machine Group, defaults to % if not specified.
 	WhiteHost *string `json:"WhiteHost,omitnil,omitempty" name:"WhiteHost"`
@@ -5950,14 +5946,14 @@ func (r *ModifyDatabaseTableAccessRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Database")
-	delete(f, "Table")
 	delete(f, "Privileges")
-	delete(f, "Role")
 	delete(f, "GrantOrRevoke")
+	delete(f, "InstanceId")
+	delete(f, "Table")
+	delete(f, "Role")
 	delete(f, "UserName")
 	delete(f, "PassWord")
 	delete(f, "CatalogName")
-	delete(f, "InstanceId")
 	delete(f, "WhiteHost")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDatabaseTableAccessRequest has unknown keys!", "")
@@ -7012,6 +7008,9 @@ type QueryTableDataRequestParams struct {
 	// Table name
 	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
 
+	// InstanceId
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
 	// Array of fields to be queried
 	SelectedFields []*string `json:"SelectedFields,omitnil,omitempty" name:"SelectedFields"`
 
@@ -7029,9 +7028,6 @@ type QueryTableDataRequestParams struct {
 
 	// Catalog name, defaults to 'internal' if not specified.
 	CatalogName *string `json:"CatalogName,omitnil,omitempty" name:"CatalogName"`
-
-	// InstanceId
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type QueryTableDataRequest struct {
@@ -7043,6 +7039,9 @@ type QueryTableDataRequest struct {
 	// Table name
 	Table *string `json:"Table,omitnil,omitempty" name:"Table"`
 
+	// InstanceId
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
 	// Array of fields to be queried
 	SelectedFields []*string `json:"SelectedFields,omitnil,omitempty" name:"SelectedFields"`
 
@@ -7060,9 +7059,6 @@ type QueryTableDataRequest struct {
 
 	// Catalog name, defaults to 'internal' if not specified.
 	CatalogName *string `json:"CatalogName,omitnil,omitempty" name:"CatalogName"`
-
-	// InstanceId
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *QueryTableDataRequest) ToJsonString() string {
@@ -7079,13 +7075,13 @@ func (r *QueryTableDataRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Database")
 	delete(f, "Table")
+	delete(f, "InstanceId")
 	delete(f, "SelectedFields")
 	delete(f, "PageNum")
 	delete(f, "PageSize")
 	delete(f, "UserName")
 	delete(f, "PassWord")
 	delete(f, "CatalogName")
-	delete(f, "InstanceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryTableDataRequest has unknown keys!", "")
 	}
@@ -8115,6 +8111,9 @@ type UpdateDatabaseRequestParams struct {
 	// Modify the operation type, such as SET_QUOTA, RENAME, SET_REPLICA_QUOTA, and SET_PROPERTIES. Modify the operation type, such as SET_QUOTA, RENAME, SET_REPLICA_QUOTA, and SET_PROPERTIES.
 	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
+	// InstanceId
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
 	// Quota value, which is used to set the quota of data volume or replicas.
 	Quota *string `json:"Quota,omitnil,omitempty" name:"Quota"`
 
@@ -8130,8 +8129,8 @@ type UpdateDatabaseRequestParams struct {
 	// Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
 	PassWord *string `json:"PassWord,omitnil,omitempty" name:"PassWord"`
 
-	// InstanceId
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+	// The name of the catalog, if left unspecified, defaults to "internal".
+	CatalogName *string `json:"CatalogName,omitnil,omitempty" name:"CatalogName"`
 }
 
 type UpdateDatabaseRequest struct {
@@ -8143,6 +8142,9 @@ type UpdateDatabaseRequest struct {
 	// Modify the operation type, such as SET_QUOTA, RENAME, SET_REPLICA_QUOTA, and SET_PROPERTIES. Modify the operation type, such as SET_QUOTA, RENAME, SET_REPLICA_QUOTA, and SET_PROPERTIES.
 	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
 
+	// InstanceId
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
 	// Quota value, which is used to set the quota of data volume or replicas.
 	Quota *string `json:"Quota,omitnil,omitempty" name:"Quota"`
 
@@ -8158,8 +8160,8 @@ type UpdateDatabaseRequest struct {
 	// Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
 	PassWord *string `json:"PassWord,omitnil,omitempty" name:"PassWord"`
 
-	// InstanceId
-	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+	// The name of the catalog, if left unspecified, defaults to "internal".
+	CatalogName *string `json:"CatalogName,omitnil,omitempty" name:"CatalogName"`
 }
 
 func (r *UpdateDatabaseRequest) ToJsonString() string {
@@ -8176,12 +8178,13 @@ func (r *UpdateDatabaseRequest) FromJsonString(s string) error {
 	}
 	delete(f, "DbName")
 	delete(f, "Operation")
+	delete(f, "InstanceId")
 	delete(f, "Quota")
 	delete(f, "NewDbName")
 	delete(f, "Properties")
 	delete(f, "UserName")
 	delete(f, "PassWord")
-	delete(f, "InstanceId")
+	delete(f, "CatalogName")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateDatabaseRequest has unknown keys!", "")
 	}
@@ -8221,12 +8224,6 @@ type UpdateTableSchemaRequestParams struct {
 	// Resource ID, which is the TCHouse-D resource ID used for table creation.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Use the user who has corresponding permissions for operations. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
-	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
-
-	// Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
-	PassWord *string `json:"PassWord,omitnil,omitempty" name:"PassWord"`
-
 	// Database name
 	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
@@ -8236,11 +8233,17 @@ type UpdateTableSchemaRequestParams struct {
 	// Column
 	Columns []*Column `json:"Columns,omitnil,omitempty" name:"Columns"`
 
-	// Index information. The inverted index and N-Gram index can be configured through this parameter. The Prefix index is related to the sort key and key column, and do not require additional configuration. Configure bloom_filter_columns in the table attribute when BloomFilter index is required.
-	IndexInfos []*IndexInfo `json:"IndexInfos,omitnil,omitempty" name:"IndexInfos"`
-
 	// Bucket information
 	Distribution *Distribution `json:"Distribution,omitnil,omitempty" name:"Distribution"`
+
+	// Use the user who has corresponding permissions for operations. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
+	PassWord *string `json:"PassWord,omitnil,omitempty" name:"PassWord"`
+
+	// Index information. The inverted index and N-Gram index can be configured through this parameter. The Prefix index is related to the sort key and key column, and do not require additional configuration. Configure bloom_filter_columns in the table attribute when BloomFilter index is required.
+	IndexInfos []*IndexInfo `json:"IndexInfos,omitnil,omitempty" name:"IndexInfos"`
 
 	// Table description
 	TableComment *string `json:"TableComment,omitnil,omitempty" name:"TableComment"`
@@ -8255,12 +8258,6 @@ type UpdateTableSchemaRequest struct {
 	// Resource ID, which is the TCHouse-D resource ID used for table creation.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// Use the user who has corresponding permissions for operations. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
-	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
-
-	// Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
-	PassWord *string `json:"PassWord,omitnil,omitempty" name:"PassWord"`
-
 	// Database name
 	DbName *string `json:"DbName,omitnil,omitempty" name:"DbName"`
 
@@ -8270,11 +8267,17 @@ type UpdateTableSchemaRequest struct {
 	// Column
 	Columns []*Column `json:"Columns,omitnil,omitempty" name:"Columns"`
 
-	// Index information. The inverted index and N-Gram index can be configured through this parameter. The Prefix index is related to the sort key and key column, and do not require additional configuration. Configure bloom_filter_columns in the table attribute when BloomFilter index is required.
-	IndexInfos []*IndexInfo `json:"IndexInfos,omitnil,omitempty" name:"IndexInfos"`
-
 	// Bucket information
 	Distribution *Distribution `json:"Distribution,omitnil,omitempty" name:"Distribution"`
+
+	// Use the user who has corresponding permissions for operations. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
+	UserName *string `json:"UserName,omitnil,omitempty" name:"UserName"`
+
+	// Password corresponding to the user. If the TCHouse-D cluster uses a kernel account registered by a CAM user, you do not need to fill it in.
+	PassWord *string `json:"PassWord,omitnil,omitempty" name:"PassWord"`
+
+	// Index information. The inverted index and N-Gram index can be configured through this parameter. The Prefix index is related to the sort key and key column, and do not require additional configuration. Configure bloom_filter_columns in the table attribute when BloomFilter index is required.
+	IndexInfos []*IndexInfo `json:"IndexInfos,omitnil,omitempty" name:"IndexInfos"`
 
 	// Table description
 	TableComment *string `json:"TableComment,omitnil,omitempty" name:"TableComment"`
@@ -8296,13 +8299,13 @@ func (r *UpdateTableSchemaRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "InstanceId")
-	delete(f, "UserName")
-	delete(f, "PassWord")
 	delete(f, "DbName")
 	delete(f, "TableName")
 	delete(f, "Columns")
-	delete(f, "IndexInfos")
 	delete(f, "Distribution")
+	delete(f, "UserName")
+	delete(f, "PassWord")
+	delete(f, "IndexInfos")
 	delete(f, "TableComment")
 	delete(f, "Properties")
 	if len(f) > 0 {
@@ -8317,7 +8320,7 @@ type UpdateTableSchemaResponseParams struct {
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
 	// Is it successful
-	Success *string `json:"Success,omitnil,omitempty" name:"Success"`
+	Success *bool `json:"Success,omitnil,omitempty" name:"Success"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
