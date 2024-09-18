@@ -58,7 +58,7 @@ type AVTemplate struct {
 	// Video bitrate. Value range: [50000, 40000000]. The value must be an integer multiple of 1000. If this parameter is left empty, the original bitrate will be used.
 	VideoBitrate *uint64 `json:"VideoBitrate,omitnil,omitempty" name:"VideoBitrate"`
 
-	// Bitrate control mode. Valid values: `CBR`, `ABR` (default)
+	// Bitrate control mode. Valid values: `CBR`, `ABR` (default), `VBR`.
 	RateControlMode *string `json:"RateControlMode,omitnil,omitempty" name:"RateControlMode"`
 
 	// Watermark ID
@@ -117,6 +117,12 @@ type AVTemplate struct {
 
 	// Quantity limit 0-20 Valid when MultiAudioTrackEnabled is turned on.
 	AudioTracks []*AudioTrackInfo `json:"AudioTracks,omitnil,omitempty" name:"AudioTracks"`
+
+
+	VideoEnhanceEnabled *uint64 `json:"VideoEnhanceEnabled,omitnil,omitempty" name:"VideoEnhanceEnabled"`
+
+
+	VideoEnhanceSettings []*VideoEnhanceSetting `json:"VideoEnhanceSettings,omitnil,omitempty" name:"VideoEnhanceSettings"`
 }
 
 type AdditionalRateSetting struct {
@@ -185,10 +191,10 @@ type AudioCodecDetail struct {
 }
 
 type AudioNormalizationSettings struct {
-
+	// Whether to enable special configuration for audio transcoding: 1: Enable 0: Disable, the default value is 0.
 	AudioNormalizationEnabled *uint64 `json:"AudioNormalizationEnabled,omitnil,omitempty" name:"AudioNormalizationEnabled"`
 
-
+	// Loudness value, floating-point number, rounded to one decimal place, range -5 to -70.
 	TargetLUFS *float64 `json:"TargetLUFS,omitnil,omitempty" name:"TargetLUFS"`
 }
 
@@ -2367,7 +2373,14 @@ type DrmSettingsInfo struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	SDMCSettings *SDMCSettingsInfo `json:"SDMCSettings,omitnil,omitempty" name:"SDMCSettings"`
 
-	// The DRM type. Valid values: `FAIRPLAY`, `WIDEVINE`, `AES128`, `PLAYREADY`. For HLS, this can be `FAIRPLAY` or `AES128` or `PLAYREADY`. For DASH, valid values: `WIDEVINE` or `PLAYREADY`. 
+	// Optional Types:
+	// `FAIRPLAY`, `WIDEVINE`, `PLAYREADY`, `AES128`
+	// 
+	// HLS-TS supports `FAIRPLAY` and `AES128`.
+	// 
+	// HLS-FMP4 supports `FAIRPLAY`, `WIDEVINE`, `PLAYREADY`, `AES128`, and combinations of two or three from `FAIRPLAY`, `WIDEVINE`, and `PLAYREADY` (concatenated with commas, e.g., "FAIRPLAY,WIDEVINE,PLAYREADY").
+	// 
+	// DASH supports `WIDEVINE`, `PLAYREADY`, and combinations of `PLAYREADY` and `WIDEVINE` (concatenated with commas, e.g., "PLAYREADY,WIDEVINE").
 	DrmType *string `json:"DrmType,omitnil,omitempty" name:"DrmType"`
 }
 
@@ -2532,7 +2545,7 @@ type HlsRemuxSettingsInfo struct {
 	// Segment duration in ms. Value range: [1000,30000]. Default value: 4000. The value can only be a multiple of 1,000.
 	SegmentDuration *uint64 `json:"SegmentDuration,omitnil,omitempty" name:"SegmentDuration"`
 
-	// Number of segments. Value range: [1,30]. Default value: 5.
+	// Number of segments. Value range: [3,30]. Default value: 5.
 	SegmentNumber *uint64 `json:"SegmentNumber,omitnil,omitempty" name:"SegmentNumber"`
 
 	// Whether to enable PDT insertion. Valid values: CLOSE/OPEN. Default value: CLOSE.
@@ -2655,8 +2668,7 @@ type InputSettingInfo struct {
 	// Note: This field may return `null`, indicating that no valid value was found.
 	DelayTime *int64 `json:"DelayTime,omitnil,omitempty" name:"DelayTime"`
 
-	// The domain of an SRT_PUSH address. If this is a request parameter, you don’t need to specify it.
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// The domain name of the SRT_PUSH push address. No need to fill in the input parameter.
 	InputDomain *string `json:"InputDomain,omitnil,omitempty" name:"InputDomain"`
 
 	// The username, which is used for authentication.
@@ -2666,6 +2678,9 @@ type InputSettingInfo struct {
 	// The password, which is used for authentication.
 	// Note: This field may return `null`, indicating that no valid value was found.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// This parameter is valid when the input source is HLS_PULL and MP4_PULL. It indicates the type of file the source is. The optional values are: LIVE, VOD. Please note that if you do not enter this parameter, the system will take the default input value VOD.
+	ContentType *string `json:"ContentType,omitnil,omitempty" name:"ContentType"`
 }
 
 type InputStatistics struct {
@@ -2884,9 +2899,13 @@ type ModifyStreamLiveInputRequestParams struct {
 	// List of the IDs of the security groups to attach
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// Input settings
-	// For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+	// Input settings. 
+	// For the type:
+	// `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`,`RTSP_PULL`,`SRT_PULL` or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+	// For the type:
+	// `SRT_PUSH`, 0 or 2 inputs of the corresponding type can be configured.
 	// This parameter can be left empty for RTP_PUSH and UDP_PUSH inputs.
+	// 
 	// Note: If this parameter is not specified or empty, the original input settings will be used.
 	InputSettings []*InputSettingInfo `json:"InputSettings,omitnil,omitempty" name:"InputSettings"`
 }
@@ -2903,9 +2922,13 @@ type ModifyStreamLiveInputRequest struct {
 	// List of the IDs of the security groups to attach
 	SecurityGroupIds []*string `json:"SecurityGroupIds,omitnil,omitempty" name:"SecurityGroupIds"`
 
-	// Input settings
-	// For the type `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`, or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+	// Input settings. 
+	// For the type:
+	// `RTMP_PUSH`, `RTMP_PULL`, `HLS_PULL`,`RTSP_PULL`,`SRT_PULL` or `MP4_PULL`, 1 or 2 inputs of the corresponding type can be configured.
+	// For the type:
+	// `SRT_PUSH`, 0 or 2 inputs of the corresponding type can be configured.
 	// This parameter can be left empty for RTP_PUSH and UDP_PUSH inputs.
+	// 
 	// Note: If this parameter is not specified or empty, the original input settings will be used.
 	InputSettings []*InputSettingInfo `json:"InputSettings,omitnil,omitempty" name:"InputSettings"`
 }
@@ -3595,7 +3618,7 @@ type StreamLiveOutputGroupsInfo struct {
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Output protocol
-	// Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, `HLS_STREAM_PACKAGE`, `DASH_STREAM_PACKAGE`, `FRAME_CAPTURE`
+	// Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, `DASH_ARCHIVE`,`HLS_STREAM_PACKAGE`, `DASH_STREAM_PACKAGE`, `FRAME_CAPTURE`,`RTP`,`RTMP`.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Output information
@@ -3832,6 +3855,14 @@ type VideoCodecDetail struct {
 	LookAheadRateControl *string `json:"LookAheadRateControl,omitnil,omitempty" name:"LookAheadRateControl"`
 }
 
+type VideoEnhanceSetting struct {
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+
+	Strength *float64 `json:"Strength,omitnil,omitempty" name:"Strength"`
+}
+
 type VideoPipelineInputStatistics struct {
 	// Video FPS.
 	Fps *uint64 `json:"Fps,omitnil,omitempty" name:"Fps"`
@@ -3868,7 +3899,7 @@ type VideoTemplateInfo struct {
 	// Top speed codec compression ratio. Value range: [0,50]. The lower the compression ratio, the higher the image quality.
 	BitrateCompressionRatio *uint64 `json:"BitrateCompressionRatio,omitnil,omitempty" name:"BitrateCompressionRatio"`
 
-	// Bitrate control mode. Valid values: `CBR`, `ABR` (default)
+	// Bitrate control mode. Valid values: `CBR`, `ABR` (default), `VBR`.
 	RateControlMode *string `json:"RateControlMode,omitnil,omitempty" name:"RateControlMode"`
 
 	// Watermark ID
@@ -3898,4 +3929,10 @@ type VideoTemplateInfo struct {
 
 	// Video encoding configuration.
 	VideoCodecDetails *VideoCodecDetail `json:"VideoCodecDetails,omitnil,omitempty" name:"VideoCodecDetails"`
+
+
+	VideoEnhanceEnabled *uint64 `json:"VideoEnhanceEnabled,omitnil,omitempty" name:"VideoEnhanceEnabled"`
+
+
+	VideoEnhanceSettings []*VideoEnhanceSetting `json:"VideoEnhanceSettings,omitnil,omitempty" name:"VideoEnhanceSettings"`
 }

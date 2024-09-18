@@ -1,6 +1,6 @@
 package common
 
-import tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
+import tcerr "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
 
 var (
 	envNotSet        = tcerr.NewTencentCloudSDKError(creErr, "could not find environmental variable", "")

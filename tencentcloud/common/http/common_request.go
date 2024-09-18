@@ -2,8 +2,8 @@ package common
 
 import (
 	"fmt"
-	tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
-	"github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
+	tcerr "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
+	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/json"
 )
 
 const (

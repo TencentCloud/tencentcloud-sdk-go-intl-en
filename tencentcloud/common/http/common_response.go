@@ -1,6 +1,6 @@
 package common
 
-import "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
+import "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/json"
 
 type actionResult map[string]interface{}
 type CommonResponse struct {
