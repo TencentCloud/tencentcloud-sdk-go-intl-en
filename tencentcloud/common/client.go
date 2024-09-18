@@ -14,10 +14,10 @@ import (
 	"strings"
 	"time"
 
-	tcerr "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
-	tchttp "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/http"
-	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/json"
-	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/profile"
+	tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
+	tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+	"github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
+	"github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
 )
 
 const (

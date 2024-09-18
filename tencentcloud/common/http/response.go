@@ -4,7 +4,7 @@ import (
 	"bufio"
 	"bytes"
 	"fmt"
-	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/json"
+	"github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 	"io/ioutil"
 	"log"
 	"strconv"
@@ -12,7 +12,7 @@ import (
 	//"log"
 	"net/http"
 
-	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
+	"github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
 )
 
 type Response interface {

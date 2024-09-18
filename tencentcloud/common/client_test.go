@@ -6,9 +6,9 @@ import (
 	"net/http"
 	"testing"
 
-	tchttp "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/http"
-	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/profile"
-	"github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/regions"
+	tchttp "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/http"
+	"github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/profile"
+	"github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/regions"
 )
 
 type requestWithClientToken struct {

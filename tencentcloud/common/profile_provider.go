@@ -5,7 +5,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	tcerr "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
+	tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
 )
 
 const (

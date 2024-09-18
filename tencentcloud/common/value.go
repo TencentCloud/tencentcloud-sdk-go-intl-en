@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"strconv"
 
-	tcerr "github.com/tencentcloud/tencentcloud-sdk-go/tencentcloud/common/errors"
+	tcerr "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/errors"
 )
 
 type value struct {
