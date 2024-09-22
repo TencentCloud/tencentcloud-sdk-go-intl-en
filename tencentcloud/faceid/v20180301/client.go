@@ -464,6 +464,77 @@ func (c *Client) CreateUploadUrlWithContext(ctx context.Context, request *Create
     return
 }
 
+func NewDetectAIFakeFacesRequest() (request *DetectAIFakeFacesRequest) {
+    request = &DetectAIFakeFacesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("faceid", APIVersion, "DetectAIFakeFaces")
+    
+    
+    return
+}
+
+func NewDetectAIFakeFacesResponse() (response *DetectAIFakeFacesResponse) {
+    response = &DetectAIFakeFacesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DetectAIFakeFaces
+// Based on the multimodal AI large model algorithm, it provides anti-attack detection capabilities for facial images and videos. It can effectively identify highly simulated AIGC face-changing, high-definition remakes, batch black market attacks, watermarks and other attack traces, and enhance the anti-counterfeiting security capabilities of images and videos.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COVEREDFACE = "FailedOperation.CoveredFace"
+//  FAILEDOPERATION_DETECTENGINESYSTEMERROR = "FailedOperation.DetectEngineSystemError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_INCOMPLETEFACE = "FailedOperation.IncompleteFace"
+//  FAILEDOPERATION_POORIMAGEQUALITY = "FailedOperation.PoorImageQuality"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  FAILEDOPERATION_VIDEODECODEFAILED = "FailedOperation.VideoDecodeFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) DetectAIFakeFaces(request *DetectAIFakeFacesRequest) (response *DetectAIFakeFacesResponse, err error) {
+    return c.DetectAIFakeFacesWithContext(context.Background(), request)
+}
+
+// DetectAIFakeFaces
+// Based on the multimodal AI large model algorithm, it provides anti-attack detection capabilities for facial images and videos. It can effectively identify highly simulated AIGC face-changing, high-definition remakes, batch black market attacks, watermarks and other attack traces, and enhance the anti-counterfeiting security capabilities of images and videos.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_COVEREDFACE = "FailedOperation.CoveredFace"
+//  FAILEDOPERATION_DETECTENGINESYSTEMERROR = "FailedOperation.DetectEngineSystemError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_INCOMPLETEFACE = "FailedOperation.IncompleteFace"
+//  FAILEDOPERATION_POORIMAGEQUALITY = "FailedOperation.PoorImageQuality"
+//  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
+//  FAILEDOPERATION_VIDEODECODEFAILED = "FailedOperation.VideoDecodeFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_ARREARS = "UnauthorizedOperation.Arrears"
+//  UNAUTHORIZEDOPERATION_CHARGESTATUSEXCEPTION = "UnauthorizedOperation.ChargeStatusException"
+//  UNAUTHORIZEDOPERATION_NONACTIVATED = "UnauthorizedOperation.Nonactivated"
+func (c *Client) DetectAIFakeFacesWithContext(ctx context.Context, request *DetectAIFakeFacesRequest) (response *DetectAIFakeFacesResponse, err error) {
+    if request == nil {
+        request = NewDetectAIFakeFacesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DetectAIFakeFaces require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDetectAIFakeFacesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDetectReflectLivenessAndCompareRequest() (request *DetectReflectLivenessAndCompareRequest) {
     request = &DetectReflectLivenessAndCompareRequest{
         BaseRequest: &tchttp.BaseRequest{},

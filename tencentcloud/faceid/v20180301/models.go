@@ -592,6 +592,11 @@ func (r *ApplyWebVerificationTokenResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AttackRiskDetail struct {
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
 type CardInfo struct {
 	// Hong Kong ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -1057,6 +1062,90 @@ func (r *CreateUploadUrlResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DetectAIFakeFacesRequestParams struct {
+	// Enter the image or video with a face to be detected, in base64 encoding. Base64 value of the image: The overall image resolution is recommended to be 480x640, and the face size is 100X100 or larger; The image data size after Base64 encoding does not exceed 3M, and only supports jpg and png formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. Base64 value of the video: The size after Base64 encoding does not exceed 8M, and supports mp4, avi, and flv formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. The maximum supported video length is 20s, and the recommended length is 2 to 5s. The recommended video resolution is 480x640, and the frame rate is between 25fps and 30fps.
+	FaceInput *string `json:"FaceInput,omitnil,omitempty" name:"FaceInput"`
+
+	// The type of input is 1- The input type is a picture 2- The input type is a video Others - Return error code InvalidParameter
+	FaceInputType *int64 `json:"FaceInputType,omitnil,omitempty" name:"FaceInputType"`
+
+	// Whether the request information needs to be fully encrypted; Supported encryption algorithms: AES-256-CBC, SM4-GCM; Users with encryption requirements can use this parameter, for details, please click the link on the left.
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+
+	// Encrypted ciphertext; The data format before encryption is as follows:{"FaceInput":"AAAAA","FaceInputType":1}
+	EncryptedBody *string `json:"EncryptedBody,omitnil,omitempty" name:"EncryptedBody"`
+}
+
+type DetectAIFakeFacesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Enter the image or video with a face to be detected, in base64 encoding. Base64 value of the image: The overall image resolution is recommended to be 480x640, and the face size is 100X100 or larger; The image data size after Base64 encoding does not exceed 3M, and only supports jpg and png formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. Base64 value of the video: The size after Base64 encoding does not exceed 8M, and supports mp4, avi, and flv formats. Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. The maximum supported video length is 20s, and the recommended length is 2 to 5s. The recommended video resolution is 480x640, and the frame rate is between 25fps and 30fps.
+	FaceInput *string `json:"FaceInput,omitnil,omitempty" name:"FaceInput"`
+
+	// The type of input is 1- The input type is a picture 2- The input type is a video Others - Return error code InvalidParameter
+	FaceInputType *int64 `json:"FaceInputType,omitnil,omitempty" name:"FaceInputType"`
+
+	// Whether the request information needs to be fully encrypted; Supported encryption algorithms: AES-256-CBC, SM4-GCM; Users with encryption requirements can use this parameter, for details, please click the link on the left.
+	Encryption *Encryption `json:"Encryption,omitnil,omitempty" name:"Encryption"`
+
+	// Encrypted ciphertext; The data format before encryption is as follows:{"FaceInput":"AAAAA","FaceInputType":1}
+	EncryptedBody *string `json:"EncryptedBody,omitnil,omitempty" name:"EncryptedBody"`
+}
+
+func (r *DetectAIFakeFacesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetectAIFakeFacesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FaceInput")
+	delete(f, "FaceInputType")
+	delete(f, "Encryption")
+	delete(f, "EncryptedBody")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetectAIFakeFacesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DetectAIFakeFacesResponseParams struct {
+	// Whether the detected image is an attack: Low: No attack risk Mid: Moderately suspected attack High: Highly suspected attack
+	AttackRiskLevel *string `json:"AttackRiskLevel,omitnil,omitempty" name:"AttackRiskLevel"`
+
+	// A list of suspected attack traces detected. Note: When no attack traces are detected, an empty array is returned. This parameter is only used as a reference for result judgment. In actual applications, it is still recommended to use the result of AttackRiskLevel.
+	AttackRiskDetailList []*AttackRiskDetail `json:"AttackRiskDetailList,omitnil,omitempty" name:"AttackRiskDetailList"`
+
+	// Additional Information
+	ExtraInfo *ExtraInfo `json:"ExtraInfo,omitnil,omitempty" name:"ExtraInfo"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DetectAIFakeFacesResponse struct {
+	*tchttp.BaseResponse
+	Response *DetectAIFakeFacesResponseParams `json:"Response"`
+}
+
+func (r *DetectAIFakeFacesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetectAIFakeFacesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DetectReflectLivenessAndCompareRequestParams struct {
 	// URL of the liveness detection data package generated by the SDK
 	LiveDataUrl *string `json:"LiveDataUrl,omitnil,omitempty" name:"LiveDataUrl"`
@@ -1155,6 +1244,28 @@ type EditDetail struct {
 
 	// Value of the field after modification,the user's manually entered result
 	RevisedFieldValue *string `json:"RevisedFieldValue,omitnil,omitempty" name:"RevisedFieldValue"`
+}
+
+type Encryption struct {
+
+	EncryptList []*string `json:"EncryptList,omitnil,omitempty" name:"EncryptList"`
+
+
+	CiphertextBlob *string `json:"CiphertextBlob,omitnil,omitempty" name:"CiphertextBlob"`
+
+
+	Iv *string `json:"Iv,omitnil,omitempty" name:"Iv"`
+
+
+	Algorithm *string `json:"Algorithm,omitnil,omitempty" name:"Algorithm"`
+
+
+	TagList []*string `json:"TagList,omitnil,omitempty" name:"TagList"`
+}
+
+type ExtraInfo struct {
+
+	RetrievalLivenessExtraInfo []*RetrievalLivenessExtraInfo `json:"RetrievalLivenessExtraInfo,omitnil,omitempty" name:"RetrievalLivenessExtraInfo"`
 }
 
 type FileInfo struct {
@@ -2824,6 +2935,17 @@ type PhilippinesVoteID struct {
 	// Region
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PrecinctNo *string `json:"PrecinctNo,omitnil,omitempty" name:"PrecinctNo"`
+}
+
+type RetrievalLivenessExtraInfo struct {
+
+	HitGroup *string `json:"HitGroup,omitnil,omitempty" name:"HitGroup"`
+
+
+	SimilarityScore *float64 `json:"SimilarityScore,omitnil,omitempty" name:"SimilarityScore"`
+
+
+	HitTemplate *string `json:"HitTemplate,omitnil,omitempty" name:"HitTemplate"`
 }
 
 type SingaporeIDCard struct {
