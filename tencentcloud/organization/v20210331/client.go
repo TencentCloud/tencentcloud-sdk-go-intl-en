@@ -126,9 +126,11 @@ func NewAddOrganizationNodeResponse() (response *AddOrganizationNodeResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ORGANIZATIONNODENAMEUSED = "FailedOperation.OrganizationNodeNameUsed"
+//  FAILEDOPERATION_TAGRESOURCESERROR = "FailedOperation.TagResourcesError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ORGANIZATIONNODENOTEXIST = "InvalidParameter.OrganizationNodeNotExist"
+//  INVALIDPARAMETER_TAGERROR = "InvalidParameter.TagError"
 //  LIMITEXCEEDED_NODEDEPTHEXCEEDLIMIT = "LimitExceeded.NodeDepthExceedLimit"
 //  LIMITEXCEEDED_NODEEXCEEDLIMIT = "LimitExceeded.NodeExceedLimit"
 //  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
@@ -143,9 +145,11 @@ func (c *Client) AddOrganizationNode(request *AddOrganizationNodeRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ORGANIZATIONNODENAMEUSED = "FailedOperation.OrganizationNodeNameUsed"
+//  FAILEDOPERATION_TAGRESOURCESERROR = "FailedOperation.TagResourcesError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ORGANIZATIONNODENOTEXIST = "InvalidParameter.OrganizationNodeNotExist"
+//  INVALIDPARAMETER_TAGERROR = "InvalidParameter.TagError"
 //  LIMITEXCEEDED_NODEDEPTHEXCEEDLIMIT = "LimitExceeded.NodeDepthExceedLimit"
 //  LIMITEXCEEDED_NODEEXCEEDLIMIT = "LimitExceeded.NodeExceedLimit"
 //  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
@@ -640,9 +644,11 @@ func NewCreateOrganizationMemberResponse() (response *CreateOrganizationMemberRe
 //  FAILEDOPERATION_ORGANIZATIONPOLICYILLEGAL = "FailedOperation.OrganizationPolicyIllegal"
 //  FAILEDOPERATION_PARTNERMANAGEMENTERR = "FailedOperation.PartnerManagementErr"
 //  FAILEDOPERATION_PAYUINILLEGAL = "FailedOperation.PayUinIllegal"
+//  FAILEDOPERATION_TAGRESOURCESERROR = "FailedOperation.TagResourcesError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTEXIST = "InvalidParameter.OrganizationMemberNotExist"
+//  INVALIDPARAMETER_TAGERROR = "InvalidParameter.TagError"
 //  LIMITEXCEEDED_CREATEMEMBEROVERLIMIT = "LimitExceeded.CreateMemberOverLimit"
 //  LIMITEXCEEDED_ORGANIZATIONMEMBEROVERLIMIT = "LimitExceeded.OrganizationMemberOverLimit"
 //  RESOURCENOTFOUND_ORGANIZATIONAUTHRELATIONNOTEXIST = "ResourceNotFound.OrganizationAuthRelationNotExist"
@@ -690,9 +696,11 @@ func (c *Client) CreateOrganizationMember(request *CreateOrganizationMemberReque
 //  FAILEDOPERATION_ORGANIZATIONPOLICYILLEGAL = "FailedOperation.OrganizationPolicyIllegal"
 //  FAILEDOPERATION_PARTNERMANAGEMENTERR = "FailedOperation.PartnerManagementErr"
 //  FAILEDOPERATION_PAYUINILLEGAL = "FailedOperation.PayUinIllegal"
+//  FAILEDOPERATION_TAGRESOURCESERROR = "FailedOperation.TagResourcesError"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_ORGANIZATIONMEMBERNOTEXIST = "InvalidParameter.OrganizationMemberNotExist"
+//  INVALIDPARAMETER_TAGERROR = "InvalidParameter.TagError"
 //  LIMITEXCEEDED_CREATEMEMBEROVERLIMIT = "LimitExceeded.CreateMemberOverLimit"
 //  LIMITEXCEEDED_ORGANIZATIONMEMBEROVERLIMIT = "LimitExceeded.OrganizationMemberOverLimit"
 //  RESOURCENOTFOUND_ORGANIZATIONAUTHRELATIONNOTEXIST = "ResourceNotFound.OrganizationAuthRelationNotExist"
@@ -2439,6 +2447,153 @@ func (c *Client) GetZoneStatisticsWithContext(ctx context.Context, request *GetZ
     request.SetContext(ctx)
     
     response = NewGetZoneStatisticsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInviteOrganizationMemberRequest() (request *InviteOrganizationMemberRequest) {
+    request = &InviteOrganizationMemberRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "InviteOrganizationMember")
+    
+    
+    return
+}
+
+func NewInviteOrganizationMemberResponse() (response *InviteOrganizationMemberResponse) {
+    response = &InviteOrganizationMemberResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InviteOrganizationMember
+// This API is used to invite a member.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLYEXIST = "FailedOperation.ApplyExist"
+//  FAILEDOPERATION_AUTHINFOEMPTY = "FailedOperation.AuthInfoEmpty"
+//  FAILEDOPERATION_AUTHINFONOTSAME = "FailedOperation.AuthInfoNotSame"
+//  FAILEDOPERATION_AUTHNOTENTERPRISE = "FailedOperation.AuthNotEnterprise"
+//  FAILEDOPERATION_CREATEBILLINGPERMISSIONERR = "FailedOperation.CreateBillingPermissionErr"
+//  FAILEDOPERATION_EXISTOTHERORGANIZATIONMEMBERSHARED = "FailedOperation.ExistOtherOrganizationMemberShared"
+//  FAILEDOPERATION_GETACCOUNTREGION = "FailedOperation.GetAccountRegion"
+//  FAILEDOPERATION_IMPORTFILEILLEGAL = "FailedOperation.ImportFileIllegal"
+//  FAILEDOPERATION_INVITATIONEXIST = "FailedOperation.InvitationExist"
+//  FAILEDOPERATION_MEMBEREXISTINOTHERORGANIZATION = "FailedOperation.MemberExistInOtherOrganization"
+//  FAILEDOPERATION_MEMBERNAMEUSED = "FailedOperation.MemberNameUsed"
+//  FAILEDOPERATION_NOTSAMEREGION = "FailedOperation.NotSameRegion"
+//  FAILEDOPERATION_OPERATEBILLINGPERMISSIONERR = "FailedOperation.OperateBillingPermissionErr"
+//  FAILEDOPERATION_ORGANIZATIONAUTHRELATIONEXIST = "FailedOperation.OrganizationAuthRelationExist"
+//  FAILEDOPERATION_ORGANIZATIONMEMBEREXIST = "FailedOperation.OrganizationMemberExist"
+//  FAILEDOPERATION_ORGANIZATIONMEMBERNAMEUSED = "FailedOperation.OrganizationMemberNameUsed"
+//  FAILEDOPERATION_ORGANIZATIONNODENOTEXIST = "FailedOperation.OrganizationNodeNotExist"
+//  FAILEDOPERATION_ORGANIZATIONPERMISSIONILLEGAL = "FailedOperation.OrganizationPermissionIllegal"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYILLEGAL = "FailedOperation.OrganizationPolicyIllegal"
+//  FAILEDOPERATION_PAYUINILLEGAL = "FailedOperation.PayUinIllegal"
+//  FAILEDOPERATION_RESENTINVITATION = "FailedOperation.ReSentInvitation"
+//  FAILEDOPERATION_TAGRESOURCESERROR = "FailedOperation.TagResourcesError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TAGERROR = "InvalidParameter.TagError"
+//  LIMITEXCEEDED_INVITATIONOVERLIMIT = "LimitExceeded.InvitationOverLimit"
+//  LIMITEXCEEDED_ORGANIZATIONMEMBEROVERLIMIT = "LimitExceeded.OrganizationMemberOverLimit"
+//  RESOURCENOTFOUND_ORGANIZATIONNODENOTEXIST = "ResourceNotFound.OrganizationNodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_ABNORMALFINANCIALSTATUSOFADMIN = "UnsupportedOperation.AbnormalFinancialStatusOfAdmin"
+//  UNSUPPORTEDOPERATION_ABNORMALFINANCIALSTATUSOFMEMBER = "UnsupportedOperation.AbnormalFinancialStatusOfMember"
+//  UNSUPPORTEDOPERATION_ADDDELEGATEPAYERNOTALLOW = "UnsupportedOperation.AddDelegatePayerNotAllow"
+//  UNSUPPORTEDOPERATION_ADDDISCOUNTINHERITNOTALLOW = "UnsupportedOperation.AddDiscountInheritNotAllow"
+//  UNSUPPORTEDOPERATION_AGENTNOTSAME = "UnsupportedOperation.AgentNotSame"
+//  UNSUPPORTEDOPERATION_EXISTEDAGENT = "UnsupportedOperation.ExistedAgent"
+//  UNSUPPORTEDOPERATION_EXISTEDCLIENT = "UnsupportedOperation.ExistedClient"
+//  UNSUPPORTEDOPERATION_INCONSISTENTUSERTYPES = "UnsupportedOperation.InconsistentUserTypes"
+//  UNSUPPORTEDOPERATION_MANAGEMENTSYSTEMERROR = "UnsupportedOperation.ManagementSystemError"
+//  UNSUPPORTEDOPERATION_MEMBERACCOUNTARREARS = "UnsupportedOperation.MemberAccountArrears"
+//  UNSUPPORTEDOPERATION_MEMBERDISCOUNTINHERITEXISTED = "UnsupportedOperation.MemberDiscountInheritExisted"
+//  UNSUPPORTEDOPERATION_MEMBEREXISTACCOUNTLEVELDISCOUNTINHERIT = "UnsupportedOperation.MemberExistAccountLevelDiscountInherit"
+//  UNSUPPORTEDOPERATION_MEMBERHASVOUCHER = "UnsupportedOperation.MemberHasVoucher"
+//  UNSUPPORTEDOPERATION_MEMBERISAGENT = "UnsupportedOperation.MemberIsAgent"
+//  UNSUPPORTEDOPERATION_MEMBERISNOTCLIENT = "UnsupportedOperation.MemberIsNotClient"
+//  UNSUPPORTEDOPERATION_ORDERINPROGRESSEXISTED = "UnsupportedOperation.OrderInProgressExisted"
+//  UNSUPPORTEDOPERATION_OWNERDISCOUNTINHERITEXISTED = "UnsupportedOperation.OwnerDiscountInheritExisted"
+//  UNSUPPORTEDOPERATION_PAYERARREARSANDNOCREDITACCOUNT = "UnsupportedOperation.PayerArrearsAndNoCreditAccount"
+//  UNSUPPORTEDOPERATION_PAYEREXISTACCOUNTLEVELDISCOUNTINHERIT = "UnsupportedOperation.PayerExistAccountLevelDiscountInherit"
+//  UNSUPPORTEDOPERATION_SECONDARYDISTRIBUTORSUBCLIENTEXISTED = "UnsupportedOperation.SecondaryDistributorSubClientExisted"
+func (c *Client) InviteOrganizationMember(request *InviteOrganizationMemberRequest) (response *InviteOrganizationMemberResponse, err error) {
+    return c.InviteOrganizationMemberWithContext(context.Background(), request)
+}
+
+// InviteOrganizationMember
+// This API is used to invite a member.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_APPLYEXIST = "FailedOperation.ApplyExist"
+//  FAILEDOPERATION_AUTHINFOEMPTY = "FailedOperation.AuthInfoEmpty"
+//  FAILEDOPERATION_AUTHINFONOTSAME = "FailedOperation.AuthInfoNotSame"
+//  FAILEDOPERATION_AUTHNOTENTERPRISE = "FailedOperation.AuthNotEnterprise"
+//  FAILEDOPERATION_CREATEBILLINGPERMISSIONERR = "FailedOperation.CreateBillingPermissionErr"
+//  FAILEDOPERATION_EXISTOTHERORGANIZATIONMEMBERSHARED = "FailedOperation.ExistOtherOrganizationMemberShared"
+//  FAILEDOPERATION_GETACCOUNTREGION = "FailedOperation.GetAccountRegion"
+//  FAILEDOPERATION_IMPORTFILEILLEGAL = "FailedOperation.ImportFileIllegal"
+//  FAILEDOPERATION_INVITATIONEXIST = "FailedOperation.InvitationExist"
+//  FAILEDOPERATION_MEMBEREXISTINOTHERORGANIZATION = "FailedOperation.MemberExistInOtherOrganization"
+//  FAILEDOPERATION_MEMBERNAMEUSED = "FailedOperation.MemberNameUsed"
+//  FAILEDOPERATION_NOTSAMEREGION = "FailedOperation.NotSameRegion"
+//  FAILEDOPERATION_OPERATEBILLINGPERMISSIONERR = "FailedOperation.OperateBillingPermissionErr"
+//  FAILEDOPERATION_ORGANIZATIONAUTHRELATIONEXIST = "FailedOperation.OrganizationAuthRelationExist"
+//  FAILEDOPERATION_ORGANIZATIONMEMBEREXIST = "FailedOperation.OrganizationMemberExist"
+//  FAILEDOPERATION_ORGANIZATIONMEMBERNAMEUSED = "FailedOperation.OrganizationMemberNameUsed"
+//  FAILEDOPERATION_ORGANIZATIONNODENOTEXIST = "FailedOperation.OrganizationNodeNotExist"
+//  FAILEDOPERATION_ORGANIZATIONPERMISSIONILLEGAL = "FailedOperation.OrganizationPermissionIllegal"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYILLEGAL = "FailedOperation.OrganizationPolicyIllegal"
+//  FAILEDOPERATION_PAYUINILLEGAL = "FailedOperation.PayUinIllegal"
+//  FAILEDOPERATION_RESENTINVITATION = "FailedOperation.ReSentInvitation"
+//  FAILEDOPERATION_TAGRESOURCESERROR = "FailedOperation.TagResourcesError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_TAGERROR = "InvalidParameter.TagError"
+//  LIMITEXCEEDED_INVITATIONOVERLIMIT = "LimitExceeded.InvitationOverLimit"
+//  LIMITEXCEEDED_ORGANIZATIONMEMBEROVERLIMIT = "LimitExceeded.OrganizationMemberOverLimit"
+//  RESOURCENOTFOUND_ORGANIZATIONNODENOTEXIST = "ResourceNotFound.OrganizationNodeNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_ABNORMALFINANCIALSTATUSOFADMIN = "UnsupportedOperation.AbnormalFinancialStatusOfAdmin"
+//  UNSUPPORTEDOPERATION_ABNORMALFINANCIALSTATUSOFMEMBER = "UnsupportedOperation.AbnormalFinancialStatusOfMember"
+//  UNSUPPORTEDOPERATION_ADDDELEGATEPAYERNOTALLOW = "UnsupportedOperation.AddDelegatePayerNotAllow"
+//  UNSUPPORTEDOPERATION_ADDDISCOUNTINHERITNOTALLOW = "UnsupportedOperation.AddDiscountInheritNotAllow"
+//  UNSUPPORTEDOPERATION_AGENTNOTSAME = "UnsupportedOperation.AgentNotSame"
+//  UNSUPPORTEDOPERATION_EXISTEDAGENT = "UnsupportedOperation.ExistedAgent"
+//  UNSUPPORTEDOPERATION_EXISTEDCLIENT = "UnsupportedOperation.ExistedClient"
+//  UNSUPPORTEDOPERATION_INCONSISTENTUSERTYPES = "UnsupportedOperation.InconsistentUserTypes"
+//  UNSUPPORTEDOPERATION_MANAGEMENTSYSTEMERROR = "UnsupportedOperation.ManagementSystemError"
+//  UNSUPPORTEDOPERATION_MEMBERACCOUNTARREARS = "UnsupportedOperation.MemberAccountArrears"
+//  UNSUPPORTEDOPERATION_MEMBERDISCOUNTINHERITEXISTED = "UnsupportedOperation.MemberDiscountInheritExisted"
+//  UNSUPPORTEDOPERATION_MEMBEREXISTACCOUNTLEVELDISCOUNTINHERIT = "UnsupportedOperation.MemberExistAccountLevelDiscountInherit"
+//  UNSUPPORTEDOPERATION_MEMBERHASVOUCHER = "UnsupportedOperation.MemberHasVoucher"
+//  UNSUPPORTEDOPERATION_MEMBERISAGENT = "UnsupportedOperation.MemberIsAgent"
+//  UNSUPPORTEDOPERATION_MEMBERISNOTCLIENT = "UnsupportedOperation.MemberIsNotClient"
+//  UNSUPPORTEDOPERATION_ORDERINPROGRESSEXISTED = "UnsupportedOperation.OrderInProgressExisted"
+//  UNSUPPORTEDOPERATION_OWNERDISCOUNTINHERITEXISTED = "UnsupportedOperation.OwnerDiscountInheritExisted"
+//  UNSUPPORTEDOPERATION_PAYERARREARSANDNOCREDITACCOUNT = "UnsupportedOperation.PayerArrearsAndNoCreditAccount"
+//  UNSUPPORTEDOPERATION_PAYEREXISTACCOUNTLEVELDISCOUNTINHERIT = "UnsupportedOperation.PayerExistAccountLevelDiscountInherit"
+//  UNSUPPORTEDOPERATION_SECONDARYDISTRIBUTORSUBCLIENTEXISTED = "UnsupportedOperation.SecondaryDistributorSubClientExisted"
+func (c *Client) InviteOrganizationMemberWithContext(ctx context.Context, request *InviteOrganizationMemberRequest) (response *InviteOrganizationMemberResponse, err error) {
+    if request == nil {
+        request = NewInviteOrganizationMemberRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InviteOrganizationMember require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInviteOrganizationMemberResponse()
     err = c.Send(request, response)
     return
 }

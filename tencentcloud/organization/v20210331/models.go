@@ -94,6 +94,9 @@ type AddOrganizationNodeRequestParams struct {
 
 	// Remarks.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Department tag list, with a maximum of 10.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type AddOrganizationNodeRequest struct {
@@ -107,6 +110,9 @@ type AddOrganizationNodeRequest struct {
 
 	// Remarks.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Department tag list, with a maximum of 10.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *AddOrganizationNodeRequest) ToJsonString() string {
@@ -124,6 +130,7 @@ func (r *AddOrganizationNodeRequest) FromJsonString(s string) error {
 	delete(f, "ParentNodeId")
 	delete(f, "Name")
 	delete(f, "Remark")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddOrganizationNodeRequest has unknown keys!", "")
 	}
@@ -310,6 +317,17 @@ func (r *AddUserToGroupResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *AddUserToGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type AuthRelationFile struct {
+	// File name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// File path.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
 // Predefined struct for user
@@ -765,6 +783,9 @@ type CreateOrganizationMemberRequestParams struct {
 
 	// Verified entity relationship ID, which is required during creating members for different entities.
 	AuthRelationId *int64 `json:"AuthRelationId,omitnil,omitempty" name:"AuthRelationId"`
+
+	// Member tag list, with a maximum of 10.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type CreateOrganizationMemberRequest struct {
@@ -799,6 +820,9 @@ type CreateOrganizationMemberRequest struct {
 
 	// Verified entity relationship ID, which is required during creating members for different entities.
 	AuthRelationId *int64 `json:"AuthRelationId,omitnil,omitempty" name:"AuthRelationId"`
+
+	// Member tag list, with a maximum of 10.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *CreateOrganizationMemberRequest) ToJsonString() string {
@@ -823,6 +847,7 @@ func (r *CreateOrganizationMemberRequest) FromJsonString(s string) error {
 	delete(f, "PayUin")
 	delete(f, "IdentityRoleID")
 	delete(f, "AuthRelationId")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateOrganizationMemberRequest has unknown keys!", "")
 	}
@@ -2026,6 +2051,9 @@ type DescribeOrganizationMembersRequestParams struct {
 
 	// Abbreviation of the trusted service, which is required during querying the trusted service admin.
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// Member tag search list, with a maximum of 10.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type DescribeOrganizationMembersRequest struct {
@@ -2048,6 +2076,9 @@ type DescribeOrganizationMembersRequest struct {
 
 	// Abbreviation of the trusted service, which is required during querying the trusted service admin.
 	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// Member tag search list, with a maximum of 10.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *DescribeOrganizationMembersRequest) ToJsonString() string {
@@ -2068,6 +2099,7 @@ func (r *DescribeOrganizationMembersRequest) FromJsonString(s string) error {
 	delete(f, "SearchKey")
 	delete(f, "AuthName")
 	delete(f, "Product")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOrganizationMembersRequest has unknown keys!", "")
 	}
@@ -2109,6 +2141,9 @@ type DescribeOrganizationNodesRequestParams struct {
 
 	// Offset. Its value must be an integer multiple of the limit. Default value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Department tag search list, with a maximum of 10.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type DescribeOrganizationNodesRequest struct {
@@ -2119,6 +2154,9 @@ type DescribeOrganizationNodesRequest struct {
 
 	// Offset. Its value must be an integer multiple of the limit. Default value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Department tag search list, with a maximum of 10.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *DescribeOrganizationNodesRequest) ToJsonString() string {
@@ -2135,6 +2173,7 @@ func (r *DescribeOrganizationNodesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Limit")
 	delete(f, "Offset")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOrganizationNodesRequest has unknown keys!", "")
 	}
@@ -2995,6 +3034,130 @@ type IdentityPolicy struct {
 	// Custom policy content, which follows the CAM policy syntax. It is valid and required when PolicyType is a custom policy.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PolicyDocument *string `json:"PolicyDocument,omitnil,omitempty" name:"PolicyDocument"`
+}
+
+// Predefined struct for user
+type InviteOrganizationMemberRequestParams struct {
+	// UIN of an invited account.
+	MemberUin *int64 `json:"MemberUin,omitnil,omitempty" name:"MemberUin"`
+
+	// Member name, which contains up to 25 characters, including English letters, digits, and symbols `+@&._[]-:,`.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Relationship policy. Valid value: `Financial`.
+	PolicyType *string `json:"PolicyType,omitnil,omitempty" name:"PolicyType"`
+
+	// List of member financial permission IDs. Valid values: 1: View bills. 2: View balance. 3: Transfer funds. 4: Consolidate bills. 5: Issue invoice. 6: Inherit discounts. 7: Pay on behalf. 1 and 2 are required by default.
+	PermissionIds []*uint64 `json:"PermissionIds,omitnil,omitempty" name:"PermissionIds"`
+
+	// Node ID of the member's department, which can be obtained through [DescribeOrganizationNodes](https://intl.cloud.tencent.com/document/product/850/82926?from_cn_redirect=1).
+	NodeId *int64 `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+
+	// Remarks.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Whether to allow a member to exit. Valid values: Allow, Denied.
+	IsAllowQuit *string `json:"IsAllowQuit,omitnil,omitempty" name:"IsAllowQuit"`
+
+	// Payer UIN, which is required when pay-on-behalf mode is used.
+	PayUin *string `json:"PayUin,omitnil,omitempty" name:"PayUin"`
+
+	// Name of a mutual trust real-name entity.
+	RelationAuthName *string `json:"RelationAuthName,omitnil,omitempty" name:"RelationAuthName"`
+
+	// List of proof files of a mutual trust entity.
+	AuthFile []*AuthRelationFile `json:"AuthFile,omitnil,omitempty" name:"AuthFile"`
+
+	// Member tag list, with a maximum of 10.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+type InviteOrganizationMemberRequest struct {
+	*tchttp.BaseRequest
+	
+	// UIN of an invited account.
+	MemberUin *int64 `json:"MemberUin,omitnil,omitempty" name:"MemberUin"`
+
+	// Member name, which contains up to 25 characters, including English letters, digits, and symbols `+@&._[]-:,`.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Relationship policy. Valid value: `Financial`.
+	PolicyType *string `json:"PolicyType,omitnil,omitempty" name:"PolicyType"`
+
+	// List of member financial permission IDs. Valid values: 1: View bills. 2: View balance. 3: Transfer funds. 4: Consolidate bills. 5: Issue invoice. 6: Inherit discounts. 7: Pay on behalf. 1 and 2 are required by default.
+	PermissionIds []*uint64 `json:"PermissionIds,omitnil,omitempty" name:"PermissionIds"`
+
+	// Node ID of the member's department, which can be obtained through [DescribeOrganizationNodes](https://intl.cloud.tencent.com/document/product/850/82926?from_cn_redirect=1).
+	NodeId *int64 `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+
+	// Remarks.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Whether to allow a member to exit. Valid values: Allow, Denied.
+	IsAllowQuit *string `json:"IsAllowQuit,omitnil,omitempty" name:"IsAllowQuit"`
+
+	// Payer UIN, which is required when pay-on-behalf mode is used.
+	PayUin *string `json:"PayUin,omitnil,omitempty" name:"PayUin"`
+
+	// Name of a mutual trust real-name entity.
+	RelationAuthName *string `json:"RelationAuthName,omitnil,omitempty" name:"RelationAuthName"`
+
+	// List of proof files of a mutual trust entity.
+	AuthFile []*AuthRelationFile `json:"AuthFile,omitnil,omitempty" name:"AuthFile"`
+
+	// Member tag list, with a maximum of 10.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+func (r *InviteOrganizationMemberRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InviteOrganizationMemberRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberUin")
+	delete(f, "Name")
+	delete(f, "PolicyType")
+	delete(f, "PermissionIds")
+	delete(f, "NodeId")
+	delete(f, "Remark")
+	delete(f, "IsAllowQuit")
+	delete(f, "PayUin")
+	delete(f, "RelationAuthName")
+	delete(f, "AuthFile")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InviteOrganizationMemberRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InviteOrganizationMemberResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type InviteOrganizationMemberResponse struct {
+	*tchttp.BaseResponse
+	Response *InviteOrganizationMemberResponseParams `json:"Response"`
+}
+
+func (r *InviteOrganizationMemberResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InviteOrganizationMemberResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type JoinedGroups struct {
@@ -4669,6 +4832,10 @@ type OrgMember struct {
 	// Member permission status. Valid values: `Confirmed`, `UnConfirmed`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PermissionStatus *string `json:"PermissionStatus,omitnil,omitempty" name:"PermissionStatus"`
+
+	// Member tag list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type OrgMemberAuthAccount struct {
@@ -4809,6 +4976,10 @@ type OrgNode struct {
 	// Update time
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Member tag list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type OrgPermission struct {
@@ -5517,6 +5688,18 @@ func (r *SetExternalSAMLIdentityProviderResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *SetExternalSAMLIdentityProviderResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type Tag struct {
+	// Tag key
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagKey *string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
+
+	// Tag value
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TagValue *string `json:"TagValue,omitnil,omitempty" name:"TagValue"`
 }
 
 type TaskInfo struct {
