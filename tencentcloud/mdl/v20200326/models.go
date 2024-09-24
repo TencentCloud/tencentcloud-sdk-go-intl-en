@@ -48,7 +48,7 @@ type AVTemplate struct {
 	// Whether audio is needed. `0`: not needed; `1`: needed
 	NeedAudio *int64 `json:"NeedAudio,omitnil,omitempty" name:"NeedAudio"`
 
-	// Audio codec. Valid value: `AAC` (default)
+	// Audio encoding format, only `AAC` and `PASSTHROUGH` are available, with `AAC` as the default.
 	Acodec *string `json:"Acodec,omitnil,omitempty" name:"Acodec"`
 
 	// Audio bitrate. If this parameter is left empty, the original bitrate will be used.
@@ -235,7 +235,7 @@ type AudioTemplateInfo struct {
 	// Audio transcoding template name, which can contain 1-20 letters and digits.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Audio codec. Valid value: AAC. Default value: AAC.
+	// Audio encoding format, only `AAC` and `PASSTHROUGH` are available, with `AAC` as the default.
 	Acodec *string `json:"Acodec,omitnil,omitempty" name:"Acodec"`
 
 	// Audio bitrate. If this parameter is left empty, the original value will be used.
@@ -259,7 +259,7 @@ type AudioTrackInfo struct {
 	// User input is limited to letters and numbers, the length should not exceed 20, and should not be repeated in the same channel.
 	TrackName *string `json:"TrackName,omitnil,omitempty" name:"TrackName"`
 
-	// Only AAC is supported.
+	// Audio encoding format, only `AAC` and `PASSTHROUGH` are available, with `AAC` as the default.
 	AudioCodec *string `json:"AudioCodec,omitnil,omitempty" name:"AudioCodec"`
 
 	// Audio bitrate.

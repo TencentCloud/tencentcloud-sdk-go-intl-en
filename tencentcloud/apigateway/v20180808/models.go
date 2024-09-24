@@ -606,7 +606,7 @@ type AttachPluginRequestParams struct {
 	// API environment.
 	EnvironmentName *string `json:"EnvironmentName,omitnil,omitempty" name:"EnvironmentName"`
 
-	// List of APIs bound with the plugin.
+	// List of APIs bound with the plugin
 	ApiIds []*string `json:"ApiIds,omitnil,omitempty" name:"ApiIds"`
 }
 
@@ -622,7 +622,7 @@ type AttachPluginRequest struct {
 	// API environment.
 	EnvironmentName *string `json:"EnvironmentName,omitnil,omitempty" name:"EnvironmentName"`
 
-	// List of APIs bound with the plugin.
+	// List of APIs bound with the plugin
 	ApiIds []*string `json:"ApiIds,omitnil,omitempty" name:"ApiIds"`
 }
 
