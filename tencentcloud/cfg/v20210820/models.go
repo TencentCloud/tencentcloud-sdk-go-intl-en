@@ -194,7 +194,7 @@ type CreateTaskFromActionRequestParams struct {
 	// Action ID, which can be obtained by using the action list API DescribeActionLibraryList.
 	TaskActionId *uint64 `json:"TaskActionId,omitnil,omitempty" name:"TaskActionId"`
 
-	// ID of the instance participating in the experiment
+	// ID of the instance participating in the experiment.
 	TaskInstances []*string `json:"TaskInstances,omitnil,omitempty" name:"TaskInstances"`
 
 	// Experiment name. If this parameter is left blank, the action name is used by default.
@@ -219,7 +219,7 @@ type CreateTaskFromActionRequest struct {
 	// Action ID, which can be obtained by using the action list API DescribeActionLibraryList.
 	TaskActionId *uint64 `json:"TaskActionId,omitnil,omitempty" name:"TaskActionId"`
 
-	// ID of the instance participating in the experiment
+	// ID of the instance participating in the experiment.
 	TaskInstances []*string `json:"TaskInstances,omitnil,omitempty" name:"TaskInstances"`
 
 	// Experiment name. If this parameter is left blank, the action name is used by default.
