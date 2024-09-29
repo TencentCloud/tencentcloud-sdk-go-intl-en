@@ -1012,7 +1012,9 @@ type CreateRoomRequestParams struct {
 	// 	Resolution. Valid values: 1: SD; 2: HD; 3: FHD
 	Resolution *uint64 `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 
-	// Maximum number of mic-on users (excluding teachers). Value range: [0, 16]
+	// Maximum number of mic-on users (excluding teachers). Value range: [0, 16]. This value affects billing, please set it according to the actual business situation. For billing rules, see "Billing Overview" under "Purchase Guide". Example:
+	// 1: Billing based on the 1v1 rule;
+	// 10: Billing based on the 1v7-12 rule.
 	MaxMicNumber *uint64 `json:"MaxMicNumber,omitnil,omitempty" name:"MaxMicNumber"`
 
 	// The room subtype. Valid values: videodoc: Document + Video; video: Video only.
@@ -1087,6 +1089,9 @@ type CreateRoomRequestParams struct {
 	//
 	// Deprecated: RecordLang is deprecated.
 	RecordLang *string `json:"RecordLang,omitnil,omitempty" name:"RecordLang"`
+
+	// Recording type. 0: Records only mixed streams (default); 1: Records mixed streams and single streams. In this mode, in addition to the mixed streams, the audio and video streams of the teacher and students on stage are recorded separately. Each recording incurs corresponding recording fees. Example: 0.
+	RecordStream *uint64 `json:"RecordStream,omitnil,omitempty" name:"RecordStream"`
 }
 
 type CreateRoomRequest struct {
@@ -1107,7 +1112,9 @@ type CreateRoomRequest struct {
 	// 	Resolution. Valid values: 1: SD; 2: HD; 3: FHD
 	Resolution *uint64 `json:"Resolution,omitnil,omitempty" name:"Resolution"`
 
-	// Maximum number of mic-on users (excluding teachers). Value range: [0, 16]
+	// Maximum number of mic-on users (excluding teachers). Value range: [0, 16]. This value affects billing, please set it according to the actual business situation. For billing rules, see "Billing Overview" under "Purchase Guide". Example:
+	// 1: Billing based on the 1v1 rule;
+	// 10: Billing based on the 1v7-12 rule.
 	MaxMicNumber *uint64 `json:"MaxMicNumber,omitnil,omitempty" name:"MaxMicNumber"`
 
 	// The room subtype. Valid values: videodoc: Document + Video; video: Video only.
@@ -1180,6 +1187,9 @@ type CreateRoomRequest struct {
 
 	// Record customized language, only when recordlayout=9, this parameter is valid.
 	RecordLang *string `json:"RecordLang,omitnil,omitempty" name:"RecordLang"`
+
+	// Recording type. 0: Records only mixed streams (default); 1: Records mixed streams and single streams. In this mode, in addition to the mixed streams, the audio and video streams of the teacher and students on stage are recorded separately. Each recording incurs corresponding recording fees. Example: 0.
+	RecordStream *uint64 `json:"RecordStream,omitnil,omitempty" name:"RecordStream"`
 }
 
 func (r *CreateRoomRequest) ToJsonString() string {
@@ -1223,6 +1233,7 @@ func (r *CreateRoomRequest) FromJsonString(s string) error {
 	delete(f, "RecordBackground")
 	delete(f, "RecordScene")
 	delete(f, "RecordLang")
+	delete(f, "RecordStream")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRoomRequest has unknown keys!", "")
 	}

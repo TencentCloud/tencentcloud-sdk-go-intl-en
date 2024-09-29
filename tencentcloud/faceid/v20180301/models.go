@@ -288,6 +288,8 @@ type ApplySdkVerificationTokenRequestParams struct {
 	// 17.ThailandDrivingLicense: Thailand Driving License
 	// 18.SingaporeDrivingLicense: Singapore Driving License
 	// 19.JapanDrivingLicense: Japan Driving License
+	// 20.TaiWanIDCard:Taiwan ID Card
+	// 21.HMTPermit: exit/entry permit (card) for traveling to and from Hong Kong, Macao, or Taiwan
 	IdCardType *string `json:"IdCardType,omitnil,omitempty" name:"IdCardType"`
 
 	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
@@ -347,6 +349,8 @@ type ApplySdkVerificationTokenRequest struct {
 	// 17.ThailandDrivingLicense: Thailand Driving License
 	// 18.SingaporeDrivingLicense: Singapore Driving License
 	// 19.JapanDrivingLicense: Japan Driving License
+	// 20.TaiWanIDCard:Taiwan ID Card
+	// 21.HMTPermit: exit/entry permit (card) for traveling to and from Hong Kong, Macao, or Taiwan
 	IdCardType *string `json:"IdCardType,omitnil,omitempty" name:"IdCardType"`
 
 	// The Base64-encoded value of the photo to compare, which is required only when `CheckMode` is set to `2`.
@@ -2054,6 +2058,32 @@ type HKIDCard struct {
 	CurrentIssueDate *string `json:"CurrentIssueDate,omitnil,omitempty" name:"CurrentIssueDate"`
 }
 
+type HMTPermit struct {
+	// Name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// English name
+	EnglishName *string `json:"EnglishName,omitnil,omitempty" name:"EnglishName"`
+
+	// License number
+	Number *string `json:"Number,omitnil,omitempty" name:"Number"`
+
+	// Gender
+	Sex *string `json:"Sex,omitnil,omitempty" name:"Sex"`
+
+	// Valid date
+	ValidDate *string `json:"ValidDate,omitnil,omitempty" name:"ValidDate"`
+
+	// Issued authority
+	IssueAuthority *string `json:"IssueAuthority,omitnil,omitempty" name:"IssueAuthority"`
+
+	// Issued address
+	IssueAddress *string `json:"IssueAddress,omitnil,omitempty" name:"IssueAddress"`
+
+	// Birthday
+	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
+}
+
 type IndonesiaDrivingLicense struct {
 	// Last name
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -2560,6 +2590,10 @@ type NormalCardInfo struct {
 	// Taiwan ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TaiWanIDCard *TaiWanIDCard `json:"TaiWanIDCard,omitnil,omitempty" name:"TaiWanIDCard"`
+
+	// exit/entry permit (card) for traveling to and from Hong Kong, Macao, or Taiwan.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HMTPermitCard *HMTPermit `json:"HMTPermitCard,omitnil,omitempty" name:"HMTPermitCard"`
 }
 
 type NormalHKIDCard struct {

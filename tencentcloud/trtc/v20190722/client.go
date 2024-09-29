@@ -287,7 +287,7 @@ func NewDescribeCallDetailInfoResponse() (response *DescribeCallDetailInfoRespon
 //
 // 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
 //
-// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://trtc.io/document/54481?product=pricing.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -325,7 +325,7 @@ func (c *Client) DescribeCallDetailInfo(request *DescribeCallDetailInfoRequest) 
 //
 // 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
 //
-// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://trtc.io/document/54481?product=pricing.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1458,7 +1458,7 @@ func NewDescribeUserEventResponse() (response *DescribeUserEventResponse) {
 //
 // 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
 //
-// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://trtc.io/document/54481?product=pricing.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1492,7 +1492,7 @@ func (c *Client) DescribeUserEvent(request *DescribeUserEventRequest) (response 
 //
 // 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
 //
-// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://trtc.io/document/54481?product=pricing.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1557,7 +1557,7 @@ func NewDescribeUserInfoResponse() (response *DescribeUserInfoResponse) {
 //
 // 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
 //
-// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://trtc.io/document/60214?product=pricing.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1594,7 +1594,7 @@ func (c *Client) DescribeUserInfo(request *DescribeUserInfoRequest) (response *D
 //
 // 1. You can use this API to query historical data or for reconciliation purposes, but we do not recommend you use it for crucial business logic.
 //
-// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://www.tencentcloud.com/document/product/647/54481.
+// 2. If you need to call this API, please upgrade the monitoring dashboard version to "Standard". For more details, please refer to: https://trtc.io/document/60214?product=pricing.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
