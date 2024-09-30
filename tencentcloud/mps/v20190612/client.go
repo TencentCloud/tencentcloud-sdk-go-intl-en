@@ -442,6 +442,7 @@ func NewCreateImageSpriteTemplateResponse() (response *CreateImageSpriteTemplate
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_COLUMNCOUNT = "InvalidParameterValue.ColumnCount"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
 //  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
 //  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
@@ -461,6 +462,7 @@ func (c *Client) CreateImageSpriteTemplate(request *CreateImageSpriteTemplateReq
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE_COLUMNCOUNT = "InvalidParameterValue.ColumnCount"
+//  INVALIDPARAMETERVALUE_FORMAT = "InvalidParameterValue.Format"
 //  INVALIDPARAMETERVALUE_HEIGHT = "InvalidParameterValue.Height"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
 //  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
@@ -538,6 +540,183 @@ func (c *Client) CreatePersonSampleWithContext(ctx context.Context, request *Cre
     request.SetContext(ctx)
     
     response = NewCreatePersonSampleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateQualityControlTemplateRequest() (request *CreateQualityControlTemplateRequest) {
+    request = &CreateQualityControlTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "CreateQualityControlTemplate")
+    
+    
+    return
+}
+
+func NewCreateQualityControlTemplateResponse() (response *CreateQualityControlTemplateResponse) {
+    response = &CreateQualityControlTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateQualityControlTemplate
+// This API is used to create a media quality inspection template. Up to 50 templates can be created.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AACDURATIONDEVIATION = "InvalidParameterValue.AACDurationDeviation"
+//  INVALIDPARAMETERVALUE_AVTIMESTAMPINTERLEAVE = "InvalidParameterValue.AVTimestampInterleave"
+//  INVALIDPARAMETERVALUE_AUDIOBITRATEOUTOFRANGE = "InvalidParameterValue.AudioBitrateOutofRange"
+//  INVALIDPARAMETERVALUE_AUDIOCHANNELSCHANGED = "InvalidParameterValue.AudioChannelsChanged"
+//  INVALIDPARAMETERVALUE_AUDIODECODEFAILED = "InvalidParameterValue.AudioDecodeFailed"
+//  INVALIDPARAMETERVALUE_AUDIODROPPINGFRAMES = "InvalidParameterValue.AudioDroppingFrames"
+//  INVALIDPARAMETERVALUE_AUDIODUPLICATEDFRAME = "InvalidParameterValue.AudioDuplicatedFrame"
+//  INVALIDPARAMETERVALUE_AUDIOOUTOFPHASE = "InvalidParameterValue.AudioOutOfPhase"
+//  INVALIDPARAMETERVALUE_AUDIOSAMPLERATECHANGED = "InvalidParameterValue.AudioSampleRateChanged"
+//  INVALIDPARAMETERVALUE_AUDIOSTREAMLACK = "InvalidParameterValue.AudioStreamLack"
+//  INVALIDPARAMETERVALUE_BLACKWHITEEDGE = "InvalidParameterValue.BlackWhiteEdge"
+//  INVALIDPARAMETERVALUE_BLUR = "InvalidParameterValue.Blur"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_CRASHSCREEN = "InvalidParameterValue.CrashScreen"
+//  INVALIDPARAMETERVALUE_DARORSARINVALID = "InvalidParameterValue.DarOrSarInvalid"
+//  INVALIDPARAMETERVALUE_DTSJITTER = "InvalidParameterValue.DtsJitter"
+//  INVALIDPARAMETERVALUE_EMPTYDETECTITEM = "InvalidParameterValue.EmptyDetectItem"
+//  INVALIDPARAMETERVALUE_FPSJITTER = "InvalidParameterValue.FpsJitter"
+//  INVALIDPARAMETERVALUE_HLSBADM3U8FORMAT = "InvalidParameterValue.HLSBadM3u8Format"
+//  INVALIDPARAMETERVALUE_HLSINVALIDMASTERM3U8 = "InvalidParameterValue.HLSInvalidMasterM3u8"
+//  INVALIDPARAMETERVALUE_HLSINVALIDMEDIAM3U8 = "InvalidParameterValue.HLSInvalidMediaM3u8"
+//  INVALIDPARAMETERVALUE_HLSMASTERM3U8RECOMMENDED = "InvalidParameterValue.HLSMasterM3u8Recommended"
+//  INVALIDPARAMETERVALUE_HLSMEDIAM3U8DISCONTINUITYEXIST = "InvalidParameterValue.HLSMediaM3u8DiscontinuityExist"
+//  INVALIDPARAMETERVALUE_HLSMEDIAM3U8RECOMMENDED = "InvalidParameterValue.HLSMediaM3u8Recommended"
+//  INVALIDPARAMETERVALUE_HLSMEDIASEGMENTSDTSJITTERDEVIATION = "InvalidParameterValue.HLSMediaSegmentsDTSJitterDeviation"
+//  INVALIDPARAMETERVALUE_HLSMEDIASEGMENTSPTSJITTERDEVIATION = "InvalidParameterValue.HLSMediaSegmentsPTSJitterDeviation"
+//  INVALIDPARAMETERVALUE_HLSMEDIASEGMENTSSTREAMNUMCHANGE = "InvalidParameterValue.HLSMediaSegmentsStreamNumChange"
+//  INVALIDPARAMETERVALUE_HIGHLIGHTING = "InvalidParameterValue.HighLighting"
+//  INVALIDPARAMETERVALUE_HIGHVOICE = "InvalidParameterValue.HighVoice"
+//  INVALIDPARAMETERVALUE_LACKAUDIORECOVER = "InvalidParameterValue.LackAudioRecover"
+//  INVALIDPARAMETERVALUE_LACKVIDEORECOVER = "InvalidParameterValue.LackVideoRecover"
+//  INVALIDPARAMETERVALUE_LOWEVALUATION = "InvalidParameterValue.LowEvaluation"
+//  INVALIDPARAMETERVALUE_LOWLIGHTING = "InvalidParameterValue.LowLighting"
+//  INVALIDPARAMETERVALUE_LOWVOICE = "InvalidParameterValue.LowVoice"
+//  INVALIDPARAMETERVALUE_MOSAIC = "InvalidParameterValue.Mosaic"
+//  INVALIDPARAMETERVALUE_MP4INVALIDCODECFOURCC = "InvalidParameterValue.Mp4InvalidCodecFourcc"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_NOVOICE = "InvalidParameterValue.NoVoice"
+//  INVALIDPARAMETERVALUE_PARAMETERSETSCHANGED = "InvalidParameterValue.ParameterSetsChanged"
+//  INVALIDPARAMETERVALUE_PTSJITTER = "InvalidParameterValue.PtsJitter"
+//  INVALIDPARAMETERVALUE_PTSLESSTHANDTS = "InvalidParameterValue.PtsLessThanDts"
+//  INVALIDPARAMETERVALUE_RECEIVEFPSJITTER = "InvalidParameterValue.ReceiveFpsJitter"
+//  INVALIDPARAMETERVALUE_RECEIVEFPSTOOSMALL = "InvalidParameterValue.ReceiveFpsTooSmall"
+//  INVALIDPARAMETERVALUE_STREAMEND = "InvalidParameterValue.StreamEnd"
+//  INVALIDPARAMETERVALUE_STREAMNALUERROR = "InvalidParameterValue.StreamNALUError"
+//  INVALIDPARAMETERVALUE_STREAMOPENFAILED = "InvalidParameterValue.StreamOpenFailed"
+//  INVALIDPARAMETERVALUE_STREAMPARSEFAILED = "InvalidParameterValue.StreamParseFailed"
+//  INVALIDPARAMETERVALUE_SVGTEMPLATE = "InvalidParameterValue.SvgTemplate"
+//  INVALIDPARAMETERVALUE_TIMECODETRACKEXIST = "InvalidParameterValue.TimecodeTrackExist"
+//  INVALIDPARAMETERVALUE_TIMESTAMPFALLBACK = "InvalidParameterValue.TimestampFallback"
+//  INVALIDPARAMETERVALUE_TSMULTIPROGRAMS = "InvalidParameterValue.TsMultiPrograms"
+//  INVALIDPARAMETERVALUE_TSSTREAMNOAUD = "InvalidParameterValue.TsStreamNoAud"
+//  INVALIDPARAMETERVALUE_UNKNOWNCATEGORY = "InvalidParameterValue.UnknownCategory"
+//  INVALIDPARAMETERVALUE_VIDEOBITRATEOUTOFRANGE = "InvalidParameterValue.VideoBitrateOutofRange"
+//  INVALIDPARAMETERVALUE_VIDEODECODEFAILED = "InvalidParameterValue.VideoDecodeFailed"
+//  INVALIDPARAMETERVALUE_VIDEODROPPINGFRAMES = "InvalidParameterValue.VideoDroppingFrames"
+//  INVALIDPARAMETERVALUE_VIDEODUPLICATEDFRAME = "InvalidParameterValue.VideoDuplicatedFrame"
+//  INVALIDPARAMETERVALUE_VIDEOFIRSTFRAMENOTIDR = "InvalidParameterValue.VideoFirstFrameNotIdr"
+//  INVALIDPARAMETERVALUE_VIDEOFREEZEDFRAME = "InvalidParameterValue.VideoFreezedFrame"
+//  INVALIDPARAMETERVALUE_VIDEORESOLUTIONCHANGED = "InvalidParameterValue.VideoResolutionChanged"
+//  INVALIDPARAMETERVALUE_VIDEOROTATION = "InvalidParameterValue.VideoRotation"
+//  INVALIDPARAMETERVALUE_VIDEOSTREAMLACK = "InvalidParameterValue.VideoStreamLack"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateQualityControlTemplate(request *CreateQualityControlTemplateRequest) (response *CreateQualityControlTemplateResponse, err error) {
+    return c.CreateQualityControlTemplateWithContext(context.Background(), request)
+}
+
+// CreateQualityControlTemplate
+// This API is used to create a media quality inspection template. Up to 50 templates can be created.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AACDURATIONDEVIATION = "InvalidParameterValue.AACDurationDeviation"
+//  INVALIDPARAMETERVALUE_AVTIMESTAMPINTERLEAVE = "InvalidParameterValue.AVTimestampInterleave"
+//  INVALIDPARAMETERVALUE_AUDIOBITRATEOUTOFRANGE = "InvalidParameterValue.AudioBitrateOutofRange"
+//  INVALIDPARAMETERVALUE_AUDIOCHANNELSCHANGED = "InvalidParameterValue.AudioChannelsChanged"
+//  INVALIDPARAMETERVALUE_AUDIODECODEFAILED = "InvalidParameterValue.AudioDecodeFailed"
+//  INVALIDPARAMETERVALUE_AUDIODROPPINGFRAMES = "InvalidParameterValue.AudioDroppingFrames"
+//  INVALIDPARAMETERVALUE_AUDIODUPLICATEDFRAME = "InvalidParameterValue.AudioDuplicatedFrame"
+//  INVALIDPARAMETERVALUE_AUDIOOUTOFPHASE = "InvalidParameterValue.AudioOutOfPhase"
+//  INVALIDPARAMETERVALUE_AUDIOSAMPLERATECHANGED = "InvalidParameterValue.AudioSampleRateChanged"
+//  INVALIDPARAMETERVALUE_AUDIOSTREAMLACK = "InvalidParameterValue.AudioStreamLack"
+//  INVALIDPARAMETERVALUE_BLACKWHITEEDGE = "InvalidParameterValue.BlackWhiteEdge"
+//  INVALIDPARAMETERVALUE_BLUR = "InvalidParameterValue.Blur"
+//  INVALIDPARAMETERVALUE_COMMENT = "InvalidParameterValue.Comment"
+//  INVALIDPARAMETERVALUE_CRASHSCREEN = "InvalidParameterValue.CrashScreen"
+//  INVALIDPARAMETERVALUE_DARORSARINVALID = "InvalidParameterValue.DarOrSarInvalid"
+//  INVALIDPARAMETERVALUE_DTSJITTER = "InvalidParameterValue.DtsJitter"
+//  INVALIDPARAMETERVALUE_EMPTYDETECTITEM = "InvalidParameterValue.EmptyDetectItem"
+//  INVALIDPARAMETERVALUE_FPSJITTER = "InvalidParameterValue.FpsJitter"
+//  INVALIDPARAMETERVALUE_HLSBADM3U8FORMAT = "InvalidParameterValue.HLSBadM3u8Format"
+//  INVALIDPARAMETERVALUE_HLSINVALIDMASTERM3U8 = "InvalidParameterValue.HLSInvalidMasterM3u8"
+//  INVALIDPARAMETERVALUE_HLSINVALIDMEDIAM3U8 = "InvalidParameterValue.HLSInvalidMediaM3u8"
+//  INVALIDPARAMETERVALUE_HLSMASTERM3U8RECOMMENDED = "InvalidParameterValue.HLSMasterM3u8Recommended"
+//  INVALIDPARAMETERVALUE_HLSMEDIAM3U8DISCONTINUITYEXIST = "InvalidParameterValue.HLSMediaM3u8DiscontinuityExist"
+//  INVALIDPARAMETERVALUE_HLSMEDIAM3U8RECOMMENDED = "InvalidParameterValue.HLSMediaM3u8Recommended"
+//  INVALIDPARAMETERVALUE_HLSMEDIASEGMENTSDTSJITTERDEVIATION = "InvalidParameterValue.HLSMediaSegmentsDTSJitterDeviation"
+//  INVALIDPARAMETERVALUE_HLSMEDIASEGMENTSPTSJITTERDEVIATION = "InvalidParameterValue.HLSMediaSegmentsPTSJitterDeviation"
+//  INVALIDPARAMETERVALUE_HLSMEDIASEGMENTSSTREAMNUMCHANGE = "InvalidParameterValue.HLSMediaSegmentsStreamNumChange"
+//  INVALIDPARAMETERVALUE_HIGHLIGHTING = "InvalidParameterValue.HighLighting"
+//  INVALIDPARAMETERVALUE_HIGHVOICE = "InvalidParameterValue.HighVoice"
+//  INVALIDPARAMETERVALUE_LACKAUDIORECOVER = "InvalidParameterValue.LackAudioRecover"
+//  INVALIDPARAMETERVALUE_LACKVIDEORECOVER = "InvalidParameterValue.LackVideoRecover"
+//  INVALIDPARAMETERVALUE_LOWEVALUATION = "InvalidParameterValue.LowEvaluation"
+//  INVALIDPARAMETERVALUE_LOWLIGHTING = "InvalidParameterValue.LowLighting"
+//  INVALIDPARAMETERVALUE_LOWVOICE = "InvalidParameterValue.LowVoice"
+//  INVALIDPARAMETERVALUE_MOSAIC = "InvalidParameterValue.Mosaic"
+//  INVALIDPARAMETERVALUE_MP4INVALIDCODECFOURCC = "InvalidParameterValue.Mp4InvalidCodecFourcc"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_NOVOICE = "InvalidParameterValue.NoVoice"
+//  INVALIDPARAMETERVALUE_PARAMETERSETSCHANGED = "InvalidParameterValue.ParameterSetsChanged"
+//  INVALIDPARAMETERVALUE_PTSJITTER = "InvalidParameterValue.PtsJitter"
+//  INVALIDPARAMETERVALUE_PTSLESSTHANDTS = "InvalidParameterValue.PtsLessThanDts"
+//  INVALIDPARAMETERVALUE_RECEIVEFPSJITTER = "InvalidParameterValue.ReceiveFpsJitter"
+//  INVALIDPARAMETERVALUE_RECEIVEFPSTOOSMALL = "InvalidParameterValue.ReceiveFpsTooSmall"
+//  INVALIDPARAMETERVALUE_STREAMEND = "InvalidParameterValue.StreamEnd"
+//  INVALIDPARAMETERVALUE_STREAMNALUERROR = "InvalidParameterValue.StreamNALUError"
+//  INVALIDPARAMETERVALUE_STREAMOPENFAILED = "InvalidParameterValue.StreamOpenFailed"
+//  INVALIDPARAMETERVALUE_STREAMPARSEFAILED = "InvalidParameterValue.StreamParseFailed"
+//  INVALIDPARAMETERVALUE_SVGTEMPLATE = "InvalidParameterValue.SvgTemplate"
+//  INVALIDPARAMETERVALUE_TIMECODETRACKEXIST = "InvalidParameterValue.TimecodeTrackExist"
+//  INVALIDPARAMETERVALUE_TIMESTAMPFALLBACK = "InvalidParameterValue.TimestampFallback"
+//  INVALIDPARAMETERVALUE_TSMULTIPROGRAMS = "InvalidParameterValue.TsMultiPrograms"
+//  INVALIDPARAMETERVALUE_TSSTREAMNOAUD = "InvalidParameterValue.TsStreamNoAud"
+//  INVALIDPARAMETERVALUE_UNKNOWNCATEGORY = "InvalidParameterValue.UnknownCategory"
+//  INVALIDPARAMETERVALUE_VIDEOBITRATEOUTOFRANGE = "InvalidParameterValue.VideoBitrateOutofRange"
+//  INVALIDPARAMETERVALUE_VIDEODECODEFAILED = "InvalidParameterValue.VideoDecodeFailed"
+//  INVALIDPARAMETERVALUE_VIDEODROPPINGFRAMES = "InvalidParameterValue.VideoDroppingFrames"
+//  INVALIDPARAMETERVALUE_VIDEODUPLICATEDFRAME = "InvalidParameterValue.VideoDuplicatedFrame"
+//  INVALIDPARAMETERVALUE_VIDEOFIRSTFRAMENOTIDR = "InvalidParameterValue.VideoFirstFrameNotIdr"
+//  INVALIDPARAMETERVALUE_VIDEOFREEZEDFRAME = "InvalidParameterValue.VideoFreezedFrame"
+//  INVALIDPARAMETERVALUE_VIDEORESOLUTIONCHANGED = "InvalidParameterValue.VideoResolutionChanged"
+//  INVALIDPARAMETERVALUE_VIDEOROTATION = "InvalidParameterValue.VideoRotation"
+//  INVALIDPARAMETERVALUE_VIDEOSTREAMLACK = "InvalidParameterValue.VideoStreamLack"
+//  LIMITEXCEEDED_TOOMUCHTEMPLATE = "LimitExceeded.TooMuchTemplate"
+func (c *Client) CreateQualityControlTemplateWithContext(ctx context.Context, request *CreateQualityControlTemplateRequest) (response *CreateQualityControlTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateQualityControlTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateQualityControlTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateQualityControlTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -657,6 +836,7 @@ func NewCreateScheduleResponse() (response *CreateScheduleResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
@@ -696,6 +876,7 @@ func (c *Client) CreateSchedule(request *CreateScheduleRequest) (response *Creat
 //
 // error code that may be returned:
 //  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
@@ -1504,6 +1685,61 @@ func (c *Client) DeletePersonSampleWithContext(ctx context.Context, request *Del
     request.SetContext(ctx)
     
     response = NewDeletePersonSampleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteQualityControlTemplateRequest() (request *DeleteQualityControlTemplateRequest) {
+    request = &DeleteQualityControlTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DeleteQualityControlTemplate")
+    
+    
+    return
+}
+
+func NewDeleteQualityControlTemplateResponse() (response *DeleteQualityControlTemplateResponse) {
+    response = &DeleteQualityControlTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteQualityControlTemplate
+// This API is used to delete a media quality inspection template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteQualityControlTemplate(request *DeleteQualityControlTemplateRequest) (response *DeleteQualityControlTemplateResponse, err error) {
+    return c.DeleteQualityControlTemplateWithContext(context.Background(), request)
+}
+
+// DeleteQualityControlTemplate
+// This API is used to delete a media quality inspection template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DeleteQualityControlTemplateWithContext(ctx context.Context, request *DeleteQualityControlTemplateRequest) (response *DeleteQualityControlTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteQualityControlTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteQualityControlTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteQualityControlTemplateResponse()
     err = c.Send(request, response)
     return
 }
@@ -2343,6 +2579,65 @@ func (c *Client) DescribePersonSamplesWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeQualityControlTemplatesRequest() (request *DescribeQualityControlTemplatesRequest) {
+    request = &DescribeQualityControlTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeQualityControlTemplates")
+    
+    
+    return
+}
+
+func NewDescribeQualityControlTemplatesResponse() (response *DescribeQualityControlTemplatesResponse) {
+    response = &DescribeQualityControlTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeQualityControlTemplates
+// This API is used to query custom media quality inspection templates, supporting paged queries by conditions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeQualityControlTemplates(request *DescribeQualityControlTemplatesRequest) (response *DescribeQualityControlTemplatesResponse, err error) {
+    return c.DescribeQualityControlTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeQualityControlTemplates
+// This API is used to query custom media quality inspection templates, supporting paged queries by conditions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
+//  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) DescribeQualityControlTemplatesWithContext(ctx context.Context, request *DescribeQualityControlTemplatesRequest) (response *DescribeQualityControlTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeQualityControlTemplatesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeQualityControlTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeQualityControlTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSampleSnapshotTemplatesRequest() (request *DescribeSampleSnapshotTemplatesRequest) {
     request = &DescribeSampleSnapshotTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2421,6 +2716,7 @@ func NewDescribeSchedulesResponse() (response *DescribeSchedulesResponse) {
 // This API is used to query a scheme.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
 //  INTERNALERROR = "InternalError"
@@ -2434,6 +2730,7 @@ func (c *Client) DescribeSchedules(request *DescribeSchedulesRequest) (response 
 // This API is used to query a scheme.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
 //  INTERNALERROR = "InternalError"
@@ -2885,6 +3182,7 @@ func NewDisableScheduleResponse() (response *DisableScheduleResponse) {
 // This API is used to disable a scheme.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_BUCKETNOTIFYALREADYEXIST = "FailedOperation.BucketNotifyAlreadyExist"
 //  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
 //  FAILEDOPERATION_GETSOURCENOTIFY = "FailedOperation.GetSourceNotify"
@@ -2905,6 +3203,7 @@ func (c *Client) DisableSchedule(request *DisableScheduleRequest) (response *Dis
 // This API is used to disable a scheme.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_BUCKETNOTIFYALREADYEXIST = "FailedOperation.BucketNotifyAlreadyExist"
 //  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
 //  FAILEDOPERATION_GETSOURCENOTIFY = "FailedOperation.GetSourceNotify"
@@ -2956,6 +3255,7 @@ func NewDisableWorkflowResponse() (response *DisableWorkflowResponse) {
 // This API is used to disable a workflow.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_BUCKETNOTIFYALREADYEXIST = "FailedOperation.BucketNotifyAlreadyExist"
 //  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
@@ -2971,6 +3271,7 @@ func (c *Client) DisableWorkflow(request *DisableWorkflowRequest) (response *Dis
 // This API is used to disable a workflow.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_BUCKETNOTIFYALREADYEXIST = "FailedOperation.BucketNotifyAlreadyExist"
 //  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
@@ -3014,33 +3315,34 @@ func NewEditMediaResponse() (response *EditMediaResponse) {
 }
 
 // EditMedia
-// This API is used to edit a video to generate a new video. Editing actions may include:
+// This API is used to edit a video to generate a new one. Editing features include:
 //
-//   
-//
-// 
-//
-// 1. **Simple editing**: Simple video editing such as clipping and splicing
-//
-// 1.1 Clipping a file to generate a new video
-//
-// 1.2 Splicing multiple files to generate a new video
-//
-// 1.3 Clipping multiple files and then splicing the clips to generate a new video
+//  
 //
 // 
 //
-// 2. **Compositing**: Composing a new video as required
+// 1. **Editing task**: simple video editing, such as clipping and splicing.
 //
-// 2.1 Adding different tracks (video, audio, subtitles) or elements (video, image, audio, text, empty)
+// 1) Edit a file to generate a new video.
 //
-// 2.2 Image: Adding, scaling, rotating, or mirroring an image
+// 2) Splice multiple files to generate a new video.
 //
-// 2.3 Audio: Adjusting volume and adding audio effects such as fade and reverb
+// 3) Edit multiple files and then splice them to generate a new video.
 //
-// 2.4 Video: Adding transition effects, changing playback speed, splicing and clipping videos, adding subtitles, playing videos picture-in-picture, separating audio from videos, adding animation effects, etc.
+// 
+//
+// 2. **Compositing task**: Generate a new video by describing information through APIs.
+//
+// 1) Multi-track (video, audio, and subtitles) and multi-type elements (video, image, audio, text, and empty).
+//
+// 2) Image level: mapping, zoom in/out, arbitrary rotation, mirroring, and more.
+//
+// 3) Audio level: volume control, fade in/out, mixing, and more.
+//
+// 4) Video level: transition, playback speed adjustment, splicing, clipping, subtitles, picture-in-picture, audio-video separation, entrance and exit animations, and more.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3049,33 +3351,34 @@ func (c *Client) EditMedia(request *EditMediaRequest) (response *EditMediaRespon
 }
 
 // EditMedia
-// This API is used to edit a video to generate a new video. Editing actions may include:
+// This API is used to edit a video to generate a new one. Editing features include:
 //
-//   
-//
-// 
-//
-// 1. **Simple editing**: Simple video editing such as clipping and splicing
-//
-// 1.1 Clipping a file to generate a new video
-//
-// 1.2 Splicing multiple files to generate a new video
-//
-// 1.3 Clipping multiple files and then splicing the clips to generate a new video
+//  
 //
 // 
 //
-// 2. **Compositing**: Composing a new video as required
+// 1. **Editing task**: simple video editing, such as clipping and splicing.
 //
-// 2.1 Adding different tracks (video, audio, subtitles) or elements (video, image, audio, text, empty)
+// 1) Edit a file to generate a new video.
 //
-// 2.2 Image: Adding, scaling, rotating, or mirroring an image
+// 2) Splice multiple files to generate a new video.
 //
-// 2.3 Audio: Adjusting volume and adding audio effects such as fade and reverb
+// 3) Edit multiple files and then splice them to generate a new video.
 //
-// 2.4 Video: Adding transition effects, changing playback speed, splicing and clipping videos, adding subtitles, playing videos picture-in-picture, separating audio from videos, adding animation effects, etc.
+// 
+//
+// 2. **Compositing task**: Generate a new video by describing information through APIs.
+//
+// 1) Multi-track (video, audio, and subtitles) and multi-type elements (video, image, audio, text, and empty).
+//
+// 2) Image level: mapping, zoom in/out, arbitrary rotation, mirroring, and more.
+//
+// 3) Audio level: volume control, fade in/out, mixing, and more.
+//
+// 4) Video level: transition, playback speed adjustment, splicing, clipping, subtitles, picture-in-picture, audio-video separation, entrance and exit animations, and more.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -3118,8 +3421,10 @@ func NewEnableScheduleResponse() (response *EnableScheduleResponse) {
 // This API is used to enable a scheme.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_BUCKETNOTIFYALREADYEXIST = "FailedOperation.BucketNotifyAlreadyExist"
 //  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_GETSOURCENOTIFY = "FailedOperation.GetSourceNotify"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
@@ -3138,8 +3443,10 @@ func (c *Client) EnableSchedule(request *EnableScheduleRequest) (response *Enabl
 // This API is used to enable a scheme.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_BUCKETNOTIFYALREADYEXIST = "FailedOperation.BucketNotifyAlreadyExist"
 //  FAILEDOPERATION_COSSTATUSINAVLID = "FailedOperation.CosStatusInavlid"
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_GETSOURCENOTIFY = "FailedOperation.GetSourceNotify"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
@@ -3456,6 +3763,7 @@ func NewModifyAIRecognitionTemplateResponse() (response *ModifyAIRecognitionTemp
 //  INVALIDPARAMETERVALUE_MODIFYDEFAULTTEMPLATE = "InvalidParameterValue.ModifyDefaultTemplate"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
 //  INVALIDPARAMETERVALUE_OBJECTLIBRARY = "InvalidParameterValue.ObjectLibrary"
+//  INVALIDPARAMETERVALUE_SOURCELANGUAGE = "InvalidParameterValue.SourceLanguage"
 //  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
 //  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
 //  INVALIDPARAMETERVALUE_USERDEFINELIBRARYLABELSET = "InvalidParameterValue.UserDefineLibraryLabelSet"
@@ -3479,6 +3787,7 @@ func (c *Client) ModifyAIRecognitionTemplate(request *ModifyAIRecognitionTemplat
 //  INVALIDPARAMETERVALUE_MODIFYDEFAULTTEMPLATE = "InvalidParameterValue.ModifyDefaultTemplate"
 //  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
 //  INVALIDPARAMETERVALUE_OBJECTLIBRARY = "InvalidParameterValue.ObjectLibrary"
+//  INVALIDPARAMETERVALUE_SOURCELANGUAGE = "InvalidParameterValue.SourceLanguage"
 //  INVALIDPARAMETERVALUE_SUBTITLEFORMAT = "InvalidParameterValue.SubtitleFormat"
 //  INVALIDPARAMETERVALUE_SWITCH = "InvalidParameterValue.Switch"
 //  INVALIDPARAMETERVALUE_USERDEFINELIBRARYLABELSET = "InvalidParameterValue.UserDefineLibraryLabelSet"
@@ -3860,6 +4169,95 @@ func (c *Client) ModifyPersonSampleWithContext(ctx context.Context, request *Mod
     return
 }
 
+func NewModifyQualityControlTemplateRequest() (request *ModifyQualityControlTemplateRequest) {
+    request = &ModifyQualityControlTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "ModifyQualityControlTemplate")
+    
+    
+    return
+}
+
+func NewModifyQualityControlTemplateResponse() (response *ModifyQualityControlTemplateResponse) {
+    response = &ModifyQualityControlTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyQualityControlTemplate
+// This API is used to modify a media quality inspection template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AUDIOBITRATE = "InvalidParameterValue.AudioBitrate"
+//  INVALIDPARAMETERVALUE_AUDIOCHANNEL = "InvalidParameterValue.AudioChannel"
+//  INVALIDPARAMETERVALUE_AUDIOCODEC = "InvalidParameterValue.AudioCodec"
+//  INVALIDPARAMETERVALUE_AUDIOSAMPLERATE = "InvalidParameterValue.AudioSampleRate"
+//  INVALIDPARAMETERVALUE_CONTAINER = "InvalidParameterValue.Container"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
+//  INVALIDPARAMETERVALUE_REMOVEVIDEO = "InvalidParameterValue.RemoveVideo"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  INVALIDPARAMETERVALUE_RESOLUTIONADAPTIVE = "InvalidParameterValue.ResolutionAdaptive"
+//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
+//  INVALIDPARAMETERVALUE_TEHDTYPE = "InvalidParameterValue.TEHDType"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  INVALIDPARAMETERVALUE_VIDEOBITRATE = "InvalidParameterValue.VideoBitrate"
+//  INVALIDPARAMETERVALUE_VIDEOCODEC = "InvalidParameterValue.VideoCodec"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyQualityControlTemplate(request *ModifyQualityControlTemplateRequest) (response *ModifyQualityControlTemplateResponse, err error) {
+    return c.ModifyQualityControlTemplateWithContext(context.Background(), request)
+}
+
+// ModifyQualityControlTemplate
+// This API is used to modify a media quality inspection template.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_ACCESSDBERROR = "InternalError.AccessDBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_AUDIOBITRATE = "InvalidParameterValue.AudioBitrate"
+//  INVALIDPARAMETERVALUE_AUDIOCHANNEL = "InvalidParameterValue.AudioChannel"
+//  INVALIDPARAMETERVALUE_AUDIOCODEC = "InvalidParameterValue.AudioCodec"
+//  INVALIDPARAMETERVALUE_AUDIOSAMPLERATE = "InvalidParameterValue.AudioSampleRate"
+//  INVALIDPARAMETERVALUE_CONTAINER = "InvalidParameterValue.Container"
+//  INVALIDPARAMETERVALUE_FPS = "InvalidParameterValue.Fps"
+//  INVALIDPARAMETERVALUE_NAME = "InvalidParameterValue.Name"
+//  INVALIDPARAMETERVALUE_REMOVEAUDIO = "InvalidParameterValue.RemoveAudio"
+//  INVALIDPARAMETERVALUE_REMOVEVIDEO = "InvalidParameterValue.RemoveVideo"
+//  INVALIDPARAMETERVALUE_RESOLUTION = "InvalidParameterValue.Resolution"
+//  INVALIDPARAMETERVALUE_RESOLUTIONADAPTIVE = "InvalidParameterValue.ResolutionAdaptive"
+//  INVALIDPARAMETERVALUE_SAMPLERATE = "InvalidParameterValue.SampleRate"
+//  INVALIDPARAMETERVALUE_TEHDTYPE = "InvalidParameterValue.TEHDType"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
+//  INVALIDPARAMETERVALUE_VIDEOBITRATE = "InvalidParameterValue.VideoBitrate"
+//  INVALIDPARAMETERVALUE_VIDEOCODEC = "InvalidParameterValue.VideoCodec"
+//  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
+func (c *Client) ModifyQualityControlTemplateWithContext(ctx context.Context, request *ModifyQualityControlTemplateRequest) (response *ModifyQualityControlTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyQualityControlTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyQualityControlTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyQualityControlTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifySampleSnapshotTemplateRequest() (request *ModifySampleSnapshotTemplateRequest) {
     request = &ModifySampleSnapshotTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3954,6 +4352,7 @@ func NewModifyScheduleResponse() (response *ModifyScheduleResponse) {
 // This API is used to modify a scheme.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
 //  INTERNALERROR = "InternalError"
@@ -3968,6 +4367,7 @@ func (c *Client) ModifySchedule(request *ModifyScheduleRequest) (response *Modif
 // This API is used to modify a scheme.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  FAILEDOPERATION_INVALIDUSER = "FailedOperation.InvalidUser"
 //  INTERNALERROR = "InternalError"
@@ -4433,6 +4833,7 @@ func NewProcessLiveStreamResponse() (response *ProcessLiveStreamResponse) {
 // HTTP callbacks are supported for live stream processing events. Notifications can also be written in real time to and read from a CMQ queue. The output files of processing tasks are saved to the storage you specify.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4463,6 +4864,7 @@ func (c *Client) ProcessLiveStream(request *ProcessLiveStreamRequest) (response 
 // HTTP callbacks are supported for live stream processing events. Notifications can also be written in real time to and read from a CMQ queue. The output files of processing tasks are saved to the storage you specify.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4505,27 +4907,32 @@ func NewProcessMediaResponse() (response *ProcessMediaResponse) {
 }
 
 // ProcessMedia
-// This API is used to initiate processing tasks for media specified by a URL or in COS. Such tasks may include the following:
+// This API is used to initiate a processing task for video URLs or media files in Cloud Object Storage (COS). Features include:
 //
-// 1. Video transcoding (general transcoding, Top Speed Codec, audio/video enhancement)
+// 1. Video transcoding (standard transcoding, TSC transcoding, and audio/video enhancement);
 //
-// 2. Animated image generating
+// 2. Animated image generating;
 //
-// 3. Time point screencapturing
+// 3. Screenshot taking at specified time points;
 //
-// 4. Sampled screencapturing
+// 4. Sampled screenshot taking;
 //
-// 5. Image sprite generating
+// 5. Sprite screenshot taking;
 //
-// 6. Adaptive bitrate streaming
+// 6. Transcoding to adaptive bitrate streaming;
 //
-// 7. Intelligent content moderation (detection of pornographic and sensitive content)
+// 7. Intelligent auditing (porn detection and sensitive information detection);
 //
-// 8. Intelligent content analysis (labeling, categorization, thumbnail generation, labeling by frame, splitting, highlight generation, opening and closing segment recognition)
+// 8. Intelligent analysis (tagging, classification, thumbnail generating, frame-by-frame tagging, video splitting, highlights generating, opening and closing segments recognition, and game timestamping);
 //
-// 9. Intelligent content recognition (face, full text, text keyword, full speech, speech keyword, speech translation, object recognition)
+// 9. Intelligent identification (face, full text, text keyword, full speech, speech keyword, speech translation, and object recognition);
+//
+// 
+//
+// 10. Media quality inspection (live stream format diagnosis, audio and video content detection (jitter, blur, low light, overexposure, black and white edges, black and white screens, screen glitch, noise, mosaic, QR code, and more), and no-reference scoring).
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -4537,27 +4944,32 @@ func (c *Client) ProcessMedia(request *ProcessMediaRequest) (response *ProcessMe
 }
 
 // ProcessMedia
-// This API is used to initiate processing tasks for media specified by a URL or in COS. Such tasks may include the following:
+// This API is used to initiate a processing task for video URLs or media files in Cloud Object Storage (COS). Features include:
 //
-// 1. Video transcoding (general transcoding, Top Speed Codec, audio/video enhancement)
+// 1. Video transcoding (standard transcoding, TSC transcoding, and audio/video enhancement);
 //
-// 2. Animated image generating
+// 2. Animated image generating;
 //
-// 3. Time point screencapturing
+// 3. Screenshot taking at specified time points;
 //
-// 4. Sampled screencapturing
+// 4. Sampled screenshot taking;
 //
-// 5. Image sprite generating
+// 5. Sprite screenshot taking;
 //
-// 6. Adaptive bitrate streaming
+// 6. Transcoding to adaptive bitrate streaming;
 //
-// 7. Intelligent content moderation (detection of pornographic and sensitive content)
+// 7. Intelligent auditing (porn detection and sensitive information detection);
 //
-// 8. Intelligent content analysis (labeling, categorization, thumbnail generation, labeling by frame, splitting, highlight generation, opening and closing segment recognition)
+// 8. Intelligent analysis (tagging, classification, thumbnail generating, frame-by-frame tagging, video splitting, highlights generating, opening and closing segments recognition, and game timestamping);
 //
-// 9. Intelligent content recognition (face, full text, text keyword, full speech, speech keyword, speech translation, object recognition)
+// 9. Intelligent identification (face, full text, text keyword, full speech, speech keyword, speech translation, and object recognition);
+//
+// 
+//
+// 10. Media quality inspection (live stream format diagnosis, audio and video content detection (jitter, blur, low light, overexposure, black and white edges, black and white screens, screen glitch, noise, mosaic, QR code, and more), and no-reference scoring).
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"

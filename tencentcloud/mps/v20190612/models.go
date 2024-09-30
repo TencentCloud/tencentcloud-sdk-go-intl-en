@@ -85,6 +85,10 @@ type AIRecognitionTemplateItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AsrWordsConfigure *AsrWordsConfigureInfo `json:"AsrWordsConfigure,omitnil,omitempty" name:"AsrWordsConfigure"`
 
+	// Voice translation control parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TranslateConfigure *TranslateConfigureInfo `json:"TranslateConfigure,omitnil,omitempty" name:"TranslateConfigure"`
+
 	// Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
@@ -99,18 +103,22 @@ type AIRecognitionTemplateItem struct {
 }
 
 type Activity struct {
-	// The subtask type.
-	// <li>`input`: The start.</li>
-	// <li>`output`: The end.</li>
-	// <li>`action-trans`: Transcoding.</li>
-	// <li>`action-samplesnapshot`: Sampled screencapturing.</li>
-	// <li>`action-AIAnalysis`: Content analysis.</li>
-	// <li>`action-AIRecognition`: Content recognition.</li>
-	// <li>`action-aiReview`: Content moderation.</li>
-	// <li>`action-animated-graphics`: Animated screenshot generation.</li>
-	// <li>`action-image-sprite`: Image sprite generation.</li>
-	// <li>`action-snapshotByTimeOffset`: Time point screencapturing.</li>
-	// <li>`action-adaptive-substream`: Adaptive bitrate streaming.</li>
+	// Atomic task type.
+	// <li>input: start node.</li>
+	// <li>output: termination node.</li>
+	// <li>action-trans: transcoding.</li>
+	// <li>action-samplesnapshot: sampled screenshot taking.</li>
+	// <li>action-AIAnalysis: analysis.</li>
+	// <li>action-AIRecognition: recognition.</li>
+	// <li>action-aiReview: auditing.</li>
+	// <li>action-animated-graphics: animated image generating.</li>
+	// <li>action-image-sprite: sprite image generating.</li>
+	// <li>action-snapshotByTimeOffset: time point screenshot taking.</li>
+	// <li>action-adaptive-substream: adaptive bitrate streaming.</li>
+	// <li>action-AIQualityControl: media quality inspection.</li>
+	// 
+	// 
+	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ActivityType *string `json:"ActivityType,omitnil,omitempty" name:"ActivityType"`
 
@@ -150,6 +158,10 @@ type ActivityPara struct {
 
 	// A content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil,omitempty" name:"AiRecognitionTask"`
+
+	// Media quality inspection task.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	QualityControlTask *AiQualityControlTaskInput `json:"QualityControlTask,omitnil,omitempty" name:"QualityControlTask"`
 }
 
 type ActivityResItem struct {
@@ -163,7 +175,7 @@ type ActivityResItem struct {
 
 	// The result of a time point screenshot task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
-	SnapshotByTimeOffsetTask *MediaProcessTaskSampleSnapshotResult `json:"SnapshotByTimeOffsetTask,omitnil,omitempty" name:"SnapshotByTimeOffsetTask"`
+	SnapshotByTimeOffsetTask *MediaProcessTaskSnapshotByTimeOffsetResult `json:"SnapshotByTimeOffsetTask,omitnil,omitempty" name:"SnapshotByTimeOffsetTask"`
 
 	// The result of a sampled screenshot task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -188,19 +200,25 @@ type ActivityResItem struct {
 	// The result of a content analysis task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AnalysisTask *ScheduleAnalysisTaskResult `json:"AnalysisTask,omitnil,omitempty" name:"AnalysisTask"`
+
+	// Media quality inspection task output.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	QualityControlTask *ScheduleQualityControlTaskResult `json:"QualityControlTask,omitnil,omitempty" name:"QualityControlTask"`
 }
 
 type ActivityResult struct {
-	// The type of the scheme’s subtask.
-	// <li>Transcode: Transcoding</li>
-	// <li>SampleSnapshot: Sampled screenshot</li>
-	// <li>AnimatedGraphics: Animated image generating</li>
-	// <li>SnapshotByTimeOffset: Time point screenshot</li>
-	// <li>ImageSprites: Image sprite generating</li>
-	// <li>AdaptiveDynamicStreaming: Adaptive bitrate streaming</li>
-	// <li>AiContentReview: Content moderation</li>
-	// <li>AIRecognition: Content recognition</li>
-	// <li>AIAnalysis: Content analysis</li>
+	// Atomic task type.
+	// <li>Transcode: transcoding.</li>
+	// <li>SampleSnapshot: sampled screenshot taking.</li>
+	// <li>AnimatedGraphics: animated image generating.</li>
+	// <li>SnapshotByTimeOffset: time point screenshot taking.</li>
+	// <li>ImageSprites: sprite image generating.</li>
+	// <li>AdaptiveDynamicStreaming: adaptive bitrate streaming.</li>
+	// <li>AiContentReview: content moderation.</li>
+	// <li>AIRecognition: intelligent identification.</li>
+	// <li>AIAnalysis: intelligent analysis.</li>
+	// 
+	// <li>AiQualityControl: media quality inspection.</li>
 	ActivityType *string `json:"ActivityType,omitnil,omitempty" name:"ActivityType"`
 
 	// The execution results of the subtasks of the scheme.
@@ -248,6 +266,12 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// 
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	DrmInfo *DrmInfo `json:"DrmInfo,omitnil,omitempty" name:"DrmInfo"`
+
+	// Adaptive transcoding template type.
+	// Common: audio-video.
+	// PureAudio: audio-only.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DefinitionType *string `json:"DefinitionType,omitnil,omitempty" name:"DefinitionType"`
 }
 
 type AdaptiveDynamicStreamingTemplate struct {
@@ -288,6 +312,21 @@ type AdaptiveDynamicStreamingTemplate struct {
 
 	// Last modified time of template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Whether it is an audio-only template. 0: video template. 1: audio-only template.Note: This field may return null, indicating that no valid values can be obtained.
+	PureAudio *uint64 `json:"PureAudio,omitnil,omitempty" name:"PureAudio"`
+
+	// HLS segment type. Valid values:
+	// <li>ts-segment: HLS+TS segment.</li>
+	// <li>ts-byterange: HLS+TS byte range.</li>
+	// <li>mp4-segment: HLS+MP4 segment.</li>
+	// <li>mp4-byterange: HLS+MP4 byte range.</li>
+	// <li>ts-packed-audio: TS+Packed audio.</li>
+	// <li>mp4-packed-audio: MP4+Packed audio.</li>
+	// Default value: ts-segment.
+	// 
+	// Note: The HLS segment format for adaptive bitrate streaming is based on this field.Note: This field may return null, indicating that no valid values can be obtained.
+	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
 }
 
 type AdaptiveStreamTemplate struct {
@@ -323,11 +362,14 @@ type AddOnSubtitle struct {
 
 type AiAnalysisResult struct {
 	// Task type. Valid values:
-	// <li>Classification: intelligent categorization</li>
-	// <li>Cover: intelligent cover generating</li>
-	// <li>Tag: intelligent tagging</li>
-	// <li>FrameTag: intelligent frame-specific tagging</li>
-	// <li>Highlight: intelligent highlight generating</li>
+	// <li>Classification: intelligent classification.</li>
+	// <li>Cover: intelligent thumbnail generating.</li>
+	// <li>Tag: intelligent tagging.</li>
+	// <li>FrameTag: intelligent frame-by-frame tagging.</li>
+	// <li>Highlight: intelligent highlights generating.</li>
+	// 
+	// <li>DeLogo: intelligent removal.</li>
+	// <li>Description: large model summarization.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Query result of intelligent categorization task in video content analysis, which is valid if task type is `Classification`.
@@ -345,6 +387,26 @@ type AiAnalysisResult struct {
 	// The result of a highlight generation task. This parameter is valid if `Type` is `Highlight`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HighlightTask *AiAnalysisTaskHighlightResult `json:"HighlightTask,omitnil,omitempty" name:"HighlightTask"`
+
+	// The query result of an intelligent removal task for video analysis, which is valid when the task type is DeLogo.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DeLogoTask *AiAnalysisTaskDelLogoResult `json:"DeLogoTask,omitnil,omitempty" name:"DeLogoTask"`
+
+	// The query result of a splitting task for video analysis, which is valid when the task type is SegmentRecognition.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SegmentTask *AiAnalysisTaskSegmentResult `json:"SegmentTask,omitnil,omitempty" name:"SegmentTask"`
+
+	// The query result of an opening and closing segments recognition task for video analysis, which is valid when the task type is HeadTailRecognition.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HeadTailTask *AiAnalysisTaskHeadTailResult `json:"HeadTailTask,omitnil,omitempty" name:"HeadTailTask"`
+
+	// The query result of a video analysis summarization task, which is valid when the task type is Description.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DescriptionTask *AiAnalysisTaskDescriptionResult `json:"DescriptionTask,omitnil,omitempty" name:"DescriptionTask"`
+
+	// The query result of a landscape-to-portrait task for video analysis, which is valid when the task type is HorizontalToVertical.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HorizontalToVerticalTask *AiAnalysisTaskHorizontalToVerticalResult `json:"HorizontalToVerticalTask,omitnil,omitempty" name:"HorizontalToVerticalTask"`
 }
 
 type AiAnalysisTaskClassificationInput struct {
@@ -410,6 +472,72 @@ type AiAnalysisTaskCoverResult struct {
 	Output *AiAnalysisTaskCoverOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
+type AiAnalysisTaskDelLogoInput struct {
+	// Intelligent removal template ID.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskDelLogoOutput struct {
+	// Path of a file after removal.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// Storage location of a file after removal.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+
+	// Path of a subtitle file extracted from a video.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginSubtitlePath *string `json:"OriginSubtitlePath,omitnil,omitempty" name:"OriginSubtitlePath"`
+
+	// Path of a subtitle translation file extracted from a video.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TranslateSubtitlePath *string `json:"TranslateSubtitlePath,omitnil,omitempty" name:"TranslateSubtitlePath"`
+}
+
+type AiAnalysisTaskDelLogoResult struct {
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. `0`: Task successful. Other values: Task failed.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Intelligent removal task input.
+	Input *AiAnalysisTaskDelLogoInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Intelligent removal task output.Note: This field may return null, indicating that no valid values can be obtained.
+	Output *AiAnalysisTaskDelLogoOutput `json:"Output,omitnil,omitempty" name:"Output"`
+}
+
+type AiAnalysisTaskDescriptionInput struct {
+	// Intelligent description template ID.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskDescriptionOutput struct {
+	// Intelligent video description list.
+	DescriptionSet []*MediaAiAnalysisDescriptionItem `json:"DescriptionSet,omitnil,omitempty" name:"DescriptionSet"`
+}
+
+type AiAnalysisTaskDescriptionResult struct {
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. `0`: Task successful. Other values: Task failed.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Intelligent description task input.
+	Input *AiAnalysisTaskDescriptionInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Intelligent description task output.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output *AiAnalysisTaskDescriptionOutput `json:"Output,omitnil,omitempty" name:"Output"`
+}
+
 type AiAnalysisTaskFrameTagInput struct {
 	// Intelligent frame-specific video tagging template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
@@ -438,6 +566,38 @@ type AiAnalysisTaskFrameTagResult struct {
 
 	// Output of intelligent frame-specific tagging task.
 	Output *AiAnalysisTaskFrameTagOutput `json:"Output,omitnil,omitempty" name:"Output"`
+}
+
+type AiAnalysisTaskHeadTailInput struct {
+	// Opening and closing segments recognition template ID.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskHeadTailOutput struct {
+	// Opening segment PTS.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HeadTimeOffset *float64 `json:"HeadTimeOffset,omitnil,omitempty" name:"HeadTimeOffset"`
+
+	// Closing segment PTS.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TailTimeOffset *float64 `json:"TailTimeOffset,omitnil,omitempty" name:"TailTimeOffset"`
+}
+
+type AiAnalysisTaskHeadTailResult struct {
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. `0`: Task successful. Other values: Task failed.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Opening and closing segments recognition task input.
+	Input *AiAnalysisTaskHeadTailInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Opening and closing segments recognition task output.Note: This field may return null, indicating that no valid values can be obtained.
+	Output *AiAnalysisTaskHeadTailOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
 type AiAnalysisTaskHighlightInput struct {
@@ -472,6 +632,51 @@ type AiAnalysisTaskHighlightResult struct {
 	Output *AiAnalysisTaskHighlightOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
+type AiAnalysisTaskHorizontalToVerticalInput struct {
+	// Intelligent landscape-to-portrait template ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskHorizontalToVerticalOutput struct {
+	// Intelligent landscape-to-portrait video list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// Storage location of intelligent landscape-to-portrait videos.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+
+	// Confidence.	
+	// 	
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+}
+
+type AiAnalysisTaskHorizontalToVerticalResult struct {
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. 0: Task successful. Other values: Task failed.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Intelligent landscape-to-portrait task input.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Input *AiAnalysisTaskHorizontalToVerticalInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Intelligent landscape-to-portrait task output.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Output *AiAnalysisTaskHorizontalToVerticalOutput `json:"Output,omitnil,omitempty" name:"Output"`
+}
+
 type AiAnalysisTaskInput struct {
 	// Video content analysis template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
@@ -480,6 +685,33 @@ type AiAnalysisTaskInput struct {
 	// Note: This parameter is for customers with special requirements. It needs to be customized offline.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
+}
+
+type AiAnalysisTaskSegmentInput struct {
+	// Splitting task template ID.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type AiAnalysisTaskSegmentOutput struct {
+	// Intelligent splitting sub-segment list.
+	SegmentSet []*SegmentRecognitionItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
+}
+
+type AiAnalysisTaskSegmentResult struct {
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. `0`: Task successful. Other values: Task failed.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Splitting task input.
+	Input *AiAnalysisTaskSegmentInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Splitting task output.Note: This field may return null, indicating that no valid values can be obtained.
+	Output *AiAnalysisTaskSegmentOutput `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
 type AiAnalysisTaskTagInput struct {
@@ -576,8 +808,27 @@ type AiContentReviewTaskInput struct {
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
+type AiParagraphInfo struct {
+	// Segment summary.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Summary *string `json:"Summary,omitnil,omitempty" name:"Summary"`
+
+	// Segmentation start time point, in seconds.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
+
+	// Segmentation end time point, in seconds.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
+}
+
 type AiQualityControlTaskInput struct {
-	// The ID of the quality control template.
+	// Media quality inspection template ID.
+	// You can directly use a preset template or customize a template in the console. The preset templates are as follows:
+	// - 10: Enable all quality inspection items.
+	// - 20: Only enable quality inspection items corresponding to format diagnosis.
+	// - 30: Only enable quality inspection items corresponding to no-reference scoring.
+	// - 40: Only enable quality inspection items corresponding to screen quality.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
@@ -625,6 +876,12 @@ type AiRecognitionResult struct {
 	//  `TransTextRecognition`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TransTextTask *AiRecognitionTaskTransTextResult `json:"TransTextTask,omitnil,omitempty" name:"TransTextTask"`
+
+	// Object recognition result, which is valid when Type is
+	// 
+	// ObjectRecognition.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ObjectTask *AiRecognitionTaskObjectResult `json:"ObjectTask,omitnil,omitempty" name:"ObjectTask"`
 }
 
 type AiRecognitionTaskAsrFullTextResult struct {
@@ -646,6 +903,10 @@ type AiRecognitionTaskAsrFullTextResult struct {
 	// Output information of a full speech recognition task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Output *AiRecognitionTaskAsrFullTextResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Task progress.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 }
 
 type AiRecognitionTaskAsrFullTextResultInput struct {
@@ -836,6 +1097,55 @@ type AiRecognitionTaskInput struct {
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
+type AiRecognitionTaskObjectResult struct {
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. `0`: Task successful. Other values: Task failed.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Object recognition task input.
+	Input *AiRecognitionTaskObjectResultInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Object recognition task output.Note: This field may return null, indicating that no valid values can be obtained.
+	Output *AiRecognitionTaskObjectResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
+}
+
+type AiRecognitionTaskObjectResultInput struct {
+	// Object recognition template ID.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type AiRecognitionTaskObjectResultItem struct {
+	// Name of a recognized object.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// List of segments that contain the object.
+	SegmentSet []*AiRecognitionTaskObjectSeqmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
+}
+
+type AiRecognitionTaskObjectResultOutput struct {
+	// Intelligent object recognition result set.
+	ResultSet []*AiRecognitionTaskObjectResultItem `json:"ResultSet,omitnil,omitempty" name:"ResultSet"`
+}
+
+type AiRecognitionTaskObjectSeqmentItem struct {
+	// Start time offset of a recognized segment, in seconds.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
+
+	// End time offset of a recognized segment, in seconds.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
+
+	// Confidence of a recognized segment. Value range: 0-100.
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+	// Zone coordinates of the recognition result. An array contains four elements: [x1, y1, x2, y2], representing the horizontal and vertical coordinates of the top-left and bottom-right corners, respectively.
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
+}
+
 type AiRecognitionTaskOcrFullTextResult struct {
 	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
@@ -961,6 +1271,10 @@ type AiRecognitionTaskTransTextResult struct {
 	// The output of the translation task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Output *AiRecognitionTaskTransTextResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Task progress.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 }
 
 type AiRecognitionTaskTransTextResultInput struct {
@@ -1542,7 +1856,14 @@ type AnimatedGraphicTaskInput struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Output path to a generated animated image file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_animatedGraphic_{definition}.{format}`.
+	// Output path of a file after animated image generating, which can be a relative or absolute path.
+	// If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).
+	// Relative path example:
+	// <li>Filename_{Variable name}.{format}.</li>
+	// <li>Filename.{format}.</li>
+	// Absolute path example:
+	// <li>/Custom path/Filename_{Variable name}.{format}.</li>
+	// If left empty, a relative path is used by default: `{inputName}_animatedGraphic_{definition}.{format}`.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 }
 
@@ -1722,26 +2043,28 @@ type AudioSeparateConfig struct {
 }
 
 type AudioTemplateInfo struct {
-	// Audio stream codec.
-	// When the outer `Container` parameter is `mp3`, the valid value is:
-	// <li>libmp3lame.</li>
-	// When the outer `Container` parameter is `ogg` or `flac`, the valid value is:
+	// Audio stream encoding format.
+	// When audio transcoding is not needed, the value is:
+	// <li>copy.</li>
+	// When the outer parameter Container is mp3, the value is:
+	// <li>mp3.</li>
+	// When the outer parameter Container is ogg or flac, the value is:
 	// <li>flac.</li>
-	// When the outer `Container` parameter is `m4a`, the valid values include:
-	// <li>libfdk_aac;</li>
-	// <li>libmp3lame;</li>
+	// When the outer parameter Container is m4a, valid values are:
+	// <li>aac;</li>
 	// <li>ac3.</li>
-	// When the outer `Container` parameter is `mp4` or `flv`, the valid values include:
-	// <li>libfdk_aac: more suitable for mp4;</li>
-	// <li>libmp3lame: more suitable for flv.</li>
-	// When the outer `Container` parameter is `hls`, the valid values include:
-	// <li>libfdk_aac;</li>
-	// <li>libmp3lame.</li>
+	// When the outer parameter Container is mp4 or flv, valid values are:
+	// <li>aac: more suitable for mp4;</li>
+	// <li>mp3: more suitable for flv;</li>
+	// <li>mp2.</li>
+	// When the outer parameter Container is hls, valid values are:
+	// <li>aac;</li>
+	// <li>mp3.</li>
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
 	// Audio stream bitrate in Kbps. Value range: 0 and [26, 256].
 	// If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
-	Bitrate *uint64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
+	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
 	// Audio stream sample rate. Valid values:
 	// <li>32,000</li>
@@ -1750,36 +2073,38 @@ type AudioTemplateInfo struct {
 	// In Hz.
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
 
-	// Audio channel system. Valid values:
-	// <li>1: Mono</li>
-	// <li>2: Dual</li>
-	// <li>6: Stereo</li>
-	// When the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.
-	// Default value: 2
+	// Audio channel mode. Valid values:
+	// <li>1: single channel.</li>
+	// <li>2: dual channel.</li>
+	// <li>6: 5.1 surround sound.</li>
+	// When the media encapsulation format is audio (flac, ogg, mp3, and m4a), the number of channels cannot be set to 5.1 surround sound.
+	// Default value: 2.
 	AudioChannel *int64 `json:"AudioChannel,omitnil,omitempty" name:"AudioChannel"`
 }
 
 type AudioTemplateInfoForUpdate struct {
-	// Audio stream codec.
-	// When the outer `Container` parameter is `mp3`, the valid value is:
-	// <li>libmp3lame.</li>
-	// When the outer `Container` parameter is `ogg` or `flac`, the valid value is:
+	// Audio stream encoding format.
+	// When audio transcoding is not needed, the value is:
+	// <li>copy.</li>
+	// When the outer parameter Container is mp3, the value is:
+	// <li>mp3.</li>
+	// When the outer parameter Container is ogg or flac, the value is:
 	// <li>flac.</li>
-	// When the outer `Container` parameter is `m4a`, the valid values include:
-	// <li>libfdk_aac;</li>
-	// <li>libmp3lame;</li>
+	// When the outer parameter Container is m4a, valid values are:
+	// <li>aac;</li>
 	// <li>ac3.</li>
-	// When the outer `Container` parameter is `mp4` or `flv`, the valid values include:
-	// <li>libfdk_aac: More suitable for mp4;</li>
-	// <li>libmp3lame: More suitable for flv;</li>
+	// When the outer parameter Container is mp4 or flv, valid values are:
+	// <li>aac: more suitable for mp4;</li>
+	// <li>mp3: more suitable for flv;</li>
 	// <li>mp2.</li>
-	// When the outer `Container` parameter is `hls`, the valid values include:
-	// <li>libfdk_aac;</li>
-	// <li>libmp3lame.</li>
+	// When the outer parameter Container is hls, valid values are:
+	// <li>aac;</li>
+	// <li>mp3.</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
 	// Audio stream bitrate in Kbps. Value range: 0 and [26, 256]. If the value is 0, the bitrate of the audio stream will be the same as that of the original audio.
-	Bitrate *uint64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
+	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
 	// Audio stream sample rate. Valid values:
 	// <li>32,000</li>
@@ -1788,11 +2113,12 @@ type AudioTemplateInfoForUpdate struct {
 	// In Hz.
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
 
-	// Audio channel system. Valid values:
-	// <li>1: Mono</li>
-	// <li>2: Dual</li>
-	// <li>6: Stereo</li>
-	// When the media is packaged in audio format (FLAC, OGG, MP3, M4A), the sound channel cannot be set to stereo.
+	// Audio channel mode. Valid values:
+	// <li>1: single channel.</li>
+	// <li>2: dual channel.</li>
+	// <li>6: 5.1 surround sound.</li>
+	// When the media encapsulation format is audio (flac, ogg, mp3, and m4a), the number of channels cannot be set to 5.1 surround sound.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AudioChannel *int64 `json:"AudioChannel,omitnil,omitempty" name:"AudioChannel"`
 
 	// The audio tracks to retain. All audio tracks are retained by default.
@@ -1915,6 +2241,11 @@ type ComposeAudioStream struct {
 	// u200c<li>`1`: Mono. </li>
 	// <li>`2`: Dual (default). </li>
 	AudioChannel *int64 `json:"AudioChannel,omitnil,omitempty" name:"AudioChannel"`
+
+	// Reference bitrate, in kbps. Value range: 26-10000.
+	// If set, the encoder will try to encode at this bitrate.
+	// If not set, the service will automatically adopt a suitable bitrate based on audio parameters.
+	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 }
 
 type ComposeCanvas struct {
@@ -2301,6 +2632,94 @@ type ComposeVideoStream struct {
 	// The video frame rate (Hz). Value range: 0–60.  
 	// The default value is `0`, which means that the frame rate will be the same as that of the first video.
 	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
+
+	// Reference bitrate, in kbps. Value range: 50-35000.
+	// If set, the encoder will try to encode at this bitrate.
+	// If not set, the service will automatically adopt a suitable bitrate based on the complexity of an image.
+	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
+}
+
+type ContainerDiagnoseResultItem struct {
+	// Diagnosed exception category. Valid values:
+	// DecodeParamException: decoding parameter exception.
+	// TimeStampException: timestamp exception.
+	// FrameException: frame rate exception.
+	// StreamStatusException: stream status exception.
+	// StreamInfo: stream information exception.
+	// StreamAbnormalCharacteristics: stream characteristics exception.
+	// DecodeException: decoding exception.
+	// HLSRequirements: HLS format exception.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
+
+	// Diagnosed specific exception type. Valid values:
+	// 
+	// VideoResolutionChanged: video resolution change.
+	// AudioSampleRateChanged: audio sample rate change.
+	// AudioChannelsChanged: audio channel quantity change.
+	// ParameterSetsChanged: stream parameter set information change.
+	// DarOrSarInvalid: video aspect ratio exception.
+	// TimestampFallback: DTS timestamp rollback.
+	// DtsJitter: DTS jitter too high.
+	// PtsJitter: PTS jitter too high.
+	// AACDurationDeviation: improper AAC frame timestamp interval.
+	// AudioDroppingFrames: audio frame dropping.
+	// VideoDroppingFrames: video frame dropping.
+	// AVTimestampInterleave: improper audio-video interleaving.
+	// PtsLessThanDts: PTS less than DTS for media streams.
+	// ReceiveFpsJitter: significant jitter in the network receive frame rate.
+	// ReceiveFpsTooSmall: network receive video frame rate too low.
+	// FpsJitter: significant jitter in the stream frame rate calculated via PTS.
+	// StreamOpenFailed: stream open failure.
+	// StreamEnd: stream end.
+	// StreamParseFailed: stream parsing failure.
+	// VideoFirstFrameNotIdr: first frame not an IDR frame.
+	// StreamNALUError: NALU start code error.
+	// TsStreamNoAud: no AUD NALU in the H26x stream of MPEG-TS.
+	// AudioStreamLack: no audio stream.
+	// VideoStreamLack: no video stream.
+	// LackAudioRecover: missing audio stream recovery.
+	// LackVideoRecover: missing video stream recovery.
+	// VideoBitrateOutofRange: video stream bitrate (kbps) out of range.
+	// AudioBitrateOutofRange: audio stream bitrate (kbps) out of range.
+	// VideoDecodeFailed: video decoding error.
+	// AudioDecodeFailed: audio decoding error.
+	// AudioOutOfPhase: opposite phase in dual-channel audio.
+	// VideoDuplicatedFrame: duplicate frames in video streams.
+	// AudioDuplicatedFrame: duplicate frames in audio streams.
+	// VideoRotation: video rotation.
+	// TsMultiPrograms: multiple programs in MPEG2-TS streams
+	// Mp4InvalidCodecFourcc: codec FourCC in MP4 not meeting Apple HLS requirements.
+	// HLSBadM3u8Format: invalid M3U8 file.
+	// HLSInvalidMasterM3u8: invalid main M3U8 file.
+	// HLSInvalidMediaM3u8: invalid media M3U8 file.
+	// HLSMasterM3u8Recommended: parameters recommended by standards missing in main M3U8.
+	// HLSMediaM3u8Recommended: parameters recommended by standards missing in media M3U8.
+	// HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY in media M3U8.
+	// HLSMediaSegmentsStreamNumChange: changed number of streams in segments.
+	// HLSMediaSegmentsPTSJitterDeviation: PTS jumps between segments without EXT-X-DISCONTINUITY.
+	// HLSMediaSegmentsDTSJitterDeviation: DTS jumps between segments without EXT-X-DISCONTINUITY.
+	// TimecodeTrackExist: TMCD track in MP4.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Diagnosed exception level. Valid values:
+	// Fatal: affecting subsequent playback and parsing.
+	// Error: may affect playback.
+	// Warning: potential risk, which may not necessarily affect playback.
+	// Notice: important stream information.
+	// Info: general stream information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SeverityLevel *string `json:"SeverityLevel,omitnil,omitempty" name:"SeverityLevel"`
+
+	// Timestamp of warning, in the format of 2022-12-25T13:14:16Z.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DateTimeSet []*string `json:"DateTimeSet,omitnil,omitempty" name:"DateTimeSet"`
+
+	// Timestamp.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TimestampSet []*float64 `json:"TimestampSet,omitnil,omitempty" name:"TimestampSet"`
 }
 
 type ContentReviewTemplateItem struct {
@@ -2467,7 +2886,7 @@ type CreateAIAnalysisTemplateResponseParams struct {
 	// Unique ID of video content analysis template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2566,7 +2985,7 @@ type CreateAIRecognitionTemplateResponseParams struct {
 	// Unique ID of a video content recognition template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2614,6 +3033,21 @@ type CreateAdaptiveDynamicStreamingTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Whether it is an audio-only template. 0: video template. 1: audio-only template.When the value is 1:
+	// 1. StreamInfos.N.RemoveVideo=1
+	// 2. StreamInfos.N.RemoveAudio=0
+	// 3. StreamInfos.N.Video.Codec=copy
+	// 
+	// When the value is 0:
+	// 
+	// 1. StreamInfos.N.Video.Codec cannot be copy.
+	// 2. StreamInfos.N.Video.Fps cannot be null.
+	PureAudio *uint64 `json:"PureAudio,omitnil,omitempty" name:"PureAudio"`
+
+	// HLS segment type. Valid values: <li>ts-segment: HLS+TS segment.</li> <li>ts-byterange: HLS+TS byte range.</li> <li>mp4-segment: HLS+MP4 segment.</li> <li>mp4-byterange: HLS+MP4 byte range.</li> <li>ts-packed-audio: TS+Packed audio.</li> <li>mp4-packed-audio: MP4+Packed audio.</li> Default value: ts-segment.
+	// Note: The HLS segment format for adaptive bitrate streaming is based on this field.
+	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
 }
 
 type CreateAdaptiveDynamicStreamingTemplateRequest struct {
@@ -2645,6 +3079,21 @@ type CreateAdaptiveDynamicStreamingTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Whether it is an audio-only template. 0: video template. 1: audio-only template.When the value is 1:
+	// 1. StreamInfos.N.RemoveVideo=1
+	// 2. StreamInfos.N.RemoveAudio=0
+	// 3. StreamInfos.N.Video.Codec=copy
+	// 
+	// When the value is 0:
+	// 
+	// 1. StreamInfos.N.Video.Codec cannot be copy.
+	// 2. StreamInfos.N.Video.Fps cannot be null.
+	PureAudio *uint64 `json:"PureAudio,omitnil,omitempty" name:"PureAudio"`
+
+	// HLS segment type. Valid values: <li>ts-segment: HLS+TS segment.</li> <li>ts-byterange: HLS+TS byte range.</li> <li>mp4-segment: HLS+MP4 segment.</li> <li>mp4-byterange: HLS+MP4 byte range.</li> <li>ts-packed-audio: TS+Packed audio.</li> <li>mp4-packed-audio: MP4+Packed audio.</li> Default value: ts-segment.
+	// Note: The HLS segment format for adaptive bitrate streaming is based on this field.
+	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
 }
 
 func (r *CreateAdaptiveDynamicStreamingTemplateRequest) ToJsonString() string {
@@ -2665,6 +3114,8 @@ func (r *CreateAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string)
 	delete(f, "DisableHigherVideoBitrate")
 	delete(f, "DisableHigherVideoResolution")
 	delete(f, "Comment")
+	delete(f, "PureAudio")
+	delete(f, "SegmentType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAdaptiveDynamicStreamingTemplateRequest has unknown keys!", "")
 	}
@@ -2676,7 +3127,7 @@ type CreateAdaptiveDynamicStreamingTemplateResponseParams struct {
 	// Unique ID of an adaptive bitrate streaming template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2808,7 +3259,7 @@ type CreateAnimatedGraphicsTemplateResponseParams struct {
 	// Unique ID of an animated image generating template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2913,7 +3364,7 @@ type CreateContentReviewTemplateResponseParams struct {
 	// The unique ID of the content moderation template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3060,7 +3511,7 @@ type CreateImageSpriteTemplateResponseParams struct {
 	// Unique ID of an image sprite generating template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3160,7 +3611,7 @@ type CreatePersonSampleResponseParams struct {
 	// Information of images that failed the verification by facial feature positioning
 	FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitnil,omitempty" name:"FailFaceInfoSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3177,6 +3628,77 @@ func (r *CreatePersonSampleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreatePersonSampleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateQualityControlTemplateRequestParams struct {
+	// Media quality inspection template name, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Media quality inspection control parameters.
+	QualityControlItemSet []*QualityControlItemConfig `json:"QualityControlItemSet,omitnil,omitempty" name:"QualityControlItemSet"`
+
+	// Media quality inspection template description, with a length limit of 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+}
+
+type CreateQualityControlTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Media quality inspection template name, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Media quality inspection control parameters.
+	QualityControlItemSet []*QualityControlItemConfig `json:"QualityControlItemSet,omitnil,omitempty" name:"QualityControlItemSet"`
+
+	// Media quality inspection template description, with a length limit of 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+}
+
+func (r *CreateQualityControlTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateQualityControlTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "QualityControlItemSet")
+	delete(f, "Comment")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateQualityControlTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateQualityControlTemplateResponseParams struct {
+	// Unique identifier of a media quality inspection template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateQualityControlTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateQualityControlTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateQualityControlTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateQualityControlTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3297,7 +3819,7 @@ type CreateSampleSnapshotTemplateResponseParams struct {
 	// Unique ID of a sampled screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3337,6 +3859,9 @@ type CreateScheduleRequestParams struct {
 
 	// The notification configuration. If you do not specify this parameter, notifications will not be sent.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
+
+	// Resource ID. Ensure the corresponding resource is in the enabled state. The default value is an account's primary resource ID.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 }
 
 type CreateScheduleRequest struct {
@@ -3360,6 +3885,9 @@ type CreateScheduleRequest struct {
 
 	// The notification configuration. If you do not specify this parameter, notifications will not be sent.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
+
+	// Resource ID. Ensure the corresponding resource is in the enabled state. The default value is an account's primary resource ID.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 }
 
 func (r *CreateScheduleRequest) ToJsonString() string {
@@ -3380,6 +3908,7 @@ func (r *CreateScheduleRequest) FromJsonString(s string) error {
 	delete(f, "OutputStorage")
 	delete(f, "OutputDir")
 	delete(f, "TaskNotifyConfig")
+	delete(f, "ResourceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateScheduleRequest has unknown keys!", "")
 	}
@@ -3391,7 +3920,7 @@ type CreateScheduleResponseParams struct {
 	// The scheme ID.
 	ScheduleId *int64 `json:"ScheduleId,omitnil,omitempty" name:"ScheduleId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3506,7 +4035,7 @@ type CreateSnapshotByTimeOffsetTemplateResponseParams struct {
 	// Unique ID of a time point screencapturing template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3528,7 +4057,7 @@ func (r *CreateSnapshotByTimeOffsetTemplateResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type CreateTranscodeTemplateRequestParams struct {
-	// Container format. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+	// Container format. Valid values: mp4, flv, hls, ts, webm, mkv, mxf, mov, mp3, flac, ogg, and m4a. Among them, mp3, flac, ogg, and m4a are for audio-only files.
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
 	// Name of a transcoding template. Length limit: 64 characters.
@@ -3565,7 +4094,7 @@ type CreateTranscodeTemplateRequestParams struct {
 type CreateTranscodeTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// Container format. Valid values: mp4; flv; hls; mp3; flac; ogg; m4a. Among them, mp3, flac, ogg, and m4a are for audio files.
+	// Container format. Valid values: mp4, flv, hls, ts, webm, mkv, mxf, mov, mp3, flac, ogg, and m4a. Among them, mp3, flac, ogg, and m4a are for audio-only files.
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
 	// Name of a transcoding template. Length limit: 64 characters.
@@ -3631,7 +4160,7 @@ type CreateTranscodeTemplateResponseParams struct {
 	// Unique ID of a transcoding template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3775,7 +4304,7 @@ type CreateWatermarkTemplateResponseParams struct {
 	// Watermark image address. This field is valid only when `Type` is `image`.
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3852,7 +4381,7 @@ func (r *CreateWordSamplesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateWordSamplesResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3974,7 +4503,7 @@ type CreateWorkflowResponseParams struct {
 	// Workflow ID.
 	WorkflowId *int64 `json:"WorkflowId,omitnil,omitempty" name:"WorkflowId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4028,7 +4557,7 @@ func (r *DeleteAIAnalysisTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteAIAnalysisTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4082,7 +4611,7 @@ func (r *DeleteAIRecognitionTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteAIRecognitionTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4136,7 +4665,7 @@ func (r *DeleteAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string)
 
 // Predefined struct for user
 type DeleteAdaptiveDynamicStreamingTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4190,7 +4719,7 @@ func (r *DeleteAnimatedGraphicsTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteAnimatedGraphicsTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4244,7 +4773,7 @@ func (r *DeleteContentReviewTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteContentReviewTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4298,7 +4827,7 @@ func (r *DeleteImageSpriteTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteImageSpriteTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4352,7 +4881,7 @@ func (r *DeletePersonSampleRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeletePersonSampleResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4369,6 +4898,60 @@ func (r *DeletePersonSampleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeletePersonSampleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteQualityControlTemplateRequestParams struct {
+	// Unique identifier of a media quality inspection template.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type DeleteQualityControlTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique identifier of a media quality inspection template.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+func (r *DeleteQualityControlTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteQualityControlTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteQualityControlTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteQualityControlTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteQualityControlTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteQualityControlTemplateResponseParams `json:"Response"`
+}
+
+func (r *DeleteQualityControlTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteQualityControlTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4406,7 +4989,7 @@ func (r *DeleteSampleSnapshotTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteSampleSnapshotTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4460,7 +5043,7 @@ func (r *DeleteScheduleRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteScheduleResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4514,7 +5097,7 @@ func (r *DeleteSnapshotByTimeOffsetTemplateRequest) FromJsonString(s string) err
 
 // Predefined struct for user
 type DeleteSnapshotByTimeOffsetTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4568,7 +5151,7 @@ func (r *DeleteTranscodeTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteTranscodeTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4622,7 +5205,7 @@ func (r *DeleteWatermarkTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteWatermarkTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4676,7 +5259,7 @@ func (r *DeleteWordSamplesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteWordSamplesResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4730,7 +5313,7 @@ func (r *DeleteWorkflowRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteWorkflowResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4765,6 +5348,9 @@ type DescribeAIAnalysisTemplatesRequestParams struct {
 	// * Preset
 	// * Custom
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for video analysis template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DescribeAIAnalysisTemplatesRequest struct {
@@ -4783,6 +5369,9 @@ type DescribeAIAnalysisTemplatesRequest struct {
 	// * Preset
 	// * Custom
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for video analysis template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DescribeAIAnalysisTemplatesRequest) ToJsonString() string {
@@ -4801,6 +5390,7 @@ func (r *DescribeAIAnalysisTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
+	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAIAnalysisTemplatesRequest has unknown keys!", "")
 	}
@@ -4815,7 +5405,7 @@ type DescribeAIAnalysisTemplatesResponseParams struct {
 	// List of video content analysis template details.
 	AIAnalysisTemplateSet []*AIAnalysisTemplateItem `json:"AIAnalysisTemplateSet,omitnil,omitempty" name:"AIAnalysisTemplateSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4850,6 +5440,9 @@ type DescribeAIRecognitionTemplatesRequestParams struct {
 	// * Preset
 	// * Custom
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for video recognition template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DescribeAIRecognitionTemplatesRequest struct {
@@ -4868,6 +5461,9 @@ type DescribeAIRecognitionTemplatesRequest struct {
 	// * Preset
 	// * Custom
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for video recognition template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DescribeAIRecognitionTemplatesRequest) ToJsonString() string {
@@ -4886,6 +5482,7 @@ func (r *DescribeAIRecognitionTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
+	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAIRecognitionTemplatesRequest has unknown keys!", "")
 	}
@@ -4900,7 +5497,7 @@ type DescribeAIRecognitionTemplatesResponseParams struct {
 	// List of video content recognition template details.
 	AIRecognitionTemplateSet []*AIRecognitionTemplateItem `json:"AIRecognitionTemplateSet,omitnil,omitempty" name:"AIRecognitionTemplateSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4935,6 +5532,12 @@ type DescribeAdaptiveDynamicStreamingTemplatesRequestParams struct {
 	// <li>Preset: preset template;</li>
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Whether it is an audio-only template. 0: video template. 1: audio-only template.
+	PureAudio *uint64 `json:"PureAudio,omitnil,omitempty" name:"PureAudio"`
+
+	// Filter condition for adaptive transcoding template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DescribeAdaptiveDynamicStreamingTemplatesRequest struct {
@@ -4953,6 +5556,12 @@ type DescribeAdaptiveDynamicStreamingTemplatesRequest struct {
 	// <li>Preset: preset template;</li>
 	// <li>Custom: custom template.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Whether it is an audio-only template. 0: video template. 1: audio-only template.
+	PureAudio *uint64 `json:"PureAudio,omitnil,omitempty" name:"PureAudio"`
+
+	// Filter condition for adaptive transcoding template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DescribeAdaptiveDynamicStreamingTemplatesRequest) ToJsonString() string {
@@ -4971,6 +5580,8 @@ func (r *DescribeAdaptiveDynamicStreamingTemplatesRequest) FromJsonString(s stri
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
+	delete(f, "PureAudio")
+	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAdaptiveDynamicStreamingTemplatesRequest has unknown keys!", "")
 	}
@@ -4985,7 +5596,7 @@ type DescribeAdaptiveDynamicStreamingTemplatesResponseParams struct {
 	// List of adaptive bitrate streaming template details.
 	AdaptiveDynamicStreamingTemplateSet []*AdaptiveDynamicStreamingTemplate `json:"AdaptiveDynamicStreamingTemplateSet,omitnil,omitempty" name:"AdaptiveDynamicStreamingTemplateSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5020,6 +5631,9 @@ type DescribeAnimatedGraphicsTemplatesRequestParams struct {
 	// <li>Preset: Preset template;</li>
 	// <li>Custom: Custom template.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for animated image generating template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DescribeAnimatedGraphicsTemplatesRequest struct {
@@ -5038,6 +5652,9 @@ type DescribeAnimatedGraphicsTemplatesRequest struct {
 	// <li>Preset: Preset template;</li>
 	// <li>Custom: Custom template.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for animated image generating template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DescribeAnimatedGraphicsTemplatesRequest) ToJsonString() string {
@@ -5056,6 +5673,7 @@ func (r *DescribeAnimatedGraphicsTemplatesRequest) FromJsonString(s string) erro
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
+	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAnimatedGraphicsTemplatesRequest has unknown keys!", "")
 	}
@@ -5070,7 +5688,7 @@ type DescribeAnimatedGraphicsTemplatesResponseParams struct {
 	// List of animated image generating template details.
 	AnimatedGraphicsTemplateSet []*AnimatedGraphicsTemplate `json:"AnimatedGraphicsTemplateSet,omitnil,omitempty" name:"AnimatedGraphicsTemplateSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5105,6 +5723,9 @@ type DescribeContentReviewTemplatesRequestParams struct {
 	// * Preset
 	// * Custom
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for intelligent auditing template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DescribeContentReviewTemplatesRequest struct {
@@ -5123,6 +5744,9 @@ type DescribeContentReviewTemplatesRequest struct {
 	// * Preset
 	// * Custom
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for intelligent auditing template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DescribeContentReviewTemplatesRequest) ToJsonString() string {
@@ -5141,6 +5765,7 @@ func (r *DescribeContentReviewTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
+	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeContentReviewTemplatesRequest has unknown keys!", "")
 	}
@@ -5155,7 +5780,7 @@ type DescribeContentReviewTemplatesResponseParams struct {
 	// List of content audit template details.
 	ContentReviewTemplateSet []*ContentReviewTemplateItem `json:"ContentReviewTemplateSet,omitnil,omitempty" name:"ContentReviewTemplateSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5190,6 +5815,9 @@ type DescribeImageSpriteTemplatesRequestParams struct {
 	// <li>Preset: Preset template;</li>
 	// <li>Custom: Custom template.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for sprite template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DescribeImageSpriteTemplatesRequest struct {
@@ -5208,6 +5836,9 @@ type DescribeImageSpriteTemplatesRequest struct {
 	// <li>Preset: Preset template;</li>
 	// <li>Custom: Custom template.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for sprite template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DescribeImageSpriteTemplatesRequest) ToJsonString() string {
@@ -5226,6 +5857,7 @@ func (r *DescribeImageSpriteTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
+	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImageSpriteTemplatesRequest has unknown keys!", "")
 	}
@@ -5240,7 +5872,7 @@ type DescribeImageSpriteTemplatesResponseParams struct {
 	// List of image sprite generating template details.
 	ImageSpriteTemplateSet []*ImageSpriteTemplate `json:"ImageSpriteTemplateSet,omitnil,omitempty" name:"ImageSpriteTemplateSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5297,7 +5929,7 @@ type DescribeMediaMetaDataResponseParams struct {
 	// Media metadata.
 	MetaData *MediaMetaData `json:"MetaData,omitnil,omitempty" name:"MetaData"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5402,7 +6034,7 @@ type DescribePersonSamplesResponseParams struct {
 	// Image information
 	PersonSet []*AiSamplePerson `json:"PersonSet,omitnil,omitempty" name:"PersonSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5423,6 +6055,101 @@ func (r *DescribePersonSamplesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeQualityControlTemplatesRequestParams struct {
+	// Filter condition for media quality inspection template unique identifiers, with an array length limit of 100.
+	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries.
+	// 
+	// <li>Default value: 10.</li>
+	// <li>Maximum value: 100.</li>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Preset: preset template. Custom: custom template.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for media quality inspection template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type DescribeQualityControlTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Filter condition for media quality inspection template unique identifiers, with an array length limit of 100.
+	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries.
+	// 
+	// <li>Default value: 10.</li>
+	// <li>Maximum value: 100.</li>
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Preset: preset template. Custom: custom template.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for media quality inspection template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *DescribeQualityControlTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeQualityControlTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definitions")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Type")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeQualityControlTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeQualityControlTemplatesResponseParams struct {
+	// Total number of records that meet filter conditions.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Media quality inspection template details list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	QualityControlTemplateSet []*QualityControlTemplate `json:"QualityControlTemplateSet,omitnil,omitempty" name:"QualityControlTemplateSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeQualityControlTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeQualityControlTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeQualityControlTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeQualityControlTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeSampleSnapshotTemplatesRequestParams struct {
 	// Unique ID filter of sampled screencapturing templates. Array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
@@ -5437,6 +6164,9 @@ type DescribeSampleSnapshotTemplatesRequestParams struct {
 	// <li>Preset: Preset template;</li>
 	// <li>Custom: Custom template.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for sampled screenshot template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DescribeSampleSnapshotTemplatesRequest struct {
@@ -5455,6 +6185,9 @@ type DescribeSampleSnapshotTemplatesRequest struct {
 	// <li>Preset: Preset template;</li>
 	// <li>Custom: Custom template.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for sampled screenshot template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DescribeSampleSnapshotTemplatesRequest) ToJsonString() string {
@@ -5473,6 +6206,7 @@ func (r *DescribeSampleSnapshotTemplatesRequest) FromJsonString(s string) error 
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
+	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSampleSnapshotTemplatesRequest has unknown keys!", "")
 	}
@@ -5487,7 +6221,7 @@ type DescribeSampleSnapshotTemplatesResponseParams struct {
 	// List of sampled screencapturing template details.
 	SampleSnapshotTemplateSet []*SampleSnapshotTemplate `json:"SampleSnapshotTemplateSet,omitnil,omitempty" name:"SampleSnapshotTemplateSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5587,7 +6321,7 @@ type DescribeSchedulesResponseParams struct {
 	// The information of the schemes.
 	ScheduleInfoSet []*SchedulesInfo `json:"ScheduleInfoSet,omitnil,omitempty" name:"ScheduleInfoSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5622,6 +6356,9 @@ type DescribeSnapshotByTimeOffsetTemplatesRequestParams struct {
 	// <li>Preset: Preset template;</li>
 	// <li>Custom: Custom template.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for time point screenshot template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DescribeSnapshotByTimeOffsetTemplatesRequest struct {
@@ -5640,6 +6377,9 @@ type DescribeSnapshotByTimeOffsetTemplatesRequest struct {
 	// <li>Preset: Preset template;</li>
 	// <li>Custom: Custom template.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Filter condition for time point screenshot template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DescribeSnapshotByTimeOffsetTemplatesRequest) ToJsonString() string {
@@ -5658,6 +6398,7 @@ func (r *DescribeSnapshotByTimeOffsetTemplatesRequest) FromJsonString(s string) 
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "Type")
+	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSnapshotByTimeOffsetTemplatesRequest has unknown keys!", "")
 	}
@@ -5672,7 +6413,7 @@ type DescribeSnapshotByTimeOffsetTemplatesResponseParams struct {
 	// List of time point screencapturing template details.
 	SnapshotByTimeOffsetTemplateSet []*SnapshotByTimeOffsetTemplate `json:"SnapshotByTimeOffsetTemplateSet,omitnil,omitempty" name:"SnapshotByTimeOffsetTemplateSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5726,11 +6467,7 @@ func (r *DescribeTaskDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTaskDetailResponseParams struct {
-	// The task type. Valid values:
-	// <li>WorkflowTask</li>
-	// <li>EditMediaTask</li>
-	// <li>LiveStreamProcessTask</li>
-	// <li>ScheduleTask (scheme)</li>
+	// Task type. Valid values:<li>WorkflowTask: video workflow processing task.</li><li>EditMediaTask: video editing task.</li><li>LiveStreamProcessTask: live stream processing task.</li><li>ScheduleTask: orchestration processing task.</li><li>EvaluationTask: evaluation task.</li>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
 	// Task status. Valid values:
@@ -5783,7 +6520,7 @@ type DescribeTaskDetailResponseParams struct {
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	LiveScheduleTask *LiveScheduleTask `json:"LiveScheduleTask,omitnil,omitempty" name:"LiveScheduleTask"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5860,7 +6597,7 @@ type DescribeTasksResponseParams struct {
 	// The total number of records that meet the conditions.
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -5912,6 +6649,9 @@ type DescribeTranscodeTemplatesRequestParams struct {
 	// <li>Enhance: Audio/Video enhancement template.</li>
 	// This parameter is left empty by default, which indicates to return all types of templates.
 	TranscodeType *string `json:"TranscodeType,omitnil,omitempty" name:"TranscodeType"`
+
+	// Filter condition for transcoding template identifiers, with a length limit of 64 characters.	
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DescribeTranscodeTemplatesRequest struct {
@@ -5947,6 +6687,9 @@ type DescribeTranscodeTemplatesRequest struct {
 	// <li>Enhance: Audio/Video enhancement template.</li>
 	// This parameter is left empty by default, which indicates to return all types of templates.
 	TranscodeType *string `json:"TranscodeType,omitnil,omitempty" name:"TranscodeType"`
+
+	// Filter condition for transcoding template identifiers, with a length limit of 64 characters.	
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DescribeTranscodeTemplatesRequest) ToJsonString() string {
@@ -5968,6 +6711,7 @@ func (r *DescribeTranscodeTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Offset")
 	delete(f, "Limit")
 	delete(f, "TranscodeType")
+	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTranscodeTemplatesRequest has unknown keys!", "")
 	}
@@ -5982,7 +6726,7 @@ type DescribeTranscodeTemplatesResponseParams struct {
 	// List of transcoding template details.
 	TranscodeTemplateSet []*TranscodeTemplate `json:"TranscodeTemplateSet,omitnil,omitempty" name:"TranscodeTemplateSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -6019,6 +6763,9 @@ type DescribeWatermarkTemplatesRequestParams struct {
 	// <li>Default value: 10;</li>
 	// <li>Maximum value: 100.</li>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter condition for watermark template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 type DescribeWatermarkTemplatesRequest struct {
@@ -6039,6 +6786,9 @@ type DescribeWatermarkTemplatesRequest struct {
 	// <li>Default value: 10;</li>
 	// <li>Maximum value: 100.</li>
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter condition for watermark template identifiers, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 }
 
 func (r *DescribeWatermarkTemplatesRequest) ToJsonString() string {
@@ -6057,6 +6807,7 @@ func (r *DescribeWatermarkTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Type")
 	delete(f, "Offset")
 	delete(f, "Limit")
+	delete(f, "Name")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWatermarkTemplatesRequest has unknown keys!", "")
 	}
@@ -6071,7 +6822,7 @@ type DescribeWatermarkTemplatesResponseParams struct {
 	// List of watermarking template details.
 	WatermarkTemplateSet []*WatermarkTemplate `json:"WatermarkTemplateSet,omitnil,omitempty" name:"WatermarkTemplateSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -6177,7 +6928,7 @@ type DescribeWordSamplesResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	WordSet []*AiSampleWord `json:"WordSet,omitnil,omitempty" name:"WordSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -6264,7 +7015,7 @@ type DescribeWorkflowsResponseParams struct {
 	// Workflow information array.
 	WorkflowInfoSet []*WorkflowInfo `json:"WorkflowInfoSet,omitnil,omitempty" name:"WorkflowInfoSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -6282,6 +7033,82 @@ func (r *DescribeWorkflowsResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *DescribeWorkflowsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type DiagnoseResult struct {
+	// Diagnosed exception category. Valid values:
+	// DecodeParamException: decoding parameter exception.
+	// TimeStampException: timestamp exception.
+	// FrameException: frame rate exception.
+	// StreamStatusException: stream status exception.
+	// StreamInfo: stream information exception.
+	// StreamAbnormalCharacteristics: stream characteristics exception.
+	// DecodeException: decoding exception.
+	// HLSRequirements: HLS format exception.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
+
+	// Diagnosed specific exception type. Valid values:
+	// 
+	// VideoResolutionChanged: video resolution change.
+	// AudioSampleRateChanged: audio sample rate change.
+	// AudioChannelsChanged: audio channel quantity change.ParameterSetsChanged: stream parameter set information change.
+	// DarOrSarInvalid: video aspect ratio exception.
+	// TimestampFallback: DTS timestamp rollback.DtsJitter: DTS jitter too high.
+	// PtsJitter: PTS jitter too high.
+	// AACDurationDeviation: improper AAC frame timestamp interval.
+	// AudioDroppingFrames: audio frame dropping.
+	// VideoDroppingFrames: video frame dropping.
+	// AVTimestampInterleave: improper audio-video interleaving.
+	// PtsLessThanDts: PTS less than DTS for media streams.
+	// ReceiveFpsJitter: significant jitter in the network receive frame rate.ReceiveFpsTooSmall: network receive video frame rate too low.FpsJitter: significant jitter in the stream frame rate calculated via PTS.StreamOpenFailed: stream open failure.
+	// StreamEnd: stream end.
+	// StreamParseFailed: stream parsing failure.
+	// VideoFirstFrameNotIdr: first frame not an IDR frame.
+	// StreamNALUError: NALU start code error.
+	// TsStreamNoAud: no AUD NALU in the H26x stream of MPEG-TS.AudioStreamLack: no audio stream.
+	// VideoStreamLack: no video stream.
+	// LackAudioRecover: missing audio stream recovery.
+	// LackVideoRecover: missing video stream recovery.
+	// VideoBitrateOutofRange: video stream bitrate (kbps) out of range.
+	// AudioBitrateOutofRange: audio stream bitrate (kbps) out of range.
+	// VideoDecodeFailed: video decoding error.
+	// AudioDecodeFailed: audio decoding error.
+	// AudioOutOfPhase: opposite phase in dual-channel audio.
+	// VideoDuplicatedFrame: duplicate frames in video streams.
+	// AudioDuplicatedFrame: duplicate frames in audio streams.
+	// VideoRotation: video rotation.
+	// TsMultiPrograms: multiple programs in MPEG2-TS streams.Mp4InvalidCodecFourcc: codec FourCC in MP4 not meeting Apple HLS requirements.
+	// HLSBadM3u8Format: invalid M3U8 file.
+	// HLSInvalidMasterM3u8: invalid main M3U8 file.
+	// HLSInvalidMediaM3u8: invalid media M3U8 file.
+	// HLSMasterM3u8Recommended: parameters recommended by standards missing in main M3U8.
+	// HLSMediaM3u8Recommended: parameters recommended by standards missing in media M3U8.
+	// HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY in media M3U8.
+	// HLSMediaSegmentsStreamNumChange: changed number of streams in segments.
+	// HLSMediaSegmentsPTSJitterDeviation: PTS jumps between segments without EXT-X-DISCONTINUITY.
+	// HLSMediaSegmentsDTSJitterDeviation: DTS jumps between segments without EXT-X-DISCONTINUITY.
+	// TimecodeTrackExist: TMCD track in MP4.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+
+	Timestamp *float64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
+
+
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+
+	DateTime *string `json:"DateTime,omitnil,omitempty" name:"DateTime"`
+
+	// Diagnosed exception level. Valid values:
+	// Fatal: affecting subsequent playback and parsing.
+	// Error: may affect playback.
+	// Warning: potential risk, which may not necessarily affect playback.
+	// Notice: important stream information.
+	// Info: general stream information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SeverityLevel *string `json:"SeverityLevel,omitnil,omitempty" name:"SeverityLevel"`
 }
 
 // Predefined struct for user
@@ -6318,7 +7145,7 @@ func (r *DisableScheduleRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DisableScheduleResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -6372,7 +7199,7 @@ func (r *DisableWorkflowRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DisableWorkflowResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -6531,7 +7358,7 @@ type EditMediaResponseParams struct {
 	// Video editing task ID, which can be used to query the status of an editing task.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -6622,7 +7449,7 @@ func (r *EnableScheduleRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type EnableScheduleResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -6676,7 +7503,7 @@ func (r *EnableWorkflowRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type EnableWorkflowResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -6750,7 +7577,7 @@ type ExecuteFunctionResponseParams struct {
 	// Packed string, which will vary according to the custom API.
 	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -6871,12 +7698,12 @@ type HdrConfig struct {
 	// Default value: ON.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// The strength. Valid values:
+	// Type. Valid values:
 	// <li>HDR10</li>
 	// <li>HLG</li>
-	// Default value: HDR10.
-	// Note: The video codec must be `libx265`.
-	// Note: The bit depth for video encoding is 10 bits.
+	// Default Value: HDR10.
+	// Note: The video encoding method should be H.265.
+	// Note: The video encoding bit depth is 10.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
@@ -6900,6 +7727,10 @@ type HighlightSegmentItem struct {
 
 	// The end time offset of the segment.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
+
+	// Segment tag.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SegmentTags []*string `json:"SegmentTags,omitnil,omitempty" name:"SegmentTags"`
 }
 
 type ImageQualityEnhanceConfig struct {
@@ -6926,7 +7757,13 @@ type ImageSpriteTaskInput struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Output path to a generated image sprite file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}_{number}.{format}`.
+	// Output path of a captured sprite image file, which can be a relative or absolute path.
+	// If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).Relative path example:
+	// <li>Filename_{Variable name}.{format}.</li>
+	// <li>Filename.{format}.</li>
+	// Absolute path example:
+	// <li>/Custom path/Filename_{Variable name}.{format}.</li>
+	// If left empty, a relative path is used by default: `{inputName}_imageSprite_{definition}_{number}.{format}`.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
 	// Output path to the WebVTT file after an image sprite is generated, which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_imageSprite_{definition}.{format}`.
@@ -6996,10 +7833,11 @@ type ImageWatermarkInput struct {
 	// String generated by [Base64-encoding](https://tools.ietf.org/html/rfc4648) a watermark image. JPEG and PNG images are supported.
 	ImageContent *string `json:"ImageContent,omitnil,omitempty" name:"ImageContent"`
 
-	// Watermark width. % and px formats are supported:
-	// <li>If the string ends in %, the `Width` of the watermark will be the specified percentage of the video width. For example, `10%` means that `Width` is 10% of the video width;</li>
-	// <li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
-	// Default value: 10%.
+	// Width of a watermark, supporting two formats: % and px.
+	// <li>If a string ends with %, it indicates that the `Width` of a watermark is a percentage of a video's width. For example, `10%` means that `Width` is 10% of a video's width.</li>
+	// <li>If a string ends with px, the `Width` of a watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
+	// 
+	// When width and height are not specified or set to 0, the default value is 10%.
 	Width *string `json:"Width,omitnil,omitempty" name:"Width"`
 
 	// Watermark height. % and px formats are supported:
@@ -7024,10 +7862,10 @@ type ImageWatermarkInputForUpdate struct {
 	// <li>If the string ends in px, the `Width` of the watermark will be in pixels. For example, `100px` means that `Width` is 100 pixels. Value range: [8, 4096].</li>
 	Width *string `json:"Width,omitnil,omitempty" name:"Width"`
 
-	// Watermark height. % and px formats are supported:
-	// <li>If the string ends in %, the `Height` of the watermark will be the specified percentage of the video height. For example, `10%` means that `Height` is 10% of the video height;</li>
-	// <li>If the string ends in px, the `Height` of the watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
-	// Default value: 0px, which means that `Height` will be proportionally scaled according to the aspect ratio of the original watermark image.
+	// Height of a watermark, supporting two formats: % and px.
+	// <li>If a string ends with %, it indicates that the `Height` of a watermark is a percentage of a video's height. For example, `10%` means that `Height` is 10% of a video's height.</li>
+	// <li>If a string ends with px, the `Height` of a watermark will be in pixels. For example, `100px` means that `Height` is 100 pixels. Value range: 0 or [8, 4096].</li>
+	// 
 	Height *string `json:"Height,omitnil,omitempty" name:"Height"`
 
 	// Repeat type of an animated watermark. Valid values:
@@ -7063,12 +7901,17 @@ type LiveActivityResItem struct {
 	// The output of a live recording task.
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	LiveRecordTask *LiveScheduleLiveRecordTaskResult `json:"LiveRecordTask,omitnil,omitempty" name:"LiveRecordTask"`
+
+	// Media quality inspection task output.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LiveQualityControlTask *ScheduleQualityControlTaskResult `json:"LiveQualityControlTask,omitnil,omitempty" name:"LiveQualityControlTask"`
 }
 
 type LiveActivityResult struct {
-	// The task type.
-	// <li>`LiveRecord`: Live recording. </li>
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Atomic task type.
+	// <li>LiveRecord: live recording.</li>
+	// <li>AiQualityControl: media quality inspection.</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ActivityType *string `json:"ActivityType,omitnil,omitempty" name:"ActivityType"`
 
 	// The task output.
@@ -7182,19 +8025,56 @@ type LiveScheduleTask struct {
 	LiveActivityResultSet []*LiveActivityResult `json:"LiveActivityResultSet,omitnil,omitempty" name:"LiveActivityResultSet"`
 }
 
+type LiveStreamAiAnalysisResultInfo struct {
+
+	ResultSet []*LiveStreamAiAnalysisResultItem `json:"ResultSet,omitnil,omitempty" name:"ResultSet"`
+}
+
+type LiveStreamAiAnalysisResultItem struct {
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+
+	SegmentResultSet []*SegmentRecognitionItem `json:"SegmentResultSet,omitnil,omitempty" name:"SegmentResultSet"`
+}
+
+type LiveStreamAiQualityControlResultInfo struct {
+	// Content quality inspection result list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: QualityControlResults is deprecated.
+	QualityControlResults []*QualityControlResult `json:"QualityControlResults,omitnil,omitempty" name:"QualityControlResults"`
+
+
+	//
+	// Deprecated: DiagnoseResults is deprecated.
+	DiagnoseResults []*DiagnoseResult `json:"DiagnoseResults,omitnil,omitempty" name:"DiagnoseResults"`
+
+	// Content quality inspection result list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	QualityControlResultSet []*QualityControlResult `json:"QualityControlResultSet,omitnil,omitempty" name:"QualityControlResultSet"`
+
+	// Format diagnostic result list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DiagnoseResultSet []*DiagnoseResult `json:"DiagnoseResultSet,omitnil,omitempty" name:"DiagnoseResultSet"`
+}
+
 type LiveStreamAiRecognitionResultInfo struct {
 	// Content recognition result list.
 	ResultSet []*LiveStreamAiRecognitionResultItem `json:"ResultSet,omitnil,omitempty" name:"ResultSet"`
 }
 
 type LiveStreamAiRecognitionResultItem struct {
-	// The result type. Valid values:
-	// <li>FaceRecognition: Face recognition</li>
-	// <li>AsrWordsRecognition: Speech keyword recognition</li>
-	// <li>OcrWordsRecognition: Text keyword recognition</li>
-	// <li>AsrFullTextRecognition: Full speech recognition</li>
-	// <li>OcrFullTextRecognition: Full text recognition</li>
-	// <li>TransTextRecognition: Speech translation</li>
+	// Result type. Valid values:
+	// <li>FaceRecognition: face recognition.</li>
+	// <li>AsrWordsRecognition: speech keyword recognition.</li>
+	// <li>OcrWordsRecognition: text keyword recognition.</li>
+	// <li>AsrFullTextRecognition: full speech recognition.</li>
+	// <li>OcrFullTextRecognition: full text recognition.</li>
+	// <li>TransTextRecognition: speech translation.</li>
+	// 
+	// <li>ObjectRecognition: object recognition.</li>
+	// <li>TagRecognition: highlights marking.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Face recognition result, which is valid when `Type` is
@@ -7219,6 +8099,12 @@ type LiveStreamAiRecognitionResultItem struct {
 
 	// The translation result. This parameter is valid only if `Type` is `TransTextRecognition`.
 	TransTextRecognitionResultSet []*LiveStreamTransTextRecognitionResult `json:"TransTextRecognitionResultSet,omitnil,omitempty" name:"TransTextRecognitionResultSet"`
+
+	// Object recognition result, which is valid when Type is ObjectRecognition.
+	ObjectRecognitionResultSet []*LiveStreamObjectRecognitionResult `json:"ObjectRecognitionResultSet,omitnil,omitempty" name:"ObjectRecognitionResultSet"`
+
+
+	TagRecognitionResultSet []*LiveStreamTagRecognitionResult `json:"TagRecognitionResultSet,omitnil,omitempty" name:"TagRecognitionResultSet"`
 }
 
 type LiveStreamAiReviewImagePoliticalResult struct {
@@ -7421,6 +8307,27 @@ type LiveStreamFaceRecognitionResult struct {
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
 }
 
+type LiveStreamObjectRecognitionResult struct {
+	// Name of a recognized object.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Start PTS time of a recognized segment, in seconds.
+	StartPtsOffset *float64 `json:"StartPtsOffset,omitnil,omitempty" name:"StartPtsOffset"`
+
+	// End PTS time of a recognized segment, in seconds.
+	EndPtsOffset *float64 `json:"EndPtsOffset,omitnil,omitempty" name:"EndPtsOffset"`
+
+	// Confidence of a recognized segment. Value range: 0-100.
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+	// Zone coordinates of the recognition result. An array contains four elements: [x1, y1, x2, y2], representing the horizontal and vertical coordinates of the top-left and bottom-right corners, respectively.
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
+
+	// Screenshot link.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+}
+
 type LiveStreamOcrFullTextRecognitionResult struct {
 	// Speech text.
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
@@ -7484,7 +8391,39 @@ type LiveStreamProcessTask struct {
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
+type LiveStreamRecordResultInfo struct {
+	// Whether recording ends.
+	// 0: Recording does not end, returning a single file.
+	// 1: Recording ends, returning all recording files.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RecordOver *uint64 `json:"RecordOver,omitnil,omitempty" name:"RecordOver"`
+
+	// File list.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FileResults []*LiveRecordFile `json:"FileResults,omitnil,omitempty" name:"FileResults"`
+}
+
+type LiveStreamTagRecognitionResult struct {
+
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+
+	StartPtsTime *float64 `json:"StartPtsTime,omitnil,omitempty" name:"StartPtsTime"`
+
+
+	EndPtsTime *float64 `json:"EndPtsTime,omitnil,omitempty" name:"EndPtsTime"`
+
+
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+}
+
 type LiveStreamTaskNotifyConfig struct {
+	// The notification type, `CMQ` by default. If this parameter is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`.
+	// 
+	// <font color="red">Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.</font>
+	NotifyType *string `json:"NotifyType,omitnil,omitempty" name:"NotifyType"`
+
 	// CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
 	CmqModel *string `json:"CmqModel,omitnil,omitempty" name:"CmqModel"`
 
@@ -7497,13 +8436,12 @@ type LiveStreamTaskNotifyConfig struct {
 	// This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
 
-	// The notification type, `CMQ` by default. If this parameter is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`.
-	// 
-	// <font color="red">Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.</font>
-	NotifyType *string `json:"NotifyType,omitnil,omitempty" name:"NotifyType"`
-
 	// HTTP callback URL, required if `NotifyType` is set to `URL`
 	NotifyUrl *string `json:"NotifyUrl,omitnil,omitempty" name:"NotifyUrl"`
+
+	// Key used to generate a callback signature.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NotifyKey *string `json:"NotifyKey,omitnil,omitempty" name:"NotifyKey"`
 }
 
 type LiveStreamTransTextRecognitionResult struct {
@@ -7588,7 +8526,7 @@ func (r *ManageTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ManageTaskResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -7622,6 +8560,18 @@ type MediaAiAnalysisCoverItem struct {
 
 	// Confidence of intelligently generated cover between 0 and 100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+}
+
+type MediaAiAnalysisDescriptionItem struct {
+	// Intelligent description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Confidence of the intelligent description, with a value range from 0 to 100.
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+	// Segmentation result.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Paragraphs []*AiParagraphInfo `json:"Paragraphs,omitnil,omitempty" name:"Paragraphs"`
 }
 
 type MediaAiAnalysisFrameTagItem struct {
@@ -8254,6 +9204,17 @@ type MediaVideoStreamItem struct {
 	// HDR type
 	// Note: This field may return `null`, indicating that no valid value was found.
 	HdrType *string `json:"HdrType,omitnil,omitempty" name:"HdrType"`
+
+
+	Codecs *string `json:"Codecs,omitnil,omitempty" name:"Codecs"`
+
+	// Numerator of the frame rate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FpsNumerator *int64 `json:"FpsNumerator,omitnil,omitempty" name:"FpsNumerator"`
+
+	// Denominator of the frame rate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FpsDenominator *int64 `json:"FpsDenominator,omitnil,omitempty" name:"FpsDenominator"`
 }
 
 // Predefined struct for user
@@ -8332,7 +9293,7 @@ func (r *ModifyAIAnalysisTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAIAnalysisTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -8435,7 +9396,7 @@ func (r *ModifyAIRecognitionTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAIRecognitionTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -8484,6 +9445,21 @@ type ModifyAdaptiveDynamicStreamingTemplateRequestParams struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Whether it is an audio-only template. 0: video template. 1: audio-only template.When the value is 1:
+	// 1. StreamInfos.N.RemoveVideo=1
+	// 2. StreamInfos.N.RemoveAudio=0
+	// 3. StreamInfos.N.Video.Codec=copy
+	// 
+	// When the value is 0:
+	// 
+	// 1. StreamInfos.N.Video.Codec cannot be copy.
+	// 2. StreamInfos.N.Video.Fps cannot be null.
+	PureAudio *uint64 `json:"PureAudio,omitnil,omitempty" name:"PureAudio"`
+
+	// HLS segment type. Valid values: <li>ts-segment: HLS+TS segment.</li> <li>ts-byterange: HLS+TS byte range.</li> <li>mp4-segment: HLS+MP4 segment.</li> <li>mp4-byterange: HLS+MP4 byte range.</li> <li>ts-packed-audio: TS+Packed audio.</li> <li>mp4-packed-audio: MP4+Packed audio.</li> Default value: ts-segment.
+	// Note: The HLS segment format for adaptive bitrate streaming is based on this field.
+	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
 }
 
 type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
@@ -8516,6 +9492,21 @@ type ModifyAdaptiveDynamicStreamingTemplateRequest struct {
 
 	// Template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Whether it is an audio-only template. 0: video template. 1: audio-only template.When the value is 1:
+	// 1. StreamInfos.N.RemoveVideo=1
+	// 2. StreamInfos.N.RemoveAudio=0
+	// 3. StreamInfos.N.Video.Codec=copy
+	// 
+	// When the value is 0:
+	// 
+	// 1. StreamInfos.N.Video.Codec cannot be copy.
+	// 2. StreamInfos.N.Video.Fps cannot be null.
+	PureAudio *uint64 `json:"PureAudio,omitnil,omitempty" name:"PureAudio"`
+
+	// HLS segment type. Valid values: <li>ts-segment: HLS+TS segment.</li> <li>ts-byterange: HLS+TS byte range.</li> <li>mp4-segment: HLS+MP4 segment.</li> <li>mp4-byterange: HLS+MP4 byte range.</li> <li>ts-packed-audio: TS+Packed audio.</li> <li>mp4-packed-audio: MP4+Packed audio.</li> Default value: ts-segment.
+	// Note: The HLS segment format for adaptive bitrate streaming is based on this field.
+	SegmentType *string `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
 }
 
 func (r *ModifyAdaptiveDynamicStreamingTemplateRequest) ToJsonString() string {
@@ -8537,6 +9528,8 @@ func (r *ModifyAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string)
 	delete(f, "DisableHigherVideoResolution")
 	delete(f, "StreamInfos")
 	delete(f, "Comment")
+	delete(f, "PureAudio")
+	delete(f, "SegmentType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAdaptiveDynamicStreamingTemplateRequest has unknown keys!", "")
 	}
@@ -8545,7 +9538,7 @@ func (r *ModifyAdaptiveDynamicStreamingTemplateRequest) FromJsonString(s string)
 
 // Predefined struct for user
 type ModifyAdaptiveDynamicStreamingTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -8681,7 +9674,7 @@ func (r *ModifyAnimatedGraphicsTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyAnimatedGraphicsTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -8790,7 +9783,7 @@ func (r *ModifyContentReviewTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyContentReviewTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -8941,7 +9934,7 @@ func (r *ModifyImageSpriteTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyImageSpriteTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -9043,7 +10036,7 @@ type ModifyPersonSampleResponseParams struct {
 	// Note: this field may return `null`, indicating that no valid values can be obtained.
 	FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitnil,omitempty" name:"FailFaceInfoSet"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -9060,6 +10053,81 @@ func (r *ModifyPersonSampleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyPersonSampleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyQualityControlTemplateRequestParams struct {
+	// Unique identifier of a media quality inspection template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Media quality inspection template name, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Template description, with a length limit of 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Media quality inspection configuration parameters.
+	QualityControlItemSet []*QualityControlItemConfig `json:"QualityControlItemSet,omitnil,omitempty" name:"QualityControlItemSet"`
+}
+
+type ModifyQualityControlTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique identifier of a media quality inspection template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Media quality inspection template name, with a length limit of 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Template description, with a length limit of 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Media quality inspection configuration parameters.
+	QualityControlItemSet []*QualityControlItemConfig `json:"QualityControlItemSet,omitnil,omitempty" name:"QualityControlItemSet"`
+}
+
+func (r *ModifyQualityControlTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyQualityControlTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	delete(f, "Name")
+	delete(f, "Comment")
+	delete(f, "QualityControlItemSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyQualityControlTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyQualityControlTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyQualityControlTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyQualityControlTemplateResponseParams `json:"Response"`
+}
+
+func (r *ModifyQualityControlTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyQualityControlTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9184,7 +10252,7 @@ func (r *ModifySampleSnapshotTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySampleSnapshotTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -9228,6 +10296,9 @@ type ModifyScheduleRequestParams struct {
 
 	// The notification configuration.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
+
+	// Resource ID. Ensure the corresponding resource is in the enabled state.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 }
 
 type ModifyScheduleRequest struct {
@@ -9255,6 +10326,9 @@ type ModifyScheduleRequest struct {
 
 	// The notification configuration.
 	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
+
+	// Resource ID. Ensure the corresponding resource is in the enabled state.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 }
 
 func (r *ModifyScheduleRequest) ToJsonString() string {
@@ -9276,6 +10350,7 @@ func (r *ModifyScheduleRequest) FromJsonString(s string) error {
 	delete(f, "OutputStorage")
 	delete(f, "OutputDir")
 	delete(f, "TaskNotifyConfig")
+	delete(f, "ResourceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyScheduleRequest has unknown keys!", "")
 	}
@@ -9284,7 +10359,7 @@ func (r *ModifyScheduleRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyScheduleResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -9403,7 +10478,7 @@ func (r *ModifySnapshotByTimeOffsetTemplateRequest) FromJsonString(s string) err
 
 // Predefined struct for user
 type ModifySnapshotByTimeOffsetTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -9528,7 +10603,7 @@ func (r *ModifyTranscodeTemplateRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyTranscodeTemplateResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -9657,7 +10732,7 @@ type ModifyWatermarkTemplateResponseParams struct {
 	// Image watermark address. This field is valid only when `ImageTemplate.ImageContent` is non-empty.
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -9741,7 +10816,7 @@ func (r *ModifyWordSampleRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyWordSampleResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -9929,9 +11004,11 @@ func (r *ParseLiveStreamProcessNotificationRequest) FromJsonString(s string) err
 
 // Predefined struct for user
 type ParseLiveStreamProcessNotificationResponseParams struct {
-	// Result type of live stream processing. Valid values:
-	// <li>AiReviewResult: Content audit result;</li>
-	// <li>ProcessEof: Live stream processing has been completed.</li>
+	// Live stream processing result type, including:
+	// <li>AiReviewResult: content moderation result;</li>
+	// <li>AiRecognitionResult: content recognition result;</li>
+	// <li>LiveRecordResult: live recording result;</li>
+	// <li>ProcessEof: live stream processing result.</li>
 	NotificationType *string `json:"NotificationType,omitnil,omitempty" name:"NotificationType"`
 
 	// Video processing task ID.
@@ -9948,13 +11025,23 @@ type ParseLiveStreamProcessNotificationResponseParams struct {
 	// Content recognition result, which is valid if `NotificationType` is `AiRecognitionResult`.
 	AiRecognitionResultInfo *LiveStreamAiRecognitionResultInfo `json:"AiRecognitionResultInfo,omitnil,omitempty" name:"AiRecognitionResultInfo"`
 
+
+	AiAnalysisResultInfo *LiveStreamAiAnalysisResultInfo `json:"AiAnalysisResultInfo,omitnil,omitempty" name:"AiAnalysisResultInfo"`
+
+
+	AiQualityControlResultInfo *LiveStreamAiQualityControlResultInfo `json:"AiQualityControlResultInfo,omitnil,omitempty" name:"AiQualityControlResultInfo"`
+
+	// Live recording result is valid when NotificationType is LiveRecordResult.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LiveRecordResultInfo *LiveStreamRecordResultInfo `json:"LiveRecordResultInfo,omitnil,omitempty" name:"LiveRecordResultInfo"`
+
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -10037,10 +11124,10 @@ type ParseNotificationResponseParams struct {
 	// - The format of this parameter is a decimal Unix timestamp, i.e., the number of seconds that have elapsed since 00:00 (UTC/GMT time) on January 1, 1970.
 	Timestamp *int64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
 
-	// The notification signature. Sign = MD5 (Timestamp + NotifyKey) MPS concatenates `Timestamp` and `NotifyKey` in `TaskNotifyConfig` and calculates a signature using the MD5 algorithm. This signature is included in the notification sent to your backend server. If the signature in the notification matches your own calculation result, it indicates that the notification is from MPS.
+	// Event notification security signature. Sign = MD5 (Timestamp + NotifyKey). Note: Media Processing Service concatenates Timestamp and NotifyKey from TaskNotifyConfig as a string and calculates the Sign value through MD5. This value is included in the notification message. Your backend server can verify whether the Sign is correct using the same algorithm, to confirm whether the message is indeed from the Media Processing Service backend.
 	Sign *string `json:"Sign,omitnil,omitempty" name:"Sign"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -10322,7 +11409,7 @@ type ProcessLiveStreamRequestParams struct {
 
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
 
-
+	// Media quality inspection type task parameters.
 	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitnil,omitempty" name:"AiQualityControlTask"`
 
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
@@ -10362,6 +11449,7 @@ type ProcessLiveStreamRequest struct {
 
 	AiAnalysisTask *AiAnalysisTaskInput `json:"AiAnalysisTask,omitnil,omitempty" name:"AiAnalysisTask"`
 
+	// Media quality inspection type task parameters.
 	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitnil,omitempty" name:"AiQualityControlTask"`
 
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
@@ -10412,7 +11500,7 @@ type ProcessLiveStreamResponseParams struct {
 	// Task ID
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -10444,13 +11532,14 @@ type ProcessMediaRequestParams struct {
 	// If you do not specify this parameter, the file will be saved to the directory specified in `InputInfo`.
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
-	// The scheme ID.
-	// Note 1: About `OutputStorage` and `OutputDir`
-	// <li>If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.</li>
-	// <li>If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.</li>
-	// Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.
+	// Orchestration ID.
+	// Note 1: For parameters OutputStorage and OutputDir:
+	// <li>When a sub-task node in service orchestration has OutputStorage and OutputDir configured, the output configured in this sub-task node is used as the output of the sub-task.</li>
+	// <li>When a sub-task node in service orchestration does not have OutputStorage and OutputDir configured, if the task creation API (ProcessMedia) has specified an output, it will override the default output of the original orchestration.</li>
+	// <li>The priority of output settings is: Orchestration sub-task node > Output specified by the task API > Corresponding configuration within an orchestration.</li>
+	// Note 2: For the TaskNotifyConfig parameter, if the task creation API (ProcessMedia) has set this parameter, it will override the default callback of the original orchestration.
 	// 
-	// Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
+	// Note 3: The trigger configured for an orchestration is for automatically starting the orchestration. It stops working when you manually call this API to start an orchestration.
 	ScheduleId *int64 `json:"ScheduleId,omitnil,omitempty" name:"ScheduleId"`
 
 	// The media processing parameters to use.
@@ -10465,7 +11554,7 @@ type ProcessMediaRequestParams struct {
 	// Type parameter of a video content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil,omitempty" name:"AiRecognitionTask"`
 
-	// The parameters of a quality control task.
+	// Media quality inspection type task parameters.
 	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitnil,omitempty" name:"AiQualityControlTask"`
 
 	// Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
@@ -10474,7 +11563,7 @@ type ProcessMediaRequestParams struct {
 	// Task flow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+	// Identification code for deduplication, up to 50 characters. If a request with the same identification code was made within the past 3 days, an error will be returned for the current request. If this parameter is not provided or is an empty string, deduplication will not be performed for this request.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
@@ -10499,13 +11588,14 @@ type ProcessMediaRequest struct {
 	// If you do not specify this parameter, the file will be saved to the directory specified in `InputInfo`.
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
-	// The scheme ID.
-	// Note 1: About `OutputStorage` and `OutputDir`
-	// <li>If an output storage and directory are specified for a subtask of the scheme, those output settings will be applied.</li>
-	// <li>If an output storage and directory are not specified for the subtasks of a scheme, the output parameters passed in the `ProcessMedia` API will be applied.</li>
-	// Note 2: If `TaskNotifyConfig` is specified, the specified settings will be used instead of the default callback settings of the scheme.
+	// Orchestration ID.
+	// Note 1: For parameters OutputStorage and OutputDir:
+	// <li>When a sub-task node in service orchestration has OutputStorage and OutputDir configured, the output configured in this sub-task node is used as the output of the sub-task.</li>
+	// <li>When a sub-task node in service orchestration does not have OutputStorage and OutputDir configured, if the task creation API (ProcessMedia) has specified an output, it will override the default output of the original orchestration.</li>
+	// <li>The priority of output settings is: Orchestration sub-task node > Output specified by the task API > Corresponding configuration within an orchestration.</li>
+	// Note 2: For the TaskNotifyConfig parameter, if the task creation API (ProcessMedia) has set this parameter, it will override the default callback of the original orchestration.
 	// 
-	// Note 3: The trigger configured for a scheme is for automatically starting a scheme. It stops working when you manually call this API to start a scheme.
+	// Note 3: The trigger configured for an orchestration is for automatically starting the orchestration. It stops working when you manually call this API to start an orchestration.
 	ScheduleId *int64 `json:"ScheduleId,omitnil,omitempty" name:"ScheduleId"`
 
 	// The media processing parameters to use.
@@ -10520,7 +11610,7 @@ type ProcessMediaRequest struct {
 	// Type parameter of a video content recognition task.
 	AiRecognitionTask *AiRecognitionTaskInput `json:"AiRecognitionTask,omitnil,omitempty" name:"AiRecognitionTask"`
 
-	// The parameters of a quality control task.
+	// Media quality inspection type task parameters.
 	AiQualityControlTask *AiQualityControlTaskInput `json:"AiQualityControlTask,omitnil,omitempty" name:"AiQualityControlTask"`
 
 	// Event notification information of a task. If this parameter is left empty, no event notifications will be obtained.
@@ -10529,7 +11619,7 @@ type ProcessMediaRequest struct {
 	// Task flow priority. The higher the value, the higher the priority. Value range: [-10, 10]. If this parameter is left empty, 0 will be used.
 	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
 
-	// The ID used for deduplication. If there was a request with the same ID in the last three days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
+	// Identification code for deduplication, up to 50 characters. If a request with the same identification code was made within the past 3 days, an error will be returned for the current request. If this parameter is not provided or is an empty string, deduplication will not be performed for this request.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
@@ -10578,7 +11668,7 @@ type ProcessMediaResponseParams struct {
 	// Task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -10679,9 +11769,13 @@ type QualityControlData struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	QualityEvaluationScore *int64 `json:"QualityEvaluationScore,omitnil,omitempty" name:"QualityEvaluationScore"`
 
-	// The issues detected by quality control.
+	// Exception items detected in content quality inspection.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	QualityControlResultSet []*QualityControlResult `json:"QualityControlResultSet,omitnil,omitempty" name:"QualityControlResultSet"`
+
+	// Exception items detected in format diagnosis.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ContainerDiagnoseResultSet []*ContainerDiagnoseResultItem `json:"ContainerDiagnoseResultSet,omitnil,omitempty" name:"ContainerDiagnoseResultSet"`
 }
 
 type QualityControlItem struct {
@@ -10698,6 +11792,100 @@ type QualityControlItem struct {
 	// The coordinates (px) of the top left and bottom right corner.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
+}
+
+type QualityControlItemConfig struct {
+	// Quality inspection item name. Valid values:
+	// <li>LowEvaluation: no-reference scoring.</li>
+	// <li>Mosaic: mosaic detection.</li>
+	// <li>CrashScreen: screen glitch detection.</li>
+	// <li>VideoFreezedFrame: video freezing.</li>
+	// <li>Blur: blur detection.</li>
+	// <li>BlackWhiteEdge: black and white edges detection.</li>
+	// <li>SolidColorScreen: solid color screen detection.</li>
+	// <li>LowLighting: low light.</li>
+	// <li>HighLighting: overexposure.</li>
+	// <li>NoVoice: no voice detection.</li>
+	// <li>LowVoice: low voice detection.</li>
+	// <li>HighVoice: high voice detection.</li>
+	// <li>Jitter: jitter detection.</li>
+	// <li>Noise: noise detection.</li>
+	// <li>QRCode: QR code detection.</li>
+	// <li>BarCode: barcode detection.</li>
+	// <li>AppletCode: mini program code detection.</li>
+	// <li>VideoResolutionChanged: video resolution change.</li>
+	// <li>AudioSampleRateChanged: audio sample rate change.</li>
+	// <li>AudioChannelsChanged: audio channel quantity change.</li>
+	// <li>ParameterSetsChanged: stream parameter set information change.</li>
+	// <li>DarOrSarInvalid: video aspect ratio exception.</li>
+	// <li>TimestampFallback: DTS timestamp rollback.</li>
+	// <li>DtsJitter: DTS jitter too high.</li>
+	// <li>PtsJitter: PTS jitter too high.</li>
+	// <li>AACDurationDeviation: improper AAC frame timestamp interval.</li>
+	// <li>AudioDroppingFrames: audio frame dropping.</li>
+	// <li>VideoDroppingFrames: video frame dropping.</li>
+	// <li>AVTimestampInterleave: improper audio-video interleaving.</li>
+	// <li>PtsLessThanDts: PTS less than DTS for media streams.</li>
+	// <li>ReceiveFpsJitter: significant jitter in the network receive frame rate.</li>
+	// <li>ReceiveFpsTooSmall: network receive video frame rate too low.</li>
+	// <li>FpsJitter: significant jitter in the stream frame rate calculated via PTS.</li>
+	// <li>StreamOpenFailed: stream open failure.</li>
+	// <li>StreamEnd: stream end.</li>
+	// <li>StreamParseFailed: stream parsing failure.</li>
+	// <li>VideoFirstFrameNotIdr: first frame not an IDR frame.</li>
+	// <li>StreamNALUError: NALU start code error.</li>
+	// <li>TsStreamNoAud: no AUD NALU in the H26x stream of MPEG-TS.</li>
+	// <li>AudioStreamLack: no audio stream.</li>
+	// <li>VideoStreamLack: no video stream.</li>
+	// <li>LackAudioRecover: missing audio stream recovery.</li>
+	// <li>LackVideoRecover: missing video stream recovery.</li>
+	// <li>VideoBitrateOutofRange: video stream bitrate (kbps) out of range.</li>
+	// <li>AudioBitrateOutofRange: audio stream bitrate (kbps) out of range.</li>
+	// <li>VideoDecodeFailed: video decoding error.</li>
+	// <li>AudioDecodeFailed: audio decoding error.</li>
+	// <li>AudioOutOfPhase: opposite phase in dual-channel audio.</li>
+	// <li>VideoDuplicatedFrame: duplicate frames in video streams.</li>
+	// <li>AudioDuplicatedFrame: duplicate frames in audio streams.</li>
+	// <li>VideoRotation: video rotation.</li>
+	// <li>TsMultiPrograms: multiple programs in MPEG2-TS streams.</li>
+	// <li>Mp4InvalidCodecFourcc: codec FourCC in MP4 not meeting Apple HLS requirements.</li>
+	// <li>HLSBadM3u8Format: invalid M3U8 file.</li>
+	// <li>HLSInvalidMasterM3u8: invalid main M3U8 file.</li>
+	// <li>HLSInvalidMediaM3u8: invalid media M3U8 file.</li>
+	// <li>HLSMasterM3u8Recommended: parameters recommended by standards missing in main M3U8.</li>
+	// <li>HLSMediaM3u8Recommended: parameters recommended by standards missing in media M3U8.</li>
+	// <li>HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY in media M3U8.</li>
+	// <li>HLSMediaSegmentsStreamNumChange: changed number of streams in segments.</li>
+	// <li>HLSMediaSegmentsPTSJitterDeviation: PTS jumps between segments without EXT-X-DISCONTINUITY.</li>
+	// <li>HLSMediaSegmentsDTSJitterDeviation: DTS jumps between segments without EXT-X-DISCONTINUITY.</li>
+	// <li>TimecodeTrackExist: TMCD track in MP4.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Capability configuration switch. Valid values:
+	// <li>ON: enabled;</li>
+	// <li>OFF: disabled.</li>
+	// 
+	// Default value: ON.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Sampling method, Valid value:
+	// - Time: sampling based on time interval.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Sampling *string `json:"Sampling,omitnil,omitempty" name:"Sampling"`
+
+	// Sampling interval time, in ms.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IntervalTime *uint64 `json:"IntervalTime,omitnil,omitempty" name:"IntervalTime"`
+
+	// Duration of abnormality, in ms.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// Threshold of a detection item. Different detection items have different thresholds.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Threshold *string `json:"Threshold,omitnil,omitempty" name:"Threshold"`
 }
 
 type QualityControlResult struct {
@@ -10722,6 +11910,42 @@ type QualityControlResult struct {
 
 	// The information of a checked segment in quality control.
 	QualityControlItems []*QualityControlItem `json:"QualityControlItems,omitnil,omitempty" name:"QualityControlItems"`
+}
+
+type QualityControlTemplate struct {
+	// Unique identifier of a media quality inspection template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Media quality inspection template name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Template description.
+	// 
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Template type. Valid values:
+	// <li>Preset: system preset template;</li>
+	// <li>Custom: custom template.</li>
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Media quality inspection configuration parameters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	QualityControlItemSet []*QualityControlItemConfig `json:"QualityControlItemSet,omitnil,omitempty" name:"QualityControlItemSet"`
+
+	// Creation time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Last modified time of a template in [ISO date format](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#iso-.E6.97.A5.E6.9C.9F.E6.A0.BC.E5.BC.8F).
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type RawImageWatermarkInput struct {
@@ -10813,7 +12037,8 @@ type ResetWorkflowRequestParams struct {
 	// Output configuration of a video processing output file. If this parameter is left empty, the storage location in `Trigger` will be inherited.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Target directory of a video processing output file, such as `/movie/201907/`. If this parameter is left empty, the file will be outputted to the same directory where the source file is located, i.e.; `{inputDir}`.
+	// The target directory for the output files generated by video processing. It must start and end with a slash (/), such as `/movie/201907/`.
+	// If left empty, it is the same as the directory of the trigger file, that is, `{inputDir}`.
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
 	// Parameter of a video processing task.
@@ -10850,7 +12075,8 @@ type ResetWorkflowRequest struct {
 	// Output configuration of a video processing output file. If this parameter is left empty, the storage location in `Trigger` will be inherited.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Target directory of a video processing output file, such as `/movie/201907/`. If this parameter is left empty, the file will be outputted to the same directory where the source file is located, i.e.; `{inputDir}`.
+	// The target directory for the output files generated by video processing. It must start and end with a slash (/), such as `/movie/201907/`.
+	// If left empty, it is the same as the directory of the trigger file, that is, `{inputDir}`.
 	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
 
 	// Parameter of a video processing task.
@@ -10903,7 +12129,7 @@ func (r *ResetWorkflowRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ResetWorkflowResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -10966,7 +12192,13 @@ type SampleSnapshotTaskInput struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Output path to a generated sampled screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
+	// Output path of an image file after sampled screenshot taking, which can be a relative or absolute path.
+	// If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).Relative path example:
+	// <li>Filename_{Variable name}.{format}.</li>
+	// <li>Filename.{format}.</li>
+	// Absolute path example:
+	// <li>/Custom path/Filename_{Variable name}.{format}.</li>
+	// If left empty, a relative path is used by default: `{inputName}_sampleSnapshot_{definition}_{number}.{format}`.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
 	// Rule of the `{number}` variable in the sampled screenshot output path.
@@ -11069,11 +12301,10 @@ type ScheduleQualityControlTaskResult struct {
 	// The error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// The input of the quality control task.
+	// Media quality inspection task input.
 	Input *AiQualityControlTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// The output of the quality control task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Media quality inspection task output.Note: This field may return null, indicating that no valid values can be obtained.
 	Output *QualityControlData `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
@@ -11194,6 +12425,10 @@ type SchedulesInfo struct {
 	// The last updated time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Resource ID. For those without an associated resource ID, fill in with an account's primary resource ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 }
 
 type ScratchRepairConfig struct {
@@ -11207,6 +12442,28 @@ type ScratchRepairConfig struct {
 	// Default value: 0.0
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Intensity *float64 `json:"Intensity,omitnil,omitempty" name:"Intensity"`
+}
+
+type SegmentRecognitionItem struct {
+
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
+
+
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
+
+
+	SegmentUrl *string `json:"SegmentUrl,omitnil,omitempty" name:"SegmentUrl"`
+
+	// Segment title.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
+
+	// Segment summary.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Summary *string `json:"Summary,omitnil,omitempty" name:"Summary"`
 }
 
 type SharpEnhanceConfig struct {
@@ -11256,7 +12513,14 @@ type SnapshotByTimeOffsetTaskInput struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Output path to a generated time point screenshot, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}`.
+	// Output path for an image file of screenshots taken at specific time points, which can be a relative or absolute path.
+	// If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).
+	// Relative path example:
+	// <li>Filename_{Variable name}.{format}.</li>
+	// <li>Filename.{format}.</li>
+	// Absolute path example:
+	// <li>/Custom path/Filename_{Variable name}.{format}.</li>
+	// If left empty, a relative path is used by default: `{inputName}_snapshotByTimeOffset_{definition}_{number}.{format}`.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
 	// Rule of the `{number}` variable in the time point screenshot output path.
@@ -11536,11 +12800,11 @@ type TaskSimpleInfo struct {
 }
 
 type TerrorismConfigureInfo struct {
-	// The parameters for detecting sensitive information in images.
-	ImgReviewInfo *TerrorismImgReviewTemplateInfo `json:"ImgReviewInfo,omitnil,omitempty" name:"ImgReviewInfo"`
-
 	// The parameters for detecting sensitive information based on OCR.
 	OcrReviewInfo *TerrorismOcrReviewTemplateInfo `json:"OcrReviewInfo,omitnil,omitempty" name:"OcrReviewInfo"`
+
+	// The parameters for detecting sensitive information in images.
+	ImgReviewInfo *TerrorismImgReviewTemplateInfo `json:"ImgReviewInfo,omitnil,omitempty" name:"ImgReviewInfo"`
 }
 
 type TerrorismConfigureInfoForUpdate struct {
@@ -11557,16 +12821,15 @@ type TerrorismImgReviewTemplateInfo struct {
 	// <li>OFF</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// The filter labels for sensitive information detection in images, which specify the types of sensitive information to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
-	// <li>guns</li>
-	// <li>crowd</li>
-	// <li>bloody</li>
-	// <li>police</li>
-	// <li>banners (sensitive flags)</li>
-	// <li>militant</li>
-	// <li>explosion</li>
-	// <li>terrorists</li>
-	// <li>scenario (sensitive scenes) </li>
+	// Sensitive content filter tags. The auditing results including the selected tags are returned. If the filter tag is empty, all auditing results will be returned. Valid values:
+	// <li>guns: weapons and guns;</li>
+	// <li>crowd: crowd gathering;</li>
+	// <li>bloody: bloodiness;</li>
+	// <li>police: police force;</li>
+	// <li>banners: sensitive flags;</li>
+	// <li>militant: militants;</li>
+	// <li>explosion: explosions and fires;</li>
+	// <li>terrorists: sensitive persons.</li>
 	LabelSet []*string `json:"LabelSet,omitnil,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. If this parameter is left empty, 90 will be used by default. Value range: 0-100.
@@ -11582,16 +12845,15 @@ type TerrorismImgReviewTemplateInfoForUpdate struct {
 	// <li>OFF</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// The filter labels for sensitive information detection in images, which specify the types of sensitive information to return. If this parameter is left empty, the detection results for all labels are returned. Valid values:
-	// <li>guns</li>
-	// <li>crowd</li>
-	// <li>bloody</li>
-	// <li>police</li>
-	// <li>banners (sensitive flags)</li>
-	// <li>militant</li>
-	// <li>explosion</li>
-	// <li>terrorists</li>
-	// <li>scenario (sensitive scenes) </li>
+	// Sensitive content filter tags. The auditing results including the selected tags are returned. If the filter tag is empty, all auditing results will be returned. Valid values:
+	// <li>guns: weapons and guns;</li>
+	// <li>crowd: crowd gathering;</li>
+	// <li>bloody: bloodiness;</li>
+	// <li>police: police force;</li>
+	// <li>banners: sensitive flags;</li>
+	// <li>militant: militants;</li>
+	// <li>explosion: explosions and fires;</li>
+	// <li>terrorists: sensitive persons.</li>
 	LabelSet []*string `json:"LabelSet,omitnil,omitempty" name:"LabelSet"`
 
 	// Threshold score for violation. If this score is reached or exceeded during intelligent audit, it will be deemed that a suspected violation has occurred. Value range: 0-100.
@@ -11633,7 +12895,7 @@ type TextWatermarkTemplateInput struct {
 	// <li>arial.ttf: Only English is supported.</li>
 	FontType *string `json:"FontType,omitnil,omitempty" name:"FontType"`
 
-	// Font size in Npx format where N is a numeric value.
+	// Font size, in the format of Npx. N is a numerical value with a value range of [0, 1] or [8, 4096].
 	FontSize *string `json:"FontSize,omitnil,omitempty" name:"FontSize"`
 
 	// Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
@@ -11644,6 +12906,10 @@ type TextWatermarkTemplateInput struct {
 	// <li>1: Completely opaque</li>
 	// Default value: 1.
 	FontAlpha *float64 `json:"FontAlpha,omitnil,omitempty" name:"FontAlpha"`
+
+	// Text content, up to 100 characters.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
 }
 
 type TextWatermarkTemplateInputForUpdate struct {
@@ -11652,7 +12918,7 @@ type TextWatermarkTemplateInputForUpdate struct {
 	// <li>arial.ttf: Only English is supported.</li>
 	FontType *string `json:"FontType,omitnil,omitempty" name:"FontType"`
 
-	// Font size in Npx format where N is a numeric value.
+	// Font size, in the format of Npx. N is a numerical value with a value range of [0, 1] or [8, 4096].
 	FontSize *string `json:"FontSize,omitnil,omitempty" name:"FontSize"`
 
 	// Font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
@@ -11662,6 +12928,9 @@ type TextWatermarkTemplateInputForUpdate struct {
 	// <li>0: Completely transparent</li>
 	// <li>1: Completely opaque</li>
 	FontAlpha *float64 `json:"FontAlpha,omitnil,omitempty" name:"FontAlpha"`
+
+	// Text content, up to 100 characters.
+	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
 }
 
 type TranscodeTaskInput struct {
@@ -11701,7 +12970,13 @@ type TranscodeTaskInput struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
-	// Path to a primary output file, which can be a relative path or an absolute path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}.{format}`.
+	// Output path of the main file after transcoding, which can be a relative or absolute path.
+	// If you need to define an output path, the path must end with `.{format}`. For variable names, refer to [Filename Variable](https://intl.cloud.tencent.com/document/product/862/37039?from_cn_redirect=1).Relative path example:
+	// <li>Filename_{Variable name}.{format}.</li>
+	// <li>Filename.{format}.</li>
+	// Absolute path example:
+	// <li>/Custom path/Filename_{Variable name}.{format}.</li>
+	// If left empty, a relative path is used by default: `{inputName}_transcode_{definition}.{format}`.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 
 	// Path to an output file part (the path to ts during transcoding to HLS), which can only be a relative path. If this parameter is left empty, the following relative path will be used by default: `{inputName}_transcode_{definition}_{number}.{format}`.
@@ -11772,6 +13047,25 @@ type TranscodeTemplate struct {
 	// Audio/Video enhancement configuration.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
+}
+
+type TranslateConfigureInfo struct {
+	// Switch of a full speech recognition task. Valid values:
+	// <li>ON: Enables an intelligent full speech recognition task;</li>
+	// <li>OFF: Disables an intelligent full speech recognition task.</li>
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+
+	SourceLanguage *string `json:"SourceLanguage,omitnil,omitempty" name:"SourceLanguage"`
+
+
+	DestinationLanguage *string `json:"DestinationLanguage,omitnil,omitempty" name:"DestinationLanguage"`
+
+	// Generated subtitle file format. Leaving it as an empty string means no subtitle file will be generated. Valid value:
+	// <li>vtt: Generate a WebVTT subtitle file.</li>
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 }
 
 type UrlInputInfo struct {
@@ -11968,22 +13262,33 @@ type VideoEnhanceConfig struct {
 }
 
 type VideoTemplateInfo struct {
-	// The video codec. Valid values:
-	// <li>`libx264`: H.264</li>
-	// <li>`libx265`: H.265</li>
-	// <li>`av1`: AOMedia Video 1</li>
-	// Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.
-	// Note: You can only use the AOMedia Video 1 codec for MP4 files.
+	// Video stream encoding format. Valid values:
+	// <li>h264: H.264 encoding.</li>
+	// <li>h265: H.265 encoding.</li>
+	// <li>h266: H.266 encoding.</li>
+	// <li>av1: AOMedia Video 1 encoding.</li>
+	// <li>vp8: VP8 encoding.</li>
+	// <li>vp9: VP9 encoding.</li>
+	// <li>mpeg2: MPEG2 encoding.</li>
+	// <li>dnxhd: DNxHD encoding.</li>
+	// <li>mv-hevc: MV-HEVC encoding.</li>
+	// Note: A resolution within 640x480 should be specified for H.265 encoding.
+	// 
+	// Note: AV1 encoding containers only support mp4, webm, and mkv.
+	// Note: H.266 encoding containers only support mp4, hls, ts, and mov.
+	// Note: VP8 and VP9 encoding containers only support webm and mkv.
+	// Note: MPEG2 and DNxHD encoding containers only support mxf.
+	// Note: MV-HEVC encoding containers only support mp4, hls, and mov. Among them, the hls format only supports mp4 segmentation format.
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
-	// The video frame rate (Hz). Value range: [0, 100].
+	// Video frame rate. Value range:
+	// When FpsDenominator is empty, the range is [0, 120], in Hz.
+	// When FpsDenominator is not empty, the Fps/FpsDenominator range is [0, 120].
 	// If the value is 0, the frame rate will be the same as that of the source video.
-	// Note: For adaptive bitrate streaming, the value range of this parameter is [0, 60].
-	Fps *uint64 `json:"Fps,omitnil,omitempty" name:"Fps"`
+	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 
-	// The video bitrate (Kbps). Value range: 0 and [128, 35000].
-	// If the value is 0, the bitrate of the video will be the same as that of the source video.
-	Bitrate *uint64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
+	// Bitrate of a video stream, in kbps. Value range: 0 and [128, 100000].If the value is 0, the bitrate of the video will be the same as that of the source video.
+	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
 	// Resolution adaption. Valid values:
 	// <li>open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side.</li>
@@ -12008,8 +13313,7 @@ type VideoTemplateInfo struct {
 	// Default value: 0.
 	Height *uint64 `json:"Height,omitnil,omitempty" name:"Height"`
 
-	// Frame interval between I keyframes. Value range: 0 and [1,100000].
-	// If this parameter is 0 or left empty, the system will automatically set the GOP length.
+	// Interval between I-frames, in frames. Value range: 0 and [1, 100000]. When it is set to 0 or not set, the system will automatically set the gop length.
 	Gop *uint64 `json:"Gop,omitnil,omitempty" name:"Gop"`
 
 	// The fill mode, which indicates how a video is resized when the video’s original aspect ratio is different from the target aspect ratio. Valid values:
@@ -12025,24 +13329,58 @@ type VideoTemplateInfo struct {
 	// If this parameter is specified, CRF (a bitrate control method) will be used for transcoding. (Video bitrate will no longer take effect.)
 	// It is not recommended to specify this parameter if there are no special requirements.
 	Vcrf *uint64 `json:"Vcrf,omitnil,omitempty" name:"Vcrf"`
+
+	// HLS segment type. Valid values:
+	// <li>0: HLS+TS segment.</li>
+	// <li>2: HLS+TS byte range.</li>
+	// <li>7: HLS+MP4 segment.</li>
+	// <li>5: HLS+MP4 byte range.</li>
+	// Default value: 0
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SegmentType *int64 `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
+
+	// Denominator of the frame rate.
+	// Note: The value must be greater than 0.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FpsDenominator *int64 `json:"FpsDenominator,omitnil,omitempty" name:"FpsDenominator"`
+
+	// 3D video splicing mode, which is only valid for MV-HEVC 3D videos. Valid values:
+	// <li>side_by_side: side-by-side view.</li>
+	// <li>top_bottom: top-bottom view.</li>
+	// Default value: side_by_side.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Stereo3dType *string `json:"Stereo3dType,omitnil,omitempty" name:"Stereo3dType"`
 }
 
 type VideoTemplateInfoForUpdate struct {
-	// The video codec. Valid values:
-	// <li>libx264: H.264</li>
-	// <li>libx265: H.265</li>
-	// <li>av1: AOMedia Video 1</li>
-	// Note: You must specify a resolution (not higher than 640 x 480) if the H.265 codec is used.
-	// Note: You can only use the AOMedia Video 1 codec for MP4 files.
+	// Video stream encoding format. Valid values:
+	// <li>h264: H.264 encoding.</li>
+	// <li>h265: H.265 encoding.</li>
+	// <li>h266: H.266 encoding.</li>
+	// <li>av1: AOMedia Video 1 encoding.</li>
+	// <li>vp8: VP8 encoding.</li>
+	// <li>vp9: VP9 encoding.</li>
+	// <li>mpeg2: MPEG2 encoding.</li>
+	// <li>dnxhd: DNxHD encoding.</li>
+	// <li>mv-hevc: MV-HEVC encoding.</li>
+	// Note: A resolution within 640x480 should be specified for H.265 encoding.
+	// 
+	// Note: AV1 encoding containers only support mp4, webm, and mkv.
+	// Note: H.266 encoding containers only support mp4, hls, ts, and mov.
+	// Note: VP8 and VP9 encoding containers only support webm and mkv.
+	// Note: MPEG2 and DNxHD encoding containers only support mxf.
+	// Note: MV-HEVC encoding containers only support mp4, hls, and mov. Among them, the hls format only supports mp4 segmentation format.Note: This field may return null, indicating that no valid values can be obtained.
 	Codec *string `json:"Codec,omitnil,omitempty" name:"Codec"`
 
-	// Video frame rate in Hz. Value range: [0, 100].
-	// If the value is 0, the frame rate will be the same as that of the source video.
-	Fps *uint64 `json:"Fps,omitnil,omitempty" name:"Fps"`
+	// Video frame rate. Value range:
+	// When FpsDenominator is empty, the range is [0, 120], in Hz.
+	// When FpsDenominator is not empty, the Fps/FpsDenominator range is [0, 120].
+	// If the value is 0, the frame rate will be the same as that of the source video.Note: This field may return null, indicating that no valid values can be obtained.
+	Fps *int64 `json:"Fps,omitnil,omitempty" name:"Fps"`
 
-	// Bitrate of a video stream in Kbps. Value range: 0 and [128, 35,000].
-	// If the value is 0, the bitrate of the video will be the same as that of the source video.
-	Bitrate *uint64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
+	// Bitrate of a video stream, in kbps. Value range: 0 and [128, 100000].If the value is 0, the bitrate of the video will be the same as that of the source video.Note: This field may return null, indicating that no valid values can be obtained.
+	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
 	// Resolution adaption. Valid values:
 	// <li>open: Enabled. When resolution adaption is enabled, `Width` indicates the long side of a video, while `Height` indicates the short side.</li>
@@ -12079,6 +13417,28 @@ type VideoTemplateInfoForUpdate struct {
 	// <li>1: Enable</li>
 	// Default value: 0. If this parameter is set to `1`, multiple streams with different resolutions and bitrates will be generated automatically. The highest resolution, bitrate, and quality of the streams are determined by the values of `width` and `height`, `Bitrate`, and `Vcrf` in `VideoTemplate` respectively. If these parameters are not set in `VideoTemplate`, the highest resolution generated will be the same as that of the source video, and the highest video quality will be close to VMAF 95. To use this parameter or learn about the billing details of adaptive encoding, please contact your sales rep.
 	ContentAdaptStream *uint64 `json:"ContentAdaptStream,omitnil,omitempty" name:"ContentAdaptStream"`
+
+	// HLS segment type. Valid values:
+	// <li>0: HLS+TS segment.</li>
+	// <li>2: HLS+TS byte range.</li>
+	// <li>7: HLS+MP4 segment.</li>
+	// <li>5: HLS+MP4 byte range.</li>
+	// Default value: 0
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SegmentType *int64 `json:"SegmentType,omitnil,omitempty" name:"SegmentType"`
+
+	// Denominator of the frame rate.
+	// Note: The value must be greater than 0.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FpsDenominator *int64 `json:"FpsDenominator,omitnil,omitempty" name:"FpsDenominator"`
+
+	// 3D video splicing mode, which is only valid for MV-HEVC 3D videos. Valid values:
+	// <li>side_by_side: side-by-side view.</li>
+	// <li>top_bottom: top-bottom view.</li>
+	// Default value: side_by_side.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Stereo3dType *string `json:"Stereo3dType,omitnil,omitempty" name:"Stereo3dType"`
 }
 
 type VolumeBalanceConfig struct {
@@ -12113,16 +13473,20 @@ type WatermarkInput struct {
 	// SVG watermark is not available for screenshot.
 	SvgContent *string `json:"SvgContent,omitnil,omitempty" name:"SvgContent"`
 
-	// Start time offset of a watermark in seconds. If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame.
-	// <li>If this parameter is left empty or 0 is entered, the watermark will appear upon the first video frame;</li>
-	// <li>If this value is greater than 0 (e.g., n), the watermark will appear at second n after the first video frame;</li>
-	// <li>If this value is smaller than 0 (e.g., -n), the watermark will appear at second n before the last video frame.</li>
+	// Start time offset of a watermark, in seconds. If not set or set to 0, a watermark starts appearing when a video starts.
+	// <li>If not set or set to 0, a watermark starts appearing when a video starts.</li>
+	// <li>If the value is greater than 0 (for example, n), a watermark will appear at second n of a video.</li>
+	// <li>If the value is less than 0 (for example, -n), a watermark will appear n seconds before the end of a video.</li>
+	// 
+	// Note: It is only used for video scenarios. Screenshots are not supported.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
 
-	// End time offset of a watermark in seconds.
-	// <li>If this parameter is left empty or 0 is entered, the watermark will exist till the last video frame;</li>
-	// <li>If this value is greater than 0 (e.g., n), the watermark will exist till second n;</li>
-	// <li>If this value is smaller than 0 (e.g., -n), the watermark will exist till second n before the last video frame.</li>
+	// End time offset of a watermark, in seconds.
+	// <li>If not set or set to 0, a watermark will last until the end of a video.</li>
+	// <li>If the value is greater than 0 (for example, n), a watermark will disappear at second n.</li>
+	// <li>If the value is less than 0 (for example, -n), a watermark will disappear n seconds before the end of a video.</li>
+	// 
+	// Note: It is only used for video scenarios. Screenshots are not supported.
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 }
 
@@ -12263,7 +13627,7 @@ type WorkflowTask struct {
 	// Execution status and result of a video content recognition task.
 	AiRecognitionResultSet []*AiRecognitionResult `json:"AiRecognitionResultSet,omitnil,omitempty" name:"AiRecognitionResultSet"`
 
-	// The execution status and result of a quality control task.
+	// Execution status and results of a media quality inspection task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AiQualityControlTaskResult *ScheduleQualityControlTaskResult `json:"AiQualityControlTaskResult,omitnil,omitempty" name:"AiQualityControlTaskResult"`
 }
