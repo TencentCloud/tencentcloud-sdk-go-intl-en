@@ -214,6 +214,67 @@ func (c *Client) AddCustomRuleWithContext(ctx context.Context, request *AddCusto
     return
 }
 
+func NewAddCustomWhiteRuleRequest() (request *AddCustomWhiteRuleRequest) {
+    request = &AddCustomWhiteRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "AddCustomWhiteRule")
+    
+    
+    return
+}
+
+func NewAddCustomWhiteRuleResponse() (response *AddCustomWhiteRuleResponse) {
+    response = &AddCustomWhiteRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddCustomWhiteRule
+// Add precision allowlist rules
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddCustomWhiteRule(request *AddCustomWhiteRuleRequest) (response *AddCustomWhiteRuleResponse, err error) {
+    return c.AddCustomWhiteRuleWithContext(context.Background(), request)
+}
+
+// AddCustomWhiteRule
+// Add precision allowlist rules
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddCustomWhiteRuleWithContext(ctx context.Context, request *AddCustomWhiteRuleRequest) (response *AddCustomWhiteRuleResponse, err error) {
+    if request == nil {
+        request = NewAddCustomWhiteRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddCustomWhiteRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddCustomWhiteRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAddSpartaProtectionRequest() (request *AddSpartaProtectionRequest) {
     request = &AddSpartaProtectionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -475,6 +536,65 @@ func (c *Client) CreateHostWithContext(ctx context.Context, request *CreateHostR
     return
 }
 
+func NewCreateIpAccessControlRequest() (request *CreateIpAccessControlRequest) {
+    request = &CreateIpAccessControlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "CreateIpAccessControl")
+    
+    
+    return
+}
+
+func NewCreateIpAccessControlResponse() (response *CreateIpAccessControlResponse) {
+    response = &CreateIpAccessControlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateIpAccessControl
+// This API is used to add WAF IP allowlists/blocklists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_THENUMBEROFADDEDBLACKANDWHITELISTEXCEEDSTHEUPPERLIMIT = "FailedOperation.TheNumberOfAddedBlackAndWhiteListExceedsTheUpperLimit"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateIpAccessControl(request *CreateIpAccessControlRequest) (response *CreateIpAccessControlResponse, err error) {
+    return c.CreateIpAccessControlWithContext(context.Background(), request)
+}
+
+// CreateIpAccessControl
+// This API is used to add WAF IP allowlists/blocklists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_THENUMBEROFADDEDBLACKANDWHITELISTEXCEEDSTHEUPPERLIMIT = "FailedOperation.TheNumberOfAddedBlackAndWhiteListExceedsTheUpperLimit"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateIpAccessControlWithContext(ctx context.Context, request *CreateIpAccessControlRequest) (response *CreateIpAccessControlResponse, err error) {
+    if request == nil {
+        request = NewCreateIpAccessControlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateIpAccessControl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateIpAccessControlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAntiFakeUrlRequest() (request *DeleteAntiFakeUrlRequest) {
     request = &DeleteAntiFakeUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -683,6 +803,59 @@ func (c *Client) DeleteCustomRuleWithContext(ctx context.Context, request *Delet
     return
 }
 
+func NewDeleteCustomWhiteRuleRequest() (request *DeleteCustomWhiteRuleRequest) {
+    request = &DeleteCustomWhiteRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DeleteCustomWhiteRule")
+    
+    
+    return
+}
+
+func NewDeleteCustomWhiteRuleResponse() (response *DeleteCustomWhiteRuleResponse) {
+    response = &DeleteCustomWhiteRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteCustomWhiteRule
+// Delete precision allowlist rules
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCustomWhiteRule(request *DeleteCustomWhiteRuleRequest) (response *DeleteCustomWhiteRuleResponse, err error) {
+    return c.DeleteCustomWhiteRuleWithContext(context.Background(), request)
+}
+
+// DeleteCustomWhiteRule
+// Delete precision allowlist rules
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteCustomWhiteRuleWithContext(ctx context.Context, request *DeleteCustomWhiteRuleRequest) (response *DeleteCustomWhiteRuleResponse, err error) {
+    if request == nil {
+        request = NewDeleteCustomWhiteRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCustomWhiteRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCustomWhiteRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteHostRequest() (request *DeleteHostRequest) {
     request = &DeleteHostRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -752,6 +925,118 @@ func (c *Client) DeleteHostWithContext(ctx context.Context, request *DeleteHostR
     request.SetContext(ctx)
     
     response = NewDeleteHostResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteIpAccessControlV2Request() (request *DeleteIpAccessControlV2Request) {
+    request = &DeleteIpAccessControlV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DeleteIpAccessControlV2")
+    
+    
+    return
+}
+
+func NewDeleteIpAccessControlV2Response() (response *DeleteIpAccessControlV2Response) {
+    response = &DeleteIpAccessControlV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteIpAccessControlV2
+// This API is used to delete latest versions of WAF IP allowlists/blocklists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_THENUMBEROFONETIMEDELETIONSREACHEDTHEUPPERLIMIT = "FailedOperation.TheNumberOfOneTimeDeletionsReachedTheUpperLimit"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteIpAccessControlV2(request *DeleteIpAccessControlV2Request) (response *DeleteIpAccessControlV2Response, err error) {
+    return c.DeleteIpAccessControlV2WithContext(context.Background(), request)
+}
+
+// DeleteIpAccessControlV2
+// This API is used to delete latest versions of WAF IP allowlists/blocklists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_THENUMBEROFONETIMEDELETIONSREACHEDTHEUPPERLIMIT = "FailedOperation.TheNumberOfOneTimeDeletionsReachedTheUpperLimit"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteIpAccessControlV2WithContext(ctx context.Context, request *DeleteIpAccessControlV2Request) (response *DeleteIpAccessControlV2Response, err error) {
+    if request == nil {
+        request = NewDeleteIpAccessControlV2Request()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteIpAccessControlV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteIpAccessControlV2Response()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteSessionRequest() (request *DeleteSessionRequest) {
+    request = &DeleteSessionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DeleteSession")
+    
+    
+    return
+}
+
+func NewDeleteSessionResponse() (response *DeleteSessionResponse) {
+    response = &DeleteSessionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteSession
+// Delete CC attack session settings
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SESSIONINUSED = "FailedOperation.SessionInUsed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteSession(request *DeleteSessionRequest) (response *DeleteSessionResponse, err error) {
+    return c.DeleteSessionWithContext(context.Background(), request)
+}
+
+// DeleteSession
+// Delete CC attack session settings
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SESSIONINUSED = "FailedOperation.SessionInUsed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteSessionWithContext(ctx context.Context, request *DeleteSessionRequest) (response *DeleteSessionResponse, err error) {
+    if request == nil {
+        request = NewDeleteSessionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSession require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteSessionResponse()
     err = c.Send(request, response)
     return
 }
@@ -1454,6 +1739,61 @@ func (c *Client) DescribeCustomRuleListWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeCustomWhiteRuleRequest() (request *DescribeCustomWhiteRuleRequest) {
+    request = &DescribeCustomWhiteRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeCustomWhiteRule")
+    
+    
+    return
+}
+
+func NewDescribeCustomWhiteRuleResponse() (response *DescribeCustomWhiteRuleResponse) {
+    response = &DescribeCustomWhiteRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCustomWhiteRule
+// Obtain the precision allowlist policy list in the protection configuration
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCustomWhiteRule(request *DescribeCustomWhiteRuleRequest) (response *DescribeCustomWhiteRuleResponse, err error) {
+    return c.DescribeCustomWhiteRuleWithContext(context.Background(), request)
+}
+
+// DescribeCustomWhiteRule
+// Obtain the precision allowlist policy list in the protection configuration
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeCustomWhiteRuleWithContext(ctx context.Context, request *DescribeCustomWhiteRuleRequest) (response *DescribeCustomWhiteRuleResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomWhiteRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomWhiteRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomWhiteRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDomainCountInfoRequest() (request *DescribeDomainCountInfoRequest) {
     request = &DescribeDomainCountInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1713,6 +2053,67 @@ func (c *Client) DescribeDomainDetailsSaasWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeDomainDetailsSaasResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDomainVerifyResultRequest() (request *DescribeDomainVerifyResultRequest) {
+    request = &DescribeDomainVerifyResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeDomainVerifyResult")
+    
+    
+    return
+}
+
+func NewDescribeDomainVerifyResultResponse() (response *DescribeDomainVerifyResultResponse) {
+    response = &DescribeDomainVerifyResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDomainVerifyResult
+// Obtain the result of adding domain operation
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEINUSE = "ResourceInUse"
+func (c *Client) DescribeDomainVerifyResult(request *DescribeDomainVerifyResultRequest) (response *DescribeDomainVerifyResultResponse, err error) {
+    return c.DescribeDomainVerifyResultWithContext(context.Background(), request)
+}
+
+// DescribeDomainVerifyResult
+// Obtain the result of adding domain operation
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEINUSE = "ResourceInUse"
+func (c *Client) DescribeDomainVerifyResultWithContext(ctx context.Context, request *DescribeDomainVerifyResultRequest) (response *DescribeDomainVerifyResultResponse, err error) {
+    if request == nil {
+        request = NewDescribeDomainVerifyResultRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDomainVerifyResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDomainVerifyResultResponse()
     err = c.Send(request, response)
     return
 }
@@ -2167,6 +2568,144 @@ func (c *Client) DescribeHostsWithContext(ctx context.Context, request *Describe
     return
 }
 
+func NewDescribeInstancesRequest() (request *DescribeInstancesRequest) {
+    request = &DescribeInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeInstances")
+    
+    
+    return
+}
+
+func NewDescribeInstancesResponse() (response *DescribeInstancesResponse) {
+    response = &DescribeInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInstances
+// Query detailed information of all user instances
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstances(request *DescribeInstancesRequest) (response *DescribeInstancesResponse, err error) {
+    return c.DescribeInstancesWithContext(context.Background(), request)
+}
+
+// DescribeInstances
+// Query detailed information of all user instances
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeInstancesWithContext(ctx context.Context, request *DescribeInstancesRequest) (response *DescribeInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstancesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeIpAccessControlRequest() (request *DescribeIpAccessControlRequest) {
+    request = &DescribeIpAccessControlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeIpAccessControl")
+    
+    
+    return
+}
+
+func NewDescribeIpAccessControlResponse() (response *DescribeIpAccessControlResponse) {
+    response = &DescribeIpAccessControlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeIpAccessControl
+// WAF IP blocklist/allowlist query
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+func (c *Client) DescribeIpAccessControl(request *DescribeIpAccessControlRequest) (response *DescribeIpAccessControlResponse, err error) {
+    return c.DescribeIpAccessControlWithContext(context.Background(), request)
+}
+
+// DescribeIpAccessControl
+// WAF IP blocklist/allowlist query
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+func (c *Client) DescribeIpAccessControlWithContext(ctx context.Context, request *DescribeIpAccessControlRequest) (response *DescribeIpAccessControlResponse, err error) {
+    if request == nil {
+        request = NewDescribeIpAccessControlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIpAccessControl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeIpAccessControlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeModuleStatusRequest() (request *DescribeModuleStatusRequest) {
     request = &DescribeModuleStatusRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2407,6 +2946,55 @@ func (c *Client) DescribePolicyStatusWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribePolicyStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePortsRequest() (request *DescribePortsRequest) {
+    request = &DescribePortsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribePorts")
+    
+    
+    return
+}
+
+func NewDescribePortsResponse() (response *DescribePortsResponse) {
+    response = &DescribePortsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePorts
+// Obtain the SaaS-type WAF protection port list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribePorts(request *DescribePortsRequest) (response *DescribePortsResponse, err error) {
+    return c.DescribePortsWithContext(context.Background(), request)
+}
+
+// DescribePorts
+// Obtain the SaaS-type WAF protection port list
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribePortsWithContext(ctx context.Context, request *DescribePortsRequest) (response *DescribePortsResponse, err error) {
+    if request == nil {
+        request = NewDescribePortsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePorts require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePortsResponse()
     err = c.Send(request, response)
     return
 }
@@ -2698,6 +3286,83 @@ func (c *Client) DescribeTopAttackDomainWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewDescribeTopAttackDomainResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeUserClbWafRegionsRequest() (request *DescribeUserClbWafRegionsRequest) {
+    request = &DescribeUserClbWafRegionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeUserClbWafRegions")
+    
+    
+    return
+}
+
+func NewDescribeUserClbWafRegionsResponse() (response *DescribeUserClbWafRegionsResponse) {
+    response = &DescribeUserClbWafRegionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeUserClbWafRegions
+// During the addition and modification of Domain Configuration for CLB-type WAF, it is required to display the supported region list for CLB-type WAF (clb-waf) through DescribeUserClbWafRegions to obtain the currently available region list for the customer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeUserClbWafRegions(request *DescribeUserClbWafRegionsRequest) (response *DescribeUserClbWafRegionsResponse, err error) {
+    return c.DescribeUserClbWafRegionsWithContext(context.Background(), request)
+}
+
+// DescribeUserClbWafRegions
+// During the addition and modification of Domain Configuration for CLB-type WAF, it is required to display the supported region list for CLB-type WAF (clb-waf) through DescribeUserClbWafRegions to obtain the currently available region list for the customer.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeUserClbWafRegionsWithContext(ctx context.Context, request *DescribeUserClbWafRegionsRequest) (response *DescribeUserClbWafRegionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeUserClbWafRegionsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeUserClbWafRegions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeUserClbWafRegionsResponse()
     err = c.Send(request, response)
     return
 }
@@ -3193,6 +3858,136 @@ func (c *Client) GetAttackTotalCountWithContext(ctx context.Context, request *Ge
     return
 }
 
+func NewGetInstanceQpsLimitRequest() (request *GetInstanceQpsLimitRequest) {
+    request = &GetInstanceQpsLimitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "GetInstanceQpsLimit")
+    
+    
+    return
+}
+
+func NewGetInstanceQpsLimitResponse() (response *GetInstanceQpsLimitResponse) {
+    response = &GetInstanceQpsLimitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetInstanceQpsLimit
+// Obtain the elastic QPS limit of package instances
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSDBOPERATIONFAILED = "FailedOperation.CLSDBOperationFailed"
+//  FAILEDOPERATION_CLSINTERNALERROR = "FailedOperation.CLSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERR = "InternalError.UnknownErr"
+//  INVALIDPARAMETER_LOGICERR = "InvalidParameter.LogicErr"
+//  INVALIDPARAMETER_QUERYSTRINGSYNTAXERR = "InvalidParameter.QueryStringSyntaxErr"
+//  INVALIDPARAMETER_SQLSYNTAXERR = "InvalidParameter.SQLSyntaxErr"
+//  INVALIDPARAMETER_TYPEMISMATCH = "InvalidParameter.TypeMismatch"
+func (c *Client) GetInstanceQpsLimit(request *GetInstanceQpsLimitRequest) (response *GetInstanceQpsLimitResponse, err error) {
+    return c.GetInstanceQpsLimitWithContext(context.Background(), request)
+}
+
+// GetInstanceQpsLimit
+// Obtain the elastic QPS limit of package instances
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSDBOPERATIONFAILED = "FailedOperation.CLSDBOperationFailed"
+//  FAILEDOPERATION_CLSINTERNALERROR = "FailedOperation.CLSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERR = "InternalError.UnknownErr"
+//  INVALIDPARAMETER_LOGICERR = "InvalidParameter.LogicErr"
+//  INVALIDPARAMETER_QUERYSTRINGSYNTAXERR = "InvalidParameter.QueryStringSyntaxErr"
+//  INVALIDPARAMETER_SQLSYNTAXERR = "InvalidParameter.SQLSyntaxErr"
+//  INVALIDPARAMETER_TYPEMISMATCH = "InvalidParameter.TypeMismatch"
+func (c *Client) GetInstanceQpsLimitWithContext(ctx context.Context, request *GetInstanceQpsLimitRequest) (response *GetInstanceQpsLimitResponse, err error) {
+    if request == nil {
+        request = NewGetInstanceQpsLimitRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetInstanceQpsLimit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetInstanceQpsLimitResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewImportIpAccessControlRequest() (request *ImportIpAccessControlRequest) {
+    request = &ImportIpAccessControlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ImportIpAccessControl")
+    
+    
+    return
+}
+
+func NewImportIpAccessControlResponse() (response *ImportIpAccessControlResponse) {
+    response = &ImportIpAccessControlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ImportIpAccessControl
+// This API is used to import IP allowlists/blocklists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSDBOPERATIONFAILED = "FailedOperation.CLSDBOperationFailed"
+//  FAILEDOPERATION_CLSINTERNALERROR = "FailedOperation.CLSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERR = "InternalError.UnknownErr"
+//  INVALIDPARAMETER_LOGICERR = "InvalidParameter.LogicErr"
+//  INVALIDPARAMETER_QUERYSTRINGSYNTAXERR = "InvalidParameter.QueryStringSyntaxErr"
+//  INVALIDPARAMETER_SQLSYNTAXERR = "InvalidParameter.SQLSyntaxErr"
+//  INVALIDPARAMETER_TYPEMISMATCH = "InvalidParameter.TypeMismatch"
+func (c *Client) ImportIpAccessControl(request *ImportIpAccessControlRequest) (response *ImportIpAccessControlResponse, err error) {
+    return c.ImportIpAccessControlWithContext(context.Background(), request)
+}
+
+// ImportIpAccessControl
+// This API is used to import IP allowlists/blocklists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSDBOPERATIONFAILED = "FailedOperation.CLSDBOperationFailed"
+//  FAILEDOPERATION_CLSINTERNALERROR = "FailedOperation.CLSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERR = "InternalError.UnknownErr"
+//  INVALIDPARAMETER_LOGICERR = "InvalidParameter.LogicErr"
+//  INVALIDPARAMETER_QUERYSTRINGSYNTAXERR = "InvalidParameter.QueryStringSyntaxErr"
+//  INVALIDPARAMETER_SQLSYNTAXERR = "InvalidParameter.SQLSyntaxErr"
+//  INVALIDPARAMETER_TYPEMISMATCH = "InvalidParameter.TypeMismatch"
+func (c *Client) ImportIpAccessControlWithContext(ctx context.Context, request *ImportIpAccessControlRequest) (response *ImportIpAccessControlResponse, err error) {
+    if request == nil {
+        request = NewImportIpAccessControlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ImportIpAccessControl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewImportIpAccessControlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyAntiFakeUrlRequest() (request *ModifyAntiFakeUrlRequest) {
     request = &ModifyAntiFakeUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3621,6 +4416,61 @@ func (c *Client) ModifyCustomRuleStatusWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewModifyCustomRuleStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyCustomWhiteRuleRequest() (request *ModifyCustomWhiteRuleRequest) {
+    request = &ModifyCustomWhiteRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyCustomWhiteRule")
+    
+    
+    return
+}
+
+func NewModifyCustomWhiteRuleResponse() (response *ModifyCustomWhiteRuleResponse) {
+    response = &ModifyCustomWhiteRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyCustomWhiteRule
+// This API is used to edit a precise allowlist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyCustomWhiteRule(request *ModifyCustomWhiteRuleRequest) (response *ModifyCustomWhiteRuleResponse, err error) {
+    return c.ModifyCustomWhiteRuleWithContext(context.Background(), request)
+}
+
+// ModifyCustomWhiteRule
+// This API is used to edit a precise allowlist.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyCustomWhiteRuleWithContext(ctx context.Context, request *ModifyCustomWhiteRuleRequest) (response *ModifyCustomWhiteRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyCustomWhiteRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCustomWhiteRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCustomWhiteRuleResponse()
     err = c.Send(request, response)
     return
 }
@@ -4152,6 +5002,357 @@ func (c *Client) ModifyHostStatusWithContext(ctx context.Context, request *Modif
     request.SetContext(ctx)
     
     response = NewModifyHostStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyInstanceElasticModeRequest() (request *ModifyInstanceElasticModeRequest) {
+    request = &ModifyInstanceElasticModeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyInstanceElasticMode")
+    
+    
+    return
+}
+
+func NewModifyInstanceElasticModeResponse() (response *ModifyInstanceElasticModeResponse) {
+    response = &ModifyInstanceElasticModeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyInstanceElasticMode
+// Modify the QPS elastic billing switch for an instance
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyInstanceElasticMode(request *ModifyInstanceElasticModeRequest) (response *ModifyInstanceElasticModeResponse, err error) {
+    return c.ModifyInstanceElasticModeWithContext(context.Background(), request)
+}
+
+// ModifyInstanceElasticMode
+// Modify the QPS elastic billing switch for an instance
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyInstanceElasticModeWithContext(ctx context.Context, request *ModifyInstanceElasticModeRequest) (response *ModifyInstanceElasticModeResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceElasticModeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceElasticMode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceElasticModeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyInstanceNameRequest() (request *ModifyInstanceNameRequest) {
+    request = &ModifyInstanceNameRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyInstanceName")
+    
+    
+    return
+}
+
+func NewModifyInstanceNameResponse() (response *ModifyInstanceNameResponse) {
+    response = &ModifyInstanceNameResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyInstanceName
+// Modify instance name
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ModifyInstanceName(request *ModifyInstanceNameRequest) (response *ModifyInstanceNameResponse, err error) {
+    return c.ModifyInstanceNameWithContext(context.Background(), request)
+}
+
+// ModifyInstanceName
+// Modify instance name
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ModifyInstanceNameWithContext(ctx context.Context, request *ModifyInstanceNameRequest) (response *ModifyInstanceNameResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceNameRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceName require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceNameResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyInstanceQpsLimitRequest() (request *ModifyInstanceQpsLimitRequest) {
+    request = &ModifyInstanceQpsLimitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyInstanceQpsLimit")
+    
+    
+    return
+}
+
+func NewModifyInstanceQpsLimitResponse() (response *ModifyInstanceQpsLimitResponse) {
+    response = &ModifyInstanceQpsLimitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyInstanceQpsLimit
+// Set elastic QPS limit for package instances
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ModifyInstanceQpsLimit(request *ModifyInstanceQpsLimitRequest) (response *ModifyInstanceQpsLimitResponse, err error) {
+    return c.ModifyInstanceQpsLimitWithContext(context.Background(), request)
+}
+
+// ModifyInstanceQpsLimit
+// Set elastic QPS limit for package instances
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ModifyInstanceQpsLimitWithContext(ctx context.Context, request *ModifyInstanceQpsLimitRequest) (response *ModifyInstanceQpsLimitResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceQpsLimitRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceQpsLimit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceQpsLimitResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyInstanceRenewFlagRequest() (request *ModifyInstanceRenewFlagRequest) {
+    request = &ModifyInstanceRenewFlagRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyInstanceRenewFlag")
+    
+    
+    return
+}
+
+func NewModifyInstanceRenewFlagResponse() (response *ModifyInstanceRenewFlagResponse) {
+    response = &ModifyInstanceRenewFlagResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyInstanceRenewFlag
+// Enable or disable auto-renewal for instance
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyInstanceRenewFlag(request *ModifyInstanceRenewFlagRequest) (response *ModifyInstanceRenewFlagResponse, err error) {
+    return c.ModifyInstanceRenewFlagWithContext(context.Background(), request)
+}
+
+// ModifyInstanceRenewFlag
+// Enable or disable auto-renewal for instance
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  DRYRUNOPERATION = "DryRunOperation"
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyInstanceRenewFlagWithContext(ctx context.Context, request *ModifyInstanceRenewFlagRequest) (response *ModifyInstanceRenewFlagResponse, err error) {
+    if request == nil {
+        request = NewModifyInstanceRenewFlagRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyInstanceRenewFlag require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyInstanceRenewFlagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyIpAccessControlRequest() (request *ModifyIpAccessControlRequest) {
+    request = &ModifyIpAccessControlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyIpAccessControl")
+    
+    
+    return
+}
+
+func NewModifyIpAccessControlResponse() (response *ModifyIpAccessControlResponse) {
+    response = &ModifyIpAccessControlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyIpAccessControl
+// This API is used to edit WAF IP allowlists/blocklists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_THENUMBEROFADDEDBLACKANDWHITELISTEXCEEDSTHEUPPERLIMIT = "FailedOperation.TheNumberOfAddedBlackAndWhiteListExceedsTheUpperLimit"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyIpAccessControl(request *ModifyIpAccessControlRequest) (response *ModifyIpAccessControlResponse, err error) {
+    return c.ModifyIpAccessControlWithContext(context.Background(), request)
+}
+
+// ModifyIpAccessControl
+// This API is used to edit WAF IP allowlists/blocklists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_THENUMBEROFADDEDBLACKANDWHITELISTEXCEEDSTHEUPPERLIMIT = "FailedOperation.TheNumberOfAddedBlackAndWhiteListExceedsTheUpperLimit"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERR = "InternalError.DBErr"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  LIMITEXCEEDED_SPECIFICATIONERR = "LimitExceeded.SpecificationErr"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyIpAccessControlWithContext(ctx context.Context, request *ModifyIpAccessControlRequest) (response *ModifyIpAccessControlResponse, err error) {
+    if request == nil {
+        request = NewModifyIpAccessControlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyIpAccessControl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyIpAccessControlResponse()
     err = c.Send(request, response)
     return
 }
@@ -4759,6 +5960,61 @@ func (c *Client) RefreshAccessCheckResultWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewRefreshAccessCheckResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSwitchElasticModeRequest() (request *SwitchElasticModeRequest) {
+    request = &SwitchElasticModeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "SwitchElasticMode")
+    
+    
+    return
+}
+
+func NewSwitchElasticModeResponse() (response *SwitchElasticModeResponse) {
+    response = &SwitchElasticModeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SwitchElasticMode
+// Toggle elasticity switch
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) SwitchElasticMode(request *SwitchElasticModeRequest) (response *SwitchElasticModeResponse, err error) {
+    return c.SwitchElasticModeWithContext(context.Background(), request)
+}
+
+// SwitchElasticMode
+// Toggle elasticity switch
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) SwitchElasticModeWithContext(ctx context.Context, request *SwitchElasticModeRequest) (response *SwitchElasticModeResponse, err error) {
+    if request == nil {
+        request = NewSwitchElasticModeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SwitchElasticMode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSwitchElasticModeResponse()
     err = c.Send(request, response)
     return
 }
