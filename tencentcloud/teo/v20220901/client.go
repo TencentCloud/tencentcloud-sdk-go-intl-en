@@ -898,6 +898,142 @@ func (c *Client) CreateCustomizeErrorPageWithContext(ctx context.Context, reques
     return
 }
 
+func NewCreateFunctionRequest() (request *CreateFunctionRequest) {
+    request = &CreateFunctionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "CreateFunction")
+    
+    
+    return
+}
+
+func NewCreateFunctionResponse() (response *CreateFunctionResponse) {
+    response = &CreateFunctionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateFunction
+// This API is used to create and deploy an edge function to EdgeOne edge nodes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FUNCTIONDEPLOYING = "FailedOperation.FunctionDeploying"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_BADCONTENT = "InvalidParameter.BadContent"
+//  INVALIDPARAMETER_BADFUNCTIONNAME = "InvalidParameter.BadFunctionName"
+//  INVALIDPARAMETER_CONTENTEXCEEDSLIMIT = "InvalidParameter.ContentExceedsLimit"
+//  INVALIDPARAMETER_FUNCTIONNAMECONFLICT = "InvalidParameter.FunctionNameConflict"
+//  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
+//  LIMITEXCEEDED_FUNCTIONLIMITEXCEEDED = "LimitExceeded.FunctionLimitExceeded"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) CreateFunction(request *CreateFunctionRequest) (response *CreateFunctionResponse, err error) {
+    return c.CreateFunctionWithContext(context.Background(), request)
+}
+
+// CreateFunction
+// This API is used to create and deploy an edge function to EdgeOne edge nodes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FUNCTIONDEPLOYING = "FailedOperation.FunctionDeploying"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_BADCONTENT = "InvalidParameter.BadContent"
+//  INVALIDPARAMETER_BADFUNCTIONNAME = "InvalidParameter.BadFunctionName"
+//  INVALIDPARAMETER_CONTENTEXCEEDSLIMIT = "InvalidParameter.ContentExceedsLimit"
+//  INVALIDPARAMETER_FUNCTIONNAMECONFLICT = "InvalidParameter.FunctionNameConflict"
+//  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
+//  LIMITEXCEEDED_FUNCTIONLIMITEXCEEDED = "LimitExceeded.FunctionLimitExceeded"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) CreateFunctionWithContext(ctx context.Context, request *CreateFunctionRequest) (response *CreateFunctionResponse, err error) {
+    if request == nil {
+        request = NewCreateFunctionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateFunction require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateFunctionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateFunctionRuleRequest() (request *CreateFunctionRuleRequest) {
+    request = &CreateFunctionRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "CreateFunctionRule")
+    
+    
+    return
+}
+
+func NewCreateFunctionRuleResponse() (response *CreateFunctionRuleResponse) {
+    response = &CreateFunctionRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateFunctionRule
+// This API is used to create a trigger rule for an edge function.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RULEOPERATIONCONFLICT = "FailedOperation.RuleOperationConflict"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_DUPLICATERULE = "InvalidParameter.DuplicateRule"
+//  INVALIDPARAMETER_INVALIDCONDITIONS = "InvalidParameter.InvalidConditions"
+//  LIMITEXCEEDED_RULELIMITEXCEEDED = "LimitExceeded.RuleLimitExceeded"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) CreateFunctionRule(request *CreateFunctionRuleRequest) (response *CreateFunctionRuleResponse, err error) {
+    return c.CreateFunctionRuleWithContext(context.Background(), request)
+}
+
+// CreateFunctionRule
+// This API is used to create a trigger rule for an edge function.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RULEOPERATIONCONFLICT = "FailedOperation.RuleOperationConflict"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_DUPLICATERULE = "InvalidParameter.DuplicateRule"
+//  INVALIDPARAMETER_INVALIDCONDITIONS = "InvalidParameter.InvalidConditions"
+//  LIMITEXCEEDED_RULELIMITEXCEEDED = "LimitExceeded.RuleLimitExceeded"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) CreateFunctionRuleWithContext(ctx context.Context, request *CreateFunctionRuleRequest) (response *CreateFunctionRuleResponse, err error) {
+    if request == nil {
+        request = NewCreateFunctionRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateFunctionRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateFunctionRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateL4ProxyRequest() (request *CreateL4ProxyRequest) {
     request = &CreateL4ProxyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1853,6 +1989,7 @@ func NewCreateZoneResponse() (response *CreateZoneResponse) {
 //
 // error code that may be returned:
 //  DRYRUNOPERATION = "DryRunOperation"
+//  INTERNALERROR_FAILEDTOCALLDNSPOD = "InternalError.FailedToCallDNSPod"
 //  INVALIDPARAMETER_INVALIDORIGINIP = "InvalidParameter.InvalidOriginIp"
 //  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
 //  INVALIDPARAMETER_PLANNOTFOUND = "InvalidParameter.PlanNotFound"
@@ -1867,6 +2004,8 @@ func NewCreateZoneResponse() (response *CreateZoneResponse) {
 //  INVALIDPARAMETERVALUE_ZONESAMEASNAME = "InvalidParameterValue.ZoneSameAsName"
 //  LIMITEXCEEDED_ZONEBINDPLAN = "LimitExceeded.ZoneBindPlan"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_COMPLIANCEFORBIDDEN = "OperationDenied.ComplianceForbidden"
+//  OPERATIONDENIED_DNSPODUNAUTHORIZEDROLEOPERATION = "OperationDenied.DNSPodUnauthorizedRoleOperation"
 //  OPERATIONDENIED_DOMAINISBLOCKED = "OperationDenied.DomainIsBlocked"
 //  OPERATIONDENIED_RECORDISFORBIDDEN = "OperationDenied.RecordIsForbidden"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -1883,6 +2022,7 @@ func NewCreateZoneResponse() (response *CreateZoneResponse) {
 //  RESOURCEINUSE_OTHERSNS = "ResourceInUse.OthersNS"
 //  RESOURCEINUSE_SELFANDOTHERSCNAME = "ResourceInUse.SelfAndOthersCname"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DNSPODDOMAINNOTINACCOUNT = "ResourceNotFound.DNSPodDomainNotInAccount"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 //  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
@@ -1899,6 +2039,7 @@ func (c *Client) CreateZone(request *CreateZoneRequest) (response *CreateZoneRes
 //
 // error code that may be returned:
 //  DRYRUNOPERATION = "DryRunOperation"
+//  INTERNALERROR_FAILEDTOCALLDNSPOD = "InternalError.FailedToCallDNSPod"
 //  INVALIDPARAMETER_INVALIDORIGINIP = "InvalidParameter.InvalidOriginIp"
 //  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
 //  INVALIDPARAMETER_PLANNOTFOUND = "InvalidParameter.PlanNotFound"
@@ -1913,6 +2054,8 @@ func (c *Client) CreateZone(request *CreateZoneRequest) (response *CreateZoneRes
 //  INVALIDPARAMETERVALUE_ZONESAMEASNAME = "InvalidParameterValue.ZoneSameAsName"
 //  LIMITEXCEEDED_ZONEBINDPLAN = "LimitExceeded.ZoneBindPlan"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_COMPLIANCEFORBIDDEN = "OperationDenied.ComplianceForbidden"
+//  OPERATIONDENIED_DNSPODUNAUTHORIZEDROLEOPERATION = "OperationDenied.DNSPodUnauthorizedRoleOperation"
 //  OPERATIONDENIED_DOMAINISBLOCKED = "OperationDenied.DomainIsBlocked"
 //  OPERATIONDENIED_RECORDISFORBIDDEN = "OperationDenied.RecordIsForbidden"
 //  RESOURCEINUSE = "ResourceInUse"
@@ -1929,6 +2072,7 @@ func (c *Client) CreateZone(request *CreateZoneRequest) (response *CreateZoneRes
 //  RESOURCEINUSE_OTHERSNS = "ResourceInUse.OthersNS"
 //  RESOURCEINUSE_SELFANDOTHERSCNAME = "ResourceInUse.SelfAndOthersCname"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DNSPODDOMAINNOTINACCOUNT = "ResourceNotFound.DNSPodDomainNotInAccount"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
 //  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
@@ -2221,6 +2365,122 @@ func (c *Client) DeleteCustomErrorPageWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDeleteCustomErrorPageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteFunctionRequest() (request *DeleteFunctionRequest) {
+    request = &DeleteFunctionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DeleteFunction")
+    
+    
+    return
+}
+
+func NewDeleteFunctionResponse() (response *DeleteFunctionResponse) {
+    response = &DeleteFunctionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteFunction
+// This API is used to delete an edge function. Once deleted, the function cannot be recovered, and associated trigger rules are also deleted.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RULEOPERATIONCONFLICT = "FailedOperation.RuleOperationConflict"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) DeleteFunction(request *DeleteFunctionRequest) (response *DeleteFunctionResponse, err error) {
+    return c.DeleteFunctionWithContext(context.Background(), request)
+}
+
+// DeleteFunction
+// This API is used to delete an edge function. Once deleted, the function cannot be recovered, and associated trigger rules are also deleted.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RULEOPERATIONCONFLICT = "FailedOperation.RuleOperationConflict"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  OPERATIONDENIED_VERSIONCONTROLLOCKED = "OperationDenied.VersionControlLocked"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) DeleteFunctionWithContext(ctx context.Context, request *DeleteFunctionRequest) (response *DeleteFunctionResponse, err error) {
+    if request == nil {
+        request = NewDeleteFunctionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteFunction require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteFunctionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteFunctionRulesRequest() (request *DeleteFunctionRulesRequest) {
+    request = &DeleteFunctionRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DeleteFunctionRules")
+    
+    
+    return
+}
+
+func NewDeleteFunctionRulesResponse() (response *DeleteFunctionRulesResponse) {
+    response = &DeleteFunctionRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteFunctionRules
+// This API is used to delete a trigger rule for an edge function.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RULEOPERATIONCONFLICT = "FailedOperation.RuleOperationConflict"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  RESOURCEUNAVAILABLE_RULENOTFOUND = "ResourceUnavailable.RuleNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) DeleteFunctionRules(request *DeleteFunctionRulesRequest) (response *DeleteFunctionRulesResponse, err error) {
+    return c.DeleteFunctionRulesWithContext(context.Background(), request)
+}
+
+// DeleteFunctionRules
+// This API is used to delete a trigger rule for an edge function.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RULEOPERATIONCONFLICT = "FailedOperation.RuleOperationConflict"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  RESOURCEUNAVAILABLE_RULENOTFOUND = "ResourceUnavailable.RuleNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) DeleteFunctionRulesWithContext(ctx context.Context, request *DeleteFunctionRulesRequest) (response *DeleteFunctionRulesResponse, err error) {
+    if request == nil {
+        request = NewDeleteFunctionRulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteFunctionRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteFunctionRulesResponse()
     err = c.Send(request, response)
     return
 }
@@ -3597,6 +3857,187 @@ func (c *Client) DescribeEnvironmentsWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeEnvironmentsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeFunctionRulesRequest() (request *DescribeFunctionRulesRequest) {
+    request = &DescribeFunctionRulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeFunctionRules")
+    
+    
+    return
+}
+
+func NewDescribeFunctionRulesResponse() (response *DescribeFunctionRulesResponse) {
+    response = &DescribeFunctionRulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeFunctionRules
+// This API is used to query the list of trigger rules for an edge function. It supports filtering by rule ID, function ID, rule description, and so on.
+//
+// error code that may be returned:
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  INVALIDPARAMETER_TOOMANYFILTERVALUES = "InvalidParameter.TooManyFilterValues"
+//  INVALIDPARAMETER_TOOMANYFILTERS = "InvalidParameter.TooManyFilters"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) DescribeFunctionRules(request *DescribeFunctionRulesRequest) (response *DescribeFunctionRulesResponse, err error) {
+    return c.DescribeFunctionRulesWithContext(context.Background(), request)
+}
+
+// DescribeFunctionRules
+// This API is used to query the list of trigger rules for an edge function. It supports filtering by rule ID, function ID, rule description, and so on.
+//
+// error code that may be returned:
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  INVALIDPARAMETER_TOOMANYFILTERVALUES = "InvalidParameter.TooManyFilterValues"
+//  INVALIDPARAMETER_TOOMANYFILTERS = "InvalidParameter.TooManyFilters"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) DescribeFunctionRulesWithContext(ctx context.Context, request *DescribeFunctionRulesRequest) (response *DescribeFunctionRulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeFunctionRulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeFunctionRules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeFunctionRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeFunctionRuntimeEnvironmentRequest() (request *DescribeFunctionRuntimeEnvironmentRequest) {
+    request = &DescribeFunctionRuntimeEnvironmentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeFunctionRuntimeEnvironment")
+    
+    
+    return
+}
+
+func NewDescribeFunctionRuntimeEnvironmentResponse() (response *DescribeFunctionRuntimeEnvironmentResponse) {
+    response = &DescribeFunctionRuntimeEnvironmentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeFunctionRuntimeEnvironment
+// This API is used to query the runtime environment of an edge function, including environment variables.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) DescribeFunctionRuntimeEnvironment(request *DescribeFunctionRuntimeEnvironmentRequest) (response *DescribeFunctionRuntimeEnvironmentResponse, err error) {
+    return c.DescribeFunctionRuntimeEnvironmentWithContext(context.Background(), request)
+}
+
+// DescribeFunctionRuntimeEnvironment
+// This API is used to query the runtime environment of an edge function, including environment variables.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) DescribeFunctionRuntimeEnvironmentWithContext(ctx context.Context, request *DescribeFunctionRuntimeEnvironmentRequest) (response *DescribeFunctionRuntimeEnvironmentResponse, err error) {
+    if request == nil {
+        request = NewDescribeFunctionRuntimeEnvironmentRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeFunctionRuntimeEnvironment require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeFunctionRuntimeEnvironmentResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeFunctionsRequest() (request *DescribeFunctionsRequest) {
+    request = &DescribeFunctionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeFunctions")
+    
+    
+    return
+}
+
+func NewDescribeFunctionsResponse() (response *DescribeFunctionsResponse) {
+    response = &DescribeFunctionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeFunctions
+// This API is used to query the list of edge functions. It supports filtering by function ID, name, description, and so on.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
+//  INVALIDPARAMETER_TOOMANYFILTERVALUES = "InvalidParameter.TooManyFilterValues"
+//  INVALIDPARAMETER_TOOMANYFILTERS = "InvalidParameter.TooManyFilters"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) DescribeFunctions(request *DescribeFunctionsRequest) (response *DescribeFunctionsResponse, err error) {
+    return c.DescribeFunctionsWithContext(context.Background(), request)
+}
+
+// DescribeFunctions
+// This API is used to query the list of edge functions. It supports filtering by function ID, name, description, and so on.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INTERNALERROR_ROUTEERROR = "InternalError.RouteError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INVALIDFILTERNAME = "InvalidParameter.InvalidFilterName"
+//  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
+//  INVALIDPARAMETER_TOOMANYFILTERVALUES = "InvalidParameter.TooManyFilterValues"
+//  INVALIDPARAMETER_TOOMANYFILTERS = "InvalidParameter.TooManyFilters"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) DescribeFunctionsWithContext(ctx context.Context, request *DescribeFunctionsRequest) (response *DescribeFunctionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeFunctionsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeFunctions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeFunctionsResponse()
     err = c.Send(request, response)
     return
 }
@@ -5095,6 +5536,69 @@ func (c *Client) DownloadL7LogsWithContext(ctx context.Context, request *Downloa
     return
 }
 
+func NewHandleFunctionRuntimeEnvironmentRequest() (request *HandleFunctionRuntimeEnvironmentRequest) {
+    request = &HandleFunctionRuntimeEnvironmentRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "HandleFunctionRuntimeEnvironment")
+    
+    
+    return
+}
+
+func NewHandleFunctionRuntimeEnvironmentResponse() (response *HandleFunctionRuntimeEnvironmentResponse) {
+    response = &HandleFunctionRuntimeEnvironmentResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// HandleFunctionRuntimeEnvironment
+// This API is used to operate the runtime environment of an edge function. It supports related settings for environment variables.
+//
+// After the environment variables are set, they can be used in the function code. For details, see [Edge Functions Referencing Environment Variables](https://intl.cloud.tencent.com/document/product/1552/109151?from_cn_redirect=1#0151fd9a-8b0e-407b-ae37-54553a60ded6).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FUNCTIONDEPLOYING = "FailedOperation.FunctionDeploying"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) HandleFunctionRuntimeEnvironment(request *HandleFunctionRuntimeEnvironmentRequest) (response *HandleFunctionRuntimeEnvironmentResponse, err error) {
+    return c.HandleFunctionRuntimeEnvironmentWithContext(context.Background(), request)
+}
+
+// HandleFunctionRuntimeEnvironment
+// This API is used to operate the runtime environment of an edge function. It supports related settings for environment variables.
+//
+// After the environment variables are set, they can be used in the function code. For details, see [Edge Functions Referencing Environment Variables](https://intl.cloud.tencent.com/document/product/1552/109151?from_cn_redirect=1#0151fd9a-8b0e-407b-ae37-54553a60ded6).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FUNCTIONDEPLOYING = "FailedOperation.FunctionDeploying"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) HandleFunctionRuntimeEnvironmentWithContext(ctx context.Context, request *HandleFunctionRuntimeEnvironmentRequest) (response *HandleFunctionRuntimeEnvironmentResponse, err error) {
+    if request == nil {
+        request = NewHandleFunctionRuntimeEnvironmentRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("HandleFunctionRuntimeEnvironment require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewHandleFunctionRuntimeEnvironmentResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewIdentifyZoneRequest() (request *IdentifyZoneRequest) {
     request = &IdentifyZoneRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5794,6 +6298,191 @@ func (c *Client) ModifyCustomErrorPageWithContext(ctx context.Context, request *
     return
 }
 
+func NewModifyFunctionRequest() (request *ModifyFunctionRequest) {
+    request = &ModifyFunctionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyFunction")
+    
+    
+    return
+}
+
+func NewModifyFunctionResponse() (response *ModifyFunctionResponse) {
+    response = &ModifyFunctionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyFunction
+// This API is used to modify an edge function. It supports modifying the function content and description. The function will take effect immediately after modification and redeployment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FUNCTIONDEPLOYING = "FailedOperation.FunctionDeploying"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_BADCONTENT = "InvalidParameter.BadContent"
+//  INVALIDPARAMETER_CONTENTEXCEEDSLIMIT = "InvalidParameter.ContentExceedsLimit"
+//  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
+//  INVALIDPARAMETER_MODIFYPARAMETERSMISSING = "InvalidParameter.ModifyParametersMissing"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) ModifyFunction(request *ModifyFunctionRequest) (response *ModifyFunctionResponse, err error) {
+    return c.ModifyFunctionWithContext(context.Background(), request)
+}
+
+// ModifyFunction
+// This API is used to modify an edge function. It supports modifying the function content and description. The function will take effect immediately after modification and redeployment.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FUNCTIONDEPLOYING = "FailedOperation.FunctionDeploying"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_BADCONTENT = "InvalidParameter.BadContent"
+//  INVALIDPARAMETER_CONTENTEXCEEDSLIMIT = "InvalidParameter.ContentExceedsLimit"
+//  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
+//  INVALIDPARAMETER_MODIFYPARAMETERSMISSING = "InvalidParameter.ModifyParametersMissing"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) ModifyFunctionWithContext(ctx context.Context, request *ModifyFunctionRequest) (response *ModifyFunctionResponse, err error) {
+    if request == nil {
+        request = NewModifyFunctionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyFunction require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyFunctionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyFunctionRuleRequest() (request *ModifyFunctionRuleRequest) {
+    request = &ModifyFunctionRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyFunctionRule")
+    
+    
+    return
+}
+
+func NewModifyFunctionRuleResponse() (response *ModifyFunctionRuleResponse) {
+    response = &ModifyFunctionRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyFunctionRule
+// This API is used to modify a trigger rule for an edge function. It supports modifying rule conditions, execution functions, and description.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RULEOPERATIONCONFLICT = "FailedOperation.RuleOperationConflict"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_DUPLICATERULE = "InvalidParameter.DuplicateRule"
+//  INVALIDPARAMETER_INVALIDCONDITIONS = "InvalidParameter.InvalidConditions"
+//  INVALIDPARAMETER_MODIFYPARAMETERSMISSING = "InvalidParameter.ModifyParametersMissing"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_RULENOTFOUND = "ResourceUnavailable.RuleNotFound"
+func (c *Client) ModifyFunctionRule(request *ModifyFunctionRuleRequest) (response *ModifyFunctionRuleResponse, err error) {
+    return c.ModifyFunctionRuleWithContext(context.Background(), request)
+}
+
+// ModifyFunctionRule
+// This API is used to modify a trigger rule for an edge function. It supports modifying rule conditions, execution functions, and description.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RULEOPERATIONCONFLICT = "FailedOperation.RuleOperationConflict"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_DUPLICATERULE = "InvalidParameter.DuplicateRule"
+//  INVALIDPARAMETER_INVALIDCONDITIONS = "InvalidParameter.InvalidConditions"
+//  INVALIDPARAMETER_MODIFYPARAMETERSMISSING = "InvalidParameter.ModifyParametersMissing"
+//  RESOURCEUNAVAILABLE_FUNCTIONNOTFOUND = "ResourceUnavailable.FunctionNotFound"
+//  RESOURCEUNAVAILABLE_RULENOTFOUND = "ResourceUnavailable.RuleNotFound"
+func (c *Client) ModifyFunctionRuleWithContext(ctx context.Context, request *ModifyFunctionRuleRequest) (response *ModifyFunctionRuleResponse, err error) {
+    if request == nil {
+        request = NewModifyFunctionRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyFunctionRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyFunctionRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyFunctionRulePriorityRequest() (request *ModifyFunctionRulePriorityRequest) {
+    request = &ModifyFunctionRulePriorityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyFunctionRulePriority")
+    
+    
+    return
+}
+
+func NewModifyFunctionRulePriorityResponse() (response *ModifyFunctionRulePriorityResponse) {
+    response = &ModifyFunctionRulePriorityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyFunctionRulePriority
+// This API is used to modify the priority of trigger rules for an edge function.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RULEOPERATIONCONFLICT = "FailedOperation.RuleOperationConflict"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) ModifyFunctionRulePriority(request *ModifyFunctionRulePriorityRequest) (response *ModifyFunctionRulePriorityResponse, err error) {
+    return c.ModifyFunctionRulePriorityWithContext(context.Background(), request)
+}
+
+// ModifyFunctionRulePriority
+// This API is used to modify the priority of trigger rules for an edge function.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_RULEOPERATIONCONFLICT = "FailedOperation.RuleOperationConflict"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE_ZONENOTFOUND = "ResourceUnavailable.ZoneNotFound"
+func (c *Client) ModifyFunctionRulePriorityWithContext(ctx context.Context, request *ModifyFunctionRulePriorityRequest) (response *ModifyFunctionRulePriorityResponse, err error) {
+    if request == nil {
+        request = NewModifyFunctionRulePriorityRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyFunctionRulePriority require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyFunctionRulePriorityResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyHostsCertificateRequest() (request *ModifyHostsCertificateRequest) {
     request = &ModifyHostsCertificateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5842,6 +6531,11 @@ func NewModifyHostsCertificateResponse() (response *ModifyHostsCertificateRespon
 //  INVALIDPARAMETER_INVALIDHTTPSCERTINFO = "InvalidParameter.InvalidHttpsCertInfo"
 //  INVALIDPARAMETER_INVALIDHTTPSTLSVERSION = "InvalidParameter.InvalidHttpsTlsVersion"
 //  INVALIDPARAMETER_ZONEISGRAYPUBLISHING = "InvalidParameter.ZoneIsGrayPublishing"
+//  INVALIDPARAMETERVALUE_CERTIFICATEVERIFYCLIENTMUSTCA = "InvalidParameterValue.CertificateVerifyClientMustCa"
+//  INVALIDPARAMETERVALUE_CERTIFICATEVERIFYCLIENTNEEDCERT = "InvalidParameterValue.CertificateVerifyClientNeedCert"
+//  INVALIDPARAMETERVALUE_CLIENTCERTINFOQUOTALIMIT = "InvalidParameterValue.ClientCertInfoQuotaLimit"
+//  INVALIDPARAMETERVALUE_SERVERCERTINFONEEDCONTAINRSAORECC = "InvalidParameterValue.ServerCertInfoNeedContainRSAorECC"
+//  INVALIDPARAMETERVALUE_SERVERCERTINFONEEDCONTAINSM2 = "InvalidParameterValue.ServerCertInfoNeedContainSM2"
 //  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_CONFIGLOCKED = "OperationDenied.ConfigLocked"
@@ -5885,6 +6579,11 @@ func (c *Client) ModifyHostsCertificate(request *ModifyHostsCertificateRequest) 
 //  INVALIDPARAMETER_INVALIDHTTPSCERTINFO = "InvalidParameter.InvalidHttpsCertInfo"
 //  INVALIDPARAMETER_INVALIDHTTPSTLSVERSION = "InvalidParameter.InvalidHttpsTlsVersion"
 //  INVALIDPARAMETER_ZONEISGRAYPUBLISHING = "InvalidParameter.ZoneIsGrayPublishing"
+//  INVALIDPARAMETERVALUE_CERTIFICATEVERIFYCLIENTMUSTCA = "InvalidParameterValue.CertificateVerifyClientMustCa"
+//  INVALIDPARAMETERVALUE_CERTIFICATEVERIFYCLIENTNEEDCERT = "InvalidParameterValue.CertificateVerifyClientNeedCert"
+//  INVALIDPARAMETERVALUE_CLIENTCERTINFOQUOTALIMIT = "InvalidParameterValue.ClientCertInfoQuotaLimit"
+//  INVALIDPARAMETERVALUE_SERVERCERTINFONEEDCONTAINRSAORECC = "InvalidParameterValue.ServerCertInfoNeedContainRSAorECC"
+//  INVALIDPARAMETERVALUE_SERVERCERTINFONEEDCONTAINSM2 = "InvalidParameterValue.ServerCertInfoNeedContainSM2"
 //  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_CONFIGLOCKED = "OperationDenied.ConfigLocked"
@@ -6713,6 +7412,7 @@ func NewModifyZoneResponse() (response *ModifyZoneResponse) {
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_CONFIGLOCKED = "InternalError.ConfigLocked"
+//  INTERNALERROR_FAILEDTOCALLDNSPOD = "InternalError.FailedToCallDNSPod"
 //  INVALIDPARAMETER_INVALIDORIGINIP = "InvalidParameter.InvalidOriginIp"
 //  INVALIDPARAMETER_INVALIDWEBSOCKETTIMEOUT = "InvalidParameter.InvalidWebSocketTimeout"
 //  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
@@ -6720,6 +7420,7 @@ func NewModifyZoneResponse() (response *ModifyZoneResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_ZONESAMEASNAME = "InvalidParameterValue.ZoneSameAsName"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_DNSPODUNAUTHORIZEDROLEOPERATION = "OperationDenied.DNSPodUnauthorizedRoleOperation"
 //  OPERATIONDENIED_DISABLEZONENOTCOMPLETED = "OperationDenied.DisableZoneNotCompleted"
 //  OPERATIONDENIED_DOMAININSHARECNAMEGROUP = "OperationDenied.DomainInShareCnameGroup"
 //  OPERATIONDENIED_DOMAINNUMBERISNOTZERO = "OperationDenied.DomainNumberIsNotZero"
@@ -6740,6 +7441,7 @@ func NewModifyZoneResponse() (response *ModifyZoneResponse) {
 //  RESOURCEINUSE_OTHERSNS = "ResourceInUse.OthersNS"
 //  RESOURCEINUSE_SELFANDOTHERSCNAME = "ResourceInUse.SelfAndOthersCname"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DNSPODDOMAINNOTINACCOUNT = "ResourceNotFound.DNSPodDomainNotInAccount"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
@@ -6754,6 +7456,7 @@ func (c *Client) ModifyZone(request *ModifyZoneRequest) (response *ModifyZoneRes
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR_CONFIGLOCKED = "InternalError.ConfigLocked"
+//  INTERNALERROR_FAILEDTOCALLDNSPOD = "InternalError.FailedToCallDNSPod"
 //  INVALIDPARAMETER_INVALIDORIGINIP = "InvalidParameter.InvalidOriginIp"
 //  INVALIDPARAMETER_INVALIDWEBSOCKETTIMEOUT = "InvalidParameter.InvalidWebSocketTimeout"
 //  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
@@ -6761,6 +7464,7 @@ func (c *Client) ModifyZone(request *ModifyZoneRequest) (response *ModifyZoneRes
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_ZONESAMEASNAME = "InvalidParameterValue.ZoneSameAsName"
 //  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_DNSPODUNAUTHORIZEDROLEOPERATION = "OperationDenied.DNSPodUnauthorizedRoleOperation"
 //  OPERATIONDENIED_DISABLEZONENOTCOMPLETED = "OperationDenied.DisableZoneNotCompleted"
 //  OPERATIONDENIED_DOMAININSHARECNAMEGROUP = "OperationDenied.DomainInShareCnameGroup"
 //  OPERATIONDENIED_DOMAINNUMBERISNOTZERO = "OperationDenied.DomainNumberIsNotZero"
@@ -6781,6 +7485,7 @@ func (c *Client) ModifyZone(request *ModifyZoneRequest) (response *ModifyZoneRes
 //  RESOURCEINUSE_OTHERSNS = "ResourceInUse.OthersNS"
 //  RESOURCEINUSE_SELFANDOTHERSCNAME = "ResourceInUse.SelfAndOthersCname"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_DNSPODDOMAINNOTINACCOUNT = "ResourceNotFound.DNSPodDomainNotInAccount"
 //  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
 //  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"

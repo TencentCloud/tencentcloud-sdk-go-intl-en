@@ -2822,6 +2822,17 @@ type OCRResult struct {
 
 	// Base64 of the cropped image on the reverse side of the ID card
 	CardBackCutImageBase64 *string `json:"CardBackCutImageBase64,omitnil,omitempty" name:"CardBackCutImageBase64"`
+
+	// Card Warning Information
+	// 
+	// -9101 Alarm for covered certificate,
+	// -9102 Alarm for photocopied certificate,
+	// -9103 Alarm for photographed certificate,
+	// -9104 Alarm for PS certificate,
+	// -9107 Alarm for reflective certificate,
+	// -9108 Alarm for blurry image,
+	// -9109 This capability is not enabled.
+	WarnCardInfos []*int64 `json:"WarnCardInfos,omitnil,omitempty" name:"WarnCardInfos"`
 }
 
 type PhilippinesDrivingLicense struct {

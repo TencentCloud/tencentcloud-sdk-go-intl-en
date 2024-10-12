@@ -22164,7 +22164,7 @@ type OpsTaskCanvasInfoList struct {
 
 	// Canvas Cyclic Dependency Task Information
 	// Note: This field may return null, indicating that no valid value can be obtained.
-	CirculateTaskList *OpsTaskCanvasDto `json:"CirculateTaskList,omitnil,omitempty" name:"CirculateTaskList"`
+	CirculateTaskList []*OpsTaskCanvasDto `json:"CirculateTaskList,omitnil,omitempty" name:"CirculateTaskList"`
 }
 
 type OpsTaskInfoPage struct {
