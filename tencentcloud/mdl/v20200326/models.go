@@ -123,6 +123,12 @@ type AVTemplate struct {
 
 
 	VideoEnhanceSettings []*VideoEnhanceSetting `json:"VideoEnhanceSettings,omitnil,omitempty" name:"VideoEnhanceSettings"`
+
+	// Key frame interval, 300-10000, optional.
+	GopSize *int64 `json:"GopSize,omitnil,omitempty" name:"GopSize"`
+
+	// Keyframe units, only support MILLISECONDS (milliseconds).
+	GopSizeUnits *string `json:"GopSizeUnits,omitnil,omitempty" name:"GopSizeUnits"`
 }
 
 type AdditionalRateSetting struct {
@@ -3618,11 +3624,14 @@ type StreamLiveOutputGroupsInfo struct {
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Output protocol
-	// Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, `DASH_ARCHIVE`,`HLS_STREAM_PACKAGE`, `DASH_STREAM_PACKAGE`, `FRAME_CAPTURE`,`RTP`,`RTMP`.
+	// Valid values: `HLS`, `DASH`, `HLS_ARCHIVE`, 
+	//  `DASH_ARCHIVE`, `HLS_STREAM_PACKAGE`, 
+	//  `DASH_STREAM_PACKAGE`, 
+	//  `FRAME_CAPTURE`, `RTP`, `RTMP`, `M2TS`.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Output information
-	// If the type is RTMP or RTP, only one output is allowed; if it is HLS or DASH, 1-10 outputs are allowed.
+	// If the type is RTMP, RTP or FRAME_CAPTURE, only one output is allowed; if it is HLS or DASH, 1-10 outputs are allowed.
 	Outputs []*OutputInfo `json:"Outputs,omitnil,omitempty" name:"Outputs"`
 
 	// Relay destinations. Quantity: [1, 2]
