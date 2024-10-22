@@ -782,7 +782,7 @@ type BindApiAppRequestParams struct {
 	// Environment to be bound.
 	Environment *string `json:"Environment,omitnil,omitempty" name:"Environment"`
 
-	// Unique ID of the service to be bound
+	// Unique ID of the service to be bound.
 	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Unique ID of the API to be bound.
@@ -798,7 +798,7 @@ type BindApiAppRequest struct {
 	// Environment to be bound.
 	Environment *string `json:"Environment,omitnil,omitempty" name:"Environment"`
 
-	// Unique ID of the service to be bound
+	// Unique ID of the service to be bound.
 	ServiceId *string `json:"ServiceId,omitnil,omitempty" name:"ServiceId"`
 
 	// Unique ID of the API to be bound.

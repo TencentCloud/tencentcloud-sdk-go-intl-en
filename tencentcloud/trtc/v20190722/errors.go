@@ -35,7 +35,10 @@ const (
 	// Unsupported on-cloud recording method.
 	FAILEDOPERATION_CRUNSUPPORTMETHOD = "FailedOperation.CRUnsupportMethod"
 
-	// 
+	// Need to unlock the required ability
+	FAILEDOPERATION_NOTABILITY = "FailedOperation.NotAbility"
+
+	// This operation is not allowed, please submit a ticket to contact us
 	FAILEDOPERATION_NOTALLOWED = "FailedOperation.NotAllowed"
 
 	// 
@@ -53,13 +56,16 @@ const (
 	// The application ID does not exist.
 	FAILEDOPERATION_SDKAPPIDNOTEXIST = "FailedOperation.SdkAppIdNotExist"
 
+	// There is no resource for this SdkAppId  In this AppId
+	FAILEDOPERATION_SDKAPPIDNOTUNDERAPPID = "FailedOperation.SdkAppIdNotUnderAppId"
+
 	// Task already exists
 	FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
 
 	// Task has ended when calling the interface.
 	FAILEDOPERATION_TASKFINISHED = "FailedOperation.TaskFinished"
 
-	// TaskId Not Exist
+	// The task does not exist.
 	FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
 
 	// The user is not in the room.
@@ -167,8 +173,11 @@ const (
 	// The number of users exceeds 6.
 	INVALIDPARAMETER_USERIDSMORETHANSIX = "InvalidParameter.UserIdsMorethanSix"
 
-	// 
+	// UserSig is expired or wrong
 	INVALIDPARAMETER_USERSIG = "InvalidParameter.UserSig"
+
+	// 
+	INVALIDPARAMETER_USERSIGNOTADMIN = "InvalidParameter.UserSigNotAdmin"
 
 	// Invalid RoomId.
 	INVALIDPARAMETERVALUE_ROOMID = "InvalidParameterValue.RoomId"

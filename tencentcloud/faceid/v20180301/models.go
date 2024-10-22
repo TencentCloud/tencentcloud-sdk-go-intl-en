@@ -597,7 +597,10 @@ func (r *ApplyWebVerificationTokenResponse) FromJsonString(s string) error {
 }
 
 type AttackRiskDetail struct {
-
+	// Suspected attack trace types
+	// SuspectedSpoofingAttack: Suspected spoofing attack
+	//  SuspectedSynthesisImage: Suspected synthesis image SuspectedSynthesisVideo: Suspected synthesis video SuspectedeAnomalyAttack: Suspected anomaly attack SuspectedAdversarialAttack: Suspected adversarial attack SuspectedBlackIndustry: Suspected batch generation attack
+	// SuspectedWatermark: Suspected watermark
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 

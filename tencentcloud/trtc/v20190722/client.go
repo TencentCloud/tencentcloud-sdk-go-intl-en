@@ -45,6 +45,57 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewControlAIConversationRequest() (request *ControlAIConversationRequest) {
+    request = &ControlAIConversationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "ControlAIConversation")
+    
+    
+    return
+}
+
+func NewControlAIConversationResponse() (response *ControlAIConversationResponse) {
+    response = &ControlAIConversationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ControlAIConversation
+// Provides server-side control of AI Conversation
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) ControlAIConversation(request *ControlAIConversationRequest) (response *ControlAIConversationResponse, err error) {
+    return c.ControlAIConversationWithContext(context.Background(), request)
+}
+
+// ControlAIConversation
+// Provides server-side control of AI Conversation
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) ControlAIConversationWithContext(ctx context.Context, request *ControlAIConversationRequest) (response *ControlAIConversationResponse, err error) {
+    if request == nil {
+        request = NewControlAIConversationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ControlAIConversation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewControlAIConversationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCloudRecordingRequest() (request *CreateCloudRecordingRequest) {
     request = &CreateCloudRecordingRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -257,6 +308,108 @@ func (c *Client) DeleteCloudRecordingWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDeleteCloudRecordingResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAIConversationRequest() (request *DescribeAIConversationRequest) {
+    request = &DescribeAIConversationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeAIConversation")
+    
+    
+    return
+}
+
+func NewDescribeAIConversationResponse() (response *DescribeAIConversationResponse) {
+    response = &DescribeAIConversationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAIConversation
+// Describe the AI conversation task status
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) DescribeAIConversation(request *DescribeAIConversationRequest) (response *DescribeAIConversationResponse, err error) {
+    return c.DescribeAIConversationWithContext(context.Background(), request)
+}
+
+// DescribeAIConversation
+// Describe the AI conversation task status
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) DescribeAIConversationWithContext(ctx context.Context, request *DescribeAIConversationRequest) (response *DescribeAIConversationResponse, err error) {
+    if request == nil {
+        request = NewDescribeAIConversationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAIConversation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAIConversationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAITranscriptionRequest() (request *DescribeAITranscriptionRequest) {
+    request = &DescribeAITranscriptionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeAITranscription")
+    
+    
+    return
+}
+
+func NewDescribeAITranscriptionResponse() (response *DescribeAITranscriptionResponse) {
+    response = &DescribeAITranscriptionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAITranscription
+// Describe AI transcription task status
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) DescribeAITranscription(request *DescribeAITranscriptionRequest) (response *DescribeAITranscriptionResponse, err error) {
+    return c.DescribeAITranscriptionWithContext(context.Background(), request)
+}
+
+// DescribeAITranscription
+// Describe AI transcription task status
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) DescribeAITranscriptionWithContext(ctx context.Context, request *DescribeAITranscriptionRequest) (response *DescribeAITranscriptionResponse, err error) {
+    if request == nil {
+        request = NewDescribeAITranscriptionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAITranscription require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAITranscriptionResponse()
     err = c.Send(request, response)
     return
 }
@@ -2129,6 +2282,140 @@ func (c *Client) SetUserBlockedByStrRoomIdWithContext(ctx context.Context, reque
     return
 }
 
+func NewStartAIConversationRequest() (request *StartAIConversationRequest) {
+    request = &StartAIConversationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "StartAIConversation")
+    
+    
+    return
+}
+
+func NewStartAIConversationResponse() (response *StartAIConversationResponse) {
+    response = &StartAIConversationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StartAIConversation
+// Initiate AI conversation task, where the AI bot enters the TRTC room to engage in AI conversation with specified members in the room. This is suitable for scenarios such as intelligent customer service and AI language teachers. The TRTC AI conversation feature has built-in speech-to-text capabilities , allowing customers to flexibly specify third-party AI model (LLM) services and text-to-speech (TTS) services. For more [feature details](https://cloud.tencent.com/document/product/647/108901).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTABILITY = "FailedOperation.NotAbility"
+//  FAILEDOPERATION_NOTALLOWED = "FailedOperation.NotAllowed"
+//  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
+//  INVALIDPARAMETER_USERSIG = "InvalidParameter.UserSig"
+//  RESOURCEINSUFFICIENT_REQUESTREJECTION = "ResourceInsufficient.RequestRejection"
+func (c *Client) StartAIConversation(request *StartAIConversationRequest) (response *StartAIConversationResponse, err error) {
+    return c.StartAIConversationWithContext(context.Background(), request)
+}
+
+// StartAIConversation
+// Initiate AI conversation task, where the AI bot enters the TRTC room to engage in AI conversation with specified members in the room. This is suitable for scenarios such as intelligent customer service and AI language teachers. The TRTC AI conversation feature has built-in speech-to-text capabilities , allowing customers to flexibly specify third-party AI model (LLM) services and text-to-speech (TTS) services. For more [feature details](https://cloud.tencent.com/document/product/647/108901).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTABILITY = "FailedOperation.NotAbility"
+//  FAILEDOPERATION_NOTALLOWED = "FailedOperation.NotAllowed"
+//  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
+//  INVALIDPARAMETER_USERSIG = "InvalidParameter.UserSig"
+//  RESOURCEINSUFFICIENT_REQUESTREJECTION = "ResourceInsufficient.RequestRejection"
+func (c *Client) StartAIConversationWithContext(ctx context.Context, request *StartAIConversationRequest) (response *StartAIConversationResponse, err error) {
+    if request == nil {
+        request = NewStartAIConversationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartAIConversation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartAIConversationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartAITranscriptionRequest() (request *StartAITranscriptionRequest) {
+    request = &StartAITranscriptionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "StartAITranscription")
+    
+    
+    return
+}
+
+func NewStartAITranscriptionResponse() (response *StartAITranscriptionResponse) {
+    response = &StartAITranscriptionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StartAITranscription
+// Initiate the transcription bot. The backend will pull the stream through the bot to perform real-time speech recognition and deliver subtitles and transcription messages. The transcription bot supports two stream pulling modes, controlled by the `TranscriptionMode` field:
+//
+// - Pull the stream of the entire room.
+//
+// - Pull the stream of a specific user.
+//
+// 
+//
+// The server delivers subtitles and transcription messages in real-time through TRTC's custom messages, with `CmdId` fixed at 1. The client only needs to listen for the callback of custom messages. For example, see the [C++ callback](https://cloud.tencent.com/document/product/647/79637#4cd82f4edb24992a15a25187089e1565). Other clients, such as Android, Web, etc., can also be found at the same link.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTABILITY = "FailedOperation.NotAbility"
+//  FAILEDOPERATION_NOTALLOWED = "FailedOperation.NotAllowed"
+//  FAILEDOPERATION_SDKAPPIDNOTUNDERAPPID = "FailedOperation.SdkAppIdNotUnderAppId"
+//  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
+//  INVALIDPARAMETER_USERSIG = "InvalidParameter.UserSig"
+//  INVALIDPARAMETER_USERSIGNOTADMIN = "InvalidParameter.UserSigNotAdmin"
+//  RESOURCEINSUFFICIENT_REQUESTREJECTION = "ResourceInsufficient.RequestRejection"
+func (c *Client) StartAITranscription(request *StartAITranscriptionRequest) (response *StartAITranscriptionResponse, err error) {
+    return c.StartAITranscriptionWithContext(context.Background(), request)
+}
+
+// StartAITranscription
+// Initiate the transcription bot. The backend will pull the stream through the bot to perform real-time speech recognition and deliver subtitles and transcription messages. The transcription bot supports two stream pulling modes, controlled by the `TranscriptionMode` field:
+//
+// - Pull the stream of the entire room.
+//
+// - Pull the stream of a specific user.
+//
+// 
+//
+// The server delivers subtitles and transcription messages in real-time through TRTC's custom messages, with `CmdId` fixed at 1. The client only needs to listen for the callback of custom messages. For example, see the [C++ callback](https://cloud.tencent.com/document/product/647/79637#4cd82f4edb24992a15a25187089e1565). Other clients, such as Android, Web, etc., can also be found at the same link.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTABILITY = "FailedOperation.NotAbility"
+//  FAILEDOPERATION_NOTALLOWED = "FailedOperation.NotAllowed"
+//  FAILEDOPERATION_SDKAPPIDNOTUNDERAPPID = "FailedOperation.SdkAppIdNotUnderAppId"
+//  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
+//  INVALIDPARAMETER_USERSIG = "InvalidParameter.UserSig"
+//  INVALIDPARAMETER_USERSIGNOTADMIN = "InvalidParameter.UserSigNotAdmin"
+//  RESOURCEINSUFFICIENT_REQUESTREJECTION = "ResourceInsufficient.RequestRejection"
+func (c *Client) StartAITranscriptionWithContext(ctx context.Context, request *StartAITranscriptionRequest) (response *StartAITranscriptionResponse, err error) {
+    if request == nil {
+        request = NewStartAITranscriptionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartAITranscription require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartAITranscriptionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStartPublishCdnStreamRequest() (request *StartPublishCdnStreamRequest) {
     request = &StartPublishCdnStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2497,6 +2784,57 @@ func (c *Client) StartStreamIngestWithContext(ctx context.Context, request *Star
     return
 }
 
+func NewStopAITranscriptionRequest() (request *StopAITranscriptionRequest) {
+    request = &StopAITranscriptionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "StopAITranscription")
+    
+    
+    return
+}
+
+func NewStopAITranscriptionResponse() (response *StopAITranscriptionResponse) {
+    response = &StopAITranscriptionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StopAITranscription
+// Stop AI Transcription task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) StopAITranscription(request *StopAITranscriptionRequest) (response *StopAITranscriptionResponse, err error) {
+    return c.StopAITranscriptionWithContext(context.Background(), request)
+}
+
+// StopAITranscription
+// Stop AI Transcription task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) StopAITranscriptionWithContext(ctx context.Context, request *StopAITranscriptionRequest) (response *StopAITranscriptionResponse, err error) {
+    if request == nil {
+        request = NewStopAITranscriptionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopAITranscription require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStopAITranscriptionResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStopPublishCdnStreamRequest() (request *StopPublishCdnStreamRequest) {
     request = &StopPublishCdnStreamRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2613,6 +2951,55 @@ func (c *Client) StopStreamIngestWithContext(ctx context.Context, request *StopS
     request.SetContext(ctx)
     
     response = NewStopStreamIngestResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateAIConversationRequest() (request *UpdateAIConversationRequest) {
+    request = &UpdateAIConversationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "UpdateAIConversation")
+    
+    
+    return
+}
+
+func NewUpdateAIConversationResponse() (response *UpdateAIConversationResponse) {
+    response = &UpdateAIConversationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateAIConversation
+// Update AI conversation task parameters
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+func (c *Client) UpdateAIConversation(request *UpdateAIConversationRequest) (response *UpdateAIConversationResponse, err error) {
+    return c.UpdateAIConversationWithContext(context.Background(), request)
+}
+
+// UpdateAIConversation
+// Update AI conversation task parameters
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+func (c *Client) UpdateAIConversationWithContext(ctx context.Context, request *UpdateAIConversationRequest) (response *UpdateAIConversationResponse, err error) {
+    if request == nil {
+        request = NewUpdateAIConversationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateAIConversation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateAIConversationResponse()
     err = c.Send(request, response)
     return
 }

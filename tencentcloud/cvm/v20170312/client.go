@@ -72,6 +72,7 @@ func NewAllocateHostsResponse() (response *AllocateHostsResponse) {
 // error code that may be returned:
 //  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
 //  INVALIDHOSTID_MALFORMED = "InvalidHostId.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  INVALIDPERIOD = "InvalidPeriod"
 //  INVALIDPROJECTID_NOTFOUND = "InvalidProjectId.NotFound"
@@ -90,6 +91,7 @@ func (c *Client) AllocateHosts(request *AllocateHostsRequest) (response *Allocat
 // error code that may be returned:
 //  INVALIDACCOUNT_INSUFFICIENTBALANCE = "InvalidAccount.InsufficientBalance"
 //  INVALIDHOSTID_MALFORMED = "InvalidHostId.Malformed"
+//  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  INVALIDPERIOD = "InvalidPeriod"
 //  INVALIDPROJECTID_NOTFOUND = "InvalidProjectId.NotFound"
@@ -412,12 +414,14 @@ func NewConfigureChcDeployVpcResponse() (response *ConfigureChcDeployVpcResponse
 // This API is used to configure the deployment network of a CHC host.
 //
 // error code that may be returned:
+//  ACCOUNTQUALIFICATIONRESTRICTIONS = "AccountQualificationRestrictions"
 //  INVALIDHOST_NOTSUPPORTED = "InvalidHost.NotSupported"
 //  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_AMOUNTNOTEQUAL = "InvalidParameterValue.AmountNotEqual"
 //  INVALIDPARAMETERVALUE_CHCHOSTSNOTFOUND = "InvalidParameterValue.ChcHostsNotFound"
 //  INVALIDPARAMETERVALUE_DEPLOYVPCALREADYEXISTS = "InvalidParameterValue.DeployVpcAlreadyExists"
+//  INVALIDPARAMETERVALUE_INCORRECTFORMAT = "InvalidParameterValue.IncorrectFormat"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MUSTDHCPENABLEDVPC = "InvalidParameterValue.MustDhcpEnabledVpc"
 //  VPCADDRNOTINSUBNET = "VpcAddrNotInSubNet"
@@ -430,12 +434,14 @@ func (c *Client) ConfigureChcDeployVpc(request *ConfigureChcDeployVpcRequest) (r
 // This API is used to configure the deployment network of a CHC host.
 //
 // error code that may be returned:
+//  ACCOUNTQUALIFICATIONRESTRICTIONS = "AccountQualificationRestrictions"
 //  INVALIDHOST_NOTSUPPORTED = "InvalidHost.NotSupported"
 //  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_AMOUNTNOTEQUAL = "InvalidParameterValue.AmountNotEqual"
 //  INVALIDPARAMETERVALUE_CHCHOSTSNOTFOUND = "InvalidParameterValue.ChcHostsNotFound"
 //  INVALIDPARAMETERVALUE_DEPLOYVPCALREADYEXISTS = "InvalidParameterValue.DeployVpcAlreadyExists"
+//  INVALIDPARAMETERVALUE_INCORRECTFORMAT = "InvalidParameterValue.IncorrectFormat"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MUSTDHCPENABLEDVPC = "InvalidParameterValue.MustDhcpEnabledVpc"
 //  VPCADDRNOTINSUBNET = "VpcAddrNotInSubNet"
@@ -452,6 +458,79 @@ func (c *Client) ConfigureChcDeployVpcWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewConfigureChcDeployVpcResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewConvertOperatingSystemsRequest() (request *ConvertOperatingSystemsRequest) {
+    request = &ConvertOperatingSystemsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cvm", APIVersion, "ConvertOperatingSystems")
+    
+    
+    return
+}
+
+func NewConvertOperatingSystemsResponse() (response *ConvertOperatingSystemsResponse) {
+    response = &ConvertOperatingSystemsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ConvertOperatingSystems
+// This API is used to switch the operating system of an instance with CentOS 7 or CentOS 8 as the source operating system.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETINSTANCETATAGENTSTATUSFAILED = "FailedOperation.GetInstanceTATAgentStatusFailed"
+//  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETER_AUTOSNAPSHOTNOTSUPPORTED = "InvalidParameter.AutoSnapshotNotSupported"
+//  INVALIDPARAMETER_INVALIDTARGETOSTYPE = "InvalidParameter.InvalidTargetOSType"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  UNSUPPORTEDOPERATION_INSTANCEOSCONVERTOSNOTSUPPORT = "UnsupportedOperation.InstanceOsConvertOsNotSupport"
+//  UNSUPPORTEDOPERATION_INSTANCEOSWINDOWS = "UnsupportedOperation.InstanceOsWindows"
+//  UNSUPPORTEDOPERATION_INSTANCESTATENOTRUNNING = "UnsupportedOperation.InstanceStateNotRunning"
+//  UNSUPPORTEDOPERATION_MARKETIMAGECONVERTOSUNSUPPORTED = "UnsupportedOperation.MarketImageConvertOSUnsupported"
+//  UNSUPPORTEDOPERATION_SPECIALINSTANCETYPE = "UnsupportedOperation.SpecialInstanceType"
+//  UNSUPPORTEDOPERATION_TATAGENTNOTONLINE = "UnsupportedOperation.TatAgentNotOnline"
+//  UNSUPPORTEDOPERATION_USERCONVERTOSNOTSUPPORT = "UnsupportedOperation.UserConvertOsNotSupport"
+func (c *Client) ConvertOperatingSystems(request *ConvertOperatingSystemsRequest) (response *ConvertOperatingSystemsResponse, err error) {
+    return c.ConvertOperatingSystemsWithContext(context.Background(), request)
+}
+
+// ConvertOperatingSystems
+// This API is used to switch the operating system of an instance with CentOS 7 or CentOS 8 as the source operating system.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETINSTANCETATAGENTSTATUSFAILED = "FailedOperation.GetInstanceTATAgentStatusFailed"
+//  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETER_AUTOSNAPSHOTNOTSUPPORTED = "InvalidParameter.AutoSnapshotNotSupported"
+//  INVALIDPARAMETER_INVALIDTARGETOSTYPE = "InvalidParameter.InvalidTargetOSType"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  UNSUPPORTEDOPERATION_INSTANCEOSCONVERTOSNOTSUPPORT = "UnsupportedOperation.InstanceOsConvertOsNotSupport"
+//  UNSUPPORTEDOPERATION_INSTANCEOSWINDOWS = "UnsupportedOperation.InstanceOsWindows"
+//  UNSUPPORTEDOPERATION_INSTANCESTATENOTRUNNING = "UnsupportedOperation.InstanceStateNotRunning"
+//  UNSUPPORTEDOPERATION_MARKETIMAGECONVERTOSUNSUPPORTED = "UnsupportedOperation.MarketImageConvertOSUnsupported"
+//  UNSUPPORTEDOPERATION_SPECIALINSTANCETYPE = "UnsupportedOperation.SpecialInstanceType"
+//  UNSUPPORTEDOPERATION_TATAGENTNOTONLINE = "UnsupportedOperation.TatAgentNotOnline"
+//  UNSUPPORTEDOPERATION_USERCONVERTOSNOTSUPPORT = "UnsupportedOperation.UserConvertOsNotSupport"
+func (c *Client) ConvertOperatingSystemsWithContext(ctx context.Context, request *ConvertOperatingSystemsRequest) (response *ConvertOperatingSystemsResponse, err error) {
+    if request == nil {
+        request = NewConvertOperatingSystemsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ConvertOperatingSystems require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewConvertOperatingSystemsResponse()
     err = c.Send(request, response)
     return
 }
@@ -482,6 +561,7 @@ func NewCreateDisasterRecoverGroupResponse() (response *CreateDisasterRecoverGro
 //  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCEINSUFFICIENT_INSUFFICIENTGROUPQUOTA = "ResourceInsufficient.InsufficientGroupQuota"
 func (c *Client) CreateDisasterRecoverGroup(request *CreateDisasterRecoverGroupRequest) (response *CreateDisasterRecoverGroupResponse, err error) {
     return c.CreateDisasterRecoverGroupWithContext(context.Background(), request)
 }
@@ -493,6 +573,7 @@ func (c *Client) CreateDisasterRecoverGroup(request *CreateDisasterRecoverGroupR
 //  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  RESOURCEINSUFFICIENT_INSUFFICIENTGROUPQUOTA = "ResourceInsufficient.InsufficientGroupQuota"
 func (c *Client) CreateDisasterRecoverGroupWithContext(ctx context.Context, request *CreateDisasterRecoverGroupRequest) (response *CreateDisasterRecoverGroupResponse, err error) {
     if request == nil {
         request = NewCreateDisasterRecoverGroupRequest()
@@ -550,19 +631,24 @@ func NewCreateImageResponse() (response *CreateImageResponse) {
 //  INVALIDPARAMETER_VALUETOOLARGE = "InvalidParameter.ValueTooLarge"
 //  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
 //  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
+//  INVALIDPARAMETERVALUE_INVALIDIMAGEFAMILY = "InvalidParameterValue.InvalidImageFamily"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_PREHEATNOTSUPPORTEDINSTANCETYPE = "InvalidParameterValue.PreheatNotSupportedInstanceType"
 //  INVALIDPARAMETERVALUE_PREHEATNOTSUPPORTEDZONE = "InvalidParameterValue.PreheatNotSupportedZone"
+//  INVALIDPARAMETERVALUE_PREHEATUNAVAILABLEZONES = "InvalidParameterValue.PreheatUnavailableZones"
 //  INVALIDPARAMETERVALUE_TAGKEYNOTFOUND = "InvalidParameterValue.TagKeyNotFound"
 //  INVALIDPARAMETERVALUE_TAGQUOTALIMITEXCEEDED = "InvalidParameterValue.TagQuotaLimitExceeded"
 //  INVALIDPARAMETERVALUE_TOOLARGE = "InvalidParameterValue.TooLarge"
+//  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  LIMITEXCEEDED_PREHEATIMAGESNAPSHOTOUTOFQUOTA = "LimitExceeded.PreheatImageSnapshotOutOfQuota"
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINUSE_DISKROLLBACKING = "ResourceInUse.DiskRollbacking"
 //  RESOURCEINSUFFICIENT_CLOUDDISKUNAVAILABLE = "ResourceInsufficient.CloudDiskUnavailable"
 //  RESOURCEUNAVAILABLE_SNAPSHOTCREATING = "ResourceUnavailable.SnapshotCreating"
 //  UNSUPPORTEDOPERATION_ENCRYPTEDIMAGESNOTSUPPORTED = "UnsupportedOperation.EncryptedImagesNotSupported"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
@@ -573,6 +659,7 @@ func NewCreateImageResponse() (response *CreateImageResponse) {
 //  UNSUPPORTEDOPERATION_INSTANCESTATESTARTING = "UnsupportedOperation.InstanceStateStarting"
 //  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPING = "UnsupportedOperation.InstanceStateStopping"
 //  UNSUPPORTEDOPERATION_INSTANCESTATETERMINATING = "UnsupportedOperation.InstanceStateTerminating"
+//  UNSUPPORTEDOPERATION_INVALIDDISKFASTROLLBACK = "UnsupportedOperation.InvalidDiskFastRollback"
 //  UNSUPPORTEDOPERATION_NOTSUPPORTINSTANCEIMAGE = "UnsupportedOperation.NotSupportInstanceImage"
 //  UNSUPPORTEDOPERATION_PREHEATIMAGE = "UnsupportedOperation.PreheatImage"
 //  UNSUPPORTEDOPERATION_SPECIALINSTANCETYPE = "UnsupportedOperation.SpecialInstanceType"
@@ -603,19 +690,24 @@ func (c *Client) CreateImage(request *CreateImageRequest) (response *CreateImage
 //  INVALIDPARAMETER_VALUETOOLARGE = "InvalidParameter.ValueTooLarge"
 //  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
 //  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
+//  INVALIDPARAMETERVALUE_INVALIDIMAGEFAMILY = "InvalidParameterValue.InvalidImageFamily"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_PREHEATNOTSUPPORTEDINSTANCETYPE = "InvalidParameterValue.PreheatNotSupportedInstanceType"
 //  INVALIDPARAMETERVALUE_PREHEATNOTSUPPORTEDZONE = "InvalidParameterValue.PreheatNotSupportedZone"
+//  INVALIDPARAMETERVALUE_PREHEATUNAVAILABLEZONES = "InvalidParameterValue.PreheatUnavailableZones"
 //  INVALIDPARAMETERVALUE_TAGKEYNOTFOUND = "InvalidParameterValue.TagKeyNotFound"
 //  INVALIDPARAMETERVALUE_TAGQUOTALIMITEXCEEDED = "InvalidParameterValue.TagQuotaLimitExceeded"
 //  INVALIDPARAMETERVALUE_TOOLARGE = "InvalidParameterValue.TooLarge"
+//  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  LIMITEXCEEDED_PREHEATIMAGESNAPSHOTOUTOFQUOTA = "LimitExceeded.PreheatImageSnapshotOutOfQuota"
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINUSE_DISKROLLBACKING = "ResourceInUse.DiskRollbacking"
 //  RESOURCEINSUFFICIENT_CLOUDDISKUNAVAILABLE = "ResourceInsufficient.CloudDiskUnavailable"
 //  RESOURCEUNAVAILABLE_SNAPSHOTCREATING = "ResourceUnavailable.SnapshotCreating"
 //  UNSUPPORTEDOPERATION_ENCRYPTEDIMAGESNOTSUPPORTED = "UnsupportedOperation.EncryptedImagesNotSupported"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
@@ -626,6 +718,7 @@ func (c *Client) CreateImage(request *CreateImageRequest) (response *CreateImage
 //  UNSUPPORTEDOPERATION_INSTANCESTATESTARTING = "UnsupportedOperation.InstanceStateStarting"
 //  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPING = "UnsupportedOperation.InstanceStateStopping"
 //  UNSUPPORTEDOPERATION_INSTANCESTATETERMINATING = "UnsupportedOperation.InstanceStateTerminating"
+//  UNSUPPORTEDOPERATION_INVALIDDISKFASTROLLBACK = "UnsupportedOperation.InvalidDiskFastRollback"
 //  UNSUPPORTEDOPERATION_NOTSUPPORTINSTANCEIMAGE = "UnsupportedOperation.NotSupportInstanceImage"
 //  UNSUPPORTEDOPERATION_PREHEATIMAGE = "UnsupportedOperation.PreheatImage"
 //  UNSUPPORTEDOPERATION_SPECIALINSTANCETYPE = "UnsupportedOperation.SpecialInstanceType"
@@ -679,6 +772,7 @@ func NewCreateKeyPairResponse() (response *CreateKeyPairResponse) {
 // * Tencent Cloud does not save users' private keys. Be sure to save it yourself.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGKEYRESERVED = "FailedOperation.TagKeyReserved"
 //  INTERNALSERVERERROR = "InternalServerError"
 //  INVALIDKEYPAIR_LIMITEXCEEDED = "InvalidKeyPair.LimitExceeded"
 //  INVALIDKEYPAIRNAME_DUPLICATE = "InvalidKeyPairName.Duplicate"
@@ -707,6 +801,7 @@ func (c *Client) CreateKeyPair(request *CreateKeyPairRequest) (response *CreateK
 // * Tencent Cloud does not save users' private keys. Be sure to save it yourself.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGKEYRESERVED = "FailedOperation.TagKeyReserved"
 //  INTERNALSERVERERROR = "InternalServerError"
 //  INVALIDKEYPAIR_LIMITEXCEEDED = "InvalidKeyPair.LimitExceeded"
 //  INVALIDKEYPAIRNAME_DUPLICATE = "InvalidKeyPairName.Duplicate"
@@ -793,6 +888,7 @@ func NewCreateLaunchTemplateVersionResponse() (response *CreateLaunchTemplateVer
 //  INVALIDPARAMETERVALUE_SUBNETNOTEXIST = "InvalidParameterValue.SubnetNotExist"
 //  INVALIDPARAMETERVALUE_THREADPERCOREVALUE = "InvalidParameterValue.ThreadPerCoreValue"
 //  INVALIDPARAMETERVALUE_VPCIDZONEIDNOTMATCH = "InvalidParameterValue.VpcIdZoneIdNotMatch"
+//  INVALIDPARAMETERVALUE_VPCNOTSUPPORTIPV6ADDRESS = "InvalidParameterValue.VpcNotSupportIpv6Address"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  INVALIDPASSWORD = "InvalidPassword"
 //  INVALIDPERIOD = "InvalidPeriod"
@@ -815,6 +911,7 @@ func NewCreateLaunchTemplateVersionResponse() (response *CreateLaunchTemplateVer
 //  RESOURCEINSUFFICIENT_DISASTERRECOVERGROUPCVMQUOTA = "ResourceInsufficient.DisasterRecoverGroupCvmQuota"
 //  RESOURCEINSUFFICIENT_SPECIFIEDINSTANCETYPE = "ResourceInsufficient.SpecifiedInstanceType"
 //  RESOURCENOTFOUND_HPCCLUSTER = "ResourceNotFound.HpcCluster"
+//  RESOURCENOTFOUND_KEYPAIRNOTFOUND = "ResourceNotFound.KeyPairNotFound"
 //  RESOURCENOTFOUND_NODEFAULTCBS = "ResourceNotFound.NoDefaultCbs"
 //  RESOURCENOTFOUND_NODEFAULTCBSWITHREASON = "ResourceNotFound.NoDefaultCbsWithReason"
 //  RESOURCEUNAVAILABLE_INSTANCETYPE = "ResourceUnavailable.InstanceType"
@@ -823,6 +920,7 @@ func NewCreateLaunchTemplateVersionResponse() (response *CreateLaunchTemplateVer
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
+//  UNSUPPORTEDOPERATION_INSTANCETYPENOTSUPPORTJUMBOFRAME = "UnsupportedOperation.InstanceTypeNotSupportJumboFrame"
 //  UNSUPPORTEDOPERATION_INVALIDDISK = "UnsupportedOperation.InvalidDisk"
 //  UNSUPPORTEDOPERATION_KEYPAIRUNSUPPORTEDWINDOWS = "UnsupportedOperation.KeyPairUnsupportedWindows"
 //  UNSUPPORTEDOPERATION_NOINSTANCETYPESUPPORTSPOT = "UnsupportedOperation.NoInstanceTypeSupportSpot"
@@ -874,6 +972,7 @@ func (c *Client) CreateLaunchTemplateVersion(request *CreateLaunchTemplateVersio
 //  INVALIDPARAMETERVALUE_SUBNETNOTEXIST = "InvalidParameterValue.SubnetNotExist"
 //  INVALIDPARAMETERVALUE_THREADPERCOREVALUE = "InvalidParameterValue.ThreadPerCoreValue"
 //  INVALIDPARAMETERVALUE_VPCIDZONEIDNOTMATCH = "InvalidParameterValue.VpcIdZoneIdNotMatch"
+//  INVALIDPARAMETERVALUE_VPCNOTSUPPORTIPV6ADDRESS = "InvalidParameterValue.VpcNotSupportIpv6Address"
 //  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  INVALIDPASSWORD = "InvalidPassword"
 //  INVALIDPERIOD = "InvalidPeriod"
@@ -896,6 +995,7 @@ func (c *Client) CreateLaunchTemplateVersion(request *CreateLaunchTemplateVersio
 //  RESOURCEINSUFFICIENT_DISASTERRECOVERGROUPCVMQUOTA = "ResourceInsufficient.DisasterRecoverGroupCvmQuota"
 //  RESOURCEINSUFFICIENT_SPECIFIEDINSTANCETYPE = "ResourceInsufficient.SpecifiedInstanceType"
 //  RESOURCENOTFOUND_HPCCLUSTER = "ResourceNotFound.HpcCluster"
+//  RESOURCENOTFOUND_KEYPAIRNOTFOUND = "ResourceNotFound.KeyPairNotFound"
 //  RESOURCENOTFOUND_NODEFAULTCBS = "ResourceNotFound.NoDefaultCbs"
 //  RESOURCENOTFOUND_NODEFAULTCBSWITHREASON = "ResourceNotFound.NoDefaultCbsWithReason"
 //  RESOURCEUNAVAILABLE_INSTANCETYPE = "ResourceUnavailable.InstanceType"
@@ -904,6 +1004,7 @@ func (c *Client) CreateLaunchTemplateVersion(request *CreateLaunchTemplateVersio
 //  UNKNOWNPARAMETER = "UnknownParameter"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
+//  UNSUPPORTEDOPERATION_INSTANCETYPENOTSUPPORTJUMBOFRAME = "UnsupportedOperation.InstanceTypeNotSupportJumboFrame"
 //  UNSUPPORTEDOPERATION_INVALIDDISK = "UnsupportedOperation.InvalidDisk"
 //  UNSUPPORTEDOPERATION_KEYPAIRUNSUPPORTEDWINDOWS = "UnsupportedOperation.KeyPairUnsupportedWindows"
 //  UNSUPPORTEDOPERATION_NOINSTANCETYPESUPPORTSPOT = "UnsupportedOperation.NoInstanceTypeSupportSpot"
@@ -1018,7 +1119,9 @@ func NewDeleteImagesResponse() (response *DeleteImagesResponse) {
 //  INVALIDIMAGEID_INCORRECTSTATE = "InvalidImageId.IncorrectState"
 //  INVALIDIMAGEID_MALFORMED = "InvalidImageId.Malformed"
 //  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
+//  INVALIDPARAMETERVALUE_INVALIDIMAGEIDISSHARED = "InvalidParameterValue.InvalidImageIdIsShared"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 func (c *Client) DeleteImages(request *DeleteImagesRequest) (response *DeleteImagesResponse, err error) {
@@ -1041,7 +1144,9 @@ func (c *Client) DeleteImages(request *DeleteImagesRequest) (response *DeleteIma
 //  INVALIDIMAGEID_INCORRECTSTATE = "InvalidImageId.IncorrectState"
 //  INVALIDIMAGEID_MALFORMED = "InvalidImageId.Malformed"
 //  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
+//  INVALIDPARAMETERVALUE_INVALIDIMAGEIDISSHARED = "InvalidParameterValue.InvalidImageIdIsShared"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 func (c *Client) DeleteImagesWithContext(ctx context.Context, request *DeleteImagesRequest) (response *DeleteImagesResponse, err error) {
@@ -1351,6 +1456,7 @@ func NewDescribeChcHostsResponse() (response *DescribeChcHostsResponse) {
 //  INVALIDPARAMETER_ATMOSTONE = "InvalidParameter.AtMostOne"
 //  INVALIDPARAMETERVALUE_CHCHOSTSNOTFOUND = "InvalidParameterValue.ChcHostsNotFound"
 //  INVALIDPARAMETERVALUE_INCORRECTFORMAT = "InvalidParameterValue.IncorrectFormat"
+//  INVALIDPARAMETERVALUE_NOTEMPTY = "InvalidParameterValue.NotEmpty"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_SUBNETIDMALFORMED = "InvalidParameterValue.SubnetIdMalformed"
 //  INVALIDPARAMETERVALUE_VPCIDMALFORMED = "InvalidParameterValue.VpcIdMalformed"
@@ -1378,6 +1484,7 @@ func (c *Client) DescribeChcHosts(request *DescribeChcHostsRequest) (response *D
 //  INVALIDPARAMETER_ATMOSTONE = "InvalidParameter.AtMostOne"
 //  INVALIDPARAMETERVALUE_CHCHOSTSNOTFOUND = "InvalidParameterValue.ChcHostsNotFound"
 //  INVALIDPARAMETERVALUE_INCORRECTFORMAT = "InvalidParameterValue.IncorrectFormat"
+//  INVALIDPARAMETERVALUE_NOTEMPTY = "InvalidParameterValue.NotEmpty"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_SUBNETIDMALFORMED = "InvalidParameterValue.SubnetIdMalformed"
 //  INVALIDPARAMETERVALUE_VPCIDMALFORMED = "InvalidParameterValue.VpcIdMalformed"
@@ -1430,6 +1537,7 @@ func NewDescribeDisasterRecoverGroupQuotaResponse() (response *DescribeDisasterR
 //  INVALIDPARAMETER_ATMOSTONE = "InvalidParameter.AtMostOne"
 //  INVALIDPARAMETERVALUE_CHCHOSTSNOTFOUND = "InvalidParameterValue.ChcHostsNotFound"
 //  INVALIDPARAMETERVALUE_INCORRECTFORMAT = "InvalidParameterValue.IncorrectFormat"
+//  INVALIDPARAMETERVALUE_NOTEMPTY = "InvalidParameterValue.NotEmpty"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_SUBNETIDMALFORMED = "InvalidParameterValue.SubnetIdMalformed"
 //  INVALIDPARAMETERVALUE_VPCIDMALFORMED = "InvalidParameterValue.VpcIdMalformed"
@@ -1451,6 +1559,7 @@ func (c *Client) DescribeDisasterRecoverGroupQuota(request *DescribeDisasterReco
 //  INVALIDPARAMETER_ATMOSTONE = "InvalidParameter.AtMostOne"
 //  INVALIDPARAMETERVALUE_CHCHOSTSNOTFOUND = "InvalidParameterValue.ChcHostsNotFound"
 //  INVALIDPARAMETERVALUE_INCORRECTFORMAT = "InvalidParameterValue.IncorrectFormat"
+//  INVALIDPARAMETERVALUE_NOTEMPTY = "InvalidParameterValue.NotEmpty"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_SUBNETIDMALFORMED = "InvalidParameterValue.SubnetIdMalformed"
 //  INVALIDPARAMETERVALUE_VPCIDMALFORMED = "InvalidParameterValue.VpcIdMalformed"
@@ -1548,6 +1657,7 @@ func NewDescribeHostsResponse() (response *DescribeHostsResponse) {
 // This API is used to query the details of CDH instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGKEYRESERVED = "FailedOperation.TagKeyReserved"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDFILTERVALUE_LIMITEXCEEDED = "InvalidFilterValue.LimitExceeded"
 //  INVALIDHOSTID_MALFORMED = "InvalidHostId.Malformed"
@@ -1563,6 +1673,7 @@ func (c *Client) DescribeHosts(request *DescribeHostsRequest) (response *Describ
 // This API is used to query the details of CDH instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGKEYRESERVED = "FailedOperation.TagKeyReserved"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDFILTERVALUE_LIMITEXCEEDED = "InvalidFilterValue.LimitExceeded"
 //  INVALIDHOSTID_MALFORMED = "InvalidHostId.Malformed"
@@ -1582,6 +1693,69 @@ func (c *Client) DescribeHostsWithContext(ctx context.Context, request *Describe
     request.SetContext(ctx)
     
     response = NewDescribeHostsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeImageFromFamilyRequest() (request *DescribeImageFromFamilyRequest) {
+    request = &DescribeImageFromFamilyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cvm", APIVersion, "DescribeImageFromFamily")
+    
+    
+    return
+}
+
+func NewDescribeImageFromFamilyResponse() (response *DescribeImageFromFamilyResponse) {
+    response = &DescribeImageFromFamilyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeImageFromFamily
+// This API is used to view information about available images within an image family.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGKEYRESERVED = "FailedOperation.TagKeyReserved"
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDFILTERVALUE_LIMITEXCEEDED = "InvalidFilterValue.LimitExceeded"
+//  INVALIDHOSTID_MALFORMED = "InvalidHostId.Malformed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeImageFromFamily(request *DescribeImageFromFamilyRequest) (response *DescribeImageFromFamilyResponse, err error) {
+    return c.DescribeImageFromFamilyWithContext(context.Background(), request)
+}
+
+// DescribeImageFromFamily
+// This API is used to view information about available images within an image family.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TAGKEYRESERVED = "FailedOperation.TagKeyReserved"
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDFILTERVALUE_LIMITEXCEEDED = "InvalidFilterValue.LimitExceeded"
+//  INVALIDHOSTID_MALFORMED = "InvalidHostId.Malformed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeImageFromFamilyWithContext(ctx context.Context, request *DescribeImageFromFamilyRequest) (response *DescribeImageFromFamilyResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageFromFamilyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageFromFamily require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImageFromFamilyResponse()
     err = c.Send(request, response)
     return
 }
@@ -1609,6 +1783,7 @@ func NewDescribeImageQuotaResponse() (response *DescribeImageQuotaResponse) {
 // This API is used to query the image quota of an user account.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGKEYRESERVED = "FailedOperation.TagKeyReserved"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDFILTERVALUE_LIMITEXCEEDED = "InvalidFilterValue.LimitExceeded"
 //  INVALIDHOSTID_MALFORMED = "InvalidHostId.Malformed"
@@ -1624,6 +1799,7 @@ func (c *Client) DescribeImageQuota(request *DescribeImageQuotaRequest) (respons
 // This API is used to query the image quota of an user account.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_TAGKEYRESERVED = "FailedOperation.TagKeyReserved"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDFILTERVALUE_LIMITEXCEEDED = "InvalidFilterValue.LimitExceeded"
 //  INVALIDHOSTID_MALFORMED = "InvalidHostId.Malformed"
@@ -1674,6 +1850,7 @@ func NewDescribeImageSharePermissionResponse() (response *DescribeImageSharePerm
 //  INVALIDACCOUNTIS_YOURSELF = "InvalidAccountIs.YourSelf"
 //  INVALIDIMAGEID_MALFORMED = "InvalidImageId.Malformed"
 //  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  OVERQUOTA = "OverQuota"
 //  UNAUTHORIZEDOPERATION_IMAGENOTBELONGTOACCOUNT = "UnauthorizedOperation.ImageNotBelongToAccount"
 func (c *Client) DescribeImageSharePermission(request *DescribeImageSharePermissionRequest) (response *DescribeImageSharePermissionResponse, err error) {
@@ -1688,6 +1865,7 @@ func (c *Client) DescribeImageSharePermission(request *DescribeImageSharePermiss
 //  INVALIDACCOUNTIS_YOURSELF = "InvalidAccountIs.YourSelf"
 //  INVALIDIMAGEID_MALFORMED = "InvalidImageId.Malformed"
 //  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  OVERQUOTA = "OverQuota"
 //  UNAUTHORIZEDOPERATION_IMAGENOTBELONGTOACCOUNT = "UnauthorizedOperation.ImageNotBelongToAccount"
 func (c *Client) DescribeImageSharePermissionWithContext(ctx context.Context, request *DescribeImageSharePermissionRequest) (response *DescribeImageSharePermissionResponse, err error) {
@@ -1735,6 +1913,7 @@ func NewDescribeImagesResponse() (response *DescribeImagesResponse) {
 // * You can specify `Offset` and `Limit` to select a certain part of the results. By default, the information on the first 20 matching results is returned.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ILLEGALTAGKEY = "FailedOperation.IllegalTagKey"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDFILTERVALUE_LIMITEXCEEDED = "InvalidFilterValue.LimitExceeded"
 //  INVALIDIMAGEID_MALFORMED = "InvalidImageId.Malformed"
@@ -1745,6 +1924,7 @@ func NewDescribeImagesResponse() (response *DescribeImagesResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_TAGKEYNOTFOUND = "InvalidParameterValue.TagKeyNotFound"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  INVALIDREGION_NOTFOUND = "InvalidRegion.NotFound"
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  RESOURCESSOLDOUT_SPECIFIEDINSTANCETYPE = "ResourcesSoldOut.SpecifiedInstanceType"
@@ -1765,6 +1945,7 @@ func (c *Client) DescribeImages(request *DescribeImagesRequest) (response *Descr
 // * You can specify `Offset` and `Limit` to select a certain part of the results. By default, the information on the first 20 matching results is returned.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ILLEGALTAGKEY = "FailedOperation.IllegalTagKey"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDFILTERVALUE_LIMITEXCEEDED = "InvalidFilterValue.LimitExceeded"
 //  INVALIDIMAGEID_MALFORMED = "InvalidImageId.Malformed"
@@ -1775,6 +1956,7 @@ func (c *Client) DescribeImages(request *DescribeImagesRequest) (response *Descr
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_TAGKEYNOTFOUND = "InvalidParameterValue.TagKeyNotFound"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  INVALIDREGION_NOTFOUND = "InvalidRegion.NotFound"
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  RESOURCESSOLDOUT_SPECIFIEDINSTANCETYPE = "ResourcesSoldOut.SpecifiedInstanceType"
@@ -1820,6 +2002,7 @@ func NewDescribeImportImageOsResponse() (response *DescribeImportImageOsResponse
 // This API is used to query the list of supported operating systems of imported images.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ILLEGALTAGKEY = "FailedOperation.IllegalTagKey"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDFILTERVALUE_LIMITEXCEEDED = "InvalidFilterValue.LimitExceeded"
 //  INVALIDIMAGEID_MALFORMED = "InvalidImageId.Malformed"
@@ -1830,6 +2013,7 @@ func NewDescribeImportImageOsResponse() (response *DescribeImportImageOsResponse
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_TAGKEYNOTFOUND = "InvalidParameterValue.TagKeyNotFound"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  INVALIDREGION_NOTFOUND = "InvalidRegion.NotFound"
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  RESOURCESSOLDOUT_SPECIFIEDINSTANCETYPE = "ResourcesSoldOut.SpecifiedInstanceType"
@@ -1844,6 +2028,7 @@ func (c *Client) DescribeImportImageOs(request *DescribeImportImageOsRequest) (r
 // This API is used to query the list of supported operating systems of imported images.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ILLEGALTAGKEY = "FailedOperation.IllegalTagKey"
 //  INVALIDFILTER = "InvalidFilter"
 //  INVALIDFILTERVALUE_LIMITEXCEEDED = "InvalidFilterValue.LimitExceeded"
 //  INVALIDIMAGEID_MALFORMED = "InvalidImageId.Malformed"
@@ -1854,6 +2039,7 @@ func (c *Client) DescribeImportImageOs(request *DescribeImportImageOsRequest) (r
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_TAGKEYNOTFOUND = "InvalidParameterValue.TagKeyNotFound"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  INVALIDREGION_NOTFOUND = "InvalidRegion.NotFound"
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  RESOURCESSOLDOUT_SPECIFIEDINSTANCETYPE = "ResourcesSoldOut.SpecifiedInstanceType"
@@ -2137,6 +2323,7 @@ func NewDescribeInstancesStatusResponse() (response *DescribeInstancesStatusResp
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDFILTER = "InvalidFilter"
 //  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
@@ -2158,6 +2345,7 @@ func (c *Client) DescribeInstancesStatus(request *DescribeInstancesStatusRequest
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDFILTER = "InvalidFilter"
 //  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
@@ -2204,6 +2392,7 @@ func NewDescribeInternetChargeTypeConfigsResponse() (response *DescribeInternetC
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDFILTER = "InvalidFilter"
 //  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
@@ -2219,6 +2408,7 @@ func (c *Client) DescribeInternetChargeTypeConfigs(request *DescribeInternetChar
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDFILTER = "InvalidFilter"
 //  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
@@ -2677,6 +2867,7 @@ func NewDescribeZoneInstanceConfigInfosResponse() (response *DescribeZoneInstanc
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  RESOURCEINSUFFICIENT_AVAILABILITYZONESOLDOUT = "ResourceInsufficient.AvailabilityZoneSoldOut"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDPOOL = "UnsupportedOperation.UnsupportedPool"
 func (c *Client) DescribeZoneInstanceConfigInfos(request *DescribeZoneInstanceConfigInfosRequest) (response *DescribeZoneInstanceConfigInfosResponse, err error) {
     return c.DescribeZoneInstanceConfigInfosWithContext(context.Background(), request)
 }
@@ -2698,6 +2889,7 @@ func (c *Client) DescribeZoneInstanceConfigInfos(request *DescribeZoneInstanceCo
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  RESOURCEINSUFFICIENT_AVAILABILITYZONESOLDOUT = "ResourceInsufficient.AvailabilityZoneSoldOut"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDPOOL = "UnsupportedOperation.UnsupportedPool"
 func (c *Client) DescribeZoneInstanceConfigInfosWithContext(ctx context.Context, request *DescribeZoneInstanceConfigInfosRequest) (response *DescribeZoneInstanceConfigInfosResponse, err error) {
     if request == nil {
         request = NewDescribeZoneInstanceConfigInfosRequest()
@@ -2738,6 +2930,8 @@ func NewDescribeZonesResponse() (response *DescribeZonesResponse) {
 //
 // error code that may be returned:
 //  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeZones(request *DescribeZonesRequest) (response *DescribeZonesResponse, err error) {
     return c.DescribeZonesWithContext(context.Background(), request)
@@ -2748,6 +2942,8 @@ func (c *Client) DescribeZones(request *DescribeZonesRequest) (response *Describ
 //
 // error code that may be returned:
 //  INVALIDFILTER = "InvalidFilter"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeZonesWithContext(ctx context.Context, request *DescribeZonesRequest) (response *DescribeZonesResponse, err error) {
     if request == nil {
@@ -2813,6 +3009,7 @@ func NewDisassociateInstancesKeyPairsResponse() (response *DisassociateInstances
 //  UNSUPPORTEDOPERATION_INSTANCEOSWINDOWS = "UnsupportedOperation.InstanceOsWindows"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEPENDING = "UnsupportedOperation.InstanceStatePending"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEREBOOTING = "UnsupportedOperation.InstanceStateRebooting"
 //  UNSUPPORTEDOPERATION_INSTANCESTATERESCUEMODE = "UnsupportedOperation.InstanceStateRescueMode"
@@ -2855,6 +3052,7 @@ func (c *Client) DisassociateInstancesKeyPairs(request *DisassociateInstancesKey
 //  UNSUPPORTEDOPERATION_INSTANCEOSWINDOWS = "UnsupportedOperation.InstanceOsWindows"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEPENDING = "UnsupportedOperation.InstanceStatePending"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEREBOOTING = "UnsupportedOperation.InstanceStateRebooting"
 //  UNSUPPORTEDOPERATION_INSTANCESTATERESCUEMODE = "UnsupportedOperation.InstanceStateRescueMode"
@@ -2949,6 +3147,178 @@ func (c *Client) DisassociateSecurityGroupsWithContext(ctx context.Context, requ
     return
 }
 
+func NewEnterRescueModeRequest() (request *EnterRescueModeRequest) {
+    request = &EnterRescueModeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cvm", APIVersion, "EnterRescueMode")
+    
+    
+    return
+}
+
+func NewEnterRescueModeResponse() (response *EnterRescueModeResponse) {
+    response = &EnterRescueModeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EnterRescueMode
+// This API is used to enter the rescue mode.
+//
+// error code that may be returned:
+//  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
+//  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDPASSWORD = "InvalidParameterValue.InvalidPassword"
+//  INVALIDPASSWORD = "InvalidPassword"
+//  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  UNSUPPORTEDOPERATION_ARMARCHITECTURE = "UnsupportedOperation.ArmArchitecture"
+//  UNSUPPORTEDOPERATION_EDGEZONENOTSUPPORTCLOUDDISK = "UnsupportedOperation.EdgeZoneNotSupportCloudDisk"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEREBOOTING = "UnsupportedOperation.InstanceStateRebooting"
+//  UNSUPPORTEDOPERATION_INSTANCESTATERESCUEMODE = "UnsupportedOperation.InstanceStateRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateServiceLiveMigrate"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESHUTDOWN = "UnsupportedOperation.InstanceStateShutdown"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPING = "UnsupportedOperation.InstanceStateStopping"
+//  UNSUPPORTEDOPERATION_INSTANCESTATETERMINATING = "UnsupportedOperation.InstanceStateTerminating"
+//  UNSUPPORTEDOPERATION_SPECIALINSTANCETYPE = "UnsupportedOperation.SpecialInstanceType"
+//  UNSUPPORTEDOPERATION_STOPPEDMODESTOPCHARGING = "UnsupportedOperation.StoppedModeStopCharging"
+func (c *Client) EnterRescueMode(request *EnterRescueModeRequest) (response *EnterRescueModeResponse, err error) {
+    return c.EnterRescueModeWithContext(context.Background(), request)
+}
+
+// EnterRescueMode
+// This API is used to enter the rescue mode.
+//
+// error code that may be returned:
+//  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
+//  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDPASSWORD = "InvalidParameterValue.InvalidPassword"
+//  INVALIDPASSWORD = "InvalidPassword"
+//  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  UNSUPPORTEDOPERATION_ARMARCHITECTURE = "UnsupportedOperation.ArmArchitecture"
+//  UNSUPPORTEDOPERATION_EDGEZONENOTSUPPORTCLOUDDISK = "UnsupportedOperation.EdgeZoneNotSupportCloudDisk"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEREBOOTING = "UnsupportedOperation.InstanceStateRebooting"
+//  UNSUPPORTEDOPERATION_INSTANCESTATERESCUEMODE = "UnsupportedOperation.InstanceStateRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateServiceLiveMigrate"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESHUTDOWN = "UnsupportedOperation.InstanceStateShutdown"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPING = "UnsupportedOperation.InstanceStateStopping"
+//  UNSUPPORTEDOPERATION_INSTANCESTATETERMINATING = "UnsupportedOperation.InstanceStateTerminating"
+//  UNSUPPORTEDOPERATION_SPECIALINSTANCETYPE = "UnsupportedOperation.SpecialInstanceType"
+//  UNSUPPORTEDOPERATION_STOPPEDMODESTOPCHARGING = "UnsupportedOperation.StoppedModeStopCharging"
+func (c *Client) EnterRescueModeWithContext(ctx context.Context, request *EnterRescueModeRequest) (response *EnterRescueModeResponse, err error) {
+    if request == nil {
+        request = NewEnterRescueModeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnterRescueMode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEnterRescueModeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewExitRescueModeRequest() (request *ExitRescueModeRequest) {
+    request = &ExitRescueModeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cvm", APIVersion, "ExitRescueMode")
+    
+    
+    return
+}
+
+func NewExitRescueModeResponse() (response *ExitRescueModeResponse) {
+    response = &ExitRescueModeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExitRescueMode
+// This API is used to exit the rescue mode.
+//
+// error code that may be returned:
+//  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
+//  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEREBOOTING = "UnsupportedOperation.InstanceStateRebooting"
+//  UNSUPPORTEDOPERATION_INSTANCESTATERUNNING = "UnsupportedOperation.InstanceStateRunning"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateServiceLiveMigrate"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESHUTDOWN = "UnsupportedOperation.InstanceStateShutdown"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPED = "UnsupportedOperation.InstanceStateStopped"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPING = "UnsupportedOperation.InstanceStateStopping"
+func (c *Client) ExitRescueMode(request *ExitRescueModeRequest) (response *ExitRescueModeResponse, err error) {
+    return c.ExitRescueModeWithContext(context.Background(), request)
+}
+
+// ExitRescueMode
+// This API is used to exit the rescue mode.
+//
+// error code that may be returned:
+//  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
+//  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
+//  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEREBOOTING = "UnsupportedOperation.InstanceStateRebooting"
+//  UNSUPPORTEDOPERATION_INSTANCESTATERUNNING = "UnsupportedOperation.InstanceStateRunning"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateServiceLiveMigrate"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESHUTDOWN = "UnsupportedOperation.InstanceStateShutdown"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPED = "UnsupportedOperation.InstanceStateStopped"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPING = "UnsupportedOperation.InstanceStateStopping"
+func (c *Client) ExitRescueModeWithContext(ctx context.Context, request *ExitRescueModeRequest) (response *ExitRescueModeResponse, err error) {
+    if request == nil {
+        request = NewExitRescueModeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExitRescueMode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExitRescueModeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewExportImagesRequest() (request *ExportImagesRequest) {
     request = &ExportImagesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2978,12 +3348,14 @@ func NewExportImagesResponse() (response *ExportImagesResponse) {
 //  INVALIDPARAMETER_IMAGEIDSSNAPSHOTIDSMUSTONE = "InvalidParameter.ImageIdsSnapshotIdsMustOne"
 //  INVALIDPARAMETER_SNAPSHOTNOTFOUND = "InvalidParameter.SnapshotNotFound"
 //  INVALIDPARAMETERVALUE_BUCKETNOTFOUND = "InvalidParameterValue.BucketNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_INVALIDBUCKETPERMISSIONFOREXPORT = "InvalidParameterValue.InvalidBucketPermissionForExport"
 //  INVALIDPARAMETERVALUE_INVALIDFILENAMEPREFIXLIST = "InvalidParameterValue.InvalidFileNamePrefixList"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEOSNAME = "InvalidParameterValue.InvalidImageOsName"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGESTATE = "InvalidParameterValue.InvalidImageState"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_TOOLARGE = "InvalidParameterValue.TooLarge"
 //  LIMITEXCEEDED_EXPORTIMAGETASKLIMITEXCEEDED = "LimitExceeded.ExportImageTaskLimitExceeded"
 //  UNSUPPORTEDOPERATION_ENCRYPTEDIMAGESNOTSUPPORTED = "UnsupportedOperation.EncryptedImagesNotSupported"
 //  UNSUPPORTEDOPERATION_IMAGETOOLARGEEXPORTUNSUPPORTED = "UnsupportedOperation.ImageTooLargeExportUnsupported"
@@ -3006,12 +3378,14 @@ func (c *Client) ExportImages(request *ExportImagesRequest) (response *ExportIma
 //  INVALIDPARAMETER_IMAGEIDSSNAPSHOTIDSMUSTONE = "InvalidParameter.ImageIdsSnapshotIdsMustOne"
 //  INVALIDPARAMETER_SNAPSHOTNOTFOUND = "InvalidParameter.SnapshotNotFound"
 //  INVALIDPARAMETERVALUE_BUCKETNOTFOUND = "InvalidParameterValue.BucketNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_INVALIDBUCKETPERMISSIONFOREXPORT = "InvalidParameterValue.InvalidBucketPermissionForExport"
 //  INVALIDPARAMETERVALUE_INVALIDFILENAMEPREFIXLIST = "InvalidParameterValue.InvalidFileNamePrefixList"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEOSNAME = "InvalidParameterValue.InvalidImageOsName"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGESTATE = "InvalidParameterValue.InvalidImageState"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_TOOLARGE = "InvalidParameterValue.TooLarge"
 //  LIMITEXCEEDED_EXPORTIMAGETASKLIMITEXCEEDED = "LimitExceeded.ExportImageTaskLimitExceeded"
 //  UNSUPPORTEDOPERATION_ENCRYPTEDIMAGESNOTSUPPORTED = "UnsupportedOperation.EncryptedImagesNotSupported"
 //  UNSUPPORTEDOPERATION_IMAGETOOLARGEEXPORTUNSUPPORTED = "UnsupportedOperation.ImageTooLargeExportUnsupported"
@@ -3056,7 +3430,7 @@ func NewImportImageResponse() (response *ImportImageResponse) {
 }
 
 // ImportImage
-// The API is used to import an image. The image imported can be used to create instances. Currently, this API can import images in formats like RAW, VHD, QCOW2, and VMDK.
+// This API is used to import an image. The image imported can be used to create instances. Currently, this API supports RAW, VHD, QCOW2, and VMDK image formats.
 //
 // error code that may be returned:
 //  IMAGEQUOTALIMITEXCEEDED = "ImageQuotaLimitExceeded"
@@ -3064,8 +3438,10 @@ func NewImportImageResponse() (response *ImportImageResponse) {
 //  INVALIDIMAGEOSTYPE_UNSUPPORTED = "InvalidImageOsType.Unsupported"
 //  INVALIDIMAGEOSVERSION_UNSUPPORTED = "InvalidImageOsVersion.Unsupported"
 //  INVALIDPARAMETER_INVALIDPARAMETERURLERROR = "InvalidParameter.InvalidParameterUrlError"
+//  INVALIDPARAMETERVALUE_ISOMUSTIMPORTBYFORCE = "InvalidParameterValue.ISOMustImportByForce"
 //  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_INVALIDBOOTMODE = "InvalidParameterValue.InvalidBootMode"
+//  INVALIDPARAMETERVALUE_INVALIDIMAGEFAMILY = "InvalidParameterValue.InvalidImageFamily"
 //  INVALIDPARAMETERVALUE_INVALIDLICENSETYPE = "InvalidParameterValue.InvalidLicenseType"
 //  INVALIDPARAMETERVALUE_TAGKEYNOTFOUND = "InvalidParameterValue.TagKeyNotFound"
 //  INVALIDPARAMETERVALUE_TOOLARGE = "InvalidParameterValue.TooLarge"
@@ -3076,7 +3452,7 @@ func (c *Client) ImportImage(request *ImportImageRequest) (response *ImportImage
 }
 
 // ImportImage
-// The API is used to import an image. The image imported can be used to create instances. Currently, this API can import images in formats like RAW, VHD, QCOW2, and VMDK.
+// This API is used to import an image. The image imported can be used to create instances. Currently, this API supports RAW, VHD, QCOW2, and VMDK image formats.
 //
 // error code that may be returned:
 //  IMAGEQUOTALIMITEXCEEDED = "ImageQuotaLimitExceeded"
@@ -3084,8 +3460,10 @@ func (c *Client) ImportImage(request *ImportImageRequest) (response *ImportImage
 //  INVALIDIMAGEOSTYPE_UNSUPPORTED = "InvalidImageOsType.Unsupported"
 //  INVALIDIMAGEOSVERSION_UNSUPPORTED = "InvalidImageOsVersion.Unsupported"
 //  INVALIDPARAMETER_INVALIDPARAMETERURLERROR = "InvalidParameter.InvalidParameterUrlError"
+//  INVALIDPARAMETERVALUE_ISOMUSTIMPORTBYFORCE = "InvalidParameterValue.ISOMustImportByForce"
 //  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_INVALIDBOOTMODE = "InvalidParameterValue.InvalidBootMode"
+//  INVALIDPARAMETERVALUE_INVALIDIMAGEFAMILY = "InvalidParameterValue.InvalidImageFamily"
 //  INVALIDPARAMETERVALUE_INVALIDLICENSETYPE = "InvalidParameterValue.InvalidLicenseType"
 //  INVALIDPARAMETERVALUE_TAGKEYNOTFOUND = "InvalidParameterValue.TagKeyNotFound"
 //  INVALIDPARAMETERVALUE_TOOLARGE = "InvalidParameterValue.TooLarge"
@@ -3267,15 +3645,15 @@ func NewInquiryPriceResetInstanceResponse() (response *InquiryPriceResetInstance
 }
 
 // InquiryPriceResetInstance
-// This API is used to query the price for reinstalling an instance.
+// This API is used to inquire about the price for reinstalling an instance.
 //
 // 
 //
-// * If you have specified the `ImageId` parameter, the price query is performed with the specified image. Otherwise, the image used by the current instance is used.
+// * If you have specified the parameter `ImageId`, inquire about the price for reinstallation by using the specified image. Otherwise, inquire about the price for reinstallation based on the image currently used by the instance.
 //
-// * You can only query the price for reinstallation caused by switching between Linux and Windows OS. And the [system disk type](https://intl.cloud.tencent.com/document/api/213/15753?from_cn_redirect=1#SystemDisk) of the instance must be `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`.
+// * Currently, only instances with a [system disk type](https://intl.cloud.tencent.com/document/api/213/15753?from_cn_redirect=1#SystemDisk) of `CLOUD_BSSD`, `CLOUD_PREMIUM`, or `CLOUD_SSD` are supported for inquiring about the price for reinstallation caused by switching between `Linux` and `Windows` operating systems through this API.
 //
-// * Currently, this API only supports instances in Mainland China regions.
+// * Currently, instances in regions outside the Chinese mainland are not supported for inquiring about the price for reinstallation caused by switching between `Linux` and `Windows` operating systems through this API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INQUIRYPRICEFAILED = "FailedOperation.InquiryPriceFailed"
@@ -3292,26 +3670,28 @@ func NewInquiryPriceResetInstanceResponse() (response *InquiryPriceResetInstance
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEIDFORRETSETINSTANCE = "InvalidParameterValue.InvalidImageIdForRetsetInstance"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEOSNAME = "InvalidParameterValue.InvalidImageOsName"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_MONITORSERVICE = "MissingParameter.MonitorService"
 //  RESOURCEINSUFFICIENT_CLOUDDISKUNAVAILABLE = "ResourceInsufficient.CloudDiskUnavailable"
 //  RESOURCESSOLDOUT_SPECIFIEDINSTANCETYPE = "ResourcesSoldOut.SpecifiedInstanceType"
 //  UNSUPPORTEDOPERATION_INVALIDIMAGELICENSETYPEFORRESET = "UnsupportedOperation.InvalidImageLicenseTypeForReset"
+//  UNSUPPORTEDOPERATION_MODIFYENCRYPTIONNOTSUPPORTED = "UnsupportedOperation.ModifyEncryptionNotSupported"
 //  UNSUPPORTEDOPERATION_RAWLOCALDISKINSREINSTALLTOQCOW2 = "UnsupportedOperation.RawLocalDiskInsReinstalltoQcow2"
 func (c *Client) InquiryPriceResetInstance(request *InquiryPriceResetInstanceRequest) (response *InquiryPriceResetInstanceResponse, err error) {
     return c.InquiryPriceResetInstanceWithContext(context.Background(), request)
 }
 
 // InquiryPriceResetInstance
-// This API is used to query the price for reinstalling an instance.
+// This API is used to inquire about the price for reinstalling an instance.
 //
 // 
 //
-// * If you have specified the `ImageId` parameter, the price query is performed with the specified image. Otherwise, the image used by the current instance is used.
+// * If you have specified the parameter `ImageId`, inquire about the price for reinstallation by using the specified image. Otherwise, inquire about the price for reinstallation based on the image currently used by the instance.
 //
-// * You can only query the price for reinstallation caused by switching between Linux and Windows OS. And the [system disk type](https://intl.cloud.tencent.com/document/api/213/15753?from_cn_redirect=1#SystemDisk) of the instance must be `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`.
+// * Currently, only instances with a [system disk type](https://intl.cloud.tencent.com/document/api/213/15753?from_cn_redirect=1#SystemDisk) of `CLOUD_BSSD`, `CLOUD_PREMIUM`, or `CLOUD_SSD` are supported for inquiring about the price for reinstallation caused by switching between `Linux` and `Windows` operating systems through this API.
 //
-// * Currently, this API only supports instances in Mainland China regions.
+// * Currently, instances in regions outside the Chinese mainland are not supported for inquiring about the price for reinstallation caused by switching between `Linux` and `Windows` operating systems through this API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INQUIRYPRICEFAILED = "FailedOperation.InquiryPriceFailed"
@@ -3328,11 +3708,13 @@ func (c *Client) InquiryPriceResetInstance(request *InquiryPriceResetInstanceReq
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEIDFORRETSETINSTANCE = "InvalidParameterValue.InvalidImageIdForRetsetInstance"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEOSNAME = "InvalidParameterValue.InvalidImageOsName"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_MONITORSERVICE = "MissingParameter.MonitorService"
 //  RESOURCEINSUFFICIENT_CLOUDDISKUNAVAILABLE = "ResourceInsufficient.CloudDiskUnavailable"
 //  RESOURCESSOLDOUT_SPECIFIEDINSTANCETYPE = "ResourcesSoldOut.SpecifiedInstanceType"
 //  UNSUPPORTEDOPERATION_INVALIDIMAGELICENSETYPEFORRESET = "UnsupportedOperation.InvalidImageLicenseTypeForReset"
+//  UNSUPPORTEDOPERATION_MODIFYENCRYPTIONNOTSUPPORTED = "UnsupportedOperation.ModifyEncryptionNotSupported"
 //  UNSUPPORTEDOPERATION_RAWLOCALDISKINSREINSTALLTOQCOW2 = "UnsupportedOperation.RawLocalDiskInsReinstalltoQcow2"
 func (c *Client) InquiryPriceResetInstanceWithContext(ctx context.Context, request *InquiryPriceResetInstanceRequest) (response *InquiryPriceResetInstanceResponse, err error) {
     if request == nil {
@@ -3487,6 +3869,10 @@ func NewInquiryPriceResetInstancesTypeResponse() (response *InquiryPriceResetIns
 //  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDINSTANCETYPE_MALFORMED = "InvalidInstanceType.Malformed"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_HOSTIDCUSTOMIZEDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdCustomizedInstanceTypeNotSupport"
+//  INVALIDPARAMETER_HOSTIDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdInstanceTypeNotSupport"
+//  INVALIDPARAMETER_HOSTIDSTANDARDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdStandardInstanceTypeNotSupport"
+//  INVALIDPARAMETER_INSTANCETYPESUPPORTEDHOSTNOTFOUND = "InvalidParameter.InstanceTypeSupportedHostNotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_BASICNETWORKINSTANCEFAMILY = "InvalidParameterValue.BasicNetworkInstanceFamily"
 //  INVALIDPARAMETERVALUE_GPUINSTANCEFAMILY = "InvalidParameterValue.GPUInstanceFamily"
@@ -3496,6 +3882,7 @@ func NewInquiryPriceResetInstancesTypeResponse() (response *InquiryPriceResetIns
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPERIOD = "InvalidPeriod"
 //  INVALIDPERMISSION = "InvalidPermission"
+//  INVALIDPROJECTID_NOTFOUND = "InvalidProjectId.NotFound"
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  LIMITEXCEEDED_EIPNUMLIMIT = "LimitExceeded.EipNumLimit"
 //  LIMITEXCEEDED_ENINUMLIMIT = "LimitExceeded.EniNumLimit"
@@ -3510,6 +3897,7 @@ func NewInquiryPriceResetInstancesTypeResponse() (response *InquiryPriceResetIns
 //  UNSUPPORTEDOPERATION_ORIGINALINSTANCETYPEINVALID = "UnsupportedOperation.OriginalInstanceTypeInvalid"
 //  UNSUPPORTEDOPERATION_STOPPEDMODESTOPCHARGING = "UnsupportedOperation.StoppedModeStopCharging"
 //  UNSUPPORTEDOPERATION_STOPPEDMODESTOPCHARGINGSAMEFAMILY = "UnsupportedOperation.StoppedModeStopChargingSameFamily"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDARMCHANGEINSTANCEFAMILY = "UnsupportedOperation.UnsupportedARMChangeInstanceFamily"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCEFAMILY = "UnsupportedOperation.UnsupportedChangeInstanceFamily"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCEFAMILYTOARM = "UnsupportedOperation.UnsupportedChangeInstanceFamilyToARM"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCETOTHISINSTANCEFAMILY = "UnsupportedOperation.UnsupportedChangeInstanceToThisInstanceFamily"
@@ -3538,6 +3926,10 @@ func (c *Client) InquiryPriceResetInstancesType(request *InquiryPriceResetInstan
 //  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDINSTANCETYPE_MALFORMED = "InvalidInstanceType.Malformed"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_HOSTIDCUSTOMIZEDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdCustomizedInstanceTypeNotSupport"
+//  INVALIDPARAMETER_HOSTIDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdInstanceTypeNotSupport"
+//  INVALIDPARAMETER_HOSTIDSTANDARDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdStandardInstanceTypeNotSupport"
+//  INVALIDPARAMETER_INSTANCETYPESUPPORTEDHOSTNOTFOUND = "InvalidParameter.InstanceTypeSupportedHostNotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_BASICNETWORKINSTANCEFAMILY = "InvalidParameterValue.BasicNetworkInstanceFamily"
 //  INVALIDPARAMETERVALUE_GPUINSTANCEFAMILY = "InvalidParameterValue.GPUInstanceFamily"
@@ -3547,6 +3939,7 @@ func (c *Client) InquiryPriceResetInstancesType(request *InquiryPriceResetInstan
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPERIOD = "InvalidPeriod"
 //  INVALIDPERMISSION = "InvalidPermission"
+//  INVALIDPROJECTID_NOTFOUND = "InvalidProjectId.NotFound"
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  LIMITEXCEEDED_EIPNUMLIMIT = "LimitExceeded.EipNumLimit"
 //  LIMITEXCEEDED_ENINUMLIMIT = "LimitExceeded.EniNumLimit"
@@ -3561,6 +3954,7 @@ func (c *Client) InquiryPriceResetInstancesType(request *InquiryPriceResetInstan
 //  UNSUPPORTEDOPERATION_ORIGINALINSTANCETYPEINVALID = "UnsupportedOperation.OriginalInstanceTypeInvalid"
 //  UNSUPPORTEDOPERATION_STOPPEDMODESTOPCHARGING = "UnsupportedOperation.StoppedModeStopCharging"
 //  UNSUPPORTEDOPERATION_STOPPEDMODESTOPCHARGINGSAMEFAMILY = "UnsupportedOperation.StoppedModeStopChargingSameFamily"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDARMCHANGEINSTANCEFAMILY = "UnsupportedOperation.UnsupportedARMChangeInstanceFamily"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCEFAMILY = "UnsupportedOperation.UnsupportedChangeInstanceFamily"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCEFAMILYTOARM = "UnsupportedOperation.UnsupportedChangeInstanceFamilyToARM"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCETOTHISINSTANCEFAMILY = "UnsupportedOperation.UnsupportedChangeInstanceToThisInstanceFamily"
@@ -3618,10 +4012,13 @@ func NewInquiryPriceResizeInstanceDisksResponse() (response *InquiryPriceResizeI
 //  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_SNAPSHOTIDMALFORMED = "InvalidParameterValue.SnapshotIdMalformed"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_ATLEASTONE = "MissingParameter.AtLeastOne"
 //  RESOURCEINSUFFICIENT_CLOUDDISKUNAVAILABLE = "ResourceInsufficient.CloudDiskUnavailable"
 //  UNSUPPORTEDOPERATION_INSTANCESTATECORRUPTED = "UnsupportedOperation.InstanceStateCorrupted"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPED = "UnsupportedOperation.InstanceStateStopped"
 //  UNSUPPORTEDOPERATION_INVALIDDISK = "UnsupportedOperation.InvalidDisk"
 //  UNSUPPORTEDOPERATION_LOCALDISKMIGRATINGTOCLOUDDISK = "UnsupportedOperation.LocalDiskMigratingToCloudDisk"
 func (c *Client) InquiryPriceResizeInstanceDisks(request *InquiryPriceResizeInstanceDisksRequest) (response *InquiryPriceResizeInstanceDisksResponse, err error) {
@@ -3647,10 +4044,13 @@ func (c *Client) InquiryPriceResizeInstanceDisks(request *InquiryPriceResizeInst
 //  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_SNAPSHOTIDMALFORMED = "InvalidParameterValue.SnapshotIdMalformed"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_ATLEASTONE = "MissingParameter.AtLeastOne"
 //  RESOURCEINSUFFICIENT_CLOUDDISKUNAVAILABLE = "ResourceInsufficient.CloudDiskUnavailable"
 //  UNSUPPORTEDOPERATION_INSTANCESTATECORRUPTED = "UnsupportedOperation.InstanceStateCorrupted"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPED = "UnsupportedOperation.InstanceStateStopped"
 //  UNSUPPORTEDOPERATION_INVALIDDISK = "UnsupportedOperation.InvalidDisk"
 //  UNSUPPORTEDOPERATION_LOCALDISKMIGRATINGTOCLOUDDISK = "UnsupportedOperation.LocalDiskMigratingToCloudDisk"
 func (c *Client) InquiryPriceResizeInstanceDisksWithContext(ctx context.Context, request *InquiryPriceResizeInstanceDisksRequest) (response *InquiryPriceResizeInstanceDisksResponse, err error) {
@@ -3710,30 +4110,44 @@ func NewInquiryPriceRunInstancesResponse() (response *InquiryPriceRunInstancesRe
 //  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
 //  INVALIDINSTANCENAME_TOOLONG = "InvalidInstanceName.TooLong"
 //  INVALIDINSTANCETYPE_MALFORMED = "InvalidInstanceType.Malformed"
+//  INVALIDPARAMETER_EDGEZONEMISSINTERNETACCESSIBLE = "InvalidParameter.EdgeZoneMissInternetAccessible"
+//  INVALIDPARAMETER_HOSTIDCUSTOMIZEDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdCustomizedInstanceTypeNotSupport"
+//  INVALIDPARAMETER_HOSTIDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdInstanceTypeNotSupport"
+//  INVALIDPARAMETER_HOSTIDSTANDARDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdStandardInstanceTypeNotSupport"
 //  INVALIDPARAMETER_INSTANCEIMAGENOTSUPPORT = "InvalidParameter.InstanceImageNotSupport"
+//  INVALIDPARAMETER_INSTANCETYPESUPPORTEDHOSTNOTFOUND = "InvalidParameter.InstanceTypeSupportedHostNotFound"
 //  INVALIDPARAMETER_INTERNETACCESSIBLENOTSUPPORTED = "InvalidParameter.InternetAccessibleNotSupported"
+//  INVALIDPARAMETER_ONLYSUPPORTFOREDGEZONE = "InvalidParameter.OnlySupportForEdgeZone"
 //  INVALIDPARAMETER_SNAPSHOTNOTFOUND = "InvalidParameter.SnapshotNotFound"
+//  INVALIDPARAMETER_SPECIALPARAMETERFORSPECIALACCOUNT = "InvalidParameter.SpecialParameterForSpecialAccount"
 //  INVALIDPARAMETERCOMBINATION = "InvalidParameterCombination"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDMALFORMED = "InvalidParameterValue.BandwidthPackageIdMalformed"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDNOTFOUND = "InvalidParameterValue.BandwidthPackageIdNotFound"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEISPNOTMATCH = "InvalidParameterValue.BandwidthPackageIspNotMatch"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEZONENOTMATCH = "InvalidParameterValue.BandwidthPackageZoneNotMatch"
 //  INVALIDPARAMETERVALUE_CLOUDSSDDATADISKSIZETOOSMALL = "InvalidParameterValue.CloudSsdDataDiskSizeTooSmall"
 //  INVALIDPARAMETERVALUE_DUPLICATETAGS = "InvalidParameterValue.DuplicateTags"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTFOUND = "InvalidParameterValue.InstanceTypeNotFound"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTHPCCLUSTER = "InvalidParameterValue.InstanceTypeNotSupportHpcCluster"
 //  INVALIDPARAMETERVALUE_INSTANCETYPEREQUIREDHPCCLUSTER = "InvalidParameterValue.InstanceTypeRequiredHpcCluster"
 //  INVALIDPARAMETERVALUE_INSUFFICIENTPRICE = "InvalidParameterValue.InsufficientPrice"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEFORMAT = "InvalidParameterValue.InvalidImageFormat"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEOSNAME = "InvalidParameterValue.InvalidImageOsName"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGESTATE = "InvalidParameterValue.InvalidImageState"
 //  INVALIDPARAMETERVALUE_INVALIDTIMEFORMAT = "InvalidParameterValue.InvalidTimeFormat"
 //  INVALIDPARAMETERVALUE_INVALIDUSERDATAFORMAT = "InvalidParameterValue.InvalidUserDataFormat"
+//  INVALIDPARAMETERVALUE_ISPNOTSUPPORTFOREDGEZONE = "InvalidParameterValue.IspNotSupportForEdgeZone"
+//  INVALIDPARAMETERVALUE_ISPVALUEREPEATED = "InvalidParameterValue.IspValueRepeated"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_REQUIREDLOCATIONIMAGE = "InvalidParameterValue.RequiredLocationImage"
 //  INVALIDPARAMETERVALUE_SNAPSHOTIDMALFORMED = "InvalidParameterValue.SnapshotIdMalformed"
 //  INVALIDPARAMETERVALUE_TAGKEYNOTFOUND = "InvalidParameterValue.TagKeyNotFound"
 //  INVALIDPARAMETERVALUE_TAGQUOTALIMITEXCEEDED = "InvalidParameterValue.TagQuotaLimitExceeded"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  INVALIDPASSWORD = "InvalidPassword"
 //  INVALIDPERIOD = "InvalidPeriod"
 //  INVALIDPERMISSION = "InvalidPermission"
@@ -3751,6 +4165,7 @@ func NewInquiryPriceRunInstancesResponse() (response *InquiryPriceRunInstancesRe
 //  RESOURCEUNAVAILABLE_INSTANCETYPE = "ResourceUnavailable.InstanceType"
 //  RESOURCESSOLDOUT_SPECIFIEDINSTANCETYPE = "ResourcesSoldOut.SpecifiedInstanceType"
 //  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
+//  UNSUPPORTEDOPERATION_INSTANCETYPENOTSUPPORTJUMBOFRAME = "UnsupportedOperation.InstanceTypeNotSupportJumboFrame"
 //  UNSUPPORTEDOPERATION_INVALIDDISK = "UnsupportedOperation.InvalidDisk"
 //  UNSUPPORTEDOPERATION_INVALIDREGIONDISKENCRYPT = "UnsupportedOperation.InvalidRegionDiskEncrypt"
 //  UNSUPPORTEDOPERATION_NOINSTANCETYPESUPPORTSPOT = "UnsupportedOperation.NoInstanceTypeSupportSpot"
@@ -3785,30 +4200,44 @@ func (c *Client) InquiryPriceRunInstances(request *InquiryPriceRunInstancesReque
 //  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
 //  INVALIDINSTANCENAME_TOOLONG = "InvalidInstanceName.TooLong"
 //  INVALIDINSTANCETYPE_MALFORMED = "InvalidInstanceType.Malformed"
+//  INVALIDPARAMETER_EDGEZONEMISSINTERNETACCESSIBLE = "InvalidParameter.EdgeZoneMissInternetAccessible"
+//  INVALIDPARAMETER_HOSTIDCUSTOMIZEDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdCustomizedInstanceTypeNotSupport"
+//  INVALIDPARAMETER_HOSTIDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdInstanceTypeNotSupport"
+//  INVALIDPARAMETER_HOSTIDSTANDARDINSTANCETYPENOTSUPPORT = "InvalidParameter.HostIdStandardInstanceTypeNotSupport"
 //  INVALIDPARAMETER_INSTANCEIMAGENOTSUPPORT = "InvalidParameter.InstanceImageNotSupport"
+//  INVALIDPARAMETER_INSTANCETYPESUPPORTEDHOSTNOTFOUND = "InvalidParameter.InstanceTypeSupportedHostNotFound"
 //  INVALIDPARAMETER_INTERNETACCESSIBLENOTSUPPORTED = "InvalidParameter.InternetAccessibleNotSupported"
+//  INVALIDPARAMETER_ONLYSUPPORTFOREDGEZONE = "InvalidParameter.OnlySupportForEdgeZone"
 //  INVALIDPARAMETER_SNAPSHOTNOTFOUND = "InvalidParameter.SnapshotNotFound"
+//  INVALIDPARAMETER_SPECIALPARAMETERFORSPECIALACCOUNT = "InvalidParameter.SpecialParameterForSpecialAccount"
 //  INVALIDPARAMETERCOMBINATION = "InvalidParameterCombination"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDMALFORMED = "InvalidParameterValue.BandwidthPackageIdMalformed"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDNOTFOUND = "InvalidParameterValue.BandwidthPackageIdNotFound"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEISPNOTMATCH = "InvalidParameterValue.BandwidthPackageIspNotMatch"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEZONENOTMATCH = "InvalidParameterValue.BandwidthPackageZoneNotMatch"
 //  INVALIDPARAMETERVALUE_CLOUDSSDDATADISKSIZETOOSMALL = "InvalidParameterValue.CloudSsdDataDiskSizeTooSmall"
 //  INVALIDPARAMETERVALUE_DUPLICATETAGS = "InvalidParameterValue.DuplicateTags"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTFOUND = "InvalidParameterValue.InstanceTypeNotFound"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTSUPPORTHPCCLUSTER = "InvalidParameterValue.InstanceTypeNotSupportHpcCluster"
 //  INVALIDPARAMETERVALUE_INSTANCETYPEREQUIREDHPCCLUSTER = "InvalidParameterValue.InstanceTypeRequiredHpcCluster"
 //  INVALIDPARAMETERVALUE_INSUFFICIENTPRICE = "InvalidParameterValue.InsufficientPrice"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEFORMAT = "InvalidParameterValue.InvalidImageFormat"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEOSNAME = "InvalidParameterValue.InvalidImageOsName"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGESTATE = "InvalidParameterValue.InvalidImageState"
 //  INVALIDPARAMETERVALUE_INVALIDTIMEFORMAT = "InvalidParameterValue.InvalidTimeFormat"
 //  INVALIDPARAMETERVALUE_INVALIDUSERDATAFORMAT = "InvalidParameterValue.InvalidUserDataFormat"
+//  INVALIDPARAMETERVALUE_ISPNOTSUPPORTFOREDGEZONE = "InvalidParameterValue.IspNotSupportForEdgeZone"
+//  INVALIDPARAMETERVALUE_ISPVALUEREPEATED = "InvalidParameterValue.IspValueRepeated"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
+//  INVALIDPARAMETERVALUE_REQUIREDLOCATIONIMAGE = "InvalidParameterValue.RequiredLocationImage"
 //  INVALIDPARAMETERVALUE_SNAPSHOTIDMALFORMED = "InvalidParameterValue.SnapshotIdMalformed"
 //  INVALIDPARAMETERVALUE_TAGKEYNOTFOUND = "InvalidParameterValue.TagKeyNotFound"
 //  INVALIDPARAMETERVALUE_TAGQUOTALIMITEXCEEDED = "InvalidParameterValue.TagQuotaLimitExceeded"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  INVALIDPASSWORD = "InvalidPassword"
 //  INVALIDPERIOD = "InvalidPeriod"
 //  INVALIDPERMISSION = "InvalidPermission"
@@ -3826,6 +4255,7 @@ func (c *Client) InquiryPriceRunInstances(request *InquiryPriceRunInstancesReque
 //  RESOURCEUNAVAILABLE_INSTANCETYPE = "ResourceUnavailable.InstanceType"
 //  RESOURCESSOLDOUT_SPECIFIEDINSTANCETYPE = "ResourcesSoldOut.SpecifiedInstanceType"
 //  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
+//  UNSUPPORTEDOPERATION_INSTANCETYPENOTSUPPORTJUMBOFRAME = "UnsupportedOperation.InstanceTypeNotSupportJumboFrame"
 //  UNSUPPORTEDOPERATION_INVALIDDISK = "UnsupportedOperation.InvalidDisk"
 //  UNSUPPORTEDOPERATION_INVALIDREGIONDISKENCRYPT = "UnsupportedOperation.InvalidRegionDiskEncrypt"
 //  UNSUPPORTEDOPERATION_NOINSTANCETYPESUPPORTSPOT = "UnsupportedOperation.NoInstanceTypeSupportSpot"
@@ -3882,6 +4312,7 @@ func NewModifyChcAttributeResponse() (response *ModifyChcAttributeResponse) {
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_NOTEMPTY = "InvalidParameterValue.NotEmpty"
 //  INVALIDPASSWORD = "InvalidPassword"
+//  INVALIDSECURITYGROUPID_NOTFOUND = "InvalidSecurityGroupId.NotFound"
 func (c *Client) ModifyChcAttribute(request *ModifyChcAttributeRequest) (response *ModifyChcAttributeResponse, err error) {
     return c.ModifyChcAttributeWithContext(context.Background(), request)
 }
@@ -3899,6 +4330,7 @@ func (c *Client) ModifyChcAttribute(request *ModifyChcAttributeRequest) (respons
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_NOTEMPTY = "InvalidParameterValue.NotEmpty"
 //  INVALIDPASSWORD = "InvalidPassword"
+//  INVALIDSECURITYGROUPID_NOTFOUND = "InvalidSecurityGroupId.NotFound"
 func (c *Client) ModifyChcAttributeWithContext(ctx context.Context, request *ModifyChcAttributeRequest) (response *ModifyChcAttributeResponse, err error) {
     if request == nil {
         request = NewModifyChcAttributeRequest()
@@ -4054,9 +4486,10 @@ func NewModifyImageAttributeResponse() (response *ModifyImageAttributeResponse) 
 //  INVALIDIMAGEID_MALFORMED = "InvalidImageId.Malformed"
 //  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
 //  INVALIDIMAGENAME_DUPLICATE = "InvalidImageName.Duplicate"
-//  INVALIDPARAMETER_VALUETOOLARGE = "InvalidParameter.ValueTooLarge"
 //  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
+//  INVALIDPARAMETERVALUE_INVALIDIMAGEFAMILY = "InvalidParameterValue.InvalidImageFamily"
 //  INVALIDPARAMETERVALUE_TOOLARGE = "InvalidParameterValue.TooLarge"
+//  UNAUTHORIZEDOPERATION_INVALIDTOKEN = "UnauthorizedOperation.InvalidToken"
 func (c *Client) ModifyImageAttribute(request *ModifyImageAttributeRequest) (response *ModifyImageAttributeResponse, err error) {
     return c.ModifyImageAttributeWithContext(context.Background(), request)
 }
@@ -4073,9 +4506,10 @@ func (c *Client) ModifyImageAttribute(request *ModifyImageAttributeRequest) (res
 //  INVALIDIMAGEID_MALFORMED = "InvalidImageId.Malformed"
 //  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
 //  INVALIDIMAGENAME_DUPLICATE = "InvalidImageName.Duplicate"
-//  INVALIDPARAMETER_VALUETOOLARGE = "InvalidParameter.ValueTooLarge"
 //  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
+//  INVALIDPARAMETERVALUE_INVALIDIMAGEFAMILY = "InvalidParameterValue.InvalidImageFamily"
 //  INVALIDPARAMETERVALUE_TOOLARGE = "InvalidParameterValue.TooLarge"
+//  UNAUTHORIZEDOPERATION_INVALIDTOKEN = "UnauthorizedOperation.InvalidToken"
 func (c *Client) ModifyImageAttributeWithContext(ctx context.Context, request *ModifyImageAttributeRequest) (response *ModifyImageAttributeResponse, err error) {
     if request == nil {
         request = NewModifyImageAttributeRequest()
@@ -4116,13 +4550,13 @@ func NewModifyImageSharePermissionResponse() (response *ModifyImageSharePermissi
 //
 // 
 //
-// * The accounts with which an image is shared can use the shared image to create instances.
+// * The account with shared image access can use the image to create instances.
 //
-// * Each custom image can be shared with up to 50 accounts.
+// * Each custom image can be shared with a maximum of 500 accounts.
 //
-// * You can use a shared image to create instances, but you cannot change its name and description.
+// * Shared images cannot have their names or description changed. They can only be used to create instances.
 //
-// * If an image is shared with another account, the shared image will be in the same region as the original image.
+// * Sharing is only supported within the same region as the recipient's account.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ACCOUNTALREADYEXISTS = "FailedOperation.AccountAlreadyExists"
@@ -4136,12 +4570,15 @@ func NewModifyImageSharePermissionResponse() (response *ModifyImageSharePermissi
 //  INVALIDIMAGEID_MALFORMED = "InvalidImageId.Malformed"
 //  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
 //  INVALIDPARAMETER_INSTANCEIMAGENOTSUPPORT = "InvalidParameter.InstanceImageNotSupport"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGESTATE = "InvalidParameterValue.InvalidImageState"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  OVERQUOTA = "OverQuota"
 //  UNAUTHORIZEDOPERATION_IMAGENOTBELONGTOACCOUNT = "UnauthorizedOperation.ImageNotBelongToAccount"
 //  UNAUTHORIZEDOPERATION_INVALIDTOKEN = "UnauthorizedOperation.InvalidToken"
+//  UNSUPPORTEDOPERATION_ENCRYPTEDIMAGESNOTSUPPORTED = "UnsupportedOperation.EncryptedImagesNotSupported"
+//  UNSUPPORTEDOPERATION_LOCATIONIMAGENOTSUPPORTED = "UnsupportedOperation.LocationImageNotSupported"
 func (c *Client) ModifyImageSharePermission(request *ModifyImageSharePermissionRequest) (response *ModifyImageSharePermissionResponse, err error) {
     return c.ModifyImageSharePermissionWithContext(context.Background(), request)
 }
@@ -4151,13 +4588,13 @@ func (c *Client) ModifyImageSharePermission(request *ModifyImageSharePermissionR
 //
 // 
 //
-// * The accounts with which an image is shared can use the shared image to create instances.
+// * The account with shared image access can use the image to create instances.
 //
-// * Each custom image can be shared with up to 50 accounts.
+// * Each custom image can be shared with a maximum of 500 accounts.
 //
-// * You can use a shared image to create instances, but you cannot change its name and description.
+// * Shared images cannot have their names or description changed. They can only be used to create instances.
 //
-// * If an image is shared with another account, the shared image will be in the same region as the original image.
+// * Sharing is only supported within the same region as the recipient's account.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ACCOUNTALREADYEXISTS = "FailedOperation.AccountAlreadyExists"
@@ -4171,12 +4608,15 @@ func (c *Client) ModifyImageSharePermission(request *ModifyImageSharePermissionR
 //  INVALIDIMAGEID_MALFORMED = "InvalidImageId.Malformed"
 //  INVALIDIMAGEID_NOTFOUND = "InvalidImageId.NotFound"
 //  INVALIDPARAMETER_INSTANCEIMAGENOTSUPPORT = "InvalidParameter.InstanceImageNotSupport"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGESTATE = "InvalidParameterValue.InvalidImageState"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  OVERQUOTA = "OverQuota"
 //  UNAUTHORIZEDOPERATION_IMAGENOTBELONGTOACCOUNT = "UnauthorizedOperation.ImageNotBelongToAccount"
 //  UNAUTHORIZEDOPERATION_INVALIDTOKEN = "UnauthorizedOperation.InvalidToken"
+//  UNSUPPORTEDOPERATION_ENCRYPTEDIMAGESNOTSUPPORTED = "UnsupportedOperation.EncryptedImagesNotSupported"
+//  UNSUPPORTEDOPERATION_LOCATIONIMAGENOTSUPPORTED = "UnsupportedOperation.LocationImageNotSupported"
 func (c *Client) ModifyImageSharePermissionWithContext(ctx context.Context, request *ModifyImageSharePermissionRequest) (response *ModifyImageSharePermissionResponse, err error) {
     if request == nil {
         request = NewModifyImageSharePermissionRequest()
@@ -4229,6 +4669,7 @@ func NewModifyInstancesAttributeResponse() (response *ModifyInstancesAttributeRe
 //
 // error code that may be returned:
 //  AUTHFAILURE_CAMROLENAMEAUTHENTICATEFAILED = "AuthFailure.CamRoleNameAuthenticateFailed"
+//  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLE = "FailedOperation.InvalidInstanceApplicationRole"
 //  FAILEDOPERATION_SECURITYGROUPACTIONFAILED = "FailedOperation.SecurityGroupActionFailed"
 //  INTERNALSERVERERROR = "InternalServerError"
 //  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
@@ -4250,6 +4691,7 @@ func NewModifyInstancesAttributeResponse() (response *ModifyInstancesAttributeRe
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
@@ -4265,6 +4707,8 @@ func NewModifyInstancesAttributeResponse() (response *ModifyInstancesAttributeRe
 //  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPING = "UnsupportedOperation.InstanceStateStopping"
 //  UNSUPPORTEDOPERATION_INSTANCESTATETERMINATED = "UnsupportedOperation.InstanceStateTerminated"
 //  UNSUPPORTEDOPERATION_INSTANCESTATETERMINATING = "UnsupportedOperation.InstanceStateTerminating"
+//  UNSUPPORTEDOPERATION_INSTANCETYPENOTSUPPORTJUMBOFRAME = "UnsupportedOperation.InstanceTypeNotSupportJumboFrame"
+//  UNSUPPORTEDOPERATION_INSTANCESENABLEJUMBOWITHOUTREBOOT = "UnsupportedOperation.InstancesEnableJumboWithoutReboot"
 //  UNSUPPORTEDOPERATION_INVALIDINSTANCENOTSUPPORTEDPROTECTEDINSTANCE = "UnsupportedOperation.InvalidInstanceNotSupportedProtectedInstance"
 //  UNSUPPORTEDOPERATION_STOPPEDMODESTOPCHARGING = "UnsupportedOperation.StoppedModeStopCharging"
 func (c *Client) ModifyInstancesAttribute(request *ModifyInstancesAttributeRequest) (response *ModifyInstancesAttributeResponse, err error) {
@@ -4288,6 +4732,7 @@ func (c *Client) ModifyInstancesAttribute(request *ModifyInstancesAttributeReque
 //
 // error code that may be returned:
 //  AUTHFAILURE_CAMROLENAMEAUTHENTICATEFAILED = "AuthFailure.CamRoleNameAuthenticateFailed"
+//  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLE = "FailedOperation.InvalidInstanceApplicationRole"
 //  FAILEDOPERATION_SECURITYGROUPACTIONFAILED = "FailedOperation.SecurityGroupActionFailed"
 //  INTERNALSERVERERROR = "InternalServerError"
 //  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
@@ -4309,6 +4754,7 @@ func (c *Client) ModifyInstancesAttribute(request *ModifyInstancesAttributeReque
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
@@ -4324,6 +4770,8 @@ func (c *Client) ModifyInstancesAttribute(request *ModifyInstancesAttributeReque
 //  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPING = "UnsupportedOperation.InstanceStateStopping"
 //  UNSUPPORTEDOPERATION_INSTANCESTATETERMINATED = "UnsupportedOperation.InstanceStateTerminated"
 //  UNSUPPORTEDOPERATION_INSTANCESTATETERMINATING = "UnsupportedOperation.InstanceStateTerminating"
+//  UNSUPPORTEDOPERATION_INSTANCETYPENOTSUPPORTJUMBOFRAME = "UnsupportedOperation.InstanceTypeNotSupportJumboFrame"
+//  UNSUPPORTEDOPERATION_INSTANCESENABLEJUMBOWITHOUTREBOOT = "UnsupportedOperation.InstancesEnableJumboWithoutReboot"
 //  UNSUPPORTEDOPERATION_INVALIDINSTANCENOTSUPPORTEDPROTECTEDINSTANCE = "UnsupportedOperation.InvalidInstanceNotSupportedProtectedInstance"
 //  UNSUPPORTEDOPERATION_STOPPEDMODESTOPCHARGING = "UnsupportedOperation.StoppedModeStopCharging"
 func (c *Client) ModifyInstancesAttributeWithContext(ctx context.Context, request *ModifyInstancesAttributeRequest) (response *ModifyInstancesAttributeResponse, err error) {
@@ -4473,14 +4921,18 @@ func NewModifyInstancesVpcAttributeResponse() (response *ModifyInstancesVpcAttri
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MUSTDHCPENABLEDVPC = "InvalidParameterValue.MustDhcpEnabledVpc"
 //  INVALIDPARAMETERVALUE_SUBNETIDMALFORMED = "InvalidParameterValue.SubnetIdMalformed"
+//  INVALIDPARAMETERVALUE_VPCIDMALFORMED = "InvalidParameterValue.VpcIdMalformed"
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
+//  UNSUPPORTEDOPERATION_EDGEZONEINSTANCE = "UnsupportedOperation.EdgeZoneInstance"
 //  UNSUPPORTEDOPERATION_ELASTICNETWORKINTERFACE = "UnsupportedOperation.ElasticNetworkInterface"
 //  UNSUPPORTEDOPERATION_IPV6NOTSUPPORTVPCMIGRATE = "UnsupportedOperation.IPv6NotSupportVpcMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCECHARGETYPE = "UnsupportedOperation.InstanceChargeType"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
@@ -4525,14 +4977,18 @@ func (c *Client) ModifyInstancesVpcAttribute(request *ModifyInstancesVpcAttribut
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_MUSTDHCPENABLEDVPC = "InvalidParameterValue.MustDhcpEnabledVpc"
 //  INVALIDPARAMETERVALUE_SUBNETIDMALFORMED = "InvalidParameterValue.SubnetIdMalformed"
+//  INVALIDPARAMETERVALUE_VPCIDMALFORMED = "InvalidParameterValue.VpcIdMalformed"
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
+//  UNSUPPORTEDOPERATION_EDGEZONEINSTANCE = "UnsupportedOperation.EdgeZoneInstance"
 //  UNSUPPORTEDOPERATION_ELASTICNETWORKINTERFACE = "UnsupportedOperation.ElasticNetworkInterface"
 //  UNSUPPORTEDOPERATION_IPV6NOTSUPPORTVPCMIGRATE = "UnsupportedOperation.IPv6NotSupportVpcMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCECHARGETYPE = "UnsupportedOperation.InstanceChargeType"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
@@ -4588,15 +5044,19 @@ func NewModifyKeyPairAttributeResponse() (response *ModifyKeyPairAttributeRespon
 }
 
 // ModifyKeyPairAttribute
-// This API is used to modify the attributes of key pairs.
+// This API is used to modify attributes of a key pair.
 //
 // 
 //
-// * This API modifies the name and description of the key pair identified by the key pair ID.
+// * Modify the name and description information of the key pair specified by the key pair ID.
 //
-// * The name of the key pair must be unique.
+// * The key pair name should not be the same as the name of an existing key pair.
 //
-// * Key pair ID is the unique identifier of a key pair and cannot be modified.
+// * The key pair ID is the unique identifier of a key pair and cannot be modified.
+//
+// 
+//
+// * Either the key pair name or description information should be specified, and both can also be specified simultaneously.
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -4611,15 +5071,19 @@ func (c *Client) ModifyKeyPairAttribute(request *ModifyKeyPairAttributeRequest) 
 }
 
 // ModifyKeyPairAttribute
-// This API is used to modify the attributes of key pairs.
+// This API is used to modify attributes of a key pair.
 //
 // 
 //
-// * This API modifies the name and description of the key pair identified by the key pair ID.
+// * Modify the name and description information of the key pair specified by the key pair ID.
 //
-// * The name of the key pair must be unique.
+// * The key pair name should not be the same as the name of an existing key pair.
 //
-// * Key pair ID is the unique identifier of a key pair and cannot be modified.
+// * The key pair ID is the unique identifier of a key pair and cannot be modified.
+//
+// 
+//
+// * Either the key pair name or description information should be specified, and both can also be specified simultaneously.
 //
 // error code that may be returned:
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -4808,6 +5272,7 @@ func NewRebootInstancesResponse() (response *RebootInstancesResponse) {
 // * Batch operations are supported. The maximum number of instances in each request is 100.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLE = "FailedOperation.InvalidInstanceApplicationRole"
 //  INTERNALSERVERERROR = "InternalServerError"
 //  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
 //  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
@@ -4822,10 +5287,12 @@ func NewRebootInstancesResponse() (response *RebootInstancesResponse) {
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATECORRUPTED = "UnsupportedOperation.InstanceStateCorrupted"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEISOLATING = "UnsupportedOperation.InstanceStateIsolating"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEPENDING = "UnsupportedOperation.InstanceStatePending"
@@ -4855,6 +5322,7 @@ func (c *Client) RebootInstances(request *RebootInstancesRequest) (response *Reb
 // * Batch operations are supported. The maximum number of instances in each request is 100.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLE = "FailedOperation.InvalidInstanceApplicationRole"
 //  INTERNALSERVERERROR = "InternalServerError"
 //  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
 //  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
@@ -4869,10 +5337,12 @@ func (c *Client) RebootInstances(request *RebootInstancesRequest) (response *Reb
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATECORRUPTED = "UnsupportedOperation.InstanceStateCorrupted"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEISOLATING = "UnsupportedOperation.InstanceStateIsolating"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEPENDING = "UnsupportedOperation.InstanceStatePending"
@@ -4926,6 +5396,7 @@ func NewRemoveChcAssistVpcResponse() (response *RemoveChcAssistVpcResponse) {
 //  ACCOUNTQUALIFICATIONRESTRICTIONS = "AccountQualificationRestrictions"
 //  INVALIDHOST_NOTSUPPORTED = "InvalidHost.NotSupported"
 //  INVALIDPARAMETERVALUE_CHCHOSTSNOTFOUND = "InvalidParameterValue.ChcHostsNotFound"
+//  INVALIDPARAMETERVALUE_INCORRECTFORMAT = "InvalidParameterValue.IncorrectFormat"
 func (c *Client) RemoveChcAssistVpc(request *RemoveChcAssistVpcRequest) (response *RemoveChcAssistVpcResponse, err error) {
     return c.RemoveChcAssistVpcWithContext(context.Background(), request)
 }
@@ -4937,6 +5408,7 @@ func (c *Client) RemoveChcAssistVpc(request *RemoveChcAssistVpcRequest) (respons
 //  ACCOUNTQUALIFICATIONRESTRICTIONS = "AccountQualificationRestrictions"
 //  INVALIDHOST_NOTSUPPORTED = "InvalidHost.NotSupported"
 //  INVALIDPARAMETERVALUE_CHCHOSTSNOTFOUND = "InvalidParameterValue.ChcHostsNotFound"
+//  INVALIDPARAMETERVALUE_INCORRECTFORMAT = "InvalidParameterValue.IncorrectFormat"
 func (c *Client) RemoveChcAssistVpcWithContext(ctx context.Context, request *RemoveChcAssistVpcRequest) (response *RemoveChcAssistVpcResponse, err error) {
     if request == nil {
         request = NewRemoveChcAssistVpcRequest()
@@ -5030,21 +5502,23 @@ func NewResetInstanceResponse() (response *ResetInstanceResponse) {
 }
 
 // ResetInstance
-// This API is used to reinstall the operating system of the specified instance.
+// This API (ResetInstance) is used to reinstall the operating system on a specified instance.
 //
 // 
 //
-// * If you specify an `ImageId`, the specified image is used. Otherwise, the image used by the current instance is used.
+// 
 //
-// * The system disk will be formatted and reset. Therefore, make sure that no important files are stored on the system disk.
+// 
 //
-// * If the operating system switches between `Linux` and `Windows`, the system disk `ID` of the instance will change, and the snapshots that are associated with the system disk can no longer be used to roll back and restore data.
+// * If you have specified the parameter `ImageId`, use the specified image for reinstallation. Otherwise, perform reinstallation based on the image currently used by the instance.
 //
-// * If no password is specified, you will get a random password via internal message.
+// * The system disk will be formatted and reset. Ensure that there are no important files in the system disk.
 //
-// * You can only use this API to switch the operating system between `Linux` and `Windows` for instances whose [system disk type](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#SystemDisk) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`.
+// * If you do not specify a password, a random password will be sent via Message Center.
 //
-// * Currently, this API only supports instances in Mainland China regions.
+// * Currently, only instances with a [system disk type](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#SystemDisk) of `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, or `CLOUD_BSSD` are supported for implementing operating system switching through this API.
+//
+// * You can query the result of the instance operation by calling the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5). If the latest operation status (LatestOperationState) of the instance is **SUCCESS**, the operation is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLEEMR = "FailedOperation.InvalidInstanceApplicationRoleEmr"
@@ -5058,6 +5532,7 @@ func NewResetInstanceResponse() (response *ResetInstanceResponse) {
 //  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
 //  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDINSTANCETYPE_MALFORMED = "InvalidInstanceType.Malformed"
+//  INVALIDKEYPAIRID_MALFORMED = "InvalidKeyPairId.Malformed"
 //  INVALIDPARAMETER_HOSTNAMEILLEGAL = "InvalidParameter.HostNameIllegal"
 //  INVALIDPARAMETER_INSTANCEIMAGENOTSUPPORT = "InvalidParameter.InstanceImageNotSupport"
 //  INVALIDPARAMETER_PARAMETERCONFLICT = "InvalidParameter.ParameterConflict"
@@ -5065,6 +5540,7 @@ func NewResetInstanceResponse() (response *ResetInstanceResponse) {
 //  INVALIDPARAMETERVALUE_ILLEGALHOSTNAME = "InvalidParameterValue.IllegalHostName"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTFOUND = "InvalidParameterValue.InstanceTypeNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEFORGIVENINSTANCETYPE = "InvalidParameterValue.InvalidImageForGivenInstanceType"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEFORMAT = "InvalidParameterValue.InvalidImageFormat"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
@@ -5074,6 +5550,8 @@ func NewResetInstanceResponse() (response *ResetInstanceResponse) {
 //  INVALIDPARAMETERVALUE_INVALIDUSERDATAFORMAT = "InvalidParameterValue.InvalidUserDataFormat"
 //  INVALIDPARAMETERVALUE_KEYPAIRNOTFOUND = "InvalidParameterValue.KeyPairNotFound"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_REQUIREDLOCATIONIMAGE = "InvalidParameterValue.RequiredLocationImage"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_MONITORSERVICE = "MissingParameter.MonitorService"
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
@@ -5081,10 +5559,12 @@ func NewResetInstanceResponse() (response *ResetInstanceResponse) {
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT_CLOUDDISKSOLDOUT = "ResourceInsufficient.CloudDiskSoldOut"
+//  RESOURCENOTFOUND_KEYPAIRNOTFOUND = "ResourceNotFound.KeyPairNotFound"
 //  RESOURCESSOLDOUT_SPECIFIEDINSTANCETYPE = "ResourcesSoldOut.SpecifiedInstanceType"
 //  UNAUTHORIZEDOPERATION_INVALIDTOKEN = "UnauthorizedOperation.InvalidToken"
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_INSTANCECHARGETYPE = "UnsupportedOperation.InstanceChargeType"
 //  UNSUPPORTEDOPERATION_INSTANCESTATECORRUPTED = "UnsupportedOperation.InstanceStateCorrupted"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
@@ -5112,21 +5592,23 @@ func (c *Client) ResetInstance(request *ResetInstanceRequest) (response *ResetIn
 }
 
 // ResetInstance
-// This API is used to reinstall the operating system of the specified instance.
+// This API (ResetInstance) is used to reinstall the operating system on a specified instance.
 //
 // 
 //
-// * If you specify an `ImageId`, the specified image is used. Otherwise, the image used by the current instance is used.
+// 
 //
-// * The system disk will be formatted and reset. Therefore, make sure that no important files are stored on the system disk.
+// 
 //
-// * If the operating system switches between `Linux` and `Windows`, the system disk `ID` of the instance will change, and the snapshots that are associated with the system disk can no longer be used to roll back and restore data.
+// * If you have specified the parameter `ImageId`, use the specified image for reinstallation. Otherwise, perform reinstallation based on the image currently used by the instance.
 //
-// * If no password is specified, you will get a random password via internal message.
+// * The system disk will be formatted and reset. Ensure that there are no important files in the system disk.
 //
-// * You can only use this API to switch the operating system between `Linux` and `Windows` for instances whose [system disk type](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#SystemDisk) is `CLOUD_BASIC`, `CLOUD_PREMIUM`, or `CLOUD_SSD`.
+// * If you do not specify a password, a random password will be sent via Message Center.
 //
-// * Currently, this API only supports instances in Mainland China regions.
+// * Currently, only instances with a [system disk type](https://intl.cloud.tencent.com/document/api/213/9452?from_cn_redirect=1#SystemDisk) of `CLOUD_BASIC`, `CLOUD_PREMIUM`, `CLOUD_SSD`, or `CLOUD_BSSD` are supported for implementing operating system switching through this API.
+//
+// * You can query the result of the instance operation by calling the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5). If the latest operation status (LatestOperationState) of the instance is **SUCCESS**, the operation is successful.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLEEMR = "FailedOperation.InvalidInstanceApplicationRoleEmr"
@@ -5140,6 +5622,7 @@ func (c *Client) ResetInstance(request *ResetInstanceRequest) (response *ResetIn
 //  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
 //  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDINSTANCETYPE_MALFORMED = "InvalidInstanceType.Malformed"
+//  INVALIDKEYPAIRID_MALFORMED = "InvalidKeyPairId.Malformed"
 //  INVALIDPARAMETER_HOSTNAMEILLEGAL = "InvalidParameter.HostNameIllegal"
 //  INVALIDPARAMETER_INSTANCEIMAGENOTSUPPORT = "InvalidParameter.InstanceImageNotSupport"
 //  INVALIDPARAMETER_PARAMETERCONFLICT = "InvalidParameter.ParameterConflict"
@@ -5147,6 +5630,7 @@ func (c *Client) ResetInstance(request *ResetInstanceRequest) (response *ResetIn
 //  INVALIDPARAMETERVALUE_ILLEGALHOSTNAME = "InvalidParameterValue.IllegalHostName"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  INVALIDPARAMETERVALUE_INSTANCETYPENOTFOUND = "InvalidParameterValue.InstanceTypeNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEFORGIVENINSTANCETYPE = "InvalidParameterValue.InvalidImageForGivenInstanceType"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEFORMAT = "InvalidParameterValue.InvalidImageFormat"
 //  INVALIDPARAMETERVALUE_INVALIDIMAGEID = "InvalidParameterValue.InvalidImageId"
@@ -5156,6 +5640,8 @@ func (c *Client) ResetInstance(request *ResetInstanceRequest) (response *ResetIn
 //  INVALIDPARAMETERVALUE_INVALIDUSERDATAFORMAT = "InvalidParameterValue.InvalidUserDataFormat"
 //  INVALIDPARAMETERVALUE_KEYPAIRNOTFOUND = "InvalidParameterValue.KeyPairNotFound"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_REQUIREDLOCATIONIMAGE = "InvalidParameterValue.RequiredLocationImage"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_MONITORSERVICE = "MissingParameter.MonitorService"
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
@@ -5163,10 +5649,12 @@ func (c *Client) ResetInstance(request *ResetInstanceRequest) (response *ResetIn
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT_CLOUDDISKSOLDOUT = "ResourceInsufficient.CloudDiskSoldOut"
+//  RESOURCENOTFOUND_KEYPAIRNOTFOUND = "ResourceNotFound.KeyPairNotFound"
 //  RESOURCESSOLDOUT_SPECIFIEDINSTANCETYPE = "ResourcesSoldOut.SpecifiedInstanceType"
 //  UNAUTHORIZEDOPERATION_INVALIDTOKEN = "UnauthorizedOperation.InvalidToken"
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 //  UNSUPPORTEDOPERATION_INSTANCECHARGETYPE = "UnsupportedOperation.InstanceChargeType"
 //  UNSUPPORTEDOPERATION_INSTANCESTATECORRUPTED = "UnsupportedOperation.InstanceStateCorrupted"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
@@ -5246,6 +5734,7 @@ func NewResetInstancesInternetMaxBandwidthResponse() (response *ResetInstancesIn
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDMALFORMED = "InvalidParameterValue.BandwidthPackageIdMalformed"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPERMISSION = "InvalidPermission"
@@ -5253,9 +5742,12 @@ func NewResetInstancesInternetMaxBandwidthResponse() (response *ResetInstancesIn
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
+//  UNSUPPORTEDOPERATION_EDGEZONEINSTANCE = "UnsupportedOperation.EdgeZoneInstance"
 //  UNSUPPORTEDOPERATION_INSTANCECHARGETYPE = "UnsupportedOperation.InstanceChargeType"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEISOLATING = "UnsupportedOperation.InstanceStateIsolating"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEPENDING = "UnsupportedOperation.InstanceStatePending"
@@ -5292,6 +5784,7 @@ func (c *Client) ResetInstancesInternetMaxBandwidth(request *ResetInstancesInter
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGEIDMALFORMED = "InvalidParameterValue.BandwidthPackageIdMalformed"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_INVALIDAPPIDFORMAT = "InvalidParameterValue.InvalidAppIdFormat"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPERMISSION = "InvalidPermission"
@@ -5299,9 +5792,12 @@ func (c *Client) ResetInstancesInternetMaxBandwidth(request *ResetInstancesInter
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
+//  UNSUPPORTEDOPERATION_EDGEZONEINSTANCE = "UnsupportedOperation.EdgeZoneInstance"
 //  UNSUPPORTEDOPERATION_INSTANCECHARGETYPE = "UnsupportedOperation.InstanceChargeType"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEISOLATING = "UnsupportedOperation.InstanceStateIsolating"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEPENDING = "UnsupportedOperation.InstanceStatePending"
@@ -5361,6 +5857,7 @@ func NewResetInstancesPasswordResponse() (response *ResetInstancesPasswordRespon
 // * You can call the [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) API and find the result of the operation in the response parameter `LatestOperationState`. If the value is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLE = "FailedOperation.InvalidInstanceApplicationRole"
 //  INTERNALSERVERERROR = "InternalServerError"
 //  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
 //  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
@@ -5375,6 +5872,7 @@ func NewResetInstancesPasswordResponse() (response *ResetInstancesPasswordRespon
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
@@ -5408,6 +5906,7 @@ func (c *Client) ResetInstancesPassword(request *ResetInstancesPasswordRequest) 
 // * You can call the [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B3-.E6.9F.A5.E8.AF.A2.E5.AE.9E.E4.BE.8B.E7.9A.84.E6.9C.80.E6.96.B0.E6.93.8D.E4.BD.9C.E6.83.85.E5.86.B5) API and find the result of the operation in the response parameter `LatestOperationState`. If the value is `SUCCESS`, the operation is successful.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLE = "FailedOperation.InvalidInstanceApplicationRole"
 //  INTERNALSERVERERROR = "InternalServerError"
 //  INVALIDINSTANCE_NOTSUPPORTED = "InvalidInstance.NotSupported"
 //  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
@@ -5422,6 +5921,7 @@ func (c *Client) ResetInstancesPassword(request *ResetInstancesPasswordRequest) 
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
@@ -5480,6 +5980,7 @@ func NewResetInstancesTypeResponse() (response *ResetInstancesTypeResponse) {
 // * Currently, you cannot use this API to change the models of [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLE = "FailedOperation.InvalidInstanceApplicationRole"
 //  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLEEMR = "FailedOperation.InvalidInstanceApplicationRoleEmr"
 //  FAILEDOPERATION_PROMOTIONALPERIORESTRICTION = "FailedOperation.PromotionalPerioRestriction"
 //  INTERNALERROR_TRADEUNKNOWNERROR = "InternalError.TradeUnknownError"
@@ -5506,11 +6007,13 @@ func NewResetInstancesTypeResponse() (response *ResetInstancesTypeResponse) {
 //  INVALIDPERMISSION = "InvalidPermission"
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  LIMITEXCEEDED_EIPNUMLIMIT = "LimitExceeded.EipNumLimit"
+//  LIMITEXCEEDED_ENILIMITINSTANCETYPE = "LimitExceeded.EniLimitInstanceType"
 //  LIMITEXCEEDED_ENINUMLIMIT = "LimitExceeded.EniNumLimit"
 //  LIMITEXCEEDED_INSTANCETYPEBANDWIDTH = "LimitExceeded.InstanceTypeBandwidth"
 //  LIMITEXCEEDED_SPOTQUOTA = "LimitExceeded.SpotQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCEINSUFFICIENT_CLOUDDISKSOLDOUT = "ResourceInsufficient.CloudDiskSoldOut"
 //  RESOURCEINSUFFICIENT_CLOUDDISKUNAVAILABLE = "ResourceInsufficient.CloudDiskUnavailable"
 //  RESOURCEINSUFFICIENT_SPECIFIEDINSTANCETYPE = "ResourceInsufficient.SpecifiedInstanceType"
 //  RESOURCENOTFOUND_INVALIDZONEINSTANCETYPE = "ResourceNotFound.InvalidZoneInstanceType"
@@ -5521,6 +6024,7 @@ func NewResetInstancesTypeResponse() (response *ResetInstancesTypeResponse) {
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
 //  UNSUPPORTEDOPERATION_DISKSNAPCREATETIMETOOOLD = "UnsupportedOperation.DiskSnapCreateTimeTooOld"
 //  UNSUPPORTEDOPERATION_HETEROGENEOUSCHANGEINSTANCEFAMILY = "UnsupportedOperation.HeterogeneousChangeInstanceFamily"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
@@ -5535,11 +6039,14 @@ func NewResetInstancesTypeResponse() (response *ResetInstancesTypeResponse) {
 //  UNSUPPORTEDOPERATION_LOCALDATADISKCHANGEINSTANCEFAMILY = "UnsupportedOperation.LocalDataDiskChangeInstanceFamily"
 //  UNSUPPORTEDOPERATION_LOCALDISKMIGRATINGTOCLOUDDISK = "UnsupportedOperation.LocalDiskMigratingToCloudDisk"
 //  UNSUPPORTEDOPERATION_NOINSTANCETYPESUPPORTSPOT = "UnsupportedOperation.NoInstanceTypeSupportSpot"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTUNPAIDORDER = "UnsupportedOperation.NotSupportUnpaidOrder"
 //  UNSUPPORTEDOPERATION_ORIGINALINSTANCETYPEINVALID = "UnsupportedOperation.OriginalInstanceTypeInvalid"
 //  UNSUPPORTEDOPERATION_REDHATINSTANCEUNSUPPORTED = "UnsupportedOperation.RedHatInstanceUnsupported"
 //  UNSUPPORTEDOPERATION_SPECIALINSTANCETYPE = "UnsupportedOperation.SpecialInstanceType"
 //  UNSUPPORTEDOPERATION_STOPPEDMODESTOPCHARGING = "UnsupportedOperation.StoppedModeStopCharging"
 //  UNSUPPORTEDOPERATION_STOPPEDMODESTOPCHARGINGSAMEFAMILY = "UnsupportedOperation.StoppedModeStopChargingSameFamily"
+//  UNSUPPORTEDOPERATION_SYSTEMDISKTYPE = "UnsupportedOperation.SystemDiskType"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDARMCHANGEINSTANCEFAMILY = "UnsupportedOperation.UnsupportedARMChangeInstanceFamily"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCEFAMILY = "UnsupportedOperation.UnsupportedChangeInstanceFamily"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCEFAMILYTOARM = "UnsupportedOperation.UnsupportedChangeInstanceFamilyToARM"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCETOTHISINSTANCEFAMILY = "UnsupportedOperation.UnsupportedChangeInstanceToThisInstanceFamily"
@@ -5555,6 +6062,7 @@ func (c *Client) ResetInstancesType(request *ResetInstancesTypeRequest) (respons
 // * Currently, you cannot use this API to change the models of [CDH](https://intl.cloud.tencent.com/document/product/416?from_cn_redirect=1) instances.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLE = "FailedOperation.InvalidInstanceApplicationRole"
 //  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLEEMR = "FailedOperation.InvalidInstanceApplicationRoleEmr"
 //  FAILEDOPERATION_PROMOTIONALPERIORESTRICTION = "FailedOperation.PromotionalPerioRestriction"
 //  INTERNALERROR_TRADEUNKNOWNERROR = "InternalError.TradeUnknownError"
@@ -5581,11 +6089,13 @@ func (c *Client) ResetInstancesType(request *ResetInstancesTypeRequest) (respons
 //  INVALIDPERMISSION = "InvalidPermission"
 //  INVALIDZONE_MISMATCHREGION = "InvalidZone.MismatchRegion"
 //  LIMITEXCEEDED_EIPNUMLIMIT = "LimitExceeded.EipNumLimit"
+//  LIMITEXCEEDED_ENILIMITINSTANCETYPE = "LimitExceeded.EniLimitInstanceType"
 //  LIMITEXCEEDED_ENINUMLIMIT = "LimitExceeded.EniNumLimit"
 //  LIMITEXCEEDED_INSTANCETYPEBANDWIDTH = "LimitExceeded.InstanceTypeBandwidth"
 //  LIMITEXCEEDED_SPOTQUOTA = "LimitExceeded.SpotQuota"
 //  MISSINGPARAMETER = "MissingParameter"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  RESOURCEINSUFFICIENT_CLOUDDISKSOLDOUT = "ResourceInsufficient.CloudDiskSoldOut"
 //  RESOURCEINSUFFICIENT_CLOUDDISKUNAVAILABLE = "ResourceInsufficient.CloudDiskUnavailable"
 //  RESOURCEINSUFFICIENT_SPECIFIEDINSTANCETYPE = "ResourceInsufficient.SpecifiedInstanceType"
 //  RESOURCENOTFOUND_INVALIDZONEINSTANCETYPE = "ResourceNotFound.InvalidZoneInstanceType"
@@ -5596,6 +6106,7 @@ func (c *Client) ResetInstancesType(request *ResetInstancesTypeRequest) (respons
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
 //  UNSUPPORTEDOPERATION_DISKSNAPCREATETIMETOOOLD = "UnsupportedOperation.DiskSnapCreateTimeTooOld"
 //  UNSUPPORTEDOPERATION_HETEROGENEOUSCHANGEINSTANCEFAMILY = "UnsupportedOperation.HeterogeneousChangeInstanceFamily"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
@@ -5610,11 +6121,14 @@ func (c *Client) ResetInstancesType(request *ResetInstancesTypeRequest) (respons
 //  UNSUPPORTEDOPERATION_LOCALDATADISKCHANGEINSTANCEFAMILY = "UnsupportedOperation.LocalDataDiskChangeInstanceFamily"
 //  UNSUPPORTEDOPERATION_LOCALDISKMIGRATINGTOCLOUDDISK = "UnsupportedOperation.LocalDiskMigratingToCloudDisk"
 //  UNSUPPORTEDOPERATION_NOINSTANCETYPESUPPORTSPOT = "UnsupportedOperation.NoInstanceTypeSupportSpot"
+//  UNSUPPORTEDOPERATION_NOTSUPPORTUNPAIDORDER = "UnsupportedOperation.NotSupportUnpaidOrder"
 //  UNSUPPORTEDOPERATION_ORIGINALINSTANCETYPEINVALID = "UnsupportedOperation.OriginalInstanceTypeInvalid"
 //  UNSUPPORTEDOPERATION_REDHATINSTANCEUNSUPPORTED = "UnsupportedOperation.RedHatInstanceUnsupported"
 //  UNSUPPORTEDOPERATION_SPECIALINSTANCETYPE = "UnsupportedOperation.SpecialInstanceType"
 //  UNSUPPORTEDOPERATION_STOPPEDMODESTOPCHARGING = "UnsupportedOperation.StoppedModeStopCharging"
 //  UNSUPPORTEDOPERATION_STOPPEDMODESTOPCHARGINGSAMEFAMILY = "UnsupportedOperation.StoppedModeStopChargingSameFamily"
+//  UNSUPPORTEDOPERATION_SYSTEMDISKTYPE = "UnsupportedOperation.SystemDiskType"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDARMCHANGEINSTANCEFAMILY = "UnsupportedOperation.UnsupportedARMChangeInstanceFamily"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCEFAMILY = "UnsupportedOperation.UnsupportedChangeInstanceFamily"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCEFAMILYTOARM = "UnsupportedOperation.UnsupportedChangeInstanceFamilyToARM"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDCHANGEINSTANCETOTHISINSTANCEFAMILY = "UnsupportedOperation.UnsupportedChangeInstanceToThisInstanceFamily"
@@ -5665,6 +6179,7 @@ func NewResizeInstanceDisksResponse() (response *ResizeInstanceDisksResponse) {
 // * Currently, only one data disk can be expanded at a time.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLE = "FailedOperation.InvalidInstanceApplicationRole"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_TRADEUNKNOWNERROR = "InternalError.TradeUnknownError"
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -5674,18 +6189,23 @@ func NewResizeInstanceDisksResponse() (response *ResizeInstanceDisksResponse) {
 //  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
 //  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CDHONLYLOCALDATADISKRESIZE = "InvalidParameterValue.CdhOnlyLocalDataDiskResize"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_ATLEASTONE = "MissingParameter.AtLeastOne"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  UNSUPPORTEDOPERATION_INSTANCECHARGETYPE = "UnsupportedOperation.InstanceChargeType"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
 //  UNSUPPORTEDOPERATION_INSTANCESTATECORRUPTED = "UnsupportedOperation.InstanceStateCorrupted"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEPENDING = "UnsupportedOperation.InstanceStatePending"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEREBOOTING = "UnsupportedOperation.InstanceStateRebooting"
 //  UNSUPPORTEDOPERATION_INSTANCESTATERESCUEMODE = "UnsupportedOperation.InstanceStateRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATERUNNING = "UnsupportedOperation.InstanceStateRunning"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATESHUTDOWN = "UnsupportedOperation.InstanceStateShutdown"
 //  UNSUPPORTEDOPERATION_INSTANCESTATESTARTING = "UnsupportedOperation.InstanceStateStarting"
 //  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPED = "UnsupportedOperation.InstanceStateStopped"
@@ -5710,6 +6230,7 @@ func (c *Client) ResizeInstanceDisks(request *ResizeInstanceDisksRequest) (respo
 // * Currently, only one data disk can be expanded at a time.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLE = "FailedOperation.InvalidInstanceApplicationRole"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_TRADEUNKNOWNERROR = "InternalError.TradeUnknownError"
 //  INTERNALSERVERERROR = "InternalServerError"
@@ -5719,18 +6240,23 @@ func (c *Client) ResizeInstanceDisks(request *ResizeInstanceDisksRequest) (respo
 //  INVALIDINSTANCEID_MALFORMED = "InvalidInstanceId.Malformed"
 //  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_CDHONLYLOCALDATADISKRESIZE = "InvalidParameterValue.CdhOnlyLocalDataDiskResize"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MISSINGPARAMETER_ATLEASTONE = "MissingParameter.AtLeastOne"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  UNSUPPORTEDOPERATION_INSTANCECHARGETYPE = "UnsupportedOperation.InstanceChargeType"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
 //  UNSUPPORTEDOPERATION_INSTANCESTATECORRUPTED = "UnsupportedOperation.InstanceStateCorrupted"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEPENDING = "UnsupportedOperation.InstanceStatePending"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEREBOOTING = "UnsupportedOperation.InstanceStateRebooting"
 //  UNSUPPORTEDOPERATION_INSTANCESTATERESCUEMODE = "UnsupportedOperation.InstanceStateRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATERUNNING = "UnsupportedOperation.InstanceStateRunning"
+//  UNSUPPORTEDOPERATION_INSTANCESTATESERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATESHUTDOWN = "UnsupportedOperation.InstanceStateShutdown"
 //  UNSUPPORTEDOPERATION_INSTANCESTATESTARTING = "UnsupportedOperation.InstanceStateStarting"
 //  UNSUPPORTEDOPERATION_INSTANCESTATESTOPPED = "UnsupportedOperation.InstanceStateStopped"
@@ -6162,9 +6688,11 @@ func NewStartInstancesResponse() (response *StartInstancesResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATECORRUPTED = "UnsupportedOperation.InstanceStateCorrupted"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
@@ -6204,9 +6732,11 @@ func (c *Client) StartInstances(request *StartInstancesRequest) (response *Start
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATECORRUPTED = "UnsupportedOperation.InstanceStateCorrupted"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
@@ -6280,17 +6810,20 @@ func NewStopInstancesResponse() (response *StopInstancesResponse) {
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
 //  UNSUPPORTEDOPERATION_HIBERNATIONFORNORMALINSTANCE = "UnsupportedOperation.HibernationForNormalInstance"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
 //  UNSUPPORTEDOPERATION_INSTANCESTATECORRUPTED = "UnsupportedOperation.InstanceStateCorrupted"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEISOLATING = "UnsupportedOperation.InstanceStateIsolating"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEPENDING = "UnsupportedOperation.InstanceStatePending"
@@ -6330,17 +6863,20 @@ func (c *Client) StopInstances(request *StopInstancesRequest) (response *StopIns
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
 //  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_ZONENOTSUPPORTED = "InvalidParameterValue.ZoneNotSupported"
 //  MISSINGPARAMETER = "MissingParameter"
 //  MUTEXOPERATION_TASKRUNNING = "MutexOperation.TaskRunning"
 //  OPERATIONDENIED_INSTANCEOPERATIONINPROGRESS = "OperationDenied.InstanceOperationInProgress"
 //  UNAUTHORIZEDOPERATION_MFAEXPIRED = "UnauthorizedOperation.MFAExpired"
 //  UNAUTHORIZEDOPERATION_MFANOTFOUND = "UnauthorizedOperation.MFANotFound"
 //  UNSUPPORTEDOPERATION_HIBERNATIONFORNORMALINSTANCE = "UnsupportedOperation.HibernationForNormalInstance"
+//  UNSUPPORTEDOPERATION_INSTANCEREINSTALLFAILED = "UnsupportedOperation.InstanceReinstallFailed"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEBANNING = "UnsupportedOperation.InstanceStateBanning"
 //  UNSUPPORTEDOPERATION_INSTANCESTATECORRUPTED = "UnsupportedOperation.InstanceStateCorrupted"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERRESCUEMODE = "UnsupportedOperation.InstanceStateEnterRescueMode"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEENTERSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateEnterServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEEXITRESCUEMODE = "UnsupportedOperation.InstanceStateExitRescueMode"
+//  UNSUPPORTEDOPERATION_INSTANCESTATEEXITSERVICELIVEMIGRATE = "UnsupportedOperation.InstanceStateExitServiceLiveMigrate"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEFREEZING = "UnsupportedOperation.InstanceStateFreezing"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEISOLATING = "UnsupportedOperation.InstanceStateIsolating"
 //  UNSUPPORTEDOPERATION_INSTANCESTATEPENDING = "UnsupportedOperation.InstanceStatePending"
@@ -6390,15 +6926,15 @@ func NewSyncImagesResponse() (response *SyncImagesResponse) {
 }
 
 // SyncImages
-// This API is used to sync a custom image to other regions.
+// This API is used to synchronize custom images to other regions.
 //
 // 
 //
-// * Each API call syncs a single image.
+// * This API only supports synchronizing one image per call.
 //
-// * This API supports syncing an image to multiple regions.
+// * This API supports multiple synchronization regions.
 //
-// * Each account can have up to 10 custom images in each region. 
+// * A single account can have a maximum of 500 custom images in each region.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDIMAGESTATE = "FailedOperation.InvalidImageState"
@@ -6416,21 +6952,22 @@ func NewSyncImagesResponse() (response *SyncImagesResponse) {
 //  INVALIDREGION_NOTFOUND = "InvalidRegion.NotFound"
 //  INVALIDREGION_UNAVAILABLE = "InvalidRegion.Unavailable"
 //  UNSUPPORTEDOPERATION_ENCRYPTEDIMAGESNOTSUPPORTED = "UnsupportedOperation.EncryptedImagesNotSupported"
+//  UNSUPPORTEDOPERATION_LOCATIONIMAGENOTSUPPORTED = "UnsupportedOperation.LocationImageNotSupported"
 //  UNSUPPORTEDOPERATION_REGION = "UnsupportedOperation.Region"
 func (c *Client) SyncImages(request *SyncImagesRequest) (response *SyncImagesResponse, err error) {
     return c.SyncImagesWithContext(context.Background(), request)
 }
 
 // SyncImages
-// This API is used to sync a custom image to other regions.
+// This API is used to synchronize custom images to other regions.
 //
 // 
 //
-// * Each API call syncs a single image.
+// * This API only supports synchronizing one image per call.
 //
-// * This API supports syncing an image to multiple regions.
+// * This API supports multiple synchronization regions.
 //
-// * Each account can have up to 10 custom images in each region. 
+// * A single account can have a maximum of 500 custom images in each region.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDIMAGESTATE = "FailedOperation.InvalidImageState"
@@ -6448,6 +6985,7 @@ func (c *Client) SyncImages(request *SyncImagesRequest) (response *SyncImagesRes
 //  INVALIDREGION_NOTFOUND = "InvalidRegion.NotFound"
 //  INVALIDREGION_UNAVAILABLE = "InvalidRegion.Unavailable"
 //  UNSUPPORTEDOPERATION_ENCRYPTEDIMAGESNOTSUPPORTED = "UnsupportedOperation.EncryptedImagesNotSupported"
+//  UNSUPPORTEDOPERATION_LOCATIONIMAGENOTSUPPORTED = "UnsupportedOperation.LocationImageNotSupported"
 //  UNSUPPORTEDOPERATION_REGION = "UnsupportedOperation.Region"
 func (c *Client) SyncImagesWithContext(ctx context.Context, request *SyncImagesRequest) (response *SyncImagesResponse, err error) {
     if request == nil {
@@ -6498,6 +7036,7 @@ func NewTerminateInstancesResponse() (response *TerminateInstancesResponse) {
 // * Batch operations are supported. The allowed maximum number of instances in each request is 100.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLE = "FailedOperation.InvalidInstanceApplicationRole"
 //  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLEEMR = "FailedOperation.InvalidInstanceApplicationRoleEmr"
 //  FAILEDOPERATION_UNRETURNABLE = "FailedOperation.Unreturnable"
 //  INTERNALERROR_TRADEUNKNOWNERROR = "InternalError.TradeUnknownError"
@@ -6537,6 +7076,7 @@ func NewTerminateInstancesResponse() (response *TerminateInstancesResponse) {
 //  UNSUPPORTEDOPERATION_INSTANCESTATETERMINATED = "UnsupportedOperation.InstanceStateTerminated"
 //  UNSUPPORTEDOPERATION_INSTANCESTATETERMINATING = "UnsupportedOperation.InstanceStateTerminating"
 //  UNSUPPORTEDOPERATION_INSTANCESPROTECTED = "UnsupportedOperation.InstancesProtected"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESOWNER = "UnsupportedOperation.InvalidInstancesOwner"
 //  UNSUPPORTEDOPERATION_REDHATINSTANCETERMINATEUNSUPPORTED = "UnsupportedOperation.RedHatInstanceTerminateUnsupported"
 //  UNSUPPORTEDOPERATION_REDHATINSTANCEUNSUPPORTED = "UnsupportedOperation.RedHatInstanceUnsupported"
 //  UNSUPPORTEDOPERATION_REGION = "UnsupportedOperation.Region"
@@ -6560,6 +7100,7 @@ func (c *Client) TerminateInstances(request *TerminateInstancesRequest) (respons
 // * Batch operations are supported. The allowed maximum number of instances in each request is 100.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLE = "FailedOperation.InvalidInstanceApplicationRole"
 //  FAILEDOPERATION_INVALIDINSTANCEAPPLICATIONROLEEMR = "FailedOperation.InvalidInstanceApplicationRoleEmr"
 //  FAILEDOPERATION_UNRETURNABLE = "FailedOperation.Unreturnable"
 //  INTERNALERROR_TRADEUNKNOWNERROR = "InternalError.TradeUnknownError"
@@ -6599,6 +7140,7 @@ func (c *Client) TerminateInstances(request *TerminateInstancesRequest) (respons
 //  UNSUPPORTEDOPERATION_INSTANCESTATETERMINATED = "UnsupportedOperation.InstanceStateTerminated"
 //  UNSUPPORTEDOPERATION_INSTANCESTATETERMINATING = "UnsupportedOperation.InstanceStateTerminating"
 //  UNSUPPORTEDOPERATION_INSTANCESPROTECTED = "UnsupportedOperation.InstancesProtected"
+//  UNSUPPORTEDOPERATION_INVALIDINSTANCESOWNER = "UnsupportedOperation.InvalidInstancesOwner"
 //  UNSUPPORTEDOPERATION_REDHATINSTANCETERMINATEUNSUPPORTED = "UnsupportedOperation.RedHatInstanceTerminateUnsupported"
 //  UNSUPPORTEDOPERATION_REDHATINSTANCEUNSUPPORTED = "UnsupportedOperation.RedHatInstanceUnsupported"
 //  UNSUPPORTEDOPERATION_REGION = "UnsupportedOperation.Region"
