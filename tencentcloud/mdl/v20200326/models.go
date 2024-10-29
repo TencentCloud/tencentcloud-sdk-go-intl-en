@@ -2584,6 +2584,9 @@ type HlsRemuxSettingsInfo struct {
 
 	// Whether the Hls main m3u8 file contains resolution information, optional values: 1: INCLUDE includes video resolution; 2: EXCLUDE does not include video resolution. Default value: 1.
 	VideoResolution *uint64 `json:"VideoResolution,omitnil,omitempty" name:"VideoResolution"`
+
+	// Whether to include the `EXT-X-ENDLIST` tag, 1 includes  `EXT-X-ENDLIST` tag, 2 does not include  `EXT-X-ENDLIST` tag; the default value is 1.
+	EndListTag *int64 `json:"EndListTag,omitnil,omitempty" name:"EndListTag"`
 }
 
 type InputAnalysisInfo struct {

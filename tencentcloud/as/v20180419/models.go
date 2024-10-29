@@ -487,6 +487,10 @@ type ClearLaunchConfigurationAttributesRequestParams struct {
 	// Whether to clear placement group information. This parameter is optional. Default value: `false`.
 	// `True` means clearing placement group information. After that, no placement groups are specified for CVMs created based on the information.
 	ClearDisasterRecoverGroupIds *bool `json:"ClearDisasterRecoverGroupIds,omitnil,omitempty" name:"ClearDisasterRecoverGroupIds"`
+
+	// Whether to clear the instance tag list. This parameter is optional, and its default value is false.
+	// If true is filled in, it indicates that the instance tag list should be cleared. After the list is cleared, the CVMs created based on this will not be bound to the tags in the list.
+	ClearInstanceTags *bool `json:"ClearInstanceTags,omitnil,omitempty" name:"ClearInstanceTags"`
 }
 
 type ClearLaunchConfigurationAttributesRequest struct {
@@ -510,6 +514,10 @@ type ClearLaunchConfigurationAttributesRequest struct {
 	// Whether to clear placement group information. This parameter is optional. Default value: `false`.
 	// `True` means clearing placement group information. After that, no placement groups are specified for CVMs created based on the information.
 	ClearDisasterRecoverGroupIds *bool `json:"ClearDisasterRecoverGroupIds,omitnil,omitempty" name:"ClearDisasterRecoverGroupIds"`
+
+	// Whether to clear the instance tag list. This parameter is optional, and its default value is false.
+	// If true is filled in, it indicates that the instance tag list should be cleared. After the list is cleared, the CVMs created based on this will not be bound to the tags in the list.
+	ClearInstanceTags *bool `json:"ClearInstanceTags,omitnil,omitempty" name:"ClearInstanceTags"`
 }
 
 func (r *ClearLaunchConfigurationAttributesRequest) ToJsonString() string {
@@ -529,6 +537,7 @@ func (r *ClearLaunchConfigurationAttributesRequest) FromJsonString(s string) err
 	delete(f, "ClearHostNameSettings")
 	delete(f, "ClearInstanceNameSettings")
 	delete(f, "ClearDisasterRecoverGroupIds")
+	delete(f, "ClearInstanceTags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ClearLaunchConfigurationAttributesRequest has unknown keys!", "")
 	}
@@ -1049,12 +1058,12 @@ type CreateLaunchConfigurationRequestParams struct {
 	// CAM role name. This parameter can be obtained from the `roleName` field returned by DescribeRoleList API.
 	CamRoleName *string `json:"CamRoleName,omitnil,omitempty" name:"CamRoleName"`
 
-	// Instance type verification policy. Value range: ALL, ANY. Default value: ANY.
-	// <br><li> ALL: The verification will success only if all instance types (InstanceType) are available; otherwise, an error will be reported.
-	// <br><li> ANY: The verification will success if any instance type (InstanceType) is available; otherwise, an error will be reported.
+	// InstanceType verification policy, whose valid values include ALL and ANY, with the default value being ANY.
+	// <li>ALL: Verification passes if all InstanceTypes are available; otherwise, a verification error will be reported.</li>
+	// <li>ANY: Verification passes if any InstanceType is available; otherwise, a verification error will be reported.</li>
 	// 
-	// Common reasons why an instance type is unavailable include stock-out of the instance type or the corresponding cloud disk.
-	// If a model in InstanceTypes does not exist or has been discontinued, a verification error will be reported regardless of the value of InstanceTypesCheckPolicy.
+	// Common reasons for unavailable InstanceTypes include the InstanceType being sold out, and the corresponding cloud disk being sold out.
+	// If a model in InstanceTypes does not exist or has been abolished, a verification error will be reported regardless of the valid values set for InstanceTypesCheckPolicy.
 	InstanceTypesCheckPolicy *string `json:"InstanceTypesCheckPolicy,omitnil,omitempty" name:"InstanceTypesCheckPolicy"`
 
 	// List of tags. This parameter is used to bind up to 10 tags to newly added instances.
@@ -1073,9 +1082,9 @@ type CreateLaunchConfigurationRequestParams struct {
 	// Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
-	// Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
-	// <br><li>ORIGINAL: uses the configured cloud disk type
-	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
+	// Cloud disk type selection policy, whose default value is ORIGINAL. Valid values:
+	// <li>ORIGINAL: Use the set cloud disk type.</li>
+	// <li>AUTOMATIC: Automatically select the currently available cloud disk type.</li>
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitnil,omitempty" name:"DiskTypePolicy"`
 
 	// HPC ID<br>
@@ -1087,6 +1096,9 @@ type CreateLaunchConfigurationRequestParams struct {
 
 	// Placement group ID. Only one is allowed.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitnil,omitempty" name:"DisasterRecoverGroupIds"`
+
+	// Image family name. Either image ID or image family name should be filled in, and only one of which can be filled.
+	ImageFamily *string `json:"ImageFamily,omitnil,omitempty" name:"ImageFamily"`
 }
 
 type CreateLaunchConfigurationRequest struct {
@@ -1142,12 +1154,12 @@ type CreateLaunchConfigurationRequest struct {
 	// CAM role name. This parameter can be obtained from the `roleName` field returned by DescribeRoleList API.
 	CamRoleName *string `json:"CamRoleName,omitnil,omitempty" name:"CamRoleName"`
 
-	// Instance type verification policy. Value range: ALL, ANY. Default value: ANY.
-	// <br><li> ALL: The verification will success only if all instance types (InstanceType) are available; otherwise, an error will be reported.
-	// <br><li> ANY: The verification will success if any instance type (InstanceType) is available; otherwise, an error will be reported.
+	// InstanceType verification policy, whose valid values include ALL and ANY, with the default value being ANY.
+	// <li>ALL: Verification passes if all InstanceTypes are available; otherwise, a verification error will be reported.</li>
+	// <li>ANY: Verification passes if any InstanceType is available; otherwise, a verification error will be reported.</li>
 	// 
-	// Common reasons why an instance type is unavailable include stock-out of the instance type or the corresponding cloud disk.
-	// If a model in InstanceTypes does not exist or has been discontinued, a verification error will be reported regardless of the value of InstanceTypesCheckPolicy.
+	// Common reasons for unavailable InstanceTypes include the InstanceType being sold out, and the corresponding cloud disk being sold out.
+	// If a model in InstanceTypes does not exist or has been abolished, a verification error will be reported regardless of the valid values set for InstanceTypesCheckPolicy.
 	InstanceTypesCheckPolicy *string `json:"InstanceTypesCheckPolicy,omitnil,omitempty" name:"InstanceTypesCheckPolicy"`
 
 	// List of tags. This parameter is used to bind up to 10 tags to newly added instances.
@@ -1166,9 +1178,9 @@ type CreateLaunchConfigurationRequest struct {
 	// Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
-	// Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
-	// <br><li>ORIGINAL: uses the configured cloud disk type
-	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
+	// Cloud disk type selection policy, whose default value is ORIGINAL. Valid values:
+	// <li>ORIGINAL: Use the set cloud disk type.</li>
+	// <li>AUTOMATIC: Automatically select the currently available cloud disk type.</li>
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitnil,omitempty" name:"DiskTypePolicy"`
 
 	// HPC ID<br>
@@ -1180,6 +1192,9 @@ type CreateLaunchConfigurationRequest struct {
 
 	// Placement group ID. Only one is allowed.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitnil,omitempty" name:"DisasterRecoverGroupIds"`
+
+	// Image family name. Either image ID or image family name should be filled in, and only one of which can be filled.
+	ImageFamily *string `json:"ImageFamily,omitnil,omitempty" name:"ImageFamily"`
 }
 
 func (r *CreateLaunchConfigurationRequest) ToJsonString() string {
@@ -1219,6 +1234,7 @@ func (r *CreateLaunchConfigurationRequest) FromJsonString(s string) error {
 	delete(f, "HpcClusterId")
 	delete(f, "IPv6InternetAccessible")
 	delete(f, "DisasterRecoverGroupIds")
+	delete(f, "ImageFamily")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLaunchConfigurationRequest has unknown keys!", "")
 	}
@@ -1724,8 +1740,16 @@ func (r *CreateScheduledActionResponse) FromJsonString(s string) error {
 }
 
 type DataDisk struct {
-	// Data disk type. See [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/31636). Valid values:<br><li>`LOCAL_BASIC`: Local disk<br><li>`LOCAL_SSD`: Local SSD disk<br><li>`CLOUD_BASIC`: HDD cloud disk<br><li>`CLOUD_PREMIUM`: Premium cloud storage<br><li>`CLOUD_SSD`: SSD cloud disk<br><li>`CLOUD_HSSD`: Enhanced SSD<br><li>`CLOUD_TSSD`: Tremendous SSD<br><br>The default value should be the same as the `DiskType` field under `SystemDisk`.
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Data disk type. For restrictions on data disk type, see [Cloud Block Storage Types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1). Valid values:
+	// <li>LOCAL_BASIC: Local hard disk.</li>
+	// <li>LOCAL_SSD: Local SSD.</li>
+	// <li>CLOUD_BASIC: General cloud disk.</li>
+	// <li>CLOUD_PREMIUM: Premium cloud disk.</li>
+	// <li>CLOUD_SSD: Cloud SSD.</li>
+	// <li>CLOUD_HSSD: Enhanced SSD.</li>
+	// <li>CLOUD_TSSD: Ultra SSD.</li>
+	// The default value is consistent with the system disk type (SystemDisk.DiskType).
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
 	// Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. For more information on limits, see [CVM Instance Configuration](https://intl.cloud.tencent.com/document/product/213/2177?from_cn_redirect=1). The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
@@ -1736,18 +1760,28 @@ type DataDisk struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SnapshotId *string `json:"SnapshotId,omitnil,omitempty" name:"SnapshotId"`
 
-	// Specifies whether the data disk is terminated along with the termination of the associated CVM instance.  Values: <br><li>`TRUE` (only available for pay-as-you-go cloud disks that are billed by hour) and `FALSE`.
-	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	// Whether the data disk is terminated along with the instance. Valid values:
+	// <li>TRUE: When the instance is terminated, the data disk is also terminated. This option is only supported for hourly postpaid cloud disks.</li>
+	// <li>FALSE: When the instance is terminated, the data disk is retained.</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DeleteWithInstance *bool `json:"DeleteWithInstance,omitnil,omitempty" name:"DeleteWithInstance"`
 
-	// Data disk encryption. Valid values: <br><li>`TRUE`: Encrypted<br><li>`FALSE`: Not encrypted
-	// Note: This field may return `null`, indicating that no valid value can be obtained.
+	// Whether the data disk is encrypted. Valid values:
+	// <li>TRUE: Encrypted.</li>
+	// <li>FALSE: Not encrypted.</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Encrypt *bool `json:"Encrypt,omitnil,omitempty" name:"Encrypt"`
 
 	// Cloud disk performance (MB/s). This parameter is used to purchase extra performance for the cloud disk. For details on the feature and limits, see [Enhanced SSD Performance](https://intl.cloud.tencent.com/document/product/362/51896?from_cn_redirect=1#. E5.A2.9E.E5.BC.BA.E5.9E.8B-ssd-.E4.BA.91.E7.A1.AC.E7.9B.98.E9.A2.9D.E5.A4.96 .E6.80.A7.E8.83.BD).
 	// This feature is only available to enhanced SSD (`CLOUD_HSSD`) and tremendous SSD (`CLOUD_TSSD`) disks with a capacity greater than 460 GB.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ThroughputPerformance *uint64 `json:"ThroughputPerformance,omitnil,omitempty" name:"ThroughputPerformance"`
+
+	// Burst performance: Whether to enable burst performance. The default value is false.
+	// 
+	// Note: This feature is in beta test and requires a ticket to be submitted for usage.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BurstPerformance *bool `json:"BurstPerformance,omitnil,omitempty" name:"BurstPerformance"`
 }
 
 // Predefined struct for user
@@ -2545,15 +2579,15 @@ type DescribeLaunchConfigurationsRequestParams struct {
 	// Queries by one or more launch configuration IDs in the format of `asc-ouy1ax38`. The maximum quantity per request is 100. This parameter does not support specifying both `LaunchConfigurationIds` and `Filters` at the same time.
 	LaunchConfigurationIds []*string `json:"LaunchConfigurationIds,omitnil,omitempty" name:"LaunchConfigurationIds"`
 
-	// Filters
-	// <li> `launch-configuration-id` - String - Required: No - Filter by launch configuration ID.</li>
-	// <li> `launch-configuration-name` - String - Required: No - Filter by launch configuration name.</li>
-	// <li> `launch-configuration-name` - String - Required: No - Fuzzy search by launch configuration name.</li>
-	// <li> `tag-key` - String - Required: No - Filter by the tag key.</li>
-	// <li> `tag-value` - String - Required: No - Filter by the tag value.</li>
-	// <li>tag:tag-key - String - Optional - Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 3 for the detailed usage.</li>
-	// </li>
-	// The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `LaunchConfigurationIds` and `Filters` at the same time.
+	// Filter criteria
+	// 
+	// <li>launch-configuration-id - String - required: no - (filter condition) filter by launch configuration ID.</li>
+	// <li>launch-configuration-name - String - required: no - (filter condition) filter by launch configuration name.</li>
+	// <li>vague-launch-configuration-name - String - required: no - (filter condition) fuzzy search by launch configuration name.</li>
+	// <li>tag-key - String - required: no - (filter condition) filter by tag key.</li>
+	// <li>tag-value - String - required: no - (filter condition) filter by tag value.</li>
+	// <li>tag:tag-key - String - required: no - (filter condition) filter by Tag key-value pair. Replace tag-key with a specific tag key. See Example 3 for usage.</li>
+	// The maximum number of `Filters` per request is 10, and the maximum number of `Filter.Values` is 5. The parameter does not support specifying both `LaunchConfigurationIds` and `Filters`.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// The number of returned results. Default value: `20`. Maximum value: `100`. For more information on `Limit`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -2569,15 +2603,15 @@ type DescribeLaunchConfigurationsRequest struct {
 	// Queries by one or more launch configuration IDs in the format of `asc-ouy1ax38`. The maximum quantity per request is 100. This parameter does not support specifying both `LaunchConfigurationIds` and `Filters` at the same time.
 	LaunchConfigurationIds []*string `json:"LaunchConfigurationIds,omitnil,omitempty" name:"LaunchConfigurationIds"`
 
-	// Filters
-	// <li> `launch-configuration-id` - String - Required: No - Filter by launch configuration ID.</li>
-	// <li> `launch-configuration-name` - String - Required: No - Filter by launch configuration name.</li>
-	// <li> `launch-configuration-name` - String - Required: No - Fuzzy search by launch configuration name.</li>
-	// <li> `tag-key` - String - Required: No - Filter by the tag key.</li>
-	// <li> `tag-value` - String - Required: No - Filter by the tag value.</li>
-	// <li>tag:tag-key - String - Optional - Filter by tag key pair. Use a specific tag key to replace `tag-key`. See Example 3 for the detailed usage.</li>
-	// </li>
-	// The maximum number of `Filters` per request is 10. The upper limit for `Filter.Values` is 5. This parameter does not support specifying both `LaunchConfigurationIds` and `Filters` at the same time.
+	// Filter criteria
+	// 
+	// <li>launch-configuration-id - String - required: no - (filter condition) filter by launch configuration ID.</li>
+	// <li>launch-configuration-name - String - required: no - (filter condition) filter by launch configuration name.</li>
+	// <li>vague-launch-configuration-name - String - required: no - (filter condition) fuzzy search by launch configuration name.</li>
+	// <li>tag-key - String - required: no - (filter condition) filter by tag key.</li>
+	// <li>tag-value - String - required: no - (filter condition) filter by tag value.</li>
+	// <li>tag:tag-key - String - required: no - (filter condition) filter by Tag key-value pair. Replace tag-key with a specific tag key. See Example 3 for usage.</li>
+	// The maximum number of `Filters` per request is 10, and the maximum number of `Filter.Values` is 5. The parameter does not support specifying both `LaunchConfigurationIds` and `Filters`.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
 	// The number of returned results. Default value: `20`. Maximum value: `100`. For more information on `Limit`, see the relevant sections in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
@@ -3356,6 +3390,8 @@ type EnhancedService struct {
 	MonitorService *RunMonitorServiceEnabled `json:"MonitorService,omitnil,omitempty" name:"MonitorService"`
 
 	// Deprecated parameter.
+	//
+	// Deprecated: AutomationService is deprecated.
 	AutomationService []*RunAutomationServiceEnabled `json:"AutomationService,omitnil,omitempty" name:"AutomationService"`
 
 	// Enable TAT service. If this parameter is not specified, the default logic is the same as that of the CVM instance. Note: This field may return `null`, indicating that no valid values can be obtained.
@@ -3535,18 +3571,26 @@ type ForwardLoadBalancerIdentification struct {
 }
 
 type HostNameSettings struct {
-	// Hostname of a CVM
-	// <br><li>The `HostName` cannot start or end with a period (.) or hyphen (-), and cannot contain consecutive periods and hyphens.
-	// <br><li>This field is unavailable to CVM instances.
-	// <br><li>Other types of instances (such as Linux): the name contains 2 to 40 characters, and supports multiple periods (.). The string between two periods can consist of letters (case insensitive), numbers, and hyphens (-), and cannot be all numbers.
-	// Note: this field may return `null`, indicating that no valid value is obtained.
+	// CVM HostName.
+	// <li>Dots (.) and hyphens (-) cannot be used as the first or last character of HostName, and cannot be used consecutively.</li>
+	// <li>Windows instances are not supported.</li>
+	// <li>Instances of other types (e.g., Linux): The length of the character should be within the range of [2, 40]. Multiple dots (.) are allowed. Each segment between dot marks can consist of letters (case-insensitive), digits, and hyphens (-). Using only digits is not allowed.</li>
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	HostName *string `json:"HostName,omitnil,omitempty" name:"HostName"`
 
-	// Type of CVM host name. Valid values: "ORIGINAL" and "UNIQUE". Default value: "ORIGINAL"
-	// <br><li> ORIGINAL. Auto Scaling transfers the HostName set in input parameters to the CVM directly. CVM may adds serial numbers for the HostName. The HostName of instances within the auto scaling group may conflict.
-	// <br><li> UNIQUE. The HostName set in input parameters is the prefix of a host name. Auto Scaling and CVM expand it. The HostName of an instance in the auto scaling group is unique.
+	// The style of the CVM HostName. Valid values include ORIGINAL and UNIQUE, and the default value is ORIGINAL.
+	// <li>ORIGINAL: AS passes HostName filled in the input parameters to CVM. CVM may append serial numbers to HostName, which can result in conflicts with HostName of instances in the scaling group.</li>
+	// <li> UNIQUE: HostName filled in the input parameters acts as a prefix for the HostName. AS and CVM will expand this prefix to ensure that HostName of the instance in the scaling group is unique.</li>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HostNameStyle *string `json:"HostNameStyle,omitnil,omitempty" name:"HostNameStyle"`
+
+	// HostName suffix for CVM.
+	// <li>Dots (.) and hyphens (-) cannot be used as the first or last character of HostNameSuffix, and cannot be used consecutively.</li>
+	// <li>Windows instances are not supported.</li>
+	// <li>Instances of other types (e.g., Linux): The length of the character should be within the range of [1, 37], and the combined length with HostName should not exceed 39. Multiple dots (.) are allowed. Each segment between dots can consist of letters (case-insensitive), digits, and hyphens (-).</li>
+	// Assume the suffix name is suffix and the original HostName is test.0, then the final HostName is test.0.suffix.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HostNameSuffix *string `json:"HostNameSuffix,omitnil,omitempty" name:"HostNameSuffix"`
 }
 
 type IPv6InternetAccessible struct {
@@ -3673,6 +3717,12 @@ type InstanceNameSettings struct {
 	// 
 	// `UNIQUE`: the input parameter `InstanceName` is the prefix of an instance name. Auto Scaling and CVM expand it. The `InstanceName` of an instance in the scaling group is unique.
 	InstanceNameStyle *string `json:"InstanceNameStyle,omitnil,omitempty" name:"InstanceNameStyle"`
+
+	// CVM instance name suffix. The length of the character is within the range of [1, 105], and the combined length with InstanceName should not exceed 107.
+	// 
+	// Assume the suffix name is suffix and the original instance name is test.0, then the final instance name is test.0.suffix.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceNameSuffix *string `json:"InstanceNameSuffix,omitnil,omitempty" name:"InstanceNameSuffix"`
 }
 
 type InstanceTag struct {
@@ -3824,6 +3874,10 @@ type LaunchConfiguration struct {
 
 	// Placement group ID, supporting specification of only one.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitnil,omitempty" name:"DisasterRecoverGroupIds"`
+
+	// Image family name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ImageFamily *string `json:"ImageFamily,omitnil,omitempty" name:"ImageFamily"`
 }
 
 type LifecycleActionResultInfo struct {
@@ -3980,9 +4034,9 @@ type ModifyAutoScalingGroupRequestParams struct {
 	// List of subnet IDs
 	SubnetIds []*string `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
-	// Termination policy. Currently, the maximum length is 1. Value range: OLDEST_INSTANCE, NEWEST_INSTANCE.
-	// <br><li> OLDEST_INSTANCE: The oldest instance in the auto scaling group will be terminated first.
-	// <br><li> NEWEST_INSTANCE: The newest instance in the auto scaling group will be terminated first.
+	// Termination policy, whose maximum length is currently 1. Valid values include OLDEST_INSTANCE and NEWEST_INSTANCE.
+	// <li>OLDEST_INSTANCE: Terminate the oldest instance in the scaling group first.</li>
+	// <li>NEWEST_INSTANCE: Terminate the newest instance in the scaling group first.</li>
 	TerminationPolicies []*string `json:"TerminationPolicies,omitnil,omitempty" name:"TerminationPolicies"`
 
 	// VPC ID. This field is left empty for basic networks. You need to specify SubnetIds when modifying the network of the auto scaling group to a VPC with a specified VPC ID. Specify Zones when modifying the network to a basic network.
@@ -3991,20 +4045,18 @@ type ModifyAutoScalingGroupRequestParams struct {
 	// List of availability zones
 	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
-	// Retry policy. Valid values: `IMMEDIATE_RETRY` (default), `INCREMENTAL_INTERVALS`, `NO_RETRY`. A partially successful scaling is judged as a failed one.
-	// <br><li>
-	// `IMMEDIATE_RETRY`: Retrying immediately in a short period of time and stopping after five consecutive failures.
-	// <br><li>
-	// `INCREMENTAL_INTERVALS`: Retrying at incremental intervals. As the number of consecutive failures increases, the retry interval gradually increases, ranging from seconds to one day.
-	// <br><li>`NO_RETRY`: Do not retry. Actions are taken when the next call or alarm message comes.
+	// Retry policy, whose valid values include IMMEDIATE_RETRY, INCREMENTAL_INTERVALS, and NO_RETRY, with the default value being IMMEDIATE_RETRY. A partially successful scaling activity is considered a failed activity.
+	// <li>IMMEDIATE_RETRY: Immediately retry, and quickly retry in a short period. There will be no retry anymore after a certain number of consecutive failures (5).</li>
+	// <li>INCREMENTAL_INTERVALS: Retry with incremental intervals. As the number of consecutive failures increases, the retry intervals gradually become longer, ranging from seconds to one day.</li>
+	// <li>NO_RETRY: There will be no retry until another user call or alarm information is received.</li>
 	RetryPolicy *string `json:"RetryPolicy,omitnil,omitempty" name:"RetryPolicy"`
 
-	// Availability zone verification policy. Value range: ALL, ANY. Default value: ANY. This will work when the resource-related fields (launch configuration, availability zone, or subnet) of the auto scaling group are actually modified.
-	// <br><li> ALL: The verification will succeed only if all availability zones (Zone) or subnets (SubnetId) are available; otherwise, an error will be reported.
-	// <br><li> ANY: The verification will success if any availability zone (Zone) or subnet (SubnetId) is available; otherwise, an error will be reported.
+	// AZ verification policy, whose valid values include ALL and ANY, with the default value being ANY. This policy comes into effect when actual changes are made to resource-related fields in the scaling group (such as launch configuration, AZ, or subnet).
+	// <li>ALL: Verification passes if all AZs or subnets are available; otherwise, a verification error will be reported.<li>
+	// <li>ANY: Verification passes if any AZ or subnet is available; otherwise, a verification error will be reported.</li>
 	// 
-	// Common reasons why an availability zone or subnet is unavailable include stock-out of CVM instances or CBS cloud disks in the availability zone, insufficient quota in the availability zone, or insufficient IPs in the subnet.
-	// If an availability zone or subnet in Zones/SubnetIds does not exist, a verification error will be reported regardless of the value of ZonesCheckPolicy.
+	// Common reasons for unavailable AZs or subnets include the CVM InstanceType in the AZ being sold out, the CBS cloud disk in the AZ being sold out, insufficient quota in the AZ, and insufficient IP addresses in the subnet.
+	// If there is no AZ or subnet in Zones/SubnetIds, a verification error will be reported regardless of the values of ZonesCheckPolicy.
 	ZonesCheckPolicy *string `json:"ZonesCheckPolicy,omitnil,omitempty" name:"ZonesCheckPolicy"`
 
 	// Service settings such as unhealthy instance replacement.
@@ -4013,34 +4065,36 @@ type ModifyAutoScalingGroupRequestParams struct {
 	// The number of IPv6 addresses that an instance has. Valid values: 0 and 1.
 	Ipv6AddressCount *int64 `json:"Ipv6AddressCount,omitnil,omitempty" name:"Ipv6AddressCount"`
 
-	// Multi-availability zone/subnet policy. Valid values: `PRIORITY` and `EQUALITY`. Default value: `PRIORITY`.
-	// <br><li>`PRIORITY`: When an instance is being created, the availability zone/subnet is chosen from top to bottom in the list. The first availability zone/subnet is always used as long as instances can be created.
-	// <br><li>`EQUALITY`: Instances created for scaling out are distributed to multiple availability zones/subnets, so as to keep the number of instances in different availability zone/subnet in balance.
+	// Multi-AZ/multi-subnet policy, whose valid values include PRIORITY and EQUALITY, with the default value being PRIORITY.
+	// <li>PRIORITY: Instances are attempted to be created taking the order of the AZ/subnet list as the priority. If the highest-priority AZ/subnet can create instances successfully, instances can always be created in that AZ/subnet.</li>
+	// <li>EQUALITY: The instances added through scale-out will be distributed across multiple AZs/subnets to ensure a relatively balanced number of instances in each AZ/subnet after scaling out.</li>
 	// 
-	// Notes:
-	// <br><li> When the scaling group is based on the classic network, this policy applies to multiple availability zones. When the scaling group is based on a VPC, this policy applies to multiple subnets, and you do not need to consider availability zones. For example, if you have four subnets (A, B, C, and D) and A, B, and C are in availability zone 1 and D is in availability zone 2, you only need to decide the order of the four subnets, without worrying about the issue of availability zones.
-	// <br><li> This policy is applicable to multiple availability zones/subnets, but is not applicable to multiple models with launch configurations. Specify the models according to the model priority.
-	// <br><li> When `PRIORITY` policy is used, the multi-model policy prevails the multi-availability zones/subnet policy. For example, if you have Model A/B, and Subnet 1/2/3, the model-subnet combinations are tried in the following order: A1 -> A2 -> A3 -> B1 -> B2 -> B3. If A1 is sold out, A2 (not B1) is tried next.
+	// Points to consider regarding this policy:
+	// <li>When the scaling group is based on a classic network, this policy applies to the multi-AZ; when the scaling group is based on a VPC network, this policy applies to the multi-subnet, in this case, the AZs are no longer considered. For example, if there are four subnets labeled A, B, C, and D, where A, B, and C are in AZ 1 and D is in AZ 2, the subnets A, B, C, and D are considered for sorting without regard to AZs 1 and 2.</li>
+	// <li>This policy applies to the multi-AZ/multi-subnet and not to the InstanceTypes parameter of the launch configuration, which is selected according to the priority policy.</li>
+	// <li>When instances are created according to the PRIORITY policy, ensure the policy for multiple models first, followed by the policy for the multi-AZ/subnet. For example, with models A and B and subnets 1, 2, and 3, attempts will be made in the order of A1, A2, A3, B1, B2, and B3. If A1 is sold out, A2 will be attempted (instead of B1).</li>
 	MultiZoneSubnetPolicy *string `json:"MultiZoneSubnetPolicy,omitnil,omitempty" name:"MultiZoneSubnetPolicy"`
 
-	// Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).
+	// Scaling group instance health check type, whose valid values include:
+	// <li>CVM: Determines whether an instance is unhealthy based on its network status. An unhealthy network status is indicated by an event where instances become unreachable via PING. Detailed criteria of judgment can be found in [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1).</li>
+	// <li>CLB: Determines whether an instance is unhealthy based on the health check status of CLB. For principles behind CLB health checks, see [Health Check](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).</li>
 	HealthCheckType *string `json:"HealthCheckType,omitnil,omitempty" name:"HealthCheckType"`
 
 	// Grace period of the CLB health check
 	LoadBalancerHealthCheckGracePeriod *uint64 `json:"LoadBalancerHealthCheckGracePeriod,omitnil,omitempty" name:"LoadBalancerHealthCheckGracePeriod"`
 
-	// Specifies how to assign instances. Valid values: `LAUNCH_CONFIGURATION` and `SPOT_MIXED`.
-	// <br><li>`LAUNCH_CONFIGURATION`: the launch configuration mode.
-	// <br><li>`SPOT_MIXED`: a mixed instance mode. Currently, this mode is supported only when the launch configuration takes the pay-as-you-go billing mode. With this mode, the scaling group can provision a combination of pay-as-you-go instances and spot instances to meet the configured capacity. Note that the billing mode of the associated launch configuration cannot be modified when this mode is used.
+	// Instance assignment policy, whose valid values include LAUNCH_CONFIGURATION and SPOT_MIXED.
+	// <li>LAUNCH_CONFIGURATION: Represent the traditional mode of assigning instances according to the launch configuration.</li>
+	// <li>SPOT_MIXED: Represent the spot mixed mode. Currently, this mode is supported only when the launch configuration is set to the pay-as-you-go billing mode. In the mixed mode, the scaling group will scale out pay-as-you-go models or spot models based on the predefined settings. When the mixed mode is used, the billing type of the associated launch configuration cannot be modified.</li>
 	InstanceAllocationPolicy *string `json:"InstanceAllocationPolicy,omitnil,omitempty" name:"InstanceAllocationPolicy"`
 
 	// Specifies how to assign pay-as-you-go instances and spot instances.
 	// This parameter is valid only when `InstanceAllocationPolicy` is set to `SPOT_MIXED`.
 	SpotMixedAllocationPolicy *SpotMixedAllocationPolicy `json:"SpotMixedAllocationPolicy,omitnil,omitempty" name:"SpotMixedAllocationPolicy"`
 
-	// Indicates whether the capacity rebalancing feature is enabled. This parameter is only valid for spot instances in the scaling group. Valid values:
-	// <br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
-	// <br><li>`FALSE`: no. In this case, AS will add instances to meet the desired capacity only after the spot instances are terminated.
+	// Capacity rebalancing feature, which is applicable only to spot instances within the scaling group. Valid values:
+	// <li>TRUE: Enable this feature. When spot instances in the scaling group are about to be automatically recycled by the spot instance service, AS proactively initiates the termination process of the spot instances. If there is a configured scale-in hook, it will be triggered before termination. After the termination process starts, AS asynchronously initiates the scale-out to reach the expected number of instances.</li>
+	// <li>FALSE: Disable this feature. AS waits for the spot instance to be terminated before scaling out to reach the number of instances expected by the scaling group.</li>
 	CapacityRebalance *bool `json:"CapacityRebalance,omitnil,omitempty" name:"CapacityRebalance"`
 
 	// Instance name sequencing settings. When enabled, an incremental numeric sequence will be appended to the names of instances automatically created within the scaling group.
@@ -4077,9 +4131,9 @@ type ModifyAutoScalingGroupRequest struct {
 	// List of subnet IDs
 	SubnetIds []*string `json:"SubnetIds,omitnil,omitempty" name:"SubnetIds"`
 
-	// Termination policy. Currently, the maximum length is 1. Value range: OLDEST_INSTANCE, NEWEST_INSTANCE.
-	// <br><li> OLDEST_INSTANCE: The oldest instance in the auto scaling group will be terminated first.
-	// <br><li> NEWEST_INSTANCE: The newest instance in the auto scaling group will be terminated first.
+	// Termination policy, whose maximum length is currently 1. Valid values include OLDEST_INSTANCE and NEWEST_INSTANCE.
+	// <li>OLDEST_INSTANCE: Terminate the oldest instance in the scaling group first.</li>
+	// <li>NEWEST_INSTANCE: Terminate the newest instance in the scaling group first.</li>
 	TerminationPolicies []*string `json:"TerminationPolicies,omitnil,omitempty" name:"TerminationPolicies"`
 
 	// VPC ID. This field is left empty for basic networks. You need to specify SubnetIds when modifying the network of the auto scaling group to a VPC with a specified VPC ID. Specify Zones when modifying the network to a basic network.
@@ -4088,20 +4142,18 @@ type ModifyAutoScalingGroupRequest struct {
 	// List of availability zones
 	Zones []*string `json:"Zones,omitnil,omitempty" name:"Zones"`
 
-	// Retry policy. Valid values: `IMMEDIATE_RETRY` (default), `INCREMENTAL_INTERVALS`, `NO_RETRY`. A partially successful scaling is judged as a failed one.
-	// <br><li>
-	// `IMMEDIATE_RETRY`: Retrying immediately in a short period of time and stopping after five consecutive failures.
-	// <br><li>
-	// `INCREMENTAL_INTERVALS`: Retrying at incremental intervals. As the number of consecutive failures increases, the retry interval gradually increases, ranging from seconds to one day.
-	// <br><li>`NO_RETRY`: Do not retry. Actions are taken when the next call or alarm message comes.
+	// Retry policy, whose valid values include IMMEDIATE_RETRY, INCREMENTAL_INTERVALS, and NO_RETRY, with the default value being IMMEDIATE_RETRY. A partially successful scaling activity is considered a failed activity.
+	// <li>IMMEDIATE_RETRY: Immediately retry, and quickly retry in a short period. There will be no retry anymore after a certain number of consecutive failures (5).</li>
+	// <li>INCREMENTAL_INTERVALS: Retry with incremental intervals. As the number of consecutive failures increases, the retry intervals gradually become longer, ranging from seconds to one day.</li>
+	// <li>NO_RETRY: There will be no retry until another user call or alarm information is received.</li>
 	RetryPolicy *string `json:"RetryPolicy,omitnil,omitempty" name:"RetryPolicy"`
 
-	// Availability zone verification policy. Value range: ALL, ANY. Default value: ANY. This will work when the resource-related fields (launch configuration, availability zone, or subnet) of the auto scaling group are actually modified.
-	// <br><li> ALL: The verification will succeed only if all availability zones (Zone) or subnets (SubnetId) are available; otherwise, an error will be reported.
-	// <br><li> ANY: The verification will success if any availability zone (Zone) or subnet (SubnetId) is available; otherwise, an error will be reported.
+	// AZ verification policy, whose valid values include ALL and ANY, with the default value being ANY. This policy comes into effect when actual changes are made to resource-related fields in the scaling group (such as launch configuration, AZ, or subnet).
+	// <li>ALL: Verification passes if all AZs or subnets are available; otherwise, a verification error will be reported.<li>
+	// <li>ANY: Verification passes if any AZ or subnet is available; otherwise, a verification error will be reported.</li>
 	// 
-	// Common reasons why an availability zone or subnet is unavailable include stock-out of CVM instances or CBS cloud disks in the availability zone, insufficient quota in the availability zone, or insufficient IPs in the subnet.
-	// If an availability zone or subnet in Zones/SubnetIds does not exist, a verification error will be reported regardless of the value of ZonesCheckPolicy.
+	// Common reasons for unavailable AZs or subnets include the CVM InstanceType in the AZ being sold out, the CBS cloud disk in the AZ being sold out, insufficient quota in the AZ, and insufficient IP addresses in the subnet.
+	// If there is no AZ or subnet in Zones/SubnetIds, a verification error will be reported regardless of the values of ZonesCheckPolicy.
 	ZonesCheckPolicy *string `json:"ZonesCheckPolicy,omitnil,omitempty" name:"ZonesCheckPolicy"`
 
 	// Service settings such as unhealthy instance replacement.
@@ -4110,34 +4162,36 @@ type ModifyAutoScalingGroupRequest struct {
 	// The number of IPv6 addresses that an instance has. Valid values: 0 and 1.
 	Ipv6AddressCount *int64 `json:"Ipv6AddressCount,omitnil,omitempty" name:"Ipv6AddressCount"`
 
-	// Multi-availability zone/subnet policy. Valid values: `PRIORITY` and `EQUALITY`. Default value: `PRIORITY`.
-	// <br><li>`PRIORITY`: When an instance is being created, the availability zone/subnet is chosen from top to bottom in the list. The first availability zone/subnet is always used as long as instances can be created.
-	// <br><li>`EQUALITY`: Instances created for scaling out are distributed to multiple availability zones/subnets, so as to keep the number of instances in different availability zone/subnet in balance.
+	// Multi-AZ/multi-subnet policy, whose valid values include PRIORITY and EQUALITY, with the default value being PRIORITY.
+	// <li>PRIORITY: Instances are attempted to be created taking the order of the AZ/subnet list as the priority. If the highest-priority AZ/subnet can create instances successfully, instances can always be created in that AZ/subnet.</li>
+	// <li>EQUALITY: The instances added through scale-out will be distributed across multiple AZs/subnets to ensure a relatively balanced number of instances in each AZ/subnet after scaling out.</li>
 	// 
-	// Notes:
-	// <br><li> When the scaling group is based on the classic network, this policy applies to multiple availability zones. When the scaling group is based on a VPC, this policy applies to multiple subnets, and you do not need to consider availability zones. For example, if you have four subnets (A, B, C, and D) and A, B, and C are in availability zone 1 and D is in availability zone 2, you only need to decide the order of the four subnets, without worrying about the issue of availability zones.
-	// <br><li> This policy is applicable to multiple availability zones/subnets, but is not applicable to multiple models with launch configurations. Specify the models according to the model priority.
-	// <br><li> When `PRIORITY` policy is used, the multi-model policy prevails the multi-availability zones/subnet policy. For example, if you have Model A/B, and Subnet 1/2/3, the model-subnet combinations are tried in the following order: A1 -> A2 -> A3 -> B1 -> B2 -> B3. If A1 is sold out, A2 (not B1) is tried next.
+	// Points to consider regarding this policy:
+	// <li>When the scaling group is based on a classic network, this policy applies to the multi-AZ; when the scaling group is based on a VPC network, this policy applies to the multi-subnet, in this case, the AZs are no longer considered. For example, if there are four subnets labeled A, B, C, and D, where A, B, and C are in AZ 1 and D is in AZ 2, the subnets A, B, C, and D are considered for sorting without regard to AZs 1 and 2.</li>
+	// <li>This policy applies to the multi-AZ/multi-subnet and not to the InstanceTypes parameter of the launch configuration, which is selected according to the priority policy.</li>
+	// <li>When instances are created according to the PRIORITY policy, ensure the policy for multiple models first, followed by the policy for the multi-AZ/subnet. For example, with models A and B and subnets 1, 2, and 3, attempts will be made in the order of A1, A2, A3, B1, B2, and B3. If A1 is sold out, A2 will be attempted (instead of B1).</li>
 	MultiZoneSubnetPolicy *string `json:"MultiZoneSubnetPolicy,omitnil,omitempty" name:"MultiZoneSubnetPolicy"`
 
-	// Health check type of instances in a scaling group.<br><li>CVM: confirm whether an instance is healthy based on the network status. If the pinged instance is unreachable, the instance will be considered unhealthy. For more information, see [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1)<br><li>CLB: confirm whether an instance is healthy based on the CLB health check status. For more information, see [Health Check Overview](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).
+	// Scaling group instance health check type, whose valid values include:
+	// <li>CVM: Determines whether an instance is unhealthy based on its network status. An unhealthy network status is indicated by an event where instances become unreachable via PING. Detailed criteria of judgment can be found in [Instance Health Check](https://intl.cloud.tencent.com/document/product/377/8553?from_cn_redirect=1).</li>
+	// <li>CLB: Determines whether an instance is unhealthy based on the health check status of CLB. For principles behind CLB health checks, see [Health Check](https://intl.cloud.tencent.com/document/product/214/6097?from_cn_redirect=1).</li>
 	HealthCheckType *string `json:"HealthCheckType,omitnil,omitempty" name:"HealthCheckType"`
 
 	// Grace period of the CLB health check
 	LoadBalancerHealthCheckGracePeriod *uint64 `json:"LoadBalancerHealthCheckGracePeriod,omitnil,omitempty" name:"LoadBalancerHealthCheckGracePeriod"`
 
-	// Specifies how to assign instances. Valid values: `LAUNCH_CONFIGURATION` and `SPOT_MIXED`.
-	// <br><li>`LAUNCH_CONFIGURATION`: the launch configuration mode.
-	// <br><li>`SPOT_MIXED`: a mixed instance mode. Currently, this mode is supported only when the launch configuration takes the pay-as-you-go billing mode. With this mode, the scaling group can provision a combination of pay-as-you-go instances and spot instances to meet the configured capacity. Note that the billing mode of the associated launch configuration cannot be modified when this mode is used.
+	// Instance assignment policy, whose valid values include LAUNCH_CONFIGURATION and SPOT_MIXED.
+	// <li>LAUNCH_CONFIGURATION: Represent the traditional mode of assigning instances according to the launch configuration.</li>
+	// <li>SPOT_MIXED: Represent the spot mixed mode. Currently, this mode is supported only when the launch configuration is set to the pay-as-you-go billing mode. In the mixed mode, the scaling group will scale out pay-as-you-go models or spot models based on the predefined settings. When the mixed mode is used, the billing type of the associated launch configuration cannot be modified.</li>
 	InstanceAllocationPolicy *string `json:"InstanceAllocationPolicy,omitnil,omitempty" name:"InstanceAllocationPolicy"`
 
 	// Specifies how to assign pay-as-you-go instances and spot instances.
 	// This parameter is valid only when `InstanceAllocationPolicy` is set to `SPOT_MIXED`.
 	SpotMixedAllocationPolicy *SpotMixedAllocationPolicy `json:"SpotMixedAllocationPolicy,omitnil,omitempty" name:"SpotMixedAllocationPolicy"`
 
-	// Indicates whether the capacity rebalancing feature is enabled. This parameter is only valid for spot instances in the scaling group. Valid values:
-	// <br><li>`TRUE`: yes. Before the spot instances in the scaling group are about to be automatically repossessed, AS will terminate them. The scale-in hook (if configured) will take effect before the termination. After the termination process starts, AS will asynchronously initiate a scaling activity to meet the desired capacity.
-	// <br><li>`FALSE`: no. In this case, AS will add instances to meet the desired capacity only after the spot instances are terminated.
+	// Capacity rebalancing feature, which is applicable only to spot instances within the scaling group. Valid values:
+	// <li>TRUE: Enable this feature. When spot instances in the scaling group are about to be automatically recycled by the spot instance service, AS proactively initiates the termination process of the spot instances. If there is a configured scale-in hook, it will be triggered before termination. After the termination process starts, AS asynchronously initiates the scale-out to reach the expected number of instances.</li>
+	// <li>FALSE: Disable this feature. AS waits for the spot instance to be terminated before scaling out to reach the number of instances expected by the scaling group.</li>
 	CapacityRebalance *bool `json:"CapacityRebalance,omitnil,omitempty" name:"CapacityRebalance"`
 
 	// Instance name sequencing settings. When enabled, an incremental numeric sequence will be appended to the names of instances automatically created within the scaling group.
@@ -4294,12 +4348,11 @@ type ModifyLaunchConfigurationAttributesRequestParams struct {
 	// The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. Specifying the `InstanceTypes` field will invalidate the original `InstanceType`.
 	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
 
-	// Instance type verification policy which works when InstanceTypes is actually modified. Value range: ALL, ANY. Default value: ANY.
-	// <br><li> ALL: The verification will success only if all instance types (InstanceType) are available; otherwise, an error will be reported.
-	// <br><li> ANY: The verification will success if any instance type (InstanceType) is available; otherwise, an error will be reported.
-	// 
-	// Common reasons why an instance type is unavailable include stock-out of the instance type or the corresponding cloud disk.
-	// If a model in InstanceTypes does not exist or has been discontinued, a verification error will be reported regardless of the value of InstanceTypesCheckPolicy.
+	// InstanceType verification policy, which is effective when actual modification is made to InstanceTypes. Valid values include ALL and ANY and the default value is ANY.
+	// <li>ALL: Verification passes if all InstanceTypes are available; otherwise, a verification error will be reported.</li>
+	// <li>ANY: Verification passes if any InstanceType is available; otherwise, a verification error will be reported.</li>
+	// Common reasons for unavailable InstanceTypes include the InstanceType being sold out, and the corresponding cloud disk being sold out.
+	// If a model in InstanceTypes does not exist or has been abolished, a verification error will be reported regardless of the valid values set for InstanceTypesCheckPolicy.
 	InstanceTypesCheckPolicy *string `json:"InstanceTypesCheckPolicy,omitnil,omitempty" name:"InstanceTypesCheckPolicy"`
 
 	// Display name of the launch configuration, which can contain Chinese characters, letters, numbers, underscores, separators ("-"), and decimal points with a maximum length of 60 bytes.
@@ -4333,9 +4386,9 @@ type ModifyLaunchConfigurationAttributesRequestParams struct {
 	// This field can be modified only when the current billing mode is spot instance.
 	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitnil,omitempty" name:"InstanceMarketOptions"`
 
-	// Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
-	// <br><li>ORIGINAL: uses the configured cloud disk type
-	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
+	// Cloud disk type selection policy. Valid values:
+	// <li>ORIGINAL: Use the set cloud disk type.</li>
+	// <li>AUTOMATIC: Automatically select the currently available cloud disk type.</li>
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitnil,omitempty" name:"DiskTypePolicy"`
 
 	// Instance system disk configurations
@@ -4374,6 +4427,13 @@ type ModifyLaunchConfigurationAttributesRequestParams struct {
 
 	// Instance login settings, which include passwords, keys, or the original login settings inherited from the image. <br>Please note that specifying new login settings will overwrite the existing ones. For instance, if you previously used a password for login and then use this parameter to switch the login settings to a key, the original password will be removed.
 	LoginSettings *LoginSettings `json:"LoginSettings,omitnil,omitempty" name:"LoginSettings"`
+
+	// Instance tag list. By specifying this parameter, the instances added through scale-out can be bound to the tag. Up to 10 Tags can be specified.
+	// This parameter will overwrite the original instance tag list. To add new tags, you need to pass the new tags along with the original tags.
+	InstanceTags []*InstanceTag `json:"InstanceTags,omitnil,omitempty" name:"InstanceTags"`
+
+	// Image family name.
+	ImageFamily *string `json:"ImageFamily,omitnil,omitempty" name:"ImageFamily"`
 }
 
 type ModifyLaunchConfigurationAttributesRequest struct {
@@ -4389,12 +4449,11 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	// The launch configuration uses `InstanceType` to indicate one single instance type and `InstanceTypes` to indicate multiple instance types. Specifying the `InstanceTypes` field will invalidate the original `InstanceType`.
 	InstanceTypes []*string `json:"InstanceTypes,omitnil,omitempty" name:"InstanceTypes"`
 
-	// Instance type verification policy which works when InstanceTypes is actually modified. Value range: ALL, ANY. Default value: ANY.
-	// <br><li> ALL: The verification will success only if all instance types (InstanceType) are available; otherwise, an error will be reported.
-	// <br><li> ANY: The verification will success if any instance type (InstanceType) is available; otherwise, an error will be reported.
-	// 
-	// Common reasons why an instance type is unavailable include stock-out of the instance type or the corresponding cloud disk.
-	// If a model in InstanceTypes does not exist or has been discontinued, a verification error will be reported regardless of the value of InstanceTypesCheckPolicy.
+	// InstanceType verification policy, which is effective when actual modification is made to InstanceTypes. Valid values include ALL and ANY and the default value is ANY.
+	// <li>ALL: Verification passes if all InstanceTypes are available; otherwise, a verification error will be reported.</li>
+	// <li>ANY: Verification passes if any InstanceType is available; otherwise, a verification error will be reported.</li>
+	// Common reasons for unavailable InstanceTypes include the InstanceType being sold out, and the corresponding cloud disk being sold out.
+	// If a model in InstanceTypes does not exist or has been abolished, a verification error will be reported regardless of the valid values set for InstanceTypesCheckPolicy.
 	InstanceTypesCheckPolicy *string `json:"InstanceTypesCheckPolicy,omitnil,omitempty" name:"InstanceTypesCheckPolicy"`
 
 	// Display name of the launch configuration, which can contain Chinese characters, letters, numbers, underscores, separators ("-"), and decimal points with a maximum length of 60 bytes.
@@ -4428,9 +4487,9 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	// This field can be modified only when the current billing mode is spot instance.
 	InstanceMarketOptions *InstanceMarketOptionsRequest `json:"InstanceMarketOptions,omitnil,omitempty" name:"InstanceMarketOptions"`
 
-	// Selection policy of cloud disks. Default value: ORIGINAL. Valid values:
-	// <br><li>ORIGINAL: uses the configured cloud disk type
-	// <br><li>AUTOMATIC: automatically chooses an available cloud disk type
+	// Cloud disk type selection policy. Valid values:
+	// <li>ORIGINAL: Use the set cloud disk type.</li>
+	// <li>AUTOMATIC: Automatically select the currently available cloud disk type.</li>
 	DiskTypePolicy *string `json:"DiskTypePolicy,omitnil,omitempty" name:"DiskTypePolicy"`
 
 	// Instance system disk configurations
@@ -4469,6 +4528,13 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 
 	// Instance login settings, which include passwords, keys, or the original login settings inherited from the image. <br>Please note that specifying new login settings will overwrite the existing ones. For instance, if you previously used a password for login and then use this parameter to switch the login settings to a key, the original password will be removed.
 	LoginSettings *LoginSettings `json:"LoginSettings,omitnil,omitempty" name:"LoginSettings"`
+
+	// Instance tag list. By specifying this parameter, the instances added through scale-out can be bound to the tag. Up to 10 Tags can be specified.
+	// This parameter will overwrite the original instance tag list. To add new tags, you need to pass the new tags along with the original tags.
+	InstanceTags []*InstanceTag `json:"InstanceTags,omitnil,omitempty" name:"InstanceTags"`
+
+	// Image family name.
+	ImageFamily *string `json:"ImageFamily,omitnil,omitempty" name:"ImageFamily"`
 }
 
 func (r *ModifyLaunchConfigurationAttributesRequest) ToJsonString() string {
@@ -4505,6 +4571,8 @@ func (r *ModifyLaunchConfigurationAttributesRequest) FromJsonString(s string) er
 	delete(f, "IPv6InternetAccessible")
 	delete(f, "DisasterRecoverGroupIds")
 	delete(f, "LoginSettings")
+	delete(f, "InstanceTags")
+	delete(f, "ImageFamily")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLaunchConfigurationAttributesRequest has unknown keys!", "")
 	}
@@ -4902,7 +4970,7 @@ type ModifyScalingPolicyRequestParams struct {
 	// The method to adjust the desired capacity after the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Valid values: <br><li>`CHANGE_IN_CAPACITY`: Increase or decrease the desired capacity </li><li>`EXACT_CAPACITY`: Adjust to the specified desired capacity </li> <li>`PERCENT_CHANGE_IN_CAPACITY`: Adjust the desired capacity by percentage </li>
 	AdjustmentType *string `json:"AdjustmentType,omitnil,omitempty" name:"AdjustmentType"`
 
-	// Specifies how to adjust the number of desired capacity when the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Values: <br><li>`AdjustmentType`=`CHANGE_IN_CAPACITY`: Number of instances to add (positive number) or remove (negative number). </li> <li>`AdjustmentType`=`EXACT_CAPACITY`: Set the desired capacity to the specified number. It must be ≥ 0. </li> <li>`AdjustmentType`=`PERCENT_CHANGE_IN_CAPACITY`: Percentage of instance number. Add instances (positive value) or remove instances (negative value) accordingly.
+	// The adjustment value for the expected number of instances after an alarm is triggered. It applies only to simple policies. <li>When AdjustmentType is CHANGE_IN_CAPACITY, a positive AdjustmentValue indicates an increase in the number of instances after the alarm is triggered, and a negative AdjustmentValue indicates a decrease in the number of instances after the alarm is triggered.</li> <li>When AdjustmentType is EXACT_CAPACITY, the value of AdjustmentValue represents the expected number of instances after the alarm is triggered, which should be greater than or equal to 0.</li> <li>When AdjustmentType is PERCENT_CHANGE_IN_CAPACITY, a positive AdjustmentValue indicates an increase in the number of instances by percentage after the alarm is triggered, and a negative AdjustmentValue indicates a decrease in the number of instances by percentage after the alarm is triggered. The unit is: %.</li>
 	AdjustmentValue *int64 `json:"AdjustmentValue,omitnil,omitempty" name:"AdjustmentValue"`
 
 	// Cooldown period (in seconds). It’s only available when `ScalingPolicyType` is `Simple`.
@@ -4940,7 +5008,7 @@ type ModifyScalingPolicyRequest struct {
 	// The method to adjust the desired capacity after the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Valid values: <br><li>`CHANGE_IN_CAPACITY`: Increase or decrease the desired capacity </li><li>`EXACT_CAPACITY`: Adjust to the specified desired capacity </li> <li>`PERCENT_CHANGE_IN_CAPACITY`: Adjust the desired capacity by percentage </li>
 	AdjustmentType *string `json:"AdjustmentType,omitnil,omitempty" name:"AdjustmentType"`
 
-	// Specifies how to adjust the number of desired capacity when the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Values: <br><li>`AdjustmentType`=`CHANGE_IN_CAPACITY`: Number of instances to add (positive number) or remove (negative number). </li> <li>`AdjustmentType`=`EXACT_CAPACITY`: Set the desired capacity to the specified number. It must be ≥ 0. </li> <li>`AdjustmentType`=`PERCENT_CHANGE_IN_CAPACITY`: Percentage of instance number. Add instances (positive value) or remove instances (negative value) accordingly.
+	// The adjustment value for the expected number of instances after an alarm is triggered. It applies only to simple policies. <li>When AdjustmentType is CHANGE_IN_CAPACITY, a positive AdjustmentValue indicates an increase in the number of instances after the alarm is triggered, and a negative AdjustmentValue indicates a decrease in the number of instances after the alarm is triggered.</li> <li>When AdjustmentType is EXACT_CAPACITY, the value of AdjustmentValue represents the expected number of instances after the alarm is triggered, which should be greater than or equal to 0.</li> <li>When AdjustmentType is PERCENT_CHANGE_IN_CAPACITY, a positive AdjustmentValue indicates an increase in the number of instances by percentage after the alarm is triggered, and a negative AdjustmentValue indicates a decrease in the number of instances by percentage after the alarm is triggered. The unit is: %.</li>
 	AdjustmentValue *int64 `json:"AdjustmentValue,omitnil,omitempty" name:"AdjustmentValue"`
 
 	// Cooldown period (in seconds). It’s only available when `ScalingPolicyType` is `Simple`.
@@ -5696,6 +5764,13 @@ type ServiceSettings struct {
 
 	// Enable unhealthy instance replacement. If this feature is enabled, AS will replace instances that are found unhealthy in the CLB health check. If this parameter is not specified, the default value `False` will be used.
 	ReplaceLoadBalancerUnhealthy *bool `json:"ReplaceLoadBalancerUnhealthy,omitnil,omitempty" name:"ReplaceLoadBalancerUnhealthy"`
+
+	// Replace mode of unhealthy replacement service. Valid values:
+	// RECREATE: Rebuild an instance to replace the original unhealthy instance.
+	// RESET: Performing a system reinstallation on unhealthy instances to keep information such as data disks, private IP addresses, and instance IDs unchanged. The instance login settings, HostName, enhanced services, and UserData will remain consistent with the current launch configuration.
+	// Default value: RECREATE.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReplaceMode *string `json:"ReplaceMode,omitnil,omitempty" name:"ReplaceMode"`
 }
 
 // Predefined struct for user

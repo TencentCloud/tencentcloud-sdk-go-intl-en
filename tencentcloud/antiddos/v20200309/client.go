@@ -2785,6 +2785,59 @@ func (c *Client) DescribeDefaultAlarmThresholdWithContext(ctx context.Context, r
     return
 }
 
+func NewDescribeIpBlockListRequest() (request *DescribeIpBlockListRequest) {
+    request = &DescribeIpBlockListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeIpBlockList")
+    
+    
+    return
+}
+
+func NewDescribeIpBlockListResponse() (response *DescribeIpBlockListResponse) {
+    response = &DescribeIpBlockListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeIpBlockList
+// 
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeIpBlockList(request *DescribeIpBlockListRequest) (response *DescribeIpBlockListResponse, err error) {
+    return c.DescribeIpBlockListWithContext(context.Background(), request)
+}
+
+// DescribeIpBlockList
+// 
+//
+// error code that may be returned:
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeIpBlockListWithContext(ctx context.Context, request *DescribeIpBlockListRequest) (response *DescribeIpBlockListResponse, err error) {
+    if request == nil {
+        request = NewDescribeIpBlockListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIpBlockList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeIpBlockListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeL7RulesBySSLCertIdRequest() (request *DescribeL7RulesBySSLCertIdRequest) {
     request = &DescribeL7RulesBySSLCertIdRequest{
         BaseRequest: &tchttp.BaseRequest{},

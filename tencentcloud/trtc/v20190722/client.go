@@ -2784,6 +2784,57 @@ func (c *Client) StartStreamIngestWithContext(ctx context.Context, request *Star
     return
 }
 
+func NewStopAIConversationRequest() (request *StopAIConversationRequest) {
+    request = &StopAIConversationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "StopAIConversation")
+    
+    
+    return
+}
+
+func NewStopAIConversationResponse() (response *StopAIConversationResponse) {
+    response = &StopAIConversationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StopAIConversation
+// Stop AI conversation task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) StopAIConversation(request *StopAIConversationRequest) (response *StopAIConversationResponse, err error) {
+    return c.StopAIConversationWithContext(context.Background(), request)
+}
+
+// StopAIConversation
+// Stop AI conversation task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) StopAIConversationWithContext(ctx context.Context, request *StopAIConversationRequest) (response *StopAIConversationResponse, err error) {
+    if request == nil {
+        request = NewStopAIConversationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopAIConversation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStopAIConversationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStopAITranscriptionRequest() (request *StopAITranscriptionRequest) {
     request = &StopAITranscriptionRequest{
         BaseRequest: &tchttp.BaseRequest{},

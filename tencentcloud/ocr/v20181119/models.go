@@ -2811,10 +2811,16 @@ type RecognizeMacaoIDCardOCRRequestParams struct {
 	// Supported image size: The downloaded image should not exceed 7M. The image download takes no more than 3 seconds.Storing images in Tencent Cloud URLs can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent.
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
+	// The URL address of the image on the back of the card. Supported image formats: PNG, JPG, JPEG. The GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. Storing images in Tencent Cloud URLs can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent.
+	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
+
 	// Base64 value of the image.Supported image formats: PNG, JPG, JPEG. Not support GIF yet.
 	// Supported image size: The downloaded image should not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds.
 	// One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// Base64 value of the image on the back of the card. Supported image formats: PNG, JPG, JPEG. The GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+	BackImageBase64 *string `json:"BackImageBase64,omitnil,omitempty" name:"BackImageBase64"`
 
 	// The following optional fields are of string type and are empty by default: 
 	// RetImage: whether to return the processed image (base64 encrypted string); the value and meaning of RetImage are as follows: 1.preprocess returns the preprocessed image data 2.portrait Return portrait image data 3."" Do not return image data SDK setting method reference: Config = Json.stringify({"RetImage":"preprocess"}) API 3.0 Explorer setting method reference: Config = {"RetImage":"portrait" }
@@ -2829,10 +2835,16 @@ type RecognizeMacaoIDCardOCRRequest struct {
 	// Supported image size: The downloaded image should not exceed 7M. The image download takes no more than 3 seconds.Storing images in Tencent Cloud URLs can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent.
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
 
+	// The URL address of the image on the back of the card. Supported image formats: PNG, JPG, JPEG. The GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. Storing images in Tencent Cloud URLs can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent.
+	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
+
 	// Base64 value of the image.Supported image formats: PNG, JPG, JPEG. Not support GIF yet.
 	// Supported image size: The downloaded image should not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds.
 	// One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// Base64 value of the image on the back of the card. Supported image formats: PNG, JPG, JPEG. The GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+	BackImageBase64 *string `json:"BackImageBase64,omitnil,omitempty" name:"BackImageBase64"`
 
 	// The following optional fields are of string type and are empty by default: 
 	// RetImage: whether to return the processed image (base64 encrypted string); the value and meaning of RetImage are as follows: 1.preprocess returns the preprocessed image data 2.portrait Return portrait image data 3."" Do not return image data SDK setting method reference: Config = Json.stringify({"RetImage":"preprocess"}) API 3.0 Explorer setting method reference: Config = {"RetImage":"portrait" }
@@ -2852,7 +2864,9 @@ func (r *RecognizeMacaoIDCardOCRRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ImageUrl")
+	delete(f, "BackImageUrl")
 	delete(f, "ImageBase64")
+	delete(f, "BackImageBase64")
 	delete(f, "Config")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RecognizeMacaoIDCardOCRRequest has unknown keys!", "")
@@ -2909,6 +2923,20 @@ type RecognizeMacaoIDCardOCRResponseParams struct {
 
 	// Image rotation angle, the horizontal direction of the text is 0, clockwise is positive, counterclockwise is negative
 	Angle *string `json:"Angle,omitnil,omitempty" name:"Angle"`
+
+	// Resident type.
+	ResidentType *string `json:"ResidentType,omitnil,omitempty" name:"ResidentType"`
+
+	// Card Warning Information
+	// 
+	// -9101 Alarm for covered certificate,
+	// -9102 Alarm for photocopied certificate,
+	// -9103 Alarm for photographed certificate,
+	// -9104 Alarm for PS certificate,
+	// -9107 Alarm for reflective certificate,
+	// -9108 Alarm for blurry image,
+	// -9109 This capability is not enabled.
+	WarnCardInfos []*int64 `json:"WarnCardInfos,omitnil,omitempty" name:"WarnCardInfos"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
