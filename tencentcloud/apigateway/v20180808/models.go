@@ -1469,11 +1469,14 @@ type CreateApiKeyRequestParams struct {
 	// Key type. Valid values: auto, manual (custom key). Default value: auto.
 	AccessKeyType *string `json:"AccessKeyType,omitnil,omitempty" name:"AccessKeyType"`
 
-	// Custom key ID, which is required if `AccessKeyType` is `manual`. It can contain 5–50 letters, digits, and underscores.
+	// Custom key ID, which is required if `AccessKeyType` is `manual`. It can contain 5-50 letters, digits, and underscores.
 	AccessKeyId *string `json:"AccessKeyId,omitnil,omitempty" name:"AccessKeyId"`
 
-	// Custom key, which is required if `AccessKeyType` is `manual`. It can contain 10–50 letters, digits, and underscores.
+	// Custom key, which is required if `AccessKeyType` is `manual`. It can contain 10-50 letters, digits, and underscores.
 	AccessKeySecret *string `json:"AccessKeySecret,omitnil,omitempty" name:"AccessKeySecret"`
+
+
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 type CreateApiKeyRequest struct {
@@ -1485,11 +1488,13 @@ type CreateApiKeyRequest struct {
 	// Key type. Valid values: auto, manual (custom key). Default value: auto.
 	AccessKeyType *string `json:"AccessKeyType,omitnil,omitempty" name:"AccessKeyType"`
 
-	// Custom key ID, which is required if `AccessKeyType` is `manual`. It can contain 5–50 letters, digits, and underscores.
+	// Custom key ID, which is required if `AccessKeyType` is `manual`. It can contain 5-50 letters, digits, and underscores.
 	AccessKeyId *string `json:"AccessKeyId,omitnil,omitempty" name:"AccessKeyId"`
 
-	// Custom key, which is required if `AccessKeyType` is `manual`. It can contain 10–50 letters, digits, and underscores.
+	// Custom key, which is required if `AccessKeyType` is `manual`. It can contain 10-50 letters, digits, and underscores.
 	AccessKeySecret *string `json:"AccessKeySecret,omitnil,omitempty" name:"AccessKeySecret"`
+
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
 }
 
 func (r *CreateApiKeyRequest) ToJsonString() string {
@@ -1508,6 +1513,7 @@ func (r *CreateApiKeyRequest) FromJsonString(s string) error {
 	delete(f, "AccessKeyType")
 	delete(f, "AccessKeyId")
 	delete(f, "AccessKeySecret")
+	delete(f, "Tags")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateApiKeyRequest has unknown keys!", "")
 	}
