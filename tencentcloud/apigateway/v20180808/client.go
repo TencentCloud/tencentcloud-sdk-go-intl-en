@@ -2799,8 +2799,6 @@ func NewDescribeApiKeysStatusResponse() (response *DescribeApiKeysStatusResponse
 // DescribeApiKeysStatus
 // This API is used to query the information of one or more API keys.
 //
-//  
-//
 // error code that may be returned:
 //  FAILEDOPERATION_CAMEXCEPTION = "FailedOperation.CamException"
 //  INTERNALERROR_CAMEXCEPTION = "InternalError.CamException"
@@ -2812,8 +2810,6 @@ func (c *Client) DescribeApiKeysStatus(request *DescribeApiKeysStatusRequest) (r
 
 // DescribeApiKeysStatus
 // This API is used to query the information of one or more API keys.
-//
-//  
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CAMEXCEPTION = "FailedOperation.CamException"

@@ -3963,6 +3963,7 @@ func NewDescribeAIRecognitionTemplatesResponse() (response *DescribeAIRecognitio
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAIRecognitionTemplates(request *DescribeAIRecognitionTemplatesRequest) (response *DescribeAIRecognitionTemplatesResponse, err error) {
@@ -3979,6 +3980,7 @@ func (c *Client) DescribeAIRecognitionTemplates(request *DescribeAIRecognitionTe
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE_DEFINITIONS = "InvalidParameterValue.Definitions"
 //  INVALIDPARAMETERVALUE_LIMIT = "InvalidParameterValue.Limit"
+//  INVALIDPARAMETERVALUE_TYPE = "InvalidParameterValue.Type"
 //  RESOURCENOTFOUND_TEMPLATENOTEXIST = "ResourceNotFound.TemplateNotExist"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeAIRecognitionTemplatesWithContext(ctx context.Context, request *DescribeAIRecognitionTemplatesRequest) (response *DescribeAIRecognitionTemplatesResponse, err error) {

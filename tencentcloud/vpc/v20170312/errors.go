@@ -119,7 +119,7 @@ const (
 	// The two parameters cannot be specified at the same time, nor exist concurrently. EIP can only be bound to the instances or the specified private IPs of the specified ENIs.
 	INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
 
-	// Incorrect parameter value.
+	// The parameter value is invalid.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
 
 	// Attacked IP address.

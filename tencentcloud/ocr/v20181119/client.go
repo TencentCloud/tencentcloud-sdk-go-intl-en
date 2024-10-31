@@ -927,6 +927,8 @@ func NewMLIDPassportOCRResponse() (response *MLIDPassportOCRResponse) {
 // MLIDPassportOCR
 // This API is used to recognize a passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions. Recognizable fields include passport ID, name, date of birth, gender, expiration date, issuing country/region, and nationality. It has the features of cropping identity photos and alarming for photographed or photocopied documents.
 //
+// This interface supports regional scope: countries with machine-readable passports
+//
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
@@ -946,6 +948,8 @@ func (c *Client) MLIDPassportOCR(request *MLIDPassportOCRRequest) (response *MLI
 
 // MLIDPassportOCR
 // This API is used to recognize a passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions. Recognizable fields include passport ID, name, date of birth, gender, expiration date, issuing country/region, and nationality. It has the features of cropping identity photos and alarming for photographed or photocopied documents.
+//
+// This interface supports regional scope: countries with machine-readable passports
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"

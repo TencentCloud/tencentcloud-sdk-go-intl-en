@@ -52,6 +52,41 @@ type ActionSummaryOverviewItem struct {
 	TotalCost *string `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 }
 
+type AdjustInfoDetail struct {
+	// Payer UIN, namely the account ID of the payer. The account ID is the user's unique account identifier on Tencent Cloud.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Example value: 909619400.
+	PayerUin *string `json:"PayerUin,omitnil,omitempty" name:"PayerUin"`
+
+	// Bill month. Format: yyyy-MM.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Example value: 2024-10.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Adjustment type.
+	// Adjustment: manualAdjustment.
+	// Supplementary settlement: supplementarySettlement.
+	// Re-settlement: reSettlement.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Example value: manualAdjustment.
+	AdjustType *string `json:"AdjustType,omitnil,omitempty" name:"AdjustType"`
+
+	// Adjustment order number.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Example value: 2220726096135.
+	AdjustNum *string `json:"AdjustNum,omitnil,omitempty" name:"AdjustNum"`
+
+	// Completion time of exception adjustment. Format: yyyy-MM-dd HH:mm:ss.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Example value: 2022-12-02 12:39:04.
+	AdjustCompletionTime *string `json:"AdjustCompletionTime,omitnil,omitempty" name:"AdjustCompletionTime"`
+
+	// Adjustment amount.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Example value: 333.00000000.
+	AdjustAmount *float64 `json:"AdjustAmount,omitnil,omitempty" name:"AdjustAmount"`
+}
+
 type AnalyseActionTypeDetail struct {
 	// Transaction type codeNote: This field may return null, indicating that no valid values can be obtained.
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
@@ -1437,6 +1472,94 @@ func (r *DescribeAccountBalanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAccountBalanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBillAdjustInfoRequestParams struct {
+	// Format: yyyy-MM.
+	// Billing month. Either Month or the combination of TimeFrom and TimeTo needs to be passed. If the TimeFrom and TimeTo are passed, the Month field is invalid.
+	// Example: 2024-10.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Format: yyyy-MM-dd.
+	// Start date. Either Month or the combination of TimeFrom and TimeTo needs to be passed. If TimeFrom and TimeTo are passed, the Month field is invalid. TimeFrom and TimeTo should represent the same month and be passed in together. Cross-month queries are not supported. The result will include the full month's data.
+	// Example: 2024-10-01.
+	TimeFrom *string `json:"TimeFrom,omitnil,omitempty" name:"TimeFrom"`
+
+	// Format: yyyy-MM-dd.
+	// End date. Either Month or the combination of TimeFrom and TimeTo needs to be passed. If TimeFrom and TimeTo are passed, the Month field is invalid. TimeFrom and TimeTo should represent the same month and be passed in together. Cross-month queries are not supported. The result will include the full month's data.
+	// Example: 2024-10-02.
+	TimeTo *string `json:"TimeTo,omitnil,omitempty" name:"TimeTo"`
+}
+
+type DescribeBillAdjustInfoRequest struct {
+	*tchttp.BaseRequest
+	
+	// Format: yyyy-MM.
+	// Billing month. Either Month or the combination of TimeFrom and TimeTo needs to be passed. If the TimeFrom and TimeTo are passed, the Month field is invalid.
+	// Example: 2024-10.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Format: yyyy-MM-dd.
+	// Start date. Either Month or the combination of TimeFrom and TimeTo needs to be passed. If TimeFrom and TimeTo are passed, the Month field is invalid. TimeFrom and TimeTo should represent the same month and be passed in together. Cross-month queries are not supported. The result will include the full month's data.
+	// Example: 2024-10-01.
+	TimeFrom *string `json:"TimeFrom,omitnil,omitempty" name:"TimeFrom"`
+
+	// Format: yyyy-MM-dd.
+	// End date. Either Month or the combination of TimeFrom and TimeTo needs to be passed. If TimeFrom and TimeTo are passed, the Month field is invalid. TimeFrom and TimeTo should represent the same month and be passed in together. Cross-month queries are not supported. The result will include the full month's data.
+	// Example: 2024-10-02.
+	TimeTo *string `json:"TimeTo,omitnil,omitempty" name:"TimeTo"`
+}
+
+func (r *DescribeBillAdjustInfoRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillAdjustInfoRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Month")
+	delete(f, "TimeFrom")
+	delete(f, "TimeTo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillAdjustInfoRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBillAdjustInfoResponseParams struct {
+	// Total amount of data.
+	// Example value: 10.
+	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// Detailed data.
+	// Example value: [].
+	Data []*AdjustInfoDetail `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeBillAdjustInfoResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBillAdjustInfoResponseParams `json:"Response"`
+}
+
+func (r *DescribeBillAdjustInfoResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBillAdjustInfoResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

@@ -210,6 +210,57 @@ func (c *Client) DescribeAccountBalanceWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeBillAdjustInfoRequest() (request *DescribeBillAdjustInfoRequest) {
+    request = &DescribeBillAdjustInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeBillAdjustInfo")
+    
+    
+    return
+}
+
+func NewDescribeBillAdjustInfoResponse() (response *DescribeBillAdjustInfoResponse) {
+    response = &DescribeBillAdjustInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBillAdjustInfo
+// This API is used to check whether the current UIN has any adjustment, enabling customers to proactively obtain the adjustment status faster.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+func (c *Client) DescribeBillAdjustInfo(request *DescribeBillAdjustInfoRequest) (response *DescribeBillAdjustInfoResponse, err error) {
+    return c.DescribeBillAdjustInfoWithContext(context.Background(), request)
+}
+
+// DescribeBillAdjustInfo
+// This API is used to check whether the current UIN has any adjustment, enabling customers to proactively obtain the adjustment status faster.
+//
+// error code that may be returned:
+//  INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
+//  INVALIDPARAMETER_INVALIDPARAMETER = "InvalidParameter.InvalidParameter"
+func (c *Client) DescribeBillAdjustInfoWithContext(ctx context.Context, request *DescribeBillAdjustInfoRequest) (response *DescribeBillAdjustInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeBillAdjustInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBillAdjustInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBillAdjustInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBillDetailRequest() (request *DescribeBillDetailRequest) {
     request = &DescribeBillDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},

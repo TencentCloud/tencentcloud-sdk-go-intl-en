@@ -66,6 +66,11 @@ type AIRecognitionTemplateItem struct {
 	// Video content recognition template description.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
+	// Template type, values:
+	// <li>Preset: system preset template;</li>
+	// <li>Custom: user-defined template.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
 	// Control parameter of opening and closing credits recognition.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	HeadTailConfigure *HeadTailConfigureInfo `json:"HeadTailConfigure,omitnil,omitempty" name:"HeadTailConfigure"`
@@ -93,6 +98,10 @@ type AIRecognitionTemplateItem struct {
 	// Speech keyword recognition control parameter.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AsrWordsConfigure *AsrWordsConfigureInfo `json:"AsrWordsConfigure,omitnil,omitempty" name:"AsrWordsConfigure"`
+
+	// Voice translation control parameter.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	AsrTranslateConfigure *AsrTranslateConfigureInfo `json:"AsrTranslateConfigure,omitnil,omitempty" name:"AsrTranslateConfigure"`
 
 	// Control parameter of object recognition.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -602,6 +611,7 @@ type AiRecognitionResult struct {
 	// <li>AsrWordsRecognition: speech keyword recognition,</li>
 	// <li>OcrWordsRecognition: text keyword recognition,</li>
 	// <li>AsrFullTextRecognition: full speech recognition,</li>
+	// <li>AsrTranslateRecognition: voice translation recognition,</li>
 	// <li>OcrFullTextRecognition: full text recognition,</li>
 	// <li>HeadTailRecognition: video opening and ending credits recognition,</li>
 	// <li>ObjectRecognition: object recognition.</li>
@@ -631,6 +641,9 @@ type AiRecognitionResult struct {
 	//  `AsrFullTextRecognition`.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	AsrFullTextTask *AiRecognitionTaskAsrFullTextResult `json:"AsrFullTextTask,omitnil,omitempty" name:"AsrFullTextTask"`
+
+	// Voice translation result, valid when Type is AsrTranslateRecognition.
+	AsrTranslateTask *AiRecognitionTaskAsrTranslateResult `json:"AsrTranslateTask,omitnil,omitempty" name:"AsrTranslateTask"`
 
 	// Text keyword recognition result, which is valid when `Type` is
 	//  `OcrWordsRecognition`.
@@ -702,6 +715,17 @@ type AiRecognitionTaskAsrFullTextResultOutput struct {
 }
 
 type AiRecognitionTaskAsrFullTextResultOutputSubtitleItem struct {
+	// Media asset subtitle ID, used for media asset subtitle management, only valid when Format is vtt.
+	// <font color=red>Note:</font> Tasks before 2024-11-01T10:00:00Z return this field as invalid.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Media asset subtitle name, used for player display, only valid when Format is vtt.
+	// <font color=red>Note:</font> Tasks before 2024-11-01T10:00:00Z return this field as invalid.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Subtitle Language.
+	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
+
 	// The format of the subtitle files. Valid values:
 	// <li>vtt</li>
 	// <li>srt</li>
@@ -723,6 +747,73 @@ type AiRecognitionTaskAsrFullTextSegmentItem struct {
 
 	// Recognized text.
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+}
+
+type AiRecognitionTaskAsrTranslateResult struct {
+	// Task status. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates the task is successful; other values indicate failure. It is not recommended to use this parameter, but to use the new parameter `ErrCodeExt`.
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Input information of the voice translation task.
+	Input *AiRecognitionTaskAsrTranslateResultInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Output information of the voice translation task.
+	// Note: this field may return null, indicating that no valid values can be obtained.
+	Output *AiRecognitionTaskAsrTranslateResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Progress of the voice translation task, value range [0-100].
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Begin process time of the voice translation task, in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
+
+	// The time when the voice translation task is completed, in [ISO date format](https://cloud.tencent.com/document/product/266/11732#I).
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
+}
+
+type AiRecognitionTaskAsrTranslateResultInput struct {
+	// Voice translation template ID.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type AiRecognitionTaskAsrTranslateResultOutput struct {
+	// Voice translation segments list.
+	// <font color=red>Note</font>: This list displays the first 100 results at most. You can get all the results from the file at the URL specified by `SegmentSetFileUrl`.
+	SegmentSet []*AiRecognitionTaskAsrTranslateSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
+
+	// URL to the file of the list for voice translation segments. The file format is JSON, and the data structure is the same as `SegmentSet`. The file will be deleted upon the expiration time `SegmentSetFileUrlExpireTime`, instead of being stored permanently.
+	SegmentSetFileUrl *string `json:"SegmentSetFileUrl,omitnil,omitempty" name:"SegmentSetFileUrl"`
+
+	// The expiration time of the URLs of voice translation segments in [ISO date format](https://cloud.tencent.com/document/product/266/11732#iso-date-format).
+	SegmentSetFileUrlExpireTime *string `json:"SegmentSetFileUrlExpireTime,omitnil,omitempty" name:"SegmentSetFileUrlExpireTime"`
+
+	// Generated subtitle list.
+	SubtitleSet []*AiRecognitionTaskAsrFullTextResultOutputSubtitleItem `json:"SubtitleSet,omitnil,omitempty" name:"SubtitleSet"`
+}
+
+type AiRecognitionTaskAsrTranslateSegmentItem struct {
+	// Confidence level of the voice translation segment. Value: 0~100.
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+	// Start time offset of the voice translation segment in seconds.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
+
+	// End time offset of the voice translation segment in seconds.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
+
+	// Recognized text.
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// The translation.
+	Translation *string `json:"Translation,omitnil,omitempty" name:"Translation"`
 }
 
 type AiRecognitionTaskAsrWordsResult struct {
@@ -2095,8 +2186,12 @@ type AsrFullTextConfigureInfo struct {
 	// <font color='red'>Note: This parameter has been deprecated. Please use `SubtitleFormats` instead.</font>
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 
-	// Media source language value range: <li>zh: Mandarin </li> <li>en: English</li> <li>ja: Japanese </li> <li>zh-ca: Cantonese</li><font color=red>Note：</font> If it fills in an empty string or leave this parameter blank, it will be automatically recognized (it is recommended to fill in the language corresponding to the media to improve the recognition accuracy).
+	// Media source language value range: <li>zh: Mandarin </li> <li>en: English</li> <li>ja: Japanese </li> <li>zh-ca: Cantonese</li><font color=red>Note: </font> If it fills in an empty string or leaves this parameter blank, it will be automatically recognized (it is recommended to fill in the language corresponding to the media to improve the recognition accuracy).
 	SrcLanguage *string `json:"SrcLanguage,omitnil,omitempty" name:"SrcLanguage"`
+
+	// Specify subtitle name, length limit: 64 characters. This value will be displayed by the player. If not provided, VOD will automatically generate it.
+	// <font color=red>Note:</font> This field is valid only when SubtitleFormats includes vtt.
+	SubtitleName *string `json:"SubtitleName,omitnil,omitempty" name:"SubtitleName"`
 }
 
 type AsrFullTextConfigureInfoForUpdate struct {
@@ -2116,6 +2211,255 @@ type AsrFullTextConfigureInfoForUpdate struct {
 
 	// Media source language value range: <li>zh: Mandarin </li> <li>en: English</li> <li>ja: Japanese </li> <li>zh-ca: Cantonese</li>
 	SrcLanguage *string `json:"SrcLanguage,omitnil,omitempty" name:"SrcLanguage"`
+
+	// Specify subtitle name, length limit: 64 characters. This value will be used for player display.
+	SubtitleName *string `json:"SubtitleName,omitnil,omitempty" name:"SubtitleName"`
+}
+
+type AsrTranslateConfigureInfo struct {
+	// Voice translation task switch, optional values:
+	// <li>ON: switch on;</li>
+	// <li>OFF: switch off.</li><font color=red>Note:</font> The task results of voice translation include asr full text recognition result. To avoid duplicate charges, simultaneous activation of voice translation and asr full text recognition features is prohibited.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Media source language. When the Switch is ON, this parameter is mandatory. Value range:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English;</li>
+	// <li>`ja`: Japanese;</li>
+	// <li>`ko`: Korean;</li>
+	// <li>`vi`: Vietnamese;</li>
+	// <li>`ms`: Malay;</li>
+	// <li>`th`: Thai;</li>
+	// <li>`pt`: Portuguese;</li>
+	// <li>`tr`: Turkish;</li>
+	// <li>`ar`: Arabic;</li>
+	// <li>`es`: Spanish;</li>
+	// <li>`hi`: Hindi;</li>
+	// <li>`fr`: French.</li>
+	SrcLanguage *string `json:"SrcLanguage,omitnil,omitempty" name:"SrcLanguage"`
+
+	// Translation target language. When the Switch is ON, this parameter is mandatory.
+	// When SrcLanguage is zh (Chinese), the value range:
+	// <li>`en`: English;</li>
+	// <li>`ja`: Japanese;</li>
+	// <li>`ko`: Korean;</li>
+	// <li>`fr`: French;</li>
+	// <li>`es`: Spanish;</li>
+	// <li>`it`: Italian;</li>
+	// <li>`de`: German;</li>
+	// <li>`tr`: Turkish;</li>
+	// <li>`ru`: Russian;</li>
+	// <li>`pt`: Portuguese;</li>
+	// <li>`vi`: Vietnamese;</li>
+	// <li>`id`: Indonesian;</li>
+	// <li>`th`: Thai;</li>
+	// <li>`ms`: Malay.</li>
+	// 
+	// When SrcLanguage is en (English), the value range:
+	// <li>`zh`: Chinese;</li>
+	// <li>`ja`: Japanese;</li>
+	// <li>`ko`: Korean;</li>
+	// <li>`fr`: French;</li>
+	// <li>`es`: Spanish;</li>
+	// <li>`it`: Italian;</li>
+	// <li>`de`: German;</li>
+	// <li>`tr`: Turkish;</li>
+	// <li>`ru`: Russian;</li>
+	// <li>`pt`: Portuguese;</li>
+	// <li>`vi`: Vietnamese;</li>
+	// <li>`id`: Indonesian;</li>
+	// <li>`th`: Thai;</li>
+	// <li>`ms`: Malay;</li>
+	// <li>`ar`: Arabic;</li>
+	// <li>`hi`: Hindi.</li>
+	// 
+	// When SrcLanguage is ja (Japanese), the valid options are:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English;</li>
+	// <li>`ko`: Korean.</li>
+	// 
+	// When SrcLanguage is ko (Korean), the valid options are:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English;</li>
+	// <li>`ja`: Japanese.</li>
+	// 
+	// When SrcLanguage is vi (Vietnamese), ms (Malay), or th (Thai), the valid options are:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English.</li>
+	// 
+	// When SrcLanguage is pt (Portuguese), the valid options are:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English;</li>
+	// <li>`fr`: French;</li>
+	// <li>`es`: Spanish;</li>
+	// <li>`it`: Italian;</li>
+	// <li>`de`: German;</li>
+	// <li>`tr`: Turkish;</li>
+	// <li>`ru`: Russian.</li>
+	// 
+	// When SrcLanguage is tr (Turkish), the value range is:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English;</li>
+	// <li>`fr`: French;</li>
+	// <li>`es`: Spanish;</li>
+	// <li>`it`: Italian;</li>
+	// <li>`de`: German;</li>
+	// <li>`ru`: Russian;</li>
+	// <li>`pt`: Portuguese.</li>
+	// 
+	// When SrcLanguage is es (Spanish), the value range is:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English;</li>
+	// <li>`fr`: French;</li>
+	// <li>`it`: Italian;</li>
+	// <li>`de`: German;</li>
+	// <li>`tr`: Turkish;</li>
+	// <li>`ru`: Russian;</li>
+	// <li>`pt`: Portuguese.</li>
+	// 
+	// When SrcLanguage is ar (Arabic) or hi (Hindi), the value range is:
+	// <li>`en`: English.</li>
+	// 
+	// When SrcLanguage is fr (French), the value range is:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English;</li>
+	// <li>`es`: Spanish;</li>
+	// <li>`it`: Italian;</li>
+	// <li>`de`: German;</li>
+	// <li>`tr`: Turkish;</li>
+	// <li>`ru`: Russian;</li>
+	// <li>`pt`: Portuguese.</li>
+	DstLanguage *string `json:"DstLanguage,omitnil,omitempty" name:"DstLanguage"`
+
+	// Generated subtitle file format list. If not filled or an empty array is provided, no subtitle file will be generated. Optional values:
+	// <li>vtt: generate WebVTT subtitle file;</li>
+	// <li>srt: generate SRT subtitle files.</li><font color=red>Note:</font> VOD media assets only support adding vtt subtitles. Therefore, VOD will add generated subtitles to media assets only when SubtitleFormats includes vtt.
+	SubtitleFormats []*string `json:"SubtitleFormats,omitnil,omitempty" name:"SubtitleFormats"`
+
+	// Specify subtitle name, length limit: 64 characters. This value will be displayed by the player. If not provided, VOD will automatically generate it.
+	SubtitleName *string `json:"SubtitleName,omitnil,omitempty" name:"SubtitleName"`
+}
+
+type AsrTranslateConfigureInfoForUpdate struct {
+	// Voice translation task switch, optional values:
+	// <li>ON: switch on;</li>
+	// <li>OFF: switch off.</li>
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Media source language, value range:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English;</li>
+	// <li>`ja`: Japanese;</li>
+	// <li>`ko`: Korean;</li>
+	// <li>`vi`: Vietnamese;</li>
+	// <li>`ms`: Malay;</li>
+	// <li>`th`: Thai;</li>
+	// <li>`pt`: Portuguese;</li>
+	// <li>`tr`: Turkish;</li>
+	// <li>`ar`: Arabic;</li>
+	// <li>`es`: Spanish;</li>
+	// <li>`hi`: Hindi;</li>
+	// <li>`fr`: French.</li>
+	SrcLanguage *string `json:"SrcLanguage,omitnil,omitempty" name:"SrcLanguage"`
+
+	// Translation target language.
+	// When SrcLanguage is zh(Chinese), value range:
+	// <li>`en`: English;</li>
+	// <li>`ja`: Japanese;</li>
+	// <li>`ko`: Korean;</li>
+	// <li>`fr`: French;</li>
+	// <li>`es`: Spanish;</li>
+	// <li>`it`: Italian;</li>
+	// <li>`de`: German;</li>
+	// <li>`tr`: Turkish;</li>
+	// <li>`ru`: Russian;</li>
+	// <li>`pt`: Portuguese;</li>
+	// <li>`vi`: Vietnamese;</li>
+	// <li>`id`: Indonesian;</li>
+	// <li>`th`: Thai;</li>
+	// <li>`ms`: Malay.</li>
+	// 
+	// When SrcLanguage is en(English), value range:
+	// <li>`zh`: Chinese;</li>
+	// <li>`ja`: Japanese;</li>
+	// <li>`ko`: Korean;</li>
+	// <li>`fr`: French;</li>
+	// <li>`es`: Spanish;</li>
+	// <li>`it`: Italian;</li>
+	// <li>`de`: German;</li>
+	// <li>`tr`: Turkish;</li>
+	// <li>`ru`: Russian;</li>
+	// <li>`pt`: Portuguese;</li>
+	// <li>`vi`: Vietnamese;</li>
+	// <li>`id`: Indonesian;</li>
+	// <li>`th`: Thai;</li>
+	// <li>`ms`: Malay;</li>
+	// <li>`ar`: Arabic;</li>
+	// <li>`hi`: Hindi.</li>
+	// 
+	// When SrcLanguage is ja (Japanese), value range:
+	// <li>zh: Chinese;</li>
+	// <li>en: English;</li>
+	// <li>ko: Korean.</li>
+	// 
+	// When SrcLanguage is ko (Korean), value range:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English;</li>
+	// <li>`ja`: Japanese.</li>
+	// 
+	// When SrcLanguage is vi (Vietnamese) or ms (Malay) or th (Thai), value range:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English.</li>
+	// 
+	// When SrcLanguage is pt (Portuguese), value range:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English;</li>
+	// <li>`fr`: French;</li>
+	// <li>`es`: Spanish;</li>
+	// <li>`it`: Italian;</li>
+	// <li>`de`: German;</li>
+	// <li>`tr`: Turkish;</li>
+	// <li>`ru`: Russian.</li>
+	// 
+	// When SrcLanguage is tr (Turkish), value range:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English;</li>
+	// <li>`fr`: French;</li>
+	// <li>`es`: Spanish;</li>
+	// <li>`it`: Italian;</li>
+	// <li>`de`: German;</li>
+	// <li>`ru`: Russian;</li>
+	// <li>`pt`: Portuguese.</li>
+	// 
+	// When SrcLanguage is es (Spanish), value range:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English;</li>
+	// <li>`fr`: French;</li>
+	// <li>`it`: Italian;</li>
+	// <li>`de`: German;</li>
+	// <li>`tr`: Turkish;</li>
+	// <li>`ru`: Russian;</li>
+	// <li>`pt`: Portuguese.</li>
+	// 
+	// When SrcLanguage is ar (Arabic) or hi (Hindi), value range:
+	// <li>`en`: English.</li>
+	// 
+	// When SrcLanguage is fr (French), value range:
+	// <li>`zh`: Chinese;</li>
+	// <li>`en`: English;</li>
+	// <li>`es`: Spanish;</li>
+	// <li>`it`: Italian;</li>
+	// <li>`de`: German;</li>
+	// <li>`tr`: Turkish;</li>
+	// <li>`ru`: Russian;</li>
+	// <li>`pt`: Portuguese.</li>
+	DstLanguage *string `json:"DstLanguage,omitnil,omitempty" name:"DstLanguage"`
+
+	// Operation information about subtitle format list.
+	SubtitleFormatsOperation *SubtitleFormatsOperation `json:"SubtitleFormatsOperation,omitnil,omitempty" name:"SubtitleFormatsOperation"`
+
+	// Specify subtitle name, length limit: 64 characters. This value will be used for player display.
+	SubtitleName *string `json:"SubtitleName,omitnil,omitempty" name:"SubtitleName"`
 }
 
 type AsrWordsConfigureInfo struct {
@@ -3541,6 +3885,9 @@ type CreateAIRecognitionTemplateRequestParams struct {
 	// Control parameter of speech keyword recognition.
 	AsrWordsConfigure *AsrWordsConfigureInfo `json:"AsrWordsConfigure,omitnil,omitempty" name:"AsrWordsConfigure"`
 
+	// Control parameter of voice translation.
+	AsrTranslateConfigure *AsrTranslateConfigureInfo `json:"AsrTranslateConfigure,omitnil,omitempty" name:"AsrTranslateConfigure"`
+
 	// Control parameter of object recognition.
 	ObjectConfigure *ObjectConfigureInfo `json:"ObjectConfigure,omitnil,omitempty" name:"ObjectConfigure"`
 
@@ -3581,6 +3928,9 @@ type CreateAIRecognitionTemplateRequest struct {
 	// Control parameter of speech keyword recognition.
 	AsrWordsConfigure *AsrWordsConfigureInfo `json:"AsrWordsConfigure,omitnil,omitempty" name:"AsrWordsConfigure"`
 
+	// Control parameter of voice translation.
+	AsrTranslateConfigure *AsrTranslateConfigureInfo `json:"AsrTranslateConfigure,omitnil,omitempty" name:"AsrTranslateConfigure"`
+
 	// Control parameter of object recognition.
 	ObjectConfigure *ObjectConfigureInfo `json:"ObjectConfigure,omitnil,omitempty" name:"ObjectConfigure"`
 
@@ -3610,6 +3960,7 @@ func (r *CreateAIRecognitionTemplateRequest) FromJsonString(s string) error {
 	delete(f, "OcrWordsConfigure")
 	delete(f, "AsrFullTextConfigure")
 	delete(f, "AsrWordsConfigure")
+	delete(f, "AsrTranslateConfigure")
 	delete(f, "ObjectConfigure")
 	delete(f, "ScreenshotInterval")
 	if len(f) > 0 {
@@ -8306,6 +8657,11 @@ type DescribeAIRecognitionTemplatesRequestParams struct {
 	// Unique ID filter of video content recognition templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
 
+	// Template type filter. Optional values:
+	// <li>Preset: preset template;</li>
+	// <li>Custom: user-defined template.</li>If not filled default is empty, i.e., no template type filter.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
 	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
@@ -8321,6 +8677,11 @@ type DescribeAIRecognitionTemplatesRequest struct {
 
 	// Unique ID filter of video content recognition templates. Array length limit: 100.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
+
+	// Template type filter. Optional values:
+	// <li>Preset: preset template;</li>
+	// <li>Custom: user-defined template.</li>If not filled default is empty, i.e., no template type filter.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Pagination offset. Default value: 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
@@ -8343,6 +8704,7 @@ func (r *DescribeAIRecognitionTemplatesRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SubAppId")
 	delete(f, "Definitions")
+	delete(f, "Type")
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
@@ -15837,10 +16199,19 @@ type MediaSubtitleInput struct {
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Subtitle language. Common values:
-	// <li>`cn`: Chinese</li>
+	// <li>`zh`: Chinese</li>
+	// <li>`en`: English</li>
 	// <li>`ja`: Japanese</li>
-	// <li>`en-US`: English</li>
-	// For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
+	// <li>`ko`: Korean</li>
+	// <li>`vi`: Vietnamese</li>
+	// <li>`ms`: Malay</li>
+	// <li>`th`: Thai</li>
+	// <li>`pt`: Portuguese</li>
+	// <li>`tr`: Turkish</li>
+	// <li>`ar`: Arabic</li>
+	// <li>`es`: Spanish</li>
+	// <li>`hi`: Hindi</li>
+	// <li>`fr`: French</li>For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
 	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
 
 	// Subtitle format. Valid value:
@@ -15862,10 +16233,19 @@ type MediaSubtitleItem struct {
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Subtitle language. Common values:
-	// <li>`cn`: Chinese</li>
+	// <li>`zh`: Chinese</li>
+	// <li>`en`: English</li>
 	// <li>`ja`: Japanese</li>
-	// <li>`en-US`: English</li>
-	// For other values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
+	// <li>`ko`: Korean</li>
+	// <li>`vi`: Vietnamese</li>
+	// <li>`ms`: Malay</li>
+	// <li>`th`: Thai</li>
+	// <li>`pt`: Portuguese</li>
+	// <li>`tr`: Turkish</li>
+	// <li>`ar`: Arabic</li>
+	// <li>`es`: Spanish</li>
+	// <li>`hi`: Hindi</li>
+	// <li>`fr`: French</li>For other valid values, see [RFC 5646](https://tools.ietf.org/html/rfc5646).
 	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
 
 	// Subtitle format. Valid value:
@@ -15874,6 +16254,11 @@ type MediaSubtitleItem struct {
 
 	// Subtitle URL
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Subtitle source, values:
+	// <li>UserUploaded: user uploaded;</li>
+	// <li>AIRecognition: AI recognition, generated through asr full text recognition or voice translation.</li>
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
 }
 
 type MediaTrack struct {
@@ -16169,6 +16554,9 @@ type ModifyAIRecognitionTemplateRequestParams struct {
 	// Control parameter of speech keyword recognition.
 	AsrWordsConfigure *AsrWordsConfigureInfoForUpdate `json:"AsrWordsConfigure,omitnil,omitempty" name:"AsrWordsConfigure"`
 
+	// Control parameter of voice translation.
+	AsrTranslateConfigure *AsrTranslateConfigureInfoForUpdate `json:"AsrTranslateConfigure,omitnil,omitempty" name:"AsrTranslateConfigure"`
+
 	// Control parameter of object recognition.
 	ObjectConfigure *ObjectConfigureInfoForUpdate `json:"ObjectConfigure,omitnil,omitempty" name:"ObjectConfigure"`
 
@@ -16212,6 +16600,9 @@ type ModifyAIRecognitionTemplateRequest struct {
 	// Control parameter of speech keyword recognition.
 	AsrWordsConfigure *AsrWordsConfigureInfoForUpdate `json:"AsrWordsConfigure,omitnil,omitempty" name:"AsrWordsConfigure"`
 
+	// Control parameter of voice translation.
+	AsrTranslateConfigure *AsrTranslateConfigureInfoForUpdate `json:"AsrTranslateConfigure,omitnil,omitempty" name:"AsrTranslateConfigure"`
+
 	// Control parameter of object recognition.
 	ObjectConfigure *ObjectConfigureInfoForUpdate `json:"ObjectConfigure,omitnil,omitempty" name:"ObjectConfigure"`
 
@@ -16242,6 +16633,7 @@ func (r *ModifyAIRecognitionTemplateRequest) FromJsonString(s string) error {
 	delete(f, "OcrWordsConfigure")
 	delete(f, "AsrFullTextConfigure")
 	delete(f, "AsrWordsConfigure")
+	delete(f, "AsrTranslateConfigure")
 	delete(f, "ObjectConfigure")
 	delete(f, "ScreenshotInterval")
 	if len(f) > 0 {
