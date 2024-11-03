@@ -309,6 +309,18 @@ type ApplySdkVerificationTokenRequestParams struct {
 
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// This interface is used to control th action sequences.
+	// Action types are as follows:
+	// "blink"
+	// "mouth"
+	// "nod"
+	// "shake"
+	// You can choose 1-2 actions out of the four.
+	// Single action example: "blink"
+	// Multiple action example: "blink,mouth"
+	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
+	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 }
 
 type ApplySdkVerificationTokenRequest struct {
@@ -368,6 +380,18 @@ type ApplySdkVerificationTokenRequest struct {
 
 	// A passthrough field, which is returned together with the verification result and can contain up to 1,024 bits.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// This interface is used to control th action sequences.
+	// Action types are as follows:
+	// "blink"
+	// "mouth"
+	// "nod"
+	// "shake"
+	// You can choose 1-2 actions out of the four.
+	// Single action example: "blink"
+	// Multiple action example: "blink,mouth"
+	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
+	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 }
 
 func (r *ApplySdkVerificationTokenRequest) ToJsonString() string {
@@ -390,6 +414,7 @@ func (r *ApplySdkVerificationTokenRequest) FromJsonString(s string) error {
 	delete(f, "DisableChangeOcrResult")
 	delete(f, "DisableCheckOcrWarnings")
 	delete(f, "Extra")
+	delete(f, "ActionList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ApplySdkVerificationTokenRequest has unknown keys!", "")
 	}
@@ -1642,6 +1667,18 @@ type GetFaceIdTokenIntlRequestParams struct {
 
 	// The pass-through parameter, which can be omitted if there are no special requirements.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// This interface is used to control th action sequences.
+	// Action types are as follows:
+	// "blink"
+	// "mouth"
+	// "nod"
+	// "shake"
+	// You can choose 1-2 actions out of the four.
+	// Single action example: "blink"
+	// Multiple action example: "blink,mouth"
+	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
+	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 }
 
 type GetFaceIdTokenIntlRequest struct {
@@ -1666,6 +1703,18 @@ type GetFaceIdTokenIntlRequest struct {
 
 	// The pass-through parameter, which can be omitted if there are no special requirements.
 	Extra *string `json:"Extra,omitnil,omitempty" name:"Extra"`
+
+	// This interface is used to control th action sequences.
+	// Action types are as follows:
+	// "blink"
+	// "mouth"
+	// "nod"
+	// "shake"
+	// You can choose 1-2 actions out of the four.
+	// Single action example: "blink"
+	// Multiple action example: "blink,mouth"
+	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2 or 4; otherwise, the interface reports an error.
+	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 }
 
 func (r *GetFaceIdTokenIntlRequest) ToJsonString() string {
@@ -1684,6 +1733,7 @@ func (r *GetFaceIdTokenIntlRequest) FromJsonString(s string) error {
 	delete(f, "SecureLevel")
 	delete(f, "Image")
 	delete(f, "Extra")
+	delete(f, "ActionList")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetFaceIdTokenIntlRequest has unknown keys!", "")
 	}
@@ -3336,4 +3386,16 @@ type WebVerificationConfigIntl struct {
 
 	// Automatic downgrade mode, with the following parameter values: 1: Downgrade to silent live mode; 2: Disable downgrade mode. The default value is 1.
 	AutoDowngrade *int64 `json:"AutoDowngrade,omitnil,omitempty" name:"AutoDowngrade"`
+
+	// This interface is used to control th action sequences.
+	// Action types are as follows:
+	// "blink"
+	// "mouth"
+	// "nod"
+	// "shake"
+	// You can choose 1-2 actions out of the four.
+	// Single action example: "blink"
+	// Multiple action example: "blink,mouth"
+	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2, 4, or 5; otherwise, the interface reports an error.
+	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
 }
