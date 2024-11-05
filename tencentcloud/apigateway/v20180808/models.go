@@ -9374,7 +9374,7 @@ type UpdateApiKeyRequestParams struct {
 	// ID of the key to be changed.
 	AccessKeyId *string `json:"AccessKeyId,omitnil,omitempty" name:"AccessKeyId"`
 
-	// Key to be updated, which is required when a custom key is updated. It can contain 10–50 letters, digits, and underscores.
+	// Key to be updated, which is required when a custom key is updated. It can contain 10-50 letters, digits, and underscores.
 	AccessKeySecret *string `json:"AccessKeySecret,omitnil,omitempty" name:"AccessKeySecret"`
 }
 
@@ -9384,7 +9384,7 @@ type UpdateApiKeyRequest struct {
 	// ID of the key to be changed.
 	AccessKeyId *string `json:"AccessKeyId,omitnil,omitempty" name:"AccessKeyId"`
 
-	// Key to be updated, which is required when a custom key is updated. It can contain 10–50 letters, digits, and underscores.
+	// Key to be updated, which is required when a custom key is updated. It can contain 10-50 letters, digits, and underscores.
 	AccessKeySecret *string `json:"AccessKeySecret,omitnil,omitempty" name:"AccessKeySecret"`
 }
 

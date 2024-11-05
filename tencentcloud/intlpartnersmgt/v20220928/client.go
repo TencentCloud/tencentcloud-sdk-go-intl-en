@@ -187,7 +187,10 @@ func NewCreateAccountResponse() (response *CreateAccountResponse) {
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_EXCEEDMAXBINDCOUNT = "FailedOperation.ExceedMaxBindCount"
 //  FAILEDOPERATION_MAILISREGISTERED = "FailedOperation.MailIsRegistered"
+//  FAILEDOPERATION_PHONEBINDUPPER = "FailedOperation.PhoneBindUpper"
+//  FAILEDOPERATION_VERIFICATIONCODEILLEGAL = "FailedOperation.VerificationCodeIllegal"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ACCOUNTTYPECONTENTINCORRECT = "InvalidParameter.AccountTypeContentIncorrect"
 //  INVALIDPARAMETER_AREACONTENTINCORRECT = "InvalidParameter.AreaContentIncorrect"
@@ -205,6 +208,7 @@ func NewCreateAccountResponse() (response *CreateAccountResponse) {
 //  INVALIDPARAMETERVALUE_MAILEMPTY = "InvalidParameterValue.MailEmpty"
 //  INVALIDPARAMETERVALUE_PASSWORDEMPTY = "InvalidParameterValue.PasswordEmpty"
 //  INVALIDPARAMETERVALUE_PHONENUMEMPTY = "InvalidParameterValue.PhoneNumEmpty"
+//  INVALIDPARAMETERVALUE_UNSUPPORTAREA = "InvalidParameterValue.UnSupportArea"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateAccountResponse, err error) {
     return c.CreateAccountWithContext(context.Background(), request)
@@ -215,7 +219,10 @@ func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateA
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_EXCEEDMAXBINDCOUNT = "FailedOperation.ExceedMaxBindCount"
 //  FAILEDOPERATION_MAILISREGISTERED = "FailedOperation.MailIsRegistered"
+//  FAILEDOPERATION_PHONEBINDUPPER = "FailedOperation.PhoneBindUpper"
+//  FAILEDOPERATION_VERIFICATIONCODEILLEGAL = "FailedOperation.VerificationCodeIllegal"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ACCOUNTTYPECONTENTINCORRECT = "InvalidParameter.AccountTypeContentIncorrect"
 //  INVALIDPARAMETER_AREACONTENTINCORRECT = "InvalidParameter.AreaContentIncorrect"
@@ -233,6 +240,7 @@ func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateA
 //  INVALIDPARAMETERVALUE_MAILEMPTY = "InvalidParameterValue.MailEmpty"
 //  INVALIDPARAMETERVALUE_PASSWORDEMPTY = "InvalidParameterValue.PasswordEmpty"
 //  INVALIDPARAMETERVALUE_PHONENUMEMPTY = "InvalidParameterValue.PhoneNumEmpty"
+//  INVALIDPARAMETERVALUE_UNSUPPORTAREA = "InvalidParameterValue.UnSupportArea"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAccountRequest) (response *CreateAccountResponse, err error) {
     if request == nil {
@@ -1430,6 +1438,63 @@ func (c *Client) QueryVoucherPoolWithContext(ctx context.Context, request *Query
     request.SetContext(ctx)
     
     response = NewQueryVoucherPoolResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSendVerifyCodeRequest() (request *SendVerifyCodeRequest) {
+    request = &SendVerifyCodeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "SendVerifyCode")
+    
+    
+    return
+}
+
+func NewSendVerifyCodeResponse() (response *SendVerifyCodeResponse) {
+    response = &SendVerifyCodeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SendVerifyCode
+// This API is used to send a verification code for account registration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PHONEBINDUPPER = "FailedOperation.PhoneBindUpper"
+//  FAILEDOPERATION_SENDVERIFYCODELIMIT = "FailedOperation.SendVerifyCodeLimit"
+//  FAILEDOPERATION_SENDVERIFYCODELIMIT60 = "FailedOperation.SendVerifyCodeLimit60"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_UNSUPPORTAREA = "InvalidParameterValue.UnSupportArea"
+func (c *Client) SendVerifyCode(request *SendVerifyCodeRequest) (response *SendVerifyCodeResponse, err error) {
+    return c.SendVerifyCodeWithContext(context.Background(), request)
+}
+
+// SendVerifyCode
+// This API is used to send a verification code for account registration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PHONEBINDUPPER = "FailedOperation.PhoneBindUpper"
+//  FAILEDOPERATION_SENDVERIFYCODELIMIT = "FailedOperation.SendVerifyCodeLimit"
+//  FAILEDOPERATION_SENDVERIFYCODELIMIT60 = "FailedOperation.SendVerifyCodeLimit60"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_UNSUPPORTAREA = "InvalidParameterValue.UnSupportArea"
+func (c *Client) SendVerifyCodeWithContext(ctx context.Context, request *SendVerifyCodeRequest) (response *SendVerifyCodeResponse, err error) {
+    if request == nil {
+        request = NewSendVerifyCodeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SendVerifyCode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSendVerifyCodeResponse()
     err = c.Send(request, response)
     return
 }
