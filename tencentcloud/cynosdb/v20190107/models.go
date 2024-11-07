@@ -11153,22 +11153,22 @@ type TemplateParamInfo struct {
 }
 
 type TradePrice struct {
-	// The non-discounted total price of monthly subscribed resources (unit: US cent)
+	// The non-discounted total price of monthly subscribed resources (unit: 0.000001 cent)
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TotalPrice *int64 `json:"TotalPrice,omitnil,omitempty" name:"TotalPrice"`
 
 	// Total discount. `100` means no discount.
 	Discount *float64 `json:"Discount,omitnil,omitempty" name:"Discount"`
 
-	// The discounted total price of monthly subscribed resources (unit: US cent). If a discount is applied, `TotalPriceDiscount` will be the product of `TotalPrice` and `Discount`.
+	// The discounted total price of monthly subscribed resources (unit: 0.000001 cent). If a discount is applied, `TotalPriceDiscount` will be the product of `TotalPrice` and `Discount`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TotalPriceDiscount *int64 `json:"TotalPriceDiscount,omitnil,omitempty" name:"TotalPriceDiscount"`
 
-	// The non-discounted unit price of pay-as-you-go resources (unit: US cent)
+	// The non-discounted unit price of pay-as-you-go resources (unit: 0.000001 cent)
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UnitPrice *int64 `json:"UnitPrice,omitnil,omitempty" name:"UnitPrice"`
 
-	// The discounted unit price of pay-as-you-go resources (unit: US cent). If a discount is applied, `UnitPriceDiscount` will be the product of `UnitPrice` and `Discount`.
+	// The discounted unit price of pay-as-you-go resources (unit: 0.000001 cent). If a discount is applied, `UnitPriceDiscount` will be the product of `UnitPrice` and `Discount`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	UnitPriceDiscount *int64 `json:"UnitPriceDiscount,omitnil,omitempty" name:"UnitPriceDiscount"`
 

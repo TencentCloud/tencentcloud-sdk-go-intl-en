@@ -909,6 +909,103 @@ func (c *Client) CreateClassWithContext(ctx context.Context, request *CreateClas
     return
 }
 
+func NewCreateComplexAdaptiveDynamicStreamingTaskRequest() (request *CreateComplexAdaptiveDynamicStreamingTaskRequest) {
+    request = &CreateComplexAdaptiveDynamicStreamingTaskRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "CreateComplexAdaptiveDynamicStreamingTask")
+    
+    
+    return
+}
+
+func NewCreateComplexAdaptiveDynamicStreamingTaskResponse() (response *CreateComplexAdaptiveDynamicStreamingTaskResponse) {
+    response = &CreateComplexAdaptiveDynamicStreamingTaskResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateComplexAdaptiveDynamicStreamingTask
+// Initiate an adaptive bitrate streaming processing task, with the following features:
+//
+// 1. Output HLS and MPEG-DASH adaptive streams based on the specified templates;
+//
+// 2. DRM options for the adaptive bitrate streaming include no encryption, Widevine, or FairPlay.
+//
+// 3. The output adaptive bitrate streaming can include multiple audio streams in different languages, with each language sourced from different media files.
+//
+// 4. The output adaptive stream can also include multiple subtitle streams in different languages.
+//
+// 
+//
+// **Notes:**
+//
+// 1. When using opening/closing credits, the video stream in the opening credit must be synchronized with the audio stream; otherwise, it will result in audio and video desynchronization in the output content.
+//
+// 2. If the output adaptive bitrate streaming needs to include audio from the main media, the FileId of the main media must be specified in the AudioSet parameter.
+//
+// 3. Subtitles must be added to the main media beforehand, which can be done through the ModifyMediaInfo API interface or the Video Management page in the console.
+//
+// 4. Support for TESHD transcoding and watermarking is currently not available.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateComplexAdaptiveDynamicStreamingTask(request *CreateComplexAdaptiveDynamicStreamingTaskRequest) (response *CreateComplexAdaptiveDynamicStreamingTaskResponse, err error) {
+    return c.CreateComplexAdaptiveDynamicStreamingTaskWithContext(context.Background(), request)
+}
+
+// CreateComplexAdaptiveDynamicStreamingTask
+// Initiate an adaptive bitrate streaming processing task, with the following features:
+//
+// 1. Output HLS and MPEG-DASH adaptive streams based on the specified templates;
+//
+// 2. DRM options for the adaptive bitrate streaming include no encryption, Widevine, or FairPlay.
+//
+// 3. The output adaptive bitrate streaming can include multiple audio streams in different languages, with each language sourced from different media files.
+//
+// 4. The output adaptive stream can also include multiple subtitle streams in different languages.
+//
+// 
+//
+// **Notes:**
+//
+// 1. When using opening/closing credits, the video stream in the opening credit must be synchronized with the audio stream; otherwise, it will result in audio and video desynchronization in the output content.
+//
+// 2. If the output adaptive bitrate streaming needs to include audio from the main media, the FileId of the main media must be specified in the AudioSet parameter.
+//
+// 3. Subtitles must be added to the main media beforehand, which can be done through the ModifyMediaInfo API interface or the Video Management page in the console.
+//
+// 4. Support for TESHD transcoding and watermarking is currently not available.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) CreateComplexAdaptiveDynamicStreamingTaskWithContext(ctx context.Context, request *CreateComplexAdaptiveDynamicStreamingTaskRequest) (response *CreateComplexAdaptiveDynamicStreamingTaskResponse, err error) {
+    if request == nil {
+        request = NewCreateComplexAdaptiveDynamicStreamingTaskRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateComplexAdaptiveDynamicStreamingTask require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateComplexAdaptiveDynamicStreamingTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateContentReviewTemplateRequest() (request *CreateContentReviewTemplateRequest) {
     request = &CreateContentReviewTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},

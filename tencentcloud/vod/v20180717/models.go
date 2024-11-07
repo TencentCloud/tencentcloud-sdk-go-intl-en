@@ -3284,6 +3284,94 @@ func (r *CommitUploadResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type ComplexAdaptiveDynamicStreamingTask struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Task status. Valid values:
+	// <li>PROCESSING: processing;</li>
+	// <li>FINISH: completed.</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Execution status and result of the complex adaptive bitrate streaming task. Each array element corresponds to an adaptive bitrate streaming template specified when initiating the task.
+	ComplexAdaptiveDynamicStreamingTaskResultSet []*ComplexAdaptiveDynamicStreamingTaskResult `json:"ComplexAdaptiveDynamicStreamingTaskResultSet,omitnil,omitempty" name:"ComplexAdaptiveDynamicStreamingTaskResultSet"`
+}
+
+type ComplexAdaptiveDynamicStreamingTaskAudioInput struct {
+	// Media ID of the input audio file. The first audio stream in the media will be fixed, while video streams and other audio streams (if any) will be ignored.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Audio stream name in the output, supporting up to 16 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// The language of the audio stream in the output, supporting up to 16 characters. It must comply with the RFC5646 specification.
+	Language *string `json:"Language,omitnil,omitempty" name:"Language"`
+
+	// Whether to set as the default audio for adaptive bitrate streaming.
+	// <li>YES: Set as the default audio;</li>
+	// <li>NO: Not set as the default audio (default value).</li>
+	Default *string `json:"Default,omitnil,omitempty" name:"Default"`
+}
+
+type ComplexAdaptiveDynamicStreamingTaskInput struct {
+	// Adaptive bitrate streaming parameters.
+	StreamPara *ComplexAdaptiveDynamicStreamingTaskStreamPara `json:"StreamPara,omitnil,omitempty" name:"StreamPara"`
+}
+
+type ComplexAdaptiveDynamicStreamingTaskOutput struct {
+	// Adaptive bitrate streaming template ID.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// The adaptive bitrate streaming format. Valid values:
+	// <li>HLS;</li>
+	// <li>MPEG-DASH.</li>
+	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
+
+	// DRM scheme type, value range:
+	// <li>Widevine;</li>
+	// <li>FairPlay.</li>
+	// The default value is an empty string, indicating that the video will not be DRM protected.
+	DrmType *string `json:"DrmType,omitnil,omitempty" name:"DrmType"`
+
+	// Playback address of the output manifest.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+}
+
+type ComplexAdaptiveDynamicStreamingTaskResult struct {
+	// Task status of a single adaptive bitrate stream. Valid values: PROCESSING, SUCCESS, FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. An empty string indicates the task is successful; other values indicate failure. For details, see [Video Processing Error Codes](https://intl.cloud.tencent.com/zh/document/product/266/39145).
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// The execution progress of a single adaptive bitrate stream. Value range: 0-100.
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Input of a single adaptive bitrate stream.
+	Input *ComplexAdaptiveDynamicStreamingTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Output of a single adaptive bitrate stream.
+	Output *ComplexAdaptiveDynamicStreamingTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
+}
+
+type ComplexAdaptiveDynamicStreamingTaskStreamPara struct {
+	// Adaptive bitrate streaming template ID.
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type ComplexAdaptiveDynamicStreamingTaskSubtitleInput struct {
+	// Subtitle ID, which must belongs to the main media.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Whether to set as the default subtitle for adaptive bitrate streaming.
+	// <li>YES: Set as the default subtitle;</li>
+	// <li>NO: Not set as the default subtitle (default value).</li>
+	Default *string `json:"Default,omitnil,omitempty" name:"Default"`
+}
+
 type ComposeMediaOutput struct {
 	// Filename of up to 64 characters.
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
@@ -4427,6 +4515,98 @@ func (r *CreateClassResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateClassResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateComplexAdaptiveDynamicStreamingTaskRequestParams struct {
+	// The VOD application ID.
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Media ID of the main media.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Adaptive bitrate streaming parameters, supporting up to 8 entries.
+	StreamParaSet []*ComplexAdaptiveDynamicStreamingTaskStreamPara `json:"StreamParaSet,omitnil,omitempty" name:"StreamParaSet"`
+
+	// List of video opening/closing credits configuration template IDs, supporting up to 4 entries. If this field is filled in, the start times of the media specified in AudioSet and SubtitleSet will be automatically adjusted to stay in sync with the main media.
+	HeadTailSet []*HeadTailTaskInput `json:"HeadTailSet,omitnil,omitempty" name:"HeadTailSet"`
+
+	// Audio media parameters, supporting up to 16 entries. Each array element corresponds to an audio stream in the output. If you want to add the audio stream from the main media file to the output, you also need to specify it here. The order of elements in the array will determine the order of audio streams in the output. If the input media file contains both video and audio streams, the video stream will be ignored.
+	AudioSet []*ComplexAdaptiveDynamicStreamingTaskAudioInput `json:"AudioSet,omitnil,omitempty" name:"AudioSet"`
+
+	// List of subtitle IDs, supporting up to 16 entries. Each array element corresponds to an subtitle stream in the output. The order of elements in the array will determine the order of subtitles in the output.
+	SubtitleSet []*ComplexAdaptiveDynamicStreamingTaskSubtitleInput `json:"SubtitleSet,omitnil,omitempty" name:"SubtitleSet"`
+}
+
+type CreateComplexAdaptiveDynamicStreamingTaskRequest struct {
+	*tchttp.BaseRequest
+	
+	// The VOD application ID.
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Media ID of the main media.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// Adaptive bitrate streaming parameters, supporting up to 8 entries.
+	StreamParaSet []*ComplexAdaptiveDynamicStreamingTaskStreamPara `json:"StreamParaSet,omitnil,omitempty" name:"StreamParaSet"`
+
+	// List of video opening/closing credits configuration template IDs, supporting up to 4 entries. If this field is filled in, the start times of the media specified in AudioSet and SubtitleSet will be automatically adjusted to stay in sync with the main media.
+	HeadTailSet []*HeadTailTaskInput `json:"HeadTailSet,omitnil,omitempty" name:"HeadTailSet"`
+
+	// Audio media parameters, supporting up to 16 entries. Each array element corresponds to an audio stream in the output. If you want to add the audio stream from the main media file to the output, you also need to specify it here. The order of elements in the array will determine the order of audio streams in the output. If the input media file contains both video and audio streams, the video stream will be ignored.
+	AudioSet []*ComplexAdaptiveDynamicStreamingTaskAudioInput `json:"AudioSet,omitnil,omitempty" name:"AudioSet"`
+
+	// List of subtitle IDs, supporting up to 16 entries. Each array element corresponds to an subtitle stream in the output. The order of elements in the array will determine the order of subtitles in the output.
+	SubtitleSet []*ComplexAdaptiveDynamicStreamingTaskSubtitleInput `json:"SubtitleSet,omitnil,omitempty" name:"SubtitleSet"`
+}
+
+func (r *CreateComplexAdaptiveDynamicStreamingTaskRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateComplexAdaptiveDynamicStreamingTaskRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubAppId")
+	delete(f, "FileId")
+	delete(f, "StreamParaSet")
+	delete(f, "HeadTailSet")
+	delete(f, "AudioSet")
+	delete(f, "SubtitleSet")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateComplexAdaptiveDynamicStreamingTaskRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateComplexAdaptiveDynamicStreamingTaskResponseParams struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateComplexAdaptiveDynamicStreamingTaskResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateComplexAdaptiveDynamicStreamingTaskResponseParams `json:"Response"`
+}
+
+func (r *CreateComplexAdaptiveDynamicStreamingTaskResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateComplexAdaptiveDynamicStreamingTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -12223,6 +12403,7 @@ type DescribeTaskDetailResponseParams struct {
 	// <li> `ReviewAudioVideo`: Moderation</li>
 	// <li>`ExtractTraceWatermark`: Digital watermark extraction</li>
 	// <li>`QualityEnhance`: Enhance audio/video</li>
+	// <li>`ComplexAdaptiveDynamicStreaming`: Complex adaptive bitrate streaming processing task</li>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
 
 	// Task status. Valid values:
@@ -12323,6 +12504,10 @@ type DescribeTaskDetailResponseParams struct {
 	// Media Quality Enhance task information. This field has a value only when TaskType is QualityEnhance.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	QualityEnhanceTask *QualityEnhanceTask `json:"QualityEnhanceTask,omitnil,omitempty" name:"QualityEnhanceTask"`
+
+	// Complex adaptive bitrate streaming processing task information. This field has a value only when TaskType is ComplexAdaptiveDynamicStreaming. 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ComplexAdaptiveDynamicStreamingTask *ComplexAdaptiveDynamicStreamingTask `json:"ComplexAdaptiveDynamicStreamingTask,omitnil,omitempty" name:"ComplexAdaptiveDynamicStreamingTask"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
