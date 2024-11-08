@@ -35,6 +35,12 @@ const (
 	// Failed to create the record.
 	FAILEDOPERATION_CREATERECORDFAILED = "FailedOperation.CreateRecordFailed"
 
+	// An exception occurs when you create an endpoint.
+	FAILEDOPERATION_CREATEVPCENDPOINTERROR = "FailedOperation.CreateVpcEndPointError"
+
+	// Failed to create an endpoint.
+	FAILEDOPERATION_CREATEVPCENDPOINTFAILED = "FailedOperation.CreateVpcEndPointFailed"
+
 	// Failed to create the private domain.
 	FAILEDOPERATION_CREATEZONEFAILED = "FailedOperation.CreateZoneFailed"
 
@@ -46,6 +52,18 @@ const (
 
 	// 
 	FAILEDOPERATION_DELETERECORDFAILED = "FailedOperation.DeleteRecordFailed"
+
+	// Failed to create an endpoint service.
+	FAILEDOPERATION_ENDPOINTSERVICECREATEFAILED = "FailedOperation.EndPointServiceCreateFailed"
+
+	// Failed to delete the endpoint service.
+	FAILEDOPERATION_ENDPOINTSERVICEDELETEFAILED = "FailedOperation.EndPointServiceDeleteFailed"
+
+	// Failed to obtain the endpoint service allowlist.
+	FAILEDOPERATION_ENDPOINTSERVICEWHITELISTFAILED = "FailedOperation.EndPointServiceWhiteListFailed"
+
+	// Failed to obtain the temporary credential.
+	FAILEDOPERATION_GETTMPCREDFAILED = "FailedOperation.GetTmpCredFailed"
 
 	// Failed to modify the record.
 	FAILEDOPERATION_MODIFYRECORDFAILED = "FailedOperation.ModifyRecordFailed"
@@ -67,6 +85,15 @@ const (
 
 	// A bound account already exists.
 	INVALIDPARAMETER_ACCOUNTEXIST = "InvalidParameter.AccountExist"
+
+	// The endpoint does not exist.
+	INVALIDPARAMETER_ENDPOINTNOTEXISTS = "InvalidParameter.EndPointNotExists"
+
+	// The endpoint service does not exist.
+	INVALIDPARAMETER_ENDPOINTSERVICENOTEXIST = "InvalidParameter.EndPointServiceNotExist"
+
+	// The private domain has already been bound with the forwarding rule.
+	INVALIDPARAMETER_FORWARDRULEZONEREPEATBIND = "InvalidParameter.ForwardRuleZoneRepeatBind"
 
 	// Invalid CIDR.
 	INVALIDPARAMETER_ILLEGALCIDR = "InvalidParameter.IllegalCidr"
@@ -152,6 +179,9 @@ const (
 	// This is a reserved domain name and cannot be created.
 	INVALIDPARAMETERVALUE_RESERVEDDOMAIN = "InvalidParameterValue.ReservedDomain"
 
+	// No access permission because the UIN is not added to the allowlist.
+	INVALIDPARAMETERVALUE_UINNOTINWHITELIST = "InvalidParameterValue.UinNotInWhiteList"
+
 	// The quota limit is exceeded.
 	LIMITEXCEEDED = "LimitExceeded"
 
@@ -188,6 +218,9 @@ const (
 	// The resource is unavailable.
 	RESOURCEUNAVAILABLE = "ResourceUnavailable"
 
+	// The platform account is not added to the allowlist of the current endpoint service.
+	RESOURCEUNAVAILABLE_SERVICEWHITELISTNOTADDED = "ResourceUnavailable.ServiceWhiteListNotAdded"
+
 	// The TLD value-added package expired.
 	RESOURCEUNAVAILABLE_TLDPACKAGEEXPIRED = "ResourceUnavailable.TldPackageExpired"
 
@@ -212,7 +245,7 @@ const (
 	// Account not bound.
 	UNSUPPORTEDOPERATION_ACCOUNTNOTBOUND = "UnsupportedOperation.AccountNotBound"
 
-	// 
+	// The API call frequency exceeds the limit.
 	UNSUPPORTEDOPERATION_FREQUENCYLIMIT = "UnsupportedOperation.FrequencyLimit"
 
 	// Subdomain recursive DNS is not supported.
