@@ -1367,6 +1367,7 @@ func NewListSecretsResponse() (response *ListSecretsResponse) {
 // This API is used to obtain the detailed information list of all Secrets. You can specify the filter fields and sorting order as needed.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"
@@ -1379,6 +1380,7 @@ func (c *Client) ListSecrets(request *ListSecretsRequest) (response *ListSecrets
 // This API is used to obtain the detailed information list of all Secrets. You can specify the filter fields and sorting order as needed.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCEUNAVAILABLE_NOTPURCHASED = "ResourceUnavailable.NotPurchased"

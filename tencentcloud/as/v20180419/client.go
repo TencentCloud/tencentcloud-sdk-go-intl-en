@@ -259,11 +259,15 @@ func NewCancelInstanceRefreshResponse() (response *CancelInstanceRefreshResponse
 // CancelInstanceRefresh
 // This API is used to cancel the instance refresh activity of the scaling group.
 //
-// * Batches that have already been refreshed or are currently being refreshed remain unaffected; batches pending refresh will be canceled.
+// * The batches that have already been refreshed or are currently being refreshed remain unaffected, but the batches pending refresh will be canceled.
 //
-// * If a refresh fails, the affected instances will remain in the standby status and require manual intervention by the user to either attempt to exit the standby status or destroy the instances.
+// * If a refresh fails, the affected instances will remain in the secondary status, and require manual intervention to exit the secondary status or terminate the instances.
 //
-// * Rollback operations are not allowed after cancellation, and resuming is also unsupported.
+// * Rollback operations are not allowed after cancellation, and recovery is also unsupported.
+//
+// * The instances temporarily scaled out due to the MaxSurge parameter are automatically terminated after cancellation.
+//
+// * During scale-in, all instances have already been updated and cannot be canceled.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_REFRESHACTIVITYNOTFOUND = "ResourceNotFound.RefreshActivityNotFound"
@@ -276,11 +280,15 @@ func (c *Client) CancelInstanceRefresh(request *CancelInstanceRefreshRequest) (r
 // CancelInstanceRefresh
 // This API is used to cancel the instance refresh activity of the scaling group.
 //
-// * Batches that have already been refreshed or are currently being refreshed remain unaffected; batches pending refresh will be canceled.
+// * The batches that have already been refreshed or are currently being refreshed remain unaffected, but the batches pending refresh will be canceled.
 //
-// * If a refresh fails, the affected instances will remain in the standby status and require manual intervention by the user to either attempt to exit the standby status or destroy the instances.
+// * If a refresh fails, the affected instances will remain in the secondary status, and require manual intervention to exit the secondary status or terminate the instances.
 //
-// * Rollback operations are not allowed after cancellation, and resuming is also unsupported.
+// * Rollback operations are not allowed after cancellation, and recovery is also unsupported.
+//
+// * The instances temporarily scaled out due to the MaxSurge parameter are automatically terminated after cancellation.
+//
+// * During scale-in, all instances have already been updated and cannot be canceled.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_REFRESHACTIVITYNOTFOUND = "ResourceNotFound.RefreshActivityNotFound"
@@ -3905,7 +3913,11 @@ func NewResumeInstanceRefreshResponse() (response *ResumeInstanceRefreshResponse
 }
 
 // ResumeInstanceRefresh
-// This API is used to resume the paused instance refresh activity, allowing it to retry failed instances in the current batch or proceed with refreshing subsequent batches. Note that calling this interface is ineffective when the activity is not in a paused status.
+// This API is used to resume the paused instance refresh activity, allowing it to retry failed instances in the current batch or proceed with refreshing subsequent batches. Note that calling this API is ineffective when the activity is not in a paused status.
+//
+// 
+//
+// - When the MaxSurge parameter is used, the activity may be paused due to scale-out or scale-in failures. This API can also be used to retry scaling operations.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_REFRESHACTIVITYNOTFOUND = "ResourceNotFound.RefreshActivityNotFound"
@@ -3916,7 +3928,11 @@ func (c *Client) ResumeInstanceRefresh(request *ResumeInstanceRefreshRequest) (r
 }
 
 // ResumeInstanceRefresh
-// This API is used to resume the paused instance refresh activity, allowing it to retry failed instances in the current batch or proceed with refreshing subsequent batches. Note that calling this interface is ineffective when the activity is not in a paused status.
+// This API is used to resume the paused instance refresh activity, allowing it to retry failed instances in the current batch or proceed with refreshing subsequent batches. Note that calling this API is ineffective when the activity is not in a paused status.
+//
+// 
+//
+// - When the MaxSurge parameter is used, the activity may be paused due to scale-out or scale-in failures. This API can also be used to retry scaling operations.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_REFRESHACTIVITYNOTFOUND = "ResourceNotFound.RefreshActivityNotFound"
@@ -3958,15 +3974,17 @@ func NewRollbackInstanceRefreshResponse() (response *RollbackInstanceRefreshResp
 }
 
 // RollbackInstanceRefresh
-// This API is used to generate a new instance refresh activity, which also supports batched refreshing and operations such as pausing, resuming, and canceling. The interface returns the RefreshActivityId for the rollback activity.
+// This API is used to generate a new instance refresh activity, which also supports batch refreshing and operations such as pausing, resuming, and canceling. This API returns RefreshActivityId for the rollback activity.
 //
-// * Instances pending refresh in the original activity are updated to a canceled status. Nonexistent instances are disregarded, while instances in all other statuses proceed to enter the rollback process.
+// * The instances pending refresh in the original activity are updated to canceled status. Nonexistent instances are disregarded, while instances in all other statuses proceed to enter the rollback process.
 //
-// * Instances that were being refreshed in the original activity will not be immediately terminated; instead, the rollback activity will be executed after their refresh has been completed.
+// * The instances that are being refreshed in the original activity will not be immediately terminated. Instead, the rollback activity will be executed after their refresh complete.
 //
-// * Rollback is supported for activities that are in a paused status or those with the most recent successful refresh; it is not supported for activities in other statuses.
+// * Rollback is supported for activities that are in the paused status or those succeeded in refreshing last time. It is not supported for activities in other statuses.
 //
-// * When the original refresh activity involves reinstalling instances, for the ImageId parameter, it will automatically restore to the image ID before the rollback; for parameters such as UserData, EnhancedService, LoginSettings, and HostName, they will still be retrieved from the launch configuration, requiring users to manually modify the launch configuration before initiating the rollback.
+// * When the original refresh activity involves reinstalling instances, for the ImageId parameter, it will automatically recover to the image ID before the rollback; for parameters such as UserData, EnhancedService, LoginSettings, and HostName, they will still be read from the launch configuration, requiring users to manually modify the launch configuration before initiating the rollback.
+//
+// * The rollback activity does not support the MaxSurge parameter currently.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_BATCHNUMBERTOOLARGE = "InvalidParameterValue.BatchNumberTooLarge"
@@ -3986,15 +4004,17 @@ func (c *Client) RollbackInstanceRefresh(request *RollbackInstanceRefreshRequest
 }
 
 // RollbackInstanceRefresh
-// This API is used to generate a new instance refresh activity, which also supports batched refreshing and operations such as pausing, resuming, and canceling. The interface returns the RefreshActivityId for the rollback activity.
+// This API is used to generate a new instance refresh activity, which also supports batch refreshing and operations such as pausing, resuming, and canceling. This API returns RefreshActivityId for the rollback activity.
 //
-// * Instances pending refresh in the original activity are updated to a canceled status. Nonexistent instances are disregarded, while instances in all other statuses proceed to enter the rollback process.
+// * The instances pending refresh in the original activity are updated to canceled status. Nonexistent instances are disregarded, while instances in all other statuses proceed to enter the rollback process.
 //
-// * Instances that were being refreshed in the original activity will not be immediately terminated; instead, the rollback activity will be executed after their refresh has been completed.
+// * The instances that are being refreshed in the original activity will not be immediately terminated. Instead, the rollback activity will be executed after their refresh complete.
 //
-// * Rollback is supported for activities that are in a paused status or those with the most recent successful refresh; it is not supported for activities in other statuses.
+// * Rollback is supported for activities that are in the paused status or those succeeded in refreshing last time. It is not supported for activities in other statuses.
 //
-// * When the original refresh activity involves reinstalling instances, for the ImageId parameter, it will automatically restore to the image ID before the rollback; for parameters such as UserData, EnhancedService, LoginSettings, and HostName, they will still be retrieved from the launch configuration, requiring users to manually modify the launch configuration before initiating the rollback.
+// * When the original refresh activity involves reinstalling instances, for the ImageId parameter, it will automatically recover to the image ID before the rollback; for parameters such as UserData, EnhancedService, LoginSettings, and HostName, they will still be read from the launch configuration, requiring users to manually modify the launch configuration before initiating the rollback.
+//
+// * The rollback activity does not support the MaxSurge parameter currently.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_BATCHNUMBERTOOLARGE = "InvalidParameterValue.BatchNumberTooLarge"
@@ -4365,6 +4385,7 @@ func NewStartInstanceRefreshResponse() (response *StartInstanceRefreshResponse) 
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_BATCHNUMBERTOOLARGE = "InvalidParameterValue.BatchNumberTooLarge"
+//  INVALIDPARAMETERVALUE_MAXSURGETOOLARGE = "InvalidParameterValue.MaxSurgeTooLarge"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPIDNOTFOUND = "ResourceNotFound.AutoScalingGroupIdNotFound"
 //  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPABNORMALSTATUS = "ResourceUnavailable.AutoScalingGroupAbnormalStatus"
 //  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
@@ -4392,6 +4413,7 @@ func (c *Client) StartInstanceRefresh(request *StartInstanceRefreshRequest) (res
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_BATCHNUMBERTOOLARGE = "InvalidParameterValue.BatchNumberTooLarge"
+//  INVALIDPARAMETERVALUE_MAXSURGETOOLARGE = "InvalidParameterValue.MaxSurgeTooLarge"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPIDNOTFOUND = "ResourceNotFound.AutoScalingGroupIdNotFound"
 //  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPABNORMALSTATUS = "ResourceUnavailable.AutoScalingGroupAbnormalStatus"
 //  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
@@ -4533,7 +4555,9 @@ func NewStopInstanceRefreshResponse() (response *StopInstanceRefreshResponse) {
 //
 // * In the paused status, the scaling group will also be disabled.
 //
-// * Instances that are currently being updated will not be paused, instances pending updates will have their updates paused.
+// * The instances that are currently being updated or scaled out will not be paused, but instances pending updates will have their updates paused.
+//
+// * During scale-in, all instances have already been updated and cannot be paused.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_REFRESHACTIVITYNOTFOUND = "ResourceNotFound.RefreshActivityNotFound"
@@ -4548,7 +4572,9 @@ func (c *Client) StopInstanceRefresh(request *StopInstanceRefreshRequest) (respo
 //
 // * In the paused status, the scaling group will also be disabled.
 //
-// * Instances that are currently being updated will not be paused, instances pending updates will have their updates paused.
+// * The instances that are currently being updated or scaled out will not be paused, but instances pending updates will have their updates paused.
+//
+// * During scale-in, all instances have already been updated and cannot be paused.
 //
 // error code that may be returned:
 //  RESOURCENOTFOUND_REFRESHACTIVITYNOTFOUND = "ResourceNotFound.RefreshActivityNotFound"
