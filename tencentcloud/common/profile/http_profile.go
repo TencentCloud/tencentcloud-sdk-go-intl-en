@@ -17,7 +17,7 @@ func NewHttpProfile() *HttpProfile {
 		ReqMethod:     "POST",
 		ReqTimeout:    60,
 		Scheme:        "HTTPS",
-		RootDomain:    "",
+		RootDomain:    "intl.tencentcloudapi.com",
 		Endpoint:      "",
 		ApigwEndpoint: "",
 	}
