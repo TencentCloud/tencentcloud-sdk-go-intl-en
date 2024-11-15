@@ -168,6 +168,7 @@ func NewAddExistedInstancesResponse() (response *AddExistedInstancesResponse) {
 //  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_VERSIONNOTSUPPORTCGROUPV2 = "InvalidParameter.VersionNotSupportCgroupV2"
 //  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) AddExistedInstances(request *AddExistedInstancesRequest) (response *AddExistedInstancesResponse, err error) {
     return c.AddExistedInstancesWithContext(context.Background(), request)
@@ -196,6 +197,7 @@ func (c *Client) AddExistedInstances(request *AddExistedInstancesRequest) (respo
 //  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_VERSIONNOTSUPPORTCGROUPV2 = "InvalidParameter.VersionNotSupportCgroupV2"
 //  LIMITEXCEEDED = "LimitExceeded"
 func (c *Client) AddExistedInstancesWithContext(ctx context.Context, request *AddExistedInstancesRequest) (response *AddExistedInstancesResponse, err error) {
     if request == nil {
@@ -289,6 +291,7 @@ func NewAddVpcCniSubnetsResponse() (response *AddVpcCniSubnetsResponse) {
 // This API is used to add subnets in the container network for a VPC-CNI cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ADDVPCCNISUBNETSFAILED = "FailedOperation.AddVpcCniSubnetsFailed"
 //  FAILEDOPERATION_VPCRECODRNOTFOUND = "FailedOperation.VpcRecodrNotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -308,6 +311,7 @@ func (c *Client) AddVpcCniSubnets(request *AddVpcCniSubnetsRequest) (response *A
 // This API is used to add subnets in the container network for a VPC-CNI cluster.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_ADDVPCCNISUBNETSFAILED = "FailedOperation.AddVpcCniSubnetsFailed"
 //  FAILEDOPERATION_VPCRECODRNOTFOUND = "FailedOperation.VpcRecodrNotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_DB = "InternalError.Db"
@@ -558,6 +562,117 @@ func (c *Client) CreateBackupStorageLocationWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewCreateBackupStorageLocationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateCLSLogConfigRequest() (request *CreateCLSLogConfigRequest) {
+    request = &CreateCLSLogConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "CreateCLSLogConfig")
+    
+    
+    return
+}
+
+func NewCreateCLSLogConfigResponse() (response *CreateCLSLogConfigResponse) {
+    response = &CreateCLSLogConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateCLSLogConfig
+// This API is used to create log collection configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_CREATECLSCLIENT = "FailedOperation.CreateClsClient"
+//  FAILEDOPERATION_CREATECLSCONFIG = "FailedOperation.CreateClsConfig"
+//  FAILEDOPERATION_CREATECLSINDEX = "FailedOperation.CreateClsIndex"
+//  FAILEDOPERATION_CREATECLSLOGSET = "FailedOperation.CreateClsLogSet"
+//  FAILEDOPERATION_CREATECLSMACHINEGROUP = "FailedOperation.CreateClsMachineGroup"
+//  FAILEDOPERATION_CREATECLSTOPIC = "FailedOperation.CreateClsTopic"
+//  FAILEDOPERATION_GETCLSCONFIG = "FailedOperation.GetClsConfig"
+//  FAILEDOPERATION_GETCLSCONFIGMACHINEGROUPS = "FailedOperation.GetClsConfigMachineGroups"
+//  FAILEDOPERATION_GETCLSINDEX = "FailedOperation.GetClsIndex"
+//  FAILEDOPERATION_GETCLSLOGSET = "FailedOperation.GetClsLogSet"
+//  FAILEDOPERATION_GETCLSMACHINEGROUP = "FailedOperation.GetClsMachineGroup"
+//  FAILEDOPERATION_GETCLSMACHINEGROUPCONFIGS = "FailedOperation.GetClsMachineGroupConfigs"
+//  FAILEDOPERATION_GETCLSTOPIC = "FailedOperation.GetClsTopic"
+//  FAILEDOPERATION_K8SCLIENTBUILDERROR = "FailedOperation.K8sClientBuildError"
+//  FAILEDOPERATION_KUBECLIENTCONNECTION = "FailedOperation.KubeClientConnection"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  FAILEDOPERATION_KUBERNETESCLIENTBUILDERROR = "FailedOperation.KubernetesClientBuildError"
+//  FAILEDOPERATION_KUBERNETESCREATEOPERATIONERROR = "FailedOperation.KubernetesCreateOperationError"
+//  FAILEDOPERATION_KUBERNETESGETOPERATIONERROR = "FailedOperation.KubernetesGetOperationError"
+//  FAILEDOPERATION_KUBERNETESINTERNAL = "FailedOperation.KubernetesInternal"
+//  FAILEDOPERATION_MODIFYCLSCONFIG = "FailedOperation.ModifyClsConfig"
+//  FAILEDOPERATION_MODIFYCLSINDEX = "FailedOperation.ModifyClsIndex"
+//  FAILEDOPERATION_MODIFYCLSTOPIC = "FailedOperation.ModifyClsTopic"
+//  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
+//  INTERNALERROR_COMPONENTCLINETHTTP = "InternalError.ComponentClinetHttp"
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) CreateCLSLogConfig(request *CreateCLSLogConfigRequest) (response *CreateCLSLogConfigResponse, err error) {
+    return c.CreateCLSLogConfigWithContext(context.Background(), request)
+}
+
+// CreateCLSLogConfig
+// This API is used to create log collection configuration.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_CREATECLSCLIENT = "FailedOperation.CreateClsClient"
+//  FAILEDOPERATION_CREATECLSCONFIG = "FailedOperation.CreateClsConfig"
+//  FAILEDOPERATION_CREATECLSINDEX = "FailedOperation.CreateClsIndex"
+//  FAILEDOPERATION_CREATECLSLOGSET = "FailedOperation.CreateClsLogSet"
+//  FAILEDOPERATION_CREATECLSMACHINEGROUP = "FailedOperation.CreateClsMachineGroup"
+//  FAILEDOPERATION_CREATECLSTOPIC = "FailedOperation.CreateClsTopic"
+//  FAILEDOPERATION_GETCLSCONFIG = "FailedOperation.GetClsConfig"
+//  FAILEDOPERATION_GETCLSCONFIGMACHINEGROUPS = "FailedOperation.GetClsConfigMachineGroups"
+//  FAILEDOPERATION_GETCLSINDEX = "FailedOperation.GetClsIndex"
+//  FAILEDOPERATION_GETCLSLOGSET = "FailedOperation.GetClsLogSet"
+//  FAILEDOPERATION_GETCLSMACHINEGROUP = "FailedOperation.GetClsMachineGroup"
+//  FAILEDOPERATION_GETCLSMACHINEGROUPCONFIGS = "FailedOperation.GetClsMachineGroupConfigs"
+//  FAILEDOPERATION_GETCLSTOPIC = "FailedOperation.GetClsTopic"
+//  FAILEDOPERATION_K8SCLIENTBUILDERROR = "FailedOperation.K8sClientBuildError"
+//  FAILEDOPERATION_KUBECLIENTCONNECTION = "FailedOperation.KubeClientConnection"
+//  FAILEDOPERATION_KUBECOMMON = "FailedOperation.KubeCommon"
+//  FAILEDOPERATION_KUBERNETESCLIENTBUILDERROR = "FailedOperation.KubernetesClientBuildError"
+//  FAILEDOPERATION_KUBERNETESCREATEOPERATIONERROR = "FailedOperation.KubernetesCreateOperationError"
+//  FAILEDOPERATION_KUBERNETESGETOPERATIONERROR = "FailedOperation.KubernetesGetOperationError"
+//  FAILEDOPERATION_KUBERNETESINTERNAL = "FailedOperation.KubernetesInternal"
+//  FAILEDOPERATION_MODIFYCLSCONFIG = "FailedOperation.ModifyClsConfig"
+//  FAILEDOPERATION_MODIFYCLSINDEX = "FailedOperation.ModifyClsIndex"
+//  FAILEDOPERATION_MODIFYCLSTOPIC = "FailedOperation.ModifyClsTopic"
+//  INTERNALERROR_COMPONENTCLIENTHTTP = "InternalError.ComponentClientHttp"
+//  INTERNALERROR_COMPONENTCLINETHTTP = "InternalError.ComponentClinetHttp"
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) CreateCLSLogConfigWithContext(ctx context.Context, request *CreateCLSLogConfigRequest) (response *CreateCLSLogConfigResponse, err error) {
+    if request == nil {
+        request = NewCreateCLSLogConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateCLSLogConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateCLSLogConfigResponse()
     err = c.Send(request, response)
     return
 }
@@ -966,6 +1081,7 @@ func NewCreateClusterInstancesResponse() (response *CreateClusterInstancesRespon
 //  INTERNALERROR_VPCPEERNOTFOUND = "InternalError.VpcPeerNotFound"
 //  INTERNALERROR_VPCRECODRNOTFOUND = "InternalError.VpcRecodrNotFound"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_VERSIONNOTSUPPORTCGROUPV2 = "InvalidParameter.VersionNotSupportCgroupV2"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT_SPECIFIEDINSTANCETYPE = "ResourceInsufficient.SpecifiedInstanceType"
@@ -1014,6 +1130,7 @@ func (c *Client) CreateClusterInstances(request *CreateClusterInstancesRequest) 
 //  INTERNALERROR_VPCPEERNOTFOUND = "InternalError.VpcPeerNotFound"
 //  INTERNALERROR_VPCRECODRNOTFOUND = "InternalError.VpcRecodrNotFound"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_VERSIONNOTSUPPORTCGROUPV2 = "InvalidParameter.VersionNotSupportCgroupV2"
 //  MISSINGPARAMETER = "MissingParameter"
 //  RESOURCEINUSE = "ResourceInUse"
 //  RESOURCEINSUFFICIENT_SPECIFIEDINSTANCETYPE = "ResourceInsufficient.SpecifiedInstanceType"
@@ -1212,7 +1329,7 @@ func NewCreateClusterVirtualNodeResponse() (response *CreateClusterVirtualNodeRe
 }
 
 // CreateClusterVirtualNode
-// This API is used to create a virtual node.
+// This API is used to create the Pay-as-you-go Super Node.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -1227,7 +1344,7 @@ func (c *Client) CreateClusterVirtualNode(request *CreateClusterVirtualNodeReque
 }
 
 // CreateClusterVirtualNode
-// This API is used to create a virtual node.
+// This API is used to create the Pay-as-you-go Super Node.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -1273,7 +1390,7 @@ func NewCreateClusterVirtualNodePoolResponse() (response *CreateClusterVirtualNo
 }
 
 // CreateClusterVirtualNodePool
-// This API is used to create a virtual node pool.
+// This API is used to create the Super Node Pool.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -1290,7 +1407,7 @@ func (c *Client) CreateClusterVirtualNodePool(request *CreateClusterVirtualNodeP
 }
 
 // CreateClusterVirtualNodePool
-// This API is used to create a virtual node pool.
+// This API is used to create the Super Node Pool.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -1507,6 +1624,79 @@ func (c *Client) CreateEdgeLogConfigWithContext(ctx context.Context, request *Cr
     request.SetContext(ctx)
     
     response = NewCreateEdgeLogConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateEksLogConfigRequest() (request *CreateEksLogConfigRequest) {
+    request = &CreateEksLogConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "CreateEksLogConfig")
+    
+    
+    return
+}
+
+func NewCreateEksLogConfigResponse() (response *CreateEksLogConfigResponse) {
+    response = &CreateEksLogConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateEksLogConfig
+// This API is used to create Log Collection Configuration for Elastic Cluster.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_CREATECLSTOPIC = "FailedOperation.CreateClsTopic"
+//  FAILEDOPERATION_GETCLSTOPIC = "FailedOperation.GetClsTopic"
+//  FAILEDOPERATION_KUBERNETESCLIENTBUILDERROR = "FailedOperation.KubernetesClientBuildError"
+//  FAILEDOPERATION_KUBERNETESCREATEOPERATIONERROR = "FailedOperation.KubernetesCreateOperationError"
+//  FAILEDOPERATION_KUBERNETESGETOPERATIONERROR = "FailedOperation.KubernetesGetOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateEksLogConfig(request *CreateEksLogConfigRequest) (response *CreateEksLogConfigResponse, err error) {
+    return c.CreateEksLogConfigWithContext(context.Background(), request)
+}
+
+// CreateEksLogConfig
+// This API is used to create Log Collection Configuration for Elastic Cluster.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_CREATECLSTOPIC = "FailedOperation.CreateClsTopic"
+//  FAILEDOPERATION_GETCLSTOPIC = "FailedOperation.GetClsTopic"
+//  FAILEDOPERATION_KUBERNETESCLIENTBUILDERROR = "FailedOperation.KubernetesClientBuildError"
+//  FAILEDOPERATION_KUBERNETESCREATEOPERATIONERROR = "FailedOperation.KubernetesCreateOperationError"
+//  FAILEDOPERATION_KUBERNETESGETOPERATIONERROR = "FailedOperation.KubernetesGetOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) CreateEksLogConfigWithContext(ctx context.Context, request *CreateEksLogConfigRequest) (response *CreateEksLogConfigResponse, err error) {
+    if request == nil {
+        request = NewCreateEksLogConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateEksLogConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateEksLogConfigResponse()
     err = c.Send(request, response)
     return
 }
@@ -1793,8 +1983,10 @@ func NewDeleteClusterResponse() (response *DeleteClusterResponse) {
 //  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
-//  FAILEDOPERATION_COMPONENTCLINETHTTP = "FailedOperation.ComponentClinetHttp"
+//  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
 //  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  FAILEDOPERATION_TAGCOMMON = "FailedOperation.TagCommon"
+//  FAILEDOPERATION_VPCCOMMON = "FailedOperation.VpcCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -1822,8 +2014,10 @@ func (c *Client) DeleteCluster(request *DeleteClusterRequest) (response *DeleteC
 //  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
 //  FAILEDOPERATION_COMPONENTCLIENTCOMMON = "FailedOperation.ComponentClientCommon"
 //  FAILEDOPERATION_COMPONENTCLIENTHTTP = "FailedOperation.ComponentClientHttp"
-//  FAILEDOPERATION_COMPONENTCLINETHTTP = "FailedOperation.ComponentClinetHttp"
+//  FAILEDOPERATION_CVMCOMMON = "FailedOperation.CvmCommon"
 //  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  FAILEDOPERATION_TAGCOMMON = "FailedOperation.TagCommon"
+//  FAILEDOPERATION_VPCCOMMON = "FailedOperation.VpcCommon"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CAMNOAUTH = "InternalError.CamNoAuth"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -2141,6 +2335,7 @@ func NewDeleteClusterInstancesResponse() (response *DeleteClusterInstancesRespon
 //  FAILEDOPERATION_ASCOMMON = "FailedOperation.AsCommon"
 //  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
 //  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
+//  FAILEDOPERATION_CVMDELETIONPROTECTION = "FailedOperation.CvmDeletionProtection"
 //  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
 //  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
@@ -2165,6 +2360,7 @@ func (c *Client) DeleteClusterInstances(request *DeleteClusterInstancesRequest) 
 //  FAILEDOPERATION_ASCOMMON = "FailedOperation.AsCommon"
 //  FAILEDOPERATION_CLUSTERNOTFOUND = "FailedOperation.ClusterNotFound"
 //  FAILEDOPERATION_CLUSTERSTATE = "FailedOperation.ClusterState"
+//  FAILEDOPERATION_CVMDELETIONPROTECTION = "FailedOperation.CvmDeletionProtection"
 //  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
 //  FAILEDOPERATION_PARAM = "FailedOperation.Param"
 //  INTERNALERROR = "InternalError"
@@ -2217,6 +2413,7 @@ func NewDeleteClusterNodePoolResponse() (response *DeleteClusterNodePoolResponse
 // This API is used to delete a node pool.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CVMDELETIONPROTECTION = "FailedOperation.CvmDeletionProtection"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
@@ -2231,6 +2428,7 @@ func (c *Client) DeleteClusterNodePool(request *DeleteClusterNodePoolRequest) (r
 // This API is used to delete a node pool.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_CVMDELETIONPROTECTION = "FailedOperation.CvmDeletionProtection"
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  INTERNALERROR_DB = "InternalError.Db"
 //  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
@@ -2395,7 +2593,7 @@ func NewDeleteClusterVirtualNodeResponse() (response *DeleteClusterVirtualNodeRe
 }
 
 // DeleteClusterVirtualNode
-// This API is used to delete a virtual node.
+// This API is used to delete the super node.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -2407,7 +2605,7 @@ func (c *Client) DeleteClusterVirtualNode(request *DeleteClusterVirtualNodeReque
 }
 
 // DeleteClusterVirtualNode
-// This API is used to delete a virtual node.
+// This API is used to delete the super node.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -2450,7 +2648,7 @@ func NewDeleteClusterVirtualNodePoolResponse() (response *DeleteClusterVirtualNo
 }
 
 // DeleteClusterVirtualNodePool
-// This API is used to delete a virtual node pool.
+// This API is used to delete the Super Node Pool.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
@@ -2463,7 +2661,7 @@ func (c *Client) DeleteClusterVirtualNodePool(request *DeleteClusterVirtualNodeP
 }
 
 // DeleteClusterVirtualNodePool
-// This API is used to delete a virtual node pool.
+// This API is used to delete the Super Node Pool.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
@@ -2696,6 +2894,65 @@ func (c *Client) DeleteEdgeClusterInstancesWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewDeleteEdgeClusterInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteLogConfigsRequest() (request *DeleteLogConfigsRequest) {
+    request = &DeleteLogConfigsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DeleteLogConfigs")
+    
+    
+    return
+}
+
+func NewDeleteLogConfigsResponse() (response *DeleteLogConfigsResponse) {
+    response = &DeleteLogConfigsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteLogConfigs
+// This API is used to delete collection rules within the cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_K8SCLIENTBUILDERROR = "FailedOperation.K8sClientBuildError"
+//  FAILEDOPERATION_KUBERNETESDELETEOPERATIONERROR = "FailedOperation.KubernetesDeleteOperationError"
+//  FAILEDOPERATION_KUBERNETESGETOPERATIONERROR = "FailedOperation.KubernetesGetOperationError"
+//  FAILEDOPERATION_KUBERNETESLISTOPERATIONERROR = "FailedOperation.KubernetesListOperationError"
+//  FAILEDOPERATION_KUBERNETESRESOURCENOTFOUND = "FailedOperation.KubernetesResourceNotFound"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+func (c *Client) DeleteLogConfigs(request *DeleteLogConfigsRequest) (response *DeleteLogConfigsResponse, err error) {
+    return c.DeleteLogConfigsWithContext(context.Background(), request)
+}
+
+// DeleteLogConfigs
+// This API is used to delete collection rules within the cluster.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_K8SCLIENTBUILDERROR = "FailedOperation.K8sClientBuildError"
+//  FAILEDOPERATION_KUBERNETESDELETEOPERATIONERROR = "FailedOperation.KubernetesDeleteOperationError"
+//  FAILEDOPERATION_KUBERNETESGETOPERATIONERROR = "FailedOperation.KubernetesGetOperationError"
+//  FAILEDOPERATION_KUBERNETESLISTOPERATIONERROR = "FailedOperation.KubernetesListOperationError"
+//  FAILEDOPERATION_KUBERNETESRESOURCENOTFOUND = "FailedOperation.KubernetesResourceNotFound"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+func (c *Client) DeleteLogConfigsWithContext(ctx context.Context, request *DeleteLogConfigsRequest) (response *DeleteLogConfigsResponse, err error) {
+    if request == nil {
+        request = NewDeleteLogConfigsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteLogConfigs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteLogConfigsResponse()
     err = c.Send(request, response)
     return
 }
@@ -3125,6 +3382,55 @@ func (c *Client) DescribeBackupStorageLocationsWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewDescribeBackupStorageLocationsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeBatchModifyTagsStatusRequest() (request *DescribeBatchModifyTagsStatusRequest) {
+    request = &DescribeBatchModifyTagsStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeBatchModifyTagsStatus")
+    
+    
+    return
+}
+
+func NewDescribeBatchModifyTagsStatusResponse() (response *DescribeBatchModifyTagsStatusResponse) {
+    response = &DescribeBatchModifyTagsStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBatchModifyTagsStatus
+// This API is used to query batch modification Tag status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTFOUND = "FailedOperation.TaskNotFound"
+func (c *Client) DescribeBatchModifyTagsStatus(request *DescribeBatchModifyTagsStatusRequest) (response *DescribeBatchModifyTagsStatusResponse, err error) {
+    return c.DescribeBatchModifyTagsStatusWithContext(context.Background(), request)
+}
+
+// DescribeBatchModifyTagsStatus
+// This API is used to query batch modification Tag status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTFOUND = "FailedOperation.TaskNotFound"
+func (c *Client) DescribeBatchModifyTagsStatusWithContext(ctx context.Context, request *DescribeBatchModifyTagsStatusRequest) (response *DescribeBatchModifyTagsStatusResponse, err error) {
+    if request == nil {
+        request = NewDescribeBatchModifyTagsStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBatchModifyTagsStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBatchModifyTagsStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -3662,6 +3968,65 @@ func (c *Client) DescribeClusterEndpointsWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeClusterEndpointsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeClusterExtraArgsRequest() (request *DescribeClusterExtraArgsRequest) {
+    request = &DescribeClusterExtraArgsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeClusterExtraArgs")
+    
+    
+    return
+}
+
+func NewDescribeClusterExtraArgsResponse() (response *DescribeClusterExtraArgsResponse) {
+    response = &DescribeClusterExtraArgsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeClusterExtraArgs
+// This API is used to query custom parameters of a cluster.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) DescribeClusterExtraArgs(request *DescribeClusterExtraArgsRequest) (response *DescribeClusterExtraArgsResponse, err error) {
+    return c.DescribeClusterExtraArgsWithContext(context.Background(), request)
+}
+
+// DescribeClusterExtraArgs
+// This API is used to query custom parameters of a cluster.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_CLUSTERNOTFOUND = "ResourceNotFound.ClusterNotFound"
+func (c *Client) DescribeClusterExtraArgsWithContext(ctx context.Context, request *DescribeClusterExtraArgsRequest) (response *DescribeClusterExtraArgsResponse, err error) {
+    if request == nil {
+        request = NewDescribeClusterExtraArgsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeClusterExtraArgs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeClusterExtraArgsResponse()
     err = c.Send(request, response)
     return
 }
@@ -4370,7 +4735,7 @@ func NewDescribeClusterVirtualNodeResponse() (response *DescribeClusterVirtualNo
 }
 
 // DescribeClusterVirtualNode
-// This API is used to query the list of virtual nodes.
+// This API is used to view the Super Node list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_KUBERNETESLISTOPERATIONERROR = "FailedOperation.KubernetesListOperationError"
@@ -4384,7 +4749,7 @@ func (c *Client) DescribeClusterVirtualNode(request *DescribeClusterVirtualNodeR
 }
 
 // DescribeClusterVirtualNode
-// This API is used to query the list of virtual nodes.
+// This API is used to view the Super Node list.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_KUBERNETESLISTOPERATIONERROR = "FailedOperation.KubernetesListOperationError"
@@ -4429,7 +4794,7 @@ func NewDescribeClusterVirtualNodePoolsResponse() (response *DescribeClusterVirt
 }
 
 // DescribeClusterVirtualNodePools
-// This API is used to query the list of virtual node pools.
+// This API is used to view the Super Node Pool list.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -4442,7 +4807,7 @@ func (c *Client) DescribeClusterVirtualNodePools(request *DescribeClusterVirtual
 }
 
 // DescribeClusterVirtualNodePools
-// This API is used to query the list of virtual node pools.
+// This API is used to view the Super Node Pool list.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -5207,6 +5572,120 @@ func (c *Client) DescribeExistedInstancesWithContext(ctx context.Context, reques
     return
 }
 
+func NewDescribeExternalNodeSupportConfigRequest() (request *DescribeExternalNodeSupportConfigRequest) {
+    request = &DescribeExternalNodeSupportConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeExternalNodeSupportConfig")
+    
+    
+    return
+}
+
+func NewDescribeExternalNodeSupportConfigResponse() (response *DescribeExternalNodeSupportConfigResponse) {
+    response = &DescribeExternalNodeSupportConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeExternalNodeSupportConfig
+// This API is used to view third-party node pool configuration information.
+//
+// error code that may be returned:
+//  INTERNALERROR_CLUSTERSTATE = "InternalError.ClusterState"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+//  UNSUPPORTEDOPERATION_NOTINWHITELIST = "UnsupportedOperation.NotInWhitelist"
+func (c *Client) DescribeExternalNodeSupportConfig(request *DescribeExternalNodeSupportConfigRequest) (response *DescribeExternalNodeSupportConfigResponse, err error) {
+    return c.DescribeExternalNodeSupportConfigWithContext(context.Background(), request)
+}
+
+// DescribeExternalNodeSupportConfig
+// This API is used to view third-party node pool configuration information.
+//
+// error code that may be returned:
+//  INTERNALERROR_CLUSTERSTATE = "InternalError.ClusterState"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE_CLUSTERSTATE = "ResourceUnavailable.ClusterState"
+//  UNSUPPORTEDOPERATION_NOTINWHITELIST = "UnsupportedOperation.NotInWhitelist"
+func (c *Client) DescribeExternalNodeSupportConfigWithContext(ctx context.Context, request *DescribeExternalNodeSupportConfigRequest) (response *DescribeExternalNodeSupportConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeExternalNodeSupportConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeExternalNodeSupportConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeExternalNodeSupportConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeIPAMDRequest() (request *DescribeIPAMDRequest) {
+    request = &DescribeIPAMDRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeIPAMD")
+    
+    
+    return
+}
+
+func NewDescribeIPAMDResponse() (response *DescribeIPAMDResponse) {
+    response = &DescribeIPAMDResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeIPAMD
+// This API is used to obtain eniipamd component information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENABLEVPCCNIFAILED = "FailedOperation.EnableVPCCNIFailed"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) DescribeIPAMD(request *DescribeIPAMDRequest) (response *DescribeIPAMDResponse, err error) {
+    return c.DescribeIPAMDWithContext(context.Background(), request)
+}
+
+// DescribeIPAMD
+// This API is used to obtain eniipamd component information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ENABLEVPCCNIFAILED = "FailedOperation.EnableVPCCNIFailed"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) DescribeIPAMDWithContext(ctx context.Context, request *DescribeIPAMDRequest) (response *DescribeIPAMDResponse, err error) {
+    if request == nil {
+        request = NewDescribeIPAMDRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIPAMD require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeIPAMDResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeImagesRequest() (request *DescribeImagesRequest) {
     request = &DescribeImagesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5288,6 +5767,183 @@ func (c *Client) DescribeImagesWithContext(ctx context.Context, request *Describ
     request.SetContext(ctx)
     
     response = NewDescribeImagesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLogConfigsRequest() (request *DescribeLogConfigsRequest) {
+    request = &DescribeLogConfigsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeLogConfigs")
+    
+    
+    return
+}
+
+func NewDescribeLogConfigsResponse() (response *DescribeLogConfigsResponse) {
+    response = &DescribeLogConfigsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLogConfigs
+// This API is used to query the log collection rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_KUBERNETESCLIENTBUILDERROR = "FailedOperation.KubernetesClientBuildError"
+//  FAILEDOPERATION_KUBERNETESGETOPERATIONERROR = "FailedOperation.KubernetesGetOperationError"
+//  FAILEDOPERATION_KUBERNETESLISTOPERATIONERROR = "FailedOperation.KubernetesListOperationError"
+//  FAILEDOPERATION_KUBERNETESRESOURCENOTFOUND = "FailedOperation.KubernetesResourceNotFound"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) DescribeLogConfigs(request *DescribeLogConfigsRequest) (response *DescribeLogConfigsResponse, err error) {
+    return c.DescribeLogConfigsWithContext(context.Background(), request)
+}
+
+// DescribeLogConfigs
+// This API is used to query the log collection rules.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_KUBERNETESCLIENTBUILDERROR = "FailedOperation.KubernetesClientBuildError"
+//  FAILEDOPERATION_KUBERNETESGETOPERATIONERROR = "FailedOperation.KubernetesGetOperationError"
+//  FAILEDOPERATION_KUBERNETESLISTOPERATIONERROR = "FailedOperation.KubernetesListOperationError"
+//  FAILEDOPERATION_KUBERNETESRESOURCENOTFOUND = "FailedOperation.KubernetesResourceNotFound"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) DescribeLogConfigsWithContext(ctx context.Context, request *DescribeLogConfigsRequest) (response *DescribeLogConfigsResponse, err error) {
+    if request == nil {
+        request = NewDescribeLogConfigsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLogConfigs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLogConfigsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLogSwitchesRequest() (request *DescribeLogSwitchesRequest) {
+    request = &DescribeLogSwitchesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeLogSwitches")
+    
+    
+    return
+}
+
+func NewDescribeLogSwitchesResponse() (response *DescribeLogSwitchesResponse) {
+    response = &DescribeLogSwitchesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLogSwitches
+// This API is used to query Cluster Log (Auditing, Event, Common Log) Switch List.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBERNETESLISTOPERATIONERROR = "FailedOperation.KubernetesListOperationError"
+//  FAILEDOPERATION_RBACFORBIDDEN = "FailedOperation.RBACForbidden"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_KUBERNETESCLIENTBUILDERROR = "InternalError.KubernetesClientBuildError"
+//  INTERNALERROR_KUBERNETESGETOPERATIONERROR = "InternalError.KubernetesGetOperationError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+func (c *Client) DescribeLogSwitches(request *DescribeLogSwitchesRequest) (response *DescribeLogSwitchesResponse, err error) {
+    return c.DescribeLogSwitchesWithContext(context.Background(), request)
+}
+
+// DescribeLogSwitches
+// This API is used to query Cluster Log (Auditing, Event, Common Log) Switch List.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_COMPONENTCLIENTUNPACK = "FailedOperation.ComponentClientUnpack"
+//  FAILEDOPERATION_KUBERNETESLISTOPERATIONERROR = "FailedOperation.KubernetesListOperationError"
+//  FAILEDOPERATION_RBACFORBIDDEN = "FailedOperation.RBACForbidden"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_KUBERNETESCLIENTBUILDERROR = "InternalError.KubernetesClientBuildError"
+//  INTERNALERROR_KUBERNETESGETOPERATIONERROR = "InternalError.KubernetesGetOperationError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+func (c *Client) DescribeLogSwitchesWithContext(ctx context.Context, request *DescribeLogSwitchesRequest) (response *DescribeLogSwitchesResponse, err error) {
+    if request == nil {
+        request = NewDescribeLogSwitchesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLogSwitches require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLogSwitchesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribePodChargeInfoRequest() (request *DescribePodChargeInfoRequest) {
+    request = &DescribePodChargeInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribePodChargeInfo")
+    
+    
+    return
+}
+
+func NewDescribePodChargeInfoResponse() (response *DescribePodChargeInfoResponse) {
+    response = &DescribePodChargeInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribePodChargeInfo
+// This API is used to query the billing information of running Pods. You can query a specific Pod by Namespace and Name or batch query by Pod Uid.
+//
+// error code that may be returned:
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+func (c *Client) DescribePodChargeInfo(request *DescribePodChargeInfoRequest) (response *DescribePodChargeInfoResponse, err error) {
+    return c.DescribePodChargeInfoWithContext(context.Background(), request)
+}
+
+// DescribePodChargeInfo
+// This API is used to query the billing information of running Pods. You can query a specific Pod by Namespace and Name or batch query by Pod Uid.
+//
+// error code that may be returned:
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+func (c *Client) DescribePodChargeInfoWithContext(ctx context.Context, request *DescribePodChargeInfoRequest) (response *DescribePodChargeInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribePodChargeInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribePodChargeInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribePodChargeInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -5446,6 +6102,61 @@ func (c *Client) DescribeRegionsWithContext(ctx context.Context, request *Descri
     return
 }
 
+func NewDescribeReservedInstanceUtilizationRateRequest() (request *DescribeReservedInstanceUtilizationRateRequest) {
+    request = &DescribeReservedInstanceUtilizationRateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeReservedInstanceUtilizationRate")
+    
+    
+    return
+}
+
+func NewDescribeReservedInstanceUtilizationRateResponse() (response *DescribeReservedInstanceUtilizationRateResponse) {
+    response = &DescribeReservedInstanceUtilizationRateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeReservedInstanceUtilizationRate
+// This API is used to query the usage rate of various types of Reserved Coupons.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+func (c *Client) DescribeReservedInstanceUtilizationRate(request *DescribeReservedInstanceUtilizationRateRequest) (response *DescribeReservedInstanceUtilizationRateResponse, err error) {
+    return c.DescribeReservedInstanceUtilizationRateWithContext(context.Background(), request)
+}
+
+// DescribeReservedInstanceUtilizationRate
+// This API is used to query the usage rate of various types of Reserved Coupons.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+func (c *Client) DescribeReservedInstanceUtilizationRateWithContext(ctx context.Context, request *DescribeReservedInstanceUtilizationRateRequest) (response *DescribeReservedInstanceUtilizationRateResponse, err error) {
+    if request == nil {
+        request = NewDescribeReservedInstanceUtilizationRateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReservedInstanceUtilizationRate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeReservedInstanceUtilizationRateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeResourceUsageRequest() (request *DescribeResourceUsageRequest) {
     request = &DescribeResourceUsageRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5568,6 +6279,71 @@ func (c *Client) DescribeRouteTableConflictsWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDescribeRouteTableConflictsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSupportedRuntimeRequest() (request *DescribeSupportedRuntimeRequest) {
+    request = &DescribeSupportedRuntimeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "DescribeSupportedRuntime")
+    
+    
+    return
+}
+
+func NewDescribeSupportedRuntimeResponse() (response *DescribeSupportedRuntimeResponse) {
+    response = &DescribeSupportedRuntimeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSupportedRuntime
+// This API is used to retrieve optional runtime versions based on K8S version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_POLICYSERVERCOMMONERROR = "FailedOperation.PolicyServerCommonError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeSupportedRuntime(request *DescribeSupportedRuntimeRequest) (response *DescribeSupportedRuntimeResponse, err error) {
+    return c.DescribeSupportedRuntimeWithContext(context.Background(), request)
+}
+
+// DescribeSupportedRuntime
+// This API is used to retrieve optional runtime versions based on K8S version.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_POLICYSERVERCOMMONERROR = "FailedOperation.PolicyServerCommonError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) DescribeSupportedRuntimeWithContext(ctx context.Context, request *DescribeSupportedRuntimeRequest) (response *DescribeSupportedRuntimeResponse, err error) {
+    if request == nil {
+        request = NewDescribeSupportedRuntimeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSupportedRuntime require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSupportedRuntimeResponse()
     err = c.Send(request, response)
     return
 }
@@ -6205,7 +6981,7 @@ func NewDrainClusterVirtualNodeResponse() (response *DrainClusterVirtualNodeResp
 }
 
 // DrainClusterVirtualNode
-// This API is used to drain a virtual node.
+// This API is used to evict the Super Node.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -6216,7 +6992,7 @@ func (c *Client) DrainClusterVirtualNode(request *DrainClusterVirtualNodeRequest
 }
 
 // DrainClusterVirtualNode
-// This API is used to drain a virtual node.
+// This API is used to evict the Super Node.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -6311,7 +7087,7 @@ func NewEnableEncryptionProtectionResponse() (response *EnableEncryptionProtecti
 }
 
 // EnableEncryptionProtection
-// This API is used to enable encryption protection.
+// This API is used to enable Encrypted Data Protection, which requires enabling KMS capability and completing KMS authorization.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -6323,7 +7099,7 @@ func (c *Client) EnableEncryptionProtection(request *EnableEncryptionProtectionR
 }
 
 // EnableEncryptionProtection
-// This API is used to enable encryption protection.
+// This API is used to enable Encrypted Data Protection, which requires enabling KMS capability and completing KMS authorization.
 //
 // error code that may be returned:
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
@@ -6547,7 +7323,7 @@ func NewGetUpgradeInstanceProgressResponse() (response *GetUpgradeInstanceProgre
 }
 
 // GetUpgradeInstanceProgress
-// This API is used to obtain the current progress of the node upgrade.
+// This API is used to obtain the current progress of node upgrade. If the cluster is not in node upgrade status, the API will report an error: Task not found.
 //
 // error code that may be returned:
 //  INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
@@ -6558,7 +7334,7 @@ func (c *Client) GetUpgradeInstanceProgress(request *GetUpgradeInstanceProgressR
 }
 
 // GetUpgradeInstanceProgress
-// This API is used to obtain the current progress of the node upgrade.
+// This API is used to obtain the current progress of node upgrade. If the cluster is not in node upgrade status, the API will report an error: Task not found.
 //
 // error code that may be returned:
 //  INTERNALERROR_TASKNOTFOUND = "InternalError.TaskNotFound"
@@ -7099,6 +7875,79 @@ func (c *Client) ModifyClusterEndpointSPWithContext(ctx context.Context, request
     return
 }
 
+func NewModifyClusterImageRequest() (request *ModifyClusterImageRequest) {
+    request = &ModifyClusterImageRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterImage")
+    
+    
+    return
+}
+
+func NewModifyClusterImageResponse() (response *ModifyClusterImageResponse) {
+    response = &ModifyClusterImageResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyClusterImage
+// This API is used to modify the cluster image.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CVMCOMMON = "InternalError.CvmCommon"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_IMAGEIDNOTFOUND = "InternalError.ImageIdNotFound"
+//  INTERNALERROR_OSNOTSUPPORT = "InternalError.OsNotSupport"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_VERSIONNOTSUPPORTCGROUPV2 = "InvalidParameter.VersionNotSupportCgroupV2"
+func (c *Client) ModifyClusterImage(request *ModifyClusterImageRequest) (response *ModifyClusterImageResponse, err error) {
+    return c.ModifyClusterImageWithContext(context.Background(), request)
+}
+
+// ModifyClusterImage
+// This API is used to modify the cluster image.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBRECORDNOTFOUND = "FailedOperation.DbRecordNotFound"
+//  FAILEDOPERATION_PARAM = "FailedOperation.Param"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CVMCOMMON = "InternalError.CvmCommon"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_DBRECORDNOTFOUND = "InternalError.DbRecordNotFound"
+//  INTERNALERROR_IMAGEIDNOTFOUND = "InternalError.ImageIdNotFound"
+//  INTERNALERROR_OSNOTSUPPORT = "InternalError.OsNotSupport"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXCEPTEDINTERNAL = "InternalError.UnexceptedInternal"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_VERSIONNOTSUPPORTCGROUPV2 = "InvalidParameter.VersionNotSupportCgroupV2"
+func (c *Client) ModifyClusterImageWithContext(ctx context.Context, request *ModifyClusterImageRequest) (response *ModifyClusterImageResponse, err error) {
+    if request == nil {
+        request = NewModifyClusterImageRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClusterImage require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyClusterImageResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyClusterNodePoolRequest() (request *ModifyClusterNodePoolRequest) {
     request = &ModifyClusterNodePoolRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7164,6 +8013,130 @@ func (c *Client) ModifyClusterNodePoolWithContext(ctx context.Context, request *
     return
 }
 
+func NewModifyClusterRuntimeConfigRequest() (request *ModifyClusterRuntimeConfigRequest) {
+    request = &ModifyClusterRuntimeConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterRuntimeConfig")
+    
+    
+    return
+}
+
+func NewModifyClusterRuntimeConfigResponse() (response *ModifyClusterRuntimeConfigResponse) {
+    response = &ModifyClusterRuntimeConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyClusterRuntimeConfig
+// This API is used to modify the latitude runtime configuration of clusters and node pools.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+func (c *Client) ModifyClusterRuntimeConfig(request *ModifyClusterRuntimeConfigRequest) (response *ModifyClusterRuntimeConfigResponse, err error) {
+    return c.ModifyClusterRuntimeConfigWithContext(context.Background(), request)
+}
+
+// ModifyClusterRuntimeConfig
+// This API is used to modify the latitude runtime configuration of clusters and node pools.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DB = "InternalError.Db"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+func (c *Client) ModifyClusterRuntimeConfigWithContext(ctx context.Context, request *ModifyClusterRuntimeConfigRequest) (response *ModifyClusterRuntimeConfigResponse, err error) {
+    if request == nil {
+        request = NewModifyClusterRuntimeConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClusterRuntimeConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyClusterRuntimeConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyClusterTagsRequest() (request *ModifyClusterTagsRequest) {
+    request = &ModifyClusterTagsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "ModifyClusterTags")
+    
+    
+    return
+}
+
+func NewModifyClusterTagsResponse() (response *ModifyClusterTagsResponse) {
+    response = &ModifyClusterTagsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyClusterTags
+// This API is used to modify cluster tags.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTFOUND = "FailedOperation.TaskNotFound"
+//  FAILEDOPERATION_TRADECOMMON = "FailedOperation.TradeCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_TASKCREATEFAILED = "InternalError.TaskCreateFailed"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) ModifyClusterTags(request *ModifyClusterTagsRequest) (response *ModifyClusterTagsResponse, err error) {
+    return c.ModifyClusterTagsWithContext(context.Background(), request)
+}
+
+// ModifyClusterTags
+// This API is used to modify cluster tags.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTFOUND = "FailedOperation.TaskNotFound"
+//  FAILEDOPERATION_TRADECOMMON = "FailedOperation.TradeCommon"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_PARAM = "InternalError.Param"
+//  INTERNALERROR_TASKCREATEFAILED = "InternalError.TaskCreateFailed"
+//  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+func (c *Client) ModifyClusterTagsWithContext(ctx context.Context, request *ModifyClusterTagsRequest) (response *ModifyClusterTagsResponse, err error) {
+    if request == nil {
+        request = NewModifyClusterTagsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyClusterTags require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyClusterTagsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyClusterVirtualNodePoolRequest() (request *ModifyClusterVirtualNodePoolRequest) {
     request = &ModifyClusterVirtualNodePoolRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7184,7 +8157,7 @@ func NewModifyClusterVirtualNodePoolResponse() (response *ModifyClusterVirtualNo
 }
 
 // ModifyClusterVirtualNodePool
-// This API is used to modify a virtual node pool.
+// This API is used to modify the Super Node Pool.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
@@ -7197,7 +8170,7 @@ func (c *Client) ModifyClusterVirtualNodePool(request *ModifyClusterVirtualNodeP
 }
 
 // ModifyClusterVirtualNodePool
-// This API is used to modify a virtual node pool.
+// This API is used to modify the Super Node Pool.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
@@ -7433,6 +8406,7 @@ func NewSetNodePoolNodeProtectionResponse() (response *SetNodePoolNodeProtection
 // This API is used to enable removal protection for the nodes automatically created by the scaling group in a node pool.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -7443,6 +8417,7 @@ func NewSetNodePoolNodeProtectionResponse() (response *SetNodePoolNodeProtection
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SetNodePoolNodeProtection(request *SetNodePoolNodeProtectionRequest) (response *SetNodePoolNodeProtectionResponse, err error) {
     return c.SetNodePoolNodeProtectionWithContext(context.Background(), request)
 }
@@ -7451,6 +8426,7 @@ func (c *Client) SetNodePoolNodeProtection(request *SetNodePoolNodeProtectionReq
 // This API is used to enable removal protection for the nodes automatically created by the scaling group in a node pool.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_RECORDNOTFOUND = "FailedOperation.RecordNotFound"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_ACCOUNTUSERNOTAUTHENTICATED = "InternalError.AccountUserNotAuthenticated"
 //  INTERNALERROR_CLUSTERNOTFOUND = "InternalError.ClusterNotFound"
@@ -7461,6 +8437,7 @@ func (c *Client) SetNodePoolNodeProtection(request *SetNodePoolNodeProtectionReq
 //  INTERNALERROR_UNEXPECTEDINTERNAL = "InternalError.UnexpectedInternal"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PARAM = "InvalidParameter.Param"
+//  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) SetNodePoolNodeProtectionWithContext(ctx context.Context, request *SetNodePoolNodeProtectionRequest) (response *SetNodePoolNodeProtectionResponse, err error) {
     if request == nil {
         request = NewSetNodePoolNodeProtectionRequest()

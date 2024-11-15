@@ -638,6 +638,9 @@ type ImportUser struct {
 	// `alipayUserId` on Alipay
 	AlipayUserId *string `json:"AlipayUserId,omitnil,omitempty" name:"AlipayUserId"`
 
+	// WeCom user ID.
+	WeComUserId *string `json:"WeComUserId,omitnil,omitempty" name:"WeComUserId"`
+
 	// Description
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
@@ -1725,6 +1728,10 @@ type User struct {
 	// `AlipayUserId` on Alipay
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AlipayUserId *string `json:"AlipayUserId,omitnil,omitempty" name:"AlipayUserId"`
+
+	// WeCom user ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WeComUserId *string `json:"WeComUserId,omitnil,omitempty" name:"WeComUserId"`
 
 	// Description
 	// Note: This field may return null, indicating that no valid values can be obtained.
