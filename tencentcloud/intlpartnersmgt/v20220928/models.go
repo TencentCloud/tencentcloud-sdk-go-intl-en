@@ -374,14 +374,15 @@ type CountryCodeItem struct {
 
 // Predefined struct for user
 type CreateAccountRequestParams struct {
-	// Account type of a new customer. Valid values: `personal`, `company`.
+	// Account type of a new customer.
+	// Valid values: `personal`, `company`.
 	AccountType *string `json:"AccountType,omitnil,omitempty" name:"AccountType"`
 
 	// Registered email address, which should be valid and correct.
 	// For example, account@qq.com.
 	Mail *string `json:"Mail,omitnil,omitempty" name:"Mail"`
 
-	// Account password
+	// Account password.
 	// Length limit: 8-20 characters
 	// A password must contain numbers, letters, and symbols (!@#$%^&*()). Space is not allowed.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
@@ -389,10 +390,13 @@ type CreateAccountRequestParams struct {
 	// The confirmed password, which must be the same as that entered in the `Password` field.
 	ConfirmPassword *string `json:"ConfirmPassword,omitnil,omitempty" name:"ConfirmPassword"`
 
-	// Customer's mobile number. The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed. Starting from October 25, 2024, the system will perform binding limit verification of the mobile number you provide, allowing a maximum of 5 accounts per mobile number.
+	// Customer's mobile number. 
+	// The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed. 
+	// The system will perform binding limit verification of the mobile number you provide, allowing a maximum of 5 accounts per mobile number.
 	PhoneNum *string `json:"PhoneNum,omitnil,omitempty" name:"PhoneNum"`
 
 	// Customer's country/region code, which can be obtained via the `GetCountryCodes` API, such as "852".
+	// Parameter value is not allowed to be 7,380,86.
 	CountryCode *string `json:"CountryCode,omitnil,omitempty" name:"CountryCode"`
 
 	// Customer's ISO2 standard country/region code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field, such as `HK`.
@@ -401,21 +405,24 @@ type CreateAccountRequestParams struct {
 	// Extension field, which is left empty by default.
 	Extended *string `json:"Extended,omitnil,omitempty" name:"Extended"`
 
-	// Verification code. Starting from October 25, 2024, a new parameter will be used to verify the validity of the mobile number you provide. When the interface is requested for the first time, a null value can be passed in. The interface will send a 6-digit verification code by SMS to the mobile number you provide, and you need to pass it in again together with other parameters after you receive it.
+	// Verification code. 
+	// It will be used to verify the validity of the mobile number you provide. 
+	// When the interface is requested for the first time, a null value can be passed in. The interface will send a 6-digit verification code by SMS to the mobile number you provide, and you need to pass it in again together with other parameters after you receive it.
 	VerifyCode *string `json:"VerifyCode,omitnil,omitempty" name:"VerifyCode"`
 }
 
 type CreateAccountRequest struct {
 	*tchttp.BaseRequest
 	
-	// Account type of a new customer. Valid values: `personal`, `company`.
+	// Account type of a new customer.
+	// Valid values: `personal`, `company`.
 	AccountType *string `json:"AccountType,omitnil,omitempty" name:"AccountType"`
 
 	// Registered email address, which should be valid and correct.
 	// For example, account@qq.com.
 	Mail *string `json:"Mail,omitnil,omitempty" name:"Mail"`
 
-	// Account password
+	// Account password.
 	// Length limit: 8-20 characters
 	// A password must contain numbers, letters, and symbols (!@#$%^&*()). Space is not allowed.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
@@ -423,10 +430,13 @@ type CreateAccountRequest struct {
 	// The confirmed password, which must be the same as that entered in the `Password` field.
 	ConfirmPassword *string `json:"ConfirmPassword,omitnil,omitempty" name:"ConfirmPassword"`
 
-	// Customer's mobile number. The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed. Starting from October 25, 2024, the system will perform binding limit verification of the mobile number you provide, allowing a maximum of 5 accounts per mobile number.
+	// Customer's mobile number. 
+	// The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed. 
+	// The system will perform binding limit verification of the mobile number you provide, allowing a maximum of 5 accounts per mobile number.
 	PhoneNum *string `json:"PhoneNum,omitnil,omitempty" name:"PhoneNum"`
 
 	// Customer's country/region code, which can be obtained via the `GetCountryCodes` API, such as "852".
+	// Parameter value is not allowed to be 7,380,86.
 	CountryCode *string `json:"CountryCode,omitnil,omitempty" name:"CountryCode"`
 
 	// Customer's ISO2 standard country/region code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field, such as `HK`.
@@ -435,7 +445,9 @@ type CreateAccountRequest struct {
 	// Extension field, which is left empty by default.
 	Extended *string `json:"Extended,omitnil,omitempty" name:"Extended"`
 
-	// Verification code. Starting from October 25, 2024, a new parameter will be used to verify the validity of the mobile number you provide. When the interface is requested for the first time, a null value can be passed in. The interface will send a 6-digit verification code by SMS to the mobile number you provide, and you need to pass it in again together with other parameters after you receive it.
+	// Verification code. 
+	// It will be used to verify the validity of the mobile number you provide. 
+	// When the interface is requested for the first time, a null value can be passed in. The interface will send a 6-digit verification code by SMS to the mobile number you provide, and you need to pass it in again together with other parameters after you receive it.
 	VerifyCode *string `json:"VerifyCode,omitnil,omitempty" name:"VerifyCode"`
 }
 
@@ -2420,6 +2432,7 @@ type RegionSummaryOverviewItem struct {
 // Predefined struct for user
 type SendVerifyCodeRequestParams struct {
 	// Country code.
+	// Parameter value is not allowed to be 7,380,86.
 	CountryCode *string `json:"CountryCode,omitnil,omitempty" name:"CountryCode"`
 
 	// Mobile number.
@@ -2430,6 +2443,7 @@ type SendVerifyCodeRequest struct {
 	*tchttp.BaseRequest
 	
 	// Country code.
+	// Parameter value is not allowed to be 7,380,86.
 	CountryCode *string `json:"CountryCode,omitnil,omitempty" name:"CountryCode"`
 
 	// Mobile number.

@@ -273,6 +273,234 @@ func (c *Client) CreateStreamPackageHarvestJobWithContext(ctx context.Context, r
     return
 }
 
+func NewCreateStreamPackageLinearAssemblyChannelRequest() (request *CreateStreamPackageLinearAssemblyChannelRequest) {
+    request = &CreateStreamPackageLinearAssemblyChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "CreateStreamPackageLinearAssemblyChannel")
+    
+    
+    return
+}
+
+func NewCreateStreamPackageLinearAssemblyChannelResponse() (response *CreateStreamPackageLinearAssemblyChannelResponse) {
+    response = &CreateStreamPackageLinearAssemblyChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateStreamPackageLinearAssemblyChannel
+// Create a linear assembly channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) CreateStreamPackageLinearAssemblyChannel(request *CreateStreamPackageLinearAssemblyChannelRequest) (response *CreateStreamPackageLinearAssemblyChannelResponse, err error) {
+    return c.CreateStreamPackageLinearAssemblyChannelWithContext(context.Background(), request)
+}
+
+// CreateStreamPackageLinearAssemblyChannel
+// Create a linear assembly channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) CreateStreamPackageLinearAssemblyChannelWithContext(ctx context.Context, request *CreateStreamPackageLinearAssemblyChannelRequest) (response *CreateStreamPackageLinearAssemblyChannelResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamPackageLinearAssemblyChannelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamPackageLinearAssemblyChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateStreamPackageLinearAssemblyChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateStreamPackageLinearAssemblyProgramRequest() (request *CreateStreamPackageLinearAssemblyProgramRequest) {
+    request = &CreateStreamPackageLinearAssemblyProgramRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "CreateStreamPackageLinearAssemblyProgram")
+    
+    
+    return
+}
+
+func NewCreateStreamPackageLinearAssemblyProgramResponse() (response *CreateStreamPackageLinearAssemblyProgramResponse) {
+    response = &CreateStreamPackageLinearAssemblyProgramResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateStreamPackageLinearAssemblyProgram
+// Create a linear assembly program.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) CreateStreamPackageLinearAssemblyProgram(request *CreateStreamPackageLinearAssemblyProgramRequest) (response *CreateStreamPackageLinearAssemblyProgramResponse, err error) {
+    return c.CreateStreamPackageLinearAssemblyProgramWithContext(context.Background(), request)
+}
+
+// CreateStreamPackageLinearAssemblyProgram
+// Create a linear assembly program.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) CreateStreamPackageLinearAssemblyProgramWithContext(ctx context.Context, request *CreateStreamPackageLinearAssemblyProgramRequest) (response *CreateStreamPackageLinearAssemblyProgramResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamPackageLinearAssemblyProgramRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamPackageLinearAssemblyProgram require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateStreamPackageLinearAssemblyProgramResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateStreamPackageSourceRequest() (request *CreateStreamPackageSourceRequest) {
+    request = &CreateStreamPackageSourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "CreateStreamPackageSource")
+    
+    
+    return
+}
+
+func NewCreateStreamPackageSourceResponse() (response *CreateStreamPackageSourceResponse) {
+    response = &CreateStreamPackageSourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateStreamPackageSource
+// Create channel linear assembly Source.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) CreateStreamPackageSource(request *CreateStreamPackageSourceRequest) (response *CreateStreamPackageSourceResponse, err error) {
+    return c.CreateStreamPackageSourceWithContext(context.Background(), request)
+}
+
+// CreateStreamPackageSource
+// Create channel linear assembly Source.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) CreateStreamPackageSourceWithContext(ctx context.Context, request *CreateStreamPackageSourceRequest) (response *CreateStreamPackageSourceResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamPackageSourceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamPackageSource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateStreamPackageSourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateStreamPackageSourceLocationRequest() (request *CreateStreamPackageSourceLocationRequest) {
+    request = &CreateStreamPackageSourceLocationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "CreateStreamPackageSourceLocation")
+    
+    
+    return
+}
+
+func NewCreateStreamPackageSourceLocationResponse() (response *CreateStreamPackageSourceLocationResponse) {
+    response = &CreateStreamPackageSourceLocationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateStreamPackageSourceLocation
+// Create Linear Assembly SourceLocation.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) CreateStreamPackageSourceLocation(request *CreateStreamPackageSourceLocationRequest) (response *CreateStreamPackageSourceLocationResponse, err error) {
+    return c.CreateStreamPackageSourceLocationWithContext(context.Background(), request)
+}
+
+// CreateStreamPackageSourceLocation
+// Create Linear Assembly SourceLocation.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) CreateStreamPackageSourceLocationWithContext(ctx context.Context, request *CreateStreamPackageSourceLocationRequest) (response *CreateStreamPackageSourceLocationResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamPackageSourceLocationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamPackageSourceLocation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateStreamPackageSourceLocationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteStreamPackageChannelEndpointsRequest() (request *DeleteStreamPackageChannelEndpointsRequest) {
     request = &DeleteStreamPackageChannelEndpointsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -493,6 +721,336 @@ func (c *Client) DeleteStreamPackageHarvestJobsWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewDeleteStreamPackageHarvestJobsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteStreamPackageLinearAssemblyChannelRequest() (request *DeleteStreamPackageLinearAssemblyChannelRequest) {
+    request = &DeleteStreamPackageLinearAssemblyChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageLinearAssemblyChannel")
+    
+    
+    return
+}
+
+func NewDeleteStreamPackageLinearAssemblyChannelResponse() (response *DeleteStreamPackageLinearAssemblyChannelResponse) {
+    response = &DeleteStreamPackageLinearAssemblyChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteStreamPackageLinearAssemblyChannel
+// Delete channel linear assemblyChannel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DeleteStreamPackageLinearAssemblyChannel(request *DeleteStreamPackageLinearAssemblyChannelRequest) (response *DeleteStreamPackageLinearAssemblyChannelResponse, err error) {
+    return c.DeleteStreamPackageLinearAssemblyChannelWithContext(context.Background(), request)
+}
+
+// DeleteStreamPackageLinearAssemblyChannel
+// Delete channel linear assemblyChannel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DeleteStreamPackageLinearAssemblyChannelWithContext(ctx context.Context, request *DeleteStreamPackageLinearAssemblyChannelRequest) (response *DeleteStreamPackageLinearAssemblyChannelResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamPackageLinearAssemblyChannelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamPackageLinearAssemblyChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamPackageLinearAssemblyChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteStreamPackageLinearAssemblyChannelsRequest() (request *DeleteStreamPackageLinearAssemblyChannelsRequest) {
+    request = &DeleteStreamPackageLinearAssemblyChannelsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageLinearAssemblyChannels")
+    
+    
+    return
+}
+
+func NewDeleteStreamPackageLinearAssemblyChannelsResponse() (response *DeleteStreamPackageLinearAssemblyChannelsResponse) {
+    response = &DeleteStreamPackageLinearAssemblyChannelsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteStreamPackageLinearAssemblyChannels
+// Delete channels in batches and linearly assemble channels.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DeleteStreamPackageLinearAssemblyChannels(request *DeleteStreamPackageLinearAssemblyChannelsRequest) (response *DeleteStreamPackageLinearAssemblyChannelsResponse, err error) {
+    return c.DeleteStreamPackageLinearAssemblyChannelsWithContext(context.Background(), request)
+}
+
+// DeleteStreamPackageLinearAssemblyChannels
+// Delete channels in batches and linearly assemble channels.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DeleteStreamPackageLinearAssemblyChannelsWithContext(ctx context.Context, request *DeleteStreamPackageLinearAssemblyChannelsRequest) (response *DeleteStreamPackageLinearAssemblyChannelsResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamPackageLinearAssemblyChannelsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamPackageLinearAssemblyChannels require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamPackageLinearAssemblyChannelsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteStreamPackageLinearAssemblyProgramRequest() (request *DeleteStreamPackageLinearAssemblyProgramRequest) {
+    request = &DeleteStreamPackageLinearAssemblyProgramRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageLinearAssemblyProgram")
+    
+    
+    return
+}
+
+func NewDeleteStreamPackageLinearAssemblyProgramResponse() (response *DeleteStreamPackageLinearAssemblyProgramResponse) {
+    response = &DeleteStreamPackageLinearAssemblyProgramResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteStreamPackageLinearAssemblyProgram
+// Delete Channel Linear Assembly Program.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DeleteStreamPackageLinearAssemblyProgram(request *DeleteStreamPackageLinearAssemblyProgramRequest) (response *DeleteStreamPackageLinearAssemblyProgramResponse, err error) {
+    return c.DeleteStreamPackageLinearAssemblyProgramWithContext(context.Background(), request)
+}
+
+// DeleteStreamPackageLinearAssemblyProgram
+// Delete Channel Linear Assembly Program.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DeleteStreamPackageLinearAssemblyProgramWithContext(ctx context.Context, request *DeleteStreamPackageLinearAssemblyProgramRequest) (response *DeleteStreamPackageLinearAssemblyProgramResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamPackageLinearAssemblyProgramRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamPackageLinearAssemblyProgram require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamPackageLinearAssemblyProgramResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteStreamPackageLinearAssemblyProgramsRequest() (request *DeleteStreamPackageLinearAssemblyProgramsRequest) {
+    request = &DeleteStreamPackageLinearAssemblyProgramsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageLinearAssemblyPrograms")
+    
+    
+    return
+}
+
+func NewDeleteStreamPackageLinearAssemblyProgramsResponse() (response *DeleteStreamPackageLinearAssemblyProgramsResponse) {
+    response = &DeleteStreamPackageLinearAssemblyProgramsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteStreamPackageLinearAssemblyPrograms
+// Batch deletion of channels linear assembly program.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DeleteStreamPackageLinearAssemblyPrograms(request *DeleteStreamPackageLinearAssemblyProgramsRequest) (response *DeleteStreamPackageLinearAssemblyProgramsResponse, err error) {
+    return c.DeleteStreamPackageLinearAssemblyProgramsWithContext(context.Background(), request)
+}
+
+// DeleteStreamPackageLinearAssemblyPrograms
+// Batch deletion of channels linear assembly program.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DeleteStreamPackageLinearAssemblyProgramsWithContext(ctx context.Context, request *DeleteStreamPackageLinearAssemblyProgramsRequest) (response *DeleteStreamPackageLinearAssemblyProgramsResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamPackageLinearAssemblyProgramsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamPackageLinearAssemblyPrograms require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamPackageLinearAssemblyProgramsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteStreamPackageSourceRequest() (request *DeleteStreamPackageSourceRequest) {
+    request = &DeleteStreamPackageSourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageSource")
+    
+    
+    return
+}
+
+func NewDeleteStreamPackageSourceResponse() (response *DeleteStreamPackageSourceResponse) {
+    response = &DeleteStreamPackageSourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteStreamPackageSource
+// Delete channel linear assembly Source.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DeleteStreamPackageSource(request *DeleteStreamPackageSourceRequest) (response *DeleteStreamPackageSourceResponse, err error) {
+    return c.DeleteStreamPackageSourceWithContext(context.Background(), request)
+}
+
+// DeleteStreamPackageSource
+// Delete channel linear assembly Source.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DeleteStreamPackageSourceWithContext(ctx context.Context, request *DeleteStreamPackageSourceRequest) (response *DeleteStreamPackageSourceResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamPackageSourceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamPackageSource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamPackageSourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteStreamPackageSourceLocationRequest() (request *DeleteStreamPackageSourceLocationRequest) {
+    request = &DeleteStreamPackageSourceLocationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageSourceLocation")
+    
+    
+    return
+}
+
+func NewDeleteStreamPackageSourceLocationResponse() (response *DeleteStreamPackageSourceLocationResponse) {
+    response = &DeleteStreamPackageSourceLocationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteStreamPackageSourceLocation
+// Batch delete media packaging SourceLocation.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DeleteStreamPackageSourceLocation(request *DeleteStreamPackageSourceLocationRequest) (response *DeleteStreamPackageSourceLocationResponse, err error) {
+    return c.DeleteStreamPackageSourceLocationWithContext(context.Background(), request)
+}
+
+// DeleteStreamPackageSourceLocation
+// Batch delete media packaging SourceLocation.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DeleteStreamPackageSourceLocationWithContext(ctx context.Context, request *DeleteStreamPackageSourceLocationRequest) (response *DeleteStreamPackageSourceLocationResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamPackageSourceLocationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamPackageSourceLocation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamPackageSourceLocationResponse()
     err = c.Send(request, response)
     return
 }
@@ -723,6 +1281,678 @@ func (c *Client) DescribeStreamPackageHarvestJobsWithContext(ctx context.Context
     return
 }
 
+func NewDescribeStreamPackageLinearAssemblyChannelRequest() (request *DescribeStreamPackageLinearAssemblyChannelRequest) {
+    request = &DescribeStreamPackageLinearAssemblyChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageLinearAssemblyChannel")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageLinearAssemblyChannelResponse() (response *DescribeStreamPackageLinearAssemblyChannelResponse) {
+    response = &DescribeStreamPackageLinearAssemblyChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageLinearAssemblyChannel
+// Query channel linear assembly Channel information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamPackageLinearAssemblyChannel(request *DescribeStreamPackageLinearAssemblyChannelRequest) (response *DescribeStreamPackageLinearAssemblyChannelResponse, err error) {
+    return c.DescribeStreamPackageLinearAssemblyChannelWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageLinearAssemblyChannel
+// Query channel linear assembly Channel information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamPackageLinearAssemblyChannelWithContext(ctx context.Context, request *DescribeStreamPackageLinearAssemblyChannelRequest) (response *DescribeStreamPackageLinearAssemblyChannelResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageLinearAssemblyChannelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageLinearAssemblyChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageLinearAssemblyChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageLinearAssemblyChannelAlertsRequest() (request *DescribeStreamPackageLinearAssemblyChannelAlertsRequest) {
+    request = &DescribeStreamPackageLinearAssemblyChannelAlertsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageLinearAssemblyChannelAlerts")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageLinearAssemblyChannelAlertsResponse() (response *DescribeStreamPackageLinearAssemblyChannelAlertsResponse) {
+    response = &DescribeStreamPackageLinearAssemblyChannelAlertsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageLinearAssemblyChannelAlerts
+// Query linear assembly channel alarm information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DescribeStreamPackageLinearAssemblyChannelAlerts(request *DescribeStreamPackageLinearAssemblyChannelAlertsRequest) (response *DescribeStreamPackageLinearAssemblyChannelAlertsResponse, err error) {
+    return c.DescribeStreamPackageLinearAssemblyChannelAlertsWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageLinearAssemblyChannelAlerts
+// Query linear assembly channel alarm information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DescribeStreamPackageLinearAssemblyChannelAlertsWithContext(ctx context.Context, request *DescribeStreamPackageLinearAssemblyChannelAlertsRequest) (response *DescribeStreamPackageLinearAssemblyChannelAlertsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageLinearAssemblyChannelAlertsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageLinearAssemblyChannelAlerts require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageLinearAssemblyChannelAlertsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageLinearAssemblyChannelsRequest() (request *DescribeStreamPackageLinearAssemblyChannelsRequest) {
+    request = &DescribeStreamPackageLinearAssemblyChannelsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageLinearAssemblyChannels")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageLinearAssemblyChannelsResponse() (response *DescribeStreamPackageLinearAssemblyChannelsResponse) {
+    response = &DescribeStreamPackageLinearAssemblyChannelsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageLinearAssemblyChannels
+// Query channel linear assembly Channel information list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
+func (c *Client) DescribeStreamPackageLinearAssemblyChannels(request *DescribeStreamPackageLinearAssemblyChannelsRequest) (response *DescribeStreamPackageLinearAssemblyChannelsResponse, err error) {
+    return c.DescribeStreamPackageLinearAssemblyChannelsWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageLinearAssemblyChannels
+// Query channel linear assembly Channel information list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
+func (c *Client) DescribeStreamPackageLinearAssemblyChannelsWithContext(ctx context.Context, request *DescribeStreamPackageLinearAssemblyChannelsRequest) (response *DescribeStreamPackageLinearAssemblyChannelsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageLinearAssemblyChannelsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageLinearAssemblyChannels require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageLinearAssemblyChannelsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageLinearAssemblyProgramRequest() (request *DescribeStreamPackageLinearAssemblyProgramRequest) {
+    request = &DescribeStreamPackageLinearAssemblyProgramRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageLinearAssemblyProgram")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageLinearAssemblyProgramResponse() (response *DescribeStreamPackageLinearAssemblyProgramResponse) {
+    response = &DescribeStreamPackageLinearAssemblyProgramResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageLinearAssemblyProgram
+// Query channel linear assembly program information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamPackageLinearAssemblyProgram(request *DescribeStreamPackageLinearAssemblyProgramRequest) (response *DescribeStreamPackageLinearAssemblyProgramResponse, err error) {
+    return c.DescribeStreamPackageLinearAssemblyProgramWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageLinearAssemblyProgram
+// Query channel linear assembly program information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamPackageLinearAssemblyProgramWithContext(ctx context.Context, request *DescribeStreamPackageLinearAssemblyProgramRequest) (response *DescribeStreamPackageLinearAssemblyProgramResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageLinearAssemblyProgramRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageLinearAssemblyProgram require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageLinearAssemblyProgramResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageLinearAssemblyProgramSchedulesRequest() (request *DescribeStreamPackageLinearAssemblyProgramSchedulesRequest) {
+    request = &DescribeStreamPackageLinearAssemblyProgramSchedulesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageLinearAssemblyProgramSchedules")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageLinearAssemblyProgramSchedulesResponse() (response *DescribeStreamPackageLinearAssemblyProgramSchedulesResponse) {
+    response = &DescribeStreamPackageLinearAssemblyProgramSchedulesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageLinearAssemblyProgramSchedules
+// Query channel linear assembly Programl assembly scheduling information list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
+func (c *Client) DescribeStreamPackageLinearAssemblyProgramSchedules(request *DescribeStreamPackageLinearAssemblyProgramSchedulesRequest) (response *DescribeStreamPackageLinearAssemblyProgramSchedulesResponse, err error) {
+    return c.DescribeStreamPackageLinearAssemblyProgramSchedulesWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageLinearAssemblyProgramSchedules
+// Query channel linear assembly Programl assembly scheduling information list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
+func (c *Client) DescribeStreamPackageLinearAssemblyProgramSchedulesWithContext(ctx context.Context, request *DescribeStreamPackageLinearAssemblyProgramSchedulesRequest) (response *DescribeStreamPackageLinearAssemblyProgramSchedulesResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageLinearAssemblyProgramSchedulesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageLinearAssemblyProgramSchedules require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageLinearAssemblyProgramSchedulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageLinearAssemblyProgramsRequest() (request *DescribeStreamPackageLinearAssemblyProgramsRequest) {
+    request = &DescribeStreamPackageLinearAssemblyProgramsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageLinearAssemblyPrograms")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageLinearAssemblyProgramsResponse() (response *DescribeStreamPackageLinearAssemblyProgramsResponse) {
+    response = &DescribeStreamPackageLinearAssemblyProgramsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageLinearAssemblyPrograms
+// Query channel linear assembly Programl information list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
+func (c *Client) DescribeStreamPackageLinearAssemblyPrograms(request *DescribeStreamPackageLinearAssemblyProgramsRequest) (response *DescribeStreamPackageLinearAssemblyProgramsResponse, err error) {
+    return c.DescribeStreamPackageLinearAssemblyProgramsWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageLinearAssemblyPrograms
+// Query channel linear assembly Programl information list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
+func (c *Client) DescribeStreamPackageLinearAssemblyProgramsWithContext(ctx context.Context, request *DescribeStreamPackageLinearAssemblyProgramsRequest) (response *DescribeStreamPackageLinearAssemblyProgramsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageLinearAssemblyProgramsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageLinearAssemblyPrograms require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageLinearAssemblyProgramsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageSourceRequest() (request *DescribeStreamPackageSourceRequest) {
+    request = &DescribeStreamPackageSourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageSource")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageSourceResponse() (response *DescribeStreamPackageSourceResponse) {
+    response = &DescribeStreamPackageSourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageSource
+// Query channel linear assembly Source information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamPackageSource(request *DescribeStreamPackageSourceRequest) (response *DescribeStreamPackageSourceResponse, err error) {
+    return c.DescribeStreamPackageSourceWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageSource
+// Query channel linear assembly Source information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamPackageSourceWithContext(ctx context.Context, request *DescribeStreamPackageSourceRequest) (response *DescribeStreamPackageSourceResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageSourceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageSource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageSourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageSourceAlertsRequest() (request *DescribeStreamPackageSourceAlertsRequest) {
+    request = &DescribeStreamPackageSourceAlertsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageSourceAlerts")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageSourceAlertsResponse() (response *DescribeStreamPackageSourceAlertsResponse) {
+    response = &DescribeStreamPackageSourceAlertsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageSourceAlerts
+// Query channel linear assembly Source alarm information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DescribeStreamPackageSourceAlerts(request *DescribeStreamPackageSourceAlertsRequest) (response *DescribeStreamPackageSourceAlertsResponse, err error) {
+    return c.DescribeStreamPackageSourceAlertsWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageSourceAlerts
+// Query channel linear assembly Source alarm information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DescribeStreamPackageSourceAlertsWithContext(ctx context.Context, request *DescribeStreamPackageSourceAlertsRequest) (response *DescribeStreamPackageSourceAlertsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageSourceAlertsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageSourceAlerts require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageSourceAlertsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageSourceLocationRequest() (request *DescribeStreamPackageSourceLocationRequest) {
+    request = &DescribeStreamPackageSourceLocationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageSourceLocation")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageSourceLocationResponse() (response *DescribeStreamPackageSourceLocationResponse) {
+    response = &DescribeStreamPackageSourceLocationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageSourceLocation
+// Query channel linear assembly sourceLocation information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamPackageSourceLocation(request *DescribeStreamPackageSourceLocationRequest) (response *DescribeStreamPackageSourceLocationResponse, err error) {
+    return c.DescribeStreamPackageSourceLocationWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageSourceLocation
+// Query channel linear assembly sourceLocation information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamPackageSourceLocationWithContext(ctx context.Context, request *DescribeStreamPackageSourceLocationRequest) (response *DescribeStreamPackageSourceLocationResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageSourceLocationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageSourceLocation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageSourceLocationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageSourceLocationAlertsRequest() (request *DescribeStreamPackageSourceLocationAlertsRequest) {
+    request = &DescribeStreamPackageSourceLocationAlertsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageSourceLocationAlerts")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageSourceLocationAlertsResponse() (response *DescribeStreamPackageSourceLocationAlertsResponse) {
+    response = &DescribeStreamPackageSourceLocationAlertsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageSourceLocationAlerts
+// Query channel linear assembly Location alarm information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DescribeStreamPackageSourceLocationAlerts(request *DescribeStreamPackageSourceLocationAlertsRequest) (response *DescribeStreamPackageSourceLocationAlertsResponse, err error) {
+    return c.DescribeStreamPackageSourceLocationAlertsWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageSourceLocationAlerts
+// Query channel linear assembly Location alarm information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_URL = "InvalidParameter.Url"
+func (c *Client) DescribeStreamPackageSourceLocationAlertsWithContext(ctx context.Context, request *DescribeStreamPackageSourceLocationAlertsRequest) (response *DescribeStreamPackageSourceLocationAlertsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageSourceLocationAlertsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageSourceLocationAlerts require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageSourceLocationAlertsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageSourceLocationsRequest() (request *DescribeStreamPackageSourceLocationsRequest) {
+    request = &DescribeStreamPackageSourceLocationsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageSourceLocations")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageSourceLocationsResponse() (response *DescribeStreamPackageSourceLocationsResponse) {
+    response = &DescribeStreamPackageSourceLocationsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageSourceLocations
+// Query channel linear assembly SourceLocation information list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
+func (c *Client) DescribeStreamPackageSourceLocations(request *DescribeStreamPackageSourceLocationsRequest) (response *DescribeStreamPackageSourceLocationsResponse, err error) {
+    return c.DescribeStreamPackageSourceLocationsWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageSourceLocations
+// Query channel linear assembly SourceLocation information list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
+func (c *Client) DescribeStreamPackageSourceLocationsWithContext(ctx context.Context, request *DescribeStreamPackageSourceLocationsRequest) (response *DescribeStreamPackageSourceLocationsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageSourceLocationsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageSourceLocations require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageSourceLocationsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageSourcesRequest() (request *DescribeStreamPackageSourcesRequest) {
+    request = &DescribeStreamPackageSourcesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageSources")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageSourcesResponse() (response *DescribeStreamPackageSourcesResponse) {
+    response = &DescribeStreamPackageSourcesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageSources
+// Query channel linear assembly Source information list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
+func (c *Client) DescribeStreamPackageSources(request *DescribeStreamPackageSourcesRequest) (response *DescribeStreamPackageSourcesResponse, err error) {
+    return c.DescribeStreamPackageSourcesWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageSources
+// Query channel linear assembly Source information list.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PAGENUM = "InvalidParameter.PageNum"
+//  INVALIDPARAMETER_PAGESIZE = "InvalidParameter.PageSize"
+//  INVALIDPARAMETER_POINTS = "InvalidParameter.Points"
+func (c *Client) DescribeStreamPackageSourcesWithContext(ctx context.Context, request *DescribeStreamPackageSourcesRequest) (response *DescribeStreamPackageSourcesResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageSourcesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageSources require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageSourcesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyStreamPackageChannelRequest() (request *ModifyStreamPackageChannelRequest) {
     request = &ModifyStreamPackageChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -892,6 +2122,348 @@ func (c *Client) ModifyStreamPackageChannelInputAuthInfoWithContext(ctx context.
     request.SetContext(ctx)
     
     response = NewModifyStreamPackageChannelInputAuthInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyStreamPackageLinearAssemblyChannelRequest() (request *ModifyStreamPackageLinearAssemblyChannelRequest) {
+    request = &ModifyStreamPackageLinearAssemblyChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageLinearAssemblyChannel")
+    
+    
+    return
+}
+
+func NewModifyStreamPackageLinearAssemblyChannelResponse() (response *ModifyStreamPackageLinearAssemblyChannelResponse) {
+    response = &ModifyStreamPackageLinearAssemblyChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyStreamPackageLinearAssemblyChannel
+// Modify channel linear assembly Channel configuration.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) ModifyStreamPackageLinearAssemblyChannel(request *ModifyStreamPackageLinearAssemblyChannelRequest) (response *ModifyStreamPackageLinearAssemblyChannelResponse, err error) {
+    return c.ModifyStreamPackageLinearAssemblyChannelWithContext(context.Background(), request)
+}
+
+// ModifyStreamPackageLinearAssemblyChannel
+// Modify channel linear assembly Channel configuration.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) ModifyStreamPackageLinearAssemblyChannelWithContext(ctx context.Context, request *ModifyStreamPackageLinearAssemblyChannelRequest) (response *ModifyStreamPackageLinearAssemblyChannelResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamPackageLinearAssemblyChannelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamPackageLinearAssemblyChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyStreamPackageLinearAssemblyChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyStreamPackageLinearAssemblyProgramRequest() (request *ModifyStreamPackageLinearAssemblyProgramRequest) {
+    request = &ModifyStreamPackageLinearAssemblyProgramRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageLinearAssemblyProgram")
+    
+    
+    return
+}
+
+func NewModifyStreamPackageLinearAssemblyProgramResponse() (response *ModifyStreamPackageLinearAssemblyProgramResponse) {
+    response = &ModifyStreamPackageLinearAssemblyProgramResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyStreamPackageLinearAssemblyProgram
+// Modify channel linear assembly Program configuration.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) ModifyStreamPackageLinearAssemblyProgram(request *ModifyStreamPackageLinearAssemblyProgramRequest) (response *ModifyStreamPackageLinearAssemblyProgramResponse, err error) {
+    return c.ModifyStreamPackageLinearAssemblyProgramWithContext(context.Background(), request)
+}
+
+// ModifyStreamPackageLinearAssemblyProgram
+// Modify channel linear assembly Program configuration.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) ModifyStreamPackageLinearAssemblyProgramWithContext(ctx context.Context, request *ModifyStreamPackageLinearAssemblyProgramRequest) (response *ModifyStreamPackageLinearAssemblyProgramResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamPackageLinearAssemblyProgramRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamPackageLinearAssemblyProgram require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyStreamPackageLinearAssemblyProgramResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyStreamPackageSourceRequest() (request *ModifyStreamPackageSourceRequest) {
+    request = &ModifyStreamPackageSourceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageSource")
+    
+    
+    return
+}
+
+func NewModifyStreamPackageSourceResponse() (response *ModifyStreamPackageSourceResponse) {
+    response = &ModifyStreamPackageSourceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyStreamPackageSource
+// Modify channel linear assembly Source configuration.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) ModifyStreamPackageSource(request *ModifyStreamPackageSourceRequest) (response *ModifyStreamPackageSourceResponse, err error) {
+    return c.ModifyStreamPackageSourceWithContext(context.Background(), request)
+}
+
+// ModifyStreamPackageSource
+// Modify channel linear assembly Source configuration.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) ModifyStreamPackageSourceWithContext(ctx context.Context, request *ModifyStreamPackageSourceRequest) (response *ModifyStreamPackageSourceResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamPackageSourceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamPackageSource require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyStreamPackageSourceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyStreamPackageSourceLocationRequest() (request *ModifyStreamPackageSourceLocationRequest) {
+    request = &ModifyStreamPackageSourceLocationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageSourceLocation")
+    
+    
+    return
+}
+
+func NewModifyStreamPackageSourceLocationResponse() (response *ModifyStreamPackageSourceLocationResponse) {
+    response = &ModifyStreamPackageSourceLocationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyStreamPackageSourceLocation
+// Modify channel linear assembly SourceLocation configuration
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) ModifyStreamPackageSourceLocation(request *ModifyStreamPackageSourceLocationRequest) (response *ModifyStreamPackageSourceLocationResponse, err error) {
+    return c.ModifyStreamPackageSourceLocationWithContext(context.Background(), request)
+}
+
+// ModifyStreamPackageSourceLocation
+// Modify channel linear assembly SourceLocation configuration
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) ModifyStreamPackageSourceLocationWithContext(ctx context.Context, request *ModifyStreamPackageSourceLocationRequest) (response *ModifyStreamPackageSourceLocationResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamPackageSourceLocationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamPackageSourceLocation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyStreamPackageSourceLocationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartStreamPackageLinearAssemblyChannelRequest() (request *StartStreamPackageLinearAssemblyChannelRequest) {
+    request = &StartStreamPackageLinearAssemblyChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "StartStreamPackageLinearAssemblyChannel")
+    
+    
+    return
+}
+
+func NewStartStreamPackageLinearAssemblyChannelResponse() (response *StartStreamPackageLinearAssemblyChannelResponse) {
+    response = &StartStreamPackageLinearAssemblyChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StartStreamPackageLinearAssemblyChannel
+// Start Linear Assembly Channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) StartStreamPackageLinearAssemblyChannel(request *StartStreamPackageLinearAssemblyChannelRequest) (response *StartStreamPackageLinearAssemblyChannelResponse, err error) {
+    return c.StartStreamPackageLinearAssemblyChannelWithContext(context.Background(), request)
+}
+
+// StartStreamPackageLinearAssemblyChannel
+// Start Linear Assembly Channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) StartStreamPackageLinearAssemblyChannelWithContext(ctx context.Context, request *StartStreamPackageLinearAssemblyChannelRequest) (response *StartStreamPackageLinearAssemblyChannelResponse, err error) {
+    if request == nil {
+        request = NewStartStreamPackageLinearAssemblyChannelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartStreamPackageLinearAssemblyChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartStreamPackageLinearAssemblyChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopStreamPackageLinearAssemblyChannelRequest() (request *StopStreamPackageLinearAssemblyChannelRequest) {
+    request = &StopStreamPackageLinearAssemblyChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "StopStreamPackageLinearAssemblyChannel")
+    
+    
+    return
+}
+
+func NewStopStreamPackageLinearAssemblyChannelResponse() (response *StopStreamPackageLinearAssemblyChannelResponse) {
+    response = &StopStreamPackageLinearAssemblyChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StopStreamPackageLinearAssemblyChannel
+// Stop linear assembly channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) StopStreamPackageLinearAssemblyChannel(request *StopStreamPackageLinearAssemblyChannelRequest) (response *StopStreamPackageLinearAssemblyChannelResponse, err error) {
+    return c.StopStreamPackageLinearAssemblyChannelWithContext(context.Background(), request)
+}
+
+// StopStreamPackageLinearAssemblyChannel
+// Stop linear assembly channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CACHEINFO = "InvalidParameter.CacheInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_PROTOCOL = "InvalidParameter.Protocol"
+func (c *Client) StopStreamPackageLinearAssemblyChannelWithContext(ctx context.Context, request *StopStreamPackageLinearAssemblyChannelRequest) (response *StopStreamPackageLinearAssemblyChannelResponse, err error) {
+    if request == nil {
+        request = NewStopStreamPackageLinearAssemblyChannelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopStreamPackageLinearAssemblyChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStopStreamPackageLinearAssemblyChannelResponse()
     err = c.Send(request, response)
     return
 }

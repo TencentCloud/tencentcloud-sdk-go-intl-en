@@ -20,6 +20,32 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
+type AdBreakInfo struct {
+	// SourceLocationId.
+	SourceLocationId *string `json:"SourceLocationId,omitnil,omitempty" name:"SourceLocationId"`
+
+	// VodSourceName.
+	VodSourceName *string `json:"VodSourceName,omitnil,omitempty" name:"VodSourceName"`
+
+	// Offset.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// MessageType, divided into SpliceInsert and TimeSignal.
+	MessageType *string `json:"MessageType,omitnil,omitempty" name:"MessageType"`
+
+	// TimeSignalConf.
+	TimeSignalConf *TimeSignalInfo `json:"TimeSignalConf,omitnil,omitempty" name:"TimeSignalConf"`
+
+	// SpliceInsertConf.
+	SpliceInsertConf *SpliceInsertInfo `json:"SpliceInsertConf,omitnil,omitempty" name:"SpliceInsertConf"`
+
+	// Metadatas.
+	Metadatas []*Metadata `json:"Metadatas,omitnil,omitempty" name:"Metadatas"`
+
+	// SourceLocationName.
+	SourceLocationName *string `json:"SourceLocationName,omitnil,omitempty" name:"SourceLocationName"`
+}
+
 type AliasValueConf struct {
 	// Alias.
 	Alias *string `json:"Alias,omitnil,omitempty" name:"Alias"`
@@ -109,6 +135,14 @@ type CacheInfoInfo struct {
 	Ext *string `json:"Ext,omitnil,omitempty" name:"Ext"`
 }
 
+type ChannelAlertResp struct {
+	// Program alarm aggregation information.
+	ProgramAlertCounts []*ProgramAlertCounts `json:"ProgramAlertCounts,omitnil,omitempty" name:"ProgramAlertCounts"`
+
+	// Program alarm details.
+	ProgramAlertInfos []*ProgramAlertInfos `json:"ProgramAlertInfos,omitnil,omitempty" name:"ProgramAlertInfos"`
+}
+
 type ChannelInfo struct {
 	// Channel ID.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
@@ -125,6 +159,14 @@ type ChannelInfo struct {
 	// Cache configuration
 	// Note: this field may return `null`, indicating that no valid value was found.
 	CacheInfo *CacheInfo `json:"CacheInfo,omitnil,omitempty" name:"CacheInfo"`
+}
+
+type ClipRangeInfo struct {
+	// The vod type is valid, the content is valid starting time, Entire and SpecifyTimeRange are optional.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Offset, valid when Type is SpecifyTimeRange.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type ConfigAliasesInfo struct {
@@ -236,26 +278,26 @@ func (r *CreateStreamPackageChannelEndpointResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type CreateStreamPackageChannelRequestParams struct {
-	// Channel name
+	// Channel name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Channel protocol. Valid values: HLS, DASH
+	// Channel protocol. Valid values: HLS, DASH, CMAF.
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// Cache configuration
+	// Cache configuration.
 	CacheInfo *CacheInfo `json:"CacheInfo,omitnil,omitempty" name:"CacheInfo"`
 }
 
 type CreateStreamPackageChannelRequest struct {
 	*tchttp.BaseRequest
 	
-	// Channel name
+	// Channel name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Channel protocol. Valid values: HLS, DASH
+	// Channel protocol. Valid values: HLS, DASH, CMAF.
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// Cache configuration
+	// Cache configuration.
 	CacheInfo *CacheInfo `json:"CacheInfo,omitnil,omitempty" name:"CacheInfo"`
 }
 
@@ -408,6 +450,371 @@ func (r *CreateStreamPackageHarvestJobResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateStreamPackageHarvestJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateStreamPackageLinearAssemblyChannelRequestParams struct {
+	// Channel name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Define the characteristics of the channel. Standard supports live broadcast and on-demand sources. Basic only supports on-demand source arrangement. Optional values: Standard and Basic.
+	Tier *string `json:"Tier,omitnil,omitempty" name:"Tier"`
+
+	// The source switching modes in the channel are divided into Linear and Loop. Basic only supports Linear, and Standatd supports both.
+	// Optional values: Linear, Standatd.
+	PlaybackMode *string `json:"PlaybackMode,omitnil,omitempty" name:"PlaybackMode"`
+
+	// Time shift enable switch, only valid when Tier is Standard.
+	TimeShiftEnable *bool `json:"TimeShiftEnable,omitnil,omitempty" name:"TimeShiftEnable"`
+
+	// Time shift configuration, effective when the time shift switch is turned on.
+	TimeShiftConf *TimeShiftInfo `json:"TimeShiftConf,omitnil,omitempty" name:"TimeShiftConf"`
+
+	// Spacer configuration is only valid when PlaybackMode is Linear.
+	SlateConf *SlateInfo `json:"SlateConf,omitnil,omitempty" name:"SlateConf"`
+
+	// Output configuration.
+	Outputs []*OutputReq `json:"Outputs,omitnil,omitempty" name:"Outputs"`
+}
+
+type CreateStreamPackageLinearAssemblyChannelRequest struct {
+	*tchttp.BaseRequest
+	
+	// Channel name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Define the characteristics of the channel. Standard supports live broadcast and on-demand sources. Basic only supports on-demand source arrangement. Optional values: Standard and Basic.
+	Tier *string `json:"Tier,omitnil,omitempty" name:"Tier"`
+
+	// The source switching modes in the channel are divided into Linear and Loop. Basic only supports Linear, and Standatd supports both.
+	// Optional values: Linear, Standatd.
+	PlaybackMode *string `json:"PlaybackMode,omitnil,omitempty" name:"PlaybackMode"`
+
+	// Time shift enable switch, only valid when Tier is Standard.
+	TimeShiftEnable *bool `json:"TimeShiftEnable,omitnil,omitempty" name:"TimeShiftEnable"`
+
+	// Time shift configuration, effective when the time shift switch is turned on.
+	TimeShiftConf *TimeShiftInfo `json:"TimeShiftConf,omitnil,omitempty" name:"TimeShiftConf"`
+
+	// Spacer configuration is only valid when PlaybackMode is Linear.
+	SlateConf *SlateInfo `json:"SlateConf,omitnil,omitempty" name:"SlateConf"`
+
+	// Output configuration.
+	Outputs []*OutputReq `json:"Outputs,omitnil,omitempty" name:"Outputs"`
+}
+
+func (r *CreateStreamPackageLinearAssemblyChannelRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamPackageLinearAssemblyChannelRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "Tier")
+	delete(f, "PlaybackMode")
+	delete(f, "TimeShiftEnable")
+	delete(f, "TimeShiftConf")
+	delete(f, "SlateConf")
+	delete(f, "Outputs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamPackageLinearAssemblyChannelRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateStreamPackageLinearAssemblyChannelResponseParams struct {
+	// channel information.
+	Info *LinearAssemblyChannelInfo `json:"Info,omitnil,omitempty" name:"Info"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateStreamPackageLinearAssemblyChannelResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateStreamPackageLinearAssemblyChannelResponseParams `json:"Response"`
+}
+
+func (r *CreateStreamPackageLinearAssemblyChannelResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamPackageLinearAssemblyChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateStreamPackageLinearAssemblyProgramRequestParams struct {
+	// Program name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// The bound channel.
+	AttachedChannel *string `json:"AttachedChannel,omitnil,omitempty" name:"AttachedChannel"`
+
+	// The type of arrangement target source is divided into live broadcast and on-demand VOD.
+	// Optional values: Live, VOD.
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// The associated source location.
+	SourceLocationId *string `json:"SourceLocationId,omitnil,omitempty" name:"SourceLocationId"`
+
+	// The associated live broadcast or on-demand broadcast, source name, and location are globally unique.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// PlaybackConf.
+	PlaybackConf *PlaybackInfoReq `json:"PlaybackConf,omitnil,omitempty" name:"PlaybackConf"`
+
+	// AdBreaks is only valid when the source type is Vod.
+	AdBreaks []*AdBreakInfo `json:"AdBreaks,omitnil,omitempty" name:"AdBreaks"`
+}
+
+type CreateStreamPackageLinearAssemblyProgramRequest struct {
+	*tchttp.BaseRequest
+	
+	// Program name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// The bound channel.
+	AttachedChannel *string `json:"AttachedChannel,omitnil,omitempty" name:"AttachedChannel"`
+
+	// The type of arrangement target source is divided into live broadcast and on-demand VOD.
+	// Optional values: Live, VOD.
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// The associated source location.
+	SourceLocationId *string `json:"SourceLocationId,omitnil,omitempty" name:"SourceLocationId"`
+
+	// The associated live broadcast or on-demand broadcast, source name, and location are globally unique.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// PlaybackConf.
+	PlaybackConf *PlaybackInfoReq `json:"PlaybackConf,omitnil,omitempty" name:"PlaybackConf"`
+
+	// AdBreaks is only valid when the source type is Vod.
+	AdBreaks []*AdBreakInfo `json:"AdBreaks,omitnil,omitempty" name:"AdBreaks"`
+}
+
+func (r *CreateStreamPackageLinearAssemblyProgramRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamPackageLinearAssemblyProgramRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "AttachedChannel")
+	delete(f, "SourceType")
+	delete(f, "SourceLocationId")
+	delete(f, "SourceName")
+	delete(f, "PlaybackConf")
+	delete(f, "AdBreaks")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamPackageLinearAssemblyProgramRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateStreamPackageLinearAssemblyProgramResponseParams struct {
+	// channel information.
+	Info *LinearAssemblyProgramInfo `json:"Info,omitnil,omitempty" name:"Info"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateStreamPackageLinearAssemblyProgramResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateStreamPackageLinearAssemblyProgramResponseParams `json:"Response"`
+}
+
+func (r *CreateStreamPackageLinearAssemblyProgramResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamPackageLinearAssemblyProgramResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateStreamPackageSourceLocationRequestParams struct {
+	// SourceLocation name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// BaseUrl.
+	BaseUrl *string `json:"BaseUrl,omitnil,omitempty" name:"BaseUrl"`
+
+	// Whether to enable patching.
+	SegmentDeliverEnable *bool `json:"SegmentDeliverEnable,omitnil,omitempty" name:"SegmentDeliverEnable"`
+
+	// Patch configuration.
+	SegmentDeliverConf *SegmentDeliverInfo `json:"SegmentDeliverConf,omitnil,omitempty" name:"SegmentDeliverConf"`
+
+	// Whether to enable package distribution sharding, it is enabled by default.
+	SegmentDeliverUsePackageEnable *bool `json:"SegmentDeliverUsePackageEnable,omitnil,omitempty" name:"SegmentDeliverUsePackageEnable"`
+}
+
+type CreateStreamPackageSourceLocationRequest struct {
+	*tchttp.BaseRequest
+	
+	// SourceLocation name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// BaseUrl.
+	BaseUrl *string `json:"BaseUrl,omitnil,omitempty" name:"BaseUrl"`
+
+	// Whether to enable patching.
+	SegmentDeliverEnable *bool `json:"SegmentDeliverEnable,omitnil,omitempty" name:"SegmentDeliverEnable"`
+
+	// Patch configuration.
+	SegmentDeliverConf *SegmentDeliverInfo `json:"SegmentDeliverConf,omitnil,omitempty" name:"SegmentDeliverConf"`
+
+	// Whether to enable package distribution sharding, it is enabled by default.
+	SegmentDeliverUsePackageEnable *bool `json:"SegmentDeliverUsePackageEnable,omitnil,omitempty" name:"SegmentDeliverUsePackageEnable"`
+}
+
+func (r *CreateStreamPackageSourceLocationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamPackageSourceLocationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "BaseUrl")
+	delete(f, "SegmentDeliverEnable")
+	delete(f, "SegmentDeliverConf")
+	delete(f, "SegmentDeliverUsePackageEnable")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamPackageSourceLocationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateStreamPackageSourceLocationResponseParams struct {
+	// SourceLocation information.
+	Info *SourceLocationInfo `json:"Info,omitnil,omitempty" name:"Info"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateStreamPackageSourceLocationResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateStreamPackageSourceLocationResponseParams `json:"Response"`
+}
+
+func (r *CreateStreamPackageSourceLocationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamPackageSourceLocationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateStreamPackageSourceRequestParams struct {
+	// The location id to which this source belongs is required and uniquely bound to one location.
+	AttachedLocation *string `json:"AttachedLocation,omitnil,omitempty" name:"AttachedLocation"`
+
+	// Source name, globally unique under location.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Distinguish between live broadcast and on-demand VOD source types. Optional values: Live, VOD.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// source specific configuration.
+	PackageConfs []*SourcePackageConf `json:"PackageConfs,omitnil,omitempty" name:"PackageConfs"`
+}
+
+type CreateStreamPackageSourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// The location id to which this source belongs is required and uniquely bound to one location.
+	AttachedLocation *string `json:"AttachedLocation,omitnil,omitempty" name:"AttachedLocation"`
+
+	// Source name, globally unique under location.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Distinguish between live broadcast and on-demand VOD source types. Optional values: Live, VOD.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// source specific configuration.
+	PackageConfs []*SourcePackageConf `json:"PackageConfs,omitnil,omitempty" name:"PackageConfs"`
+}
+
+func (r *CreateStreamPackageSourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamPackageSourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AttachedLocation")
+	delete(f, "Name")
+	delete(f, "Type")
+	delete(f, "PackageConfs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamPackageSourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateStreamPackageSourceResponseParams struct {
+	// Source information.
+	Info *SourceInfo `json:"Info,omitnil,omitempty" name:"Info"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateStreamPackageSourceResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateStreamPackageSourceResponseParams `json:"Response"`
+}
+
+func (r *CreateStreamPackageSourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateStreamPackageSourceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -637,6 +1044,330 @@ func (r *DeleteStreamPackageHarvestJobsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteStreamPackageHarvestJobsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageLinearAssemblyChannelRequestParams struct {
+	// channel id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DeleteStreamPackageLinearAssemblyChannelRequest struct {
+	*tchttp.BaseRequest
+	
+	// channel id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *DeleteStreamPackageLinearAssemblyChannelRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageLinearAssemblyChannelRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamPackageLinearAssemblyChannelRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageLinearAssemblyChannelResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteStreamPackageLinearAssemblyChannelResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteStreamPackageLinearAssemblyChannelResponseParams `json:"Response"`
+}
+
+func (r *DeleteStreamPackageLinearAssemblyChannelResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageLinearAssemblyChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageLinearAssemblyChannelsRequestParams struct {
+	// List of channel ids.
+	Ids []*string `json:"Ids,omitnil,omitempty" name:"Ids"`
+}
+
+type DeleteStreamPackageLinearAssemblyChannelsRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of channel ids.
+	Ids []*string `json:"Ids,omitnil,omitempty" name:"Ids"`
+}
+
+func (r *DeleteStreamPackageLinearAssemblyChannelsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageLinearAssemblyChannelsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Ids")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamPackageLinearAssemblyChannelsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageLinearAssemblyChannelsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteStreamPackageLinearAssemblyChannelsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteStreamPackageLinearAssemblyChannelsResponseParams `json:"Response"`
+}
+
+func (r *DeleteStreamPackageLinearAssemblyChannelsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageLinearAssemblyChannelsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageLinearAssemblyProgramRequestParams struct {
+	// Program id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DeleteStreamPackageLinearAssemblyProgramRequest struct {
+	*tchttp.BaseRequest
+	
+	// Program id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *DeleteStreamPackageLinearAssemblyProgramRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageLinearAssemblyProgramRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamPackageLinearAssemblyProgramRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageLinearAssemblyProgramResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteStreamPackageLinearAssemblyProgramResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteStreamPackageLinearAssemblyProgramResponseParams `json:"Response"`
+}
+
+func (r *DeleteStreamPackageLinearAssemblyProgramResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageLinearAssemblyProgramResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageLinearAssemblyProgramsRequestParams struct {
+	// Program id list.
+	Ids []*string `json:"Ids,omitnil,omitempty" name:"Ids"`
+}
+
+type DeleteStreamPackageLinearAssemblyProgramsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Program id list.
+	Ids []*string `json:"Ids,omitnil,omitempty" name:"Ids"`
+}
+
+func (r *DeleteStreamPackageLinearAssemblyProgramsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageLinearAssemblyProgramsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Ids")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamPackageLinearAssemblyProgramsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageLinearAssemblyProgramsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteStreamPackageLinearAssemblyProgramsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteStreamPackageLinearAssemblyProgramsResponseParams `json:"Response"`
+}
+
+func (r *DeleteStreamPackageLinearAssemblyProgramsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageLinearAssemblyProgramsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageSourceLocationRequestParams struct {
+	// SourceLocation Id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DeleteStreamPackageSourceLocationRequest struct {
+	*tchttp.BaseRequest
+	
+	// SourceLocation Id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *DeleteStreamPackageSourceLocationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageSourceLocationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamPackageSourceLocationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageSourceLocationResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteStreamPackageSourceLocationResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteStreamPackageSourceLocationResponseParams `json:"Response"`
+}
+
+func (r *DeleteStreamPackageSourceLocationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageSourceLocationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageSourceRequestParams struct {
+	// SourceLocation Id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DeleteStreamPackageSourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// SourceLocation Id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *DeleteStreamPackageSourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageSourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteStreamPackageSourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteStreamPackageSourceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteStreamPackageSourceResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteStreamPackageSourceResponseParams `json:"Response"`
+}
+
+func (r *DeleteStreamPackageSourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteStreamPackageSourceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -911,6 +1642,850 @@ func (r *DescribeStreamPackageHarvestJobsResponse) FromJsonString(s string) erro
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type DescribeStreamPackageLinearAssemblyChannelAlertsRequestParams struct {
+	// Channel ID.
+	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
+
+	// Query start time, Unix timestamp, supports queries in the last seven days.
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query end time, Unix timestamp, supports queries in the last seven days.
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+type DescribeStreamPackageLinearAssemblyChannelAlertsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Channel ID.
+	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
+
+	// Query start time, Unix timestamp, supports queries in the last seven days.
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query end time, Unix timestamp, supports queries in the last seven days.
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+func (r *DescribeStreamPackageLinearAssemblyChannelAlertsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageLinearAssemblyChannelAlertsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChannelId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageLinearAssemblyChannelAlertsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageLinearAssemblyChannelAlertsResponseParams struct {
+	// Channel alarm information.
+	Infos *ChannelAlertResp `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeStreamPackageLinearAssemblyChannelAlertsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageLinearAssemblyChannelAlertsResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageLinearAssemblyChannelAlertsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageLinearAssemblyChannelAlertsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageLinearAssemblyChannelRequestParams struct {
+	// channel id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DescribeStreamPackageLinearAssemblyChannelRequest struct {
+	*tchttp.BaseRequest
+	
+	// channel id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *DescribeStreamPackageLinearAssemblyChannelRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageLinearAssemblyChannelRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageLinearAssemblyChannelRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageLinearAssemblyChannelResponseParams struct {
+	// Channel information.
+	Info *LinearAssemblyChannelInfo `json:"Info,omitnil,omitempty" name:"Info"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeStreamPackageLinearAssemblyChannelResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageLinearAssemblyChannelResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageLinearAssemblyChannelResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageLinearAssemblyChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageLinearAssemblyChannelsRequestParams struct {
+	// Paging query page number, the value range is [1, 1000].
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Paging query the size of each page, the value range is [1, 1000].
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+type DescribeStreamPackageLinearAssemblyChannelsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Paging query page number, the value range is [1, 1000].
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Paging query the size of each page, the value range is [1, 1000].
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+func (r *DescribeStreamPackageLinearAssemblyChannelsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageLinearAssemblyChannelsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PageNum")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageLinearAssemblyChannelsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageLinearAssemblyChannelsResponseParams struct {
+	// Channel list.
+	Infos []*LinearAssemblyChannelInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// Number of pages.
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Size per page.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// The total amount.
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
+
+	// total pages.
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeStreamPackageLinearAssemblyChannelsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageLinearAssemblyChannelsResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageLinearAssemblyChannelsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageLinearAssemblyChannelsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageLinearAssemblyProgramRequestParams struct {
+	// program id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DescribeStreamPackageLinearAssemblyProgramRequest struct {
+	*tchttp.BaseRequest
+	
+	// program id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *DescribeStreamPackageLinearAssemblyProgramRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageLinearAssemblyProgramRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageLinearAssemblyProgramRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageLinearAssemblyProgramResponseParams struct {
+	// Program information.
+	Info *LinearAssemblyProgramInfo `json:"Info,omitnil,omitempty" name:"Info"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeStreamPackageLinearAssemblyProgramResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageLinearAssemblyProgramResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageLinearAssemblyProgramResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageLinearAssemblyProgramResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageLinearAssemblyProgramSchedulesRequestParams struct {
+	// Query all Programs under a Channel.
+	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
+
+	// Window duration information, in seconds.
+	TimeWindow *uint64 `json:"TimeWindow,omitnil,omitempty" name:"TimeWindow"`
+
+	// Paging query page number, the value range is [1, 1000].
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Paging query the size of each page, the value range is [1, 1000].
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+type DescribeStreamPackageLinearAssemblyProgramSchedulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Query all Programs under a Channel.
+	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
+
+	// Window duration information, in seconds.
+	TimeWindow *uint64 `json:"TimeWindow,omitnil,omitempty" name:"TimeWindow"`
+
+	// Paging query page number, the value range is [1, 1000].
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Paging query the size of each page, the value range is [1, 1000].
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+func (r *DescribeStreamPackageLinearAssemblyProgramSchedulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageLinearAssemblyProgramSchedulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ChannelId")
+	delete(f, "TimeWindow")
+	delete(f, "PageNum")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageLinearAssemblyProgramSchedulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageLinearAssemblyProgramSchedulesResponseParams struct {
+	// Program's scheduling list.
+	Infos []*LinearAssemblyProgramInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// Number of pages.
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Size per page.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// The total amount.
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
+
+	// Total pages.
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeStreamPackageLinearAssemblyProgramSchedulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageLinearAssemblyProgramSchedulesResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageLinearAssemblyProgramSchedulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageLinearAssemblyProgramSchedulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageLinearAssemblyProgramsRequestParams struct {
+	// Paging query page number, the value range is [1, 1000].
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Paging query the size of each page, the value range is [1, 1000].
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Query all Programs under a Channel.
+	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
+}
+
+type DescribeStreamPackageLinearAssemblyProgramsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Paging query page number, the value range is [1, 1000].
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Paging query the size of each page, the value range is [1, 1000].
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Query all Programs under a Channel.
+	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
+}
+
+func (r *DescribeStreamPackageLinearAssemblyProgramsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageLinearAssemblyProgramsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PageNum")
+	delete(f, "PageSize")
+	delete(f, "ChannelId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageLinearAssemblyProgramsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageLinearAssemblyProgramsResponseParams struct {
+	// Program list.
+	Infos []*LinearAssemblyProgramInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// Number of pages.
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Size per page.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// The total amount.
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
+
+	// total pages.
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeStreamPackageLinearAssemblyProgramsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageLinearAssemblyProgramsResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageLinearAssemblyProgramsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageLinearAssemblyProgramsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageSourceAlertsRequestParams struct {
+	// Source ID.
+	SourceId *string `json:"SourceId,omitnil,omitempty" name:"SourceId"`
+
+	// Query start time, Unix timestamp, supports queries in the last seven days.
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query end time, Unix timestamp, supports queries in the last seven days.
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+type DescribeStreamPackageSourceAlertsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Source ID.
+	SourceId *string `json:"SourceId,omitnil,omitempty" name:"SourceId"`
+
+	// Query start time, Unix timestamp, supports queries in the last seven days.
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query end time, Unix timestamp, supports queries in the last seven days.
+	EndTime *uint64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+func (r *DescribeStreamPackageSourceAlertsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageSourceAlertsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SourceId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageSourceAlertsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageSourceAlertsResponseParams struct {
+	// Source alarm information.
+	Infos []*SourceAlert `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeStreamPackageSourceAlertsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageSourceAlertsResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageSourceAlertsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageSourceAlertsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageSourceLocationAlertsRequestParams struct {
+	// Location ID.
+	LocationId *string `json:"LocationId,omitnil,omitempty" name:"LocationId"`
+}
+
+type DescribeStreamPackageSourceLocationAlertsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Location ID.
+	LocationId *string `json:"LocationId,omitnil,omitempty" name:"LocationId"`
+}
+
+func (r *DescribeStreamPackageSourceLocationAlertsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageSourceLocationAlertsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "LocationId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageSourceLocationAlertsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageSourceLocationAlertsResponseParams struct {
+	// Location alarm information.
+	Infos []*LocationAlert `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeStreamPackageSourceLocationAlertsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageSourceLocationAlertsResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageSourceLocationAlertsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageSourceLocationAlertsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageSourceLocationRequestParams struct {
+	// SourceLocation Id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DescribeStreamPackageSourceLocationRequest struct {
+	*tchttp.BaseRequest
+	
+	// SourceLocation Id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *DescribeStreamPackageSourceLocationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageSourceLocationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageSourceLocationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageSourceLocationResponseParams struct {
+	// SourceLocation information.
+	Info *SourceLocationInfo `json:"Info,omitnil,omitempty" name:"Info"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeStreamPackageSourceLocationResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageSourceLocationResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageSourceLocationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageSourceLocationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageSourceLocationsRequestParams struct {
+	// Paging query page number, the value range is [1, 1000].
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Paging query the size of each page, the value range is [1, 1000].
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+type DescribeStreamPackageSourceLocationsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Paging query page number, the value range is [1, 1000].
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Paging query the size of each page, the value range is [1, 1000].
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+}
+
+func (r *DescribeStreamPackageSourceLocationsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageSourceLocationsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PageNum")
+	delete(f, "PageSize")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageSourceLocationsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageSourceLocationsResponseParams struct {
+	// SourceLocation list.
+	Infos []*SourceLocationInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// Number of pages.
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Size per page.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// The total amount.
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
+
+	// total pages.
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeStreamPackageSourceLocationsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageSourceLocationsResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageSourceLocationsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageSourceLocationsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageSourceRequestParams struct {
+	// SourceLocation Id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type DescribeStreamPackageSourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// SourceLocation Id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *DescribeStreamPackageSourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageSourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageSourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageSourceResponseParams struct {
+	// Source information.
+	Info *SourceInfo `json:"Info,omitnil,omitempty" name:"Info"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeStreamPackageSourceResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageSourceResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageSourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageSourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageSourcesRequestParams struct {
+	// Paging query page number, the value range is [1, 1000].
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Paging query the size of each page, the value range is [1, 1000].
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Location Id, query all sources under the location.
+	LocationId *string `json:"LocationId,omitnil,omitempty" name:"LocationId"`
+
+	// The type of source is divided into live broadcast and on-demand VOD.
+	// Optional values: Live, VOD.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type DescribeStreamPackageSourcesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Paging query page number, the value range is [1, 1000].
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Paging query the size of each page, the value range is [1, 1000].
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Location Id, query all sources under the location.
+	LocationId *string `json:"LocationId,omitnil,omitempty" name:"LocationId"`
+
+	// The type of source is divided into live broadcast and on-demand VOD.
+	// Optional values: Live, VOD.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+func (r *DescribeStreamPackageSourcesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageSourcesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PageNum")
+	delete(f, "PageSize")
+	delete(f, "LocationId")
+	delete(f, "Type")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeStreamPackageSourcesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeStreamPackageSourcesResponseParams struct {
+	// Source list.
+	Infos []*SourceInfo `json:"Infos,omitnil,omitempty" name:"Infos"`
+
+	// Number of pages.
+	PageNum *uint64 `json:"PageNum,omitnil,omitempty" name:"PageNum"`
+
+	// Size per page.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// The total amount.
+	TotalNum *uint64 `json:"TotalNum,omitnil,omitempty" name:"TotalNum"`
+
+	// total pages.
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeStreamPackageSourcesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeStreamPackageSourcesResponseParams `json:"Response"`
+}
+
+func (r *DescribeStreamPackageSourcesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeStreamPackageSourcesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type EndpointAuthInfo struct {
 	// The security group allowlist in CIDR format.
 	// Note: this field may return null, indicating that no valid values can be obtained.
@@ -1019,6 +2594,118 @@ type InputInfo struct {
 
 	// Channel input authentication information.
 	AuthInfo *InputAuthInfo `json:"AuthInfo,omitnil,omitempty" name:"AuthInfo"`
+}
+
+type LinearAssemblyChannelInfo struct {
+	// Linear assembly channel name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Define the characteristics of the channel. Standard supports live broadcast and on-demand sources, while Basic only supports on-demand source arrangement.
+	Tier *string `json:"Tier,omitnil,omitempty" name:"Tier"`
+
+	// The source switching mode in the channel is divided into Linear and Loop. Live broadcast only supports Linear.
+	PlaybackMode *string `json:"PlaybackMode,omitnil,omitempty" name:"PlaybackMode"`
+
+	// Time shift configuration, vod is valid.
+	TimeShiftConf *TimeShiftInfo `json:"TimeShiftConf,omitnil,omitempty" name:"TimeShiftConf"`
+
+	// Spacer configuration.
+	SlateConf *SlateInfo `json:"SlateConf,omitnil,omitempty" name:"SlateConf"`
+
+	// output information.
+	Outputs []*OutputInfo `json:"Outputs,omitnil,omitempty" name:"Outputs"`
+
+	// List of programs bound to this channel.
+	AttachedPrograms []*string `json:"AttachedPrograms,omitnil,omitempty" name:"AttachedPrograms"`
+
+	// program information.
+	ProgramSchedules []*ProgramScheduleInfo `json:"ProgramSchedules,omitnil,omitempty" name:"ProgramSchedules"`
+
+	// ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Region.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// State.
+	State *string `json:"State,omitnil,omitempty" name:"State"`
+
+	// Time shift on switch.
+	TimeShiftEnable *bool `json:"TimeShiftEnable,omitnil,omitempty" name:"TimeShiftEnable"`
+
+	// Channel creation time, unix seconds timestamp.
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+}
+
+type LinearAssemblyProgramInfo struct {
+	// Channel linear assembly program information.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// The type of the arrangement target source, divided into live broadcast and on-demand.
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// The associated source location id.
+	SourceLocationId *string `json:"SourceLocationId,omitnil,omitempty" name:"SourceLocationId"`
+
+	// SourceId, uniquely identifies a source.
+	SourceId *string `json:"SourceId,omitnil,omitempty" name:"SourceId"`
+
+	// The associated live broadcast or on-demand broadcast, source name, and location are globally unique.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// The bound channel.
+	AttachedChannel *string `json:"AttachedChannel,omitnil,omitempty" name:"AttachedChannel"`
+
+	// Play configuration.
+	PlaybackConf *PlaybackInfo `json:"PlaybackConf,omitnil,omitempty" name:"PlaybackConf"`
+
+	// AdBreaks.
+	AdBreaks []*AdBreakInfo `json:"AdBreaks,omitnil,omitempty" name:"AdBreaks"`
+
+	// ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Region.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// SourceLocation name.
+	SourceLocationName *string `json:"SourceLocationName,omitnil,omitempty" name:"SourceLocationName"`
+}
+
+type LocationAlert struct {
+	// Location ID.
+	LocationId *string `json:"LocationId,omitnil,omitempty" name:"LocationId"`
+
+	// Alarm event code.
+	Code *uint64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// Alarm classification.
+	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
+
+	// Alarm message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Update time.
+	LastModifiedTime *uint64 `json:"LastModifiedTime,omitnil,omitempty" name:"LastModifiedTime"`
+
+	// Location name.
+	LocationName *string `json:"LocationName,omitnil,omitempty" name:"LocationName"`
+}
+
+type ManifestInfo struct {
+	// Time window, in seconds.
+	Windows *uint64 `json:"Windows,omitnil,omitempty" name:"Windows"`
+
+	// Enter the format of the output advertising tag. Optional values are: Date Range and Enhanced SCTE-35.
+	AdMarkupType *string `json:"AdMarkupType,omitnil,omitempty" name:"AdMarkupType"`
+}
+
+type Metadata struct {
+	// Key.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Value.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 // Predefined struct for user
@@ -1226,32 +2913,32 @@ func (r *ModifyStreamPackageChannelInputAuthInfoResponse) FromJsonString(s strin
 
 // Predefined struct for user
 type ModifyStreamPackageChannelRequestParams struct {
-	// Channel ID
+	// Channel ID.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// New channel name
+	// New channel name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// New channel protocol. Valid values: HLS, DASH
+	// New channel protocol. Valid values: HLS, DASH, CMAF.
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// Cache configuration
+	// Cache configuration.
 	CacheInfo *CacheInfo `json:"CacheInfo,omitnil,omitempty" name:"CacheInfo"`
 }
 
 type ModifyStreamPackageChannelRequest struct {
 	*tchttp.BaseRequest
 	
-	// Channel ID
+	// Channel ID.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 
-	// New channel name
+	// New channel name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// New channel protocol. Valid values: HLS, DASH
+	// New channel protocol. Valid values: HLS, DASH, CMAF.
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
-	// Cache configuration
+	// Cache configuration.
 	CacheInfo *CacheInfo `json:"CacheInfo,omitnil,omitempty" name:"CacheInfo"`
 }
 
@@ -1299,6 +2986,456 @@ func (r *ModifyStreamPackageChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifyStreamPackageLinearAssemblyChannelRequestParams struct {
+	// Channel ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Modified name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Define the characteristics of the channel. Standard supports live broadcast and on-demand sources, while Basic only supports on-demand source arrangement.
+	Tier *string `json:"Tier,omitnil,omitempty" name:"Tier"`
+
+	// The source switching mode in the channel is divided into Linear and Loop. Live broadcast only supports Linear.
+	// Optional values: Linear, Loop.
+	PlaybackMode *string `json:"PlaybackMode,omitnil,omitempty" name:"PlaybackMode"`
+
+	// Time shift on switch.
+	TimeShiftEnable *bool `json:"TimeShiftEnable,omitnil,omitempty" name:"TimeShiftEnable"`
+
+	// Time shift configuration.
+	TimeShiftConf *TimeShiftInfo `json:"TimeShiftConf,omitnil,omitempty" name:"TimeShiftConf"`
+
+	// padding configuration.
+	SlateConf *SlateInfo `json:"SlateConf,omitnil,omitempty" name:"SlateConf"`
+
+	// Output configuration.
+	Outputs []*OutputInfo `json:"Outputs,omitnil,omitempty" name:"Outputs"`
+}
+
+type ModifyStreamPackageLinearAssemblyChannelRequest struct {
+	*tchttp.BaseRequest
+	
+	// Channel ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Modified name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Define the characteristics of the channel. Standard supports live broadcast and on-demand sources, while Basic only supports on-demand source arrangement.
+	Tier *string `json:"Tier,omitnil,omitempty" name:"Tier"`
+
+	// The source switching mode in the channel is divided into Linear and Loop. Live broadcast only supports Linear.
+	// Optional values: Linear, Loop.
+	PlaybackMode *string `json:"PlaybackMode,omitnil,omitempty" name:"PlaybackMode"`
+
+	// Time shift on switch.
+	TimeShiftEnable *bool `json:"TimeShiftEnable,omitnil,omitempty" name:"TimeShiftEnable"`
+
+	// Time shift configuration.
+	TimeShiftConf *TimeShiftInfo `json:"TimeShiftConf,omitnil,omitempty" name:"TimeShiftConf"`
+
+	// padding configuration.
+	SlateConf *SlateInfo `json:"SlateConf,omitnil,omitempty" name:"SlateConf"`
+
+	// Output configuration.
+	Outputs []*OutputInfo `json:"Outputs,omitnil,omitempty" name:"Outputs"`
+}
+
+func (r *ModifyStreamPackageLinearAssemblyChannelRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyStreamPackageLinearAssemblyChannelRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "Name")
+	delete(f, "Tier")
+	delete(f, "PlaybackMode")
+	delete(f, "TimeShiftEnable")
+	delete(f, "TimeShiftConf")
+	delete(f, "SlateConf")
+	delete(f, "Outputs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamPackageLinearAssemblyChannelRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyStreamPackageLinearAssemblyChannelResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyStreamPackageLinearAssemblyChannelResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyStreamPackageLinearAssemblyChannelResponseParams `json:"Response"`
+}
+
+func (r *ModifyStreamPackageLinearAssemblyChannelResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyStreamPackageLinearAssemblyChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyStreamPackageLinearAssemblyProgramRequestParams struct {
+	// Program ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Modified name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// The type of the arrangement target source, divided into live broadcast and on-demand.
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// The associated source location.
+	SourceLocationId *string `json:"SourceLocationId,omitnil,omitempty" name:"SourceLocationId"`
+
+	// The associated live broadcast or on-demand broadcast, source name, and location are globally unique.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// PlaybackConf.
+	PlaybackConf *PlaybackInfoReq `json:"PlaybackConf,omitnil,omitempty" name:"PlaybackConf"`
+
+	// AdBreaks.
+	AdBreaks []*AdBreakInfo `json:"AdBreaks,omitnil,omitempty" name:"AdBreaks"`
+}
+
+type ModifyStreamPackageLinearAssemblyProgramRequest struct {
+	*tchttp.BaseRequest
+	
+	// Program ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Modified name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// The type of the arrangement target source, divided into live broadcast and on-demand.
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// The associated source location.
+	SourceLocationId *string `json:"SourceLocationId,omitnil,omitempty" name:"SourceLocationId"`
+
+	// The associated live broadcast or on-demand broadcast, source name, and location are globally unique.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// PlaybackConf.
+	PlaybackConf *PlaybackInfoReq `json:"PlaybackConf,omitnil,omitempty" name:"PlaybackConf"`
+
+	// AdBreaks.
+	AdBreaks []*AdBreakInfo `json:"AdBreaks,omitnil,omitempty" name:"AdBreaks"`
+}
+
+func (r *ModifyStreamPackageLinearAssemblyProgramRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyStreamPackageLinearAssemblyProgramRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "Name")
+	delete(f, "SourceType")
+	delete(f, "SourceLocationId")
+	delete(f, "SourceName")
+	delete(f, "PlaybackConf")
+	delete(f, "AdBreaks")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamPackageLinearAssemblyProgramRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyStreamPackageLinearAssemblyProgramResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyStreamPackageLinearAssemblyProgramResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyStreamPackageLinearAssemblyProgramResponseParams `json:"Response"`
+}
+
+func (r *ModifyStreamPackageLinearAssemblyProgramResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyStreamPackageLinearAssemblyProgramResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyStreamPackageSourceLocationRequestParams struct {
+	// SourceLocation Id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Modified name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// BaseUrl.
+	BaseUrl *string `json:"BaseUrl,omitnil,omitempty" name:"BaseUrl"`
+
+	// Whether to enable patching.
+	SegmentDeliverEnable *bool `json:"SegmentDeliverEnable,omitnil,omitempty" name:"SegmentDeliverEnable"`
+
+	// Patch configuration.
+	SegmentDeliverConf *SegmentDeliverInfo `json:"SegmentDeliverConf,omitnil,omitempty" name:"SegmentDeliverConf"`
+
+	// Whether to enable package distribution sharding, it is enabled by default.
+	SegmentDeliverUsePackageEnable *bool `json:"SegmentDeliverUsePackageEnable,omitnil,omitempty" name:"SegmentDeliverUsePackageEnable"`
+}
+
+type ModifyStreamPackageSourceLocationRequest struct {
+	*tchttp.BaseRequest
+	
+	// SourceLocation Id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Modified name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// BaseUrl.
+	BaseUrl *string `json:"BaseUrl,omitnil,omitempty" name:"BaseUrl"`
+
+	// Whether to enable patching.
+	SegmentDeliverEnable *bool `json:"SegmentDeliverEnable,omitnil,omitempty" name:"SegmentDeliverEnable"`
+
+	// Patch configuration.
+	SegmentDeliverConf *SegmentDeliverInfo `json:"SegmentDeliverConf,omitnil,omitempty" name:"SegmentDeliverConf"`
+
+	// Whether to enable package distribution sharding, it is enabled by default.
+	SegmentDeliverUsePackageEnable *bool `json:"SegmentDeliverUsePackageEnable,omitnil,omitempty" name:"SegmentDeliverUsePackageEnable"`
+}
+
+func (r *ModifyStreamPackageSourceLocationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyStreamPackageSourceLocationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "Name")
+	delete(f, "BaseUrl")
+	delete(f, "SegmentDeliverEnable")
+	delete(f, "SegmentDeliverConf")
+	delete(f, "SegmentDeliverUsePackageEnable")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamPackageSourceLocationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyStreamPackageSourceLocationResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyStreamPackageSourceLocationResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyStreamPackageSourceLocationResponseParams `json:"Response"`
+}
+
+func (r *ModifyStreamPackageSourceLocationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyStreamPackageSourceLocationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyStreamPackageSourceRequestParams struct {
+	// Source Id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Modified name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Distinguish between live broadcast and on-demand VOD source types.
+	// Optional values: Live, VOD (on demand)
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// source configuration.
+	PackageConfs []*SourcePackageConf `json:"PackageConfs,omitnil,omitempty" name:"PackageConfs"`
+}
+
+type ModifyStreamPackageSourceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Source Id.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Modified name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Distinguish between live broadcast and on-demand VOD source types.
+	// Optional values: Live, VOD (on demand)
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// source configuration.
+	PackageConfs []*SourcePackageConf `json:"PackageConfs,omitnil,omitempty" name:"PackageConfs"`
+}
+
+func (r *ModifyStreamPackageSourceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyStreamPackageSourceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "Name")
+	delete(f, "Type")
+	delete(f, "PackageConfs")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamPackageSourceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyStreamPackageSourceResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyStreamPackageSourceResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyStreamPackageSourceResponseParams `json:"Response"`
+}
+
+func (r *ModifyStreamPackageSourceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyStreamPackageSourceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type NameServer struct {
+	// name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// address.
+	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+}
+
+type OutputInfo struct {
+	// HLS DASH.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// The output group name can be associated with the source group name.
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
+
+	// The file name output by the channel program after scheduling.
+	ManifestName *string `json:"ManifestName,omitnil,omitempty" name:"ManifestName"`
+
+	// Advertisement configuration.
+	ManifestConf *ManifestInfo `json:"ManifestConf,omitnil,omitempty" name:"ManifestConf"`
+
+	// Playback address.
+	PlaybackURL *string `json:"PlaybackURL,omitnil,omitempty" name:"PlaybackURL"`
+}
+
+type OutputReq struct {
+	// Output type, distinguish HLS DASH.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// The output group name can be associated with the source group name.
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
+
+	// The file name output by the channel program after scheduling.
+	ManifestName *string `json:"ManifestName,omitnil,omitempty" name:"ManifestName"`
+
+	// Advertisement configuration.
+	ManifestConf *ManifestInfo `json:"ManifestConf,omitnil,omitempty" name:"ManifestConf"`
+}
+
+type PlaybackInfo struct {
+	// Program duration, in milliseconds, valid for live broadcast.
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// Program startup method, live broadcast only supports Absolute, on-demand also supports Relative.
+	TransitionType *string `json:"TransitionType,omitnil,omitempty" name:"TransitionType"`
+
+	// Unix timestamp, the start execution time of the program in the Absolute scenario.
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// It is related to the insertion order of the selected program, divided into After and Before.
+	RelativePosition *string `json:"RelativePosition,omitnil,omitempty" name:"RelativePosition"`
+
+	// The selected insertion reference program id.
+	RelativeProgramId *string `json:"RelativeProgramId,omitnil,omitempty" name:"RelativeProgramId"`
+
+	// Spacer configuration.
+	ClipRangeConf *ClipRangeInfo `json:"ClipRangeConf,omitnil,omitempty" name:"ClipRangeConf"`
+
+	// RelativeProgramName.
+	RelativeProgramName *string `json:"RelativeProgramName,omitnil,omitempty" name:"RelativeProgramName"`
+}
+
+type PlaybackInfoReq struct {
+	// Program startup method, live broadcast only supports Absolute, on-demand also supports Relative.
+	// Optional values: Absolute, Relative.
+	TransitionType *string `json:"TransitionType,omitnil,omitempty" name:"TransitionType"`
+
+	// Unix timestamp, the start execution time of the program in absolute scenarios.
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Program duration, in milliseconds, valid for live broadcast.
+	Duration *uint64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// It is related to the insertion order of the selected program, divided into After and Before.
+	RelativePosition *string `json:"RelativePosition,omitnil,omitempty" name:"RelativePosition"`
+
+	// The selected insertion reference program id.
+	RelativeProgramId *string `json:"RelativeProgramId,omitnil,omitempty" name:"RelativeProgramId"`
+
+	// Spacer configuration.
+	ClipRangeConf *ClipRangeInfo `json:"ClipRangeConf,omitnil,omitempty" name:"ClipRangeConf"`
+}
+
 type PointInfo struct {
 	// Channel input list.
 	Inputs []*InputInfo `json:"Inputs,omitnil,omitempty" name:"Inputs"`
@@ -1306,6 +3443,72 @@ type PointInfo struct {
 	// Channel output list.
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	Endpoints []*EndpointInfo `json:"Endpoints,omitnil,omitempty" name:"Endpoints"`
+}
+
+type ProgramAlertCounts struct {
+	// Program ID.
+	ProgramId *string `json:"ProgramId,omitnil,omitempty" name:"ProgramId"`
+
+	// Program name.
+	ProgramName *string `json:"ProgramName,omitnil,omitempty" name:"ProgramName"`
+
+	// Alarm classification.
+	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
+
+	// The number of occurrences
+	Count *uint64 `json:"Count,omitnil,omitempty" name:"Count"`
+
+	// Update time.
+	LastModifiedTime *uint64 `json:"LastModifiedTime,omitnil,omitempty" name:"LastModifiedTime"`
+}
+
+type ProgramAlertInfos struct {
+	// Channel ID.
+	ChannelId *string `json:"ChannelId,omitnil,omitempty" name:"ChannelId"`
+
+	// Channel name.
+	ChannelName *string `json:"ChannelName,omitnil,omitempty" name:"ChannelName"`
+
+	// ProgramID.
+	ProgramId *string `json:"ProgramId,omitnil,omitempty" name:"ProgramId"`
+
+	// ProgramName.
+	ProgramName *string `json:"ProgramName,omitnil,omitempty" name:"ProgramName"`
+
+	// Alarm event code.
+	Code *uint64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// Alarm classification.
+	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
+
+	// Alarm message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Update time.
+	LastModifiedTime *uint64 `json:"LastModifiedTime,omitnil,omitempty" name:"LastModifiedTime"`
+}
+
+type ProgramScheduleInfo struct {
+	// program name.
+	ProgramName *string `json:"ProgramName,omitnil,omitempty" name:"ProgramName"`
+
+	// program id.
+	ProgramId *string `json:"ProgramId,omitnil,omitempty" name:"ProgramId"`
+
+	// source type.
+	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
+
+	// source id.
+	SourceId *string `json:"SourceId,omitnil,omitempty" name:"SourceId"`
+
+	// The id of the source location.
+	SourceLocationId *string `json:"SourceLocationId,omitnil,omitempty" name:"SourceLocationId"`
+
+	// Start timestamp.
+	StartTime *uint64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Duration.
+	Duration *string `json:"Duration,omitnil,omitempty" name:"Duration"`
 }
 
 type SSAIConf struct {
@@ -1349,6 +3552,264 @@ type SSAIConf struct {
 	// 3:Unrestricted 
 	// 4.Both.
 	DeliveryRestrictions *uint64 `json:"DeliveryRestrictions,omitnil,omitempty" name:"DeliveryRestrictions"`
+}
+
+type SegmentDeliverInfo struct {
+	// Default content source address.
+	DefaultSegmentUrl *string `json:"DefaultSegmentUrl,omitnil,omitempty" name:"DefaultSegmentUrl"`
+
+	// Custom server address.
+	NameServers []*NameServer `json:"NameServers,omitnil,omitempty" name:"NameServers"`
+}
+
+type SlateInfo struct {
+	// The ID of the source location.
+	SourceLocationId *string `json:"SourceLocationId,omitnil,omitempty" name:"SourceLocationId"`
+
+	// The corresponding vod shim content source name.
+	VodSourceName *string `json:"VodSourceName,omitnil,omitempty" name:"VodSourceName"`
+}
+
+type SourceAlert struct {
+	// Source ID.
+	SourceId *string `json:"SourceId,omitnil,omitempty" name:"SourceId"`
+
+	// Source name.
+	SourceName *string `json:"SourceName,omitnil,omitempty" name:"SourceName"`
+
+	// Alarm event code.
+	Code *uint64 `json:"Code,omitnil,omitempty" name:"Code"`
+
+	// Alarm classification.
+	Category *string `json:"Category,omitnil,omitempty" name:"Category"`
+
+	// Alarm message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Update time.
+	LastModifiedTime *uint64 `json:"LastModifiedTime,omitnil,omitempty" name:"LastModifiedTime"`
+}
+
+type SourceInfo struct {
+	// name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// The source type distinguishes between live broadcast and on-demand Vod.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Source configuration.
+	PackageConf []*SourcePackageConf `json:"PackageConf,omitnil,omitempty" name:"PackageConf"`
+
+	// ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Create timestamp.
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Update timestamp.
+	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Region.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+}
+
+type SourceLocationInfo struct {
+	// ID, unique identification.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// SourceLocation name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// area.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// BaseUrl information.
+	BaseUrl *string `json:"BaseUrl,omitnil,omitempty" name:"BaseUrl"`
+
+	// Whether to enable patching.
+	SegmentDeliverEnable *bool `json:"SegmentDeliverEnable,omitnil,omitempty" name:"SegmentDeliverEnable"`
+
+	// Patch configuration.
+	SegmentDeliverConf *SegmentDeliverInfo `json:"SegmentDeliverConf,omitnil,omitempty" name:"SegmentDeliverConf"`
+
+	// List of bound live broadcast source ids.
+	AttachedLiveSources []*string `json:"AttachedLiveSources,omitnil,omitempty" name:"AttachedLiveSources"`
+
+	// List of bound on-demand source ids.
+	AttachedVodSources []*string `json:"AttachedVodSources,omitnil,omitempty" name:"AttachedVodSources"`
+
+	// Source location creation time, Unix timestamp.
+	CreateTime *uint64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Source location last modified time, Unix timestamp.
+	UpdateTime *uint64 `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Whether to enable package distribution sharding, it is enabled by default.
+	SegmentDeliverUsePackageEnable *bool `json:"SegmentDeliverUsePackageEnable,omitnil,omitempty" name:"SegmentDeliverUsePackageEnable"`
+}
+
+type SourcePackageConf struct {
+	// Group name. When the channel is in Linear mode and vod source is selected, the group name corresponds to the output group name of the channel output.
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
+
+	// Type, distinguish between HLS and DASH, optional values: HLS, DASH.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// access path.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+}
+
+type SpliceInsertInfo struct {
+	// EventID.
+	EventID *string `json:"EventID,omitnil,omitempty" name:"EventID"`
+
+	// AvailNum.
+	AvailNum *string `json:"AvailNum,omitnil,omitempty" name:"AvailNum"`
+
+	// AvailExpected.
+	AvailExpected *string `json:"AvailExpected,omitnil,omitempty" name:"AvailExpected"`
+
+	// ProgramID.
+	ProgramID *string `json:"ProgramID,omitnil,omitempty" name:"ProgramID"`
+}
+
+// Predefined struct for user
+type StartStreamPackageLinearAssemblyChannelRequestParams struct {
+	// Channel ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type StartStreamPackageLinearAssemblyChannelRequest struct {
+	*tchttp.BaseRequest
+	
+	// Channel ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *StartStreamPackageLinearAssemblyChannelRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartStreamPackageLinearAssemblyChannelRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartStreamPackageLinearAssemblyChannelRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartStreamPackageLinearAssemblyChannelResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type StartStreamPackageLinearAssemblyChannelResponse struct {
+	*tchttp.BaseResponse
+	Response *StartStreamPackageLinearAssemblyChannelResponseParams `json:"Response"`
+}
+
+func (r *StartStreamPackageLinearAssemblyChannelResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartStreamPackageLinearAssemblyChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopStreamPackageLinearAssemblyChannelRequestParams struct {
+	// Channel ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+type StopStreamPackageLinearAssemblyChannelRequest struct {
+	*tchttp.BaseRequest
+	
+	// Channel ID.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+}
+
+func (r *StopStreamPackageLinearAssemblyChannelRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopStreamPackageLinearAssemblyChannelRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StopStreamPackageLinearAssemblyChannelRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StopStreamPackageLinearAssemblyChannelResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type StopStreamPackageLinearAssemblyChannelResponse struct {
+	*tchttp.BaseResponse
+	Response *StopStreamPackageLinearAssemblyChannelResponseParams `json:"Response"`
+}
+
+func (r *StopStreamPackageLinearAssemblyChannelResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StopStreamPackageLinearAssemblyChannelResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type TimeShiftInfo struct {
+	// Lookback window, in seconds.
+	TimeWindows *uint64 `json:"TimeWindows,omitnil,omitempty" name:"TimeWindows"`
+}
+
+type TimeSignalInfo struct {
+	// EventID.
+	EventID *string `json:"EventID,omitnil,omitempty" name:"EventID"`
+
+	// UPIDType.
+	UPIDType *string `json:"UPIDType,omitnil,omitempty" name:"UPIDType"`
+
+	// UPID.
+	UPID *string `json:"UPID,omitnil,omitempty" name:"UPID"`
+
+	// TypeID.
+	TypeID *string `json:"TypeID,omitnil,omitempty" name:"TypeID"`
+
+	// Num.
+	Num *string `json:"Num,omitnil,omitempty" name:"Num"`
+
+	// Expected.
+	Expected *string `json:"Expected,omitnil,omitempty" name:"Expected"`
+
+	// SubsegmentNum.
+	SubsegmentNum *string `json:"SubsegmentNum,omitnil,omitempty" name:"SubsegmentNum"`
+
+	// SubsegmentsExpected.
+	SubsegmentsExpected *string `json:"SubsegmentsExpected,omitnil,omitempty" name:"SubsegmentsExpected"`
 }
 
 // Predefined struct for user
