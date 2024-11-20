@@ -804,6 +804,59 @@ func (c *Client) DescribeCustomerUinWithContext(ctx context.Context, request *De
     return
 }
 
+func NewForceQNRequest() (request *ForceQNRequest) {
+    request = &ForceQNRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "ForceQN")
+    
+    
+    return
+}
+
+func NewForceQNResponse() (response *ForceQNResponse) {
+    response = &ForceQNResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ForceQN
+// This API is used to set and cancel forced service suspension.Reseller need to be allowlisted to use the API.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PAGE = "InvalidParameter.Page"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) ForceQN(request *ForceQNRequest) (response *ForceQNResponse, err error) {
+    return c.ForceQNWithContext(context.Background(), request)
+}
+
+// ForceQN
+// This API is used to set and cancel forced service suspension.Reseller need to be allowlisted to use the API.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_PAGE = "InvalidParameter.Page"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) ForceQNWithContext(ctx context.Context, request *ForceQNRequest) (response *ForceQNResponse, err error) {
+    if request == nil {
+        request = NewForceQNRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ForceQN require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewForceQNResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetCountryCodesRequest() (request *GetCountryCodesRequest) {
     request = &GetCountryCodesRequest{
         BaseRequest: &tchttp.BaseRequest{},

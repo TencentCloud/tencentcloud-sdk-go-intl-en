@@ -23,6 +23,9 @@ const (
 	// Operation failed.
 	FAILEDOPERATION = "FailedOperation"
 
+	// 
+	FAILEDOPERATION_SEGMENTLOADING = "FailedOperation.SegmentLoading"
+
 	// Internal error.
 	INTERNALERROR = "InternalError"
 
@@ -31,6 +34,9 @@ const (
 
 	// Incorrect parameter value.
 	INVALIDPARAMETERVALUE = "InvalidParameterValue"
+
+	// The quota limit is exceeded.
+	LIMITEXCEEDED = "LimitExceeded"
 
 	// Missing parameter.
 	MISSINGPARAMETER = "MissingParameter"
