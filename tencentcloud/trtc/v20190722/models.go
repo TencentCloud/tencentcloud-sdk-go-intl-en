@@ -3465,6 +3465,9 @@ type StartStreamIngestRequestParams struct {
 
 	// Loop playback maximum duration, only effective when RepeatNum is set to -1, valid value range: [1, 10080], unit: minutes
 	MaxDuration *int64 `json:"MaxDuration,omitnil,omitempty" name:"MaxDuration"`
+
+	// Volume. Valid value range: [0, 100], default value is 100, indicating the original volume.
+	Volume *uint64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 }
 
 type StartStreamIngestRequest struct {
@@ -3511,6 +3514,9 @@ type StartStreamIngestRequest struct {
 
 	// Loop playback maximum duration, only effective when RepeatNum is set to -1, valid value range: [1, 10080], unit: minutes
 	MaxDuration *int64 `json:"MaxDuration,omitnil,omitempty" name:"MaxDuration"`
+
+	// Volume. Valid value range: [0, 100], default value is 100, indicating the original volume.
+	Volume *uint64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 }
 
 func (r *StartStreamIngestRequest) ToJsonString() string {
@@ -3539,6 +3545,7 @@ func (r *StartStreamIngestRequest) FromJsonString(s string) error {
 	delete(f, "AutoPush")
 	delete(f, "RepeatNum")
 	delete(f, "MaxDuration")
+	delete(f, "Volume")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartStreamIngestRequest has unknown keys!", "")
 	}
@@ -4137,6 +4144,9 @@ type UpdateStreamIngestRequestParams struct {
 
 	// The new url of the media resource.
 	StreamUrl *string `json:"StreamUrl,omitnil,omitempty" name:"StreamUrl"`
+
+	// Volume. Valid value range: [0, 100], default value is 100, indicating the original volume.
+	Volume *uint64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 }
 
 type UpdateStreamIngestRequest struct {
@@ -4150,6 +4160,9 @@ type UpdateStreamIngestRequest struct {
 
 	// The new url of the media resource.
 	StreamUrl *string `json:"StreamUrl,omitnil,omitempty" name:"StreamUrl"`
+
+	// Volume. Valid value range: [0, 100], default value is 100, indicating the original volume.
+	Volume *uint64 `json:"Volume,omitnil,omitempty" name:"Volume"`
 }
 
 func (r *UpdateStreamIngestRequest) ToJsonString() string {
@@ -4167,6 +4180,7 @@ func (r *UpdateStreamIngestRequest) FromJsonString(s string) error {
 	delete(f, "SdkAppId")
 	delete(f, "TaskId")
 	delete(f, "StreamUrl")
+	delete(f, "Volume")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateStreamIngestRequest has unknown keys!", "")
 	}

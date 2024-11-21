@@ -444,6 +444,7 @@ func NewCreateAccountResponse() (response *CreateAccountResponse) {
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_GETUSERLISTFAILED = "InternalError.GetUserListFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CHARACTERERROR = "InvalidParameter.CharacterError"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
@@ -467,6 +468,7 @@ func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateA
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
 //  INTERNALERROR_GETUSERLISTFAILED = "InternalError.GetUserListFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_CHARACTERERROR = "InvalidParameter.CharacterError"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
@@ -603,6 +605,7 @@ func NewCreateHourDBInstanceResponse() (response *CreateHourDBInstanceResponse) 
 //  FAILEDOPERATION_TAGDRYRUNERROR = "FailedOperation.TagDryRunError"
 //  FAILEDOPERATION_USERNOTAUTHED = "FailedOperation.UserNotAuthed"
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INTERNALERROR_CHECKVIPSTATUSFAILED = "InternalError.CheckVipStatusFailed"
 //  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
 //  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
 //  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
@@ -631,6 +634,7 @@ func (c *Client) CreateHourDBInstance(request *CreateHourDBInstanceRequest) (res
 //  FAILEDOPERATION_TAGDRYRUNERROR = "FailedOperation.TagDryRunError"
 //  FAILEDOPERATION_USERNOTAUTHED = "FailedOperation.UserNotAuthed"
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
+//  INTERNALERROR_CHECKVIPSTATUSFAILED = "InternalError.CheckVipStatusFailed"
 //  INTERNALERROR_GETSUBNETFAILED = "InternalError.GetSubnetFailed"
 //  INTERNALERROR_GETVPCFAILED = "InternalError.GetVpcFailed"
 //  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
@@ -1261,6 +1265,7 @@ func NewDescribeDBSecurityGroupsResponse() (response *DescribeDBSecurityGroupsRe
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_AUTHNOSTRATEGY = "FailedOperation.AuthNoStrategy"
+//  FAILEDOPERATION_GETSECURITYGROUPDETAILFAILED = "FailedOperation.GetSecurityGroupDetailFailed"
 //  INTERNALERROR_GETSECURITYGROUPDETAILFAILED = "InternalError.GetSecurityGroupDetailFailed"
 //  INTERNALERROR_INSTANCEOPERATEPERMISSIONERROR = "InternalError.InstanceOperatePermissionError"
 //  INTERNALERROR_LISTINSTANCERESPRESOURCECOUNTNOTMATCHERROR = "InternalError.ListInstanceRespResourceCountNotMatchError"
@@ -1287,6 +1292,7 @@ func (c *Client) DescribeDBSecurityGroups(request *DescribeDBSecurityGroupsReque
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_AUTHNOSTRATEGY = "FailedOperation.AuthNoStrategy"
+//  FAILEDOPERATION_GETSECURITYGROUPDETAILFAILED = "FailedOperation.GetSecurityGroupDetailFailed"
 //  INTERNALERROR_GETSECURITYGROUPDETAILFAILED = "InternalError.GetSecurityGroupDetailFailed"
 //  INTERNALERROR_INSTANCEOPERATEPERMISSIONERROR = "InternalError.InstanceOperatePermissionError"
 //  INTERNALERROR_LISTINSTANCERESPRESOURCECOUNTNOTMATCHERROR = "InternalError.ListInstanceRespResourceCountNotMatchError"
@@ -1406,7 +1412,7 @@ func NewDescribeDBTmpInstancesResponse() (response *DescribeDBTmpInstancesRespon
 }
 
 // DescribeDBTmpInstances
-// This API is used to obtain a temp u200drollback instance.
+// This API is used to obtain a temp rollback instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
@@ -1418,7 +1424,7 @@ func (c *Client) DescribeDBTmpInstances(request *DescribeDBTmpInstancesRequest) 
 }
 
 // DescribeDBTmpInstances
-// This API is used to obtain a temp u200drollback instance.
+// This API is used to obtain a temp rollback instance.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
@@ -2402,6 +2408,7 @@ func NewIsolateDedicatedDBInstanceResponse() (response *IsolateDedicatedDBInstan
 //  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
 func (c *Client) IsolateDedicatedDBInstance(request *IsolateDedicatedDBInstanceRequest) (response *IsolateDedicatedDBInstanceResponse, err error) {
     return c.IsolateDedicatedDBInstanceWithContext(context.Background(), request)
 }
@@ -2417,6 +2424,7 @@ func (c *Client) IsolateDedicatedDBInstance(request *IsolateDedicatedDBInstanceR
 //  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSABNORMAL = "ResourceUnavailable.InstanceStatusAbnormal"
 //  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+//  UNSUPPORTEDOPERATION_INVALIDOPERATION = "UnsupportedOperation.InvalidOperation"
 func (c *Client) IsolateDedicatedDBInstanceWithContext(ctx context.Context, request *IsolateDedicatedDBInstanceRequest) (response *IsolateDedicatedDBInstanceResponse, err error) {
     if request == nil {
         request = NewIsolateDedicatedDBInstanceRequest()
@@ -3160,6 +3168,7 @@ func NewResetAccountPasswordResponse() (response *ResetAccountPasswordResponse) 
 //  FAILEDOPERATION_RESETPASSWORDFAILED = "FailedOperation.ResetPasswordFailed"
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
 //  INVALIDPARAMETER_CHARACTERERROR = "InvalidParameter.CharacterError"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
@@ -3179,6 +3188,7 @@ func (c *Client) ResetAccountPassword(request *ResetAccountPasswordRequest) (res
 //  FAILEDOPERATION_RESETPASSWORDFAILED = "FailedOperation.ResetPasswordFailed"
 //  INTERNALERROR_CAMAUTHFAILED = "InternalError.CamAuthFailed"
 //  INTERNALERROR_DBOPERATIONFAILED = "InternalError.DbOperationFailed"
+//  INTERNALERROR_INNERSYSTEMERROR = "InternalError.InnerSystemError"
 //  INVALIDPARAMETER_CHARACTERERROR = "InvalidParameter.CharacterError"
 //  INVALIDPARAMETER_GENERICPARAMETERERROR = "InvalidParameter.GenericParameterError"
 //  RESOURCEUNAVAILABLE_INSTANCEALREADYDELETED = "ResourceUnavailable.InstanceAlreadyDeleted"
