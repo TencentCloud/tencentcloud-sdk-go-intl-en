@@ -45,6 +45,61 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewAddProjectRequest() (request *AddProjectRequest) {
+    request = &AddProjectRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tag", APIVersion, "AddProject")
+    
+    
+    return
+}
+
+func NewAddProjectResponse() (response *AddProjectResponse) {
+    response = &AddProjectResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddProject
+// Creates a project
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PROJECTNUMEXCEED = "FailedOperation.ProjectNumExceed"
+//  INVALIDPARAMETER_PROJECTNAMEEXISTED = "InvalidParameter.ProjectNameExisted"
+//  RESOURCENOTFOUND_RECORDNOTFOUND = "ResourceNotFound.RecordNotFound"
+func (c *Client) AddProject(request *AddProjectRequest) (response *AddProjectResponse, err error) {
+    return c.AddProjectWithContext(context.Background(), request)
+}
+
+// AddProject
+// Creates a project
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_PROJECTNUMEXCEED = "FailedOperation.ProjectNumExceed"
+//  INVALIDPARAMETER_PROJECTNAMEEXISTED = "InvalidParameter.ProjectNameExisted"
+//  RESOURCENOTFOUND_RECORDNOTFOUND = "ResourceNotFound.RecordNotFound"
+func (c *Client) AddProjectWithContext(ctx context.Context, request *AddProjectRequest) (response *AddProjectResponse, err error) {
+    if request == nil {
+        request = NewAddProjectRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddProject require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddProjectResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAddResourceTagRequest() (request *AddResourceTagRequest) {
     request = &AddResourceTagRequest{
         BaseRequest: &tchttp.BaseRequest{},
