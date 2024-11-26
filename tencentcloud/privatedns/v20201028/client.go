@@ -1270,7 +1270,7 @@ func NewDescribePrivateZoneListResponse() (response *DescribePrivateZoneListResp
 }
 
 // DescribePrivateZoneList
-// This API is used to get the list of private domains.
+// This API is used to obtain the private domain list.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -1298,7 +1298,7 @@ func (c *Client) DescribePrivateZoneList(request *DescribePrivateZoneListRequest
 }
 
 // DescribePrivateZoneList
-// This API is used to get the list of private domains.
+// This API is used to obtain the private domain list.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"

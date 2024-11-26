@@ -83,6 +83,9 @@ const (
 	// Unsupported configuration task type.
 	INVALIDPARAMETER_INVALIDTASKTYPE = "InvalidParameter.InvalidTaskType"
 
+	// 
+	INVALIDPARAMETER_PREPROCESSPARAMETER = "InvalidParameter.PreprocessParameter"
+
 	// The format of the real-time recording parameter is invalid.
 	INVALIDPARAMETER_RECORDPARAMETER = "InvalidParameter.RecordParameter"
 

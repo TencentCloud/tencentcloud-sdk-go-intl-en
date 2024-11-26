@@ -55,6 +55,8 @@ type ApplicationVersion struct {
 
 	// Git information
 	// Note: This field may return null, indicating that no valid values can be obtained.
+	//
+	// Deprecated: GitInfo is deprecated.
 	GitInfo *string `json:"GitInfo,omitnil,omitempty" name:"GitInfo"`
 }
 

@@ -83,7 +83,7 @@ const (
 	// FailedOperation.GroupIdNotFound
 	FAILEDOPERATION_GROUPIDNOTFOUND = "FailedOperation.GroupIdNotFound"
 
-	// Invalid tenant
+	// The tenant is invalid.
 	FAILEDOPERATION_INVALIDTENANT = "FailedOperation.InvalidTenant"
 
 	// FailedOperation.ListAllUserGroupsFailure
@@ -224,7 +224,7 @@ const (
 	// The operation is unauthorized.
 	UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 
-	// Not activated
+	// The service is not activated.
 	UNAUTHORIZEDOPERATION_TENANTNOTACTIVATED = "UnauthorizedOperation.TenantNotActivated"
 
 	// The parameter is unknown.
