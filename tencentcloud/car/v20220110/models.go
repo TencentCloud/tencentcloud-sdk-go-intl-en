@@ -1887,7 +1887,7 @@ type ModifyApplicationProjectRequestParams struct {
 	// Frame rate.
 	FPS *int64 `json:"FPS,omitnil,omitempty" name:"FPS"`
 
-	// Waiting time for application pre-launch.
+	// Waiting time for pre-launch.
 	PreloadDuration *string `json:"PreloadDuration,omitnil,omitempty" name:"PreloadDuration"`
 
 	// Waiting time for reconnection.
@@ -1942,7 +1942,7 @@ type ModifyApplicationProjectRequest struct {
 	// Frame rate.
 	FPS *int64 `json:"FPS,omitnil,omitempty" name:"FPS"`
 
-	// Waiting time for application pre-launch.
+	// Waiting time for pre-launch.
 	PreloadDuration *string `json:"PreloadDuration,omitnil,omitempty" name:"PreloadDuration"`
 
 	// Waiting time for reconnection.

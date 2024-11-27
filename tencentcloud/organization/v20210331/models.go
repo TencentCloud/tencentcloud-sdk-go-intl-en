@@ -170,13 +170,13 @@ type AddPermissionPolicyToRoleConfigurationRequestParams struct {
 	// Permission configuration ID.
 	RoleConfigurationId *string `json:"RoleConfigurationId,omitnil,omitempty" name:"RoleConfigurationId"`
 
-	// Permission policy type. Valid values: System: system policy, namely the CAM system policy reused; Custom: custom policy, namely the custom policy prepared according to the CAM permission policy syntax and structure. Only the system policy is supported at the early stage, and the custom policy will be supported later.
+	// Permission policy type. Valid values: System: system policy, namely the CAM system policy reused; Custom: custom policy, namely the custom policy prepared according to the CAM permission policy syntax and structure.  
 	RolePolicyType *string `json:"RolePolicyType,omitnil,omitempty" name:"RolePolicyType"`
 
-	// Permission policy name, which includes up to 20 policies, each containing up to 32 characters.
+	// Permission policy name, supporting up to 20 policies, with each policy having a maximum of 32 characters. If you need to add a system policy, it is recommended to use the RolePolicies parameter. For custom policies, the array length is up to 1.
 	RolePolicyNames []*string `json:"RolePolicyNames,omitnil,omitempty" name:"RolePolicyNames"`
 
-	// Policy details.
+	// Details of an added system policy.
 	RolePolicies []*PolicyDetail `json:"RolePolicies,omitnil,omitempty" name:"RolePolicies"`
 
 	// Custom policy content, which contains up to 4096 characters. When RolePolicyType is Inline, this parameter must be configured. For details, see the permission policy syntax and structure.
@@ -192,13 +192,13 @@ type AddPermissionPolicyToRoleConfigurationRequest struct {
 	// Permission configuration ID.
 	RoleConfigurationId *string `json:"RoleConfigurationId,omitnil,omitempty" name:"RoleConfigurationId"`
 
-	// Permission policy type. Valid values: System: system policy, namely the CAM system policy reused; Custom: custom policy, namely the custom policy prepared according to the CAM permission policy syntax and structure. Only the system policy is supported at the early stage, and the custom policy will be supported later.
+	// Permission policy type. Valid values: System: system policy, namely the CAM system policy reused; Custom: custom policy, namely the custom policy prepared according to the CAM permission policy syntax and structure.  
 	RolePolicyType *string `json:"RolePolicyType,omitnil,omitempty" name:"RolePolicyType"`
 
-	// Permission policy name, which includes up to 20 policies, each containing up to 32 characters.
+	// Permission policy name, supporting up to 20 policies, with each policy having a maximum of 32 characters. If you need to add a system policy, it is recommended to use the RolePolicies parameter. For custom policies, the array length is up to 1.
 	RolePolicyNames []*string `json:"RolePolicyNames,omitnil,omitempty" name:"RolePolicyNames"`
 
-	// Policy details.
+	// Details of an added system policy.
 	RolePolicies []*PolicyDetail `json:"RolePolicies,omitnil,omitempty" name:"RolePolicies"`
 
 	// Custom policy content, which contains up to 4096 characters. When RolePolicyType is Inline, this parameter must be configured. For details, see the permission policy syntax and structure.
@@ -530,6 +530,9 @@ type CreateGroupRequestParams struct {
 
 	// User group description, which contains up to 1024 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// User group type. Manual: manually created, Synchronized: imported from external sources.
+	GroupType *string `json:"GroupType,omitnil,omitempty" name:"GroupType"`
 }
 
 type CreateGroupRequest struct {
@@ -543,6 +546,9 @@ type CreateGroupRequest struct {
 
 	// User group description, which contains up to 1024 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// User group type. Manual: manually created, Synchronized: imported from external sources.
+	GroupType *string `json:"GroupType,omitnil,omitempty" name:"GroupType"`
 }
 
 func (r *CreateGroupRequest) ToJsonString() string {
@@ -560,6 +566,7 @@ func (r *CreateGroupRequest) FromJsonString(s string) error {
 	delete(f, "ZoneId")
 	delete(f, "GroupName")
 	delete(f, "Description")
+	delete(f, "GroupType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateGroupRequest has unknown keys!", "")
 	}
@@ -670,6 +677,139 @@ func (r *CreateOrgServiceAssignResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateOrgServiceAssignResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateOrganizationIdentityRequestParams struct {
+	// Identity name.
+	IdentityAliasName *string `json:"IdentityAliasName,omitnil,omitempty" name:"IdentityAliasName"`
+
+	// Identity policy.
+	IdentityPolicy []*IdentityPolicy `json:"IdentityPolicy,omitnil,omitempty" name:"IdentityPolicy"`
+
+	// Identity description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type CreateOrganizationIdentityRequest struct {
+	*tchttp.BaseRequest
+	
+	// Identity name.
+	IdentityAliasName *string `json:"IdentityAliasName,omitnil,omitempty" name:"IdentityAliasName"`
+
+	// Identity policy.
+	IdentityPolicy []*IdentityPolicy `json:"IdentityPolicy,omitnil,omitempty" name:"IdentityPolicy"`
+
+	// Identity description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+func (r *CreateOrganizationIdentityRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOrganizationIdentityRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IdentityAliasName")
+	delete(f, "IdentityPolicy")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateOrganizationIdentityRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateOrganizationIdentityResponseParams struct {
+	// Identity ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IdentityId *uint64 `json:"IdentityId,omitnil,omitempty" name:"IdentityId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateOrganizationIdentityResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateOrganizationIdentityResponseParams `json:"Response"`
+}
+
+func (r *CreateOrganizationIdentityResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOrganizationIdentityResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateOrganizationMemberAuthIdentityRequestParams struct {
+	// Member UIN list, including up to 10 items.
+	MemberUins []*uint64 `json:"MemberUins,omitnil,omitempty" name:"MemberUins"`
+
+	// Identity ID list, including up to 5 items, which can be obtained through [ListOrganizationIdentity](https://intl.cloud.tencent.com/document/product/850/82934?from_cn_redirect=1).
+	IdentityIds []*uint64 `json:"IdentityIds,omitnil,omitempty" name:"IdentityIds"`
+}
+
+type CreateOrganizationMemberAuthIdentityRequest struct {
+	*tchttp.BaseRequest
+	
+	// Member UIN list, including up to 10 items.
+	MemberUins []*uint64 `json:"MemberUins,omitnil,omitempty" name:"MemberUins"`
+
+	// Identity ID list, including up to 5 items, which can be obtained through [ListOrganizationIdentity](https://intl.cloud.tencent.com/document/product/850/82934?from_cn_redirect=1).
+	IdentityIds []*uint64 `json:"IdentityIds,omitnil,omitempty" name:"IdentityIds"`
+}
+
+func (r *CreateOrganizationMemberAuthIdentityRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOrganizationMemberAuthIdentityRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberUins")
+	delete(f, "IdentityIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateOrganizationMemberAuthIdentityRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateOrganizationMemberAuthIdentityResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateOrganizationMemberAuthIdentityResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateOrganizationMemberAuthIdentityResponseParams `json:"Response"`
+}
+
+func (r *CreateOrganizationMemberAuthIdentityResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOrganizationMemberAuthIdentityResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -881,6 +1021,143 @@ func (r *CreateOrganizationMemberResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateOrganizationMembersPolicyRequestParams struct {
+	// Member UIN list, including up to 10 items.
+	MemberUins []*int64 `json:"MemberUins,omitnil,omitempty" name:"MemberUins"`
+
+	// Policy name, which contains 1 to 128 characters, including English letters, digits, and symbols `+=,.@_-`.
+	PolicyName *string `json:"PolicyName,omitnil,omitempty" name:"PolicyName"`
+
+	// Member access identity ID, which can be obtained through [ListOrganizationIdentity](https://intl.cloud.tencent.com/document/product/850/82934?from_cn_redirect=1).
+	IdentityId *int64 `json:"IdentityId,omitnil,omitempty" name:"IdentityId"`
+
+	// Policy description, which contains up to 128 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type CreateOrganizationMembersPolicyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Member UIN list, including up to 10 items.
+	MemberUins []*int64 `json:"MemberUins,omitnil,omitempty" name:"MemberUins"`
+
+	// Policy name, which contains 1 to 128 characters, including English letters, digits, and symbols `+=,.@_-`.
+	PolicyName *string `json:"PolicyName,omitnil,omitempty" name:"PolicyName"`
+
+	// Member access identity ID, which can be obtained through [ListOrganizationIdentity](https://intl.cloud.tencent.com/document/product/850/82934?from_cn_redirect=1).
+	IdentityId *int64 `json:"IdentityId,omitnil,omitempty" name:"IdentityId"`
+
+	// Policy description, which contains up to 128 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+func (r *CreateOrganizationMembersPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOrganizationMembersPolicyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberUins")
+	delete(f, "PolicyName")
+	delete(f, "IdentityId")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateOrganizationMembersPolicyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateOrganizationMembersPolicyResponseParams struct {
+	// Policy ID.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PolicyId *int64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateOrganizationMembersPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateOrganizationMembersPolicyResponseParams `json:"Response"`
+}
+
+func (r *CreateOrganizationMembersPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOrganizationMembersPolicyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateOrganizationRequestParams struct {
+
+}
+
+type CreateOrganizationRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *CreateOrganizationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOrganizationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateOrganizationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateOrganizationResponseParams struct {
+	// Organization ID.
+	OrgId *uint64 `json:"OrgId,omitnil,omitempty" name:"OrgId"`
+
+	// Creator's nickname.
+	NickName *string `json:"NickName,omitnil,omitempty" name:"NickName"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateOrganizationResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateOrganizationResponseParams `json:"Response"`
+}
+
+func (r *CreateOrganizationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOrganizationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateRoleAssignmentRequestParams struct {
 	// Space ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -949,16 +1226,16 @@ type CreateRoleConfigurationRequestParams struct {
 	// Space ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Access configuration name, which contains up to 128 characters, including English letters, digits, and hyphens (-).
+	// Permission configuration name, which contains up to 128 characters, including English letters, digits, and hyphens (-).
 	RoleConfigurationName *string `json:"RoleConfigurationName,omitnil,omitempty" name:"RoleConfigurationName"`
 
-	// Access configuration description, which contains up to 1024 characters.
+	// Permission configuration description, which contains up to 1,024 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Session duration. It indicates the maximum session duration when CIC users use the access configuration to access the target account of the Tencent Cloud Organization. Unit: seconds. Value range: 900-43,200 (15 minutes to 12 hours). Default value: 3600 (1 hour).
+	// Session duration, in seconds. It is the maximum time a CIC user can maintain a session while using permission configurations to access a target account in TCO. Value range: 900 to 43200 (15 minutes to 12 hours). Default: 3600 (1 hour).
 	SessionDuration *int64 `json:"SessionDuration,omitnil,omitempty" name:"SessionDuration"`
 
-	// Initial access page. It indicates the initial access page URL when CIC users use the access configuration to access the target account of the Tencent Cloud Organization. This page must be the Tencent Cloud console page. The default is null, which indicates navigating to the home page of the Tencent Cloud console.
+	// Initial access page. It is the initial page address when a CIC user uses permission configurations to access a target account in TCO. This page must be a Tencent Cloud console page. The default value is empty, representing a redirection to the home page of the Tencent Cloud console.
 	RelayState *string `json:"RelayState,omitnil,omitempty" name:"RelayState"`
 }
 
@@ -968,16 +1245,16 @@ type CreateRoleConfigurationRequest struct {
 	// Space ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Access configuration name, which contains up to 128 characters, including English letters, digits, and hyphens (-).
+	// Permission configuration name, which contains up to 128 characters, including English letters, digits, and hyphens (-).
 	RoleConfigurationName *string `json:"RoleConfigurationName,omitnil,omitempty" name:"RoleConfigurationName"`
 
-	// Access configuration description, which contains up to 1024 characters.
+	// Permission configuration description, which contains up to 1,024 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Session duration. It indicates the maximum session duration when CIC users use the access configuration to access the target account of the Tencent Cloud Organization. Unit: seconds. Value range: 900-43,200 (15 minutes to 12 hours). Default value: 3600 (1 hour).
+	// Session duration, in seconds. It is the maximum time a CIC user can maintain a session while using permission configurations to access a target account in TCO. Value range: 900 to 43200 (15 minutes to 12 hours). Default: 3600 (1 hour).
 	SessionDuration *int64 `json:"SessionDuration,omitnil,omitempty" name:"SessionDuration"`
 
-	// Initial access page. It indicates the initial access page URL when CIC users use the access configuration to access the target account of the Tencent Cloud Organization. This page must be the Tencent Cloud console page. The default is null, which indicates navigating to the home page of the Tencent Cloud console.
+	// Initial access page. It is the initial page address when a CIC user uses permission configurations to access a target account in TCO. This page must be a Tencent Cloud console page. The default value is empty, representing a redirection to the home page of the Tencent Cloud console.
 	RelayState *string `json:"RelayState,omitnil,omitempty" name:"RelayState"`
 }
 
@@ -1030,6 +1307,81 @@ func (r *CreateRoleConfigurationResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateSCIMCredentialRequestParams struct {
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+type CreateSCIMCredentialRequest struct {
+	*tchttp.BaseRequest
+	
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+func (r *CreateSCIMCredentialRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSCIMCredentialRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSCIMCredentialRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSCIMCredentialResponseParams struct {
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// SCIM key ID, which starts with the scimcred- prefix, followed by 12 random digits/lowercase letters.
+	CredentialId *string `json:"CredentialId,omitnil,omitempty" name:"CredentialId"`
+
+	// SCIM key type.
+	CredentialType *string `json:"CredentialType,omitnil,omitempty" name:"CredentialType"`
+
+	// Creation time of a SCIM key.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Expiration time of a SCIM key.
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// SCIM key status. Enabled: enabled. Disabled: disabled.
+	CredentialStatus *string `json:"CredentialStatus,omitnil,omitempty" name:"CredentialStatus"`
+
+	// SCIM key.
+	CredentialSecret *string `json:"CredentialSecret,omitnil,omitempty" name:"CredentialSecret"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateSCIMCredentialResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSCIMCredentialResponseParams `json:"Response"`
+}
+
+func (r *CreateSCIMCredentialResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSCIMCredentialResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateUserRequestParams struct {
 	// Space ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -1054,6 +1406,9 @@ type CreateUserRequestParams struct {
 
 	// User status. Valid values: Enabled (default), Disabled.
 	UserStatus *string `json:"UserStatus,omitnil,omitempty" name:"UserStatus"`
+
+	// User type. Manual: manually created, Synchronized: imported from external sources.
+	UserType *string `json:"UserType,omitnil,omitempty" name:"UserType"`
 }
 
 type CreateUserRequest struct {
@@ -1082,6 +1437,9 @@ type CreateUserRequest struct {
 
 	// User status. Valid values: Enabled (default), Disabled.
 	UserStatus *string `json:"UserStatus,omitnil,omitempty" name:"UserStatus"`
+
+	// User type. Manual: manually created, Synchronized: imported from external sources.
+	UserType *string `json:"UserType,omitnil,omitempty" name:"UserType"`
 }
 
 func (r *CreateUserRequest) ToJsonString() string {
@@ -1104,6 +1462,7 @@ func (r *CreateUserRequest) FromJsonString(s string) error {
 	delete(f, "Description")
 	delete(f, "Email")
 	delete(f, "UserStatus")
+	delete(f, "UserType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateUserRequest has unknown keys!", "")
 	}
@@ -1322,6 +1681,175 @@ func (r *DeleteOrgServiceAssignResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteOrganizationIdentityRequestParams struct {
+	// Identity ID, which can be obtained through [ListOrganizationIdentity](https://intl.cloud.tencent.com/document/product/850/82934?from_cn_redirect=1).
+	IdentityId *uint64 `json:"IdentityId,omitnil,omitempty" name:"IdentityId"`
+}
+
+type DeleteOrganizationIdentityRequest struct {
+	*tchttp.BaseRequest
+	
+	// Identity ID, which can be obtained through [ListOrganizationIdentity](https://intl.cloud.tencent.com/document/product/850/82934?from_cn_redirect=1).
+	IdentityId *uint64 `json:"IdentityId,omitnil,omitempty" name:"IdentityId"`
+}
+
+func (r *DeleteOrganizationIdentityRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteOrganizationIdentityRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IdentityId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteOrganizationIdentityRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteOrganizationIdentityResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteOrganizationIdentityResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteOrganizationIdentityResponseParams `json:"Response"`
+}
+
+func (r *DeleteOrganizationIdentityResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteOrganizationIdentityResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteOrganizationMemberAuthIdentityRequestParams struct {
+	// Member UIN.
+	MemberUin *uint64 `json:"MemberUin,omitnil,omitempty" name:"MemberUin"`
+
+	// Identity ID, which can be obtained through [ListOrganizationIdentity](https://intl.cloud.tencent.com/document/product/850/82934?from_cn_redirect=1).
+	IdentityId *uint64 `json:"IdentityId,omitnil,omitempty" name:"IdentityId"`
+}
+
+type DeleteOrganizationMemberAuthIdentityRequest struct {
+	*tchttp.BaseRequest
+	
+	// Member UIN.
+	MemberUin *uint64 `json:"MemberUin,omitnil,omitempty" name:"MemberUin"`
+
+	// Identity ID, which can be obtained through [ListOrganizationIdentity](https://intl.cloud.tencent.com/document/product/850/82934?from_cn_redirect=1).
+	IdentityId *uint64 `json:"IdentityId,omitnil,omitempty" name:"IdentityId"`
+}
+
+func (r *DeleteOrganizationMemberAuthIdentityRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteOrganizationMemberAuthIdentityRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberUin")
+	delete(f, "IdentityId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteOrganizationMemberAuthIdentityRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteOrganizationMemberAuthIdentityResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteOrganizationMemberAuthIdentityResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteOrganizationMemberAuthIdentityResponseParams `json:"Response"`
+}
+
+func (r *DeleteOrganizationMemberAuthIdentityResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteOrganizationMemberAuthIdentityResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteOrganizationMembersPolicyRequestParams struct {
+	// Access policy ID, which can be obtained through [DescribeOrganizationMemberPolicies](https://intl.cloud.tencent.com/document/product/850/82935?from_cn_redirect=1).
+	PolicyId *uint64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
+}
+
+type DeleteOrganizationMembersPolicyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Access policy ID, which can be obtained through [DescribeOrganizationMemberPolicies](https://intl.cloud.tencent.com/document/product/850/82935?from_cn_redirect=1).
+	PolicyId *uint64 `json:"PolicyId,omitnil,omitempty" name:"PolicyId"`
+}
+
+func (r *DeleteOrganizationMembersPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteOrganizationMembersPolicyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "PolicyId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteOrganizationMembersPolicyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteOrganizationMembersPolicyResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteOrganizationMembersPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteOrganizationMembersPolicyResponseParams `json:"Response"`
+}
+
+func (r *DeleteOrganizationMembersPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteOrganizationMembersPolicyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteOrganizationMembersRequestParams struct {
 	// Uin list of the deleted members.
 	MemberUin []*int64 `json:"MemberUin,omitnil,omitempty" name:"MemberUin"`
@@ -1430,6 +1958,57 @@ func (r *DeleteOrganizationNodesResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteOrganizationRequestParams struct {
+
+}
+
+type DeleteOrganizationRequest struct {
+	*tchttp.BaseRequest
+	
+}
+
+func (r *DeleteOrganizationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteOrganizationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteOrganizationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteOrganizationResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteOrganizationResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteOrganizationResponseParams `json:"Response"`
+}
+
+func (r *DeleteOrganizationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteOrganizationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteRoleAssignmentRequestParams struct {
 	// Space ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -1443,13 +2022,13 @@ type DeleteRoleAssignmentRequestParams struct {
 	// UIN of the target account of the Tencent Cloud Organization.
 	TargetUin *int64 `json:"TargetUin,omitnil,omitempty" name:"TargetUin"`
 
-	// Identity type for the CAM user synchronization. Valid values: User: indicates that the identity for the CAM user synchronization is a CIC user; Group: indicates that the identity for the CAM user synchronization is a CIC user group.
+	// Identity types synchronized for CAM users. Valid values: User: indicates the synchronized identity is a user. Group: indicates the synchronized identity is a user group.
 	PrincipalType *string `json:"PrincipalType,omitnil,omitempty" name:"PrincipalType"`
 
-	// Identity ID for the CAM user synchronization. Valid values: When the PrincipalType value is Group, it is the CIC user group ID (g-********). When the PrincipalType value is User, it is the CIC user ID (u-********).  	
+	// User synchronization ID. Valid values: When PrincipalType is Group, it is a user group ID (g-********). When PrincipalType is User, it is a user ID (u-********).
 	PrincipalId *string `json:"PrincipalId,omitnil,omitempty" name:"PrincipalId"`
 
-	// Whether to undeploy an access configuration synchronously when you remove the last authorization for using this access configuration on the target account of the Tencent Cloud Organization. Valid values: DeprovisionForLastRoleAssignmentOnAccount: Undeploy the access configuration; None (default): Do not undeploy access configuration.
+	// Whether to remove the permission configuration deployment when removing the last authorization with a certain permission configuration from a target account in TCO. Valid values: DeprovisionForLastRoleAssignmentOnAccount: Remove the permission configuration deployment. None (default): Do not remove the permission configuration deployment.
 	DeprovisionStrategy *string `json:"DeprovisionStrategy,omitnil,omitempty" name:"DeprovisionStrategy"`
 }
 
@@ -1468,13 +2047,13 @@ type DeleteRoleAssignmentRequest struct {
 	// UIN of the target account of the Tencent Cloud Organization.
 	TargetUin *int64 `json:"TargetUin,omitnil,omitempty" name:"TargetUin"`
 
-	// Identity type for the CAM user synchronization. Valid values: User: indicates that the identity for the CAM user synchronization is a CIC user; Group: indicates that the identity for the CAM user synchronization is a CIC user group.
+	// Identity types synchronized for CAM users. Valid values: User: indicates the synchronized identity is a user. Group: indicates the synchronized identity is a user group.
 	PrincipalType *string `json:"PrincipalType,omitnil,omitempty" name:"PrincipalType"`
 
-	// Identity ID for the CAM user synchronization. Valid values: When the PrincipalType value is Group, it is the CIC user group ID (g-********). When the PrincipalType value is User, it is the CIC user ID (u-********).  	
+	// User synchronization ID. Valid values: When PrincipalType is Group, it is a user group ID (g-********). When PrincipalType is User, it is a user ID (u-********).
 	PrincipalId *string `json:"PrincipalId,omitnil,omitempty" name:"PrincipalId"`
 
-	// Whether to undeploy an access configuration synchronously when you remove the last authorization for using this access configuration on the target account of the Tencent Cloud Organization. Valid values: DeprovisionForLastRoleAssignmentOnAccount: Undeploy the access configuration; None (default): Do not undeploy access configuration.
+	// Whether to remove the permission configuration deployment when removing the last authorization with a certain permission configuration from a target account in TCO. Valid values: DeprovisionForLastRoleAssignmentOnAccount: Remove the permission configuration deployment. None (default): Do not remove the permission configuration deployment.
 	DeprovisionStrategy *string `json:"DeprovisionStrategy,omitnil,omitempty" name:"DeprovisionStrategy"`
 }
 
@@ -1586,6 +2165,67 @@ func (r *DeleteRoleConfigurationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteRoleConfigurationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSCIMCredentialRequestParams struct {
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// SCIM key ID, which starts with the scimcred- prefix, followed by 12 random digits/lowercase letters.
+	CredentialId *string `json:"CredentialId,omitnil,omitempty" name:"CredentialId"`
+}
+
+type DeleteSCIMCredentialRequest struct {
+	*tchttp.BaseRequest
+	
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// SCIM key ID, which starts with the scimcred- prefix, followed by 12 random digits/lowercase letters.
+	CredentialId *string `json:"CredentialId,omitnil,omitempty" name:"CredentialId"`
+}
+
+func (r *DeleteSCIMCredentialRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSCIMCredentialRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "CredentialId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSCIMCredentialRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSCIMCredentialResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteSCIMCredentialResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSCIMCredentialResponseParams `json:"Response"`
+}
+
+func (r *DeleteSCIMCredentialResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSCIMCredentialResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2663,6 +3303,63 @@ func (r *GetRoleConfigurationResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type GetSCIMSynchronizationStatusRequestParams struct {
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+type GetSCIMSynchronizationStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+func (r *GetSCIMSynchronizationStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetSCIMSynchronizationStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetSCIMSynchronizationStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetSCIMSynchronizationStatusResponseParams struct {
+	// SCIM synchronization status. Enabled: enabled. Disabled: disabled.
+	SCIMSynchronizationStatus *string `json:"SCIMSynchronizationStatus,omitnil,omitempty" name:"SCIMSynchronizationStatus"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type GetSCIMSynchronizationStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *GetSCIMSynchronizationStatusResponseParams `json:"Response"`
+}
+
+func (r *GetSCIMSynchronizationStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetSCIMSynchronizationStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type GetTaskStatusRequestParams struct {
 	// Space ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -3362,6 +4059,9 @@ type ListGroupsRequestParams struct {
 
 	// Sorting type. Desc: descending order; Asc: ascending order. It should be set along with SortField.
 	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Pagination offset. Do not use it together with NextToken, prioritizing using NextToken.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type ListGroupsRequest struct {
@@ -3390,6 +4090,9 @@ type ListGroupsRequest struct {
 
 	// Sorting type. Desc: descending order; Asc: ascending order. It should be set along with SortField.
 	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Pagination offset. Do not use it together with NextToken, prioritizing using NextToken.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *ListGroupsRequest) ToJsonString() string {
@@ -3412,6 +4115,7 @@ func (r *ListGroupsRequest) FromJsonString(s string) error {
 	delete(f, "FilterUsers")
 	delete(f, "SortField")
 	delete(f, "SortType")
+	delete(f, "Offset")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListGroupsRequest has unknown keys!", "")
 	}
@@ -3888,10 +4592,10 @@ type ListRoleAssignmentsRequestParams struct {
 	// UIN of the synchronized target account of the Tencent Cloud Organization.
 	TargetUin *int64 `json:"TargetUin,omitnil,omitempty" name:"TargetUin"`
 
-	// Identity type for the CAM user synchronization. Valid values: User: indicates that the identity for the CAM user synchronization is a CIC user; Group: indicates that the identity for the CAM user synchronization is a CIC user group.
+	// Identity types synchronized for CAM users. Valid values: User: indicates the synchronized identity is a user. Group: indicates the synchronized identity is a user group.
 	PrincipalType *string `json:"PrincipalType,omitnil,omitempty" name:"PrincipalType"`
 
-	// Identity ID for the CAM user synchronization. Valid values: When the PrincipalType value is Group, it is the CIC user group ID (g-********). When the PrincipalType value is User, it is the CIC user ID (u-********).
+	// User synchronization ID. Valid values: When PrincipalType is Group, it is a user group ID (g-****). When PrincipalType is User, it is a user ID (u-****).
 	PrincipalId *string `json:"PrincipalId,omitnil,omitempty" name:"PrincipalId"`
 
 	// Query condition, which currently only supports search by permission configuration name.
@@ -3919,10 +4623,10 @@ type ListRoleAssignmentsRequest struct {
 	// UIN of the synchronized target account of the Tencent Cloud Organization.
 	TargetUin *int64 `json:"TargetUin,omitnil,omitempty" name:"TargetUin"`
 
-	// Identity type for the CAM user synchronization. Valid values: User: indicates that the identity for the CAM user synchronization is a CIC user; Group: indicates that the identity for the CAM user synchronization is a CIC user group.
+	// Identity types synchronized for CAM users. Valid values: User: indicates the synchronized identity is a user. Group: indicates the synchronized identity is a user group.
 	PrincipalType *string `json:"PrincipalType,omitnil,omitempty" name:"PrincipalType"`
 
-	// Identity ID for the CAM user synchronization. Valid values: When the PrincipalType value is Group, it is the CIC user group ID (g-********). When the PrincipalType value is User, it is the CIC user ID (u-********).
+	// User synchronization ID. Valid values: When PrincipalType is Group, it is a user group ID (g-****). When PrincipalType is User, it is a user ID (u-****).
 	PrincipalId *string `json:"PrincipalId,omitnil,omitempty" name:"PrincipalId"`
 
 	// Query condition, which currently only supports search by permission configuration name.
@@ -4122,7 +4826,7 @@ type ListRoleConfigurationsRequestParams struct {
 	// Maximum number of data entries per page. Value range: 1-100. Default value: 10.
 	MaxResults *int64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
 
-	// Filter criterion, case-insensitive. Currently, only RoleConfigurationName is supported, and only eq (Equals) and sw (Starts With) are supported. For example, Filter = "RoleConfigurationName, sw test" indicates querying all access configurations with names starting with test; Filter = "RoleConfigurationName, eq TestRoleConfiguration" indicates querying the access configuration with the name TestRoleConfiguration.
+	// Filter criteria, which are case insensitive. Currently, only RoleConfigurationName is supported and only eq (Equals) and sw (Start With) are supported. Example: Filter = "RoleConfigurationName, only sw test" means querying all permission configurations starting with test. Filter = "RoleConfigurationName, only eq TestRoleConfiguration" means querying the permission configuration named TestRoleConfiguration.
 	Filter *string `json:"Filter,omitnil,omitempty" name:"Filter"`
 
 	// Check whether the member account has been configured with permissions. If configured, return IsSelected: true; otherwise, return false.
@@ -4144,7 +4848,7 @@ type ListRoleConfigurationsRequest struct {
 	// Maximum number of data entries per page. Value range: 1-100. Default value: 10.
 	MaxResults *int64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
 
-	// Filter criterion, case-insensitive. Currently, only RoleConfigurationName is supported, and only eq (Equals) and sw (Starts With) are supported. For example, Filter = "RoleConfigurationName, sw test" indicates querying all access configurations with names starting with test; Filter = "RoleConfigurationName, eq TestRoleConfiguration" indicates querying the access configuration with the name TestRoleConfiguration.
+	// Filter criteria, which are case insensitive. Currently, only RoleConfigurationName is supported and only eq (Equals) and sw (Start With) are supported. Example: Filter = "RoleConfigurationName, only sw test" means querying all permission configurations starting with test. Filter = "RoleConfigurationName, only eq TestRoleConfiguration" means querying the permission configuration named TestRoleConfiguration.
 	Filter *string `json:"Filter,omitnil,omitempty" name:"Filter"`
 
 	// Check whether the member account has been configured with permissions. If configured, return IsSelected: true; otherwise, return false.
@@ -4216,11 +4920,78 @@ func (r *ListRoleConfigurationsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ListSCIMCredentialsRequestParams struct {
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// SCIM key ID.
+	CredentialId *string `json:"CredentialId,omitnil,omitempty" name:"CredentialId"`
+}
+
+type ListSCIMCredentialsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// SCIM key ID.
+	CredentialId *string `json:"CredentialId,omitnil,omitempty" name:"CredentialId"`
+}
+
+func (r *ListSCIMCredentialsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListSCIMCredentialsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "CredentialId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListSCIMCredentialsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ListSCIMCredentialsResponseParams struct {
+	// Number of SCIM keys.
+	TotalCounts *int64 `json:"TotalCounts,omitnil,omitempty" name:"TotalCounts"`
+
+	// SCIM key information.
+	SCIMCredentials []*SCIMCredential `json:"SCIMCredentials,omitnil,omitempty" name:"SCIMCredentials"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ListSCIMCredentialsResponse struct {
+	*tchttp.BaseResponse
+	Response *ListSCIMCredentialsResponseParams `json:"Response"`
+}
+
+func (r *ListSCIMCredentialsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListSCIMCredentialsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ListTasksRequestParams struct {
 	// Space ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Identity ID for the CAM user synchronization. Valid values: When the PrincipalType value is Group, it is the CIC user group ID (g-********). When the PrincipalType value is User, it is the CIC user ID (u-********).
+	// User synchronization ID. Valid values: When PrincipalType is Group, it is a user group ID (g-****). When PrincipalType is User, it is a user ID (u-****).
 	PrincipalId *string `json:"PrincipalId,omitnil,omitempty" name:"PrincipalId"`
 
 	// Token for querying the next page of returned results. During use of the API for the first time, NextToken is not needed. When you call the API for the first time, if the total number of returned data entries exceeds the MaxResults limit, the data is truncated and only MaxResults data entries are returned. Meanwhile, the return parameter IsTruncated is true and a NextToken is returned. You can use the NextToken returned last time to continue calling the API with other request parameters unchanged, to query the truncated data. You can use this method for multiple queries until IsTruncated is false, indicating that all data has been queried.
@@ -4229,7 +5000,7 @@ type ListTasksRequestParams struct {
 	// Maximum number of data entries per page. Value range: 1-100. Default value: 10.
 	MaxResults *int64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
 
-	// Identity type for the CAM user synchronization. Valid values: User: indicates that the identity for the CAM user synchronization is a CIC user; Group: indicates that the identity for the CAM user synchronization is a CIC user group.
+	// Identity types synchronized for CAM users. Valid values: User: indicates the synchronized identity is a user. Group: indicates the synchronized identity is a user group.
 	PrincipalType *string `json:"PrincipalType,omitnil,omitempty" name:"PrincipalType"`
 
 	// UIN of the synchronized target account of the Tencent Cloud Organization.
@@ -4254,7 +5025,7 @@ type ListTasksRequest struct {
 	// Space ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Identity ID for the CAM user synchronization. Valid values: When the PrincipalType value is Group, it is the CIC user group ID (g-********). When the PrincipalType value is User, it is the CIC user ID (u-********).
+	// User synchronization ID. Valid values: When PrincipalType is Group, it is a user group ID (g-****). When PrincipalType is User, it is a user ID (u-****).
 	PrincipalId *string `json:"PrincipalId,omitnil,omitempty" name:"PrincipalId"`
 
 	// Token for querying the next page of returned results. During use of the API for the first time, NextToken is not needed. When you call the API for the first time, if the total number of returned data entries exceeds the MaxResults limit, the data is truncated and only MaxResults data entries are returned. Meanwhile, the return parameter IsTruncated is true and a NextToken is returned. You can use the NextToken returned last time to continue calling the API with other request parameters unchanged, to query the truncated data. You can use this method for multiple queries until IsTruncated is false, indicating that all data has been queried.
@@ -4263,7 +5034,7 @@ type ListTasksRequest struct {
 	// Maximum number of data entries per page. Value range: 1-100. Default value: 10.
 	MaxResults *int64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
 
-	// Identity type for the CAM user synchronization. Valid values: User: indicates that the identity for the CAM user synchronization is a CIC user; Group: indicates that the identity for the CAM user synchronization is a CIC user group.
+	// Identity types synchronized for CAM users. Valid values: User: indicates the synchronized identity is a user. Group: indicates the synchronized identity is a user group.
 	PrincipalType *string `json:"PrincipalType,omitnil,omitempty" name:"PrincipalType"`
 
 	// UIN of the synchronized target account of the Tencent Cloud Organization.
@@ -4352,7 +5123,7 @@ type ListUserSyncProvisioningsRequestParams struct {
 	// Space ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Identity ID for the CAM user synchronization. Valid values: When the PrincipalType value is Group, it is the CIC user group ID (g-********). When the PrincipalType value is User, it is the CIC user ID (u-********).
+	// User synchronization ID. Valid values: When PrincipalType is Group, it is a user group ID (g-********). When PrincipalType is User, it is a user ID (u-********).
 	PrincipalId *string `json:"PrincipalId,omitnil,omitempty" name:"PrincipalId"`
 
 	// Token for querying the next page of returned results. During use of the API for the first time, NextToken is not needed. When you call the API for the first time, if the total number of returned data entries exceeds the MaxResults limit, the data is truncated and only MaxResults data entries are returned. Meanwhile, the return parameter IsTruncated is true and a NextToken is returned. You can use the NextToken returned last time to continue calling the API with other request parameters unchanged, to query the truncated data. You can use this method for multiple queries until IsTruncated is false, indicating that all data has been queried.
@@ -4361,7 +5132,7 @@ type ListUserSyncProvisioningsRequestParams struct {
 	// Maximum number of data entries per page. Value range: 1-100. Default value: 10.
 	MaxResults *int64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
 
-	// Identity type for the CAM user synchronization. Valid values: User: indicates that the identity for the CAM user synchronization is a CIC user; Group: indicates that the identity for the CAM user synchronization is a CIC user group.
+	// Identity types synchronized for CAM users. Valid values: User: indicates the synchronized identity is a user. Group: indicates the synchronized identity is a user group.
 	PrincipalType *string `json:"PrincipalType,omitnil,omitempty" name:"PrincipalType"`
 
 	// UIN of the target account of the Tencent Cloud Organization.
@@ -4380,7 +5151,7 @@ type ListUserSyncProvisioningsRequest struct {
 	// Space ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Identity ID for the CAM user synchronization. Valid values: When the PrincipalType value is Group, it is the CIC user group ID (g-********). When the PrincipalType value is User, it is the CIC user ID (u-********).
+	// User synchronization ID. Valid values: When PrincipalType is Group, it is a user group ID (g-********). When PrincipalType is User, it is a user ID (u-********).
 	PrincipalId *string `json:"PrincipalId,omitnil,omitempty" name:"PrincipalId"`
 
 	// Token for querying the next page of returned results. During use of the API for the first time, NextToken is not needed. When you call the API for the first time, if the total number of returned data entries exceeds the MaxResults limit, the data is truncated and only MaxResults data entries are returned. Meanwhile, the return parameter IsTruncated is true and a NextToken is returned. You can use the NextToken returned last time to continue calling the API with other request parameters unchanged, to query the truncated data. You can use this method for multiple queries until IsTruncated is false, indicating that all data has been queried.
@@ -4389,7 +5160,7 @@ type ListUserSyncProvisioningsRequest struct {
 	// Maximum number of data entries per page. Value range: 1-100. Default value: 10.
 	MaxResults *int64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
 
-	// Identity type for the CAM user synchronization. Valid values: User: indicates that the identity for the CAM user synchronization is a CIC user; Group: indicates that the identity for the CAM user synchronization is a CIC user group.
+	// Identity types synchronized for CAM users. Valid values: User: indicates the synchronized identity is a user. Group: indicates the synchronized identity is a user group.
 	PrincipalType *string `json:"PrincipalType,omitnil,omitempty" name:"PrincipalType"`
 
 	// UIN of the target account of the Tencent Cloud Organization.
@@ -4493,6 +5264,9 @@ type ListUsersRequestParams struct {
 
 	// Sorting type. Desc: descending order; Asc: ascending order. It should be set along with SortField.
 	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Pagination offset. Do not use it together with NextToken, prioritizing using NextToken.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type ListUsersRequest struct {
@@ -4524,6 +5298,9 @@ type ListUsersRequest struct {
 
 	// Sorting type. Desc: descending order; Asc: ascending order. It should be set along with SortField.
 	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Pagination offset. Do not use it together with NextToken, prioritizing using NextToken.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 func (r *ListUsersRequest) ToJsonString() string {
@@ -4547,6 +5324,7 @@ func (r *ListUsersRequest) FromJsonString(s string) error {
 	delete(f, "FilterGroups")
 	delete(f, "SortField")
 	delete(f, "SortType")
+	delete(f, "Offset")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListUsersRequest has unknown keys!", "")
 	}
@@ -5171,6 +5949,60 @@ func (r *ProvisionRoleConfigurationResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type QuitOrganizationRequestParams struct {
+	// Organization ID.
+	OrgId *uint64 `json:"OrgId,omitnil,omitempty" name:"OrgId"`
+}
+
+type QuitOrganizationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Organization ID.
+	OrgId *uint64 `json:"OrgId,omitnil,omitempty" name:"OrgId"`
+}
+
+func (r *QuitOrganizationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QuitOrganizationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "OrgId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QuitOrganizationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type QuitOrganizationResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type QuitOrganizationResponse struct {
+	*tchttp.BaseResponse
+	Response *QuitOrganizationResponseParams `json:"Response"`
+}
+
+func (r *QuitOrganizationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *QuitOrganizationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type RemoveExternalSAMLIdPCertificateRequestParams struct {
 	// Space ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -5601,6 +6433,26 @@ type SAMLServiceProvider struct {
 	AcsUrl *string `json:"AcsUrl,omitnil,omitempty" name:"AcsUrl"`
 }
 
+type SCIMCredential struct {
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// SCIM key status. Enabled: enabled. Disabled: disabled.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// SCIM key ID, which starts with the scimcred- prefix, followed by 12 random digits/lowercase letters.
+	CredentialId *string `json:"CredentialId,omitnil,omitempty" name:"CredentialId"`
+
+	// SCIM key type.
+	CredentialType *string `json:"CredentialType,omitnil,omitempty" name:"CredentialType"`
+
+	// Creation time of a SCIM key.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Expiration time of a SCIM key.
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+}
+
 // Predefined struct for user
 type SetExternalSAMLIdentityProviderRequestParams struct {
 	// Space ID.
@@ -5754,6 +6606,81 @@ type TaskStatus struct {
 }
 
 // Predefined struct for user
+type UpdateCustomPolicyForRoleConfigurationRequestParams struct {
+	// Space ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Permission configuration ID.
+	RoleConfigurationId *string `json:"RoleConfigurationId,omitnil,omitempty" name:"RoleConfigurationId"`
+
+	// Permission policy name, which contains up to 32 characters.
+	CustomPolicyName *string `json:"CustomPolicyName,omitnil,omitempty" name:"CustomPolicyName"`
+
+	// Custom policy content, which contains up to 4096 characters. When RolePolicyType is Inline, this parameter must be configured. For details, see the permission policy syntax and structure.
+	NewCustomPolicyDocument *string `json:"NewCustomPolicyDocument,omitnil,omitempty" name:"NewCustomPolicyDocument"`
+}
+
+type UpdateCustomPolicyForRoleConfigurationRequest struct {
+	*tchttp.BaseRequest
+	
+	// Space ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Permission configuration ID.
+	RoleConfigurationId *string `json:"RoleConfigurationId,omitnil,omitempty" name:"RoleConfigurationId"`
+
+	// Permission policy name, which contains up to 32 characters.
+	CustomPolicyName *string `json:"CustomPolicyName,omitnil,omitempty" name:"CustomPolicyName"`
+
+	// Custom policy content, which contains up to 4096 characters. When RolePolicyType is Inline, this parameter must be configured. For details, see the permission policy syntax and structure.
+	NewCustomPolicyDocument *string `json:"NewCustomPolicyDocument,omitnil,omitempty" name:"NewCustomPolicyDocument"`
+}
+
+func (r *UpdateCustomPolicyForRoleConfigurationRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCustomPolicyForRoleConfigurationRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "RoleConfigurationId")
+	delete(f, "CustomPolicyName")
+	delete(f, "NewCustomPolicyDocument")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateCustomPolicyForRoleConfigurationRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateCustomPolicyForRoleConfigurationResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateCustomPolicyForRoleConfigurationResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateCustomPolicyForRoleConfigurationResponseParams `json:"Response"`
+}
+
+func (r *UpdateCustomPolicyForRoleConfigurationResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateCustomPolicyForRoleConfigurationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type UpdateGroupRequestParams struct {
 	// Space ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -5828,6 +6755,172 @@ func (r *UpdateGroupResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpdateGroupResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateOrganizationIdentityRequestParams struct {
+	// Identity ID, which can be obtained through [ListOrganizationIdentity](https://intl.cloud.tencent.com/document/product/850/82934?from_cn_redirect=1).
+	IdentityId *uint64 `json:"IdentityId,omitnil,omitempty" name:"IdentityId"`
+
+	// Identity description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Identity policy.
+	IdentityPolicy []*IdentityPolicy `json:"IdentityPolicy,omitnil,omitempty" name:"IdentityPolicy"`
+}
+
+type UpdateOrganizationIdentityRequest struct {
+	*tchttp.BaseRequest
+	
+	// Identity ID, which can be obtained through [ListOrganizationIdentity](https://intl.cloud.tencent.com/document/product/850/82934?from_cn_redirect=1).
+	IdentityId *uint64 `json:"IdentityId,omitnil,omitempty" name:"IdentityId"`
+
+	// Identity description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Identity policy.
+	IdentityPolicy []*IdentityPolicy `json:"IdentityPolicy,omitnil,omitempty" name:"IdentityPolicy"`
+}
+
+func (r *UpdateOrganizationIdentityRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateOrganizationIdentityRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IdentityId")
+	delete(f, "Description")
+	delete(f, "IdentityPolicy")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateOrganizationIdentityRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateOrganizationIdentityResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateOrganizationIdentityResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateOrganizationIdentityResponseParams `json:"Response"`
+}
+
+func (r *UpdateOrganizationIdentityResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateOrganizationIdentityResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateOrganizationMemberRequestParams struct {
+	// Member UIN.
+	MemberUin *uint64 `json:"MemberUin,omitnil,omitempty" name:"MemberUin"`
+
+	// Member name, which contains up to 25 characters, including English letters, digits, and symbols `+@&._[]-:,`.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Remarks, which contain up to 40 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Relationship policy type. When PolicyType is not empty, PermissionIds cannot be empty. Value: Financial.
+	PolicyType *string `json:"PolicyType,omitnil,omitempty" name:"PolicyType"`
+
+	// List of member financial permission IDs. When PermissionIds is not empty, PolicyType cannot be empty.
+	// Valid values: 1: View bills. 2: View balance. 3: Allocate funds. 4: Consolidate bills. 5: Issue invoices. 6: Inherit discounts. 7: Pay on behalf. 8: Analyze costs. 1 and 2 are required by default.
+	PermissionIds []*uint64 `json:"PermissionIds,omitnil,omitempty" name:"PermissionIds"`
+
+	// Whether to allow members to exit an organization. Valid values: Allow: permitted, Denied: not permitted.
+	IsAllowQuit *string `json:"IsAllowQuit,omitnil,omitempty" name:"IsAllowQuit"`
+
+	// Payer UIN, which is required when pay-on-behalf mode is used in member financial permission. The value is the principal administrator UIN of the corresponding member.
+	PayUin *string `json:"PayUin,omitnil,omitempty" name:"PayUin"`
+}
+
+type UpdateOrganizationMemberRequest struct {
+	*tchttp.BaseRequest
+	
+	// Member UIN.
+	MemberUin *uint64 `json:"MemberUin,omitnil,omitempty" name:"MemberUin"`
+
+	// Member name, which contains up to 25 characters, including English letters, digits, and symbols `+@&._[]-:,`.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Remarks, which contain up to 40 characters.
+	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
+
+	// Relationship policy type. When PolicyType is not empty, PermissionIds cannot be empty. Value: Financial.
+	PolicyType *string `json:"PolicyType,omitnil,omitempty" name:"PolicyType"`
+
+	// List of member financial permission IDs. When PermissionIds is not empty, PolicyType cannot be empty.
+	// Valid values: 1: View bills. 2: View balance. 3: Allocate funds. 4: Consolidate bills. 5: Issue invoices. 6: Inherit discounts. 7: Pay on behalf. 8: Analyze costs. 1 and 2 are required by default.
+	PermissionIds []*uint64 `json:"PermissionIds,omitnil,omitempty" name:"PermissionIds"`
+
+	// Whether to allow members to exit an organization. Valid values: Allow: permitted, Denied: not permitted.
+	IsAllowQuit *string `json:"IsAllowQuit,omitnil,omitempty" name:"IsAllowQuit"`
+
+	// Payer UIN, which is required when pay-on-behalf mode is used in member financial permission. The value is the principal administrator UIN of the corresponding member.
+	PayUin *string `json:"PayUin,omitnil,omitempty" name:"PayUin"`
+}
+
+func (r *UpdateOrganizationMemberRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateOrganizationMemberRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MemberUin")
+	delete(f, "Name")
+	delete(f, "Remark")
+	delete(f, "PolicyType")
+	delete(f, "PermissionIds")
+	delete(f, "IsAllowQuit")
+	delete(f, "PayUin")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateOrganizationMemberRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateOrganizationMemberResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateOrganizationMemberResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateOrganizationMemberResponseParams `json:"Response"`
+}
+
+func (r *UpdateOrganizationMemberResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateOrganizationMemberResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5907,13 +7000,13 @@ type UpdateRoleConfigurationRequestParams struct {
 	// Permission configuration ID.
 	RoleConfigurationId *string `json:"RoleConfigurationId,omitnil,omitempty" name:"RoleConfigurationId"`
 
-	// Description of new access configuration, which contains up to 1024 characters.
+	// New permission configuration description, which contains up to 1,024 characters.
 	NewDescription *string `json:"NewDescription,omitnil,omitempty" name:"NewDescription"`
 
-	// New session duration. It indicates the maximum session duration when CIC users use the access configuration to access the target account of the Tencent Cloud Organization. Unit: seconds. Value range: 900-43,200 (15 minutes to 12 hours).
+	// New session duration, in seconds. It is the maximum time a CIC user can maintain a session while using permission configurations to access a target account in TCO. Value range: 900 to 43200 (15 minutes to 12 hours).
 	NewSessionDuration *int64 `json:"NewSessionDuration,omitnil,omitempty" name:"NewSessionDuration"`
 
-	// New initial access page. It indicates the initial access page URL when CIC users use the access configuration to access the target account of the Tencent Cloud Organization. This page must be the Tencent Cloud console page.
+	// New initial access page. It is the initial page address when a CIC user uses permission configurations to access a target account in TCO. This page must be a Tencent Cloud console page.
 	NewRelayState *string `json:"NewRelayState,omitnil,omitempty" name:"NewRelayState"`
 }
 
@@ -5926,13 +7019,13 @@ type UpdateRoleConfigurationRequest struct {
 	// Permission configuration ID.
 	RoleConfigurationId *string `json:"RoleConfigurationId,omitnil,omitempty" name:"RoleConfigurationId"`
 
-	// Description of new access configuration, which contains up to 1024 characters.
+	// New permission configuration description, which contains up to 1,024 characters.
 	NewDescription *string `json:"NewDescription,omitnil,omitempty" name:"NewDescription"`
 
-	// New session duration. It indicates the maximum session duration when CIC users use the access configuration to access the target account of the Tencent Cloud Organization. Unit: seconds. Value range: 900-43,200 (15 minutes to 12 hours).
+	// New session duration, in seconds. It is the maximum time a CIC user can maintain a session while using permission configurations to access a target account in TCO. Value range: 900 to 43200 (15 minutes to 12 hours).
 	NewSessionDuration *int64 `json:"NewSessionDuration,omitnil,omitempty" name:"NewSessionDuration"`
 
-	// New initial access page. It indicates the initial access page URL when CIC users use the access configuration to access the target account of the Tencent Cloud Organization. This page must be the Tencent Cloud console page.
+	// New initial access page. It is the initial page address when a CIC user uses permission configurations to access a target account in TCO. This page must be a Tencent Cloud console page.
 	NewRelayState *string `json:"NewRelayState,omitnil,omitempty" name:"NewRelayState"`
 }
 
@@ -5981,6 +7074,135 @@ func (r *UpdateRoleConfigurationResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *UpdateRoleConfigurationResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateSCIMCredentialStatusRequestParams struct {
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// SCIM key ID, which starts with the scimcred- prefix, followed by 12 random digits/lowercase letters.
+	CredentialId *string `json:"CredentialId,omitnil,omitempty" name:"CredentialId"`
+
+	// SCIM key status. Enabled: enabled. Disabled: disabled.
+	NewStatus *string `json:"NewStatus,omitnil,omitempty" name:"NewStatus"`
+}
+
+type UpdateSCIMCredentialStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// SCIM key ID, which starts with the scimcred- prefix, followed by 12 random digits/lowercase letters.
+	CredentialId *string `json:"CredentialId,omitnil,omitempty" name:"CredentialId"`
+
+	// SCIM key status. Enabled: enabled. Disabled: disabled.
+	NewStatus *string `json:"NewStatus,omitnil,omitempty" name:"NewStatus"`
+}
+
+func (r *UpdateSCIMCredentialStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateSCIMCredentialStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "CredentialId")
+	delete(f, "NewStatus")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateSCIMCredentialStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateSCIMCredentialStatusResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateSCIMCredentialStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateSCIMCredentialStatusResponseParams `json:"Response"`
+}
+
+func (r *UpdateSCIMCredentialStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateSCIMCredentialStatusResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateSCIMSynchronizationStatusRequestParams struct {
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// SCIM synchronization status. Enabled: enabled. Disabled: disabled.
+	SCIMSynchronizationStatus *string `json:"SCIMSynchronizationStatus,omitnil,omitempty" name:"SCIMSynchronizationStatus"`
+}
+
+type UpdateSCIMSynchronizationStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Space ID, which starts with the z- prefix, followed by 12 random digits/lowercase letters.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// SCIM synchronization status. Enabled: enabled. Disabled: disabled.
+	SCIMSynchronizationStatus *string `json:"SCIMSynchronizationStatus,omitnil,omitempty" name:"SCIMSynchronizationStatus"`
+}
+
+func (r *UpdateSCIMSynchronizationStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateSCIMSynchronizationStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "SCIMSynchronizationStatus")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateSCIMSynchronizationStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UpdateSCIMSynchronizationStatusResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UpdateSCIMSynchronizationStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *UpdateSCIMSynchronizationStatusResponseParams `json:"Response"`
+}
+
+func (r *UpdateSCIMSynchronizationStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UpdateSCIMSynchronizationStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

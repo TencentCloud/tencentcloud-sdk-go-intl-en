@@ -41,7 +41,7 @@ const (
 	// Incorrect query time range.
 	INVALIDPARAMETER_TIMERANGEERROR = "InvalidParameter.TimeRangeError"
 
-	// Invalid BizId.
+	// Invalid BizId.(SDKAppid)
 	INVALIDPARAMETERVALUE_INVALIDBIZID = "InvalidParameterValue.InvalidBizId"
 
 	// Invalid RecordMode.

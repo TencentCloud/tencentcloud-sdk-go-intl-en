@@ -2134,26 +2134,26 @@ func (r *CheckIntegrationTaskNameExistsResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type CheckTaskNameExistRequestParams struct {
-	// Project ID/Workspace ID
+	// Project ID/Workspace ID.
 	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Task Type (consistent with scheduling parameters)
+	// Task Type (consistent with scheduling parameters).
 	TypeId *int64 `json:"TypeId,omitnil,omitempty" name:"TypeId"`
 
-	// Task Name
+	// Task Name.
 	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 }
 
 type CheckTaskNameExistRequest struct {
 	*tchttp.BaseRequest
 	
-	// Project ID/Workspace ID
+	// Project ID/Workspace ID.
 	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Task Type (consistent with scheduling parameters)
+	// Task Type (consistent with scheduling parameters).
 	TypeId *int64 `json:"TypeId,omitnil,omitempty" name:"TypeId"`
 
-	// Task Name
+	// Task Name.
 	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
 }
 

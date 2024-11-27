@@ -598,9 +598,7 @@ type AddSpartaProtectionRequestParams struct {
 	// When SniType=3, this parameter is required, indicating a custom SNI;
 	SniHost *string `json:"SniHost,omitnil,omitempty" name:"SniHost"`
 
-	// Whether to enable XFF reset
-	// 0: disable
-	// 1: enable
+	// Whether to enable XFF reset. 0: disable; 1: enable.
 	XFFReset *int64 `json:"XFFReset,omitnil,omitempty" name:"XFFReset"`
 
 	// Domain name remarks
@@ -612,8 +610,29 @@ type AddSpartaProtectionRequestParams struct {
 	// Whether to enable caching. 0: disable; 1: enable.
 	ProxyBuffer *int64 `json:"ProxyBuffer,omitnil,omitempty" name:"ProxyBuffer"`
 
-	// 0: disable probe test; 1: enable probe test. The test is enabled by default.
+	// Whether to enable the test. 0: disable; 1: enable. The test is enabled by default.
 	ProbeStatus *int64 `json:"ProbeStatus,omitnil,omitempty" name:"ProbeStatus"`
+
+	// Whether to enable SM. 0: do not enable SM; 1: add support for SM based on the existing TLS option; 2: enable SM and support only SM client access.
+	GmType *int64 `json:"GmType,omitnil,omitempty" name:"GmType"`
+
+	// SM certificate type. 0: no SM certificate is available; 1: the certificate is a self-owned SM certificate; 2: the certificate is a managed SM certificate.
+	GmCertType *int64 `json:"GmCertType,omitnil,omitempty" name:"GmCertType"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the certificate chain of the self-owned SM certificate.
+	GmCert *string `json:"GmCert,omitnil,omitempty" name:"GmCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the self-owned SM certificate.
+	GmPrivateKey *string `json:"GmPrivateKey,omitnil,omitempty" name:"GmPrivateKey"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the encryption certificate of the self-owned SM certificate.
+	GmEncCert *string `json:"GmEncCert,omitnil,omitempty" name:"GmEncCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the encryption certificate for the self-owned SM certificate.
+	GmEncPrivateKey *string `json:"GmEncPrivateKey,omitnil,omitempty" name:"GmEncPrivateKey"`
+
+	// When GmCertType is 2, this parameter needs to be set, indicating the ID of the certificate managed by the Tencent Cloud SSL platform.
+	GmSSLId *string `json:"GmSSLId,omitnil,omitempty" name:"GmSSLId"`
 }
 
 type AddSpartaProtectionRequest struct {
@@ -758,9 +777,7 @@ type AddSpartaProtectionRequest struct {
 	// When SniType=3, this parameter is required, indicating a custom SNI;
 	SniHost *string `json:"SniHost,omitnil,omitempty" name:"SniHost"`
 
-	// Whether to enable XFF reset
-	// 0: disable
-	// 1: enable
+	// Whether to enable XFF reset. 0: disable; 1: enable.
 	XFFReset *int64 `json:"XFFReset,omitnil,omitempty" name:"XFFReset"`
 
 	// Domain name remarks
@@ -772,8 +789,29 @@ type AddSpartaProtectionRequest struct {
 	// Whether to enable caching. 0: disable; 1: enable.
 	ProxyBuffer *int64 `json:"ProxyBuffer,omitnil,omitempty" name:"ProxyBuffer"`
 
-	// 0: disable probe test; 1: enable probe test. The test is enabled by default.
+	// Whether to enable the test. 0: disable; 1: enable. The test is enabled by default.
 	ProbeStatus *int64 `json:"ProbeStatus,omitnil,omitempty" name:"ProbeStatus"`
+
+	// Whether to enable SM. 0: do not enable SM; 1: add support for SM based on the existing TLS option; 2: enable SM and support only SM client access.
+	GmType *int64 `json:"GmType,omitnil,omitempty" name:"GmType"`
+
+	// SM certificate type. 0: no SM certificate is available; 1: the certificate is a self-owned SM certificate; 2: the certificate is a managed SM certificate.
+	GmCertType *int64 `json:"GmCertType,omitnil,omitempty" name:"GmCertType"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the certificate chain of the self-owned SM certificate.
+	GmCert *string `json:"GmCert,omitnil,omitempty" name:"GmCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the self-owned SM certificate.
+	GmPrivateKey *string `json:"GmPrivateKey,omitnil,omitempty" name:"GmPrivateKey"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the encryption certificate of the self-owned SM certificate.
+	GmEncCert *string `json:"GmEncCert,omitnil,omitempty" name:"GmEncCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the encryption certificate for the self-owned SM certificate.
+	GmEncPrivateKey *string `json:"GmEncPrivateKey,omitnil,omitempty" name:"GmEncPrivateKey"`
+
+	// When GmCertType is 2, this parameter needs to be set, indicating the ID of the certificate managed by the Tencent Cloud SSL platform.
+	GmSSLId *string `json:"GmSSLId,omitnil,omitempty" name:"GmSSLId"`
 }
 
 func (r *AddSpartaProtectionRequest) ToJsonString() string {
@@ -826,6 +864,13 @@ func (r *AddSpartaProtectionRequest) FromJsonString(s string) error {
 	delete(f, "UpstreamHost")
 	delete(f, "ProxyBuffer")
 	delete(f, "ProbeStatus")
+	delete(f, "GmType")
+	delete(f, "GmCertType")
+	delete(f, "GmCert")
+	delete(f, "GmPrivateKey")
+	delete(f, "GmEncCert")
+	delete(f, "GmEncPrivateKey")
+	delete(f, "GmSSLId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AddSpartaProtectionRequest has unknown keys!", "")
 	}
@@ -902,6 +947,20 @@ type ApiPkg struct {
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	IsAPISecurityTrial *int64 `json:"IsAPISecurityTrial,omitnil,omitempty" name:"IsAPISecurityTrial"`
+}
+
+type AttackLogInfo struct {
+	// Details of Attack Logs
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// CLS Returned Content
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+	// CLS Returned Content
+	Source *string `json:"Source,omitnil,omitempty" name:"Source"`
+
+	// CLS Returned Content
+	TimeStamp *string `json:"TimeStamp,omitnil,omitempty" name:"TimeStamp"`
 }
 
 type BatchIpAccessControlData struct {
@@ -1188,26 +1247,6 @@ type CCRuleLists struct {
 	Res []*CCRuleItems `json:"Res,omitnil,omitempty" name:"Res"`
 }
 
-type CacheUrlItem struct {
-	// Id
-	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
-
-	// Name
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-
-	// Domain name
-	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
-
-	// uri
-	Uri *string `json:"Uri,omitnil,omitempty" name:"Uri"`
-
-	// Protocol
-	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
-
-	// Status
-	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
-}
-
 type CacheUrlItems struct {
 	// Identifier
 	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
@@ -1289,6 +1328,10 @@ type ClbDomainsInfo struct {
 	// Domain name remarks
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Note *string `json:"Note,omitnil,omitempty" name:"Note"`
+
+	// Domain name tag.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Labels []*string `json:"Labels,omitnil,omitempty" name:"Labels"`
 }
 
 type ClbObject struct {
@@ -1365,6 +1408,11 @@ type ClbObject struct {
 
 	// Object access mode. 0: image mode; 1: cleaning mode; 2: examination mode. By default, the cleaning mode is used.Note: This field may return null, indicating that no valid values can be obtained.
 	ObjectFlowMode *int64 `json:"ObjectFlowMode,omitnil,omitempty" name:"ObjectFlowMode"`
+
+	// VPC ID in numerical format
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NumericalVpcId *int64 `json:"NumericalVpcId,omitnil,omitempty" name:"NumericalVpcId"`
 }
 
 type ClbWafRegionItem struct {
@@ -1665,6 +1713,8 @@ type CreateIpAccessControlRequestParams struct {
 	ActionType *int64 `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
 	// valid_ts indicates a valid date. Its value is a second-level timestamp, such as 1680570420, which indicates 2023-04-04 09:07:00.
+	//
+	// Deprecated: ValidTS is deprecated.
 	ValidTS *int64 `json:"ValidTS,omitnil,omitempty" name:"ValidTS"`
 
 	// Instance ID
@@ -2213,16 +2263,16 @@ type DeleteIpAccessControlV2RequestParams struct {
 	// Domain name
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// Rule ID list, which supports deletion in batches.
+	// Rule ID list. Batch deletion is supported. This parameter does not need to be specified when DeleteAll is true.
 	RuleIds []*uint64 `json:"RuleIds,omitnil,omitempty" name:"RuleIds"`
 
-	// Whether to delete all IP blocklists/allowlists under the corresponding domain. True indicates deleting all; false indicates only deleting a specified IP list.
+	// Whether to delete all IP blocklists/allowlists under the corresponding domain name. true: delete all lists; false: delete only the specified lists. Batch protection is not supported.
 	DeleteAll *bool `json:"DeleteAll,omitnil,omitempty" name:"DeleteAll"`
 
 	// batch: indicates batch protection IP allowlists/blocklists.
 	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
 
-	// IP allowlist/blocklist type. 40: IP allowlist; 42: IP blocklist.
+	// IP blocklist/allowlist type. 40: IP allowlist; 42: IP blocklist. This parameter should be passed in when DeleteAll is true.
 	ActionType *uint64 `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 }
 
@@ -2232,16 +2282,16 @@ type DeleteIpAccessControlV2Request struct {
 	// Domain name
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// Rule ID list, which supports deletion in batches.
+	// Rule ID list. Batch deletion is supported. This parameter does not need to be specified when DeleteAll is true.
 	RuleIds []*uint64 `json:"RuleIds,omitnil,omitempty" name:"RuleIds"`
 
-	// Whether to delete all IP blocklists/allowlists under the corresponding domain. True indicates deleting all; false indicates only deleting a specified IP list.
+	// Whether to delete all IP blocklists/allowlists under the corresponding domain name. true: delete all lists; false: delete only the specified lists. Batch protection is not supported.
 	DeleteAll *bool `json:"DeleteAll,omitnil,omitempty" name:"DeleteAll"`
 
 	// batch: indicates batch protection IP allowlists/blocklists.
 	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
 
-	// IP allowlist/blocklist type. 40: IP allowlist; 42: IP blocklist.
+	// IP blocklist/allowlist type. 40: IP allowlist; 42: IP blocklist. This parameter should be passed in when DeleteAll is true.
 	ActionType *uint64 `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 }
 
@@ -2530,167 +2580,6 @@ func (r *DescribeAntiFakeRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
-// Predefined struct for user
-type DescribeAntiFakeUrlRequestParams struct {
-	// Domain name
-	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
-
-	// Page turning parameters
-	PageInfo *PageInfo `json:"PageInfo,omitnil,omitempty" name:"PageInfo"`
-}
-
-type DescribeAntiFakeUrlRequest struct {
-	*tchttp.BaseRequest
-	
-	// Domain name
-	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
-
-	// Page turning parameters
-	PageInfo *PageInfo `json:"PageInfo,omitnil,omitempty" name:"PageInfo"`
-}
-
-func (r *DescribeAntiFakeUrlRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAntiFakeUrlRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Domain")
-	delete(f, "PageInfo")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAntiFakeUrlRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeAntiFakeUrlResponseParams struct {
-	// Total number
-	Total *string `json:"Total,omitnil,omitempty" name:"Total"`
-
-	// Information
-	List []*CacheUrlItem `json:"List,omitnil,omitempty" name:"List"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DescribeAntiFakeUrlResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeAntiFakeUrlResponseParams `json:"Response"`
-}
-
-func (r *DescribeAntiFakeUrlResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAntiFakeUrlResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeAntiInfoLeakRulesRequestParams struct {
-	// Domain name
-	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
-
-	// Action type
-	ActionType *int64 `json:"ActionType,omitnil,omitempty" name:"ActionType"`
-
-	// Page turning
-	PageInfo *PageInfo `json:"PageInfo,omitnil,omitempty" name:"PageInfo"`
-}
-
-type DescribeAntiInfoLeakRulesRequest struct {
-	*tchttp.BaseRequest
-	
-	// Domain name
-	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
-
-	// Action type
-	ActionType *int64 `json:"ActionType,omitnil,omitempty" name:"ActionType"`
-
-	// Page turning
-	PageInfo *PageInfo `json:"PageInfo,omitnil,omitempty" name:"PageInfo"`
-}
-
-func (r *DescribeAntiInfoLeakRulesRequest) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAntiInfoLeakRulesRequest) FromJsonString(s string) error {
-	f := make(map[string]interface{})
-	if err := json.Unmarshal([]byte(s), &f); err != nil {
-		return err
-	}
-	delete(f, "Domain")
-	delete(f, "ActionType")
-	delete(f, "PageInfo")
-	if len(f) > 0 {
-		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAntiInfoLeakRulesRequest has unknown keys!", "")
-	}
-	return json.Unmarshal([]byte(s), &r)
-}
-
-// Predefined struct for user
-type DescribeAntiInfoLeakRulesResponseParams struct {
-	// Number of records
-	TotalCount *string `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
-
-	// List of rules
-	RuleList []*DescribeAntiInfoLeakRulesRuleItem `json:"RuleList,omitnil,omitempty" name:"RuleList"`
-
-	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
-	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
-}
-
-type DescribeAntiInfoLeakRulesResponse struct {
-	*tchttp.BaseResponse
-	Response *DescribeAntiInfoLeakRulesResponseParams `json:"Response"`
-}
-
-func (r *DescribeAntiInfoLeakRulesResponse) ToJsonString() string {
-    b, _ := json.Marshal(r)
-    return string(b)
-}
-
-// FromJsonString It is highly **NOT** recommended to use this function
-// because it has no param check, nor strict type check
-func (r *DescribeAntiInfoLeakRulesResponse) FromJsonString(s string) error {
-	return json.Unmarshal([]byte(s), &r)
-}
-
-type DescribeAntiInfoLeakRulesRuleItem struct {
-	// Rule ID
-	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
-
-	// Rule name
-	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
-
-	// Rule status
-	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
-
-	// Rule Action Type
-	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
-
-	// Rule creation time
-	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
-
-	// Detailed Rules
-	Strategies []*DescribeAntiInfoLeakRulesStrategyItem `json:"Strategies,omitnil,omitempty" name:"Strategies"`
-}
-
 type DescribeAntiInfoLeakRulesStrategyItem struct {
 	// Field
 	Field *string `json:"Field,omitnil,omitempty" name:"Field"`
@@ -2821,6 +2710,137 @@ type DescribeAntiLeakageItem struct {
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+}
+
+// Predefined struct for user
+type DescribeAttackOverviewRequestParams struct {
+	// Query start time
+	FromTime *string `json:"FromTime,omitnil,omitempty" name:"FromTime"`
+
+	// Query end time
+	ToTime *string `json:"ToTime,omitnil,omitempty" name:"ToTime"`
+
+	// Customer app ID
+	Appid *uint64 `json:"Appid,omitnil,omitempty" name:"Appid"`
+
+	// Queried domain
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// Only two values are valid: sparta-waf, clb-waf. No filtering if not input.
+	Edition *string `json:"Edition,omitnil,omitempty" name:"Edition"`
+
+	// WAF instance ID. No filter will be carried out if it is not input.
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
+}
+
+type DescribeAttackOverviewRequest struct {
+	*tchttp.BaseRequest
+	
+	// Query start time
+	FromTime *string `json:"FromTime,omitnil,omitempty" name:"FromTime"`
+
+	// Query end time
+	ToTime *string `json:"ToTime,omitnil,omitempty" name:"ToTime"`
+
+	// Customer app ID
+	Appid *uint64 `json:"Appid,omitnil,omitempty" name:"Appid"`
+
+	// Queried domain
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// Only two values are valid: sparta-waf, clb-waf. No filtering if not input.
+	Edition *string `json:"Edition,omitnil,omitempty" name:"Edition"`
+
+	// WAF instance ID. No filter will be carried out if it is not input.
+	InstanceID *string `json:"InstanceID,omitnil,omitempty" name:"InstanceID"`
+}
+
+func (r *DescribeAttackOverviewRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAttackOverviewRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "FromTime")
+	delete(f, "ToTime")
+	delete(f, "Appid")
+	delete(f, "Domain")
+	delete(f, "Edition")
+	delete(f, "InstanceID")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAttackOverviewRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAttackOverviewResponseParams struct {
+	// Total number of access requests
+	AccessCount *uint64 `json:"AccessCount,omitnil,omitempty" name:"AccessCount"`
+
+	// Total web attacks
+	AttackCount *uint64 `json:"AttackCount,omitnil,omitempty" name:"AttackCount"`
+
+	// Total number of access controls
+	ACLCount *uint64 `json:"ACLCount,omitnil,omitempty" name:"ACLCount"`
+
+	// Total CC attacks
+	CCCount *uint64 `json:"CCCount,omitnil,omitempty" name:"CCCount"`
+
+	// Total bot attack count
+	BotCount *uint64 `json:"BotCount,omitnil,omitempty" name:"BotCount"`
+
+	// Total API assets
+	ApiAssetsCount *uint64 `json:"ApiAssetsCount,omitnil,omitempty" name:"ApiAssetsCount"`
+
+	// Number of API risk events
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ApiRiskEventCount *uint64 `json:"ApiRiskEventCount,omitnil,omitempty" name:"ApiRiskEventCount"`
+
+	// Total number of blocklisted IP addresses.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IPBlackCount *uint64 `json:"IPBlackCount,omitnil,omitempty" name:"IPBlackCount"`
+
+	// Total number of tamper-proof items
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TamperCount *uint64 `json:"TamperCount,omitnil,omitempty" name:"TamperCount"`
+
+	// Total number of information leaks
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LeakCount *uint64 `json:"LeakCount,omitnil,omitempty" name:"LeakCount"`
+
+	// Weekly proportion of API risk events.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ApiRiskEventCircleCount *int64 `json:"ApiRiskEventCircleCount,omitnil,omitempty" name:"ApiRiskEventCircleCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAttackOverviewResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAttackOverviewResponseParams `json:"Response"`
+}
+
+func (r *DescribeAttackOverviewResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAttackOverviewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -3186,7 +3206,7 @@ type DescribeCertificateVerifyResultRequestParams struct {
 	// Domain name
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// Certificate type. 0: no certificate, with only the HTTP listening port configured; 1: self-owned certificate; 2: managed certificate.
+	// Certificate type. 0: Do not check international standard certificates; 1: The certificate is a self-owned certificate; 2: The certificate is a managed certificate.
 	CertType *int64 `json:"CertType,omitnil,omitempty" name:"CertType"`
 
 	// When CertType is 1, this parameter is required, indicating the self-owned certificate chain
@@ -3197,6 +3217,24 @@ type DescribeCertificateVerifyResultRequestParams struct {
 
 	// When CertType=1, this parameter is required, indicating the private key of the self-owned certificate.
 	PrivateKey *string `json:"PrivateKey,omitnil,omitempty" name:"PrivateKey"`
+
+	// SM certificate type. 0: Do not check SM certificates; 1: The certificate is a self-owned SM certificate; 2: The certificate is a managed SM certificate.
+	GmCertType *int64 `json:"GmCertType,omitnil,omitempty" name:"GmCertType"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the certificate chain of the self-owned SM certificate.
+	GmCert *string `json:"GmCert,omitnil,omitempty" name:"GmCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the self-owned SM certificate.
+	GmPrivateKey *string `json:"GmPrivateKey,omitnil,omitempty" name:"GmPrivateKey"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the encryption certificate of the self-owned SM certificate.
+	GmEncCert *string `json:"GmEncCert,omitnil,omitempty" name:"GmEncCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the encryption certificate for the self-owned SM certificate.
+	GmEncPrivateKey *string `json:"GmEncPrivateKey,omitnil,omitempty" name:"GmEncPrivateKey"`
+
+	// When GmCertType is 2, this parameter needs to be set, indicating the ID of the certificate managed by the Tencent Cloud SSL platform.
+	GmSSLId *string `json:"GmSSLId,omitnil,omitempty" name:"GmSSLId"`
 }
 
 type DescribeCertificateVerifyResultRequest struct {
@@ -3205,7 +3243,7 @@ type DescribeCertificateVerifyResultRequest struct {
 	// Domain name
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
-	// Certificate type. 0: no certificate, with only the HTTP listening port configured; 1: self-owned certificate; 2: managed certificate.
+	// Certificate type. 0: Do not check international standard certificates; 1: The certificate is a self-owned certificate; 2: The certificate is a managed certificate.
 	CertType *int64 `json:"CertType,omitnil,omitempty" name:"CertType"`
 
 	// When CertType is 1, this parameter is required, indicating the self-owned certificate chain
@@ -3216,6 +3254,24 @@ type DescribeCertificateVerifyResultRequest struct {
 
 	// When CertType=1, this parameter is required, indicating the private key of the self-owned certificate.
 	PrivateKey *string `json:"PrivateKey,omitnil,omitempty" name:"PrivateKey"`
+
+	// SM certificate type. 0: Do not check SM certificates; 1: The certificate is a self-owned SM certificate; 2: The certificate is a managed SM certificate.
+	GmCertType *int64 `json:"GmCertType,omitnil,omitempty" name:"GmCertType"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the certificate chain of the self-owned SM certificate.
+	GmCert *string `json:"GmCert,omitnil,omitempty" name:"GmCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the self-owned SM certificate.
+	GmPrivateKey *string `json:"GmPrivateKey,omitnil,omitempty" name:"GmPrivateKey"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the encryption certificate of the self-owned SM certificate.
+	GmEncCert *string `json:"GmEncCert,omitnil,omitempty" name:"GmEncCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the encryption certificate for the self-owned SM certificate.
+	GmEncPrivateKey *string `json:"GmEncPrivateKey,omitnil,omitempty" name:"GmEncPrivateKey"`
+
+	// When GmCertType is 2, this parameter needs to be set, indicating the ID of the certificate managed by the Tencent Cloud SSL platform.
+	GmSSLId *string `json:"GmSSLId,omitnil,omitempty" name:"GmSSLId"`
 }
 
 func (r *DescribeCertificateVerifyResultRequest) ToJsonString() string {
@@ -3235,6 +3291,12 @@ func (r *DescribeCertificateVerifyResultRequest) FromJsonString(s string) error 
 	delete(f, "Certificate")
 	delete(f, "CertID")
 	delete(f, "PrivateKey")
+	delete(f, "GmCertType")
+	delete(f, "GmCert")
+	delete(f, "GmPrivateKey")
+	delete(f, "GmEncCert")
+	delete(f, "GmEncPrivateKey")
+	delete(f, "GmSSLId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCertificateVerifyResultRequest has unknown keys!", "")
 	}
@@ -3893,7 +3955,7 @@ type DescribeDomainsRequestParams struct {
 	// Number of returned domains
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter array
+	// Filter array. The filter fields are as follows. Edition: instance version, which can be set to sparta-waf or clb-waf; Domain: domain name; DomainId: domain name ID; InstanceName: instance name; InstanceId: instance ID; FlowMode: traffic access mode, which supports only CLB WAF; FlowCheckMode: traffic inspection mode, which supports only CLB WAF; ClsStatus: log switch; Status: WAF switch; BotStatus: BOT switch; ApiStatus: API security switch; Engine: engine mode; UpstreamIP: origin server IP address, which supports only SaaS WAF; UpstreamDomain: origin server domain name, which supports only SaaS WAF; DomainState: domain name status, which supports only SaaS WAF; SgState: security group status, which supports only SaaS WAF; Label: group tag, which supports the filtering of only one tag at a time.
 	Filters []*FiltersItemNew `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -3906,7 +3968,7 @@ type DescribeDomainsRequest struct {
 	// Number of returned domains
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter array
+	// Filter array. The filter fields are as follows. Edition: instance version, which can be set to sparta-waf or clb-waf; Domain: domain name; DomainId: domain name ID; InstanceName: instance name; InstanceId: instance ID; FlowMode: traffic access mode, which supports only CLB WAF; FlowCheckMode: traffic inspection mode, which supports only CLB WAF; ClsStatus: log switch; Status: WAF switch; BotStatus: BOT switch; ApiStatus: API security switch; Engine: engine mode; UpstreamIP: origin server IP address, which supports only SaaS WAF; UpstreamDomain: origin server domain name, which supports only SaaS WAF; DomainState: domain name status, which supports only SaaS WAF; SgState: security group status, which supports only SaaS WAF; Label: group tag, which supports the filtering of only one tag at a time.
 	Filters []*FiltersItemNew `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -5470,13 +5532,14 @@ func (r *DescribeTopAttackDomainResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeUserClbWafRegionsRequestParams struct {
-
+	// Traffic source. The default value is clb if not specified. clb: Cloud Load Balancer; tsegw: cloud-native API gateway; scf: Serverless Cloud Function; apisix: other gateways on Tencent Cloud.
 	AlbType *string `json:"AlbType,omitnil,omitempty" name:"AlbType"`
 }
 
 type DescribeUserClbWafRegionsRequest struct {
 	*tchttp.BaseRequest
 	
+	// Traffic source. The default value is clb if not specified. clb: Cloud Load Balancer; tsegw: cloud-native API gateway; scf: Serverless Cloud Function; apisix: other gateways on Tencent Cloud.
 	AlbType *string `json:"AlbType,omitnil,omitempty" name:"AlbType"`
 }
 
@@ -5952,6 +6015,10 @@ type DomainInfo struct {
 	// CLB WAF access status
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AccessStatus *int64 `json:"AccessStatus,omitnil,omitempty" name:"AccessStatus"`
+
+	// Domain name tag.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Labels []*string `json:"Labels,omitnil,omitempty" name:"Labels"`
 }
 
 type DomainPackageNew struct {
@@ -6198,6 +6265,38 @@ type DomainsPartInfo struct {
 	// Whether to enable caching. 0: disable; 1: enable.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProxyBuffer *int64 `json:"ProxyBuffer,omitnil,omitempty" name:"ProxyBuffer"`
+
+	// Whether to enable SM. 0: do not enable SM; 1: add support for SM based on the existing TLS option; 2: enable SM and support only SM client access.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GmType *int64 `json:"GmType,omitnil,omitempty" name:"GmType"`
+
+	// SM certificate type. 0: no SM certificate is available; 1: the certificate is a self-owned SM certificate; 2: the certificate is a managed SM certificate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GmCertType *int64 `json:"GmCertType,omitnil,omitempty" name:"GmCertType"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the certificate chain of the self-owned SM certificate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GmCert *string `json:"GmCert,omitnil,omitempty" name:"GmCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the self-owned SM certificate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GmPrivateKey *string `json:"GmPrivateKey,omitnil,omitempty" name:"GmPrivateKey"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the encryption certificate of the self-owned SM certificate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GmEncCert *string `json:"GmEncCert,omitnil,omitempty" name:"GmEncCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the encryption certificate for the self-owned SM certificate.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GmEncPrivateKey *string `json:"GmEncPrivateKey,omitnil,omitempty" name:"GmEncPrivateKey"`
+
+	// When GmCertType is 2, this parameter needs to be set, indicating the ID of the certificate managed by the Tencent Cloud SSL platform.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	GmSSLId *string `json:"GmSSLId,omitnil,omitempty" name:"GmSSLId"`
+
+	// Domain name tag.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Labels []*string `json:"Labels,omitnil,omitempty" name:"Labels"`
 }
 
 type FiltersItemNew struct {
@@ -6412,6 +6511,90 @@ func (r *GenerateDealsAndPayNewResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *GenerateDealsAndPayNewResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetAttackHistogramRequestParams struct {
+	// Queried domain: use all for all domains
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// Query start time
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query end time
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Lucene syntax.
+	QueryString *string `json:"QueryString,omitnil,omitempty" name:"QueryString"`
+}
+
+type GetAttackHistogramRequest struct {
+	*tchttp.BaseRequest
+	
+	// Queried domain: use all for all domains
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// Query start time
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query end time
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Lucene syntax.
+	QueryString *string `json:"QueryString,omitnil,omitempty" name:"QueryString"`
+}
+
+func (r *GetAttackHistogramRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetAttackHistogramRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "QueryString")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetAttackHistogramRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetAttackHistogramResponseParams struct {
+	// Statistics details
+	Data []*LogHistogramInfo `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// Time period size
+	Period *uint64 `json:"Period,omitnil,omitempty" name:"Period"`
+
+	// Number of entries counted
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type GetAttackHistogramResponse struct {
+	*tchttp.BaseResponse
+	Response *GetAttackHistogramResponseParams `json:"Response"`
+}
+
+func (r *GetAttackHistogramResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetAttackHistogramResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6687,6 +6870,10 @@ type GoodsDetailNew struct {
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// CLB WAF or SaaS WAF mode.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	MicroVersion *string `json:"MicroVersion,omitnil,omitempty" name:"MicroVersion"`
 }
 
 type HostDel struct {
@@ -7345,6 +7532,14 @@ type LoadBalancerPackageNew struct {
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LoadBalancerDomain *string `json:"LoadBalancerDomain,omitnil,omitempty" name:"LoadBalancerDomain"`
+}
+
+type LogHistogramInfo struct {
+	// Number of logs.
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
+
+	// Timestamp.
+	TimeStamp *int64 `json:"TimeStamp,omitnil,omitempty" name:"TimeStamp"`
 }
 
 type MajorEventsPkg struct {
@@ -8486,6 +8681,74 @@ func (r *ModifyDomainIpv6StatusResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyDomainPostActionRequestParams struct {
+	// www.tx.com
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// 0- Disable shipping, 1- Enable shipping
+	PostCLSAction *int64 `json:"PostCLSAction,omitnil,omitempty" name:"PostCLSAction"`
+
+	// 0- Disable shipping, 1- Enable shipping
+	PostCKafkaAction *int64 `json:"PostCKafkaAction,omitnil,omitempty" name:"PostCKafkaAction"`
+}
+
+type ModifyDomainPostActionRequest struct {
+	*tchttp.BaseRequest
+	
+	// www.tx.com
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// 0- Disable shipping, 1- Enable shipping
+	PostCLSAction *int64 `json:"PostCLSAction,omitnil,omitempty" name:"PostCLSAction"`
+
+	// 0- Disable shipping, 1- Enable shipping
+	PostCKafkaAction *int64 `json:"PostCKafkaAction,omitnil,omitempty" name:"PostCKafkaAction"`
+}
+
+func (r *ModifyDomainPostActionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDomainPostActionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "PostCLSAction")
+	delete(f, "PostCKafkaAction")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDomainPostActionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDomainPostActionResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDomainPostActionResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDomainPostActionResponseParams `json:"Response"`
+}
+
+func (r *ModifyDomainPostActionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDomainPostActionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyDomainsCLSStatusRequestParams struct {
 	// Domain name list to be modified
 	Domains []*DomainURI `json:"Domains,omitnil,omitempty" name:"Domains"`
@@ -9113,11 +9376,13 @@ type ModifyIpAccessControlRequestParams struct {
 	// 42: blocklist; 40: allowlist.
 	ActionType *int64 `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// valid_ts indicates a valid date. Its value is a second-level timestamp, such as 1680570420, which indicates 2023-04-04 09:07:00.
-	ValidTS *int64 `json:"ValidTS,omitnil,omitempty" name:"ValidTS"`
-
 	// Rule ID
 	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// valid_ts indicates a valid date. Its value is a second-level timestamp, such as 1680570420, which indicates 2023-04-04 09:07:00.
+	//
+	// Deprecated: ValidTS is deprecated.
+	ValidTS *int64 `json:"ValidTS,omitnil,omitempty" name:"ValidTS"`
 
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -9151,11 +9416,11 @@ type ModifyIpAccessControlRequest struct {
 	// 42: blocklist; 40: allowlist.
 	ActionType *int64 `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
-	// valid_ts indicates a valid date. Its value is a second-level timestamp, such as 1680570420, which indicates 2023-04-04 09:07:00.
-	ValidTS *int64 `json:"ValidTS,omitnil,omitempty" name:"ValidTS"`
-
 	// Rule ID
 	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// valid_ts indicates a valid date. Its value is a second-level timestamp, such as 1680570420, which indicates 2023-04-04 09:07:00.
+	ValidTS *int64 `json:"ValidTS,omitnil,omitempty" name:"ValidTS"`
 
 	// Instance ID
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -9191,8 +9456,8 @@ func (r *ModifyIpAccessControlRequest) FromJsonString(s string) error {
 	delete(f, "Domain")
 	delete(f, "IpList")
 	delete(f, "ActionType")
-	delete(f, "ValidTS")
 	delete(f, "RuleId")
+	delete(f, "ValidTS")
 	delete(f, "InstanceId")
 	delete(f, "Edition")
 	delete(f, "SourceType")
@@ -9682,8 +9947,29 @@ type ModifySpartaProtectionRequestParams struct {
 	// Whether to enable caching. 0: disable; 1: enable.
 	ProxyBuffer *int64 `json:"ProxyBuffer,omitnil,omitempty" name:"ProxyBuffer"`
 
-	// 0: Disable probe test; 1: Enable probe test. The probe test is enabled by default.
+	// Whether to enable the test. 0: disable; 1: enable. The test is enabled by default.
 	ProbeStatus *int64 `json:"ProbeStatus,omitnil,omitempty" name:"ProbeStatus"`
+
+	// SM option. 0: do not enable SM; 1: add support for SM based on the existing TLS option; 2: enable SM and support only SM client access.
+	GmType *int64 `json:"GmType,omitnil,omitempty" name:"GmType"`
+
+	// SM certificate type. 0: no SM certificate is available; 1: the certificate is a self-owned SM certificate; 2: the certificate is a managed SM certificate.
+	GmCertType *int64 `json:"GmCertType,omitnil,omitempty" name:"GmCertType"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the certificate chain of the self-owned SM certificate.
+	GmCert *string `json:"GmCert,omitnil,omitempty" name:"GmCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the self-owned SM certificate.
+	GmPrivateKey *string `json:"GmPrivateKey,omitnil,omitempty" name:"GmPrivateKey"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the encryption certificate of the self-owned SM certificate.
+	GmEncCert *string `json:"GmEncCert,omitnil,omitempty" name:"GmEncCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the encryption certificate for the self-owned SM certificate.
+	GmEncPrivateKey *string `json:"GmEncPrivateKey,omitnil,omitempty" name:"GmEncPrivateKey"`
+
+	// When GmCertType is 2, this parameter needs to be set, indicating the ID of the certificate managed by the Tencent Cloud SSL platform.
+	GmSSLId *string `json:"GmSSLId,omitnil,omitempty" name:"GmSSLId"`
 }
 
 type ModifySpartaProtectionRequest struct {
@@ -9803,8 +10089,29 @@ type ModifySpartaProtectionRequest struct {
 	// Whether to enable caching. 0: disable; 1: enable.
 	ProxyBuffer *int64 `json:"ProxyBuffer,omitnil,omitempty" name:"ProxyBuffer"`
 
-	// 0: Disable probe test; 1: Enable probe test. The probe test is enabled by default.
+	// Whether to enable the test. 0: disable; 1: enable. The test is enabled by default.
 	ProbeStatus *int64 `json:"ProbeStatus,omitnil,omitempty" name:"ProbeStatus"`
+
+	// SM option. 0: do not enable SM; 1: add support for SM based on the existing TLS option; 2: enable SM and support only SM client access.
+	GmType *int64 `json:"GmType,omitnil,omitempty" name:"GmType"`
+
+	// SM certificate type. 0: no SM certificate is available; 1: the certificate is a self-owned SM certificate; 2: the certificate is a managed SM certificate.
+	GmCertType *int64 `json:"GmCertType,omitnil,omitempty" name:"GmCertType"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the certificate chain of the self-owned SM certificate.
+	GmCert *string `json:"GmCert,omitnil,omitempty" name:"GmCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the self-owned SM certificate.
+	GmPrivateKey *string `json:"GmPrivateKey,omitnil,omitempty" name:"GmPrivateKey"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the encryption certificate of the self-owned SM certificate.
+	GmEncCert *string `json:"GmEncCert,omitnil,omitempty" name:"GmEncCert"`
+
+	// When GmCertType is 1, this parameter needs to be set, indicating the private key of the encryption certificate for the self-owned SM certificate.
+	GmEncPrivateKey *string `json:"GmEncPrivateKey,omitnil,omitempty" name:"GmEncPrivateKey"`
+
+	// When GmCertType is 2, this parameter needs to be set, indicating the ID of the certificate managed by the Tencent Cloud SSL platform.
+	GmSSLId *string `json:"GmSSLId,omitnil,omitempty" name:"GmSSLId"`
 }
 
 func (r *ModifySpartaProtectionRequest) ToJsonString() string {
@@ -9856,6 +10163,13 @@ func (r *ModifySpartaProtectionRequest) FromJsonString(s string) error {
 	delete(f, "UpstreamHost")
 	delete(f, "ProxyBuffer")
 	delete(f, "ProbeStatus")
+	delete(f, "GmType")
+	delete(f, "GmCertType")
+	delete(f, "GmCert")
+	delete(f, "GmPrivateKey")
+	delete(f, "GmEncCert")
+	delete(f, "GmEncPrivateKey")
+	delete(f, "GmSSLId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySpartaProtectionRequest has unknown keys!", "")
 	}
@@ -10075,14 +10389,6 @@ func (r *ModifyWebshellStatusResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifyWebshellStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
-}
-
-type PageInfo struct {
-	// Page number
-	PageNumber *string `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
-
-	// Page Entry Quantity
-	PageSize *string `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 }
 
 type PeakPointsItem struct {
@@ -10361,6 +10667,124 @@ type ResponseCode struct {
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 }
 
+// Predefined struct for user
+type SearchAttackLogRequestParams struct {
+	// Queried domain: use all for all domains
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// Query start time
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query end time
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// API upgrade. Input an empty string for this field. Use the Page field for page turning.
+	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
+
+	// Lucene syntax.
+	QueryString *string `json:"QueryString,omitnil,omitempty" name:"QueryString"`
+
+	// Number of queries: 10 by default, up to 100
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
+
+	// desc by default. Value can be set to desc or asc.
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Page number, starting from 0
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
+}
+
+type SearchAttackLogRequest struct {
+	*tchttp.BaseRequest
+	
+	// Queried domain: use all for all domains
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// Query start time
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Query end time
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// API upgrade. Input an empty string for this field. Use the Page field for page turning.
+	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
+
+	// Lucene syntax.
+	QueryString *string `json:"QueryString,omitnil,omitempty" name:"QueryString"`
+
+	// Number of queries: 10 by default, up to 100
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
+
+	// desc by default. Value can be set to desc or asc.
+	Sort *string `json:"Sort,omitnil,omitempty" name:"Sort"`
+
+	// Page number, starting from 0
+	Page *int64 `json:"Page,omitnil,omitempty" name:"Page"`
+}
+
+func (r *SearchAttackLogRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SearchAttackLogRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Domain")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Context")
+	delete(f, "QueryString")
+	delete(f, "Count")
+	delete(f, "Sort")
+	delete(f, "Page")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SearchAttackLogRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SearchAttackLogResponseParams struct {
+	// Number of attack logs returned
+	Count *uint64 `json:"Count,omitnil,omitempty" name:"Count"`
+
+	// API upgrade: this field is invalid, defaults to returning an empty string
+	Context *string `json:"Context,omitnil,omitempty" name:"Context"`
+
+	// Attack log array entry content
+	Data []*AttackLogInfo `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// CLS API returned content
+	ListOver *bool `json:"ListOver,omitnil,omitempty" name:"ListOver"`
+
+	// CLS API returned content, indicating whether to enable the new version index
+	SqlFlag *bool `json:"SqlFlag,omitnil,omitempty" name:"SqlFlag"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type SearchAttackLogResponse struct {
+	*tchttp.BaseResponse
+	Response *SearchAttackLogResponseParams `json:"Response"`
+}
+
+func (r *SearchAttackLogResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SearchAttackLogResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type SearchItem struct {
 	// Log switch
 	ClsStatus *string `json:"ClsStatus,omitnil,omitempty" name:"ClsStatus"`
@@ -10488,6 +10912,11 @@ type Strategy struct {
 	// 
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Arg *string `json:"Arg,omitnil,omitempty" name:"Arg"`
+
+	// 0: case-sensitive.
+	// 1: case-insensitive.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CaseNotSensitive *uint64 `json:"CaseNotSensitive,omitnil,omitempty" name:"CaseNotSensitive"`
 }
 
 type StrategyForAntiInfoLeak struct {

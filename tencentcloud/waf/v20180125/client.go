@@ -1147,136 +1147,6 @@ func (c *Client) DescribeAntiFakeRulesWithContext(ctx context.Context, request *
     return
 }
 
-func NewDescribeAntiFakeUrlRequest() (request *DescribeAntiFakeUrlRequest) {
-    request = &DescribeAntiFakeUrlRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("waf", APIVersion, "DescribeAntiFakeUrl")
-    
-    
-    return
-}
-
-func NewDescribeAntiFakeUrlResponse() (response *DescribeAntiFakeUrlResponse) {
-    response = &DescribeAntiFakeUrlResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeAntiFakeUrl
-// 废弃接口
-//
-// 
-//
-// This API has been deprecated.
-//
-// 
-//
-// Obtain a tamper-proof URL
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-func (c *Client) DescribeAntiFakeUrl(request *DescribeAntiFakeUrlRequest) (response *DescribeAntiFakeUrlResponse, err error) {
-    return c.DescribeAntiFakeUrlWithContext(context.Background(), request)
-}
-
-// DescribeAntiFakeUrl
-// 废弃接口
-//
-// 
-//
-// This API has been deprecated.
-//
-// 
-//
-// Obtain a tamper-proof URL
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-func (c *Client) DescribeAntiFakeUrlWithContext(ctx context.Context, request *DescribeAntiFakeUrlRequest) (response *DescribeAntiFakeUrlResponse, err error) {
-    if request == nil {
-        request = NewDescribeAntiFakeUrlRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAntiFakeUrl require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAntiFakeUrlResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeAntiInfoLeakRulesRequest() (request *DescribeAntiInfoLeakRulesRequest) {
-    request = &DescribeAntiInfoLeakRulesRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("waf", APIVersion, "DescribeAntiInfoLeakRules")
-    
-    
-    return
-}
-
-func NewDescribeAntiInfoLeakRulesResponse() (response *DescribeAntiInfoLeakRulesResponse) {
-    response = &DescribeAntiInfoLeakRulesResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeAntiInfoLeakRules
-// 老接口已经不再使用。
-//
-// 
-//
-// The old API is no longer in use.
-//
-// 
-//
-// Obtain the information leakage prevention rule list
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-func (c *Client) DescribeAntiInfoLeakRules(request *DescribeAntiInfoLeakRulesRequest) (response *DescribeAntiInfoLeakRulesResponse, err error) {
-    return c.DescribeAntiInfoLeakRulesWithContext(context.Background(), request)
-}
-
-// DescribeAntiInfoLeakRules
-// 老接口已经不再使用。
-//
-// 
-//
-// The old API is no longer in use.
-//
-// 
-//
-// Obtain the information leakage prevention rule list
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-func (c *Client) DescribeAntiInfoLeakRulesWithContext(ctx context.Context, request *DescribeAntiInfoLeakRulesRequest) (response *DescribeAntiInfoLeakRulesResponse, err error) {
-    if request == nil {
-        request = NewDescribeAntiInfoLeakRulesRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeAntiInfoLeakRules require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeAntiInfoLeakRulesResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeAntiInfoLeakageRulesRequest() (request *DescribeAntiInfoLeakageRulesRequest) {
     request = &DescribeAntiInfoLeakageRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1324,6 +1194,93 @@ func (c *Client) DescribeAntiInfoLeakageRulesWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewDescribeAntiInfoLeakageRulesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAttackOverviewRequest() (request *DescribeAttackOverviewRequest) {
+    request = &DescribeAttackOverviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "DescribeAttackOverview")
+    
+    
+    return
+}
+
+func NewDescribeAttackOverviewResponse() (response *DescribeAttackOverviewResponse) {
+    response = &DescribeAttackOverviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAttackOverview
+// This API is used to describe the attack overview.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSINTERNALERROR = "FailedOperation.CLSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAttackOverview(request *DescribeAttackOverviewRequest) (response *DescribeAttackOverviewResponse, err error) {
+    return c.DescribeAttackOverviewWithContext(context.Background(), request)
+}
+
+// DescribeAttackOverview
+// This API is used to describe the attack overview.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSINTERNALERROR = "FailedOperation.CLSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDCERTIFICATE = "InvalidParameter.InvalidCertificate"
+//  INVALIDPARAMETER_QUERYCERTBYSSLIDFAILED = "InvalidParameter.QueryCertBySSLIDFailed"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeAttackOverviewWithContext(ctx context.Context, request *DescribeAttackOverviewRequest) (response *DescribeAttackOverviewResponse, err error) {
+    if request == nil {
+        request = NewDescribeAttackOverviewRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAttackOverview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAttackOverviewResponse()
     err = c.Send(request, response)
     return
 }
@@ -3793,6 +3750,71 @@ func (c *Client) GenerateDealsAndPayNewWithContext(ctx context.Context, request 
     return
 }
 
+func NewGetAttackHistogramRequest() (request *GetAttackHistogramRequest) {
+    request = &GetAttackHistogramRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "GetAttackHistogram")
+    
+    
+    return
+}
+
+func NewGetAttackHistogramResponse() (response *GetAttackHistogramResponse) {
+    response = &GetAttackHistogramResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetAttackHistogram
+// This API is used to generate a bar chart for the generation time of attack logs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSDBOPERATIONFAILED = "FailedOperation.CLSDBOperationFailed"
+//  FAILEDOPERATION_CLSINTERNALERROR = "FailedOperation.CLSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERR = "InternalError.UnknownErr"
+//  INVALIDPARAMETER_LOGICERR = "InvalidParameter.LogicErr"
+//  INVALIDPARAMETER_QUERYSTRINGSYNTAXERR = "InvalidParameter.QueryStringSyntaxErr"
+//  INVALIDPARAMETER_SQLSYNTAXERR = "InvalidParameter.SQLSyntaxErr"
+//  INVALIDPARAMETER_TYPEMISMATCH = "InvalidParameter.TypeMismatch"
+func (c *Client) GetAttackHistogram(request *GetAttackHistogramRequest) (response *GetAttackHistogramResponse, err error) {
+    return c.GetAttackHistogramWithContext(context.Background(), request)
+}
+
+// GetAttackHistogram
+// This API is used to generate a bar chart for the generation time of attack logs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSDBOPERATIONFAILED = "FailedOperation.CLSDBOperationFailed"
+//  FAILEDOPERATION_CLSINTERNALERROR = "FailedOperation.CLSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERR = "InternalError.UnknownErr"
+//  INVALIDPARAMETER_LOGICERR = "InvalidParameter.LogicErr"
+//  INVALIDPARAMETER_QUERYSTRINGSYNTAXERR = "InvalidParameter.QueryStringSyntaxErr"
+//  INVALIDPARAMETER_SQLSYNTAXERR = "InvalidParameter.SQLSyntaxErr"
+//  INVALIDPARAMETER_TYPEMISMATCH = "InvalidParameter.TypeMismatch"
+func (c *Client) GetAttackHistogramWithContext(ctx context.Context, request *GetAttackHistogramRequest) (response *GetAttackHistogramResponse, err error) {
+    if request == nil {
+        request = NewGetAttackHistogramRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetAttackHistogram require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetAttackHistogramResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetAttackTotalCountRequest() (request *GetAttackTotalCountRequest) {
     request = &GetAttackTotalCountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4613,6 +4635,91 @@ func (c *Client) ModifyDomainIpv6StatusWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewModifyDomainIpv6StatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDomainPostActionRequest() (request *ModifyDomainPostActionRequest) {
+    request = &ModifyDomainPostActionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "ModifyDomainPostAction")
+    
+    
+    return
+}
+
+func NewModifyDomainPostActionResponse() (response *ModifyDomainPostActionResponse) {
+    response = &ModifyDomainPostActionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDomainPostAction
+// This API is used to modify the domain shipping status.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CKAFKAINTERNALERROR = "FailedOperation.CKafkaInternalError"
+//  FAILEDOPERATION_CLSINTERNALERROR = "FailedOperation.CLSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyDomainPostAction(request *ModifyDomainPostActionRequest) (response *ModifyDomainPostActionResponse, err error) {
+    return c.ModifyDomainPostActionWithContext(context.Background(), request)
+}
+
+// ModifyDomainPostAction
+// This API is used to modify the domain shipping status.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CKAFKAINTERNALERROR = "FailedOperation.CKafkaInternalError"
+//  FAILEDOPERATION_CLSINTERNALERROR = "FailedOperation.CLSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  RESOURCESSOLDOUT = "ResourcesSoldOut"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) ModifyDomainPostActionWithContext(ctx context.Context, request *ModifyDomainPostActionRequest) (response *ModifyDomainPostActionResponse, err error) {
+    if request == nil {
+        request = NewModifyDomainPostActionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDomainPostAction require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDomainPostActionResponse()
     err = c.Send(request, response)
     return
 }
@@ -5960,6 +6067,71 @@ func (c *Client) RefreshAccessCheckResultWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewRefreshAccessCheckResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewSearchAttackLogRequest() (request *SearchAttackLogRequest) {
+    request = &SearchAttackLogRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("waf", APIVersion, "SearchAttackLog")
+    
+    
+    return
+}
+
+func NewSearchAttackLogResponse() (response *SearchAttackLogResponse) {
+    response = &SearchAttackLogResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SearchAttackLog
+// The new version of the CLS API has parameter changes, with query changed to query_string to support Lucene syntax for API search queries.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSDBOPERATIONFAILED = "FailedOperation.CLSDBOperationFailed"
+//  FAILEDOPERATION_CLSINTERNALERROR = "FailedOperation.CLSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERR = "InternalError.UnknownErr"
+//  INVALIDPARAMETER_LOGICERR = "InvalidParameter.LogicErr"
+//  INVALIDPARAMETER_QUERYSTRINGSYNTAXERR = "InvalidParameter.QueryStringSyntaxErr"
+//  INVALIDPARAMETER_TYPEMISMATCH = "InvalidParameter.TypeMismatch"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) SearchAttackLog(request *SearchAttackLogRequest) (response *SearchAttackLogResponse, err error) {
+    return c.SearchAttackLogWithContext(context.Background(), request)
+}
+
+// SearchAttackLog
+// The new version of the CLS API has parameter changes, with query changed to query_string to support Lucene syntax for API search queries.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CLSDBOPERATIONFAILED = "FailedOperation.CLSDBOperationFailed"
+//  FAILEDOPERATION_CLSINTERNALERROR = "FailedOperation.CLSInternalError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_UNKNOWNERR = "InternalError.UnknownErr"
+//  INVALIDPARAMETER_LOGICERR = "InvalidParameter.LogicErr"
+//  INVALIDPARAMETER_QUERYSTRINGSYNTAXERR = "InvalidParameter.QueryStringSyntaxErr"
+//  INVALIDPARAMETER_TYPEMISMATCH = "InvalidParameter.TypeMismatch"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) SearchAttackLogWithContext(ctx context.Context, request *SearchAttackLogRequest) (response *SearchAttackLogResponse, err error) {
+    if request == nil {
+        request = NewSearchAttackLogRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SearchAttackLog require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSearchAttackLogResponse()
     err = c.Send(request, response)
     return
 }

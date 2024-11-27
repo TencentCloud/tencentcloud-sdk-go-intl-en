@@ -263,9 +263,12 @@ func NewAddUserToGroupResponse() (response *AddUserToGroupResponse) {
 // This API is used to add users to a user group.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GROUPTYPEUSERTYPENOTMATCH = "FailedOperation.GroupTypeUserTypeNotMatch"
 //  FAILEDOPERATION_GROUPUSERCOUNTOVERUPPERLIMIT = "FailedOperation.GroupUserCountOverUpperLimit"
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALGROUPNOTUPDATE = "FailedOperation.ManualGroupNotUpdate"
 //  FAILEDOPERATION_SYNCHRONIZEDGROUPNOTADDUSER = "FailedOperation.SynchronizedGroupNotAddUser"
+//  FAILEDOPERATION_SYNCHRONIZEDGROUPNOTUPDATE = "FailedOperation.SynchronizedGroupNotUpdate"
 //  FAILEDOPERATION_USERADDGROUPCOUNTOVERUPPERLIMIT = "FailedOperation.UserAddGroupCountOverUpperLimit"
 //  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
 //  INVALIDPARAMETER_GROUPNOTEXIST = "InvalidParameter.GroupNotExist"
@@ -280,9 +283,12 @@ func (c *Client) AddUserToGroup(request *AddUserToGroupRequest) (response *AddUs
 // This API is used to add users to a user group.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_GROUPTYPEUSERTYPENOTMATCH = "FailedOperation.GroupTypeUserTypeNotMatch"
 //  FAILEDOPERATION_GROUPUSERCOUNTOVERUPPERLIMIT = "FailedOperation.GroupUserCountOverUpperLimit"
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALGROUPNOTUPDATE = "FailedOperation.ManualGroupNotUpdate"
 //  FAILEDOPERATION_SYNCHRONIZEDGROUPNOTADDUSER = "FailedOperation.SynchronizedGroupNotAddUser"
+//  FAILEDOPERATION_SYNCHRONIZEDGROUPNOTUPDATE = "FailedOperation.SynchronizedGroupNotUpdate"
 //  FAILEDOPERATION_USERADDGROUPCOUNTOVERUPPERLIMIT = "FailedOperation.UserAddGroupCountOverUpperLimit"
 //  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
 //  INVALIDPARAMETER_GROUPNOTEXIST = "InvalidParameter.GroupNotExist"
@@ -604,6 +610,128 @@ func (c *Client) CreateOrgServiceAssignWithContext(ctx context.Context, request 
     return
 }
 
+func NewCreateOrganizationRequest() (request *CreateOrganizationRequest) {
+    request = &CreateOrganizationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "CreateOrganization")
+    
+    
+    return
+}
+
+func NewCreateOrganizationResponse() (response *CreateOrganizationResponse) {
+    response = &CreateOrganizationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateOrganization
+// This API is used to create an organization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHINFOEMPTY = "FailedOperation.AuthInfoEmpty"
+//  FAILEDOPERATION_AUTHNOTENTERPRISE = "FailedOperation.AuthNotEnterprise"
+//  FAILEDOPERATION_ORGANIZATIONEXISTALREADY = "FailedOperation.OrganizationExistAlready"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_CREATEMEMBERNOTALLOWCREATEORGANIZATION = "UnsupportedOperation.CreateMemberNotAllowCreateOrganization"
+func (c *Client) CreateOrganization(request *CreateOrganizationRequest) (response *CreateOrganizationResponse, err error) {
+    return c.CreateOrganizationWithContext(context.Background(), request)
+}
+
+// CreateOrganization
+// This API is used to create an organization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHINFOEMPTY = "FailedOperation.AuthInfoEmpty"
+//  FAILEDOPERATION_AUTHNOTENTERPRISE = "FailedOperation.AuthNotEnterprise"
+//  FAILEDOPERATION_ORGANIZATIONEXISTALREADY = "FailedOperation.OrganizationExistAlready"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_CREATEMEMBERNOTALLOWCREATEORGANIZATION = "UnsupportedOperation.CreateMemberNotAllowCreateOrganization"
+func (c *Client) CreateOrganizationWithContext(ctx context.Context, request *CreateOrganizationRequest) (response *CreateOrganizationResponse, err error) {
+    if request == nil {
+        request = NewCreateOrganizationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateOrganization require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateOrganizationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateOrganizationIdentityRequest() (request *CreateOrganizationIdentityRequest) {
+    request = &CreateOrganizationIdentityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "CreateOrganizationIdentity")
+    
+    
+    return
+}
+
+func NewCreateOrganizationIdentityResponse() (response *CreateOrganizationIdentityResponse) {
+    response = &CreateOrganizationIdentityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateOrganizationIdentity
+// This API is used to add an organization identity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETPOLICYDETAIL = "FailedOperation.GetPolicyDetail"
+//  FAILEDOPERATION_ORGANIZATIONIDENTITYNAMEUSED = "FailedOperation.OrganizationIdentityNameUsed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_IDENTITYEXCEEDLIMIT = "LimitExceeded.IdentityExceedLimit"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+func (c *Client) CreateOrganizationIdentity(request *CreateOrganizationIdentityRequest) (response *CreateOrganizationIdentityResponse, err error) {
+    return c.CreateOrganizationIdentityWithContext(context.Background(), request)
+}
+
+// CreateOrganizationIdentity
+// This API is used to add an organization identity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETPOLICYDETAIL = "FailedOperation.GetPolicyDetail"
+//  FAILEDOPERATION_ORGANIZATIONIDENTITYNAMEUSED = "FailedOperation.OrganizationIdentityNameUsed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_IDENTITYEXCEEDLIMIT = "LimitExceeded.IdentityExceedLimit"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+func (c *Client) CreateOrganizationIdentityWithContext(ctx context.Context, request *CreateOrganizationIdentityRequest) (response *CreateOrganizationIdentityResponse, err error) {
+    if request == nil {
+        request = NewCreateOrganizationIdentityRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateOrganizationIdentity require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateOrganizationIdentityResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateOrganizationMemberRequest() (request *CreateOrganizationMemberRequest) {
     request = &CreateOrganizationMemberRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -739,6 +867,69 @@ func (c *Client) CreateOrganizationMemberWithContext(ctx context.Context, reques
     return
 }
 
+func NewCreateOrganizationMemberAuthIdentityRequest() (request *CreateOrganizationMemberAuthIdentityRequest) {
+    request = &CreateOrganizationMemberAuthIdentityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "CreateOrganizationMemberAuthIdentity")
+    
+    
+    return
+}
+
+func NewCreateOrganizationMemberAuthIdentityResponse() (response *CreateOrganizationMemberAuthIdentityResponse) {
+    response = &CreateOrganizationMemberAuthIdentityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateOrganizationMemberAuthIdentity
+// This API is used to add organization member access authorization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEROLE = "FailedOperation.CreateRole"
+//  FAILEDOPERATION_ORGANIZATIONIDENTITYPOLICYERROR = "FailedOperation.OrganizationIdentityPolicyError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateOrganizationMemberAuthIdentity(request *CreateOrganizationMemberAuthIdentityRequest) (response *CreateOrganizationMemberAuthIdentityResponse, err error) {
+    return c.CreateOrganizationMemberAuthIdentityWithContext(context.Background(), request)
+}
+
+// CreateOrganizationMemberAuthIdentity
+// This API is used to add organization member access authorization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEROLE = "FailedOperation.CreateRole"
+//  FAILEDOPERATION_ORGANIZATIONIDENTITYPOLICYERROR = "FailedOperation.OrganizationIdentityPolicyError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateOrganizationMemberAuthIdentityWithContext(ctx context.Context, request *CreateOrganizationMemberAuthIdentityRequest) (response *CreateOrganizationMemberAuthIdentityResponse, err error) {
+    if request == nil {
+        request = NewCreateOrganizationMemberAuthIdentityRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateOrganizationMemberAuthIdentity require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateOrganizationMemberAuthIdentityResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateOrganizationMemberPolicyRequest() (request *CreateOrganizationMemberPolicyRequest) {
     request = &CreateOrganizationMemberPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -759,7 +950,7 @@ func NewCreateOrganizationMemberPolicyResponse() (response *CreateOrganizationMe
 }
 
 // CreateOrganizationMemberPolicy
-// This API is used to create an organization member access policy.
+// This API is used to create an organization member access authorization policy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEPOLICY = "FailedOperation.CreatePolicy"
@@ -775,7 +966,7 @@ func (c *Client) CreateOrganizationMemberPolicy(request *CreateOrganizationMembe
 }
 
 // CreateOrganizationMemberPolicy
-// This API is used to create an organization member access policy.
+// This API is used to create an organization member access authorization policy.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CREATEPOLICY = "FailedOperation.CreatePolicy"
@@ -798,6 +989,69 @@ func (c *Client) CreateOrganizationMemberPolicyWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewCreateOrganizationMemberPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateOrganizationMembersPolicyRequest() (request *CreateOrganizationMembersPolicyRequest) {
+    request = &CreateOrganizationMembersPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "CreateOrganizationMembersPolicy")
+    
+    
+    return
+}
+
+func NewCreateOrganizationMembersPolicyResponse() (response *CreateOrganizationMembersPolicyResponse) {
+    response = &CreateOrganizationMembersPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateOrganizationMembersPolicy
+// This API is used to create an organization member access policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEPOLICY = "FailedOperation.CreatePolicy"
+//  FAILEDOPERATION_MEMBERPOLICYNAMEEXIST = "FailedOperation.MemberPolicyNameExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_MEMBERIDENTITYNOTEXIST = "ResourceNotFound.MemberIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateOrganizationMembersPolicy(request *CreateOrganizationMembersPolicyRequest) (response *CreateOrganizationMembersPolicyResponse, err error) {
+    return c.CreateOrganizationMembersPolicyWithContext(context.Background(), request)
+}
+
+// CreateOrganizationMembersPolicy
+// This API is used to create an organization member access policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CREATEPOLICY = "FailedOperation.CreatePolicy"
+//  FAILEDOPERATION_MEMBERPOLICYNAMEEXIST = "FailedOperation.MemberPolicyNameExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_MEMBERIDENTITYNOTEXIST = "ResourceNotFound.MemberIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) CreateOrganizationMembersPolicyWithContext(ctx context.Context, request *CreateOrganizationMembersPolicyRequest) (response *CreateOrganizationMembersPolicyResponse, err error) {
+    if request == nil {
+        request = NewCreateOrganizationMembersPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateOrganizationMembersPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateOrganizationMembersPolicyResponse()
     err = c.Send(request, response)
     return
 }
@@ -922,6 +1176,59 @@ func (c *Client) CreateRoleConfigurationWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewCreateRoleConfigurationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSCIMCredentialRequest() (request *CreateSCIMCredentialRequest) {
+    request = &CreateSCIMCredentialRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "CreateSCIMCredential")
+    
+    
+    return
+}
+
+func NewCreateSCIMCredentialResponse() (response *CreateSCIMCredentialResponse) {
+    response = &CreateSCIMCredentialResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateSCIMCredential
+// This API is used to create a SCIM key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_SCIMCREDENTIALGENERATEERROR = "FailedOperation.ScimCredentialGenerateError"
+//  LIMITEXCEEDED_SCIMCREDENTIALLIMITEXCEEDED = "LimitExceeded.ScimCredentialLimitExceeded"
+func (c *Client) CreateSCIMCredential(request *CreateSCIMCredentialRequest) (response *CreateSCIMCredentialResponse, err error) {
+    return c.CreateSCIMCredentialWithContext(context.Background(), request)
+}
+
+// CreateSCIMCredential
+// This API is used to create a SCIM key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_SCIMCREDENTIALGENERATEERROR = "FailedOperation.ScimCredentialGenerateError"
+//  LIMITEXCEEDED_SCIMCREDENTIALLIMITEXCEEDED = "LimitExceeded.ScimCredentialLimitExceeded"
+func (c *Client) CreateSCIMCredentialWithContext(ctx context.Context, request *CreateSCIMCredentialRequest) (response *CreateSCIMCredentialResponse, err error) {
+    if request == nil {
+        request = NewCreateSCIMCredentialRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSCIMCredential require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSCIMCredentialResponse()
     err = c.Send(request, response)
     return
 }
@@ -1071,6 +1378,7 @@ func NewDeleteGroupResponse() (response *DeleteGroupResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION_DELETEGROUPNOTALLOWEXISTUSER = "FailedOperation.DeleteGroupNotAllowExistUser"
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALGROUPNOTDELETE = "FailedOperation.ManualGroupNotDelete"
 //  FAILEDOPERATION_ROLECONFIGURATIONAUTHORIZATIONEXIST = "FailedOperation.RoleConfigurationAuthorizationExist"
 //  FAILEDOPERATION_SYNCHRONIZEDGROUPNOTDELETE = "FailedOperation.SynchronizedGroupNotDelete"
 //  FAILEDOPERATION_USERPROVISIONINGEXISTS = "FailedOperation.UserProvisioningExists"
@@ -1086,6 +1394,7 @@ func (c *Client) DeleteGroup(request *DeleteGroupRequest) (response *DeleteGroup
 // error code that may be returned:
 //  FAILEDOPERATION_DELETEGROUPNOTALLOWEXISTUSER = "FailedOperation.DeleteGroupNotAllowExistUser"
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALGROUPNOTDELETE = "FailedOperation.ManualGroupNotDelete"
 //  FAILEDOPERATION_ROLECONFIGURATIONAUTHORIZATIONEXIST = "FailedOperation.RoleConfigurationAuthorizationExist"
 //  FAILEDOPERATION_SYNCHRONIZEDGROUPNOTDELETE = "FailedOperation.SynchronizedGroupNotDelete"
 //  FAILEDOPERATION_USERPROVISIONINGEXISTS = "FailedOperation.UserProvisioningExists"
@@ -1168,6 +1477,189 @@ func (c *Client) DeleteOrgServiceAssignWithContext(ctx context.Context, request 
     return
 }
 
+func NewDeleteOrganizationRequest() (request *DeleteOrganizationRequest) {
+    request = &DeleteOrganizationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DeleteOrganization")
+    
+    
+    return
+}
+
+func NewDeleteOrganizationResponse() (response *DeleteOrganizationResponse) {
+    response = &DeleteOrganizationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteOrganization
+// This API is used to delete an organization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MEMBEREXISTDELEGATEPAYERNOTALLOWDELETE = "FailedOperation.MemberExistDelegatePayerNotAllowDelete"
+//  FAILEDOPERATION_MEMBERISDELEGATEPAYERNOTALLOWDELETE = "FailedOperation.MemberIsDelegatePayerNotAllowDelete"
+//  FAILEDOPERATION_ORGANIZATIONNOTEMPTY = "FailedOperation.OrganizationNotEmpty"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTDISABLED = "FailedOperation.OrganizationPolicyIsNotDisabled"
+//  FAILEDOPERATION_QUITSHAREUINT = "FailedOperation.QuitShareUint"
+//  FAILEDOPERATION_QUITESHAREUNIT = "FailedOperation.QuiteShareUnit"
+//  FAILEDOPERATION_SHAREUNITNOTEMPTY = "FailedOperation.ShareUnitNotEmpty"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) DeleteOrganization(request *DeleteOrganizationRequest) (response *DeleteOrganizationResponse, err error) {
+    return c.DeleteOrganizationWithContext(context.Background(), request)
+}
+
+// DeleteOrganization
+// This API is used to delete an organization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MEMBEREXISTDELEGATEPAYERNOTALLOWDELETE = "FailedOperation.MemberExistDelegatePayerNotAllowDelete"
+//  FAILEDOPERATION_MEMBERISDELEGATEPAYERNOTALLOWDELETE = "FailedOperation.MemberIsDelegatePayerNotAllowDelete"
+//  FAILEDOPERATION_ORGANIZATIONNOTEMPTY = "FailedOperation.OrganizationNotEmpty"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYISNOTDISABLED = "FailedOperation.OrganizationPolicyIsNotDisabled"
+//  FAILEDOPERATION_QUITSHAREUINT = "FailedOperation.QuitShareUint"
+//  FAILEDOPERATION_QUITESHAREUNIT = "FailedOperation.QuiteShareUnit"
+//  FAILEDOPERATION_SHAREUNITNOTEMPTY = "FailedOperation.ShareUnitNotEmpty"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) DeleteOrganizationWithContext(ctx context.Context, request *DeleteOrganizationRequest) (response *DeleteOrganizationResponse, err error) {
+    if request == nil {
+        request = NewDeleteOrganizationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteOrganization require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteOrganizationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteOrganizationIdentityRequest() (request *DeleteOrganizationIdentityRequest) {
+    request = &DeleteOrganizationIdentityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DeleteOrganizationIdentity")
+    
+    
+    return
+}
+
+func NewDeleteOrganizationIdentityResponse() (response *DeleteOrganizationIdentityResponse) {
+    response = &DeleteOrganizationIdentityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteOrganizationIdentity
+// This API is used to delete an organization identity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONIDENTITYINUSED = "FailedOperation.OrganizationIdentityInUsed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) DeleteOrganizationIdentity(request *DeleteOrganizationIdentityRequest) (response *DeleteOrganizationIdentityResponse, err error) {
+    return c.DeleteOrganizationIdentityWithContext(context.Background(), request)
+}
+
+// DeleteOrganizationIdentity
+// This API is used to delete an organization identity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ORGANIZATIONIDENTITYINUSED = "FailedOperation.OrganizationIdentityInUsed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) DeleteOrganizationIdentityWithContext(ctx context.Context, request *DeleteOrganizationIdentityRequest) (response *DeleteOrganizationIdentityResponse, err error) {
+    if request == nil {
+        request = NewDeleteOrganizationIdentityRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteOrganizationIdentity require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteOrganizationIdentityResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteOrganizationMemberAuthIdentityRequest() (request *DeleteOrganizationMemberAuthIdentityRequest) {
+    request = &DeleteOrganizationMemberAuthIdentityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DeleteOrganizationMemberAuthIdentity")
+    
+    
+    return
+}
+
+func NewDeleteOrganizationMemberAuthIdentityResponse() (response *DeleteOrganizationMemberAuthIdentityResponse) {
+    response = &DeleteOrganizationMemberAuthIdentityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteOrganizationMemberAuthIdentity
+// This API is used to delete organization member access authorization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MEMBERIDENTITYAUTHUSED = "FailedOperation.MemberIdentityAuthUsed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_MEMBERIDENTITYNOTEXIST = "ResourceNotFound.MemberIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) DeleteOrganizationMemberAuthIdentity(request *DeleteOrganizationMemberAuthIdentityRequest) (response *DeleteOrganizationMemberAuthIdentityResponse, err error) {
+    return c.DeleteOrganizationMemberAuthIdentityWithContext(context.Background(), request)
+}
+
+// DeleteOrganizationMemberAuthIdentity
+// This API is used to delete organization member access authorization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_MEMBERIDENTITYAUTHUSED = "FailedOperation.MemberIdentityAuthUsed"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_MEMBERIDENTITYNOTEXIST = "ResourceNotFound.MemberIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) DeleteOrganizationMemberAuthIdentityWithContext(ctx context.Context, request *DeleteOrganizationMemberAuthIdentityRequest) (response *DeleteOrganizationMemberAuthIdentityResponse, err error) {
+    if request == nil {
+        request = NewDeleteOrganizationMemberAuthIdentityRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteOrganizationMemberAuthIdentity require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteOrganizationMemberAuthIdentityResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteOrganizationMembersRequest() (request *DeleteOrganizationMembersRequest) {
     request = &DeleteOrganizationMembersRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1241,6 +1733,63 @@ func (c *Client) DeleteOrganizationMembersWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDeleteOrganizationMembersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteOrganizationMembersPolicyRequest() (request *DeleteOrganizationMembersPolicyRequest) {
+    request = &DeleteOrganizationMembersPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DeleteOrganizationMembersPolicy")
+    
+    
+    return
+}
+
+func NewDeleteOrganizationMembersPolicyResponse() (response *DeleteOrganizationMembersPolicyResponse) {
+    response = &DeleteOrganizationMembersPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteOrganizationMembersPolicy
+// This API is used to delete an organization member access policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DELETEPOLICY = "FailedOperation.DeletePolicy"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) DeleteOrganizationMembersPolicy(request *DeleteOrganizationMembersPolicyRequest) (response *DeleteOrganizationMembersPolicyResponse, err error) {
+    return c.DeleteOrganizationMembersPolicyWithContext(context.Background(), request)
+}
+
+// DeleteOrganizationMembersPolicy
+// This API is used to delete an organization member access policy.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DELETEPOLICY = "FailedOperation.DeletePolicy"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_MEMBERPOLICYNOTEXIST = "ResourceNotFound.MemberPolicyNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) DeleteOrganizationMembersPolicyWithContext(ctx context.Context, request *DeleteOrganizationMembersPolicyRequest) (response *DeleteOrganizationMembersPolicyResponse, err error) {
+    if request == nil {
+        request = NewDeleteOrganizationMembersPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteOrganizationMembersPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteOrganizationMembersPolicyResponse()
     err = c.Send(request, response)
     return
 }
@@ -1418,6 +1967,61 @@ func (c *Client) DeleteRoleConfigurationWithContext(ctx context.Context, request
     return
 }
 
+func NewDeleteSCIMCredentialRequest() (request *DeleteSCIMCredentialRequest) {
+    request = &DeleteSCIMCredentialRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DeleteSCIMCredential")
+    
+    
+    return
+}
+
+func NewDeleteSCIMCredentialResponse() (response *DeleteSCIMCredentialResponse) {
+    response = &DeleteSCIMCredentialResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteSCIMCredential
+// This API is used to delete a SCIM key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
+//  INVALIDPARAMETER_SCIMCREDENTIALNOTFOUND = "InvalidParameter.ScimCredentialNotFound"
+func (c *Client) DeleteSCIMCredential(request *DeleteSCIMCredentialRequest) (response *DeleteSCIMCredentialResponse, err error) {
+    return c.DeleteSCIMCredentialWithContext(context.Background(), request)
+}
+
+// DeleteSCIMCredential
+// This API is used to delete a SCIM key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
+//  INVALIDPARAMETER_SCIMCREDENTIALNOTFOUND = "InvalidParameter.ScimCredentialNotFound"
+func (c *Client) DeleteSCIMCredentialWithContext(ctx context.Context, request *DeleteSCIMCredentialRequest) (response *DeleteSCIMCredentialResponse, err error) {
+    if request == nil {
+        request = NewDeleteSCIMCredentialRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteSCIMCredential require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteSCIMCredentialResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteUserRequest() (request *DeleteUserRequest) {
     request = &DeleteUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1442,6 +2046,7 @@ func NewDeleteUserResponse() (response *DeleteUserResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALUSERNOTDELETE = "FailedOperation.ManualUserNotDelete"
 //  FAILEDOPERATION_ROLECONFIGURATIONAUTHORIZATIONEXIST = "FailedOperation.RoleConfigurationAuthorizationExist"
 //  FAILEDOPERATION_SYNCHRONIZEDUSERNOTDELETE = "FailedOperation.SynchronizedUserNotDelete"
 //  FAILEDOPERATION_USERPROVISIONINGEXISTS = "FailedOperation.UserProvisioningExists"
@@ -1457,6 +2062,7 @@ func (c *Client) DeleteUser(request *DeleteUserRequest) (response *DeleteUserRes
 //
 // error code that may be returned:
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALUSERNOTDELETE = "FailedOperation.ManualUserNotDelete"
 //  FAILEDOPERATION_ROLECONFIGURATIONAUTHORIZATIONEXIST = "FailedOperation.RoleConfigurationAuthorizationExist"
 //  FAILEDOPERATION_SYNCHRONIZEDUSERNOTDELETE = "FailedOperation.SynchronizedUserNotDelete"
 //  FAILEDOPERATION_USERPROVISIONINGEXISTS = "FailedOperation.UserProvisioningExists"
@@ -1554,7 +2160,7 @@ func NewDescribeIdentityCenterResponse() (response *DescribeIdentityCenterRespon
 }
 
 // DescribeIdentityCenter
-// This API is used to obtain the CAM Identity Center service information.
+// This API is used to obtain TCO Identity Center service information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
@@ -1564,7 +2170,7 @@ func (c *Client) DescribeIdentityCenter(request *DescribeIdentityCenterRequest) 
 }
 
 // DescribeIdentityCenter
-// This API is used to obtain the CAM Identity Center service information.
+// This API is used to obtain TCO Identity Center service information.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
@@ -2182,6 +2788,59 @@ func (c *Client) GetRoleConfigurationWithContext(ctx context.Context, request *G
     request.SetContext(ctx)
     
     response = NewGetRoleConfigurationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetSCIMSynchronizationStatusRequest() (request *GetSCIMSynchronizationStatusRequest) {
+    request = &GetSCIMSynchronizationStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "GetSCIMSynchronizationStatus")
+    
+    
+    return
+}
+
+func NewGetSCIMSynchronizationStatusResponse() (response *GetSCIMSynchronizationStatusResponse) {
+    response = &GetSCIMSynchronizationStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetSCIMSynchronizationStatus
+// This API is used to query SCIM synchronization status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
+func (c *Client) GetSCIMSynchronizationStatus(request *GetSCIMSynchronizationStatusRequest) (response *GetSCIMSynchronizationStatusResponse, err error) {
+    return c.GetSCIMSynchronizationStatusWithContext(context.Background(), request)
+}
+
+// GetSCIMSynchronizationStatus
+// This API is used to query SCIM synchronization status.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
+func (c *Client) GetSCIMSynchronizationStatusWithContext(ctx context.Context, request *GetSCIMSynchronizationStatusRequest) (response *GetSCIMSynchronizationStatusResponse, err error) {
+    if request == nil {
+        request = NewGetSCIMSynchronizationStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetSCIMSynchronizationStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetSCIMSynchronizationStatusResponse()
     err = c.Send(request, response)
     return
 }
@@ -3191,6 +3850,59 @@ func (c *Client) ListRoleConfigurationsWithContext(ctx context.Context, request 
     return
 }
 
+func NewListSCIMCredentialsRequest() (request *ListSCIMCredentialsRequest) {
+    request = &ListSCIMCredentialsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "ListSCIMCredentials")
+    
+    
+    return
+}
+
+func NewListSCIMCredentialsResponse() (response *ListSCIMCredentialsResponse) {
+    response = &ListSCIMCredentialsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListSCIMCredentials
+// This API is used to query the user SCIM key list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
+func (c *Client) ListSCIMCredentials(request *ListSCIMCredentialsRequest) (response *ListSCIMCredentialsResponse, err error) {
+    return c.ListSCIMCredentialsWithContext(context.Background(), request)
+}
+
+// ListSCIMCredentials
+// This API is used to query the user SCIM key list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
+func (c *Client) ListSCIMCredentialsWithContext(ctx context.Context, request *ListSCIMCredentialsRequest) (response *ListSCIMCredentialsResponse, err error) {
+    if request == nil {
+        request = NewListSCIMCredentialsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListSCIMCredentials require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListSCIMCredentialsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListTasksRequest() (request *ListTasksRequest) {
     request = &ListTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3431,7 +4143,7 @@ func NewOpenIdentityCenterResponse() (response *OpenIdentityCenterResponse) {
 }
 
 // OpenIdentityCenter
-// This API is used to activate the CIC service.
+// This API is used to activate Identity Center service (CIC).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
@@ -3447,7 +4159,7 @@ func (c *Client) OpenIdentityCenter(request *OpenIdentityCenterRequest) (respons
 }
 
 // OpenIdentityCenter
-// This API is used to activate the CIC service.
+// This API is used to activate Identity Center service (CIC).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
@@ -3531,6 +4243,87 @@ func (c *Client) ProvisionRoleConfigurationWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewProvisionRoleConfigurationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewQuitOrganizationRequest() (request *QuitOrganizationRequest) {
+    request = &QuitOrganizationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "QuitOrganization")
+    
+    
+    return
+}
+
+func NewQuitOrganizationResponse() (response *QuitOrganizationResponse) {
+    response = &QuitOrganizationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QuitOrganization
+// This API is used to exit an organization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DISABLEQUITSELFCREATEDORGANIZATION = "FailedOperation.DisableQuitSelfCreatedOrganization"
+//  FAILEDOPERATION_MEMBEREXISTDELEGATEPAYERNOTALLOWDELETE = "FailedOperation.MemberExistDelegatePayerNotAllowDelete"
+//  FAILEDOPERATION_MEMBERISDELEGATEPAYERNOTALLOWDELETE = "FailedOperation.MemberIsDelegatePayerNotAllowDelete"
+//  FAILEDOPERATION_MEMBERSHARERESOURCE = "FailedOperation.MemberShareResource"
+//  FAILEDOPERATION_OPERATEBILLINGPERMISSIONERR = "FailedOperation.OperateBillingPermissionErr"
+//  FAILEDOPERATION_ORGANIZATIONAUTHMANAGENOTALLOWDELETE = "FailedOperation.OrganizationAuthManageNotAllowDelete"
+//  FAILEDOPERATION_QUITESHAREUNIT = "FailedOperation.QuiteShareUnit"
+//  FAILEDOPERATION_SHARERESOURCEMEMBERINUSE = "FailedOperation.ShareResourceMemberInUse"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION_CREATEMEMBERNOTALLOWQUIT = "UnsupportedOperation.CreateMemberNotAllowQuit"
+//  UNSUPPORTEDOPERATION_MEMBEREXISTOPERATEPROCESSNOTALLOWDELETE = "UnsupportedOperation.MemberExistOperateProcessNotAllowDelete"
+//  UNSUPPORTEDOPERATION_MEMBEREXISTSERVICENOTALLOWDELETE = "UnsupportedOperation.MemberExistServiceNotAllowDelete"
+//  UNSUPPORTEDOPERATION_MEMBERNOPAYMENT = "UnsupportedOperation.MemberNoPayment"
+//  UNSUPPORTEDOPERATION_MEMBERNOTALLOWQUIT = "UnsupportedOperation.MemberNotAllowQuit"
+func (c *Client) QuitOrganization(request *QuitOrganizationRequest) (response *QuitOrganizationResponse, err error) {
+    return c.QuitOrganizationWithContext(context.Background(), request)
+}
+
+// QuitOrganization
+// This API is used to exit an organization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DISABLEQUITSELFCREATEDORGANIZATION = "FailedOperation.DisableQuitSelfCreatedOrganization"
+//  FAILEDOPERATION_MEMBEREXISTDELEGATEPAYERNOTALLOWDELETE = "FailedOperation.MemberExistDelegatePayerNotAllowDelete"
+//  FAILEDOPERATION_MEMBERISDELEGATEPAYERNOTALLOWDELETE = "FailedOperation.MemberIsDelegatePayerNotAllowDelete"
+//  FAILEDOPERATION_MEMBERSHARERESOURCE = "FailedOperation.MemberShareResource"
+//  FAILEDOPERATION_OPERATEBILLINGPERMISSIONERR = "FailedOperation.OperateBillingPermissionErr"
+//  FAILEDOPERATION_ORGANIZATIONAUTHMANAGENOTALLOWDELETE = "FailedOperation.OrganizationAuthManageNotAllowDelete"
+//  FAILEDOPERATION_QUITESHAREUNIT = "FailedOperation.QuiteShareUnit"
+//  FAILEDOPERATION_SHARERESOURCEMEMBERINUSE = "FailedOperation.ShareResourceMemberInUse"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION_CREATEMEMBERNOTALLOWQUIT = "UnsupportedOperation.CreateMemberNotAllowQuit"
+//  UNSUPPORTEDOPERATION_MEMBEREXISTOPERATEPROCESSNOTALLOWDELETE = "UnsupportedOperation.MemberExistOperateProcessNotAllowDelete"
+//  UNSUPPORTEDOPERATION_MEMBEREXISTSERVICENOTALLOWDELETE = "UnsupportedOperation.MemberExistServiceNotAllowDelete"
+//  UNSUPPORTEDOPERATION_MEMBERNOPAYMENT = "UnsupportedOperation.MemberNoPayment"
+//  UNSUPPORTEDOPERATION_MEMBERNOTALLOWQUIT = "UnsupportedOperation.MemberNotAllowQuit"
+func (c *Client) QuitOrganizationWithContext(ctx context.Context, request *QuitOrganizationRequest) (response *QuitOrganizationResponse, err error) {
+    if request == nil {
+        request = NewQuitOrganizationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QuitOrganization require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQuitOrganizationResponse()
     err = c.Send(request, response)
     return
 }
@@ -3671,7 +4464,9 @@ func NewRemoveUserFromGroupResponse() (response *RemoveUserFromGroupResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALGROUPNOTUPDATE = "FailedOperation.ManualGroupNotUpdate"
 //  FAILEDOPERATION_SYNCHRONIZEDGROUPNOTREMOVEUSER = "FailedOperation.SynchronizedGroupNotRemoveUser"
+//  FAILEDOPERATION_SYNCHRONIZEDGROUPNOTUPDATE = "FailedOperation.SynchronizedGroupNotUpdate"
 //  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
 //  INVALIDPARAMETER_GROUPNOTEXIST = "InvalidParameter.GroupNotExist"
 //  INVALIDPARAMETER_GROUPUSERNOTEXIST = "InvalidParameter.GroupUserNotExist"
@@ -3685,7 +4480,9 @@ func (c *Client) RemoveUserFromGroup(request *RemoveUserFromGroupRequest) (respo
 //
 // error code that may be returned:
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALGROUPNOTUPDATE = "FailedOperation.ManualGroupNotUpdate"
 //  FAILEDOPERATION_SYNCHRONIZEDGROUPNOTREMOVEUSER = "FailedOperation.SynchronizedGroupNotRemoveUser"
+//  FAILEDOPERATION_SYNCHRONIZEDGROUPNOTUPDATE = "FailedOperation.SynchronizedGroupNotUpdate"
 //  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
 //  INVALIDPARAMETER_GROUPNOTEXIST = "InvalidParameter.GroupNotExist"
 //  INVALIDPARAMETER_GROUPUSERNOTEXIST = "InvalidParameter.GroupUserNotExist"
@@ -3773,6 +4570,67 @@ func (c *Client) SetExternalSAMLIdentityProviderWithContext(ctx context.Context,
     return
 }
 
+func NewUpdateCustomPolicyForRoleConfigurationRequest() (request *UpdateCustomPolicyForRoleConfigurationRequest) {
+    request = &UpdateCustomPolicyForRoleConfigurationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "UpdateCustomPolicyForRoleConfiguration")
+    
+    
+    return
+}
+
+func NewUpdateCustomPolicyForRoleConfigurationResponse() (response *UpdateCustomPolicyForRoleConfigurationResponse) {
+    response = &UpdateCustomPolicyForRoleConfigurationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateCustomPolicyForRoleConfiguration
+// This API is used to modify a custom policy for permission configurations.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
+//  INVALIDPARAMETER_POLICYDOCUMENTEMPTY = "InvalidParameter.PolicyDocumentEmpty"
+//  INVALIDPARAMETER_POLICYTYPEERROR = "InvalidParameter.PolicyTypeError"
+//  INVALIDPARAMETER_ROLECONFIGURATIONNOTEXIST = "InvalidParameter.RoleConfigurationNotExist"
+//  INVALIDPARAMETER_ROLEPOLICYNOTEXIST = "InvalidParameter.RolePolicyNotExist"
+func (c *Client) UpdateCustomPolicyForRoleConfiguration(request *UpdateCustomPolicyForRoleConfigurationRequest) (response *UpdateCustomPolicyForRoleConfigurationResponse, err error) {
+    return c.UpdateCustomPolicyForRoleConfigurationWithContext(context.Background(), request)
+}
+
+// UpdateCustomPolicyForRoleConfiguration
+// This API is used to modify a custom policy for permission configurations.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
+//  INVALIDPARAMETER_POLICYDOCUMENTEMPTY = "InvalidParameter.PolicyDocumentEmpty"
+//  INVALIDPARAMETER_POLICYTYPEERROR = "InvalidParameter.PolicyTypeError"
+//  INVALIDPARAMETER_ROLECONFIGURATIONNOTEXIST = "InvalidParameter.RoleConfigurationNotExist"
+//  INVALIDPARAMETER_ROLEPOLICYNOTEXIST = "InvalidParameter.RolePolicyNotExist"
+func (c *Client) UpdateCustomPolicyForRoleConfigurationWithContext(ctx context.Context, request *UpdateCustomPolicyForRoleConfigurationRequest) (response *UpdateCustomPolicyForRoleConfigurationResponse, err error) {
+    if request == nil {
+        request = NewUpdateCustomPolicyForRoleConfigurationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateCustomPolicyForRoleConfiguration require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateCustomPolicyForRoleConfigurationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateGroupRequest() (request *UpdateGroupRequest) {
     request = &UpdateGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3797,6 +4655,7 @@ func NewUpdateGroupResponse() (response *UpdateGroupResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALGROUPNOTUPDATE = "FailedOperation.ManualGroupNotUpdate"
 //  FAILEDOPERATION_SYNCHRONIZEDGROUPNOTUPDATE = "FailedOperation.SynchronizedGroupNotUpdate"
 //  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
 //  INVALIDPARAMETER_GROUPNAMEALREADYEXISTS = "InvalidParameter.GroupNameAlreadyExists"
@@ -3810,6 +4669,7 @@ func (c *Client) UpdateGroup(request *UpdateGroupRequest) (response *UpdateGroup
 //
 // error code that may be returned:
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALGROUPNOTUPDATE = "FailedOperation.ManualGroupNotUpdate"
 //  FAILEDOPERATION_SYNCHRONIZEDGROUPNOTUPDATE = "FailedOperation.SynchronizedGroupNotUpdate"
 //  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
 //  INVALIDPARAMETER_GROUPNAMEALREADYEXISTS = "InvalidParameter.GroupNameAlreadyExists"
@@ -3826,6 +4686,174 @@ func (c *Client) UpdateGroupWithContext(ctx context.Context, request *UpdateGrou
     request.SetContext(ctx)
     
     response = NewUpdateGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateOrganizationIdentityRequest() (request *UpdateOrganizationIdentityRequest) {
+    request = &UpdateOrganizationIdentityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "UpdateOrganizationIdentity")
+    
+    
+    return
+}
+
+func NewUpdateOrganizationIdentityResponse() (response *UpdateOrganizationIdentityResponse) {
+    response = &UpdateOrganizationIdentityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateOrganizationIdentity
+// This API is used to update an organization identity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETPOLICYDETAIL = "FailedOperation.GetPolicyDetail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+func (c *Client) UpdateOrganizationIdentity(request *UpdateOrganizationIdentityRequest) (response *UpdateOrganizationIdentityResponse, err error) {
+    return c.UpdateOrganizationIdentityWithContext(context.Background(), request)
+}
+
+// UpdateOrganizationIdentity
+// This API is used to update an organization identity.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GETPOLICYDETAIL = "FailedOperation.GetPolicyDetail"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONIDENTITYNOTEXIST = "ResourceNotFound.OrganizationIdentityNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_POLICYNOTEXIST = "ResourceNotFound.PolicyNotExist"
+func (c *Client) UpdateOrganizationIdentityWithContext(ctx context.Context, request *UpdateOrganizationIdentityRequest) (response *UpdateOrganizationIdentityResponse, err error) {
+    if request == nil {
+        request = NewUpdateOrganizationIdentityRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateOrganizationIdentity require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateOrganizationIdentityResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateOrganizationMemberRequest() (request *UpdateOrganizationMemberRequest) {
+    request = &UpdateOrganizationMemberRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "UpdateOrganizationMember")
+    
+    
+    return
+}
+
+func NewUpdateOrganizationMemberResponse() (response *UpdateOrganizationMemberResponse) {
+    response = &UpdateOrganizationMemberResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateOrganizationMember
+// This API is used to update organization member information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHINFOEMPTY = "FailedOperation.AuthInfoEmpty"
+//  FAILEDOPERATION_AUTHINFONOTSAME = "FailedOperation.AuthInfoNotSame"
+//  FAILEDOPERATION_AUTHNOTENTERPRISE = "FailedOperation.AuthNotEnterprise"
+//  FAILEDOPERATION_CHANGEPERMISSIONRECORDEXIST = "FailedOperation.ChangePermissionRecordExist"
+//  FAILEDOPERATION_CREATEBILLINGPERMISSIONERR = "FailedOperation.CreateBillingPermissionErr"
+//  FAILEDOPERATION_MEMBERNAMEUSED = "FailedOperation.MemberNameUsed"
+//  FAILEDOPERATION_OPERATEBILLINGPERMISSIONERR = "FailedOperation.OperateBillingPermissionErr"
+//  FAILEDOPERATION_ORGANIZATIONMEMBERNAMEUSED = "FailedOperation.OrganizationMemberNameUsed"
+//  FAILEDOPERATION_ORGANIZATIONPERMISSIONILLEGAL = "FailedOperation.OrganizationPermissionIllegal"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYILLEGAL = "FailedOperation.OrganizationPolicyIllegal"
+//  FAILEDOPERATION_PAYUINILLEGAL = "FailedOperation.PayUinIllegal"
+//  INVALIDPARAMETER_ALLOWQUITILLEGAL = "InvalidParameter.AllowQuitIllegal"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_ADDDELEGATEPAYERNOTALLOW = "UnsupportedOperation.AddDelegatePayerNotAllow"
+//  UNSUPPORTEDOPERATION_ADDDISCOUNTINHERITNOTALLOW = "UnsupportedOperation.AddDiscountInheritNotAllow"
+//  UNSUPPORTEDOPERATION_DELETEDELEGATEPAYERNOTALLOW = "UnsupportedOperation.DeleteDelegatePayerNotAllow"
+//  UNSUPPORTEDOPERATION_EXISTEDAGENT = "UnsupportedOperation.ExistedAgent"
+//  UNSUPPORTEDOPERATION_EXISTEDCLIENT = "UnsupportedOperation.ExistedClient"
+//  UNSUPPORTEDOPERATION_INCONSISTENTUSERTYPES = "UnsupportedOperation.InconsistentUserTypes"
+//  UNSUPPORTEDOPERATION_MANAGEMENTSYSTEMERROR = "UnsupportedOperation.ManagementSystemError"
+//  UNSUPPORTEDOPERATION_MEMBERACCOUNTARREARS = "UnsupportedOperation.MemberAccountArrears"
+//  UNSUPPORTEDOPERATION_MEMBERDISCOUNTINHERITEXISTED = "UnsupportedOperation.MemberDiscountInheritExisted"
+//  UNSUPPORTEDOPERATION_MEMBEREXISTACCOUNTLEVELDISCOUNTINHERIT = "UnsupportedOperation.MemberExistAccountLevelDiscountInherit"
+//  UNSUPPORTEDOPERATION_MEMBERISAGENT = "UnsupportedOperation.MemberIsAgent"
+//  UNSUPPORTEDOPERATION_MEMBERNOTALLOWQUIT = "UnsupportedOperation.MemberNotAllowQuit"
+//  UNSUPPORTEDOPERATION_ORDERINPROGRESSEXISTED = "UnsupportedOperation.OrderInProgressExisted"
+//  UNSUPPORTEDOPERATION_OWNERDISCOUNTINHERITEXISTED = "UnsupportedOperation.OwnerDiscountInheritExisted"
+//  UNSUPPORTEDOPERATION_PAYERARREARSANDNOCREDITACCOUNT = "UnsupportedOperation.PayerArrearsAndNoCreditAccount"
+//  UNSUPPORTEDOPERATION_PAYEREXISTACCOUNTLEVELDISCOUNTINHERIT = "UnsupportedOperation.PayerExistAccountLevelDiscountInherit"
+func (c *Client) UpdateOrganizationMember(request *UpdateOrganizationMemberRequest) (response *UpdateOrganizationMemberResponse, err error) {
+    return c.UpdateOrganizationMemberWithContext(context.Background(), request)
+}
+
+// UpdateOrganizationMember
+// This API is used to update organization member information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHINFOEMPTY = "FailedOperation.AuthInfoEmpty"
+//  FAILEDOPERATION_AUTHINFONOTSAME = "FailedOperation.AuthInfoNotSame"
+//  FAILEDOPERATION_AUTHNOTENTERPRISE = "FailedOperation.AuthNotEnterprise"
+//  FAILEDOPERATION_CHANGEPERMISSIONRECORDEXIST = "FailedOperation.ChangePermissionRecordExist"
+//  FAILEDOPERATION_CREATEBILLINGPERMISSIONERR = "FailedOperation.CreateBillingPermissionErr"
+//  FAILEDOPERATION_MEMBERNAMEUSED = "FailedOperation.MemberNameUsed"
+//  FAILEDOPERATION_OPERATEBILLINGPERMISSIONERR = "FailedOperation.OperateBillingPermissionErr"
+//  FAILEDOPERATION_ORGANIZATIONMEMBERNAMEUSED = "FailedOperation.OrganizationMemberNameUsed"
+//  FAILEDOPERATION_ORGANIZATIONPERMISSIONILLEGAL = "FailedOperation.OrganizationPermissionIllegal"
+//  FAILEDOPERATION_ORGANIZATIONPOLICYILLEGAL = "FailedOperation.OrganizationPolicyIllegal"
+//  FAILEDOPERATION_PAYUINILLEGAL = "FailedOperation.PayUinIllegal"
+//  INVALIDPARAMETER_ALLOWQUITILLEGAL = "InvalidParameter.AllowQuitIllegal"
+//  RESOURCENOTFOUND_MEMBERNOTEXIST = "ResourceNotFound.MemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_ADDDELEGATEPAYERNOTALLOW = "UnsupportedOperation.AddDelegatePayerNotAllow"
+//  UNSUPPORTEDOPERATION_ADDDISCOUNTINHERITNOTALLOW = "UnsupportedOperation.AddDiscountInheritNotAllow"
+//  UNSUPPORTEDOPERATION_DELETEDELEGATEPAYERNOTALLOW = "UnsupportedOperation.DeleteDelegatePayerNotAllow"
+//  UNSUPPORTEDOPERATION_EXISTEDAGENT = "UnsupportedOperation.ExistedAgent"
+//  UNSUPPORTEDOPERATION_EXISTEDCLIENT = "UnsupportedOperation.ExistedClient"
+//  UNSUPPORTEDOPERATION_INCONSISTENTUSERTYPES = "UnsupportedOperation.InconsistentUserTypes"
+//  UNSUPPORTEDOPERATION_MANAGEMENTSYSTEMERROR = "UnsupportedOperation.ManagementSystemError"
+//  UNSUPPORTEDOPERATION_MEMBERACCOUNTARREARS = "UnsupportedOperation.MemberAccountArrears"
+//  UNSUPPORTEDOPERATION_MEMBERDISCOUNTINHERITEXISTED = "UnsupportedOperation.MemberDiscountInheritExisted"
+//  UNSUPPORTEDOPERATION_MEMBEREXISTACCOUNTLEVELDISCOUNTINHERIT = "UnsupportedOperation.MemberExistAccountLevelDiscountInherit"
+//  UNSUPPORTEDOPERATION_MEMBERISAGENT = "UnsupportedOperation.MemberIsAgent"
+//  UNSUPPORTEDOPERATION_MEMBERNOTALLOWQUIT = "UnsupportedOperation.MemberNotAllowQuit"
+//  UNSUPPORTEDOPERATION_ORDERINPROGRESSEXISTED = "UnsupportedOperation.OrderInProgressExisted"
+//  UNSUPPORTEDOPERATION_OWNERDISCOUNTINHERITEXISTED = "UnsupportedOperation.OwnerDiscountInheritExisted"
+//  UNSUPPORTEDOPERATION_PAYERARREARSANDNOCREDITACCOUNT = "UnsupportedOperation.PayerArrearsAndNoCreditAccount"
+//  UNSUPPORTEDOPERATION_PAYEREXISTACCOUNTLEVELDISCOUNTINHERIT = "UnsupportedOperation.PayerExistAccountLevelDiscountInherit"
+func (c *Client) UpdateOrganizationMemberWithContext(ctx context.Context, request *UpdateOrganizationMemberRequest) (response *UpdateOrganizationMemberResponse, err error) {
+    if request == nil {
+        request = NewUpdateOrganizationMemberRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateOrganizationMember require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateOrganizationMemberResponse()
     err = c.Send(request, response)
     return
 }
@@ -3938,6 +4966,118 @@ func (c *Client) UpdateRoleConfigurationWithContext(ctx context.Context, request
     return
 }
 
+func NewUpdateSCIMCredentialStatusRequest() (request *UpdateSCIMCredentialStatusRequest) {
+    request = &UpdateSCIMCredentialStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "UpdateSCIMCredentialStatus")
+    
+    
+    return
+}
+
+func NewUpdateSCIMCredentialStatusResponse() (response *UpdateSCIMCredentialStatusResponse) {
+    response = &UpdateSCIMCredentialStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateSCIMCredentialStatus
+// This API is used to enable or disable a SCIM key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
+//  INVALIDPARAMETER_SCIMCREDENTIALNOTFOUND = "InvalidParameter.ScimCredentialNotFound"
+//  INVALIDPARAMETER_USERSCIMCREDENTIALSTATUSERROR = "InvalidParameter.UserScimCredentialStatusError"
+func (c *Client) UpdateSCIMCredentialStatus(request *UpdateSCIMCredentialStatusRequest) (response *UpdateSCIMCredentialStatusResponse, err error) {
+    return c.UpdateSCIMCredentialStatusWithContext(context.Background(), request)
+}
+
+// UpdateSCIMCredentialStatus
+// This API is used to enable or disable a SCIM key.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
+//  INVALIDPARAMETER_SCIMCREDENTIALNOTFOUND = "InvalidParameter.ScimCredentialNotFound"
+//  INVALIDPARAMETER_USERSCIMCREDENTIALSTATUSERROR = "InvalidParameter.UserScimCredentialStatusError"
+func (c *Client) UpdateSCIMCredentialStatusWithContext(ctx context.Context, request *UpdateSCIMCredentialStatusRequest) (response *UpdateSCIMCredentialStatusResponse, err error) {
+    if request == nil {
+        request = NewUpdateSCIMCredentialStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateSCIMCredentialStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateSCIMCredentialStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateSCIMSynchronizationStatusRequest() (request *UpdateSCIMSynchronizationStatusRequest) {
+    request = &UpdateSCIMSynchronizationStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "UpdateSCIMSynchronizationStatus")
+    
+    
+    return
+}
+
+func NewUpdateSCIMSynchronizationStatusResponse() (response *UpdateSCIMSynchronizationStatusResponse) {
+    response = &UpdateSCIMSynchronizationStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateSCIMSynchronizationStatus
+// This API is used to enable or disable user SCIM synchronization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
+//  INVALIDPARAMETER_SCIMSYNCSTATUSERROR = "InvalidParameter.ScimSyncStatusError"
+func (c *Client) UpdateSCIMSynchronizationStatus(request *UpdateSCIMSynchronizationStatusRequest) (response *UpdateSCIMSynchronizationStatusResponse, err error) {
+    return c.UpdateSCIMSynchronizationStatusWithContext(context.Background(), request)
+}
+
+// UpdateSCIMSynchronizationStatus
+// This API is used to enable or disable user SCIM synchronization.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DBOPERATIONERROR = "FailedOperation.DBOperationError"
+//  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
+//  INVALIDPARAMETER_SCIMSYNCSTATUSERROR = "InvalidParameter.ScimSyncStatusError"
+func (c *Client) UpdateSCIMSynchronizationStatusWithContext(ctx context.Context, request *UpdateSCIMSynchronizationStatusRequest) (response *UpdateSCIMSynchronizationStatusResponse, err error) {
+    if request == nil {
+        request = NewUpdateSCIMSynchronizationStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateSCIMSynchronizationStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateSCIMSynchronizationStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateUserRequest() (request *UpdateUserRequest) {
     request = &UpdateUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3962,6 +5102,7 @@ func NewUpdateUserResponse() (response *UpdateUserResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALUSERNOTUPDATE = "FailedOperation.ManualUserNotUpdate"
 //  FAILEDOPERATION_SYNCHRONIZEDUSERNOTUPDATE = "FailedOperation.SynchronizedUserNotUpdate"
 //  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
 //  INVALIDPARAMETER_EMAILALREADYEXISTS = "InvalidParameter.EmailAlreadyExists"
@@ -3975,6 +5116,7 @@ func (c *Client) UpdateUser(request *UpdateUserRequest) (response *UpdateUserRes
 //
 // error code that may be returned:
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALUSERNOTUPDATE = "FailedOperation.ManualUserNotUpdate"
 //  FAILEDOPERATION_SYNCHRONIZEDUSERNOTUPDATE = "FailedOperation.SynchronizedUserNotUpdate"
 //  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
 //  INVALIDPARAMETER_EMAILALREADYEXISTS = "InvalidParameter.EmailAlreadyExists"
@@ -4019,6 +5161,8 @@ func NewUpdateUserStatusResponse() (response *UpdateUserStatusResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALUSERNOTUPDATE = "FailedOperation.ManualUserNotUpdate"
+//  FAILEDOPERATION_SYNCHRONIZEDUSERNOTUPDATE = "FailedOperation.SynchronizedUserNotUpdate"
 //  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) UpdateUserStatus(request *UpdateUserStatusRequest) (response *UpdateUserStatusResponse, err error) {
@@ -4030,6 +5174,8 @@ func (c *Client) UpdateUserStatus(request *UpdateUserStatusRequest) (response *U
 //
 // error code that may be returned:
 //  FAILEDOPERATION_IDENTITYCENTERNOTOPEN = "FailedOperation.IdentityCenterNotOpen"
+//  FAILEDOPERATION_MANUALUSERNOTUPDATE = "FailedOperation.ManualUserNotUpdate"
+//  FAILEDOPERATION_SYNCHRONIZEDUSERNOTUPDATE = "FailedOperation.SynchronizedUserNotUpdate"
 //  FAILEDOPERATION_ZONEIDNOTEXIST = "FailedOperation.ZoneIdNotExist"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) UpdateUserStatusWithContext(ctx context.Context, request *UpdateUserStatusRequest) (response *UpdateUserStatusResponse, err error) {

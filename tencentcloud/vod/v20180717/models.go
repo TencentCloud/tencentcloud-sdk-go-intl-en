@@ -6838,6 +6838,9 @@ type CreateVodDomainRequestParams struct {
 	// Domain name to add to VOD. Note: a wildcard domain name is not supported.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
 	// Region to enable acceleration. Valid values:
 	// <li>`Chinese Mainland`</li>
 	// <li>`Outside Chinese Mainland`</li>
@@ -6845,8 +6848,9 @@ type CreateVodDomainRequestParams struct {
 	// If `AccelerateArea` is not specified, VOD will enable acceleration in or outside Chinese mainland based on the regional information a user has configured with Tencent Cloud.
 	AccelerateArea *string `json:"AccelerateArea,omitnil,omitempty" name:"AccelerateArea"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+	// Domain type. Valid values:
+	// <li>`VOD`: Domain name distributed using the VOD product;</li> <li>`EdgeOne`: Domain name distributed using the EdgeOne product.</li>default value: VOD. 
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type CreateVodDomainRequest struct {
@@ -6855,6 +6859,9 @@ type CreateVodDomainRequest struct {
 	// Domain name to add to VOD. Note: a wildcard domain name is not supported.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
 	// Region to enable acceleration. Valid values:
 	// <li>`Chinese Mainland`</li>
 	// <li>`Outside Chinese Mainland`</li>
@@ -6862,8 +6869,9 @@ type CreateVodDomainRequest struct {
 	// If `AccelerateArea` is not specified, VOD will enable acceleration in or outside Chinese mainland based on the regional information a user has configured with Tencent Cloud.
 	AccelerateArea *string `json:"AccelerateArea,omitnil,omitempty" name:"AccelerateArea"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+	// Domain type. Valid values:
+	// <li>`VOD`: Domain name distributed using the VOD product;</li> <li>`EdgeOne`: Domain name distributed using the EdgeOne product.</li>default value: VOD. 
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 func (r *CreateVodDomainRequest) ToJsonString() string {
@@ -6879,8 +6887,9 @@ func (r *CreateVodDomainRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Domain")
-	delete(f, "AccelerateArea")
 	delete(f, "SubAppId")
+	delete(f, "AccelerateArea")
+	delete(f, "Type")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateVodDomainRequest has unknown keys!", "")
 	}
@@ -13081,6 +13090,13 @@ type DomainDetailInfo struct {
 	// The QUIC configuration for the domain.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	QUICConfig *DomainQUICConfig `json:"QUICConfig,omitnil,omitempty" name:"QUICConfig"`
+
+
+	IPFilterPolicy *IPFilterPolicy `json:"IPFilterPolicy,omitnil,omitempty" name:"IPFilterPolicy"`
+
+	// Domain type. Valid values:
+	// <li>`VOD`: Domain name distributed using the VOD product;</li> <li>`EdgeOne`: Domain name distributed using the EdgeOne product.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type DomainHTTPSConfig struct {
@@ -14646,6 +14662,17 @@ type HwPrivateAccess struct {
 
 	// BucketName
 	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
+}
+
+type IPFilterPolicy struct {
+
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+
+	FilterType *string `json:"FilterType,omitnil,omitempty" name:"FilterType"`
+
+
+	IPList []*string `json:"IPList,omitnil,omitempty" name:"IPList"`
 }
 
 type ImageBlur struct {

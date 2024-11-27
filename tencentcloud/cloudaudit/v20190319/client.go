@@ -177,6 +177,7 @@ func NewCreateAuditTrackResponse() (response *CreateAuditTrackResponse) {
 // This API is used to create a tracking set.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CHECKCLSTOPICISEXISTFAILED = "FailedOperation.CheckClsTopicIsExistFailed"
 //  FAILEDOPERATION_CHECKCOSBUCKETISEXISTFAILED = "FailedOperation.CheckCosBucketIsExistFailed"
 //  FAILEDOPERATION_GETCLSTOPICFAILED = "FailedOperation.GetClsTopicFailed"
@@ -188,6 +189,7 @@ func NewCreateAuditTrackResponse() (response *CreateAuditTrackResponse) {
 //  INVALIDPARAMETERVALUE_COSREGIONERROR = "InvalidParameterValue.CosRegionError"
 //  LIMITEXCEEDED_OVERAMOUNT = "LimitExceeded.OverAmount"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_COSNOTEXIST = "ResourceNotFound.CosNotExist"
 func (c *Client) CreateAuditTrack(request *CreateAuditTrackRequest) (response *CreateAuditTrackResponse, err error) {
     return c.CreateAuditTrackWithContext(context.Background(), request)
 }
@@ -196,6 +198,7 @@ func (c *Client) CreateAuditTrack(request *CreateAuditTrackRequest) (response *C
 // This API is used to create a tracking set.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_CHECKCLSTOPICISEXISTFAILED = "FailedOperation.CheckClsTopicIsExistFailed"
 //  FAILEDOPERATION_CHECKCOSBUCKETISEXISTFAILED = "FailedOperation.CheckCosBucketIsExistFailed"
 //  FAILEDOPERATION_GETCLSTOPICFAILED = "FailedOperation.GetClsTopicFailed"
@@ -207,6 +210,7 @@ func (c *Client) CreateAuditTrack(request *CreateAuditTrackRequest) (response *C
 //  INVALIDPARAMETERVALUE_COSREGIONERROR = "InvalidParameterValue.CosRegionError"
 //  LIMITEXCEEDED_OVERAMOUNT = "LimitExceeded.OverAmount"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_COSNOTEXIST = "ResourceNotFound.CosNotExist"
 func (c *Client) CreateAuditTrackWithContext(ctx context.Context, request *CreateAuditTrackRequest) (response *CreateAuditTrackResponse, err error) {
     if request == nil {
         request = NewCreateAuditTrackRequest()

@@ -400,6 +400,14 @@ type AnalysisDimensional struct {
 	ConfigInfo []*AlarmAnalysisConfig `json:"ConfigInfo,omitnil,omitempty" name:"ConfigInfo"`
 }
 
+type AnonymousInfo struct {
+
+	Operations []*string `json:"Operations,omitnil,omitempty" name:"Operations"`
+
+
+	Conditions []*ConditionInfo `json:"Conditions,omitnil,omitempty" name:"Conditions"`
+}
+
 // Predefined struct for user
 type ApplyConfigToMachineGroupRequestParams struct {
 	// Collection configuration ID
@@ -715,6 +723,17 @@ type Column struct {
 type CompressInfo struct {
 	// Compression format. Valid values: `gzip`; `lzop`; `snappy`; `none` (no compression)
 	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
+}
+
+type ConditionInfo struct {
+
+	Attributes *string `json:"Attributes,omitnil,omitempty" name:"Attributes"`
+
+
+	Rule *uint64 `json:"Rule,omitnil,omitempty" name:"Rule"`
+
+
+	ConditionValue *string `json:"ConditionValue,omitnil,omitempty" name:"ConditionValue"`
 }
 
 type ConfigInfo struct {
@@ -9370,6 +9389,11 @@ type Tag struct {
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
+type TopicExtendInfo struct {
+
+	AnonymousAccess *AnonymousInfo `json:"AnonymousAccess,omitnil,omitempty" name:"AnonymousAccess"`
+}
+
 type TopicInfo struct {
 	// Logset ID
 	LogsetId *string `json:"LogsetId,omitnil,omitempty" name:"LogsetId"`
@@ -9433,6 +9457,9 @@ type TopicInfo struct {
 
 	// Free authentication switch. false: disabled; true: enabled.After enabling, anonymous access to the log topic will be supported for specified operations. For details, please refer to Log Topic (https://intl.cloud.tencent.com/document/product/614/41035?from_cn_redirect=1).Note: This field may return null, indicating that no valid values can be obtained.
 	IsWebTracking *bool `json:"IsWebTracking,omitnil,omitempty" name:"IsWebTracking"`
+
+
+	Extends *TopicExtendInfo `json:"Extends,omitnil,omitempty" name:"Extends"`
 }
 
 // Predefined struct for user
