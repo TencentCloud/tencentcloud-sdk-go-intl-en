@@ -530,7 +530,7 @@ const (
 	// You disabled the service.
 	RESOURCENOTFOUND_USERDISABLESERVICE = "ResourceNotFound.UserDisableService"
 
-	// The LVB service has not been activated.
+	// The CSS service has not been activated.
 	RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 
 	// The user does not exist.

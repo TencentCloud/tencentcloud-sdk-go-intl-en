@@ -101,9 +101,15 @@ type AccelerationDomainCertificate struct {
 	// Certificate configuration mode. Values: <li>`disable`: Do not configure the certificate;</li><li>`eofreecert`: Use a free certificate provided by EdgeOne; </li><li>`sslcert`: Configure an SSL certificate.</li>
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
 
-	// List of certificates
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// List of server certificates. The relevant certificates are deployed on the entrance side of the EO.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
 	List []*CertificateInfo `json:"List,omitnil,omitempty" name:"List"`
+
+	// In the edge mutual authentication scenario, this field represents the client's CA certificate, which is deployed inside the EO node and used for EO node authentication of the client certificate.
+	ClientCertInfo *MutualTLS `json:"ClientCertInfo,omitnil,omitempty" name:"ClientCertInfo"`
+
+	// The certificate carried during EO node origin-pull is used when the origin server enables the mutual authentication handshake to validate the client certificate, ensuring that the request originates from a trusted EO node.
+	UpstreamCertInfo *UpstreamCertInfo `json:"UpstreamCertInfo,omitnil,omitempty" name:"UpstreamCertInfo"`
 }
 
 type AclCondition struct {
@@ -6715,7 +6721,7 @@ type DescribeL4ProxyRulesRequestParams struct {
 	// Paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. The upper limit for Filters.Values is 20. All rule information under the current Layer 4 instance will be returned if left empty. The detailed filter criteria are as follows: <li>rule-tag: Filters rules under the Layer 4 proxy instance according to rule tag.</li>
+	// Filter criteria. The upper limit of Filters.Values is 20. If it is not filled in, all rule information under the current layer-4 instance will be returned. The detailed filter criteria are as follows: <li>rule-id: filter as per the rules under the layer-4 proxy instance by Rule ID. Rule ID is in the form: rule-31vv7qig0vjy;</li> <li>rule-tag: filter as per the rules under the layer-4 proxy instance by Rule Tag.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -6734,7 +6740,7 @@ type DescribeL4ProxyRulesRequest struct {
 	// Paginated query limit. Default value: 20. Maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Filter criteria. The upper limit for Filters.Values is 20. All rule information under the current Layer 4 instance will be returned if left empty. The detailed filter criteria are as follows: <li>rule-tag: Filters rules under the Layer 4 proxy instance according to rule tag.</li>
+	// Filter criteria. The upper limit of Filters.Values is 20. If it is not filled in, all rule information under the current layer-4 instance will be returned. The detailed filter criteria are as follows: <li>rule-id: filter as per the rules under the layer-4 proxy instance by Rule ID. Rule ID is in the form: rule-31vv7qig0vjy;</li> <li>rule-tag: filter as per the rules under the layer-4 proxy instance by Rule Tag.</li>
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -11438,7 +11444,7 @@ type ModifyHostsCertificateRequestParams struct {
 	// Deprecated: ApplyType is deprecated.
 	ApplyType *string `json:"ApplyType,omitnil,omitempty" name:"ApplyType"`
 
-	// In the Edge mTLS scenario, this field represents the client's CA certificate, which is deployed at the EO entry side for authenticating the client access to EO nodes. The original configuration applies if this field is not specified.
+	// In the mutual authentication scenario, this field represents the client's CA certificate, which is deployed inside the EO node and used for the client to authenticate the EO node. By default, it is disabled. If it is left blank, it indicates retaining the original configuration.
 	ClientCertInfo *MutualTLS `json:"ClientCertInfo,omitnil,omitempty" name:"ClientCertInfo"`
 }
 
@@ -11466,7 +11472,7 @@ type ModifyHostsCertificateRequest struct {
 	// Default value: `none`.
 	ApplyType *string `json:"ApplyType,omitnil,omitempty" name:"ApplyType"`
 
-	// In the Edge mTLS scenario, this field represents the client's CA certificate, which is deployed at the EO entry side for authenticating the client access to EO nodes. The original configuration applies if this field is not specified.
+	// In the mutual authentication scenario, this field represents the client's CA certificate, which is deployed inside the EO node and used for the client to authenticate the EO node. By default, it is disabled. If it is left blank, it indicates retaining the original configuration.
 	ClientCertInfo *MutualTLS `json:"ClientCertInfo,omitnil,omitempty" name:"ClientCertInfo"`
 }
 
@@ -13193,14 +13199,14 @@ type OriginRecord struct {
 }
 
 type OwnershipVerification struct {
-	// u200cInformation required for authentication using DNS resolution. It's applicable to sites connected via CNAME. See [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5).
-	//  
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// CNAME, when there is no domain name access, the information required for DNS resolution verification is used. For details, refer to [Site/Domain Ownership Verification
+	// ](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5).
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
 	DnsVerification *DnsVerification `json:"DnsVerification,omitnil,omitempty" name:"DnsVerification"`
 
-	// u200cInformation required for verifying via a file. It's applicable to sites connected via CNAMEs. See [Ownership Verification](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5).
-	//  
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// CNAME, when there is no domain name access, the information required for file verification is used. For details, refer to [Site/Domain Ownership Verification
+	// ](https://intl.cloud.tencent.com/document/product/1552/70789?from_cn_redirect=1#7af6ecf8-afca-4e35-8811-b5797ed1bde5).
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
 	FileVerification *FileVerification `json:"FileVerification,omitnil,omitempty" name:"FileVerification"`
 
 	// u200cInformation required for switching DNS servers. It's applicable to sites connected via NSs. For details, see [Modifying DNS Server](https://intl.cloud.tencent.com/document/product/1552/90452?from_cn_redirect=1).
@@ -14423,6 +14429,11 @@ func (r *UpgradePlanResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *UpgradePlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type UpstreamCertInfo struct {
+	// In the origin-pull mutual authentication scenario, this field represents the certificate (including the public and private keys) carried during EO node origin-pull, which is deployed in the EO node for the origin server to authenticate the EO node. When used as an input parameter, it is left blank to indicate retaining the original configuration.
+	UpstreamMutualTLS *MutualTLS `json:"UpstreamMutualTLS,omitnil,omitempty" name:"UpstreamMutualTLS"`
 }
 
 type UpstreamHttp2 struct {

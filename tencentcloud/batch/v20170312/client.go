@@ -154,6 +154,7 @@ func NewCreateComputeEnvResponse() (response *CreateComputeEnvResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCAM = "InternalError.CallCam"
 //  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
 //  INTERNALERROR_CALLTAGAPI = "InternalError.CallTagAPI"
 //  INVALIDPARAMETER_CVMPARAMETERS = "InvalidParameter.CvmParameters"
@@ -186,6 +187,7 @@ func (c *Client) CreateComputeEnv(request *CreateComputeEnvRequest) (response *C
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLCAM = "InternalError.CallCam"
 //  INTERNALERROR_CALLCVM = "InternalError.CallCvm"
 //  INTERNALERROR_CALLTAGAPI = "InternalError.CallTagAPI"
 //  INVALIDPARAMETER_CVMPARAMETERS = "InvalidParameter.CvmParameters"

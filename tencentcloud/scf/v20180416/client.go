@@ -101,6 +101,7 @@ func NewCopyFunctionResponse() (response *CopyFunctionResponse) {
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_REGION = "UnauthorizedOperation.Region"
+//  UNSUPPORTEDOPERATION_COPYFUNCTION = "UnsupportedOperation.CopyFunction"
 //  UNSUPPORTEDOPERATION_REGION = "UnsupportedOperation.Region"
 func (c *Client) CopyFunction(request *CopyFunctionRequest) (response *CopyFunctionResponse, err error) {
     return c.CopyFunctionWithContext(context.Background(), request)
@@ -143,6 +144,7 @@ func (c *Client) CopyFunction(request *CopyFunctionRequest) (response *CopyFunct
 //  RESOURCENOTFOUND_NAMESPACE = "ResourceNotFound.Namespace"
 //  UNAUTHORIZEDOPERATION_CAM = "UnauthorizedOperation.CAM"
 //  UNAUTHORIZEDOPERATION_REGION = "UnauthorizedOperation.Region"
+//  UNSUPPORTEDOPERATION_COPYFUNCTION = "UnsupportedOperation.CopyFunction"
 //  UNSUPPORTEDOPERATION_REGION = "UnsupportedOperation.Region"
 func (c *Client) CopyFunctionWithContext(ctx context.Context, request *CopyFunctionRequest) (response *CopyFunctionResponse, err error) {
     if request == nil {

@@ -225,6 +225,7 @@ func NewCreateOrganizationResponse() (response *CreateOrganizationResponse) {
 // This API is used to create an organization.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ORGANIZATIONEXISTALREADY = "FailedOperation.OrganizationExistAlready"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) CreateOrganization(request *CreateOrganizationRequest) (response *CreateOrganizationResponse, err error) {
@@ -235,6 +236,7 @@ func (c *Client) CreateOrganization(request *CreateOrganizationRequest) (respons
 // This API is used to create an organization.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  FAILEDOPERATION_ORGANIZATIONEXISTALREADY = "FailedOperation.OrganizationExistAlready"
 //  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
 func (c *Client) CreateOrganizationWithContext(ctx context.Context, request *CreateOrganizationRequest) (response *CreateOrganizationResponse, err error) {
@@ -277,6 +279,7 @@ func NewDeleteOrganizationResponse() (response *DeleteOrganizationResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ORGANIZATIONNOTEMPTY = "FailedOperation.OrganizationNotEmpty"
+//  FAILEDOPERATION_SHAREUNITNOTEMPTY = "FailedOperation.ShareUnitNotEmpty"
 //  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) DeleteOrganization(request *DeleteOrganizationRequest) (response *DeleteOrganizationResponse, err error) {
     return c.DeleteOrganizationWithContext(context.Background(), request)
@@ -287,6 +290,7 @@ func (c *Client) DeleteOrganization(request *DeleteOrganizationRequest) (respons
 //
 // error code that may be returned:
 //  FAILEDOPERATION_ORGANIZATIONNOTEMPTY = "FailedOperation.OrganizationNotEmpty"
+//  FAILEDOPERATION_SHAREUNITNOTEMPTY = "FailedOperation.ShareUnitNotEmpty"
 //  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) DeleteOrganizationWithContext(ctx context.Context, request *DeleteOrganizationRequest) (response *DeleteOrganizationResponse, err error) {
     if request == nil {
@@ -380,6 +384,7 @@ func NewDeleteOrganizationMembersResponse() (response *DeleteOrganizationMembers
 // This API is used to delete multiple organization members in a single request.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_QUITSHAREUINTERROR = "FailedOperation.QuitShareUintError"
 //  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) DeleteOrganizationMembers(request *DeleteOrganizationMembersRequest) (response *DeleteOrganizationMembersResponse, err error) {
     return c.DeleteOrganizationMembersWithContext(context.Background(), request)
@@ -389,6 +394,7 @@ func (c *Client) DeleteOrganizationMembers(request *DeleteOrganizationMembersReq
 // This API is used to delete multiple organization members in a single request.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_QUITSHAREUINTERROR = "FailedOperation.QuitShareUintError"
 //  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) DeleteOrganizationMembersWithContext(ctx context.Context, request *DeleteOrganizationMembersRequest) (response *DeleteOrganizationMembersResponse, err error) {
     if request == nil {
@@ -680,6 +686,7 @@ func NewListOrganizationMembersResponse() (response *ListOrganizationMembersResp
 // This API is used to obtain a list of organization members.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) ListOrganizationMembers(request *ListOrganizationMembersRequest) (response *ListOrganizationMembersResponse, err error) {
     return c.ListOrganizationMembersWithContext(context.Background(), request)
@@ -689,6 +696,7 @@ func (c *Client) ListOrganizationMembers(request *ListOrganizationMembersRequest
 // This API is used to obtain a list of organization members.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
 func (c *Client) ListOrganizationMembersWithContext(ctx context.Context, request *ListOrganizationMembersRequest) (response *ListOrganizationMembersResponse, err error) {
     if request == nil {
@@ -934,6 +942,7 @@ func NewSendOrganizationInvitationResponse() (response *SendOrganizationInvitati
 //
 // error code that may be returned:
 //  FAILEDOPERATION_MEMBERNAMEUSED = "FailedOperation.MemberNameUsed"
+//  FAILEDOPERATION_NOTSAMEREGION = "FailedOperation.NotSameRegion"
 //  FAILEDOPERATION_RESENTINVITATION = "FailedOperation.ReSentInvitation"
 //  FAILEDOPERATION_USERINORGANIZATION = "FailedOperation.UserInOrganization"
 //  FAILEDOPERATION_USERNOTREGISTER = "FailedOperation.UserNotRegister"
@@ -949,6 +958,7 @@ func (c *Client) SendOrganizationInvitation(request *SendOrganizationInvitationR
 //
 // error code that may be returned:
 //  FAILEDOPERATION_MEMBERNAMEUSED = "FailedOperation.MemberNameUsed"
+//  FAILEDOPERATION_NOTSAMEREGION = "FailedOperation.NotSameRegion"
 //  FAILEDOPERATION_RESENTINVITATION = "FailedOperation.ReSentInvitation"
 //  FAILEDOPERATION_USERINORGANIZATION = "FailedOperation.UserInOrganization"
 //  FAILEDOPERATION_USERNOTREGISTER = "FailedOperation.UserNotRegister"

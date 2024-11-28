@@ -65,7 +65,7 @@ const (
 	// Authentication failed while creating a custom push task. Check whether the push address is correct.
 	FAILEDOPERATION_CREATELOGTOPICTASKAUTHFAILURE = "FailedOperation.CreateLogTopicTaskAuthFailure"
 
-	// 
+	// The edge client certificate has expired. It is not supported to issue expired certificates for the time being.
 	FAILEDOPERATION_EDGECLIENTCERTIFICATEHASEXPIRED = "FailedOperation.EdgeClientCertificateHasExpired"
 
 	// Another task is being deployed. Please try again later.
@@ -95,7 +95,7 @@ const (
 	// Unknown configuration group type.
 	FAILEDOPERATION_UNKNOWNCONFIGGROUPTYPE = "FailedOperation.UnknownConfigGroupType"
 
-	// 
+	// The client certificate for the origin-pull mutual authentication has expired. It is not supported to issue expired certificates.
 	FAILEDOPERATION_UPSTREAMCLIENTCERTIFICATEHASEXPIRED = "FailedOperation.UpstreamClientCertificateHasExpired"
 
 	// Internal error.
@@ -203,7 +203,7 @@ const (
 	// Duplicate rules.
 	INVALIDPARAMETER_DUPLICATERULE = "InvalidParameter.DuplicateRule"
 
-	// 
+	// Invalid edge client certificate configuration.
 	INVALIDPARAMETER_EDGECLIENTCERTCHECKERROR = "InvalidParameter.EdgeClientCertCheckError"
 
 	// The current conditions do not support the requested operation.
@@ -584,13 +584,13 @@ const (
 	// The LoadBalancer names under the same site should be unique.
 	INVALIDPARAMETER_LOADBALANCERNAMEREPEATED = "InvalidParameter.LoadBalancerNameRepeated"
 
-	// The LoadBalancer is used in a Layer-4 proxy.
+	// The LoadBalancer is referenced by the layer-4 instance and cannot be deleted.
 	INVALIDPARAMETER_LOADBALANCERUSEDINL4PROXY = "InvalidParameter.LoadBalancerUsedInL4Proxy"
 
-	// The LoadBalancer is used in a Layer-7 domain name.
+	// The LoadBalancer is referenced by the layer-7 domain name and cannot be deleted.
 	INVALIDPARAMETER_LOADBALANCERUSEDINL7DOMAIN = "InvalidParameter.LoadBalancerUsedInL7Domain"
 
-	// The LoadBalancer is used in a rule engine.
+	// The LoadBalancer is referenced by the rule engine and cannot be deleted.
 	INVALIDPARAMETER_LOADBALANCERUSEDINRULEENGINE = "InvalidParameter.LoadBalancerUsedInRuleEngine"
 
 	// Modification parameters are missing.
@@ -725,7 +725,7 @@ const (
 	// Invalid file upload link.
 	INVALIDPARAMETER_UPLOADURL = "InvalidParameter.UploadUrl"
 
-	// 
+	// Invalid origin-pull client certificate configuration.
 	INVALIDPARAMETER_UPSTREAMCLIENTCERTCHECKERROR = "InvalidParameter.UpstreamClientCertCheckError"
 
 	// The site is already bound.
@@ -749,10 +749,10 @@ const (
 	// The domain name for this zone has been banned.
 	INVALIDPARAMETERVALUE_ACCESSBLACKLIST = "InvalidParameterValue.AccessBlacklist"
 
-	// 
+	// Alias domain names do not support the configuration of edge mutual authentication for the time being.
 	INVALIDPARAMETERVALUE_ALIASDOMAINNOTSUPPORTEDGEMTLS = "InvalidParameterValue.AliasDomainNotSupportEdgeMTLS"
 
-	// 
+	// Alias domain names do not support the configuration of origin-pull mutual authentication for the time being.
 	INVALIDPARAMETERVALUE_ALIASDOMAINNOTSUPPORTUPSTREAMMTLS = "InvalidParameterValue.AliasDomainNotSupportUpstreamMTLS"
 
 	// 
@@ -761,13 +761,13 @@ const (
 	// 
 	INVALIDPARAMETERVALUE_CERTIFICATEVERIFYCLIENTNEEDCERT = "InvalidParameterValue.CertificateVerifyClientNeedCert"
 
-	// 
+	// Currently, only RSA or ECC algorithm certificates are supported for the origin-pull mutual authentication, and the SCA SM2 algorithm certificates are not supported.
 	INVALIDPARAMETERVALUE_CERTIFICATEVERIFYUPSTREAMCLIENTMUSTRSAORECC = "InvalidParameterValue.CertificateVerifyUpstreamClientMustRSAorECC"
 
-	// 
+	// The certificate type for the origin-pull mutual authentication is incorrect and cannot be configured as a CA certificate.
 	INVALIDPARAMETERVALUE_CERTIFICATEVERIFYUPSTREAMCLIENTMUSTSVR = "InvalidParameterValue.CertificateVerifyUpstreamClientMustSVR"
 
-	// 
+	// Origin-pull mutual authentication configuration requires at least one certificate.
 	INVALIDPARAMETERVALUE_CERTIFICATEVERIFYUPSTREAMCLIENTNEEDCERT = "InvalidParameterValue.CertificateVerifyUpstreamClientNeedCert"
 
 	// 
@@ -779,7 +779,7 @@ const (
 	// DNS records conflict with DNSSEC.
 	INVALIDPARAMETERVALUE_CONFLICTWITHDNSSEC = "InvalidParameterValue.ConflictWithDNSSEC"
 
-	// 
+	// The DNS record conflicts with acceleration domain name record.
 	INVALIDPARAMETERVALUE_CONFLICTWITHDOMAIN = "InvalidParameterValue.ConflictWithDomain"
 
 	// This DNS record conflicts with NS records.
@@ -866,7 +866,7 @@ const (
 	// Configuration item error.
 	INVALIDPARAMETERVALUE_UNRECOGNIZABLEVALUE = "InvalidParameterValue.UnrecognizableValue"
 
-	// 
+	// One client certificate is allowed at most in the origin-pull mutual authentication configuration.
 	INVALIDPARAMETERVALUE_UPSTREAMCLIENTCERTINFOQUOTALIMIT = "InvalidParameterValue.UpstreamClientCertInfoQuotaLimit"
 
 	// The zone name format is incorrect. Please input a correctly formed domain name.
@@ -989,13 +989,13 @@ const (
 	// The EdgeOne service of the site is disabled. Please enable it and try again.
 	OPERATIONDENIED_ERRZONEISALREADYPAUSED = "OperationDenied.ErrZoneIsAlreadyPaused"
 
-	// 
+	// The edge mutual authentication certificates for the domain name to be changed are inconsistent. Please confirm that the domain name certificates are consistent and try again.
 	OPERATIONDENIED_HOSTSCLIENTCERTIFICATEINCONSISTENCY = "OperationDenied.HostsClientCertificateInconsistency"
 
 	// The keyless server of the domain name to be changed is inconsistent. Please confirm that the keyless server is consistent before retrying.
 	OPERATIONDENIED_HOSTSKEYLESSSERVERINCONSISTENCY = "OperationDenied.HostsKeylessServerInconsistency"
 
-	// 
+	// The origin-pull mutual authentication certificates for the domain name to be changed are inconsistent. Please confirm that the domain name certificates are consistent and try again.
 	OPERATIONDENIED_HOSTSUPSTREAMCERTIFICATEINCONSISTENCY = "OperationDenied.HostsUpstreamCertificateInconsistency"
 
 	// The security service must be enabled when you enable the DDoS Protection.
@@ -1067,7 +1067,7 @@ const (
 	// Currently, the keyless certificate feature is available only to users in the allowlist.
 	OPERATIONDENIED_NOTINKEYLESSWHITELIST = "OperationDenied.NotInKeylessWhiteList"
 
-	// 
+	// The current origin-pull mutual authentication feature is only available to allowlist users.
 	OPERATIONDENIED_NOTINUPSTREAMMTLSWHITELIST = "OperationDenied.NotInUpstreamMTLSWhiteList"
 
 	// The current user is not included in the whitelist for version management.
@@ -1127,10 +1127,10 @@ const (
 	// The static IP cannot be enabled for this instance's region.
 	OPERATIONDENIED_STATICIPAREACONFLICT = "OperationDenied.StaticIpAreaConflict"
 
-	// 
+	// Disabling the origin-pull mutual authentication is not supported now. To disable it, please change the edge HTTPS certificate configuration to 'none'.
 	OPERATIONDENIED_UNSUPPORTTOCLOSEUPSTREAMMTLS = "OperationDenied.UnSupportToCloseUpstreamMTLS"
 
-	// 
+	// To enable the origin-pull mutual authentication, please configure the edge HTTPS certificate first.
 	OPERATIONDENIED_USEUPSTREAMMTLSNEEDOPENHTTPS = "OperationDenied.UseUpstreamMTLSNeedOpenHttps"
 
 	// There is a test version in use. Please release the test version to the live environment, or roll back the test version and try again.
