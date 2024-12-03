@@ -446,13 +446,13 @@ type BillDetailComponent struct {
 	// Voucher payment: The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
 
-	// Cash credit: The amount paid from the user’s cash account
+	// Cash credit: The amount paid from the user's cash account
 	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
 
-	// Free credit: The amount paid with the user’s free credit
+	// Free credit: The amount paid with the user's free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
 
-	// Commission credit: The amount paid with the user’s commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+	// Commission credit: The amount paid with the user's commission credit. Note: This field may return null, indicating that no valid values can be obtained.
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
 
 	// Component type code. Note: This field may return null, indicating that no valid values can be obtained.
@@ -490,6 +490,15 @@ type BillDetailComponent struct {
 	// Configuration description: The specification configuration of an instance.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ComponentConfig []*BillDetailComponentConfig `json:"ComponentConfig,omitnil,omitempty" name:"ComponentConfig"`
+
+	// The tax rate.
+	TaxRate *string `json:"TaxRate,omitnil,omitempty" name:"TaxRate"`
+
+	// The tax amount.
+	TaxAmount *string `json:"TaxAmount,omitnil,omitempty" name:"TaxAmount"`
+
+	// The currency used for the settlement of a component.
+	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
 }
 
 type BillDetailComponentConfig struct {
@@ -626,7 +635,7 @@ type BillResourceSummary struct {
 	// Product name: The name of a Tencent Cloud product purchased by the user, such as CVM.
 	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
 
-	// Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM – Standard S1.
+	// Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM Computing C5t.
 	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
 
 	// Billing mode, which can be monthly subscription or pay-as-you-go.
@@ -680,19 +689,19 @@ type BillResourceSummary struct {
 	// Offer type
 	ReduceType *string `json:"ReduceType,omitnil,omitempty" name:"ReduceType"`
 
-	// Total amount after discount
+	// Total amount after discount (Including Tax):  = Total Amount After Discount (Excluding Tax) + TaxAmount
 	RealTotalCost *string `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
 
 	// Voucher payment: The voucher deduction amount
 	VoucherPayAmount *string `json:"VoucherPayAmount,omitnil,omitempty" name:"VoucherPayAmount"`
 
-	// Cash credit: The amount paid from the user’s cash account
+	// Cash credit: The amount paid from the user's cash account
 	CashPayAmount *string `json:"CashPayAmount,omitnil,omitempty" name:"CashPayAmount"`
 
-	// Free credit: The amount paid with the user’s free credit
+	// Free credit: The amount paid with the user's free credit
 	IncentivePayAmount *string `json:"IncentivePayAmount,omitnil,omitempty" name:"IncentivePayAmount"`
 
-	// Commission credit: The amount paid with the user’s commission credit. Note: This field may return null, indicating that no valid values can be obtained.
+	// Commission credit: The amount paid with the user's commission credit. Note: This field may return null, indicating that no valid values can be obtained.
 	TransferPayAmount *string `json:"TransferPayAmount,omitnil,omitempty" name:"TransferPayAmount"`
 
 	// Extended field 3: Extended attribute information of a product, which is displayed on the resource bill only.
@@ -1821,27 +1830,21 @@ type DescribeBillDetailRequestParams struct {
 	// Queries information on a specified resource
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
-	// Action type to query. Valid values:
-	// Purchase
-	// Renewal
-	// Modify
-	// Refund
-	// Deduction
 	// Hourly settlement
 	// Daily settlement
 	// Monthly settlement
-	// Offline project deduction
-	// Offline deduction
-	// adjust-CR
-	// adjust-DR
-	// One-off RI Fee
 	// Spot
-	// Hourly RI fee
 	// New monthly subscription
 	// Monthly subscription renewal
 	// Monthly subscription specification adjustment
-	// Monthly subscription specification adjustment
 	// Monthly subscription refund
+	// Adjustment - deduction
+	// Adjustment - refund
+	// Hourly RI fee
+	// One-off RI Fee
+	// Hourly Savings Plan fee
+	// Offline project deduction
+	// Offline product deduction
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
 	// Project ID: ID of the project to which the resource belongs
@@ -1904,27 +1907,21 @@ type DescribeBillDetailRequest struct {
 	// Queries information on a specified resource
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
-	// Action type to query. Valid values:
-	// Purchase
-	// Renewal
-	// Modify
-	// Refund
-	// Deduction
 	// Hourly settlement
 	// Daily settlement
 	// Monthly settlement
-	// Offline project deduction
-	// Offline deduction
-	// adjust-CR
-	// adjust-DR
-	// One-off RI Fee
 	// Spot
-	// Hourly RI fee
 	// New monthly subscription
 	// Monthly subscription renewal
 	// Monthly subscription specification adjustment
-	// Monthly subscription specification adjustment
 	// Monthly subscription refund
+	// Adjustment - deduction
+	// Adjustment - refund
+	// Hourly RI fee
+	// One-off RI Fee
+	// Hourly Savings Plan fee
+	// Offline project deduction
+	// Offline product deduction
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
 	// Project ID: ID of the project to which the resource belongs
@@ -2298,39 +2295,36 @@ type DescribeBillResourceSummaryRequestParams struct {
 	// Bill month in the format of "yyyy-mm". This value must be no earlier than March 2019, when Bill 2.0 was launched.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// The period type. byUsedTime: By usage period; byPayTime: by payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
+	// The period type. byUsedTime
+	//
+	// Deprecated: PeriodType is deprecated.
 	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
 
 	// Indicates whether or not the total number of records of accessing the list is required, used for frontend pages.
 	// 1 = yes, 0 = no
 	NeedRecordNum *int64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
 
-	// Action type to query. Valid values:
-	// Purchase
-	// Renewal
-	// Modify
-	// Refund
-	// Deduction
 	// Hourly settlement
 	// Daily settlement
 	// Monthly settlement
-	// Offline project deduction
-	// Offline deduction
-	// adjust-CR
-	// adjust-DR
-	// One-off RI Fee
 	// Spot
-	// Hourly RI fee
 	// New monthly subscription
 	// Monthly subscription renewal
 	// Monthly subscription specification adjustment
 	// Monthly subscription refund
+	// Adjustment - deduction
+	// Adjustment - refund
+	// Hourly RI fee
+	// One-off RI Fee
+	// Hourly Savings Plan fee
+	// Offline project deduction
+	// Offline product deduction
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
 	// ID of the instance to be queried
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
-	// Billing mode. Valid values: `prePay` (prepaid), `postPay` (postpaid)
+	// Billing mode: prePay/postPay
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// Product code
@@ -2360,39 +2354,34 @@ type DescribeBillResourceSummaryRequest struct {
 	// Bill month in the format of "yyyy-mm". This value must be no earlier than March 2019, when Bill 2.0 was launched.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
-	// The period type. byUsedTime: By usage period; byPayTime: by payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page.
+	// The period type. byUsedTime
 	PeriodType *string `json:"PeriodType,omitnil,omitempty" name:"PeriodType"`
 
 	// Indicates whether or not the total number of records of accessing the list is required, used for frontend pages.
 	// 1 = yes, 0 = no
 	NeedRecordNum *int64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
 
-	// Action type to query. Valid values:
-	// Purchase
-	// Renewal
-	// Modify
-	// Refund
-	// Deduction
 	// Hourly settlement
 	// Daily settlement
 	// Monthly settlement
-	// Offline project deduction
-	// Offline deduction
-	// adjust-CR
-	// adjust-DR
-	// One-off RI Fee
 	// Spot
-	// Hourly RI fee
 	// New monthly subscription
 	// Monthly subscription renewal
 	// Monthly subscription specification adjustment
 	// Monthly subscription refund
+	// Adjustment - deduction
+	// Adjustment - refund
+	// Hourly RI fee
+	// One-off RI Fee
+	// Hourly Savings Plan fee
+	// Offline project deduction
+	// Offline product deduction
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
 
 	// ID of the instance to be queried
 	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
 
-	// Billing mode. Valid values: `prePay` (prepaid), `postPay` (postpaid)
+	// Billing mode: prePay/postPay
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 
 	// Product code

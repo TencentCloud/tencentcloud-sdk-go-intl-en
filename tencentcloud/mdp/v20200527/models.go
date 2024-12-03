@@ -818,6 +818,20 @@ func (r *CreateStreamPackageSourceResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DashManifestInfo struct {
+	// The total duration of each manifest in seconds. [30, 3600], type: integer, default value 60.
+	Windows *int64 `json:"Windows,omitnil,omitempty" name:"Windows"`
+
+	// The minimum cache time (in seconds) that the player keeps in the buffer. [2, 60], type: integer, default value 30.
+	MinBufferTime *int64 `json:"MinBufferTime,omitnil,omitempty" name:"MinBufferTime"`
+
+	// The minimum time (in seconds) that the player should wait before requesting an update to the manifest. [2, 60], type: integer, default value 2.
+	MinUpdatePeriod *int64 `json:"MinUpdatePeriod,omitnil,omitempty" name:"MinUpdatePeriod"`
+
+	// The time from the latest live broadcast time point when the player starts broadcasting is a rollback amount (in seconds). [2, 60], type: integer, default value 10.
+	SuggestedPresentationDelay *int64 `json:"SuggestedPresentationDelay,omitnil,omitempty" name:"SuggestedPresentationDelay"`
+}
+
 // Predefined struct for user
 type DeleteStreamPackageChannelEndpointsRequestParams struct {
 	// Channel ID
@@ -3371,11 +3385,14 @@ type OutputInfo struct {
 	// The file name output by the channel program after scheduling.
 	ManifestName *string `json:"ManifestName,omitnil,omitempty" name:"ManifestName"`
 
-	// Advertisement configuration.
+	// The manifest info, used when Type is HLS.
 	ManifestConf *ManifestInfo `json:"ManifestConf,omitnil,omitempty" name:"ManifestConf"`
 
 	// Playback address.
 	PlaybackURL *string `json:"PlaybackURL,omitnil,omitempty" name:"PlaybackURL"`
+
+	// The manifest info, used when Type is DASH.
+	DashManifestConf *DashManifestInfo `json:"DashManifestConf,omitnil,omitempty" name:"DashManifestConf"`
 }
 
 type OutputReq struct {
@@ -3388,8 +3405,11 @@ type OutputReq struct {
 	// The file name output by the channel program after scheduling.
 	ManifestName *string `json:"ManifestName,omitnil,omitempty" name:"ManifestName"`
 
-	// Advertisement configuration.
+	// The manifest info, used when Type is HLS.
 	ManifestConf *ManifestInfo `json:"ManifestConf,omitnil,omitempty" name:"ManifestConf"`
+
+	// The manifest info, used when Type is DASH.
+	DashManifestConf *DashManifestInfo `json:"DashManifestConf,omitnil,omitempty" name:"DashManifestConf"`
 }
 
 type PlaybackInfo struct {
