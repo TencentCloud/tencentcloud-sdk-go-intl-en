@@ -4741,11 +4741,11 @@ func NewUpgradeLifecycleHookResponse() (response *UpgradeLifecycleHookResponse) 
 }
 
 // UpgradeLifecycleHook
-// This API (UpgradeLifecycleHook) is used to upgrade a lifecycle hook.
+// This API is used to upgrade the lifecycle hook.
 //
 // 
 //
-// * This API is used to upgrade a lifecycle hook in a "completely overriding" manner, i.e., it uniformly sets a new configuration according to the API parameters regardless of the original parameters. If optional fields are left empty, their default values will be used.
+// * This API is used to upgrade the lifecycle hook, adopting a "comprehensive overwrite" style. Regardless of how the previous parameters were set, it uniformly uses the new configurations for API parameters. For optional fields, if they are not filled in, default values will be used.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -4769,11 +4769,11 @@ func (c *Client) UpgradeLifecycleHook(request *UpgradeLifecycleHookRequest) (res
 }
 
 // UpgradeLifecycleHook
-// This API (UpgradeLifecycleHook) is used to upgrade a lifecycle hook.
+// This API is used to upgrade the lifecycle hook.
 //
 // 
 //
-// * This API is used to upgrade a lifecycle hook in a "completely overriding" manner, i.e., it uniformly sets a new configuration according to the API parameters regardless of the original parameters. If optional fields are left empty, their default values will be used.
+// * This API is used to upgrade the lifecycle hook, adopting a "comprehensive overwrite" style. Regardless of how the previous parameters were set, it uniformly uses the new configurations for API parameters. For optional fields, if they are not filled in, default values will be used.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

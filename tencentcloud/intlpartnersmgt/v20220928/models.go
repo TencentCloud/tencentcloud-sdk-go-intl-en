@@ -2509,6 +2509,7 @@ type SendVerifyCodeRequestParams struct {
 	CountryCode *string `json:"CountryCode,omitnil,omitempty" name:"CountryCode"`
 
 	// Mobile number.
+	// The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed.No need to add CountryCode before mobile number.
 	PhoneNum *string `json:"PhoneNum,omitnil,omitempty" name:"PhoneNum"`
 }
 
@@ -2520,6 +2521,7 @@ type SendVerifyCodeRequest struct {
 	CountryCode *string `json:"CountryCode,omitnil,omitempty" name:"CountryCode"`
 
 	// Mobile number.
+	// The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed.No need to add CountryCode before mobile number.
 	PhoneNum *string `json:"PhoneNum,omitnil,omitempty" name:"PhoneNum"`
 }
 

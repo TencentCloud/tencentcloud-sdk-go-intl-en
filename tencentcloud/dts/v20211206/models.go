@@ -131,6 +131,11 @@ type CompareAbstractInfo struct {
 	FinishedAt *string `json:"FinishedAt,omitnil,omitempty" name:"FinishedAt"`
 }
 
+type CompareColumnItem struct {
+	// Column nameNote: This field may return null, indicating that no valid values can be obtained.
+	ColumnName *string `json:"ColumnName,omitnil,omitempty" name:"ColumnName"`
+}
+
 type CompareDetailInfo struct {
 	// Details of inconsistent tables
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -150,8 +155,7 @@ type CompareObject struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ObjectItems []*CompareObjectItem `json:"ObjectItems,omitnil,omitempty" name:"ObjectItems"`
 
-	// Advanced object type (`account`: Account; `index`: Index; `shardkey`: Shard key, which may be adjusted later; `schema`: Database/table structure)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Advanced object types, such as account, index, shardkey, schema.Note: This field may return null, indicating that no valid values can be obtained.
 	AdvancedObjects []*string `json:"AdvancedObjects,omitnil,omitempty" name:"AdvancedObjects"`
 }
 
@@ -176,18 +180,15 @@ type CompareObjectItem struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Tables []*CompareTableItem `json:"Tables,omitnil,omitempty" name:"Tables"`
 
-	// View selection mode. Valid values: `all`, `partial`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// View selection mode: all refers to all view objects under the current object, partial refers to partial view objects (consistency check does not check views, and the current parameters are disabled).Note: This field may return null, indicating that no valid values can be obtained.
 	ViewMode *string `json:"ViewMode,omitnil,omitempty" name:"ViewMode"`
 
-	// View configuration for data consistency check, which is required if `ViewMode` is `partial`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// View configuration used for consistency check. When ViewMode is partial, it needs to be filled in (consistency check does not check views, and the current parameters are disabled).Note: This field may return null, indicating that no valid values can be obtained.
 	Views []*CompareViewItem `json:"Views,omitnil,omitempty" name:"Views"`
 }
 
 type CompareOptions struct {
-	// Comparison type: (`dataCheck`: Full data comparison; `sampleDataCheck`: Sampling data comparison; `rowsCount`: Row count comparison)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Comparative Method: dataCheck (Complete Data Comparison), sampleDataCheck (Sampling Data Comparison), rowsCount (Row Count Comparison)Note: This field may return null, indicating that no valid value can be obtained.
 	Method *string `json:"Method,omitnil,omitempty" name:"Method"`
 
 	// Sampling rate. Value range: 0-100%.
@@ -203,6 +204,12 @@ type CompareTableItem struct {
 	// Table name
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TableName *string `json:"TableName,omitnil,omitempty" name:"TableName"`
+
+	// In column mode, all refers to all data, while partial refers to part of the data (this parameter is only valid for data sync tasks).Note: This field may return null, indicating that no valid values can be obtained.
+	ColumnMode *string `json:"ColumnMode,omitnil,omitempty" name:"ColumnMode"`
+
+	// This field is required when ColumnMode is set to partial (this parameter is only valid for data sync tasks).Note: This field may return null, indicating that no valid values can be obtained.
+	Columns []*CompareColumnItem `json:"Columns,omitnil,omitempty" name:"Columns"`
 }
 
 type CompareTaskInfo struct {
@@ -337,6 +344,116 @@ func (r *CompleteMigrateJobResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CompleteMigrateJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ConfigureSubscribeJobRequestParams struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Data subscription type. Valid values for non-mongo DatabaseType: all (full instance update); dml (data update); ddl (structure update); dmlAndDdl (data + structure update). Valid values for mongo DatabaseType: all (full instance update); database (subscribe to a table); collection (subscribe to a collection).
+	SubscribeMode *string `json:"SubscribeMode,omitnil,omitempty" name:"SubscribeMode"`
+
+	// Source database access type. Valid values: extranet (public network); vpncloud (VPN access); dcg (Direct Connect); ccn (CCN); cdb (database); cvm (self-build on CVM); intranet (intranet); vpc (VPC). Note: The specific optional values depend on the current link support capabilities.
+	AccessType *string `json:"AccessType,omitnil,omitempty" name:"AccessType"`
+
+	// Database node information
+	Endpoints []*EndpointItem `json:"Endpoints,omitnil,omitempty" name:"Endpoints"`
+
+	// Kafka configuration
+	KafkaConfig *SubscribeKafkaConfig `json:"KafkaConfig,omitnil,omitempty" name:"KafkaConfig"`
+
+	// Subscription database table information. When SubscribeMode is not all or ddl, SubscribeObjects is a required parameter.
+	SubscribeObjects []*SubscribeObject `json:"SubscribeObjects,omitnil,omitempty" name:"SubscribeObjects"`
+
+	// Subscription data format, such as: protobuf, json, avro. Note: The specific optional values depend on the current link support capabilities. For details on the data format, please refer to the consumption demo documentation on the official website.
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// mongo optional parameter: output aggregation settings.
+	PipelineInfo []*PipelineInfo `json:"PipelineInfo,omitnil,omitempty" name:"PipelineInfo"`
+
+	// Additional information added for the business. The parameter name is called key, and the parameter value is called value.Optional parameters for mysql: ProcessXA. If true is filled in, it will be processed. If it is left blank or filled with other values, it will not be processed.Optional parameters for mongo: SubscribeType. Currently only changeStream is supported. If not filled in, the default is changeStream.Other businesses currently have no optional parameters.
+	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitnil,omitempty" name:"ExtraAttr"`
+}
+
+type ConfigureSubscribeJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Data subscription type. Valid values for non-mongo DatabaseType: all (full instance update); dml (data update); ddl (structure update); dmlAndDdl (data + structure update). Valid values for mongo DatabaseType: all (full instance update); database (subscribe to a table); collection (subscribe to a collection).
+	SubscribeMode *string `json:"SubscribeMode,omitnil,omitempty" name:"SubscribeMode"`
+
+	// Source database access type. Valid values: extranet (public network); vpncloud (VPN access); dcg (Direct Connect); ccn (CCN); cdb (database); cvm (self-build on CVM); intranet (intranet); vpc (VPC). Note: The specific optional values depend on the current link support capabilities.
+	AccessType *string `json:"AccessType,omitnil,omitempty" name:"AccessType"`
+
+	// Database node information
+	Endpoints []*EndpointItem `json:"Endpoints,omitnil,omitempty" name:"Endpoints"`
+
+	// Kafka configuration
+	KafkaConfig *SubscribeKafkaConfig `json:"KafkaConfig,omitnil,omitempty" name:"KafkaConfig"`
+
+	// Subscription database table information. When SubscribeMode is not all or ddl, SubscribeObjects is a required parameter.
+	SubscribeObjects []*SubscribeObject `json:"SubscribeObjects,omitnil,omitempty" name:"SubscribeObjects"`
+
+	// Subscription data format, such as: protobuf, json, avro. Note: The specific optional values depend on the current link support capabilities. For details on the data format, please refer to the consumption demo documentation on the official website.
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// mongo optional parameter: output aggregation settings.
+	PipelineInfo []*PipelineInfo `json:"PipelineInfo,omitnil,omitempty" name:"PipelineInfo"`
+
+	// Additional information added for the business. The parameter name is called key, and the parameter value is called value.Optional parameters for mysql: ProcessXA. If true is filled in, it will be processed. If it is left blank or filled with other values, it will not be processed.Optional parameters for mongo: SubscribeType. Currently only changeStream is supported. If not filled in, the default is changeStream.Other businesses currently have no optional parameters.
+	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitnil,omitempty" name:"ExtraAttr"`
+}
+
+func (r *ConfigureSubscribeJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ConfigureSubscribeJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	delete(f, "SubscribeMode")
+	delete(f, "AccessType")
+	delete(f, "Endpoints")
+	delete(f, "KafkaConfig")
+	delete(f, "SubscribeObjects")
+	delete(f, "Protocol")
+	delete(f, "PipelineInfo")
+	delete(f, "ExtraAttr")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ConfigureSubscribeJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ConfigureSubscribeJobResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ConfigureSubscribeJobResponse struct {
+	*tchttp.BaseResponse
+	Response *ConfigureSubscribeJobResponseParams `json:"Response"`
+}
+
+func (r *ConfigureSubscribeJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ConfigureSubscribeJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -479,7 +596,7 @@ func (r *ConfigureSyncJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ConfigureSyncJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -553,7 +670,7 @@ func (r *ContinueMigrateJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ContinueMigrateJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -607,7 +724,7 @@ func (r *ContinueSyncJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ContinueSyncJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -661,7 +778,7 @@ func (r *CreateCheckSyncJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCheckSyncJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -747,7 +864,7 @@ type CreateCompareTaskResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CompareTaskId *string `json:"CompareTaskId,omitnil,omitempty" name:"CompareTaskId"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -764,6 +881,88 @@ func (r *CreateCompareTaskResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateCompareTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateConsumerGroupRequestParams struct {
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Consumer group name, which consists of numbers, letters (upper and lower case), or begins with _ - . Ends with numbers, letters (upper and lower case). The full name of the actually generated consumer group is in the form: consumer-grp-#{SubscribeId}-#{ConsumerGroupName}.
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
+
+	// Account name, which consists of numbers, letters (upper and lower case), or begins with _-.. Ends with numbers, letters (upper and lower case). The full name of the actually generated account is in the form: account-#{SubscribeId}-#{AccountName}.
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+
+	// Consumer group password, which should be longer than 3 characters.
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// Consumer group description
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type CreateConsumerGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Consumer group name, which consists of numbers, letters (upper and lower case), or begins with _ - . Ends with numbers, letters (upper and lower case). The full name of the actually generated consumer group is in the form: consumer-grp-#{SubscribeId}-#{ConsumerGroupName}.
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
+
+	// Account name, which consists of numbers, letters (upper and lower case), or begins with _-.. Ends with numbers, letters (upper and lower case). The full name of the actually generated account is in the form: account-#{SubscribeId}-#{AccountName}.
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+
+	// Consumer group password, which should be longer than 3 characters.
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// Consumer group description
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+func (r *CreateConsumerGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConsumerGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	delete(f, "ConsumerGroupName")
+	delete(f, "AccountName")
+	delete(f, "Password")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateConsumerGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateConsumerGroupResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateConsumerGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateConsumerGroupResponseParams `json:"Response"`
+}
+
+func (r *CreateConsumerGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateConsumerGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -801,7 +1000,7 @@ func (r *CreateMigrateCheckJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateMigrateCheckJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -908,7 +1107,7 @@ type CreateMigrationServiceResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	JobIds []*string `json:"JobIds,omitnil,omitempty" name:"JobIds"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -962,7 +1161,7 @@ func (r *CreateModifyCheckSyncJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateModifyCheckSyncJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -979,6 +1178,160 @@ func (r *CreateModifyCheckSyncJobResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateModifyCheckSyncJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSubscribeCheckJobRequestParams struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+type CreateSubscribeCheckJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+func (r *CreateSubscribeCheckJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSubscribeCheckJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSubscribeCheckJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSubscribeCheckJobResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateSubscribeCheckJobResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSubscribeCheckJobResponseParams `json:"Response"`
+}
+
+func (r *CreateSubscribeCheckJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSubscribeCheckJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSubscribeRequestParams struct {
+	// Subscription database type. Currently, cynosdbmysql, mariadb, mongodb, mysql, percona, tdpg, and tdsqlpercona are supported.
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// Payment method. Valid values: 0 (monthly subscription); 1 (pay-as-you-go).
+	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
+
+	// Purchase duration. This field needs to be filled in when the payType is monthly subscription. The unit is month. Value range: 1-120. Default value: 1.
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// Whether to renew automatically. This field needs to be filled in when the payType is monthly subscription. Valid values: 0 (auto-renewal disabled); 1 (auto-renewal enabled). Automatic renewal is not performed by default. This flag is invalid for pay-as-you-go.
+	AutoRenew *int64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
+
+	// Quantity. Default value: 1. Maximum value: 10.
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
+
+	// Instance resource tags
+	Tags []*TagItem `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Custom task name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type CreateSubscribeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Subscription database type. Currently, cynosdbmysql, mariadb, mongodb, mysql, percona, tdpg, and tdsqlpercona are supported.
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// Payment method. Valid values: 0 (monthly subscription); 1 (pay-as-you-go).
+	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
+
+	// Purchase duration. This field needs to be filled in when the payType is monthly subscription. The unit is month. Value range: 1-120. Default value: 1.
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// Whether to renew automatically. This field needs to be filled in when the payType is monthly subscription. Valid values: 0 (auto-renewal disabled); 1 (auto-renewal enabled). Automatic renewal is not performed by default. This flag is invalid for pay-as-you-go.
+	AutoRenew *int64 `json:"AutoRenew,omitnil,omitempty" name:"AutoRenew"`
+
+	// Quantity. Default value: 1. Maximum value: 10.
+	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
+
+	// Instance resource tags
+	Tags []*TagItem `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Custom task name
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *CreateSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSubscribeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Product")
+	delete(f, "PayType")
+	delete(f, "Duration")
+	delete(f, "AutoRenew")
+	delete(f, "Count")
+	delete(f, "Tags")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSubscribeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSubscribeResponseParams struct {
+	// Array of data subscription instance IDs
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubscribeIds []*string `json:"SubscribeIds,omitnil,omitempty" name:"SubscribeIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSubscribeResponseParams `json:"Response"`
+}
+
+func (r *CreateSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSubscribeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1096,7 +1449,7 @@ type CreateSyncJobResponseParams struct {
 	// Sync task IDs
 	JobIds []*string `json:"JobIds,omitnil,omitempty" name:"JobIds"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1448,7 +1801,7 @@ func (r *DeleteCompareTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteCompareTaskResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1465,6 +1818,74 @@ func (r *DeleteCompareTaskResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteCompareTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteConsumerGroupRequestParams struct {
+	// ID of the data subscription instance
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Consumer group name. The full name of the actual consumer group is in the form: consumer-grp-#{SubscribeId}-#{ConsumerGroupName}.Please make sure the consumer group name is correct.
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
+
+	// Account name. The full name of the actual account is in the form: account-#{SubscribeId}-#{AccountName}.Please make sure the account name is correct.
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+}
+
+type DeleteConsumerGroupRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the data subscription instance
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Consumer group name. The full name of the actual consumer group is in the form: consumer-grp-#{SubscribeId}-#{ConsumerGroupName}.Please make sure the consumer group name is correct.
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
+
+	// Account name. The full name of the actual account is in the form: account-#{SubscribeId}-#{AccountName}.Please make sure the account name is correct.
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+}
+
+func (r *DeleteConsumerGroupRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteConsumerGroupRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	delete(f, "ConsumerGroupName")
+	delete(f, "AccountName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteConsumerGroupRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteConsumerGroupResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteConsumerGroupResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteConsumerGroupResponseParams `json:"Response"`
+}
+
+func (r *DeleteConsumerGroupResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteConsumerGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1522,7 +1943,7 @@ type DescribeCheckSyncJobResultResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	StepInfos []*StepInfo `json:"StepInfos,omitnil,omitempty" name:"StepInfos"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1647,7 +2068,7 @@ type DescribeCompareReportResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Detail *CompareDetailInfo `json:"Detail,omitnil,omitempty" name:"Detail"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1737,7 +2158,7 @@ type DescribeCompareTasksResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Items []*CompareTaskItem `json:"Items,omitnil,omitempty" name:"Items"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1754,6 +2175,80 @@ func (r *DescribeCompareTasksResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeCompareTasksResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsumerGroupsRequestParams struct {
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Starting offset for returned results. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of results to be returned at a time. Default value: 10.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeConsumerGroupsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Starting offset for returned results. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of results to be returned at a time. Default value: 10.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeConsumerGroupsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumerGroupsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeConsumerGroupsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeConsumerGroupsResponseParams struct {
+	// Total number of consumer groups under the specific instance
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Consumer group list
+	Items []*GroupInfo `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeConsumerGroupsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeConsumerGroupsResponseParams `json:"Response"`
+}
+
+func (r *DescribeConsumerGroupsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeConsumerGroupsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1862,7 +2357,7 @@ type DescribeMigrateDBInstancesResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Instances []*MigrateDBItem `json:"Instances,omitnil,omitempty" name:"Instances"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -1931,7 +2426,7 @@ type DescribeMigrationCheckJobResponseParams struct {
 	// Check result. Valid values: `checkPass`, `checkNotPass`.
 	CheckFlag *string `json:"CheckFlag,omitnil,omitempty" name:"CheckFlag"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2307,7 +2802,7 @@ type DescribeModifyCheckSyncJobResultResponseParams struct {
 	// Step details Note: This field may return null, indicating that no valid values can be obtained.
 	StepInfos []*StepInfo `json:"StepInfos,omitnil,omitempty" name:"StepInfos"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2324,6 +2819,477 @@ func (r *DescribeModifyCheckSyncJobResultResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeModifyCheckSyncJobResultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeOffsetByTimeRequestParams struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Timestamp, the format is: Y-m-d h:m:s. If the input time is much later than the current time, this is equivalent to the latest offset; if the input time is much earlier than the current time, this is equivalent to the oldest offset; if the input is empty, the default time is 0, which is the oldest offset to be queried.
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
+}
+
+type DescribeOffsetByTimeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Timestamp, the format is: Y-m-d h:m:s. If the input time is much later than the current time, this is equivalent to the latest offset; if the input time is much earlier than the current time, this is equivalent to the oldest offset; if the input is empty, the default time is 0, which is the oldest offset to be queried.
+	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
+}
+
+func (r *DescribeOffsetByTimeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOffsetByTimeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	delete(f, "Time")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeOffsetByTimeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeOffsetByTimeResponseParams struct {
+	// Time and Offset response.
+	Items []*OffsetTimeMap `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeOffsetByTimeResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeOffsetByTimeResponseParams `json:"Response"`
+}
+
+func (r *DescribeOffsetByTimeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeOffsetByTimeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSubscribeCheckJobRequestParams struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+type DescribeSubscribeCheckJobRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+func (r *DescribeSubscribeCheckJobRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSubscribeCheckJobRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSubscribeCheckJobRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSubscribeCheckJobResponseParams struct {
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Failure or error prompts, success signals 'success'.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Job running status. Valid values: running, failed, success.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Current overall progress. Value range: 0-100.
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Total check steps
+	StepAll *uint64 `json:"StepAll,omitnil,omitempty" name:"StepAll"`
+
+	// Current step in execution
+	StepNow *uint64 `json:"StepNow,omitnil,omitempty" name:"StepNow"`
+
+	// Running status of each stepNote: This field may return null, indicating that no valid values can be obtained.
+	Steps []*SubscribeCheckStepInfo `json:"Steps,omitnil,omitempty" name:"Steps"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSubscribeCheckJobResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSubscribeCheckJobResponseParams `json:"Response"`
+}
+
+func (r *DescribeSubscribeCheckJobResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSubscribeCheckJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSubscribeDetailRequestParams struct {
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+type DescribeSubscribeDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+func (r *DescribeSubscribeDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSubscribeDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSubscribeDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSubscribeDetailResponseParams struct {
+	// The ID of the data subscription, such as subs-b6x64o31tm
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Data subscription instance name
+	SubscribeName *string `json:"SubscribeName,omitnil,omitempty" name:"SubscribeName"`
+
+	// Subscription database type. Currently, cynosdbmysql, mariadb, mongodb, mysql, percona, tdpg, tdsqlpercona are supported.
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// The subscribed cloud database instance ID. This value only makes sense if cloud database is subscribed. Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// The subscribed cloud database instance status. This value only makes sense if cloud database is subscribed. Valid values: running, isolated, offline.Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceStatus *string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
+
+	// Subscription task billing status. Valid values: normal, isolating, isolated, offline, post2PrePayIng.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Subscription task status. Valid values: notStarted, checking, checkNotPass, checkPass, starting, running, error.
+	SubsStatus *string `json:"SubsStatus,omitnil,omitempty" name:"SubsStatus"`
+
+	// Modification time, the format is: Y-m-d h:m:s.Note: This field may return null, indicating that no valid values can be obtained.
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+
+	// Creation time, the format is: Y-m-d h:m:s.Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Isolation time, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
+	IsolateTime *string `json:"IsolateTime,omitnil,omitempty" name:"IsolateTime"`
+
+	// Expiration time for monthly subscription tasks, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Offline time, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
+	OfflineTime *string `json:"OfflineTime,omitnil,omitempty" name:"OfflineTime"`
+
+	// Payment method. Valid values: 0 (monthly subscription); 1 (pay-as-you-go).
+	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
+
+	// Auto-renewal flag. It is meaningful only when PayType=0. Valid values: 0 (auto-renewal disabled); 1 (auto-renewal enabled).
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
+
+	// The region where the task is located
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Kafka topic
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
+
+	// Broker address of Kafka serviceNote: This field may return null, indicating that no valid values can be obtained.
+	Broker *string `json:"Broker,omitnil,omitempty" name:"Broker"`
+
+	// Data subscription type. Valid values for non-mongo Product: all (full instance update); dml (data update); ddl (structure update); dmlAndDdl (data + structure update). Valid values for mongo Product: all (full instance update); database (subscribe to a table); collection (subscribe to a collection).Note: This field may return null, indicating that no valid values can be obtained.
+	SubscribeMode *string `json:"SubscribeMode,omitnil,omitempty" name:"SubscribeMode"`
+
+	// Subscription data format. If it is empty, the default format is used: mysql\cynosdbmysql\mariadb\percona\tdsqlpercona\tdpg is protobuf, mongo is json. When DatabaseType is mysql and cynosdbmysql, there are three optional protocols: protobuf\avro\json. For details on data format, please refer to the consumption demo documentation on the official website.Note: This field may return null, indicating that no valid values can be obtained.
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// Information of subscribed tableNote: This field may return null, indicating that no valid values can be obtained.
+	SubscribeObjects []*SubscribeObject `json:"SubscribeObjects,omitnil,omitempty" name:"SubscribeObjects"`
+
+	// Kafka configuration information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	KafkaConfig *SubscribeKafkaConfig `json:"KafkaConfig,omitnil,omitempty" name:"KafkaConfig"`
+
+	// Source database access type. Valid values: extranet (public network); vpncloud (VPN access); dcg (Direct Connect); ccn (CCN); cdb (database); cvm (self-build on CVM); intranet (intranet); vpc (VPC). Note: The specific optional values depend on the current link support capabilities.Note: This field may return null, indicating that no valid values can be obtained.
+	AccessType *string `json:"AccessType,omitnil,omitempty" name:"AccessType"`
+
+	// Access type information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Endpoints []*EndpointItem `json:"Endpoints,omitnil,omitempty" name:"Endpoints"`
+
+	// Mongo output aggregation settings
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PipelineInfo []*PipelineInfo `json:"PipelineInfo,omitnil,omitempty" name:"PipelineInfo"`
+
+	// TagNote: This field may return null, indicating that no valid values can be obtained.
+	Tags []*TagItem `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Subscription task error information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Errors []*SubsErr `json:"Errors,omitnil,omitempty" name:"Errors"`
+
+	// Additional information added for the business. The parameter name is called key, and the parameter value is called value.Optional parameters for mysql: ProcessXA. Fill in true to process, others will not be processed.Optional parameters for mongo: SubscribeType. Currently only changeStream is supported.Note: This field may return null, indicating that no valid values can be obtained.
+	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitnil,omitempty" name:"ExtraAttr"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSubscribeDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSubscribeDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeSubscribeDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSubscribeDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSubscribeJobsRequestParams struct {
+	// Subscription ID (exact match)
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Subscription name (prefix fuzzy match)
+	SubscribeName *string `json:"SubscribeName,omitnil,omitempty" name:"SubscribeName"`
+
+	// Subscribed cloud database instance ID (exact match)
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Payment method. Valid values: 0 (monthly subscription); 1 (pay-as-you-go).
+	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
+
+	// Subscribed database product. Currently, cynosdbmysql, mariadb, mongodb, mysql, percona, tdpg, tdsqlpercona are supported.
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// Data subscription lifecycle status. Valid values: normal, isolating, isolated, offline, post2PrePayIng.
+	Status []*string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Data subscription status. Valid values: notStarted, checking, checkNotPass, checkPass, starting, running, error.
+	SubsStatus []*string `json:"SubsStatus,omitnil,omitempty" name:"SubsStatus"`
+
+	// Starting offset for returned results. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of results to be returned at a time. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Sorting order. Valid values: DESC, ASC. Default value: DESC, indicating descending by creation time.
+	OrderDirection *string `json:"OrderDirection,omitnil,omitempty" name:"OrderDirection"`
+
+	// Tag filter condition, the relationship between multiple TagFilters is and.
+	TagFilters []*TagFilter `json:"TagFilters,omitnil,omitempty" name:"TagFilters"`
+}
+
+type DescribeSubscribeJobsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Subscription ID (exact match)
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Subscription name (prefix fuzzy match)
+	SubscribeName *string `json:"SubscribeName,omitnil,omitempty" name:"SubscribeName"`
+
+	// Subscribed cloud database instance ID (exact match)
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Payment method. Valid values: 0 (monthly subscription); 1 (pay-as-you-go).
+	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
+
+	// Subscribed database product. Currently, cynosdbmysql, mariadb, mongodb, mysql, percona, tdpg, tdsqlpercona are supported.
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// Data subscription lifecycle status. Valid values: normal, isolating, isolated, offline, post2PrePayIng.
+	Status []*string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Data subscription status. Valid values: notStarted, checking, checkNotPass, checkPass, starting, running, error.
+	SubsStatus []*string `json:"SubsStatus,omitnil,omitempty" name:"SubsStatus"`
+
+	// Starting offset for returned results. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of results to be returned at a time. Default value: 20. Maximum value: 100.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Sorting order. Valid values: DESC, ASC. Default value: DESC, indicating descending by creation time.
+	OrderDirection *string `json:"OrderDirection,omitnil,omitempty" name:"OrderDirection"`
+
+	// Tag filter condition, the relationship between multiple TagFilters is and.
+	TagFilters []*TagFilter `json:"TagFilters,omitnil,omitempty" name:"TagFilters"`
+}
+
+func (r *DescribeSubscribeJobsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSubscribeJobsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	delete(f, "SubscribeName")
+	delete(f, "InstanceId")
+	delete(f, "PayType")
+	delete(f, "Product")
+	delete(f, "Status")
+	delete(f, "SubsStatus")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "OrderDirection")
+	delete(f, "TagFilters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSubscribeJobsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSubscribeJobsResponseParams struct {
+	// Number of eligible instances.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Information list of data subscription instances
+	Items []*SubscribeInfo `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSubscribeJobsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSubscribeJobsResponseParams `json:"Response"`
+}
+
+func (r *DescribeSubscribeJobsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSubscribeJobsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSubscribeReturnableRequestParams struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+type DescribeSubscribeReturnableRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+func (r *DescribeSubscribeReturnableRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSubscribeReturnableRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSubscribeReturnableRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSubscribeReturnableResponseParams struct {
+	// Whether the instance is returnable
+	IsReturnable *bool `json:"IsReturnable,omitnil,omitempty" name:"IsReturnable"`
+
+	// Reason for the non-returnability
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ReturnFailMessage *string `json:"ReturnFailMessage,omitnil,omitempty" name:"ReturnFailMessage"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSubscribeReturnableResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSubscribeReturnableResponseParams `json:"Response"`
+}
+
+func (r *DescribeSubscribeReturnableResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSubscribeReturnableResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2460,6 +3426,60 @@ func (r *DescribeSyncJobsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DestroyIsolatedSubscribeRequestParams struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+type DestroyIsolatedSubscribeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+func (r *DestroyIsolatedSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DestroyIsolatedSubscribeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DestroyIsolatedSubscribeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DestroyIsolatedSubscribeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DestroyIsolatedSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *DestroyIsolatedSubscribeResponseParams `json:"Response"`
+}
+
+func (r *DestroyIsolatedSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DestroyIsolatedSubscribeResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DestroyMigrateJobRequestParams struct {
 	// Task ID
 	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
@@ -2493,7 +3513,7 @@ func (r *DestroyMigrateJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DestroyMigrateJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2547,7 +3567,7 @@ func (r *DestroySyncJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DestroySyncJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2651,6 +3671,20 @@ type DifferenceItem struct {
 	// Completion time
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FinishedAt *string `json:"FinishedAt,omitnil,omitempty" name:"FinishedAt"`
+}
+
+type DistributeRule struct {
+	// Rule type. Valid values for non-mongo products: table (partitioned by table name); pk (partitioned by table name + primary key); cols (partitioned by column name). Valid values for mongo: collection (partitioned by collection name); collectionAndObjectId (partitioned by collection + primary key). Note: This field may return null, indicating that no valid values can be obtained.
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
+
+	// Database name matching rule, please fill in the regular expression.Note: This field may return null, indicating that no valid values can be obtained.
+	DbPattern *string `json:"DbPattern,omitnil,omitempty" name:"DbPattern"`
+
+	// Table name matching rule. If DatabaseType is mongodb, it matches the collection name.Note: This field may return null, indicating that no valid values can be obtained.
+	TablePattern *string `json:"TablePattern,omitnil,omitempty" name:"TablePattern"`
+
+	// Column name. This field is required if RuleType is cols. The subscription task will use the value of this column to calculate the partition. Mongo does not partition by column, so there is no need to pass this field.Note: This field may return null, indicating that no valid values can be obtained.
+	Columns []*string `json:"Columns,omitnil,omitempty" name:"Columns"`
 }
 
 type DynamicOptions struct {
@@ -2783,6 +3817,62 @@ type Endpoint struct {
 	SetId *string `json:"SetId,omitnil,omitempty" name:"SetId"`
 }
 
+type EndpointItem struct {
+	// Region of the source database. If AccessType is ccn, please fill in the region where vpc is located because the region of the source database is unknown. For other access methods, please fill in the region where the subscription task is located, as ensuring the subscription task and the source database are in the same region is the optimal network solution.Note: This field may return null, indicating that no valid values can be obtained.
+	DatabaseRegion *string `json:"DatabaseRegion,omitnil,omitempty" name:"DatabaseRegion"`
+
+	// UsernameNote: This field may return null, indicating that no valid values can be obtained.
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+
+	// Password. It is required when used as an input parameter and empty when used as an output parameter.Note: This field may return null, indicating that no valid values can be obtained.
+	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
+
+	// Target instance ID. This field is required when AccessType is cdb. When configuring the InstanceId, the instance information is queried and checked. The mysql query interface has been authenticated. Please ensure that the sub-user has the cdb:DescribeDBInstances interface permission.Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Cloud Virtual Machine ID. This field is required when AccessType is cvm.Note: This field may return null, indicating that no valid values can be obtained.
+	CvmInstanceId *string `json:"CvmInstanceId,omitnil,omitempty" name:"CvmInstanceId"`
+
+	// Direct Connect gateway ID. This field is required when AccessType is dcg.Note: This field may return null, indicating that no valid values can be obtained.
+	UniqDcgId *string `json:"UniqDcgId,omitnil,omitempty" name:"UniqDcgId"`
+
+	// Cloud Connect Network ID. This field is required when AccessType is ccn.Note: This field may return null, indicating that no valid values can be obtained.
+	CcnId *string `json:"CcnId,omitnil,omitempty" name:"CcnId"`
+
+	// VPN gateway ID. This field is required when AccessType is vpncloud.Note: This field may return null, indicating that no valid values can be obtained.
+	UniqVpnGwId *string `json:"UniqVpnGwId,omitnil,omitempty" name:"UniqVpnGwId"`
+
+	// VpcID. This field is required when AccessType is dcg\ccn\vpncloud\vpc.Note: This field may return null, indicating that no valid values can be obtained.
+	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
+
+	// Subnet ID. This field is required when AccessType is dcg\ccn\vpncloud\vpc.Note: This field may return null, indicating that no valid values can be obtained.
+	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
+
+	// Database address, supports domain name and IP. This field is required when AccessType is dcg\ccn\vpncloud\vpc\extranet\intranet.Note: This field may return null, indicating that no valid values can be obtained.
+	HostName *string `json:"HostName,omitnil,omitempty" name:"HostName"`
+
+	// Database port. This field is required when AccessType is dcg\ccn\vpncloud\vpc\extranet\intranet\cvm.Note: This field may return null, indicating that no valid values can be obtained.
+	Port *uint64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Whether to use encrypted transmission. Valid values: UnEncrypted; Encrypted. Only mysql supports it. If it is not filled in, it will not be encrypted by default. Other products do not need to fill in this.Note: This field may return null, indicating that no valid values can be obtained.
+	EncryptConn *string `json:"EncryptConn,omitnil,omitempty" name:"EncryptConn"`
+
+	// Database network environment. This field is required when AccessType is ccn. Valid values: UserIDC; TencentVPC; Aws; AliYun; Others.Note: This field may return null, indicating that no valid values can be obtained.
+	DatabaseNetEnv *string `json:"DatabaseNetEnv,omitnil,omitempty" name:"DatabaseNetEnv"`
+
+	// The UIN of the main account to which the Cloud Connect Network gateway belongs. It is required for cross-account CCN.Note: This field may return null, indicating that no valid values can be obtained.
+	CcnOwnerUin *string `json:"CcnOwnerUin,omitnil,omitempty" name:"CcnOwnerUin"`
+
+	// Additional information added for the business. Parameter name is called key, parameter value is called value. Mandatory parameters for tdpg: PgDatabase (subscribed database name).Note: This field may return null, indicating that no valid values can be obtained.
+	ExtraAttr []*KeyValuePairOption `json:"ExtraAttr,omitnil,omitempty" name:"ExtraAttr"`
+
+
+	ChildInstanceId *string `json:"ChildInstanceId,omitnil,omitempty" name:"ChildInstanceId"`
+
+
+	ChildInstanceType *string `json:"ChildInstanceType,omitnil,omitempty" name:"ChildInstanceType"`
+}
+
 type ErrInfo struct {
 	// Cause of the error
 	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
@@ -2812,6 +3902,41 @@ type ErrorInfoItem struct {
 	// Help document
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HelpDoc *string `json:"HelpDoc,omitnil,omitempty" name:"HelpDoc"`
+}
+
+type GroupInfo struct {
+	// Consumer group account
+	Account *string `json:"Account,omitnil,omitempty" name:"Account"`
+
+	// Consumer group name
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
+
+	// Consumer group descriptionNote: This field may return null, indicating that no valid values can be obtained.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Consumer group offset. This field is for compatibility with the previous single partition scenario, where the value is the offset of the last partition. For the offset of each partition, please refer to the StateOfPartition field.
+	ConsumerGroupOffset *int64 `json:"ConsumerGroupOffset,omitnil,omitempty" name:"ConsumerGroupOffset"`
+
+	// The amount of data that has not been consumed by the consumer group. This field is for compatibility with the previous single partition scenario, where the value is the amount of unconsumed data in the last partition. For the amount of unconsumed data in each partition, refer to the StateOfPartition field.
+	ConsumerGroupLag *int64 `json:"ConsumerGroupLag,omitnil,omitempty" name:"ConsumerGroupLag"`
+
+	// Consumption delay (in seconds)
+	Latency *int64 `json:"Latency,omitnil,omitempty" name:"Latency"`
+
+	// Consumption status of each partition
+	StateOfPartition []*MonitorInfo `json:"StateOfPartition,omitnil,omitempty" name:"StateOfPartition"`
+
+	// Consumer group creation time, the format is: YYYY-MM-DD hh:mm:ss.
+	CreatedAt *string `json:"CreatedAt,omitnil,omitempty" name:"CreatedAt"`
+
+	// Consumer group update time, the format is: YYYY-MM-DD hh:mm:ss.
+	UpdatedAt *string `json:"UpdatedAt,omitnil,omitempty" name:"UpdatedAt"`
+
+	// Consumer group states, including Dead, Empty, Stable, etc. Only Dead and Empty states can perform reset operations.
+	ConsumerGroupState *string `json:"ConsumerGroupState,omitnil,omitempty" name:"ConsumerGroupState"`
+
+	// The partition is being consumed by each consumer.Note: This field may return null, indicating that no valid values can be obtained.
+	PartitionAssignment []*PartitionAssignment `json:"PartitionAssignment,omitnil,omitempty" name:"PartitionAssignment"`
 }
 
 // Predefined struct for user
@@ -2848,7 +3973,7 @@ func (r *IsolateMigrateJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type IsolateMigrateJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2865,6 +3990,60 @@ func (r *IsolateMigrateJobResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *IsolateMigrateJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateSubscribeRequestParams struct {
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+type IsolateSubscribeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+func (r *IsolateSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateSubscribeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "IsolateSubscribeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type IsolateSubscribeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type IsolateSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *IsolateSubscribeResponseParams `json:"Response"`
+}
+
+func (r *IsolateSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *IsolateSubscribeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2902,7 +4081,7 @@ func (r *IsolateSyncJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type IsolateSyncJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3109,6 +4288,17 @@ type MigrateOption struct {
 	MigrateWay *string `json:"MigrateWay,omitnil,omitempty" name:"MigrateWay"`
 }
 
+type ModifiedSubscribeObject struct {
+	// Subscription object type. Valid values: 0 (database); 1 (table, for mongo tasks, this corresponds to a collection).Note: mongo only supports full instance, single database or single collection subscription, so this field should not conflict with SubscribeObjectType. For example, when SubscribeObjectType=4, it means mongo single database subscription, then 0 should be passed in this field.Note: This field may return null, indicating that no valid values can be obtained.
+	ObjectsType *int64 `json:"ObjectsType,omitnil,omitempty" name:"ObjectsType"`
+
+	// Subscription database nameNote: This field may return null, indicating that no valid values can be obtained.
+	DatabaseName *string `json:"DatabaseName,omitnil,omitempty" name:"DatabaseName"`
+
+	// Name of the table (or collection) in the subscription database. If ObjectsType is 1, this field is required and not empty; 
+	TableNames []*string `json:"TableNames,omitnil,omitempty" name:"TableNames"`
+}
+
 // Predefined struct for user
 type ModifyCompareTaskNameRequestParams struct {
 	// Migration task ID
@@ -3157,7 +4347,7 @@ func (r *ModifyCompareTaskNameRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyCompareTaskNameResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3246,7 +4436,7 @@ func (r *ModifyCompareTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyCompareTaskResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3263,6 +4453,163 @@ func (r *ModifyCompareTaskResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyCompareTaskResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConsumerGroupDescriptionRequestParams struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Consumer group name. The full name of the actual consumer group is in the form: consumer-grp-#{SubscribeId}-#{ConsumerGroupName}.Please make sure the consumer group name is correct.
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
+
+	// Account name. The full name of the actual account is in the form: account-#{SubscribeId}-#{AccountName}.Please make sure the account name is correct.
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+
+	// Updated description of the consumer group
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type ModifyConsumerGroupDescriptionRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Consumer group name. The full name of the actual consumer group is in the form: consumer-grp-#{SubscribeId}-#{ConsumerGroupName}.Please make sure the consumer group name is correct.
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
+
+	// Account name. The full name of the actual account is in the form: account-#{SubscribeId}-#{AccountName}.Please make sure the account name is correct.
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+
+	// Updated description of the consumer group
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+func (r *ModifyConsumerGroupDescriptionRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConsumerGroupDescriptionRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	delete(f, "ConsumerGroupName")
+	delete(f, "AccountName")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyConsumerGroupDescriptionRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConsumerGroupDescriptionResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyConsumerGroupDescriptionResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyConsumerGroupDescriptionResponseParams `json:"Response"`
+}
+
+func (r *ModifyConsumerGroupDescriptionResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConsumerGroupDescriptionResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConsumerGroupPasswordRequestParams struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Account name. The full name of the actual account is in the form: account-#{SubscribeId}-#{AccountName}.
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+
+	// Consumer group name. The full name of the actual consumer group is in the form: consumer-grp-#{SubscribeId}-#{ConsumerGroupName}.
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
+
+	// Old Password.
+	OldPassword *string `json:"OldPassword,omitnil,omitempty" name:"OldPassword"`
+
+	// New password. The character length is no less than 3 and no more than 32.
+	NewPassword *string `json:"NewPassword,omitnil,omitempty" name:"NewPassword"`
+}
+
+type ModifyConsumerGroupPasswordRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Account name. The full name of the actual account is in the form: account-#{SubscribeId}-#{AccountName}.
+	AccountName *string `json:"AccountName,omitnil,omitempty" name:"AccountName"`
+
+	// Consumer group name. The full name of the actual consumer group is in the form: consumer-grp-#{SubscribeId}-#{ConsumerGroupName}.
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
+
+	// Old Password.
+	OldPassword *string `json:"OldPassword,omitnil,omitempty" name:"OldPassword"`
+
+	// New password. The character length is no less than 3 and no more than 32.
+	NewPassword *string `json:"NewPassword,omitnil,omitempty" name:"NewPassword"`
+}
+
+func (r *ModifyConsumerGroupPasswordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConsumerGroupPasswordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	delete(f, "AccountName")
+	delete(f, "ConsumerGroupName")
+	delete(f, "OldPassword")
+	delete(f, "NewPassword")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyConsumerGroupPasswordRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyConsumerGroupPasswordResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyConsumerGroupPasswordResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyConsumerGroupPasswordResponseParams `json:"Response"`
+}
+
+func (r *ModifyConsumerGroupPasswordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyConsumerGroupPasswordResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3307,7 +4654,7 @@ func (r *ModifyMigrateJobSpecRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyMigrateJobSpecResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3368,7 +4715,7 @@ func (r *ModifyMigrateNameRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyMigrateNameResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3385,6 +4732,156 @@ func (r *ModifyMigrateNameResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyMigrateNameResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMigrateRateLimitRequestParams struct {
+	// Migration task ID
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
+
+	// Number of full export threads for migration task. Value range: 1-16.
+	DumpThread *int64 `json:"DumpThread,omitnil,omitempty" name:"DumpThread"`
+
+	// The full export Rps for migration task. The value needs to be greater than 0.
+	DumpRps *int64 `json:"DumpRps,omitnil,omitempty" name:"DumpRps"`
+
+	// Number of full import threads for migration task. Value range: 1-16.
+	LoadThread *int64 `json:"LoadThread,omitnil,omitempty" name:"LoadThread"`
+
+	// Number of incremental import threads for migration task. Value range: 1-128.
+	SinkerThread *int64 `json:"SinkerThread,omitnil,omitempty" name:"SinkerThread"`
+
+	// Limits for full import Rps.
+	LoadRps *int64 `json:"LoadRps,omitnil,omitempty" name:"LoadRps"`
+}
+
+type ModifyMigrateRateLimitRequest struct {
+	*tchttp.BaseRequest
+	
+	// Migration task ID
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
+
+	// Number of full export threads for migration task. Value range: 1-16.
+	DumpThread *int64 `json:"DumpThread,omitnil,omitempty" name:"DumpThread"`
+
+	// The full export Rps for migration task. The value needs to be greater than 0.
+	DumpRps *int64 `json:"DumpRps,omitnil,omitempty" name:"DumpRps"`
+
+	// Number of full import threads for migration task. Value range: 1-16.
+	LoadThread *int64 `json:"LoadThread,omitnil,omitempty" name:"LoadThread"`
+
+	// Number of incremental import threads for migration task. Value range: 1-128.
+	SinkerThread *int64 `json:"SinkerThread,omitnil,omitempty" name:"SinkerThread"`
+
+	// Limits for full import Rps.
+	LoadRps *int64 `json:"LoadRps,omitnil,omitempty" name:"LoadRps"`
+}
+
+func (r *ModifyMigrateRateLimitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMigrateRateLimitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	delete(f, "DumpThread")
+	delete(f, "DumpRps")
+	delete(f, "LoadThread")
+	delete(f, "SinkerThread")
+	delete(f, "LoadRps")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMigrateRateLimitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMigrateRateLimitResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyMigrateRateLimitResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyMigrateRateLimitResponseParams `json:"Response"`
+}
+
+func (r *ModifyMigrateRateLimitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMigrateRateLimitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMigrateRuntimeAttributeRequestParams struct {
+	// Migration task id, for example: dts-2rgv0f09
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
+
+	// Attributes that need to be modified. This structure is designed as a generic structure to separate customized attributes for multiple businesses. <br>For instance, for Redis:<br>{<br>	 "Key": "DstWriteMode",	// Target database write mode<br> 	"Value": "normal"	          // clearData (clear target instance data), overwrite (perform task in overwrite manner), normal (follow normal procedure, no additional actions, this is the default value) <br>},<br>{<br/>	 "Key": "IsDstReadOnly",	// Whether to set target database as read-only during migration<br/> 	"Value": "true"	          // true (set as read-only), false (do not set as read-only) <br/>}
+	OtherOptions []*KeyValuePairOption `json:"OtherOptions,omitnil,omitempty" name:"OtherOptions"`
+}
+
+type ModifyMigrateRuntimeAttributeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Migration task id, for example: dts-2rgv0f09
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
+
+	// Attributes that need to be modified. This structure is designed as a generic structure to separate customized attributes for multiple businesses. <br>For instance, for Redis:<br>{<br>	 "Key": "DstWriteMode",	// Target database write mode<br> 	"Value": "normal"	          // clearData (clear target instance data), overwrite (perform task in overwrite manner), normal (follow normal procedure, no additional actions, this is the default value) <br>},<br>{<br/>	 "Key": "IsDstReadOnly",	// Whether to set target database as read-only during migration<br/> 	"Value": "true"	          // true (set as read-only), false (do not set as read-only) <br/>}
+	OtherOptions []*KeyValuePairOption `json:"OtherOptions,omitnil,omitempty" name:"OtherOptions"`
+}
+
+func (r *ModifyMigrateRuntimeAttributeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMigrateRuntimeAttributeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	delete(f, "OtherOptions")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyMigrateRuntimeAttributeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyMigrateRuntimeAttributeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyMigrateRuntimeAttributeResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyMigrateRuntimeAttributeResponseParams `json:"Response"`
+}
+
+func (r *ModifyMigrateRuntimeAttributeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyMigrateRuntimeAttributeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3499,6 +4996,217 @@ func (r *ModifyMigrationJobResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifySubscribeAutoRenewFlagRequestParams struct {
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Auto-renewal flag. Valid values: 1 (auto-renewal enabled); 0 (auto-renewal disabled).
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
+}
+
+type ModifySubscribeAutoRenewFlagRequest struct {
+	*tchttp.BaseRequest
+	
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Auto-renewal flag. Valid values: 1 (auto-renewal enabled); 0 (auto-renewal disabled).
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
+}
+
+func (r *ModifySubscribeAutoRenewFlagRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySubscribeAutoRenewFlagRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	delete(f, "AutoRenewFlag")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySubscribeAutoRenewFlagRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySubscribeAutoRenewFlagResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySubscribeAutoRenewFlagResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySubscribeAutoRenewFlagResponseParams `json:"Response"`
+}
+
+func (r *ModifySubscribeAutoRenewFlagResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySubscribeAutoRenewFlagResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySubscribeNameRequestParams struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Modified data subscription instance name. Value range: 1-60.
+	SubscribeName *string `json:"SubscribeName,omitnil,omitempty" name:"SubscribeName"`
+}
+
+type ModifySubscribeNameRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Modified data subscription instance name. Value range: 1-60.
+	SubscribeName *string `json:"SubscribeName,omitnil,omitempty" name:"SubscribeName"`
+}
+
+func (r *ModifySubscribeNameRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySubscribeNameRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	delete(f, "SubscribeName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySubscribeNameRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySubscribeNameResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySubscribeNameResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySubscribeNameResponseParams `json:"Response"`
+}
+
+func (r *ModifySubscribeNameResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySubscribeNameResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySubscribeObjectsRequestParams struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Data subscription type. Valid values for non-mongo task: 0 (full instance update); 1 (data update); 2 (structure update); 3 (data + structure update). Valid values for mongo task: 0 (full instance update); 4 (subscribe to a table); 5 (subscribe to a collection).
+	SubscribeObjectType *int64 `json:"SubscribeObjectType,omitnil,omitempty" name:"SubscribeObjectType"`
+
+	// Modified subscription database table information. It will replace the original subscription object, this field is required unless SubscribeObjectType = 0 or 2.
+	Objects []*ModifiedSubscribeObject `json:"Objects,omitnil,omitempty" name:"Objects"`
+
+	// Kafka partitioning policy. If left blank, it will remain unchanged by default. If filled, it will replace the original policy.
+	DistributeRules []*DistributeRule `json:"DistributeRules,omitnil,omitempty" name:"DistributeRules"`
+
+	// Default partitioning policy. Data that does not meet the regex in DistributeRules will be partitioned according to the default partitioning policy.Default strategies supported by non-mongo products: table - partitioned by table name, pk - partitioned by table name + primary key. Mongo's default strategy only supports: collection-partitioned by collection name.This field is used in conjunction with DistributeRules. If DistributeRules is configured, this field is also required. If this field is configured, it is considered as configuring a DistributeRules, and the original partitioning policy will also be overwritten.
+	DefaultRuleType *string `json:"DefaultRuleType,omitnil,omitempty" name:"DefaultRuleType"`
+
+	// Mongo output aggregation settings, optional for Mongo tasks. If left blank, no modification will be made by default.
+	PipelineInfo []*PipelineInfo `json:"PipelineInfo,omitnil,omitempty" name:"PipelineInfo"`
+}
+
+type ModifySubscribeObjectsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Data subscription type. Valid values for non-mongo task: 0 (full instance update); 1 (data update); 2 (structure update); 3 (data + structure update). Valid values for mongo task: 0 (full instance update); 4 (subscribe to a table); 5 (subscribe to a collection).
+	SubscribeObjectType *int64 `json:"SubscribeObjectType,omitnil,omitempty" name:"SubscribeObjectType"`
+
+	// Modified subscription database table information. It will replace the original subscription object, this field is required unless SubscribeObjectType = 0 or 2.
+	Objects []*ModifiedSubscribeObject `json:"Objects,omitnil,omitempty" name:"Objects"`
+
+	// Kafka partitioning policy. If left blank, it will remain unchanged by default. If filled, it will replace the original policy.
+	DistributeRules []*DistributeRule `json:"DistributeRules,omitnil,omitempty" name:"DistributeRules"`
+
+	// Default partitioning policy. Data that does not meet the regex in DistributeRules will be partitioned according to the default partitioning policy.Default strategies supported by non-mongo products: table - partitioned by table name, pk - partitioned by table name + primary key. Mongo's default strategy only supports: collection-partitioned by collection name.This field is used in conjunction with DistributeRules. If DistributeRules is configured, this field is also required. If this field is configured, it is considered as configuring a DistributeRules, and the original partitioning policy will also be overwritten.
+	DefaultRuleType *string `json:"DefaultRuleType,omitnil,omitempty" name:"DefaultRuleType"`
+
+	// Mongo output aggregation settings, optional for Mongo tasks. If left blank, no modification will be made by default.
+	PipelineInfo []*PipelineInfo `json:"PipelineInfo,omitnil,omitempty" name:"PipelineInfo"`
+}
+
+func (r *ModifySubscribeObjectsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySubscribeObjectsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	delete(f, "SubscribeObjectType")
+	delete(f, "Objects")
+	delete(f, "DistributeRules")
+	delete(f, "DefaultRuleType")
+	delete(f, "PipelineInfo")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySubscribeObjectsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySubscribeObjectsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySubscribeObjectsResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySubscribeObjectsResponseParams `json:"Response"`
+}
+
+func (r *ModifySubscribeObjectsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySubscribeObjectsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifySyncJobConfigRequestParams struct {
 	// Sync task ID
 	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
@@ -3546,7 +5254,7 @@ func (r *ModifySyncJobConfigRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySyncJobConfigResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3566,6 +5274,109 @@ func (r *ModifySyncJobConfigResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type ModifySyncRateLimitRequestParams struct {
+	// Migration task ID
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
+
+	// Number of full export threads for sync task. Value range: 1-16.
+	DumpThread *int64 `json:"DumpThread,omitnil,omitempty" name:"DumpThread"`
+
+	// The full export Rps for sync task. The value needs to be greater than 0.
+	DumpRps *int64 `json:"DumpRps,omitnil,omitempty" name:"DumpRps"`
+
+	// Number of full import threads for sync task. Value range: 1-16.
+	LoadThread *int64 `json:"LoadThread,omitnil,omitempty" name:"LoadThread"`
+
+	// Number of incremental import threads for sync task. Value range: 1-128.
+	SinkerThread *int64 `json:"SinkerThread,omitnil,omitempty" name:"SinkerThread"`
+
+	// The full import Rps for sync task.
+	LoadRps *int64 `json:"LoadRps,omitnil,omitempty" name:"LoadRps"`
+}
+
+type ModifySyncRateLimitRequest struct {
+	*tchttp.BaseRequest
+	
+	// Migration task ID
+	JobId *string `json:"JobId,omitnil,omitempty" name:"JobId"`
+
+	// Number of full export threads for sync task. Value range: 1-16.
+	DumpThread *int64 `json:"DumpThread,omitnil,omitempty" name:"DumpThread"`
+
+	// The full export Rps for sync task. The value needs to be greater than 0.
+	DumpRps *int64 `json:"DumpRps,omitnil,omitempty" name:"DumpRps"`
+
+	// Number of full import threads for sync task. Value range: 1-16.
+	LoadThread *int64 `json:"LoadThread,omitnil,omitempty" name:"LoadThread"`
+
+	// Number of incremental import threads for sync task. Value range: 1-128.
+	SinkerThread *int64 `json:"SinkerThread,omitnil,omitempty" name:"SinkerThread"`
+
+	// The full import Rps for sync task.
+	LoadRps *int64 `json:"LoadRps,omitnil,omitempty" name:"LoadRps"`
+}
+
+func (r *ModifySyncRateLimitRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySyncRateLimitRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "JobId")
+	delete(f, "DumpThread")
+	delete(f, "DumpRps")
+	delete(f, "LoadThread")
+	delete(f, "SinkerThread")
+	delete(f, "LoadRps")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySyncRateLimitRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySyncRateLimitResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySyncRateLimitResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySyncRateLimitResponseParams `json:"Response"`
+}
+
+func (r *ModifySyncRateLimitResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySyncRateLimitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type MonitorInfo struct {
+	// The number of the current partition, starting from 0.
+	PartitionNo *int64 `json:"PartitionNo,omitnil,omitempty" name:"PartitionNo"`
+
+	// The offset of the current partition.
+	ConsumerGroupOffset *int64 `json:"ConsumerGroupOffset,omitnil,omitempty" name:"ConsumerGroupOffset"`
+
+	// The amount of unconsumed data in the current partition.
+	ConsumerGroupLag *int64 `json:"ConsumerGroupLag,omitnil,omitempty" name:"ConsumerGroupLag"`
+
+	// The consumption delay of the current partition (in seconds).
+	Latency *int64 `json:"Latency,omitnil,omitempty" name:"Latency"`
+}
+
 type Objects struct {
 	// Sync object type. Valid value: `Partial` (Partial objects). Note: This field may return null, indicating that no valid values can be obtained.
 	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
@@ -3580,6 +5391,14 @@ type Objects struct {
 	// A redundant field that specifies the online DDL type
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	OnlineDDL *OnlineDDL `json:"OnlineDDL,omitnil,omitempty" name:"OnlineDDL"`
+}
+
+type OffsetTimeMap struct {
+	// Kafka partition numberNote: This field may return null, indicating that no valid values can be obtained.
+	PartitionNo *uint64 `json:"PartitionNo,omitnil,omitempty" name:"PartitionNo"`
+
+	// Kafka offsetNote: This field may return null, indicating that no valid values can be obtained.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 }
 
 type OnlineDDL struct {
@@ -3636,6 +5455,14 @@ type Options struct {
 	FilterCheckpoint *bool `json:"FilterCheckpoint,omitnil,omitempty" name:"FilterCheckpoint"`
 }
 
+type PartitionAssignment struct {
+	// The clientId of the consumer
+	ClientId *string `json:"ClientId,omitnil,omitempty" name:"ClientId"`
+
+	// The partition is being consumed by this consumer.Note: This field may return null, indicating that no valid values can be obtained.
+	PartitionNo []*uint64 `json:"PartitionNo,omitnil,omitempty" name:"PartitionNo"`
+}
+
 // Predefined struct for user
 type PauseMigrateJobRequestParams struct {
 	// Data migration task ID
@@ -3670,7 +5497,7 @@ func (r *PauseMigrateJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type PauseMigrateJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3724,7 +5551,7 @@ func (r *PauseSyncJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type PauseSyncJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3742,6 +5569,14 @@ func (r *PauseSyncJobResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *PauseSyncJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type PipelineInfo struct {
+	// Aggregation operators: $addFields, $match, $project, $replaceRoot, $redact, $replaceWith, $set, $unset. $replaceWith, $set, $unset are available options for subscription instances that are version 4.2 or higher.Note: This field may return null, indicating that no valid values can be obtained.
+	AggOp *string `json:"AggOp,omitnil,omitempty" name:"AggOp"`
+
+	// Aggregation expression must be in json format.Note: This field may return null, indicating that no valid values can be obtained.
+	AggCmd *string `json:"AggCmd,omitnil,omitempty" name:"AggCmd"`
 }
 
 type ProcessProgress struct {
@@ -3854,7 +5689,7 @@ func (r *RecoverMigrateJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type RecoverMigrateJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3908,7 +5743,7 @@ func (r *RecoverSyncJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type RecoverSyncJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3925,6 +5760,149 @@ func (r *RecoverSyncJobResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *RecoverSyncJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResetConsumerGroupOffsetRequestParams struct {
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Subscribed Kafka topic
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+
+	// Consumer group name. The full name of the actual consumer group is in the form: consumer-grp-#{SubscribeId}-#{ConsumerGroupName}.
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
+
+	// The partition number of offset needs to be modified.
+	PartitionNos []*int64 `json:"PartitionNos,omitnil,omitempty" name:"PartitionNos"`
+
+	// Reset mode. Valid values: earliest (start consumption from the earliest position); latest (start consumption from the latest position); datetime (start consumption from the most recent checkpoint before the specified time).
+	ResetMode *string `json:"ResetMode,omitnil,omitempty" name:"ResetMode"`
+
+	// When ResetMode is datetime, this field needs to be filled in, the format is: Y-m-d h:m:s. If not filled in, the default time is 0, and the effect is the same as earliest.
+	ResetDatetime *string `json:"ResetDatetime,omitnil,omitempty" name:"ResetDatetime"`
+}
+
+type ResetConsumerGroupOffsetRequest struct {
+	*tchttp.BaseRequest
+	
+	// Subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Subscribed Kafka topic
+	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
+
+	// Consumer group name. The full name of the actual consumer group is in the form: consumer-grp-#{SubscribeId}-#{ConsumerGroupName}.
+	ConsumerGroupName *string `json:"ConsumerGroupName,omitnil,omitempty" name:"ConsumerGroupName"`
+
+	// The partition number of offset needs to be modified.
+	PartitionNos []*int64 `json:"PartitionNos,omitnil,omitempty" name:"PartitionNos"`
+
+	// Reset mode. Valid values: earliest (start consumption from the earliest position); latest (start consumption from the latest position); datetime (start consumption from the most recent checkpoint before the specified time).
+	ResetMode *string `json:"ResetMode,omitnil,omitempty" name:"ResetMode"`
+
+	// When ResetMode is datetime, this field needs to be filled in, the format is: Y-m-d h:m:s. If not filled in, the default time is 0, and the effect is the same as earliest.
+	ResetDatetime *string `json:"ResetDatetime,omitnil,omitempty" name:"ResetDatetime"`
+}
+
+func (r *ResetConsumerGroupOffsetRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetConsumerGroupOffsetRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	delete(f, "TopicName")
+	delete(f, "ConsumerGroupName")
+	delete(f, "PartitionNos")
+	delete(f, "ResetMode")
+	delete(f, "ResetDatetime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetConsumerGroupOffsetRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResetConsumerGroupOffsetResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ResetConsumerGroupOffsetResponse struct {
+	*tchttp.BaseResponse
+	Response *ResetConsumerGroupOffsetResponseParams `json:"Response"`
+}
+
+func (r *ResetConsumerGroupOffsetResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetConsumerGroupOffsetResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResetSubscribeRequestParams struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+type ResetSubscribeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+func (r *ResetSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetSubscribeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResetSubscribeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResetSubscribeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ResetSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *ResetSubscribeResponseParams `json:"Response"`
+}
+
+func (r *ResetSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResetSubscribeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -3969,7 +5947,7 @@ func (r *ResizeSyncJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ResizeSyncJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4030,7 +6008,7 @@ func (r *ResumeMigrateJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ResumeMigrateJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4047,6 +6025,60 @@ func (r *ResumeMigrateJobResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ResumeMigrateJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResumeSubscribeRequestParams struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+type ResumeSubscribeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+func (r *ResumeSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeSubscribeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ResumeSubscribeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ResumeSubscribeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ResumeSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *ResumeSubscribeResponseParams `json:"Response"`
+}
+
+func (r *ResumeSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ResumeSubscribeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4084,7 +6116,7 @@ func (r *ResumeSyncJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ResumeSyncJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4166,7 +6198,7 @@ type SkipCheckItemResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4227,7 +6259,7 @@ func (r *SkipSyncCheckItemRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type SkipSyncCheckItemResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4312,7 +6344,7 @@ func (r *StartCompareRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartCompareResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4366,7 +6398,7 @@ func (r *StartMigrateJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartMigrateJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4420,7 +6452,7 @@ func (r *StartModifySyncJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartModifySyncJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4437,6 +6469,60 @@ func (r *StartModifySyncJobResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *StartModifySyncJobResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartSubscribeRequestParams struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+type StartSubscribeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+}
+
+func (r *StartSubscribeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartSubscribeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubscribeId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartSubscribeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type StartSubscribeResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type StartSubscribeResponse struct {
+	*tchttp.BaseResponse
+	Response *StartSubscribeResponseParams `json:"Response"`
+}
+
+func (r *StartSubscribeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *StartSubscribeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4474,7 +6560,7 @@ func (r *StartSyncJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StartSyncJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4628,7 +6714,7 @@ func (r *StopCompareRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StopCompareResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4682,7 +6768,7 @@ func (r *StopMigrateJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StopMigrateJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4736,7 +6822,7 @@ func (r *StopSyncJobRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type StopSyncJobResponseParams struct {
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -4754,6 +6840,137 @@ func (r *StopSyncJobResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *StopSyncJobResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type SubsErr struct {
+	// Error message
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+}
+
+type SubscribeCheckStepInfo struct {
+	// Step name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StepName *string `json:"StepName,omitnil,omitempty" name:"StepName"`
+
+	// Step Id
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StepId *string `json:"StepId,omitnil,omitempty" name:"StepId"`
+
+	// Step number, starting from 1
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StepNo *uint64 `json:"StepNo,omitnil,omitempty" name:"StepNo"`
+
+	// Current step status. Valid values: notStarted, running, finished, failed.Note: This field may return null, indicating that no valid values can be obtained.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Current step progressNote: This field may return null, indicating that no valid values can be obtained.
+	Percent *uint64 `json:"Percent,omitnil,omitempty" name:"Percent"`
+
+	// Error messageNote: This field may return null, indicating that no valid values can be obtained.
+	Errors []*SubscribeCheckStepTip `json:"Errors,omitnil,omitempty" name:"Errors"`
+
+	// Warning messageNote: This field may return null, indicating that no valid values can be obtained.
+	Warnings []*SubscribeCheckStepTip `json:"Warnings,omitnil,omitempty" name:"Warnings"`
+}
+
+type SubscribeCheckStepTip struct {
+	// Error or warning detailsNote: This field may return null, indicating that no valid values can be obtained.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Help documentation
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	HelpDoc *string `json:"HelpDoc,omitnil,omitempty" name:"HelpDoc"`
+}
+
+type SubscribeInfo struct {
+	// Data subscription instance ID
+	SubscribeId *string `json:"SubscribeId,omitnil,omitempty" name:"SubscribeId"`
+
+	// Data subscription instance name
+	SubscribeName *string `json:"SubscribeName,omitnil,omitempty" name:"SubscribeName"`
+
+	// Kafka topic for data sent by the subscription instance
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Topic *string `json:"Topic,omitnil,omitempty" name:"Topic"`
+
+	// Subscription instance type. Currently, cynosdbmysql, mariadb, mongodb, mysql, percona, tdpg, tdsqlpercona are supported.
+	Product *string `json:"Product,omitnil,omitempty" name:"Product"`
+
+	// The subscribed database instance ID (if the subscription is a cloud database). If the instance is not on Tencent Cloud, this value is empty.Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Cloud database status: running, isolated, offline. If it is not on the cloud, this value is empty.Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceStatus *string `json:"InstanceStatus,omitnil,omitempty" name:"InstanceStatus"`
+
+	// Data subscription lifecycle status. Valid values: normal (normal), isolating (isolating), isolated (isolated), offlining (offlining), post2PrePayIng (changing from pay-as-you-go to monthly subscription).
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Data subscription status. Valid values: notStarted, checking, checkNotPass, checkPass, starting, running, error.
+	SubsStatus *string `json:"SubsStatus,omitnil,omitempty" name:"SubsStatus"`
+
+	// Last modification time, the format is: Y-m-d h:m:s.Note: This field may return null, indicating that no valid values can be obtained.
+	ModifyTime *string `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
+
+	// Creation time, the format is: Y-m-d h:m:s.Note: This field may return null, indicating that no valid values can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Isolation time, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
+	IsolateTime *string `json:"IsolateTime,omitnil,omitempty" name:"IsolateTime"`
+
+	// Expiration time for monthly subscription tasks, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Offline time, the format is: Y-m-d h:m:s. Default time: 0000-00-00 00:00:00.Note: This field may return null, indicating that no valid values can be obtained.
+	OfflineTime *string `json:"OfflineTime,omitnil,omitempty" name:"OfflineTime"`
+
+	// Billing mode. 1: pay-as-you-go
+	PayType *int64 `json:"PayType,omitnil,omitempty" name:"PayType"`
+
+	// Auto-renewal flag. It is meaningful only when PayType=0. Valid values: 0 (auto-renewal disabled); 1 (auto-renewal enabled).
+	AutoRenewFlag *int64 `json:"AutoRenewFlag,omitnil,omitempty" name:"AutoRenewFlag"`
+
+	// Data subscription instance region
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// Access type. Valid values: extranet (public network); vpncloud (VPN access); dcg (Direct Connect); ccn (CCN); cdb (database); cvm (self-build on CVM); intranet (intranet); vpc (VPC).Note: This field may return null, indicating that no valid values can be obtained.
+	AccessType *string `json:"AccessType,omitnil,omitempty" name:"AccessType"`
+
+	// Database node information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Endpoints []*EndpointItem `json:"Endpoints,omitnil,omitempty" name:"Endpoints"`
+
+	// Data subscription version, only Kafka version is currently supported.Note: This field may return null, indicating that no valid values can be obtained.
+	SubscribeVersion *string `json:"SubscribeVersion,omitnil,omitempty" name:"SubscribeVersion"`
+
+	// TagNote: This field may return null, indicating that no valid values can be obtained.
+	Tags []*TagItem `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Task error messageNote: This field may return null, indicating that no valid values can be obtained.
+	Errors []*SubsErr `json:"Errors,omitnil,omitempty" name:"Errors"`
+}
+
+type SubscribeKafkaConfig struct {
+	// Number of Kafka partitions. Valid values: 1, 4, 8.Note: This field may return null, indicating that no valid values can be obtained.
+	NumberOfPartitions *uint64 `json:"NumberOfPartitions,omitnil,omitempty" name:"NumberOfPartitions"`
+
+	// Partition rules. This field is required when NumberOfPartitions > 1.Note: This field may return null, indicating that no valid values can be obtained.
+	DistributeRules []*DistributeRule `json:"DistributeRules,omitnil,omitempty" name:"DistributeRules"`
+
+	// Default partitioning policy. If NumberOfPartitions > 1, this field is required. Data that does not meet the regex in DistributeRules will be partitioned according to the default partitioning policy.Valid values for non-mongo products: table (partitioned by table name); pk (partitioned by table name + primary key). Valid values for mongo: collection (partitioned by collection name). This field is used in conjunction with DistributeRules. If this field is configured, it is considered as configuring a DistributeRules.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	DefaultRuleType *string `json:"DefaultRuleType,omitnil,omitempty" name:"DefaultRuleType"`
+}
+
+type SubscribeObject struct {
+	// Subscription data type. Valid values: database; table (if DatabaseType is mongodb, it means a collection).Note: This field may return null, indicating that no valid values can be obtained.
+	ObjectType *string `json:"ObjectType,omitnil,omitempty" name:"ObjectType"`
+
+	// Subscribed database name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Database *string `json:"Database,omitnil,omitempty" name:"Database"`
+
+	// Name of the table in the subscribed database. If DatabaseType is mongodb, fill in the collection name. MongoDB only supports subscribing to a single database or a single collection.Note: This field may return null, indicating that no valid values can be obtained.
+	Tables []*string `json:"Tables,omitnil,omitempty" name:"Tables"`
 }
 
 type SyncDBEndpointInfos struct {

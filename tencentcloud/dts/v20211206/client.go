@@ -160,6 +160,93 @@ func (c *Client) CompleteMigrateJobWithContext(ctx context.Context, request *Com
     return
 }
 
+func NewConfigureSubscribeJobRequest() (request *ConfigureSubscribeJobRequest) {
+    request = &ConfigureSubscribeJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "ConfigureSubscribeJob")
+    
+    
+    return
+}
+
+func NewConfigureSubscribeJobResponse() (response *ConfigureSubscribeJobResponse) {
+    response = &ConfigureSubscribeJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ConfigureSubscribeJob
+// This API is used to configure data subscription instances.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ConfigureSubscribeJob(request *ConfigureSubscribeJobRequest) (response *ConfigureSubscribeJobResponse, err error) {
+    return c.ConfigureSubscribeJobWithContext(context.Background(), request)
+}
+
+// ConfigureSubscribeJob
+// This API is used to configure data subscription instances.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CONTROLLERNOTFOUNDERROR = "InvalidParameter.ControllerNotFoundError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ConfigureSubscribeJobWithContext(ctx context.Context, request *ConfigureSubscribeJobRequest) (response *ConfigureSubscribeJobResponse, err error) {
+    if request == nil {
+        request = NewConfigureSubscribeJobRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ConfigureSubscribeJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewConfigureSubscribeJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewConfigureSyncJobRequest() (request *ConfigureSyncJobRequest) {
     request = &ConfigureSyncJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -187,6 +274,7 @@ func NewConfigureSyncJobResponse() (response *ConfigureSyncJobResponse) {
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
 func (c *Client) ConfigureSyncJob(request *ConfigureSyncJobRequest) (response *ConfigureSyncJobResponse, err error) {
     return c.ConfigureSyncJobWithContext(context.Background(), request)
 }
@@ -199,6 +287,7 @@ func (c *Client) ConfigureSyncJob(request *ConfigureSyncJobRequest) (response *C
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
 //  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
 //  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
 func (c *Client) ConfigureSyncJobWithContext(ctx context.Context, request *ConfigureSyncJobRequest) (response *ConfigureSyncJobResponse, err error) {
     if request == nil {
         request = NewConfigureSyncJobRequest()
@@ -475,6 +564,89 @@ func (c *Client) CreateCompareTaskWithContext(ctx context.Context, request *Crea
     request.SetContext(ctx)
     
     response = NewCreateCompareTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateConsumerGroupRequest() (request *CreateConsumerGroupRequest) {
+    request = &CreateConsumerGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "CreateConsumerGroup")
+    
+    
+    return
+}
+
+func NewCreateConsumerGroupResponse() (response *CreateConsumerGroupResponse) {
+    response = &CreateConsumerGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateConsumerGroup
+// This API is used to creat a consumer group for the subscription instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) CreateConsumerGroup(request *CreateConsumerGroupRequest) (response *CreateConsumerGroupResponse, err error) {
+    return c.CreateConsumerGroupWithContext(context.Background(), request)
+}
+
+// CreateConsumerGroup
+// This API is used to creat a consumer group for the subscription instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUE = "InvalidParameterValue.InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) CreateConsumerGroupWithContext(ctx context.Context, request *CreateConsumerGroupRequest) (response *CreateConsumerGroupResponse, err error) {
+    if request == nil {
+        request = NewCreateConsumerGroupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateConsumerGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateConsumerGroupResponse()
     err = c.Send(request, response)
     return
 }
@@ -780,6 +952,174 @@ func (c *Client) CreateModifyCheckSyncJobWithContext(ctx context.Context, reques
     return
 }
 
+func NewCreateSubscribeRequest() (request *CreateSubscribeRequest) {
+    request = &CreateSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "CreateSubscribe")
+    
+    
+    return
+}
+
+func NewCreateSubscribeResponse() (response *CreateSubscribeResponse) {
+    response = &CreateSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateSubscribe
+// This API is used to create a data subscription task.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_USERNOTAUTHED = "FailedOperation.UserNotAuthed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_NOTENOUGHMONEYERROR = "OperationDenied.NotEnoughMoneyError"
+//  OPERATIONDENIED_OPERATIONDENIED = "OperationDenied.OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) CreateSubscribe(request *CreateSubscribeRequest) (response *CreateSubscribeResponse, err error) {
+    return c.CreateSubscribeWithContext(context.Background(), request)
+}
+
+// CreateSubscribe
+// This API is used to create a data subscription task.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  FAILEDOPERATION_USERNOTAUTHED = "FailedOperation.UserNotAuthed"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_NOTENOUGHMONEYERROR = "OperationDenied.NotEnoughMoneyError"
+//  OPERATIONDENIED_OPERATIONDENIED = "OperationDenied.OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) CreateSubscribeWithContext(ctx context.Context, request *CreateSubscribeRequest) (response *CreateSubscribeResponse, err error) {
+    if request == nil {
+        request = NewCreateSubscribeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSubscribe require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSubscribeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateSubscribeCheckJobRequest() (request *CreateSubscribeCheckJobRequest) {
+    request = &CreateSubscribeCheckJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "CreateSubscribeCheckJob")
+    
+    
+    return
+}
+
+func NewCreateSubscribeCheckJobResponse() (response *CreateSubscribeCheckJobResponse) {
+    response = &CreateSubscribeCheckJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateSubscribeCheckJob
+// This API is used to create a subscription check task. The task must have successfully called the ConfigureSubscribeJob interface to configure all necessary information before starting the check.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) CreateSubscribeCheckJob(request *CreateSubscribeCheckJobRequest) (response *CreateSubscribeCheckJobResponse, err error) {
+    return c.CreateSubscribeCheckJobWithContext(context.Background(), request)
+}
+
+// CreateSubscribeCheckJob
+// This API is used to create a subscription check task. The task must have successfully called the ConfigureSubscribeJob interface to configure all necessary information before starting the check.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) CreateSubscribeCheckJobWithContext(ctx context.Context, request *CreateSubscribeCheckJobRequest) (response *CreateSubscribeCheckJobResponse, err error) {
+    if request == nil {
+        request = NewCreateSubscribeCheckJobRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateSubscribeCheckJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateSubscribeCheckJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateSyncJobRequest() (request *CreateSyncJobRequest) {
     request = &CreateSyncJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -932,6 +1272,89 @@ func (c *Client) DeleteCompareTaskWithContext(ctx context.Context, request *Dele
     request.SetContext(ctx)
     
     response = NewDeleteCompareTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteConsumerGroupRequest() (request *DeleteConsumerGroupRequest) {
+    request = &DeleteConsumerGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "DeleteConsumerGroup")
+    
+    
+    return
+}
+
+func NewDeleteConsumerGroupResponse() (response *DeleteConsumerGroupResponse) {
+    response = &DeleteConsumerGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteConsumerGroup
+// This API is used to delete a consumer group of a subscription task.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DeleteConsumerGroup(request *DeleteConsumerGroupRequest) (response *DeleteConsumerGroupResponse, err error) {
+    return c.DeleteConsumerGroupWithContext(context.Background(), request)
+}
+
+// DeleteConsumerGroup
+// This API is used to delete a consumer group of a subscription task.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DeleteConsumerGroupWithContext(ctx context.Context, request *DeleteConsumerGroupRequest) (response *DeleteConsumerGroupResponse, err error) {
+    if request == nil {
+        request = NewDeleteConsumerGroupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteConsumerGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteConsumerGroupResponse()
     err = c.Send(request, response)
     return
 }
@@ -1153,6 +1576,89 @@ func (c *Client) DescribeCompareTasksWithContext(ctx context.Context, request *D
     request.SetContext(ctx)
     
     response = NewDescribeCompareTasksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeConsumerGroupsRequest() (request *DescribeConsumerGroupsRequest) {
+    request = &DescribeConsumerGroupsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "DescribeConsumerGroups")
+    
+    
+    return
+}
+
+func NewDescribeConsumerGroupsResponse() (response *DescribeConsumerGroupsResponse) {
+    response = &DescribeConsumerGroupsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeConsumerGroups
+// This API is used to get consumer group details for the subscription instance configuration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DescribeConsumerGroups(request *DescribeConsumerGroupsRequest) (response *DescribeConsumerGroupsResponse, err error) {
+    return c.DescribeConsumerGroupsWithContext(context.Background(), request)
+}
+
+// DescribeConsumerGroups
+// This API is used to get consumer group details for the subscription instance configuration.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DescribeConsumerGroupsWithContext(ctx context.Context, request *DescribeConsumerGroupsRequest) (response *DescribeConsumerGroupsResponse, err error) {
+    if request == nil {
+        request = NewDescribeConsumerGroupsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeConsumerGroups require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeConsumerGroupsResponse()
     err = c.Send(request, response)
     return
 }
@@ -1576,6 +2082,417 @@ func (c *Client) DescribeModifyCheckSyncJobResultWithContext(ctx context.Context
     return
 }
 
+func NewDescribeOffsetByTimeRequest() (request *DescribeOffsetByTimeRequest) {
+    request = &DescribeOffsetByTimeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "DescribeOffsetByTime")
+    
+    
+    return
+}
+
+func NewDescribeOffsetByTimeResponse() (response *DescribeOffsetByTimeResponse) {
+    response = &DescribeOffsetByTimeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeOffsetByTime
+// This API is used to query the latest offset before the specified time in KafkaTopic.The offset output by the interface is the closest offset to this time.If the input time is much later than the current time, the output is equivalent to the latest offset;If the input time is much earlier than the current time, the output is equivalent to the oldest offset;If the input is empty, the default time is 0, which is the oldest offset to be queried.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DescribeOffsetByTime(request *DescribeOffsetByTimeRequest) (response *DescribeOffsetByTimeResponse, err error) {
+    return c.DescribeOffsetByTimeWithContext(context.Background(), request)
+}
+
+// DescribeOffsetByTime
+// This API is used to query the latest offset before the specified time in KafkaTopic.The offset output by the interface is the closest offset to this time.If the input time is much later than the current time, the output is equivalent to the latest offset;If the input time is much earlier than the current time, the output is equivalent to the oldest offset;If the input is empty, the default time is 0, which is the oldest offset to be queried.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DescribeOffsetByTimeWithContext(ctx context.Context, request *DescribeOffsetByTimeRequest) (response *DescribeOffsetByTimeResponse, err error) {
+    if request == nil {
+        request = NewDescribeOffsetByTimeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOffsetByTime require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeOffsetByTimeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSubscribeCheckJobRequest() (request *DescribeSubscribeCheckJobRequest) {
+    request = &DescribeSubscribeCheckJobRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "DescribeSubscribeCheckJob")
+    
+    
+    return
+}
+
+func NewDescribeSubscribeCheckJobResponse() (response *DescribeSubscribeCheckJobResponse) {
+    response = &DescribeSubscribeCheckJobResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSubscribeCheckJob
+// This API is used to query the results of a subscription check task.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DescribeSubscribeCheckJob(request *DescribeSubscribeCheckJobRequest) (response *DescribeSubscribeCheckJobResponse, err error) {
+    return c.DescribeSubscribeCheckJobWithContext(context.Background(), request)
+}
+
+// DescribeSubscribeCheckJob
+// This API is used to query the results of a subscription check task.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DescribeSubscribeCheckJobWithContext(ctx context.Context, request *DescribeSubscribeCheckJobRequest) (response *DescribeSubscribeCheckJobResponse, err error) {
+    if request == nil {
+        request = NewDescribeSubscribeCheckJobRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSubscribeCheckJob require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSubscribeCheckJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSubscribeDetailRequest() (request *DescribeSubscribeDetailRequest) {
+    request = &DescribeSubscribeDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "DescribeSubscribeDetail")
+    
+    
+    return
+}
+
+func NewDescribeSubscribeDetailResponse() (response *DescribeSubscribeDetailResponse) {
+    response = &DescribeSubscribeDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSubscribeDetail
+// This API is used to get the configuration information of the data subscription instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DescribeSubscribeDetail(request *DescribeSubscribeDetailRequest) (response *DescribeSubscribeDetailResponse, err error) {
+    return c.DescribeSubscribeDetailWithContext(context.Background(), request)
+}
+
+// DescribeSubscribeDetail
+// This API is used to get the configuration information of the data subscription instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DescribeSubscribeDetailWithContext(ctx context.Context, request *DescribeSubscribeDetailRequest) (response *DescribeSubscribeDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeSubscribeDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSubscribeDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSubscribeDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSubscribeJobsRequest() (request *DescribeSubscribeJobsRequest) {
+    request = &DescribeSubscribeJobsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "DescribeSubscribeJobs")
+    
+    
+    return
+}
+
+func NewDescribeSubscribeJobsResponse() (response *DescribeSubscribeJobsResponse) {
+    response = &DescribeSubscribeJobsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSubscribeJobs
+// This API is used to get the information list of data subscription instances. Pagination is enabled by default with 20 results returned each time.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DescribeSubscribeJobs(request *DescribeSubscribeJobsRequest) (response *DescribeSubscribeJobsResponse, err error) {
+    return c.DescribeSubscribeJobsWithContext(context.Background(), request)
+}
+
+// DescribeSubscribeJobs
+// This API is used to get the information list of data subscription instances. Pagination is enabled by default with 20 results returned each time.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DescribeSubscribeJobsWithContext(ctx context.Context, request *DescribeSubscribeJobsRequest) (response *DescribeSubscribeJobsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSubscribeJobsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSubscribeJobs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSubscribeJobsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSubscribeReturnableRequest() (request *DescribeSubscribeReturnableRequest) {
+    request = &DescribeSubscribeReturnableRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "DescribeSubscribeReturnable")
+    
+    
+    return
+}
+
+func NewDescribeSubscribeReturnableResponse() (response *DescribeSubscribeReturnableResponse) {
+    response = &DescribeSubscribeReturnableResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSubscribeReturnable
+// This API is used to query whether a subscription task can be terminated and returned.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DescribeSubscribeReturnable(request *DescribeSubscribeReturnableRequest) (response *DescribeSubscribeReturnableResponse, err error) {
+    return c.DescribeSubscribeReturnableWithContext(context.Background(), request)
+}
+
+// DescribeSubscribeReturnable
+// This API is used to query whether a subscription task can be terminated and returned.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DescribeSubscribeReturnableWithContext(ctx context.Context, request *DescribeSubscribeReturnableRequest) (response *DescribeSubscribeReturnableResponse, err error) {
+    if request == nil {
+        request = NewDescribeSubscribeReturnableRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSubscribeReturnable require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSubscribeReturnableResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSyncJobsRequest() (request *DescribeSyncJobsRequest) {
     request = &DescribeSyncJobsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1635,6 +2552,89 @@ func (c *Client) DescribeSyncJobsWithContext(ctx context.Context, request *Descr
     request.SetContext(ctx)
     
     response = NewDescribeSyncJobsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDestroyIsolatedSubscribeRequest() (request *DestroyIsolatedSubscribeRequest) {
+    request = &DestroyIsolatedSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "DestroyIsolatedSubscribe")
+    
+    
+    return
+}
+
+func NewDestroyIsolatedSubscribeResponse() (response *DestroyIsolatedSubscribeResponse) {
+    response = &DestroyIsolatedSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DestroyIsolatedSubscribe
+// This API is used to deactivate an isolated data subscription instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DestroyIsolatedSubscribe(request *DestroyIsolatedSubscribeRequest) (response *DestroyIsolatedSubscribeResponse, err error) {
+    return c.DestroyIsolatedSubscribeWithContext(context.Background(), request)
+}
+
+// DestroyIsolatedSubscribe
+// This API is used to deactivate an isolated data subscription instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) DestroyIsolatedSubscribeWithContext(ctx context.Context, request *DestroyIsolatedSubscribeRequest) (response *DestroyIsolatedSubscribeResponse, err error) {
+    if request == nil {
+        request = NewDestroyIsolatedSubscribeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DestroyIsolatedSubscribe require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDestroyIsolatedSubscribeResponse()
     err = c.Send(request, response)
     return
 }
@@ -1858,6 +2858,89 @@ func (c *Client) IsolateMigrateJobWithContext(ctx context.Context, request *Isol
     return
 }
 
+func NewIsolateSubscribeRequest() (request *IsolateSubscribeRequest) {
+    request = &IsolateSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "IsolateSubscribe")
+    
+    
+    return
+}
+
+func NewIsolateSubscribeResponse() (response *IsolateSubscribeResponse) {
+    response = &IsolateSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// IsolateSubscribe
+// This API is used to isolate the subscription task. After calling, the subscription task will not be available. Pay-as-you-go tasks will stop billing, and monthly subscription tasks will refund automatically.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) IsolateSubscribe(request *IsolateSubscribeRequest) (response *IsolateSubscribeResponse, err error) {
+    return c.IsolateSubscribeWithContext(context.Background(), request)
+}
+
+// IsolateSubscribe
+// This API is used to isolate the subscription task. After calling, the subscription task will not be available. Pay-as-you-go tasks will stop billing, and monthly subscription tasks will refund automatically.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) IsolateSubscribeWithContext(ctx context.Context, request *IsolateSubscribeRequest) (response *IsolateSubscribeResponse, err error) {
+    if request == nil {
+        request = NewIsolateSubscribeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("IsolateSubscribe require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewIsolateSubscribeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewIsolateSyncJobRequest() (request *IsolateSyncJobRequest) {
     request = &IsolateSyncJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1883,6 +2966,7 @@ func NewIsolateSyncJobResponse() (response *IsolateSyncJobResponse) {
 // error code that may be returned:
 //  INTERNALERROR_INTERNALTRADEERROR = "InternalError.InternalTradeError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
 //  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
 func (c *Client) IsolateSyncJob(request *IsolateSyncJobRequest) (response *IsolateSyncJobResponse, err error) {
@@ -1895,6 +2979,7 @@ func (c *Client) IsolateSyncJob(request *IsolateSyncJobRequest) (response *Isola
 // error code that may be returned:
 //  INTERNALERROR_INTERNALTRADEERROR = "InternalError.InternalTradeError"
 //  INTERNALERROR_UNKNOWNERROR = "InternalError.UnknownError"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
 //  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
 //  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
 func (c *Client) IsolateSyncJobWithContext(ctx context.Context, request *IsolateSyncJobRequest) (response *IsolateSyncJobResponse, err error) {
@@ -2081,6 +3166,172 @@ func (c *Client) ModifyCompareTaskNameWithContext(ctx context.Context, request *
     return
 }
 
+func NewModifyConsumerGroupDescriptionRequest() (request *ModifyConsumerGroupDescriptionRequest) {
+    request = &ModifyConsumerGroupDescriptionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "ModifyConsumerGroupDescription")
+    
+    
+    return
+}
+
+func NewModifyConsumerGroupDescriptionResponse() (response *ModifyConsumerGroupDescriptionResponse) {
+    response = &ModifyConsumerGroupDescriptionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyConsumerGroupDescription
+// This API is used to modify the description of the specified subscription consumption group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ModifyConsumerGroupDescription(request *ModifyConsumerGroupDescriptionRequest) (response *ModifyConsumerGroupDescriptionResponse, err error) {
+    return c.ModifyConsumerGroupDescriptionWithContext(context.Background(), request)
+}
+
+// ModifyConsumerGroupDescription
+// This API is used to modify the description of the specified subscription consumption group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ModifyConsumerGroupDescriptionWithContext(ctx context.Context, request *ModifyConsumerGroupDescriptionRequest) (response *ModifyConsumerGroupDescriptionResponse, err error) {
+    if request == nil {
+        request = NewModifyConsumerGroupDescriptionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyConsumerGroupDescription require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyConsumerGroupDescriptionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyConsumerGroupPasswordRequest() (request *ModifyConsumerGroupPasswordRequest) {
+    request = &ModifyConsumerGroupPasswordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "ModifyConsumerGroupPassword")
+    
+    
+    return
+}
+
+func NewModifyConsumerGroupPasswordResponse() (response *ModifyConsumerGroupPasswordResponse) {
+    response = &ModifyConsumerGroupPasswordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyConsumerGroupPassword
+// This API is used to modify the password of the specified subscription consumer group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ModifyConsumerGroupPassword(request *ModifyConsumerGroupPasswordRequest) (response *ModifyConsumerGroupPasswordResponse, err error) {
+    return c.ModifyConsumerGroupPasswordWithContext(context.Background(), request)
+}
+
+// ModifyConsumerGroupPassword
+// This API is used to modify the password of the specified subscription consumer group.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ModifyConsumerGroupPasswordWithContext(ctx context.Context, request *ModifyConsumerGroupPasswordRequest) (response *ModifyConsumerGroupPasswordResponse, err error) {
+    if request == nil {
+        request = NewModifyConsumerGroupPasswordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyConsumerGroupPassword require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyConsumerGroupPasswordResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyMigrateJobSpecRequest() (request *ModifyMigrateJobSpecRequest) {
     request = &ModifyMigrateJobSpecRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2247,6 +3498,156 @@ func (c *Client) ModifyMigrateNameWithContext(ctx context.Context, request *Modi
     return
 }
 
+func NewModifyMigrateRateLimitRequest() (request *ModifyMigrateRateLimitRequest) {
+    request = &ModifyMigrateRateLimitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "ModifyMigrateRateLimit")
+    
+    
+    return
+}
+
+func NewModifyMigrateRateLimitResponse() (response *ModifyMigrateRateLimitResponse) {
+    response = &ModifyMigrateRateLimitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyMigrateRateLimit
+// This API is used to restrict the rate limit of the task, when a user finds that migration task has a large impact on the load of user's database.
+//
+// error code that may be returned:
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  DRYRUNOPERATION_DRYRUNOPERATIONERROR = "DryRunOperation.DryRunOperationError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  LIMITEXCEEDED_LIMITEXCEEDEDERROR = "LimitExceeded.LimitExceededError"
+//  MISSINGPARAMETER_MISSINGPARAMETERERROR = "MissingParameter.MissingParameterError"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  REQUESTLIMITEXCEEDED_REQUESTLIMITEXCEEDEDERROR = "RequestLimitExceeded.RequestLimitExceededError"
+//  RESOURCEINUSE_RESOURCEINUSEERROR = "ResourceInUse.ResourceInUseError"
+//  RESOURCEINSUFFICIENT_RESOURCEINSUFFICIENTERROR = "ResourceInsufficient.ResourceInsufficientError"
+//  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  RESOURCEUNAVAILABLE_RESOURCEUNAVAILABLEERROR = "ResourceUnavailable.ResourceUnavailableError"
+//  RESOURCESSOLDOUT_RESOURCESSOLDOUTERROR = "ResourcesSoldOut.ResourcesSoldOutError"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNKNOWNPARAMETER_UNKNOWNPARAMETERERROR = "UnknownParameter.UnknownParameterError"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ModifyMigrateRateLimit(request *ModifyMigrateRateLimitRequest) (response *ModifyMigrateRateLimitResponse, err error) {
+    return c.ModifyMigrateRateLimitWithContext(context.Background(), request)
+}
+
+// ModifyMigrateRateLimit
+// This API is used to restrict the rate limit of the task, when a user finds that migration task has a large impact on the load of user's database.
+//
+// error code that may be returned:
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  DRYRUNOPERATION_DRYRUNOPERATIONERROR = "DryRunOperation.DryRunOperationError"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  LIMITEXCEEDED_LIMITEXCEEDEDERROR = "LimitExceeded.LimitExceededError"
+//  MISSINGPARAMETER_MISSINGPARAMETERERROR = "MissingParameter.MissingParameterError"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  REQUESTLIMITEXCEEDED_REQUESTLIMITEXCEEDEDERROR = "RequestLimitExceeded.RequestLimitExceededError"
+//  RESOURCEINUSE_RESOURCEINUSEERROR = "ResourceInUse.ResourceInUseError"
+//  RESOURCEINSUFFICIENT_RESOURCEINSUFFICIENTERROR = "ResourceInsufficient.ResourceInsufficientError"
+//  RESOURCENOTFOUND_JOBNOTEXIST = "ResourceNotFound.JobNotExist"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  RESOURCEUNAVAILABLE_RESOURCEUNAVAILABLEERROR = "ResourceUnavailable.ResourceUnavailableError"
+//  RESOURCESSOLDOUT_RESOURCESSOLDOUTERROR = "ResourcesSoldOut.ResourcesSoldOutError"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNKNOWNPARAMETER_UNKNOWNPARAMETERERROR = "UnknownParameter.UnknownParameterError"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ModifyMigrateRateLimitWithContext(ctx context.Context, request *ModifyMigrateRateLimitRequest) (response *ModifyMigrateRateLimitResponse, err error) {
+    if request == nil {
+        request = NewModifyMigrateRateLimitRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMigrateRateLimit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMigrateRateLimitResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyMigrateRuntimeAttributeRequest() (request *ModifyMigrateRuntimeAttributeRequest) {
+    request = &ModifyMigrateRuntimeAttributeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "ModifyMigrateRuntimeAttribute")
+    
+    
+    return
+}
+
+func NewModifyMigrateRuntimeAttributeResponse() (response *ModifyMigrateRuntimeAttributeResponse) {
+    response = &ModifyMigrateRuntimeAttributeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyMigrateRuntimeAttribute
+// This API is used to modify task runtime attributes. This interface is different from the configuration class interface and does not perform state machine evaluation.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_EXECHTTPREQUESTERROR = "InternalError.ExecHttpRequestError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNKNOWNPARAMETER_UNKNOWNPARAMETERERROR = "UnknownParameter.UnknownParameterError"
+func (c *Client) ModifyMigrateRuntimeAttribute(request *ModifyMigrateRuntimeAttributeRequest) (response *ModifyMigrateRuntimeAttributeResponse, err error) {
+    return c.ModifyMigrateRuntimeAttributeWithContext(context.Background(), request)
+}
+
+// ModifyMigrateRuntimeAttribute
+// This API is used to modify task runtime attributes. This interface is different from the configuration class interface and does not perform state machine evaluation.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_EXECHTTPREQUESTERROR = "InternalError.ExecHttpRequestError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNKNOWNPARAMETER_UNKNOWNPARAMETERERROR = "UnknownParameter.UnknownParameterError"
+func (c *Client) ModifyMigrateRuntimeAttributeWithContext(ctx context.Context, request *ModifyMigrateRuntimeAttributeRequest) (response *ModifyMigrateRuntimeAttributeResponse, err error) {
+    if request == nil {
+        request = NewModifyMigrateRuntimeAttributeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyMigrateRuntimeAttribute require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyMigrateRuntimeAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyMigrationJobRequest() (request *ModifyMigrationJobRequest) {
     request = &ModifyMigrationJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2342,6 +3743,255 @@ func (c *Client) ModifyMigrationJobWithContext(ctx context.Context, request *Mod
     return
 }
 
+func NewModifySubscribeAutoRenewFlagRequest() (request *ModifySubscribeAutoRenewFlagRequest) {
+    request = &ModifySubscribeAutoRenewFlagRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "ModifySubscribeAutoRenewFlag")
+    
+    
+    return
+}
+
+func NewModifySubscribeAutoRenewFlagResponse() (response *ModifySubscribeAutoRenewFlagResponse) {
+    response = &ModifySubscribeAutoRenewFlagResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifySubscribeAutoRenewFlag
+// This API is used to modify the auto-renewal flag of your subscription instance. Only the monthly subscription modification task makes sense. After modifying, the pay-as-you-go task has no impact.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ModifySubscribeAutoRenewFlag(request *ModifySubscribeAutoRenewFlagRequest) (response *ModifySubscribeAutoRenewFlagResponse, err error) {
+    return c.ModifySubscribeAutoRenewFlagWithContext(context.Background(), request)
+}
+
+// ModifySubscribeAutoRenewFlag
+// This API is used to modify the auto-renewal flag of your subscription instance. Only the monthly subscription modification task makes sense. After modifying, the pay-as-you-go task has no impact.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ModifySubscribeAutoRenewFlagWithContext(ctx context.Context, request *ModifySubscribeAutoRenewFlagRequest) (response *ModifySubscribeAutoRenewFlagResponse, err error) {
+    if request == nil {
+        request = NewModifySubscribeAutoRenewFlagRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySubscribeAutoRenewFlag require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySubscribeAutoRenewFlagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySubscribeNameRequest() (request *ModifySubscribeNameRequest) {
+    request = &ModifySubscribeNameRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "ModifySubscribeName")
+    
+    
+    return
+}
+
+func NewModifySubscribeNameResponse() (response *ModifySubscribeNameResponse) {
+    response = &ModifySubscribeNameResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifySubscribeName
+// This API is used to modify the name of the data subscription instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ModifySubscribeName(request *ModifySubscribeNameRequest) (response *ModifySubscribeNameResponse, err error) {
+    return c.ModifySubscribeNameWithContext(context.Background(), request)
+}
+
+// ModifySubscribeName
+// This API is used to modify the name of the data subscription instance.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ModifySubscribeNameWithContext(ctx context.Context, request *ModifySubscribeNameRequest) (response *ModifySubscribeNameResponse, err error) {
+    if request == nil {
+        request = NewModifySubscribeNameRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySubscribeName require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySubscribeNameResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySubscribeObjectsRequest() (request *ModifySubscribeObjectsRequest) {
+    request = &ModifySubscribeObjectsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "ModifySubscribeObjects")
+    
+    
+    return
+}
+
+func NewModifySubscribeObjectsResponse() (response *ModifySubscribeObjectsResponse) {
+    response = &ModifySubscribeObjectsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifySubscribeObjects
+// This API is used to modify the data subscription object and Kafka partition rule. For MongoDB subscription, you can also modify the output aggregation rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ModifySubscribeObjects(request *ModifySubscribeObjectsRequest) (response *ModifySubscribeObjectsResponse, err error) {
+    return c.ModifySubscribeObjectsWithContext(context.Background(), request)
+}
+
+// ModifySubscribeObjects
+// This API is used to modify the data subscription object and Kafka partition rule. For MongoDB subscription, you can also modify the output aggregation rule.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ModifySubscribeObjectsWithContext(ctx context.Context, request *ModifySubscribeObjectsRequest) (response *ModifySubscribeObjectsResponse, err error) {
+    if request == nil {
+        request = NewModifySubscribeObjectsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySubscribeObjects require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySubscribeObjectsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifySyncJobConfigRequest() (request *ModifySyncJobConfigRequest) {
     request = &ModifySyncJobConfigRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2389,6 +4039,55 @@ func (c *Client) ModifySyncJobConfigWithContext(ctx context.Context, request *Mo
     request.SetContext(ctx)
     
     response = NewModifySyncJobConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifySyncRateLimitRequest() (request *ModifySyncRateLimitRequest) {
+    request = &ModifySyncRateLimitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "ModifySyncRateLimit")
+    
+    
+    return
+}
+
+func NewModifySyncRateLimitResponse() (response *ModifySyncRateLimitResponse) {
+    response = &ModifySyncRateLimitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifySyncRateLimit
+// This API is used to restrict the rate limit of the task, when a user finds that the sync task has a large impact on the load of user's database.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+func (c *Client) ModifySyncRateLimit(request *ModifySyncRateLimitRequest) (response *ModifySyncRateLimitResponse, err error) {
+    return c.ModifySyncRateLimitWithContext(context.Background(), request)
+}
+
+// ModifySyncRateLimit
+// This API is used to restrict the rate limit of the task, when a user finds that the sync task has a large impact on the load of user's database.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+func (c *Client) ModifySyncRateLimitWithContext(ctx context.Context, request *ModifySyncRateLimitRequest) (response *ModifySyncRateLimitResponse, err error) {
+    if request == nil {
+        request = NewModifySyncRateLimitRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifySyncRateLimit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifySyncRateLimitResponse()
     err = c.Send(request, response)
     return
 }
@@ -2649,6 +4348,172 @@ func (c *Client) RecoverSyncJobWithContext(ctx context.Context, request *Recover
     return
 }
 
+func NewResetConsumerGroupOffsetRequest() (request *ResetConsumerGroupOffsetRequest) {
+    request = &ResetConsumerGroupOffsetRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "ResetConsumerGroupOffset")
+    
+    
+    return
+}
+
+func NewResetConsumerGroupOffsetResponse() (response *ResetConsumerGroupOffsetResponse) {
+    response = &ResetConsumerGroupOffsetResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ResetConsumerGroupOffset
+// This API is used to reset the offset of the subscription consumer group. Call the DescribeConsumerGroups API to query the status of the consumer group, only when the status is Dead or Empty can this operation be executed. Otherwise, the reset will not be effective and the API will not return any error.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ResetConsumerGroupOffset(request *ResetConsumerGroupOffsetRequest) (response *ResetConsumerGroupOffsetResponse, err error) {
+    return c.ResetConsumerGroupOffsetWithContext(context.Background(), request)
+}
+
+// ResetConsumerGroupOffset
+// This API is used to reset the offset of the subscription consumer group. Call the DescribeConsumerGroups API to query the status of the consumer group, only when the status is Dead or Empty can this operation be executed. Otherwise, the reset will not be effective and the API will not return any error.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ResetConsumerGroupOffsetWithContext(ctx context.Context, request *ResetConsumerGroupOffsetRequest) (response *ResetConsumerGroupOffsetResponse, err error) {
+    if request == nil {
+        request = NewResetConsumerGroupOffsetRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResetConsumerGroupOffset require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResetConsumerGroupOffsetResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewResetSubscribeRequest() (request *ResetSubscribeRequest) {
+    request = &ResetSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "ResetSubscribe")
+    
+    
+    return
+}
+
+func NewResetSubscribeResponse() (response *ResetSubscribeResponse) {
+    response = &ResetSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ResetSubscribe
+// This API is used to reset the subscription instance. After resetting, the subscription task can be reconfigured.You can call DescribeSubscribeDetail to query the subscription information to determine whether the subscription is successful. When SubsStatus changes to notStarted, it means the reset is successful.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ResetSubscribe(request *ResetSubscribeRequest) (response *ResetSubscribeResponse, err error) {
+    return c.ResetSubscribeWithContext(context.Background(), request)
+}
+
+// ResetSubscribe
+// This API is used to reset the subscription instance. After resetting, the subscription task can be reconfigured.You can call DescribeSubscribeDetail to query the subscription information to determine whether the subscription is successful. When SubsStatus changes to notStarted, it means the reset is successful.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ResetSubscribeWithContext(ctx context.Context, request *ResetSubscribeRequest) (response *ResetSubscribeResponse, err error) {
+    if request == nil {
+        request = NewResetSubscribeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResetSubscribe require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResetSubscribeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResizeSyncJobRequest() (request *ResizeSyncJobRequest) {
     request = &ResizeSyncJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2797,6 +4662,89 @@ func (c *Client) ResumeMigrateJobWithContext(ctx context.Context, request *Resum
     return
 }
 
+func NewResumeSubscribeRequest() (request *ResumeSubscribeRequest) {
+    request = &ResumeSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "ResumeSubscribe")
+    
+    
+    return
+}
+
+func NewResumeSubscribeResponse() (response *ResumeSubscribeResponse) {
+    response = &ResumeSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ResumeSubscribe
+// This API is used to resume faulty subscription tasks. When the status of the subscription task is set to error, you can resume task via this API.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ResumeSubscribe(request *ResumeSubscribeRequest) (response *ResumeSubscribeResponse, err error) {
+    return c.ResumeSubscribeWithContext(context.Background(), request)
+}
+
+// ResumeSubscribe
+// This API is used to resume faulty subscription tasks. When the status of the subscription task is set to error, you can resume task via this API.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) ResumeSubscribeWithContext(ctx context.Context, request *ResumeSubscribeRequest) (response *ResumeSubscribeResponse, err error) {
+    if request == nil {
+        request = NewResumeSubscribeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ResumeSubscribe require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewResumeSubscribeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResumeSyncJobRequest() (request *ResumeSyncJobRequest) {
     request = &ResumeSyncJobRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2933,6 +4881,7 @@ func NewSkipSyncCheckItemResponse() (response *SkipSyncCheckItemResponse) {
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
 func (c *Client) SkipSyncCheckItem(request *SkipSyncCheckItemRequest) (response *SkipSyncCheckItemResponse, err error) {
     return c.SkipSyncCheckItemWithContext(context.Background(), request)
 }
@@ -2952,6 +4901,7 @@ func (c *Client) SkipSyncCheckItem(request *SkipSyncCheckItemRequest) (response 
 //  OPERATIONDENIED = "OperationDenied"
 //  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
 //  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
 func (c *Client) SkipSyncCheckItemWithContext(ctx context.Context, request *SkipSyncCheckItemRequest) (response *SkipSyncCheckItemResponse, err error) {
     if request == nil {
         request = NewSkipSyncCheckItemRequest()
@@ -3211,6 +5161,89 @@ func (c *Client) StartModifySyncJobWithContext(ctx context.Context, request *Sta
     request.SetContext(ctx)
     
     response = NewStartModifySyncJobResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStartSubscribeRequest() (request *StartSubscribeRequest) {
+    request = &StartSubscribeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("dts", APIVersion, "StartSubscribe")
+    
+    
+    return
+}
+
+func NewStartSubscribeResponse() (response *StartSubscribeResponse) {
+    response = &StartSubscribeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StartSubscribe
+// This API is used to start a Kafka version of the data subscription instance. This interface can be called only when the status of the subscription task is checkPass.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) StartSubscribe(request *StartSubscribeRequest) (response *StartSubscribeResponse, err error) {
+    return c.StartSubscribeWithContext(context.Background(), request)
+}
+
+// StartSubscribe
+// This API is used to start a Kafka version of the data subscription instance. This interface can be called only when the status of the subscription task is checkPass.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDOPERATIONERROR = "FailedOperation.FailedOperationError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_INTERNALERRORERROR = "InternalError.InternalErrorError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INVALIDPARAMETERERROR = "InvalidParameter.InvalidParameterError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUEERROR = "InvalidParameterValue.InvalidParameterValueError"
+//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCENOTFOUND_RESOURCENOTFOUNDERROR = "ResourceNotFound.ResourceNotFoundError"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNAUTHORIZEDOPERATION_UNAUTHORIZEDOPERATIONERROR = "UnauthorizedOperation.UnauthorizedOperationError"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDOPERATIONERROR = "UnsupportedOperation.UnsupportedOperationError"
+func (c *Client) StartSubscribeWithContext(ctx context.Context, request *StartSubscribeRequest) (response *StartSubscribeResponse, err error) {
+    if request == nil {
+        request = NewStartSubscribeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartSubscribe require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartSubscribeResponse()
     err = c.Send(request, response)
     return
 }
