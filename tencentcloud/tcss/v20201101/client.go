@@ -3972,6 +3972,10 @@ func NewDeleteCompliancePolicyItemFromWhitelistResponse() (response *DeleteCompl
 }
 
 // DeleteCompliancePolicyItemFromWhitelist
+// 产品重构优化，这几个接口已经没有调用了
+//
+// 
+//
 // This API is used to remove the specified check item from the allowlist.
 //
 // error code that may be returned:
@@ -3986,6 +3990,10 @@ func (c *Client) DeleteCompliancePolicyItemFromWhitelist(request *DeleteComplian
 }
 
 // DeleteCompliancePolicyItemFromWhitelist
+// 产品重构优化，这几个接口已经没有调用了
+//
+// 
+//
 // This API is used to remove the specified check item from the allowlist.
 //
 // error code that may be returned:
@@ -4873,6 +4881,10 @@ func NewDescribeAbnormalProcessEventsExportResponse() (response *DescribeAbnorma
 }
 
 // DescribeAbnormalProcessEventsExport
+// 接口已废弃
+//
+// 
+//
 // This API is used to query and export the list of abnormal process events at runtime.
 //
 // error code that may be returned:
@@ -4888,6 +4900,10 @@ func (c *Client) DescribeAbnormalProcessEventsExport(request *DescribeAbnormalPr
 }
 
 // DescribeAbnormalProcessEventsExport
+// 接口已废弃
+//
+// 
+//
 // This API is used to query and export the list of abnormal process events at runtime.
 //
 // error code that may be returned:
@@ -5117,6 +5133,10 @@ func NewDescribeAbnormalProcessRulesExportResponse() (response *DescribeAbnormal
 }
 
 // DescribeAbnormalProcessRulesExport
+// 接口已废弃
+//
+// 
+//
 // This API is used to query and export the list of abnormal process policies at runtime.
 //
 // error code that may be returned:
@@ -5132,6 +5152,10 @@ func (c *Client) DescribeAbnormalProcessRulesExport(request *DescribeAbnormalPro
 }
 
 // DescribeAbnormalProcessRulesExport
+// 接口已废弃
+//
+// 
+//
 // This API is used to query and export the list of abnormal process policies at runtime.
 //
 // error code that may be returned:
@@ -5489,6 +5513,10 @@ func NewDescribeAccessControlRulesExportResponse() (response *DescribeAccessCont
 }
 
 // DescribeAccessControlRulesExport
+// 接口已废弃
+//
+// 
+//
 // This API is used to export the list of access control policies at runtime.
 //
 // error code that may be returned:
@@ -5504,6 +5532,10 @@ func (c *Client) DescribeAccessControlRulesExport(request *DescribeAccessControl
 }
 
 // DescribeAccessControlRulesExport
+// 接口已废弃
+//
+// 
+//
 // This API is used to export the list of access control policies at runtime.
 //
 // error code that may be returned:
@@ -6535,6 +6567,10 @@ func NewDescribeAssetImageListExportResponse() (response *DescribeAssetImageList
 }
 
 // DescribeAssetImageListExport
+// 接口已废弃
+//
+// 
+//
 // This API is used to export the list of images.
 //
 // error code that may be returned:
@@ -6547,6 +6583,10 @@ func (c *Client) DescribeAssetImageListExport(request *DescribeAssetImageListExp
 }
 
 // DescribeAssetImageListExport
+// 接口已废弃
+//
+// 
+//
 // This API is used to export the list of images.
 //
 // error code that may be returned:
@@ -9518,6 +9558,10 @@ func NewDescribeEscapeEventsExportResponse() (response *DescribeEscapeEventsExpo
 }
 
 // DescribeEscapeEventsExport
+// 接口已废弃
+//
+// 
+//
 // This API is used to export the list of container escape events.
 //
 // error code that may be returned:
@@ -9529,6 +9573,10 @@ func (c *Client) DescribeEscapeEventsExport(request *DescribeEscapeEventsExportR
 }
 
 // DescribeEscapeEventsExport
+// 接口已废弃
+//
+// 
+//
 // This API is used to export the list of container escape events.
 //
 // error code that may be returned:
@@ -9843,13 +9891,8 @@ func NewDescribeExportJobResultResponse() (response *DescribeExportJobResultResp
 // This API is used to query the result of an export task.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_DATANOTFOUND = "InvalidParameterValue.DataNotFound"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 func (c *Client) DescribeExportJobResult(request *DescribeExportJobResultRequest) (response *DescribeExportJobResultResponse, err error) {
     return c.DescribeExportJobResultWithContext(context.Background(), request)
 }
@@ -9858,13 +9901,8 @@ func (c *Client) DescribeExportJobResult(request *DescribeExportJobResultRequest
 // This API is used to query the result of an export task.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_DATANOTFOUND = "InvalidParameterValue.DataNotFound"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  OPERATIONDENIED = "OperationDenied"
-//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 func (c *Client) DescribeExportJobResultWithContext(ctx context.Context, request *DescribeExportJobResultRequest) (response *DescribeExportJobResultResponse, err error) {
     if request == nil {
         request = NewDescribeExportJobResultRequest()

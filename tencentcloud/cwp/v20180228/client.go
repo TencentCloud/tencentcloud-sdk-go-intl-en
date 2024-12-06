@@ -792,67 +792,6 @@ func (c *Client) CreateBuyBindTaskWithContext(ctx context.Context, request *Crea
     return
 }
 
-func NewCreateCloudProtectServiceOrderRecordRequest() (request *CreateCloudProtectServiceOrderRecordRequest) {
-    request = &CreateCloudProtectServiceOrderRecordRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cwp", APIVersion, "CreateCloudProtectServiceOrderRecord")
-    
-    
-    return
-}
-
-func NewCreateCloudProtectServiceOrderRecordResponse() (response *CreateCloudProtectServiceOrderRecordResponse) {
-    response = &CreateCloudProtectServiceOrderRecordResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// CreateCloudProtectServiceOrderRecord
-// 云护航计费产品已下线
-//
-// 
-//
-// This API is used to confirm the receipt after using the cloud escort service.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) CreateCloudProtectServiceOrderRecord(request *CreateCloudProtectServiceOrderRecordRequest) (response *CreateCloudProtectServiceOrderRecordResponse, err error) {
-    return c.CreateCloudProtectServiceOrderRecordWithContext(context.Background(), request)
-}
-
-// CreateCloudProtectServiceOrderRecord
-// 云护航计费产品已下线
-//
-// 
-//
-// This API is used to confirm the receipt after using the cloud escort service.
-//
-// error code that may be returned:
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  MISSINGPARAMETER = "MissingParameter"
-func (c *Client) CreateCloudProtectServiceOrderRecordWithContext(ctx context.Context, request *CreateCloudProtectServiceOrderRecordRequest) (response *CreateCloudProtectServiceOrderRecordResponse, err error) {
-    if request == nil {
-        request = NewCreateCloudProtectServiceOrderRecordRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("CreateCloudProtectServiceOrderRecord require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewCreateCloudProtectServiceOrderRecordResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewCreateEmergencyVulScanRequest() (request *CreateEmergencyVulScanRequest) {
     request = &CreateEmergencyVulScanRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5528,6 +5467,7 @@ func NewDescribeAssetRecentMachineInfoResponse() (response *DescribeAssetRecentM
 // This API is used to obtain the latest trend of hosts.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
 //  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
@@ -5543,6 +5483,7 @@ func (c *Client) DescribeAssetRecentMachineInfo(request *DescribeAssetRecentMach
 // This API is used to obtain the latest trend of hosts.
 //
 // error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_DATERANGE = "InvalidParameter.DateRange"
 //  INVALIDPARAMETER_ILLEGALREQUEST = "InvalidParameter.IllegalRequest"
@@ -6806,6 +6747,10 @@ func NewDescribeAttackLogsResponse() (response *DescribeAttackLogsResponse) {
 }
 
 // DescribeAttackLogs
+// DescribeAttackEvents 代替
+//
+// 
+//
 // This API is used to display the list of network attack logs in pagination.
 //
 // error code that may be returned:
@@ -6822,6 +6767,10 @@ func (c *Client) DescribeAttackLogs(request *DescribeAttackLogsRequest) (respons
 }
 
 // DescribeAttackLogs
+// DescribeAttackEvents 代替
+//
+// 
+//
 // This API is used to display the list of network attack logs in pagination.
 //
 // error code that may be returned:
@@ -6869,6 +6818,10 @@ func NewDescribeAttackSourceResponse() (response *DescribeAttackSourceResponse) 
 }
 
 // DescribeAttackSource
+// 已废弃
+//
+// 
+//
 // This API is used to backtrack attacks.
 //
 // error code that may be returned:
@@ -6887,6 +6840,10 @@ func (c *Client) DescribeAttackSource(request *DescribeAttackSourceRequest) (res
 }
 
 // DescribeAttackSource
+// 已废弃
+//
+// 
+//
 // This API is used to backtrack attacks.
 //
 // error code that may be returned:
@@ -6936,6 +6893,10 @@ func NewDescribeAttackSourceEventsResponse() (response *DescribeAttackSourceEven
 }
 
 // DescribeAttackSourceEvents
+// 已废弃
+//
+// 
+//
 // This API is used to query attack backtracking events.
 //
 // error code that may be returned:
@@ -6955,6 +6916,10 @@ func (c *Client) DescribeAttackSourceEvents(request *DescribeAttackSourceEventsR
 }
 
 // DescribeAttackSourceEvents
+// 已废弃
+//
+// 
+//
 // This API is used to query attack backtracking events.
 //
 // error code that may be returned:
@@ -9169,81 +9134,6 @@ func (c *Client) DescribeClientExceptionWithContext(ctx context.Context, request
     return
 }
 
-func NewDescribeCloudProtectServiceOrderListRequest() (request *DescribeCloudProtectServiceOrderListRequest) {
-    request = &DescribeCloudProtectServiceOrderListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("cwp", APIVersion, "DescribeCloudProtectServiceOrderList")
-    
-    
-    return
-}
-
-func NewDescribeCloudProtectServiceOrderListResponse() (response *DescribeCloudProtectServiceOrderListResponse) {
-    response = &DescribeCloudProtectServiceOrderListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeCloudProtectServiceOrderList
-// 云护航计费产品已下线
-//
-// 
-//
-// This API is used to query the list of cloud escort service orders.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeCloudProtectServiceOrderList(request *DescribeCloudProtectServiceOrderListRequest) (response *DescribeCloudProtectServiceOrderListResponse, err error) {
-    return c.DescribeCloudProtectServiceOrderListWithContext(context.Background(), request)
-}
-
-// DescribeCloudProtectServiceOrderList
-// 云护航计费产品已下线
-//
-// 
-//
-// This API is used to query the list of cloud escort service orders.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  AUTHFAILURE_UNAUTHORIZEDOPERATION = "AuthFailure.UnauthorizedOperation"
-//  INTERNALERROR = "InternalError"
-//  INTERNALERROR_MAINDBFAIL = "InternalError.MainDBFail"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INVALIDFORMAT = "InvalidParameter.InvalidFormat"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeCloudProtectServiceOrderListWithContext(ctx context.Context, request *DescribeCloudProtectServiceOrderListRequest) (response *DescribeCloudProtectServiceOrderListResponse, err error) {
-    if request == nil {
-        request = NewDescribeCloudProtectServiceOrderListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeCloudProtectServiceOrderList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeCloudProtectServiceOrderListResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeComponentStatisticsRequest() (request *DescribeComponentStatisticsRequest) {
     request = &DescribeComponentStatisticsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -9264,6 +9154,10 @@ func NewDescribeComponentStatisticsResponse() (response *DescribeComponentStatis
 }
 
 // DescribeComponentStatistics
+// 接口已无效
+//
+// 
+//
 // This API is used to obtain the data of the component statistics list.
 //
 // error code that may be returned:
@@ -9279,6 +9173,10 @@ func (c *Client) DescribeComponentStatistics(request *DescribeComponentStatistic
 }
 
 // DescribeComponentStatistics
+// 接口已无效
+//
+// 
+//
 // This API is used to obtain the data of the component statistics list.
 //
 // error code that may be returned:
@@ -10719,6 +10617,10 @@ func NewDescribeIndexListResponse() (response *DescribeIndexListResponse) {
 }
 
 // DescribeIndexList
+// 接口已废弃
+//
+// 
+//
 // This API is used to obtain the index list.
 //
 // error code that may be returned:
@@ -10729,6 +10631,10 @@ func (c *Client) DescribeIndexList(request *DescribeIndexListRequest) (response 
 }
 
 // DescribeIndexList
+// 接口已废弃
+//
+// 
+//
 // This API is used to obtain the index list.
 //
 // error code that may be returned:
@@ -16678,6 +16584,10 @@ func NewDescribeSecurityProtectionStatResponse() (response *DescribeSecurityProt
 }
 
 // DescribeSecurityProtectionStat
+// 接口已无效
+//
+// 
+//
 // This API is used to obtain the summary of security protection statuses.
 //
 // error code that may be returned:
@@ -16690,6 +16600,10 @@ func (c *Client) DescribeSecurityProtectionStat(request *DescribeSecurityProtect
 }
 
 // DescribeSecurityProtectionStat
+// 接口已无效
+//
+// 
+//
 // This API is used to obtain the summary of security protection statuses.
 //
 // error code that may be returned:

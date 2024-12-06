@@ -65,7 +65,7 @@ func NewArchiveKeyResponse() (response *ArchiveKeyResponse) {
 }
 
 // ArchiveKey
-// This API is used to archive keys. The archived keys can only be used for decryption but not encryption.
+// This API is used to archive keys.The archived keys can only be used for decryption but not encryption.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CMKUSEDBYCLOUDPRODUCT = "FailedOperation.CmkUsedByCloudProduct"
@@ -82,7 +82,7 @@ func (c *Client) ArchiveKey(request *ArchiveKeyRequest) (response *ArchiveKeyRes
 }
 
 // ArchiveKey
-// This API is used to archive keys. The archived keys can only be used for decryption but not encryption.
+// This API is used to archive keys.The archived keys can only be used for decryption but not encryption.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CMKUSEDBYCLOUDPRODUCT = "FailedOperation.CmkUsedByCloudProduct"
