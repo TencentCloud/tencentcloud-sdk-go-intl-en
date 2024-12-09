@@ -847,8 +847,8 @@ type CompareFaceLivenessRequestParams struct {
 	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
 	VideoBase64 *string `json:"VideoBase64,omitnil,omitempty" name:"VideoBase64"`
 
-	// The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
-	// `LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
+	// The liveness detection type. Valid values: `ACTION`, and `SILENT`.
+	// `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
 	// Example value: "SILENT"
 	LivenessType *string `json:"LivenessType,omitnil,omitempty" name:"LivenessType"`
 
@@ -881,8 +881,8 @@ type CompareFaceLivenessRequest struct {
 	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
 	VideoBase64 *string `json:"VideoBase64,omitnil,omitempty" name:"VideoBase64"`
 
-	// The liveness detection type. Valid values: `LIP`, `ACTION`, and `SILENT`.
-	// `LIP`: Numeric mode; `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
+	// The liveness detection type. Valid values: `ACTION`, and `SILENT`.
+	// `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
 	// Example value: "SILENT"
 	LivenessType *string `json:"LivenessType,omitnil,omitempty" name:"LivenessType"`
 

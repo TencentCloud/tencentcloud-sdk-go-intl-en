@@ -572,7 +572,7 @@ func NewDescribeClusterPodAssetsResponse() (response *DescribeClusterPodAssetsRe
 }
 
 // DescribeClusterPodAssets
-// This API is used to list cluster pods. 
+// This API is used to list cluster pods.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -598,7 +598,7 @@ func (c *Client) DescribeClusterPodAssets(request *DescribeClusterPodAssetsReque
 }
 
 // DescribeClusterPodAssets
-// This API is used to list cluster pods. 
+// This API is used to list cluster pods.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"

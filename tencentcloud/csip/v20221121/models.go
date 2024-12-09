@@ -1621,6 +1621,9 @@ func (r *DescribeCVMAssetsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeClusterPodAssetsRequestParams struct {
+	// Member id
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
 	// Filter conditions
 	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
 }
@@ -1628,6 +1631,9 @@ type DescribeClusterPodAssetsRequestParams struct {
 type DescribeClusterPodAssetsRequest struct {
 	*tchttp.BaseRequest
 	
+	// Member id
+	MemberId []*string `json:"MemberId,omitnil,omitempty" name:"MemberId"`
+
 	// Filter conditions
 	Filter *Filter `json:"Filter,omitnil,omitempty" name:"Filter"`
 }
@@ -1644,6 +1650,7 @@ func (r *DescribeClusterPodAssetsRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
+	delete(f, "MemberId")
 	delete(f, "Filter")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeClusterPodAssetsRequest has unknown keys!", "")

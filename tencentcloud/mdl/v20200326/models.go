@@ -129,6 +129,9 @@ type AVTemplate struct {
 
 	// Keyframe units, only support MILLISECONDS (milliseconds).
 	GopSizeUnits *string `json:"GopSizeUnits,omitnil,omitempty" name:"GopSizeUnits"`
+
+	// Color space setting.
+	ColorSpaceSettings *ColorSpaceSetting `json:"ColorSpaceSettings,omitnil,omitempty" name:"ColorSpaceSettings"`
 }
 
 type AdditionalRateSetting struct {
@@ -329,6 +332,11 @@ type ChannelPipelineAlerts struct {
 
 	// Alarm details.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+}
+
+type ColorSpaceSetting struct {
+	// Color space, supports `PASSTHROUGH` (transparent transmission, only supports H265); optional.
+	ColorSpace *string `json:"ColorSpace,omitnil,omitempty" name:"ColorSpace"`
 }
 
 type CosSettings struct {
@@ -3947,4 +3955,7 @@ type VideoTemplateInfo struct {
 
 
 	VideoEnhanceSettings []*VideoEnhanceSetting `json:"VideoEnhanceSettings,omitnil,omitempty" name:"VideoEnhanceSettings"`
+
+	// Color space setting.
+	ColorSpaceSettings *ColorSpaceSetting `json:"ColorSpaceSettings,omitnil,omitempty" name:"ColorSpaceSettings"`
 }
