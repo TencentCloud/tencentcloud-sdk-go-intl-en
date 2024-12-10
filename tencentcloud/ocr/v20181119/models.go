@@ -1289,12 +1289,18 @@ type MLIDCardOCRRequestParams struct {
 	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
+	// Base64 value of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+	BackImageBase64 *string `json:"BackImageBase64,omitnil,omitempty" name:"BackImageBase64"`
+
 	// The URL of an image. (This field is not available outside the Chinese mainland.)
 	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
 	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
 	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
 	// For a non-Tencent Cloud URL, the download speed and stability may be low.
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// The URL address of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. Storing images in Tencent Cloud URLs can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent.
+	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
 
 	// Whether to return an image. Default value: `false`.
 	RetImage *bool `json:"RetImage,omitnil,omitempty" name:"RetImage"`
@@ -1308,12 +1314,18 @@ type MLIDCardOCRRequest struct {
 	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
+	// Base64 value of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image cannot exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+	BackImageBase64 *string `json:"BackImageBase64,omitnil,omitempty" name:"BackImageBase64"`
+
 	// The URL of an image. (This field is not available outside the Chinese mainland.)
 	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
 	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
 	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
 	// For a non-Tencent Cloud URL, the download speed and stability may be low.
 	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// The URL address of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download takes no more than 3 seconds. Storing images in Tencent Cloud URLs can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent.
+	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
 
 	// Whether to return an image. Default value: `false`.
 	RetImage *bool `json:"RetImage,omitnil,omitempty" name:"RetImage"`
@@ -1332,7 +1344,9 @@ func (r *MLIDCardOCRRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "ImageBase64")
+	delete(f, "BackImageBase64")
 	delete(f, "ImageUrl")
+	delete(f, "BackImageUrl")
 	delete(f, "RetImage")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "MLIDCardOCRRequest has unknown keys!", "")
@@ -1387,6 +1401,9 @@ type MLIDCardOCRResponseParams struct {
 
 	// Date of birth. This field is available only for work permits (i-Kad) and ID cards (MyKad).
 	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
+
+	// Number on the back of Malaysia ID card 
+	MyKadNumber *string `json:"MyKadNumber,omitnil,omitempty" name:"MyKadNumber"`
 
 	// Card Warning Information
 	// 

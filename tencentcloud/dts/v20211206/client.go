@@ -69,7 +69,7 @@ func NewCompleteMigrateJobResponse() (response *CompleteMigrateJobResponse) {
 //
 // For tasks in incremental migration mode, you need to call this API before migration gets ready for completion to stop migrating incremental data.
 //
-// If the task status queried through the `DescribeMigrationJobs` API is ready (`Status` = `readyComplete), you can call this API to complete the migration task.
+// If the task status queried through the `DescribeMigrationJobs` API is ready (`Status` = `readyComplete`), you can call this API to complete the migration task.
 //
 // error code that may be returned:
 //  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
@@ -111,7 +111,7 @@ func (c *Client) CompleteMigrateJob(request *CompleteMigrateJobRequest) (respons
 //
 // For tasks in incremental migration mode, you need to call this API before migration gets ready for completion to stop migrating incremental data.
 //
-// If the task status queried through the `DescribeMigrationJobs` API is ready (`Status` = `readyComplete), you can call this API to complete the migration task.
+// If the task status queried through the `DescribeMigrationJobs` API is ready (`Status` = `readyComplete`), you can call this API to complete the migration task.
 //
 // error code that may be returned:
 //  AUTHFAILURE_AUTHFAILUREERROR = "AuthFailure.AuthFailureError"
