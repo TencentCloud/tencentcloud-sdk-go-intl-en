@@ -702,6 +702,10 @@ type AiAnalysisTaskSegmentInput struct {
 type AiAnalysisTaskSegmentOutput struct {
 	// Intelligent splitting sub-segment list.
 	SegmentSet []*SegmentRecognitionItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
+
+	// Video abstract, used for offline scenarios.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Abstract *string `json:"Abstract,omitnil,omitempty" name:"Abstract"`
 }
 
 type AiAnalysisTaskSegmentResult struct {
@@ -946,6 +950,9 @@ type AiRecognitionTaskAsrFullTextSegmentItem struct {
 
 	// Recognized text.
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Word timestamp information.
+	Wordlist []*WordResult `json:"Wordlist,omitnil,omitempty" name:"Wordlist"`
 }
 
 type AiRecognitionTaskAsrWordsResult struct {
@@ -1104,6 +1111,9 @@ type AiRecognitionTaskFaceSegmentItem struct {
 type AiRecognitionTaskInput struct {
 	// Intelligent video recognition template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// User extension field, which does not need to be filled in for general scenarios.
+	UserExtPara *string `json:"UserExtPara,omitnil,omitempty" name:"UserExtPara"`
 }
 
 type AiRecognitionTaskObjectResult struct {
@@ -1314,6 +1324,9 @@ type AiRecognitionTaskTransTextSegmentItem struct {
 
 	// The translation.
 	Trans *string `json:"Trans,omitnil,omitempty" name:"Trans"`
+
+	// Word timestamp information.
+	Wordlist []*WordResult `json:"Wordlist,omitnil,omitempty" name:"Wordlist"`
 }
 
 type AiReviewPoliticalAsrTaskInput struct {
@@ -6658,6 +6671,24 @@ type DescribeTranscodeTemplatesRequestParams struct {
 
 	// Filter condition for transcoding template identifiers, with a length limit of 64 characters.	
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Video scenario. Optional values: 
+	// normal: General transcoding scenario: General transcoding and compression scenario. 
+	// pgc: PGC HD TV shows and movies: At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality contents of videos and audio are retained. 
+	// materials_video: HD materials: Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
+	// ugc: UGC content: It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
+	// e-commerce_video: Fashion show/e-commerce: At the time of compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
+	// educational_video: Education: At the time of compression, emphasis is placed on the clarity and readability of text and images to help students better understand the content, ensuring that the teaching content is clearly conveyed. 
+	// no_config: Not configured.
+	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+	// Transcoding policy. Optional values: 
+	// ultra_compress: Extreme compression: Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
+	// standard_compress: Comprehensively optimal: The compression ratio and image quality are balanced, and files are compressed as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for this policy. 
+	// high_compress: Bitrate priority: Priority is given to reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
+	// low_compress: Image quality priority: Priority is given to ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
+	// no_config: Not configured.
+	CompressType *string `json:"CompressType,omitnil,omitempty" name:"CompressType"`
 }
 
 type DescribeTranscodeTemplatesRequest struct {
@@ -6696,6 +6727,24 @@ type DescribeTranscodeTemplatesRequest struct {
 
 	// Filter condition for transcoding template identifiers, with a length limit of 64 characters.	
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Video scenario. Optional values: 
+	// normal: General transcoding scenario: General transcoding and compression scenario. 
+	// pgc: PGC HD TV shows and movies: At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality contents of videos and audio are retained. 
+	// materials_video: HD materials: Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
+	// ugc: UGC content: It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
+	// e-commerce_video: Fashion show/e-commerce: At the time of compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
+	// educational_video: Education: At the time of compression, emphasis is placed on the clarity and readability of text and images to help students better understand the content, ensuring that the teaching content is clearly conveyed. 
+	// no_config: Not configured.
+	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+	// Transcoding policy. Optional values: 
+	// ultra_compress: Extreme compression: Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
+	// standard_compress: Comprehensively optimal: The compression ratio and image quality are balanced, and files are compressed as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for this policy. 
+	// high_compress: Bitrate priority: Priority is given to reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
+	// low_compress: Image quality priority: Priority is given to ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
+	// no_config: Not configured.
+	CompressType *string `json:"CompressType,omitnil,omitempty" name:"CompressType"`
 }
 
 func (r *DescribeTranscodeTemplatesRequest) ToJsonString() string {
@@ -6718,6 +6767,8 @@ func (r *DescribeTranscodeTemplatesRequest) FromJsonString(s string) error {
 	delete(f, "Limit")
 	delete(f, "TranscodeType")
 	delete(f, "Name")
+	delete(f, "SceneType")
+	delete(f, "CompressType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTranscodeTemplatesRequest has unknown keys!", "")
 	}
@@ -7258,8 +7309,11 @@ type EditMediaOutputConfig struct {
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
-	// The clip mode. Valid values: `normal` (default), `fast`.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Editing mode. Optional values:
+	// normal (default): Precise editing
+	// fast: Fast editing, with faster processing speed but lower precision to some extent
+	// Note: fast only supports individual files, and the default output transcoding format of normal is h264.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -7739,6 +7793,31 @@ type HighlightSegmentItem struct {
 	SegmentTags []*string `json:"SegmentTags,omitnil,omitempty" name:"SegmentTags"`
 }
 
+type ImageEncodeConfig struct {
+	// Image format. Valid values: JPG, BMP, GIF, PNG, and WebP. The default is the original image format.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
+
+	// Relative image quality. Valid range: 1 - 100. The value is based on the original image quality, and the default is the original image quality.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Quality *int64 `json:"Quality,omitnil,omitempty" name:"Quality"`
+}
+
+type ImageEnhanceConfig struct {
+	// Super-resolution configuration.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SuperResolution *SuperResolutionConfig `json:"SuperResolution,omitnil,omitempty" name:"SuperResolution"`
+
+
+	ColorEnhance *ColorEnhanceConfig `json:"ColorEnhance,omitnil,omitempty" name:"ColorEnhance"`
+
+
+	SharpEnhance *SharpEnhanceConfig `json:"SharpEnhance,omitnil,omitempty" name:"SharpEnhance"`
+
+
+	FaceEnhance *FaceEnhanceConfig `json:"FaceEnhance,omitnil,omitempty" name:"FaceEnhance"`
+}
+
 type ImageQualityEnhanceConfig struct {
 	// Whether to enable the feature. Valid values:
 	// <li>ON</li>
@@ -7833,6 +7912,16 @@ type ImageSpriteTemplate struct {
 
 	// The image format.
 	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
+}
+
+type ImageTaskInput struct {
+	// Image encoding configuration.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	EncodeConfig *ImageEncodeConfig `json:"EncodeConfig,omitnil,omitempty" name:"EncodeConfig"`
+
+	// Image enhancement configuration.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	EnhanceConfig *ImageEnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
 }
 
 type ImageWatermarkInput struct {
@@ -8425,10 +8514,16 @@ type LiveStreamTagRecognitionResult struct {
 }
 
 type LiveStreamTaskNotifyConfig struct {
-	// The notification type, `CMQ` by default. If this parameter is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`.
+	// Notification type:
 	// 
-	// <font color="red">Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.</font>
+	// "CMQ": Callback messages are written to the CMQ queue; 
+	// "URL": When a URL is specified, the HTTP callback is pushed to the address specified by NotifyUrl. The callback protocol is http+json. The content of the packet body is the same as the output parameters of the [ParseLiveStreamProcessNotification API](https://intl.cloud.tencent.com/document/product/862/39229?from_cn_redirect=1).
+	// 
+	// <font color="red">Note: If left blank, it is CMQ by default. To use the other type, you need to fill in the corresponding type value.</font>
 	NotifyType *string `json:"NotifyType,omitnil,omitempty" name:"NotifyType"`
+
+	// HTTP callback URL, required if `NotifyType` is set to `URL`
+	NotifyUrl *string `json:"NotifyUrl,omitnil,omitempty" name:"NotifyUrl"`
 
 	// CMQ model. There are two types: `Queue` and `Topic`. Currently, only `Queue` is supported.
 	CmqModel *string `json:"CmqModel,omitnil,omitempty" name:"CmqModel"`
@@ -8441,9 +8536,6 @@ type LiveStreamTaskNotifyConfig struct {
 
 	// This parameter is valid when the model is `Topic`, indicating the name of the CMQ topic for receiving event notifications.
 	TopicName *string `json:"TopicName,omitnil,omitempty" name:"TopicName"`
-
-	// HTTP callback URL, required if `NotifyType` is set to `URL`
-	NotifyUrl *string `json:"NotifyUrl,omitnil,omitempty" name:"NotifyUrl"`
 
 	// Key used to generate a callback signature.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -11393,6 +11485,84 @@ type PornOcrReviewTemplateInfoForUpdate struct {
 }
 
 // Predefined struct for user
+type ProcessImageRequestParams struct {
+	// File input information for image processing.
+	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// Target storage for image processing output files. If left blank, it inherits the storage location in InputInfo.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+
+	// Output file path for image processing. If left blank, it is the directory of the file in InputInfo. If it is a directory, such as `/image/201907/`, it means inheriting the original filename and outputting to this directory.
+	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
+
+	// Image processing parameter.
+	ImageTask *ImageTaskInput `json:"ImageTask,omitnil,omitempty" name:"ImageTask"`
+}
+
+type ProcessImageRequest struct {
+	*tchttp.BaseRequest
+	
+	// File input information for image processing.
+	InputInfo *MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// Target storage for image processing output files. If left blank, it inherits the storage location in InputInfo.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+
+	// Output file path for image processing. If left blank, it is the directory of the file in InputInfo. If it is a directory, such as `/image/201907/`, it means inheriting the original filename and outputting to this directory.
+	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
+
+	// Image processing parameter.
+	ImageTask *ImageTaskInput `json:"ImageTask,omitnil,omitempty" name:"ImageTask"`
+}
+
+func (r *ProcessImageRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ProcessImageRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InputInfo")
+	delete(f, "OutputStorage")
+	delete(f, "OutputDir")
+	delete(f, "ImageTask")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessImageRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ProcessImageResponseParams struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ProcessImageResponse struct {
+	*tchttp.BaseResponse
+	Response *ProcessImageResponseParams `json:"Response"`
+}
+
+func (r *ProcessImageResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ProcessImageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ProcessLiveStreamRequestParams struct {
 	// Live stream URL, which must be a live stream file address. RTMP, HLS, and FLV are supported.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
@@ -11805,69 +11975,68 @@ type QualityControlItem struct {
 }
 
 type QualityControlItemConfig struct {
-	// Quality inspection item name. Valid values:
-	// <li>LowEvaluation: no-reference scoring.</li>
-	// <li>Mosaic: mosaic detection.</li>
-	// <li>CrashScreen: screen glitch detection.</li>
-	// <li>VideoFreezedFrame: video freezing.</li>
-	// <li>Blur: blur detection.</li>
-	// <li>BlackWhiteEdge: black and white edges detection.</li>
-	// <li>SolidColorScreen: solid color screen detection.</li>
-	// <li>LowLighting: low light.</li>
-	// <li>HighLighting: overexposure.</li>
-	// <li>NoVoice: no voice detection.</li>
-	// <li>LowVoice: low voice detection.</li>
-	// <li>HighVoice: high voice detection.</li>
-	// <li>Jitter: jitter detection.</li>
-	// <li>Noise: noise detection.</li>
+	// Quality control item name. The quality control item values are as follows:
+	// <li>LowEvaluation: No reference score.</li>
+	// <li>Mosaic: Mosaic detection.</li>
+	// <li>CrashScreen: Screen crash detection.</li>
+	// <li>Blur: Blur detection.</li>
+	// <li>BlackWhiteEdge: Black and white edge detection.</li>
+	// <li>SolidColorScreen: Solid color screen detection.</li>
+	// <li>LowLighting: Low lighting.</li>
+	// <li>HighLighting: Overexposure.</li>
+	// <li>NoVoice: Silence detection.</li>
+	// <li>LowVoice: Low voice detection.</li>
+	// <li>HighVoice: High voice detection.</li>
+	// <li>Jitter: Jitter detection.</li>
+	// <li>Noise: Noise detection.</li>
 	// <li>QRCode: QR code detection.</li>
-	// <li>BarCode: barcode detection.</li>
-	// <li>AppletCode: mini program code detection.</li>
-	// <li>VideoResolutionChanged: video resolution change.</li>
-	// <li>AudioSampleRateChanged: audio sample rate change.</li>
-	// <li>AudioChannelsChanged: audio channel quantity change.</li>
-	// <li>ParameterSetsChanged: stream parameter set information change.</li>
-	// <li>DarOrSarInvalid: video aspect ratio exception.</li>
-	// <li>TimestampFallback: DTS timestamp rollback.</li>
-	// <li>DtsJitter: DTS jitter too high.</li>
-	// <li>PtsJitter: PTS jitter too high.</li>
-	// <li>AACDurationDeviation: improper AAC frame timestamp interval.</li>
-	// <li>AudioDroppingFrames: audio frame dropping.</li>
-	// <li>VideoDroppingFrames: video frame dropping.</li>
-	// <li>AVTimestampInterleave: improper audio-video interleaving.</li>
-	// <li>PtsLessThanDts: PTS less than DTS for media streams.</li>
-	// <li>ReceiveFpsJitter: significant jitter in the network receive frame rate.</li>
-	// <li>ReceiveFpsTooSmall: network receive video frame rate too low.</li>
-	// <li>FpsJitter: significant jitter in the stream frame rate calculated via PTS.</li>
-	// <li>StreamOpenFailed: stream open failure.</li>
-	// <li>StreamEnd: stream end.</li>
-	// <li>StreamParseFailed: stream parsing failure.</li>
-	// <li>VideoFirstFrameNotIdr: first frame not an IDR frame.</li>
+	// <li>BarCode: Barcode detection.</li>
+	// <li>AppletCode: Applet code detection.</li>
+	// <li>VideoResolutionChanged: The video resolution changed.</li>
+	// <li>AudioSampleRateChanged: The audio sampling rate changed.</li>
+	// <li>AudioChannelsChanged: The audio channel count changed.</li>
+	// <li>ParameterSetsChanged: The stream parameter set information changed.</li>
+	// <li>DarOrSarInvalid: Abnormal video aspect ratio.</li>
+	// <li>TimestampFallback: DTS timestamp fallback.</li>
+	// <li>DtsJitter: Excessive DTS jitter.</li>
+	// <li>PtsJitter: Excessive PTS jitter.</li>
+	// <li>AACDurationDeviation: Unreasonable AAC frame timestamp interval.</li>
+	// <li>AudioDroppingFrames: Audio frame loss.</li>
+	// <li>VideoDroppingFrames: Video frame loss.</li>
+	// <li>AVTimestampInterleave: Unreasonable audio and video interleaving.</li>
+	// <li>PtsLessThanDts: The PTS of media streams is less than DTS.</li>
+	// <li>ReceiveFpsJitter: Excessive jitter of the frame rate received by the network.</li>
+	// <li>ReceiveFpsTooSmall: Too low video frame rate received by the network.</li>
+	// <li>FpsJitter: Excessive stream frame rate jitter calculated through PTS.</li>
+	// <li>StreamOpenFailed: Stream opening failed.</li>
+	// <li>StreamEnd: The stream ended.</li>
+	// <li>StreamParseFailed: Stream parsing failed.</li>
+	// <li>VideoFirstFrameNotIdr: The first frame is not an IDR frame.</li>
 	// <li>StreamNALUError: NALU start code error.</li>
-	// <li>TsStreamNoAud: no AUD NALU in the H26x stream of MPEG-TS.</li>
-	// <li>AudioStreamLack: no audio stream.</li>
-	// <li>VideoStreamLack: no video stream.</li>
-	// <li>LackAudioRecover: missing audio stream recovery.</li>
-	// <li>LackVideoRecover: missing video stream recovery.</li>
-	// <li>VideoBitrateOutofRange: video stream bitrate (kbps) out of range.</li>
-	// <li>AudioBitrateOutofRange: audio stream bitrate (kbps) out of range.</li>
-	// <li>VideoDecodeFailed: video decoding error.</li>
-	// <li>AudioDecodeFailed: audio decoding error.</li>
-	// <li>AudioOutOfPhase: opposite phase in dual-channel audio.</li>
-	// <li>VideoDuplicatedFrame: duplicate frames in video streams.</li>
-	// <li>AudioDuplicatedFrame: duplicate frames in audio streams.</li>
-	// <li>VideoRotation: video rotation.</li>
-	// <li>TsMultiPrograms: multiple programs in MPEG2-TS streams.</li>
-	// <li>Mp4InvalidCodecFourcc: codec FourCC in MP4 not meeting Apple HLS requirements.</li>
-	// <li>HLSBadM3u8Format: invalid M3U8 file.</li>
-	// <li>HLSInvalidMasterM3u8: invalid main M3U8 file.</li>
-	// <li>HLSInvalidMediaM3u8: invalid media M3U8 file.</li>
-	// <li>HLSMasterM3u8Recommended: parameters recommended by standards missing in main M3U8.</li>
-	// <li>HLSMediaM3u8Recommended: parameters recommended by standards missing in media M3U8.</li>
-	// <li>HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY in media M3U8.</li>
-	// <li>HLSMediaSegmentsStreamNumChange: changed number of streams in segments.</li>
-	// <li>HLSMediaSegmentsPTSJitterDeviation: PTS jumps between segments without EXT-X-DISCONTINUITY.</li>
-	// <li>HLSMediaSegmentsDTSJitterDeviation: DTS jumps between segments without EXT-X-DISCONTINUITY.</li>
+	// <li>TsStreamNoAud: The H26x stream of MPEGTS lacks AUD NALU.</li>
+	// <li>AudioStreamLack: No audio stream.</li>
+	// <li>VideoStreamLack: No video stream.</li>
+	// <li>LackAudioRecover: Lack of audio stream recovery.</li>
+	// <li>LackVideoRecover: Lack of video stream recovery.</li>
+	// <li>VideoBitrateOutofRange: Out-of-range video stream bitrate (kbps).</li>
+	// <li>AudioBitrateOutofRange: Out-of-range audio stream bitrate (kbps).</li>
+	// <li>VideoDecodeFailed: Video decoding error.</li>
+	// <li>AudioDecodeFailed: Audio decoding error.</li>
+	// <li>AudioOutOfPhase: Opposite phase in Dual-channel audio.</li>
+	// <li>VideoDuplicatedFrame: Duplicate frames in the video stream.</li>
+	// <li>AudioDuplicatedFrame: Duplicate frames in the audio stream.</li>
+	// <li>VideoRotation: Video image rotation.</li>
+	// <li>TsMultiPrograms: The MPEG2-TS stream has multiple programs.</li>
+	// <li>Mp4InvalidCodecFourcc: The codec fourcc in MP4 does not meet Apple HLS requirements.</li>
+	// <li>HLSBadM3u8Format: Invalid m3u8 file.</li>
+	// <li>HLSInvalidMasterM3u8: Invalid main m3u8 file.</li>
+	// <li>HLSInvalidMediaM3u8: Invalid media m3u8 file.</li>
+	// <li>HLSMasterM3u8Recommended: The main m3u8 file lacks parameters recommended by the standard.</li>
+	// <li>HLSMediaM3u8Recommended: The media m3u8 file lacks parameters recommended by the standard.</li>
+	// <li>HLSMediaM3u8DiscontinuityExist: EXT-X-DISCONTINUITY exists in the media m3u8 file.</li>
+	// <li>HLSMediaSegmentsStreamNumChange: The number of streams in the segment has changed.</li>
+	// <li>HLSMediaSegmentsPTSJitterDeviation: PTS jitter between segments without EXT-X-DISCONTINUITY.</li>
+	// <li>HLSMediaSegmentsDTSJitterDeviation: DTS jitter between segments without EXT-X-DISCONTINUITY.</li>
 	// <li>TimecodeTrackExist: TMCD track in MP4.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
@@ -12467,6 +12636,10 @@ type SegmentRecognitionItem struct {
 
 	SegmentUrl *string `json:"SegmentUrl,omitnil,omitempty" name:"SegmentUrl"`
 
+	// Segment cover.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CovImgUrl *string `json:"CovImgUrl,omitnil,omitempty" name:"CovImgUrl"`
+
 	// Segment title.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
@@ -12474,6 +12647,17 @@ type SegmentRecognitionItem struct {
 	// Segment summary.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Summary *string `json:"Summary,omitnil,omitempty" name:"Summary"`
+
+	// Segmentation keywords.
+	Keywords []*string `json:"Keywords,omitnil,omitempty" name:"Keywords"`
+
+	// The start time of a live streaming segment, in the ISO date format.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// The end time of a live streaming segment, in the ISO date format.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type SegmentSpecificInfo struct {
@@ -13074,6 +13258,10 @@ type TranscodeTemplate struct {
 	// Audio/Video enhancement configuration.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
+
+	// Transcoding template alias.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AliasName *string `json:"AliasName,omitnil,omitempty" name:"AliasName"`
 }
 
 type TranslateConfigureInfo struct {
@@ -13461,6 +13649,36 @@ type VideoTemplateInfo struct {
 	// Special segment configuration
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	SegmentSpecificInfo *SegmentSpecificInfo `json:"SegmentSpecificInfo,omitnil,omitempty" name:"SegmentSpecificInfo"`
+
+	// Whether to enable scenario-based settings for the template 
+	// 0: disable 
+	// 1: enable 
+	//  
+	// Default value: 0	
+	// 	
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ScenarioBased *int64 `json:"ScenarioBased,omitnil,omitempty" name:"ScenarioBased"`
+
+	// Video scenario. Optional values: 
+	// normal: General transcoding scenario: General transcoding and compression scenario.
+	// pgc: PGC HD TV shows and movies: At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality contents of videos and audio are retained. 
+	// materials_video: HD materials: Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
+	// ugc: UGC content: It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
+	// e-commerce_video: Fashion show/e-commerce: At the time of compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
+	// educational_video: Education: At the time of compression, emphasis is placed on the clarity and readability of text and images to help students better understand the content, ensuring that the teaching content is clearly conveyed. 
+	// Default value: normal
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+	// Transcoding policy. Optional values: 
+	// ultra_compress: Extreme compression: Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
+	// standard_compress: Comprehensively optimal: The compression ratio and image quality are balanced, and files are compressed as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for this policy. 
+	// high_compress: Bitrate priority: Priority is given to reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
+	// low_compress: Image quality priority: Priority is given to ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
+	// Default value: standard_compress 
+	// Note: If you need to watch videos on TV, it is recommended no to use the ultra_compress policy. The billing standard for the ultra_compress policy is TSC transcoding + audio and video enhancement - artifacts removal.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CompressType *string `json:"CompressType,omitnil,omitempty" name:"CompressType"`
 }
 
 type VideoTemplateInfoForUpdate struct {
@@ -13643,6 +13861,36 @@ type VideoTemplateInfoForUpdate struct {
 	// Special segment configuration	
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	SegmentSpecificInfo *SegmentSpecificInfo `json:"SegmentSpecificInfo,omitnil,omitempty" name:"SegmentSpecificInfo"`
+
+	// Whether to enable scenario-based settings for the template 
+	// 0: disable 
+	// 1: enable 
+	//  
+	// Default value: 0	
+	// 	
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ScenarioBased *int64 `json:"ScenarioBased,omitnil,omitempty" name:"ScenarioBased"`
+
+	// Video scenario. Optional values: 
+	// normal: General transcoding scenario: General transcoding and compression scenario
+	// pgc: PGC HD TV shows and movies: At the time of compression, focus is placed on the viewing experience of TV shows and movies and ROI encoding is performed according to their characteristics, while high-quality contents of videos and audio are retained. 
+	// materials_video: HD materials: Scenario involving material resources, where requirements for image quality are extremely high and there are many transparent images, with almost no visual loss during compression. 
+	// ugc: UGC content: It is suitable for a wide range of UGC/short video scenarios, with an optimized encoding bitrate for short video characteristics, improved image quality, and enhanced business QOS/QOE metrics. 
+	// e-commerce_video: Fashion show/e-commerce: At the time of compression, emphasis is placed on detail clarity and ROI enhancement, with a particular focus on maintaining the image quality of the face region. 
+	// educational_video: Education: At the time of compression, emphasis is placed on the clarity and readability of text and images to help students better understand the content, ensuring that the teaching content is clearly conveyed.
+	// Default value: normal
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SceneType *string `json:"SceneType,omitnil,omitempty" name:"SceneType"`
+
+	// Transcoding policy. Optional values: 
+	// ultra_compress: Extreme compression: Compared to standard compression, this policy can maximize bitrate compression while ensuring a certain level of image quality, thus greatly saving bandwidth and storage costs. 
+	// standard_compress: Comprehensively optimal: The compression ratio and image quality are balanced, and files are compressed as much as possible without a noticeable reduction in subjective image quality. Only audio and video TSC transcoding fees are charged for this policy. 
+	// high_compress: Bitrate priority: Priority is given to reducing file size, which may result in certain image quality loss. Only audio and video TSC transcoding fees are charged for this policy. 
+	// low_compress: Image quality priority: Priority is given to ensuring image quality, and the size of compressed files may be relatively large. Only audio and video TSC transcoding fees are charged for this policy. 
+	// Default value: standard_compress 
+	// Note: If you need to watch videos on TV, it is recommended no to use the ultra_compress policy. The billing standard for the ultra_compress policy is TSC transcoding + audio and video enhancement - artifacts removal.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CompressType *string `json:"CompressType,omitnil,omitempty" name:"CompressType"`
 }
 
 type VolumeBalanceConfig struct {
@@ -13743,6 +13991,17 @@ type WatermarkTemplate struct {
 	// <li>bottomLeft: The origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text;</li>
 	// <li>bottomRight: The origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.</li>
 	CoordinateOrigin *string `json:"CoordinateOrigin,omitnil,omitempty" name:"CoordinateOrigin"`
+}
+
+type WordResult struct {
+	// Word text.
+	Word *string `json:"Word,omitnil,omitempty" name:"Word"`
+
+	// Word start timestamp, in seconds.
+	Start *float64 `json:"Start,omitnil,omitempty" name:"Start"`
+
+	// Word end timestamp, in seconds.
+	End *float64 `json:"End,omitnil,omitempty" name:"End"`
 }
 
 type WorkflowInfo struct {
