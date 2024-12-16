@@ -2048,7 +2048,7 @@ func NewCreateZoneResponse() (response *CreateZoneResponse) {
 //
 // error code that may be returned:
 //  DRYRUNOPERATION = "DryRunOperation"
-//  INTERNALERROR_FAILEDTOCALLDNSPOD = "InternalError.FailedToCallDNSPod"
+//  FAILEDOPERATION_FAILEDTOCALLDNSPOD = "FailedOperation.FailedToCallDNSPod"
 //  INVALIDPARAMETER_INVALIDORIGINIP = "InvalidParameter.InvalidOriginIp"
 //  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
 //  INVALIDPARAMETER_PLANNOTFOUND = "InvalidParameter.PlanNotFound"
@@ -2098,7 +2098,7 @@ func (c *Client) CreateZone(request *CreateZoneRequest) (response *CreateZoneRes
 //
 // error code that may be returned:
 //  DRYRUNOPERATION = "DryRunOperation"
-//  INTERNALERROR_FAILEDTOCALLDNSPOD = "InternalError.FailedToCallDNSPod"
+//  FAILEDOPERATION_FAILEDTOCALLDNSPOD = "FailedOperation.FailedToCallDNSPod"
 //  INVALIDPARAMETER_INVALIDORIGINIP = "InvalidParameter.InvalidOriginIp"
 //  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
 //  INVALIDPARAMETER_PLANNOTFOUND = "InvalidParameter.PlanNotFound"
@@ -5451,6 +5451,61 @@ func (c *Client) DescribeTopL7CacheDataWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeZoneConfigImportResultRequest() (request *DescribeZoneConfigImportResultRequest) {
+    request = &DescribeZoneConfigImportResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeZoneConfigImportResult")
+    
+    
+    return
+}
+
+func NewDescribeZoneConfigImportResultResponse() (response *DescribeZoneConfigImportResultResponse) {
+    response = &DescribeZoneConfigImportResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeZoneConfigImportResult
+// This API is used to query the results of site configuration import via API (ImportZoneConfig). This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) DescribeZoneConfigImportResult(request *DescribeZoneConfigImportResultRequest) (response *DescribeZoneConfigImportResultResponse, err error) {
+    return c.DescribeZoneConfigImportResultWithContext(context.Background(), request)
+}
+
+// DescribeZoneConfigImportResult
+// This API is used to query the results of site configuration import via API (ImportZoneConfig). This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) DescribeZoneConfigImportResultWithContext(ctx context.Context, request *DescribeZoneConfigImportResultRequest) (response *DescribeZoneConfigImportResultResponse, err error) {
+    if request == nil {
+        request = NewDescribeZoneConfigImportResultRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeZoneConfigImportResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeZoneConfigImportResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeZoneSettingRequest() (request *DescribeZoneSettingRequest) {
     request = &DescribeZoneSettingRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5752,6 +5807,59 @@ func (c *Client) DownloadL7LogsWithContext(ctx context.Context, request *Downloa
     return
 }
 
+func NewExportZoneConfigRequest() (request *ExportZoneConfigRequest) {
+    request = &ExportZoneConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ExportZoneConfig")
+    
+    
+    return
+}
+
+func NewExportZoneConfigResponse() (response *ExportZoneConfigResponse) {
+    response = &ExportZoneConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExportZoneConfig
+// This API is used to export site configuration . The exported configuration is used for import via the API (ImportZoneConfig). This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+//
+// error code that may be returned:
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) ExportZoneConfig(request *ExportZoneConfigRequest) (response *ExportZoneConfigResponse, err error) {
+    return c.ExportZoneConfigWithContext(context.Background(), request)
+}
+
+// ExportZoneConfig
+// This API is used to export site configuration . The exported configuration is used for import via the API (ImportZoneConfig). This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+//
+// error code that may be returned:
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) ExportZoneConfigWithContext(ctx context.Context, request *ExportZoneConfigRequest) (response *ExportZoneConfigResponse, err error) {
+    if request == nil {
+        request = NewExportZoneConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportZoneConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExportZoneConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewHandleFunctionRuntimeEnvironmentRequest() (request *HandleFunctionRuntimeEnvironmentRequest) {
     request = &HandleFunctionRuntimeEnvironmentRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5864,6 +5972,59 @@ func (c *Client) IdentifyZoneWithContext(ctx context.Context, request *IdentifyZ
     request.SetContext(ctx)
     
     response = NewIdentifyZoneResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewImportZoneConfigRequest() (request *ImportZoneConfigRequest) {
+    request = &ImportZoneConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ImportZoneConfig")
+    
+    
+    return
+}
+
+func NewImportZoneConfigResponse() (response *ImportZoneConfigResponse) {
+    response = &ImportZoneConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ImportZoneConfig
+// This API is used to quickly import site configuration files. After the import is initiated, the API will return the corresponding task ID (TaskId). Users need to use the site configuration import result query API (DescribeZoneConfigImportResult) to obtain the results of this import task. This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+//
+// error code that may be returned:
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) ImportZoneConfig(request *ImportZoneConfigRequest) (response *ImportZoneConfigResponse, err error) {
+    return c.ImportZoneConfigWithContext(context.Background(), request)
+}
+
+// ImportZoneConfig
+// This API is used to quickly import site configuration files. After the import is initiated, the API will return the corresponding task ID (TaskId). Users need to use the site configuration import result query API (DescribeZoneConfigImportResult) to obtain the results of this import task. This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
+//
+// error code that may be returned:
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) ImportZoneConfigWithContext(ctx context.Context, request *ImportZoneConfigRequest) (response *ImportZoneConfigResponse, err error) {
+    if request == nil {
+        request = NewImportZoneConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ImportZoneConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewImportZoneConfigResponse()
     err = c.Send(request, response)
     return
 }
@@ -7726,8 +7887,8 @@ func NewModifyZoneResponse() (response *ModifyZoneResponse) {
 // error code that may be returned:
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDTOCALLDNSPOD = "FailedOperation.FailedToCallDNSPod"
 //  INTERNALERROR_CONFIGLOCKED = "InternalError.ConfigLocked"
-//  INTERNALERROR_FAILEDTOCALLDNSPOD = "InternalError.FailedToCallDNSPod"
 //  INVALIDPARAMETER_INVALIDORIGINIP = "InvalidParameter.InvalidOriginIp"
 //  INVALIDPARAMETER_INVALIDWEBSOCKETTIMEOUT = "InvalidParameter.InvalidWebSocketTimeout"
 //  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"
@@ -7770,8 +7931,8 @@ func (c *Client) ModifyZone(request *ModifyZoneRequest) (response *ModifyZoneRes
 // error code that may be returned:
 //  DRYRUNOPERATION = "DryRunOperation"
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_FAILEDTOCALLDNSPOD = "FailedOperation.FailedToCallDNSPod"
 //  INTERNALERROR_CONFIGLOCKED = "InternalError.ConfigLocked"
-//  INTERNALERROR_FAILEDTOCALLDNSPOD = "InternalError.FailedToCallDNSPod"
 //  INVALIDPARAMETER_INVALIDORIGINIP = "InvalidParameter.InvalidOriginIp"
 //  INVALIDPARAMETER_INVALIDWEBSOCKETTIMEOUT = "InvalidParameter.InvalidWebSocketTimeout"
 //  INVALIDPARAMETER_LENGTHEXCEEDSLIMIT = "InvalidParameter.LengthExceedsLimit"

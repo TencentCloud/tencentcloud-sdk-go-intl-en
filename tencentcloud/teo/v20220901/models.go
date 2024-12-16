@@ -8350,29 +8350,29 @@ type DescribeTopL7AnalysisDataRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// The metrics queried. Valid values:
-	// <li> l7Flow_outFlux_country: statistics of the L7 EdgeOne response traffic by country/region;</li>
-	// <li> l7Flow_outFlux_province: statistics of the L7 EdgeOne response traffic by province within the Chinese mainland;</li>
-	// <li> l7Flow_outFlux_statusCode: statistics of the L7 EdgeOne response traffic by status code;</li>
-	// <li> l7Flow_outFlux_domain: statistics of the L7 EdgeOne response traffic by domain name;</li>
-	// <li> l7Flow_outFlux_url: statistics of the L7 EdgeOne response traffic by URL path;</li>
-	// <li> l7Flow_outFlux_resourceType: statistics of the L7 EdgeOne response traffic by resource type;</li>
-	// <li> l7Flow_outFlux_sip: statistics of the L7 EdgeOne response traffic by client IP;</li>
-	// <li> l7Flow_outFlux_referers: statistics of the L7 EdgeOne response traffic by Referer;</li>
-	// <li> l7Flow_outFlux_ua_device: statistics of the L7 EdgeOne response traffic by device type;</li>
-	// <li> l7Flow_outFlux_ua_browser: statistics of the L7 EdgeOne response traffic by browser type;</li>
-	// <li> l7Flow_outFlux_us_os: statistics of the L7 EdgeOne response traffic by operating system type;</li>
-	// <li> l7Flow_request_country: statistics of the L7 access request count by country/region;</li>
-	// <li> l7Flow_request_province: statistics of the L7 access request count by province within the Chinese mainland;</li>
-	// <li> l7Flow_request_statusCode: statistics of the L7 access request count by status code;</li>
-	// <li> l7Flow_request_domain: statistics of the L7 access request count by domain name;</li>
-	// <li> l7Flow_request_url: statistics of the L7 access request count by URL path;</li>
-	// <li> l7Flow_request_resourceType: statistics of the L7 access request count by resource type;</li>
-	// <li> l7Flow_request_sip: statistics of the L7 access request count by client IP;</li>
-	// <li> l7Flow_request_referer: statistics of the L7 access request count by Referer;</li>
-	// <li> l7Flow_request_ua_device: statistics of the L7 access request count by device type;</li>
-	// <li> l7Flow_request_ua_browser: statistics of the L7 access request count by browser type;</li>
-	// <li> l7Flow_request_us_os: statistics of the L7 access request count by operating system type.</li>
+	// Queried metric. Valid values:
+	// <li> l7Flow_outFlux_country: L7 EdgeOne response traffic metric counted by the country/region dimension;</li>
+	// <li> l7Flow_outFlux_province: L7 EdgeOne response traffic metric counted by the dimension of provinces in Chinese mainland;</li>
+	// <li> l7Flow_outFlux_statusCode: L7 EdgeOne response traffic metric counted by the status code dimension;</li>
+	// <li> l7Flow_outFlux_domain: L7 EdgeOne response traffic metric counted by the domain name dimension;</li>
+	// <li> l7Flow_outFlux_url: L7 EdgeOne response traffic metric counted by the URL path dimension;</li>
+	// <li> l7Flow_outFlux_resourceType: L7 EdgeOne response traffic metric counted by the resource type dimension;</li>
+	// <li> l7Flow_outFlux_sip: L7 EdgeOne response traffic metric counted by the client IP dimension;</li>
+	// <li> l7Flow_outFlux_referers: L7 EdgeOne response traffic metric counted by the referer dimension;</li>
+	// <li> l7Flow_outFlux_ua_device: L7 EdgeOne response traffic metric counted by the device type dimension;</li>
+	// <li> l7Flow_outFlux_ua_browser: L7 EdgeOne response traffic metric counted by the browser type dimension;</li>
+	// <li> l7Flow_outFlux_ua_os: L7 EdgeOne response traffic metric counted by the operating system type dimension;</li>
+	// <li> l7Flow_request_country: L7 access request count metric counted by the country/region dimension;</li>
+	// <li> l7Flow_request_province: L7 access request count metric counted by the dimension of provinces in the Chinese mainland;</li>
+	// <li> l7Flow_request_statusCode: L7 access request count metric counted by the status code dimension;</li>
+	// <li> l7Flow_request_domain: L7 access request count metric counted by the domain name dimension;</li>
+	// <li> l7Flow_request_url: L7 access request count metrics counted by the URL path dimension;</li>
+	// <li> l7Flow_request_resourceType: L7 access request count metric counted by the resource type dimension;</li>
+	// <li> l7Flow_request_sip: L7 access request count metric counted by the client IP dimension;</li>
+	// <li> l7Flow_request_referer: L7 access request count metric counted by the referer dimension;</li>
+	// <li> l7Flow_request_ua_device: L7 access request count metric counted by the device type dimension;</li>
+	// <li> l7Flow_request_ua_browser: L7 access request count metric counted by the browser type dimension;</li>
+	// <li> l7Flow_request_ua_os: L7 access request count metric counted by the operating system type dimension.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// ZoneId set. This parameter is required.
@@ -8424,29 +8424,29 @@ type DescribeTopL7AnalysisDataRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// The metrics queried. Valid values:
-	// <li> l7Flow_outFlux_country: statistics of the L7 EdgeOne response traffic by country/region;</li>
-	// <li> l7Flow_outFlux_province: statistics of the L7 EdgeOne response traffic by province within the Chinese mainland;</li>
-	// <li> l7Flow_outFlux_statusCode: statistics of the L7 EdgeOne response traffic by status code;</li>
-	// <li> l7Flow_outFlux_domain: statistics of the L7 EdgeOne response traffic by domain name;</li>
-	// <li> l7Flow_outFlux_url: statistics of the L7 EdgeOne response traffic by URL path;</li>
-	// <li> l7Flow_outFlux_resourceType: statistics of the L7 EdgeOne response traffic by resource type;</li>
-	// <li> l7Flow_outFlux_sip: statistics of the L7 EdgeOne response traffic by client IP;</li>
-	// <li> l7Flow_outFlux_referers: statistics of the L7 EdgeOne response traffic by Referer;</li>
-	// <li> l7Flow_outFlux_ua_device: statistics of the L7 EdgeOne response traffic by device type;</li>
-	// <li> l7Flow_outFlux_ua_browser: statistics of the L7 EdgeOne response traffic by browser type;</li>
-	// <li> l7Flow_outFlux_us_os: statistics of the L7 EdgeOne response traffic by operating system type;</li>
-	// <li> l7Flow_request_country: statistics of the L7 access request count by country/region;</li>
-	// <li> l7Flow_request_province: statistics of the L7 access request count by province within the Chinese mainland;</li>
-	// <li> l7Flow_request_statusCode: statistics of the L7 access request count by status code;</li>
-	// <li> l7Flow_request_domain: statistics of the L7 access request count by domain name;</li>
-	// <li> l7Flow_request_url: statistics of the L7 access request count by URL path;</li>
-	// <li> l7Flow_request_resourceType: statistics of the L7 access request count by resource type;</li>
-	// <li> l7Flow_request_sip: statistics of the L7 access request count by client IP;</li>
-	// <li> l7Flow_request_referer: statistics of the L7 access request count by Referer;</li>
-	// <li> l7Flow_request_ua_device: statistics of the L7 access request count by device type;</li>
-	// <li> l7Flow_request_ua_browser: statistics of the L7 access request count by browser type;</li>
-	// <li> l7Flow_request_us_os: statistics of the L7 access request count by operating system type.</li>
+	// Queried metric. Valid values:
+	// <li> l7Flow_outFlux_country: L7 EdgeOne response traffic metric counted by the country/region dimension;</li>
+	// <li> l7Flow_outFlux_province: L7 EdgeOne response traffic metric counted by the dimension of provinces in Chinese mainland;</li>
+	// <li> l7Flow_outFlux_statusCode: L7 EdgeOne response traffic metric counted by the status code dimension;</li>
+	// <li> l7Flow_outFlux_domain: L7 EdgeOne response traffic metric counted by the domain name dimension;</li>
+	// <li> l7Flow_outFlux_url: L7 EdgeOne response traffic metric counted by the URL path dimension;</li>
+	// <li> l7Flow_outFlux_resourceType: L7 EdgeOne response traffic metric counted by the resource type dimension;</li>
+	// <li> l7Flow_outFlux_sip: L7 EdgeOne response traffic metric counted by the client IP dimension;</li>
+	// <li> l7Flow_outFlux_referers: L7 EdgeOne response traffic metric counted by the referer dimension;</li>
+	// <li> l7Flow_outFlux_ua_device: L7 EdgeOne response traffic metric counted by the device type dimension;</li>
+	// <li> l7Flow_outFlux_ua_browser: L7 EdgeOne response traffic metric counted by the browser type dimension;</li>
+	// <li> l7Flow_outFlux_ua_os: L7 EdgeOne response traffic metric counted by the operating system type dimension;</li>
+	// <li> l7Flow_request_country: L7 access request count metric counted by the country/region dimension;</li>
+	// <li> l7Flow_request_province: L7 access request count metric counted by the dimension of provinces in the Chinese mainland;</li>
+	// <li> l7Flow_request_statusCode: L7 access request count metric counted by the status code dimension;</li>
+	// <li> l7Flow_request_domain: L7 access request count metric counted by the domain name dimension;</li>
+	// <li> l7Flow_request_url: L7 access request count metrics counted by the URL path dimension;</li>
+	// <li> l7Flow_request_resourceType: L7 access request count metric counted by the resource type dimension;</li>
+	// <li> l7Flow_request_sip: L7 access request count metric counted by the client IP dimension;</li>
+	// <li> l7Flow_request_referer: L7 access request count metric counted by the referer dimension;</li>
+	// <li> l7Flow_request_ua_device: L7 access request count metric counted by the device type dimension;</li>
+	// <li> l7Flow_request_ua_browser: L7 access request count metric counted by the browser type dimension;</li>
+	// <li> l7Flow_request_ua_os: L7 access request count metric counted by the operating system type dimension.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// ZoneId set. This parameter is required.
@@ -8687,6 +8687,82 @@ func (r *DescribeTopL7CacheDataResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeTopL7CacheDataResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeZoneConfigImportResultRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// It indicates the configuration import task ID for which the result needs to be queried. The import task ID is only retained for 7 days.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DescribeZoneConfigImportResultRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// It indicates the configuration import task ID for which the result needs to be queried. The import task ID is only retained for 7 days.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeZoneConfigImportResultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeZoneConfigImportResultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeZoneConfigImportResultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeZoneConfigImportResultResponseParams struct {
+	// The status of this import task. Valid values: <li>success: It indicates the configuration was successfully imported;</li> <li>failure: It indicates the configuration import failed;</li> <li>doing: It indicates the configuration is being imported.</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// The status message of this import task. If the configuration item import fails, you can view the failure cause through this field.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// The configuration content of this import task.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// The start time of this import task.
+	ImportTime *string `json:"ImportTime,omitnil,omitempty" name:"ImportTime"`
+
+	// The end time of this import task.
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeZoneConfigImportResultResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeZoneConfigImportResultResponseParams `json:"Response"`
+}
+
+func (r *DescribeZoneConfigImportResultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeZoneConfigImportResultResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9402,6 +9478,72 @@ type ExceptUserRuleScope struct {
 	SkipConditions []*SkipCondition `json:"SkipConditions,omitnil,omitempty" name:"SkipConditions"`
 }
 
+// Predefined struct for user
+type ExportZoneConfigRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// It indicates exporting the type list of configuration . If it is left blank, all types of configurations will be exported. Currently supported valid values:<li>L7AccelerationConfig: It indicates exporting the Layer-7 acceleration configuration, corresponding to the console's "Site Acceleration - Global Acceleration Configuration" and "Site Acceleration - Rule Engine".</li>
+	// Note: The types that will be supported for export in the future will increase with iterations. When exporting all types, pay attention to the export file size. It is recommended to specify the configuration types to be exported to control the request and response packet payload size.
+	Types []*string `json:"Types,omitnil,omitempty" name:"Types"`
+}
+
+type ExportZoneConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// It indicates exporting the type list of configuration . If it is left blank, all types of configurations will be exported. Currently supported valid values:<li>L7AccelerationConfig: It indicates exporting the Layer-7 acceleration configuration, corresponding to the console's "Site Acceleration - Global Acceleration Configuration" and "Site Acceleration - Rule Engine".</li>
+	// Note: The types that will be supported for export in the future will increase with iterations. When exporting all types, pay attention to the export file size. It is recommended to specify the configuration types to be exported to control the request and response packet payload size.
+	Types []*string `json:"Types,omitnil,omitempty" name:"Types"`
+}
+
+func (r *ExportZoneConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExportZoneConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Types")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExportZoneConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ExportZoneConfigResponseParams struct {
+	// The specific content of the exported configuration, returned in the JSON format and encoded in the UTF-8 mode. Refer to the example below for the configuration content.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ExportZoneConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ExportZoneConfigResponseParams `json:"Response"`
+}
+
+func (r *ExportZoneConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExportZoneConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type FailReason struct {
 	// Failure reason.
 	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
@@ -9891,6 +10033,70 @@ type ImageOptimize struct {
 	// <li>`on`: Enable</li>
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
+// Predefined struct for user
+type ImportZoneConfigRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// The configuration content to be imported, which should be in the JSON format and be encoded in the UTF-8 mode. The configuration content can be obtained through the site configuration export API (ExportZoneConfig). You can individually import "Site Acceleration - Global Acceleration Configuration" or "Site Acceleration - Rule Engine" by passing in the corresponding fields. Refer to the example below for details.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+}
+
+type ImportZoneConfigRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// The configuration content to be imported, which should be in the JSON format and be encoded in the UTF-8 mode. The configuration content can be obtained through the site configuration export API (ExportZoneConfig). You can individually import "Site Acceleration - Global Acceleration Configuration" or "Site Acceleration - Rule Engine" by passing in the corresponding fields. Refer to the example below for details.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+}
+
+func (r *ImportZoneConfigRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ImportZoneConfigRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Content")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ImportZoneConfigRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ImportZoneConfigResponseParams struct {
+	// It indicates the task ID of this import configuration. You can obtain the result of this import task through the site configuration import result query API (DescribeZoneConfigImportResult). Note: The import task ID is only retained for 7 days.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ImportZoneConfigResponse struct {
+	*tchttp.BaseResponse
+	Response *ImportZoneConfigResponseParams `json:"Response"`
+}
+
+func (r *ImportZoneConfigResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ImportZoneConfigResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -13792,22 +13998,22 @@ type RuleCondition struct {
 	// <li>`notexist`: Does not exist</li>
 	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
 
-	// Match type. Valid values: <li> filename: File name; </li> <li> extension: File extension; </li> <li> host: Host name; </li> <li> full_url: The complete URL path under the current site, which must include the HTTP protocol, host, and path; </li> <li> url: Request for the URL path under the current site; </li><li> client_country: Client country/region;</li> <li> query_string: The query string of the URL requested under the current site; </li> <li> request_header: HTTP request header; </li><li> client_ip: Client IP address; </li><li> request_protocol: Request Protocol; </li><li> request_method: HTTP Request Methods. </li>
+	// Matching type. Valid values: <li>filename: Filename;</li><li>extension: File suffix;</li><li>host: Host;</li><li>full_url: A complete URL path under the current site, including the HTTP protocol, the host, and the path;</li><li>url: The request for a URL path under the current site;</li><li>client_country: Client country/region;</li><li>query_string: The query string for a requested URL under the current site;</li><li>request_header: HTTP request header;</li><li>client_ip: Client IP;</li><li>request_protocol: Request protocol;</li><li>request_method: HTTP request method.</li>
 	Target *string `json:"Target,omitnil,omitempty" name:"Target"`
 
-	// The parameter values for match types. It is allowed to pass an empty array only when the match type is query_string or request_header and the operator value is Exist or Does Not Exist. The corresponding match types include:
-	// <li> File extension: Extensions like jpg, txt, etc.;</li>
-	// <li> File name: For example, foo in foo.jpg;</li>
-	// <li> All: All requests for domain names under the site; </li>
-	// <li> HOST: The host under the current site, for example, www.maxx55.com;</li>
-	// <li> URL Path: Request for the URL path under the current site, for example, /example;</li>
-	// <li> URL Full: The complete URL request under the current site, which must include the HTTP protocol, host, and path, for example, https://www.maxx55.cn/example;</li>
-	// <li> Client country/region: Country/region codes compliant with the ISO3166 standard;</li>
-	// <li> Query string: The parameter values in the query string of the URL requested under the current site, for example, cn and 1 in lang=cn&version=1; </li>
-	// <li> HTTP request header: The value of the HTTP request header field, for example, zh-CN,zh;q=0.9 in Accept-Language:zh-CN,zh;q=0.9; </li>
-	// <li> Client IP: The client IP address carried by the current request, supporting IPv4, IPv6, and an IP range; </li>
-	// <li> Request Protocol: The protocol of the current request, with possible values: HTTP, HTTPS; </li>
-	// <li> HTTP Request Methods: The method of the current request, with possible values: GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT, OPTIONS, PATCH, COPY, LOCK, MKCOL, MOVE, PROPFIND, PROPPATCH, UNLOCK. </li>
+	// Parameter values for corresponding matching types. It is allowed to pass an empty array only when the matching type is query_string or request_header and the operator value is exist or not exist. Corresponding match types include:
+	// <li>extension: File suffix such as jpg or txt;</li>
+	// <li> filename: For example, foo in foo.jpg;</li>
+	// <li> all (any request under the site): all;</li>
+	// <li> host: The host under the current site. For example, www.maxx55.com;</li>
+	// <li> URL path: The request for a URL path under the current site. For example, /example;</li>
+	// <li> URL full: The request for a complete URL under the current site, including the HTTP protocol, the host, and the path. For example: https://www.maxx55.cn/example;</li>
+	// <li> client_country: Country/region identifier compliant with the ISO3166 standard;</li>
+	// <li> query_string: The parameter value in the query string of the requested URL under the current site. For example, cn and 1 in lang=cn&version=1;</li>
+	// <li> request_header: The value of the HTTP request header field. For example, zh-CN,zh;q=0.9 in Accept-Language:zh-CN,zh;q=0.9;</li>
+	// <li> client_ip: The client request IP carried in the current request, which supports IPv4/IPv6 and an IP range;</li>
+	// <li> request_protocol: The protocol of the current request. Valid values: HTTP and HTTPS;</li>
+	// <li> request_method: The method of the current request. Valid values: GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT, OPTIONS, PATCH, COPY, LOCK, MKCOL, MOVE, PROPFIND, PROPPATCH, and UNLOCK. </li>
 	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
 
 	// Whether the parameter value is case insensitive. Default value: false.

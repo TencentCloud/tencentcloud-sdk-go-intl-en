@@ -1348,6 +1348,59 @@ func (c *Client) QueryPartnerCreditWithContext(ctx context.Context, request *Que
     return
 }
 
+func NewQueryPolicyProductListByCodeRequest() (request *QueryPolicyProductListByCodeRequest) {
+    request = &QueryPolicyProductListByCodeRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "QueryPolicyProductListByCode")
+    
+    
+    return
+}
+
+func NewQueryPolicyProductListByCodeResponse() (response *QueryPolicyProductListByCodeResponse) {
+    response = &QueryPolicyProductListByCodeResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryPolicyProductListByCode
+// This API is used to query the product list information within the specified policy range. To call this API, contact your account manager to add it to the allowlist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) QueryPolicyProductListByCode(request *QueryPolicyProductListByCodeRequest) (response *QueryPolicyProductListByCodeResponse, err error) {
+    return c.QueryPolicyProductListByCodeWithContext(context.Background(), request)
+}
+
+// QueryPolicyProductListByCode
+// This API is used to query the product list information within the specified policy range. To call this API, contact your account manager to add it to the allowlist.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) QueryPolicyProductListByCodeWithContext(ctx context.Context, request *QueryPolicyProductListByCodeRequest) (response *QueryPolicyProductListByCodeResponse, err error) {
+    if request == nil {
+        request = NewQueryPolicyProductListByCodeRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryPolicyProductListByCode require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryPolicyProductListByCodeResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryVoucherAmountByUinRequest() (request *QueryVoucherAmountByUinRequest) {
     request = &QueryVoucherAmountByUinRequest{
         BaseRequest: &tchttp.BaseRequest{},
