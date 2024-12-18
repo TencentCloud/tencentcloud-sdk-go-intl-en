@@ -359,12 +359,16 @@ type AddOnSubtitle struct {
 	// <li>`subtitle-stream`: Add a subtitle track.</li>
 	// <li>`close-caption-708`: Embed CEA-708 subtitles in SEI frames.</li>
 	// <li>`close-caption-608`: Embed CEA-608 subtitles in SEI frames.</li>
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The subtitle file.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Subtitle *MediaInputInfo `json:"Subtitle,omitnil,omitempty" name:"Subtitle"`
+
+	// Subtitle name.	
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SubtitleName *string `json:"SubtitleName,omitnil,omitempty" name:"SubtitleName"`
 }
 
 type AiAnalysisResult struct {
@@ -7805,16 +7809,15 @@ type ImageEncodeConfig struct {
 
 type ImageEnhanceConfig struct {
 	// Super-resolution configuration.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	SuperResolution *SuperResolutionConfig `json:"SuperResolution,omitnil,omitempty" name:"SuperResolution"`
 
-
+	// Color enhancement configuration.
 	ColorEnhance *ColorEnhanceConfig `json:"ColorEnhance,omitnil,omitempty" name:"ColorEnhance"`
 
-
+	// Detail enhancement configuration.
 	SharpEnhance *SharpEnhanceConfig `json:"SharpEnhance,omitnil,omitempty" name:"SharpEnhance"`
 
-
+	// Face enhancement configuration.
 	FaceEnhance *FaceEnhanceConfig `json:"FaceEnhance,omitnil,omitempty" name:"FaceEnhance"`
 }
 
@@ -11103,9 +11106,10 @@ func (r *ParseLiveStreamProcessNotificationRequest) FromJsonString(s string) err
 // Predefined struct for user
 type ParseLiveStreamProcessNotificationResponseParams struct {
 	// Live stream processing result type, including:
-	// <li>AiReviewResult: content moderation result;</li>
-	// <li>AiRecognitionResult: content recognition result;</li>
-	// <li>LiveRecordResult: live recording result;</li>
+	// <li>AiReviewResult: content auditing result.</li>
+	// <li>AiRecognitionResult: content recognition result.</li>
+	// <li>LiveRecordResult: live recording result.</li>
+	// <li>AiQualityControlResult: media quality inspection result.</li>
 	// <li>ProcessEof: live stream processing result.</li>
 	NotificationType *string `json:"NotificationType,omitnil,omitempty" name:"NotificationType"`
 
@@ -11113,24 +11117,24 @@ type ParseLiveStreamProcessNotificationResponseParams struct {
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// Information of a live stream processing error, which is valid when `NotificationType` is `ProcessEof`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: when this field return null, means no valid values can be obtained.
 	ProcessEofInfo *LiveStreamProcessErrorInfo `json:"ProcessEofInfo,omitnil,omitempty" name:"ProcessEofInfo"`
 
 	// Content audit result, which is valid when `NotificationType` is `AiReviewResult`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: when this field return null, means no valid values can be obtained.
 	AiReviewResultInfo *LiveStreamAiReviewResultInfo `json:"AiReviewResultInfo,omitnil,omitempty" name:"AiReviewResultInfo"`
 
 	// Content recognition result, which is valid if `NotificationType` is `AiRecognitionResult`.
 	AiRecognitionResultInfo *LiveStreamAiRecognitionResultInfo `json:"AiRecognitionResultInfo,omitnil,omitempty" name:"AiRecognitionResultInfo"`
 
-
+	// Content analysis result, which is valid if `NotificationType` is `AiAnalysisResult`.
 	AiAnalysisResultInfo *LiveStreamAiAnalysisResultInfo `json:"AiAnalysisResultInfo,omitnil,omitempty" name:"AiAnalysisResultInfo"`
 
-
+	// Media quality inspection result, which is valid if `NotificationType` is `AiQualityControlResult`.
 	AiQualityControlResultInfo *LiveStreamAiQualityControlResultInfo `json:"AiQualityControlResultInfo,omitnil,omitempty" name:"AiQualityControlResultInfo"`
 
 	// Live recording result is valid when NotificationType is LiveRecordResult.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: when this field return null, means no valid values can be obtained.
 	LiveRecordResultInfo *LiveStreamRecordResultInfo `json:"LiveRecordResultInfo,omitnil,omitempty" name:"LiveRecordResultInfo"`
 
 	// The ID used for deduplication. If there was a request with the same ID in the last seven days, the current request will return an error. The ID can contain up to 50 characters. If this parameter is left empty or an empty string is entered, no deduplication will be performed.
@@ -11138,6 +11142,15 @@ type ParseLiveStreamProcessNotificationResponseParams struct {
 
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// - Expiration time, event notification signature expiration UNIX timestamp. - By default, notifications sent by MPS expire after 10 minutes. If the expiration time specified has elapsed, a notification will be considered invalid. This can prevent replay attacks. - The format of Timestamp is a decimal UNIX timestamp, which is the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT).
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Timestamp *int64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
+
+	// Event notification security signature. Sign = MD5 (Timestamp + NotifyKey). Note: Media Processing Service concatenates Timestamp and NotifyKey from TaskNotifyConfig as a string and calculates the Sign value through MD5. This value is included in the notification message. Your backend server can verify whether the Sign is correct using the same algorithm, to confirm whether the message is indeed from the Media Processing Service backend.
+	// 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Sign *string `json:"Sign,omitnil,omitempty" name:"Sign"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`

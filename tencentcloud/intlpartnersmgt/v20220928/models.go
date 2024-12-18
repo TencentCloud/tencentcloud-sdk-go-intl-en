@@ -379,7 +379,7 @@ type CreateAccountRequestParams struct {
 	AccountType *string `json:"AccountType,omitnil,omitempty" name:"AccountType"`
 
 	// Registered email address, which should be valid and correct.
-	// For example, account@qq.com.
+	// such as "account@qq.com"
 	Mail *string `json:"Mail,omitnil,omitempty" name:"Mail"`
 
 	// Account password.
@@ -390,24 +390,23 @@ type CreateAccountRequestParams struct {
 	// The confirmed password, which must be the same as that entered in the `Password` field.
 	ConfirmPassword *string `json:"ConfirmPassword,omitnil,omitempty" name:"ConfirmPassword"`
 
-	// Customer's mobile number. 
-	// The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed. 
+	// Customer's mobile number.
+	// The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed.
 	// The system will perform binding limit verification of the mobile number you provide, allowing a maximum of 5 accounts per mobile number.
 	PhoneNum *string `json:"PhoneNum,omitnil,omitempty" name:"PhoneNum"`
 
-	// Customer's country/region code, which can be obtained via the `GetCountryCodes` API, such as "852".
+	// Customer's country/region code, which can be obtained via the  [GetCountryCodes API](https://www.tencentcloud.com/document/product/1085/51416), such as "852".
 	// Parameter value is not allowed to be 7,380,86.
 	CountryCode *string `json:"CountryCode,omitnil,omitempty" name:"CountryCode"`
 
-	// Customer's ISO2 standard country/region code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field, such as `HK`.
+	// Customer's ISO2 standard country/region code, which can be obtained via the [GetCountryCodes API](https://www.tencentcloud.com/document/product/1085/51416). It should correspond to the `CountryCode` field, such as `HK`.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Extension field, which is left empty by default.
 	Extended *string `json:"Extended,omitnil,omitempty" name:"Extended"`
 
-	// Verification code. 
-	// It will be used to verify the validity of the mobile number you provide. 
-	// When the interface is requested for the first time, a null value can be passed in. The interface will send a 6-digit verification code by SMS to the mobile number you provide, and you need to pass it in again together with other parameters after you receive it.
+	// VerifyCode. This field is required. 
+	// Use the [SendVerifyCode API](https://www.tencentcloud.com/document/product/1085/65907) to obtain the verifycode.The SendVerifyCode API sends a 6-digit verifycode to your specified mobile number via SMS. After receiving it, you need to pass it along with other parameters.
 	VerifyCode *string `json:"VerifyCode,omitnil,omitempty" name:"VerifyCode"`
 }
 
@@ -419,7 +418,7 @@ type CreateAccountRequest struct {
 	AccountType *string `json:"AccountType,omitnil,omitempty" name:"AccountType"`
 
 	// Registered email address, which should be valid and correct.
-	// For example, account@qq.com.
+	// such as "account@qq.com"
 	Mail *string `json:"Mail,omitnil,omitempty" name:"Mail"`
 
 	// Account password.
@@ -430,24 +429,23 @@ type CreateAccountRequest struct {
 	// The confirmed password, which must be the same as that entered in the `Password` field.
 	ConfirmPassword *string `json:"ConfirmPassword,omitnil,omitempty" name:"ConfirmPassword"`
 
-	// Customer's mobile number. 
-	// The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed. 
+	// Customer's mobile number.
+	// The caller needs to ensure the validity and correctness of the mobile number. A global mobile number within a range of 1-32 digits is allowed.
 	// The system will perform binding limit verification of the mobile number you provide, allowing a maximum of 5 accounts per mobile number.
 	PhoneNum *string `json:"PhoneNum,omitnil,omitempty" name:"PhoneNum"`
 
-	// Customer's country/region code, which can be obtained via the `GetCountryCodes` API, such as "852".
+	// Customer's country/region code, which can be obtained via the  [GetCountryCodes API](https://www.tencentcloud.com/document/product/1085/51416), such as "852".
 	// Parameter value is not allowed to be 7,380,86.
 	CountryCode *string `json:"CountryCode,omitnil,omitempty" name:"CountryCode"`
 
-	// Customer's ISO2 standard country/region code, which can be obtained via the `GetCountryCodes` API. It should correspond to the `CountryCode` field, such as `HK`.
+	// Customer's ISO2 standard country/region code, which can be obtained via the [GetCountryCodes API](https://www.tencentcloud.com/document/product/1085/51416). It should correspond to the `CountryCode` field, such as `HK`.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 
 	// Extension field, which is left empty by default.
 	Extended *string `json:"Extended,omitnil,omitempty" name:"Extended"`
 
-	// Verification code. 
-	// It will be used to verify the validity of the mobile number you provide. 
-	// When the interface is requested for the first time, a null value can be passed in. The interface will send a 6-digit verification code by SMS to the mobile number you provide, and you need to pass it in again together with other parameters after you receive it.
+	// VerifyCode. This field is required. 
+	// Use the [SendVerifyCode API](https://www.tencentcloud.com/document/product/1085/65907) to obtain the verifycode.The SendVerifyCode API sends a 6-digit verifycode to your specified mobile number via SMS. After receiving it, you need to pass it along with other parameters.
 	VerifyCode *string `json:"VerifyCode,omitnil,omitempty" name:"VerifyCode"`
 }
 

@@ -183,7 +183,7 @@ func NewCreateAccountResponse() (response *CreateAccountResponse) {
 }
 
 // CreateAccount
-// This API is used to create Tencent Cloud customer accounts for first-level resellers/second-level resellers.After the account is created, it will be automatically bound to the partner account.Note:
+// This API is used to create Tencent Cloud customer accounts for distributor/second-level resellers.After the account is created, it will be automatically bound to the partner account.Note:
 //
 // 1. Create a Tencent Cloud account. The entered email address and mobile phone number need to be verified by the partner for validity.
 //
@@ -221,7 +221,7 @@ func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateA
 }
 
 // CreateAccount
-// This API is used to create Tencent Cloud customer accounts for first-level resellers/second-level resellers.After the account is created, it will be automatically bound to the partner account.Note:
+// This API is used to create Tencent Cloud customer accounts for distributor/second-level resellers.After the account is created, it will be automatically bound to the partner account.Note:
 //
 // 1. Create a Tencent Cloud account. The entered email address and mobile phone number need to be verified by the partner for validity.
 //
@@ -824,7 +824,9 @@ func NewForceQNResponse() (response *ForceQNResponse) {
 }
 
 // ForceQN
-// This API is used to set and cancel forced service suspension.Reseller need to be allowlisted to use the API.
+// This API is used to set and cancel forced service suspension.
+//
+// Note:Reseller need to be allowlisted to use the API, please contact your business representative to apply for allowlist.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PAGE = "InvalidParameter.Page"
@@ -835,7 +837,9 @@ func (c *Client) ForceQN(request *ForceQNRequest) (response *ForceQNResponse, er
 }
 
 // ForceQN
-// This API is used to set and cancel forced service suspension.Reseller need to be allowlisted to use the API.
+// This API is used to set and cancel forced service suspension.
+//
+// Note:Reseller need to be allowlisted to use the API, please contact your business representative to apply for allowlist.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PAGE = "InvalidParameter.Page"
