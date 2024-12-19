@@ -270,6 +270,79 @@ func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAc
     return
 }
 
+func NewCreateAndSendClientInvitationMailRequest() (request *CreateAndSendClientInvitationMailRequest) {
+    request = &CreateAndSendClientInvitationMailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "CreateAndSendClientInvitationMail")
+    
+    
+    return
+}
+
+func NewCreateAndSendClientInvitationMailResponse() (response *CreateAndSendClientInvitationMailResponse) {
+    response = &CreateAndSendClientInvitationMailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAndSendClientInvitationMail
+// This API is used to apply for the allowlist. If needed, please contact your business representative.Directions:
+//
+// 1.This API is used to create an invitation link, which you can send to a specified email address.
+//
+// 2.Customer need to click the invitation link in the email, fill in and submit the required information.
+//
+// 3.You can review the customer's application in customer management  after submission.
+//
+// 
+//
+// Note:This API is used to manually send the invitation link to the customer if the specified email does not receive it.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SENDMAILLIMIT180 = "FailedOperation.SendMailLimit180"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) CreateAndSendClientInvitationMail(request *CreateAndSendClientInvitationMailRequest) (response *CreateAndSendClientInvitationMailResponse, err error) {
+    return c.CreateAndSendClientInvitationMailWithContext(context.Background(), request)
+}
+
+// CreateAndSendClientInvitationMail
+// This API is used to apply for the allowlist. If needed, please contact your business representative.Directions:
+//
+// 1.This API is used to create an invitation link, which you can send to a specified email address.
+//
+// 2.Customer need to click the invitation link in the email, fill in and submit the required information.
+//
+// 3.You can review the customer's application in customer management  after submission.
+//
+// 
+//
+// Note:This API is used to manually send the invitation link to the customer if the specified email does not receive it.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SENDMAILLIMIT180 = "FailedOperation.SendMailLimit180"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
+func (c *Client) CreateAndSendClientInvitationMailWithContext(ctx context.Context, request *CreateAndSendClientInvitationMailRequest) (response *CreateAndSendClientInvitationMailResponse, err error) {
+    if request == nil {
+        request = NewCreateAndSendClientInvitationMailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAndSendClientInvitationMail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAndSendClientInvitationMailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBillDetailRequest() (request *DescribeBillDetailRequest) {
     request = &DescribeBillDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},

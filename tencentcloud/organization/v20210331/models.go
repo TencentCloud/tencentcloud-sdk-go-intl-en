@@ -900,7 +900,7 @@ type CreateOrganizationMemberRequestParams struct {
 	// Relationship policy. Valid value: `Financial`.
 	PolicyType *string `json:"PolicyType,omitnil,omitempty" name:"PolicyType"`
 
-	// List of member financial permission IDs. `7` indicates paying, which is the default value.
+	// Member Finanace Authorization. Valid values: 1: View Bills. 2: View Balance.  4: Consolidate Bills. 5: Invoice. 6: Inherit Offer. 7: Pay On Behalf. 8: Cost Explorer. 9: Budget Management.  1, 2 and 7 are required.
 	PermissionIds []*uint64 `json:"PermissionIds,omitnil,omitempty" name:"PermissionIds"`
 
 	// Node ID of the member's department, which can be obtained through [DescribeOrganizationNodes](https://intl.cloud.tencent.com/document/product/850/82926?from_cn_redirect=1).
@@ -937,7 +937,7 @@ type CreateOrganizationMemberRequest struct {
 	// Relationship policy. Valid value: `Financial`.
 	PolicyType *string `json:"PolicyType,omitnil,omitempty" name:"PolicyType"`
 
-	// List of member financial permission IDs. `7` indicates paying, which is the default value.
+	// Member Finanace Authorization. Valid values: 1: View Bills. 2: View Balance.  4: Consolidate Bills. 5: Invoice. 6: Inherit Offer. 7: Pay On Behalf. 8: Cost Explorer. 9: Budget Management.  1, 2 and 7 are required.
 	PermissionIds []*uint64 `json:"PermissionIds,omitnil,omitempty" name:"PermissionIds"`
 
 	// Node ID of the member's department, which can be obtained through [DescribeOrganizationNodes](https://intl.cloud.tencent.com/document/product/850/82926?from_cn_redirect=1).
@@ -3744,7 +3744,7 @@ type InviteOrganizationMemberRequestParams struct {
 	// Relationship policy. Valid value: `Financial`.
 	PolicyType *string `json:"PolicyType,omitnil,omitempty" name:"PolicyType"`
 
-	// List of member financial permission IDs. Valid values: 1: View bills. 2: View balance. 3: Transfer funds. 4: Consolidate bills. 5: Issue invoice. 6: Inherit discounts. 7: Pay on behalf. 1 and 2 are required by default.
+	// Member Finanace Authorization. Valid values: 1: View Bills. 2: View Balance.  4: Consolidate Bills. 5: Invoice. 6: Inherit Offer. 7: Pay On Behalf. 8: Cost Explorer. 9: Budget Management.  1 and 2 are required.
 	PermissionIds []*uint64 `json:"PermissionIds,omitnil,omitempty" name:"PermissionIds"`
 
 	// Node ID of the member's department, which can be obtained through [DescribeOrganizationNodes](https://intl.cloud.tencent.com/document/product/850/82926?from_cn_redirect=1).
@@ -3781,7 +3781,7 @@ type InviteOrganizationMemberRequest struct {
 	// Relationship policy. Valid value: `Financial`.
 	PolicyType *string `json:"PolicyType,omitnil,omitempty" name:"PolicyType"`
 
-	// List of member financial permission IDs. Valid values: 1: View bills. 2: View balance. 3: Transfer funds. 4: Consolidate bills. 5: Issue invoice. 6: Inherit discounts. 7: Pay on behalf. 1 and 2 are required by default.
+	// Member Finanace Authorization. Valid values: 1: View Bills. 2: View Balance.  4: Consolidate Bills. 5: Invoice. 6: Inherit Offer. 7: Pay On Behalf. 8: Cost Explorer. 9: Budget Management.  1 and 2 are required.
 	PermissionIds []*uint64 `json:"PermissionIds,omitnil,omitempty" name:"PermissionIds"`
 
 	// Node ID of the member's department, which can be obtained through [DescribeOrganizationNodes](https://intl.cloud.tencent.com/document/product/850/82926?from_cn_redirect=1).
