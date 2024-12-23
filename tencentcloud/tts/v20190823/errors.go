@@ -29,6 +29,9 @@ const (
 	// Internal error.
 	INTERNALERROR_INTERNALERROR = "InternalError.InternalError"
 
+	// 
+	INTERNALERROR_NORESOURCE = "InternalError.NoResource"
+
 	// The request text contains invalid characters.
 	INVALIDPARAMETER_INVALIDTEXT = "InvalidParameter.InvalidText"
 

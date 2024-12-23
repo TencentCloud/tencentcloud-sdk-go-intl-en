@@ -43,7 +43,7 @@ type AssociateDDoSEipAddressRequestParams struct {
 	// Anti-DDoS instance ID (only Anti-DDoS Advanced). For example, `bgpip-0000011x`.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// EIP of the Anti-DDoS instance ID
+	// EIP of the Anti-DDoS instance ID.
 	Eip *string `json:"Eip,omitnil,omitempty" name:"Eip"`
 
 	// Instance ID to bind. For example, `ins-11112222`. It can be queried in the console or obtained from `InstanceId` returned by `DescribeInstances`.
@@ -59,7 +59,7 @@ type AssociateDDoSEipAddressRequest struct {
 	// Anti-DDoS instance ID (only Anti-DDoS Advanced). For example, `bgpip-0000011x`.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
-	// EIP of the Anti-DDoS instance ID
+	// EIP of the Anti-DDoS instance ID.
 	Eip *string `json:"Eip,omitnil,omitempty" name:"Eip"`
 
 	// Instance ID to bind. For example, `ins-11112222`. It can be queried in the console or obtained from `InstanceId` returned by `DescribeInstances`.

@@ -1392,6 +1392,135 @@ func (r *DetectFaceResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DetectFaceSimilarityRequestParams struct {
+	// A image base64 data.
+	//  - The size after base64 encoding cannot exceed 5M. 
+	// - The long side pixels of jpg format cannot exceed 4000, and the long side pixels of pictures in other formats cannot exceed 2000. The short side of images in all formats must be no less than 64 pixels. 
+	// - If the picture contains multiple faces, only the face with the highest confidence is selected. - Supports PNG, JPG, JPEG, BMP, but does not support GIF images.
+	ImageA *string `json:"ImageA,omitnil,omitempty" name:"ImageA"`
+
+	// B image base64 data.
+	//  - The size after base64 encoding cannot exceed 5M. 
+	// - The long side pixels of jpg format cannot exceed 4000, and the long side pixels of pictures in other formats cannot exceed 2000. The short side of images in all formats must be no less than 64 pixels. 
+	// - If the picture contains multiple faces, only the face with the highest confidence is selected. - Supports PNG, JPG, JPEG, BMP, but does not support GIF images.
+	ImageB *string `json:"ImageB,omitnil,omitempty" name:"ImageB"`
+
+	// A URL for the image. 
+	// - The size of the corresponding image after base64 encoding cannot exceed 5M. 
+	// - The long side pixels of jpg format cannot exceed 4000, and the long side pixels of pictures in other formats cannot exceed 2000. The short side of images in all formats must be no less than 64 pixels. 
+	// - A The URL and Image of the picture must be provided. If both are provided, only the Url will be used. 
+	// - Images stored in Tencent Cloud's Url can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. 
+	// - The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent. 
+	// - If the picture contains multiple faces, only the face with the largest face area is selected. 
+	// - Supports PNG, JPG, JPEG, BMP, but does not support GIF images.
+	UrlA *string `json:"UrlA,omitnil,omitempty" name:"UrlA"`
+
+	// B The URL of the image. 
+	// - The size of the corresponding image after base64 encoding cannot exceed 5M. 
+	// - The long side pixels of jpg format cannot exceed 4000, and the long side pixels of pictures in other formats cannot exceed 2000. The short side of images in all formats must be no less than 64 pixels. 
+	// - B The URL and Image of the picture must be provided. If both are provided, only the Url will be used. 
+	// - Images stored in Tencent Cloud's Url can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. 
+	// - The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent. 
+	// - If the picture contains multiple faces, only the face with the largest face area is selected. 
+	// - Supports PNG, JPG, JPEG, BMP, but does not support GIF images.
+	UrlB *string `json:"UrlB,omitnil,omitempty" name:"UrlB"`
+
+	// Image quality control. 
+	// - Value range: 0: No control; 1: Lower quality requirements, the image is very blurry, and the eyes, nose, and mouth cover at least one or more of them; 2: General quality requirements, the image is bright, Dark, blurry or generally blurred, eyebrows covered, cheeks covered, chin covered, at least three of them; 3: High quality requirements, the image may be brighter, darker, generally blurry, eyebrows blocked, cheeks blocked, chin blocked, one or two of them; 4: Very high quality requirements, all dimensions are the best or the most , there is a slight problem in one dimension; default is 0. 
+	// - If the image quality does not meet the requirements, the returned result will prompt that the image quality test does not meet the requirements.
+	QualityControl *uint64 `json:"QualityControl,omitnil,omitempty" name:"QualityControl"`
+}
+
+type DetectFaceSimilarityRequest struct {
+	*tchttp.BaseRequest
+	
+	// A image base64 data.
+	//  - The size after base64 encoding cannot exceed 5M. 
+	// - The long side pixels of jpg format cannot exceed 4000, and the long side pixels of pictures in other formats cannot exceed 2000. The short side of images in all formats must be no less than 64 pixels. 
+	// - If the picture contains multiple faces, only the face with the highest confidence is selected. - Supports PNG, JPG, JPEG, BMP, but does not support GIF images.
+	ImageA *string `json:"ImageA,omitnil,omitempty" name:"ImageA"`
+
+	// B image base64 data.
+	//  - The size after base64 encoding cannot exceed 5M. 
+	// - The long side pixels of jpg format cannot exceed 4000, and the long side pixels of pictures in other formats cannot exceed 2000. The short side of images in all formats must be no less than 64 pixels. 
+	// - If the picture contains multiple faces, only the face with the highest confidence is selected. - Supports PNG, JPG, JPEG, BMP, but does not support GIF images.
+	ImageB *string `json:"ImageB,omitnil,omitempty" name:"ImageB"`
+
+	// A URL for the image. 
+	// - The size of the corresponding image after base64 encoding cannot exceed 5M. 
+	// - The long side pixels of jpg format cannot exceed 4000, and the long side pixels of pictures in other formats cannot exceed 2000. The short side of images in all formats must be no less than 64 pixels. 
+	// - A The URL and Image of the picture must be provided. If both are provided, only the Url will be used. 
+	// - Images stored in Tencent Cloud's Url can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. 
+	// - The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent. 
+	// - If the picture contains multiple faces, only the face with the largest face area is selected. 
+	// - Supports PNG, JPG, JPEG, BMP, but does not support GIF images.
+	UrlA *string `json:"UrlA,omitnil,omitempty" name:"UrlA"`
+
+	// B The URL of the image. 
+	// - The size of the corresponding image after base64 encoding cannot exceed 5M. 
+	// - The long side pixels of jpg format cannot exceed 4000, and the long side pixels of pictures in other formats cannot exceed 2000. The short side of images in all formats must be no less than 64 pixels. 
+	// - B The URL and Image of the picture must be provided. If both are provided, only the Url will be used. 
+	// - Images stored in Tencent Cloud's Url can ensure higher download speed and stability. It is recommended that images be stored in Tencent Cloud. 
+	// - The URL speed and stability of non-Tencent cloud storage may be affected to a certain extent. 
+	// - If the picture contains multiple faces, only the face with the largest face area is selected. 
+	// - Supports PNG, JPG, JPEG, BMP, but does not support GIF images.
+	UrlB *string `json:"UrlB,omitnil,omitempty" name:"UrlB"`
+
+	// Image quality control. 
+	// - Value range: 0: No control; 1: Lower quality requirements, the image is very blurry, and the eyes, nose, and mouth cover at least one or more of them; 2: General quality requirements, the image is bright, Dark, blurry or generally blurred, eyebrows covered, cheeks covered, chin covered, at least three of them; 3: High quality requirements, the image may be brighter, darker, generally blurry, eyebrows blocked, cheeks blocked, chin blocked, one or two of them; 4: Very high quality requirements, all dimensions are the best or the most , there is a slight problem in one dimension; default is 0. 
+	// - If the image quality does not meet the requirements, the returned result will prompt that the image quality test does not meet the requirements.
+	QualityControl *uint64 `json:"QualityControl,omitnil,omitempty" name:"QualityControl"`
+}
+
+func (r *DetectFaceSimilarityRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetectFaceSimilarityRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageA")
+	delete(f, "ImageB")
+	delete(f, "UrlA")
+	delete(f, "UrlB")
+	delete(f, "QualityControl")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DetectFaceSimilarityRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DetectFaceSimilarityResponseParams struct {
+	// The value range is [0.00, 100.00]. It is recommended that when the similarity is greater than or equal to 70, the person can be judged to be the same person, and the threshold can be adjusted according to the specific scenario (the false pass rate for a threshold of 70 is one in 1,000, and the false pass rate for a threshold of 80 is one in 10,000).
+	Score *float64 `json:"Score,omitnil,omitempty" name:"Score"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DetectFaceSimilarityResponse struct {
+	*tchttp.BaseResponse
+	Response *DetectFaceSimilarityResponseParams `json:"Response"`
+}
+
+func (r *DetectFaceSimilarityResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DetectFaceSimilarityResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DetectLiveFaceAccurateRequestParams struct {
 	// Base64-encoded image data, which cannot exceed 5 MB.
 	// The long side cannot exceed 4,000 px for images in .jpg format or 2,000 px for images in other formats. 
