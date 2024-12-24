@@ -3338,6 +3338,7 @@ type WebVerificationConfigIntl struct {
 	// 1: OCR+living detection & face comparison;
 	// 2: Living detection & face comparison;
 	// 3: Living detection;
+	// 4: OCR;
 	// The default value is 2.
 	// Example value: 3
 	CheckMode *int64 `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
