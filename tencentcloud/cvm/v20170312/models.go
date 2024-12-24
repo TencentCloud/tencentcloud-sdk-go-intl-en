@@ -7391,6 +7391,16 @@ type SyncImagesRequestParams struct {
 	// 
 	// Default value: false.
 	ImageSetRequired *bool `json:"ImageSetRequired,omitnil,omitempty" name:"ImageSetRequired"`
+
+	// Whether to synchronize as an encrypted custom image.
+	// Default value is `false`.
+	// Synchronization to an encrypted custom image is only supported within the same region.
+	Encrypt *bool `json:"Encrypt,omitnil,omitempty" name:"Encrypt"`
+
+	// KMS key ID used when synchronizing to an encrypted custom image. 
+	// This parameter is valid only synchronizing to an encrypted image.
+	// If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+	KmsKeyId *string `json:"KmsKeyId,omitnil,omitempty" name:"KmsKeyId"`
 }
 
 type SyncImagesRequest struct {
@@ -7414,6 +7424,16 @@ type SyncImagesRequest struct {
 	// 
 	// Default value: false.
 	ImageSetRequired *bool `json:"ImageSetRequired,omitnil,omitempty" name:"ImageSetRequired"`
+
+	// Whether to synchronize as an encrypted custom image.
+	// Default value is `false`.
+	// Synchronization to an encrypted custom image is only supported within the same region.
+	Encrypt *bool `json:"Encrypt,omitnil,omitempty" name:"Encrypt"`
+
+	// KMS key ID used when synchronizing to an encrypted custom image. 
+	// This parameter is valid only synchronizing to an encrypted image.
+	// If KmsKeyId is not specified, the default CBS cloud product KMS key is used.
+	KmsKeyId *string `json:"KmsKeyId,omitnil,omitempty" name:"KmsKeyId"`
 }
 
 func (r *SyncImagesRequest) ToJsonString() string {
@@ -7433,6 +7453,8 @@ func (r *SyncImagesRequest) FromJsonString(s string) error {
 	delete(f, "DryRun")
 	delete(f, "ImageName")
 	delete(f, "ImageSetRequired")
+	delete(f, "Encrypt")
+	delete(f, "KmsKeyId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SyncImagesRequest has unknown keys!", "")
 	}
