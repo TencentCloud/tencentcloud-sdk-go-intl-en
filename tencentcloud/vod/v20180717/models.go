@@ -4740,12 +4740,21 @@ func (r *CreateContentReviewTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDomainVerifyRecordRequestParams struct {
+	// Need to access the VOD acceleration domain name.
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2024, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
 type CreateDomainVerifyRecordRequest struct {
 	*tchttp.BaseRequest
 	
+	// Need to access the VOD acceleration domain name.
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2024, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
 func (r *CreateDomainVerifyRecordRequest) ToJsonString() string {
@@ -4760,7 +4769,8 @@ func (r *CreateDomainVerifyRecordRequest) FromJsonString(s string) error {
 	if err := json.Unmarshal([]byte(s), &f); err != nil {
 		return err
 	}
-	
+	delete(f, "Domain")
+	delete(f, "SubAppId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDomainVerifyRecordRequest has unknown keys!", "")
 	}
@@ -25837,6 +25847,9 @@ type VerifyDomainRecordRequestParams struct {
 	// Need to access the VOD acceleration domain name.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
 
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2024, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
 	// VerifyType:
 	// <li>dns: DNS Parse verification; </li>
 	// <li>fIle: Document verification.</li>
@@ -25850,6 +25863,9 @@ type VerifyDomainRecordRequest struct {
 	
 	// Need to access the VOD acceleration domain name.
 	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2024, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// VerifyType:
 	// <li>dns: DNS Parse verification; </li>
@@ -25872,6 +25888,7 @@ func (r *VerifyDomainRecordRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "Domain")
+	delete(f, "SubAppId")
 	delete(f, "VerifyType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "VerifyDomainRecordRequest has unknown keys!", "")
