@@ -13022,6 +13022,177 @@ func (c *Client) InquirePriceCreateDirectConnectGatewayWithContext(ctx context.C
     return
 }
 
+func NewInquiryPriceAllocateAddressesRequest() (request *InquiryPriceAllocateAddressesRequest) {
+    request = &InquiryPriceAllocateAddressesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "InquiryPriceAllocateAddresses")
+    
+    
+    return
+}
+
+func NewInquiryPriceAllocateAddressesResponse() (response *InquiryPriceAllocateAddressesResponse) {
+    response = &InquiryPriceAllocateAddressesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InquiryPriceAllocateAddresses
+// This API (InquiryPriceAllocateAddresses) is used to query the price of purchasing EIPs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDREGION = "FailedOperation.InvalidRegion"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
+//  INVALIDPARAMETERVALUE_COMBINATION = "InvalidParameterValue.Combination"
+//  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
+//  UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDREGION = "UnsupportedOperation.UnsupportedRegion"
+func (c *Client) InquiryPriceAllocateAddresses(request *InquiryPriceAllocateAddressesRequest) (response *InquiryPriceAllocateAddressesResponse, err error) {
+    return c.InquiryPriceAllocateAddressesWithContext(context.Background(), request)
+}
+
+// InquiryPriceAllocateAddresses
+// This API (InquiryPriceAllocateAddresses) is used to query the price of purchasing EIPs.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDREGION = "FailedOperation.InvalidRegion"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
+//  INVALIDPARAMETERVALUE_COMBINATION = "InvalidParameterValue.Combination"
+//  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
+//  UNSUPPORTEDOPERATION_ACTIONNOTFOUND = "UnsupportedOperation.ActionNotFound"
+//  UNSUPPORTEDOPERATION_UNSUPPORTEDREGION = "UnsupportedOperation.UnsupportedRegion"
+func (c *Client) InquiryPriceAllocateAddressesWithContext(ctx context.Context, request *InquiryPriceAllocateAddressesRequest) (response *InquiryPriceAllocateAddressesResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceAllocateAddressesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquiryPriceAllocateAddresses require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInquiryPriceAllocateAddressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquiryPriceModifyAddressesBandwidthRequest() (request *InquiryPriceModifyAddressesBandwidthRequest) {
+    request = &InquiryPriceModifyAddressesBandwidthRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "InquiryPriceModifyAddressesBandwidth")
+    
+    
+    return
+}
+
+func NewInquiryPriceModifyAddressesBandwidthResponse() (response *InquiryPriceModifyAddressesBandwidthResponse) {
+    response = &InquiryPriceModifyAddressesBandwidthResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InquiryPriceModifyAddressesBandwidth
+// This API is used to query the price of modifying EIP bandwidth.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
+//  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
+//  INVALIDPARAMETERVALUE_BANDWIDTHTOOSMALL = "InvalidParameterValue.BandwidthTooSmall"
+//  INVALIDPARAMETERVALUE_RESOURCEEXPIRED = "InvalidParameterValue.ResourceExpired"
+//  INVALIDPARAMETERVALUE_RESOURCENOTSUPPORT = "InvalidParameterValue.ResourceNotSupport"
+func (c *Client) InquiryPriceModifyAddressesBandwidth(request *InquiryPriceModifyAddressesBandwidthRequest) (response *InquiryPriceModifyAddressesBandwidthResponse, err error) {
+    return c.InquiryPriceModifyAddressesBandwidthWithContext(context.Background(), request)
+}
+
+// InquiryPriceModifyAddressesBandwidth
+// This API is used to query the price of modifying EIP bandwidth.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
+//  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
+//  INVALIDPARAMETERVALUE_BANDWIDTHTOOSMALL = "InvalidParameterValue.BandwidthTooSmall"
+//  INVALIDPARAMETERVALUE_RESOURCEEXPIRED = "InvalidParameterValue.ResourceExpired"
+//  INVALIDPARAMETERVALUE_RESOURCENOTSUPPORT = "InvalidParameterValue.ResourceNotSupport"
+func (c *Client) InquiryPriceModifyAddressesBandwidthWithContext(ctx context.Context, request *InquiryPriceModifyAddressesBandwidthRequest) (response *InquiryPriceModifyAddressesBandwidthResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceModifyAddressesBandwidthRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquiryPriceModifyAddressesBandwidth require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInquiryPriceModifyAddressesBandwidthResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewInquiryPriceRenewAddressesRequest() (request *InquiryPriceRenewAddressesRequest) {
+    request = &InquiryPriceRenewAddressesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "InquiryPriceRenewAddresses")
+    
+    
+    return
+}
+
+func NewInquiryPriceRenewAddressesResponse() (response *InquiryPriceRenewAddressesResponse) {
+    response = &InquiryPriceRenewAddressesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// InquiryPriceRenewAddresses
+// This API (InquiryPriceRenewAddresses) is used to query the price of renewing prepaid EIPs.
+//
+// error code that may be returned:
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDADDRESSINTERNETCHARGETYPE = "UnsupportedOperation.InvalidAddressInternetChargeType"
+func (c *Client) InquiryPriceRenewAddresses(request *InquiryPriceRenewAddressesRequest) (response *InquiryPriceRenewAddressesResponse, err error) {
+    return c.InquiryPriceRenewAddressesWithContext(context.Background(), request)
+}
+
+// InquiryPriceRenewAddresses
+// This API (InquiryPriceRenewAddresses) is used to query the price of renewing prepaid EIPs.
+//
+// error code that may be returned:
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTFOUND = "InvalidParameterValue.AddressNotFound"
+//  UNSUPPORTEDOPERATION_INVALIDADDRESSINTERNETCHARGETYPE = "UnsupportedOperation.InvalidAddressInternetChargeType"
+func (c *Client) InquiryPriceRenewAddressesWithContext(ctx context.Context, request *InquiryPriceRenewAddressesRequest) (response *InquiryPriceRenewAddressesResponse, err error) {
+    if request == nil {
+        request = NewInquiryPriceRenewAddressesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("InquiryPriceRenewAddresses require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewInquiryPriceRenewAddressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInquiryPriceRenewVpnGatewayRequest() (request *InquiryPriceRenewVpnGatewayRequest) {
     request = &InquiryPriceRenewVpnGatewayRequest{
         BaseRequest: &tchttp.BaseRequest{},

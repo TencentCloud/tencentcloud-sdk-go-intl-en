@@ -1994,6 +1994,150 @@ func (r *CreateCustomizeErrorPageResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateDnsRecordRequestParams struct {
+	// The site ID of the DNS record.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// The DNS record name.If the domain name is in Chinese, Korean, or Japanese, it needs to be converted to Punycode before being entered.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// DNS record types include:
+	// 
+	// - A:Points the domain to an external IPv4 address, such as 8.8.8.8.
+	// - AAAA: Points the domain to an external IPv6 address.
+	// - MX: Used for mail servers. When multiple MX records exist, the one with the lowest priority value is preferred.
+	// - CNAME: Points the domain to another domain, which then resolves to the final IP address.
+	// - TXT: Provides identification and description for the domain, commonly used for domain verification and SPF records (anti-spam).
+	// - NS: If you need to delegate a subdomain to another DNS service provider, you need to add an NS record. NS records cannot be added to the root domain.
+	// - CAA: Specifies which Certificate Authorities (CAs) are allowed to issue certificates for the site.
+	// - SRV: Indicates that a specific server is using a particular service, commonly used in Microsoft's directory management systems.
+	// 
+	// Different record types, such as SRV and CAA, have specific requirements for the host record name and record value format. For detailed descriptions and format examples of each record type, please refer to: [Introduction to DNS Record Types](https://www.tencentcloud.com/zh/document/product/1145/54764#2f681022-91ab-4a9e-ac3d-0a6c454d954e).
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// DNS record content should be filled in according to the corresponding Type value. If the domain name is in Chinese, Korean, or Japanese, it needs to be converted to Punycode before being entered.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// DNS record resolution location, if not specified, default to "Default," which means the default resolution location and is effective for all regions.
+	// - Resolution location configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+	// - Resolution location configuration is only available for Standard and Enterprise packages.
+	// 
+	// For the values, please refer to: [Resolution Lines and Corresponding Codes Enumeration](https://www.tencentcloud.com/zh/document/product/1145/67229).
+	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
+
+	// TTL (in seconds). The smaller the value, the faster the record changes take effect. Default value: 300
+	TTL *int64 `json:"TTL,omitnil,omitempty" name:"TTL"`
+
+	// DNS record weight can be specified within the range of -1 to 100. Setting the weight to 0 means the record will not be resolved. If not specified, the default value is -1, indicating that no weight is set.
+	// 
+	// Weight configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+	// 
+	// Note: For the same subdomain, different DNS records on the same resolution line should either all have weights set or none should have weights set.
+	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
+
+	// The MX record priority parameter is only effective when the Type (DNS record type) is MX. The smaller the value, the higher the priority. Users can specify a value in the range of 0 to 50. If not specified, the default value is 0.
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+}
+
+type CreateDnsRecordRequest struct {
+	*tchttp.BaseRequest
+	
+	// The site ID of the DNS record.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// The DNS record name.If the domain name is in Chinese, Korean, or Japanese, it needs to be converted to Punycode before being entered.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// DNS record types include:
+	// 
+	// - A:Points the domain to an external IPv4 address, such as 8.8.8.8.
+	// - AAAA: Points the domain to an external IPv6 address.
+	// - MX: Used for mail servers. When multiple MX records exist, the one with the lowest priority value is preferred.
+	// - CNAME: Points the domain to another domain, which then resolves to the final IP address.
+	// - TXT: Provides identification and description for the domain, commonly used for domain verification and SPF records (anti-spam).
+	// - NS: If you need to delegate a subdomain to another DNS service provider, you need to add an NS record. NS records cannot be added to the root domain.
+	// - CAA: Specifies which Certificate Authorities (CAs) are allowed to issue certificates for the site.
+	// - SRV: Indicates that a specific server is using a particular service, commonly used in Microsoft's directory management systems.
+	// 
+	// Different record types, such as SRV and CAA, have specific requirements for the host record name and record value format. For detailed descriptions and format examples of each record type, please refer to: [Introduction to DNS Record Types](https://www.tencentcloud.com/zh/document/product/1145/54764#2f681022-91ab-4a9e-ac3d-0a6c454d954e).
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// DNS record content should be filled in according to the corresponding Type value. If the domain name is in Chinese, Korean, or Japanese, it needs to be converted to Punycode before being entered.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// DNS record resolution location, if not specified, default to "Default," which means the default resolution location and is effective for all regions.
+	// - Resolution location configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+	// - Resolution location configuration is only available for Standard and Enterprise packages.
+	// 
+	// For the values, please refer to: [Resolution Lines and Corresponding Codes Enumeration](https://www.tencentcloud.com/zh/document/product/1145/67229).
+	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
+
+	// TTL (in seconds). The smaller the value, the faster the record changes take effect. Default value: 300
+	TTL *int64 `json:"TTL,omitnil,omitempty" name:"TTL"`
+
+	// DNS record weight can be specified within the range of -1 to 100. Setting the weight to 0 means the record will not be resolved. If not specified, the default value is -1, indicating that no weight is set.
+	// 
+	// Weight configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
+	// 
+	// Note: For the same subdomain, different DNS records on the same resolution line should either all have weights set or none should have weights set.
+	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
+
+	// The MX record priority parameter is only effective when the Type (DNS record type) is MX. The smaller the value, the higher the priority. Users can specify a value in the range of 0 to 50. If not specified, the default value is 0.
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+}
+
+func (r *CreateDnsRecordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDnsRecordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Name")
+	delete(f, "Type")
+	delete(f, "Content")
+	delete(f, "Location")
+	delete(f, "TTL")
+	delete(f, "Weight")
+	delete(f, "Priority")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDnsRecordRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateDnsRecordResponseParams struct {
+	// The ID of the DNS record.
+	RecordId *string `json:"RecordId,omitnil,omitempty" name:"RecordId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateDnsRecordResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateDnsRecordResponseParams `json:"Response"`
+}
+
+func (r *CreateDnsRecordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateDnsRecordResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateFunctionRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -3975,6 +4119,67 @@ func (r *DeleteCustomErrorPageResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteCustomErrorPageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDnsRecordsRequestParams struct {
+	// The site ID of the DNS record to be deleted.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// List of DNS record IDs to be deleted, with a maximum limit of 1000.
+	RecordIds []*string `json:"RecordIds,omitnil,omitempty" name:"RecordIds"`
+}
+
+type DeleteDnsRecordsRequest struct {
+	*tchttp.BaseRequest
+	
+	// The site ID of the DNS record to be deleted.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// List of DNS record IDs to be deleted, with a maximum limit of 1000.
+	RecordIds []*string `json:"RecordIds,omitnil,omitempty" name:"RecordIds"`
+}
+
+func (r *DeleteDnsRecordsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDnsRecordsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "RecordIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteDnsRecordsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteDnsRecordsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteDnsRecordsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteDnsRecordsResponseParams `json:"Response"`
+}
+
+func (r *DeleteDnsRecordsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteDnsRecordsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6123,6 +6328,130 @@ func (r *DescribeDeployHistoryResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeDeployHistoryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDnsRecordsRequestParams struct {
+	// The site ID of the DNS record.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// The page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// The paginated query limit. Default value: 20. Maximum value: 1000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The upper limit of Filters.Values is 20. The detailed filtering conditions are as follows: <li>id: Filter by DNS record ID, supports fuzzy query;</li><li>name: Filter by DNS record name, supports fuzzy query;</li><li>content: Filter by DNS record content, supports fuzzy query;</li><li>type: Filter by DNS record type, does not support fuzzy query. Options:<br> A: Point the domain name to an external IPv4 address, such as 8.8.8.8;<br> AAAA: Point the domain name to an external IPv6 address;<br> CNAME: Point the domain name to another domain name, which then resolves to the final IP address;<br> TXT: Identify and describe the domain name, often used for domain verification and SPF records (anti-spam);<br> NS: If you need to delegate subdomain resolution to another DNS service provider, you need to add an NS record. Root domains cannot add NS records;<br> CAA: Specify the CA that can issue certificates for this site;<br> SRV: Identify a server using a specific service, commonly used in Microsoft's directory management;<br> MX: Specify the recipient's mail server.</li><li>ttl: Filter by the time-to-live (TTL) of the record, does not support fuzzy query.</li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Sort criteria, with possible values:
+	// <li>content: DNS record content;</li>
+	// <li>created-on: DNS record creation time;</li>
+	// <li>name: DNS record name;</li>
+	// <li>ttl: Time-to-live (TTL);</li>
+	// <li>type: DNS record type.</li>
+	// The default sorting is based on a combination of type and name attributes.
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// List sorting order, with possible values:
+	// <li>asc: Ascending order;</li>
+	// <li>desc: Descending order.</li>
+	// The default value is asc.
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+
+	// The match mode. Values:
+	// <li>`all`: Return all records that match the specified filter.</li>
+	// <li>`any`: Return any record that matches the specified filter.</li>Default value: all.
+	Match *string `json:"Match,omitnil,omitempty" name:"Match"`
+}
+
+type DescribeDnsRecordsRequest struct {
+	*tchttp.BaseRequest
+	
+	// The site ID of the DNS record.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// The page offset. Default value: 0
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// The paginated query limit. Default value: 20. Maximum value: 1000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The upper limit of Filters.Values is 20. The detailed filtering conditions are as follows: <li>id: Filter by DNS record ID, supports fuzzy query;</li><li>name: Filter by DNS record name, supports fuzzy query;</li><li>content: Filter by DNS record content, supports fuzzy query;</li><li>type: Filter by DNS record type, does not support fuzzy query. Options:<br> A: Point the domain name to an external IPv4 address, such as 8.8.8.8;<br> AAAA: Point the domain name to an external IPv6 address;<br> CNAME: Point the domain name to another domain name, which then resolves to the final IP address;<br> TXT: Identify and describe the domain name, often used for domain verification and SPF records (anti-spam);<br> NS: If you need to delegate subdomain resolution to another DNS service provider, you need to add an NS record. Root domains cannot add NS records;<br> CAA: Specify the CA that can issue certificates for this site;<br> SRV: Identify a server using a specific service, commonly used in Microsoft's directory management;<br> MX: Specify the recipient's mail server.</li><li>ttl: Filter by the time-to-live (TTL) of the record, does not support fuzzy query.</li>
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Sort criteria, with possible values:
+	// <li>content: DNS record content;</li>
+	// <li>created-on: DNS record creation time;</li>
+	// <li>name: DNS record name;</li>
+	// <li>ttl: Time-to-live (TTL);</li>
+	// <li>type: DNS record type.</li>
+	// The default sorting is based on a combination of type and name attributes.
+	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
+
+	// List sorting order, with possible values:
+	// <li>asc: Ascending order;</li>
+	// <li>desc: Descending order.</li>
+	// The default value is asc.
+	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
+
+	// The match mode. Values:
+	// <li>`all`: Return all records that match the specified filter.</li>
+	// <li>`any`: Return any record that matches the specified filter.</li>Default value: all.
+	Match *string `json:"Match,omitnil,omitempty" name:"Match"`
+}
+
+func (r *DescribeDnsRecordsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDnsRecordsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	delete(f, "SortBy")
+	delete(f, "SortOrder")
+	delete(f, "Match")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDnsRecordsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDnsRecordsResponseParams struct {
+	// Total number of DNS records.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of DNS records
+	DnsRecords []*DnsRecord `json:"DnsRecords,omitnil,omitempty" name:"DnsRecords"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDnsRecordsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDnsRecordsResponseParams `json:"Response"`
+}
+
+func (r *DescribeDnsRecordsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDnsRecordsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9088,6 +9417,47 @@ type DiffIPWhitelist struct {
 	NoChangeIPWhitelist *IPWhitelist `json:"NoChangeIPWhitelist,omitnil,omitempty" name:"NoChangeIPWhitelist"`
 }
 
+type DnsRecord struct {
+	// Site ID. 
+	// Note: ZoneId is only used as an output parameter and cannot be used as an input parameter in ModifyDnsRecords. If this parameter is passed, it will be ignored.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// DNS record ID.
+	RecordId *string `json:"RecordId,omitnil,omitempty" name:"RecordId"`
+
+	// DNS record name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// DNS record type, with possible values: <li>A: Points the domain name to an external IPv4 address, such as 8.8.8.8;</li> <li>AAAA: Points the domain name to an external IPv6 address;</li> <li>MX: Used for mail servers. When there are multiple MX records, the lower the priority value, the higher the priority;</li> <li>CNAME: Points the domain name to another domain name, which then resolves to the final IP address;</li> <li>TXT: Identifies and describes the domain name, commonly used for domain verification and SPF records (anti-spam);</li> <li>NS: If you need to delegate the subdomain to another DNS service provider for resolution, you need to add an NS record. NS records cannot be added to the root domain;</li> <li>CAA: Specifies the CA that can issue certificates for this site;</li> <li>SRV: Identifies a server that uses a specific service, commonly used in Microsoft's directory management.</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// DNS record resolution line. If not specified, the default is Default, which means the default resolution line and is effective for all regions. The resolution line configuration is only applicable when Type (DNS record type) is A, AAAA, or CNAME. For values, please refer to: [Resolution Line and Corresponding Code Enumeration](https://www.tencentcloud.com/zh/document/product/1145/67229).
+	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
+
+	// DNS record content. Fill in the corresponding content according to the Type value.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Cache time, with a range of 60~86400. The smaller the value, the faster the record modification takes effect in various regions. Unit: seconds.
+	TTL *int64 `json:"TTL,omitnil,omitempty" name:"TTL"`
+
+	// DNS record weight, with a range of -1~100. A value of -1 means no weight is assigned, and a value of 0 means no resolution. Weight configuration is only applicable when Type (DNS record type) is A, AAAA, or CNAME.
+	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
+
+	// MX record priority, with a range of 0~50. The smaller the value, the higher the priority.
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+
+	// DNS record resolution status, with possible values: <li>enable: Effective;</li> <li>disable: Disabled.</li> Note: Status is only used as an output parameter and cannot be used as an input parameter in ModifyDnsRecords. If this parameter is passed, it will be ignored.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// The creation time.
+	// Note: CreatedOn is only used as an output parameter and cannot be used as an input parameter in ModifyDnsRecords. If this parameter is passed, it will be ignored.
+	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
+
+	// The modification time.
+	// Note: ModifiedOn is only used as an output parameter and cannot be used as an input parameter in ModifyDnsRecords. If this parameter is passed, it will be ignored.
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
+}
+
 type DnsVerification struct {
 	// The host record.
 	Subdomain *string `json:"Subdomain,omitnil,omitempty" name:"Subdomain"`
@@ -11404,6 +11774,135 @@ func (r *ModifyCustomErrorPageResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyCustomErrorPageResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDnsRecordsRequestParams struct {
+	// Site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// List of DNS record modification data, with a maximum of 100 modifications at a time.
+	DnsRecords []*DnsRecord `json:"DnsRecords,omitnil,omitempty" name:"DnsRecords"`
+}
+
+type ModifyDnsRecordsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// List of DNS record modification data, with a maximum of 100 modifications at a time.
+	DnsRecords []*DnsRecord `json:"DnsRecords,omitnil,omitempty" name:"DnsRecords"`
+}
+
+func (r *ModifyDnsRecordsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDnsRecordsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "DnsRecords")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDnsRecordsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDnsRecordsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDnsRecordsResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDnsRecordsResponseParams `json:"Response"`
+}
+
+func (r *ModifyDnsRecordsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDnsRecordsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDnsRecordsStatusRequestParams struct {
+	// Site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// List of DNS record IDs to be enabled, with a limit of 200. Note: The same DNS record ID cannot exist in both RecordsToEnable and RecordsToDisable.
+	RecordsToEnable []*string `json:"RecordsToEnable,omitnil,omitempty" name:"RecordsToEnable"`
+
+	// List of DNS record IDs to be disabled, with a limit of 200. Note: The same DNS record ID cannot exist in both RecordsToEnable and RecordsToDisable.
+	RecordsToDisable []*string `json:"RecordsToDisable,omitnil,omitempty" name:"RecordsToDisable"`
+}
+
+type ModifyDnsRecordsStatusRequest struct {
+	*tchttp.BaseRequest
+	
+	// Site ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// List of DNS record IDs to be enabled, with a limit of 200. Note: The same DNS record ID cannot exist in both RecordsToEnable and RecordsToDisable.
+	RecordsToEnable []*string `json:"RecordsToEnable,omitnil,omitempty" name:"RecordsToEnable"`
+
+	// List of DNS record IDs to be disabled, with a limit of 200. Note: The same DNS record ID cannot exist in both RecordsToEnable and RecordsToDisable.
+	RecordsToDisable []*string `json:"RecordsToDisable,omitnil,omitempty" name:"RecordsToDisable"`
+}
+
+func (r *ModifyDnsRecordsStatusRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDnsRecordsStatusRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "RecordsToEnable")
+	delete(f, "RecordsToDisable")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyDnsRecordsStatusRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyDnsRecordsStatusResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyDnsRecordsStatusResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyDnsRecordsStatusResponseParams `json:"Response"`
+}
+
+func (r *ModifyDnsRecordsStatusResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyDnsRecordsStatusResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

@@ -4147,6 +4147,9 @@ type UpdateStreamIngestRequestParams struct {
 
 	// Volume. Valid value range: [0, 100], default value is 100, indicating the original volume.
 	Volume *uint64 `json:"Volume,omitnil,omitempty" name:"Volume"`
+
+	// Whether to pause, the default value of false indicates no pause. During the pause, the task is still in progress and is billed. If you want to terminate the task, please call the stop interface.
+	IsPause *bool `json:"IsPause,omitnil,omitempty" name:"IsPause"`
 }
 
 type UpdateStreamIngestRequest struct {
@@ -4163,6 +4166,9 @@ type UpdateStreamIngestRequest struct {
 
 	// Volume. Valid value range: [0, 100], default value is 100, indicating the original volume.
 	Volume *uint64 `json:"Volume,omitnil,omitempty" name:"Volume"`
+
+	// Whether to pause, the default value of false indicates no pause. During the pause, the task is still in progress and is billed. If you want to terminate the task, please call the stop interface.
+	IsPause *bool `json:"IsPause,omitnil,omitempty" name:"IsPause"`
 }
 
 func (r *UpdateStreamIngestRequest) ToJsonString() string {
@@ -4181,6 +4187,7 @@ func (r *UpdateStreamIngestRequest) FromJsonString(s string) error {
 	delete(f, "TaskId")
 	delete(f, "StreamUrl")
 	delete(f, "Volume")
+	delete(f, "IsPause")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdateStreamIngestRequest has unknown keys!", "")
 	}

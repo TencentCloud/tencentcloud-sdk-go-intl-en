@@ -15420,6 +15420,252 @@ func (r *InquirePriceCreateDirectConnectGatewayResponse) FromJsonString(s string
 }
 
 // Predefined struct for user
+type InquiryPriceAllocateAddressesRequestParams struct {
+	// EIP billing method.
+	// 
+	// <ul style="margin:0"><li>Users with standard account type. Valid values: <ul>
+	// <li>BANDWIDTH_POSTPAID_BY_HOUR: billed by hourly bandwidth on a pay-as-you-go basis.</li>
+	// <li>BANDWIDTH_PREPAID_BY_MONTH: monthly bandwidth subscription.</li>
+	// <li>TRAFFIC_POSTPAID_BY_HOUR: billed by hourly traffic on a pay-as-you-go basis.</li></ul>Default value: TRAFFIC_POSTPAID_BY_HOUR.</li>
+	// </ul>
+	InternetChargeType *string `json:"InternetChargeType,omitnil,omitempty" name:"InternetChargeType"`
+
+	// The EIP outbound bandwidth cap, in Mbps.
+	// <ul style="margin:0"><li>For users with standard account type, the range of optional values depends on the EIP billing method:<ul>
+	// <li>`BANDWIDTH_POSTPAID_BY_HOUR`: 1 Mbps to 100 Mbps.</li>
+	// <li>`BANDWIDTH_PREPAID_BY_MONTH`: 1 Mbps to 200 Mbps</li>
+	// <li>`TRAFFIC_POSTPAID_BY_HOUR`: 1 Mbps to 100 Mbps.</li></ul>Default value: 1 Mbps.</li></ul>
+	// <li>For users with traditional account type, the EIP outbound bandwidth cap is subject to the public network egress bandwidth limit of the bound instance. No need to pass this parameter.</li></ul>
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// A required billing parameter for an EIP billed by "BANDWIDTH_PREPAID_BY_MONTH". When the EIP is billed by "BANDWIDTH_PREPAID_BY_MONTH" this parameter is required. For other scenarios, it can be ignored.
+	AddressChargePrepaid *AddressChargePrepaid `json:"AddressChargePrepaid,omitnil,omitempty" name:"AddressChargePrepaid"`
+
+	// EIP type. Default value: EIP.
+	// 
+	// 
+	// 
+	// <ul style="margin:0"><li>High quality EIP, valid values: <ul><li>HighQualityEIP: high quality EIP</li></ul>Note: High quality EIP is supported only in some regions.</li></ul><ul style="margin:0">
+	//         <li>High-defense IP, valid values: <ul>
+	//                 <li>AntiDDoSEIP: high-defense IP</li>
+	//             </ul>
+	//         </li>
+	//     </ul>
+	AddressType *string `json:"AddressType,omitnil,omitempty" name:"AddressType"`
+}
+
+type InquiryPriceAllocateAddressesRequest struct {
+	*tchttp.BaseRequest
+	
+	// EIP billing method.
+	// 
+	// <ul style="margin:0"><li>Users with standard account type. Valid values: <ul>
+	// <li>BANDWIDTH_POSTPAID_BY_HOUR: billed by hourly bandwidth on a pay-as-you-go basis.</li>
+	// <li>BANDWIDTH_PREPAID_BY_MONTH: monthly bandwidth subscription.</li>
+	// <li>TRAFFIC_POSTPAID_BY_HOUR: billed by hourly traffic on a pay-as-you-go basis.</li></ul>Default value: TRAFFIC_POSTPAID_BY_HOUR.</li>
+	// </ul>
+	InternetChargeType *string `json:"InternetChargeType,omitnil,omitempty" name:"InternetChargeType"`
+
+	// The EIP outbound bandwidth cap, in Mbps.
+	// <ul style="margin:0"><li>For users with standard account type, the range of optional values depends on the EIP billing method:<ul>
+	// <li>`BANDWIDTH_POSTPAID_BY_HOUR`: 1 Mbps to 100 Mbps.</li>
+	// <li>`BANDWIDTH_PREPAID_BY_MONTH`: 1 Mbps to 200 Mbps</li>
+	// <li>`TRAFFIC_POSTPAID_BY_HOUR`: 1 Mbps to 100 Mbps.</li></ul>Default value: 1 Mbps.</li></ul>
+	// <li>For users with traditional account type, the EIP outbound bandwidth cap is subject to the public network egress bandwidth limit of the bound instance. No need to pass this parameter.</li></ul>
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// A required billing parameter for an EIP billed by "BANDWIDTH_PREPAID_BY_MONTH". When the EIP is billed by "BANDWIDTH_PREPAID_BY_MONTH" this parameter is required. For other scenarios, it can be ignored.
+	AddressChargePrepaid *AddressChargePrepaid `json:"AddressChargePrepaid,omitnil,omitempty" name:"AddressChargePrepaid"`
+
+	// EIP type. Default value: EIP.
+	// 
+	// 
+	// 
+	// <ul style="margin:0"><li>High quality EIP, valid values: <ul><li>HighQualityEIP: high quality EIP</li></ul>Note: High quality EIP is supported only in some regions.</li></ul><ul style="margin:0">
+	//         <li>High-defense IP, valid values: <ul>
+	//                 <li>AntiDDoSEIP: high-defense IP</li>
+	//             </ul>
+	//         </li>
+	//     </ul>
+	AddressType *string `json:"AddressType,omitnil,omitempty" name:"AddressType"`
+}
+
+func (r *InquiryPriceAllocateAddressesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceAllocateAddressesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InternetChargeType")
+	delete(f, "InternetMaxBandwidthOut")
+	delete(f, "AddressChargePrepaid")
+	delete(f, "AddressType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceAllocateAddressesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceAllocateAddressesResponseParams struct {
+	// EIP price
+	Price *InternetPrice `json:"Price,omitnil,omitempty" name:"Price"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type InquiryPriceAllocateAddressesResponse struct {
+	*tchttp.BaseResponse
+	Response *InquiryPriceAllocateAddressesResponseParams `json:"Response"`
+}
+
+func (r *InquiryPriceAllocateAddressesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceAllocateAddressesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceModifyAddressesBandwidthRequestParams struct {
+	// Unique ID of EIP
+	AddressIds []*string `json:"AddressIds,omitnil,omitempty" name:"AddressIds"`
+
+	// New Bandwidth Value
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+}
+
+type InquiryPriceModifyAddressesBandwidthRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique ID of EIP
+	AddressIds []*string `json:"AddressIds,omitnil,omitempty" name:"AddressIds"`
+
+	// New Bandwidth Value
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+}
+
+func (r *InquiryPriceModifyAddressesBandwidthRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceModifyAddressesBandwidthRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AddressIds")
+	delete(f, "InternetMaxBandwidthOut")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceModifyAddressesBandwidthRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceModifyAddressesBandwidthResponseParams struct {
+	// Inquiry results for adjusting EIP bandwidth.
+	Price *InternetPrice `json:"Price,omitnil,omitempty" name:"Price"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type InquiryPriceModifyAddressesBandwidthResponse struct {
+	*tchttp.BaseResponse
+	Response *InquiryPriceModifyAddressesBandwidthResponseParams `json:"Response"`
+}
+
+func (r *InquiryPriceModifyAddressesBandwidthResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceModifyAddressesBandwidthResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceRenewAddressesRequestParams struct {
+	// Indicates the renewal resource instance ID.
+	AddressIds []*string `json:"AddressIds,omitnil,omitempty" name:"AddressIds"`
+
+	// A required billing parameter for an EIP billed by "BANDWIDTH_PREPAID_BY_MONTH". When the EIP is billed by "BANDWIDTH_PREPAID_BY_MONTH", this parameter is required. For other scenarios, it can be ignored.
+	AddressChargePrepaid *AddressChargePrepaid `json:"AddressChargePrepaid,omitnil,omitempty" name:"AddressChargePrepaid"`
+}
+
+type InquiryPriceRenewAddressesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Indicates the renewal resource instance ID.
+	AddressIds []*string `json:"AddressIds,omitnil,omitempty" name:"AddressIds"`
+
+	// A required billing parameter for an EIP billed by "BANDWIDTH_PREPAID_BY_MONTH". When the EIP is billed by "BANDWIDTH_PREPAID_BY_MONTH", this parameter is required. For other scenarios, it can be ignored.
+	AddressChargePrepaid *AddressChargePrepaid `json:"AddressChargePrepaid,omitnil,omitempty" name:"AddressChargePrepaid"`
+}
+
+func (r *InquiryPriceRenewAddressesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceRenewAddressesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AddressIds")
+	delete(f, "AddressChargePrepaid")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceRenewAddressesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type InquiryPriceRenewAddressesResponseParams struct {
+	// Elastic Public IP renewal price.
+	Price *InternetPrice `json:"Price,omitnil,omitempty" name:"Price"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type InquiryPriceRenewAddressesResponse struct {
+	*tchttp.BaseResponse
+	Response *InquiryPriceRenewAddressesResponseParams `json:"Response"`
+}
+
+func (r *InquiryPriceRenewAddressesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *InquiryPriceRenewAddressesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type InquiryPriceRenewVpnGatewayRequestParams struct {
 	// The ID of the VPN gateway instance.
 	VpnGatewayId *string `json:"VpnGatewayId,omitnil,omitempty" name:"VpnGatewayId"`
@@ -15561,6 +15807,27 @@ type InstanceStatistic struct {
 
 	// Number of instances
 	InstanceCount *uint64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
+}
+
+type InternetPrice struct {
+	// Detailed parameters of Public IP inquiry.
+	AddressPrice *InternetPriceDetail `json:"AddressPrice,omitnil,omitempty" name:"AddressPrice"`
+}
+
+type InternetPriceDetail struct {
+	// Postpaid unit price. Unit: USD. Returned only for postpaid price inquiry.
+	UnitPrice *float64 `json:"UnitPrice,omitnil,omitempty" name:"UnitPrice"`
+
+	// Discounted price. Unit: USD
+	// Note: This field may return null, indicating that no valid value was found.
+	DiscountPrice *float64 `json:"DiscountPrice,omitnil,omitempty" name:"DiscountPrice"`
+
+	// Billing unit. Valid values: <ul> <li>HOUR: Indicates that the billing unit is calculated hourly. The scenarios currently involving this billing unit include TRAFFIC_POSTPAID_BY_HOUR and BANDWIDTH_POSTPAID_BY_HOUR.</li></ul>
+	// Note: This field may return null, indicating that no valid value was found.
+	ChargeUnit *string `json:"ChargeUnit,omitnil,omitempty" name:"ChargeUnit"`
+
+	// Original price. Unit: CNY. Returned only for prepaid price inquiry.
+	OriginalPrice *float64 `json:"OriginalPrice,omitnil,omitempty" name:"OriginalPrice"`
 }
 
 type IpAddressStates struct {

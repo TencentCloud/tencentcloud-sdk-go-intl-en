@@ -900,6 +900,57 @@ func (c *Client) CreateCustomizeErrorPageWithContext(ctx context.Context, reques
     return
 }
 
+func NewCreateDnsRecordRequest() (request *CreateDnsRecordRequest) {
+    request = &CreateDnsRecordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "CreateDnsRecord")
+    
+    
+    return
+}
+
+func NewCreateDnsRecordResponse() (response *CreateDnsRecordResponse) {
+    response = &CreateDnsRecordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDnsRecord
+// This API is used to create a DNS record.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_CONTENTTYPENOTMATCH = "InvalidParameterValue.ContentTypeNotMatch"
+//  INVALIDPARAMETERVALUE_PAGENAMEALREADYEXIST = "InvalidParameterValue.PageNameAlreadyExist"
+func (c *Client) CreateDnsRecord(request *CreateDnsRecordRequest) (response *CreateDnsRecordResponse, err error) {
+    return c.CreateDnsRecordWithContext(context.Background(), request)
+}
+
+// CreateDnsRecord
+// This API is used to create a DNS record.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_CONTENTTYPENOTMATCH = "InvalidParameterValue.ContentTypeNotMatch"
+//  INVALIDPARAMETERVALUE_PAGENAMEALREADYEXIST = "InvalidParameterValue.PageNameAlreadyExist"
+func (c *Client) CreateDnsRecordWithContext(ctx context.Context, request *CreateDnsRecordRequest) (response *CreateDnsRecordResponse, err error) {
+    if request == nil {
+        request = NewCreateDnsRecordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDnsRecord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDnsRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateFunctionRequest() (request *CreateFunctionRequest) {
     request = &CreateFunctionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2428,6 +2479,57 @@ func (c *Client) DeleteCustomErrorPageWithContext(ctx context.Context, request *
     return
 }
 
+func NewDeleteDnsRecordsRequest() (request *DeleteDnsRecordsRequest) {
+    request = &DeleteDnsRecordsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DeleteDnsRecords")
+    
+    
+    return
+}
+
+func NewDeleteDnsRecordsResponse() (response *DeleteDnsRecordsResponse) {
+    response = &DeleteDnsRecordsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteDnsRecords
+// This API is used to delete DNS records in batches.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteDnsRecords(request *DeleteDnsRecordsRequest) (response *DeleteDnsRecordsResponse, err error) {
+    return c.DeleteDnsRecordsWithContext(context.Background(), request)
+}
+
+// DeleteDnsRecords
+// This API is used to delete DNS records in batches.
+//
+// error code that may be returned:
+//  RESOURCEINUSE = "ResourceInUse"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DeleteDnsRecordsWithContext(ctx context.Context, request *DeleteDnsRecordsRequest) (response *DeleteDnsRecordsResponse, err error) {
+    if request == nil {
+        request = NewDeleteDnsRecordsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDnsRecords require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDnsRecordsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteFunctionRequest() (request *DeleteFunctionRequest) {
     request = &DeleteFunctionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3922,6 +4024,55 @@ func (c *Client) DescribeDeployHistoryWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewDescribeDeployHistoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDnsRecordsRequest() (request *DescribeDnsRecordsRequest) {
+    request = &DescribeDnsRecordsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeDnsRecords")
+    
+    
+    return
+}
+
+func NewDescribeDnsRecordsResponse() (response *DescribeDnsRecordsResponse) {
+    response = &DescribeDnsRecordsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDnsRecords
+// This API is used to query DNS records. Paging, sorting and filtering are supported.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeDnsRecords(request *DescribeDnsRecordsRequest) (response *DescribeDnsRecordsResponse, err error) {
+    return c.DescribeDnsRecordsWithContext(context.Background(), request)
+}
+
+// DescribeDnsRecords
+// This API is used to query DNS records. Paging, sorting and filtering are supported.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeDnsRecordsWithContext(ctx context.Context, request *DescribeDnsRecordsRequest) (response *DescribeDnsRecordsResponse, err error) {
+    if request == nil {
+        request = NewDescribeDnsRecordsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDnsRecords require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDnsRecordsResponse()
     err = c.Send(request, response)
     return
 }
@@ -6671,6 +6822,104 @@ func (c *Client) ModifyCustomErrorPageWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewModifyCustomErrorPageResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDnsRecordsRequest() (request *ModifyDnsRecordsRequest) {
+    request = &ModifyDnsRecordsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyDnsRecords")
+    
+    
+    return
+}
+
+func NewModifyDnsRecordsResponse() (response *ModifyDnsRecordsResponse) {
+    response = &ModifyDnsRecordsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDnsRecords
+// You can use this interface to batch modify DNS records.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyDnsRecords(request *ModifyDnsRecordsRequest) (response *ModifyDnsRecordsResponse, err error) {
+    return c.ModifyDnsRecordsWithContext(context.Background(), request)
+}
+
+// ModifyDnsRecords
+// You can use this interface to batch modify DNS records.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyDnsRecordsWithContext(ctx context.Context, request *ModifyDnsRecordsRequest) (response *ModifyDnsRecordsResponse, err error) {
+    if request == nil {
+        request = NewModifyDnsRecordsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDnsRecords require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDnsRecordsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyDnsRecordsStatusRequest() (request *ModifyDnsRecordsStatusRequest) {
+    request = &ModifyDnsRecordsStatusRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyDnsRecordsStatus")
+    
+    
+    return
+}
+
+func NewModifyDnsRecordsStatusResponse() (response *ModifyDnsRecordsStatusResponse) {
+    response = &ModifyDnsRecordsStatusResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyDnsRecordsStatus
+// You can use this interface to batch modify the status of DNS records, enabling and disabling records in bulk.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyDnsRecordsStatus(request *ModifyDnsRecordsStatusRequest) (response *ModifyDnsRecordsStatusResponse, err error) {
+    return c.ModifyDnsRecordsStatusWithContext(context.Background(), request)
+}
+
+// ModifyDnsRecordsStatus
+// You can use this interface to batch modify the status of DNS records, enabling and disabling records in bulk.
+//
+// error code that may be returned:
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) ModifyDnsRecordsStatusWithContext(ctx context.Context, request *ModifyDnsRecordsStatusRequest) (response *ModifyDnsRecordsStatusResponse, err error) {
+    if request == nil {
+        request = NewModifyDnsRecordsStatusRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyDnsRecordsStatus require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyDnsRecordsStatusResponse()
     err = c.Send(request, response)
     return
 }
