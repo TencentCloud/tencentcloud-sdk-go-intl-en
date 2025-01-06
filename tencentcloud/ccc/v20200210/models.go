@@ -592,6 +592,9 @@ type CreateAICallRequestParams struct {
 	// The AI prompt when NotifyDuration has passed without the user speaking, default is "Sorry, I didn't hear you clearly. Can you repeat that?"
 	NotifyMessage *string `json:"NotifyMessage,omitnil,omitempty" name:"NotifyMessage"`
 
+
+	NotifyMaxCount *uint64 `json:"NotifyMaxCount,omitnil,omitempty" name:"NotifyMaxCount"`
+
 	// <p>And VoiceType field needs to select one, here is to use your own custom TTS, VoiceType is some built-in sound qualities</p>
 	// <ul>
 	// <li>Tencent TTS<br>
@@ -851,6 +854,8 @@ type CreateAICallRequest struct {
 	// The AI prompt when NotifyDuration has passed without the user speaking, default is "Sorry, I didn't hear you clearly. Can you repeat that?"
 	NotifyMessage *string `json:"NotifyMessage,omitnil,omitempty" name:"NotifyMessage"`
 
+	NotifyMaxCount *uint64 `json:"NotifyMaxCount,omitnil,omitempty" name:"NotifyMaxCount"`
+
 	// <p>And VoiceType field needs to select one, here is to use your own custom TTS, VoiceType is some built-in sound qualities</p>
 	// <ul>
 	// <li>Tencent TTS<br>
@@ -964,6 +969,7 @@ func (r *CreateAICallRequest) FromJsonString(s string) error {
 	delete(f, "EndFunctionDesc")
 	delete(f, "NotifyDuration")
 	delete(f, "NotifyMessage")
+	delete(f, "NotifyMaxCount")
 	delete(f, "CustomTTSConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAICallRequest has unknown keys!", "")
