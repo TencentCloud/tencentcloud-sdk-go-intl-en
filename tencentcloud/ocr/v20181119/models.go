@@ -4344,6 +4344,141 @@ func (r *SmartStructuralOCRV2Response) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type SmartStructuralProRequestParams struct {
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// The number of the PDF page that needs to be recognized. Only one single PDF page can be recognized. This parameter is valid if the uploaded file is a PDF `. Default value: `1`.
+	PdfPageNumber *uint64 `json:"PdfPageNumber,omitnil,omitempty" name:"PdfPageNumber"`
+
+	// The names of the fields you want to return for the structured information recognition.
+	// For example, if you want to return only the recognition result of the "Name" and "Gender" fields, set this parameter as follows:
+	// ItemNames=["Name","Gender"]
+	ItemNames []*string `json:"ItemNames,omitnil,omitempty" name:"ItemNames"`
+
+	// Whether to enable recognition of all fields.
+	ReturnFullText *bool `json:"ReturnFullText,omitnil,omitempty" name:"ReturnFullText"`
+
+	// Configuration ID support: General 
+	// -- General scenarios; InvoiceEng 
+	// -- Ocean bill of lading, international invoice template; 
+	// -- Ocean shipment order template; WayBillEng 
+	// -- CustomsDeclaration
+	// -- WeightNote
+	// -- MedicalMeter
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+
+	// Enable recognition of coordinate values in full-text fields
+	EnableCoord *bool `json:"EnableCoord,omitnil,omitempty" name:"EnableCoord"`
+}
+
+type SmartStructuralProRequest struct {
+	*tchttp.BaseRequest
+	
+	// The URL of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	// The download speed and stability of non-Tencent Cloud URLs may be low.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// The Base64-encoded value of the image.
+	// Supported image formats: PNG, JPG, and JPEG. GIF is currently not supported.
+	// Supported image size: The downloaded image after Base64 encoding can be up to 7 MB. The download time of the image cannot exceed 3s.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, only `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// The number of the PDF page that needs to be recognized. Only one single PDF page can be recognized. This parameter is valid if the uploaded file is a PDF `. Default value: `1`.
+	PdfPageNumber *uint64 `json:"PdfPageNumber,omitnil,omitempty" name:"PdfPageNumber"`
+
+	// The names of the fields you want to return for the structured information recognition.
+	// For example, if you want to return only the recognition result of the "Name" and "Gender" fields, set this parameter as follows:
+	// ItemNames=["Name","Gender"]
+	ItemNames []*string `json:"ItemNames,omitnil,omitempty" name:"ItemNames"`
+
+	// Whether to enable recognition of all fields.
+	ReturnFullText *bool `json:"ReturnFullText,omitnil,omitempty" name:"ReturnFullText"`
+
+	// Configuration ID support: General 
+	// -- General scenarios; InvoiceEng 
+	// -- Ocean bill of lading, international invoice template; 
+	// -- Ocean shipment order template; WayBillEng 
+	// -- CustomsDeclaration
+	// -- WeightNote
+	// -- MedicalMeter
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+
+	// Enable recognition of coordinate values in full-text fields
+	EnableCoord *bool `json:"EnableCoord,omitnil,omitempty" name:"EnableCoord"`
+}
+
+func (r *SmartStructuralProRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SmartStructuralProRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageUrl")
+	delete(f, "ImageBase64")
+	delete(f, "PdfPageNumber")
+	delete(f, "ItemNames")
+	delete(f, "ReturnFullText")
+	delete(f, "ConfigId")
+	delete(f, "EnableCoord")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "SmartStructuralProRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type SmartStructuralProResponseParams struct {
+	// The rotation angle (degrees) of the text on the image. 0: The text is horizontal. Positive value: The text is rotated clockwise. Negative value: The text is rotated counterclockwise.
+	Angle *float64 `json:"Angle,omitnil,omitempty" name:"Angle"`
+
+	// The structural information (key-value).
+	StructuralList []*GroupInfo `json:"StructuralList,omitnil,omitempty" name:"StructuralList"`
+
+	// The recognized text information.
+	WordList []*WordItem `json:"WordList,omitnil,omitempty" name:"WordList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type SmartStructuralProResponse struct {
+	*tchttp.BaseResponse
+	Response *SmartStructuralProResponseParams `json:"Response"`
+}
+
+func (r *SmartStructuralProResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *SmartStructuralProResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type TableCellInfo struct {
 	// Column index of the upper-left corner of the cell
 	ColTl *int64 `json:"ColTl,omitnil,omitempty" name:"ColTl"`
