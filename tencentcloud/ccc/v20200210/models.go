@@ -20,6 +20,17 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
+type AITransferItem struct {
+
+	TransferFunctionName *string `json:"TransferFunctionName,omitnil,omitempty" name:"TransferFunctionName"`
+
+
+	TransferFunctionDesc *string `json:"TransferFunctionDesc,omitnil,omitempty" name:"TransferFunctionDesc"`
+
+
+	TransferSkillGroupId *uint64 `json:"TransferSkillGroupId,omitnil,omitempty" name:"TransferSkillGroupId"`
+}
+
 // Predefined struct for user
 type AbortAgentCruiseDialingCampaignRequestParams struct {
 	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
@@ -586,6 +597,12 @@ type CreateAICallRequestParams struct {
 	// Effective when EndFunctionEnable is true; the description of call_end function calling, default is "End the call when user has to leave (like says bye) or you are instructed to do so."
 	EndFunctionDesc *string `json:"EndFunctionDesc,omitnil,omitempty" name:"EndFunctionDesc"`
 
+
+	TransferFunctionEnable *bool `json:"TransferFunctionEnable,omitnil,omitempty" name:"TransferFunctionEnable"`
+
+
+	TransferItems []*AITransferItem `json:"TransferItems,omitnil,omitempty" name:"TransferItems"`
+
 	// The duration after which the user hasn't spoken to trigger a notification, minimum 10 seconds, default 10 seconds
 	NotifyDuration *int64 `json:"NotifyDuration,omitnil,omitempty" name:"NotifyDuration"`
 
@@ -675,6 +692,9 @@ type CreateAICallRequestParams struct {
 	// 
 	// </div></div>
 	CustomTTSConfig *string `json:"CustomTTSConfig,omitnil,omitempty" name:"CustomTTSConfig"`
+
+
+	PromptVariables []*Variable `json:"PromptVariables,omitnil,omitempty" name:"PromptVariables"`
 }
 
 type CreateAICallRequest struct {
@@ -848,6 +868,10 @@ type CreateAICallRequest struct {
 	// Effective when EndFunctionEnable is true; the description of call_end function calling, default is "End the call when user has to leave (like says bye) or you are instructed to do so."
 	EndFunctionDesc *string `json:"EndFunctionDesc,omitnil,omitempty" name:"EndFunctionDesc"`
 
+	TransferFunctionEnable *bool `json:"TransferFunctionEnable,omitnil,omitempty" name:"TransferFunctionEnable"`
+
+	TransferItems []*AITransferItem `json:"TransferItems,omitnil,omitempty" name:"TransferItems"`
+
 	// The duration after which the user hasn't spoken to trigger a notification, minimum 10 seconds, default 10 seconds
 	NotifyDuration *int64 `json:"NotifyDuration,omitnil,omitempty" name:"NotifyDuration"`
 
@@ -936,6 +960,8 @@ type CreateAICallRequest struct {
 	// 
 	// </div></div>
 	CustomTTSConfig *string `json:"CustomTTSConfig,omitnil,omitempty" name:"CustomTTSConfig"`
+
+	PromptVariables []*Variable `json:"PromptVariables,omitnil,omitempty" name:"PromptVariables"`
 }
 
 func (r *CreateAICallRequest) ToJsonString() string {
@@ -967,10 +993,13 @@ func (r *CreateAICallRequest) FromJsonString(s string) error {
 	delete(f, "InterruptSpeechDuration")
 	delete(f, "EndFunctionEnable")
 	delete(f, "EndFunctionDesc")
+	delete(f, "TransferFunctionEnable")
+	delete(f, "TransferItems")
 	delete(f, "NotifyDuration")
 	delete(f, "NotifyMessage")
 	delete(f, "NotifyMaxCount")
 	delete(f, "CustomTTSConfig")
+	delete(f, "PromptVariables")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAICallRequest has unknown keys!", "")
 	}

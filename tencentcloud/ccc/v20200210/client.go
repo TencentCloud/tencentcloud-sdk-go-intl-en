@@ -275,7 +275,7 @@ func NewCreateAICallResponse() (response *CreateAICallResponse) {
 //
 // 
 //
-// Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://intl.cloud.tencent.com/document/product/679/112100?from_cn_redirect=1).
+// Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://www.tencentcloud.com/document/product/1229/66889).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
@@ -300,7 +300,7 @@ func (c *Client) CreateAICall(request *CreateAICallRequest) (response *CreateAIC
 //
 // 
 //
-// Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://intl.cloud.tencent.com/document/product/679/112100?from_cn_redirect=1).
+// Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://www.tencentcloud.com/document/product/1229/66889).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
