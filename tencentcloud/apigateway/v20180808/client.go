@@ -2952,6 +2952,69 @@ func (c *Client) DescribeApisStatusWithContext(ctx context.Context, request *Des
     return
 }
 
+func NewDescribeExclusiveInstanceRegionsRequest() (request *DescribeExclusiveInstanceRegionsRequest) {
+    request = &DescribeExclusiveInstanceRegionsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeExclusiveInstanceRegions")
+    
+    
+    return
+}
+
+func NewDescribeExclusiveInstanceRegionsResponse() (response *DescribeExclusiveInstanceRegionsResponse) {
+    response = &DescribeExclusiveInstanceRegionsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeExclusiveInstanceRegions
+// Get the list of supported regions for dedicated instances
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_REQUESTPOSTERROR = "UnsupportedOperation.RequestPostError"
+func (c *Client) DescribeExclusiveInstanceRegions(request *DescribeExclusiveInstanceRegionsRequest) (response *DescribeExclusiveInstanceRegionsResponse, err error) {
+    return c.DescribeExclusiveInstanceRegionsWithContext(context.Background(), request)
+}
+
+// DescribeExclusiveInstanceRegions
+// Get the list of supported regions for dedicated instances
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SERVICENOTEXIST = "FailedOperation.ServiceNotExist"
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
+//  INVALIDPARAMETERVALUE_INVALIDREGION = "InvalidParameterValue.InvalidRegion"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+//  UNAUTHORIZEDOPERATION_ACCESSRESOURCE = "UnauthorizedOperation.AccessResource"
+//  UNSUPPORTEDOPERATION_INVALIDACTION = "UnsupportedOperation.InvalidAction"
+//  UNSUPPORTEDOPERATION_REQUESTPOSTERROR = "UnsupportedOperation.RequestPostError"
+func (c *Client) DescribeExclusiveInstanceRegionsWithContext(ctx context.Context, request *DescribeExclusiveInstanceRegionsRequest) (response *DescribeExclusiveInstanceRegionsResponse, err error) {
+    if request == nil {
+        request = NewDescribeExclusiveInstanceRegionsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeExclusiveInstanceRegions require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeExclusiveInstanceRegionsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeIPStrategyRequest() (request *DescribeIPStrategyRequest) {
     request = &DescribeIPStrategyRequest{
         BaseRequest: &tchttp.BaseRequest{},
