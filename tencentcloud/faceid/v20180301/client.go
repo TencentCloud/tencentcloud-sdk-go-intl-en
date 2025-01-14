@@ -189,7 +189,7 @@ func NewApplySdkVerificationTokenResponse() (response *ApplySdkVerificationToken
 }
 
 // ApplySdkVerificationToken
-// This API is used to apply for a token before calling the Identity Verification SDK service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
+// This API is used to apply for a token before calling the eKYC SDK service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -201,7 +201,7 @@ func (c *Client) ApplySdkVerificationToken(request *ApplySdkVerificationTokenReq
 }
 
 // ApplySdkVerificationToken
-// This API is used to apply for a token before calling the Identity Verification SDK service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
+// This API is used to apply for a token before calling the eKYC SDK service each time. This token is required for initiating the verification process and getting the result after the verification is completed.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -369,6 +369,7 @@ func NewCompareFaceLivenessResponse() (response *CompareFaceLivenessResponse) {
 // This interface supports judgment of real person and photo comparison to verify the user's identity online. By passing the video and photo into the interface, it will first judge whether the person in the video is real. If yes, it judges whether the person in the video is the same one as the uploaded photo and returns authentication result.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPRESSVIDEOERROR = "FailedOperation.CompressVideoError"
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -384,6 +385,7 @@ func (c *Client) CompareFaceLiveness(request *CompareFaceLivenessRequest) (respo
 // This interface supports judgment of real person and photo comparison to verify the user's identity online. By passing the video and photo into the interface, it will first judge whether the person in the video is real. If yes, it judges whether the person in the video is the same one as the uploaded photo and returns authentication result.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_COMPRESSVIDEOERROR = "FailedOperation.CompressVideoError"
 //  FAILEDOPERATION_UNKNOWN = "FailedOperation.UnKnown"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
@@ -656,7 +658,7 @@ func NewGenerateReflectSequenceResponse() (response *GenerateReflectSequenceResp
 }
 
 // GenerateReflectSequence
-// This API is used to generate an appropriate light sequence based on the information collected by the liveness comparison (reflection-based) SDK and pass the light sequence into the SDK to start the identity verification process.
+// This API is used to generate an appropriate light sequence based on the information collected by the liveness comparison (reflection-based) SDK and pass the light sequence into the SDK to start the eKYC process.
 //
 // The data generated with the SDK must be stored in COS, and the region of the COS bucket must be same as that of requests made with this API. We recommend that you pass resources with upload link APIs.
 //
@@ -668,7 +670,7 @@ func (c *Client) GenerateReflectSequence(request *GenerateReflectSequenceRequest
 }
 
 // GenerateReflectSequence
-// This API is used to generate an appropriate light sequence based on the information collected by the liveness comparison (reflection-based) SDK and pass the light sequence into the SDK to start the identity verification process.
+// This API is used to generate an appropriate light sequence based on the information collected by the liveness comparison (reflection-based) SDK and pass the light sequence into the SDK to start the eKYC process.
 //
 // The data generated with the SDK must be stored in COS, and the region of the COS bucket must be same as that of requests made with this API. We recommend that you pass resources with upload link APIs.
 //
@@ -825,7 +827,7 @@ func NewGetFaceIdTokenIntlResponse() (response *GetFaceIdTokenIntlResponse) {
 }
 
 // GetFaceIdTokenIntl
-// This API is used to apply for an SDK token before calling the liveness detection and face comparison SDK each time. The SDK token is used throughout the identity verification process and to get the verification result after the verification is completed. A token is valid for one identity verification process only.
+// This API is used to apply for an SDK token before calling the selfie verification SDK each time. The SDK token is used throughout the eKYC process and to get the verification result after the verification is completed. A token is valid for one eKYC process only.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"
@@ -836,7 +838,7 @@ func (c *Client) GetFaceIdTokenIntl(request *GetFaceIdTokenIntlRequest) (respons
 }
 
 // GetFaceIdTokenIntl
-// This API is used to apply for an SDK token before calling the liveness detection and face comparison SDK each time. The SDK token is used throughout the identity verification process and to get the verification result after the verification is completed. A token is valid for one identity verification process only.
+// This API is used to apply for an SDK token before calling the selfie verification SDK each time. The SDK token is used throughout the eKYC process and to get the verification result after the verification is completed. A token is valid for one eKYC process only.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_IMAGESIZETOOLARGE = "FailedOperation.ImageSizeTooLarge"

@@ -887,68 +887,56 @@ type CardVerifyResult struct {
 
 // Predefined struct for user
 type CompareFaceLivenessRequestParams struct {
-	// Base64 value of photos used for face comparison. 
-	// The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
-	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
-	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
+	// Base64 string of the image for face comparison.
+	// - The size of the Base64-encoded image data can be up to 3 MB. JPG and PNG formats are supported.
+	// - Please use the standard Base64 encoding method (with = padding). Refer to RFC4648 for the encoding specification.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
-	// Base64 value of videos used for face comparison. 
-	// The size of videos data encoded by Base64 shall not exceed 8M, only mp4,avi,flv are supported. 
-	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
-	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
+	// Base64 string of the video for liveness detection.
+	// - The size of the Base64-encoded video data can be up to 8 MB. MP4, AVI, and FLV formats are supported.
+	// -Use standard Base64 encoding (with = padding), following RFC4648.
 	VideoBase64 *string `json:"VideoBase64,omitnil,omitempty" name:"VideoBase64"`
 
-	// The liveness detection type. Valid values: `ACTION`, and `SILENT`.
-	// `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
-	// Example value: "SILENT"
+	// Liveness detection type.
+	// -Values:
+	// ACTION is action mode.
+	// SILENT is silent mode.
+	// -Choose one of the two modes to pass in.
 	LivenessType *string `json:"LivenessType,omitnil,omitempty" name:"LivenessType"`
 
-	// When the "LivenessType" parameter is "ACTION", it must be specified.
-	// It is used to control the action sequence. Action types: 
-	// 1 (open mouth)
-	// 2 (blink)
-	// 3 (nod)
-	// 4 (shake head). 
-	// Select one or two from the four actions.
-	// Example of passing single action parameter: "1".
-	// Example of passing multiple action parameters: "4,2".
-	// When the "LivenessType" parameter value is "SILENT", it shall be unspecified.
-	// Example value: ""
+	// Control the action sequence. Action types include: 1 (open mouth), 2 (blink), 3 (nod), 4 (shake head). Supports one or two actions.
+	// -Required when the LivenessType parameter is set to ACTION.
+	// -Single action example: "1".
+	// -Multiple actions parameter passing example: "4,2".
+	// -When the LivenessType parameter is set to SILENT, leave it blank.
 	ValidateData *string `json:"ValidateData,omitnil,omitempty" name:"ValidateData"`
 }
 
 type CompareFaceLivenessRequest struct {
 	*tchttp.BaseRequest
 	
-	// Base64 value of photos used for face comparison. 
-	// The size of image data encoded by Base64 shall not exceed 3M, only jpg and png are supported. 
-	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
-	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
+	// Base64 string of the image for face comparison.
+	// - The size of the Base64-encoded image data can be up to 3 MB. JPG and PNG formats are supported.
+	// - Please use the standard Base64 encoding method (with = padding). Refer to RFC4648 for the encoding specification.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
-	// Base64 value of videos used for face comparison. 
-	// The size of videos data encoded by Base64 shall not exceed 8M, only mp4,avi,flv are supported. 
-	// Please use standard Base64 encoding (use = for padding). Refer to RFC4648 for encoding specifications. 
-	// Example values: "/9j/4AAQSk... (total length:61944)KiiK//2Q=="
+	// Base64 string of the video for liveness detection.
+	// - The size of the Base64-encoded video data can be up to 8 MB. MP4, AVI, and FLV formats are supported.
+	// -Use standard Base64 encoding (with = padding), following RFC4648.
 	VideoBase64 *string `json:"VideoBase64,omitnil,omitempty" name:"VideoBase64"`
 
-	// The liveness detection type. Valid values: `ACTION`, and `SILENT`.
-	// `ACTION`: Motion mode; `SILENT`: silent mode. Select one of them.
-	// Example value: "SILENT"
+	// Liveness detection type.
+	// -Values:
+	// ACTION is action mode.
+	// SILENT is silent mode.
+	// -Choose one of the two modes to pass in.
 	LivenessType *string `json:"LivenessType,omitnil,omitempty" name:"LivenessType"`
 
-	// When the "LivenessType" parameter is "ACTION", it must be specified.
-	// It is used to control the action sequence. Action types: 
-	// 1 (open mouth)
-	// 2 (blink)
-	// 3 (nod)
-	// 4 (shake head). 
-	// Select one or two from the four actions.
-	// Example of passing single action parameter: "1".
-	// Example of passing multiple action parameters: "4,2".
-	// When the "LivenessType" parameter value is "SILENT", it shall be unspecified.
-	// Example value: ""
+	// Control the action sequence. Action types include: 1 (open mouth), 2 (blink), 3 (nod), 4 (shake head). Supports one or two actions.
+	// -Required when the LivenessType parameter is set to ACTION.
+	// -Single action example: "1".
+	// -Multiple actions parameter passing example: "4,2".
+	// -When the LivenessType parameter is set to SILENT, leave it blank.
 	ValidateData *string `json:"ValidateData,omitnil,omitempty" name:"ValidateData"`
 }
 
@@ -976,19 +964,21 @@ func (r *CompareFaceLivenessRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CompareFaceLivenessResponseParams struct {
-	// Service error code. When the return value is "Success", it indicates that the liveness detection and face comparison succeeded. It is determined that they are the same person. When the return value is "FailedOperation.CompareLowSimilarity", it indicates that the liveness detection succeeded, and the face comparison similarity is lower than 70 points. It is determined that they are not the same person. For other error cases, please refer to Liveness Face Comparison (Pure API) Error Code (https://www.tencentcloud.com/document/product/1061/55390). 
-	// Example Value: "Success".
+	// Business Error Codes.
+	// -When the return value is "Success", it indicates that liveness detection and face comparison passed. Determined to be the same person.
+	// -When the return value is "FailedOperation.CompareLowSimilarity", it indicates that liveness detection passed, but face comparison similarity is below 70. Determined not to be the same person.
+	// -For other error cases, please refer to [Liveness Face Comparison (API only) Error Codes](https://www.tencentcloud.com/zh/document/product/1061/55390?lang=zh&pg=#97df7537-87fe-4266-87e9-02c816d41ee2)
 	Result *string `json:"Result,omitnil,omitempty" name:"Result"`
 
-	// Description of business results. 
-	// Example value: "Success"
+	// The service result description
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// This value is valid when the "Result" parameter is "Success" or "FailedOperation.CompareLowSimilarity." 
-	// This value indicates the similarity of face comparison. Value range: [0.00, 100.00]. The false pass rate for threshold 70 is 1 in 1,000, and the false pass rate for threshold 80 is 1 in 10,000. 
-	// Example value: 80.00
+	// This value indicates the similarity of face comparison. Value range: 0.00-100.00.
+	// - The false acceptance rate for a threshold of 70 is 0.1%, and for a threshold of 80, it is 0.01%.
+	// - This value is valid when the Result parameter is "Success" or "FailedOperation.CompareLowSimilarity".
 	Sim *float64 `json:"Sim,omitnil,omitempty" name:"Sim"`
 
+	// The best screenshot photo from the video after verification, encoded in BASE64, in jpg format.
 	// The optimal screenshot of the video after verification is the value encoded by BASE64, jpg format. 
 	// Note: This field may return "null", indicating that no valid value can be obtained. 
 	// Example values: "/9j/4AAQSk... (total length:142036)s97n//2Q=="
@@ -1501,7 +1491,7 @@ func (r *GenerateReflectSequenceRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GenerateReflectSequenceResponseParams struct {
-	// The resource URL of the light sequence, which needs to be downloaded and passed through to the SDK to start the identity verification process.
+	// The resource URL of the light sequence, which needs to be downloaded and passed through to the SDK to start the eKYC process.
 	ReflectSequenceUrl *string `json:"ReflectSequenceUrl,omitnil,omitempty" name:"ReflectSequenceUrl"`
 
 	// The MD5 hash value of the light sequence, which is used to check whether the light sequence is altered.
@@ -1616,14 +1606,14 @@ func (r *GetCardVerificationResultResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type GetFaceIdResultIntlRequestParams struct {
-	// The ID of the SDK-based liveness detection and face comparison process, which is generated when the `GetFaceIdTokenIntl` API is called.	
+	// The ID of the SDK-based selfie verification process, which is generated when the `GetFaceIdTokenIntl` API is called.	
 	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 }
 
 type GetFaceIdResultIntlRequest struct {
 	*tchttp.BaseRequest
 	
-	// The ID of the SDK-based liveness detection and face comparison process, which is generated when the `GetFaceIdTokenIntl` API is called.	
+	// The ID of the SDK-based selfie verification process, which is generated when the `GetFaceIdTokenIntl` API is called.	
 	SdkToken *string `json:"SdkToken,omitnil,omitempty" name:"SdkToken"`
 }
 
@@ -1651,7 +1641,7 @@ type GetFaceIdResultIntlResponseParams struct {
 	// The return code of the verification result.
 	// 0: Succeeded.
 	// 1001: System error.
-	// 1004: Liveness detection and face comparison failed.
+	// 1004: Selfie verification comparison failed.
 	// 2004: The image passed in is too large or too small.
 	// 2012: Several faces were detected.
 	// 2013: No face was detected, or the face detected was incomplete.
@@ -1670,7 +1660,7 @@ type GetFaceIdResultIntlResponseParams struct {
 	// The video file (Base64) for verification.
 	Video *string `json:"Video,omitnil,omitempty" name:"Video"`
 
-	// The similarity, with a value range of 0-100. A greater value indicates higher similarity. This parameter is returned only in the `compare` (liveness detection and face comparison) mode.
+	// The similarity, with a value range of 0-100. A greater value indicates higher similarity. This parameter is returned only in the `compare` (selfie verification) mode.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	Similarity *float64 `json:"Similarity,omitnil,omitempty" name:"Similarity"`
 
@@ -1702,7 +1692,7 @@ func (r *GetFaceIdResultIntlResponse) FromJsonString(s string) error {
 type GetFaceIdTokenIntlRequestParams struct {
 	// The detection mode. Valid values:
 	// `liveness`: Liveness detection only.
-	// `compare`: Liveness detection and face comparison.
+	// `compare`: Selfie verification.
 	// Default value: `liveness`.
 	CheckMode *string `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
@@ -1738,7 +1728,7 @@ type GetFaceIdTokenIntlRequest struct {
 	
 	// The detection mode. Valid values:
 	// `liveness`: Liveness detection only.
-	// `compare`: Liveness detection and face comparison.
+	// `compare`: Selfie verification.
 	// Default value: `liveness`.
 	CheckMode *string `json:"CheckMode,omitnil,omitempty" name:"CheckMode"`
 
@@ -1990,7 +1980,7 @@ func (r *GetWebVerificationResultIntlRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type GetWebVerificationResultIntlResponseParams struct {
 	// The final result of this verification. `0` indicates that the person is the same as that in the photo.
-	// For other error codes, see <a href="https://www.tencentcloud.com/document/product/1061/55390?lang=en&pg=#8a960e1e-39c0-42cb-b181-b3164d77f81e">Liveness Detection and Face Comparison (Mobile HTML5) Error Codes</a>
+	// For other error codes, see <a href="https://www.tencentcloud.com/document/product/1061/55390?lang=en&pg=#8a960e1e-39c0-42cb-b181-b3164d77f81e">Selfie Verification (Mobile HTML5) Error Codes</a>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErrorCode *int64 `json:"ErrorCode,omitnil,omitempty" name:"ErrorCode"`
 
