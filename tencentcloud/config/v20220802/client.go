@@ -147,6 +147,59 @@ func (c *Client) ListAggregateConfigRulesWithContext(ctx context.Context, reques
     return
 }
 
+func NewListAggregateDiscoveredResourcesRequest() (request *ListAggregateDiscoveredResourcesRequest) {
+    request = &ListAggregateDiscoveredResourcesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("config", APIVersion, "ListAggregateDiscoveredResources")
+    
+    
+    return
+}
+
+func NewListAggregateDiscoveredResourcesResponse() (response *ListAggregateDiscoveredResourcesResponse) {
+    response = &ListAggregateDiscoveredResourcesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListAggregateDiscoveredResources
+// Account Group access the list of resources.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ACCOUNTGROUPISNOTEXIST = "ResourceNotFound.AccountGroupIsNotExist"
+func (c *Client) ListAggregateDiscoveredResources(request *ListAggregateDiscoveredResourcesRequest) (response *ListAggregateDiscoveredResourcesResponse, err error) {
+    return c.ListAggregateDiscoveredResourcesWithContext(context.Background(), request)
+}
+
+// ListAggregateDiscoveredResources
+// Account Group access the list of resources.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ACCOUNTGROUPISNOTEXIST = "ResourceNotFound.AccountGroupIsNotExist"
+func (c *Client) ListAggregateDiscoveredResourcesWithContext(ctx context.Context, request *ListAggregateDiscoveredResourcesRequest) (response *ListAggregateDiscoveredResourcesResponse, err error) {
+    if request == nil {
+        request = NewListAggregateDiscoveredResourcesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListAggregateDiscoveredResources require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListAggregateDiscoveredResourcesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListConfigRulesRequest() (request *ListConfigRulesRequest) {
     request = &ListConfigRulesRequest{
         BaseRequest: &tchttp.BaseRequest{},

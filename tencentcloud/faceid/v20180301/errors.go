@@ -188,6 +188,9 @@ const (
 	// Video decoding abnormality
 	FAILEDOPERATION_VIDEODECODEFAILED = "FailedOperation.VideoDecodeFailed"
 
+	// 
+	FAILEDOPERATION_VIDEODURATIONEXCEEDED = "FailedOperation.VideoDurationExceeded"
+
 	// Internal error.
 	INTERNALERROR = "InternalError"
 

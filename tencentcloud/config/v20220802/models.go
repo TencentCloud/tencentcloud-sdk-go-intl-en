@@ -20,6 +20,57 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
+type AggregateResourceInfo struct {
+	// Resource type
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
+
+	// Resource name
+	ResourceName *string `json:"ResourceName,omitnil,omitempty" name:"ResourceName"`
+
+	// Resource ID
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Region
+	// 
+	// Note: This field may return null, indicating that no valid value is found.
+	ResourceRegion *string `json:"ResourceRegion,omitnil,omitempty" name:"ResourceRegion"`
+
+	// Resource Status
+	// 
+	// Note: This field may return null, indicating that no valid value is found.
+	ResourceStatus *string `json:"ResourceStatus,omitnil,omitempty" name:"ResourceStatus"`
+
+	// Whether to delete. 1: Deleted; 0: Not deleted.
+	// Note: This field may return null, indicating that no valid value is found.
+	ResourceDelete *uint64 `json:"ResourceDelete,omitnil,omitempty" name:"ResourceDelete"`
+
+	// Resource creation time
+	// 
+	// Note: This field may return null, indicating that no valid value is found.
+	ResourceCreateTime *string `json:"ResourceCreateTime,omitnil,omitempty" name:"ResourceCreateTime"`
+
+	// Tag information
+	// 
+	// Note: This field may return null, indicating that no valid value is found.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Availability zone
+	// 
+	// Note: This field may return null, indicating that no valid value is found.
+	ResourceZone *string `json:"ResourceZone,omitnil,omitempty" name:"ResourceZone"`
+
+	// Compliance status
+	// Note: This field may return null, indicating that no valid value is found.
+	ComplianceResult *string `json:"ComplianceResult,omitnil,omitempty" name:"ComplianceResult"`
+
+	// Resource owner uid
+	ResourceOwnerId *uint64 `json:"ResourceOwnerId,omitnil,omitempty" name:"ResourceOwnerId"`
+
+	// User nickname
+	// Note: This field may return null, indicating that no valid value is found.
+	ResourceOwnerName *string `json:"ResourceOwnerName,omitnil,omitempty" name:"ResourceOwnerName"`
+}
+
 type Annotation struct {
 	// Current actual configuration of the resource. It can contain 0 to 256 characters, which is the non-compliant configuration of the resource.
 	// Note: This field may return null, indicating that no valid value is found.
@@ -468,6 +519,102 @@ func (r *ListAggregateConfigRulesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ListAggregateConfigRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ListAggregateDiscoveredResourcesRequestParams struct {
+	// Items per Page
+	MaxResults *uint64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
+
+	// Account group ID
+	AccountGroupId *string `json:"AccountGroupId,omitnil,omitempty" name:"AccountGroupId"`
+
+	// resourceName: Resource name; resourceId: Resource ID; resourceType: Resource type
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <Tag>
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Next page token.
+	NextToken *string `json:"NextToken,omitnil,omitempty" name:"NextToken"`
+
+	// Sorting method asc, desc
+	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+}
+
+type ListAggregateDiscoveredResourcesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Items per Page
+	MaxResults *uint64 `json:"MaxResults,omitnil,omitempty" name:"MaxResults"`
+
+	// Account group ID
+	AccountGroupId *string `json:"AccountGroupId,omitnil,omitempty" name:"AccountGroupId"`
+
+	// resourceName: Resource name; resourceId: Resource ID; resourceType: Resource type
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <Tag>
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Next page token.
+	NextToken *string `json:"NextToken,omitnil,omitempty" name:"NextToken"`
+
+	// Sorting method asc, desc
+	OrderType *string `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+}
+
+func (r *ListAggregateDiscoveredResourcesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListAggregateDiscoveredResourcesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "MaxResults")
+	delete(f, "AccountGroupId")
+	delete(f, "Filters")
+	delete(f, "Tags")
+	delete(f, "NextToken")
+	delete(f, "OrderType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListAggregateDiscoveredResourcesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ListAggregateDiscoveredResourcesResponseParams struct {
+	// Details.
+	Items []*AggregateResourceInfo `json:"Items,omitnil,omitempty" name:"Items"`
+
+	// next page
+	// Note: This field may return null, indicating that no valid value is found.
+	NextToken *string `json:"NextToken,omitnil,omitempty" name:"NextToken"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ListAggregateDiscoveredResourcesResponse struct {
+	*tchttp.BaseResponse
+	Response *ListAggregateDiscoveredResourcesResponseParams `json:"Response"`
+}
+
+func (r *ListAggregateDiscoveredResourcesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListAggregateDiscoveredResourcesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

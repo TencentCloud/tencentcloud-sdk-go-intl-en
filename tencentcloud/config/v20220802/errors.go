@@ -17,6 +17,9 @@ package v20220802
 const (
 	// error codes for specific actions
 
+	// Internal error.
+	INTERNALERROR = "InternalError"
+
 	// Parameter error.
 	INVALIDPARAMETER = "InvalidParameter"
 
