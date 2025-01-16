@@ -1340,6 +1340,107 @@ func (r *CreateAllocationTagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type Deal struct {
+	// Order ID.
+	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
+
+	// The status of the order. 1: unpaid; 2: paid; 3: shipping; 4: shipped; 5: shipment failed; 6: refunded; 7: closed case; 8: order expired; 9: order invalidated; 10: product invalidated; 11: third-party payment refused; 12: payment in process
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Payer
+	Payer *string `json:"Payer,omitnil,omitempty" name:"Payer"`
+
+	// Creation time
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Creator
+	Creator *string `json:"Creator,omitnil,omitempty" name:"Creator"`
+
+	// Actual payment amount (pent)
+	RealTotalCost *int64 `json:"RealTotalCost,omitnil,omitempty" name:"RealTotalCost"`
+
+	// Voucher offset amount (pent)
+	VoucherDecline *int64 `json:"VoucherDecline,omitnil,omitempty" name:"VoucherDecline"`
+
+	// Project ID
+	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Product category ID
+	GoodsCategoryId *int64 `json:"GoodsCategoryId,omitnil,omitempty" name:"GoodsCategoryId"`
+
+	// Product details
+	ProductInfo []*ProductInfo `json:"ProductInfo,omitnil,omitempty" name:"ProductInfo"`
+
+	// Duration
+	TimeSpan *float64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	// Time unit
+	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
+
+	// Currency unit
+	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
+
+	// Discount rate
+	Policy *float64 `json:"Policy,omitnil,omitempty" name:"Policy"`
+
+	// Unit price (cents)
+	Price *float64 `json:"Price,omitnil,omitempty" name:"Price"`
+
+	// Original price (cents)
+	TotalCost *float64 `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
+
+	// Product code
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
+
+	// Subproduct code
+	SubProductCode *string `json:"SubProductCode,omitnil,omitempty" name:"SubProductCode"`
+
+	// Large order number.
+	BigDealId *string `json:"BigDealId,omitnil,omitempty" name:"BigDealId"`
+
+	// Refund formula
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Formula *string `json:"Formula,omitnil,omitempty" name:"Formula"`
+
+	// Refund involves order information
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RefReturnDeals *string `json:"RefReturnDeals,omitnil,omitempty" name:"RefReturnDeals"`
+
+	// Billing mode: `prePay` (prepaid), `postPay` (pay-as-you-go), `riPay` (reserved instance)
+	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// Transaction type
+	// 
+	// `modifyNetworkMode`: Adjusting bandwidth mode
+	// `modifyNetworkSize`: Adjusting bandwidth size
+	// `refund`: Refund
+	// `downgrade`: Downgrade
+	// upgrade (upgrade)
+	// renew
+	// purchase
+	// preMoveOut annual and monthly subscription resources
+	// preMoveIn annual and monthly subscription resources
+	// preToPost prepaid to postpaid
+	// postMoveOut move out pay-as-you-go resources
+	// postMoveIn move in pay-as-you-go resources
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// Product code Chinese name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
+
+	// Subproduct code Chinese name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SubProductName *string `json:"SubProductName,omitnil,omitempty" name:"SubProductName"`
+
+	// The resource ID corresponding to the order. If the query parameter `Limit` exceeds 200, null will be returned.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ResourceId []*string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+}
+
 // Predefined struct for user
 type DeleteAllocationTagRequestParams struct {
 	// Cost allocation tag key
@@ -3705,6 +3806,153 @@ func (r *DescribeCostSummaryByResourceResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeDealsByCondRequestParams struct {
+	// Start time 
+	// Example :2016-01-01 00:00:00
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time 
+	// Example:2016-02-01 00:00:00. 
+	// It is recommended that the span does not exceed 3 months.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// The number of records per page. The default is 20, and the maximum is 1,000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The page number the records start from, starting from 0. The default is 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Order status, default is 4 (successful order)
+	// Status of the order
+	// 1: unpaid
+	// 2: paid 
+	// 3: shipment in progress
+	// 4: shipped
+	// 5`: Shipment Failed
+	// 6`: Refunded
+	// 7`: Ticket closed
+	// 8`: Order expired
+	// 9`: Order invalid
+	// 10: product invalidated
+	// 11: third-party payment refused
+	// 12: payment in process
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Sub-order number
+	// Example: 202202021234567
+	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
+
+	// Large order number.
+	// Example: 202202021234566
+	BigDealId *string `json:"BigDealId,omitnil,omitempty" name:"BigDealId"`
+
+	// Resource ID
+	// Example:ins-a2bb34
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+}
+
+type DescribeDealsByCondRequest struct {
+	*tchttp.BaseRequest
+	
+	// Start time 
+	// Example :2016-01-01 00:00:00
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// End time 
+	// Example:2016-02-01 00:00:00. 
+	// It is recommended that the span does not exceed 3 months.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// The number of records per page. The default is 20, and the maximum is 1,000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// The page number the records start from, starting from 0. The default is 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Order status, default is 4 (successful order)
+	// Status of the order
+	// 1: unpaid
+	// 2: paid 
+	// 3: shipment in progress
+	// 4: shipped
+	// 5`: Shipment Failed
+	// 6`: Refunded
+	// 7`: Ticket closed
+	// 8`: Order expired
+	// 9`: Order invalid
+	// 10: product invalidated
+	// 11: third-party payment refused
+	// 12: payment in process
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Sub-order number
+	// Example: 202202021234567
+	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
+
+	// Large order number.
+	// Example: 202202021234566
+	BigDealId *string `json:"BigDealId,omitnil,omitempty" name:"BigDealId"`
+
+	// Resource ID
+	// Example:ins-a2bb34
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+}
+
+func (r *DescribeDealsByCondRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDealsByCondRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Status")
+	delete(f, "OrderId")
+	delete(f, "BigDealId")
+	delete(f, "ResourceId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeDealsByCondRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeDealsByCondResponseParams struct {
+	// Order list
+	Deals []*Deal `json:"Deals,omitnil,omitempty" name:"Deals"`
+
+	// Total number of orders
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeDealsByCondResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeDealsByCondResponseParams `json:"Response"`
+}
+
+func (r *DescribeDealsByCondResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeDealsByCondResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeDosageCosDetailByDateRequestParams struct {
 	// The start date of the usage query, such as `2020-09-01`.
 	StartDate *string `json:"StartDate,omitnil,omitempty" name:"StartDate"`
@@ -4260,6 +4508,14 @@ type PayModeSummaryOverviewItem struct {
 
 	// Detailed summary of costs by transaction type
 	Detail []*ActionSummaryOverviewItem `json:"Detail,omitnil,omitempty" name:"Detail"`
+}
+
+type ProductInfo struct {
+	// Product detail name identifier
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Product details
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type ProjectSummaryOverviewItem struct {

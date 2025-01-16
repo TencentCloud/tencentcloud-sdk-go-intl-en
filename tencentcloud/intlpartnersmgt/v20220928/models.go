@@ -1793,37 +1793,37 @@ type PayModeSummaryOverviewItem struct {
 }
 
 type PolicyProductList struct {
-	// Policy code.
+	// Dealer policy code.
 	PolicyCode *string `json:"PolicyCode,omitnil,omitempty" name:"PolicyCode"`
 
-	// Product code, if the return is *, any item under this level is included in the policy product scope.
+	// Product level 1 code. If the return value is *, any item at this level is included in the policy product range.
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
-	// Product name, if the return is *, any item under this level is included in the policy product scope.
+	// Product level 1 name. If the return value is *, any item at this level is included in the policy product range.
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-	// SubProduct code, if the return is *, any item under this level is included in the policy product scope.
+	// Product level 2 code. If the return value is *, any item at this level is included in the policy product range.
 	SubProductCode *string `json:"SubProductCode,omitnil,omitempty" name:"SubProductCode"`
 
-	// SubProduct name, if the return is *, any item under this level is included in the policy product scope.
+	// Product level 2 name. If the return value is *, any item at this level is included in the policy product range.
 	SubProductName *string `json:"SubProductName,omitnil,omitempty" name:"SubProductName"`
 
-	// Component type code, if the return is *, any item under this level is included in the policy product scope.
+	// Product level 3 code. If the return value is *, any item at this level is included in the policy product range.
 	ComponentTypeCode *string `json:"ComponentTypeCode,omitnil,omitempty" name:"ComponentTypeCode"`
 
-	// Component type name, if the return is *, any item under this level is included in the policy product scope.
+	// Product level 3 name. If the return value is *, any item at this level is included in the policy product range.
 	ComponentTypeName *string `json:"ComponentTypeName,omitnil,omitempty" name:"ComponentTypeName"`
 
-	// Component code, if the return is *, any item under this level is included in the policy product scope.
+	// Product level 4 code. If the return value is *, any item at this level is included in the policy product range.
 	ComponentCode *string `json:"ComponentCode,omitnil,omitempty" name:"ComponentCode"`
 
-	// Component name, if the return is *, any item under this level is included in the policy product scope.
+	// Product fourth-level name. If the return value is *, any item under this level is included in the policy product scope.
 	ComponentName *string `json:"ComponentName,omitnil,omitempty" name:"ComponentName"`
 
-	// Policy effective date.
+	// Policy effective time.
 	StartDate *string `json:"StartDate,omitnil,omitempty" name:"StartDate"`
 
-	// Policy expiration date.
+	// Policy expiration time.
 	EndDate *string `json:"EndDate,omitnil,omitempty" name:"EndDate"`
 }
 
@@ -2349,39 +2349,51 @@ func (r *QueryPartnerCreditResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type QueryPolicyProductListByCodeRequestParams struct {
-	// Policy code
+	// Dealer policy code.
 	PolicyCode *string `json:"PolicyCode,omitnil,omitempty" name:"PolicyCode"`
 
-	// Product code
+	// Product level 1 code.
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
-	// Product name
+	// Product level 1 name.
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-	// Subproduct code
+	// Product level 2 code.
 	SubProductCode *string `json:"SubProductCode,omitnil,omitempty" name:"SubProductCode"`
 
-	// Subproduct name
+	// Product level 2 name.
 	SubProductName *string `json:"SubProductName,omitnil,omitempty" name:"SubProductName"`
+
+	// Page parameter: current page number. The minimum value is 1.
+	Page *uint64 `json:"Page,omitnil,omitempty" name:"Page"`
+
+	// Page parameter: Indicates the number of entries per page. Value range: [1, 200], default is 200.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 }
 
 type QueryPolicyProductListByCodeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Policy code
+	// Dealer policy code.
 	PolicyCode *string `json:"PolicyCode,omitnil,omitempty" name:"PolicyCode"`
 
-	// Product code
+	// Product level 1 code.
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
-	// Product name
+	// Product level 1 name.
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-	// Subproduct code
+	// Product level 2 code.
 	SubProductCode *string `json:"SubProductCode,omitnil,omitempty" name:"SubProductCode"`
 
-	// Subproduct name
+	// Product level 2 name.
 	SubProductName *string `json:"SubProductName,omitnil,omitempty" name:"SubProductName"`
+
+	// Page parameter: current page number. The minimum value is 1.
+	Page *uint64 `json:"Page,omitnil,omitempty" name:"Page"`
+
+	// Page parameter: Indicates the number of entries per page. Value range: [1, 200], default is 200.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 }
 
 func (r *QueryPolicyProductListByCodeRequest) ToJsonString() string {
@@ -2401,6 +2413,8 @@ func (r *QueryPolicyProductListByCodeRequest) FromJsonString(s string) error {
 	delete(f, "ProductName")
 	delete(f, "SubProductCode")
 	delete(f, "SubProductName")
+	delete(f, "Page")
+	delete(f, "PageSize")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "QueryPolicyProductListByCodeRequest has unknown keys!", "")
 	}
@@ -2409,8 +2423,11 @@ func (r *QueryPolicyProductListByCodeRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type QueryPolicyProductListByCodeResponseParams struct {
-	// Policy product list
+	// Dealer policy product list.
 	ProductList []*PolicyProductList `json:"ProductList,omitnil,omitempty" name:"ProductList"`
+
+	// Total number of data entries
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`

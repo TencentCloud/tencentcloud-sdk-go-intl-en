@@ -1259,6 +1259,55 @@ func (c *Client) DescribeCostSummaryByResourceWithContext(ctx context.Context, r
     return
 }
 
+func NewDescribeDealsByCondRequest() (request *DescribeDealsByCondRequest) {
+    request = &DescribeDealsByCondRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeDealsByCond")
+    
+    
+    return
+}
+
+func NewDescribeDealsByCondResponse() (response *DescribeDealsByCondResponse) {
+    response = &DescribeDealsByCondResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDealsByCond
+// Querying orders
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeDealsByCond(request *DescribeDealsByCondRequest) (response *DescribeDealsByCondResponse, err error) {
+    return c.DescribeDealsByCondWithContext(context.Background(), request)
+}
+
+// DescribeDealsByCond
+// Querying orders
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeDealsByCondWithContext(ctx context.Context, request *DescribeDealsByCondRequest) (response *DescribeDealsByCondResponse, err error) {
+    if request == nil {
+        request = NewDescribeDealsByCondRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDealsByCond require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDealsByCondResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDosageCosDetailByDateRequest() (request *DescribeDosageCosDetailByDateRequest) {
     request = &DescribeDosageCosDetailByDateRequest{
         BaseRequest: &tchttp.BaseRequest{},
