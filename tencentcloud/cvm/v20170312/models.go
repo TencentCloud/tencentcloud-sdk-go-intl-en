@@ -1248,14 +1248,14 @@ type DataDisk struct {
 
 // Predefined struct for user
 type DeleteDisasterRecoverGroupsRequestParams struct {
-	// ID list of spread placement groups, obtainable via the [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/api/213/17810?from_cn_redirect=1) API. You can operate up to 100 spread placement groups in each request.
+	// ID list of spread placement groups, obtainable via the [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/api/213/17810?from_cn_redirect=1) API. You can operate up to 10 spread placement groups in each request.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitnil,omitempty" name:"DisasterRecoverGroupIds"`
 }
 
 type DeleteDisasterRecoverGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID list of spread placement groups, obtainable via the [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/api/213/17810?from_cn_redirect=1) API. You can operate up to 100 spread placement groups in each request.
+	// ID list of spread placement groups, obtainable via the [DescribeDisasterRecoverGroups](https://intl.cloud.tencent.com/document/api/213/17810?from_cn_redirect=1) API. You can operate up to 10 spread placement groups in each request.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitnil,omitempty" name:"DisasterRecoverGroupIds"`
 }
 
@@ -1765,7 +1765,7 @@ func (r *DescribeDisasterRecoverGroupQuotaResponse) FromJsonString(s string) err
 
 // Predefined struct for user
 type DescribeDisasterRecoverGroupsRequestParams struct {
-	// ID list of spread placement groups. You can operate up to 100 spread placement groups in each request.
+	// ID list of spread placement groups. You can operate up to 10 spread placement groups in each request.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitnil,omitempty" name:"DisasterRecoverGroupIds"`
 
 	// Name of a spread placement group. Fuzzy match is supported.
@@ -1781,7 +1781,7 @@ type DescribeDisasterRecoverGroupsRequestParams struct {
 type DescribeDisasterRecoverGroupsRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID list of spread placement groups. You can operate up to 100 spread placement groups in each request.
+	// ID list of spread placement groups. You can operate up to 10 spread placement groups in each request.
 	DisasterRecoverGroupIds []*string `json:"DisasterRecoverGroupIds,omitnil,omitempty" name:"DisasterRecoverGroupIds"`
 
 	// Name of a spread placement group. Fuzzy match is supported.

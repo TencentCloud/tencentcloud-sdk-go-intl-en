@@ -720,6 +720,67 @@ func (c *Client) DescribeCustomerBillDetailWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeCustomerBillDownloadUrlRequest() (request *DescribeCustomerBillDownloadUrlRequest) {
+    request = &DescribeCustomerBillDownloadUrlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeCustomerBillDownloadUrl")
+    
+    
+    return
+}
+
+func NewDescribeCustomerBillDownloadUrlResponse() (response *DescribeCustomerBillDownloadUrlResponse) {
+    response = &DescribeCustomerBillDownloadUrlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCustomerBillDownloadUrl
+// This API is used to get the URL for downloading the customer bill file by reseller. The download conditions are as follows:
+//
+// 1. Detailed bills (billDetail and billDetailPack) can be downloaded starting from June 2022; resource bills (billResource and billResourcePack) can be downloaded starting from November 2023.
+//
+// 2. Bill packages (billDetailPack and billResourcePack) can only be downloaded after billing.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerBillDownloadUrl(request *DescribeCustomerBillDownloadUrlRequest) (response *DescribeCustomerBillDownloadUrlResponse, err error) {
+    return c.DescribeCustomerBillDownloadUrlWithContext(context.Background(), request)
+}
+
+// DescribeCustomerBillDownloadUrl
+// This API is used to get the URL for downloading the customer bill file by reseller. The download conditions are as follows:
+//
+// 1. Detailed bills (billDetail and billDetailPack) can be downloaded starting from June 2022; resource bills (billResource and billResourcePack) can be downloaded starting from November 2023.
+//
+// 2. Bill packages (billDetailPack and billResourcePack) can only be downloaded after billing.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerBillDownloadUrlWithContext(ctx context.Context, request *DescribeCustomerBillDownloadUrlRequest) (response *DescribeCustomerBillDownloadUrlResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerBillDownloadUrlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomerBillDownloadUrl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomerBillDownloadUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCustomerBillSummaryRequest() (request *DescribeCustomerBillSummaryRequest) {
     request = &DescribeCustomerBillSummaryRequest{
         BaseRequest: &tchttp.BaseRequest{},
