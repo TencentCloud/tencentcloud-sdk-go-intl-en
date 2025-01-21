@@ -3987,6 +3987,129 @@ func (r *RecognizeThaiIDCardOCRResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type RecognizeThaiPinkCardRequestParams struct {
+	// The Base64-encoded value of an image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// The URL of the image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// Whether to crop the profile photo. The default value is `false`, meaning not to return the Base64-encoded value of the profile photo on the Thai identity card.
+	// When this parameter is set to `true`, the Base64-encoded value of the profile photo on the Thai identity card after rotation correction is returned.
+	CropPortrait *bool `json:"CropPortrait,omitnil,omitempty" name:"CropPortrait"`
+}
+
+type RecognizeThaiPinkCardRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64-encoded value of an image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// Either `ImageUrl` or `ImageBase64` of the image must be provided. If both are provided, `ImageUrl` is used.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// The URL of the image. The image cannot exceed 7 MB after being Base64-encoded. A resolution above 500 x 800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupy more than 2/3 area of the image.
+	// We recommend that you store the image in Tencent Cloud for higher download speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// Whether to crop the profile photo. The default value is `false`, meaning not to return the Base64-encoded value of the profile photo on the Thai identity card.
+	// When this parameter is set to `true`, the Base64-encoded value of the profile photo on the Thai identity card after rotation correction is returned.
+	CropPortrait *bool `json:"CropPortrait,omitnil,omitempty" name:"CropPortrait"`
+}
+
+func (r *RecognizeThaiPinkCardRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeThaiPinkCardRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "CropPortrait")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RecognizeThaiPinkCardRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RecognizeThaiPinkCardResponseParams struct {
+	// Country
+	Country *string `json:"Country,omitnil,omitempty" name:"Country"`
+
+	// ID number
+	IDNumber *string `json:"IDNumber,omitnil,omitempty" name:"IDNumber"`
+
+	// Name in Thai
+	ThaiName *string `json:"ThaiName,omitnil,omitempty" name:"ThaiName"`
+
+	// Name in English
+	EnName *string `json:"EnName,omitnil,omitempty" name:"EnName"`
+
+	// Date of birth in Thai
+	ThaiDOB *string `json:"ThaiDOB,omitnil,omitempty" name:"ThaiDOB"`
+
+	// Date of birth in English
+	EnDOB *string `json:"EnDOB,omitnil,omitempty" name:"EnDOB"`
+
+	// Photo number
+	PhotoNumber *string `json:"PhotoNumber,omitnil,omitempty" name:"PhotoNumber"`
+
+	// Address in Thai
+	ThaiAddress *string `json:"ThaiAddress,omitnil,omitempty" name:"ThaiAddress"`
+
+	// Date of issue in Thai
+	ThaiDateOfIssue *string `json:"ThaiDateOfIssue,omitnil,omitempty" name:"ThaiDateOfIssue"`
+
+	// Date of issue in English
+	DateOfIssue *string `json:"DateOfIssue,omitnil,omitempty" name:"DateOfIssue"`
+
+	// Expiration date in Thai
+	ThaiDateOfExpiry *string `json:"ThaiDateOfExpiry,omitnil,omitempty" name:"ThaiDateOfExpiry"`
+
+	// Expiration date in English
+	DateOfExpiry *string `json:"DateOfExpiry,omitnil,omitempty" name:"DateOfExpiry"`
+
+	// Issuing agency
+	IssuingAgency *string `json:"IssuingAgency,omitnil,omitempty" name:"IssuingAgency"`
+
+	// Ref number
+	RefNumber *string `json:"RefNumber,omitnil,omitempty" name:"RefNumber"`
+
+	// Field confidence:
+	//  { "ID": { "Confidence": 0.9999 }, "ThaiName": { "Confidence": 0.9996 } }
+	AdvancedInfo *string `json:"AdvancedInfo,omitnil,omitempty" name:"AdvancedInfo"`
+
+	// Identity photo
+	PortraitImage *string `json:"PortraitImage,omitnil,omitempty" name:"PortraitImage"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RecognizeThaiPinkCardResponse struct {
+	*tchttp.BaseResponse
+	Response *RecognizeThaiPinkCardResponseParams `json:"Response"`
+}
+
+func (r *RecognizeThaiPinkCardResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeThaiPinkCardResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Rect struct {
 	// X-coordinate of top-left point
 	X *int64 `json:"X,omitnil,omitempty" name:"X"`

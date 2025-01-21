@@ -2634,6 +2634,83 @@ func (c *Client) RecognizeThaiIDCardOCRWithContext(ctx context.Context, request 
     return
 }
 
+func NewRecognizeThaiPinkCardRequest() (request *RecognizeThaiPinkCardRequest) {
+    request = &RecognizeThaiPinkCardRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "RecognizeThaiPinkCard")
+    
+    
+    return
+}
+
+func NewRecognizeThaiPinkCardResponse() (response *RecognizeThaiPinkCardResponse) {
+    response = &RecognizeThaiPinkCardResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RecognizeThaiPinkCard
+// This API is used to recognize the fields on a Thai identity card, including name in Thai, name in English, address, date of birth, identification number, date of issue, and date of expiry.
+//
+// Currently, this API is not generally available. For more information, please [contact your sales rep](https://intl.cloud.tencent.com/about/connect?from_cn_redirect=1).
+//
+// 
+//
+// A maximum of 5 requests can be initiated per second for this API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) RecognizeThaiPinkCard(request *RecognizeThaiPinkCardRequest) (response *RecognizeThaiPinkCardResponse, err error) {
+    return c.RecognizeThaiPinkCardWithContext(context.Background(), request)
+}
+
+// RecognizeThaiPinkCard
+// This API is used to recognize the fields on a Thai identity card, including name in Thai, name in English, address, date of birth, identification number, date of issue, and date of expiry.
+//
+// Currently, this API is not generally available. For more information, please [contact your sales rep](https://intl.cloud.tencent.com/about/connect?from_cn_redirect=1).
+//
+// 
+//
+// A maximum of 5 requests can be initiated per second for this API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) RecognizeThaiPinkCardWithContext(ctx context.Context, request *RecognizeThaiPinkCardRequest) (response *RecognizeThaiPinkCardResponse, err error) {
+    if request == nil {
+        request = NewRecognizeThaiPinkCardRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RecognizeThaiPinkCard require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRecognizeThaiPinkCardResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSealOCRRequest() (request *SealOCRRequest) {
     request = &SealOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},

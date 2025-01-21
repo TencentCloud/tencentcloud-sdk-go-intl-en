@@ -3561,4 +3561,7 @@ type WebVerificationConfigIntl struct {
 	// Multiple action example: "blink,mouth"
 	// The default value is blink. The different action types passed in this parameter take effect only when the SecurityLevel is 2, 4, or 5; otherwise, the interface reports an error.
 	ActionList *string `json:"ActionList,omitnil,omitempty" name:"ActionList"`
+
+	// Control liveness retry number.The value range is 1-99.
+	LivenessRetryLimit *int64 `json:"LivenessRetryLimit,omitnil,omitempty" name:"LivenessRetryLimit"`
 }
