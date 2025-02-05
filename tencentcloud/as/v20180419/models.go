@@ -485,7 +485,7 @@ type ClearLaunchConfigurationAttributesRequestParams struct {
 	ClearHostNameSettings *bool `json:"ClearHostNameSettings,omitnil,omitempty" name:"ClearHostNameSettings"`
 
 	// Whether to clear the CVM instance name settings. This parameter is optional and the default value is `false`.
-	// Setting it to `true` will clear the instance name settings, which means that CVM newly created on this launch configuration will be named in the “as-{{AutoScalingGroupName}} format.
+	// Setting it to `true` will clear the instance name settings, which means that CVM newly created on this launch configuration will be named in the as-{{AutoScalingGroupName}} format.
 	ClearInstanceNameSettings *bool `json:"ClearInstanceNameSettings,omitnil,omitempty" name:"ClearInstanceNameSettings"`
 
 	// Whether to clear placement group information. This parameter is optional. Default value: `false`.
@@ -495,6 +495,9 @@ type ClearLaunchConfigurationAttributesRequestParams struct {
 	// Whether to clear the instance tag list. This parameter is optional, and its default value is false.
 	// If true is filled in, it indicates that the instance tag list should be cleared. After the list is cleared, the CVMs created based on this will not be bound to the tags in the list.
 	ClearInstanceTags *bool `json:"ClearInstanceTags,omitnil,omitempty" name:"ClearInstanceTags"`
+
+	// Whether to clear metadata, optional, defaults to false. Setting it to true will clear metadata, the CVMs created based on this will not be associated with custom metadata.
+	ClearMetadata *bool `json:"ClearMetadata,omitnil,omitempty" name:"ClearMetadata"`
 }
 
 type ClearLaunchConfigurationAttributesRequest struct {
@@ -512,7 +515,7 @@ type ClearLaunchConfigurationAttributesRequest struct {
 	ClearHostNameSettings *bool `json:"ClearHostNameSettings,omitnil,omitempty" name:"ClearHostNameSettings"`
 
 	// Whether to clear the CVM instance name settings. This parameter is optional and the default value is `false`.
-	// Setting it to `true` will clear the instance name settings, which means that CVM newly created on this launch configuration will be named in the “as-{{AutoScalingGroupName}} format.
+	// Setting it to `true` will clear the instance name settings, which means that CVM newly created on this launch configuration will be named in the as-{{AutoScalingGroupName}} format.
 	ClearInstanceNameSettings *bool `json:"ClearInstanceNameSettings,omitnil,omitempty" name:"ClearInstanceNameSettings"`
 
 	// Whether to clear placement group information. This parameter is optional. Default value: `false`.
@@ -522,6 +525,9 @@ type ClearLaunchConfigurationAttributesRequest struct {
 	// Whether to clear the instance tag list. This parameter is optional, and its default value is false.
 	// If true is filled in, it indicates that the instance tag list should be cleared. After the list is cleared, the CVMs created based on this will not be bound to the tags in the list.
 	ClearInstanceTags *bool `json:"ClearInstanceTags,omitnil,omitempty" name:"ClearInstanceTags"`
+
+	// Whether to clear metadata, optional, defaults to false. Setting it to true will clear metadata, the CVMs created based on this will not be associated with custom metadata.
+	ClearMetadata *bool `json:"ClearMetadata,omitnil,omitempty" name:"ClearMetadata"`
 }
 
 func (r *ClearLaunchConfigurationAttributesRequest) ToJsonString() string {
@@ -542,6 +548,7 @@ func (r *ClearLaunchConfigurationAttributesRequest) FromJsonString(s string) err
 	delete(f, "ClearInstanceNameSettings")
 	delete(f, "ClearDisasterRecoverGroupIds")
 	delete(f, "ClearInstanceTags")
+	delete(f, "ClearMetadata")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ClearLaunchConfigurationAttributesRequest has unknown keys!", "")
 	}
@@ -1024,7 +1031,7 @@ type CreateLaunchConfigurationRequestParams struct {
 	// [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><br/>You can obtain the image IDs in the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE).</li><li>You can also use the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// Project ID of the launch configuration. The default project is used if it’s left blank.
+	// Project ID of the launch configuration. The default project is used if it is left blank.
 	// Note that this project ID is not the same as the project ID of the scaling group. 
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
@@ -1112,6 +1119,9 @@ type CreateLaunchConfigurationRequestParams struct {
 
 	// CDC ID.
 	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
+
+	// Custom metadata.
+	Metadata *Metadata `json:"Metadata,omitnil,omitempty" name:"Metadata"`
 }
 
 type CreateLaunchConfigurationRequest struct {
@@ -1123,7 +1133,7 @@ type CreateLaunchConfigurationRequest struct {
 	// [Image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images: <br/><li>Public images </li><li>Custom images </li><li>Shared images </li><br/>You can obtain the image IDs in the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE).</li><li>You can also use the [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1) and look for `ImageId` in the response.</li>
 	ImageId *string `json:"ImageId,omitnil,omitempty" name:"ImageId"`
 
-	// Project ID of the launch configuration. The default project is used if it’s left blank.
+	// Project ID of the launch configuration. The default project is used if it is left blank.
 	// Note that this project ID is not the same as the project ID of the scaling group. 
 	ProjectId *uint64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
@@ -1211,6 +1221,9 @@ type CreateLaunchConfigurationRequest struct {
 
 	// CDC ID.
 	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
+
+	// Custom metadata.
+	Metadata *Metadata `json:"Metadata,omitnil,omitempty" name:"Metadata"`
 }
 
 func (r *CreateLaunchConfigurationRequest) ToJsonString() string {
@@ -1252,6 +1265,7 @@ func (r *CreateLaunchConfigurationRequest) FromJsonString(s string) error {
 	delete(f, "DisasterRecoverGroupIds")
 	delete(f, "ImageFamily")
 	delete(f, "DedicatedClusterId")
+	delete(f, "Metadata")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLaunchConfigurationRequest has unknown keys!", "")
 	}
@@ -1525,7 +1539,7 @@ type CreateScalingPolicyRequestParams struct {
 	// Scaling policy type. Valid values: <br><li>`SIMPLE` (default): A simple policy</li><li>`TARGET_TRACKING`: A target tracking policy</li>.
 	ScalingPolicyType *string `json:"ScalingPolicyType,omitnil,omitempty" name:"ScalingPolicyType"`
 
-	// The method to adjust the desired capacity after the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Valid values: <br><li>`CHANGE_IN_CAPACITY`: Increase or decrease the desired capacity </li><li>`EXACT_CAPACITY`: Adjust to the specified desired capacity </li> <li>`PERCENT_CHANGE_IN_CAPACITY`: Adjust the desired capacity by percentage </li>
+	// The method to adjust the desired capacity after the alarm is triggered. It is only available when `ScalingPolicyType` is `Simple`. Valid values: <br><li>`CHANGE_IN_CAPACITY`: Increase or decrease the desired capacity </li><li>`EXACT_CAPACITY`: Adjust to the specified desired capacity </li> <li>`PERCENT_CHANGE_IN_CAPACITY`: Adjust the desired capacity by percentage </li>
 	AdjustmentType *string `json:"AdjustmentType,omitnil,omitempty" name:"AdjustmentType"`
 
 	// Adjustment value for the expected number of instances after an alarm is triggered, which is applicable only to simple policies.
@@ -1537,15 +1551,15 @@ type CreateScalingPolicyRequestParams struct {
 	// Cooldown period (in seconds). This parameter is only applicable to a simple policy. Default value: 300.
 	Cooldown *uint64 `json:"Cooldown,omitnil,omitempty" name:"Cooldown"`
 
-	// Alarm monitoring metric. It’s only available when `ScalingPolicyType` is `Simple`.
+	// Alarm monitoring metric. It is only available when `ScalingPolicyType` is `Simple`.
 	MetricAlarm *MetricAlarm `json:"MetricAlarm,omitnil,omitempty" name:"MetricAlarm"`
 
-	// Predefined monitoring item, which is applicable only to target tracking policies. Valid values:
-	// <li>ASG_AVG_CPU_UTILIZATION: average CPU utilization.</li>
-	// <li>ASG_AVG_LAN_TRAFFIC_OUT: average outbound private network bandwidth.</li>
-	// <li>ASG_AVG_LAN_TRAFFIC_IN: average inbound private network bandwidth.</li>
-	// <li>ASG_AVG_WAN_TRAFFIC_OUT: average outbound public network bandwidth.</li>
-	// <li>ASG_AVG_WAN_TRAFFIC_IN: average inbound public network bandwidth.</li>
+	// Predefined monitoring item, applicable only to target tracking policies. Valid values:
+	// <li>ASG_AVG_CPU_UTILIZATION: average CPU utilization</li>
+	// <li>ASG_AVG_LAN_TRAFFIC_OUT: average outbound private network bandwidth</li>
+	// <li>ASG_AVG_LAN_TRAFFIC_IN: average inbound private network bandwidth</li>
+	// <li>ASG_AVG_WAN_TRAFFIC_OUT: average outbound public network bandwidth</li>
+	// <li>ASG_AVG_WAN_TRAFFIC_IN: average inbound public network bandwidth</li>
 	PredefinedMetricType *string `json:"PredefinedMetricType,omitnil,omitempty" name:"PredefinedMetricType"`
 
 	// Target value, which is applicable only to target tracking policies.
@@ -1556,7 +1570,7 @@ type CreateScalingPolicyRequestParams struct {
 	// <li>ASG_AVG_WAN_TRAFFIC_IN: value range: > 0; unit: Mbps.</li>
 	TargetValue *uint64 `json:"TargetValue,omitnil,omitempty" name:"TargetValue"`
 
-	// Instance warm-up period (in seconds). It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Value range: 0-3600. Default value: 300.
+	// Instance warm-up period (in seconds). It is only available when `ScalingPolicyType` is `TARGET_TRACKING`. Value range: 0-3600. Default value: 300.
 	EstimatedInstanceWarmup *uint64 `json:"EstimatedInstanceWarmup,omitnil,omitempty" name:"EstimatedInstanceWarmup"`
 
 	// Whether to disable scale-in, which is applicable only to target tracking policies. Default value: false. Valid values:
@@ -1581,7 +1595,7 @@ type CreateScalingPolicyRequest struct {
 	// Scaling policy type. Valid values: <br><li>`SIMPLE` (default): A simple policy</li><li>`TARGET_TRACKING`: A target tracking policy</li>.
 	ScalingPolicyType *string `json:"ScalingPolicyType,omitnil,omitempty" name:"ScalingPolicyType"`
 
-	// The method to adjust the desired capacity after the alarm is triggered. It’s only available when `ScalingPolicyType` is `Simple`. Valid values: <br><li>`CHANGE_IN_CAPACITY`: Increase or decrease the desired capacity </li><li>`EXACT_CAPACITY`: Adjust to the specified desired capacity </li> <li>`PERCENT_CHANGE_IN_CAPACITY`: Adjust the desired capacity by percentage </li>
+	// The method to adjust the desired capacity after the alarm is triggered. It is only available when `ScalingPolicyType` is `Simple`. Valid values: <br><li>`CHANGE_IN_CAPACITY`: Increase or decrease the desired capacity </li><li>`EXACT_CAPACITY`: Adjust to the specified desired capacity </li> <li>`PERCENT_CHANGE_IN_CAPACITY`: Adjust the desired capacity by percentage </li>
 	AdjustmentType *string `json:"AdjustmentType,omitnil,omitempty" name:"AdjustmentType"`
 
 	// Adjustment value for the expected number of instances after an alarm is triggered, which is applicable only to simple policies.
@@ -1593,15 +1607,15 @@ type CreateScalingPolicyRequest struct {
 	// Cooldown period (in seconds). This parameter is only applicable to a simple policy. Default value: 300.
 	Cooldown *uint64 `json:"Cooldown,omitnil,omitempty" name:"Cooldown"`
 
-	// Alarm monitoring metric. It’s only available when `ScalingPolicyType` is `Simple`.
+	// Alarm monitoring metric. It is only available when `ScalingPolicyType` is `Simple`.
 	MetricAlarm *MetricAlarm `json:"MetricAlarm,omitnil,omitempty" name:"MetricAlarm"`
 
-	// Predefined monitoring item, which is applicable only to target tracking policies. Valid values:
-	// <li>ASG_AVG_CPU_UTILIZATION: average CPU utilization.</li>
-	// <li>ASG_AVG_LAN_TRAFFIC_OUT: average outbound private network bandwidth.</li>
-	// <li>ASG_AVG_LAN_TRAFFIC_IN: average inbound private network bandwidth.</li>
-	// <li>ASG_AVG_WAN_TRAFFIC_OUT: average outbound public network bandwidth.</li>
-	// <li>ASG_AVG_WAN_TRAFFIC_IN: average inbound public network bandwidth.</li>
+	// Predefined monitoring item, applicable only to target tracking policies. Valid values:
+	// <li>ASG_AVG_CPU_UTILIZATION: average CPU utilization</li>
+	// <li>ASG_AVG_LAN_TRAFFIC_OUT: average outbound private network bandwidth</li>
+	// <li>ASG_AVG_LAN_TRAFFIC_IN: average inbound private network bandwidth</li>
+	// <li>ASG_AVG_WAN_TRAFFIC_OUT: average outbound public network bandwidth</li>
+	// <li>ASG_AVG_WAN_TRAFFIC_IN: average inbound public network bandwidth</li>
 	PredefinedMetricType *string `json:"PredefinedMetricType,omitnil,omitempty" name:"PredefinedMetricType"`
 
 	// Target value, which is applicable only to target tracking policies.
@@ -1612,7 +1626,7 @@ type CreateScalingPolicyRequest struct {
 	// <li>ASG_AVG_WAN_TRAFFIC_IN: value range: > 0; unit: Mbps.</li>
 	TargetValue *uint64 `json:"TargetValue,omitnil,omitempty" name:"TargetValue"`
 
-	// Instance warm-up period (in seconds). It’s only available when `ScalingPolicyType` is `TARGET_TRACKING`. Value range: 0-3600. Default value: 300.
+	// Instance warm-up period (in seconds). It is only available when `ScalingPolicyType` is `TARGET_TRACKING`. Value range: 0-3600. Default value: 300.
 	EstimatedInstanceWarmup *uint64 `json:"EstimatedInstanceWarmup,omitnil,omitempty" name:"EstimatedInstanceWarmup"`
 
 	// Whether to disable scale-in, which is applicable only to target tracking policies. Default value: false. Valid values:
@@ -4025,9 +4039,9 @@ type LimitedLoginSettings struct {
 
 type LoginSettings struct {
 	// Instance login password. The password complexity requirements vary according to the operating system type. The details are as follows:
-	// <li>The login password for Linux instances should contain 8 to 16 characters, including at least two types of the following characters: letters, digits, and special characters (such as ()`~!@#$%^&*-+=|{}[]:;',.?/).</li>
-	// <li>The login password for Windows instances should contain 12 to 16 characters, including at least three types of the following characters: lowercase letters, uppercase letters, digits, and special characters (such as ()`~!@#$%^&*-+={}[]:;',.?/).</li>
-	// If this parameter is not specified, the system will generate a random password and notify the user via the message center.
+	// - For a Linux system, the password should contain 8 to 30 characters consisting of at least two of the four character types: lowercase letters, uppercase letters, digits, and special characters.
+	// - For a Windows system, the password should contain 12 to 30 characters consisting of at least three of the four character types: lowercase letters, uppercase letters, digits, and special characters.
+	// - If this parameter is not specified, the system will generate a random password and notify the user via the message centerSupported special characters: ( ) ` ~ ! @ # $ % ^ & * - + = | { } [ ] : ; ' , . ? /
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 
 	// List of key IDs. After an instance is associated with a key, you can access the instance with the private key in the key pair. You can call `DescribeKeyPairs` to obtain `KeyId`. Key and password cannot be specified at the same time. Windows instances do not support keys. Currently, you can only specify one key when purchasing an instance.
@@ -4037,6 +4051,19 @@ type LoginSettings struct {
 	// <li>TRUE: Retain the login settings of the image.</li>
 	// <li>FALSE: Do not retain the login settings of the image.</li> Default value: FALSE.
 	KeepImageLogin *bool `json:"KeepImageLogin,omitnil,omitempty" name:"KeepImageLogin"`
+}
+
+type Metadata struct {
+	// Custom metadata key-value pair list.
+	Items []*MetadataItem `json:"Items,omitnil,omitempty" name:"Items"`
+}
+
+type MetadataItem struct {
+	// Custom metadata key.
+	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
+
+	// Custom metadata value.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type MetricAlarm struct {
@@ -4494,6 +4521,9 @@ type ModifyLaunchConfigurationAttributesRequestParams struct {
 
 	// Cloud Dedicated Cluster (CDC) ID.
 	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
+
+	// Custom metadata.
+	Metadata *Metadata `json:"Metadata,omitnil,omitempty" name:"Metadata"`
 }
 
 type ModifyLaunchConfigurationAttributesRequest struct {
@@ -4598,6 +4628,9 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 
 	// Cloud Dedicated Cluster (CDC) ID.
 	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
+
+	// Custom metadata.
+	Metadata *Metadata `json:"Metadata,omitnil,omitempty" name:"Metadata"`
 }
 
 func (r *ModifyLaunchConfigurationAttributesRequest) ToJsonString() string {
@@ -4637,6 +4670,7 @@ func (r *ModifyLaunchConfigurationAttributesRequest) FromJsonString(s string) er
 	delete(f, "InstanceTags")
 	delete(f, "ImageFamily")
 	delete(f, "DedicatedClusterId")
+	delete(f, "Metadata")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyLaunchConfigurationAttributesRequest has unknown keys!", "")
 	}
@@ -5607,9 +5641,9 @@ type RunAutomationServiceEnabled struct {
 }
 
 type RunMonitorServiceEnabled struct {
-	// Whether to enable the [Tencent Cloud Observability Platform](https://www.tencentcloud.com/document/product/248?lang=en&pg=) service. Valid values:
-	// <li>TRUE: enable.</li>
-	// <li>FALSE: disable.</li>
+	// Whether [TCOP (formerly Cloud Monitor)](https://intl.cloud.tencent.com/document/product/248?from_cn_redirect=1) is enabled. Valid values:
+	// <li>TRUE: enabled</li>
+	// <li>FALSE: disabled</li>
 	// Default value: TRUE.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
@@ -5859,6 +5893,9 @@ type ServiceSettings struct {
 	// Default value: RECREATE.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ReplaceMode *string `json:"ReplaceMode,omitnil,omitempty" name:"ReplaceMode"`
+
+	// Automatic instance tag update. The default value is false. If this feature is enabled, tags of running instances in a scaling group will be updated as well if the scaling group tags are updated. (This feature takes effect for tag creation and editing but not tag deletion.) The update does not take effect immediately due to certain latency.
+	AutoUpdateInstanceTags *bool `json:"AutoUpdateInstanceTags,omitnil,omitempty" name:"AutoUpdateInstanceTags"`
 }
 
 // Predefined struct for user

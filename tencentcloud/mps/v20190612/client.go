@@ -2850,6 +2850,61 @@ func (c *Client) DescribeSnapshotByTimeOffsetTemplatesWithContext(ctx context.Co
     return
 }
 
+func NewDescribeStreamLinkSecurityGroupRequest() (request *DescribeStreamLinkSecurityGroupRequest) {
+    request = &DescribeStreamLinkSecurityGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeStreamLinkSecurityGroup")
+    
+    
+    return
+}
+
+func NewDescribeStreamLinkSecurityGroupResponse() (response *DescribeStreamLinkSecurityGroupResponse) {
+    response = &DescribeStreamLinkSecurityGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamLinkSecurityGroup
+// This API is used to query a security group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLinkSecurityGroup(request *DescribeStreamLinkSecurityGroupRequest) (response *DescribeStreamLinkSecurityGroupResponse, err error) {
+    return c.DescribeStreamLinkSecurityGroupWithContext(context.Background(), request)
+}
+
+// DescribeStreamLinkSecurityGroup
+// This API is used to query a security group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) DescribeStreamLinkSecurityGroupWithContext(ctx context.Context, request *DescribeStreamLinkSecurityGroupRequest) (response *DescribeStreamLinkSecurityGroupResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamLinkSecurityGroupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamLinkSecurityGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamLinkSecurityGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeTaskDetailRequest() (request *DescribeTaskDetailRequest) {
     request = &DescribeTaskDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
