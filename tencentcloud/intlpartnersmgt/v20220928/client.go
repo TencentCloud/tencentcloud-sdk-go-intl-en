@@ -163,6 +163,89 @@ func (c *Client) AllocateCustomerCreditWithContext(ctx context.Context, request 
     return
 }
 
+func NewApproveClientApplyRequest() (request *ApproveClientApplyRequest) {
+    request = &ApproveClientApplyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "ApproveClientApply")
+    
+    
+    return
+}
+
+func NewApproveClientApplyResponse() (response *ApproveClientApplyResponse) {
+    response = &ApproveClientApplyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ApproveClientApply
+// Description: This API is used by resellers to review applications to become sub-customers. Note: This API is used to apply for the allowlist. If needed, please contact your business representative.
+//
+// 
+//
+// Callable roles: Reseller, Distributer, Second-level reseller
+//
+// error code that may be returned:
+//  FAILEDOPERATION_BINDORGANIZATIONACCOUNT = "FailedOperation.BindOrganizationAccount"
+//  FAILEDOPERATION_CLIENTBALANCEISLESSOREQUALZERO = "FailedOperation.ClientBalanceIsLessOrEqualZero"
+//  FAILEDOPERATION_CLIENTBUYSP = "FailedOperation.ClientBuySP"
+//  FAILEDOPERATION_CLIENTCREATESHAREUNIT = "FailedOperation.ClientCreateShareUnit"
+//  FAILEDOPERATION_CLIENTJOINSHAREUNIT = "FailedOperation.ClientJoinShareUnit"
+//  FAILEDOPERATION_CLIENTNOTAPPLY = "FailedOperation.ClientNotApply"
+//  FAILEDOPERATION_EXCEEDMAXBINDCOUNT = "FailedOperation.ExceedMaxBindCount"
+//  FAILEDOPERATION_UINALREADYKA = "FailedOperation.UinAlreadyKA"
+//  FAILEDOPERATION_UINNOTRESELLER = "FailedOperation.UinNotReseller"
+//  INVALIDPARAMETERVALUE_INVALIDUIN = "InvalidParameterValue.InvalidUin"
+//  INVALIDPARAMETERVALUE_UINALREADYCLIENT = "InvalidParameterValue.UinAlreadyClient"
+//  INVALIDPARAMETERVALUE_UINISSUBACCOUNT = "InvalidParameterValue.UinIsSubAccount"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) ApproveClientApply(request *ApproveClientApplyRequest) (response *ApproveClientApplyResponse, err error) {
+    return c.ApproveClientApplyWithContext(context.Background(), request)
+}
+
+// ApproveClientApply
+// Description: This API is used by resellers to review applications to become sub-customers. Note: This API is used to apply for the allowlist. If needed, please contact your business representative.
+//
+// 
+//
+// Callable roles: Reseller, Distributer, Second-level reseller
+//
+// error code that may be returned:
+//  FAILEDOPERATION_BINDORGANIZATIONACCOUNT = "FailedOperation.BindOrganizationAccount"
+//  FAILEDOPERATION_CLIENTBALANCEISLESSOREQUALZERO = "FailedOperation.ClientBalanceIsLessOrEqualZero"
+//  FAILEDOPERATION_CLIENTBUYSP = "FailedOperation.ClientBuySP"
+//  FAILEDOPERATION_CLIENTCREATESHAREUNIT = "FailedOperation.ClientCreateShareUnit"
+//  FAILEDOPERATION_CLIENTJOINSHAREUNIT = "FailedOperation.ClientJoinShareUnit"
+//  FAILEDOPERATION_CLIENTNOTAPPLY = "FailedOperation.ClientNotApply"
+//  FAILEDOPERATION_EXCEEDMAXBINDCOUNT = "FailedOperation.ExceedMaxBindCount"
+//  FAILEDOPERATION_UINALREADYKA = "FailedOperation.UinAlreadyKA"
+//  FAILEDOPERATION_UINNOTRESELLER = "FailedOperation.UinNotReseller"
+//  INVALIDPARAMETERVALUE_INVALIDUIN = "InvalidParameterValue.InvalidUin"
+//  INVALIDPARAMETERVALUE_UINALREADYCLIENT = "InvalidParameterValue.UinAlreadyClient"
+//  INVALIDPARAMETERVALUE_UINISSUBACCOUNT = "InvalidParameterValue.UinIsSubAccount"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) ApproveClientApplyWithContext(ctx context.Context, request *ApproveClientApplyRequest) (response *ApproveClientApplyResponse, err error) {
+    if request == nil {
+        request = NewApproveClientApplyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApproveClientApply require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewApproveClientApplyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAccountRequest() (request *CreateAccountRequest) {
     request = &CreateAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1486,6 +1569,63 @@ func (c *Client) QueryPartnerCreditWithContext(ctx context.Context, request *Que
     return
 }
 
+func NewQueryPendingClientsV2Request() (request *QueryPendingClientsV2Request) {
+    request = &QueryPendingClientsV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "QueryPendingClientsV2")
+    
+    
+    return
+}
+
+func NewQueryPendingClientsV2Response() (response *QueryPendingClientsV2Response) {
+    response = &QueryPendingClientsV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryPendingClientsV2
+// Description: This API is used by resellers to query the list of sub-customers pending review. Note: This API is used to apply for the allowlist. If needed, please contact your business representative.
+//
+// 
+//
+// Callable roles: Reseller, Distributer, Second-level reseller
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) QueryPendingClientsV2(request *QueryPendingClientsV2Request) (response *QueryPendingClientsV2Response, err error) {
+    return c.QueryPendingClientsV2WithContext(context.Background(), request)
+}
+
+// QueryPendingClientsV2
+// Description: This API is used by resellers to query the list of sub-customers pending review. Note: This API is used to apply for the allowlist. If needed, please contact your business representative.
+//
+// 
+//
+// Callable roles: Reseller, Distributer, Second-level reseller
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) QueryPendingClientsV2WithContext(ctx context.Context, request *QueryPendingClientsV2Request) (response *QueryPendingClientsV2Response, err error) {
+    if request == nil {
+        request = NewQueryPendingClientsV2Request()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryPendingClientsV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryPendingClientsV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryPolicyProductListByCodeRequest() (request *QueryPolicyProductListByCodeRequest) {
     request = &QueryPolicyProductListByCodeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1509,9 +1649,7 @@ func NewQueryPolicyProductListByCodeResponse() (response *QueryPolicyProductList
 // This API is used to query the product list information within the specified policy range. To call this API, contact your account manager to add it to the allowlist.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
-//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryPolicyProductListByCode(request *QueryPolicyProductListByCodeRequest) (response *QueryPolicyProductListByCodeResponse, err error) {
     return c.QueryPolicyProductListByCodeWithContext(context.Background(), request)
 }
@@ -1520,9 +1658,7 @@ func (c *Client) QueryPolicyProductListByCode(request *QueryPolicyProductListByC
 // This API is used to query the product list information within the specified policy range. To call this API, contact your account manager to add it to the allowlist.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
-//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryPolicyProductListByCodeWithContext(ctx context.Context, request *QueryPolicyProductListByCodeRequest) (response *QueryPolicyProductListByCodeResponse, err error) {
     if request == nil {
         request = NewQueryPolicyProductListByCodeRequest()
@@ -1562,9 +1698,7 @@ func NewQueryVoucherAmountByUinResponse() (response *QueryVoucherAmountByUinResp
 // This API is used to query the voucher quota based on the customer UIN.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
-//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherAmountByUin(request *QueryVoucherAmountByUinRequest) (response *QueryVoucherAmountByUinResponse, err error) {
     return c.QueryVoucherAmountByUinWithContext(context.Background(), request)
 }
@@ -1573,9 +1707,7 @@ func (c *Client) QueryVoucherAmountByUin(request *QueryVoucherAmountByUinRequest
 // This API is used to query the voucher quota based on the customer UIN.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
-//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherAmountByUinWithContext(ctx context.Context, request *QueryVoucherAmountByUinRequest) (response *QueryVoucherAmountByUinResponse, err error) {
     if request == nil {
         request = NewQueryVoucherAmountByUinRequest()
@@ -1615,9 +1747,7 @@ func NewQueryVoucherListByUinResponse() (response *QueryVoucherListByUinResponse
 // This API is used to query the voucher list based on the customer UIN.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
-//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherListByUin(request *QueryVoucherListByUinRequest) (response *QueryVoucherListByUinResponse, err error) {
     return c.QueryVoucherListByUinWithContext(context.Background(), request)
 }
@@ -1626,9 +1756,7 @@ func (c *Client) QueryVoucherListByUin(request *QueryVoucherListByUinRequest) (r
 // This API is used to query the voucher list based on the customer UIN.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
-//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherListByUinWithContext(ctx context.Context, request *QueryVoucherListByUinRequest) (response *QueryVoucherListByUinResponse, err error) {
     if request == nil {
         request = NewQueryVoucherListByUinRequest()
@@ -1668,9 +1796,7 @@ func NewQueryVoucherPoolResponse() (response *QueryVoucherPoolResponse) {
 // This API is used to query the voucher quota pool.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
-//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherPool(request *QueryVoucherPoolRequest) (response *QueryVoucherPoolResponse, err error) {
     return c.QueryVoucherPoolWithContext(context.Background(), request)
 }
@@ -1679,9 +1805,7 @@ func (c *Client) QueryVoucherPool(request *QueryVoucherPoolRequest) (response *Q
 // This API is used to query the voucher quota pool.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
-//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherPoolWithContext(ctx context.Context, request *QueryVoucherPoolRequest) (response *QueryVoucherPoolResponse, err error) {
     if request == nil {
         request = NewQueryVoucherPoolRequest()
