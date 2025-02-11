@@ -1406,6 +1406,63 @@ func (c *Client) QueryCreditQuotaWithContext(ctx context.Context, request *Query
     return
 }
 
+func NewQueryCustomerBillingQuotaRequest() (request *QueryCustomerBillingQuotaRequest) {
+    request = &QueryCustomerBillingQuotaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "QueryCustomerBillingQuota")
+    
+    
+    return
+}
+
+func NewQueryCustomerBillingQuotaResponse() (response *QueryCustomerBillingQuotaResponse) {
+    response = &QueryCustomerBillingQuotaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryCustomerBillingQuota
+// Description: This API is used for a sub-customer to real-time query its own total credit and remaining credit in USD.
+//
+// 
+//
+// Callable roles: Sub-customer
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) QueryCustomerBillingQuota(request *QueryCustomerBillingQuotaRequest) (response *QueryCustomerBillingQuotaResponse, err error) {
+    return c.QueryCustomerBillingQuotaWithContext(context.Background(), request)
+}
+
+// QueryCustomerBillingQuota
+// Description: This API is used for a sub-customer to real-time query its own total credit and remaining credit in USD.
+//
+// 
+//
+// Callable roles: Sub-customer
+//
+// error code that may be returned:
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) QueryCustomerBillingQuotaWithContext(ctx context.Context, request *QueryCustomerBillingQuotaRequest) (response *QueryCustomerBillingQuotaResponse, err error) {
+    if request == nil {
+        request = NewQueryCustomerBillingQuotaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryCustomerBillingQuota require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryCustomerBillingQuotaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryCustomersCreditRequest() (request *QueryCustomersCreditRequest) {
     request = &QueryCustomersCreditRequest{
         BaseRequest: &tchttp.BaseRequest{},
