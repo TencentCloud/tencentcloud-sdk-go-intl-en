@@ -387,6 +387,67 @@ func (c *Client) CreateStreamPackageLinearAssemblyProgramWithContext(ctx context
     return
 }
 
+func NewCreateStreamPackageSSAIChannelRequest() (request *CreateStreamPackageSSAIChannelRequest) {
+    request = &CreateStreamPackageSSAIChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "CreateStreamPackageSSAIChannel")
+    
+    
+    return
+}
+
+func NewCreateStreamPackageSSAIChannelResponse() (response *CreateStreamPackageSSAIChannelResponse) {
+    response = &CreateStreamPackageSSAIChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateStreamPackageSSAIChannel
+// CreateStreamPackageSSAIChannel
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
+func (c *Client) CreateStreamPackageSSAIChannel(request *CreateStreamPackageSSAIChannelRequest) (response *CreateStreamPackageSSAIChannelResponse, err error) {
+    return c.CreateStreamPackageSSAIChannelWithContext(context.Background(), request)
+}
+
+// CreateStreamPackageSSAIChannel
+// CreateStreamPackageSSAIChannel
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
+func (c *Client) CreateStreamPackageSSAIChannelWithContext(ctx context.Context, request *CreateStreamPackageSSAIChannelRequest) (response *CreateStreamPackageSSAIChannelResponse, err error) {
+    if request == nil {
+        request = NewCreateStreamPackageSSAIChannelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateStreamPackageSSAIChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateStreamPackageSSAIChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateStreamPackageSourceRequest() (request *CreateStreamPackageSourceRequest) {
     request = &CreateStreamPackageSourceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -941,6 +1002,67 @@ func (c *Client) DeleteStreamPackageLinearAssemblyProgramsWithContext(ctx contex
     request.SetContext(ctx)
     
     response = NewDeleteStreamPackageLinearAssemblyProgramsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteStreamPackageSSAIChannelRequest() (request *DeleteStreamPackageSSAIChannelRequest) {
+    request = &DeleteStreamPackageSSAIChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DeleteStreamPackageSSAIChannel")
+    
+    
+    return
+}
+
+func NewDeleteStreamPackageSSAIChannelResponse() (response *DeleteStreamPackageSSAIChannelResponse) {
+    response = &DeleteStreamPackageSSAIChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteStreamPackageSSAIChannel
+// DeleteStreamPackageSSAIChannel
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
+func (c *Client) DeleteStreamPackageSSAIChannel(request *DeleteStreamPackageSSAIChannelRequest) (response *DeleteStreamPackageSSAIChannelResponse, err error) {
+    return c.DeleteStreamPackageSSAIChannelWithContext(context.Background(), request)
+}
+
+// DeleteStreamPackageSSAIChannel
+// DeleteStreamPackageSSAIChannel
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
+func (c *Client) DeleteStreamPackageSSAIChannelWithContext(ctx context.Context, request *DeleteStreamPackageSSAIChannelRequest) (response *DeleteStreamPackageSSAIChannelResponse, err error) {
+    if request == nil {
+        request = NewDeleteStreamPackageSSAIChannelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteStreamPackageSSAIChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteStreamPackageSSAIChannelResponse()
     err = c.Send(request, response)
     return
 }
@@ -1619,6 +1741,128 @@ func (c *Client) DescribeStreamPackageLinearAssemblyProgramsWithContext(ctx cont
     return
 }
 
+func NewDescribeStreamPackageSSAIChannelRequest() (request *DescribeStreamPackageSSAIChannelRequest) {
+    request = &DescribeStreamPackageSSAIChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageSSAIChannel")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageSSAIChannelResponse() (response *DescribeStreamPackageSSAIChannelResponse) {
+    response = &DescribeStreamPackageSSAIChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageSSAIChannel
+// DescribeStreamPackageSSAIChannel
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
+func (c *Client) DescribeStreamPackageSSAIChannel(request *DescribeStreamPackageSSAIChannelRequest) (response *DescribeStreamPackageSSAIChannelResponse, err error) {
+    return c.DescribeStreamPackageSSAIChannelWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageSSAIChannel
+// DescribeStreamPackageSSAIChannel
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
+func (c *Client) DescribeStreamPackageSSAIChannelWithContext(ctx context.Context, request *DescribeStreamPackageSSAIChannelRequest) (response *DescribeStreamPackageSSAIChannelResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageSSAIChannelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageSSAIChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageSSAIChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStreamPackageSSAIChannelsRequest() (request *DescribeStreamPackageSSAIChannelsRequest) {
+    request = &DescribeStreamPackageSSAIChannelsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeStreamPackageSSAIChannels")
+    
+    
+    return
+}
+
+func NewDescribeStreamPackageSSAIChannelsResponse() (response *DescribeStreamPackageSSAIChannelsResponse) {
+    response = &DescribeStreamPackageSSAIChannelsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStreamPackageSSAIChannels
+// DescribeStreamPackageSSAIChannels
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
+func (c *Client) DescribeStreamPackageSSAIChannels(request *DescribeStreamPackageSSAIChannelsRequest) (response *DescribeStreamPackageSSAIChannelsResponse, err error) {
+    return c.DescribeStreamPackageSSAIChannelsWithContext(context.Background(), request)
+}
+
+// DescribeStreamPackageSSAIChannels
+// DescribeStreamPackageSSAIChannels
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
+func (c *Client) DescribeStreamPackageSSAIChannelsWithContext(ctx context.Context, request *DescribeStreamPackageSSAIChannelsRequest) (response *DescribeStreamPackageSSAIChannelsResponse, err error) {
+    if request == nil {
+        request = NewDescribeStreamPackageSSAIChannelsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStreamPackageSSAIChannels require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStreamPackageSSAIChannelsResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeStreamPackageSourceRequest() (request *DescribeStreamPackageSourceRequest) {
     request = &DescribeStreamPackageSourceRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2236,6 +2480,67 @@ func (c *Client) ModifyStreamPackageLinearAssemblyProgramWithContext(ctx context
     request.SetContext(ctx)
     
     response = NewModifyStreamPackageLinearAssemblyProgramResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyStreamPackageSSAIChannelRequest() (request *ModifyStreamPackageSSAIChannelRequest) {
+    request = &ModifyStreamPackageSSAIChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "ModifyStreamPackageSSAIChannel")
+    
+    
+    return
+}
+
+func NewModifyStreamPackageSSAIChannelResponse() (response *ModifyStreamPackageSSAIChannelResponse) {
+    response = &ModifyStreamPackageSSAIChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyStreamPackageSSAIChannel
+// ModifyStreamPackageSSAIChannel
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
+func (c *Client) ModifyStreamPackageSSAIChannel(request *ModifyStreamPackageSSAIChannelRequest) (response *ModifyStreamPackageSSAIChannelResponse, err error) {
+    return c.ModifyStreamPackageSSAIChannelWithContext(context.Background(), request)
+}
+
+// ModifyStreamPackageSSAIChannel
+// ModifyStreamPackageSSAIChannel
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_AUTHINFO = "InvalidParameter.AuthInfo"
+//  INVALIDPARAMETER_EXCEEDEDQUANTITYLIMIT = "InvalidParameter.ExceededQuantityLimit"
+//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
+//  INVALIDPARAMETER_NAME = "InvalidParameter.Name"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+//  INVALIDPARAMETER_SSAIINFO = "InvalidParameter.SSAIInfo"
+func (c *Client) ModifyStreamPackageSSAIChannelWithContext(ctx context.Context, request *ModifyStreamPackageSSAIChannelRequest) (response *ModifyStreamPackageSSAIChannelResponse, err error) {
+    if request == nil {
+        request = NewModifyStreamPackageSSAIChannelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyStreamPackageSSAIChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyStreamPackageSSAIChannelResponse()
     err = c.Send(request, response)
     return
 }
