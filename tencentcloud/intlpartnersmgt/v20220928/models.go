@@ -473,7 +473,7 @@ type CreateAccountRequestParams struct {
 	// Extension field, which is left empty by default.
 	Extended *string `json:"Extended,omitnil,omitempty" name:"Extended"`
 
-	// VerifyCode. This field is required. 
+	// VerifyCode. This parameter is required. 
 	// Use the [SendVerifyCode API](https://www.tencentcloud.com/document/product/1085/65907) to obtain the verifycode.The SendVerifyCode API sends a 6-digit verifycode to your specified mobile number via SMS. After receiving it, you need to pass it along with other parameters.
 	VerifyCode *string `json:"VerifyCode,omitnil,omitempty" name:"VerifyCode"`
 }
@@ -512,7 +512,7 @@ type CreateAccountRequest struct {
 	// Extension field, which is left empty by default.
 	Extended *string `json:"Extended,omitnil,omitempty" name:"Extended"`
 
-	// VerifyCode. This field is required. 
+	// VerifyCode. This parameter is required. 
 	// Use the [SendVerifyCode API](https://www.tencentcloud.com/document/product/1085/65907) to obtain the verifycode.The SendVerifyCode API sends a 6-digit verifycode to your specified mobile number via SMS. After receiving it, you need to pass it along with other parameters.
 	VerifyCode *string `json:"VerifyCode,omitnil,omitempty" name:"VerifyCode"`
 }

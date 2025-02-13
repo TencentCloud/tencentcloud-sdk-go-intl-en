@@ -65,7 +65,7 @@ func NewAbortAgentCruiseDialingCampaignResponse() (response *AbortAgentCruiseDia
 }
 
 // AbortAgentCruiseDialingCampaign
-// If you want to stop running agent's individual auto task, then call AbortAgentCruiseDialingCampaign to terminate.
+// Stop Agent Cruise-style Outbound Call Task
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -75,7 +75,7 @@ func (c *Client) AbortAgentCruiseDialingCampaign(request *AbortAgentCruiseDialin
 }
 
 // AbortAgentCruiseDialingCampaign
-// If you want to stop running agent's individual auto task, then call AbortAgentCruiseDialingCampaign to terminate.
+// Stop Agent Cruise-style Outbound Call Task
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -116,7 +116,7 @@ func NewAbortPredictiveDialingCampaignResponse() (response *AbortPredictiveDiali
 }
 
 // AbortPredictiveDialingCampaign
-// This API is used to pause predictive dialing campaign
+// This API is used to pause the predictive outbound call task.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -126,7 +126,7 @@ func (c *Client) AbortPredictiveDialingCampaign(request *AbortPredictiveDialingC
 }
 
 // AbortPredictiveDialingCampaign
-// This API is used to pause predictive dialing campaign
+// This API is used to pause the predictive outbound call task.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -167,7 +167,7 @@ func NewBindNumberCallOutSkillGroupResponse() (response *BindNumberCallOutSkillG
 }
 
 // BindNumberCallOutSkillGroup
-// This API is used to assign outbound skill group(s) to your number
+// This API is used to bind outbound skill group of number.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -176,7 +176,7 @@ func (c *Client) BindNumberCallOutSkillGroup(request *BindNumberCallOutSkillGrou
 }
 
 // BindNumberCallOutSkillGroup
-// This API is used to assign outbound skill group(s) to your number
+// This API is used to bind outbound skill group of number.
 //
 // error code that may be returned:
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
@@ -216,7 +216,7 @@ func NewBindStaffSkillGroupListResponse() (response *BindStaffSkillGroupListResp
 }
 
 // BindStaffSkillGroupList
-// This API is used to assign an agent to skill group
+// This API is used to bind the agent's skill group.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -228,7 +228,7 @@ func (c *Client) BindStaffSkillGroupList(request *BindStaffSkillGroupListRequest
 }
 
 // BindStaffSkillGroupList
-// This API is used to assign an agent to skill group
+// This API is used to bind the agent's skill group.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -247,6 +247,87 @@ func (c *Client) BindStaffSkillGroupListWithContext(ctx context.Context, request
     request.SetContext(ctx)
     
     response = NewBindStaffSkillGroupListResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAIAgentCallRequest() (request *CreateAIAgentCallRequest) {
+    request = &CreateAIAgentCallRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "CreateAIAgentCall")
+    
+    
+    return
+}
+
+func NewCreateAIAgentCallResponse() (response *CreateAIAgentCallResponse) {
+    response = &CreateAIAgentCallResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAIAgentCall
+// This API is used to initiate outbound calls using an AI model, limited to owned phone numbers only. Currently, a limited-time free trial of Advanced Agents is available.
+//
+// 
+//
+// Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://intl.cloud.tencent.com/document/product/679/112100?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
+//  FAILEDOPERATION_CALLEEISBLACKUSER = "FailedOperation.CalleeIsBlackUser"
+//  FAILEDOPERATION_CALLEROVERFREQUENCY = "FailedOperation.CallerOverFrequency"
+//  FAILEDOPERATION_CALLOUTRULEBLINDAREA = "FailedOperation.CalloutRuleBlindArea"
+//  FAILEDOPERATION_CALLOUTRULEMAXCALLCOUNTCALLEEINTERVALTIME = "FailedOperation.CalloutRuleMaxCallCountCalleeIntervalTime"
+//  FAILEDOPERATION_CALLOUTRULEMAXCALLCOUNTCALLEEPERDAYAPPID = "FailedOperation.CalloutRuleMaxCallCountCalleePerDayAppID"
+//  FAILEDOPERATION_CALLOUTRULENOTWORKTIME = "FailedOperation.CalloutRuleNotWorkTime"
+//  FAILEDOPERATION_NOCALLOUTNUMBER = "FailedOperation.NoCallOutNumber"
+//  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  LIMITEXCEEDED_BASEPACKAGEEXPIRED = "LimitExceeded.BasePackageExpired"
+func (c *Client) CreateAIAgentCall(request *CreateAIAgentCallRequest) (response *CreateAIAgentCallResponse, err error) {
+    return c.CreateAIAgentCallWithContext(context.Background(), request)
+}
+
+// CreateAIAgentCall
+// This API is used to initiate outbound calls using an AI model, limited to owned phone numbers only. Currently, a limited-time free trial of Advanced Agents is available.
+//
+// 
+//
+// Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://intl.cloud.tencent.com/document/product/679/112100?from_cn_redirect=1).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
+//  FAILEDOPERATION_CALLEEISBLACKUSER = "FailedOperation.CalleeIsBlackUser"
+//  FAILEDOPERATION_CALLEROVERFREQUENCY = "FailedOperation.CallerOverFrequency"
+//  FAILEDOPERATION_CALLOUTRULEBLINDAREA = "FailedOperation.CalloutRuleBlindArea"
+//  FAILEDOPERATION_CALLOUTRULEMAXCALLCOUNTCALLEEINTERVALTIME = "FailedOperation.CalloutRuleMaxCallCountCalleeIntervalTime"
+//  FAILEDOPERATION_CALLOUTRULEMAXCALLCOUNTCALLEEPERDAYAPPID = "FailedOperation.CalloutRuleMaxCallCountCalleePerDayAppID"
+//  FAILEDOPERATION_CALLOUTRULENOTWORKTIME = "FailedOperation.CalloutRuleNotWorkTime"
+//  FAILEDOPERATION_NOCALLOUTNUMBER = "FailedOperation.NoCallOutNumber"
+//  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  LIMITEXCEEDED_BASEPACKAGEEXPIRED = "LimitExceeded.BasePackageExpired"
+func (c *Client) CreateAIAgentCallWithContext(ctx context.Context, request *CreateAIAgentCallRequest) (response *CreateAIAgentCallResponse, err error) {
+    if request == nil {
+        request = NewCreateAIAgentCallRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAIAgentCall require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAIAgentCallResponse()
     err = c.Send(request, response)
     return
 }
@@ -425,7 +506,7 @@ func NewCreateAgentCruiseDialingCampaignResponse() (response *CreateAgentCruiseD
 }
 
 // CreateAgentCruiseDialingCampaign
-// This document shows how to call API to create an individual auto dialing campaign for agent
+// Agent Cruise-style Outbound Call.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -437,7 +518,7 @@ func (c *Client) CreateAgentCruiseDialingCampaign(request *CreateAgentCruiseDial
 }
 
 // CreateAgentCruiseDialingCampaign
-// This document shows how to call API to create an individual auto dialing campaign for agent
+// Agent Cruise-style Outbound Call.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -761,6 +842,73 @@ func (c *Client) CreateIVRSessionWithContext(ctx context.Context, request *Creat
     request.SetContext(ctx)
     
     response = NewCreateIVRSessionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateOwnNumberApplyRequest() (request *CreateOwnNumberApplyRequest) {
+    request = &CreateOwnNumberApplyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "CreateOwnNumberApply")
+    
+    
+    return
+}
+
+func NewCreateOwnNumberApplyResponse() (response *CreateOwnNumberApplyResponse) {
+    response = &CreateOwnNumberApplyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateOwnNumberApply
+// Create customer's own number access review
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTEXIST = "InvalidParameter.InstanceNotExist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_APPLYIDNOTEXIST = "InvalidParameterValue.ApplyIDNotExist"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_PHONENUMINVALID = "InvalidParameterValue.PhoneNumInvalid"
+//  INVALIDPARAMETERVALUE_WAITINGAPPROVALOVERFLOW = "InvalidParameterValue.WaitingApprovalOverflow"
+func (c *Client) CreateOwnNumberApply(request *CreateOwnNumberApplyRequest) (response *CreateOwnNumberApplyResponse, err error) {
+    return c.CreateOwnNumberApplyWithContext(context.Background(), request)
+}
+
+// CreateOwnNumberApply
+// Create customer's own number access review
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTEXIST = "InvalidParameter.InstanceNotExist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_APPLYIDNOTEXIST = "InvalidParameterValue.ApplyIDNotExist"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_PHONENUMINVALID = "InvalidParameterValue.PhoneNumInvalid"
+//  INVALIDPARAMETERVALUE_WAITINGAPPROVALOVERFLOW = "InvalidParameterValue.WaitingApprovalOverflow"
+func (c *Client) CreateOwnNumberApplyWithContext(ctx context.Context, request *CreateOwnNumberApplyRequest) (response *CreateOwnNumberApplyResponse, err error) {
+    if request == nil {
+        request = NewCreateOwnNumberApplyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateOwnNumberApply require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateOwnNumberApplyResponse()
     err = c.Send(request, response)
     return
 }
@@ -1101,6 +1249,59 @@ func (c *Client) DeleteStaffWithContext(ctx context.Context, request *DeleteStaf
     request.SetContext(ctx)
     
     response = NewDeleteStaffResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAICallExtractResultRequest() (request *DescribeAICallExtractResultRequest) {
+    request = &DescribeAICallExtractResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "DescribeAICallExtractResult")
+    
+    
+    return
+}
+
+func NewDescribeAICallExtractResultResponse() (response *DescribeAICallExtractResultResponse) {
+    response = &DescribeAICallExtractResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAICallExtractResult
+// Obtain AI call content extraction result
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeAICallExtractResult(request *DescribeAICallExtractResultRequest) (response *DescribeAICallExtractResultResponse, err error) {
+    return c.DescribeAICallExtractResultWithContext(context.Background(), request)
+}
+
+// DescribeAICallExtractResult
+// Obtain AI call content extraction result
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) DescribeAICallExtractResultWithContext(ctx context.Context, request *DescribeAICallExtractResultRequest) (response *DescribeAICallExtractResultResponse, err error) {
+    if request == nil {
+        request = NewDescribeAICallExtractResultRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAICallExtractResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAICallExtractResultResponse()
     err = c.Send(request, response)
     return
 }
@@ -2036,7 +2237,7 @@ func NewDescribeTelCallInfoResponse() (response *DescribeTelCallInfoResponse) {
 }
 
 // DescribeTelCallInfo
-// This API is used to access call detail records by application
+// This API is used to access telephone consumption statistics by instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DUPLICATEDACCOUNT = "FailedOperation.DuplicatedAccount"
@@ -2050,7 +2251,7 @@ func (c *Client) DescribeTelCallInfo(request *DescribeTelCallInfoRequest) (respo
 }
 
 // DescribeTelCallInfo
-// This API is used to access call detail records by application
+// This API is used to access telephone consumption statistics by instance.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DUPLICATEDACCOUNT = "FailedOperation.DuplicatedAccount"
@@ -2128,6 +2329,63 @@ func (c *Client) DescribeTelCdrWithContext(ctx context.Context, request *Describ
     request.SetContext(ctx)
     
     response = NewDescribeTelCdrResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeTelRecordAsrRequest() (request *DescribeTelRecordAsrRequest) {
+    request = &DescribeTelRecordAsrRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "DescribeTelRecordAsr")
+    
+    
+    return
+}
+
+func NewDescribeTelRecordAsrResponse() (response *DescribeTelRecordAsrResponse) {
+    response = &DescribeTelRecordAsrResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeTelRecordAsr
+// Pull conversation recording for text information
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_INSTANCENOTEXIST = "InvalidParameter.InstanceNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeTelRecordAsr(request *DescribeTelRecordAsrRequest) (response *DescribeTelRecordAsrResponse, err error) {
+    return c.DescribeTelRecordAsrWithContext(context.Background(), request)
+}
+
+// DescribeTelRecordAsr
+// Pull conversation recording for text information
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_INSTANCENOTEXIST = "InvalidParameter.InstanceNotExist"
+//  MISSINGPARAMETER = "MissingParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeTelRecordAsrWithContext(ctx context.Context, request *DescribeTelRecordAsrRequest) (response *DescribeTelRecordAsrResponse, err error) {
+    if request == nil {
+        request = NewDescribeTelRecordAsrRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeTelRecordAsr require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeTelRecordAsrResponse()
     err = c.Send(request, response)
     return
 }
@@ -2364,6 +2622,73 @@ func (c *Client) ModifyExtensionWithContext(ctx context.Context, request *Modify
     return
 }
 
+func NewModifyOwnNumberApplyRequest() (request *ModifyOwnNumberApplyRequest) {
+    request = &ModifyOwnNumberApplyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "ModifyOwnNumberApply")
+    
+    
+    return
+}
+
+func NewModifyOwnNumberApplyResponse() (response *ModifyOwnNumberApplyResponse) {
+    response = &ModifyOwnNumberApplyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyOwnNumberApply
+// Modify customer's own number approval form
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTEXIST = "InvalidParameter.InstanceNotExist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_APPLYIDNOTEXIST = "InvalidParameterValue.ApplyIDNotExist"
+//  INVALIDPARAMETERVALUE_ERRORAPPLYSTATUS = "InvalidParameterValue.ErrorApplyStatus"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_PHONENUMINVALID = "InvalidParameterValue.PhoneNumInvalid"
+func (c *Client) ModifyOwnNumberApply(request *ModifyOwnNumberApplyRequest) (response *ModifyOwnNumberApplyResponse, err error) {
+    return c.ModifyOwnNumberApplyWithContext(context.Background(), request)
+}
+
+// ModifyOwnNumberApply
+// Modify customer's own number approval form
+//
+// error code that may be returned:
+//  FAILEDOPERATION_PERMISSIONDENIED = "FailedOperation.PermissionDenied"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_INSTANCENOTEXIST = "InvalidParameter.InstanceNotExist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_APPLYIDNOTEXIST = "InvalidParameterValue.ApplyIDNotExist"
+//  INVALIDPARAMETERVALUE_ERRORAPPLYSTATUS = "InvalidParameterValue.ErrorApplyStatus"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_PHONENUMINVALID = "InvalidParameterValue.PhoneNumInvalid"
+func (c *Client) ModifyOwnNumberApplyWithContext(ctx context.Context, request *ModifyOwnNumberApplyRequest) (response *ModifyOwnNumberApplyResponse, err error) {
+    if request == nil {
+        request = NewModifyOwnNumberApplyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyOwnNumberApply require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyOwnNumberApplyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyStaffRequest() (request *ModifyStaffRequest) {
     request = &ModifyStaffRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2384,7 +2709,7 @@ func NewModifyStaffResponse() (response *ModifyStaffResponse) {
 }
 
 // ModifyStaff
-// This API is used to modify  customer service / agent account.
+// This API is used to modify the customer service account.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -2400,7 +2725,7 @@ func (c *Client) ModifyStaff(request *ModifyStaffRequest) (response *ModifyStaff
 }
 
 // ModifyStaff
-// This API is used to modify  customer service / agent account.
+// This API is used to modify the customer service account.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"

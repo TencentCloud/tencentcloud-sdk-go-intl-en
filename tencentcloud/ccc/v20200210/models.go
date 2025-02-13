@@ -20,33 +20,86 @@ import (
     "github.com/tencentcloud/tencentcloud-sdk-go-intl-en/tencentcloud/common/json"
 )
 
-type AITransferItem struct {
+type AICallExtractConfigElement struct {
+	// Configuration item type, including.
+	// Text.
+	// Selector option.
+	// Boolean value.
+	// Number.
+	InfoType *string `json:"InfoType,omitnil,omitempty" name:"InfoType"`
 
+	// Configuration item name, duplicat.
+	InfoName *string `json:"InfoName,omitnil,omitempty" name:"InfoName"`
+
+	// Specific content of the configuration item.
+	InfoContent *string `json:"InfoContent,omitnil,omitempty" name:"InfoContent"`
+
+	// Example of extracted content from the configuration item.
+	Examples []*string `json:"Examples,omitnil,omitempty" name:"Examples"`
+
+	// When infotype is selector, this field needs to be configured.
+	Choices []*string `json:"Choices,omitnil,omitempty" name:"Choices"`
+}
+
+type AICallExtractResultElement struct {
+	// Type of extracted information.
+	// Text.
+	// Selector options.
+	// Boolean value.
+	// Number.
+	InfoType *string `json:"InfoType,omitnil,omitempty" name:"InfoType"`
+
+	// Name of the extracted information.
+	InfoName *string `json:"InfoName,omitnil,omitempty" name:"InfoName"`
+
+	// Specific description of the extracted information.
+	InfoContent *string `json:"InfoContent,omitnil,omitempty" name:"InfoContent"`
+
+	// Specific result of the extracted information.
+	Result *AICallExtractResultInfo `json:"Result,omitnil,omitempty" name:"Result"`
+}
+
+type AICallExtractResultInfo struct {
+	// The extracted type is text.
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// The extracted type is option.
+	Chosen []*string `json:"Chosen,omitnil,omitempty" name:"Chosen"`
+
+	// The extracted type is a boolean value.
+	Boolean *bool `json:"Boolean,omitnil,omitempty" name:"Boolean"`
+
+	// The extracted type is a number.
+	Number *float64 `json:"Number,omitnil,omitempty" name:"Number"`
+}
+
+type AITransferItem struct {
+	// Name of the function calling for transfer to human.
 	TransferFunctionName *string `json:"TransferFunctionName,omitnil,omitempty" name:"TransferFunctionName"`
 
-
+	// Takes effect when transferfunctionenable is true; the description of transfer_to_human function calling defaults to "transfer to human when the user has to transfer to human (like says transfer to human) or you are instructed to do so.".
 	TransferFunctionDesc *string `json:"TransferFunctionDesc,omitnil,omitempty" name:"TransferFunctionDesc"`
 
-
+	// Skill group id for transferring to human agent.
 	TransferSkillGroupId *uint64 `json:"TransferSkillGroupId,omitnil,omitempty" name:"TransferSkillGroupId"`
 }
 
 // Predefined struct for user
 type AbortAgentCruiseDialingCampaignRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// <Task id>.
 	CampaignId *uint64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
 type AbortAgentCruiseDialingCampaignRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// <Task id>.
 	CampaignId *uint64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
@@ -94,20 +147,20 @@ func (r *AbortAgentCruiseDialingCampaignResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type AbortPredictiveDialingCampaignRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// Task id.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
 type AbortPredictiveDialingCampaignRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// Task id.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
@@ -153,21 +206,36 @@ func (r *AbortPredictiveDialingCampaignResponse) FromJsonString(s string) error 
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type AsrData struct {
+	// User side.
+	User *string `json:"User,omitnil,omitempty" name:"User"`
+
+	// Message content.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Timestamp.
+	//
+	// Deprecated: Timestamp is deprecated.
+	Timestamp *int64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
+
+	// Sentence start time, unix millisecond timestamp.
+	Start *int64 `json:"Start,omitnil,omitempty" name:"Start"`
+
+	// Sentence end time, unix millisecond timestamp.
+	End *int64 `json:"End,omitnil,omitempty" name:"End"`
+}
+
 type AudioFileInfo struct {
-	// File ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// File id.
 	FileId *uint64 `json:"FileId,omitnil,omitempty" name:"FileId"`
 
-	// File alias
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// File alias.
 	CustomFileName *string `json:"CustomFileName,omitnil,omitempty" name:"CustomFileName"`
 
-	// Filename
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Filename.
 	AudioFileName *string `json:"AudioFileName,omitnil,omitempty" name:"AudioFileName"`
 
-	// Review status, 0-Not reviewed, 1-Approved, 2-Rejected
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Review status: 0 - unreviewed, 1 - approved, 2 - rejected.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
@@ -175,18 +243,18 @@ type AutoCalloutTaskCalleeInfo struct {
 	// Called number.
 	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
 
-	// Call status 0 - Initial, 1 - Answered, 2 - Unanswered, 3 - Calling, 4 - Pending Retry.
+	// Call status 0 - initial, 1 - answered, 2 - unanswered, 3 - calling, 4 - pending retry.
 	State *uint64 `json:"State,omitnil,omitempty" name:"State"`
 
-	// List of session IDs.
+	// List of session ids.
 	Sessions []*string `json:"Sessions,omitnil,omitempty" name:"Sessions"`
 }
 
 type AutoCalloutTaskInfo struct {
-	// Task Name
+	// Task name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Number of calls.
+	// Number of called parties.
 	CalleeCount *uint64 `json:"CalleeCount,omitnil,omitempty" name:"CalleeCount"`
 
 	// List of calling numbers.
@@ -195,47 +263,48 @@ type AutoCalloutTaskInfo struct {
 	// Start timestamp.
 	NotBefore *int64 `json:"NotBefore,omitnil,omitempty" name:"NotBefore"`
 
-	// End timestamp.
+	// End timestamp
+	// .
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	NotAfter *int64 `json:"NotAfter,omitnil,omitempty" name:"NotAfter"`
 
 	// IvrId used by the task.
 	IvrId *uint64 `json:"IvrId,omitnil,omitempty" name:"IvrId"`
 
-	// Task status:
-	// 0 Initial: Task created, calling not started
-	// 1 Running
-	// 2  Completed: All calls in the task are completed
-	// 3 Ending: The task is due, but some calls are still not finished
-	// 4 Ended: Task terminated due to expiration
+	// Task status:.
+	// 0 initial: task creation, call not started.
+	// 1 running.
+	// 2 completed: all calls in the task are completed.
+	// 3 ending: the task has expired, but there are still some calls not ended.
+	// 4 ended: task terminated due to expiration.
 	State *uint64 `json:"State,omitnil,omitempty" name:"State"`
 
-	// Task ID.
+	// <Task id>.
 	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 // Predefined struct for user
 type BindNumberCallOutSkillGroupRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Number to be bound.
 	Number *string `json:"Number,omitnil,omitempty" name:"Number"`
 
-	// Skill group ID list to be bound.
+	// Skill group id list to be bound.
 	SkillGroupIds []*uint64 `json:"SkillGroupIds,omitnil,omitempty" name:"SkillGroupIds"`
 }
 
 type BindNumberCallOutSkillGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Number to be bound.
 	Number *string `json:"Number,omitnil,omitempty" name:"Number"`
 
-	// Skill group ID list to be bound.
+	// Skill group id list to be bound.
 	SkillGroupIds []*uint64 `json:"SkillGroupIds,omitnil,omitempty" name:"SkillGroupIds"`
 }
 
@@ -284,13 +353,13 @@ func (r *BindNumberCallOutSkillGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type BindStaffSkillGroupListRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Agent email.
 	StaffEmail *string `json:"StaffEmail,omitnil,omitempty" name:"StaffEmail"`
 
-	// Bound skill group list
+	// Bound skill group list.
 	//
 	// Deprecated: SkillGroupList is deprecated.
 	SkillGroupList []*int64 `json:"SkillGroupList,omitnil,omitempty" name:"SkillGroupList"`
@@ -302,13 +371,13 @@ type BindStaffSkillGroupListRequestParams struct {
 type BindStaffSkillGroupListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Agent email.
 	StaffEmail *string `json:"StaffEmail,omitnil,omitempty" name:"StaffEmail"`
 
-	// Bound skill group list
+	// Bound skill group list.
 	SkillGroupList []*int64 `json:"SkillGroupList,omitnil,omitempty" name:"SkillGroupList"`
 
 	// Bound skill group list (required).
@@ -360,7 +429,7 @@ func (r *BindStaffSkillGroupListResponse) FromJsonString(s string) error {
 }
 
 type CallInMetrics struct {
-	// Number of IVR residency.
+	// Number of ivr residency.
 	IvrCount *int64 `json:"IvrCount,omitnil,omitempty" name:"IvrCount"`
 
 	// Number in queue.
@@ -369,7 +438,7 @@ type CallInMetrics struct {
 	// Number in ringing.
 	RingCount *int64 `json:"RingCount,omitnil,omitempty" name:"RingCount"`
 
-	// Number in connection.
+	// Number of connections.
 	AcceptCount *int64 `json:"AcceptCount,omitnil,omitempty" name:"AcceptCount"`
 
 	// Number of customer service transferring to the external line.
@@ -398,7 +467,7 @@ type CallInNumberMetrics struct {
 	// Line number.
 	Number *string `json:"Number,omitnil,omitempty" name:"Number"`
 
-	// Line-related metrics.
+	// Line-Related metrics.
 	Metrics *CallInMetrics `json:"Metrics,omitnil,omitempty" name:"Metrics"`
 
 	// Bound skill group metrics.
@@ -406,7 +475,7 @@ type CallInNumberMetrics struct {
 }
 
 type CallInSkillGroupMetrics struct {
-	// Skill group ID.
+	// Skill group id.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 
 	// Data metrics.
@@ -420,11 +489,96 @@ type CalleeAttribute struct {
 	// Called number.
 	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
 
-	// Associate data.
+	// Accompanying data.
 	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
 
-	// Parameter
+	// Parameter.
 	Variables []*Variable `json:"Variables,omitnil,omitempty" name:"Variables"`
+}
+
+// Predefined struct for user
+type CreateAIAgentCallRequestParams struct {
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// AI agent id.
+	AIAgentId *uint64 `json:"AIAgentId,omitnil,omitempty" name:"AIAgentId"`
+
+	// Callee number.
+	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
+
+	// Caller number list
+	Callers []*string `json:"Callers,omitnil,omitempty" name:"Callers"`
+
+	// Prompt variable.
+	PromptVariables []*Variable `json:"PromptVariables,omitnil,omitempty" name:"PromptVariables"`
+}
+
+type CreateAIAgentCallRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// AI agent id.
+	AIAgentId *uint64 `json:"AIAgentId,omitnil,omitempty" name:"AIAgentId"`
+
+	// Callee number.
+	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
+
+	// Caller number list
+	Callers []*string `json:"Callers,omitnil,omitempty" name:"Callers"`
+
+	// Prompt variable.
+	PromptVariables []*Variable `json:"PromptVariables,omitnil,omitempty" name:"PromptVariables"`
+}
+
+func (r *CreateAIAgentCallRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAIAgentCallRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "AIAgentId")
+	delete(f, "Callee")
+	delete(f, "Callers")
+	delete(f, "PromptVariables")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAIAgentCallRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAIAgentCallResponseParams struct {
+	// Newly created session id.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAIAgentCallResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAIAgentCallResponseParams `json:"Response"`
+}
+
+func (r *CreateAIAgentCallResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAIAgentCallResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -470,7 +624,7 @@ type CreateAICallRequestParams struct {
 
 	// Model interface protocol types, currently compatible with three protocol types:
 	// 
-	// - OpenAI protocol (including GPT, Hunyuan, DeepSeek, etc.):"openai"
+	// - OpenAI protocol (including GPT, DeepSeek, etc.):"openai"
 	// - Azure protocol:"azure"
 	// - Minimax protocol:"minimax"
 	LLMType *string `json:"LLMType,omitnil,omitempty" name:"LLMType"`
@@ -478,7 +632,7 @@ type CreateAICallRequestParams struct {
 	// Model name, such as
 	// 
 	// - OpenAI protocol
-	// "gpt-4o-mini","gpt-4o","hunyuan-standard", "hunyuan-turbo","deepseek-chat";
+	// "gpt-4o-mini","gpt-4o","deepseek-chat";
 	// 
 	// - Azure protocol
 	// "gpt-4o-mini", "gpt-4o";
@@ -500,7 +654,6 @@ type CreateAICallRequestParams struct {
 	// 
 	// - OpenAI protocol
 	// GPT:"https://api.openai.com/v1/"
-	// Hunyuan:"https://api.hunyuan.cloud.tencent.com/v1"
 	// Deepseek:"https://api.deepseek.com/v1"
 	// 
 	// - Azure protocol
@@ -546,7 +699,7 @@ type CreateAICallRequestParams struct {
 	// 
 	VoiceType *string `json:"VoiceType,omitnil,omitempty" name:"VoiceType"`
 
-	// List of calling numbers.
+	// Caller number list
 	Callers []*string `json:"Callers,omitnil,omitempty" name:"Callers"`
 
 	// Used to set the AI Agent Greeting.
@@ -555,6 +708,9 @@ type CreateAICallRequestParams struct {
 	// 0: Use welcomeMessage (if empty, the callee speaks first; if not empty, the bot speaks first)
 	// 1:   Use AI to automatically generate welcomeMessage and speak first based on the prompt
 	WelcomeType *int64 `json:"WelcomeType,omitnil,omitempty" name:"WelcomeType"`
+
+	// 0: interruptible by default, 1: high priority and not interruptible.
+	WelcomeMessagePriority *int64 `json:"WelcomeMessagePriority,omitnil,omitempty" name:"WelcomeMessagePriority"`
 
 	// Maximum Waiting Duration (milliseconds), default is 60 seconds, if the user does not speak within this time, the call is automatically terminated
 	MaxDuration *int64 `json:"MaxDuration,omitnil,omitempty" name:"MaxDuration"`
@@ -585,7 +741,7 @@ type CreateAICallRequestParams struct {
 	// 20. Russian = "ru" # Russian
 	Languages []*string `json:"Languages,omitnil,omitempty" name:"Languages"`
 
-	// Interrupt AI speech mode, default is 0, 0 indicates the server interrupts automatically, 1 indicates the server does not interrupt, interruption signal sent by the client side.
+	// Interrupt ai speaking mode. default is 0. 0 indicates automatic interruption and 1 indicates no interruption.
 	InterruptMode *int64 `json:"InterruptMode,omitnil,omitempty" name:"InterruptMode"`
 
 	// Used when InterruptMode is 0, unit in milliseconds, default is 500ms. It means that the server-side detects ongoing vocal input for the InterruptSpeechDuration milliseconds and then interrupts.
@@ -597,10 +753,10 @@ type CreateAICallRequestParams struct {
 	// Effective when EndFunctionEnable is true; the description of call_end function calling, default is "End the call when user has to leave (like says bye) or you are instructed to do so."
 	EndFunctionDesc *string `json:"EndFunctionDesc,omitnil,omitempty" name:"EndFunctionDesc"`
 
-
+	// Whether the model supports (or enables) transfer_to_human function calling.
 	TransferFunctionEnable *bool `json:"TransferFunctionEnable,omitnil,omitempty" name:"TransferFunctionEnable"`
 
-
+	// Takes effect when transferfunctionenable is true: transfer to human configuration.
 	TransferItems []*AITransferItem `json:"TransferItems,omitnil,omitempty" name:"TransferItems"`
 
 	// The duration after which the user hasn't spoken to trigger a notification, minimum 10 seconds, default 10 seconds
@@ -609,7 +765,7 @@ type CreateAICallRequestParams struct {
 	// The AI prompt when NotifyDuration has passed without the user speaking, default is "Sorry, I didn't hear you clearly. Can you repeat that?"
 	NotifyMessage *string `json:"NotifyMessage,omitnil,omitempty" name:"NotifyMessage"`
 
-
+	// Maximum number of times to trigger ai prompt sound, unlimited by default.
 	NotifyMaxCount *uint64 `json:"NotifyMaxCount,omitnil,omitempty" name:"NotifyMaxCount"`
 
 	// <p>And VoiceType field needs to select one, here is to use your own custom TTS, VoiceType is some built-in sound qualities</p>
@@ -631,35 +787,6 @@ type CreateAICallRequestParams struct {
 	// </code></pre>
 	// 
 	//   </div></div><ul>
-	// <li>Minimax TTS<br>
-	// For configuration, please refer to the <a href="https://platform.minimaxi.com/document/T2A%20V2?key=66719005a427f0c8a5701643" target="_blank">Minimax TTS documentation link</a>. Note that Minimax TTS has frequency limits, and exceeding the limit may cause response delays, <a href="https://platform.minimaxi.com/document/Rate%20limits?key=66b19417290299a26b234572" target="_blank">Minimax TTS frequency limit related documentation link</a>.</li>
-	// </ul>
-	// <div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
-	//         &quot;TTSType&quot;: &quot;minimax&quot;,  // String TTS type,
-	//         &quot;Model&quot;: &quot;speech-01-turbo&quot;,
-	//         &quot;APIUrl&quot;: &quot;https://api.minimax.chat/v1/t2a_v2&quot;,
-	//         &quot;APIKey&quot;: &quot;eyxxxx&quot;,
-	//         &quot;GroupId&quot;: &quot;181000000000000&quot;,
-	//         &quot;VoiceType&quot;:&quot;female-tianmei-yujie&quot;,
-	//         &quot;Speed&quot;: 1.2
-	// }
-	// </code></pre>
-	// </div></div><ul>
-	// <li>Volcano TTS</li>
-	// </ul>
-	// <p>For type of sound quality configuration, refer to the<a href="https://www.volcengine.com/docs/6561/162929" target="_blank">Volcano TTS documentation</a><br>
-	// TTS Sound Quality List - Voice Technology - Volcano Engine<br>
-	// Large Model TTS Sound Quality List - Voice Technology - Volcano Engine</p>
-	// <div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
-	//     &quot;TTSType&quot;: &quot;volcengine&quot;,  // Required: String TTS type
-	//     &quot;AppId&quot; : &quot;xxxxxxxx&quot;,   // Required: String Volcano Engine assigned AppId
-	//     &quot;Token&quot; : &quot;TY9d4sQXHxxxxxxx&quot;, // Required: String type Volcano Engine access token
-	//     &quot;Speed&quot; : 1.0,            // Optional parameter: Playback speed, default is 1.0
-	//     &quot;Volume&quot;: 1.0,            // Optional parameter: Volume, default is 1.0
-	//     &quot;Cluster&quot; : &quot;volcano_tts&quot;, // Optional parameter: Business cluster, default is volcano_tts
-	//     &quot;VoiceType&quot; : &quot;zh_male_aojiaobazong_moon_bigtts&quot;   // Sound quality type, default is the sound quality of the large model TTS. If using normal TTS, fill in the corresponding sound quality type. Incorrect sound quality type will result in no sound.
-	// }
-	// </code></pre>
 	// 
 	// </div></div><ul>
 	// <li>Azure TTS<br>
@@ -693,8 +820,14 @@ type CreateAICallRequestParams struct {
 	// </div></div>
 	CustomTTSConfig *string `json:"CustomTTSConfig,omitnil,omitempty" name:"CustomTTSConfig"`
 
-
+	// Prompt word variable.
 	PromptVariables []*Variable `json:"PromptVariables,omitnil,omitempty" name:"PromptVariables"`
+
+	// Automatic speech recognition vad time ranges from 240 to 2000, with a default of 1000, measured in milliseconds. smaller values will make automatic speech recognition segment faster.
+	VadSilenceTime *int64 `json:"VadSilenceTime,omitnil,omitempty" name:"VadSilenceTime"`
+
+	// Call content extraction configuration.
+	ExtractConfig []*AICallExtractConfigElement `json:"ExtractConfig,omitnil,omitempty" name:"ExtractConfig"`
 }
 
 type CreateAICallRequest struct {
@@ -741,7 +874,7 @@ type CreateAICallRequest struct {
 
 	// Model interface protocol types, currently compatible with three protocol types:
 	// 
-	// - OpenAI protocol (including GPT, Hunyuan, DeepSeek, etc.):"openai"
+	// - OpenAI protocol (including GPT, DeepSeek, etc.):"openai"
 	// - Azure protocol:"azure"
 	// - Minimax protocol:"minimax"
 	LLMType *string `json:"LLMType,omitnil,omitempty" name:"LLMType"`
@@ -749,7 +882,7 @@ type CreateAICallRequest struct {
 	// Model name, such as
 	// 
 	// - OpenAI protocol
-	// "gpt-4o-mini","gpt-4o","hunyuan-standard", "hunyuan-turbo","deepseek-chat";
+	// "gpt-4o-mini","gpt-4o","deepseek-chat";
 	// 
 	// - Azure protocol
 	// "gpt-4o-mini", "gpt-4o";
@@ -771,7 +904,6 @@ type CreateAICallRequest struct {
 	// 
 	// - OpenAI protocol
 	// GPT:"https://api.openai.com/v1/"
-	// Hunyuan:"https://api.hunyuan.cloud.tencent.com/v1"
 	// Deepseek:"https://api.deepseek.com/v1"
 	// 
 	// - Azure protocol
@@ -817,7 +949,7 @@ type CreateAICallRequest struct {
 	// 
 	VoiceType *string `json:"VoiceType,omitnil,omitempty" name:"VoiceType"`
 
-	// List of calling numbers.
+	// Caller number list
 	Callers []*string `json:"Callers,omitnil,omitempty" name:"Callers"`
 
 	// Used to set the AI Agent Greeting.
@@ -826,6 +958,9 @@ type CreateAICallRequest struct {
 	// 0: Use welcomeMessage (if empty, the callee speaks first; if not empty, the bot speaks first)
 	// 1:   Use AI to automatically generate welcomeMessage and speak first based on the prompt
 	WelcomeType *int64 `json:"WelcomeType,omitnil,omitempty" name:"WelcomeType"`
+
+	// 0: interruptible by default, 1: high priority and not interruptible.
+	WelcomeMessagePriority *int64 `json:"WelcomeMessagePriority,omitnil,omitempty" name:"WelcomeMessagePriority"`
 
 	// Maximum Waiting Duration (milliseconds), default is 60 seconds, if the user does not speak within this time, the call is automatically terminated
 	MaxDuration *int64 `json:"MaxDuration,omitnil,omitempty" name:"MaxDuration"`
@@ -856,7 +991,7 @@ type CreateAICallRequest struct {
 	// 20. Russian = "ru" # Russian
 	Languages []*string `json:"Languages,omitnil,omitempty" name:"Languages"`
 
-	// Interrupt AI speech mode, default is 0, 0 indicates the server interrupts automatically, 1 indicates the server does not interrupt, interruption signal sent by the client side.
+	// Interrupt ai speaking mode. default is 0. 0 indicates automatic interruption and 1 indicates no interruption.
 	InterruptMode *int64 `json:"InterruptMode,omitnil,omitempty" name:"InterruptMode"`
 
 	// Used when InterruptMode is 0, unit in milliseconds, default is 500ms. It means that the server-side detects ongoing vocal input for the InterruptSpeechDuration milliseconds and then interrupts.
@@ -868,8 +1003,10 @@ type CreateAICallRequest struct {
 	// Effective when EndFunctionEnable is true; the description of call_end function calling, default is "End the call when user has to leave (like says bye) or you are instructed to do so."
 	EndFunctionDesc *string `json:"EndFunctionDesc,omitnil,omitempty" name:"EndFunctionDesc"`
 
+	// Whether the model supports (or enables) transfer_to_human function calling.
 	TransferFunctionEnable *bool `json:"TransferFunctionEnable,omitnil,omitempty" name:"TransferFunctionEnable"`
 
+	// Takes effect when transferfunctionenable is true: transfer to human configuration.
 	TransferItems []*AITransferItem `json:"TransferItems,omitnil,omitempty" name:"TransferItems"`
 
 	// The duration after which the user hasn't spoken to trigger a notification, minimum 10 seconds, default 10 seconds
@@ -878,6 +1015,7 @@ type CreateAICallRequest struct {
 	// The AI prompt when NotifyDuration has passed without the user speaking, default is "Sorry, I didn't hear you clearly. Can you repeat that?"
 	NotifyMessage *string `json:"NotifyMessage,omitnil,omitempty" name:"NotifyMessage"`
 
+	// Maximum number of times to trigger ai prompt sound, unlimited by default.
 	NotifyMaxCount *uint64 `json:"NotifyMaxCount,omitnil,omitempty" name:"NotifyMaxCount"`
 
 	// <p>And VoiceType field needs to select one, here is to use your own custom TTS, VoiceType is some built-in sound qualities</p>
@@ -899,35 +1037,6 @@ type CreateAICallRequest struct {
 	// </code></pre>
 	// 
 	//   </div></div><ul>
-	// <li>Minimax TTS<br>
-	// For configuration, please refer to the <a href="https://platform.minimaxi.com/document/T2A%20V2?key=66719005a427f0c8a5701643" target="_blank">Minimax TTS documentation link</a>. Note that Minimax TTS has frequency limits, and exceeding the limit may cause response delays, <a href="https://platform.minimaxi.com/document/Rate%20limits?key=66b19417290299a26b234572" target="_blank">Minimax TTS frequency limit related documentation link</a>.</li>
-	// </ul>
-	// <div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
-	//         &quot;TTSType&quot;: &quot;minimax&quot;,  // String TTS type,
-	//         &quot;Model&quot;: &quot;speech-01-turbo&quot;,
-	//         &quot;APIUrl&quot;: &quot;https://api.minimax.chat/v1/t2a_v2&quot;,
-	//         &quot;APIKey&quot;: &quot;eyxxxx&quot;,
-	//         &quot;GroupId&quot;: &quot;181000000000000&quot;,
-	//         &quot;VoiceType&quot;:&quot;female-tianmei-yujie&quot;,
-	//         &quot;Speed&quot;: 1.2
-	// }
-	// </code></pre>
-	// </div></div><ul>
-	// <li>Volcano TTS</li>
-	// </ul>
-	// <p>For type of sound quality configuration, refer to the<a href="https://www.volcengine.com/docs/6561/162929" target="_blank">Volcano TTS documentation</a><br>
-	// TTS Sound Quality List - Voice Technology - Volcano Engine<br>
-	// Large Model TTS Sound Quality List - Voice Technology - Volcano Engine</p>
-	// <div><div class="v-md-pre-wrapper copy-code-mode v-md-pre-wrapper- extra-class"><pre class="v-md-prism-"><code>{
-	//     &quot;TTSType&quot;: &quot;volcengine&quot;,  // Required: String TTS type
-	//     &quot;AppId&quot; : &quot;xxxxxxxx&quot;,   // Required: String Volcano Engine assigned AppId
-	//     &quot;Token&quot; : &quot;TY9d4sQXHxxxxxxx&quot;, // Required: String type Volcano Engine access token
-	//     &quot;Speed&quot; : 1.0,            // Optional parameter: Playback speed, default is 1.0
-	//     &quot;Volume&quot;: 1.0,            // Optional parameter: Volume, default is 1.0
-	//     &quot;Cluster&quot; : &quot;volcano_tts&quot;, // Optional parameter: Business cluster, default is volcano_tts
-	//     &quot;VoiceType&quot; : &quot;zh_male_aojiaobazong_moon_bigtts&quot;   // Sound quality type, default is the sound quality of the large model TTS. If using normal TTS, fill in the corresponding sound quality type. Incorrect sound quality type will result in no sound.
-	// }
-	// </code></pre>
 	// 
 	// </div></div><ul>
 	// <li>Azure TTS<br>
@@ -961,7 +1070,14 @@ type CreateAICallRequest struct {
 	// </div></div>
 	CustomTTSConfig *string `json:"CustomTTSConfig,omitnil,omitempty" name:"CustomTTSConfig"`
 
+	// Prompt word variable.
 	PromptVariables []*Variable `json:"PromptVariables,omitnil,omitempty" name:"PromptVariables"`
+
+	// Automatic speech recognition vad time ranges from 240 to 2000, with a default of 1000, measured in milliseconds. smaller values will make automatic speech recognition segment faster.
+	VadSilenceTime *int64 `json:"VadSilenceTime,omitnil,omitempty" name:"VadSilenceTime"`
+
+	// Call content extraction configuration.
+	ExtractConfig []*AICallExtractConfigElement `json:"ExtractConfig,omitnil,omitempty" name:"ExtractConfig"`
 }
 
 func (r *CreateAICallRequest) ToJsonString() string {
@@ -987,6 +1103,7 @@ func (r *CreateAICallRequest) FromJsonString(s string) error {
 	delete(f, "Callers")
 	delete(f, "WelcomeMessage")
 	delete(f, "WelcomeType")
+	delete(f, "WelcomeMessagePriority")
 	delete(f, "MaxDuration")
 	delete(f, "Languages")
 	delete(f, "InterruptMode")
@@ -1000,6 +1117,8 @@ func (r *CreateAICallRequest) FromJsonString(s string) error {
 	delete(f, "NotifyMaxCount")
 	delete(f, "CustomTTSConfig")
 	delete(f, "PromptVariables")
+	delete(f, "VadSilenceTime")
+	delete(f, "ExtractConfig")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAICallRequest has unknown keys!", "")
 	}
@@ -1033,7 +1152,7 @@ func (r *CreateAICallResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAdminURLRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Admin account.
@@ -1043,7 +1162,7 @@ type CreateAdminURLRequestParams struct {
 type CreateAdminURLRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Admin account.
@@ -1072,7 +1191,7 @@ func (r *CreateAdminURLRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAdminURLResponseParams struct {
-	// Log-in link.
+	// Log-In link.
 	URL *string `json:"URL,omitnil,omitempty" name:"URL"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1097,25 +1216,25 @@ func (r *CreateAdminURLResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAgentCruiseDialingCampaignRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task Name
+	// Task name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Agent Account
+	// Agent account.
 	Agent *string `json:"Agent,omitnil,omitempty" name:"Agent"`
 
-	// Single-round Concurrent Call Volume 1-20
+	// Single-Round concurrent call volume 1-20.
 	ConcurrencyNumber *int64 `json:"ConcurrencyNumber,omitnil,omitempty" name:"ConcurrencyNumber"`
 
-	// Task start time. Unix timestamp. The task will automatically start after this time.
+	// Task start time. unix timestamp. the task will automatically start after this time.
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Task termination time. Unix timestamp. The task will automatically terminate after this time.
+	// Task termination time. unix timestamp. the task will automatically terminate after this time.
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Called list supporting E.164 or number formats without country code.
+	// Called list supporting e.164 or number formats without country code.
 	Callees []*string `json:"Callees,omitnil,omitempty" name:"Callees"`
 
 	// Calling list using the number formats displayed on the management side.
@@ -1124,32 +1243,32 @@ type CreateAgentCruiseDialingCampaignRequestParams struct {
 	// Being called sequence: 0 for random 1 for in order.
 	CallOrder *int64 `json:"CallOrder,omitnil,omitempty" name:"CallOrder"`
 
-	// Caller Custom Data, Maximum Length 1024
+	// Caller custom data, maximum length 1024.
 	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
 }
 
 type CreateAgentCruiseDialingCampaignRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task Name
+	// Task name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Agent Account
+	// Agent account.
 	Agent *string `json:"Agent,omitnil,omitempty" name:"Agent"`
 
-	// Single-round Concurrent Call Volume 1-20
+	// Single-Round concurrent call volume 1-20.
 	ConcurrencyNumber *int64 `json:"ConcurrencyNumber,omitnil,omitempty" name:"ConcurrencyNumber"`
 
-	// Task start time. Unix timestamp. The task will automatically start after this time.
+	// Task start time. unix timestamp. the task will automatically start after this time.
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Task termination time. Unix timestamp. The task will automatically terminate after this time.
+	// Task termination time. unix timestamp. the task will automatically terminate after this time.
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Called list supporting E.164 or number formats without country code.
+	// Called list supporting e.164 or number formats without country code.
 	Callees []*string `json:"Callees,omitnil,omitempty" name:"Callees"`
 
 	// Calling list using the number formats displayed on the management side.
@@ -1158,7 +1277,7 @@ type CreateAgentCruiseDialingCampaignRequest struct {
 	// Being called sequence: 0 for random 1 for in order.
 	CallOrder *int64 `json:"CallOrder,omitnil,omitempty" name:"CallOrder"`
 
-	// Caller Custom Data, Maximum Length 1024
+	// Caller custom data, maximum length 1024.
 	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
 }
 
@@ -1192,7 +1311,7 @@ func (r *CreateAgentCruiseDialingCampaignRequest) FromJsonString(s string) error
 
 // Predefined struct for user
 type CreateAgentCruiseDialingCampaignResponseParams struct {
-	// Generated task ID.
+	// Generated task id.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1217,10 +1336,10 @@ func (r *CreateAgentCruiseDialingCampaignResponse) FromJsonString(s string) erro
 
 // Predefined struct for user
 type CreateAutoCalloutTaskRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task starting timestamp. Unix second-level timestamp.
+	// Task starting timestamp. unix second-level timestamp.
 	NotBefore *int64 `json:"NotBefore,omitnil,omitempty" name:"NotBefore"`
 
 	// List of called numbers.
@@ -1235,13 +1354,13 @@ type CreateAutoCalloutTaskRequestParams struct {
 	// Task name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Task description.
+	// <Task description>.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Task stop timestamp. Unix second-level timestamp.
+	// Task stop timestamp. unix second-level timestamp.
 	NotAfter *int64 `json:"NotAfter,omitnil,omitempty" name:"NotAfter"`
 
-	// Maximum attempts, 1-3 times
+	// Maximum attempts, 1-3 times.
 	Tries *uint64 `json:"Tries,omitnil,omitempty" name:"Tries"`
 
 	// Custom variables (supported only in advanced versions).
@@ -1257,10 +1376,10 @@ type CreateAutoCalloutTaskRequestParams struct {
 type CreateAutoCalloutTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task starting timestamp. Unix second-level timestamp.
+	// Task starting timestamp. unix second-level timestamp.
 	NotBefore *int64 `json:"NotBefore,omitnil,omitempty" name:"NotBefore"`
 
 	// List of called numbers.
@@ -1275,13 +1394,13 @@ type CreateAutoCalloutTaskRequest struct {
 	// Task name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Task description.
+	// <Task description>.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
-	// Task stop timestamp. Unix second-level timestamp.
+	// Task stop timestamp. unix second-level timestamp.
 	NotAfter *int64 `json:"NotAfter,omitnil,omitempty" name:"NotAfter"`
 
-	// Maximum attempts, 1-3 times
+	// Maximum attempts, 1-3 times.
 	Tries *uint64 `json:"Tries,omitnil,omitempty" name:"Tries"`
 
 	// Custom variables (supported only in advanced versions).
@@ -1326,7 +1445,7 @@ func (r *CreateAutoCalloutTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateAutoCalloutTaskResponseParams struct {
-	// Task ID.
+	// Task id.
 	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1351,34 +1470,34 @@ func (r *CreateAutoCalloutTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCCCSkillGroupRequestParams struct {
-	// Application ID (required).
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Skill group name.
 	SkillGroupName *string `json:"SkillGroupName,omitnil,omitempty" name:"SkillGroupName"`
 
-	// Skill group type 0-Cell phone, 1-Online, 3-Audio, 4-Video.
+	// Skill group type 0-cell phone, 1-online, 3-audio, 4-video.
 	SkillGroupType *int64 `json:"SkillGroupType,omitnil,omitempty" name:"SkillGroupType"`
 
-	// The maximum number of people received by the skill group (the maximum number of people that one seat in this skill group can receive) is set to 1 by default. 1. If the skill group type is online, the maximum could be set to one and above.
-	// 2. If the skill group type is phone, audio, or video, then the maximum must be 1
+	// The maximum number of people received by the skill group (the maximum number of people that one agent in this skill group can receive) is set to 1 by default. if the skill group type is online, the maximum can be set to one or more.
+	// 2. if the skill group type is phone, audio, or video, then the reception limit must be 1.
 	MaxConcurrency *uint64 `json:"MaxConcurrency,omitnil,omitempty" name:"MaxConcurrency"`
 }
 
 type CreateCCCSkillGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required).
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Skill group name.
 	SkillGroupName *string `json:"SkillGroupName,omitnil,omitempty" name:"SkillGroupName"`
 
-	// Skill group type 0-Cell phone, 1-Online, 3-Audio, 4-Video.
+	// Skill group type 0-cell phone, 1-online, 3-audio, 4-video.
 	SkillGroupType *int64 `json:"SkillGroupType,omitnil,omitempty" name:"SkillGroupType"`
 
-	// The maximum number of people received by the skill group (the maximum number of people that one seat in this skill group can receive) is set to 1 by default. 1. If the skill group type is online, the maximum could be set to one and above.
-	// 2. If the skill group type is phone, audio, or video, then the maximum must be 1
+	// The maximum number of people received by the skill group (the maximum number of people that one agent in this skill group can receive) is set to 1 by default. if the skill group type is online, the maximum can be set to one or more.
+	// 2. if the skill group type is phone, audio, or video, then the reception limit must be 1.
 	MaxConcurrency *uint64 `json:"MaxConcurrency,omitnil,omitempty" name:"MaxConcurrency"`
 }
 
@@ -1406,7 +1525,7 @@ func (r *CreateCCCSkillGroupRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCCCSkillGroupResponseParams struct {
-	// Skill group ID.
+	// Skill group id.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1431,19 +1550,19 @@ func (r *CreateCCCSkillGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCallOutSessionRequestParams struct {
-	// Application ID
+	// Application id.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Customer Service User ID usually refers to the customer service email.
+	// Customer service user id usually refers to the customer service email.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
 	// Called number must be preceded by 0086.
 	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
 
-	// Caller number (obsolete one and use Callers) must be preceded by 0086.
+	// Caller number (obsolete one and use callers) must be preceded by 0086.
 	Caller *string `json:"Caller,omitnil,omitempty" name:"Caller"`
 
-	// Designated caller number list. If the prior number fails, it will automatically switch to the next number that must be preceded by 0086.
+	// Designated caller number list. if the prior number fails, it will automatically switch to the next number that must be preceded by 0086.
 	Callers []*string `json:"Callers,omitnil,omitempty" name:"Callers"`
 
 	// Whether to force the use of cell phone outbound call or not, currently only supports true, if true, please ensure that the allowlist has been configured.
@@ -1461,19 +1580,19 @@ type CreateCallOutSessionRequestParams struct {
 type CreateCallOutSessionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID
+	// Application id.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Customer Service User ID usually refers to the customer service email.
+	// Customer service user id usually refers to the customer service email.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
 	// Called number must be preceded by 0086.
 	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
 
-	// Caller number (obsolete one and use Callers) must be preceded by 0086.
+	// Caller number (obsolete one and use callers) must be preceded by 0086.
 	Caller *string `json:"Caller,omitnil,omitempty" name:"Caller"`
 
-	// Designated caller number list. If the prior number fails, it will automatically switch to the next number that must be preceded by 0086.
+	// Designated caller number list. if the prior number fails, it will automatically switch to the next number that must be preceded by 0086.
 	Callers []*string `json:"Callers,omitnil,omitempty" name:"Callers"`
 
 	// Whether to force the use of cell phone outbound call or not, currently only supports true, if true, please ensure that the allowlist has been configured.
@@ -1514,7 +1633,7 @@ func (r *CreateCallOutSessionRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateCallOutSessionResponseParams struct {
-	// Newly created session ID.
+	// Newly created session id.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1539,10 +1658,10 @@ func (r *CreateCallOutSessionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateExtensionRequestParams struct {
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Extension
+	// Extension.
 	ExtensionId *string `json:"ExtensionId,omitnil,omitempty" name:"ExtensionId"`
 
 	// Extension name.
@@ -1558,10 +1677,10 @@ type CreateExtensionRequestParams struct {
 type CreateExtensionRequest struct {
 	*tchttp.BaseRequest
 	
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Extension
+	// Extension.
 	ExtensionId *string `json:"ExtensionId,omitnil,omitempty" name:"ExtensionId"`
 
 	// Extension name.
@@ -1621,44 +1740,44 @@ func (r *CreateExtensionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateIVRSessionRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Called.
 	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
 
-	// Specified IVR Id. Currently, it supports inbound and automatic outbound types
+	// Specified ivr id. currently, it supports inbound and automatic outbound types.
 	IVRId *int64 `json:"IVRId,omitnil,omitempty" name:"IVRId"`
 
 	// List of calling numbers.
 	Callers []*string `json:"Callers,omitnil,omitempty" name:"Callers"`
 
-	// Custom variable
+	// Custom variable.
 	Variables []*Variable `json:"Variables,omitnil,omitempty" name:"Variables"`
 
-	// User Data
+	// User data.
 	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
 }
 
 type CreateIVRSessionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Called.
 	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
 
-	// Specified IVR Id. Currently, it supports inbound and automatic outbound types
+	// Specified ivr id. currently, it supports inbound and automatic outbound types.
 	IVRId *int64 `json:"IVRId,omitnil,omitempty" name:"IVRId"`
 
 	// List of calling numbers.
 	Callers []*string `json:"Callers,omitnil,omitempty" name:"Callers"`
 
-	// Custom variable
+	// Custom variable.
 	Variables []*Variable `json:"Variables,omitnil,omitempty" name:"Variables"`
 
-	// User Data
+	// User data.
 	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
 }
 
@@ -1688,7 +1807,7 @@ func (r *CreateIVRSessionRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateIVRSessionResponseParams struct {
-	// Newly created session ID.
+	// Newly created session id.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1712,14 +1831,92 @@ func (r *CreateIVRSessionResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateOwnNumberApplyRequestParams struct {
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// SIP connection id.
+	SipTrunkId *int64 `json:"SipTrunkId,omitnil,omitempty" name:"SipTrunkId"`
+
+	// Circuit-Related parameters.
+	DetailList []*OwnNumberApplyDetailItem `json:"DetailList,omitnil,omitempty" name:"DetailList"`
+
+	// Prefix for sending numbers.
+	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
+}
+
+type CreateOwnNumberApplyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// SIP connection id.
+	SipTrunkId *int64 `json:"SipTrunkId,omitnil,omitempty" name:"SipTrunkId"`
+
+	// Circuit-Related parameters.
+	DetailList []*OwnNumberApplyDetailItem `json:"DetailList,omitnil,omitempty" name:"DetailList"`
+
+	// Prefix for sending numbers.
+	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
+}
+
+func (r *CreateOwnNumberApplyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOwnNumberApplyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "SipTrunkId")
+	delete(f, "DetailList")
+	delete(f, "Prefix")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateOwnNumberApplyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateOwnNumberApplyResponseParams struct {
+	// Approval id.
+	ApplyId *uint64 `json:"ApplyId,omitnil,omitempty" name:"ApplyId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateOwnNumberApplyResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateOwnNumberApplyResponseParams `json:"Response"`
+}
+
+func (r *CreateOwnNumberApplyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateOwnNumberApplyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreatePredictiveDialingCampaignRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task Name
+	// <Task name>.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Called list supporting E.164 or number formats without country code.
+	// Called list supporting e.164 or number formats without country code.
 	Callees []*string `json:"Callees,omitnil,omitempty" name:"Callees"`
 
 	// Calling list using the number formats displayed on the management side.
@@ -1740,29 +1937,38 @@ type CreatePredictiveDialingCampaignRequestParams struct {
 	// Call retry interval, in seconds, [60 - 86,400].
 	RetryInterval *int64 `json:"RetryInterval,omitnil,omitempty" name:"RetryInterval"`
 
-	// Task start time. Unix timestamp. The task will automatically start after this time.
+	// Task start time. unix timestamp. the task will automatically start after this time.
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Task termination time. Unix timestamp. The task will automatically terminate after this time.
+	// Task termination time. unix timestamp. the task will automatically terminate after this time.
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Specified IVR ID.
+	// Specified ivr id.
 	IVRId *int64 `json:"IVRId,omitnil,omitempty" name:"IVRId"`
 
 	// Number of call retries, 0 - 2.
 	RetryTimes *int64 `json:"RetryTimes,omitnil,omitempty" name:"RetryTimes"`
+
+	// Custom variable.
+	Variables []*Variable `json:"Variables,omitnil,omitempty" name:"Variables"`
+
+	// UUI
+	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
+
+	// Property of the called.
+	CalleeAttributes []*CalleeAttribute `json:"CalleeAttributes,omitnil,omitempty" name:"CalleeAttributes"`
 }
 
 type CreatePredictiveDialingCampaignRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task Name
+	// <Task name>.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Called list supporting E.164 or number formats without country code.
+	// Called list supporting e.164 or number formats without country code.
 	Callees []*string `json:"Callees,omitnil,omitempty" name:"Callees"`
 
 	// Calling list using the number formats displayed on the management side.
@@ -1783,17 +1989,26 @@ type CreatePredictiveDialingCampaignRequest struct {
 	// Call retry interval, in seconds, [60 - 86,400].
 	RetryInterval *int64 `json:"RetryInterval,omitnil,omitempty" name:"RetryInterval"`
 
-	// Task start time. Unix timestamp. The task will automatically start after this time.
+	// Task start time. unix timestamp. the task will automatically start after this time.
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Task termination time. Unix timestamp. The task will automatically terminate after this time.
+	// Task termination time. unix timestamp. the task will automatically terminate after this time.
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Specified IVR ID.
+	// Specified ivr id.
 	IVRId *int64 `json:"IVRId,omitnil,omitempty" name:"IVRId"`
 
 	// Number of call retries, 0 - 2.
 	RetryTimes *int64 `json:"RetryTimes,omitnil,omitempty" name:"RetryTimes"`
+
+	// Custom variable.
+	Variables []*Variable `json:"Variables,omitnil,omitempty" name:"Variables"`
+
+	// UUI
+	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
+
+	// Property of the called.
+	CalleeAttributes []*CalleeAttribute `json:"CalleeAttributes,omitnil,omitempty" name:"CalleeAttributes"`
 }
 
 func (r *CreatePredictiveDialingCampaignRequest) ToJsonString() string {
@@ -1821,6 +2036,9 @@ func (r *CreatePredictiveDialingCampaignRequest) FromJsonString(s string) error 
 	delete(f, "EndTime")
 	delete(f, "IVRId")
 	delete(f, "RetryTimes")
+	delete(f, "Variables")
+	delete(f, "UUI")
+	delete(f, "CalleeAttributes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreatePredictiveDialingCampaignRequest has unknown keys!", "")
 	}
@@ -1829,7 +2047,7 @@ func (r *CreatePredictiveDialingCampaignRequest) FromJsonString(s string) error 
 
 // Predefined struct for user
 type CreatePredictiveDialingCampaignResponseParams struct {
-	// Generated task ID.
+	// Generated task id.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1854,26 +2072,26 @@ func (r *CreatePredictiveDialingCampaignResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type CreateSDKLoginTokenRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Agent account.
 	SeatUserId *string `json:"SeatUserId,omitnil,omitempty" name:"SeatUserId"`
 
-	// Whether the generated token is for one-time verification?
+	// Whether the generated token is for one-time verification?.
 	OnlyOnce *bool `json:"OnlyOnce,omitnil,omitempty" name:"OnlyOnce"`
 }
 
 type CreateSDKLoginTokenRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Agent account.
 	SeatUserId *string `json:"SeatUserId,omitnil,omitempty" name:"SeatUserId"`
 
-	// Whether the generated token is for one-time verification?
+	// Whether the generated token is for one-time verification?.
 	OnlyOnce *bool `json:"OnlyOnce,omitnil,omitempty" name:"OnlyOnce"`
 }
 
@@ -1900,13 +2118,13 @@ func (r *CreateSDKLoginTokenRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateSDKLoginTokenResponseParams struct {
-	// SDK log-in Token.
+	// SDK log-in token.
 	Token *string `json:"Token,omitnil,omitempty" name:"Token"`
 
-	// Expiry timestamp. Unix timestamp.
+	// Expiry timestamp. unix timestamp.
 	ExpiredTime *int64 `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 
-	// The path in which the SDK is loaded will change with its release.
+	// The path in which the sdk is loaded will change with its release.
 	SdkURL *string `json:"SdkURL,omitnil,omitempty" name:"SdkURL"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -1931,26 +2149,26 @@ func (r *CreateSDKLoginTokenResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateStaffRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Customer information, no more than 10.
 	Staffs []*SeatUserInfo `json:"Staffs,omitnil,omitempty" name:"Staffs"`
 
-	// Whether to send a password mail or not (the default is true)
+	// Whether to send a password mail or not (the default is true).
 	SendPassword *bool `json:"SendPassword,omitnil,omitempty" name:"SendPassword"`
 }
 
 type CreateStaffRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Customer information, no more than 10.
 	Staffs []*SeatUserInfo `json:"Staffs,omitnil,omitempty" name:"Staffs"`
 
-	// Whether to send a password mail or not (the default is true)
+	// Whether to send a password mail or not (the default is true).
 	SendPassword *bool `json:"SendPassword,omitnil,omitempty" name:"SendPassword"`
 }
 
@@ -1978,7 +2196,6 @@ func (r *CreateStaffRequest) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateStaffResponseParams struct {
 	// Error agent list and error information.
-	// Note: This field may return null, indicating that no valid value could be obtained.
 	ErrorStaffList []*ErrStaffItem `json:"ErrorStaffList,omitnil,omitempty" name:"ErrorStaffList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2003,20 +2220,20 @@ func (r *CreateStaffResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteExtensionRequestParams struct {
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Extension
+	// Extension.
 	ExtensionId *string `json:"ExtensionId,omitnil,omitempty" name:"ExtensionId"`
 }
 
 type DeleteExtensionRequest struct {
 	*tchttp.BaseRequest
 	
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Extension
+	// Extension.
 	ExtensionId *string `json:"ExtensionId,omitnil,omitempty" name:"ExtensionId"`
 }
 
@@ -2064,20 +2281,20 @@ func (r *DeleteExtensionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeletePredictiveDialingCampaignRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// <Task id>.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
 type DeletePredictiveDialingCampaignRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// <Task id>.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
@@ -2125,20 +2342,20 @@ func (r *DeletePredictiveDialingCampaignResponse) FromJsonString(s string) error
 
 // Predefined struct for user
 type DeleteStaffRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Customer service emails, supports up to 200 at a time.
+	// List of customer service emails to be deleted, supports up to 200 at a time.
 	StaffList []*string `json:"StaffList,omitnil,omitempty" name:"StaffList"`
 }
 
 type DeleteStaffRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Customer service emails, supports up to 200 at a time.
+	// List of customer service emails to be deleted, supports up to 200 at a time.
 	StaffList []*string `json:"StaffList,omitnil,omitempty" name:"StaffList"`
 }
 
@@ -2164,8 +2381,7 @@ func (r *DeleteStaffRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteStaffResponseParams struct {
-	// List of customer service staff that can't be deleted when being online.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// List of customer service staff that cannot be deleted when they are online.
 	OnlineStaffList []*string `json:"OnlineStaffList,omitnil,omitempty" name:"OnlineStaffList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2189,21 +2405,99 @@ func (r *DeleteStaffResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeAICallExtractResultRequestParams struct {
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Session id.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Search for the start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Search for the end time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+type DescribeAICallExtractResultRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Session id.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Search for the start time.
+	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Search for the end time.
+	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+}
+
+func (r *DescribeAICallExtractResultRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAICallExtractResultRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "SessionId")
+	delete(f, "StartTime")
+	delete(f, "EndTime")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAICallExtractResultRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAICallExtractResultResponseParams struct {
+	// Result list.
+	ResultList []*AICallExtractResultElement `json:"ResultList,omitnil,omitempty" name:"ResultList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAICallExtractResultResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAICallExtractResultResponseParams `json:"Response"`
+}
+
+func (r *DescribeAICallExtractResultResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAICallExtractResultResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeAgentCruiseDialingCampaignRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// Task id.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
 type DescribeAgentCruiseDialingCampaignRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// Task id.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
@@ -2229,34 +2523,34 @@ func (r *DescribeAgentCruiseDialingCampaignRequest) FromJsonString(s string) err
 
 // Predefined struct for user
 type DescribeAgentCruiseDialingCampaignResponseParams struct {
-	// Task Name
+	// Task name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Agent Account
+	// Agent account.
 	Agent *string `json:"Agent,omitnil,omitempty" name:"Agent"`
 
-	// Single-round Concurrent Call Volume 1-20
+	// Single-Round concurrent call volume 1-20.
 	ConcurrencyNumber *int64 `json:"ConcurrencyNumber,omitnil,omitempty" name:"ConcurrencyNumber"`
 
-	// Task start time. Unix timestamp. The task will automatically start after this time.
+	// Task start time. unix timestamp. the task will automatically start after this time.
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Task termination time. Unix timestamp. The task will automatically terminate after this time.
+	// Task termination time. unix timestamp. the task will automatically terminate after this time.
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Being called sequence: 0 for random 1 for in order.
 	CallOrder *int64 `json:"CallOrder,omitnil,omitempty" name:"CallOrder"`
 
-	// Caller Custom Data, Maximum Length 1024
+	// Caller custom data, maximum length 1024.
 	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
 
-	// Task status 0 Not started 1 Running 2 Completed 3 Terminated
+	// Task status 0 not started 1 running 2 completed 3 terminated.
 	State *int64 `json:"State,omitnil,omitempty" name:"State"`
 
-	// Total number of called parties
+	// Total number of called parties.
 	TotalCalleeCount *int64 `json:"TotalCalleeCount,omitnil,omitempty" name:"TotalCalleeCount"`
 
-	// Number of called parties
+	// Number of calls made and received.
 	CalledCalleeCount *int64 `json:"CalledCalleeCount,omitnil,omitempty" name:"CalledCalleeCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2281,20 +2575,20 @@ func (r *DescribeAgentCruiseDialingCampaignResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type DescribeAutoCalloutTaskRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// Task id.
 	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type DescribeAutoCalloutTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// Task id.
 	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
@@ -2320,10 +2614,10 @@ func (r *DescribeAutoCalloutTaskRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAutoCalloutTaskResponseParams struct {
-	// Task Name
+	// Task name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Task Description.
+	// <Task description>.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
 
 	// Task start timestamp.
@@ -2367,26 +2661,26 @@ func (r *DescribeAutoCalloutTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAutoCalloutTasksRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Page size
+	// <Page size>.
 	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Page number
+	// Page number.
 	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 }
 
 type DescribeAutoCalloutTasksRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Page size
+	// <Page size>.
 	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Page number
+	// Page number.
 	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 }
 
@@ -2416,7 +2710,7 @@ type DescribeAutoCalloutTasksResponseParams struct {
 	// Total quantity.
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Task list.
+	// <Task list>.
 	Tasks []*AutoCalloutTaskInfo `json:"Tasks,omitnil,omitempty" name:"Tasks"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2441,14 +2735,14 @@ func (r *DescribeAutoCalloutTasksResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCCCBuyInfoListRequestParams struct {
-	// Application ID list, query all applications when not transmitted.
+	// Application id list, query all applications when not transmitted.
 	SdkAppIds []*int64 `json:"SdkAppIds,omitnil,omitempty" name:"SdkAppIds"`
 }
 
 type DescribeCCCBuyInfoListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID list, query all applications when not transmitted.
+	// Application id list, query all applications when not transmitted.
 	SdkAppIds []*int64 `json:"SdkAppIds,omitnil,omitempty" name:"SdkAppIds"`
 }
 
@@ -2504,13 +2798,13 @@ func (r *DescribeCCCBuyInfoListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCallInMetricsRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Whether to return skill group dimension information or not (the default is "Yes").
+	// Whether to return skill group dimension information or not (the default is "yes").
 	EnabledSkillGroup *bool `json:"EnabledSkillGroup,omitnil,omitempty" name:"EnabledSkillGroup"`
 
-	// Whether to return line dimension information or not (the default is "No").
+	// Whether to return line dimension information or not (the default is "no").
 	EnabledNumber *bool `json:"EnabledNumber,omitnil,omitempty" name:"EnabledNumber"`
 
 	// Filter skill group list.
@@ -2520,13 +2814,13 @@ type DescribeCallInMetricsRequestParams struct {
 type DescribeCallInMetricsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Whether to return skill group dimension information or not (the default is "Yes").
+	// Whether to return skill group dimension information or not (the default is "yes").
 	EnabledSkillGroup *bool `json:"EnabledSkillGroup,omitnil,omitempty" name:"EnabledSkillGroup"`
 
-	// Whether to return line dimension information or not (the default is "No").
+	// Whether to return line dimension information or not (the default is "no").
 	EnabledNumber *bool `json:"EnabledNumber,omitnil,omitempty" name:"EnabledNumber"`
 
 	// Filter skill group list.
@@ -2564,11 +2858,9 @@ type DescribeCallInMetricsResponseParams struct {
 	TotalMetrics *CallInMetrics `json:"TotalMetrics,omitnil,omitempty" name:"TotalMetrics"`
 
 	// Circuit dimension metrics.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	NumberMetrics []*CallInNumberMetrics `json:"NumberMetrics,omitnil,omitempty" name:"NumberMetrics"`
 
-	// Skill group dimension metrics
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Skill group dimension metrics.
 	SkillGroupMetrics []*CallInSkillGroupMetrics `json:"SkillGroupMetrics,omitnil,omitempty" name:"SkillGroupMetrics"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2593,20 +2885,20 @@ func (r *DescribeCallInMetricsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeExtensionRequestParams struct {
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Extension
+	// Extension.
 	ExtensionId *string `json:"ExtensionId,omitnil,omitempty" name:"ExtensionId"`
 }
 
 type DescribeExtensionRequest struct {
 	*tchttp.BaseRequest
 	
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Extension
+	// Extension.
 	ExtensionId *string `json:"ExtensionId,omitnil,omitempty" name:"ExtensionId"`
 }
 
@@ -2632,10 +2924,10 @@ func (r *DescribeExtensionRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeExtensionResponseParams struct {
-	// Extension
+	// Extension.
 	ExtensionId *string `json:"ExtensionId,omitnil,omitempty" name:"ExtensionId"`
 
-	// Domain name
+	// Domain name.
 	ExtensionDomain *string `json:"ExtensionDomain,omitnil,omitempty" name:"ExtensionDomain"`
 
 	// Registered password.
@@ -2669,16 +2961,16 @@ func (r *DescribeExtensionResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeExtensionsRequestParams struct {
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Page number (starting from 0)
+	// Page number (starting from 0).
 	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
-	// Filtering extension number list
+	// Filtering extension number list.
 	ExtensionIds []*string `json:"ExtensionIds,omitnil,omitempty" name:"ExtensionIds"`
 
-	// Page size
+	// Page size.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Fuzzy query field (fuzzy query for extension number, extension name, agent email, and agent name).
@@ -2691,16 +2983,16 @@ type DescribeExtensionsRequestParams struct {
 type DescribeExtensionsRequest struct {
 	*tchttp.BaseRequest
 	
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Page number (starting from 0)
+	// Page number (starting from 0).
 	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
-	// Filtering extension number list
+	// Filtering extension number list.
 	ExtensionIds []*string `json:"ExtensionIds,omitnil,omitempty" name:"ExtensionIds"`
 
-	// Page size
+	// Page size.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Fuzzy query field (fuzzy query for extension number, extension name, agent email, and agent name).
@@ -2764,44 +3056,44 @@ func (r *DescribeExtensionsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeIvrAudioListRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Page size, upper limit 50
+	// Page size, upper limit 50.
 	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Page number starting from 0.
 	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
-	// File alias
+	// File alias.
 	CustomFileName []*string `json:"CustomFileName,omitnil,omitempty" name:"CustomFileName"`
 
-	// Filename
+	// Filename.
 	AudioFileName []*string `json:"AudioFileName,omitnil,omitempty" name:"AudioFileName"`
 
-	// File ID
+	// File id.
 	FileId []*uint64 `json:"FileId,omitnil,omitempty" name:"FileId"`
 }
 
 type DescribeIvrAudioListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Page size, upper limit 50
+	// Page size, upper limit 50.
 	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Page number starting from 0.
 	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
-	// File alias
+	// File alias.
 	CustomFileName []*string `json:"CustomFileName,omitnil,omitempty" name:"CustomFileName"`
 
-	// Filename
+	// Filename.
 	AudioFileName []*string `json:"AudioFileName,omitnil,omitempty" name:"AudioFileName"`
 
-	// File ID
+	// File id.
 	FileId []*uint64 `json:"FileId,omitnil,omitempty" name:"FileId"`
 }
 
@@ -2831,10 +3123,10 @@ func (r *DescribeIvrAudioListRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeIvrAudioListResponseParams struct {
-	// Total number
+	// Total quantity.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// File Information
+	// File information.
 	FileInfo []*AudioFileInfo `json:"FileInfo,omitnil,omitempty" name:"FileInfo"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2859,7 +3151,7 @@ func (r *DescribeIvrAudioListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeNumbersRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Page number, starting from 0.
@@ -2872,7 +3164,7 @@ type DescribeNumbersRequestParams struct {
 type DescribeNumbersRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Page number, starting from 0.
@@ -2905,7 +3197,7 @@ func (r *DescribeNumbersRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeNumbersResponseParams struct {
-	// Total quantity
+	// Total quantity.
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Number list.
@@ -2933,7 +3225,7 @@ func (r *DescribeNumbersResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePSTNActiveSessionListRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Data offset.
@@ -2946,7 +3238,7 @@ type DescribePSTNActiveSessionListRequestParams struct {
 type DescribePSTNActiveSessionListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Data offset.
@@ -3007,20 +3299,20 @@ func (r *DescribePSTNActiveSessionListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribePredictiveDialingCampaignRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// <Task id>.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
 type DescribePredictiveDialingCampaignRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// <Task id>.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
@@ -3046,10 +3338,10 @@ func (r *DescribePredictiveDialingCampaignRequest) FromJsonString(s string) erro
 
 // Predefined struct for user
 type DescribePredictiveDialingCampaignResponseParams struct {
-	// Task ID.
+	// Task id.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 
-	// Task Name
+	// Task name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Being called sequence: 0 for random 1 for in order.
@@ -3058,7 +3350,7 @@ type DescribePredictiveDialingCampaignResponseParams struct {
 	// ID of the used skill group of agents.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 
-	// Specified IVR ID.
+	// Specified ivr id.
 	IVRId *int64 `json:"IVRId,omitnil,omitempty" name:"IVRId"`
 
 	// Running priority of multiple tasks in the same application, from high to low 1 - 5.
@@ -3073,10 +3365,10 @@ type DescribePredictiveDialingCampaignResponseParams struct {
 	// Call retry interval, in seconds, [60 - 86,400].
 	RetryInterval *int64 `json:"RetryInterval,omitnil,omitempty" name:"RetryInterval"`
 
-	// Task start time. Unix timestamp. The task will automatically start after this time.
+	// Task start time. unix timestamp. the task will automatically start after this time.
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Task termination time. Unix timestamp. The task will automatically terminate after this time.
+	// Task termination time. unix timestamp. the task will automatically terminate after this time.
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3100,42 +3392,34 @@ func (r *DescribePredictiveDialingCampaignResponse) FromJsonString(s string) err
 }
 
 type DescribePredictiveDialingCampaignsElement struct {
-	// Task ID
-	// Note: This field may return null if no valid value is obtained.
+	// <Task id>.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 
-	// Task Name
-	// Note: This field might return null if no valid values can be obtained.
+	// Task name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Task status 0 - Ready to start, 1 - In progress, 2 - Paused, 3 - Terminated, 4 - Completed.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Task status 0 - ready to start, 1 - in progress, 2 - paused, 3 - terminated, 4 - completed.
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Task status reasons 0 - Normal, 1 - Manually ended, 2 - Ended due to overtime.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Task status reasons 0 - normal, 1 - manually ended, 2 - ended due to overtime.
 	StatusReason *int64 `json:"StatusReason,omitnil,omitempty" name:"StatusReason"`
 
 	// Number of called numbers.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	CalleeCount *int64 `json:"CalleeCount,omitnil,omitempty" name:"CalleeCount"`
 
 	// Number of completed calls.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	FinishedCalleeCount *int64 `json:"FinishedCalleeCount,omitnil,omitempty" name:"FinishedCalleeCount"`
 
 	// Running priority of multiple tasks in the same application, from high to low 1 - 5.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
 	// ID of the used skill group of agents.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 }
 
 // Predefined struct for user
 type DescribePredictiveDialingCampaignsRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Page size, 100 maximum.
@@ -3147,14 +3431,14 @@ type DescribePredictiveDialingCampaignsRequestParams struct {
 	// Query the task list name keyword.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Query task list skill group ID.
+	// Query task list skill group id.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 }
 
 type DescribePredictiveDialingCampaignsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Page size, 100 maximum.
@@ -3166,7 +3450,7 @@ type DescribePredictiveDialingCampaignsRequest struct {
 	// Query the task list name keyword.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Query task list skill group ID.
+	// Query task list skill group id.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 }
 
@@ -3196,11 +3480,9 @@ func (r *DescribePredictiveDialingCampaignsRequest) FromJsonString(s string) err
 // Predefined struct for user
 type DescribePredictiveDialingCampaignsResponseParams struct {
 	// Total data volume.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Data
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Data.
 	CampaignList []*DescribePredictiveDialingCampaignsElement `json:"CampaignList,omitnil,omitempty" name:"CampaignList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3225,13 +3507,13 @@ func (r *DescribePredictiveDialingCampaignsResponse) FromJsonString(s string) er
 
 // Predefined struct for user
 type DescribePredictiveDialingSessionsRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Generated task ID.
+	// Generated task id.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 
-	// Page size, maximum of 1000
+	// Page size, maximum of 1000.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Page number starting from 0.
@@ -3241,13 +3523,13 @@ type DescribePredictiveDialingSessionsRequestParams struct {
 type DescribePredictiveDialingSessionsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Generated task ID.
+	// Generated task id.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 
-	// Page size, maximum of 1000
+	// Page size, maximum of 1000.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Page number starting from 0.
@@ -3281,7 +3563,7 @@ type DescribePredictiveDialingSessionsResponseParams struct {
 	// Total data volume.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// List of session IDs for a call. You can access detailed call bills in batches through https://intl.cloud.tencent.com/document/product/679/47714.?from_cn_redirect=1
+	// List of session ids for a call. you can access detailed call bills in batches through https://intl.cloud.tencent.com/document/product/679/47714.?from_cn_redirect=1.
 	SessionList []*string `json:"SessionList,omitnil,omitempty" name:"SessionList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3306,13 +3588,13 @@ func (r *DescribePredictiveDialingSessionsResponse) FromJsonString(s string) err
 
 // Predefined struct for user
 type DescribeProtectedTelCdrRequestParams struct {
-	// Start timestamp. Unix second-level timestamp.
+	// Start timestamp. unix second-level timestamp.
 	StartTimeStamp *int64 `json:"StartTimeStamp,omitnil,omitempty" name:"StartTimeStamp"`
 
-	// End timestamp. Unix second-level timestamp.
+	// End timestamp. unix second-level timestamp.
 	EndTimeStamp *int64 `json:"EndTimeStamp,omitnil,omitempty" name:"EndTimeStamp"`
 
-	// For the Application ID, go to https://console.cloud.tencent.com/ccc.
+	// For the application id, you can check https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Page size, upper limit 100.
@@ -3325,13 +3607,13 @@ type DescribeProtectedTelCdrRequestParams struct {
 type DescribeProtectedTelCdrRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start timestamp. Unix second-level timestamp.
+	// Start timestamp. unix second-level timestamp.
 	StartTimeStamp *int64 `json:"StartTimeStamp,omitnil,omitempty" name:"StartTimeStamp"`
 
-	// End timestamp. Unix second-level timestamp.
+	// End timestamp. unix second-level timestamp.
 	EndTimeStamp *int64 `json:"EndTimeStamp,omitnil,omitempty" name:"EndTimeStamp"`
 
-	// For the Application ID, go to https://console.cloud.tencent.com/ccc.
+	// For the application id, you can check https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Page size, upper limit 100.
@@ -3399,19 +3681,19 @@ func (r *DescribeProtectedTelCdrResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSkillGroupInfoListRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Page size, upper limit 100.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Page number starting from 0.
+	// <Page number starting from 0.>.
 	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
-	// Using skill group ID when querying a single skill group.
+	// Using skill group id when querying a single skill group.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 
-	// Used when querying skill groups with a modified time greater or equal to ModifiedTime.
+	// Used when querying skill groups with a modified time greater or equal to modifiedtime.
 	ModifiedTime *int64 `json:"ModifiedTime,omitnil,omitempty" name:"ModifiedTime"`
 
 	// Skill group name.
@@ -3421,19 +3703,19 @@ type DescribeSkillGroupInfoListRequestParams struct {
 type DescribeSkillGroupInfoListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Page size, upper limit 100.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Page number starting from 0.
+	// <Page number starting from 0.>.
 	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
-	// Using skill group ID when querying a single skill group.
+	// Using skill group id when querying a single skill group.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 
-	// Used when querying skill groups with a modified time greater or equal to ModifiedTime.
+	// Used when querying skill groups with a modified time greater or equal to modifiedtime.
 	ModifiedTime *int64 `json:"ModifiedTime,omitnil,omitempty" name:"ModifiedTime"`
 
 	// Skill group name.
@@ -3469,7 +3751,7 @@ type DescribeSkillGroupInfoListResponseParams struct {
 	// Total number of skill groups.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// Skill Group Information List.
+	// Skill group information list.
 	SkillGroupList []*SkillGroupInfoItem `json:"SkillGroupList,omitnil,omitempty" name:"SkillGroupList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3494,10 +3776,10 @@ func (r *DescribeSkillGroupInfoListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeStaffInfoListRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Page size, upper limit 9,999
+	// Page size, upper limit 9,999.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Page number starting from 0.
@@ -3506,20 +3788,20 @@ type DescribeStaffInfoListRequestParams struct {
 	// Agent account used when querying a single agent.
 	StaffMail *string `json:"StaffMail,omitnil,omitempty" name:"StaffMail"`
 
-	// Use when querying for agents with a modification time greater or equal to ModifiedTime.
+	// Use when querying for agents with a modification time greater or equal to modifiedtime.
 	ModifiedTime *int64 `json:"ModifiedTime,omitnil,omitempty" name:"ModifiedTime"`
 
-	// Skill group ID.
+	// Skill group id.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 }
 
 type DescribeStaffInfoListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Page size, upper limit 9,999
+	// Page size, upper limit 9,999.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
 	// Page number starting from 0.
@@ -3528,10 +3810,10 @@ type DescribeStaffInfoListRequest struct {
 	// Agent account used when querying a single agent.
 	StaffMail *string `json:"StaffMail,omitnil,omitempty" name:"StaffMail"`
 
-	// Use when querying for agents with a modification time greater or equal to ModifiedTime.
+	// Use when querying for agents with a modification time greater or equal to modifiedtime.
 	ModifiedTime *int64 `json:"ModifiedTime,omitnil,omitempty" name:"ModifiedTime"`
 
-	// Skill group ID.
+	// Skill group id.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 }
 
@@ -3589,32 +3871,32 @@ func (r *DescribeStaffInfoListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeStaffStatusMetricsRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Filter agent list. By default, do not pass all returned agent information.
+	// Filter agent list. by default, do not pass all returned agent information.
 	StaffList []*string `json:"StaffList,omitnil,omitempty" name:"StaffList"`
 
-	// Filter skill group ID list.
+	// Filter skill group id list.
 	GroupIdList []*int64 `json:"GroupIdList,omitnil,omitempty" name:"GroupIdList"`
 
-	// Filter agent status list Agent status free Available | busy Busy | rest On Break | notReady Not Ready | afterCallWork Post-call Adjustment | offline Offline
+	// Filter agent status list agent status free available | busy busy | rest on break | notready not ready | aftercallwork post-call adjustment | offline offline . 
 	StatusList []*string `json:"StatusList,omitnil,omitempty" name:"StatusList"`
 }
 
 type DescribeStaffStatusMetricsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Filter agent list. By default, do not pass all returned agent information.
+	// Filter agent list. by default, do not pass all returned agent information.
 	StaffList []*string `json:"StaffList,omitnil,omitempty" name:"StaffList"`
 
-	// Filter skill group ID list.
+	// Filter skill group id list.
 	GroupIdList []*int64 `json:"GroupIdList,omitnil,omitempty" name:"GroupIdList"`
 
-	// Filter agent status list Agent status free Available | busy Busy | rest On Break | notReady Not Ready | afterCallWork Post-call Adjustment | offline Offline
+	// Filter agent status list agent status free available | busy busy | rest on break | notready not ready | aftercallwork post-call adjustment | offline offline . 
 	StatusList []*string `json:"StatusList,omitnil,omitempty" name:"StatusList"`
 }
 
@@ -3642,7 +3924,7 @@ func (r *DescribeStaffStatusMetricsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeStaffStatusMetricsResponseParams struct {
-	// Real-time information on agent status.
+	// Real-Time information on agent status.
 	Metrics []*StaffStatusMetrics `json:"Metrics,omitnil,omitempty" name:"Metrics"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3667,26 +3949,26 @@ func (r *DescribeStaffStatusMetricsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTelCallInfoRequestParams struct {
-	// Start timestamp, Unix timestamp (query dimension supports only daily. For example, to query May 1st, pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59" timestamp. To query May 1st and May 2nd, pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59" timestamp)
+	// Start timestamp, unix timestamp (query dimension supports only daily. for example, to query may 1st, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-01 23:59:59" timestamp. to query may 1st and may 2nd, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-02 23:59:59" timestamp).
 	StartTimeStamp *int64 `json:"StartTimeStamp,omitnil,omitempty" name:"StartTimeStamp"`
 
-	// End timestamp, Unix timestamp, the query time range is up to 90 days (query dimension supports only daily. For example, to query May 1st, pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59" timestamp. To query May 1st and May 2nd, pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59" timestamp)
+	// End timestamp, unix timestamp, the query time range is up to 90 days (query dimension supports only daily. for example, to query may 1st, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-01 23:59:59" timestamp. to query may 1st and may 2nd, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-02 23:59:59" timestamp).
 	EndTimeStamp *int64 `json:"EndTimeStamp,omitnil,omitempty" name:"EndTimeStamp"`
 
-	// Application ID list, when having multiple IDs, the returned value is the sum of all the IDs.
+	// Application id list, when having multiple ids, the returned value is the sum of all the ids.
 	SdkAppIdList []*int64 `json:"SdkAppIdList,omitnil,omitempty" name:"SdkAppIdList"`
 }
 
 type DescribeTelCallInfoRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start timestamp, Unix timestamp (query dimension supports only daily. For example, to query May 1st, pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59" timestamp. To query May 1st and May 2nd, pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59" timestamp)
+	// Start timestamp, unix timestamp (query dimension supports only daily. for example, to query may 1st, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-01 23:59:59" timestamp. to query may 1st and may 2nd, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-02 23:59:59" timestamp).
 	StartTimeStamp *int64 `json:"StartTimeStamp,omitnil,omitempty" name:"StartTimeStamp"`
 
-	// End timestamp, Unix timestamp, the query time range is up to 90 days (query dimension supports only daily. For example, to query May 1st, pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-01 23:59:59" timestamp. To query May 1st and May 2nd, pass startTime:"2023-05-01 00:00:00","endTime":"2023-05-02 23:59:59" timestamp)
+	// End timestamp, unix timestamp, the query time range is up to 90 days (query dimension supports only daily. for example, to query may 1st, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-01 23:59:59" timestamp. to query may 1st and may 2nd, pass starttime:"2023-05-01 00:00:00","endtime":"2023-05-02 23:59:59" timestamp).
 	EndTimeStamp *int64 `json:"EndTimeStamp,omitnil,omitempty" name:"EndTimeStamp"`
 
-	// Application ID list, when having multiple IDs, the returned value is the sum of all the IDs.
+	// Application id list, when having multiple ids, the returned value is the sum of all the ids.
 	SdkAppIdList []*int64 `json:"SdkAppIdList,omitnil,omitempty" name:"SdkAppIdList"`
 }
 
@@ -3713,27 +3995,27 @@ func (r *DescribeTelCallInfoRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTelCallInfoResponseParams struct {
-	// Number of minutes consumed by Outbound Package.
+	// Number of minutes consumed by outbound package.
 	TelCallOutCount *int64 `json:"TelCallOutCount,omitnil,omitempty" name:"TelCallOutCount"`
 
-	// Number of minutes consumed by Inbound Package.
+	// Number of minutes consumed by inbound package.
 	TelCallInCount *int64 `json:"TelCallInCount,omitnil,omitempty" name:"TelCallInCount"`
 
 	// Number of agent usage statistics.
 	SeatUsedCount *int64 `json:"SeatUsedCount,omitnil,omitempty" name:"SeatUsedCount"`
 
-	// Number of minutes consumed by Audio package.
+	// Number of minutes consumed by audio package.
 	//
 	// Deprecated: VoipCallInCount is deprecated.
 	VoipCallInCount *int64 `json:"VoipCallInCount,omitnil,omitempty" name:"VoipCallInCount"`
 
-	// Number of minutes consumed by Audio package.
+	// Number of minutes consumed by audio package.
 	VOIPCallInCount *int64 `json:"VOIPCallInCount,omitnil,omitempty" name:"VOIPCallInCount"`
 
-	// Number of minutes consumed by Offline Speech-to-Text Package.
+	// Number of minutes consumed by offline speech-to-text package.
 	AsrOfflineCount *int64 `json:"AsrOfflineCount,omitnil,omitempty" name:"AsrOfflineCount"`
 
-	// Number of minutes consumed by Real-time Speech-to-Text Package.
+	// Number of minutes consumed by real-time speech-to-text package.
 	AsrRealtimeCount *int64 `json:"AsrRealtimeCount,omitnil,omitempty" name:"AsrRealtimeCount"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -3758,13 +4040,13 @@ func (r *DescribeTelCallInfoResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeTelCdrRequestParams struct {
-	// Start timestamp, Unix Timestamp in Seconds. Supports up to the past 180 days.
+	// Start timestamp, unix timestamp in seconds. supports up to the past 180 days.
 	StartTimeStamp *int64 `json:"StartTimeStamp,omitnil,omitempty" name:"StartTimeStamp"`
 
-	// End timestamp, Unix Timestamp in Seconds. The range between the end time and start time is less than 90 days.
+	// End timestamp, unix timestamp in seconds. the range between the end time and start time is less than 90 days.
 	EndTimeStamp *int64 `json:"EndTimeStamp,omitnil,omitempty" name:"EndTimeStamp"`
 
-	// Instance ID (deprecated).
+	// Instance id (deprecated).
 	//
 	// Deprecated: InstanceId is deprecated.
 	InstanceId *int64 `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
@@ -3775,32 +4057,32 @@ type DescribeTelCdrRequestParams struct {
 	// Offset (deprecated).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Page size (required), up to 100.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Page number (required), starting from 0.
+	// <Page number (required), starting from 0.>.
 	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
-	// Filter by Phone Number.
+	// Filter by phone number.
 	Phones []*string `json:"Phones,omitnil,omitempty" name:"Phones"`
 
-	// Filter by SessionId.
+	// Filter by sessionid.
 	SessionIds []*string `json:"SessionIds,omitnil,omitempty" name:"SessionIds"`
 }
 
 type DescribeTelCdrRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start timestamp, Unix Timestamp in Seconds. Supports up to the past 180 days.
+	// Start timestamp, unix timestamp in seconds. supports up to the past 180 days.
 	StartTimeStamp *int64 `json:"StartTimeStamp,omitnil,omitempty" name:"StartTimeStamp"`
 
-	// End timestamp, Unix Timestamp in Seconds. The range between the end time and start time is less than 90 days.
+	// End timestamp, unix timestamp in seconds. the range between the end time and start time is less than 90 days.
 	EndTimeStamp *int64 `json:"EndTimeStamp,omitnil,omitempty" name:"EndTimeStamp"`
 
-	// Instance ID (deprecated).
+	// Instance id (deprecated).
 	InstanceId *int64 `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Maximum number of returned entries (deprecated).
@@ -3809,19 +4091,19 @@ type DescribeTelCdrRequest struct {
 	// Offset (deprecated).
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Page size (required), up to 100.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Page number (required), starting from 0.
+	// <Page number (required), starting from 0.>.
 	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
 
-	// Filter by Phone Number.
+	// Filter by phone number.
 	Phones []*string `json:"Phones,omitnil,omitempty" name:"Phones"`
 
-	// Filter by SessionId.
+	// Filter by sessionid.
 	SessionIds []*string `json:"SessionIds,omitnil,omitempty" name:"SessionIds"`
 }
 
@@ -3887,21 +4169,85 @@ func (r *DescribeTelCdrResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
-type DescribeTelSessionRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+type DescribeTelRecordAsrRequestParams struct {
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Session ID.
+	// Session id.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+}
+
+type DescribeTelRecordAsrRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Session id.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+}
+
+func (r *DescribeTelRecordAsrRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTelRecordAsrRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "SessionId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeTelRecordAsrRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTelRecordAsrResponseParams struct {
+	// Recording to text information.
+	AsrDataList []*AsrData `json:"AsrDataList,omitnil,omitempty" name:"AsrDataList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeTelRecordAsrResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeTelRecordAsrResponseParams `json:"Response"`
+}
+
+func (r *DescribeTelRecordAsrResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeTelRecordAsrResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeTelSessionRequestParams struct {
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Session id.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 }
 
 type DescribeTelSessionRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Session ID.
+	// Session id.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 }
 
@@ -3958,7 +4304,7 @@ type DisableCCCPhoneNumberRequestParams struct {
 	// Disable switch: 0 for enable, 1 for disable.
 	Disabled *int64 `json:"Disabled,omitnil,omitempty" name:"Disabled"`
 
-	// TCCC instance application ID.
+	// TCCC instance application id.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 }
 
@@ -3971,7 +4317,7 @@ type DisableCCCPhoneNumberRequest struct {
 	// Disable switch: 0 for enable, 1 for disable.
 	Disabled *int64 `json:"Disabled,omitnil,omitempty" name:"Disabled"`
 
-	// TCCC instance application ID.
+	// TCCC instance application id.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 }
 
@@ -4019,7 +4365,7 @@ func (r *DisableCCCPhoneNumberResponse) FromJsonString(s string) error {
 }
 
 type ErrStaffItem struct {
-	// Agent Email Address
+	// Agent email address.
 	StaffEmail *string `json:"StaffEmail,omitnil,omitempty" name:"StaffEmail"`
 
 	// Error code.
@@ -4030,13 +4376,13 @@ type ErrStaffItem struct {
 }
 
 type ExtensionInfo struct {
-	// Instance ID.
+	// Instance id.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Extension full name.
 	FullExtensionId *string `json:"FullExtensionId,omitnil,omitempty" name:"FullExtensionId"`
 
-	// Extension
+	// Extension.
 	ExtensionId *string `json:"ExtensionId,omitnil,omitempty" name:"ExtensionId"`
 
 	// Affiliated skill group list.
@@ -4045,41 +4391,41 @@ type ExtensionInfo struct {
 	// Extension name.
 	ExtensionName *string `json:"ExtensionName,omitnil,omitempty" name:"ExtensionName"`
 
-	// Creation Time
+	// Creation time.
 	CreateTime *int64 `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
 	// Last modification time.
 	ModifyTime *int64 `json:"ModifyTime,omitnil,omitempty" name:"ModifyTime"`
 
-	// Telephone status (0 Offline, 100 Free, 200 Busy).
+	// Telephone status (0 offline, 100 free, 200 busy).
 	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// Whether to register.
 	Register *bool `json:"Register,omitnil,omitempty" name:"Register"`
 
-	// Bind Agent Email
+	// Bind agent email.
 	Relation *string `json:"Relation,omitnil,omitempty" name:"Relation"`
 
-	// Bind Agent Name
+	// Bind agent name.
 	RelationName *string `json:"RelationName,omitnil,omitempty" name:"RelationName"`
 }
 
 // Predefined struct for user
 type HangUpCallRequestParams struct {
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Session ID.
+	// Session id.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 }
 
 type HangUpCallRequest struct {
 	*tchttp.BaseRequest
 	
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Session ID.
+	// Session id.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 }
 
@@ -4126,21 +4472,31 @@ func (r *HangUpCallResponse) FromJsonString(s string) error {
 }
 
 type IVRKeyPressedElement struct {
-	// Key.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Hit keyword or press.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
-	// Tag associated with key.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Tag associated with the key.
 	Label *string `json:"Label,omitnil,omitempty" name:"Label"`
+
+	// UNIX millisecond timestamp.
+	Timestamp *int64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
+
+	// Node tags.
+	NodeLabel *string `json:"NodeLabel,omitnil,omitempty" name:"NodeLabel"`
+
+	// User'S original input.
+	OriginalContent *string `json:"OriginalContent,omitnil,omitempty" name:"OriginalContent"`
+
+	// TTS prompt content.
+	TTSPrompt *string `json:"TTSPrompt,omitnil,omitempty" name:"TTSPrompt"`
 }
 
 // Predefined struct for user
 type ModifyExtensionRequestParams struct {
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Extension
+	// Extension.
 	ExtensionId *string `json:"ExtensionId,omitnil,omitempty" name:"ExtensionId"`
 
 	// Extension name.
@@ -4156,10 +4512,10 @@ type ModifyExtensionRequestParams struct {
 type ModifyExtensionRequest struct {
 	*tchttp.BaseRequest
 	
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Extension
+	// Extension.
 	ExtensionId *string `json:"ExtensionId,omitnil,omitempty" name:"ExtensionId"`
 
 	// Extension name.
@@ -4218,27 +4574,102 @@ func (r *ModifyExtensionResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyOwnNumberApplyRequestParams struct {
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Circuit-Related parameters.
+	DetailList []*OwnNumberApplyDetailItem `json:"DetailList,omitnil,omitempty" name:"DetailList"`
+
+	// Approval id.
+	ApplyId *uint64 `json:"ApplyId,omitnil,omitempty" name:"ApplyId"`
+
+	// Prefix for sending numbers.
+	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
+}
+
+type ModifyOwnNumberApplyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
+	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
+
+	// Circuit-Related parameters.
+	DetailList []*OwnNumberApplyDetailItem `json:"DetailList,omitnil,omitempty" name:"DetailList"`
+
+	// Approval id.
+	ApplyId *uint64 `json:"ApplyId,omitnil,omitempty" name:"ApplyId"`
+
+	// Prefix for sending numbers.
+	Prefix *string `json:"Prefix,omitnil,omitempty" name:"Prefix"`
+}
+
+func (r *ModifyOwnNumberApplyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyOwnNumberApplyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SdkAppId")
+	delete(f, "DetailList")
+	delete(f, "ApplyId")
+	delete(f, "Prefix")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyOwnNumberApplyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyOwnNumberApplyResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyOwnNumberApplyResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyOwnNumberApplyResponseParams `json:"Response"`
+}
+
+func (r *ModifyOwnNumberApplyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyOwnNumberApplyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyStaffPasswordRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Agent email.
 	Email *string `json:"Email,omitnil,omitempty" name:"Email"`
 
-	// The set password 
+	// The set password.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
 type ModifyStaffPasswordRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Agent email.
 	Email *string `json:"Email,omitnil,omitempty" name:"Email"`
 
-	// The set password 
+	// The set password.
 	Password *string `json:"Password,omitnil,omitempty" name:"Password"`
 }
 
@@ -4287,7 +4718,7 @@ func (r *ModifyStaffPasswordResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyStaffRequestParams struct {
-	// Application ID
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Agent account.
@@ -4302,23 +4733,26 @@ type ModifyStaffRequestParams struct {
 	// Agent nickname.
 	Nick *string `json:"Nick,omitnil,omitempty" name:"Nick"`
 
-	// Agent ID
+	// Agent id.
 	StaffNo *string `json:"StaffNo,omitnil,omitempty" name:"StaffNo"`
 
-	// Bind skill group ID list.
+	// Bind skill group id list.
 	SkillGroupIds []*int64 `json:"SkillGroupIds,omitnil,omitempty" name:"SkillGroupIds"`
 
 	// Whether the cell phone outbound call switch is enabled or not.
 	UseMobileCallOut *bool `json:"UseMobileCallOut,omitnil,omitempty" name:"UseMobileCallOut"`
 
-	// Cell phone answering pattern: 0 - Off | 1 - Only when Offline | 2 - Always.
+	// Cell phone answering pattern: 0 - off | 1 - only when offline | 2 - always.
 	UseMobileAccept *int64 `json:"UseMobileAccept,omitnil,omitempty" name:"UseMobileAccept"`
+
+	// Agent extension number (starting with 1 to 8, 4 - 6 digits).
+	ExtensionNumber *string `json:"ExtensionNumber,omitnil,omitempty" name:"ExtensionNumber"`
 }
 
 type ModifyStaffRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Agent account.
@@ -4333,17 +4767,20 @@ type ModifyStaffRequest struct {
 	// Agent nickname.
 	Nick *string `json:"Nick,omitnil,omitempty" name:"Nick"`
 
-	// Agent ID
+	// Agent id.
 	StaffNo *string `json:"StaffNo,omitnil,omitempty" name:"StaffNo"`
 
-	// Bind skill group ID list.
+	// Bind skill group id list.
 	SkillGroupIds []*int64 `json:"SkillGroupIds,omitnil,omitempty" name:"SkillGroupIds"`
 
 	// Whether the cell phone outbound call switch is enabled or not.
 	UseMobileCallOut *bool `json:"UseMobileCallOut,omitnil,omitempty" name:"UseMobileCallOut"`
 
-	// Cell phone answering pattern: 0 - Off | 1 - Only when Offline | 2 - Always.
+	// Cell phone answering pattern: 0 - off | 1 - only when offline | 2 - always.
 	UseMobileAccept *int64 `json:"UseMobileAccept,omitnil,omitempty" name:"UseMobileAccept"`
+
+	// Agent extension number (starting with 1 to 8, 4 - 6 digits).
+	ExtensionNumber *string `json:"ExtensionNumber,omitnil,omitempty" name:"ExtensionNumber"`
 }
 
 func (r *ModifyStaffRequest) ToJsonString() string {
@@ -4367,6 +4804,7 @@ func (r *ModifyStaffRequest) FromJsonString(s string) error {
 	delete(f, "SkillGroupIds")
 	delete(f, "UseMobileCallOut")
 	delete(f, "UseMobileAccept")
+	delete(f, "ExtensionNumber")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStaffRequest has unknown keys!", "")
 	}
@@ -4406,11 +4844,28 @@ type NumberInfo struct {
 	State *int64 `json:"State,omitnil,omitempty" name:"State"`
 }
 
+type OwnNumberApplyDetailItem struct {
+	// Number type: 0 - inbound | 1 - outbound | 2 - inbound and outbound.
+	CallType *int64 `json:"CallType,omitnil,omitempty" name:"CallType"`
+
+	// Line number.
+	PhoneNumber *string `json:"PhoneNumber,omitnil,omitempty" name:"PhoneNumber"`
+
+	// Maximum concurrent call number.
+	MaxCallCount *int64 `json:"MaxCallCount,omitnil,omitempty" name:"MaxCallCount"`
+
+	// Maximum number of concurrencies per second.
+	MaxCallPSec *int64 `json:"MaxCallPSec,omitnil,omitempty" name:"MaxCallPSec"`
+
+	// Outbound called number format, use {+e.164} or {e.164}. 
+	OutboundCalleeFormat *string `json:"OutboundCalleeFormat,omitnil,omitempty" name:"OutboundCalleeFormat"`
+}
+
 type PSTNSession struct {
-	// Session ID.
+	// Session id.
 	SessionID *string `json:"SessionID,omitnil,omitempty" name:"SessionID"`
 
-	// Temporary room ID for session.
+	// Temporary room id for session.
 	RoomID *string `json:"RoomID,omitnil,omitempty" name:"RoomID"`
 
 	// Caller.
@@ -4419,49 +4874,49 @@ type PSTNSession struct {
 	// Called.
 	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
 
-	// Start time. Unix timestamp.
+	// Start time. unix timestamp.
 	StartTimestamp *int64 `json:"StartTimestamp,omitnil,omitempty" name:"StartTimestamp"`
 
-	// Ring time. Unix timestamp.
+	// Ring time. unix timestamp.
 	RingTimestamp *int64 `json:"RingTimestamp,omitnil,omitempty" name:"RingTimestamp"`
 
-	// Answer time. Unix timestamp.
+	// Answer time. unix timestamp.
 	AcceptTimestamp *int64 `json:"AcceptTimestamp,omitnil,omitempty" name:"AcceptTimestamp"`
 
 	// Agent email.
 	StaffEmail *string `json:"StaffEmail,omitnil,omitempty" name:"StaffEmail"`
 
-	// Agent ID
+	// Agent id.
 	StaffNumber *string `json:"StaffNumber,omitnil,omitempty" name:"StaffNumber"`
 
-	// Session Status
-	// ringing Ringing
-	// seatJoining  waiting for the agent to answer
-	// inProgress  Ongoing
-	// finished - Completed.
+	// Session status.
+	// Ringing - in progress.
+	// SeatJoining - waiting for the agent to answer.
+	// InProgress: in progress.
+	// Finished - completed.
 	SessionStatus *string `json:"SessionStatus,omitnil,omitempty" name:"SessionStatus"`
 
-	// Session call direction, 0 - Inbound | 1 - Outbound.
+	// Session call direction, 0 - inbound | 1 - outbound.
 	Direction *int64 `json:"Direction,omitnil,omitempty" name:"Direction"`
 
-	// The number used for transferring to the external line (Outbound Caller).
+	// The number used for transferring to the external line (outbound caller).
 	OutBoundCaller *string `json:"OutBoundCaller,omitnil,omitempty" name:"OutBoundCaller"`
 
 	// Outbound callee.
 	OutBoundCallee *string `json:"OutBoundCallee,omitnil,omitempty" name:"OutBoundCallee"`
 
-	// Caller number protection ID. Effective when the number protection map feature is activated, and the Caller field is empty.
+	// Caller number protection id. effective when the number protection map feature is activated, and the caller field is empty.
 	ProtectedCaller *string `json:"ProtectedCaller,omitnil,omitempty" name:"ProtectedCaller"`
 
-	// Called number protection ID. Effective when the number protection map feature is activated, and the Callee field is empty.
+	// Called number protection id. effective when the number protection map feature is activated, and the callee field is empty.
 	ProtectedCallee *string `json:"ProtectedCallee,omitnil,omitempty" name:"ProtectedCallee"`
 }
 
 type PSTNSessionInfo struct {
-	// Session ID.
+	// Session id.
 	SessionID *string `json:"SessionID,omitnil,omitempty" name:"SessionID"`
 
-	// Temporary room ID for session.
+	// Temporary room id for session.
 	RoomID *string `json:"RoomID,omitnil,omitempty" name:"RoomID"`
 
 	// Caller.
@@ -4470,70 +4925,70 @@ type PSTNSessionInfo struct {
 	// Called.
 	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
 
-	// Start time. Unix timestamp.
+	// Start time. unix timestamp.
 	StartTimestamp *string `json:"StartTimestamp,omitnil,omitempty" name:"StartTimestamp"`
 
-	// Answer time. Unix timestamp.
+	// Answer time. unix timestamp.
 	AcceptTimestamp *string `json:"AcceptTimestamp,omitnil,omitempty" name:"AcceptTimestamp"`
 
 	// Agent email.
 	StaffEmail *string `json:"StaffEmail,omitnil,omitempty" name:"StaffEmail"`
 
-	// Agent ID
+	// Agent id.
 	StaffNumber *string `json:"StaffNumber,omitnil,omitempty" name:"StaffNumber"`
 
-	// Agent Status inProgress Ongoing
+	// Agent status inprogress ongoing.
 	SessionStatus *string `json:"SessionStatus,omitnil,omitempty" name:"SessionStatus"`
 
-	// Session call direction, 0 - Inbound | 1 - Outbound.
+	// Session call direction, 0 - inbound | 1 - outbound.
 	Direction *int64 `json:"Direction,omitnil,omitempty" name:"Direction"`
 
-	// Ring time. Unix timestamp.
+	// Ring time. unix timestamp.
 	RingTimestamp *int64 `json:"RingTimestamp,omitnil,omitempty" name:"RingTimestamp"`
 
-	// Caller number protection ID. Effective when the number protection map feature is activated, and the Caller field is empty.
+	// Caller number protection id. effective when the number protection map feature is activated, and the caller field is empty.
 	ProtectedCaller *string `json:"ProtectedCaller,omitnil,omitempty" name:"ProtectedCaller"`
 
-	// Called number protection ID. Effective when the number protection map feature is activated, and the Callee field is empty.
+	// Called number protection id. effective when the number protection map feature is activated, and the callee field is empty.
 	ProtectedCallee *string `json:"ProtectedCallee,omitnil,omitempty" name:"ProtectedCallee"`
 }
 
 type PackageBuyInfo struct {
-	// Package ID.
+	// Package id.
 	PackageId *string `json:"PackageId,omitnil,omitempty" name:"PackageId"`
 
-	// Package type, 0 - Outbound call package | 1 - 400 inbound call package.
+	// Package type, 0 - outbound call package | 1 - 400 inbound call package.
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Total package.
+	// <TOTAL_PACKAGE>.
 	CapacitySize *int64 `json:"CapacitySize,omitnil,omitempty" name:"CapacitySize"`
 
-	// Remaining package.
+	// Remaining package balance.
 	CapacityRemain *int64 `json:"CapacityRemain,omitnil,omitempty" name:"CapacityRemain"`
 
 	// Purchased timestamp.
 	BuyTime *int64 `json:"BuyTime,omitnil,omitempty" name:"BuyTime"`
 
-	// End timestamp.
+	// Deadline timestamp.
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 // Predefined struct for user
 type PausePredictiveDialingCampaignRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// Task id.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
 type PausePredictiveDialingCampaignRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// Task id.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
@@ -4580,41 +5035,41 @@ func (r *PausePredictiveDialingCampaignResponse) FromJsonString(s string) error 
 }
 
 type PhoneNumBuyInfo struct {
-	// Telephone Number
+	// Telephone number.
 	PhoneNum *string `json:"PhoneNum,omitnil,omitempty" name:"PhoneNum"`
 
-	// Number type, 0 - Landline | 1 - Virtual Business Number | 2 - ISP Number | 3 - 400 Number.
+	// Number type, 0 - landline | 1 - virtual business number | 2 - ISP number | 3 - 400 number.
 	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Call type of the number, 1 - Inbound | 2 - Outbound | 3 - Inbound and outbound.
+	// Call type of the number, 1 - inbound | 2 - outbound | 3 - inbound and outbound.
 	CallType *int64 `json:"CallType,omitnil,omitempty" name:"CallType"`
 
 	// Purchased timestamp.
 	BuyTime *int64 `json:"BuyTime,omitnil,omitempty" name:"BuyTime"`
 
-	// End timestamp.
+	// Deadline timestamp.
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Number status, 1-Normal | 2-Suspended due to non-payment | 4-Admin suspended | 5-Suspended due to violation.
+	// Number status, 1-normal | 2-suspended due to non-payment | 4-admin suspended | 5-suspended due to violation.
 	State *int64 `json:"State,omitnil,omitempty" name:"State"`
 }
 
 // Predefined struct for user
 type ResetExtensionPasswordRequestParams struct {
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Extension
+	// Extension.
 	ExtensionId *string `json:"ExtensionId,omitnil,omitempty" name:"ExtensionId"`
 }
 
 type ResetExtensionPasswordRequest struct {
 	*tchttp.BaseRequest
 	
-	// TCCC instance application ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Extension
+	// Extension.
 	ExtensionId *string `json:"ExtensionId,omitnil,omitempty" name:"ExtensionId"`
 }
 
@@ -4665,20 +5120,20 @@ func (r *ResetExtensionPasswordResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ResumePredictiveDialingCampaignRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// <Task id>.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
 type ResumePredictiveDialingCampaignRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// <Task id>.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 }
 
@@ -4725,23 +5180,22 @@ func (r *ResumePredictiveDialingCampaignResponse) FromJsonString(s string) error
 }
 
 type SdkAppIdBuyInfo struct {
-	// Application ID
+	// Application id.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Application Name
+	// Application name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Agent Purchase Count (still within the validity period)
+	// Agent purchase count (still within the validity period).
 	StaffBuyNum *int64 `json:"StaffBuyNum,omitnil,omitempty" name:"StaffBuyNum"`
 
-	// Agent Purchase List (still within the validity period)
+	// Agent purchase list (still within the validity period).
 	StaffBuyList []*StaffBuyInfo `json:"StaffBuyList,omitnil,omitempty" name:"StaffBuyList"`
 
 	// List of numbers purchased.
 	PhoneNumBuyList []*PhoneNumBuyInfo `json:"PhoneNumBuyList,omitnil,omitempty" name:"PhoneNumBuyList"`
 
 	// Number of office telephones purchased (still within the validity period).
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	SipBuyNum *int64 `json:"SipBuyNum,omitnil,omitempty" name:"SipBuyNum"`
 }
 
@@ -4753,202 +5207,174 @@ type SeatUserInfo struct {
 	Mail *string `json:"Mail,omitnil,omitempty" name:"Mail"`
 
 	// Worker number.
-	// Note: This field may return null, indicating that no valid value could be obtained.
 	StaffNumber *string `json:"StaffNumber,omitnil,omitempty" name:"StaffNumber"`
 
-	// Agent's Telephone Number (With 0086 Prefix)
+	// Agent'S telephone number (with 0086 prefix).
 	Phone *string `json:"Phone,omitnil,omitempty" name:"Phone"`
 
 	// Agent nickname.
 	Nick *string `json:"Nick,omitnil,omitempty" name:"Nick"`
 
-	// User ID
+	// User id.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
-	// List of skill groups associated with the seat
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// List of skill groups associated with the agent.
 	SkillGroupNameList []*string `json:"SkillGroupNameList,omitnil,omitempty" name:"SkillGroupNameList"`
 
-	// 1: Admin.
-	// 2: Quality inspector.
-	// 3: Ordinary agent.
-	// else: Custom Role ID.
-	// Note: This field may return null, indicating that no valid value could be obtained.
+	// 1: admin.
+	// 2: quality inspector.
+	// 3: ordinary agent.
+	// Else: custom role id.
 	Role *int64 `json:"Role,omitnil,omitempty" name:"Role"`
+
+	// Agent extension number (starting with 1 to 8, 4 - 6 digits).
+	ExtensionNumber *string `json:"ExtensionNumber,omitnil,omitempty" name:"ExtensionNumber"`
 }
 
 type ServeParticipant struct {
 	// Agent email.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Mail *string `json:"Mail,omitnil,omitempty" name:"Mail"`
 
-	// Agent Telephone
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Agent phone number.
 	Phone *string `json:"Phone,omitnil,omitempty" name:"Phone"`
 
-	// Ring timestamp. Unix second-level timestamp.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Ringing timestamp, unix second-level timestamp.
 	RingTimestamp *int64 `json:"RingTimestamp,omitnil,omitempty" name:"RingTimestamp"`
 
-	// Answer timestamp. Unix second-level timestamp.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Answer timestamp. unix second-level timestamp.
 	AcceptTimestamp *int64 `json:"AcceptTimestamp,omitnil,omitempty" name:"AcceptTimestamp"`
 
-	// End timestamp. Unix second-level timestamp.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// End timestamp. unix second-level timestamp.
 	EndedTimestamp *int64 `json:"EndedTimestamp,omitnil,omitempty" name:"EndedTimestamp"`
 
-	// Recording ID, which can be used to index the recording on the agent side
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Recording id can be indexed to the agent side recording.
 	RecordId *string `json:"RecordId,omitnil,omitempty" name:"RecordId"`
 
-	// Participant type: "staffSeat", "outboundSeat", "staffPhoneSeat".
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Participant type: "staffseat", "outboundseat", "staffphoneseat".
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Transfer Source Agent Information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Transfer source agent information.
 	TransferFrom *string `json:"TransferFrom,omitnil,omitempty" name:"TransferFrom"`
 
-	// Transfer source participant type is consistent with the Type value.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Transfer source participant type is consistent with the type value.
 	TransferFromType *string `json:"TransferFromType,omitnil,omitempty" name:"TransferFromType"`
 
-	// Transfer Destination Agent Information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Transfer destination agent information.
 	TransferTo *string `json:"TransferTo,omitnil,omitempty" name:"TransferTo"`
 
-	// Transfer destination participant type is consistent with Type values.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Transfer destination participant type, which is consistent with type values.
 	TransferToType *string `json:"TransferToType,omitnil,omitempty" name:"TransferToType"`
 
-	// Skill group ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Skill group id.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 
 	// Ending status.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	EndStatusString *string `json:"EndStatusString,omitnil,omitempty" name:"EndStatusString"`
 
-	// Recording URL.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Recording url.
 	RecordURL *string `json:"RecordURL,omitnil,omitempty" name:"RecordURL"`
 
 	// Participant sequence number, starting from 0.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Sequence *int64 `json:"Sequence,omitnil,omitempty" name:"Sequence"`
 
-	// Start timestamp. Unix second-level timestamp.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Start timestamp. unix second-level timestamp.
 	StartTimestamp *int64 `json:"StartTimestamp,omitnil,omitempty" name:"StartTimestamp"`
 
-	// Skill Group name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Skill group name.
 	SkillGroupName *string `json:"SkillGroupName,omitnil,omitempty" name:"SkillGroupName"`
 
-	// Address of the third party COS for transferring recording.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Address of the third-party cos for transferring recording.
 	CustomRecordURL *string `json:"CustomRecordURL,omitnil,omitempty" name:"CustomRecordURL"`
 }
 
 type SkillGroupInfoItem struct {
-	// Skill group ID.
+	// Skill group id.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 
 	// Skill group name.
 	SkillGroupName *string `json:"SkillGroupName,omitnil,omitempty" name:"SkillGroupName"`
 
-	// (Deprecated) Type: IM, TEL, ALL (full media).
+	// (Deprecated) type: im, tel, all (full media).
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Session allocation policy.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	RoutePolicy *string `json:"RoutePolicy,omitnil,omitempty" name:"RoutePolicy"`
 
-	// Should the conversation allocation prioritize the last service seat?
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Whether the session is allocated to the last serviced agent first.
 	UsingLastSeat *int64 `json:"UsingLastSeat,omitnil,omitempty" name:"UsingLastSeat"`
 
 	// Maximum concurrency number of single client service (default 1 for telephone type).
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	MaxConcurrency *int64 `json:"MaxConcurrency,omitnil,omitempty" name:"MaxConcurrency"`
 
 	// Last modification time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	LastModifyTimestamp *int64 `json:"LastModifyTimestamp,omitnil,omitempty" name:"LastModifyTimestamp"`
 
-	// Skill group type 0-phone, 1-online, 3-audio, 4-video.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Skill group type 0-cell phone, 1-online, 3-audio, 4-video.	.	
 	SkillGroupType *int64 `json:"SkillGroupType,omitnil,omitempty" name:"SkillGroupType"`
 
-	// Extension number within the skill group
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Intra-Skill group line number.
 	Alias *string `json:"Alias,omitnil,omitempty" name:"Alias"`
 }
 
 type SkillGroupItem struct {
-	// Skill group ID.
+	// Skill group id.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 
 	// Skill group name.
 	SkillGroupName *string `json:"SkillGroupName,omitnil,omitempty" name:"SkillGroupName"`
 
-	// Priority
+	// Priority.
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
-	// Type: IM, TEL, ALL (full media).
+	// Type: im, tel, all (full media).
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type StaffBuyInfo struct {
-	// Number of agents purchased
+	// Number of agents purchased.
 	Num *int64 `json:"Num,omitnil,omitempty" name:"Num"`
 
 	// Purchased timestamp.
 	BuyTime *int64 `json:"BuyTime,omitnil,omitempty" name:"BuyTime"`
 
-	// End timestamp.
+	// Deadline timestamp.
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Number of office telephones purchased.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Quantity of office telephones purchased.
 	SipNum *int64 `json:"SipNum,omitnil,omitempty" name:"SipNum"`
 }
 
 type StaffInfo struct {
 	// Agent name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Agent email.
 	Mail *string `json:"Mail,omitnil,omitempty" name:"Mail"`
 
-	// Agent's Telephone Number
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Agent phone number.
 	Phone *string `json:"Phone,omitnil,omitempty" name:"Phone"`
 
 	// Agent nickname.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Nick *string `json:"Nick,omitnil,omitempty" name:"Nick"`
 
-	// Agent ID
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Agent id.
 	StaffNumber *string `json:"StaffNumber,omitnil,omitempty" name:"StaffNumber"`
 
-	// User Role ID
+	// User role id.
 	RoleId *uint64 `json:"RoleId,omitnil,omitempty" name:"RoleId"`
 
-	// Affiliated Skill Group List.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Affiliated skill group list.
 	SkillGroupList []*SkillGroupItem `json:"SkillGroupList,omitnil,omitempty" name:"SkillGroupList"`
 
 	// Last modification time.
-	// Note: this field may return null, indicating that no valid values can be obtained.
 	LastModifyTimestamp *int64 `json:"LastModifyTimestamp,omitnil,omitempty" name:"LastModifyTimestamp"`
+
+	// Agent extension number (starting with 1 to 8, 4 - 6 digits).
+	ExtensionNumber *string `json:"ExtensionNumber,omitnil,omitempty" name:"ExtensionNumber"`
 }
 
 type StaffSkillGroupList struct {
-	// Skill group ID.
+	// Skill group id.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 
 	// Priority of the agent in the skill group (1 is the highest, 5 is the lowest, 3 by default).
@@ -4956,10 +5382,10 @@ type StaffSkillGroupList struct {
 }
 
 type StaffStatusExtra struct {
-	// IM - Text | TEL - Cell phone | ALL - Full media.
+	// IM - text | tel - cell phone | all - full media.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// IN - Inbound | OUT - Outbound.
+	// IN - inbound | out - outbound.
 	Direct *string `json:"Direct,omitnil,omitempty" name:"Direct"`
 }
 
@@ -4967,70 +5393,70 @@ type StaffStatusMetrics struct {
 	// Agent email.
 	Email *string `json:"Email,omitnil,omitempty" name:"Email"`
 
-	// Agent status free Available | busy Busy | rest On Break | notReady Not Ready | afterCallWork Post-call Adjustment | offline Offline
+	// Agent status free available | busy busy | rest on break | notready not ready | aftercallwork post-call adjustment | offline offline.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Supplementary Information on Agent Status
+	// Supplementary information on agent status.
 	StatusExtra *StaffStatusExtra `json:"StatusExtra,omitnil,omitempty" name:"StatusExtra"`
 
-	// Total Online duration of the day.
+	// Total online duration of the day.
 	OnlineDuration *int64 `json:"OnlineDuration,omitnil,omitempty" name:"OnlineDuration"`
 
-	// Total Available duration of the day.
+	// Total available duration of the day.
 	FreeDuration *int64 `json:"FreeDuration,omitnil,omitempty" name:"FreeDuration"`
 
-	// Total Busy duration of the day.
+	// Total busy duration of the day.
 	BusyDuration *int64 `json:"BusyDuration,omitnil,omitempty" name:"BusyDuration"`
 
-	// Total Not Ready status duration of the day.
+	// Total not ready status duration of the day.
 	NotReadyDuration *int64 `json:"NotReadyDuration,omitnil,omitempty" name:"NotReadyDuration"`
 
-	// Total Break duration of the day.
+	// Total break duration of the day.
 	RestDuration *int64 `json:"RestDuration,omitnil,omitempty" name:"RestDuration"`
 
-	// Total After Call Work duration of the day.
+	// Adjust the total duration of after-call work for the day.
 	AfterCallWorkDuration *int64 `json:"AfterCallWorkDuration,omitnil,omitempty" name:"AfterCallWorkDuration"`
 
-	// Reason for Break.
+	// Reason for break.
 	Reason *string `json:"Reason,omitnil,omitempty" name:"Reason"`
 
-	// Whether to reserve Break status.
+	// Whether to reserve break status.
 	ReserveRest *bool `json:"ReserveRest,omitnil,omitempty" name:"ReserveRest"`
 
-	// Whether to reserve Not Ready status.
+	// Whether to reserve not ready status.
 	ReserveNotReady *bool `json:"ReserveNotReady,omitnil,omitempty" name:"ReserveNotReady"`
 
-	// Cell phone answering pattern: 0 - Off | 1 - Only when Offline | 2 - Always.
+	// Cell phone answering pattern: 0 - off | 1 - only when offline | 2 - always.
 	UseMobileAccept *int64 `json:"UseMobileAccept,omitnil,omitempty" name:"UseMobileAccept"`
 
 	// Cell phone outbound call switch.
 	UseMobileCallOut *bool `json:"UseMobileCallOut,omitnil,omitempty" name:"UseMobileCallOut"`
 
 	// Last online timestamp.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	LastOnlineTimestamp *int64 `json:"LastOnlineTimestamp,omitnil,omitempty" name:"LastOnlineTimestamp"`
 
 	// Last status timestamp.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	LastStatusTimestamp *int64 `json:"LastStatusTimestamp,omitnil,omitempty" name:"LastStatusTimestamp"`
 }
 
 // Predefined struct for user
 type StopAutoCalloutTaskRequestParams struct {
-	// Call Center Instance ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// Task id.
 	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
 type StopAutoCalloutTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// Call Center Instance ID.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Task ID.
+	// Task id.
 	TaskId *uint64 `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 }
 
@@ -5083,264 +5509,248 @@ type TelCdrInfo struct {
 	// Called number.
 	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
 
-	// Call initiation timestamp, Unix timestamp.
+	// Call initiation timestamp, unix timestamp.
 	Time *int64 `json:"Time,omitnil,omitempty" name:"Time"`
 
-	// Call direction: 0 - Inbound, 1 - Outbound.
+	// Call direction: 0 - inbound, 1 - outbound.
 	Direction *int64 `json:"Direction,omitnil,omitempty" name:"Direction"`
 
 	// Call duration.
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
-	// Recording Information.
+	// Recording information.
 	RecordURL *string `json:"RecordURL,omitnil,omitempty" name:"RecordURL"`
 
-	// Recording ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Recording id.
 	RecordId *string `json:"RecordId,omitnil,omitempty" name:"RecordId"`
 
-	// Agent Information
+	// Agent information.
 	SeatUser *SeatUserInfo `json:"SeatUser,omitnil,omitempty" name:"SeatUser"`
 
-	// EndStatus corresponds one-to-one with EndStatusString, specific enumerations are as follows:
+	// EndStatus corresponds one-to-one with endstatusstring, with specific enumerations as follows:.
 	// 
-	// **Scenario	         EndStatus	EndStatusString	Status Description**
+	// **Scenario	EndStatus	EndStatusString	Status description**.
 	// 
-	// Incoming & Outgoing Calls	1	        ok	                        Normal End
+	// Inbound call & call	1	ok	end properly.
 	// 
-	// Incoming & Outgoing Calls	0	        error	                System Error
+	// Inbound call & call | 0 | error | system error.
 	// 
-	// Incoming Call	             102	        ivrGiveUp	        User Gave Up During IVR
+	// Inbound call | 102 | ivrgiveup | user gives up during ivr.
 	// 
-	// Incoming Call	             103	        waitingGiveUp	       User Gave Up During Queue
+	// Inbound call | 103 | waitinggiveup | user gives up during session queue.
 	// 
-	// Incoming Call	             104	        ringingGiveUp	       User Gave Up During Ringing
+	// Inbound call | 104 | ringinggiveup | user gives up during session ringing.
 	// 
-	// Incoming Call	             105	        noSeatOnline	       No Seat Online
+	// Inbound call | 105 | noseatonline | no agent online.
 	// 
-	// Incoming Call              106	       notWorkTime	       Non-Working Hours   
+	// Inbound call              106	       non - working hour      non - working hour.   
 	// 
-	// Incoming Call	            107	       ivrEnd	               Ended Directly After IVR
+	// Inbound call              107	       ivrend                   end directly after ivr.
 	// 
-	// Incoming Call	            100	      blackList Incoming blocklist  
+	// Inbound call              100	       blocklist call - in      call - in blocklist. 
 	// 
-	// Outgoing Call               2	              unconnected	Unconnected
+	// Outgoing call            2                 unconnected            unconnected.
 	// 
-	// Outgoing Call             108	        restrictedCallee	Callee restricted due to high risk
+	// Outgoing call            108           restricted callee      callee restricted due to high - risk.
 	// 
-	// Outgoing Call             109	        tooManyRequest	    Frequency limit exceeded
+	// Outgoing call         109        toomanyrequest        overfrequency.
 	// 
-	// Outgoing Call             110	        restrictedArea	    Call to restricted area
+	// Outgoing call         110        restrictedarea        outbound blind area.
 	// 
-	// Outgoing Call             111	        restrictedTime	Call time restricted
+	// Outgoing call         111        restrictedtime        outbound time restriction.
 	//                          
-	// Outgoing Call             201            unknown	Unknown status
+	// Outgoing call         201        unknown               unknown status.
 	// 
-	// Outgoing Call             202            notAnswer	Missed call
+	// Outgoing call         202        notanswer             unanswered.
 	// 
-	// Outgoing Call            203	    userReject	Reject/Hang Up
+	// Outgoing call - 203 - userreject: reject call.
 	// 
-	// Outgoing Call	          204	    powerOff	Shutting down
+	// Outgoing call - 204 - poweroff: power off.
 	// 
-	// Outgoing Call           205            numberNotExist	Disconnected Number
+	// Outgoing call - 205 - numbernotexist: nonexistent number.
 	// 
-	// Outgoing Call	         206	           busy	During the call
+	// Outgoing call - 206 - busy: call in progress.
 	// 
-	// Outgoing Call   	        207	           outOfCredit	Overdue Payment
+	// Outgoing call - 207 - outofcredit: arrears.
 	// 
-	// Outgoing Call	         208	           operatorError	 ISP Carrier Line Anomaly
+	// Outgoing call - 208 - operatorerror - ISP line exception.
 	// 
-	// Outgoing Call         	209	           callerCancel	Caller Cancelled
+	// Outgoing call - 209 - callercancel - caller cancellation.
 	// 
-	// Outgoing Call	        210	           notInService	Out of Service Area
+	// Outgoing call - 210 - notinservice - not in service area.
 	// 
-	// Incoming & Outgoing Calls	211    clientError    Client Error
+	// Inbound and outgoing call - 211 - clienterror - client error.
+	// Outgoing call - 212 - carrierblocked - ISP blocking.
 	EndStatus *int64 `json:"EndStatus,omitnil,omitempty" name:"EndStatus"`
 
 	// Skill group name.
 	SkillGroup *string `json:"SkillGroup,omitnil,omitempty" name:"SkillGroup"`
 
-	// Caller's location.
+	// Caller'S location.
 	CallerLocation *string `json:"CallerLocation,omitnil,omitempty" name:"CallerLocation"`
 
-	// Time spent in IVR stage.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Time spent in ivr stage.
 	IVRDuration *int64 `json:"IVRDuration,omitnil,omitempty" name:"IVRDuration"`
 
-	// Ring timestamp. UNIX second-level timestamp
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Ring timestamp. unix second-level timestamp.
 	RingTimestamp *int64 `json:"RingTimestamp,omitnil,omitempty" name:"RingTimestamp"`
 
-	// Answer timestamp. UNIX second-Level timestamp
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Answer timestamp. unix second-level timestamp.
 	AcceptTimestamp *int64 `json:"AcceptTimestamp,omitnil,omitempty" name:"AcceptTimestamp"`
 
-	// End timestamp. UNIX second-level timestamp
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// End timestamp. unix second-level timestamp.
 	EndedTimestamp *int64 `json:"EndedTimestamp,omitnil,omitempty" name:"EndedTimestamp"`
 
-	// IVR key information, e.g. ["1","2","3"]
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// IVR key information, e.g. ["1","2","3"].
 	IVRKeyPressed []*string `json:"IVRKeyPressed,omitnil,omitempty" name:"IVRKeyPressed"`
 
-	// Hanging Up Party seat Seat user Users system system
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Hang-Up side, seat, user, system.
 	HungUpSide *string `json:"HungUpSide,omitnil,omitempty" name:"HungUpSide"`
 
-	// List of Service Participants
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Service participant list.
 	ServeParticipants []*ServeParticipant `json:"ServeParticipants,omitnil,omitempty" name:"ServeParticipants"`
 
-	// Skill group ID.
-	// Note: this field may return null, indicating that no valid values can be obtained.
+	// Skill group id.
 	SkillGroupId *int64 `json:"SkillGroupId,omitnil,omitempty" name:"SkillGroupId"`
 
-	// EndStatus corresponds one-to-one with EndStatusString, specific enumerations are as follows:
+	// EndStatus corresponds one-to-one with endstatusstring, with specific enumerations as follows:.
 	// 
-	// **Scenario	         EndStatus	EndStatusString	Status Description**
+	// **Scenario	EndStatus	EndStatusString	Status description**.
 	// 
-	// Incoming & Outgoing Calls	1	        ok	                        Normal End
+	// Inbound call & call	1	ok	end properly.
 	// 
-	// Incoming & Outgoing Calls	0	        error	                System Error
+	// Inbound call & call | 0 | error | system error.
 	// 
-	// Incoming Call	             102	        ivrGiveUp	        User Gave Up During IVR
+	// Inbound call | 102 | ivrgiveup | user gives up during ivr.
 	// 
-	// Incoming Call	             103	        waitingGiveUp	       User Gave Up During Queue
+	// Inbound call | 103 | waitinggiveup | user gives up during session queue.
 	// 
-	// Incoming Call	             104	        ringingGiveUp	       User Gave Up During Ringing
+	// Inbound call | 104 | ringinggiveup | user gives up during session ringing.
 	// 
-	// Incoming Call	             105	        noSeatOnline	       No Seat Online
+	// Inbound call | 105 | noseatonline | no agent online.
 	// 
-	// Incoming Call              106	       notWorkTime	       Non-Working Hours   
+	// Inbound call              106	       non - working hour      non - working hour.   
 	// 
-	// Incoming Call	            107	       ivrEnd	               Ended Directly After IVR
+	// Inbound call              107	       ivrend                   end directly after ivr.
 	// 
-	// Incoming Call	            100	      blackList Incoming blocklist  
+	// Inbound call              100	       blocklist call - in      call - in blocklist. 
 	// 
-	// Outgoing Call               2	              unconnected	Unconnected
+	// Outgoing call            2                 unconnected            unconnected.
 	// 
-	// Outgoing Call             108	        restrictedCallee	Callee restricted due to high risk
+	// Outgoing call            108           restricted callee      callee restricted due to high - risk.
 	// 
-	// Outgoing Call             109	        tooManyRequest	    Frequency limit exceeded
+	// Outgoing call         109        toomanyrequest        overfrequency.
 	// 
-	// Outgoing Call             110	        restrictedArea	    Call to restricted area
+	// Outgoing call         110        restrictedarea        outbound blind area.
 	// 
-	// Outgoing Call             111	        restrictedTime	Call time restricted
+	// Outgoing call         111        restrictedtime        outbound time restriction.
 	//                          
-	// Outgoing Call             201            unknown	Unknown status
+	// Outgoing call         201        unknown               unknown status.
 	// 
-	// Outgoing Call             202            notAnswer	Missed call
+	// Outgoing call         202        notanswer             unanswered.
 	// 
-	// Outgoing Call            203	    userReject	Reject/Hang Up
+	// Outgoing call - 203 - userreject: reject call.
 	// 
-	// Outgoing Call	          204	    powerOff	Shutting down
+	// Outgoing call - 204 - poweroff: power off.
 	// 
-	// Outgoing Call           205            numberNotExist	Disconnected Number
+	// Outgoing call - 205 - numbernotexist: nonexistent number.
 	// 
-	// Phone Call Out	         206	           busy	In Call
+	// Outgoing call - 206 - busy: call in progress.
 	// 
-	// Outgoing Call   	        207	           outOfCredit	Overdue Payment
+	// Outgoing call - 207 - outofcredit: arrears.
 	// 
-	// Outgoing Call	         208	           operatorError	 ISP Carrier Line Anomaly
+	// Outgoing call - 208 - operatorerror - ISP line exception.
 	// 
-	// Outgoing Call         	209	           callerCancel	Caller Cancelled
+	// Outgoing call - 209 - callercancel - caller cancellation.
 	// 
-	// Outgoing Call	        210	           notInService	Out of Service Area
+	// Outgoing call - 210 - notinservice - not in service area.
 	// 
-	// Phone Call In & Out	211    clientError    Client Error
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Inbound and outgoing call - 211 - clienterror - client error.
+	// Outgoing call - 212 - carrierblocked - ISP blocking.
 	EndStatusString *string `json:"EndStatusString,omitnil,omitempty" name:"EndStatusString"`
 
-	// Session start timestamp. UNIX second-level timestamp.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Session start timestamp. unix second-level timestamp.
 	StartTimestamp *int64 `json:"StartTimestamp,omitnil,omitempty" name:"StartTimestamp"`
 
-	// Queue entry time. Unix second-level timestamp.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Queue entry time. unix second-level timestamp.
 	QueuedTimestamp *int64 `json:"QueuedTimestamp,omitnil,omitempty" name:"QueuedTimestamp"`
 
-	// Post-IVR key information (e.g. [{"Key":"1","Label":"Very Satisfied"}])
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Post-IVR key information (e.g. [{"key":"1","label":"very satisfied"}]).
 	PostIVRKeyPressed []*IVRKeyPressedElement `json:"PostIVRKeyPressed,omitnil,omitempty" name:"PostIVRKeyPressed"`
 
-	// Queue Skill Group ID.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Queue skill group id.
 	QueuedSkillGroupId *int64 `json:"QueuedSkillGroupId,omitnil,omitempty" name:"QueuedSkillGroupId"`
 
-	// Session ID.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Session id.
 	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
 
-	// Caller number protection ID. (Effective when the number protection map feature is activated, and the Caller field is empty).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Caller number protection id. effective when the number protection map feature is activated, and the caller field is empty.
 	ProtectedCaller *string `json:"ProtectedCaller,omitnil,omitempty" name:"ProtectedCaller"`
 
-	// Called number protection ID (Effective when the number protection map feature is activated, and the Callee field is empty).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Called number protection id. effective when the number protection map feature is activated, and the callee field is empty.
 	ProtectedCallee *string `json:"ProtectedCallee,omitnil,omitempty" name:"ProtectedCallee"`
 
-	// Customer custom data. (User-to-User Interface)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Customer custom data. (user - to - user interface).
+	// Note: this field may return null, indicating that no valid values can be obtained.
 	//
 	// Deprecated: Uui is deprecated.
 	Uui *string `json:"Uui,omitnil,omitempty" name:"Uui"`
 
-	// Customer custom data. (User-to-User Interface)
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Customer custom data. (user - to - user interface).
 	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
 
-	// IVR key information (e.g.?[{"Key":"1","Label":"highly satisfied"}])
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// IVR key information (e.g. [{"key":"1","label":"very satisfied"}]).
 	IVRKeyPressedEx []*IVRKeyPressedElement `json:"IVRKeyPressedEx,omitnil,omitempty" name:"IVRKeyPressedEx"`
 
-	// Access to the ASR text information address of the recording.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Access to the asr text information address of the recording.
 	AsrUrl *string `json:"AsrUrl,omitnil,omitempty" name:"AsrUrl"`
 
-	// Address of the third party COS for transferring recording.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// ASRUrl status: complete.
+	// Completed;.
+	// Processing.
+	// Generating.
+	// NotExists.
+	// No record (offline asr generation is not enabled or no package is available).
+	AsrStatus *string `json:"AsrStatus,omitnil,omitempty" name:"AsrStatus"`
+
+	// Address of the third-party cos for transferring recording.
 	CustomRecordURL *string `json:"CustomRecordURL,omitnil,omitempty" name:"CustomRecordURL"`
 
-	// Remarks
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Remarks.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
 	// Queue skill group name.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	QueuedSkillGroupName *string `json:"QueuedSkillGroupName,omitnil,omitempty" name:"QueuedSkillGroupName"`
 
-	// Audio message recording URL during call.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Audio message recording url during call.
 	VoicemailRecordURL []*string `json:"VoicemailRecordURL,omitnil,omitempty" name:"VoicemailRecordURL"`
 
-	// Text Information address of ASR audio message during a call.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Text information address of asr audio message during a call.
 	VoicemailAsrURL []*string `json:"VoicemailAsrURL,omitnil,omitempty" name:"VoicemailAsrURL"`
 }
 
 // Predefined struct for user
 type UnbindNumberCallOutSkillGroupRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Number to be unbound.
 	Number *string `json:"Number,omitnil,omitempty" name:"Number"`
 
-	// List of skill group IDs to be unbound.
+	// List of skill group ids to be unbound.
 	SkillGroupIds []*uint64 `json:"SkillGroupIds,omitnil,omitempty" name:"SkillGroupIds"`
 }
 
 type UnbindNumberCallOutSkillGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Number to be unbound.
 	Number *string `json:"Number,omitnil,omitempty" name:"Number"`
 
-	// List of skill group IDs to be unbound.
+	// List of skill group ids to be unbound.
 	SkillGroupIds []*uint64 `json:"SkillGroupIds,omitnil,omitempty" name:"SkillGroupIds"`
 }
 
@@ -5389,7 +5799,7 @@ func (r *UnbindNumberCallOutSkillGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UnbindStaffSkillGroupListRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Customer service email.
@@ -5402,7 +5812,7 @@ type UnbindStaffSkillGroupListRequestParams struct {
 type UnbindStaffSkillGroupListRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
 	// Customer service email.
@@ -5457,16 +5867,16 @@ func (r *UnbindStaffSkillGroupListResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdateCCCSkillGroupRequestParams struct {
-	// Application ID (required).
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Skill group ID.
+	// Skill group id.
 	SkillGroupID *int64 `json:"SkillGroupID,omitnil,omitempty" name:"SkillGroupID"`
 
 	// Modified skill group name.
 	SkillGroupName *string `json:"SkillGroupName,omitnil,omitempty" name:"SkillGroupName"`
 
-	// Modified maximum concurrency and the maximum synchronization is 2.
+	// Modified maximum concurrency, with the maximum synchronization being 2.
 	MaxConcurrency *int64 `json:"MaxConcurrency,omitnil,omitempty" name:"MaxConcurrency"`
 
 	// True for simultaneous ringing, false for sequential ringing.
@@ -5476,16 +5886,16 @@ type UpdateCCCSkillGroupRequestParams struct {
 type UpdateCCCSkillGroupRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required).
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *uint64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Skill group ID.
+	// Skill group id.
 	SkillGroupID *int64 `json:"SkillGroupID,omitnil,omitempty" name:"SkillGroupID"`
 
 	// Modified skill group name.
 	SkillGroupName *string `json:"SkillGroupName,omitnil,omitempty" name:"SkillGroupName"`
 
-	// Modified maximum concurrency and the maximum synchronization is 2.
+	// Modified maximum concurrency, with the maximum synchronization being 2.
 	MaxConcurrency *int64 `json:"MaxConcurrency,omitnil,omitempty" name:"MaxConcurrency"`
 
 	// True for simultaneous ringing, false for sequential ringing.
@@ -5539,16 +5949,16 @@ func (r *UpdateCCCSkillGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UpdatePredictiveDialingCampaignRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Generated task ID.
+	// Generated task id.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 
-	// Task Name
+	// Task name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Called list supporting E.164 or number formats without country code.
+	// Called list supporting e.164 or number formats without country code.
 	Callees []*string `json:"Callees,omitnil,omitempty" name:"Callees"`
 
 	// Calling list using the number formats displayed on the management side.
@@ -5563,38 +5973,47 @@ type UpdatePredictiveDialingCampaignRequestParams struct {
 	// Running priority of multiple tasks in the same application, from high to low 1 - 5.
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
-	// Expected call drop rate, percentage, 5 - 50.
+	// Expected call drop rate, percentage, 5 - 50.	.	
 	ExpectedAbandonRate *int64 `json:"ExpectedAbandonRate,omitnil,omitempty" name:"ExpectedAbandonRate"`
 
 	// Call retry interval, in seconds, [60 - 86,400].
 	RetryInterval *int64 `json:"RetryInterval,omitnil,omitempty" name:"RetryInterval"`
 
-	// Task start time. Unix timestamp. The task will automatically start after this time.
+	// Task start time. unix timestamp. the task will automatically start after this time.
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Task termination time. Unix timestamp. The task will automatically terminate after this time.
+	// Task termination time. unix timestamp. the task will automatically terminate after this time.
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Specified IVR ID.
+	// Specified ivr id.
 	IVRId *int64 `json:"IVRId,omitnil,omitempty" name:"IVRId"`
 
 	// Number of call retries, 0 - 2.
 	RetryTimes *int64 `json:"RetryTimes,omitnil,omitempty" name:"RetryTimes"`
+
+	// Custom variable.
+	Variables []*Variable `json:"Variables,omitnil,omitempty" name:"Variables"`
+
+	// 	UUI
+	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
+
+	// Property of the called.
+	CalleeAttributes []*CalleeAttribute `json:"CalleeAttributes,omitnil,omitempty" name:"CalleeAttributes"`
 }
 
 type UpdatePredictiveDialingCampaignRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Generated task ID.
+	// Generated task id.
 	CampaignId *int64 `json:"CampaignId,omitnil,omitempty" name:"CampaignId"`
 
-	// Task Name
+	// Task name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Called list supporting E.164 or number formats without country code.
+	// Called list supporting e.164 or number formats without country code.
 	Callees []*string `json:"Callees,omitnil,omitempty" name:"Callees"`
 
 	// Calling list using the number formats displayed on the management side.
@@ -5609,23 +6028,32 @@ type UpdatePredictiveDialingCampaignRequest struct {
 	// Running priority of multiple tasks in the same application, from high to low 1 - 5.
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
-	// Expected call drop rate, percentage, 5 - 50.
+	// Expected call drop rate, percentage, 5 - 50.	.	
 	ExpectedAbandonRate *int64 `json:"ExpectedAbandonRate,omitnil,omitempty" name:"ExpectedAbandonRate"`
 
 	// Call retry interval, in seconds, [60 - 86,400].
 	RetryInterval *int64 `json:"RetryInterval,omitnil,omitempty" name:"RetryInterval"`
 
-	// Task start time. Unix timestamp. The task will automatically start after this time.
+	// Task start time. unix timestamp. the task will automatically start after this time.
 	StartTime *int64 `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Task termination time. Unix timestamp. The task will automatically terminate after this time.
+	// Task termination time. unix timestamp. the task will automatically terminate after this time.
 	EndTime *int64 `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Specified IVR ID.
+	// Specified ivr id.
 	IVRId *int64 `json:"IVRId,omitnil,omitempty" name:"IVRId"`
 
 	// Number of call retries, 0 - 2.
 	RetryTimes *int64 `json:"RetryTimes,omitnil,omitempty" name:"RetryTimes"`
+
+	// Custom variable.
+	Variables []*Variable `json:"Variables,omitnil,omitempty" name:"Variables"`
+
+	// 	UUI
+	UUI *string `json:"UUI,omitnil,omitempty" name:"UUI"`
+
+	// Property of the called.
+	CalleeAttributes []*CalleeAttribute `json:"CalleeAttributes,omitnil,omitempty" name:"CalleeAttributes"`
 }
 
 func (r *UpdatePredictiveDialingCampaignRequest) ToJsonString() string {
@@ -5654,6 +6082,9 @@ func (r *UpdatePredictiveDialingCampaignRequest) FromJsonString(s string) error 
 	delete(f, "EndTime")
 	delete(f, "IVRId")
 	delete(f, "RetryTimes")
+	delete(f, "Variables")
+	delete(f, "UUI")
+	delete(f, "CalleeAttributes")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UpdatePredictiveDialingCampaignRequest has unknown keys!", "")
 	}
@@ -5683,39 +6114,37 @@ func (r *UpdatePredictiveDialingCampaignResponse) FromJsonString(s string) error
 }
 
 type UploadAudioInfo struct {
-	// File Alias (can be duplicated)
+	// File alias (can be duplicated).
 	CustomFileName *string `json:"CustomFileName,omitnil,omitempty" name:"CustomFileName"`
 
-	// Audio File Link (supports mp3 and wav formats, file size not exceeding 5MB)
+	// Audio file link (supports mp3 and wav formats, file size not exceeding 5mb).
 	AudioUrl *string `json:"AudioUrl,omitnil,omitempty" name:"AudioUrl"`
 }
 
 type UploadIvrAudioFailedInfo struct {
-	// Filename
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Filename.
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
-	// Reason for failure
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Reason for failure.
 	FailedMsg *string `json:"FailedMsg,omitnil,omitempty" name:"FailedMsg"`
 }
 
 // Predefined struct for user
 type UploadIvrAudioRequestParams struct {
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Audio File List
+	// Audio file list.
 	AudioList []*UploadAudioInfo `json:"AudioList,omitnil,omitempty" name:"AudioList"`
 }
 
 type UploadIvrAudioRequest struct {
 	*tchttp.BaseRequest
 	
-	// Application ID (required) can be found at https://console.cloud.tencent.com/ccc.
+	// Application id (required) can be found at https://console.cloud.tencent.com/ccc.
 	SdkAppId *int64 `json:"SdkAppId,omitnil,omitempty" name:"SdkAppId"`
 
-	// Audio File List
+	// Audio file list.
 	AudioList []*UploadAudioInfo `json:"AudioList,omitnil,omitempty" name:"AudioList"`
 }
 
@@ -5741,12 +6170,10 @@ func (r *UploadIvrAudioRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type UploadIvrAudioResponseParams struct {
-	// List of failed uploads
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// List of files that failed to be uploaded.
 	FailedFileList []*UploadIvrAudioFailedInfo `json:"FailedFileList,omitnil,omitempty" name:"FailedFileList"`
 
-	// List of successful uploads
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// List of successfully uploaded files.
 	SuccessFileList []*AudioFileInfo `json:"SuccessFileList,omitnil,omitempty" name:"SuccessFileList"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
