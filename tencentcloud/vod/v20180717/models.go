@@ -5996,53 +5996,65 @@ func (r *CreateReviewTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateRoundPlayRequestParams struct {
-	// The playback start time, in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+	// The playback start time, in [iso 8601 date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The files on the list.
-	// <li>Array length limit: 100.</li>
+	// The program list.
+	// <Li>Array length limit: 100.</li>.
 	RoundPlaylist []*RoundPlayListItemInfo `json:"RoundPlaylist,omitnil,omitempty" name:"RoundPlaylist"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The playlist name (not longer than 64 characters).
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// The playlist description (not longer than 256 characters).
+	// The playlist description, length limit: 256 characters.
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
-	// Play mode, optional values:
-	// <li>Loop: Play the playlist in a loop;</li>
-	// <li>Linear: Play once, stop playing after the playlist is played. </li>
-	// Default value: Loop.
+	// Play mode, optional values:.
+	// <Li>Loop: loop the playlist;</li>.
+	// <Li>Linear: single play, stop playback after the single play finishes.</li>.
+	// Default value: loop.
 	PlayBackMode *string `json:"PlayBackMode,omitnil,omitempty" name:"PlayBackMode"`
+
+	// Playlist unique identifier id, with a length limit of 64 characters, only allowing uppercase and lowercase english letters (a-za-z), digits (0-9) and hyphens (-). if there is a playlist with the same roundplayid, return the error invalidparametervalue.roundplayalreadyexists. the default value is empty, which means it is system-assigned.
+	RoundPlayId *string `json:"RoundPlayId,omitnil,omitempty" name:"RoundPlayId"`
+
+	// Expiration time, in iso 8601 format. for details, see [iso date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format). the playlist will stop playing after expiration. "9999-12-31t23:59:59+08:00" means it does not expire. default value: 9999-12-31t23:59:59+08:00.
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 }
 
 type CreateRoundPlayRequest struct {
 	*tchttp.BaseRequest
 	
-	// The playback start time, in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+	// The playback start time, in [iso 8601 date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The files on the list.
-	// <li>Array length limit: 100.</li>
+	// The program list.
+	// <Li>Array length limit: 100.</li>.
 	RoundPlaylist []*RoundPlayListItemInfo `json:"RoundPlaylist,omitnil,omitempty" name:"RoundPlaylist"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The playlist name (not longer than 64 characters).
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// The playlist description (not longer than 256 characters).
+	// The playlist description, length limit: 256 characters.
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
-	// Play mode, optional values:
-	// <li>Loop: Play the playlist in a loop;</li>
-	// <li>Linear: Play once, stop playing after the playlist is played. </li>
-	// Default value: Loop.
+	// Play mode, optional values:.
+	// <Li>Loop: loop the playlist;</li>.
+	// <Li>Linear: single play, stop playback after the single play finishes.</li>.
+	// Default value: loop.
 	PlayBackMode *string `json:"PlayBackMode,omitnil,omitempty" name:"PlayBackMode"`
+
+	// Playlist unique identifier id, with a length limit of 64 characters, only allowing uppercase and lowercase english letters (a-za-z), digits (0-9) and hyphens (-). if there is a playlist with the same roundplayid, return the error invalidparametervalue.roundplayalreadyexists. the default value is empty, which means it is system-assigned.
+	RoundPlayId *string `json:"RoundPlayId,omitnil,omitempty" name:"RoundPlayId"`
+
+	// Expiration time, in iso 8601 format. for details, see [iso date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format). the playlist will stop playing after expiration. "9999-12-31t23:59:59+08:00" means it does not expire. default value: 9999-12-31t23:59:59+08:00.
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 }
 
 func (r *CreateRoundPlayRequest) ToJsonString() string {
@@ -6063,6 +6075,8 @@ func (r *CreateRoundPlayRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "Desc")
 	delete(f, "PlayBackMode")
+	delete(f, "RoundPlayId")
+	delete(f, "ExpiredTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateRoundPlayRequest has unknown keys!", "")
 	}
@@ -6071,10 +6085,10 @@ func (r *CreateRoundPlayRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateRoundPlayResponseParams struct {
-	// The playlist ID, which is unique.
+	// The unique identifier of the playlist.
 	RoundPlayId *string `json:"RoundPlayId,omitnil,omitempty" name:"RoundPlayId"`
 
-	// The playlist URL.
+	// The playlist playback url.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -8281,20 +8295,20 @@ func (r *DeleteReviewTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteRoundPlayRequestParams struct {
-	// The playlist ID, which is unique.
+	// The unique identifier of the playlist.
 	RoundPlayId *string `json:"RoundPlayId,omitnil,omitempty" name:"RoundPlayId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
 type DeleteRoundPlayRequest struct {
 	*tchttp.BaseRequest
 	
-	// The playlist ID, which is unique.
+	// The unique identifier of the playlist.
 	RoundPlayId *string `json:"RoundPlayId,omitnil,omitempty" name:"RoundPlayId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 }
 
@@ -9869,6 +9883,77 @@ func (r *DescribeContentReviewTemplatesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeContentReviewTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCurrentPlaylistRequestParams struct {
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id.</b>.
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// The unique identifier of the playlist.
+	RoundPlayId *string `json:"RoundPlayId,omitnil,omitempty" name:"RoundPlayId"`
+
+	// The length of the returned playlist. maximum is 10, default value is 5.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeCurrentPlaylistRequest struct {
+	*tchttp.BaseRequest
+	
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id.</b>.
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// The unique identifier of the playlist.
+	RoundPlayId *string `json:"RoundPlayId,omitnil,omitempty" name:"RoundPlayId"`
+
+	// The length of the returned playlist. maximum is 10, default value is 5.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeCurrentPlaylistRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCurrentPlaylistRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubAppId")
+	delete(f, "RoundPlayId")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeCurrentPlaylistRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeCurrentPlaylistResponseParams struct {
+	// Current playlist information.
+	CurrentPlaylist []*RoundPlayFilePlayInfo `json:"CurrentPlaylist,omitnil,omitempty" name:"CurrentPlaylist"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeCurrentPlaylistResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeCurrentPlaylistResponseParams `json:"Response"`
+}
+
+func (r *DescribeCurrentPlaylistResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeCurrentPlaylistResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -11666,31 +11751,56 @@ func (r *DescribeReviewTemplatesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRoundPlaysRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// The playlist IDs. Array length limit: 100.
+	// Filter criteria: playlist identifier, array length limit: 100.
 	RoundPlayIds []*string `json:"RoundPlayIds,omitnil,omitempty" name:"RoundPlayIds"`
 
+	// Filter criteria: playlist status, optional values: <li>enabled: startup status;</li> <li>disabled: stopped status.</li>.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
+	// Filter criteria: playlist creation time.
+	CreateTime *TimeRange `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Filter criteria: playlist update time.
+	UpdateTime *TimeRange `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Scrolling identifier which is used for pulling in batches. if a single request cannot pull all the data entries, the API will return `scrolltoken`, and if the next request carries it, the next pull will start from the next entry.
+	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
+
+	// Pagination offset, default value: 0. this field is obsolete. please use the `scrolltoken` parameter for batch queries.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The number of records to return. Default value: 10. Maximum value: 100.
+	// Number of returned entries. default value: 10. maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
 type DescribeRoundPlaysRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// The playlist IDs. Array length limit: 100.
+	// Filter criteria: playlist identifier, array length limit: 100.
 	RoundPlayIds []*string `json:"RoundPlayIds,omitnil,omitempty" name:"RoundPlayIds"`
 
+	// Filter criteria: playlist status, optional values: <li>enabled: startup status;</li> <li>disabled: stopped status.</li>.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Filter criteria: playlist creation time.
+	CreateTime *TimeRange `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Filter criteria: playlist update time.
+	UpdateTime *TimeRange `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Scrolling identifier which is used for pulling in batches. if a single request cannot pull all the data entries, the API will return `scrolltoken`, and if the next request carries it, the next pull will start from the next entry.
+	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
+
+	// Pagination offset, default value: 0. this field is obsolete. please use the `scrolltoken` parameter for batch queries.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The number of records to return. Default value: 10. Maximum value: 100.
+	// Number of returned entries. default value: 10. maximum value: 100.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 }
 
@@ -11708,6 +11818,10 @@ func (r *DescribeRoundPlaysRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SubAppId")
 	delete(f, "RoundPlayIds")
+	delete(f, "Status")
+	delete(f, "CreateTime")
+	delete(f, "UpdateTime")
+	delete(f, "ScrollToken")
 	delete(f, "Offset")
 	delete(f, "Limit")
 	if len(f) > 0 {
@@ -11718,11 +11832,14 @@ func (r *DescribeRoundPlaysRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeRoundPlaysResponseParams struct {
-	// The total number of records that meet the conditions.
+	// The total number of carousel broadcast playlists that meet the filter criteria. deprecated. for batch inquiries, please use the scrolltoken parameter.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// The information of the playlists.
+	// The details of the playlist.
 	RoundPlaySet []*RoundPlayInfo `json:"RoundPlaySet,omitnil,omitempty" name:"RoundPlaySet"`
+
+	// Scrolling identifier. if a request does not return all the data entries, this field indicates the id of the next entry. if this field is empty, there is no more data.
+	ScrollToken *string `json:"ScrollToken,omitnil,omitempty" name:"ScrollToken"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
@@ -14536,6 +14653,91 @@ type HDRInfo struct {
 	// <li>This parameter is valid only if `Switch` is `ON`.</li>
 	// <li>For audio/video remastering, this parameter is valid only if the output video codec is `libx265`.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+// Predefined struct for user
+type HandleCurrentPlaylistRequestParams struct {
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574) id.</b>.
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// The unique identifier of the playlist.
+	RoundPlayId *string `json:"RoundPlayId,omitnil,omitempty" name:"RoundPlayId"`
+
+	// Operation type, available options:<li>insert: insert program into the current playlist.</li> <li>inserttemporary: temporarily insert program into the current playlist. can only be inserted after the currently playing program. temporarily inserted programs are only effective during this carousel process.</li><li>delete: delete program from the playlist. cannot delete currently playing programs.</li>.
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
+
+	// Playlist program id. required when operation is insert, indicating the program list will be inserted after this program. the insertion position must be after the currently playing program.
+	ItemId *string `json:"ItemId,omitnil,omitempty" name:"ItemId"`
+
+	// Program list. required when operation is insert, inserttemporary, delete, indicating the list of programs to be operated on. the list length can be up to a maximum of 10.
+	RoundPlaylist []*RoundPlayListItemInfo `json:"RoundPlaylist,omitnil,omitempty" name:"RoundPlaylist"`
+}
+
+type HandleCurrentPlaylistRequest struct {
+	*tchttp.BaseRequest
+	
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574) id.</b>.
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// The unique identifier of the playlist.
+	RoundPlayId *string `json:"RoundPlayId,omitnil,omitempty" name:"RoundPlayId"`
+
+	// Operation type, available options:<li>insert: insert program into the current playlist.</li> <li>inserttemporary: temporarily insert program into the current playlist. can only be inserted after the currently playing program. temporarily inserted programs are only effective during this carousel process.</li><li>delete: delete program from the playlist. cannot delete currently playing programs.</li>.
+	Operation *string `json:"Operation,omitnil,omitempty" name:"Operation"`
+
+	// Playlist program id. required when operation is insert, indicating the program list will be inserted after this program. the insertion position must be after the currently playing program.
+	ItemId *string `json:"ItemId,omitnil,omitempty" name:"ItemId"`
+
+	// Program list. required when operation is insert, inserttemporary, delete, indicating the list of programs to be operated on. the list length can be up to a maximum of 10.
+	RoundPlaylist []*RoundPlayListItemInfo `json:"RoundPlaylist,omitnil,omitempty" name:"RoundPlaylist"`
+}
+
+func (r *HandleCurrentPlaylistRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *HandleCurrentPlaylistRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "SubAppId")
+	delete(f, "RoundPlayId")
+	delete(f, "Operation")
+	delete(f, "ItemId")
+	delete(f, "RoundPlaylist")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "HandleCurrentPlaylistRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type HandleCurrentPlaylistResponseParams struct {
+	// List of successfully operated programs.
+	RoundPlaylist []*RoundPlayListItemInfo `json:"RoundPlaylist,omitnil,omitempty" name:"RoundPlaylist"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type HandleCurrentPlaylistResponse struct {
+	*tchttp.BaseResponse
+	Response *HandleCurrentPlaylistResponseParams `json:"Response"`
+}
+
+func (r *HandleCurrentPlaylistResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *HandleCurrentPlaylistResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type HeadTailConfigureInfo struct {
@@ -18816,17 +19018,17 @@ func (r *ModifyReviewTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyRoundPlayRequestParams struct {
-	// The playlist ID, which is unique.
+	// The unique identifier of the playlist.
 	RoundPlayId *string `json:"RoundPlayId,omitnil,omitempty" name:"RoundPlayId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, for customers who enable vod, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// The playback start time, in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+	// The playback start time, in [iso 8601 date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The files on the list.
-	// <li>Array length limit: 100.</li>
+	// The program list.
+	// <Li>Array length limit: 100.</li>.
 	RoundPlaylist []*RoundPlayListItemInfo `json:"RoundPlaylist,omitnil,omitempty" name:"RoundPlaylist"`
 
 	// The playlist name (not longer than 64 characters).
@@ -18835,30 +19037,32 @@ type ModifyRoundPlayRequestParams struct {
 	// The playlist description (not longer than 256 characters).
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
-	// Playback status, optional values: 
-	// <li>Disabled: End playback, and the carousel task cannot be started again after the end. </li>
+	// Playback status, optional values:<li>disabled: stop playback.</li><li>enabled: start playback after the duration has elapsed.</li>.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Play mode, optional values:
-	// <li>Loop: Play the playlist in a loop;</li>
-	// <li>Linear: Play once, stop playing after the playlist is played. </li>
+	// Play mode, optional values:.
+	// <Li>Loop: loop the playlist;</li>.
+	// <Li>Linear: single play, stop playback after the playlist finishes.</li>.
 	PlayBackMode *string `json:"PlayBackMode,omitnil,omitempty" name:"PlayBackMode"`
+
+	// Expiration time, in iso 8601 format. for details, see [iso date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format). the playback will stop after expiration. "9999-12-31t23:59:59+08:00" means no expiration.
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 }
 
 type ModifyRoundPlayRequest struct {
 	*tchttp.BaseRequest
 	
-	// The playlist ID, which is unique.
+	// The unique identifier of the playlist.
 	RoundPlayId *string `json:"RoundPlayId,omitnil,omitempty" name:"RoundPlayId"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, for customers who enable vod, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// The playback start time, in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+	// The playback start time, in [iso 8601 date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The files on the list.
-	// <li>Array length limit: 100.</li>
+	// The program list.
+	// <Li>Array length limit: 100.</li>.
 	RoundPlaylist []*RoundPlayListItemInfo `json:"RoundPlaylist,omitnil,omitempty" name:"RoundPlaylist"`
 
 	// The playlist name (not longer than 64 characters).
@@ -18867,14 +19071,16 @@ type ModifyRoundPlayRequest struct {
 	// The playlist description (not longer than 256 characters).
 	Desc *string `json:"Desc,omitnil,omitempty" name:"Desc"`
 
-	// Playback status, optional values: 
-	// <li>Disabled: End playback, and the carousel task cannot be started again after the end. </li>
+	// Playback status, optional values:<li>disabled: stop playback.</li><li>enabled: start playback after the duration has elapsed.</li>.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Play mode, optional values:
-	// <li>Loop: Play the playlist in a loop;</li>
-	// <li>Linear: Play once, stop playing after the playlist is played. </li>
+	// Play mode, optional values:.
+	// <Li>Loop: loop the playlist;</li>.
+	// <Li>Linear: single play, stop playback after the playlist finishes.</li>.
 	PlayBackMode *string `json:"PlayBackMode,omitnil,omitempty" name:"PlayBackMode"`
+
+	// Expiration time, in iso 8601 format. for details, see [iso date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format). the playback will stop after expiration. "9999-12-31t23:59:59+08:00" means no expiration.
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 }
 
 func (r *ModifyRoundPlayRequest) ToJsonString() string {
@@ -18897,6 +19103,7 @@ func (r *ModifyRoundPlayRequest) FromJsonString(s string) error {
 	delete(f, "Desc")
 	delete(f, "Status")
 	delete(f, "PlayBackMode")
+	delete(f, "ExpiredTime")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyRoundPlayRequest has unknown keys!", "")
 	}
@@ -23595,11 +23802,30 @@ type ReviewTemplate struct {
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
+type RoundPlayFilePlayInfo struct {
+	// Playlist program id, assigned by the system.
+	ItemId *string `json:"ItemId,omitnil,omitempty" name:"ItemId"`
+
+	// The media file id.
+	FileId *string `json:"FileId,omitnil,omitempty" name:"FileId"`
+
+	// The playback start time, in [iso 8601 date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
+	StartPlayTime *string `json:"StartPlayTime,omitnil,omitempty" name:"StartPlayTime"`
+
+	// Playback duration, in seconds.
+	// Note: this field may return null, indicating that no valid value was found.
+	Duration *float64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// Playback progress, in seconds.
+	// Note: this field may return null, indicating that no valid value was found.
+	Progress *float64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+}
+
 type RoundPlayInfo struct {
 	// The playlist ID.
 	RoundPlayId *string `json:"RoundPlayId,omitnil,omitempty" name:"RoundPlayId"`
 
-	// The playback start time, in [ISO 8601 date format](https://intl.cloud.tencent.com/document/product/266/11732?lang=en&pg=).
+	// The playback start time, in [ISO 8601 date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The files on the list.
@@ -23625,6 +23851,15 @@ type RoundPlayInfo struct {
 
 	// Carousel playback address.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
+
+	// Creation time, in iso 8601 format. for details, see [iso date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Update time, in iso 8601 format. for details, see [iso date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format).
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Expiration time, in iso 8601 format. for details, see [iso date format](https://www.tencentcloud.com/document/product/266/11732?has_map=2#iso-date-format). the playback of the playlist will stop after expiration. "9999-12-31t23:59:59+08:00" means never expire.
+	ExpiredTime *string `json:"ExpiredTime,omitnil,omitempty" name:"ExpiredTime"`
 }
 
 type RoundPlayListItemInfo struct {
@@ -23637,7 +23872,10 @@ type RoundPlayListItemInfo struct {
 	// The file must be in HLS format.
 	AudioVideoType *string `json:"AudioVideoType,omitnil,omitempty" name:"AudioVideoType"`
 
-	// The transcoding template used to generate the transcoding output played. This parameter is required if `AudioVideoType` is `Transcode`.
+	// ID of the program to be played, assigned by the system.
+	ItemId *string `json:"ItemId,omitnil,omitempty" name:"ItemId"`
+
+	// The transcoding template to be played is specified. this parameter is required if `audiovideotype` is `transcode`.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 

@@ -1793,6 +1793,13 @@ func NewCreateRoundPlayResponse() (response *CreateRoundPlayResponse) {
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_EXPIREDTIME = "InvalidParameterValue.ExpiredTime"
+//  INVALIDPARAMETERVALUE_ROUNDPLAYALREADYEXISTS = "InvalidParameterValue.RoundPlayAlreadyExists"
+//  INVALIDPARAMETERVALUE_ROUNDPLAYLIST = "InvalidParameterValue.RoundPlaylist"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  LIMITEXCEEDED_PLAYLIST = "LimitExceeded.PlayList"
+//  LIMITEXCEEDED_ROUNDPLAYS = "LimitExceeded.RoundPlays"
+//  LIMITEXCEEDED_RUNNINGROUNDPLAYS = "LimitExceeded.RunningRoundPlays"
 func (c *Client) CreateRoundPlay(request *CreateRoundPlayRequest) (response *CreateRoundPlayResponse, err error) {
     return c.CreateRoundPlayWithContext(context.Background(), request)
 }
@@ -1807,6 +1814,13 @@ func (c *Client) CreateRoundPlay(request *CreateRoundPlayRequest) (response *Cre
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_EXPIREDTIME = "InvalidParameterValue.ExpiredTime"
+//  INVALIDPARAMETERVALUE_ROUNDPLAYALREADYEXISTS = "InvalidParameterValue.RoundPlayAlreadyExists"
+//  INVALIDPARAMETERVALUE_ROUNDPLAYLIST = "InvalidParameterValue.RoundPlaylist"
+//  INVALIDPARAMETERVALUE_STARTTIME = "InvalidParameterValue.StartTime"
+//  LIMITEXCEEDED_PLAYLIST = "LimitExceeded.PlayList"
+//  LIMITEXCEEDED_ROUNDPLAYS = "LimitExceeded.RoundPlays"
+//  LIMITEXCEEDED_RUNNINGROUNDPLAYS = "LimitExceeded.RunningRoundPlays"
 func (c *Client) CreateRoundPlayWithContext(ctx context.Context, request *CreateRoundPlayRequest) (response *CreateRoundPlayResponse, err error) {
     if request == nil {
         request = NewCreateRoundPlayRequest()
@@ -4705,6 +4719,55 @@ func (c *Client) DescribeContentReviewTemplatesWithContext(ctx context.Context, 
     return
 }
 
+func NewDescribeCurrentPlaylistRequest() (request *DescribeCurrentPlaylistRequest) {
+    request = &DescribeCurrentPlaylistRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "DescribeCurrentPlaylist")
+    
+    
+    return
+}
+
+func NewDescribeCurrentPlaylistResponse() (response *DescribeCurrentPlaylistResponse) {
+    response = &DescribeCurrentPlaylistResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCurrentPlaylist
+// Query current playlist of the round play.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_ROUNDPLAYID = "InvalidParameterValue.RoundPlayId"
+func (c *Client) DescribeCurrentPlaylist(request *DescribeCurrentPlaylistRequest) (response *DescribeCurrentPlaylistResponse, err error) {
+    return c.DescribeCurrentPlaylistWithContext(context.Background(), request)
+}
+
+// DescribeCurrentPlaylist
+// Query current playlist of the round play.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_ROUNDPLAYID = "InvalidParameterValue.RoundPlayId"
+func (c *Client) DescribeCurrentPlaylistWithContext(ctx context.Context, request *DescribeCurrentPlaylistRequest) (response *DescribeCurrentPlaylistResponse, err error) {
+    if request == nil {
+        request = NewDescribeCurrentPlaylistRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCurrentPlaylist require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCurrentPlaylistResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDailyPlayStatFileListRequest() (request *DescribeDailyPlayStatFileListRequest) {
     request = &DescribeDailyPlayStatFileListRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7421,6 +7484,65 @@ func (c *Client) ForbidMediaDistributionWithContext(ctx context.Context, request
     return
 }
 
+func NewHandleCurrentPlaylistRequest() (request *HandleCurrentPlaylistRequest) {
+    request = &HandleCurrentPlaylistRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vod", APIVersion, "HandleCurrentPlaylist")
+    
+    
+    return
+}
+
+func NewHandleCurrentPlaylistResponse() (response *HandleCurrentPlaylistResponse) {
+    response = &HandleCurrentPlaylistResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// HandleCurrentPlaylist
+// Operate the current play list . Supported operations include:<li> Insert: Insert a playing program into the current playlist.</li><li> Delete: Remove a playing program from the playlist.</li>
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_INDEX = "InvalidParameterValue.Index"
+//  INVALIDPARAMETERVALUE_ROUNDPLAYID = "InvalidParameterValue.RoundPlayId"
+//  INVALIDPARAMETERVALUE_ROUNDPLAYLIST = "InvalidParameterValue.RoundPlaylist"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  LIMITEXCEEDED_PLAYLIST = "LimitExceeded.PlayList"
+func (c *Client) HandleCurrentPlaylist(request *HandleCurrentPlaylistRequest) (response *HandleCurrentPlaylistResponse, err error) {
+    return c.HandleCurrentPlaylistWithContext(context.Background(), request)
+}
+
+// HandleCurrentPlaylist
+// Operate the current play list . Supported operations include:<li> Insert: Insert a playing program into the current playlist.</li><li> Delete: Remove a playing program from the playlist.</li>
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
+//  INVALIDPARAMETERVALUE_INDEX = "InvalidParameterValue.Index"
+//  INVALIDPARAMETERVALUE_ROUNDPLAYID = "InvalidParameterValue.RoundPlayId"
+//  INVALIDPARAMETERVALUE_ROUNDPLAYLIST = "InvalidParameterValue.RoundPlaylist"
+//  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
+//  LIMITEXCEEDED_PLAYLIST = "LimitExceeded.PlayList"
+func (c *Client) HandleCurrentPlaylistWithContext(ctx context.Context, request *HandleCurrentPlaylistRequest) (response *HandleCurrentPlaylistResponse, err error) {
+    if request == nil {
+        request = NewHandleCurrentPlaylistRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("HandleCurrentPlaylist require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewHandleCurrentPlaylistResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewInspectMediaQualityRequest() (request *InspectMediaQualityRequest) {
     request = &InspectMediaQualityRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -9083,6 +9205,9 @@ func NewModifyRoundPlayResponse() (response *ModifyRoundPlayResponse) {
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_PLAYLIST = "LimitExceeded.PlayList"
+//  LIMITEXCEEDED_ROUNDPLAYS = "LimitExceeded.RoundPlays"
+//  LIMITEXCEEDED_RUNNINGROUNDPLAYS = "LimitExceeded.RunningRoundPlays"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyRoundPlay(request *ModifyRoundPlayRequest) (response *ModifyRoundPlayResponse, err error) {
     return c.ModifyRoundPlayWithContext(context.Background(), request)
@@ -9097,6 +9222,9 @@ func (c *Client) ModifyRoundPlay(request *ModifyRoundPlayRequest) (response *Mod
 //  FAILEDOPERATION = "FailedOperation"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  LIMITEXCEEDED_PLAYLIST = "LimitExceeded.PlayList"
+//  LIMITEXCEEDED_ROUNDPLAYS = "LimitExceeded.RoundPlays"
+//  LIMITEXCEEDED_RUNNINGROUNDPLAYS = "LimitExceeded.RunningRoundPlays"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) ModifyRoundPlayWithContext(ctx context.Context, request *ModifyRoundPlayRequest) (response *ModifyRoundPlayResponse, err error) {
     if request == nil {
