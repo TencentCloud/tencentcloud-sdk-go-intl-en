@@ -205,7 +205,7 @@ type Address struct {
 	// Whether the EIP supports direct connection mode. `True` indicates the EIP supports direct connection. `False` indicates that the resource does not support direct connection.
 	IsEipDirectConnection *bool `json:"IsEipDirectConnection,omitnil,omitempty" name:"IsEipDirectConnection"`
 
-	// IP type. Valid values: `CalcIP` (device IP), `WanIP` (public network IP), `EIP` (general elastic IP), `AnycastEIP` (accelerated EIP), and `AntiDDoSEIP` (Anti DDoS EIP).
+	// EIP resource type. Valid values: `CalcIP` (device IP), `WanIP` (public IP), `EIP` (elastic IP), `AnycastEIP` (accelerated EIP), and `AntiDDoSEIP` (anti-DDoS EIP).
 	AddressType *string `json:"AddressType,omitnil,omitempty" name:"AddressType"`
 
 	// Whether the EIP is automatically released after being unbound. `True` indicates the EIP will be automatically released after being unbound. `False` indicates the EIP will not be automatically released after being unbound.
@@ -250,17 +250,28 @@ type Address struct {
 	// Note: this field may return `null`, indicating that no valid value was found.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
-
+	// Static single-line IP network egress
+	// Note: This field may return null, indicating that no valid value was found.
 	Egress *string `json:"Egress,omitnil,omitempty" name:"Egress"`
 
 	// ID of the Anti-DDoS service package. It is returned if the EIP is an Anti-DDoS EIP. 
 	AntiDDoSPackageId *string `json:"AntiDDoSPackageId,omitnil,omitempty" name:"AntiDDoSPackageId"`
 
-
+	// Indicates whether the current EIP is auto-renewed. This field is displayed only for EIPs with monthly prepaid bandwidth. Valid values are as follows:
+	// <li>NOTIFY_AND_MANUAL_RENEW: Normal renewal</li><li>NOTIFY_AND_AUTO_RENEW: Automatic renewal</li><li>DISABLE_NOTIFY_AND_MANUAL_RENEW: No renewal upon expiration</li>
 	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
 
-
+	// Indicates the ID of the Bandwidth Package associated with the current public IP. If the public IP is not billed by Bandwidth Package, this field is empty.
+	// Note: This field may return null, indicating that no valid value was found.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitnil,omitempty" name:"BandwidthPackageId"`
+
+	// Indicates the unique ID of the VPC to which the traditional EIPv6 belongs.
+	// Note: This field may return null, indicating that no valid value was found.
+	UnVpcId *string `json:"UnVpcId,omitnil,omitempty" name:"UnVpcId"`
+
+	// Indicates the unique ID of the CDC.
+	// Note: This field may return 'null', indicating that no valid value was found.
+	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 }
 
 type AddressChargePrepaid struct {
@@ -610,6 +621,274 @@ func (r *AllocateAddressesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *AllocateAddressesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AllocateIPv6AddressesRequestParams struct {
+	// EIPv6 name, which is the custom EIPv6 name given by the user when the user applies for the EIPv6. Default: not named.
+	AddressName *string `json:"AddressName,omitnil,omitempty" name:"AddressName"`
+
+	// Indicates the type of EIPv6. Valid values:
+	// 
+	// - EIPv6: common IPv6
+	// - HighQualityEIPv6: dedicated IPv6
+	// Note: Contact the product team to enable the dedicated IPv6 allowlist. The dedicated IPv6 is only supported in some regions.
+	// 
+	// Default: EIPv6.
+	AddressType *string `json:"AddressType,omitnil,omitempty" name:"AddressType"`
+
+	// Number of applied EIPv6 addresses. Default: 1.
+	AddressCount *int64 `json:"AddressCount,omitnil,omitempty" name:"AddressCount"`
+
+	// Indicates the billing method of EIPv6. Valid values:
+	// 
+	// - BANDWIDTH_PACKAGE: billed by [Bandwidth Package](https://intl.cloud.tencent.com/document/product/684/15255?from_cn_redirect=1)
+	// - TRAFFIC_POSTPAID_BY_HOUR: postpaid by traffic on an hourly basis
+	// 
+	// Default: TRAFFIC_POSTPAID_BY_HOUR.
+	InternetChargeType *string `json:"InternetChargeType,omitnil,omitempty" name:"InternetChargeType"`
+
+	// Indicates the type of EIPv6 line. Default: BGP.
+	// 
+	// For a user who has enabled the static single-line IP allowlist, valid values include:
+	// - CMCC: China Mobile
+	// - CTCC: China Telecom
+	// - CUCC: China Unicom
+	// Note: The static single-line IP is only supported in some regions.
+	InternetServiceProvider *string `json:"InternetServiceProvider,omitnil,omitempty" name:"InternetServiceProvider"`
+
+	// EIPv6 bandwidth cap, in Mbps.
+	// 
+	// Valid values depend on the EIP billing method:
+	// 
+	// - BANDWIDTH_PACKAGE: 1 Mbps to 2000 Mbps
+	// - TRAFFIC_POSTPAID_BY_HOUR: 1 Mbps to 100 Mbps
+	// 
+	// Default: 1 Mbps.
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Unique ID of the bandwidth package.
+	// Setting this parameter and having InternetChargeType as BANDWIDTH_PACKAGE indicate that the created EIP will join this BGP bandwidth package and the billing method of bandwidth package will be adopted.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitnil,omitempty" name:"BandwidthPackageId"`
+
+	// List of tags to be associated.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// EIPv6 network egress. Valid values:
+	// 
+	// - CENTER_EGRESS_1: Central egress point 1
+	// - CENTER_EGRESS_2: Central egress point 2
+	// - CENTER_EGRESS_3: Central egress point 3
+	// Note: The network egress for different Internet Service Providers (ISPs) or resource types requires contacting the product team for enablement.
+	// 
+	// Default: CENTER_EGRESS_1.
+	Egress *string `json:"Egress,omitnil,omitempty" name:"Egress"`
+}
+
+type AllocateIPv6AddressesRequest struct {
+	*tchttp.BaseRequest
+	
+	// EIPv6 name, which is the custom EIPv6 name given by the user when the user applies for the EIPv6. Default: not named.
+	AddressName *string `json:"AddressName,omitnil,omitempty" name:"AddressName"`
+
+	// Indicates the type of EIPv6. Valid values:
+	// 
+	// - EIPv6: common IPv6
+	// - HighQualityEIPv6: dedicated IPv6
+	// Note: Contact the product team to enable the dedicated IPv6 allowlist. The dedicated IPv6 is only supported in some regions.
+	// 
+	// Default: EIPv6.
+	AddressType *string `json:"AddressType,omitnil,omitempty" name:"AddressType"`
+
+	// Number of applied EIPv6 addresses. Default: 1.
+	AddressCount *int64 `json:"AddressCount,omitnil,omitempty" name:"AddressCount"`
+
+	// Indicates the billing method of EIPv6. Valid values:
+	// 
+	// - BANDWIDTH_PACKAGE: billed by [Bandwidth Package](https://intl.cloud.tencent.com/document/product/684/15255?from_cn_redirect=1)
+	// - TRAFFIC_POSTPAID_BY_HOUR: postpaid by traffic on an hourly basis
+	// 
+	// Default: TRAFFIC_POSTPAID_BY_HOUR.
+	InternetChargeType *string `json:"InternetChargeType,omitnil,omitempty" name:"InternetChargeType"`
+
+	// Indicates the type of EIPv6 line. Default: BGP.
+	// 
+	// For a user who has enabled the static single-line IP allowlist, valid values include:
+	// - CMCC: China Mobile
+	// - CTCC: China Telecom
+	// - CUCC: China Unicom
+	// Note: The static single-line IP is only supported in some regions.
+	InternetServiceProvider *string `json:"InternetServiceProvider,omitnil,omitempty" name:"InternetServiceProvider"`
+
+	// EIPv6 bandwidth cap, in Mbps.
+	// 
+	// Valid values depend on the EIP billing method:
+	// 
+	// - BANDWIDTH_PACKAGE: 1 Mbps to 2000 Mbps
+	// - TRAFFIC_POSTPAID_BY_HOUR: 1 Mbps to 100 Mbps
+	// 
+	// Default: 1 Mbps.
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Unique ID of the bandwidth package.
+	// Setting this parameter and having InternetChargeType as BANDWIDTH_PACKAGE indicate that the created EIP will join this BGP bandwidth package and the billing method of bandwidth package will be adopted.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitnil,omitempty" name:"BandwidthPackageId"`
+
+	// List of tags to be associated.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// EIPv6 network egress. Valid values:
+	// 
+	// - CENTER_EGRESS_1: Central egress point 1
+	// - CENTER_EGRESS_2: Central egress point 2
+	// - CENTER_EGRESS_3: Central egress point 3
+	// Note: The network egress for different Internet Service Providers (ISPs) or resource types requires contacting the product team for enablement.
+	// 
+	// Default: CENTER_EGRESS_1.
+	Egress *string `json:"Egress,omitnil,omitempty" name:"Egress"`
+}
+
+func (r *AllocateIPv6AddressesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AllocateIPv6AddressesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "AddressName")
+	delete(f, "AddressType")
+	delete(f, "AddressCount")
+	delete(f, "InternetChargeType")
+	delete(f, "InternetServiceProvider")
+	delete(f, "InternetMaxBandwidthOut")
+	delete(f, "BandwidthPackageId")
+	delete(f, "Tags")
+	delete(f, "Egress")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AllocateIPv6AddressesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AllocateIPv6AddressesResponseParams struct {
+	// List of unique IDs of applied EIPv6 addresses.
+	AddressSet []*string `json:"AddressSet,omitnil,omitempty" name:"AddressSet"`
+
+	// Async task ID. You can use the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type AllocateIPv6AddressesResponse struct {
+	*tchttp.BaseResponse
+	Response *AllocateIPv6AddressesResponseParams `json:"Response"`
+}
+
+func (r *AllocateIPv6AddressesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AllocateIPv6AddressesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AllocateIp6AddressesBandwidthRequestParams struct {
+	// IPv6 addresses that require the public network access capability.
+	Ip6Addresses []*string `json:"Ip6Addresses,omitnil,omitempty" name:"Ip6Addresses"`
+
+	// Bandwidth, in Mbps. The default value is 1 Mbps.
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Network billing mode. IPv6 addresses currently support "TRAFFIC_POSTPAID_BY_HOUR" and "BANDWIDTH_PACKAGE". The default network billing mode is "TRAFFIC_POSTPAID_BY_HOUR".
+	InternetChargeType *string `json:"InternetChargeType,omitnil,omitempty" name:"InternetChargeType"`
+
+	// Bandwidth package ID. This ID is required for standard accounts to add the IPv6 addresses to the bandwidth package, thus using the billing mode.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitnil,omitempty" name:"BandwidthPackageId"`
+
+	// List of tags to be associated.		
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+type AllocateIp6AddressesBandwidthRequest struct {
+	*tchttp.BaseRequest
+	
+	// IPv6 addresses that require the public network access capability.
+	Ip6Addresses []*string `json:"Ip6Addresses,omitnil,omitempty" name:"Ip6Addresses"`
+
+	// Bandwidth, in Mbps. The default value is 1 Mbps.
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// Network billing mode. IPv6 addresses currently support "TRAFFIC_POSTPAID_BY_HOUR" and "BANDWIDTH_PACKAGE". The default network billing mode is "TRAFFIC_POSTPAID_BY_HOUR".
+	InternetChargeType *string `json:"InternetChargeType,omitnil,omitempty" name:"InternetChargeType"`
+
+	// Bandwidth package ID. This ID is required for standard accounts to add the IPv6 addresses to the bandwidth package, thus using the billing mode.
+	BandwidthPackageId *string `json:"BandwidthPackageId,omitnil,omitempty" name:"BandwidthPackageId"`
+
+	// List of tags to be associated.		
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+func (r *AllocateIp6AddressesBandwidthRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AllocateIp6AddressesBandwidthRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Ip6Addresses")
+	delete(f, "InternetMaxBandwidthOut")
+	delete(f, "InternetChargeType")
+	delete(f, "BandwidthPackageId")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AllocateIp6AddressesBandwidthRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AllocateIp6AddressesBandwidthResponseParams struct {
+	// List of unique IDs of Classic elastic Public IPv6 instances.
+	AddressSet []*string `json:"AddressSet,omitnil,omitempty" name:"AddressSet"`
+
+	// Asynchronous task ID. You can call the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type AllocateIp6AddressesBandwidthResponse struct {
+	*tchttp.BaseResponse
+	Response *AllocateIp6AddressesBandwidthResponseParams `json:"Response"`
+}
+
+func (r *AllocateIp6AddressesBandwidthResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AllocateIp6AddressesBandwidthResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -1054,6 +1333,74 @@ func (r *AssociateDirectConnectGatewayNatGatewayResponse) ToJsonString() string 
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *AssociateDirectConnectGatewayNatGatewayResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AssociateIPv6AddressRequestParams struct {
+	// Unique ID of the EIPv6, such as eipv6-11112222.
+	IPv6AddressId *string `json:"IPv6AddressId,omitnil,omitempty" name:"IPv6AddressId"`
+
+	// ID of the ENI to be bound, such as eni-11112222. NetworkInterfaceId and InstanceId cannot be specified at the same time. The ENI ID can be queried by logging in to the console or obtained from the networkInterfaceId field in the returned value of the DescribeNetworkInterfaces API.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitnil,omitempty" name:"NetworkInterfaceId"`
+
+	// Private IPv6 to be bound. If NetworkInterfaceId is specified, PrivateIPv6Address must also be specified, which indicates that the EIP will be bound to the specified private IPv6 of the specified ENI. At the same time, it shall be ensured that the specified PrivateIPv6Address is a private IPv6 on the specified NetworkInterfaceId. The specified ENI's private IPv6 can be queried by logging in to the console or obtained from the Ipv6AddressSet.Address field in the returned value of the DescribeNetworkInterfaces API.
+	PrivateIPv6Address *string `json:"PrivateIPv6Address,omitnil,omitempty" name:"PrivateIPv6Address"`
+}
+
+type AssociateIPv6AddressRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique ID of the EIPv6, such as eipv6-11112222.
+	IPv6AddressId *string `json:"IPv6AddressId,omitnil,omitempty" name:"IPv6AddressId"`
+
+	// ID of the ENI to be bound, such as eni-11112222. NetworkInterfaceId and InstanceId cannot be specified at the same time. The ENI ID can be queried by logging in to the console or obtained from the networkInterfaceId field in the returned value of the DescribeNetworkInterfaces API.
+	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitnil,omitempty" name:"NetworkInterfaceId"`
+
+	// Private IPv6 to be bound. If NetworkInterfaceId is specified, PrivateIPv6Address must also be specified, which indicates that the EIP will be bound to the specified private IPv6 of the specified ENI. At the same time, it shall be ensured that the specified PrivateIPv6Address is a private IPv6 on the specified NetworkInterfaceId. The specified ENI's private IPv6 can be queried by logging in to the console or obtained from the Ipv6AddressSet.Address field in the returned value of the DescribeNetworkInterfaces API.
+	PrivateIPv6Address *string `json:"PrivateIPv6Address,omitnil,omitempty" name:"PrivateIPv6Address"`
+}
+
+func (r *AssociateIPv6AddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssociateIPv6AddressRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IPv6AddressId")
+	delete(f, "NetworkInterfaceId")
+	delete(f, "PrivateIPv6Address")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "AssociateIPv6AddressRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type AssociateIPv6AddressResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type AssociateIPv6AddressResponse struct {
+	*tchttp.BaseResponse
+	Response *AssociateIPv6AddressResponseParams `json:"Response"`
+}
+
+func (r *AssociateIPv6AddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *AssociateIPv6AddressResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9869,6 +10216,219 @@ func (r *DescribeHaVipsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeIPv6AddressesRequestParams struct {
+	// Unique ID column identifying IPv6.
+	// 
+	// - Unique ID of the traditional EIPv6, such as `eip-11112222`
+	// - Unique ID of the EIPv6, such as `eipv6-11112222`
+	// 
+	// Note: `IPv6AddressIds` and `Filters` cannot be specified at the same time.
+	IPv6AddressIds []*string `json:"IPv6AddressIds,omitnil,omitempty" name:"IPv6AddressIds"`
+
+	// Each request can have up to 10 `Filters` and 100 `Filter.Values`. `IPv6AddressIds` and `Filters` cannot be specified at the same time. The detailed filter conditions are as follows:
+	// 
+	// - address-id - String - Required: No - (Filter condition) Filter by the unique ID of the EIPv6.
+	// - public-ipv6-address - String - Required: No - (Filter condition) Filter by the public IPv6 address.
+	// - network-interface-id - String - Required: No - (Filter condition) Filter by the unique ID of the ENI.
+	// - instance-id - String - Required: No - (Filter condition) Filter by the unique ID of the bound instance.
+	// - charge-type - String - Required: No - (Filter condition) Filter by the billing type.
+	// - private-ipv6-address - String - Required: No - (Filter condition) Filter by the bound private IPv6 address.
+	// - egress - String - Required: No - (Filter condition) Filter by the egress.
+	// - address-type - String - Required: No - (Filter condition) Filter by the IPv6 type. Valid values: 'EIP6', 'EIPv6', 'WanIPv6', and 'HighQualityEIPv6'. Default: 'EIPv6'.
+	// - address-isp - String - Required: No - (Filter condition) Filter by the ISP type. Valid values: 'BGP', 'CMCC', 'CUCC', and 'CTCC'.
+	// - address-status - String - Required: No - (Filter condition) Filter by the EIP status. Valid values: 'CREATING', 'BINDING', 'BIND', 'UNBINDING', 'UNBIND', 'OFFLINING', 'BIND_ENI', and 'PRIVATE'.
+	// - address-name - String - Required: No - (Filter condition) Filter by the EIP name. Fuzzy filtering is not supported.
+	// - tag-key - String - Required: No - (Filter condition) Filter by the tag key.
+	// - tag-value - String - Required: No - (Filter condition) Filter by the tag value.
+	// - tag:tag-key - String - Required: No - (Filter condition) Filter by the tag-key - value pair. Replace tag-key with a specific tag key.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Indicates whether to query the traditional IPv6 address information.
+	Traditional *bool `json:"Traditional,omitnil,omitempty" name:"Traditional"`
+
+	// Offset. Default: 0. For more information on Offset, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned results. Default: 20. Maximum: 100. For more information on Limit, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeIPv6AddressesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique ID column identifying IPv6.
+	// 
+	// - Unique ID of the traditional EIPv6, such as `eip-11112222`
+	// - Unique ID of the EIPv6, such as `eipv6-11112222`
+	// 
+	// Note: `IPv6AddressIds` and `Filters` cannot be specified at the same time.
+	IPv6AddressIds []*string `json:"IPv6AddressIds,omitnil,omitempty" name:"IPv6AddressIds"`
+
+	// Each request can have up to 10 `Filters` and 100 `Filter.Values`. `IPv6AddressIds` and `Filters` cannot be specified at the same time. The detailed filter conditions are as follows:
+	// 
+	// - address-id - String - Required: No - (Filter condition) Filter by the unique ID of the EIPv6.
+	// - public-ipv6-address - String - Required: No - (Filter condition) Filter by the public IPv6 address.
+	// - network-interface-id - String - Required: No - (Filter condition) Filter by the unique ID of the ENI.
+	// - instance-id - String - Required: No - (Filter condition) Filter by the unique ID of the bound instance.
+	// - charge-type - String - Required: No - (Filter condition) Filter by the billing type.
+	// - private-ipv6-address - String - Required: No - (Filter condition) Filter by the bound private IPv6 address.
+	// - egress - String - Required: No - (Filter condition) Filter by the egress.
+	// - address-type - String - Required: No - (Filter condition) Filter by the IPv6 type. Valid values: 'EIP6', 'EIPv6', 'WanIPv6', and 'HighQualityEIPv6'. Default: 'EIPv6'.
+	// - address-isp - String - Required: No - (Filter condition) Filter by the ISP type. Valid values: 'BGP', 'CMCC', 'CUCC', and 'CTCC'.
+	// - address-status - String - Required: No - (Filter condition) Filter by the EIP status. Valid values: 'CREATING', 'BINDING', 'BIND', 'UNBINDING', 'UNBIND', 'OFFLINING', 'BIND_ENI', and 'PRIVATE'.
+	// - address-name - String - Required: No - (Filter condition) Filter by the EIP name. Fuzzy filtering is not supported.
+	// - tag-key - String - Required: No - (Filter condition) Filter by the tag key.
+	// - tag-value - String - Required: No - (Filter condition) Filter by the tag value.
+	// - tag:tag-key - String - Required: No - (Filter condition) Filter by the tag-key - value pair. Replace tag-key with a specific tag key.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Indicates whether to query the traditional IPv6 address information.
+	Traditional *bool `json:"Traditional,omitnil,omitempty" name:"Traditional"`
+
+	// Offset. Default: 0. For more information on Offset, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned results. Default: 20. Maximum: 100. For more information on Limit, see the relevant section in the API [Overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeIPv6AddressesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeIPv6AddressesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IPv6AddressIds")
+	delete(f, "Filters")
+	delete(f, "Traditional")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeIPv6AddressesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeIPv6AddressesResponseParams struct {
+	// Number of IPv6 meeting conditions.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// IPv6 detailed information list.
+	AddressSet []*Address `json:"AddressSet,omitnil,omitempty" name:"AddressSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeIPv6AddressesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeIPv6AddressesResponseParams `json:"Response"`
+}
+
+func (r *DescribeIPv6AddressesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeIPv6AddressesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeIp6AddressesRequestParams struct {
+	// List of unique IDs that identify IPv6 instances. The unique ID of an IPv6 instance is in the format of `eip-11112222`. Parameters `Ip6AddressIds` and `Filters` cannot be specified at the same time.
+	Ip6AddressIds []*string `json:"Ip6AddressIds,omitnil,omitempty" name:"Ip6AddressIds"`
+
+	// Each request can have up to 10 `Filters` values and 100 `Filter.Values` values. Parameters `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
+	// <li>address-ip - String - Required: No - (Filter condition) Filter by the IP address of IPv6 instances.</li>
+	// <li>network-interface-id - String - Required: No - (Filter condition) Filter by the unique ID of ENIs.</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+type DescribeIp6AddressesRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of unique IDs that identify IPv6 instances. The unique ID of an IPv6 instance is in the format of `eip-11112222`. Parameters `Ip6AddressIds` and `Filters` cannot be specified at the same time.
+	Ip6AddressIds []*string `json:"Ip6AddressIds,omitnil,omitempty" name:"Ip6AddressIds"`
+
+	// Each request can have up to 10 `Filters` values and 100 `Filter.Values` values. Parameters `AddressIds` and `Filters` cannot be specified at the same time. The specific filter conditions are as follows:
+	// <li>address-ip - String - Required: No - (Filter condition) Filter by the IP address of IPv6 instances.</li>
+	// <li>network-interface-id - String - Required: No - (Filter condition) Filter by the unique ID of ENIs.</li>
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned results. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in the API [overview](https://intl.cloud.tencent.com/document/api/213/11646?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+}
+
+func (r *DescribeIp6AddressesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeIp6AddressesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Ip6AddressIds")
+	delete(f, "Filters")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeIp6AddressesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeIp6AddressesResponseParams struct {
+	// Number of IPv6 meeting conditions.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// IPv6 detailed information list.
+	AddressSet []*Address `json:"AddressSet,omitnil,omitempty" name:"AddressSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeIp6AddressesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeIp6AddressesResponseParams `json:"Response"`
+}
+
+func (r *DescribeIp6AddressesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeIp6AddressesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeIpGeolocationDatabaseUrlRequestParams struct {
 	// Protocol type for an IP location database. Valid value: `ipv4`.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
@@ -14187,6 +14747,67 @@ func (r *DisassociateDirectConnectGatewayNatGatewayResponse) FromJsonString(s st
 }
 
 // Predefined struct for user
+type DisassociateIPv6AddressRequestParams struct {
+	// Indicates the unique ID of the EIPv6, such as eipv6-11112222.
+	IPv6AddressId *string `json:"IPv6AddressId,omitnil,omitempty" name:"IPv6AddressId"`
+
+	// Indicates whether to keep the ENI bound when unbinding.
+	KeepBindWithEni *bool `json:"KeepBindWithEni,omitnil,omitempty" name:"KeepBindWithEni"`
+}
+
+type DisassociateIPv6AddressRequest struct {
+	*tchttp.BaseRequest
+	
+	// Indicates the unique ID of the EIPv6, such as eipv6-11112222.
+	IPv6AddressId *string `json:"IPv6AddressId,omitnil,omitempty" name:"IPv6AddressId"`
+
+	// Indicates whether to keep the ENI bound when unbinding.
+	KeepBindWithEni *bool `json:"KeepBindWithEni,omitnil,omitempty" name:"KeepBindWithEni"`
+}
+
+func (r *DisassociateIPv6AddressRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisassociateIPv6AddressRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IPv6AddressId")
+	delete(f, "KeepBindWithEni")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DisassociateIPv6AddressRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DisassociateIPv6AddressResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DisassociateIPv6AddressResponse struct {
+	*tchttp.BaseResponse
+	Response *DisassociateIPv6AddressResponseParams `json:"Response"`
+}
+
+func (r *DisassociateIPv6AddressResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DisassociateIPv6AddressResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DisassociateNatGatewayAddressRequestParams struct {
 	// The ID of the NAT gateway, such as `nat-df45454`.
 	NatGatewayId *string `json:"NatGatewayId,omitnil,omitempty" name:"NatGatewayId"`
@@ -17297,6 +17918,199 @@ func (r *ModifyHaVipAttributeResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyIPv6AddressesAttributesRequestParams struct {
+	// List of unique IDs of EIPv6.
+	IPv6AddressIds []*string `json:"IPv6AddressIds,omitnil,omitempty" name:"IPv6AddressIds"`
+
+	// Name of the EIPv6 address
+	IPv6AddressName *string `json:"IPv6AddressName,omitnil,omitempty" name:"IPv6AddressName"`
+}
+
+type ModifyIPv6AddressesAttributesRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of unique IDs of EIPv6.
+	IPv6AddressIds []*string `json:"IPv6AddressIds,omitnil,omitempty" name:"IPv6AddressIds"`
+
+	// Name of the EIPv6 address
+	IPv6AddressName *string `json:"IPv6AddressName,omitnil,omitempty" name:"IPv6AddressName"`
+}
+
+func (r *ModifyIPv6AddressesAttributesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyIPv6AddressesAttributesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IPv6AddressIds")
+	delete(f, "IPv6AddressName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyIPv6AddressesAttributesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyIPv6AddressesAttributesResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyIPv6AddressesAttributesResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyIPv6AddressesAttributesResponseParams `json:"Response"`
+}
+
+func (r *ModifyIPv6AddressesAttributesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyIPv6AddressesAttributesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyIPv6AddressesBandwidthRequestParams struct {
+	// Unique ID of the EIPv6 address
+	IPv6AddressIds []*string `json:"IPv6AddressIds,omitnil,omitempty" name:"IPv6AddressIds"`
+
+	// Network bandwidth of the EIPv6 address
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+}
+
+type ModifyIPv6AddressesBandwidthRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique ID of the EIPv6 address
+	IPv6AddressIds []*string `json:"IPv6AddressIds,omitnil,omitempty" name:"IPv6AddressIds"`
+
+	// Network bandwidth of the EIPv6 address
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+}
+
+func (r *ModifyIPv6AddressesBandwidthRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyIPv6AddressesBandwidthRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IPv6AddressIds")
+	delete(f, "InternetMaxBandwidthOut")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyIPv6AddressesBandwidthRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyIPv6AddressesBandwidthResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyIPv6AddressesBandwidthResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyIPv6AddressesBandwidthResponseParams `json:"Response"`
+}
+
+func (r *ModifyIPv6AddressesBandwidthResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyIPv6AddressesBandwidthResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyIp6AddressesBandwidthRequestParams struct {
+	// Modified target bandwidth, in Mbps.
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// IPv6 addresses. Both Ip6Addresses and Ip6AddressId are required, but they cannot be specified at the same time.
+	Ip6Addresses []*string `json:"Ip6Addresses,omitnil,omitempty" name:"Ip6Addresses"`
+
+	// Unique IDs corresponding to the IPv6 addresses. Format: eip-xxxxxxxx. Both Ip6Addresses and Ip6AddressId are required, but they cannot be specified at the same time.
+	Ip6AddressIds []*string `json:"Ip6AddressIds,omitnil,omitempty" name:"Ip6AddressIds"`
+}
+
+type ModifyIp6AddressesBandwidthRequest struct {
+	*tchttp.BaseRequest
+	
+	// Modified target bandwidth, in Mbps.
+	InternetMaxBandwidthOut *int64 `json:"InternetMaxBandwidthOut,omitnil,omitempty" name:"InternetMaxBandwidthOut"`
+
+	// IPv6 addresses. Both Ip6Addresses and Ip6AddressId are required, but they cannot be specified at the same time.
+	Ip6Addresses []*string `json:"Ip6Addresses,omitnil,omitempty" name:"Ip6Addresses"`
+
+	// Unique IDs corresponding to the IPv6 addresses. Format: eip-xxxxxxxx. Both Ip6Addresses and Ip6AddressId are required, but they cannot be specified at the same time.
+	Ip6AddressIds []*string `json:"Ip6AddressIds,omitnil,omitempty" name:"Ip6AddressIds"`
+}
+
+func (r *ModifyIp6AddressesBandwidthRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyIp6AddressesBandwidthRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InternetMaxBandwidthOut")
+	delete(f, "Ip6Addresses")
+	delete(f, "Ip6AddressIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyIp6AddressesBandwidthRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyIp6AddressesBandwidthResponseParams struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyIp6AddressesBandwidthResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyIp6AddressesBandwidthResponseParams `json:"Response"`
+}
+
+func (r *ModifyIp6AddressesBandwidthResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyIp6AddressesBandwidthResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyIpv6AddressesAttributeRequestParams struct {
 	// The `ID` of the ENI instance, such as `eni-m6dyj72l`.
 	NetworkInterfaceId *string `json:"NetworkInterfaceId,omitnil,omitempty" name:"NetworkInterfaceId"`
@@ -19998,6 +20812,124 @@ func (r *ReleaseAddressesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ReleaseAddressesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReleaseIPv6AddressesRequestParams struct {
+	// Unique ID of the IPv6 address.
+	IPv6AddressIds []*string `json:"IPv6AddressIds,omitnil,omitempty" name:"IPv6AddressIds"`
+}
+
+type ReleaseIPv6AddressesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique ID of the IPv6 address.
+	IPv6AddressIds []*string `json:"IPv6AddressIds,omitnil,omitempty" name:"IPv6AddressIds"`
+}
+
+func (r *ReleaseIPv6AddressesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReleaseIPv6AddressesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "IPv6AddressIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReleaseIPv6AddressesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReleaseIPv6AddressesResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ReleaseIPv6AddressesResponse struct {
+	*tchttp.BaseResponse
+	Response *ReleaseIPv6AddressesResponseParams `json:"Response"`
+}
+
+func (r *ReleaseIPv6AddressesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReleaseIPv6AddressesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReleaseIp6AddressesBandwidthRequestParams struct {
+	// IPv6 addresses. Both Ip6Addresses and Ip6AddressIds are required, but they cannot be specified at the same time.
+	Ip6Addresses []*string `json:"Ip6Addresses,omitnil,omitempty" name:"Ip6Addresses"`
+
+	// Unique IDs corresponding to the IPv6 addresses. Format: eip-xxxxxxxx. Both Ip6Addresses and Ip6AddressIds are required, but they cannot be specified at the same time.
+	Ip6AddressIds []*string `json:"Ip6AddressIds,omitnil,omitempty" name:"Ip6AddressIds"`
+}
+
+type ReleaseIp6AddressesBandwidthRequest struct {
+	*tchttp.BaseRequest
+	
+	// IPv6 addresses. Both Ip6Addresses and Ip6AddressIds are required, but they cannot be specified at the same time.
+	Ip6Addresses []*string `json:"Ip6Addresses,omitnil,omitempty" name:"Ip6Addresses"`
+
+	// Unique IDs corresponding to the IPv6 addresses. Format: eip-xxxxxxxx. Both Ip6Addresses and Ip6AddressIds are required, but they cannot be specified at the same time.
+	Ip6AddressIds []*string `json:"Ip6AddressIds,omitnil,omitempty" name:"Ip6AddressIds"`
+}
+
+func (r *ReleaseIp6AddressesBandwidthRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReleaseIp6AddressesBandwidthRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Ip6Addresses")
+	delete(f, "Ip6AddressIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ReleaseIp6AddressesBandwidthRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ReleaseIp6AddressesBandwidthResponseParams struct {
+	// Asynchronous task ID. You can call the [DescribeTaskResult](https://intl.cloud.tencent.com/document/api/215/36271?from_cn_redirect=1) API to query the task status.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ReleaseIp6AddressesBandwidthResponse struct {
+	*tchttp.BaseResponse
+	Response *ReleaseIp6AddressesBandwidthResponseParams `json:"Response"`
+}
+
+func (r *ReleaseIp6AddressesBandwidthResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ReleaseIp6AddressesBandwidthResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

@@ -421,6 +421,180 @@ func (c *Client) AllocateAddressesWithContext(ctx context.Context, request *Allo
     return
 }
 
+func NewAllocateIPv6AddressesRequest() (request *AllocateIPv6AddressesRequest) {
+    request = &AllocateIPv6AddressesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "AllocateIPv6Addresses")
+    
+    
+    return
+}
+
+func NewAllocateIPv6AddressesResponse() (response *AllocateIPv6AddressesResponse) {
+    response = &AllocateIPv6AddressesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AllocateIPv6Addresses
+// This API is used to apply for one or more Elastic IPv6 (EIPv6) instances.
+//
+// 
+//
+// - EIPv6 is a fixed public IPv6 address that can be independently applied for and held in a Tencent Cloud region, providing a consistent product experience with Elastic IPv4.
+//
+// - You can quickly bind an EIPv6 instance to the private IPv6 address of a cloud resource, so as to quickly enable IPv6 public bandwidth for the cloud resource.
+//
+// - You can also bind an EIPv6 instance to other cloud resources as needed, so as to shield instance failures.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
+//  INVALIDPARAMETERVALUE_BANDWIDTHTOOSMALL = "InvalidParameterValue.BandwidthTooSmall"
+//  INVALIDPARAMETERVALUE_COMBINATION = "InvalidParameterValue.Combination"
+//  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
+//  LIMITEXCEEDED_BANDWIDTHPACKAGERESOURCEQUOTA = "LimitExceeded.BandwidthPackageResourceQuota"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_ACCOUNTNOTSUPPORTED = "UnsupportedOperation.AccountNotSupported"
+func (c *Client) AllocateIPv6Addresses(request *AllocateIPv6AddressesRequest) (response *AllocateIPv6AddressesResponse, err error) {
+    return c.AllocateIPv6AddressesWithContext(context.Background(), request)
+}
+
+// AllocateIPv6Addresses
+// This API is used to apply for one or more Elastic IPv6 (EIPv6) instances.
+//
+// 
+//
+// - EIPv6 is a fixed public IPv6 address that can be independently applied for and held in a Tencent Cloud region, providing a consistent product experience with Elastic IPv4.
+//
+// - You can quickly bind an EIPv6 instance to the private IPv6 address of a cloud resource, so as to quickly enable IPv6 public bandwidth for the cloud resource.
+//
+// - You can also bind an EIPv6 instance to other cloud resources as needed, so as to shield instance failures.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
+//  INVALIDPARAMETERVALUE_BANDWIDTHTOOSMALL = "InvalidParameterValue.BandwidthTooSmall"
+//  INVALIDPARAMETERVALUE_COMBINATION = "InvalidParameterValue.Combination"
+//  INVALIDPARAMETERVALUE_UNAVAILABLEZONE = "InvalidParameterValue.UnavailableZone"
+//  LIMITEXCEEDED_BANDWIDTHPACKAGERESOURCEQUOTA = "LimitExceeded.BandwidthPackageResourceQuota"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+//  UNSUPPORTEDOPERATION_ACCOUNTNOTSUPPORTED = "UnsupportedOperation.AccountNotSupported"
+func (c *Client) AllocateIPv6AddressesWithContext(ctx context.Context, request *AllocateIPv6AddressesRequest) (response *AllocateIPv6AddressesResponse, err error) {
+    if request == nil {
+        request = NewAllocateIPv6AddressesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AllocateIPv6Addresses require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAllocateIPv6AddressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAllocateIp6AddressesBandwidthRequest() (request *AllocateIp6AddressesBandwidthRequest) {
+    request = &AllocateIp6AddressesBandwidthRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "AllocateIp6AddressesBandwidth")
+    
+    
+    return
+}
+
+func NewAllocateIp6AddressesBandwidthResponse() (response *AllocateIp6AddressesBandwidthResponse) {
+    response = &AllocateIp6AddressesBandwidthResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AllocateIp6AddressesBandwidth
+// This API is used to allocate IPv6 public network bandwidth for classic elastic public IPv6 addresses.
+//
+// 
+//
+// - Classic elastic public IPv6 addresses only have the private network communication capability by default. They can have the IPv6 public network communication capability and be displayed in the list of Classic Elastic Public IPv6 only after IPv6 public network bandwidth is allocated in the console or by calling this API. 
+//
+// - You can allocate public network bandwidth for one or multiple Classic elastic public IPv6 addresses each time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
+//  FAILEDOPERATION_TASKFAILED = "FailedOperation.TaskFailed"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTINVPC = "InvalidParameterValue.AddressIpNotInVpc"
+//  INVALIDPARAMETERVALUE_ADDRESSPUBLISHED = "InvalidParameterValue.AddressPublished"
+//  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDIPV6 = "InvalidParameterValue.InvalidIpv6"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
+//  UNSUPPORTEDOPERATION_INVALIDADDRESSINTERNETCHARGETYPE = "UnsupportedOperation.InvalidAddressInternetChargeType"
+func (c *Client) AllocateIp6AddressesBandwidth(request *AllocateIp6AddressesBandwidthRequest) (response *AllocateIp6AddressesBandwidthResponse, err error) {
+    return c.AllocateIp6AddressesBandwidthWithContext(context.Background(), request)
+}
+
+// AllocateIp6AddressesBandwidth
+// This API is used to allocate IPv6 public network bandwidth for classic elastic public IPv6 addresses.
+//
+// 
+//
+// - Classic elastic public IPv6 addresses only have the private network communication capability by default. They can have the IPv6 public network communication capability and be displayed in the list of Classic Elastic Public IPv6 only after IPv6 public network bandwidth is allocated in the console or by calling this API. 
+//
+// - You can allocate public network bandwidth for one or multiple Classic elastic public IPv6 addresses each time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
+//  FAILEDOPERATION_TASKFAILED = "FailedOperation.TaskFailed"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTINVPC = "InvalidParameterValue.AddressIpNotInVpc"
+//  INVALIDPARAMETERVALUE_ADDRESSPUBLISHED = "InvalidParameterValue.AddressPublished"
+//  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
+//  INVALIDPARAMETERVALUE_BANDWIDTHPACKAGENOTFOUND = "InvalidParameterValue.BandwidthPackageNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDIPV6 = "InvalidParameterValue.InvalidIpv6"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  UNSUPPORTEDOPERATION_BANDWIDTHPACKAGEIDNOTSUPPORTED = "UnsupportedOperation.BandwidthPackageIdNotSupported"
+//  UNSUPPORTEDOPERATION_INVALIDADDRESSINTERNETCHARGETYPE = "UnsupportedOperation.InvalidAddressInternetChargeType"
+func (c *Client) AllocateIp6AddressesBandwidthWithContext(ctx context.Context, request *AllocateIp6AddressesBandwidthRequest) (response *AllocateIp6AddressesBandwidthResponse, err error) {
+    if request == nil {
+        request = NewAllocateIp6AddressesBandwidthRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AllocateIp6AddressesBandwidth require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAllocateIp6AddressesBandwidthResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAssignIpv6AddressesRequest() (request *AssignIpv6AddressesRequest) {
     request = &AssignIpv6AddressesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -967,6 +1141,91 @@ func (c *Client) AssociateDirectConnectGatewayNatGatewayWithContext(ctx context.
     request.SetContext(ctx)
     
     response = NewAssociateDirectConnectGatewayNatGatewayResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAssociateIPv6AddressRequest() (request *AssociateIPv6AddressRequest) {
+    request = &AssociateIPv6AddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "AssociateIPv6Address")
+    
+    
+    return
+}
+
+func NewAssociateIPv6AddressResponse() (response *AssociateIPv6AddressResponse) {
+    response = &AssociateIPv6AddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AssociateIPv6Address
+// This API is used to bind an EIPv6 instance to the private IPv6 address configured on the CVM or ENI.
+//
+// 
+//
+// - Binding an EIPv6 to the CVM essentially indicates binding the EIPv6 to the private IPv6 address configured on the ENI of the CVM.
+//
+// - Before binding an EIPv6 to the private IPv6 of a specified ENI, ensure that the private IPv6 address is unbound before the binding operation is performed.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTAPPLICABLE = "InvalidParameterValue.AddressNotApplicable"
+//  INVALIDPARAMETERVALUE_MISSINGASSOCIATEENTITY = "InvalidParameterValue.MissingAssociateEntity"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACEINSTANCENOTSUPPORT = "InvalidParameterValue.NetworkInterfaceInstanceNotSupport"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACENOTFOUND = "InvalidParameterValue.NetworkInterfaceNotFound"
+//  INVALIDPRIVATEIPADDRESS_ALREADYBINDEIP = "InvalidPrivateIpAddress.AlreadyBindEip"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ADDRESSINARREARS = "OperationDenied.AddressInArrears"
+//  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+func (c *Client) AssociateIPv6Address(request *AssociateIPv6AddressRequest) (response *AssociateIPv6AddressResponse, err error) {
+    return c.AssociateIPv6AddressWithContext(context.Background(), request)
+}
+
+// AssociateIPv6Address
+// This API is used to bind an EIPv6 instance to the private IPv6 address configured on the CVM or ENI.
+//
+// 
+//
+// - Binding an EIPv6 to the CVM essentially indicates binding the EIPv6 to the private IPv6 address configured on the ENI of the CVM.
+//
+// - Before binding an EIPv6 to the private IPv6 of a specified ENI, ensure that the private IPv6 address is unbound before the binding operation is performed.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERCONFLICT = "InvalidParameterConflict"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  INVALIDPARAMETERVALUE_ADDRESSNOTAPPLICABLE = "InvalidParameterValue.AddressNotApplicable"
+//  INVALIDPARAMETERVALUE_MISSINGASSOCIATEENTITY = "InvalidParameterValue.MissingAssociateEntity"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACEINSTANCENOTSUPPORT = "InvalidParameterValue.NetworkInterfaceInstanceNotSupport"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACENOTFOUND = "InvalidParameterValue.NetworkInterfaceNotFound"
+//  INVALIDPRIVATEIPADDRESS_ALREADYBINDEIP = "InvalidPrivateIpAddress.AlreadyBindEip"
+//  MISSINGPARAMETER = "MissingParameter"
+//  OPERATIONDENIED_ADDRESSINARREARS = "OperationDenied.AddressInArrears"
+//  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+func (c *Client) AssociateIPv6AddressWithContext(ctx context.Context, request *AssociateIPv6AddressRequest) (response *AssociateIPv6AddressResponse, err error) {
+    if request == nil {
+        request = NewAssociateIPv6AddressRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AssociateIPv6Address require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAssociateIPv6AddressResponse()
     err = c.Send(request, response)
     return
 }
@@ -8954,6 +9213,146 @@ func (c *Client) DescribeHaVipsWithContext(ctx context.Context, request *Describ
     return
 }
 
+func NewDescribeIPv6AddressesRequest() (request *DescribeIPv6AddressesRequest) {
+    request = &DescribeIPv6AddressesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeIPv6Addresses")
+    
+    
+    return
+}
+
+func NewDescribeIPv6AddressesResponse() (response *DescribeIPv6AddressesResponse) {
+    response = &DescribeIPv6AddressesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeIPv6Addresses
+// This API is used to query detailed information of one or more EIPv6 instances.
+//
+// 
+//
+// - You can query EIPv6 and traditional EIPv6 instance information in a specified region.
+//
+// - The system returns a certain number (as specified by the Limit, the default value is 20) of EIPv6 instances of the current user if the parameter is empty.
+//
+// error code that may be returned:
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+func (c *Client) DescribeIPv6Addresses(request *DescribeIPv6AddressesRequest) (response *DescribeIPv6AddressesResponse, err error) {
+    return c.DescribeIPv6AddressesWithContext(context.Background(), request)
+}
+
+// DescribeIPv6Addresses
+// This API is used to query detailed information of one or more EIPv6 instances.
+//
+// 
+//
+// - You can query EIPv6 and traditional EIPv6 instance information in a specified region.
+//
+// - The system returns a certain number (as specified by the Limit, the default value is 20) of EIPv6 instances of the current user if the parameter is empty.
+//
+// error code that may be returned:
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+func (c *Client) DescribeIPv6AddressesWithContext(ctx context.Context, request *DescribeIPv6AddressesRequest) (response *DescribeIPv6AddressesResponse, err error) {
+    if request == nil {
+        request = NewDescribeIPv6AddressesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIPv6Addresses require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeIPv6AddressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeIp6AddressesRequest() (request *DescribeIp6AddressesRequest) {
+    request = &DescribeIp6AddressesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeIp6Addresses")
+    
+    
+    return
+}
+
+func NewDescribeIp6AddressesResponse() (response *DescribeIp6AddressesResponse) {
+    response = &DescribeIp6AddressesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeIp6Addresses
+// This API is used to query the detailed information on one or multiple classic elastic public IPv6 instances.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTPUBLIC = "InvalidParameterValue.AddressIpNotPublic"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACEIDMALFORMED = "InvalidParameterValue.NetworkInterfaceIdMalformed"
+func (c *Client) DescribeIp6Addresses(request *DescribeIp6AddressesRequest) (response *DescribeIp6AddressesResponse, err error) {
+    return c.DescribeIp6AddressesWithContext(context.Background(), request)
+}
+
+// DescribeIp6Addresses
+// This API is used to query the detailed information on one or multiple classic elastic public IPv6 instances.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETER_INVALIDFILTER = "InvalidParameter.InvalidFilter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTPUBLIC = "InvalidParameterValue.AddressIpNotPublic"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_NETWORKINTERFACEIDMALFORMED = "InvalidParameterValue.NetworkInterfaceIdMalformed"
+func (c *Client) DescribeIp6AddressesWithContext(ctx context.Context, request *DescribeIp6AddressesRequest) (response *DescribeIp6AddressesResponse, err error) {
+    if request == nil {
+        request = NewDescribeIp6AddressesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeIp6Addresses require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeIp6AddressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeIpGeolocationDatabaseUrlRequest() (request *DescribeIpGeolocationDatabaseUrlRequest) {
     request = &DescribeIpGeolocationDatabaseUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -12187,6 +12586,75 @@ func (c *Client) DisassociateDirectConnectGatewayNatGatewayWithContext(ctx conte
     return
 }
 
+func NewDisassociateIPv6AddressRequest() (request *DisassociateIPv6AddressRequest) {
+    request = &DisassociateIPv6AddressRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "DisassociateIPv6Address")
+    
+    
+    return
+}
+
+func NewDisassociateIPv6AddressResponse() (response *DisassociateIPv6AddressResponse) {
+    response = &DisassociateIPv6AddressResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DisassociateIPv6Address
+// This API is used to unbind an EIPv6 instance.
+//
+// 
+//
+// - You can unbind EIPv6 instances bound to Cloud Virtual Machine (CVM) or Elastic Network Interface (ENI).
+//
+// - Only EIPv6 instances in BIND or BIND_ENI status can be unbound.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ADDRESSENIINFONOTFOUND = "FailedOperation.AddressEniInfoNotFound"
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  OPERATIONDENIED_ADDRESSINARREARS = "OperationDenied.AddressInArrears"
+//  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+func (c *Client) DisassociateIPv6Address(request *DisassociateIPv6AddressRequest) (response *DisassociateIPv6AddressResponse, err error) {
+    return c.DisassociateIPv6AddressWithContext(context.Background(), request)
+}
+
+// DisassociateIPv6Address
+// This API is used to unbind an EIPv6 instance.
+//
+// 
+//
+// - You can unbind EIPv6 instances bound to Cloud Virtual Machine (CVM) or Elastic Network Interface (ENI).
+//
+// - Only EIPv6 instances in BIND or BIND_ENI status can be unbound.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ADDRESSENIINFONOTFOUND = "FailedOperation.AddressEniInfoNotFound"
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  OPERATIONDENIED_ADDRESSINARREARS = "OperationDenied.AddressInArrears"
+//  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+func (c *Client) DisassociateIPv6AddressWithContext(ctx context.Context, request *DisassociateIPv6AddressRequest) (response *DisassociateIPv6AddressResponse, err error) {
+    if request == nil {
+        request = NewDisassociateIPv6AddressRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DisassociateIPv6Address require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDisassociateIPv6AddressResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDisassociateNatGatewayAddressRequest() (request *DisassociateNatGatewayAddressRequest) {
     request = &DisassociateNatGatewayAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -14528,6 +14996,221 @@ func (c *Client) ModifyHaVipAttributeWithContext(ctx context.Context, request *M
     return
 }
 
+func NewModifyIPv6AddressesAttributesRequest() (request *ModifyIPv6AddressesAttributesRequest) {
+    request = &ModifyIPv6AddressesAttributesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyIPv6AddressesAttributes")
+    
+    
+    return
+}
+
+func NewModifyIPv6AddressesAttributesResponse() (response *ModifyIPv6AddressesAttributesResponse) {
+    response = &ModifyIPv6AddressesAttributesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyIPv6AddressesAttributes
+// This API is used to modify the name of an EIPv6 instance.
+//
+// 
+//
+// - You can modify the name of both EIPv6 and traditional EIPv6 instances.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  MISSINGPARAMETER_MULTIMISSINGPARAMETER = "MissingParameter.MultiMissingParameter"
+//  OPERATIONDENIED_ADDRESSINARREARS = "OperationDenied.AddressInArrears"
+//  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+func (c *Client) ModifyIPv6AddressesAttributes(request *ModifyIPv6AddressesAttributesRequest) (response *ModifyIPv6AddressesAttributesResponse, err error) {
+    return c.ModifyIPv6AddressesAttributesWithContext(context.Background(), request)
+}
+
+// ModifyIPv6AddressesAttributes
+// This API is used to modify the name of an EIPv6 instance.
+//
+// 
+//
+// - You can modify the name of both EIPv6 and traditional EIPv6 instances.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  MISSINGPARAMETER_MULTIMISSINGPARAMETER = "MissingParameter.MultiMissingParameter"
+//  OPERATIONDENIED_ADDRESSINARREARS = "OperationDenied.AddressInArrears"
+//  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+func (c *Client) ModifyIPv6AddressesAttributesWithContext(ctx context.Context, request *ModifyIPv6AddressesAttributesRequest) (response *ModifyIPv6AddressesAttributesResponse, err error) {
+    if request == nil {
+        request = NewModifyIPv6AddressesAttributesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyIPv6AddressesAttributes require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyIPv6AddressesAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyIPv6AddressesBandwidthRequest() (request *ModifyIPv6AddressesBandwidthRequest) {
+    request = &ModifyIPv6AddressesBandwidthRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyIPv6AddressesBandwidth")
+    
+    
+    return
+}
+
+func NewModifyIPv6AddressesBandwidthResponse() (response *ModifyIPv6AddressesBandwidthResponse) {
+    response = &ModifyIPv6AddressesBandwidthResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyIPv6AddressesBandwidth
+// This API is used to modify the bandwidth cap of an EIPv6 instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  OPERATIONDENIED_ADDRESSINARREARS = "OperationDenied.AddressInArrears"
+//  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+func (c *Client) ModifyIPv6AddressesBandwidth(request *ModifyIPv6AddressesBandwidthRequest) (response *ModifyIPv6AddressesBandwidthResponse, err error) {
+    return c.ModifyIPv6AddressesBandwidthWithContext(context.Background(), request)
+}
+
+// ModifyIPv6AddressesBandwidth
+// This API is used to modify the bandwidth cap of an EIPv6 instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  OPERATIONDENIED_ADDRESSINARREARS = "OperationDenied.AddressInArrears"
+//  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+func (c *Client) ModifyIPv6AddressesBandwidthWithContext(ctx context.Context, request *ModifyIPv6AddressesBandwidthRequest) (response *ModifyIPv6AddressesBandwidthResponse, err error) {
+    if request == nil {
+        request = NewModifyIPv6AddressesBandwidthRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyIPv6AddressesBandwidth require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyIPv6AddressesBandwidthResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyIp6AddressesBandwidthRequest() (request *ModifyIp6AddressesBandwidthRequest) {
+    request = &ModifyIp6AddressesBandwidthRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyIp6AddressesBandwidth")
+    
+    
+    return
+}
+
+func NewModifyIp6AddressesBandwidthResponse() (response *ModifyIp6AddressesBandwidthResponse) {
+    response = &ModifyIp6AddressesBandwidthResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyIp6AddressesBandwidth
+// This API is used to adjust the bandwidth limit of a classic elastic public IPv6 instance.
+//
+// 
+//
+// - You can adjust the bandwidth limit of only classic elastic public IPv6 instances.
+//
+// - To adjust the bandwidth limit of an elastic public IPv6 instance, call the ModifyIPv6AddressesBandwidth API.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDADDRESSIDSTATE_INARREARS = "InvalidAddressIdState.InArrears"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
+//  INVALIDPARAMETERVALUE_INVALIDIPV6 = "InvalidParameterValue.InvalidIpv6"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  OPERATIONDENIED_MUTEXTASKRUNNING = "OperationDenied.MutexTaskRunning"
+//  UNSUPPORTEDOPERATION_ADDRESSIPINARREAR = "UnsupportedOperation.AddressIpInArrear"
+//  UNSUPPORTEDOPERATION_ADDRESSIPINTERNETCHARGETYPENOTPERMIT = "UnsupportedOperation.AddressIpInternetChargeTypeNotPermit"
+//  UNSUPPORTEDOPERATION_ADDRESSIPNOTSUPPORTINSTANCE = "UnsupportedOperation.AddressIpNotSupportInstance"
+//  UNSUPPORTEDOPERATION_ADDRESSIPSTATUSNOTPERMIT = "UnsupportedOperation.AddressIpStatusNotPermit"
+func (c *Client) ModifyIp6AddressesBandwidth(request *ModifyIp6AddressesBandwidthRequest) (response *ModifyIp6AddressesBandwidthResponse, err error) {
+    return c.ModifyIp6AddressesBandwidthWithContext(context.Background(), request)
+}
+
+// ModifyIp6AddressesBandwidth
+// This API is used to adjust the bandwidth limit of a classic elastic public IPv6 instance.
+//
+// 
+//
+// - You can adjust the bandwidth limit of only classic elastic public IPv6 instances.
+//
+// - To adjust the bandwidth limit of an elastic public IPv6 instance, call the ModifyIPv6AddressesBandwidth API.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDACCOUNT_NOTSUPPORTED = "InvalidAccount.NotSupported"
+//  INVALIDADDRESSID_NOTFOUND = "InvalidAddressId.NotFound"
+//  INVALIDADDRESSIDSTATE_INARREARS = "InvalidAddressIdState.InArrears"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  INVALIDPARAMETERVALUE_BANDWIDTHOUTOFRANGE = "InvalidParameterValue.BandwidthOutOfRange"
+//  INVALIDPARAMETERVALUE_INVALIDIPV6 = "InvalidParameterValue.InvalidIpv6"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  OPERATIONDENIED_MUTEXTASKRUNNING = "OperationDenied.MutexTaskRunning"
+//  UNSUPPORTEDOPERATION_ADDRESSIPINARREAR = "UnsupportedOperation.AddressIpInArrear"
+//  UNSUPPORTEDOPERATION_ADDRESSIPINTERNETCHARGETYPENOTPERMIT = "UnsupportedOperation.AddressIpInternetChargeTypeNotPermit"
+//  UNSUPPORTEDOPERATION_ADDRESSIPNOTSUPPORTINSTANCE = "UnsupportedOperation.AddressIpNotSupportInstance"
+//  UNSUPPORTEDOPERATION_ADDRESSIPSTATUSNOTPERMIT = "UnsupportedOperation.AddressIpStatusNotPermit"
+func (c *Client) ModifyIp6AddressesBandwidthWithContext(ctx context.Context, request *ModifyIp6AddressesBandwidthRequest) (response *ModifyIp6AddressesBandwidthResponse, err error) {
+    if request == nil {
+        request = NewModifyIp6AddressesBandwidthRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyIp6AddressesBandwidth require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyIp6AddressesBandwidthResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyIpv6AddressesAttributeRequest() (request *ModifyIpv6AddressesAttributeRequest) {
     request = &ModifyIpv6AddressesAttributeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -16485,6 +17168,154 @@ func (c *Client) ReleaseAddressesWithContext(ctx context.Context, request *Relea
     request.SetContext(ctx)
     
     response = NewReleaseAddressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewReleaseIPv6AddressesRequest() (request *ReleaseIPv6AddressesRequest) {
+    request = &ReleaseIPv6AddressesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "ReleaseIPv6Addresses")
+    
+    
+    return
+}
+
+func NewReleaseIPv6AddressesResponse() (response *ReleaseIPv6AddressesResponse) {
+    response = &ReleaseIPv6AddressesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ReleaseIPv6Addresses
+// This API is used to release one or more EIPv6 instances.
+//
+// 
+//
+// - You can release the obtained EIPv6 instances. To use them again, please reapply.
+//
+// - Only EIPv6 instances in UNBIND status can be released.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  OPERATIONDENIED_ADDRESSINARREARS = "OperationDenied.AddressInArrears"
+//  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+func (c *Client) ReleaseIPv6Addresses(request *ReleaseIPv6AddressesRequest) (response *ReleaseIPv6AddressesResponse, err error) {
+    return c.ReleaseIPv6AddressesWithContext(context.Background(), request)
+}
+
+// ReleaseIPv6Addresses
+// This API is used to release one or more EIPv6 instances.
+//
+// 
+//
+// - You can release the obtained EIPv6 instances. To use them again, please reapply.
+//
+// - Only EIPv6 instances in UNBIND status can be released.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  OPERATIONDENIED_ADDRESSINARREARS = "OperationDenied.AddressInArrears"
+//  UNSUPPORTEDOPERATION_ADDRESSSTATUSNOTPERMIT = "UnsupportedOperation.AddressStatusNotPermit"
+func (c *Client) ReleaseIPv6AddressesWithContext(ctx context.Context, request *ReleaseIPv6AddressesRequest) (response *ReleaseIPv6AddressesResponse, err error) {
+    if request == nil {
+        request = NewReleaseIPv6AddressesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ReleaseIPv6Addresses require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewReleaseIPv6AddressesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewReleaseIp6AddressesBandwidthRequest() (request *ReleaseIp6AddressesBandwidthRequest) {
+    request = &ReleaseIp6AddressesBandwidthRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "ReleaseIp6AddressesBandwidth")
+    
+    
+    return
+}
+
+func NewReleaseIp6AddressesBandwidthResponse() (response *ReleaseIp6AddressesBandwidthResponse) {
+    response = &ReleaseIp6AddressesBandwidthResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ReleaseIp6AddressesBandwidth
+// This API is used to release the IPv6 public network bandwidth of classic elastic public IPv6 instances.
+//
+// 
+//
+// - Classic elastic public IPv6 addresses still have the IPv6 private network communication capability after the public network bandwidth is released.
+//
+// - To allocate IPV6 public network bandwidth, call the AllocateIp6AddressesBandwidth API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKFAILED = "FailedOperation.TaskFailed"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDIPV6 = "InvalidParameterValue.InvalidIpv6"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  OPERATIONDENIED_MUTEXTASKRUNNING = "OperationDenied.MutexTaskRunning"
+func (c *Client) ReleaseIp6AddressesBandwidth(request *ReleaseIp6AddressesBandwidthRequest) (response *ReleaseIp6AddressesBandwidthResponse, err error) {
+    return c.ReleaseIp6AddressesBandwidthWithContext(context.Background(), request)
+}
+
+// ReleaseIp6AddressesBandwidth
+// This API is used to release the IPv6 public network bandwidth of classic elastic public IPv6 instances.
+//
+// 
+//
+// - Classic elastic public IPv6 addresses still have the IPv6 private network communication capability after the public network bandwidth is released.
+//
+// - To allocate IPV6 public network bandwidth, call the AllocateIp6AddressesBandwidth API.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKFAILED = "FailedOperation.TaskFailed"
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_COEXIST = "InvalidParameter.Coexist"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_ADDRESSIDMALFORMED = "InvalidParameterValue.AddressIdMalformed"
+//  INVALIDPARAMETERVALUE_ADDRESSIPNOTFOUND = "InvalidParameterValue.AddressIpNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDIPV6 = "InvalidParameterValue.InvalidIpv6"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  OPERATIONDENIED_MUTEXTASKRUNNING = "OperationDenied.MutexTaskRunning"
+func (c *Client) ReleaseIp6AddressesBandwidthWithContext(ctx context.Context, request *ReleaseIp6AddressesBandwidthRequest) (response *ReleaseIp6AddressesBandwidthResponse, err error) {
+    if request == nil {
+        request = NewReleaseIp6AddressesBandwidthRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ReleaseIp6AddressesBandwidth require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewReleaseIp6AddressesBandwidthResponse()
     err = c.Send(request, response)
     return
 }
