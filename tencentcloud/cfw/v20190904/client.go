@@ -2521,6 +2521,61 @@ func (c *Client) DescribeUnHandleEventTabListWithContext(ctx context.Context, re
     return
 }
 
+func NewDescribeVpcAcRuleRequest() (request *DescribeVpcAcRuleRequest) {
+    request = &DescribeVpcAcRuleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cfw", APIVersion, "DescribeVpcAcRule")
+    
+    
+    return
+}
+
+func NewDescribeVpcAcRuleResponse() (response *DescribeVpcAcRuleResponse) {
+    response = &DescribeVpcAcRuleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeVpcAcRule
+// Query Inter-VPC rules
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeVpcAcRule(request *DescribeVpcAcRuleRequest) (response *DescribeVpcAcRuleResponse, err error) {
+    return c.DescribeVpcAcRuleWithContext(context.Background(), request)
+}
+
+// DescribeVpcAcRule
+// Query Inter-VPC rules
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeVpcAcRuleWithContext(ctx context.Context, request *DescribeVpcAcRuleRequest) (response *DescribeVpcAcRuleResponse, err error) {
+    if request == nil {
+        request = NewDescribeVpcAcRuleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeVpcAcRule require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeVpcAcRuleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewExpandCfwVerticalRequest() (request *ExpandCfwVerticalRequest) {
     request = &ExpandCfwVerticalRequest{
         BaseRequest: &tchttp.BaseRequest{},

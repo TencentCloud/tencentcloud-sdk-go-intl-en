@@ -2282,6 +2282,136 @@ type QuotaInvoice struct {
 }
 
 // Predefined struct for user
+type RecognizeBrazilDriverLicenseOCRRequestParams struct {
+	// The Base64 value of the image. It is required that the image after Base64 encoding should not exceed 7M, the resolution is recommended to be 500*800 or above, and PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// The Base64 value of the image. It is required that the image after Base64 encoding should not exceed 7M, the resolution is recommended to be 500*800 or above, and PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+	BackImageBase64 *string `json:"BackImageBase64,omitnil,omitempty" name:"BackImageBase64"`
+
+	// The URL address of the image. It is required that the image after Base64 encoding should not exceed 7M, the resolution is recommended to be 500*800 or above, and PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. It is recommended that images be stored in Tencent Cloud to ensure higher download speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// The URL address of the image. It is required that the image after Base64 encoding should not exceed 7M, the resolution is recommended to be 500*800 or above, and PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. It is recommended that images be stored in Tencent Cloud to ensure higher download speed and stability.
+	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
+
+	// Picture switch. The default is false, and the base64 encoding of the avatar photo is not returned. When set to true, the base64 encoding of the portrait photo is returned.
+	CropPortrait *bool `json:"CropPortrait,omitnil,omitempty" name:"CropPortrait"`
+}
+
+type RecognizeBrazilDriverLicenseOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Base64 value of the image. It is required that the image after Base64 encoding should not exceed 7M, the resolution is recommended to be 500*800 or above, and PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// The Base64 value of the image. It is required that the image after Base64 encoding should not exceed 7M, the resolution is recommended to be 500*800 or above, and PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. One of ImageUrl and ImageBase64 of the image must be provided. If both are provided, only ImageUrl will be used.
+	BackImageBase64 *string `json:"BackImageBase64,omitnil,omitempty" name:"BackImageBase64"`
+
+	// The URL address of the image. It is required that the image after Base64 encoding should not exceed 7M, the resolution is recommended to be 500*800 or above, and PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. It is recommended that images be stored in Tencent Cloud to ensure higher download speed and stability.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// The URL address of the image. It is required that the image after Base64 encoding should not exceed 7M, the resolution is recommended to be 500*800 or above, and PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies at least 2/3 of the picture. It is recommended that images be stored in Tencent Cloud to ensure higher download speed and stability.
+	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
+
+	// Picture switch. The default is false, and the base64 encoding of the avatar photo is not returned. When set to true, the base64 encoding of the portrait photo is returned.
+	CropPortrait *bool `json:"CropPortrait,omitnil,omitempty" name:"CropPortrait"`
+}
+
+func (r *RecognizeBrazilDriverLicenseOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeBrazilDriverLicenseOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "BackImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "BackImageUrl")
+	delete(f, "CropPortrait")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RecognizeBrazilDriverLicenseOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RecognizeBrazilDriverLicenseOCRResponseParams struct {
+	// Name
+	NOME *string `json:"NOME,omitnil,omitempty" name:"NOME"`
+
+	// Driving license type
+	CatHab *string `json:"CatHab,omitnil,omitempty" name:"CatHab"`
+
+	// CNH number
+	CNHNumber *string `json:"CNHNumber,omitnil,omitempty" name:"CNHNumber"`
+
+	// Valid date
+	VALIDADE *string `json:"VALIDADE,omitnil,omitempty" name:"VALIDADE"`
+
+	// Qualification
+	QUALIFICATION *string `json:"QUALIFICATION,omitnil,omitempty" name:"QUALIFICATION"`
+
+	// ID number
+	IDENTIDADE *string `json:"IDENTIDADE,omitnil,omitempty" name:"IDENTIDADE"`
+
+	// CPF
+	CPF *string `json:"CPF,omitnil,omitempty" name:"CPF"`
+
+	// Birthday
+	NASCIMENTO *string `json:"NASCIMENTO,omitnil,omitempty" name:"NASCIMENTO"`
+
+	// Membership
+	MEMBERSHIP *string `json:"MEMBERSHIP,omitnil,omitempty" name:"MEMBERSHIP"`
+
+	// Registration number
+	REGISTRO *string `json:"REGISTRO,omitnil,omitempty" name:"REGISTRO"`
+
+	// Remark
+	OBSERVATIONS *string `json:"OBSERVATIONS,omitnil,omitempty" name:"OBSERVATIONS"`
+
+	// Issue date
+	IssueDate *string `json:"IssueDate,omitnil,omitempty" name:"IssueDate"`
+
+	// Issue location
+	LOCAL *string `json:"LOCAL,omitnil,omitempty" name:"LOCAL"`
+
+	// Number in the back of the card
+	BackNumber *string `json:"BackNumber,omitnil,omitempty" name:"BackNumber"`
+
+	// Field confidence
+	AdvancedInfo *string `json:"AdvancedInfo,omitnil,omitempty" name:"AdvancedInfo"`
+
+	// PortraitImage base64
+	PortraitImage *string `json:"PortraitImage,omitnil,omitempty" name:"PortraitImage"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RecognizeBrazilDriverLicenseOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *RecognizeBrazilDriverLicenseOCRResponseParams `json:"Response"`
+}
+
+func (r *RecognizeBrazilDriverLicenseOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeBrazilDriverLicenseOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type RecognizeGeneralInvoiceRequestParams struct {
 	// The Base64-encoded value of the image.
 	// Supported image formats: PNG, JPG, JPEG, and PDF. GIF is currently not supported.

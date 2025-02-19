@@ -829,6 +829,12 @@ type AiParagraphInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Summary *string `json:"Summary,omitnil,omitempty" name:"Summary"`
 
+	// Segment title.
+	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
+
+	// Segment keywords.
+	Keywords []*string `json:"Keywords,omitnil,omitempty" name:"Keywords"`
+
 	// Segmentation start time point, in seconds.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
@@ -8998,6 +9004,12 @@ type MediaAiAnalysisDescriptionItem struct {
 
 	// Confidence of the intelligent description, with a value range from 0 to 100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+	// Intelligent description title.
+	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
+
+	// Intelligent description keywords.
+	Keywords []*string `json:"Keywords,omitnil,omitempty" name:"Keywords"`
 
 	// Segmentation result.
 	// Note: This field may return null, indicating that no valid values can be obtained.

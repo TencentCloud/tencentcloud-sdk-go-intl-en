@@ -1126,6 +1126,71 @@ func (c *Client) PermitOCRWithContext(ctx context.Context, request *PermitOCRReq
     return
 }
 
+func NewRecognizeBrazilDriverLicenseOCRRequest() (request *RecognizeBrazilDriverLicenseOCRRequest) {
+    request = &RecognizeBrazilDriverLicenseOCRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "RecognizeBrazilDriverLicenseOCR")
+    
+    
+    return
+}
+
+func NewRecognizeBrazilDriverLicenseOCRResponse() (response *RecognizeBrazilDriverLicenseOCRResponse) {
+    response = &RecognizeBrazilDriverLicenseOCRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RecognizeBrazilDriverLicenseOCR
+// This interface supports identification of the front and back of Brazilian driver's license. The identification fields include name, driver's license category, number, validity period, etc.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) RecognizeBrazilDriverLicenseOCR(request *RecognizeBrazilDriverLicenseOCRRequest) (response *RecognizeBrazilDriverLicenseOCRResponse, err error) {
+    return c.RecognizeBrazilDriverLicenseOCRWithContext(context.Background(), request)
+}
+
+// RecognizeBrazilDriverLicenseOCR
+// This interface supports identification of the front and back of Brazilian driver's license. The identification fields include name, driver's license category, number, validity period, etc.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_EMPTYIMAGEERROR = "FailedOperation.EmptyImageError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+//  UNKNOWNPARAMETER = "UnknownParameter"
+func (c *Client) RecognizeBrazilDriverLicenseOCRWithContext(ctx context.Context, request *RecognizeBrazilDriverLicenseOCRRequest) (response *RecognizeBrazilDriverLicenseOCRResponse, err error) {
+    if request == nil {
+        request = NewRecognizeBrazilDriverLicenseOCRRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RecognizeBrazilDriverLicenseOCR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRecognizeBrazilDriverLicenseOCRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRecognizeGeneralInvoiceRequest() (request *RecognizeGeneralInvoiceRequest) {
     request = &RecognizeGeneralInvoiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
