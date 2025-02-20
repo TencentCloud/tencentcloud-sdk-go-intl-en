@@ -27,6 +27,14 @@ type AccelerateMainland struct {
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
+type AccelerateMainlandParameters struct {
+	// Mainland china acceleration optimization switch. valid values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
 type AccelerateType struct {
 	// Acceleration switch. Values:
 	// <li>`on`: Enable</li>
@@ -110,6 +118,36 @@ type AccelerationDomainCertificate struct {
 
 	// The certificate carried during EO node origin-pull is used when the origin server enables the mutual authentication handshake to validate the client certificate, ensuring that the request originates from a trusted EO node.
 	UpstreamCertInfo *UpstreamCertInfo `json:"UpstreamCertInfo,omitnil,omitempty" name:"UpstreamCertInfo"`
+}
+
+type AccessURLRedirectParameters struct {
+	// Status code. valid values: 301, 302, 303, 307, 308.
+	StatusCode *int64 `json:"StatusCode,omitnil,omitempty" name:"StatusCode"`
+
+	// Target request protocol. valid values:.
+	// <Li>Http: target request protocol http;</li>.
+	// <Li>Https: target request protocol https;</li>.
+	// <Li>Follow: follow the request.</li>.
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// Target hostname.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	HostName *HostName `json:"HostName,omitnil,omitempty" name:"HostName"`
+
+	// Target path.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	URLPath *URLPath `json:"URLPath,omitnil,omitempty" name:"URLPath"`
+
+	// Carry query parameters.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	QueryString *AccessURLRedirectQueryString `json:"QueryString,omitnil,omitempty" name:"QueryString"`
+}
+
+type AccessURLRedirectQueryString struct {
+	// Action to be executed. values:.
+	// <Li>`Full`: retain all</li>.
+	// <Li>`Ignore`: ignore all</li>.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
 type AclCondition struct {
@@ -231,35 +269,36 @@ type AclUserRule struct {
 }
 
 type Action struct {
-	// Common feature operations. The options for this category include:
-	// <li> Access URL overriding (AccessUrlRedirect);</li>
-	// <li> Origin URL overriding (UpstreamUrlRedirect);</li>
-	// <li> QUIC;</li>
-	// <li> WebSocket;</li>
-	// <li> Video dragging (VideoSeek);</li>
-	// <li> Token authentication (Authentication);</li>
-	// <li> Custom CacheKey (CacheKey);</li>
-	// <li> Node caching TTL (Cache);</li>
-	// <li> Browser caching TTL (MaxAge);</li>
-	// <li> Offline caching (OfflineCache);</li>
-	// <li> Smart routing (SmartRouting);</li>
-	// <li> Range-based origin pull (RangeOriginPull);</li>
-	// <li> HTTP/2 origin pull (UpstreamHttp2);</li>
-	// <li> Host header overriding (HostHeader);</li>
-	// <li> Forced HTTPS (ForceRedirect);</li>
-	// <li> HTTPS origin pull (OriginPullProtocol);</li>
-	// <li> Cache pre-refresh (CachePrefresh);</li>
-	// <li> Smart compression (Compression);</li>
-	// <li> Hsts;</li>
-	// <li> ClientIpHeader;</li>
-	// <li> SslTlsSecureConf;</li>
-	// <li> OcspStapling;</li>
-	// <li> HTTP/2 access (Http2);</li>
-	// <li> Redirection during origin pull (UpstreamFollowRedirect);</li>
-	// <li> Modifying origin server (Origin);</li>
-	// <li> Layer 7 origin pull timeout (HTTPUpstreamTimeout);</li>
-	// <li> HTTP response (HttpResponse).</li>
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Common feature operations. the options for this category include:.
+	// <Li>Access url rewrite (`accessurlredirect`).</li>.
+	// <Li> origin url overriding (upstreamurlredirect);</li>.
+	// <Li> quic;</li>.
+	// <Li> websocket;</li>.
+	// <Li> video dragging (videoseek);</li>.
+	// <Li> token authentication (authentication);</li>.
+	// <Li> custom cachekey (cachekey);</li>.
+	// <Li> node caching ttl (cache);</li>.
+	// <Li> browser cache ttl (maxage);</li>.
+	// <Li> offline caching (offlinecache);</li>.
+	// <Li> smart acceleration (smartrouting);</li>.
+	// <Li> range-based origin pull (rangeoriginpull);</li>.
+	// <Li> http/2 origin pull (upstreamhttp2);</li>.
+	// <Li> host header overriding (hostheader);</li>.
+	// <Li> force https (forceredirect);</li>.
+	// <Li> https origin pull (originpullprotocol);</li>.
+	// <Li>`ResponseSpeedLimit`: single connection download speed limit.</li>.
+	// <Li>`CachePrefresh`: cache prefresh.</li>.
+	// <Li>`Compression`: smart compression.</li>.
+	// <Li>Hsts;</Li>.
+	// <Li>ClientIpHeader;</Li>.
+	// <Li> ssltlssecureconf;</li>.
+	// <Li> ocspstapling;</li>.
+	// <Li> http/2 access (http2);</li>.
+	// <Li> redirection during origin pull (upstreamfollowredirect);</li>.
+	// <Li> modifying origin server (origin);</li>.
+	// <Li> layer 7 origin pull timeout (httpupstreamtimeout).</li>.
+	// <Li> http response (httpresponse).</li>.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
 	NormalAction *NormalAction `json:"NormalAction,omitnil,omitempty" name:"NormalAction"`
 
 	// Feature operation with a request/response header. Features of this type include:
@@ -568,6 +607,39 @@ type AscriptionInfo struct {
 
 	// The record value.
 	RecordValue *string `json:"RecordValue,omitnil,omitempty" name:"RecordValue"`
+}
+
+type AuthenticationParameters struct {
+	// Authentication type. valid values:.
+	// 
+	// <Li>TypeA: authentication method a type, for specific meaning please refer to [authentication method a](https://intl.cloud.tencent.com/document/product/1552/109329?from_cn_redirect=1);</li>.
+	// <Li>TypeB: authentication method b type, for specific meaning please refer to [authentication method b](https://intl.cloud.tencent.com/document/product/1552/109330?from_cn_redirect=1);</li>.
+	// <Li>TypeC: authentication method c type, for specific meaning please refer to [authentication method c](https://intl.cloud.tencent.com/document/product/1552/109331?from_cn_redirect=1);</li>.
+	// <Li>TypeD: authentication method d type, for specific meaning please refer to [authentication method d](https://intl.cloud.tencent.com/document/product/1552/109332?from_cn_redirect=1);</li>.
+	// <Li>TypeVOD: authentication method v type, for specific meaning please refer to [authentication method v](https://intl.cloud.tencent.com/document/product/1552/109333?from_cn_redirect=1).</li>.
+	AuthType *string `json:"AuthType,omitnil,omitempty" name:"AuthType"`
+
+	// The primary authentication key consists of 6–40 uppercase and lowercase english letters or digits, and cannot contain " and $.
+	SecretKey *string `json:"SecretKey,omitnil,omitempty" name:"SecretKey"`
+
+	// Validity period of the authentication url, in seconds, value range: 1–630720000. used to determine if the client access request has expired:.
+	// <Li>If the current time exceeds "timestamp + validity period", it is an expired request, and a 403 is returned directly.</li>.
+	// <Li>If the current time does not exceed "timestamp + validity period", the request is not expired, and the md5 string is further validated.</li> note: when authtype is one of typea, typeb, typec, or typed, this field is required.
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// The backup authentication key consists of 6–40 uppercase and lowercase english letters or digits, and cannot contain " and $.
+	BackupSecretKey *string `json:"BackupSecretKey,omitnil,omitempty" name:"BackupSecretKey"`
+
+	// Authentication parameters name. the node will validate the value corresponding to this parameter name. consists of 1-100 uppercase and lowercase letters, numbers, or underscores.<br>note: this field is required when authtype is either typea or typed.
+	AuthParam *string `json:"AuthParam,omitnil,omitempty" name:"AuthParam"`
+
+	// Authentication timestamp. it cannot be the same as the value of the authparam field.<br>note: this field is required when authtype is typed.
+	TimeParam *string `json:"TimeParam,omitnil,omitempty" name:"TimeParam"`
+
+	// Authentication time format. values:.
+	// <Li>Dec: decimal;</li>.
+	// <Li>Hex: hexadecimal.</li>note: this field is required when authtype is typed. the default is hex.
+	TimeFormat *string `json:"TimeFormat,omitnil,omitempty" name:"TimeFormat"`
 }
 
 type BillingData struct {
@@ -1045,6 +1117,31 @@ type CacheConfig struct {
 	FollowOrigin *FollowOrigin `json:"FollowOrigin,omitnil,omitempty" name:"FollowOrigin"`
 }
 
+type CacheConfigCustomTime struct {
+	// Custom cache time switch. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Custom cache time value, unit: seconds. value range: 0-315360000.<br>note: this field is required when switch is on; when switch is off, this field is not required and will not take effect if filled.
+	CacheTime *int64 `json:"CacheTime,omitnil,omitempty" name:"CacheTime"`
+}
+
+type CacheConfigParameters struct {
+	// Follow origin server cache configuration. only one of followorigin, nocache, customtime can have switch set to on.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	FollowOrigin *FollowOrigin `json:"FollowOrigin,omitnil,omitempty" name:"FollowOrigin"`
+
+	// No cache configuration. only one of followorigin, nocache, customtime can have switch set to on.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	NoCache *NoCache `json:"NoCache,omitnil,omitempty" name:"NoCache"`
+
+	// Custom cache time configuration. only one of followorigin, nocache, customtime can have switch set to on.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	CustomTime *CacheConfigCustomTime `json:"CustomTime,omitnil,omitempty" name:"CustomTime"`
+}
+
 type CacheKey struct {
 	// Whether to enable full-path cache. Values:
 	// <li>`on`: Enable full-path cache (i.e., disable Ignore Query String).</li>
@@ -1063,6 +1160,112 @@ type CacheKey struct {
 	QueryString *QueryString `json:"QueryString,omitnil,omitempty" name:"QueryString"`
 }
 
+type CacheKeyConfigParameters struct {
+	// Whether to enable full-path cache. values:.
+	// <Li>`On`: enable full-path cache (i.e., disable ignore query string).</li>.
+	// <Li>`Off`: disable full-path cache (i.e., enable ignore query string).</li>.
+	FullURLCache *string `json:"FullURLCache,omitnil,omitempty" name:"FullURLCache"`
+
+	// Whether to ignore case in the cache key. values:.
+	// <Li>`On`: ignore;</li>.
+	// <Li>`Off`: not ignore.</li>.
+	IgnoreCase *string `json:"IgnoreCase,omitnil,omitempty" name:"IgnoreCase"`
+
+	// Query string retention configuration parameter. this field and fullurlcache must be set simultaneously, but cannot both be `on`.
+	QueryString *CacheKeyQueryString `json:"QueryString,omitnil,omitempty" name:"QueryString"`
+}
+
+type CacheKeyCookie struct {
+	// Whether to enable feature. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Cache action. values:.
+	// <Li>`Full`: retain all</li>.
+	// <Li> `ignore`: ignore all;</li>.
+	// <Li> `includecustom`: retain specified parameters;</li>.
+	// <Li> `excludecustom`: ignore specified parameters.</li> **note**: when `switch` is on, this field is required. when `switch` is off, this field is not required and will not take effect if filled.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// Custom cache key cookie name list.<br>note: this field is required when action is includecustom or excludecustom; when action is full or ignore, this field is not required and will not take effect if filled.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+}
+
+type CacheKeyHeader struct {
+	// Whether to enable feature. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Custom cache key http request header list.<br>note: this field is required when switch is on; when switch is off, this field is not required and will not take effect if filled.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+}
+
+type CacheKeyParameters struct {
+	// Switch for retaining the complete query string. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li> note: at least one of fullurlcache, ignorecase, header, scheme, or cookie must be configured. this field and querystring.switch must be set simultaneously, but cannot both be on.
+	FullURLCache *string `json:"FullURLCache,omitnil,omitempty" name:"FullURLCache"`
+
+	// Configuration parameter for retaining the query string. this field and fullurlcache must be set simultaneously, but cannot both be on.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	QueryString *CacheKeyQueryString `json:"QueryString,omitnil,omitempty" name:"QueryString"`
+
+	// Switch for ignoring case. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li> note: at least one of fullurlcache, ignorecase, header, scheme, or cookie must be configured.
+	IgnoreCase *string `json:"IgnoreCase,omitnil,omitempty" name:"IgnoreCase"`
+
+	// HTTP request header configuration parameters. at least one of the following configurations must be set: fullurlcache, ignorecase, header, scheme, cookie.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	Header *CacheKeyHeader `json:"Header,omitnil,omitempty" name:"Header"`
+
+	// Request protocol switch. valid values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li> note: at least one of fullurlcache, ignorecase, header, scheme, or cookie must be configured.
+	Scheme *string `json:"Scheme,omitnil,omitempty" name:"Scheme"`
+
+	// Cookie configuration parameters. at least one of the following configurations must be set: fullurlcache, ignorecase, header, scheme, cookie.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	Cookie *CacheKeyCookie `json:"Cookie,omitnil,omitempty" name:"Cookie"`
+}
+
+type CacheKeyQueryString struct {
+	// Query string retain/ignore specified parameter switch. valid values are:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Actions to retain/ignore specified parameters in the query string. values:.
+	// <Li>`IncludeCustom`: retain partial parameters.</li>.
+	// <Li>`ExcludeCustom`: ignore partial parameters.</li> note: this field is required when `switch` is on. when `switch` is off, this field is not required and will not take effect if filled.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// List of parameter names to be retained/ignored in the query string. <br>note: this field is required when `switch` is on. when `switch` is off, this field is not required and will not take effect if filled.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+}
+
+type CacheParameters struct {
+	// Cache follows origin server. if not specified, this configuration is not set. only one of followorigin, nocache, or customtime can have switch set to on.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	FollowOrigin *FollowOrigin `json:"FollowOrigin,omitnil,omitempty" name:"FollowOrigin"`
+
+	// No cache. if not specified, this configuration is not set. only one of followorigin, nocache, or customtime can have switch set to on.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	NoCache *NoCache `json:"NoCache,omitnil,omitempty" name:"NoCache"`
+
+	// Custom cache time. if not specified, this configuration is not set. only one of followorigin, nocache, or customtime can have switch set to on.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	CustomTime *CustomTime `json:"CustomTime,omitnil,omitempty" name:"CustomTime"`
+}
+
 type CachePrefresh struct {
 	// Whether to enable cache prefresh. Values:
 	// <li>`on`: Enable</li>
@@ -1072,6 +1275,17 @@ type CachePrefresh struct {
 	// The cache prefresh percentage. Values: 1-99
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Percent *int64 `json:"Percent,omitnil,omitempty" name:"Percent"`
+}
+
+type CachePrefreshParameters struct {
+	// Whether to enable cache prefresh. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Prefresh interval set as a percentage of the node cache time. value range: 1-99.<br>note: this field is required when switch is on; when switch is off, this field is not required and will not take effect if filled.
+	CacheTimePercent *int64 `json:"CacheTimePercent,omitnil,omitempty" name:"CacheTimePercent"`
 }
 
 type CacheTag struct {
@@ -1188,6 +1402,28 @@ type CheckRegionHealthStatus struct {
 	OriginHealthStatus []*OriginHealthStatus `json:"OriginHealthStatus,omitnil,omitempty" name:"OriginHealthStatus"`
 }
 
+type ClientIPCountryParameters struct {
+	// Whether to enable configuration. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Name of the request header that contains the client ip region. it is valid when `switch=on`. the default value `eo-client-ipcountry` is used when it is not specified.
+	HeaderName *string `json:"HeaderName,omitnil,omitempty" name:"HeaderName"`
+}
+
+type ClientIPHeaderParameters struct {
+	// Whether to enable configuration. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Name of the request header containing the client ip address for origin-pull. when switch is on, this parameter is required. x-forwarded-for is not allowed for this parameter.
+	HeaderName *string `json:"HeaderName,omitnil,omitempty" name:"HeaderName"`
+}
+
 type ClientIpCountry struct {
 	// Whether to enable configuration. Values:
 	// <li>`on`: Enable</li>
@@ -1246,6 +1482,19 @@ type Compression struct {
 	Algorithms []*string `json:"Algorithms,omitnil,omitempty" name:"Algorithms"`
 }
 
+type CompressionParameters struct {
+	// Whether to enable smart compression. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Supported compression algorithm list. this field is required when switch is on; otherwise, it is not effective. valid values:.
+	// <Li>`Brotli`: brotli algorithm;</li>.
+	// <Li>`Gzip`: gzip algorithm.</li>.
+	Algorithms []*string `json:"Algorithms,omitnil,omitempty" name:"Algorithms"`
+}
+
 type ConfigGroupVersionInfo struct {
 	// Version ID.
 	VersionId *string `json:"VersionId,omitnil,omitempty" name:"VersionId"`
@@ -1272,6 +1521,38 @@ type ConfigGroupVersionInfo struct {
 
 	// Version creation time. The time format follows the ISO 8601 standard and is represented in Coordinated Universal Time (UTC).
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+}
+
+type ContentIdentifier struct {
+	// Content identifier id.
+	ContentId *string `json:"ContentId,omitnil,omitempty" name:"ContentId"`
+
+	// Content identifier description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Count of citations by the rule engine.
+	ReferenceCount *int64 `json:"ReferenceCount,omitnil,omitempty" name:"ReferenceCount"`
+
+	// Bound package id.
+	PlanId *string `json:"PlanId,omitnil,omitempty" name:"PlanId"`
+
+	// Bound tags.
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Content identifier status. valid values:.
+	// <Li>`Active`: activated</li>.
+	// <Li>`Deleted`: deleted</li>.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Creation time, which adopts coordinated universal time (utc) and follows the date and time format of the iso 8601 standard.
+	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
+
+	// Latest update time, which adopts coordinated universal time (utc) and follows the date and time format of the iso 8601 standard.
+	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
+
+	// Deletion time, which is empty when the status is not `deleted`. the time format follows the iso 8601 standard and is represented in coordinated universal time (utc).
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	DeletedOn *string `json:"DeletedOn,omitnil,omitempty" name:"DeletedOn"`
 }
 
 // Predefined struct for user
@@ -1909,6 +2190,77 @@ func (r *CreateConfigGroupVersionResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateContentIdentifierRequestParams struct {
+	// Description of the content identifier, length limit of up to 20 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Target plan id to be bound, available only for the enterprise edition. <li>if there is already a plan under your account, go to [plan management](https://console.cloud.tencent.com/edgeone/package) to get the plan id and directly bind the content identifier to the plan;</li><li>if you do not have a plan to bind, please purchase an enterprise edition plan first.</li>.
+	PlanId *string `json:"PlanId,omitnil,omitempty" name:"PlanId"`
+
+	// Tags of the content identifier. this parameter is used for authority control. to create tags, go to the [tag console](https://console.cloud.tencent.com/tag/taglist).
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+type CreateContentIdentifierRequest struct {
+	*tchttp.BaseRequest
+	
+	// Description of the content identifier, length limit of up to 20 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Target plan id to be bound, available only for the enterprise edition. <li>if there is already a plan under your account, go to [plan management](https://console.cloud.tencent.com/edgeone/package) to get the plan id and directly bind the content identifier to the plan;</li><li>if you do not have a plan to bind, please purchase an enterprise edition plan first.</li>.
+	PlanId *string `json:"PlanId,omitnil,omitempty" name:"PlanId"`
+
+	// Tags of the content identifier. this parameter is used for authority control. to create tags, go to the [tag console](https://console.cloud.tencent.com/tag/taglist).
+	Tags []*Tag `json:"Tags,omitnil,omitempty" name:"Tags"`
+}
+
+func (r *CreateContentIdentifierRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateContentIdentifierRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Description")
+	delete(f, "PlanId")
+	delete(f, "Tags")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateContentIdentifierRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateContentIdentifierResponseParams struct {
+	// Generated content identifier id. after creation, you can go to the rule engine to "set the content identifier" under certain match conditions.
+	ContentId *string `json:"ContentId,omitnil,omitempty" name:"ContentId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateContentIdentifierResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateContentIdentifierResponseParams `json:"Response"`
+}
+
+func (r *CreateContentIdentifierResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateContentIdentifierResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateCustomizeErrorPageRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -1995,94 +2347,64 @@ func (r *CreateCustomizeErrorPageResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDnsRecordRequestParams struct {
-	// The site ID of the DNS record.
+	// Zone id.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// The DNS record name.If the domain name is in Chinese, Korean, or Japanese, it needs to be converted to Punycode before being entered.
+	// DNS record name. if the domain name is in chinese, korean, or japanese, it needs to be converted to punycode before input.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// DNS record types include:
-	// 
-	// - A:Points the domain to an external IPv4 address, such as 8.8.8.8.
-	// - AAAA: Points the domain to an external IPv6 address.
-	// - MX: Used for mail servers. When multiple MX records exist, the one with the lowest priority value is preferred.
-	// - CNAME: Points the domain to another domain, which then resolves to the final IP address.
-	// - TXT: Provides identification and description for the domain, commonly used for domain verification and SPF records (anti-spam).
-	// - NS: If you need to delegate a subdomain to another DNS service provider, you need to add an NS record. NS records cannot be added to the root domain.
-	// - CAA: Specifies which Certificate Authorities (CAs) are allowed to issue certificates for the site.
-	// - SRV: Indicates that a specific server is using a particular service, commonly used in Microsoft's directory management systems.
-	// 
-	// Different record types, such as SRV and CAA, have specific requirements for the host record name and record value format. For detailed descriptions and format examples of each record type, please refer to: [Introduction to DNS Record Types](https://www.tencentcloud.com/zh/document/product/1145/54764#2f681022-91ab-4a9e-ac3d-0a6c454d954e).
+	// DNS record type. valid values are: <li>a: points the domain name to an external ipv4 address, such as 8.8.8.8;</li><li>aaaa: points the domain name to an external ipv6 address;</li><li>mx: used for email servers. when there are multiple mx records, the lower the priority value, the higher the priority;</li><li>cname: points the domain name to another domain name, which then resolves to the final ip address;</li><li>txt: identifies and describes the domain name, commonly used for domain verification and spf records (anti-spam);</li><li>ns: if you need to delegate the subdomain to another dns service provider for resolution, you need to add an ns record. the root domain cannot add ns records;</li><li>caa: specifies the ca that can issue certificates for this site;</li><li>srv: identifies a server using a service, commonly used in microsoft's directory management.</li>.
+	// Different record types, such as srv and caa records, have different requirements for host record names and record value formats. for detailed descriptions and format examples of each record type, please refer to: [introduction to dns record types](https://intl.cloud.tencent.com/document/product/1552/90453?from_cn_redirect=1#2f681022-91ab-4a9e-ac3d-0a6c454d954e).
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// DNS record content should be filled in according to the corresponding Type value. If the domain name is in Chinese, Korean, or Japanese, it needs to be converted to Punycode before being entered.
+	// DNS record content. fill in the corresponding content according to the type value. if the domain name is in chinese, korean, or japanese, it needs to be converted to punycode before input.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// DNS record resolution location, if not specified, default to "Default," which means the default resolution location and is effective for all regions.
-	// - Resolution location configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
-	// - Resolution location configuration is only available for Standard and Enterprise packages.
+	// DNS record resolution route. if not specified, the default is default, which means the default resolution route and is effective in all regions.
 	// 
-	// For the values, please refer to: [Resolution Lines and Corresponding Codes Enumeration](https://www.tencentcloud.com/zh/document/product/1145/67229).
+	// - resolution route configuration is only applicable when type (dns record type) is a, aaaa, or cname.
+	// - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
 	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
 
-	// TTL (in seconds). The smaller the value, the faster the record changes take effect. Default value: 300
+	// Cache time. users can specify a value range of 60-86400. the smaller the value, the faster the modification records will take effect in all regions. default value: 300. unit: seconds.
 	TTL *int64 `json:"TTL,omitnil,omitempty" name:"TTL"`
 
-	// DNS record weight can be specified within the range of -1 to 100. Setting the weight to 0 means the record will not be resolved. If not specified, the default value is -1, indicating that no weight is set.
-	// 
-	// Weight configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
-	// 
-	// Note: For the same subdomain, different DNS records on the same resolution line should either all have weights set or none should have weights set.
+	// DNS record weight. users can specify a value range of -1 to 100. a value of 0 means no resolution. if not specified, the default is -1, which means no weight is set. weight configuration is only applicable when type (dns record type) is a, aaaa, or cname.<br>note: for the same subdomain, different dns records with the same resolution route should either all have weights set or none have weights set.
 	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
 
-	// The MX record priority parameter is only effective when the Type (DNS record type) is MX. The smaller the value, the higher the priority. Users can specify a value in the range of 0 to 50. If not specified, the default value is 0.
+	// MX record priority, which takes effect only when type (dns record type) is mx. the smaller the value, the higher the priority. users can specify a value range of 0–50. the default value is 0 if not specified.
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 }
 
 type CreateDnsRecordRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site ID of the DNS record.
+	// Zone id.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// The DNS record name.If the domain name is in Chinese, Korean, or Japanese, it needs to be converted to Punycode before being entered.
+	// DNS record name. if the domain name is in chinese, korean, or japanese, it needs to be converted to punycode before input.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// DNS record types include:
-	// 
-	// - A:Points the domain to an external IPv4 address, such as 8.8.8.8.
-	// - AAAA: Points the domain to an external IPv6 address.
-	// - MX: Used for mail servers. When multiple MX records exist, the one with the lowest priority value is preferred.
-	// - CNAME: Points the domain to another domain, which then resolves to the final IP address.
-	// - TXT: Provides identification and description for the domain, commonly used for domain verification and SPF records (anti-spam).
-	// - NS: If you need to delegate a subdomain to another DNS service provider, you need to add an NS record. NS records cannot be added to the root domain.
-	// - CAA: Specifies which Certificate Authorities (CAs) are allowed to issue certificates for the site.
-	// - SRV: Indicates that a specific server is using a particular service, commonly used in Microsoft's directory management systems.
-	// 
-	// Different record types, such as SRV and CAA, have specific requirements for the host record name and record value format. For detailed descriptions and format examples of each record type, please refer to: [Introduction to DNS Record Types](https://www.tencentcloud.com/zh/document/product/1145/54764#2f681022-91ab-4a9e-ac3d-0a6c454d954e).
+	// DNS record type. valid values are: <li>a: points the domain name to an external ipv4 address, such as 8.8.8.8;</li><li>aaaa: points the domain name to an external ipv6 address;</li><li>mx: used for email servers. when there are multiple mx records, the lower the priority value, the higher the priority;</li><li>cname: points the domain name to another domain name, which then resolves to the final ip address;</li><li>txt: identifies and describes the domain name, commonly used for domain verification and spf records (anti-spam);</li><li>ns: if you need to delegate the subdomain to another dns service provider for resolution, you need to add an ns record. the root domain cannot add ns records;</li><li>caa: specifies the ca that can issue certificates for this site;</li><li>srv: identifies a server using a service, commonly used in microsoft's directory management.</li>.
+	// Different record types, such as srv and caa records, have different requirements for host record names and record value formats. for detailed descriptions and format examples of each record type, please refer to: [introduction to dns record types](https://intl.cloud.tencent.com/document/product/1552/90453?from_cn_redirect=1#2f681022-91ab-4a9e-ac3d-0a6c454d954e).
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// DNS record content should be filled in according to the corresponding Type value. If the domain name is in Chinese, Korean, or Japanese, it needs to be converted to Punycode before being entered.
+	// DNS record content. fill in the corresponding content according to the type value. if the domain name is in chinese, korean, or japanese, it needs to be converted to punycode before input.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// DNS record resolution location, if not specified, default to "Default," which means the default resolution location and is effective for all regions.
-	// - Resolution location configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
-	// - Resolution location configuration is only available for Standard and Enterprise packages.
+	// DNS record resolution route. if not specified, the default is default, which means the default resolution route and is effective in all regions.
 	// 
-	// For the values, please refer to: [Resolution Lines and Corresponding Codes Enumeration](https://www.tencentcloud.com/zh/document/product/1145/67229).
+	// - resolution route configuration is only applicable when type (dns record type) is a, aaaa, or cname.
+	// - resolution route configuration is only applicable to standard version and enterprise edition packages. for valid values, please refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
 	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
 
-	// TTL (in seconds). The smaller the value, the faster the record changes take effect. Default value: 300
+	// Cache time. users can specify a value range of 60-86400. the smaller the value, the faster the modification records will take effect in all regions. default value: 300. unit: seconds.
 	TTL *int64 `json:"TTL,omitnil,omitempty" name:"TTL"`
 
-	// DNS record weight can be specified within the range of -1 to 100. Setting the weight to 0 means the record will not be resolved. If not specified, the default value is -1, indicating that no weight is set.
-	// 
-	// Weight configuration is only applicable when the Type (DNS record type) is A, AAAA, or CNAME.
-	// 
-	// Note: For the same subdomain, different DNS records on the same resolution line should either all have weights set or none should have weights set.
+	// DNS record weight. users can specify a value range of -1 to 100. a value of 0 means no resolution. if not specified, the default is -1, which means no weight is set. weight configuration is only applicable when type (dns record type) is a, aaaa, or cname.<br>note: for the same subdomain, different dns records with the same resolution route should either all have weights set or none have weights set.
 	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
 
-	// The MX record priority parameter is only effective when the Type (DNS record type) is MX. The smaller the value, the higher the priority. Users can specify a value in the range of 0 to 50. If not specified, the default value is 0.
+	// MX record priority, which takes effect only when type (dns record type) is mx. the smaller the value, the higher the priority. users can specify a value range of 0–50. the default value is 0 if not specified.
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 }
 
@@ -2114,7 +2436,7 @@ func (r *CreateDnsRecordRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDnsRecordResponseParams struct {
-	// The ID of the DNS record.
+	// DNS record id.
 	RecordId *string `json:"RecordId,omitnil,omitempty" name:"RecordId"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -2482,6 +2804,70 @@ func (r *CreateL4ProxyRulesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateL4ProxyRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateL7AccRulesRequestParams struct {
+	// Zone id.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// The rule content.
+	Rules []*RuleEngineItem `json:"Rules,omitnil,omitempty" name:"Rules"`
+}
+
+type CreateL7AccRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone id.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// The rule content.
+	Rules []*RuleEngineItem `json:"Rules,omitnil,omitempty" name:"Rules"`
+}
+
+func (r *CreateL7AccRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateL7AccRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Rules")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateL7AccRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateL7AccRulesResponseParams struct {
+	// Rule id list.
+	RuleIds []*string `json:"RuleIds,omitnil,omitempty" name:"RuleIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateL7AccRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateL7AccRulesResponseParams `json:"Response"`
+}
+
+func (r *CreateL7AccRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateL7AccRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -2867,6 +3253,8 @@ type CreatePrefetchTaskRequestParams struct {
 	Targets []*string `json:"Targets,omitnil,omitempty" name:"Targets"`
 
 	// Whether to encode a URL according to RFC3986. Enable this field when the URL contains non-ASCII characters.
+	//
+	// Deprecated: EncodeUrl is deprecated.
 	EncodeUrl *bool `json:"EncodeUrl,omitnil,omitempty" name:"EncodeUrl"`
 
 	// HTTP header information
@@ -2944,7 +3332,9 @@ func (r *CreatePrefetchTaskResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreatePurgeTaskRequestParams struct {
-	// ID of the site.
+	// Zone id.
+	// .
+	// If you want to quickly submit targets urls under different sites, you can set it to *, but the account calling this api must have permission for all site resources under the main account.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Type of cache purging. Values:
@@ -2974,7 +3364,9 @@ type CreatePurgeTaskRequestParams struct {
 type CreatePurgeTaskRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID of the site.
+	// Zone id.
+	// .
+	// If you want to quickly submit targets urls under different sites, you can set it to *, but the account calling this api must have permission for all site resources under the main account.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
 	// Type of cache purging. Values:
@@ -3665,6 +4057,23 @@ type CustomField struct {
 	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 }
 
+type CustomTime struct {
+	// Custom cache time switch. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Ignore origin server cachecontrol switch. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li> note: this field is required when `switch` is on. when `switch` is off, this field is not required and will not take effect if filled.
+	IgnoreCacheControl *string `json:"IgnoreCacheControl,omitnil,omitempty" name:"IgnoreCacheControl"`
+
+	// Custom cache time value, unit: seconds. value range: 0-315360000.<br>note: this field is required when switch is on; when switch is off, this field is not required and will not take effect if filled.
+	CacheTime *int64 `json:"CacheTime,omitnil,omitempty" name:"CacheTime"`
+}
+
 type CustomizedHeader struct {
 	// Custom header key.
 	// Note: This field may return null, which indicates a failure to obtain a valid value.
@@ -4062,6 +4471,60 @@ func (r *DeleteApplicationProxyRuleResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteContentIdentifierRequestParams struct {
+	// Content identifier id.
+	ContentId *string `json:"ContentId,omitnil,omitempty" name:"ContentId"`
+}
+
+type DeleteContentIdentifierRequest struct {
+	*tchttp.BaseRequest
+	
+	// Content identifier id.
+	ContentId *string `json:"ContentId,omitnil,omitempty" name:"ContentId"`
+}
+
+func (r *DeleteContentIdentifierRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteContentIdentifierRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ContentId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteContentIdentifierRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteContentIdentifierResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteContentIdentifierResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteContentIdentifierResponseParams `json:"Response"`
+}
+
+func (r *DeleteContentIdentifierResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteContentIdentifierResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteCustomErrorPageRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -4124,20 +4587,20 @@ func (r *DeleteCustomErrorPageResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DeleteDnsRecordsRequestParams struct {
-	// The site ID of the DNS record to be deleted.
+	// Zone id.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// List of DNS record IDs to be deleted, with a maximum limit of 1000.
+	// List of dns record ids to be deleted, upper limit: 1000.
 	RecordIds []*string `json:"RecordIds,omitnil,omitempty" name:"RecordIds"`
 }
 
 type DeleteDnsRecordsRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site ID of the DNS record to be deleted.
+	// Zone id.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// List of DNS record IDs to be deleted, with a maximum limit of 1000.
+	// List of dns record ids to be deleted, upper limit: 1000.
 	RecordIds []*string `json:"RecordIds,omitnil,omitempty" name:"RecordIds"`
 }
 
@@ -4431,6 +4894,67 @@ func (r *DeleteL4ProxyRulesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteL4ProxyRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteL7AccRulesRequestParams struct {
+	// Zone id.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// List of rule ids to be deleted. you can obtain ruleid through describel7accrules.
+	RuleIds []*string `json:"RuleIds,omitnil,omitempty" name:"RuleIds"`
+}
+
+type DeleteL7AccRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone id.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// List of rule ids to be deleted. you can obtain ruleid through describel7accrules.
+	RuleIds []*string `json:"RuleIds,omitnil,omitempty" name:"RuleIds"`
+}
+
+func (r *DeleteL7AccRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteL7AccRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "RuleIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteL7AccRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteL7AccRulesResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteL7AccRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteL7AccRulesResponseParams `json:"Response"`
+}
+
+func (r *DeleteL7AccRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteL7AccRulesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5607,6 +6131,80 @@ func (r *DescribeConfigGroupVersionsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeContentIdentifiersRequestParams struct {
+	// The offset of paginated query. default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Limit on paginated queries. default value: `20`. maximum value: `100`.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter conditions. the upper limit for filters is 20, and the upper limit for filters.values is 20. if this parameter is not filled in, the content identifiers with permissions under the current appid are returned by default. detailed filtering conditions are as follows: <li>description: filter by content identifier description in batches; for example: test;</li><li>content-id: filter by content identifier id in batches; for example: eocontent-2noz78a8ev6k;</li><li>tag-key: filter by Tag key;</li><li>tag-value: filter by Tag value;</li><li>status: filter by content identifier status. valid values: active: active; deleted: deleted.</li>only description supports fuzzy query, other fields require precise query.
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeContentIdentifiersRequest struct {
+	*tchttp.BaseRequest
+	
+	// The offset of paginated query. default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Limit on paginated queries. default value: `20`. maximum value: `100`.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Filter conditions. the upper limit for filters is 20, and the upper limit for filters.values is 20. if this parameter is not filled in, the content identifiers with permissions under the current appid are returned by default. detailed filtering conditions are as follows: <li>description: filter by content identifier description in batches; for example: test;</li><li>content-id: filter by content identifier id in batches; for example: eocontent-2noz78a8ev6k;</li><li>tag-key: filter by Tag key;</li><li>tag-value: filter by Tag value;</li><li>status: filter by content identifier status. valid values: active: active; deleted: deleted.</li>only description supports fuzzy query, other fields require precise query.
+	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeContentIdentifiersRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeContentIdentifiersRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeContentIdentifiersRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeContentIdentifiersResponseParams struct {
+	// Total number of content identifiers that meet the filter conditions.	
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Detailed content identifier list.
+	ContentIdentifiers []*ContentIdentifier `json:"ContentIdentifiers,omitnil,omitempty" name:"ContentIdentifiers"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeContentIdentifiersResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeContentIdentifiersResponseParams `json:"Response"`
+}
+
+func (r *DescribeContentIdentifiersResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeContentIdentifiersResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeContentQuotaRequestParams struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -6333,72 +6931,50 @@ func (r *DescribeDeployHistoryResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDnsRecordsRequestParams struct {
-	// The site ID of the DNS record.
+	// Zone id.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// The page offset. Default value: 0
+	// Offset of paginated query. default value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The paginated query limit. Default value: 20. Maximum value: 1000.
+	// Number limit of paginated query. default value: 20. maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// The upper limit of Filters.Values is 20. The detailed filtering conditions are as follows: <li>id: Filter by DNS record ID, supports fuzzy query;</li><li>name: Filter by DNS record name, supports fuzzy query;</li><li>content: Filter by DNS record content, supports fuzzy query;</li><li>type: Filter by DNS record type, does not support fuzzy query. Options:<br> A: Point the domain name to an external IPv4 address, such as 8.8.8.8;<br> AAAA: Point the domain name to an external IPv6 address;<br> CNAME: Point the domain name to another domain name, which then resolves to the final IP address;<br> TXT: Identify and describe the domain name, often used for domain verification and SPF records (anti-spam);<br> NS: If you need to delegate subdomain resolution to another DNS service provider, you need to add an NS record. Root domains cannot add NS records;<br> CAA: Specify the CA that can issue certificates for this site;<br> SRV: Identify a server using a specific service, commonly used in Microsoft's directory management;<br> MX: Specify the recipient's mail server.</li><li>ttl: Filter by the time-to-live (TTL) of the record, does not support fuzzy query.</li>
+	// Filter conditions. up to 20 values for each filter. detailed filter conditions are as follows: <li>id: filter by dns record id, supports fuzzy search;</li><li>name: filter by dns record name, supports fuzzy search;</li><li>content: filter by dns record content, supports fuzzy search;</li><li>type: filter by dns record type, does not support fuzzy search. valid values:<br>   a: points the domain name to an external ipv4 address, such as 8.8.8.8;<br>   aaaa: points the domain name to an external ipv6 address;<br>   cname: points the domain name to another domain name, which then resolves to the final ip address;<br>   txt: identifies and describes the domain name, commonly used for domain verification and spf records (anti-spam);<br>   ns: if you need to delegate the subdomain to another dns service provider, you need to add an ns record. root domain cannot add ns records;<br>   caa: specifies the ca that can issue certificates for this site;<br>   srv: identifies a server using a specific service, commonly used in microsoft's directory management;<br>   mx: specifies the recipient's mail server.</li><li>ttl: filter by resolution effective time, does not support fuzzy search.</li>.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sort criteria, with possible values:
-	// <li>content: DNS record content;</li>
-	// <li>created-on: DNS record creation time;</li>
-	// <li>name: DNS record name;</li>
-	// <li>ttl: Time-to-live (TTL);</li>
-	// <li>type: DNS record type.</li>
-	// The default sorting is based on a combination of type and name attributes.
+	// Sorting basis. values include: <li>`content`: dns record content</li><li>`created-on`: dns record creation time</li><li>`name`: dns record name</li><li>`ttl`: cache time</li><li>`type`: dns record type</li> default sorting is by the combination of `type`, `name`.
 	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
 
-	// List sorting order, with possible values:
-	// <li>asc: Ascending order;</li>
-	// <li>desc: Descending order.</li>
-	// The default value is asc.
+	// List sort method. values: <li>`asc`: ascending order</li><li>`desc`: sort in descending order</li> default value: `asc`.
 	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
 
-	// The match mode. Values:
-	// <li>`all`: Return all records that match the specified filter.</li>
-	// <li>`any`: Return any record that matches the specified filter.</li>Default value: all.
+	// Match method. values: <li>`all`: return records that match all query conditions</li><li>`any`: return records that match any query condition</li> default value: `all`.
 	Match *string `json:"Match,omitnil,omitempty" name:"Match"`
 }
 
 type DescribeDnsRecordsRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site ID of the DNS record.
+	// Zone id.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// The page offset. Default value: 0
+	// Offset of paginated query. default value: 0.
 	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// The paginated query limit. Default value: 20. Maximum value: 1000.
+	// Number limit of paginated query. default value: 20. maximum value: 1000.
 	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// The upper limit of Filters.Values is 20. The detailed filtering conditions are as follows: <li>id: Filter by DNS record ID, supports fuzzy query;</li><li>name: Filter by DNS record name, supports fuzzy query;</li><li>content: Filter by DNS record content, supports fuzzy query;</li><li>type: Filter by DNS record type, does not support fuzzy query. Options:<br> A: Point the domain name to an external IPv4 address, such as 8.8.8.8;<br> AAAA: Point the domain name to an external IPv6 address;<br> CNAME: Point the domain name to another domain name, which then resolves to the final IP address;<br> TXT: Identify and describe the domain name, often used for domain verification and SPF records (anti-spam);<br> NS: If you need to delegate subdomain resolution to another DNS service provider, you need to add an NS record. Root domains cannot add NS records;<br> CAA: Specify the CA that can issue certificates for this site;<br> SRV: Identify a server using a specific service, commonly used in Microsoft's directory management;<br> MX: Specify the recipient's mail server.</li><li>ttl: Filter by the time-to-live (TTL) of the record, does not support fuzzy query.</li>
+	// Filter conditions. up to 20 values for each filter. detailed filter conditions are as follows: <li>id: filter by dns record id, supports fuzzy search;</li><li>name: filter by dns record name, supports fuzzy search;</li><li>content: filter by dns record content, supports fuzzy search;</li><li>type: filter by dns record type, does not support fuzzy search. valid values:<br>   a: points the domain name to an external ipv4 address, such as 8.8.8.8;<br>   aaaa: points the domain name to an external ipv6 address;<br>   cname: points the domain name to another domain name, which then resolves to the final ip address;<br>   txt: identifies and describes the domain name, commonly used for domain verification and spf records (anti-spam);<br>   ns: if you need to delegate the subdomain to another dns service provider, you need to add an ns record. root domain cannot add ns records;<br>   caa: specifies the ca that can issue certificates for this site;<br>   srv: identifies a server using a specific service, commonly used in microsoft's directory management;<br>   mx: specifies the recipient's mail server.</li><li>ttl: filter by resolution effective time, does not support fuzzy search.</li>.
 	Filters []*AdvancedFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Sort criteria, with possible values:
-	// <li>content: DNS record content;</li>
-	// <li>created-on: DNS record creation time;</li>
-	// <li>name: DNS record name;</li>
-	// <li>ttl: Time-to-live (TTL);</li>
-	// <li>type: DNS record type.</li>
-	// The default sorting is based on a combination of type and name attributes.
+	// Sorting basis. values include: <li>`content`: dns record content</li><li>`created-on`: dns record creation time</li><li>`name`: dns record name</li><li>`ttl`: cache time</li><li>`type`: dns record type</li> default sorting is by the combination of `type`, `name`.
 	SortBy *string `json:"SortBy,omitnil,omitempty" name:"SortBy"`
 
-	// List sorting order, with possible values:
-	// <li>asc: Ascending order;</li>
-	// <li>desc: Descending order.</li>
-	// The default value is asc.
+	// List sort method. values: <li>`asc`: ascending order</li><li>`desc`: sort in descending order</li> default value: `asc`.
 	SortOrder *string `json:"SortOrder,omitnil,omitempty" name:"SortOrder"`
 
-	// The match mode. Values:
-	// <li>`all`: Return all records that match the specified filter.</li>
-	// <li>`any`: Return any record that matches the specified filter.</li>Default value: all.
+	// Match method. values: <li>`all`: return records that match all query conditions</li><li>`any`: return records that match any query condition</li> default value: `all`.
 	Match *string `json:"Match,omitnil,omitempty" name:"Match"`
 }
 
@@ -6429,10 +7005,10 @@ func (r *DescribeDnsRecordsRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDnsRecordsResponseParams struct {
-	// Total number of DNS records.
+	// Total number of dns records.
 	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
-	// List of DNS records
+	// List of dns records.
 	DnsRecords []*DnsRecord `json:"DnsRecords,omitnil,omitempty" name:"DnsRecords"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -7121,6 +7697,148 @@ func (r *DescribeL4ProxyRulesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeL4ProxyRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeL7AccRulesRequestParams struct {
+	// Zone id.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Filter conditions. the upper limit for filters.values is 20. if this parameter is not filled in, the rules under the site are returned in order by default. detailed filtering conditions are as follows:.
+	// <Li>Rule-Id: filter by rule id.</li>.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number limit of paginated query. default value: 20. maximum value: 1000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset of paginated query. default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeL7AccRulesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone id.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Filter conditions. the upper limit for filters.values is 20. if this parameter is not filled in, the rules under the site are returned in order by default. detailed filtering conditions are as follows:.
+	// <Li>Rule-Id: filter by rule id.</li>.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// Number limit of paginated query. default value: 20. maximum value: 1000.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset of paginated query. default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeL7AccRulesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeL7AccRulesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Filters")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeL7AccRulesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeL7AccRulesResponseParams struct {
+	// Total number of rules.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Rule list. rules are executed in top-down order. for details, refer to [rule priority](https://intl.cloud.tencent.com/document/product/1552/70901?from_cn_redirect=1#.e4.bc.98.e5.85.88.e7.ba.a7).
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	Rules []*RuleEngineItem `json:"Rules,omitnil,omitempty" name:"Rules"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeL7AccRulesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeL7AccRulesResponseParams `json:"Response"`
+}
+
+func (r *DescribeL7AccRulesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeL7AccRulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeL7AccSettingRequestParams struct {
+	// Zone id.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+type DescribeL7AccSettingRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone id.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+}
+
+func (r *DescribeL7AccSettingRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeL7AccSettingRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeL7AccSettingRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeL7AccSettingResponseParams struct {
+	// Global configuration for site acceleration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ZoneSetting *ZoneConfigParameters `json:"ZoneSetting,omitnil,omitempty" name:"ZoneSetting"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeL7AccSettingResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeL7AccSettingResponseParams `json:"Response"`
+}
+
+func (r *DescribeL7AccSettingResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeL7AccSettingResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7903,8 +8621,9 @@ type DescribeRulesRequestParams struct {
 	// ID of the site
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Filter conditions. Each filter condition can have up to 20 entries. See below for details:
-	// <li>`rule-id`:<br>   Filter by the <strong>rule ID</strong><br>   Type: String<br>   Required: No</li>
+	// Filter criteria. the maximum value of filters.values is 20. the detailed filter criteria are as follows:
+	// .
+	// <Li>Rule-Id: filter by rule id.</li>.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -7914,8 +8633,9 @@ type DescribeRulesRequest struct {
 	// ID of the site
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Filter conditions. Each filter condition can have up to 20 entries. See below for details:
-	// <li>`rule-id`:<br>   Filter by the <strong>rule ID</strong><br>   Type: String<br>   Required: No</li>
+	// Filter criteria. the maximum value of filters.values is 20. the detailed filter criteria are as follows:
+	// .
+	// <Li>Rule-Id: filter by rule id.</li>.
 	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
 }
 
@@ -8100,9 +8820,7 @@ type DescribeSecurityIPGroupRequestParams struct {
 	// Site ID, used to specify the scope of the queried site.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Specifies the ID of a security IP group.
-	// <li>When this parameter is provided, only the configuration of the security IP group with the specified ID is queried.</li>
-	// <li>When this parameter is not provided, information of all security IP groups under the site is returned.</li>
+	// Specifies the security ip group id. <li>when this parameter is provided, only the configuration of the specified security ip group id is queried;</li> <li>when this parameter is not provided, information of all security ip groups under the site is returned.</li>.
 	GroupIds []*int64 `json:"GroupIds,omitnil,omitempty" name:"GroupIds"`
 }
 
@@ -8112,9 +8830,7 @@ type DescribeSecurityIPGroupRequest struct {
 	// Site ID, used to specify the scope of the queried site.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Specifies the ID of a security IP group.
-	// <li>When this parameter is provided, only the configuration of the security IP group with the specified ID is queried.</li>
-	// <li>When this parameter is not provided, information of all security IP groups under the site is returned.</li>
+	// Specifies the security ip group id. <li>when this parameter is provided, only the configuration of the specified security ip group id is queried;</li> <li>when this parameter is not provided, information of all security ip groups under the site is returned.</li>.
 	GroupIds []*int64 `json:"GroupIds,omitnil,omitempty" name:"GroupIds"`
 }
 
@@ -8377,14 +9093,16 @@ type DescribeTimingL7AnalysisDataRequestParams struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Metric list. Valid values:
-	// <li>l7Flow_outFlux: L7 EdgeOne response traffic;</li>
-	// <li>l7Flow_inFlux: L7 client request traffic;</li>
-	// <li>l7Flow_flux: L7 total access traffic (including the EdgeOne response traffic and client request traffic);</li>
-	// <li>l7Flow_outBandwidth: L7 EdgeOne response bandwidth;</li>
-	// <li>l7Flow_inBandwidth: L7 client request bandwidth;</li>
-	// <li>l7Flow_bandwidth: L7 total access bandwidth (including the EdgeOne response bandwidth and client request bandwidth);</li>
-	// <li>l7Flow_request: L7 access request count.</li>
+	// Metric list. valid values:.
+	// <Li>L7Flow_outFlux: l7 edgeone response traffic, unit: byte;</li>.
+	// <Li>L7Flow_inFlux: l7 client request traffic, unit: byte;</li>.
+	// <Li>L7Flow_flux: l7 total access traffic (including the edgeone response traffic and client request traffic), unit: byte;</li>.
+	// <Li>L7Flow_outBandwidth: l7 edgeone response bandwidth, unit: bps;</li>.
+	// <Li>L7Flow_inBandwidth: l7 client request bandwidth, unit: bps;</li>.
+	// <Li>L7Flow_bandwidth: l7 total access bandwidth (including the edgeone response bandwidth and client request bandwidth), unit: bps;</li>.
+	// <Li>L7Flow_request: l7 access request count, unit: times;</li>.
+	// <Li> l7flow_avgresponsetime: l7 average response time, unit: ms (milliseconds);</li>.
+	// <Li> l7flow_avgfirstbyteresponsetime: l7 average first byte response time for access, unit: ms.</li>.
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// Zone ID set. This parameter is required.
@@ -8433,14 +9151,16 @@ type DescribeTimingL7AnalysisDataRequest struct {
 	// The end time.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Metric list. Valid values:
-	// <li>l7Flow_outFlux: L7 EdgeOne response traffic;</li>
-	// <li>l7Flow_inFlux: L7 client request traffic;</li>
-	// <li>l7Flow_flux: L7 total access traffic (including the EdgeOne response traffic and client request traffic);</li>
-	// <li>l7Flow_outBandwidth: L7 EdgeOne response bandwidth;</li>
-	// <li>l7Flow_inBandwidth: L7 client request bandwidth;</li>
-	// <li>l7Flow_bandwidth: L7 total access bandwidth (including the EdgeOne response bandwidth and client request bandwidth);</li>
-	// <li>l7Flow_request: L7 access request count.</li>
+	// Metric list. valid values:.
+	// <Li>L7Flow_outFlux: l7 edgeone response traffic, unit: byte;</li>.
+	// <Li>L7Flow_inFlux: l7 client request traffic, unit: byte;</li>.
+	// <Li>L7Flow_flux: l7 total access traffic (including the edgeone response traffic and client request traffic), unit: byte;</li>.
+	// <Li>L7Flow_outBandwidth: l7 edgeone response bandwidth, unit: bps;</li>.
+	// <Li>L7Flow_inBandwidth: l7 client request bandwidth, unit: bps;</li>.
+	// <Li>L7Flow_bandwidth: l7 total access bandwidth (including the edgeone response bandwidth and client request bandwidth), unit: bps;</li>.
+	// <Li>L7Flow_request: l7 access request count, unit: times;</li>.
+	// <Li> l7flow_avgresponsetime: l7 average response time, unit: ms (milliseconds);</li>.
+	// <Li> l7flow_avgfirstbyteresponsetime: l7 average first byte response time for access, unit: ms.</li>.
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
 	// Zone ID set. This parameter is required.
@@ -9418,43 +10138,48 @@ type DiffIPWhitelist struct {
 }
 
 type DnsRecord struct {
-	// Site ID. 
-	// Note: ZoneId is only used as an output parameter and cannot be used as an input parameter in ModifyDnsRecords. If this parameter is passed, it will be ignored.
+	// Zone id.<br>note: zoneid is for output parameter use only and cannot be used as an input parameter in modifydnsrecords. if this parameter is passed, it will be ignored.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// DNS record ID.
+	// DNS record id.
 	RecordId *string `json:"RecordId,omitnil,omitempty" name:"RecordId"`
 
 	// DNS record name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// DNS record type, with possible values: <li>A: Points the domain name to an external IPv4 address, such as 8.8.8.8;</li> <li>AAAA: Points the domain name to an external IPv6 address;</li> <li>MX: Used for mail servers. When there are multiple MX records, the lower the priority value, the higher the priority;</li> <li>CNAME: Points the domain name to another domain name, which then resolves to the final IP address;</li> <li>TXT: Identifies and describes the domain name, commonly used for domain verification and SPF records (anti-spam);</li> <li>NS: If you need to delegate the subdomain to another DNS service provider for resolution, you need to add an NS record. NS records cannot be added to the root domain;</li> <li>CAA: Specifies the CA that can issue certificates for this site;</li> <li>SRV: Identifies a server that uses a specific service, commonly used in Microsoft's directory management.</li>
+	// DNS record type. valid values are:.
+	// <Li>A: point the domain to a public network ipv4 address, such as 8.8.8.8;</li>.
+	// <Li>AAAA: point the domain to a public network ipv6 address;</li>.
+	// <Li>MX: used for email servers. when there are multiple mx records, the lower the priority, the higher the precedence;</li>.
+	// <Li>CNAME: point the domain to another domain name, which will resolve to the final ip address;</li>.
+	// <Li>TXT: identify and describe the domain, commonly used for domain verification and spf records (anti-spam);</li>.
+	// <Li>NS: if you need to delegate the resolution of a subdomain to another dns service provider, you need to add an ns record. ns records cannot be added to the root domain name;</li>.
+	// <Li>CAA: specifies the ca that can issue certificates for this site;</li>.
+	// <Li>SRV: indicates that a server is using a service, commonly seen in microsoft system directory management.</li>.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// DNS record resolution line. If not specified, the default is Default, which means the default resolution line and is effective for all regions. The resolution line configuration is only applicable when Type (DNS record type) is A, AAAA, or CNAME. For values, please refer to: [Resolution Line and Corresponding Code Enumeration](https://www.tencentcloud.com/zh/document/product/1145/67229).
+	// DNS record resolution route, if not specified, defaults to default, indicating the default resolution route, effective in all regions.<br>resolution route configuration only applies when type (dns record type) is a, aaaa, or cname.<br>for valid values, refer to: [resolution routes and corresponding code enumeration](https://intl.cloud.tencent.com/document/product/1552/112542?from_cn_redirect=1).
 	Location *string `json:"Location,omitnil,omitempty" name:"Location"`
 
-	// DNS record content. Fill in the corresponding content according to the Type value.
+	// DNS record content. fill in the corresponding content based on the type value.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
-	// Cache time, with a range of 60~86400. The smaller the value, the faster the record modification takes effect in various regions. Unit: seconds.
+	// Cache time. value range: 60–86400. the smaller the value, the faster the record modification will take effect globally. unit: seconds.
 	TTL *int64 `json:"TTL,omitnil,omitempty" name:"TTL"`
 
-	// DNS record weight, with a range of -1~100. A value of -1 means no weight is assigned, and a value of 0 means no resolution. Weight configuration is only applicable when Type (DNS record type) is A, AAAA, or CNAME.
+	// DNS record weight. value range: -1–100. a value of -1 means no weight is assigned, and 0 means no parsing. weight configuration is only applicable when type (dns record type) is a, aaaa, or cname.
 	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
 
-	// MX record priority, with a range of 0~50. The smaller the value, the higher the priority.
+	// MX record priority. value range: 0–50. the smaller the value, the higher the priority.
 	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
 
-	// DNS record resolution status, with possible values: <li>enable: Effective;</li> <li>disable: Disabled.</li> Note: Status is only used as an output parameter and cannot be used as an input parameter in ModifyDnsRecords. If this parameter is passed, it will be ignored.
+	// DNS record parsing status. valid values are: <li>enable: takes effect;</li><li>disable: disabled.</li> note: status is only used as an output parameter and cannot be used as an input parameter in modifydnsrecords. if this parameter is passed, it will be ignored.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// The creation time.
-	// Note: CreatedOn is only used as an output parameter and cannot be used as an input parameter in ModifyDnsRecords. If this parameter is passed, it will be ignored.
+	// Creation time.<br>note: createdon is only used as an output parameter and cannot be used as an input parameter in modifydnsrecords. if this parameter is passed, it will be ignored.
 	CreatedOn *string `json:"CreatedOn,omitnil,omitempty" name:"CreatedOn"`
 
-	// The modification time.
-	// Note: ModifiedOn is only used as an output parameter and cannot be used as an input parameter in ModifyDnsRecords. If this parameter is passed, it will be ignored.
+	// Modification time.<br>note: modifiedon is for output parameter only and cannot be used as an input parameter in modifydnsrecords. if this parameter is passed, it will be ignored.
 	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
 }
 
@@ -9736,6 +10461,20 @@ type EnvInfo struct {
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
+type ErrorPage struct {
+	// Status code. supported values are 400, 403, 404, 405, 414, 416, 451, 500, 501, 502, 503, 504.
+	StatusCode *int64 `json:"StatusCode,omitnil,omitempty" name:"StatusCode"`
+
+	// Redirect url. requires a full redirect path, such as https://www.test.com/error.html.
+	RedirectURL *string `json:"RedirectURL,omitnil,omitempty" name:"RedirectURL"`
+}
+
+type ErrorPageParameters struct {
+	// Custom error page configuration list.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ErrorPageParams []*ErrorPage `json:"ErrorPageParams,omitnil,omitempty" name:"ErrorPageParams"`
+}
+
 type ErrorPageReference struct {
 	// Referenced business ID, such as the custom block rule ID.
 	BusinessId *string `json:"BusinessId,omitnil,omitempty" name:"BusinessId"`
@@ -9964,20 +10703,17 @@ type FollowOrigin struct {
 	// <li>`off`: Disable</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Whether to cache when an origin server does not return the Cache-Control header. This field is required when Switch is on; otherwise, it is ineffective. Valid values:
-	// <li>on: Cache.</li>
-	// <li>off: Do not cache.</li>
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Whether to cache when an origin server does not return the cache-control header. this field is required when switch is on; when switch is off, this field is not required and will be ineffective if filled. valid values:.
+	// <Li>On: cache;</li>.
+	// <Li>Off: do not cache.</li>.
 	DefaultCache *string `json:"DefaultCache,omitnil,omitempty" name:"DefaultCache"`
 
-	// Whether to use the default caching policy when an origin server does not return the Cache-Control header. This field is required when DefaultCache is set to on; otherwise, it is ineffective. When DefaultCacheTime is not 0, this field should be off. Valid values:
-	// <li>on: Use the default caching policy.</li>
-	// <li>off: Do not use the default caching policy.</li>
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// Whether to use the default caching policy when an origin server does not return the cache-control header. this field is required when defaultcache is set to on; otherwise, it is ineffective. when defaultcachetime is not 0, this field should be off. valid values:.
+	// <Li>On: use the default caching policy.</li>.
+	// <Li>Off: do not use the default caching policy.</li>.
 	DefaultCacheStrategy *string `json:"DefaultCacheStrategy,omitnil,omitempty" name:"DefaultCacheStrategy"`
 
-	// The default cache time in seconds when an origin server does not return the Cache-Control header. The value ranges from 0 to 315360000. This field is required when DefaultCache is set to on; otherwise, it is ineffective. When DefaultCacheStrategy is on, this field should be 0.
-	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	// The default cache time in seconds when an origin server does not return the cache-control header. the value ranges from 0 to 315360000. this field is required when defaultcache is set to on; otherwise, it is ineffective. when defaultcachestrategy is on, this field should be 0.
 	DefaultCacheTime *int64 `json:"DefaultCacheTime,omitnil,omitempty" name:"DefaultCacheTime"`
 }
 
@@ -9991,6 +10727,19 @@ type ForceRedirect struct {
 	// <li>`301`: 301 redirect</li>
 	// <li>`302`: 302 redirect</li>
 	// Note: This field may return null, indicating that no valid values can be obtained.
+	RedirectStatusCode *int64 `json:"RedirectStatusCode,omitnil,omitempty" name:"RedirectStatusCode"`
+}
+
+type ForceRedirectHTTPSParameters struct {
+	// Whether to enable forced redirect configuration switch. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Redirection status code. this field is required when switch is on; otherwise, it is not effective. valid values are:.
+	// <Li>`301`: 301 redirect;</li>.
+	// <Li>`302`: 302 redirect.</li>.
 	RedirectStatusCode *int64 `json:"RedirectStatusCode,omitnil,omitempty" name:"RedirectStatusCode"`
 }
 
@@ -10069,6 +10818,56 @@ type Grpc struct {
 	// <li>`on`: Enable;</li>
 	// <li>`off`: Disable.</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
+type GrpcParameters struct {
+	// Whether to enable grpc. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
+type HSTSParameters struct {
+	// Whether to enable hsts. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Cache hsts header time, unit: seconds. value range: 1-31536000.<br>note: this field is required when switch is on; when switch is off, this field is not required and will not take effect if filled.
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+
+	// Whether to allow other subdomains to inherit the same hsts header. values:.
+	// <Li>On: allows other subdomains to inherit the same hsts header.</li>.
+	// <Li>Off: does not allow other subdomains to inherit the same hsts header.</li> note: when switch is on, this field is required; when switch is off, this field is not required and will not take effect if filled.
+	IncludeSubDomains *string `json:"IncludeSubDomains,omitnil,omitempty" name:"IncludeSubDomains"`
+
+	// Whether to allow the browser to preload the hsts header. valid values:.
+	// <Li>On: allows the browser to preload the hsts header.</li>.
+	// <Li>Off: does not allow the browser to preload the hsts header.</li> note: when switch is on, this field is required; when switch is off, this field is not required and will not take effect if filled.
+	Preload *string `json:"Preload,omitnil,omitempty" name:"Preload"`
+}
+
+type HTTP2Parameters struct {
+	// Whether to enable http2 access. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
+type HTTPResponseParameters struct {
+	// Response status code. supports 2xx, 4xx, 5xx, excluding 499, 514, 101, 301, 302, 303, 509, 520-599.
+	StatusCode *int64 `json:"StatusCode,omitnil,omitempty" name:"StatusCode"`
+
+	// Response page id.
+	ResponsePage *string `json:"ResponsePage,omitnil,omitempty" name:"ResponsePage"`
+}
+
+type HTTPUpstreamTimeoutParameters struct {
+	// HTTP response timeout in seconds. value range: 5–600.
+	ResponseTimeout *int64 `json:"ResponseTimeout,omitnil,omitempty" name:"ResponseTimeout"`
 }
 
 // Predefined struct for user
@@ -10162,6 +10961,20 @@ type Header struct {
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
+type HeaderAction struct {
+	// HTTP header setting methods. valid values are:.
+	// <Li>`Set`: sets a value for an existing header parameter;</li>.
+	// <Li>`Del`: deletes a header parameter;</li>.
+	// <Li>`Add`: adds a header parameter.</li>.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// HTTP header name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// HTTP header value. this parameter is required when the action is set to `set` or `add`; it is optional when the action is set to `del`.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
 type HealthChecker struct {
 	// Health check policy. Valid values:
 	// <li>HTTP.</li>
@@ -10210,6 +11023,26 @@ type HealthChecker struct {
 
 	// The expected return result from an origin server during health check. Only ASCII visible characters are allowed, with up to 500 characters. This parameter is valid only when Type = UDP.
 	RecvContext *string `json:"RecvContext,omitnil,omitempty" name:"RecvContext"`
+}
+
+type HostHeaderParameters struct {
+	// Action to be executed. values:.
+	// <Li>FollowOrigin: follow origin server domain name;</li>.
+	// <Li>`Custom`: custom</li>.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// Host header rewrite requires a complete domain name.<br>note: this field is required when switch is on; when switch is off, this field is not required and any value will be ignored.
+	ServerName *string `json:"ServerName,omitnil,omitempty" name:"ServerName"`
+}
+
+type HostName struct {
+	// Target hostname configuration, valid values are:.
+	// <Li>`Follow`: follow the request;</li>.
+	// <Li>`Custom`: custom</li>.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// Custom value for target hostname, maximum length is 1024.<br>note: when action is custom, this field is required; when action is follow, this field is not effective.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type Hsts struct {
@@ -10305,6 +11138,13 @@ type IPWhitelist struct {
 
 	// List of IPv6 addresses
 	IPv6 []*string `json:"IPv6,omitnil,omitempty" name:"IPv6"`
+}
+
+type IPv6Parameters struct {
+	// Whether to enable ipv6 access functionality. valid values:.
+	// <Li>`On`: enable ipv6 access;</li>.
+	// <Li>`Off`: disable ipv6 access feature.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type Identification struct {
@@ -10911,6 +11751,16 @@ type MaxAge struct {
 	// Specifies the maximum amount of time (in seconds). The maximum value is 365 days.
 	// Note: The value `0` means not to cache.
 	MaxAgeTime *int64 `json:"MaxAgeTime,omitnil,omitempty" name:"MaxAgeTime"`
+}
+
+type MaxAgeParameters struct {
+	// Specifies whether to follow the origin server cache-control configuration, with the following values:.
+	// <Li>`On`: follow the origin server and ignore the field cachetime;</li>.
+	// <Li>`Off`: do not follow the origin server and apply the field cachetime.</li>.
+	FollowOrigin *string `json:"FollowOrigin,omitnil,omitempty" name:"FollowOrigin"`
+
+	// Custom cache time value, unit: seconds. value range: 0-315360000.<br>note: when followorigin is off, it means not following the origin server and using cachetime to set the cache time; otherwise, this field will not take effect.
+	CacheTime *int64 `json:"CacheTime,omitnil,omitempty" name:"CacheTime"`
 }
 
 // Predefined struct for user
@@ -11689,6 +12539,67 @@ func (r *ModifyApplicationProxyStatusResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyContentIdentifierRequestParams struct {
+	// Content identifier id.
+	ContentId *string `json:"ContentId,omitnil,omitempty" name:"ContentId"`
+
+	// Content identifier description. length limit: 20 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+type ModifyContentIdentifierRequest struct {
+	*tchttp.BaseRequest
+	
+	// Content identifier id.
+	ContentId *string `json:"ContentId,omitnil,omitempty" name:"ContentId"`
+
+	// Content identifier description. length limit: 20 characters.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
+func (r *ModifyContentIdentifierRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyContentIdentifierRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ContentId")
+	delete(f, "Description")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyContentIdentifierRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyContentIdentifierResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyContentIdentifierResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyContentIdentifierResponseParams `json:"Response"`
+}
+
+func (r *ModifyContentIdentifierResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyContentIdentifierResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyCustomErrorPageRequestParams struct {
 	// Custom error page ID.
 	PageId *string `json:"PageId,omitnil,omitempty" name:"PageId"`
@@ -11779,20 +12690,20 @@ func (r *ModifyCustomErrorPageResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDnsRecordsRequestParams struct {
-	// Site ID.
+	// Zone id.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// List of DNS record modification data, with a maximum of 100 modifications at a time.
+	// DNS record modification data list, up to 100 entries can be modified at a time.
 	DnsRecords []*DnsRecord `json:"DnsRecords,omitnil,omitempty" name:"DnsRecords"`
 }
 
 type ModifyDnsRecordsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Site ID.
+	// Zone id.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// List of DNS record modification data, with a maximum of 100 modifications at a time.
+	// DNS record modification data list, up to 100 entries can be modified at a time.
 	DnsRecords []*DnsRecord `json:"DnsRecords,omitnil,omitempty" name:"DnsRecords"`
 }
 
@@ -11840,26 +12751,26 @@ func (r *ModifyDnsRecordsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifyDnsRecordsStatusRequestParams struct {
-	// Site ID.
+	// Zone id.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// List of DNS record IDs to be enabled, with a limit of 200. Note: The same DNS record ID cannot exist in both RecordsToEnable and RecordsToDisable.
+	// List of dns record ids to be enabled, upper limit: 200. <br>note: the same dns record id cannot exist in both recordstoenable and recordstodisable.
 	RecordsToEnable []*string `json:"RecordsToEnable,omitnil,omitempty" name:"RecordsToEnable"`
 
-	// List of DNS record IDs to be disabled, with a limit of 200. Note: The same DNS record ID cannot exist in both RecordsToEnable and RecordsToDisable.
+	// List of dns record ids to be disabled, upper limit: 200. <br>note: the same dns record id cannot exist in both recordstoenable and recordstodisable.
 	RecordsToDisable []*string `json:"RecordsToDisable,omitnil,omitempty" name:"RecordsToDisable"`
 }
 
 type ModifyDnsRecordsStatusRequest struct {
 	*tchttp.BaseRequest
 	
-	// Site ID.
+	// Zone id.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// List of DNS record IDs to be enabled, with a limit of 200. Note: The same DNS record ID cannot exist in both RecordsToEnable and RecordsToDisable.
+	// List of dns record ids to be enabled, upper limit: 200. <br>note: the same dns record id cannot exist in both recordstoenable and recordstodisable.
 	RecordsToEnable []*string `json:"RecordsToEnable,omitnil,omitempty" name:"RecordsToEnable"`
 
-	// List of DNS record IDs to be disabled, with a limit of 200. Note: The same DNS record ID cannot exist in both RecordsToEnable and RecordsToDisable.
+	// List of dns record ids to be disabled, upper limit: 200. <br>note: the same dns record id cannot exist in both recordstoenable and recordstodisable.
 	RecordsToDisable []*string `json:"RecordsToDisable,omitnil,omitempty" name:"RecordsToDisable"`
 }
 
@@ -12526,6 +13437,130 @@ func (r *ModifyL4ProxyStatusResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyL7AccRuleRequestParams struct {
+	// Zone id.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Rules to be modified. you can first obtain the ruleid of the rule to be modified through the describel7accrules api, then pass in the modified rule content. the original rule content will be updated in an overriding manner.
+	Rule *RuleEngineItem `json:"Rule,omitnil,omitempty" name:"Rule"`
+}
+
+type ModifyL7AccRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone id.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Rules to be modified. you can first obtain the ruleid of the rule to be modified through the describel7accrules api, then pass in the modified rule content. the original rule content will be updated in an overriding manner.
+	Rule *RuleEngineItem `json:"Rule,omitnil,omitempty" name:"Rule"`
+}
+
+func (r *ModifyL7AccRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyL7AccRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Rule")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyL7AccRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyL7AccRuleResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyL7AccRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyL7AccRuleResponseParams `json:"Response"`
+}
+
+func (r *ModifyL7AccRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyL7AccRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyL7AccSettingRequestParams struct {
+	// Zone id.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Site acceleration global configuration. the settings in this parameter will apply to all domain names under the site. you only need to modify the required settings directly, and other settings not passed in will remain unchanged.
+	// 
+	ZoneConfig *ZoneConfig `json:"ZoneConfig,omitnil,omitempty" name:"ZoneConfig"`
+}
+
+type ModifyL7AccSettingRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone id.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Site acceleration global configuration. the settings in this parameter will apply to all domain names under the site. you only need to modify the required settings directly, and other settings not passed in will remain unchanged.
+	// 
+	ZoneConfig *ZoneConfig `json:"ZoneConfig,omitnil,omitempty" name:"ZoneConfig"`
+}
+
+func (r *ModifyL7AccSettingRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyL7AccSettingRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "ZoneConfig")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyL7AccSettingRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyL7AccSettingResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyL7AccSettingResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyL7AccSettingResponseParams `json:"Response"`
+}
+
+func (r *ModifyL7AccSettingResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyL7AccSettingResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyLoadBalancerRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -12718,6 +13753,45 @@ func (r *ModifyOriginGroupResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifyOriginGroupResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyOriginParameters struct {
+	// The origin type. values:.
+	// <Li>IPDomain: ipv4, ipv6, or domain name type origin server;</li>.
+	// <Li>OriginGroup: origin server group type origin server;</li>.
+	// <Li>LoadBalance: cloud load balancer (clb), this feature is in beta test. to use it, please submit a ticket or contact smart customer service;</li>.
+	// <Li>COS: tencent cloud COS origin server;</li>.
+	// <Li>AWSS3: all object storage origin servers that support the aws s3 protocol.</li>.
+	OriginType *string `json:"OriginType,omitnil,omitempty" name:"OriginType"`
+
+	// Origin server address, which varies according to the value of origintype:.
+	// <Li>When origintype = ipdomain, fill in an ipv4 address, an ipv6 address, or a domain name;</li>.
+	// <Li>When origintype = cos, please fill in the access domain name of the cos bucket;</li>.
+	// <Li>When origintype = awss3, fill in the access domain name of the s3 bucket;</li>.
+	// <Li>When origintype = origingroup, fill in the origin server group id;</li>.
+	// <Li>When origintype = loadbalance, fill in the cloud load balancer instance id. this feature is currently only available to the allowlist.</li>.
+	Origin *string `json:"Origin,omitnil,omitempty" name:"Origin"`
+
+	// Origin-Pull protocol configuration. this parameter is required when origintype is ipdomain, origingroup, or loadbalance. valid values are:.
+	// <Li>Http: use http protocol;</li>.
+	// <Li>Https: use https protocol;</li>.
+	// <Li>Follow: follow the protocol.</li>.
+	OriginProtocol *string `json:"OriginProtocol,omitnil,omitempty" name:"OriginProtocol"`
+
+	// Ports for http origin-pull requests. value range: 1-65535. this parameter takes effect only when the origin-pull protocol originprotocol is http or follow.
+	HTTPOriginPort *int64 `json:"HTTPOriginPort,omitnil,omitempty" name:"HTTPOriginPort"`
+
+	// Ports for https origin-pull requests. value range: 1-65535. this parameter takes effect only when the origin-pull protocol originprotocol is https or follow.
+	HTTPSOriginPort *int64 `json:"HTTPSOriginPort,omitnil,omitempty" name:"HTTPSOriginPort"`
+
+	// Whether access to the private object storage origin server is allowed. this parameter is valid only when the origin server type origintype is COS or awss3. valid values:.
+	// <Li>On: enable private authentication;</li>.
+	// <Li>Off: disable private authentication.</li> if not specified, the default value is off.
+	PrivateAccess *string `json:"PrivateAccess,omitnil,omitempty" name:"PrivateAccess"`
+
+	// Private authentication parameter. this parameter is valid only when origintype = awss3 and privateaccess = on.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	PrivateParameters *OriginPrivateParameters `json:"PrivateParameters,omitnil,omitempty" name:"PrivateParameters"`
 }
 
 // Predefined struct for user
@@ -12918,6 +13992,18 @@ func (r *ModifyRealtimeLogDeliveryTaskResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *ModifyRealtimeLogDeliveryTaskResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type ModifyRequestHeaderParameters struct {
+	// List of http header setting rules.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	HeaderActions []*HeaderAction `json:"HeaderActions,omitnil,omitempty" name:"HeaderActions"`
+}
+
+type ModifyResponseHeaderParameters struct {
+	// HTTP origin-pull header rules list.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	HeaderActions []*HeaderAction `json:"HeaderActions,omitnil,omitempty" name:"HeaderActions"`
 }
 
 // Predefined struct for user
@@ -13611,10 +14697,26 @@ type NsVerification struct {
 	NameServers []*string `json:"NameServers,omitnil,omitempty" name:"NameServers"`
 }
 
+type OCSPStaplingParameters struct {
+	// Whether to enable ocsp stapling configuration switch. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
 type OfflineCache struct {
 	// Whether offline cache is enabled. Valid values:
 	// <li>`on`: Enable</li>
 	// <li>`off`: Disable</li>
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
+type OfflineCacheParameters struct {
+	// Whether to enable offline caching. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
@@ -13842,6 +14944,22 @@ type OriginInfo struct {
 	VodeoBucketId *string `json:"VodeoBucketId,omitnil,omitempty" name:"VodeoBucketId"`
 }
 
+type OriginPrivateParameters struct {
+	// Authentication parameter access key id.
+	AccessKeyId *string `json:"AccessKeyId,omitnil,omitempty" name:"AccessKeyId"`
+
+	// Authentication parameter secret access key.
+	SecretAccessKey *string `json:"SecretAccessKey,omitnil,omitempty" name:"SecretAccessKey"`
+
+	// Authentication version. values:.
+	// <Li>V2: v2 version;</li>.
+	// <Li>V4: v4 version.</li>.
+	SignatureVersion *string `json:"SignatureVersion,omitnil,omitempty" name:"SignatureVersion"`
+
+	// Region of the bucket.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+}
+
 type OriginProtectionInfo struct {
 	// ID of the site.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -13988,6 +15106,14 @@ type PostMaxSize struct {
 	MaxSize *int64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
 }
 
+type PostMaxSizeParameters struct {
+	// Whether to enable post request file upload limit, in bytes (default limit: 32 * 2<sup>20</sup> bytes). valid values: <li>`on`: enable limit;</li><li>`off`: disable limit.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Maximum size of the file uploaded for streaming via a post request, in bytes. value range: 1 * 2<sup>20</sup> bytes to 500 * 2<sup>20</sup> bytes.
+	MaxSize *int64 `json:"MaxSize,omitnil,omitempty" name:"MaxSize"`
+}
+
 type PrepaidPlanParam struct {
 	// Prepaid plan duration, unit: month. Valid values: 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 24, 36.
 	// 
@@ -14011,6 +15137,14 @@ type PrivateParameter struct {
 
 	// The parameter value.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type QUICParameters struct {
+	// Whether to enable quic. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type QueryCondition struct {
@@ -14073,6 +15207,14 @@ type Quota struct {
 	// <li>`purge_all`: Purge all caches</li>
 	// <li>`purge_cache_tag`: Purge by cache tag</li><li>`prefetch_url`: Pre-warm by URL</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type RangeOriginPullParameters struct {
+	// Whether to enable range gets. values are:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
 type RateLimitConfig struct {
@@ -14419,6 +15561,20 @@ type Resource struct {
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
+type ResponseSpeedLimitParameters struct {
+	// Download rate limit mode. valid values:.
+	// <Li>LimitUponDownload: rate limit throughout the download process;</li>.
+	// <Li>LimitAfterSpecificBytesDownloaded: rate limit after downloading specific bytes at full speed;</li>.
+	// <Li>LimitAfterSpecificSecondsDownloaded: start speed limit after downloading at full speed for a specific duration.</li>.
+	Mode *string `json:"Mode,omitnil,omitempty" name:"Mode"`
+
+	// Rate-Limiting value, in kb/s. enter a numerical value to specify the rate limit.
+	MaxSpeed *string `json:"MaxSpeed,omitnil,omitempty" name:"MaxSpeed"`
+
+	// Rate-Limiting start value, which can be the download size or specified duration, in kb or s. this parameter is required when mode is set to limitafterspecificbytesdownloaded or limitafterspecificsecondsdownloaded. enter a numerical value to specify the download size or duration.
+	StartAt *string `json:"StartAt,omitnil,omitempty" name:"StartAt"`
+}
+
 type RewriteAction struct {
 	// Feature name. For details, see [DescribeRulesSetting](https://intl.cloud.tencent.com/document/product/1552/80618?from_cn_redirect=1) API
 	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
@@ -14442,6 +15598,20 @@ type Rule struct {
 type RuleAndConditions struct {
 	// Rule engine condition. This condition will be considered met if all items in the array are met.
 	Conditions []*RuleCondition `json:"Conditions,omitnil,omitempty" name:"Conditions"`
+}
+
+type RuleBranch struct {
+	// [Match condition].
+	// ](Https://Cloud.Tencent.Com/Document/Product/1552/90438#33f65828-C6c6-4b66-A011-25a20b548d5d).
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
+
+	// [Operations](Https://Cloud.Tencent.Com/Document/Product/1552/90438#C7bd7e02-9247-4a72-B0e4-11c27cadb198).<Br>Note: actions and subrules cannot both be empty.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	Actions []*RuleEngineAction `json:"Actions,omitnil,omitempty" name:"Actions"`
+
+	// List of sub-rules. multiple rules exist in this list and are executed sequentially from top to bottom.<br>note: subrules and actions cannot both be empty. currently, only one layer of subrules is supported.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	SubRules []*RuleEngineSubRule `json:"SubRules,omitnil,omitempty" name:"SubRules"`
 }
 
 type RuleChoicePropertiesItem struct {
@@ -14530,6 +15700,178 @@ type RuleCondition struct {
 	IgnoreNameCase *bool `json:"IgnoreNameCase,omitnil,omitempty" name:"IgnoreNameCase"`
 }
 
+type RuleEngineAction struct {
+
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Node cache ttl configuration parameter. when name is cache, this parameter is required.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	CacheParameters *CacheParameters `json:"CacheParameters,omitnil,omitempty" name:"CacheParameters"`
+
+	// Custom cache key configuration parameter. when name is cachekey, this parameter is required.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	CacheKeyParameters *CacheKeyParameters `json:"CacheKeyParameters,omitnil,omitempty" name:"CacheKeyParameters"`
+
+	// The cache prefresh configuration parameter. this parameter is required when `name` is `cacheprefresh`.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	CachePrefreshParameters *CachePrefreshParameters `json:"CachePrefreshParameters,omitnil,omitempty" name:"CachePrefreshParameters"`
+
+	// The access url redirection configuration parameter. this parameter is required when `name` is `accessurlredirect`.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	AccessURLRedirectParameters *AccessURLRedirectParameters `json:"AccessURLRedirectParameters,omitnil,omitempty" name:"AccessURLRedirectParameters"`
+
+	// The origin-pull url rewrite configuration parameter. this parameter is required when `name` is `upstreamurlrewrite`.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	UpstreamURLRewriteParameters *UpstreamURLRewriteParameters `json:"UpstreamURLRewriteParameters,omitnil,omitempty" name:"UpstreamURLRewriteParameters"`
+
+	// The quic configuration parameter. this parameter is required when `name` is `quic`.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	QUICParameters *QUICParameters `json:"QUICParameters,omitnil,omitempty" name:"QUICParameters"`
+
+	// The websocket configuration parameter. this parameter is required when `name` is `websocket`.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	WebSocketParameters *WebSocketParameters `json:"WebSocketParameters,omitnil,omitempty" name:"WebSocketParameters"`
+
+	// Token authentication configuration parameter. this parameter is required when `name` is `authentication`.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	AuthenticationParameters *AuthenticationParameters `json:"AuthenticationParameters,omitnil,omitempty" name:"AuthenticationParameters"`
+
+	// Browser cache ttl configuration parameter. this parameter is required when `name` is `maxage`.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	MaxAgeParameters *MaxAgeParameters `json:"MaxAgeParameters,omitnil,omitempty" name:"MaxAgeParameters"`
+
+	// Status code cache ttl configuration parameter. this parameter is required when `name` is `statuscodecache`.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	StatusCodeCacheParameters *StatusCodeCacheParameters `json:"StatusCodeCacheParameters,omitnil,omitempty" name:"StatusCodeCacheParameters"`
+
+	// Offline cache configuration parameter. this parameter is required when `name` is `offlinecache`.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	OfflineCacheParameters *OfflineCacheParameters `json:"OfflineCacheParameters,omitnil,omitempty" name:"OfflineCacheParameters"`
+
+	// Smart acceleration configuration parameter. this parameter is required when `name` is `smartrouting`.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	SmartRoutingParameters *SmartRoutingParameters `json:"SmartRoutingParameters,omitnil,omitempty" name:"SmartRoutingParameters"`
+
+	// Shard source retrieval configuration parameter. this parameter is required when name is set to rangeoriginpull.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	RangeOriginPullParameters *RangeOriginPullParameters `json:"RangeOriginPullParameters,omitnil,omitempty" name:"RangeOriginPullParameters"`
+
+	// HTTP2 origin-pull configuration parameter. this parameter is required when name is set to upstreamhttp2.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	UpstreamHTTP2Parameters *UpstreamHTTP2Parameters `json:"UpstreamHTTP2Parameters,omitnil,omitempty" name:"UpstreamHTTP2Parameters"`
+
+	// Host header rewrite configuration parameter. this parameter is required when name is set to hostheader.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	HostHeaderParameters *HostHeaderParameters `json:"HostHeaderParameters,omitnil,omitempty" name:"HostHeaderParameters"`
+
+	// Force https redirect configuration parameter. this parameter is required when the name is set to forceredirecthttps.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ForceRedirectHTTPSParameters *ForceRedirectHTTPSParameters `json:"ForceRedirectHTTPSParameters,omitnil,omitempty" name:"ForceRedirectHTTPSParameters"`
+
+	// Intelligent compression configuration. this parameter is required when name is set to compression.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	CompressionParameters *CompressionParameters `json:"CompressionParameters,omitnil,omitempty" name:"CompressionParameters"`
+
+	// HSTS configuration parameter. this parameter is required when name is hsts.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	HSTSParameters *HSTSParameters `json:"HSTSParameters,omitnil,omitempty" name:"HSTSParameters"`
+
+	// Client ip header configuration for storing client request ip information. this parameter is required when name is clientipheader.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ClientIPHeaderParameters *ClientIPHeaderParameters `json:"ClientIPHeaderParameters,omitnil,omitempty" name:"ClientIPHeaderParameters"`
+
+	// OCSP stapling configuration parameter. this parameter is required when the name is set to ocspstapling.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	OCSPStaplingParameters *OCSPStaplingParameters `json:"OCSPStaplingParameters,omitnil,omitempty" name:"OCSPStaplingParameters"`
+
+	// HTTP2 access configuration parameter. this parameter is required when name is http2.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	HTTP2Parameters *HTTP2Parameters `json:"HTTP2Parameters,omitnil,omitempty" name:"HTTP2Parameters"`
+
+	// Maximum size configuration for file streaming upload via a post request. this parameter is required when name is postmaxsize.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	PostMaxSizeParameters *PostMaxSizeParameters `json:"PostMaxSizeParameters,omitnil,omitempty" name:"PostMaxSizeParameters"`
+
+	// Configuration parameter for carrying the region information of the client ip during origin-pull. this parameter is required when the name is set to clientipcountry.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ClientIPCountryParameters *ClientIPCountryParameters `json:"ClientIPCountryParameters,omitnil,omitempty" name:"ClientIPCountryParameters"`
+
+	// Configuration parameter for following redirects during origin-pull. this parameter is required when the name is set to upstreamfollowredirect.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	UpstreamFollowRedirectParameters *UpstreamFollowRedirectParameters `json:"UpstreamFollowRedirectParameters,omitnil,omitempty" name:"UpstreamFollowRedirectParameters"`
+
+	// Configuration parameter for origin-pull request. this parameter is required when the name is set to upstreamrequest.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	UpstreamRequestParameters *UpstreamRequestParameters `json:"UpstreamRequestParameters,omitnil,omitempty" name:"UpstreamRequestParameters"`
+
+	// SSL/TLS security configuration parameter. this parameter is required when the name is set to tlsconfig.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	TLSConfigParameters *TLSConfigParameters `json:"TLSConfigParameters,omitnil,omitempty" name:"TLSConfigParameters"`
+
+	// Configuration parameter for modifying the origin server. this parameter is required when the name is set to modifyorigin.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ModifyOriginParameters *ModifyOriginParameters `json:"ModifyOriginParameters,omitnil,omitempty" name:"ModifyOriginParameters"`
+
+	// Configuration of layer 7 origin timeout. this parameter is required when name is httpupstreamtimeout.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	HTTPUpstreamTimeoutParameters *HTTPUpstreamTimeoutParameters `json:"HTTPUpstreamTimeoutParameters,omitnil,omitempty" name:"HTTPUpstreamTimeoutParameters"`
+
+	// HTTP response configuration parameters. this parameter is required when name is httpresponse.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	HttpResponseParameters *HTTPResponseParameters `json:"HttpResponseParameters,omitnil,omitempty" name:"HttpResponseParameters"`
+
+	// Custom error page configuration parameters. this parameter is required when name is errorpage.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ErrorPageParameters *ErrorPageParameters `json:"ErrorPageParameters,omitnil,omitempty" name:"ErrorPageParameters"`
+
+	// Modify http node response header configuration parameters. this parameter is required when name is modifyresponseheader.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ModifyResponseHeaderParameters *ModifyResponseHeaderParameters `json:"ModifyResponseHeaderParameters,omitnil,omitempty" name:"ModifyResponseHeaderParameters"`
+
+	// Modify http node request header configuration parameters. this parameter is required when name is modifyrequestheader.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ModifyRequestHeaderParameters *ModifyRequestHeaderParameters `json:"ModifyRequestHeaderParameters,omitnil,omitempty" name:"ModifyRequestHeaderParameters"`
+
+	// Single connection download speed limit configuration parameter. this parameter is required when name is responsespeedlimit.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ResponseSpeedLimitParameters *ResponseSpeedLimitParameters `json:"ResponseSpeedLimitParameters,omitnil,omitempty" name:"ResponseSpeedLimitParameters"`
+
+	// Content identification configuration parameter. this parameter is required when name is httpresponse.
+	// 
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	SetContentIdentifierParameters *SetContentIdentifierParameters `json:"SetContentIdentifierParameters,omitnil,omitempty" name:"SetContentIdentifierParameters"`
+}
+
+type RuleEngineItem struct {
+	// Rule status. values: <li>`enable`: enabled</li> <li>`disable`: disabled</li>.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Rule id. a unique identifier for the rule. this parameter is required when calling `modifyl7accrules`.
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Rule name. name length limit: 255 characters.
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
+
+	// Rule annotation. multiple annotations can be added.
+	Description []*string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Sub-Rule branch. this list currently supports filling in only one rule; multiple entries are invalid.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	Branches []*RuleBranch `json:"Branches,omitnil,omitempty" name:"Branches"`
+
+	// Rule priority. only used as an output parameter.
+	RulePriority *int64 `json:"RulePriority,omitnil,omitempty" name:"RulePriority"`
+}
+
+type RuleEngineSubRule struct {
+	// Sub-Rule branch.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	Branches []*RuleBranch `json:"Branches,omitnil,omitempty" name:"Branches"`
+
+	// Rule comments.
+	Description []*string `json:"Description,omitnil,omitempty" name:"Description"`
+}
+
 type RuleExtraParameter struct {
 	// Parameter name. Valid values:
 	// <li>`Action`: Required parameter for HTTP header modification when `RewirteAction` is selected for `RuleAction`.</li>
@@ -14603,11 +15945,11 @@ type RulesProperties struct {
 	ChoicesValue []*string `json:"ChoicesValue,omitnil,omitempty" name:"ChoicesValue"`
 
 	// The parameter value type.
-	// <li>`CHOICE`: `If Type=CHOICE`, choose a value in `ChoiceValue`.</li>
-	// <li>`TOGGLE`: If `Type=TOGGLE`, choose `on` or `off` from `ChoicesValue`.</li>
-	// <li>`OBJECT`: Specify an object. If this is specified, `ChoiceProperties` includes attributes of the specified object. See [Example 2. Create a rule with Type=OBJECT](https://intl.cloud.tencent.com/document/product/1552/80622?from_cn_redirect=1#.E7.A4.BA.E4.BE.8B2-.E5.8F.82.E6.95.B0.E4.B8.BA-OBJECT-.E7.B1.BB.E5.9E.8B.E7.9A.84.E5.88.9B.E5.BB.BA)</li>
-	// <li>`CUSTOM_NUM`: (Integer) Custom value.</li>
-	// <li>`CUSTOM_STRING`: (String) Custom value.</li>
+	// <Li>`CHOICE`: the parameter value can only be selected from `choicesvalue`.</li>.
+	// <Li>TOGGLE: the parameter value is of switch type and can be selected from `choicesvalue`.</li>.
+	// <Li>OBJECT: the parameter value is of object type, and `choiceproperties` are the properties associated with this object type.</li>.
+	// <Li>`CUSTOM_NUM`: (integer) custom value.</li>.
+	// <Li> custom_string: parameter value is user-customized, string type.</li> note: when the parameter type is object, please refer to [example 2: creating a parameter of object type](https://intl.cloud.tencent.com/document/product/1552/80622?from_cn_redirect=1#.e7.a4.ba.e4.be.8b2-.e4.bf.ae.e6.94.b9.e6.ba.90.e7.ab.99.e4.b8.baip.e5.9f.9f.e5.90.8d).
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Maximum value. If both `Min` and `Max` are set to `0`, this parameter does not take effect.
@@ -14795,6 +16137,11 @@ type ServerCertInfo struct {
 	CommonName *string `json:"CommonName,omitnil,omitempty" name:"CommonName"`
 }
 
+type SetContentIdentifierParameters struct {
+	// Content identifier id.
+	ContentIdentifier *string `json:"ContentIdentifier,omitnil,omitempty" name:"ContentIdentifier"`
+}
+
 type SkipCondition struct {
 	// The field type. Values:
 	// <li>`header_fields`: HTTP request header</li>
@@ -14881,6 +16228,14 @@ type SmartRouting struct {
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 }
 
+type SmartRoutingParameters struct {
+	// Whether to enable smart acceleration. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
 type StandardDebug struct {
 	// Whether to enable standard debugging. Values:
 	// <li>`on`: Enable</li>
@@ -14892,6 +16247,34 @@ type StandardDebug struct {
 
 	// The time when the standard debugging setting expires. If it is exceeded, this feature becomes invalid.
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+}
+
+type StandardDebugParameters struct {
+	// Whether to enable standard debugging. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// The client ip to allow. it can be an ipv4/ipv6 address or a cidr block. 0.0.0.0/0 means to allow all ipv4 clients for debugging; ::/0 means to allow all ipv6 clients for debugging; 127.0.0.1 is not allowed. <br>note: this field is required when `switch=on` and the number of entries should be 1-100. when `switch=off`, this field is not required and any value specified will not take effect.
+	AllowClientIPList []*string `json:"AllowClientIPList,omitnil,omitempty" name:"AllowClientIPList"`
+
+	// Debug feature expiration time. the feature will be disabled after the set time. <br>note: this field is required when `switch=on`. when `switch=off`, this field is not required and any value specified will not take effect.
+	Expires *string `json:"Expires,omitnil,omitempty" name:"Expires"`
+}
+
+type StatusCodeCacheParam struct {
+	// Status code. valid values: 400, 401, 403, 404, 405, 407, 414, 500, 501, 502, 503, 504, 509, 514.
+	StatusCode *int64 `json:"StatusCode,omitnil,omitempty" name:"StatusCode"`
+
+	// Cache time value in seconds. value range: 0–31536000.
+	CacheTime *int64 `json:"CacheTime,omitnil,omitempty" name:"CacheTime"`
+}
+
+type StatusCodeCacheParameters struct {
+	// Status code cache ttl.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	StatusCodeCacheParams []*StatusCodeCacheParam `json:"StatusCodeCacheParams,omitnil,omitempty" name:"StatusCodeCacheParams"`
 }
 
 type SubRule struct {
@@ -14941,6 +16324,14 @@ type SwitchConfig struct {
 	// <li>`on`: Enable</li>
 	// <li>`off`: Disable</li>It does not affect DDoS and bot configuration.
 	WebSwitch *string `json:"WebSwitch,omitnil,omitempty" name:"WebSwitch"`
+}
+
+type TLSConfigParameters struct {
+	// TLS version. at least one must be specified. if multiple versions are specified, they must be consecutive, e.g., enable tls1, 1.1, 1.2, and 1.3. it is not allowed to enable only 1 and 1.2 while disabling 1.1. valid values: <li>`tlsv1`: tlsv1 version;</li><li>`tlsv1.1`: tlsv1.1 version;</li><li>`tlsv1.2`: tlsv1.2 version;</li><li>`tlsv1.3`: tlsv1.3 version.</li>.
+	Version []*string `json:"Version,omitnil,omitempty" name:"Version"`
+
+	// Cipher suite. for detailed information, please refer to [tls versions and cipher suites description](https://intl.cloud.tencent.com/document/product/1552/86545?from_cn_redirect=1). valid values: <li>`loose-v2023`: loose-v2023 cipher suite;</li><li>`general-v2023`: general-v2023 cipher suite;</li><li>`strict-v2023`: strict-v2023 cipher suite.</li>.
+	CipherSuite *string `json:"CipherSuite,omitnil,omitempty" name:"CipherSuite"`
 }
 
 type Tag struct {
@@ -15067,6 +16458,20 @@ type TopEntryValue struct {
 	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
 }
 
+type URLPath struct {
+	// Action to be executed. values:.
+	// <Li>`Follow`: follow the request;</li>.
+	// <Li>`Custom`: custom;</li>.
+	// <Li>`Regex`: regular expression matching.</li>.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// Regular expression matching expression, length range is 1-1024.<br>note: when action is regex, this field is required; when action is follow or custom, this field is not required and will not take effect if filled.
+	Regex *string `json:"Regex,omitnil,omitempty" name:"Regex"`
+
+	// Redirect target url, length range is 1-1024.<br>note: when action is regex or custom, this field is required; when action is follow, this field is not required and will not take effect if filled.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
 // Predefined struct for user
 type UpgradePlanRequestParams struct {
 	// Plan ID, formatted as edgeone-2unuvzjmmn2q.
@@ -15143,11 +16548,91 @@ type UpstreamCertInfo struct {
 	UpstreamMutualTLS *MutualTLS `json:"UpstreamMutualTLS,omitnil,omitempty" name:"UpstreamMutualTLS"`
 }
 
+type UpstreamFollowRedirectParameters struct {
+	// Whether to enable origin-pull to follow the redirection configuration. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// The maximum number of redirects. value range: 1-5.
+	// Note: this field is required when switch is on; when switch is off, this field is not required and will not take effect if filled.
+	MaxTimes *int64 `json:"MaxTimes,omitnil,omitempty" name:"MaxTimes"`
+}
+
+type UpstreamHTTP2Parameters struct {
+	// Whether to enable http2 origin-pull. valid values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
 type UpstreamHttp2 struct {
 	// Whether to enable HTTP2 origin-pull. Valid values: 
 	// <li>`on`: Enable;</li>
 	// <li>`off`: Disable.</li>
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+}
+
+type UpstreamRequestCookie struct {
+	// Whether to enable the origin-pull request parameter cookie. valid values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Origin-Pull request parameter cookie mode. this parameter is required when `switch` is on. valid values are:.
+	// <Li>Full: indicates full retention;</li>.
+	// <Li>Ignore: ignore all.</li>.
+	// <Li>`IncludeCustom`: retain partial parameters.</li>.
+	// <Li>ExcludeCustom: ignore partial parameters.</li>.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// Specifies parameter values. this parameter takes effect only when the query string mode action is `includecustom` or `excludecustom`, and is used to specify the parameters to be reserved or ignored. up to 10 parameters are supported.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+}
+
+type UpstreamRequestParameters struct {
+	// Query string configuration. optional. if not provided, it will not be configured.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	QueryString *UpstreamRequestQueryString `json:"QueryString,omitnil,omitempty" name:"QueryString"`
+
+	// Cookie configuration. optional. if not provided, it will not be configured.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	Cookie *UpstreamRequestCookie `json:"Cookie,omitnil,omitempty" name:"Cookie"`
+}
+
+type UpstreamRequestQueryString struct {
+	// Whether to enable origin-pull request parameter query string. values:.
+	// <Li>`On`: enable;</li>
+	// .
+	// <Li>Off: disable.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Query string mode. this parameter is required when switch is on. values:.
+	// <Li>`Full`: retain all</li>.
+	// <Li>`Ignore`: ignore all;</li>.
+	// <Li>IncludeCustom: retain partial parameters.</li>.
+	// <Li>ExcludeCustom: ignore partial parameters.</li>.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// Specifies parameter values. this parameter takes effect only when the query string mode action is `includecustom` or `excludecustom`, and is used to specify the parameters to be reserved or ignored. up to 10 parameters are supported.
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+}
+
+type UpstreamURLRewriteParameters struct {
+	// Origin-Pull url rewriting type, only path is supported.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Origin-Pull url rewrite action. valid values are:.
+	// <Li>`Replace`: replace the path prefix.</li>.
+	// <Li>`AddPrefix`: add the path prefix.</li>.
+	// <Li>`RmvPrefix`: remove the path prefix.</li>.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// Origin-Pull url rewrite value, maximum length 1024, must start with /.<br>note: when action is addprefix, it cannot end with /; when action is rmvprefix, * cannot be present.
+	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
 }
 
 type VanityNameServers struct {
@@ -15289,6 +16774,16 @@ type WebSocket struct {
 	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
 }
 
+type WebSocketParameters struct {
+	// Whether to enable websocket connection timeout. values:.
+	// <Li>On: use timeout as the websocket timeout;</li>.
+	// <Li>Off: the platform still supports websocket connections, using the system default timeout of 15 seconds.</li>.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Timeout, unit: seconds. maximum timeout is 120 seconds.<br>note: this field is required when switch is on; otherwise, this field will not take effect.
+	Timeout *int64 `json:"Timeout,omitnil,omitempty" name:"Timeout"`
+}
+
 type Zone struct {
 	// Site ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -15376,6 +16871,110 @@ type Zone struct {
 	// Ownership verification information
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	OwnershipVerification *OwnershipVerification `json:"OwnershipVerification,omitnil,omitempty" name:"OwnershipVerification"`
+}
+
+type ZoneConfig struct {
+	// <Intelligent acceleration configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	SmartRouting *SmartRoutingParameters `json:"SmartRouting,omitnil,omitempty" name:"SmartRouting"`
+
+	// Node cache expiration time configuration.
+	// .
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	Cache *CacheConfigParameters `json:"Cache,omitnil,omitempty" name:"Cache"`
+
+	// Browser cache rule configuration, which is used to set the default value of maxage and is disabled by default.
+	// .
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	MaxAge *MaxAgeParameters `json:"MaxAge,omitnil,omitempty" name:"MaxAge"`
+
+	// The node cache key configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	CacheKey *CacheKeyConfigParameters `json:"CacheKey,omitnil,omitempty" name:"CacheKey"`
+
+	// Cache prefresh configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	CachePrefresh *CachePrefreshParameters `json:"CachePrefresh,omitnil,omitempty" name:"CachePrefresh"`
+
+	// Offline cache configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	OfflineCache *OfflineCacheParameters `json:"OfflineCache,omitnil,omitempty" name:"OfflineCache"`
+
+	// Smart compression configuration.
+	// .
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	Compression *CompressionParameters `json:"Compression,omitnil,omitempty" name:"Compression"`
+
+	// Forced https redirect configuration for access protocols.
+	// .
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ForceRedirectHTTPS *ForceRedirectHTTPSParameters `json:"ForceRedirectHTTPS,omitnil,omitempty" name:"ForceRedirectHTTPS"`
+
+	// HSTS configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	HSTS *HSTSParameters `json:"HSTS,omitnil,omitempty" name:"HSTS"`
+
+	// TLS configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	TLSConfig *TLSConfigParameters `json:"TLSConfig,omitnil,omitempty" name:"TLSConfig"`
+
+	// OCSP stapling configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	OCSPStapling *OCSPStaplingParameters `json:"OCSPStapling,omitnil,omitempty" name:"OCSPStapling"`
+
+	// HTTP/2 configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	HTTP2 *HTTP2Parameters `json:"HTTP2,omitnil,omitempty" name:"HTTP2"`
+
+	// QUIC access configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	QUIC *QUICParameters `json:"QUIC,omitnil,omitempty" name:"QUIC"`
+
+	// HTTP2 origin-pull configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	UpstreamHTTP2 *UpstreamHTTP2Parameters `json:"UpstreamHTTP2,omitnil,omitempty" name:"UpstreamHTTP2"`
+
+	// IPv6 access configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	IPv6 *IPv6Parameters `json:"IPv6,omitnil,omitempty" name:"IPv6"`
+
+	// WebSocket configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	WebSocket *WebSocketParameters `json:"WebSocket,omitnil,omitempty" name:"WebSocket"`
+
+	// POST request transport configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	PostMaxSize *PostMaxSizeParameters `json:"PostMaxSize,omitnil,omitempty" name:"PostMaxSize"`
+
+	// Client ip origin-pull request header configuration.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ClientIPHeader *ClientIPHeaderParameters `json:"ClientIPHeader,omitnil,omitempty" name:"ClientIPHeader"`
+
+	// Whether to carry the region information of the client ip during origin-pull.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ClientIPCountry *ClientIPCountryParameters `json:"ClientIPCountry,omitnil,omitempty" name:"ClientIPCountry"`
+
+	// Configuration of grpc support.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	Grpc *GrpcParameters `json:"Grpc,omitnil,omitempty" name:"Grpc"`
+
+	// Accelerate optimization and configuration in mainland china.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	AccelerateMainland *AccelerateMainlandParameters `json:"AccelerateMainland,omitnil,omitempty" name:"AccelerateMainland"`
+
+	// Standard debugging configuration.
+	// .
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	StandardDebug *StandardDebugParameters `json:"StandardDebug,omitnil,omitempty" name:"StandardDebug"`
+}
+
+type ZoneConfigParameters struct {
+	// The site name.
+	ZoneName *string `json:"ZoneName,omitnil,omitempty" name:"ZoneName"`
+
+	// Site configuration information.
+	// Note: this field may return null, which indicates a failure to obtain a valid value.
+	ZoneConfig *ZoneConfig `json:"ZoneConfig,omitnil,omitempty" name:"ZoneConfig"`
 }
 
 type ZoneSetting struct {
