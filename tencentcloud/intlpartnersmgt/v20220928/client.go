@@ -270,15 +270,20 @@ func NewCreateAccountResponse() (response *CreateAccountResponse) {
 //
 // 1. Create a Tencent Cloud account. The entered email address and mobile phone number need to be verified by the partner for validity.
 //
-// 2.  Customers need to add personal information when logging in for the first time.
+// 2. Customers need to add personal information when logging in for the first time.
 //
-// 3.  This interface needs to be applied for allowlist usage. Please contact the channel manager to initiate the application process.
+// 3. This interface needs to be applied for allowlist usage. Please contact the channel manager to initiate the application process.
+//
+// 
+//
+// Callable roles: distributor, second-level reseller, reseller
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_EXCEEDMAXBINDCOUNT = "FailedOperation.ExceedMaxBindCount"
 //  FAILEDOPERATION_MAILISREGISTERED = "FailedOperation.MailIsRegistered"
 //  FAILEDOPERATION_PHONEBINDUPPER = "FailedOperation.PhoneBindUpper"
+//  FAILEDOPERATION_TRADEINFOINCORRECT = "FailedOperation.TradeInfoIncorrect"
 //  FAILEDOPERATION_VERIFICATIONCODEILLEGAL = "FailedOperation.VerificationCodeIllegal"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ACCOUNTTYPECONTENTINCORRECT = "InvalidParameter.AccountTypeContentIncorrect"
@@ -297,6 +302,7 @@ func NewCreateAccountResponse() (response *CreateAccountResponse) {
 //  INVALIDPARAMETERVALUE_MAILEMPTY = "InvalidParameterValue.MailEmpty"
 //  INVALIDPARAMETERVALUE_PASSWORDEMPTY = "InvalidParameterValue.PasswordEmpty"
 //  INVALIDPARAMETERVALUE_PHONENUMEMPTY = "InvalidParameterValue.PhoneNumEmpty"
+//  INVALIDPARAMETERVALUE_TRADEINFOEMPTY = "InvalidParameterValue.TradeInfoEmpty"
 //  INVALIDPARAMETERVALUE_UNSUPPORTAREA = "InvalidParameterValue.UnSupportArea"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateAccountResponse, err error) {
@@ -308,15 +314,20 @@ func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateA
 //
 // 1. Create a Tencent Cloud account. The entered email address and mobile phone number need to be verified by the partner for validity.
 //
-// 2.  Customers need to add personal information when logging in for the first time.
+// 2. Customers need to add personal information when logging in for the first time.
 //
-// 3.  This interface needs to be applied for allowlist usage. Please contact the channel manager to initiate the application process.
+// 3. This interface needs to be applied for allowlist usage. Please contact the channel manager to initiate the application process.
+//
+// 
+//
+// Callable roles: distributor, second-level reseller, reseller
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
 //  FAILEDOPERATION_EXCEEDMAXBINDCOUNT = "FailedOperation.ExceedMaxBindCount"
 //  FAILEDOPERATION_MAILISREGISTERED = "FailedOperation.MailIsRegistered"
 //  FAILEDOPERATION_PHONEBINDUPPER = "FailedOperation.PhoneBindUpper"
+//  FAILEDOPERATION_TRADEINFOINCORRECT = "FailedOperation.TradeInfoIncorrect"
 //  FAILEDOPERATION_VERIFICATIONCODEILLEGAL = "FailedOperation.VerificationCodeIllegal"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_ACCOUNTTYPECONTENTINCORRECT = "InvalidParameter.AccountTypeContentIncorrect"
@@ -335,6 +346,7 @@ func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateA
 //  INVALIDPARAMETERVALUE_MAILEMPTY = "InvalidParameterValue.MailEmpty"
 //  INVALIDPARAMETERVALUE_PASSWORDEMPTY = "InvalidParameterValue.PasswordEmpty"
 //  INVALIDPARAMETERVALUE_PHONENUMEMPTY = "InvalidParameterValue.PhoneNumEmpty"
+//  INVALIDPARAMETERVALUE_TRADEINFOEMPTY = "InvalidParameterValue.TradeInfoEmpty"
 //  INVALIDPARAMETERVALUE_UNSUPPORTAREA = "InvalidParameterValue.UnSupportArea"
 //  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) CreateAccountWithContext(ctx context.Context, request *CreateAccountRequest) (response *CreateAccountResponse, err error) {
@@ -1123,6 +1135,55 @@ func (c *Client) GetCountryCodesWithContext(ctx context.Context, request *GetCou
     request.SetContext(ctx)
     
     response = NewGetCountryCodesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetTradeConfigListRequest() (request *GetTradeConfigListRequest) {
+    request = &GetTradeConfigListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "GetTradeConfigList")
+    
+    
+    return
+}
+
+func NewGetTradeConfigListResponse() (response *GetTradeConfigListResponse) {
+    response = &GetTradeConfigListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetTradeConfigList
+// This API is used to query industry information, including layer-1 industry and layer-2 industry.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) GetTradeConfigList(request *GetTradeConfigListRequest) (response *GetTradeConfigListResponse, err error) {
+    return c.GetTradeConfigListWithContext(context.Background(), request)
+}
+
+// GetTradeConfigList
+// This API is used to query industry information, including layer-1 industry and layer-2 industry.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) GetTradeConfigListWithContext(ctx context.Context, request *GetTradeConfigListRequest) (response *GetTradeConfigListResponse, err error) {
+    if request == nil {
+        request = NewGetTradeConfigListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTradeConfigList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTradeConfigListResponse()
     err = c.Send(request, response)
     return
 }
