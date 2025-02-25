@@ -477,10 +477,12 @@ type CreateAccountRequestParams struct {
 	// Use the [SendVerifyCode API](https://www.tencentcloud.com/document/product/1085/65907) to obtain the verifycode.The SendVerifyCode API sends a 6-digit verifycode to your specified mobile number via SMS. After receiving it, you need to pass it along with other parameters.
 	VerifyCode *string `json:"VerifyCode,omitnil,omitempty" name:"VerifyCode"`
 
-	// Layer-1 industry id. This is a required item and can be obtained via the [ GetTradeConfigList  API](https://www.tencentcloud.com/zh/document/product/1085/68181).
+	// Layer-1 industry id. This is a required item and can be obtained via the [ GetTradeConfigList  API](https://www.tencentcloud.com/zh/document/product/1085/68181),
+	// such as "kghy_01".
 	TradeOne *string `json:"TradeOne,omitnil,omitempty" name:"TradeOne"`
 
-	// Layer-2 industry id. This is a required item and can be obtained via the [ GetTradeConfigList API](https://www.tencentcloud.com/zh/document/product/1085/68181).
+	// Layer-2 industry id. This is a required item and can be obtained via the [ GetTradeConfigList API](https://www.tencentcloud.com/zh/document/product/1085/68181),
+	// such as "kghy_0101"
 	TradeTwo *string `json:"TradeTwo,omitnil,omitempty" name:"TradeTwo"`
 }
 
@@ -522,10 +524,12 @@ type CreateAccountRequest struct {
 	// Use the [SendVerifyCode API](https://www.tencentcloud.com/document/product/1085/65907) to obtain the verifycode.The SendVerifyCode API sends a 6-digit verifycode to your specified mobile number via SMS. After receiving it, you need to pass it along with other parameters.
 	VerifyCode *string `json:"VerifyCode,omitnil,omitempty" name:"VerifyCode"`
 
-	// Layer-1 industry id. This is a required item and can be obtained via the [ GetTradeConfigList  API](https://www.tencentcloud.com/zh/document/product/1085/68181).
+	// Layer-1 industry id. This is a required item and can be obtained via the [ GetTradeConfigList  API](https://www.tencentcloud.com/zh/document/product/1085/68181),
+	// such as "kghy_01".
 	TradeOne *string `json:"TradeOne,omitnil,omitempty" name:"TradeOne"`
 
-	// Layer-2 industry id. This is a required item and can be obtained via the [ GetTradeConfigList API](https://www.tencentcloud.com/zh/document/product/1085/68181).
+	// Layer-2 industry id. This is a required item and can be obtained via the [ GetTradeConfigList API](https://www.tencentcloud.com/zh/document/product/1085/68181),
+	// such as "kghy_0101"
 	TradeTwo *string `json:"TradeTwo,omitnil,omitempty" name:"TradeTwo"`
 }
 
