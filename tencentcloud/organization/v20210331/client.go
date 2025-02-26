@@ -45,6 +45,71 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewAcceptJoinShareUnitInvitationRequest() (request *AcceptJoinShareUnitInvitationRequest) {
+    request = &AcceptJoinShareUnitInvitationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "AcceptJoinShareUnitInvitation")
+    
+    
+    return
+}
+
+func NewAcceptJoinShareUnitInvitationResponse() (response *AcceptJoinShareUnitInvitationResponse) {
+    response = &AcceptJoinShareUnitInvitationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AcceptJoinShareUnitInvitation
+// This API is used to accept an invitation to join a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHINFOEMPTY = "FailedOperation.AuthInfoEmpty"
+//  FAILEDOPERATION_AUTHINFONOTSAME = "FailedOperation.AuthInfoNotSame"
+//  FAILEDOPERATION_AUTHNOTENTERPRISE = "FailedOperation.AuthNotEnterprise"
+//  FAILEDOPERATION_SHAREMEMBERNOTEXIST = "FailedOperation.ShareMemberNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AcceptJoinShareUnitInvitation(request *AcceptJoinShareUnitInvitationRequest) (response *AcceptJoinShareUnitInvitationResponse, err error) {
+    return c.AcceptJoinShareUnitInvitationWithContext(context.Background(), request)
+}
+
+// AcceptJoinShareUnitInvitation
+// This API is used to accept an invitation to join a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_AUTHINFOEMPTY = "FailedOperation.AuthInfoEmpty"
+//  FAILEDOPERATION_AUTHINFONOTSAME = "FailedOperation.AuthInfoNotSame"
+//  FAILEDOPERATION_AUTHNOTENTERPRISE = "FailedOperation.AuthNotEnterprise"
+//  FAILEDOPERATION_SHAREMEMBERNOTEXIST = "FailedOperation.ShareMemberNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AcceptJoinShareUnitInvitationWithContext(ctx context.Context, request *AcceptJoinShareUnitInvitationRequest) (response *AcceptJoinShareUnitInvitationResponse, err error) {
+    if request == nil {
+        request = NewAcceptJoinShareUnitInvitationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AcceptJoinShareUnitInvitation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAcceptJoinShareUnitInvitationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAddExternalSAMLIdPCertificateRequest() (request *AddExternalSAMLIdPCertificateRequest) {
     request = &AddExternalSAMLIdPCertificateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -236,6 +301,215 @@ func (c *Client) AddPermissionPolicyToRoleConfigurationWithContext(ctx context.C
     request.SetContext(ctx)
     
     response = NewAddPermissionPolicyToRoleConfigurationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAddShareUnitRequest() (request *AddShareUnitRequest) {
+    request = &AddShareUnitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "AddShareUnit")
+    
+    
+    return
+}
+
+func NewAddShareUnitResponse() (response *AddShareUnitResponse) {
+    response = &AddShareUnitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddShareUnit
+// This API is used to create a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHINFOEMPTY = "FailedOperation.AuthInfoEmpty"
+//  FAILEDOPERATION_AUTHNOTENTERPRISE = "FailedOperation.AuthNotEnterprise"
+//  FAILEDOPERATION_RESOURCEOVERLIMIT = "FailedOperation.ResourceOverLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddShareUnit(request *AddShareUnitRequest) (response *AddShareUnitResponse, err error) {
+    return c.AddShareUnitWithContext(context.Background(), request)
+}
+
+// AddShareUnit
+// This API is used to create a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHINFOEMPTY = "FailedOperation.AuthInfoEmpty"
+//  FAILEDOPERATION_AUTHNOTENTERPRISE = "FailedOperation.AuthNotEnterprise"
+//  FAILEDOPERATION_RESOURCEOVERLIMIT = "FailedOperation.ResourceOverLimit"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddShareUnitWithContext(ctx context.Context, request *AddShareUnitRequest) (response *AddShareUnitResponse, err error) {
+    if request == nil {
+        request = NewAddShareUnitRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddShareUnit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddShareUnitResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAddShareUnitMembersRequest() (request *AddShareUnitMembersRequest) {
+    request = &AddShareUnitMembersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "AddShareUnitMembers")
+    
+    
+    return
+}
+
+func NewAddShareUnitMembersResponse() (response *AddShareUnitMembersResponse) {
+    response = &AddShareUnitMembersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddShareUnitMembers
+// This API is used to add a shared unit member.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SHAREAREANOTEXIST = "FailedOperation.ShareAreaNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  FAILEDOPERATION_SOMEUINSNOTINORGANIZATION = "FailedOperation.SomeUinsNotInOrganization"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SHAREUNITMEMBEROVERLIMIT = "LimitExceeded.ShareUnitMemberOverLimit"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_SHARINGTOOTHERORGANIZATIONMEMBER = "UnsupportedOperation.SharingToOtherOrganizationMember"
+func (c *Client) AddShareUnitMembers(request *AddShareUnitMembersRequest) (response *AddShareUnitMembersResponse, err error) {
+    return c.AddShareUnitMembersWithContext(context.Background(), request)
+}
+
+// AddShareUnitMembers
+// This API is used to add a shared unit member.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SHAREAREANOTEXIST = "FailedOperation.ShareAreaNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  FAILEDOPERATION_SOMEUINSNOTINORGANIZATION = "FailedOperation.SomeUinsNotInOrganization"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SHAREUNITMEMBEROVERLIMIT = "LimitExceeded.ShareUnitMemberOverLimit"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_SHARINGTOOTHERORGANIZATIONMEMBER = "UnsupportedOperation.SharingToOtherOrganizationMember"
+func (c *Client) AddShareUnitMembersWithContext(ctx context.Context, request *AddShareUnitMembersRequest) (response *AddShareUnitMembersResponse, err error) {
+    if request == nil {
+        request = NewAddShareUnitMembersRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddShareUnitMembers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddShareUnitMembersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewAddShareUnitResourcesRequest() (request *AddShareUnitResourcesRequest) {
+    request = &AddShareUnitResourcesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "AddShareUnitResources")
+    
+    
+    return
+}
+
+func NewAddShareUnitResourcesResponse() (response *AddShareUnitResourcesResponse) {
+    response = &AddShareUnitResourcesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddShareUnitResources
+// This API is used to add resources to a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_HASDIFFERENTRESOURCETYPE = "FailedOperation.HasDifferentResourceType"
+//  FAILEDOPERATION_SHAREAREANOTEXIST = "FailedOperation.ShareAreaNotExist"
+//  FAILEDOPERATION_SHARERESOURCETYPENOTEXIST = "FailedOperation.ShareResourceTypeNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SHAREUNITRESOURCEOVERLIMIT = "LimitExceeded.ShareUnitResourceOverLimit"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_MEMBERUNSUPPORTEDOPERATION = "UnsupportedOperation.MemberUnsupportedOperation"
+func (c *Client) AddShareUnitResources(request *AddShareUnitResourcesRequest) (response *AddShareUnitResourcesResponse, err error) {
+    return c.AddShareUnitResourcesWithContext(context.Background(), request)
+}
+
+// AddShareUnitResources
+// This API is used to add resources to a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_HASDIFFERENTRESOURCETYPE = "FailedOperation.HasDifferentResourceType"
+//  FAILEDOPERATION_SHAREAREANOTEXIST = "FailedOperation.ShareAreaNotExist"
+//  FAILEDOPERATION_SHARERESOURCETYPENOTEXIST = "FailedOperation.ShareResourceTypeNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SHAREUNITRESOURCEOVERLIMIT = "LimitExceeded.ShareUnitResourceOverLimit"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  UNSUPPORTEDOPERATION_MEMBERUNSUPPORTEDOPERATION = "UnsupportedOperation.MemberUnsupportedOperation"
+func (c *Client) AddShareUnitResourcesWithContext(ctx context.Context, request *AddShareUnitResourcesRequest) (response *AddShareUnitResourcesResponse, err error) {
+    if request == nil {
+        request = NewAddShareUnitResourcesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddShareUnitResources require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddShareUnitResourcesResponse()
     err = c.Send(request, response)
     return
 }
@@ -2022,6 +2296,209 @@ func (c *Client) DeleteSCIMCredentialWithContext(ctx context.Context, request *D
     return
 }
 
+func NewDeleteShareUnitRequest() (request *DeleteShareUnitRequest) {
+    request = &DeleteShareUnitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DeleteShareUnit")
+    
+    
+    return
+}
+
+func NewDeleteShareUnitResponse() (response *DeleteShareUnitResponse) {
+    response = &DeleteShareUnitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteShareUnit
+// This API is used to delete a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteShareUnit(request *DeleteShareUnitRequest) (response *DeleteShareUnitResponse, err error) {
+    return c.DeleteShareUnitWithContext(context.Background(), request)
+}
+
+// DeleteShareUnit
+// This API is used to delete a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteShareUnitWithContext(ctx context.Context, request *DeleteShareUnitRequest) (response *DeleteShareUnitResponse, err error) {
+    if request == nil {
+        request = NewDeleteShareUnitRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteShareUnit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteShareUnitResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteShareUnitMembersRequest() (request *DeleteShareUnitMembersRequest) {
+    request = &DeleteShareUnitMembersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DeleteShareUnitMembers")
+    
+    
+    return
+}
+
+func NewDeleteShareUnitMembersResponse() (response *DeleteShareUnitMembersResponse) {
+    response = &DeleteShareUnitMembersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteShareUnitMembers
+// This API is used to delete a shared unit member.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SHAREAREANOTEXIST = "FailedOperation.ShareAreaNotExist"
+//  FAILEDOPERATION_SHARERESOURCEMEMBERINUSE = "FailedOperation.ShareResourceMemberInUse"
+//  FAILEDOPERATION_SHARERESOURCENOTEXIST = "FailedOperation.ShareResourceNotExist"
+//  FAILEDOPERATION_SHARERESOURCETYPENOTEXIST = "FailedOperation.ShareResourceTypeNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SHAREUNITMEMBEROVERLIMIT = "LimitExceeded.ShareUnitMemberOverLimit"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteShareUnitMembers(request *DeleteShareUnitMembersRequest) (response *DeleteShareUnitMembersResponse, err error) {
+    return c.DeleteShareUnitMembersWithContext(context.Background(), request)
+}
+
+// DeleteShareUnitMembers
+// This API is used to delete a shared unit member.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SHAREAREANOTEXIST = "FailedOperation.ShareAreaNotExist"
+//  FAILEDOPERATION_SHARERESOURCEMEMBERINUSE = "FailedOperation.ShareResourceMemberInUse"
+//  FAILEDOPERATION_SHARERESOURCENOTEXIST = "FailedOperation.ShareResourceNotExist"
+//  FAILEDOPERATION_SHARERESOURCETYPENOTEXIST = "FailedOperation.ShareResourceTypeNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SHAREUNITMEMBEROVERLIMIT = "LimitExceeded.ShareUnitMemberOverLimit"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteShareUnitMembersWithContext(ctx context.Context, request *DeleteShareUnitMembersRequest) (response *DeleteShareUnitMembersResponse, err error) {
+    if request == nil {
+        request = NewDeleteShareUnitMembersRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteShareUnitMembers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteShareUnitMembersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteShareUnitResourcesRequest() (request *DeleteShareUnitResourcesRequest) {
+    request = &DeleteShareUnitResourcesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DeleteShareUnitResources")
+    
+    
+    return
+}
+
+func NewDeleteShareUnitResourcesResponse() (response *DeleteShareUnitResourcesResponse) {
+    response = &DeleteShareUnitResourcesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteShareUnitResources
+// This API is used to delete shared unit resources.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SHAREAREANOTEXIST = "FailedOperation.ShareAreaNotExist"
+//  FAILEDOPERATION_SHARERESOURCEMEMBERINUSE = "FailedOperation.ShareResourceMemberInUse"
+//  FAILEDOPERATION_SHARERESOURCENOTEXIST = "FailedOperation.ShareResourceNotExist"
+//  FAILEDOPERATION_SHARERESOURCETYPENOTEXIST = "FailedOperation.ShareResourceTypeNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SHAREUNITRESOURCEOVERLIMIT = "LimitExceeded.ShareUnitResourceOverLimit"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteShareUnitResources(request *DeleteShareUnitResourcesRequest) (response *DeleteShareUnitResourcesResponse, err error) {
+    return c.DeleteShareUnitResourcesWithContext(context.Background(), request)
+}
+
+// DeleteShareUnitResources
+// This API is used to delete shared unit resources.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_SHAREAREANOTEXIST = "FailedOperation.ShareAreaNotExist"
+//  FAILEDOPERATION_SHARERESOURCEMEMBERINUSE = "FailedOperation.ShareResourceMemberInUse"
+//  FAILEDOPERATION_SHARERESOURCENOTEXIST = "FailedOperation.ShareResourceNotExist"
+//  FAILEDOPERATION_SHARERESOURCETYPENOTEXIST = "FailedOperation.ShareResourceTypeNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SHAREUNITRESOURCEOVERLIMIT = "LimitExceeded.ShareUnitResourceOverLimit"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DeleteShareUnitResourcesWithContext(ctx context.Context, request *DeleteShareUnitResourcesRequest) (response *DeleteShareUnitResourcesResponse, err error) {
+    if request == nil {
+        request = NewDeleteShareUnitResourcesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteShareUnitResources require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteShareUnitResourcesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteUserRequest() (request *DeleteUserRequest) {
     request = &DeleteUserRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2515,6 +2992,242 @@ func (c *Client) DescribeOrganizationNodesWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewDescribeOrganizationNodesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeShareAreasRequest() (request *DescribeShareAreasRequest) {
+    request = &DescribeShareAreasRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DescribeShareAreas")
+    
+    
+    return
+}
+
+func NewDescribeShareAreasResponse() (response *DescribeShareAreasResponse) {
+    response = &DescribeShareAreasResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeShareAreas
+// This API is used to obtain a list of shareable regions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeShareAreas(request *DescribeShareAreasRequest) (response *DescribeShareAreasResponse, err error) {
+    return c.DescribeShareAreasWithContext(context.Background(), request)
+}
+
+// DescribeShareAreas
+// This API is used to obtain a list of shareable regions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeShareAreasWithContext(ctx context.Context, request *DescribeShareAreasRequest) (response *DescribeShareAreasResponse, err error) {
+    if request == nil {
+        request = NewDescribeShareAreasRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeShareAreas require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeShareAreasResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeShareUnitMembersRequest() (request *DescribeShareUnitMembersRequest) {
+    request = &DescribeShareUnitMembersRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DescribeShareUnitMembers")
+    
+    
+    return
+}
+
+func NewDescribeShareUnitMembersResponse() (response *DescribeShareUnitMembersResponse) {
+    response = &DescribeShareUnitMembersResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeShareUnitMembers
+// This API is used to obtain the member list of a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeShareUnitMembers(request *DescribeShareUnitMembersRequest) (response *DescribeShareUnitMembersResponse, err error) {
+    return c.DescribeShareUnitMembersWithContext(context.Background(), request)
+}
+
+// DescribeShareUnitMembers
+// This API is used to obtain the member list of a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeShareUnitMembersWithContext(ctx context.Context, request *DescribeShareUnitMembersRequest) (response *DescribeShareUnitMembersResponse, err error) {
+    if request == nil {
+        request = NewDescribeShareUnitMembersRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeShareUnitMembers require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeShareUnitMembersResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeShareUnitResourcesRequest() (request *DescribeShareUnitResourcesRequest) {
+    request = &DescribeShareUnitResourcesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DescribeShareUnitResources")
+    
+    
+    return
+}
+
+func NewDescribeShareUnitResourcesResponse() (response *DescribeShareUnitResourcesResponse) {
+    response = &DescribeShareUnitResourcesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeShareUnitResources
+// This API is used to obtain the resource list of a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeShareUnitResources(request *DescribeShareUnitResourcesRequest) (response *DescribeShareUnitResourcesResponse, err error) {
+    return c.DescribeShareUnitResourcesWithContext(context.Background(), request)
+}
+
+// DescribeShareUnitResources
+// This API is used to obtain the resource list of a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeShareUnitResourcesWithContext(ctx context.Context, request *DescribeShareUnitResourcesRequest) (response *DescribeShareUnitResourcesResponse, err error) {
+    if request == nil {
+        request = NewDescribeShareUnitResourcesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeShareUnitResources require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeShareUnitResourcesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeShareUnitsRequest() (request *DescribeShareUnitsRequest) {
+    request = &DescribeShareUnitsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DescribeShareUnits")
+    
+    
+    return
+}
+
+func NewDescribeShareUnitsResponse() (response *DescribeShareUnitsResponse) {
+    response = &DescribeShareUnitsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeShareUnits
+// This API is used to obtain a list of shared units.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeShareUnits(request *DescribeShareUnitsRequest) (response *DescribeShareUnitsResponse, err error) {
+    return c.DescribeShareUnitsWithContext(context.Background(), request)
+}
+
+// DescribeShareUnits
+// This API is used to obtain a list of shared units.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) DescribeShareUnitsWithContext(ctx context.Context, request *DescribeShareUnitsRequest) (response *DescribeShareUnitsResponse, err error) {
+    if request == nil {
+        request = NewDescribeShareUnitsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeShareUnits require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeShareUnitsResponse()
     err = c.Send(request, response)
     return
 }
@@ -4328,6 +5041,65 @@ func (c *Client) QuitOrganizationWithContext(ctx context.Context, request *QuitO
     return
 }
 
+func NewRejectJoinShareUnitInvitationRequest() (request *RejectJoinShareUnitInvitationRequest) {
+    request = &RejectJoinShareUnitInvitationRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "RejectJoinShareUnitInvitation")
+    
+    
+    return
+}
+
+func NewRejectJoinShareUnitInvitationResponse() (response *RejectJoinShareUnitInvitationResponse) {
+    response = &RejectJoinShareUnitInvitationResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RejectJoinShareUnitInvitation
+// This API is used to reject an invitation to join a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SHAREMEMBERNOTEXIST = "FailedOperation.ShareMemberNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) RejectJoinShareUnitInvitation(request *RejectJoinShareUnitInvitationRequest) (response *RejectJoinShareUnitInvitationResponse, err error) {
+    return c.RejectJoinShareUnitInvitationWithContext(context.Background(), request)
+}
+
+// RejectJoinShareUnitInvitation
+// This API is used to reject an invitation to join a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SHAREMEMBERNOTEXIST = "FailedOperation.ShareMemberNotExist"
+//  FAILEDOPERATION_SHAREUNITNOTEXIST = "FailedOperation.ShareUnitNotExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) RejectJoinShareUnitInvitationWithContext(ctx context.Context, request *RejectJoinShareUnitInvitationRequest) (response *RejectJoinShareUnitInvitationResponse, err error) {
+    if request == nil {
+        request = NewRejectJoinShareUnitInvitationRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RejectJoinShareUnitInvitation require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRejectJoinShareUnitInvitationResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRemoveExternalSAMLIdPCertificateRequest() (request *RemoveExternalSAMLIdPCertificateRequest) {
     request = &RemoveExternalSAMLIdPCertificateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5074,6 +5846,69 @@ func (c *Client) UpdateSCIMSynchronizationStatusWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewUpdateSCIMSynchronizationStatusResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateShareUnitRequest() (request *UpdateShareUnitRequest) {
+    request = &UpdateShareUnitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "UpdateShareUnit")
+    
+    
+    return
+}
+
+func NewUpdateShareUnitResponse() (response *UpdateShareUnitResponse) {
+    response = &UpdateShareUnitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateShareUnit
+// This API is used to update a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EXISTSHAREMEMBERNOTINORGANIZATION = "FailedOperation.ExistShareMemberNotInOrganization"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateShareUnit(request *UpdateShareUnitRequest) (response *UpdateShareUnitResponse, err error) {
+    return c.UpdateShareUnitWithContext(context.Background(), request)
+}
+
+// UpdateShareUnit
+// This API is used to update a shared unit.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_EXISTSHAREMEMBERNOTINORGANIZATION = "FailedOperation.ExistShareMemberNotInOrganization"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateShareUnitWithContext(ctx context.Context, request *UpdateShareUnitRequest) (response *UpdateShareUnitResponse, err error) {
+    if request == nil {
+        request = NewUpdateShareUnitRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateShareUnit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateShareUnitResponse()
     err = c.Send(request, response)
     return
 }

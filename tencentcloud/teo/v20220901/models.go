@@ -15601,8 +15601,7 @@ type RuleAndConditions struct {
 }
 
 type RuleBranch struct {
-	// [Match condition].
-	// ](Https://Cloud.Tencent.Com/Document/Product/1552/90438#33f65828-C6c6-4b66-A011-25a20b548d5d).
+	// [Match condition](https://www.tencentcloud.com/document/product/1145/54759).
 	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
 
 	// [Operations](Https://Cloud.Tencent.Com/Document/Product/1552/90438#C7bd7e02-9247-4a72-B0e4-11c27cadb198).<Br>Note: actions and subrules cannot both be empty.
