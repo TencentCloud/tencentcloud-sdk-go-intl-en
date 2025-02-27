@@ -2942,7 +2942,11 @@ type SetUserBlockedByStrRoomIdRequestParams struct {
 	// The user ID.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
-	// Whether to disable the user’s audio and video. 0: Enable; 1: Disable.
+	// Controls the activation state of audio and video.
+	// 0: Enable audio and video,
+	// 1: Disable audio and video,
+	// 2: Disable audio only,
+	// 3: Disable video only.
 	IsMute *uint64 `json:"IsMute,omitnil,omitempty" name:"IsMute"`
 }
 
@@ -2958,7 +2962,11 @@ type SetUserBlockedByStrRoomIdRequest struct {
 	// The user ID.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
-	// Whether to disable the user’s audio and video. 0: Enable; 1: Disable.
+	// Controls the activation state of audio and video.
+	// 0: Enable audio and video,
+	// 1: Disable audio and video,
+	// 2: Disable audio only,
+	// 3: Disable video only.
 	IsMute *uint64 `json:"IsMute,omitnil,omitempty" name:"IsMute"`
 }
 
@@ -3017,7 +3025,11 @@ type SetUserBlockedRequestParams struct {
 	// The user ID.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
-	// Whether to disable the user’s audio and video. 0: Enable; 1: Disable.
+	// Controls the activation state of audio and video.
+	// 0: Enable audio and video,
+	// 1: Disable audio and video,
+	// 2: Disable audio only,
+	// 3: Disable video only.
 	IsMute *uint64 `json:"IsMute,omitnil,omitempty" name:"IsMute"`
 }
 
@@ -3033,7 +3045,11 @@ type SetUserBlockedRequest struct {
 	// The user ID.
 	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 
-	// Whether to disable the user’s audio and video. 0: Enable; 1: Disable.
+	// Controls the activation state of audio and video.
+	// 0: Enable audio and video,
+	// 1: Disable audio and video,
+	// 2: Disable audio only,
+	// 3: Disable video only.
 	IsMute *uint64 `json:"IsMute,omitnil,omitempty" name:"IsMute"`
 }
 

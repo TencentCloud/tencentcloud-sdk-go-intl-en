@@ -329,7 +329,7 @@ func NewCommitCertificateInformationResponse() (response *CommitCertificateInfor
 }
 
 // CommitCertificateInformation
-// This API is used to submit a certificate order.
+// Submit payment certificate orders; This API does not maintain new features, and you can use the new API to submit orders. [CertificateOrderSubmit](https://intl.cloud.tencent.com/document/product/400/116032?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
@@ -347,7 +347,7 @@ func (c *Client) CommitCertificateInformation(request *CommitCertificateInformat
 }
 
 // CommitCertificateInformation
-// This API is used to submit a certificate order.
+// Submit payment certificate orders; This API does not maintain new features, and you can use the new API to submit orders. [CertificateOrderSubmit](https://intl.cloud.tencent.com/document/product/400/116032?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
@@ -843,7 +843,7 @@ func NewDescribeCertificateBindResourceTaskDetailResponse() (response *DescribeC
 }
 
 // DescribeCertificateBindResourceTaskDetail
-// This API is used to query the result of an async task created with `CreateCertificateBindResourceSyncTask` to query cloud resources associated with a certificate. The following types of cloud resources are supported: CLB, CDN, WAF, LIVE, VOD, DDOS, TKE, APIGATEWAY, TCB, and TEO (EDGEONE).
+// This API is used to query the task result of CreateCertificateBindResourceSyncTask, returning the asynchronous task result of the certificate associated with cloud resources, supporting the following cloud resources: clb, cdn, waf, live, vod, ddos, tke, apigateway, tcb, teo (edgeOne), cos.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -854,7 +854,7 @@ func (c *Client) DescribeCertificateBindResourceTaskDetail(request *DescribeCert
 }
 
 // DescribeCertificateBindResourceTaskDetail
-// This API is used to query the result of an async task created with `CreateCertificateBindResourceSyncTask` to query cloud resources associated with a certificate. The following types of cloud resources are supported: CLB, CDN, WAF, LIVE, VOD, DDOS, TKE, APIGATEWAY, TCB, and TEO (EDGEONE).
+// This API is used to query the task result of CreateCertificateBindResourceSyncTask, returning the asynchronous task result of the certificate associated with cloud resources, supporting the following cloud resources: clb, cdn, waf, live, vod, ddos, tke, apigateway, tcb, teo (edgeOne), cos.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1168,7 +1168,7 @@ func NewDescribeHostTeoInstanceListResponse() (response *DescribeHostTeoInstance
 }
 
 // DescribeHostTeoInstanceList
-// This API is used to query the list of EDGEONE instances to which a certificate can be deployed.
+// This API is used to query the list of EdgeOne instances to which a certificate can be deployed.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1187,7 +1187,7 @@ func (c *Client) DescribeHostTeoInstanceList(request *DescribeHostTeoInstanceLis
 }
 
 // DescribeHostTeoInstanceList
-// This API is used to query the list of EDGEONE instances to which a certificate can be deployed.
+// This API is used to query the list of EdgeOne instances to which a certificate can be deployed.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1302,7 +1302,7 @@ func NewDescribeHostUpdateRecordDetailResponse() (response *DescribeHostUpdateRe
 }
 
 // DescribeHostUpdateRecordDetail
-// Query certificate cloud resource update record details list
+// This API is used to query the update record details of certificate cloud resources.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1319,7 +1319,7 @@ func (c *Client) DescribeHostUpdateRecordDetail(request *DescribeHostUpdateRecor
 }
 
 // DescribeHostUpdateRecordDetail
-// Query certificate cloud resource update record details list
+// This API is used to query the update record details of certificate cloud resources.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1769,7 +1769,7 @@ func NewSubmitCertificateInformationResponse() (response *SubmitCertificateInfor
 }
 
 // SubmitCertificateInformation
-// This API is used to submit certificate information.
+// Submit documentation for paid certificates; This API does not maintain new features, and you can use the new API to submit documentation. [CertificateInfoSubmit](https://intl.cloud.tencent.com/document/product/400/116033?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
@@ -1785,7 +1785,7 @@ func (c *Client) SubmitCertificateInformation(request *SubmitCertificateInformat
 }
 
 // SubmitCertificateInformation
-// This API is used to submit certificate information.
+// Submit documentation for paid certificates; This API does not maintain new features, and you can use the new API to submit documentation. [CertificateInfoSubmit](https://intl.cloud.tencent.com/document/product/400/116033?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
@@ -1832,7 +1832,7 @@ func NewUpdateCertificateInstanceResponse() (response *UpdateCertificateInstance
 }
 
 // UpdateCertificateInstance
-// This API is used to update old certificate resources with one click and is an asynchronous interface. After this API is called, the returned DeployRecordId being 0 indicates that the task is in progress, and the returned DeployRecordId being greater than 0 indicates that the task is successfully created. If the creation fails, an exception is returned.
+// This API is used to one-click update old certificate resources. This API is asynchronous. After calling it, if DeployRecordId is 0, it means the task is in progress. Repeat the request to this API. When the returned DeployRecordId is greater than 0, it means the task creation is successful. If it is not created successfully, an exception will be thrown.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1856,13 +1856,14 @@ func NewUpdateCertificateInstanceResponse() (response *UpdateCertificateInstance
 //  FAILEDOPERATION_ROLENOTFOUNDAUTHORIZATION = "FailedOperation.RoleNotFoundAuthorization"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+//  INVALIDPARAMETERVALUE_INTERMEDIATECERTNOTSAME = "InvalidParameterValue.IntermediateCertNotSame"
 //  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) UpdateCertificateInstance(request *UpdateCertificateInstanceRequest) (response *UpdateCertificateInstanceResponse, err error) {
     return c.UpdateCertificateInstanceWithContext(context.Background(), request)
 }
 
 // UpdateCertificateInstance
-// This API is used to update old certificate resources with one click and is an asynchronous interface. After this API is called, the returned DeployRecordId being 0 indicates that the task is in progress, and the returned DeployRecordId being greater than 0 indicates that the task is successfully created. If the creation fails, an exception is returned.
+// This API is used to one-click update old certificate resources. This API is asynchronous. After calling it, if DeployRecordId is 0, it means the task is in progress. Repeat the request to this API. When the returned DeployRecordId is greater than 0, it means the task creation is successful. If it is not created successfully, an exception will be thrown.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1886,6 +1887,7 @@ func (c *Client) UpdateCertificateInstance(request *UpdateCertificateInstanceReq
 //  FAILEDOPERATION_ROLENOTFOUNDAUTHORIZATION = "FailedOperation.RoleNotFoundAuthorization"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+//  INVALIDPARAMETERVALUE_INTERMEDIATECERTNOTSAME = "InvalidParameterValue.IntermediateCertNotSame"
 //  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
 func (c *Client) UpdateCertificateInstanceWithContext(ctx context.Context, request *UpdateCertificateInstanceRequest) (response *UpdateCertificateInstanceResponse, err error) {
     if request == nil {

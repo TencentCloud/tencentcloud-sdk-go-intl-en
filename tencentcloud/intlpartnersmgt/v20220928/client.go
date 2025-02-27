@@ -67,7 +67,11 @@ func NewAllocateCreditPoolResponse() (response *AllocateCreditPoolResponse) {
 // AllocateCreditPool
 // This API is used to allocate credit pools to second-level resellers by distributors.
 //
+// Callable roles: Distributor
+//
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_VOUCHERAMOUNTOUTOFRANGE = "InvalidParameterValue.VoucherAmountOutOfRange"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) AllocateCreditPool(request *AllocateCreditPoolRequest) (response *AllocateCreditPoolResponse, err error) {
     return c.AllocateCreditPoolWithContext(context.Background(), request)
@@ -76,7 +80,11 @@ func (c *Client) AllocateCreditPool(request *AllocateCreditPoolRequest) (respons
 // AllocateCreditPool
 // This API is used to allocate credit pools to second-level resellers by distributors.
 //
+// Callable roles: Distributor
+//
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE_VOUCHERAMOUNTOUTOFRANGE = "InvalidParameterValue.VoucherAmountOutOfRange"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) AllocateCreditPoolWithContext(ctx context.Context, request *AllocateCreditPoolRequest) (response *AllocateCreditPoolResponse, err error) {
     if request == nil {
@@ -124,9 +132,15 @@ func NewAllocateCustomerCreditResponse() (response *AllocateCustomerCreditRespon
 //
 // 4. The set credit is an increment of the current available credit and cannot exceed the remaining allocable credit. Setting the credit to a negative value indicates that it will be repossessed. The available credit can be set to 0 at the minimum.
 //
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
 //  INVALIDPARAMETERVALUE_CREDITAMOUNTOUTOFRANGE = "InvalidParameterValue.CreditAmountOutOfRange"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) AllocateCustomerCredit(request *AllocateCustomerCreditRequest) (response *AllocateCustomerCreditResponse, err error) {
     return c.AllocateCustomerCreditWithContext(context.Background(), request)
@@ -143,9 +157,15 @@ func (c *Client) AllocateCustomerCredit(request *AllocateCustomerCreditRequest) 
 //
 // 4. The set credit is an increment of the current available credit and cannot exceed the remaining allocable credit. Setting the credit to a negative value indicates that it will be repossessed. The available credit can be set to 0 at the minimum.
 //
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
 //  INVALIDPARAMETERVALUE_CREDITAMOUNTOUTOFRANGE = "InvalidParameterValue.CreditAmountOutOfRange"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) AllocateCustomerCreditWithContext(ctx context.Context, request *AllocateCustomerCreditRequest) (response *AllocateCustomerCreditResponse, err error) {
     if request == nil {
@@ -276,7 +296,7 @@ func NewCreateAccountResponse() (response *CreateAccountResponse) {
 //
 // 
 //
-// Callable roles: distributor, second-level reseller, reseller
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -320,7 +340,7 @@ func (c *Client) CreateAccount(request *CreateAccountRequest) (response *CreateA
 //
 // 
 //
-// Callable roles: distributor, second-level reseller, reseller
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -397,6 +417,10 @@ func NewCreateAndSendClientInvitationMailResponse() (response *CreateAndSendClie
 //
 // Note:This API is used to manually send the invitation link to the customer if the specified email does not receive it.
 //
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  FAILEDOPERATION_SENDMAILLIMIT180 = "FailedOperation.SendMailLimit180"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -417,6 +441,10 @@ func (c *Client) CreateAndSendClientInvitationMail(request *CreateAndSendClientI
 // 
 //
 // Note:This API is used to manually send the invitation link to the customer if the specified email does not receive it.
+//
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SENDMAILLIMIT180 = "FailedOperation.SendMailLimit180"
@@ -458,7 +486,9 @@ func NewDescribeBillDetailResponse() (response *DescribeBillDetailResponse) {
 }
 
 // DescribeBillDetail
-// This API is used to query bill details by customers.
+// Description: End-customer queries its own bill details.
+//
+// Callable role: End-customer.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -469,7 +499,9 @@ func (c *Client) DescribeBillDetail(request *DescribeBillDetailRequest) (respons
 }
 
 // DescribeBillDetail
-// This API is used to query bill details by customers.
+// Description: End-customer queries its own bill details.
+//
+// Callable role: End-customer.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -511,7 +543,9 @@ func NewDescribeBillDownloadUrlResponse() (response *DescribeBillDownloadUrlResp
 }
 
 // DescribeBillDownloadUrl
-// This API is used to download billing files and return billing file URLs by customers.
+// Description: This API is used to download billing files and return billing file URLs for sub-customers.
+//
+// Callable role: Enb-customer.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -521,7 +555,9 @@ func (c *Client) DescribeBillDownloadUrl(request *DescribeBillDownloadUrlRequest
 }
 
 // DescribeBillDownloadUrl
-// This API is used to download billing files and return billing file URLs by customers.
+// Description: This API is used to download billing files and return billing file URLs for sub-customers.
+//
+// Callable role: Enb-customer.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -562,7 +598,9 @@ func NewDescribeBillSummaryResponse() (response *DescribeBillSummaryResponse) {
 }
 
 // DescribeBillSummary
-// External API for the L1 billing of the customer billing center
+// Description: External API for L1 billing of Sub-customer billing center.
+//
+// Callable role: End-customer.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -576,7 +614,9 @@ func (c *Client) DescribeBillSummary(request *DescribeBillSummaryRequest) (respo
 }
 
 // DescribeBillSummary
-// External API for the L1 billing of the customer billing center
+// Description: External API for L1 billing of Sub-customer billing center.
+//
+// Callable role: End-customer.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -623,6 +663,8 @@ func NewDescribeBillSummaryByPayModeResponse() (response *DescribeBillSummaryByP
 // DescribeBillSummaryByPayMode
 // This API is used to obtain the total amount of customer bills by payment mode.
 //
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -633,6 +675,8 @@ func (c *Client) DescribeBillSummaryByPayMode(request *DescribeBillSummaryByPayM
 
 // DescribeBillSummaryByPayMode
 // This API is used to obtain the total amount of customer bills by payment mode.
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -674,7 +718,9 @@ func NewDescribeBillSummaryByProductResponse() (response *DescribeBillSummaryByP
 }
 
 // DescribeBillSummaryByProduct
-// This API is used to obtain the total amount of customer bills by product.
+// Description: Obtain the summarized value of sub - account bills by product dimension.
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -685,7 +731,9 @@ func (c *Client) DescribeBillSummaryByProduct(request *DescribeBillSummaryByProd
 }
 
 // DescribeBillSummaryByProduct
-// This API is used to obtain the total amount of customer bills by product.
+// Description: Obtain the summarized value of sub - account bills by product dimension.
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -727,7 +775,9 @@ func NewDescribeBillSummaryByRegionResponse() (response *DescribeBillSummaryByRe
 }
 
 // DescribeBillSummaryByRegion
-// This API is used to obtain the total amount of customer bills by region.
+// Description: Obtain the summarized value of sub - account bills by region through API.
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -738,7 +788,9 @@ func (c *Client) DescribeBillSummaryByRegion(request *DescribeBillSummaryByRegio
 }
 
 // DescribeBillSummaryByRegion
-// This API is used to obtain the total amount of customer bills by region.
+// Description: Obtain the summarized value of sub - account bills by region through API.
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -782,6 +834,8 @@ func NewDescribeCustomerBillDetailResponse() (response *DescribeCustomerBillDeta
 // DescribeCustomerBillDetail
 // This API is used to query the customer bill details by resellers.
 //
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -793,6 +847,8 @@ func (c *Client) DescribeCustomerBillDetail(request *DescribeCustomerBillDetailR
 
 // DescribeCustomerBillDetail
 // This API is used to query the customer bill details by resellers.
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -898,6 +954,8 @@ func NewDescribeCustomerBillSummaryResponse() (response *DescribeCustomerBillSum
 // DescribeCustomerBillSummary
 // This API is used to query the total amount of customer bills.
 //
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -908,6 +966,8 @@ func (c *Client) DescribeCustomerBillSummary(request *DescribeCustomerBillSummar
 
 // DescribeCustomerBillSummary
 // This API is used to query the total amount of customer bills.
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -951,6 +1011,10 @@ func NewDescribeCustomerInfoResponse() (response *DescribeCustomerInfoResponse) 
 // DescribeCustomerInfo
 // This API is used to query the customer information.
 //
+// 
+//
+// Callable roles: Distributor, Reseller
+//
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
@@ -960,6 +1024,10 @@ func (c *Client) DescribeCustomerInfo(request *DescribeCustomerInfoRequest) (res
 
 // DescribeCustomerInfo
 // This API is used to query the customer information.
+//
+// 
+//
+// Callable roles: Distributor, Reseller
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -1053,9 +1121,11 @@ func NewForceQNResponse() (response *ForceQNResponse) {
 }
 
 // ForceQN
-// This API is used to set and cancel forced service suspension.
+// Forced Service Suspension settings and cancellation can be used only after the reseller is whitelisted.
 //
-// Note:Reseller need to be allowlisted to use the API, please contact your business representative to apply for allowlist.
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PAGE = "InvalidParameter.Page"
@@ -1066,9 +1136,11 @@ func (c *Client) ForceQN(request *ForceQNRequest) (response *ForceQNResponse, er
 }
 
 // ForceQN
-// This API is used to set and cancel forced service suspension.
+// Forced Service Suspension settings and cancellation can be used only after the reseller is whitelisted.
 //
-// Note:Reseller need to be allowlisted to use the API, please contact your business representative to apply for allowlist.
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PAGE = "InvalidParameter.Page"
@@ -1161,6 +1233,10 @@ func NewGetTradeConfigListResponse() (response *GetTradeConfigListResponse) {
 // GetTradeConfigList
 // This API is used to query industry information, including layer-1 industry and layer-2 industry.
 //
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller,End-customer
+//
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 func (c *Client) GetTradeConfigList(request *GetTradeConfigListRequest) (response *GetTradeConfigListResponse, err error) {
@@ -1169,6 +1245,10 @@ func (c *Client) GetTradeConfigList(request *GetTradeConfigListRequest) (respons
 
 // GetTradeConfigList
 // This API is used to query industry information, including layer-1 industry and layer-2 industry.
+//
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller,End-customer
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -1210,6 +1290,10 @@ func NewModifyClientRemarkResponse() (response *ModifyClientRemarkResponse) {
 // ModifyClientRemark
 // This API is used to modify customer remarks.
 //
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1221,6 +1305,10 @@ func (c *Client) ModifyClientRemark(request *ModifyClientRemarkRequest) (respons
 
 // ModifyClientRemark
 // This API is used to modify customer remarks.
+//
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1265,6 +1353,8 @@ func NewQueryAccountVerificationStatusResponse() (response *QueryAccountVerifica
 // QueryAccountVerificationStatus
 // This API is used to query the account verification status.
 //
+// Callable roles: Distributor, Reseller
+//
 // error code that may be returned:
 //  FAILEDOPERATION_UININVALID = "FailedOperation.UinInvalid"
 //  INTERNALERROR = "InternalError"
@@ -1280,6 +1370,8 @@ func (c *Client) QueryAccountVerificationStatus(request *QueryAccountVerificatio
 
 // QueryAccountVerificationStatus
 // This API is used to query the account verification status.
+//
+// Callable roles: Distributor, Reseller
 //
 // error code that may be returned:
 //  FAILEDOPERATION_UININVALID = "FailedOperation.UinInvalid"
@@ -1328,6 +1420,8 @@ func NewQueryCreditAllocationHistoryResponse() (response *QueryCreditAllocationH
 // QueryCreditAllocationHistory
 // This API is used to query all the credit allocation records of a single customer.
 //
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 func (c *Client) QueryCreditAllocationHistory(request *QueryCreditAllocationHistoryRequest) (response *QueryCreditAllocationHistoryResponse, err error) {
@@ -1336,6 +1430,8 @@ func (c *Client) QueryCreditAllocationHistory(request *QueryCreditAllocationHist
 
 // QueryCreditAllocationHistory
 // This API is used to query all the credit allocation records of a single customer.
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1377,6 +1473,8 @@ func NewQueryCreditByUinListResponse() (response *QueryCreditByUinListResponse) 
 // QueryCreditByUinList
 // This API is used to query the credit of users in the list.
 //
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  FAILEDOPERATION_UINNOTAGENT = "FailedOperation.UinNotAgent"
 //  INTERNALERROR = "InternalError"
@@ -1392,6 +1490,8 @@ func (c *Client) QueryCreditByUinList(request *QueryCreditByUinListRequest) (res
 
 // QueryCreditByUinList
 // This API is used to query the credit of users in the list.
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  FAILEDOPERATION_UINNOTAGENT = "FailedOperation.UinNotAgent"
@@ -1414,55 +1514,6 @@ func (c *Client) QueryCreditByUinListWithContext(ctx context.Context, request *Q
     request.SetContext(ctx)
     
     response = NewQueryCreditByUinListResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewQueryCreditQuotaRequest() (request *QueryCreditQuotaRequest) {
-    request = &QueryCreditQuotaRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "QueryCreditQuota")
-    
-    
-    return
-}
-
-func NewQueryCreditQuotaResponse() (response *QueryCreditQuotaResponse) {
-    response = &QueryCreditQuotaResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// QueryCreditQuota
-// This API is used to query customer credits.
-//
-// error code that may be returned:
-//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
-func (c *Client) QueryCreditQuota(request *QueryCreditQuotaRequest) (response *QueryCreditQuotaResponse, err error) {
-    return c.QueryCreditQuotaWithContext(context.Background(), request)
-}
-
-// QueryCreditQuota
-// This API is used to query customer credits.
-//
-// error code that may be returned:
-//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
-func (c *Client) QueryCreditQuotaWithContext(ctx context.Context, request *QueryCreditQuotaRequest) (response *QueryCreditQuotaResponse, err error) {
-    if request == nil {
-        request = NewQueryCreditQuotaRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("QueryCreditQuota require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewQueryCreditQuotaResponse()
     err = c.Send(request, response)
     return
 }
@@ -1546,8 +1597,13 @@ func NewQueryCustomersCreditResponse() (response *QueryCustomersCreditResponse) 
 // QueryCustomersCredit
 // This API is used for a partner to the credits and basic information of cutomers.
 //
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDUIN = "InvalidParameterValue.InvalidUin"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryCustomersCredit(request *QueryCustomersCreditRequest) (response *QueryCustomersCreditResponse, err error) {
@@ -1557,8 +1613,13 @@ func (c *Client) QueryCustomersCredit(request *QueryCustomersCreditRequest) (res
 // QueryCustomersCredit
 // This API is used for a partner to the credits and basic information of cutomers.
 //
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETERVALUE_INVALIDUIN = "InvalidParameterValue.InvalidUin"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryCustomersCreditWithContext(ctx context.Context, request *QueryCustomersCreditRequest) (response *QueryCustomersCreditResponse, err error) {
@@ -1599,10 +1660,12 @@ func NewQueryDirectCustomersCreditResponse() (response *QueryDirectCustomersCred
 // QueryDirectCustomersCredit
 // This API is used to query the credits of direct customers.
 //
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryDirectCustomersCredit(request *QueryDirectCustomersCreditRequest) (response *QueryDirectCustomersCreditResponse, err error) {
@@ -1612,10 +1675,12 @@ func (c *Client) QueryDirectCustomersCredit(request *QueryDirectCustomersCreditR
 // QueryDirectCustomersCredit
 // This API is used to query the credits of direct customers.
 //
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  OPERATIONDENIED = "OperationDenied"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryDirectCustomersCreditWithContext(ctx context.Context, request *QueryDirectCustomersCreditRequest) (response *QueryDirectCustomersCreditResponse, err error) {
@@ -1656,6 +1721,10 @@ func NewQueryPartnerCreditResponse() (response *QueryPartnerCreditResponse) {
 // QueryPartnerCredit
 // This API is used for a partner to query its own total credit, available credit, and used credit in USD.
 //
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
+//
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -1666,6 +1735,10 @@ func (c *Client) QueryPartnerCredit(request *QueryPartnerCreditRequest) (respons
 
 // QueryPartnerCredit
 // This API is used for a partner to query its own total credit, available credit, and used credit in USD.
+//
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1764,7 +1837,9 @@ func NewQueryPolicyProductListByCodeResponse() (response *QueryPolicyProductList
 }
 
 // QueryPolicyProductListByCode
-// This API is used to query the product list information within the specified policy range. To call this API, contact your account manager to add it to the allowlist.
+// This API is used to query the product list information within the specified policy range. To call this API, contact your business manager to apply for adding it to the allowlist.
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -1773,7 +1848,9 @@ func (c *Client) QueryPolicyProductListByCode(request *QueryPolicyProductListByC
 }
 
 // QueryPolicyProductListByCode
-// This API is used to query the product list information within the specified policy range. To call this API, contact your account manager to add it to the allowlist.
+// This API is used to query the product list information within the specified policy range. To call this API, contact your business manager to apply for adding it to the allowlist.
+//
+// Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -1813,7 +1890,9 @@ func NewQueryVoucherAmountByUinResponse() (response *QueryVoucherAmountByUinResp
 }
 
 // QueryVoucherAmountByUin
-// This API is used to query the voucher quota based on the customer UIN.
+// This API is used by primary/secondary resellers to query the voucher quota based on the customer UIN.
+//
+// Callable roles: Reseller, Distributor, Second-level reseller
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -1822,7 +1901,9 @@ func (c *Client) QueryVoucherAmountByUin(request *QueryVoucherAmountByUinRequest
 }
 
 // QueryVoucherAmountByUin
-// This API is used to query the voucher quota based on the customer UIN.
+// This API is used by primary/secondary resellers to query the voucher quota based on the customer UIN.
+//
+// Callable roles: Reseller, Distributor, Second-level reseller
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -1862,7 +1943,9 @@ func NewQueryVoucherListByUinResponse() (response *QueryVoucherListByUinResponse
 }
 
 // QueryVoucherListByUin
-// This API is used to query the voucher list based on the customer UIN.
+// This API is used by primary/secondary resellers to query the voucher list based on the customer UIN.
+//
+// Callable roles: Reseller, Distributor, Second-level reseller
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -1871,7 +1954,9 @@ func (c *Client) QueryVoucherListByUin(request *QueryVoucherListByUinRequest) (r
 }
 
 // QueryVoucherListByUin
-// This API is used to query the voucher list based on the customer UIN.
+// This API is used by primary/secondary resellers to query the voucher list based on the customer UIN.
+//
+// Callable roles: Reseller, Distributor, Second-level reseller
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -1911,7 +1996,9 @@ func NewQueryVoucherPoolResponse() (response *QueryVoucherPoolResponse) {
 }
 
 // QueryVoucherPool
-// This API is used to query the voucher quota pool.
+// This API is used by primary/secondary resellers to query the voucher quota pool.
+//
+// Callable roles: Distributor, First-level reseller, Second-level reseller
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -1920,7 +2007,9 @@ func (c *Client) QueryVoucherPool(request *QueryVoucherPoolRequest) (response *Q
 }
 
 // QueryVoucherPool
-// This API is used to query the voucher quota pool.
+// This API is used by primary/secondary resellers to query the voucher quota pool.
+//
+// Callable roles: Distributor, First-level reseller, Second-level reseller
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -1962,6 +2051,10 @@ func NewSendVerifyCodeResponse() (response *SendVerifyCodeResponse) {
 // SendVerifyCode
 // This API is used to send a verification code for account registration.
 //
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller,End-customer
+//
 // error code that may be returned:
 //  FAILEDOPERATION_PHONEBINDUPPER = "FailedOperation.PhoneBindUpper"
 //  FAILEDOPERATION_SENDVERIFYCODELIMIT = "FailedOperation.SendVerifyCodeLimit"
@@ -1974,6 +2067,10 @@ func (c *Client) SendVerifyCode(request *SendVerifyCodeRequest) (response *SendV
 
 // SendVerifyCode
 // This API is used to send a verification code for account registration.
+//
+// 
+//
+// Callable roles: Distributor, Second-level reseller, Reseller,End-customer
 //
 // error code that may be returned:
 //  FAILEDOPERATION_PHONEBINDUPPER = "FailedOperation.PhoneBindUpper"

@@ -4183,6 +4183,9 @@ type RecognizeThaiPinkCardResponseParams struct {
 	// Name in English
 	EnName *string `json:"EnName,omitnil,omitempty" name:"EnName"`
 
+	// Surname in Thai
+	ThaiSurName *string `json:"ThaiSurName,omitnil,omitempty" name:"ThaiSurName"`
+
 	// Date of birth in Thai
 	ThaiDOB *string `json:"ThaiDOB,omitnil,omitempty" name:"ThaiDOB"`
 
