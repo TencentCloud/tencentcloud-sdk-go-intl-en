@@ -856,7 +856,7 @@ func NewCreateLaunchTemplateResponse() (response *CreateLaunchTemplateResponse) 
 //
 // 
 //
-// When a template is created, it defaults to Version 1. You can use `CreateLaunchTemplateVersion` to create new versions of this template, with the version number increasing. When you run `RunInstances` to create instances, you can specify the instance launch template version. If it’s not specified, the default template version is used.
+// When a template is created, it defaults to Version 1. You can use `CreateLaunchTemplateVersion` to create new versions of this template, with the version number increasing. When you run `RunInstances` to create instances, you can specify the instance launch template version. If it's not specified, the default template version is used.
 //
 // error code that may be returned:
 //  ACCOUNTQUALIFICATIONRESTRICTIONS = "AccountQualificationRestrictions"
@@ -962,7 +962,7 @@ func (c *Client) CreateLaunchTemplate(request *CreateLaunchTemplateRequest) (res
 //
 // 
 //
-// When a template is created, it defaults to Version 1. You can use `CreateLaunchTemplateVersion` to create new versions of this template, with the version number increasing. When you run `RunInstances` to create instances, you can specify the instance launch template version. If it’s not specified, the default template version is used.
+// When a template is created, it defaults to Version 1. You can use `CreateLaunchTemplateVersion` to create new versions of this template, with the version number increasing. When you run `RunInstances` to create instances, you can specify the instance launch template version. If it's not specified, the default template version is used.
 //
 // error code that may be returned:
 //  ACCOUNTQUALIFICATIONRESTRICTIONS = "AccountQualificationRestrictions"

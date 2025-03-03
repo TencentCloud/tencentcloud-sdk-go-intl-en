@@ -1010,6 +1010,12 @@ type CreateLaunchTemplateRequestParams struct {
 
 	// Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
+
+
+	DisableApiTermination *bool `json:"DisableApiTermination,omitnil,omitempty" name:"DisableApiTermination"`
+
+	// Instance launch template tag description list. By specifying the TemplateTag parameter, you can bind tags to the instance launch template.
+	LaunchTemplateTagSpecification []*TagSpecification `json:"LaunchTemplateTagSpecification,omitnil,omitempty" name:"LaunchTemplateTagSpecification"`
 }
 
 type CreateLaunchTemplateRequest struct {
@@ -1097,6 +1103,11 @@ type CreateLaunchTemplateRequest struct {
 
 	// Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
+
+	DisableApiTermination *bool `json:"DisableApiTermination,omitnil,omitempty" name:"DisableApiTermination"`
+
+	// Instance launch template tag description list. By specifying the TemplateTag parameter, you can bind tags to the instance launch template.
+	LaunchTemplateTagSpecification []*TagSpecification `json:"LaunchTemplateTagSpecification,omitnil,omitempty" name:"LaunchTemplateTagSpecification"`
 }
 
 func (r *CreateLaunchTemplateRequest) ToJsonString() string {
@@ -1137,6 +1148,8 @@ func (r *CreateLaunchTemplateRequest) FromJsonString(s string) error {
 	delete(f, "HpcClusterId")
 	delete(f, "InstanceChargeType")
 	delete(f, "InstanceChargePrepaid")
+	delete(f, "DisableApiTermination")
+	delete(f, "LaunchTemplateTagSpecification")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateLaunchTemplateRequest has unknown keys!", "")
 	}
