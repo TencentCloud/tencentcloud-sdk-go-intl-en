@@ -1936,31 +1936,31 @@ type PayModeSummaryOverviewItem struct {
 }
 
 type PolicyProductList struct {
-	// Dealer policy code.
+	//  Policy code.
 	PolicyCode *string `json:"PolicyCode,omitnil,omitempty" name:"PolicyCode"`
 
-	// Product level 1 code. If the return value is *, any item at this level is included in the policy product range.
+	// The code of the ProductName field in the  bill data. If the return value is *, any item at this level is included in the policy product range.
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
-	// Product level 1 name. If the return value is *, any item at this level is included in the policy product range.
+	// The ProductName field value in the billing data. If the return value is *, any item at this level is included in the policy product range.
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-	// Product level 2 code. If the return value is *, any item at this level is included in the policy product range.
+	// The code of the SubProduct field in the  bill data. If the return value is *, any item at this level is included in the policy product range.
 	SubProductCode *string `json:"SubProductCode,omitnil,omitempty" name:"SubProductCode"`
 
-	// Product level 2 name. If the return value is *, any item at this level is included in the policy product range.
+	// The SubProduct field value in the billing data. If the return value is *, any item at this level is included in the policy product range.
 	SubProductName *string `json:"SubProductName,omitnil,omitempty" name:"SubProductName"`
 
-	// Product level 3 code. If the return value is *, any item at this level is included in the policy product range.
+	// The code of the ComponentType field in the  bill data. If the return value is *, any item at this level is included in the policy product range.
 	ComponentTypeCode *string `json:"ComponentTypeCode,omitnil,omitempty" name:"ComponentTypeCode"`
 
-	// Product level 3 name. If the return value is *, any item at this level is included in the policy product range.
+	// The ComponentType field value in the billing data. If the return value is *, any item at this level is included in the policy product range.
 	ComponentTypeName *string `json:"ComponentTypeName,omitnil,omitempty" name:"ComponentTypeName"`
 
-	// Product level 4 code. If the return value is *, any item at this level is included in the policy product range.
+	// The code of the Component field in the  bill data. If the return value is *, any item at this level is included in the policy product range.
 	ComponentCode *string `json:"ComponentCode,omitnil,omitempty" name:"ComponentCode"`
 
-	// Product fourth-level name. If the return value is *, any item under this level is included in the policy product scope.
+	// The Component field value in the billing data. If the return value is *, any item at this level is included in the policy product range.
 	ComponentName *string `json:"ComponentName,omitnil,omitempty" name:"ComponentName"`
 
 	// Policy effective time.
@@ -2617,19 +2617,19 @@ type QueryPendingCustomersItem struct {
 
 // Predefined struct for user
 type QueryPolicyProductListByCodeRequestParams struct {
-	// Dealer policy code.
+	// Policy code.
 	PolicyCode *string `json:"PolicyCode,omitnil,omitempty" name:"PolicyCode"`
 
-	// Product level 1 code.
+	// The code of the ProductName field in the  bill data.
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
-	// Product level 1 name.
+	// The ProductName field value in the billing data.
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-	// Product level 2 code.
+	// The code of the SubProductName field in the  bill data.
 	SubProductCode *string `json:"SubProductCode,omitnil,omitempty" name:"SubProductCode"`
 
-	// Product level 2 name.
+	// The SubProductName field value in the billing data.
 	SubProductName *string `json:"SubProductName,omitnil,omitempty" name:"SubProductName"`
 
 	// Page parameter: current page number. The minimum value is 1.
@@ -2642,19 +2642,19 @@ type QueryPolicyProductListByCodeRequestParams struct {
 type QueryPolicyProductListByCodeRequest struct {
 	*tchttp.BaseRequest
 	
-	// Dealer policy code.
+	// Policy code.
 	PolicyCode *string `json:"PolicyCode,omitnil,omitempty" name:"PolicyCode"`
 
-	// Product level 1 code.
+	// The code of the ProductName field in the  bill data.
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
-	// Product level 1 name.
+	// The ProductName field value in the billing data.
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-	// Product level 2 code.
+	// The code of the SubProductName field in the  bill data.
 	SubProductCode *string `json:"SubProductCode,omitnil,omitempty" name:"SubProductCode"`
 
-	// Product level 2 name.
+	// The SubProductName field value in the billing data.
 	SubProductName *string `json:"SubProductName,omitnil,omitempty" name:"SubProductName"`
 
 	// Page parameter: current page number. The minimum value is 1.
@@ -2691,7 +2691,7 @@ func (r *QueryPolicyProductListByCodeRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type QueryPolicyProductListByCodeResponseParams struct {
-	// Dealer policy product list.
+	// policy product list.
 	ProductList []*PolicyProductList `json:"ProductList,omitnil,omitempty" name:"ProductList"`
 
 	// Total number of data entries
