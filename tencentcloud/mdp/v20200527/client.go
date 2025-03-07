@@ -45,6 +45,59 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewBindLinearAssemblyCDNDomainWithChannelRequest() (request *BindLinearAssemblyCDNDomainWithChannelRequest) {
+    request = &BindLinearAssemblyCDNDomainWithChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "BindLinearAssemblyCDNDomainWithChannel")
+    
+    
+    return
+}
+
+func NewBindLinearAssemblyCDNDomainWithChannelResponse() (response *BindLinearAssemblyCDNDomainWithChannelResponse) {
+    response = &BindLinearAssemblyCDNDomainWithChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// BindLinearAssemblyCDNDomainWithChannel
+// Linear Assembly channel is bound to CDN playback domain name.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CDNDOMAIN = "InvalidParameter.CdnDomain"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+func (c *Client) BindLinearAssemblyCDNDomainWithChannel(request *BindLinearAssemblyCDNDomainWithChannelRequest) (response *BindLinearAssemblyCDNDomainWithChannelResponse, err error) {
+    return c.BindLinearAssemblyCDNDomainWithChannelWithContext(context.Background(), request)
+}
+
+// BindLinearAssemblyCDNDomainWithChannel
+// Linear Assembly channel is bound to CDN playback domain name.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CDNDOMAIN = "InvalidParameter.CdnDomain"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+func (c *Client) BindLinearAssemblyCDNDomainWithChannelWithContext(ctx context.Context, request *BindLinearAssemblyCDNDomainWithChannelRequest) (response *BindLinearAssemblyCDNDomainWithChannelResponse, err error) {
+    if request == nil {
+        request = NewBindLinearAssemblyCDNDomainWithChannelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BindLinearAssemblyCDNDomainWithChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBindLinearAssemblyCDNDomainWithChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBindNewLVBDomainWithChannelRequest() (request *BindNewLVBDomainWithChannelRequest) {
     request = &BindNewLVBDomainWithChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1173,6 +1226,106 @@ func (c *Client) DeleteStreamPackageSourceLocationWithContext(ctx context.Contex
     request.SetContext(ctx)
     
     response = NewDeleteStreamPackageSourceLocationResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLinearAssemblyCDNDomainWithChannelRequest() (request *DescribeLinearAssemblyCDNDomainWithChannelRequest) {
+    request = &DescribeLinearAssemblyCDNDomainWithChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeLinearAssemblyCDNDomainWithChannel")
+    
+    
+    return
+}
+
+func NewDescribeLinearAssemblyCDNDomainWithChannelResponse() (response *DescribeLinearAssemblyCDNDomainWithChannelResponse) {
+    response = &DescribeLinearAssemblyCDNDomainWithChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLinearAssemblyCDNDomainWithChannel
+// Query the CDN domain name associated with the LinearAssembly channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+func (c *Client) DescribeLinearAssemblyCDNDomainWithChannel(request *DescribeLinearAssemblyCDNDomainWithChannelRequest) (response *DescribeLinearAssemblyCDNDomainWithChannelResponse, err error) {
+    return c.DescribeLinearAssemblyCDNDomainWithChannelWithContext(context.Background(), request)
+}
+
+// DescribeLinearAssemblyCDNDomainWithChannel
+// Query the CDN domain name associated with the LinearAssembly channel.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+func (c *Client) DescribeLinearAssemblyCDNDomainWithChannelWithContext(ctx context.Context, request *DescribeLinearAssemblyCDNDomainWithChannelRequest) (response *DescribeLinearAssemblyCDNDomainWithChannelResponse, err error) {
+    if request == nil {
+        request = NewDescribeLinearAssemblyCDNDomainWithChannelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLinearAssemblyCDNDomainWithChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLinearAssemblyCDNDomainWithChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeLinearAssemblyCDNDomainWithChannelsRequest() (request *DescribeLinearAssemblyCDNDomainWithChannelsRequest) {
+    request = &DescribeLinearAssemblyCDNDomainWithChannelsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "DescribeLinearAssemblyCDNDomainWithChannels")
+    
+    
+    return
+}
+
+func NewDescribeLinearAssemblyCDNDomainWithChannelsResponse() (response *DescribeLinearAssemblyCDNDomainWithChannelsResponse) {
+    response = &DescribeLinearAssemblyCDNDomainWithChannelsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeLinearAssemblyCDNDomainWithChannels
+// Query the CDN domain names associated with all LinearAssembly channels.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeLinearAssemblyCDNDomainWithChannels(request *DescribeLinearAssemblyCDNDomainWithChannelsRequest) (response *DescribeLinearAssemblyCDNDomainWithChannelsResponse, err error) {
+    return c.DescribeLinearAssemblyCDNDomainWithChannelsWithContext(context.Background(), request)
+}
+
+// DescribeLinearAssemblyCDNDomainWithChannels
+// Query the CDN domain names associated with all LinearAssembly channels.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+func (c *Client) DescribeLinearAssemblyCDNDomainWithChannelsWithContext(ctx context.Context, request *DescribeLinearAssemblyCDNDomainWithChannelsRequest) (response *DescribeLinearAssemblyCDNDomainWithChannelsResponse, err error) {
+    if request == nil {
+        request = NewDescribeLinearAssemblyCDNDomainWithChannelsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeLinearAssemblyCDNDomainWithChannels require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeLinearAssemblyCDNDomainWithChannelsResponse()
     err = c.Send(request, response)
     return
 }
@@ -2824,6 +2977,61 @@ func (c *Client) UnbindCdnDomainWithChannelWithContext(ctx context.Context, requ
     request.SetContext(ctx)
     
     response = NewUnbindCdnDomainWithChannelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUnbindLinearAssemblyCDNDomainWithChannelRequest() (request *UnbindLinearAssemblyCDNDomainWithChannelRequest) {
+    request = &UnbindLinearAssemblyCDNDomainWithChannelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdp", APIVersion, "UnbindLinearAssemblyCDNDomainWithChannel")
+    
+    
+    return
+}
+
+func NewUnbindLinearAssemblyCDNDomainWithChannelResponse() (response *UnbindLinearAssemblyCDNDomainWithChannelResponse) {
+    response = &UnbindLinearAssemblyCDNDomainWithChannelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UnbindLinearAssemblyCDNDomainWithChannel
+// Unbind LinearAssembly channel with CDN domain name.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CDNDOMAIN = "InvalidParameter.CdnDomain"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) UnbindLinearAssemblyCDNDomainWithChannel(request *UnbindLinearAssemblyCDNDomainWithChannelRequest) (response *UnbindLinearAssemblyCDNDomainWithChannelResponse, err error) {
+    return c.UnbindLinearAssemblyCDNDomainWithChannelWithContext(context.Background(), request)
+}
+
+// UnbindLinearAssemblyCDNDomainWithChannel
+// Unbind LinearAssembly channel with CDN domain name.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_CDNDOMAIN = "InvalidParameter.CdnDomain"
+//  INVALIDPARAMETER_CHANNELID = "InvalidParameter.ChannelId"
+//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
+func (c *Client) UnbindLinearAssemblyCDNDomainWithChannelWithContext(ctx context.Context, request *UnbindLinearAssemblyCDNDomainWithChannelRequest) (response *UnbindLinearAssemblyCDNDomainWithChannelResponse, err error) {
+    if request == nil {
+        request = NewUnbindLinearAssemblyCDNDomainWithChannelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UnbindLinearAssemblyCDNDomainWithChannel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUnbindLinearAssemblyCDNDomainWithChannelResponse()
     err = c.Send(request, response)
     return
 }

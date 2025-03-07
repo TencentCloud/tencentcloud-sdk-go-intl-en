@@ -1024,7 +1024,7 @@ type CreateLaunchTemplateRequestParams struct {
 	// Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
-
+	// Instance termination protection flag, indicating whether an instance is allowed to be deleted through an API. Valid values:<br><li>true: Instance protection is enabled, and the instance is not allowed to be deleted through the API.</li><br><li>false: Instance protection is disabled, and the instance is allowed to be deleted through the API.</li><br><br>Default value: false.
 	DisableApiTermination *bool `json:"DisableApiTermination,omitnil,omitempty" name:"DisableApiTermination"`
 
 	// Instance launch template tag description list. By specifying the TemplateTag parameter, you can bind tags to the instance launch template.
@@ -1117,6 +1117,7 @@ type CreateLaunchTemplateRequest struct {
 	// Details of the monthly subscription, including the purchase period, auto-renewal. It is required if the `InstanceChargeType` is `PREPAID`.
 	InstanceChargePrepaid *InstanceChargePrepaid `json:"InstanceChargePrepaid,omitnil,omitempty" name:"InstanceChargePrepaid"`
 
+	// Instance termination protection flag, indicating whether an instance is allowed to be deleted through an API. Valid values:<br><li>true: Instance protection is enabled, and the instance is not allowed to be deleted through the API.</li><br><li>false: Instance protection is disabled, and the instance is allowed to be deleted through the API.</li><br><br>Default value: false.
 	DisableApiTermination *bool `json:"DisableApiTermination,omitnil,omitempty" name:"DisableApiTermination"`
 
 	// Instance launch template tag description list. By specifying the TemplateTag parameter, you can bind tags to the instance launch template.
@@ -6109,6 +6110,67 @@ func (r *ModifyInstancesProjectResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyInstancesProjectResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyInstancesRenewFlagRequestParams struct {
+	// For one or more instance IDs to be operated, you can obtain the instance ID through the `instanceid` in the returned value from the API [describeinstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1). The maximum number of instances that can be operated for each request is 100.
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// Auto-renewal flag. Valid values: <br><li>notify_and_auto_renew: Notifies of expiration and performs auto-renewal.</li><li>notify_and_manual_renew: Notifies of expiration but does not perform auto-renewal.</li><li>disable_notify_and_manual_renew: Not notifies of expiration nor perform auto-renewal.</li><br>If this parameter is specified to notify_and_auto_renew, the instance will be automatically renewed on a monthly basis after it expires when there is sufficient account balance.
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+}
+
+type ModifyInstancesRenewFlagRequest struct {
+	*tchttp.BaseRequest
+	
+	// For one or more instance IDs to be operated, you can obtain the instance ID through the `instanceid` in the returned value from the API [describeinstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1). The maximum number of instances that can be operated for each request is 100.
+	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// Auto-renewal flag. Valid values: <br><li>notify_and_auto_renew: Notifies of expiration and performs auto-renewal.</li><li>notify_and_manual_renew: Notifies of expiration but does not perform auto-renewal.</li><li>disable_notify_and_manual_renew: Not notifies of expiration nor perform auto-renewal.</li><br>If this parameter is specified to notify_and_auto_renew, the instance will be automatically renewed on a monthly basis after it expires when there is sufficient account balance.
+	RenewFlag *string `json:"RenewFlag,omitnil,omitempty" name:"RenewFlag"`
+}
+
+func (r *ModifyInstancesRenewFlagRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstancesRenewFlagRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InstanceIds")
+	delete(f, "RenewFlag")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyInstancesRenewFlagRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyInstancesRenewFlagResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyInstancesRenewFlagResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyInstancesRenewFlagResponseParams `json:"Response"`
+}
+
+func (r *ModifyInstancesRenewFlagResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyInstancesRenewFlagResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 

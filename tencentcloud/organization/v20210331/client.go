@@ -167,6 +167,75 @@ func (c *Client) AddExternalSAMLIdPCertificateWithContext(ctx context.Context, r
     return
 }
 
+func NewAddOrganizationMemberEmailRequest() (request *AddOrganizationMemberEmailRequest) {
+    request = &AddOrganizationMemberEmailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "AddOrganizationMemberEmail")
+    
+    
+    return
+}
+
+func NewAddOrganizationMemberEmailResponse() (response *AddOrganizationMemberEmailResponse) {
+    response = &AddOrganizationMemberEmailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddOrganizationMemberEmail
+// This API is used to add an organization member's mailbox.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CHECKACCOUNTPHONEBINDLIMIT = "FailedOperation.CheckAccountPhoneBindLimit"
+//  FAILEDOPERATION_CHECKMAILACCOUNT = "FailedOperation.CheckMailAccount"
+//  FAILEDOPERATION_EMAILALREADYUSED = "FailedOperation.EmailAlreadyUsed"
+//  FAILEDOPERATION_MEMBEREMAILEXIST = "FailedOperation.MemberEmailExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_EMAILBINDOVERLIMIT = "LimitExceeded.EmailBindOverLimit"
+//  LIMITEXCEEDED_PHONENUMBOUND = "LimitExceeded.PhoneNumBound"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddOrganizationMemberEmail(request *AddOrganizationMemberEmailRequest) (response *AddOrganizationMemberEmailResponse, err error) {
+    return c.AddOrganizationMemberEmailWithContext(context.Background(), request)
+}
+
+// AddOrganizationMemberEmail
+// This API is used to add an organization member's mailbox.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CHECKACCOUNTPHONEBINDLIMIT = "FailedOperation.CheckAccountPhoneBindLimit"
+//  FAILEDOPERATION_CHECKMAILACCOUNT = "FailedOperation.CheckMailAccount"
+//  FAILEDOPERATION_EMAILALREADYUSED = "FailedOperation.EmailAlreadyUsed"
+//  FAILEDOPERATION_MEMBEREMAILEXIST = "FailedOperation.MemberEmailExist"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_EMAILBINDOVERLIMIT = "LimitExceeded.EmailBindOverLimit"
+//  LIMITEXCEEDED_PHONENUMBOUND = "LimitExceeded.PhoneNumBound"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) AddOrganizationMemberEmailWithContext(ctx context.Context, request *AddOrganizationMemberEmailRequest) (response *AddOrganizationMemberEmailResponse, err error) {
+    if request == nil {
+        request = NewAddOrganizationMemberEmailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddOrganizationMemberEmail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddOrganizationMemberEmailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAddOrganizationNodeRequest() (request *AddOrganizationNodeRequest) {
     request = &AddOrganizationNodeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2829,6 +2898,85 @@ func (c *Client) DescribeOrganizationMemberAuthIdentitiesWithContext(ctx context
     return
 }
 
+func NewDescribeOrganizationMemberEmailBindRequest() (request *DescribeOrganizationMemberEmailBindRequest) {
+    request = &DescribeOrganizationMemberEmailBindRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "DescribeOrganizationMemberEmailBind")
+    
+    
+    return
+}
+
+func NewDescribeOrganizationMemberEmailBindResponse() (response *DescribeOrganizationMemberEmailBindResponse) {
+    response = &DescribeOrganizationMemberEmailBindResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeOrganizationMemberEmailBind
+// This API is used to query detailed information about member mailbox binding.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ACCOUNTALREADYREGISTER = "FailedOperation.AccountAlreadyRegister"
+//  FAILEDOPERATION_BINDEMAILLINKEXPIRED = "FailedOperation.BindEmailLinkExpired"
+//  FAILEDOPERATION_BINDEMAILLINKINVALID = "FailedOperation.BindEmailLinkInvalid"
+//  FAILEDOPERATION_EMAILALREADYUSED = "FailedOperation.EmailAlreadyUsed"
+//  FAILEDOPERATION_EMAILBINDRECORDINVALID = "FailedOperation.EmailBindRecordInvalid"
+//  FAILEDOPERATION_MEMBERBINDEMAILERROR = "FailedOperation.MemberBindEmailError"
+//  FAILEDOPERATION_MEMBERBINDPHONEERROR = "FailedOperation.MemberBindPhoneError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CODEERROR = "InvalidParameter.CodeError"
+//  INVALIDPARAMETER_CODEEXPIRED = "InvalidParameter.CodeExpired"
+//  INVALIDPARAMETER_INVALIDEMAIL = "InvalidParameter.InvalidEmail"
+//  INVALIDPARAMETER_PASSWORDILLEGAL = "InvalidParameter.PasswordIllegal"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribeOrganizationMemberEmailBind(request *DescribeOrganizationMemberEmailBindRequest) (response *DescribeOrganizationMemberEmailBindResponse, err error) {
+    return c.DescribeOrganizationMemberEmailBindWithContext(context.Background(), request)
+}
+
+// DescribeOrganizationMemberEmailBind
+// This API is used to query detailed information about member mailbox binding.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ACCOUNTALREADYREGISTER = "FailedOperation.AccountAlreadyRegister"
+//  FAILEDOPERATION_BINDEMAILLINKEXPIRED = "FailedOperation.BindEmailLinkExpired"
+//  FAILEDOPERATION_BINDEMAILLINKINVALID = "FailedOperation.BindEmailLinkInvalid"
+//  FAILEDOPERATION_EMAILALREADYUSED = "FailedOperation.EmailAlreadyUsed"
+//  FAILEDOPERATION_EMAILBINDRECORDINVALID = "FailedOperation.EmailBindRecordInvalid"
+//  FAILEDOPERATION_MEMBERBINDEMAILERROR = "FailedOperation.MemberBindEmailError"
+//  FAILEDOPERATION_MEMBERBINDPHONEERROR = "FailedOperation.MemberBindPhoneError"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETER_CODEERROR = "InvalidParameter.CodeError"
+//  INVALIDPARAMETER_CODEEXPIRED = "InvalidParameter.CodeExpired"
+//  INVALIDPARAMETER_INVALIDEMAIL = "InvalidParameter.InvalidEmail"
+//  INVALIDPARAMETER_PASSWORDILLEGAL = "InvalidParameter.PasswordIllegal"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  RESOURCENOTFOUND_USERNOTEXIST = "ResourceNotFound.UserNotExist"
+func (c *Client) DescribeOrganizationMemberEmailBindWithContext(ctx context.Context, request *DescribeOrganizationMemberEmailBindRequest) (response *DescribeOrganizationMemberEmailBindResponse, err error) {
+    if request == nil {
+        request = NewDescribeOrganizationMemberEmailBindRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeOrganizationMemberEmailBind require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeOrganizationMemberEmailBindResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeOrganizationMemberPoliciesRequest() (request *DescribeOrganizationMemberPoliciesRequest) {
     request = &DescribeOrganizationMemberPoliciesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5275,6 +5423,69 @@ func (c *Client) RemoveUserFromGroupWithContext(ctx context.Context, request *Re
     return
 }
 
+func NewSendOrgMemberAccountBindEmailRequest() (request *SendOrgMemberAccountBindEmailRequest) {
+    request = &SendOrgMemberAccountBindEmailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "SendOrgMemberAccountBindEmail")
+    
+    
+    return
+}
+
+func NewSendOrgMemberAccountBindEmailResponse() (response *SendOrgMemberAccountBindEmailResponse) {
+    response = &SendOrgMemberAccountBindEmailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// SendOrgMemberAccountBindEmail
+// This API is used to resend an email for activating the member's bound mailbox.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EMAILBINDRECORDINVALID = "FailedOperation.EmailBindRecordInvalid"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SENDEMAILLIMIT = "LimitExceeded.SendEmailLimit"
+//  LIMITEXCEEDED_SENDEMAILWITHINONEHOURLIMIT = "LimitExceeded.SendEmailWithinOneHourLimit"
+//  RESOURCENOTFOUND_EMAILBINDRECORDNOTEXIST = "ResourceNotFound.EmailBindRecordNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) SendOrgMemberAccountBindEmail(request *SendOrgMemberAccountBindEmailRequest) (response *SendOrgMemberAccountBindEmailResponse, err error) {
+    return c.SendOrgMemberAccountBindEmailWithContext(context.Background(), request)
+}
+
+// SendOrgMemberAccountBindEmail
+// This API is used to resend an email for activating the member's bound mailbox.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_EMAILBINDRECORDINVALID = "FailedOperation.EmailBindRecordInvalid"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_SENDEMAILLIMIT = "LimitExceeded.SendEmailLimit"
+//  LIMITEXCEEDED_SENDEMAILWITHINONEHOURLIMIT = "LimitExceeded.SendEmailWithinOneHourLimit"
+//  RESOURCENOTFOUND_EMAILBINDRECORDNOTEXIST = "ResourceNotFound.EmailBindRecordNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+func (c *Client) SendOrgMemberAccountBindEmailWithContext(ctx context.Context, request *SendOrgMemberAccountBindEmailRequest) (response *SendOrgMemberAccountBindEmailResponse, err error) {
+    if request == nil {
+        request = NewSendOrgMemberAccountBindEmailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("SendOrgMemberAccountBindEmail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewSendOrgMemberAccountBindEmailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewSetExternalSAMLIdentityProviderRequest() (request *SetExternalSAMLIdentityProviderRequest) {
     request = &SetExternalSAMLIdentityProviderRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -5626,6 +5837,73 @@ func (c *Client) UpdateOrganizationMemberWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewUpdateOrganizationMemberResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateOrganizationMemberEmailBindRequest() (request *UpdateOrganizationMemberEmailBindRequest) {
+    request = &UpdateOrganizationMemberEmailBindRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("organization", APIVersion, "UpdateOrganizationMemberEmailBind")
+    
+    
+    return
+}
+
+func NewUpdateOrganizationMemberEmailBindResponse() (response *UpdateOrganizationMemberEmailBindResponse) {
+    response = &UpdateOrganizationMemberEmailBindResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateOrganizationMemberEmailBind
+// This API is used to modify the mailbox of a bound member.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CHECKMAILACCOUNT = "FailedOperation.CheckMailAccount"
+//  FAILEDOPERATION_EMAILALREADYUSED = "FailedOperation.EmailAlreadyUsed"
+//  FAILEDOPERATION_EMAILBINDRECORDINVALID = "FailedOperation.EmailBindRecordInvalid"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_UPDATEEMAILBINDOVERLIMIT = "LimitExceeded.UpdateEmailBindOverLimit"
+//  RESOURCENOTFOUND_EMAILBINDRECORDNOTEXIST = "ResourceNotFound.EmailBindRecordNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateOrganizationMemberEmailBind(request *UpdateOrganizationMemberEmailBindRequest) (response *UpdateOrganizationMemberEmailBindResponse, err error) {
+    return c.UpdateOrganizationMemberEmailBindWithContext(context.Background(), request)
+}
+
+// UpdateOrganizationMemberEmailBind
+// This API is used to modify the mailbox of a bound member.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_CHECKMAILACCOUNT = "FailedOperation.CheckMailAccount"
+//  FAILEDOPERATION_EMAILALREADYUSED = "FailedOperation.EmailAlreadyUsed"
+//  FAILEDOPERATION_EMAILBINDRECORDINVALID = "FailedOperation.EmailBindRecordInvalid"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  LIMITEXCEEDED_UPDATEEMAILBINDOVERLIMIT = "LimitExceeded.UpdateEmailBindOverLimit"
+//  RESOURCENOTFOUND_EMAILBINDRECORDNOTEXIST = "ResourceNotFound.EmailBindRecordNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONMEMBERNOTEXIST = "ResourceNotFound.OrganizationMemberNotExist"
+//  RESOURCENOTFOUND_ORGANIZATIONNOTEXIST = "ResourceNotFound.OrganizationNotExist"
+//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+func (c *Client) UpdateOrganizationMemberEmailBindWithContext(ctx context.Context, request *UpdateOrganizationMemberEmailBindRequest) (response *UpdateOrganizationMemberEmailBindResponse, err error) {
+    if request == nil {
+        request = NewUpdateOrganizationMemberEmailBindRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateOrganizationMemberEmailBind require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateOrganizationMemberEmailBindResponse()
     err = c.Send(request, response)
     return
 }
