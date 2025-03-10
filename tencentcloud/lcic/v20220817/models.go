@@ -3106,6 +3106,12 @@ type DocumentInfo struct {
 
 	// Document preview address
 	Preview *string `json:"Preview,omitnil,omitempty" name:"Preview"`
+
+	// Document resolution.Note: This field may return null, indicating that no valid values can be obtained.
+	Resolution *string `json:"Resolution,omitnil,omitempty" name:"Resolution"`
+
+	// Minimum resolution of a transcoded document, consistent with the parameters provided when the document is created.Note: This field may return null, indicating that no valid values can be obtained.
+	MinScaleResolution *string `json:"MinScaleResolution,omitnil,omitempty" name:"MinScaleResolution"`
 }
 
 // Predefined struct for user

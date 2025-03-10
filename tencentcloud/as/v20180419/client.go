@@ -4616,10 +4616,6 @@ func NewUpgradeLaunchConfigurationResponse() (response *UpgradeLaunchConfigurati
 }
 
 // UpgradeLaunchConfiguration
-// 已有替代接口ModifyLaunchConfiguration。该接口存在覆盖参数风险，目前官网已隐藏
-//
-// 
-//
 // There is a replacement API: ModifyLaunchConfiguration. This API carries the risk of parameter overwriting, and it has currently been hidden on the official website.
 //
 // This API (UpgradeLaunchConfiguration) is used to upgrade the launch configuration.
@@ -4663,10 +4659,6 @@ func (c *Client) UpgradeLaunchConfiguration(request *UpgradeLaunchConfigurationR
 }
 
 // UpgradeLaunchConfiguration
-// 已有替代接口ModifyLaunchConfiguration。该接口存在覆盖参数风险，目前官网已隐藏
-//
-// 
-//
 // There is a replacement API: ModifyLaunchConfiguration. This API carries the risk of parameter overwriting, and it has currently been hidden on the official website.
 //
 // This API (UpgradeLaunchConfiguration) is used to upgrade the launch configuration.

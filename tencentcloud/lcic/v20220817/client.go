@@ -1796,10 +1796,6 @@ func NewDescribeDocumentsResponse() (response *DescribeDocumentsResponse) {
 }
 
 // DescribeDocuments
-// 有新接口替换
-//
-// 
-//
 // A new API is offered for this action now.
 //
 // 
@@ -1813,10 +1809,6 @@ func (c *Client) DescribeDocuments(request *DescribeDocumentsRequest) (response 
 }
 
 // DescribeDocuments
-// 有新接口替换
-//
-// 
-//
 // A new API is offered for this action now.
 //
 // 

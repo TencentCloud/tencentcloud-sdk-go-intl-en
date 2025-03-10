@@ -97,7 +97,7 @@ func NewTextModerationResponse() (response *TextModerationResponse) {
 //
 // - English letters, digits and Chinese characters are supported for moderation.
 //
-// - The API request frequency limit: **1,000 times/second**. 
+// - The API request frequency limit: **1,000 times/second**.
 //
 // error code that may be returned:
 //  INTERNALERROR_ERRTEXTTIMEOUT = "InternalError.ErrTextTimeOut"
@@ -147,7 +147,7 @@ func (c *Client) TextModeration(request *TextModerationRequest) (response *TextM
 //
 // - English letters, digits and Chinese characters are supported for moderation.
 //
-// - The API request frequency limit: **1,000 times/second**. 
+// - The API request frequency limit: **1,000 times/second**.
 //
 // error code that may be returned:
 //  INTERNALERROR_ERRTEXTTIMEOUT = "InternalError.ErrTextTimeOut"

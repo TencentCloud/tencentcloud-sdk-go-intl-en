@@ -3972,10 +3972,6 @@ func NewDeleteCompliancePolicyItemFromWhitelistResponse() (response *DeleteCompl
 }
 
 // DeleteCompliancePolicyItemFromWhitelist
-// 产品重构优化，这几个接口已经没有调用了
-//
-// 
-//
 // This API is used to remove the specified check item from the allowlist.
 //
 // error code that may be returned:
@@ -3990,10 +3986,6 @@ func (c *Client) DeleteCompliancePolicyItemFromWhitelist(request *DeleteComplian
 }
 
 // DeleteCompliancePolicyItemFromWhitelist
-// 产品重构优化，这几个接口已经没有调用了
-//
-// 
-//
 // This API is used to remove the specified check item from the allowlist.
 //
 // error code that may be returned:

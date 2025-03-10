@@ -662,7 +662,7 @@ type BangladeshIDCard struct {
 }
 
 type CardInfo struct {
-	// Hong Kong ID Card
+	// Hong Kong ID (China) Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HKIDCard *HKIDCard `json:"HKIDCard,omitnil,omitempty" name:"HKIDCard"`
 
@@ -694,7 +694,7 @@ type CardInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PhilippinesUMID *PhilippinesUMID `json:"PhilippinesUMID,omitnil,omitempty" name:"PhilippinesUMID"`
 
-	// ID Cards of Hong Kong, Macao and Taiwan (China), and International Passport
+	// ID Cards of Hong Kong (China), Macao (China) and Taiwan (China), and International Passport
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InternationalIDPassport *InternationalIDPassport `json:"InternationalIDPassport,omitnil,omitempty" name:"InternationalIDPassport"`
 
@@ -714,11 +714,11 @@ type CardInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SingaporeIDCard *SingaporeIDCard `json:"SingaporeIDCard,omitnil,omitempty" name:"SingaporeIDCard"`
 
-	// Macao ID Card
+	// Macao (China) ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MacaoIDCard *MacaoIDCard `json:"MacaoIDCard,omitnil,omitempty" name:"MacaoIDCard"`
 
-	// TaiWan ID Card
+	// TaiWan (China) ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TaiWanIDCard *TaiWanIDCard `json:"TaiWanIDCard,omitnil,omitempty" name:"TaiWanIDCard"`
 
@@ -848,7 +848,7 @@ type CardVerifyResult struct {
 	// - BerlakuHingga (string): Expiry date.
 	// - IssuedDate (string): Issue date.
 	// 
-	// (5) A passport issued in Hong Kong/Macao/Taiwan (China) or other countries/regions
+	// (5) A passport issued in Hong Kong (China) /Macao (China) /Taiwan (China) or other countries/regions
 	// When the value of `IdCardType` is `MLIDPassport`:
 	// - FullName (string): Full name.
 	// - Surname (string): Surname.
@@ -2110,7 +2110,9 @@ func (r *GetWebVerificationResultResponse) FromJsonString(s string) error {
 }
 
 type HKIDCard struct {
-
+	// Chinese name
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Example:  SAN, Nan
 	CnName *string `json:"CnName,omitnil,omitempty" name:"CnName"`
 
 	// English name
@@ -2686,7 +2688,7 @@ type NigeriaIDCard struct {
 }
 
 type NormalCardInfo struct {
-	// Hong Kong ID Card
+	// Hong Kong (China) ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HKIDCard *NormalHKIDCard `json:"HKIDCard,omitnil,omitempty" name:"HKIDCard"`
 
@@ -2718,7 +2720,7 @@ type NormalCardInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PhilippinesUMID *PhilippinesUMID `json:"PhilippinesUMID,omitnil,omitempty" name:"PhilippinesUMID"`
 
-	// ID Cards of Hong Kong, Macao and Taiwan (China), and International Passport
+	// ID Cards of Hong Kong (China), Macao (China) and Taiwan (China), and International Passport
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InternationalIDPassport *InternationalIDPassport `json:"InternationalIDPassport,omitnil,omitempty" name:"InternationalIDPassport"`
 
@@ -2738,11 +2740,11 @@ type NormalCardInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SingaporeIDCard *SingaporeIDCard `json:"SingaporeIDCard,omitnil,omitempty" name:"SingaporeIDCard"`
 
-	// Macao ID Card
+	// Macao (China) ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MacaoIDCard *MacaoIDCard `json:"MacaoIDCard,omitnil,omitempty" name:"MacaoIDCard"`
 
-	// Mainland ID Card
+	// Mainland (China) ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MainlandIDCard *MainlandIDCard `json:"MainlandIDCard,omitnil,omitempty" name:"MainlandIDCard"`
 
@@ -2750,11 +2752,11 @@ type NormalCardInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	JapanIDCard *JapanIDCard `json:"JapanIDCard,omitnil,omitempty" name:"JapanIDCard"`
 
-	// Taiwan ID Card
+	// Taiwan (China) ID Card
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TaiWanIDCard *TaiWanIDCard `json:"TaiWanIDCard,omitnil,omitempty" name:"TaiWanIDCard"`
 
-	// exit/entry permit (card) for traveling to and from Hong Kong, Macao, or Taiwan.
+	// exit/entry permit (card) for traveling to and from Hong Kong (China), Macao (China), or Taiwan (China).
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	HMTPermitCard *HMTPermit `json:"HMTPermitCard,omitnil,omitempty" name:"HMTPermitCard"`
 }
@@ -3514,7 +3516,7 @@ type WebVerificationConfigIntl struct {
 	// 6.PhilippinesTinID: Philippines TinID card
 	// 7.PhilippinesSSSID: Philippines SSSID card
 	// 8.PhilippinesUMID: Philippines UMID card
-	// 9.InternationalIDPassport: ID cards of Hong Kong, Macao and Taiwan (China), and international passport.
+	// 9.InternationalIDPassport: ID cards of Hong Kong (China), Macao (China) and Taiwan (China), and international passport.
 	// 10.IndonesiaDrivingLicense:Indonesia driving license
 	// 11.ThailandIDCard: Thailand ID card
 	// 12.ThailandDrivingLicense: Thailand driving license
@@ -3524,8 +3526,8 @@ type WebVerificationConfigIntl struct {
 	// 16.JapanIDCard: Japan ID card
 	// 17.JapanDrivingLicense: Japan driving license
 	// 18.PhilippinesIDCard: Philippines ID card
-	// 19.MainlandIDCard: Mainland ID card
-	// 20.MacaoIDCard: Macao ID card
+	// 19.MainlandIDCard: Mainland (China) ID card
+	// 20.MacaoIDCard: Macao (China) ID card
 	// Example: HKIDCard
 	IDCardType *string `json:"IDCardType,omitnil,omitempty" name:"IDCardType"`
 
