@@ -3174,6 +3174,59 @@ func (c *Client) DescribeIPStrategysStatusWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeInstancesNetworkConfigRequest() (request *DescribeInstancesNetworkConfigRequest) {
+    request = &DescribeInstancesNetworkConfigRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("apigateway", APIVersion, "DescribeInstancesNetworkConfig")
+    
+    
+    return
+}
+
+func NewDescribeInstancesNetworkConfigResponse() (response *DescribeInstancesNetworkConfigResponse) {
+    response = &DescribeInstancesNetworkConfigResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInstancesNetworkConfig
+// This API is used to obtain the network configuration list of a dedicated instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeInstancesNetworkConfig(request *DescribeInstancesNetworkConfigRequest) (response *DescribeInstancesNetworkConfigResponse, err error) {
+    return c.DescribeInstancesNetworkConfigWithContext(context.Background(), request)
+}
+
+// DescribeInstancesNetworkConfig
+// This API is used to obtain the network configuration list of a dedicated instance.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_FORMATERROR = "InvalidParameter.FormatError"
+//  INVALIDPARAMETERVALUE_INVALIDFILTERNOTSUPPORTEDNAME = "InvalidParameterValue.InvalidFilterNotSupportedName"
+//  RESOURCENOTFOUND_INVALIDSERVICE = "ResourceNotFound.InvalidService"
+func (c *Client) DescribeInstancesNetworkConfigWithContext(ctx context.Context, request *DescribeInstancesNetworkConfigRequest) (response *DescribeInstancesNetworkConfigResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstancesNetworkConfigRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstancesNetworkConfig require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstancesNetworkConfigResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeLogSearchRequest() (request *DescribeLogSearchRequest) {
     request = &DescribeLogSearchRequest{
         BaseRequest: &tchttp.BaseRequest{},
