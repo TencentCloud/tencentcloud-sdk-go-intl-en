@@ -83,6 +83,15 @@ type TextToVoiceRequestParams struct {
 
 	// The threshold of speech segmentation sensibility, which can be `0` (default), `1`, or `2`. A larger value indicates fewer segments, and the model tends to only segment sentences based on punctuation marks. We recommend you not change this parameter to avoid adverse effect on speech synthesis.
 	SegmentRate *uint64 `json:"SegmentRate,omitnil,omitempty" name:"SegmentRate"`
+
+
+	EmotionCategory *string `json:"EmotionCategory,omitnil,omitempty" name:"EmotionCategory"`
+
+
+	EmotionIntensity *int64 `json:"EmotionIntensity,omitnil,omitempty" name:"EmotionIntensity"`
+
+
+	FastVoiceType *string `json:"FastVoiceType,omitnil,omitempty" name:"FastVoiceType"`
 }
 
 type TextToVoiceRequest struct {
@@ -128,6 +137,12 @@ type TextToVoiceRequest struct {
 
 	// The threshold of speech segmentation sensibility, which can be `0` (default), `1`, or `2`. A larger value indicates fewer segments, and the model tends to only segment sentences based on punctuation marks. We recommend you not change this parameter to avoid adverse effect on speech synthesis.
 	SegmentRate *uint64 `json:"SegmentRate,omitnil,omitempty" name:"SegmentRate"`
+
+	EmotionCategory *string `json:"EmotionCategory,omitnil,omitempty" name:"EmotionCategory"`
+
+	EmotionIntensity *int64 `json:"EmotionIntensity,omitnil,omitempty" name:"EmotionIntensity"`
+
+	FastVoiceType *string `json:"FastVoiceType,omitnil,omitempty" name:"FastVoiceType"`
 }
 
 func (r *TextToVoiceRequest) ToJsonString() string {
@@ -154,6 +169,9 @@ func (r *TextToVoiceRequest) FromJsonString(s string) error {
 	delete(f, "Codec")
 	delete(f, "EnableSubtitle")
 	delete(f, "SegmentRate")
+	delete(f, "EmotionCategory")
+	delete(f, "EmotionIntensity")
+	delete(f, "FastVoiceType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TextToVoiceRequest has unknown keys!", "")
 	}

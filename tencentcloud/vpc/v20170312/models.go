@@ -481,6 +481,9 @@ type AllocateAddressesRequestParams struct {
 
 	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 
+
+	IsDedicatedAddressPool *bool `json:"IsDedicatedAddressPool,omitnil,omitempty" name:"IsDedicatedAddressPool"`
+
 	// Network egress. It defaults to `center_egress1`.
 	Egress *string `json:"Egress,omitnil,omitempty" name:"Egress"`
 
@@ -552,6 +555,8 @@ type AllocateAddressesRequest struct {
 
 	DedicatedClusterId *string `json:"DedicatedClusterId,omitnil,omitempty" name:"DedicatedClusterId"`
 
+	IsDedicatedAddressPool *bool `json:"IsDedicatedAddressPool,omitnil,omitempty" name:"IsDedicatedAddressPool"`
+
 	// Network egress. It defaults to `center_egress1`.
 	Egress *string `json:"Egress,omitnil,omitempty" name:"Egress"`
 
@@ -587,6 +592,7 @@ func (r *AllocateAddressesRequest) FromJsonString(s string) error {
 	delete(f, "BandwidthPackageId")
 	delete(f, "AddressName")
 	delete(f, "DedicatedClusterId")
+	delete(f, "IsDedicatedAddressPool")
 	delete(f, "Egress")
 	delete(f, "AntiDDoSPackageId")
 	delete(f, "ClientToken")

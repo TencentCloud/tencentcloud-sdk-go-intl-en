@@ -522,9 +522,12 @@ func NewDescribeEventsResponse() (response *DescribeEventsResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_MEMBERNOTAUDITROLE = "FailedOperation.MemberNotAuditRole"
+//  FAILEDOPERATION_MEMBERNOTINORGANIZATION = "FailedOperation.MemberNotInOrganization"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_OVERAMOUNT = "LimitExceeded.OverAmount"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeEvents(request *DescribeEventsRequest) (response *DescribeEventsResponse, err error) {
     return c.DescribeEventsWithContext(context.Background(), request)
 }
@@ -534,9 +537,12 @@ func (c *Client) DescribeEvents(request *DescribeEventsRequest) (response *Descr
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_MEMBERNOTAUDITROLE = "FailedOperation.MemberNotAuditRole"
+//  FAILEDOPERATION_MEMBERNOTINORGANIZATION = "FailedOperation.MemberNotInOrganization"
 //  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  LIMITEXCEEDED_OVERAMOUNT = "LimitExceeded.OverAmount"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
 func (c *Client) DescribeEventsWithContext(ctx context.Context, request *DescribeEventsRequest) (response *DescribeEventsResponse, err error) {
     if request == nil {
         request = NewDescribeEventsRequest()
