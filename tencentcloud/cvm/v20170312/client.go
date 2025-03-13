@@ -2954,6 +2954,71 @@ func (c *Client) DescribeRegionsWithContext(ctx context.Context, request *Descri
     return
 }
 
+func NewDescribeReservedInstancesRequest() (request *DescribeReservedInstancesRequest) {
+    request = &DescribeReservedInstancesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cvm", APIVersion, "DescribeReservedInstances")
+    
+    
+    return
+}
+
+func NewDescribeReservedInstancesResponse() (response *DescribeReservedInstancesResponse) {
+    response = &DescribeReservedInstancesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeReservedInstances
+// This API is used to list the reserved instances purchased by the user.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDFILTERVALUE_LIMITEXCEEDED = "InvalidFilterValue.LimitExceeded"
+//  INVALIDINSTANCETYPE_MALFORMED = "InvalidInstanceType.Malformed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  UNSUPPORTEDOPERATION_INVALIDPERMISSIONNONINTERNATIONALACCOUNT = "UnsupportedOperation.InvalidPermissionNonInternationalAccount"
+//  UNSUPPORTEDOPERATION_RESERVEDINSTANCEINVISIBLEFORUSER = "UnsupportedOperation.ReservedInstanceInvisibleForUser"
+func (c *Client) DescribeReservedInstances(request *DescribeReservedInstancesRequest) (response *DescribeReservedInstancesResponse, err error) {
+    return c.DescribeReservedInstancesWithContext(context.Background(), request)
+}
+
+// DescribeReservedInstances
+// This API is used to list the reserved instances purchased by the user.
+//
+// error code that may be returned:
+//  INTERNALSERVERERROR = "InternalServerError"
+//  INVALIDFILTER = "InvalidFilter"
+//  INVALIDFILTERVALUE_LIMITEXCEEDED = "InvalidFilterValue.LimitExceeded"
+//  INVALIDINSTANCETYPE_MALFORMED = "InvalidInstanceType.Malformed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  UNSUPPORTEDOPERATION_INVALIDPERMISSIONNONINTERNATIONALACCOUNT = "UnsupportedOperation.InvalidPermissionNonInternationalAccount"
+//  UNSUPPORTEDOPERATION_RESERVEDINSTANCEINVISIBLEFORUSER = "UnsupportedOperation.ReservedInstanceInvisibleForUser"
+func (c *Client) DescribeReservedInstancesWithContext(ctx context.Context, request *DescribeReservedInstancesRequest) (response *DescribeReservedInstancesResponse, err error) {
+    if request == nil {
+        request = NewDescribeReservedInstancesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReservedInstances require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeReservedInstancesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeReservedInstancesConfigInfosRequest() (request *DescribeReservedInstancesConfigInfosRequest) {
     request = &DescribeReservedInstancesConfigInfosRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2974,7 +3039,7 @@ func NewDescribeReservedInstancesConfigInfosResponse() (response *DescribeReserv
 }
 
 // DescribeReservedInstancesConfigInfos
-// This API is used to describe reserved instance (RI) offerings. Currently, RIs are only offered to beta users.
+// This API is used to describe reserved instance (RI) offerings.
 //
 // error code that may be returned:
 //  INVALIDFILTER = "InvalidFilter"
@@ -2986,7 +3051,7 @@ func (c *Client) DescribeReservedInstancesConfigInfos(request *DescribeReservedI
 }
 
 // DescribeReservedInstancesConfigInfos
-// This API is used to describe reserved instance (RI) offerings. Currently, RIs are only offered to beta users.
+// This API is used to describe reserved instance (RI) offerings.
 //
 // error code that may be returned:
 //  INVALIDFILTER = "InvalidFilter"

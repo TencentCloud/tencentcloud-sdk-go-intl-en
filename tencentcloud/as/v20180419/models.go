@@ -4454,8 +4454,9 @@ type ModifyLaunchConfigurationAttributesRequestParams struct {
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil,omitempty" name:"InternetAccessible"`
 
 	// Instance billing mode. Valid values:
-	// <br><li>POSTPAID_BY_HOUR: pay-as-you-go hourly
-	// <br><li>SPOTPAID: spot instance
+	// <li>POSTPAID_BY_HOUR: pay-as-you-go hourly</li>
+	// <li>SPOTPAID: spot instance</li>
+	// <li> CDCPAID: dedicated cluster</li>
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
 	// Parameter setting for the prepaid mode (monthly subscription mode). This parameter can specify the renewal period, whether to set the auto-renewal, and other attributes of the monthly-subscribed instances.
@@ -4561,8 +4562,9 @@ type ModifyLaunchConfigurationAttributesRequest struct {
 	InternetAccessible *InternetAccessible `json:"InternetAccessible,omitnil,omitempty" name:"InternetAccessible"`
 
 	// Instance billing mode. Valid values:
-	// <br><li>POSTPAID_BY_HOUR: pay-as-you-go hourly
-	// <br><li>SPOTPAID: spot instance
+	// <li>POSTPAID_BY_HOUR: pay-as-you-go hourly</li>
+	// <li>SPOTPAID: spot instance</li>
+	// <li> CDCPAID: dedicated cluster</li>
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
 	// Parameter setting for the prepaid mode (monthly subscription mode). This parameter can specify the renewal period, whether to set the auto-renewal, and other attributes of the monthly-subscribed instances.

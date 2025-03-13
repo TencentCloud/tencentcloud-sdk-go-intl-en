@@ -3254,19 +3254,19 @@ func (r *DescribeRegionsResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeReservedInstancesConfigInfosRequestParams struct {
-	// zone
+	// <li><strong>zone</li></strong>
 	// Filters by the availability zones in which the reserved instance can be purchased, such as `ap-guangzhou-1`.
 	// Type: String
 	// Required: no
 	// Valid values: list of regions/availability zones
 	// 
-	// product-description
+	// <li><strong>product-description</li></strong>
 	// Filters by the platform description (operating system) of the reserved instance, such as `linux`.
 	// Type: String
 	// Required: no
 	// Valid value: linux
 	// 
-	// duration
+	// <li><strong>duration</li></strong>
 	// Filters by the **validity** of the reserved instance, which is the purchased usage period. For example, `31536000`.
 	// Type: Integer
 	// Unit: second
@@ -3278,19 +3278,19 @@ type DescribeReservedInstancesConfigInfosRequestParams struct {
 type DescribeReservedInstancesConfigInfosRequest struct {
 	*tchttp.BaseRequest
 	
-	// zone
+	// <li><strong>zone</li></strong>
 	// Filters by the availability zones in which the reserved instance can be purchased, such as `ap-guangzhou-1`.
 	// Type: String
 	// Required: no
 	// Valid values: list of regions/availability zones
 	// 
-	// product-description
+	// <li><strong>product-description</li></strong>
 	// Filters by the platform description (operating system) of the reserved instance, such as `linux`.
 	// Type: String
 	// Required: no
 	// Valid value: linux
 	// 
-	// duration
+	// <li><strong>duration</li></strong>
 	// Filters by the **validity** of the reserved instance, which is the purchased usage period. For example, `31536000`.
 	// Type: Integer
 	// Unit: second
@@ -3467,6 +3467,119 @@ func (r *DescribeReservedInstancesOfferingsResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeReservedInstancesOfferingsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeReservedInstancesRequestParams struct {
+	// Trial run. Default value: false.
+	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
+
+	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned instances. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <li><strong>zone</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>availability zones</strong>] in which reserved instances can be purchased. For example, ap-guangzhou-1.</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid values: See the <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">availability zone list</a>.</p>
+	// <li><strong>duration</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>validity periods</strong>] of reserved instances, which is the instance purchase duration. For example, 31536000.</p><p style="padding-left: 30px;">Type: Integer.</p><p style="padding-left: 30px;">Unit: Second.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid values: 31536000 (1 year) | 94608000 (3 years).</p>
+	// <li><strong>instance-type</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>specifications of reserved instances</strong>]. For example, S3.MEDIUM4.</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid values: See the <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">reserved instance specification list</a>.</p>
+	// <li><strong>instance-family</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>types of reserved instances</strong>]. For example, S3.</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid values: See the <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">reserved instance type list</a>.</p>
+	// <li><strong>offering-type</strong></li>
+	// <p style="padding-left: 30px;">Filter by <strong>payment types</strong>]. For example, All Upfront (fully prepaid).</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid values: All Upfront (fully prepaid) | Partial Upfront (partially prepaid) | No Upfront (non-prepaid).</p>
+	// <li><strong>product-description</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>platform descriptions</strong>] (operating system) of reserved instances. For example, linux.</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid value: linux.</p>
+	// <li><strong>reserved-instances-id</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>IDs of purchased reserved instances</strong>]. For example, 650c138f-ae7e-4750-952a-96841d6e9fc1.</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p>
+	// <li><strong>state</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>statuses of purchased reserved instances</strong>]. For example, active.</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid values: active (created) | pending (waiting to be created) | retired (expired).</p>
+	// Each request can have up to 10 filters, and each filter can have up to 5 values.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+type DescribeReservedInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Trial run. Default value: false.
+	DryRun *bool `json:"DryRun,omitnil,omitempty" name:"DryRun"`
+
+	// Offset. Default value: 0. For more information on `Offset`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned instances. Default value: 20. Maximum value: 100. For more information on `Limit`, see the relevant section in API [Introduction](https://intl.cloud.tencent.com/document/api/213/15688?from_cn_redirect=1).
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// <li><strong>zone</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>availability zones</strong>] in which reserved instances can be purchased. For example, ap-guangzhou-1.</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid values: See the <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">availability zone list</a>.</p>
+	// <li><strong>duration</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>validity periods</strong>] of reserved instances, which is the instance purchase duration. For example, 31536000.</p><p style="padding-left: 30px;">Type: Integer.</p><p style="padding-left: 30px;">Unit: Second.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid values: 31536000 (1 year) | 94608000 (3 years).</p>
+	// <li><strong>instance-type</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>specifications of reserved instances</strong>]. For example, S3.MEDIUM4.</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid values: See the <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">reserved instance specification list</a>.</p>
+	// <li><strong>instance-family</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>types of reserved instances</strong>]. For example, S3.</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid values: See the <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">reserved instance type list</a>.</p>
+	// <li><strong>offering-type</strong></li>
+	// <p style="padding-left: 30px;">Filter by <strong>payment types</strong>]. For example, All Upfront (fully prepaid).</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid values: All Upfront (fully prepaid) | Partial Upfront (partially prepaid) | No Upfront (non-prepaid).</p>
+	// <li><strong>product-description</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>platform descriptions</strong>] (operating system) of reserved instances. For example, linux.</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid value: linux.</p>
+	// <li><strong>reserved-instances-id</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>IDs of purchased reserved instances</strong>]. For example, 650c138f-ae7e-4750-952a-96841d6e9fc1.</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p>
+	// <li><strong>state</strong></li>
+	// <p style="padding-left: 30px;">Filter by [<strong>statuses of purchased reserved instances</strong>]. For example, active.</p><p style="padding-left: 30px;">Type: String.</p><p style="padding-left: 30px;">Required: No.</p><p style="padding-left: 30px;">Valid values: active (created) | pending (waiting to be created) | retired (expired).</p>
+	// Each request can have up to 10 filters, and each filter can have up to 5 values.
+	Filters []*Filter `json:"Filters,omitnil,omitempty" name:"Filters"`
+}
+
+func (r *DescribeReservedInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReservedInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DryRun")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Filters")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeReservedInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeReservedInstancesResponseParams struct {
+	// Number of reserved instances that meet the conditions.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of reserved instances that meet the conditions.
+	ReservedInstancesSet []*ReservedInstances `json:"ReservedInstancesSet,omitnil,omitempty" name:"ReservedInstancesSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeReservedInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeReservedInstancesResponseParams `json:"Response"`
+}
+
+func (r *DescribeReservedInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeReservedInstancesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6768,10 +6881,10 @@ type ReservedInstancePriceItem struct {
 	// Valid value: `Linux`.
 	ProductDescription *string `json:"ProductDescription,omitnil,omitempty" name:"ProductDescription"`
 
-	// Upfront total cost, in USD.
+	// Discount price for subsequent total cost, in USD/hr.
 	DiscountUsagePrice *float64 `json:"DiscountUsagePrice,omitnil,omitempty" name:"DiscountUsagePrice"`
 
-	// Discount price for subsequent total cost, in USD/hr.
+	// Discount price for upfront total cost, in USD.
 	DiscountFixedPrice *float64 `json:"DiscountFixedPrice,omitnil,omitempty" name:"DiscountFixedPrice"`
 }
 
@@ -6817,6 +6930,60 @@ type ReservedInstanceTypeItem struct {
 
 	// Price information about the reserved instance.
 	Prices []*ReservedInstancePriceItem `json:"Prices,omitnil,omitempty" name:"Prices"`
+}
+
+type ReservedInstances struct {
+	// (This field has been deprecated. ReservedInstanceId is recommended.) IDs of purchased reserved instances. For example, ri-rtbh4han.
+	//
+	// Deprecated: ReservedInstancesId is deprecated.
+	ReservedInstancesId *string `json:"ReservedInstancesId,omitnil,omitempty" name:"ReservedInstancesId"`
+
+	// Specifications of reserved instances. For example, S3.MEDIUM4.
+	// Return values: <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved instance specification list.</a>
+	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Availability zones in which reserved instances can be purchased. For example, ap-guangzhou-1.
+	// Return values: <a href="https://intl.cloud.tencent.com/document/product/213/6091?from_cn_redirect=1">Availability zone list.</a>
+	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
+
+	// Billing start time of reserved instances. For example, 1949-10-01 00:00:00.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Billing end time of reserved instances. For example, 1949-10-01 00:00:00.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Validity periods of reserved instances, which is the purchase duration of reserved instances. For example, 31536000.
+	// Unit: second.
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// Number of purchased reserved instances. For example, 10.
+	InstanceCount *int64 `json:"InstanceCount,omitnil,omitempty" name:"InstanceCount"`
+
+	// Platform descriptions (operating systems) of reserved instances. For example, linux.
+	// Return value: linux.
+	ProductDescription *string `json:"ProductDescription,omitnil,omitempty" name:"ProductDescription"`
+
+	// Statuses of purchased reserved instances. For example: active.
+	// Return values: active (created) | pending (waiting to be created) | retired (expired).
+	State *string `json:"State,omitnil,omitempty" name:"State"`
+
+	// Billing currencies of purchasable reserved instances. Use standard currency codes defined in ISO 4217. For example, USD.
+	// Return value: USD.
+	CurrencyCode *string `json:"CurrencyCode,omitnil,omitempty" name:"CurrencyCode"`
+
+	// Payment types of reserved instances. For example, All Upfront.
+	// Return value: All Upfront (fully prepaid).
+	OfferingType *string `json:"OfferingType,omitnil,omitempty" name:"OfferingType"`
+
+	// Types of reserved instances. For example, S3.
+	// Return values: <a href="https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1">Reserved instance type list.</a>
+	InstanceFamily *string `json:"InstanceFamily,omitnil,omitempty" name:"InstanceFamily"`
+
+	// IDs of purchased reserved instances. For example, ri-rtbh4han.
+	ReservedInstanceId *string `json:"ReservedInstanceId,omitnil,omitempty" name:"ReservedInstanceId"`
+
+	// Display names of reserved instances. For example, riname-01.
+	ReservedInstanceName *string `json:"ReservedInstanceName,omitnil,omitempty" name:"ReservedInstanceName"`
 }
 
 type ReservedInstancesOffering struct {
