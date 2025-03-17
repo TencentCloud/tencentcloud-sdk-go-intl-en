@@ -265,7 +265,7 @@ type BillDetail struct {
 	// Product name: The name of a Tencent Cloud product purchased by the user, such as CVM.
 	BusinessCodeName *string `json:"BusinessCodeName,omitnil,omitempty" name:"BusinessCodeName"`
 
-	// Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM – Standard S1.
+	// Subproduct name: The subcategory of a Tencent Cloud product purchased by the user, such as CVM Standard S1.
 	ProductCodeName *string `json:"ProductCodeName,omitnil,omitempty" name:"ProductCodeName"`
 
 	// Billing mode, which can be monthly subscription or pay-as-you-go.
@@ -367,6 +367,15 @@ type BillDetail struct {
 
 	// Note attributes (instance configuration): Other note information, such as the reserved instance, the reserved instance type, the transaction type, and the region information on both ends of the CCN product.Note: This field may return null, indicating that no valid values can be obtained.
 	ReserveDetail *string `json:"ReserveDetail,omitnil,omitempty" name:"ReserveDetail"`
+
+	// the discount object for the current consumption item, such as official website discount, user discount, and event discount.
+	DiscountObject *string `json:"DiscountObject,omitnil,omitempty" name:"DiscountObject"`
+
+	// the discount type for the current consumption item, such as discount and contract price.
+	DiscountType *string `json:"DiscountType,omitnil,omitempty" name:"DiscountType"`
+
+	// supplementary description of the discount type, such as 0.2.
+	DiscountContent *string `json:"DiscountContent,omitnil,omitempty" name:"DiscountContent"`
 }
 
 type BillDetailAssociatedOrder struct {
@@ -1889,7 +1898,7 @@ type DescribeBillDetailRequestParams struct {
 	// Offset
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Quantity, maximum is 100
+	// Quantity, maximum is 300
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// The period type. byUsedTime: By usage period; byPayTime: By payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page. 
@@ -1968,7 +1977,7 @@ type DescribeBillDetailRequest struct {
 	// Offset
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Quantity, maximum is 100
+	// Quantity, maximum is 300
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
 	// The period type. byUsedTime: By usage period; byPayTime: By payment period. Must be the same as the period of the current monthly bill of the Billing Center. You can check your bill statistics period type at the top of the [Bill Overview](https://console.cloud.tencent.com/expense/bill/overview) page. 
