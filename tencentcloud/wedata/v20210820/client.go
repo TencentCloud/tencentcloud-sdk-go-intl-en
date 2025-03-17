@@ -6265,6 +6265,104 @@ func (c *Client) DescribeRealTimeTaskSpeedWithContext(ctx context.Context, reque
     return
 }
 
+func NewDescribeReportTaskDetailRequest() (request *DescribeReportTaskDetailRequest) {
+    request = &DescribeReportTaskDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DescribeReportTaskDetail")
+    
+    
+    return
+}
+
+func NewDescribeReportTaskDetailResponse() (response *DescribeReportTaskDetailResponse) {
+    response = &DescribeReportTaskDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeReportTaskDetail
+// This API is used to query task details for reports.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeReportTaskDetail(request *DescribeReportTaskDetailRequest) (response *DescribeReportTaskDetailResponse, err error) {
+    return c.DescribeReportTaskDetailWithContext(context.Background(), request)
+}
+
+// DescribeReportTaskDetail
+// This API is used to query task details for reports.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeReportTaskDetailWithContext(ctx context.Context, request *DescribeReportTaskDetailRequest) (response *DescribeReportTaskDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeReportTaskDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReportTaskDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeReportTaskDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeReportTaskListRequest() (request *DescribeReportTaskListRequest) {
+    request = &DescribeReportTaskListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DescribeReportTaskList")
+    
+    
+    return
+}
+
+func NewDescribeReportTaskListResponse() (response *DescribeReportTaskListResponse) {
+    response = &DescribeReportTaskListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeReportTaskList
+// This API is used to query the task submission list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeReportTaskList(request *DescribeReportTaskListRequest) (response *DescribeReportTaskListResponse, err error) {
+    return c.DescribeReportTaskListWithContext(context.Background(), request)
+}
+
+// DescribeReportTaskList
+// This API is used to query the task submission list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeReportTaskListWithContext(ctx context.Context, request *DescribeReportTaskListRequest) (response *DescribeReportTaskListResponse, err error) {
+    if request == nil {
+        request = NewDescribeReportTaskListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReportTaskList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeReportTaskListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeResourceManagePathTreesRequest() (request *DescribeResourceManagePathTreesRequest) {
     request = &DescribeResourceManagePathTreesRequest{
         BaseRequest: &tchttp.BaseRequest{},
