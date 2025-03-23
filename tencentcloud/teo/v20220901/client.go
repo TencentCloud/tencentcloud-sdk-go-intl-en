@@ -5891,6 +5891,63 @@ func (c *Client) DescribeSecurityIPGroupInfoWithContext(ctx context.Context, req
     return
 }
 
+func NewDescribeSecurityPolicyRequest() (request *DescribeSecurityPolicyRequest) {
+    request = &DescribeSecurityPolicyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeSecurityPolicy")
+    
+    
+    return
+}
+
+func NewDescribeSecurityPolicyResponse() (response *DescribeSecurityPolicyResponse) {
+    response = &DescribeSecurityPolicyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSecurityPolicy
+// This API is used to query the web and security protection configurations.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeSecurityPolicy(request *DescribeSecurityPolicyRequest) (response *DescribeSecurityPolicyResponse, err error) {
+    return c.DescribeSecurityPolicyWithContext(context.Background(), request)
+}
+
+// DescribeSecurityPolicy
+// This API is used to query the web and security protection configurations.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeSecurityPolicyWithContext(ctx context.Context, request *DescribeSecurityPolicyRequest) (response *DescribeSecurityPolicyResponse, err error) {
+    if request == nil {
+        request = NewDescribeSecurityPolicyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSecurityPolicy require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeSecurityTemplateBindingsRequest() (request *DescribeSecurityTemplateBindingsRequest) {
     request = &DescribeSecurityTemplateBindingsRequest{
         BaseRequest: &tchttp.BaseRequest{},

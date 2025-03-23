@@ -1191,6 +1191,65 @@ func (c *Client) RecognizeBrazilDriverLicenseOCRWithContext(ctx context.Context,
     return
 }
 
+func NewRecognizeBrazilIDCardOCRRequest() (request *RecognizeBrazilIDCardOCRRequest) {
+    request = &RecognizeBrazilIDCardOCRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "RecognizeBrazilIDCardOCR")
+    
+    
+    return
+}
+
+func NewRecognizeBrazilIDCardOCRResponse() (response *RecognizeBrazilIDCardOCRResponse) {
+    response = &RecognizeBrazilIDCardOCRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RecognizeBrazilIDCardOCR
+// This interface supports identification of the front and back of Brazilian ID license. The identification fields include name, driver's license category, number, validity period, etc.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) RecognizeBrazilIDCardOCR(request *RecognizeBrazilIDCardOCRRequest) (response *RecognizeBrazilIDCardOCRResponse, err error) {
+    return c.RecognizeBrazilIDCardOCRWithContext(context.Background(), request)
+}
+
+// RecognizeBrazilIDCardOCR
+// This interface supports identification of the front and back of Brazilian ID license. The identification fields include name, driver's license category, number, validity period, etc.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) RecognizeBrazilIDCardOCRWithContext(ctx context.Context, request *RecognizeBrazilIDCardOCRRequest) (response *RecognizeBrazilIDCardOCRResponse, err error) {
+    if request == nil {
+        request = NewRecognizeBrazilIDCardOCRRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RecognizeBrazilIDCardOCR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRecognizeBrazilIDCardOCRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRecognizeGeneralInvoiceRequest() (request *RecognizeGeneralInvoiceRequest) {
     request = &RecognizeGeneralInvoiceRequest{
         BaseRequest: &tchttp.BaseRequest{},

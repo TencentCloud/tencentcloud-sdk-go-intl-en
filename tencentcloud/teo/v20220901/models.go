@@ -899,6 +899,11 @@ func (r *BindZoneToPlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type BlockIPActionParameters struct {
+	// Penalty duration for `BlockIP`. Units: <li>`s`: second, value range 1-120;</li> <li>`m`: minute, value range 1-120;</li> <li>`h`: hour, value range 1-48.</li>.
+	Duration *string `json:"Duration,omitnil,omitempty" name:"Duration"`
+}
+
 type BotConfig struct {
 	// Whether to enable bot security. Values:
 	// <li>`on`: Enable</li>
@@ -4055,6 +4060,34 @@ type CustomField struct {
 	// Indicates whether to deliver this field. If not filled in, this field will not be delivered.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+}
+
+type CustomRule struct {
+	// The custom rule name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// The specifics of the custom rule, must comply with the expression grammar, please refer to product documentation for details.
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
+
+	// Action for custom rules. The Name parameter of SecurityAction supports: <li>`Deny`: block;</li> <li>`Monitor`: observe;</li> <li>`ReturnCustomPage`: block with customized page;</li> <li>`Redirect`: Redirect to URL;</li> <li>`BlockIP`: IP blocking;</li> <li>`JSChallenge`: JavaScript challenge;</li> <li>`ManagedChallenge`: managed challenge;</li> <li>`Allow`: Allow.</li>.
+	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// The custom rule status. Values: <li>`on`: enabled</li> <li>`off`: disabled</li>.
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Custom rule ID. <br>Different rule configuration operations are supported by rule ID : <br> - Add a new rule: ID is empty or the ID parameter is not specified; <br> - Modify an existing rule: specify the rule ID that needs to be updated/modified; <br> - Delete an existing rule: existing rules not included in the Rules parameter will be deleted.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Type of custom rule. Values: <li>`BasicAccessRule`: basic access control;</li> <li>`PreciseMatchRule`: exact custom rule, default;</li> <li>`ManagedAccessRule`: expert customized rule, output parameter only.</li>The default value is PreciseMatchRule.
+	RuleType *string `json:"RuleType,omitnil,omitempty" name:"RuleType"`
+
+	// Customize the priority of custom rule. Range: 0-100, the default value is 0, this parameter only supports PreciseMatchRule.
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+}
+
+type CustomRules struct {
+	// The custom rule. <br>when modifying the Web protection configuration using ModifySecurityPolicy: <br> - if the Rules parameter is not specified or the parameter length of Rules is zero: clear all custom rule configurations. <br> - if the Rules parameter is not specified: keep the existing custom rule configuration without modification.
+	Rules []*CustomRule `json:"Rules,omitnil,omitempty" name:"Rules"`
 }
 
 type CustomTime struct {
@@ -8880,6 +8913,85 @@ func (r *DescribeSecurityIPGroupResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeSecurityPolicyRequestParams struct {
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// `SecurityPolicy` type, the following parameter values can be used for query: <li>`ZoneDefaultPolicy`: used to specify a query for site-level policies;</li> <li>`Template`: used to specify a query for policy templates. the `TemplateId` parameter needs to be specified simultaneously;</li> <li>`Host`: used to specify a query for domain-level policies (note: when using `Host` to specify a domain name service policy, only domain name services or policy templates that have been applied domain-level policies are supported).</li>	
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
+
+	// Specify the policy Template ID. Use this parameter to specify the ID of the policy Template to query the Template configuration when the `Entity` parameter value is set to `Template`.
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+
+	// Specify the domain name. When the `Entity` parameter value is set to `Host`, use the domain-level policy specified by this parameter to query the domain configuration. For example, use `www.example.com` to configure the domain-level policy for that domain name.
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+}
+
+type DescribeSecurityPolicyRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// `SecurityPolicy` type, the following parameter values can be used for query: <li>`ZoneDefaultPolicy`: used to specify a query for site-level policies;</li> <li>`Template`: used to specify a query for policy templates. the `TemplateId` parameter needs to be specified simultaneously;</li> <li>`Host`: used to specify a query for domain-level policies (note: when using `Host` to specify a domain name service policy, only domain name services or policy templates that have been applied domain-level policies are supported).</li>	
+	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
+
+	// Specify the policy Template ID. Use this parameter to specify the ID of the policy Template to query the Template configuration when the `Entity` parameter value is set to `Template`.
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+
+	// Specify the domain name. When the `Entity` parameter value is set to `Host`, use the domain-level policy specified by this parameter to query the domain configuration. For example, use `www.example.com` to configure the domain-level policy for that domain name.
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+}
+
+func (r *DescribeSecurityPolicyRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityPolicyRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "Entity")
+	delete(f, "TemplateId")
+	delete(f, "Host")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSecurityPolicyRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSecurityPolicyResponseParams struct {
+	// Security policy configuration.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	SecurityPolicy *SecurityPolicy `json:"SecurityPolicy,omitnil,omitempty" name:"SecurityPolicy"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSecurityPolicyResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSecurityPolicyResponseParams `json:"Response"`
+}
+
+func (r *DescribeSecurityPolicyResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSecurityPolicyResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeSecurityTemplateBindingsRequestParams struct {
 	// ID of the site to query
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -10121,6 +10233,43 @@ type DetailHost struct {
 	// Whether to carry the location information of the client IP during origin-pull.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	ClientIpCountry *ClientIpCountry `json:"ClientIpCountry,omitnil,omitempty" name:"ClientIpCountry"`
+}
+
+type DetectLengthLimitCondition struct {
+	// Parameter name of the matched condition. Values:.
+	// <li>`body_depth`: detection depth of the request body packet part.</li>
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Parameter value of the matched condition, used in pairs with the `Name` parameter.
+	// When the `Name` value is body_depth, `Values` only support passing in a single value. Values:
+	// <li>`8KB`;</li>
+	// <li>`64KB`;</li>
+	// <li>`128KB`.</li>
+	Values []*string `json:"Values,omitnil,omitempty" name:"Values"`
+}
+
+type DetectLengthLimitConfig struct {
+	// List of rules that detect length limits.
+	DetectLengthLimitRules []*DetectLengthLimitRule `json:"DetectLengthLimitRules,omitnil,omitempty" name:"DetectLengthLimitRules"`
+}
+
+type DetectLengthLimitRule struct {
+	// Rule Id, output parameter only.
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Rule name, output parameter only.
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
+
+	// Rule description, output parameter only.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Rule configuration conditions, output parameter only.
+	Conditions []*DetectLengthLimitCondition `json:"Conditions,omitnil,omitempty" name:"Conditions"`
+
+	// Handling method. Values:.
+	// <li>`skip`: when request body data exceeds the detection depth set by `body_depth` in `Conditions` output parameters, skip all request body content detection.</li>.
+	// <li>`scan`: detect at the detection depth set by `body_depth` in the `Conditions` output parameters only. Truncate the excess part of the request body content directly, the excess part of the request body will not go through security detection.</li> Output paramter only.
+	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
 type DiffIPWhitelist struct {
@@ -11740,6 +11889,84 @@ type LogFormat struct {
 	// <li>,: half-width comma;</li>
 	// <li>;: Half-width semicolon. </li>
 	FieldDelimiter *string `json:"FieldDelimiter,omitnil,omitempty" name:"FieldDelimiter"`
+}
+
+type ManagedRuleAction struct {
+	// Specific items under ManagedRuleGroup, used to rewrite the configuration of this individual rule item, refer to product documentation for details.	
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Action for the managed rule item specified by RuleId, the SecurityAction Name parameter supports: <li>`Deny`: block and respond with an block page;</li> <li>`Monitor`: observe, do not process the request and record the security event in logs;</li> <li>`Disabled`: disabled, do not scan the request and skip this rule.</li>.
+	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
+}
+
+type ManagedRuleAutoUpdate struct {
+	// Enable automatic update to the latest version or not. Values: <li>`on`: enabled</li> <li>`off`: disabled</li>.
+	AutoUpdateToLatestVersion *string `json:"AutoUpdateToLatestVersion,omitnil,omitempty" name:"AutoUpdateToLatestVersion"`
+
+	// Current version, compliant with ISO 8601 standard format, such as 2023-12-21T12:00:32Z, empty by default, output parameter only.
+	RulesetVersion *string `json:"RulesetVersion,omitnil,omitempty" name:"RulesetVersion"`
+}
+
+type ManagedRuleDetail struct {
+	// Managed rule Id.
+	RuleId *string `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Protection level of managed rules. Values: <li>`low`: low risk, this rule has a relatively low risk and is applicable to very strict access scenarios, this level of rule may generate considerable false alarms.</li> <li>`medium`: medium risk, this means the risk of this rule is normal and is suitable for protection scenarios with stricter requirements.</li> <li>`high`: high risk, this indicates that the risk of this rule is relatively high and will not generate false alarms in most scenarios.</li> <li>`extreme`: ultra-high risk. this represents that the risk of this rule is extremely high and will not generate false alarms basically.</li>.
+	RiskLevel *string `json:"RiskLevel,omitnil,omitempty" name:"RiskLevel"`
+
+	// Rule description.
+	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	// Rule tag. Some types of rules do not have tags.
+	Tags []*string `json:"Tags,omitnil,omitempty" name:"Tags"`
+
+	// Rule version.
+	RuleVersion *string `json:"RuleVersion,omitnil,omitempty" name:"RuleVersion"`
+}
+
+type ManagedRuleGroup struct {
+	// Name of the managed rule group, if the configuration for the rule group is not specified, it will be processed by default, refer to product documentation for the specific value of GroupId.
+	GroupId *string `json:"GroupId,omitnil,omitempty" name:"GroupId"`
+
+	// Protection level of the managed rule group. Values: <li>`loose`: lenient, only contain ultra-high risk rules, at this point, Action parameter needs configured instead of RuleActions parameter;</li> <li>`normal`: normal, contain ultra-high risk and high-risk rules, at this point,Action parameter needs configured instead of RuleActions parameter;</li> <li>`strict`: strict, contains ultra-high risk, high-risk and medium-risk rules, at this point, Action parameter needs configured instead of RuleActions parameter;</li> <li>`extreme`: super strict, contains ultra-high risk, high-risk, medium-risk and low-risk rules, at this point, Action parameter needs configured instead of RuleActions parameter;</li> <li>`custom`: custom, refined strategy, configure the RuleActions parameter for each individual rule, at this point, the Action field is invalid, use RuleActions to configure the refined strategy for each individual rule.</li>.
+	SensitivityLevel *string `json:"SensitivityLevel,omitnil,omitempty" name:"SensitivityLevel"`
+
+	// Action for ManagedRuleGroup. the Name parameter value of SecurityAction supports: <li>`Deny`: block and respond with a block page;</li> <li>`Monitor`: observe, do not process requests and record security events in logs;</li> <li>`Disabled`: not enabled, do not scan requests and skip this rule.</li>.
+	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// Specific configuration of rule items under the managed rule group, valid only when SensitivityLevel is custom.
+	RuleActions []*ManagedRuleAction `json:"RuleActions,omitnil,omitempty" name:"RuleActions"`
+
+	// ManagedRuleGroup detailed information, output parameter only.
+	MetaData *ManagedRuleGroupMeta `json:"MetaData,omitnil,omitempty" name:"MetaData"`
+}
+
+type ManagedRuleGroupMeta struct {
+	// ManagedRuleGroup detailed information, output parameter only.
+	GroupDetail *string `json:"GroupDetail,omitnil,omitempty" name:"GroupDetail"`
+
+	// ManagedRuleGroup name, output parameter only.
+	GroupName *string `json:"GroupName,omitnil,omitempty" name:"GroupName"`
+
+	// All sub-rules information under current ManagedRuleGroup, output parameter only.
+	RuleDetails []*ManagedRuleDetail `json:"RuleDetails,omitnil,omitempty" name:"RuleDetails"`
+}
+
+type ManagedRules struct {
+	// The managed rule status. Values: <li>`on`: enabled, all managed rules take effect as configured;</li> <li>`off`: disabled, all managed rules do not take effect.</li>.
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Evaluation mode is enabled or not, it is valid only when the `Enabled` parameter is set to `on`. Values: <li>`on`: enabled, all managed rules take effect in `observe` mode.</li> <li>off: disabled, all managed rules take effect according to the specified configuration.</li>.
+	DetectionOnly *string `json:"DetectionOnly,omitnil,omitempty" name:"DetectionOnly"`
+
+	// Managed rule semantic analysis is enabled or not, it is valid only when the `Enabled` parameter is `on`. Values: <li>`on`: enabled, perform semantic analysis  before processing requests;</li> <li>`off`: disabled, process requests directly without semantic analysis.</li> <br/>The default value is `off`.
+	SemanticAnalysis *string `json:"SemanticAnalysis,omitnil,omitempty" name:"SemanticAnalysis"`
+
+	// Managed rule automatic update option.
+	AutoUpdate *ManagedRuleAutoUpdate `json:"AutoUpdate,omitnil,omitempty" name:"AutoUpdate"`
+
+	// Configuration of the managed rule group. If this structure is passed as an empty array or the GroupId is not included in the array, it will be processed based by default.
+	ManagedRuleGroups []*ManagedRuleGroup `json:"ManagedRuleGroups,omitnil,omitempty" name:"ManagedRuleGroups"`
 }
 
 type MaxAge struct {
@@ -14178,44 +14405,44 @@ func (r *ModifySecurityIPGroupResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ModifySecurityPolicyRequestParams struct {
-	// The site ID.
+	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Security configuration.
+	// Security policy configuration. <li>When the `CustomRule` in the `SecurityPolicy` parameter is set, the `AclConfg` and `IpTableConfg` in the `SecurityConfig` parameter will be ignored;</li> <li>when the `ManagedRule` in the `SecurityPolicy` parameter is set, the `WafConfig` in the `SecurityConfig` parameter will be ignored.</li> <li>For custom rules and managed rule policy configuration, using `SecurityPolicy` parameter to configure settings is recommended.</li>
 	SecurityConfig *SecurityConfig `json:"SecurityConfig,omitnil,omitempty" name:"SecurityConfig"`
 
-	// Subdomain/application name.
-	// 
-	// Note: When both this parameter and the TemplateId parameter are specified, this parameter will not take effect. Do not specify this parameter and the TemplateId parameter at the same time.
+	// Security policy configuration. The parameter is recommended to use for custom policies and managed rule configurations of web protection, it supports configuring security policies with expression grammar.	
+	SecurityPolicy *SecurityPolicy `json:"SecurityPolicy,omitnil,omitempty" name:"SecurityPolicy"`
+
+	// `SecurityPolicy` type, the following parameter values can be used for query: <li>`ZoneDefaultPolicy`: used to specify a query for site-level policies;</li> <li>`Template`: used to specify a query for policy templates. the `TemplateId` parameter needs to be specified simultaneously;</li> <li>`Host`: used to specify a query for domain-level policies (note: when using `Host` to specify a domain name service policy, only domain name services or policy templates that have been applied domain-level policies are supported).</li>	
 	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
-	// Specifies the policy template ID, or the site's global policy.
-	// - To configure a policy template, specify the policy template ID.
-	// - To configure the site's global policy, use the @ZoneLevel@Domain parameter value.
-	// 
-	// Note: When this parameter is used, the Entity parameter will not take effect. Do not use this parameter and the Entity parameter at the same time.
+	// Specify the domain name. When the `Entity` parameter value is set to `Host`, use the domain-level policy specified by this parameter to query the domain configuration. For example, use `www.example.com` to configure the domain-level policy for that domain name.
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Specify the policy template ID. Use this parameter to specify the ID of the policy Template to query the Template configuration when the `Entity` parameter value is set to `Template`.
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
 type ModifySecurityPolicyRequest struct {
 	*tchttp.BaseRequest
 	
-	// The site ID.
+	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
 
-	// Security configuration.
+	// Security policy configuration. <li>When the `CustomRule` in the `SecurityPolicy` parameter is set, the `AclConfg` and `IpTableConfg` in the `SecurityConfig` parameter will be ignored;</li> <li>when the `ManagedRule` in the `SecurityPolicy` parameter is set, the `WafConfig` in the `SecurityConfig` parameter will be ignored.</li> <li>For custom rules and managed rule policy configuration, using `SecurityPolicy` parameter to configure settings is recommended.</li>
 	SecurityConfig *SecurityConfig `json:"SecurityConfig,omitnil,omitempty" name:"SecurityConfig"`
 
-	// Subdomain/application name.
-	// 
-	// Note: When both this parameter and the TemplateId parameter are specified, this parameter will not take effect. Do not specify this parameter and the TemplateId parameter at the same time.
+	// Security policy configuration. The parameter is recommended to use for custom policies and managed rule configurations of web protection, it supports configuring security policies with expression grammar.	
+	SecurityPolicy *SecurityPolicy `json:"SecurityPolicy,omitnil,omitempty" name:"SecurityPolicy"`
+
+	// `SecurityPolicy` type, the following parameter values can be used for query: <li>`ZoneDefaultPolicy`: used to specify a query for site-level policies;</li> <li>`Template`: used to specify a query for policy templates. the `TemplateId` parameter needs to be specified simultaneously;</li> <li>`Host`: used to specify a query for domain-level policies (note: when using `Host` to specify a domain name service policy, only domain name services or policy templates that have been applied domain-level policies are supported).</li>	
 	Entity *string `json:"Entity,omitnil,omitempty" name:"Entity"`
 
-	// Specifies the policy template ID, or the site's global policy.
-	// - To configure a policy template, specify the policy template ID.
-	// - To configure the site's global policy, use the @ZoneLevel@Domain parameter value.
-	// 
-	// Note: When this parameter is used, the Entity parameter will not take effect. Do not use this parameter and the Entity parameter at the same time.
+	// Specify the domain name. When the `Entity` parameter value is set to `Host`, use the domain-level policy specified by this parameter to query the domain configuration. For example, use `www.example.com` to configure the domain-level policy for that domain name.
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Specify the policy template ID. Use this parameter to specify the ID of the policy Template to query the Template configuration when the `Entity` parameter value is set to `Template`.
 	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
 }
 
@@ -14233,7 +14460,9 @@ func (r *ModifySecurityPolicyRequest) FromJsonString(s string) error {
 	}
 	delete(f, "ZoneId")
 	delete(f, "SecurityConfig")
+	delete(f, "SecurityPolicy")
 	delete(f, "Entity")
+	delete(f, "Host")
 	delete(f, "TemplateId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySecurityPolicyRequest has unknown keys!", "")
@@ -15426,6 +15655,11 @@ type RealtimeLogDeliveryTask struct {
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
+type RedirectActionParameters struct {
+	// Redirect URL.
+	URL *string `json:"URL,omitnil,omitempty" name:"URL"`
+}
+
 type RenewFlag struct {
 	// The auto-renewal flag for prepaid plan has the following values:
 	// <li> on: Enable auto-renewal;</li>
@@ -15573,6 +15807,14 @@ type ResponseSpeedLimitParameters struct {
 
 	// Rate-Limiting start value, which can be the download size or specified duration, in kb or s. this parameter is required when mode is set to limitafterspecificbytesdownloaded or limitafterspecificsecondsdownloaded. enter a numerical value to specify the download size or duration.
 	StartAt *string `json:"StartAt,omitnil,omitempty" name:"StartAt"`
+}
+
+type ReturnCustomPageActionParameters struct {
+	// Response custom status code.
+	ResponseCode *string `json:"ResponseCode,omitnil,omitempty" name:"ResponseCode"`
+
+	// Response custom page ID.
+	ErrorPageId *string `json:"ErrorPageId,omitnil,omitempty" name:"ErrorPageId"`
 }
 
 type RewriteAction struct {
@@ -16049,6 +16291,21 @@ type SecEntryValue struct {
 	Sum *float64 `json:"Sum,omitnil,omitempty" name:"Sum"`
 }
 
+type SecurityAction struct {
+	// Specific action name for security operation. Values:
+	// <li>`Deny`: block</li> <li>`Monitor`: monitor</li> <li>`ReturnCustomPage`: block with customized page</li> <li>`Redirect`: Redirect to URL</li> <li>`BlockIP`: IP block</li> <li>`JSChallenge`: javaScript challenge</li> <li>`ManagedChallenge`: managed challenge</li> <li>`Disabled`: disabled</li> <li>`Allow`: allow</li>.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Additional parameter when Name is BlockIP.
+	BlockIPActionParameters *BlockIPActionParameters `json:"BlockIPActionParameters,omitnil,omitempty" name:"BlockIPActionParameters"`
+
+	// Additional parameter when Name is ReturnCustomPage.
+	ReturnCustomPageActionParameters *ReturnCustomPageActionParameters `json:"ReturnCustomPageActionParameters,omitnil,omitempty" name:"ReturnCustomPageActionParameters"`
+
+	// Additional parameter when Name is Redirect.
+	RedirectActionParameters *RedirectActionParameters `json:"RedirectActionParameters,omitnil,omitempty" name:"RedirectActionParameters"`
+}
+
 type SecurityConfig struct {
 	// Managed rule. If the parameter is null or not filled, the configuration last set will be used by default.
 	// Note: This field may return null, indicating that no valid value can be obtained.
@@ -16085,6 +16342,20 @@ type SecurityConfig struct {
 
 	// Settings for slow attack defense. If the parameter is null or not filled, the configuration last set will be used by default.Note: This field may return null, indicating that no valid value can be obtained.
 	SlowPostConfig *SlowPostConfig `json:"SlowPostConfig,omitnil,omitempty" name:"SlowPostConfig"`
+
+	// Detect the length limit configuration, output parameter only.
+	// Note: This field may return null, which indicates a failure to obtain a valid value.
+	DetectLengthLimitConfig *DetectLengthLimitConfig `json:"DetectLengthLimitConfig,omitnil,omitempty" name:"DetectLengthLimitConfig"`
+}
+
+type SecurityPolicy struct {
+	// Custom rules. If the parameter is null or not filled, the configuration last set will be used by default.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CustomRules *CustomRules `json:"CustomRules,omitnil,omitempty" name:"CustomRules"`
+
+	// Managed. If the parameter is null or not filled, the configuration last set will be used by default.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ManagedRules *ManagedRules `json:"ManagedRules,omitnil,omitempty" name:"ManagedRules"`
 }
 
 type SecurityTemplateBinding struct {
