@@ -8516,6 +8516,57 @@ func (c *Client) ModifyL7AccRuleWithContext(ctx context.Context, request *Modify
     return
 }
 
+func NewModifyL7AccRulePriorityRequest() (request *ModifyL7AccRulePriorityRequest) {
+    request = &ModifyL7AccRulePriorityRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyL7AccRulePriority")
+    
+    
+    return
+}
+
+func NewModifyL7AccRulePriorityResponse() (response *ModifyL7AccRulePriorityResponse) {
+    response = &ModifyL7AccRulePriorityResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyL7AccRulePriority
+// This interface is used to modify the priority of the rule list in the [Rule Engine](https://intl.cloud.tencent.com/document/product/1552/70901?from_cn_redirect=1). This interface requires the complete rule ID list under the site ID to be passed in. The rule ID list can be obtained through the [Query Seven-Layer Acceleration Rules](https://intl.cloud.tencent.com/document/product/1552/115820?from_cn_redirect=1) interface. The final priority order will be adjusted to the order of the rule ID list, and will be executed from front to back.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_INVALIDRULEENGINE = "InvalidParameter.InvalidRuleEngine"
+//  INVALIDPARAMETER_INVALIDRULEENGINENOTFOUND = "InvalidParameter.InvalidRuleEngineNotFound"
+func (c *Client) ModifyL7AccRulePriority(request *ModifyL7AccRulePriorityRequest) (response *ModifyL7AccRulePriorityResponse, err error) {
+    return c.ModifyL7AccRulePriorityWithContext(context.Background(), request)
+}
+
+// ModifyL7AccRulePriority
+// This interface is used to modify the priority of the rule list in the [Rule Engine](https://intl.cloud.tencent.com/document/product/1552/70901?from_cn_redirect=1). This interface requires the complete rule ID list under the site ID to be passed in. The rule ID list can be obtained through the [Query Seven-Layer Acceleration Rules](https://intl.cloud.tencent.com/document/product/1552/115820?from_cn_redirect=1) interface. The final priority order will be adjusted to the order of the rule ID list, and will be executed from front to back.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_INVALIDRULEENGINE = "InvalidParameter.InvalidRuleEngine"
+//  INVALIDPARAMETER_INVALIDRULEENGINENOTFOUND = "InvalidParameter.InvalidRuleEngineNotFound"
+func (c *Client) ModifyL7AccRulePriorityWithContext(ctx context.Context, request *ModifyL7AccRulePriorityRequest) (response *ModifyL7AccRulePriorityResponse, err error) {
+    if request == nil {
+        request = NewModifyL7AccRulePriorityRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyL7AccRulePriority require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyL7AccRulePriorityResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyL7AccSettingRequest() (request *ModifyL7AccSettingRequest) {
     request = &ModifyL7AccSettingRequest{
         BaseRequest: &tchttp.BaseRequest{},

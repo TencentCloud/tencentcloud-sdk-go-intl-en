@@ -518,6 +518,9 @@ const (
 	// Invalid response header.
 	INVALIDPARAMETER_INVALIDRESPONSEHEADERVALUE = "InvalidParameter.InvalidResponseHeaderValue"
 
+	// The rule engine configuration is invalid.
+	INVALIDPARAMETER_INVALIDRULEENGINE = "InvalidParameter.InvalidRuleEngine"
+
 	// Invalid rule engine operation.
 	INVALIDPARAMETER_INVALIDRULEENGINEACTION = "InvalidParameter.InvalidRuleEngineAction"
 
