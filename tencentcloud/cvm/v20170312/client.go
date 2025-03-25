@@ -2473,6 +2473,57 @@ func (c *Client) DescribeInstancesWithContext(ctx context.Context, request *Desc
     return
 }
 
+func NewDescribeInstancesAttributesRequest() (request *DescribeInstancesAttributesRequest) {
+    request = &DescribeInstancesAttributesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("cvm", APIVersion, "DescribeInstancesAttributes")
+    
+    
+    return
+}
+
+func NewDescribeInstancesAttributesResponse() (response *DescribeInstancesAttributesResponse) {
+    response = &DescribeInstancesAttributesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInstancesAttributes
+// This API is used to obtain the attributes of specified instances. Currently, it supports querying the custom data UserData of instances.
+//
+// error code that may be returned:
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+func (c *Client) DescribeInstancesAttributes(request *DescribeInstancesAttributesRequest) (response *DescribeInstancesAttributesResponse, err error) {
+    return c.DescribeInstancesAttributesWithContext(context.Background(), request)
+}
+
+// DescribeInstancesAttributes
+// This API is used to obtain the attributes of specified instances. Currently, it supports querying the custom data UserData of instances.
+//
+// error code that may be returned:
+//  INVALIDINSTANCEID_NOTFOUND = "InvalidInstanceId.NotFound"
+//  INVALIDPARAMETERVALUE_INSTANCEIDMALFORMED = "InvalidParameterValue.InstanceIdMalformed"
+func (c *Client) DescribeInstancesAttributesWithContext(ctx context.Context, request *DescribeInstancesAttributesRequest) (response *DescribeInstancesAttributesResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstancesAttributesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstancesAttributes require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstancesAttributesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeInstancesOperationLimitRequest() (request *DescribeInstancesOperationLimitRequest) {
     request = &DescribeInstancesOperationLimitRequest{
         BaseRequest: &tchttp.BaseRequest{},
