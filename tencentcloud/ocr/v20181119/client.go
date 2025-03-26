@@ -931,7 +931,9 @@ func NewMLIDPassportOCRResponse() (response *MLIDPassportOCRResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_FIELDEXCEPTION = "FailedOperation.FieldException"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_INCONSISTENCYBETWEENMRZANDVRZ = "FailedOperation.InconsistencyBetweenMRZAndVRZ"
 //  FAILEDOPERATION_NOPASSPORT = "FailedOperation.NoPassport"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
@@ -953,7 +955,9 @@ func (c *Client) MLIDPassportOCR(request *MLIDPassportOCRRequest) (response *MLI
 //
 // error code that may be returned:
 //  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_FIELDEXCEPTION = "FailedOperation.FieldException"
 //  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_INCONSISTENCYBETWEENMRZANDVRZ = "FailedOperation.InconsistencyBetweenMRZAndVRZ"
 //  FAILEDOPERATION_NOPASSPORT = "FailedOperation.NoPassport"
 //  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
 //  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"

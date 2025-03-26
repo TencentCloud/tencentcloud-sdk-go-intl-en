@@ -1438,7 +1438,7 @@ func (r *MLIDCardOCRResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type MLIDPassportOCRRequestParams struct {
-	// Base64-encoded value of image. The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 500x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies more than 2/3 area of the image.
+	// Base64-encoded value of image. The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 500x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported. It is recommended that the card part occupies more than 2/3 area of the image.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// Whether to return an image. 
@@ -1446,7 +1446,7 @@ type MLIDPassportOCRRequestParams struct {
 	RetImage *bool `json:"RetImage,omitnil,omitempty" name:"RetImage"`
 
 	// URL address of image. (This field is not supported outside Chinese mainland)
-	// Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
+	// Supported image formats: PNG, JPG, JPEG, BMP, PDF.
 	// Supported image size: the downloaded image cannot exceed 7 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
 	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
 	// The download speed and stability of non-Tencent Cloud URLs may be low.
@@ -1456,7 +1456,7 @@ type MLIDPassportOCRRequestParams struct {
 type MLIDPassportOCRRequest struct {
 	*tchttp.BaseRequest
 	
-	// Base64-encoded value of image. The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 500x800 is recommended. PNG, JPG, JPEG, and BMP formats are supported. It is recommended that the card part occupies more than 2/3 area of the image.
+	// Base64-encoded value of image. The image cannot exceed 7 MB in size after being Base64-encoded. A resolution above 500x800 is recommended. PNG, JPG, JPEG, BMP, and PDF formats are supported. It is recommended that the card part occupies more than 2/3 area of the image.
 	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
 
 	// Whether to return an image. 
@@ -1464,7 +1464,7 @@ type MLIDPassportOCRRequest struct {
 	RetImage *bool `json:"RetImage,omitnil,omitempty" name:"RetImage"`
 
 	// URL address of image. (This field is not supported outside Chinese mainland)
-	// Supported image formats: PNG, JPG, JPEG. GIF is currently not supported.
+	// Supported image formats: PNG, JPG, JPEG, BMP, PDF.
 	// Supported image size: the downloaded image cannot exceed 7 MB after being Base64-encoded. The download time of the image cannot exceed 3 seconds.
 	// We recommend you store the image in Tencent Cloud, as a Tencent Cloud URL can guarantee higher download speed and stability.
 	// The download speed and stability of non-Tencent Cloud URLs may be low.
