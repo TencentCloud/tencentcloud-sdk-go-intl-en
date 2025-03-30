@@ -104,22 +104,23 @@ type AIRecognitionTemplateItem struct {
 
 type Activity struct {
 	// Atomic task type.
-	// <li>input: start node.</li>
-	// <li>output: termination node.</li>
-	// <li>action-trans: transcoding.</li>
-	// <li>action-samplesnapshot: sampled screenshot taking.</li>
-	// <li>action-AIAnalysis: analysis.</li>
-	// <li>action-AIRecognition: recognition.</li>
-	// <li>action-aiReview: auditing.</li>
-	// <li>action-animated-graphics: animated image generating.</li>
-	// <li>action-image-sprite: sprite image generating.</li>
-	// <li>action-snapshotByTimeOffset: time point screenshot taking.</li>
-	// <li>action-adaptive-substream: adaptive bitrate streaming.</li>
-	// <li>action-AIQualityControl: media quality inspection.</li>
+	// <li>input: start node</li>
+	// <li>output: end node</li>
+	// <li>action-trans: transcoding</li>
+	// <li>action-samplesnapshot: sampled screenshot</li>
+	// <li>action-AIAnalysis: analysis</li>
+	// <li>action-AIRecognition: recognition</li>
+	// <li>action-aiReview: review</li>
+	// <li>action-animated-graphics: conversion to GIF</li>
+	// <li>action-image-sprite: image sprite</li>
+	// <li>action-snapshotByTimeOffset: time point screenshot</li>
+	// <li>action-adaptive-substream: adaptive bitrate stream</li>
+	// <li>action-AIQualityControl: media quality inspection</li>
+	// <li>action-SmartSubtitles: smart subtitle</li>
 	// 
 	// 
 	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	ActivityType *string `json:"ActivityType,omitnil,omitempty" name:"ActivityType"`
 
 	// The indexes of the subsequent actions.
@@ -162,6 +163,10 @@ type ActivityPara struct {
 	// Media quality inspection task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	QualityControlTask *AiQualityControlTaskInput `json:"QualityControlTask,omitnil,omitempty" name:"QualityControlTask"`
+
+	// Smart subtitle task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SmartSubtitlesTask *SmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
 }
 
 type ActivityResItem struct {
@@ -204,21 +209,26 @@ type ActivityResItem struct {
 	// Media quality inspection task output.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	QualityControlTask *ScheduleQualityControlTaskResult `json:"QualityControlTask,omitnil,omitempty" name:"QualityControlTask"`
+
+	// Smart subtitle task output.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SmartSubtitlesTask *ScheduleSmartSubtitleTaskResult `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
 }
 
 type ActivityResult struct {
 	// Atomic task type.
-	// <li>Transcode: transcoding.</li>
-	// <li>SampleSnapshot: sampled screenshot taking.</li>
-	// <li>AnimatedGraphics: animated image generating.</li>
-	// <li>SnapshotByTimeOffset: time point screenshot taking.</li>
-	// <li>ImageSprites: sprite image generating.</li>
-	// <li>AdaptiveDynamicStreaming: adaptive bitrate streaming.</li>
-	// <li>AiContentReview: content moderation.</li>
-	// <li>AIRecognition: intelligent identification.</li>
-	// <li>AIAnalysis: intelligent analysis.</li>
-	// 
+	// <Li>Transcode: transcoding</li>
+	// <Li>SampleSnapshot: sampled screenshot</li>
+	// <Li>AnimatedGraphics: conversion to GIF</li>
+	// <Li>SnapshotByTimeOffset: time point screenshot</li>
+	// <Li>ImageSprites: image sprite</li>
+	// <Li>AdaptiveDynamicStreaming: adaptive bitrate stream</li>
+	// <Li>AiContentReview: content review</li>
+	// <Li>AIRecognition: intelligent recognition</li>
+	// <Li>AIAnalysis: intelligent analysis</li>
 	// <li>AiQualityControl: media quality inspection.</li>
+	// 
+	// <Li>SmartSubtitles: smart subtitle</li>
 	ActivityType *string `json:"ActivityType,omitnil,omitempty" name:"ActivityType"`
 
 	// The execution results of the subtasks of the scheme.
@@ -352,6 +362,11 @@ type AdaptiveStreamTemplate struct {
 	// <li>0: no,</li>
 	// <li>1: yes.</li>
 	RemoveVideo *uint64 `json:"RemoveVideo,omitnil,omitempty" name:"RemoveVideo"`
+
+	// List of audio parameter information.
+	// The parameter array has a maximum length of 64.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AudioList []*AudioTemplateInfo `json:"AudioList,omitnil,omitempty" name:"AudioList"`
 }
 
 type AddOnSubtitle struct {
@@ -693,9 +708,13 @@ type AiAnalysisTaskInput struct {
 	// Video content analysis template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// An extended parameter, whose value is a stringfied JSON.
-	// Note: This parameter is for customers with special requirements. It needs to be customized offline.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Additional parameter. Its value is a serialized JSON string.
+	// Note: This parameter is used to meet customization requirements. References:
+	// Smart erase: https://intl.cloud.tencent.com/document/product/862/101530?from_cn_redirect=1
+	// Video splitting: https://intl.cloud.tencent.com/document/product/862/112098?from_cn_redirect=1
+	// Intelligent highlights: https://intl.cloud.tencent.com/document/product/862/107280?from_cn_redirect=1
+	// Horizontal-to-vertical video transformation: https://intl.cloud.tencent.com/document/product/862/112112?from_cn_redirect=1
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
 
@@ -1987,6 +2006,67 @@ type AsrFullTextConfigureInfoForUpdate struct {
 	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
 }
 
+type AsrHotWordsConfigure struct {
+	// Hotword switch.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Hotword lexicon ID.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	LibraryId *string `json:"LibraryId,omitnil,omitempty" name:"LibraryId"`
+}
+
+type AsrHotwordsSet struct {
+	// Hotword lexicon ID.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
+
+	// Current hotword lexicon status. The value indicates the number of smart subtitle templates bound to this hotword lexicon.
+	// If the Status value is 0, it indicates that the hotword lexicon is not referenced by any smart subtitle template and that it can be deleted.
+	// If the Status value is not 0, it indicates that the hotword lexicon cannot be deleted.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Hotword lexicon name.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Number of hotwords in the hotword lexicon.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	WordCount *uint64 `json:"WordCount,omitnil,omitempty" name:"WordCount"`
+
+	// Name of the uploaded hotword file.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+	// Creation time of the hotword lexicon in ISO datetime format (UTC time). For example, 2006-01-02T15:04:05Z.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Creation time of the hotword lexicon in ISO datetime format (UTC time). For example, 2006-01-02T15:04:05Z.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// 0: temporary hotword lexicon
+	// 1: file-based hotword lexicon
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type AsrHotwordsSetItem struct {
+	// Hotword ID.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Hotword text.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Hotword weight. The value can be 11 or 100 or be in the range of 1 to 10.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Weight *int64 `json:"Weight,omitnil,omitempty" name:"Weight"`
+}
+
 type AsrWordsConfigureInfo struct {
 	// Switch of a speech keyword recognition task. Valid values:
 	// <li>ON: Enables a speech keyword recognition task;</li>
@@ -2110,6 +2190,11 @@ type AudioTemplateInfo struct {
 	// When the media encapsulation format is audio (flac, ogg, mp3, and m4a), the number of channels cannot be set to 5.1 surround sound.
 	// Default value: 2.
 	AudioChannel *int64 `json:"AudioChannel,omitnil,omitempty" name:"AudioChannel"`
+
+	// Merge audio track information.
+	// This field only takes effec in adaptive bitrate transcoding.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TrackChannelInfo *AudioTrackChannelInfo `json:"TrackChannelInfo,omitnil,omitempty" name:"TrackChannelInfo"`
 }
 
 type AudioTemplateInfoForUpdate struct {
@@ -2153,6 +2238,28 @@ type AudioTemplateInfoForUpdate struct {
 
 	// The audio tracks to retain. All audio tracks are retained by default.
 	StreamSelects []*int64 `json:"StreamSelects,omitnil,omitempty" name:"StreamSelects"`
+}
+
+type AudioTrackChannelInfo struct {
+	// Whether to enable audio mix. valid values:.
+	// 0: indicates not enabling audio mix.
+	// 1: Indicates enabling audio mix.
+	// Default value: 0
+	// 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ChannelsRemix *int64 `json:"ChannelsRemix,omitnil,omitempty" name:"ChannelsRemix"`
+
+	// Audio track input type. valid values:.
+	// trask: indicates usage of the audio track id.
+	// Task_channel: indicates usage of the audio track id and sound channel id.
+	// Default: trask.
+	// If the original aduio track is multichannel, recommend using trask_channel.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SelectType *string `json:"SelectType,omitnil,omitempty" name:"SelectType"`
+
+	// Audio track information.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	InputTrackInfo []*TrackInfo `json:"InputTrackInfo,omitnil,omitempty" name:"InputTrackInfo"`
 }
 
 type AwsS3FileUploadTrigger struct {
@@ -3316,6 +3423,93 @@ func (r *CreateAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 }
 
 // Predefined struct for user
+type CreateAsrHotwordsRequestParams struct {
+	// 0: temporary hotword; 1 file-based hotword.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Hotword lexicon name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Hotword lexicon text. This field is required if Type is set to 0.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Base64-encoded content of the hotword file. This field is required if Type is set to 1.
+	// 
+	FileContent *string `json:"FileContent,omitnil,omitempty" name:"FileContent"`
+
+	// Name of the uploaded file.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+}
+
+type CreateAsrHotwordsRequest struct {
+	*tchttp.BaseRequest
+	
+	// 0: temporary hotword; 1 file-based hotword.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Hotword lexicon name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Hotword lexicon text. This field is required if Type is set to 0.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Base64-encoded content of the hotword file. This field is required if Type is set to 1.
+	// 
+	FileContent *string `json:"FileContent,omitnil,omitempty" name:"FileContent"`
+
+	// Name of the uploaded file.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+}
+
+func (r *CreateAsrHotwordsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAsrHotwordsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Type")
+	delete(f, "Name")
+	delete(f, "Content")
+	delete(f, "FileContent")
+	delete(f, "FileName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAsrHotwordsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAsrHotwordsResponseParams struct {
+	// Hotword lexicon ID.
+	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAsrHotwordsResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAsrHotwordsResponseParams `json:"Response"`
+}
+
+func (r *CreateAsrHotwordsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAsrHotwordsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateContentReviewTemplateRequestParams struct {
 	// The name of the content moderation template. Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -3323,13 +3517,13 @@ type CreateContentReviewTemplateRequestParams struct {
 	// The template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Control parameter for porn information
+	// Control parameter for a pornography detection task.
 	PornConfigure *PornConfigureInfo `json:"PornConfigure,omitnil,omitempty" name:"PornConfigure"`
 
-	// Control parameter for terrorism information
+	// Control parameter for a violence detection task.
 	TerrorismConfigure *TerrorismConfigureInfo `json:"TerrorismConfigure,omitnil,omitempty" name:"TerrorismConfigure"`
 
-	// Control parameter for politically sensitive information
+	// Control parameter for a sensitive content detection task.
 	PoliticalConfigure *PoliticalConfigureInfo `json:"PoliticalConfigure,omitnil,omitempty" name:"PoliticalConfigure"`
 
 	// Control parameter of prohibited information detection. Prohibited information includes:
@@ -3351,13 +3545,13 @@ type CreateContentReviewTemplateRequest struct {
 	// The template description. Length limit: 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
 
-	// Control parameter for porn information
+	// Control parameter for a pornography detection task.
 	PornConfigure *PornConfigureInfo `json:"PornConfigure,omitnil,omitempty" name:"PornConfigure"`
 
-	// Control parameter for terrorism information
+	// Control parameter for a violence detection task.
 	TerrorismConfigure *TerrorismConfigureInfo `json:"TerrorismConfigure,omitnil,omitempty" name:"TerrorismConfigure"`
 
-	// Control parameter for politically sensitive information
+	// Control parameter for a sensitive content detection task.
 	PoliticalConfigure *PoliticalConfigureInfo `json:"PoliticalConfigure,omitnil,omitempty" name:"PoliticalConfigure"`
 
 	// Control parameter of prohibited information detection. Prohibited information includes:
@@ -4044,6 +4238,210 @@ func (r *CreateScheduleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *CreateScheduleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSmartSubtitleTemplateRequestParams struct {
+	// Smart subtitle template name.
+	// Length limit: 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Source language of the video with smart subtitles.
+	// Supported languages:
+	// zh: Simplified Chinese
+	// en: English
+	// ja: Japanese
+	// ko: Korean
+	// zh-PY: Chinese-English-Cantonese
+	// zh-medical: Medical Chinese
+	// yue: Cantonese
+	// vi: Vietnamese
+	// ms: Malay
+	// id: Indonesian
+	// fli: Filipino
+	// th: Thai
+	// pt: Portuguese
+	// tr: Turkish
+	// ar: Arabic
+	// es: Spanish
+	// hi: Hindi
+	// fr: French
+	// de: German
+	// zh-dialect: Chinese dialect
+	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
+
+	// Smart subtitle language type.
+	// 0: source language1: target language
+	// 2: source language + target language
+	// The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
+
+	// Smart subtitle template description.
+	// Length limit: 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Smart subtitle file format.
+	// vtt: WebVTT format
+	// If this field is left blank, no subtitle file will be generated.
+	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
+
+	// ASR hotword lexicon parameter.
+	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
+
+	// Subtitle translation switch.
+	// ON: enable translation
+	// OFF: disable translation
+	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
+
+	// Target language for subtitle translation.
+	// This field takes effect when TranslateSwitch is set to ON.
+	// Supported languages:
+	// zh: Simplified Chinese
+	// en: English
+	// ja: Japanese
+	// ko: Korean
+	// fr: French
+	// es: Spanish
+	// it: Italian
+	// de: German
+	// tr: Turkish
+	// ru: Russian
+	// pt: Portuguese
+	// vi: Vietnamese
+	// id: Indonesian
+	// ms: Malay
+	// th: Thai
+	// ar: Arabic
+	// hi: Hindi
+	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
+}
+
+type CreateSmartSubtitleTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Smart subtitle template name.
+	// Length limit: 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Source language of the video with smart subtitles.
+	// Supported languages:
+	// zh: Simplified Chinese
+	// en: English
+	// ja: Japanese
+	// ko: Korean
+	// zh-PY: Chinese-English-Cantonese
+	// zh-medical: Medical Chinese
+	// yue: Cantonese
+	// vi: Vietnamese
+	// ms: Malay
+	// id: Indonesian
+	// fli: Filipino
+	// th: Thai
+	// pt: Portuguese
+	// tr: Turkish
+	// ar: Arabic
+	// es: Spanish
+	// hi: Hindi
+	// fr: French
+	// de: German
+	// zh-dialect: Chinese dialect
+	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
+
+	// Smart subtitle language type.
+	// 0: source language1: target language
+	// 2: source language + target language
+	// The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
+
+	// Smart subtitle template description.
+	// Length limit: 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Smart subtitle file format.
+	// vtt: WebVTT format
+	// If this field is left blank, no subtitle file will be generated.
+	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
+
+	// ASR hotword lexicon parameter.
+	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
+
+	// Subtitle translation switch.
+	// ON: enable translation
+	// OFF: disable translation
+	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
+
+	// Target language for subtitle translation.
+	// This field takes effect when TranslateSwitch is set to ON.
+	// Supported languages:
+	// zh: Simplified Chinese
+	// en: English
+	// ja: Japanese
+	// ko: Korean
+	// fr: French
+	// es: Spanish
+	// it: Italian
+	// de: German
+	// tr: Turkish
+	// ru: Russian
+	// pt: Portuguese
+	// vi: Vietnamese
+	// id: Indonesian
+	// ms: Malay
+	// th: Thai
+	// ar: Arabic
+	// hi: Hindi
+	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
+}
+
+func (r *CreateSmartSubtitleTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSmartSubtitleTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Name")
+	delete(f, "VideoSrcLanguage")
+	delete(f, "SubtitleType")
+	delete(f, "Comment")
+	delete(f, "SubtitleFormat")
+	delete(f, "AsrHotWordsConfigure")
+	delete(f, "TranslateSwitch")
+	delete(f, "TranslateDstLanguage")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSmartSubtitleTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateSmartSubtitleTemplateResponseParams struct {
+	// Unique identifier of the smart subtitle template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateSmartSubtitleTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateSmartSubtitleTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateSmartSubtitleTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateSmartSubtitleTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4847,6 +5245,60 @@ func (r *DeleteAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 }
 
 // Predefined struct for user
+type DeleteAsrHotwordsRequestParams struct {
+	// ID of the hotword lexicon to be deleted.
+	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
+}
+
+type DeleteAsrHotwordsRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the hotword lexicon to be deleted.
+	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
+}
+
+func (r *DeleteAsrHotwordsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAsrHotwordsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "HotwordsId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAsrHotwordsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAsrHotwordsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteAsrHotwordsResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteAsrHotwordsResponseParams `json:"Response"`
+}
+
+func (r *DeleteAsrHotwordsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAsrHotwordsResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteContentReviewTemplateRequestParams struct {
 	// The unique ID of the content moderation template.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
@@ -5221,6 +5673,60 @@ func (r *DeleteScheduleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DeleteScheduleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSmartSubtitleTemplateRequestParams struct {
+	// Unique identifier of the smart subtitle template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+type DeleteSmartSubtitleTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique identifier of the smart subtitle template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+}
+
+func (r *DeleteSmartSubtitleTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSmartSubtitleTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteSmartSubtitleTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteSmartSubtitleTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteSmartSubtitleTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteSmartSubtitleTemplateResponseParams `json:"Response"`
+}
+
+func (r *DeleteSmartSubtitleTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteSmartSubtitleTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -5870,6 +6376,286 @@ func (r *DescribeAnimatedGraphicsTemplatesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAnimatedGraphicsTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAsrHotwordsListRequestParams struct {
+	// Parameter for querying by hotword lexicon ID.
+	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
+
+	// Parameter for querying by hotword lexicon name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. All hotword lexicons are returned by default.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Hotword lexicon sorting order.
+	// 
+	// 0: ascending (default)
+	// 1: descending
+	OrderType *uint64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+
+	// Sorts hotword lexicons by a specific field. By default, hotword lexicons are sorted by creation time. If an invalid field is used for sorting, the default sorting field applies.
+	// 
+	//  - CreateTime: sort by creation time
+	//  - UpdateTime: sort by update time
+	//  - Name: sort by hotword lexicon name
+	//  - WordCount: sort by the number of hotwords
+	//  - HotwordsId: sort by hotword lexicon ID
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// 0: temporary hotword; 1 file-based hotword.
+	Types []*uint64 `json:"Types,omitnil,omitempty" name:"Types"`
+}
+
+type DescribeAsrHotwordsListRequest struct {
+	*tchttp.BaseRequest
+	
+	// Parameter for querying by hotword lexicon ID.
+	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
+
+	// Parameter for querying by hotword lexicon name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. All hotword lexicons are returned by default.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Hotword lexicon sorting order.
+	// 
+	// 0: ascending (default)
+	// 1: descending
+	OrderType *uint64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+
+	// Sorts hotword lexicons by a specific field. By default, hotword lexicons are sorted by creation time. If an invalid field is used for sorting, the default sorting field applies.
+	// 
+	//  - CreateTime: sort by creation time
+	//  - UpdateTime: sort by update time
+	//  - Name: sort by hotword lexicon name
+	//  - WordCount: sort by the number of hotwords
+	//  - HotwordsId: sort by hotword lexicon ID
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// 0: temporary hotword; 1 file-based hotword.
+	Types []*uint64 `json:"Types,omitnil,omitempty" name:"Types"`
+}
+
+func (r *DescribeAsrHotwordsListRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAsrHotwordsListRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "HotwordsId")
+	delete(f, "Name")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "OrderType")
+	delete(f, "OrderBy")
+	delete(f, "Types")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAsrHotwordsListRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAsrHotwordsListResponseParams struct {
+	// Total number of hotword lexicons.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. All hotword lexicons are returned by default.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Hotword lexicon list.
+	AsrHotwordsSet []*AsrHotwordsSet `json:"AsrHotwordsSet,omitnil,omitempty" name:"AsrHotwordsSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAsrHotwordsListResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAsrHotwordsListResponseParams `json:"Response"`
+}
+
+func (r *DescribeAsrHotwordsListResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAsrHotwordsListResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAsrHotwordsRequestParams struct {
+	// ID of the hotword lexicon to be queried.
+	// **Note: Either HotwordsId or Name should be specified. If both are specified, HotwordsId has a higher priority than Name.**
+	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
+
+	// Hotword lexicon name.
+	// **Note: Either HotwordsId or Name should be specified. If both are specified, HotwordsId has a higher priority than Name.**
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Paging offset. Default value: 0.
+	// 
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Hotword sorting field. Valid values:
+	// 
+	//  - Default: Sort by the hotword upload sequence.
+	//  - Weight: Sort by the weight.
+	//  - Lexical: Sort by the first letter of hotwords.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Hotword sorting order. 0: ascending (default); 1: descending.
+	OrderType *uint64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+}
+
+type DescribeAsrHotwordsRequest struct {
+	*tchttp.BaseRequest
+	
+	// ID of the hotword lexicon to be queried.
+	// **Note: Either HotwordsId or Name should be specified. If both are specified, HotwordsId has a higher priority than Name.**
+	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
+
+	// Hotword lexicon name.
+	// **Note: Either HotwordsId or Name should be specified. If both are specified, HotwordsId has a higher priority than Name.**
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Paging offset. Default value: 0.
+	// 
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Hotword sorting field. Valid values:
+	// 
+	//  - Default: Sort by the hotword upload sequence.
+	//  - Weight: Sort by the weight.
+	//  - Lexical: Sort by the first letter of hotwords.
+	OrderBy *string `json:"OrderBy,omitnil,omitempty" name:"OrderBy"`
+
+	// Hotword sorting order. 0: ascending (default); 1: descending.
+	OrderType *uint64 `json:"OrderType,omitnil,omitempty" name:"OrderType"`
+}
+
+func (r *DescribeAsrHotwordsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAsrHotwordsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "HotwordsId")
+	delete(f, "Name")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "OrderBy")
+	delete(f, "OrderType")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAsrHotwordsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAsrHotwordsResponseParams struct {
+	// ID of the hotword lexicon to be queried.
+	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
+
+	// Current status of the hotword lexicon corresponding to the ID. The value 0 indicates that no template is bound to this hotword lexicon when the query is performed and that the hotword lexicon can be deleted.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Hotword lexicon name.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// The value is 0 for a temporary hotword lexicon, and the string provided during creation is returned.
+	// The value is 1 for a file-based hotword lexicon, and the content of the file uploaded during creation is returned.
+	// 
+	// 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Name of the uploaded hotword file.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+
+	// List of hotwords returned for the query.
+	HotWords []*AsrHotwordsSetItem `json:"HotWords,omitnil,omitempty" name:"HotWords"`
+
+	// Hotword text, which depends on the value of Type.
+	// If the value of Type is 0, the hotword string is returned.
+	// If the value of Type is 1, the base64-encoded content of the hotword file is returned.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Number of words contained in the hotword lexicon.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	WordCount *uint64 `json:"WordCount,omitnil,omitempty" name:"WordCount"`
+
+	// Paging offset. Default value: 0.
+	// 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Creation time of the hotword lexicon in ISO datetime format (UTC time). For example, "2006-01-02T15:04:05Z".Note: This field may return null, indicating that no valid value can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Modification time of the hotword lexicon in ISO datetime format (UTC time). For example, "2006-01-02T15:04:05Z".
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAsrHotwordsResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAsrHotwordsResponseParams `json:"Response"`
+}
+
+func (r *DescribeAsrHotwordsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAsrHotwordsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -6595,6 +7381,98 @@ func (r *DescribeSchedulesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeSchedulesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSmartSubtitleTemplatesRequestParams struct {
+	// Condition for filtering smart subtitle templates by unique identifier. The array can contain up to 10 unique identifiers.
+	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Condition for filtering templates by type. If this field is not specified, all templates are returned. Valid values:
+	// * Preset: system preset template
+	// * Custom: user-defined template
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Condition for filtering smart subtitle templates by ID. Length limit: 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type DescribeSmartSubtitleTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// Condition for filtering smart subtitle templates by unique identifier. The array can contain up to 10 unique identifiers.
+	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
+
+	// Paging offset. Default value: 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of returned entries. Default value: 10. Maximum value: 100.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Condition for filtering templates by type. If this field is not specified, all templates are returned. Valid values:
+	// * Preset: system preset template
+	// * Custom: user-defined template
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Condition for filtering smart subtitle templates by ID. Length limit: 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *DescribeSmartSubtitleTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSmartSubtitleTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definitions")
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "Type")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeSmartSubtitleTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeSmartSubtitleTemplatesResponseParams struct {
+	// Total number of records that meet filter conditions.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of smart subtitle template details.
+	SmartSubtitleTemplateSet []*SmartSubtitleTemplateItem `json:"SmartSubtitleTemplateSet,omitnil,omitempty" name:"SmartSubtitleTemplateSet"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeSmartSubtitleTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeSmartSubtitleTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeSmartSubtitleTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeSmartSubtitleTemplatesResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -7572,14 +8450,20 @@ func (r *DisableWorkflowResponse) FromJsonString(s string) error {
 }
 
 type DrmInfo struct {
-	// The encryption type.
-	// <li>`simpleaes`: AES-128 encryption.</li>
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Encryption type.
+	// <li>simpleaes: AES-128 encryption</li>
+	// <li> widevine</li>
+	// <li>fairplay: not supported for DASH streams</li>
+	// <li> playready</li>
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The AES-128 encryption details.
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	SimpleAesDrm *SimpleAesDrm `json:"SimpleAesDrm,omitnil,omitempty" name:"SimpleAesDrm"`
+
+	// Information about FairPlay, WideVine, and PlayReady encryption.
+	SpekeDrm *SpekeDrm `json:"SpekeDrm,omitnil,omitempty" name:"SpekeDrm"`
 }
 
 type EditMediaFileInfo struct {
@@ -8105,6 +8989,14 @@ type HighlightSegmentItem struct {
 	// Segment tag.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SegmentTags []*string `json:"SegmentTags,omitnil,omitempty" name:"SegmentTags"`
+
+	// The live streaming segment corresponds to the live start time point, in the ISO date format.	
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
+
+	// The live streaming segment corresponds to the live streaming end time, in the ISO date format.	
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type ImageEncodeConfig struct {
@@ -9608,6 +10500,21 @@ type MediaTranscodeItem struct {
 	// Video stream information.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	VideoStreamSet []*MediaVideoStreamItem `json:"VideoStreamSet,omitnil,omitempty" name:"VideoStreamSet"`
+
+	// Enhancement items used for video transcoding. Descriptions of enhancement items:
+	// <li>hdr: HDR configuration</li>
+	// <li>wd_fps: configuration of frame interpolation for higher frame rate</li>
+	// <li>video_super_resolution: 	super-resolution configuration</li>
+	// <li>repair: comprehensive enhancement configuration</li>
+	// <li>denoise: video denoising configuration</li>
+	// <Li>color_enhance: color enhancement configuration</li>
+	// <Li>scratch: scratch removal configuration</li>
+	// <li>artifact: artifact (glitch) removal configuration</li>
+	// <li>sharp: detail enhancement configuration</li>
+	// <Li>low_light: low-light enhancement configuration</li>
+	// <Li>face_enhance: face enhancement configuration</li>
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CallBackExtInfo *string `json:"CallBackExtInfo,omitnil,omitempty" name:"CallBackExtInfo"`
 }
 
 type MediaVideoStreamItem struct {
@@ -10147,6 +11054,92 @@ func (r *ModifyAnimatedGraphicsTemplateResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyAnimatedGraphicsTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAsrHotwordsRequestParams struct {
+	// Hotword lexicon ID.
+	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
+
+	// Hotword lexicon name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Hotword lexicon text.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Base64-encoded content of the hotword file. This field is required if Type is set to 1.
+	// 
+	// 
+	FileContent *string `json:"FileContent,omitnil,omitempty" name:"FileContent"`
+
+	// Name of the uploaded hotword file.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+}
+
+type ModifyAsrHotwordsRequest struct {
+	*tchttp.BaseRequest
+	
+	// Hotword lexicon ID.
+	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
+
+	// Hotword lexicon name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Hotword lexicon text.
+	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
+
+	// Base64-encoded content of the hotword file. This field is required if Type is set to 1.
+	// 
+	// 
+	FileContent *string `json:"FileContent,omitnil,omitempty" name:"FileContent"`
+
+	// Name of the uploaded hotword file.
+	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
+}
+
+func (r *ModifyAsrHotwordsRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAsrHotwordsRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "HotwordsId")
+	delete(f, "Name")
+	delete(f, "Content")
+	delete(f, "FileContent")
+	delete(f, "FileName")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAsrHotwordsRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAsrHotwordsResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyAsrHotwordsResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAsrHotwordsResponseParams `json:"Response"`
+}
+
+func (r *ModifyAsrHotwordsResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAsrHotwordsResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -10907,6 +11900,214 @@ func (r *ModifyScheduleResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyScheduleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySmartSubtitleTemplateRequestParams struct {
+	// Unique identifier of the smart subtitle template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Subtitle translation switch.
+	// ON: enable translation
+	// OFF: disable translation
+	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
+
+	// Smart subtitle template name.
+	// Length limit: 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Smart subtitle template description.
+	// Length limit: 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Source language of the video with smart subtitles.
+	// Supported languages:
+	// zh: Simplified Chinese
+	// en: English
+	// ja: Japanese
+	// ko: Korean
+	// zh-PY: Chinese-English-Cantonese
+	// zh-medical: Medical Chinese
+	// yue: Cantonese
+	// vi: Vietnamese
+	// ms: Malay
+	// id: Indonesian
+	// fli: Filipino
+	// th: Thai
+	// pt: Portuguese
+	// tr: Turkish
+	// ar: Arabic
+	// es: Spanish
+	// hi: Hindi
+	// fr: French
+	// de: German
+	// zh-dialect: Chinese dialect
+	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
+
+	// Smart subtitle file format.
+	// vtt: WebVTT format
+	// If this field is left blank, no subtitle file will be generated.
+	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
+
+	// Smart subtitle language type.
+	// 0: source language1: target language
+	// 2: source language + target language
+	// The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
+
+	// ASR hotword lexicon parameter.
+	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
+
+	// Target language for subtitle translation.
+	// This field takes effect when TranslateSwitch is set to ON.
+	// Supported languages:
+	// zh: Simplified Chinese
+	// en: English
+	// ja: Japanese
+	// ko: Korean
+	// fr: French
+	// es: Spanish
+	// it: Italian
+	// de: German
+	// tr: Turkish
+	// ru: Russian
+	// pt: Portuguese
+	// vi: Vietnamese
+	// id: Indonesian
+	// ms: Malay
+	// th: Thai
+	// ar: Arabic
+	// hi: Hindi
+	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
+}
+
+type ModifySmartSubtitleTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Unique identifier of the smart subtitle template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Subtitle translation switch.
+	// ON: enable translation
+	// OFF: disable translation
+	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
+
+	// Smart subtitle template name.
+	// Length limit: 64 characters.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Smart subtitle template description.
+	// Length limit: 256 characters.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Source language of the video with smart subtitles.
+	// Supported languages:
+	// zh: Simplified Chinese
+	// en: English
+	// ja: Japanese
+	// ko: Korean
+	// zh-PY: Chinese-English-Cantonese
+	// zh-medical: Medical Chinese
+	// yue: Cantonese
+	// vi: Vietnamese
+	// ms: Malay
+	// id: Indonesian
+	// fli: Filipino
+	// th: Thai
+	// pt: Portuguese
+	// tr: Turkish
+	// ar: Arabic
+	// es: Spanish
+	// hi: Hindi
+	// fr: French
+	// de: German
+	// zh-dialect: Chinese dialect
+	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
+
+	// Smart subtitle file format.
+	// vtt: WebVTT format
+	// If this field is left blank, no subtitle file will be generated.
+	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
+
+	// Smart subtitle language type.
+	// 0: source language1: target language
+	// 2: source language + target language
+	// The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
+
+	// ASR hotword lexicon parameter.
+	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
+
+	// Target language for subtitle translation.
+	// This field takes effect when TranslateSwitch is set to ON.
+	// Supported languages:
+	// zh: Simplified Chinese
+	// en: English
+	// ja: Japanese
+	// ko: Korean
+	// fr: French
+	// es: Spanish
+	// it: Italian
+	// de: German
+	// tr: Turkish
+	// ru: Russian
+	// pt: Portuguese
+	// vi: Vietnamese
+	// id: Indonesian
+	// ms: Malay
+	// th: Thai
+	// ar: Arabic
+	// hi: Hindi
+	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
+}
+
+func (r *ModifySmartSubtitleTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySmartSubtitleTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Definition")
+	delete(f, "TranslateSwitch")
+	delete(f, "Name")
+	delete(f, "Comment")
+	delete(f, "VideoSrcLanguage")
+	delete(f, "SubtitleFormat")
+	delete(f, "SubtitleType")
+	delete(f, "AsrHotWordsConfigure")
+	delete(f, "TranslateDstLanguage")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifySmartSubtitleTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifySmartSubtitleTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifySmartSubtitleTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifySmartSubtitleTemplateResponseParams `json:"Response"`
+}
+
+func (r *ModifySmartSubtitleTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifySmartSubtitleTemplateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -12194,6 +13395,18 @@ type ProcessMediaRequestParams struct {
 	// <li> `Online` (default): A task that is executed immediately.</li>
 	// <li> `Offline`: A task that is executed when the system is idle (within three days by default).</li>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// Resource ID. Ensure the corresponding resource is in the enabled state. The default value is an account's primary resource ID.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Smart subtitle task.
+	SmartSubtitlesTask *SmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
+
+	// Whether to skip metadata acquisition. Valid values:
+	// 0: do not skip
+	// 1: skip
+	// Default value: 0		
+	SkipMateData *int64 `json:"SkipMateData,omitnil,omitempty" name:"SkipMateData"`
 }
 
 type ProcessMediaRequest struct {
@@ -12252,6 +13465,18 @@ type ProcessMediaRequest struct {
 	// <li> `Online` (default): A task that is executed immediately.</li>
 	// <li> `Offline`: A task that is executed when the system is idle (within three days by default).</li>
 	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// Resource ID. Ensure the corresponding resource is in the enabled state. The default value is an account's primary resource ID.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Smart subtitle task.
+	SmartSubtitlesTask *SmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
+
+	// Whether to skip metadata acquisition. Valid values:
+	// 0: do not skip
+	// 1: skip
+	// Default value: 0		
+	SkipMateData *int64 `json:"SkipMateData,omitnil,omitempty" name:"SkipMateData"`
 }
 
 func (r *ProcessMediaRequest) ToJsonString() string {
@@ -12280,6 +13505,9 @@ func (r *ProcessMediaRequest) FromJsonString(s string) error {
 	delete(f, "SessionId")
 	delete(f, "SessionContext")
 	delete(f, "TaskType")
+	delete(f, "ResourceId")
+	delete(f, "SmartSubtitlesTask")
+	delete(f, "SkipMateData")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ProcessMediaRequest has unknown keys!", "")
 	}
@@ -12591,6 +13819,80 @@ type RawImageWatermarkInput struct {
 	// <li>`repeat_last_frame`: stays on the last frame after watermark playback ends.</li>
 	// <li>`repeat` (default): repeats the playback until the video ends.</li>
 	RepeatType *string `json:"RepeatType,omitnil,omitempty" name:"RepeatType"`
+}
+
+type RawSmartSubtitleParameter struct {
+	// Smart subtitle language type.
+	// 0: source language1: target language
+	// 2: source language + target language
+	// The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
+
+	// Source language of the video with smart subtitles.
+	// Supported languages:
+	// zh: Simplified Chinese
+	// en: English
+	// ja: Japanese
+	// ko: Korean
+	// zh-PY: Chinese-English-Cantonese
+	// zh-medical: Medical Chinese
+	// yue: Cantonese
+	// vi: Vietnamese
+	// ms: Malay
+	// id: Indonesian
+	// fli: Filipino
+	// th: Thai
+	// pt: Portuguese
+	// tr: Turkish
+	// ar: Arabic
+	// es: Spanish
+	// hi: Hindi
+	// fr: French
+	// de: German
+	// zh-dialect: Chinese dialect
+	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
+
+	// Smart subtitle file format.
+	// vtt: WebVTT format
+	// If this field is left blank, no subtitle file will be generated.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
+
+	// Subtitle translation switch.
+	// ON: enable translation
+	// OFF: disable translation
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
+
+	// Target language for subtitle translation.
+	// This field takes effect when TranslateSwitch is set to ON.
+	// Supported languages:
+	// zh: Simplified Chinese
+	// en: English
+	// ja: Japanese
+	// ko: Korean
+	// fr: French
+	// es: Spanish
+	// it: Italian
+	// de: German
+	// tr: Turkish
+	// ru: Russian
+	// pt: Portuguese
+	// vi: Vietnamese
+	// id: Indonesian
+	// ms: Malay
+	// th: Thai
+	// ar: Arabic
+	// hi: Hindi
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
+
+	// ASR hotword lexicon parameter.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
+
+	// Custom parameter.
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type RawTranscodeParameter struct {
@@ -12972,6 +14274,36 @@ type ScheduleReviewTaskResult struct {
 	Output []*AiContentReviewResult `json:"Output,omitnil,omitempty" name:"Output"`
 }
 
+type ScheduleSmartSubtitleTaskResult struct {
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Recognition task input.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Input *SmartSubtitlesTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Recognition task output.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Output []*SmartSubtitlesResult `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
+
+	// Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
+}
+
 type ScheduleTask struct {
 	// The scheme ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
@@ -13123,6 +14455,9 @@ type SegmentRecognitionItem struct {
 	// The end time of a live streaming segment, in the ISO date format.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Specifies the character ID.
+	PersonId *string `json:"PersonId,omitnil,omitempty" name:"PersonId"`
 }
 
 type SegmentSpecificInfo struct {
@@ -13167,6 +14502,259 @@ type SimpleAesDrm struct {
 	// The initialization vector for encryption (a 32-byte string).
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	Vector *string `json:"Vector,omitnil,omitempty" name:"Vector"`
+}
+
+type SmartSubtitleTaskAsrFullTextResult struct {
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Input information on the full speech recognition task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Input *SmartSubtitleTaskResultInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Output information on the full speech recognition task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Output *SmartSubtitleTaskAsrFullTextResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Task progress.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+}
+
+type SmartSubtitleTaskAsrFullTextResultOutput struct {
+	// List of segments for full speech recognition.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SegmentSet []*SmartSubtitleTaskAsrFullTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
+
+	// Subtitle file path.
+	SubtitlePath *string `json:"SubtitlePath,omitnil,omitempty" name:"SubtitlePath"`
+}
+
+type SmartSubtitleTaskAsrFullTextSegmentItem struct {
+	// Confidence of a recognized segment. Value range: 0-100.
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+	// Start time offset of a recognized segment, in seconds.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
+
+	// End time offset of a recognized segment, in seconds.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
+
+	// Recognized text.
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Word timestamp information.
+	// 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Wordlist []*WordResult `json:"Wordlist,omitnil,omitempty" name:"Wordlist"`
+}
+
+type SmartSubtitleTaskResultInput struct {
+	// Smart subtitle template ID.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Custom smart subtitle parameter. It takes effect when Definition is set to 0.
+	// This parameter is used in high customization scenarios. It is recommended that you preferentially use Definition to specify smart subtitle parameters.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	RawParameter *RawSmartSubtitleParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
+}
+
+type SmartSubtitleTaskTransTextResult struct {
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// Error code. 0 indicates that the task is successful, and other values indicate that the task has failed. (This field is not recommended. Use the new error code field ErrCodeExt instead.)
+	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Translation task input information.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Input *SmartSubtitleTaskResultInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Translation task output information.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Output *SmartSubtitleTaskTransTextResultOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Task progress.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+}
+
+type SmartSubtitleTaskTransTextResultOutput struct {
+	// List of segments for translation.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SegmentSet []*SmartSubtitleTaskTransTextSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
+
+	// Subtitle file path.
+	SubtitlePath *string `json:"SubtitlePath,omitnil,omitempty" name:"SubtitlePath"`
+}
+
+type SmartSubtitleTaskTransTextSegmentItem struct {
+	// Confidence of a recognized segment. Value range: 0-100.
+	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+	// Start time offset of a recognized segment, in seconds.
+	StartTimeOffset *float64 `json:"StartTimeOffset,omitnil,omitempty" name:"StartTimeOffset"`
+
+	// End time offset of a recognized segment, in seconds.
+	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
+
+	// Recognized text.
+	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
+
+	// Translated text.
+	Trans *string `json:"Trans,omitnil,omitempty" name:"Trans"`
+
+	// Word timestamp information.
+	// 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Wordlist []*WordResult `json:"Wordlist,omitnil,omitempty" name:"Wordlist"`
+}
+
+type SmartSubtitleTemplateItem struct {
+	// Unique identifier of the smart subtitle template.
+	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// Smart subtitle template name.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Smart subtitle template description.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Template type. Valid values:
+	// * Preset: system preset template
+	// * Custom: user-defined template
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// ASR hotword lexicon parameter.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AsrHotWordsConfigure *AsrHotWordsConfigure `json:"AsrHotWordsConfigure,omitnil,omitempty" name:"AsrHotWordsConfigure"`
+
+	// Name of the hotword lexicon associated with the template.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AsrHotWordsLibraryName *string `json:"AsrHotWordsLibraryName,omitnil,omitempty" name:"AsrHotWordsLibraryName"`
+
+	// Source language of the video with smart subtitles.
+	// Supported languages:
+	// zh: Simplified Chinese
+	// en: English
+	// ja: Japanese
+	// ko: Korean
+	// zh-PY: Chinese-English-Cantonese
+	// zh-medical: Medical Chinese
+	// yue: Cantonese
+	// vi: Vietnamese
+	// ms: Malay
+	// id: Indonesian
+	// fli: Filipino
+	// th: Thai
+	// pt: Portuguese
+	// tr: Turkish
+	// ar: Arabic
+	// es: Spanish
+	// hi: Hindi
+	// fr: French
+	// de: German
+	// zh-dialect: Chinese dialect
+	VideoSrcLanguage *string `json:"VideoSrcLanguage,omitnil,omitempty" name:"VideoSrcLanguage"`
+
+	// Smart subtitle file format.
+	// vtt: WebVTT format
+	// If this field is left blank, no subtitle file will be generated.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SubtitleFormat *string `json:"SubtitleFormat,omitnil,omitempty" name:"SubtitleFormat"`
+
+	// Smart subtitle language type.
+	// 0: source language1: target language
+	// 2: source language + target language
+	// The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
+
+	// Subtitle translation switch.
+	// ON: enable translation
+	// OFF: disable translation
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TranslateSwitch *string `json:"TranslateSwitch,omitnil,omitempty" name:"TranslateSwitch"`
+
+	// Target language for subtitle translation.
+	// This field takes effect when TranslateSwitch is set to ON.
+	// Supported languages:
+	// zh: Simplified Chinese
+	// en: English
+	// ja: Japanese
+	// ko: Korean
+	// fr: French
+	// es: Spanish
+	// it: Italian
+	// de: German
+	// tr: Turkish
+	// ru: Russian
+	// pt: Portuguese
+	// vi: Vietnamese
+	// id: Indonesian
+	// ms: Malay
+	// th: Thai
+	// ar: Arabic
+	// hi: Hindi
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TranslateDstLanguage *string `json:"TranslateDstLanguage,omitnil,omitempty" name:"TranslateDstLanguage"`
+
+	// Template creation time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Last modification time of the template in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Alias of the preset smart subtitle template.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AliasName *string `json:"AliasName,omitnil,omitempty" name:"AliasName"`
+}
+
+type SmartSubtitlesResult struct {
+	// Task type. Valid values:
+	// <Li>AsrFullTextRecognition: full speech recognition</li>
+	// <Li>TransTextRecognition: speech translation</li>
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Full speech recognition result. When Type is
+	//  set to AsrFullTextRecognition, this parameter takes effect.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AsrFullTextTask *SmartSubtitleTaskAsrFullTextResult `json:"AsrFullTextTask,omitnil,omitempty" name:"AsrFullTextTask"`
+
+	// Translation result. When Type is
+	// 
+	//  set to TransTextRecognition, this parameter takes effect.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TransTextTask *SmartSubtitleTaskTransTextResult `json:"TransTextTask,omitnil,omitempty" name:"TransTextTask"`
+}
+
+type SmartSubtitlesTaskInput struct {
+	// Smart subtitle template ID.	
+	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
+
+	// User extension field, which does not need to be filled in for general scenarios.
+	UserExtPara *string `json:"UserExtPara,omitnil,omitempty" name:"UserExtPara"`
+
+	// Custom smart subtitle parameter. It takes effect when Definition is set to 0. This parameter is used in high customization scenarios. It is recommended that you preferentially use Definition to specify smart subtitle parameters.	
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	RawParameter *RawSmartSubtitleParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
 }
 
 type SnapshotByTimeOffsetTaskInput struct {
@@ -13257,6 +14845,31 @@ type SnapshotByTimeOffsetTemplate struct {
 	// <li>gauss: Fill with Gaussian blur. This option retains the aspect ratio of the source video for the screenshot and fills the unmatched area with Gaussian blur.</li>
 	// Default value: black.
 	FillType *string `json:"FillType,omitnil,omitempty" name:"FillType"`
+}
+
+type SpekeDrm struct {
+	// Resource ID.
+	// It supports 1 to 128 characters consisting of digits, letters, underscores (_), and hyphens (-).
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Access address of the DRM vendor.
+	// 
+	// Note: Different DRM vendors have different limits on the number of substreams. For example, PallyCon limits the number of substreams to no more than 5, and DRMtoday supports encryption of up to 9 substreams.
+	KeyServerUrl *string `json:"KeyServerUrl,omitnil,omitempty" name:"KeyServerUrl"`
+
+	// Initialization vector (32-byte string) for encryption.
+	Vector *string `json:"Vector,omitnil,omitempty" name:"Vector"`
+
+	// Encryption method. cbcs: default method of FairPlay; cenc: default method of PlayReady and Widevine.
+	// 
+	// cbcs: supported by PlayReady, Widevine, and FairPlay
+	// cenc: supported by PlayReady and Widevine
+	EncryptionMethod *string `json:"EncryptionMethod,omitnil,omitempty" name:"EncryptionMethod"`
+
+	// Substream encryption rule. Default value: preset0.
+	// preset 0: use the same key to encrypt all substreams
+	// preset1: use different keys for each substream
+	EncryptionPreset *string `json:"EncryptionPreset,omitnil,omitempty" name:"EncryptionPreset"`
 }
 
 type SubtitleTemplate struct {
@@ -13607,6 +15220,26 @@ type TextWatermarkTemplateInputForUpdate struct {
 
 	// Text content, up to 100 characters.
 	TextContent *string `json:"TextContent,omitnil,omitempty" name:"TextContent"`
+}
+
+type TrackInfo struct {
+	// Audio track and sound channel serial number, description:
+	// When the SelectType value is trask, this value is of the integer type, for example: 1.
+	// When the SelectType value is trask_channel, this value is of the decimal type, for example: 1.0.
+	// Default value: `1.0`.
+	// The integer part represents the audio track serial number, and the decimal part represents the sound channel. The audio track serial number is the stream index of the audio track, and input of 0 and positive integers is supported. The decimal part supports up to 2 decimal places, and only 0 - 63 is supported. However, when the Codec is aac/eac3/ac3, only 0 - 15 is supported for the decimal part. For example: for an audio track with a stream index of 1, 1.0 represents the first sound channel of this audio track, and 1.1 represents the second sound channel of this audio track.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TrackNum *string `json:"TrackNum,omitnil,omitempty" name:"TrackNum"`
+
+	// Sound channel volume. specifies the volume of the sound channel.
+	// When the value of AudioChannel is 1, the value length is 1.
+	// When the value of AudioChannel is 2, the value length is 2.
+	// When the value of AudioChannel is 6, the length of this value is greater than 2.
+	// The array value of this parameter has a valid value range of [-60, 6]. among them, -60 indicates mute, 0 indicates keeping the original volume, and 6 means doubling the original volume. the default value is -60.
+	// Supports 3 decimal places.
+	// 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ChannelVolume []*float64 `json:"ChannelVolume,omitnil,omitempty" name:"ChannelVolume"`
 }
 
 type TranscodeTaskInput struct {
@@ -14565,6 +16198,10 @@ type WorkflowTask struct {
 	// Execution status and results of a media quality inspection task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AiQualityControlTaskResult *ScheduleQualityControlTaskResult `json:"AiQualityControlTaskResult,omitnil,omitempty" name:"AiQualityControlTaskResult"`
+
+	// Execution result of the smart subtitle task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SmartSubtitlesTaskResult []*SmartSubtitlesResult `json:"SmartSubtitlesTaskResult,omitnil,omitempty" name:"SmartSubtitlesTaskResult"`
 }
 
 type WorkflowTrigger struct {

@@ -1699,6 +1699,59 @@ func (c *Client) QueryDirectCustomersCreditWithContext(ctx context.Context, requ
     return
 }
 
+func NewQueryInvitationInfoRequest() (request *QueryInvitationInfoRequest) {
+    request = &QueryInvitationInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "QueryInvitationInfo")
+    
+    
+    return
+}
+
+func NewQueryInvitationInfoResponse() (response *QueryInvitationInfoResponse) {
+    response = &QueryInvitationInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryInvitationInfo
+// Query usage information of invitation link. Once created, the data will only be retained for 60 days, and the system will automatically delete the invitation link after 60 days.
+//
+// Invokable role types: Distributor, Second-level reseller, Reseller.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) QueryInvitationInfo(request *QueryInvitationInfoRequest) (response *QueryInvitationInfoResponse, err error) {
+    return c.QueryInvitationInfoWithContext(context.Background(), request)
+}
+
+// QueryInvitationInfo
+// Query usage information of invitation link. Once created, the data will only be retained for 60 days, and the system will automatically delete the invitation link after 60 days.
+//
+// Invokable role types: Distributor, Second-level reseller, Reseller.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) QueryInvitationInfoWithContext(ctx context.Context, request *QueryInvitationInfoRequest) (response *QueryInvitationInfoResponse, err error) {
+    if request == nil {
+        request = NewQueryInvitationInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryInvitationInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryInvitationInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryPartnerCreditRequest() (request *QueryPartnerCreditRequest) {
     request = &QueryPartnerCreditRequest{
         BaseRequest: &tchttp.BaseRequest{},
