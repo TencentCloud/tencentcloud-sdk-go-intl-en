@@ -1658,6 +1658,7 @@ func NewDeleteDDoSSpeedLimitConfigResponse() (response *DeleteDDoSSpeedLimitConf
 // This API is used to delete Anti-DDoS access rate limit configurations.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteDDoSSpeedLimitConfig(request *DeleteDDoSSpeedLimitConfigRequest) (response *DeleteDDoSSpeedLimitConfigResponse, err error) {
     return c.DeleteDDoSSpeedLimitConfigWithContext(context.Background(), request)
@@ -1667,6 +1668,7 @@ func (c *Client) DeleteDDoSSpeedLimitConfig(request *DeleteDDoSSpeedLimitConfigR
 // This API is used to delete Anti-DDoS access rate limit configurations.
 //
 // error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  RESOURCENOTFOUND = "ResourceNotFound"
 func (c *Client) DeleteDDoSSpeedLimitConfigWithContext(ctx context.Context, request *DeleteDDoSSpeedLimitConfigRequest) (response *DeleteDDoSSpeedLimitConfigResponse, err error) {
     if request == nil {
@@ -2075,95 +2077,6 @@ func (c *Client) DescribeBizTrendWithContext(ctx context.Context, request *Descr
     request.SetContext(ctx)
     
     response = NewDescribeBizTrendResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeBlackWhiteIpListRequest() (request *DescribeBlackWhiteIpListRequest) {
-    request = &DescribeBlackWhiteIpListRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeBlackWhiteIpList")
-    
-    
-    return
-}
-
-func NewDescribeBlackWhiteIpListResponse() (response *DescribeBlackWhiteIpListResponse) {
-    response = &DescribeBlackWhiteIpListResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeBlackWhiteIpList
-// 接口变更
-//
-// 
-//
-// This API is used to get an Anti-DDoS IP blocklist/allowlist.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeBlackWhiteIpList(request *DescribeBlackWhiteIpListRequest) (response *DescribeBlackWhiteIpListResponse, err error) {
-    return c.DescribeBlackWhiteIpListWithContext(context.Background(), request)
-}
-
-// DescribeBlackWhiteIpList
-// 接口变更
-//
-// 
-//
-// This API is used to get an Anti-DDoS IP blocklist/allowlist.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-//  DRYRUNOPERATION = "DryRunOperation"
-//  FAILEDOPERATION = "FailedOperation"
-//  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  LIMITEXCEEDED = "LimitExceeded"
-//  MISSINGPARAMETER = "MissingParameter"
-//  OPERATIONDENIED = "OperationDenied"
-//  RESOURCEINUSE = "ResourceInUse"
-//  RESOURCEINSUFFICIENT = "ResourceInsufficient"
-//  RESOURCENOTFOUND = "ResourceNotFound"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
-//  RESOURCESSOLDOUT = "ResourcesSoldOut"
-//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
-//  UNKNOWNPARAMETER = "UnknownParameter"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
-func (c *Client) DescribeBlackWhiteIpListWithContext(ctx context.Context, request *DescribeBlackWhiteIpListRequest) (response *DescribeBlackWhiteIpListResponse, err error) {
-    if request == nil {
-        request = NewDescribeBlackWhiteIpListRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeBlackWhiteIpList require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeBlackWhiteIpListResponse()
     err = c.Send(request, response)
     return
 }
@@ -3338,63 +3251,6 @@ func (c *Client) DescribeListPacketFilterConfigWithContext(ctx context.Context, 
     request.SetContext(ctx)
     
     response = NewDescribeListPacketFilterConfigResponse()
-    err = c.Send(request, response)
-    return
-}
-
-func NewDescribeListProtectThresholdConfigRequest() (request *DescribeListProtectThresholdConfigRequest) {
-    request = &DescribeListProtectThresholdConfigRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("antiddos", APIVersion, "DescribeListProtectThresholdConfig")
-    
-    
-    return
-}
-
-func NewDescribeListProtectThresholdConfigResponse() (response *DescribeListProtectThresholdConfigResponse) {
-    response = &DescribeListProtectThresholdConfigResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeListProtectThresholdConfig
-// 接口变更
-//
-// 
-//
-// This API is used to get a list of protection threshold configurations for AI protection switch, protection level, and CC threshold switch.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-func (c *Client) DescribeListProtectThresholdConfig(request *DescribeListProtectThresholdConfigRequest) (response *DescribeListProtectThresholdConfigResponse, err error) {
-    return c.DescribeListProtectThresholdConfigWithContext(context.Background(), request)
-}
-
-// DescribeListProtectThresholdConfig
-// 接口变更
-//
-// 
-//
-// This API is used to get a list of protection threshold configurations for AI protection switch, protection level, and CC threshold switch.
-//
-// error code that may be returned:
-//  AUTHFAILURE = "AuthFailure"
-func (c *Client) DescribeListProtectThresholdConfigWithContext(ctx context.Context, request *DescribeListProtectThresholdConfigRequest) (response *DescribeListProtectThresholdConfigResponse, err error) {
-    if request == nil {
-        request = NewDescribeListProtectThresholdConfigRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeListProtectThresholdConfig require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeListProtectThresholdConfigResponse()
     err = c.Send(request, response)
     return
 }
