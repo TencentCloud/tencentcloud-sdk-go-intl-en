@@ -624,6 +624,8 @@ type CreatePrivateZoneRequestParams struct {
 	DnsForwardStatus *string `json:"DnsForwardStatus,omitnil,omitempty" name:"DnsForwardStatus"`
 
 	// Associates the private domain to a VPC when it is created
+	//
+	// Deprecated: Vpcs is deprecated.
 	Vpcs []*VpcInfo `json:"Vpcs,omitnil,omitempty" name:"Vpcs"`
 
 	// List of authorized accounts' VPCs to associate with the private domain
