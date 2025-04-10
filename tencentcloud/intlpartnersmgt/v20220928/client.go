@@ -1923,6 +1923,63 @@ func (c *Client) QueryPolicyProductListByCodeWithContext(ctx context.Context, re
     return
 }
 
+func NewQueryT1IndirectCustomersDetailRequest() (request *QueryT1IndirectCustomersDetailRequest) {
+    request = &QueryT1IndirectCustomersDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "QueryT1IndirectCustomersDetail")
+    
+    
+    return
+}
+
+func NewQueryT1IndirectCustomersDetailResponse() (response *QueryT1IndirectCustomersDetailResponse) {
+    response = &QueryT1IndirectCustomersDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryT1IndirectCustomersDetail
+// This API is used to query the indirect sub-customers of a first-level distributor.
+//
+// Invokable role type: first-level reseller.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDSUBAGENTUIN = "FailedOperation.InvalidSubAgentUin"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) QueryT1IndirectCustomersDetail(request *QueryT1IndirectCustomersDetailRequest) (response *QueryT1IndirectCustomersDetailResponse, err error) {
+    return c.QueryT1IndirectCustomersDetailWithContext(context.Background(), request)
+}
+
+// QueryT1IndirectCustomersDetail
+// This API is used to query the indirect sub-customers of a first-level distributor.
+//
+// Invokable role type: first-level reseller.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDSUBAGENTUIN = "FailedOperation.InvalidSubAgentUin"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) QueryT1IndirectCustomersDetailWithContext(ctx context.Context, request *QueryT1IndirectCustomersDetailRequest) (response *QueryT1IndirectCustomersDetailResponse, err error) {
+    if request == nil {
+        request = NewQueryT1IndirectCustomersDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryT1IndirectCustomersDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryT1IndirectCustomersDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryVoucherAmountByUinRequest() (request *QueryVoucherAmountByUinRequest) {
     request = &QueryVoucherAmountByUinRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1948,7 +2005,9 @@ func NewQueryVoucherAmountByUinResponse() (response *QueryVoucherAmountByUinResp
 // Callable roles: Reseller, Distributor, Second-level reseller
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDSUBAGENTUIN = "FailedOperation.InvalidSubAgentUin"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherAmountByUin(request *QueryVoucherAmountByUinRequest) (response *QueryVoucherAmountByUinResponse, err error) {
     return c.QueryVoucherAmountByUinWithContext(context.Background(), request)
 }
@@ -1959,7 +2018,9 @@ func (c *Client) QueryVoucherAmountByUin(request *QueryVoucherAmountByUinRequest
 // Callable roles: Reseller, Distributor, Second-level reseller
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDSUBAGENTUIN = "FailedOperation.InvalidSubAgentUin"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherAmountByUinWithContext(ctx context.Context, request *QueryVoucherAmountByUinRequest) (response *QueryVoucherAmountByUinResponse, err error) {
     if request == nil {
         request = NewQueryVoucherAmountByUinRequest()
@@ -2001,7 +2062,9 @@ func NewQueryVoucherListByUinResponse() (response *QueryVoucherListByUinResponse
 // Callable roles: Reseller, Distributor, Second-level reseller
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDSUBAGENTUIN = "FailedOperation.InvalidSubAgentUin"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherListByUin(request *QueryVoucherListByUinRequest) (response *QueryVoucherListByUinResponse, err error) {
     return c.QueryVoucherListByUinWithContext(context.Background(), request)
 }
@@ -2012,7 +2075,9 @@ func (c *Client) QueryVoucherListByUin(request *QueryVoucherListByUinRequest) (r
 // Callable roles: Reseller, Distributor, Second-level reseller
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDSUBAGENTUIN = "FailedOperation.InvalidSubAgentUin"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherListByUinWithContext(ctx context.Context, request *QueryVoucherListByUinRequest) (response *QueryVoucherListByUinResponse, err error) {
     if request == nil {
         request = NewQueryVoucherListByUinRequest()
@@ -2054,7 +2119,9 @@ func NewQueryVoucherPoolResponse() (response *QueryVoucherPoolResponse) {
 // Callable roles: Distributor, First-level reseller, Second-level reseller
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDSUBAGENTUIN = "FailedOperation.InvalidSubAgentUin"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherPool(request *QueryVoucherPoolRequest) (response *QueryVoucherPoolResponse, err error) {
     return c.QueryVoucherPoolWithContext(context.Background(), request)
 }
@@ -2065,7 +2132,9 @@ func (c *Client) QueryVoucherPool(request *QueryVoucherPoolRequest) (response *Q
 // Callable roles: Distributor, First-level reseller, Second-level reseller
 //
 // error code that may be returned:
+//  FAILEDOPERATION_INVALIDSUBAGENTUIN = "FailedOperation.InvalidSubAgentUin"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryVoucherPoolWithContext(ctx context.Context, request *QueryVoucherPoolRequest) (response *QueryVoucherPoolResponse, err error) {
     if request == nil {
         request = NewQueryVoucherPoolRequest()
