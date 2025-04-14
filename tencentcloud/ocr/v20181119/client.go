@@ -2701,8 +2701,6 @@ func NewRecognizeThaiIDCardOCRResponse() (response *RecognizeThaiIDCardOCRRespon
 // RecognizeThaiIDCardOCR
 // This API is used to recognize the fields on a Thai identity card, including name in Thai, name in English, address, date of birth, identification number, date of issue, and date of expiry.
 //
-// Currently, this API is not generally available. For more information, please [contact your sales rep](https://intl.cloud.tencent.com/about/connect?from_cn_redirect=1).
-//
 // 
 //
 // A maximum of 10 requests can be initiated per second for this API.
@@ -2726,8 +2724,6 @@ func (c *Client) RecognizeThaiIDCardOCR(request *RecognizeThaiIDCardOCRRequest) 
 
 // RecognizeThaiIDCardOCR
 // This API is used to recognize the fields on a Thai identity card, including name in Thai, name in English, address, date of birth, identification number, date of issue, and date of expiry.
-//
-// Currently, this API is not generally available. For more information, please [contact your sales rep](https://intl.cloud.tencent.com/about/connect?from_cn_redirect=1).
 //
 // 
 //
