@@ -633,57 +633,6 @@ func (c *Client) DeleteStreamLiveWatermarkWithContext(ctx context.Context, reque
     return
 }
 
-func NewDescribeMediaLiveHighlightResultRequest() (request *DescribeMediaLiveHighlightResultRequest) {
-    request = &DescribeMediaLiveHighlightResultRequest{
-        BaseRequest: &tchttp.BaseRequest{},
-    }
-    
-    request.Init().WithApiInfo("mdl", APIVersion, "DescribeMediaLiveHighlightResult")
-    
-    
-    return
-}
-
-func NewDescribeMediaLiveHighlightResultResponse() (response *DescribeMediaLiveHighlightResultResponse) {
-    response = &DescribeMediaLiveHighlightResultResponse{
-        BaseResponse: &tchttp.BaseResponse{},
-    } 
-    return
-
-}
-
-// DescribeMediaLiveHighlightResult
-// Query the highlight result information corresponding to the media live broadcast channel.
-//
-// error code that may be returned:
-//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
-//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
-func (c *Client) DescribeMediaLiveHighlightResult(request *DescribeMediaLiveHighlightResultRequest) (response *DescribeMediaLiveHighlightResultResponse, err error) {
-    return c.DescribeMediaLiveHighlightResultWithContext(context.Background(), request)
-}
-
-// DescribeMediaLiveHighlightResult
-// Query the highlight result information corresponding to the media live broadcast channel.
-//
-// error code that may be returned:
-//  INVALIDPARAMETER_ID = "InvalidParameter.Id"
-//  INVALIDPARAMETER_NOTFOUND = "InvalidParameter.NotFound"
-func (c *Client) DescribeMediaLiveHighlightResultWithContext(ctx context.Context, request *DescribeMediaLiveHighlightResultRequest) (response *DescribeMediaLiveHighlightResultResponse, err error) {
-    if request == nil {
-        request = NewDescribeMediaLiveHighlightResultRequest()
-    }
-    
-    if c.GetCredential() == nil {
-        return nil, errors.New("DescribeMediaLiveHighlightResult require credential")
-    }
-
-    request.SetContext(ctx)
-    
-    response = NewDescribeMediaLiveHighlightResultResponse()
-    err = c.Send(request, response)
-    return
-}
-
 func NewDescribeStreamLiveChannelRequest() (request *DescribeStreamLiveChannelRequest) {
     request = &DescribeStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},

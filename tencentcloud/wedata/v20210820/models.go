@@ -18099,6 +18099,155 @@ func (r *GetFileInfoResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type GetInstanceLogRequestParams struct {
+	// **Project ID**.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Unique identifier of an instance.
+	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
+
+	// Lifecycle no.
+	LifeRoundNum *uint64 `json:"LifeRoundNum,omitnil,omitempty" name:"LifeRoundNum"`
+
+	// Time zone.
+	// Time zone. specifies the time zone. the default value is UTC+8.
+	ScheduleTimeZone *string `json:"ScheduleTimeZone,omitnil,omitempty" name:"ScheduleTimeZone"`
+
+	// Indicates the Ip address of the executor where the log is located.
+	BrokerIp *string `json:"BrokerIp,omitnil,omitempty" name:"BrokerIp"`
+
+	// Log file.
+	// When executionJobId in instance details is empty but originFileName is not empty, originFileName and brokerIp must be included in the input parameters.
+	// If both executionJobId and originFileName are empty, it indicates that the instance has not been dispatched for execution or has not generated logs. for example, branch node or merge node.
+	OriginFileName *string `json:"OriginFileName,omitnil,omitempty" name:"OriginFileName"`
+
+	// **Execution ID**.
+	// 
+	// When executionJobId in instance details is not empty, executionJobId needs to be included in the input parameters. originFileName and brokerIp are not required parameters.
+	ExecutionJobId *string `json:"ExecutionJobId,omitnil,omitempty" name:"ExecutionJobId"`
+
+	// Log level.
+	// Default All.
+	// 
+	// - Info
+	// - Debug
+	// - Warn
+	// - Error
+	// - All
+	LogLevel *string `json:"LogLevel,omitnil,omitempty" name:"LogLevel"`
+
+	// Start row number for obtaining logs.
+	// The default is 1.
+	StartLineNum *uint64 `json:"StartLineNum,omitnil,omitempty" name:"StartLineNum"`
+
+	// End line number for obtaining logs.
+	// The default value is 10000.
+	EndLineCount *uint64 `json:"EndLineCount,omitnil,omitempty" name:"EndLineCount"`
+}
+
+type GetInstanceLogRequest struct {
+	*tchttp.BaseRequest
+	
+	// **Project ID**.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Unique identifier of an instance.
+	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
+
+	// Lifecycle no.
+	LifeRoundNum *uint64 `json:"LifeRoundNum,omitnil,omitempty" name:"LifeRoundNum"`
+
+	// Time zone.
+	// Time zone. specifies the time zone. the default value is UTC+8.
+	ScheduleTimeZone *string `json:"ScheduleTimeZone,omitnil,omitempty" name:"ScheduleTimeZone"`
+
+	// Indicates the Ip address of the executor where the log is located.
+	BrokerIp *string `json:"BrokerIp,omitnil,omitempty" name:"BrokerIp"`
+
+	// Log file.
+	// When executionJobId in instance details is empty but originFileName is not empty, originFileName and brokerIp must be included in the input parameters.
+	// If both executionJobId and originFileName are empty, it indicates that the instance has not been dispatched for execution or has not generated logs. for example, branch node or merge node.
+	OriginFileName *string `json:"OriginFileName,omitnil,omitempty" name:"OriginFileName"`
+
+	// **Execution ID**.
+	// 
+	// When executionJobId in instance details is not empty, executionJobId needs to be included in the input parameters. originFileName and brokerIp are not required parameters.
+	ExecutionJobId *string `json:"ExecutionJobId,omitnil,omitempty" name:"ExecutionJobId"`
+
+	// Log level.
+	// Default All.
+	// 
+	// - Info
+	// - Debug
+	// - Warn
+	// - Error
+	// - All
+	LogLevel *string `json:"LogLevel,omitnil,omitempty" name:"LogLevel"`
+
+	// Start row number for obtaining logs.
+	// The default is 1.
+	StartLineNum *uint64 `json:"StartLineNum,omitnil,omitempty" name:"StartLineNum"`
+
+	// End line number for obtaining logs.
+	// The default value is 10000.
+	EndLineCount *uint64 `json:"EndLineCount,omitnil,omitempty" name:"EndLineCount"`
+}
+
+func (r *GetInstanceLogRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetInstanceLogRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "InstanceKey")
+	delete(f, "LifeRoundNum")
+	delete(f, "ScheduleTimeZone")
+	delete(f, "BrokerIp")
+	delete(f, "OriginFileName")
+	delete(f, "ExecutionJobId")
+	delete(f, "LogLevel")
+	delete(f, "StartLineNum")
+	delete(f, "EndLineCount")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetInstanceLogRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetInstanceLogResponseParams struct {
+	// Scheduling instance details.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *InstanceLogVO `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type GetInstanceLogResponse struct {
+	*tchttp.BaseResponse
+	Response *GetInstanceLogResponseParams `json:"Response"`
+}
+
+func (r *GetInstanceLogResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetInstanceLogResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type GetIntegrationNodeColumnSchemaRequestParams struct {
 	// Field Example (JSON Format)
 	ColumnContent *string `json:"ColumnContent,omitnil,omitempty" name:"ColumnContent"`
@@ -18325,6 +18474,80 @@ func (r *GetOfflineInstanceListResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type GetTaskInstanceRequestParams struct {
+	// **Project ID**.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Unique identifier of an instance.
+	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
+
+	// Time zone.
+	// Time zone. specifies the time zone. the default value is UTC+8.
+	ScheduleTimeZone *string `json:"ScheduleTimeZone,omitnil,omitempty" name:"ScheduleTimeZone"`
+}
+
+type GetTaskInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// **Project ID**.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Unique identifier of an instance.
+	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
+
+	// Time zone.
+	// Time zone. specifies the time zone. the default value is UTC+8.
+	ScheduleTimeZone *string `json:"ScheduleTimeZone,omitnil,omitempty" name:"ScheduleTimeZone"`
+}
+
+func (r *GetTaskInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetTaskInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "InstanceKey")
+	delete(f, "ScheduleTimeZone")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetTaskInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type GetTaskInstanceResponseParams struct {
+	// Details of scheduling an instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Data *InstanceDetailVO `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type GetTaskInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *GetTaskInstanceResponseParams `json:"Response"`
+}
+
+func (r *GetTaskInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *GetTaskInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type InstanceApiOpsRequest struct {
 	// Single Query Condition
 	Instance *InstanceOpsDto `json:"Instance,omitnil,omitempty" name:"Instance"`
@@ -18428,6 +18651,164 @@ type InstanceCondition struct {
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 }
 
+type InstanceDetailVO struct {
+	// Unique id of an instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
+
+	// Project ID.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Folder ID.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FolderId *string `json:"FolderId,omitnil,omitempty" name:"FolderId"`
+
+	// Folder name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FolderName *string `json:"FolderName,omitnil,omitempty" name:"FolderName"`
+
+	// Workflow ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WorkflowId *string `json:"WorkflowId,omitnil,omitempty" name:"WorkflowId"`
+
+	// Workflow name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WorkflowName *string `json:"WorkflowName,omitnil,omitempty" name:"WorkflowName"`
+
+	// Responsible person list.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InChargeList []*string `json:"InChargeList,omitnil,omitempty" name:"InChargeList"`
+
+	// Task ID
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Task Name
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
+
+	// Task cycle type.
+	// Support filtering multiple items with an or relationship between conditions.
+	// * O: ONEOFF_CYCLE
+	// * Y: YEAR_CYCLE
+	// * M: MONTH_CYCLE
+	// * W: WEEK_CYCLE
+	// * D: DAY_CYCLE
+	// * H: HOUR_CYCLE
+	// * I: MINUTE_CYCLE
+	// * C: CRONTAB_CYCLE
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskCycleType *string `json:"TaskCycleType,omitnil,omitempty" name:"TaskCycleType"`
+
+	// Task type
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskType *TaskTypeOpsDto `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// Execution resource group ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutorGroupId *string `json:"ExecutorGroupId,omitnil,omitempty" name:"ExecutorGroupId"`
+
+	// Resource group name
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutorGroupName *string `json:"ExecutorGroupName,omitnil,omitempty" name:"ExecutorGroupName"`
+
+	// Standard data time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CurRunDate *string `json:"CurRunDate,omitnil,omitempty" name:"CurRunDate"`
+
+	// Next standard data time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	NextCurDate *string `json:"NextCurDate,omitnil,omitempty" name:"NextCurDate"`
+
+	// Limit on the number of retries issued each time a run fails.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TryLimit *uint64 `json:"TryLimit,omitnil,omitempty" name:"TryLimit"`
+
+	// Current number of issued run attempts.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tries *uint64 `json:"Tries,omitnil,omitempty" name:"Tries"`
+
+	// Cumulative running times.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalRunNum *uint64 `json:"TotalRunNum,omitnil,omitempty" name:"TotalRunNum"`
+
+	// Lifecycle no.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LifeRoundNum *uint64 `json:"LifeRoundNum,omitnil,omitempty" name:"LifeRoundNum"`
+
+	// Instance type.
+	// 
+	// -0 indicates the supplementary entry type.
+	// -1 indicates a periodic instance.
+	// -2 indicates a non-periodic instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceType *uint64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Indicates the status of an instance.
+	// 
+	// -Indicates waiting for event.
+	// -[12] indicates waiting for upstream.
+	// -[6, 7, 9, 10, 18] indicates awaiting execution.
+	// -1, 19, 22 indicate running.
+	// -21: skip running.
+	// -[3] indicates retry on failure.
+	// -[8, 4, 5, 13] indicates a failure.
+	// -[2] indicates a success.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceState *uint64 `json:"InstanceState,omitnil,omitempty" name:"InstanceState"`
+
+	// Planned scheduling time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SchedulerTime *string `json:"SchedulerTime,omitnil,omitempty" name:"SchedulerTime"`
+
+	// Start time of operation.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Indicates the operation completion time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Time spent.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CostTime *string `json:"CostTime,omitnil,omitempty" name:"CostTime"`
+
+	// Instance running trigger type.
+	// 
+	// -RERUN indicates rerunning.
+	// -ADDITION indicates supplementary recording.
+	// -PERIODIC indicates a period.
+	// -APERIODIC indicates non-periodic.
+	// -RERUN_SKIP_RUN indicates re-run - empty run.
+	// -ADDITION_SKIP_RUN indicates a supplementary run - empty run.
+	// -PERIODIC_SKIP_RUN indicates an empty run in a periodic cycle.
+	// -APERIODIC_SKIP_RUN indicates a non-periodic empty run.
+	// -MANUAL_TRIGGER indicates manual triggering.
+	// -RERUN_MANUAL_TRIGGER indicates manual triggering - rerun.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceRunType *string `json:"InstanceRunType,omitnil,omitempty" name:"InstanceRunType"`
+
+	// Dispatch execution ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutionJobId *string `json:"ExecutionJobId,omitnil,omitempty" name:"ExecutionJobId"`
+
+	// Instance lifecycle list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceLifeCycleList []*InstanceLifeCycleVO `json:"InstanceLifeCycleList,omitnil,omitempty" name:"InstanceLifeCycleList"`
+
+	// The last execution log of the instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LatestLog *InstanceLogVO `json:"LatestLog,omitnil,omitempty" name:"LatestLog"`
+}
+
 type InstanceDownloadLogInfo struct {
 	// File NameNote: This field may return null, indicating that no valid value can be obtained.
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
@@ -18480,16 +18861,108 @@ type InstanceLifeCycleOpsDto struct {
 	InstanceState *string `json:"InstanceState,omitnil,omitempty" name:"InstanceState"`
 }
 
+type InstanceLifeCycleVO struct {
+	// Unique identifier of the instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
+
+	// Instance status.
+	// 
+	// -Indicates waiting for event.
+	// -[12] indicates waiting for upstream.
+	// -[6, 7, 9, 10, 18] indicates awaiting execution.
+	// -1, 19, 22 indicate running.
+	// -21: skip running.
+	// -[3] indicates retry on failure.
+	// -[8, 4, 5, 13] indicates a failure.
+	// -[2] indicates a success.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceState *uint64 `json:"InstanceState,omitnil,omitempty" name:"InstanceState"`
+
+	// Lifecycle no.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LifeRoundNum *uint64 `json:"LifeRoundNum,omitnil,omitempty" name:"LifeRoundNum"`
+
+	// Instance running trigger type.
+	// 
+	// -RERUN indicates rerunning.
+	// -ADDITION indicates supplementary recording.
+	// -PERIODIC indicates a period.
+	// -APERIODIC indicates non-periodic.
+	// -RERUN_SKIP_RUN means empty run for re-run.
+	// -ADDITION_SKIP_RUN indicates a supplementary run - empty run.
+	// -PERIODIC_SKIP_RUN indicates an empty run in a periodic cycle.
+	// -APERIODIC_SKIP_RUN indicates a non-periodic empty run.
+	// -MANUAL_TRIGGER indicates manual triggering.
+	// -RERUN_MANUAL_TRIGGER indicates manual triggering - rerun.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RunType *string `json:"RunType,omitnil,omitempty" name:"RunType"`
+
+	// Number of retries after failure.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tries *uint64 `json:"Tries,omitnil,omitempty" name:"Tries"`
+
+	// List of instance lifecycle.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LifeCycleDetailList []*InstanceLifeDetailDto `json:"LifeCycleDetailList,omitnil,omitempty" name:"LifeCycleDetailList"`
+
+	// Instance code file.
+	// The file content specifies the code used for running the execution instance this time. only some tasks support it.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CodeFileName *string `json:"CodeFileName,omitnil,omitempty" name:"CodeFileName"`
+
+	// Dispatch execution ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutionJobId *string `json:"ExecutionJobId,omitnil,omitempty" name:"ExecutionJobId"`
+
+	// The execution node where the log resides.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BrokerIp *string `json:"BrokerIp,omitnil,omitempty" name:"BrokerIp"`
+
+	// Log file name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	OriginFileName *string `json:"OriginFileName,omitnil,omitempty" name:"OriginFileName"`
+
+	// Instance log type.
+	// 
+	// -run: indicates the state of functioning. 
+	// -kill: terminates.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogType *string `json:"LogType,omitnil,omitempty" name:"LogType"`
+
+	// Time spent.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CostTime *string `json:"CostTime,omitnil,omitempty" name:"CostTime"`
+}
+
 type InstanceLifeDetailDto struct {
-	// Instance StatusNote: This field may return null, indicating that no valid value can be obtained.
+	// Indicates the status of an instance.
+	// -Indicates waiting for event.
+	// -[12] indicates waiting for upstream.
+	// -[6, 7, 9, 10, 18] indicates awaiting execution.
+	// -1, 19, 22 indicate running.
+	// -21: skip running.
+	// -[3] indicates retry on failure.
+	// -[8, 4, 5, 13] indicates a failure.
+	// -[2] indicates a success.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	State *string `json:"State,omitnil,omitempty" name:"State"`
 
 	// Start Time of the State
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// Instance Lifecycle Phase Status
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Instance lifecycle phase status.
+	// 
+	// -WAIT_UPSTREAM indicates waiting for event/upstream status.
+	// -WAIT_RUN indicates a waiting for running status.
+	// -RUNNING indicates a running state.
+	// -COMPLETE indicates the final state - completed.
+	// -FAILED indicates the final state - retry on failure.
+	// -EXPIRED indicates the final state - failure.
+	// -SKIP_RUNNING indicates the final state - a branch skipped by the upstream branch node.
+	// -HISTORY indicates compatibility with historical instances.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	DetailState *string `json:"DetailState,omitnil,omitempty" name:"DetailState"`
 
 	// End Time of the State
@@ -18659,6 +19132,87 @@ type InstanceLogList struct {
 	// Time Consumed
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	CostTime *string `json:"CostTime,omitnil,omitempty" name:"CostTime"`
+}
+
+type InstanceLogVO struct {
+	// Unique id of an instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
+
+	// Project ID.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// **Instance status**.
+	// 
+	// -Indicates waiting for event.
+	// -[12] indicates waiting for upstream.
+	// -[6, 7, 9, 10, 18] indicates awaiting execution.
+	// -1, 19, 22 indicate running.
+	// -21: skip running.
+	// -[3] indicates retry on failure.
+	// -[8, 4, 5, 13] indicates a failure.
+	// -[2] indicates a success.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceState *uint64 `json:"InstanceState,omitnil,omitempty" name:"InstanceState"`
+
+	// Instance running trigger type.
+	// 
+	// -RERUN indicates rerunning.
+	// -ADDITION indicates supplementary recording.
+	// -PERIODIC indicates a period.
+	// -APERIODIC indicates non-periodic.
+	// -RERUN_SKIP_RUN means empty run for re-run.
+	// -ADDITION_SKIP_RUN indicates a supplementary run - empty run.
+	// -PERIODIC_SKIP_RUN indicates an empty run in a periodic cycle.
+	// -APERIODIC_SKIP_RUN indicates a non-periodic empty run.
+	// -MANUAL_TRIGGER indicates manual triggering.
+	// -RERUN_MANUAL_TRIGGER indicates manual triggering - rerun.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	RunType *string `json:"RunType,omitnil,omitempty" name:"RunType"`
+
+	// Start time of running.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Indicates the operation completion time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Run code content.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CodeInfo *string `json:"CodeInfo,omitnil,omitempty" name:"CodeInfo"`
+
+	// File size for running code.
+	// Unit: KB.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CodeFileSize *string `json:"CodeFileSize,omitnil,omitempty" name:"CodeFileSize"`
+
+	// Log node information.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	BrokerIp *string `json:"BrokerIp,omitnil,omitempty" name:"BrokerIp"`
+
+	// Log content.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogInfo *string `json:"LogInfo,omitnil,omitempty" name:"LogInfo"`
+
+	// Log file size.
+	// KB.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LogFileSize *string `json:"LogFileSize,omitnil,omitempty" name:"LogFileSize"`
+
+	// Row count of returned logs this time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	LineCount *uint64 `json:"LineCount,omitnil,omitempty" name:"LineCount"`
+
+	// Execute platform log pagination query parameters, transparently input for each request. the value is an empty string when querying the first page.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+
+	// Paging query for logs. indicates whether it is the last page.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	IsEnd *bool `json:"IsEnd,omitnil,omitempty" name:"IsEnd"`
 }
 
 type InstanceNodeInfo struct {
@@ -18924,6 +19478,34 @@ type InstanceOpsInfoPage struct {
 	Items []*InstanceOpsDto `json:"Items,omitnil,omitempty" name:"Items"`
 }
 
+type InstancePageVO struct {
+	// Total number of entries.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Total number of pages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalPage *uint64 `json:"TotalPage,omitnil,omitempty" name:"TotalPage"`
+
+	// Page number
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PageNumber *uint64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// Entries per page.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PageSize *uint64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Total number of pages.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	PageCount *uint64 `json:"PageCount,omitnil,omitempty" name:"PageCount"`
+
+	// Data List
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Items []*InstanceVO `json:"Items,omitnil,omitempty" name:"Items"`
+}
+
 type InstanceSearchCondition struct {
 	// Task Scheduling Cycle Type
 	CycleList []*string `json:"CycleList,omitnil,omitempty" name:"CycleList"`
@@ -18976,6 +19558,130 @@ type InstanceStatisticInfo struct {
 	// 1
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Count *int64 `json:"Count,omitnil,omitempty" name:"Count"`
+}
+
+type InstanceVO struct {
+	// Unique identifier of an instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
+
+	// Project ID.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Folder ID.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FolderId *string `json:"FolderId,omitnil,omitempty" name:"FolderId"`
+
+	// Folder name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	FolderName *string `json:"FolderName,omitnil,omitempty" name:"FolderName"`
+
+	// Workflow ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WorkflowId *string `json:"WorkflowId,omitnil,omitempty" name:"WorkflowId"`
+
+	// Workflow name.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	WorkflowName *string `json:"WorkflowName,omitnil,omitempty" name:"WorkflowName"`
+
+	// Responsible person list.
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InChargeList []*string `json:"InChargeList,omitnil,omitempty" name:"InChargeList"`
+
+	// Task ID
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Task Name
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskName *string `json:"TaskName,omitnil,omitempty" name:"TaskName"`
+
+	// Task type
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskType *TaskTypeOpsDto `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// Task cycle type.
+	// Supports filtering multiple conditions with an or relationship between them.
+	// * O: ONEOFF_CYCLE
+	// * Y: YEAR_CYCLE
+	// * M: MONTH_CYCLE
+	// * W: WEEK_CYCLE
+	// * D: DAY_CYCLE
+	// * H: HOUR_CYCLE
+	// * I: MINUTE_CYCLE
+	// * C: CRONTAB_CYCLE
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TaskCycleType *string `json:"TaskCycleType,omitnil,omitempty" name:"TaskCycleType"`
+
+	// Standard data time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CurRunDate *string `json:"CurRunDate,omitnil,omitempty" name:"CurRunDate"`
+
+	// Specifies the limit on the number of retries issued each time a running failure occurs.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TryLimit *uint64 `json:"TryLimit,omitnil,omitempty" name:"TryLimit"`
+
+	// Number of retries after failure.
+	// Will be reset to 0 and then recounted when triggered for execution by once again manually rerunning or using a supplementary entry instance and other methods.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	Tries *uint64 `json:"Tries,omitnil,omitempty" name:"Tries"`
+
+	// Cumulative running times.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	TotalRunNum *uint64 `json:"TotalRunNum,omitnil,omitempty" name:"TotalRunNum"`
+
+	// Instance type.
+	// 
+	// -0 indicates the supplementary entry type.
+	// -1 indicates a periodic instance.
+	// -2 indicates a non-periodic instance.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceType *uint64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Indicates the status of an instance.
+	// 
+	// -Indicates waiting for event.
+	// -[12] indicates waiting for upstream.
+	// -[6, 7, 9, 10, 18] indicates awaiting execution.
+	// -[1, 19, 22]: running.
+	// -[21] indicates skipping running.
+	// -[3] indicates retry on failure.
+	// -[8, 4, 5, 13] indicates a failure.
+	// -[2] indicates a success.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	InstanceState *uint64 `json:"InstanceState,omitnil,omitempty" name:"InstanceState"`
+
+	// Start time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+	// Operation completion time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+	// Time spent.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	CostTime *string `json:"CostTime,omitnil,omitempty" name:"CostTime"`
+
+	// Planned scheduling time.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	SchedulerTime *string `json:"SchedulerTime,omitnil,omitempty" name:"SchedulerTime"`
+
+	// Execution resource group ID.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutorGroupId *string `json:"ExecutorGroupId,omitnil,omitempty" name:"ExecutorGroupId"`
+
+	// Resource group name
+	// 
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	ExecutorGroupName *string `json:"ExecutorGroupName,omitnil,omitempty" name:"ExecutorGroupName"`
 }
 
 type IntegrationInstanceLog struct {
@@ -19627,6 +20333,289 @@ type LinkOpsDto struct {
 
 	// Workflow IDNote: This field may return null, indicating that no valid value can be obtained.
 	WorkflowId *string `json:"WorkflowId,omitnil,omitempty" name:"WorkflowId"`
+}
+
+// Predefined struct for user
+type ListInstancesRequestParams struct {
+	// **Project ID**.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Instance plan scheduling time.
+	// Filter start time. the time format is yyyy-MM-dd HH:MM:ss.
+	ScheduleTimeFrom *string `json:"ScheduleTimeFrom,omitnil,omitempty" name:"ScheduleTimeFrom"`
+
+	// Instance plan scheduling time.
+	// Filter expiration time. time format: yyyy-MM-dd HH:MM:ss.
+	ScheduleTimeTo *string `json:"ScheduleTimeTo,omitnil,omitempty" name:"ScheduleTimeTo"`
+
+	// Page number, integer.
+	// Use in conjunction with pageSize and cannot be less than 1. the default value is 1.
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// Number of items per page, integer.
+	// Use in conjunction with pageNumber and should not exceed 200. default value: 10.
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Field used to sort query results.
+	// 
+	// -SCHEDULE_DATE indicates the planned scheduling time.
+	// -START_TIME indicates the start execution time of an instance.
+	// -END_TIME indicates the execution end time of the instance.
+	// -COST_TIME indicates the execution duration of an instance.
+	SortColumn *string `json:"SortColumn,omitnil,omitempty" name:"SortColumn"`
+
+	// Instance sorting order.
+	// 
+	// - ASC 
+	// - DESC
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Instance type.
+	// 
+	// -0 indicates the supplementary entry type.
+	// -1 indicates a periodic instance.
+	// -2 indicates a non-periodic instance.
+	InstanceType *uint64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Instance execution status.
+	// Support filtering multiple items with an "or" relationship between conditions.
+	// 
+	// -Indicates waiting for event.
+	// -[12] indicates waiting for upstream.
+	// -[6, 7, 9, 10, 18] indicates awaiting execution.
+	// -1, 19, 22 indicate running.
+	// -[21] indicates skipping running.
+	// -[3] indicates retry on failure.
+	// -[8, 4, 5, 13] indicates a failure.
+	// -[2] indicates a success.
+	InstanceStateList []*uint64 `json:"InstanceStateList,omitnil,omitempty" name:"InstanceStateList"`
+
+	// **Task type Id** specifies the identifier for the task type.
+	// 
+	// -Supports filtering multiple items with an or relationship between conditions.
+	// -You can use the DescribeAllTaskType API to obtain all task types supported by the project.
+	TaskTypeIdList []*uint64 `json:"TaskTypeIdList,omitnil,omitempty" name:"TaskTypeIdList"`
+
+	// Task cycle type.
+	// Supports filtering multiple conditions with an or relationship between them.
+	// * O: ONEOFF_CYCLE
+	// * Y: YEAR_CYCLE
+	// * M: MONTH_CYCLE
+	// * W: WEEK_CYCLE
+	// * D: DAY_CYCLE
+	// * H: HOUR_CYCLE
+	// * I: MINUTE_CYCLE
+	// * C: CRONTAB_CYCLE
+	TaskCycleList []*string `json:"TaskCycleList,omitnil,omitempty" name:"TaskCycleList"`
+
+	// Task name or task ID.
+	// Supports fuzzy search filtering. multiple items are separated by english commas.
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
+
+	// Task owner.
+	// Support filtering multiple items with an or relationship between conditions.
+	InChargeList []*string `json:"InChargeList,omitnil,omitempty" name:"InChargeList"`
+
+	// File to which the task belongs.
+	// Supports filtering multiple conditions with an or relationship between them.
+	// The FindAllFolder API can be used to obtain the folder list under a project.
+	TaskFolderIdList []*string `json:"TaskFolderIdList,omitnil,omitempty" name:"TaskFolderIdList"`
+
+	// **Associated workflow of the task**.
+	// Supports filtering multiple conditions with an or relationship between them.
+	// The workflow list under a project can be obtained through the DescribeOpsWorkflows api.
+	WorkflowIdList []*string `json:"WorkflowIdList,omitnil,omitempty" name:"WorkflowIdList"`
+
+	// Execution resource group Id.
+	// Supports filtering multiple conditions with an or relationship between them.
+	// The scheduling resource group list under the project can be obtained through the DescribeNormalSchedulerExecutorGroups api.
+	// The DescribeNormalIntegrationExecutorGroups API can be used to obtain the list of all integration resource groups under a project.
+	ExecutorGroupIdList []*string `json:"ExecutorGroupIdList,omitnil,omitempty" name:"ExecutorGroupIdList"`
+
+	// **Start time**.
+	// Filter start time. the time format is yyyy-MM-dd HH:MM:ss.
+	StartTimeFrom *string `json:"StartTimeFrom,omitnil,omitempty" name:"StartTimeFrom"`
+
+	// **Start time**.
+	// Filter expiration time. time format: yyyy-MM-dd HH:MM:ss.
+	StartTimeTo *string `json:"StartTimeTo,omitnil,omitempty" name:"StartTimeTo"`
+
+	// Time zone.
+	// Time zone. specifies the time zone. the default value is UTC+8.
+	ScheduleTimeZone *string `json:"ScheduleTimeZone,omitnil,omitempty" name:"ScheduleTimeZone"`
+}
+
+type ListInstancesRequest struct {
+	*tchttp.BaseRequest
+	
+	// **Project ID**.
+	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
+
+	// Instance plan scheduling time.
+	// Filter start time. the time format is yyyy-MM-dd HH:MM:ss.
+	ScheduleTimeFrom *string `json:"ScheduleTimeFrom,omitnil,omitempty" name:"ScheduleTimeFrom"`
+
+	// Instance plan scheduling time.
+	// Filter expiration time. time format: yyyy-MM-dd HH:MM:ss.
+	ScheduleTimeTo *string `json:"ScheduleTimeTo,omitnil,omitempty" name:"ScheduleTimeTo"`
+
+	// Page number, integer.
+	// Use in conjunction with pageSize and cannot be less than 1. the default value is 1.
+	PageNumber *int64 `json:"PageNumber,omitnil,omitempty" name:"PageNumber"`
+
+	// Number of items per page, integer.
+	// Use in conjunction with pageNumber and should not exceed 200. default value: 10.
+	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
+
+	// Field used to sort query results.
+	// 
+	// -SCHEDULE_DATE indicates the planned scheduling time.
+	// -START_TIME indicates the start execution time of an instance.
+	// -END_TIME indicates the execution end time of the instance.
+	// -COST_TIME indicates the execution duration of an instance.
+	SortColumn *string `json:"SortColumn,omitnil,omitempty" name:"SortColumn"`
+
+	// Instance sorting order.
+	// 
+	// - ASC 
+	// - DESC
+	SortType *string `json:"SortType,omitnil,omitempty" name:"SortType"`
+
+	// Instance type.
+	// 
+	// -0 indicates the supplementary entry type.
+	// -1 indicates a periodic instance.
+	// -2 indicates a non-periodic instance.
+	InstanceType *uint64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
+
+	// Instance execution status.
+	// Support filtering multiple items with an "or" relationship between conditions.
+	// 
+	// -Indicates waiting for event.
+	// -[12] indicates waiting for upstream.
+	// -[6, 7, 9, 10, 18] indicates awaiting execution.
+	// -1, 19, 22 indicate running.
+	// -[21] indicates skipping running.
+	// -[3] indicates retry on failure.
+	// -[8, 4, 5, 13] indicates a failure.
+	// -[2] indicates a success.
+	InstanceStateList []*uint64 `json:"InstanceStateList,omitnil,omitempty" name:"InstanceStateList"`
+
+	// **Task type Id** specifies the identifier for the task type.
+	// 
+	// -Supports filtering multiple items with an or relationship between conditions.
+	// -You can use the DescribeAllTaskType API to obtain all task types supported by the project.
+	TaskTypeIdList []*uint64 `json:"TaskTypeIdList,omitnil,omitempty" name:"TaskTypeIdList"`
+
+	// Task cycle type.
+	// Supports filtering multiple conditions with an or relationship between them.
+	// * O: ONEOFF_CYCLE
+	// * Y: YEAR_CYCLE
+	// * M: MONTH_CYCLE
+	// * W: WEEK_CYCLE
+	// * D: DAY_CYCLE
+	// * H: HOUR_CYCLE
+	// * I: MINUTE_CYCLE
+	// * C: CRONTAB_CYCLE
+	TaskCycleList []*string `json:"TaskCycleList,omitnil,omitempty" name:"TaskCycleList"`
+
+	// Task name or task ID.
+	// Supports fuzzy search filtering. multiple items are separated by english commas.
+	Keyword *string `json:"Keyword,omitnil,omitempty" name:"Keyword"`
+
+	// Task owner.
+	// Support filtering multiple items with an or relationship between conditions.
+	InChargeList []*string `json:"InChargeList,omitnil,omitempty" name:"InChargeList"`
+
+	// File to which the task belongs.
+	// Supports filtering multiple conditions with an or relationship between them.
+	// The FindAllFolder API can be used to obtain the folder list under a project.
+	TaskFolderIdList []*string `json:"TaskFolderIdList,omitnil,omitempty" name:"TaskFolderIdList"`
+
+	// **Associated workflow of the task**.
+	// Supports filtering multiple conditions with an or relationship between them.
+	// The workflow list under a project can be obtained through the DescribeOpsWorkflows api.
+	WorkflowIdList []*string `json:"WorkflowIdList,omitnil,omitempty" name:"WorkflowIdList"`
+
+	// Execution resource group Id.
+	// Supports filtering multiple conditions with an or relationship between them.
+	// The scheduling resource group list under the project can be obtained through the DescribeNormalSchedulerExecutorGroups api.
+	// The DescribeNormalIntegrationExecutorGroups API can be used to obtain the list of all integration resource groups under a project.
+	ExecutorGroupIdList []*string `json:"ExecutorGroupIdList,omitnil,omitempty" name:"ExecutorGroupIdList"`
+
+	// **Start time**.
+	// Filter start time. the time format is yyyy-MM-dd HH:MM:ss.
+	StartTimeFrom *string `json:"StartTimeFrom,omitnil,omitempty" name:"StartTimeFrom"`
+
+	// **Start time**.
+	// Filter expiration time. time format: yyyy-MM-dd HH:MM:ss.
+	StartTimeTo *string `json:"StartTimeTo,omitnil,omitempty" name:"StartTimeTo"`
+
+	// Time zone.
+	// Time zone. specifies the time zone. the default value is UTC+8.
+	ScheduleTimeZone *string `json:"ScheduleTimeZone,omitnil,omitempty" name:"ScheduleTimeZone"`
+}
+
+func (r *ListInstancesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListInstancesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ProjectId")
+	delete(f, "ScheduleTimeFrom")
+	delete(f, "ScheduleTimeTo")
+	delete(f, "PageNumber")
+	delete(f, "PageSize")
+	delete(f, "SortColumn")
+	delete(f, "SortType")
+	delete(f, "InstanceType")
+	delete(f, "InstanceStateList")
+	delete(f, "TaskTypeIdList")
+	delete(f, "TaskCycleList")
+	delete(f, "Keyword")
+	delete(f, "InChargeList")
+	delete(f, "TaskFolderIdList")
+	delete(f, "WorkflowIdList")
+	delete(f, "ExecutorGroupIdList")
+	delete(f, "StartTimeFrom")
+	delete(f, "StartTimeTo")
+	delete(f, "ScheduleTimeZone")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ListInstancesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ListInstancesResponseParams struct {
+	// Instance result set.
+	Data *InstancePageVO `json:"Data,omitnil,omitempty" name:"Data"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ListInstancesResponse struct {
+	*tchttp.BaseResponse
+	Response *ListInstancesResponseParams `json:"Response"`
+}
+
+func (r *ListInstancesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ListInstancesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user

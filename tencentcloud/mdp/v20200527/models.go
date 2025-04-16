@@ -4169,6 +4169,12 @@ type SSAIConf struct {
 
 	// Advertising CDN prefix needs to start with http:// or https://
 	AdCDNPrefix *string `json:"AdCDNPrefix,omitnil,omitempty" name:"AdCDNPrefix"`
+
+	// Pre-roll ad decision service address.
+	PreRollAdsUrl *string `json:"PreRollAdsUrl,omitnil,omitempty" name:"PreRollAdsUrl"`
+
+	// The maximum allowed duration of pre-roll ads, (0, 3600].
+	PreRollMaxAllowedDuration *int64 `json:"PreRollMaxAllowedDuration,omitnil,omitempty" name:"PreRollMaxAllowedDuration"`
 }
 
 type SegmentDeliverInfo struct {
