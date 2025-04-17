@@ -2652,6 +2652,67 @@ func (c *Client) DescribeInstanceParamsWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeMaintenanceSpanRequest() (request *DescribeMaintenanceSpanRequest) {
+    request = &DescribeMaintenanceSpanRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("sqlserver", APIVersion, "DescribeMaintenanceSpan")
+    
+    
+    return
+}
+
+func NewDescribeMaintenanceSpanResponse() (response *DescribeMaintenanceSpanResponse) {
+    response = &DescribeMaintenanceSpanResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeMaintenanceSpan
+// This API is used to query the maintenance time window of an instance based on its instance ID.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeMaintenanceSpan(request *DescribeMaintenanceSpanRequest) (response *DescribeMaintenanceSpanResponse, err error) {
+    return c.DescribeMaintenanceSpanWithContext(context.Background(), request)
+}
+
+// DescribeMaintenanceSpan
+// This API is used to query the maintenance time window of an instance based on its instance ID.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GCSERROR = "FailedOperation.GcsError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INTERNALERROR_GCSERROR = "InternalError.GcsError"
+//  INTERNALERROR_SYSTEMERROR = "InternalError.SystemError"
+//  INVALIDPARAMETER_INPUTILLEGAL = "InvalidParameter.InputIllegal"
+//  RESOURCENOTFOUND_INSTANCENOTFOUND = "ResourceNotFound.InstanceNotFound"
+//  UNAUTHORIZEDOPERATION_PERMISSIONDENIED = "UnauthorizedOperation.PermissionDenied"
+func (c *Client) DescribeMaintenanceSpanWithContext(ctx context.Context, request *DescribeMaintenanceSpanRequest) (response *DescribeMaintenanceSpanResponse, err error) {
+    if request == nil {
+        request = NewDescribeMaintenanceSpanRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeMaintenanceSpan require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeMaintenanceSpanResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeMigrationDetailRequest() (request *DescribeMigrationDetailRequest) {
     request = &DescribeMigrationDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},
