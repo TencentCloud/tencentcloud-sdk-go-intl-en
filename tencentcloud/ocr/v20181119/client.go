@@ -1254,6 +1254,67 @@ func (c *Client) RecognizeBrazilIDCardOCRWithContext(ctx context.Context, reques
     return
 }
 
+func NewRecognizeBrazilRNEOCRRequest() (request *RecognizeBrazilRNEOCRRequest) {
+    request = &RecognizeBrazilRNEOCRRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "RecognizeBrazilRNEOCR")
+    
+    
+    return
+}
+
+func NewRecognizeBrazilRNEOCRResponse() (response *RecognizeBrazilRNEOCRResponse) {
+    response = &RecognizeBrazilRNEOCRResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RecognizeBrazilRNEOCR
+// Brazil RNE document recognition Default interface request frequency limit: 5 times/second
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) RecognizeBrazilRNEOCR(request *RecognizeBrazilRNEOCRRequest) (response *RecognizeBrazilRNEOCRResponse, err error) {
+    return c.RecognizeBrazilRNEOCRWithContext(context.Background(), request)
+}
+
+// RecognizeBrazilRNEOCR
+// Brazil RNE document recognition Default interface request frequency limit: 5 times/second
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) RecognizeBrazilRNEOCRWithContext(ctx context.Context, request *RecognizeBrazilRNEOCRRequest) (response *RecognizeBrazilRNEOCRResponse, err error) {
+    if request == nil {
+        request = NewRecognizeBrazilRNEOCRRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RecognizeBrazilRNEOCR require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRecognizeBrazilRNEOCRResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRecognizeGeneralInvoiceRequest() (request *RecognizeGeneralInvoiceRequest) {
     request = &RecognizeGeneralInvoiceRequest{
         BaseRequest: &tchttp.BaseRequest{},
