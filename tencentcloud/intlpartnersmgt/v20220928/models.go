@@ -1534,20 +1534,39 @@ type DescribeCustomerInfoData struct {
 	// Binding time.
 	BindTime *string `json:"BindTime,omitnil,omitempty" name:"BindTime"`
 
-	// Account status
-	// .
+	// Account status.
 	// 0: normal.
 	// 1: forcibly mandatory (this function is not supported yet).
 	// 2: mandatory arrears. 
 	AccountStatus *string `json:"AccountStatus,omitnil,omitempty" name:"AccountStatus"`
 
-	// Identity verification status.
-	// -1: files not uploaded.
-	// 0: not submitted for review.
-	// 1: under review.
-	// 2: review error.
-	// 3: approved.
+	// Specifies the identity verification status.
+	// -999: account information not found.
+	// -1: file not uploaded.
+	// 0: pending review.
+	// Under review.
+	// Error in review: 2.
+	// 3: pass review.
 	AuthStatus *string `json:"AuthStatus,omitnil,omitempty" name:"AuthStatus"`
+
+	// Real-Name type.
+	// -1: default value. no such information. 
+	// 0: personal type. 
+	// 1: enterprise type.
+	AuthType *int64 `json:"AuthType,omitnil,omitempty" name:"AuthType"`
+
+	// Specifies the registration time of the cid.
+	CidRegisterTime *string `json:"CidRegisterTime,omitnil,omitempty" name:"CidRegisterTime"`
+
+	// Specifies the registration time of the uin.
+	UinRegisterTime *string `json:"UinRegisterTime,omitnil,omitempty" name:"UinRegisterTime"`
+
+	// Time when real-name authentication passed.
+	AuthPassTime *string `json:"AuthPassTime,omitnil,omitempty" name:"AuthPassTime"`
+
+	// Whether there is consumption.
+	// 0: no consumption; 1: consumption.
+	HasExpense *int64 `json:"HasExpense,omitnil,omitempty" name:"HasExpense"`
 }
 
 // Predefined struct for user

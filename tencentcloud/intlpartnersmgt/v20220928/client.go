@@ -1009,11 +1009,9 @@ func NewDescribeCustomerInfoResponse() (response *DescribeCustomerInfoResponse) 
 }
 
 // DescribeCustomerInfo
-// This API is used to query the customer information.
+// This API is used to query sub-customer information.
 //
-// 
-//
-// Callable roles: Distributor, Reseller
+// Invocation roles: reseller, first-level distributor.
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
@@ -1023,11 +1021,9 @@ func (c *Client) DescribeCustomerInfo(request *DescribeCustomerInfoRequest) (res
 }
 
 // DescribeCustomerInfo
-// This API is used to query the customer information.
+// This API is used to query sub-customer information.
 //
-// 
-//
-// Callable roles: Distributor, Reseller
+// Invocation roles: reseller, first-level distributor.
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
