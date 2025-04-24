@@ -569,6 +569,7 @@ func NewCreateAutoCalloutTaskResponse() (response *CreateAutoCalloutTaskResponse
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_EXPERIENCEACCOUNT = "InvalidParameterValue.ExperienceAccount"
 func (c *Client) CreateAutoCalloutTask(request *CreateAutoCalloutTaskRequest) (response *CreateAutoCalloutTaskResponse, err error) {
     return c.CreateAutoCalloutTaskWithContext(context.Background(), request)
 }
@@ -582,6 +583,7 @@ func (c *Client) CreateAutoCalloutTask(request *CreateAutoCalloutTaskRequest) (r
 //  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_EXPERIENCEACCOUNT = "InvalidParameterValue.ExperienceAccount"
 func (c *Client) CreateAutoCalloutTaskWithContext(ctx context.Context, request *CreateAutoCalloutTaskRequest) (response *CreateAutoCalloutTaskResponse, err error) {
     if request == nil {
         request = NewCreateAutoCalloutTaskRequest()
@@ -796,6 +798,8 @@ func NewCreateIVRSessionResponse() (response *CreateIVRSessionResponse) {
 // Create a session associated with IVR. This feature is supported only in the Advanced Version. Currently, it supports inbound and automatic outbound IVR types. Upon receiving the request, TCCC will first attempt to call the callee, then enter the IVR flow.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_AICONCURRENTNOPACKAGE = "FailedOperation.AIConcurrentNoPackage"
+//  FAILEDOPERATION_AICONCURRENTOVERFREQUENCY = "FailedOperation.AIConcurrentOverFrequency"
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
 //  FAILEDOPERATION_CALLEEISBLACKUSER = "FailedOperation.CalleeIsBlackUser"
 //  FAILEDOPERATION_CALLEROVERFREQUENCY = "FailedOperation.CallerOverFrequency"
@@ -817,6 +821,8 @@ func (c *Client) CreateIVRSession(request *CreateIVRSessionRequest) (response *C
 // Create a session associated with IVR. This feature is supported only in the Advanced Version. Currently, it supports inbound and automatic outbound IVR types. Upon receiving the request, TCCC will first attempt to call the callee, then enter the IVR flow.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_AICONCURRENTNOPACKAGE = "FailedOperation.AIConcurrentNoPackage"
+//  FAILEDOPERATION_AICONCURRENTOVERFREQUENCY = "FailedOperation.AIConcurrentOverFrequency"
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
 //  FAILEDOPERATION_CALLEEISBLACKUSER = "FailedOperation.CalleeIsBlackUser"
 //  FAILEDOPERATION_CALLEROVERFREQUENCY = "FailedOperation.CallerOverFrequency"

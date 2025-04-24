@@ -17,6 +17,12 @@ package v20200210
 const (
 	// error codes for specific actions
 
+	// 
+	FAILEDOPERATION_AICONCURRENTNOPACKAGE = "FailedOperation.AIConcurrentNoPackage"
+
+	// 
+	FAILEDOPERATION_AICONCURRENTOVERFREQUENCY = "FailedOperation.AIConcurrentOverFrequency"
+
 	// Outbound call failure.
 	FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
 
@@ -121,6 +127,9 @@ const (
 
 	// Error in the status of the review form.
 	INVALIDPARAMETERVALUE_ERRORAPPLYSTATUS = "InvalidParameterValue.ErrorApplyStatus"
+
+	// 
+	INVALIDPARAMETERVALUE_EXPERIENCEACCOUNT = "InvalidParameterValue.ExperienceAccount"
 
 	// The SDKAppID does not exist.
 	INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"

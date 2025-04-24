@@ -511,6 +511,8 @@ type CreateAIAgentCallRequestParams struct {
 	Callers []*string `json:"Callers,omitnil,omitempty" name:"Callers"`
 
 	// Prompt variable.
+	//
+	// Deprecated: PromptVariables is deprecated.
 	PromptVariables []*Variable `json:"PromptVariables,omitnil,omitempty" name:"PromptVariables"`
 }
 
@@ -589,6 +591,35 @@ type CreateAICallRequestParams struct {
 	// Called number.
 	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
 
+	// Model interface protocol types, currently compatible with three protocol types:
+	// 
+	// - OpenAI protocol (including GPT, DeepSeek, etc.):"openai"
+	// - Azure protocol:"azure"
+	// - Minimax protocol:"minimax"
+	LLMType *string `json:"LLMType,omitnil,omitempty" name:"LLMType"`
+
+	// Model API key, for authentication information, please refer to the respective model's official website
+	// 
+	// - OpenAI protocol: [GPT](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key), [DeepSeek](https://api-docs.deepseek.com/zh-cn/);
+	// 
+	// - Azure protocol: [Azure GPT](https://learn.microsoft.com/en-us/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-studio#key-settings);
+	// 
+	// - Minimax:[Minimax](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)
+	APIKey *string `json:"APIKey,omitnil,omitempty" name:"APIKey"`
+
+	// Model interface address
+	// 
+	// - OpenAI protocol
+	// GPT:"https://api.openai.com/v1/"
+	// Deepseek:"https://api.deepseek.com/v1"
+	// 
+	// - Azure protocol
+	//  "https://{your-resource-name}.openai.azure.com?api-version={api-version}"
+	// 
+	// - Minimax protocol
+	// "https://api.minimax.chat/v1"
+	APIUrl *string `json:"APIUrl,omitnil,omitempty" name:"APIUrl"`
+
 	// ## Identity
 	// You are Kate from the appointment department at Retell Health calling Cindy over the phone to prepare for the annual checkup coming up. You are a pleasant and friendly receptionist caring deeply for the user. You don't provide medical advice but would use the medical knowledge to understand user responses.
 	// 
@@ -622,13 +653,6 @@ type CreateAICallRequestParams struct {
 	//   - If user do not have any questions, call function end_call to hang up.
 	SystemPrompt *string `json:"SystemPrompt,omitnil,omitempty" name:"SystemPrompt"`
 
-	// Model interface protocol types, currently compatible with three protocol types:
-	// 
-	// - OpenAI protocol (including GPT, DeepSeek, etc.):"openai"
-	// - Azure protocol:"azure"
-	// - Minimax protocol:"minimax"
-	LLMType *string `json:"LLMType,omitnil,omitempty" name:"LLMType"`
-
 	// Model name, such as
 	// 
 	// - OpenAI protocol
@@ -640,28 +664,6 @@ type CreateAICallRequestParams struct {
 	// - Minimax protocol
 	// "deepseek-chat".
 	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
-
-	// Model API key, for authentication information, please refer to the respective model's official website
-	// 
-	// - OpenAI protocol: [GPT](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key), [DeepSeek](https://api-docs.deepseek.com/zh-cn/);
-	// 
-	// - Azure protocol: [Azure GPT](https://learn.microsoft.com/en-us/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-studio#key-settings);
-	// 
-	// - Minimax:[Minimax](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)
-	APIKey *string `json:"APIKey,omitnil,omitempty" name:"APIKey"`
-
-	// Model interface address
-	// 
-	// - OpenAI protocol
-	// GPT:"https://api.openai.com/v1/"
-	// Deepseek:"https://api.deepseek.com/v1"
-	// 
-	// - Azure protocol
-	//  "https://{your-resource-name}.openai.azure.com?api-version={api-version}"
-	// 
-	// - Minimax protocol
-	// "https://api.minimax.chat/v1"
-	APIUrl *string `json:"APIUrl,omitnil,omitempty" name:"APIUrl"`
 
 	// The following voice parameter values are available by default. If you wish to customize the voice type, please leave VoiceType blank and configure it in the CustomTTSConfig parameter.
 	// 
@@ -821,6 +823,8 @@ type CreateAICallRequestParams struct {
 	CustomTTSConfig *string `json:"CustomTTSConfig,omitnil,omitempty" name:"CustomTTSConfig"`
 
 	// Prompt word variable.
+	//
+	// Deprecated: PromptVariables is deprecated.
 	PromptVariables []*Variable `json:"PromptVariables,omitnil,omitempty" name:"PromptVariables"`
 
 	// Automatic speech recognition vad time ranges from 240 to 2000, with a default of 1000, measured in milliseconds. smaller values will make automatic speech recognition segment faster.
@@ -838,6 +842,35 @@ type CreateAICallRequest struct {
 
 	// Called number.
 	Callee *string `json:"Callee,omitnil,omitempty" name:"Callee"`
+
+	// Model interface protocol types, currently compatible with three protocol types:
+	// 
+	// - OpenAI protocol (including GPT, DeepSeek, etc.):"openai"
+	// - Azure protocol:"azure"
+	// - Minimax protocol:"minimax"
+	LLMType *string `json:"LLMType,omitnil,omitempty" name:"LLMType"`
+
+	// Model API key, for authentication information, please refer to the respective model's official website
+	// 
+	// - OpenAI protocol: [GPT](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key), [DeepSeek](https://api-docs.deepseek.com/zh-cn/);
+	// 
+	// - Azure protocol: [Azure GPT](https://learn.microsoft.com/en-us/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-studio#key-settings);
+	// 
+	// - Minimax:[Minimax](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)
+	APIKey *string `json:"APIKey,omitnil,omitempty" name:"APIKey"`
+
+	// Model interface address
+	// 
+	// - OpenAI protocol
+	// GPT:"https://api.openai.com/v1/"
+	// Deepseek:"https://api.deepseek.com/v1"
+	// 
+	// - Azure protocol
+	//  "https://{your-resource-name}.openai.azure.com?api-version={api-version}"
+	// 
+	// - Minimax protocol
+	// "https://api.minimax.chat/v1"
+	APIUrl *string `json:"APIUrl,omitnil,omitempty" name:"APIUrl"`
 
 	// ## Identity
 	// You are Kate from the appointment department at Retell Health calling Cindy over the phone to prepare for the annual checkup coming up. You are a pleasant and friendly receptionist caring deeply for the user. You don't provide medical advice but would use the medical knowledge to understand user responses.
@@ -872,13 +905,6 @@ type CreateAICallRequest struct {
 	//   - If user do not have any questions, call function end_call to hang up.
 	SystemPrompt *string `json:"SystemPrompt,omitnil,omitempty" name:"SystemPrompt"`
 
-	// Model interface protocol types, currently compatible with three protocol types:
-	// 
-	// - OpenAI protocol (including GPT, DeepSeek, etc.):"openai"
-	// - Azure protocol:"azure"
-	// - Minimax protocol:"minimax"
-	LLMType *string `json:"LLMType,omitnil,omitempty" name:"LLMType"`
-
 	// Model name, such as
 	// 
 	// - OpenAI protocol
@@ -890,28 +916,6 @@ type CreateAICallRequest struct {
 	// - Minimax protocol
 	// "deepseek-chat".
 	Model *string `json:"Model,omitnil,omitempty" name:"Model"`
-
-	// Model API key, for authentication information, please refer to the respective model's official website
-	// 
-	// - OpenAI protocol: [GPT](https://help.openai.com/en/articles/4936850-where-do-i-find-my-openai-api-key), [DeepSeek](https://api-docs.deepseek.com/zh-cn/);
-	// 
-	// - Azure protocol: [Azure GPT](https://learn.microsoft.com/en-us/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Ctypescript%2Cpython-new&pivots=programming-language-studio#key-settings);
-	// 
-	// - Minimax:[Minimax](https://platform.minimaxi.com/document/Fast%20access?key=66701cf51d57f38758d581b2)
-	APIKey *string `json:"APIKey,omitnil,omitempty" name:"APIKey"`
-
-	// Model interface address
-	// 
-	// - OpenAI protocol
-	// GPT:"https://api.openai.com/v1/"
-	// Deepseek:"https://api.deepseek.com/v1"
-	// 
-	// - Azure protocol
-	//  "https://{your-resource-name}.openai.azure.com?api-version={api-version}"
-	// 
-	// - Minimax protocol
-	// "https://api.minimax.chat/v1"
-	APIUrl *string `json:"APIUrl,omitnil,omitempty" name:"APIUrl"`
 
 	// The following voice parameter values are available by default. If you wish to customize the voice type, please leave VoiceType blank and configure it in the CustomTTSConfig parameter.
 	// 
@@ -1094,11 +1098,11 @@ func (r *CreateAICallRequest) FromJsonString(s string) error {
 	}
 	delete(f, "SdkAppId")
 	delete(f, "Callee")
-	delete(f, "SystemPrompt")
 	delete(f, "LLMType")
-	delete(f, "Model")
 	delete(f, "APIKey")
 	delete(f, "APIUrl")
+	delete(f, "SystemPrompt")
+	delete(f, "Model")
 	delete(f, "VoiceType")
 	delete(f, "Callers")
 	delete(f, "WelcomeMessage")
@@ -5361,6 +5365,8 @@ type StaffInfo struct {
 	StaffNumber *string `json:"StaffNumber,omitnil,omitempty" name:"StaffNumber"`
 
 	// User role id.
+	//
+	// Deprecated: RoleId is deprecated.
 	RoleId *uint64 `json:"RoleId,omitnil,omitempty" name:"RoleId"`
 
 	// Affiliated skill group list.

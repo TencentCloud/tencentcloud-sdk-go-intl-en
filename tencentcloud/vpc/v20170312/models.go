@@ -2883,20 +2883,23 @@ func (r *CreateAssistantCidrResponse) FromJsonString(s string) error {
 // Predefined struct for user
 type CreateBandwidthPackageRequestParams struct {
 	// The network type of the bandwidth package. Default value: `BGP`. Valid values:
-	// `BGP` 
+	// `BGP`
 	// `HIGH_QUALITY_BGP`
 	NetworkType *string `json:"NetworkType,omitnil,omitempty" name:"NetworkType"`
 
-	// The billing mode of the bandwidth package. Default value: `TOP5_POSTPAID_BY_MONTH`. Valid values:
-	// <li>`TOP5_POSTPAID_BY_MONTH`: monthly top 5 </li>
-	// <li>`PERCENT95_POSTPAID_BY_MONTH`: monthly 95th percentile</li>
-	// <li>`FIXED_PREPAID_BY_MONTH`: monthly subscription</li>
+	// The billing mode of the bandwidth package. Default value: `ENHANCED95_POSTPAID_BY_MONTH`. Valid values:
+	// <li>`ENHANCED95_POSTPAID_BY_MONTH`: Pay-as-you-go - Enhanced 95th percentile</li>
+	// <li>`PRIMARY_TRAFFIC_POSTPAID_BY_HOUR`: Postpaid - Main Traffic Billing</li>
+	// <li>`BANDWIDTH_POSTPAID_BY_DAY`: General BGP, Pay-as-you-go - Bandwidth-based</li>
+	// <li>`PEAK_BANDWIDTH_POSTPAID_BY_DAY`: Static single-line, Pay-as-you-go - Daily billed</li>
+	// <li>`TOP5_POSTPAID_BY_MONTH`: Pay-as-you-go - Monthly top 5th, If you need to use this Bglling mode, please submit a ticket.</li>
+	// 
 	ChargeType *string `json:"ChargeType,omitnil,omitempty" name:"ChargeType"`
 
 	// The name of the bandwidth package.
 	BandwidthPackageName *string `json:"BandwidthPackageName,omitnil,omitempty" name:"BandwidthPackageName"`
 
-	// The number of bandwidth packages to create. Valid range: 1-20. It can only be “1” for bill-by-CVM accounts.
+	// The number of bandwidth packages to create. Valid range: 1-20. It can only be "1" for bill-by-CVM accounts.
 	BandwidthPackageCount *uint64 `json:"BandwidthPackageCount,omitnil,omitempty" name:"BandwidthPackageCount"`
 
 	// The limit of the bandwidth package in Mbps. The value '-1' indicates there is no limit. This feature is currently in beta.
@@ -2910,26 +2913,33 @@ type CreateBandwidthPackageRequestParams struct {
 
 
 	TimeSpan *uint64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	//     Network egress. It defaults to `center_egress1`. Valid values:
+	// center_egress1,center_egress2,center_egress3
+	Egress *string `json:"Egress,omitnil,omitempty" name:"Egress"`
 }
 
 type CreateBandwidthPackageRequest struct {
 	*tchttp.BaseRequest
 	
 	// The network type of the bandwidth package. Default value: `BGP`. Valid values:
-	// `BGP` 
+	// `BGP`
 	// `HIGH_QUALITY_BGP`
 	NetworkType *string `json:"NetworkType,omitnil,omitempty" name:"NetworkType"`
 
-	// The billing mode of the bandwidth package. Default value: `TOP5_POSTPAID_BY_MONTH`. Valid values:
-	// <li>`TOP5_POSTPAID_BY_MONTH`: monthly top 5 </li>
-	// <li>`PERCENT95_POSTPAID_BY_MONTH`: monthly 95th percentile</li>
-	// <li>`FIXED_PREPAID_BY_MONTH`: monthly subscription</li>
+	// The billing mode of the bandwidth package. Default value: `ENHANCED95_POSTPAID_BY_MONTH`. Valid values:
+	// <li>`ENHANCED95_POSTPAID_BY_MONTH`: Pay-as-you-go - Enhanced 95th percentile</li>
+	// <li>`PRIMARY_TRAFFIC_POSTPAID_BY_HOUR`: Postpaid - Main Traffic Billing</li>
+	// <li>`BANDWIDTH_POSTPAID_BY_DAY`: General BGP, Pay-as-you-go - Bandwidth-based</li>
+	// <li>`PEAK_BANDWIDTH_POSTPAID_BY_DAY`: Static single-line, Pay-as-you-go - Daily billed</li>
+	// <li>`TOP5_POSTPAID_BY_MONTH`: Pay-as-you-go - Monthly top 5th, If you need to use this Bglling mode, please submit a ticket.</li>
+	// 
 	ChargeType *string `json:"ChargeType,omitnil,omitempty" name:"ChargeType"`
 
 	// The name of the bandwidth package.
 	BandwidthPackageName *string `json:"BandwidthPackageName,omitnil,omitempty" name:"BandwidthPackageName"`
 
-	// The number of bandwidth packages to create. Valid range: 1-20. It can only be “1” for bill-by-CVM accounts.
+	// The number of bandwidth packages to create. Valid range: 1-20. It can only be "1" for bill-by-CVM accounts.
 	BandwidthPackageCount *uint64 `json:"BandwidthPackageCount,omitnil,omitempty" name:"BandwidthPackageCount"`
 
 	// The limit of the bandwidth package in Mbps. The value '-1' indicates there is no limit. This feature is currently in beta.
@@ -2942,6 +2952,10 @@ type CreateBandwidthPackageRequest struct {
 	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
 
 	TimeSpan *uint64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
+
+	//     Network egress. It defaults to `center_egress1`. Valid values:
+	// center_egress1,center_egress2,center_egress3
+	Egress *string `json:"Egress,omitnil,omitempty" name:"Egress"`
 }
 
 func (r *CreateBandwidthPackageRequest) ToJsonString() string {
@@ -2964,6 +2978,7 @@ func (r *CreateBandwidthPackageRequest) FromJsonString(s string) error {
 	delete(f, "Tags")
 	delete(f, "Protocol")
 	delete(f, "TimeSpan")
+	delete(f, "Egress")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateBandwidthPackageRequest has unknown keys!", "")
 	}

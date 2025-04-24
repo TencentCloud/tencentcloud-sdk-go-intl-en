@@ -389,7 +389,7 @@ const (
 	// Tags are not assigned quotas.
 	INVALIDPARAMETERVALUE_TAGNOTALLOCATEDQUOTA = "InvalidParameterValue.TagNotAllocatedQuota"
 
-	// The tag and value do not exist.
+	// The Tag does not exist.
 	INVALIDPARAMETERVALUE_TAGNOTEXISTED = "InvalidParameterValue.TagNotExisted"
 
 	// Unsupported tag.
