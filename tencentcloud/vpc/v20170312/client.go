@@ -9286,6 +9286,69 @@ func (c *Client) DescribeIPv6AddressesWithContext(ctx context.Context, request *
     return
 }
 
+func NewDescribeInstanceJumboRequest() (request *DescribeInstanceJumboRequest) {
+    request = &DescribeInstanceJumboRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "DescribeInstanceJumbo")
+    
+    
+    return
+}
+
+func NewDescribeInstanceJumboResponse() (response *DescribeInstanceJumboResponse) {
+    response = &DescribeInstanceJumboResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeInstanceJumbo
+// This API is used to check whether Cloud Virtual Machines support jumbo frames.
+//
+// Usage limits.
+//
+// This API is used to perform operations that require CAM policy authorization and read access to the corresponding instance. The API accesses CVM instances, so it verifies whether there are CAM permissions for the instance. For example: CAM action allows vpc:DescribeInstanceJumbo; resource allows qcs::cvm:ap-guangzhou:uin/2126195383:instance/*.
+//
+// This API is used to check the jumbo frame status before and after instance migration. The status returned by this API may be inconsistent before and after migration. You need to check whether the host machines of the instance before and after migration both support jumbo frames. One possible reason is that the instance has been migrated to a host machine that does not support jumbo frames.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeInstanceJumbo(request *DescribeInstanceJumboRequest) (response *DescribeInstanceJumboResponse, err error) {
+    return c.DescribeInstanceJumboWithContext(context.Background(), request)
+}
+
+// DescribeInstanceJumbo
+// This API is used to check whether Cloud Virtual Machines support jumbo frames.
+//
+// Usage limits.
+//
+// This API is used to perform operations that require CAM policy authorization and read access to the corresponding instance. The API accesses CVM instances, so it verifies whether there are CAM permissions for the instance. For example: CAM action allows vpc:DescribeInstanceJumbo; resource allows qcs::cvm:ap-guangzhou:uin/2126195383:instance/*.
+//
+// This API is used to check the jumbo frame status before and after instance migration. The status returned by this API may be inconsistent before and after migration. You need to check whether the host machines of the instance before and after migration both support jumbo frames. One possible reason is that the instance has been migrated to a host machine that does not support jumbo frames.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) DescribeInstanceJumboWithContext(ctx context.Context, request *DescribeInstanceJumboRequest) (response *DescribeInstanceJumboResponse, err error) {
+    if request == nil {
+        request = NewDescribeInstanceJumboRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeInstanceJumbo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeInstanceJumboResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeIp6AddressesRequest() (request *DescribeIp6AddressesRequest) {
     request = &DescribeIp6AddressesRequest{
         BaseRequest: &tchttp.BaseRequest{},
