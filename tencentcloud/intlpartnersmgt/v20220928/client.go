@@ -1097,6 +1097,61 @@ func (c *Client) DescribeCustomerUinWithContext(ctx context.Context, request *De
     return
 }
 
+func NewDescribeRebateDownloadUrlRequest() (request *DescribeRebateDownloadUrlRequest) {
+    request = &DescribeRebateDownloadUrlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeRebateDownloadUrl")
+    
+    
+    return
+}
+
+func NewDescribeRebateDownloadUrlResponse() (response *DescribeRebateDownloadUrlResponse) {
+    response = &DescribeRebateDownloadUrlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRebateDownloadUrl
+// This API is used to download the commission bill file by resellers/agents. The file URL is returned.
+//
+// Resellers/Agents can call this API.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) DescribeRebateDownloadUrl(request *DescribeRebateDownloadUrlRequest) (response *DescribeRebateDownloadUrlResponse, err error) {
+    return c.DescribeRebateDownloadUrlWithContext(context.Background(), request)
+}
+
+// DescribeRebateDownloadUrl
+// This API is used to download the commission bill file by resellers/agents. The file URL is returned.
+//
+// Resellers/Agents can call this API.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+func (c *Client) DescribeRebateDownloadUrlWithContext(ctx context.Context, request *DescribeRebateDownloadUrlRequest) (response *DescribeRebateDownloadUrlResponse, err error) {
+    if request == nil {
+        request = NewDescribeRebateDownloadUrlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRebateDownloadUrl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRebateDownloadUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewForceQNRequest() (request *ForceQNRequest) {
     request = &ForceQNRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1124,9 +1179,8 @@ func NewForceQNResponse() (response *ForceQNResponse) {
 // Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
-//  INVALIDPARAMETER_PAGE = "InvalidParameter.Page"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
-//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) ForceQN(request *ForceQNRequest) (response *ForceQNResponse, err error) {
     return c.ForceQNWithContext(context.Background(), request)
 }
@@ -1139,9 +1193,8 @@ func (c *Client) ForceQN(request *ForceQNRequest) (response *ForceQNResponse, er
 // Callable roles: Distributor, Second-level reseller, Reseller
 //
 // error code that may be returned:
-//  INVALIDPARAMETER_PAGE = "InvalidParameter.Page"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
-//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) ForceQNWithContext(ctx context.Context, request *ForceQNRequest) (response *ForceQNResponse, err error) {
     if request == nil {
         request = NewForceQNRequest()
