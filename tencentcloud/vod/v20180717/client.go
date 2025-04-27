@@ -7509,6 +7509,7 @@ func NewHandleCurrentPlaylistResponse() (response *HandleCurrentPlaylistResponse
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
 //  INVALIDPARAMETERVALUE_INDEX = "InvalidParameterValue.Index"
+//  INVALIDPARAMETERVALUE_ITEMID = "InvalidParameterValue.ItemId"
 //  INVALIDPARAMETERVALUE_ROUNDPLAYID = "InvalidParameterValue.RoundPlayId"
 //  INVALIDPARAMETERVALUE_ROUNDPLAYLIST = "InvalidParameterValue.RoundPlaylist"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"
@@ -7523,6 +7524,7 @@ func (c *Client) HandleCurrentPlaylist(request *HandleCurrentPlaylistRequest) (r
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_FILEID = "InvalidParameterValue.FileId"
 //  INVALIDPARAMETERVALUE_INDEX = "InvalidParameterValue.Index"
+//  INVALIDPARAMETERVALUE_ITEMID = "InvalidParameterValue.ItemId"
 //  INVALIDPARAMETERVALUE_ROUNDPLAYID = "InvalidParameterValue.RoundPlayId"
 //  INVALIDPARAMETERVALUE_ROUNDPLAYLIST = "InvalidParameterValue.RoundPlaylist"
 //  INVALIDPARAMETERVALUE_SUBAPPID = "InvalidParameterValue.SubAppId"

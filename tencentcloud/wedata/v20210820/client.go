@@ -45,6 +45,55 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewAddProjectUserRoleRequest() (request *AddProjectUserRoleRequest) {
+    request = &AddProjectUserRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "AddProjectUserRole")
+    
+    
+    return
+}
+
+func NewAddProjectUserRoleResponse() (response *AddProjectUserRoleResponse) {
+    response = &AddProjectUserRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddProjectUserRole
+// This API is used to add a user role to a project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) AddProjectUserRole(request *AddProjectUserRoleRequest) (response *AddProjectUserRoleResponse, err error) {
+    return c.AddProjectUserRoleWithContext(context.Background(), request)
+}
+
+// AddProjectUserRole
+// This API is used to add a user role to a project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) AddProjectUserRoleWithContext(ctx context.Context, request *AddProjectUserRoleRequest) (response *AddProjectUserRoleResponse, err error) {
+    if request == nil {
+        request = NewAddProjectUserRoleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddProjectUserRole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddProjectUserRoleResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBatchCreateIntegrationTaskAlarmsRequest() (request *BatchCreateIntegrationTaskAlarmsRequest) {
     request = &BatchCreateIntegrationTaskAlarmsRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6412,6 +6461,57 @@ func (c *Client) DescribeResourceManagePathTreesWithContext(ctx context.Context,
     return
 }
 
+func NewDescribeRoleListRequest() (request *DescribeRoleListRequest) {
+    request = &DescribeRoleListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "DescribeRoleList")
+    
+    
+    return
+}
+
+func NewDescribeRoleListResponse() (response *DescribeRoleListResponse) {
+    response = &DescribeRoleListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRoleList
+// This API is used to retrieve role list information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhitelistError"
+func (c *Client) DescribeRoleList(request *DescribeRoleListRequest) (response *DescribeRoleListResponse, err error) {
+    return c.DescribeRoleListWithContext(context.Background(), request)
+}
+
+// DescribeRoleList
+// This API is used to retrieve role list information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  OPERATIONDENIED_USERNOTINWHITELISTERROR = "OperationDenied.UserNotInWhitelistError"
+func (c *Client) DescribeRoleListWithContext(ctx context.Context, request *DescribeRoleListRequest) (response *DescribeRoleListResponse, err error) {
+    if request == nil {
+        request = NewDescribeRoleListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRoleList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeRoleListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeRuleRequest() (request *DescribeRuleRequest) {
     request = &DescribeRuleRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -12344,6 +12444,55 @@ func (c *Client) UnlockIntegrationTaskWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewUnlockIntegrationTaskResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUpdateProjectUserRoleRequest() (request *UpdateProjectUserRoleRequest) {
+    request = &UpdateProjectUserRoleRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "UpdateProjectUserRole")
+    
+    
+    return
+}
+
+func NewUpdateProjectUserRoleResponse() (response *UpdateProjectUserRoleResponse) {
+    response = &UpdateProjectUserRoleResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateProjectUserRole
+// This API is used to modify user roles in a project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) UpdateProjectUserRole(request *UpdateProjectUserRoleRequest) (response *UpdateProjectUserRoleResponse, err error) {
+    return c.UpdateProjectUserRoleWithContext(context.Background(), request)
+}
+
+// UpdateProjectUserRole
+// This API is used to modify user roles in a project.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) UpdateProjectUserRoleWithContext(ctx context.Context, request *UpdateProjectUserRoleRequest) (response *UpdateProjectUserRoleResponse, err error) {
+    if request == nil {
+        request = NewUpdateProjectUserRoleRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateProjectUserRole require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateProjectUserRoleResponse()
     err = c.Send(request, response)
     return
 }

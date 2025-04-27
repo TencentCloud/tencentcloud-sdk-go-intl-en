@@ -6485,6 +6485,9 @@ type CreateSubAppIdRequestParams struct {
 
 	// Subapplication overview. Length limit: 300 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type CreateSubAppIdRequest struct {
@@ -6495,6 +6498,8 @@ type CreateSubAppIdRequest struct {
 
 	// Subapplication overview. Length limit: 300 characters.
 	Description *string `json:"Description,omitnil,omitempty" name:"Description"`
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 func (r *CreateSubAppIdRequest) ToJsonString() string {
@@ -6511,6 +6516,7 @@ func (r *CreateSubAppIdRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Name")
 	delete(f, "Description")
+	delete(f, "Type")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateSubAppIdRequest has unknown keys!", "")
 	}
@@ -8956,42 +8962,42 @@ func (r *DescribeAIRecognitionTemplatesResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type DescribeAdaptiveDynamicStreamingTemplatesRequestParams struct {
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Unique ID filter of transcoding to adaptive bitrate streaming templates. Array length limit: 100.
+	// Unique id filter of transcoding to adaptive bitrate streaming templates. array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
 
-	// Paged offset. Default value: 0.
+	// Pagination offset. default value: 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned entries. Default value: 10. Maximum value: 100.
+	// Number of returned entries. default value: 10. maximum value: 100.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Template type filter. Valid values:
-	// <li>Preset: preset template;</li>
-	// <li>Custom: custom template.</li>
+	// Template type filter. valid values:.
+	// <Li>Preset: system preset template;</li>.
+	// <Li>Custom: user-defined template.</li>.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type DescribeAdaptiveDynamicStreamingTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	// <B>VOD [subapplication](https://intl.cloud.tencent.com/document/product/266/14574?from_cn_redirect=1) id. starting from december 25, 2023, if you want to access resources in the vod application (whether it is the default application or a newly created application), you must enter the application id in this field.</b>.
 	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
-	// Unique ID filter of transcoding to adaptive bitrate streaming templates. Array length limit: 100.
+	// Unique id filter of transcoding to adaptive bitrate streaming templates. array length limit: 100.
 	Definitions []*uint64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
 
-	// Paged offset. Default value: 0.
+	// Pagination offset. default value: 0.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
-	// Number of returned entries. Default value: 10. Maximum value: 100.
+	// Number of returned entries. default value: 10. maximum value: 100.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Template type filter. Valid values:
-	// <li>Preset: preset template;</li>
-	// <li>Custom: custom template.</li>
+	// Template type filter. valid values:.
+	// <Li>Preset: system preset template;</li>.
+	// <Li>Custom: user-defined template.</li>.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
@@ -9020,7 +9026,7 @@ func (r *DescribeAdaptiveDynamicStreamingTemplatesRequest) FromJsonString(s stri
 
 // Predefined struct for user
 type DescribeAdaptiveDynamicStreamingTemplatesResponseParams struct {
-	// Number of eligible entries.
+	// The total number of records matching the filter criteria.
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// List of transcoding to adaptive bitrate streaming template details.
@@ -13721,7 +13727,7 @@ type EnhanceMediaQualityOutputConfig struct {
 	// <li>Default value: 0, which means other categories.</li>
 	ClassId *int64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
 
-	// The expiration time of the output file, the file will be deleted after this time, the default is never to expire, the format is in accordance with the ISO 8601 standard, see [ISO date format description](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I)。
+	// The expiration time of the output file, the file will be deleted after this time, the default is never to expire, the format is in accordance with the ISO 8601 standard, see [ISO date format description](https://intl.cloud.tencent.com/document/product/266/11732?from_cn_redirect=1#I).
 	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
 }
 
@@ -23258,11 +23264,11 @@ type RestoreMediaRequestParams struct {
 	// Media file unique identifier list, maximum length: 100.
 	FileIds []*string `json:"FileIds,omitnil,omitempty" name:"FileIds"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
-
 	// The accessible duration of the unfrozen temporary media files must be greater than 0, and the unit is "days".
 	RestoreDay *uint64 `json:"RestoreDay,omitnil,omitempty" name:"RestoreDay"`
+
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The retrieval mode. If the current storage class is ARCHIVE, the valid values for this parameter are as follows:
 	// <li>Expedited: The files are made available in five minutes.</li>
@@ -23280,11 +23286,11 @@ type RestoreMediaRequest struct {
 	// Media file unique identifier list, maximum length: 100.
 	FileIds []*string `json:"FileIds,omitnil,omitempty" name:"FileIds"`
 
-	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
-	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
-
 	// The accessible duration of the unfrozen temporary media files must be greater than 0, and the unit is "days".
 	RestoreDay *uint64 `json:"RestoreDay,omitnil,omitempty" name:"RestoreDay"`
+
+	// <b>The VOD [application](https://intl.cloud.tencent.com/document/product/266/14574) ID. For customers who activate VOD service from December 25, 2023, if they want to access resources in a VOD application (whether it's the default application or a newly created one), they must fill in this field with the application ID.</b>
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
 
 	// The retrieval mode. If the current storage class is ARCHIVE, the valid values for this parameter are as follows:
 	// <li>Expedited: The files are made available in five minutes.</li>
@@ -23309,8 +23315,8 @@ func (r *RestoreMediaRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "FileIds")
-	delete(f, "SubAppId")
 	delete(f, "RestoreDay")
+	delete(f, "SubAppId")
 	delete(f, "RestoreTier")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RestoreMediaRequest has unknown keys!", "")
@@ -25306,6 +25312,8 @@ type SvgWatermarkInputForUpdate struct {
 	// It can be seen that A, B, C, and D are periodically displayed for 5 seconds and hidden for 15 seconds, and the four have a fixed display order. 
 	// This configuration item is used to describe the periodic configuration of a single watermark.
 	// Note: This field may return null, indicating that no valid value can be obtained.
+	//
+	// Deprecated: CycleConfig is deprecated.
 	CycleConfig *WatermarkCycleConfigForUpdate `json:"CycleConfig,omitnil,omitempty" name:"CycleConfig"`
 }
 
