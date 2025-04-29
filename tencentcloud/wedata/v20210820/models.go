@@ -18397,7 +18397,9 @@ type GetInstanceLogRequestParams struct {
 	// Unique identifier of an instance.
 	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
 
-	// Lifecycle no.
+	// Instance lifetime number, which identifies one-time execution of the instance.
+	// 
+	// For example: the number of the first run of a periodic instance is 0. when the user reruns the instance later, the number of the second execution is 1.
 	LifeRoundNum *uint64 `json:"LifeRoundNum,omitnil,omitempty" name:"LifeRoundNum"`
 
 	// Time zone.
@@ -18434,6 +18436,12 @@ type GetInstanceLogRequestParams struct {
 	// End line number for obtaining logs.
 	// The default value is 10000.
 	EndLineCount *uint64 `json:"EndLineCount,omitnil,omitempty" name:"EndLineCount"`
+
+	// Used when performing a paging query for logs. it has no specific business meaning.
+	// 
+	// Specifies that the value is null for the first query. 
+	// Use the ExtInfo field value in the returned information from the previous query for the second and subsequent queries.
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 type GetInstanceLogRequest struct {
@@ -18445,7 +18453,9 @@ type GetInstanceLogRequest struct {
 	// Unique identifier of an instance.
 	InstanceKey *string `json:"InstanceKey,omitnil,omitempty" name:"InstanceKey"`
 
-	// Lifecycle no.
+	// Instance lifetime number, which identifies one-time execution of the instance.
+	// 
+	// For example: the number of the first run of a periodic instance is 0. when the user reruns the instance later, the number of the second execution is 1.
 	LifeRoundNum *uint64 `json:"LifeRoundNum,omitnil,omitempty" name:"LifeRoundNum"`
 
 	// Time zone.
@@ -18482,6 +18492,12 @@ type GetInstanceLogRequest struct {
 	// End line number for obtaining logs.
 	// The default value is 10000.
 	EndLineCount *uint64 `json:"EndLineCount,omitnil,omitempty" name:"EndLineCount"`
+
+	// Used when performing a paging query for logs. it has no specific business meaning.
+	// 
+	// Specifies that the value is null for the first query. 
+	// Use the ExtInfo field value in the returned information from the previous query for the second and subsequent queries.
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 }
 
 func (r *GetInstanceLogRequest) ToJsonString() string {
@@ -18506,6 +18522,7 @@ func (r *GetInstanceLogRequest) FromJsonString(s string) error {
 	delete(f, "LogLevel")
 	delete(f, "StartLineNum")
 	delete(f, "EndLineCount")
+	delete(f, "ExtInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "GetInstanceLogRequest has unknown keys!", "")
 	}
@@ -19011,11 +19028,11 @@ type InstanceDetailVO struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExecutorGroupName *string `json:"ExecutorGroupName,omitnil,omitempty" name:"ExecutorGroupName"`
 
-	// Standard data time.
+	// Instance data time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CurRunDate *string `json:"CurRunDate,omitnil,omitempty" name:"CurRunDate"`
 
-	// Next standard data time.
+	// Next instance data time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	NextCurDate *string `json:"NextCurDate,omitnil,omitempty" name:"NextCurDate"`
 
@@ -19031,25 +19048,27 @@ type InstanceDetailVO struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TotalRunNum *uint64 `json:"TotalRunNum,omitnil,omitempty" name:"TotalRunNum"`
 
-	// Lifecycle no.
+	// Instance lifetime number, which identifies one-time execution of the instance.
+	// 
+	// For example: the number of the first run of a periodic instance is 0. after the user reruns the instance later, the number of the second execution is 1.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LifeRoundNum *uint64 `json:"LifeRoundNum,omitnil,omitempty" name:"LifeRoundNum"`
 
 	// Instance type.
 	// 
-	// -0 indicates the supplementary entry type.
-	// -1 indicates a periodic instance.
-	// -2 indicates a non-periodic instance.
+	// -0 indicates Replenished Instance.
+	// -1 indicates Periodic Instance.
+	// -2 indicates Non-Periodic Instance.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceType *uint64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// Indicates the status of an instance.
 	// 
-	// -Indicates waiting for event.
+	// -[0] Indicates waiting for event.
 	// -[12] indicates waiting for upstream.
 	// -[6, 7, 9, 10, 18] indicates awaiting execution.
-	// -1, 19, 22 indicate running.
-	// -21: skip running.
+	// -[1, 19, 22] indicate running.
+	// -[21]: skip running.
 	// -[3] indicates retry on failure.
 	// -[8, 4, 5, 13] indicates a failure.
 	// -[2] indicates a success.
@@ -19075,11 +19094,11 @@ type InstanceDetailVO struct {
 	// Instance running trigger type.
 	// 
 	// -RERUN indicates rerunning.
-	// -ADDITION indicates supplementary recording.
+	// -ADDITION indicates data replenishment.
 	// -PERIODIC indicates a period.
 	// -APERIODIC indicates non-periodic.
 	// -RERUN_SKIP_RUN indicates re-run - empty run.
-	// -ADDITION_SKIP_RUN indicates a supplementary run - empty run.
+	// -ADDITION_SKIP_RUN indicates a data replenishment run - empty run.
 	// -PERIODIC_SKIP_RUN indicates an empty run in a periodic cycle.
 	// -APERIODIC_SKIP_RUN indicates a non-periodic empty run.
 	// -MANUAL_TRIGGER indicates manual triggering.
@@ -19159,29 +19178,31 @@ type InstanceLifeCycleVO struct {
 
 	// Instance status.
 	// 
-	// -Indicates waiting for event.
+	// -[0] Indicates waiting for event.
 	// -[12] indicates waiting for upstream.
 	// -[6, 7, 9, 10, 18] indicates awaiting execution.
-	// -1, 19, 22 indicate running.
-	// -21: skip running.
+	// -[1, 19, 22] indicate running.
+	// -[21] skip running.
 	// -[3] indicates retry on failure.
 	// -[8, 4, 5, 13] indicates a failure.
 	// -[2] indicates a success.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceState *uint64 `json:"InstanceState,omitnil,omitempty" name:"InstanceState"`
 
-	// Lifecycle no.
+	// Instance lifetime number, which identifies one-time execution of the instance.
+	// 
+	// For example: the number of the first run of a periodic instance is 0. when the user reruns the instance later, the number of the second execution is 1.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LifeRoundNum *uint64 `json:"LifeRoundNum,omitnil,omitempty" name:"LifeRoundNum"`
 
 	// Instance running trigger type.
 	// 
 	// -RERUN indicates rerunning.
-	// -ADDITION indicates supplementary recording.
+	// -ADDITION indicates data replenishment.
 	// -PERIODIC indicates a period.
 	// -APERIODIC indicates non-periodic.
 	// -RERUN_SKIP_RUN means empty run for re-run.
-	// -ADDITION_SKIP_RUN indicates a supplementary run - empty run.
+	// -ADDITION_SKIP_RUN indicates data replenishment - empty run.
 	// -PERIODIC_SKIP_RUN indicates an empty run in a periodic cycle.
 	// -APERIODIC_SKIP_RUN indicates a non-periodic empty run.
 	// -MANUAL_TRIGGER indicates manual triggering.
@@ -19203,6 +19224,8 @@ type InstanceLifeCycleVO struct {
 	CodeFileName *string `json:"CodeFileName,omitnil,omitempty" name:"CodeFileName"`
 
 	// Dispatch execution ID.
+	// The unified execution platform dispatches execution to the new version executor with a unique ID to identify a specific execution, while the existing old executors do not have this ID when dispatching execution.
+	// If it is unknown whether the executor version supports this ID, contact tencent cloud's operations team.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExecutionJobId *string `json:"ExecutionJobId,omitnil,omitempty" name:"ExecutionJobId"`
 
@@ -19228,11 +19251,11 @@ type InstanceLifeCycleVO struct {
 
 type InstanceLifeDetailDto struct {
 	// Indicates the status of an instance.
-	// -Indicates waiting for event.
+	// -[0] Indicates waiting for event.
 	// -[12] indicates waiting for upstream.
 	// -[6, 7, 9, 10, 18] indicates awaiting execution.
-	// -1, 19, 22 indicate running.
-	// -21: skip running.
+	// -[1, 19, 22]  indicate running.
+	// -[21] skip running.
 	// -[3] indicates retry on failure.
 	// -[8, 4, 5, 13] indicates a failure.
 	// -[2] indicates a success.
@@ -19245,14 +19268,14 @@ type InstanceLifeDetailDto struct {
 
 	// Instance lifecycle phase status.
 	// 
-	// -WAIT_UPSTREAM indicates waiting for event/upstream status.
-	// -WAIT_RUN indicates a waiting for running status.
-	// -RUNNING indicates a running state.
-	// -COMPLETE indicates the final state - completed.
-	// -FAILED indicates the final state - retry on failure.
-	// -EXPIRED indicates the final state - failure.
-	// -SKIP_RUNNING indicates the final state - a branch skipped by the upstream branch node.
-	// -HISTORY indicates compatibility with historical instances.
+	// -WAIT_UPSTREAM indicates waiting for an event or upstream status.
+	// -WAIT_RUN indicates waiting for running status.
+	// -RUNNING indicates the running state.
+	// -COMPLETE indicates terminal state - completed.
+	// -FAILED indicates terminal state - retry after failure.
+	// -EXPIRED indicates terminal state - failure.
+	// -SKIP_RUNNING indicates terminal state - a branch skipped by the upstream branch node.
+	// -HISTORY indicates compatibility with historical instances before march 30, 2024. no need to pay attention to this enumeration type for instances afterward.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DetailState *string `json:"DetailState,omitnil,omitempty" name:"DetailState"`
 
@@ -19437,11 +19460,11 @@ type InstanceLogVO struct {
 
 	// **Instance status**.
 	// 
-	// -Indicates waiting for event.
+	// -[0] Indicates waiting for event.
 	// -[12] indicates waiting for upstream.
 	// -[6, 7, 9, 10, 18] indicates awaiting execution.
-	// -1, 19, 22 indicate running.
-	// -21: skip running.
+	// -[1, 19, 22] indicate running.
+	// -[21] skip running.
 	// -[3] indicates retry on failure.
 	// -[8, 4, 5, 13] indicates a failure.
 	// -[2] indicates a success.
@@ -19450,12 +19473,12 @@ type InstanceLogVO struct {
 
 	// Instance running trigger type.
 	// 
-	// -RERUN indicates rerunning.
+	// -RERUN indicates data replenishment.
 	// -ADDITION indicates supplementary recording.
 	// -PERIODIC indicates a period.
 	// -APERIODIC indicates non-periodic.
 	// -RERUN_SKIP_RUN means empty run for re-run.
-	// -ADDITION_SKIP_RUN indicates a supplementary run - empty run.
+	// -ADDITION_SKIP_RUN indicates data replenishment - empty run.
 	// -PERIODIC_SKIP_RUN indicates an empty run in a periodic cycle.
 	// -APERIODIC_SKIP_RUN indicates a non-periodic empty run.
 	// -MANUAL_TRIGGER indicates manual triggering.
@@ -19497,7 +19520,10 @@ type InstanceLogVO struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LineCount *uint64 `json:"LineCount,omitnil,omitempty" name:"LineCount"`
 
-	// Execute platform log pagination query parameters, transparently input for each request. the value is an empty string when querying the first page.
+	// Used when performing a paging query for logs. it has no specific business meaning.
+	// 
+	// Specifies that the value is null for the first query. 
+	// Specifies that you can use the field value of ExtInfo in the returned information from the previous query for the second and subsequent queries.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
 
@@ -19911,7 +19937,7 @@ type InstanceVO struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TaskCycleType *string `json:"TaskCycleType,omitnil,omitempty" name:"TaskCycleType"`
 
-	// Standard data time.
+	// Instance data time.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	CurRunDate *string `json:"CurRunDate,omitnil,omitempty" name:"CurRunDate"`
 
@@ -19938,7 +19964,7 @@ type InstanceVO struct {
 
 	// Indicates the status of an instance.
 	// 
-	// -Indicates waiting for event.
+	// -[0]Indicates waiting for event.
 	// -[12] indicates waiting for upstream.
 	// -[6, 7, 9, 10, 18] indicates awaiting execution.
 	// -[1, 19, 22]: running.
@@ -20631,12 +20657,12 @@ type ListInstancesRequestParams struct {
 	// **Project ID**.
 	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Instance plan scheduling time.
-	// Filter start time. the time format is yyyy-MM-dd HH:MM:ss.
+	// Filter criteria for instance planned scheduling time.
+	// Specifies the start time for filtering. the time format is yyyy-MM-dd HH:MM:ss.
 	ScheduleTimeFrom *string `json:"ScheduleTimeFrom,omitnil,omitempty" name:"ScheduleTimeFrom"`
 
-	// Instance plan scheduling time.
-	// Filter expiration time. time format: yyyy-MM-dd HH:MM:ss.
+	// Filter criteria for instance planned scheduling time.
+	// Filter expiration time. the time format is yyyy-MM-dd HH:MM:ss.
 	ScheduleTimeTo *string `json:"ScheduleTimeTo,omitnil,omitempty" name:"ScheduleTimeTo"`
 
 	// Page number, integer.
@@ -20647,12 +20673,12 @@ type ListInstancesRequestParams struct {
 	// Use in conjunction with pageNumber and should not exceed 200. default value: 10.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Field used to sort query results.
+	// Sorting field for query results.
 	// 
-	// -SCHEDULE_DATE indicates the planned scheduling time.
-	// -START_TIME indicates the start execution time of an instance.
-	// -END_TIME indicates the execution end time of the instance.
-	// -COST_TIME indicates the execution duration of an instance.
+	// -SCHEDULE_DATE indicates sorting based on the planned scheduling time.
+	// -START_TIME indicates sorting by the instance's start execution time.
+	// -END_TIME indicates sorting based on the instance execution end time.
+	// -COST_TIME indicates sorting based on instance execution duration.
 	SortColumn *string `json:"SortColumn,omitnil,omitempty" name:"SortColumn"`
 
 	// Instance sorting order.
@@ -20663,18 +20689,18 @@ type ListInstancesRequestParams struct {
 
 	// Instance type.
 	// 
-	// -0 indicates the supplementary entry type.
-	// -1 indicates a periodic instance.
-	// -2 indicates a non-periodic instance.
+	// -0 indicates Replenished Instance.
+	// -1 indicates Periodic Instance.
+	// -2 indicates Non-Periodic instance.
 	InstanceType *uint64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// Instance execution status.
 	// Support filtering multiple items with an "or" relationship between conditions.
 	// 
-	// -Indicates waiting for event.
+	// -[0] Indicates waiting for event.
 	// -[12] indicates waiting for upstream.
 	// -[6, 7, 9, 10, 18] indicates awaiting execution.
-	// -1, 19, 22 indicate running.
+	// -[1, 19, 22] indicate running.
 	// -[21] indicates skipping running.
 	// -[3] indicates retry on failure.
 	// -[8, 4, 5, 13] indicates a failure.
@@ -20723,12 +20749,12 @@ type ListInstancesRequestParams struct {
 	// The DescribeNormalIntegrationExecutorGroups API can be used to obtain the list of all integration resource groups under a project.
 	ExecutorGroupIdList []*string `json:"ExecutorGroupIdList,omitnil,omitempty" name:"ExecutorGroupIdList"`
 
-	// **Start time**.
-	// Filter start time. the time format is yyyy-MM-dd HH:MM:ss.
+	// Instance execution start time filter criteria.
+	// Specifies the start time for filtering. the time format is yyyy-MM-dd HH:MM:ss.
 	StartTimeFrom *string `json:"StartTimeFrom,omitnil,omitempty" name:"StartTimeFrom"`
 
-	// **Start time**.
-	// Filter expiration time. time format: yyyy-MM-dd HH:MM:ss.
+	// Instance execution start time filter criteria.
+	// Filter expiration time. the time format is yyyy-MM-dd HH:MM:ss.
 	StartTimeTo *string `json:"StartTimeTo,omitnil,omitempty" name:"StartTimeTo"`
 
 	// Time zone.
@@ -20742,12 +20768,12 @@ type ListInstancesRequest struct {
 	// **Project ID**.
 	ProjectId *string `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Instance plan scheduling time.
-	// Filter start time. the time format is yyyy-MM-dd HH:MM:ss.
+	// Filter criteria for instance planned scheduling time.
+	// Specifies the start time for filtering. the time format is yyyy-MM-dd HH:MM:ss.
 	ScheduleTimeFrom *string `json:"ScheduleTimeFrom,omitnil,omitempty" name:"ScheduleTimeFrom"`
 
-	// Instance plan scheduling time.
-	// Filter expiration time. time format: yyyy-MM-dd HH:MM:ss.
+	// Filter criteria for instance planned scheduling time.
+	// Filter expiration time. the time format is yyyy-MM-dd HH:MM:ss.
 	ScheduleTimeTo *string `json:"ScheduleTimeTo,omitnil,omitempty" name:"ScheduleTimeTo"`
 
 	// Page number, integer.
@@ -20758,12 +20784,12 @@ type ListInstancesRequest struct {
 	// Use in conjunction with pageNumber and should not exceed 200. default value: 10.
 	PageSize *int64 `json:"PageSize,omitnil,omitempty" name:"PageSize"`
 
-	// Field used to sort query results.
+	// Sorting field for query results.
 	// 
-	// -SCHEDULE_DATE indicates the planned scheduling time.
-	// -START_TIME indicates the start execution time of an instance.
-	// -END_TIME indicates the execution end time of the instance.
-	// -COST_TIME indicates the execution duration of an instance.
+	// -SCHEDULE_DATE indicates sorting based on the planned scheduling time.
+	// -START_TIME indicates sorting by the instance's start execution time.
+	// -END_TIME indicates sorting based on the instance execution end time.
+	// -COST_TIME indicates sorting based on instance execution duration.
 	SortColumn *string `json:"SortColumn,omitnil,omitempty" name:"SortColumn"`
 
 	// Instance sorting order.
@@ -20774,18 +20800,18 @@ type ListInstancesRequest struct {
 
 	// Instance type.
 	// 
-	// -0 indicates the supplementary entry type.
-	// -1 indicates a periodic instance.
-	// -2 indicates a non-periodic instance.
+	// -0 indicates Replenished Instance.
+	// -1 indicates Periodic Instance.
+	// -2 indicates Non-Periodic instance.
 	InstanceType *uint64 `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// Instance execution status.
 	// Support filtering multiple items with an "or" relationship between conditions.
 	// 
-	// -Indicates waiting for event.
+	// -[0] Indicates waiting for event.
 	// -[12] indicates waiting for upstream.
 	// -[6, 7, 9, 10, 18] indicates awaiting execution.
-	// -1, 19, 22 indicate running.
+	// -[1, 19, 22] indicate running.
 	// -[21] indicates skipping running.
 	// -[3] indicates retry on failure.
 	// -[8, 4, 5, 13] indicates a failure.
@@ -20834,12 +20860,12 @@ type ListInstancesRequest struct {
 	// The DescribeNormalIntegrationExecutorGroups API can be used to obtain the list of all integration resource groups under a project.
 	ExecutorGroupIdList []*string `json:"ExecutorGroupIdList,omitnil,omitempty" name:"ExecutorGroupIdList"`
 
-	// **Start time**.
-	// Filter start time. the time format is yyyy-MM-dd HH:MM:ss.
+	// Instance execution start time filter criteria.
+	// Specifies the start time for filtering. the time format is yyyy-MM-dd HH:MM:ss.
 	StartTimeFrom *string `json:"StartTimeFrom,omitnil,omitempty" name:"StartTimeFrom"`
 
-	// **Start time**.
-	// Filter expiration time. time format: yyyy-MM-dd HH:MM:ss.
+	// Instance execution start time filter criteria.
+	// Filter expiration time. the time format is yyyy-MM-dd HH:MM:ss.
 	StartTimeTo *string `json:"StartTimeTo,omitnil,omitempty" name:"StartTimeTo"`
 
 	// Time zone.

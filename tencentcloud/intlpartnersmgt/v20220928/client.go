@@ -1972,6 +1972,61 @@ func (c *Client) QueryPolicyProductListByCodeWithContext(ctx context.Context, re
     return
 }
 
+func NewQuerySubAgentsDetailV2Request() (request *QuerySubAgentsDetailV2Request) {
+    request = &QuerySubAgentsDetailV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "QuerySubAgentsDetailV2")
+    
+    
+    return
+}
+
+func NewQuerySubAgentsDetailV2Response() (response *QuerySubAgentsDetailV2Response) {
+    response = &QuerySubAgentsDetailV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QuerySubAgentsDetailV2
+// This API is used to query information of second-level resellers.
+//
+// Invocation Role:Distributor.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) QuerySubAgentsDetailV2(request *QuerySubAgentsDetailV2Request) (response *QuerySubAgentsDetailV2Response, err error) {
+    return c.QuerySubAgentsDetailV2WithContext(context.Background(), request)
+}
+
+// QuerySubAgentsDetailV2
+// This API is used to query information of second-level resellers.
+//
+// Invocation Role:Distributor.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) QuerySubAgentsDetailV2WithContext(ctx context.Context, request *QuerySubAgentsDetailV2Request) (response *QuerySubAgentsDetailV2Response, err error) {
+    if request == nil {
+        request = NewQuerySubAgentsDetailV2Request()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QuerySubAgentsDetailV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQuerySubAgentsDetailV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryT1IndirectCustomersDetailRequest() (request *QueryT1IndirectCustomersDetailRequest) {
     request = &QueryT1IndirectCustomersDetailRequest{
         BaseRequest: &tchttp.BaseRequest{},

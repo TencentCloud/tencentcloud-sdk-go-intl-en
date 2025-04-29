@@ -2663,6 +2663,136 @@ func (r *RecognizeBrazilRNEOCRResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type RecognizeBrazilRNMOCRRequestParams struct {
+	// Base64 value of the image. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image downloading time should not exceed 3 seconds.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// URL address of the image. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image download time should not exceed 3 seconds. URLs of images stored in Tencent Cloud can guarantee higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The speed and stability of URLs not stored in Tencent Cloud may be affected to a certain extent.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// Base64 value of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image download time should not exceed 3 seconds. An ImageUrl and ImageBase64 must be provided. If both are provided, only ImageUrl will be used.
+	BackImageBase64 *string `json:"BackImageBase64,omitnil,omitempty" name:"BackImageBase64"`
+
+	// The URL address of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download time does not exceed 3 seconds. The URL of the image stored in Tencent Cloud can ensure higher download speed and stability. It is recommended to store the image in Tencent Cloud. The speed and stability of the URL stored outside Tencent Cloud may be affected to a certain extent.
+	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
+
+	// Whether to return portrait photos.
+	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
+}
+
+type RecognizeBrazilRNMOCRRequest struct {
+	*tchttp.BaseRequest
+	
+	// Base64 value of the image. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image downloading time should not exceed 3 seconds.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// URL address of the image. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image download time should not exceed 3 seconds. URLs of images stored in Tencent Cloud can guarantee higher download speed and stability. It is recommended that images be stored in Tencent Cloud. The speed and stability of URLs not stored in Tencent Cloud may be affected to a certain extent.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// Base64 value of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image should not exceed 7M after Base64 encoding. Image download time should not exceed 3 seconds. An ImageUrl and ImageBase64 must be provided. If both are provided, only ImageUrl will be used.
+	BackImageBase64 *string `json:"BackImageBase64,omitnil,omitempty" name:"BackImageBase64"`
+
+	// The URL address of the image on the back of the card. Supported image formats: PNG, JPG, JPEG, GIF format is not supported yet. Supported image size: The downloaded image does not exceed 7M after Base64 encoding. The image download time does not exceed 3 seconds. The URL of the image stored in Tencent Cloud can ensure higher download speed and stability. It is recommended to store the image in Tencent Cloud. The speed and stability of the URL stored outside Tencent Cloud may be affected to a certain extent.
+	BackImageUrl *string `json:"BackImageUrl,omitnil,omitempty" name:"BackImageUrl"`
+
+	// Whether to return portrait photos.
+	ReturnHeadImage *bool `json:"ReturnHeadImage,omitnil,omitempty" name:"ReturnHeadImage"`
+}
+
+func (r *RecognizeBrazilRNMOCRRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeBrazilRNMOCRRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageBase64")
+	delete(f, "ImageUrl")
+	delete(f, "BackImageBase64")
+	delete(f, "BackImageUrl")
+	delete(f, "ReturnHeadImage")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RecognizeBrazilRNMOCRRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type RecognizeBrazilRNMOCRResponseParams struct {
+	// Last name
+	SOBRENOME *string `json:"SOBRENOME,omitnil,omitempty" name:"SOBRENOME"`
+
+	// First name
+	NOME *string `json:"NOME,omitnil,omitempty" name:"NOME"`
+
+	// Date of Birth
+	DATADENASCIMENTO *string `json:"DATADENASCIMENTO,omitnil,omitempty" name:"DATADENASCIMENTO"`
+
+	// Gender
+	SEXO *string `json:"SEXO,omitnil,omitempty" name:"SEXO"`
+
+	// Parents name
+	MEMBERSHIP *string `json:"MEMBERSHIP,omitnil,omitempty" name:"MEMBERSHIP"`
+
+	// Nationality
+	NACIONALIDADE *string `json:"NACIONALIDADE,omitnil,omitempty" name:"NACIONALIDADE"`
+
+	// Expiry Date
+	VALIDADE *string `json:"VALIDADE,omitnil,omitempty" name:"VALIDADE"`
+
+	// RNM
+	RNM *string `json:"RNM,omitnil,omitempty" name:"RNM"`
+
+	// CPF
+	CPF *string `json:"CPF,omitnil,omitempty" name:"CPF"`
+
+
+	CLASSIFICATION *string `json:"CLASSIFICATION,omitnil,omitempty" name:"CLASSIFICATION"`
+
+
+	PRAZODERESIDENCIA *string `json:"PRAZODERESIDENCIA,omitnil,omitempty" name:"PRAZODERESIDENCIA"`
+
+	// Issue Date
+	ISSUANCE *string `json:"ISSUANCE,omitnil,omitempty" name:"ISSUANCE"`
+
+	// Legal basis
+	AMPAROLEGAL *string `json:"AMPAROLEGAL,omitnil,omitempty" name:"AMPAROLEGAL"`
+
+	// Machine readable zone code
+	MRZ *string `json:"MRZ,omitnil,omitempty" name:"MRZ"`
+
+	// PortraitImage
+	PortraitImage *string `json:"PortraitImage,omitnil,omitempty" name:"PortraitImage"`
+
+	// PortraitImage(Back)
+	PortraitImageBack *string `json:"PortraitImageBack,omitnil,omitempty" name:"PortraitImageBack"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type RecognizeBrazilRNMOCRResponse struct {
+	*tchttp.BaseResponse
+	Response *RecognizeBrazilRNMOCRResponseParams `json:"Response"`
+}
+
+func (r *RecognizeBrazilRNMOCRResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *RecognizeBrazilRNMOCRResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type RecognizeGeneralInvoiceRequestParams struct {
 	// The Base64-encoded value of the image.
 	// Supported image formats: PNG, JPG, JPEG, and PDF. GIF is currently not supported.
