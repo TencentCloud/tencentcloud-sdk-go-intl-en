@@ -3089,7 +3089,7 @@ func (r *QueryT1IndirectCustomersDetailRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type QueryT1IndirectCustomersDetailResponseParams struct {
-	// The number of indirect sub-customers of a first-level distributor.
+	// The number of indirect sub-customers of a distributor.
 	Total *int64 `json:"Total,omitnil,omitempty" name:"Total"`
 
 	// Second-level reseller UIN.

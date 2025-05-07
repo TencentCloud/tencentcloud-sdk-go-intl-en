@@ -2047,9 +2047,9 @@ func NewQueryT1IndirectCustomersDetailResponse() (response *QueryT1IndirectCusto
 }
 
 // QueryT1IndirectCustomersDetail
-// This API is used to query the indirect sub-customers of a first-level distributor.
+// This API is used to query the indirect sub-customers of a distributor.
 //
-// Invokable role type: first-level reseller.
+// Invokable role type: Distributor
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDSUBAGENTUIN = "FailedOperation.InvalidSubAgentUin"
@@ -2060,9 +2060,9 @@ func (c *Client) QueryT1IndirectCustomersDetail(request *QueryT1IndirectCustomer
 }
 
 // QueryT1IndirectCustomersDetail
-// This API is used to query the indirect sub-customers of a first-level distributor.
+// This API is used to query the indirect sub-customers of a distributor.
 //
-// Invokable role type: first-level reseller.
+// Invokable role type: Distributor
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDSUBAGENTUIN = "FailedOperation.InvalidSubAgentUin"
