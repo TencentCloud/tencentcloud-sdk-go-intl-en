@@ -266,6 +266,99 @@ func (c *Client) ApproveClientApplyWithContext(ctx context.Context, request *App
     return
 }
 
+func NewApproveSubAgentApplyRequest() (request *ApproveSubAgentApplyRequest) {
+    request = &ApproveSubAgentApplyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "ApproveSubAgentApply")
+    
+    
+    return
+}
+
+func NewApproveSubAgentApplyResponse() (response *ApproveSubAgentApplyResponse) {
+    response = &ApproveSubAgentApplyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ApproveSubAgentApply
+// This API is used to approve applications for second-level resellers.
+//
+// Invocation Role: Distributor.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ACCOUNTTYPENOTCOMPANY = "FailedOperation.AccountTypeNotCompany"
+//  FAILEDOPERATION_BINDORGANIZATIONACCOUNT = "FailedOperation.BindOrganizationAccount"
+//  FAILEDOPERATION_CLIENTBALANCEISLESSOREQUALZERO = "FailedOperation.ClientBalanceIsLessOrEqualZero"
+//  FAILEDOPERATION_CLIENTBUYSP = "FailedOperation.ClientBuySP"
+//  FAILEDOPERATION_CLIENTCREATESHAREUNIT = "FailedOperation.ClientCreateShareUnit"
+//  FAILEDOPERATION_CLIENTJOINSHAREUNIT = "FailedOperation.ClientJoinShareUnit"
+//  FAILEDOPERATION_EXCEEDMAXBINDCOUNT = "FailedOperation.ExceedMaxBindCount"
+//  FAILEDOPERATION_REALNAMEINAPPROVAL = "FailedOperation.RealNameInApproval"
+//  FAILEDOPERATION_REALNAMENOTCOMPLETED = "FailedOperation.RealNameNotCompleted"
+//  FAILEDOPERATION_REALNAMEREJECT = "FailedOperation.RealNameReject"
+//  FAILEDOPERATION_REALNAMETYPEILLEGAL = "FailedOperation.RealNameTypeIllegal"
+//  FAILEDOPERATION_RESELLERNOTAPPLY = "FailedOperation.ResellerNotApply"
+//  FAILEDOPERATION_UINALREADYKA = "FailedOperation.UinAlreadyKA"
+//  FAILEDOPERATION_UINAPPLIEDAGENT = "FailedOperation.UinAppliedAgent"
+//  FAILEDOPERATION_UINNOTRESELLER = "FailedOperation.UinNotReseller"
+//  INVALIDPARAMETERVALUE_UINALREADYAPPLIEDCLIENT = "InvalidParameterValue.UinAlreadyAppliedClient"
+//  INVALIDPARAMETERVALUE_UINALREADYCLIENT = "InvalidParameterValue.UinAlreadyClient"
+//  INVALIDPARAMETERVALUE_UINALREADYRESELLER = "InvalidParameterValue.UinAlreadyReseller"
+//  INVALIDPARAMETERVALUE_UINISSUBACCOUNT = "InvalidParameterValue.UinIsSubAccount"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) ApproveSubAgentApply(request *ApproveSubAgentApplyRequest) (response *ApproveSubAgentApplyResponse, err error) {
+    return c.ApproveSubAgentApplyWithContext(context.Background(), request)
+}
+
+// ApproveSubAgentApply
+// This API is used to approve applications for second-level resellers.
+//
+// Invocation Role: Distributor.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_ACCOUNTTYPENOTCOMPANY = "FailedOperation.AccountTypeNotCompany"
+//  FAILEDOPERATION_BINDORGANIZATIONACCOUNT = "FailedOperation.BindOrganizationAccount"
+//  FAILEDOPERATION_CLIENTBALANCEISLESSOREQUALZERO = "FailedOperation.ClientBalanceIsLessOrEqualZero"
+//  FAILEDOPERATION_CLIENTBUYSP = "FailedOperation.ClientBuySP"
+//  FAILEDOPERATION_CLIENTCREATESHAREUNIT = "FailedOperation.ClientCreateShareUnit"
+//  FAILEDOPERATION_CLIENTJOINSHAREUNIT = "FailedOperation.ClientJoinShareUnit"
+//  FAILEDOPERATION_EXCEEDMAXBINDCOUNT = "FailedOperation.ExceedMaxBindCount"
+//  FAILEDOPERATION_REALNAMEINAPPROVAL = "FailedOperation.RealNameInApproval"
+//  FAILEDOPERATION_REALNAMENOTCOMPLETED = "FailedOperation.RealNameNotCompleted"
+//  FAILEDOPERATION_REALNAMEREJECT = "FailedOperation.RealNameReject"
+//  FAILEDOPERATION_REALNAMETYPEILLEGAL = "FailedOperation.RealNameTypeIllegal"
+//  FAILEDOPERATION_RESELLERNOTAPPLY = "FailedOperation.ResellerNotApply"
+//  FAILEDOPERATION_UINALREADYKA = "FailedOperation.UinAlreadyKA"
+//  FAILEDOPERATION_UINAPPLIEDAGENT = "FailedOperation.UinAppliedAgent"
+//  FAILEDOPERATION_UINNOTRESELLER = "FailedOperation.UinNotReseller"
+//  INVALIDPARAMETERVALUE_UINALREADYAPPLIEDCLIENT = "InvalidParameterValue.UinAlreadyAppliedClient"
+//  INVALIDPARAMETERVALUE_UINALREADYCLIENT = "InvalidParameterValue.UinAlreadyClient"
+//  INVALIDPARAMETERVALUE_UINALREADYRESELLER = "InvalidParameterValue.UinAlreadyReseller"
+//  INVALIDPARAMETERVALUE_UINISSUBACCOUNT = "InvalidParameterValue.UinIsSubAccount"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) ApproveSubAgentApplyWithContext(ctx context.Context, request *ApproveSubAgentApplyRequest) (response *ApproveSubAgentApplyResponse, err error) {
+    if request == nil {
+        request = NewApproveSubAgentApplyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ApproveSubAgentApply require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewApproveSubAgentApplyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAccountRequest() (request *CreateAccountRequest) {
     request = &CreateAccountRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -405,21 +498,19 @@ func NewCreateAndSendClientInvitationMailResponse() (response *CreateAndSendClie
 }
 
 // CreateAndSendClientInvitationMail
-// This API is used to apply for the allowlist. If needed, please contact your business representative.Directions:
+// This API is used to perform operations. Application for allowlist is required before usage. If needed, contact your business representative to request allowlisting. The specific usage process is as follows;.
 //
-// 1.This API is used to create an invitation link, which you can send to a specified email address.
+// This API is used to create an invitation link. You can send the invitation link to your designated email address.
 //
-// 2.Customer need to click the invitation link in the email, fill in and submit the required information.
+// 2. Customers need to click the invitation link in the mailbox, fill in and submit relevant information.
 //
-// 3.You can review the customer's application in customer management  after submission.
-//
-// 
-//
-// Note:This API is used to manually send the invitation link to the customer if the specified email does not receive it.
+// 3. After customer submission, you can view the application of this sub-customer on the customer management page and review it.
 //
 // 
 //
-// Callable roles: Distributor, Second-level reseller, Reseller
+// This API is used to handle cases where if the designated mailbox does not receive the invitation link, you can send the invitation link returned by the API to the customer manually.
+//
+// Invocation roles: resellers, distributors, second-level reseller.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SENDMAILLIMIT180 = "FailedOperation.SendMailLimit180"
@@ -430,21 +521,19 @@ func (c *Client) CreateAndSendClientInvitationMail(request *CreateAndSendClientI
 }
 
 // CreateAndSendClientInvitationMail
-// This API is used to apply for the allowlist. If needed, please contact your business representative.Directions:
+// This API is used to perform operations. Application for allowlist is required before usage. If needed, contact your business representative to request allowlisting. The specific usage process is as follows;.
 //
-// 1.This API is used to create an invitation link, which you can send to a specified email address.
+// This API is used to create an invitation link. You can send the invitation link to your designated email address.
 //
-// 2.Customer need to click the invitation link in the email, fill in and submit the required information.
+// 2. Customers need to click the invitation link in the mailbox, fill in and submit relevant information.
 //
-// 3.You can review the customer's application in customer management  after submission.
-//
-// 
-//
-// Note:This API is used to manually send the invitation link to the customer if the specified email does not receive it.
+// 3. After customer submission, you can view the application of this sub-customer on the customer management page and review it.
 //
 // 
 //
-// Callable roles: Distributor, Second-level reseller, Reseller
+// This API is used to handle cases where if the designated mailbox does not receive the invitation link, you can send the invitation link returned by the API to the customer manually.
+//
+// Invocation roles: resellers, distributors, second-level reseller.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_SENDMAILLIMIT180 = "FailedOperation.SendMailLimit180"
@@ -1919,6 +2008,61 @@ func (c *Client) QueryPendingClientsV2WithContext(ctx context.Context, request *
     return
 }
 
+func NewQueryPendingSubAgentsV2Request() (request *QueryPendingSubAgentsV2Request) {
+    request = &QueryPendingSubAgentsV2Request{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "QueryPendingSubAgentsV2")
+    
+    
+    return
+}
+
+func NewQueryPendingSubAgentsV2Response() (response *QueryPendingSubAgentsV2Response) {
+    response = &QueryPendingSubAgentsV2Response{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// QueryPendingSubAgentsV2
+// This API is used to query information of second-level resellers in application.
+//
+// Invocation Role: Distributor.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) QueryPendingSubAgentsV2(request *QueryPendingSubAgentsV2Request) (response *QueryPendingSubAgentsV2Response, err error) {
+    return c.QueryPendingSubAgentsV2WithContext(context.Background(), request)
+}
+
+// QueryPendingSubAgentsV2
+// This API is used to query information of second-level resellers in application.
+//
+// Invocation Role: Distributor.
+//
+// error code that may be returned:
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) QueryPendingSubAgentsV2WithContext(ctx context.Context, request *QueryPendingSubAgentsV2Request) (response *QueryPendingSubAgentsV2Response, err error) {
+    if request == nil {
+        request = NewQueryPendingSubAgentsV2Request()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("QueryPendingSubAgentsV2 require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewQueryPendingSubAgentsV2Response()
+    err = c.Send(request, response)
+    return
+}
+
 func NewQueryPolicyProductListByCodeRequest() (request *QueryPolicyProductListByCodeRequest) {
     request = &QueryPolicyProductListByCodeRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1945,6 +2089,7 @@ func NewQueryPolicyProductListByCodeResponse() (response *QueryPolicyProductList
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryPolicyProductListByCode(request *QueryPolicyProductListByCodeRequest) (response *QueryPolicyProductListByCodeResponse, err error) {
     return c.QueryPolicyProductListByCodeWithContext(context.Background(), request)
 }
@@ -1956,6 +2101,7 @@ func (c *Client) QueryPolicyProductListByCode(request *QueryPolicyProductListByC
 //
 // error code that may be returned:
 //  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
 func (c *Client) QueryPolicyProductListByCodeWithContext(ctx context.Context, request *QueryPolicyProductListByCodeRequest) (response *QueryPolicyProductListByCodeResponse, err error) {
     if request == nil {
         request = NewQueryPolicyProductListByCodeRequest()
