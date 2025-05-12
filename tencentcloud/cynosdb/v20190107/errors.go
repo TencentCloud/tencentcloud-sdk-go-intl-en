@@ -17,6 +17,9 @@ package v20190107
 const (
 	// error codes for specific actions
 
+	// CAM signature/authentication error.
+	AUTHFAILURE = "AuthFailure"
+
 	// Operation failed
 	FAILEDOPERATION = "FailedOperation"
 
@@ -37,6 +40,9 @@ const (
 
 	// Failed to create a resource pack
 	FAILEDOPERATION_CREATESOURCEPACKAGEERROR = "FailedOperation.CreateSourcePackageError"
+
+	// 
+	FAILEDOPERATION_CYNOSDBMYSQLSETBACKUPSTRATEGY = "FailedOperation.CynosdbMysqlSetBackupStrategy"
 
 	// Failed to access the database. Please try again later. If the problem persists, please contact customer service.
 	FAILEDOPERATION_DATABASEACCESSERROR = "FailedOperation.DatabaseAccessError"
@@ -59,6 +65,9 @@ const (
 	// Insufficient account balance
 	FAILEDOPERATION_INSUFFICIENTBALANCE = "FailedOperation.InsufficientBalance"
 
+	// Modification of resource package deduction priority failed. check parameters and try again later.
+	FAILEDOPERATION_MODIFYDEDUCTIONPRIORITYERROR = "FailedOperation.ModifyDeductionPriorityError"
+
 	// Operation failed. Try again later. If the problem persists, contact customer service.
 	FAILEDOPERATION_OPERATIONFAILEDERROR = "FailedOperation.OperationFailedError"
 
@@ -73,6 +82,12 @@ const (
 
 	// Failed to refund the resource pack
 	FAILEDOPERATION_REFUNDSOURCEPACKAGEERROR = "FailedOperation.RefundSourcePackageError"
+
+	// Policy modification failed.
+	FAILEDOPERATION_SERVERLESSSETSTRATEGYERROR = "FailedOperation.ServerlessSetStrategyError"
+
+	// Specification information {{1}} search failure.
+	FAILEDOPERATION_SPECNOTFOUNDERROR = "FailedOperation.SpecNotFoundError"
 
 	// Failed to create the order and make a payment. Please try again later. If the problem persists, please contact customer service.
 	FAILEDOPERATION_TRADECREATEORDERERROR = "FailedOperation.TradeCreateOrderError"
@@ -239,6 +254,9 @@ const (
 	// For the cluster in this status, the operation is not allowed.
 	OPERATIONDENIED_CLUSTERSTATUSDENIEDERROR = "OperationDenied.ClusterStatusDeniedError"
 
+	// Fail to retrieve the proxy.
+	OPERATIONDENIED_GETPROXYGROUPFAILEDERROR = "OperationDenied.GetProxyGroupFailedError"
+
 	// You do not have the permission to operate this resource.
 	OPERATIONDENIED_INSTANCEACCESSDENIEDERROR = "OperationDenied.InstanceAccessDeniedError"
 
@@ -250,6 +268,33 @@ const (
 
 	// Insufficient account balance.
 	OPERATIONDENIED_INSUFFICIENTBALANCEERROR = "OperationDenied.InsufficientBalanceError"
+
+	// Response size exceeds the limit: {{1}}. reduce the query quantity.
+	OPERATIONDENIED_LENGTHOVERLIMIT = "OperationDenied.LengthOverLimit"
+
+	// You do not have permission to operate the resource (carry out this operation).
+	OPERATIONDENIED_OPERATIONDENIEDERROR = "OperationDenied.OperationDeniedError"
+
+	// Paused-State serverless is not allowed to be modified for multi-availability zone.
+	OPERATIONDENIED_PAUSEDSLSNOTALLOWMODIFYSLAVE = "OperationDenied.PausedSlsNotAllowModifySlave"
+
+	// Mismatched number of creatable connections supported by the proxy node. the supported number of create connections is {{1}}, and the current number of connections is {{2}}.
+	OPERATIONDENIED_PROXYCONNECTCOUNTCHECKERROR = "OperationDenied.ProxyConnectCountCheckError"
+
+	// Proxy node quantity check_failed.
+	OPERATIONDENIED_PROXYNODECOUNTCHECKERROR = "OperationDenied.ProxyNodeCountCheckError"
+
+	// Non-Running proxy.
+	OPERATIONDENIED_PROXYNOTRUNNINGERROR = "OperationDenied.ProxyNotRunningError"
+
+	// Availability zone does not exist.
+	OPERATIONDENIED_PROXYSALEZONECHECKERROR = "OperationDenied.ProxySaleZoneCheckError"
+
+	// Proxy version check_failed.
+	OPERATIONDENIED_PROXYVERSIONCHECKERROR = "OperationDenied.ProxyVersionCheckError"
+
+	// Verification failure of proxy availability zone.
+	OPERATIONDENIED_PROXYZONECHECKERROR = "OperationDenied.ProxyZoneCheckError"
 
 	// For the serverless cluster in this status, the operation is not allowed.
 	OPERATIONDENIED_SERVERLESSCLUSTERSTATUSDENIED = "OperationDenied.ServerlessClusterStatusDenied"
