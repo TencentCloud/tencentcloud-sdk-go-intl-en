@@ -143,6 +143,63 @@ func (c *Client) BatchCreateIntegrationTaskAlarmsWithContext(ctx context.Context
     return
 }
 
+func NewBatchCreateTaskVersionAsyncRequest() (request *BatchCreateTaskVersionAsyncRequest) {
+    request = &BatchCreateTaskVersionAsyncRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "BatchCreateTaskVersionAsync")
+    
+    
+    return
+}
+
+func NewBatchCreateTaskVersionAsyncResponse() (response *BatchCreateTaskVersionAsyncResponse) {
+    response = &BatchCreateTaskVersionAsyncResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// BatchCreateTaskVersionAsync
+// This API is used to asynchronously create task versions in batches.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_SIGNATUREEXPIRE = "AuthFailure.SignatureExpire"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) BatchCreateTaskVersionAsync(request *BatchCreateTaskVersionAsyncRequest) (response *BatchCreateTaskVersionAsyncResponse, err error) {
+    return c.BatchCreateTaskVersionAsyncWithContext(context.Background(), request)
+}
+
+// BatchCreateTaskVersionAsync
+// This API is used to asynchronously create task versions in batches.
+//
+// error code that may be returned:
+//  AUTHFAILURE = "AuthFailure"
+//  AUTHFAILURE_SIGNATUREEXPIRE = "AuthFailure.SignatureExpire"
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+func (c *Client) BatchCreateTaskVersionAsyncWithContext(ctx context.Context, request *BatchCreateTaskVersionAsyncRequest) (response *BatchCreateTaskVersionAsyncResponse, err error) {
+    if request == nil {
+        request = NewBatchCreateTaskVersionAsyncRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchCreateTaskVersionAsync require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBatchCreateTaskVersionAsyncResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewBatchDeleteIntegrationTasksRequest() (request *BatchDeleteIntegrationTasksRequest) {
     request = &BatchDeleteIntegrationTasksRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1888,7 +1945,7 @@ func NewCreateTaskResponse() (response *CreateTaskResponse) {
 }
 
 // CreateTask
-// Creating task
+// This API is used to create a task. This API is deprecated. Use the CreateTaskNew API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -1897,7 +1954,7 @@ func (c *Client) CreateTask(request *CreateTaskRequest) (response *CreateTaskRes
 }
 
 // CreateTask
-// Creating task
+// This API is used to create a task. This API is deprecated. Use the CreateTaskNew API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -2027,6 +2084,55 @@ func (c *Client) CreateTaskFolderWithContext(ctx context.Context, request *Creat
     request.SetContext(ctx)
     
     response = NewCreateTaskFolderResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateTaskNewRequest() (request *CreateTaskNewRequest) {
+    request = &CreateTaskNewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "CreateTaskNew")
+    
+    
+    return
+}
+
+func NewCreateTaskNewResponse() (response *CreateTaskNewResponse) {
+    response = &CreateTaskNewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateTaskNew
+// This API is used to aggregate task creation.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateTaskNew(request *CreateTaskNewRequest) (response *CreateTaskNewResponse, err error) {
+    return c.CreateTaskNewWithContext(context.Background(), request)
+}
+
+// CreateTaskNew
+// This API is used to aggregate task creation.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateTaskNewWithContext(ctx context.Context, request *CreateTaskNewRequest) (response *CreateTaskNewResponse, err error) {
+    if request == nil {
+        request = NewCreateTaskNewRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateTaskNew require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateTaskNewResponse()
     err = c.Send(request, response)
     return
 }
@@ -10776,9 +10882,9 @@ func NewModifyTaskLinksResponse() (response *ModifyTaskLinksResponse) {
 }
 
 // ModifyTaskLinks
-// <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
+// <p style="color:red;">[Note: This version is only available to some whitelist customers in the Guangzhou zone]</p>.
 //
-// Add Parent Task Dependency
+// Add parent task dependency. This API is deprecated. Use API ModifyTaskLinksDs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -10787,9 +10893,9 @@ func (c *Client) ModifyTaskLinks(request *ModifyTaskLinksRequest) (response *Mod
 }
 
 // ModifyTaskLinks
-// <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
+// <p style="color:red;">[Note: This version is only available to some whitelist customers in the Guangzhou zone]</p>.
 //
-// Add Parent Task Dependency
+// Add parent task dependency. This API is deprecated. Use API ModifyTaskLinksDs.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -10805,6 +10911,57 @@ func (c *Client) ModifyTaskLinksWithContext(ctx context.Context, request *Modify
     request.SetContext(ctx)
     
     response = NewModifyTaskLinksResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyTaskLinksDsRequest() (request *ModifyTaskLinksDsRequest) {
+    request = &ModifyTaskLinksDsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "ModifyTaskLinksDs")
+    
+    
+    return
+}
+
+func NewModifyTaskLinksDsResponse() (response *ModifyTaskLinksDsResponse) {
+    response = &ModifyTaskLinksDsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyTaskLinksDs
+// This API is used to add parent task dependency.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOLOCK = "FailedOperation.NoLock"
+func (c *Client) ModifyTaskLinksDs(request *ModifyTaskLinksDsRequest) (response *ModifyTaskLinksDsResponse, err error) {
+    return c.ModifyTaskLinksDsWithContext(context.Background(), request)
+}
+
+// ModifyTaskLinksDs
+// This API is used to add parent task dependency.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_NOLOCK = "FailedOperation.NoLock"
+func (c *Client) ModifyTaskLinksDsWithContext(ctx context.Context, request *ModifyTaskLinksDsRequest) (response *ModifyTaskLinksDsResponse, err error) {
+    if request == nil {
+        request = NewModifyTaskLinksDsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyTaskLinksDs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyTaskLinksDsResponse()
     err = c.Send(request, response)
     return
 }
@@ -10931,7 +11088,7 @@ func NewModifyWorkflowInfoResponse() (response *ModifyWorkflowInfoResponse) {
 }
 
 // ModifyWorkflowInfo
-// Update Workflow Information
+// This API is used to update workflow information. (deprecated). Use API UpdateWorkflowInfo.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -10940,7 +11097,7 @@ func (c *Client) ModifyWorkflowInfo(request *ModifyWorkflowInfoRequest) (respons
 }
 
 // ModifyWorkflowInfo
-// Update Workflow Information
+// This API is used to update workflow information. (deprecated). Use API UpdateWorkflowInfo.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -10980,7 +11137,7 @@ func NewModifyWorkflowScheduleResponse() (response *ModifyWorkflowScheduleRespon
 }
 
 // ModifyWorkflowSchedule
-// Update Workflow Scheduling
+// This API is used to update workflow scheduling. This API is deprecated. Use the RenewWorkflowSchedulerInfoDs API instead.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -10989,7 +11146,7 @@ func (c *Client) ModifyWorkflowSchedule(request *ModifyWorkflowScheduleRequest) 
 }
 
 // ModifyWorkflowSchedule
-// Update Workflow Scheduling
+// This API is used to update workflow scheduling. This API is deprecated. Use the RenewWorkflowSchedulerInfoDs API instead.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -11058,6 +11215,55 @@ func (c *Client) MoveTasksToFolderWithContext(ctx context.Context, request *Move
     return
 }
 
+func NewRegisterDsEventRequest() (request *RegisterDsEventRequest) {
+    request = &RegisterDsEventRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "RegisterDsEvent")
+    
+    
+    return
+}
+
+func NewRegisterDsEventResponse() (response *RegisterDsEventResponse) {
+    response = &RegisterDsEventResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RegisterDsEvent
+// This API is used to register an event.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) RegisterDsEvent(request *RegisterDsEventRequest) (response *RegisterDsEventResponse, err error) {
+    return c.RegisterDsEventWithContext(context.Background(), request)
+}
+
+// RegisterDsEvent
+// This API is used to register an event.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) RegisterDsEventWithContext(ctx context.Context, request *RegisterDsEventRequest) (response *RegisterDsEventResponse, err error) {
+    if request == nil {
+        request = NewRegisterDsEventRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RegisterDsEvent require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRegisterDsEventResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRegisterEventRequest() (request *RegisterEventRequest) {
     request = &RegisterEventRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -11078,9 +11284,9 @@ func NewRegisterEventResponse() (response *RegisterEventResponse) {
 }
 
 // RegisterEvent
-// <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
+// <p style="color:red;">[Note: This version is only available for partial allowlisted customers in the Guangzhou region]</p>.
 //
-// Registration Event
+// This API is used to register events. This API is deprecated. Use API RegisterDsEvent.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -11089,9 +11295,9 @@ func (c *Client) RegisterEvent(request *RegisterEventRequest) (response *Registe
 }
 
 // RegisterEvent
-// <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
+// <p style="color:red;">[Note: This version is only available for partial allowlisted customers in the Guangzhou region]</p>.
 //
-// Registration Event
+// This API is used to register events. This API is deprecated. Use API RegisterDsEvent.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -11209,6 +11415,104 @@ func (c *Client) RemoveWorkflowDsWithContext(ctx context.Context, request *Remov
     request.SetContext(ctx)
     
     response = NewRemoveWorkflowDsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRenewWorkflowOwnerDsRequest() (request *RenewWorkflowOwnerDsRequest) {
+    request = &RenewWorkflowOwnerDsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "RenewWorkflowOwnerDs")
+    
+    
+    return
+}
+
+func NewRenewWorkflowOwnerDsResponse() (response *RenewWorkflowOwnerDsResponse) {
+    response = &RenewWorkflowOwnerDsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RenewWorkflowOwnerDs
+// This API is used to batch update the task owner under a workflow.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) RenewWorkflowOwnerDs(request *RenewWorkflowOwnerDsRequest) (response *RenewWorkflowOwnerDsResponse, err error) {
+    return c.RenewWorkflowOwnerDsWithContext(context.Background(), request)
+}
+
+// RenewWorkflowOwnerDs
+// This API is used to batch update the task owner under a workflow.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) RenewWorkflowOwnerDsWithContext(ctx context.Context, request *RenewWorkflowOwnerDsRequest) (response *RenewWorkflowOwnerDsResponse, err error) {
+    if request == nil {
+        request = NewRenewWorkflowOwnerDsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenewWorkflowOwnerDs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenewWorkflowOwnerDsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRenewWorkflowSchedulerInfoDsRequest() (request *RenewWorkflowSchedulerInfoDsRequest) {
+    request = &RenewWorkflowSchedulerInfoDsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "RenewWorkflowSchedulerInfoDs")
+    
+    
+    return
+}
+
+func NewRenewWorkflowSchedulerInfoDsResponse() (response *RenewWorkflowSchedulerInfoDsResponse) {
+    response = &RenewWorkflowSchedulerInfoDsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RenewWorkflowSchedulerInfoDs
+// This API is used to update task scheduling information under a workflow.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) RenewWorkflowSchedulerInfoDs(request *RenewWorkflowSchedulerInfoDsRequest) (response *RenewWorkflowSchedulerInfoDsResponse, err error) {
+    return c.RenewWorkflowSchedulerInfoDsWithContext(context.Background(), request)
+}
+
+// RenewWorkflowSchedulerInfoDs
+// This API is used to update task scheduling information under a workflow.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) RenewWorkflowSchedulerInfoDsWithContext(ctx context.Context, request *RenewWorkflowSchedulerInfoDsRequest) (response *RenewWorkflowSchedulerInfoDsResponse, err error) {
+    if request == nil {
+        request = NewRenewWorkflowSchedulerInfoDsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenewWorkflowSchedulerInfoDs require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenewWorkflowSchedulerInfoDsResponse()
     err = c.Send(request, response)
     return
 }
@@ -11952,9 +12256,9 @@ func NewSubmitTaskResponse() (response *SubmitTaskResponse) {
 }
 
 // SubmitTask
-// <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
+// <p style="color:red;">[Note: This version is only available for partial whitelist customers in the Guangzhou zone]</p>.
 //
-// Submit a Task
+// This API is used to submit tasks. This API is deprecated. Use the CreateTaskVersionDs API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -11986,9 +12290,9 @@ func (c *Client) SubmitTask(request *SubmitTaskRequest) (response *SubmitTaskRes
 }
 
 // SubmitTask
-// <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
+// <p style="color:red;">[Note: This version is only available for partial whitelist customers in the Guangzhou zone]</p>.
 //
-// Submit a Task
+// This API is used to submit tasks. This API is deprecated. Use the CreateTaskVersionDs API.
 //
 // error code that may be returned:
 //  AUTHFAILURE = "AuthFailure"
@@ -12100,7 +12404,7 @@ func NewSubmitWorkflowResponse() (response *SubmitWorkflowResponse) {
 }
 
 // SubmitWorkflow
-// Submit Workflow
+// Submit a workflow. This API is deprecated. Use the BatchCreateTaskVersionAsync API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -12109,7 +12413,7 @@ func (c *Client) SubmitWorkflow(request *SubmitWorkflowRequest) (response *Submi
 }
 
 // SubmitWorkflow
-// Submit Workflow
+// Submit a workflow. This API is deprecated. Use the BatchCreateTaskVersionAsync API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -12334,9 +12638,9 @@ func NewTriggerEventResponse() (response *TriggerEventResponse) {
 }
 
 // TriggerEvent
-// <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
+// <p style="color:red;">[Note: This version is only available to some allowlisted customers in the Guangzhou region]</p>.
 //
-// Trigger events
+// This API is used to trigger event. This API is deprecated. Use API TriggerDsEvent.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -12345,9 +12649,9 @@ func (c *Client) TriggerEvent(request *TriggerEventRequest) (response *TriggerEv
 }
 
 // TriggerEvent
-// <p style="color:red;">[Note: This version is only available to a portion of allowlist customers in the Guangzhou Region]</p>
+// <p style="color:red;">[Note: This version is only available to some allowlisted customers in the Guangzhou region]</p>.
 //
-// Trigger events
+// This API is used to trigger event. This API is deprecated. Use API TriggerDsEvent.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -12497,6 +12801,59 @@ func (c *Client) UpdateProjectUserRoleWithContext(ctx context.Context, request *
     return
 }
 
+func NewUpdateWorkflowInfoRequest() (request *UpdateWorkflowInfoRequest) {
+    request = &UpdateWorkflowInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("wedata", APIVersion, "UpdateWorkflowInfo")
+    
+    
+    return
+}
+
+func NewUpdateWorkflowInfoResponse() (response *UpdateWorkflowInfoResponse) {
+    response = &UpdateWorkflowInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UpdateWorkflowInfo
+// This API is developed in ds.
+//
+// This API is used to update a workflow, including its basic information and workflow parameters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) UpdateWorkflowInfo(request *UpdateWorkflowInfoRequest) (response *UpdateWorkflowInfoResponse, err error) {
+    return c.UpdateWorkflowInfoWithContext(context.Background(), request)
+}
+
+// UpdateWorkflowInfo
+// This API is developed in ds.
+//
+// This API is used to update a workflow, including its basic information and workflow parameters.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) UpdateWorkflowInfoWithContext(ctx context.Context, request *UpdateWorkflowInfoRequest) (response *UpdateWorkflowInfoResponse, err error) {
+    if request == nil {
+        request = NewUpdateWorkflowInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UpdateWorkflowInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUpdateWorkflowInfoResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUpdateWorkflowOwnerRequest() (request *UpdateWorkflowOwnerRequest) {
     request = &UpdateWorkflowOwnerRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -12517,7 +12874,7 @@ func NewUpdateWorkflowOwnerResponse() (response *UpdateWorkflowOwnerResponse) {
 }
 
 // UpdateWorkflowOwner
-// Modifying Workflow Person in Charge
+// This API is used to modify the workflow owner. Deprecated. Use the RenewWorkflowOwnerDs API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
@@ -12527,7 +12884,7 @@ func (c *Client) UpdateWorkflowOwner(request *UpdateWorkflowOwnerRequest) (respo
 }
 
 // UpdateWorkflowOwner
-// Modifying Workflow Person in Charge
+// This API is used to modify the workflow owner. Deprecated. Use the RenewWorkflowOwnerDs API.
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
