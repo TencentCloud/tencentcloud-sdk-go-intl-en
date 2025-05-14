@@ -1061,8 +1061,9 @@ type CreateLaunchConfigurationRequestParams struct {
 	UserData *string `json:"UserData,omitnil,omitempty" name:"UserData"`
 
 	// Instance billing mode. CVM instances take `POSTPAID_BY_HOUR` by default. Valid values:
-	// <br><li>POSTPAID_BY_HOUR: pay-as-you-go hourly
-	// <br><li>SPOTPAID: spot instance
+	// <li>POSTPAID_BY_HOUR: pay-as-you-go hourly</li>
+	// <li>SPOTPAID: spot instance</li>
+	// <li> CDCPAID: dedicated cluster</li>
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
 	// Market options of the instance, such as parameters related to spot instances. This parameter is required for spot instances.
@@ -1163,8 +1164,9 @@ type CreateLaunchConfigurationRequest struct {
 	UserData *string `json:"UserData,omitnil,omitempty" name:"UserData"`
 
 	// Instance billing mode. CVM instances take `POSTPAID_BY_HOUR` by default. Valid values:
-	// <br><li>POSTPAID_BY_HOUR: pay-as-you-go hourly
-	// <br><li>SPOTPAID: spot instance
+	// <li>POSTPAID_BY_HOUR: pay-as-you-go hourly</li>
+	// <li>SPOTPAID: spot instance</li>
+	// <li> CDCPAID: dedicated cluster</li>
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
 	// Market options of the instance, such as parameters related to spot instances. This parameter is required for spot instances.
@@ -1801,20 +1803,18 @@ func (r *CreateScheduledActionResponse) FromJsonString(s string) error {
 }
 
 type DataDisk struct {
-	// Data disk type. For restrictions on data disk type, see [Cloud Block Storage Types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1). Valid values:
-	// <li>LOCAL_BASIC: Local hard disk.</li>
+	// Data disk type. For restrictions on the data disk type, see [cloud block storage types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1). Valid values:
+	// <li>LOCAL_BASIC: Local Disk.</li>
 	// <li>LOCAL_SSD: Local SSD.</li>
-	// <li>CLOUD_BASIC: General cloud disk.</li>
-	// <li>CLOUD_PREMIUM: Premium cloud disk.</li>
+	// <li>CLOUD_BASIC: Basic Cloud Disk.</li>
+	// <li>CLOUD_PREMIUM: Premium Disk.</li>
 	// <li>CLOUD_SSD: Cloud SSD.</li>
 	// <li>CLOUD_HSSD: Enhanced SSD.</li>
-	// <li>CLOUD_TSSD: Ultra SSD.</li>
+	// <li>CLOUD_TSSD: Tremendous SSD.</li>
 	// The default value is consistent with the system disk type (SystemDisk.DiskType).
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// Data disk size (in GB). The minimum adjustment increment is 10 GB. The value range varies by data disk type. For more information on limits, see [CVM Instance Configuration](https://intl.cloud.tencent.com/document/product/213/2177?from_cn_redirect=1). The default value is 0, indicating that no data disk is purchased. For more information, see the product documentation.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Data disk size, in GB. The minimum adjustment step size is 10 GB. The value range varies according to the data disk type. For specific restrictions, see [CVM instance configuration](https://intl.cloud.tencent.com/document/product/213/2177?from_cn_redirect=1). Default value: 0, which means that no data disk is purchased. For more restrictions, see the product documentation.
 	DiskSize *uint64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 
 	// Data disk snapshot ID, such as `snap-l8psqwnt`.
@@ -2396,15 +2396,21 @@ func (r *DescribeAutoScalingAdvicesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeAutoScalingGroupLastActivitiesRequestParams struct {
-	// ID list of an auto scaling group.
+	// ID list of auto scaling groups.
 	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitnil,omitempty" name:"AutoScalingGroupIds"`
+
+	// Excludes cancelled type activities when querying. Default value is false, which means cancelled type activities are not excluded.
+	ExcludeCancelledActivity *bool `json:"ExcludeCancelledActivity,omitnil,omitempty" name:"ExcludeCancelledActivity"`
 }
 
 type DescribeAutoScalingGroupLastActivitiesRequest struct {
 	*tchttp.BaseRequest
 	
-	// ID list of an auto scaling group.
+	// ID list of auto scaling groups.
 	AutoScalingGroupIds []*string `json:"AutoScalingGroupIds,omitnil,omitempty" name:"AutoScalingGroupIds"`
+
+	// Excludes cancelled type activities when querying. Default value is false, which means cancelled type activities are not excluded.
+	ExcludeCancelledActivity *bool `json:"ExcludeCancelledActivity,omitnil,omitempty" name:"ExcludeCancelledActivity"`
 }
 
 func (r *DescribeAutoScalingGroupLastActivitiesRequest) ToJsonString() string {
@@ -2420,6 +2426,7 @@ func (r *DescribeAutoScalingGroupLastActivitiesRequest) FromJsonString(s string)
 		return err
 	}
 	delete(f, "AutoScalingGroupIds")
+	delete(f, "ExcludeCancelledActivity")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAutoScalingGroupLastActivitiesRequest has unknown keys!", "")
 	}
@@ -3755,8 +3762,7 @@ type InstanceMarketOptionsRequest struct {
 	// Bidding-related options
 	SpotOptions *SpotMarketOptions `json:"SpotOptions,omitnil,omitempty" name:"SpotOptions"`
 
-	// Market option type. Currently, this only supports the value "spot"
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Market option type. The value can only be spot currently.
 	MarketType *string `json:"MarketType,omitnil,omitempty" name:"MarketType"`
 }
 
@@ -3816,27 +3822,21 @@ type InternetAccessible struct {
 
 type InvocationResult struct {
 	// Instance ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 
 	// Execution activity ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	InvocationId *string `json:"InvocationId,omitnil,omitempty" name:"InvocationId"`
 
-	// Execution task ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Task ID.
 	InvocationTaskId *string `json:"InvocationTaskId,omitnil,omitempty" name:"InvocationTaskId"`
 
 	// Command ID.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	CommandId *string `json:"CommandId,omitnil,omitempty" name:"CommandId"`
 
-	// Execution Status
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the execution task status.
 	TaskStatus *string `json:"TaskStatus,omitnil,omitempty" name:"TaskStatus"`
 
-	// Execution exception information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the exception information during execution.
 	ErrorMessage *string `json:"ErrorMessage,omitnil,omitempty" name:"ErrorMessage"`
 }
 
@@ -5643,20 +5643,18 @@ type RunAutomationServiceEnabled struct {
 }
 
 type RunMonitorServiceEnabled struct {
-	// Whether [TCOP (formerly Cloud Monitor)](https://intl.cloud.tencent.com/document/product/248?from_cn_redirect=1) is enabled. Valid values:
-	// <li>TRUE: enabled</li>
-	// <li>FALSE: disabled</li>
+	// Whether to enable [Tencent Cloud Observability Platform (formerly Cloud Monitor)](https://intl.cloud.tencent.com/document/product/248?from_cn_redirect=1) (TCOP). Valid values:
+	// <li>TRUE: enable TCOP.</li>
+	// <li>FALSE: disable TCOP.</li>
 	// Default value: TRUE.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 }
 
 type RunSecurityServiceEnabled struct {
-	// Whether to enable the [Cloud Workload Protection Platform](https://www.tencentcloud.com/document/product/296?lang=en&pg=) service. Valid values:
-	// <li>TRUE: enable.</li>
-	// <li>FALSE: disable.</li>
+	// Whether to enable [Cloud Workload Protection Platform (CWPP)](https://intl.cloud.tencent.com/document/product/296?from_cn_redirect=1). Valid values:
+	// <li>TRUE: enable CWPP.</li>
+	// <li>FALSE: disable CWPP.</li>
 	// Default value: TRUE.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Enabled *bool `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 }
 
@@ -5972,8 +5970,7 @@ type SpotMarketOptions struct {
 	// Bidding price such as "1.05"
 	MaxPrice *string `json:"MaxPrice,omitnil,omitempty" name:"MaxPrice"`
 
-	// Bid request type. Currently, only "one-time" type is supported. Default value: one-time
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Spot instance type. The value can only be one-time currently. Default value: one-time.
 	SpotInstanceType *string `json:"SpotInstanceType,omitnil,omitempty" name:"SpotInstanceType"`
 }
 
@@ -6280,12 +6277,16 @@ func (r *StopInstanceRefreshResponse) FromJsonString(s string) error {
 }
 
 type SystemDisk struct {
-	// System disk type. For more information on limits of system disk types, see [Cloud Disk Types](https://intl.cloud.tencent.com/document/product/362/31636). Valid values:<br><li>`LOCAL_BASIC`: local disk <br><li>`LOCAL_SSD`: local SSD disk <br><li>`CLOUD_BASIC`: HDD cloud disk <br><li>`CLOUD_PREMIUM`: premium cloud storage<br><li>`CLOUD_SSD`: SSD cloud disk <br><br>Default value: `CLOUD_PREMIUM`.
-	// Note: this field may return `null`, indicating that no valid value can be obtained.
+	// System disk type. For restrictions on the system disk type, see [cloud block storage types](https://intl.cloud.tencent.com/document/product/362/2353?from_cn_redirect=1). Valid values:
+	// <li>LOCAL_BASIC: Local Disk.</li>
+	// <li>LOCAL_SSD: Local SSD.</li>
+	// <li>CLOUD_BASIC: Basic Cloud Disk.</li>
+	// <li>CLOUD_PREMIUM: Premium Disk.</li>
+	// <li>CLOUD_SSD: Cloud SSD.</li>
+	// <li>Default value: CLOUD_PREMIUM.</li>
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
-	// System disk size in GB. Default value: 50
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// System disk size, in GB. Default value: 50.
 	DiskSize *uint64 `json:"DiskSize,omitnil,omitempty" name:"DiskSize"`
 }
 
