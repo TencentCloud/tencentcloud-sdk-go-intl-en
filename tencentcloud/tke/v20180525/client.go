@@ -7303,6 +7303,57 @@ func (c *Client) GetClusterLevelPriceWithContext(ctx context.Context, request *G
     return
 }
 
+func NewGetTkeAppChartListRequest() (request *GetTkeAppChartListRequest) {
+    request = &GetTkeAppChartListRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("tke", APIVersion, "GetTkeAppChartList")
+    
+    
+    return
+}
+
+func NewGetTkeAppChartListResponse() (response *GetTkeAppChartListResponse) {
+    response = &GetTkeAppChartListResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetTkeAppChartList
+// This API is used to retrieve the App List supported by TKE.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) GetTkeAppChartList(request *GetTkeAppChartListRequest) (response *GetTkeAppChartListResponse, err error) {
+    return c.GetTkeAppChartListWithContext(context.Background(), request)
+}
+
+// GetTkeAppChartList
+// This API is used to retrieve the App List supported by TKE.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) GetTkeAppChartListWithContext(ctx context.Context, request *GetTkeAppChartListRequest) (response *GetTkeAppChartListResponse, err error) {
+    if request == nil {
+        request = NewGetTkeAppChartListRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetTkeAppChartList require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetTkeAppChartListResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetUpgradeInstanceProgressRequest() (request *GetUpgradeInstanceProgressRequest) {
     request = &GetUpgradeInstanceProgressRequest{
         BaseRequest: &tchttp.BaseRequest{},
