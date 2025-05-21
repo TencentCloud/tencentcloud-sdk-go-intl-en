@@ -195,6 +195,69 @@ func (c *Client) AddBandwidthPackageResourcesWithContext(ctx context.Context, re
     return
 }
 
+func NewAddTemplateMemberRequest() (request *AddTemplateMemberRequest) {
+    request = &AddTemplateMemberRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "AddTemplateMember")
+    
+    
+    return
+}
+
+func NewAddTemplateMemberResponse() (response *AddTemplateMemberResponse) {
+    response = &AddTemplateMemberResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// AddTemplateMember
+// This API is used to add a parameter template of the IP address, protocol port, IP address group, or protocol port group type.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+func (c *Client) AddTemplateMember(request *AddTemplateMemberRequest) (response *AddTemplateMemberResponse, err error) {
+    return c.AddTemplateMemberWithContext(context.Background(), request)
+}
+
+// AddTemplateMember
+// This API is used to add a parameter template of the IP address, protocol port, IP address group, or protocol port group type.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  INVALIDPARAMETERVALUE_MALFORMED = "InvalidParameterValue.Malformed"
+//  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
+//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+func (c *Client) AddTemplateMemberWithContext(ctx context.Context, request *AddTemplateMemberRequest) (response *AddTemplateMemberResponse, err error) {
+    if request == nil {
+        request = NewAddTemplateMemberRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("AddTemplateMember require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewAddTemplateMemberResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewAdjustPublicAddressRequest() (request *AdjustPublicAddressRequest) {
     request = &AdjustPublicAddressRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -7318,6 +7381,63 @@ func (c *Client) DeleteSubnetWithContext(ctx context.Context, request *DeleteSub
     request.SetContext(ctx)
     
     response = NewDeleteSubnetResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteTemplateMemberRequest() (request *DeleteTemplateMemberRequest) {
+    request = &DeleteTemplateMemberRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "DeleteTemplateMember")
+    
+    
+    return
+}
+
+func NewDeleteTemplateMemberResponse() (response *DeleteTemplateMemberResponse) {
+    response = &DeleteTemplateMemberResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteTemplateMember
+// This API is used to delete a parameter template of the IP address, protocol port, IP address group, or protocol port group type.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+func (c *Client) DeleteTemplateMember(request *DeleteTemplateMemberRequest) (response *DeleteTemplateMemberResponse, err error) {
+    return c.DeleteTemplateMemberWithContext(context.Background(), request)
+}
+
+// DeleteTemplateMember
+// This API is used to delete a parameter template of the IP address, protocol port, IP address group, or protocol port group type.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+func (c *Client) DeleteTemplateMemberWithContext(ctx context.Context, request *DeleteTemplateMemberRequest) (response *DeleteTemplateMemberResponse, err error) {
+    if request == nil {
+        request = NewDeleteTemplateMemberRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteTemplateMember require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteTemplateMemberResponse()
     err = c.Send(request, response)
     return
 }
@@ -16615,6 +16735,63 @@ func (c *Client) ModifySubnetAttributeWithContext(ctx context.Context, request *
     request.SetContext(ctx)
     
     response = NewModifySubnetAttributeResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyTemplateMemberRequest() (request *ModifyTemplateMemberRequest) {
+    request = &ModifyTemplateMemberRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("vpc", APIVersion, "ModifyTemplateMember")
+    
+    
+    return
+}
+
+func NewModifyTemplateMemberResponse() (response *ModifyTemplateMemberResponse) {
+    response = &ModifyTemplateMemberResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyTemplateMember
+// This API is used to modify a parameter template of the IP address, protocol port, IP address group, or protocol port group type.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+func (c *Client) ModifyTemplateMember(request *ModifyTemplateMemberRequest) (response *ModifyTemplateMemberResponse, err error) {
+    return c.ModifyTemplateMemberWithContext(context.Background(), request)
+}
+
+// ModifyTemplateMember
+// This API is used to modify a parameter template of the IP address, protocol port, IP address group, or protocol port group type.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_DUPLICATE = "InvalidParameterValue.Duplicate"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNSUPPORTEDOPERATION_MUTEXOPERATIONTASKRUNNING = "UnsupportedOperation.MutexOperationTaskRunning"
+func (c *Client) ModifyTemplateMemberWithContext(ctx context.Context, request *ModifyTemplateMemberRequest) (response *ModifyTemplateMemberResponse, err error) {
+    if request == nil {
+        request = NewModifyTemplateMemberRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyTemplateMember require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyTemplateMemberResponse()
     err = c.Send(request, response)
     return
 }
