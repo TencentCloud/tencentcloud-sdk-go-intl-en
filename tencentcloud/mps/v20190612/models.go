@@ -711,10 +711,10 @@ type AiAnalysisTaskInput struct {
 
 	// Additional parameter. Its value is a serialized JSON string.
 	// Note: This parameter is used to meet customization requirements. References:
-	// Smart erase: https://intl.cloud.tencent.com/document/product/862/101530?from_cn_redirect=1
-	// Video splitting: https://intl.cloud.tencent.com/document/product/862/112098?from_cn_redirect=1
-	// Intelligent highlights: https://intl.cloud.tencent.com/document/product/862/107280?from_cn_redirect=1
-	// Horizontal-to-vertical video transformation: https://intl.cloud.tencent.com/document/product/862/112112?from_cn_redirect=1
+	// [Smart Erase Tutorial]: https://intl.cloud.tencent.com/document/product/862/101530?from_cn_redirect=1
+	// [Video Splitting (Long Videos to Short Videos) Tutorial](https://intl.cloud.tencent.com/document/product/862/112098?from_cn_redirect=1)
+	// [Intelligent Highlights Tutorial](https://intl.cloud.tencent.com/document/product/862/107280?from_cn_redirect=1)
+	// [Horizontal-to-Vertical Video Transformation Tutorial](https://intl.cloud.tencent.com/document/product/862/112112?from_cn_redirect=1)
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	ExtendedParameter *string `json:"ExtendedParameter,omitnil,omitempty" name:"ExtendedParameter"`
 }
@@ -2184,9 +2184,9 @@ type AudioTemplateInfo struct {
 	// 
 	Bitrate *int64 `json:"Bitrate,omitnil,omitempty" name:"Bitrate"`
 
-	// The sampling rate of the audio stream. the supported sampling rate options vary for different encoding standards. for details, see audio sampling rate support scope document https://intl.cloud.tencent.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53.
+	// Audio stream sampling rate. Different sampling rate options are provided for different encoding standards. For details, see [Audio/Video Transcoding Template](https://intl.cloud.tencent.com/document/product/862/77166?from_cn_redirect=1#f3b039f1-d817-4a96-b4e4-90132d31cd53).
 	// Unit: Hz.
-	// Please ensure that the sampling rate of the source audio stream is within the value range of the above options. otherwise, transcoding failure may occur.
+	// Note: Make sure that the sampling rate of the source audio stream is among the above options. Otherwise, transcoding may fail.
 	SampleRate *uint64 `json:"SampleRate,omitnil,omitempty" name:"SampleRate"`
 
 	// Audio channel mode. Valid values:
@@ -2515,7 +2515,7 @@ type ComposeMediaItem struct {
 }
 
 type ComposeMediaTrack struct {
-	// The track type. Valid values:<ul><li>`Video`: Video track. A video track can consist of the following elements:</li><ul><li>Video</li><li>Image</li><li>Transition</li><li>Empty</li></ul><li>`Audio`: Audio track. An audio track can consist of the following elements:</li><ul><li>Audio</li><li>Transition</li><li>Empty</li></ul><li>`Title`: Text track. A text track can consist of the following elements: </li><ul><li>Subtitle</li></ul>
+	// Track type. Valid values: <ul><li>Video: video track. It can consist of the following elements:</li><ul><li>Video elements</li><li>Image elements</li><li>Transition elements</li><li>Empty elements</li></ul><li>Audio: audio track. It can consist of the following elements:</li><ul><li>Audio elements</li><li>Transition elements</li><li>Empty elements</li></ul><li>Title: text track. It can consist of the following elements:</li><ul><li>Subtitle elements</li></ul></ul>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The elements of a track.
@@ -3772,8 +3772,11 @@ func (r *CreateImageSpriteTemplateResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateLiveRecordTemplateRequestParams struct {
-	// HLS configuration parameters.
+	// HLS configuration parameter. Either this parameter or MP4Configure should be specified.
 	HLSConfigure *HLSConfigureInfo `json:"HLSConfigure,omitnil,omitempty" name:"HLSConfigure"`
+
+	// MP4 configuration parameter. Either this parameter or HLSConfigure should be specified.
+	MP4Configure *MP4ConfigureInfo `json:"MP4Configure,omitnil,omitempty" name:"MP4Configure"`
 
 	// Recording template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -3785,8 +3788,11 @@ type CreateLiveRecordTemplateRequestParams struct {
 type CreateLiveRecordTemplateRequest struct {
 	*tchttp.BaseRequest
 	
-	// HLS configuration parameters.
+	// HLS configuration parameter. Either this parameter or MP4Configure should be specified.
 	HLSConfigure *HLSConfigureInfo `json:"HLSConfigure,omitnil,omitempty" name:"HLSConfigure"`
+
+	// MP4 configuration parameter. Either this parameter or HLSConfigure should be specified.
+	MP4Configure *MP4ConfigureInfo `json:"MP4Configure,omitnil,omitempty" name:"MP4Configure"`
 
 	// Recording template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -3808,6 +3814,7 @@ func (r *CreateLiveRecordTemplateRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "HLSConfigure")
+	delete(f, "MP4Configure")
 	delete(f, "Name")
 	delete(f, "Comment")
 	if len(f) > 0 {
@@ -4603,6 +4610,9 @@ type CreateTranscodeTemplateRequestParams struct {
 
 	// Audio/Video enhancement configuration.
 	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
+
+
+	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
 type CreateTranscodeTemplateRequest struct {
@@ -4640,6 +4650,8 @@ type CreateTranscodeTemplateRequest struct {
 
 	// Audio/Video enhancement configuration.
 	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
+
+	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
 func (r *CreateTranscodeTemplateRequest) ToJsonString() string {
@@ -4663,6 +4675,7 @@ func (r *CreateTranscodeTemplateRequest) FromJsonString(s string) error {
 	delete(f, "AudioTemplate")
 	delete(f, "TEHDConfig")
 	delete(f, "EnhanceConfig")
+	delete(f, "StdExtInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateTranscodeTemplateRequest has unknown keys!", "")
 	}
@@ -7395,7 +7408,7 @@ func (r *DescribeSchedulesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeSmartSubtitleTemplatesRequestParams struct {
-	// Condition for filtering smart subtitle templates by unique identifier. The array can contain up to 10 unique identifiers.
+	// Unique identifiers of smart subtitle templates for filtering. The array can contain up to 100 unique identifiers.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
 
 	// Paging offset. Default value: 0.
@@ -7416,7 +7429,7 @@ type DescribeSmartSubtitleTemplatesRequestParams struct {
 type DescribeSmartSubtitleTemplatesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Condition for filtering smart subtitle templates by unique identifier. The array can contain up to 10 unique identifiers.
+	// Unique identifiers of smart subtitle templates for filtering. The array can contain up to 100 unique identifiers.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
 
 	// Paging offset. Default value: 0.
@@ -9008,8 +9021,25 @@ type HighlightSegmentItem struct {
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
+type ImageAreaBoxInfo struct {
+	// Type of the box selection area in the image. Valid values:
+	// <li>logo: icon</li>
+	// <li>text: text</li>
+	// Default value: logo.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Coordinates (pixel-level) of the box selection area in the image. Format: [x1, y1, x2, y2], which indicates the coordinates of the top left corner and the bottom right corner.
+	// For example, [101, 85, 111, 95].
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
+
+
+	BoundingBox []*float64 `json:"BoundingBox,omitnil,omitempty" name:"BoundingBox"`
+}
+
 type ImageEncodeConfig struct {
-	// Image format. Valid values: JPG, BMP, GIF, PNG, and WebP. The default is the original image format.
+	// Image format. Valid values: JPEG, PNG, BMP, and WebP. If it is not specified, the original image format is used. Animations are not supported.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
 
@@ -9030,6 +9060,27 @@ type ImageEnhanceConfig struct {
 
 	// Face enhancement configuration.
 	FaceEnhance *FaceEnhanceConfig `json:"FaceEnhance,omitnil,omitempty" name:"FaceEnhance"`
+}
+
+type ImageEraseConfig struct {
+	// Icon erasing configuration.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ImageEraseLogo *ImageEraseLogoConfig `json:"ImageEraseLogo,omitnil,omitempty" name:"ImageEraseLogo"`
+}
+
+type ImageEraseLogoConfig struct {
+	// Capability configuration enabling status. Valid values:
+	// <li>ON: enabled</li>
+	// <li>OFF: disabled</li>
+	// Default value: ON.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Multiple box selection areas to be erased. Note: The value array of this parameter can contain up to 2 values.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	// 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ImageAreaBoxes []*ImageAreaBoxInfo `json:"ImageAreaBoxes,omitnil,omitempty" name:"ImageAreaBoxes"`
 }
 
 type ImageQualityEnhanceConfig struct {
@@ -9136,6 +9187,10 @@ type ImageTaskInput struct {
 	// Image enhancement configuration.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	EnhanceConfig *ImageEnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
+
+	// Image erasing configuration.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	EraseConfig *ImageEraseConfig `json:"EraseConfig,omitnil,omitempty" name:"EraseConfig"`
 }
 
 type ImageWatermarkInput struct {
@@ -9279,6 +9334,9 @@ type LiveRecordTemplate struct {
 
 	// HLS configuration parameters
 	HLSConfigure *HLSConfigureInfo `json:"HLSConfigure,omitnil,omitempty" name:"HLSConfigure"`
+
+	// MP4 configuration parameter.
+	MP4Configure *MP4ConfigureInfo `json:"MP4Configure,omitnil,omitempty" name:"MP4Configure"`
 
 	// Recording template name.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -9810,6 +9868,11 @@ type LowLightEnhanceConfig struct {
 	// Default value: normal.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
+}
+
+type MP4ConfigureInfo struct {
+	// Recording duration, in seconds. The interval can range from 10 minutes to 720 minutes. It is 60 minutes (3,600 seconds) by default.
+	Interval *int64 `json:"Interval,omitnil,omitempty" name:"Interval"`
 }
 
 // Predefined struct for user
@@ -11068,7 +11131,10 @@ func (r *ModifyAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type ModifyAsrHotwordsRequestParams struct {
-	// Hotword lexicon ID.
+	// Hotword lexicon ID. 
+	//  
+	// Either Name or Content should be specified if the hotword lexicon is a text-based hotword lexicon.
+	// One of Name, FileContent, and FileName should be specified if the hotword lexicon is a file-based hotword lexicon.
 	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
 
 	// Hotword lexicon name.
@@ -11089,7 +11155,10 @@ type ModifyAsrHotwordsRequestParams struct {
 type ModifyAsrHotwordsRequest struct {
 	*tchttp.BaseRequest
 	
-	// Hotword lexicon ID.
+	// Hotword lexicon ID. 
+	//  
+	// Either Name or Content should be specified if the hotword lexicon is a text-based hotword lexicon.
+	// One of Name, FileContent, and FileName should be specified if the hotword lexicon is a file-based hotword lexicon.
 	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
 
 	// Hotword lexicon name.
@@ -11417,8 +11486,11 @@ type ModifyLiveRecordTemplateRequestParams struct {
 	// Specifies the recording template unique identifier.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// HLS configuration parameters.
+	// HLS configuration parameter. Either this parameter or MP4Configure should be specified.
 	HLSConfigure *HLSConfigureInfo `json:"HLSConfigure,omitnil,omitempty" name:"HLSConfigure"`
+
+	// MP4 configuration parameter. Either this parameter or HLSConfigure should be specified.
+	MP4Configure *MP4ConfigureInfo `json:"MP4Configure,omitnil,omitempty" name:"MP4Configure"`
 
 	// Recording template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -11433,8 +11505,11 @@ type ModifyLiveRecordTemplateRequest struct {
 	// Specifies the recording template unique identifier.
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// HLS configuration parameters.
+	// HLS configuration parameter. Either this parameter or MP4Configure should be specified.
 	HLSConfigure *HLSConfigureInfo `json:"HLSConfigure,omitnil,omitempty" name:"HLSConfigure"`
+
+	// MP4 configuration parameter. Either this parameter or HLSConfigure should be specified.
+	MP4Configure *MP4ConfigureInfo `json:"MP4Configure,omitnil,omitempty" name:"MP4Configure"`
 
 	// Recording template name. Length limit: 64 characters.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
@@ -11457,6 +11532,7 @@ func (r *ModifyLiveRecordTemplateRequest) FromJsonString(s string) error {
 	}
 	delete(f, "Definition")
 	delete(f, "HLSConfigure")
+	delete(f, "MP4Configure")
 	delete(f, "Name")
 	delete(f, "Comment")
 	if len(f) > 0 {
@@ -13625,9 +13701,13 @@ type QualityControlData struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	NoVideo *bool `json:"NoVideo,omitnil,omitempty" name:"NoVideo"`
 
-	// The no-reference video quality score. Value range: 0-100.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// No-reference quality score of the video (100 points in total).
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	QualityEvaluationScore *int64 `json:"QualityEvaluationScore,omitnil,omitempty" name:"QualityEvaluationScore"`
+
+	// No-reference quality score of the video (MOS).
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	QualityEvaluationMeanOpinionScore *float64 `json:"QualityEvaluationMeanOpinionScore,omitnil,omitempty" name:"QualityEvaluationMeanOpinionScore"`
 
 	// Exception items detected in content quality inspection.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -16119,6 +16199,9 @@ type WordResult struct {
 
 	// Word end timestamp, in seconds.
 	End *float64 `json:"End,omitnil,omitempty" name:"End"`
+
+	// Text after translation.
+	Trans *string `json:"Trans,omitnil,omitempty" name:"Trans"`
 }
 
 type WorkflowInfo struct {
