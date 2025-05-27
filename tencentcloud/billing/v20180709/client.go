@@ -210,6 +210,59 @@ func (c *Client) DescribeAccountBalanceWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeAllocationUnitDetailRequest() (request *DescribeAllocationUnitDetailRequest) {
+    request = &DescribeAllocationUnitDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DescribeAllocationUnitDetail")
+    
+    
+    return
+}
+
+func NewDescribeAllocationUnitDetailResponse() (response *DescribeAllocationUnitDetailResponse) {
+    response = &DescribeAllocationUnitDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAllocationUnitDetail
+// Query the details of a cost allocation unit.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeAllocationUnitDetail(request *DescribeAllocationUnitDetailRequest) (response *DescribeAllocationUnitDetailResponse, err error) {
+    return c.DescribeAllocationUnitDetailWithContext(context.Background(), request)
+}
+
+// DescribeAllocationUnitDetail
+// Query the details of a cost allocation unit.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeAllocationUnitDetailWithContext(ctx context.Context, request *DescribeAllocationUnitDetailRequest) (response *DescribeAllocationUnitDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeAllocationUnitDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAllocationUnitDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAllocationUnitDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeBillAdjustInfoRequest() (request *DescribeBillAdjustInfoRequest) {
     request = &DescribeBillAdjustInfoRequest{
         BaseRequest: &tchttp.BaseRequest{},
