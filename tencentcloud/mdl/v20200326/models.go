@@ -2539,11 +2539,11 @@ type InputSecurityGroupInfo struct {
 }
 
 type InputSettingInfo struct {
-	// Application name, which is valid if `Type` is `RTMP_PUSH` and can contain 1-32 letters and digits
+	// Application name, which is valid if `Type` is `RTMP_PUSH` or `RTMPS_PUSH`, and can contain 1-32 letters and digits
 	// Note: This field may return `null`, indicating that no valid value was found.
 	AppName *string `json:"AppName,omitnil,omitempty" name:"AppName"`
 
-	// Stream name, which is valid if `Type` is `RTMP_PUSH` and can contain 1-32 letters and digits
+	// Stream name, which is valid if `Type` is `RTMP_PUSH` or `RTMPS_PUSH`, and can contain 1-32 letters and digits
 	// Note: This field may return `null`, indicating that no valid value was found.
 	StreamName *string `json:"StreamName,omitnil,omitempty" name:"StreamName"`
 
@@ -2559,8 +2559,8 @@ type InputSettingInfo struct {
 	// Note: this field may return `null`, indicating that no valid value was found.
 	SourceType *string `json:"SourceType,omitnil,omitempty" name:"SourceType"`
 
-	// Delayed time (ms) for playback, which is valid if `Type` is `RTMP_PUSH`
-	// Value range: 0 (default) or 10000-600000
+	// Delayed time (ms) for playback, which is valid if `Type` is `RTMP_PUSH` or `RTMPS_PUSH`.
+	// Value range: 0 (default) or 10000-600000.
 	// The value must be a multiple of 1,000.
 	// Note: This field may return `null`, indicating that no valid value was found.
 	DelayTime *int64 `json:"DelayTime,omitnil,omitempty" name:"DelayTime"`
