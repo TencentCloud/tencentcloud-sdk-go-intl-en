@@ -98,6 +98,65 @@ func (c *Client) CreateAllocationTagWithContext(ctx context.Context, request *Cr
     return
 }
 
+func NewCreateAllocationUnitRequest() (request *CreateAllocationUnitRequest) {
+    request = &CreateAllocationUnitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "CreateAllocationUnit")
+    
+    
+    return
+}
+
+func NewCreateAllocationUnitResponse() (response *CreateAllocationUnitResponse) {
+    response = &CreateAllocationUnitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAllocationUnit
+// This API is used to create allocation units.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NUMLIMITERROR = "FailedOperation.NumLimitError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATERROR = "InternalError.DbOperatError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) CreateAllocationUnit(request *CreateAllocationUnitRequest) (response *CreateAllocationUnitResponse, err error) {
+    return c.CreateAllocationUnitWithContext(context.Background(), request)
+}
+
+// CreateAllocationUnit
+// This API is used to create allocation units.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NUMLIMITERROR = "FailedOperation.NumLimitError"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATERROR = "InternalError.DbOperatError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) CreateAllocationUnitWithContext(ctx context.Context, request *CreateAllocationUnitRequest) (response *CreateAllocationUnitResponse, err error) {
+    if request == nil {
+        request = NewCreateAllocationUnitRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAllocationUnit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAllocationUnitResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteAllocationTagRequest() (request *DeleteAllocationTagRequest) {
     request = &DeleteAllocationTagRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -147,6 +206,61 @@ func (c *Client) DeleteAllocationTagWithContext(ctx context.Context, request *De
     request.SetContext(ctx)
     
     response = NewDeleteAllocationTagResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteAllocationUnitRequest() (request *DeleteAllocationUnitRequest) {
+    request = &DeleteAllocationUnitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "DeleteAllocationUnit")
+    
+    
+    return
+}
+
+func NewDeleteAllocationUnitResponse() (response *DeleteAllocationUnitResponse) {
+    response = &DeleteAllocationUnitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteAllocationUnit
+// Delete a cost allocation unit.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DeleteAllocationUnit(request *DeleteAllocationUnitRequest) (response *DeleteAllocationUnitResponse, err error) {
+    return c.DeleteAllocationUnitWithContext(context.Background(), request)
+}
+
+// DeleteAllocationUnit
+// Delete a cost allocation unit.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  OPERATIONDENIED = "OperationDenied"
+func (c *Client) DeleteAllocationUnitWithContext(ctx context.Context, request *DeleteAllocationUnitRequest) (response *DeleteAllocationUnitResponse, err error) {
+    if request == nil {
+        request = NewDeleteAllocationUnitRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAllocationUnit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAllocationUnitResponse()
     err = c.Send(request, response)
     return
 }
@@ -1575,6 +1689,61 @@ func (c *Client) DescribeVoucherUsageDetailsWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDescribeVoucherUsageDetailsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyAllocationUnitRequest() (request *ModifyAllocationUnitRequest) {
+    request = &ModifyAllocationUnitRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "ModifyAllocationUnit")
+    
+    
+    return
+}
+
+func NewModifyAllocationUnitResponse() (response *ModifyAllocationUnitResponse) {
+    response = &ModifyAllocationUnitResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyAllocationUnit
+// This API is used to modify cost allocation unit information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATERROR = "InternalError.DbOperatError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyAllocationUnit(request *ModifyAllocationUnitRequest) (response *ModifyAllocationUnitResponse, err error) {
+    return c.ModifyAllocationUnitWithContext(context.Background(), request)
+}
+
+// ModifyAllocationUnit
+// This API is used to modify cost allocation unit information.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBOPERATERROR = "InternalError.DbOperatError"
+//  INTERNALERROR_GATEWAYERROR = "InternalError.GatewayError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ModifyAllocationUnitWithContext(ctx context.Context, request *ModifyAllocationUnitRequest) (response *ModifyAllocationUnitResponse, err error) {
+    if request == nil {
+        request = NewModifyAllocationUnitRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyAllocationUnit require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyAllocationUnitResponse()
     err = c.Send(request, response)
     return
 }
