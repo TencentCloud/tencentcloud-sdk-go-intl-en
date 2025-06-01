@@ -87,6 +87,109 @@ type AdjustInfoDetail struct {
 	AdjustAmount *float64 `json:"AdjustAmount,omitnil,omitempty" name:"AdjustAmount"`
 }
 
+type AllocationRationExpression struct {
+	// Cost allocation unit ID that the sharing rule belongs to.
+	NodeId *uint64 `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+
+	// Sharing proportion occupied by allocation unit, pass 0 for allocation by proportion.
+	Ratio *float64 `json:"Ratio,omitnil,omitempty" name:"Ratio"`
+}
+
+type AllocationRuleExpression struct {
+	// RuleKey: cost allocation dimension.
+	// Enumeration value.
+	// ownerUin - user UIN.
+	// Operator UIN.
+	// businessCode - product-level code.
+	// productCode - 2-tier product code.
+	// itemCode - 4-tier product code.
+	// projectId - specifies the project ID.
+	// regionId.
+	// resourceId - specifies the resource ID.
+	// tag - tag key-value pair.
+	// payMode - billing mode.
+	// instanceType - instance type.
+	// actionType - transaction type.
+	RuleKey *string `json:"RuleKey,omitnil,omitempty" name:"RuleKey"`
+
+	// Specifies the dimension rules for cost allocation.
+	// Enumeration value.
+	// in.
+	// not in.
+	Operator *string `json:"Operator,omitnil,omitempty" name:"Operator"`
+
+	// Cost allocation dimension value. for example, when RuleKey is businessCode, ["p_cbs","p_sqlserver"] indicates the cost of products at the "p_cbs","p_sqlserver" level.
+	RuleValue []*string `json:"RuleValue,omitnil,omitempty" name:"RuleValue"`
+
+	// Logical connection for cost allocation, enumeration values are as follows:.
+	// Create and bind a policy query an instance reset the access password of an instance.
+	// Create and bind a policy query an instance reset the access password of an instance.
+	Connectors *string `json:"Connectors,omitnil,omitempty" name:"Connectors"`
+
+	// Nested rule.
+	Children []*AllocationRuleExpression `json:"Children,omitnil,omitempty" name:"Children"`
+}
+
+type AllocationRuleOverview struct {
+	// Sharing rule ID.
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Sharing rule name.
+	RuleName *string `json:"RuleName,omitnil,omitempty" name:"RuleName"`
+
+	// Public area policy type.
+	// Enumeration value.
+	// 1 - custom sharing proportion. 
+	// 2 - proportional allocation. 
+	// 3 - allocation by proportion.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Last update time of the sharing rules.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Overview of cost allocation units.
+	AllocationNode []*AllocationUnit `json:"AllocationNode,omitnil,omitempty" name:"AllocationNode"`
+}
+
+type AllocationRulesSummary struct {
+	// Add new sharing rule name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Specifies the sharing rule policy type. the enumeration values are as follows:.
+	// 1 - custom sharing proportion. 
+	// 2 - proportional allocation.
+	// 3 - allocation by proportion.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Sharing rule expression.
+	RuleDetail *AllocationRuleExpression `json:"RuleDetail,omitnil,omitempty" name:"RuleDetail"`
+
+	// Sharing proportion expression, allocation by proportion not passed.
+	RatioDetail []*AllocationRationExpression `json:"RatioDetail,omitnil,omitempty" name:"RatioDetail"`
+}
+
+type AllocationTree struct {
+	// ID of a cost allocation unit.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Cost allocation unit name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Unique identifier of a cost allocation unit
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Subtree.
+	Children []*AllocationTree `json:"Children,omitnil,omitempty" name:"Children"`
+}
+
+type AllocationUnit struct {
+	// Cost allocation unit ID.
+	NodeId *uint64 `json:"NodeId,omitnil,omitempty" name:"NodeId"`
+
+	// Specifies the name of a cost allocation rule.
+	TreeNodeUniqKeyName *string `json:"TreeNodeUniqKeyName,omitnil,omitempty" name:"TreeNodeUniqKeyName"`
+}
+
 type AnalyseActionTypeDetail struct {
 	// Transaction type codeNote: This field may return null, indicating that no valid values can be obtained.
 	ActionType *string `json:"ActionType,omitnil,omitempty" name:"ActionType"`
@@ -1296,6 +1399,70 @@ type CostDetail struct {
 }
 
 // Predefined struct for user
+type CreateAllocationRuleRequestParams struct {
+	// List of sharing rules.
+	RuleList *AllocationRulesSummary `json:"RuleList,omitnil,omitempty" name:"RuleList"`
+
+	// Month, the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+type CreateAllocationRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of sharing rules.
+	RuleList *AllocationRulesSummary `json:"RuleList,omitnil,omitempty" name:"RuleList"`
+
+	// Month, the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+func (r *CreateAllocationRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAllocationRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleList")
+	delete(f, "Month")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateAllocationRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateAllocationRuleResponseParams struct {
+	// Add new sharing rule ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateAllocationRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateAllocationRuleResponseParams `json:"Response"`
+}
+
+func (r *CreateAllocationRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateAllocationRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateAllocationTagRequestParams struct {
 	// Cost allocation tag key.
 	TagKey []*string `json:"TagKey,omitnil,omitempty" name:"TagKey"`
@@ -1423,6 +1590,77 @@ func (r *CreateAllocationUnitResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+// Predefined struct for user
+type CreateGatherRuleRequestParams struct {
+	// Cost allocation unit ID that the rule belongs to.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Collection rule details.
+	RuleList *GatherRuleSummary `json:"RuleList,omitnil,omitempty" name:"RuleList"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+type CreateGatherRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Cost allocation unit ID that the rule belongs to.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Collection rule details.
+	RuleList *GatherRuleSummary `json:"RuleList,omitnil,omitempty" name:"RuleList"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+func (r *CreateGatherRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateGatherRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "RuleList")
+	delete(f, "Month")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateGatherRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateGatherRuleResponseParams struct {
+	// Collection  rule ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateGatherRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateGatherRuleResponseParams `json:"Response"`
+}
+
+func (r *CreateGatherRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateGatherRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 type Deal struct {
 	// Order ID.
 	OrderId *string `json:"OrderId,omitnil,omitempty" name:"OrderId"`
@@ -1522,6 +1760,67 @@ type Deal struct {
 	// The resource ID corresponding to the order. If the query parameter `Limit` exceeds 200, null will be returned.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ResourceId []*string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+}
+
+// Predefined struct for user
+type DeleteAllocationRuleRequestParams struct {
+	// The deleted sharing rule ID.
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+type DeleteAllocationRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The deleted sharing rule ID.
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+func (r *DeleteAllocationRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAllocationRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleId")
+	delete(f, "Month")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteAllocationRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteAllocationRuleResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteAllocationRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteAllocationRuleResponseParams `json:"Response"`
+}
+
+func (r *DeleteAllocationRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteAllocationRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 // Predefined struct for user
@@ -1640,6 +1939,67 @@ func (r *DeleteAllocationUnitResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteGatherRuleRequestParams struct {
+	// The deleted collection rule ID.
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+type DeleteGatherRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The deleted collection rule ID.
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+func (r *DeleteGatherRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteGatherRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleId")
+	delete(f, "Month")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteGatherRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteGatherRuleResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteGatherRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteGatherRuleResponseParams `json:"Response"`
+}
+
+func (r *DeleteGatherRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteGatherRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeAccountBalanceRequestParams struct {
 
 }
@@ -1726,6 +2086,250 @@ func (r *DescribeAccountBalanceResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeAccountBalanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationRuleDetailRequestParams struct {
+	// The queried sharing rule ID.
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+type DescribeAllocationRuleDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// The queried sharing rule ID.
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+func (r *DescribeAllocationRuleDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationRuleDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleId")
+	delete(f, "Month")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllocationRuleDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationRuleDetailResponseParams struct {
+	// Sharing rule ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Sharing rule ownership UIN.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Sharing rule name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Specifies the public area policy type. the enumeration values are as follows:.
+	// 1 - custom sharing proportion. 
+	// 2 - proportional allocation. 
+	// 3 - allocation by proportion.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Public sharing rule expression.
+	RuleDetail *AllocationRuleExpression `json:"RuleDetail,omitnil,omitempty" name:"RuleDetail"`
+
+	// Sharing proportion expression. returns when Type is 1 or 2.
+	RatioDetail []*AllocationRationExpression `json:"RatioDetail,omitnil,omitempty" name:"RatioDetail"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAllocationRuleDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllocationRuleDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllocationRuleDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationRuleDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationRuleSummaryRequestParams struct {
+	// Specifies the data quantity per fetch. the maximum value is 1000.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Public area policy type, for filtering.
+	// Enumeration values are as follows:. 
+	// 1 - custom sharing proportion. 
+	// 2 - proportional allocation. 
+	// 3 - allocation by proportion.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Sharing rule name or cost allocation unit name, used for fuzzy filter criteria.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+type DescribeAllocationRuleSummaryRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the data quantity per fetch. the maximum value is 1000.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Pagination offset
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+
+	// Public area policy type, for filtering.
+	// Enumeration values are as follows:. 
+	// 1 - custom sharing proportion. 
+	// 2 - proportional allocation. 
+	// 3 - allocation by proportion.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Sharing rule name or cost allocation unit name, used for fuzzy filter criteria.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+}
+
+func (r *DescribeAllocationRuleSummaryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationRuleSummaryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Limit")
+	delete(f, "Offset")
+	delete(f, "Month")
+	delete(f, "Type")
+	delete(f, "Name")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllocationRuleSummaryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationRuleSummaryResponseParams struct {
+	// Sharing rule expression.
+	RuleList []*AllocationRuleOverview `json:"RuleList,omitnil,omitempty" name:"RuleList"`
+
+	// Total number of rules.
+	Total *uint64 `json:"Total,omitnil,omitempty" name:"Total"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAllocationRuleSummaryResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllocationRuleSummaryResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllocationRuleSummaryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationRuleSummaryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationTreeRequestParams struct {
+	// Month, the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+type DescribeAllocationTreeRequest struct {
+	*tchttp.BaseRequest
+	
+	// Month, the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+func (r *DescribeAllocationTreeRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationTreeRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Month")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeAllocationTreeRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeAllocationTreeResponseParams struct {
+	// Cost allocation unit ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Specifies the name of a cost allocation unit.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Unique identifier of a cost allocation unit
+	TreeNodeUniqKey *string `json:"TreeNodeUniqKey,omitnil,omitempty" name:"TreeNodeUniqKey"`
+
+	// Specifies a subtree.
+	Children []*AllocationTree `json:"Children,omitnil,omitempty" name:"Children"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeAllocationTreeResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeAllocationTreeResponseParams `json:"Response"`
+}
+
+func (r *DescribeAllocationTreeResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeAllocationTreeResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4256,6 +4860,79 @@ func (r *DescribeDosageCosDetailByDateResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeGatherRuleDetailRequestParams struct {
+	// Specifies the ID of the queried collection rule.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Month, the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+type DescribeGatherRuleDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Specifies the ID of the queried collection rule.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Month, the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+func (r *DescribeGatherRuleDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGatherRuleDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "Month")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeGatherRuleDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeGatherRuleDetailResponseParams struct {
+	// Specifies the collection rule ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Associated UIN of the collection rule.
+	Uin *string `json:"Uin,omitnil,omitempty" name:"Uin"`
+
+	// Collection rule last update time.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Collection rule details.
+	RuleDetail *AllocationRuleExpression `json:"RuleDetail,omitnil,omitempty" name:"RuleDetail"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeGatherRuleDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeGatherRuleDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeGatherRuleDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeGatherRuleDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeTagListRequestParams struct {
 	// The number of entries returned at a time. The maximum value is `1000`.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
@@ -4710,6 +5387,100 @@ type ExcludedProducts struct {
 	PayMode *string `json:"PayMode,omitnil,omitempty" name:"PayMode"`
 }
 
+type GatherRuleSummary struct {
+	// Cost allocation regular expression.
+	RuleDetail *AllocationRuleExpression `json:"RuleDetail,omitnil,omitempty" name:"RuleDetail"`
+}
+
+// Predefined struct for user
+type ModifyAllocationRuleRequestParams struct {
+	// The edited sharing rule ID.
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Edited sharing rule name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Public sharing policy types, enumeration values are as follows: 1 - custom sharing proportion 2 - proportional allocation 3 - allocation by proportion.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Edited share rules expression.
+	RuleDetail *AllocationRuleExpression `json:"RuleDetail,omitnil,omitempty" name:"RuleDetail"`
+
+	// Edited sharing proportion expression.
+	RatioDetail []*AllocationRationExpression `json:"RatioDetail,omitnil,omitempty" name:"RatioDetail"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+type ModifyAllocationRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// The edited sharing rule ID.
+	RuleId *uint64 `json:"RuleId,omitnil,omitempty" name:"RuleId"`
+
+	// Edited sharing rule name.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Public sharing policy types, enumeration values are as follows: 1 - custom sharing proportion 2 - proportional allocation 3 - allocation by proportion.
+	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Edited share rules expression.
+	RuleDetail *AllocationRuleExpression `json:"RuleDetail,omitnil,omitempty" name:"RuleDetail"`
+
+	// Edited sharing proportion expression.
+	RatioDetail []*AllocationRationExpression `json:"RatioDetail,omitnil,omitempty" name:"RatioDetail"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+func (r *ModifyAllocationRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAllocationRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "RuleId")
+	delete(f, "Name")
+	delete(f, "Type")
+	delete(f, "RuleDetail")
+	delete(f, "RatioDetail")
+	delete(f, "Month")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyAllocationRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyAllocationRuleResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyAllocationRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyAllocationRuleResponseParams `json:"Response"`
+}
+
+func (r *ModifyAllocationRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyAllocationRuleResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
 // Predefined struct for user
 type ModifyAllocationUnitRequestParams struct {
 	// ID of the modified cost allocation unit.
@@ -4796,6 +5567,74 @@ func (r *ModifyAllocationUnitResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyAllocationUnitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyGatherRuleRequestParams struct {
+	// Edit collection rule ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Rule detail of the edited collection rule.
+	RuleDetail *AllocationRuleExpression `json:"RuleDetail,omitnil,omitempty" name:"RuleDetail"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+type ModifyGatherRuleRequest struct {
+	*tchttp.BaseRequest
+	
+	// Edit collection rule ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Rule detail of the edited collection rule.
+	RuleDetail *AllocationRuleExpression `json:"RuleDetail,omitnil,omitempty" name:"RuleDetail"`
+
+	// Month, which is the current month by default if not provided.
+	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
+}
+
+func (r *ModifyGatherRuleRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyGatherRuleRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Id")
+	delete(f, "RuleDetail")
+	delete(f, "Month")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyGatherRuleRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyGatherRuleResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyGatherRuleResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyGatherRuleResponseParams `json:"Response"`
+}
+
+func (r *ModifyGatherRuleResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyGatherRuleResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
