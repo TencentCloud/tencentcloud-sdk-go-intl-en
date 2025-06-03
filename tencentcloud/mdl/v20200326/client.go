@@ -1424,6 +1424,55 @@ func (c *Client) DescribeStreamLiveWatermarksWithContext(ctx context.Context, re
     return
 }
 
+func NewGetAbWatermarkPlayUrlRequest() (request *GetAbWatermarkPlayUrlRequest) {
+    request = &GetAbWatermarkPlayUrlRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mdl", APIVersion, "GetAbWatermarkPlayUrl")
+    
+    
+    return
+}
+
+func NewGetAbWatermarkPlayUrlResponse() (response *GetAbWatermarkPlayUrlResponse) {
+    response = &GetAbWatermarkPlayUrlResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetAbWatermarkPlayUrl
+// Get AB watermark play url.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) GetAbWatermarkPlayUrl(request *GetAbWatermarkPlayUrlRequest) (response *GetAbWatermarkPlayUrlResponse, err error) {
+    return c.GetAbWatermarkPlayUrlWithContext(context.Background(), request)
+}
+
+// GetAbWatermarkPlayUrl
+// Get AB watermark play url.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) GetAbWatermarkPlayUrlWithContext(ctx context.Context, request *GetAbWatermarkPlayUrlRequest) (response *GetAbWatermarkPlayUrlResponse, err error) {
+    if request == nil {
+        request = NewGetAbWatermarkPlayUrlRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetAbWatermarkPlayUrl require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetAbWatermarkPlayUrlResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewModifyStreamLiveChannelRequest() (request *ModifyStreamLiveChannelRequest) {
     request = &ModifyStreamLiveChannelRequest{
         BaseRequest: &tchttp.BaseRequest{},
