@@ -2408,7 +2408,7 @@ type FrameCaptureTemplate struct {
 
 // Predefined struct for user
 type GetAbWatermarkPlayUrlRequestParams struct {
-	// Client UUID, 32-bit unsigned integer.
+	// Client UUID, 32-bit unsigned integer, [0, 4294967295].
 	Uuid *uint64 `json:"Uuid,omitnil,omitempty" name:"Uuid"`
 
 	// Channel ID of Stream Package.
@@ -2421,7 +2421,7 @@ type GetAbWatermarkPlayUrlRequestParams struct {
 type GetAbWatermarkPlayUrlRequest struct {
 	*tchttp.BaseRequest
 	
-	// Client UUID, 32-bit unsigned integer.
+	// Client UUID, 32-bit unsigned integer, [0, 4294967295].
 	Uuid *uint64 `json:"Uuid,omitnil,omitempty" name:"Uuid"`
 
 	// Channel ID of Stream Package.
