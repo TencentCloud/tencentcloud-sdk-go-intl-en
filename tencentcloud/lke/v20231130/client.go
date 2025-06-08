@@ -2504,7 +2504,7 @@ func NewSaveDocResponse() (response *SaveDocResponse) {
 }
 
 // SaveDoc
-// This API is used to save a knowledge base document Q&As. 
+// This API is used to save a knowledge base document Q&As.
 //
 // Three steps to store a file in the knowledge library of the application: 
 //
@@ -2523,7 +2523,7 @@ func (c *Client) SaveDoc(request *SaveDocRequest) (response *SaveDocResponse, er
 }
 
 // SaveDoc
-// This API is used to save a knowledge base document Q&As. 
+// This API is used to save a knowledge base document Q&As.
 //
 // Three steps to store a file in the knowledge library of the application: 
 //
