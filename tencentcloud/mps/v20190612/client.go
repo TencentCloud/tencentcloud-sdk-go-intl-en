@@ -45,6 +45,71 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewBatchProcessMediaRequest() (request *BatchProcessMediaRequest) {
+    request = &BatchProcessMediaRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "BatchProcessMedia")
+    
+    
+    return
+}
+
+func NewBatchProcessMediaResponse() (response *BatchProcessMediaResponse) {
+    response = &BatchProcessMediaResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// BatchProcessMedia
+// This API is used to initiate batch processing tasks for URL video links, with features including:
+//
+// Smart subtitle (full speech, speech hotword, and speech translation)
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) BatchProcessMedia(request *BatchProcessMediaRequest) (response *BatchProcessMediaResponse, err error) {
+    return c.BatchProcessMediaWithContext(context.Background(), request)
+}
+
+// BatchProcessMedia
+// This API is used to initiate batch processing tasks for URL video links, with features including:
+//
+// Smart subtitle (full speech, speech hotword, and speech translation)
+//
+// error code that may be returned:
+//  FAILEDOPERATION_GENERATERESOURCE = "FailedOperation.GenerateResource"
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE_SESSIONCONTEXTTOOLONG = "InvalidParameterValue.SessionContextTooLong"
+//  INVALIDPARAMETERVALUE_SESSIONID = "InvalidParameterValue.SessionId"
+//  INVALIDPARAMETERVALUE_SESSIONIDTOOLONG = "InvalidParameterValue.SessionIdTooLong"
+func (c *Client) BatchProcessMediaWithContext(ctx context.Context, request *BatchProcessMediaRequest) (response *BatchProcessMediaResponse, err error) {
+    if request == nil {
+        request = NewBatchProcessMediaRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("BatchProcessMedia require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewBatchProcessMediaResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateAIAnalysisTemplateRequest() (request *CreateAIAnalysisTemplateRequest) {
     request = &CreateAIAnalysisTemplateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2687,6 +2752,63 @@ func (c *Client) DescribeAsrHotwordsListWithContext(ctx context.Context, request
     return
 }
 
+func NewDescribeBatchTaskDetailRequest() (request *DescribeBatchTaskDetailRequest) {
+    request = &DescribeBatchTaskDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeBatchTaskDetail")
+    
+    
+    return
+}
+
+func NewDescribeBatchTaskDetailResponse() (response *DescribeBatchTaskDetailResponse) {
+    response = &DescribeBatchTaskDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeBatchTaskDetail
+// This API is used to query the details of the task execution status and results by task ID (tasks submitted within the last 7 days can be queried).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeBatchTaskDetail(request *DescribeBatchTaskDetailRequest) (response *DescribeBatchTaskDetailResponse, err error) {
+    return c.DescribeBatchTaskDetailWithContext(context.Background(), request)
+}
+
+// DescribeBatchTaskDetail
+// This API is used to query the details of the task execution status and results by task ID (tasks submitted within the last 7 days can be queried).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeBatchTaskDetailWithContext(ctx context.Context, request *DescribeBatchTaskDetailRequest) (response *DescribeBatchTaskDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeBatchTaskDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeBatchTaskDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeBatchTaskDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeContentReviewTemplatesRequest() (request *DescribeContentReviewTemplatesRequest) {
     request = &DescribeContentReviewTemplatesRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2797,6 +2919,63 @@ func (c *Client) DescribeImageSpriteTemplatesWithContext(ctx context.Context, re
     request.SetContext(ctx)
     
     response = NewDescribeImageSpriteTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeImageTaskDetailRequest() (request *DescribeImageTaskDetailRequest) {
+    request = &DescribeImageTaskDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mps", APIVersion, "DescribeImageTaskDetail")
+    
+    
+    return
+}
+
+func NewDescribeImageTaskDetailResponse() (response *DescribeImageTaskDetailResponse) {
+    response = &DescribeImageTaskDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeImageTaskDetail
+// This API is used to query the details of the task execution status and results by task ID (tasks submitted within the last 7 days can be queried).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeImageTaskDetail(request *DescribeImageTaskDetailRequest) (response *DescribeImageTaskDetailResponse, err error) {
+    return c.DescribeImageTaskDetailWithContext(context.Background(), request)
+}
+
+// DescribeImageTaskDetail
+// This API is used to query the details of the task execution status and results by task ID (tasks submitted within the last 7 days can be queried).
+//
+// error code that may be returned:
+//  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCENOTFOUND = "ResourceNotFound"
+//  UNAUTHORIZEDOPERATION = "UnauthorizedOperation"
+func (c *Client) DescribeImageTaskDetailWithContext(ctx context.Context, request *DescribeImageTaskDetailRequest) (response *DescribeImageTaskDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeImageTaskDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeImageTaskDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeImageTaskDetailResponse()
     err = c.Send(request, response)
     return
 }
@@ -5466,11 +5645,13 @@ func NewProcessImageResponse() (response *ProcessImageResponse) {
 }
 
 // ProcessImage
-// This API is used to initiate image processing. Its features include:
+// This API is used to initiate image processing, with features including:
 //
-// 1. Format conversion;
+// 1. Format conversion.
 //
-// 2. Image enhancement;
+// 2. Image enhancement.
+//
+// 3. Image erasure.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"
@@ -5484,11 +5665,13 @@ func (c *Client) ProcessImage(request *ProcessImageRequest) (response *ProcessIm
 }
 
 // ProcessImage
-// This API is used to initiate image processing. Its features include:
+// This API is used to initiate image processing, with features including:
 //
-// 1. Format conversion;
+// 1. Format conversion.
 //
-// 2. Image enhancement;
+// 2. Image enhancement.
+//
+// 3. Image erasure.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_INVALIDMPSUSER = "FailedOperation.InvalidMpsUser"

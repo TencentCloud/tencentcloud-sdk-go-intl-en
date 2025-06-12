@@ -1215,7 +1215,7 @@ type DescribeCustomerBillDetailRequestParams struct {
 	// Sub-account UIN
 	CustomerUin *uint64 `json:"CustomerUin,omitnil,omitempty" name:"CustomerUin"`
 
-	// Inquiry month, in the format of YYYY-MM, such as 2023-01
+	// Inquiry month, in the format of YYYY-MM, such as 2023-01.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
 	// Page parameter: number of entries per page. Value range: [1, 200]
@@ -1270,7 +1270,7 @@ type DescribeCustomerBillDetailRequest struct {
 	// Sub-account UIN
 	CustomerUin *uint64 `json:"CustomerUin,omitnil,omitempty" name:"CustomerUin"`
 
-	// Inquiry month, in the format of YYYY-MM, such as 2023-01
+	// Inquiry month, in the format of YYYY-MM, such as 2023-01.
 	Month *string `json:"Month,omitnil,omitempty" name:"Month"`
 
 	// Page parameter: number of entries per page. Value range: [1, 200]

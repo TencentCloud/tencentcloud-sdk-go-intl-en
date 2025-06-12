@@ -923,7 +923,7 @@ func NewDescribeCustomerBillDetailResponse() (response *DescribeCustomerBillDeta
 // DescribeCustomerBillDetail
 // This API is used to query the customer bill details by resellers.
 //
-// Callable roles: Distributor, Second-level reseller, Reseller
+// Callable roles: Distributor, Second-level reseller, Reseller.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
@@ -937,7 +937,7 @@ func (c *Client) DescribeCustomerBillDetail(request *DescribeCustomerBillDetailR
 // DescribeCustomerBillDetail
 // This API is used to query the customer bill details by resellers.
 //
-// Callable roles: Distributor, Second-level reseller, Reseller
+// Callable roles: Distributor, Second-level reseller, Reseller.
 //
 // error code that may be returned:
 //  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"

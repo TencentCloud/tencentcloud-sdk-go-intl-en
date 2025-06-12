@@ -2023,8 +2023,8 @@ type AsrHotwordsSet struct {
 	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
 
 	// Current hotword lexicon status. The value indicates the number of smart subtitle templates bound to this hotword lexicon.
-	// If the Status value is 0, it indicates that the hotword lexicon is not referenced by any smart subtitle template and that it can be deleted.
-	// If the Status value is not 0, it indicates that the hotword lexicon cannot be deleted.
+	// If the value of Status is 0, it indicates that the hotword lexicon is not referenced by any smart subtitle template and that it can be deleted.
+	// If the value of Status is not 0, it indicates that the hotword lexicon cannot be deleted.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
@@ -2314,6 +2314,153 @@ type AwsSQS struct {
 	// The key required to read from/write to the SQS queue.
 	// Note: This field may return·null, indicating that no valid values can be obtained.
 	S3SecretKey *string `json:"S3SecretKey,omitnil,omitempty" name:"S3SecretKey"`
+}
+
+// Predefined struct for user
+type BatchProcessMediaRequestParams struct {
+	// Path of the input file.
+	InputInfo []*MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// Storage bucket for the output file. If it is left blank, the storage location in InputInfo will be inherited.
+	// Note: When InputInfo.Type is URL, this parameter is required.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+
+	// Storage directory for the output file. It should start and end with a slash (/), such as `/movie/201907/`.
+	// If left blank, it indicates that the directory is the same as the one where the file is located in InputInfo.
+	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
+
+	// Smart subtitle.
+	SmartSubtitlesTask *SmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
+
+	// Event notification information of the task. If left blank, it indicates that no event notification will be obtained.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
+
+	// Priority of the task flow. The higher the value, the higher the priority. The value range is from -10 to 10. If left blank, the default value is 0.
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+
+	// Source context, which is used to pass through the user request information. The callback for task flow status changes will return the value of this field. The maximum length is 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// Resource ID. Ensure the corresponding resource is in the enabled state. The default value is an account's primary resource ID.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Whether to skip metadata acquisition. Valid values:
+	// 0: do not skip.
+	// 1: skip.
+	// Default value: 0		
+	SkipMateData *int64 `json:"SkipMateData,omitnil,omitempty" name:"SkipMateData"`
+}
+
+type BatchProcessMediaRequest struct {
+	*tchttp.BaseRequest
+	
+	// Path of the input file.
+	InputInfo []*MediaInputInfo `json:"InputInfo,omitnil,omitempty" name:"InputInfo"`
+
+	// Storage bucket for the output file. If it is left blank, the storage location in InputInfo will be inherited.
+	// Note: When InputInfo.Type is URL, this parameter is required.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+
+	// Storage directory for the output file. It should start and end with a slash (/), such as `/movie/201907/`.
+	// If left blank, it indicates that the directory is the same as the one where the file is located in InputInfo.
+	OutputDir *string `json:"OutputDir,omitnil,omitempty" name:"OutputDir"`
+
+	// Smart subtitle.
+	SmartSubtitlesTask *SmartSubtitlesTaskInput `json:"SmartSubtitlesTask,omitnil,omitempty" name:"SmartSubtitlesTask"`
+
+	// Event notification information of the task. If left blank, it indicates that no event notification will be obtained.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
+
+	// Priority of the task flow. The higher the value, the higher the priority. The value range is from -10 to 10. If left blank, the default value is 0.
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+
+	// Source context, which is used to pass through the user request information. The callback for task flow status changes will return the value of this field. The maximum length is 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// Resource ID. Ensure the corresponding resource is in the enabled state. The default value is an account's primary resource ID.
+	ResourceId *string `json:"ResourceId,omitnil,omitempty" name:"ResourceId"`
+
+	// Whether to skip metadata acquisition. Valid values:
+	// 0: do not skip.
+	// 1: skip.
+	// Default value: 0		
+	SkipMateData *int64 `json:"SkipMateData,omitnil,omitempty" name:"SkipMateData"`
+}
+
+func (r *BatchProcessMediaRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchProcessMediaRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "InputInfo")
+	delete(f, "OutputStorage")
+	delete(f, "OutputDir")
+	delete(f, "SmartSubtitlesTask")
+	delete(f, "TaskNotifyConfig")
+	delete(f, "TasksPriority")
+	delete(f, "SessionContext")
+	delete(f, "ResourceId")
+	delete(f, "SkipMateData")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "BatchProcessMediaRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type BatchProcessMediaResponseParams struct {
+	// Task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type BatchProcessMediaResponse struct {
+	*tchttp.BaseResponse
+	Response *BatchProcessMediaResponseParams `json:"Response"`
+}
+
+func (r *BatchProcessMediaResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *BatchProcessMediaResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type BatchSmartSubtitlesResult struct {
+	// Input information for smart subtitle tasks.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Input *SmartSubtitleTaskResultInput `json:"Input,omitnil,omitempty" name:"Input"`
+
+	// Output information for smart subtitle tasks.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Outputs []*SmartSubtitleTaskBatchOutput `json:"Outputs,omitnil,omitempty" name:"Outputs"`
+}
+
+type BatchSubTaskResult struct {
+	// Input information for a batch task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	InputInfos []*MediaInputInfo `json:"InputInfos,omitnil,omitempty" name:"InputInfos"`
+
+	// Metadata of the original video.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Metadatas []*MediaMetaData `json:"Metadatas,omitnil,omitempty" name:"Metadatas"`
+
+	// Execution result of the smart subtitle task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SmartSubtitlesTaskResult *BatchSmartSubtitlesResult `json:"SmartSubtitlesTaskResult,omitnil,omitempty" name:"SmartSubtitlesTaskResult"`
 }
 
 type ClassificationConfigureInfo struct {
@@ -4275,7 +4422,7 @@ type CreateSmartSubtitleTemplateRequestParams struct {
 	// vi: Vietnamese
 	// ms: Malay
 	// id: Indonesian
-	// fli: Filipino
+	// fil: Filipino
 	// th: Thai
 	// pt: Portuguese
 	// tr: Turkish
@@ -4352,7 +4499,7 @@ type CreateSmartSubtitleTemplateRequest struct {
 	// vi: Vietnamese
 	// ms: Malay
 	// id: Indonesian
-	// fli: Filipino
+	// fil: Filipino
 	// th: Thai
 	// pt: Portuguese
 	// tr: Turkish
@@ -4611,7 +4758,7 @@ type CreateTranscodeTemplateRequestParams struct {
 	// Audio/Video enhancement configuration.
 	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
 
-
+	// Additional parameter, which is a serialized JSON string.
 	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
@@ -4651,6 +4798,7 @@ type CreateTranscodeTemplateRequest struct {
 	// Audio/Video enhancement configuration.
 	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
 
+	// Additional parameter, which is a serialized JSON string.
 	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 }
 
@@ -6682,6 +6830,102 @@ func (r *DescribeAsrHotwordsResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeBatchTaskDetailRequestParams struct {
+	// Video processing task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DescribeBatchTaskDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Video processing task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeBatchTaskDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBatchTaskDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBatchTaskDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeBatchTaskDetailResponseParams struct {
+	// Task type. Currently, the valid values include:
+	// <Li>BatchTask: batch processing task for video workflows.</li>.
+	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// Task status. Valid values:
+	// <Li>WAITING: waiting.</li>
+	// <Li>PROCESSING: processing.</li>
+	// <li>FINISH: completed.</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Task creation time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
+
+	// Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
+
+	// Media processing task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+
+	// Video processing task information. This field has a value only when TaskType is BatchTask.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BatchTaskResult *BatchSubTaskResult `json:"BatchTaskResult,omitnil,omitempty" name:"BatchTaskResult"`
+
+	// Event notification information of the task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TaskNotifyConfig *TaskNotifyConfig `json:"TaskNotifyConfig,omitnil,omitempty" name:"TaskNotifyConfig"`
+
+	// Priority of the task flow, with a value range of [-10, 10].
+	TasksPriority *int64 `json:"TasksPriority,omitnil,omitempty" name:"TasksPriority"`
+
+	// An identifier for deduplication. If there has been a request with the same identifier within the past seven days, an error will be returned for the current request. The maximum length is 50 characters. Leaving it blank or using a null string indicates no deduplication is required.
+	SessionId *string `json:"SessionId,omitnil,omitempty" name:"SessionId"`
+
+	// Source context, which is used to pass through user request information. The callback for task flow status changes will return the value of this field. The maximum length is 1,000 characters.
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// Additional information field, only used in specific scenarios.
+	ExtInfo *string `json:"ExtInfo,omitnil,omitempty" name:"ExtInfo"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeBatchTaskDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeBatchTaskDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeBatchTaskDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeBatchTaskDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeContentReviewTemplatesRequestParams struct {
 	// The IDs of the content moderation templates to query. Array length limit: 50.
 	Definitions []*int64 `json:"Definitions,omitnil,omitempty" name:"Definitions"`
@@ -6862,6 +7106,85 @@ func (r *DescribeImageSpriteTemplatesResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *DescribeImageSpriteTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageTaskDetailRequestParams struct {
+	// Image processing task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+type DescribeImageTaskDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Image processing task ID.
+	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
+}
+
+func (r *DescribeImageTaskDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageTaskDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "TaskId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeImageTaskDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeImageTaskDetailResponseParams struct {
+	// Task type. Currently, the valid values include:
+	// <Li>WorkflowTask: workflow processing task.</li>
+	// 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TaskType *string `json:"TaskType,omitnil,omitempty" name:"TaskType"`
+
+	// Task status. Valid values:
+	// <Li>WAITING: waiting.</li>
+	// <Li>PROCESSING: processing.</li>
+	// <li>FINISH: completed.</li>
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Execution status and results of the image processing task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ImageProcessTaskResultSet []*ImageProcessTaskResult `json:"ImageProcessTaskResultSet,omitnil,omitempty" name:"ImageProcessTaskResultSet"`
+
+	// Task creation time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeImageTaskDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeImageTaskDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeImageTaskDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeImageTaskDetailResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -9023,8 +9346,8 @@ type HighlightSegmentItem struct {
 
 type ImageAreaBoxInfo struct {
 	// Type of the box selection area in the image. Valid values:
-	// <li>logo: icon</li>
-	// <li>text: text</li>
+	// <li>logo: icon.</li>
+	// <li>Text: text.</li>
 	// Default value: logo.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
@@ -9034,8 +9357,26 @@ type ImageAreaBoxInfo struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	AreaCoordSet []*int64 `json:"AreaCoordSet,omitnil,omitempty" name:"AreaCoordSet"`
 
-
+	// Coordinates of the box selection area in the image. Format: [x1, y1, x2, y2], which indicates the coordinates of the top left corner and the bottom right corner. This parameter takes effect when AreaCoordSet is not specified.
+	//  - [0.1, 0.1, 0.3, 0.3]: Indicates the ratio (values are less than 1).
+	//  -[50, 50, 350, 280]: Indicates the pixel (values are greater than or equal to 1).
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	BoundingBox []*float64 `json:"BoundingBox,omitnil,omitempty" name:"BoundingBox"`
+}
+
+type ImageDenoiseConfig struct {
+	// Capability configuration enabling status. Valid values:
+	// <li>ON: enabled.</li>
+	// <li>OFF: disabled.</li>
+	// Default value: ON.
+	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
+
+	// Type, with valid values including:
+	// <li>weak</li>
+	// <li>strong</li>
+	// Default value: weak.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type ImageEncodeConfig struct {
@@ -9052,6 +9393,14 @@ type ImageEnhanceConfig struct {
 	// Super-resolution configuration.
 	SuperResolution *SuperResolutionConfig `json:"SuperResolution,omitnil,omitempty" name:"SuperResolution"`
 
+	// Denoising configuration.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Denoise *ImageDenoiseConfig `json:"Denoise,omitnil,omitempty" name:"Denoise"`
+
+	// Comprehensive enhancement configuration.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	ImageQualityEnhance *ImageQualityEnhanceConfig `json:"ImageQualityEnhance,omitnil,omitempty" name:"ImageQualityEnhance"`
+
 	// Color enhancement configuration.
 	ColorEnhance *ColorEnhanceConfig `json:"ColorEnhance,omitnil,omitempty" name:"ColorEnhance"`
 
@@ -9060,6 +9409,10 @@ type ImageEnhanceConfig struct {
 
 	// Face enhancement configuration.
 	FaceEnhance *FaceEnhanceConfig `json:"FaceEnhance,omitnil,omitempty" name:"FaceEnhance"`
+
+	// Low-light enhancement configuration.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	LowLightEnhance *LowLightEnhanceConfig `json:"LowLightEnhance,omitnil,omitempty" name:"LowLightEnhance"`
 }
 
 type ImageEraseConfig struct {
@@ -9076,11 +9429,39 @@ type ImageEraseLogoConfig struct {
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Switch *string `json:"Switch,omitnil,omitempty" name:"Switch"`
 
-	// Multiple box selection areas to be erased. Note: The value array of this parameter can contain up to 2 values.
+	// Multiple box selection areas that need to be erased, with a maximum of 16 areas available.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	// 
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	ImageAreaBoxes []*ImageAreaBoxInfo `json:"ImageAreaBoxes,omitnil,omitempty" name:"ImageAreaBoxes"`
+}
+
+type ImageProcessTaskOutput struct {
+	// Path of the output file.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
+
+	// Storage location of the output file.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
+}
+
+type ImageProcessTaskResult struct {
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error message.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Transcoding task output.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Output *ImageProcessTaskOutput `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Transcoding progress, with a value range of [0-100].
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 }
 
 type ImageQualityEnhanceConfig struct {
@@ -11133,8 +11514,8 @@ func (r *ModifyAnimatedGraphicsTemplateResponse) FromJsonString(s string) error 
 type ModifyAsrHotwordsRequestParams struct {
 	// Hotword lexicon ID. 
 	//  
-	// Either Name or Content should be specified if the hotword lexicon is a text-based hotword lexicon.
-	// One of Name, FileContent, and FileName should be specified if the hotword lexicon is a file-based hotword lexicon.
+	// Either Name or Content should be specified if the hotword lexicon is a temporary hotword lexicon.
+	// Either Name, FileContent, or FileName should be specified if the hotword lexicon is a file-based hotword lexicon.
 	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
 
 	// Hotword lexicon name.
@@ -11157,8 +11538,8 @@ type ModifyAsrHotwordsRequest struct {
 	
 	// Hotword lexicon ID. 
 	//  
-	// Either Name or Content should be specified if the hotword lexicon is a text-based hotword lexicon.
-	// One of Name, FileContent, and FileName should be specified if the hotword lexicon is a file-based hotword lexicon.
+	// Either Name or Content should be specified if the hotword lexicon is a temporary hotword lexicon.
+	// Either Name, FileContent, or FileName should be specified if the hotword lexicon is a file-based hotword lexicon.
 	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
 
 	// Hotword lexicon name.
@@ -12018,7 +12399,7 @@ type ModifySmartSubtitleTemplateRequestParams struct {
 	// vi: Vietnamese
 	// ms: Malay
 	// id: Indonesian
-	// fli: Filipino
+	// fil: Filipino
 	// th: Thai
 	// pt: Portuguese
 	// tr: Turkish
@@ -12098,7 +12479,7 @@ type ModifySmartSubtitleTemplateRequest struct {
 	// vi: Vietnamese
 	// ms: Malay
 	// id: Indonesian
-	// fli: Filipino
+	// fil: Filipino
 	// th: Thai
 	// pt: Portuguese
 	// tr: Turkish
@@ -13912,9 +14293,10 @@ type RawImageWatermarkInput struct {
 
 type RawSmartSubtitleParameter struct {
 	// Smart subtitle language type.
-	// 0: source language1: target language
+	// 0: source language
+	// 1: target language
 	// 2: source language + target language
-	// The value can only be 0 when TranslateSwitch is set to OFF.The value can only be 1 or 2 when TranslateSwitch is set to ON.
+	// The value can only be 0 when TranslateSwitch is set to OFF. The value can only be 1 or 2 when TranslateSwitch is set to ON.
 	SubtitleType *int64 `json:"SubtitleType,omitnil,omitempty" name:"SubtitleType"`
 
 	// Source language of the video with smart subtitles.
@@ -13929,7 +14311,7 @@ type RawSmartSubtitleParameter struct {
 	// vi: Vietnamese
 	// ms: Malay
 	// id: Indonesian
-	// fli: Filipino
+	// fil: Filipino
 	// th: Thai
 	// pt: Portuguese
 	// tr: Turkish
@@ -14008,6 +14390,14 @@ type RawTranscodeParameter struct {
 
 	// TESHD transcoding parameter.
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
+
+	// Additional parameter, which is a serialized JSON string.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
+
+	// Audio/Video enhancement configuration.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	EnhanceConfig *EnhanceConfig `json:"EnhanceConfig,omitnil,omitempty" name:"EnhanceConfig"`
 }
 
 type RawWatermarkParameter struct {
@@ -14645,6 +15035,28 @@ type SmartSubtitleTaskAsrFullTextSegmentItem struct {
 	// 
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	Wordlist []*WordResult `json:"Wordlist,omitnil,omitempty" name:"Wordlist"`
+}
+
+type SmartSubtitleTaskBatchOutput struct {
+	// Task progress.
+	Progress *uint64 `json:"Progress,omitnil,omitempty" name:"Progress"`
+
+	// Task status, including PROCESSING, SUCCESS, and FAIL.
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Error code. An empty string indicates that the task is successful, and other values indicate that the task has failed. For specific values, see [Error Codes] (https://intl.cloud.tencent.com/document/product/862/50369?from_cn_redirect=1#.E8.A7.86.E9.A2.91.E5.A4.84.E7.90.86.E7.B1.BB.E9.94.99.E8.AF.AF.E7.A0.81).
+	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
+
+	// Error message.
+	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
+
+	// Translation task output information.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	TransTextTask *SmartSubtitleTaskTransTextResultOutput `json:"TransTextTask,omitnil,omitempty" name:"TransTextTask"`
+
+	// Output information on the full speech recognition task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	AsrFullTextTask *SmartSubtitleTaskAsrFullTextResultOutput `json:"AsrFullTextTask,omitnil,omitempty" name:"AsrFullTextTask"`
 }
 
 type SmartSubtitleTaskResultInput struct {
