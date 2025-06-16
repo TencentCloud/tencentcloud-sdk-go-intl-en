@@ -45,6 +45,184 @@ func NewClient(credential common.CredentialIface, region string, clientProfile *
 }
 
 
+func NewCheckAttributeLabelExistRequest() (request *CheckAttributeLabelExistRequest) {
+    request = &CheckAttributeLabelExistRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "CheckAttributeLabelExist")
+    
+    
+    return
+}
+
+func NewCheckAttributeLabelExistResponse() (response *CheckAttributeLabelExistResponse) {
+    response = &CheckAttributeLabelExistResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CheckAttributeLabelExist
+// This API is used to check if the label name under an attribute exist.
+func (c *Client) CheckAttributeLabelExist(request *CheckAttributeLabelExistRequest) (response *CheckAttributeLabelExistResponse, err error) {
+    return c.CheckAttributeLabelExistWithContext(context.Background(), request)
+}
+
+// CheckAttributeLabelExist
+// This API is used to check if the label name under an attribute exist.
+func (c *Client) CheckAttributeLabelExistWithContext(ctx context.Context, request *CheckAttributeLabelExistRequest) (response *CheckAttributeLabelExistResponse, err error) {
+    if request == nil {
+        request = NewCheckAttributeLabelExistRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckAttributeLabelExist require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckAttributeLabelExistResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCheckAttributeLabelReferRequest() (request *CheckAttributeLabelReferRequest) {
+    request = &CheckAttributeLabelReferRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "CheckAttributeLabelRefer")
+    
+    
+    return
+}
+
+func NewCheckAttributeLabelReferResponse() (response *CheckAttributeLabelReferResponse) {
+    response = &CheckAttributeLabelReferResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CheckAttributeLabelRefer
+// This API is used to check attribute label references.
+func (c *Client) CheckAttributeLabelRefer(request *CheckAttributeLabelReferRequest) (response *CheckAttributeLabelReferResponse, err error) {
+    return c.CheckAttributeLabelReferWithContext(context.Background(), request)
+}
+
+// CheckAttributeLabelRefer
+// This API is used to check attribute label references.
+func (c *Client) CheckAttributeLabelReferWithContext(ctx context.Context, request *CheckAttributeLabelReferRequest) (response *CheckAttributeLabelReferResponse, err error) {
+    if request == nil {
+        request = NewCheckAttributeLabelReferRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CheckAttributeLabelRefer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCheckAttributeLabelReferResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAppRequest() (request *CreateAppRequest) {
+    request = &CreateAppRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "CreateApp")
+    
+    
+    return
+}
+
+func NewCreateAppResponse() (response *CreateAppResponse) {
+    response = &CreateAppResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateApp
+// This API is used to create knowledge engine applications.
+func (c *Client) CreateApp(request *CreateAppRequest) (response *CreateAppResponse, err error) {
+    return c.CreateAppWithContext(context.Background(), request)
+}
+
+// CreateApp
+// This API is used to create knowledge engine applications.
+func (c *Client) CreateAppWithContext(ctx context.Context, request *CreateAppRequest) (response *CreateAppResponse, err error) {
+    if request == nil {
+        request = NewCreateAppRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateApp require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAppResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateAttributeLabelRequest() (request *CreateAttributeLabelRequest) {
+    request = &CreateAttributeLabelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "CreateAttributeLabel")
+    
+    
+    return
+}
+
+func NewCreateAttributeLabelResponse() (response *CreateAttributeLabelResponse) {
+    response = &CreateAttributeLabelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateAttributeLabel
+// This API is used to create attributes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateAttributeLabel(request *CreateAttributeLabelRequest) (response *CreateAttributeLabelResponse, err error) {
+    return c.CreateAttributeLabelWithContext(context.Background(), request)
+}
+
+// CreateAttributeLabel
+// This API is used to create attributes.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateAttributeLabelWithContext(ctx context.Context, request *CreateAttributeLabelRequest) (response *CreateAttributeLabelResponse, err error) {
+    if request == nil {
+        request = NewCreateAttributeLabelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateAttributeLabel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateAttributeLabelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateCorpRequest() (request *CreateCorpRequest) {
     request = &CreateCorpRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -66,12 +244,18 @@ func NewCreateCorpResponse() (response *CreateCorpResponse) {
 
 // CreateCorp
 // This API is used to create enterprises.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) CreateCorp(request *CreateCorpRequest) (response *CreateCorpResponse, err error) {
     return c.CreateCorpWithContext(context.Background(), request)
 }
 
 // CreateCorp
 // This API is used to create enterprises.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
 func (c *Client) CreateCorpWithContext(ctx context.Context, request *CreateCorpRequest) (response *CreateCorpResponse, err error) {
     if request == nil {
         request = NewCreateCorpRequest()
@@ -84,6 +268,153 @@ func (c *Client) CreateCorpWithContext(ctx context.Context, request *CreateCorpR
     request.SetContext(ctx)
     
     response = NewCreateCorpResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateDocCateRequest() (request *CreateDocCateRequest) {
+    request = &CreateDocCateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "CreateDocCate")
+    
+    
+    return
+}
+
+func NewCreateDocCateResponse() (response *CreateDocCateResponse) {
+    response = &CreateDocCateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateDocCate
+// This API is used to create doc categories.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateDocCate(request *CreateDocCateRequest) (response *CreateDocCateResponse, err error) {
+    return c.CreateDocCateWithContext(context.Background(), request)
+}
+
+// CreateDocCate
+// This API is used to create doc categories.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateDocCateWithContext(ctx context.Context, request *CreateDocCateRequest) (response *CreateDocCateResponse, err error) {
+    if request == nil {
+        request = NewCreateDocCateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateDocCate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateDocCateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateQARequest() (request *CreateQARequest) {
+    request = &CreateQARequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "CreateQA")
+    
+    
+    return
+}
+
+func NewCreateQAResponse() (response *CreateQAResponse) {
+    response = &CreateQAResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateQA
+// This API is used to enter Q&As.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateQA(request *CreateQARequest) (response *CreateQAResponse, err error) {
+    return c.CreateQAWithContext(context.Background(), request)
+}
+
+// CreateQA
+// This API is used to enter Q&As.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateQAWithContext(ctx context.Context, request *CreateQARequest) (response *CreateQAResponse, err error) {
+    if request == nil {
+        request = NewCreateQARequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateQA require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateQAResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateQACateRequest() (request *CreateQACateRequest) {
+    request = &CreateQACateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "CreateQACate")
+    
+    
+    return
+}
+
+func NewCreateQACateResponse() (response *CreateQACateResponse) {
+    response = &CreateQACateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateQACate
+// This API is used to create Q&A categories.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateQACate(request *CreateQACateRequest) (response *CreateQACateResponse, err error) {
+    return c.CreateQACateWithContext(context.Background(), request)
+}
+
+// CreateQACate
+// This API is used to create Q&A categories.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) CreateQACateWithContext(ctx context.Context, request *CreateQACateRequest) (response *CreateQACateResponse, err error) {
+    if request == nil {
+        request = NewCreateQACateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateQACate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateQACateResponse()
     err = c.Send(request, response)
     return
 }
@@ -161,6 +492,75 @@ func (c *Client) CreateReconstructDocumentFlowWithContext(ctx context.Context, r
     request.SetContext(ctx)
     
     response = NewCreateReconstructDocumentFlowResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewCreateRejectedQuestionRequest() (request *CreateRejectedQuestionRequest) {
+    request = &CreateRejectedQuestionRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "CreateRejectedQuestion")
+    
+    
+    return
+}
+
+func NewCreateRejectedQuestionResponse() (response *CreateRejectedQuestionResponse) {
+    response = &CreateRejectedQuestionResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateRejectedQuestion
+// This API is used to create rejected questions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_FILEDECODEFAILED = "FailedOperation.FileDecodeFailed"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNKNOWFILETYPEERROR = "FailedOperation.UnKnowFileTypeError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) CreateRejectedQuestion(request *CreateRejectedQuestionRequest) (response *CreateRejectedQuestionResponse, err error) {
+    return c.CreateRejectedQuestionWithContext(context.Background(), request)
+}
+
+// CreateRejectedQuestion
+// This API is used to create rejected questions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_FILEDECODEFAILED = "FailedOperation.FileDecodeFailed"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNKNOWFILETYPEERROR = "FailedOperation.UnKnowFileTypeError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) CreateRejectedQuestionWithContext(ctx context.Context, request *CreateRejectedQuestionRequest) (response *CreateRejectedQuestionResponse, err error) {
+    if request == nil {
+        request = NewCreateRejectedQuestionRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateRejectedQuestion require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateRejectedQuestionResponse()
     err = c.Send(request, response)
     return
 }
@@ -263,6 +663,55 @@ func (c *Client) DeleteAppWithContext(ctx context.Context, request *DeleteAppReq
     return
 }
 
+func NewDeleteAttributeLabelRequest() (request *DeleteAttributeLabelRequest) {
+    request = &DeleteAttributeLabelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "DeleteAttributeLabel")
+    
+    
+    return
+}
+
+func NewDeleteAttributeLabelResponse() (response *DeleteAttributeLabelResponse) {
+    response = &DeleteAttributeLabelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteAttributeLabel
+// This API is used to delete attribute labels.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteAttributeLabel(request *DeleteAttributeLabelRequest) (response *DeleteAttributeLabelResponse, err error) {
+    return c.DeleteAttributeLabelWithContext(context.Background(), request)
+}
+
+// DeleteAttributeLabel
+// This API is used to delete attribute labels.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteAttributeLabelWithContext(ctx context.Context, request *DeleteAttributeLabelRequest) (response *DeleteAttributeLabelResponse, err error) {
+    if request == nil {
+        request = NewDeleteAttributeLabelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteAttributeLabel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteAttributeLabelResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteDocRequest() (request *DeleteDocRequest) {
     request = &DeleteDocRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -308,6 +757,55 @@ func (c *Client) DeleteDocWithContext(ctx context.Context, request *DeleteDocReq
     request.SetContext(ctx)
     
     response = NewDeleteDocResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDeleteDocCateRequest() (request *DeleteDocCateRequest) {
+    request = &DeleteDocCateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "DeleteDocCate")
+    
+    
+    return
+}
+
+func NewDeleteDocCateResponse() (response *DeleteDocCateResponse) {
+    response = &DeleteDocCateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteDocCate
+// This API is used to delete Doc categories.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteDocCate(request *DeleteDocCateRequest) (response *DeleteDocCateResponse, err error) {
+    return c.DeleteDocCateWithContext(context.Background(), request)
+}
+
+// DeleteDocCate
+// This API is used to delete Doc categories.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DeleteDocCateWithContext(ctx context.Context, request *DeleteDocCateRequest) (response *DeleteDocCateResponse, err error) {
+    if request == nil {
+        request = NewDeleteDocCateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteDocCate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteDocCateResponse()
     err = c.Send(request, response)
     return
 }
@@ -455,6 +953,55 @@ func (c *Client) DeleteRejectedQuestionWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDeleteRejectedQuestionResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAppRequest() (request *DescribeAppRequest) {
+    request = &DescribeAppRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "DescribeApp")
+    
+    
+    return
+}
+
+func NewDescribeAppResponse() (response *DescribeAppResponse) {
+    response = &DescribeAppResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeApp
+// This API is used to obtain application details under the corporate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeApp(request *DescribeAppRequest) (response *DescribeAppResponse, err error) {
+    return c.DescribeAppWithContext(context.Background(), request)
+}
+
+// DescribeApp
+// This API is used to obtain application details under the corporate.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeAppWithContext(ctx context.Context, request *DescribeAppRequest) (response *DescribeAppResponse, err error) {
+    if request == nil {
+        request = NewDescribeAppRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeApp require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAppResponse()
     err = c.Send(request, response)
     return
 }
@@ -655,6 +1202,55 @@ func (c *Client) DescribeConcurrencyUsageGraphWithContext(ctx context.Context, r
     return
 }
 
+func NewDescribeCorpRequest() (request *DescribeCorpRequest) {
+    request = &DescribeCorpRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "DescribeCorp")
+    
+    
+    return
+}
+
+func NewDescribeCorpResponse() (response *DescribeCorpResponse) {
+    response = &DescribeCorpResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCorp
+// This API is used to query corporate details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCorp(request *DescribeCorpRequest) (response *DescribeCorpResponse, err error) {
+    return c.DescribeCorpWithContext(context.Background(), request)
+}
+
+// DescribeCorp
+// This API is used to query corporate details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeCorpWithContext(ctx context.Context, request *DescribeCorpRequest) (response *DescribeCorpResponse, err error) {
+    if request == nil {
+        request = NewDescribeCorpRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCorp require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCorpResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeDocRequest() (request *DescribeDocRequest) {
     request = &DescribeDocRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -802,6 +1398,104 @@ func (c *Client) DescribeKnowledgeUsagePieGraphWithContext(ctx context.Context, 
     return
 }
 
+func NewDescribeQARequest() (request *DescribeQARequest) {
+    request = &DescribeQARequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "DescribeQA")
+    
+    
+    return
+}
+
+func NewDescribeQAResponse() (response *DescribeQAResponse) {
+    response = &DescribeQAResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeQA
+// This API is used to query Q&A details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeQA(request *DescribeQARequest) (response *DescribeQAResponse, err error) {
+    return c.DescribeQAWithContext(context.Background(), request)
+}
+
+// DescribeQA
+// This API is used to query Q&A details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeQAWithContext(ctx context.Context, request *DescribeQARequest) (response *DescribeQAResponse, err error) {
+    if request == nil {
+        request = NewDescribeQARequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeQA require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeQAResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeReferRequest() (request *DescribeReferRequest) {
+    request = &DescribeReferRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "DescribeRefer")
+    
+    
+    return
+}
+
+func NewDescribeReferResponse() (response *DescribeReferResponse) {
+    response = &DescribeReferResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeRefer
+// This API is used to get the reference source details list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeRefer(request *DescribeReferRequest) (response *DescribeReferResponse, err error) {
+    return c.DescribeReferWithContext(context.Background(), request)
+}
+
+// DescribeRefer
+// This API is used to get the reference source details list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeReferWithContext(ctx context.Context, request *DescribeReferRequest) (response *DescribeReferResponse, err error) {
+    if request == nil {
+        request = NewDescribeReferRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeRefer require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeReferResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeReleaseRequest() (request *DescribeReleaseRequest) {
     request = &DescribeReleaseRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -847,6 +1541,55 @@ func (c *Client) DescribeReleaseWithContext(ctx context.Context, request *Descri
     request.SetContext(ctx)
     
     response = NewDescribeReleaseResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeReleaseInfoRequest() (request *DescribeReleaseInfoRequest) {
+    request = &DescribeReleaseInfoRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "DescribeReleaseInfo")
+    
+    
+    return
+}
+
+func NewDescribeReleaseInfoResponse() (response *DescribeReleaseInfoResponse) {
+    response = &DescribeReleaseInfoResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeReleaseInfo
+// This API is used to pull the release button status and last release time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeReleaseInfo(request *DescribeReleaseInfoRequest) (response *DescribeReleaseInfoResponse, err error) {
+    return c.DescribeReleaseInfoWithContext(context.Background(), request)
+}
+
+// DescribeReleaseInfo
+// This API is used to pull the release button status and last release time.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeReleaseInfoWithContext(ctx context.Context, request *DescribeReleaseInfoRequest) (response *DescribeReleaseInfoResponse, err error) {
+    if request == nil {
+        request = NewDescribeReleaseInfoRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeReleaseInfo require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeReleaseInfoResponse()
     err = c.Send(request, response)
     return
 }
@@ -945,6 +1688,104 @@ func (c *Client) DescribeSearchStatsGraphWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewDescribeSearchStatsGraphResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeSegmentsRequest() (request *DescribeSegmentsRequest) {
+    request = &DescribeSegmentsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "DescribeSegments")
+    
+    
+    return
+}
+
+func NewDescribeSegmentsResponse() (response *DescribeSegmentsResponse) {
+    response = &DescribeSegmentsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeSegments
+// This API is used to get fragment details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeSegments(request *DescribeSegmentsRequest) (response *DescribeSegmentsResponse, err error) {
+    return c.DescribeSegmentsWithContext(context.Background(), request)
+}
+
+// DescribeSegments
+// This API is used to get fragment details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeSegmentsWithContext(ctx context.Context, request *DescribeSegmentsRequest) (response *DescribeSegmentsResponse, err error) {
+    if request == nil {
+        request = NewDescribeSegmentsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeSegments require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeSegmentsResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeStorageCredentialRequest() (request *DescribeStorageCredentialRequest) {
+    request = &DescribeStorageCredentialRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "DescribeStorageCredential")
+    
+    
+    return
+}
+
+func NewDescribeStorageCredentialResponse() (response *DescribeStorageCredentialResponse) {
+    response = &DescribeStorageCredentialResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeStorageCredential
+// This API is used to get the temporary key for file upload.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeStorageCredential(request *DescribeStorageCredentialRequest) (response *DescribeStorageCredentialResponse, err error) {
+    return c.DescribeStorageCredentialWithContext(context.Background(), request)
+}
+
+// DescribeStorageCredential
+// This API is used to get the temporary key for file upload.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) DescribeStorageCredentialWithContext(ctx context.Context, request *DescribeStorageCredentialRequest) (response *DescribeStorageCredentialResponse, err error) {
+    if request == nil {
+        request = NewDescribeStorageCredentialRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeStorageCredential require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeStorageCredentialResponse()
     err = c.Send(request, response)
     return
 }
@@ -1094,6 +1935,57 @@ func (c *Client) DescribeUnsatisfiedReplyContextWithContext(ctx context.Context,
     request.SetContext(ctx)
     
     response = NewDescribeUnsatisfiedReplyContextResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewExportAttributeLabelRequest() (request *ExportAttributeLabelRequest) {
+    request = &ExportAttributeLabelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "ExportAttributeLabel")
+    
+    
+    return
+}
+
+func NewExportAttributeLabelResponse() (response *ExportAttributeLabelResponse) {
+    response = &ExportAttributeLabelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExportAttributeLabel
+// This API is used to export attribute labels.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ExportAttributeLabel(request *ExportAttributeLabelRequest) (response *ExportAttributeLabelResponse, err error) {
+    return c.ExportAttributeLabelWithContext(context.Background(), request)
+}
+
+// ExportAttributeLabel
+// This API is used to export attribute labels.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) ExportAttributeLabelWithContext(ctx context.Context, request *ExportAttributeLabelRequest) (response *ExportAttributeLabelResponse, err error) {
+    if request == nil {
+        request = NewExportAttributeLabelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExportAttributeLabel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExportAttributeLabelResponse()
     err = c.Send(request, response)
     return
 }
@@ -1249,6 +2141,255 @@ func (c *Client) GenerateQAWithContext(ctx context.Context, request *GenerateQAR
     return
 }
 
+func NewGetAnswerTypeDataCountRequest() (request *GetAnswerTypeDataCountRequest) {
+    request = &GetAnswerTypeDataCountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "GetAnswerTypeDataCount")
+    
+    
+    return
+}
+
+func NewGetAnswerTypeDataCountResponse() (response *GetAnswerTypeDataCountResponse) {
+    response = &GetAnswerTypeDataCountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetAnswerTypeDataCount
+// This API is used to get response type data statistics.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) GetAnswerTypeDataCount(request *GetAnswerTypeDataCountRequest) (response *GetAnswerTypeDataCountResponse, err error) {
+    return c.GetAnswerTypeDataCountWithContext(context.Background(), request)
+}
+
+// GetAnswerTypeDataCount
+// This API is used to get response type data statistics.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) GetAnswerTypeDataCountWithContext(ctx context.Context, request *GetAnswerTypeDataCountRequest) (response *GetAnswerTypeDataCountResponse, err error) {
+    if request == nil {
+        request = NewGetAnswerTypeDataCountRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetAnswerTypeDataCount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetAnswerTypeDataCountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetAppKnowledgeCountRequest() (request *GetAppKnowledgeCountRequest) {
+    request = &GetAppKnowledgeCountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "GetAppKnowledgeCount")
+    
+    
+    return
+}
+
+func NewGetAppKnowledgeCountResponse() (response *GetAppKnowledgeCountResponse) {
+    response = &GetAppKnowledgeCountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetAppKnowledgeCount
+// This API is used to get a model list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetAppKnowledgeCount(request *GetAppKnowledgeCountRequest) (response *GetAppKnowledgeCountResponse, err error) {
+    return c.GetAppKnowledgeCountWithContext(context.Background(), request)
+}
+
+// GetAppKnowledgeCount
+// This API is used to get a model list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetAppKnowledgeCountWithContext(ctx context.Context, request *GetAppKnowledgeCountRequest) (response *GetAppKnowledgeCountResponse, err error) {
+    if request == nil {
+        request = NewGetAppKnowledgeCountRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetAppKnowledgeCount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetAppKnowledgeCountResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetAppSecretRequest() (request *GetAppSecretRequest) {
+    request = &GetAppSecretRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "GetAppSecret")
+    
+    
+    return
+}
+
+func NewGetAppSecretResponse() (response *GetAppSecretResponse) {
+    response = &GetAppSecretResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetAppSecret
+// This API is used to get application secret keys.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetAppSecret(request *GetAppSecretRequest) (response *GetAppSecretResponse, err error) {
+    return c.GetAppSecretWithContext(context.Background(), request)
+}
+
+// GetAppSecret
+// This API is used to get application secret keys.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetAppSecretWithContext(ctx context.Context, request *GetAppSecretRequest) (response *GetAppSecretResponse, err error) {
+    if request == nil {
+        request = NewGetAppSecretRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetAppSecret require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetAppSecretResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetDocPreviewRequest() (request *GetDocPreviewRequest) {
+    request = &GetDocPreviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "GetDocPreview")
+    
+    
+    return
+}
+
+func NewGetDocPreviewResponse() (response *GetDocPreviewResponse) {
+    response = &GetDocPreviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetDocPreview
+// This API is used to get document preview information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetDocPreview(request *GetDocPreviewRequest) (response *GetDocPreviewResponse, err error) {
+    return c.GetDocPreviewWithContext(context.Background(), request)
+}
+
+// GetDocPreview
+// This API is used to get document preview information.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GetDocPreviewWithContext(ctx context.Context, request *GetDocPreviewRequest) (response *GetDocPreviewResponse, err error) {
+    if request == nil {
+        request = NewGetDocPreviewRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetDocPreview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetDocPreviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetLikeDataCountRequest() (request *GetLikeDataCountRequest) {
+    request = &GetLikeDataCountRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "GetLikeDataCount")
+    
+    
+    return
+}
+
+func NewGetLikeDataCountResponse() (response *GetLikeDataCountResponse) {
+    response = &GetLikeDataCountResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetLikeDataCount
+// This API is used to get likes and dislikes data statistics.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) GetLikeDataCount(request *GetLikeDataCountRequest) (response *GetLikeDataCountResponse, err error) {
+    return c.GetLikeDataCountWithContext(context.Background(), request)
+}
+
+// GetLikeDataCount
+// This API is used to get likes and dislikes data statistics.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
+func (c *Client) GetLikeDataCountWithContext(ctx context.Context, request *GetLikeDataCountRequest) (response *GetLikeDataCountResponse, err error) {
+    if request == nil {
+        request = NewGetLikeDataCountRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetLikeDataCount require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetLikeDataCountResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGetMsgRecordRequest() (request *GetMsgRecordRequest) {
     request = &GetMsgRecordRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1273,6 +2414,7 @@ func NewGetMsgRecordResponse() (response *GetMsgRecordResponse) {
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) GetMsgRecord(request *GetMsgRecordRequest) (response *GetMsgRecordResponse, err error) {
     return c.GetMsgRecordWithContext(context.Background(), request)
 }
@@ -1282,6 +2424,7 @@ func (c *Client) GetMsgRecord(request *GetMsgRecordRequest) (response *GetMsgRec
 //
 // error code that may be returned:
 //  FAILEDOPERATION = "FailedOperation"
+//  MISSINGPARAMETER = "MissingParameter"
 func (c *Client) GetMsgRecordWithContext(ctx context.Context, request *GetMsgRecordRequest) (response *GetMsgRecordResponse, err error) {
     if request == nil {
         request = NewGetMsgRecordRequest()
@@ -1294,6 +2437,65 @@ func (c *Client) GetMsgRecordWithContext(ctx context.Context, request *GetMsgRec
     request.SetContext(ctx)
     
     response = NewGetMsgRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGetReconstructDocumentResultRequest() (request *GetReconstructDocumentResultRequest) {
+    request = &GetReconstructDocumentResultRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "GetReconstructDocumentResult")
+    
+    
+    return
+}
+
+func NewGetReconstructDocumentResultResponse() (response *GetReconstructDocumentResultResponse) {
+    response = &GetReconstructDocumentResultResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GetReconstructDocumentResult
+// This is an asynchronous APIs, used to get document parsing task results.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) GetReconstructDocumentResult(request *GetReconstructDocumentResultRequest) (response *GetReconstructDocumentResultResponse, err error) {
+    return c.GetReconstructDocumentResultWithContext(context.Background(), request)
+}
+
+// GetReconstructDocumentResult
+// This is an asynchronous APIs, used to get document parsing task results.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) GetReconstructDocumentResultWithContext(ctx context.Context, request *GetReconstructDocumentResultRequest) (response *GetReconstructDocumentResultResponse, err error) {
+    if request == nil {
+        request = NewGetReconstructDocumentResultRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GetReconstructDocumentResult require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGetReconstructDocumentResultResponse()
     err = c.Send(request, response)
     return
 }
@@ -1321,7 +2523,12 @@ func NewGetTaskStatusResponse() (response *GetTaskStatusResponse) {
 // This API is used to get the task status.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
 func (c *Client) GetTaskStatus(request *GetTaskStatusRequest) (response *GetTaskStatusResponse, err error) {
     return c.GetTaskStatusWithContext(context.Background(), request)
 }
@@ -1330,7 +2537,12 @@ func (c *Client) GetTaskStatus(request *GetTaskStatusRequest) (response *GetTask
 // This API is used to get the task status.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
 func (c *Client) GetTaskStatusWithContext(ctx context.Context, request *GetTaskStatusRequest) (response *GetTaskStatusResponse, err error) {
     if request == nil {
         request = NewGetTaskStatusRequest()
@@ -1392,6 +2604,104 @@ func (c *Client) GetWsTokenWithContext(ctx context.Context, request *GetWsTokenR
     request.SetContext(ctx)
     
     response = NewGetWsTokenResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGroupDocRequest() (request *GroupDocRequest) {
+    request = &GroupDocRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "GroupDoc")
+    
+    
+    return
+}
+
+func NewGroupDocResponse() (response *GroupDocResponse) {
+    response = &GroupDocResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GroupDoc
+// DocGroup.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GroupDoc(request *GroupDocRequest) (response *GroupDocResponse, err error) {
+    return c.GroupDocWithContext(context.Background(), request)
+}
+
+// GroupDoc
+// DocGroup.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GroupDocWithContext(ctx context.Context, request *GroupDocRequest) (response *GroupDocResponse, err error) {
+    if request == nil {
+        request = NewGroupDocRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GroupDoc require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGroupDocResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewGroupQARequest() (request *GroupQARequest) {
+    request = &GroupQARequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "GroupQA")
+    
+    
+    return
+}
+
+func NewGroupQAResponse() (response *GroupQAResponse) {
+    response = &GroupQAResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// GroupQA
+// Q&A Group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GroupQA(request *GroupQARequest) (response *GroupQAResponse, err error) {
+    return c.GroupQAWithContext(context.Background(), request)
+}
+
+// GroupQA
+// Q&A Group.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) GroupQAWithContext(ctx context.Context, request *GroupQARequest) (response *GroupQAResponse, err error) {
+    if request == nil {
+        request = NewGroupQARequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("GroupQA require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewGroupQAResponse()
     err = c.Send(request, response)
     return
 }
@@ -1494,6 +2804,104 @@ func (c *Client) ListAppWithContext(ctx context.Context, request *ListAppRequest
     return
 }
 
+func NewListAppCategoryRequest() (request *ListAppCategoryRequest) {
+    request = &ListAppCategoryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "ListAppCategory")
+    
+    
+    return
+}
+
+func NewListAppCategoryResponse() (response *ListAppCategoryResponse) {
+    response = &ListAppCategoryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListAppCategory
+// This API is used to get list of application types.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListAppCategory(request *ListAppCategoryRequest) (response *ListAppCategoryResponse, err error) {
+    return c.ListAppCategoryWithContext(context.Background(), request)
+}
+
+// ListAppCategory
+// This API is used to get list of application types.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListAppCategoryWithContext(ctx context.Context, request *ListAppCategoryRequest) (response *ListAppCategoryResponse, err error) {
+    if request == nil {
+        request = NewListAppCategoryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListAppCategory require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListAppCategoryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListAppKnowledgeDetailRequest() (request *ListAppKnowledgeDetailRequest) {
+    request = &ListAppKnowledgeDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "ListAppKnowledgeDetail")
+    
+    
+    return
+}
+
+func NewListAppKnowledgeDetailResponse() (response *ListAppKnowledgeDetailResponse) {
+    response = &ListAppKnowledgeDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListAppKnowledgeDetail
+// This API is used to query the knowledge base capacity details in a list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListAppKnowledgeDetail(request *ListAppKnowledgeDetailRequest) (response *ListAppKnowledgeDetailResponse, err error) {
+    return c.ListAppKnowledgeDetailWithContext(context.Background(), request)
+}
+
+// ListAppKnowledgeDetail
+// This API is used to query the knowledge base capacity details in a list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListAppKnowledgeDetailWithContext(ctx context.Context, request *ListAppKnowledgeDetailRequest) (response *ListAppKnowledgeDetailResponse, err error) {
+    if request == nil {
+        request = NewListAppKnowledgeDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListAppKnowledgeDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListAppKnowledgeDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListAttributeLabelRequest() (request *ListAttributeLabelRequest) {
     request = &ListAttributeLabelRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1539,6 +2947,202 @@ func (c *Client) ListAttributeLabelWithContext(ctx context.Context, request *Lis
     request.SetContext(ctx)
     
     response = NewListAttributeLabelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListDocRequest() (request *ListDocRequest) {
+    request = &ListDocRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "ListDoc")
+    
+    
+    return
+}
+
+func NewListDocResponse() (response *ListDocResponse) {
+    response = &ListDocResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListDoc
+// This API is used to get document list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListDoc(request *ListDocRequest) (response *ListDocResponse, err error) {
+    return c.ListDocWithContext(context.Background(), request)
+}
+
+// ListDoc
+// This API is used to get document list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListDocWithContext(ctx context.Context, request *ListDocRequest) (response *ListDocResponse, err error) {
+    if request == nil {
+        request = NewListDocRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListDoc require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListDocResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListDocCateRequest() (request *ListDocCateRequest) {
+    request = &ListDocCateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "ListDocCate")
+    
+    
+    return
+}
+
+func NewListDocCateResponse() (response *ListDocCateResponse) {
+    response = &ListDocCateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListDocCate
+// This API is used to get document category.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListDocCate(request *ListDocCateRequest) (response *ListDocCateResponse, err error) {
+    return c.ListDocCateWithContext(context.Background(), request)
+}
+
+// ListDocCate
+// This API is used to get document category.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListDocCateWithContext(ctx context.Context, request *ListDocCateRequest) (response *ListDocCateResponse, err error) {
+    if request == nil {
+        request = NewListDocCateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListDocCate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListDocCateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListModelRequest() (request *ListModelRequest) {
+    request = &ListModelRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "ListModel")
+    
+    
+    return
+}
+
+func NewListModelResponse() (response *ListModelResponse) {
+    response = &ListModelResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListModel
+// This API is used to get the model list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListModel(request *ListModelRequest) (response *ListModelResponse, err error) {
+    return c.ListModelWithContext(context.Background(), request)
+}
+
+// ListModel
+// This API is used to get the model list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListModelWithContext(ctx context.Context, request *ListModelRequest) (response *ListModelResponse, err error) {
+    if request == nil {
+        request = NewListModelRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListModel require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListModelResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListQARequest() (request *ListQARequest) {
+    request = &ListQARequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "ListQA")
+    
+    
+    return
+}
+
+func NewListQAResponse() (response *ListQAResponse) {
+    response = &ListQAResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListQA
+// This API is used to query Q&A lists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListQA(request *ListQARequest) (response *ListQAResponse, err error) {
+    return c.ListQAWithContext(context.Background(), request)
+}
+
+// ListQA
+// This API is used to query Q&A lists.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListQAWithContext(ctx context.Context, request *ListQARequest) (response *ListQAResponse, err error) {
+    if request == nil {
+        request = NewListQARequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListQA require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListQAResponse()
     err = c.Send(request, response)
     return
 }
@@ -1641,6 +3245,104 @@ func (c *Client) ListRejectedQuestionWithContext(ctx context.Context, request *L
     return
 }
 
+func NewListRejectedQuestionPreviewRequest() (request *ListRejectedQuestionPreviewRequest) {
+    request = &ListRejectedQuestionPreviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "ListRejectedQuestionPreview")
+    
+    
+    return
+}
+
+func NewListRejectedQuestionPreviewResponse() (response *ListRejectedQuestionPreviewResponse) {
+    response = &ListRejectedQuestionPreviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListRejectedQuestionPreview
+// This API is used to release a preview of rejected questions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListRejectedQuestionPreview(request *ListRejectedQuestionPreviewRequest) (response *ListRejectedQuestionPreviewResponse, err error) {
+    return c.ListRejectedQuestionPreviewWithContext(context.Background(), request)
+}
+
+// ListRejectedQuestionPreview
+// This API is used to release a preview of rejected questions.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListRejectedQuestionPreviewWithContext(ctx context.Context, request *ListRejectedQuestionPreviewRequest) (response *ListRejectedQuestionPreviewResponse, err error) {
+    if request == nil {
+        request = NewListRejectedQuestionPreviewRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListRejectedQuestionPreview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListRejectedQuestionPreviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListReleaseRequest() (request *ListReleaseRequest) {
+    request = &ListReleaseRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "ListRelease")
+    
+    
+    return
+}
+
+func NewListReleaseResponse() (response *ListReleaseResponse) {
+    response = &ListReleaseResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListRelease
+// This API is used to get the release list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListRelease(request *ListReleaseRequest) (response *ListReleaseResponse, err error) {
+    return c.ListReleaseWithContext(context.Background(), request)
+}
+
+// ListRelease
+// This API is used to get the release list.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListReleaseWithContext(ctx context.Context, request *ListReleaseRequest) (response *ListReleaseResponse, err error) {
+    if request == nil {
+        request = NewListReleaseRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListRelease require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListReleaseResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewListReleaseConfigPreviewRequest() (request *ListReleaseConfigPreviewRequest) {
     request = &ListReleaseConfigPreviewRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1686,6 +3388,104 @@ func (c *Client) ListReleaseConfigPreviewWithContext(ctx context.Context, reques
     request.SetContext(ctx)
     
     response = NewListReleaseConfigPreviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListReleaseDocPreviewRequest() (request *ListReleaseDocPreviewRequest) {
+    request = &ListReleaseDocPreviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "ListReleaseDocPreview")
+    
+    
+    return
+}
+
+func NewListReleaseDocPreviewResponse() (response *ListReleaseDocPreviewResponse) {
+    response = &ListReleaseDocPreviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListReleaseDocPreview
+// This API is used to preview released documents.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListReleaseDocPreview(request *ListReleaseDocPreviewRequest) (response *ListReleaseDocPreviewResponse, err error) {
+    return c.ListReleaseDocPreviewWithContext(context.Background(), request)
+}
+
+// ListReleaseDocPreview
+// This API is used to preview released documents.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListReleaseDocPreviewWithContext(ctx context.Context, request *ListReleaseDocPreviewRequest) (response *ListReleaseDocPreviewResponse, err error) {
+    if request == nil {
+        request = NewListReleaseDocPreviewRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListReleaseDocPreview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListReleaseDocPreviewResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewListReleaseQAPreviewRequest() (request *ListReleaseQAPreviewRequest) {
+    request = &ListReleaseQAPreviewRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "ListReleaseQAPreview")
+    
+    
+    return
+}
+
+func NewListReleaseQAPreviewResponse() (response *ListReleaseQAPreviewResponse) {
+    response = &ListReleaseQAPreviewResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ListReleaseQAPreview
+// List of documents.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListReleaseQAPreview(request *ListReleaseQAPreviewRequest) (response *ListReleaseQAPreviewResponse, err error) {
+    return c.ListReleaseQAPreviewWithContext(context.Background(), request)
+}
+
+// ListReleaseQAPreview
+// List of documents.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) ListReleaseQAPreviewWithContext(ctx context.Context, request *ListReleaseQAPreviewRequest) (response *ListReleaseQAPreviewResponse, err error) {
+    if request == nil {
+        request = NewListReleaseQAPreviewRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ListReleaseQAPreview require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewListReleaseQAPreviewResponse()
     err = c.Send(request, response)
     return
 }
@@ -2333,6 +4133,55 @@ func (c *Client) RateMsgRecordWithContext(ctx context.Context, request *RateMsgR
     request.SetContext(ctx)
     
     response = NewRateMsgRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewRenameDocRequest() (request *RenameDocRequest) {
+    request = &RenameDocRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("lke", APIVersion, "RenameDoc")
+    
+    
+    return
+}
+
+func NewRenameDocResponse() (response *RenameDocResponse) {
+    response = &RenameDocResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RenameDoc
+// This API is used to rename a document.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) RenameDoc(request *RenameDocRequest) (response *RenameDocResponse, err error) {
+    return c.RenameDocWithContext(context.Background(), request)
+}
+
+// RenameDoc
+// This API is used to rename a document.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+func (c *Client) RenameDocWithContext(ctx context.Context, request *RenameDocRequest) (response *RenameDocResponse, err error) {
+    if request == nil {
+        request = NewRenameDocRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RenameDoc require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRenameDocResponse()
     err = c.Send(request, response)
     return
 }
