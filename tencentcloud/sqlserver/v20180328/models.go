@@ -540,7 +540,7 @@ type CreateBackupRequestParams struct {
 	// Backup name. If this parameter is left empty, a backup name in the format of "[Instance ID]_[Backup start timestamp]" will be automatically generated.
 	BackupName *string `json:"BackupName,omitnil,omitempty" name:"BackupName"`
 
-
+	// Backup storage policy. 0: Follow the custom backup retention policy; 1: Follow the instance lifecycle until the instance is eliminated. Default value: 0.
 	StorageStrategy *int64 `json:"StorageStrategy,omitnil,omitempty" name:"StorageStrategy"`
 }
 
@@ -559,6 +559,7 @@ type CreateBackupRequest struct {
 	// Backup name. If this parameter is left empty, a backup name in the format of "[Instance ID]_[Backup start timestamp]" will be automatically generated.
 	BackupName *string `json:"BackupName,omitnil,omitempty" name:"BackupName"`
 
+	// Backup storage policy. 0: Follow the custom backup retention policy; 1: Follow the instance lifecycle until the instance is eliminated. Default value: 0.
 	StorageStrategy *int64 `json:"StorageStrategy,omitnil,omitempty" name:"StorageStrategy"`
 }
 

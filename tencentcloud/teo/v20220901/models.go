@@ -15067,6 +15067,9 @@ type OriginDetail struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	PrivateParameters []*PrivateParameter `json:"PrivateParameters,omitnil,omitempty" name:"PrivateParameters"`
 
+	// current configured origin HOST header.
+	HostHeader *string `json:"HostHeader,omitnil,omitempty" name:"HostHeader"`
+
 	// MO sub-application ID
 	//
 	// Deprecated: VodeoSubAppId is deprecated.
@@ -15081,6 +15084,13 @@ type OriginDetail struct {
 	//
 	// Deprecated: VodeoBucketId is deprecated.
 	VodeoBucketId *string `json:"VodeoBucketId,omitnil,omitempty" name:"VodeoBucketId"`
+
+	// VOD origin-pull range. this parameter returns a value when OriginType = VOD. valid values: <li>all: all files in the VOD application corresponding to the current origin server. the default value is all;</li> <li>bucket: files in a specified bucket under the VOD application corresponding to the current origin server. specify the bucket by the VodBucketId parameter.</li>.
+	// </li>
+	VodOriginScope *string `json:"VodOriginScope,omitnil,omitempty" name:"VodOriginScope"`
+
+	// VOD bucket ID. this parameter is required when OriginType = VOD and VodOriginScope = bucket. data source: storage ID of the bucket under the VOD professional application.
+	VodBucketId *string `json:"VodBucketId,omitnil,omitempty" name:"VodBucketId"`
 }
 
 type OriginGroup struct {
@@ -15212,6 +15222,13 @@ type OriginInfo struct {
 	// Private authentication parameter. This parameter is valid only when PrivateAccess is on.
 	PrivateParameters []*PrivateParameter `json:"PrivateParameters,omitnil,omitempty" name:"PrivateParameters"`
 
+	// Custom origin HOST header, this parameter only takes effect when OriginType=IP_DOMAIN. 
+	// 
+	// - If OriginType=COS or AWS_S3, the origin HOST header will be consistent with the origin domain name. 
+	// - If OriginType=ORIGIN_GROUP, the origin HOST header follows the configuration within the origin group;if not configured, it defaults to the acceleration domain name. 
+	// - If OriginType=VOD or SPACE, there is no need to configure this header, and it will take effect according to the corresponding origin domain name.
+	HostHeader *string `json:"HostHeader,omitnil,omitempty" name:"HostHeader"`
+
 	// VODEO sub-application ID. This parameter is required when OriginType is VODEO.
 	//
 	// Deprecated: VodeoSubAppId is deprecated.
@@ -15228,6 +15245,13 @@ type OriginInfo struct {
 	//
 	// Deprecated: VodeoBucketId is deprecated.
 	VodeoBucketId *string `json:"VodeoBucketId,omitnil,omitempty" name:"VodeoBucketId"`
+
+	// VOD origin-pull scope. this parameter is valid only when OriginType = VOD. valid values: <li>all: all files in the VOD application corresponding to the current origin server. the default value is all;</li> <li>bucket: files in a specified bucket under the VOD application corresponding to the current origin server. specify the bucket by the parameter VodBucketId.</li>.
+	// </li>
+	VodOriginScope *string `json:"VodOriginScope,omitnil,omitempty" name:"VodOriginScope"`
+
+	// VOD bucket ID. this parameter is required when OriginType = VOD and VodOriginScope = bucket. data source: storage ID of the bucket under the VOD professional edition application.
+	VodBucketId *string `json:"VodBucketId,omitnil,omitempty" name:"VodBucketId"`
 }
 
 type OriginPrivateParameters struct {
