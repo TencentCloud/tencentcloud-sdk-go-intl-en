@@ -2489,14 +2489,11 @@ type InquiryPriceRenewInstanceRequestParams struct {
 	// How long the instance will be renewed for, which needs to be used together with `TimeUnit`.
 	TimeSpan *uint64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// List of resource IDs of the node to be renewed. The resource ID is in the format of `emr-vm-xxxxxxxx`. A valid resource ID can be queried in the [console](https://console.cloud.tencent.com/emr/static/hardware).
-	ResourceIds []*string `json:"ResourceIds,omitnil,omitempty" name:"ResourceIds"`
-
-	// Location of the instance. This parameter is used to specify the AZ, project, and other attributes of the instance.
-	Placement *Placement `json:"Placement,omitnil,omitempty" name:"Placement"`
-
 	// Instance billing mode.
 	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// List of resource IDs of the node to be renewed. The resource ID is in the format of `emr-vm-xxxxxxxx`. A valid resource ID can be queried in the [console](https://console.cloud.tencent.com/emr/static/hardware).
+	ResourceIds []*string `json:"ResourceIds,omitnil,omitempty" name:"ResourceIds"`
 
 	// Unit of time for instance renewal.
 	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
@@ -2504,8 +2501,17 @@ type InquiryPriceRenewInstanceRequestParams struct {
 	// Currency.
 	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
 
+	// Location of the instance. This parameter is used to specify the AZ, project, and other attributes of the instance.
+	Placement *Placement `json:"Placement,omitnil,omitempty" name:"Placement"`
+
 	// Whether to change from pay-as-you-go billing to monthly subscription billing. `0`: no; `1`: yes
 	ModifyPayMode *int64 `json:"ModifyPayMode,omitnil,omitempty" name:"ModifyPayMode"`
+
+
+	NeedDetail *bool `json:"NeedDetail,omitnil,omitempty" name:"NeedDetail"`
+
+
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 type InquiryPriceRenewInstanceRequest struct {
@@ -2514,14 +2520,11 @@ type InquiryPriceRenewInstanceRequest struct {
 	// How long the instance will be renewed for, which needs to be used together with `TimeUnit`.
 	TimeSpan *uint64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// List of resource IDs of the node to be renewed. The resource ID is in the format of `emr-vm-xxxxxxxx`. A valid resource ID can be queried in the [console](https://console.cloud.tencent.com/emr/static/hardware).
-	ResourceIds []*string `json:"ResourceIds,omitnil,omitempty" name:"ResourceIds"`
-
-	// Location of the instance. This parameter is used to specify the AZ, project, and other attributes of the instance.
-	Placement *Placement `json:"Placement,omitnil,omitempty" name:"Placement"`
-
 	// Instance billing mode.
 	PayMode *int64 `json:"PayMode,omitnil,omitempty" name:"PayMode"`
+
+	// List of resource IDs of the node to be renewed. The resource ID is in the format of `emr-vm-xxxxxxxx`. A valid resource ID can be queried in the [console](https://console.cloud.tencent.com/emr/static/hardware).
+	ResourceIds []*string `json:"ResourceIds,omitnil,omitempty" name:"ResourceIds"`
 
 	// Unit of time for instance renewal.
 	TimeUnit *string `json:"TimeUnit,omitnil,omitempty" name:"TimeUnit"`
@@ -2529,8 +2532,15 @@ type InquiryPriceRenewInstanceRequest struct {
 	// Currency.
 	Currency *string `json:"Currency,omitnil,omitempty" name:"Currency"`
 
+	// Location of the instance. This parameter is used to specify the AZ, project, and other attributes of the instance.
+	Placement *Placement `json:"Placement,omitnil,omitempty" name:"Placement"`
+
 	// Whether to change from pay-as-you-go billing to monthly subscription billing. `0`: no; `1`: yes
 	ModifyPayMode *int64 `json:"ModifyPayMode,omitnil,omitempty" name:"ModifyPayMode"`
+
+	NeedDetail *bool `json:"NeedDetail,omitnil,omitempty" name:"NeedDetail"`
+
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
 }
 
 func (r *InquiryPriceRenewInstanceRequest) ToJsonString() string {
@@ -2546,12 +2556,14 @@ func (r *InquiryPriceRenewInstanceRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "TimeSpan")
-	delete(f, "ResourceIds")
-	delete(f, "Placement")
 	delete(f, "PayMode")
+	delete(f, "ResourceIds")
 	delete(f, "TimeUnit")
 	delete(f, "Currency")
+	delete(f, "Placement")
 	delete(f, "ModifyPayMode")
+	delete(f, "NeedDetail")
+	delete(f, "InstanceId")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceRenewInstanceRequest has unknown keys!", "")
 	}
@@ -2576,7 +2588,13 @@ type InquiryPriceRenewInstanceResponseParams struct {
 	// Note: this field may return null, indicating that no valid values can be obtained.
 	TimeSpan *int64 `json:"TimeSpan,omitnil,omitempty" name:"TimeSpan"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+
+	PriceDetail []*PriceDetail `json:"PriceDetail,omitnil,omitempty" name:"PriceDetail"`
+
+
+	NodeRenewPriceDetails []*NodeRenewPriceDetail `json:"NodeRenewPriceDetails,omitnil,omitempty" name:"NodeRenewPriceDetails"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -2630,6 +2648,15 @@ type InquiryPriceScaleOutInstanceRequestParams struct {
 
 	// Number of master nodes to be added.
 	MasterCount *uint64 `json:"MasterCount,omitnil,omitempty" name:"MasterCount"`
+
+	// The type can be ComputeResource, EMR, or a default value. The default value is EMR.
+	ResourceBaseType *string `json:"ResourceBaseType,omitnil,omitempty" name:"ResourceBaseType"`
+
+	// Computing resource ID.
+	ComputeResourceId *string `json:"ComputeResourceId,omitnil,omitempty" name:"ComputeResourceId"`
+
+	// Scale-out resource type.
+	HardwareResourceType *string `json:"HardwareResourceType,omitnil,omitempty" name:"HardwareResourceType"`
 }
 
 type InquiryPriceScaleOutInstanceRequest struct {
@@ -2667,6 +2694,15 @@ type InquiryPriceScaleOutInstanceRequest struct {
 
 	// Number of master nodes to be added.
 	MasterCount *uint64 `json:"MasterCount,omitnil,omitempty" name:"MasterCount"`
+
+	// The type can be ComputeResource, EMR, or a default value. The default value is EMR.
+	ResourceBaseType *string `json:"ResourceBaseType,omitnil,omitempty" name:"ResourceBaseType"`
+
+	// Computing resource ID.
+	ComputeResourceId *string `json:"ComputeResourceId,omitnil,omitempty" name:"ComputeResourceId"`
+
+	// Scale-out resource type.
+	HardwareResourceType *string `json:"HardwareResourceType,omitnil,omitempty" name:"HardwareResourceType"`
 }
 
 func (r *InquiryPriceScaleOutInstanceRequest) ToJsonString() string {
@@ -2691,6 +2727,9 @@ func (r *InquiryPriceScaleOutInstanceRequest) FromJsonString(s string) error {
 	delete(f, "Currency")
 	delete(f, "RouterCount")
 	delete(f, "MasterCount")
+	delete(f, "ResourceBaseType")
+	delete(f, "ComputeResourceId")
+	delete(f, "HardwareResourceType")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "InquiryPriceScaleOutInstanceRequest has unknown keys!", "")
 	}
@@ -2720,7 +2759,7 @@ type InquiryPriceScaleOutInstanceResponseParams struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	MultipleEmrPrice []*EmrPrice `json:"MultipleEmrPrice,omitnil,omitempty" name:"MultipleEmrPrice"`
 
-	// The unique request ID, which is returned for each request. RequestId is required for locating a problem.
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
 	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
 }
 
@@ -3494,6 +3533,32 @@ type NodeHardwareInfo struct {
 	ServicesStatus *string `json:"ServicesStatus,omitnil,omitempty" name:"ServicesStatus"`
 }
 
+type NodeRenewPriceDetail struct {
+
+	ChargeType *int64 `json:"ChargeType,omitnil,omitempty" name:"ChargeType"`
+
+
+	EmrResourceId *string `json:"EmrResourceId,omitnil,omitempty" name:"EmrResourceId"`
+
+
+	NodeType *string `json:"NodeType,omitnil,omitempty" name:"NodeType"`
+
+
+	Ip *string `json:"Ip,omitnil,omitempty" name:"Ip"`
+
+
+	ExpireTime *string `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+
+	OriginalCost *float64 `json:"OriginalCost,omitnil,omitempty" name:"OriginalCost"`
+
+
+	DiscountCost *float64 `json:"DiscountCost,omitnil,omitempty" name:"DiscountCost"`
+
+
+	RenewPriceDetails []*RenewPriceDetail `json:"RenewPriceDetails,omitnil,omitempty" name:"RenewPriceDetails"`
+}
+
 type NodeResourceSpec struct {
 	// The spec type, such as `S2.MEDIUM8`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
@@ -4064,6 +4129,23 @@ type PriceResource struct {
 	// Number of local disks.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	LocalDiskNum *int64 `json:"LocalDiskNum,omitnil,omitempty" name:"LocalDiskNum"`
+}
+
+type RenewPriceDetail struct {
+
+	BillingName *string `json:"BillingName,omitnil,omitempty" name:"BillingName"`
+
+
+	Policy *float64 `json:"Policy,omitnil,omitempty" name:"Policy"`
+
+
+	Quantity *int64 `json:"Quantity,omitnil,omitempty" name:"Quantity"`
+
+
+	OriginalCost *float64 `json:"OriginalCost,omitnil,omitempty" name:"OriginalCost"`
+
+
+	DiscountCost *float64 `json:"DiscountCost,omitnil,omitempty" name:"DiscountCost"`
 }
 
 type Resource struct {

@@ -1711,8 +1711,6 @@ type Deal struct {
 	TotalCost *float64 `json:"TotalCost,omitnil,omitempty" name:"TotalCost"`
 
 	// Product code
-	// 
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
 	// Subproduct code
@@ -1721,12 +1719,10 @@ type Deal struct {
 	// Large order number.
 	BigDealId *string `json:"BigDealId,omitnil,omitempty" name:"BigDealId"`
 
-	// Refund formula
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Refund formula.
 	Formula *string `json:"Formula,omitnil,omitempty" name:"Formula"`
 
-	// Refund involves order information
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Refund involves order information.
 	RefReturnDeals *string `json:"RefReturnDeals,omitnil,omitempty" name:"RefReturnDeals"`
 
 	// Billing mode: `prePay` (prepaid), `postPay` (pay-as-you-go), `riPay` (reserved instance)
@@ -1734,27 +1730,24 @@ type Deal struct {
 
 	// Transaction type
 	// 
-	// `modifyNetworkMode`: Adjusting bandwidth mode
-	// `modifyNetworkSize`: Adjusting bandwidth size
-	// `refund`: Refund
-	// `downgrade`: Downgrade
-	// upgrade (upgrade)
-	// renew
-	// purchase
-	// preMoveOut annual and monthly subscription resources
-	// preMoveIn annual and monthly subscription resources
-	// preToPost prepaid to postpaid
-	// postMoveOut move out pay-as-you-go resources
-	// postMoveIn move in pay-as-you-go resources
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Modify network mode adjust bandwidth mode.
+	// Adjust bandwidth size.
+	// `Refund`: refund.
+	// downgrade.
+	// upgrade configuration.
+	// renew.
+	// purchase.
+	// preMoveOut monthly subscription resource migration out.
+	// preMoveIn specifies the monthly subscription resources to migrate.
+	// preToPost specifies the prepaid to postpaid conversion.
+	// postMoveOut specifies the pay-as-you-go resources to be migrated out.
+	// postMoveIn specifies the pay-as-you-go resources for inbound migration.
 	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
 
-	// Product code Chinese name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Product code chinese name.
 	ProductName *string `json:"ProductName,omitnil,omitempty" name:"ProductName"`
 
-	// Subproduct code Chinese name
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Sub-Product code chinese name.
 	SubProductName *string `json:"SubProductName,omitnil,omitempty" name:"SubProductName"`
 
 	// The resource ID corresponding to the order. If the query parameter `Limit` exceeds 200, null will be returned.

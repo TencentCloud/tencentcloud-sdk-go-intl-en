@@ -1374,6 +1374,109 @@ func (r *DeleteCertificateResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type DeployRecord struct {
+	// Total number.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Total successes
+	SuccessTotalCount *int64 `json:"SuccessTotalCount,omitnil,omitempty" name:"SuccessTotalCount"`
+
+	// Total failed deployments.
+	FailedTotalCount *int64 `json:"FailedTotalCount,omitnil,omitempty" name:"FailedTotalCount"`
+
+	// Deployment in progress total number.
+	RunningTotalCount *int64 `json:"RunningTotalCount,omitnil,omitempty" name:"RunningTotalCount"`
+
+	// Deployment record type 0 specifies deployment, 1 indicates rollback.
+	Type *int64 `json:"Type,omitnil,omitempty" name:"Type"`
+
+	// Deployment record detail list.
+	RecordDetailList []*DeployRecordList `json:"RecordDetailList,omitnil,omitempty" name:"RecordDetailList"`
+
+	// Hosted resource deployment state: `0` (awaiting deployment), `1` (deployment successful), `2` (deployment failed), `3` (deploying), `4` (rollback successful), `5` (rollback failure).
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Managed resource creation time.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+}
+
+type DeployRecordItem struct {
+	// Deployment record detail ID.
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Bound certificate ID.
+	OldCertId *string `json:"OldCertId,omitnil,omitempty" name:"OldCertId"`
+
+	// Deployment instance ID.
+	InstanceId *string `json:"InstanceId,omitnil,omitempty" name:"InstanceId"`
+
+	// Specifies the deployment instance name.
+	InstanceName *string `json:"InstanceName,omitnil,omitempty" name:"InstanceName"`
+
+	// Deploy the listener ID.
+	ListenerId *string `json:"ListenerId,omitnil,omitempty" name:"ListenerId"`
+
+	// Deployment domain name list.
+	Domains []*string `json:"Domains,omitnil,omitempty" name:"Domains"`
+
+	// Deploy listener protocol.
+	Protocol *string `json:"Protocol,omitnil,omitempty" name:"Protocol"`
+
+	// Deployment state.
+	Status *int64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Deployment error information.
+	ErrorMsg *string `json:"ErrorMsg,omitnil,omitempty" name:"ErrorMsg"`
+
+	// Describes the creation time of the deployment record detail.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Specifies the last update time of the deployment record detail.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
+
+	// Deploy listener name.
+	ListenerName *string `json:"ListenerName,omitnil,omitempty" name:"ListenerName"`
+
+	// Whether SNI is enabled.
+	SniSwitch *int64 `json:"SniSwitch,omitnil,omitempty" name:"SniSwitch"`
+
+	// COS bucket name.
+	Bucket *string `json:"Bucket,omitnil,omitempty" name:"Bucket"`
+
+	// Namespace name.
+	Namespace *string `json:"Namespace,omitnil,omitempty" name:"Namespace"`
+
+	// The secret name.
+	SecretName *string `json:"SecretName,omitnil,omitempty" name:"SecretName"`
+
+	// Port
+	Port *int64 `json:"Port,omitnil,omitempty" name:"Port"`
+
+	// Deployed TCB region.
+	Region *string `json:"Region,omitnil,omitempty" name:"Region"`
+
+	// CLB type. valid values: 0 (classic clb); 1 (application clb).
+	Forward *int64 `json:"Forward,omitnil,omitempty" name:"Forward"`
+
+	// Certificate authentication mode: UNIDIRECTIONAL for one-way authentication, MUTUAL for MUTUAL authentication.
+	SSLMode *string `json:"SSLMode,omitnil,omitempty" name:"SSLMode"`
+
+	// Deployment resource type.
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
+}
+
+type DeployRecordList struct {
+	// Deployment resource type.
+	ResourceType *string `json:"ResourceType,omitnil,omitempty" name:"ResourceType"`
+
+	// Deployment resource detail list.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	List []*DeployRecordItem `json:"List,omitnil,omitempty" name:"List"`
+
+	// Total count of deployment resources.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+}
+
 // Predefined struct for user
 type DescribeCSRRequestParams struct {
 	// The CSR ID.
@@ -2944,6 +3047,151 @@ func (r *DescribeHostUpdateRecordResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeHostUploadUpdateRecordDetailRequestParams struct {
+	// Hosting record ID.
+	DeployRecordId *int64 `json:"DeployRecordId,omitnil,omitempty" name:"DeployRecordId"`
+
+	// Number of items per page. default is 10, maximum is 200. exceeds 200 will be set to 200.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+type DescribeHostUploadUpdateRecordDetailRequest struct {
+	*tchttp.BaseRequest
+	
+	// Hosting record ID.
+	DeployRecordId *int64 `json:"DeployRecordId,omitnil,omitempty" name:"DeployRecordId"`
+
+	// Number of items per page. default is 10, maximum is 200. exceeds 200 will be set to 200.
+	Limit *int64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Offset. Default value: 0.
+	Offset *int64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+}
+
+func (r *DescribeHostUploadUpdateRecordDetailRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostUploadUpdateRecordDetailRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DeployRecordId")
+	delete(f, "Limit")
+	delete(f, "Offset")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeHostUploadUpdateRecordDetailRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHostUploadUpdateRecordDetailResponseParams struct {
+	// Hosting record detail list.
+	DeployRecordDetail []*DeployRecord `json:"DeployRecordDetail,omitnil,omitempty" name:"DeployRecordDetail"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeHostUploadUpdateRecordDetailResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeHostUploadUpdateRecordDetailResponseParams `json:"Response"`
+}
+
+func (r *DescribeHostUploadUpdateRecordDetailResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostUploadUpdateRecordDetailResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHostUploadUpdateRecordRequestParams struct {
+	// Pagination offset, starting from 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of items per page. default is 10.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Original certificate ID
+	OldCertificateId *string `json:"OldCertificateId,omitnil,omitempty" name:"OldCertificateId"`
+}
+
+type DescribeHostUploadUpdateRecordRequest struct {
+	*tchttp.BaseRequest
+	
+	// Pagination offset, starting from 0.
+	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
+
+	// Number of items per page. default is 10.
+	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
+
+	// Original certificate ID
+	OldCertificateId *string `json:"OldCertificateId,omitnil,omitempty" name:"OldCertificateId"`
+}
+
+func (r *DescribeHostUploadUpdateRecordRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostUploadUpdateRecordRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "Offset")
+	delete(f, "Limit")
+	delete(f, "OldCertificateId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeHostUploadUpdateRecordRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeHostUploadUpdateRecordResponseParams struct {
+	// Total number.
+	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// Certificate deployment record list.
+	DeployRecordList []*UploadUpdateRecordInfo `json:"DeployRecordList,omitnil,omitempty" name:"DeployRecordList"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeHostUploadUpdateRecordResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeHostUploadUpdateRecordResponseParams `json:"Response"`
+}
+
+func (r *DescribeHostUploadUpdateRecordResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeHostUploadUpdateRecordResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DownloadCertificateRequestParams struct {
 	// Certificate ID
 	CertificateId *string `json:"CertificateId,omitnil,omitempty" name:"CertificateId"`
@@ -3471,6 +3719,70 @@ func (r *ModifyCertificateResubmitResponse) ToJsonString() string {
 // FromJsonString It is highly **NOT** recommended to use this function
 // because it has no param check, nor strict type check
 func (r *ModifyCertificateResubmitResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCertificatesExpiringNotificationSwitchRequestParams struct {
+	// Certificate ID list. maximum of 50.
+	CertificateIds []*string `json:"CertificateIds,omitnil,omitempty" name:"CertificateIds"`
+
+	// 0: do not ignore notifications. 1: ignore notifications.
+	SwitchStatus *uint64 `json:"SwitchStatus,omitnil,omitempty" name:"SwitchStatus"`
+}
+
+type ModifyCertificatesExpiringNotificationSwitchRequest struct {
+	*tchttp.BaseRequest
+	
+	// Certificate ID list. maximum of 50.
+	CertificateIds []*string `json:"CertificateIds,omitnil,omitempty" name:"CertificateIds"`
+
+	// 0: do not ignore notifications. 1: ignore notifications.
+	SwitchStatus *uint64 `json:"SwitchStatus,omitnil,omitempty" name:"SwitchStatus"`
+}
+
+func (r *ModifyCertificatesExpiringNotificationSwitchRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCertificatesExpiringNotificationSwitchRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "CertificateIds")
+	delete(f, "SwitchStatus")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyCertificatesExpiringNotificationSwitchRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyCertificatesExpiringNotificationSwitchResponseParams struct {
+	// Certificate ID list.
+	CertificateIds []*string `json:"CertificateIds,omitnil,omitempty" name:"CertificateIds"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyCertificatesExpiringNotificationSwitchResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyCertificatesExpiringNotificationSwitchResponseParams `json:"Response"`
+}
+
+func (r *ModifyCertificatesExpiringNotificationSwitchResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyCertificatesExpiringNotificationSwitchResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
@@ -4959,6 +5271,233 @@ func (r *UploadConfirmLetterResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *UploadConfirmLetterResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UploadUpdateCertificateInstanceRequestParams struct {
+	// Old Certificate ID for One-Click Update. Query the tencent cloud resources bound to this certificate ID and use the new certificate to update these resources.
+	OldCertificateId *string `json:"OldCertificateId,omitnil,omitempty" name:"OldCertificateId"`
+
+	// Resource type that needs to be deployed, parameter value (lowercase): clb.
+	ResourceTypes []*string `json:"ResourceTypes,omitnil,omitempty" name:"ResourceTypes"`
+
+	// Public key certificate.
+	CertificatePublicKey *string `json:"CertificatePublicKey,omitnil,omitempty" name:"CertificatePublicKey"`
+
+	// Private key certificate.
+	CertificatePrivateKey *string `json:"CertificatePrivateKey,omitnil,omitempty" name:"CertificatePrivateKey"`
+
+	// The list of regions where cloud resources need to be deployed. The cloud resource type supported in the region is required. Value: clb.
+	ResourceTypesRegions []*ResourceTypeRegions `json:"ResourceTypesRegions,omitnil,omitempty" name:"ResourceTypesRegions"`
+}
+
+type UploadUpdateCertificateInstanceRequest struct {
+	*tchttp.BaseRequest
+	
+	// Old Certificate ID for One-Click Update. Query the tencent cloud resources bound to this certificate ID and use the new certificate to update these resources.
+	OldCertificateId *string `json:"OldCertificateId,omitnil,omitempty" name:"OldCertificateId"`
+
+	// Resource type that needs to be deployed, parameter value (lowercase): clb.
+	ResourceTypes []*string `json:"ResourceTypes,omitnil,omitempty" name:"ResourceTypes"`
+
+	// Public key certificate.
+	CertificatePublicKey *string `json:"CertificatePublicKey,omitnil,omitempty" name:"CertificatePublicKey"`
+
+	// Private key certificate.
+	CertificatePrivateKey *string `json:"CertificatePrivateKey,omitnil,omitempty" name:"CertificatePrivateKey"`
+
+	// The list of regions where cloud resources need to be deployed. The cloud resource type supported in the region is required. Value: clb.
+	ResourceTypesRegions []*ResourceTypeRegions `json:"ResourceTypesRegions,omitnil,omitempty" name:"ResourceTypesRegions"`
+}
+
+func (r *UploadUpdateCertificateInstanceRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UploadUpdateCertificateInstanceRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "OldCertificateId")
+	delete(f, "ResourceTypes")
+	delete(f, "CertificatePublicKey")
+	delete(f, "CertificatePrivateKey")
+	delete(f, "ResourceTypesRegions")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UploadUpdateCertificateInstanceRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UploadUpdateCertificateInstanceResponseParams struct {
+	// The tencent cloud resource update task ID. DeployRecordId equals 0 indicates the task is in progress. Repeatedly request this API, and when DeployRecordId is greater than 0, it means the task has been successfully created. If not successfully created, an exception will be thrown.
+	DeployRecordId *uint64 `json:"DeployRecordId,omitnil,omitempty" name:"DeployRecordId"`
+
+	// Update task creation status: 1 indicates successful creation; 0 indicates an existing ongoing update task, and no new update task was created. The return value DeployRecordId represents the ID of the ongoing update task.
+	DeployStatus *int64 `json:"DeployStatus,omitnil,omitempty" name:"DeployStatus"`
+
+	// Create progress details for asynchronous update tasks.
+	// Note: This field may return null, indicating that no valid values can be obtained.
+	UpdateSyncProgress []*UpdateSyncProgress `json:"UpdateSyncProgress,omitnil,omitempty" name:"UpdateSyncProgress"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UploadUpdateCertificateInstanceResponse struct {
+	*tchttp.BaseResponse
+	Response *UploadUpdateCertificateInstanceResponseParams `json:"Response"`
+}
+
+func (r *UploadUpdateCertificateInstanceResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UploadUpdateCertificateInstanceResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UploadUpdateCertificateRecordRetryRequestParams struct {
+	// Retry deployment record ID, obtained through UpdateCertificateInstance to get the deployment record ID. If this parameter is not provided, DeployRecordDetailId must be provided.
+	DeployRecordId *int64 `json:"DeployRecordId,omitnil,omitempty" name:"DeployRecordId"`
+
+	// Retry deployment record detail ID, obtained through the DescribeHostUpdateRecordDetail API. If this parameter is not provided, DeployRecordId must be provided.
+	DeployRecordDetailId *int64 `json:"DeployRecordDetailId,omitnil,omitempty" name:"DeployRecordDetailId"`
+}
+
+type UploadUpdateCertificateRecordRetryRequest struct {
+	*tchttp.BaseRequest
+	
+	// Retry deployment record ID, obtained through UpdateCertificateInstance to get the deployment record ID. If this parameter is not provided, DeployRecordDetailId must be provided.
+	DeployRecordId *int64 `json:"DeployRecordId,omitnil,omitempty" name:"DeployRecordId"`
+
+	// Retry deployment record detail ID, obtained through the DescribeHostUpdateRecordDetail API. If this parameter is not provided, DeployRecordId must be provided.
+	DeployRecordDetailId *int64 `json:"DeployRecordDetailId,omitnil,omitempty" name:"DeployRecordDetailId"`
+}
+
+func (r *UploadUpdateCertificateRecordRetryRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UploadUpdateCertificateRecordRetryRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DeployRecordId")
+	delete(f, "DeployRecordDetailId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UploadUpdateCertificateRecordRetryRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UploadUpdateCertificateRecordRetryResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UploadUpdateCertificateRecordRetryResponse struct {
+	*tchttp.BaseResponse
+	Response *UploadUpdateCertificateRecordRetryResponseParams `json:"Response"`
+}
+
+func (r *UploadUpdateCertificateRecordRetryResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UploadUpdateCertificateRecordRetryResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UploadUpdateCertificateRecordRollbackRequestParams struct {
+	// Record ID of the certificate pending rollback, obtained through the UpdateCertificateInstance API.
+	DeployRecordId *int64 `json:"DeployRecordId,omitnil,omitempty" name:"DeployRecordId"`
+}
+
+type UploadUpdateCertificateRecordRollbackRequest struct {
+	*tchttp.BaseRequest
+	
+	// Record ID of the certificate pending rollback, obtained through the UpdateCertificateInstance API.
+	DeployRecordId *int64 `json:"DeployRecordId,omitnil,omitempty" name:"DeployRecordId"`
+}
+
+func (r *UploadUpdateCertificateRecordRollbackRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UploadUpdateCertificateRecordRollbackRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "DeployRecordId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "UploadUpdateCertificateRecordRollbackRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type UploadUpdateCertificateRecordRollbackResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type UploadUpdateCertificateRecordRollbackResponse struct {
+	*tchttp.BaseResponse
+	Response *UploadUpdateCertificateRecordRollbackResponseParams `json:"Response"`
+}
+
+func (r *UploadUpdateCertificateRecordRollbackResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *UploadUpdateCertificateRecordRollbackResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+type UploadUpdateRecordInfo struct {
+	// Record ID
+	Id *uint64 `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Original certificate ID
+	OldCertId *string `json:"OldCertId,omitnil,omitempty" name:"OldCertId"`
+
+	// Deployment resource type list.
+	ResourceTypes []*string `json:"ResourceTypes,omitnil,omitempty" name:"ResourceTypes"`
+
+	// Deployment state.
+	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
+
+	// Deployment time.
+	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
+
+	// Last update time.
+	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 }
 
 type VODInstanceList struct {

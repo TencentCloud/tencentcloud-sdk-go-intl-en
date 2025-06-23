@@ -139,13 +139,13 @@ type ActivityPara struct {
 	// An animated screenshot generation task.
 	AnimatedGraphicTask *AnimatedGraphicTaskInput `json:"AnimatedGraphicTask,omitnil,omitempty" name:"AnimatedGraphicTask"`
 
-	// A time point screencapturing task.
+	// A time point screenshot task.
 	SnapshotByTimeOffsetTask *SnapshotByTimeOffsetTaskInput `json:"SnapshotByTimeOffsetTask,omitnil,omitempty" name:"SnapshotByTimeOffsetTask"`
 
-	// A sampled screencapturing task.
+	// A sampled screenshot task.
 	SampleSnapshotTask *SampleSnapshotTaskInput `json:"SampleSnapshotTask,omitnil,omitempty" name:"SampleSnapshotTask"`
 
-	// An image sprite generation task.
+	// An image sprite screenshot task.
 	ImageSpriteTask *ImageSpriteTaskInput `json:"ImageSpriteTask,omitnil,omitempty" name:"ImageSpriteTask"`
 
 	// An adaptive bitrate streaming task.
@@ -638,7 +638,7 @@ type AiAnalysisTaskHighlightOutput struct {
 	HighlightSet []*MediaAiAnalysisHighlightItem `json:"HighlightSet,omitnil,omitempty" name:"HighlightSet"`
 
 	// The storage location of the highlight segments.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 }
 
@@ -1464,7 +1464,7 @@ type AiReviewPornOcrTaskOutput struct {
 
 type AiReviewPornTaskInput struct {
 	// The ID of a porn detection template.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 }
 
@@ -2101,7 +2101,7 @@ type AudioBeautifyConfig struct {
 	// <li>`declick`: Noise removal.</li>
 	// <li>`deesser`: De-essing.</li>
 	// Default: `declick`.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Types []*string `json:"Types,omitnil,omitempty" name:"Types"`
 }
 
@@ -2115,19 +2115,19 @@ type AudioDenoiseConfig struct {
 
 type AudioEnhanceConfig struct {
 	// The audio noise reduction configuration.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Denoise *AudioDenoiseConfig `json:"Denoise,omitnil,omitempty" name:"Denoise"`
 
 	// The audio separation configuration.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Separate *AudioSeparateConfig `json:"Separate,omitnil,omitempty" name:"Separate"`
 
 	// The volume equalization configuration.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	VolumeBalance *VolumeBalanceConfig `json:"VolumeBalance,omitnil,omitempty" name:"VolumeBalance"`
 
 	// The audio improvement configuration.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Beautify *AudioBeautifyConfig `json:"Beautify,omitnil,omitempty" name:"Beautify"`
 }
 
@@ -2142,14 +2142,14 @@ type AudioSeparateConfig struct {
 	// <li>`normal`: Separate voice and background audio.</li>
 	// <li>`music`: Separate vocals and instrumentals.</li>
 	// Default value: `normal`.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The output audio track. Valid values:
 	// <li>`vocal`: Voice.</li>
 	// <li>`background`: Output background audio if the scenario is `normal`, and output instrumentals if the scenario is `music`.</li>
 	// Default value: `vocal`.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Track *string `json:"Track,omitnil,omitempty" name:"Track"`
 }
 
@@ -2300,19 +2300,19 @@ type AwsS3FileUploadTrigger struct {
 
 type AwsSQS struct {
 	// The region of the SQS queue.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SQSRegion *string `json:"SQSRegion,omitnil,omitempty" name:"SQSRegion"`
 
 	// The name of the SQS queue.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SQSQueueName *string `json:"SQSQueueName,omitnil,omitempty" name:"SQSQueueName"`
 
 	// The key ID required to read from/write to the SQS queue.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	S3SecretId *string `json:"S3SecretId,omitnil,omitempty" name:"S3SecretId"`
 
 	// The key required to read from/write to the SQS queue.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	S3SecretKey *string `json:"S3SecretKey,omitnil,omitempty" name:"S3SecretKey"`
 }
 
@@ -8804,7 +8804,7 @@ type DrmInfo struct {
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The AES-128 encryption details.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	SimpleAesDrm *SimpleAesDrm `json:"SimpleAesDrm,omitnil,omitempty" name:"SimpleAesDrm"`
 
 	// Information about FairPlay, WideVine, and PlayReady encryption.
@@ -8824,13 +8824,13 @@ type EditMediaFileInfo struct {
 	// The ID of the material associated with an element. This parameter is required for video compositing tasks.
 	// 
 	// Note: The ID can be up to 32 characters long and can contain letters, digits, and special characters -_
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
 }
 
 type EditMediaOutputConfig struct {
 	// The container. Valid values: `mp4` (default), `hls`, `mov`, `flv`, `avi`.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Container *string `json:"Container,omitnil,omitempty" name:"Container"`
 
 	// Editing mode. Optional values:
@@ -9113,7 +9113,7 @@ type EnhanceConfig struct {
 	VideoEnhance *VideoEnhanceConfig `json:"VideoEnhance,omitnil,omitempty" name:"VideoEnhance"`
 
 	// The audio enhancement configuration.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AudioEnhance *AudioEnhanceConfig `json:"AudioEnhance,omitnil,omitempty" name:"AudioEnhance"`
 }
 
@@ -9313,11 +9313,11 @@ type HdrConfig struct {
 
 type HeadTailParameter struct {
 	// The opening segments.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	HeadSet []*MediaInputInfo `json:"HeadSet,omitnil,omitempty" name:"HeadSet"`
 
 	// The closing segments.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TailSet []*MediaInputInfo `json:"TailSet,omitnil,omitempty" name:"TailSet"`
 }
 
@@ -9644,7 +9644,7 @@ type ImageWatermarkTemplate struct {
 
 type LiveActivityResItem struct {
 	// The output of a live recording task.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LiveRecordTask *LiveScheduleLiveRecordTaskResult `json:"LiveRecordTask,omitnil,omitempty" name:"LiveRecordTask"`
 
 	// Media quality inspection task output.
@@ -9660,39 +9660,39 @@ type LiveActivityResult struct {
 	ActivityType *string `json:"ActivityType,omitnil,omitempty" name:"ActivityType"`
 
 	// The task output.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LiveActivityResItem *LiveActivityResItem `json:"LiveActivityResItem,omitnil,omitempty" name:"LiveActivityResItem"`
 }
 
 type LiveRecordFile struct {
 	// The URL of the recording file.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// The size of the recording file.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Size *int64 `json:"Size,omitnil,omitempty" name:"Size"`
 
 	// The duration of the recording file.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
 
 	// The recording start time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
 	// The recording end time in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 }
 
 type LiveRecordResult struct {
 	// The storage of the recording file.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// The recording segments.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FileList []*LiveRecordFile `json:"FileList,omitnil,omitempty" name:"FileList"`
 }
 
@@ -9701,11 +9701,11 @@ type LiveRecordTaskInput struct {
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// The storage of the recording file. If this parameter is left empty, the `OutputStorage` value of the parent folder will be inherited.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// The output path of the recording file.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	OutputObjectPath *string `json:"OutputObjectPath,omitnil,omitempty" name:"OutputObjectPath"`
 }
 
@@ -9742,59 +9742,59 @@ type LiveScheduleLiveRecordTaskResult struct {
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// The error code. An empty string indicates the task is successful; any other value indicates the task has failed. For details, see [Error Codes](https://www.tencentcloud.com/document/product/1041/40249).
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErrCodeExt *string `json:"ErrCodeExt,omitnil,omitempty" name:"ErrCodeExt"`
 
 	// The error code. `0` indicates the task is successful; other values indicate the task has failed. This parameter is not recommended. Please use `ErrCodeExt` instead.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
 	// The error message.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
 	// The input of a live recording task.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Input *LiveRecordTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
 	// The output of a live recording task.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Output *LiveRecordResult `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// The time when the task was started, in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
 
 	// The time when the task was completed, in [ISO date format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
 type LiveScheduleTask struct {
 	// The ID of a live scheme subtask.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
 	// The task status. Valid values:
 	// <li>`PROCESSING`</li>
 	// <li>`FINISH` </li>
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 
 	// If the value returned is not `0`, there was a source error. If `0` is returned, refer to the error codes of the corresponding task type.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	ErrCode *int64 `json:"ErrCode,omitnil,omitempty" name:"ErrCode"`
 
 	// If there was a source error, this parameter is the error message. For other errors, refer to the error messages of the corresponding task type.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
 	// The URL of the live stream.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// The task output.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	LiveActivityResultSet []*LiveActivityResult `json:"LiveActivityResultSet,omitnil,omitempty" name:"LiveActivityResultSet"`
 }
 
@@ -10749,16 +10749,16 @@ type MediaProcessTaskInput struct {
 	// List of transcoding tasks.
 	TranscodeTaskSet []*TranscodeTaskInput `json:"TranscodeTaskSet,omitnil,omitempty" name:"TranscodeTaskSet"`
 
-	// List of animated image generating tasks.
+	// List of animated image screenshot tasks.
 	AnimatedGraphicTaskSet []*AnimatedGraphicTaskInput `json:"AnimatedGraphicTaskSet,omitnil,omitempty" name:"AnimatedGraphicTaskSet"`
 
-	// List of time point screencapturing tasks.
+	// List of time point screenshot tasks.
 	SnapshotByTimeOffsetTaskSet []*SnapshotByTimeOffsetTaskInput `json:"SnapshotByTimeOffsetTaskSet,omitnil,omitempty" name:"SnapshotByTimeOffsetTaskSet"`
 
-	// List of sampled screencapturing tasks.
+	// List of sampled screenshot tasks.
 	SampleSnapshotTaskSet []*SampleSnapshotTaskInput `json:"SampleSnapshotTaskSet,omitnil,omitempty" name:"SampleSnapshotTaskSet"`
 
-	// List of image sprite generating tasks.
+	// List of image sprite screenshot tasks.
 	ImageSpriteTaskSet []*ImageSpriteTaskInput `json:"ImageSpriteTaskSet,omitnil,omitempty" name:"ImageSpriteTaskSet"`
 
 	// List of adaptive bitrate streaming tasks.
@@ -10769,10 +10769,10 @@ type MediaProcessTaskResult struct {
 	// Task type. Valid values:
 	// <li>Transcode: Transcoding</li>
 	// <li>AnimatedGraphics: Animated image generating</li>
-	// <li>SnapshotByTimeOffset: Time point screencapturing</li>
-	// <li>SampleSnapshot: Sampled screencapturing</li>
-	// <li>ImageSprites: Image sprite generating</li>
-	// <li>CoverBySnapshot: Screencapturing for cover image</li>
+	// <li>SnapshotByTimeOffset: Time point screenshot</li>
+	// <li>SampleSnapshot: Sampled screenshot</li>
+	// <li>ImageSprites: Image sprite screenshot</li>
+	// <li>CoverBySnapshot: Screenshot for cover image</li>
 	// <li>AdaptiveDynamicStreaming: Adaptive bitrate streaming</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
@@ -10784,15 +10784,15 @@ type MediaProcessTaskResult struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AnimatedGraphicTask *MediaProcessTaskAnimatedGraphicResult `json:"AnimatedGraphicTask,omitnil,omitempty" name:"AnimatedGraphicTask"`
 
-	// Query result of a time point screencapturing task, which is valid when task type is `SnapshotByTimeOffset`.
+	// Query result of a time point screenshot task, which is valid when task type is `SnapshotByTimeOffset`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SnapshotByTimeOffsetTask *MediaProcessTaskSnapshotByTimeOffsetResult `json:"SnapshotByTimeOffsetTask,omitnil,omitempty" name:"SnapshotByTimeOffsetTask"`
 
-	// Query result of a sampled screencapturing task, which is valid when task type is `SampleSnapshot`.
+	// Query result of a sampled screenshot task, which is valid when task type is `SampleSnapshot`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	SampleSnapshotTask *MediaProcessTaskSampleSnapshotResult `json:"SampleSnapshotTask,omitnil,omitempty" name:"SampleSnapshotTask"`
 
-	// Query result of an image sprite generating task, which is valid when task type is `ImageSprite`.
+	// Query result of an image sprite screenshot task, which is valid when task type is `ImageSprite`.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	ImageSpriteTask *MediaProcessTaskImageSpriteResult `json:"ImageSpriteTask,omitnil,omitempty" name:"ImageSpriteTask"`
 
@@ -10815,12 +10815,18 @@ type MediaProcessTaskSampleSnapshotResult struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Input for a sampled screencapturing task.
+	// Input for a sampled screenshot task.
 	Input *SampleSnapshotTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of a sampled screencapturing task.
+	// Output of a sampled screenshot task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Output *MediaSampleSnapshotItem `json:"Output,omitnil,omitempty" name:"Output"`
+
+
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
+
+
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
 type MediaProcessTaskSnapshotByTimeOffsetResult struct {
@@ -10836,12 +10842,18 @@ type MediaProcessTaskSnapshotByTimeOffsetResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Input for a time point screencapturing task.
+	// Input for a time point screenshot task.
 	Input *SnapshotByTimeOffsetTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of a time point screencapturing task.
+	// Output of a time point screenshot task.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Output *MediaSnapshotByTimeOffsetItem `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// The time when the task started executing, in ISO date format.
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
+
+	// The time when the task finished, in ISO date format.
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
 type MediaProcessTaskTranscodeResult struct {
@@ -10870,7 +10882,7 @@ type MediaProcessTaskTranscodeResult struct {
 }
 
 type MediaSampleSnapshotItem struct {
-	// Sampled screenshot specification ID. For more information, please see [Sampled Screencapturing Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// Sampled screenshot specification ID. For more information, please see [Sampled Screenshot Parameter Template](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E9.87.87.E6.A0.B7.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// Sample type. Valid values:
@@ -10894,7 +10906,7 @@ type MediaSampleSnapshotItem struct {
 }
 
 type MediaSnapshotByTimeOffsetItem struct {
-	// Specification of a time point screenshot. For more information, please see [Parameter Template for Time Point Screencapturing](https://intl.cloud.tencent.com/document/product/266/33480?from_cn_redirect=1#.E6.97.B6.E9.97.B4.E7.82.B9.E6.88.AA.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// Specification of a time point screenshot template. 
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// Information set of screenshots of the same specification. Each element represents a screenshot.
@@ -13160,11 +13172,11 @@ type OverrideTranscodeParameter struct {
 	AddonAudioStream []*MediaInputInfo `json:"AddonAudioStream,omitnil,omitempty" name:"AddonAudioStream"`
 
 	// An extended field for transcoding.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 
 	// The subtitle file to add.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	AddOnSubtitles []*AddOnSubtitle `json:"AddOnSubtitles,omitnil,omitempty" name:"AddOnSubtitles"`
 }
 
@@ -14584,7 +14596,7 @@ type S3OutputStorage struct {
 }
 
 type SampleSnapshotTaskInput struct {
-	// Sampled screencapturing template ID.
+	// Sampled screenshot template ID.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// List of up to 10 image or text watermarks.
@@ -14610,7 +14622,7 @@ type SampleSnapshotTaskInput struct {
 }
 
 type SampleSnapshotTemplate struct {
-	// Unique ID of a sampled screencapturing template.
+	// Unique ID of a sampled screenshot template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// Template type. Valid values:
@@ -14618,7 +14630,7 @@ type SampleSnapshotTemplate struct {
 	// <li>Custom: Custom template.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Name of a sampled screencapturing template.
+	// Name of a sampled screenshot template.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Template description.
@@ -14649,7 +14661,7 @@ type SampleSnapshotTemplate struct {
 	// Image format.
 	Format *string `json:"Format,omitnil,omitempty" name:"Format"`
 
-	// Sampled screencapturing type.
+	// Sampled screenshot type.
 	SampleType *string `json:"SampleType,omitnil,omitempty" name:"SampleType"`
 
 	// Sampling interval.
@@ -14822,7 +14834,7 @@ type SchedulesInfo struct {
 	// The scheme type. Valid values:
 	//  <li>`Preset`</li>
 	// <li>`Custom` </li>
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The scheme status. Valid values:
@@ -14971,15 +14983,15 @@ type SharpEnhanceConfig struct {
 
 type SimpleAesDrm struct {
 	// The URI of decryption key.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Uri *string `json:"Uri,omitnil,omitempty" name:"Uri"`
 
 	// The encryption key (a 32-byte string).
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Key *string `json:"Key,omitnil,omitempty" name:"Key"`
 
 	// The initialization vector for encryption (a 32-byte string).
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Vector *string `json:"Vector,omitnil,omitempty" name:"Vector"`
 }
 
@@ -15259,7 +15271,7 @@ type SmartSubtitlesTaskInput struct {
 }
 
 type SnapshotByTimeOffsetTaskInput struct {
-	// ID of a time point screencapturing template.
+	// ID of a time point screenshot template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// List of screenshot time points in the format of `s` or `%`:
@@ -15294,7 +15306,7 @@ type SnapshotByTimeOffsetTaskInput struct {
 }
 
 type SnapshotByTimeOffsetTemplate struct {
-	// Unique ID of a time point screencapturing template.
+	// Unique ID of a time point screenshot template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// Template type. Valid values:
@@ -15302,7 +15314,7 @@ type SnapshotByTimeOffsetTemplate struct {
 	// <li>Custom: Custom template.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Name of a time point screencapturing template.
+	// Name of a time point screenshot template.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
 	// Template description.
@@ -15375,11 +15387,11 @@ type SpekeDrm struct {
 
 type SubtitleTemplate struct {
 	// The URL of the subtitles to add to the video.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
 	// The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	StreamIndex *int64 `json:"StreamIndex,omitnil,omitempty" name:"StreamIndex"`
 
 	// The font. Valid values:
@@ -15388,22 +15400,22 @@ type SubtitleTemplate struct {
 	// <li>`simkai.ttf`: Kaiti.</li>
 	// <li>`arial.ttf`: Arial.</li>
 	// The default is `hei.ttf`.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FontType *string `json:"FontType,omitnil,omitempty" name:"FontType"`
 
 	// The font size (pixels). If this is not specified, the font size in the subtitle file will be used.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FontSize *string `json:"FontSize,omitnil,omitempty" name:"FontSize"`
 
 	// The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FontColor *string `json:"FontColor,omitnil,omitempty" name:"FontColor"`
 
 	// The text transparency. Value range: 0-1.
 	// <li>`0`: Fully transparent.</li>
 	// <li>`1`: Fully opaque.</li>
 	// Default value: 1.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	FontAlpha *float64 `json:"FontAlpha,omitnil,omitempty" name:"FontAlpha"`
 }
 
@@ -15492,11 +15504,11 @@ type TEHDConfigForUpdate struct {
 	// <li>`TEHD-100`: TSC-100 (video TSC). </li>
 	// <li>`TEHD-200`: TSC-200 (audio TSC). </li>
 	// If this parameter is left blank, no modification will be made.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The maximum video bitrate. If this parameter is not specified, no modifications will be made.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	MaxVideoBitrate *int64 `json:"MaxVideoBitrate,omitnil,omitempty" name:"MaxVideoBitrate"`
 }
 
@@ -15548,14 +15560,14 @@ type TaskNotifyConfig struct {
 	AwsSQS *AwsSQS `json:"AwsSQS,omitnil,omitempty" name:"AwsSQS"`
 
 	// The key used to generate the callback signature.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	NotifyKey *string `json:"NotifyKey,omitnil,omitempty" name:"NotifyKey"`
 }
 
 type TaskOutputStorage struct {
 	// The storage type for a media processing output file. Valid values:
 	// <li>`COS`: Tencent Cloud COS</li>
-	// <li>`>AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.</li>
+	// <li>`AWS-S3`: AWS S3. This type is only supported for AWS tasks, and the output bucket must be in the same region as the bucket of the source file.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The location to save the output object in COS. This parameter is valid and required when `Type` is COS.
@@ -16179,9 +16191,9 @@ type VideoTemplateInfo struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FpsDenominator *int64 `json:"FpsDenominator,omitnil,omitempty" name:"FpsDenominator"`
 
-	// 3D video splicing mode, applicable only to mv-hevc and effective for 3d videos. valid values:.
-	// <Li>Side_by_side: the original video content is arranged in a left-right layout.</li>.
-	// <li>top_bottom: vertical layout arrangement of original video content.</li>.
+	// 3D video splicing mode, applicable only to mv-hevc and effective for 3d videos. valid values:
+	// <Li>side_by_side: the original video content is arranged in a left-right layout.</li>
+	// <li>top_bottom: vertical layout arrangement of original video content.</li>
 	// Submit the amount and cost based on the segmented resolution size.
 	// Default value: side_by_side.
 	// Note: This field may return null, indicating that no valid value can be obtained.
@@ -16298,7 +16310,7 @@ type VideoTemplateInfoForUpdate struct {
 	// 
 	// Note: 
 	// AV1 encoding containers currently only support mp4, webm, and mkv.
-	// H.266 encoding containers currently only support mp4, hls, ts, and move. 
+	// H.266 encoding containers currently only support mp4, hls, ts, and mov. 
 	// VP8 and VP9 encoding containers currently only support webm and mkv.
 	// MPEG2 and DNxHD encoding containers currently only support mxf.
 	// MV-HEVC encoding containers only support mp4, hls, and mov. Also, the hls format only supports mp4 segmentation format.
@@ -16396,9 +16408,9 @@ type VideoTemplateInfoForUpdate struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FpsDenominator *int64 `json:"FpsDenominator,omitnil,omitempty" name:"FpsDenominator"`
 
-	// 3D video splicing mode, applicable only to mv-hevc and effective for 3d videos. valid values:.
-	// <Li>Side_by_side: the original video content is arranged in a left-right layout.</li>.
-	// <Li>Top_bottom: layout arrangement of the original video content from top to bottom.</li>.
+	// 3D video splicing mode, applicable only to mv-hevc and effective for 3d videos. valid values:
+	// <Li>side_by_side: the original video content is arranged in a left-right layout.</li>
+	// <Li>top_bottom: layout arrangement of the original video content from top to bottom.</li>
 	// The usage and charges will be reported based on the segmented resolution dimensions.
 	// Default value: side_by_side.
 	// Note: This field may return null, indicating that no valid value can be obtained.
@@ -16513,7 +16525,7 @@ type VolumeBalanceConfig struct {
 	// <li>`loudNorm`: Loudness normalization.</li>
 	// <li>`gainControl`: Volume leveling.</li>
 	// Default value: `loudNorm`.
-	// Note: This field may return·null, indicating that no valid values can be obtained.
+	// Note: This field may return null, indicating that no valid values can be obtained.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 

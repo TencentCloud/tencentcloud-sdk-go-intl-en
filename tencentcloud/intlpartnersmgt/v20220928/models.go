@@ -335,7 +335,6 @@ type BillDetailData struct {
 	BillingMode *string `json:"BillingMode,omitnil,omitempty" name:"BillingMode"`
 
 	// Project name.
-	// .
 	ProjectName *string `json:"ProjectName,omitnil,omitempty" name:"ProjectName"`
 
 	// Resource region.
@@ -397,7 +396,7 @@ type BillDetailData struct {
 	// Original cost = component list price * component usage * usage duration.
 	OriginalCost *string `json:"OriginalCost,omitnil,omitempty" name:"OriginalCost"`
 
-	// Discount (default is 1).
+	// Discount (default is 1) - abandoned.
 	DiscountRate *string `json:"DiscountRate,omitnil,omitempty" name:"DiscountRate"`
 
 	// Currency.
@@ -414,6 +413,9 @@ type BillDetailData struct {
 
 	// Identifier (id).
 	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// customer discount rate. The discount rate applied to the reseller's customer, which set by reseller, default value equal to 1.
+	CustomerDiscountRate *string `json:"CustomerDiscountRate,omitnil,omitempty" name:"CustomerDiscountRate"`
 }
 
 type BusinessInfo struct {
@@ -1212,7 +1214,7 @@ func (r *DescribeBillSummaryResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeCustomerBillDetailRequestParams struct {
-	// Sub-account UIN
+	// Sub-account UIN.
 	CustomerUin *uint64 `json:"CustomerUin,omitnil,omitempty" name:"CustomerUin"`
 
 	// Inquiry month, in the format of YYYY-MM, such as 2023-01.
@@ -1267,7 +1269,7 @@ type DescribeCustomerBillDetailRequestParams struct {
 type DescribeCustomerBillDetailRequest struct {
 	*tchttp.BaseRequest
 	
-	// Sub-account UIN
+	// Sub-account UIN.
 	CustomerUin *uint64 `json:"CustomerUin,omitnil,omitempty" name:"CustomerUin"`
 
 	// Inquiry month, in the format of YYYY-MM, such as 2023-01.

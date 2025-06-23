@@ -914,6 +914,7 @@ func NewCreateInstancesResponse() (response *CreateInstancesResponse) {
 //  INVALIDPARAMETERVALUE_PASSWORDFREEDENIED = "InvalidParameterValue.PasswordFreeDenied"
 //  INVALIDPARAMETERVALUE_PASSWORDRULEERROR = "InvalidParameterValue.PasswordRuleError"
 //  INVALIDPARAMETERVALUE_SECURITYGROUPIDSNOTEXISTS = "InvalidParameterValue.SecurityGroupIdsNotExists"
+//  INVALIDPARAMETERVALUE_SPECNOTEXIST = "InvalidParameterValue.SpecNotExist"
 //  INVALIDPARAMETERVALUE_UNVPCIDNOTEXISTS = "InvalidParameterValue.UnVpcIdNotExists"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  LIMITEXCEEDED_INVALIDMEMSIZE = "LimitExceeded.InvalidMemSize"
@@ -953,6 +954,7 @@ func (c *Client) CreateInstances(request *CreateInstancesRequest) (response *Cre
 //  INVALIDPARAMETERVALUE_PASSWORDFREEDENIED = "InvalidParameterValue.PasswordFreeDenied"
 //  INVALIDPARAMETERVALUE_PASSWORDRULEERROR = "InvalidParameterValue.PasswordRuleError"
 //  INVALIDPARAMETERVALUE_SECURITYGROUPIDSNOTEXISTS = "InvalidParameterValue.SecurityGroupIdsNotExists"
+//  INVALIDPARAMETERVALUE_SPECNOTEXIST = "InvalidParameterValue.SpecNotExist"
 //  INVALIDPARAMETERVALUE_UNVPCIDNOTEXISTS = "InvalidParameterValue.UnVpcIdNotExists"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  LIMITEXCEEDED_INVALIDMEMSIZE = "LimitExceeded.InvalidMemSize"
@@ -6355,6 +6357,7 @@ func NewUpgradeInstanceResponse() (response *UpgradeInstanceResponse) {
 //  INVALIDPARAMETERVALUE_MEMSIZENOTINRANGE = "InvalidParameterValue.MemSizeNotInRange"
 //  INVALIDPARAMETERVALUE_REDUCECAPACITYNOTALLOWED = "InvalidParameterValue.ReduceCapacityNotAllowed"
 //  INVALIDPARAMETERVALUE_SPECNOTEXIST = "InvalidParameterValue.SpecNotExist"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  LIMITEXCEEDED_INVALIDMEMSIZE = "LimitExceeded.InvalidMemSize"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
@@ -6364,6 +6367,7 @@ func NewUpgradeInstanceResponse() (response *UpgradeInstanceResponse) {
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
 //  RESOURCEUNAVAILABLE_SALEOUT = "ResourceUnavailable.SaleOut"
 //  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+//  UNSUPPORTEDOPERATION_LOWVERSION = "UnsupportedOperation.LowVersion"
 func (c *Client) UpgradeInstance(request *UpgradeInstanceRequest) (response *UpgradeInstanceResponse, err error) {
     return c.UpgradeInstanceWithContext(context.Background(), request)
 }
@@ -6380,6 +6384,7 @@ func (c *Client) UpgradeInstance(request *UpgradeInstanceRequest) (response *Upg
 //  INVALIDPARAMETERVALUE_MEMSIZENOTINRANGE = "InvalidParameterValue.MemSizeNotInRange"
 //  INVALIDPARAMETERVALUE_REDUCECAPACITYNOTALLOWED = "InvalidParameterValue.ReduceCapacityNotAllowed"
 //  INVALIDPARAMETERVALUE_SPECNOTEXIST = "InvalidParameterValue.SpecNotExist"
+//  INVALIDPARAMETERVALUE_UNSUPPORTEDTYPE = "InvalidParameterValue.UnSupportedType"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  LIMITEXCEEDED_INVALIDMEMSIZE = "LimitExceeded.InvalidMemSize"
 //  RESOURCEINSUFFICIENT = "ResourceInsufficient"
@@ -6389,6 +6394,7 @@ func (c *Client) UpgradeInstance(request *UpgradeInstanceRequest) (response *Upg
 //  RESOURCEUNAVAILABLE_INSTANCESTATUSERROR = "ResourceUnavailable.InstanceStatusError"
 //  RESOURCEUNAVAILABLE_SALEOUT = "ResourceUnavailable.SaleOut"
 //  UNAUTHORIZEDOPERATION_NOCAMAUTHED = "UnauthorizedOperation.NoCAMAuthed"
+//  UNSUPPORTEDOPERATION_LOWVERSION = "UnsupportedOperation.LowVersion"
 func (c *Client) UpgradeInstanceWithContext(ctx context.Context, request *UpgradeInstanceRequest) (response *UpgradeInstanceResponse, err error) {
     if request == nil {
         request = NewUpgradeInstanceRequest()

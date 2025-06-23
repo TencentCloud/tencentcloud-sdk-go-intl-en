@@ -1347,6 +1347,126 @@ func (c *Client) DescribeHostUpdateRecordDetailWithContext(ctx context.Context, 
     return
 }
 
+func NewDescribeHostUploadUpdateRecordRequest() (request *DescribeHostUploadUpdateRecordRequest) {
+    request = &DescribeHostUploadUpdateRecordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "DescribeHostUploadUpdateRecord")
+    
+    
+    return
+}
+
+func NewDescribeHostUploadUpdateRecordResponse() (response *DescribeHostUploadUpdateRecordResponse) {
+    response = &DescribeHostUploadUpdateRecordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeHostUploadUpdateRecord
+// This API is used to query the record list of cloud resource updates for certificates (certificate ID unchanged).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATENOTAVAILABLE = "FailedOperation.CertificateNotAvailable"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+func (c *Client) DescribeHostUploadUpdateRecord(request *DescribeHostUploadUpdateRecordRequest) (response *DescribeHostUploadUpdateRecordResponse, err error) {
+    return c.DescribeHostUploadUpdateRecordWithContext(context.Background(), request)
+}
+
+// DescribeHostUploadUpdateRecord
+// This API is used to query the record list of cloud resource updates for certificates (certificate ID unchanged).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATENOTAVAILABLE = "FailedOperation.CertificateNotAvailable"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+func (c *Client) DescribeHostUploadUpdateRecordWithContext(ctx context.Context, request *DescribeHostUploadUpdateRecordRequest) (response *DescribeHostUploadUpdateRecordResponse, err error) {
+    if request == nil {
+        request = NewDescribeHostUploadUpdateRecordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeHostUploadUpdateRecord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeHostUploadUpdateRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeHostUploadUpdateRecordDetailRequest() (request *DescribeHostUploadUpdateRecordDetailRequest) {
+    request = &DescribeHostUploadUpdateRecordDetailRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "DescribeHostUploadUpdateRecordDetail")
+    
+    
+    return
+}
+
+func NewDescribeHostUploadUpdateRecordDetailResponse() (response *DescribeHostUploadUpdateRecordDetailResponse) {
+    response = &DescribeHostUploadUpdateRecordDetailResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeHostUploadUpdateRecordDetail
+// This API is used to query the deployment record details of certificate update records (certificate ID unchanged).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeHostUploadUpdateRecordDetail(request *DescribeHostUploadUpdateRecordDetailRequest) (response *DescribeHostUploadUpdateRecordDetailResponse, err error) {
+    return c.DescribeHostUploadUpdateRecordDetailWithContext(context.Background(), request)
+}
+
+// DescribeHostUploadUpdateRecordDetail
+// This API is used to query the deployment record details of certificate update records (certificate ID unchanged).
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeHostUploadUpdateRecordDetailWithContext(ctx context.Context, request *DescribeHostUploadUpdateRecordDetailRequest) (response *DescribeHostUploadUpdateRecordDetailResponse, err error) {
+    if request == nil {
+        request = NewDescribeHostUploadUpdateRecordDetailRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeHostUploadUpdateRecordDetail require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeHostUploadUpdateRecordDetailResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDownloadCertificateRequest() (request *DownloadCertificateRequest) {
     request = &DownloadCertificateRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1658,6 +1778,59 @@ func (c *Client) ModifyCertificateResubmitWithContext(ctx context.Context, reque
     request.SetContext(ctx)
     
     response = NewModifyCertificateResubmitResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyCertificatesExpiringNotificationSwitchRequest() (request *ModifyCertificatesExpiringNotificationSwitchRequest) {
+    request = &ModifyCertificatesExpiringNotificationSwitchRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "ModifyCertificatesExpiringNotificationSwitch")
+    
+    
+    return
+}
+
+func NewModifyCertificatesExpiringNotificationSwitchResponse() (response *ModifyCertificatesExpiringNotificationSwitchResponse) {
+    response = &ModifyCertificatesExpiringNotificationSwitchResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyCertificatesExpiringNotificationSwitch
+// Modify to ignore certificate expiration notifications. Enable or disable certificate expiration notifications.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  INVALIDPARAMETER_CERTIFICATESNUMBEREXCEEDED = "InvalidParameter.CertificatesNumberExceeded"
+func (c *Client) ModifyCertificatesExpiringNotificationSwitch(request *ModifyCertificatesExpiringNotificationSwitchRequest) (response *ModifyCertificatesExpiringNotificationSwitchResponse, err error) {
+    return c.ModifyCertificatesExpiringNotificationSwitchWithContext(context.Background(), request)
+}
+
+// ModifyCertificatesExpiringNotificationSwitch
+// Modify to ignore certificate expiration notifications. Enable or disable certificate expiration notifications.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  INVALIDPARAMETER_CERTIFICATESNUMBEREXCEEDED = "InvalidParameter.CertificatesNumberExceeded"
+func (c *Client) ModifyCertificatesExpiringNotificationSwitchWithContext(ctx context.Context, request *ModifyCertificatesExpiringNotificationSwitchRequest) (response *ModifyCertificatesExpiringNotificationSwitchResponse, err error) {
+    if request == nil {
+        request = NewModifyCertificatesExpiringNotificationSwitchRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyCertificatesExpiringNotificationSwitch require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyCertificatesExpiringNotificationSwitchResponse()
     err = c.Send(request, response)
     return
 }
@@ -2217,6 +2390,241 @@ func (c *Client) UploadConfirmLetterWithContext(ctx context.Context, request *Up
     request.SetContext(ctx)
     
     response = NewUploadConfirmLetterResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUploadUpdateCertificateInstanceRequest() (request *UploadUpdateCertificateInstanceRequest) {
+    request = &UploadUpdateCertificateInstanceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "UploadUpdateCertificateInstance")
+    
+    
+    return
+}
+
+func NewUploadUpdateCertificateInstanceResponse() (response *UploadUpdateCertificateInstanceResponse) {
+    response = &UploadUpdateCertificateInstanceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UploadUpdateCertificateInstance
+// This API is used to update certificate content (certificate ID unchanged) and update associated Tencent Cloud resources. This is an asynchronous API. After calling, a DeployRecordId of 0 indicates that the task is in progress. Repeatedly request this API, and when DeployRecordId is greater than 0, it means the task has been successfully created. If the task is not successfully created, an exception will be thrown.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYHASPENDINGRECORD = "FailedOperation.CertificateDeployHasPendingRecord"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYINSTANCEEMPTY = "FailedOperation.CertificateDeployInstanceEmpty"
+//  FAILEDOPERATION_CERTIFICATEEXISTS = "FailedOperation.CertificateExists"
+//  FAILEDOPERATION_CERTIFICATEHOSTDEPLOYCANNOTALLOW = "FailedOperation.CertificateHostDeployCanNotAllow"
+//  FAILEDOPERATION_CERTIFICATEHOSTRESOURCEINNERINTERRUPT = "FailedOperation.CertificateHostResourceInnerInterrupt"
+//  FAILEDOPERATION_CERTIFICATEHOSTRESOURCEINSTANCEHUGELIMIT = "FailedOperation.CertificateHostResourceInstanceHugeLimit"
+//  FAILEDOPERATION_CERTIFICATEHOSTRESOURCETYPEINVALID = "FailedOperation.CertificateHostResourceTypeInvalid"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATEMATCHERROR = "FailedOperation.CertificateMatchError"
+//  FAILEDOPERATION_CERTIFICATENOTAVAILABLE = "FailedOperation.CertificateNotAvailable"
+//  FAILEDOPERATION_CERTIFICATENOTDEPLOYINSTANCE = "FailedOperation.CertificateNotDeployInstance"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CERTIFICATEPARSEERROR = "FailedOperation.CertificateParseError"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  FAILEDOPERATION_ROLENOTFOUNDAUTHORIZATION = "FailedOperation.RoleNotFoundAuthorization"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+//  INVALIDPARAMETERVALUE_INTERMEDIATECERTNOTSAME = "InvalidParameterValue.IntermediateCertNotSame"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+func (c *Client) UploadUpdateCertificateInstance(request *UploadUpdateCertificateInstanceRequest) (response *UploadUpdateCertificateInstanceResponse, err error) {
+    return c.UploadUpdateCertificateInstanceWithContext(context.Background(), request)
+}
+
+// UploadUpdateCertificateInstance
+// This API is used to update certificate content (certificate ID unchanged) and update associated Tencent Cloud resources. This is an asynchronous API. After calling, a DeployRecordId of 0 indicates that the task is in progress. Repeatedly request this API, and when DeployRecordId is greater than 0, it means the task has been successfully created. If the task is not successfully created, an exception will be thrown.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYHASPENDINGRECORD = "FailedOperation.CertificateDeployHasPendingRecord"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYINSTANCEEMPTY = "FailedOperation.CertificateDeployInstanceEmpty"
+//  FAILEDOPERATION_CERTIFICATEEXISTS = "FailedOperation.CertificateExists"
+//  FAILEDOPERATION_CERTIFICATEHOSTDEPLOYCANNOTALLOW = "FailedOperation.CertificateHostDeployCanNotAllow"
+//  FAILEDOPERATION_CERTIFICATEHOSTRESOURCEINNERINTERRUPT = "FailedOperation.CertificateHostResourceInnerInterrupt"
+//  FAILEDOPERATION_CERTIFICATEHOSTRESOURCEINSTANCEHUGELIMIT = "FailedOperation.CertificateHostResourceInstanceHugeLimit"
+//  FAILEDOPERATION_CERTIFICATEHOSTRESOURCETYPEINVALID = "FailedOperation.CertificateHostResourceTypeInvalid"
+//  FAILEDOPERATION_CERTIFICATEINVALID = "FailedOperation.CertificateInvalid"
+//  FAILEDOPERATION_CERTIFICATEMATCHERROR = "FailedOperation.CertificateMatchError"
+//  FAILEDOPERATION_CERTIFICATENOTAVAILABLE = "FailedOperation.CertificateNotAvailable"
+//  FAILEDOPERATION_CERTIFICATENOTDEPLOYINSTANCE = "FailedOperation.CertificateNotDeployInstance"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_CERTIFICATEPARSEERROR = "FailedOperation.CertificateParseError"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  FAILEDOPERATION_ROLENOTFOUNDAUTHORIZATION = "FailedOperation.RoleNotFoundAuthorization"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER_WITHDETAILREASON = "InvalidParameter.WithDetailReason"
+//  INVALIDPARAMETERVALUE_INTERMEDIATECERTNOTSAME = "InvalidParameterValue.IntermediateCertNotSame"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+func (c *Client) UploadUpdateCertificateInstanceWithContext(ctx context.Context, request *UploadUpdateCertificateInstanceRequest) (response *UploadUpdateCertificateInstanceResponse, err error) {
+    if request == nil {
+        request = NewUploadUpdateCertificateInstanceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UploadUpdateCertificateInstance require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUploadUpdateCertificateInstanceResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUploadUpdateCertificateRecordRetryRequest() (request *UploadUpdateCertificateRecordRetryRequest) {
+    request = &UploadUpdateCertificateRecordRetryRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "UploadUpdateCertificateRecordRetry")
+    
+    
+    return
+}
+
+func NewUploadUpdateCertificateRecordRetryResponse() (response *UploadUpdateCertificateRecordRetryResponse) {
+    response = &UploadUpdateCertificateRecordRetryResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UploadUpdateCertificateRecordRetry
+// Cloud Resource Update (Certificate ID Unchanged) Deployment Retry Record.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYHASPENDINGRECORD = "FailedOperation.CertificateDeployHasPendingRecord"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYRETRYSTATUSINVALID = "FailedOperation.CertificateDeployRetryStatusInvalid"
+//  FAILEDOPERATION_CERTIFICATENOTDEPLOYINSTANCE = "FailedOperation.CertificateNotDeployInstance"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+func (c *Client) UploadUpdateCertificateRecordRetry(request *UploadUpdateCertificateRecordRetryRequest) (response *UploadUpdateCertificateRecordRetryResponse, err error) {
+    return c.UploadUpdateCertificateRecordRetryWithContext(context.Background(), request)
+}
+
+// UploadUpdateCertificateRecordRetry
+// Cloud Resource Update (Certificate ID Unchanged) Deployment Retry Record.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYHASPENDINGRECORD = "FailedOperation.CertificateDeployHasPendingRecord"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYRETRYSTATUSINVALID = "FailedOperation.CertificateDeployRetryStatusInvalid"
+//  FAILEDOPERATION_CERTIFICATENOTDEPLOYINSTANCE = "FailedOperation.CertificateNotDeployInstance"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+func (c *Client) UploadUpdateCertificateRecordRetryWithContext(ctx context.Context, request *UploadUpdateCertificateRecordRetryRequest) (response *UploadUpdateCertificateRecordRetryResponse, err error) {
+    if request == nil {
+        request = NewUploadUpdateCertificateRecordRetryRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UploadUpdateCertificateRecordRetry require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUploadUpdateCertificateRecordRetryResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewUploadUpdateCertificateRecordRollbackRequest() (request *UploadUpdateCertificateRecordRollbackRequest) {
+    request = &UploadUpdateCertificateRecordRollbackRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ssl", APIVersion, "UploadUpdateCertificateRecordRollback")
+    
+    
+    return
+}
+
+func NewUploadUpdateCertificateRecordRollbackResponse() (response *UploadUpdateCertificateRecordRollbackResponse) {
+    response = &UploadUpdateCertificateRecordRollbackResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// UploadUpdateCertificateRecordRollback
+// This API is used to roll back the full task when cloud resource update succeeds with unchanged certificate ID.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYDETAILROLLBACKSTATUSINVALID = "FailedOperation.CertificateDeployDetailRollbackStatusInvalid"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYHASPENDINGRECORD = "FailedOperation.CertificateDeployHasPendingRecord"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYRETRYSTATUSINVALID = "FailedOperation.CertificateDeployRetryStatusInvalid"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYROLLBACKSTATUSINVALID = "FailedOperation.CertificateDeployRollbackStatusInvalid"
+//  FAILEDOPERATION_CERTIFICATENOTDEPLOYINSTANCE = "FailedOperation.CertificateNotDeployInstance"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+func (c *Client) UploadUpdateCertificateRecordRollback(request *UploadUpdateCertificateRecordRollbackRequest) (response *UploadUpdateCertificateRecordRollbackResponse, err error) {
+    return c.UploadUpdateCertificateRecordRollbackWithContext(context.Background(), request)
+}
+
+// UploadUpdateCertificateRecordRollback
+// This API is used to roll back the full task when cloud resource update succeeds with unchanged certificate ID.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AUTHERROR = "FailedOperation.AuthError"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYDETAILROLLBACKSTATUSINVALID = "FailedOperation.CertificateDeployDetailRollbackStatusInvalid"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYHASPENDINGRECORD = "FailedOperation.CertificateDeployHasPendingRecord"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYRETRYSTATUSINVALID = "FailedOperation.CertificateDeployRetryStatusInvalid"
+//  FAILEDOPERATION_CERTIFICATEDEPLOYROLLBACKSTATUSINVALID = "FailedOperation.CertificateDeployRollbackStatusInvalid"
+//  FAILEDOPERATION_CERTIFICATENOTDEPLOYINSTANCE = "FailedOperation.CertificateNotDeployInstance"
+//  FAILEDOPERATION_CERTIFICATENOTFOUND = "FailedOperation.CertificateNotFound"
+//  FAILEDOPERATION_INVALIDPARAM = "FailedOperation.InvalidParam"
+//  FAILEDOPERATION_NOPROJECTPERMISSION = "FailedOperation.NoProjectPermission"
+//  FAILEDOPERATION_NOREALNAMEAUTH = "FailedOperation.NoRealNameAuth"
+//  INTERNALERROR = "InternalError"
+//  LIMITEXCEEDED_RATELIMITEXCEEDED = "LimitExceeded.RateLimitExceeded"
+func (c *Client) UploadUpdateCertificateRecordRollbackWithContext(ctx context.Context, request *UploadUpdateCertificateRecordRollbackRequest) (response *UploadUpdateCertificateRecordRollbackResponse, err error) {
+    if request == nil {
+        request = NewUploadUpdateCertificateRecordRollbackRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("UploadUpdateCertificateRecordRollback require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewUploadUpdateCertificateRecordRollbackResponse()
     err = c.Send(request, response)
     return
 }
