@@ -2043,8 +2043,6 @@ func NewDetectFaceResponse() (response *DetectFaceResponse) {
 //
 // - Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
 //
-// 
-//
 // error code that may be returned:
 //  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
 //  FAILEDOPERATION = "FailedOperation"
@@ -2154,8 +2152,6 @@ func (c *Client) DetectFace(request *DetectFaceRequest) (response *DetectFaceRes
 // >     
 //
 // - Please use the signature algorithm v3 to calculate the signature in the common parameters, that is, set the `SignatureMethod` parameter to `TC3-HMAC-SHA256`.
-//
-// 
 //
 // error code that may be returned:
 //  AUTHFAILURE_INVALIDAUTHORIZATION = "AuthFailure.InvalidAuthorization"
