@@ -2318,6 +2318,65 @@ func (c *Client) RecognizeMainlandIDCardOCRWithContext(ctx context.Context, requ
     return
 }
 
+func NewRecognizeMexicoVTIDRequest() (request *RecognizeMexicoVTIDRequest) {
+    request = &RecognizeMexicoVTIDRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "RecognizeMexicoVTID")
+    
+    
+    return
+}
+
+func NewRecognizeMexicoVTIDResponse() (response *RecognizeMexicoVTIDResponse) {
+    response = &RecognizeMexicoVTIDResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RecognizeMexicoVTID
+// This interface supports identification of the front and back of Mexican Voter ID Card. The default interface request frequency limit is 5 times per second.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) RecognizeMexicoVTID(request *RecognizeMexicoVTIDRequest) (response *RecognizeMexicoVTIDResponse, err error) {
+    return c.RecognizeMexicoVTIDWithContext(context.Background(), request)
+}
+
+// RecognizeMexicoVTID
+// This interface supports identification of the front and back of Mexican Voter ID Card. The default interface request frequency limit is 5 times per second.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+func (c *Client) RecognizeMexicoVTIDWithContext(ctx context.Context, request *RecognizeMexicoVTIDRequest) (response *RecognizeMexicoVTIDResponse, err error) {
+    if request == nil {
+        request = NewRecognizeMexicoVTIDRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RecognizeMexicoVTID require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRecognizeMexicoVTIDResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewRecognizePhilippinesDrivingLicenseOCRRequest() (request *RecognizePhilippinesDrivingLicenseOCRRequest) {
     request = &RecognizePhilippinesDrivingLicenseOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},
