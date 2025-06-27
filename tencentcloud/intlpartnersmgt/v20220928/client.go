@@ -960,6 +960,65 @@ func (c *Client) DescribeCustomerBillDetailWithContext(ctx context.Context, requ
     return
 }
 
+func NewDescribeCustomerBillDetailByDayRequest() (request *DescribeCustomerBillDetailByDayRequest) {
+    request = &DescribeCustomerBillDetailByDayRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("intlpartnersmgt", APIVersion, "DescribeCustomerBillDetailByDay")
+    
+    
+    return
+}
+
+func NewDescribeCustomerBillDetailByDayResponse() (response *DescribeCustomerBillDetailByDayResponse) {
+    response = &DescribeCustomerBillDetailByDayResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeCustomerBillDetailByDay
+// This API is used to query the daily bill expenditure of cu by resellers.
+//
+// Invocation Role: first-level reseller, second-level reseller, reseller.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerBillDetailByDay(request *DescribeCustomerBillDetailByDayRequest) (response *DescribeCustomerBillDetailByDayResponse, err error) {
+    return c.DescribeCustomerBillDetailByDayWithContext(context.Background(), request)
+}
+
+// DescribeCustomerBillDetailByDay
+// This API is used to query the daily bill expenditure of cu by resellers.
+//
+// Invocation Role: first-level reseller, second-level reseller, reseller.
+//
+// error code that may be returned:
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INVALIDMONTH = "InvalidParameterValue.InvalidMonth"
+//  OPERATIONDENIED_SERVICEBUSY = "OperationDenied.ServiceBusy"
+//  UNAUTHORIZEDOPERATION_UINNOAUTH = "UnauthorizedOperation.UinNoAuth"
+func (c *Client) DescribeCustomerBillDetailByDayWithContext(ctx context.Context, request *DescribeCustomerBillDetailByDayRequest) (response *DescribeCustomerBillDetailByDayResponse, err error) {
+    if request == nil {
+        request = NewDescribeCustomerBillDetailByDayRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeCustomerBillDetailByDay require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeCustomerBillDetailByDayResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeCustomerBillDownloadUrlRequest() (request *DescribeCustomerBillDownloadUrlRequest) {
     request = &DescribeCustomerBillDownloadUrlRequest{
         BaseRequest: &tchttp.BaseRequest{},

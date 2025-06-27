@@ -1462,37 +1462,37 @@ func (r *CreateCloudReadOnlyDBInstancesResponse) FromJsonString(s string) error 
 
 // Predefined struct for user
 type CreateDBInstancesRequestParams struct {
-	// Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the `DescribeZones` API
+	// Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the `DescribeZones` API.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Instance memory size in GB
+	// Instance memory size in GB.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance storage capacity in GB
+	// Instance storage capacity in GB.
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Billing mode. Valid value: POSTPAID (pay-as-you-go).
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
-	// Project ID
+	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Number of instances purchased this time. Default value: 1. Maximum value: 10
+	// Number of instances purchased this time. Default value: 1. Maximum value: 10.
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// VPC subnet ID in the format of subnet-bdoe83fa. `SubnetId` and `VpcId` should be set or ignored simultaneously
+	// VPC subnet ID in the format of subnet-bdoe83fa. `SubnetId` and `VpcId` should be set or ignored simultaneously.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// VPC ID in the format of vpc-dsp338hz. `SubnetId` and `VpcId` should be set or ignored simultaneously
+	// VPC ID in the format of vpc-dsp338hz. `SubnetId` and `VpcId` should be set or ignored simultaneously.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Length of purchase of instance. The default value is 1, indicating one month. The value cannot exceed 48
+	// Length of purchase of instance. The default value is 1, indicating one month. The value cannot exceed 48.
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Whether to automatically use voucher. 0: no, 1: yes. Default value: no
+	// Whether to automatically use voucher. 0: no, 1: yes. Default value: no.
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Array of voucher IDs (currently, only one voucher can be used per order)
+	// Array of voucher IDs (currently, only one voucher can be used per order).
 	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
 
 	// SQL Server version. Valid values: `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard). Default value: `2008R2`. The available version varies by region, and you can pull the version information by calling the `DescribeProductConfig` API.
@@ -1519,7 +1519,7 @@ type CreateDBInstancesRequestParams struct {
 	// Whether to deploy across availability zones. Default value: false.
 	MultiZones *bool `json:"MultiZones,omitnil,omitempty" name:"MultiZones"`
 
-	// Tags associated with the instances to be created
+	// Tags associated with the instances to be created.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// Collation of system character sets. Default value: `Chinese_PRC_CI_AS`.
@@ -1527,42 +1527,48 @@ type CreateDBInstancesRequestParams struct {
 
 	// System time zone. Default value: `China Standard Time`.
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Whether it is a multi-node architecture instance. Default value: `false`.If MultiNodes = true, the value of the MultiZones parameter must be true.
+	MultiNodes *bool `json:"MultiNodes,omitnil,omitempty" name:"MultiNodes"`
+
+	// The zone in which the standby node is available. Default is empty. When MultiNodes = true, the availability zones of the primary and standby nodes cannot all be the same. The minimum number of availability zones for the standby nodes is 2, and the maximum is 5.
+	DrZones []*string `json:"DrZones,omitnil,omitempty" name:"DrZones"`
 }
 
 type CreateDBInstancesRequest struct {
 	*tchttp.BaseRequest
 	
-	// Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the `DescribeZones` API
+	// Instance AZ, such as ap-guangzhou-1 (Guangzhou Zone 1). Purchasable AZs for an instance can be obtained through the `DescribeZones` API.
 	Zone *string `json:"Zone,omitnil,omitempty" name:"Zone"`
 
-	// Instance memory size in GB
+	// Instance memory size in GB.
 	Memory *int64 `json:"Memory,omitnil,omitempty" name:"Memory"`
 
-	// Instance storage capacity in GB
+	// Instance storage capacity in GB.
 	Storage *int64 `json:"Storage,omitnil,omitempty" name:"Storage"`
 
 	// Billing mode. Valid value: POSTPAID (pay-as-you-go).
 	InstanceChargeType *string `json:"InstanceChargeType,omitnil,omitempty" name:"InstanceChargeType"`
 
-	// Project ID
+	// Project ID.
 	ProjectId *int64 `json:"ProjectId,omitnil,omitempty" name:"ProjectId"`
 
-	// Number of instances purchased this time. Default value: 1. Maximum value: 10
+	// Number of instances purchased this time. Default value: 1. Maximum value: 10.
 	GoodsNum *int64 `json:"GoodsNum,omitnil,omitempty" name:"GoodsNum"`
 
-	// VPC subnet ID in the format of subnet-bdoe83fa. `SubnetId` and `VpcId` should be set or ignored simultaneously
+	// VPC subnet ID in the format of subnet-bdoe83fa. `SubnetId` and `VpcId` should be set or ignored simultaneously.
 	SubnetId *string `json:"SubnetId,omitnil,omitempty" name:"SubnetId"`
 
-	// VPC ID in the format of vpc-dsp338hz. `SubnetId` and `VpcId` should be set or ignored simultaneously
+	// VPC ID in the format of vpc-dsp338hz. `SubnetId` and `VpcId` should be set or ignored simultaneously.
 	VpcId *string `json:"VpcId,omitnil,omitempty" name:"VpcId"`
 
-	// Length of purchase of instance. The default value is 1, indicating one month. The value cannot exceed 48
+	// Length of purchase of instance. The default value is 1, indicating one month. The value cannot exceed 48.
 	Period *int64 `json:"Period,omitnil,omitempty" name:"Period"`
 
-	// Whether to automatically use voucher. 0: no, 1: yes. Default value: no
+	// Whether to automatically use voucher. 0: no, 1: yes. Default value: no.
 	AutoVoucher *int64 `json:"AutoVoucher,omitnil,omitempty" name:"AutoVoucher"`
 
-	// Array of voucher IDs (currently, only one voucher can be used per order)
+	// Array of voucher IDs (currently, only one voucher can be used per order).
 	VoucherIds []*string `json:"VoucherIds,omitnil,omitempty" name:"VoucherIds"`
 
 	// SQL Server version. Valid values: `2008R2` (SQL Server 2008 R2 Enterprise), `2012SP3` (SQL Server 2012 Enterprise), `201202` (SQL Server 2012 Standard), `2014SP2` (SQL Server 2014 Enterprise), 201402 (SQL Server 2014 Standard), `2016SP1` (SQL Server 2016 Enterprise), `201602` (SQL Server 2016 Standard), `2017` (SQL Server 2017 Enterprise), `201702` (SQL Server 2017 Standard), `2019` (SQL Server 2019 Enterprise), `201902` (SQL Server 2019 Standard). Default value: `2008R2`. The available version varies by region, and you can pull the version information by calling the `DescribeProductConfig` API.
@@ -1589,7 +1595,7 @@ type CreateDBInstancesRequest struct {
 	// Whether to deploy across availability zones. Default value: false.
 	MultiZones *bool `json:"MultiZones,omitnil,omitempty" name:"MultiZones"`
 
-	// Tags associated with the instances to be created
+	// Tags associated with the instances to be created.
 	ResourceTags []*ResourceTag `json:"ResourceTags,omitnil,omitempty" name:"ResourceTags"`
 
 	// Collation of system character sets. Default value: `Chinese_PRC_CI_AS`.
@@ -1597,6 +1603,12 @@ type CreateDBInstancesRequest struct {
 
 	// System time zone. Default value: `China Standard Time`.
 	TimeZone *string `json:"TimeZone,omitnil,omitempty" name:"TimeZone"`
+
+	// Whether it is a multi-node architecture instance. Default value: `false`.If MultiNodes = true, the value of the MultiZones parameter must be true.
+	MultiNodes *bool `json:"MultiNodes,omitnil,omitempty" name:"MultiNodes"`
+
+	// The zone in which the standby node is available. Default is empty. When MultiNodes = true, the availability zones of the primary and standby nodes cannot all be the same. The minimum number of availability zones for the standby nodes is 2, and the maximum is 5.
+	DrZones []*string `json:"DrZones,omitnil,omitempty" name:"DrZones"`
 }
 
 func (r *CreateDBInstancesRequest) ToJsonString() string {
@@ -1633,6 +1645,8 @@ func (r *CreateDBInstancesRequest) FromJsonString(s string) error {
 	delete(f, "ResourceTags")
 	delete(f, "Collation")
 	delete(f, "TimeZone")
+	delete(f, "MultiNodes")
+	delete(f, "DrZones")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateDBInstancesRequest has unknown keys!", "")
 	}
@@ -1641,10 +1655,10 @@ func (r *CreateDBInstancesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type CreateDBInstancesResponseParams struct {
-	// Order name
+	// Order name.
 	DealName *string `json:"DealName,omitnil,omitempty" name:"DealName"`
 
-	// Order name array
+	// Order name array.
 	DealNames []*string `json:"DealNames,omitnil,omitempty" name:"DealNames"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
