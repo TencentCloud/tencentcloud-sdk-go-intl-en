@@ -17,10 +17,10 @@ package v20200210
 const (
 	// error codes for specific actions
 
-	// 
+	// No available AI concurrency licenses. please proceed to purchase on the console.
 	FAILEDOPERATION_AICONCURRENTNOPACKAGE = "FailedOperation.AIConcurrentNoPackage"
 
-	// 
+	// AI concurrent overfrequency.
 	FAILEDOPERATION_AICONCURRENTOVERFREQUENCY = "FailedOperation.AIConcurrentOverFrequency"
 
 	// Outbound call failure.
@@ -61,6 +61,9 @@ const (
 
 	// Agent is busy.
 	FAILEDOPERATION_SEATSTATUSBUSY = "FailedOperation.SeatStatusBusy"
+
+	// Session does not exist.
+	FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
 
 	// Number of uploaded files exceeds the limit.
 	FAILEDOPERATION_UPLOADFILEOVERFLOW = "FailedOperation.UploadFileOverflow"
@@ -128,7 +131,7 @@ const (
 	// Error in the status of the review form.
 	INVALIDPARAMETERVALUE_ERRORAPPLYSTATUS = "InvalidParameterValue.ErrorApplyStatus"
 
-	// 
+	// The intelligent agent of the use experience account does not support this operation.
 	INVALIDPARAMETERVALUE_EXPERIENCEACCOUNT = "InvalidParameterValue.ExperienceAccount"
 
 	// The SDKAppID does not exist.
@@ -139,6 +142,9 @@ const (
 
 	// The number has been bound to another account.
 	INVALIDPARAMETERVALUE_PHONENUMISBOUNDOTHERACCOUNT = "InvalidParameterValue.PhoneNumIsBoundOtherAccount"
+
+	// The number of users in the skill group with simultaneous ringing exceeds the upper limit by 2. please confirm and modify.
+	INVALIDPARAMETERVALUE_RINGALLGROUPMEMBEROVERFLOW = "InvalidParameterValue.RingAllGroupMemberOverflow"
 
 	// Skill group error.
 	INVALIDPARAMETERVALUE_SKILLGROUPERROR = "InvalidParameterValue.SkillGroupError"
@@ -169,6 +175,9 @@ const (
 
 	// The resource does not exist.
 	RESOURCENOTFOUND = "ResourceNotFound"
+
+	// Resources are unavailable.
+	RESOURCEUNAVAILABLE = "ResourceUnavailable"
 
 	// Unknown parameter error.
 	UNKNOWNPARAMETER = "UnknownParameter"

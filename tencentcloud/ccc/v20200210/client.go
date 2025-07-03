@@ -275,7 +275,7 @@ func NewCreateAIAgentCallResponse() (response *CreateAIAgentCallResponse) {
 //
 // 
 //
-// Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://intl.cloud.tencent.com/document/product/679/112100?from_cn_redirect=1).
+// Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://www.tencentcloud.com/document/product/1229/70681).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
@@ -300,7 +300,7 @@ func (c *Client) CreateAIAgentCall(request *CreateAIAgentCallRequest) (response 
 //
 // 
 //
-// Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://intl.cloud.tencent.com/document/product/679/112100?from_cn_redirect=1).
+// Before initiating a call, please ensure your AI model is compatible with OpenAI, Azure, or Minimax protocols, and visit the model provider's website to obtain relevant authentication information. For detailed feature descriptions, please refer to the documentation [Tencent Cloud Contact Center AI Call Platform](https://www.tencentcloud.com/document/product/1229/70681).
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
@@ -675,7 +675,15 @@ func NewCreateCallOutSessionResponse() (response *CreateCallOutSessionResponse) 
 }
 
 // CreateCallOutSession
-// This API is used to create outbound sessions. Currently, only dual call is supported. That is, firstly, please use the platform number to call the agent's cell phone. After the agent answers, then please make outbound calls to the user. Due to ISP frequency restrictions, the agent's phone number must first be added to the allowlist to avoid frequency control which may lead to the failure of the outbound call.
+// This API is used to create an outbound call session. Currently, only dual calls are supported. That is, first use the platform number to call the agent mobile phone. After the agent answers, then make an outbound call to the user. Moreover, due to ISP frequency restrictions, the agent phone number must be added to the allowlist first to avoid frequency control leading to the failure of the outbound call. Therefore, before calling this API, the following operations have been completed.
+//
+// 1. The agent specified by UserId has already bound the mobile number. https://intl.cloud.tencent.com/document/product/679/76067?from_cn_redirect=1#.E6.AD.A5.E9.AA.A42.EF.BC.9A.E5.AE.8C.E5.96.84.E8.B4.A6.E5.8F.B7.E4.BF.A1.E6.81.AF.
+//
+// 2. The agent's bound mobile number has applied for and passed the outbound call allowlist.
+//
+// This API is used to make calls. Currently, the agent side can only call the user's mobile phone, so the IsForceMobile field must be true.
+//
+// 4. Do not fill in the mobile number bound to the current UserId for the callee, otherwise it can lead to call failure due to a busy line.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
@@ -694,7 +702,15 @@ func (c *Client) CreateCallOutSession(request *CreateCallOutSessionRequest) (res
 }
 
 // CreateCallOutSession
-// This API is used to create outbound sessions. Currently, only dual call is supported. That is, firstly, please use the platform number to call the agent's cell phone. After the agent answers, then please make outbound calls to the user. Due to ISP frequency restrictions, the agent's phone number must first be added to the allowlist to avoid frequency control which may lead to the failure of the outbound call.
+// This API is used to create an outbound call session. Currently, only dual calls are supported. That is, first use the platform number to call the agent mobile phone. After the agent answers, then make an outbound call to the user. Moreover, due to ISP frequency restrictions, the agent phone number must be added to the allowlist first to avoid frequency control leading to the failure of the outbound call. Therefore, before calling this API, the following operations have been completed.
+//
+// 1. The agent specified by UserId has already bound the mobile number. https://intl.cloud.tencent.com/document/product/679/76067?from_cn_redirect=1#.E6.AD.A5.E9.AA.A42.EF.BC.9A.E5.AE.8C.E5.96.84.E8.B4.A6.E5.8F.B7.E4.BF.A1.E6.81.AF.
+//
+// 2. The agent's bound mobile number has applied for and passed the outbound call allowlist.
+//
+// This API is used to make calls. Currently, the agent side can only call the user's mobile phone, so the IsForceMobile field must be true.
+//
+// 4. Do not fill in the mobile number bound to the current UserId for the callee, otherwise it can lead to call failure due to a busy line.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_CALLOUTFAILED = "FailedOperation.CallOutFailed"
@@ -1094,6 +1110,61 @@ func (c *Client) CreateStaffWithContext(ctx context.Context, request *CreateStaf
     return
 }
 
+func NewDeleteCCCSkillGroupRequest() (request *DeleteCCCSkillGroupRequest) {
+    request = &DeleteCCCSkillGroupRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "DeleteCCCSkillGroup")
+    
+    
+    return
+}
+
+func NewDeleteCCCSkillGroupResponse() (response *DeleteCCCSkillGroupResponse) {
+    response = &DeleteCCCSkillGroupResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteCCCSkillGroup
+// This API is used to delete a skill group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+func (c *Client) DeleteCCCSkillGroup(request *DeleteCCCSkillGroupRequest) (response *DeleteCCCSkillGroupResponse, err error) {
+    return c.DeleteCCCSkillGroupWithContext(context.Background(), request)
+}
+
+// DeleteCCCSkillGroup
+// This API is used to delete a skill group.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+func (c *Client) DeleteCCCSkillGroupWithContext(ctx context.Context, request *DeleteCCCSkillGroupRequest) (response *DeleteCCCSkillGroupResponse, err error) {
+    if request == nil {
+        request = NewDeleteCCCSkillGroupRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteCCCSkillGroup require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteCCCSkillGroupResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteExtensionRequest() (request *DeleteExtensionRequest) {
     request = &DeleteExtensionRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -1117,13 +1188,10 @@ func NewDeleteExtensionResponse() (response *DeleteExtensionResponse) {
 // This API is used to delete telephone accounts.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_DUPLICATEDACCOUNT = "FailedOperation.DuplicatedAccount"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENOTEXIST = "InvalidParameter.InstanceNotExist"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DeleteExtension(request *DeleteExtensionRequest) (response *DeleteExtensionResponse, err error) {
     return c.DeleteExtensionWithContext(context.Background(), request)
 }
@@ -1132,13 +1200,10 @@ func (c *Client) DeleteExtension(request *DeleteExtensionRequest) (response *Del
 // This API is used to delete telephone accounts.
 //
 // error code that may be returned:
-//  FAILEDOPERATION_DUPLICATEDACCOUNT = "FailedOperation.DuplicatedAccount"
 //  INTERNALERROR = "InternalError"
-//  INVALIDPARAMETER = "InvalidParameter"
-//  INVALIDPARAMETER_INSTANCENOTEXIST = "InvalidParameter.InstanceNotExist"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
-//  LIMITEXCEEDED = "LimitExceeded"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
 func (c *Client) DeleteExtensionWithContext(ctx context.Context, request *DeleteExtensionRequest) (response *DeleteExtensionResponse, err error) {
     if request == nil {
         request = NewDeleteExtensionRequest()
@@ -1308,6 +1373,59 @@ func (c *Client) DescribeAICallExtractResultWithContext(ctx context.Context, req
     request.SetContext(ctx)
     
     response = NewDescribeAICallExtractResultResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeAILatencyRequest() (request *DescribeAILatencyRequest) {
+    request = &DescribeAILatencyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "DescribeAILatency")
+    
+    
+    return
+}
+
+func NewDescribeAILatencyResponse() (response *DescribeAILatencyResponse) {
+    response = &DescribeAILatencyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeAILatency
+// This API is used to obtain AI latency information.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_INSTANCENOTEXIST = "InvalidParameter.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+func (c *Client) DescribeAILatency(request *DescribeAILatencyRequest) (response *DescribeAILatencyResponse, err error) {
+    return c.DescribeAILatencyWithContext(context.Background(), request)
+}
+
+// DescribeAILatency
+// This API is used to obtain AI latency information.
+//
+// error code that may be returned:
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETER_INSTANCENOTEXIST = "InvalidParameter.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+func (c *Client) DescribeAILatencyWithContext(ctx context.Context, request *DescribeAILatencyRequest) (response *DescribeAILatencyResponse, err error) {
+    if request == nil {
+        request = NewDescribeAILatencyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeAILatency require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeAILatencyResponse()
     err = c.Send(request, response)
     return
 }
@@ -2528,6 +2646,59 @@ func (c *Client) DisableCCCPhoneNumberWithContext(ctx context.Context, request *
     return
 }
 
+func NewForceMemberOfflineRequest() (request *ForceMemberOfflineRequest) {
+    request = &ForceMemberOfflineRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "ForceMemberOffline")
+    
+    
+    return
+}
+
+func NewForceMemberOfflineResponse() (response *ForceMemberOfflineResponse) {
+    response = &ForceMemberOfflineResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ForceMemberOffline
+// This API is used to force customer service to go offline.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ForceMemberOffline(request *ForceMemberOfflineRequest) (response *ForceMemberOfflineResponse, err error) {
+    return c.ForceMemberOfflineWithContext(context.Background(), request)
+}
+
+// ForceMemberOffline
+// This API is used to force customer service to go offline.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) ForceMemberOfflineWithContext(ctx context.Context, request *ForceMemberOfflineRequest) (response *ForceMemberOfflineResponse, err error) {
+    if request == nil {
+        request = NewForceMemberOfflineRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ForceMemberOffline require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewForceMemberOfflineResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewHangUpCallRequest() (request *HangUpCallRequest) {
     request = &HangUpCallRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2911,6 +3082,59 @@ func (c *Client) ResetExtensionPasswordWithContext(ctx context.Context, request 
     return
 }
 
+func NewRestoreMemberOnlineRequest() (request *RestoreMemberOnlineRequest) {
+    request = &RestoreMemberOnlineRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "RestoreMemberOnline")
+    
+    
+    return
+}
+
+func NewRestoreMemberOnlineResponse() (response *RestoreMemberOnlineResponse) {
+    response = &RestoreMemberOnlineResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// RestoreMemberOnline
+// This API is used to restore customer service to go live.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) RestoreMemberOnline(request *RestoreMemberOnlineRequest) (response *RestoreMemberOnlineResponse, err error) {
+    return c.RestoreMemberOnlineWithContext(context.Background(), request)
+}
+
+// RestoreMemberOnline
+// This API is used to restore customer service to go live.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_DBERROR = "InternalError.DBError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+func (c *Client) RestoreMemberOnlineWithContext(ctx context.Context, request *RestoreMemberOnlineRequest) (response *RestoreMemberOnlineResponse, err error) {
+    if request == nil {
+        request = NewRestoreMemberOnlineRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("RestoreMemberOnline require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewRestoreMemberOnlineResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewResumePredictiveDialingCampaignRequest() (request *ResumePredictiveDialingCampaignRequest) {
     request = &ResumePredictiveDialingCampaignRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3017,6 +3241,65 @@ func (c *Client) StopAutoCalloutTaskWithContext(ctx context.Context, request *St
     return
 }
 
+func NewTransferToManualRequest() (request *TransferToManualRequest) {
+    request = &TransferToManualRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ccc", APIVersion, "TransferToManual")
+    
+    
+    return
+}
+
+func NewTransferToManualResponse() (response *TransferToManualResponse) {
+    response = &TransferToManualResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// TransferToManual
+// This API is used to transfer a session to an agent in specific scenarios.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_RINGALLGROUPMEMBEROVERFLOW = "InvalidParameterValue.RingAllGroupMemberOverflow"
+//  INVALIDPARAMETERVALUE_SKILLGROUPERROR = "InvalidParameterValue.SkillGroupError"
+func (c *Client) TransferToManual(request *TransferToManualRequest) (response *TransferToManualResponse, err error) {
+    return c.TransferToManualWithContext(context.Background(), request)
+}
+
+// TransferToManual
+// This API is used to transfer a session to an agent in specific scenarios.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_RINGALLGROUPMEMBEROVERFLOW = "InvalidParameterValue.RingAllGroupMemberOverflow"
+//  INVALIDPARAMETERVALUE_SKILLGROUPERROR = "InvalidParameterValue.SkillGroupError"
+func (c *Client) TransferToManualWithContext(ctx context.Context, request *TransferToManualRequest) (response *TransferToManualResponse, err error) {
+    if request == nil {
+        request = NewTransferToManualRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("TransferToManual require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewTransferToManualResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewUnbindNumberCallOutSkillGroupRequest() (request *UnbindNumberCallOutSkillGroupRequest) {
     request = &UnbindNumberCallOutSkillGroupRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3040,10 +3323,12 @@ func NewUnbindNumberCallOutSkillGroupResponse() (response *UnbindNumberCallOutSk
 // This API is used to unbind the number from the outbound call skill group.
 //
 // error code that may be returned:
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_RINGALLGROUPMEMBEROVERFLOW = "InvalidParameterValue.RingAllGroupMemberOverflow"
+//  INVALIDPARAMETERVALUE_SKILLGROUPERROR = "InvalidParameterValue.SkillGroupError"
 func (c *Client) UnbindNumberCallOutSkillGroup(request *UnbindNumberCallOutSkillGroupRequest) (response *UnbindNumberCallOutSkillGroupResponse, err error) {
     return c.UnbindNumberCallOutSkillGroupWithContext(context.Background(), request)
 }
@@ -3052,10 +3337,12 @@ func (c *Client) UnbindNumberCallOutSkillGroup(request *UnbindNumberCallOutSkill
 // This API is used to unbind the number from the outbound call skill group.
 //
 // error code that may be returned:
-//  INTERNALERROR_DBERROR = "InternalError.DBError"
-//  INVALIDPARAMETER = "InvalidParameter"
+//  FAILEDOPERATION_SESSIONNOTEXISTS = "FailedOperation.SessionNotExists"
+//  INTERNALERROR = "InternalError"
 //  INVALIDPARAMETERVALUE = "InvalidParameterValue"
-//  UNSUPPORTEDOPERATION = "UnsupportedOperation"
+//  INVALIDPARAMETERVALUE_INSTANCENOTEXIST = "InvalidParameterValue.InstanceNotExist"
+//  INVALIDPARAMETERVALUE_RINGALLGROUPMEMBEROVERFLOW = "InvalidParameterValue.RingAllGroupMemberOverflow"
+//  INVALIDPARAMETERVALUE_SKILLGROUPERROR = "InvalidParameterValue.SkillGroupError"
 func (c *Client) UnbindNumberCallOutSkillGroupWithContext(ctx context.Context, request *UnbindNumberCallOutSkillGroupRequest) (response *UnbindNumberCallOutSkillGroupResponse, err error) {
     if request == nil {
         request = NewUnbindNumberCallOutSkillGroupRequest()

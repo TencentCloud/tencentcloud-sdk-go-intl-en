@@ -980,7 +980,7 @@ func NewDescribeCustomerBillDetailByDayResponse() (response *DescribeCustomerBil
 }
 
 // DescribeCustomerBillDetailByDay
-// This API is used to query the daily bill expenditure of cu by resellers.
+// This API is used to query the daily bill expenditure of customer by resellers.
 //
 // Invocation Role: first-level reseller, second-level reseller, reseller.
 //
@@ -994,7 +994,7 @@ func (c *Client) DescribeCustomerBillDetailByDay(request *DescribeCustomerBillDe
 }
 
 // DescribeCustomerBillDetailByDay
-// This API is used to query the daily bill expenditure of cu by resellers.
+// This API is used to query the daily bill expenditure of customer by resellers.
 //
 // Invocation Role: first-level reseller, second-level reseller, reseller.
 //

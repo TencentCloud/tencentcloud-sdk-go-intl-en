@@ -6390,10 +6390,10 @@ func (r *DescribeCustomErrorPagesResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDDoSAttackDataRequestParams struct {
-	// Start time of the query period.
+	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time of the query period.
+	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Statistical metrics.
@@ -6403,17 +6403,17 @@ type DescribeDDoSAttackDataRequestParams struct {
 	// <li>`ddos_attackPackageRate`: Time-series data of attack packet rate.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// ZoneId set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// IDs of DDoS policies to be queried. All policies will be selected if this field is not specified.
 	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
-	// The query granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minutes;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day</li>If this field is not specified, the granularity is determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < Period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
+	// Query period granularity. Valid values:
+	// <li>min: 1 minute;</li>
+	// <li>5min: 5 minutes;</li>
+	// <li>hour: 1 hour;</li>
+	// <li>day: 1 day.</li>If this parameter is not filled in, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Geolocation scope. Values:
@@ -6426,10 +6426,10 @@ type DescribeDDoSAttackDataRequestParams struct {
 type DescribeDDoSAttackDataRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start time of the query period.
+	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time of the query period.
+	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Statistical metrics.
@@ -6439,17 +6439,17 @@ type DescribeDDoSAttackDataRequest struct {
 	// <li>`ddos_attackPackageRate`: Time-series data of attack packet rate.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// ZoneId set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// IDs of DDoS policies to be queried. All policies will be selected if this field is not specified.
 	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
-	// The query granularity. Values:
-	// <li>`min`: 1 minute;</li>
-	// <li>`5min`: 5 minutes;</li>
-	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day</li>If this field is not specified, the granularity is determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < Period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
+	// Query period granularity. Valid values:
+	// <li>min: 1 minute;</li>
+	// <li>5min: 5 minutes;</li>
+	// <li>hour: 1 hour;</li>
+	// <li>day: 1 day.</li>If this parameter is not filled in, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Geolocation scope. Values:
@@ -6515,16 +6515,16 @@ func (r *DescribeDDoSAttackDataResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeDDoSAttackEventRequestParams struct {
-	// Start time. Time range: 30 days.
+	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time. Time range: 30 days.
+	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// List of DDoS policy IDs. All policies are selected if this field is not specified.
 	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
-	// ZoneId set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
@@ -6556,16 +6556,16 @@ type DescribeDDoSAttackEventRequestParams struct {
 type DescribeDDoSAttackEventRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start time. Time range: 30 days.
+	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time. Time range: 30 days.
+	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// List of DDoS policy IDs. All policies are selected if this field is not specified.
 	PolicyIds []*int64 `json:"PolicyIds,omitnil,omitempty" name:"PolicyIds"`
 
-	// ZoneId set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Limit on paginated queries. Default value: 20. Maximum value: 1000.
@@ -6656,7 +6656,7 @@ type DescribeDDoSAttackTopDataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time.
+	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The statistical metric. Values:
@@ -6668,7 +6668,7 @@ type DescribeDDoSAttackTopDataRequestParams struct {
 	// <li>`ddos_attackFlux_sregion`: Rank attacker regions by the number of attacks.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Site ID set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// The list of DDoS policy IDs to be specified. All policies will be selected if this field is not specified.
@@ -6694,7 +6694,7 @@ type DescribeDDoSAttackTopDataRequestParams struct {
 
 	// Data storage region. Values:
 	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user's location.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
@@ -6704,7 +6704,7 @@ type DescribeDDoSAttackTopDataRequest struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time.
+	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// The statistical metric. Values:
@@ -6716,7 +6716,7 @@ type DescribeDDoSAttackTopDataRequest struct {
 	// <li>`ddos_attackFlux_sregion`: Rank attacker regions by the number of attacks.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// Site ID set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// The list of DDoS policy IDs to be specified. All policies will be selected if this field is not specified.
@@ -6742,7 +6742,7 @@ type DescribeDDoSAttackTopDataRequest struct {
 
 	// Data storage region. Values:
 	// <li>`overseas`: Global (outside the Chinese mainland);</li>
-	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user’s location.
+	// <li>`mainland`: Chinese mainland.</li>If this field is not specified, the data storage region will be determined based on the user's location.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
@@ -9066,17 +9066,19 @@ type DescribeTimingL4DataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time.
+	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Query indicator. Values: 
-	// <li>l4Flow_connections: Number of access connections;</li>
-	// <li>l4Flow_flux: Total access traffic;</li>
-	// <li>l4Flow_inFlux: Ingress access traffic;</li>
-	// <li>l4Flow_outFlux: Egress access traffic. </li>
+	// Metric list. Valid values:
+	// <Li>l4Flow_connections: number of concurrent connections;</li>
+	// <Li>l4Flow_flux: total traffic;</li>
+	// <Li>l4Flow_inFlux: inbound traffic;</li>
+	// <Li>l4Flow_outFlux: outbound traffic.</li>
+	// <Li>l4Flow_inBandwidth: inbound peak bandwidth.</li>
+	// <Li>l4Flow_outBandwidth: outbound peak bandwidth.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// ZoneId set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of L4 proxy IDs. All L4 proxies will be selected if this field is not specified.
@@ -9086,18 +9088,15 @@ type DescribeTimingL4DataRequestParams struct {
 	// <li>`min`: 1 minute;</li>
 	// <li>`5min`: 5 minutes;</li>
 	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
+	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period <= 1 hour: `min`; <br>1 hour < period <= 2 days: `5min`; <br>2 days < period <= 7 days: `hour`; <br>Period > 7 days: `day`.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Filter criteria. The detailed Key values of filter criteria are as follows:
-	// <li>ruleId: Filter by forwarding rule ID.</li>
-	// <li>proxyId: Filter by L4 proxy instance ID.</li>
+	// Filter criteria. The detailed key values of filter criteria are as follows:
+	// <li>ruleId: filter by forwarding rule ID.</li>
+	// <li>proxyId: filter by L4 proxy instance ID.</li>
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Geolocation scope. Values:
-	// <li>`overseas`: Regions outside the Chinese mainland</li>
-	// <li>`mainland`: Chinese mainland</li>
-	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+	// Data ownership region. This parameter is deprecated. Please filter data by client region in Filters.country.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
@@ -9107,17 +9106,19 @@ type DescribeTimingL4DataRequest struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time.
+	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Query indicator. Values: 
-	// <li>l4Flow_connections: Number of access connections;</li>
-	// <li>l4Flow_flux: Total access traffic;</li>
-	// <li>l4Flow_inFlux: Ingress access traffic;</li>
-	// <li>l4Flow_outFlux: Egress access traffic. </li>
+	// Metric list. Valid values:
+	// <Li>l4Flow_connections: number of concurrent connections;</li>
+	// <Li>l4Flow_flux: total traffic;</li>
+	// <Li>l4Flow_inFlux: inbound traffic;</li>
+	// <Li>l4Flow_outFlux: outbound traffic.</li>
+	// <Li>l4Flow_inBandwidth: inbound peak bandwidth.</li>
+	// <Li>l4Flow_outBandwidth: outbound peak bandwidth.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// ZoneId set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// List of L4 proxy IDs. All L4 proxies will be selected if this field is not specified.
@@ -9127,18 +9128,15 @@ type DescribeTimingL4DataRequest struct {
 	// <li>`min`: 1 minute;</li>
 	// <li>`5min`: 5 minutes;</li>
 	// <li>`hour`: 1 hour;</li>
-	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period ≤ 1 hour: `min`; <br>1 hour < Period ≤ 2 days: `5min`; <br>2 days < period ≤ 7 days: `hour`; <br>Period > 7 days: `day`.
+	// <li>`day`: 1 day.</li>If this field is not specified, the granularity will be determined based on the query period. <br>Period <= 1 hour: `min`; <br>1 hour < period <= 2 days: `5min`; <br>2 days < period <= 7 days: `hour`; <br>Period > 7 days: `day`.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
-	// Filter criteria. The detailed Key values of filter criteria are as follows:
-	// <li>ruleId: Filter by forwarding rule ID.</li>
-	// <li>proxyId: Filter by L4 proxy instance ID.</li>
+	// Filter criteria. The detailed key values of filter criteria are as follows:
+	// <li>ruleId: filter by forwarding rule ID.</li>
+	// <li>proxyId: filter by L4 proxy instance ID.</li>
 	Filters []*QueryCondition `json:"Filters,omitnil,omitempty" name:"Filters"`
 
-	// Geolocation scope. Values:
-	// <li>`overseas`: Regions outside the Chinese mainland</li>
-	// <li>`mainland`: Chinese mainland</li>
-	// <li>`global`: Global</li>If this field is not specified, the default value `global` is used.
+	// Data ownership region. This parameter is deprecated. Please filter data by client region in Filters.country.
 	Area *string `json:"Area,omitnil,omitempty" name:"Area"`
 }
 
@@ -9202,7 +9200,7 @@ type DescribeTimingL7AnalysisDataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time.
+	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Metric list. Valid values:.
@@ -9217,14 +9215,14 @@ type DescribeTimingL7AnalysisDataRequestParams struct {
 	// <Li>l7Flow_avgFirstByteResponseTime: Average L7 edge first byte response time. Unit: ms.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Zone ID set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Query period granularity. Valid values:
 	// <li>min: 1 minute;</li>
 	// <li>5min: 5 minutes;</li>
 	// <li>hour: 1 hour;</li>
-	// <li>day: 1 day.</li>If this parameter is not filled in, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.
+	// <li>day: 1 day.</li>If this parameter is not filled in, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 1 hour, no more than 2 days, no more than 7 days, and over 7 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Filter criteria. The detailed key values of filter criteria are as follows:
@@ -9258,7 +9256,7 @@ type DescribeTimingL7AnalysisDataRequest struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time.
+	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Metric list. Valid values:.
@@ -9273,14 +9271,14 @@ type DescribeTimingL7AnalysisDataRequest struct {
 	// <Li>l7Flow_avgFirstByteResponseTime: Average L7 edge first byte response time. Unit: ms.</li>
 	MetricNames []*string `json:"MetricNames,omitnil,omitempty" name:"MetricNames"`
 
-	// Zone ID set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Query period granularity. Valid values:
 	// <li>min: 1 minute;</li>
 	// <li>5min: 5 minutes;</li>
 	// <li>hour: 1 hour;</li>
-	// <li>day: 1 day.</li>If this parameter is not filled in, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 2 hours, no more than 2 days, no more than 7 days, and over 7 days.
+	// <li>day: 1 day.</li>If this parameter is not filled in, the granularity will be automatically calculated based on the interval between the start time and end time. Specifically, data will be queried with a granularity of min, 5min, hour, and day respectively when the period is no more than 1 hour, no more than 2 days, no more than 7 days, and over 7 days.
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Filter criteria. The detailed key values of filter criteria are as follows:
@@ -9504,7 +9502,7 @@ type DescribeTopL7AnalysisDataRequestParams struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time.
+	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Queried metric. Valid values:
@@ -9534,7 +9532,7 @@ type DescribeTopL7AnalysisDataRequestParams struct {
 	// <li> l7Flow_request_ua: L7 request count aggregated by the User-Agent dimension.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// ZoneId set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Indicates the top N data to be queried. The maximum value is 1000. If this parameter is not input, the default value is 10, indicating querying the top 10 data.
@@ -9578,7 +9576,7 @@ type DescribeTopL7AnalysisDataRequest struct {
 	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// The end time.
+	// The end time. The query time range (`EndTime` - `StartTime`) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Queried metric. Valid values:
@@ -9608,7 +9606,7 @@ type DescribeTopL7AnalysisDataRequest struct {
 	// <li> l7Flow_request_ua: L7 request count aggregated by the User-Agent dimension.</li>
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
-	// ZoneId set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
 	// Indicates the top N data to be queried. The maximum value is 1000. If this parameter is not input, the default value is 10, indicating querying the top 10 data.

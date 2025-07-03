@@ -429,6 +429,9 @@ type CreateStreamLiveChannelRequestParams struct {
 
 	// Frame capture templates.
 	FrameCaptureTemplates []*FrameCaptureTemplate `json:"FrameCaptureTemplates,omitnil,omitempty" name:"FrameCaptureTemplates"`
+
+	// General settings.
+	GeneralSettings *GeneralSetting `json:"GeneralSettings,omitnil,omitempty" name:"GeneralSettings"`
 }
 
 type CreateStreamLiveChannelRequest struct {
@@ -475,6 +478,9 @@ type CreateStreamLiveChannelRequest struct {
 
 	// Frame capture templates.
 	FrameCaptureTemplates []*FrameCaptureTemplate `json:"FrameCaptureTemplates,omitnil,omitempty" name:"FrameCaptureTemplates"`
+
+	// General settings.
+	GeneralSettings *GeneralSetting `json:"GeneralSettings,omitnil,omitempty" name:"GeneralSettings"`
 }
 
 func (r *CreateStreamLiveChannelRequest) ToJsonString() string {
@@ -503,6 +509,7 @@ func (r *CreateStreamLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "InputAnalysisSettings")
 	delete(f, "Tags")
 	delete(f, "FrameCaptureTemplates")
+	delete(f, "GeneralSettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamLiveChannelRequest has unknown keys!", "")
 	}
@@ -2340,6 +2347,12 @@ type EventSettingsReq struct {
 
 	// Meta information plan configuration.
 	TimedMetadataSetting *TimedMetadataInfo `json:"TimedMetadataSetting,omitnil,omitempty" name:"TimedMetadataSetting"`
+
+	// Static image activate setting.
+	StaticImageActivateSetting *StaticImageActivateSetting `json:"StaticImageActivateSetting,omitnil,omitempty" name:"StaticImageActivateSetting"`
+
+	// Static image deactivate setting.
+	StaticImageDeactivateSetting *StaticImageDeactivateSetting `json:"StaticImageDeactivateSetting,omitnil,omitempty" name:"StaticImageDeactivateSetting"`
 }
 
 type EventSettingsResp struct {
@@ -2369,6 +2382,12 @@ type EventSettingsResp struct {
 
 	// Meta information plan configuration.
 	TimedMetadataSetting *TimedMetadataInfo `json:"TimedMetadataSetting,omitnil,omitempty" name:"TimedMetadataSetting"`
+
+	// Static image activate setting.
+	StaticImageActivateSetting *StaticImageActivateSetting `json:"StaticImageActivateSetting,omitnil,omitempty" name:"StaticImageActivateSetting"`
+
+	// Static image deactivate setting.
+	StaticImageDeactivateSetting *StaticImageDeactivateSetting `json:"StaticImageDeactivateSetting,omitnil,omitempty" name:"StaticImageDeactivateSetting"`
 }
 
 type FailOverSettings struct {
@@ -2404,6 +2423,11 @@ type FrameCaptureTemplate struct {
 
 	// Sharpness, an integer between 0 and 100.
 	Sharpness *uint64 `json:"Sharpness,omitnil,omitempty" name:"Sharpness"`
+}
+
+type GeneralSetting struct {
+	// Static graphic overlay configuration.
+	StaticImageSettings *StaticImageSettings `json:"StaticImageSettings,omitnil,omitempty" name:"StaticImageSettings"`
 }
 
 // Predefined struct for user
@@ -2747,6 +2771,9 @@ type ModifyStreamLiveChannelRequestParams struct {
 
 	// Frame capture templates.
 	FrameCaptureTemplates []*FrameCaptureTemplate `json:"FrameCaptureTemplates,omitnil,omitempty" name:"FrameCaptureTemplates"`
+
+	// General settings.
+	GeneralSettings *GeneralSetting `json:"GeneralSettings,omitnil,omitempty" name:"GeneralSettings"`
 }
 
 type ModifyStreamLiveChannelRequest struct {
@@ -2796,6 +2823,9 @@ type ModifyStreamLiveChannelRequest struct {
 
 	// Frame capture templates.
 	FrameCaptureTemplates []*FrameCaptureTemplate `json:"FrameCaptureTemplates,omitnil,omitempty" name:"FrameCaptureTemplates"`
+
+	// General settings.
+	GeneralSettings *GeneralSetting `json:"GeneralSettings,omitnil,omitempty" name:"GeneralSettings"`
 }
 
 func (r *ModifyStreamLiveChannelRequest) ToJsonString() string {
@@ -2825,6 +2855,7 @@ func (r *ModifyStreamLiveChannelRequest) FromJsonString(s string) error {
 	delete(f, "InputAnalysisSettings")
 	delete(f, "Tags")
 	delete(f, "FrameCaptureTemplates")
+	delete(f, "GeneralSettings")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamLiveChannelRequest has unknown keys!", "")
 	}
@@ -3436,6 +3467,51 @@ func (r *StartStreamLiveChannelResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
 }
 
+type StaticImageActivateSetting struct {
+	// The address of the image to be inserted, starting with http or https and ending with .png .PNG .bmp .BMP .tga .TGA.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// The layer of the superimposed image, 0-7; the default value is 0, and a higher layer means it is on the top.
+	Layer *int64 `json:"Layer,omitnil,omitempty" name:"Layer"`
+
+	// Opacity, range 0-100; the default value is 100, which means completely opaque.
+	Opacity *int64 `json:"Opacity,omitnil,omitempty" name:"Opacity"`
+
+	// The distance from the left edge in pixels; the default value is 0 and the maximum value is 4096.
+	ImageX *int64 `json:"ImageX,omitnil,omitempty" name:"ImageX"`
+
+	// The distance from the top edge in pixels; the default value is 0 and the maximum value is 2160.
+	ImageY *int64 `json:"ImageY,omitnil,omitempty" name:"ImageY"`
+
+	// The width of the image superimposed on the video frame, in pixels. The default value is empty (not set), which means using the original image size. The minimum value is 1 and the maximum value is 4096.
+	Width *int64 `json:"Width,omitnil,omitempty" name:"Width"`
+
+	// The height of the image superimposed on the video frame, in pixels. The default value is empty (not set), which means the original image size is used. The minimum value is 1 and the maximum value is 2160.
+	Height *int64 `json:"Height,omitnil,omitempty" name:"Height"`
+
+	// Overlay duration, in milliseconds, range 0-86400000; default value 0, 0 means continuous.
+	Duration *int64 `json:"Duration,omitnil,omitempty" name:"Duration"`
+
+	// Fade-in duration, in milliseconds, range 0-5000; default value 0, 0 means no fade-in effect.
+	FadeIn *int64 `json:"FadeIn,omitnil,omitempty" name:"FadeIn"`
+
+	// Fade-out duration, in milliseconds, range 0-5000; default value 0, 0 means no fade-out effect.
+	FadeOut *int64 `json:"FadeOut,omitnil,omitempty" name:"FadeOut"`
+}
+
+type StaticImageDeactivateSetting struct {
+	// The overlay level to be canceled, range 0-7, default value 0.
+	Layer *int64 `json:"Layer,omitnil,omitempty" name:"Layer"`
+
+	// Fade-out duration, in milliseconds, range 0-5000; default value 0, 0 means no fade-out effect.
+	FadeOut *int64 `json:"FadeOut,omitnil,omitempty" name:"FadeOut"`
+}
+
+type StaticImageSettings struct {
+	// Whether to enable global static image overlay, 0: Disable, 1: Enable; Default value: 0.
+	GlobalImageOverlayEnabled *int64 `json:"GlobalImageOverlayEnabled,omitnil,omitempty" name:"GlobalImageOverlayEnabled"`
+}
+
 // Predefined struct for user
 type StopStreamLiveChannelRequestParams struct {
 	// Channel ID
@@ -3554,7 +3630,7 @@ type StreamLiveChannelInfo struct {
 	// Note: this field may return `null`, indicating that no valid value was found.
 	AVTemplates []*AVTemplate `json:"AVTemplates,omitnil,omitempty" name:"AVTemplates"`
 
-
+	// Caption templates.
 	CaptionTemplates []*SubtitleConf `json:"CaptionTemplates,omitnil,omitempty" name:"CaptionTemplates"`
 
 	// Event settings
@@ -3579,6 +3655,9 @@ type StreamLiveChannelInfo struct {
 
 	// Frame capture templates.
 	FrameCaptureTemplates []*FrameCaptureTemplate `json:"FrameCaptureTemplates,omitnil,omitempty" name:"FrameCaptureTemplates"`
+
+	// General settings.
+	GeneralSettings *GeneralSetting `json:"GeneralSettings,omitnil,omitempty" name:"GeneralSettings"`
 }
 
 type StreamLiveOutputGroupsInfo struct {
