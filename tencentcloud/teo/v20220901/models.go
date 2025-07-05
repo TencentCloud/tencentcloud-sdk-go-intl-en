@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+// Copyright (c) 2017-2025 Tencent. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -15627,11 +15627,10 @@ type OriginInfo struct {
 	// Private authentication parameter. This parameter is valid only when PrivateAccess is on.
 	PrivateParameters []*PrivateParameter `json:"PrivateParameters,omitnil,omitempty" name:"PrivateParameters"`
 
-	// Custom origin HOST header, this parameter only takes effect when OriginType=IP_DOMAIN. 
-	// 
-	// - If OriginType=COS or AWS_S3, the origin HOST header will be consistent with the origin domain name. 
-	// - If OriginType=ORIGIN_GROUP, the origin HOST header follows the configuration within the origin group;if not configured, it defaults to the acceleration domain name. 
-	// - If OriginType=VOD or SPACE, there is no need to configure this header, and it will take effect according to the corresponding origin domain name.
+	// Custom origin server HOST header. this parameter is valid only when OriginType=IP_DOMAIN.If the OriginType is another type of origin, this parameter does not need to be passed in, otherwise an error will be reported.
+	// If OriginType is COS or AWS_S3, the HOST header for origin-pull will remain consistent with the origin server domain name.
+	// If OriginType is ORIGIN_GROUP, the HOST header follows the ORIGIN site GROUP configuration. if not configured, it defaults to the acceleration domain name.
+	// If OriginType is VOD or SPACE, no configuration is required for this header, and the domain name takes effect based on the corresponding origin.
 	HostHeader *string `json:"HostHeader,omitnil,omitempty" name:"HostHeader"`
 
 	// VODEO sub-application ID. This parameter is required when OriginType is VODEO.

@@ -1,4 +1,4 @@
-// Copyright (c) 2017-2018 THL A29 Limited, a Tencent company. All Rights Reserved.
+// Copyright (c) 2017-2025 Tencent. All Rights Reserved.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -5307,6 +5307,10 @@ type Instance struct {
 	// Latest operation errors of the instance.
 	// Note: This field may return `null`, indicating that no valid values can be obtained.
 	LatestOperationErrorMsg *string `json:"LatestOperationErrorMsg,omitnil,omitempty" name:"LatestOperationErrorMsg"`
+
+	// Public IPv6 address of the instance.
+	// Note: this field may return null, indicating that no valid value was found.
+	PublicIPv6Addresses []*string `json:"PublicIPv6Addresses,omitnil,omitempty" name:"PublicIPv6Addresses"`
 }
 
 type InstanceAttribute struct {
@@ -5439,6 +5443,45 @@ type InternetAccessible struct {
 
 	// Bandwidth package ID. it can be obtained through the `BandwidthPackageId` in the return value from the DescribeBandwidthPackages api. this parameter is used as an input parameter only in the RunInstances api.
 	BandwidthPackageId *string `json:"BandwidthPackageId,omitnil,omitempty" name:"BandwidthPackageId"`
+
+	// The EIP line type. 
+	//  <li>BGP Default: BGP</li>
+	// 
+	// For a user who has activated the static single-line IP allowlist, possible values are:
+	// 
+	//  <li>CMCC: China Mobile</li>
+	//  <li>CTCC: China Telecom</li>
+	//  <li>CUCC: China Unicom</li>
+	// 
+	// Note: Only certain regions support static single-line IP addresses.
+	InternetServiceProvider *string `json:"InternetServiceProvider,omitnil,omitempty" name:"InternetServiceProvider"`
+
+	// AddressType. Default value: `WanIP`.
+	// 
+	// For beta users of dedicated IP, the value can be:
+	// <li>HighQualityEIP: Dedicated IP</li>
+	// Note that dedicated IPs are only available in partial regions.
+	// 
+	// For beta users of Anti-DDoS IP, the value can be:
+	// <li>AntiDDoSEIP: Anti-DDoS EIP</li>
+	// Note that Anti-DDoS IPs are only available in partial regions.
+	// 
+	// This feature is currently in gradually released phase. To access it, please contact us.
+	IPv4AddressType *string `json:"IPv4AddressType,omitnil,omitempty" name:"IPv4AddressType"`
+
+	// Indicates the type of EIPv6. Valid values:
+	// 
+	// <li>EIPv6: common IPv6</li>
+	// <li>HighQualityEIPv6: dedicated IPv6</li>
+	// Note: Contact the product team to enable the dedicated IPv6 allowlist. The dedicated IPv6 is only supported in some regions. 
+	// 
+	// Default: `EIPv6`
+	// 
+	// This feature is currently in gradually released phase. To access it, please contact us.
+	IPv6AddressType *string `json:"IPv6AddressType,omitnil,omitempty" name:"IPv6AddressType"`
+
+	// Anti-DDoS service package ID. This is required when you want to request an Anti-DDoS IP.
+	AntiDDoSPackageId *string `json:"AntiDDoSPackageId,omitnil,omitempty" name:"AntiDDoSPackageId"`
 }
 
 type InternetChargeTypeConfig struct {
@@ -7556,7 +7599,7 @@ type RunInstancesRequestParams struct {
 	Placement *Placement `json:"Placement,omitnil,omitempty" name:"Placement"`
 
 	// The instance model. 
-	// <br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). If this parameter is not specified, `S1.SMALL1` will be used by default.<br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
+	// <br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). <br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><br/>To check the image ID:<br/><li>For public images, custom images, and shared images, go to the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
@@ -7611,6 +7654,9 @@ type RunInstancesRequestParams struct {
 	// User data provided to the instance. This parameter needs to be encoded in base64 format with the maximum size of 16 KB. For more information on how to get the value of this parameter, see the commands you need to execute on startup for [Windows](https://intl.cloud.tencent.com/document/product/213/17526) or [Linux](https://intl.cloud.tencent.com/document/product/213/17525).
 	UserData *string `json:"UserData,omitnil,omitempty" name:"UserData"`
 
+
+	Metadata *Metadata `json:"Metadata,omitnil,omitempty" name:"Metadata"`
+
 	// Whether the request is a dry run only.
 	// `true`: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
 	// If the dry run fails, the corresponding error code will be returned.
@@ -7638,6 +7684,9 @@ type RunInstancesRequestParams struct {
 
 	// Instance termination protection flag, indicating whether an instance is allowed to be deleted through an API. Valid values:<br><li>true: Instance protection is enabled, and the instance is not allowed to be deleted through the API.</li><br><li>false: Instance protection is disabled, and the instance is allowed to be deleted through the API.</li><br><br>Default value: false.
 	DisableApiTermination *bool `json:"DisableApiTermination,omitnil,omitempty" name:"DisableApiTermination"`
+
+
+	EnableJumboFrame *bool `json:"EnableJumboFrame,omitnil,omitempty" name:"EnableJumboFrame"`
 }
 
 type RunInstancesRequest struct {
@@ -7654,7 +7703,7 @@ type RunInstancesRequest struct {
 	Placement *Placement `json:"Placement,omitnil,omitempty" name:"Placement"`
 
 	// The instance model. 
-	// <br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). If this parameter is not specified, `S1.SMALL1` will be used by default.<br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
+	// <br><li>To view specific values for `POSTPAID_BY_HOUR` instances, you can call [DescribeInstanceTypeConfigs](https://intl.cloud.tencent.com/document/api/213/15749?from_cn_redirect=1) or refer to [Instance Types](https://intl.cloud.tencent.com/document/product/213/11518?from_cn_redirect=1). <br><li>For `CDHPAID` instances, the value of this parameter is in the format of `CDH_XCXG` based on the number of CPU cores and memory capacity. For example, if you want to create a CDH instance with a single-core CPU and 1 GB memory, specify this parameter as `CDH_1C1G`.
 	InstanceType *string `json:"InstanceType,omitnil,omitempty" name:"InstanceType"`
 
 	// The [image](https://intl.cloud.tencent.com/document/product/213/4940?from_cn_redirect=1) ID in the format of `img-xxx`. There are three types of images:<br/><li>Public images</li><li>Custom images</li><li>Shared images</li><br/>To check the image ID:<br/><li>For public images, custom images, and shared images, go to the [CVM console](https://console.cloud.tencent.com/cvm/image?rid=1&imageType=PUBLIC_IMAGE). </li><li>Call [DescribeImages](https://intl.cloud.tencent.com/document/api/213/15715?from_cn_redirect=1), pass in `InstanceType` to retrieve the list of images supported by the current model, and then find the `ImageId` in the response.</li>
@@ -7709,6 +7758,8 @@ type RunInstancesRequest struct {
 	// User data provided to the instance. This parameter needs to be encoded in base64 format with the maximum size of 16 KB. For more information on how to get the value of this parameter, see the commands you need to execute on startup for [Windows](https://intl.cloud.tencent.com/document/product/213/17526) or [Linux](https://intl.cloud.tencent.com/document/product/213/17525).
 	UserData *string `json:"UserData,omitnil,omitempty" name:"UserData"`
 
+	Metadata *Metadata `json:"Metadata,omitnil,omitempty" name:"Metadata"`
+
 	// Whether the request is a dry run only.
 	// `true`: dry run only. The request will not create instance(s). A dry run can check whether all the required parameters are specified, whether the request format is right, whether the request exceeds service limits, and whether the specified CVMs are available.
 	// If the dry run fails, the corresponding error code will be returned.
@@ -7736,6 +7787,8 @@ type RunInstancesRequest struct {
 
 	// Instance termination protection flag, indicating whether an instance is allowed to be deleted through an API. Valid values:<br><li>true: Instance protection is enabled, and the instance is not allowed to be deleted through the API.</li><br><li>false: Instance protection is disabled, and the instance is allowed to be deleted through the API.</li><br><br>Default value: false.
 	DisableApiTermination *bool `json:"DisableApiTermination,omitnil,omitempty" name:"DisableApiTermination"`
+
+	EnableJumboFrame *bool `json:"EnableJumboFrame,omitnil,omitempty" name:"EnableJumboFrame"`
 }
 
 func (r *RunInstancesRequest) ToJsonString() string {
@@ -7771,6 +7824,7 @@ func (r *RunInstancesRequest) FromJsonString(s string) error {
 	delete(f, "TagSpecification")
 	delete(f, "InstanceMarketOptions")
 	delete(f, "UserData")
+	delete(f, "Metadata")
 	delete(f, "DryRun")
 	delete(f, "CpuTopology")
 	delete(f, "CamRoleName")
@@ -7779,6 +7833,7 @@ func (r *RunInstancesRequest) FromJsonString(s string) error {
 	delete(f, "DedicatedClusterId")
 	delete(f, "ChcIds")
 	delete(f, "DisableApiTermination")
+	delete(f, "EnableJumboFrame")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "RunInstancesRequest has unknown keys!", "")
 	}
@@ -8117,15 +8172,15 @@ func (r *SyncImagesResponse) FromJsonString(s string) error {
 }
 
 type SystemDisk struct {
-	// Specifies the system disk type. for the restrictions on the system disk type, refer to [storage overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). value range:<br>.
-	// <Li>LOCAL_BASIC: specifies a local hard disk.</li>.
-	// <Li>LOCAL_SSD: specifies a local ssd.</li>.
-	// <Li>CLOUD_BASIC: ordinary cloud disk.</li>.
-	// <Li>CLOUD_SSD: ssd cloud disk</li>.
-	// <Li>CLOUD_PREMIUM: high-performance cloud block storage.</li>.
-	// <Li>CLOUD_BSSD: universal type ssd cloud disk</li>.
-	// <Li>CLOUD_HSSD: enhanced ssd cloud disk</li>.
-	// <li>CLOUD_TSSD: ultra-fast SSD cbs</li.
+	// Specifies the system disk type. for the restrictions on the system disk type, refer to [storage overview](https://intl.cloud.tencent.com/document/product/213/4952?from_cn_redirect=1). value range:<br>
+	// <li>LOCAL_BASIC: Local SATA disk</li>
+	// <li>LOCAL_SSD: Local NVMe SSD</li>
+	// <li>CLOUD_BASIC: Cloud SATA disk</li>
+	// <li>CLOUD_SSD: Cloud SSD</li>
+	// <li>CLOUD_PREMIUM: Premium SSD</li>
+	// <li>CLOUD_BSSD: Balanced SSD</li>
+	// <li>CLOUD_HSSD: Enhanced SSD</li>
+	// <li>CLOUD_TSSD: Tremendous SSD</li>
 	// Default value: Current disk types with inventory available.
 	DiskType *string `json:"DiskType,omitnil,omitempty" name:"DiskType"`
 
@@ -8172,6 +8227,12 @@ type TerminateInstancesRequestParams struct {
 	// One or more instance IDs to be operated. You can obtain the instance ID through the `InstanceId` in the return value from the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1). The maximum number of instances per request is 100.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
 
+	// Release an Elastic IP. Under EIP 2.0, only the first EIP on the primary network interface can be released, and currently supported release types are limited to HighQualityEIP, AntiDDoSEIP, EIPv6, and HighQualityEIPv6.
+	// Default value:  `false`.
+	// 
+	// This feature is currently in gradually released phase. To access it, please contact us.
+	ReleaseAddress *bool `json:"ReleaseAddress,omitnil,omitempty" name:"ReleaseAddress"`
+
 	// Whether to release a monthly subscription data disk mounted on an instance. true: Release the data disk along with termination of the instance. false: Only terminate the instance.
 	// Default value: `false`.
 	ReleasePrepaidDataDisks *bool `json:"ReleasePrepaidDataDisks,omitnil,omitempty" name:"ReleasePrepaidDataDisks"`
@@ -8182,6 +8243,12 @@ type TerminateInstancesRequest struct {
 	
 	// One or more instance IDs to be operated. You can obtain the instance ID through the `InstanceId` in the return value from the API [DescribeInstances](https://intl.cloud.tencent.com/document/api/213/15728?from_cn_redirect=1). The maximum number of instances per request is 100.
 	InstanceIds []*string `json:"InstanceIds,omitnil,omitempty" name:"InstanceIds"`
+
+	// Release an Elastic IP. Under EIP 2.0, only the first EIP on the primary network interface can be released, and currently supported release types are limited to HighQualityEIP, AntiDDoSEIP, EIPv6, and HighQualityEIPv6.
+	// Default value:  `false`.
+	// 
+	// This feature is currently in gradually released phase. To access it, please contact us.
+	ReleaseAddress *bool `json:"ReleaseAddress,omitnil,omitempty" name:"ReleaseAddress"`
 
 	// Whether to release a monthly subscription data disk mounted on an instance. true: Release the data disk along with termination of the instance. false: Only terminate the instance.
 	// Default value: `false`.
@@ -8201,6 +8268,7 @@ func (r *TerminateInstancesRequest) FromJsonString(s string) error {
 		return err
 	}
 	delete(f, "InstanceIds")
+	delete(f, "ReleaseAddress")
 	delete(f, "ReleasePrepaidDataDisks")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "TerminateInstancesRequest has unknown keys!", "")
@@ -8244,6 +8312,7 @@ type VirtualPrivateCloud struct {
 	PrivateIpAddresses []*string `json:"PrivateIpAddresses,omitnil,omitempty" name:"PrivateIpAddresses"`
 
 	// Number of IPv6 addresses randomly generated for the ENI.
+	// If IPv6AddressType is specified under InternetAccessible, this parameter must not be set to 0.
 	Ipv6AddressCount *uint64 `json:"Ipv6AddressCount,omitnil,omitempty" name:"Ipv6AddressCount"`
 }
 
