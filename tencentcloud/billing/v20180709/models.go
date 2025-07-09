@@ -2752,6 +2752,8 @@ type DescribeBillDetailRequestParams struct {
 	NeedRecordNum *int64 `json:"NeedRecordNum,omitnil,omitempty" name:"NeedRecordNum"`
 
 	// Queries information on a specified product
+	//
+	// Deprecated: ProductCode is deprecated.
 	ProductCode *string `json:"ProductCode,omitnil,omitempty" name:"ProductCode"`
 
 	// Billing mode: prePay/postPay
