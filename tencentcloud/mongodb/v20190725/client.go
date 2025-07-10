@@ -65,7 +65,7 @@ func NewAssignProjectResponse() (response *AssignProjectResponse) {
 }
 
 // AssignProject
-// This API is used to specify the project to which a TencentDB instance belongs.
+// This API is used to specify the project of a TencentDB for MongoDB instance.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -77,7 +77,7 @@ func (c *Client) AssignProject(request *AssignProjectRequest) (response *AssignP
 }
 
 // AssignProject
-// This API is used to specify the project to which a TencentDB instance belongs.
+// This API is used to specify the project of a TencentDB for MongoDB instance.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -120,7 +120,7 @@ func NewCreateBackupDBInstanceResponse() (response *CreateBackupDBInstanceRespon
 }
 
 // CreateBackupDBInstance
-// This API is used to create instance backups.
+// This API is used to back up an instance.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -135,7 +135,7 @@ func (c *Client) CreateBackupDBInstance(request *CreateBackupDBInstanceRequest) 
 }
 
 // CreateBackupDBInstance
-// This API is used to create instance backups.
+// This API is used to back up an instance.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -402,7 +402,7 @@ func NewDescribeAsyncRequestInfoResponse() (response *DescribeAsyncRequestInfoRe
 }
 
 // DescribeAsyncRequestInfo
-// This API is used to query async task status.
+// This API is used to query the asynchronous task status.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -413,7 +413,7 @@ func (c *Client) DescribeAsyncRequestInfo(request *DescribeAsyncRequestInfoReque
 }
 
 // DescribeAsyncRequestInfo
-// This API is used to query async task status.
+// This API is used to query the asynchronous task status.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -512,7 +512,7 @@ func NewDescribeClientConnectionsResponse() (response *DescribeClientConnections
 }
 
 // DescribeClientConnections
-// This API is used to query the client connection information of an instance, including the IP and number of connections. Currently, only instances of MongoDB 3.2 are supported.
+// This API is used to query the client connection information on an instance, including the IP address for connection and the number of connections.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -525,7 +525,7 @@ func (c *Client) DescribeClientConnections(request *DescribeClientConnectionsReq
 }
 
 // DescribeClientConnections
-// This API is used to query the client connection information of an instance, including the IP and number of connections. Currently, only instances of MongoDB 3.2 are supported.
+// This API is used to query the client connection information on an instance, including the IP address for connection and the number of connections.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -622,7 +622,7 @@ func NewDescribeDBInstanceDealResponse() (response *DescribeDBInstanceDealRespon
 }
 
 // DescribeDBInstanceDeal
-// This API is used to get details of purchase, renewal, and specification adjustment orders of a MongoDB instance.
+// This API is used to get order details of purchase, renewal, and specification adjustment of a MongoDB instance.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -633,7 +633,7 @@ func (c *Client) DescribeDBInstanceDeal(request *DescribeDBInstanceDealRequest) 
 }
 
 // DescribeDBInstanceDeal
-// This API is used to get details of purchase, renewal, and specification adjustment orders of a MongoDB instance.
+// This API is used to get order details of purchase, renewal, and specification adjustment of a MongoDB instance.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -651,6 +651,57 @@ func (c *Client) DescribeDBInstanceDealWithContext(ctx context.Context, request 
     request.SetContext(ctx)
     
     response = NewDescribeDBInstanceDealResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeDBInstanceNamespaceRequest() (request *DescribeDBInstanceNamespaceRequest) {
+    request = &DescribeDBInstanceNamespaceRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("mongodb", APIVersion, "DescribeDBInstanceNamespace")
+    
+    
+    return
+}
+
+func NewDescribeDBInstanceNamespaceResponse() (response *DescribeDBInstanceNamespaceResponse) {
+    response = &DescribeDBInstanceNamespaceResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeDBInstanceNamespace
+// This API is used to query the table information on a database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeDBInstanceNamespace(request *DescribeDBInstanceNamespaceRequest) (response *DescribeDBInstanceNamespaceResponse, err error) {
+    return c.DescribeDBInstanceNamespaceWithContext(context.Background(), request)
+}
+
+// DescribeDBInstanceNamespace
+// This API is used to query the table information on a database.
+//
+// error code that may be returned:
+//  INTERNALERROR = "InternalError"
+//  INVALIDPARAMETER = "InvalidParameter"
+func (c *Client) DescribeDBInstanceNamespaceWithContext(ctx context.Context, request *DescribeDBInstanceNamespaceRequest) (response *DescribeDBInstanceNamespaceResponse, err error) {
+    if request == nil {
+        request = NewDescribeDBInstanceNamespaceRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeDBInstanceNamespace require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeDBInstanceNamespaceResponse()
     err = c.Send(request, response)
     return
 }
@@ -675,7 +726,7 @@ func NewDescribeDBInstancesResponse() (response *DescribeDBInstancesResponse) {
 }
 
 // DescribeDBInstances
-// This API is used to query the list of TencentDB instances (which can be primary, disaster recovery, or read-only instances). It supports filtering instances by project ID, instance ID, and instance status.
+// This API is used to query the list of TencentDB for MongoDB instances. It supports filtering primary instances, disaster recovery instances, and read-only instances by project ID, instance ID, instance status, and other conditions.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -683,13 +734,14 @@ func NewDescribeDBInstancesResponse() (response *DescribeDBInstancesResponse) {
 //  INVALIDPARAMETERVALUE_REGIONERROR = "InvalidParameterValue.RegionError"
 //  INVALIDPARAMETERVALUE_VPCIDORSUBNETIDNOTFOUND = "InvalidParameterValue.VpcIdOrSubnetIdNotFound"
 //  INVALIDPARAMETERVALUE_ZONEERROR = "InvalidParameterValue.ZoneError"
+//  LIMITEXCEEDED_TOOMANYREQUESTS = "LimitExceeded.TooManyRequests"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDBInstances(request *DescribeDBInstancesRequest) (response *DescribeDBInstancesResponse, err error) {
     return c.DescribeDBInstancesWithContext(context.Background(), request)
 }
 
 // DescribeDBInstances
-// This API is used to query the list of TencentDB instances (which can be primary, disaster recovery, or read-only instances). It supports filtering instances by project ID, instance ID, and instance status.
+// This API is used to query the list of TencentDB for MongoDB instances. It supports filtering primary instances, disaster recovery instances, and read-only instances by project ID, instance ID, instance status, and other conditions.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
@@ -697,6 +749,7 @@ func (c *Client) DescribeDBInstances(request *DescribeDBInstancesRequest) (respo
 //  INVALIDPARAMETERVALUE_REGIONERROR = "InvalidParameterValue.RegionError"
 //  INVALIDPARAMETERVALUE_VPCIDORSUBNETIDNOTFOUND = "InvalidParameterValue.VpcIdOrSubnetIdNotFound"
 //  INVALIDPARAMETERVALUE_ZONEERROR = "InvalidParameterValue.ZoneError"
+//  LIMITEXCEEDED_TOOMANYREQUESTS = "LimitExceeded.TooManyRequests"
 //  UNSUPPORTEDOPERATION = "UnsupportedOperation"
 func (c *Client) DescribeDBInstancesWithContext(ctx context.Context, request *DescribeDBInstancesRequest) (response *DescribeDBInstancesResponse, err error) {
     if request == nil {
@@ -734,7 +787,7 @@ func NewDescribeInstanceParamsResponse() (response *DescribeInstanceParamsRespon
 }
 
 // DescribeInstanceParams
-// This API is used to query the modifiable parameter list of an instance.
+// This API is used to query the list of parameters that can be modified for the current instance.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -748,7 +801,7 @@ func (c *Client) DescribeInstanceParams(request *DescribeInstanceParamsRequest) 
 }
 
 // DescribeInstanceParams
-// This API is used to query the modifiable parameter list of an instance.
+// This API is used to query the list of parameters that can be modified for the current instance.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -793,7 +846,7 @@ func NewDescribeSecurityGroupResponse() (response *DescribeSecurityGroupResponse
 }
 
 // DescribeSecurityGroup
-// This API is used to query the security groups associated with an instance.
+// This API is used to query security groups bound to an instance.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -805,7 +858,7 @@ func (c *Client) DescribeSecurityGroup(request *DescribeSecurityGroupRequest) (r
 }
 
 // DescribeSecurityGroup
-// This API is used to query the security groups associated with an instance.
+// This API is used to query security groups bound to an instance.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1207,6 +1260,7 @@ func NewInquirePriceRenewDBInstancesResponse() (response *InquirePriceRenewDBIns
 //  INTERNALERROR_FINDINSTANCEFAILED = "InternalError.FindInstanceFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_INVALIDTRADEOPERATION = "InvalidParameterValue.InvalidTradeOperation"
 //  INVALIDPARAMETERVALUE_ZONECLOSED = "InvalidParameterValue.ZoneClosed"
 func (c *Client) InquirePriceRenewDBInstances(request *InquirePriceRenewDBInstancesRequest) (response *InquirePriceRenewDBInstancesResponse, err error) {
     return c.InquirePriceRenewDBInstancesWithContext(context.Background(), request)
@@ -1220,6 +1274,7 @@ func (c *Client) InquirePriceRenewDBInstances(request *InquirePriceRenewDBInstan
 //  INTERNALERROR_FINDINSTANCEFAILED = "InternalError.FindInstanceFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
 //  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
+//  INVALIDPARAMETERVALUE_INVALIDTRADEOPERATION = "InvalidParameterValue.InvalidTradeOperation"
 //  INVALIDPARAMETERVALUE_ZONECLOSED = "InvalidParameterValue.ZoneClosed"
 func (c *Client) InquirePriceRenewDBInstancesWithContext(ctx context.Context, request *InquirePriceRenewDBInstancesRequest) (response *InquirePriceRenewDBInstancesResponse, err error) {
     if request == nil {
@@ -1320,9 +1375,10 @@ func NewModifyDBInstanceNetworkAddressResponse() (response *ModifyDBInstanceNetw
 }
 
 // ModifyDBInstanceNetworkAddress
-// This API is used to modify the network settings of a TencentDB instance, such as switching its network type from classic network to VPC or between VPCs.
+// This API is used to modify the network information on a TencentDB for MongoDB instance. It supports switching from a basic network to a VPC network or from one VPC network to another VPC network.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_NOTALLOWMODIFYADDRAFTEROPENWANSERVICE = "FailedOperation.NotAllowModifyAddrAfterOpenWanService"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1334,9 +1390,10 @@ func (c *Client) ModifyDBInstanceNetworkAddress(request *ModifyDBInstanceNetwork
 }
 
 // ModifyDBInstanceNetworkAddress
-// This API is used to modify the network settings of a TencentDB instance, such as switching its network type from classic network to VPC or between VPCs.
+// This API is used to modify the network information on a TencentDB for MongoDB instance. It supports switching from a basic network to a VPC network or from one VPC network to another VPC network.
 //
 // error code that may be returned:
+//  FAILEDOPERATION_NOTALLOWMODIFYADDRAFTEROPENWANSERVICE = "FailedOperation.NotAllowModifyAddrAfterOpenWanService"
 //  INTERNALERROR = "InternalError"
 //  INTERNALERROR_CHECKAPPIDFAILED = "InternalError.CheckAppIdFailed"
 //  INVALIDPARAMETER = "InvalidParameter"
@@ -1379,7 +1436,7 @@ func NewModifyDBInstanceSecurityGroupResponse() (response *ModifyDBInstanceSecur
 }
 
 // ModifyDBInstanceSecurityGroup
-// This API is used to modify the security groups associated with an instance.
+// This API is used to modify security groups bound to an instance.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1394,7 +1451,7 @@ func (c *Client) ModifyDBInstanceSecurityGroup(request *ModifyDBInstanceSecurity
 }
 
 // ModifyDBInstanceSecurityGroup
-// This API is used to modify the security groups associated with an instance.
+// This API is used to modify security groups bound to an instance.
 //
 // error code that may be returned:
 //  INTERNALERROR = "InternalError"
@@ -1440,9 +1497,10 @@ func NewModifyDBInstanceSpecResponse() (response *ModifyDBInstanceSpecResponse) 
 }
 
 // ModifyDBInstanceSpec
-// This API is used to adjust the specification configuration of a TencentDB for MongoDB. The purchasable specifications supported by the API can be obtained through the DescribeSpecInfo API.
+// This API is used to adjust the configuration of a TencentDB for MongoDB instance. Saleable specifications supported for this API can be obtained from the DescribeSpecInfo API for querying saleable TencentDB for MongoDB specifications.
 //
 // error code that may be returned:
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETER_ZONECLOSED = "InvalidParameter.ZoneClosed"
 //  INVALIDPARAMETERVALUE_INVALIDTRADEOPERATION = "InvalidParameterValue.InvalidTradeOperation"
 //  INVALIDPARAMETERVALUE_MODIFYMODEERROR = "InvalidParameterValue.ModifyModeError"
@@ -1456,9 +1514,10 @@ func (c *Client) ModifyDBInstanceSpec(request *ModifyDBInstanceSpecRequest) (res
 }
 
 // ModifyDBInstanceSpec
-// This API is used to adjust the specification configuration of a TencentDB for MongoDB. The purchasable specifications supported by the API can be obtained through the DescribeSpecInfo API.
+// This API is used to adjust the configuration of a TencentDB for MongoDB instance. Saleable specifications supported for this API can be obtained from the DescribeSpecInfo API for querying saleable TencentDB for MongoDB specifications.
 //
 // error code that may be returned:
+//  INVALIDPARAMETER_PERMISSIONDENIED = "InvalidParameter.PermissionDenied"
 //  INVALIDPARAMETER_ZONECLOSED = "InvalidParameter.ZoneClosed"
 //  INVALIDPARAMETERVALUE_INVALIDTRADEOPERATION = "InvalidParameterValue.InvalidTradeOperation"
 //  INVALIDPARAMETERVALUE_MODIFYMODEERROR = "InvalidParameterValue.ModifyModeError"
@@ -1511,6 +1570,7 @@ func NewOfflineIsolatedDBInstanceResponse() (response *OfflineIsolatedDBInstance
 //  INVALIDPARAMETERVALUE_INSTANCEHASBEENDELETED = "InvalidParameterValue.InstanceHasBeenDeleted"
 //  INVALIDPARAMETERVALUE_LOCKFAILED = "InvalidParameterValue.LockFailed"
 //  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
 func (c *Client) OfflineIsolatedDBInstance(request *OfflineIsolatedDBInstanceRequest) (response *OfflineIsolatedDBInstanceResponse, err error) {
     return c.OfflineIsolatedDBInstanceWithContext(context.Background(), request)
 }
@@ -1524,6 +1584,7 @@ func (c *Client) OfflineIsolatedDBInstance(request *OfflineIsolatedDBInstanceReq
 //  INVALIDPARAMETERVALUE_INSTANCEHASBEENDELETED = "InvalidParameterValue.InstanceHasBeenDeleted"
 //  INVALIDPARAMETERVALUE_LOCKFAILED = "InvalidParameterValue.LockFailed"
 //  INVALIDPARAMETERVALUE_NOTFOUNDINSTANCE = "InvalidParameterValue.NotFoundInstance"
+//  INVALIDPARAMETERVALUE_STATUSABNORMAL = "InvalidParameterValue.StatusAbnormal"
 func (c *Client) OfflineIsolatedDBInstanceWithContext(ctx context.Context, request *OfflineIsolatedDBInstanceRequest) (response *OfflineIsolatedDBInstanceResponse, err error) {
     if request == nil {
         request = NewOfflineIsolatedDBInstanceRequest()
