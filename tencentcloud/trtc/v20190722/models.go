@@ -2209,6 +2209,12 @@ type McuAudioParams struct {
 	UnSubscribeAudioList []*McuUserInfoParams `json:"UnSubscribeAudioList,omitnil,omitempty" name:"UnSubscribeAudioList"`
 }
 
+type McuCloudVod struct {
+	// Tencent VOD Parameters
+	// Example :{"ExpireTime":86400}
+	McuTencentVod *McuTencentVod `json:"McuTencentVod,omitnil,omitempty" name:"McuTencentVod"`
+}
+
 type McuCustomCrop struct {
 	// The horizontal offset (pixels) of the starting point for cropping. This parameter must be greater than 0.
 	LocationX *uint64 `json:"LocationX,omitnil,omitempty" name:"LocationX"`
@@ -2335,12 +2341,121 @@ type McuPublishCdnParam struct {
 	IsTencentCdn *uint64 `json:"IsTencentCdn,omitnil,omitempty" name:"IsTencentCdn"`
 }
 
+type McuRecordParams struct {
+	// Relay Recording Mode
+	// 0/blank: Not currently supported, behavior undefined.
+	// 1: Disable recording.
+	// 2: Start recording (uses console's auto-recording template parameters. Reference: [Link to Documentation]).
+	// 3: Start recording (uses API-specified parameters).
+	// Example: 2
+	UniRecord *uint64 `json:"UniRecord,omitnil,omitempty" name:"UniRecord"`
+
+	// Recording Task Key
+	// Identifies a recording task. This parameter allows merging multiple relay tasks into one recording file. If unspecified, only records the current relay task.
+	// [Format: Up to 128 bytes; only letters (a-z, A-Z), numbers (0-9), underscores (_), and hyphens (-).]
+	// Example: test_record_key_a
+	RecordKey *string `json:"RecordKey,omitnil,omitempty" name:"RecordKey"`
+
+	// [Valid only when UniRecord=3]
+	// Recording Resume Wait Time
+	// Corresponds to template parameter "Resume Wait Duration." Unit: seconds.
+	// Range: 5-86400 (24 hours). Default: 30. Recording stops if idle longer than this value.
+	// Example: 30
+	RecordWaitTime *uint64 `json:"RecordWaitTime,omitnil,omitempty" name:"RecordWaitTime"`
+
+	// [Valid only when UniRecord=3]
+	// Recording Output Formats
+	// Corresponds to template parameter "File Format." Supported values: hls, mp4, aac. Default: mp4.
+	// Note: mp4 and aac formats are mutually exclusive.
+	// Example (MP4 only): ["mp4"]
+	// Example (MP4 + HLS): ["mp4","hls"]
+	RecordFormat []*string `json:"RecordFormat,omitnil,omitempty" name:"RecordFormat"`
+
+	// [Valid only when UniRecord=3]
+	// Single File Duration
+	// Corresponds to template parameter "Max File Duration." Unit: minutes.
+	// Range: 1-1440 (24 hours). Default: 1440. Applies only to mp4/aac. Actual duration is capped at 2GB file size.
+	// Example: 1440
+	MaxMediaFileDuration *uint64 `json:"MaxMediaFileDuration,omitnil,omitempty" name:"MaxMediaFileDuration"`
+
+	// [Valid only when UniRecord=3]
+	// Recording Media Type
+	// Corresponds to template parameter "Recording Format."
+	// 0: Audio+Video, 1: Audio only, 2: Video only. Output is the intersection of this setting and relay content.
+	// Example: 0
+	StreamType *uint64 `json:"StreamType,omitnil,omitempty" name:"StreamType"`
+
+	// Recording Filename Prefix
+	// Filename prefix (<=64 bytes). Applies only to VOD storage.
+	// *Format: Letters (a-z, A-Z), numbers (0-9), underscores (_), hyphens (-).*
+	// Example: mcu_record_prefix
+	UserDefineRecordPrefix *string `json:"UserDefineRecordPrefix,omitnil,omitempty" name:"UserDefineRecordPrefix"`
+
+	// [Valid only when UniRecord=3]
+	// Recording Storage Parameters
+	// Corresponds to console parameter "Storage Location." Supports Tencent VOD or COS (exclusively).
+	// Example: {"McuCloudVod":{"McuTencentVod":{"ExpireTime":86400}}}
+	McuStorageParams *McuStorageParams `json:"McuStorageParams,omitnil,omitempty" name:"McuStorageParams"`
+}
+
 type McuSeiParams struct {
 	// The audio volume layout SEI.
 	LayoutVolume *McuLayoutVolume `json:"LayoutVolume,omitnil,omitempty" name:"LayoutVolume"`
 
 	// The pass-through SEI.
 	PassThrough *McuPassThrough `json:"PassThrough,omitnil,omitempty" name:"PassThrough"`
+}
+
+type McuStorageParams struct {
+	// Third-Party Cloud Storage Account Information
+	// (Note: Storing files in Object Storage COS will incur recording file delivery fees. For details, see [Cloud Recording Billing]. Storing in VOD does not incur this fee.)
+	// Example:{"Vendor":0,"Region":"ap-shanghai","Bucket":"*","AccessKey":"*","SecretKey":"***","FileNamePrefix":["mcu_record"]}
+	CloudStorage *CloudStorage `json:"CloudStorage,omitnil,omitempty" name:"CloudStorage"`
+
+	// Tencent Cloud VOD Account Information
+	// Example:{"McuTencentVod":{"ExpireTime":86400}}
+	McuCloudVod *McuCloudVod `json:"McuCloudVod,omitnil,omitempty" name:"McuCloudVod"`
+}
+
+type McuTencentVod struct {
+	// Post-Upload Task Processing
+	// Automatically initiates task flows after media uploads complete. Value = Task flow template name.
+	// VOD supports creating and naming task flow templates.
+	// Example: template_name
+	Procedure *string `json:"Procedure,omitnil,omitempty" name:"Procedure"`
+
+	// Media File Expiration Time
+	// Absolute expiration time from current timestamp.
+	// 86400 = 1 day retention
+	// 0 = permanent storage (default)
+	// Example: 86400
+	ExpireTime *uint64 `json:"ExpireTime,omitnil,omitempty" name:"ExpireTime"`
+
+	// Upload Region Specification
+	// For users requiring specific upload regions.
+	// Example: ap-shanghai
+	StorageRegion *string `json:"StorageRegion,omitnil,omitempty" name:"StorageRegion"`
+
+	// Category ID
+	// Manages media classification. Obtain via category creation API.
+	// Default: 0 (Other category)
+	// Example: 0
+	ClassId *uint64 `json:"ClassId,omitnil,omitempty" name:"ClassId"`
+
+	// VOD SubAppId
+	// Required when accessing sub-application resources. Leave empty otherwise.
+	// Example: 0
+	SubAppId *uint64 `json:"SubAppId,omitnil,omitempty" name:"SubAppId"`
+
+	// Task Flow Context
+	// Passed through in task completion callbacks.
+	// Example: user_custom
+	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
+
+	// Upload Context
+	// Passed through in upload completion callbacks.
+	// Example: user_custom
+	SourceContext *string `json:"SourceContext,omitnil,omitempty" name:"SourceContext"`
 }
 
 type McuUserInfoParams struct {
@@ -3338,6 +3453,10 @@ type StartPublishCdnStreamRequestParams struct {
 
 	// The information of the room to which streams are relayed. Between this parameter and `PublishCdnParams`, you must specify at least one. Please note that relaying to a TRTC room is only supported in some SDK versions. For details, please contact technical support.
 	FeedBackRoomParams []*McuFeedBackRoomParams `json:"FeedBackRoomParams,omitnil,omitempty" name:"FeedBackRoomParams"`
+
+	// Relay Recording Parameters.
+	// Example value:{"UniRecord":1,"RecordKey": "test_recore_key_a"}
+	RecordParams *McuRecordParams `json:"RecordParams,omitnil,omitempty" name:"RecordParams"`
 }
 
 type StartPublishCdnStreamRequest struct {
@@ -3375,6 +3494,10 @@ type StartPublishCdnStreamRequest struct {
 
 	// The information of the room to which streams are relayed. Between this parameter and `PublishCdnParams`, you must specify at least one. Please note that relaying to a TRTC room is only supported in some SDK versions. For details, please contact technical support.
 	FeedBackRoomParams []*McuFeedBackRoomParams `json:"FeedBackRoomParams,omitnil,omitempty" name:"FeedBackRoomParams"`
+
+	// Relay Recording Parameters.
+	// Example value:{"UniRecord":1,"RecordKey": "test_recore_key_a"}
+	RecordParams *McuRecordParams `json:"RecordParams,omitnil,omitempty" name:"RecordParams"`
 }
 
 func (r *StartPublishCdnStreamRequest) ToJsonString() string {
@@ -3400,6 +3523,7 @@ func (r *StartPublishCdnStreamRequest) FromJsonString(s string) error {
 	delete(f, "PublishCdnParams")
 	delete(f, "SeiParams")
 	delete(f, "FeedBackRoomParams")
+	delete(f, "RecordParams")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "StartPublishCdnStreamRequest has unknown keys!", "")
 	}
