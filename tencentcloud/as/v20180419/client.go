@@ -65,11 +65,11 @@ func NewAttachInstancesResponse() (response *AttachInstancesResponse) {
 }
 
 // AttachInstances
-// This API is used to add CVM instances to an auto scaling group.
+// This interface (AttachInstances) is used to add CVM instances to a scaling group.
 //
 // * Only CVM instances in `RUNNING` or `STOPPED` status can be added.
 //
-// * The added CVM instances must in the same VPC as the scaling group.
+// This API is used to ensure added CVM instances match the VPC network of the scaling group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
@@ -95,11 +95,11 @@ func (c *Client) AttachInstances(request *AttachInstancesRequest) (response *Att
 }
 
 // AttachInstances
-// This API is used to add CVM instances to an auto scaling group.
+// This interface (AttachInstances) is used to add CVM instances to a scaling group.
 //
 // * Only CVM instances in `RUNNING` or `STOPPED` status can be added.
 //
-// * The added CVM instances must in the same VPC as the scaling group.
+// This API is used to ensure added CVM instances match the VPC network of the scaling group.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
@@ -259,13 +259,15 @@ func NewCancelInstanceRefreshResponse() (response *CancelInstanceRefreshResponse
 // CancelInstanceRefresh
 // This API is used to cancel the instance refresh activity of the scaling group.
 //
-// * The batches that have already been refreshed or are currently being refreshed remain unaffected, but the batches pending refresh will be canceled.
+// * The batches that have already been refreshed remain unaffected, but the batches pending refresh will be canceled.
 //
-// * If a refresh fails, the affected instances will remain in the secondary status, and require manual intervention to exit the secondary status or terminate the instances.
+// * If a batch is currently refreshing, cancellation is not allowed. You can suspend the event and wait until the current batch finishes before canceling.
 //
-// * Rollback operations are not allowed after cancellation, and recovery is also unsupported.
+// This API is used to refresh the failed instances. If a refresh fails, the affected instances will remain in standby status, and require manual intervention to exit the standby status or terminate the instances.
 //
-// * The instances temporarily scaled out due to the MaxSurge parameter are automatically terminated after cancellation.
+// * Rollback operations are not allowed after cancellation, and recovery is unsupported.
+//
+// Temporarily expanded instances due to the maxSurge parameter are automatically destroyed after cancellation.
 //
 // * During scale-in, all instances have already been updated and cannot be canceled.
 //
@@ -280,13 +282,15 @@ func (c *Client) CancelInstanceRefresh(request *CancelInstanceRefreshRequest) (r
 // CancelInstanceRefresh
 // This API is used to cancel the instance refresh activity of the scaling group.
 //
-// * The batches that have already been refreshed or are currently being refreshed remain unaffected, but the batches pending refresh will be canceled.
+// * The batches that have already been refreshed remain unaffected, but the batches pending refresh will be canceled.
 //
-// * If a refresh fails, the affected instances will remain in the secondary status, and require manual intervention to exit the secondary status or terminate the instances.
+// * If a batch is currently refreshing, cancellation is not allowed. You can suspend the event and wait until the current batch finishes before canceling.
 //
-// * Rollback operations are not allowed after cancellation, and recovery is also unsupported.
+// This API is used to refresh the failed instances. If a refresh fails, the affected instances will remain in standby status, and require manual intervention to exit the standby status or terminate the instances.
 //
-// * The instances temporarily scaled out due to the MaxSurge parameter are automatically terminated after cancellation.
+// * Rollback operations are not allowed after cancellation, and recovery is unsupported.
+//
+// Temporarily expanded instances due to the maxSurge parameter are automatically destroyed after cancellation.
 //
 // * During scale-in, all instances have already been updated and cannot be canceled.
 //
@@ -490,6 +494,7 @@ func NewCreateAutoScalingGroupResponse() (response *CreateAutoScalingGroupRespon
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_SIZE = "InvalidParameterValue.Size"
 //  INVALIDPARAMETERVALUE_SUBNETIDS = "InvalidParameterValue.SubnetIds"
+//  INVALIDPARAMETERVALUE_SUBNETNOTINDEDICATEDCLUSTER = "InvalidParameterValue.SubnetNotInDedicatedCluster"
 //  INVALIDPARAMETERVALUE_TARGETPORTDUPLICATED = "InvalidParameterValue.TargetPortDuplicated"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_ZONEMISMATCHREGION = "InvalidParameterValue.ZoneMismatchRegion"
@@ -541,6 +546,7 @@ func (c *Client) CreateAutoScalingGroup(request *CreateAutoScalingGroupRequest) 
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_SIZE = "InvalidParameterValue.Size"
 //  INVALIDPARAMETERVALUE_SUBNETIDS = "InvalidParameterValue.SubnetIds"
+//  INVALIDPARAMETERVALUE_SUBNETNOTINDEDICATEDCLUSTER = "InvalidParameterValue.SubnetNotInDedicatedCluster"
 //  INVALIDPARAMETERVALUE_TARGETPORTDUPLICATED = "InvalidParameterValue.TargetPortDuplicated"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  INVALIDPARAMETERVALUE_ZONEMISMATCHREGION = "InvalidParameterValue.ZoneMismatchRegion"
@@ -700,15 +706,15 @@ func NewCreateLaunchConfigurationResponse() (response *CreateLaunchConfiguration
 }
 
 // CreateLaunchConfiguration
-// This API is used to create a launch configuration.
+// This interface (CreateLaunchConfiguration) is used to create new launch configuration.
 //
 // 
 //
-// * To modify a launch configuration, please use `ModifyLaunchConfigurationAttributes`.
+// * To modify a launch configuration, use [ModifyLaunchConfigurationAttributes](https://intl.cloud.tencent.com/document/api/377/31298?from_cn_redirect=1) to partially modify fields. If needed, create a new launch configuration.
 //
 // 
 //
-// * Up to 20 launch configurations can be created for each project. For more information, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
+// By default, 50 launch configurations can be created per region. For details, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INTERNALERROR_CALLSTSERROR = "InternalError.CallStsError"
@@ -757,15 +763,15 @@ func (c *Client) CreateLaunchConfiguration(request *CreateLaunchConfigurationReq
 }
 
 // CreateLaunchConfiguration
-// This API is used to create a launch configuration.
+// This interface (CreateLaunchConfiguration) is used to create new launch configuration.
 //
 // 
 //
-// * To modify a launch configuration, please use `ModifyLaunchConfigurationAttributes`.
+// * To modify a launch configuration, use [ModifyLaunchConfigurationAttributes](https://intl.cloud.tencent.com/document/api/377/31298?from_cn_redirect=1) to partially modify fields. If needed, create a new launch configuration.
 //
 // 
 //
-// * Up to 20 launch configurations can be created for each project. For more information, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
+// By default, 50 launch configurations can be created per region. For details, see [Usage Limits](https://intl.cloud.tencent.com/document/product/377/3120?from_cn_redirect=1).
 //
 // error code that may be returned:
 //  INTERNALERROR_CALLSTSERROR = "InternalError.CallStsError"
@@ -845,15 +851,15 @@ func NewCreateLifecycleHookResponse() (response *CreateLifecycleHookResponse) {
 }
 
 // CreateLifecycleHook
-// This API is used to create a lifecycle hook.
+// This interface (CreateLifecycleHook) is used for creating a lifecycle hook.
 //
 // 
 //
-// * You can configure notifications or automation commands (TAT) for the lifecycle hook.
+// * You can configure notifications or automation commands for the lifecycle hook.
 //
 // 
 //
-// If you configured a notification, Auto Scaling will notify the TDMQ queue of the following information:
+// If you configured a notification, Auto Scaling will notify the TDMQ Message Queue of the following information:.
 //
 // 
 //
@@ -869,15 +875,15 @@ func NewCreateLifecycleHookResponse() (response *CreateLifecycleHookResponse) {
 //
 // 	"ActivityId": "asa-fznnvrja",
 //
-// 	"AutoScalingGroupId": "asg-rrrrtttt",
+// 	"AutoScalingGroupId": "asg-ft6y7u8n",
 //
-// 	"LifecycleHookId": "ash-xxxxyyyy",
+// 	"LifecycleHookId": "ash-p9i7y6t5",
 //
 // 	"LifecycleHookName": "my-hook",
 //
 // 	"LifecycleActionToken": "3080e1c9-0efe-4dd7-ad3b-90cd6618298f",
 //
-// 	"InstanceId": "ins-aaaabbbb",
+// 	"InstanceId": "ins-y6dr5e43",
 //
 // 	"LifecycleTransition": "INSTANCE_LAUNCHING",
 //
@@ -914,15 +920,15 @@ func (c *Client) CreateLifecycleHook(request *CreateLifecycleHookRequest) (respo
 }
 
 // CreateLifecycleHook
-// This API is used to create a lifecycle hook.
+// This interface (CreateLifecycleHook) is used for creating a lifecycle hook.
 //
 // 
 //
-// * You can configure notifications or automation commands (TAT) for the lifecycle hook.
+// * You can configure notifications or automation commands for the lifecycle hook.
 //
 // 
 //
-// If you configured a notification, Auto Scaling will notify the TDMQ queue of the following information:
+// If you configured a notification, Auto Scaling will notify the TDMQ Message Queue of the following information:.
 //
 // 
 //
@@ -938,15 +944,15 @@ func (c *Client) CreateLifecycleHook(request *CreateLifecycleHookRequest) (respo
 //
 // 	"ActivityId": "asa-fznnvrja",
 //
-// 	"AutoScalingGroupId": "asg-rrrrtttt",
+// 	"AutoScalingGroupId": "asg-ft6y7u8n",
 //
-// 	"LifecycleHookId": "ash-xxxxyyyy",
+// 	"LifecycleHookId": "ash-p9i7y6t5",
 //
 // 	"LifecycleHookName": "my-hook",
 //
 // 	"LifecycleActionToken": "3080e1c9-0efe-4dd7-ad3b-90cd6618298f",
 //
-// 	"InstanceId": "ins-aaaabbbb",
+// 	"InstanceId": "ins-y6dr5e43",
 //
 // 	"LifecycleTransition": "INSTANCE_LAUNCHING",
 //
@@ -1432,7 +1438,7 @@ func NewDeleteLaunchConfigurationResponse() (response *DeleteLaunchConfiguration
 //
 // 
 //
-// * If the launch configuration is active in an auto scaling group, it cannot be deleted.
+// * If the launch configuration is active in a scaling group, it cannot be deleted.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
@@ -1448,7 +1454,7 @@ func (c *Client) DeleteLaunchConfiguration(request *DeleteLaunchConfigurationReq
 //
 // 
 //
-// * If the launch configuration is active in an auto scaling group, it cannot be deleted.
+// * If the launch configuration is active in a scaling group, it cannot be deleted.
 //
 // error code that may be returned:
 //  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
@@ -2621,6 +2627,7 @@ func NewDetachLoadBalancersResponse() (response *DetachLoadBalancersResponse) {
 //  LIMITEXCEEDED_AFTERATTACHLBLIMITEXCEEDED = "LimitExceeded.AfterAttachLbLimitExceeded"
 //  MISSINGPARAMETER_INSCENARIO = "MissingParameter.InScenario"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
+//  RESOURCENOTFOUND_CLASSICLOADBALANCERNOTFOUND = "ResourceNotFound.ClassicLoadBalancerNotFound"
 //  RESOURCENOTFOUND_LISTENERNOTFOUND = "ResourceNotFound.ListenerNotFound"
 //  RESOURCENOTFOUND_LOADBALANCERNOTFOUND = "ResourceNotFound.LoadBalancerNotFound"
 //  RESOURCENOTFOUND_LOADBALANCERNOTINAUTOSCALINGGROUP = "ResourceNotFound.LoadBalancerNotInAutoScalingGroup"
@@ -2652,6 +2659,7 @@ func (c *Client) DetachLoadBalancers(request *DetachLoadBalancersRequest) (respo
 //  LIMITEXCEEDED_AFTERATTACHLBLIMITEXCEEDED = "LimitExceeded.AfterAttachLbLimitExceeded"
 //  MISSINGPARAMETER_INSCENARIO = "MissingParameter.InScenario"
 //  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
+//  RESOURCENOTFOUND_CLASSICLOADBALANCERNOTFOUND = "ResourceNotFound.ClassicLoadBalancerNotFound"
 //  RESOURCENOTFOUND_LISTENERNOTFOUND = "ResourceNotFound.ListenerNotFound"
 //  RESOURCENOTFOUND_LOADBALANCERNOTFOUND = "ResourceNotFound.LoadBalancerNotFound"
 //  RESOURCENOTFOUND_LOADBALANCERNOTINAUTOSCALINGGROUP = "ResourceNotFound.LoadBalancerNotInAutoScalingGroup"
@@ -2841,6 +2849,91 @@ func (c *Client) EnableAutoScalingGroupWithContext(ctx context.Context, request 
     return
 }
 
+func NewEnterStandbyRequest() (request *EnterStandbyRequest) {
+    request = &EnterStandbyRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("as", APIVersion, "EnterStandby")
+    
+    
+    return
+}
+
+func NewEnterStandbyResponse() (response *EnterStandbyResponse) {
+    response = &EnterStandbyResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// EnterStandby
+// This API is used to set instances within the scaling group to standby status.
+//
+// Instances in standby status have a CLB weight value of 0 and will not be selected for scaling in, unhealthy replacement, or refresh operation.
+//
+// This API is used to call the Auto Scaling power-on/power-off API which may change the standby status, while the Cloud Virtual Machine server power on/off API will not affect it.
+//
+// The instance enters standby status, and the scaling group attempts to lower the expected number of instances, which will not be less than the minimum value.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
+//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
+//  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
+//  RESOURCENOTFOUND_INSTANCESNOTFOUND = "ResourceNotFound.InstancesNotFound"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+//  RESOURCEUNAVAILABLE_INSTANCEINOPERATION = "ResourceUnavailable.InstanceInOperation"
+//  RESOURCEUNAVAILABLE_LOADBALANCERINOPERATION = "ResourceUnavailable.LoadBalancerInOperation"
+func (c *Client) EnterStandby(request *EnterStandbyRequest) (response *EnterStandbyResponse, err error) {
+    return c.EnterStandbyWithContext(context.Background(), request)
+}
+
+// EnterStandby
+// This API is used to set instances within the scaling group to standby status.
+//
+// Instances in standby status have a CLB weight value of 0 and will not be selected for scaling in, unhealthy replacement, or refresh operation.
+//
+// This API is used to call the Auto Scaling power-on/power-off API which may change the standby status, while the Cloud Virtual Machine server power on/off API will not affect it.
+//
+// The instance enters standby status, and the scaling group attempts to lower the expected number of instances, which will not be less than the minimum value.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
+//  INTERNALERROR = "InternalError"
+//  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
+//  INTERNALERROR_REQUESTERROR = "InternalError.RequestError"
+//  INVALIDPARAMETER_ACTIONNOTFOUND = "InvalidParameter.ActionNotFound"
+//  INVALIDPARAMETERVALUE_INVALIDAUTOSCALINGGROUPID = "InvalidParameterValue.InvalidAutoScalingGroupId"
+//  INVALIDPARAMETERVALUE_INVALIDINSTANCEID = "InvalidParameterValue.InvalidInstanceId"
+//  INVALIDPARAMETERVALUE_LIMITEXCEEDED = "InvalidParameterValue.LimitExceeded"
+//  RESOURCENOTFOUND_AUTOSCALINGGROUPNOTFOUND = "ResourceNotFound.AutoScalingGroupNotFound"
+//  RESOURCENOTFOUND_INSTANCESNOTFOUND = "ResourceNotFound.InstancesNotFound"
+//  RESOURCEUNAVAILABLE_AUTOSCALINGGROUPINACTIVITY = "ResourceUnavailable.AutoScalingGroupInActivity"
+//  RESOURCEUNAVAILABLE_INSTANCEINOPERATION = "ResourceUnavailable.InstanceInOperation"
+//  RESOURCEUNAVAILABLE_LOADBALANCERINOPERATION = "ResourceUnavailable.LoadBalancerInOperation"
+func (c *Client) EnterStandbyWithContext(ctx context.Context, request *EnterStandbyRequest) (response *EnterStandbyResponse, err error) {
+    if request == nil {
+        request = NewEnterStandbyRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("EnterStandby require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewEnterStandbyResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewExecuteScalingPolicyRequest() (request *ExecuteScalingPolicyRequest) {
     request = &ExecuteScalingPolicyRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2944,11 +3037,13 @@ func NewExitStandbyResponse() (response *ExitStandbyResponse) {
 }
 
 // ExitStandby
-// This API is used to exit instances from the standby status in the scaling group.
+// This API is used to exit instances from standby status in the scaling group.
 //
-// * When an instance is in standby status, its load balancer weight is set to 0. Upon exiting the standby status, the weight value automatically gets restored.
+// * After exiting standby status, the instance enters running state and the CLB weight value is restored to the default value.
 //
-// * Initiating power-on/power-off actions on instances that are in standby status also results in them exiting from the standby status.
+// This API is used to call the Auto Scaling power-on/power-off API which may change the standby status, while the Cloud Virtual Machine server power on/off API will not affect it.
+//
+// After instances exit standby status, the scaling group will raise the expected number of instances. The new expected number cannot exceed the maximum value.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
@@ -2969,11 +3064,13 @@ func (c *Client) ExitStandby(request *ExitStandbyRequest) (response *ExitStandby
 }
 
 // ExitStandby
-// This API is used to exit instances from the standby status in the scaling group.
+// This API is used to exit instances from standby status in the scaling group.
 //
-// * When an instance is in standby status, its load balancer weight is set to 0. Upon exiting the standby status, the weight value automatically gets restored.
+// * After exiting standby status, the instance enters running state and the CLB weight value is restored to the default value.
 //
-// * Initiating power-on/power-off actions on instances that are in standby status also results in them exiting from the standby status.
+// This API is used to call the Auto Scaling power-on/power-off API which may change the standby status, while the Cloud Virtual Machine server power on/off API will not affect it.
+//
+// After instances exit standby status, the scaling group will raise the expected number of instances. The new expected number cannot exceed the maximum value.
 //
 // error code that may be returned:
 //  FAILEDOPERATION_NOACTIVITYTOGENERATE = "FailedOperation.NoActivityToGenerate"
@@ -3049,6 +3146,7 @@ func NewModifyAutoScalingGroupResponse() (response *ModifyAutoScalingGroupRespon
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_SIZE = "InvalidParameterValue.Size"
 //  INVALIDPARAMETERVALUE_SUBNETIDS = "InvalidParameterValue.SubnetIds"
+//  INVALIDPARAMETERVALUE_SUBNETNOTINDEDICATEDCLUSTER = "InvalidParameterValue.SubnetNotInDedicatedCluster"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  LIMITEXCEEDED_MAXSIZELIMITEXCEEDED = "LimitExceeded.MaxSizeLimitExceeded"
@@ -3088,6 +3186,7 @@ func (c *Client) ModifyAutoScalingGroup(request *ModifyAutoScalingGroupRequest) 
 //  INVALIDPARAMETERVALUE_RANGE = "InvalidParameterValue.Range"
 //  INVALIDPARAMETERVALUE_SIZE = "InvalidParameterValue.Size"
 //  INVALIDPARAMETERVALUE_SUBNETIDS = "InvalidParameterValue.SubnetIds"
+//  INVALIDPARAMETERVALUE_SUBNETNOTINDEDICATEDCLUSTER = "InvalidParameterValue.SubnetNotInDedicatedCluster"
 //  INVALIDPARAMETERVALUE_TOOLONG = "InvalidParameterValue.TooLong"
 //  LIMITEXCEEDED = "LimitExceeded"
 //  LIMITEXCEEDED_MAXSIZELIMITEXCEEDED = "LimitExceeded.MaxSizeLimitExceeded"
@@ -3203,13 +3302,11 @@ func NewModifyLaunchConfigurationAttributesResponse() (response *ModifyLaunchCon
 }
 
 // ModifyLaunchConfigurationAttributes
-// This API (ModifyLaunchConfigurationAttributes) is used to modify some attributes of a launch configuration.
+// This API (ModifyLaunchConfigurationAttributes) is used to modify part of a launch configuration's attributes.
 //
 // 
 //
-// * The changes of launch configuration do not affect the existing instances. New instances will be created based on the modified configuration.
-//
-// * This API supports modifying certain simple types of attributes.
+// This API is used to modify the startup configuration. Existing instances scaled out using this configuration will not change, while newly added instances using this launch configuration will scale out according to the new configuration.
 //
 // error code that may be returned:
 //  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"
@@ -3254,13 +3351,11 @@ func (c *Client) ModifyLaunchConfigurationAttributes(request *ModifyLaunchConfig
 }
 
 // ModifyLaunchConfigurationAttributes
-// This API (ModifyLaunchConfigurationAttributes) is used to modify some attributes of a launch configuration.
+// This API (ModifyLaunchConfigurationAttributes) is used to modify part of a launch configuration's attributes.
 //
 // 
 //
-// * The changes of launch configuration do not affect the existing instances. New instances will be created based on the modified configuration.
-//
-// * This API supports modifying certain simple types of attributes.
+// This API is used to modify the startup configuration. Existing instances scaled out using this configuration will not change, while newly added instances using this launch configuration will scale out according to the new configuration.
 //
 // error code that may be returned:
 //  INTERNALERROR_CALLEEERROR = "InternalError.CalleeError"

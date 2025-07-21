@@ -2478,6 +2478,59 @@ func (c *Client) CreateSharedCNAMEWithContext(ctx context.Context, request *Crea
     return
 }
 
+func NewCreateWebSecurityTemplateRequest() (request *CreateWebSecurityTemplateRequest) {
+    request = &CreateWebSecurityTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "CreateWebSecurityTemplate")
+    
+    
+    return
+}
+
+func NewCreateWebSecurityTemplateResponse() (response *CreateWebSecurityTemplateResponse) {
+    response = &CreateWebSecurityTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// CreateWebSecurityTemplate
+// This API is used to create a security policy configuration template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
+//  LIMITEXCEEDED_SECURITY = "LimitExceeded.Security"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) CreateWebSecurityTemplate(request *CreateWebSecurityTemplateRequest) (response *CreateWebSecurityTemplateResponse, err error) {
+    return c.CreateWebSecurityTemplateWithContext(context.Background(), request)
+}
+
+// CreateWebSecurityTemplate
+// This API is used to create a security policy configuration template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
+//  LIMITEXCEEDED_SECURITY = "LimitExceeded.Security"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) CreateWebSecurityTemplateWithContext(ctx context.Context, request *CreateWebSecurityTemplateRequest) (response *CreateWebSecurityTemplateResponse, err error) {
+    if request == nil {
+        request = NewCreateWebSecurityTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("CreateWebSecurityTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewCreateWebSecurityTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewCreateZoneRequest() (request *CreateZoneRequest) {
     request = &CreateZoneRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3649,6 +3702,59 @@ func (c *Client) DeleteSharedCNAMEWithContext(ctx context.Context, request *Dele
     return
 }
 
+func NewDeleteWebSecurityTemplateRequest() (request *DeleteWebSecurityTemplateRequest) {
+    request = &DeleteWebSecurityTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DeleteWebSecurityTemplate")
+    
+    
+    return
+}
+
+func NewDeleteWebSecurityTemplateResponse() (response *DeleteWebSecurityTemplateResponse) {
+    response = &DeleteWebSecurityTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DeleteWebSecurityTemplate
+// This API is used to delete a security policy configuration template.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+func (c *Client) DeleteWebSecurityTemplate(request *DeleteWebSecurityTemplateRequest) (response *DeleteWebSecurityTemplateResponse, err error) {
+    return c.DeleteWebSecurityTemplateWithContext(context.Background(), request)
+}
+
+// DeleteWebSecurityTemplate
+// This API is used to delete a security policy configuration template.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+func (c *Client) DeleteWebSecurityTemplateWithContext(ctx context.Context, request *DeleteWebSecurityTemplateRequest) (response *DeleteWebSecurityTemplateResponse, err error) {
+    if request == nil {
+        request = NewDeleteWebSecurityTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DeleteWebSecurityTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDeleteWebSecurityTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDeleteZoneRequest() (request *DeleteZoneRequest) {
     request = &DeleteZoneRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -4047,6 +4153,7 @@ func NewDescribeBillingDataResponse() (response *DescribeBillingDataResponse) {
 //
 // error code that may be returned:
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INVALIDPARAMETER_GROUPBYLIMITEXCEEDED = "InvalidParameter.GroupByLimitExceeded"
 //  INVALIDPARAMETER_INVALIDINTERVAL = "InvalidParameter.InvalidInterval"
 //  INVALIDPARAMETER_INVALIDMETRIC = "InvalidParameter.InvalidMetric"
 //  INVALIDPARAMETER_ZONEHASNOTBEENBOUNDTOPLAN = "InvalidParameter.ZoneHasNotBeenBoundToPlan"
@@ -4059,6 +4166,7 @@ func (c *Client) DescribeBillingData(request *DescribeBillingDataRequest) (respo
 //
 // error code that may be returned:
 //  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  INVALIDPARAMETER_GROUPBYLIMITEXCEEDED = "InvalidParameter.GroupByLimitExceeded"
 //  INVALIDPARAMETER_INVALIDINTERVAL = "InvalidParameter.InvalidInterval"
 //  INVALIDPARAMETER_INVALIDMETRIC = "InvalidParameter.InvalidMetric"
 //  INVALIDPARAMETER_ZONEHASNOTBEENBOUNDTOPLAN = "InvalidParameter.ZoneHasNotBeenBoundToPlan"
@@ -6424,6 +6532,116 @@ func (c *Client) DescribeTopL7CacheDataWithContext(ctx context.Context, request 
     return
 }
 
+func NewDescribeWebSecurityTemplateRequest() (request *DescribeWebSecurityTemplateRequest) {
+    request = &DescribeWebSecurityTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeWebSecurityTemplate")
+    
+    
+    return
+}
+
+func NewDescribeWebSecurityTemplateResponse() (response *DescribeWebSecurityTemplateResponse) {
+    response = &DescribeWebSecurityTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeWebSecurityTemplate
+// This API is used to query security policy configuration template details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) DescribeWebSecurityTemplate(request *DescribeWebSecurityTemplateRequest) (response *DescribeWebSecurityTemplateResponse, err error) {
+    return c.DescribeWebSecurityTemplateWithContext(context.Background(), request)
+}
+
+// DescribeWebSecurityTemplate
+// This API is used to query security policy configuration template details.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
+//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+func (c *Client) DescribeWebSecurityTemplateWithContext(ctx context.Context, request *DescribeWebSecurityTemplateRequest) (response *DescribeWebSecurityTemplateResponse, err error) {
+    if request == nil {
+        request = NewDescribeWebSecurityTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWebSecurityTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeWebSecurityTemplateResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewDescribeWebSecurityTemplatesRequest() (request *DescribeWebSecurityTemplatesRequest) {
+    request = &DescribeWebSecurityTemplatesRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "DescribeWebSecurityTemplates")
+    
+    
+    return
+}
+
+func NewDescribeWebSecurityTemplatesResponse() (response *DescribeWebSecurityTemplatesResponse) {
+    response = &DescribeWebSecurityTemplatesResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeWebSecurityTemplates
+// This API is used to query the security policy configuration template list.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeWebSecurityTemplates(request *DescribeWebSecurityTemplatesRequest) (response *DescribeWebSecurityTemplatesResponse, err error) {
+    return c.DescribeWebSecurityTemplatesWithContext(context.Background(), request)
+}
+
+// DescribeWebSecurityTemplates
+// This API is used to query the security policy configuration template list.
+//
+// error code that may be returned:
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
+//  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
+func (c *Client) DescribeWebSecurityTemplatesWithContext(ctx context.Context, request *DescribeWebSecurityTemplatesRequest) (response *DescribeWebSecurityTemplatesResponse, err error) {
+    if request == nil {
+        request = NewDescribeWebSecurityTemplatesRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWebSecurityTemplates require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeWebSecurityTemplatesResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDescribeZoneConfigImportResultRequest() (request *DescribeZoneConfigImportResultRequest) {
     request = &DescribeZoneConfigImportResultRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -6447,10 +6665,10 @@ func NewDescribeZoneConfigImportResultResponse() (response *DescribeZoneConfigIm
 // This API is used to query the results of site configuration import via API (ImportZoneConfig). This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
 func (c *Client) DescribeZoneConfigImportResult(request *DescribeZoneConfigImportResultRequest) (response *DescribeZoneConfigImportResultResponse, err error) {
     return c.DescribeZoneConfigImportResultWithContext(context.Background(), request)
 }
@@ -6459,10 +6677,10 @@ func (c *Client) DescribeZoneConfigImportResult(request *DescribeZoneConfigImpor
 // This API is used to query the results of site configuration import via API (ImportZoneConfig). This feature only supports the sites in the plans of the Standard Edition and the Enterprise Edition.
 //
 // error code that may be returned:
-//  FAILEDOPERATION = "FailedOperation"
-//  LIMITEXCEEDED_QUERYTIMELIMITEXCEEDED = "LimitExceeded.QueryTimeLimitExceeded"
-//  RESOURCEUNAVAILABLE = "ResourceUnavailable"
+//  INTERNALERROR_PROXYSERVER = "InternalError.ProxyServer"
 //  UNAUTHORIZEDOPERATION_CAMUNAUTHORIZED = "UnauthorizedOperation.CamUnauthorized"
+//  UNAUTHORIZEDOPERATION_NOPERMISSION = "UnauthorizedOperation.NoPermission"
+//  UNAUTHORIZEDOPERATION_UNKNOWN = "UnauthorizedOperation.Unknown"
 func (c *Client) DescribeZoneConfigImportResultWithContext(ctx context.Context, request *DescribeZoneConfigImportResultRequest) (response *DescribeZoneConfigImportResultResponse, err error) {
     if request == nil {
         request = NewDescribeZoneConfigImportResultRequest()
@@ -9676,6 +9894,55 @@ func (c *Client) ModifySecurityPolicyWithContext(ctx context.Context, request *M
     request.SetContext(ctx)
     
     response = NewModifySecurityPolicyResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewModifyWebSecurityTemplateRequest() (request *ModifyWebSecurityTemplateRequest) {
+    request = &ModifyWebSecurityTemplateRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("teo", APIVersion, "ModifyWebSecurityTemplate")
+    
+    
+    return
+}
+
+func NewModifyWebSecurityTemplateResponse() (response *ModifyWebSecurityTemplateResponse) {
+    response = &ModifyWebSecurityTemplateResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ModifyWebSecurityTemplate
+// This API is used to modify the security policy configuration template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
+func (c *Client) ModifyWebSecurityTemplate(request *ModifyWebSecurityTemplateRequest) (response *ModifyWebSecurityTemplateResponse, err error) {
+    return c.ModifyWebSecurityTemplateWithContext(context.Background(), request)
+}
+
+// ModifyWebSecurityTemplate
+// This API is used to modify the security policy configuration template.
+//
+// error code that may be returned:
+//  INVALIDPARAMETER_SECURITY = "InvalidParameter.Security"
+func (c *Client) ModifyWebSecurityTemplateWithContext(ctx context.Context, request *ModifyWebSecurityTemplateRequest) (response *ModifyWebSecurityTemplateResponse, err error) {
+    if request == nil {
+        request = NewModifyWebSecurityTemplateRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ModifyWebSecurityTemplate require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewModifyWebSecurityTemplateResponse()
     err = c.Send(request, response)
     return
 }

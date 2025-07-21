@@ -314,6 +314,17 @@ type Action struct {
 	CodeAction *CodeAction `json:"CodeAction,omitnil,omitempty" name:"CodeAction"`
 }
 
+type AdaptiveFrequencyControl struct {
+	// Whether adaptive frequency control is enabled. valid values: <li>on: enable;</li> <li>off: disable.</li>.
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// The restriction level of adaptive frequency control. required when Enabled is on. valid values: <li>Loose: Loose</li><li>Moderate: Moderate</li><li>Strict: Strict</li>.
+	Sensitivity *string `json:"Sensitivity,omitnil,omitempty" name:"Sensitivity"`
+
+	// The handling method of adaptive frequency control. this field is required when Enabled is on. valid values for SecurityAction Name: <li>Monitor: observation;</li> <li>Deny: block;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>.
+	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
+}
+
 type Addresses struct {
 	// IPv4 subnet.
 	IPv4 []*string `json:"IPv4,omitnil,omitempty" name:"IPv4"`
@@ -465,6 +476,14 @@ type AliasDomain struct {
 
 	// Modification time of the alias domain name.
 	ModifiedOn *string `json:"ModifiedOn,omitnil,omitempty" name:"ModifiedOn"`
+}
+
+type AllowActionParameters struct {
+	// Minimum latency response time. when configured as 0s, it means no delay for direct response. supported units: <li>s: seconds, value ranges from 0 to 5.</li>.
+	MinDelayTime *string `json:"MinDelayTime,omitnil,omitempty" name:"MinDelayTime"`
+
+	// Maximum delayed response time. supported units: <li>s: seconds, value ranges from 5 to 10.</li>.
+	MaxDelayTime *string `json:"MaxDelayTime,omitnil,omitempty" name:"MaxDelayTime"`
 }
 
 type ApplicationProxy struct {
@@ -650,12 +669,33 @@ type AuthenticationParameters struct {
 	TimeFormat *string `json:"TimeFormat,omitnil,omitempty" name:"TimeFormat"`
 }
 
+type BandwidthAbuseDefense struct {
+	// Whether bandwidth abuse protection (applicable to chinese mainland only) is enabled. valid values: <li>on: enabled;</li> <li>off: disabled.</li>.
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Bandwidth abuse protection (applicable to chinese mainland) handling method. required when Enabled is on. valid values for SecurityAction Name: <li>Monitor: observe;</li> <li>Deny: block;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>.
+	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
+}
+
 type BillingData struct {
-	// Time.
+	// Data timestamp.
 	Time *string `json:"Time,omitnil,omitempty" name:"Time"`
 
 	// Value.
 	Value *uint64 `json:"Value,omitnil,omitempty" name:"Value"`
+
+	// Zone ID (or content identifier if enabled).
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Domain name.
+	Host *string `json:"Host,omitnil,omitempty" name:"Host"`
+
+	// Layer-4 proxy instance ID.
+	ProxyId *string `json:"ProxyId,omitnil,omitempty" name:"ProxyId"`
+
+	// Billing region (based on EdgeOne node location). Values: 
+	// <li>CH: Mainland China</li> <li>AF: Africa</li> <li>AS1: Asia Pacific Region 1</li> <li>AS2: Asia Pacific Region 2</li> <li>AS3: Asia Pacific Region 3</li> <li>EU: Europe</li> <li>MidEast: Middle East</li> <li>NA: North America</li> <li>SA: South America</li>
+	RegionId *string `json:"RegionId,omitnil,omitempty" name:"RegionId"`
 }
 
 type BillingDataFilter struct {
@@ -664,6 +704,20 @@ type BillingDataFilter struct {
 
 	// Parameter value.
 	Value *string `json:"Value,omitnil,omitempty" name:"Value"`
+}
+
+type BindDomainInfo struct {
+	// Domain name.
+	Domain *string `json:"Domain,omitnil,omitempty" name:"Domain"`
+
+	// Zone ID to which the domain belongs.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Binding status. valid values:. 
+	// <li>`process`: binding in progress</li>
+	// <li>`online`: binding succeeded.</li>
+	// <Li>`fail`: binding failed.</li>
+	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
 // Predefined struct for user
@@ -985,6 +1039,11 @@ type BotManagedRule struct {
 	// The ID of the rule that applies the "Block" action.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	DropManagedIds []*int64 `json:"DropManagedIds,omitnil,omitempty" name:"DropManagedIds"`
+}
+
+type BotManagement struct {
+	// Definition list of client authentication rules. feature in beta test. submit a ticket or contact smart customer service if needed.
+	ClientAttestationRules *ClientAttestationRules `json:"ClientAttestationRules,omitnil,omitempty" name:"ClientAttestationRules"`
 }
 
 type BotPortraitRule struct {
@@ -1337,6 +1396,17 @@ type CertificateInfo struct {
 	Status *string `json:"Status,omitnil,omitempty" name:"Status"`
 }
 
+type ChallengeActionParameters struct {
+	// Safe execution challenge actions. valid values: <li> InterstitialChallenge: interstitial challenge;</li> <li> InlineChallenge: embedded challenge;</li> <li> JSChallenge: JavaScript challenge;</li> <li> ManagedChallenge: managed challenge.</li>.
+	ChallengeOption *string `json:"ChallengeOption,omitnil,omitempty" name:"ChallengeOption"`
+
+	// Specifies the time interval for challenge repetition. this field is required when Name is InterstitialChallenge/InlineChallenge. default value is 300s. supported units: <li>s: second, value ranges from 1 to 60;</li><li>m: minute, value ranges from 1 to 60;</li><li>h: hour, value ranges from 1 to 24.</li>.
+	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
+
+	// Client authentication method ID. this field is required when Name is InterstitialChallenge/InlineChallenge.
+	AttesterId *string `json:"AttesterId,omitnil,omitempty" name:"AttesterId"`
+}
+
 // Predefined struct for user
 type CheckCnameStatusRequestParams struct {
 	// Site ID.
@@ -1413,6 +1483,45 @@ type CheckRegionHealthStatus struct {
 
 	// Origin server health status.
 	OriginHealthStatus []*OriginHealthStatus `json:"OriginHealthStatus,omitnil,omitempty" name:"OriginHealthStatus"`
+}
+
+type ClientAttestationRule struct {
+	// Client authentication rule ID. supported rule configuration operations by rule ID: <li> <b>add</b> a new rule: leave the ID empty or do not specify the ID parameter.</li> <li> <b>modify</b> an existing rule: specify the rule ID that needs to be updated/modified.</li> <li> <b>delete</b> an existing rule: existing rules not included in the ClientAttestationRule list under BotManagement parameters will be deleted.</li>.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Specifies the name of the client authentication rule.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Whether the rule is enabled. valid values: <li>`on`: enable</li> <li>`off`: disable</li>.
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Priority of rules. a smaller value indicates higher priority execution. value range: 0-100. default value: 0.
+	Priority *uint64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+
+	// The rule content must comply with expression grammar. for details, see the product document.
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
+
+	// Specifies the client authentication option ID.
+	AttesterId *string `json:"AttesterId,omitnil,omitempty" name:"AttesterId"`
+
+	// Client device configuration. if the DeviceProfiles parameter value is not specified in the ClientAttestationRules parameter, keep the existing client device configuration and do not modify it.
+	DeviceProfiles []*DeviceProfile `json:"DeviceProfiles,omitnil,omitempty" name:"DeviceProfiles"`
+
+	// Handling method for failed client authentication. valid values for SecurityAction Name: <li>Deny: block;</li> <li>Monitor: observation;</li> <li>Redirect: redirection;</li> <li>Challenge: Challenge.</li> default value: Monitor.
+	InvalidAttestationAction *SecurityAction `json:"InvalidAttestationAction,omitnil,omitempty" name:"InvalidAttestationAction"`
+}
+
+type ClientAttestationRules struct {
+	// List of client authentication. when using ModifySecurityPolicy to modify Web protection configuration: <li> if Rules in SecurityPolicy.BotManagement.ClientAttestationRules is not specified or the parameter length of Rules is zero: clear all client authentication rule configuration. </li> <li> if ClientAttestationRules in SecurityPolicy.BotManagement parameters is unspecified: keep existing client authentication rule configuration and do not modify. </li>.
+	Rules []*ClientAttestationRule `json:"Rules,omitnil,omitempty" name:"Rules"`
+}
+
+type ClientFiltering struct {
+	// Whether intelligent client filtering is enabled. valid values: <li>on: enable;</li> <li>off: disable.</li>.
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// The handling method of intelligent client filtering. when Enabled is on, this field is required. the Name parameter of SecurityAction supports: <li>Monitor: observation;</li> <li>Deny: block;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name only supports JSChallenge.</li>.
+	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
 }
 
 type ClientIPCountryParameters struct {
@@ -3922,6 +4031,77 @@ func (r *CreateSharedCNAMEResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type CreateWebSecurityTemplateRequestParams struct {
+	// Zone ID. Explicitly identifies the zone to which the policy template belongs for access control purposes.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Policy template name. Composed of Chinese characters, letters, digits, and underscores. Cannot begin with an underscore and must be less than or equal to 32 characters.
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
+
+	// Web security policy template configuration. Generates default config if empty. Supported: Exception rules, custom rules, rate limiting rules, managed rules. Not supported: Bot management rules (under development).
+	SecurityPolicy *SecurityPolicy `json:"SecurityPolicy,omitnil,omitempty" name:"SecurityPolicy"`
+}
+
+type CreateWebSecurityTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID. Explicitly identifies the zone to which the policy template belongs for access control purposes.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Policy template name. Composed of Chinese characters, letters, digits, and underscores. Cannot begin with an underscore and must be less than or equal to 32 characters.
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
+
+	// Web security policy template configuration. Generates default config if empty. Supported: Exception rules, custom rules, rate limiting rules, managed rules. Not supported: Bot management rules (under development).
+	SecurityPolicy *SecurityPolicy `json:"SecurityPolicy,omitnil,omitempty" name:"SecurityPolicy"`
+}
+
+func (r *CreateWebSecurityTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateWebSecurityTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "TemplateName")
+	delete(f, "SecurityPolicy")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateWebSecurityTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type CreateWebSecurityTemplateResponseParams struct {
+	// Policy template ID.
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type CreateWebSecurityTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *CreateWebSecurityTemplateResponseParams `json:"Response"`
+}
+
+func (r *CreateWebSecurityTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *CreateWebSecurityTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type CreateZoneRequestParams struct {
 	// Site access type. If this parameter is not input, the default value `partial` is used. Valid values of this parameter are as follows:
 	// <li>partial: CNAME access;</li>
@@ -5440,6 +5620,67 @@ func (r *DeleteSharedCNAMEResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DeleteWebSecurityTemplateRequestParams struct {
+	// Zone ID. The zone to which the target policy template belongs for access control. Use the DescribeWebSecurityTemplates interface to query the zone of the policy template.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Policy template ID.
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+}
+
+type DeleteWebSecurityTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID. The zone to which the target policy template belongs for access control. Use the DescribeWebSecurityTemplates interface to query the zone of the policy template.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Policy template ID.
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+}
+
+func (r *DeleteWebSecurityTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteWebSecurityTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "TemplateId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DeleteWebSecurityTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DeleteWebSecurityTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DeleteWebSecurityTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *DeleteWebSecurityTemplateResponseParams `json:"Response"`
+}
+
+func (r *DeleteWebSecurityTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DeleteWebSecurityTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DeleteZoneRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -5500,6 +5741,44 @@ type DeliveryCondition struct {
 	// <li>SecurityAction: Filter by final action after the request matches a security rule.<br>?? Supported operator: equal<br>?? Options:<br>?? -: unknown/not matched<br>?? Monitor: observation<br>?? JSChallenge: JavaScript challenge<br>?? Deny: blocking<br>?? Allow: allowing<br>?? BlockIP: IP blocking<br>?? Redirect: redirection<br>?? ReturnCustomPage: returning to a custom page<br>?? ManagedChallenge: managed challenge<br>?? Silence: silence<br>?? LongDelay: response after a long delay<br>?? ShortDelay: response after a short delay</li>
 	// <li>SecurityModule: Filter by name of the security module finally handling the request.<br>??Supported operator: equal<br>??Options:<br>?? -: unknown/not matched<br>?? CustomRule: Custom Rules in Web Protection<br>?? RateLimitingCustomRule: Rate Limiting Rules in Web Protection<br>?? ManagedRule: Managed Rules in Web Protection<br>?? L7DDoS: CC Attack Defense in Web Protection<br>?? BotManagement: Bot Basic Management in Bot Management<br>?? BotClientReputation: Client Reputation Analysis in Bot Management<br>?? BotBehaviorAnalysis: Bot Intelligent Analysis in Bot Management<br>?? BotCustomRule: Custom Bot Rules in Bot Management<br>?? BotActiveDetection: Active Detection in Bot Management</li>
 	Conditions []*QueryCondition `json:"Conditions,omitnil,omitempty" name:"Conditions"`
+}
+
+type DenyActionParameters struct {
+	// Specifies whether to extend the ban on the source IP. valid values.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: Disable.</li>
+	// 
+	// After enabled, continuously blocks client ips that trigger the rule. when this option is enabled, the BlockIpDuration parameter must be simultaneously designated.
+	// Note: this option cannot intersect with ReturnCustomPage or Stall.
+	BlockIp *string `json:"BlockIp,omitnil,omitempty" name:"BlockIp"`
+
+	// The ban duration when BlockIP is on.
+	BlockIpDuration *string `json:"BlockIpDuration,omitnil,omitempty" name:"BlockIpDuration"`
+
+	// Specifies whether to use a custom page. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: Disable.</li>
+	// 
+	// Enabled, use custom page content to intercept requests. when this option is enabled, ResponseCode and ErrorPageId parameters must be specified simultaneously.
+	// Note: this option cannot intersect with the BlockIp or Stall option.
+	ReturnCustomPage *string `json:"ReturnCustomPage,omitnil,omitempty" name:"ReturnCustomPage"`
+
+	// Status code of the custom page.
+	ResponseCode *string `json:"ResponseCode,omitnil,omitempty" name:"ResponseCode"`
+
+	// Specifies the page id of the custom page.
+	ErrorPageId *string `json:"ErrorPageId,omitnil,omitempty" name:"ErrorPageId"`
+
+	// Specifies whether to suspend the request source without processing. valid values:.
+	// <li>`on`: Enable;</li>
+	// 
+	// <li>off: Disable.</li>
+	// 
+	// Enabled, no longer responds to requests in the current connection session and does not actively disconnect. used for crawler combat to consume client connection resources.
+	// Note: this option cannot intersect with BlockIp or ReturnCustomPage options.
+	Stall *string `json:"Stall,omitnil,omitempty" name:"Stall"`
 }
 
 // Predefined struct for user
@@ -5953,32 +6232,53 @@ func (r *DescribeAvailablePlansResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeBillingDataRequestParams struct {
-	// Start time.
+	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time.
+	// The end time. The query time range (EndTime - StartTime) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Site ID set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Metric list. Valid values:
+	// Metric name. Valid values:
+	// **Layer 4/7 Acceleration Traffic (Unit: Byte):**
 	// <li>acc_flux: content acceleration traffic, in bytes;</li>
 	// <li>smt_flux: smart acceleration traffic, in bytes;</li>
-	// <li>l4_flux: L4 acceleration traffic, in bytes;</li>
+	// <li>l4_flux: layer 4 acceleration traffic, in bytes;</li>
 	// <li>sec_flux: exclusive protection traffic, in bytes;</li>
-	// <li>zxctg_flux: network optimization traffic in the Chinese mainland, in bytes;</li>
-	// <li>acc_bandwidth: content acceleration bandwidth, in bps;</li>
+	// <li>zxctg_flux: network optimization traffic in the chinese mainland, in bytes;</li>
+	// 
+	// **Layer 4/7 Acceleration Bandwidth (Unit: bps):**
+	// <Li>acc_bandwidth: content acceleration bandwidth, in bps.</li>
 	// <li>smt_bandwidth: smart acceleration bandwidth, in bps;</li>
-	// <li>l4_bandwidth: L4 acceleration bandwidth, in bps;</li>
-	// <li>sec_bandwidth: exclusive protection bandwidth, in bps;</li>
-	// <li>zxctg_bandwidth: network optimization bandwidth in the Chinese mainland, in bps;</li>
+	// <Li>l4_bandwidth: layer 4 acceleration bandwidth, in bps.</li>
+	// <li>sec_bandwidth: exclusive protection bandwidth, in bps.</li>
+	// <li>zxctg_bandwidth: network optimization bandwidth in the chinese mainland, in bps;</li>
+	// 
+	// **HTTP/HTTPS Security Requests (Unit: counts):**
 	// <li>sec_request_clean: number of HTTP/HTTPS requests;</li>
-	// <li>smt_request_clean: number of smart acceleration requests;</li>
-	// <li>quic_request: number of QUIC requests;</li>
-	// <li>bot_request_clean: number of Bot requests;</li>
+	// 
+	// **Value-added Service Usage:**
+	// <li>smt_request_clean: number of smart acceleration requests, in counts;</li>
+	// <li>quic_request: number of quic requests;</li>
+	// <Li>bot_request_clean: number of bot requests;</li>
 	// <li>cls_count: number of real-time log entries pushed;</li>
-	// <li>ddos_bandwidth: elastic DDoS protection bandwidth, in bps.</li>
+	// <li>ddos_bandwidth: elastic ddos protection bandwidth, in bps.</li>
+	// 
+	// **Edge Computing Usage:**
+	// <li>edgefunction_request: number of edge function executions, in counts</li>
+	// <li>edgefunction_cpu_time: edge function CPU processing time, in milliseconds</li>
+	// 
+	// **Media Processing Usage (Unit: seconds):**
+	// <li>total_transcode: duration of jit transcoding and transmuxing for all specifications of audio and video, in seconds;</li>
+	// <li>remux: transmuxing duration, in seconds;</li>
+	// <li>transcode_audio: audio transcoding duration, in seconds;</li>
+	// <li>transcode_H264_SD: specifies the duration of standard-definition videos encoded in H.264 (short side <= 480 px), in seconds;</li>
+	// <li>transcode_H264_HD: specifies the duration of high-definition video (short side <= 720 px) encoded in H.264, in seconds;</li>
+	// <li>transcode_H264_FHD: specifies the duration of a full hd video (short side <= 1080 px) encoded in H.264, in seconds;</li>
+	// <li>transcode_H264_2K: specifies the duration of a 2K video (short side <= 1440 px) encoded in H.264, expressed in seconds.</li>
+	// 
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// Time granularity of the query. Valid values:
@@ -5988,41 +6288,86 @@ type DescribeBillingDataRequestParams struct {
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Filter criteria. The detailed values of filter criteria are as follows:
-	// <li>host: Filter by domain name, such as test.example.com.<br></li>
-	// <li>proxy-id: Filter by L4 proxy instance ID, such as sid-2rugn89bkla9.<br></li>
-	// <li>region-id: Filter by billing region. Options:<br>  CH: Chinese mainland<br>  AF: Africa<br>  AS1: Asia-Pacific Region 1<br>  AS2: Asia-Pacific Region 2<br>  AS3: Asia-Pacific Region 3<br>  EU: Europe<br>  MidEast: Middle East<br>  NA: North America<br>  SA: South America</li>
+	// <ul>
+	//   <li>host: Filter by domain name, such as test.example.com.</li>
+	//   <li>proxy-id: Filter by L4 proxy instance ID, such as sid-2rugn89bkla9.</li>
+	//   <li>region-id: Filter by billing region. Options:
+	//     <ul>
+	//       <li>CH: Chinese mainland</li>
+	//       <li>AF: Africa</li>
+	//       <li>AS1: Asia-Pacific Region 1</li>
+	//       <li>AS2: Asia-Pacific Region 2</li>
+	//       <li>AS3: Asia-Pacific Region 3</li>
+	//       <li>EU: Europe</li>
+	//       <li>MidEast: Middle East</li>
+	//       <li>NA: North America</li>
+	//       <li>SA: South America</li>
+	//     </ul>
+	//   </li>
+	// </ul>
+	// <p>Note: Filters of the same `Type` use OR logic, while filters of different `Type` use AND logic.</p>
 	Filters []*BillingDataFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Grouping aggregation dimensions. A maximum of two dimensions can be used for grouping simultaneously. The values are as follows:</p>
+	//   <ul>
+	//     <li>zone-id: Group by zone ID. If content identifiers are used, grouping by content identifier takes priority.</li>
+	//     <li>host: Group by domain name.</li>
+	//     <li>proxy-id: Group by layer-4 proxy instance ID.</li>
+	//     <li>region-id: Group by billing region.</li>
+	//   </ul>
+	GroupBy []*string `json:"GroupBy,omitnil,omitempty" name:"GroupBy"`
 }
 
 type DescribeBillingDataRequest struct {
 	*tchttp.BaseRequest
 	
-	// Start time.
+	// The start time.
 	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
 
-	// End time.
+	// The end time. The query time range (EndTime - StartTime) must be less than or equal to 31 days.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
-	// Site ID set. This parameter is required.
+	// Zone ID set. This parameter is required. A maximum of 100 zone IDs can be passed in. If you need to query data for all zones under the Tencent Cloud main account, please use "*" instead. To query account-level data, you need to have full resource permissions for all zones of this interface.
 	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
 
-	// Metric list. Valid values:
+	// Metric name. Valid values:
+	// **Layer 4/7 Acceleration Traffic (Unit: Byte):**
 	// <li>acc_flux: content acceleration traffic, in bytes;</li>
 	// <li>smt_flux: smart acceleration traffic, in bytes;</li>
-	// <li>l4_flux: L4 acceleration traffic, in bytes;</li>
+	// <li>l4_flux: layer 4 acceleration traffic, in bytes;</li>
 	// <li>sec_flux: exclusive protection traffic, in bytes;</li>
-	// <li>zxctg_flux: network optimization traffic in the Chinese mainland, in bytes;</li>
-	// <li>acc_bandwidth: content acceleration bandwidth, in bps;</li>
+	// <li>zxctg_flux: network optimization traffic in the chinese mainland, in bytes;</li>
+	// 
+	// **Layer 4/7 Acceleration Bandwidth (Unit: bps):**
+	// <Li>acc_bandwidth: content acceleration bandwidth, in bps.</li>
 	// <li>smt_bandwidth: smart acceleration bandwidth, in bps;</li>
-	// <li>l4_bandwidth: L4 acceleration bandwidth, in bps;</li>
-	// <li>sec_bandwidth: exclusive protection bandwidth, in bps;</li>
-	// <li>zxctg_bandwidth: network optimization bandwidth in the Chinese mainland, in bps;</li>
+	// <Li>l4_bandwidth: layer 4 acceleration bandwidth, in bps.</li>
+	// <li>sec_bandwidth: exclusive protection bandwidth, in bps.</li>
+	// <li>zxctg_bandwidth: network optimization bandwidth in the chinese mainland, in bps;</li>
+	// 
+	// **HTTP/HTTPS Security Requests (Unit: counts):**
 	// <li>sec_request_clean: number of HTTP/HTTPS requests;</li>
-	// <li>smt_request_clean: number of smart acceleration requests;</li>
-	// <li>quic_request: number of QUIC requests;</li>
-	// <li>bot_request_clean: number of Bot requests;</li>
+	// 
+	// **Value-added Service Usage:**
+	// <li>smt_request_clean: number of smart acceleration requests, in counts;</li>
+	// <li>quic_request: number of quic requests;</li>
+	// <Li>bot_request_clean: number of bot requests;</li>
 	// <li>cls_count: number of real-time log entries pushed;</li>
-	// <li>ddos_bandwidth: elastic DDoS protection bandwidth, in bps.</li>
+	// <li>ddos_bandwidth: elastic ddos protection bandwidth, in bps.</li>
+	// 
+	// **Edge Computing Usage:**
+	// <li>edgefunction_request: number of edge function executions, in counts</li>
+	// <li>edgefunction_cpu_time: edge function CPU processing time, in milliseconds</li>
+	// 
+	// **Media Processing Usage (Unit: seconds):**
+	// <li>total_transcode: duration of jit transcoding and transmuxing for all specifications of audio and video, in seconds;</li>
+	// <li>remux: transmuxing duration, in seconds;</li>
+	// <li>transcode_audio: audio transcoding duration, in seconds;</li>
+	// <li>transcode_H264_SD: specifies the duration of standard-definition videos encoded in H.264 (short side <= 480 px), in seconds;</li>
+	// <li>transcode_H264_HD: specifies the duration of high-definition video (short side <= 720 px) encoded in H.264, in seconds;</li>
+	// <li>transcode_H264_FHD: specifies the duration of a full hd video (short side <= 1080 px) encoded in H.264, in seconds;</li>
+	// <li>transcode_H264_2K: specifies the duration of a 2K video (short side <= 1440 px) encoded in H.264, expressed in seconds.</li>
+	// 
 	MetricName *string `json:"MetricName,omitnil,omitempty" name:"MetricName"`
 
 	// Time granularity of the query. Valid values:
@@ -6032,10 +6377,34 @@ type DescribeBillingDataRequest struct {
 	Interval *string `json:"Interval,omitnil,omitempty" name:"Interval"`
 
 	// Filter criteria. The detailed values of filter criteria are as follows:
-	// <li>host: Filter by domain name, such as test.example.com.<br></li>
-	// <li>proxy-id: Filter by L4 proxy instance ID, such as sid-2rugn89bkla9.<br></li>
-	// <li>region-id: Filter by billing region. Options:<br>  CH: Chinese mainland<br>  AF: Africa<br>  AS1: Asia-Pacific Region 1<br>  AS2: Asia-Pacific Region 2<br>  AS3: Asia-Pacific Region 3<br>  EU: Europe<br>  MidEast: Middle East<br>  NA: North America<br>  SA: South America</li>
+	// <ul>
+	//   <li>host: Filter by domain name, such as test.example.com.</li>
+	//   <li>proxy-id: Filter by L4 proxy instance ID, such as sid-2rugn89bkla9.</li>
+	//   <li>region-id: Filter by billing region. Options:
+	//     <ul>
+	//       <li>CH: Chinese mainland</li>
+	//       <li>AF: Africa</li>
+	//       <li>AS1: Asia-Pacific Region 1</li>
+	//       <li>AS2: Asia-Pacific Region 2</li>
+	//       <li>AS3: Asia-Pacific Region 3</li>
+	//       <li>EU: Europe</li>
+	//       <li>MidEast: Middle East</li>
+	//       <li>NA: North America</li>
+	//       <li>SA: South America</li>
+	//     </ul>
+	//   </li>
+	// </ul>
+	// <p>Note: Filters of the same `Type` use OR logic, while filters of different `Type` use AND logic.</p>
 	Filters []*BillingDataFilter `json:"Filters,omitnil,omitempty" name:"Filters"`
+
+	// <p>Grouping aggregation dimensions. A maximum of two dimensions can be used for grouping simultaneously. The values are as follows:</p>
+	//   <ul>
+	//     <li>zone-id: Group by zone ID. If content identifiers are used, grouping by content identifier takes priority.</li>
+	//     <li>host: Group by domain name.</li>
+	//     <li>proxy-id: Group by layer-4 proxy instance ID.</li>
+	//     <li>region-id: Group by billing region.</li>
+	//   </ul>
+	GroupBy []*string `json:"GroupBy,omitnil,omitempty" name:"GroupBy"`
 }
 
 func (r *DescribeBillingDataRequest) ToJsonString() string {
@@ -6056,6 +6425,7 @@ func (r *DescribeBillingDataRequest) FromJsonString(s string) error {
 	delete(f, "MetricName")
 	delete(f, "Interval")
 	delete(f, "Filters")
+	delete(f, "GroupBy")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeBillingDataRequest has unknown keys!", "")
 	}
@@ -9985,6 +10355,130 @@ func (r *DescribeTopL7CacheDataResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type DescribeWebSecurityTemplateRequestParams struct {
+	// Zone ID. The zone to which the target policy template belongs for access control. Use the DescribeWebSecurityTemplates interface to query the zone of the policy template.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Policy template ID.
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+}
+
+type DescribeWebSecurityTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID. The zone to which the target policy template belongs for access control. Use the DescribeWebSecurityTemplates interface to query the zone of the policy template.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Policy template ID.
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+}
+
+func (r *DescribeWebSecurityTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeWebSecurityTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "TemplateId")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWebSecurityTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeWebSecurityTemplateResponseParams struct {
+	// Web Security policy template configuration. Bot management configuration is not currently supported (under development).
+	SecurityPolicy *SecurityPolicy `json:"SecurityPolicy,omitnil,omitempty" name:"SecurityPolicy"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeWebSecurityTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeWebSecurityTemplateResponseParams `json:"Response"`
+}
+
+func (r *DescribeWebSecurityTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeWebSecurityTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeWebSecurityTemplatesRequestParams struct {
+	// List of zone IDs. A maximum of 100 zones can be queried in a single request.
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+}
+
+type DescribeWebSecurityTemplatesRequest struct {
+	*tchttp.BaseRequest
+	
+	// List of zone IDs. A maximum of 100 zones can be queried in a single request.
+	ZoneIds []*string `json:"ZoneIds,omitnil,omitempty" name:"ZoneIds"`
+}
+
+func (r *DescribeWebSecurityTemplatesRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeWebSecurityTemplatesRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneIds")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "DescribeWebSecurityTemplatesRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type DescribeWebSecurityTemplatesResponseParams struct {
+	// Total number of policy templates.
+	TotalCount *int64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
+
+	// List of policy templates.
+	SecurityPolicyTemplates []*SecurityPolicyTemplateInfo `json:"SecurityPolicyTemplates,omitnil,omitempty" name:"SecurityPolicyTemplates"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type DescribeWebSecurityTemplatesResponse struct {
+	*tchttp.BaseResponse
+	Response *DescribeWebSecurityTemplatesResponseParams `json:"Response"`
+}
+
+func (r *DescribeWebSecurityTemplatesResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *DescribeWebSecurityTemplatesResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type DescribeZoneConfigImportResultRequestParams struct {
 	// Zone ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -10403,6 +10897,23 @@ type DetectLengthLimitRule struct {
 	// <li>`skip`: when request body data exceeds the detection depth set by `body_depth` in `Conditions` output parameters, skip all request body content detection.</li>.
 	// <li>`scan`: detect at the detection depth set by `body_depth` in the `Conditions` output parameters only. Truncate the excess part of the request body content directly, the excess part of the request body will not go through security detection.</li> Output paramter only.
 	Action *string `json:"Action,omitnil,omitempty" name:"Action"`
+}
+
+type DeviceProfile struct {
+	// Client device type. valid values: <li>iOS;</li> <li>Android;</li> <li>WebView.</li>.
+	ClientType *string `json:"ClientType,omitnil,omitempty" name:"ClientType"`
+
+	// The minimum value to determine a request as high-risk ranges from 1–99. the larger the value, the higher the request risk, and the closer it resembles a request initiated by a Bot client. the default value is 50, corresponding to high-risk for values 51–100.
+	HighRiskMinScore *uint64 `json:"HighRiskMinScore,omitnil,omitempty" name:"HighRiskMinScore"`
+
+	// Handling method for high-risk requests. valid values for SecurityAction Name: <li>Deny: block;</li> <li>Monitor: observation;</li> <li>Redirect: redirection;</li> <li>Challenge: Challenge.</li> default value: Monitor.
+	HighRiskRequestAction *SecurityAction `json:"HighRiskRequestAction,omitnil,omitempty" name:"HighRiskRequestAction"`
+
+	// Specifies the minimum value to determine a request as medium-risk. value range: 1–99. the larger the value, the higher the request risk, resembling requests initiated by a Bot client. default value: 15, corresponding to medium-risk for values 16–50.
+	MediumRiskMinScore *uint64 `json:"MediumRiskMinScore,omitnil,omitempty" name:"MediumRiskMinScore"`
+
+	// Handling method for medium-risk requests. SecurityAction Name parameter supports: <li>Deny: block;</li> <li>Monitor: observe;</li> <li>Redirect: Redirect;</li> <li>Challenge: Challenge.</li> default value is Monitor.
+	MediumRiskRequestAction *SecurityAction `json:"MediumRiskRequestAction,omitnil,omitempty" name:"MediumRiskRequestAction"`
 }
 
 type DiffIPWhitelist struct {
@@ -11017,6 +11528,43 @@ type ExceptUserRuleScope struct {
 	SkipConditions []*SkipCondition `json:"SkipConditions,omitnil,omitempty" name:"SkipConditions"`
 }
 
+type ExceptionRule struct {
+	// The ID of the exception rule. different rule configuration operations are supported by rule ID: <li> <b>add</b> a new rule: leave the ID empty or do not specify the ID parameter.</li> <li> <b>modify</b> an existing rule: specify the rule ID that needs to be updated/modified.</li> <li> <b>delete</b> an existing rule: existing Rules not included in the Rules list under the ExceptionRules parameter will be deleted.</li>.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// The name of the exception rule.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// Describes the specific content of the exception rule, which must comply with the expression grammar. for details, please refer to the product document.
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
+
+	// Exception rule execution options, valid values: <li>WebSecurityModules: designate the security protection module for the exception rule.</li> <li>ManagedRules: designate the managed rule.</li>.
+	SkipScope *string `json:"SkipScope,omitnil,omitempty" name:"SkipScope"`
+
+	// Skip the specific type of request. valid values: <li>SkipOnAllRequestFields: skip all requests;</li> <li>SkipOnSpecifiedRequestFields: skip specified request fields.</li> valid only when SkipScope is ManagedRules.
+	SkipOption *string `json:"SkipOption,omitnil,omitempty" name:"SkipOption"`
+
+	// Specifies the security protection module for exception rules. valid only when SkipScope is WebSecurityModules. valid values: <li>websec-mod-managed-rules: managed rule.</li><li>websec-mod-rate-limiting: rate limit.</li><li>websec-mod-custom-rules: custom rule.</li><li>websec-mod-adaptive-control: adaptive frequency control, intelligent client filtering, slow attack protection, traffic theft protection.</li><li>websec-mod-bot: bot management.</li>.
+	WebSecurityModulesForException []*string `json:"WebSecurityModulesForException,omitnil,omitempty" name:"WebSecurityModulesForException"`
+
+	// Specifies the managed rule for the exception rule. valid only when SkipScope is ManagedRules. cannot specify ManagedRuleGroupsForException at this time.
+	ManagedRulesForException []*string `json:"ManagedRulesForException,omitnil,omitempty" name:"ManagedRulesForException"`
+
+	// A managed rule group with designated exception rules is valid only when SkipScope is ManagedRules, and at this point you cannot specify ManagedRulesForException.
+	ManagedRuleGroupsForException []*string `json:"ManagedRuleGroupsForException,omitnil,omitempty" name:"ManagedRuleGroupsForException"`
+
+	// Specify exception rules to skip request fields. valid only when SkipScope is ManagedRules and SkipOption is SkipOnSpecifiedRequestFields.
+	RequestFieldsForException []*RequestFieldsForException `json:"RequestFieldsForException,omitnil,omitempty" name:"RequestFieldsForException"`
+
+	// Whether the exception rule is enabled. valid values: <li>`on`: enable</li> <li>`off`: disable</li>.
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+}
+
+type ExceptionRules struct {
+	// Definition list of exception Rules. when using ModifySecurityPolicy to modify Web protection configuration: <li>if the Rules parameter is not specified or the parameter length is zero: clear all exception rule configurations.</li><li>if the ExceptionRules parameter value is not specified in SecurityPolicy: keep existing exception rule configurations without modification.</li>.
+	Rules []*ExceptionRule `json:"Rules,omitnil,omitempty" name:"Rules"`
+}
+
 // Predefined struct for user
 type ExportZoneConfigRequestParams struct {
 	// Zone ID.
@@ -11496,6 +12044,20 @@ type Hsts struct {
 	// <li>`off`: Disable</li>
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Preload *string `json:"Preload,omitnil,omitempty" name:"Preload"`
+}
+
+type HttpDDoSProtection struct {
+	// Specifies the specific configuration of adaptive frequency control.
+	AdaptiveFrequencyControl *AdaptiveFrequencyControl `json:"AdaptiveFrequencyControl,omitnil,omitempty" name:"AdaptiveFrequencyControl"`
+
+	// Specifies the intelligent client filter configuration.
+	ClientFiltering *ClientFiltering `json:"ClientFiltering,omitnil,omitempty" name:"ClientFiltering"`
+
+	// Specifies the specific configuration for bandwidth abuse protection.
+	BandwidthAbuseDefense *BandwidthAbuseDefense `json:"BandwidthAbuseDefense,omitnil,omitempty" name:"BandwidthAbuseDefense"`
+
+	// Specifies the configuration of slow attack protection.
+	SlowAttackDefense *SlowAttackDefense `json:"SlowAttackDefense,omitnil,omitempty" name:"SlowAttackDefense"`
 }
 
 type Https struct {
@@ -12269,6 +12831,17 @@ type MaxAgeParameters struct {
 
 	// Custom cache time value, unit: seconds. value range: 0-315360000.<br>note: when followorigin is off, it means not following the origin server and using cachetime to set the cache time; otherwise, this field will not take effect.
 	CacheTime *int64 `json:"CacheTime,omitnil,omitempty" name:"CacheTime"`
+}
+
+type MinimalRequestBodyTransferRate struct {
+	// Minimum body transfer rate threshold, the measurement unit is only supported in bps.
+	MinimalAvgTransferRateThreshold *string `json:"MinimalAvgTransferRateThreshold,omitnil,omitempty" name:"MinimalAvgTransferRateThreshold"`
+
+	// Minimum body transfer rate statistical time range, valid values: <li>10s: 10 seconds;</li> <li>30s: 30 seconds;</li> <li>60s: 60 seconds;</li> <li>120s: 120 seconds.</li>.
+	CountingPeriod *string `json:"CountingPeriod,omitnil,omitempty" name:"CountingPeriod"`
+
+	// Specifies whether the minimum body transfer rate threshold is enabled. valid values: <li>on: enable;</li> <li>off: disable.</li>.
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
 }
 
 // Predefined struct for user
@@ -14896,6 +15469,83 @@ func (r *ModifySecurityPolicyResponse) FromJsonString(s string) error {
 }
 
 // Predefined struct for user
+type ModifyWebSecurityTemplateRequestParams struct {
+	// Zone ID. The zone to which the target policy template belongs for access control. Use the DescribeWebSecurityTemplates interface to query the zone of the policy template.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Policy template ID.
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+
+	// Modified policy template name. Consists of Chinese characters, letters, numbers, and underscores, cannot start with an underscore, and must not exceed 32 characters. If the field is empty, no modification will be made.
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
+
+	// Security policy template configuration content. If the value is empty, no modification will be made; submodule structures not passed in will not be modified. Currently supports exception rules, custom rules, rate limiting rules, and managed rule configurations in the Web Security module, using expression syntax for security policy configuration. Bot management rule configuration is not yet supported (under development).
+	// Special note: When passing a submodule structure as input, ensure all rule content to be retained is included. Rule content not passed in will be treated as deleted.
+	SecurityPolicy *SecurityPolicy `json:"SecurityPolicy,omitnil,omitempty" name:"SecurityPolicy"`
+}
+
+type ModifyWebSecurityTemplateRequest struct {
+	*tchttp.BaseRequest
+	
+	// Zone ID. The zone to which the target policy template belongs for access control. Use the DescribeWebSecurityTemplates interface to query the zone of the policy template.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Policy template ID.
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+
+	// Modified policy template name. Consists of Chinese characters, letters, numbers, and underscores, cannot start with an underscore, and must not exceed 32 characters. If the field is empty, no modification will be made.
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
+
+	// Security policy template configuration content. If the value is empty, no modification will be made; submodule structures not passed in will not be modified. Currently supports exception rules, custom rules, rate limiting rules, and managed rule configurations in the Web Security module, using expression syntax for security policy configuration. Bot management rule configuration is not yet supported (under development).
+	// Special note: When passing a submodule structure as input, ensure all rule content to be retained is included. Rule content not passed in will be treated as deleted.
+	SecurityPolicy *SecurityPolicy `json:"SecurityPolicy,omitnil,omitempty" name:"SecurityPolicy"`
+}
+
+func (r *ModifyWebSecurityTemplateRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyWebSecurityTemplateRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ZoneId")
+	delete(f, "TemplateId")
+	delete(f, "TemplateName")
+	delete(f, "SecurityPolicy")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyWebSecurityTemplateRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ModifyWebSecurityTemplateResponseParams struct {
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ModifyWebSecurityTemplateResponse struct {
+	*tchttp.BaseResponse
+	Response *ModifyWebSecurityTemplateResponseParams `json:"Response"`
+}
+
+func (r *ModifyWebSecurityTemplateResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ModifyWebSecurityTemplateResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
 type ModifyZoneRequestParams struct {
 	// The site ID.
 	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
@@ -16081,6 +16731,43 @@ type RateLimitUserRule struct {
 	RedirectUrl *string `json:"RedirectUrl,omitnil,omitempty" name:"RedirectUrl"`
 }
 
+type RateLimitingRule struct {
+	// The ID of precise rate limiting. rule ID supports different rule configuration operations: <li><b>add</b> a new rule: leave the ID empty or do not specify the ID parameter.</li> <li><b>modify</b> an existing rule: specify the rule ID that needs to be updated/modified.</li> <li><b>delete</b> an existing rule: existing Rules not included in the Rules list under the RateLimitingRules parameter will be deleted.</li>.
+	Id *string `json:"Id,omitnil,omitempty" name:"Id"`
+
+	// Specifies the name of the precise rate limit.
+	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
+
+	// The specific content of precise speed limit shall comply with the expression syntax. for detailed specifications, see the product documentation.
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
+
+	// Rate threshold request feature match mode. this field is required when Enabled is on.  when there are multiple conditions, composite multiple conditions will perform statistics count. the maximum number of conditions must not exceed 5. valid values: <li><b>http.request.ip</b>: client ip;</li> <li><b>http.request.xff_header_ip</b>: client ip (priority match xff header);</li> <li><b>http.request.uri.path</b>: request access path;</li> <li><b>http.request.cookies['session']</b>: Cookie named session, where session can be replaced with your own specified parameter;</li> <li><b>http.request.headers['user-agent']</b>: http header named user-agent, where user-agent can be replaced with your own specified parameter;</li> <li><b>http.request.ja3</b>: request ja3 fingerprint;</li> <li><b>http.request.uri.query['test']</b>: URL query parameter named test, where test can be replaced with your own specified parameter.</li>.
+	CountBy []*string `json:"CountBy,omitnil,omitempty" name:"CountBy"`
+
+	// Precision rate limiting specifies the cumulative number of interceptions within the time range. value ranges from 1 to 100000.
+	MaxRequestThreshold *int64 `json:"MaxRequestThreshold,omitnil,omitempty" name:"MaxRequestThreshold"`
+
+	// Specifies the time window for statistics. valid values: <li>1s: 1 second;</li><li>5s: 5 seconds;</li><li>10s: 10 seconds;</li><li>20s: 20 seconds;</li><li>30s: 30 seconds;</li><li>40s: 40 seconds;</li><li>50s: 50 seconds;</li><li>1m: 1 minute;</li><li>2m: 2 minutes;</li><li>5m: 5 minutes;</li><li>10m: 10 minutes;</li><li>1h: 1 hour.</li>.
+	CountingPeriod *string `json:"CountingPeriod,omitnil,omitempty" name:"CountingPeriod"`
+
+	// The duration of an Action is only supported in the following units: <li>s: seconds, value range 1–120;</li> <li>m: minutes, value range 1–120;</li> <li>h: hours, value range 1–48;</li> <li>d: days, value range 1–30.</li>.
+	ActionDuration *string `json:"ActionDuration,omitnil,omitempty" name:"ActionDuration"`
+
+	// Precision rate limiting handling methods. valid values: <li>Monitor: Monitor;</li> <li>Deny: block, where DenyActionParameters.Name supports Deny and ReturnCustomPage;</li> <li>Challenge: Challenge, where ChallengeActionParameters.Name supports JSChallenge and ManagedChallenge;</li> <li>Redirect: Redirect to URL;</li>.
+	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// Precision rate limiting specifies the priority. value range is 0 to 100. default is 0.
+	Priority *int64 `json:"Priority,omitnil,omitempty" name:"Priority"`
+
+	// Whether the precise rate limiting rule is enabled. valid values: <li>on: enabled;</li> <li>off: disabled.</li>.
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+}
+
+type RateLimitingRules struct {
+	// Definition list of precise rate limiting. when using ModifySecurityPolicy to modify the Web protection configuration: <br> <li> if the Rules parameter is not specified or its length is zero: clear all precision rate limiting configurations.</li> <li> if the RateLimitingRules parameter value is unspecified in the SecurityPolicy parameter: retain the existing custom rule configuration without modification.</li>.
+	Rules []*RateLimitingRule `json:"Rules,omitnil,omitempty" name:"Rules"`
+}
+
 type RealtimeLogDeliveryTask struct {
 	// ID of a real-time log shipping task.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
@@ -16221,6 +16908,39 @@ func (r *RenewPlanResponse) ToJsonString() string {
 // because it has no param check, nor strict type check
 func (r *RenewPlanResponse) FromJsonString(s string) error {
 	return json.Unmarshal([]byte(s), &r)
+}
+
+type RequestBodyTransferTimeout struct {
+	// Body transfer timeout duration. valid values: 5-120. measurement unit: seconds (s) only.
+	IdleTimeout *string `json:"IdleTimeout,omitnil,omitempty" name:"IdleTimeout"`
+
+	// Whether body transfer timeout is enabled. valid values: <li>`on`: enable</li> <li>`off`: disable</li>.
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+}
+
+type RequestFieldsForException struct {
+	// Skip specific field. supported values:.
+	// <li>body.json: parameter content in json requests. at this point, Condition supports key and value, TargetField supports key and value, for example { "Scope": "body.json", "Condition": "", "TargetField": "key" }, which means all parameters in json requests skip WAF scan.</li>.
+	// <li style="margin-top:5px">cookie: cookie; at this point Condition supports key, value, TargetField supports key, value, for example { "Scope": "cookie", "Condition": "${key} in ['account-id'] and ${value} like ['prefix-*']", "TargetField": "value" }, which means the cookie parameter name equals account-id and the parameter value wildcard matches prefix-* to skip WAF scan;</li>.
+	// <li style="margin-top:5px">header: HTTP header parameters. at this point, Condition supports key and value, TargetField supports key and value, for example { "Scope": "header", "Condition": "${key} like ['x-auth-*']", "TargetField": "value" }, which means header parameter name wildcard match x-auth-* skips WAF scan.</li>.
+	// <li style="margin-top:5px">uri.query: URL encoding content/query parameter. at this point, Condition supports key and value, TargetField supports key and value. example: { "Scope": "uri.query", "Condition": "${key} in ['action'] and ${value} in ['upload', 'delete']", "TargetField": "value" }. indicates URL encoding content/query parameter name equal to action and parameter value equal to upload or delete skips WAF scan.</li>.
+	// <li style="margin-top:5px">uri: specifies the request path uri. at this point, Condition must be empty. TargetField supports query, path, fullpath, such as {"Scope": "uri", "Condition": "", "TargetField": "query"}, indicates the request path uri skips WAF scan for query parameters.</li>.
+	// <li style="margin-top:5px">body: request body content. at this point Condition must be empty, TargetField supports fullbody, multipart, such as { "Scope": "body", "Condition": "", "TargetField": "fullbody" }, which means the request body content skips WAF scan as a full request.</li>.
+	Scope *string `json:"Scope,omitnil,omitempty" name:"Scope"`
+
+	// Skip specific field expression must comply with expression grammar.
+	// Condition supports expression configuration syntax: <li> write according to the matching conditional expression syntax of rules, with support for referencing key and value.</li> <li> supports in, like operators, and logical combination with and.</li>.
+	// For example: <li>${key} in ['x-trace-id']: the parameter name equals x-trace-id.</li> <li>${key} in ['x-trace-id'] and ${value} like ['Bearer *']: the parameter name equals x-trace-id and the parameter value wildcard matches Bearer *.</li>.
+	Condition *string `json:"Condition,omitnil,omitempty" name:"Condition"`
+
+	// The Scope parameter takes different values. the TargetField expression supports the following values:.
+	// <Li> body.json: supports key, value.</li>.
+	// <li>cookie: supports key and value.</li>.
+	// <li>header: supports key, value</li>.
+	// <Li> uri.query: supports key and value</li>.
+	// <li>uri. specifies path, query, or fullpath.</li>.
+	// <Li>Body: supports fullbody and multipart.</li>.
+	TargetField *string `json:"TargetField,omitnil,omitempty" name:"TargetField"`
 }
 
 type Resource struct {
@@ -16777,18 +17497,36 @@ type SecEntryValue struct {
 }
 
 type SecurityAction struct {
-	// Specific action name for security operation. Values:
-	// <li>`Deny`: block</li> <li>`Monitor`: monitor</li> <li>`ReturnCustomPage`: block with customized page</li> <li>`Redirect`: Redirect to URL</li> <li>`BlockIP`: IP block</li> <li>`JSChallenge`: javaScript challenge</li> <li>`ManagedChallenge`: managed challenge</li> <li>`Disabled`: disabled</li> <li>`Allow`: allow</li>.
+	// Safe execution actions. valid values:.
+	// <Li>Deny: block request to access site resource;</li>.
+	// <Li>`Monitor`: observe; only record logs</li>.
+	// <li>`Redirect`: Redirect to URL</li>.
+	// <Li>Disabled: disabled; specify rule is not enabled.</li>.
+	// <Li>Allow: allow access but delay processing the request.</li>.
+	// <Li>Challenge: challenge, respond to challenge content;</li>.
+	// <Li>BlockIP: to be deprecated, ip block;</li>.
+	// <Li>`ReturnCustomPage`: to be deprecated, use specified page block;</li>.
+	// <li>JSChallenge: to be deprecated, JavaScript challenge;</li>.
+	// <Li>ManagedChallenge: to be deprecated. managed challenge.</li>.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// Additional parameter when Name is BlockIP.
-	BlockIPActionParameters *BlockIPActionParameters `json:"BlockIPActionParameters,omitnil,omitempty" name:"BlockIPActionParameters"`
-
-	// Additional parameter when Name is ReturnCustomPage.
-	ReturnCustomPageActionParameters *ReturnCustomPageActionParameters `json:"ReturnCustomPageActionParameters,omitnil,omitempty" name:"ReturnCustomPageActionParameters"`
+	// Additional parameters when Name is Deny.
+	DenyActionParameters *DenyActionParameters `json:"DenyActionParameters,omitnil,omitempty" name:"DenyActionParameters"`
 
 	// Additional parameter when Name is Redirect.
 	RedirectActionParameters *RedirectActionParameters `json:"RedirectActionParameters,omitnil,omitempty" name:"RedirectActionParameters"`
+
+	// Additional parameters when Name is Allow.
+	AllowActionParameters *AllowActionParameters `json:"AllowActionParameters,omitnil,omitempty" name:"AllowActionParameters"`
+
+	// Additional parameter when Name is Challenge.
+	ChallengeActionParameters *ChallengeActionParameters `json:"ChallengeActionParameters,omitnil,omitempty" name:"ChallengeActionParameters"`
+
+	// To be deprecated, additional parameter when Name is BlockIP.
+	BlockIPActionParameters *BlockIPActionParameters `json:"BlockIPActionParameters,omitnil,omitempty" name:"BlockIPActionParameters"`
+
+	// To be deprecated, additional parameter when Name is ReturnCustomPage.
+	ReturnCustomPageActionParameters *ReturnCustomPageActionParameters `json:"ReturnCustomPageActionParameters,omitnil,omitempty" name:"ReturnCustomPageActionParameters"`
 }
 
 type SecurityConfig struct {
@@ -16841,6 +17579,32 @@ type SecurityPolicy struct {
 	// Managed. If the parameter is null or not filled, the configuration last set will be used by default.
 	// Note: This field may return null, indicating that no valid value can be obtained.
 	ManagedRules *ManagedRules `json:"ManagedRules,omitnil,omitempty" name:"ManagedRules"`
+
+	// HTTP DDOS protection configuration.
+	HttpDDoSProtection *HttpDDoSProtection `json:"HttpDDoSProtection,omitnil,omitempty" name:"HttpDDoSProtection"`
+
+	// Configures the rate limiting rule.
+	RateLimitingRules *RateLimitingRules `json:"RateLimitingRules,omitnil,omitempty" name:"RateLimitingRules"`
+
+	// Exception rule configuration.
+	ExceptionRules *ExceptionRules `json:"ExceptionRules,omitnil,omitempty" name:"ExceptionRules"`
+
+	// Bot management configuration.
+	BotManagement *BotManagement `json:"BotManagement,omitnil,omitempty" name:"BotManagement"`
+}
+
+type SecurityPolicyTemplateInfo struct {
+	// The zone ID to which the policy template belongs.
+	ZoneId *string `json:"ZoneId,omitnil,omitempty" name:"ZoneId"`
+
+	// Policy template ID.
+	TemplateId *string `json:"TemplateId,omitnil,omitempty" name:"TemplateId"`
+
+	// The name of the policy template.
+	TemplateName *string `json:"TemplateName,omitnil,omitempty" name:"TemplateName"`
+
+	// Information about domains bound to the policy template.
+	BindDomains []*BindDomainInfo `json:"BindDomains,omitnil,omitempty" name:"BindDomains"`
 }
 
 type SecurityTemplateBinding struct {
@@ -16934,6 +17698,20 @@ type SkipCondition struct {
 	// The value that matches the content.
 	// Note: This field may return `null`, indicating that no valid value can be obtained.
 	MatchContent []*string `json:"MatchContent,omitnil,omitempty" name:"MatchContent"`
+}
+
+type SlowAttackDefense struct {
+	// Whether slow attack protection is enabled. valid values: <li>on: enabled;</li> <li>off: disabled.</li>.
+	Enabled *string `json:"Enabled,omitnil,omitempty" name:"Enabled"`
+
+	// Slow attack protection handling method. required when Enabled is on. valid values for SecurityAction Name: <li>Monitor: observation;</li> <li>Deny: block;</li>.
+	Action *SecurityAction `json:"Action,omitnil,omitempty" name:"Action"`
+
+	// The specific configuration of the minimum body transfer rate threshold is required when Enabled is on.
+	MinimalRequestBodyTransferRate *MinimalRequestBodyTransferRate `json:"MinimalRequestBodyTransferRate,omitnil,omitempty" name:"MinimalRequestBodyTransferRate"`
+
+	// Specifies the specific configuration of body transfer timeout duration. required when Enabled is on.
+	RequestBodyTransferTimeout *RequestBodyTransferTimeout `json:"RequestBodyTransferTimeout,omitnil,omitempty" name:"RequestBodyTransferTimeout"`
 }
 
 type SlowPostConfig struct {

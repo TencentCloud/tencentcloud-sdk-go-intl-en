@@ -2563,7 +2563,7 @@ type QueryCustomersCreditData struct {
 
 // Predefined struct for user
 type QueryCustomersCreditRequestParams struct {
-	// Search condition type. You can only search by customer ID, name, remarks, or email.
+	// Search condition type. You can only search by ClientUin, Name, Remark, or Email.
 	FilterType *string `json:"FilterType,omitnil,omitempty" name:"FilterType"`
 
 	// Search condition
@@ -2582,7 +2582,7 @@ type QueryCustomersCreditRequestParams struct {
 type QueryCustomersCreditRequest struct {
 	*tchttp.BaseRequest
 	
-	// Search condition type. You can only search by customer ID, name, remarks, or email.
+	// Search condition type. You can only search by ClientUin, Name, Remark, or Email.
 	FilterType *string `json:"FilterType,omitnil,omitempty" name:"FilterType"`
 
 	// Search condition

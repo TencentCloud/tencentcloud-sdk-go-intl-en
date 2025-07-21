@@ -263,7 +263,7 @@ const (
 	// The resource is being shipped.
 	RESOURCEUNAVAILABLE_DELIVERING = "ResourceUnavailable.Delivering"
 
-	// The account is frozen.
+	// The account has been frozen.
 	RESOURCEUNAVAILABLE_FREEZE = "ResourceUnavailable.Freeze"
 
 	// Failed to get the authentication information.
@@ -284,7 +284,7 @@ const (
 	// The resource has been repossessed.
 	RESOURCEUNAVAILABLE_RECOVER = "ResourceUnavailable.Recover"
 
-	// The service has been suspended for the account.
+	// Services for the account has been stopped.
 	RESOURCEUNAVAILABLE_STOPUSING = "ResourceUnavailable.StopUsing"
 
 	// The billing status is unknown.
