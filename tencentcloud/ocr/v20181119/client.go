@@ -126,6 +126,89 @@ func (c *Client) BankCardOCRWithContext(ctx context.Context, request *BankCardOC
     return
 }
 
+func NewExtractDocMultiRequest() (request *ExtractDocMultiRequest) {
+    request = &ExtractDocMultiRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("ocr", APIVersion, "ExtractDocMulti")
+    
+    
+    return
+}
+
+func NewExtractDocMultiResponse() (response *ExtractDocMultiResponse) {
+    response = &ExtractDocMultiResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// ExtractDocMulti
+// This API supports identifying and extracting field information in structured scenarios such as complex scenarios and multiple formats. Key scenarios include: finance, health care, transportation, travel, insurance. Click [experience now](https://ocrdemo.cloud.tencent.com/).
+//
+// 
+//
+// This API is used to set the alias SmartStructuralPro.
+//
+// 
+//
+// The default API request rate limit is 5 requests per second.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) ExtractDocMulti(request *ExtractDocMultiRequest) (response *ExtractDocMultiResponse, err error) {
+    return c.ExtractDocMultiWithContext(context.Background(), request)
+}
+
+// ExtractDocMulti
+// This API supports identifying and extracting field information in structured scenarios such as complex scenarios and multiple formats. Key scenarios include: finance, health care, transportation, travel, insurance. Click [experience now](https://ocrdemo.cloud.tencent.com/).
+//
+// 
+//
+// This API is used to set the alias SmartStructuralPro.
+//
+// 
+//
+// The default API request rate limit is 5 requests per second.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_DOWNLOADERROR = "FailedOperation.DownLoadError"
+//  FAILEDOPERATION_IMAGEDECODEFAILED = "FailedOperation.ImageDecodeFailed"
+//  FAILEDOPERATION_OCRFAILED = "FailedOperation.OcrFailed"
+//  FAILEDOPERATION_UNKNOWERROR = "FailedOperation.UnKnowError"
+//  FAILEDOPERATION_UNOPENERROR = "FailedOperation.UnOpenError"
+//  INVALIDPARAMETERVALUE_INVALIDPARAMETERVALUELIMIT = "InvalidParameterValue.InvalidParameterValueLimit"
+//  LIMITEXCEEDED_TOOLARGEFILEERROR = "LimitExceeded.TooLargeFileError"
+//  RESOURCEUNAVAILABLE_INARREARS = "ResourceUnavailable.InArrears"
+//  RESOURCEUNAVAILABLE_RESOURCEPACKAGERUNOUT = "ResourceUnavailable.ResourcePackageRunOut"
+//  RESOURCESSOLDOUT_CHARGESTATUSEXCEPTION = "ResourcesSoldOut.ChargeStatusException"
+func (c *Client) ExtractDocMultiWithContext(ctx context.Context, request *ExtractDocMultiRequest) (response *ExtractDocMultiResponse, err error) {
+    if request == nil {
+        request = NewExtractDocMultiRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("ExtractDocMulti require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewExtractDocMultiResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewGeneralAccurateOCRRequest() (request *GeneralAccurateOCRRequest) {
     request = &GeneralAccurateOCRRequest{
         BaseRequest: &tchttp.BaseRequest{},

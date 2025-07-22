@@ -309,6 +309,11 @@ type BusInvoice struct {
 	TrainNumber *string `json:"TrainNumber,omitnil,omitempty" name:"TrainNumber"`
 }
 
+type ConfigAdvanced struct {
+	// Single attribute configuration of a template.
+	Scene *string `json:"Scene,omitnil,omitempty" name:"Scene"`
+}
+
 type Coord struct {
 	// Horizontal coordinate
 	X *int64 `json:"X,omitnil,omitempty" name:"X"`
@@ -328,6 +333,182 @@ type DetectedWords struct {
 
 	// A possible character
 	Character *string `json:"Character,omitnil,omitempty" name:"Character"`
+}
+
+// Predefined struct for user
+type ExtractDocMultiRequestParams struct {
+	// The Url address of the image. supported image formats: PNG, JPG, JPEG, WORD, EXCEL. GIF format is not currently supported. supported image size: no more than 10M after Base64 encoding. image download time should not exceed 3 seconds. supported image pixels: between 20-10000px. images stored in tencent cloud's Url ensure higher download speed and stability. it is recommended to store images in tencent cloud. the speed and stability of non-tencent cloud storage urls may be impacted.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// The Base64 value of the image. supported image formats: PNG, JPG, JPEG, WORD, EXCEL. GIF format is not currently supported. supported image size: no more than 10M after encoding the downloaded image with Base64. image download time: no more than 3 seconds. supported image pixels: between 20-10000px. either ImageUrl or ImageBase64 must be provided. if both are provided, only use ImageUrl.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// Specifies the page number of the PDF to be recognized. only single page recognition is supported. valid when uploading a PDF file with the IsPdf parameter set to true. default value is the first 3 pages.
+	PdfPageNumber *uint64 `json:"PdfPageNumber,omitnil,omitempty" name:"PdfPageNumber"`
+
+	// Specifies the field names to be returned by the customized structuring feature. for example, if the customer wants to add the recognition result of two fields, name and gender, manually input ItemNames=["name","gender"].
+	ItemNames []*string `json:"ItemNames,omitnil,omitempty" name:"ItemNames"`
+
+	// true: only custom field.
+	// False: default value field + custom field.
+	// Default true.
+	ItemNamesShowMode *bool `json:"ItemNamesShowMode,omitnil,omitempty" name:"ItemNamesShowMode"`
+
+	// Whether the full-text field recognition is enabled.
+	ReturnFullText *bool `json:"ReturnFullText,omitnil,omitempty" name:"ReturnFullText"`
+
+	// Configuration ID support: 
+	// -- General
+	// -- InvoiceEng
+	// -- WayBillEng
+	// -- CustomsDeclaration
+	// -- WeightNote
+	// -- MedicalMeter
+	// -- BillOfLading
+	// -- EntrustmentBook
+	// -- Statement
+	// -- BookingConfirmation
+	// -- AirWayBill
+	// -- Table
+	// -- SteelLabel
+	// -- CarInsurance
+	// -- MultiRealEstateCertificate
+	// -- MultiRealEstateMaterial
+	// -- HongKongUtilityBill
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+
+	// Whether the full-text field coordinate value recognition is enabled.
+	EnableCoord *bool `json:"EnableCoord,omitnil,omitempty" name:"EnableCoord"`
+
+	// Whether parent-child key recognition is enabled. the option is selected by default.
+	OutputParentKey *bool `json:"OutputParentKey,omitnil,omitempty" name:"OutputParentKey"`
+
+	// Single attribute configuration of a template.
+	ConfigAdvanced *ConfigAdvanced `json:"ConfigAdvanced,omitnil,omitempty" name:"ConfigAdvanced"`
+
+	// When cn, the added key is chinese.  
+	// When set to en, the added key is english.
+	OutputLanguage *string `json:"OutputLanguage,omitnil,omitempty" name:"OutputLanguage"`
+}
+
+type ExtractDocMultiRequest struct {
+	*tchttp.BaseRequest
+	
+	// The Url address of the image. supported image formats: PNG, JPG, JPEG, WORD, EXCEL. GIF format is not currently supported. supported image size: no more than 10M after Base64 encoding. image download time should not exceed 3 seconds. supported image pixels: between 20-10000px. images stored in tencent cloud's Url ensure higher download speed and stability. it is recommended to store images in tencent cloud. the speed and stability of non-tencent cloud storage urls may be impacted.
+	ImageUrl *string `json:"ImageUrl,omitnil,omitempty" name:"ImageUrl"`
+
+	// The Base64 value of the image. supported image formats: PNG, JPG, JPEG, WORD, EXCEL. GIF format is not currently supported. supported image size: no more than 10M after encoding the downloaded image with Base64. image download time: no more than 3 seconds. supported image pixels: between 20-10000px. either ImageUrl or ImageBase64 must be provided. if both are provided, only use ImageUrl.
+	ImageBase64 *string `json:"ImageBase64,omitnil,omitempty" name:"ImageBase64"`
+
+	// Specifies the page number of the PDF to be recognized. only single page recognition is supported. valid when uploading a PDF file with the IsPdf parameter set to true. default value is the first 3 pages.
+	PdfPageNumber *uint64 `json:"PdfPageNumber,omitnil,omitempty" name:"PdfPageNumber"`
+
+	// Specifies the field names to be returned by the customized structuring feature. for example, if the customer wants to add the recognition result of two fields, name and gender, manually input ItemNames=["name","gender"].
+	ItemNames []*string `json:"ItemNames,omitnil,omitempty" name:"ItemNames"`
+
+	// true: only custom field.
+	// False: default value field + custom field.
+	// Default true.
+	ItemNamesShowMode *bool `json:"ItemNamesShowMode,omitnil,omitempty" name:"ItemNamesShowMode"`
+
+	// Whether the full-text field recognition is enabled.
+	ReturnFullText *bool `json:"ReturnFullText,omitnil,omitempty" name:"ReturnFullText"`
+
+	// Configuration ID support: 
+	// -- General
+	// -- InvoiceEng
+	// -- WayBillEng
+	// -- CustomsDeclaration
+	// -- WeightNote
+	// -- MedicalMeter
+	// -- BillOfLading
+	// -- EntrustmentBook
+	// -- Statement
+	// -- BookingConfirmation
+	// -- AirWayBill
+	// -- Table
+	// -- SteelLabel
+	// -- CarInsurance
+	// -- MultiRealEstateCertificate
+	// -- MultiRealEstateMaterial
+	// -- HongKongUtilityBill
+	ConfigId *string `json:"ConfigId,omitnil,omitempty" name:"ConfigId"`
+
+	// Whether the full-text field coordinate value recognition is enabled.
+	EnableCoord *bool `json:"EnableCoord,omitnil,omitempty" name:"EnableCoord"`
+
+	// Whether parent-child key recognition is enabled. the option is selected by default.
+	OutputParentKey *bool `json:"OutputParentKey,omitnil,omitempty" name:"OutputParentKey"`
+
+	// Single attribute configuration of a template.
+	ConfigAdvanced *ConfigAdvanced `json:"ConfigAdvanced,omitnil,omitempty" name:"ConfigAdvanced"`
+
+	// When cn, the added key is chinese.  
+	// When set to en, the added key is english.
+	OutputLanguage *string `json:"OutputLanguage,omitnil,omitempty" name:"OutputLanguage"`
+}
+
+func (r *ExtractDocMultiRequest) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExtractDocMultiRequest) FromJsonString(s string) error {
+	f := make(map[string]interface{})
+	if err := json.Unmarshal([]byte(s), &f); err != nil {
+		return err
+	}
+	delete(f, "ImageUrl")
+	delete(f, "ImageBase64")
+	delete(f, "PdfPageNumber")
+	delete(f, "ItemNames")
+	delete(f, "ItemNamesShowMode")
+	delete(f, "ReturnFullText")
+	delete(f, "ConfigId")
+	delete(f, "EnableCoord")
+	delete(f, "OutputParentKey")
+	delete(f, "ConfigAdvanced")
+	delete(f, "OutputLanguage")
+	if len(f) > 0 {
+		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ExtractDocMultiRequest has unknown keys!", "")
+	}
+	return json.Unmarshal([]byte(s), &r)
+}
+
+// Predefined struct for user
+type ExtractDocMultiResponseParams struct {
+	// Image rotation angle (angle system). the text's horizontal direction is 0. clockwise is positive; counterclockwise is negative.
+	Angle *float64 `json:"Angle,omitnil,omitempty" name:"Angle"`
+
+	// Configures the structured text info.
+	StructuralList []*GroupInfo `json:"StructuralList,omitnil,omitempty" name:"StructuralList"`
+
+	// Restore text information.
+	WordList []*WordItem `json:"WordList,omitnil,omitempty" name:"WordList"`
+
+	// Number of sample identification fields.
+	TokenNum *int64 `json:"TokenNum,omitnil,omitempty" name:"TokenNum"`
+
+	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
+	RequestId *string `json:"RequestId,omitnil,omitempty" name:"RequestId"`
+}
+
+type ExtractDocMultiResponse struct {
+	*tchttp.BaseResponse
+	Response *ExtractDocMultiResponseParams `json:"Response"`
+}
+
+func (r *ExtractDocMultiResponse) ToJsonString() string {
+    b, _ := json.Marshal(r)
+    return string(b)
+}
+
+// FromJsonString It is highly **NOT** recommended to use this function
+// because it has no param check, nor strict type check
+func (r *ExtractDocMultiResponse) FromJsonString(s string) error {
+	return json.Unmarshal([]byte(s), &r)
 }
 
 type FlightItem struct {
@@ -6157,6 +6338,20 @@ func (r *VinOCRResponse) FromJsonString(s string) error {
 }
 
 type WordItem struct {
+	// The text content.
+	DetectedText *string `json:"DetectedText,omitnil,omitempty" name:"DetectedText"`
+
+	// The coordinates of the four vertices.
+	Coord *Polygon `json:"Coord,omitnil,omitempty" name:"Coord"`
+
+	// Description.
+	AdvancedInfo *string `json:"AdvancedInfo,omitnil,omitempty" name:"AdvancedInfo"`
+
+	// Specifies the four-point coordinate of the word.
+	WordCoord []*WordPolygon `json:"WordCoord,omitnil,omitempty" name:"WordCoord"`
+}
+
+type WordPolygon struct {
 	// The text content.
 	DetectedText *string `json:"DetectedText,omitnil,omitempty" name:"DetectedText"`
 

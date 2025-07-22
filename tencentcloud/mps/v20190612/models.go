@@ -104,27 +104,24 @@ type AIRecognitionTemplateItem struct {
 
 type Activity struct {
 	// Atomic task type.
-	// <li>input: start node</li>
-	// <li>output: end node</li>
-	// <li>action-trans: transcoding</li>
-	// <li>action-samplesnapshot: sampled screenshot</li>
-	// <li>action-AIAnalysis: analysis</li>
-	// <li>action-AIRecognition: recognition</li>
-	// <li>action-aiReview: review</li>
-	// <li>action-animated-graphics: conversion to GIF</li>
-	// <li>action-image-sprite: image sprite</li>
-	// <li>action-snapshotByTimeOffset: time point screenshot</li>
-	// <li>action-adaptive-substream: adaptive bitrate stream</li>
-	// <li>action-AIQualityControl: media quality inspection</li>
-	// <li>action-SmartSubtitles: smart subtitle</li>
+	// <li>input: starting node.</li>.
+	// <li>`output`: termination node</li>.
+	// <li>action-trans: transcoding.</li>.
+	// <li>action-samplesnapshot: specifies sampled screenshot taking.</li>.
+	// <li>action-AIAnalysis: analysis.</li>.
+	// <li>action-AIRecognition: specifies recognition.</li>.
+	// <li>action-aiReview: specifies the review action.</li>.
+	// <li>action-animated-graphics: specifies the animated image.</li>.
+	// <li>action-image-sprite: specifies the sprite sheet.</li>.
+	// <li>action-snapshotByTimeOffset: specifies time point screenshot taking.</li>.
+	// <li>action-adaptive-substream: specifies the adaptive bitrate stream.</li>.
+	// <li>action-AIQualityControl: media quality inspection.</li>.
+	// <li>action-SmartSubtitles: specifies smart subtitling.</li>.
 	// 
 	// 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	ActivityType *string `json:"ActivityType,omitnil,omitempty" name:"ActivityType"`
 
-	// The indexes of the subsequent actions.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Rear node index array.
 	ReardriveIndex []*int64 `json:"ReardriveIndex,omitnil,omitempty" name:"ReardriveIndex"`
 
 	// The parameters of a subtask.
@@ -281,14 +278,15 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	AddOnSubtitles []*AddOnSubtitle `json:"AddOnSubtitles,omitnil,omitempty" name:"AddOnSubtitles"`
 
 	// Drm information.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	DrmInfo *DrmInfo `json:"DrmInfo,omitnil,omitempty" name:"DrmInfo"`
 
 	// Adaptive transcoding template type.
-	// Common: audio-video.
+	// Common: audio/video type.
 	// PureAudio: audio-only.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	DefinitionType *string `json:"DefinitionType,omitnil,omitempty" name:"DefinitionType"`
+
+	// Subtitle setting.
+	SubtitleTemplate *string `json:"SubtitleTemplate,omitnil,omitempty" name:"SubtitleTemplate"`
 }
 
 type AdaptiveDynamicStreamingTemplate struct {
@@ -513,11 +511,9 @@ type AiAnalysisTaskDelLogoOutput struct {
 	OutputStorage *TaskOutputStorage `json:"OutputStorage,omitnil,omitempty" name:"OutputStorage"`
 
 	// Path of a subtitle file extracted from a video.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	OriginSubtitlePath *string `json:"OriginSubtitlePath,omitnil,omitempty" name:"OriginSubtitlePath"`
 
 	// Path of a subtitle translation file extracted from a video.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	TranslateSubtitlePath *string `json:"TranslateSubtitlePath,omitnil,omitempty" name:"TranslateSubtitlePath"`
 }
 
@@ -1077,46 +1073,37 @@ type AiRecognitionTaskFaceResultItem struct {
 	// Result set of segments that contain a figure.
 	SegmentSet []*AiRecognitionTaskFaceSegmentItem `json:"SegmentSet,omitnil,omitempty" name:"SegmentSet"`
 
-	// The person’s gender.
-	// <li>Male</li>
-	// <li>Female</li>
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Gender of the person.
+	// <Li>Male: man.</li>.
+	// <Li>Female: specifies the woman.</li>.
 	Gender *string `json:"Gender,omitnil,omitempty" name:"Gender"`
 
-	// The person’s birth date.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Date of birth.
 	Birthday *string `json:"Birthday,omitnil,omitempty" name:"Birthday"`
 
-	// The person’s job or job title.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Occupation or position of a person.
 	Profession *string `json:"Profession,omitnil,omitempty" name:"Profession"`
 
-	// The college the person graduated from.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies the graduation institution of the person.
 	SchoolOfGraduation *string `json:"SchoolOfGraduation,omitnil,omitempty" name:"SchoolOfGraduation"`
 
-	// The person’s profile.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Description of the person.
 	Abstract *string `json:"Abstract,omitnil,omitempty" name:"Abstract"`
 
-	// The person’s place of birth.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies the birthplace or place of origin.
 	PlaceOfBirth *string `json:"PlaceOfBirth,omitnil,omitempty" name:"PlaceOfBirth"`
 
-	// Whether the person is a politician or artist.
-	// <li>Politician</li>
-	// <li>Artist</li>
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Person type.
+	// <Li>Politician: specifies the official.</li>.
+	// <Li>Artist: specifies the artist.</li>.
 	PersonType *string `json:"PersonType,omitnil,omitempty" name:"PersonType"`
 
-	// Sensitivity
-	// <li>Normal</li>
-	// <li>Sensitive</li>
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Sensitivity labeling.
+	// <Li>Normal: specifies the scaling group is normal.</li>.
+	// <Li>Sensitive: specifies sensitivity.</li>.
 	Remark *string `json:"Remark,omitnil,omitempty" name:"Remark"`
 
-	// The screenshot URL.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies the screenshot link.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 }
 
@@ -2704,7 +2691,7 @@ type ComposeSubtitleItem struct {
 	// The subtitle style ID, which corresponds to the `Id` field of `ComposeStyles`.
 	StyleId *string `json:"StyleId,omitnil,omitempty" name:"StyleId"`
 
-	// The subtitle text.
+	// Subtitle text. note: long text may exceed the frame. recommend using \n for line breaks.
 	Text *string `json:"Text,omitnil,omitempty" name:"Text"`
 
 	// The time of the element in the timeline. If this is not specified, the element will follow the previous element.	
@@ -4105,6 +4092,10 @@ type CreateQualityControlTemplateRequestParams struct {
 
 	// Media quality inspection template description, with a length limit of 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Recording file format. Valid values:
+	// <li>PNG: PNG image.</li>
+	RecordFormat *string `json:"RecordFormat,omitnil,omitempty" name:"RecordFormat"`
 }
 
 type CreateQualityControlTemplateRequest struct {
@@ -4118,6 +4109,10 @@ type CreateQualityControlTemplateRequest struct {
 
 	// Media quality inspection template description, with a length limit of 256 characters.
 	Comment *string `json:"Comment,omitnil,omitempty" name:"Comment"`
+
+	// Recording file format. Valid values:
+	// <li>PNG: PNG image.</li>
+	RecordFormat *string `json:"RecordFormat,omitnil,omitempty" name:"RecordFormat"`
 }
 
 func (r *CreateQualityControlTemplateRequest) ToJsonString() string {
@@ -4135,6 +4130,7 @@ func (r *CreateQualityControlTemplateRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "QualityControlItemSet")
 	delete(f, "Comment")
+	delete(f, "RecordFormat")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateQualityControlTemplateRequest has unknown keys!", "")
 	}
@@ -6761,23 +6757,18 @@ type DescribeAsrHotwordsResponseParams struct {
 	// ID of the hotword lexicon to be queried.
 	HotwordsId *string `json:"HotwordsId,omitnil,omitempty" name:"HotwordsId"`
 
-	// Current status of the hotword lexicon corresponding to the ID. The value 0 indicates that no template is bound to this hotword lexicon when the query is performed and that the hotword lexicon can be deleted.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Current hotword lexicon id status. a value of 0 indicates that no template is bound to this hotword lexicon at the query moment and it can be deleted.
 	Status *uint64 `json:"Status,omitnil,omitempty" name:"Status"`
 
-	// Hotword lexicon name.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Name of the hot lexicon.
 	Name *string `json:"Name,omitnil,omitempty" name:"Name"`
 
-	// The value is 0 for a temporary hotword lexicon, and the string provided during creation is returned.
-	// The value is 1 for a file-based hotword lexicon, and the content of the file uploaded during creation is returned.
+	// Specifies the value is 0 for a temporary hotword lexicon and returns the string provided during creation.
+	// Specifies the value is 1 for a file-based hotword lexicon, and returns the content of the file uploaded during creation.
 	// 
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	Type *uint64 `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// Name of the uploaded hotword file.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	FileName *string `json:"FileName,omitnil,omitempty" name:"FileName"`
 
 	// List of hotwords returned for the query.
@@ -6786,27 +6777,21 @@ type DescribeAsrHotwordsResponseParams struct {
 	// Hotword text, which depends on the value of Type.
 	// If the value of Type is 0, the hotword string is returned.
 	// If the value of Type is 1, the base64-encoded content of the hotword file is returned.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	Content *string `json:"Content,omitnil,omitempty" name:"Content"`
 
 	// Number of words contained in the hotword lexicon.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	WordCount *uint64 `json:"WordCount,omitnil,omitempty" name:"WordCount"`
 
 	// Paging offset. Default value: 0.
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	Offset *uint64 `json:"Offset,omitnil,omitempty" name:"Offset"`
 
 	// Number of returned entries. Default value: 10. Maximum value: 100.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	Limit *uint64 `json:"Limit,omitnil,omitempty" name:"Limit"`
 
-	// Creation time of the hotword lexicon in ISO datetime format (UTC time). For example, "2006-01-02T15:04:05Z".Note: This field may return null, indicating that no valid value can be obtained.
+	// Hot word lexicon createtime in ISOUTC format "2006-01-02T15:04:05Z".
 	CreateTime *string `json:"CreateTime,omitnil,omitempty" name:"CreateTime"`
 
-	// Modification time of the hotword lexicon in ISO datetime format (UTC time). For example, "2006-01-02T15:04:05Z".
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Hot lexicon last modified in ISOUTC format "2006-01-02T15:04:05Z".
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -6885,8 +6870,7 @@ type DescribeBatchTaskDetailResponseParams struct {
 	// Media processing task ID.
 	TaskId *string `json:"TaskId,omitnil,omitempty" name:"TaskId"`
 
-	// Video processing task information. This field has a value only when TaskType is BatchTask.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Video processing task information. this field has a value only when TaskType is BatchTask.
 	BatchTaskResult *BatchSubTaskResult `json:"BatchTaskResult,omitnil,omitempty" name:"BatchTaskResult"`
 
 	// Event notification information of the task.
@@ -8495,8 +8479,7 @@ func (r *DescribeWordSamplesRequest) FromJsonString(s string) error {
 
 // Predefined struct for user
 type DescribeWordSamplesResponseParams struct {
-	// Number of eligible entries.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Total number of qualified records.
 	TotalCount *uint64 `json:"TotalCount,omitnil,omitempty" name:"TotalCount"`
 
 	// Keyword information.
@@ -8796,11 +8779,24 @@ func (r *DisableWorkflowResponse) FromJsonString(s string) error {
 
 type DrmInfo struct {
 	// Encryption type.
-	// <li>simpleaes: AES-128 encryption</li>
-	// <li> widevine</li>
-	// <li>fairplay: not supported for DASH streams</li>
-	// <li> playready</li>
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// 
+	// - simpleaes
+	// Can only be used for HLS. format support ts and mp4.
+	// Only can be used in slice mode. cannot be used in singlefile mode.
+	// 
+	// - fairplay:
+	// Can only be used for HLS. valid values: mp4.
+	// Available for use in slice mode or singlefile mode.
+	// 
+	// - widevine:
+	// Can be used for HLS and DASH. format can only be mp4.
+	// Output HLS: available for use in slice mode or singlefile mode.
+	// Output DASH: can only be in singlefile mode.
+	// 
+	// - playready:
+	// Can be used for HLS and DASH. format can only be mp4.
+	// Output HLS: available for use in slice mode or singlefile mode.
+	// Output DASH: can only be singlefile mode.
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
 	// The AES-128 encryption details.
@@ -10040,6 +10036,18 @@ type LiveStreamAsrFullTextRecognitionResult struct {
 
 	// Confidence of recognized segment. Value range: 0–100.
 	Confidence *float64 `json:"Confidence,omitnil,omitempty" name:"Confidence"`
+
+
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+
+	SteadyState *bool `json:"SteadyState,omitnil,omitempty" name:"SteadyState"`
+
+	// User ID in the result of recognition via WebSocket and TRTC.Note: This field may return null, indicating that no valid value can be obtained.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 }
 
 type LiveStreamAsrWordsRecognitionResult struct {
@@ -10235,6 +10243,19 @@ type LiveStreamTransTextRecognitionResult struct {
 
 	// The translation.
 	Trans *string `json:"Trans,omitnil,omitempty" name:"Trans"`
+
+
+	StartTime *string `json:"StartTime,omitnil,omitempty" name:"StartTime"`
+
+
+	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
+
+
+	SteadyState *bool `json:"SteadyState,omitnil,omitempty" name:"SteadyState"`
+
+	// User ID in the result of real-time translation via WebSocket and TRTC.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	UserId *string `json:"UserId,omitnil,omitempty" name:"UserId"`
 }
 
 type LowLightEnhanceConfig struct {
@@ -10359,6 +10380,10 @@ type MediaAiAnalysisDescriptionItem struct {
 	// Segmentation result.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Paragraphs []*AiParagraphInfo `json:"Paragraphs,omitnil,omitempty" name:"Paragraphs"`
+
+	// Address of the mind map of a summary task.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	MindMapUrl *string `json:"MindMapUrl,omitnil,omitempty" name:"MindMapUrl"`
 }
 
 type MediaAiAnalysisFrameTagItem struct {
@@ -10415,7 +10440,7 @@ type MediaAnimatedGraphicsItem struct {
 	// Path to a generated animated image file.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-	// ID of an animated image generating template. For more information, please see [Animated Image Generating Parameter Template](https://intl.cloud.tencent.com/document/product/266/33481?from_cn_redirect=1#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF).
+	// Specifies the rotating image template ID. see [rotating image template](https://intl.cloud.tencent.com/document/product/862/77168?from_cn_redirect=1#.E8.BD.AC.E5.8A.A8.E5.9B.BE.E6.A8.A1.E6.9D.BF.5B.5D(ID.3Amove)).
 	Definition *int64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
 	// Animated image format, such as gif.
@@ -10740,9 +10765,14 @@ type MediaProcessTaskImageSpriteResult struct {
 	// Input for an image sprite generating task.
 	Input *ImageSpriteTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of an image sprite generating task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the output of an image sprite task for a video.
 	Output *MediaImageSpriteItem `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
+
+	// Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
 type MediaProcessTaskInput struct {
@@ -10818,14 +10848,13 @@ type MediaProcessTaskSampleSnapshotResult struct {
 	// Input for a sampled screenshot task.
 	Input *SampleSnapshotTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of a sampled screenshot task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the output of a sampling screenshot task for a video.
 	Output *MediaSampleSnapshotItem `json:"Output,omitnil,omitempty" name:"Output"`
 
-
+	// Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
 	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
 
-
+	// Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
@@ -10845,14 +10874,13 @@ type MediaProcessTaskSnapshotByTimeOffsetResult struct {
 	// Input for a time point screenshot task.
 	Input *SnapshotByTimeOffsetTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Output of a time point screenshot task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the output of a screenshot task at specified time points for a video.
 	Output *MediaSnapshotByTimeOffsetItem `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// The time when the task started executing, in ISO date format.
+	// Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
 	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
 
-	// The time when the task finished, in ISO date format.
+	// Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
@@ -10876,8 +10904,7 @@ type MediaProcessTaskTranscodeResult struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Output *MediaTranscodeItem `json:"Output,omitnil,omitempty" name:"Output"`
 
-	// Transcoding progress. Value range: 0-100
-	// Note: This field may return `null`, indicating that no valid value was found.
+	// Transcoding progress, with a value range of [0-100].
 	Progress *int64 `json:"Progress,omitnil,omitempty" name:"Progress"`
 }
 
@@ -12034,8 +12061,7 @@ type ModifyPersonSampleResponseParams struct {
 	// Image information
 	Person *AiSamplePerson `json:"Person,omitnil,omitempty" name:"Person"`
 
-	// Information of images that failed the verification by facial feature positioning.
-	// Note: this field may return `null`, indicating that no valid values can be obtained.
+	// Indicates the information of facial features with processing failure.
 	FailFaceInfoSet []*AiSampleFailFaceInfo `json:"FailFaceInfoSet,omitnil,omitempty" name:"FailFaceInfoSet"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -12071,6 +12097,10 @@ type ModifyQualityControlTemplateRequestParams struct {
 
 	// Media quality inspection configuration parameters.
 	QualityControlItemSet []*QualityControlItemConfig `json:"QualityControlItemSet,omitnil,omitempty" name:"QualityControlItemSet"`
+
+	// Recording file format. Valid values:
+	// <li>PNG: PNG image.</li>
+	RecordFormat *string `json:"RecordFormat,omitnil,omitempty" name:"RecordFormat"`
 }
 
 type ModifyQualityControlTemplateRequest struct {
@@ -12087,6 +12117,10 @@ type ModifyQualityControlTemplateRequest struct {
 
 	// Media quality inspection configuration parameters.
 	QualityControlItemSet []*QualityControlItemConfig `json:"QualityControlItemSet,omitnil,omitempty" name:"QualityControlItemSet"`
+
+	// Recording file format. Valid values:
+	// <li>PNG: PNG image.</li>
+	RecordFormat *string `json:"RecordFormat,omitnil,omitempty" name:"RecordFormat"`
 }
 
 func (r *ModifyQualityControlTemplateRequest) ToJsonString() string {
@@ -12105,6 +12139,7 @@ func (r *ModifyQualityControlTemplateRequest) FromJsonString(s string) error {
 	delete(f, "Name")
 	delete(f, "Comment")
 	delete(f, "QualityControlItemSet")
+	delete(f, "RecordFormat")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyQualityControlTemplateRequest has unknown keys!", "")
 	}
@@ -13163,20 +13198,16 @@ type OverrideTranscodeParameter struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	TEHDConfig *TEHDConfigForUpdate `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
-	// The subtitle settings.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Subtitle stream configuration parameter.
 	SubtitleTemplate *SubtitleTemplate `json:"SubtitleTemplate,omitnil,omitempty" name:"SubtitleTemplate"`
 
-	// The information of the external audio track to add.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the external audio track parameter.
 	AddonAudioStream []*MediaInputInfo `json:"AddonAudioStream,omitnil,omitempty" name:"AddonAudioStream"`
 
-	// An extended field for transcoding.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Extension field for transcoding.
 	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 
-	// The subtitle file to add.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Subtitle file to be inserted.
 	AddOnSubtitles []*AddOnSubtitle `json:"AddOnSubtitles,omitnil,omitempty" name:"AddOnSubtitles"`
 }
 
@@ -13252,13 +13283,10 @@ type ParseLiveStreamProcessNotificationResponseParams struct {
 	// The source context which is used to pass through the user request information. The task flow status change callback will return the value of this field. It can contain up to 1,000 characters.
 	SessionContext *string `json:"SessionContext,omitnil,omitempty" name:"SessionContext"`
 
-	// - Expiration time, event notification signature expiration UNIX timestamp. - By default, notifications sent by MPS expire after 10 minutes. If the expiration time specified has elapsed, a notification will be considered invalid. This can prevent replay attacks. - The format of Timestamp is a decimal UNIX timestamp, which is the number of seconds that have elapsed since January 1, 1970 (midnight UTC/GMT).
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// - expiration time, event notification signature expiration in UNIX Timestamp format. - notifications from media processing default to an expiration time of 10 minutes. if the time specified by the Timestamp value in a message notification has expired, the notification can be deemed invalid, furthermore preventing network replay attacks. - the Timestamp format is decimal UNIX Timestamp, seconds elapsed since midnight (UTC/GMT) on january 1, 1970.
 	Timestamp *int64 `json:"Timestamp,omitnil,omitempty" name:"Timestamp"`
 
 	// Event notification security signature. Sign = MD5 (Timestamp + NotifyKey). Note: Media Processing Service concatenates Timestamp and NotifyKey from TaskNotifyConfig as a string and calculates the Sign value through MD5. This value is included in the notification message. Your backend server can verify whether the Sign is correct using the same algorithm, to confirm whether the message is indeed from the Media Processing Service backend.
-	// 
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	Sign *string `json:"Sign,omitnil,omitempty" name:"Sign"`
 
 	// The unique request ID, generated by the server, will be returned for every request (if the request fails to reach the server for other reasons, the request will not obtain a RequestId). RequestId is required for locating a problem.
@@ -13686,7 +13714,13 @@ func (r *ProcessImageResponse) FromJsonString(s string) error {
 
 // Predefined struct for user
 type ProcessLiveStreamRequestParams struct {
-	// Live stream URL, which must be a live stream file address. RTMP, HLS, and FLV are supported.
+	// Live stream URL. (It should be a live streaming file address. RTMP, HLS, FLV, and TRTC addresses are supported.)
+	// A TRTC address is as follows:
+	//  trtc: //trtc.rtc.qq.com/mps/`<roomid>`?sdkappid=`<sdkappid>`&userid=`<userid>`&usersig=<`usersig>`
+	// `<roomid>` is the TRTC room ID, which is a number.
+	// `<sdkappid>` is the SDK app ID of TRTC.
+	// `<userid>` is the user ID for accessing a room, which can be used to distinguish robots.
+	// <`usersig>` is the TRTC user signature.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Event notification information of a task, which is used to specify the live stream processing result.
@@ -13727,7 +13761,13 @@ type ProcessLiveStreamRequestParams struct {
 type ProcessLiveStreamRequest struct {
 	*tchttp.BaseRequest
 	
-	// Live stream URL, which must be a live stream file address. RTMP, HLS, and FLV are supported.
+	// Live stream URL. (It should be a live streaming file address. RTMP, HLS, FLV, and TRTC addresses are supported.)
+	// A TRTC address is as follows:
+	//  trtc: //trtc.rtc.qq.com/mps/`<roomid>`?sdkappid=`<sdkappid>`&userid=`<userid>`&usersig=<`usersig>`
+	// `<roomid>` is the TRTC room ID, which is a number.
+	// `<sdkappid>` is the SDK app ID of TRTC.
+	// `<userid>` is the user ID for accessing a room, which can be used to distinguish robots.
+	// <`usersig>` is the TRTC user signature.
 	Url *string `json:"Url,omitnil,omitempty" name:"Url"`
 
 	// Event notification information of a task, which is used to specify the live stream processing result.
@@ -14404,7 +14444,6 @@ type RawTranscodeParameter struct {
 	TEHDConfig *TEHDConfig `json:"TEHDConfig,omitnil,omitempty" name:"TEHDConfig"`
 
 	// Additional parameter, which is a serialized JSON string.
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	StdExtInfo *string `json:"StdExtInfo,omitnil,omitempty" name:"StdExtInfo"`
 
 	// Audio/Video enhancement configuration.
@@ -14417,8 +14456,12 @@ type RawWatermarkParameter struct {
 	// <li>image: image watermark.</li>
 	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 
-	// Origin position, which currently can only be:
-	// <li>TopLeft: the origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text.</li>
+	// Origin position. valid values:.
+	// <Li>TopLeft: indicates that the coordinate origin is at the top left corner of the video image and the watermark origin is at the top left corner of the image or text.</li>.
+	// <Li>TopRight: indicates that the coordinate origin is at the top right corner of the video image and the watermark origin is at the top right corner of the image or text.</li>.
+	// <Li>BottomLeft: indicates that the coordinate origin is at the bottom-left corner of the video image and the watermark origin is at the bottom-left corner of the image or text.</li>.
+	// <li>BottomRight: indicates that the coordinate origin is at the bottom right corner of the video image and the watermark origin is at the bottom right corner of the image or text.</li>
+	// 
 	// Default value: TopLeft.
 	CoordinateOrigin *string `json:"CoordinateOrigin,omitnil,omitempty" name:"CoordinateOrigin"`
 
@@ -14739,9 +14782,14 @@ type ScheduleRecognitionTaskResult struct {
 	// The input of the content recognition task.
 	Input *AiRecognitionTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// The output of the content recognition task.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Output of the identification task.
 	Output []*AiRecognitionResult `json:"Output,omitnil,omitempty" name:"Output"`
+
+	// Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
+
+	// Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
+	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
 type ScheduleReviewTaskResult struct {
@@ -14778,20 +14826,16 @@ type ScheduleSmartSubtitleTaskResult struct {
 	// Error message.
 	Message *string `json:"Message,omitnil,omitempty" name:"Message"`
 
-	// Recognition task input.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Input of the recognition task.
 	Input *SmartSubtitlesTaskInput `json:"Input,omitnil,omitempty" name:"Input"`
 
-	// Recognition task output.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Output of the identification task.
 	Output []*SmartSubtitlesResult `json:"Output,omitnil,omitempty" name:"Output"`
 
 	// Task execution start time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	BeginProcessTime *string `json:"BeginProcessTime,omitnil,omitempty" name:"BeginProcessTime"`
 
 	// Task execution completion time in [ISO datetime format](https://intl.cloud.tencent.com/document/product/862/37710?from_cn_redirect=1#52).
-	// Note: This field may return null, indicating that no valid value can be obtained.
 	FinishTime *string `json:"FinishTime,omitnil,omitempty" name:"FinishTime"`
 }
 
@@ -14921,30 +14965,25 @@ type SegmentRecognitionItem struct {
 
 	EndTimeOffset *float64 `json:"EndTimeOffset,omitnil,omitempty" name:"EndTimeOffset"`
 
-
+	// Specifies the split segment URL.
 	SegmentUrl *string `json:"SegmentUrl,omitnil,omitempty" name:"SegmentUrl"`
 
-	// Segment cover.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies the segment cover.
 	CovImgUrl *string `json:"CovImgUrl,omitnil,omitempty" name:"CovImgUrl"`
 
 	// Segment title.
-	// Note: This field may return null, indicating that no valid values can be obtained.
 	Title *string `json:"Title,omitnil,omitempty" name:"Title"`
 
-	// Segment summary.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the segment summary.
 	Summary *string `json:"Summary,omitnil,omitempty" name:"Summary"`
 
 	// Segmentation keywords.
 	Keywords []*string `json:"Keywords,omitnil,omitempty" name:"Keywords"`
 
-	// The start time of a live streaming segment, in the ISO date format.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies the start time of a live streaming segment in the ISO date format.
 	BeginTime *string `json:"BeginTime,omitnil,omitempty" name:"BeginTime"`
 
-	// The end time of a live streaming segment, in the ISO date format.
-	// Note: This field may return null, indicating that no valid value can be obtained.
+	// Specifies the end time of a live streaming segment in the ISO date format.
 	EndTime *string `json:"EndTime,omitnil,omitempty" name:"EndTime"`
 
 	// Specifies the character ID.
@@ -15390,25 +15429,43 @@ type SubtitleTemplate struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	Path *string `json:"Path,omitnil,omitempty" name:"Path"`
 
-	// The subtitle track to add to the video. If both `Path` and `StreamIndex` are specified, `Path` will be used. You need to specify at least one of the two parameters.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Specifies the subtitle track for embedding subtitles into the video. the Streamindex parameter takes value starting from 0, where 0 indicates usage of the first subtitle track in the source video. if Path is specified, use Path preferentially. either Path or Streamindex should be specified.
+	// 
+	// -Note: StreamIndex must match the subtitle track index in the source file. for example, if the subtitle track in the source file is stream#0:3, StreamIndex should be 3. otherwise, task processing failed.
+	// 
+	// 
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	StreamIndex *int64 `json:"StreamIndex,omitnil,omitempty" name:"StreamIndex"`
 
-	// The font. Valid values:
-	// <li>`hei.ttf`: Heiti.</li>
-	// <li>`song.ttf`: Songti.</li>
-	// <li>`simkai.ttf`: Kaiti.</li>
-	// <li>`arial.ttf`: Arial.</li>
-	// The default is `hei.ttf`.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Font type. valid values:.
+	// <li>hei.ttf: simhei.</li>.
+	// <li>song.ttf: simsun.</li>.
+	// <Li>Kai.Ttf (recommend) or simkai.ttf: kaiti.</li>.
+	// <li>msyh.ttf: microsoft yahei</li>.
+	// <li>msyhbd.ttf: microsoft yahei in bold.</li>.
+	// <li>hkjgt.ttf: dynafont king gothic</li>.
+	// <li>dhttx.ttf: dianheitexiti.</li>.
+	// <li>xqgdzt.ttf: xiqueguzidianti</li>.
+	// <li>qpcyt.ttf: smart splice super round body.</li>.
+	// <li>arial.ttf: english only.</li>.
+	// <li>dinalternate.ttf:DIN Alternate Bold</li>
+	// <li>helveticalt.ttf:Helvetica</li>
+	// <li>helveticains.ttf:Helvetica Inserat</li>
+	// <li>trajanpro.ttf:TrajanPro-Bold</li>
+	// <li>korean.ttf: specifies the korean language.</li>.
+	// <li>japanese.ttf: specifies the japanese language.</li>.
+	// <li>thai.ttf: specifies the thai language.</li>.
+	// Default: hei.ttf (heiti). note: kaiti is recommended for use with kai.ttf.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	FontType *string `json:"FontType,omitnil,omitempty" name:"FontType"`
 
-	// The font size (pixels). If this is not specified, the font size in the subtitle file will be used.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Font size. Format: Npx, where N is a numerical value. If it is not specified, the font size of the subtitle file applies.
+	// It is 5% of the source video height by default.
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	FontSize *string `json:"FontSize,omitnil,omitempty" name:"FontSize"`
 
-	// The font color in 0xRRGGBB format. Default value: 0xFFFFFF (white).
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Font color. Format: 0xRRGGBB. Default value: 0xFFFFFF (white).
+	// Note: This field may return null, indicating that no valid value can be obtained.
 	FontColor *string `json:"FontColor,omitnil,omitempty" name:"FontColor"`
 
 	// The text transparency. Value range: 0-1.
@@ -15417,6 +15474,53 @@ type SubtitleTemplate struct {
 	// Default value: 1.
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	FontAlpha *float64 `json:"FontAlpha,omitnil,omitempty" name:"FontAlpha"`
+
+	// Subtitle position on the Y-axis. If this parameter is specified, the built-in coordinates in the subtitle file will be ignored. The pixel and percentage formats are supported.
+	// 
+	//  - Pixel: Npx. Value range of N: [0,4096].
+	//  - Percentage: N%. Value range of N: [0,100]. For example, 10% indicates that the subtitle position on the Y-axis is 10% of the video height.
+	// 
+	// By default, the position is 4% of the source video height.
+	// Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the subtitle reference position is at the bottom of the central axis of the subtitles, as shown in the figure below.
+	// ![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
+	// 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	YPos *string `json:"YPos,omitnil,omitempty" name:"YPos"`
+
+	// Subtitle background position on the Y-axis. Pixel and percentage formats are supported.
+	// 
+	//  - Pixel: Npx. Value range of N: [0,4096].
+	//  - Percentage: N%. Value range of N: [0,100]. For example, 10% indicates that the subtitle background position on the Y-axis is 10% of the video height.
+	// 
+	// If this parameter is not specified, the subtitle background is disabled.
+	// Note: The origin of the coordinate axes is at the bottom of the central axis of the source video, and the reference position of the subtitle background is at the bottom of the central axis of the source video, as shown in the figure below.
+	// ![image](https://ie-mps-1258344699.cos.ap-nanjing.tencentcos.cn/common/cloud/mps-demo/102_ai_subtitle/subtitle_style.png)
+	// 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BoardY *string `json:"BoardY,omitnil,omitempty" name:"BoardY"`
+
+	// Board width. Unit: pixels. Value range: [0,4096].
+	// It is 90% of the source video width by default.
+	// 
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BoardWidth *int64 `json:"BoardWidth,omitnil,omitempty" name:"BoardWidth"`
+
+	// Board height. Unit: pixels. Value range: [0,4096].
+	// It is 15% of the source video height by default.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BoardHeight *int64 `json:"BoardHeight,omitnil,omitempty" name:"BoardHeight"`
+
+	// Board color. Format: 0xRRGGBB.
+	// Default value: 0x000000 (black).
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BoardColor *string `json:"BoardColor,omitnil,omitempty" name:"BoardColor"`
+
+	// Subtitle background transparency. Value range: [0, 1].
+	// <li>0: completely transparent.</li>
+	// <li>1: completely opaque.</li>
+	// Default value: 0.8.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	BoardAlpha *float64 `json:"BoardAlpha,omitnil,omitempty" name:"BoardAlpha"`
 }
 
 type SuperResolutionConfig struct {
@@ -15527,13 +15631,13 @@ type TagConfigureInfoForUpdate struct {
 }
 
 type TaskNotifyConfig struct {
-	// The notification type. Valid values:
-	// <li>`CMQ`: This value is no longer used. Please use `TDMQ-CMQ` instead.</li>
-	// <li>`TDMQ-CMQ`: Message queue</li>
-	// <li>`URL`: If `NotifyType` is set to `URL`, HTTP callbacks are sent to the URL specified by `NotifyUrl`. HTTP and JSON are used for the callbacks. The packet contains the response parameters of the `ParseNotification` API.</li>
-	// <li>`SCF`: This notification type is not recommended. You need to configure it in the SCF console.</li>
-	// <li>`AWS-SQS`: AWS queue. This type is only supported for AWS tasks, and the queue must be in the same region as the AWS bucket.</li>
-	// <font color="red">Note: If you do not pass this parameter or pass in an empty string, `CMQ` will be used. To use a different notification type, specify this parameter accordingly.</font>
+	// Notification type. available values:.
+	// <li>CMQ: offline. switch to TDMQ-CMQ.</li>.
+	// <Li>TDMQ-CMQ: message queue</li>.
+	// <li>URL: when a URL is specified, the HTTP callback is pushed to the address specified by NotifyUrl. the callback protocol is HTTP+json. the content of the packet body is the same as the output parameters of the parseeventnotification api.</li>.
+	// <Li>SCF: not recommended. additional configuration is required in the console.</li>.
+	// <Li>AWS-SQS: aws queue, suitable for aws tasks only and requires the same region.</li>.
+	// <font color="red">note: if left blank, it is TDMQ-CMQ by default. to use another type, you need to fill in the corresponding type value. if using TDMQ-CMQ message queue, an excessively large task response may cause queue failure.</font>.
 	NotifyType *string `json:"NotifyType,omitnil,omitempty" name:"NotifyType"`
 
 	// Workflow notification method. Valid values: Finish, Change. If this parameter is left empty, `Finish` will be used.
@@ -15559,8 +15663,7 @@ type TaskNotifyConfig struct {
 	// Note: This field may return null, indicating that no valid values can be obtained.
 	AwsSQS *AwsSQS `json:"AwsSQS,omitnil,omitempty" name:"AwsSQS"`
 
-	// The key used to generate the callback signature.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// key used to generate a callback signature.
 	NotifyKey *string `json:"NotifyKey,omitnil,omitempty" name:"NotifyKey"`
 }
 
@@ -15760,8 +15863,8 @@ type TranscodeTaskInput struct {
 	// ID of a video transcoding template.
 	Definition *uint64 `json:"Definition,omitnil,omitempty" name:"Definition"`
 
-	// Custom video transcoding parameter, which is valid if `Definition` is 0.
-	// This parameter is used in highly customized scenarios. We recommend you use `Definition` to specify the transcoding parameter preferably.
+	// Custom video transcoding parameter. valid when Definition is set to 0.
+	// This parameter is used in high customization scenarios. it is recommended that you preferentially use Definition to specify transcoding parameters.
 	RawParameter *RawTranscodeParameter `json:"RawParameter,omitnil,omitempty" name:"RawParameter"`
 
 	// Video transcoding custom parameter, which is valid when `Definition` is not 0.
@@ -15770,8 +15873,7 @@ type TranscodeTaskInput struct {
 	// Note: this field may return `null`, indicating that no valid value was found.
 	OverrideParameter *OverrideTranscodeParameter `json:"OverrideParameter,omitnil,omitempty" name:"OverrideParameter"`
 
-	// List of up to 10 image or text watermarks.
-	// Note: This field may return null, indicating that no valid values can be obtained.
+	// Watermark list. Multiple image or text watermarks up to a maximum of 10 are supported.
 	WatermarkSet []*WatermarkInput `json:"WatermarkSet,omitnil,omitempty" name:"WatermarkSet"`
 
 	// List of blurs. Up to 10 ones can be supported.
@@ -16607,10 +16709,10 @@ type WatermarkTemplate struct {
 	UpdateTime *string `json:"UpdateTime,omitnil,omitempty" name:"UpdateTime"`
 
 	// Origin position. Valid values:
-	// <li>topLeft: The origin of coordinates is in the top-left corner of the video, and the origin of the watermark is in the top-left corner of the image or text;</li>
-	// <li>topRight: The origin of coordinates is in the top-right corner of the video, and the origin of the watermark is in the top-right corner of the image or text;</li>
-	// <li>bottomLeft: The origin of coordinates is in the bottom-left corner of the video, and the origin of the watermark is in the bottom-left corner of the image or text;</li>
-	// <li>bottomRight: The origin of coordinates is in the bottom-right corner of the video, and the origin of the watermark is in the bottom-right corner of the image or text.</li>
+	// <li>TopLeft: indicates that the coordinate origin is at the top left corner of the video image and the watermark origin is at the top left corner of the image or text.</li>
+	// <li>TopRight: indicates that the coordinate origin is at the top right corner of the video image and the watermark origin is at the top right corner of the image or text.</li>
+	// <li>BottomLeft: indicates that the coordinate origin is at the bottom left corner of the video image and the watermark origin is at the bottom left corner of the image or text.</li>
+	// <li>BottomRight: indicates that the coordinate origin is at the bottom right corner of the video image and the watermark origin is at the bottom right corner of the image or text.</li>
 	CoordinateOrigin *string `json:"CoordinateOrigin,omitnil,omitempty" name:"CoordinateOrigin"`
 }
 

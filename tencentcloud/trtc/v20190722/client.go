@@ -1789,6 +1789,57 @@ func (c *Client) DescribeUserInfoWithContext(ctx context.Context, request *Descr
     return
 }
 
+func NewDescribeWebRecordRequest() (request *DescribeWebRecordRequest) {
+    request = &DescribeWebRecordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "DescribeWebRecord")
+    
+    
+    return
+}
+
+func NewDescribeWebRecordResponse() (response *DescribeWebRecordResponse) {
+    response = &DescribeWebRecordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// DescribeWebRecord
+// Queries the status of a web-page recording task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) DescribeWebRecord(request *DescribeWebRecordRequest) (response *DescribeWebRecordResponse, err error) {
+    return c.DescribeWebRecordWithContext(context.Background(), request)
+}
+
+// DescribeWebRecord
+// Queries the status of a web-page recording task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) DescribeWebRecordWithContext(ctx context.Context, request *DescribeWebRecordRequest) (response *DescribeWebRecordResponse, err error) {
+    if request == nil {
+        request = NewDescribeWebRecordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("DescribeWebRecord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewDescribeWebRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewDismissRoomRequest() (request *DismissRoomRequest) {
     request = &DismissRoomRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -2784,6 +2835,63 @@ func (c *Client) StartStreamIngestWithContext(ctx context.Context, request *Star
     return
 }
 
+func NewStartWebRecordRequest() (request *StartWebRecordRequest) {
+    request = &StartWebRecordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "StartWebRecord")
+    
+    
+    return
+}
+
+func NewStartWebRecordResponse() (response *StartWebRecordResponse) {
+    response = &StartWebRecordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StartWebRecord
+// This interface can be used to initiate a web-page recording task. In the interface parameters, specify the recording URL, recording resolution, recording result storage and other parameters. If there are parameter or API logic problems, the result will be returned immediately. If there are page problems, such as the page cannot be accessed, the result will be returned in the callback. Please pay attention.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTABILITY = "FailedOperation.NotAbility"
+//  FAILEDOPERATION_NOTALLOWED = "FailedOperation.NotAllowed"
+//  FAILEDOPERATION_SDKAPPIDNOTUNDERAPPID = "FailedOperation.SdkAppIdNotUnderAppId"
+//  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
+//  RESOURCEINSUFFICIENT_REQUESTREJECTION = "ResourceInsufficient.RequestRejection"
+func (c *Client) StartWebRecord(request *StartWebRecordRequest) (response *StartWebRecordResponse, err error) {
+    return c.StartWebRecordWithContext(context.Background(), request)
+}
+
+// StartWebRecord
+// This interface can be used to initiate a web-page recording task. In the interface parameters, specify the recording URL, recording resolution, recording result storage and other parameters. If there are parameter or API logic problems, the result will be returned immediately. If there are page problems, such as the page cannot be accessed, the result will be returned in the callback. Please pay attention.
+//
+// error code that may be returned:
+//  FAILEDOPERATION_NOTABILITY = "FailedOperation.NotAbility"
+//  FAILEDOPERATION_NOTALLOWED = "FailedOperation.NotAllowed"
+//  FAILEDOPERATION_SDKAPPIDNOTUNDERAPPID = "FailedOperation.SdkAppIdNotUnderAppId"
+//  FAILEDOPERATION_TASKEXIST = "FailedOperation.TaskExist"
+//  RESOURCEINSUFFICIENT_REQUESTREJECTION = "ResourceInsufficient.RequestRejection"
+func (c *Client) StartWebRecordWithContext(ctx context.Context, request *StartWebRecordRequest) (response *StartWebRecordResponse, err error) {
+    if request == nil {
+        request = NewStartWebRecordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StartWebRecord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStartWebRecordResponse()
+    err = c.Send(request, response)
+    return
+}
+
 func NewStopAIConversationRequest() (request *StopAIConversationRequest) {
     request = &StopAIConversationRequest{
         BaseRequest: &tchttp.BaseRequest{},
@@ -3002,6 +3110,57 @@ func (c *Client) StopStreamIngestWithContext(ctx context.Context, request *StopS
     request.SetContext(ctx)
     
     response = NewStopStreamIngestResponse()
+    err = c.Send(request, response)
+    return
+}
+
+func NewStopWebRecordRequest() (request *StopWebRecordRequest) {
+    request = &StopWebRecordRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("trtc", APIVersion, "StopWebRecord")
+    
+    
+    return
+}
+
+func NewStopWebRecordResponse() (response *StopWebRecordResponse) {
+    response = &StopWebRecordResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// StopWebRecord
+// Stop an web-page recording task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) StopWebRecord(request *StopWebRecordRequest) (response *StopWebRecordResponse, err error) {
+    return c.StopWebRecordWithContext(context.Background(), request)
+}
+
+// StopWebRecord
+// Stop an web-page recording task
+//
+// error code that may be returned:
+//  FAILEDOPERATION_TASKNOTEXIST = "FailedOperation.TaskNotExist"
+//  INVALIDPARAMETER_TASKID = "InvalidParameter.TaskId"
+func (c *Client) StopWebRecordWithContext(ctx context.Context, request *StopWebRecordRequest) (response *StopWebRecordResponse, err error) {
+    if request == nil {
+        request = NewStopWebRecordRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("StopWebRecord require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewStopWebRecordResponse()
     err = c.Send(request, response)
     return
 }
