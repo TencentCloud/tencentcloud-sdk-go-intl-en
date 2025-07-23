@@ -285,8 +285,9 @@ type AdaptiveDynamicStreamingTaskInput struct {
 	// PureAudio: audio-only.
 	DefinitionType *string `json:"DefinitionType,omitnil,omitempty" name:"DefinitionType"`
 
-	// Subtitle setting.
-	SubtitleTemplate *string `json:"SubtitleTemplate,omitnil,omitempty" name:"SubtitleTemplate"`
+	// Specifies the subtitle parameter.
+	// Note: This field may return null, indicating that no valid value can be obtained.
+	SubtitleTemplate *SubtitleTemplate `json:"SubtitleTemplate,omitnil,omitempty" name:"SubtitleTemplate"`
 }
 
 type AdaptiveDynamicStreamingTemplate struct {

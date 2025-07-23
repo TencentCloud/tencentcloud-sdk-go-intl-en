@@ -71,7 +71,7 @@ func NewImageModerationResponse() (response *ImageModerationResponse) {
 //
 // - Go to the "[CMS console - IMS](https://console.cloud.tencent.com/cms/image/package)" to activate IMS.
 //
-// - This API is a paid API. For its billing mode, see [IMS Pricing](https://intl.cloud.tencent.com/product/ims/pricing?from_cn_redirect=1).
+// - This API is a paid API. For its billing mode, see [IMS Pricing](https://www.tencentcloud.com/document/product/1122/43810).
 //
 // 
 //
@@ -173,7 +173,7 @@ func (c *Client) ImageModeration(request *ImageModerationRequest) (response *Ima
 //
 // - Go to the "[CMS console - IMS](https://console.cloud.tencent.com/cms/image/package)" to activate IMS.
 //
-// - This API is a paid API. For its billing mode, see [IMS Pricing](https://intl.cloud.tencent.com/product/ims/pricing?from_cn_redirect=1).
+// - This API is a paid API. For its billing mode, see [IMS Pricing](https://www.tencentcloud.com/document/product/1122/43810).
 //
 // 
 //

@@ -2307,3 +2307,78 @@ func (c *Client) ModifyGatherRuleWithContext(ctx context.Context, request *Modif
     err = c.Send(request, response)
     return
 }
+
+func NewPayDealsRequest() (request *PayDealsRequest) {
+    request = &PayDealsRequest{
+        BaseRequest: &tchttp.BaseRequest{},
+    }
+    
+    request.Init().WithApiInfo("billing", APIVersion, "PayDeals")
+    
+    
+    return
+}
+
+func NewPayDealsResponse() (response *PayDealsResponse) {
+    response = &PayDealsResponse{
+        BaseResponse: &tchttp.BaseResponse{},
+    } 
+    return
+
+}
+
+// PayDeals
+// This API is used to pay for an order.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AGENTPAYDEALCANNOTDOWN = "FailedOperation.AgentPayDealCannotDown"
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
+//  FAILEDOPERATION_INVALIDDEAL = "FailedOperation.InvalidDeal"
+//  FAILEDOPERATION_INVALIDVOUCHER = "FailedOperation.InvalidVoucher"
+//  FAILEDOPERATION_NEEDPAYTOGETER = "FailedOperation.NeedPayTogeter"
+//  FAILEDOPERATION_NEEDPAYTOGETHER = "FailedOperation.NeedPayTogether"
+//  FAILEDOPERATION_PAYPRICEERROR = "FailedOperation.PayPriceError"
+//  FAILEDOPERATION_PAYSUCCDELIVERFAILED = "FailedOperation.PaySuccDeliverFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+//  UNAUTHORIZEDOPERATION_CERTIFICATIONNEEDUPGRADE = "UnauthorizedOperation.CertificationNeedUpgrade"
+//  UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
+func (c *Client) PayDeals(request *PayDealsRequest) (response *PayDealsResponse, err error) {
+    return c.PayDealsWithContext(context.Background(), request)
+}
+
+// PayDeals
+// This API is used to pay for an order.
+//
+// error code that may be returned:
+//  FAILEDOPERATION = "FailedOperation"
+//  FAILEDOPERATION_AGENTPAYDEALCANNOTDOWN = "FailedOperation.AgentPayDealCannotDown"
+//  FAILEDOPERATION_BALANCEINSUFFICIENT = "FailedOperation.BalanceInsufficient"
+//  FAILEDOPERATION_INVALIDDEAL = "FailedOperation.InvalidDeal"
+//  FAILEDOPERATION_INVALIDVOUCHER = "FailedOperation.InvalidVoucher"
+//  FAILEDOPERATION_NEEDPAYTOGETER = "FailedOperation.NeedPayTogeter"
+//  FAILEDOPERATION_NEEDPAYTOGETHER = "FailedOperation.NeedPayTogether"
+//  FAILEDOPERATION_PAYPRICEERROR = "FailedOperation.PayPriceError"
+//  FAILEDOPERATION_PAYSUCCDELIVERFAILED = "FailedOperation.PaySuccDeliverFailed"
+//  INVALIDPARAMETER = "InvalidParameter"
+//  INVALIDPARAMETERVALUE = "InvalidParameterValue"
+//  UNAUTHORIZEDOPERATION_CAMNOAUTH = "UnauthorizedOperation.CamNoAuth"
+//  UNAUTHORIZEDOPERATION_CERTIFICATIONNEEDUPGRADE = "UnauthorizedOperation.CertificationNeedUpgrade"
+//  UNAUTHORIZEDOPERATION_NOTCERTIFICATION = "UnauthorizedOperation.NotCertification"
+func (c *Client) PayDealsWithContext(ctx context.Context, request *PayDealsRequest) (response *PayDealsResponse, err error) {
+    if request == nil {
+        request = NewPayDealsRequest()
+    }
+    
+    if c.GetCredential() == nil {
+        return nil, errors.New("PayDeals require credential")
+    }
+
+    request.SetContext(ctx)
+    
+    response = NewPayDealsResponse()
+    err = c.Send(request, response)
+    return
+}

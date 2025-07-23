@@ -601,10 +601,6 @@ func NewCreateAutoScalingGroupFromInstanceResponse() (response *CreateAutoScalin
 // CreateAutoScalingGroupFromInstance
 // This API is used to create launch configurations and scaling groups based on an instance.
 //
-// 
-//
-// Note: for a scaling group that is created based on a monthly-subscribed instance, the instances added for scale-out are pay-as-you-go instance.
-//
 // error code that may be returned:
 //  ACCOUNTQUALIFICATIONRESTRICTIONS = "AccountQualificationRestrictions"
 //  CALLCVMERROR = "CallCvmError"
@@ -638,10 +634,6 @@ func (c *Client) CreateAutoScalingGroupFromInstance(request *CreateAutoScalingGr
 
 // CreateAutoScalingGroupFromInstance
 // This API is used to create launch configurations and scaling groups based on an instance.
-//
-// 
-//
-// Note: for a scaling group that is created based on a monthly-subscribed instance, the instances added for scale-out are pay-as-you-go instance.
 //
 // error code that may be returned:
 //  ACCOUNTQUALIFICATIONRESTRICTIONS = "AccountQualificationRestrictions"

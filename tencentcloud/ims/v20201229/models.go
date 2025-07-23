@@ -72,6 +72,9 @@ type ImageModerationRequestParams struct {
 
 	// This field indicates the information of the device that corresponds to the object to be detected. It can be passed in to identify the device involved in the violation.
 	Device *Device `json:"Device,omitnil,omitempty" name:"Device"`
+
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 type ImageModerationRequest struct {
@@ -100,6 +103,8 @@ type ImageModerationRequest struct {
 
 	// This field indicates the information of the device that corresponds to the object to be detected. It can be passed in to identify the device involved in the violation.
 	Device *Device `json:"Device,omitnil,omitempty" name:"Device"`
+
+	Type *string `json:"Type,omitnil,omitempty" name:"Type"`
 }
 
 func (r *ImageModerationRequest) ToJsonString() string {
@@ -122,6 +127,7 @@ func (r *ImageModerationRequest) FromJsonString(s string) error {
 	delete(f, "MaxFrames")
 	delete(f, "User")
 	delete(f, "Device")
+	delete(f, "Type")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ImageModerationRequest has unknown keys!", "")
 	}

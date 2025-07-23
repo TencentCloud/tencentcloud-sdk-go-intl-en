@@ -73,7 +73,7 @@ func NewTextModerationResponse() (response *TextModerationResponse) {
 //
 // - Before invoking this API, be sure you have activated Tencent Cloud Text Moderation System in the [Content Moderation - Text Moderation System](https://console.cloud.tencent.com/cms/text/package) console.
 //
-// - This is a paid API. For the billing details, see [Text Moderation System Pricing](https://intl.cloud.tencent.com/product/tms/pricing?from_cn_redirect=1).
+// - This is a paid API. For the billing details, see [Text Moderation System Pricing](https://www.tencentcloud.com/document/product/1121/43752).
 //
 // 
 //
@@ -108,6 +108,7 @@ func NewTextModerationResponse() (response *TextModerationResponse) {
 //  INVALIDPARAMETERVALUE_ERRFILECONTENT = "InvalidParameterValue.ErrFileContent"
 //  INVALIDPARAMETERVALUE_ERRTEXTCONTENTLEN = "InvalidParameterValue.ErrTextContentLen"
 //  INVALIDPARAMETERVALUE_ERRTEXTCONTENTTYPE = "InvalidParameterValue.ErrTextContentType"
+//  INVALIDPARAMETERVALUE_ERRTYPE = "InvalidParameterValue.ErrType"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZED = "UnauthorizedOperation.Unauthorized"
 func (c *Client) TextModeration(request *TextModerationRequest) (response *TextModerationResponse, err error) {
@@ -123,7 +124,7 @@ func (c *Client) TextModeration(request *TextModerationRequest) (response *TextM
 //
 // - Before invoking this API, be sure you have activated Tencent Cloud Text Moderation System in the [Content Moderation - Text Moderation System](https://console.cloud.tencent.com/cms/text/package) console.
 //
-// - This is a paid API. For the billing details, see [Text Moderation System Pricing](https://intl.cloud.tencent.com/product/tms/pricing?from_cn_redirect=1).
+// - This is a paid API. For the billing details, see [Text Moderation System Pricing](https://www.tencentcloud.com/document/product/1121/43752).
 //
 // 
 //
@@ -158,6 +159,7 @@ func (c *Client) TextModeration(request *TextModerationRequest) (response *TextM
 //  INVALIDPARAMETERVALUE_ERRFILECONTENT = "InvalidParameterValue.ErrFileContent"
 //  INVALIDPARAMETERVALUE_ERRTEXTCONTENTLEN = "InvalidParameterValue.ErrTextContentLen"
 //  INVALIDPARAMETERVALUE_ERRTEXTCONTENTTYPE = "InvalidParameterValue.ErrTextContentType"
+//  INVALIDPARAMETERVALUE_ERRTYPE = "InvalidParameterValue.ErrType"
 //  REQUESTLIMITEXCEEDED = "RequestLimitExceeded"
 //  UNAUTHORIZEDOPERATION_UNAUTHORIZED = "UnauthorizedOperation.Unauthorized"
 func (c *Client) TextModerationWithContext(ctx context.Context, request *TextModerationRequest) (response *TextModerationResponse, err error) {
