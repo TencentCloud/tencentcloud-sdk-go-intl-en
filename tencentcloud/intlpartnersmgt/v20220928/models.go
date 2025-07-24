@@ -1219,7 +1219,8 @@ type DescribeCustomerBillDetailByDayRequestParams struct {
 	CustomerUin *int64 `json:"CustomerUin,omitnil,omitempty" name:"CustomerUin"`
 
 	// Date.
-	// Such as" 2025-06-25"
+	// Such as" 2025-06-25".
+	// Please note: Historical daily bill dated before "2025-06-01",cannot be queried.
 	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 }
 
@@ -1231,7 +1232,8 @@ type DescribeCustomerBillDetailByDayRequest struct {
 	CustomerUin *int64 `json:"CustomerUin,omitnil,omitempty" name:"CustomerUin"`
 
 	// Date.
-	// Such as" 2025-06-25"
+	// Such as" 2025-06-25".
+	// Please note: Historical daily bill dated before "2025-06-01",cannot be queried.
 	Date *string `json:"Date,omitnil,omitempty" name:"Date"`
 }
 
