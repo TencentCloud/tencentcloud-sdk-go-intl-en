@@ -268,6 +268,12 @@ type CreateStreamPackageChannelEndpointRequestParams struct {
 
 	// The number of days to look back in TimeShift, up to 30 days is supported.
 	TimeShiftDuration *uint64 `json:"TimeShiftDuration,omitnil,omitempty" name:"TimeShiftDuration"`
+
+	// Enable DRM. This is only effective for CMAF protocol.
+	DRMEnabled *bool `json:"DRMEnabled,omitnil,omitempty" name:"DRMEnabled"`
+
+	// DRM configuration information.
+	DRMInfo *DRMInfo `json:"DRMInfo,omitnil,omitempty" name:"DRMInfo"`
 }
 
 type CreateStreamPackageChannelEndpointRequest struct {
@@ -293,6 +299,12 @@ type CreateStreamPackageChannelEndpointRequest struct {
 
 	// The number of days to look back in TimeShift, up to 30 days is supported.
 	TimeShiftDuration *uint64 `json:"TimeShiftDuration,omitnil,omitempty" name:"TimeShiftDuration"`
+
+	// Enable DRM. This is only effective for CMAF protocol.
+	DRMEnabled *bool `json:"DRMEnabled,omitnil,omitempty" name:"DRMEnabled"`
+
+	// DRM configuration information.
+	DRMInfo *DRMInfo `json:"DRMInfo,omitnil,omitempty" name:"DRMInfo"`
 }
 
 func (r *CreateStreamPackageChannelEndpointRequest) ToJsonString() string {
@@ -314,6 +326,8 @@ func (r *CreateStreamPackageChannelEndpointRequest) FromJsonString(s string) err
 	delete(f, "Manifest")
 	delete(f, "TimeShiftEnable")
 	delete(f, "TimeShiftDuration")
+	delete(f, "DRMEnabled")
+	delete(f, "DRMInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "CreateStreamPackageChannelEndpointRequest has unknown keys!", "")
 	}
@@ -3254,6 +3268,12 @@ type ModifyStreamPackageChannelEndpointRequestParams struct {
 	// Customer-defined url parameters are inserted into the specified position of the Endpoint url based on the CustomUrlParamIndex.
 	// The parameters can only contain digits, letters, underscores (_), and hyphens (-), with a length of 1 to 64 chars.
 	CustomUrlParam *string `json:"CustomUrlParam,omitnil,omitempty" name:"CustomUrlParam"`
+
+	// Enable DRM. This is only effective for CMAF protocol.
+	DRMEnabled *bool `json:"DRMEnabled,omitnil,omitempty" name:"DRMEnabled"`
+
+	// DRM configuration information
+	DRMInfo *DRMInfo `json:"DRMInfo,omitnil,omitempty" name:"DRMInfo"`
 }
 
 type ModifyStreamPackageChannelEndpointRequest struct {
@@ -3293,6 +3313,12 @@ type ModifyStreamPackageChannelEndpointRequest struct {
 	// Customer-defined url parameters are inserted into the specified position of the Endpoint url based on the CustomUrlParamIndex.
 	// The parameters can only contain digits, letters, underscores (_), and hyphens (-), with a length of 1 to 64 chars.
 	CustomUrlParam *string `json:"CustomUrlParam,omitnil,omitempty" name:"CustomUrlParam"`
+
+	// Enable DRM. This is only effective for CMAF protocol.
+	DRMEnabled *bool `json:"DRMEnabled,omitnil,omitempty" name:"DRMEnabled"`
+
+	// DRM configuration information
+	DRMInfo *DRMInfo `json:"DRMInfo,omitnil,omitempty" name:"DRMInfo"`
 }
 
 func (r *ModifyStreamPackageChannelEndpointRequest) ToJsonString() string {
@@ -3318,6 +3344,8 @@ func (r *ModifyStreamPackageChannelEndpointRequest) FromJsonString(s string) err
 	delete(f, "SSAIInfo")
 	delete(f, "CustomUrlParamIndex")
 	delete(f, "CustomUrlParam")
+	delete(f, "DRMEnabled")
+	delete(f, "DRMInfo")
 	if len(f) > 0 {
 		return tcerr.NewTencentCloudSDKError("ClientError.BuildRequestError", "ModifyStreamPackageChannelEndpointRequest has unknown keys!", "")
 	}
